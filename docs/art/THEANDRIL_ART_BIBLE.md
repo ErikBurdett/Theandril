@@ -18,12 +18,14 @@ Generated campaign seats inherit their actual stable faction definition. Player-
 | Reedbound Council | Woven oval shields, weathered green cloth, reed/straw roofs, raised timber dwellings and river-working equipment | Three upright reeds within an open oval |
 | Cinder March | Broad angular iron, rust-red cloth, squared shields, stepped masonry, practical watchtowers and forge hearths | Stepped watch-wall around a single ember |
 | Glass Tide | Slate-blue and salt-linen cloth, curved shields, light stone, rigging details, blue gables and beacon towers | Hollow sail diamond above two broad horizontal bars |
+| Iron Covenant | Anvilheights deep-folk and human craft valleys; blue-black riveted iron, dull brass, charcoal leather, broad infantry, squared stone workshops and sealed forge halls | Split anvil with broad top, narrow divided stem and block base |
+| Sepulchral Synod | Living veiled caretakers and housed ancestors; chalk-pale plates, indigo cloth, aged bronze, narrow guardians and terraced limestone halls | Hollow ring above three broad terrace steps |
 
 Identity belongs in equipment, buildings and heraldry, not a whole-body tint that recolors skin and steel. Separate ownership outlines, selection rings, faction labels and accessible UI remain authoritative interaction cues. Public culture reference cards reveal no campaign locations or armies.
 
 ## First complete culture kit
 
-Each of the four implemented cultures needs six current troop roles, three real character roles, three presentation-only settlement stages, crest, banner and badge: **15 assets per culture / 60 qualified assets**. A static first-facing kit is not a complete animation set. Future roster art must remain marked as future until a canonical consumer exists.
+Each of the six authored cultures has six land-troop roles, three real character roles, three settlement-stage presentations, crest, banner and badge: **15 assets per culture / 90 qualified assets**. The new [Covenant/Synod briefs](SLICE12_SOURCE_BRIEFS.md) use separate original calls for every role. A static first-facing kit is not a complete animation set. Naval-role art is still absent and must use explicit ship-shaped procedural fallbacks, never infantry substitutions. Future roster art must remain marked as future until a canonical consumer exists.
 
 | Asset role | Native canvas | Anchor |
 | --- | --- | --- |
@@ -40,6 +42,6 @@ Humanoid strategic figures may use approximately 50 painted pixels of height for
 
 Keep original source, revision/rejection reasons, exact prompt, unavailable model/seed fields, extraction bounds, processing hashes, Aseprite tags/timings and individual review evidence. New pixels invalidate review. Do not invent animation by repeating one frame or mirror asymmetric weapons/heraldry without explicit review. Future walk/attack/hurt/death and additional facings retain the same canvas, anchors and directional conventions; review each clip's actual motion.
 
-Existing ten biome tiles use 64×64 native hex masks. Terrain variations, shore/river/road junctions and transition families remain separate production work. Buildings may deliberately overhang a hex; their ground anchors, ownership cues and selection hit regions must remain stable. Art never alters topology or canonical movement rules.
+The twelve biome tiles use 64×64 native hex masks, including flat ash scrub and chalkland. Five actual land-improvement props use 64×64 transparent canvases, `(32,48)` ground anchors and exact half-native presentation where possible. Terrain variations, shore/river/road junctions and transition families remain separate production work. Buildings may deliberately overhang a hex; their ground anchors, ownership cues and selection hit regions must remain stable. Art never alters topology or canonical movement rules.
 
 UI icons use native or exact half-size nearest-neighbor sampling. Art Lab uses integer 1/2/4/8× previews. The current world camera still fits art fractionally to its regular hex geometry: do not call it pixel-perfect. Far view groups actual observed armies into small faction badges and uses town banners; hidden enemies must never acquire render objects. Measure viewport/chunk pools and map atlas residency separately from the DOM's verified image cache. Publication is approved-only; missing assets retain explicit playable fallbacks.

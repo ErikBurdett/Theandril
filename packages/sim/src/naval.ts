@@ -7,6 +7,7 @@ import { indexes, updateSight } from './visibility';
 import { rulesVersion } from './rules';
 
 export interface TransportAftermath { armyId: string; name: string; lostFormationIds: string[]; outcome: 'damaged' | 'lost' }
+export interface TransportSnapshot { armyId: string; fleetId: string; factionId: string; name: string; formationIds: string[] }
 export interface ProductionOption { settlementId: string; itemId: string; kind: 'building' | 'land' | 'naval'; canQueue: boolean; blocker: string | null }
 export interface NavalArmyView {
   domain: 'land' | 'naval'; carrierId: string | null;
@@ -31,6 +32,9 @@ export const armyDomain = (army: Army): 'land' | 'naval' => units.get(army.forma
 export const fleetCargo = (state: GameState, fleetId: string): Army[] => [...(cargoIndex(state).get(fleetId) ?? [])].map(id => state.armies[id]).filter((army): army is Army => Boolean(army)).sort(order);
 export const fleetTransportCapacity = (fleet: Army): number => fleet.formations.reduce((sum, formation) => sum + (units.get(formation.unitId)?.naval?.transportCapacity ?? 0), 0);
 export const fleetTransportUsed = (state: GameState, fleetId: string): number => fleetCargo(state, fleetId).reduce((sum, army) => sum + army.formations.length, 0);
+export function snapshotFleetCargo(state: GameState, fleets: Army[]): TransportSnapshot[] {
+  return fleets.flatMap(fleet => fleetCargo(state, fleet.id).map(army => ({ armyId: army.id, fleetId: fleet.id, factionId: army.factionId, name: army.name, formationIds: army.formations.map(item => item.id) }))).sort((a, b) => a.armyId < b.armyId ? -1 : 1);
+}
 export const carriedArmyBlocker = (state: GameState, armyId: string): string | null => state.transports[armyId] ? 'This army is aboard a transport. Disembark before issuing independent orders.' : null;
 export function armyTransportBlocker(state: GameState, armyId: string): string | null {
   return carriedArmyBlocker(state, armyId) ?? (cargoIndex(state).get(armyId)?.size ? 'Disembark all carried armies before reorganizing this fleet.' : null);

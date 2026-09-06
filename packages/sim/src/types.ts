@@ -1,11 +1,12 @@
 import type { GeneratorVersion, MapSize, World } from '@theandril/mapgen';
-import type { CampaignPace } from '@theandril/content';
+import type { CampaignPace, RosterVersion } from '@theandril/content';
 import type { BattleOrder, BattleState } from './combat';
 import type { DiplomacyObservation, DiplomacyState, PeaceTerms } from './diplomacy';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
 import type { NavalArmyView, ProductionOption, TransportAftermath } from './naval';
+import type { LandState, LandObservation, LandCommand } from './territory';
 
 export interface ArmyFormation {
   id: string;
@@ -131,6 +132,7 @@ export interface CampaignBattle {
   rulesVersion: 5 | 6 | 7 | 8;
   domain: 'land' | 'naval';
   transportAftermath: TransportAftermath[];
+  transportSnapshots: import('./naval').TransportSnapshot[];
   characterSnapshots: CharacterBattleSnapshot[];
   characterAftermath: CharacterAftermath[];
   usedAbilities: { characterId: string; abilityId: string }[];
@@ -160,6 +162,7 @@ export interface CampaignBattle {
 export type BattleReport = CampaignBattle;
 
 export type GameCommand =
+  | LandCommand
   | { type: 'embarkArmy'; factionId: string; armyId: string; fleetId: string }
   | { type: 'disembarkArmy'; factionId: string; armyId: string; target: number }
   | { type: 'recruitCharacter'; factionId: string; settlementId: string; definitionId: string }
@@ -197,6 +200,8 @@ export type GameCommand =
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
 export interface GameState {
+  rosterVersion: RosterVersion;
+  land: LandState;
   /** Land army ID -> carrying fleet ID; sparse, no nested transports. */
   transports: Record<string, string>;
   characters: Record<string, Character>;
@@ -224,6 +229,7 @@ export interface GameState {
 }
 
 export interface Observation {
+  land: LandObservation;
   productionOptions: ProductionOption[];
   characters: CharacterView[];
   characterRecruitment: CharacterRecruitmentOption[];
@@ -239,7 +245,7 @@ export interface Observation {
   armies: ArmyView[];
   routes: MovementRoute[];
   events: DomainEvent[];
-  cells: { cell: number; terrain: number; biome: number; waterDepth: number; fertility: number; visible: boolean }[];
+  cells: { cell: number; terrain: number; biome: number; waterDepth: number; fertility: number; visible: boolean; featureMask?: number; settlementId?: string | null; factionId?: string | null; improvementId?: string | null }[];
   width: number;
   height: number;
   seed: number;
@@ -258,9 +264,11 @@ export interface Observation {
 }
 
 export interface NewGameOptions {
+  rosterVersion?: RosterVersion;
   seed: number;
   size: MapSize;
   factionCount?: number;
+  factionDefinitionId?: string;
   pace?: CampaignPace;
   generatorVersion?: GeneratorVersion;
 }

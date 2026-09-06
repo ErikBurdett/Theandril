@@ -9,7 +9,7 @@ export const NAVAL_FIXTURE = {
   coastalId: 'army.11', coastalName: 'Shorewatch squadron', coastalCell: 829,
   enemyFleetId: 'army.4', enemyFleetName: 'Reedbound tideguard', enemyFleetCell: 788,
   marshalId: 'character.12', shallowCell: 782, deepCell: 783,
-  voyageCell: 786, landingWaterCell: 788, landingCell: 837,
+  voyageCell: 786, landingWaterCell: 836, landingCell: 837,
 } as const;
 
 function command(state: GameState, input: GameCommand): void {

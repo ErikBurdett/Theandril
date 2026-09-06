@@ -1,0 +1,771 @@
+{
+  "saveVersion": 8,
+  "contentHash": "257e1e91",
+  "notes": "Sequential reserved offline benchmark windows, then a separate full49 Chromium run. No other root/agent tests or benchmarks ran concurrently with the measured workloads. Renderer values below are the rounded console summary, not the full entity attachment.",
+  "scale": {
+    "startedAt": "2026-09-06 04:10:00 UTC",
+    "runtime": "v26.7.0",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+    "os": "linux 7.1.9-arch1-2",
+    "measurements": [
+      {
+        "size": "huge",
+        "mature": false,
+        "cells": 196608,
+        "factions": 32,
+        "initialArmies": 64,
+        "initialFormations": 64,
+        "armies": 427,
+        "formations": 652,
+        "largestArmyFormations": 7,
+        "settlements": 201,
+        "generatedMs": 88.750363,
+        "turns": 100,
+        "averageEndTurnMs": 0.7326552900000328,
+        "maxEndTurnMs": 1.9939369999999599,
+        "averageAiAllFactionsMs": 55.96193937999974,
+        "averageCommandResolutionMs": 14.326929369999958,
+        "averageFullTurnWithoutSaveMs": 71.02152403999972,
+        "commands": 23619,
+        "rejectedCommands": 0,
+        "saveMs": 57.80062999999973,
+        "loadMs": 139.45080899999994,
+        "resumedTurnsVerified": 50,
+        "battleReportsRetained": 20,
+        "saveBytes": 3425172,
+        "fullObservationBytes": 586126,
+        "heapSamplesMiB": [
+          34,
+          68,
+          48,
+          75,
+          117
+        ],
+        "hashes": [
+          "eb7935e4",
+          "6e5bb79f",
+          "8f3cefcf",
+          "76e77c67",
+          "435c1882"
+        ],
+        "saveHash": "435c1882",
+        "averagePhaseMs": {
+          "sieges": 0.005853950000000623,
+          "settlements": 0.25056371999993643,
+          "upkeep": 0.10845602000001237,
+          "characters": 0.18535963000003902,
+          "movement": 0.14708368999998128,
+          "travel": 0.0015222299999732057,
+          "diplomacy": 0.004553429999996297,
+          "progression": 0.00222514000002775
+        },
+        "note": "Young campaign with real AI; content roster reused for stress faction counts. Army containers and canonical formations are counted separately: merging lowers container count without erasing formation workload. Victory project proposals are intentionally deferred for this 100-turn workload; full archived victory is benchmarked separately."
+      },
+      {
+        "size": "huge",
+        "mature": true,
+        "cells": 196608,
+        "factions": 32,
+        "initialArmies": 1500,
+        "initialFormations": 1500,
+        "armies": 673,
+        "formations": 1528,
+        "largestArmyFormations": 12,
+        "settlements": 180,
+        "generatedMs": 195.7074300000004,
+        "turns": 100,
+        "averageEndTurnMs": 0.8207436100000813,
+        "maxEndTurnMs": 1.6958770000001095,
+        "averageAiAllFactionsMs": 46.385766689999784,
+        "averageCommandResolutionMs": 9.552245030000122,
+        "averageFullTurnWithoutSaveMs": 56.758755329999985,
+        "commands": 30558,
+        "rejectedCommands": 0,
+        "saveMs": 47.88465900000119,
+        "loadMs": 124.0089509999998,
+        "resumedTurnsVerified": 50,
+        "battleReportsRetained": 20,
+        "saveBytes": 2990337,
+        "fullObservationBytes": 538161,
+        "heapSamplesMiB": [
+          212,
+          70,
+          104,
+          141,
+          115
+        ],
+        "hashes": [
+          "7c8fe0df",
+          "33966662",
+          "3d6f958e",
+          "612bd793",
+          "6cbbb81e"
+        ],
+        "saveHash": "6cbbb81e",
+        "averagePhaseMs": {
+          "sieges": 0.0034537699999964387,
+          "settlements": 0.1398027699999875,
+          "upkeep": 0.18514797000003455,
+          "characters": 0.14173784999982672,
+          "movement": 0.3186256299999877,
+          "travel": 0.0017207399999097106,
+          "diplomacy": 0.0031041899998672305,
+          "progression": 0.0014047799999752897
+        },
+        "note": "Synthetic 1500/4000-singleton-army starting position; real command validation, AI, economy and movement for 100 turns. Field battles resolve when encountered. Army containers and canonical formations are counted separately: merging lowers container count without erasing formation workload. Victory project proposals are intentionally deferred for this 100-turn workload; full archived victory is benchmarked separately."
+      },
+      {
+        "size": "legendary",
+        "mature": false,
+        "cells": 307200,
+        "factions": 40,
+        "initialArmies": 80,
+        "initialFormations": 80,
+        "armies": 535,
+        "formations": 823,
+        "largestArmyFormations": 9,
+        "settlements": 252,
+        "generatedMs": 100.76125200000024,
+        "turns": 100,
+        "averageEndTurnMs": 0.7852433800000653,
+        "maxEndTurnMs": 2.2558940000017174,
+        "averageAiAllFactionsMs": 69.6873012500015,
+        "averageCommandResolutionMs": 16.791246050000062,
+        "averageFullTurnWithoutSaveMs": 87.26379068000162,
+        "commands": 29471,
+        "rejectedCommands": 0,
+        "saveMs": 91.86899199999971,
+        "loadMs": 198.51206199999797,
+        "resumedTurnsVerified": 50,
+        "battleReportsRetained": 20,
+        "saveBytes": 4971489,
+        "fullObservationBytes": 762019,
+        "heapSamplesMiB": [
+          181,
+          114,
+          61,
+          115,
+          261
+        ],
+        "hashes": [
+          "b0d137d7",
+          "2b94fbb7",
+          "37ebd9a1",
+          "3bbf3adc",
+          "0f01f3be"
+        ],
+        "saveHash": "0f01f3be",
+        "averagePhaseMs": {
+          "sieges": 0.0047123999998802905,
+          "settlements": 0.2656692300000577,
+          "upkeep": 0.10457848000016384,
+          "characters": 0.2195736599999509,
+          "movement": 0.16422070999986318,
+          "travel": 0.001526659999981348,
+          "diplomacy": 0.003165179999996326,
+          "progression": 0.001518129999640223
+        },
+        "note": "Young campaign with real AI; content roster reused for stress faction counts. Army containers and canonical formations are counted separately: merging lowers container count without erasing formation workload. Victory project proposals are intentionally deferred for this 100-turn workload; full archived victory is benchmarked separately."
+      },
+      {
+        "size": "legendary",
+        "mature": true,
+        "cells": 307200,
+        "factions": 40,
+        "initialArmies": 4000,
+        "initialFormations": 4000,
+        "armies": 1706,
+        "formations": 4034,
+        "largestArmyFormations": 13,
+        "settlements": 219,
+        "generatedMs": 322.95192099999986,
+        "turns": 100,
+        "averageEndTurnMs": 1.690183909999796,
+        "maxEndTurnMs": 3.2702730000019073,
+        "averageAiAllFactionsMs": 119.66162045999994,
+        "averageCommandResolutionMs": 19.20925209000685,
+        "averageFullTurnWithoutSaveMs": 140.5610564600066,
+        "commands": 62564,
+        "rejectedCommands": 0,
+        "saveMs": 80.4392399999997,
+        "loadMs": 194.5787960000016,
+        "resumedTurnsVerified": 50,
+        "battleReportsRetained": 20,
+        "saveBytes": 4780603,
+        "fullObservationBytes": 689636,
+        "heapSamplesMiB": [
+          213,
+          178,
+          133,
+          257,
+          93
+        ],
+        "hashes": [
+          "7b477dac",
+          "f02e23fa",
+          "10ef3123",
+          "915c67f8",
+          "a4122797"
+        ],
+        "saveHash": "a4122797",
+        "averagePhaseMs": {
+          "sieges": 0.00323785999971733,
+          "settlements": 0.1623379700001533,
+          "upkeep": 0.4661618799999269,
+          "characters": 0.1630587600002036,
+          "movement": 0.8634792299995024,
+          "travel": 0.0017831900002784095,
+          "diplomacy": 0.004419049999851268,
+          "progression": 0.0013113000002340414
+        },
+        "note": "Synthetic 1500/4000-singleton-army starting position; real command validation, AI, economy and movement for 100 turns. Field battles resolve when encountered. Army containers and canonical formations are counted separately: merging lowers container count without erasing formation workload. Victory project proposals are intentionally deferred for this 100-turn workload; full archived victory is benchmarked separately."
+      }
+    ],
+    "movement": [
+      {
+        "size": "huge",
+        "cells": 196608,
+        "explored": 196608,
+        "fullObservationMs": 8.92307399999845,
+        "coldQueryMs": 25.062631000000692,
+        "range": {
+          "samples": 120,
+          "medianMs": 0.06982799999968847,
+          "p95Ms": 0.07464999999501742,
+          "maxMs": 3.502630999995745
+        },
+        "route": {
+          "samples": 120,
+          "medianMs": 0.08839499999885447,
+          "p95Ms": 0.09361799999896903,
+          "maxMs": 0.14841200000228127
+        },
+        "rangeCells": 84,
+        "pathCells": 18,
+        "pathCost": 18,
+        "expandedNodes": 104,
+        "farQueryMs": 3.0826359999991837,
+        "farQueryLimited": true,
+        "farQueryNodes": 4096,
+        "queuedArmies": 512,
+        "queue512Ms": 132.53993400000036,
+        "fullEndTurn": {
+          "samples": 20,
+          "medianMs": 0.1966420000026119,
+          "p95Ms": 77.58585499999754,
+          "maxMs": 77.58585499999754
+        },
+        "travelPhase": {
+          "samples": 20,
+          "medianMs": 0.0023369999980786815,
+          "p95Ms": 77.12871299999824,
+          "maxMs": 77.12871299999824
+        },
+        "activeTravelPhase": {
+          "samples": 5,
+          "medianMs": 71.60989300000074,
+          "p95Ms": 77.12871299999824,
+          "maxMs": 77.12871299999824
+        },
+        "savedRouteBytes": 3169194,
+        "resumedTurnsVerified": 20,
+        "finalHash": "82e79c7e",
+        "note": "Synthetic fully explored two-faction world, cached observation previews; 512 guards begin stacked and share an eighteen-edge destination. No hostile intervention or AI in this workload. Query timing includes result-equality check; end-turn timing excludes separate mirror/hash checks. Path limit is measured separately from successful local route. No archive/save time in turn timings."
+      },
+      {
+        "size": "legendary",
+        "cells": 307200,
+        "explored": 307200,
+        "fullObservationMs": 12.134967000005418,
+        "coldQueryMs": 40.000544000002265,
+        "range": {
+          "samples": 120,
+          "medianMs": 0.07065600000350969,
+          "p95Ms": 0.07776799999555806,
+          "maxMs": 0.26177800000004936
+        },
+        "route": {
+          "samples": 120,
+          "medianMs": 0.08927300000505056,
+          "p95Ms": 0.10072200000286102,
+          "maxMs": 1.4298330000019632
+        },
+        "rangeCells": 90,
+        "pathCells": 18,
+        "pathCost": 18,
+        "expandedNodes": 110,
+        "farQueryMs": 2.810732999998436,
+        "farQueryLimited": true,
+        "farQueryNodes": 4096,
+        "queuedArmies": 512,
+        "queue512Ms": 128.7739070000025,
+        "fullEndTurn": {
+          "samples": 20,
+          "medianMs": 0.24705900000117254,
+          "p95Ms": 75.12152799999603,
+          "maxMs": 75.12152799999603
+        },
+        "travelPhase": {
+          "samples": 20,
+          "medianMs": 0.002454000001307577,
+          "p95Ms": 74.77201499999501,
+          "maxMs": 74.77201499999501
+        },
+        "activeTravelPhase": {
+          "samples": 5,
+          "medianMs": 72.943005000001,
+          "p95Ms": 74.77201499999501,
+          "maxMs": 74.77201499999501
+        },
+        "savedRouteBytes": 4879789,
+        "resumedTurnsVerified": 20,
+        "finalHash": "4de412c7",
+        "note": "Synthetic fully explored two-faction world, cached observation previews; 512 guards begin stacked and share an eighteen-edge destination. No hostile intervention or AI in this workload. Query timing includes result-equality check; end-turn timing excludes separate mirror/hash checks. Path limit is measured separately from successful local route. No archive/save time in turn timings."
+      }
+    ],
+    "battleKernel": {
+      "iterations": 200,
+      "formationsPerSide": 12,
+      "unitIds": [
+        "unit.colonist",
+        "unit.scout",
+        "unit.guard"
+      ],
+      "medianMs": 0.3993350000018836,
+      "p95Ms": 0.46996300000319025,
+      "maxMs": 1.3470400000005611
+    },
+    "conquestAndPeace": {
+      "iterations": 50,
+      "siegeAssaultMedianMs": 0.2454920000018319,
+      "siegeAssaultP95Ms": 0.2959709999995539,
+      "peacePackageWithMirrorMedianMs": 0.024045999998634215,
+      "peacePackageWithMirrorP95Ms": 0.03685099999711383,
+      "finalHash": "1ef40987",
+      "note": "Real blockade, militia assault, occupation, paid peace and treaty expiry. Capture-decision midpoint save plus 11 resumed turns verified every run. Siege timing excludes setup; peace timing includes separately applied mirror commands."
+    }
+  },
+  "geography": {
+    "startedAt": "2026-09-06 04:11:15 UTC",
+    "scope": "Current whole generation including the new shelf; standalone shelf only. Warmed samples exclude correctness checks, component diagnostics, JSON encoding, saves, simulation and browser. No claim of isolated host or naval gameplay throughput.",
+    "node": "v26.7.0",
+    "cases": [
+      {
+        "size": "huge",
+        "seed": 20260905,
+        "factions": 32,
+        "cells": 196608,
+        "generatorVersion": 3,
+        "counts": {
+          "land": 100499,
+          "shallow": 3768,
+          "deep": 92341,
+          "coastalPassableLand": 1952
+        },
+        "fingerprints": {
+          "terrain": "881daf62",
+          "fertility": "11dbd2e8",
+          "biome": "8db13134",
+          "waterDepth": "cbbea0e5"
+        },
+        "legacyPhysicalIdentity": true,
+        "depthOutputBytes": 196608,
+        "depthTemporaryQueueBoundBytes": 786432,
+        "depthJsonArrayBytes": 393217,
+        "allWaterComponents": {
+          "count": 2,
+          "largestCells": 96052
+        },
+        "shallowOnlyComponents": {
+          "count": 4,
+          "largestCells": 3631
+        },
+        "generation": {
+          "samples": 7,
+          "meanMs": 48.368559571428555,
+          "medianMs": 48.64511799999997,
+          "p95Ms": 55.734533,
+          "minMs": 44.273371999999995,
+          "maxMs": 55.734533
+        },
+        "deriveWaterDepth": {
+          "samples": 7,
+          "meanMs": 8.018614142857123,
+          "medianMs": 7.217089999999985,
+          "p95Ms": 12.785546999999951,
+          "minMs": 7.049388000000022,
+          "maxMs": 12.785546999999951
+        }
+      },
+      {
+        "size": "legendary",
+        "seed": 20260905,
+        "factions": 40,
+        "cells": 307200,
+        "generatorVersion": 3,
+        "counts": {
+          "land": 157245,
+          "shallow": 4786,
+          "deep": 145169,
+          "coastalPassableLand": 2498
+        },
+        "fingerprints": {
+          "terrain": "24ab9dbc",
+          "fertility": "6bd77c3a",
+          "biome": "a5256fb6",
+          "waterDepth": "c922fb2b"
+        },
+        "legacyPhysicalIdentity": true,
+        "depthOutputBytes": 307200,
+        "depthTemporaryQueueBoundBytes": 1228800,
+        "depthJsonArrayBytes": 614401,
+        "allWaterComponents": {
+          "count": 2,
+          "largestCells": 149711
+        },
+        "shallowOnlyComponents": {
+          "count": 3,
+          "largestCells": 4613
+        },
+        "generation": {
+          "samples": 7,
+          "meanMs": 69.80038285714288,
+          "medianMs": 69.67548099999999,
+          "p95Ms": 75.31998900000008,
+          "minMs": 66.35273200000006,
+          "maxMs": 75.31998900000008
+        },
+        "deriveWaterDepth": {
+          "samples": 7,
+          "meanMs": 11.805416285714273,
+          "medianMs": 11.175790000000006,
+          "p95Ms": 15.539336000000048,
+          "minMs": 10.937850000000026,
+          "maxMs": 15.539336000000048
+        }
+      }
+    ]
+  },
+  "archives": {
+    "startedAt": "2026-09-06 04:11:18 UTC",
+    "runtime": "v26.7.0",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+    "note": "Generated starts, every faction controlled by real AI, complete command/event/battle archives, true Prosperity victory. Short32/40faction scale runs are distinct from Standard/Epic4faction duration runs. Round time includes end-turn archive hashes but excludes disk saves, compression, rendering and final log generation. Complete replay and envelope restore verified.",
+    "measurements": [
+      {
+        "seed": 20260905,
+        "size": "tiny",
+        "pace": "short",
+        "factions": 4,
+        "victory": {
+          "path": "prosperity",
+          "factionId": "faction.ashen_compact",
+          "projectId": "project.91",
+          "settlementId": "settlement.22",
+          "turn": 44
+        },
+        "turns": 43,
+        "orders": 567,
+        "events": 1616,
+        "battleReportsArchived": 9,
+        "rejected": 0,
+        "totalMs": 217.10948399999998,
+        "aiMs": 79.57376600000032,
+        "observationMs": 34.81484099999986,
+        "commandAndArchiveMs": 102.29837499999937,
+        "winnerSettlements": 4,
+        "livingCharacters": 16,
+        "retainedMemorials": 0,
+        "characterActivity": {
+          "character_recruited": 16,
+          "character_assigned": 13,
+          "character_mission_started": 9,
+          "character_mission_progress": 9,
+          "character_mission_completed": 9,
+          "character_battle_experience": 8,
+          "character_promoted": 3,
+          "character_recovered": 2
+        },
+        "conquestNotifications": 0,
+        "averageRoundWithArchiveMs": 5.04905776744186,
+        "saveMs": 2.711769000000004,
+        "loadMs": 22.13462099999998,
+        "exportMs": 27.930285000000026,
+        "importMs": 28.257025,
+        "compressedBytes": 47061,
+        "logMs": 13.381708000000003,
+        "replayMs": 83.85492299999999,
+        "saveBytes": 507940,
+        "technicalBytes": 700579,
+        "historyBytes": 31966,
+        "chapters": 46,
+        "hash": "6edfb093",
+        "heapMiB": 62
+      },
+      {
+        "seed": 20260905,
+        "size": "huge",
+        "pace": "short",
+        "factions": 32,
+        "victory": {
+          "path": "prosperity",
+          "factionId": "faction.ashen_compact",
+          "projectId": "project.696",
+          "settlementId": "settlement.162",
+          "turn": 42
+        },
+        "turns": 41,
+        "orders": 4565,
+        "events": 17130,
+        "battleReportsArchived": 7,
+        "rejected": 0,
+        "totalMs": 2392.0408589999997,
+        "aiMs": 456.33215600000756,
+        "observationMs": 257.1605749999967,
+        "commandAndArchiveMs": 1676.5192039999915,
+        "winnerSettlements": 4,
+        "livingCharacters": 121,
+        "retainedMemorials": 0,
+        "characterActivity": {
+          "character_recruited": 121,
+          "character_assigned": 113,
+          "character_mission_started": 218,
+          "character_mission_progress": 218,
+          "character_mission_completed": 199,
+          "character_promoted": 32
+        },
+        "conquestNotifications": 0,
+        "averageRoundWithArchiveMs": 58.34245997560975,
+        "saveMs": 58.19903300000033,
+        "loadMs": 418.73914300000024,
+        "exportMs": 510.2604580000002,
+        "importMs": 441.2065840000005,
+        "compressedBytes": 485107,
+        "logMs": 249.17970499999956,
+        "replayMs": 2171.990624,
+        "saveBytes": 7695627,
+        "technicalBytes": 16165544,
+        "historyBytes": 213395,
+        "chapters": 44,
+        "hash": "2e4772f9",
+        "heapMiB": 198
+      },
+      {
+        "seed": 20260905,
+        "size": "legendary",
+        "pace": "short",
+        "factions": 40,
+        "victory": {
+          "path": "prosperity",
+          "factionId": "faction.ashen_compact",
+          "projectId": "project.862",
+          "settlementId": "settlement.81",
+          "turn": 42
+        },
+        "turns": 41,
+        "orders": 5771,
+        "events": 22300,
+        "battleReportsArchived": 3,
+        "rejected": 0,
+        "totalMs": 3304.0490790000003,
+        "aiMs": 538.265721000047,
+        "observationMs": 323.2611639999859,
+        "commandAndArchiveMs": 2440.3296060000603,
+        "winnerSettlements": 5,
+        "livingCharacters": 147,
+        "retainedMemorials": 0,
+        "characterActivity": {
+          "character_recruited": 147,
+          "character_assigned": 143,
+          "character_mission_started": 269,
+          "character_mission_progress": 269,
+          "character_mission_completed": 248,
+          "character_promoted": 40
+        },
+        "conquestNotifications": 0,
+        "averageRoundWithArchiveMs": 80.58656290243903,
+        "saveMs": 83.6093890000011,
+        "loadMs": 583.1142879999989,
+        "exportMs": 771.8041659999999,
+        "importMs": 664.3306030000003,
+        "compressedBytes": 614777,
+        "logMs": 392.9157470000009,
+        "replayMs": 3219.3842790000017,
+        "saveBytes": 10837357,
+        "technicalBytes": 23667927,
+        "historyBytes": 261261,
+        "chapters": 44,
+        "hash": "5fdc3caa",
+        "heapMiB": 468
+      },
+      {
+        "seed": 20260905,
+        "size": "tiny",
+        "pace": "standard",
+        "factions": 4,
+        "victory": {
+          "path": "prosperity",
+          "factionId": "faction.ashen_compact",
+          "projectId": "project.713",
+          "settlementId": "settlement.67",
+          "turn": 251
+        },
+        "turns": 250,
+        "orders": 5225,
+        "events": 14718,
+        "battleReportsArchived": 275,
+        "rejected": 0,
+        "totalMs": 2442.8961320000017,
+        "aiMs": 1174.6837379999852,
+        "observationMs": 401.22243799993885,
+        "commandAndArchiveMs": 838.3299649997571,
+        "winnerSettlements": 8,
+        "livingCharacters": 23,
+        "retainedMemorials": 0,
+        "characterActivity": {
+          "character_recruited": 23,
+          "character_assigned": 28,
+          "character_mission_started": 118,
+          "character_mission_progress": 117,
+          "character_mission_completed": 113,
+          "character_battle_experience": 238,
+          "character_promoted": 36,
+          "character_recovered": 26,
+          "commander_rallied": 24,
+          "character_mission_cancelled": 2,
+          "character_mission_interrupted": 2
+        },
+        "conquestNotifications": 126,
+        "averageRoundWithArchiveMs": 9.771584528000007,
+        "saveMs": 17.494832000000315,
+        "loadMs": 57.142635000000155,
+        "exportMs": 121.71515200000067,
+        "importMs": 80.12128500000108,
+        "compressedBytes": 390496,
+        "logMs": 105.34352399999989,
+        "replayMs": 878.2680089999994,
+        "saveBytes": 4543527,
+        "technicalBytes": 7249545,
+        "historyBytes": 316948,
+        "chapters": 253,
+        "hash": "7c4420a3",
+        "heapMiB": 451
+      },
+      {
+        "seed": 20260905,
+        "size": "tiny",
+        "pace": "epic",
+        "factions": 4,
+        "victory": {
+          "path": "prosperity",
+          "factionId": "faction.cinder_march",
+          "projectId": "project.2643",
+          "settlementId": "settlement.387",
+          "turn": 1111
+        },
+        "turns": 1110,
+        "orders": 21176,
+        "events": 61057,
+        "battleReportsArchived": 1116,
+        "rejected": 0,
+        "totalMs": 13423.049239000004,
+        "aiMs": 6366.181252000111,
+        "observationMs": 2152.601786999785,
+        "commandAndArchiveMs": 4765.012993000084,
+        "winnerSettlements": 27,
+        "livingCharacters": 22,
+        "retainedMemorials": 5,
+        "characterActivity": {
+          "character_recruited": 27,
+          "character_assigned": 37,
+          "character_mission_started": 448,
+          "character_mission_progress": 447,
+          "character_mission_completed": 427,
+          "character_battle_experience": 1670,
+          "character_promoted": 69,
+          "character_recovered": 228,
+          "commander_rallied": 159,
+          "character_mission_cancelled": 16,
+          "character_mission_interrupted": 4,
+          "character_died": 5
+        },
+        "conquestNotifications": 630,
+        "averageRoundWithArchiveMs": 12.092837152252255,
+        "saveMs": 80.14729600000283,
+        "loadMs": 211.5788190000021,
+        "exportMs": 480.5800020000024,
+        "importMs": 408.6440730000031,
+        "compressedBytes": 1690022,
+        "logMs": 495.6339300000036,
+        "replayMs": 4606.334434999997,
+        "saveBytes": 19801442,
+        "technicalBytes": 33360327,
+        "historyBytes": 1384215,
+        "chapters": 1113,
+        "hash": "4e68cc88",
+        "heapMiB": 335
+      }
+    ]
+  },
+  "browser": {
+    "fullSuite": {
+      "scenarios": 49,
+      "result": "passed",
+      "reportedDuration": "2.7m",
+      "browser": "Chromium151.0.7922.173"
+    },
+    "renderer": {
+      "workload": "Synthetic fully explored Huge,32factions,1500global armies,32towns. Live fog limits entities; no turn advancement.",
+      "stateHash": "dbae7323",
+      "cells": 196608,
+      "initialTransferBytes": 16499620,
+      "atlasPages": 1,
+      "residentAtlasBytesEstimate": 4194304,
+      "atlasSha256": "59bfd5e96f75f235bbe528b416a8bfb25e44f9965f7a002cb3440afd252e3b90",
+      "firstArtLoadMs": 251.1,
+      "firstArtRenderCpuMs": 28.2,
+      "samples": [
+        {
+          "stage": "fully-explored-static",
+          "visibleCells": 2304,
+          "cachedChunks": 9,
+          "visibleSprites": 48,
+          "pooledSprites": 2352,
+          "frameP95Ms": 16.8
+        },
+        {
+          "stage": "near-static-faction-poses",
+          "visibleCells": 2304,
+          "cachedChunks": 9,
+          "visibleSprites": 48,
+          "pooledSprites": 2352,
+          "frameP95Ms": 16.8
+        },
+        {
+          "stage": "six-camera-drags",
+          "visibleCells": 1024,
+          "cachedChunks": 11,
+          "visibleSprites": 0,
+          "pooledSprites": 2864,
+          "frameP95Ms": 16.8
+        },
+        {
+          "stage": "far-strategic",
+          "visibleCells": 2304,
+          "cachedChunks": 16,
+          "visibleSprites": 0,
+          "pooledSprites": 4144,
+          "frameP95Ms": 16.7
+        },
+        {
+          "stage": "far-strategic-home-aggregates",
+          "visibleCells": 2304,
+          "cachedChunks": 16,
+          "visibleSprites": 2,
+          "pooledSprites": 4144,
+          "frameP95Ms": 16.7
+        }
+      ]
+    }
+  }
+}

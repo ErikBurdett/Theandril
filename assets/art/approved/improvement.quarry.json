@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.quarry",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.quarry"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art strategy-map asset on genuinely transparent PNG. One isolated complete object, not a sheet; entire silhouette comfortably inside generous15% transparent margin. Coarse square64x64 logical detail, grouped material values, restrained upper-left highlights, crisp edges. No text, labels, border, people, landscape background, smooth gradients, glow, soft alpha shadows or checkerboard. Serious practical weathered medieval fantasy; no copied game designs. A compact stone QUARRY improvement prop: two short pale stepped exposed rock cuts, stacked squared grey blocks and one small wooden lifting derrick with a suspended single block. Shallow three-quarter southeast view. Low broad readable industrial stonework, not a mine tunnel, fortress or mountain. Whole rope/crane fits margin; transparent outside compact footprint, no people or surrounding full tile.",
+  "frames": [
+    {
+      "id": "improvement.quarry/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/improvement.quarry/8358093433dc79965f9cfe1c12e45e752f1240a86ad39d7da5c6e16abd189d91/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "878d930aabb23ad9f423f1c16db715f83502d60d8bda23a8a777387fa79b1ef7",
+    "sourceRefs": [
+      "assets/art/source/slice12/improvement.quarry-v1.png",
+      "assets/art/source/slice12/improvement.quarry-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "dfc3a283e04c7e7a2c1031b6145fe6259fe66f951c652c36668939dd359c9428",
+    "2af7caab513e2b7416e87916fec74a25136646d5b284f7c39b99863319f986da"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "00df36bc5cabf80a96e17f0ee306cabaa861073042d20988f00abc2640379619",
+      "inputHash": "dfc3a283e04c7e7a2c1031b6145fe6259fe66f951c652c36668939dd359c9428",
+      "outputHash": "6b1b0e555ae328e6da10ea39c897d47f4daad651427eabca4081ccc98fe5c499"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "6b1b0e555ae328e6da10ea39c897d47f4daad651427eabca4081ccc98fe5c499",
+      "outputHash": "2f7a668a26aab55b3c3f99489e1e74f3ca4880be93f3e48837179d65962b9166"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "2f7a668a26aab55b3c3f99489e1e74f3ca4880be93f3e48837179d65962b9166",
+      "outputHash": "1d88aa0676a04e3caf5d1b525b7252e4aaf40edb3a33be6ed1d80ff42e4ae958"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "1d58d5a29d80d52eab610b4ce4ff9a8fafcd8c8949fd544aee280b11018c193f",
+      "outputHash": "ac56f0312ce82cba0a4a3430e26baa641c7296f133617dee292d87073f958f8d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "eeaaf3271db1a6eb5318762427b5de04c2c9dacb26cf88c92a657bff1f571ac9",
+      "outputHash": "02849f3a27e4124745371c4449463c6ea6f3cb313c46124e1d8eb0680812ede5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "a4ebcabd275caa6950b6e28e80dfa070df563cd131c42c1d88e83b3b440adf73",
+      "outputHash": "0d43584b1a20fe5a38c51e6bb959fb343a8470d95df232e4e134fe9dcf7665a3"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/improvement.quarry.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T05:32:49.096Z",
+    "notes": "Inspected native1x/4x: pale stepped rock cuts and brown lifting derrick create a clear masonry-work silhouette; suspended block, crane tip and squared lower blocks remain intact. Whole prop fits64px ground32,48 without mountain/base-tile substitution.32px half-native runtime placement review pending.\nReviewed candidate 8358093433dc79965f9cfe1c12e45e752f1240a86ad39d7da5c6e16abd189d91; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/7081439af53f330f6ba131e8a39f0d998ea2407822b1c43d1b486ca72a66b2e1.png"
+    ],
+    "inputHash": "2feb734e5983eee55f960ce0137a79d399fe5058616e5d30667541dee0e0626f"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

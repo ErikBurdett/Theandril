@@ -32,6 +32,8 @@ describe('faction source preparation', () => {
     expect(FACTION_SHEET_ROLES.slice(12)).toEqual(['ui.crest', 'ui.banner', 'ui.badge']);
     expect(parseFactionArguments(['--family=glass_tide'])).toEqual(['glass_tide']);
     expect(() => parseFactionArguments(['--family=../ashen_compact-v1-rejected'])).toThrow('Unknown faction');
+    expect(parseFactionArguments([])).toEqual(['ashen_compact', 'reedbound_council', 'cinder_march', 'glass_tide']);
+    expect(() => parseFactionArguments(['--family=iron_covenant'])).toThrow('individual generated sources');
     expect(() => parseFactionArguments(['--family=glass_tide', '--approve'])).toThrow('Usage');
   });
   it('partitions odd provider dimensions without losing pixels and creates deterministic padded native PNGs', () => {

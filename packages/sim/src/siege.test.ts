@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { checksum, FACTIONS, UNITS } from '@theandril/content';
 import { isPassable, neighbors } from '@theandril/mapgen';
 import { conquestCampaign, CONQUEST_FIXTURE } from '../../test-fixtures/src/conquest-fixture';
+import { rebaseAuthoredLand, refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { applyCommand, deserializeGame, getObservation, replayGame, serializeGame, settlementYields, stateHash, validateEndTurn } from './index';
 import type { CaptureDecision, CaptureOutcome, GameCommand, GameState, Ruin, Siege } from './index';
 import { rebuildIndexes } from './visibility';
@@ -57,7 +58,7 @@ describe('siege economy, combat and control', () => {
     state.world.starts.push(state.world.terrain.findIndex((terrain, cell) => isPassable(terrain) && !state.world.starts.includes(cell)));
     const thirdArmyId = `army.${state.nextId++}`;
     state.armies[thirdArmyId] = { ...template, id: thirdArmyId, factionId: definition.id, cell, formations: [createArmyFormation(thirdArmyId, template.formations[0]!.unitId)] };
-    rebuildIndexes(state);
+    rebaseAuthoredLand(state);
     command(state, { type: 'declareWar', factionId: definition.id, targetFactionId: rival });
     command(state, { type: 'besiege', factionId: definition.id, armyId: thirdArmyId, settlementId: town.id });
     const view = getObservation(state, player);
@@ -66,7 +67,7 @@ describe('siege economy, combat and control', () => {
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(before);
     // Move only authored sight sources away: explored-but-unseen siege presence is not disclosed.
     const home = Object.values(state.settlements).find(town => town.factionId === player)!;
-    home.cell = state.world.starts[1]!; template.cell = home.cell; rebuildIndexes(state);
+    home.cell = state.world.starts[1]!; template.cell = home.cell; rebaseAuthoredLand(state);
     expect(state.explored[player]?.has(town.cell)).toBe(true);
     expect(getObservation(state, player).visibleSiegeSettlementIds).toEqual([]);
     expect(getObservation(state, player).sieges).toEqual([]);
@@ -157,7 +158,7 @@ describe('siege economy, combat and control', () => {
       state.armies[id] = { ...attacker, id, name: unit.name, factionId: rival, cell: requireTown(state).cell, movement: unit.movement, formations: [createArmyFormation(id, unitId)] };
       defenderIds.push(id);
     }
-    rebuildIndexes(state);
+    refreshAuthoredSight(state);
     command(state, war);
     reject(state, { type: 'attack', factionId: player, armyId, targetArmyId: defenderIds[0] });
     const initial = serializeGame(state);
@@ -252,7 +253,7 @@ describe('settlement capture consequences', () => {
     state.progression[definition.id] = { technologies: [], institutionId: null, doctrineId: null };
     state.world.starts.push(start); state.explored[definition.id] = new Set();
     requireTown(state).founderFactionId = definition.id;
-    rebuildIndexes(state);
+    rebaseAuthoredLand(state);
     fallen(state);
     expect(state.pendingCapture?.options.some(option => option.outcome === 'liberate')).toBe(true);
     expect(getObservation(state, player).factions.some(faction => faction.id === definition.id && faction.name === definition.name)).toBe(true);

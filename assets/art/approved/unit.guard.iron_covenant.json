@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.iron_covenant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic-game pixel-art sprite, Iron Covenant oath guard, for Theandril. True transparent PNG background (alpha zero), one isolated full-body figure only, no sheet, labels, border, scenery or ground tile. Serious weathered medieval dark fantasy, adult deep-folk proportions: compact broad-shouldered craftsperson-warrior, not chibi. Southeast-facing shallow three-quarter view, head and feet fully visible. Dark blue-black riveted iron, dull brass reinforcement, charcoal leather, small muted old-gold cloth accent; heavy rectangular shield with a simple original split-anvil symbol, short practical sword, faceted low helmet and visible beard. Disciplined Anvilheights Kiln-faith metalworkers, not a copy of any existing fictional dwarf. Pixel technique: deliberately coarse square clusters, about 64x64 logical pixel resolution shown enlarged, NOT painterly miniature or smooth vector. Strong grouped midtones, restrained upper-left highlights, clear silhouette, crisp hard pixel edges, no antialiasing, glow, texture confetti, gradient background or baked checkerboard. Figure occupies central three quarters of a square transparent canvas with generous empty margin and baseline near bottom. Exactly one guard, exactly one shield and one sword. No text or runic letters.",
+  "frames": [
+    {
+      "id": "unit.guard.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard.iron_covenant/134e0f7e0452282e50e75612371f86de30a9e61f2e243bef7c49578b79a91224/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "eee3c30c403e7a417c00022abc296ce9419b56ec20c4a55ec07cb5515f2007dc",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.guard.iron_covenant-v1.png",
+      "assets/art/source/slice12/unit.guard.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "06ab70b13616c0bb485f31e9d66492c8e1e683ad40d8c1f6a4de67cd0b621187",
+    "cdea34549b0caeb39683270670b84a3b8d34d393110352b80cd762506e082410"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "14dbc348676265fd58547fd5f4b2e7756e859a18c2e5e4dff9bb70410f36f120",
+      "inputHash": "06ab70b13616c0bb485f31e9d66492c8e1e683ad40d8c1f6a4de67cd0b621187",
+      "outputHash": "212ad2e1a52364d8171a7d70542ce1d531047a5cd8d5148b98a304916d73edf3"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "212ad2e1a52364d8171a7d70542ce1d531047a5cd8d5148b98a304916d73edf3",
+      "outputHash": "818536c659c62771a78ae320447e925c9a5025c011bb2597626f6971137f8604"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "818536c659c62771a78ae320447e925c9a5025c011bb2597626f6971137f8604",
+      "outputHash": "09b856d51256558ed511dafaead21c3ebe80850af431e338a4c3f0c0ca892cbe"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "6da8c4a82e84b1eea5bbffccda802b37ed438e743b4601b5527f23101767da90",
+      "outputHash": "76d43e65e6194e6c29c6a4eed71f4101f68622f6015e4f8cc54b667a11568958"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "303ae88a958ce4d512c26d3bf569bf252802b6c73242815ac80a1ceec150f59d",
+      "outputHash": "846454fec0820b8fd964b9a9f544f713b9a16a2c2e2da4ac6a0a2a6589ee0d0a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "d22485cd9b0636171fcfc83397dbf3f06091bb1225ec75000e0abed6b2a99719",
+      "outputHash": "a8561118d687dd09ca5afae6d03052abbdd7c7b2bb96799a8b73b8760de97a09"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.guard.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:46:28.891Z",
+    "notes": "Inspected native 1x and 4x: broad shield and short sword remain separate; planted boots and low faceted helmet fit the 64px ground anchor. Dark iron/brass palette and broad adult deep-folk silhouette distinguish this role from the Synod guard. No clipped weapon, residual background or partial alpha. Static idle only; in-game review pending.\nReviewed candidate 134e0f7e0452282e50e75612371f86de30a9e61f2e243bef7c49578b79a91224; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/6f1945a607d9c8843ce40653bc7ec15d7073f486fa865ef3a977c3aacb6320c6.png"
+    ],
+    "inputHash": "c602bfc2cce20f352016e63a4d8dc96708e8314a9ed278a56251619b45f438e3"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

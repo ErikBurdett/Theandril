@@ -13,7 +13,7 @@ test('world-size recommendations expose generated seats honestly and a chosen fa
   }
   await expect(page.getByTestId('faction-density-help')).toContainText('Additional seats are generated variants, not additional authored nations');
   await expect(page.locator('.faction-card')).toContainText('Ashen Compact');
-  await expect(page.locator('.faction-card')).toContainText('Your current player seat');
+  await expect(page.locator('.faction-card')).toContainText('Your chosen player seat');
   await count.fill('1'); expect(await count.evaluate(element => (element as HTMLInputElement).validity.rangeUnderflow)).toBe(true);
   await count.fill('49'); expect(await count.evaluate(element => (element as HTMLInputElement).validity.rangeOverflow)).toBe(true);
   await size.selectOption('tiny'); await count.fill('6');

@@ -4,9 +4,10 @@ import { createGame, getObservation, serializeGame, stateHash } from '@theandril
 import { selectEntityArt } from './faction-style';
 
 describe('authored faction artwork selection', () => {
-  it('defines exactly sixty unique qualified bindings without claiming generic content IDs', () => {
-    expect(FACTION_ART_ROLES).toHaveLength(15); expect(FACTION_ART_IDS).toHaveLength(60);
-    expect(new Set(FACTION_ART_IDS).size).toBe(60);
+  it('defines ninety unique qualified bindings for six cultures without claiming generic content IDs', () => {
+    expect(FACTION_ART_FAMILIES).toHaveLength(6);
+    expect(FACTION_ART_ROLES).toHaveLength(15); expect(FACTION_ART_IDS).toHaveLength(90);
+    expect(new Set(FACTION_ART_IDS).size).toBe(90);
     for (const family of FACTION_ART_FAMILIES) for (const role of FACTION_ART_ROLES) expect(factionArtId(role, `faction.${family}`)).toBe(`${role}.${family}`);
   });
   it('uses only exact authored definition IDs, never seat numbers, names or arbitrary suffixes', () => {

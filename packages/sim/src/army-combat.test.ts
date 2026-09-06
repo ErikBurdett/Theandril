@@ -78,14 +78,15 @@ describe('mixed campaign forces use the real formation battlefield', () => {
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
   });
 
-  it('rejects a stacked target over twelve total formations without omitting any defenders', () => {
+  it('rejects a stacked target over twenty total formations without omitting any defenders', () => {
     const state = borderBattleCampaign();
     for (let i = 0; i < 11; i++) reinforce(state, 'army.4', 'unit.guard');
     const defender = state.armies['army.4']!; const id = `army.${state.nextId++}`;
     state.armies[id] = { ...defender, id, formations: [createArmyFormation(id, 'unit.scout')] };
+    for (let i = 0; i < 8; i++) reinforce(state, id, 'unit.guard');
     rebuildIndexes(state); issue(state, end); issue(state, war);
     const before = stateHash(state);
-    expect(applyCommand(state, attack)).toMatchObject({ ok: false, error: 'This field battle supports at most twelve defending formations.' });
+    expect(applyCommand(state, attack)).toMatchObject({ ok: false, error: 'This field battle supports at most twenty defending formations.' });
     expect(stateHash(state)).toBe(before);
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(before);
   });

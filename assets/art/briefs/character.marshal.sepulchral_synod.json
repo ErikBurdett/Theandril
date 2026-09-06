@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.sepulchral_synod",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. ONE full-body adult living veiled marshal, chalk-pale cuirass and indigo long command sash, bronze open-ring collar. Raised short bronze command baton and a small closed parchment ledger at belt. Tall upright figure, no pike, shield or horse; leader silhouette remains practical, no crown or spell aura. Facing down-right with10% transparent margin around every extremity.",
+  "frames": [
+    {
+      "id": "character.marshal.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.sepulchral_synod/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2af5d26f4915d41b9d3e4bf4c07bb8dd660e580086618046bc9e7ddfe1f92729",
+    "sourceRefs": [
+      "assets/art/source/slice12/character.marshal.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/character.marshal.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "fc93595fc2a190591960ff2ba619d3e2bdaf4b529fceeee49e49c5d60b7209ae",
+    "6a88215f7b232419b2b41c7a938fe1a59c980b520333e190dd149072a473177f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "70247899594a52870b637eedb2e59f05d92ee5ea630839a6344c92d06bcfb26b",
+      "inputHash": "fc93595fc2a190591960ff2ba619d3e2bdaf4b529fceeee49e49c5d60b7209ae",
+      "outputHash": "568edb0f3ab63d2ebef086c0063302d3c5f3792131d725786d6c7fda35d9f5fe"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

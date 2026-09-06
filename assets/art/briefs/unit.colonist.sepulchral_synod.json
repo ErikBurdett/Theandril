@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.sepulchral_synod",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. ONE complete civilian migration cart with its ONE adult living veiled caretaker pulling from the RIGHT SIDE. The cart is on the LEFT; handles extend RIGHT to the caretaker who walks toward the LOWER RIGHT. Mandatory rightward orientation; do NOT put caretaker left of cart. Indigo canopy over chalk-painted boards, bronze-rimmed wheels, seed sacks and closed ancestral reliquary cases, no exposed remains. All wheels and the caretaker are connected/readable. Whole silhouette occupies only central70% of transparent canvas.",
+  "frames": [
+    {
+      "id": "unit.colonist.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.colonist.sepulchral_synod/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e5664bfea0f5b0eb726b7b2d6726f9a554575f7d7fbba07c130a6d53f614c4d6",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.colonist.sepulchral_synod-v2.png",
+      "assets/art/source/slice12/unit.colonist.sepulchral_synod-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "0d6683d25f0af9040efd5857cd4ec3c53fc9adc7ac116d666ec3c267353eb05c",
+    "d1c2c0886efac0040e26fd10c2be9f5de77d1eec8967e6d0da6c9214b48935a2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "974ea394da58d3abe9c9430c8ae583bb3a421e654a8656c92f9ec5332483af5d",
+      "inputHash": "0d6683d25f0af9040efd5857cd4ec3c53fc9adc7ac116d666ec3c267353eb05c",
+      "outputHash": "1920d882e403cf4c48665778dc886ace28caccef1b248a2930fe22342a2af871"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

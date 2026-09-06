@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.sepulchral_synod",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original static pixel-art strategy map settlement sprite, isolated on genuine transparent PNG. Whole architectural footprint, roofs and chimneys fully enclosed with generous15% empty margins on every side. Shallow three-quarter southeast map view. Coarse square pixel clusters with grouped material values, soft upper-left highlights, crisp native-style edges, restrained dark fantasy. No landscape/base tile, characters, scenery, labels, text, borders, smooth gradients, glow, smoke or baked checkerboard. This is a single settlement silhouette, not a sheet or comparison. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. Mature southern chalkland city: compact monumental stepped chalk terraces ascending to a broad indigo-canopied priest hall, multiple low colonnades, carefully ranked enclosed ancestral chambers and living-workshop courts, bronze portal bindings. Tiered architectural silhouette, not Gothic cathedral, no skull piles or exposed dead. Pale surfaces grouped against deep indigo recesses. Native128x128 visual detail, whole footprint enclosed.",
+  "frames": [
+    {
+      "id": "settlement.city.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.sepulchral_synod/858c97a324d92020f7fd430a755f5c78f69d92420184dada14bdf2c4eb59df77/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1b26f695b3f49b62e188b3882556991b6a7bb7e51ed7393769a56e271bbd1dcf",
+    "sourceRefs": [
+      "assets/art/source/slice12/settlement.city.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/settlement.city.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "926e1afd1413bd45db9d7add63911d70a610dbc0248a0f4430765a2f447bdc40",
+    "17c544d8592513b26c0298c6bf8a676562cef8db0bfb765e1ac02461062433b6"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-128",
+      "settingsHash": "995fdf34c9c6c38d09a674115696b4d492f15fcb65c44ada5fc5bbd0272ae44a",
+      "inputHash": "926e1afd1413bd45db9d7add63911d70a610dbc0248a0f4430765a2f447bdc40",
+      "outputHash": "82aa40583687f23dc7c8503d8620ff9b4a165a1a14d22f8731e3a59db2ae209b"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "82aa40583687f23dc7c8503d8620ff9b4a165a1a14d22f8731e3a59db2ae209b",
+      "outputHash": "ca1dc76e7d7dd86820a78ee1662fe33147fda765b6c9f1d6ca8e66156f7f5ebd"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ca1dc76e7d7dd86820a78ee1662fe33147fda765b6c9f1d6ca8e66156f7f5ebd",
+      "outputHash": "faf7d53a434e73e881c92d31c46486e916f15bdf7f5f6d329828cec673fbb23e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "7383418c899eb188ff13cc866764f31caa9462b453dc39e3477b9a1d1e5a002e",
+      "outputHash": "c92eb56458804423e6b0bf8503b287c6d4ba7486f514d5ed132adbe81b607af8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "55580fad4e180ed6b50b9cfef1ac7f8334f9c1b8d5d9eb90dbb9c5fe4dbf4279",
+      "outputHash": "8352f3d43c01c7e6384256a515c894c2bda17aa3812fe7390ffd4e4ca87dfd5c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "e2b3f908803fc8d39362fa3bf65b26418ad79f6281be8065bd2fcd40fde836ad",
+      "outputHash": "e5e20233ab0c67489454d294779c6aae21cd8f533bdc0a5ec58f6d1803d909ea"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.sepulchral_synod.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:59:26.064Z",
+    "notes": "Inspected native1x/4x: broad128px stepped city has a central colonnaded indigo hall, coherent pale terrace masses and a complete top ring. Whole footprint and broad gate remain intact; dark openings preserve depth without noisy single-pixel decoration dominating the form. Clearly larger tier than town; runtime placement review pending.\nReviewed candidate 858c97a324d92020f7fd430a755f5c78f69d92420184dada14bdf2c4eb59df77; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/59c573f646e1690fa0bbbae074434bd6c0b246bb99e60d5ff0de5607b1970278.png"
+    ],
+    "inputHash": "2ec7df03a2d209c1422832d30703dc0edf99e560347f855024c2c039dd6769c4"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

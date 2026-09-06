@@ -1,0 +1,61 @@
+{
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "note": "Generated starts, every faction controlled by real AI, complete command/event/battle archives, true Prosperity victory. Short32/40faction scale runs are distinct from Standard/Epic4faction duration runs. Round time includes end-turn archive hashes but excludes disk saves, compression, rendering and final log generation. Complete replay and envelope restore verified.",
+  "measurements": [
+    {
+      "seed": 20260905,
+      "size": "tiny",
+      "pace": "epic",
+      "factions": 4,
+      "victory": {
+        "path": "prosperity",
+        "factionId": "faction.reedbound_council",
+        "projectId": "project.2302",
+        "settlementId": "settlement.388",
+        "turn": 863
+      },
+      "turns": 862,
+      "orders": 18935,
+      "events": 54448,
+      "battleReportsArchived": 888,
+      "rejected": 0,
+      "totalMs": 18901.351337,
+      "aiMs": 5690.0025549999555,
+      "observationMs": 5858.329066000044,
+      "commandAndArchiveMs": 7003.183430999852,
+      "winnerSettlements": 34,
+      "livingCharacters": 19,
+      "retainedMemorials": 18,
+      "characterActivity": {
+        "character_recruited": 37,
+        "character_assigned": 49,
+        "character_mission_started": 529,
+        "character_mission_progress": 526,
+        "character_mission_completed": 506,
+        "character_battle_experience": 1274,
+        "character_promoted": 87,
+        "character_recovered": 227,
+        "character_mission_interrupted": 9,
+        "commander_rallied": 174,
+        "character_mission_cancelled": 12,
+        "character_died": 18
+      },
+      "conquestNotifications": 404,
+      "averageRoundWithArchiveMs": 21.927321736658932,
+      "saveMs": 85.92280299999766,
+      "loadMs": 213.56751499999882,
+      "exportMs": 454.93214699999953,
+      "importMs": 329.93594999999914,
+      "compressedBytes": 1475486,
+      "logMs": 424.23109999999724,
+      "replayMs": 7049.817105999999,
+      "saveBytes": 16991736,
+      "technicalBytes": 27796134,
+      "historyBytes": 1308675,
+      "chapters": 865,
+      "hash": "177160fb",
+      "heapMiB": 277
+    }
+  ]
+}

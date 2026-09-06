@@ -10,7 +10,7 @@ import { doctrineEffects } from './progression';
 import { armyCanAttack, armySight, armyStrength } from './army-composition';
 import { rulesVersion } from './rules';
 import { armyCharacterLeadership, automaticallyRally, finishBattleCharacters, interruptArmyMissions, snapshotArmyCharacters } from './characters';
-import { armyDomain, armyTerrainBlocker, carriedArmyBlocker, moveFleetCargo, reconcileFleetCargo } from './naval';
+import { armyDomain, armyTerrainBlocker, carriedArmyBlocker, moveFleetCargo, reconcileFleetCargo, snapshotFleetCargo } from './naval';
 
 export const MAX_BATTLE_REPORTS = 20;
 const units = new Map(UNITS.map(unit => [unit.id, unit]));
@@ -68,7 +68,7 @@ function compositionSnapshot(state: GameState, armies: Army[], militiaId: string
   if (militiaId) formationBindings.push({ battleFormationId: militiaId, formationId: militiaId, armyId: null });
   formationBindings.sort((a, b) => a.battleFormationId < b.battleFormationId ? -1 : 1);
   return { rulesVersion: rulesVersion(state) < 6 ? 5 as const : rulesVersion(state) < 7 ? 6 as const : rulesVersion(state) < 8 ? 7 as const : 8 as const, formationBindings,
-    domain: armyDomain(armies[0]!), transportAftermath: [],
+    domain: armyDomain(armies[0]!), transportAftermath: [], transportSnapshots: snapshotFleetCargo(state, armies),
     characterSnapshots: rulesVersion(state) >= 7 ? snapshotArmyCharacters(state, armies) : [], characterAftermath: [], usedAbilities: [],
     formationStrengths: formationBindings.map(binding => ({ formationId: binding.formationId, strength: [...combat.attacker, ...combat.defender].find(item => item.id === binding.battleFormationId)!.strength })),
     formationAftermath: [] };
@@ -289,9 +289,11 @@ export function resolveCampaignBattle(state: GameState, factionId: string, order
   return { ok: true, events };
 }
 
-export function cloneCampaignBattle(battle: CampaignBattle): CampaignBattle {
+export function cloneCampaignBattle(battle: CampaignBattle, viewerFactionId?: string): CampaignBattle {
+  const cargo = battle.transportSnapshots.filter(item => !viewerFactionId || item.factionId === viewerFactionId);
+  const cargoIds = new Set(cargo.map(item => item.armyId));
   return {
-    ...battle, transportAftermath: battle.transportAftermath.map(item => ({ ...item, lostFormationIds: [...item.lostFormationIds] })), characterSnapshots: battle.characterSnapshots.map(item => ({ ...item, learnedSkillIds: [...item.learnedSkillIds], leadership: { ...item.leadership } })), characterAftermath: battle.characterAftermath.map(item => ({ ...item })), usedAbilities: battle.usedAbilities.map(item => ({ ...item })), formationBindings: battle.formationBindings.map(item => ({ ...item })), formationStrengths: battle.formationStrengths.map(item => ({ ...item })), formationAftermath: battle.formationAftermath.map(item => ({ ...item })), defenderIds: [...battle.defenderIds], initialStrengths: battle.initialStrengths.map(army => ({ ...army })), aftermath: battle.aftermath.map(army => ({ ...army })),
+    ...battle, transportSnapshots: cargo.map(item => ({ ...item, formationIds: [...item.formationIds] })), transportAftermath: battle.transportAftermath.filter(item => !viewerFactionId || cargoIds.has(item.armyId)).map(item => ({ ...item, lostFormationIds: [...item.lostFormationIds] })), characterSnapshots: battle.characterSnapshots.map(item => ({ ...item, learnedSkillIds: [...item.learnedSkillIds], leadership: { ...item.leadership } })), characterAftermath: battle.characterAftermath.map(item => ({ ...item })), usedAbilities: battle.usedAbilities.map(item => ({ ...item })), formationBindings: battle.formationBindings.map(item => ({ ...item })), formationStrengths: battle.formationStrengths.map(item => ({ ...item })), formationAftermath: battle.formationAftermath.map(item => ({ ...item })), defenderIds: [...battle.defenderIds], initialStrengths: battle.initialStrengths.map(army => ({ ...army })), aftermath: battle.aftermath.map(army => ({ ...army })),
     combat: {
       ...battle.combat, attacker: battle.combat.attacker.map(unit => ({ ...unit })), defender: battle.combat.defender.map(unit => ({ ...unit })),
       log: [...battle.combat.log], ...(battle.combat.result ? { result: { ...battle.combat.result } } : {}),

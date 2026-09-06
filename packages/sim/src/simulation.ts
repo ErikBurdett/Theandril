@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BUILDINGS, FACTIONS, UNITS, campaignPaceSchema } from '@theandril/content';
+import { BUILDINGS, FACTIONS, FACTION_ROSTERS, ROSTER_VERSION, UNITS, campaignPaceSchema, factionRoster, rosterVersionSchema } from '@theandril/content';
 import { GENERATOR_VERSION, generateWorld, isPassable, neighbors } from '@theandril/mapgen';
 import type { Army, CommandResult, DomainEvent, GameState, NewGameOptions, Observation, PhaseObserver, Settlement } from './types';
 import { cellsWithin, indexes, rebuildIndexes, updateSight } from './visibility';
@@ -12,6 +12,8 @@ import { advanceMovement, cancelMovement, moveTo, pauseMovement, queueMovement, 
 import { armyCanFound, effectiveArmyMovement, armySight, armyUpkeep, createArmyFormation, getArmyView, splitArmyFormations, transferArmyFormations } from './army-composition';
 import { armyTerrainBlocker, carriedArmyBlocker, disembarkArmy, embarkArmy, moveFleetCargo, navalLaunchCell, observeProductionOptions, productionRequirementBlocker } from './naval';
 import { LEGACY_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './rules';
+import { factionStarts } from './faction-starts';
+import { applyLandCommand, emptyLandState, getLandObservation, handleLandCapture, initializeSettlementLand, landCommandSchemas, observeLandCell, refreshLandKnowledge, resolveLandTurn, settlementLandYield } from './territory';
 import { advanceCharacters, armyHasCharacterMission, assignCharacter, cancelCharacterMission, characterUpkeep, getCharacterObservation, observeCommanderAbilities, promoteCharacter, recruitCharacter, reconcileCharacterMissions, removeArmyCharacters, startCharacterMission, unassignCharacter, useCommanderAbility } from './characters';
 
 const identifier = z.string().min(1).max(100);
@@ -62,23 +64,35 @@ const version7CommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('cancelCharacterMission'), factionId: identifier, characterId: identifier }).strict(),
   z.object({ type: z.literal('useCommanderAbility'), factionId: identifier, characterId: identifier, abilityId: identifier }).strict(),
 ]);
-export const commandSchema = z.discriminatedUnion('type', [
+const version8CommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('embarkArmy'), factionId: identifier, armyId: identifier, fleetId: identifier }).strict(),
   ...version7CommandSchema.options.filter(schema => schema.shape.type.value !== 'transferFormations' && schema.shape.type.value !== 'splitArmy'),
   z.object({ type: z.literal('transferFormations'), factionId: identifier, sourceArmyId: identifier, targetArmyId: identifier, formationIds: z.array(identifier).min(1).max(20) }).strict(),
   z.object({ type: z.literal('splitArmy'), factionId: identifier, armyId: identifier, formationIds: z.array(identifier).min(1).max(20), name: armyName.optional() }).strict(),
   z.object({ type: z.literal('disembarkArmy'), factionId: identifier, armyId: identifier, target: z.number().int().min(0).max(349_999) }).strict(),
 ]);
-export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : commandSchema;
+export const commandSchema = z.discriminatedUnion('type', [...version8CommandSchema.options, ...landCommandSchemas]);
+export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : commandSchema;
+
+/** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
+export function initializeLegacyLand(state: GameState): void {
+  state.land = emptyLandState(state.factions.map(faction => faction.id));
+  for (const town of Object.values(state.settlements).sort((a, b) => a.id < b.id ? -1 : 1)) initializeSettlementLand(state, town);
+  for (const faction of state.factions) refreshLandKnowledge(state, faction.id, indexes(state).visible.get(faction.id) ?? new Map());
+}
 
 /** Historical singleton execution preserves old IDs, outcomes, messages and content access. */
 export function applyCommandForVersion(state: GameState, input: unknown, version: RulesVersion): CommandResult {
   const parsed = commandSchemaForVersion(version).safeParse(input);
   if (!parsed.success) return { ok: false, error: 'Malformed command: ' + parsed.error.issues[0]?.message, events: [] };
+  const historicalRoster: readonly string[] = FACTION_ROSTERS[version < 9 || state.world.generatorVersion < 4 ? 1 : 2];
+  if (version < 10 && state.factions.some(faction => !historicalRoster.includes(faction.definitionId))) throw new Error('Historical rules cannot execute cultures absent from their frozen roster.');
   if (version < 7 && Object.keys(state.characters).length) throw new Error('Historical rules cannot execute a campaign containing characters.');
   if (version < 8 && (Object.keys(state.transports).length || Object.values(state.characters).some(character => character.learnedSkillIds.length) || Object.values(state.armies).some(army => army.formations.length > 12 || army.formations.some(formation => units.get(formation.unitId)?.movementDomain === 'naval')))) throw new Error('Historical rules cannot execute modern command trees or naval armies.');
   if (version < 6 && Object.values(state.armies).some(army => army.formations.length !== 1 || army.formations[0]?.id !== `formation.${army.id.slice(5)}` || !LEGACY_UNIT_IDS.has(army.formations[0]?.unitId ?? ''))) throw new Error('Historical rules require an unmodified singleton-army campaign.');
-  return withRules(state, version, () => applyCommand(state, input));
+  const result = withRules(state, version, () => applyCommand(state, input));
+  if (result.ok && version < 9) initializeLegacyLand(state);
+  return result;
 }
 
 export const MAX_EVENTS = 200;
@@ -91,18 +105,30 @@ export function createGame(options: NewGameOptions): GameState {
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(48).default(4),
+    factionDefinitionId: z.string().refine(id => FACTIONS.some(faction => faction.id === id), 'Unknown faction culture').optional(),
     pace: campaignPaceSchema.default('standard'),
-    generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3)]).default(GENERATOR_VERSION),
+    generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]).default(GENERATOR_VERSION),
+    rosterVersion: rosterVersionSchema.default(ROSTER_VERSION),
   }).strict().parse(options);
+  // Physical generation never implicitly changes the roster used by a saved origin.
+  const catalog = factionRoster(checked.rosterVersion);
+  if (checked.factionDefinitionId) {
+    const chosen = catalog.findIndex(faction => faction.id === checked.factionDefinitionId);
+    if (chosen < 0) throw new Error('That culture is unavailable to this historical roster.');
+    catalog.unshift(...catalog.splice(chosen, 1));
+  }
   const selected = Array.from({ length: checked.factionCount }, (_, index) => {
-    const base = FACTIONS[index % FACTIONS.length];
+    const base = catalog[index % catalog.length];
     if (!base) throw new Error('No faction definitions are available');
-    return { ...base, definitionId: base.id, id: index < FACTIONS.length ? base.id : `${base.id}.${index + 1}`, name: index < FACTIONS.length ? base.name : `${base.name} ${index + 1}` };
+    return { ...base, definitionId: base.id, id: index < catalog.length ? base.id : `${base.id}.${index + 1}`, name: index < catalog.length ? base.name : `${base.name} ${index + 1}` };
   });
   const owner = selected[0];
   if (!owner) throw new Error('A campaign requires a player faction');
   const world = generateWorld(checked.seed, checked.size, checked.factionCount, checked.generatorVersion);
+  world.starts = factionStarts(world, selected.map(faction => faction.definitionId));
   const state: GameState = {
+    rosterVersion: checked.rosterVersion,
+    land: emptyLandState(selected.map(faction => faction.id)),
     turn: 1, nextId: 1, turnOwnerId: owner.id, world, pace: checked.pace,
     factions: selected.map(faction => ({ id: faction.id, definitionId: faction.definitionId, name: faction.name, color: faction.color, treasury: 60, knowledge: 0 })),
     armies: {}, transports: {}, characters: {}, routes: {}, settlements: {}, explored: {}, events: [], wars: [], battle: null, battleReports: [],
@@ -140,9 +166,10 @@ export function settlementYields(state: GameState, settlement: Settlement): { fo
     }
   }
   const recovery = Math.max(10, 100 - settlement.devastation);
+  const land = rulesVersion(state) >= 9 ? settlementLandYield(state, settlement) : { food: 0, industry: 0, coin: 0, knowledge: 0 };
   const progression = progressionYields(state, settlement.factionId);
   for (const yieldId of ['food', 'industry', 'coin', 'knowledge'] as const) {
-    yields[yieldId] += progression[yieldId];
+    yields[yieldId] += progression[yieldId] + land[yieldId];
     yields[yieldId] = Math.floor(yields[yieldId] * recovery / 100);
     if (settlement.occupationTurns > 0) yields[yieldId] = Math.floor(yields[yieldId] / 2);
     if (state.sieges[settlement.id]) yields[yieldId] = yieldId === 'food' ? 0 : Math.floor(yields[yieldId] / 2);
@@ -201,6 +228,7 @@ function resolveTurn(state: GameState, emitted: DomainEvent[], observe: PhaseObs
       settlement.population++;
       emitted.push({ turn: state.turn, type: 'settlement_grew', message: `${settlement.name} grew to population ${settlement.population}.`, factionId: faction.id, cell: settlement.cell });
     }
+    if (rulesVersion(state) >= 9) resolveLandTurn(state, settlement, emitted);
     if (!state.sieges[settlement.id]) {
       settlement.devastation = Math.max(0, settlement.devastation - 5);
       settlement.occupationTurns = Math.max(0, settlement.occupationTurns - 1);
@@ -292,9 +320,11 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     if (army.movement < 1) return fail('The caravan has no movement remaining this turn.');
     if (!isPassable(state.world.terrain[army.cell] ?? 0)) return fail('This terrain cannot support a settlement.');
     if (cellsWithin(state, army.cell, 2).some(cell => index.settlements.has(cell))) return fail('Found settlements at least three hexes apart.');
+    if (rulesVersion(state) >= 9 && observeLandCell(state, faction.id, army.cell).settlementId) return fail('This tile already belongs to a settlement.');
     if (Object.values(state.settlements).some(item => item.factionId === faction.id && item.name === command.name)) return fail('Your faction already has a settlement with that name.');
     const id = `settlement.${state.nextId++}`;
     state.settlements[id] = { id, factionId: faction.id, name: command.name, cell: army.cell, population: 1, food: 0, buildings: [], queue: [], founderFactionId: faction.id, devastation: 0, occupationTurns: 0 };
+    if (rulesVersion(state) >= 9) initializeSettlementLand(state, state.settlements[id]!);
     index.settlements.set(army.cell, id);
     updateSight(state, faction.id, army.cell, 3, 1);
     updateSight(state, faction.id, army.cell, armySight(army), -1);
@@ -373,12 +403,14 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     if (!result.ok) return result;
     emitted.push(...result.events);
   } else if (command.type === 'besiege' || command.type === 'liftSiege' || command.type === 'assault' || command.type === 'resolveCapture') {
+    const previousOwner = state.settlements[command.settlementId]?.factionId;
     const result = command.type === 'besiege' ? besiegeSettlement(state, faction.id, command.armyId, command.settlementId)
       : command.type === 'liftSiege' ? liftSettlementSiege(state, faction.id, command.settlementId)
         : command.type === 'assault' ? assaultSettlement(state, faction.id, command.settlementId)
           : resolveSettlementCapture(state, faction.id, command.settlementId, command.outcome);
     if (!result.ok) return result;
     emitted.push(...result.events);
+    if (command.type === 'resolveCapture' && previousOwner && rulesVersion(state) >= 9) handleLandCapture(state, command.settlementId, previousOwner, emitted);
   } else if (command.type === 'proposePeace' || command.type === 'respondPeace') {
     const result = command.type === 'proposePeace' ? proposePeace(state, faction.id, command.targetFactionId, command.terms) : respondPeace(state, faction.id, command.offerId, command.accept);
     if (!result.ok) return result;
@@ -399,6 +431,9 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
                 : useCommanderAbility(state, faction.id, command.characterId, command.abilityId);
     if (!result.ok) return result;
     emitted.push(...result.events);
+  } else if (command.type === 'claimCell' || command.type === 'setWorkedTiles' || command.type === 'improveTile' || command.type === 'terraformTile' || command.type === 'cancelLandWork' || command.type === 'setCapital') {
+    const error = applyLandCommand(state, command, emitted);
+    if (error) return fail(error);
   } else {
     const validation = validateEndTurn(state, command);
     if (!validation.ok) return validation;
@@ -414,12 +449,17 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
   if (state.battle) affectedArmies.push(state.battle.attackerId, ...state.battle.defenderIds);
   if (command.type === 'besiege') pauseMovement(state, command.armyId, 'This army is maintaining a siege.', emitted);
   reconcileMovement(state, emitted, affectedArmies);
+  if (rulesVersion(state) >= 9 && (command.type === 'found' || command.type === 'resolveCapture' || command.type === 'claimCell' || command.type === 'endTurn')) {
+    for (const party of state.factions) refreshLandKnowledge(state, party.id, index.visible.get(party.id) ?? new Map());
+  }
   state.events.push(...emitted);
   if (state.events.length > MAX_EVENTS) state.events.splice(0, state.events.length - MAX_EVENTS);
   return { ok: true, events: emitted.map(event => ({ ...event })), ...(diagnostics.length ? { diagnostics } : {}) };
 }
 
-export function getObservation(state: GameState, factionId: string): Observation {
+export interface ObservationOptions { landDetails?: 'all' | 'none' | readonly string[] }
+
+export function getObservation(state: GameState, factionId: string, options: ObservationOptions = {}): Observation {
   const faction = state.factions.find(item => item.id === factionId);
   if (!faction) throw new Error('Unknown observation faction');
   const visible = indexes(state).visible.get(factionId) ?? new Map<number, number>();
@@ -427,6 +467,9 @@ export function getObservation(state: GameState, factionId: string): Observation
   const armies = Object.values(state.armies).filter(army => army.factionId === factionId || !state.transports[army.id] && visible.has(army.cell)).sort(compareId);
   const settlements = Object.values(state.settlements).filter(settlement => settlement.factionId === factionId || visible.has(settlement.cell)).sort(compareId);
   const knownFactions = new Set([factionId, ...armies.map(army => army.factionId), ...settlements.map(settlement => settlement.factionId)]);
+  // A witnessed border identifies its public culture even when the town center
+  // has not been reached. Last-seen ownership never reveals its current changes.
+  for (const land of Object.values(state.land.known[factionId] ?? {})) if (land.factionId) knownFactions.add(land.factionId);
   const wars = state.wars.filter(pair => pair.includes(factionId)).map(pair => pair[0] === factionId ? pair[1] : pair[0]).sort();
   const diplomacy = getDiplomacyObservation(state, factionId);
   for (const relation of diplomacy.relations) for (const party of relation.parties) knownFactions.add(party);
@@ -437,6 +480,7 @@ export function getObservation(state: GameState, factionId: string): Observation
   for (const project of state.projects) knownFactions.add(project.factionId);
   const involved = (battle: { attackerFactionId: string; defenderFactionId: string }): boolean => battle.attackerFactionId === factionId || battle.defenderFactionId === factionId;
   return {
+    land: getLandObservation(state, factionId, visible, options.landDetails),
     turn: state.turn, factionId, factionCount: state.factions.length, pace: state.pace,
     factions: state.factions.filter(item => knownFactions.has(item.id)).map(item => ({ id: item.id, definitionId: item.definitionId, name: item.name, color: item.color })),
     treasury: faction.treasury, knowledge: faction.knowledge,
@@ -448,10 +492,13 @@ export function getObservation(state: GameState, factionId: string): Observation
     routes: Object.values(state.routes).filter(route => state.armies[route.armyId]?.factionId === factionId).sort((a, b) => a.armyId < b.armyId ? -1 : 1).map(route => ({ ...route, path: [...route.path], waypoints: [...route.waypoints], knownHostileIds: [...route.knownHostileIds] })),
     settlements: settlements.map(settlement => ({ ...settlement, buildings: [...settlement.buildings].sort(), food: settlement.factionId === factionId ? settlement.food : 0, queue: settlement.factionId === factionId ? settlement.queue.map(item => ({ ...item })) : [] })),
     events: state.events.filter(event => event.factionId === factionId).map(event => ({ ...event })),
-    cells: [...(state.explored[factionId] ?? [])].sort((a, b) => a - b).map(cell => ({ cell, terrain: state.world.terrain[cell] ?? 0, biome: state.world.biome[cell] ?? 0, waterDepth: state.world.waterDepth[cell] ?? 0, fertility: state.world.fertility[cell] ?? 0, visible: visible.has(cell) })),
+    cells: [...(state.explored[factionId] ?? [])].sort((a, b) => a - b).map(cell => {
+      const known = state.land.known[factionId]?.[cell];
+      return { cell, terrain: state.world.terrain[cell] ?? 0, biome: known?.biome ?? state.world.biome[cell] ?? 0, waterDepth: state.world.waterDepth[cell] ?? 0, fertility: state.world.fertility[cell] ?? 0, visible: visible.has(cell), ...(known?.settlementId ? { settlementId: known.settlementId, factionId: known.factionId } : {}), ...(known?.improvementId ? { improvementId: known.improvementId } : {}) };
+    }),
     width: state.world.width, height: state.world.height, seed: state.world.seed,
-    wars, battle: state.battle && involved(state.battle) ? cloneCampaignBattle(state.battle) : null,
-    battleReports: state.battleReports.filter(involved).map(cloneCampaignBattle),
+    wars, battle: state.battle && involved(state.battle) ? cloneCampaignBattle(state.battle, factionId) : null,
+    battleReports: state.battleReports.filter(involved).map(battle => cloneCampaignBattle(battle, factionId)),
     diplomacy, sieges: observeSieges(state, factionId),
     visibleSiegeSettlementIds: settlements.filter(town => visible.has(town.cell) && state.sieges[town.id]).map(town => town.id),
     progression: getProgressionObservation(state, factionId), projects: state.projects.map(project => ({ ...project })), victory: state.victory ? { ...state.victory } : null,

@@ -1,0 +1,168 @@
+{
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "contentHash": "9418e598",
+  "note": "Sequential same-state full/scoped read comparison. Synthetic32/40-town owner, population8, retained1500/4000 armies; real paid claims/workers. Setup/JSON/equality/AI/mirror assertions excluded from selector timers. Node structuredClone timings are not browser worker latency. Last clone timer includes packing and transfer; others do not. Logical payload bytes exclude platform framing. No rendering or full AI rounds measured; eight end turns verify paid-work save continuation, not campaign pacing.",
+  "scenarios": [
+    {
+      "size": "huge",
+      "cells": 196608,
+      "factions": 32,
+      "ownTowns": 32,
+      "armies": 1500,
+      "claimed": 1184,
+      "candidateCells": 1184,
+      "observedCells": 1208,
+      "initialHash": "1f6c8980",
+      "landBytes": {
+        "full": 3929445,
+        "summary": 25248,
+        "selectedTown": 123693
+      },
+      "payloadBytes": {
+        "oldObjectObservation": 5640253,
+        "oldNonCellReadModel": 5461115,
+        "newNonCellReadModel": 1556918,
+        "packedCells": 35129,
+        "total": 1592047
+      },
+      "times": {
+        "fullObservation": {
+          "samples": 12,
+          "meanMs": 31.442373583333318,
+          "medianMs": 32.01194899999996,
+          "p95Ms": 34.45270499999992
+        },
+        "summaryObservation": {
+          "samples": 12,
+          "meanMs": 23.217627666666676,
+          "medianMs": 23.245725999999877,
+          "p95Ms": 24.62531100000001
+        },
+        "selectedTown": {
+          "samples": 12,
+          "meanMs": 0.13613124999996748,
+          "medianMs": 0.13347199999998338,
+          "p95Ms": 0.1616750000000593
+        },
+        "pack": {
+          "samples": 12,
+          "meanMs": 0.3018019999999903,
+          "medianMs": 0.3078840000002856,
+          "p95Ms": 0.33199500000000626
+        },
+        "decode": {
+          "samples": 12,
+          "meanMs": 0.05464450000003277,
+          "medianMs": 0.05353999999988446,
+          "p95Ms": 0.07012399999985064
+        },
+        "oldStructuredClone": {
+          "samples": 12,
+          "meanMs": 14.433351416666634,
+          "medianMs": 14.82661300000018,
+          "p95Ms": 15.328029000000242
+        },
+        "newStructuredCloneWithoutTransfer": {
+          "samples": 12,
+          "meanMs": 4.792505749999918,
+          "medianMs": 4.771400000000085,
+          "p95Ms": 5.715354999999818
+        },
+        "packAndTransferClone": {
+          "samples": 12,
+          "meanMs": 5.198396166666687,
+          "medianMs": 5.1009070000000065,
+          "p95Ms": 5.839525999999751
+        }
+      },
+      "continuation": {
+        "turns": 8,
+        "finalHash": "5b4dcb6f",
+        "improvementId": "improvement.managed_woodlot",
+        "paidCoin": 36
+      },
+      "heapMiB": 126.59149169921875
+    },
+    {
+      "size": "legendary",
+      "cells": 307200,
+      "factions": 40,
+      "ownTowns": 40,
+      "armies": 4000,
+      "claimed": 1480,
+      "candidateCells": 1480,
+      "observedCells": 1504,
+      "initialHash": "02d3b393",
+      "landBytes": {
+        "full": 4926419,
+        "summary": 31974,
+        "selectedTown": 122835
+      },
+      "payloadBytes": {
+        "oldObjectObservation": 8987345,
+        "oldNonCellReadModel": 8762837,
+        "newNonCellReadModel": 3868392,
+        "packedCells": 43862,
+        "total": 3912254
+      },
+      "times": {
+        "fullObservation": {
+          "samples": 12,
+          "meanMs": 77.45271541666663,
+          "medianMs": 76.53209400000014,
+          "p95Ms": 89.271479
+        },
+        "summaryObservation": {
+          "samples": 12,
+          "meanMs": 69.01620324999992,
+          "medianMs": 68.89461599999959,
+          "p95Ms": 76.49198499999966
+        },
+        "selectedTown": {
+          "samples": 12,
+          "meanMs": 0.13325099999982135,
+          "medianMs": 0.13236400000005233,
+          "p95Ms": 0.1455469999991692
+        },
+        "pack": {
+          "samples": 12,
+          "meanMs": 0.3780306666667457,
+          "medianMs": 0.366226000000097,
+          "p95Ms": 0.41850999999951455
+        },
+        "decode": {
+          "samples": 12,
+          "meanMs": 0.07420691666652601,
+          "medianMs": 0.0737490000001344,
+          "p95Ms": 0.07806599999912578
+        },
+        "oldStructuredClone": {
+          "samples": 12,
+          "meanMs": 25.927598083333503,
+          "medianMs": 25.470978999999716,
+          "p95Ms": 34.962023000000045
+        },
+        "newStructuredCloneWithoutTransfer": {
+          "samples": 12,
+          "meanMs": 11.633674666666593,
+          "medianMs": 11.40107099999841,
+          "p95Ms": 12.584284999999
+        },
+        "packAndTransferClone": {
+          "samples": 12,
+          "meanMs": 11.94677641666658,
+          "medianMs": 11.717373999999836,
+          "p95Ms": 13.185959999998886
+        }
+      },
+      "continuation": {
+        "turns": 8,
+        "finalHash": "daeb1f2d",
+        "improvementId": "improvement.terraced_fields",
+        "paidCoin": 30
+      },
+      "heapMiB": 248.3741226196289
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import { createArmyFormation } from './army-composition';
 import { describe, expect, it } from 'vitest';
+import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { checksum, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS } from '@theandril/content';
 import { isPassable, neighbors } from '@theandril/mapgen';
 import { prosperityCampaign, PROSPERITY_FIXTURE } from '../../test-fixtures/src/victory-fixture';
@@ -7,7 +8,6 @@ import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
 import { applyCommand, deserializeGame, getObservation, replayGame, serializeGame, settlementYields, stateHash, validateEndTurn } from './index';
 import type { GameCommand, GameState, VictoryProject, FactionProgression, Victory } from './index';
 import { reconcileProjects } from './progression';
-import { rebuildIndexes } from './visibility';
 
 const player = 'faction.ashen_compact'; const rival = 'faction.reedbound_council';
 const end: GameCommand = { type: 'endTurn', factionId: player };
@@ -166,7 +166,7 @@ function invasionReady(): GameState {
   if (cell === undefined) throw new Error('Fixture has no invasion position');
   for (const own of Object.values(state.armies)) if (own.cell === host.cell) delete state.armies[own.id];
   Object.assign(army, { formations: [createArmyFormation(army.id, guard.id)], name: guard.name, cell, movement: guard.movement });
-  rebuildIndexes(state); return deserializeGame(serializeGame(state));
+  refreshAuthoredSight(state); return deserializeGame(serializeGame(state));
 }
 
 describe('strict progression save invariants', () => {

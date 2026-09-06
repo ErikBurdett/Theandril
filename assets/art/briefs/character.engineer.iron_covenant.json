@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.iron_covenant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. ONE full-body adult deep-folk engineer, heavy charcoal leather apron, brass goggles on forehead, blue-black shoulder cap, large square-headed masonry hammer held low and leather roll of chisels at belt. Visible broad bearded face, compact powerful adult build, not chibi. No weapon shield. Facing down-right, entire hammer and boots with10% transparent margin.",
+  "frames": [
+    {
+      "id": "character.engineer.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.engineer.iron_covenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b9f67bba51302ffb5891af0b7726df1220fa0f05ea8afc4342ec3bddf7e9e482",
+    "sourceRefs": [
+      "assets/art/source/slice12/character.engineer.iron_covenant-v1.png",
+      "assets/art/source/slice12/character.engineer.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "b5982341497ef31ff88b8cc639c9c83bd69a0ed3be26f178a14ff903bf64dce4",
+    "ba535e8dbe325704d34942b40deec69214f450bc3853761c12cb4e4c995f6c81"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "634c834609c4e0152342bc9dff13a236430e65205247b5f138e8246255318efd",
+      "inputHash": "b5982341497ef31ff88b8cc639c9c83bd69a0ed3be26f178a14ff903bf64dce4",
+      "outputHash": "3bfcc7e31c61088cbf662f26ade30006d0321f2537c7479ed7402ba61797f31a"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

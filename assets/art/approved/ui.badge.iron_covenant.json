@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.iron_covenant",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art heraldic game UI asset on genuine transparent PNG alpha-zero background. A single simple bold emblem, not a sheet, no text or letters. Coarse pixel clusters and deliberately large readable shapes, serious weathered medieval material treatment with only a few grouped highlights from upper left. NO gradients, halos, glow, antialiasing, checkerboard or background panel outside the object. Complete outline surrounded by at least15% transparent margin. Designed to survive native nearest-neighbor sampling. Iron Covenant strategic BADGE at32x32 logical pixels: one very simple chunky muted-gold split-anvil icon on a small dark iron rounded-square plate. Anvil broad top/narrow stem/block base with ONE dark vertical split; strong high-contrast large shapes. No tiny ornament, letters, wreath, rim rivets or extra symbols. Symmetrical frontal icon.",
+  "frames": [
+    {
+      "id": "ui.badge.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.iron_covenant/387ac53c1208cbb4e0673d953c0b7891143c6a95a1bafbcae2f758fd0f85abe6/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d6e75661c9ed182ad769973fe009289b448860af8b58ac0eceaf190a9d87e0fa",
+    "sourceRefs": [
+      "assets/art/source/slice12/ui.badge.iron_covenant-v1.png",
+      "assets/art/source/slice12/ui.badge.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "89288875ad898cf83567c8a4da17ffc629fc2a7d4d3ed36343b49b2f3ef7422b",
+    "0cf2f43b8a599ac0b0ac47d2bc3a1d473db5be55050be71180171a1b9fb7140a"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-32",
+      "settingsHash": "22b2a1cb04c5cf597d8fc13a618416739ea7f2d630e728438ca37865bfed7c34",
+      "inputHash": "89288875ad898cf83567c8a4da17ffc629fc2a7d4d3ed36343b49b2f3ef7422b",
+      "outputHash": "bdd3fde14a584f251da966c48790acbfb6361d5dec661576e44513aee4d304b2"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "bdd3fde14a584f251da966c48790acbfb6361d5dec661576e44513aee4d304b2",
+      "outputHash": "13f3be8362528d065ee183e4175893a5c1bd9804a3dbcd45e944dd96e70cf1d4"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "13f3be8362528d065ee183e4175893a5c1bd9804a3dbcd45e944dd96e70cf1d4",
+      "outputHash": "fa8894525fa632bd3d00782338559ef4d10a3ad4137de8c2368a4e4a82817f68"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "997f5bcdf66fbe2ca92c037efa8e1f73171002476c80703a2507f1bc46b54bf2",
+      "outputHash": "c4998df60e33e757fb004befbac3439b2948e1ce1fc5db80b64644c4eb1533a7"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "2e6077dbb015dc8d54116b64b0851240e5c7105a62bfe951dfabd892b3714aad",
+      "outputHash": "c3015d3887ba69150d28078a748097ae3f4b3dadfb1cc7d0304dd6f76a794994"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "6d897b15e85224479ab0cd9197c13b2abcdcccab98ae3eb725f63bff00737605",
+      "outputHash": "97fd5062eb728f4873f4c4c2c0a46cc53aef016a391f6e47a11ce841799b2fda"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T05:32:44.098Z",
+    "notes": "Inspected native1x/4x: native32px rounded iron plate retains a chunky gold split-anvil with separated center, legible compact silhouette and restrained rim. No letters, full padding and hard alpha. Its independent source is not a downscaled copy of the crest. Strategic badge source; far-view review pending.\nReviewed candidate 387ac53c1208cbb4e0673d953c0b7891143c6a95a1bafbcae2f758fd0f85abe6; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/2c571c0d4c166ac3b3986a4462ab6be52ec88c2b412c8dd62d7c7eb1b6f86c8e.png"
+    ],
+    "inputHash": "67c60141c2c5c09e255b86773378ad1b109aa89e40ab77014c71681c4ac32512"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

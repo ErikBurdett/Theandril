@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.sepulchral_synod",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. ONE full-body living adult engineer in an indigo work veil and pale heavy linen apron, bronze square measuring tool and short stone mallet held low, chalk dust on broad sleeves, compact tool satchel. Practical terrace mason with two clear hands and boots, no weapon shield or spell aura. Facing down-right, all tools comfortably inside10% transparent margins.",
+  "frames": [
+    {
+      "id": "character.engineer.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.engineer.sepulchral_synod/9c54de697802efeb350bc1728ce1420374b137a44a17d7e90d15bde0522025b1/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "487f8ef2c6a30b9cc1e3dcb38a02e000aa87f48dcfa709ac252d04394e9b6d4a",
+    "sourceRefs": [
+      "assets/art/source/slice12/character.engineer.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/character.engineer.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "bd2190c0f525c7347477196b1854296743d54fb73025ffd7e1b04be575acc9fc",
+    "0cbfac444892219a978aee255a4d69c9f167d62de8d6c64973fb3c3cd18b5187"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "df5430e27b7a3bc6010d76a2427a7fe099fe99617ef6f797b35c19f170cb8b2e",
+      "inputHash": "bd2190c0f525c7347477196b1854296743d54fb73025ffd7e1b04be575acc9fc",
+      "outputHash": "cd55fe58353a804a36759639c8e56f10875b245c285f0d06393606066f285e3f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "cd55fe58353a804a36759639c8e56f10875b245c285f0d06393606066f285e3f",
+      "outputHash": "4cc9ce561032caa8b7ddd5d25d70137fd493d5d6d825774eed79bd1d2724f679"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4cc9ce561032caa8b7ddd5d25d70137fd493d5d6d825774eed79bd1d2724f679",
+      "outputHash": "1a3d1cf06d7b41dbb0df73cde1d8490bb336d988b6ee5389960e6d5a9837ccd4"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "9178efdd3b27ec1dc1ed9e72bd32f9146d3ed49934c2184a0fb0b5ba52a5d3cc",
+      "outputHash": "5b6261cd9860d149d20d858001b444185d654fab1d63203c7c3170c40d88bed1"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "56ae4d79ad73215ab1922b593ba7d5f5393d81536ff1721f3d4d389477eaa26d",
+      "outputHash": "057b4454ec95f7cc41bea79f8314418b36e5110026ae559ad807d12ffedf19f9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "da933c66cc3c315ddca5df8fa1691b11437b65d5d5f37dd54d97f2400ab24878",
+      "outputHash": "1ff5ee9df2453483c102f311d96379f8b5cc3c92db748c672d84636023bace59"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.engineer.sepulchral_synod.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:54:17.908Z",
+    "notes": "Inspected native1x and4x: broad pale work apron, low square mallet and outward bronze measuring tool distinguish engineer from map surveyor; indigo veil and modest ring headpiece retain the new culture language. Both hands/tools and feet remain unclipped; hard alpha/native palette checks pass. Static role art; runtime review pending.\nReviewed candidate 9c54de697802efeb350bc1728ce1420374b137a44a17d7e90d15bde0522025b1; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/824c8bf216a6de9aabb2301bda654e5b479a0010c6bce528e2dd966c01989270.png"
+    ],
+    "inputHash": "ba1d5a860a84e18da1065d7cc28e9513bd58a682676f8181d5f7b7830a08cbe8"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

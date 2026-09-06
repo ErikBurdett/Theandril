@@ -6,6 +6,10 @@
 .army-capabilities dd { margin: 4px 0 0; font-size: .87rem; }
 .formation-choices { border: 0; padding: 0; min-width: 0; margin: 18px 0; }
 .formation-choices legend { font-size: .75rem; color: var(--muted); padding: 0 0 9px; }
+.formation-selection-tools { display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 9px; }
+.formation-selection-tools button { font-size:10px;padding:6px 8px; }
+.formation-selection-tools span { font-size:10px;color:var(--muted); }
+.formation-roster { max-height:420px;overflow:auto;scrollbar-width:thin;padding:0 4px 4px 0; }
 .formation-choice { display: flex; align-items: flex-start; gap: 10px; border: 1px solid var(--line); padding: 10px; margin: 7px 0; cursor: pointer; }
 .formation-choice input { flex: 0 0 17px; width: 17px; height: 17px; margin: 3px 0 0; }
 .formation-choice span { min-width: 0; }

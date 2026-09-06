@@ -1,11 +1,13 @@
 import { BUILDINGS, UNITS } from '@theandril/content';
 import { hexDistance, neighbors } from '@theandril/mapgen';
-import type { GameCommand, Observation } from '@theandril/sim';
+import { MAX_ARMY_FORMATIONS, type GameCommand, type Observation } from '@theandril/sim';
 import { planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
 import { planConquestDecision } from './conquest';
 import { planProgression } from './progression';
 import { createNavigation } from './navigation';
 import { planCharacters } from './characters';
+import { planNaval } from './naval';
+import { planLand } from './land';
 
 export { chooseCaptureOption } from './conquest';
 export type { AiPlan } from './diplomacy';
@@ -32,9 +34,10 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const factionId = view.factionId;
   const cells = new Map(view.cells.map(cell => [cell.cell, cell]));
   const ownSettlements = view.settlements.filter(town => town.factionId === factionId);
-  const ownArmies = view.armies.filter(army => army.factionId === factionId);
+  const allOwnArmies = view.armies.filter(army => army.factionId === factionId);
+  const ownArmies = allOwnArmies.filter(army => army.domain !== 'naval' && !army.carrierId);
   const protectedIds = protectedFactions(view);
-  const enemies = view.armies.filter(army => army.factionId !== factionId);
+  const enemies = view.armies.filter(army => army.factionId !== factionId && army.domain !== 'naval' && !army.carrierId);
   const enemyTowns = view.settlements.filter(town => town.factionId !== factionId);
   const enemyByCell = new Map<number, typeof enemies>();
   const strengthByCell = new Map<number, number>();
@@ -49,9 +52,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const projectHosts = new Set(view.projects.filter(project => project.factionId !== factionId && (project.status === 'active' || project.status === 'paused')).map(project => project.settlementId));
   const objectives = enemyTowns.filter(town => !protectedIds.has(town.factionId)).sort((a, b) => Number(projectHosts.has(b.id)) - Number(projectHosts.has(a.id)) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)).slice(0, 64);
   const approachCells = [...new Set([...enemies, ...enemyTowns].filter(entity => !protectedIds.has(entity.factionId)).map(entity => entity.cell))].slice(0, 64);
-  const hasColonist = ownArmies.some(army => army.canFound);
+  const hasColonist = allOwnArmies.some(army => army.formations.some(formation => units.get(formation.unitId)?.canFound));
   let plannedColonist = hasColonist || ownSettlements.some(town => town.queue.some(order => order.itemId === 'unit.colonist'));
-  const formations = ownArmies.flatMap(army => army.formations);
+  const formations = allOwnArmies.filter(army => army.domain !== 'naval').flatMap(army => army.formations);
   const militaryCount = formations.filter(formation => !units.get(formation.unitId)?.canFound).length;
   const areaPerFaction = view.width * view.height / Math.max(1, view.factionCount);
   const settlementTarget = areaPerFaction > 12_000 ? 8 : areaPerFaction > 3000 ? 6 : 4;
@@ -64,20 +67,27 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   };
   let budget = Math.max(0, view.treasury - advancement.coinSpent - advancement.reserve);
   // Protect the next expansion caravan and one basic building before optional appointments.
+  const production = new Map(view.productionOptions.map(option => [option.settlementId + ':' + option.itemId, option.canQueue]));
+  const canQueue = (settlementId: string, itemId: string): boolean => production.get(settlementId + ':' + itemId) === true;
   const economyReserve = (ownSettlements.length < settlementTarget && !plannedColonist ? UNITS[0]!.coinCost : 0)
-    + Math.max(0, ...ownSettlements.filter(town => !town.queue.length).map(town => BUILDINGS.find(item => !town.buildings.includes(item.id))?.coinCost ?? 0));
+    + Math.max(0, ...ownSettlements.filter(town => !town.queue.length).map(town => BUILDINGS.find(item => !item.coastalOnly && !town.buildings.includes(item.id) && canQueue(town.id, item.id))?.coinCost ?? 0));
   const specialists = planCharacters(view, Math.max(0, budget - economyReserve));
   plans.push(...specialists.commands); reasons.push(...specialists.reasons);
   budget -= specialists.coinSpent;
-  let plannedMilitary = ownSettlements.reduce((count, town) => count + town.queue.filter(order => units.has(order.itemId) && order.itemId !== 'unit.colonist').length, 0);
-  const productionLimit = plans.length + 96;
+  const knowledgeSpent = advancement.commands.reduce((sum, command) => sum + (command.type === 'research' ? view.progression.technologyChoices.find(choice => choice.id === command.technologyId)?.knowledgeCost ?? 0 : 0), 0);
+  const naval = planNaval(view, Math.max(0, budget - economyReserve), { heldArmyIds: specialists.heldArmyIds, knowledgeBudget: Math.max(0, view.knowledge - knowledgeSpent) });
+  plans.push(...naval.commands); reasons.push(...naval.reasons); budget -= naval.coinSpent;
+  if (naval.interrupts) return { commands: plans, reasons };
+  if (naval.commands.some(command => command.type === 'queue' && command.itemId === 'unit.colonist')) plannedColonist = true;
+  let plannedMilitary = ownSettlements.reduce((count, town) => count + town.queue.filter(order => units.has(order.itemId) && units.get(order.itemId)?.movementDomain !== 'naval' && order.itemId !== 'unit.colonist').length, 0);
+  const productionLimit = Math.min(112, plans.length + 96);
   for (const town of rotate(ownSettlements, 96)) {
     if (plans.length >= productionLimit) break;
-    if (town.queue.length) continue;
-    const building = BUILDINGS.find(item => !town.buildings.includes(item.id) && item.coinCost <= budget);
+    if (town.queue.length || naval.queuedSettlementIds.has(town.id)) continue;
+    const building = BUILDINGS.find(item => !item.coastalOnly && !town.buildings.includes(item.id) && item.coinCost <= budget && canQueue(town.id, item.id));
     const desired = [...new Set(roster)].sort((a, b) => (rosterCounts.get(a) ?? 0) / roster.filter(id => id === a).length - (rosterCounts.get(b) ?? 0) / roster.filter(id => id === b).length || roster.indexOf(a) - roster.indexOf(b));
-    const recruit = desired.map(id => units.get(id)).find(unit => unit && unit.coinCost <= budget);
-    const item = building ?? (ownSettlements.length < settlementTarget && !plannedColonist ? UNITS[0] : militaryCount + plannedMilitary < formationTarget ? recruit : undefined);
+    const recruit = desired.map(id => units.get(id)).find(unit => unit && unit.coinCost <= budget && canQueue(town.id, unit.id));
+    const item = building ?? (ownSettlements.length < settlementTarget && !plannedColonist && canQueue(town.id, UNITS[0]!.id) ? UNITS[0] : militaryCount + plannedMilitary < formationTarget ? recruit : undefined);
     if (item && budget >= item.coinCost) {
       plans.push({ type: 'queue', factionId, settlementId: town.id, itemId: item.id });
       budget -= item.coinCost;
@@ -85,6 +95,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       if (units.has(item.id) && item.id !== 'unit.colonist') { plannedMilitary++; rosterCounts.set(item.id, (rosterCounts.get(item.id) ?? 0) + 1); }
     }
   }
+  const land = planLand(view, Math.max(0, budget - 24));
+  plans.push(...land.commands); reasons.push(...land.reasons); budget -= land.coinSpent;
   const claimed = new Set<number>();
   const navigation = createNavigation(view);
   const wars = new Set(view.wars);
@@ -96,17 +108,21 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // Keep one fast reconnaissance detachment independent. Other recruits join real field armies.
   const explorerId = ownArmies.find(army => army.formations.length === 1 && army.unitId === 'unit.scout')?.id;
   const groups = new Map<number, typeof ownArmies>();
-  for (const army of ownArmies) if (!army.canFound && army.id !== explorerId && !besiegers.has(army.id) && !specialists.heldArmyIds.has(army.id)) {
+  const desiredConcentration = (army: typeof ownArmies[number]): number => army.commander
+    ? Math.min(army.formationCapacity, Math.max(12, ...enemies.filter(enemy => hexDistance(army.cell, enemy.cell, view.width) <= 18).map(enemy => enemy.formations.length + 2)))
+    : Math.min(6, army.formationCapacity);
+  for (const army of ownArmies) if (!army.canFound && army.id !== explorerId && !besiegers.has(army.id) && !naval.heldArmyIds.has(army.id) && !army.reorganizationBlocker) {
     const group = groups.get(army.cell) ?? []; group.push(army); groups.set(army.cell, group);
   }
   for (const group of groups.values()) {
-    group.sort((a, b) => b.formations.length - a.formations.length || (a.id < b.id ? -1 : 1));
+    group.sort((a, b) => Number(Boolean(b.commander)) - Number(Boolean(a.commander)) || b.formations.length - a.formations.length || (a.id < b.id ? -1 : 1));
     const target = group[0]; if (!target) continue;
     let size = target.formations.length;
     let commanderCount = Number(Boolean(target.commander));
     let companionCount = target.agents.length;
     for (const source of group.slice(1)) {
-      if (plans.length >= 112 || size + source.formations.length > 6 || commanderCount + Number(Boolean(source.commander)) > 1 || companionCount + source.agents.length > 2) continue;
+      const option = source.mergeOptions.find(option => option.armyId === target.id);
+      if (plans.length >= 112 || !option?.canMerge || size + source.formations.length > Math.min(desiredConcentration(target), option.resultCapacity) || commanderCount + Number(Boolean(source.commander)) > 1 || companionCount + source.agents.length > 2) continue;
       plans.push({ type: 'mergeArmies', factionId, sourceArmyId: source.id, targetArmyId: target.id });
       reorganized.add(source.id); reorganized.add(target.id); size += source.formations.length;
       commanderCount += Number(Boolean(source.commander)); companionCount += source.agents.length;
@@ -115,8 +131,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   }
   for (const army of rotate(ownArmies, 32).slice(0, 128)) {
     if (plans.length >= 128) break;
-    if (besiegers.has(army.id) || reorganized.has(army.id) || specialists.heldArmyIds.has(army.id)) continue; // Composition/assignment changes need fresh facts; missions commit the carrier.
-    if (army.canFound && army.movement > 0 && foundingCells.every(cell => hexDistance(cell, army.cell, view.width) >= 4)) {
+    if (besiegers.has(army.id) || reorganized.has(army.id) || naval.heldArmyIds.has(army.id)) continue; // Composition/assignment/transport changes need fresh facts.
+    if (army.canFound && army.movement > 0 && !cells.get(army.cell)?.settlementId && foundingCells.every(cell => hexDistance(cell, army.cell, view.width) >= 4)) {
       let name: string;
       do { name = `Hearth ${++hearthNumber}`; } while (settlementNames.has(name));
       settlementNames.add(name);
@@ -128,9 +144,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     const adjacent = neighbors(army.cell, view.width, view.height);
     const targets = adjacent.flatMap(cell => {
       const stack = enemyByCell.get(cell) ?? [];
-      return stack.reduce((sum, defender) => sum + defender.formations.length, 0) <= 12 ? stack : [];
+      return stack.reduce((sum, defender) => sum + defender.formations.length, 0) <= MAX_ARMY_FORMATIONS ? stack : [];
     });
-    const military = army.canAttack && !army.canFound && army.id !== explorerId;
+    const military = army.canAttack && !army.canFound && army.id !== explorerId && !army.commandBlocker;
     if (military) {
       if (army.morale < 35 || army.fatigue > 65) {
         if (reasons.length < 16) reasons.push(`${army.id} rests to recover morale and fatigue.`);
@@ -140,7 +156,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
         const defenders = enemyByCell.get(other.cell) ?? [];
         const terrain = cells.get(other.cell)?.terrain;
         const cost = terrain === 2 || terrain === 3 ? 2 : 1;
-        return !protectedIds.has(other.factionId) && cost <= army.movement && defenders.reduce((sum, defender) => sum + defender.formations.length, 0) <= 12 && (strengthByCell.get(other.cell) ?? 0) <= army.strength && !townByCell.has(other.cell);
+        return !protectedIds.has(other.factionId) && cost <= army.movement && defenders.reduce((sum, defender) => sum + defender.formations.length, 0) <= MAX_ARMY_FORMATIONS && (strengthByCell.get(other.cell) ?? 0) <= army.strength && !townByCell.has(other.cell);
       });
       if (target && plans.length <= 126) {
         if (!wars.has(target.factionId)) {
@@ -163,7 +179,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
         reasons.push(`${army.id} invests visible settlement ${town.id}; assess its defenses next pass.`);
         continue;
       }
-      if (ownTownCells.has(army.cell) && army.formations.length < 3 && militaryCount + plannedMilitary < formationTarget + 3) {
+      if (ownTownCells.has(army.cell) && army.formations.length < (army.commander ? desiredConcentration(army) : 3) && militaryCount + plannedMilitary < formationTarget + 3) {
         const reinforcements = ownSettlements.find(town => town.cell === army.cell)?.queue.some(order => units.has(order.itemId) && order.itemId !== 'unit.colonist') || plans.some(command => command.type === 'queue' && command.settlementId === ownSettlements.find(town => town.cell === army.cell)?.id && units.has(command.itemId) && command.itemId !== 'unit.colonist');
         if (reinforcements) { if (reasons.length < 16) reasons.push(`${army.id} holds its recruitment point for a mixed formation column.`); continue; }
       }

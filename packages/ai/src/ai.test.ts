@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { applyCommand, createGame, getObservation, serializeGame, deserializeGame, stateHash, type GameState } from '@theandril/sim';
 import { planTurn } from './index';
-import { BUILDINGS } from '@theandril/content';
+import { BUILDINGS, FACTIONS, UNITS } from '@theandril/content';
 
 function run(state: GameState, count: number): void {
   for (let turn = 0; turn < count && !state.victory; turn++) {
@@ -25,8 +25,10 @@ function run(state: GameState, count: number): void {
     expect(applyCommand(state, { type: 'endTurn', factionId: state.turnOwnerId }).ok).toBe(true);
   }
 }
-test('AI settles, builds, recruits and expands through the public command API', () => {
-  const state = createGame({ seed: 74, size: 'tiny', factionCount: 4 });
+test.each(FACTIONS)('$name AI settles, builds, recruits and expands through the public command API', culture => {
+  // Isolate each culture's economic competence from elimination by a rival.
+  // Contested expansion, defeats and long wars have separate pacing/soak cases.
+  const state = createGame({ seed: 74, size: 'tiny', factionCount: 1, factionDefinitionId: culture.id });
   run(state, 100);
   for (const faction of state.factions) {
     const towns = Object.values(state.settlements).filter(town => town.factionId === faction.id);
@@ -50,6 +52,7 @@ test('production budget rotates so later settlements receive orders and colonist
   view.treasury = 1_000_000;
   view.armies = [];
   view.settlements = Array.from({ length: 160 }, (_, i) => ({ id: `settlement.${i}`, factionId: view.factionId, founderFactionId: view.factionId, devastation: 0, occupationTurns: 0, name: `Town ${i}`, cell: i, population: 1, food: 0, buildings: [], queue: [] }));
+  view.productionOptions = view.settlements.flatMap(town => [...BUILDINGS, ...UNITS].map(item => ({ settlementId: town.id, itemId: item.id, kind: item.id.startsWith('building.') ? 'building' as const : 'land' as const, canQueue: true, blocker: null })));
   const ordered = new Set<string>();
   for (const turn of [1, 2]) {
     for (const command of planTurn({ ...view, turn })) if (command.type === 'queue') ordered.add(command.settlementId);

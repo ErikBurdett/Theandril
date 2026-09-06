@@ -277,10 +277,13 @@ export function validateMovement(state: GameState): void {
   for (const [armyId, route] of Object.entries(state.routes)) {
     const army = state.armies[armyId]; assert(army && route.armyId === armyId, 'travel order references an unknown army'); if (!army) continue;
     assert(route.status === 'active' ? route.pauseReason === null && route.origin === army.cell : route.pauseReason !== null, 'travel status and origin disagree');
+    // A paused plan retains its original geography after a coastal hull joins a fleet.
+    // Resuming replans against current capability; active routes still require deep access.
+    const ocean = route.status === 'paused' || fleetCanEnterDeepWater(state, army);
     let cursor = route.origin; let waypoint = 0;
     assert(state.explored[army.factionId]?.has(cursor), 'travel origin must be explored');
     for (const next of route.path) {
-      assert(neighbors(cursor, state.world.width, state.world.height).includes(next) && !travelTerrainBlocker(armyDomain(army), fleetCanEnterDeepWater(state, army), state.world.terrain[next] ?? 0, state.world.waterDepth[next] ?? 0) && state.explored[army.factionId]?.has(next), 'travel route must be contiguous explored terrain permitted to the army domain');
+      assert(neighbors(cursor, state.world.width, state.world.height).includes(next) && !travelTerrainBlocker(armyDomain(army), ocean, state.world.terrain[next] ?? 0, state.world.waterDepth[next] ?? 0) && state.explored[army.factionId]?.has(next), 'travel route must be contiguous explored terrain permitted to the army domain');
       cursor = next; if (route.waypoints[waypoint] === next) waypoint++;
     }
     assert(waypoint === route.waypoints.length && route.path.at(-1) === route.waypoints.at(-1), 'travel waypoints differ from the saved route');

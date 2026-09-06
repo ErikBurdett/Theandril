@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.sepulchral_synod",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art heraldic game UI asset on genuine transparent PNG alpha-zero background. A single simple bold emblem, not a sheet, no text or letters. Coarse pixel clusters and deliberately large readable shapes, serious weathered medieval material treatment with only a few grouped highlights from upper left. NO gradients, halos, glow, antialiasing, checkerboard or background panel outside the object. Complete outline surrounded by at least15% transparent margin. Designed to survive native nearest-neighbor sampling. Sepulchral Synod BANNER at64x64 logical pixels: one upright short bronze-bound wooden pole, simple hollow-ring finial, deep indigo rectangular cloth extending RIGHT with pale chalk edging. Center a bold pale hollow ring over three wide pale terrace steps. Entire pole including its foot is fully visible, no pedestal or ground. Single static cloth shape.",
+  "frames": [
+    {
+      "id": "ui.banner.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/ui.banner.sepulchral_synod/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "45d551d1e01713cc98c3c012d1f187171ccaf26f576d95047966b9859d6d9ea1",
+    "sourceRefs": [
+      "assets/art/source/slice12/ui.banner.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/ui.banner.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "2a2cc11b64f2c24bab95fcbe477169940dd9bb9c99ef842496eed2f48896623c",
+    "97f3e8fba0e9ad280851e7d28ba124bd17ae80f462c71fdbdb60cb47026e50d0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "f10b91eadbf82dacc053de16a3ff7b003fbf5e684ed6a178693ce99c26839fc3",
+      "inputHash": "2a2cc11b64f2c24bab95fcbe477169940dd9bb9c99ef842496eed2f48896623c",
+      "outputHash": "0887b6130e3009b15a7e39984cc9d6bc9587c98a7beaf86b2871c50d74cc2a5d"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

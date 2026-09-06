@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.iron_covenant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. ONE full-body adult deep-folk engineer, heavy charcoal leather apron, brass goggles on forehead, blue-black shoulder cap, large square-headed masonry hammer held low and leather roll of chisels at belt. Visible broad bearded face, compact powerful adult build, not chibi. No weapon shield. Facing down-right, entire hammer and boots with10% transparent margin.",
+  "frames": [
+    {
+      "id": "character.engineer.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.engineer.iron_covenant/d4f3a09b209ccee9ebf4002c5ec3dcc483bf20739ec8e85c72bc93ce8df332c9/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b9f67bba51302ffb5891af0b7726df1220fa0f05ea8afc4342ec3bddf7e9e482",
+    "sourceRefs": [
+      "assets/art/source/slice12/character.engineer.iron_covenant-v1.png",
+      "assets/art/source/slice12/character.engineer.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "b5982341497ef31ff88b8cc639c9c83bd69a0ed3be26f178a14ff903bf64dce4",
+    "ba535e8dbe325704d34942b40deec69214f450bc3853761c12cb4e4c995f6c81"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "634c834609c4e0152342bc9dff13a236430e65205247b5f138e8246255318efd",
+      "inputHash": "b5982341497ef31ff88b8cc639c9c83bd69a0ed3be26f178a14ff903bf64dce4",
+      "outputHash": "3bfcc7e31c61088cbf662f26ade30006d0321f2537c7479ed7402ba61797f31a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "3bfcc7e31c61088cbf662f26ade30006d0321f2537c7479ed7402ba61797f31a",
+      "outputHash": "a7b053b89deb4c2e7a9d50b7607cd21cde1775c03564ba9ee5c3997e7977c200"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a7b053b89deb4c2e7a9d50b7607cd21cde1775c03564ba9ee5c3997e7977c200",
+      "outputHash": "754d89332dd0a111851fd0545bb9ce8b70386cbed8f7661e5e5e8524f4160610"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "2416f68854a7200776fcebd93efb6ef0e5a566a2c9ea855e5910d192b03f1236",
+      "outputHash": "d08bc44e636bb38999514b028e5c6a6990fc2368c94f85ac3209440c02ec97d6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "2934418f147324e4bdd9570319568a59fde67355479858597fa8f79d79a2c9bf",
+      "outputHash": "29914e5b32352fd6d1f169716ea265c3c03a01d43e9ea5ee195a439db3be59a5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "6712f2e4e9c668361f1f3d160e4d8daf49473e79ac0a2823881c65c498c66ce3",
+      "outputHash": "1561bc85b8d5d7dcf039cbedb6fcdec2cd65ba4258877af59b36539ad47ee8e8"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.engineer.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:54:16.156Z",
+    "notes": "Inspected native1x and4x: broad apron, bare working sleeves and low square hammer distinguish mason from sword guard and map-bearing surveyor. Goggles and beard compress to warm head clusters without malformed anatomy; equipment and boots remain padded. Static role art, runtime review pending.\nReviewed candidate d4f3a09b209ccee9ebf4002c5ec3dcc483bf20739ec8e85c72bc93ce8df332c9; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/da52b0ace540a300560bc54afb84d308dca75e2c187f607e3e6542a6b718bff4.png"
+    ],
+    "inputHash": "2402478cf41dbdba3728076718ab5258882126e64b3c65f812f2c30eb67b7aa2"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

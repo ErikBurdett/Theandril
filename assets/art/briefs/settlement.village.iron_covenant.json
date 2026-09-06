@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.iron_covenant",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original static pixel-art strategy map settlement sprite, isolated on genuine transparent PNG. Whole architectural footprint, roofs and chimneys fully enclosed with generous15% empty margins on every side. Shallow three-quarter southeast map view. Coarse square pixel clusters with grouped material values, soft upper-left highlights, crisp native-style edges, restrained dark fantasy. No landscape/base tile, characters, scenery, labels, text, borders, smooth gradients, glow, smoke or baked checkerboard. This is a single settlement silhouette, not a sheet or comparison. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. Small founding village: three modest squat squared-stone workshops clustered closely around one low forge chimney and a sheltered shared kiln. Dark blue-black iron roofs with dull brass brackets, charcoal timber doors. Low open profile, no curtain wall or tall towers. Native96x96 visual detail; simple coherent footprint.",
+  "frames": [
+    {
+      "id": "settlement.village.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/settlement.village.iron_covenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c3928c5416f944ff410ad08c50f9d177b4ff967ed0bd8628a8cba3e5409d7d06",
+    "sourceRefs": [
+      "assets/art/source/slice12/settlement.village.iron_covenant-v1.png",
+      "assets/art/source/slice12/settlement.village.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "bdb7b8a20ea49628ee449bb0ebe7ebcdd15c847990db7e29943b4085381def35",
+    "b539f28473ef2899660b87e07375af8db98be7a3a5cfdf66c9d425d290cc0245"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "8534ac51245ead1032a4a1c154bbf098063166dbcea9849cf67d9f8831138a0b",
+      "inputHash": "bdb7b8a20ea49628ee449bb0ebe7ebcdd15c847990db7e29943b4085381def35",
+      "outputHash": "9b63261d346f2fff4f3e2f1258f4a2c8e22dd29a016234a469c5ba177bf75955"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

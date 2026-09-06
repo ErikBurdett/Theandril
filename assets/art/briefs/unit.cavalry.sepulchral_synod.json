@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.sepulchral_synod",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. ONE living veiled mounted custodian on ONE grey horse facing LOWER RIGHT. Pale saddlecloth with indigo rectangular panels and aged bronze tack; rider indigo face veil/pale mail, short narrow lance angled down-right. Entire horse muzzle, four legs/hooves, tail, rider and lance tip fit the CENTRAL70% of transparent canvas; at least15% empty margin around all extremities. Clear horse silhouette, coarse96x96 logical detail. No extra figures, no ghost horse, no landscape.",
+  "frames": [
+    {
+      "id": "unit.cavalry.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.cavalry.sepulchral_synod/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "a3d03e05140216de14c107483a2311773b7b60876f296c9b5ac23c79a74de1ef",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.cavalry.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/unit.cavalry.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "65489d1a2751ca4bcdbdd16984bf3791ed05c547aec4aa776fc76f07784a25ce",
+    "bbb9cbf33e0719244007e87df7d7c389cc8bdd0649e8bf3d7525d1a6ed7c0510"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "9821945d4ce77cacf7061b5325b4ba02d302d7d0709d6a60214474e66e87a640",
+      "inputHash": "65489d1a2751ca4bcdbdd16984bf3791ed05c547aec4aa776fc76f07784a25ce",
+      "outputHash": "1c7cf9d59c8cf6bd6a9144ea7b1351724980644d3e056b9371adeac105f42149"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

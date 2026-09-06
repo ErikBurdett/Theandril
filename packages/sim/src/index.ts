@@ -4,9 +4,11 @@ export type {
   Siege, SiegeObservation, CaptureDecision, CaptureOption, CaptureOutcome, Ruin,
 } from './types';
 export type { BattleOrder, BattleState, BattleFormation } from './combat';
-export type { CampaignPace } from '@theandril/content';
+export type { CampaignPace, RosterVersion } from '@theandril/content';
 export { createGame, applyCommand, applyCommandForVersion, getObservation, settlementYields, validateEndTurn, commandSchema, commandSchemaForVersion } from './simulation';
+export type { ObservationOptions } from './simulation';
 export { stateHash, stateHashForVersion, serializeGame, serializeGameForVersion, deserializeGame, replayGame, SAVE_VERSION, eventSchema, campaignBattleSchema, schema7CampaignBattleSchema, schema6CampaignBattleSchema, legacyCampaignBattleSchema, battleReportForVersion } from './save';
+export * from './territory';
 export type { FactionProgression, ProgressionObservation, VictoryProject, Victory } from './progression';
 export { getProgressionObservation } from './progression';
 export type { MovementRoute, MovementPreview, MovementQuery } from './movement';
@@ -19,5 +21,5 @@ export { getCharacterObservation, MAX_LIVING_CHARACTERS, MAX_DEAD_CHARACTERS } f
 export { MAX_ARMY_FORMATIONS, armyStrength, armyMaxStrength, armyMorale, armyFatigue, armyUnitId, armyMovement, armySight, armyUpkeep, armyCanFound, armyCanAttack, getArmyView, createArmyFormation } from './army-composition';
 export { effectiveArmyMovement } from './army-composition';
 export { armyCommandCapacity, armyCommandStatus } from './characters';
-export type { NavalArmyView, ProductionOption, TransportAftermath } from './naval';
+export type { NavalArmyView, ProductionOption, TransportAftermath, TransportSnapshot } from './naval';
 export { armyDomain, fleetTransportCapacity, fleetCanEnterDeepWater, embarkObjection, disembarkObjection } from './naval';

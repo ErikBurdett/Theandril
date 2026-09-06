@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.sepulchral_synod",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original static pixel-art strategy map settlement sprite, isolated on genuine transparent PNG. Whole architectural footprint, roofs and chimneys fully enclosed with generous15% empty margins on every side. Shallow three-quarter southeast map view. Coarse square pixel clusters with grouped material values, soft upper-left highlights, crisp native-style edges, restrained dark fantasy. No landscape/base tile, characters, scenery, labels, text, borders, smooth gradients, glow, smoke or baked checkerboard. This is a single settlement silhouette, not a sheet or comparison. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. Small chalkland founding village: three low pale flat-roof caretaker houses around a modest stepped communal terrace and one narrow indigo awning. Chalk-white masonry, aged bronze door braces, low parapets, no gothic spikes or cathedral. Readable low open footprint, native96x96 detail.",
+  "frames": [
+    {
+      "id": "settlement.village.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/settlement.village.sepulchral_synod/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d1077a0c16cdd7c2522657a1b25d675571bd242c018979e8e663a4a13777cf28",
+    "sourceRefs": [
+      "assets/art/source/slice12/settlement.village.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/settlement.village.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "7fcd7ce6d8df32cd0aba7d8e1d577b336fa65699facb96e7d56d90847257ed85",
+    "bb002134f8c030c4ccd3ef94db5641225a7270c9d63737d2d57bbf14b70efe74"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "d7ee6053e5d66581054bca9769ecf7af940e32de18628867010143aba6f4919d",
+      "inputHash": "7fcd7ce6d8df32cd0aba7d8e1d577b336fa65699facb96e7d56d90847257ed85",
+      "outputHash": "8eec1bb34dea19bb54e641c08bf5bbd6ad12c3a3d00e3beacf2cd52738992c01"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

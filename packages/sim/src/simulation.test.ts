@@ -52,7 +52,8 @@ describe('canonical campaign commands', () => {
     expect(state.settlements[settlementId]?.buildings).toContain('building.granary');
     expect(state.settlements[settlementId]?.population).toBeGreaterThan(1);
     expect(Object.values(state.armies).some(army => army.factionId === player && army.formations[0]?.unitId === 'unit.guard')).toBe(true);
-    expect(state.factions[0]?.knowledge).toBe(10);
+    // Ten turns: 1 core knowledge + 1 worked-center knowledge + 1 capital knowledge.
+    expect(state.factions[0]?.knowledge).toBe(30);
     expect(state.events.some(event => event.type === 'unit_recruited')).toBe(true);
   });
 

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.managed_woodlot",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.managed_woodlot"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art strategy-map asset on genuinely transparent PNG. One isolated complete object, not a sheet; entire silhouette comfortably inside generous15% transparent margin. Coarse square64x64 logical detail, grouped material values, restrained upper-left highlights, crisp edges. No text, labels, border, people, landscape background, smooth gradients, glow, soft alpha shadows or checkerboard. Serious practical weathered medieval fantasy; no copied game designs. A compact MANAGED WOODLOT improvement prop: three deliberately small regularly spaced coppiced leafy trees of different cut heights, short orderly stack of harvested logs and one low timber rack. Shallow three-quarter southeast view, clear tended woodlot rather than wild forest or lumbermill building. Joined compact ground-level cluster, no full landscape tile, people, axes floating or giant trunk.",
+  "frames": [
+    {
+      "id": "improvement.managed_woodlot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/improvement.managed_woodlot/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "aea2c6c50a5b01525474255f8afdc14b613eaf69d2657f0b62edacc85e3ed215",
+    "sourceRefs": [
+      "assets/art/source/slice12/improvement.managed_woodlot-v1.png",
+      "assets/art/source/slice12/improvement.managed_woodlot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "8fa0a1facb95c47b80b69cca64765ee0d833eae5d4b7ca28df7ffa01c2bed5ea",
+    "a1b5870d2e7da9a36b1b99b9ffe912724bace4a24814842b6ac71aeb7d9af10a"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "9bf0f57166f0995bf322b2279e47a2bc84fb2058b23a4245465e2f7a0972ff2b",
+      "inputHash": "8fa0a1facb95c47b80b69cca64765ee0d833eae5d4b7ca28df7ffa01c2bed5ea",
+      "outputHash": "1c9e39df655d90db6c76d5530bdd3d5cf3255f5bf5295548b98282b6ce5f07e8"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

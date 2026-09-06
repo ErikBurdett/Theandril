@@ -7,7 +7,7 @@ const campaigns: { pace: CampaignPace; seed: number; minimum: number; maximum: n
   { pace: 'standard', seed: 74, minimum: 150, maximum: 400 },
   { pace: 'standard', seed: 99, minimum: 200, maximum: 400 },
   { pace: 'epic', seed: 74, minimum: 500, maximum: 1400 },
-  // With real commanders/refits, seed 99 wins at 648 with 14 towns and 514 battles.
+  // Earlier character rules let seed99 earn victory at648 with14towns/514battles.
   // Apply the same earned-conquest exception as seed 74; the separate archived
   // seed-20260905 regression still requires 800–1,400 turns and a turn-500 resume.
   { pace: 'epic', seed: 99, minimum: 500, maximum: 1400 },
@@ -62,4 +62,4 @@ test.each(campaigns)('$pace seed $seed reaches an earned long-form victory with 
   expect(lateProduction).toBeGreaterThan(0); // Project saving must not halt late growth and replacement armies.
   expect(mirror && stateHash(mirror)).toBe(stateHash(state));
   for (const faction of state.factions) expect(planTurn(getObservation(state, faction.id))).toEqual([]);
-});
+}, 60_000); // Long active empires mirror every order; seed99 measured24s in isolation.

@@ -3,8 +3,8 @@ import { FACTION_ART_IDS, parseRuntimeCatalog, type RuntimeAsset, type RuntimeCa
 import { validateAtlasData } from './art-validation';
 import { validatePngDimensions } from './image-validation';
 
-export const BIOME_ART_IDS = ['terrain.ocean', 'terrain.grassland', 'terrain.temperate_forest', 'terrain.taiga', 'terrain.tundra', 'terrain.desert', 'terrain.steppe', 'terrain.marsh', 'terrain.rainforest', 'terrain.alpine'] as const;
-export const LIVE_ART_IDS = new Set<string>([...BIOME_ART_IDS, 'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', ...FACTION_ART_IDS]);
+export const BIOME_ART_IDS = ['terrain.ocean', 'terrain.grassland', 'terrain.temperate_forest', 'terrain.taiga', 'terrain.tundra', 'terrain.desert', 'terrain.steppe', 'terrain.marsh', 'terrain.rainforest', 'terrain.alpine', 'terrain.ash_scrub', 'terrain.chalkland'] as const;
+export const LIVE_ART_IDS = new Set<string>([...BIOME_ART_IDS, 'improvement.terraced_fields', 'improvement.managed_woodlot', 'improvement.quarry', 'improvement.reedworks', 'improvement.shore_fishery', 'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', ...FACTION_ART_IDS]);
 export interface ArtStatus {
   state: 'loading' | 'ready' | 'fallback'; message: string; atlasPages: number;
   residentBytesEstimate: number; downloadBytes: number; loadMs: number; warnings: string[];

@@ -1,6 +1,7 @@
 import { neighbors, isPassable } from '@theandril/mapgen';
 import { applyCommand, createArmyFormation, deserializeGame, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
 import { borderBattleCampaign } from './combat-fixture';
+import { refreshAuthoredSight } from './authored-land';
 
 export const CHARACTER_FIXTURE = {
   playerFactionId: 'faction.ashen_compact', enemyFactionId: 'faction.reedbound_council',
@@ -36,6 +37,7 @@ export function characterCampaign(armyCount = 2): GameState {
       cell: home.cell, movement: 3, formations: [createArmyFormation(id, 'unit.guard')],
     };
   }
+  refreshAuthoredSight(state);
   return deserializeGame(serializeGame(state));
 }
 
@@ -66,6 +68,7 @@ export function characterBattleCampaign(): GameState {
   }
   for (const cell of visible) state.explored[enemy.factionId]!.add(cell);
   // Rebuild spatial/fog indexes before issuing normal appointment/assignment commands.
+  refreshAuthoredSight(state);
   state = deserializeGame(serializeGame(state));
   issue(state, { type: 'recruitCharacter', factionId: state.turnOwnerId, settlementId: home.id, definitionId: 'character.marshal' });
   const marshal = Object.values(state.characters).find(character => character.definitionId === 'character.marshal');

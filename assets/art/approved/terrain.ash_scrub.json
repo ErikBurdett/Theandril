@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.ash_scrub",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.ash_scrub"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art strategy-map asset on genuinely transparent PNG. One isolated complete object, not a sheet; entire silhouette comfortably inside generous15% transparent margin. Coarse square64x64 logical detail, grouped material values, restrained upper-left highlights, crisp edges. No text, labels, border, people, landscape background, smooth gradients, glow, soft alpha shadows or checkerboard. Serious practical weathered medieval fantasy; no copied game designs. A SINGLE flat overhead POINTY-TOP HEXAGON terrain stamp, not an isometric raised block: grey-brown ash-rich soil, broad charcoal cinder patches, sparse low muted sage scrub clumps and a few rusty pebbles. Ash scrub is living dry regrowth, NOT flowing lava or burned city. Flat fully opaque ground fills one regular hexagon with top/bottom points, outside alpha zero. Low visual contrast and detail near edges so repeated adjacent stamps blend; no border, bevel, shadow, tree, cliff or raised sides.",
+  "frames": [
+    {
+      "id": "terrain.ash_scrub/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.ash_scrub/ba91d6571a913e7276646d96926ff334136ffaa0efaaa5d737f0041682c45076/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f317700d1c54a09615bcb5df62492b6d060e77e9c865b5bf3df501f097bcf304",
+    "sourceRefs": [
+      "assets/art/source/slice12/terrain.ash_scrub-v1.png",
+      "assets/art/source/slice12/terrain.ash_scrub-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "970be19b005db8d16ecc551d126e1136fc44cf2a61bd02ae468df496ba8cea85",
+    "b8b7c85819803e7ac2f8d2e3b1d2f12a7b3f29afaa0792df44d144e9c4666c02"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "97e23be5f323aaaaad3ea1b6884fc376416d48b8bbe873fb6da5eb22eee10057",
+      "inputHash": "970be19b005db8d16ecc551d126e1136fc44cf2a61bd02ae468df496ba8cea85",
+      "outputHash": "376eac1f3e09589425f32d1e3d2c950b0c00b14e0dbf715d85972f47cc621f26"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "376eac1f3e09589425f32d1e3d2c950b0c00b14e0dbf715d85972f47cc621f26",
+      "outputHash": "e0d1ad5c803848c442cbf618f387d9363917a7bd2884496614606efbb7c2fb45"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e0d1ad5c803848c442cbf618f387d9363917a7bd2884496614606efbb7c2fb45",
+      "outputHash": "b109e39531cff60bbce51c3966e99a307083f57dfafa7a46ea92a61c89c64596"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "5289b0402205efaf74dfb3db89ff0db80a372ba9ca6b23c0558499bfdb71d2b8",
+      "outputHash": "1df685b7749c8bfc8fb876b23e9ebd201252062680409bea5d3f03955057a4e5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "bd5722f3d0fae3022e7ef752d4c97be411504f393e078415b3e679460001262f",
+      "outputHash": "50758005e846b8a40fc80f9a0243819cc542db797bacb22b6deb5b82f6651c33"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "32f8676717308c5c6144cdc57ed68b33da354c681ade947d6dc2e5033479607d",
+      "outputHash": "d8c30aea9ddeccf090fb2128475c7111f8a6b1ee9e5dd5cb902d01cd4ac3d44d"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.ash_scrub.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T05:32:46.573Z",
+    "notes": "Inspected native1x/4x and five-by-five pointy-hex repeat at1x/4x: flat ash-brown ground, dark cinder clusters and low sage scrub remain distinct from yellow desert and green grassland. Exact hex mask has no internal alpha gaps; no raised border or baked cliff. Single-variant repetition remains visible and transition artwork is not claimed; neighboring-biome/game-camera review pending.\nReviewed candidate ba91d6571a913e7276646d96926ff334136ffaa0efaaa5d737f0041682c45076; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/e7873c4dcb17f177ff7dec6d89a491ffb703288ae93d5c9b4b12664d95b0220b.png"
+    ],
+    "inputHash": "4d2c89f19e87b9c3ed8ba8d3e22a4e51cc0dd06698d07289abd4e3c15834c77b"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

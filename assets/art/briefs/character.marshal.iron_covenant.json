@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.iron_covenant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. ONE full-body named field marshal archetype: elder adult deep-folk woman with a broad square silhouette, braided grey hair uncovered, blue-black officer breastplate, short muted-gold shoulder mantle, a short command baton held outward and a folded dispatch case. NO horse, NO long pike, NO shield; readable leader silhouette. Stand facing down-right, preserve all boots and hair with at least10% transparent margin.",
+  "frames": [
+    {
+      "id": "character.marshal.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.iron_covenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "df4ca1bf5ce16132ad3f2f58d11b427f6dce94983bf7961758a328ea9c329ad8",
+    "sourceRefs": [
+      "assets/art/source/slice12/character.marshal.iron_covenant-v1.png",
+      "assets/art/source/slice12/character.marshal.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "36cd08ecb3901f164663b4878dc7c4bbd8bd3c6e419b246e28c9dc7da7d00f79",
+    "b70565584f817ff1bcc5eb07f053919721eec5f05185a55e4424aa27b2f59dd6"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "87bc6d90a7909ad6d5f7d750dcf841989e752dcec4cc08efddc74acc0a903cde",
+      "inputHash": "36cd08ecb3901f164663b4878dc7c4bbd8bd3c6e419b246e28c9dc7da7d00f79",
+      "outputHash": "774613d656e9594a3ed08afd8a358368be0074f38113c8efa6f49e9f7bc2772a"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

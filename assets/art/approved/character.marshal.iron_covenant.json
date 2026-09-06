@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.iron_covenant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. ONE full-body named field marshal archetype: elder adult deep-folk woman with a broad square silhouette, braided grey hair uncovered, blue-black officer breastplate, short muted-gold shoulder mantle, a short command baton held outward and a folded dispatch case. NO horse, NO long pike, NO shield; readable leader silhouette. Stand facing down-right, preserve all boots and hair with at least10% transparent margin.",
+  "frames": [
+    {
+      "id": "character.marshal.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.marshal.iron_covenant/723cd0a5777685a612926fd24c733c12223db196d1d4e7853c153900e375041f/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "df4ca1bf5ce16132ad3f2f58d11b427f6dce94983bf7961758a328ea9c329ad8",
+    "sourceRefs": [
+      "assets/art/source/slice12/character.marshal.iron_covenant-v1.png",
+      "assets/art/source/slice12/character.marshal.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "36cd08ecb3901f164663b4878dc7c4bbd8bd3c6e419b246e28c9dc7da7d00f79",
+    "b70565584f817ff1bcc5eb07f053919721eec5f05185a55e4424aa27b2f59dd6"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "87bc6d90a7909ad6d5f7d750dcf841989e752dcec4cc08efddc74acc0a903cde",
+      "inputHash": "36cd08ecb3901f164663b4878dc7c4bbd8bd3c6e419b246e28c9dc7da7d00f79",
+      "outputHash": "774613d656e9594a3ed08afd8a358368be0074f38113c8efa6f49e9f7bc2772a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "774613d656e9594a3ed08afd8a358368be0074f38113c8efa6f49e9f7bc2772a",
+      "outputHash": "a32de2be62b62b6bb54ae21f22cf25d64c8c4f09226f85e8f70a1bd4731ed985"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a32de2be62b62b6bb54ae21f22cf25d64c8c4f09226f85e8f70a1bd4731ed985",
+      "outputHash": "c9fc3c73987cb987d1d0dc0f1e7fb6bf0a492625a6b9318bb92ec32c0c73120a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "b03fa281a77bedc54454fca8485979fdaa1f5c307bc2b9f9be708f775a725c67",
+      "outputHash": "e7ea32034812e67b343d0e1d8a6f6cca7a831660012fc70be60a231a3b1e36a3"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "e7ec6ac30fcd7fa457a910f96013c6dc568bf1e9371520d5bd16d308a364418a",
+      "outputHash": "33f9ece1ba1ec41b7dfbf6dede0b5673dc24d37485598cf545597d7c93e60113"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "a416ae42ffce368e14924dcefd7a37cc84ec9bc6256c75360b613def59147bc9",
+      "outputHash": "33561621c4dbd10f335919209e3bd2c5b9a81d4128596e21f6798390afe64c1d"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.marshal.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:54:14.936Z",
+    "notes": "Inspected native1x and4x: uncovered grey-haired officer and gold shoulder mantle provide a clear leader distinction; short outstretched baton and ledger silhouette remain separate from shield infantry. Feet, braid and hand fit padded64px ground contract. Static role identifier only, no claim of a unique named portrait or animation; runtime review pending.\nReviewed candidate 723cd0a5777685a612926fd24c733c12223db196d1d4e7853c153900e375041f; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/48e4e79d9f91b39e6abfaa5ae3823e45fc8da85d043d8f4798b7813e9a40a849.png"
+    ],
+    "inputHash": "ac7b0143df0756161fb55067aaa6a479f32ef37d389f1de5c36d155a9c534a19"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

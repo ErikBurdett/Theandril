@@ -28,7 +28,7 @@ async function unobstructed(element: Locator): Promise<void> {
   })).toBe(true);
 }
 
-test('four public culture crests are reference art, while campaign heraldry follows only observed faction definitions', async ({ page }, testInfo) => {
+test('six public culture crests are reference art, while campaign heraldry follows only observed faction definitions', async ({ page }, testInfo) => {
   const requests: string[] = [];
   page.on('request', request => { if (new URL(request.url()).pathname.startsWith('/art/')) requests.push(new URL(request.url()).pathname); });
   await page.goto('/');
@@ -40,15 +40,15 @@ test('four public culture crests are reference art, while campaign heraldry foll
     await approved(art(cultures, factionArtId('ui.crest', faction.id)!));
     await expect(cultures.getByRole('heading', { name: faction.name, exact: true })).toBeVisible();
   }
-  await cultures.screenshot({ path: testInfo.outputPath('four-public-culture-crests.png') });
+  await cultures.screenshot({ path: testInfo.outputPath('six-public-culture-crests.png') });
   await page.setViewportSize({ width: 390, height: 844 });
   const cards = cultures.locator('article');
-  for (let index = 0; index < 4; index++) {
+  for (let index = 0; index < FACTIONS.length; index++) {
     const card = cards.nth(index);
     await card.evaluate(element => element.scrollIntoView({ block: 'center' }));
     await unobstructed(card);
     await unobstructed(card.locator('[data-art-id]'));
-    if (index % 2 === 1) await page.screenshot({ path: testInfo.outputPath(`four-public-culture-crests-narrow-pair-${(index + 1) / 2}.png`) });
+    if (index % 2 === 1) await page.screenshot({ path: testInfo.outputPath(`six-public-culture-crests-narrow-pair-${(index + 1) / 2}.png`) });
   }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -110,7 +110,7 @@ test('renamed realms retain their authored family, real appointments gain role a
   }
   for (const unit of ['colonist', 'scout', 'guard', 'spearman', 'heavy_infantry', 'cavalry']) await approved(art(page.locator('.inspector'), `unit.${unit}.ashen_compact`));
   await page.setViewportSize({ width: 390, height: 844 });
-  const recruitment = page.locator('.faction-recruit-options');
+  const recruitment = page.getByTestId('production-land').locator('.faction-recruit-options');
   expect(await recruitment.evaluate(element => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length)).toBe(1);
   const outriders = page.getByRole('button', { name: 'Recruit Charter outriders', exact: true });
   await outriders.evaluate(element => element.scrollIntoView({ block: 'center' }));

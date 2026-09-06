@@ -18,6 +18,7 @@ export function NavalTransport({ army, view, busy, issue, selectArmy }: { army: 
     <h3 className="section-title">{army.domain === 'naval' ? 'Fleet & passengers' : army.carrierId ? 'Aboard a transport' : 'Embark for sea'}</h3>
     {army.domain === 'naval' ? <>
       <p className="field-help">{army.canEnterDeepWater ? 'This fleet can navigate shallow water and deep ocean.' : 'Shallow-water passage only. Deep ocean requires Ocean navigation and ocean-capable hulls throughout the fleet.'}</p>
+      <p className="field-help">Chart key: paired pale waves mark coastal shallows; three slate waves mark deep ocean. Ship silhouettes are procedural while naval artwork awaits approval.</p>
       <p className="transport-capacity" data-testid="transport-capacity">Passengers: {army.transportUsed} / {army.transportCapacity} formation spaces</p>
       {army.cargo.length ? <><p className="field-help">Select a carried army to review its landing shores. Loaded fleets must unload before reorganizing.</p><ul className="transport-cargo">{army.cargo.map(cargo => <li key={cargo.armyId}><button aria-label={`Select embarked ${cargo.name} (${cargo.armyId})`} onClick={() => selectArmy(cargo.armyId)}>{cargo.name}<small>{cargo.formations} formations · {cargo.armyId}</small></button></li>)}</ul></> : <p className="field-help">No passengers aboard. Select a land army on an adjacent shore to embark it.</p>}
       {army.transportCapacity > 0 && <p className="transport-warning">{lossWarning}</p>}

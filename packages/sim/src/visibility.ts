@@ -1,6 +1,8 @@
 import { neighbors } from '@theandril/mapgen';
 import { armySight } from './army-composition';
 import type { GameState } from './types';
+import { observeLandCell } from './territory';
+import { rulesVersion } from './rules';
 
 export interface SpatialIndex {
   armies: Map<number, Set<string>>;
@@ -63,4 +65,5 @@ export function indexes(state: GameState): SpatialIndex {
 
 export function updateSight(state: GameState, factionId: string, cell: number, radius: number, delta: 1 | -1): void {
   changeSight(state, indexes(state), factionId, cell, radius, delta);
+  if (delta > 0 && rulesVersion(state) >= 9) for (const seen of cellsWithin(state, cell, radius)) observeLandCell(state, factionId, seen, true);
 }

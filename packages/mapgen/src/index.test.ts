@@ -120,7 +120,7 @@ describe('odd-row hex geometry', () => {
 describe('world generation', () => {
   it('preserves the versioned seed fixture for saves and replays', () => {
     const world = generateWorld(20260905, 'tiny', 8, 1);
-    expect(GENERATOR_VERSION).toBe(3);
+    expect(GENERATOR_VERSION).toBe(4);
     expect({ version: world.generatorVersion, fingerprint: fingerprint(world), starts: world.starts })
       .toEqual({
         version: 1,

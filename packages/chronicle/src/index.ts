@@ -8,7 +8,7 @@ export type { JournalHeader, JournalCommit, JournalOptions } from './journal';
 
 export type CampaignMode = 'player' | 'watch';
 export type ArchiveCoverage = 'complete' | 'from-save';
-export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8;
+export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10;
 export type ArchivedBattleReport = BattleReport | z.infer<typeof legacyCampaignBattleSchema> | z.infer<typeof schema6CampaignBattleSchema> | z.infer<typeof schema7CampaignBattleSchema>;
 export interface ArchiveRecord {
   sequence: number;
@@ -55,7 +55,7 @@ const legacyArchiveSchema = z.object({
   initialSave: z.string().max(64 * 1024 * 1024), initialHash: hash, initialTurn: turn,
   records: z.array(legacyRecordSchema).max(1_000_000), finalHash: hash.nullable(),
 }).strict();
-const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8)]);
+const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10)]);
 // Reports are validated in their original format. Never add modern metadata to old evidence.
 const recordSchema = z.discriminatedUnion('rulesVersion', [
   legacyRecordSchema.extend({ checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(4) }).strict(),
@@ -63,6 +63,8 @@ const recordSchema = z.discriminatedUnion('rulesVersion', [
   legacyRecordSchema.extend({ battles: z.array(schema6CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(6) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(schema7CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(7) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(8) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(9) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(10) }).strict(),
 ]);
 const archiveSchema = legacyArchiveSchema.extend({ version: z.literal(2), initialSaveVersion: hashVersion, records: z.array(recordSchema).max(1_000_000), finalHashVersion: hashVersion.nullable() }).strict();
 
@@ -118,9 +120,9 @@ export function parseArchive(raw: unknown, current: GameState): CampaignArchive 
   const initial = deserializeGame(archive.initialSave);
   if (snapshotVersion(archive.initialSave) !== archive.initialSaveVersion || stateHashForVersion(initial, archive.initialSaveVersion) !== archive.initialHash || initial.turn !== archive.initialTurn) throw new Error('Archive initial snapshot mismatch.');
   if (initial.world.seed !== current.world.seed || initial.world.width !== current.world.width || initial.world.height !== current.world.height
-    || initial.turnOwnerId !== current.turnOwnerId || initial.pace !== current.pace || initial.world.generatorVersion !== current.world.generatorVersion || initial.factions.map(f => f.id).join('|') !== current.factions.map(f => f.id).join('|')) throw new Error('Archive belongs to a different campaign.');
+    || initial.turnOwnerId !== current.turnOwnerId || initial.pace !== current.pace || initial.world.generatorVersion !== current.world.generatorVersion || initial.rosterVersion !== current.rosterVersion || initial.factions.map(f => f.id).join('|') !== current.factions.map(f => f.id).join('|')) throw new Error('Archive belongs to a different campaign.');
   if (archive.coverage === 'complete') {
-    const generated = createGame({ seed: initial.world.seed, size: mapSize(initial), factionCount: initial.factions.length, pace: initial.pace, generatorVersion: initial.world.generatorVersion });
+    const generated = createGame({ seed: initial.world.seed, size: mapSize(initial), factionCount: initial.factions.length, pace: initial.pace, generatorVersion: initial.world.generatorVersion, rosterVersion: initial.rosterVersion, ...(archive.initialSaveVersion >= 9 ? { factionDefinitionId: initial.factions[0]!.definitionId } : {}) });
     if (stateHashForVersion(generated, archive.initialSaveVersion) !== archive.initialHash) throw new Error('Complete history must begin at the generated campaign start.');
   }
   let expectedTurn = initial.turn;
@@ -169,7 +171,7 @@ export function replayArchive(archive: CampaignArchive): GameState {
   return game;
 }
 
-const routine = new Set(['army_moved', 'production_queued', 'turn_started', 'campaign_started', 'battle_round', 'siege_progress', 'victory_project_progress']);
+const routine = new Set(['army_moved', 'production_queued', 'turn_started', 'campaign_started', 'battle_round', 'siege_progress', 'victory_project_progress', 'land_work_progress']);
 function uniqueEvents(events: DomainEvent[]): DomainEvent[] {
   const seen = new Set<string>();
   return events.filter(event => {
@@ -211,8 +213,10 @@ export function generateChronicles(game: GameState, archive: CampaignArchive): C
     }
     const movements = events.filter(event => event.type === 'army_moved').length;
     const queues = events.filter(event => event.type === 'production_queued').length;
+    const landProgress = events.filter(event => event.type === 'land_work_progress').length;
     const rejected = entry.records.filter(record => !record.ok).length;
     if (movements || queues) paragraphs.push(`The lesser entries record ${movements} march${movements === 1 ? '' : 'es'} and ${queues} new production order${queues === 1 ? '' : 's'}. Their exact destinations and commissions survive in the technical ledger.`);
+    if (landProgress) paragraphs.push(`Across the hinterlands, ${landProgress} land-work order${landProgress === 1 ? '' : 's'} advanced. Their paid commitments and remaining work are preserved in the technical ledger.`);
     if (rejected) paragraphs.push(`${rejected} order${rejected === 1 ? ' was' : 's were'} refused by the campaign rules and changed no realm. The technical ledger preserves the reasons.`);
     if (!paragraphs.length) paragraphs.push('No new public achievement or calamity was recorded in this turn; the ledgers of the realms continued.');
     const title = events.some(e => e.type === 'campaign_victory') ? `Turn ${number} — The closing of the book`
@@ -230,7 +234,7 @@ export function generateChronicles(game: GameState, archive: CampaignArchive): C
   const history = { title: 'The Book of Rekindled Hearths', subtitle: `A chronicle of world ${initial.world.seed}`, coverage, chapters };
   const technicalRecord = { format: 'theandril-technical-log', version: 2, gameVersion: '0.1.0', saveVersion: SAVE_VERSION, contentHash: CONTENT_HASH,
     coverage, mode: archive.mode, seed: initial.world.seed, size: mapSize(initial), pace: initial.pace, factions: initial.factions.map(({ id, name }) => ({ id, name })),
-    initialSnapshot: JSON.parse(archive.initialSave) as unknown, initialHash: archive.initialHash, initialSaveVersion: archive.initialSaveVersion, generatorVersion: initial.world.generatorVersion, records: archive.records,
+    initialSnapshot: JSON.parse(archive.initialSave) as unknown, initialHash: archive.initialHash, initialSaveVersion: archive.initialSaveVersion, generatorVersion: initial.world.generatorVersion, rosterVersion: initial.rosterVersion, records: archive.records,
     victory: game.victory, finalHash: archive.finalHash, finalHashVersion: archive.finalHashVersion,
     replay: 'Deserialize initialSnapshot with the recorded rules/content version. Apply records.command in sequence, including rejected orders; compare results, events and end-turn checkpoints. Checksums detect accidental corruption, not malicious forgery.',
   };

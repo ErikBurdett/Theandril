@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.sepulchral_synod",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art heraldic game UI asset on genuine transparent PNG alpha-zero background. A single simple bold emblem, not a sheet, no text or letters. Coarse pixel clusters and deliberately large readable shapes, serious weathered medieval material treatment with only a few grouped highlights from upper left. NO gradients, halos, glow, antialiasing, checkerboard or background panel outside the object. Complete outline surrounded by at least15% transparent margin. Designed to survive native nearest-neighbor sampling. Sepulchral Synod strategic BADGE at32x32 logical pixels: a simple chunky chalk-pale HOLLOW RING above THREE SHORT BROAD TERRACE STEPS on a dark indigo circular plate with subtle bronze edge. Very few large contrasting pixel clusters. No skull, cross, letters, tiny decoration or extra objects. Symmetrical frontal icon.",
+  "frames": [
+    {
+      "id": "ui.badge.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/source/native/ui.badge.sepulchral_synod/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "6f0eb3ee54f7aea1719cc891b89cbcbd933578c9e975912869ea70abf5d6b5b9",
+    "sourceRefs": [
+      "assets/art/source/slice12/ui.badge.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/ui.badge.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "d042c3eb142d553dbdb42077818b5d7a16f2c0b71b07627ba2d8b3e762c8b775",
+    "70c149fbe8aa850cb4eae39afce3d45e7e7105faf24d477eb45b3a5afeec52ae"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-32",
+      "settingsHash": "acbb96ae6eb788ea4fcae5dee8738bd388b54d4a7e84ffa50f5b3494fc19dafc",
+      "inputHash": "d042c3eb142d553dbdb42077818b5d7a16f2c0b71b07627ba2d8b3e762c8b775",
+      "outputHash": "267e70fd0c5551fd1b1d9bbb085971f1093afe395a5c7b087b0e24001d10b357"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

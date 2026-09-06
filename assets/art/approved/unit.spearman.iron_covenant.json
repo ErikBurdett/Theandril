@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.iron_covenant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. One broad adult deep-folk pike soldier. Long practical ash pike vertical and slightly forward, its steel tip wholly inside generous top margin; small squared buckler, blue-black mail under gold-tabbed leather. Compact planted stance, visible beard, simple low faceted iron helmet. Pike shaft one continuous readable diagonal; no extra weapons.",
+  "frames": [
+    {
+      "id": "unit.spearman.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.spearman.iron_covenant/426ee77c9f18e77a3815483d0c0d76b5129d49cf2081b39c7c323504f0389313/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e41796f946f907d3781e063391019645b398a3636367647d1e07d141b3b4b876",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.spearman.iron_covenant-v1.png",
+      "assets/art/source/slice12/unit.spearman.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "32d5e618700f26628a2fb19a913d8e4b84c3f8e05ce0cc850a0cf09cbff6f55f",
+    "d9b1792b9472d19b69659015326d39f86c68f8bff580306f68b06e7648a9a1a8"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "1f31b421a9dbd7bc1bea4e9d7dc0b7090f3836493ceac3f4451a13aab7c5d430",
+      "inputHash": "32d5e618700f26628a2fb19a913d8e4b84c3f8e05ce0cc850a0cf09cbff6f55f",
+      "outputHash": "5e9284c38e96d9c5faa3eb7cf4bba6a31a8c16e2283eefda9c24c8ecb2b81454"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "5e9284c38e96d9c5faa3eb7cf4bba6a31a8c16e2283eefda9c24c8ecb2b81454",
+      "outputHash": "855f2e9c88e7ca5a79070f47dc62dcbf2099ed05e48c236ecddc8a80453c6980"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "855f2e9c88e7ca5a79070f47dc62dcbf2099ed05e48c236ecddc8a80453c6980",
+      "outputHash": "0c1d3b986a59865dd27ff5a7f60e9cbd30b9266ad551831072a3b8475ff31f24"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "99431fdf80d3c803c6bbb86ab61cf36be4b0216b28150995fa560e9c42954c51",
+      "outputHash": "df7c9a09bf9fcd5ce715cbc2b01d7b6eede023769f6dbd134db16143348d774b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "d064c6f47e3ea6afca8731207fc6d8c5bbe64d7cf3f0ead52f9282aaa67ab15e",
+      "outputHash": "5c300d8e243b70afe812c217d4ea93e258eff37818720fa8c0a25259b282353e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "c96f525528ad5bfba8fe14de2002bf09d3ed7fc133cd0e40aa5704c3367b9fe5",
+      "outputHash": "259b57715ab618d69fcd43566720edbd8cca8bb386cb00a9530205ebabad78e5"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.spearman.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:49:22.452Z",
+    "notes": "Inspected 1x/4x: tall continuous dark pike and bright steel tip separate from compact infantry body; buckler and plated shoulder provide a readable side silhouette. Full shaft, boots and tip fit padded64px frame. Body is smaller than the sword guard because the long weapon shares its fixed canvas. Static only; runtime review pending.\nReviewed candidate 426ee77c9f18e77a3815483d0c0d76b5129d49cf2081b39c7c323504f0389313; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/765a1fdb420d434772a79d1dd7eecf4e693e1e9a981eb54a2862b7c5b4297bc5.png"
+    ],
+    "inputHash": "d08a8ae6a640d85dba7077141b6445313d401a1501b27ab537e3aef7cfa8ea2a"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

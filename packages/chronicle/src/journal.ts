@@ -10,7 +10,7 @@ function requireValue(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error('Campaign journal: ' + message);
 }
 function campaignIdentity(game: GameState): string {
-  return JSON.stringify([game.world.seed, game.world.width, game.world.height, game.world.generatorVersion,
+  return JSON.stringify([game.world.seed, game.world.width, game.world.height, game.world.generatorVersion, game.rosterVersion,
     game.turnOwnerId, game.pace, game.factions.map(faction => faction.id)]);
 }
 

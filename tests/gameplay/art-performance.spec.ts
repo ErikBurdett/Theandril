@@ -15,7 +15,8 @@ test('fully explored Huge art rendering stays viewport-bounded across static fac
   await page.goto('/');
   const catalog = parseRuntimeCatalog(await (await page.request.get('/art/catalog.json')).json());
   const mapBindings = new Set<string>([...FACTION_ART_IDS,
-    'terrain.ocean', 'terrain.grassland', 'terrain.temperate_forest', 'terrain.taiga', 'terrain.tundra', 'terrain.desert', 'terrain.steppe', 'terrain.marsh', 'terrain.rainforest', 'terrain.alpine',
+    'terrain.ocean', 'terrain.grassland', 'terrain.temperate_forest', 'terrain.taiga', 'terrain.tundra', 'terrain.desert', 'terrain.steppe', 'terrain.marsh', 'terrain.rainforest', 'terrain.alpine', 'terrain.ash_scrub', 'terrain.chalkland',
+    'improvement.terraced_fields', 'improvement.managed_woodlot', 'improvement.quarry', 'improvement.reedworks', 'improvement.shore_fishery',
     'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin',
   ]);
   const neededPages = new Set(catalog.assets.filter(asset => mapBindings.has(asset.id) || asset.contentIds.some(id => mapBindings.has(id))).map(asset => asset.atlasId));
@@ -35,11 +36,22 @@ test('fully explored Huge art rendering stays viewport-bounded across static fac
     const metrics = await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters());
     const art = await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics());
     expect(metrics?.cachedChunks).toBeLessThanOrEqual(64);
+    // Empty Graphics must not drag a distant chunk's cache back to world(0,0).
+    expect(metrics?.maxCachedChunkWidth).toBeLessThanOrEqual(900);
+    expect(metrics?.maxCachedChunkHeight).toBeLessThanOrEqual(760);
+    expect(metrics?.cachedTextureBytesEstimate).toBeLessThanOrEqual(64 * 4 * 1024 * 1024);
     expect(metrics?.visibleCells).toBeLessThan(10000);
     expect(metrics?.pooledSprites).toBeLessThanOrEqual(64 * 256 + 1500);
     expect(metrics?.residentAtlasBytesEstimate).toBe(expectedResidency);
     expect(metrics?.residentAtlasBytesEstimate).toBeLessThanOrEqual(16 * 1024 * 1024);
     expect(metrics?.atlasPages).toBe(mapAtlases.length);
+    // Full exploration must not regress to cloning hundreds of thousands of
+    // cell objects, or eagerly enumerate every town's land action quotes.
+    expect(metrics?.cellTransferBytes).toBeGreaterThan(cells * 9);
+    expect(metrics?.cellTransferBytes).toBeLessThan(2 * 1024 * 1024);
+    expect(metrics?.transferBytes).toBeLessThan(3 * 1024 * 1024);
+    expect(metrics?.landQueryCount).toBe(0);
+    expect(await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.land.settlements.every(town => town.cells.length === 0))).toBe(true);
     expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(hash);
     samples.push({ stage, metrics, art });
   };
@@ -72,7 +84,9 @@ test('fully explored Huge art rendering stays viewport-bounded across static fac
   expect(farMetrics?.visibleSprites).toBeLessThan(farMetrics?.visibleEntities ?? 0);
   expect(far?.visibleAnimationFrames).toEqual([]);
   await page.screenshot({ path: testInfo.outputPath('fully-explored-strategic.png'), fullPage: true });
-  const report = { workload: 'Synthetic fully explored Huge, 32 factions, 1,500 global armies, 32 towns; fog still limits currently visible entities. Static qualified faction poses at near zoom; co-located armies aggregate to heraldic badges at far zoom. No turn advancement or claims about late-game strategic load.', mapAtlases, expectedResidency, cells, stateHash: hash, samples };
+  const canvas = await page.getByTestId('map-container').locator('canvas').boundingBox();
+  const homeCell = Object.values(state.armies).find(army => army.factionId === state.turnOwnerId)!.cell;
+  const report = { workload: 'Synthetic fully explored Huge, 32 factions, 1,500 global armies, 32 towns; fog still limits currently visible entities. Static qualified faction poses at near zoom; co-located armies aggregate to heraldic badges at far zoom. No turn advancement or claims about late-game strategic load. Cache backing is separately estimated with power-of-two dimensions; returned texture-pool resources and other GPU allocations are not included.', homeCell, canvas, mapAtlases, expectedResidency, cells, stateHash: hash, samples };
   await testInfo.attach('fully-explored-art-performance.json', { body: JSON.stringify(report, null, 2), contentType: 'application/json' });
   // Retain detailed entity evidence in the attachment; keep the console measurement summary bounded.
   console.log('Fully explored Huge art measurements:', JSON.stringify({ ...report, samples: samples.map(({ stage, metrics }) => ({ stage, metrics })) }));

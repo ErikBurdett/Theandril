@@ -11,20 +11,25 @@ function fingerprint(values: Iterable<number>): string {
 test('freezes distinct modern climate and legacy terrain-only biome fingerprints', () => {
   const modern = generateWorld(20260905, 'tiny', 8);
   const legacy = generateWorld(20260905, 'tiny', 8, 1);
-  expect(modern.generatorVersion).toBe(3);
+  expect(modern.generatorVersion).toBe(4);
   expect(legacy.generatorVersion).toBe(1);
-  expect(fingerprint(modern.biome)).toBe('fa0ab681');
+  expect(fingerprint(modern.biome)).toBe('aa734ee0');
+  for (const version of [2, 3] as const) expect(fingerprint(generateWorld(20260905, 'tiny', 8, version).biome)).toBe('fa0ab681');
   expect(fingerprint(legacy.biome)).toBe('583ccc48');
   expect(deriveBiomes(1, 5, 1, Uint8Array.from([0, 1, 2, 3, 4]), 1)).toEqual(Uint8Array.from([0, 1, 2, 1, 9]));
 });
 
 test.each(Object.keys(MAP_DIMENSIONS) as MapSize[])('preserves all physical geography, fertility and starts on %s across versions', size => {
-  const modern = generateWorld(20260905, size, 48, 2);
-  const legacy = generateWorld(20260905, size, 48, 1);
-  expect(fingerprint(modern.terrain)).toBe(fingerprint(legacy.terrain));
-  expect(fingerprint(modern.fertility)).toBe(fingerprint(legacy.fertility));
-  expect(modern.starts).toEqual(legacy.starts);
-  expect(fingerprint(deriveBiomes(modern.seed, modern.width, modern.height, modern.terrain, 2))).toBe(fingerprint(modern.biome));
+  const modern = generateWorld(20260905, size, 48, 4);
+  for (const version of [1, 2, 3] as const) {
+    const legacy = generateWorld(20260905, size, 48, version);
+    expect(fingerprint(modern.terrain)).toBe(fingerprint(legacy.terrain));
+    expect(fingerprint(modern.fertility)).toBe(fingerprint(legacy.fertility));
+    expect(fingerprint(modern.waterDepth)).toBe(fingerprint(legacy.waterDepth));
+    expect(modern.starts).toEqual(legacy.starts);
+    expect(fingerprint(deriveBiomes(legacy.seed, legacy.width, legacy.height, legacy.terrain, version))).toBe(fingerprint(legacy.biome));
+  }
+  expect(fingerprint(deriveBiomes(modern.seed, modern.width, modern.height, modern.terrain, 4))).toBe(fingerprint(modern.biome));
   expect(modern.biome.every(isValidBiome)).toBe(true);
 });
 
@@ -61,6 +66,8 @@ test.each(['huge', 'legendary'] as const)('%s climate has coherent diverse distr
       if (biome === BIOME.tundra && climate.temperature[cell]! >= 23) consistent = false;
       if (biome === BIOME.desert && (terrain === TERRAIN.forest || climate.temperature[cell]! < 48 || climate.moisture[cell]! >= 35)) consistent = false;
       if (biome === BIOME.marsh && !neighbors(cell, world.width, world.height).some(next => world.terrain[next] === TERRAIN.water)) consistent = false;
+      if (biome === BIOME.ashScrub && (terrain === TERRAIN.forest || climate.temperature[cell]! < 40 || climate.moisture[cell]! >= 52)) consistent = false;
+      if (biome === BIOME.chalkland && (terrain === TERRAIN.forest || climate.temperature[cell]! < 35 || climate.moisture[cell]! >= 63)) consistent = false;
       const next = cell + 1;
       if (next % world.width && next < world.biome.length && terrain !== TERRAIN.water && world.terrain[next] !== TERRAIN.water) {
         landEdges++;
@@ -83,12 +90,12 @@ test.each(['huge', 'legendary'] as const)('%s climate has coherent diverse distr
 });
 
 test('rejects unsupported versions, mismatched dimensions and invalid physical inputs', () => {
-  expect(() => generateWorld(1, 'tiny', 4, 4 as GeneratorVersion)).toThrow(RangeError);
+  expect(() => generateWorld(1, 'tiny', 4, 5 as GeneratorVersion)).toThrow(RangeError);
   expect(() => deriveBiomes(1, 1, 1, new Uint8Array([0]), 0 as GeneratorVersion)).toThrow(RangeError);
   expect(() => deriveBiomes(NaN, 1, 1, new Uint8Array([0]))).toThrow(RangeError);
   expect(() => deriveBiomes(1, 2, 1, new Uint8Array([0]))).toThrow(RangeError);
   expect(() => deriveClimate(1, 1, 1, new Uint8Array([5]))).toThrow(RangeError);
   expect(() => deriveClimate(1, 0, 0, new Uint8Array())).toThrow(RangeError);
-  expect([-1, 10, NaN, 1.5].some(isValidBiome)).toBe(false);
+  expect([-1, 12, NaN, 1.5].some(isValidBiome)).toBe(false);
   expect(Object.values(BIOME).every(isValidBiome)).toBe(true);
 });

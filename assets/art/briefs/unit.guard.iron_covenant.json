@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.iron_covenant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic-game pixel-art sprite, Iron Covenant oath guard, for Theandril. True transparent PNG background (alpha zero), one isolated full-body figure only, no sheet, labels, border, scenery or ground tile. Serious weathered medieval dark fantasy, adult deep-folk proportions: compact broad-shouldered craftsperson-warrior, not chibi. Southeast-facing shallow three-quarter view, head and feet fully visible. Dark blue-black riveted iron, dull brass reinforcement, charcoal leather, small muted old-gold cloth accent; heavy rectangular shield with a simple original split-anvil symbol, short practical sword, faceted low helmet and visible beard. Disciplined Anvilheights Kiln-faith metalworkers, not a copy of any existing fictional dwarf. Pixel technique: deliberately coarse square clusters, about 64x64 logical pixel resolution shown enlarged, NOT painterly miniature or smooth vector. Strong grouped midtones, restrained upper-left highlights, clear silhouette, crisp hard pixel edges, no antialiasing, glow, texture confetti, gradient background or baked checkerboard. Figure occupies central three quarters of a square transparent canvas with generous empty margin and baseline near bottom. Exactly one guard, exactly one shield and one sword. No text or runic letters.",
+  "frames": [
+    {
+      "id": "unit.guard.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.guard.iron_covenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "eee3c30c403e7a417c00022abc296ce9419b56ec20c4a55ec07cb5515f2007dc",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.guard.iron_covenant-v1.png",
+      "assets/art/source/slice12/unit.guard.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "06ab70b13616c0bb485f31e9d66492c8e1e683ad40d8c1f6a4de67cd0b621187",
+    "cdea34549b0caeb39683270670b84a3b8d34d393110352b80cd762506e082410"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "14dbc348676265fd58547fd5f4b2e7756e859a18c2e5e4dff9bb70410f36f120",
+      "inputHash": "06ab70b13616c0bb485f31e9d66492c8e1e683ad40d8c1f6a4de67cd0b621187",
+      "outputHash": "212ad2e1a52364d8171a7d70542ce1d531047a5cd8d5148b98a304916d73edf3"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,6 +1,6 @@
 /** Increment whenever the same seed/settings can produce different geography. */
-export const GENERATOR_VERSION = 3;
-export type GeneratorVersion = 1 | 2 | 3;
+export const GENERATOR_VERSION = 4;
+export type GeneratorVersion = 1 | 2 | 3 | 4;
 
 export const MAP_DIMENSIONS = {
   tiny: { width: 48, height: 32 },
@@ -26,9 +26,12 @@ export const TERRAIN_NAMES = ['Water', 'Plains', 'Forest', 'Hills', 'Mountain'] 
 export const WATER_DEPTH = { land: 0, shallow: 1, deep: 2 } as const;
 export const WATER_DEPTH_NAMES = ['Land', 'Coastal shallows', 'Deep ocean'] as const;
 export function isValidWaterDepth(depth: number): boolean { return Number.isInteger(depth) && depth >= 0 && depth < WATER_DEPTH_NAMES.length; }
-export const BIOME = { ocean: 0, grassland: 1, temperateForest: 2, taiga: 3, tundra: 4, desert: 5, steppe: 6, marsh: 7, rainforest: 8, alpine: 9 } as const;
-export const BIOME_NAMES = ['Ocean', 'Temperate grassland', 'Temperate forest', 'Taiga', 'Tundra', 'Desert', 'Steppe', 'Marsh', 'Rainforest', 'Alpine'] as const;
+export const BIOME = { ocean: 0, grassland: 1, temperateForest: 2, taiga: 3, tundra: 4, desert: 5, steppe: 6, marsh: 7, rainforest: 8, alpine: 9, ashScrub: 10, chalkland: 11 } as const;
+export const BIOME_NAMES = ['Ocean', 'Temperate grassland', 'Temperate forest', 'Taiga', 'Tundra', 'Desert', 'Steppe', 'Marsh', 'Rainforest', 'Alpine', 'Ash scrub', 'Chalkland'] as const;
 export function isValidBiome(biome: number): boolean { return Number.isInteger(biome) && biome >= 0 && biome < BIOME_NAMES.length; }
+export const FEATURE = { spring: 1, ore: 2, oldGrowth: 4, waterlogging: 8, peat: 16, richShoals: 32, glassShards: 64 } as const;
+export const FEATURE_MASK = 127;
+export function isValidFeatureMask(features: number): boolean { return Number.isInteger(features) && features >= 0 && features <= FEATURE_MASK; }
 
 export interface World {
   /** Canonical unsigned 32-bit seed. */
@@ -217,7 +220,7 @@ export function deriveClimate(seed: number, width: number, height: number, terra
 
 /** Derive labels from existing terrain, including authored/legacy maps; never mutate it. */
 export function deriveBiomes(seed: number, width: number, height: number, terrain: Uint8Array, generatorVersion: GeneratorVersion = GENERATOR_VERSION): Uint8Array {
-  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3) throw new RangeError('Unknown generator version.');
+  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3 && generatorVersion !== 4) throw new RangeError('Unknown generator version.');
   validateClimateInput(seed, width, height, terrain);
   const result = new Uint8Array(terrain.length);
   const climate = generatorVersion >= 2 ? deriveClimate(seed, width, height, terrain) : undefined;
@@ -240,7 +243,54 @@ export function deriveBiomes(seed: number, width: number, height: number, terrai
     } else if (temperature >= 48 && moisture < 35) result[cell] = BIOME.desert;
     else if (moisture < 52 || temperature < 35) result[cell] = BIOME.steppe;
     else result[cell] = BIOME.grassland;
+    // Generator4 adds coherent Ashfall disturbance and calcareous land identities.
+    // These are labels only: no relief, fertility, shelf or start-placement changes.
+    // Woodland, tundra, marsh and alpine retain their existing climate constraints.
+    if (generatorVersion >= 4 && physical !== TERRAIN.forest) {
+      const geology = noise(cell % width, Math.floor(cell / width), Math.max(4, Math.floor(width / 9)), seed ^ 0x47454f4c);
+      if (temperature >= 40 && moisture < 52 && geology < -9000) result[cell] = BIOME.ashScrub;
+      else if (temperature >= 35 && moisture < 63 && geology > 8500) result[cell] = BIOME.chalkland;
+    }
   }
+  return result;
+}
+
+/**
+ * Sparse, stateless O(1) feature query from immutable geography, including migrated
+ * worlds. Never reads a cultivated biome, consumes an RNG stream, or scans the map.
+ * Rules versions decide whether these economic features apply to a campaign.
+ */
+export function naturalFeatures(world: World, cell: number): number {
+  const { width, height, seed, terrain, waterDepth } = world;
+  if (!Number.isSafeInteger(seed) || !Number.isInteger(width) || width < 1 || !Number.isInteger(height) || height < 1 ||
+      width * height > 350_000 || !(terrain instanceof Uint8Array) || !(waterDepth instanceof Uint8Array) ||
+      terrain.length !== width * height || waterDepth.length !== terrain.length || !Number.isInteger(cell) || cell < 0 || cell >= terrain.length) {
+    throw new RangeError('Natural features require a valid bounded world and cell.');
+  }
+  const physical = terrain[cell]!;
+  if (physical > TERRAIN.mountain || !isValidWaterDepth(waterDepth[cell]!) || (physical === TERRAIN.water) === (waterDepth[cell] === WATER_DEPTH.land)) throw new RangeError('Natural feature terrain and depth disagree.');
+  const x = cell % width, y = Math.floor(cell / width);
+  const geology = noise(x, y, Math.max(4, Math.floor(width / 9)), seed ^ 0x47454f4c);
+  const roll = mix32(seed ^ Math.imul(cell + 1, 0x4e415455));
+  let result = 0;
+  if (physical === TERRAIN.water) {
+    if (waterDepth[cell] === WATER_DEPTH.shallow) {
+      if (roll % 3 !== 0) result |= FEATURE.richShoals;
+      if (geology > 11000 && roll % 5 === 0) result |= FEATURE.glassShards;
+    }
+    return result;
+  }
+  if ((physical === TERRAIN.hills || physical === TERRAIN.mountain) && roll % 3 === 0) result |= FEATURE.ore;
+  if (physical === TERRAIN.mountain) return result;
+  if (roll % 17 === 0) result |= FEATURE.spring;
+  if (physical === TERRAIN.forest && (roll >>> 8) % 3 === 0) result |= FEATURE.oldGrowth;
+  const coastal = neighbors(cell, width, height).some(next => terrain[next] === TERRAIN.water);
+  const wet = noise(x, y, Math.max(4, Math.floor(width / 11)), seed ^ 0x5241494e) > 3500;
+  if (physical !== TERRAIN.hills && wet && (coastal || (roll >>> 16) % 5 === 0)) {
+    result |= FEATURE.waterlogging;
+    if ((roll >>> 12) % 3 === 0) result |= FEATURE.peat;
+  }
+  if (coastal && geology > 11000 && roll % 3 === 0) result |= FEATURE.glassShards;
   return result;
 }
 
@@ -333,7 +383,7 @@ function placeStarts(world: World, count: number): void {
 export function generateWorld(seed: number, size: MapSize, factionCount: number, generatorVersion: GeneratorVersion = GENERATOR_VERSION): World {
   if (!Number.isSafeInteger(seed)) throw new RangeError('Seed must be a safe integer.');
   if (!Object.hasOwn(MAP_DIMENSIONS, size)) throw new RangeError('Unknown map size.');
-  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3) throw new RangeError('Unknown generator version.');
+  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3 && generatorVersion !== 4) throw new RangeError('Unknown generator version.');
   if (!Number.isInteger(factionCount) || factionCount < 1 || factionCount > 48) {
     throw new RangeError('Faction count must be an integer between 1 and 48.');
   }

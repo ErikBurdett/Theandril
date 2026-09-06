@@ -173,9 +173,9 @@
       "id": "foundation",
       "imageUrl": "/art/foundation.png",
       "jsonUrl": "/art/foundation.json",
-      "width": 1024,
-      "height": 1024,
-      "sha256": "59bfd5e96f75f235bbe528b416a8bfb25e44f9965f7a002cb3440afd252e3b90"
+      "width": 2048,
+      "height": 2048,
+      "sha256": "7a22a84c0c4623cea16327af27313e6796560024f38fbafde1491a0afe27ceb7"
     }
   ],
   "assets": [
@@ -399,6 +399,78 @@
       }
     },
     {
+      "id": "character.engineer.iron_covenant",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "character.engineer.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "character.engineer.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 214,
+            "y": 4,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "character.engineer.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "character.engineer.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/character.engineer.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "b9f67bba51302ffb5891af0b7726df1220fa0f05ea8afc4342ec3bddf7e9e482",
+        "sourceRefs": [
+          "assets/art/source/slice12/character.engineer.iron_covenant-v1.png",
+          "assets/art/source/slice12/character.engineer.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:54:16.156Z",
+        "notes": "Inspected native1x and4x: broad apron, bare working sleeves and low square hammer distinguish mason from sword guard and map-bearing surveyor. Goggles and beard compress to warm head clusters without malformed anatomy; equipment and boots remain padded. Static role art, runtime review pending.\nReviewed candidate d4f3a09b209ccee9ebf4002c5ec3dcc483bf20739ec8e85c72bc93ce8df332c9; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/da52b0ace540a300560bc54afb84d308dca75e2c187f607e3e6542a6b718bff4.png"
+        ],
+        "inputHash": "2402478cf41dbdba3728076718ab5258882126e64b3c65f812f2c30eb67b7aa2"
+      }
+    },
+    {
       "id": "character.engineer.reedbound_council",
       "type": "unit",
       "status": "ATLASED",
@@ -418,7 +490,7 @@
         {
           "id": "character.engineer.reedbound_council/idle/se/0",
           "frame": {
-            "x": 214,
+            "x": 284,
             "y": 4,
             "w": 64,
             "h": 64
@@ -472,6 +544,78 @@
       }
     },
     {
+      "id": "character.engineer.sepulchral_synod",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "character.engineer.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "character.engineer.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 354,
+            "y": 4,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "character.engineer.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "character.engineer.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/character.engineer.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "487f8ef2c6a30b9cc1e3dcb38a02e000aa87f48dcfa709ac252d04394e9b6d4a",
+        "sourceRefs": [
+          "assets/art/source/slice12/character.engineer.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/character.engineer.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:54:17.908Z",
+        "notes": "Inspected native1x and4x: broad pale work apron, low square mallet and outward bronze measuring tool distinguish engineer from map surveyor; indigo veil and modest ring headpiece retain the new culture language. Both hands/tools and feet remain unclipped; hard alpha/native palette checks pass. Static role art; runtime review pending.\nReviewed candidate 9c54de697802efeb350bc1728ce1420374b137a44a17d7e90d15bde0522025b1; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/824c8bf216a6de9aabb2301bda654e5b479a0010c6bce528e2dd966c01989270.png"
+        ],
+        "inputHash": "ba1d5a860a84e18da1065d7cc28e9513bd58a682676f8181d5f7b7830a08cbe8"
+      }
+    },
+    {
       "id": "character.marshal.ashen_compact",
       "type": "unit",
       "status": "ATLASED",
@@ -491,7 +635,7 @@
         {
           "id": "character.marshal.ashen_compact/idle/se/0",
           "frame": {
-            "x": 284,
+            "x": 424,
             "y": 4,
             "w": 64,
             "h": 64
@@ -564,7 +708,7 @@
         {
           "id": "character.marshal.cinder_march/idle/se/0",
           "frame": {
-            "x": 354,
+            "x": 494,
             "y": 4,
             "w": 64,
             "h": 64
@@ -637,7 +781,7 @@
         {
           "id": "character.marshal.glass_tide/idle/se/0",
           "frame": {
-            "x": 424,
+            "x": 564,
             "y": 4,
             "w": 64,
             "h": 64
@@ -691,6 +835,78 @@
       }
     },
     {
+      "id": "character.marshal.iron_covenant",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "character.marshal.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "character.marshal.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 634,
+            "y": 4,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "character.marshal.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "character.marshal.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/character.marshal.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "df4ca1bf5ce16132ad3f2f58d11b427f6dce94983bf7961758a328ea9c329ad8",
+        "sourceRefs": [
+          "assets/art/source/slice12/character.marshal.iron_covenant-v1.png",
+          "assets/art/source/slice12/character.marshal.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:54:14.936Z",
+        "notes": "Inspected native1x and4x: uncovered grey-haired officer and gold shoulder mantle provide a clear leader distinction; short outstretched baton and ledger silhouette remain separate from shield infantry. Feet, braid and hand fit padded64px ground contract. Static role identifier only, no claim of a unique named portrait or animation; runtime review pending.\nReviewed candidate 723cd0a5777685a612926fd24c733c12223db196d1d4e7853c153900e375041f; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/48e4e79d9f91b39e6abfaa5ae3823e45fc8da85d043d8f4798b7813e9a40a849.png"
+        ],
+        "inputHash": "ac7b0143df0756161fb55067aaa6a479f32ef37d389f1de5c36d155a9c534a19"
+      }
+    },
+    {
       "id": "character.marshal.reedbound_council",
       "type": "unit",
       "status": "ATLASED",
@@ -710,7 +926,7 @@
         {
           "id": "character.marshal.reedbound_council/idle/se/0",
           "frame": {
-            "x": 494,
+            "x": 704,
             "y": 4,
             "w": 64,
             "h": 64
@@ -764,6 +980,78 @@
       }
     },
     {
+      "id": "character.marshal.sepulchral_synod",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "character.marshal.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "character.marshal.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 774,
+            "y": 4,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "character.marshal.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "character.marshal.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/character.marshal.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "2af5d26f4915d41b9d3e4bf4c07bb8dd660e580086618046bc9e7ddfe1f92729",
+        "sourceRefs": [
+          "assets/art/source/slice12/character.marshal.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/character.marshal.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:54:16.752Z",
+        "notes": "Inspected native1x and4x: raised ring-headed command baton, pale veiled head and long indigo sash make an upright commanding silhouette without weapon shield. Entire raised hand/baton and planted boots remain enclosed; pale cloth separates from dark armor. Static role art, not spell effects; runtime review pending.\nReviewed candidate 6c27d7ee4f923ed8f55680cab53103543da634af21ce3481dd3879f0f06bcd0b; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/c2d60b29ae18e1e31fa626206255ff54921aaa0c24957c850b46652b3c64f190.png"
+        ],
+        "inputHash": "4c3049f26dfceb15b8a2db272bdc3bcde48fa461eccca2214e4111a482732be8"
+      }
+    },
+    {
       "id": "character.surveyor.ashen_compact",
       "type": "unit",
       "status": "ATLASED",
@@ -783,7 +1071,7 @@
         {
           "id": "character.surveyor.ashen_compact/idle/se/0",
           "frame": {
-            "x": 564,
+            "x": 844,
             "y": 4,
             "w": 64,
             "h": 64
@@ -856,7 +1144,7 @@
         {
           "id": "character.surveyor.cinder_march/idle/se/0",
           "frame": {
-            "x": 634,
+            "x": 914,
             "y": 4,
             "w": 64,
             "h": 64
@@ -929,7 +1217,7 @@
         {
           "id": "character.surveyor.glass_tide/idle/se/0",
           "frame": {
-            "x": 704,
+            "x": 984,
             "y": 4,
             "w": 64,
             "h": 64
@@ -983,6 +1271,78 @@
       }
     },
     {
+      "id": "character.surveyor.iron_covenant",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "character.surveyor.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "character.surveyor.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 1054,
+            "y": 4,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "character.surveyor.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "character.surveyor.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/character.surveyor.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "0209a5761856bce3b130ad8123e9621c29dd5a3ea3d38c05b0b463e0b34e2cc1",
+        "sourceRefs": [
+          "assets/art/source/slice12/character.surveyor.iron_covenant-v1.png",
+          "assets/art/source/slice12/character.surveyor.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:54:15.545Z",
+        "notes": "Inspected native1x and4x: bright open parchment map forms a broad unmistakable tool shape; uncovered human head and unarmored dark travel coat contrast with broad deep-folk engineer. Both boots and map corners are intact; pale map remains readable on checkerboard. Static role art, runtime review pending.\nReviewed candidate 9aa52102c9d799b99ec70c3ebed8047091ace5016d1be6116f7d62cd2fae7d6f; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/1413eb833397db30b5d326e942338a102ff17020715ccd2d8cd8e8f7c9c9375b.png"
+        ],
+        "inputHash": "0b75dd9855528aa07ac3c1bda628d56b10d94f46474e296f416d50a44ba52f2a"
+      }
+    },
+    {
       "id": "character.surveyor.reedbound_council",
       "type": "unit",
       "status": "ATLASED",
@@ -1002,7 +1362,7 @@
         {
           "id": "character.surveyor.reedbound_council/idle/se/0",
           "frame": {
-            "x": 774,
+            "x": 1124,
             "y": 4,
             "w": 64,
             "h": 64
@@ -1056,6 +1416,78 @@
       }
     },
     {
+      "id": "character.surveyor.sepulchral_synod",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "character.surveyor.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "character.surveyor.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 1194,
+            "y": 4,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "character.surveyor.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "character.surveyor.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/character.surveyor.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "7a4e67053c3d56f399c76126528348c10313a88cf6460c88d59766dde086a1e2",
+        "sourceRefs": [
+          "assets/art/source/slice12/character.surveyor.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/character.surveyor.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:54:17.337Z",
+        "notes": "Inspected native1x and4x: open pale map at waist and hooded mobile stance distinguish surveyor from raised-baton marshal. Small dividers and field stakes are secondary detail; main map/face/boots remain readable and complete. Indigo and chalk clothing preserve culture identity. Static role art; runtime review pending.\nReviewed candidate 2e3361418332dc28231a527755b9b8dcc8d146ae4583ec38851e0f418527bda9; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/1708d7de1ae47b6215dbcf40909738eafba8c3eaa4aa76ee3559595d025b127a.png"
+        ],
+        "inputHash": "a6052fa1b468ad1c668cd694d54e854e9c404110962e06ff70029d4c0bf748d3"
+      }
+    },
+    {
       "id": "effect.magic",
       "type": "effect",
       "status": "ATLASED",
@@ -1075,7 +1507,7 @@
         {
           "id": "effect.magic/idle/se/0",
           "frame": {
-            "x": 844,
+            "x": 1264,
             "y": 4,
             "w": 64,
             "h": 64
@@ -1088,7 +1520,7 @@
         {
           "id": "effect.magic/idle/se/1",
           "frame": {
-            "x": 914,
+            "x": 1334,
             "y": 4,
             "w": 64,
             "h": 64
@@ -1101,8 +1533,8 @@
         {
           "id": "effect.magic/idle/se/2",
           "frame": {
-            "x": 4,
-            "y": 74,
+            "x": 1404,
+            "y": 4,
             "w": 64,
             "h": 64
           },
@@ -1114,8 +1546,8 @@
         {
           "id": "effect.magic/idle/se/3",
           "frame": {
-            "x": 74,
-            "y": 74,
+            "x": 1474,
+            "y": 4,
             "w": 64,
             "h": 64
           },
@@ -1192,8 +1624,8 @@
         {
           "id": "effect.melee/idle/se/0",
           "frame": {
-            "x": 144,
-            "y": 74,
+            "x": 1544,
+            "y": 4,
             "w": 64,
             "h": 64
           },
@@ -1205,8 +1637,8 @@
         {
           "id": "effect.melee/idle/se/1",
           "frame": {
-            "x": 214,
-            "y": 74,
+            "x": 1614,
+            "y": 4,
             "w": 64,
             "h": 64
           },
@@ -1218,8 +1650,8 @@
         {
           "id": "effect.melee/idle/se/2",
           "frame": {
-            "x": 284,
-            "y": 74,
+            "x": 1684,
+            "y": 4,
             "w": 64,
             "h": 64
           },
@@ -1231,8 +1663,8 @@
         {
           "id": "effect.melee/idle/se/3",
           "frame": {
-            "x": 354,
-            "y": 74,
+            "x": 1754,
+            "y": 4,
             "w": 64,
             "h": 64
           },
@@ -1309,8 +1741,8 @@
         {
           "id": "effect.movement/idle/se/0",
           "frame": {
-            "x": 424,
-            "y": 74,
+            "x": 1824,
+            "y": 4,
             "w": 64,
             "h": 64
           },
@@ -1381,8 +1813,8 @@
         {
           "id": "effect.projectile/idle/se/0",
           "frame": {
-            "x": 494,
-            "y": 74,
+            "x": 1894,
+            "y": 4,
             "w": 64,
             "h": 64
           },
@@ -1394,8 +1826,8 @@
         {
           "id": "effect.projectile/idle/se/1",
           "frame": {
-            "x": 564,
-            "y": 74,
+            "x": 1964,
+            "y": 4,
             "w": 64,
             "h": 64
           },
@@ -1407,7 +1839,7 @@
         {
           "id": "effect.projectile/idle/se/2",
           "frame": {
-            "x": 634,
+            "x": 4,
             "y": 74,
             "w": 64,
             "h": 64
@@ -1420,7 +1852,7 @@
         {
           "id": "effect.projectile/idle/se/3",
           "frame": {
-            "x": 704,
+            "x": 74,
             "y": 74,
             "w": 64,
             "h": 64
@@ -1498,7 +1930,7 @@
         {
           "id": "effect.selection/idle/se/0",
           "frame": {
-            "x": 774,
+            "x": 144,
             "y": 74,
             "w": 64,
             "h": 64
@@ -1551,6 +1983,366 @@
       }
     },
     {
+      "id": "improvement.managed_woodlot",
+      "type": "map-object",
+      "status": "ATLASED",
+      "contentIds": [
+        "improvement.managed_woodlot"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        48
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "improvement.managed_woodlot/idle/se/0",
+          "frame": {
+            "x": 214,
+            "y": 74,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "improvement.managed_woodlot/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "improvement.managed_woodlot/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/improvement.managed_woodlot.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "aea2c6c50a5b01525474255f8afdc14b613eaf69d2657f0b62edacc85e3ed215",
+        "sourceRefs": [
+          "assets/art/source/slice12/improvement.managed_woodlot-v1.png",
+          "assets/art/source/slice12/improvement.managed_woodlot-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:48.456Z",
+        "notes": "Inspected native1x/4x: upright tended tree, two cut-height side trees and pale stacked log ends distinguish woodlot from wild forest. Compact roots/log rack and top leaves are complete within44px painted-height cap. No full land tile or people; hard alpha.32px half-native runtime review pending.\nReviewed candidate 1b02fcd8a40e2c007203760065b565b0f51746c41dda20c3706d04f38fdb886e; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/1813c4a0ffcbec9d2ab1943728282b41ebd7403f8fc89c208b29dc421d87d505.png"
+        ],
+        "inputHash": "d5324c34b625a34398c1de4bbec7b62076ad39388216f23d2e3bdb9887d386bc"
+      }
+    },
+    {
+      "id": "improvement.quarry",
+      "type": "map-object",
+      "status": "ATLASED",
+      "contentIds": [
+        "improvement.quarry"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        48
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "improvement.quarry/idle/se/0",
+          "frame": {
+            "x": 284,
+            "y": 74,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "improvement.quarry/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "improvement.quarry/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/improvement.quarry.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "878d930aabb23ad9f423f1c16db715f83502d60d8bda23a8a777387fa79b1ef7",
+        "sourceRefs": [
+          "assets/art/source/slice12/improvement.quarry-v1.png",
+          "assets/art/source/slice12/improvement.quarry-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:49.096Z",
+        "notes": "Inspected native1x/4x: pale stepped rock cuts and brown lifting derrick create a clear masonry-work silhouette; suspended block, crane tip and squared lower blocks remain intact. Whole prop fits64px ground32,48 without mountain/base-tile substitution.32px half-native runtime placement review pending.\nReviewed candidate 8358093433dc79965f9cfe1c12e45e752f1240a86ad39d7da5c6e16abd189d91; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/7081439af53f330f6ba131e8a39f0d998ea2407822b1c43d1b486ca72a66b2e1.png"
+        ],
+        "inputHash": "2feb734e5983eee55f960ce0137a79d399fe5058616e5d30667541dee0e0626f"
+      }
+    },
+    {
+      "id": "improvement.reedworks",
+      "type": "map-object",
+      "status": "ATLASED",
+      "contentIds": [
+        "improvement.reedworks"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        48
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "improvement.reedworks/idle/se/0",
+          "frame": {
+            "x": 354,
+            "y": 74,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "improvement.reedworks/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "improvement.reedworks/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/improvement.reedworks.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "c19e87df232bb56f8efcf7c0ca9bf66bdf36924aa7b3c12edd4fd8064c833667",
+        "sourceRefs": [
+          "assets/art/source/slice12/improvement.reedworks-v1.png",
+          "assets/art/source/slice12/improvement.reedworks-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:49.715Z",
+        "notes": "Inspected native1x/4x: twin upright ochre reed bundles, timber drying frame and low basket bench give a narrow marsh-craft silhouette. All rack posts and bundles stay inside44px painted-height cap and ground32,48. No village or full terrain tile;32px half-native placement review pending.\nReviewed candidate 978cc1a49eed15c5f74847bb303f8449bc5bc6df6dc7a3beee242cf3dc1865f3; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/38be7f57effc3a3613aa8bb5234aff3aa9bb1ccc26b744db2915f4d9acaa8d8f.png"
+        ],
+        "inputHash": "689c2b68221488e50da820af0877717628cf37313c6c53de50b2ab86627082db"
+      }
+    },
+    {
+      "id": "improvement.shore_fishery",
+      "type": "map-object",
+      "status": "ATLASED",
+      "contentIds": [
+        "improvement.shore_fishery"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        48
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "improvement.shore_fishery/idle/se/0",
+          "frame": {
+            "x": 424,
+            "y": 74,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "improvement.shore_fishery/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "improvement.shore_fishery/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/improvement.shore_fishery.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "6b3521f181cf35e7c77da6aeb94394f2d206e2f9d3b298b5cb7e35530a20789b",
+        "sourceRefs": [
+          "assets/art/source/slice12/improvement.shore_fishery-v1.png",
+          "assets/art/source/slice12/improvement.shore_fishery-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:50.332Z",
+        "notes": "Inspected native1x/4x: short bent pier, draped net, creels and bright hanging fish form a distinct open timber silhouette, with transparent gaps under the walkway. Entire posts and fish rack fit64px ground32,48. No boat or water tile substituted for canonical fleet;32px half-native placement review pending.\nReviewed candidate f60a7f0d0866ddce7d477198613098c9a4f8d860f53a3c2937637b21a4819088; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/c1a64b65423a11e9655f5e958613b70f79917781ce09366f850dc12f5773b04c.png"
+        ],
+        "inputHash": "93790493a999817455dfe422f6f2b0965acefa513a274e34ffd52a4a8bcdf5b6"
+      }
+    },
+    {
+      "id": "improvement.terraced_fields",
+      "type": "map-object",
+      "status": "ATLASED",
+      "contentIds": [
+        "improvement.terraced_fields"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        48
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "improvement.terraced_fields/idle/se/0",
+          "frame": {
+            "x": 494,
+            "y": 74,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "improvement.terraced_fields/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "improvement.terraced_fields/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/improvement.terraced_fields.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "f5fd3b775abf8336d5a2e9e90e484a8f2124fd844c09b41f4584c68e7dcfb3fd",
+        "sourceRefs": [
+          "assets/art/source/slice12/improvement.terraced_fields-v1.png",
+          "assets/art/source/slice12/improvement.terraced_fields-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:47.813Z",
+        "notes": "Inspected native1x/4x: three ordered crop bands, retaining walls and a small blue sluice form a compact low field prop; broad rows remain readable and whole footprint fits64px ground32,48. No surrounding full tile or people. Hard alpha and palette valid;32px half-native runtime placement review pending.\nReviewed candidate 210237d8b3c18c3e04c03e68c6aaa0d7285938b0449b0a3ea8f514dc690e7b56; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/199a46e94364a2e6e49a9dd41d16d46c7e80cd4b33140f701e9bdd8be78ca099.png"
+        ],
+        "inputHash": "2f4fcd4908a1b4fc8062f61a641a65387718526fa6fbc5005163fe35c8cddb1a"
+      }
+    },
+    {
       "id": "map.resource",
       "type": "map-object",
       "status": "ATLASED",
@@ -1570,7 +2362,7 @@
         {
           "id": "map.resource/idle/se/0",
           "frame": {
-            "x": 844,
+            "x": 564,
             "y": 74,
             "w": 64,
             "h": 64
@@ -1642,7 +2434,7 @@
         {
           "id": "map.ruin/idle/se/0",
           "frame": {
-            "x": 914,
+            "x": 634,
             "y": 74,
             "w": 64,
             "h": 64
@@ -1714,8 +2506,8 @@
         {
           "id": "map.watchtower/idle/se/0",
           "frame": {
-            "x": 4,
-            "y": 144,
+            "x": 704,
+            "y": 74,
             "w": 64,
             "h": 64
           },
@@ -1786,8 +2578,8 @@
         {
           "id": "monster.quarry_ogre/idle/se/0",
           "frame": {
-            "x": 74,
-            "y": 144,
+            "x": 774,
+            "y": 74,
             "w": 96,
             "h": 96
           },
@@ -1858,8 +2650,8 @@
         {
           "id": "monster.revenant/idle/se/0",
           "frame": {
-            "x": 176,
-            "y": 144,
+            "x": 876,
+            "y": 74,
             "w": 64,
             "h": 64
           },
@@ -1930,8 +2722,8 @@
         {
           "id": "monster.slateback/idle/se/0",
           "frame": {
-            "x": 246,
-            "y": 144,
+            "x": 946,
+            "y": 74,
             "w": 128,
             "h": 128
           },
@@ -2002,8 +2794,8 @@
         {
           "id": "settlement.city/idle/se/0",
           "frame": {
-            "x": 380,
-            "y": 144,
+            "x": 1080,
+            "y": 74,
             "w": 128,
             "h": 128
           },
@@ -2074,8 +2866,8 @@
         {
           "id": "settlement.city.ashen_compact/idle/se/0",
           "frame": {
-            "x": 514,
-            "y": 144,
+            "x": 1214,
+            "y": 74,
             "w": 128,
             "h": 128
           },
@@ -2147,8 +2939,8 @@
         {
           "id": "settlement.city.cinder_march/idle/se/0",
           "frame": {
-            "x": 648,
-            "y": 144,
+            "x": 1348,
+            "y": 74,
             "w": 128,
             "h": 128
           },
@@ -2220,8 +3012,8 @@
         {
           "id": "settlement.city.glass_tide/idle/se/0",
           "frame": {
-            "x": 782,
-            "y": 144,
+            "x": 1482,
+            "y": 74,
             "w": 128,
             "h": 128
           },
@@ -2274,6 +3066,78 @@
       }
     },
     {
+      "id": "settlement.city.iron_covenant",
+      "type": "settlement",
+      "status": "ATLASED",
+      "contentIds": [
+        "settlement.city.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 128,
+        "height": 128
+      },
+      "pivot": [
+        64,
+        112
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "settlement.city.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 1616,
+            "y": 74,
+            "w": 128,
+            "h": 128
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "settlement.city.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "settlement.city.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/settlement.city.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "016eaa335aa0839dca8b93566930bce972e2d17f8013f8927b21947752c3b7f6",
+        "sourceRefs": [
+          "assets/art/source/slice12/settlement.city.iron_covenant-v1.png",
+          "assets/art/source/slice12/settlement.city.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:59:24.270Z",
+        "notes": "Inspected native1x/4x: broad curtain wall, large gate and stepped central hall provide128px city hierarchy; four chimney silhouettes and gold banners separate from dark roofs. Full outer wall corners and top stacks preserved. Distinctly more imposing than town without terrain mountain/base substitution; runtime placement review pending.\nReviewed candidate c1c29a30717c87435e57b1630717d181467090a8ca1771c9b450af6b2187577a; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/5a19eff31e3503a94fbef0e303dcbf10090c8af0dbab02311ee7f076ead2a59b.png"
+        ],
+        "inputHash": "1283e4ff7d7b989ab3688d7acff8d51beae8f8088965df915e3f8e289ad39563"
+      }
+    },
+    {
       "id": "settlement.city.reedbound_council",
       "type": "settlement",
       "status": "ATLASED",
@@ -2293,8 +3157,8 @@
         {
           "id": "settlement.city.reedbound_council/idle/se/0",
           "frame": {
-            "x": 4,
-            "y": 278,
+            "x": 1750,
+            "y": 74,
             "w": 128,
             "h": 128
           },
@@ -2347,6 +3211,78 @@
       }
     },
     {
+      "id": "settlement.city.sepulchral_synod",
+      "type": "settlement",
+      "status": "ATLASED",
+      "contentIds": [
+        "settlement.city.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 128,
+        "height": 128
+      },
+      "pivot": [
+        64,
+        112
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "settlement.city.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 1884,
+            "y": 74,
+            "w": 128,
+            "h": 128
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "settlement.city.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "settlement.city.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/settlement.city.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "1b26f695b3f49b62e188b3882556991b6a7bb7e51ed7393769a56e271bbd1dcf",
+        "sourceRefs": [
+          "assets/art/source/slice12/settlement.city.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/settlement.city.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:59:26.064Z",
+        "notes": "Inspected native1x/4x: broad128px stepped city has a central colonnaded indigo hall, coherent pale terrace masses and a complete top ring. Whole footprint and broad gate remain intact; dark openings preserve depth without noisy single-pixel decoration dominating the form. Clearly larger tier than town; runtime placement review pending.\nReviewed candidate 858c97a324d92020f7fd430a755f5c78f69d92420184dada14bdf2c4eb59df77; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/59c573f646e1690fa0bbbae074434bd6c0b246bb99e60d5ff0de5607b1970278.png"
+        ],
+        "inputHash": "2ec7df03a2d209c1422832d30703dc0edf99e560347f855024c2c039dd6769c4"
+      }
+    },
+    {
       "id": "settlement.town",
       "type": "settlement",
       "status": "ATLASED",
@@ -2366,8 +3302,8 @@
         {
           "id": "settlement.town/idle/se/0",
           "frame": {
-            "x": 138,
-            "y": 278,
+            "x": 4,
+            "y": 208,
             "w": 96,
             "h": 96
           },
@@ -2438,8 +3374,8 @@
         {
           "id": "settlement.town.ashen_compact/idle/se/0",
           "frame": {
-            "x": 240,
-            "y": 278,
+            "x": 106,
+            "y": 208,
             "w": 96,
             "h": 96
           },
@@ -2511,8 +3447,8 @@
         {
           "id": "settlement.town.cinder_march/idle/se/0",
           "frame": {
-            "x": 342,
-            "y": 278,
+            "x": 208,
+            "y": 208,
             "w": 96,
             "h": 96
           },
@@ -2584,8 +3520,8 @@
         {
           "id": "settlement.town.glass_tide/idle/se/0",
           "frame": {
-            "x": 444,
-            "y": 278,
+            "x": 310,
+            "y": 208,
             "w": 96,
             "h": 96
           },
@@ -2638,6 +3574,78 @@
       }
     },
     {
+      "id": "settlement.town.iron_covenant",
+      "type": "settlement",
+      "status": "ATLASED",
+      "contentIds": [
+        "settlement.town.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "settlement.town.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 412,
+            "y": 208,
+            "w": 96,
+            "h": 96
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "settlement.town.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "settlement.town.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/settlement.town.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "d6113b2f328e070bafd46658b8bad38304240ebd72f43f8b5f900270d51e64b1",
+        "sourceRefs": [
+          "assets/art/source/slice12/settlement.town.iron_covenant-v1.png",
+          "assets/art/source/slice12/settlement.town.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:59:23.667Z",
+        "notes": "Inspected native1x/4x: higher central guildhall and paired furnace wings behind low wall establish a denser town silhouette than the open village. Roof blue-black planes, warm forge interiors and stone wall values remain distinct; chimneys and flag intact. Full96px footprint padded; runtime placement review pending.\nReviewed candidate 1fd522c4669a1960b51a3bd5e55981dd3560057e303a3f4ad6e83d60d8f62a04; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/7bd0123ea831504cc46ffc7ef63f2834013e2de2bbc5187ade6b482fe5bd131b.png"
+        ],
+        "inputHash": "e3b9378af969394073b1bb4870c17d1bbaf34b071bdf0988683b66754a930c6d"
+      }
+    },
+    {
       "id": "settlement.town.reedbound_council",
       "type": "settlement",
       "status": "ATLASED",
@@ -2657,8 +3665,8 @@
         {
           "id": "settlement.town.reedbound_council/idle/se/0",
           "frame": {
-            "x": 546,
-            "y": 278,
+            "x": 514,
+            "y": 208,
             "w": 96,
             "h": 96
           },
@@ -2711,6 +3719,78 @@
       }
     },
     {
+      "id": "settlement.town.sepulchral_synod",
+      "type": "settlement",
+      "status": "ATLASED",
+      "contentIds": [
+        "settlement.town.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "settlement.town.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 616,
+            "y": 208,
+            "w": 96,
+            "h": 96
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "settlement.town.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "settlement.town.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/settlement.town.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "713cd4fd8428af8204423378c001efd83a4d535a46d7c6e20541fd7155a2cc5f",
+        "sourceRefs": [
+          "assets/art/source/slice12/settlement.town.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/settlement.town.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:59:25.457Z",
+        "notes": "Inspected native1x/4x: compact ascending chalk tiers and high open ring create a taller town hierarchy than the village; indigo recesses, low bronze roofs and broad steps remain legible. Native96px footprint and top ring have transparent padding. Whole structure retained, not a resized city sprite; runtime placement review pending.\nReviewed candidate 9c38a7f3983a17c0038d5874fbfbfed942193b2fa13f39c378db668d504140d8; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/7da6054c8b57ea73fc49fdffa8de6e1d74537a0014f99858c203d2610152ec83.png"
+        ],
+        "inputHash": "1367b31f795f145ab227526f1a36285c574fe95a6c188103af4dae90ffc158b5"
+      }
+    },
+    {
       "id": "settlement.village",
       "type": "settlement",
       "status": "ATLASED",
@@ -2730,8 +3810,8 @@
         {
           "id": "settlement.village/idle/se/0",
           "frame": {
-            "x": 648,
-            "y": 278,
+            "x": 718,
+            "y": 208,
             "w": 96,
             "h": 96
           },
@@ -2802,8 +3882,8 @@
         {
           "id": "settlement.village.ashen_compact/idle/se/0",
           "frame": {
-            "x": 750,
-            "y": 278,
+            "x": 820,
+            "y": 208,
             "w": 96,
             "h": 96
           },
@@ -2875,8 +3955,8 @@
         {
           "id": "settlement.village.cinder_march/idle/se/0",
           "frame": {
-            "x": 852,
-            "y": 278,
+            "x": 922,
+            "y": 208,
             "w": 96,
             "h": 96
           },
@@ -2948,8 +4028,8 @@
         {
           "id": "settlement.village.glass_tide/idle/se/0",
           "frame": {
-            "x": 4,
-            "y": 412,
+            "x": 1024,
+            "y": 208,
             "w": 96,
             "h": 96
           },
@@ -3002,6 +4082,78 @@
       }
     },
     {
+      "id": "settlement.village.iron_covenant",
+      "type": "settlement",
+      "status": "ATLASED",
+      "contentIds": [
+        "settlement.village.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "settlement.village.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 1126,
+            "y": 208,
+            "w": 96,
+            "h": 96
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "settlement.village.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "settlement.village.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/settlement.village.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "c3928c5416f944ff410ad08c50f9d177b4ff967ed0bd8628a8cba3e5409d7d06",
+        "sourceRefs": [
+          "assets/art/source/slice12/settlement.village.iron_covenant-v1.png",
+          "assets/art/source/slice12/settlement.village.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:59:23.067Z",
+        "notes": "Inspected native1x/4x: three low blue-black workshop roofs surround a small orange kiln; separate building blocks retain an open village footprint. Full chimneys and ground corners fit96px canvas and common ground anchor. No rectangular background survives alpha. Low profile clearly precedes town/city; runtime placement review pending.\nReviewed candidate 10a8a653c8ebfc69860aa95a4a138140230075e59780025ef438bd3918712e96; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/2dbe435aa235f4f3b421b989831dadcc07ea7230bd5a6b14234d165bd2a1b713.png"
+        ],
+        "inputHash": "66b02d19d25eddf930581a9fec69b6499f9a7f1811c481badaf4b5f59484f570"
+      }
+    },
+    {
       "id": "settlement.village.reedbound_council",
       "type": "settlement",
       "status": "ATLASED",
@@ -3021,8 +4173,8 @@
         {
           "id": "settlement.village.reedbound_council/idle/se/0",
           "frame": {
-            "x": 106,
-            "y": 412,
+            "x": 1228,
+            "y": 208,
             "w": 96,
             "h": 96
           },
@@ -3075,6 +4227,78 @@
       }
     },
     {
+      "id": "settlement.village.sepulchral_synod",
+      "type": "settlement",
+      "status": "ATLASED",
+      "contentIds": [
+        "settlement.village.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "settlement.village.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 1330,
+            "y": 208,
+            "w": 96,
+            "h": 96
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "settlement.village.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "settlement.village.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/settlement.village.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "d1077a0c16cdd7c2522657a1b25d675571bd242c018979e8e663a4a13777cf28",
+        "sourceRefs": [
+          "assets/art/source/slice12/settlement.village.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/settlement.village.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:59:24.870Z",
+        "notes": "Inspected native1x/4x: three low chalk houses and small stepped court form an open founding-village silhouette; dark indigo awnings and doors separate pale material planes. Full roof parapets and entry stairs survive96px fitting, no clipped corners or background. Lighter terraced architecture differs structurally from Iron workshops; runtime review pending.\nReviewed candidate 5ff2cb69297df15eb7a4217623a1b4e55469a9e53ba328135dd503e3d60173f7; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/a4dbe7c870f87a01a98207b4065babe7a6bc653816c3cedfbd8949050f5bfe40.png"
+        ],
+        "inputHash": "9853eae38fcab89b1420a31031c5fc65eca1fea6c09cd67ff4265f702a2ce427"
+      }
+    },
+    {
       "id": "terrain.alpine",
       "type": "terrain",
       "status": "ATLASED",
@@ -3094,8 +4318,8 @@
         {
           "id": "terrain.alpine/idle/se/0",
           "frame": {
-            "x": 208,
-            "y": 412,
+            "x": 1432,
+            "y": 208,
             "w": 64,
             "h": 64
           },
@@ -3147,6 +4371,150 @@
       }
     },
     {
+      "id": "terrain.ash_scrub",
+      "type": "terrain",
+      "status": "ATLASED",
+      "contentIds": [
+        "terrain.ash_scrub"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        32
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "terrain.ash_scrub/idle/se/0",
+          "frame": {
+            "x": 1502,
+            "y": 208,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "terrain.ash_scrub/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "terrain.ash_scrub/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/terrain.ash_scrub.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "f317700d1c54a09615bcb5df62492b6d060e77e9c865b5bf3df501f097bcf304",
+        "sourceRefs": [
+          "assets/art/source/slice12/terrain.ash_scrub-v1.png",
+          "assets/art/source/slice12/terrain.ash_scrub-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:46.573Z",
+        "notes": "Inspected native1x/4x and five-by-five pointy-hex repeat at1x/4x: flat ash-brown ground, dark cinder clusters and low sage scrub remain distinct from yellow desert and green grassland. Exact hex mask has no internal alpha gaps; no raised border or baked cliff. Single-variant repetition remains visible and transition artwork is not claimed; neighboring-biome/game-camera review pending.\nReviewed candidate ba91d6571a913e7276646d96926ff334136ffaa0efaaa5d737f0041682c45076; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/e7873c4dcb17f177ff7dec6d89a491ffb703288ae93d5c9b4b12664d95b0220b.png"
+        ],
+        "inputHash": "4d2c89f19e87b9c3ed8ba8d3e22a4e51cc0dd06698d07289abd4e3c15834c77b"
+      }
+    },
+    {
+      "id": "terrain.chalkland",
+      "type": "terrain",
+      "status": "ATLASED",
+      "contentIds": [
+        "terrain.chalkland"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        32
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "terrain.chalkland/idle/se/0",
+          "frame": {
+            "x": 1572,
+            "y": 208,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "terrain.chalkland/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "terrain.chalkland/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/terrain.chalkland.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "580d70d1451519269c1be0d9e51b38493c06baabe55ce6348fa1f39956dc81eb",
+        "sourceRefs": [
+          "assets/art/source/slice12/terrain.chalkland-v1.png",
+          "assets/art/source/slice12/terrain.chalkland-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:47.181Z",
+        "notes": "Inspected native1x/4x and five-by-five pointy-hex repeat at1x/4x: pale cream limestone patches and sparse olive regrowth read as dry chalk ground, not snow. Hexes meet without transparent seams or raised sides. Pattern repetition is visible in this single stamp; transition/random-variant families and neighboring-biome/game-camera review remain separate.\nReviewed candidate cfae00e59acc3597b30fd02536c75a16bc87faabf53f728fce0d98228d4260e7; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/f4ad842cd06cbe494f5444186c60a98d8490b27f8d516ac4c2e8655029e32249.png"
+        ],
+        "inputHash": "972f391d4a66bf4f11ec4812d93126bd30bbff08c08dcbcf246528c466f3369f"
+      }
+    },
+    {
       "id": "terrain.coast",
       "type": "terrain",
       "status": "ATLASED",
@@ -3166,8 +4534,8 @@
         {
           "id": "terrain.coast/idle/se/0",
           "frame": {
-            "x": 278,
-            "y": 412,
+            "x": 1642,
+            "y": 208,
             "w": 64,
             "h": 64
           },
@@ -3238,8 +4606,8 @@
         {
           "id": "terrain.desert/idle/se/0",
           "frame": {
-            "x": 348,
-            "y": 412,
+            "x": 1712,
+            "y": 208,
             "w": 64,
             "h": 64
           },
@@ -3310,8 +4678,8 @@
         {
           "id": "terrain.grassland/idle/se/0",
           "frame": {
-            "x": 418,
-            "y": 412,
+            "x": 1782,
+            "y": 208,
             "w": 64,
             "h": 64
           },
@@ -3382,8 +4750,8 @@
         {
           "id": "terrain.hills/idle/se/0",
           "frame": {
-            "x": 488,
-            "y": 412,
+            "x": 1852,
+            "y": 208,
             "w": 64,
             "h": 64
           },
@@ -3454,8 +4822,8 @@
         {
           "id": "terrain.marsh/idle/se/0",
           "frame": {
-            "x": 558,
-            "y": 412,
+            "x": 1922,
+            "y": 208,
             "w": 64,
             "h": 64
           },
@@ -3526,8 +4894,8 @@
         {
           "id": "terrain.ocean/idle/se/0",
           "frame": {
-            "x": 628,
-            "y": 412,
+            "x": 4,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -3598,8 +4966,8 @@
         {
           "id": "terrain.rainforest/idle/se/0",
           "frame": {
-            "x": 698,
-            "y": 412,
+            "x": 74,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -3670,8 +5038,8 @@
         {
           "id": "terrain.river/idle/se/0",
           "frame": {
-            "x": 768,
-            "y": 412,
+            "x": 144,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -3742,8 +5110,8 @@
         {
           "id": "terrain.road/idle/se/0",
           "frame": {
-            "x": 838,
-            "y": 412,
+            "x": 214,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -3814,8 +5182,8 @@
         {
           "id": "terrain.steppe/idle/se/0",
           "frame": {
-            "x": 908,
-            "y": 412,
+            "x": 284,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -3886,8 +5254,8 @@
         {
           "id": "terrain.taiga/idle/se/0",
           "frame": {
-            "x": 4,
-            "y": 514,
+            "x": 354,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -3958,8 +5326,8 @@
         {
           "id": "terrain.temperate_forest/idle/se/0",
           "frame": {
-            "x": 74,
-            "y": 514,
+            "x": 424,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -4030,8 +5398,8 @@
         {
           "id": "terrain.transitions/idle/se/0",
           "frame": {
-            "x": 144,
-            "y": 514,
+            "x": 494,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -4102,8 +5470,8 @@
         {
           "id": "terrain.tundra/idle/se/0",
           "frame": {
-            "x": 214,
-            "y": 514,
+            "x": 564,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -4174,8 +5542,8 @@
         {
           "id": "ui.badge.ashen_compact/idle/se/0",
           "frame": {
-            "x": 284,
-            "y": 514,
+            "x": 634,
+            "y": 310,
             "w": 32,
             "h": 32
           },
@@ -4247,8 +5615,8 @@
         {
           "id": "ui.badge.cinder_march/idle/se/0",
           "frame": {
-            "x": 322,
-            "y": 514,
+            "x": 672,
+            "y": 310,
             "w": 32,
             "h": 32
           },
@@ -4320,8 +5688,8 @@
         {
           "id": "ui.badge.glass_tide/idle/se/0",
           "frame": {
-            "x": 360,
-            "y": 514,
+            "x": 710,
+            "y": 310,
             "w": 32,
             "h": 32
           },
@@ -4374,6 +5742,78 @@
       }
     },
     {
+      "id": "ui.badge.iron_covenant",
+      "type": "ui",
+      "status": "ATLASED",
+      "contentIds": [
+        "ui.badge.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 32,
+        "height": 32
+      },
+      "pivot": [
+        16,
+        16
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "ui.badge.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 748,
+            "y": 310,
+            "w": 32,
+            "h": 32
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "ui.badge.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "ui.badge.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/ui.badge.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "d6e75661c9ed182ad769973fe009289b448860af8b58ac0eceaf190a9d87e0fa",
+        "sourceRefs": [
+          "assets/art/source/slice12/ui.badge.iron_covenant-v1.png",
+          "assets/art/source/slice12/ui.badge.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:44.098Z",
+        "notes": "Inspected native1x/4x: native32px rounded iron plate retains a chunky gold split-anvil with separated center, legible compact silhouette and restrained rim. No letters, full padding and hard alpha. Its independent source is not a downscaled copy of the crest. Strategic badge source; far-view review pending.\nReviewed candidate 387ac53c1208cbb4e0673d953c0b7891143c6a95a1bafbcae2f758fd0f85abe6; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/2c571c0d4c166ac3b3986a4462ab6be52ec88c2b412c8dd62d7c7eb1b6f86c8e.png"
+        ],
+        "inputHash": "67c60141c2c5c09e255b86773378ad1b109aa89e40ab77014c71681c4ac32512"
+      }
+    },
+    {
       "id": "ui.badge.reedbound_council",
       "type": "ui",
       "status": "ATLASED",
@@ -4393,8 +5833,8 @@
         {
           "id": "ui.badge.reedbound_council/idle/se/0",
           "frame": {
-            "x": 398,
-            "y": 514,
+            "x": 786,
+            "y": 310,
             "w": 32,
             "h": 32
           },
@@ -4447,6 +5887,78 @@
       }
     },
     {
+      "id": "ui.badge.sepulchral_synod",
+      "type": "ui",
+      "status": "ATLASED",
+      "contentIds": [
+        "ui.badge.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 32,
+        "height": 32
+      },
+      "pivot": [
+        16,
+        16
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "ui.badge.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 824,
+            "y": 310,
+            "w": 32,
+            "h": 32
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "ui.badge.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "ui.badge.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/ui.badge.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "6f0eb3ee54f7aea1719cc891b89cbcbd933578c9e975912869ea70abf5d6b5b9",
+        "sourceRefs": [
+          "assets/art/source/slice12/ui.badge.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/ui.badge.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:45.955Z",
+        "notes": "Inspected native1x/4x: native32px indigo round plate contains a simple pale hollow ring and terrace steps, with legible bronze outline. No clipped circle or tiny unreadable lettering; independent composition differs from shield crest. Strategic badge source; far-view review pending.\nReviewed candidate 21a1b54161c7e6a6b20e49e43b358bac43afa1bd66f1982773ab31003009c04a; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/eeed70c65dacd58f42afcf424aa0fb94ec92f39a584f67f279b5f922538b84aa.png"
+        ],
+        "inputHash": "e79f8455ad2d7499ec6b9bc47e438c1206b0b467da3c2e7dcce88adc771ab3b7"
+      }
+    },
+    {
       "id": "ui.banner.ashen_compact",
       "type": "ui",
       "status": "ATLASED",
@@ -4466,8 +5978,8 @@
         {
           "id": "ui.banner.ashen_compact/idle/se/0",
           "frame": {
-            "x": 436,
-            "y": 514,
+            "x": 862,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -4539,8 +6051,8 @@
         {
           "id": "ui.banner.cinder_march/idle/se/0",
           "frame": {
-            "x": 506,
-            "y": 514,
+            "x": 932,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -4612,8 +6124,8 @@
         {
           "id": "ui.banner.glass_tide/idle/se/0",
           "frame": {
-            "x": 576,
-            "y": 514,
+            "x": 1002,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -4666,6 +6178,78 @@
       }
     },
     {
+      "id": "ui.banner.iron_covenant",
+      "type": "ui",
+      "status": "ATLASED",
+      "contentIds": [
+        "ui.banner.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "ui.banner.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 1072,
+            "y": 310,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "ui.banner.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "ui.banner.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/ui.banner.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "bdbc555688b97cf14f217204f4ec158ebbc49804b29bb9c10a77bb56df550157",
+        "sourceRefs": [
+          "assets/art/source/slice12/ui.banner.iron_covenant-v1.png",
+          "assets/art/source/slice12/ui.banner.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:43.517Z",
+        "notes": "Inspected native1x/4x: rightward swallowtail cloth, short pole and brass finial form continuous native64px banner; gold split-anvil remains recognizable. Pole foot is wholly retained at ground anchor32,56. Ragged cloth holes are deliberate hard alpha, not absent animation frames. Static UI/map source; placement review pending.\nReviewed candidate 968998dcdb29bd7089cb39531884910d5fed379d3cdf4d50f8582537863769c8; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/1f4ecbb8113ee2abe7d2156cb5b4ce4894e0349d8347227e0df3f6d4340c1ecb.png"
+        ],
+        "inputHash": "0dfebd7c0187d6253e0746e2e686ec94051edd5b6bb83cc856d470686ef2c13a"
+      }
+    },
+    {
       "id": "ui.banner.reedbound_council",
       "type": "ui",
       "status": "ATLASED",
@@ -4685,8 +6269,8 @@
         {
           "id": "ui.banner.reedbound_council/idle/se/0",
           "frame": {
-            "x": 646,
-            "y": 514,
+            "x": 1142,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -4739,6 +6323,78 @@
       }
     },
     {
+      "id": "ui.banner.sepulchral_synod",
+      "type": "ui",
+      "status": "ATLASED",
+      "contentIds": [
+        "ui.banner.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "ui.banner.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 1212,
+            "y": 310,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "ui.banner.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "ui.banner.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/ui.banner.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "45d551d1e01713cc98c3c012d1f187171ccaf26f576d95047966b9859d6d9ea1",
+        "sourceRefs": [
+          "assets/art/source/slice12/ui.banner.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/ui.banner.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:45.341Z",
+        "notes": "Inspected native1x/4x: indigo rightward cloth displays pale ring-over-steps; narrow pole and open finial are complete through the ground anchor. Pale edge and cloth silhouette contrast with Iron banner without hue-only replacement. One static pose, hard alpha; placement review pending.\nReviewed candidate 3a0880802fc2156aabff4c0d1939a90083fd8b60087600699ec8a77d6892ce26; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/fa9b4c30c175ebd46fc3b50c0416742dd51a71589130654ea159f1e555152392.png"
+        ],
+        "inputHash": "2dc46332a4f5ea835d502ecec797b0ef04406eb6f5aa43b574a9daede3ca11d1"
+      }
+    },
+    {
       "id": "ui.crest.ashen_compact",
       "type": "ui",
       "status": "ATLASED",
@@ -4758,8 +6414,8 @@
         {
           "id": "ui.crest.ashen_compact/idle/se/0",
           "frame": {
-            "x": 716,
-            "y": 514,
+            "x": 1282,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -4831,8 +6487,8 @@
         {
           "id": "ui.crest.cinder_march/idle/se/0",
           "frame": {
-            "x": 786,
-            "y": 514,
+            "x": 1352,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -4904,8 +6560,8 @@
         {
           "id": "ui.crest.glass_tide/idle/se/0",
           "frame": {
-            "x": 856,
-            "y": 514,
+            "x": 1422,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -4958,6 +6614,78 @@
       }
     },
     {
+      "id": "ui.crest.iron_covenant",
+      "type": "ui",
+      "status": "ATLASED",
+      "contentIds": [
+        "ui.crest.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        32
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "ui.crest.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 1492,
+            "y": 310,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "ui.crest.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "ui.crest.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/ui.crest.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "a8fdb0b64016fe3c5491c97bcc83a7f620cc120e700d66f82acfc33cef80112b",
+        "sourceRefs": [
+          "assets/art/source/slice12/ui.crest.iron_covenant-v1.png",
+          "assets/art/source/slice12/ui.crest.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:42.911Z",
+        "notes": "Inspected native1x/4x: angular iron shield and brass rim enclose one broad split-anvil mark; emblem remains legible without letters. Full64px centered shield tip and shoulders fit padding. Distinct material planes, not a tinted existing crest. Static UI source approved; actual UI review pending.\nReviewed candidate 0ac6b13caaab1465a0caefea071a1d4445d76cdff7085613c0fcc007b4336ec9; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/0a821d647d645c0130fa42bc874518242f12bbcb499be02f38d6c9618269f680.png"
+        ],
+        "inputHash": "95377d955b90fcd42c624a4e6a6056ded781a98c8d20edbaca655f57d2be8c73"
+      }
+    },
+    {
       "id": "ui.crest.reedbound_council",
       "type": "ui",
       "status": "ATLASED",
@@ -4977,8 +6705,8 @@
         {
           "id": "ui.crest.reedbound_council/idle/se/0",
           "frame": {
-            "x": 926,
-            "y": 514,
+            "x": 1562,
+            "y": 310,
             "w": 64,
             "h": 64
           },
@@ -5031,6 +6759,78 @@
       }
     },
     {
+      "id": "ui.crest.sepulchral_synod",
+      "type": "ui",
+      "status": "ATLASED",
+      "contentIds": [
+        "ui.crest.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        32
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "ui.crest.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 1632,
+            "y": 310,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "ui.crest.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "ui.crest.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/ui.crest.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "2d41456da897aa5a3636731a64c575d34db752129e99db56e8b0f75a9191cd36",
+        "sourceRefs": [
+          "assets/art/source/slice12/ui.crest.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/ui.crest.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:32:44.720Z",
+        "notes": "Inspected native1x/4x: pale stepped shield, indigo hollow ring and three broad terrace bars read as one original heraldic mark. Bronze rim and complete bottom point remain inside64px center contract. Structurally distinct from Iron shield; no skull or lettering. Static UI source; placement review pending.\nReviewed candidate a82845a53d6b090b1ad9d8d09d142ce3aa58a4cd5c5dc6aac2f7b1f897177efc; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/a48e42d99aa967e79b4f61fb99df323458ad90c6c8b32a1ed057b7c1f24673da.png"
+        ],
+        "inputHash": "ed0b8d1f5d212c0360cf6bee58e2627b7a0e8b6385758325b7b8d9a9f07e1569"
+      }
+    },
+    {
       "id": "unit.cavalry",
       "type": "unit",
       "status": "ATLASED",
@@ -5050,8 +6850,8 @@
         {
           "id": "unit.cavalry/idle/se/0",
           "frame": {
-            "x": 4,
-            "y": 584,
+            "x": 1702,
+            "y": 310,
             "w": 96,
             "h": 96
           },
@@ -5122,8 +6922,8 @@
         {
           "id": "unit.cavalry.ashen_compact/idle/se/0",
           "frame": {
-            "x": 106,
-            "y": 584,
+            "x": 1804,
+            "y": 310,
             "w": 96,
             "h": 96
           },
@@ -5195,8 +6995,8 @@
         {
           "id": "unit.cavalry.cinder_march/idle/se/0",
           "frame": {
-            "x": 208,
-            "y": 584,
+            "x": 1906,
+            "y": 310,
             "w": 96,
             "h": 96
           },
@@ -5268,8 +7068,8 @@
         {
           "id": "unit.cavalry.glass_tide/idle/se/0",
           "frame": {
-            "x": 310,
-            "y": 584,
+            "x": 4,
+            "y": 412,
             "w": 96,
             "h": 96
           },
@@ -5322,6 +7122,78 @@
       }
     },
     {
+      "id": "unit.cavalry.iron_covenant",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.cavalry.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.cavalry.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 106,
+            "y": 412,
+            "w": 96,
+            "h": 96
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.cavalry.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.cavalry.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.cavalry.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "a2f5a92a9d7d2ccc580d08480c67abdfa21b2850f43cf950df99426704e13019",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.cavalry.iron_covenant-v1.png",
+          "assets/art/source/slice12/unit.cavalry.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:49:25.617Z",
+        "notes": "Inspected 1x/4x: chestnut horse, rider, pennant and low diagonal lance are continuous with distinct silhouette gaps between all four hooves. Horse white stockings provide native-scale leg readability; full spear tip and pennant fit96px ground contract. Single static pose, not an asserted gait animation; runtime review pending.\nReviewed candidate fbafce658fe17b9716d68fd5912ea6f45cef27218adf334f313b0d0b30155b2e; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/47ba6b4cbd49225da861307a833648aa5ca470c3f8478b0c3dc2d4074b63e1d2.png"
+        ],
+        "inputHash": "14e1c977579f72519807bad9902f6133796da21bf35fd57d17de85a1b98be9e6"
+      }
+    },
+    {
       "id": "unit.cavalry.reedbound_council",
       "type": "unit",
       "status": "ATLASED",
@@ -5341,8 +7213,8 @@
         {
           "id": "unit.cavalry.reedbound_council/idle/se/0",
           "frame": {
-            "x": 412,
-            "y": 584,
+            "x": 208,
+            "y": 412,
             "w": 96,
             "h": 96
           },
@@ -5395,6 +7267,78 @@
       }
     },
     {
+      "id": "unit.cavalry.sepulchral_synod",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.cavalry.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.cavalry.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 310,
+            "y": 412,
+            "w": 96,
+            "h": 96
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.cavalry.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.cavalry.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.cavalry.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "a3d03e05140216de14c107483a2311773b7b60876f296c9b5ac23c79a74de1ef",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.cavalry.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/unit.cavalry.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:01:32.804Z",
+        "notes": "Inspected native1x/4x: grey horse with pale saddlecloth, indigo-veiled rider and low lance all remain complete at96px. Four legs and contrasting hooves separate against transparency; ring headpiece and weapon tip fit padded ground contract. Narrow upright cavalry silhouette differs from broad chestnut Iron mount. Single static pose, not animation; runtime review pending.\nReviewed candidate 282b65468b466ba2ec1b99f836a3a259f82f70b98cada20352819174981e25b8; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/4c268fddac0a3097ea93b7491def20dc27d491efb3a7cb75da42407bc80ebab5.png"
+        ],
+        "inputHash": "9083b7a033e067eec28a2c8df8cef7de20e1ff4f185db95a933660e131f6ad3d"
+      }
+    },
+    {
       "id": "unit.colonist",
       "type": "unit",
       "status": "ATLASED",
@@ -5414,8 +7358,8 @@
         {
           "id": "unit.colonist/idle/se/0",
           "frame": {
-            "x": 514,
-            "y": 584,
+            "x": 412,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5427,8 +7371,8 @@
         {
           "id": "unit.colonist/idle/se/1",
           "frame": {
-            "x": 584,
-            "y": 584,
+            "x": 482,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5440,8 +7384,8 @@
         {
           "id": "unit.colonist/idle/se/2",
           "frame": {
-            "x": 654,
-            "y": 584,
+            "x": 552,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5453,8 +7397,8 @@
         {
           "id": "unit.colonist/idle/se/3",
           "frame": {
-            "x": 724,
-            "y": 584,
+            "x": 622,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5531,8 +7475,8 @@
         {
           "id": "unit.colonist.ashen_compact/idle/se/0",
           "frame": {
-            "x": 794,
-            "y": 584,
+            "x": 692,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5604,8 +7548,8 @@
         {
           "id": "unit.colonist.cinder_march/idle/se/0",
           "frame": {
-            "x": 864,
-            "y": 584,
+            "x": 762,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5677,8 +7621,8 @@
         {
           "id": "unit.colonist.glass_tide/idle/se/0",
           "frame": {
-            "x": 934,
-            "y": 584,
+            "x": 832,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5731,6 +7675,78 @@
       }
     },
     {
+      "id": "unit.colonist.iron_covenant",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.colonist.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.colonist.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 902,
+            "y": 412,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.colonist.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.colonist.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.colonist.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "aeacc2d2706f0f3b787388584a56d251bf1aa78f71a4fdc2d91c148b70bf29d0",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.colonist.iron_covenant-v1.png",
+          "assets/art/source/slice12/unit.colonist.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:46:29.439Z",
+        "notes": "Inspected native 1x and 4x: readable covered civilian cart, two dark wheels and a right-facing puller joined by handles; entire load fits with padding. Pale canopy provides a legible value group over iron bands. Smaller worker is deliberate scale within the compact cart asset. Static idle only; in-game review pending.\nReviewed candidate 6f210e1810e136724b0371ef599d06afdec2e483fffc781989493d497dfff834; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/618ac53a1ce61bd4efeac49ae909dcbc842b0456a727bee199bb98b02dd4a0c1.png"
+        ],
+        "inputHash": "c623903e007b2d7c00a5c71ae503cd07498955eec9d8cb95a476f44ff0e35923"
+      }
+    },
+    {
       "id": "unit.colonist.reedbound_council",
       "type": "unit",
       "status": "ATLASED",
@@ -5750,8 +7766,8 @@
         {
           "id": "unit.colonist.reedbound_council/idle/se/0",
           "frame": {
-            "x": 4,
-            "y": 686,
+            "x": 972,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5804,6 +7820,78 @@
       }
     },
     {
+      "id": "unit.colonist.sepulchral_synod",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.colonist.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.colonist.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 1042,
+            "y": 412,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.colonist.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.colonist.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.colonist.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "e5664bfea0f5b0eb726b7b2d6726f9a554575f7d7fbba07c130a6d53f614c4d6",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.colonist.sepulchral_synod-v2.png",
+          "assets/art/source/slice12/unit.colonist.sepulchral_synod-v2.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:01:31.630Z",
+        "notes": "Replacementv2 inspected native1x/4x: veiled caretaker now pulls from the RIGHT, matching southeast static kit; entire cart, two wheels and handles remain continuous and unclipped. Pale stacked cases and indigo canopy separate from worker. First left-facing source/rejection retained, not mirrored. Static only; runtime review pending.\nReviewed candidate 39a1f03b095dd8e33bc3b9f9d691ef888c87bfc97dd5782303602c908d9bbd97; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/9f422401125e1275272154c38c4fdca735671314e58d2d7b44e47d1d9b7d0526.png"
+        ],
+        "inputHash": "e2bd4f034da8e2758f4a3809e716827e3dfb140fba07147690caf12af7ab4f0d"
+      }
+    },
+    {
       "id": "unit.commander",
       "type": "unit",
       "status": "ATLASED",
@@ -5823,8 +7911,8 @@
         {
           "id": "unit.commander/idle/se/0",
           "frame": {
-            "x": 74,
-            "y": 686,
+            "x": 1112,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5895,8 +7983,8 @@
         {
           "id": "unit.guard/idle/se/0",
           "frame": {
-            "x": 144,
-            "y": 686,
+            "x": 1182,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5908,8 +7996,8 @@
         {
           "id": "unit.guard/idle/se/1",
           "frame": {
-            "x": 214,
-            "y": 686,
+            "x": 1252,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5921,8 +8009,8 @@
         {
           "id": "unit.guard/idle/se/2",
           "frame": {
-            "x": 284,
-            "y": 686,
+            "x": 1322,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -5934,8 +8022,8 @@
         {
           "id": "unit.guard/idle/se/3",
           "frame": {
-            "x": 354,
-            "y": 686,
+            "x": 1392,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -6012,8 +8100,8 @@
         {
           "id": "unit.guard.ashen_compact/idle/se/0",
           "frame": {
-            "x": 424,
-            "y": 686,
+            "x": 1462,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -6085,8 +8173,8 @@
         {
           "id": "unit.guard.cinder_march/idle/se/0",
           "frame": {
-            "x": 494,
-            "y": 686,
+            "x": 1532,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -6158,8 +8246,8 @@
         {
           "id": "unit.guard.glass_tide/idle/se/0",
           "frame": {
-            "x": 564,
-            "y": 686,
+            "x": 1602,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -6212,6 +8300,78 @@
       }
     },
     {
+      "id": "unit.guard.iron_covenant",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.guard.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.guard.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 1672,
+            "y": 412,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.guard.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.guard.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.guard.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "eee3c30c403e7a417c00022abc296ce9419b56ec20c4a55ec07cb5515f2007dc",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.guard.iron_covenant-v1.png",
+          "assets/art/source/slice12/unit.guard.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:46:28.891Z",
+        "notes": "Inspected native 1x and 4x: broad shield and short sword remain separate; planted boots and low faceted helmet fit the 64px ground anchor. Dark iron/brass palette and broad adult deep-folk silhouette distinguish this role from the Synod guard. No clipped weapon, residual background or partial alpha. Static idle only; in-game review pending.\nReviewed candidate 134e0f7e0452282e50e75612371f86de30a9e61f2e243bef7c49578b79a91224; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/6f1945a607d9c8843ce40653bc7ec15d7073f486fa865ef3a977c3aacb6320c6.png"
+        ],
+        "inputHash": "c602bfc2cce20f352016e63a4d8dc96708e8314a9ed278a56251619b45f438e3"
+      }
+    },
+    {
       "id": "unit.guard.reedbound_council",
       "type": "unit",
       "status": "ATLASED",
@@ -6231,8 +8391,8 @@
         {
           "id": "unit.guard.reedbound_council/idle/se/0",
           "frame": {
-            "x": 634,
-            "y": 686,
+            "x": 1742,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -6285,6 +8445,78 @@
       }
     },
     {
+      "id": "unit.guard.sepulchral_synod",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.guard.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.guard.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 1812,
+            "y": 412,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.guard.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.guard.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.guard.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "4fac908edcf3220537500e1dd3da9a2f3f64ef974f806d1433fbcd9a5795ada5",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.guard.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/unit.guard.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:46:30.554Z",
+        "notes": "Inspected native 1x and 4x: upright pale lamellar silhouette, indigo veil, narrow shield and diagonal sword read separately; two boots and blade remain inside padding. Chalk highlights establish a visibly different culture from dark Iron armor without hue-only swapping. No gore, partial alpha or baked ground. Static idle only; in-game review pending.\nReviewed candidate e24173ca8af11626b203102891368f19da29665cde3c06be25fd9531054ef126; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/96ab5488c9cf60659674408f997b5b14c2d99e2c6086dfbaaeb3121e3fd29afd.png"
+        ],
+        "inputHash": "ccb20e89f530f2df9fffacc2ce5ba451b2f3d7dd74c2315bda90acb5deee5028"
+      }
+    },
+    {
       "id": "unit.heavy_infantry",
       "type": "unit",
       "status": "ATLASED",
@@ -6304,8 +8536,8 @@
         {
           "id": "unit.heavy_infantry/idle/se/0",
           "frame": {
-            "x": 704,
-            "y": 686,
+            "x": 1882,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -6376,8 +8608,8 @@
         {
           "id": "unit.heavy_infantry.ashen_compact/idle/se/0",
           "frame": {
-            "x": 774,
-            "y": 686,
+            "x": 1952,
+            "y": 412,
             "w": 64,
             "h": 64
           },
@@ -6449,8 +8681,8 @@
         {
           "id": "unit.heavy_infantry.cinder_march/idle/se/0",
           "frame": {
-            "x": 844,
-            "y": 686,
+            "x": 4,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -6522,8 +8754,8 @@
         {
           "id": "unit.heavy_infantry.glass_tide/idle/se/0",
           "frame": {
-            "x": 914,
-            "y": 686,
+            "x": 74,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -6576,6 +8808,78 @@
       }
     },
     {
+      "id": "unit.heavy_infantry.iron_covenant",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.heavy_infantry.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.heavy_infantry.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 144,
+            "y": 514,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.heavy_infantry.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.heavy_infantry.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.heavy_infantry.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "f1dcb534487b0fe60a4526d2ac683d5f648a0217305d1e566e0150656227198c",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.heavy_infantry.iron_covenant-v1.png",
+          "assets/art/source/slice12/unit.heavy_infantry.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:49:24.533Z",
+        "notes": "Inspected 1x/4x: visibly broad rectangular armor and full pavise distinguish heavy infantry from lighter Iron guard; cleaver remains separate from shield and boots. Blue-black metal forms are bounded by brass edge clusters rather than tinting an existing sprite. No clipped pieces or partial alpha. Static only; runtime review pending.\nReviewed candidate c18d5d1beca4e08c5cb877955619c74580e850d98276e5194cc4349abaeaf9fb; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/4b8868bedcf854d464611e7b1991132a3e0a27713fa7db30aa87b3fa8c40850a.png"
+        ],
+        "inputHash": "4b5b067a2fbcb0bc98f49914344c22b82bfc536c7c03003600c4ca5670946fc0"
+      }
+    },
+    {
       "id": "unit.heavy_infantry.reedbound_council",
       "type": "unit",
       "status": "ATLASED",
@@ -6595,8 +8899,8 @@
         {
           "id": "unit.heavy_infantry.reedbound_council/idle/se/0",
           "frame": {
-            "x": 4,
-            "y": 756,
+            "x": 214,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -6649,6 +8953,78 @@
       }
     },
     {
+      "id": "unit.heavy_infantry.sepulchral_synod",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.heavy_infantry.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.heavy_infantry.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 284,
+            "y": 514,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.heavy_infantry.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.heavy_infantry.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.heavy_infantry.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "c25d9b8b997022d6540a1899ba47f7d2eec3d46a7f1e6eab73a0f337220566f6",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.heavy_infantry.sepulchral_synod-v2.png",
+          "assets/art/source/slice12/unit.heavy_infantry.sepulchral_synod-v2.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T05:01:32.207Z",
+        "notes": "Replacementv2 inspected native1x/4x: full low helmet is enclosed with transparent margin, unlike clipped first source. Broad pale armor, indigo sash, large stepped shield and low bronze mace create a distinct heavy silhouette. Closed armor suggests housed ancestor without gore or glow. Static only; runtime review pending.\nReviewed candidate c9490f3049cabdef6a2abb587d0600d0503873407bb33d07b71601c690c84963; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/a8ee820242e86f41acede387edbeea1dfb1802615095a83d5be1cc971f9cbf8c.png"
+        ],
+        "inputHash": "589e366a5aa708213cdaaf19ed0563a3f76cc9991edf7f1faec2f184bd09beb4"
+      }
+    },
+    {
       "id": "unit.mage",
       "type": "unit",
       "status": "ATLASED",
@@ -6668,8 +9044,8 @@
         {
           "id": "unit.mage/idle/se/0",
           "frame": {
-            "x": 74,
-            "y": 756,
+            "x": 354,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -6740,8 +9116,8 @@
         {
           "id": "unit.scout/idle/se/0",
           "frame": {
-            "x": 144,
-            "y": 756,
+            "x": 424,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -6753,8 +9129,8 @@
         {
           "id": "unit.scout/idle/se/1",
           "frame": {
-            "x": 214,
-            "y": 756,
+            "x": 494,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -6766,8 +9142,8 @@
         {
           "id": "unit.scout/idle/se/2",
           "frame": {
-            "x": 284,
-            "y": 756,
+            "x": 564,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -6779,8 +9155,8 @@
         {
           "id": "unit.scout/idle/se/3",
           "frame": {
-            "x": 354,
-            "y": 756,
+            "x": 634,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -6857,8 +9233,8 @@
         {
           "id": "unit.scout.ashen_compact/idle/se/0",
           "frame": {
-            "x": 424,
-            "y": 756,
+            "x": 704,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -6930,8 +9306,8 @@
         {
           "id": "unit.scout.cinder_march/idle/se/0",
           "frame": {
-            "x": 494,
-            "y": 756,
+            "x": 774,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -7003,8 +9379,8 @@
         {
           "id": "unit.scout.glass_tide/idle/se/0",
           "frame": {
-            "x": 564,
-            "y": 756,
+            "x": 844,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -7057,6 +9433,78 @@
       }
     },
     {
+      "id": "unit.scout.iron_covenant",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.scout.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.scout.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 914,
+            "y": 514,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.scout.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.scout.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.scout.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "1a5021dfa26bb504c08ae38c3b44c3c9f5f50560cadb608cc5811c58bcd7464d",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.scout.iron_covenant-v1.png",
+          "assets/art/source/slice12/unit.scout.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:46:29.987Z",
+        "notes": "Inspected native 1x and 4x: slender unshielded adult scout, diagonal low bow and high quiver separate from the broad guard silhouette. Dark hood and brass accents remain restrained; boots and equipment are unclipped on the common ground anchor. Fine facial details intentionally resolve as a small value cluster. Static idle only; in-game review pending.\nReviewed candidate 317ea118e38032640bf06a61d1d270b48801d3e23cbfa48944558731a8f6af38; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/c83857113abb7be0e59f63ef4f0e018652bbfa0d1178caa132d29e7771550f43.png"
+        ],
+        "inputHash": "3ea29a290da1dccdc46bdeb6cdb923aa3970744db4f7532f23b4d71c270da356"
+      }
+    },
+    {
       "id": "unit.scout.reedbound_council",
       "type": "unit",
       "status": "ATLASED",
@@ -7076,8 +9524,8 @@
         {
           "id": "unit.scout.reedbound_council/idle/se/0",
           "frame": {
-            "x": 634,
-            "y": 756,
+            "x": 984,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -7130,6 +9578,78 @@
       }
     },
     {
+      "id": "unit.scout.sepulchral_synod",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.scout.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.scout.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 1054,
+            "y": 514,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.scout.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.scout.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.scout.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "51240efb1d17fbc9a260bd8166f7359806530b23264e73d0214cebfa353dd57f",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.scout.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/unit.scout.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:49:26.435Z",
+        "notes": "Inspected 1x/4x: pale short cloak and indigo hood frame an unshielded mobile scout; low bow and high quiver are distinct from the narrow shield guardian. Full adult figure and equipment remain padded on common64px ground baseline. Bright cloak provides culture contrast without replacing silhouette with a recolor. Static only; runtime review pending.\nReviewed candidate 9f7d669ce6fedd2a90bae77a34bbf091b3aaa86ddf6e48da59f324a0aff4b10a; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/c3713329a07c5d07621a93790c7166f2f9e33c93f97dfe1a7eea56ec25d75089.png"
+        ],
+        "inputHash": "f7c5547a4e82e75db6a82b5a064190ccd8c31f0dbfb3ba5f2f06b8b3566b2c53"
+      }
+    },
+    {
       "id": "unit.spearman",
       "type": "unit",
       "status": "ATLASED",
@@ -7149,8 +9669,8 @@
         {
           "id": "unit.spearman/idle/se/0",
           "frame": {
-            "x": 704,
-            "y": 756,
+            "x": 1124,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -7221,8 +9741,8 @@
         {
           "id": "unit.spearman.ashen_compact/idle/se/0",
           "frame": {
-            "x": 774,
-            "y": 756,
+            "x": 1194,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -7294,8 +9814,8 @@
         {
           "id": "unit.spearman.cinder_march/idle/se/0",
           "frame": {
-            "x": 844,
-            "y": 756,
+            "x": 1264,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -7367,8 +9887,8 @@
         {
           "id": "unit.spearman.glass_tide/idle/se/0",
           "frame": {
-            "x": 914,
-            "y": 756,
+            "x": 1334,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -7421,6 +9941,78 @@
       }
     },
     {
+      "id": "unit.spearman.iron_covenant",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.spearman.iron_covenant"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.spearman.iron_covenant/idle/se/0",
+          "frame": {
+            "x": 1404,
+            "y": 514,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.spearman.iron_covenant/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.spearman.iron_covenant/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.spearman.iron_covenant.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "e41796f946f907d3781e063391019645b398a3636367647d1e07d141b3b4b876",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.spearman.iron_covenant-v1.png",
+          "assets/art/source/slice12/unit.spearman.iron_covenant-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:49:22.452Z",
+        "notes": "Inspected 1x/4x: tall continuous dark pike and bright steel tip separate from compact infantry body; buckler and plated shoulder provide a readable side silhouette. Full shaft, boots and tip fit padded64px frame. Body is smaller than the sword guard because the long weapon shares its fixed canvas. Static only; runtime review pending.\nReviewed candidate 426ee77c9f18e77a3815483d0c0d76b5129d49cf2081b39c7c323504f0389313; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/765a1fdb420d434772a79d1dd7eecf4e693e1e9a981eb54a2862b7c5b4297bc5.png"
+        ],
+        "inputHash": "d08a8ae6a640d85dba7077141b6445313d401a1501b27ab537e3aef7cfa8ea2a"
+      }
+    },
+    {
       "id": "unit.spearman.reedbound_council",
       "type": "unit",
       "status": "ATLASED",
@@ -7440,8 +10032,8 @@
         {
           "id": "unit.spearman.reedbound_council/idle/se/0",
           "frame": {
-            "x": 4,
-            "y": 826,
+            "x": 1474,
+            "y": 514,
             "w": 64,
             "h": 64
           },
@@ -7491,6 +10083,78 @@
           "assets/art/reviews/67383c12d78d975263cc248552d0cc454374011f41131ce1f72bd8d04234a986.png"
         ],
         "inputHash": "2528db72a1a37df340f93b91078b42b955de00148087500eca51687808eb6a65"
+      }
+    },
+    {
+      "id": "unit.spearman.sepulchral_synod",
+      "type": "unit",
+      "status": "ATLASED",
+      "contentIds": [
+        "unit.spearman.sepulchral_synod"
+      ],
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "foundation",
+      "frames": [
+        {
+          "id": "unit.spearman.sepulchral_synod/idle/se/0",
+          "frame": {
+            "x": 1544,
+            "y": 514,
+            "w": 64,
+            "h": 64
+          },
+          "direction": "se",
+          "state": "idle",
+          "index": 0,
+          "durationMs": 250
+        }
+      ],
+      "clips": [
+        {
+          "id": "unit.spearman.sepulchral_synod/idle/se",
+          "direction": "se",
+          "state": "idle",
+          "frames": [
+            "unit.spearman.sepulchral_synod/idle/se/0"
+          ],
+          "durationsMs": [
+            250
+          ],
+          "loop": false
+        }
+      ],
+      "validation": {
+        "score": 100,
+        "passed": true,
+        "reportPath": "assets/art/reports/unit.spearman.sepulchral_synod.approved.json"
+      },
+      "provenance": {
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "promptHash": "9a77442826105c2fe661f32c020039a71f2a730ccc1fe205beb0006ccdbd03cb",
+        "sourceRefs": [
+          "assets/art/source/slice12/unit.spearman.sepulchral_synod-v1.png",
+          "assets/art/source/slice12/unit.spearman.sepulchral_synod-v1.json"
+        ],
+        "licenseNotes": [
+          "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+        ]
+      },
+      "review": {
+        "reviewer": "Codex",
+        "reviewedAt": "2026-09-06T04:49:27.173Z",
+        "notes": "Inspected 1x/4x: continuous upright bronze-tipped pike and pale buckler distinguish this compact sentinel from sword guard and bow scout. Indigo robe, pale outer strips and bronze helm ring form grouped values. Pike tip and both boots survive nearest native fitting with padding. Static only; runtime review pending.\nReviewed candidate f6d1bf8faf75b99418efd8feb4f9dcc7f12e1c9d5010adca6f2aa0719e152fa5; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/8819560e5f937c58048987e11a45e026da3d8aa737def1b05aa5081127719872.png"
+        ],
+        "inputHash": "7fd06a1025fe4cfc916c1d2b360d94d4e665815187f7ed659116294098a3f8c0"
       }
     }
   ]

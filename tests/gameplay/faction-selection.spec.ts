@@ -1,0 +1,25 @@
+import { expect, test } from '@playwright/test';
+
+test('a selected new culture owns the actual player seat and persists through save/load', async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 390, height: 844 }); await page.goto('/');
+  await page.getByRole('combobox', { name: 'Player faction', exact: true }).selectOption('faction.iron_covenant');
+  await expect(page.getByRole('region', { name: 'Player culture' })).toContainText('Taiga');
+  await expect(page.getByRole('region', { name: 'Player culture' })).toContainText('−1');
+  await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('tiny');
+  await page.getByRole('spinbutton', { name: 'Faction count', exact: true }).fill('6');
+  await page.getByRole('combobox', { name: 'Campaign pace', exact: true }).selectOption('short');
+  await page.getByRole('button', { name: /Begin campaign/ }).click();
+  await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
+  expect(await page.evaluate(() => { const view = window.__THEANDRIL__!.getSummary()!; return view.factions.find(item => item.id === view.factionId)?.definitionId; })).toBe('faction.iron_covenant');
+  await page.getByRole('textbox', { name: 'Settlement name', exact: true }).fill('Iron Hearth');
+  await page.getByRole('button', { name: 'Found settlement', exact: true }).click();
+  await expect(page.getByTestId('land-panel')).toBeVisible(); await expect(page.getByTestId('settlement-stage')).toHaveText('colony · Capital');
+  const options = page.locator('.campaign-options'); await options.locator('summary').click();
+  await page.getByRole('button', { name: 'Save campaign', exact: true }).click(); await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
+  const hash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
+  await page.reload(); await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(hash);
+  expect(await page.evaluate(() => { const view = window.__THEANDRIL__!.getSummary()!; return view.factions.find(item => item.id === view.factionId)?.definitionId; })).toBe('faction.iron_covenant');
+  await page.screenshot({ path: testInfo.outputPath('iron-covenant-selected-seat.png') });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});

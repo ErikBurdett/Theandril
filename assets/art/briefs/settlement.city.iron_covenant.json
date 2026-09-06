@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.iron_covenant",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original static pixel-art strategy map settlement sprite, isolated on genuine transparent PNG. Whole architectural footprint, roofs and chimneys fully enclosed with generous15% empty margins on every side. Shallow three-quarter southeast map view. Coarse square pixel clusters with grouped material values, soft upper-left highlights, crisp native-style edges, restrained dark fantasy. No landscape/base tile, characters, scenery, labels, text, borders, smooth gradients, glow, smoke or baked checkerboard. This is a single settlement silhouette, not a sheet or comparison. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. Mature Anvilheights city: imposing but compact terraced stone citadel of linked broad guildhalls, angular buttresses, a central sealed hall and four short forge chimneys; outer squared curtain wall with large mechanical gate. Blue-black roofs and restrained dull brass fittings, gold cloth accents. No giant rock mountain or terrain base. Native128x128 visual detail; clear central hierarchy and whole footprint.",
+  "frames": [
+    {
+      "id": "settlement.city.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/source/native/settlement.city.iron_covenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "016eaa335aa0839dca8b93566930bce972e2d17f8013f8927b21947752c3b7f6",
+    "sourceRefs": [
+      "assets/art/source/slice12/settlement.city.iron_covenant-v1.png",
+      "assets/art/source/slice12/settlement.city.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "9c6c39f66b7bc7c0335ebdd8c875f0b2ab500aff009bf95e4cbb1c4c80229cab",
+    "2efd69dd5906c462cd3af9cd41a19430ea25fd996480fb3d5e2ed35bd26d81e0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-128",
+      "settingsHash": "cc23c082465f634ddbac4942c1966b9dbb4cff520be27e9298416fdd911333f1",
+      "inputHash": "9c6c39f66b7bc7c0335ebdd8c875f0b2ab500aff009bf95e4cbb1c4c80229cab",
+      "outputHash": "e952789ca739694d00125f527df962254db3896d9b1dccb1b00cf30377353fed"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

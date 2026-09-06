@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.sepulchral_synod",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original static pixel-art strategy map settlement sprite, isolated on genuine transparent PNG. Whole architectural footprint, roofs and chimneys fully enclosed with generous15% empty margins on every side. Shallow three-quarter southeast map view. Coarse square pixel clusters with grouped material values, soft upper-left highlights, crisp native-style edges, restrained dark fantasy. No landscape/base tile, characters, scenery, labels, text, borders, smooth gradients, glow, smoke or baked checkerboard. This is a single settlement silhouette, not a sheet or comparison. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. Developed chalkland town: three ascending broad chalk masonry terraces with living workshops along the lower tier, a veiled open-ring shrine at top, two modest indigo awnings and bronze gate bands. Pale architectural layers and dark door recesses, practical inhabited priest-state. More substantial than three huts but not enormous. Native96x96 visual detail.",
+  "frames": [
+    {
+      "id": "settlement.town.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.sepulchral_synod/9c38a7f3983a17c0038d5874fbfbfed942193b2fa13f39c378db668d504140d8/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "713cd4fd8428af8204423378c001efd83a4d535a46d7c6e20541fd7155a2cc5f",
+    "sourceRefs": [
+      "assets/art/source/slice12/settlement.town.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/settlement.town.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "bd1197accabc26a5b3bca7abf1e44c8d3c0ea0fe332b2e553a549732a2843fd3",
+    "fc6c43fa2c7005b91d258e9e633a2dfc189ad5d05969c46bd55a2956c8e037e5"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "09e2cd47720324cf1c10e4d97f06a04a06c39923e803f9e0ad65187dbf073893",
+      "inputHash": "bd1197accabc26a5b3bca7abf1e44c8d3c0ea0fe332b2e553a549732a2843fd3",
+      "outputHash": "c06503f1ef0ae7d458077c4b8db411373fe210f63f60b18832ac70d67549a6ea"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "c06503f1ef0ae7d458077c4b8db411373fe210f63f60b18832ac70d67549a6ea",
+      "outputHash": "720c8547029d3373207919401fdd7416c35e9e14dbb4a9b3d5e8c15f62d97d3a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "720c8547029d3373207919401fdd7416c35e9e14dbb4a9b3d5e8c15f62d97d3a",
+      "outputHash": "25f2820a948d15a7de27df6d84b60bb74af90bb325c9d4331034747ad12b9eac"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "a5b92d14f7412d9c740bfeeec32f26bc4dbe76e8bef91037f5db25368be3a77d",
+      "outputHash": "7b32c89368e4133db85ce2f95126d65f6c888e18764aa15a754d6e30787c4119"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "882985264913690f985499299e6ed24352ac8ec08c6d06e83fba89c34b585e1c",
+      "outputHash": "9966eefc6f09dc2587b2ba1c0bf635eec187aa119ccb7763be6bf38a9113e644"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "7d3867d81b5dd7eb1d519121d46726c0acb25240f7110f103f20d5d1a08d76b5",
+      "outputHash": "c00f3d236e16a9bcfe1fda994a4bb9655c8c98b33d69779d6846bb96022f543b"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.sepulchral_synod.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:59:25.457Z",
+    "notes": "Inspected native1x/4x: compact ascending chalk tiers and high open ring create a taller town hierarchy than the village; indigo recesses, low bronze roofs and broad steps remain legible. Native96px footprint and top ring have transparent padding. Whole structure retained, not a resized city sprite; runtime placement review pending.\nReviewed candidate 9c38a7f3983a17c0038d5874fbfbfed942193b2fa13f39c378db668d504140d8; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/7da6054c8b57ea73fc49fdffa8de6e1d74537a0014f99858c203d2610152ec83.png"
+    ],
+    "inputHash": "1367b31f795f145ab227526f1a36285c574fe95a6c188103af4dae90ffc158b5"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

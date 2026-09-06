@@ -22,11 +22,26 @@ export const campaignPaceSchema = z.enum(['short', 'standard', 'long', 'epic']);
 export type CampaignPace = z.infer<typeof campaignPaceSchema>;
 export const campaignPaceProfileSchema = z.object({ name, description, civicKnowledgeCost: cost, projectCoinCost: cost, projectActiveTurns: z.number().int().min(1).max(100) }).strict();
 export type CampaignPaceProfile = z.infer<typeof campaignPaceProfileSchema>;
-export const CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+/** Frozen prices for command replay under rules4–7; never rebalance these in place. */
+export const LEGACY_CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
   short: { name: 'Short', description: 'A brief test or skirmish campaign, usually measured in dozens of turns. Early growth and AI strength are unchanged.', civicKnowledgeCost: 40, projectCoinCost: 120, projectActiveTurns: 5 },
   standard: { name: 'Standard', description: 'A full campaign aiming for hundreds of turns, with greater late economic investment and time to oppose public projects. Actual length depends on play.', civicKnowledgeCost: 400, projectCoinCost: 10_000, projectActiveTurns: 20 },
   long: { name: 'Long', description: 'An extended campaign aiming around five hundred turns. Higher late costs and a wider public response window do not increase AI strength.', civicKnowledgeCost: 800, projectCoinCost: 24_000, projectActiveTurns: 40 },
   epic: { name: 'Epic', description: 'An enduring campaign aiming around a thousand turns. Large late investments and lengthy public projects extend play without changing AI strength.', civicKnowledgeCost: 1600, projectCoinCost: 60_000, projectActiveTurns: 60 },
+};
+/** Schema8's stronger military/economy needs a larger late Epic commitment. Early
+ * economy and the real60-turn counterplay window stay unchanged; no turn lock. */
+export const SCHEMA8_CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+  ...LEGACY_CAMPAIGN_PACES,
+  epic: { ...LEGACY_CAMPAIGN_PACES.epic, projectCoinCost: 75_000 },
+};
+/** Developed hinterlands increase recurring income. Keep the late commitment
+ * proportionate without delaying early work, raising AI strength or locking turns. */
+export const CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+  ...SCHEMA8_CAMPAIGN_PACES,
+  standard: { ...SCHEMA8_CAMPAIGN_PACES.standard, projectCoinCost: 18_000 },
+  long: { ...SCHEMA8_CAMPAIGN_PACES.long, projectCoinCost: 80_000 },
+  epic: { ...SCHEMA8_CAMPAIGN_PACES.epic, projectCoinCost: 240_000 },
 };
 
 export const TECHNOLOGIES: readonly TechnologyDefinition[] = [

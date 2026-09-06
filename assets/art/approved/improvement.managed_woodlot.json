@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.managed_woodlot",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.managed_woodlot"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art strategy-map asset on genuinely transparent PNG. One isolated complete object, not a sheet; entire silhouette comfortably inside generous15% transparent margin. Coarse square64x64 logical detail, grouped material values, restrained upper-left highlights, crisp edges. No text, labels, border, people, landscape background, smooth gradients, glow, soft alpha shadows or checkerboard. Serious practical weathered medieval fantasy; no copied game designs. A compact MANAGED WOODLOT improvement prop: three deliberately small regularly spaced coppiced leafy trees of different cut heights, short orderly stack of harvested logs and one low timber rack. Shallow three-quarter southeast view, clear tended woodlot rather than wild forest or lumbermill building. Joined compact ground-level cluster, no full landscape tile, people, axes floating or giant trunk.",
+  "frames": [
+    {
+      "id": "improvement.managed_woodlot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/improvement.managed_woodlot/1b02fcd8a40e2c007203760065b565b0f51746c41dda20c3706d04f38fdb886e/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "aea2c6c50a5b01525474255f8afdc14b613eaf69d2657f0b62edacc85e3ed215",
+    "sourceRefs": [
+      "assets/art/source/slice12/improvement.managed_woodlot-v1.png",
+      "assets/art/source/slice12/improvement.managed_woodlot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "8fa0a1facb95c47b80b69cca64765ee0d833eae5d4b7ca28df7ffa01c2bed5ea",
+    "a1b5870d2e7da9a36b1b99b9ffe912724bace4a24814842b6ac71aeb7d9af10a"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "9bf0f57166f0995bf322b2279e47a2bc84fb2058b23a4245465e2f7a0972ff2b",
+      "inputHash": "8fa0a1facb95c47b80b69cca64765ee0d833eae5d4b7ca28df7ffa01c2bed5ea",
+      "outputHash": "1c9e39df655d90db6c76d5530bdd3d5cf3255f5bf5295548b98282b6ce5f07e8"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "1c9e39df655d90db6c76d5530bdd3d5cf3255f5bf5295548b98282b6ce5f07e8",
+      "outputHash": "3c3c8274cfbb4a8e2b223130f173b45f3d8acb1c7baabc680f7d4420d77bf328"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3c3c8274cfbb4a8e2b223130f173b45f3d8acb1c7baabc680f7d4420d77bf328",
+      "outputHash": "9035e7d50a5b569602e3310fab710bebee5c35a7bb625a826cd4ea03a0479ff3"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "e279c2b550a85aa1bf25a2f23eba3234ec92137d50c029be40595f78aaf7619f",
+      "outputHash": "6a46af9e08afa46463d1839ae09154808f6bcc02b184eba1f9b866ef2b52aa69"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "7747db5a7ae5786825431e2da7dce8c2a18c1458ad9baf455d21f265eed3daf7",
+      "outputHash": "328e1fc7dc0d8c8d891c6b14c8e631985ea24d607f932ef1c06ce93820f75cdc"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "ee20a5eb40b6c6da2ac47a9880ad2fbacf835efde2b2d17a6bea4b59ea60d924",
+      "outputHash": "94c6144ad44de77bdc302ece053d47152a46a184e815132f0f2bad42f3e46cab"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/improvement.managed_woodlot.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T05:32:48.456Z",
+    "notes": "Inspected native1x/4x: upright tended tree, two cut-height side trees and pale stacked log ends distinguish woodlot from wild forest. Compact roots/log rack and top leaves are complete within44px painted-height cap. No full land tile or people; hard alpha.32px half-native runtime review pending.\nReviewed candidate 1b02fcd8a40e2c007203760065b565b0f51746c41dda20c3706d04f38fdb886e; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/1813c4a0ffcbec9d2ab1943728282b41ebd7403f8fc89c208b29dc421d87d505.png"
+    ],
+    "inputHash": "d5324c34b625a34398c1de4bbec7b62076ad39388216f23d2e3bdb9887d386bc"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

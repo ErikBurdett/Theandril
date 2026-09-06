@@ -1,6 +1,7 @@
 import { hexDistance, isPassable, neighbors } from '@theandril/mapgen';
 import { deserializeGame, serializeGame, type GameState } from '@theandril/sim';
 import { borderBattleCampaign } from './combat-fixture';
+import { rebaseAuthoredLand } from './authored-land';
 
 export const CONQUEST_FIXTURE = {
   playerArmyId: 'army.2', settlementId: 'settlement.6',
@@ -48,5 +49,6 @@ export function conquestCampaign(): GameState {
   for (const army of Object.values(state.armies)) if (army.factionId !== state.turnOwnerId) delete state.armies[army.id];
   reveal(state, player.factionId, player.cell, 2);
   for (const settlement of Object.values(state.settlements)) reveal(state, settlement.factionId, settlement.cell, 3);
+  rebaseAuthoredLand(state);
   return deserializeGame(serializeGame(state));
 }

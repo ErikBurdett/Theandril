@@ -12,9 +12,11 @@ const applyLegacy = (state: GameState, command: unknown) => applyCommandForVersi
 interface SaveFixture {
   version: number; gameVersion: string; contentHash: string; stateChecksum: string;
   state: {
+    rosterVersion: GameState['rosterVersion'];
     pace: CampaignPace;
     turn: number; nextId: number; nextEntityId?: number; turnOwnerId: string;
-    world: { width: number; height: number; seed: number; terrain: number[]; fertility: number[]; starts: number[]; biome: number[]; generatorVersion: 1 | 2 };
+    world: { width: number; height: number; seed: number; terrain: number[]; fertility: number[]; starts: number[]; biome: number[]; waterDepth: number[]; generatorVersion: 1 | 2 | 3 | 4 };
+    land: GameState['land'];
     armies: Army[]; settlements: Settlement[]; factions: FactionState[];
     explored: { factionId: string; cells: number[] }[]; events: DomainEvent[];
     wars: [string, string][]; battle: CampaignBattle | null; battleReports: CampaignBattle[];
@@ -22,6 +24,7 @@ interface SaveFixture {
     progression: (FactionProgression & { factionId: string })[]; projects: VictoryProject[]; victory: Victory | null;
     routes: MovementRoute[];
     characters: GameState['characters'][string][];
+    transports: { armyId: string; fleetId: string }[];
   };
 }
 
@@ -50,8 +53,8 @@ function previousV2State(save: SaveFixture) {
 }
 
 function previousV3State(save: SaveFixture) {
-  const { progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, ...state } = save.state;
-  const { biome: _biome, generatorVersion: _generatorVersion, ...world } = state.world;
+  const { progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, ...state } = save.state;
+  const { biome: _biome, generatorVersion: _generatorVersion, waterDepth: _waterDepth, ...world } = state.world;
   const previousBattle = (battle: CampaignBattle) => {
     const { attackerDoctrineId: _attackerDoctrine, defenderDoctrineId: _defenderDoctrine, ...previous } = legacyCampaignBattleSchema.parse(battleReportForVersion(battle, 5));
     return previous;
@@ -60,12 +63,13 @@ function previousV3State(save: SaveFixture) {
 }
 
 function legacyGeography(state: GameState): void {
+  state.rosterVersion = 1;
   state.world.generatorVersion = 1;
   state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, 1);
 }
 
 function fixture(): SaveFixture {
-  const state = createGame({ seed: 42, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1 });
+  const state = createGame({ seed: 42, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
   const army = Object.values(state.armies).find(item => item.formations[0]?.unitId === 'unit.colonist');
   if (!army) throw new Error('Missing colonist');
   applyLegacy(state, { type: 'found', factionId: army.factionId, armyId: army.id, name: 'Cinderwatch' });

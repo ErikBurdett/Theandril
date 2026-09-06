@@ -203,6 +203,7 @@ export function validateSieges(state: GameState): void {
     const army = state.armies[siege.armyId]; const town = state.settlements[siege.settlementId];
     require(key === siege.settlementId && town && army && army.factionId === siege.factionId && armyCanAttack(army), 'invalid siege references');
     if (!army || !town) continue;
+    require(armyDomain(army) === 'land' && !state.transports[army.id], 'a siege requires an independent land army');
     require(!assigned.has(army.id) && siege.startedTurn <= state.turn && atWar(state, siege.factionId, town.factionId) && neighbors(army.cell, state.world.width, state.world.height).includes(town.cell), 'invalid siege position, timing or ownership');
     require(siege.militiaStrength <= Math.min(60, 10 + town.population * 10), 'siege militia exceeds local population');
     assigned.add(army.id);

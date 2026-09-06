@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.shore_fishery",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.shore_fishery"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art strategy-map asset on genuinely transparent PNG. One isolated complete object, not a sheet; entire silhouette comfortably inside generous15% transparent margin. Coarse square64x64 logical detail, grouped material values, restrained upper-left highlights, crisp edges. No text, labels, border, people, landscape background, smooth gradients, glow, soft alpha shadows or checkerboard. Serious practical weathered medieval fantasy; no copied game designs. A compact SHORE FISHERY improvement prop: short L-shaped weathered timber fishing pier with three posts, one small draped drying net, two creels and a few fish-shaped pale drying silhouettes on a rack. Shallow three-quarter southeast view. No boat, ship, house, people, full water tile or landscape; transparent between planks and outside compact pier/rack silhouette. Entire posts/net and pier ends inside margins.",
+  "frames": [
+    {
+      "id": "improvement.shore_fishery/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/improvement.shore_fishery/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "6b3521f181cf35e7c77da6aeb94394f2d206e2f9d3b298b5cb7e35530a20789b",
+    "sourceRefs": [
+      "assets/art/source/slice12/improvement.shore_fishery-v1.png",
+      "assets/art/source/slice12/improvement.shore_fishery-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "b4148cee5eb5f3c0a47d14e9643ed0e27e2f3ba1e6df3e69ce9b9b2b4fff6e35",
+    "e674c8e2d07b59c557913b2f81b3ba7768fb186c9cc2bd6b5edadb48c19ab042"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "93b141c9dd7075befd59cc3df756ea0ac64b574334e3884cf02ba8c707622509",
+      "inputHash": "b4148cee5eb5f3c0a47d14e9643ed0e27e2f3ba1e6df3e69ce9b9b2b4fff6e35",
+      "outputHash": "7b4f3246e9ffedb3d6dc780b1ec6a4c359904e9d8b64c630901641dbe18c30b0"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

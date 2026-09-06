@@ -1,4 +1,4 @@
-import { hexDistance, isPassable, neighbors } from '@theandril/mapgen';
+import { hexDistance, isPassable, neighbors, TERRAIN, WATER_DEPTH } from '@theandril/mapgen';
 import { getMovementQuery, type Observation } from '@theandril/sim';
 
 type ObservedArmy = Observation['armies'][number];
@@ -15,9 +15,11 @@ export function createNavigation(view: Observation) {
   const travelView = { ...view, cells: view.cells.filter(cell => cell.visible) };
   const gains = new Map<string, number>();
   let expandedNodes = 0;
-  const canEnter = (cell: number): boolean => {
+  const canEnter = (army: ObservedArmy, cell: number): boolean => {
     const known = cells.get(cell);
-    return Boolean(known && isPassable(known.terrain) && !occupied.has(cell));
+    return Boolean(known && !army.carrierId && !occupied.has(cell) && (army.domain === 'naval'
+      ? known.terrain === TERRAIN.water && (known.waterDepth === WATER_DEPTH.shallow || known.waterDepth === WATER_DEPTH.deep && army.canEnterDeepWater)
+      : isPassable(known.terrain)));
   };
   const informationGain = (cell: number, sight: number): number => {
     const key = cell + ':' + sight;
@@ -48,7 +50,7 @@ export function createNavigation(view: Observation) {
         return path.filter(next => (costs.get(next) ?? Infinity) <= army.movement && !claimed.has(next)).at(-1);
       }
       for (const next of neighbors(cell, view.width, view.height)) {
-        if (!canEnter(next)) continue;
+        if (!canEnter(army, next)) continue;
         const cost = distance + costOf(cells.get(next)!.terrain);
         if (cost >= (costs.get(next) ?? Infinity)) continue;
         costs.set(next, cost); parents.set(next, cell); (buckets[cost] ??= []).push(next);
@@ -60,7 +62,8 @@ export function createNavigation(view: Observation) {
     get expandedNodes() { return expandedNodes; },
     informationGain,
     destination(army: ObservedArmy, sight: number, claimed: Set<number>, strategicScore?: (cell: number) => number): number | undefined {
-      const range = getMovementQuery(travelView, army.id).reachable.filter(item => canEnter(item.cell) && !claimed.has(item.cell));
+      if (army.carrierId || army.movementBlocker) return undefined;
+      const range = getMovementQuery(travelView, army.id).reachable.filter(item => canEnter(army, item.cell) && !claimed.has(item.cell));
       const candidates = range.map(item => ({ ...item, gain: informationGain(item.cell, sight), strategic: strategicScore?.(item.cell) ?? 0 }));
       // Stable per-army tie breaking spreads scouts without changing their objective each turn.
       let salt = 0; for (let i = 0; i < army.id.length; i++) salt = Math.imul(salt, 31) + army.id.charCodeAt(i) | 0;

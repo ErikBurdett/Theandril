@@ -25,6 +25,7 @@ This is a release scope, not a brainstorm. A system counts only when it is playa
 - Select a unit, then click a reachable hex to move or explicitly attack a hostile force; preview movement costs and paths.
 - Saved multi-turn travel and waypoints with visible interruption reasons, cancellation and deliberate resume after blockers, faction actions or events.
 - Coherent biome diversity with readable terrain/biome distinctions.
+- Authored faction-biome affinities and paid, saved cultivation with scaling costs; terrain changes remain fog-filtered and preserve movement/battle-history integrity.
 - Discoveries, ruins, lairs, landmarks.
 - Resource discovery.
 - Map search, minimap, filters/lenses.
@@ -35,6 +36,8 @@ This is a release scope, not a brainstorm. A system counts only when it is playa
 - Found settlement.
 - Settlement growth tiers.
 - Territorial control/hinterland.
+- Colony, settlement and city development, with capital designation independent of size; clearly visible faction/city borders and distinct owned, worked and improved tiles.
+- Every settlement can develop its surrounding land, with natural features and biome affinities producing explicit positive and negative site/yield effects.
 - Buildings and specializations.
 - Population/growth.
 - Local culture and stability.
@@ -213,6 +216,9 @@ Theandril 1.0 requires multiple different advancement systems rather than one un
 - Armies and fleets.
 - Unit formations.
 - Commanders.
+- General-led formation capacity, earned prerequisite-based skill branches and non-destructive recovery when a leader is lost, wounded or reassigned.
+- Shallow coastal shelves and deep ocean with explicit research and hull-capability access rules.
+- Real naval recruitment, army transport, legal shore embarkation/landing and naval combat; transported formations and attached characters retain identity, upkeep and saved consequences.
 - Composition templates.
 - Movement and hierarchical pathfinding.
 - Zones of control.

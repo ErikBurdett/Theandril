@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.sepulchral_synod",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. One upright veiled human terrace sentinel carrying one very long ash pike with a simple bronze leaf tip entirely inside generous top margin and narrow chalk-painted buckler. Indigo layered cloth, pale lamellar chest plate, bronze bindings. Long shaft continuous, two planted boots, no extra weapons.",
+  "frames": [
+    {
+      "id": "unit.spearman.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.spearman.sepulchral_synod/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9a77442826105c2fe661f32c020039a71f2a730ccc1fe205beb0006ccdbd03cb",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.spearman.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/unit.spearman.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "582f65aa854c5b9d32afae3c6ef2eb96b4373c1055db560d33c9659c0706c5eb",
+    "9402df6fe9bbfa2f3e5a37bb34a928f181b5f3ff325f61c19eb8460c3bce4703"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "a225aa6f67b13830622d01e244ce2ca4c8a727c4f6050da0a50a9c5e0076e7c6",
+      "inputHash": "582f65aa854c5b9d32afae3c6ef2eb96b4373c1055db560d33c9659c0706c5eb",
+      "outputHash": "4b3adcfa320aa74ef537acfb9223cfc492e746c4406e3bdabfb06fb75969244b"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

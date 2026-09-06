@@ -137,22 +137,26 @@ async function generate(brief: AssetManifest) {
 async function approved() { return Promise.all((await entries('assets/art/approved')).map(async file => { const manifest = parseAssetManifest(await json('assets/art/approved/' + file)); return { manifest, frames: await frames(manifest) }; })); }
 async function atlas(integrate: boolean) {
   const inputs = await approved(); if (!inputs.length) throw new Error('No reviewed approvals; runtime atlas cannot include candidates.');
-  const started = performance.now(), result = buildAtlas(inputs, { id: 'foundation', pageSize: 1024, imageUrl: '/art/foundation.png', jsonUrl: '/art/foundation.json', palette });
-  const second = buildAtlas([...inputs].reverse(), { id: 'foundation', pageSize: 1024, imageUrl: '/art/foundation.png', jsonUrl: '/art/foundation.json', palette });
+  // The134-asset release overflowed1024; keep native pixels intact on one explicit2048 page.
+  const requestedSize = option('page-size') ?? '2048';
+  if (requestedSize !== '1024' && requestedSize !== '2048') throw new Error('Atlas page-size must be1024 or2048');
+  const pageSize = requestedSize === '1024' ? 1024 : 2048;
+  const started = performance.now(), result = buildAtlas(inputs, { id: 'foundation', pageSize, imageUrl: '/art/foundation.png', jsonUrl: '/art/foundation.json', palette });
+  const second = buildAtlas([...inputs].reverse(), { id: 'foundation', pageSize, imageUrl: '/art/foundation.png', jsonUrl: '/art/foundation.json', palette });
   if (sha256(result.png) !== sha256(second.png) || cacheKey(result.catalog) !== cacheKey(second.catalog)) throw new Error('Atlas determinism check failed');
   await save('assets/art/runtime/foundation.png', result.png, true); await save('assets/art/runtime/foundation.json', result.json); await save('assets/art/runtime/catalog.json', result.catalog);
   if (integrate) {
     await save('apps/web/public/art/foundation.png', result.png, true); await save('apps/web/public/art/foundation.json', result.json); await save('apps/web/public/art/catalog.json', result.catalog);
     const runtimeById = new Map(result.catalog.assets.map(asset => [asset.id, asset]));
     const allBriefs = await Promise.all((await entries('assets/art/briefs')).map(file => json('assets/art/briefs/' + file).then(parseAssetManifest)));
-    const live = new Set([...FACTION_ART_IDS, 'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', ...['ocean', 'grassland', 'temperate_forest', 'taiga', 'tundra', 'desert', 'steppe', 'marsh', 'rainforest', 'alpine'].map(id => 'terrain.' + id)]);
+    const live = new Set([...FACTION_ART_IDS, 'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', ...['ocean', 'grassland', 'temperate_forest', 'taiga', 'tundra', 'desert', 'steppe', 'marsh', 'rainforest', 'alpine', 'ash_scrub', 'chalkland'].map(id => 'terrain.' + id), ...['terraced_fields', 'managed_woodlot', 'quarry', 'reedworks', 'shore_fishery'].map(id => 'improvement.' + id)]);
     const lab: ArtLabCatalog = { schemaVersion: 1, palette, atlases: result.catalog.atlases, assets: allBriefs.map(asset => {
       const runtime = runtimeById.get(asset.id) ?? null;
       return { id: asset.id, type: asset.type, status: runtime?.status ?? asset.status, contentIds: asset.contentIds, nativeResolution: asset.nativeResolution, pivot: asset.frames[0]!.pivot, previewUrl: null, runtime, validation: runtime?.validation ?? null, provenance: runtime?.provenance ?? asset.provenance, review: runtime?.review ?? null, reasons: [live.has(asset.id) ? 'Bound to an existing observation-derived gameplay renderer or faction UI.' : 'Foundation artwork for future content. No canonical gameplay consumer exists yet.', ...(!runtime ? ['Not approved or not published. Candidate files are never served in production.'] : [])] };
     }) };
     await save('apps/web/public/art/lab-catalog.json', lab);
   }
-  console.log(`${integrate ? 'Published' : 'Built'} ${inputs.length} approved assets, ${Object.keys(result.json.frames).length} frames; PNG ${result.png.length} bytes; ${result.catalog.atlases[0]!.sha256}; two-order rebuild ${(performance.now() - started).toFixed(1)} ms. In-game review remains separate.`);
+  console.log(`${integrate ? 'Published' : 'Built'} ${inputs.length} approved assets, ${Object.keys(result.json.frames).length} frames; ${pageSize}x${pageSize} / ${pageSize * pageSize * 4 / 1024 / 1024} MiB per decoded page; PNG ${result.png.length} bytes; ${result.catalog.atlases[0]!.sha256}; two-order rebuild ${(performance.now() - started).toFixed(1)} ms. In-game review remains separate.`);
 }
 
 try {

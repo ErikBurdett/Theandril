@@ -61,9 +61,12 @@ describe('immutable real schema-6 mixed-army archives', () => {
     const report = game.battleReports.at(-1)!;
     expect(report).toMatchObject({ rulesVersion: 6, characterSnapshots: [], characterAftermath: [], usedAbilities: [] });
     expect(battleReportForVersion(report, 6)).toEqual(captured.battle.archive.records.find(record => record.battles.length)!.battles[0]);
-    expect(archive.records.every(record => record.rulesVersion === 7)).toBe(true);
+    expect(archive.records.every(record => record.rulesVersion === SAVE_VERSION)).toBe(true);
     expect(serializeGame(replayArchive(parseArchive(archive, game)))).toBe(serializeGame(game));
-    expect(serializeGameForVersion(game, 6)).toBe(captured.battle.finalSave);
+    const historical = deserializeGame(captured.battle.finalSave);
+    expect(game.armies).toEqual(historical.armies);
+    // A modern end turn uses developed land yields; it is not an old economic seal.
+    expect(game.factions.reduce((sum, faction) => sum + faction.knowledge, 0)).toBeGreaterThan(historical.factions.reduce((sum, faction) => sum + faction.knowledge, 0));
   });
 
   it('rejects an invented schema-6 formation aftermath instead of accepting a matching final snapshot alone', () => {
@@ -77,14 +80,13 @@ describe('immutable real schema-6 mixed-army archives', () => {
     expect(() => parseArchive(modernized, game)).toThrow();
   });
 
-  it('appends schema-7 commands without rewriting six-format evidence and never downgrades afterward', () => {
+  it('appends modern commands without rewriting six-format evidence and never downgrades afterward', () => {
     const game = deserializeGame(captured.travel.finalSave);
     const archive = parseArchive(captured.travel.archive, game);
     const end = { type: 'endTurn' as const, factionId: game.turnOwnerId };
     expect(applyRecordedCommand(game, archive, end).ok).toBe(true);
     expect(archive.records.slice(0, captured.travel.archive.records.length)).toEqual(captured.travel.archive.records);
-    expect(archive.records.at(-1)).toMatchObject({ rulesVersion: 7, checkpointVersion: 7, checkpoint: stateHash(game) });
-    expect(SAVE_VERSION).toBe(7);
+    expect(archive.records.at(-1)).toMatchObject({ rulesVersion: SAVE_VERSION, checkpointVersion: SAVE_VERSION, checkpoint: stateHash(game) });
     expect(serializeGame(replayArchive(parseArchive(archive, game)))).toBe(serializeGame(game));
     const downgraded = structuredClone(archive);
     downgraded.records.push({ ...downgraded.records.at(-1)!, sequence: downgraded.records.length + 1, turn: game.turn, afterTurn: game.turn + 1, rulesVersion: 6, checkpointVersion: 6 });

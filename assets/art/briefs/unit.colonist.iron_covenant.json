@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.iron_covenant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Produce ONE original static strategic-game PIXEL-ART sprite for Theandril, on genuine transparent PNG alpha-zero background. One isolated subject, not a sprite sheet. Southeast shallow three-quarter view, entire silhouette enclosed in generous empty margins. Deliberately coarse square pixel clusters, roughly64x64 logical detail shown enlarged, clear silhouette and grouped midtones, restrained soft upper-left light. Serious weathered medieval fantasy, no cartoon/chibi proportions, no text, labels, borders, scenery, floor tile, glow, smooth gradients, antialiasing, tiny texture confetti or baked checkerboard. Suitable for exact native nearest-neighbor processing. Iron Covenant of the Anvilheights: disciplined deep-folk holds and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass fittings, charcoal leather, muted gold cloth, faceted helmets, original simple split-anvil seal. Angular engineering rather than horns, spikes or costume borrowed from other games. Subject: one compact covered migration handcart being pulled by a human adult craft worker in a dark leather apron and low brass-rimmed cap; rolled blankets, a small iron-banded tool chest, practical heavy two wheels. Covered cart and worker form one joined silhouette, full wheels/handles visible. A civilian household expedition, no sword or shield. Fit the entire side-facing cart and puller, adult worker body smaller than cart canopy.",
+  "frames": [
+    {
+      "id": "unit.colonist.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.colonist.iron_covenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "aeacc2d2706f0f3b787388584a56d251bf1aa78f71a4fdc2d91c148b70bf29d0",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.colonist.iron_covenant-v1.png",
+      "assets/art/source/slice12/unit.colonist.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "e9ad3f91a6d00ed7b77fcc337d8c0c19dc75a558c3a035ed06d474ed91d8a9f2",
+    "e15a2773e6b2d910c5e7bd8dea5b82f3c415176889f66c4f58ee00dc5eca28a3"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "ea02ef2f550556e76852c5a777b4ece4cecd81e3de35d5f4058e6be574c30fa4",
+      "inputHash": "e9ad3f91a6d00ed7b77fcc337d8c0c19dc75a558c3a035ed06d474ed91d8a9f2",
+      "outputHash": "17d3a29ac2e769df478d15105d7961017fad6941bd91c0daed7f221a02659361"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

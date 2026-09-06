@@ -64,12 +64,20 @@ export const COMMANDER_ABILITIES: readonly CommanderAbilityDefinition[] = [
 ];
 
 export interface CharacterNamePool { given: readonly string[]; family: readonly string[] }
-/** Civic/geographic names follow the four introductory cultures, not borrowed rosters. */
+/** Civic/geographic pools preserve the original six cultures and name each new tradition independently. */
 export const CHARACTER_NAMES: Readonly<Record<string, CharacterNamePool>> = {
   'faction.ashen_compact': { given: ['Mera', 'Aven', 'Ressa', 'Tovan', 'Edrin', 'Leth', 'Sella', 'Orven'], family: ['Kilnbound', 'Ashwell', 'Coalstead', 'Oathweft', 'Flint', 'Hearthward', 'Copperspan', 'Roothearth'] },
   'faction.reedbound_council': { given: ['Neri', 'Vessa', 'Talen', 'Ossa', 'Iren', 'Belan', 'Sori', 'Denna'], family: ['Reedwake', 'Mirebank', 'Silt', 'Fordkeeper', 'Willowreach', 'Rushward', 'Lowwater', 'Ferryglass'] },
   'faction.cinder_march': { given: ['Dren', 'Kesta', 'Rovan', 'Venn', 'Arda', 'Hessa', 'Torrel', 'Oska'], family: ['Slagwatch', 'Flintscar', 'Coalridge', 'Emberpost', 'Ironstair', 'Burntfell', 'Blackkiln', 'Redquarry'] },
   'faction.glass_tide': { given: ['Seren', 'Lessa', 'Cerin', 'Vero', 'Ilna', 'Oren', 'Tessa', 'Navel'], family: ['Glasswake', 'Saltcharter', 'Lanternquay', 'Tideledger', 'Stormsill', 'Shoreglass', 'Harborwrit', 'Whitecove'] },
+  'faction.iron_covenant': { given: ['Dova', 'Bren', 'Hedra', 'Olek', 'Marn', 'Vedra', 'Korin', 'Sava'], family: ['Anvilward', 'Seamkeeper', 'Deepmeasure', 'Kilnseal', 'Stonebrace', 'Passiron', 'Forgeledger', 'Valleybond'] },
+  'faction.sepulchral_synod': { given: ['Erel', 'Naia', 'Sethra', 'Oris', 'Vela', 'Thalen', 'Merin', 'Ista'], family: ['Chalkseal', 'Terraceward', 'Boneledger', 'Quietgrain', 'Ninthstep', 'Drywell', 'Veilmark', 'Lastmeasure'] },
+  'faction.mire_courts': { given: ['Orell', 'Nethra', 'Velune', 'Issel', 'Maroe', 'Thessa', 'Ulen', 'Enneth'], family: ['Stillbough', 'Seasonroot', 'Fenmantle', 'Lilycourt', 'Mossbell', 'Duskpool', 'Alderveil', 'Deepfrond'] },
+  'faction.saltwind_remnant': { given: ['Alda', 'Cerrel', 'Nessa', 'Veylan', 'Odris', 'Evara', 'Tallis', 'Illa'], family: ['Keelwrit', 'Outerwake', 'Pledgesail', 'Ropemeasure', 'Soundingmark', 'Seacounter', 'Weatherbond', 'Anchorheir'] },
+  'faction.wardhall_remnant': { given: ['Hadran', 'Elwen', 'Marden', 'Reva', 'Teren', 'Odra', 'Selwin', 'Brenna'], family: ['Plainsward', 'Linewright', 'Reachstone', 'Hallmeasure', 'Surveybar', 'Bracekeeper', 'Gatecourse', 'Levelmark'] },
+  'faction.rimehorn_clans': { given: ['Ruva', 'Torrin', 'Kelda', 'Varek', 'Olva', 'Hedrin', 'Norna', 'Sivren'], family: ['Rimeledge', 'Hornkeeper', 'Snowbeam', 'Shelterstone', 'Coldhearth', 'Tundrafold', 'Hightallow', 'Wintershare'] },
+  'faction.sable_steppe': { given: ['Saren', 'Ivara', 'Odan', 'Rilka', 'Tamar', 'Veshi', 'Alen', 'Kora'], family: ['Grassknot', 'Farbridle', 'Campward', 'Duskrein', 'Openmile', 'Grazingmark', 'Saddlewrit', 'Windtether'] },
+  'faction.morrow_spore': { given: ['Melli', 'Ovenna', 'Issa', 'Nelun', 'Vaeri', 'Somen', 'Erla', 'Tavvi'], family: ['Threadgrove', 'Morrowcap', 'Loamkeeper', 'Rootwitness', 'Sporeweft', 'Underleaf', 'Fallenbough', 'Ringmemory'] },
 };
 export function characterName(factionDefinitionId: string, serial: number): string {
   const pool = CHARACTER_NAMES[factionDefinitionId];

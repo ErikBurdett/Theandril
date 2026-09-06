@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.iron_covenant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. ONE full-body adult human female land surveyor, plain charcoal coat and brass-clasped hood thrown back, carrying a broad unfurled parchment map at waist and one short measuring rod. Tool pack and boots, no weapons or shield. Human practical valley craftswoman, simple large map silhouette visually distinct from bow scout. Facing down-right, generous transparent margins.",
+  "frames": [
+    {
+      "id": "character.surveyor.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.surveyor.iron_covenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0209a5761856bce3b130ad8123e9621c29dd5a3ea3d38c05b0b463e0b34e2cc1",
+    "sourceRefs": [
+      "assets/art/source/slice12/character.surveyor.iron_covenant-v1.png",
+      "assets/art/source/slice12/character.surveyor.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "0865662b68aa923c566561d0ba4ac454e80f5bbd72ba62012d294c3ed453f7a1",
+    "06e021a784f5095921227fda1b404a7b0606aebde03e257ef12ef057d02a6a19"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "bafdd3ba7baf6548a2d9c03b5847cdabbd84a37969434bc8aebb2f2da45d6bea",
+      "inputHash": "0865662b68aa923c566561d0ba4ac454e80f5bbd72ba62012d294c3ed453f7a1",
+      "outputHash": "d85e85e87676c540fd9e6df9450928d110e25a5a38ba6fb2c47a1cfd09953333"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.sepulchral_synod",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original static pixel-art strategy map settlement sprite, isolated on genuine transparent PNG. Whole architectural footprint, roofs and chimneys fully enclosed with generous15% empty margins on every side. Shallow three-quarter southeast map view. Coarse square pixel clusters with grouped material values, soft upper-left highlights, crisp native-style edges, restrained dark fantasy. No landscape/base tile, characters, scenery, labels, text, borders, smooth gradients, glow, smoke or baked checkerboard. This is a single settlement silhouette, not a sheet or comparison. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. Small chalkland founding village: three low pale flat-roof caretaker houses around a modest stepped communal terrace and one narrow indigo awning. Chalk-white masonry, aged bronze door braces, low parapets, no gothic spikes or cathedral. Readable low open footprint, native96x96 detail.",
+  "frames": [
+    {
+      "id": "settlement.village.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.village.sepulchral_synod/5ff2cb69297df15eb7a4217623a1b4e55469a9e53ba328135dd503e3d60173f7/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d1077a0c16cdd7c2522657a1b25d675571bd242c018979e8e663a4a13777cf28",
+    "sourceRefs": [
+      "assets/art/source/slice12/settlement.village.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/settlement.village.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "7fcd7ce6d8df32cd0aba7d8e1d577b336fa65699facb96e7d56d90847257ed85",
+    "bb002134f8c030c4ccd3ef94db5641225a7270c9d63737d2d57bbf14b70efe74"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "d7ee6053e5d66581054bca9769ecf7af940e32de18628867010143aba6f4919d",
+      "inputHash": "7fcd7ce6d8df32cd0aba7d8e1d577b336fa65699facb96e7d56d90847257ed85",
+      "outputHash": "8eec1bb34dea19bb54e641c08bf5bbd6ad12c3a3d00e3beacf2cd52738992c01"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "8eec1bb34dea19bb54e641c08bf5bbd6ad12c3a3d00e3beacf2cd52738992c01",
+      "outputHash": "72ebf5b209aa29a987296bffd6582e9f75106690bb190be2cbc1bccc964132c6"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "72ebf5b209aa29a987296bffd6582e9f75106690bb190be2cbc1bccc964132c6",
+      "outputHash": "e8f70662bbc32b98a7df17c7649bdb525fd5e3995d89b872297e4b09326eb6f5"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "0d8dcb1ff5bfdb5bf3038f0168a25a010b370f4de01cc499629237b5836294ae",
+      "outputHash": "c39d668e1163c3e5f0c341c1404e53367f2aad69a2476ffc89dd727a813b4a3a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "12d0e874aba32523b6c2551b46212ee154ce485e32ab1aeb82819b3e8d91856b",
+      "outputHash": "867afa662fdfc8e5d592e761c4bba532196fbbe538cfef74f9f942a93d043c10"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "13d8d4d8515daee4366c2b8b12d21e36ec7d694718b024450b8e2ad543fe5b9a",
+      "outputHash": "7e32ba3d4f1a85754ef48c2b0af6196f22eda44f5914ef49f08bbe8077026a06"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.village.sepulchral_synod.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:59:24.870Z",
+    "notes": "Inspected native1x/4x: three low chalk houses and small stepped court form an open founding-village silhouette; dark indigo awnings and doors separate pale material planes. Full roof parapets and entry stairs survive96px fitting, no clipped corners or background. Lighter terraced architecture differs structurally from Iron workshops; runtime review pending.\nReviewed candidate 5ff2cb69297df15eb7a4217623a1b4e55469a9e53ba328135dd503e3d60173f7; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a4dbe7c870f87a01a98207b4065babe7a6bc653816c3cedfbd8949050f5bfe40.png"
+    ],
+    "inputHash": "9853eae38fcab89b1420a31031c5fc65eca1fea6c09cd67ff4265f702a2ce427"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

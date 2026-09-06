@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { checksum, UNITS } from '@theandril/content';
 import { isPassable, neighbors } from '@theandril/mapgen';
 import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
+import { rebaseAuthoredLand } from '../../test-fixtures/src/authored-land';
 import { applyCommand, createGame, deserializeGame, getObservation, replayGame, serializeGame, stateHash, validateEndTurn } from './index';
 import type { CampaignBattle, GameCommand, GameState } from './index';
 import { chooseBattleOrder } from './combat';
@@ -102,7 +103,7 @@ describe('field battles in the campaign', () => {
     const crowded = borderBattleCampaign();
     const guard = crowded.armies['army.4'];
     if (!guard) throw new Error('Missing defender');
-    for (let index = 0; index < 12; index++) {
+    for (let index = 0; index < 20; index++) {
       const id = `army.${crowded.nextId++}`;
       crowded.armies[id] = { ...guard, id, formations: [createArmyFormation(id, guard.formations[0]!.unitId)] };
     }
@@ -208,7 +209,7 @@ describe('field battles in the campaign', () => {
         state.armies[id] = { ...defender, id, cell, formations: [createArmyFormation(id, defender.formations[0]!.unitId)] };
       }
     }
-    rebuildIndexes(state);
+    rebaseAuthoredLand(state);
     begin(state);
     checked(state, { type: 'battleOrder', factionId: player, order: 'withdraw' });
     expect(state.armies[attacker.id]).toBeUndefined();
@@ -241,7 +242,7 @@ describe('field battles in the campaign', () => {
 
 describe('battle save invariants', () => {
   it('preserves canonical wars when generated faction IDs share prefixes', () => {
-    const state = createGame({ seed: 1, size: 'tiny', factionCount: 8 });
+    const state = createGame({ seed: 1, size: 'tiny', factionCount: 8, generatorVersion: 3, rosterVersion: 1 });
     state.wars = [['faction.ashen_compact', rival], ['faction.ashen_compact.5', rival]];
     for (const pair of state.wars) recordWar(state, pair[0], pair[1]);
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));

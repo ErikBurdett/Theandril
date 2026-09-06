@@ -127,7 +127,7 @@ export function FactionArtDisplay({ contentId, definitionId, label, compact = fa
 /** Public content information, not discovered campaign seats or an unimplemented selection control. */
 export function PublicCultures() {
   return <section className="public-cultures" aria-labelledby="public-cultures-heading" data-testid="public-cultures">
-    <h3 id="public-cultures-heading">Four introductory cultures</h3>
+    <h3 id="public-cultures-heading">Introductory cultures</h3>
     <p>Public culture reference, not a player-seat selector. Generated realms reuse these traditions; their locations and forces must still be discovered.</p>
     <div className="public-culture-grid">{FACTIONS.map(faction => <article key={faction.id}><FactionArt contentId="ui.crest" definitionId={faction.id} label={`${faction.name} crest`}/><div><h4>{faction.name}</h4><p>{faction.motto}</p></div></article>)}</div>
   </section>;

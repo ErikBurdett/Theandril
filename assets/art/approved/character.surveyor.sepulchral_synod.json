@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.sepulchral_synod",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. ONE full-body living adult woman land surveyor, indigo hood and pale dust veil, kneel-length travel coat, bronze survey dividers held over an open parchment map at waist. Small chalk stake bundle in backpack. Unarmored working scholar, no bow, staff, shield or magic. Facing down-right, whole figure and tools enclosed in10% transparent margins.",
+  "frames": [
+    {
+      "id": "character.surveyor.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.surveyor.sepulchral_synod/2e3361418332dc28231a527755b9b8dcc8d146ae4583ec38851e0f418527bda9/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7a4e67053c3d56f399c76126528348c10313a88cf6460c88d59766dde086a1e2",
+    "sourceRefs": [
+      "assets/art/source/slice12/character.surveyor.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/character.surveyor.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "0f4949398840c237c515da88806c0cc07d4d01864b92d66b1a395664a1811b42",
+    "36469effff74b589f2567610d1c8075fb9527bd23587adcdf4cd6303e818be4d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "b8aad98d035dad062ebb1612b58be03325733d19f756d960155245f36ab74bde",
+      "inputHash": "0f4949398840c237c515da88806c0cc07d4d01864b92d66b1a395664a1811b42",
+      "outputHash": "98ad2b3b046a567c71988fa32a9ba70a9dadb16ead1c0908c009ebf22dc6371d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "98ad2b3b046a567c71988fa32a9ba70a9dadb16ead1c0908c009ebf22dc6371d",
+      "outputHash": "92ca67fa4c4fe13a4d0f50c00a0734b7e79be535bc38b2546ecf51590a3910f1"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "92ca67fa4c4fe13a4d0f50c00a0734b7e79be535bc38b2546ecf51590a3910f1",
+      "outputHash": "dab7d2f2ad8a2a2886e960e162380f590f2cb796b2ac70be3677e7d7a0d463ab"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "52a6e9b18adf8b453e146344b0a5ca8c433a15acb0d197e0d0a0c371abc92ab5",
+      "outputHash": "ea381ebbd0cc22fc091e7406310f06114c715e70b271ffc16830ff0691f5f52b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "643f621988aa585391b007d7b278dec1ce348a4597a161f045b567a6e9c7219c",
+      "outputHash": "49ec0ee157ce9ba884c34ce7280e62d5b1d3f4eafb713b0c968464326bf98bc0"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "624c7d03bdc6e8b2e6b6853f14a68d9d24e268b4b3ac1e68a60baaf88e8f4c74",
+      "outputHash": "f0097fcfe56ecb2ea187cc5779f22d4b75115f6092031b989c31a63d741e5a7a"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.surveyor.sepulchral_synod.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:54:17.337Z",
+    "notes": "Inspected native1x and4x: open pale map at waist and hooded mobile stance distinguish surveyor from raised-baton marshal. Small dividers and field stakes are secondary detail; main map/face/boots remain readable and complete. Indigo and chalk clothing preserve culture identity. Static role art; runtime review pending.\nReviewed candidate 2e3361418332dc28231a527755b9b8dcc8d146ae4583ec38851e0f418527bda9; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/1708d7de1ae47b6215dbcf40909738eafba8c3eaa4aa76ee3559595d025b127a.png"
+    ],
+    "inputHash": "a6052fa1b468ad1c668cd694d54e854e9c404110962e06ff70029d4c0bf748d3"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

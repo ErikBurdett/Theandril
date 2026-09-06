@@ -1,8 +1,8 @@
 # Faction asset coverage
 
-All four implemented cultures have15 distinct, individually approved assets each. Generated campaign seats inherit their definition's kit, not a name-based reskin. These 60 static first-facing assets are integrated in map and UI consumers; they are not a claim of full directional/action animation or additional authored cultures.
+All six authored cultures have 15 distinct, individually approved land-role assets each. Generated campaign seats inherit their definition's kit, not a name-based reskin. These 90 static first-facing assets are published for actual map and UI consumers; they are not a claim of full directional/action animation. The three naval roles per culture remain explicit procedural fallbacks, not approved infantry substitutions.
 
-Every link below opens a retained approval with exact frame/atlas/provenance and review evidence. [Source and extraction index](../../assets/art/faction-index.json), [individual review decisions](reviews/faction-base-kits.json), [visual bible](THEANDRIL_ART_BIBLE.md), [runtime catalog](../../assets/art/runtime/catalog.json).
+Every link below opens a retained approval with exact frame/atlas/provenance and review evidence. [Original four-family extraction index](../../assets/art/faction-index.json), [new individual source index](../../assets/art/source/slice12/generation.json), [original review decisions](reviews/faction-base-kits.json), [new exact review order](reviews/slice12-all-order.json), [visual bible](THEANDRIL_ART_BIBLE.md), [runtime catalog](../../assets/art/runtime/catalog.json).
 
 | Role | Native px | Ashen Compact | Reedbound Council | Cinder March | Glass Tide |
 | --- | --- | --- | --- | --- | --- |
@@ -22,8 +22,28 @@ Every link below opens a retained approval with exact frame/atlas/provenance and
 | ui.banner | 64×64 | [Approved](../../assets/art/approved/ui.banner.ashen_compact.json) | [Approved](../../assets/art/approved/ui.banner.reedbound_council.json) | [Approved](../../assets/art/approved/ui.banner.cinder_march.json) | [Approved](../../assets/art/approved/ui.banner.glass_tide.json) |
 | ui.badge | 32×32 | [Approved](../../assets/art/approved/ui.badge.ashen_compact.json) | [Approved](../../assets/art/approved/ui.badge.reedbound_council.json) | [Approved](../../assets/art/approved/ui.badge.cinder_march.json) | [Approved](../../assets/art/approved/ui.badge.glass_tide.json) |
 
+## Two additional native kits
+
+| Role | Native px | Iron Covenant | Sepulchral Synod |
+| --- | --- | --- | --- |
+| unit.colonist | 64×64 | [Approved](../../assets/art/approved/unit.colonist.iron_covenant.json) | [Approved](../../assets/art/approved/unit.colonist.sepulchral_synod.json) |
+| unit.scout | 64×64 | [Approved](../../assets/art/approved/unit.scout.iron_covenant.json) | [Approved](../../assets/art/approved/unit.scout.sepulchral_synod.json) |
+| unit.guard | 64×64 | [Approved](../../assets/art/approved/unit.guard.iron_covenant.json) | [Approved](../../assets/art/approved/unit.guard.sepulchral_synod.json) |
+| unit.spearman | 64×64 | [Approved](../../assets/art/approved/unit.spearman.iron_covenant.json) | [Approved](../../assets/art/approved/unit.spearman.sepulchral_synod.json) |
+| unit.heavy_infantry | 64×64 | [Approved](../../assets/art/approved/unit.heavy_infantry.iron_covenant.json) | [Approved](../../assets/art/approved/unit.heavy_infantry.sepulchral_synod.json) |
+| unit.cavalry | 96×96 | [Approved](../../assets/art/approved/unit.cavalry.iron_covenant.json) | [Approved](../../assets/art/approved/unit.cavalry.sepulchral_synod.json) |
+| character.marshal | 64×64 | [Approved](../../assets/art/approved/character.marshal.iron_covenant.json) | [Approved](../../assets/art/approved/character.marshal.sepulchral_synod.json) |
+| character.surveyor | 64×64 | [Approved](../../assets/art/approved/character.surveyor.iron_covenant.json) | [Approved](../../assets/art/approved/character.surveyor.sepulchral_synod.json) |
+| character.engineer | 64×64 | [Approved](../../assets/art/approved/character.engineer.iron_covenant.json) | [Approved](../../assets/art/approved/character.engineer.sepulchral_synod.json) |
+| settlement.village | 96×96 | [Approved](../../assets/art/approved/settlement.village.iron_covenant.json) | [Approved](../../assets/art/approved/settlement.village.sepulchral_synod.json) |
+| settlement.town | 96×96 | [Approved](../../assets/art/approved/settlement.town.iron_covenant.json) | [Approved](../../assets/art/approved/settlement.town.sepulchral_synod.json) |
+| settlement.city | 128×128 | [Approved](../../assets/art/approved/settlement.city.iron_covenant.json) | [Approved](../../assets/art/approved/settlement.city.sepulchral_synod.json) |
+| ui.crest | 64×64 | [Approved](../../assets/art/approved/ui.crest.iron_covenant.json) | [Approved](../../assets/art/approved/ui.crest.sepulchral_synod.json) |
+| ui.banner | 64×64 | [Approved](../../assets/art/approved/ui.banner.iron_covenant.json) | [Approved](../../assets/art/approved/ui.banner.sepulchral_synod.json) |
+| ui.badge | 32×32 | [Approved](../../assets/art/approved/ui.badge.iron_covenant.json) | [Approved](../../assets/art/approved/ui.badge.sepulchral_synod.json) |
+
 Troops/buildings appear on observed world entities. Character figures appear in actual appointment, roster and detail controls; recruitment and formations show troop icons. Crests appear in public culture reference, own realm and diplomacy; badges identify encountered realms and grouped far-view armies; banners identify selected armies and far-view towns. No hidden enemy or foreign character receives a UI sprite from private state.
 
-The full pack retains 37 generic foundation assets:97 approved assets /115 frames /one 1024² atlas,492,790 PNG bytes, SHA-256 `59bfd5e96f75f235bbe528b416a8bfb25e44f9965f7a002cb3440afd252e3b90`. There are 80 current map/UI/fallback bindings and17 future-only assets. Map decoding is4 MiB, with a separate potential 4 MiB DOM decode; do not report the map estimate as total presentation memory.
+The full pack contains 37 retained generic foundation assets, 90 culture assets and seven new land assets: 134 approved assets / 152 frames / one 2048² atlas, 692,034 PNG bytes, SHA-256 `7a22a84c0c4623cea16327af27313e6796560024f38fbafde1491a0afe27ceb7`. There are 117 current map/UI/fallback bindings and 17 future-only assets. A 1024² attempt explicitly overflowed; map decoding is now 16 MiB, with a separate potential 16 MiB DOM decode. Do not report the map estimate as total presentation memory.
 
-Ashen uses reviewed source revision 4; revisions 1–3 remain rejected. Other families use revision 1. Source/crop provenance preserves the explicit Glass surveyor/city component masks. Reed/Cinder pikes approach the original sheet top; native points were inspected and fit inside transparent padding. Whole-caravan fit makes travelers smaller than solo infantry; broad cities deliberately overhang their hex. Ornamental Ashen hearth/forge accents are a documented variant of the practical craft-house direction. These are strategic base-kit approvals, not final visual-production signoff.
+Ashen uses reviewed source revision 4; revisions 1–3 remain rejected. Reed/Cinder/Glass use sheet revision 1. Source/crop provenance preserves the explicit Glass surveyor/city component masks. Covenant and Synod use one independently generated original per role; Synod cart/heavy infantry use revision 2 after documented orientation/clipping rejects. Every new role has separate native/enlarged review evidence. Reed/Cinder pikes approach the original sheet top; native points were inspected and fit inside transparent padding. Whole-caravan fit makes travelers smaller than solo infantry; broad cities deliberately overhang their hex. Ornamental Ashen hearth/forge accents are a documented variant of the practical craft-house direction. These are strategic base-kit approvals, not final visual-production signoff.

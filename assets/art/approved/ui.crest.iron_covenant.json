@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.iron_covenant",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art heraldic game UI asset on genuine transparent PNG alpha-zero background. A single simple bold emblem, not a sheet, no text or letters. Coarse pixel clusters and deliberately large readable shapes, serious weathered medieval material treatment with only a few grouped highlights from upper left. NO gradients, halos, glow, antialiasing, checkerboard or background panel outside the object. Complete outline surrounded by at least15% transparent margin. Designed to survive native nearest-neighbor sampling. Iron Covenant CREST at64x64 logical pixels: a simple broad blackened-iron hexagonal shield plate with flat cut shoulders and dull brass rim. Center a bold muted-gold split-anvil icon: broad flat anvil top, narrow stem split by one dark vertical seam, block base. Symmetrical frontal heraldry; no decorative wreath, crown, weapon or landscape. One complete shield.",
+  "frames": [
+    {
+      "id": "ui.crest.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/ui.crest.iron_covenant/0ac6b13caaab1465a0caefea071a1d4445d76cdff7085613c0fcc007b4336ec9/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "a8fdb0b64016fe3c5491c97bcc83a7f620cc120e700d66f82acfc33cef80112b",
+    "sourceRefs": [
+      "assets/art/source/slice12/ui.crest.iron_covenant-v1.png",
+      "assets/art/source/slice12/ui.crest.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "123f5ac08d5e203b5e6b1e1a60e7510a8acf90a9c421d060aedd66c20e8aeba0",
+    "77223193b48431b8ff350d199b7db62876a40fb8c3e878ec78f1edc7dfeff7b2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "4c7c49a66235b12c71f290006373140e15b215b5a8081bea4b16f5d76c93d876",
+      "inputHash": "123f5ac08d5e203b5e6b1e1a60e7510a8acf90a9c421d060aedd66c20e8aeba0",
+      "outputHash": "12ec7a666351ee5b1a2d84eec917ff3d208d2f9afadafcc279588eb44fd45ac2"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "12ec7a666351ee5b1a2d84eec917ff3d208d2f9afadafcc279588eb44fd45ac2",
+      "outputHash": "2b1d82e5607862fa156ba05db48295c283327338b806763c83fd712211e5ceac"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "2b1d82e5607862fa156ba05db48295c283327338b806763c83fd712211e5ceac",
+      "outputHash": "b38a707d92b012cbbe3fb5c251544a62e97ad9c9664b2a80e43575c2e0455da2"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "02aacdd133b08a8e0f649673f5ccd670b339ddf3be86392bd83cc09ec30fa8ae",
+      "outputHash": "98954aa8196452b37da4e141ad8c44340539f496c38374506edd8ac76897f3f4"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "f4dd37e0d4cd4d649c9ee919eef73b0c3992057492e8cf0edf34e5e37e6f2a2e",
+      "outputHash": "fc85d15b2029f64e8c68d2b92cf564f75994382143a2e2133b1a8dc9129bc403"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "28ec139dc5d00f536d2e5e3d37c50544b56eb1defc69404bd8b44c06cf03741a",
+      "outputHash": "bdce923f29d5d97cebc305a36f784251999d51ff8570fd02b1a72371429c70c2"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.crest.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T05:32:42.911Z",
+    "notes": "Inspected native1x/4x: angular iron shield and brass rim enclose one broad split-anvil mark; emblem remains legible without letters. Full64px centered shield tip and shoulders fit padding. Distinct material planes, not a tinted existing crest. Static UI source approved; actual UI review pending.\nReviewed candidate 0ac6b13caaab1465a0caefea071a1d4445d76cdff7085613c0fcc007b4336ec9; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0a821d647d645c0130fa42bc874518242f12bbcb499be02f38d6c9618269f680.png"
+    ],
+    "inputHash": "95377d955b90fcd42c624a4e6a6056ded781a98c8d20edbaca655f57d2be8c73"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

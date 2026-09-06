@@ -1,0 +1,325 @@
+{
+  "capturedAt": "2026-09-06T06:30:32.013Z",
+  "command": "node --import tsx scripts/benchmark-cell-transfer.ts --output",
+  "runtime": "v26.7.0",
+  "os": "linux 7.1.9-arch1-2",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "logicalCpus": 32,
+  "installedMemoryBytes": 33317580800,
+  "contentHash": "9418e598",
+  "warmups": 3,
+  "samples": 12,
+  "workloads": [
+    {
+      "size": "huge",
+      "factions": 32,
+      "towns": 32,
+      "fullyExplored": true,
+      "visible": 61,
+      "movementCommand": {
+        "type": "move",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.2",
+        "target": 50498
+      },
+      "beforeHash": "638cd4a9",
+      "afterHash": "4f2cfe0f",
+      "full": {
+        "cells": 196608,
+        "oldJsonBytes": 16329737,
+        "packedBytes": 1769695,
+        "binaryBytes": 1769612,
+        "dictionaryAndMetadataBytes": 83,
+        "sparseMetadataRows": 7,
+        "dictionaryEntries": 2,
+        "reductionPercent": 89.16274646676796,
+        "observedCellsSeal": "9d361b1127d370ef7bbbe783782226c87f991bd31741654c05a4b1fdc6083dfd",
+        "objectStructuredClone": {
+          "samples": 12,
+          "meanMs": 75.41237091666663,
+          "medianMs": 75.64848600000005,
+          "p95Ms": 81.79626000000007,
+          "maxMs": 81.79626000000007
+        },
+        "pack": {
+          "samples": 12,
+          "meanMs": 27.767665583333326,
+          "medianMs": 25.207801000000018,
+          "p95Ms": 40.874728000000005,
+          "maxMs": 40.874728000000005
+        },
+        "transferStructuredClone": {
+          "samples": 12,
+          "meanMs": 0.03729916666668487,
+          "medianMs": 0.03430100000014136,
+          "p95Ms": 0.04968600000006518,
+          "maxMs": 0.04968600000006518
+        },
+        "unpack": {
+          "samples": 12,
+          "meanMs": 5.772125916666691,
+          "medianMs": 4.3932300000001305,
+          "p95Ms": 30.34956000000011,
+          "maxMs": 30.34956000000011
+        },
+        "packTransferUnpack": {
+          "samples": 12,
+          "meanMs": 33.5770906666667,
+          "medianMs": 31.83232599999974,
+          "p95Ms": 54.936261000000286,
+          "maxMs": 54.936261000000286
+        }
+      },
+      "delta": {
+        "cells": 18,
+        "oldJsonBytes": 1486,
+        "packedBytes": 202,
+        "binaryBytes": 162,
+        "dictionaryAndMetadataBytes": 40,
+        "sparseMetadataRows": 0,
+        "dictionaryEntries": 0,
+        "reductionPercent": 86.40646029609691,
+        "observedCellsSeal": "cb7f5f9619df656635e2eaf0b69f7013c84b73bacf52773356c0206f168e9c80",
+        "objectStructuredClone": {
+          "samples": 12,
+          "meanMs": 0.007716499999939212,
+          "medianMs": 0.007726999999704276,
+          "p95Ms": 0.008190000000013242,
+          "maxMs": 0.008190000000013242
+        },
+        "pack": {
+          "samples": 12,
+          "meanMs": 0.0026636666666490783,
+          "medianMs": 0.002686999999696127,
+          "p95Ms": 0.0029029999996055267,
+          "maxMs": 0.0029029999996055267
+        },
+        "transferStructuredClone": {
+          "samples": 12,
+          "meanMs": 0.0038042499999164647,
+          "medianMs": 0.0037449999999807915,
+          "p95Ms": 0.004057000000102562,
+          "maxMs": 0.004057000000102562
+        },
+        "unpack": {
+          "samples": 12,
+          "meanMs": 0.0012234999999994518,
+          "medianMs": 0.001209000000017113,
+          "p95Ms": 0.0013509999998859712,
+          "maxMs": 0.0013509999998859712
+        },
+        "packTransferUnpack": {
+          "samples": 12,
+          "meanMs": 0.007691416666564995,
+          "medianMs": 0.007746999999653781,
+          "p95Ms": 0.008021000000098866,
+          "maxMs": 0.008021000000098866
+        }
+      },
+      "empty": {
+        "cells": 0,
+        "oldJsonBytes": 2,
+        "packedBytes": 39,
+        "binaryBytes": 0,
+        "dictionaryAndMetadataBytes": 39,
+        "sparseMetadataRows": 0,
+        "dictionaryEntries": 0,
+        "reductionPercent": -1850,
+        "observedCellsSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "objectStructuredClone": {
+          "samples": 12,
+          "meanMs": 0.0007100833333500608,
+          "medianMs": 0.0006709999997838167,
+          "p95Ms": 0.0009599999998499698,
+          "maxMs": 0.0009599999998499698
+        },
+        "pack": {
+          "samples": 12,
+          "meanMs": 0.0006250000000894337,
+          "medianMs": 0.0006260000000111177,
+          "p95Ms": 0.0006740000003446767,
+          "maxMs": 0.0006740000003446767
+        },
+        "transferStructuredClone": {
+          "samples": 12,
+          "meanMs": 0.0036444166666266633,
+          "medianMs": 0.003596999999899708,
+          "p95Ms": 0.004503999999997177,
+          "maxMs": 0.004503999999997177
+        },
+        "unpack": {
+          "samples": 12,
+          "meanMs": 0.0010585833332849386,
+          "medianMs": 0.0009780000000318978,
+          "p95Ms": 0.0018749999999272404,
+          "maxMs": 0.0018749999999272404
+        },
+        "packTransferUnpack": {
+          "samples": 12,
+          "meanMs": 0.005328000000001036,
+          "medianMs": 0.005242000000180269,
+          "p95Ms": 0.0061749999999847205,
+          "maxMs": 0.0061749999999847205
+        }
+      },
+      "heapUsedBytes": 398150752,
+      "rssBytes": 814850048
+    },
+    {
+      "size": "legendary",
+      "factions": 40,
+      "towns": 40,
+      "fullyExplored": true,
+      "visible": 61,
+      "movementCommand": {
+        "type": "move",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.2",
+        "target": 134019
+      },
+      "beforeHash": "a0bf21f7",
+      "afterHash": "8e9f7359",
+      "full": {
+        "cells": 307200,
+        "oldJsonBytes": 25577385,
+        "packedBytes": 2765023,
+        "binaryBytes": 2764940,
+        "dictionaryAndMetadataBytes": 83,
+        "sparseMetadataRows": 7,
+        "dictionaryEntries": 2,
+        "reductionPercent": 89.18957899722744,
+        "observedCellsSeal": "4c4afb6d1416706ec4995804ba421ddda9a26ebd2e23da32d132b26e1d9b7b93",
+        "objectStructuredClone": {
+          "samples": 12,
+          "meanMs": 127.6567859166665,
+          "medianMs": 127.95738799999981,
+          "p95Ms": 133.2119160000002,
+          "maxMs": 133.2119160000002
+        },
+        "pack": {
+          "samples": 12,
+          "meanMs": 38.206075500000075,
+          "medianMs": 36.909975000000486,
+          "p95Ms": 61.0467749999998,
+          "maxMs": 61.0467749999998
+        },
+        "transferStructuredClone": {
+          "samples": 12,
+          "meanMs": 0.034790249999862986,
+          "medianMs": 0.034261000000697095,
+          "p95Ms": 0.04402399999980844,
+          "maxMs": 0.04402399999980844
+        },
+        "unpack": {
+          "samples": 12,
+          "meanMs": 6.594544666666707,
+          "medianMs": 3.477179999999862,
+          "p95Ms": 30.19075199999952,
+          "maxMs": 30.19075199999952
+        },
+        "packTransferUnpack": {
+          "samples": 12,
+          "meanMs": 44.83541041666664,
+          "medianMs": 41.468001999999615,
+          "p95Ms": 65.17122500000005,
+          "maxMs": 65.17122500000005
+        }
+      },
+      "delta": {
+        "cells": 18,
+        "oldJsonBytes": 1504,
+        "packedBytes": 202,
+        "binaryBytes": 162,
+        "dictionaryAndMetadataBytes": 40,
+        "sparseMetadataRows": 0,
+        "dictionaryEntries": 0,
+        "reductionPercent": 86.56914893617021,
+        "observedCellsSeal": "e8ecd52b58a44ff510924e52683a78b2e88608c68dba94c3ffb11904430491bb",
+        "objectStructuredClone": {
+          "samples": 12,
+          "meanMs": 0.008049083333238135,
+          "medianMs": 0.007718999999269727,
+          "p95Ms": 0.009583999999449588,
+          "maxMs": 0.009583999999449588
+        },
+        "pack": {
+          "samples": 12,
+          "meanMs": 0.002605166666550455,
+          "medianMs": 0.0026129999987460906,
+          "p95Ms": 0.0030029999998077983,
+          "maxMs": 0.0030029999998077983
+        },
+        "transferStructuredClone": {
+          "samples": 12,
+          "meanMs": 0.003550666666493877,
+          "medianMs": 0.003509999998641433,
+          "p95Ms": 0.004426999999850523,
+          "maxMs": 0.004426999999850523
+        },
+        "unpack": {
+          "samples": 12,
+          "meanMs": 0.0016695833337507793,
+          "medianMs": 0.0011230000000068685,
+          "p95Ms": 0.005673000001479522,
+          "maxMs": 0.005673000001479522
+        },
+        "packTransferUnpack": {
+          "samples": 12,
+          "meanMs": 0.007825416666795112,
+          "medianMs": 0.0072770000024320325,
+          "p95Ms": 0.013103000001137843,
+          "maxMs": 0.013103000001137843
+        }
+      },
+      "empty": {
+        "cells": 0,
+        "oldJsonBytes": 2,
+        "packedBytes": 39,
+        "binaryBytes": 0,
+        "dictionaryAndMetadataBytes": 39,
+        "sparseMetadataRows": 0,
+        "dictionaryEntries": 0,
+        "reductionPercent": -1850,
+        "observedCellsSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "objectStructuredClone": {
+          "samples": 12,
+          "meanMs": 0.0006596666671612184,
+          "medianMs": 0.0006630000007135095,
+          "p95Ms": 0.0008020000004762551,
+          "maxMs": 0.0008020000004762551
+        },
+        "pack": {
+          "samples": 12,
+          "meanMs": 0.00041700000004614896,
+          "medianMs": 0.00038999999924271833,
+          "p95Ms": 0.0005380000002332963,
+          "maxMs": 0.0005380000002332963
+        },
+        "transferStructuredClone": {
+          "samples": 12,
+          "meanMs": 0.003257333333749557,
+          "medianMs": 0.003281000001152279,
+          "p95Ms": 0.00358800000140036,
+          "maxMs": 0.00358800000140036
+        },
+        "unpack": {
+          "samples": 12,
+          "meanMs": 0.0008386666663682263,
+          "medianMs": 0.0008309999993798556,
+          "p95Ms": 0.0009829999999055872,
+          "maxMs": 0.0009829999999055872
+        },
+        "packTransferUnpack": {
+          "samples": 12,
+          "meanMs": 0.004513000000163932,
+          "medianMs": 0.004495000001043081,
+          "p95Ms": 0.0050490000012359815,
+          "maxMs": 0.0050490000012359815
+        }
+      },
+      "heapUsedBytes": 854975056,
+      "rssBytes": 1397891072
+    }
+  ],
+  "scope": "Actual observed cells from generated worlds with public founding and movement; full exploration is authored then strictly loaded. Three warmups excluded. Node structuredClone with real transfer detaches packet buffers; this is not browser postMessage scheduling or rendering. Packing and full decoder validation are included, while accounting, hashes, saved movement mirror and JSON comparisons are excluded. Logical bytes count binary byteLength plus UTF-8 metadata/dictionary; implementation-specific clone framing/decoded heap is not included. Heap/RSS are unforced-GC process samples, not leak proof. Empty packets may exceed [] JSON size."
+}

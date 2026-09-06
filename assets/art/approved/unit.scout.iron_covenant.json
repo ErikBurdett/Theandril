@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.scout.iron_covenant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.scout.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Produce ONE original static strategic-game PIXEL-ART sprite for Theandril, on genuine transparent PNG alpha-zero background. One isolated subject, not a sprite sheet. Southeast shallow three-quarter view, entire silhouette enclosed in generous empty margins. Deliberately coarse square pixel clusters, roughly64x64 logical detail shown enlarged, clear silhouette and grouped midtones, restrained soft upper-left light. Serious weathered medieval fantasy, no cartoon/chibi proportions, no text, labels, borders, scenery, floor tile, glow, smooth gradients, antialiasing, tiny texture confetti or baked checkerboard. Suitable for exact native nearest-neighbor processing. Iron Covenant of the Anvilheights: disciplined deep-folk holds and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass fittings, charcoal leather, muted gold cloth, faceted helmets, original simple split-anvil seal. Angular engineering rather than horns, spikes or costume borrowed from other games. Subject: one lean adult human valley wayfinder in a short charcoal hood, brass-clasped travel coat, visible face, compact recurve bow held diagonally low and arrow quiver. Lighter leather kit, boots, rolled route chart, modest split-anvil clasp. Full body. The open scout silhouette contrasts with the broad heavy deep-folk shield infantry.",
+  "frames": [
+    {
+      "id": "unit.scout.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.scout.iron_covenant/317ea118e38032640bf06a61d1d270b48801d3e23cbfa48944558731a8f6af38/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1a5021dfa26bb504c08ae38c3b44c3c9f5f50560cadb608cc5811c58bcd7464d",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.scout.iron_covenant-v1.png",
+      "assets/art/source/slice12/unit.scout.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "36753c947cb988df9b4a3179f1e026a48da29126f40e897fbc4a98eadc7054c6",
+    "39070a6abd3a4583e6214980a1372dfdf2a0b98e5fe0c4c8bf78edb412dc2393"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "d1445198680b63db674bf2aadf88f04da62bf31ebf4864e7fcdd491fe93e3cea",
+      "inputHash": "36753c947cb988df9b4a3179f1e026a48da29126f40e897fbc4a98eadc7054c6",
+      "outputHash": "f0dceb335ff3447d1b77681048d4561e5f19cc1776cb3eb7d7039554e61d39e5"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "f0dceb335ff3447d1b77681048d4561e5f19cc1776cb3eb7d7039554e61d39e5",
+      "outputHash": "5f4c499a080854776236482d0d28706571191b3a2d30a41d8d5b3561817a4b35"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "5f4c499a080854776236482d0d28706571191b3a2d30a41d8d5b3561817a4b35",
+      "outputHash": "3a7663be93fef5868bce74737534be1fa00333cc2d3a2e0c1eff44357c12d439"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "fcb97a1892dd61571fdcbf7355aa31761d427e737a4eaddd0fa15a0bde53a116",
+      "outputHash": "ded76a63d076e193491f33fe8e87b7eef5d77bf5d658bf2ca4e4e2666ae3a6ae"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "9f5b2d7b31e0a9fa63341df1ce00c7507ce81eb3d1493975a3c1f66b8c47a85c",
+      "outputHash": "477ff63c6eded709edc4631456aff29f1bacb4658d19fbc59a862a21e5cdcd0f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "00e4a3c2dad879884946ee6ee1f5b2b608c9600733e839665bf72eb5a91cca3d",
+      "outputHash": "e25efcc26b2f93d2d730d48984c1182876fde0bd3a2ff0d56c61b2316adfef26"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.scout.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:46:29.987Z",
+    "notes": "Inspected native 1x and 4x: slender unshielded adult scout, diagonal low bow and high quiver separate from the broad guard silhouette. Dark hood and brass accents remain restrained; boots and equipment are unclipped on the common ground anchor. Fine facial details intentionally resolve as a small value cluster. Static idle only; in-game review pending.\nReviewed candidate 317ea118e38032640bf06a61d1d270b48801d3e23cbfa48944558731a8f6af38; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/c83857113abb7be0e59f63ef4f0e018652bbfa0d1178caa132d29e7771550f43.png"
+    ],
+    "inputHash": "3ea29a290da1dccdc46bdeb6cdb923aa3970744db4f7532f23b4d71c270da356"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

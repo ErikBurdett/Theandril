@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.iron_covenant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. One broad adult deep-folk pike soldier. Long practical ash pike vertical and slightly forward, its steel tip wholly inside generous top margin; small squared buckler, blue-black mail under gold-tabbed leather. Compact planted stance, visible beard, simple low faceted iron helmet. Pike shaft one continuous readable diagonal; no extra weapons.",
+  "frames": [
+    {
+      "id": "unit.spearman.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.spearman.iron_covenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e41796f946f907d3781e063391019645b398a3636367647d1e07d141b3b4b876",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.spearman.iron_covenant-v1.png",
+      "assets/art/source/slice12/unit.spearman.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "32d5e618700f26628a2fb19a913d8e4b84c3f8e05ce0cc850a0cf09cbff6f55f",
+    "d9b1792b9472d19b69659015326d39f86c68f8bff580306f68b06e7648a9a1a8"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "1f31b421a9dbd7bc1bea4e9d7dc0b7090f3836493ceac3f4451a13aab7c5d430",
+      "inputHash": "32d5e618700f26628a2fb19a913d8e4b84c3f8e05ce0cc850a0cf09cbff6f55f",
+      "outputHash": "5e9284c38e96d9c5faa3eb7cf4bba6a31a8c16e2283eefda9c24c8ecb2b81454"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

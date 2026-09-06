@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { CHARACTER_DEFINITIONS, checksum, UNITS } from '@theandril/content';
 import { deriveWaterDepth, isPassable, neighbors, SeededRandom } from '@theandril/mapgen';
 import { characterBattleCampaign, characterCampaign } from '../../test-fixtures/src/character-fixture';
+import { rebaseAuthoredLand } from '../../test-fixtures/src/authored-land';
 import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
 import { conquestCampaign } from '../../test-fixtures/src/conquest-fixture';
 import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, getMovementQuery, getObservation, serializeGame, serializeGameForVersion, stateHash } from './index';
@@ -35,6 +36,23 @@ function attach(state: GameState, definitionId: string, armyId = 'army.2'): Char
 const mission = (state: GameState, character: Character, missionId: string, settlementId?: string) => issue(state, { type: 'startCharacterMission', factionId: character.factionId, characterId: character.id, missionId, ...(settlementId ? { settlementId } : {}) });
 
 describe('named campaign characters', () => {
+  it('exposes every legal attachment destination in a 100-army co-located stack', () => {
+    // Explicit synthetic stack; appointment and the distant-list assignment
+    // still use normal commands, and the scenario passed strict save loading.
+    const state = characterCampaign(100), surveyor = appoint(state, 'character.surveyor');
+    const expectedIds = Object.values(state.armies).filter(army => army.factionId === player).map(army => army.id).sort();
+    const before = stateHash(state), view = getObservation(state, player);
+    const options = view.characters.find(character => character.id === surveyor.id)!.assignmentOptions;
+    expect(options).toHaveLength(100);
+    expect(options.map(option => option.armyId)).toEqual(expectedIds);
+    expect(options.every(option => option.canAssign && option.blocker === null)).toBe(true);
+    expect(stateHash(state)).toBe(before);
+    const destination = options.at(-1)!;
+    issue(state, { type: 'assignCharacter', factionId: player, characterId: surveyor.id, armyId: destination.armyId });
+    expect(surveyor.location).toEqual({ kind: 'army', armyId: destination.armyId });
+    expect(restore(state).characters[surveyor.id]!.location).toEqual(surveyor.location);
+  });
+
   it('earns branching training through real refit experience and applies the learned improvement', () => {
     const state = characterCampaign(); const engineer = attach(state, 'character.engineer');
     const army = state.armies['army.2']!;
@@ -94,7 +112,7 @@ describe('named campaign characters', () => {
     state.world.waterDepth = deriveWaterDepth(state.world.width, state.world.height, state.world.terrain);
     const fleetId = `army.${state.nextId++}`;
     state.armies[fleetId] = { id: fleetId, factionId: player, name: 'Harbor command', cell: shore, movement: 3, formations: [createArmyFormation(fleetId, 'unit.transport')] };
-    state.progression[player]!.technologies.push('technology.coastal_navigation'); state.progression[player]!.technologies.sort(); rebuildIndexes(state);
+    state.progression[player]!.technologies.push('technology.coastal_navigation'); state.progression[player]!.technologies.sort(); rebaseAuthoredLand(state);
     const marshal = appoint(state, 'character.marshal');
     expect(getObservation(state, player).characters.find(item => item.id === marshal.id)!.assignmentOptions).toContainEqual({ armyId: fleetId, label: 'Harbor command', canAssign: true, blocker: null });
     const command = { type: 'assignCharacter' as const, factionId: player, characterId: marshal.id, armyId: fleetId };
@@ -107,7 +125,7 @@ describe('named campaign characters', () => {
     expect(state.armies[fleetId]!.movement).toBe(1); expect(characterCell(state, marshal)).toBe(town.cell); restore(state);
     const engineer = appoint(state, 'character.engineer');
     issue(state, { type: 'assignCharacter', factionId: player, characterId: engineer.id, armyId: 'army.2' });
-    issue(state, { type: 'embark', factionId: player, armyId: 'army.2', fleetId });
+    issue(state, { type: 'embarkArmy', factionId: player, armyId: 'army.2', fleetId });
     reject(state, { type: 'unassignCharacter', factionId: player, characterId: engineer.id, settlementId: town.id });
     reject(state, { type: 'assignCharacter', factionId: player, characterId: engineer.id, armyId: fleetId });
     reject(state, { type: 'startCharacterMission', factionId: player, characterId: engineer.id, missionId: 'mission.refit' });
@@ -327,7 +345,7 @@ describe('named campaign characters', () => {
     const protectedCells = new Set([attacker.cell, ...Object.values(state.settlements).map(town => town.cell), ...state.world.starts]);
     for (const cell of neighbors(defender.cell, state.world.width, state.world.height)) if (!protectedCells.has(cell)) { state.world.terrain[cell] = 0; state.world.biome[cell] = 0; state.world.fertility[cell] = 0; }
     state.world.waterDepth = deriveWaterDepth(state.world.width, state.world.height, state.world.terrain);
-    attacker.formations = [createArmyFormation(attacker.id, 'unit.heavy_infantry')]; attacker.movement = 2; rebuildIndexes(state);
+    attacker.formations = [createArmyFormation(attacker.id, 'unit.heavy_infantry')]; attacker.movement = 2; rebaseAuthoredLand(state);
     issue(state, { type: 'declareWar', factionId: player, targetFactionId: rival }); issue(state, { type: 'attack', factionId: player, armyId: attacker.id, targetArmyId: defender.id }); issue(state, { type: 'autoResolveBattle', factionId: player });
     expect(doomed.dead).toBe(true); expect(doomed.location).toBeNull();
     expect(state.battleReports.at(-1)?.characterAftermath).toContainEqual({ characterId: doomed.id, name: doomed.name, outcome: 'dead', experience: 0, woundedTurns: 0 });

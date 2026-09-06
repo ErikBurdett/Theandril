@@ -1,5 +1,6 @@
 import { createArmyFormation } from './army-composition';
 import { describe, expect, it } from 'vitest';
+import { rebaseAuthoredLand } from '../../test-fixtures/src/authored-land';
 import { checksum, UNITS } from '@theandril/content';
 import { deriveBiomes } from '@theandril/mapgen';
 import { applyCommand, createGame, deserializeGame, getMovementQuery, getObservation, MAX_PATH_NODES, replayGame, serializeGame, stateHash } from './index';
@@ -13,7 +14,7 @@ const issue = (state: GameState, command: GameCommand): void => { expect(applyCo
 const reject = (state: GameState, command: unknown): void => { const hash = stateHash(state); expect(applyCommand(state, command).ok).toBe(false); expect(stateHash(state)).toBe(hash); };
 function field(war = false): GameState {
   const state = createGame({ seed: 88, size: 'tiny', factionCount: 2, pace: 'short' });
-  state.world.terrain.fill(1); state.world.fertility.fill(75); state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, state.world.generatorVersion);
+  state.world.terrain.fill(1); state.world.waterDepth.fill(0); state.world.fertility.fill(75); state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, state.world.generatorVersion);
   delete state.armies['army.1']; delete state.armies['army.3'];
   const guard = UNITS.find(unit => unit.id === 'unit.guard')!;
   for (const [id, cell] of [[armyId, 100], ['army.4', 1500]] as const) Object.assign(state.armies[id]!, { formations: [createArmyFormation(id, guard.id)], name: guard.name, movement: guard.movement, cell });
@@ -130,7 +131,7 @@ describe('persistent queued travel and interruptions', () => {
     const state = field(true); state.armies['army.4']!.cell = 105;
     const id = `settlement.${state.nextId++}`;
     state.settlements[id] = { id, factionId, founderFactionId: factionId, name: 'Road hearth', cell: 104, population: 1, food: 0, buildings: [], queue: [], devastation: 0, occupationTurns: 0 };
-    rebuildIndexes(state); issue(state, queue(104));
+    rebaseAuthoredLand(state); issue(state, queue(104));
     if (state.routes[armyId]?.status === 'paused') issue(state, { type: 'resumeMovement', factionId, armyId });
     expect(state.routes[armyId]?.status).toBe('active');
     issue(state, { type: 'besiege', factionId: rival, armyId: 'army.4', settlementId: id });
@@ -177,7 +178,7 @@ describe('strict saved routes', () => {
     ['unknown biome', (save: Save) => { save.state.world.biome[0] = 90; }],
     ['water biome on land', (save: Save) => { save.state.world.biome[100] = 0; }],
     ['wrong biome dimensions', (save: Save) => { save.state.world.biome.pop(); }],
-    ['unknown generator', (save: Save) => { save.state.world.generatorVersion = 3; }],
+    ['unknown generator', (save: Save) => { save.state.world.generatorVersion = 99; }],
   ] as const)('rejects %s even when the checksum is recomputed', (_name, mutate) => {
     const state = field(); issue(state, queue(110)); const save: Save = JSON.parse(serializeGame(state)); mutate(save); save.stateChecksum = checksum(JSON.stringify(save.state));
     expect(() => deserializeGame(JSON.stringify(save))).toThrow();

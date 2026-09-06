@@ -38,7 +38,7 @@ test('AI watch plays a whole generated campaign, survives a save, and binds both
   await expect(page.getByTestId('victory-result')).toContainText('achieved Prosperity');
   const finalHash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
   const victory = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.victory);
-  expect(victory?.turn).toBe(43); // Current rules; the original v4 turn46 seal has a separate frozen replay test.
+  expect(victory?.turn).toBe(38); // Schema9 worked-land economy; genuine historical rules/archive seals remain separately tested.
   await dialog.getByLabel('History chapter', { exact: true }).selectOption('1');
   await expect(page.getByTestId('history-chapter')).toContainText('was founded');
   await page.screenshot({ path: testInfo.outputPath('history-tome.png'), fullPage: true });

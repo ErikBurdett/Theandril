@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.iron_covenant",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art heraldic game UI asset on genuine transparent PNG alpha-zero background. A single simple bold emblem, not a sheet, no text or letters. Coarse pixel clusters and deliberately large readable shapes, serious weathered medieval material treatment with only a few grouped highlights from upper left. NO gradients, halos, glow, antialiasing, checkerboard or background panel outside the object. Complete outline surrounded by at least15% transparent margin. Designed to survive native nearest-neighbor sampling. Iron Covenant BANNER at64x64 logical pixels: one upright short dark wooden pole with plain brass finial, charcoal-blue rectangular cloth extending RIGHT with a single short swallowtail notch. Bold muted-gold split-anvil centered on cloth. Entire pole including planted pointed foot fully visible, no ground or pedestal. No wind animation implied; static cloth.",
+  "frames": [
+    {
+      "id": "ui.banner.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/ui.banner.iron_covenant/968998dcdb29bd7089cb39531884910d5fed379d3cdf4d50f8582537863769c8/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bdbc555688b97cf14f217204f4ec158ebbc49804b29bb9c10a77bb56df550157",
+    "sourceRefs": [
+      "assets/art/source/slice12/ui.banner.iron_covenant-v1.png",
+      "assets/art/source/slice12/ui.banner.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "8a7537987b217f2763d140fcb156f0f195b9a297306763e6801055945d8a2a1a",
+    "a82902f7201df83b690cdf5de6909e70de4c2534f26d96c7dbaa24b5ec57b544"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "ed5cd84b5b5f276b1b9caea54af631c6b9d6dda5a0467ab779c343f4e01e4b52",
+      "inputHash": "8a7537987b217f2763d140fcb156f0f195b9a297306763e6801055945d8a2a1a",
+      "outputHash": "473167ced15e6f39f2464fad865092cc1e77cdf8d9aca5980301116ce4f4b42e"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "473167ced15e6f39f2464fad865092cc1e77cdf8d9aca5980301116ce4f4b42e",
+      "outputHash": "7e5b44be9c30142264300a9c7674aedc284f48830778aced8f0be09eb69450d5"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7e5b44be9c30142264300a9c7674aedc284f48830778aced8f0be09eb69450d5",
+      "outputHash": "302b6e11bc25d1e4ededcc816dad0f7e03ba4785a90dad3bfa6f1d8a5a7c7971"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "50dbdbd2d5fb270d235193d4b4ff2b4c74edab6199b5683043b3937fa02d402d",
+      "outputHash": "ce99a75d136d3720cade491151ead9d122c0eec70be8c33cee40fd99d5f5b212"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "639dacbc1ab22eb1a3fdcc8da246ec6e653a05524d9eb7d5e929e00588e3aeb7",
+      "outputHash": "8456a406850e8582460bc9374e455a1a8078adf13d7eec2eb99e58e526ffe7fe"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "857c5a71b6a2f2412d4cd19bacd42c71d10e05e8227fa790ebf9d5ba0af53608",
+      "outputHash": "27083d64a56331f757c8c93c7d5ce37d114dcf2255452a82e49ad154e5ad76e8"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.banner.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T05:32:43.517Z",
+    "notes": "Inspected native1x/4x: rightward swallowtail cloth, short pole and brass finial form continuous native64px banner; gold split-anvil remains recognizable. Pole foot is wholly retained at ground anchor32,56. Ragged cloth holes are deliberate hard alpha, not absent animation frames. Static UI/map source; placement review pending.\nReviewed candidate 968998dcdb29bd7089cb39531884910d5fed379d3cdf4d50f8582537863769c8; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/1f4ecbb8113ee2abe7d2156cb5b4ce4894e0349d8347227e0df3f6d4340c1ecb.png"
+    ],
+    "inputHash": "0dfebd7c0187d6253e0746e2e686ec94051edd5b6bb83cc856d470686ef2c13a"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

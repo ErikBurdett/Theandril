@@ -3,6 +3,7 @@ import { FACTION_ART_FAMILIES, factionArtId, type RuntimeCatalog } from '@theand
 import { neighbors } from '@theandril/mapgen';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, serializeGame, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
+import { rebaseAuthoredLand } from '../../packages/test-fixtures/src/authored-land';
 
 const ROLES = ['unit.colonist', 'unit.scout', 'unit.guard', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry'];
 const HIDDEN_ARMY_NAME = 'Unseen Glass detachment';
@@ -10,14 +11,14 @@ const cell = (column: number, row: number) => row * 48 + column;
 
 /** Authored initial placement, never a runtime mutator. Every subsequent input is real UI. */
 function factionGallery(): GameState {
-  const state = createGame({ seed: 20260905, size: 'tiny', factionCount: 4, pace: 'short' });
+  const state = createGame({ seed: 20260905, size: 'tiny', factionCount: 6, pace: 'short' });
   for (const faction of state.factions) {
     const colonist = Object.values(state.armies).find(army => army.factionId === faction.id && army.formations[0]?.unitId === 'unit.colonist');
     if (!colonist) throw new Error('Gallery requires a founding caravan');
     const result = applyCommand(state, { type: 'found', factionId: faction.id, armyId: colonist.id, name: `${faction.name} hearth` });
     if (!result.ok) throw new Error(result.error);
   }
-  state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60);
+  state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60); state.world.waterDepth.fill(0);
   state.armies = {};
   function addArmy(factionId: string, unitId: string, location: number, name: string) {
     const id = `army.${state.nextId++}`;
@@ -26,10 +27,11 @@ function factionGallery(): GameState {
   state.factions.forEach((faction, family) => {
     ROLES.forEach((role, index) => addArmy(faction.id, role, cell(15 + index * 2, 10 + family * 2), `${FACTION_ART_FAMILIES[family]} ${role.slice(5)}`));
     const town = Object.values(state.settlements).find(town => town.factionId === faction.id)!;
-    town.cell = cell(15 + family * 4, 8); town.population = [2, 6, 12, 2][family]!;
+    town.cell = cell(15 + (family % 3) * 5, family < 3 ? 8 : 22); town.population = [2, 3, 8, 2, 3, 8][family]!;
   });
   for (const [column, row] of [[16, 14], [24, 14], [16, 18], [24, 18]]) addArmy(state.turnOwnerId, 'unit.scout', cell(column!, row!), 'Gallery observer');
-  addArmy(state.turnOwnerId, 'unit.scout', cell(22, 14), 'Culture survey');
+  addArmy(state.turnOwnerId, 'unit.scout', cell(20, 19), 'Southern town observer');
+  addArmy(state.turnOwnerId, 'unit.scout', cell(22, 15), 'Culture survey');
   addArmy(state.turnOwnerId, 'unit.guard', cell(19, 10), 'Co-located hearth reserve');
   // The same authored family also has a genuine unseen army, never sent to the renderer.
   addArmy(state.factions[3]!.id, 'unit.guard', 0, HIDDEN_ARMY_NAME);
@@ -45,19 +47,20 @@ function factionGallery(): GameState {
   }
   for (const army of Object.values(state.armies)) reveal(army.factionId, army.cell, 4);
   for (const town of Object.values(state.settlements)) reveal(town.factionId, town.cell, 3);
+  rebaseAuthoredLand(state);
   return deserializeGame(serializeGame(state));
 }
 
 async function loadGallery(page: Page): Promise<void> {
-  await page.setViewportSize({ width: 1680, height: 1100 });
+  await page.setViewportSize({ width: 1680, height: 1320 });
   await page.goto('/');
-  await page.locator('input[type=file]').setInputFiles({ name: 'four-observed-cultures.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(factionGallery()))) });
+  await page.locator('input[type=file]').setInputFiles({ name: 'six-observed-cultures.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(factionGallery()))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
   await page.getByTestId('army-registry').getByRole('button', { name: /Culture survey/ }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.state)).toBe('ready');
 }
 
-test('all four observed cultures select distinct untinted role art and bounded strategic heraldry without changing canonical input or fog', async ({ page }, testInfo) => {
+test('all six observed cultures select distinct untinted role art and bounded strategic heraldry without changing canonical input or fog', async ({ page }, testInfo) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await loadGallery(page);
   await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
@@ -76,7 +79,7 @@ test('all four observed cultures select distinct untinted role art and bounded s
     expect(entity.nativeWidth).toBe(entity.role === 'settlement.city' ? 128 : entity.role.startsWith('settlement.') || entity.role === 'unit.cavalry' ? 96 : 64);
     expect(entity.nativeHeight).toBe(entity.nativeWidth);
   }
-  await page.screenshot({ path: testInfo.outputPath('four-cultures-near.png'), fullPage: true });
+  await page.screenshot({ path: testInfo.outputPath('six-cultures-near.png'), fullPage: true });
   // A sprite's larger visual canvas does not replace the canonical hex hit target.
   await page.keyboard.press('Escape');
   const target = cell(19, 12);
@@ -93,11 +96,11 @@ test('all four observed cultures select distinct untinted role art and bounded s
   expect(far?.visibleEntityArt.every(entity => entity.nativeWidth === (entity.role.startsWith('settlement.') ? 64 : 32))).toBe(true);
   const farMetrics = await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters());
   expect(farMetrics?.visibleSprites).toBeLessThan(farMetrics?.visibleEntities ?? 0);
-  await page.screenshot({ path: testInfo.outputPath('four-cultures-far.png'), fullPage: true });
+  await page.screenshot({ path: testInfo.outputPath('six-cultures-far.png'), fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole('button', { name: 'Focus selection', exact: true }).click();
   await page.getByTestId('map-container').scrollIntoViewIfNeeded();
-  await page.screenshot({ path: testInfo.outputPath('four-cultures-narrow.png') });
+  await page.screenshot({ path: testInfo.outputPath('six-cultures-narrow.png') });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(hash);
   await testInfo.attach('faction-art-inspection.json', { body: JSON.stringify({ near, far, metrics: await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters()), notes: ['Authored placement imported through validated save boundary; no runtime mutation hooks.', 'Only actually visible enemies supplied art metadata.', 'Static one-pose faction art; native 32px badges and 64px banners use exact nearest 2:1 reduction at strategic zoom.', 'Selection, zoom and narrow resizing did not alter canonical state.'] }, null, 2), contentType: 'application/json' });

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.iron_covenant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. One very broad adult deep-folk heavy infantry veteran, massive rectangular shoulder plates and a visibly thick armored silhouette, short heavy one-handed cleaver and squat reinforced pavise shield. Blue-black iron plate broad planes with brass seams, face inside low angular visor, two sturdy planted boots. NOT giant proportions; same adult figure scale as normal guard but wider.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.heavy_infantry.iron_covenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f1dcb534487b0fe60a4526d2ac683d5f648a0217305d1e566e0150656227198c",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.heavy_infantry.iron_covenant-v1.png",
+      "assets/art/source/slice12/unit.heavy_infantry.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "114ee6ff3092c188334972d84567c6a5baaddc2c5f88f780bbff046ebe2019fa",
+    "9b2794243d4ccd00a20d3c1b59ef14f9cc2d70ef6277c2d65d48d67d0e5bbc36"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "cfcb189c4e8fa836c35dc87f0dec44ce8bc27974a417baa0fe5472643ad4398f",
+      "inputHash": "114ee6ff3092c188334972d84567c6a5baaddc2c5f88f780bbff046ebe2019fa",
+      "outputHash": "963faf151090a93a692dc1dfcb7da14f8cd9fcb257ca16c50924e6a4897f5ed6"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

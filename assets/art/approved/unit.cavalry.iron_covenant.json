@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.iron_covenant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. One human mounted outrider on one stocky chestnut mountain horse, facing down-right. Entire horse nose, legs, hooves and rider spear visible with generous margin. Charcoal quilted saddlecloth edged brass, low angular rider helmet, short gold pennant. Dynamic but static four-legged walk pose, coarse96x96 logical detail. No horse armor hiding silhouette, no extra figures.",
+  "frames": [
+    {
+      "id": "unit.cavalry.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.iron_covenant/fbafce658fe17b9716d68fd5912ea6f45cef27218adf334f313b0d0b30155b2e/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "a2f5a92a9d7d2ccc580d08480c67abdfa21b2850f43cf950df99426704e13019",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.cavalry.iron_covenant-v1.png",
+      "assets/art/source/slice12/unit.cavalry.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "d8bca74c5cdc853bf8d19a1305f4989dfa183c4a85cf5ace7898d52a128e7ee1",
+    "9eea76c90da400d0ec35dd2d7bf838962c3008ebb0955781ae2073eab68076c0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "b697383ef0336338e6fb8eb827fd8aa098310d003748f152b0c073295c437169",
+      "inputHash": "d8bca74c5cdc853bf8d19a1305f4989dfa183c4a85cf5ace7898d52a128e7ee1",
+      "outputHash": "d1321d2eeeb2a084017ddccac086a162c0f08e6921dd23950833f7784a1da885"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "d1321d2eeeb2a084017ddccac086a162c0f08e6921dd23950833f7784a1da885",
+      "outputHash": "fe0f2accdca877fd8fc36401e828dd6fe18803fc7afe993f254d92c8ba1162cb"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "fe0f2accdca877fd8fc36401e828dd6fe18803fc7afe993f254d92c8ba1162cb",
+      "outputHash": "828024880fb0ca0cb724ccf32429b0d2458e05c6decc4cb0e06314ee78a02fee"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "aa8124ea50ce12dc77b52b34c6a28e5da4ba0535c069a2bb097b0f40c4a329d1",
+      "outputHash": "9c171d7caad9a75665d60b4577d2c34aabd0c405d2aa4974b306f7e40f8b0759"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "b0afa9138db060d3608df267e42567123ff803e63dcd4ad4bb6111962393f5c2",
+      "outputHash": "fe494233e99046909326923af65ca46b2465ba8a7a25e636f0182ece37b7a431"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "e52dc9725786c39c6715ba030317ea32009d1bfe1e7a924e09eb4f5478d38394",
+      "outputHash": "e1abb1977980232d34ce1c778e4cda9853c86b69fc221c2ea412dba1cae2958f"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:49:25.617Z",
+    "notes": "Inspected 1x/4x: chestnut horse, rider, pennant and low diagonal lance are continuous with distinct silhouette gaps between all four hooves. Horse white stockings provide native-scale leg readability; full spear tip and pennant fit96px ground contract. Single static pose, not an asserted gait animation; runtime review pending.\nReviewed candidate fbafce658fe17b9716d68fd5912ea6f45cef27218adf334f313b0d0b30155b2e; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/47ba6b4cbd49225da861307a833648aa5ca470c3f8478b0c3dc2d4074b63e1d2.png"
+    ],
+    "inputHash": "14e1c977579f72519807bad9902f6133796da21bf35fd57d17de85a1b98be9e6"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

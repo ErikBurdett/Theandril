@@ -30,7 +30,7 @@ describe('preserved schema-4 archives and mixed-version continuation', () => {
     // Provenance: the completed pre-schema-5 benchmark recorded seed 20260905,
     // Tiny / four AI factions / Short pace, victory on turn46 and seal a7a7b987.
     // This is an independently recorded golden, not a retained raw save artifact.
-    const state = createGame({ seed: 20260905, size: 'tiny', factionCount: 4, pace: 'short', generatorVersion: 1 });
+    const state = createGame({ seed: 20260905, size: 'tiny', factionCount: 4, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
     const prior = legacyOrigin(state);
     const issue = (command: GameCommand): void => {
       legacyIssue(state, prior, command);
@@ -60,7 +60,7 @@ describe('preserved schema-4 archives and mixed-version continuation', () => {
   });
 
   it('migrates actual v4 snapshot structure without rewriting its bytes, events or checkpoint seals', () => {
-    const state = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1 });
+    const state = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
     const prior = legacyOrigin(state);
     legacyIssue(state, prior, { type: 'found', factionId, armyId: 'army.1', name: 'Old hearth' });
     for (let turn = 0; turn < 8; turn++) legacyIssue(state, prior, end);
@@ -78,7 +78,7 @@ describe('preserved schema-4 archives and mixed-version continuation', () => {
   });
 
   it('keeps historical rejected future command names rejected while new records use new rules', () => {
-    const state = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1 });
+    const state = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
     const prior = legacyOrigin(state);
     const oldUnknownCommand = { type: 'moveTo', factionId, armyId: 'army.2', target: 1 };
     legacyIssue(state, prior, oldUnknownCommand); legacyIssue(state, prior, end);
@@ -94,7 +94,7 @@ describe('preserved schema-4 archives and mixed-version continuation', () => {
   });
 
   it('preserves original victory seals and postgame records after importing an old completed campaign', () => {
-    const state = prosperityCampaign(); state.world.generatorVersion = 1; state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, 1);
+    const state = prosperityCampaign(); state.rosterVersion = 1; state.world.generatorVersion = 1; state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, 1);
     const prior = legacyOrigin(state, 'from-save');
     for (const command of [
       { type: 'research', factionId, technologyId: 'technology.civic_accounts' },
@@ -115,7 +115,7 @@ describe('preserved schema-4 archives and mixed-version continuation', () => {
   });
 
   it('rejects invented versions, lost format metadata and a downgrade after modern records', () => {
-    const state = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1 }); const prior = legacyOrigin(state);
+    const state = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 }); const prior = legacyOrigin(state);
     legacyIssue(state, prior, end); const archive = parseArchive(prior, state);
     expect(applyRecordedCommand(state, archive, end).ok).toBe(true);
     for (const mutate of [

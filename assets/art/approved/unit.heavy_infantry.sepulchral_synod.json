@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.sepulchral_synod",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. ONE housed ancestral heavy sentinel completely enclosed in broad chalk-pale segmented armor and indigo cloth, bronze joints, closed low helmet with NO ornament extending above the head. Large stepped rectangular shield and short bronze mace. No exposed bones, no eye glow. ENTIRE figure including helmet, shield, mace and boots occupies ONLY CENTRAL70% of canvas leaving at least15% fully transparent EMPTY MARGIN above, below, left and right. Nothing touches or approaches canvas edges.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.heavy_infantry.sepulchral_synod/c9490f3049cabdef6a2abb587d0600d0503873407bb33d07b71601c690c84963/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c25d9b8b997022d6540a1899ba47f7d2eec3d46a7f1e6eab73a0f337220566f6",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.heavy_infantry.sepulchral_synod-v2.png",
+      "assets/art/source/slice12/unit.heavy_infantry.sepulchral_synod-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "3c0e5d08bde93cd2dfe5ed220ccac2bc14e61646ea1328aa9ea8d1afbb3520fe",
+    "16b4784b1d00494f5244154db871bb7c536d7bb2abcce62fd6dab8e3613e3b47"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "6767990139e0ac779d96f84dbf4e935a518c25f33c507447bc59841f02b8193b",
+      "inputHash": "3c0e5d08bde93cd2dfe5ed220ccac2bc14e61646ea1328aa9ea8d1afbb3520fe",
+      "outputHash": "8b2d4a131d8686b431a1581e90522e40c9cb0e1760b4123dacc0a4a871eea109"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "8b2d4a131d8686b431a1581e90522e40c9cb0e1760b4123dacc0a4a871eea109",
+      "outputHash": "e1d6840afd17f3756feb38a4346bcefbf4df18b529808fa2319c4bf392f34444"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e1d6840afd17f3756feb38a4346bcefbf4df18b529808fa2319c4bf392f34444",
+      "outputHash": "bb0181ac232e5cb338f8cd6978cee658ee1a5cb65c2c9cb5923aac5f8e69048b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "0f4527d21ca862281ad3da23fc53f8f5d26bbe4e5a7d5ad6f58b76c54193ef4c",
+      "outputHash": "574dcc9024033712b264d5417f3a3b46cbb8c1e38127eda595b47a920fe75726"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "a658333a93ebe05bc1926bc3d726ae5d5edfd65cbfd8c328e5d83ea1b2b86125",
+      "outputHash": "3fb641378100e85f476bea9bc60d39345265efb6811c24bacb821d5c614407b2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "54b1c34eaa2dc55668ac4dde9995867d95d5dacd8aad10b67d907cf022a907ac",
+      "outputHash": "826f5cec61fdd78d8301134afd0827837bfc7a7e15ee1fa2f1770ad4b3601854"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.heavy_infantry.sepulchral_synod.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T05:01:32.207Z",
+    "notes": "Replacementv2 inspected native1x/4x: full low helmet is enclosed with transparent margin, unlike clipped first source. Broad pale armor, indigo sash, large stepped shield and low bronze mace create a distinct heavy silhouette. Closed armor suggests housed ancestor without gore or glow. Static only; runtime review pending.\nReviewed candidate c9490f3049cabdef6a2abb587d0600d0503873407bb33d07b71601c690c84963; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a8ee820242e86f41acede387edbeea1dfb1802615095a83d5be1cc971f9cbf8c.png"
+    ],
+    "inputHash": "589e366a5aa708213cdaaf19ed0563a3f76cc9991edf7f1faec2f184bd09beb4"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

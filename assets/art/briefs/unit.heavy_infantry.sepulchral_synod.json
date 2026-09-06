@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.sepulchral_synod",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. ONE housed ancestral heavy sentinel completely enclosed in broad chalk-pale segmented armor and indigo cloth, bronze joints, closed low helmet with NO ornament extending above the head. Large stepped rectangular shield and short bronze mace. No exposed bones, no eye glow. ENTIRE figure including helmet, shield, mace and boots occupies ONLY CENTRAL70% of canvas leaving at least15% fully transparent EMPTY MARGIN above, below, left and right. Nothing touches or approaches canvas edges.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.heavy_infantry.sepulchral_synod/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c25d9b8b997022d6540a1899ba47f7d2eec3d46a7f1e6eab73a0f337220566f6",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.heavy_infantry.sepulchral_synod-v2.png",
+      "assets/art/source/slice12/unit.heavy_infantry.sepulchral_synod-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "3c0e5d08bde93cd2dfe5ed220ccac2bc14e61646ea1328aa9ea8d1afbb3520fe",
+    "16b4784b1d00494f5244154db871bb7c536d7bb2abcce62fd6dab8e3613e3b47"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "6767990139e0ac779d96f84dbf4e935a518c25f33c507447bc59841f02b8193b",
+      "inputHash": "3c0e5d08bde93cd2dfe5ed220ccac2bc14e61646ea1328aa9ea8d1afbb3520fe",
+      "outputHash": "8b2d4a131d8686b431a1581e90522e40c9cb0e1760b4123dacc0a4a871eea109"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.sepulchral_synod",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Produce ONE original static strategic-game PIXEL-ART sprite for Theandril, on genuine transparent PNG alpha-zero background. One isolated subject, not a sprite sheet. Southeast shallow three-quarter view, entire silhouette enclosed in generous empty margins. Deliberately coarse square pixel clusters, roughly64x64 logical detail shown enlarged, clear silhouette and grouped midtones, restrained soft upper-left light. Serious weathered medieval fantasy, no cartoon/chibi proportions, no text, labels, borders, scenery, floor tile, glow, smooth gradients, antialiasing, tiny texture confetti or baked checkerboard. Suitable for exact native nearest-neighbor processing. Sepulchral Synod of the southern chalklands: an enduring priest-state of veiled living caretakers and housed ancestral dead. Pale chalk/bone plates, indigo veils and sashes, aged bronze bindings, terraced geometric forms. Original heraldic three stepped terraces enclosing a small hollow ring. Austere, practical, reverent rather than horror spectacle; no blood, no gore, no neon magic. Subject: one full-body oath guard, an adult living human custodian with a fully veiled face, short broad sword and tall narrow shield shaped as three ascending terrace steps. Chalk-pale lamellar cuirass, indigo cloth underlayer, bronze shield bindings. Upright slender silhouette, clearly one head, two hands holding equipment, two planted boots. Shield bears a small hollow-ring-over-steps motif, no letters.",
+  "frames": [
+    {
+      "id": "unit.guard.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.guard.sepulchral_synod/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "4fac908edcf3220537500e1dd3da9a2f3f64ef974f806d1433fbcd9a5795ada5",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.guard.sepulchral_synod-v1.png",
+      "assets/art/source/slice12/unit.guard.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "873f59d628bda4f4504085a6d8ffe55ec4419cbbe845fd7b079c60fb68a3e7b6",
+    "6a5be509d92f6537fff06ffbf5988cfeb314f3a2664b933e77ce565d6289c23b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "9aba543a1867106b445283ac6a45fc6005de2deb3b2b119901627476476ab26e",
+      "inputHash": "873f59d628bda4f4504085a6d8ffe55ec4419cbbe845fd7b079c60fb68a3e7b6",
+      "outputHash": "157874db0d37d31d647e5ba5860b61c45280e3dd392c1cf3288d0037b34af09c"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

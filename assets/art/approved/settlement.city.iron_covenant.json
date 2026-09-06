@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.iron_covenant",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original static pixel-art strategy map settlement sprite, isolated on genuine transparent PNG. Whole architectural footprint, roofs and chimneys fully enclosed with generous15% empty margins on every side. Shallow three-quarter southeast map view. Coarse square pixel clusters with grouped material values, soft upper-left highlights, crisp native-style edges, restrained dark fantasy. No landscape/base tile, characters, scenery, labels, text, borders, smooth gradients, glow, smoke or baked checkerboard. This is a single settlement silhouette, not a sheet or comparison. Iron Covenant, Anvilheights deep-folk and human craft valleys, Kiln faith. Blue-black riveted iron, dull brass, charcoal leather, muted gold. Angular disciplined engineered forms, original split-anvil seal, no fantasy horns. Mature Anvilheights city: imposing but compact terraced stone citadel of linked broad guildhalls, angular buttresses, a central sealed hall and four short forge chimneys; outer squared curtain wall with large mechanical gate. Blue-black roofs and restrained dull brass fittings, gold cloth accents. No giant rock mountain or terrain base. Native128x128 visual detail; clear central hierarchy and whole footprint.",
+  "frames": [
+    {
+      "id": "settlement.city.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.iron_covenant/c1c29a30717c87435e57b1630717d181467090a8ca1771c9b450af6b2187577a/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "016eaa335aa0839dca8b93566930bce972e2d17f8013f8927b21947752c3b7f6",
+    "sourceRefs": [
+      "assets/art/source/slice12/settlement.city.iron_covenant-v1.png",
+      "assets/art/source/slice12/settlement.city.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "9c6c39f66b7bc7c0335ebdd8c875f0b2ab500aff009bf95e4cbb1c4c80229cab",
+    "2efd69dd5906c462cd3af9cd41a19430ea25fd996480fb3d5e2ed35bd26d81e0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-128",
+      "settingsHash": "cc23c082465f634ddbac4942c1966b9dbb4cff520be27e9298416fdd911333f1",
+      "inputHash": "9c6c39f66b7bc7c0335ebdd8c875f0b2ab500aff009bf95e4cbb1c4c80229cab",
+      "outputHash": "e952789ca739694d00125f527df962254db3896d9b1dccb1b00cf30377353fed"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "e952789ca739694d00125f527df962254db3896d9b1dccb1b00cf30377353fed",
+      "outputHash": "20414fc024dd4e72bb45c4849d37f36427ac4111115b598fbf7e93f2f03249f8"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "20414fc024dd4e72bb45c4849d37f36427ac4111115b598fbf7e93f2f03249f8",
+      "outputHash": "d537a0607c79763ff007d47793756a011c6d733a0d2ed9086181b31865c36b38"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "de41f2b2c6ab779dfe9244d2ef2984917486fe5baf30d56250b4ee00fad6532a",
+      "outputHash": "9380804f0047bc7f58a937af6117b7cd774fd181d87f2b59a0a72973b1dfce93"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "6230fc9a4f76720efe402c305e8d109981d555f4720a2cc32bbad49ee47b1e9a",
+      "outputHash": "05fc3e37411da933322f4cf10e6fbf82992f8af38b32b3c953e55c9a2ccad43b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "c92bff372fe29ad5288ade4524d960fa15d3425e50f7e5d4b9bac2d7a211df0d",
+      "outputHash": "ff1d5ca3a230c83359639a53bfd246a6a357afc852b59161a21fad0c3d49c713"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T04:59:24.270Z",
+    "notes": "Inspected native1x/4x: broad curtain wall, large gate and stepped central hall provide128px city hierarchy; four chimney silhouettes and gold banners separate from dark roofs. Full outer wall corners and top stacks preserved. Distinctly more imposing than town without terrain mountain/base substitution; runtime placement review pending.\nReviewed candidate c1c29a30717c87435e57b1630717d181467090a8ca1771c9b450af6b2187577a; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5a19eff31e3503a94fbef0e303dcbf10090c8af0dbab02311ee7f076ead2a59b.png"
+    ],
+    "inputHash": "1283e4ff7d7b989ab3688d7acff8d51beae8f8088965df915e3f8e289ad39563"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

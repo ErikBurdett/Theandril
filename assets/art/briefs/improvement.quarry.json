@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.quarry",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.quarry"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art strategy-map asset on genuinely transparent PNG. One isolated complete object, not a sheet; entire silhouette comfortably inside generous15% transparent margin. Coarse square64x64 logical detail, grouped material values, restrained upper-left highlights, crisp edges. No text, labels, border, people, landscape background, smooth gradients, glow, soft alpha shadows or checkerboard. Serious practical weathered medieval fantasy; no copied game designs. A compact stone QUARRY improvement prop: two short pale stepped exposed rock cuts, stacked squared grey blocks and one small wooden lifting derrick with a suspended single block. Shallow three-quarter southeast view. Low broad readable industrial stonework, not a mine tunnel, fortress or mountain. Whole rope/crane fits margin; transparent outside compact footprint, no people or surrounding full tile.",
+  "frames": [
+    {
+      "id": "improvement.quarry/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/improvement.quarry/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "878d930aabb23ad9f423f1c16db715f83502d60d8bda23a8a777387fa79b1ef7",
+    "sourceRefs": [
+      "assets/art/source/slice12/improvement.quarry-v1.png",
+      "assets/art/source/slice12/improvement.quarry-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "dfc3a283e04c7e7a2c1031b6145fe6259fe66f951c652c36668939dd359c9428",
+    "2af7caab513e2b7416e87916fec74a25136646d5b284f7c39b99863319f986da"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "00df36bc5cabf80a96e17f0ee306cabaa861073042d20988f00abc2640379619",
+      "inputHash": "dfc3a283e04c7e7a2c1031b6145fe6259fe66f951c652c36668939dd359c9428",
+      "outputHash": "6b1b0e555ae328e6da10ea39c897d47f4daad651427eabca4081ccc98fe5c499"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

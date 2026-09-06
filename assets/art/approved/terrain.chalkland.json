@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.chalkland",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.chalkland"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art strategy-map asset on genuinely transparent PNG. One isolated complete object, not a sheet; entire silhouette comfortably inside generous15% transparent margin. Coarse square64x64 logical detail, grouped material values, restrained upper-left highlights, crisp edges. No text, labels, border, people, landscape background, smooth gradients, glow, soft alpha shadows or checkerboard. Serious practical weathered medieval fantasy; no copied game designs. A SINGLE flat overhead POINTY-TOP HEXAGON terrain stamp, not an isometric raised block: pale warm chalk soil with broad cream limestone patches, sparse short dusty olive grass and a few small chalk nodules. Chalkland is a dry calcareous grassland, NOT snow or sand dunes. Flat fully opaque ground fills one regular hexagon with top/bottom points, outside alpha zero. Low visual contrast and quiet matching edges for repeated map tiles; no border, bevel, shadow, trees, cliff or raised sides.",
+  "frames": [
+    {
+      "id": "terrain.chalkland/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.chalkland/cfae00e59acc3597b30fd02536c75a16bc87faabf53f728fce0d98228d4260e7/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "580d70d1451519269c1be0d9e51b38493c06baabe55ce6348fa1f39956dc81eb",
+    "sourceRefs": [
+      "assets/art/source/slice12/terrain.chalkland-v1.png",
+      "assets/art/source/slice12/terrain.chalkland-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "d2d3f3bdebaffaf18747bad543972b3b0dba72e5d01839ca40e7d37b2fde5b8d",
+    "625c429385c40c8d43dd7f794a8b8675d1695b91e73bd0b4178198936fad0ef6"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "81f7f383bc3a2200983ff02b175fb3a0ddc2a2fb523f6c4ddc677998c995f232",
+      "inputHash": "d2d3f3bdebaffaf18747bad543972b3b0dba72e5d01839ca40e7d37b2fde5b8d",
+      "outputHash": "d327dd322555555431826fb362c060e0dc6521289f499ede895ad9b2224f1309"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "d327dd322555555431826fb362c060e0dc6521289f499ede895ad9b2224f1309",
+      "outputHash": "714c0ddf5bec0c4886e97cfd975efff53661d809eff5f917503a7fa57e8faa4e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "714c0ddf5bec0c4886e97cfd975efff53661d809eff5f917503a7fa57e8faa4e",
+      "outputHash": "706155978efedbca933711039e0f28911c09f6e3b611faa38dd2ae31d390b857"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "b4985125823e220c202c2ae520d9df17b3c6cc1883ced9f29a647e2f05a388c4",
+      "outputHash": "4e718af22f674071b9dc5e65d530bf0280fadf0c673e634c631cfc01c5c97070"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "39e5143bffba4223e5ec62e9e2ce2fd260a8e44b447969fe44e8333f920324b1",
+      "outputHash": "8d397eea01408c1a3d8cc0fa7aa9bdd3dfffcec377c230a6a08b09a84adc4656"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "b2f122f5e861d7d54b587cf1e6a59788e8b40da302be96c79c60154264903169",
+      "outputHash": "a1d2647d0ed26509ecb36912614be8317fd133d40185b156fb6e80272694d8c8"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.chalkland.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T05:32:47.181Z",
+    "notes": "Inspected native1x/4x and five-by-five pointy-hex repeat at1x/4x: pale cream limestone patches and sparse olive regrowth read as dry chalk ground, not snow. Hexes meet without transparent seams or raised sides. Pattern repetition is visible in this single stamp; transition/random-variant families and neighboring-biome/game-camera review remain separate.\nReviewed candidate cfae00e59acc3597b30fd02536c75a16bc87faabf53f728fce0d98228d4260e7; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/f4ad842cd06cbe494f5444186c60a98d8490b27f8d516ac4c2e8655029e32249.png"
+    ],
+    "inputHash": "972f391d4a66bf4f11ec4812d93126bd30bbff08c08dcbcf246528c466f3369f"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.iron_covenant",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art heraldic game UI asset on genuine transparent PNG alpha-zero background. A single simple bold emblem, not a sheet, no text or letters. Coarse pixel clusters and deliberately large readable shapes, serious weathered medieval material treatment with only a few grouped highlights from upper left. NO gradients, halos, glow, antialiasing, checkerboard or background panel outside the object. Complete outline surrounded by at least15% transparent margin. Designed to survive native nearest-neighbor sampling. Iron Covenant strategic BADGE at32x32 logical pixels: one very simple chunky muted-gold split-anvil icon on a small dark iron rounded-square plate. Anvil broad top/narrow stem/block base with ONE dark vertical split; strong high-contrast large shapes. No tiny ornament, letters, wreath, rim rivets or extra symbols. Symmetrical frontal icon.",
+  "frames": [
+    {
+      "id": "ui.badge.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/source/native/ui.badge.iron_covenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d6e75661c9ed182ad769973fe009289b448860af8b58ac0eceaf190a9d87e0fa",
+    "sourceRefs": [
+      "assets/art/source/slice12/ui.badge.iron_covenant-v1.png",
+      "assets/art/source/slice12/ui.badge.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "89288875ad898cf83567c8a4da17ffc629fc2a7d4d3ed36343b49b2f3ef7422b",
+    "0cf2f43b8a599ac0b0ac47d2bc3a1d473db5be55050be71180171a1b9fb7140a"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-32",
+      "settingsHash": "22b2a1cb04c5cf597d8fc13a618416739ea7f2d630e728438ca37865bfed7c34",
+      "inputHash": "89288875ad898cf83567c8a4da17ffc629fc2a7d4d3ed36343b49b2f3ef7422b",
+      "outputHash": "bdd3fde14a584f251da966c48790acbfb6361d5dec661576e44513aee4d304b2"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

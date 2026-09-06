@@ -32,6 +32,8 @@ Normal campaigns support strategically engaging play over hundreds of turns, wit
 
 Victorious AI campaigns expose both a complete technical log and a factual history tome in the UI. Full records survive save/resume and include the generated start through victory; imported older campaigns disclose any missing earlier history. Verify replay from the technical record, not merely a matching final snapshot.
 
+Settlement development exposes colony/settlement/city size and capital designation, clear faction/city borders, worked hinterlands and improvements. Player and AI cultivation use the same visible scaling costs, signed feature/biome effects and saved interruptions. Conquest, razing, population loss and unseen terrain changes preserve ownership, worker and intelligence invariants.
+
 ## Gate C — AI competency
 
 AI factions can:
@@ -76,6 +78,8 @@ Legendary stress fixture executes its benchmark without pathological collapse.
 - siege works;
 - retreat/pursuit works;
 - commander abilities work;
+- general skill prerequisites and command capacity work through assignment, wounds, reorganization and saved battles without deleting excess troops;
+- researched naval movement distinguishes shallow/deep water, with player and AI transport, legal landings, naval retreat and persisted hull/passenger losses;
 - terrain matters;
 - morale matters;
 - tactical intervention works;

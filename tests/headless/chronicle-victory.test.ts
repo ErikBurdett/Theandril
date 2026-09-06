@@ -4,6 +4,9 @@ import { planTurn } from '../../packages/ai/src/index';
 import { applyRecordedCommand, createArchive, generateChronicles, replayArchive } from '../../packages/chronicle/src/index';
 import { deserializeCampaign, serializeCampaign } from '../../packages/persistence/src/index';
 
+// The schema9 863-turn Epic case takes about40s in isolation: it mirrors every
+// post500 order and replays the complete technical history twice. Give this
+// archive integration test its own wall-time budget; keep all turn/count gates.
 test.each(['short', 'epic'] as const)('generated-start %s AI victory produces complete factual logs identical after archive save/resume', pace => {
   const game = createGame({ seed: 20260905, size: 'tiny', factionCount: 4, pace });
   const archive = createArchive(game, { mode: 'watch' });
@@ -63,4 +66,4 @@ test.each(['short', 'epic'] as const)('generated-start %s AI victory produces co
   expect(documents.technicalPages.at(-1)?.turn).toBe(game.turn);
   expect(technical.finalHash).toBe(stateHash(game));
   expect(stateHash(replayArchive({ ...archive, initialSave: JSON.stringify(technical.initialSnapshot), initialHash: technical.initialHash, records: technical.records }))).toBe(stateHash(game));
-});
+}, 60_000);

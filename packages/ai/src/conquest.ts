@@ -25,7 +25,7 @@ export function planConquestDecision(view: Observation): AiPlan | null {
   }
   for (const siege of view.sieges.filter(item => item.factionId === view.factionId).slice(0, 64)) {
     const army = view.armies.find(item => item.id === siege.armyId && item.factionId === view.factionId);
-    if (!army) continue;
+    if (!army || army.domain === 'naval' || army.carrierId) continue;
     if (army.morale < 25 || army.fatigue > 85 || army.strength * 2 < siege.defenderStrength) {
       return { commands: [{ type: 'liftSiege', factionId: view.factionId, settlementId: siege.settlementId }], reasons: ['Lift the siege to preserve an exhausted or badly outmatched army.'] };
     }

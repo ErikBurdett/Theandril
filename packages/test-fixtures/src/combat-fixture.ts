@@ -1,6 +1,7 @@
 import { UNITS } from '@theandril/content';
 import { isPassable, neighbors } from '@theandril/mapgen';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, serializeGame, type GameState } from '@theandril/sim';
+import { refreshAuthoredSight } from './authored-land';
 
 /** Local authored-scenario sight only; this is never exposed as a runtime mutation API. */
 function revealLocal(state: GameState, factionId: string, origin: number, radius: number): void {
@@ -22,7 +23,7 @@ function revealLocal(state: GameState, factionId: string, origin: number, radius
 
 /** A peaceful border encounter; subsequent war and battle outcomes use real campaign commands. */
 export function borderBattleCampaign(): GameState {
-  const state = createGame({ seed: 20260905, size: 'tiny', factionCount: 2 });
+  const state = createGame({ seed: 20260905, size: 'tiny', factionCount: 2, generatorVersion: 3 });
   const names = ['Ashen Hearth', 'Reedbound Hold'];
   for (const [index, faction] of state.factions.entries()) {
     const colonist = Object.values(state.armies).find(army => army.factionId === faction.id && army.formations.some(item => item.unitId === 'unit.colonist'));
@@ -48,5 +49,6 @@ export function borderBattleCampaign(): GameState {
   }
   for (const town of Object.values(state.settlements)) revealLocal(state, town.factionId, town.cell, 3);
   // Validate the complete authored position and restore canonical spatial/visibility caches.
+  refreshAuthoredSight(state);
   return deserializeGame(serializeGame(state));
 }

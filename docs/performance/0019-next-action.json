@@ -1,0 +1,53 @@
+{
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "note": "Synthetic mature empireLandCampaign fixtures, ordinary permitted observations. 20 warmups and 200 samples. Pure candidate filtering/sorting and four directional lookups only; excludes state setup, observation construction, assertions, React, renderer and worker. Global army counts are not ownership counts; actual observed and owned counts are reported separately. Navigation preserves exact observation/save bytes and state hashes; this is not an end-turn or thousand-turn memory measurement.",
+  "scenarios": [
+    {
+      "size": "huge",
+      "worldCells": 196608,
+      "globalArmies": 1500,
+      "observedArmies": 1500,
+      "ownArmies": 47,
+      "ownTowns": 32,
+      "armyCandidates": 47,
+      "townCandidates": 32,
+      "candidateBuild": {
+        "samples": 200,
+        "meanMs": 0.02423198999999954,
+        "medianMs": 0.021881000000121276,
+        "p95Ms": 0.028911999999991167
+      },
+      "fourDirectionalLookups": {
+        "samples": 200,
+        "meanMs": 0.0011975349999977425,
+        "medianMs": 0.0006150000001525768,
+        "p95Ms": 0.0020589999999174324
+      },
+      "hash": "1f6c8980"
+    },
+    {
+      "size": "legendary",
+      "worldCells": 307200,
+      "globalArmies": 4000,
+      "observedArmies": 4000,
+      "ownArmies": 100,
+      "ownTowns": 40,
+      "armyCandidates": 100,
+      "townCandidates": 40,
+      "candidateBuild": {
+        "samples": 200,
+        "meanMs": 0.04973439500000268,
+        "medianMs": 0.04756900000029418,
+        "p95Ms": 0.05474300000014409
+      },
+      "fourDirectionalLookups": {
+        "samples": 200,
+        "meanMs": 0.0014507950000052007,
+        "medianMs": 0.0008739999998397252,
+        "p95Ms": 0.0024029999999584106
+      },
+      "hash": "02d3b393"
+    }
+  ]
+}

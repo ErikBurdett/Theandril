@@ -1,34 +1,41 @@
-import { createGame, getMovementQuery, getObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
+import { createGame, getMovementQuery, getObservation, getSettlementLandObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
 import { planTurn } from '@theandril/ai';
 import { createJournal, resumeJournal, generateChronicles, type CampaignJournal, type ChronicleDocuments } from '@theandril/chronicle';
 import { SaveStore, deserializeCampaign, exportSave, importSave, serializeCampaign } from '@theandril/persistence';
 import type { Request, Response, WorkerMetrics } from './protocol';
+import { cellTransferBuffers, cellTransferBytes, packCells } from './cell-transfer';
 
 let state: GameState | undefined;
 let journal: CampaignJournal | undefined;
 let chronicles: ChronicleDocuments | undefined;
 let recordingFailed = false;
 let queryObservation: Observation | undefined;
+let queryHash = '';
 let publishedHash = '';
 const saves = new SaveStore();
 let knownCells = new Map<number, Observation['cells'][number]>();
-const metrics: WorkerMetrics = { generationMs: 0, commandMs: 0, aiMs: 0, transferBytes: 0, totalTransferBytes: 0 };
+const metrics: WorkerMetrics = { generationMs: 0, commandMs: 0, aiMs: 0, transferBytes: 0, totalTransferBytes: 0, cellTransferBytes: 0, landQueryCount: 0, landQueryBytes: 0, totalLandQueryBytes: 0 };
+const textEncoder = new TextEncoder();
 
-function send(message: Response): void { self.postMessage(message); }
+function send(message: Response, transfer: Transferable[] = []): void { self.postMessage(message, { transfer }); }
 function publish(id: number, message: string, reset = false): void {
   if (!state || !journal) throw new Error('Begin or load a campaign first.');
-  const observation = queryObservation ??= getObservation(state, state.turnOwnerId);
+  const observation = queryObservation ??= getObservation(state, state.turnOwnerId, { landDetails: 'none' });
   if (reset) knownCells = new Map();
   const cells = observation.cells.filter(cell => {
     const old = knownCells.get(cell.cell);
-    return !old || old.terrain !== cell.terrain || old.biome !== cell.biome || old.fertility !== cell.fertility || old.visible !== cell.visible;
+    return !old || old.terrain !== cell.terrain || old.biome !== cell.biome || old.waterDepth !== cell.waterDepth || old.fertility !== cell.fertility || old.visible !== cell.visible || old.featureMask !== cell.featureMask || old.settlementId !== cell.settlementId || old.factionId !== cell.factionId || old.improvementId !== cell.improvementId;
   });
   for (const cell of cells) knownCells.set(cell.cell, cell);
-  const delta = { ...observation, cells };
-  metrics.transferBytes = new TextEncoder().encode(JSON.stringify(delta)).byteLength;
+  const { cells: observedCells, ...summary } = observation;
+  void observedCells;
+  const packed = packCells(cells);
+  metrics.cellTransferBytes = cellTransferBytes(packed);
+  metrics.transferBytes = textEncoder.encode(JSON.stringify(summary)).byteLength + metrics.cellTransferBytes;
   metrics.totalTransferBytes += metrics.transferBytes;
   publishedHash = stateHash(state);
-  send({ id, type: 'state', observation: delta, campaign: { mode: journal.mode, coverage: journal.coverage }, reset, hash: publishedHash, metrics: { ...metrics }, message });
+  queryHash = publishedHash;
+  send({ id, type: 'state', observation: summary, cells: packed, campaign: { mode: journal.mode, coverage: journal.coverage }, reset, hash: publishedHash, metrics: { ...metrics }, message }, cellTransferBuffers(packed));
 }
 
 function applyCommand(game: GameState, command: GameCommand) {
@@ -77,13 +84,14 @@ async function handle(request: Request): Promise<void> {
     if (request.type === 'new') {
       send({ id: request.id, type: 'progress', message: 'Raising continents and finding a place for the first hearth…' });
       const started = performance.now();
-      const generated = createGame({ seed: request.seed, size: request.size, factionCount: request.factionCount ?? 4, pace: request.pace });
+      const generated = createGame({ seed: request.seed, size: request.size, factionCount: request.factionCount ?? 4, pace: request.pace, ...(request.factionDefinitionId ? { factionDefinitionId: request.factionDefinitionId } : {}) });
       const record = createJournal(generated, { mode: request.mode });
       state = generated; journal = record; chronicles = undefined; recordingFailed = false; queryObservation = undefined;
       metrics.generationMs = performance.now() - started;
       metrics.commandMs = 0;
       metrics.aiMs = 0;
       metrics.totalTransferBytes = 0;
+      metrics.cellTransferBytes = 0; metrics.landQueryCount = 0; metrics.landQueryBytes = 0; metrics.totalLandQueryBytes = 0;
       publish(request.id, request.mode === 'watch' ? 'AI watch is paused. Resume to observe every faction act, or step one round.' : 'Your people await a hearth. Select the caravan and found your first settlement.', true);
       return;
     }
@@ -102,9 +110,24 @@ async function handle(request: Request): Promise<void> {
     }
     if (!state || !journal) throw new Error('Begin or load a campaign first.');
     if (recordingFailed) throw new Error('Recording was interrupted. Restore a saved campaign before continuing.');
+    if (request.type === 'landQuery') {
+      // A read selector checks seat ownership and sight; this is not a game order
+      // and must not enter the journal or advance a turn. Use a fresh hash only
+      // when a command invalidated the last published observation.
+      const currentHash = queryObservation ? queryHash : stateHash(state);
+      const town = getSettlementLandObservation(state, state.turnOwnerId, request.settlementId);
+      metrics.landQueryBytes = textEncoder.encode(JSON.stringify({ settlementId: request.settlementId, town, hash: currentHash })).byteLength;
+      metrics.landQueryCount++;
+      metrics.totalLandQueryBytes += metrics.landQueryBytes;
+      metrics.totalTransferBytes += metrics.landQueryBytes;
+      send({ id: request.id, type: 'landQuery', settlementId: request.settlementId, town, hash: currentHash, metrics: { ...metrics } });
+      return;
+    }
     if (request.type === 'movementQuery') {
-      const view = queryObservation ??= getObservation(state, state.turnOwnerId);
-      send({ id: request.id, type: 'movementQuery', query: getMovementQuery(view, request.armyId, request.target, { append: request.append }), hash: publishedHash });
+      const currentHash = queryObservation ? queryHash : stateHash(state);
+      const view = queryObservation ??= getObservation(state, state.turnOwnerId, { landDetails: 'none' });
+      queryHash = currentHash;
+      send({ id: request.id, type: 'movementQuery', query: getMovementQuery(view, request.armyId, request.target, { append: request.append }), hash: currentHash });
       return;
     }
     if (request.type === 'chronicles') {

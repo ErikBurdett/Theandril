@@ -17,7 +17,7 @@ export const CAMPAIGN_STORES = {
 const digestSchema = z.string().regex(/^[a-f0-9]{64}$/);
 const count = z.number().int().min(0).max(1_000_000);
 const bytes = z.number().int().min(0).max(MAX_SAVE_BYTES);
-const version = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8)]);
+const version = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9)]);
 const headerSchema = z.object({
   version: z.literal(2), mode: z.enum(['player', 'watch']), coverage: z.enum(['complete', 'from-save']),
   initialHash: z.string().regex(/^[a-f0-9]{8}$/), initialSaveVersion: version, initialTurn: count.min(1),

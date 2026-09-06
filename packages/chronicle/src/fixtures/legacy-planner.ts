@@ -9,6 +9,9 @@ import { planProgression } from './legacy-progression';
 export { chooseCaptureOption } from './legacy-conquest';
 export type { AiPlan } from './legacy-diplomacy';
 const units = new Map(UNITS.map(unit => [unit.id, unit]));
+// The historical planner consumed exactly this four-building content pack.
+// New construction definitions must never leak into reconstruction of its old orders.
+const legacyBuildings = BUILDINGS.filter(item => ['building.granary', 'building.workshop', 'building.market', 'building.archive'].includes(item.id));
 
 /** Bounded proposals use only this faction's filtered observation. Sim validates every one. */
 export function planTurn(view: Observation): GameCommand[] {
@@ -63,7 +66,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   for (const town of rotate(ownSettlements, 96)) {
     if (plans.length >= productionLimit) break;
     if (town.queue.length) continue;
-    const building = BUILDINGS.find(item => !town.buildings.includes(item.id) && item.coinCost <= budget);
+    const building = legacyBuildings.find(item => !town.buildings.includes(item.id) && item.coinCost <= budget);
     const item = building ?? (ownSettlements.length < 4 && !plannedColonist ? UNITS[0] : militaryCount + plannedGuards < ownSettlements.length * 2 ? UNITS.find(unit => unit.id === 'unit.guard') : undefined);
     if (item && budget >= item.coinCost) {
       plans.push({ type: 'queue', factionId, settlementId: town.id, itemId: item.id });

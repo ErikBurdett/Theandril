@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.ash_scrub",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.ash_scrub"
+  ],
+  "prompt": "Use case: stylized-concept. ONE original pixel-art strategy-map asset on genuinely transparent PNG. One isolated complete object, not a sheet; entire silhouette comfortably inside generous15% transparent margin. Coarse square64x64 logical detail, grouped material values, restrained upper-left highlights, crisp edges. No text, labels, border, people, landscape background, smooth gradients, glow, soft alpha shadows or checkerboard. Serious practical weathered medieval fantasy; no copied game designs. A SINGLE flat overhead POINTY-TOP HEXAGON terrain stamp, not an isometric raised block: grey-brown ash-rich soil, broad charcoal cinder patches, sparse low muted sage scrub clumps and a few rusty pebbles. Ash scrub is living dry regrowth, NOT flowing lava or burned city. Flat fully opaque ground fills one regular hexagon with top/bottom points, outside alpha zero. Low visual contrast and detail near edges so repeated adjacent stamps blend; no border, bevel, shadow, tree, cliff or raised sides.",
+  "frames": [
+    {
+      "id": "terrain.ash_scrub/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.ash_scrub/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f317700d1c54a09615bcb5df62492b6d060e77e9c865b5bf3df501f097bcf304",
+    "sourceRefs": [
+      "assets/art/source/slice12/terrain.ash_scrub-v1.png",
+      "assets/art/source/slice12/terrain.ash_scrub-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "970be19b005db8d16ecc551d126e1136fc44cf2a61bd02ae468df496ba8cea85",
+    "b8b7c85819803e7ac2f8d2e3b1d2f12a7b3f29afaa0792df44d144e9c4666c02"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "97e23be5f323aaaaad3ea1b6884fc376416d48b8bbe873fb6da5eb22eee10057",
+      "inputHash": "970be19b005db8d16ecc551d126e1136fc44cf2a61bd02ae468df496ba8cea85",
+      "outputHash": "376eac1f3e09589425f32d1e3d2c950b0c00b14e0dbf715d85972f47cc621f26"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

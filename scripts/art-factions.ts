@@ -246,11 +246,13 @@ function requiredString(input: unknown, label: string): string {
   return input;
 }
 export function parseFactionArguments(args: string[]): FactionArtFamily[] {
-  if (!args.length) return [...FACTION_ART_FAMILIES];
+  const sheetFamilies: FactionArtFamily[] = ['ashen_compact', 'reedbound_council', 'cinder_march', 'glass_tide'];
+  if (!args.length) return sheetFamilies;
   if (args.length !== 1 || !args[0]!.startsWith('--family=')) throw new Error('Usage: node --import tsx scripts/art-factions.ts [--family=slug]');
   const family = args[0]!.slice('--family='.length);
   const known = FACTION_ART_FAMILIES.find((entry) => entry === family);
   if (!known) throw new Error('Unknown faction family; no source paths were opened.');
+  if (!sheetFamilies.includes(known)) throw new Error('This culture uses individual generated sources; run scripts/art-slice12.ts, not sheet extraction.');
   return [known];
 }
 

@@ -3,6 +3,9 @@ import type { Observation } from '@theandril/sim';
 import { BIOME_ART_IDS, RuntimeArt, type ArtStatus } from './art';
 import { terrainRelief } from './terrain-style';
 import { selectEntityArt } from './faction-style';
+import { mapArmyVisible, navalMarker, waterPresentation } from './naval-style';
+import { dirtyTerritoryChunks, IMPROVEMENT_GLYPHS, settlementArtRole, territoryEdges } from './territory-style';
+import { finishChunkBorders, measureChunkCache, type ChunkCacheSize } from './chunk-cache';
 export type { ArtStatus } from './art';
 
 const RADIUS = 29;
@@ -11,12 +14,12 @@ const ROW_HEIGHT = RADIUS * 1.5;
 const CHUNK = 16;
 const TERRAIN_COLORS = [0x25404b, 0x747658, 0x3f5a49, 0x877963, 0x777a76];
 // Indexed by the map generator's stable biome IDs; these are visual colors only.
-const BIOME_COLORS = [0x25404b, 0x747658, 0x3f5a49, 0x496668, 0x8d9993, 0xa28b62, 0x8b8760, 0x526e66, 0x345d45, 0x92958e];
+const BIOME_COLORS = [0x25404b, 0x747658, 0x3f5a49, 0x496668, 0x8d9993, 0xa28b62, 0x8b8760, 0x526e66, 0x345d45, 0x92958e, 0x786b60, 0xb8b8a0];
 type Cell = Observation['cells'][number];
 export interface MapPointerInput { shiftKey: boolean; pointerType: string }
 export interface RouteVisual { origin: number; path: number[]; waypoints?: number[]; paused?: boolean; attack?: boolean }
-type Marker = { id: string; cell: number; name: string; factionId: string; settlement: boolean; ruin?: boolean; unitId?: string; population?: number };
-type ChunkView = { root: Container; count: number; version: number; used: number; sprites: Sprite[]; artCells: number };
+type Marker = { id: string; cell: number; name: string; factionId: string; settlement: boolean; ruin?: boolean; unitId?: string; population?: number; domain?: 'land' | 'naval' };
+type ChunkView = { root: Container; count: number; version: number; used: number; sprites: Sprite[]; artCells: number; borderEdges: number; improvementProps: number; missingProps: boolean; cache: ChunkCacheSize };
 
 export interface RenderMetrics {
   renderer: 'webgl'; frameCount: number; frameMs: number; frameP95Ms: number;
@@ -25,6 +28,8 @@ export interface RenderMetrics {
   highlightedCells: number; routeCells: number; previewCells: number;
   atlasPages: number; residentAtlasBytesEstimate: number; artLoadMs: number; artFirstRenderCpuMs: number;
   visibleSprites: number; terrainSpriteCells: number; pooledSprites: number;
+  territoryEdges: number; improvementProps: number;
+  maxCachedChunkWidth: number; maxCachedChunkHeight: number; cachedTextureBytesEstimate: number;
 }
 
 /** Only explored cells enter this view. Viewport work is bounded by visible chunks. */
@@ -71,7 +76,7 @@ export class WorldRenderer {
   private visibleEntityArt: { entityId: string; factionId: string; definitionId: string | null; role: string; assetId: string | null; presentation: string; nativeWidth: number | null; nativeHeight: number | null; tint: number | null }[] = [];
   private visibleArtWarnings: string[] = [];
   private reducedMotion = false;
-  private metrics: RenderMetrics = { renderer: 'webgl', frameCount: 0, frameMs: 0, frameP95Ms: 0, renderCpuMs: 0, visibleCells: 0, visibleChunks: 0, cachedChunks: 0, chunkRebuilds: 0, visibleEntities: 0, zoom: 1, highlightedCells: 0, routeCells: 0, previewCells: 0, atlasPages: 0, residentAtlasBytesEstimate: 0, artLoadMs: 0, artFirstRenderCpuMs: -1, visibleSprites: 0, terrainSpriteCells: 0, pooledSprites: 0 };
+  private metrics: RenderMetrics = { renderer: 'webgl', frameCount: 0, frameMs: 0, frameP95Ms: 0, renderCpuMs: 0, visibleCells: 0, visibleChunks: 0, cachedChunks: 0, chunkRebuilds: 0, visibleEntities: 0, zoom: 1, highlightedCells: 0, routeCells: 0, previewCells: 0, atlasPages: 0, residentAtlasBytesEstimate: 0, artLoadMs: 0, artFirstRenderCpuMs: -1, visibleSprites: 0, terrainSpriteCells: 0, pooledSprites: 0, territoryEdges: 0, improvementProps: 0, maxCachedChunkWidth: 0, maxCachedChunkHeight: 0, cachedTextureBytesEstimate: 0 };
 
   constructor(private readonly onArtStatus?: (status: ArtStatus) => void) {}
 
@@ -166,16 +171,17 @@ export class WorldRenderer {
       this.chunks.clear(); this.viewportKey = '';
     }
     for (const cell of observation.cells) {
+      const previous = this.cellData.get(cell.cell);
       this.cellData.set(cell.cell, cell);
-      const key = this.chunkKey(cell.cell);
-      this.chunkVersions.set(key, (this.chunkVersions.get(key) ?? 0) + 1);
+      const ownerChanged = (previous?.settlementId ?? null) !== (cell.settlementId ?? null) || (previous?.factionId ?? null) !== (cell.factionId ?? null);
+      for (const key of ownerChanged ? dirtyTerritoryChunks(cell.cell, observation.width, observation.height, CHUNK) : [this.chunkKey(cell.cell)]) this.chunkVersions.set(key, (this.chunkVersions.get(key) ?? 0) + 1);
     }
     this.markerChunks.clear();
     this.settlementCells = new Set([...observation.settlements.map(settlement => settlement.cell), ...observation.ruins.map(ruin => ruin.cell)]);
     this.factionColors = new Map(observation.factions.map(faction => [faction.id, faction.color]));
     this.factionDefinitions = new Map(observation.factions.map(faction => [faction.id, faction.definitionId]));
     this.enemyFactions = new Set(observation.wars);
-    for (const entity of [...observation.settlements.map(item => ({ ...item, settlement: true })), ...observation.armies.map(item => ({ ...item, settlement: false })), ...observation.ruins.map(item => ({ id: item.id, cell: item.cell, name: item.name, factionId: '', settlement: false, ruin: true }))]) {
+    for (const entity of [...observation.settlements.map(item => ({ ...item, settlement: true })), ...observation.armies.filter(mapArmyVisible).map(item => ({ ...item, settlement: false })), ...observation.ruins.map(item => ({ id: item.id, cell: item.cell, name: item.name, factionId: '', settlement: false, ruin: true }))]) {
       const key = this.chunkKey(entity.cell);
       const list = this.markerChunks.get(key) ?? [];
       list.push(entity); this.markerChunks.set(key, list);
@@ -189,7 +195,11 @@ export class WorldRenderer {
     const observed = this.cellData.get(cell); if (!observed) return;
     const assetId = BIOME_ART_IDS[observed.biome];
     const approved = Boolean(assetId && this.art?.frame(assetId));
-    return { cell, biome: observed.biome, terrain: observed.terrain, assetId: approved ? assetId : null, approved, relief: terrainRelief(observed.terrain, observed.biome, approved), visible: observed.visible };
+    return { cell, biome: observed.biome, terrain: observed.terrain, waterDepth: observed.waterDepth, waterPresentation: waterPresentation(observed.terrain, observed.waterDepth), assetId: approved ? assetId : null, approved, relief: terrainRelief(observed.terrain, observed.biome, approved), visible: observed.visible,
+      settlementId: observed.settlementId ?? null, factionId: observed.factionId ?? null, improvementId: observed.improvementId ?? null,
+      improvementPresentation: observed.improvementId ? this.art?.frame(observed.improvementId) ? 'approved' : 'procedural' : null,
+      territoryEdges: this.observation ? territoryEdges(observed, this.observation.width, this.observation.height, id => this.cellData.get(id)) : [],
+    };
   }
   resetHover(): void { this.clearHovered?.(); }
   /** Read-only screen projection for accessible integrations and real canvas-click tests. */
@@ -210,7 +220,16 @@ export class WorldRenderer {
   getArtDiagnostics() { return { ...this.artStatus, warnings: [...this.artStatus.warnings, ...this.visibleArtWarnings], visibleAssetIds: [...this.visibleAssetIds].sort(), visibleEntityArt: this.visibleEntityArt.map(item => ({ ...item })), visibleAnimationFrames: this.visibleAnimations.map(({ contentId, frameId }) => ({ contentId, frameId })), reducedMotion: this.reducedMotion, visibleSprites: this.metrics.visibleSprites, terrainSpriteCells: this.metrics.terrainSpriteCells, lod: this.world.scale.x < .65 ? 'strategic-glyphs' : this.world.scale.x < 1.2 ? 'static-sprites' : 'near-sprites', terrainPresentation: { nativeFootprint: [56, 64], scaleX: HEX_WIDTH / 56, scaleY: RADIUS / 32, note: 'Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect.' } }; }
   getMetrics(): RenderMetrics {
     const sorted = [...this.samples].sort((a, b) => a - b);
-    return { ...this.metrics, pooledSprites: this.figurePool.length + this.terrainPool.length + [...this.chunks.values()].reduce((sum, chunk) => sum + chunk.sprites.length, 0), frameP95Ms: sorted[Math.floor(sorted.length * 0.95)] ?? 0, cachedChunks: this.chunks.size, zoom: this.world.scale.x };
+    let pooledSprites = this.figurePool.length + this.terrainPool.length, maxCachedChunkWidth = 0, maxCachedChunkHeight = 0, cachedTextureBytesEstimate = 0;
+    // Read stored construction measurements for the bounded ≤64 retained cache.
+    // This excludes freed textures still retained by Pixi's pool and other GPU allocations.
+    for (const chunk of this.chunks.values()) {
+      pooledSprites += chunk.sprites.length;
+      maxCachedChunkWidth = Math.max(maxCachedChunkWidth, chunk.cache.width);
+      maxCachedChunkHeight = Math.max(maxCachedChunkHeight, chunk.cache.height);
+      cachedTextureBytesEstimate += chunk.cache.bytesEstimate;
+    }
+    return { ...this.metrics, pooledSprites, maxCachedChunkWidth, maxCachedChunkHeight, cachedTextureBytesEstimate, frameP95Ms: sorted[Math.floor(sorted.length * 0.95)] ?? 0, cachedChunks: this.chunks.size, zoom: this.world.scale.x };
   }
   select(cell: number | undefined): void { this.selected = cell; this.redrawSelection(); }
   focus(cell: number): void {
@@ -279,14 +298,15 @@ export class WorldRenderer {
     view.root.removeFromParent(); view.root.destroy({ children: true });
   }
   private makeChunk(cx: number, cy: number, key: string): ChunkView {
-    const root = new Container(), tiles = new Container(), graphics = new Graphics(); root.addChild(tiles, graphics); this.terrain.addChild(root);
-    const sprites: Sprite[] = []; let artCells = 0, count = 0;
+    const root = new Container(), tiles = new Container(), graphics = new Graphics(), props = new Container(), borders = new Graphics(); root.addChild(tiles, graphics, props); this.terrain.addChild(root);
+    const sprites: Sprite[] = []; let artCells = 0, count = 0, borderEdges = 0, improvementProps = 0, missingProps = false;
     const width = this.observation!.width, height = this.observation!.height;
     for (let row = cy * CHUNK; row < Math.min(height, (cy + 1) * CHUNK); row++) for (let col = cx * CHUNK; col < Math.min(width, (cx + 1) * CHUNK); col++) {
       const cell = this.cellData.get(row * width + col);
       if (!cell) continue;
       count++;
-      const [x, y] = this.center(cell.cell), color = BIOME_COLORS[cell.biome] ?? TERRAIN_COLORS[cell.terrain] ?? 0x777777, alpha = cell.visible ? 1 : 0.4;
+      const water = waterPresentation(cell.terrain, cell.waterDepth);
+      const [x, y] = this.center(cell.cell), color = water === 'deep' ? 0x1a303e : water === 'shallows' ? 0x3a6266 : BIOME_COLORS[cell.biome] ?? TERRAIN_COLORS[cell.terrain] ?? 0x777777, alpha = cell.visible ? 1 : 0.4;
       const artFrame = this.art?.frame(BIOME_ART_IDS[cell.biome] ?? '');
       const relief = terrainRelief(cell.terrain, cell.biome, Boolean(artFrame));
       if (artFrame) {
@@ -297,7 +317,15 @@ export class WorldRenderer {
         tiles.addChild(sprite); sprites.push(sprite); artCells++;
         this.hex(graphics, x, y).stroke({ color: 0x202d29, width: 0.7, alpha: 0.55 });
       } else this.hex(graphics, x, y).fill({ color, alpha }).stroke({ color: 0x202d29, width: 0.7, alpha: 0.55 });
-      if (relief === 'hill-ridges') {
+      if (water !== 'land') {
+        // Separate original depth marks, not a tint/recolor of the approved ocean tile.
+        // Paired pale shelf lines vs a dark-backed triple wave remain distinct without hue.
+        const rows = water === 'deep' ? [-7, 0, 7] : [-3, 4];
+        for (const offset of rows) {
+          graphics.moveTo(x - 12, y + offset).lineTo(x - 6, y + offset - 2).lineTo(x, y + offset).lineTo(x + 6, y + offset - 2).lineTo(x + 12, y + offset).stroke({ color: 0x152b35, width: 4, alpha: alpha * .9 });
+          graphics.moveTo(x - 12, y + offset).lineTo(x - 6, y + offset - 2).lineTo(x, y + offset).lineTo(x + 6, y + offset - 2).lineTo(x + 12, y + offset).stroke({ color: water === 'deep' ? 0x718b9a : 0xc0cec0, width: water === 'deep' ? 1.3 : 1.8, alpha });
+        }
+      } else if (relief === 'hill-ridges') {
         // A 20×8 lower-edge cue leaves the tile's actual surface visible and distinguishes hills from peaks.
         graphics.moveTo(x - 10, y + 16).lineTo(x - 5, y + 10).lineTo(x, y + 16).moveTo(x - 1, y + 16).lineTo(x + 5, y + 10).lineTo(x + 11, y + 16).stroke({ color: 0x202328, width: 3.8, alpha });
         graphics.moveTo(x - 10, y + 15).lineTo(x - 5, y + 9).lineTo(x, y + 15).moveTo(x - 1, y + 15).lineTo(x + 5, y + 9).lineTo(x + 11, y + 15).stroke({ color: 0xd2c4a6, width: 1.5, alpha });
@@ -322,10 +350,41 @@ export class WorldRenderer {
       } else {
         graphics.moveTo(x - 8, y + 7).lineTo(x - 6, y + 2).moveTo(x + 7, y - 2).lineTo(x + 9, y - 7).stroke({ color: 0xc4b883, width: 1, alpha: alpha * 0.4 });
       }
+      if (cell.improvementId) {
+        improvementProps++;
+        const prop = this.art?.frame(cell.improvementId), glyph = IMPROVEMENT_GLYPHS[cell.improvementId];
+        if (prop) {
+          const sprite = this.terrainPool.pop() ?? new Sprite(); sprite.texture = prop.texture;
+          sprite.anchor.set(prop.asset.pivot[0] / prop.asset.nativeResolution.width, prop.asset.pivot[1] / prop.asset.nativeResolution.height);
+          // Native 64px props use exact 2:1 reduction, preserving the authored ground pivot.
+          sprite.scale.set(Math.min(32 / prop.asset.nativeResolution.width, 32 / prop.asset.nativeResolution.height)); sprite.position.set(x, y + 10); sprite.alpha = alpha; sprite.visible = true; sprite.roundPixels = true; sprite.tint = 0xffffff;
+          props.addChild(sprite); sprites.push(sprite);
+        } else if (glyph) {
+          missingProps = true;
+          graphics.roundRect(x - 11, y - 10, 22, 22, 3).fill({ color: 0x202328, alpha: alpha * .85 });
+          if (glyph === 'fields') for (const offset of [-6, 0, 6]) graphics.moveTo(x - 8, y + offset).lineTo(x + 7, y + offset - 3).stroke({ color: 0xdbce95, width: 2, alpha });
+          else if (glyph === 'woodlot') graphics.poly([x - 8, y + 5, x, y - 8, x + 8, y + 5]).stroke({ color: 0xdbce95, width: 2, alpha }).moveTo(x, y + 5).lineTo(x, y + 9).stroke({ color: 0xdbce95, width: 2, alpha });
+          else if (glyph === 'quarry') graphics.poly([x - 8, y + 7, x - 5, y - 5, x + 5, y - 7, x + 8, y + 7]).stroke({ color: 0xdbce95, width: 2, alpha });
+          else if (glyph === 'reeds') for (const offset of [-6, 0, 6]) graphics.moveTo(x + offset, y + 8).lineTo(x + offset, y - 7).moveTo(x + offset, y).lineTo(x + offset + 4, y - 4).stroke({ color: 0xdbce95, width: 2, alpha });
+          else graphics.ellipse(x - 2, y, 6, 4).stroke({ color: 0xdbce95, width: 2, alpha }).poly([x + 4, y, x + 9, y - 5, x + 9, y + 5]).stroke({ color: 0xdbce95, width: 2, alpha });
+        }
+      }
+      for (const edge of territoryEdges(cell, width, height, id => this.cellData.get(id))) {
+        borderEdges++;
+        const normalX = Math.cos(edge.angle), normalY = Math.sin(edge.angle), distance = HEX_WIDTH / 2 - 1;
+        const middleX = x + normalX * distance, middleY = y + normalY * distance, half = RADIUS / 2 - 1;
+        const ax = middleX - normalY * half, ay = middleY + normalX * half, bx = middleX + normalY * half, by = middleY - normalX * half;
+        borders.moveTo(ax, ay).lineTo(bx, by).stroke({ color: 0x182323, width: edge.kind === 'realm' ? 4.5 : 2.5, alpha: .85 * alpha });
+        borders.moveTo(ax, ay).lineTo(bx, by).stroke({ color: this.factionColors.get(edge.factionId) ?? 0xd2c09b, width: edge.kind === 'realm' ? 2.5 : 1, alpha: alpha * (edge.kind === 'realm' ? 1 : .6) });
+      }
     }
+    finishChunkBorders(root, borders, borderEdges);
+    // Empty neighbor chunks are deliberately uncached; remove their empty leaf too.
+    if (!count) { graphics.removeFromParent(); graphics.destroy(); }
+    const cache = measureChunkCache(root, count);
     if (count) root.cacheAsTexture({ resolution: 1, antialias: false, scaleMode: 'nearest' });
     this.metrics.chunkRebuilds++;
-    return { root, count, version: this.chunkVersions.get(key) ?? 0, used: this.metrics.frameCount, sprites, artCells };
+    return { root, count, version: this.chunkVersions.get(key) ?? 0, used: this.metrics.frameCount, sprites, artCells, borderEdges, improvementProps, missingProps, cache };
   }
   private redrawSelection(): void {
     this.selection.clear();
@@ -343,7 +402,7 @@ export class WorldRenderer {
     const maxY = Math.min(Math.ceil(height / CHUNK) - 1, Math.floor(((this.app.screen.height - this.world.y) / zoom / ROW_HEIGHT + 2) / CHUNK));
     const viewportKey = `${minX},${maxX},${minY},${maxY},${zoom < 0.65}`;
     const changed = viewportKey !== this.viewportKey; this.viewportKey = viewportKey;
-    const visible = new Set<string>(); let cells = 0, artCells = 0;
+    const visible = new Set<string>(); let cells = 0, artCells = 0, borderEdges = 0, improvementProps = 0, missingProps = false;
     for (let cy = minY; cy <= maxY; cy++) for (let cx = minX; cx <= maxX; cx++) {
       const key = `${cx},${cy}`;
       if (!this.chunkVersions.has(key)) continue;
@@ -352,6 +411,7 @@ export class WorldRenderer {
       if (view && view.version !== this.chunkVersions.get(key)) { this.destroyChunk(view); view = undefined; }
       if (!view) { view = this.makeChunk(cx, cy, key); this.chunks.set(key, view); }
       view.root.visible = true; view.used = this.metrics.frameCount; cells += view.count; artCells += view.artCells;
+      borderEdges += view.borderEdges; improvementProps += view.improvementProps; missingProps ||= view.missingProps;
     }
     for (const [key, view] of this.chunks) if (!visible.has(key)) view.root.visible = false;
     // The retained offscreen cache is bounded, independent of campaign world size.
@@ -360,10 +420,12 @@ export class WorldRenderer {
       for (const [key, view] of old) { if (this.chunks.size <= 64) break; this.destroyChunk(view); this.chunks.delete(key); }
     }
     this.metrics.visibleCells = cells; this.metrics.visibleChunks = visible.size; this.metrics.terrainSpriteCells = artCells;
+    this.metrics.territoryEdges = borderEdges; this.metrics.improvementProps = improvementProps;
     if (changed || this.markerDirty || this.art) {
       this.markers.clear(); this.labelPool.forEach(label => { label.visible = false; });
       this.figurePool.forEach(sprite => { sprite.visible = false; }); this.visibleAnimations = []; this.visibleAssetIds.clear(); this.visibleEntityArt = [];
       const warnings = new Set<string>(), strategicGroups = new Set<string>();
+      if (missingProps) warnings.add('Some land improvements lack approved artwork; their distinct procedural glyphs are shown.');
       let labels = 0, entities = 0, figures = 0;
       for (const key of visible) for (const entity of this.markerChunks.get(key) ?? []) {
         const [x, y] = this.center(entity.cell), own = entity.factionId === this.observation.factionId;
@@ -373,16 +435,18 @@ export class WorldRenderer {
         const far = zoom < .65;
         // One far badge per observed cell/culture, not a pile of identical co-located sprites.
         if (far) {
-          const group = `${entity.cell}/${entity.factionId}/${entity.ruin ? 'ruin' : entity.settlement ? 'town' : 'army'}`;
+          const group = `${entity.cell}/${entity.factionId}/${entity.ruin ? 'ruin' : entity.settlement ? 'town' : entity.domain === 'naval' ? 'fleet' : 'army'}`;
           if (strategicGroups.has(group)) continue;
           strategicGroups.add(group);
         }
         const hostile = this.enemyFactions.has(entity.factionId);
         const color = this.factionColors.get(entity.factionId) ?? 0xc9a66b;
-        const contentId = entity.ruin ? 'map.ruin' : entity.settlement ? (entity.population ?? 0) >= 12 ? 'settlement.city' : (entity.population ?? 0) >= 6 ? 'settlement.town' : 'settlement.village' : entity.unitId ?? '';
+        const contentId = entity.ruin ? 'map.ruin' : entity.settlement ? settlementArtRole(entity.population ?? 1) : entity.unitId ?? '';
         const definitionId = this.factionDefinitions.get(entity.factionId);
-        const selectedArt = selectEntityArt(contentId, definitionId, far, id => this.art?.byContent.has(id) ?? false);
+        const naval = entity.domain === 'naval';
+        const selectedArt = naval ? { contentId: null, presentation: `procedural-${navalMarker(contentId)}`, warning: 'Naval artwork is not yet approved; visible fleets use procedural ship silhouettes.' } : selectEntityArt(contentId, definitionId, far, id => this.art?.byContent.has(id) ?? false);
         const artFrame = selectedArt.contentId ? this.art?.frame(selectedArt.contentId) : undefined;
+        if (entity.settlement && this.observation.land.capitalSettlementId === entity.id) this.markers.poly([x - 7, y - 24, x - 4, y - 30, x, y - 26, x + 4, y - 30, x + 7, y - 24]).stroke({ color: 0xffdfa0, width: 2 });
         if (this.art && selectedArt.warning) warnings.add(selectedArt.warning);
         this.visibleEntityArt.push({ entityId: entity.id, factionId: entity.factionId, definitionId: definitionId ?? null, role: contentId, assetId: artFrame?.asset.id ?? null, presentation: selectedArt.presentation, nativeWidth: artFrame?.asset.nativeResolution.width ?? null, nativeHeight: artFrame?.asset.nativeResolution.height ?? null, tint: artFrame ? 0xffffff : null });
         if (artFrame) {
@@ -402,6 +466,19 @@ export class WorldRenderer {
           if (own) this.markers.poly([x + offset - 3, y + offset + 2, x + offset, y + offset - 3, x + offset + 3, y + offset + 2]).fill(color);
           else if (hostile) this.markers.moveTo(x + offset - 4, y + offset - 3).lineTo(x + offset + 4, y + offset + 4).moveTo(x + offset + 4, y + offset - 3).lineTo(x + offset - 4, y + offset + 4).stroke({ color, width: 2 });
           else this.markers.poly([x + offset, y + offset - 4, x + offset + 4, y + offset, x + offset, y + offset + 4, x + offset - 4, y + offset]).stroke({ color, width: 1.5 });
+        } else if (naval) {
+          const scale = far ? .7 / zoom : 1;
+          this.markers.save().translateTransform(x, y).scaleTransform(scale, scale);
+          this.markers.poly([-17, 4, 17, 4, 10, 13, -9, 13]).fill(0x202328).stroke({ color, width: 2 });
+          this.markers.moveTo(0, 4).lineTo(0, -21).stroke({ color: 0xc1b597, width: 2 });
+          this.markers.poly([-3, -19, -3, 1, -13, 1]).fill({ color: 0xc1b597, alpha: .95 }).stroke({ color: 0x202328, width: 1 });
+          if (navalMarker(contentId) !== 'transport') this.markers.poly([3, -16, 3, 0, 13, 0]).fill(color).stroke({ color: 0x202328, width: 1 });
+          if (navalMarker(contentId) === 'ocean-warship') this.markers.moveTo(-12, 7).lineTo(-19, 11).moveTo(12, 7).lineTo(19, 11).stroke({ color: 0xc1b597, width: 2 });
+          this.markers.moveTo(-17, 17).lineTo(-8, 15).lineTo(0, 17).lineTo(8, 15).lineTo(17, 17).stroke({ color: 0xa7c4c7, width: 1.5 });
+          if (own) this.markers.rect(-3, 7, 6, 3).fill(color);
+          else if (hostile) this.markers.moveTo(-4, 6).lineTo(4, 11).moveTo(4, 6).lineTo(-4, 11).stroke({ color, width: 2 });
+          else this.markers.poly([0, 5, 4, 8, 0, 11, -4, 8]).stroke({ color, width: 1.5 });
+          this.markers.restore();
         } else if (entity.ruin) {
           this.markers.poly([x - 12, y + 10, x - 12, y - 9, x - 6, y - 3, x - 2, y - 7, x - 2, y + 10]).fill(0x27302b).stroke({ color: 0xb8aa89, width: 2 });
           this.markers.moveTo(x + 2, y + 10).lineTo(x + 5, y - 3).lineTo(x + 11, y - 8).lineTo(x + 11, y + 10).stroke({ color: 0xb8aa89, width: 2 });

@@ -1,0 +1,343 @@
+{
+  "scope": "Reserved CPU window: schema9/content9418e598; no browser, tests or local art processing. Full AI turns exclude saves/archive/browser. Existing benchmark.ts workload, measured after territory/faction ecology integration.",
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "os": "linux 7.1.9-arch1-2",
+  "measurements": [
+    {
+      "size": "huge",
+      "mature": false,
+      "cells": 196608,
+      "factions": 32,
+      "initialArmies": 64,
+      "initialFormations": 64,
+      "armies": 397,
+      "formations": 638,
+      "largestArmyFormations": 8,
+      "settlements": 197,
+      "generatedMs": 97.784798,
+      "turns": 100,
+      "averageEndTurnMs": 3.2041732899999817,
+      "maxEndTurnMs": 6.5809730000000854,
+      "averageAiAllFactionsMs": 81.87124728000032,
+      "averageCommandResolutionMs": 21.67893743000104,
+      "averageFullTurnWithoutSaveMs": 106.75435800000133,
+      "commands": 25274,
+      "rejectedCommands": 0,
+      "saveMs": 82.60771000000022,
+      "loadMs": 171.14570099999946,
+      "resumedTurnsVerified": 50,
+      "battleReportsRetained": 20,
+      "saveBytes": 3857342,
+      "fullObservationBytes": 1292900,
+      "heapSamplesMiB": [
+        30,
+        34,
+        80,
+        193,
+        164
+      ],
+      "hashes": [
+        "b3e43e60",
+        "4bed4227",
+        "bd5d6383",
+        "1d559079",
+        "5146212d"
+      ],
+      "saveHash": "5146212d",
+      "averagePhaseMs": {
+        "sieges": 0.00682487999996738,
+        "settlements": 1.3112169699999685,
+        "upkeep": 0.13495319999998173,
+        "characters": 0.29720729999995454,
+        "movement": 0.18972942000003967,
+        "travel": 0.001543820000042615,
+        "diplomacy": 0.005402420000027632,
+        "progression": 0.002517210000060004
+      },
+      "note": "Young campaign with real AI; content roster reused for stress faction counts. Army containers and canonical formations are counted separately: merging lowers container count without erasing formation workload. Victory project proposals are intentionally deferred for this 100-turn workload; full archived victory is benchmarked separately."
+    },
+    {
+      "size": "huge",
+      "mature": true,
+      "cells": 196608,
+      "factions": 32,
+      "initialArmies": 1500,
+      "initialFormations": 1500,
+      "armies": 678,
+      "formations": 1531,
+      "largestArmyFormations": 12,
+      "settlements": 168,
+      "generatedMs": 234.12396999999874,
+      "turns": 100,
+      "averageEndTurnMs": 3.537822889999861,
+      "maxEndTurnMs": 6.794010999999955,
+      "averageAiAllFactionsMs": 63.23894252999971,
+      "averageCommandResolutionMs": 12.124066049997655,
+      "averageFullTurnWithoutSaveMs": 78.90083146999723,
+      "commands": 25971,
+      "rejectedCommands": 0,
+      "saveMs": 61.409842000000936,
+      "loadMs": 143.3316270000032,
+      "resumedTurnsVerified": 50,
+      "battleReportsRetained": 20,
+      "saveBytes": 3079113,
+      "fullObservationBytes": 790455,
+      "heapSamplesMiB": [
+        104,
+        75,
+        172,
+        65,
+        96
+      ],
+      "hashes": [
+        "ac4c3aa7",
+        "30092dfd",
+        "81774d94",
+        "4ec3beab",
+        "0eb5f7a9"
+      ],
+      "saveHash": "0eb5f7a9",
+      "averagePhaseMs": {
+        "sieges": 0.0033267800000612623,
+        "settlements": 1.023999030000232,
+        "upkeep": 0.26882851000002117,
+        "characters": 0.196911069999951,
+        "movement": 0.3421013399998628,
+        "travel": 0.0017003300003125333,
+        "diplomacy": 0.00280681000003824,
+        "progression": 0.001670560000129626
+      },
+      "note": "Synthetic 1500/4000-singleton-army starting position; real command validation, AI, economy and movement for 100 turns. Field battles resolve when encountered. Army containers and canonical formations are counted separately: merging lowers container count without erasing formation workload. Victory project proposals are intentionally deferred for this 100-turn workload; full archived victory is benchmarked separately."
+    },
+    {
+      "size": "legendary",
+      "mature": false,
+      "cells": 307200,
+      "factions": 40,
+      "initialArmies": 80,
+      "initialFormations": 80,
+      "armies": 540,
+      "formations": 837,
+      "largestArmyFormations": 9,
+      "settlements": 257,
+      "generatedMs": 107.18614399999933,
+      "turns": 100,
+      "averageEndTurnMs": 3.909019660000049,
+      "maxEndTurnMs": 6.554605999997875,
+      "averageAiAllFactionsMs": 105.91469921000153,
+      "averageCommandResolutionMs": 27.96131260000282,
+      "averageFullTurnWithoutSaveMs": 137.78503147000438,
+      "commands": 33642,
+      "rejectedCommands": 0,
+      "saveMs": 118.33360900000116,
+      "loadMs": 260.09599600000365,
+      "resumedTurnsVerified": 50,
+      "battleReportsRetained": 20,
+      "saveBytes": 5576562,
+      "fullObservationBytes": 1645671,
+      "heapSamplesMiB": [
+        168,
+        186,
+        185,
+        153,
+        283
+      ],
+      "hashes": [
+        "606f2cd4",
+        "5e1bc5ec",
+        "006c8ae2",
+        "7f341495",
+        "b8e116c8"
+      ],
+      "saveHash": "b8e116c8",
+      "averagePhaseMs": {
+        "sieges": 0.005056550000153948,
+        "settlements": 1.5560839599998872,
+        "upkeep": 0.14332212999979674,
+        "characters": 0.3561443299998791,
+        "movement": 0.20576374000011127,
+        "travel": 0.0017650199998024618,
+        "diplomacy": 0.003131939999948372,
+        "progression": 0.0017189800000051037
+      },
+      "note": "Young campaign with real AI; content roster reused for stress faction counts. Army containers and canonical formations are counted separately: merging lowers container count without erasing formation workload. Victory project proposals are intentionally deferred for this 100-turn workload; full archived victory is benchmarked separately."
+    },
+    {
+      "size": "legendary",
+      "mature": true,
+      "cells": 307200,
+      "factions": 40,
+      "initialArmies": 4000,
+      "initialFormations": 4000,
+      "armies": 1786,
+      "formations": 4038,
+      "largestArmyFormations": 12,
+      "settlements": 204,
+      "generatedMs": 384.081720999995,
+      "turns": 100,
+      "averageEndTurnMs": 6.19247304000055,
+      "maxEndTurnMs": 9.784025000000838,
+      "averageAiAllFactionsMs": 133.5842672299974,
+      "averageCommandResolutionMs": 22.707169909995574,
+      "averageFullTurnWithoutSaveMs": 162.48391017999356,
+      "commands": 49989,
+      "rejectedCommands": 0,
+      "saveMs": 97.47938399999839,
+      "loadMs": 227.03273400000035,
+      "resumedTurnsVerified": 50,
+      "battleReportsRetained": 20,
+      "saveBytes": 4767909,
+      "fullObservationBytes": 1099319,
+      "heapSamplesMiB": [
+        273,
+        161,
+        146,
+        114,
+        249
+      ],
+      "hashes": [
+        "99b56be4",
+        "bc1eddbe",
+        "d7275aed",
+        "b814bbcd",
+        "87cd9e6f"
+      ],
+      "saveHash": "87cd9e6f",
+      "averagePhaseMs": {
+        "sieges": 0.0019413499993243021,
+        "settlements": 1.4282629200002703,
+        "upkeep": 0.556580510000058,
+        "characters": 0.24921737000040595,
+        "movement": 1.0991568099994766,
+        "travel": 0.001877669999958016,
+        "diplomacy": 0.0038664900002913782,
+        "progression": 0.001716250000099535
+      },
+      "note": "Synthetic 1500/4000-singleton-army starting position; real command validation, AI, economy and movement for 100 turns. Field battles resolve when encountered. Army containers and canonical formations are counted separately: merging lowers container count without erasing formation workload. Victory project proposals are intentionally deferred for this 100-turn workload; full archived victory is benchmarked separately."
+    }
+  ],
+  "movement": [
+    {
+      "size": "huge",
+      "cells": 196608,
+      "explored": 196608,
+      "fullObservationMs": 26.657146999998076,
+      "coldQueryMs": 21.907145999997738,
+      "range": {
+        "samples": 120,
+        "medianMs": 0.0699800000002142,
+        "p95Ms": 0.07718900000327267,
+        "maxMs": 0.08229900000151247
+      },
+      "route": {
+        "samples": 120,
+        "medianMs": 0.08849300000292715,
+        "p95Ms": 0.09601599999587052,
+        "maxMs": 0.33738499999890337
+      },
+      "rangeCells": 84,
+      "pathCells": 18,
+      "pathCost": 18,
+      "expandedNodes": 104,
+      "farQueryMs": 3.2167689999987488,
+      "farQueryLimited": true,
+      "farQueryNodes": 4096,
+      "queuedArmies": 512,
+      "queue512Ms": 147.4318110000022,
+      "fullEndTurn": {
+        "samples": 20,
+        "medianMs": 0.23369200000161072,
+        "p95Ms": 75.99925699999585,
+        "maxMs": 75.99925699999585
+      },
+      "travelPhase": {
+        "samples": 20,
+        "medianMs": 0.0025670000031823292,
+        "p95Ms": 75.6170989999955,
+        "maxMs": 75.6170989999955
+      },
+      "activeTravelPhase": {
+        "samples": 5,
+        "medianMs": 73.48350600000413,
+        "p95Ms": 75.6170989999955,
+        "maxMs": 75.6170989999955
+      },
+      "savedRouteBytes": 3199460,
+      "resumedTurnsVerified": 20,
+      "finalHash": "0db2f182",
+      "note": "Synthetic fully explored two-faction world, cached observation previews; 512 guards begin stacked and share an eighteen-edge destination. No hostile intervention or AI in this workload. Query timing includes result-equality check; end-turn timing excludes separate mirror/hash checks. Path limit is measured separately from successful local route. No archive/save time in turn timings."
+    },
+    {
+      "size": "legendary",
+      "cells": 307200,
+      "explored": 307200,
+      "fullObservationMs": 18.828853000006347,
+      "coldQueryMs": 41.32662100000016,
+      "range": {
+        "samples": 120,
+        "medianMs": 0.017815999999584164,
+        "p95Ms": 0.02123600000049919,
+        "maxMs": 0.029601999995065853
+      },
+      "route": {
+        "samples": 120,
+        "medianMs": 0.05677799999830313,
+        "p95Ms": 0.06872300000395626,
+        "maxMs": 1.6801229999982752
+      },
+      "rangeCells": 14,
+      "pathCells": 19,
+      "pathCost": 20,
+      "expandedNodes": 82,
+      "farQueryMs": 14.353873000000021,
+      "farQueryLimited": true,
+      "farQueryNodes": 4096,
+      "queuedArmies": 512,
+      "queue512Ms": 188.74728599999798,
+      "fullEndTurn": {
+        "samples": 20,
+        "medianMs": 0.2602959999931045,
+        "p95Ms": 77.44293099999777,
+        "maxMs": 77.44293099999777
+      },
+      "travelPhase": {
+        "samples": 20,
+        "medianMs": 0.002414000002318062,
+        "p95Ms": 77.08450799999991,
+        "maxMs": 77.08450799999991
+      },
+      "activeTravelPhase": {
+        "samples": 6,
+        "medianMs": 75.95975900000485,
+        "p95Ms": 77.08450799999991,
+        "maxMs": 77.08450799999991
+      },
+      "savedRouteBytes": 4944074,
+      "resumedTurnsVerified": 20,
+      "finalHash": "aadc8cea",
+      "note": "Synthetic fully explored two-faction world, cached observation previews; 512 guards begin stacked and share an eighteen-edge destination. No hostile intervention or AI in this workload. Query timing includes result-equality check; end-turn timing excludes separate mirror/hash checks. Path limit is measured separately from successful local route. No archive/save time in turn timings."
+    }
+  ],
+  "battleKernel": {
+    "iterations": 200,
+    "formationsPerSide": 12,
+    "unitIds": [
+      "unit.colonist",
+      "unit.scout",
+      "unit.guard"
+    ],
+    "medianMs": 0.3976859999966109,
+    "p95Ms": 0.8584560000017518,
+    "maxMs": 1.6111399999936111
+  },
+  "conquestAndPeace": {
+    "iterations": 50,
+    "siegeAssaultMedianMs": 0.260470000001078,
+    "siegeAssaultP95Ms": 0.3217149999982212,
+    "peacePackageWithMirrorMedianMs": 0.029685000001336448,
+    "peacePackageWithMirrorP95Ms": 0.04671000000234926,
+    "finalHash": "3587bb50",
+    "note": "Real blockade, militia assault, occupation, paid peace and treaty expiry. Capture-decision midpoint save plus 11 resumed turns verified every run. Siege timing excludes setup; peace timing includes separately applied mirror commands."
+  }
+}

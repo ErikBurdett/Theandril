@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { observeLandCell } from './territory';
 import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, characterName, CHARACTER_SKILLS, COMMANDER_ABILITIES, UNITS } from '@theandril/content';
 import { neighbors, SeededRandom } from '@theandril/mapgen';
 import type { Army, CampaignBattle, CommandResult, DomainEvent, GameState } from './types';
@@ -335,7 +336,10 @@ export function advanceCharacters(state: GameState, events: DomainEvent[]): void
     let changed = 0; let detail = '';
     if (definition.kind === 'survey') {
       const explored = state.explored[character.factionId]!;
-      for (const cell of cellsWithin(state, mission.anchorCell, definition.radius + (skill?.surveyRadiusBonus ?? 0))) if (!explored.has(cell)) { explored.add(cell); changed++; }
+      for (const cell of cellsWithin(state, mission.anchorCell, definition.radius + (skill?.surveyRadiusBonus ?? 0))) {
+        if (!explored.has(cell)) { explored.add(cell); changed++; }
+        if (rulesVersion(state) >= 9) observeLandCell(state, character.factionId, cell, true);
+      }
       detail = `${changed} previously unknown terrain hexes charted; hidden armies were not revealed`;
     } else if (definition.kind === 'refit') {
       for (const item of army.formations) { const added = Math.min(definition.strengthRestore + (skill?.refitBonus ?? 0), (units.get(item.unitId)?.strength ?? item.strength) - item.strength); item.strength += added; changed += added; }
@@ -423,7 +427,7 @@ export function getCharacterObservation(state: GameState, factionId: string): { 
     const cell = characterCell(state, character); const definition = definitions.get(character.definitionId)!;
     const town = cell === null ? undefined : state.settlements[indexes(state).settlements.get(cell) ?? ''];
     const nearbyCells = cell === null ? [] : [cell, ...(rulesVersion(state) >= 8 && town?.factionId === factionId && town.buildings.includes('building.harbor') ? neighbors(cell, state.world.width, state.world.height) : [])];
-    const coLocated = nearbyCells.flatMap(at => [...(indexes(state).armies.get(at) ?? [])]).map(id => state.armies[id]!).filter(army => army.factionId === factionId && (army.cell === cell || armyDomain(army) === 'naval')).sort(byId).slice(0, 24);
+    const coLocated = nearbyCells.flatMap(at => [...(indexes(state).armies.get(at) ?? [])]).map(id => state.armies[id]!).filter(army => army.factionId === factionId && (army.cell === cell || armyDomain(army) === 'naval')).sort(byId);
     const receivingCells = cell === null ? [] : [cell, ...(rulesVersion(state) >= 8 && character.location?.kind === 'army' && armyDomain(state.armies[character.location.armyId]!) === 'naval' ? neighbors(cell, state.world.width, state.world.height) : [])];
     const receivingTowns = receivingCells.flatMap(at => { const item = state.settlements[indexes(state).settlements.get(at) ?? '']; return item?.factionId === factionId && (at === cell || item.buildings.includes('building.harbor')) ? [item] : []; }).sort(byId);
     const missionOptions = definition.missionIds.flatMap(missionId => {

@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { checksum } from '@theandril/content';
-import { applyCommand, createGame, deserializeGame, serializeGame, serializeGameForVersion, stateHash } from '@theandril/sim';
+import { applyCommand, createGame, deserializeGame, SAVE_VERSION, serializeGame, serializeGameForVersion, stateHash } from '@theandril/sim';
 import type { GameCommand } from '@theandril/sim';
 import * as chronicle from './index';
 import { createJournal, resumeJournal } from './journal';
@@ -115,7 +115,7 @@ describe('private incremental campaign journals', () => {
       const original = journal.prepareCommit(game, 0);
       expect(journal.record(game, end).ok).toBe(true);
       const suffix = journal.prepareCommit(game, original.to);
-      expect(suffix.records).toHaveLength(1); expect(suffix.records[0]!.rulesVersion).toBe(7);
+      expect(suffix.records).toHaveLength(1); expect(suffix.records[0]!.rulesVersion).toBe(SAVE_VERSION);
       const combined = { ...suffix.header, records: [...original.records, ...suffix.records] };
       expect(combined.records.slice(0, original.to)).toEqual(fixture[name].archive.records);
       expect(stateHash(chronicle.replayArchive(combined))).toBe(stateHash(game));
@@ -123,7 +123,7 @@ describe('private incremental campaign journals', () => {
   });
 
   it('accepts an archive-1 schema-4 origin without rewriting its snapshot or seal', () => {
-    const game = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1 });
+    const game = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
     const initialSave = serializeGameForVersion(game, 4), initialHash = checksum(initialSave);
     const journal = resumeJournal(game, { version: 1, mode: 'player', coverage: 'complete', initialSave, initialHash, initialTurn: 1, records: [], finalHash: null });
     expect(journal.prepareCommit(game, 0).header).toMatchObject({ initialSave, initialHash, initialSaveVersion: 4 });
@@ -131,7 +131,7 @@ describe('private incremental campaign journals', () => {
     expect(stateHash(chronicle.replayArchive(journal.materialize()))).toBe(stateHash(game));
   });
 
-  it('resumes a real schema-7 mission and appends only its deterministic completion', () => {
+  it('resumes a real current-format mission and appends only its deterministic completion', () => {
     const game = create(), journal = createJournal(game, { mode: 'player' }), factionId = game.turnOwnerId;
     expect(journal.record(game, { type: 'found', factionId, armyId: 'army.1', name: 'Witness hearth' }).ok).toBe(true);
     const settlementId = Object.keys(game.settlements)[0]!;

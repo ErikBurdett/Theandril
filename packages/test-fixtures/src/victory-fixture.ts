@@ -55,7 +55,7 @@ export function prosperityCampaign(): GameState {
     if (caravan.movement < 1) advance();
     issue({ type: 'found', factionId: state.turnOwnerId, armyId: caravan.id, name });
   }
-  for (const town of Object.values(state.settlements)) if (town.factionId === state.turnOwnerId) town.buildings = BUILDINGS.map(building => building.id);
+  for (const town of Object.values(state.settlements)) if (town.factionId === state.turnOwnerId) town.buildings = BUILDINGS.filter(building => !building.coastalOnly).map(building => building.id);
   const player = state.factions.find(faction => faction.id === state.turnOwnerId)!;
   player.treasury = 300; player.knowledge = 64;
   // Only readiness is authored. Technology, institutions, doctrines, projects and victory stay untouched.

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.sepulchral_synod",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE isolated original static pixel-art game asset on a genuinely TRANSPARENT PNG background. One subject only, not a sprite sheet. Native logical detail about64x64 rendered enlarged with coarse square clusters. Shallow southeast three-quarter view, entire head/equipment/feet comfortably inside transparent margins. Strong readable silhouette and broad midtone groups; hard pixel edges, restrained upper-left lighting, serious weathered medieval fantasy. No text, labels, border, floor tile, scenery, antialiasing, glow, soft halos, smooth gradients or tiny noisy texture. No existing franchise imagery. Sepulchral Synod, southern chalklands priest-state with veiled living caretakers and housed ancestors. Chalk-pale plates, indigo cloth, aged bronze, terraced geometric motifs and simple hollow ring over three steps. Austere and practical, no gore or neon magic. ONE complete civilian migration cart with its ONE adult living veiled caretaker pulling from the RIGHT SIDE. The cart is on the LEFT; handles extend RIGHT to the caretaker who walks toward the LOWER RIGHT. Mandatory rightward orientation; do NOT put caretaker left of cart. Indigo canopy over chalk-painted boards, bronze-rimmed wheels, seed sacks and closed ancestral reliquary cases, no exposed remains. All wheels and the caretaker are connected/readable. Whole silhouette occupies only central70% of transparent canvas.",
+  "frames": [
+    {
+      "id": "unit.colonist.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.sepulchral_synod/39a1f03b095dd8e33bc3b9f9d691ef888c87bfc97dd5782303602c908d9bbd97/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e5664bfea0f5b0eb726b7b2d6726f9a554575f7d7fbba07c130a6d53f614c4d6",
+    "sourceRefs": [
+      "assets/art/source/slice12/unit.colonist.sepulchral_synod-v2.png",
+      "assets/art/source/slice12/unit.colonist.sepulchral_synod-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game artwork used. Service terms apply; model/seed unavailable and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "0d6683d25f0af9040efd5857cd4ec3c53fc9adc7ac116d666ec3c267353eb05c",
+    "d1c2c0886efac0040e26fd10c2be9f5de77d1eec8967e6d0da6c9214b48935a2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "974ea394da58d3abe9c9430c8ae583bb3a421e654a8656c92f9ec5332483af5d",
+      "inputHash": "0d6683d25f0af9040efd5857cd4ec3c53fc9adc7ac116d666ec3c267353eb05c",
+      "outputHash": "1920d882e403cf4c48665778dc886ace28caccef1b248a2930fe22342a2af871"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "1920d882e403cf4c48665778dc886ace28caccef1b248a2930fe22342a2af871",
+      "outputHash": "d6f222ce7eda1d77d097adacbb03a32888181410fa756cfb7296ae2b73e2b889"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d6f222ce7eda1d77d097adacbb03a32888181410fa756cfb7296ae2b73e2b889",
+      "outputHash": "8c3f63f666dd142bcf806c7cc8c5632d42ccf3f9b0f14c5866a2c2dd50ef5bc8"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "ef09dd83fd46d8e0f3d86207d05548141e6adea2f4ee66fd52090f29a263e7ec",
+      "outputHash": "c14a8a237324c23acc7b3e84d8b0a1eabb8a35b7d5aca19608dba928c7154cb9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "4cd6a075cbf9d500ab92c69fbb7028c80b3b4ded686933f546037ceefb046800",
+      "outputHash": "64c369722b2192140fbab8abf3bc0e3eda88423f0a61c8f302654862506a53eb"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "a36d7703f761314bbad4425eec8fe1ccaa3da7742836cdb44804dad070d24f0a",
+      "outputHash": "7e647f33b270b1a96005446dd0df9f70cf5d11bd8099235c56aa305b2934f424"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.sepulchral_synod.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-06T05:01:31.630Z",
+    "notes": "Replacementv2 inspected native1x/4x: veiled caretaker now pulls from the RIGHT, matching southeast static kit; entire cart, two wheels and handles remain continuous and unclipped. Pale stacked cases and indigo canopy separate from worker. First left-facing source/rejection retained, not mirrored. Static only; runtime review pending.\nReviewed candidate 39a1f03b095dd8e33bc3b9f9d691ef888c87bfc97dd5782303602c908d9bbd97; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/9f422401125e1275272154c38c4fdca735671314e58d2d7b44e47d1d9b7d0526.png"
+    ],
+    "inputHash": "e2bd4f034da8e2758f4a3809e716827e3dfb140fba07147690caf12af7ab4f0d"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

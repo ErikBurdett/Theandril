@@ -1,7 +1,8 @@
 import { z } from 'zod';
-import { CAMPAIGN_PACES, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, TECHNOLOGIES } from '@theandril/content';
+import { CAMPAIGN_PACES, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, TECHNOLOGIES } from '@theandril/content';
 import { isPassable } from '@theandril/mapgen';
 import type { CommandResult, DomainEvent, GameState } from './types';
+import { rulesVersion } from './rules';
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 const turn = z.number().int().min(1).max(1_000_000);
@@ -25,6 +26,7 @@ export interface ProgressionObservation extends FactionProgression {
 export const createFactionProgression = (): FactionProgression => ({ technologies: [], institutionId: null, doctrineId: null });
 const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
 const ongoing = (project: VictoryProject): boolean => project.status === 'active' || project.status === 'paused';
+const campaignProfile = (state: GameState) => (rulesVersion(state) < 8 ? LEGACY_CAMPAIGN_PACES : rulesVersion(state) === 8 ? SCHEMA8_CAMPAIGN_PACES : CAMPAIGN_PACES)[state.pace];
 
 export function doctrineEffects(doctrineId: string | null) {
   return DOCTRINES.find(item => item.id === doctrineId)?.effects ?? { attack: 0, armor: 0, movement: 0 };
@@ -70,7 +72,7 @@ function publicEvent(state: GameState, project: VictoryProject, type: string, me
 export function getProgressionObservation(state: GameState, factionId: string): ProgressionObservation {
   const faction = state.factions.find(item => item.id === factionId); const progress = state.progression[factionId];
   if (!faction || !progress) throw new Error('Unknown progression faction');
-  const pace = CAMPAIGN_PACES[state.pace];
+  const pace = campaignProfile(state);
   const strategic = strategicBlocker(state);
   const technologyChoices = TECHNOLOGIES.map(item => {
     const knowledgeCost = item.id === 'technology.civic_accounts' ? pace.civicKnowledgeCost : item.knowledgeCost;
@@ -167,7 +169,7 @@ export function validateProgression(state: GameState): void {
     assert(owners.has(project.factionId) && !projectOwners.has(project.factionId), 'project ownership must be known and unique'); projectOwners.add(project.factionId);
     assert(/^project\.[1-9][0-9]*$/.test(project.id) && Number(project.id.slice(8)) < state.nextId && (index === 0 || project.id > (state.projects[index - 1]?.id ?? '')), 'invalid project identity or order');
     assert(/^settlement\.[1-9][0-9]*$/.test(project.settlementId) && Number(project.settlementId.slice(11)) < state.nextId, 'invalid project settlement reference');
-    assert(project.projectId === PROSPERITY_PROJECT.id && project.requiredTurns === CAMPAIGN_PACES[state.pace].projectActiveTurns && project.startedTurn <= state.turn && project.progress <= state.turn - project.startedTurn && project.progress <= project.requiredTurns, 'invalid project definition or progress');
+    assert(project.projectId === PROSPERITY_PROJECT.id && project.requiredTurns === campaignProfile(state).projectActiveTurns && project.startedTurn <= state.turn && project.progress <= state.turn - project.startedTurn && project.progress <= project.requiredTurns, 'invalid project definition or progress');
     assert(project.cell < state.world.width * state.world.height && isPassable(state.world.terrain[project.cell] ?? 0), 'invalid public project location');
     const host = state.settlements[project.settlementId];
     if (project.status !== 'cancelled') assert(host && host.factionId === project.factionId && host.cell === project.cell && host.name === project.settlementName, 'project host ownership or location disagrees');

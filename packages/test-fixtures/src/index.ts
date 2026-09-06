@@ -1,6 +1,8 @@
 import { applyCommand, createArmyFormation, createGame, deserializeGame, serializeGame, type GameState } from '@theandril/sim';
 import { UNITS } from '@theandril/content';
 
+export { navalCampaign, NAVAL_FIXTURE } from './naval-fixture';
+
 /** Synthetic mature starting position; subsequent turns use the unmodified rules and AI. */
 export function matureCampaign(size: 'huge' | 'legendary'): GameState {
   const count = size === 'huge' ? 32 : 40;
