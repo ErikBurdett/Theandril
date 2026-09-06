@@ -1,5 +1,5 @@
 import { UNITS } from '@theandril/content';
-import { hexDistance, isPassable, neighbors, SeededRandom } from '@theandril/mapgen';
+import { hexDistance, neighbors, SeededRandom } from '@theandril/mapgen';
 import { autoResolveBattle, chooseBattleOrder, createBattle, resolveBattleRound } from './combat';
 import type { BattleFormation, BattleOrder } from './combat';
 import type { Army, ArmyFormation, CampaignBattle, CommandResult, DomainEvent, GameState } from './types';
@@ -10,6 +10,7 @@ import { doctrineEffects } from './progression';
 import { armyCanAttack, armySight, armyStrength } from './army-composition';
 import { rulesVersion } from './rules';
 import { armyCharacterLeadership, automaticallyRally, finishBattleCharacters, interruptArmyMissions, snapshotArmyCharacters } from './characters';
+import { armyDomain, armyTerrainBlocker, carriedArmyBlocker, moveFleetCargo, reconcileFleetCargo } from './naval';
 
 export const MAX_BATTLE_REPORTS = 20;
 const units = new Map(UNITS.map(unit => [unit.id, unit]));
@@ -34,7 +35,7 @@ export function declareCampaignWar(state: GameState, factionId: string, targetFa
   const objection = declareWarObjection(state, factionId, targetFactionId);
   if (objection) return fail(objection);
   const visible = indexes(state).visible.get(factionId);
-  const hasContact = Object.values(state.armies).some(army => army.factionId === targetFactionId && visible?.has(army.cell))
+  const hasContact = Object.values(state.armies).some(army => !state.transports[army.id] && army.factionId === targetFactionId && visible?.has(army.cell))
     || Object.values(state.settlements).some(town => town.factionId === targetFactionId && visible?.has(town.cell));
   if (!hasContact) return fail('Scout a faction before declaring war.');
   state.wars.push(warPair(factionId, targetFactionId));
@@ -66,7 +67,8 @@ function compositionSnapshot(state: GameState, armies: Army[], militiaId: string
   const formationBindings: CampaignBattle['formationBindings'] = armies.flatMap(army => army.formations.map(item => ({ battleFormationId: rulesVersion(state) < 6 ? army.id : item.id, formationId: item.id, armyId: army.id })));
   if (militiaId) formationBindings.push({ battleFormationId: militiaId, formationId: militiaId, armyId: null });
   formationBindings.sort((a, b) => a.battleFormationId < b.battleFormationId ? -1 : 1);
-  return { rulesVersion: rulesVersion(state) < 6 ? 5 as const : rulesVersion(state) < 7 ? 6 as const : 7 as const, formationBindings,
+  return { rulesVersion: rulesVersion(state) < 6 ? 5 as const : rulesVersion(state) < 7 ? 6 as const : rulesVersion(state) < 8 ? 7 as const : 8 as const, formationBindings,
+    domain: armyDomain(armies[0]!), transportAftermath: [],
     characterSnapshots: rulesVersion(state) >= 7 ? snapshotArmyCharacters(state, armies) : [], characterAftermath: [], usedAbilities: [],
     formationStrengths: formationBindings.map(binding => ({ formationId: binding.formationId, strength: [...combat.attacker, ...combat.defender].find(item => item.id === binding.battleFormationId)!.strength })),
     formationAftermath: [] };
@@ -76,23 +78,26 @@ export function startCampaignBattle(state: GameState, factionId: string, armyId:
   const attacker = state.armies[armyId];
   const defender = state.armies[targetArmyId];
   if (!attacker || attacker.factionId !== factionId) return fail('You do not control that army.');
+  const carried = carriedArmyBlocker(state, armyId); if (carried) return fail(carried);
   const index = indexes(state);
   // An unknown or hidden target deliberately returns the same error.
-  if (!defender || !index.visible.get(factionId)?.has(defender.cell)) return fail('Choose a currently visible enemy army.');
+  if (!defender || state.transports[defender.id] || !index.visible.get(factionId)?.has(defender.cell)) return fail('Choose a currently visible enemy army.');
   if (defender.factionId === factionId) return fail('An army cannot attack its own faction.');
   if (!atWar(state, factionId, defender.factionId)) return fail('Declare war before attacking this faction.');
   if (!armyCanAttack(attacker)) return fail('Hearth caravans cannot initiate attacks.');
+  if (armyDomain(attacker) !== armyDomain(defender)) return fail('Land armies fight on land and fleets fight on water. Disembark before a land attack.');
+  const terrainBlocker = armyTerrainBlocker(state, attacker, defender.cell); if (terrainBlocker) return fail(terrainBlocker);
   if (!neighbors(attacker.cell, state.world.width, state.world.height).includes(defender.cell)) return fail('Attack an adjacent enemy army.');
   if (index.settlements.has(defender.cell)) return fail('Besiege this settlement and assault its defenses to attack its garrison.');
   const terrain = state.world.terrain[defender.cell] ?? 0;
   const cost = terrain === 2 || terrain === 3 ? 2 : 1;
   if (attacker.movement < cost) return fail('Not enough movement remains to attack this terrain.');
   const defenders = [...(index.armies.get(defender.cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => army !== undefined).sort(compareId);
-  if (defenders.reduce((sum, army) => sum + army.formations.length, 0) > 12) return fail(rulesVersion(state) < 6 ? 'This field battle supports at most twelve defending armies.' : 'This field battle supports at most twelve defending formations.');
+  if (defenders.reduce((sum, army) => sum + army.formations.length, 0) > (rulesVersion(state) < 8 ? 12 : 20)) return fail(rulesVersion(state) >= 8 ? 'This field battle supports at most twenty defending formations.' : rulesVersion(state) < 6 ? 'This field battle supports at most twelve defending armies.' : 'This field battle supports at most twelve defending formations.');
   if (!defenders.length || defenders.some(army => army.factionId !== defender.factionId)) return fail('The defending stack has invalid ownership.');
   const serial = state.nextId;
   const seed = new SeededRandom((state.world.seed ^ serial) >>> 0).nextUint32();
-  const combat = createBattle({ seed, terrain, attacker: deployment(state, [attacker]), defender: deployment(state, defenders) });
+  const combat = createBattle({ seed, terrain, attacker: deployment(state, [attacker]), defender: deployment(state, defenders) }, rulesVersion(state));
   state.battle = {
     id: `battle.${serial}`, turn: state.turn, attackerId: attacker.id, defenderId: defender.id,
     defenderIds: defenders.map(army => army.id), attackerFactionId: factionId, defenderFactionId: defender.factionId,
@@ -120,7 +125,7 @@ export function startSettlementAssault(state: GameState, factionId: string, army
   const attacker = state.armies[armyId]; const town = state.settlements[settlementId]; const siege = state.sieges[settlementId];
   if (!attacker || !town || !siege) return fail('Missing assault participants.');
   const defenders = [...(indexes(state).armies.get(town.cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => army !== undefined).sort(compareId);
-  if (defenders.reduce((sum, army) => sum + army.formations.length, 0) > 12 || defenders.some(army => army.factionId !== town.factionId)) return fail('Invalid defending garrison.');
+  if (defenders.reduce((sum, army) => sum + army.formations.length, 0) > (rulesVersion(state) < 8 ? 12 : 20) || defenders.some(army => army.factionId !== town.factionId)) return fail('Invalid defending garrison.');
   const militiaId = defenders.length ? null : `militia.${town.id}`;
   const fortification = Math.floor(siege.defenses / 10);
   const guard = units.get('unit.guard');
@@ -133,7 +138,7 @@ export function startSettlementAssault(state: GameState, factionId: string, army
   }];
   const serial = state.nextId;
   const seed = new SeededRandom((state.world.seed ^ serial) >>> 0).nextUint32();
-  const combat = createBattle({ seed, terrain: state.world.terrain[town.cell] ?? 0, attacker: deployment(state, [attacker]), defender: defensiveFormations });
+  const combat = createBattle({ seed, terrain: state.world.terrain[town.cell] ?? 0, attacker: deployment(state, [attacker]), defender: defensiveFormations }, rulesVersion(state));
   state.battle = {
     id: `battle.${serial}`, turn: state.turn, attackerId: attacker.id, defenderId: defenders[0]?.id ?? militiaId ?? '',
     defenderIds: defenders.length ? defenders.map(army => army.id) : [militiaId ?? ''], attackerFactionId: factionId, defenderFactionId: town.factionId,
@@ -166,13 +171,14 @@ export function relocateArmy(state: GameState, army: Army, target: number): void
   occupants?.delete(army.id);
   if (!occupants?.size) index.armies.delete(army.cell);
   army.cell = target;
+  moveFleetCargo(state, army.id);
   const destination = index.armies.get(target) ?? new Set<string>();
   destination.add(army.id); index.armies.set(target, destination);
   updateSight(state, army.factionId, target, sight, 1);
 }
 
 function canOccupy(state: GameState, army: Army, cell: number): boolean {
-  if (!isPassable(state.world.terrain[cell] ?? 0)) return false;
+  if (armyTerrainBlocker(state, army, cell)) return false;
   const index = indexes(state);
   if ([...(index.armies.get(cell) ?? [])].some(id => state.armies[id]?.factionId !== army.factionId)) return false;
   const town = index.settlements.get(cell);
@@ -248,6 +254,7 @@ function finishCampaignBattle(state: GameState, battle: CampaignBattle, events: 
       : battle.aftermath.find(ending => ending.armyId === binding.battleFormationId)?.strength ?? 0,
   }));
   finishBattleCharacters(state, battle, events);
+  if (battle.rulesVersion >= 8) for (const id of participants) battle.transportAftermath.push(...reconcileFleetCargo(state, id, events));
   const winner = result.winner === 'draw' ? 'Neither side' : state.factions.find(faction => faction.id === (result.winner === 'attacker' ? battle.attackerFactionId : battle.defenderFactionId))?.name ?? result.winner;
   const message = `${winner} prevailed at hex ${battle.defenderCell}: ${result.reason}.`;
   for (const factionId of [battle.attackerFactionId, battle.defenderFactionId]) events.push({ turn: state.turn, type: 'battle_finished', factionId, cell: battle.defenderCell, message });
@@ -269,13 +276,13 @@ export function resolveCampaignBattle(state: GameState, factionId: string, order
   if (order === undefined && battle.rulesVersion >= 7 && battle.characterSnapshots.length) {
     while (!battle.combat.result) {
       automaticallyRally(state, battle, [battle.attackerFactionId, battle.defenderFactionId], events);
-      battle.combat = resolveBattleRound(battle.combat, { attacker: chooseBattleOrder(battle.combat, 'attacker'), defender: chooseBattleOrder(battle.combat, 'defender') });
+      battle.combat = resolveBattleRound(battle.combat, { attacker: chooseBattleOrder(battle.combat, 'attacker'), defender: chooseBattleOrder(battle.combat, 'defender') }, battle.rulesVersion);
     }
     combat = battle.combat;
-  } else combat = order === undefined ? autoResolveBattle(battle.combat) : resolveBattleRound(battle.combat, {
+  } else combat = order === undefined ? autoResolveBattle(battle.combat, battle.rulesVersion) : resolveBattleRound(battle.combat, {
     attacker: side === 'attacker' ? order : chooseBattleOrder(battle.combat, 'attacker'),
     defender: side === 'defender' ? order : chooseBattleOrder(battle.combat, 'defender'),
-  });
+  }, battle.rulesVersion);
   battle.combat = combat;
   if (combat.result) finishCampaignBattle(state, battle, events);
   else for (const participant of [battle.attackerFactionId, battle.defenderFactionId]) events.push({ turn: state.turn, factionId: participant, type: 'battle_round', cell: battle.defenderCell, message: `Battle round ${combat.round} resolved.` });
@@ -284,7 +291,7 @@ export function resolveCampaignBattle(state: GameState, factionId: string, order
 
 export function cloneCampaignBattle(battle: CampaignBattle): CampaignBattle {
   return {
-    ...battle, characterSnapshots: battle.characterSnapshots.map(item => ({ ...item, leadership: { ...item.leadership } })), characterAftermath: battle.characterAftermath.map(item => ({ ...item })), usedAbilities: battle.usedAbilities.map(item => ({ ...item })), formationBindings: battle.formationBindings.map(item => ({ ...item })), formationStrengths: battle.formationStrengths.map(item => ({ ...item })), formationAftermath: battle.formationAftermath.map(item => ({ ...item })), defenderIds: [...battle.defenderIds], initialStrengths: battle.initialStrengths.map(army => ({ ...army })), aftermath: battle.aftermath.map(army => ({ ...army })),
+    ...battle, transportAftermath: battle.transportAftermath.map(item => ({ ...item, lostFormationIds: [...item.lostFormationIds] })), characterSnapshots: battle.characterSnapshots.map(item => ({ ...item, learnedSkillIds: [...item.learnedSkillIds], leadership: { ...item.leadership } })), characterAftermath: battle.characterAftermath.map(item => ({ ...item })), usedAbilities: battle.usedAbilities.map(item => ({ ...item })), formationBindings: battle.formationBindings.map(item => ({ ...item })), formationStrengths: battle.formationStrengths.map(item => ({ ...item })), formationAftermath: battle.formationAftermath.map(item => ({ ...item })), defenderIds: [...battle.defenderIds], initialStrengths: battle.initialStrengths.map(army => ({ ...army })), aftermath: battle.aftermath.map(army => ({ ...army })),
     combat: {
       ...battle.combat, attacker: battle.combat.attacker.map(unit => ({ ...unit })), defender: battle.combat.defender.map(unit => ({ ...unit })),
       log: [...battle.combat.log], ...(battle.combat.result ? { result: { ...battle.combat.result } } : {}),

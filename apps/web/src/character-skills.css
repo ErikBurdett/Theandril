@@ -1,0 +1,14 @@
+.character-skills{margin:22px 0;border-block:1px solid #4b5740;padding:0 0 18px}
+.character-skills>.field-help{margin:9px 0}
+.skill-branches{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0 3px}
+.skill-branches button{flex:1;min-width:95px;font-size:12px;padding:8px}
+.skill-branches button[aria-selected=true]{border-color:#c9ad6d;background:#78613833}
+.skill-branches button span{display:block;font-size:10px;color:#a9b79e;margin-top:4px}
+.skill-branch-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;outline-offset:3px}
+.skill-branch-panel .character-promotion{margin-top:8px;min-width:0;display:flex;flex-direction:column}
+.skill-branch-panel .character-promotion>small{font-size:10px;color:#b4ac8f;margin-bottom:7px}
+.skill-branch-panel .character-promotion>button{margin-top:auto;min-height:40px}
+.skill-branch-panel .skill-prerequisite{color:#d0c39b}
+.skill-acquired{background:#60784b17;border-color:#81895a}
+.army-command-warning{border-left:3px solid #ba9461;padding-left:10px}
+@media(max-width:700px){.skill-branch-panel{grid-template-columns:minmax(0,1fr)}.skill-branches button{min-width:85px}}

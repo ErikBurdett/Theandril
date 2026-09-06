@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { CHARACTER_DEFINITIONS, checksum, UNITS } from '@theandril/content';
-import { isPassable, neighbors, SeededRandom } from '@theandril/mapgen';
+import { deriveWaterDepth, isPassable, neighbors, SeededRandom } from '@theandril/mapgen';
 import { characterBattleCampaign, characterCampaign } from '../../test-fixtures/src/character-fixture';
 import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
 import { conquestCampaign } from '../../test-fixtures/src/conquest-fixture';
 import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, getMovementQuery, getObservation, serializeGame, serializeGameForVersion, stateHash } from './index';
 import type { Character, GameCommand, GameState } from './index';
 import { cellsWithin, rebuildIndexes } from './visibility';
-import { characterCell, rebuildCharacterIndexes } from './characters';
+import { armyCommandCapacity, characterCell, characterLeadership, rebuildCharacterIndexes } from './characters';
 import { relocateArmy } from './warfare';
 
 const player = 'faction.ashen_compact';
@@ -35,6 +35,41 @@ function attach(state: GameState, definitionId: string, armyId = 'army.2'): Char
 const mission = (state: GameState, character: Character, missionId: string, settlementId?: string) => issue(state, { type: 'startCharacterMission', factionId: character.factionId, characterId: character.id, missionId, ...(settlementId ? { settlementId } : {}) });
 
 describe('named campaign characters', () => {
+  it('earns branching training through real refit experience and applies the learned improvement', () => {
+    const state = characterCampaign(); const engineer = attach(state, 'character.engineer');
+    const army = state.armies['army.2']!;
+    for (let completed = 0; completed < 8; completed++) {
+      for (const formation of army.formations) formation.strength = 1;
+      mission(state, engineer, 'mission.refit'); end(state); end(state);
+      if (completed === 2) issue(state, { type: 'promoteCharacter', factionId: player, characterId: engineer.id, skillId: 'skill.fieldcraft' });
+    }
+    expect(engineer.experience).toBe(20);
+    issue(state, { type: 'promoteCharacter', factionId: player, characterId: engineer.id, skillId: 'skill.column_workshops' });
+    expect(engineer.experience).toBe(2); expect(engineer.skillId).toBe('skill.fieldcraft'); expect(engineer.learnedSkillIds).toEqual(['skill.column_workshops']);
+    expect(getObservation(state, player).characters.find(item => item.id === engineer.id)?.missions[0]?.effectText).toContain('10 missing strength');
+    for (const formation of army.formations) formation.strength = 1;
+    mission(state, engineer, 'mission.refit'); const mirror = restore(state); end(state); end(mirror); end(state); end(mirror);
+    expect(army.formations.every(item => item.strength === 11)).toBe(true); expect(stateHash(mirror)).toBe(stateHash(state));
+    reject(state, { type: 'promoteCharacter', factionId: player, characterId: engineer.id, skillId: 'skill.siegecraft' });
+  });
+
+  it('keeps exclusive roots but combines command and battlefield branches, rejecting unearned, duplicate and corrupt nodes', () => {
+    const state = characterCampaign(); const marshal = attach(state, 'character.marshal'); const army = state.armies['army.2']!;
+    expect(armyCommandCapacity(state, army)).toBe(16);
+    const promote = (skillId: string) => ({ type: 'promoteCharacter' as const, factionId: player, characterId: marshal.id, skillId });
+    reject(state, promote('skill.steadfast')); marshal.experience = 200; // Authored veteran XP; mission test above earns its XP normally.
+    reject(state, promote('skill.field_orders')); issue(state, promote('skill.decisive')); reject(state, promote('skill.steadfast'));
+    issue(state, promote('skill.muster_rolls')); expect(armyCommandCapacity(state, army)).toBe(18);
+    issue(state, promote('skill.measured_advance')); expect(characterLeadership(marshal)).toEqual({ attack: 4, armor: 0 });
+    issue(state, promote('skill.field_orders')); expect(armyCommandCapacity(state, army)).toBe(20);
+    expect(marshal.experience).toBe(128); reject(state, promote('skill.muster_rolls')); reject(state, promote('skill.unbroken_line'));
+    const view = getObservation(state, player).characters.find(item => item.id === marshal.id)!;
+    expect(view.promotions.find(item => item.skillId === 'skill.field_orders')).toMatchObject({ acquired: true, requiresAll: ['skill.muster_rolls'], branch: 'command', tier: 3 });
+    const saved = JSON.parse(serializeGame(state)) as { state: { characters: Character[] }; stateChecksum: string };
+    saved.state.characters[0]!.learnedSkillIds = ['skill.field_orders']; saved.stateChecksum = checksum(JSON.stringify(saved.state));
+    expect(() => deserializeGame(JSON.stringify(saved))).toThrow(/prerequisite/);
+    expect(() => serializeGameForVersion(state, 7)).toThrow(); restore(state);
+  });
   it('appoints named paid characters, charges real upkeep, rejects unsafe/foreign/malformed appointments atomically', () => {
     const state = characterCampaign(); const before = state.factions[0]!.treasury;
     const marshal = appoint(state, 'character.marshal');
@@ -49,6 +84,55 @@ describe('named campaign characters', () => {
     end(state); end(without);
     expect(without.factions[0]!.treasury - state.factions[0]!.treasury).toBe(2);
     restore(state);
+  });
+
+  it('boards and disembarks officers only through a safe adjacent harbor, paying fleet movement without teleportation', () => {
+    const state = characterCampaign(), town = state.settlements['settlement.5']!;
+    town.buildings.push('building.harbor'); town.buildings.sort();
+    const shore = neighbors(town.cell, state.world.width, state.world.height).find(cell => !state.world.starts.includes(cell) && !Object.values(state.settlements).some(item => item.cell === cell))!;
+    state.world.terrain[shore] = 0; state.world.biome[shore] = 0; state.world.fertility[shore] = 0;
+    state.world.waterDepth = deriveWaterDepth(state.world.width, state.world.height, state.world.terrain);
+    const fleetId = `army.${state.nextId++}`;
+    state.armies[fleetId] = { id: fleetId, factionId: player, name: 'Harbor command', cell: shore, movement: 3, formations: [createArmyFormation(fleetId, 'unit.transport')] };
+    state.progression[player]!.technologies.push('technology.coastal_navigation'); state.progression[player]!.technologies.sort(); rebuildIndexes(state);
+    const marshal = appoint(state, 'character.marshal');
+    expect(getObservation(state, player).characters.find(item => item.id === marshal.id)!.assignmentOptions).toContainEqual({ armyId: fleetId, label: 'Harbor command', canAssign: true, blocker: null });
+    const command = { type: 'assignCharacter' as const, factionId: player, characterId: marshal.id, armyId: fleetId };
+    state.armies[fleetId]!.movement = 0; reject(state, command); state.armies[fleetId]!.movement = 3;
+    town.occupationTurns = 1; reject(state, command); town.occupationTurns = 0;
+    issue(state, command); expect(state.armies[fleetId]!.movement).toBe(2); expect(characterCell(state, marshal)).toBe(shore);
+    expect(armyCommandCapacity(state, state.armies[fleetId]!)).toBe(16);
+    expect(getObservation(state, player).characters.find(item => item.id === marshal.id)!.unassignmentOptions[0]).toMatchObject({ settlementId: town.id, canUnassign: true });
+    issue(state, { type: 'unassignCharacter', factionId: player, characterId: marshal.id, settlementId: town.id });
+    expect(state.armies[fleetId]!.movement).toBe(1); expect(characterCell(state, marshal)).toBe(town.cell); restore(state);
+    const engineer = appoint(state, 'character.engineer');
+    issue(state, { type: 'assignCharacter', factionId: player, characterId: engineer.id, armyId: 'army.2' });
+    issue(state, { type: 'embark', factionId: player, armyId: 'army.2', fleetId });
+    reject(state, { type: 'unassignCharacter', factionId: player, characterId: engineer.id, settlementId: town.id });
+    reject(state, { type: 'assignCharacter', factionId: player, characterId: engineer.id, armyId: fleetId });
+    reject(state, { type: 'startCharacterMission', factionId: player, characterId: engineer.id, missionId: 'mission.refit' });
+    engineer.experience = 12;
+    issue(state, { type: 'promoteCharacter', factionId: player, characterId: engineer.id, skillId: 'skill.fieldcraft' });
+    expect(engineer.location).toEqual({ kind: 'army', armyId: 'army.2' }); restore(state);
+  });
+
+  it('retains every formation when a large-army marshal is wounded and restores command only after recovery', () => {
+    const state = characterBattleCampaign(), army = state.armies['army.2']!, marshal = Object.values(state.characters)[0]!;
+    marshal.experience = 72;
+    for (const skillId of ['skill.decisive', 'skill.muster_rolls', 'skill.measured_advance', 'skill.field_orders']) issue(state, { type: 'promoteCharacter', factionId: player, characterId: marshal.id, skillId });
+    while (army.formations.length < 20) army.formations.push(createArmyFormation(`army.${state.nextId++}`, 'unit.guard'));
+    army.formations.sort((a, b) => a.id < b.id ? -1 : 1); rebuildIndexes(state);
+    issue(state, { type: 'declareWar', factionId: player, targetFactionId: rival });
+    issue(state, { type: 'attack', factionId: player, armyId: army.id, targetArmyId: 'army.4' });
+    expect(state.battle!.combat.attacker).toHaveLength(20);
+    expect(state.battle!.characterSnapshots[0]!.learnedSkillIds).toEqual(marshal.learnedSkillIds);
+    expect(state.battle!.characterSnapshots[0]!.leadership).toEqual({ attack: 4, armor: 0 });
+    const mirror = restore(state);
+    const withdraw = { type: 'battleOrder' as const, factionId: player, order: 'withdraw' as const };
+    issue(state, withdraw); issue(mirror, withdraw); expect(stateHash(mirror)).toBe(stateHash(state));
+    expect(army.formations).toHaveLength(20); expect(marshal.woundedTurns).toBe(2); expect(armyCommandCapacity(state, army)).toBe(12);
+    end(state); expect(army.movement).toBe(1); expect(marshal.woundedTurns).toBe(1);
+    end(state); expect(armyCommandCapacity(state, army)).toBe(20); expect(army.movement).toBe(3); restore(state);
   });
 
   it('requires co-location and enforces one marshal/two companions without teleporting', () => {
@@ -242,6 +326,7 @@ describe('named campaign characters', () => {
     // Authored trapped approach: withdrawal cannot reach a legal unoccupied land hex.
     const protectedCells = new Set([attacker.cell, ...Object.values(state.settlements).map(town => town.cell), ...state.world.starts]);
     for (const cell of neighbors(defender.cell, state.world.width, state.world.height)) if (!protectedCells.has(cell)) { state.world.terrain[cell] = 0; state.world.biome[cell] = 0; state.world.fertility[cell] = 0; }
+    state.world.waterDepth = deriveWaterDepth(state.world.width, state.world.height, state.world.terrain);
     attacker.formations = [createArmyFormation(attacker.id, 'unit.heavy_infantry')]; attacker.movement = 2; rebuildIndexes(state);
     issue(state, { type: 'declareWar', factionId: player, targetFactionId: rival }); issue(state, { type: 'attack', factionId: player, armyId: attacker.id, targetArmyId: defender.id }); issue(state, { type: 'autoResolveBattle', factionId: player });
     expect(doomed.dead).toBe(true); expect(doomed.location).toBeNull();
@@ -286,6 +371,7 @@ describe('named campaign characters', () => {
     corrupt(data => { data.characters[0]!.location = { kind: 'army', armyId: 'army.missing' }; });
     corrupt(data => { data.characters[0]!.dead = true; });
     corrupt(data => { data.characters[0]!.skillId = 'skill.siegecraft'; });
+    state.world.generatorVersion = 2; // This authored fixture isolates the character boundary; real legacy origins are separately captured.
     expect(() => serializeGameForVersion(state, 6)).toThrow(/characters/); expect(() => applyCommandForVersion(state, { type: 'endTurn', factionId: player }, 6)).toThrow(/characters/);
     issue(state, { type: 'declareWar', factionId: player, targetFactionId: rival }); issue(state, { type: 'attack', factionId: player, armyId: 'army.2', targetArmyId: 'army.4' });
     corrupt(data => { data.battle!.characterSnapshots[0]!.leadership.attack++; });

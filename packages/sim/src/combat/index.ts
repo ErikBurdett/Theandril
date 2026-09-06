@@ -12,12 +12,15 @@ type Side = 'attacker' | 'defender';
 const formationSchema = z.object({
   id: identifier, unitId: identifier,
   strength: bounded(10_000), maxStrength: z.number().int().min(1).max(10_000),
-  morale: bounded(100), fatigue: bounded(100), row: bounded(2), column: bounded(4),
+  morale: bounded(100), fatigue: bounded(100), row: bounded(3), column: bounded(4),
   attack: bounded(100), armor: bounded(100), initiative: bounded(100), range: bounded(4),
 }).strict().refine(unit => unit.strength <= unit.maxStrength, 'Strength exceeds formation capacity.');
 export type BattleFormation = z.infer<typeof formationSchema>;
-const formations = z.array(formationSchema).min(1).max(12);
+const formations = z.array(formationSchema).min(1).max(20);
 const inputSchema = z.object({ seed: bounded(0xffffffff), terrain: bounded(4), attacker: formations, defender: formations }).strict();
+const legacyInputSchema = inputSchema.extend({ attacker: formations.max(12), defender: formations.max(12) }).superRefine((input, context) => {
+  if ([...input.attacker, ...input.defender].some(formation => formation.row > 2)) context.addIssue({ code: 'custom', message: 'Historical battles have only three ranks.' });
+});
 export type BattleInput = z.infer<typeof inputSchema>;
 
 /** rngState is canonical: saves resume the combat stream independently of the campaign. */
@@ -41,6 +44,9 @@ export const battleStateSchema = inputSchema.extend({
   }
 });
 export type BattleState = z.infer<typeof battleStateSchema>;
+export const legacyBattleStateSchema = battleStateSchema.superRefine((state, context) => {
+  if (state.attacker.length > 12 || state.defender.length > 12 || [...state.attacker, ...state.defender].some(formation => formation.row > 2)) context.addIssue({ code: 'custom', message: 'Historical battles support at most twelve formations and three ranks per side.' });
+});
 
 const byId = (a: BattleFormation, b: BattleFormation): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 const active = (formation: BattleFormation): boolean => formation.strength > 0 && formation.morale > 0;
@@ -51,8 +57,8 @@ const append = (state: BattleState, message: string): void => {
   if (state.log.length > MAX_LOG) state.log.splice(0, state.log.length - MAX_LOG);
 };
 
-export function createBattle(input: BattleInput): BattleState {
-  const checked = inputSchema.parse(input);
+export function createBattle(input: BattleInput, version = 8): BattleState {
+  const checked = (version < 8 ? legacyInputSchema : inputSchema).parse(input);
   if ([...checked.attacker, ...checked.defender].some(unit => !active(unit))) {
     throw new Error('Starting formations must have positive strength and morale.');
   }
@@ -114,8 +120,8 @@ function targetFor(state: BattleState, side: Side, actor: BattleFormation, order
 }
 
 /** Validates and clones input, then resolves one shared tactical/autoresolve round. */
-export function resolveBattleRound(input: BattleState, orders: { attacker: BattleOrder; defender: BattleOrder }): BattleState {
-  const state = battleStateSchema.parse(input);
+export function resolveBattleRound(input: BattleState, orders: { attacker: BattleOrder; defender: BattleOrder }, version = 8): BattleState {
+  const state = (version < 8 ? legacyBattleStateSchema : battleStateSchema).parse(input);
   const checked = z.object({ attacker: orderSchema, defender: orderSchema }).strict().parse(orders);
   state.attacker.sort(byId); state.defender.sort(byId);
   if (state.result) return state;
@@ -182,11 +188,11 @@ export function chooseBattleOrder(state: BattleState, side: Side): BattleOrder {
   return 'advance';
 }
 
-export function autoResolveBattle(input: BattleState): BattleState {
-  let state = battleStateSchema.parse(input);
+export function autoResolveBattle(input: BattleState, version = 8): BattleState {
+  let state = (version < 8 ? legacyBattleStateSchema : battleStateSchema).parse(input);
   state.attacker.sort(byId); state.defender.sort(byId);
   while (!state.result) {
-    state = resolveBattleRound(state, { attacker: chooseBattleOrder(state, 'attacker'), defender: chooseBattleOrder(state, 'defender') });
+    state = resolveBattleRound(state, { attacker: chooseBattleOrder(state, 'attacker'), defender: chooseBattleOrder(state, 'defender') }, version);
   }
   return state;
 }

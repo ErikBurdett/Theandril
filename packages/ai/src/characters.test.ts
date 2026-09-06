@@ -53,6 +53,22 @@ test('zero discretionary budget never fabricates appointments or paid missions',
   const plan = planCharacters(getObservation(state, state.turnOwnerId), 0);
   expect(plan.commands).toEqual([]); expect(plan.coinSpent).toBe(0);
 });
+test('AI follows acquired prerequisites and prefers battlecraft for a small army without guessing eligibility', () => {
+  const state = characterCampaign();
+  issue(state, { type: 'recruitCharacter', factionId: state.turnOwnerId, settlementId: CHARACTER_FIXTURE.homeId, definitionId: 'character.marshal' });
+  const marshal = Object.values(state.characters)[0]!;
+  issue(state, { type: 'assignCharacter', factionId: state.turnOwnerId, characterId: marshal.id, armyId: CHARACTER_FIXTURE.armyId });
+  marshal.experience = 100;
+  for (const expected of ['skill.decisive', 'skill.measured_advance', 'skill.muster_rolls', 'skill.field_orders']) {
+    const view = getObservation(state, state.turnOwnerId);
+    const plan = planCharacters(view, 0);
+    const command = plan.commands.find(item => item.type === 'promoteCharacter');
+    expect(command).toMatchObject({ skillId: expected });
+    issue(state, command!);
+  }
+  expect(marshal.learnedSkillIds).toEqual(['skill.field_orders', 'skill.measured_advance', 'skill.muster_rolls']);
+  expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+});
 
 test('full AI respects active mission carriers and never merges two commanded armies', () => {
   const state = characterCampaign();

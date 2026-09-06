@@ -3,8 +3,11 @@
 This module is ready for campaign integration. It does not register commands, modify
 strategic armies, or expose a player interface by itself.
 
-`createBattle` accepts the seed, terrain ID, and 1–12 formations on each side. Each
-formation occupies a unique slot in a five-column, three-rank deployment grid.
+`createBattle` accepts the seed, terrain ID, and 1–20 formations on each side. Each
+formation occupies a unique slot in a five-column, four-rank deployment grid.
+Its optional rules-version argument preserves the historical twelve-formation,
+three-rank limit before version 8; round resolution and autoresolve take the same
+version. The combat formulas themselves are unchanged.
 Formation IDs are unique across the whole battle. Arrays are normalized by ID.
 Malformed stats, unknown fields, duplicate slots/IDs, and dead starting formations
 are rejected. Unit definitions must be resolved by the campaign before supplying

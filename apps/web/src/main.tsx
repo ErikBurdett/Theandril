@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState, type FormEvent } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BUILDINGS, CAMPAIGN_PACES, UNITS } from '@theandril/content';
-import { BIOME_NAMES, RECOMMENDED_FACTION_COUNTS, neighbors, type MapSize } from '@theandril/mapgen';
+import { BIOME_NAMES, RECOMMENDED_FACTION_COUNTS, WATER_DEPTH_NAMES, neighbors, type MapSize } from '@theandril/mapgen';
 import type { CampaignPace, GameCommand, MovementQuery, Observation, PeaceAssessment, PeaceTerms } from '@theandril/sim';
 import { WorldRenderer, type ArtStatus, type MapPointerInput } from '@theandril/render';
 import { MovementMapHint, MovementOrders, useMapMovement, type MapMovement, type MovementReview } from './movement';
@@ -14,6 +14,7 @@ import { ArmyComposition } from './army';
 import { ArmyCharacters, CharacterAppointments, CharacterRegistry } from './characters';
 import { FactionEncounters } from './diplomacy';
 import { FactionArt, PublicCultures } from './faction-art';
+import { NavalTransport, SettlementProduction } from './naval';
 import { CapturePanel, RuinInspection, SettlementDefense, SiegeLedger, SiegeOrders } from './siege';
 import './style.css';
 import './campaign-records.css';
@@ -59,6 +60,7 @@ function App() {
   const [error, setError] = useState(false);
   const [name, setName] = useState('Cinderhearth');
   const [search, setSearch] = useState('');
+  const [forceFilter, setForceFilter] = useState('all');
   const [registry, setRegistry] = useState<'armies' | 'settlements'>('armies');
   const [textScale, setTextScale] = useState('1');
   const [turnKey, setTurnKey] = useState('e');
@@ -143,6 +145,7 @@ function App() {
         movementQueries.current.clear();
         documentsRef.current = undefined; setDocuments(undefined); setChronicleError(''); chronicleQuery.current = undefined;
       }
+      if (response.reset) setForceFilter('all');
       if (response.observation.victory) pauseWatch();
       renderer.current ??= new WorldRenderer(setArtStatus);
       renderer.current.update(response.observation, response.reset);
@@ -304,7 +307,8 @@ function App() {
   const ordersBusy = controlLocked || Boolean(observation?.battle || observation?.pendingCapture);
   const movement = useMapMovement({ view: observation, selection, hash: hash.current, locked: ordersBusy, renderer, select, issue: command, query: reviewMovement });
   movementRef.current = movement;
-  const filteredArmies = ownArmies.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
+  const armyNamesById = new Map(ownArmies.map(item => [item.id, item.name]));
+  const filteredArmies = ownArmies.filter(item => (forceFilter === 'all' || (forceFilter === 'embarked' ? Boolean(item.carrierId) : item.domain === forceFilter && !item.carrierId)) && item.name.toLowerCase().includes(search.toLowerCase()));
   const filteredSettlements = ownSettlements.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
   const importFile = async (file: File | undefined) => {
     if (!file) return;
@@ -342,7 +346,20 @@ function App() {
     {observation?.victory && !showSetup && <section className="victory-banner" data-testid="victory-result" aria-label="Campaign result"><span className="eyebrow">The witnesses seal the book</span><h2>{observation.factions.find(faction => faction.id === observation.victory?.factionId)?.name ?? observation.victory.factionId} achieved Prosperity</h2><p>Turn {observation.victory.turn} · The Hearth Exchange is complete. Campaign orders have ended.</p><button className="primary" onClick={openChronicles}>Read campaign chronicles</button></section>}
     {observation && <main className="campaign" style={showSetup ? { display: 'none' } : undefined}>
       <aside className="empire panel"><div className="realm-heading faction-art-heading"><FactionArt contentId="ui.crest" definitionId={realm?.definitionId} label={`${realmName} crest`}/><div><span className="eyebrow">Your people</span><h2>{realmName}</h2></div></div><label className="search-label">Search your realm<input type="search" value={search} placeholder="Army or settlement name" onChange={event => setSearch(event.target.value)}/></label><div className="tabs" role="tablist" aria-label="Realm registry"><button role="tab" aria-selected={registry === 'armies'} onClick={() => setRegistry('armies')}>Armies <span>{ownArmies.length}</span></button><button role="tab" aria-selected={registry === 'settlements'} onClick={() => setRegistry('settlements')}>Settlements <span>{ownSettlements.length}</span></button></div>
-        {registry === 'armies' ? <div className="registry" data-testid="army-registry">{filteredArmies.map(item => <button className={'registry-item ' + (army?.id === item.id ? 'selected' : '')} key={item.id} onClick={() => select({ armyId: item.id, cell: item.cell }, true)}><span className="entity-symbol" aria-hidden="true">△</span><span><strong>{item.name}</strong><small>{item.formations.length} {item.formations.length === 1 ? 'formation' : 'formations'} · {item.movement} movement · {item.strength} strength</small>{item.commander && <small>Commander: {item.commander.name}</small>}{item.agents.some(agent => agent.status === 'mission') && <small className="registry-route-state">⚑ Stationary mission</small>}{routesByArmy.get(item.id) && <small className="registry-route-state">{routesByArmy.get(item.id)?.status === 'paused' ? '⚑ Route interrupted' : '↝ Travel queued'}</small>}</span><span aria-hidden="true">›</span></button>)}{filteredArmies.length === 0 && <p className="empty">{search ? 'No matching armies.' : 'Recruit an army from a settlement.'}</p>}</div> : <div className="registry" data-testid="settlement-registry">{filteredSettlements.map(item => <button className={'registry-item ' + (settlement?.id === item.id ? 'selected' : '')} key={item.id} onClick={() => select({ settlementId: item.id, cell: item.cell }, true)}><span className="entity-symbol" aria-hidden="true">⌂</span><span><strong>{item.name}</strong><small>{item.population} people · {item.queue.length ? itemName(item.queue[0]!.itemId) : 'No production'}</small></span><span aria-hidden="true">›</span></button>)}{filteredSettlements.length === 0 && <p className="empty">{search ? 'No matching settlements.' : 'Select your caravan to establish the first hearth.'}</p>}</div>}
+        {registry === 'armies' ? <>
+          <label className="force-filter">Force type<select value={forceFilter} onChange={event => setForceFilter(event.target.value)}><option value="all">All armies & fleets</option><option value="land">Land armies ashore</option><option value="naval">Fleets</option><option value="embarked">Embarked armies</option></select></label>
+          <div className="registry" data-testid="army-registry">{filteredArmies.map(item => <button className={'registry-item ' + (army?.id === item.id ? 'selected' : '')} key={item.id} onClick={() => select({ armyId: item.id, cell: item.cell }, true)}>
+            <span className="entity-symbol" aria-hidden="true">{item.domain === 'naval' ? '⚓' : item.carrierId ? '↪' : '△'}</span><span><strong>{item.name}</strong>
+              <small>{item.formations.length} {item.formations.length === 1 ? 'formation' : 'formations'} · {item.movement} movement · {item.strength} strength</small>
+              {item.domain === 'naval' && <small>Fleet · {item.transportUsed} / {item.transportCapacity} passengers</small>}
+              {item.carrierId && <small>Aboard {armyNamesById.get(item.carrierId) ?? item.carrierId}</small>}
+              {item.commander && <small>Commander: {item.commander.name}</small>}
+              {item.overCommand && <small className="registry-route-state">⚑ Over command · {item.formations.length} / {item.formationCapacity}</small>}
+              {item.agents.some(agent => agent.status === 'mission') && <small className="registry-route-state">⚑ Stationary mission</small>}
+              {routesByArmy.get(item.id) && <small className="registry-route-state">{routesByArmy.get(item.id)?.status === 'paused' ? '⚑ Route interrupted' : '↝ Travel queued'}</small>}
+            </span><span aria-hidden="true">›</span>
+          </button>)}{filteredArmies.length === 0 && <p className="empty">{search || forceFilter !== 'all' ? 'No matching forces.' : 'Recruit an army or fleet from a settlement.'}</p>}</div>
+        </> : <div className="registry" data-testid="settlement-registry">{filteredSettlements.map(item => <button className={'registry-item ' + (settlement?.id === item.id ? 'selected' : '')} key={item.id} onClick={() => select({ settlementId: item.id, cell: item.cell }, true)}><span className="entity-symbol" aria-hidden="true">⌂</span><span><strong>{item.name}</strong><small>{item.population} people · {item.queue.length ? itemName(item.queue[0]!.itemId) : 'No production'}</small></span><span aria-hidden="true">›</span></button>)}{filteredSettlements.length === 0 && <p className="empty">{search ? 'No matching settlements.' : 'Select your caravan to establish the first hearth.'}</p>}</div>}
         <PublicProjects view={observation} locate={cell => select({ cell }, true)}/>
         <FactionEncounters view={observation} busy={controlLocked} issue={command} stateHash={hash.current} review={reviewPeace}/>
         <SiegeLedger view={observation} locate={cell => renderer.current?.focus(cell)}/>
@@ -355,28 +372,27 @@ function App() {
           : observation.battle ? <><h2>Battle in progress</h2><p className="field-help">Current strength, morale, and fatigue are shown in the battle panel. Resolve the engagement before issuing campaign orders.</p></>
           : army ? <>
             <div className="faction-art-heading"><FactionArt contentId="ui.banner" definitionId={realm?.definitionId} label={`${realmName} army banner`}/><h2>{army.name}</h2></div>
-            <p className="subtle">{army.formations.length === 1 ? itemName(army.unitId) : `${army.formations.length} formations marching together`} · cell {army.cell}</p>
+            <p className="subtle">{army.domain === 'naval' ? 'Fleet · ' : army.carrierId ? 'Embarked army · ' : ''}{army.formations.length === 1 ? itemName(army.unitId) : `${army.formations.length} formations together`} · cell {army.cell}</p>
             <div className="stat-pair"><div><strong>{army.movement}</strong><small>Movement</small></div><div><strong>{army.strength}</strong><small>Strength</small></div></div>
             <ArmyCharacters army={army} open={characterId => openCharacters(characterId, army.id)}/>
+            <NavalTransport key={`transport-${army.id}`} army={army} view={observation} busy={ordersBusy} issue={command} selectArmy={armyId => { const target = ownArmies.find(item => item.id === armyId); if (target) { setSearch(''); setForceFilter('all'); setRegistry('armies'); select({ armyId: target.id, cell: target.cell }, true); } }}/>
             {army.canFound && <form className="found-form" onSubmit={event => { event.preventDefault(); command({ type: 'found', factionId, armyId: army.id, name }); }}><label>Settlement name<input value={name} maxLength={40} required onChange={event => setName(event.target.value)}/></label><p className="field-help">One caravan formation becomes a settlement here. Any escorts remain, spend their remaining movement, and pause their travel order.</p><button className="primary wide" type="submit" disabled={busy}>Found settlement</button></form>}
             <MovementOrders movement={movement} view={observation} issue={command} locate={cell => select({ ...selectionRef.current, cell }, true)}/>
             <ArmyComposition key={army.id} army={army} view={observation} busy={ordersBusy} issue={command} inspectArmy={target => select({ armyId: target.id, cell: target.cell })}/>
             <h3 className="section-title">Single-step shortcuts</h3><p className="field-help">Optional: move one neighboring hex using the buttons below. For complete routes and attacks, use the map or Paths & marching orders above.</p>
-            <div className="nearby-cells">{near.map(cell => <button key={cell} disabled={busy || Boolean(army.movementBlocker)} aria-label={`Move to cell ${cell}`} onClick={() => command({ type: 'move', factionId, armyId: army.id, target: cell })}><span>{terrainNames[renderer.current?.inspect(cell)?.terrain ?? -1] ?? 'Unknown'}</span><small>Hex {cell}</small></button>)}</div>
+            <div className="nearby-cells">{near.map(cell => { const known = renderer.current?.inspect(cell); return <button key={cell} disabled={busy || Boolean(army.movementBlocker)} aria-label={`Move to cell ${cell}`} onClick={() => command({ type: 'move', factionId, armyId: army.id, target: cell })}><span>{known?.waterDepth ? WATER_DEPTH_NAMES[known.waterDepth] : terrainNames[known?.terrain ?? -1] ?? 'Unknown'}</span><small>Hex {cell}</small></button>; })}</div>
           </> : settlement ? <>
             <h2>{settlement.name}</h2><p className="subtle">A hearth of the {realmName} · cell {settlement.cell}</p>
             <div className="stat-pair"><div><strong>{settlement.population}</strong><small>Population</small></div><div><strong>{settlement.food}</strong><small>Stored food</small></div></div>
             <SettlementDefense settlement={settlement} view={observation}/><CharacterAppointments view={observation} settlementId={settlement.id} busy={ordersBusy} issue={command} open={() => openCharacters()}/>
             <h3 className="section-title">Production queue</h3>
             {settlement.queue.length ? <ol className="production-queue">{settlement.queue.map((item, index) => <li key={index}><span>{itemName(item.itemId)}</span><small>{item.progress} / {content.find(definition => definition.id === item.itemId)?.cost} industry</small></li>)}</ol> : <p className="field-help">The hearth is idle. Choose a project below.</p>}
-            <h3 className="section-title">Construction</h3><div className="build-options">{BUILDINGS.map(item => <button key={item.id} disabled={busy || settlement.buildings.includes(item.id) || settlement.queue.some(order => order.itemId === item.id)} aria-label={`Build ${item.name}`} onClick={() => command({ type: 'queue', factionId, settlementId: settlement.id, itemId: item.id })}><strong>{item.name}</strong><small>{settlement.buildings.includes(item.id) ? 'Built' : `${item.cost} industry · ${item.coinCost} coin`}</small><small>{[item.food ? `+${item.food} food` : '', item.industry ? `+${item.industry} industry` : '', item.coin ? `+${item.coin} coin` : '', item.knowledge ? `+${item.knowledge} knowledge` : ''].filter(Boolean).join(' · ')} each turn</small></button>)}</div>
-            <h3 className="section-title">Recruitment</h3><p className="field-help">Each completed company forms a detachment at this settlement. Select an army and open Army composition to merge or transfer co-located formations.</p>
-            <div className="build-options faction-recruit-options">{UNITS.map(item => <button key={item.id} disabled={busy} aria-label={`Recruit ${item.name}`} onClick={() => command({ type: 'queue', factionId, settlementId: settlement.id, itemId: item.id })}><span className="faction-art-card"><FactionArt contentId={item.id} definitionId={realm?.definitionId} label={`${realmName} ${item.name}`} decorative/><span><strong>{item.name}</strong><small>{item.cost} industry · {item.coinCost} coin · {item.upkeep} upkeep</small><small>{item.movement} movement · {item.range} range · {item.armor} armor</small>{item.description && <small>{item.description}</small>}</span></span></button>)}</div>
+            <SettlementProduction view={observation} settlementId={settlement.id} busy={ordersBusy} issue={command}/>
           </> : <><h2>The frontier awaits</h2><p>Select an army or settlement from the map or your realm registry to issue orders.</p></>}
         {army && !observation.battle && !observation.pendingCapture && <SiegeOrders army={army} view={observation} busy={ordersBusy} issue={command}/>}
         {army && !observation.battle && !observation.pendingCapture && <AttackOrders army={army} view={observation} busy={ordersBusy} issue={command} terrain={cell => renderer.current?.inspect(cell)?.terrain}/>}
         <RuinInspection view={observation} cell={selection.cell}/>
-        {selection.cell !== undefined && <div className="hex-inspector"><span className="eyebrow">Selected hex {selection.cell}</span><p>{selectedCell ? `${BIOME_NAMES[selectedCell.biome] ?? 'Unknown biome'} · ${terrainNames[selectedCell.terrain]} · fertility ${selectedCell.fertility} · ${selectedCell.visible ? 'in sight' : 'last explored'}` : 'Beyond known maps. Send a wayfinder to reveal this land.'}</p></div>}
+        {selection.cell !== undefined && <div className="hex-inspector"><span className="eyebrow">Selected hex {selection.cell}</span><p>{selectedCell ? `${selectedCell.waterDepth ? WATER_DEPTH_NAMES[selectedCell.waterDepth] : BIOME_NAMES[selectedCell.biome] ?? 'Unknown biome'} · ${terrainNames[selectedCell.terrain]} · fertility ${selectedCell.fertility} · ${selectedCell.visible ? 'in sight' : 'last explored'}` : 'Beyond known maps. Send a wayfinder or fleet to chart this region.'}</p></div>}
       </fieldset></aside>
     </main>}
     {observation && !showSetup && <BattleHistory view={observation}/>}

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
 import {
-  autoResolveBattle, battleStateSchema, chooseBattleOrder, createBattle,
+  autoResolveBattle, battleStateSchema, legacyBattleStateSchema, chooseBattleOrder, createBattle,
   MAX_BATTLE_ROUNDS, resolveBattleRound, type BattleFormation, type BattleInput, type BattleOrder,
 } from './index';
 
@@ -117,6 +117,23 @@ describe('formation battle rules', () => {
 });
 
 describe('battle determinism, persistence and bounds', () => {
+  it('uses four ranks for twenty-versus-twenty battles while freezing historical twelve-formation limits', () => {
+    const side = (prefix: string, count: number) => Array.from({ length: count }, (_, index) => formation(`${prefix}.${index}`, { row: Math.floor(index / 5), column: index % 5, range: index >= 15 ? 2 : 0 }));
+    const input = fixture({ attacker: side('army.a', 20), defender: side('army.b', 20) });
+    const initial = createBattle(input, 8);
+    expect(initial.attacker).toHaveLength(20); expect(initial.attacker.find(item => item.id === 'army.a.19')!.row).toBe(3);
+    expect(legacyBattleStateSchema.safeParse(initial).success).toBe(false);
+    expect(() => createBattle(input, 7)).toThrow();
+    expect(() => resolveBattleRound(initial, advance, 7)).toThrow();
+    expect(() => autoResolveBattle(initial, 7)).toThrow();
+    let manual = initial;
+    while (!manual.result) manual = resolveBattleRound(JSON.parse(JSON.stringify(manual)), { attacker: chooseBattleOrder(manual, 'attacker'), defender: chooseBattleOrder(manual, 'defender') }, 8);
+    expect(manual).toEqual(autoResolveBattle(initial, 8));
+    expect([...manual.attacker, ...manual.defender]).toHaveLength(40);
+    expect(manual.attacker.some(item => item.strength < item.maxStrength)).toBe(true);
+    const oldInput = fixture({ attacker: side('army.a', 12), defender: side('army.b', 12) });
+    expect(autoResolveBattle(createBattle(oldInput, 7), 7)).toEqual(autoResolveBattle(createBattle(oldInput, 8), 8));
+  });
   it('autoresolve exactly matches manual rounds using the same AI orders', () => {
     const initial = createBattle(fixture({ terrain: 3 }));
     let manual = initial;
@@ -152,7 +169,7 @@ describe('battle determinism, persistence and bounds', () => {
     expect(() => createBattle({ ...input, seed: NaN })).toThrow();
     expect(() => createBattle({ ...input, attacker: [] })).toThrow();
     expect(() => createBattle({ ...input, attacker: Array.from({ length: 13 }, (_, i) => formation(`army.a${i}`)) })).toThrow();
-    expect(() => createBattle({ ...input, attacker: [formation('army.a', { row: 3 })] })).toThrow();
+    expect(() => createBattle({ ...input, attacker: [formation('army.a', { row: 4 })] })).toThrow();
     expect(() => createBattle({ ...input, attacker: [formation('army.a', { column: 5 })] })).toThrow();
     expect(() => createBattle({ ...input, attacker: [formation('army.a', { strength: 0 })] })).toThrow();
     expect(() => createBattle({ ...input, attacker: [formation('army.a', { strength: 101 })] })).toThrow();

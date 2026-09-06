@@ -11,7 +11,7 @@ function fingerprint(values: Iterable<number>): string {
 test('freezes distinct modern climate and legacy terrain-only biome fingerprints', () => {
   const modern = generateWorld(20260905, 'tiny', 8);
   const legacy = generateWorld(20260905, 'tiny', 8, 1);
-  expect(modern.generatorVersion).toBe(2);
+  expect(modern.generatorVersion).toBe(3);
   expect(legacy.generatorVersion).toBe(1);
   expect(fingerprint(modern.biome)).toBe('fa0ab681');
   expect(fingerprint(legacy.biome)).toBe('583ccc48');
@@ -83,7 +83,7 @@ test.each(['huge', 'legendary'] as const)('%s climate has coherent diverse distr
 });
 
 test('rejects unsupported versions, mismatched dimensions and invalid physical inputs', () => {
-  expect(() => generateWorld(1, 'tiny', 4, 3 as GeneratorVersion)).toThrow(RangeError);
+  expect(() => generateWorld(1, 'tiny', 4, 4 as GeneratorVersion)).toThrow(RangeError);
   expect(() => deriveBiomes(1, 1, 1, new Uint8Array([0]), 0 as GeneratorVersion)).toThrow(RangeError);
   expect(() => deriveBiomes(NaN, 1, 1, new Uint8Array([0]))).toThrow(RangeError);
   expect(() => deriveBiomes(1, 2, 1, new Uint8Array([0]))).toThrow(RangeError);

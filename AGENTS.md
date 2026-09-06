@@ -130,6 +130,8 @@ Do not inflate completion status.
 
 For `/unlazy`, `$unlazy`, or a request to keep developing toward 1.0, use the repository-local [Unlazy skill](.agents/skills/unlazy/SKILL.md): carry a playable slice through implementation and verification, record its evidence, then continue within the current authorized task. It is not permission to create background jobs or publish/deploy, and is not a substitute for the release gates.
 
+For general-led army capacity, officer skill trees, fleets, transport or ocean warfare, also use [Armies and fleets](.agents/skills/theandril-armies-fleets/SKILL.md) to preserve leader-loss, cargo, domain, fog and historical replay invariants.
+
 ## Release quality
 
 Never count:

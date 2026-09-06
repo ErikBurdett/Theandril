@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
 import { checksum, UNITS } from '@theandril/content';
-import { deriveBiomes } from '@theandril/mapgen';
+import { deriveBiomes, deriveWaterDepth } from '@theandril/mapgen';
 import { applyCommand, applyCommandForVersion, armyCanAttack, armyCanFound, armyMovement, armySight, armyStrength, armyUpkeep, battleReportForVersion, createArmyFormation, createGame, deserializeGame, getMovementQuery, getObservation, replayGame, serializeGame, serializeGameForVersion, settlementYields, stateHash, stateHashForVersion, type Army, type GameCommand, type GameState } from './index';
 import { rebuildIndexes } from './visibility';
 import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
+import { characterCampaign } from '../../test-fixtures/src/character-fixture';
+import { armyCommandCapacity } from './characters';
 import legacy from './fixtures/v5-army-replay.json';
 
 const factionId = 'faction.ashen_compact';
@@ -13,8 +15,9 @@ const merge: GameCommand = { type: 'mergeArmies', factionId, sourceArmyId: 'army
 const issue = (state: GameState, command: GameCommand): void => { expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true }); };
 const reject = (state: GameState, command: unknown): void => { const hash = stateHash(state); expect(applyCommand(state, command).ok).toBe(false); expect(stateHash(state)).toBe(hash); };
 function field(): GameState {
-  const state = createGame({ seed: 88, size: 'tiny', factionCount: 1, pace: 'short' });
+  const state = createGame({ seed: 88, size: 'tiny', factionCount: 1, pace: 'short', generatorVersion: 2 });
   state.world.terrain.fill(1); state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, state.world.generatorVersion);
+  state.world.waterDepth = deriveWaterDepth(state.world.width, state.world.height, state.world.terrain);
   for (const army of Object.values(state.armies)) army.cell = 100;
   state.armies['army.1']!.formations = [createArmyFormation('army.1', 'unit.guard')];
   state.explored[factionId] = new Set(state.world.terrain.keys());
@@ -27,6 +30,32 @@ function addDetachment(state: GameState, template: Army, unitId: string): string
 }
 
 describe('real army formation containers', () => {
+  it('inherits a marshal on full merge, preserves over-command troops after reassignment and permits repair without free movement', () => {
+    const state = characterCampaign(), source = state.armies['army.2']!, target = Object.values(state.armies).find(item => item.id !== source.id)!;
+    issue(state, { type: 'recruitCharacter', factionId, settlementId: 'settlement.5', definitionId: 'character.marshal' });
+    const marshal = Object.values(state.characters)[0]!;
+    issue(state, { type: 'assignCharacter', factionId, characterId: marshal.id, armyId: source.id });
+    while (source.formations.length < 10) source.formations.push(createArmyFormation(`army.${state.nextId++}`, 'unit.guard'));
+    while (target.formations.length < 6) target.formations.push(createArmyFormation(`army.${state.nextId++}`, 'unit.guard'));
+    source.formations.sort((a, b) => a.id < b.id ? -1 : 1); target.formations.sort((a, b) => a.id < b.id ? -1 : 1);
+    const option = getObservation(state, factionId).armies.find(item => item.id === source.id)!.mergeOptions.find(item => item.armyId === target.id)!;
+    expect(option).toMatchObject({ canMerge: true, resultCapacity: 16, transferLimit: 6 });
+    issue(state, { type: 'mergeArmies', factionId, sourceArmyId: source.id, targetArmyId: target.id });
+    expect(target.formations).toHaveLength(16); expect(target.movement).toBe(3); expect(armyCommandCapacity(state, target)).toBe(16);
+    reject(state, { type: 'splitArmy', factionId, armyId: target.id, formationIds: target.formations.slice(0, 13).map(item => item.id) });
+    issue(state, { type: 'unassignCharacter', factionId, characterId: marshal.id, settlementId: 'settlement.5' });
+    expect(target.formations).toHaveLength(16); expect(target.movement).toBe(1);
+    expect(getObservation(state, factionId).armies.find(item => item.id === target.id)).toMatchObject({ overCommand: true, maxMovement: 1, formationCapacity: 12 });
+    const extra = addDetachment(state, target, 'unit.guard'); reject(state, { type: 'mergeArmies', factionId, sourceArmyId: extra, targetArmyId: target.id });
+    issue(state, { type: 'assignCharacter', factionId, characterId: marshal.id, armyId: target.id });
+    expect(target.movement).toBe(1); expect(armyCommandCapacity(state, target)).toBe(16);
+    issue(state, { type: 'unassignCharacter', factionId, characterId: marshal.id, settlementId: 'settlement.5' });
+    const ids = target.formations.map(item => item.id);
+    issue(state, { type: 'splitArmy', factionId, armyId: target.id, formationIds: ids.slice(0, 4) });
+    expect(target.formations).toHaveLength(12); expect(target.movement).toBe(1);
+    expect(Object.values(state.armies).flatMap(army => army.formations).map(item => item.id).sort()).toEqual([...ids, state.armies[extra]!.formations[0]!.id].sort());
+    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+  });
   it('recruits a formation through normal production, merges it, and charges summed upkeep', () => {
     const state = createGame({ seed: 88, size: 'tiny', factionCount: 1 });
     issue(state, { type: 'found', factionId, armyId: 'army.1', name: 'Mixed Hearth' });

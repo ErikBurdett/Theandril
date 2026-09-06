@@ -1,6 +1,6 @@
 /** Increment whenever the same seed/settings can produce different geography. */
-export const GENERATOR_VERSION = 2;
-export type GeneratorVersion = 1 | 2;
+export const GENERATOR_VERSION = 3;
+export type GeneratorVersion = 1 | 2 | 3;
 
 export const MAP_DIMENSIONS = {
   tiny: { width: 48, height: 32 },
@@ -23,6 +23,9 @@ export function recommendedFactionCount(size: MapSize): number {
 
 export const TERRAIN = { water: 0, plains: 1, forest: 2, hills: 3, mountain: 4 } as const;
 export const TERRAIN_NAMES = ['Water', 'Plains', 'Forest', 'Hills', 'Mountain'] as const;
+export const WATER_DEPTH = { land: 0, shallow: 1, deep: 2 } as const;
+export const WATER_DEPTH_NAMES = ['Land', 'Coastal shallows', 'Deep ocean'] as const;
+export function isValidWaterDepth(depth: number): boolean { return Number.isInteger(depth) && depth >= 0 && depth < WATER_DEPTH_NAMES.length; }
 export const BIOME = { ocean: 0, grassland: 1, temperateForest: 2, taiga: 3, tundra: 4, desert: 5, steppe: 6, marsh: 7, rainforest: 8, alpine: 9 } as const;
 export const BIOME_NAMES = ['Ocean', 'Temperate grassland', 'Temperate forest', 'Taiga', 'Tundra', 'Desert', 'Steppe', 'Marsh', 'Rainforest', 'Alpine'] as const;
 export function isValidBiome(biome: number): boolean { return Number.isInteger(biome) && biome >= 0 && biome < BIOME_NAMES.length; }
@@ -34,6 +37,8 @@ export interface World {
   width: number;
   height: number;
   terrain: Uint8Array;
+  /** Zero on land; the first two water hexes from land are shallow, all other water deep. */
+  waterDepth: Uint8Array;
   /** Climate/vegetation identity, independent of physical movement terrain. */
   biome: Uint8Array;
   /** Base food potential, from 0 to 100. */
@@ -104,6 +109,38 @@ function writeNeighbors(cell: number, width: number, height: number, result: num
     if (westDiagonal >= 0) result.push((y - 1) * width + westDiagonal);
     if (eastDiagonal < width) result.push((y - 1) * width + eastDiagonal);
   }
+}
+
+/**
+ * A bounded two-hex coastal shelf, derived without RNG or changes to physical terrain.
+ * All non-water terrain, including mountains, forms a shore. Map edges are not land.
+ * O(cells) time and at most 5 bytes/cell of output + temporary storage; no recursive flood.
+ * Also used on authored/legacy snapshots: regenerating terrain would erase their edits.
+ */
+export function deriveWaterDepth(width: number, height: number, terrain: Uint8Array): Uint8Array {
+  if (!(terrain instanceof Uint8Array) || !Number.isInteger(width) || width < 1 || !Number.isInteger(height) || height < 1 ||
+      width * height > 350_000 || terrain.length !== width * height || terrain.some(value => value > TERRAIN.mountain)) {
+    throw new RangeError('Water depth requires matching bounded physical terrain.');
+  }
+  const result = new Uint8Array(terrain.length);
+  const shoreline = new Int32Array(terrain.length);
+  const adjacent: number[] = [];
+  let count = 0;
+  for (let cell = 0; cell < terrain.length; cell++) {
+    if (terrain[cell] !== TERRAIN.water) continue;
+    result[cell] = WATER_DEPTH.deep;
+    writeNeighbors(cell, width, height, adjacent);
+    if (adjacent.some(next => terrain[next] !== TERRAIN.water)) {
+      result[cell] = WATER_DEPTH.shallow;
+      shoreline[count++] = cell;
+    }
+  }
+  // Expand only the first band, never enqueue the second: wide seas retain deep channels.
+  for (let index = 0; index < count; index++) {
+    writeNeighbors(shoreline[index]!, width, height, adjacent);
+    for (const next of adjacent) if (terrain[next] === TERRAIN.water) result[next] = WATER_DEPTH.shallow;
+  }
+  return result;
 }
 
 /** Geometric distance; terrain and map bounds do not alter the metric. */
@@ -180,10 +217,10 @@ export function deriveClimate(seed: number, width: number, height: number, terra
 
 /** Derive labels from existing terrain, including authored/legacy maps; never mutate it. */
 export function deriveBiomes(seed: number, width: number, height: number, terrain: Uint8Array, generatorVersion: GeneratorVersion = GENERATOR_VERSION): Uint8Array {
-  if (generatorVersion !== 1 && generatorVersion !== 2) throw new RangeError('Unknown generator version.');
+  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3) throw new RangeError('Unknown generator version.');
   validateClimateInput(seed, width, height, terrain);
   const result = new Uint8Array(terrain.length);
-  const climate = generatorVersion === 2 ? deriveClimate(seed, width, height, terrain) : undefined;
+  const climate = generatorVersion >= 2 ? deriveClimate(seed, width, height, terrain) : undefined;
   const adjacent: number[] = [];
   for (let cell = 0; cell < terrain.length; cell++) {
     const physical = terrain[cell];
@@ -296,7 +333,7 @@ function placeStarts(world: World, count: number): void {
 export function generateWorld(seed: number, size: MapSize, factionCount: number, generatorVersion: GeneratorVersion = GENERATOR_VERSION): World {
   if (!Number.isSafeInteger(seed)) throw new RangeError('Seed must be a safe integer.');
   if (!Object.hasOwn(MAP_DIMENSIONS, size)) throw new RangeError('Unknown map size.');
-  if (generatorVersion !== 1 && generatorVersion !== 2) throw new RangeError('Unknown generator version.');
+  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3) throw new RangeError('Unknown generator version.');
   if (!Number.isInteger(factionCount) || factionCount < 1 || factionCount > 48) {
     throw new RangeError('Faction count must be an integer between 1 and 48.');
   }
@@ -304,6 +341,7 @@ export function generateWorld(seed: number, size: MapSize, factionCount: number,
   const world: World = {
     seed: seed >>> 0, width, height, generatorVersion,
     terrain: new Uint8Array(width * height),
+    waterDepth: new Uint8Array(width * height),
     biome: new Uint8Array(width * height),
     fertility: new Uint8Array(width * height), starts: [],
   };
@@ -346,5 +384,6 @@ export function generateWorld(seed: number, size: MapSize, factionCount: number,
   }
   placeStarts(world, factionCount);
   world.biome = deriveBiomes(world.seed, width, height, world.terrain, generatorVersion);
+  world.waterDepth = deriveWaterDepth(width, height, world.terrain);
   return world;
 }

@@ -3,7 +3,7 @@ import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_NAMES, CHARACTER_S
 
 const factions = new Set(FACTIONS.map(item => item.id));
 test('character content has real distinct roles, effects and localized names and descriptions', () => {
-  expect(validateContent()).toMatchObject({ characterRoles: 3, characterMissions: 3, characterSkills: 4, commanderAbilities: 1 });
+  expect(validateContent()).toMatchObject({ characterRoles: 3, characterMissions: 3, characterSkills: 11, commanderAbilities: 1 });
   expect(CHARACTER_DEFINITIONS.map(item => item.role)).toEqual(['marshal', 'surveyor', 'engineer']);
   expect(CHARACTER_MISSIONS.map(item => item.kind)).toEqual(['survey', 'refit', 'sabotage']);
   expect(CHARACTER_MISSIONS.find(item => item.kind === 'sabotage')?.failureChance).toBeGreaterThan(0);
@@ -11,6 +11,17 @@ test('character content has real distinct roles, effects and localized names and
     expect(LOCALIZATION[item.id + '.name']).toBe(item.name);
     expect(LOCALIZATION[item.id + '.description']).toBe(item.description);
   }
+});
+test('branching skill trees have attainable prerequisites, unchanged old specializations and real command ceilings', () => {
+  const muster = CHARACTER_SKILLS.find(skill => skill.id === 'skill.muster_rolls')!;
+  const orders = CHARACTER_SKILLS.find(skill => skill.id === 'skill.field_orders')!;
+  expect(muster.requiresAny).toEqual(['skill.steadfast', 'skill.decisive']);
+  expect(orders.requiresAll).toEqual([muster.id]);
+  expect(16 + muster.commandCapacityBonus + orders.commandCapacityBonus).toBe(20);
+  const changed = (id: string, values: Partial<typeof muster>) => CHARACTER_SKILLS.map(skill => skill.id === id ? { ...skill, ...values } : skill);
+  expect(() => validateCharacterContent(factions, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, changed(muster.id, { requiresAny: [], requiresAll: ['skill.steadfast', 'skill.decisive'] }))).toThrow('Unreachable');
+  expect(() => validateCharacterContent(factions, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, changed(muster.id, { requiresAny: [orders.id] }))).toThrow('cyclic');
+  expect(() => validateCharacterContent(factions, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, changed(muster.id, { requiresAny: ['skill.fieldcraft'] }))).toThrow('incompatible');
 });
 test('character packs reject broken, duplicate and role-incompatible references', () => {
   expect(() => validateCharacterContent(factions, [...CHARACTER_DEFINITIONS, CHARACTER_DEFINITIONS[0]!])).toThrow('Duplicate character');

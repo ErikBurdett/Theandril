@@ -1,7 +1,7 @@
 # Map generation foundation
 
-`generateWorld(seed, size, factionCount, generatorVersion = 2)` returns typed terrain,
-fertility and biome arrays, a canonical unsigned seed, generator version, dimensions,
+`generateWorld(seed, size, factionCount, generatorVersion = 3)` returns typed terrain,
+fertility, biome and water-depth arrays, a canonical unsigned seed, generator version, dimensions,
 and one start cell per faction. Call it from
 the simulation worker; it has no browser, network, or simulation dependencies.
 
@@ -24,6 +24,16 @@ campaign. The engine owns movement costs and all mutable game rules. Biomes do n
 change movement costs or fertility in this slice: all versions retain byte-identical
 physical terrain, fertility and starting positions for the same seed/settings.
 
+Version 3 adds `waterDepth`: land (0), coastal shallows (1), and deep ocean (2).
+`WATER_DEPTH`, `WATER_DEPTH_NAMES` and `isValidWaterDepth` expose the stable IDs.
+`deriveWaterDepth(width, height, terrain)` marks exactly the first two water hexes
+from any land as shallow. Mountains also form shores; the finite map edge does not.
+All-water maps are deep, and small enclosed pools use the same shoreline rule.
+This deterministic O(cells) stage uses no RNG, leaves its input untouched and uses
+one byte/cell of output plus at most four bytes/cell of temporary queue storage.
+It is a geometric shelf, not measured bathymetry, lake classification or hydrology.
+Simulation owns ship domains, technology requirements and actual sea movement.
+
 Version 2 adds Ocean (0), Temperate grassland (1), Temperate forest (2), Taiga (3),
 Tundra (4), Desert (5), Steppe (6), Marsh (7), Rainforest (8), and Alpine (9).
 `BIOME`, `BIOME_NAMES` and `isValidBiome` provide the stable classification contract.
@@ -44,7 +54,7 @@ ridges create coherent terrain. All starts occupy the largest connected passable
 component. Candidate regions have at least four passable neighbors. A bounded
 farthest-point selection separates starts; each receives at least 75 fertility and
 an adjacent cell with at least 70. This supports connected terrestrial expansion
-while leaving other land for future naval gameplay. Starts retain surrounding
+while leaving other land accessible by sea. Starts retain surrounding
 geographic differences.
 
 Generation takes O(cells + 8192 × factions) work and O(cells) temporary space.
@@ -53,14 +63,18 @@ evenly to bound distance comparisons; no generation stage retries until success.
 Every world owns separate buffers. Seeded integer stream state can be serialized
 and resumed using `SeededRandom`.
 
-`GENERATOR_VERSION` is 2. Explicit version 1 generation preserves the historical
+`GENERATOR_VERSION` is 3. Explicit version 1 generation preserves the historical
 seeded terrain/fertility/starts and derives only a base-terrain biome fallback:
 water → ocean, forest → temperate forest, mountains → alpine, plains/hills → grassland.
 Migration can use the same helper on authored legacy terrain instead of regenerating
 and overwriting it. The seed-20260905, Tiny, eight-faction fixture retains physical
 fingerprint `88244012`; its version-1 biome fingerprint is `583ccc48`, and its
-version-2 climate-biome fingerprint is `fa0ab681`. Any later change to seeded output
-must increment the version and explicitly address save/replay compatibility.
+version-2/3 climate-biome fingerprint is `fa0ab681`. The version-3 water-depth
+fingerprint is `46301137`. Versions 1/2 also return derived water depth, but legacy
+save/archive hash projections must omit the added field; migration derives it from
+the stored terrain rather than regenerating an authored map. Version 3 preserves
+every previous physical array/start and the version-2 biome array. Any later change
+to seeded output must increment the version and address save/replay compatibility.
 
 This is a campaign foundation, not complete 1.0 geography. Persisted climate/elevation
 debug lenses, hydrology, rivers/lakes, biome economic modifiers, resources/sites, named regions,
@@ -74,3 +88,8 @@ land ratios, terrain coherence, malformed input, and independent campaign buffer
 Additional Huge/Legendary climate checks cover all ten biome classes, coherent
 land-neighbor distributions, climate/terrain compatibility, and all 48 starting
 food guarantees while proving physical-map parity with legacy generation.
+Water-depth tests add exact two-hex distances, malformed-input bounds, frozen Huge/
+Legendary fingerprints, shallow/deep distributions and unchanged start guarantees.
+Run `node --import tsx scripts/benchmark-naval-geography.ts` from the repository root
+for generation/shelf timings and independent water-connectivity diagnostics. These
+measure geography only, not simulation, pathfinding, saves or browser performance.

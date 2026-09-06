@@ -22,7 +22,7 @@ export function planCharacters(view: Observation, coinBudget: number): Character
   const exposed = (army: ArmyView): boolean => threats.some(enemy => hexDistance(enemy.cell, army.cell, view.width) <= 3 && enemy.strength >= army.strength);
   const marshals = new Set(own.filter(army => army.commander).map(army => army.id));
   const companions = new Map(own.map(army => [army.id, army.agents.length]));
-  const useful = (army: ArmyView): boolean => army.canAttack && !army.canFound && !exposed(army);
+  const useful = (army: ArmyView): boolean => !army.carrierId && army.canAttack && !army.canFound && !exposed(army);
   const priority = (army: ArmyView, role: string): number => role === 'marshal'
     ? army.formations.length * 100 + army.strength
     : role === 'engineer' ? (army.maxStrength - army.strength) * 4 + army.formations.length * 30
@@ -40,17 +40,20 @@ export function planCharacters(view: Observation, coinBudget: number): Character
     if (character.woundedTurns) continue;
     const preference = character.role === 'marshal' ? view.wars.length ? 'skill.steadfast' : 'skill.decisive'
       : character.role === 'engineer' && view.sieges.some(siege => siege.factionId === view.factionId) ? 'skill.siegecraft' : 'skill.fieldcraft';
-    const promotion = character.promotions.find(option => option.skillId === preference && option.canPromote)
-      ?? character.promotions.find(option => option.canPromote);
+    const trainingPriority = (option: typeof character.promotions[number]): number => option.skillId === preference ? 100
+      : option.branch === 'command' ? carrier && carrier.formations.length >= carrier.formationCapacity - 2 ? 90 : 30
+      : option.branch === 'battlecraft' ? 60 : 50;
+    const promotion = character.promotions.filter(option => option.canPromote).sort((a, b) => trainingPriority(b) - trainingPriority(a) || a.tier - b.tier || (a.skillId < b.skillId ? -1 : 1))[0];
     if (promotion) {
       commands.push({ type: 'promoteCharacter', factionId: view.factionId, characterId: character.id, skillId: promotion.skillId });
+      if (carrier) heldArmyIds.add(carrier.id);
       reasons.push(`${character.name} spends earned experience on ${promotion.name}.`);
       continue; // Mission effects must be assessed from the upgraded read model.
     }
     if (!carrier) {
       const targets = character.assignmentOptions.filter(option => option.canAssign).flatMap(option => {
         const army = armies.get(option.armyId);
-        return army && useful(army) && !heldArmyIds.has(army.id) && !besiegers.has(army.id)
+        return army && useful(army) && (character.role === 'marshal' || army.domain === 'land') && !heldArmyIds.has(army.id) && !besiegers.has(army.id)
           && (character.role === 'marshal' ? !marshals.has(army.id) : (companions.get(army.id) ?? 0) < 2) ? [army] : [];
       }).sort((a, b) => priority(b, character.role) - priority(a, character.role) || byId(a, b));
       const target = targets[0];
@@ -62,7 +65,7 @@ export function planCharacters(view: Observation, coinBudget: number): Character
       }
       continue;
     }
-    if (heldArmyIds.has(carrier.id) || exposed(carrier)) continue;
+    if (heldArmyIds.has(carrier.id) || exposed(carrier) || carrier.carrierId || carrier.domain === 'naval') continue;
     const mission = character.missions.filter(option => option.canStart && option.coinCost <= budget).sort((a, b) => {
       const score = (id: string) => id === 'mission.sabotage' ? 3 : id === 'mission.refit' ? 2 : 1;
       return score(b.missionId) - score(a.missionId);
@@ -87,7 +90,7 @@ export function planCharacters(view: Observation, coinBudget: number): Character
   for (const option of opportunities) {
     const town = view.settlements.find(town => town.id === option.settlementId);
     if (!town) continue;
-    const candidate = own.filter(army => army.cell === town.cell && useful(army) && !besiegers.has(army.id) && !heldArmyIds.has(army.id)
+    const candidate = own.filter(army => army.cell === town.cell && army.domain === 'land' && useful(army) && !besiegers.has(army.id) && !heldArmyIds.has(army.id)
       && (option.role === 'marshal' ? army.formations.length >= 2 && !marshals.has(army.id) : (companions.get(army.id) ?? 0) < 2))
       .sort((a, b) => priority(b, option.role) - priority(a, option.role) || byId(a, b))[0];
     if (!candidate) continue;

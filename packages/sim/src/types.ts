@@ -5,6 +5,7 @@ import type { DiplomacyObservation, DiplomacyState, PeaceTerms } from './diploma
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
+import type { NavalArmyView, ProductionOption, TransportAftermath } from './naval';
 
 export interface ArmyFormation {
   id: string;
@@ -24,7 +25,14 @@ export interface Army {
 }
 
 /** Detached, derived roster summary; none of these aggregate values are canonical. */
-export interface ArmyView extends Army {
+export interface ArmyView extends Army, NavalArmyView {
+  formationCapacity: number;
+  overCommand: boolean;
+  commandBlocker: string | null;
+  capacityReason: string;
+  splitFormationLimit: number;
+  mergeOptions: { armyId: string; label: string; resultCapacity: number; canMerge: boolean; blocker: string | null; transferLimit: number; transferBlocker: string | null }[];
+  mergeOptionsTruncated: boolean;
   commander: CharacterSummary | null;
   agents: CharacterSummary[];
   movementBlocker: string | null;
@@ -120,7 +128,9 @@ export interface DomainEvent {
 }
 
 export interface CampaignBattle {
-  rulesVersion: 5 | 6 | 7;
+  rulesVersion: 5 | 6 | 7 | 8;
+  domain: 'land' | 'naval';
+  transportAftermath: TransportAftermath[];
   characterSnapshots: CharacterBattleSnapshot[];
   characterAftermath: CharacterAftermath[];
   usedAbilities: { characterId: string; abilityId: string }[];
@@ -150,6 +160,8 @@ export interface CampaignBattle {
 export type BattleReport = CampaignBattle;
 
 export type GameCommand =
+  | { type: 'embarkArmy'; factionId: string; armyId: string; fleetId: string }
+  | { type: 'disembarkArmy'; factionId: string; armyId: string; target: number }
   | { type: 'recruitCharacter'; factionId: string; settlementId: string; definitionId: string }
   | { type: 'assignCharacter'; factionId: string; characterId: string; armyId: string }
   | { type: 'unassignCharacter'; factionId: string; characterId: string; settlementId: string }
@@ -185,6 +197,8 @@ export type GameCommand =
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
 export interface GameState {
+  /** Land army ID -> carrying fleet ID; sparse, no nested transports. */
+  transports: Record<string, string>;
   characters: Record<string, Character>;
   pace: CampaignPace;
   turn: number;
@@ -210,6 +224,7 @@ export interface GameState {
 }
 
 export interface Observation {
+  productionOptions: ProductionOption[];
   characters: CharacterView[];
   characterRecruitment: CharacterRecruitmentOption[];
   commanderAbilities: CommanderAbilityOption[];
@@ -224,7 +239,7 @@ export interface Observation {
   armies: ArmyView[];
   routes: MovementRoute[];
   events: DomainEvent[];
-  cells: { cell: number; terrain: number; biome: number; fertility: number; visible: boolean }[];
+  cells: { cell: number; terrain: number; biome: number; waterDepth: number; fertility: number; visible: boolean }[];
   width: number;
   height: number;
   seed: number;

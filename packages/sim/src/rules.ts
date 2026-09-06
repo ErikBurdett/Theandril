@@ -1,8 +1,8 @@
 import type { GameState } from './types';
 
-export type RulesVersion = 4 | 5 | 6 | 7;
+export type RulesVersion = 4 | 5 | 6 | 7 | 8;
 const activeRules = new WeakMap<GameState, RulesVersion>();
-export const rulesVersion = (state: GameState): RulesVersion => activeRules.get(state) ?? 7;
+export const rulesVersion = (state: GameState): RulesVersion => activeRules.get(state) ?? 8;
 export const LEGACY_UNIT_IDS = new Set(['unit.colonist', 'unit.scout', 'unit.guard']);
 
 /** Execution context only, never canonical state; historical records select their own rules. */

@@ -12,11 +12,11 @@ const factionName = (view: Observation, id: string): string => view.factions.fin
 export function AttackOrders({ army, view, busy, issue, terrain }: { army: ArmyView; view: Observation; busy: boolean; issue: IssueOrder; terrain: (cell: number) => number | undefined }) {
   if (!army.canAttack) return null;
   const adjacent = new Set(neighbors(army.cell, view.width, view.height));
-  const targets = view.armies.filter(target => target.factionId !== view.factionId && adjacent.has(target.cell));
+  const targets = view.armies.filter(target => target.factionId !== view.factionId && !target.carrierId && target.domain === army.domain && adjacent.has(target.cell));
   return <section className="attack-orders" aria-label="Nearby enemy forces">
-    <h3 className="section-title">Field engagement</h3>
+    <h3 className="section-title">{army.domain === 'naval' ? 'Naval engagement' : 'Field engagement'}</h3>
     <p className="field-help">Your force: {army.strength} strength · {army.morale} morale · {army.fatigue} fatigue.</p>
-    {targets.length === 0 && <p className="field-help">No neighboring foreign armies are in sight.</p>}
+    {targets.length === 0 && <p className="field-help">No neighboring foreign {army.domain === 'naval' ? 'fleets' : 'land armies'} are in sight.</p>}
     {targets.map(target => <div className="attack-target" key={target.id}>
       <strong>{target.name}</strong>
       <small>{factionName(view, target.factionId)} · hex {target.cell}</small>
@@ -26,7 +26,7 @@ export function AttackOrders({ army, view, busy, issue, terrain }: { army: ArmyV
         ? <button className="danger wide" disabled={busy || Boolean(view.battle)} data-testid={`attack-${target.id}`} aria-label={`Attack ${target.name} (${target.id})`} onClick={() => issue({ type: 'attack', factionId: view.factionId, armyId: army.id, targetArmyId: target.id })}>Attack {target.name}</button>
         : <p className="field-help">Declare war from the encountered factions list before attacking.</p>}
     </div>)}
-    {targets.length > 0 && <p className="field-help">The battle includes every defending formation at that hex. Forests provide cover and hills favor defenders. Command each round or let your officers resolve the engagement.</p>}
+    {targets.length > 0 && <p className="field-help">The battle includes every defending {army.domain === 'naval' ? 'naval' : 'land'} formation at that hex. {army.domain === 'naval' ? 'Passengers do not fight as ship formations; destroyed transport capacity can drown them.' : 'Forests provide cover and hills favor defenders.'} Command each round or let your officers resolve the engagement.</p>}
   </section>;
 }
 
@@ -55,8 +55,8 @@ export function BattlePanel({ view, busy, issue }: { view: Observation; busy: bo
   if (!battle) return null;
   const ownSide = battle.attackerFactionId === view.factionId ? 'attacker' : 'defender';
   return <section className="battle-panel" data-testid="battle-panel" aria-labelledby="battle-heading">
-    <div className="battle-heading"><div><span className="eyebrow">The field of oaths</span><h2 id="battle-heading" tabIndex={-1} ref={heading}>Battle at hex {battle.defenderCell}</h2></div><div className="battle-round" aria-live="polite">ROUND <strong data-testid="battle-round">{battle.combat.round}</strong></div></div>
-    <p className="battle-context">{terrainNames[battle.combat.terrain]} · You command the {ownSide === 'attacker' ? 'attacking' : 'defending'} forces.{battle.settlementId && ` Settlement assault · fortification ${battle.fortification}.`}</p>
+    <div className="battle-heading"><div><span className="eyebrow">{battle.domain === 'naval' ? 'The contested waters' : 'The field of oaths'}</span><h2 id="battle-heading" tabIndex={-1} ref={heading}>{battle.domain === 'naval' ? 'Naval battle' : 'Battle'} at hex {battle.defenderCell}</h2></div><div className="battle-round" aria-live="polite">ROUND <strong data-testid="battle-round">{battle.combat.round}</strong></div></div>
+    <p className="battle-context">{terrainNames[battle.combat.terrain]} · You command the {ownSide === 'attacker' ? 'attacking' : 'defending'} {battle.domain === 'naval' ? 'fleet' : 'forces'}.{battle.settlementId && ` Settlement assault · fortification ${battle.fortification}.`}{battle.domain === 'naval' && ' Carried troops do not enter the line. Sunk carriers lose their passengers; destroyed transport formations may leave too little carrying space.'}</p>
     <div className="battle-autoresolve"><p>Each order resolves one round for both sides. Your officers use these same battle rules when given command.</p><button className="primary" disabled={busy} onClick={() => issue({ type: 'autoResolveBattle', factionId: view.factionId })}>Auto-resolve battle</button></div>
     <CommanderBattleControls view={view} busy={busy} issue={issue}/>
     <div className="battle-sides">
@@ -72,7 +72,7 @@ function Report({ report, view }: { report: BattleReport; view: Observation }) {
   const result = report.combat.result;
   const winnerId = result?.winner === 'attacker' ? report.attackerFactionId : result?.winner === 'defender' ? report.defenderFactionId : undefined;
   return <article className="battle-report" data-testid="battle-report">
-    <div><span className="eyebrow">Turn {report.turn} · hex {report.defenderCell}</span><h3>{winnerId ? `${factionName(view, winnerId)} held the field` : 'The field was left contested'}</h3><p>{result?.reason} · {report.combat.round} rounds · {terrainNames[report.combat.terrain]}</p></div>
+    <div><span className="eyebrow">Turn {report.turn} · hex {report.defenderCell} · {report.domain === 'naval' ? 'Naval battle' : 'Land battle'}</span><h3>{winnerId ? `${factionName(view, winnerId)} held the ${report.domain === 'naval' ? 'waters' : 'field'}` : `The ${report.domain === 'naval' ? 'waters were' : 'field was'} left contested`}</h3><p>{result?.reason} · {report.combat.round} rounds · {terrainNames[report.combat.terrain]}</p></div>
     <div className="battle-losses">{(['attacker', 'defender'] as const).map(side => {
       const battleIds = new Set(report.combat[side].map(formation => formation.id));
       const ids = new Set(report.formationBindings.filter(binding => battleIds.has(binding.battleFormationId)).map(binding => binding.formationId));
@@ -81,6 +81,7 @@ function Report({ report, view }: { report: BattleReport; view: Observation }) {
       return <div key={side}><strong>{factionName(view, side === 'attacker' ? report.attackerFactionId : report.defenderFactionId)}</strong><span>{initial - remaining} strength lost · {remaining} survivors</span></div>;
     })}</div>
     <ul className="battle-aftermath">{report.aftermath.map(army => <li key={army.armyId}>{army.armyId}: {army.outcome}{army.cell === null ? '' : ` at hex ${army.cell}`} · {army.strength} remaining strength</li>)}</ul>
+    {report.transportAftermath.length > 0 && <section className="transport-aftermath" data-testid="transport-aftermath"><h4>Passengers lost at sea</h4><ul>{report.transportAftermath.map(cargo => <li key={cargo.armyId}>{cargo.name} ({cargo.armyId}): {cargo.lostFormationIds.length} carried formations lost{cargo.outcome === 'lost' ? ' · the entire army and its attached characters were lost' : ' · the surviving army remains aboard'}.<small> Lost formations: {cargo.lostFormationIds.join(', ')}</small></li>)}</ul></section>}
     {report.characterAftermath.length > 0 && <section data-testid="character-battle-aftermath"><h4>Those who marched</h4><ul className="battle-aftermath">{report.characterAftermath.map(character => <li key={character.characterId}>{character.name}: {character.outcome} · {character.experience} experience{character.woundedTurns ? ` · ${character.woundedTurns} recovery turns` : ''}</li>)}</ul></section>}
     <details><summary>Formations & battle account</summary><FormationTable formations={report.combat.attacker} label="Attacking formations at round end"/><FormationTable formations={report.combat.defender} label="Defending formations at round end"/><ol className="report-log">{report.combat.log.map((entry, index) => <li key={index}>{entry}</li>)}</ol></details>
   </article>;

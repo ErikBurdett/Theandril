@@ -7,7 +7,7 @@ function formation(state: GameState, unitId: string) { return createArmyFormatio
 /** Authored formations enter through the production save validator, never a browser mutation hook. */
 function rosterCampaign(kind: 'reorganize' | 'battle' | 'capacity' = 'reorganize'): GameState {
   const state = createGame({ seed: 20260905, size: 'tiny', pace: 'short', factionCount: 2 });
-  state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60);
+  state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60); state.world.waterDepth.fill(0);
   const first = state.armies['army.1']!; const second = state.armies['army.2']!;
   const guard = formation(state, 'unit.guard'); guard.strength = 40; guard.morale = 65; guard.fatigue = 7;
   Object.assign(first, { cell: ORIGIN, name: 'Roadguard column', movement: 3, formations: [guard, formation(state, 'unit.scout'), formation(state, 'unit.colonist')] });
@@ -118,7 +118,7 @@ test('twelve-formation limits and proper-subset splitting stay explicit in the n
   await expect(panel.getByRole('button', { name: 'Merge armies', exact: true })).toBeDisabled();
   await expect(panel.getByRole('button', { name: 'Transfer selected formations', exact: true })).toBeDisabled();
   await expect(panel.getByRole('button', { name: 'Split selected formations', exact: true })).toBeDisabled();
-  await expect(panel).toContainText('A full merge would exceed 12 formations');
+  await expect(panel).toContainText('The combined army exceeds its 12-formation command capacity.');
   await page.getByTestId('army-registry').getByRole('button', { name: /Iron detachment/ }).click();
   panel = await openComposition(page);
   await expect(panel.getByRole('checkbox')).toHaveCount(12);

@@ -1,0 +1,30 @@
+---
+name: theandril-armies-fleets
+description: Build or refactor Theandril general-led armies, branching officer skills, fleets, transport, ocean movement and naval combat. Use with the repository simulation/combat skills for integrated military campaign work.
+---
+
+# Armies, generals and fleets
+
+Treat Total War and Civilization as genre references for clear army organization and sea travel, not copied rules, names or interfaces. Read the current army/naval implementation and `docs/IMPLEMENTATION_STATUS.md`; capacity numbers and schemas in older design documents may predate user-directed changes.
+
+## One authoritative military model
+
+Keep formations as persistent members of strategic army containers. A general is a real character attachment, not an extra soldier or a UI-only capacity switch. Derive capacity, bonuses, skill prerequisites and blockers in simulation observations. UI and AI consume those decisions. Preserve formation identity, losses, spent movement, upkeep and attached characters through every merge, split, transfer and transport operation.
+
+Before changing schema or tactical rules, retain independently captured old saves/commands/results. Version old hash projections and command execution; new defaults must not silently rewrite historical records or let newly added skills affect old battles. Tree nodes need validated prerequisites, cycle checks, role compatibility, explicit exclusivity and actual effects. Learning a node spends earned experience once; changing commanders cannot refill movement or grant formation health.
+
+## Loss and transport boundaries
+
+Define what happens when a leader dies, is wounded or leaves an oversized army. Never delete excess formations or trap the player without a legal repair path. Permit a bounded, explained penalty and a way to appoint a replacement or detach troops.
+
+Transport is a canonical relationship between an existing land army and a real fleet. Validate ownership, shore adjacency, capacity, domain, movement commitments and active missions before mutation. No nested carriers or duplicate cargo. Carried troops must not move, fight, found settlements, cast field missions, expose independent sight or reorganize around capacity checks. Moving a fleet moves its cargo and characters atomically. Define cargo losses when capacity is lost and when the carrier sinks; save the factual aftermath and tell the player before embarkation.
+
+Land, shallow water and deep ocean are distinct travel constraints. Keep depth in compact static geography; use the same domain/capability query for previews, direct movement, queued routes, attack approach, retreat and AI. Deep-water unlocks do not create land access for ships. Cargo unloading does not bypass enemy occupancy, diplomacy, movement costs or settlement capture rules. A blocked route must explain why and remain recoverable.
+
+## Verify the player outcome
+
+Exercise real general recruitment/assignment, prerequisite purchases, large-army battle, leader loss, shore embarkation, a saved voyage, deep-water gating, naval battle/retreat, carrier loss and disembarkation. Compare manual/autoresolve using the same kernel. Assert transport conservation, nonnegative capacity and no hidden cargo/character disclosure. Add observation-only AI scenarios that actually load, sail and unload rather than merely buy ships.
+
+Measure larger tactical rosters and loaded fleets separately from idle entities. Use indexed carrier/cargo and co-located army queries; avoid repeated global scans per army/turn. Check actual narrow UI, map selection, far markers and missing-art fallbacks. Ships must never borrow infantry artwork as if it were naval art. Publish any new art only through the repository's reviewed asset pipeline.
+
+Carry each coherent slice through the `/unlazy` verification loop and record concrete remaining limits; this skill does not expand permission to publish, deploy or run external services.

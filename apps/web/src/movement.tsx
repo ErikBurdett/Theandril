@@ -30,7 +30,7 @@ export function useMapMovement(context: Context) {
   const [notice, setNotice] = useState('Select a destination on the map to issue an order.');
   const army = context.view?.armies.find(item => item.id === context.selection.armyId && item.factionId === context.view?.factionId);
   const route = context.view?.routes.find(item => item.armyId === army?.id);
-  const canAct = Boolean(army && context.view && !context.locked);
+  const canAct = Boolean(army && !army.carrierId && context.view && !context.locked);
   const showPreview = (preview?: MovementPreview) => {
     const current = latest.current;
     const own = current.view?.armies.find(item => item.id === current.selection.armyId);
@@ -45,7 +45,7 @@ export function useMapMovement(context: Context) {
     context.renderer.current?.setMovementRange([]);
     context.renderer.current?.resetHover();
     if (!army || context.locked || !context.view) return;
-    setNotice(army.movement ? 'Choose a highlighted hex to move; hover to preview the known route.' : 'No movement remains. Queue a future route or end the turn.');
+    setNotice(army.movementBlocker ?? (army.movement ? 'Choose a highlighted hex to move; hover to preview the known route.' : 'No movement remains. Queue a future route or end the turn.'));
     context.query(army.id).then(result => {
       if (epoch !== requestEpoch.current) return;
       setReachable(result.reachable); context.renderer.current?.setMovementRange(result.reachable);
@@ -94,7 +94,7 @@ export function useMapMovement(context: Context) {
     const current = latest.current, view = current.view;
     if (!view) return;
     const shouldAppend = input.shiftKey || appendRef.current;
-    const friends = view.armies.filter(item => item.cell === cell && item.factionId === view.factionId).sort((a, b) => a.id < b.id ? -1 : 1);
+    const friends = view.armies.filter(item => item.cell === cell && !item.carrierId && item.factionId === view.factionId).sort((a, b) => a.id < b.id ? -1 : 1);
     if (friends.length && !(shouldAppend && current.selection.armyId && !current.locked)) {
       const index = friends.findIndex(item => item.id === current.selection.armyId);
       current.select({ armyId: friends[(index + 1) % friends.length]!.id, cell }); return;
@@ -140,7 +140,8 @@ export function MovementOrders({ movement, view, issue, locate }: { movement: Ma
   if (!army) return null;
   const preview = hovered ?? candidate;
   return <section className="map-orders" data-testid="map-orders" aria-label="Map movement orders">
-    <h3 className="section-title">Paths & marching orders</h3>
+    <h3 className="section-title">{army.domain === 'naval' ? 'Routes & sailing orders' : 'Paths & marching orders'}</h3>
+    {army.carrierId && <p className="character-blocker">This army is embarked. Select its carrying fleet to sail, or choose an eligible shore in the transport panel to disembark.</p>}
     {route && <section className="queued-route" data-testid="queued-route" aria-label="Queued route"><h4>{route.status === 'paused' ? 'Route interrupted' : 'Route active'}</h4>{route.pauseReason && <p role="status">{route.pauseReason}</p>}<div className="route-actions"><button className="wide" disabled={!canAct || route.status !== 'paused'} onClick={() => issue({ type: 'resumeMovement', factionId: view.factionId, armyId: army.id })}>Resume route</button><button className="wide" disabled={!canAct} onClick={() => issue({ type: 'cancelMovement', factionId: view.factionId, armyId: army.id })}>Cancel route</button></div><p>{route.path.length} known steps remaining. New hostile sightings or blocked passages can interrupt travel; queued routes never declare war or attack automatically.</p><ol>{route.waypoints.map((cell, index) => <li key={index}><button aria-label={`Focus waypoint ${index + 1} at hex ${cell}`} onClick={() => locate(cell)}>Waypoint {index + 1} · hex {cell}</button></li>)}</ol></section>}
     <p className="field-help" data-testid="movement-range">{movement.reachable.length} highlighted destinations within current movement. Click a reachable hex to move, or a reachable hostile army to attack. Dragging only pans.</p>
     <label className="waypoint-toggle"><input type="checkbox" checked={movement.append} disabled={!canAct || planning} onChange={event => movement.setAppendMode(event.target.checked)}/>Add waypoint mode</label>
@@ -150,7 +151,7 @@ export function MovementOrders({ movement, view, issue, locate }: { movement: Ma
       <button className="wide" type="submit" disabled={!canAct || planning}>Review route</button>
     </form>
     <p className="field-help route-notice" role="status">{planning ? 'Reviewing the known route…' : movement.notice}</p>
-    {preview && <div className="route-preview" data-testid="route-preview"><strong>{preview.action === 'attack' ? 'Field attack' : preview.action === 'besiege' ? 'Settlement defenses' : preview.action === 'blocked' ? 'Route unavailable' : 'March'} · hex {preview.target}</strong><p>{preview.path.length} steps · {preview.cost} movement</p>{preview.blocker && <p>{preview.blocker}</p>}{preview.limited && <p>Search limit reached. Choose a nearer waypoint.</p>}</div>}
+    {preview && <div className="route-preview" data-testid="route-preview"><strong>{preview.action === 'attack' ? army.domain === 'naval' ? 'Naval attack' : 'Field attack' : preview.action === 'besiege' ? 'Settlement defenses' : preview.action === 'blocked' ? 'Route unavailable' : army.domain === 'naval' ? 'Voyage' : 'March'} · hex {preview.target}</strong><p>{preview.path.length} steps · {preview.cost} movement</p>{preview.blocker && <p>{preview.blocker}</p>}{preview.limited && <p>Search limit reached. Choose a nearer waypoint.</p>}</div>}
     {candidate && <div className="route-actions" ref={routeActions} tabIndex={-1} role="group" aria-label={`Reviewed destination ${candidate.target}`}><p className="field-help">Orders below target hex {candidate.target}.</p><button className={candidate.action === 'attack' ? 'danger wide' : 'wide'} disabled={!canAct || planning || !candidate.canMoveNow || movement.append} onClick={() => movement.issueCandidate(false)}>{candidate.action === 'attack' ? 'Attack now' : 'Move now'}</button><button className="primary wide" disabled={!canAct || planning || !candidate.canQueue} onClick={() => movement.issueCandidate(true)}>{movement.append ? 'Add waypoint' : 'Queue route'}</button></div>}
   </section>;
 }

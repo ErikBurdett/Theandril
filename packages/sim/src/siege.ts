@@ -7,6 +7,7 @@ import { atWar, relocateArmy, startSettlementAssault } from './warfare';
 import { indexes, updateSight } from './visibility';
 import { recordConquest } from './diplomacy';
 import { captureSettlementCharacters } from './characters';
+import { armyDomain, carriedArmyBlocker } from './naval';
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 const bounded = (maximum: number) => z.number().int().min(0).max(maximum);
@@ -34,6 +35,7 @@ export function besiegeSettlement(state: GameState, factionId: string, armyId: s
   const army = state.armies[armyId];
   const town = state.settlements[settlementId];
   if (!army || army.factionId !== factionId) return fail('You do not control that army.');
+  if (carriedArmyBlocker(state, army.id) || armyDomain(army) !== 'land') return fail('Disembark a land army before besieging a settlement.');
   if (!town || !indexes(state).visible.get(factionId)?.has(town.cell)) return fail('Choose a currently visible enemy settlement.');
   if (!atWar(state, factionId, town.factionId)) return fail('Declare war before besieging this settlement.');
   if (!armyCanAttack(army)) return fail('Hearth caravans cannot besiege settlements.');
@@ -64,7 +66,7 @@ export function assaultObjection(state: GameState, factionId: string, settlement
   if (!atWar(state, factionId, town.factionId)) return 'An assault requires an active war.';
   const terrain = state.world.terrain[town.cell];
   if (army.movement < (terrain === 2 || terrain === 3 ? 2 : 1)) return 'The besieging army needs movement to assault; wait for the next turn.';
-  if ([...(indexes(state).armies.get(town.cell) ?? [])].reduce((sum, id) => sum + (state.armies[id]?.formations.length ?? 0), 0) > 12) return rulesVersion(state) < 6 ? 'An assault supports at most twelve defending armies.' : 'An assault supports at most twelve defending formations.';
+  if ([...(indexes(state).armies.get(town.cell) ?? [])].reduce((sum, id) => sum + (state.armies[id]?.formations.length ?? 0), 0) > (rulesVersion(state) < 8 ? 12 : 20)) return rulesVersion(state) >= 8 ? 'An assault supports at most twenty defending formations.' : rulesVersion(state) < 6 ? 'An assault supports at most twelve defending armies.' : 'An assault supports at most twelve defending formations.';
   return null;
 }
 

@@ -1,15 +1,15 @@
 import { z } from 'zod';
 import { CONTENT_HASH, PROSPERITY_PROJECT } from '@theandril/content';
 import { MAP_DIMENSIONS, type MapSize } from '@theandril/mapgen';
-import { applyCommand, applyCommandForVersion, battleReportForVersion, commandSchemaForVersion, createGame, deserializeGame, eventSchema, campaignBattleSchema, legacyCampaignBattleSchema, schema6CampaignBattleSchema, serializeGame, stateHash, stateHashForVersion, SAVE_VERSION, type BattleReport, type CommandResult, type DomainEvent, type GameCommand, type GameState, type PhaseObserver } from '@theandril/sim';
+import { applyCommand, applyCommandForVersion, battleReportForVersion, commandSchemaForVersion, createGame, deserializeGame, eventSchema, campaignBattleSchema, legacyCampaignBattleSchema, schema6CampaignBattleSchema, schema7CampaignBattleSchema, serializeGame, stateHash, stateHashForVersion, SAVE_VERSION, type BattleReport, type CommandResult, type DomainEvent, type GameCommand, type GameState, type PhaseObserver } from '@theandril/sim';
 
 export { CampaignJournal, createJournal, resumeJournal } from './journal';
 export type { JournalHeader, JournalCommit, JournalOptions } from './journal';
 
 export type CampaignMode = 'player' | 'watch';
 export type ArchiveCoverage = 'complete' | 'from-save';
-export type ArchiveRulesVersion = 4 | 5 | 6 | 7;
-export type ArchivedBattleReport = BattleReport | z.infer<typeof legacyCampaignBattleSchema> | z.infer<typeof schema6CampaignBattleSchema>;
+export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8;
+export type ArchivedBattleReport = BattleReport | z.infer<typeof legacyCampaignBattleSchema> | z.infer<typeof schema6CampaignBattleSchema> | z.infer<typeof schema7CampaignBattleSchema>;
 export interface ArchiveRecord {
   sequence: number;
   turn: number;
@@ -55,13 +55,14 @@ const legacyArchiveSchema = z.object({
   initialSave: z.string().max(64 * 1024 * 1024), initialHash: hash, initialTurn: turn,
   records: z.array(legacyRecordSchema).max(1_000_000), finalHash: hash.nullable(),
 }).strict();
-const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7)]);
+const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8)]);
 // Reports are validated in their original format. Never add modern metadata to old evidence.
 const recordSchema = z.discriminatedUnion('rulesVersion', [
   legacyRecordSchema.extend({ checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(4) }).strict(),
   legacyRecordSchema.extend({ checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(5) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(schema6CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(6) }).strict(),
-  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(7) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(schema7CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(7) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(8) }).strict(),
 ]);
 const archiveSchema = legacyArchiveSchema.extend({ version: z.literal(2), initialSaveVersion: hashVersion, records: z.array(recordSchema).max(1_000_000), finalHashVersion: hashVersion.nullable() }).strict();
 

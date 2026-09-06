@@ -44,6 +44,7 @@ export function rebuildIndexes(state: GameState): SpatialIndex {
     visible: new Map(state.factions.map(faction => [faction.id, new Map()])),
   };
   for (const army of Object.values(state.armies)) {
+    if (state.transports[army.id]) continue;
     const occupants = index.armies.get(army.cell) ?? new Set<string>();
     occupants.add(army.id); index.armies.set(army.cell, occupants);
     changeSight(state, index, army.factionId, army.cell, armySight(army), 1);

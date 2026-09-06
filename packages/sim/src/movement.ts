@@ -1,11 +1,12 @@
 import { z } from 'zod';
 import { armyCanAttack, armySight } from './army-composition';
-import { hexDistance, isPassable, neighbors } from '@theandril/mapgen';
+import { hexDistance, neighbors } from '@theandril/mapgen';
 import type { Army, CommandResult, DomainEvent, GameState, Observation } from './types';
 import { cellsWithin, indexes, updateSight } from './visibility';
 import { startCampaignBattle } from './warfare';
 import { rulesVersion } from './rules';
 import { armyHasCharacterMission } from './characters';
+import { armyDomain, armyTerrainBlocker, carriedArmyBlocker, fleetCanEnterDeepWater, moveFleetCargo, travelTerrainBlocker } from './naval';
 
 export const MAX_ROUTE_CELLS = 256;
 export const MAX_WAYPOINTS = 8;
@@ -18,6 +19,8 @@ export interface MovementPreview { target: number; path: number[]; cost: number;
 export interface MovementQuery { reachable: { cell: number; cost: number }[]; preview: MovementPreview | null; limited: boolean; expandedNodes: number }
 interface Knowledge {
   legacy: boolean;
+  battleLimit: number;
+  terrainBlocker(cell: number): string | null;
   width: number; height: number; factionId: string; army: Army | undefined; wars: Set<string>;
   terrain(cell: number): number | undefined; armies(cell: number): Army[]; townOwner(cell: number): string | undefined;
   route: MovementRoute | undefined; strategicBlocker: string | null; besieging: boolean;
@@ -28,16 +31,17 @@ const compareId = (a: { id: string }, b: { id: string }): number => a.id < b.id 
 const blocked = (state: GameState): string | null => state.victory ? 'This campaign has ended in victory.' : state.battle ? 'Resolve the pending battle first.' : state.pendingCapture ? 'Resolve the settlement capture first.' : null;
 
 /** Index one detached observation once, not once for every hovered hex. */
-const observed = new WeakMap<Observation, { terrain: Map<number, number>; armies: Map<number, Army[]>; towns: Map<number, string> }>();
+const observed = new WeakMap<Observation, { terrain: Map<number, number>; depths: Map<number, number>; armies: Map<number, Army[]>; towns: Map<number, string> }>();
 function observedKnowledge(view: Observation, armyId: string): Knowledge {
   let known = observed.get(view);
   if (!known) {
-    known = { terrain: new Map(view.cells.map(item => [item.cell, item.terrain])), armies: new Map(), towns: new Map(view.settlements.map(town => [town.cell, town.factionId])) };
-    for (const army of view.armies) { const occupants = known.armies.get(army.cell) ?? []; occupants.push(army); known.armies.set(army.cell, occupants); }
+    known = { terrain: new Map(view.cells.map(item => [item.cell, item.terrain])), depths: new Map(view.cells.map(item => [item.cell, item.waterDepth])), armies: new Map(), towns: new Map(view.settlements.map(town => [town.cell, town.factionId])) };
+    for (const army of view.armies) { if (army.carrierId) continue; const occupants = known.armies.get(army.cell) ?? []; occupants.push(army); known.armies.set(army.cell, occupants); }
     observed.set(view, known);
   }
   const index = known;
-  return { legacy: false, width: view.width, height: view.height, factionId: view.factionId, army: view.armies.find(army => army.id === armyId && army.factionId === view.factionId), wars: new Set(view.wars),
+  const army = view.armies.find(army => army.id === armyId && army.factionId === view.factionId);
+  return { legacy: false, battleLimit: 20, terrainBlocker: cell => travelTerrainBlocker(army?.domain ?? 'land', army?.canEnterDeepWater ?? false, index.terrain.get(cell) ?? 0, index.depths.get(cell) ?? 0), width: view.width, height: view.height, factionId: view.factionId, army, wars: new Set(view.wars),
     terrain: cell => index.terrain.get(cell), armies: cell => index.armies.get(cell) ?? [], townOwner: cell => index.towns.get(cell), route: view.routes.find(route => route.armyId === armyId),
     strategicBlocker: view.victory ? 'This campaign has ended in victory.' : view.battle ? 'Resolve the pending battle first.' : view.pendingCapture ? 'Resolve the settlement capture first.' : view.armies.find(army => army.id === armyId)?.movementBlocker ?? null,
     besieging: view.sieges.some(siege => siege.armyId === armyId),
@@ -45,17 +49,17 @@ function observedKnowledge(view: Observation, armyId: string): Knowledge {
 }
 function canonicalKnowledge(state: GameState, factionId: string, armyId: string): Knowledge {
   const index = indexes(state); const visible = index.visible.get(factionId); const army = state.armies[armyId];
-  return { legacy: rulesVersion(state) < 6, width: state.world.width, height: state.world.height, factionId, army: army?.factionId === factionId ? army : undefined,
+  return { legacy: rulesVersion(state) < 6, battleLimit: rulesVersion(state) < 8 ? 12 : 20, terrainBlocker: cell => army ? armyTerrainBlocker(state, army, cell) : 'Unknown army.', width: state.world.width, height: state.world.height, factionId, army: army?.factionId === factionId ? army : undefined,
     wars: new Set(state.wars.filter(pair => pair.includes(factionId)).map(pair => pair[0] === factionId ? pair[1] : pair[0])),
     terrain: cell => state.explored[factionId]?.has(cell) ? state.world.terrain[cell] : undefined,
     armies: cell => visible?.has(cell) ? [...(index.armies.get(cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => Boolean(army)) : [],
     townOwner: cell => visible?.has(cell) ? state.settlements[index.settlements.get(cell) ?? '']?.factionId : undefined,
-    route: state.routes[armyId], strategicBlocker: blocked(state) ?? (armyHasCharacterMission(state, armyId) ? 'Cancel the active character mission before moving this army.' : null), besieging: Object.values(state.sieges).some(siege => siege.armyId === armyId),
+    route: state.routes[armyId], strategicBlocker: blocked(state) ?? carriedArmyBlocker(state, armyId) ?? (armyHasCharacterMission(state, armyId) ? 'Cancel the active character mission before moving this army.' : null), besieging: Object.values(state.sieges).some(siege => siege.armyId === armyId),
   };
 }
 function mayEnter(knowledge: Knowledge, cell: number, attackTarget?: number): boolean {
   const terrain = knowledge.terrain(cell);
-  if (terrain === undefined || !isPassable(terrain)) return false;
+  if (terrain === undefined || knowledge.terrainBlocker(cell)) return false;
   const owner = knowledge.townOwner(cell);
   if (owner && owner !== knowledge.factionId) return false;
   return !knowledge.armies(cell).some(army => army.factionId !== knowledge.factionId) || cell === attackTarget;
@@ -106,14 +110,15 @@ function preview(knowledge: Knowledge, target: number, append = false, budget = 
   if (knowledge.strategicBlocker) return deny(knowledge.strategicBlocker);
   if (knowledge.besieging) return deny('Lift this army’s siege before moving it.');
   if (!Number.isSafeInteger(target) || target < 0 || target >= knowledge.width * knowledge.height || knowledge.terrain(target) === undefined) return deny('Choose a known destination within the explored world.');
-  if (!isPassable(knowledge.terrain(target) ?? 0)) return deny('Water and mountains are impassable to these armies.');
+  const terrainBlocker = knowledge.terrainBlocker(target);
+  if (terrainBlocker) return deny(terrainBlocker);
   const townOwner = knowledge.townOwner(target);
   if (townOwner && townOwner !== knowledge.factionId) return { ...deny(knowledge.wars.has(townOwner) ? 'Besiege this settlement and assault its defenses; travel cannot bypass a garrison.' : 'This settlement belongs to another faction. Declare war before a siege.'), action: 'besiege' };
   const enemies = knowledge.armies(target).filter(other => other.factionId !== knowledge.factionId).sort(compareId);
   const enemy = enemies[0];
   if (enemy && !knowledge.wars.has(enemy.factionId)) return deny('Declare war before attacking this faction.');
   if (enemy && !armyCanAttack(army)) return deny('Hearth caravans cannot initiate attacks.');
-  if (enemies.reduce((sum, army) => sum + army.formations.length, 0) > 12) return deny(knowledge.legacy ? 'This field battle supports at most twelve defending armies.' : 'This field battle supports at most twelve defending formations.');
+  if (enemies.reduce((sum, army) => sum + army.formations.length, 0) > knowledge.battleLimit) return deny(knowledge.battleLimit === 20 ? 'This field battle supports at most twenty defending formations.' : knowledge.legacy ? 'This field battle supports at most twelve defending armies.' : 'This field battle supports at most twelve defending formations.');
   if (append && enemy) return deny('Queued travel cannot include an automatic attack.');
   const waypoints = plannedWaypoints(knowledge, target, append);
   if (waypoints.length > MAX_WAYPOINTS) return deny('A travel order supports at most eight waypoints.');
@@ -138,7 +143,7 @@ export function getMovementQuery(view: Observation, armyId: string, target?: num
   if (army && armyCanAttack(army) && range) for (const [cell, cost] of range.costs) for (const next of neighbors(cell, knowledge.width, knowledge.height)) {
     const enemies = knowledge.armies(next).filter(other => other.factionId !== knowledge.factionId);
     const owner = knowledge.townOwner(next); const terrain = knowledge.terrain(next);
-    if (terrain === undefined || !isPassable(terrain) || owner && owner !== knowledge.factionId || !enemies.length || enemies.length > 12 || enemies.some(other => !knowledge.wars.has(other.factionId))) continue;
+    if (terrain === undefined || knowledge.terrainBlocker(next) || owner && owner !== knowledge.factionId || !enemies.length || enemies.reduce((sum, enemy) => sum + enemy.formations.length, 0) > knowledge.battleLimit || enemies.some(other => !knowledge.wars.has(other.factionId))) continue;
     const attackCost = cost + stepCost(terrain);
     if (attackCost <= army.movement && attackCost < (reachable.get(next) ?? Infinity)) reachable.set(next, attackCost);
   }
@@ -161,11 +166,12 @@ export function pauseMovement(state: GameState, armyId: string, reason: string, 
   events.push(notice(state, army, 'movement_paused', `${army.name} paused its travel: ${reason}`));
 }
 function stepObjection(state: GameState, army: Army, target: number): string | null {
+  const carried = carriedArmyBlocker(state, army.id); if (carried) return carried;
   if (armyHasCharacterMission(state, army.id)) return 'Cancel the active character mission before moving this army.';
   if (!neighbors(army.cell, state.world.width, state.world.height).includes(target)) return 'The army was displaced from its planned route.';
   const index = indexes(state);
   if (!index.visible.get(army.factionId)?.has(target)) return 'The next step is not currently visible.';
-  if (!isPassable(state.world.terrain[target] ?? 0)) return 'The next step is no longer passable.';
+  const terrainBlocker = armyTerrainBlocker(state, army, target); if (terrainBlocker) return terrainBlocker;
   if ([...(index.armies.get(target) ?? [])].some(id => state.armies[id]?.factionId !== army.factionId)) return 'Another faction now blocks the next step.';
   const town = state.settlements[index.settlements.get(target) ?? ''];
   if (town && town.factionId !== army.factionId) return 'Another faction now controls the next settlement.';
@@ -177,6 +183,7 @@ function takeStep(state: GameState, army: Army, target: number, events: DomainEv
   const index = indexes(state); const sight = armySight(army);
   updateSight(state, army.factionId, army.cell, sight, -1); index.armies.get(army.cell)?.delete(army.id);
   army.cell = target; army.movement -= stepCost(state.world.terrain[target] ?? 0);
+  moveFleetCargo(state, army.id);
   const occupants = index.armies.get(target) ?? new Set<string>(); occupants.add(army.id); index.armies.set(target, occupants);
   updateSight(state, army.factionId, target, sight, 1);
   events.push(notice(state, army, 'army_moved', `${army.name} explored hex ${army.cell}.`));
@@ -273,7 +280,7 @@ export function validateMovement(state: GameState): void {
     let cursor = route.origin; let waypoint = 0;
     assert(state.explored[army.factionId]?.has(cursor), 'travel origin must be explored');
     for (const next of route.path) {
-      assert(neighbors(cursor, state.world.width, state.world.height).includes(next) && isPassable(state.world.terrain[next] ?? 0) && state.explored[army.factionId]?.has(next), 'travel route must be contiguous explored land');
+      assert(neighbors(cursor, state.world.width, state.world.height).includes(next) && !travelTerrainBlocker(armyDomain(army), fleetCanEnterDeepWater(state, army), state.world.terrain[next] ?? 0, state.world.waterDepth[next] ?? 0) && state.explored[army.factionId]?.has(next), 'travel route must be contiguous explored terrain permitted to the army domain');
       cursor = next; if (route.waypoints[waypoint] === next) waypoint++;
     }
     assert(waypoint === route.waypoints.length && route.path.at(-1) === route.waypoints.at(-1), 'travel waypoints differ from the saved route');

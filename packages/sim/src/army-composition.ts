@@ -1,9 +1,12 @@
 import { DOCTRINES, UNITS } from '@theandril/content';
 import type { Army, ArmyFormation, ArmyView, CommandResult, DomainEvent, GameState } from './types';
 import { indexes, updateSight } from './visibility';
-import { armyHasCharacterMission, characterCompositionObjection, observeArmyCharacters, transferArmyCharacters } from './characters';
+import { armyCommandCapacity, armyCommandStatus, armyHasCharacterMission, characterCommandCapacity, characterCompositionObjection, charactersForArmy, observeArmyCharacters, transferArmyCharacters } from './characters';
+import { rulesVersion } from './rules';
+import { armyDomain, armyTransportBlocker, getNavalArmyView } from './naval';
 
-export const MAX_ARMY_FORMATIONS = 12;
+export const MAX_ARMY_FORMATIONS = 20;
+export const DETACHMENT_FORMATIONS = 12;
 const units = new Map(UNITS.map(unit => [unit.id, unit]));
 const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 export const armyStrength = (army: Army): number => army.formations.reduce((sum, item) => sum + item.strength, 0);
@@ -11,6 +14,7 @@ export const armyMaxStrength = (army: Army): number => army.formations.reduce((s
 export const armyMorale = (army: Army): number => Math.min(...army.formations.map(item => item.morale));
 export const armyFatigue = (army: Army): number => Math.max(...army.formations.map(item => item.fatigue));
 export const armyMovement = (army: Army, doctrineId: string | null = null): number => Math.min(...army.formations.map(item => units.get(item.unitId)?.movement ?? 0)) + (DOCTRINES.find(item => item.id === doctrineId)?.effects.movement ?? 0);
+export const effectiveArmyMovement = (state: GameState, army: Army, doctrineId: string | null = state.progression[army.factionId]?.doctrineId ?? null): number => Math.min(armyMovement(army, doctrineId), army.formations.length > armyCommandCapacity(state, army) ? 1 : Infinity);
 export const armySight = (army: Army): number => Math.max(0, ...army.formations.map(item => units.get(item.unitId)?.sight ?? 0));
 export const armyUpkeep = (army: Army): number => army.formations.reduce((sum, item) => sum + (units.get(item.unitId)?.upkeep ?? 0), 0);
 export const armyCanFound = (army: Army): boolean => army.formations.some(item => units.get(item.unitId)?.canFound);
@@ -21,9 +25,18 @@ export function armyUnitId(army: Army): string {
 }
 export function getArmyView(state: GameState, army: Army): ArmyView {
   const blocker = armyHasCharacterMission(state, army.id) ? 'Cancel the active character mission before moving or reorganizing this army.' : null;
-  return { ...army, ...observeArmyCharacters(state, army.id), movementBlocker: blocker, reorganizationBlocker: blocker, formations: army.formations.map(item => ({ ...item })), unitId: armyUnitId(army), displayUnitId: armyUnitId(army),
+  const command = armyCommandStatus(state, army), peers = [...(indexes(state).armies.get(army.cell) ?? [])].filter(id => id !== army.id && state.armies[id]?.factionId === army.factionId).sort();
+  const mergeOptions = peers.slice(0, 24).map(id => {
+    const target = state.armies[id]!, resultCapacity = mergeCapacity(state, army, target);
+    const common = transferObjection(state, army.factionId, army, target);
+    const mergeBlocker = common ?? characterCompositionObjection(state, army.id, target.id, true) ?? (army.formations.length + target.formations.length > resultCapacity ? `The combined army exceeds its ${resultCapacity}-formation command capacity.` : null);
+    const transferLimit = common ? 0 : Math.max(0, armyCommandCapacity(state, target) - target.formations.length);
+    return { armyId: id, label: target.name, resultCapacity, canMerge: mergeBlocker === null, blocker: mergeBlocker, transferLimit, transferBlocker: common ?? (transferLimit ? null : 'The receiving army has no spare command capacity.') };
+  });
+  return { ...army, ...observeArmyCharacters(state, army.id), ...getNavalArmyView(state, army), formationCapacity: command.capacity, overCommand: command.overCommand, commandBlocker: command.commandBlocker, capacityReason: command.capacityReason, splitFormationLimit: DETACHMENT_FORMATIONS, mergeOptions, mergeOptionsTruncated: peers.length > 24,
+    movementBlocker: blocker, reorganizationBlocker: objection(state, army.factionId, army), formations: army.formations.map(item => ({ ...item })), unitId: armyUnitId(army), displayUnitId: armyUnitId(army),
     strength: armyStrength(army), maxStrength: armyMaxStrength(army), morale: armyMorale(army), fatigue: armyFatigue(army),
-    maxMovement: armyMovement(army, state.progression[army.factionId]?.doctrineId ?? null), sight: armySight(army), upkeep: armyUpkeep(army), canFound: armyCanFound(army), canAttack: armyCanAttack(army) };
+    maxMovement: effectiveArmyMovement(state, army), sight: armySight(army), upkeep: armyUpkeep(army), canFound: armyCanFound(army), canAttack: armyCanAttack(army) };
 }
 
 /** A new singleton shares its creation serial; migration never consumes nextId. */
@@ -37,13 +50,26 @@ function objection(state: GameState, factionId: string, army: Army | undefined):
   if (!army || army.factionId !== factionId) return 'You do not control that army.';
   if (state.battle || state.pendingCapture) return 'Resolve the pending battle or capture before reorganizing armies.';
   if (armyHasCharacterMission(state, army.id)) return 'Cancel the active character mission before reorganizing this army.';
+  if (rulesVersion(state) >= 8 && armyTransportBlocker(state, army.id)) return armyTransportBlocker(state, army.id);
   if (Object.values(state.sieges).some(siege => siege.armyId === army.id)) return 'Lift this army’s siege before reorganizing its formations.';
   return null;
+}
+function transferObjection(state: GameState, factionId: string, source: Army | undefined, target: Army | undefined): string | null {
+  const blocked = objection(state, factionId, source) ?? objection(state, factionId, target);
+  if (blocked || !source || !target) return blocked ?? 'Unknown army.';
+  if (source.id === target.id) return 'Choose two different armies.';
+  if (source.cell !== target.cell) return 'Armies must share a hex to transfer formations.';
+  if (rulesVersion(state) >= 8 && armyDomain(source) !== armyDomain(target)) return 'Land and naval formations cannot share an army. Use a transport fleet to carry land troops.';
+  return null;
+}
+function mergeCapacity(state: GameState, source: Army, target: Army): number {
+  if (rulesVersion(state) < 8) return DETACHMENT_FORMATIONS;
+  return Math.max(armyCommandCapacity(state, target), ...charactersForArmy(state, source.id).map(characterCommandCapacity));
 }
 function sight(state: GameState, army: Army, delta: 1 | -1): void { updateSight(state, army.factionId, army.cell, armySight(army), delta); }
 const changed = (state: GameState, army: Army, events: DomainEvent[]): void => {
   army.formations.sort(byId);
-  army.movement = Math.min(army.movement, armyMovement(army, state.progression[army.factionId]?.doctrineId ?? null));
+  army.movement = Math.min(army.movement, effectiveArmyMovement(state, army));
   sight(state, army, 1);
   const route = state.routes[army.id];
   const reason = 'Army composition changed; review the shared travel order.';
@@ -55,13 +81,12 @@ const changed = (state: GameState, army: Army, events: DomainEvent[]): void => {
 
 export function transferArmyFormations(state: GameState, factionId: string, sourceArmyId: string, targetArmyId: string, formationIds?: string[]): CommandResult {
   const source = state.armies[sourceArmyId]; const target = state.armies[targetArmyId];
-  const error = objection(state, factionId, source) ?? objection(state, factionId, target);
+  const error = transferObjection(state, factionId, source, target);
   if (error || !source || !target) return fail(error ?? 'Unknown army.');
-  if (source.id === target.id) return fail('Choose two different armies.');
-  if (source.cell !== target.cell) return fail('Armies must share a hex to transfer formations.');
   const ids = new Set(formationIds ?? source.formations.map(item => item.id));
   if (!ids.size || formationIds && ids.size !== formationIds.length || [...ids].some(id => !source.formations.some(item => item.id === id))) return fail('Choose distinct formations belonging to the source army.');
-  if (target.formations.length + ids.size > MAX_ARMY_FORMATIONS) return fail('An army can contain at most twelve formations.');
+  const capacity = ids.size === source.formations.length ? mergeCapacity(state, source, target) : armyCommandCapacity(state, target);
+  if (target.formations.length + ids.size > capacity) return fail(rulesVersion(state) < 8 ? 'An army can contain at most twelve formations.' : `The receiving army can command at most ${capacity} formations. Assign or train a healthy marshal first.`);
   const characterError = characterCompositionObjection(state, source.id, target.id, ids.size === source.formations.length);
   if (characterError) return fail(characterError);
   const events: DomainEvent[] = [];
@@ -69,9 +94,10 @@ export function transferArmyFormations(state: GameState, factionId: string, sour
   target.formations.push(...source.formations.filter(item => ids.has(item.id)));
   source.formations = source.formations.filter(item => !ids.has(item.id));
   target.movement = Math.min(target.movement, source.movement);
+  if (!source.formations.length && rulesVersion(state) >= 8) transferArmyCharacters(state, source.id, target.id, events);
   changed(state, target, events);
   if (source.formations.length) changed(state, source, events);
-  else { transferArmyCharacters(state, source.id, target.id, events); indexes(state).armies.get(source.cell)?.delete(source.id); delete state.armies[source.id]; delete state.routes[source.id]; }
+  else { if (rulesVersion(state) < 8) transferArmyCharacters(state, source.id, target.id, events); indexes(state).armies.get(source.cell)?.delete(source.id); delete state.armies[source.id]; delete state.routes[source.id]; }
   events.push({ turn: state.turn, factionId, type: 'formations_transferred', cell: target.cell, message: `${source.name} transferred ${ids.size} formation${ids.size === 1 ? '' : 's'} to ${target.name}.` });
   return { ok: true, events };
 }
@@ -81,6 +107,7 @@ export function splitArmyFormations(state: GameState, factionId: string, armyId:
   if (error || !source) return fail(error ?? 'Unknown army.');
   const ids = new Set(formationIds);
   if (!ids.size || ids.size !== formationIds.length || ids.size >= source.formations.length || [...ids].some(id => !source.formations.some(item => item.id === id))) return fail('Split a distinct, nonempty selection while leaving at least one formation in the original army.');
+  if (ids.size > DETACHMENT_FORMATIONS) return fail('A new unled detachment can contain at most twelve formations; the marshal remains with the original army.');
   const id = `army.${state.nextId}`;
   const detached: Army = { id, factionId, name: name ?? `${source.name} detachment`.slice(0, 80).trim(), cell: source.cell, movement: source.movement, formations: source.formations.filter(item => ids.has(item.id)) };
   const events: DomainEvent[] = [];
