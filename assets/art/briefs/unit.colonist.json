@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist"
+  ],
+  "prompt": "Create an ORIGINAL production sprite sheet for Theandril, a gritty dark-fantasy hex strategy game about hearthland communities after the fall of the Witness Roads.\nExact sheet layout: 4 columns by 3 rows of equal square cells, no gutters, on a genuinely transparent background. Each cell is a 64 by 64 logical-pixel canvas shown at identical integer enlargement. Total logical sheet 256 x 192. Every figure fully contained inside its cell with generous transparent margins, feet on the same baseline at logical y=56, centered x=32. Orthographic three-quarter front view facing southeast, slightly seen from above, NOT isometric floor bases. No labels, grid lines, ground patches, shadows outside silhouette, text or watermarks.\nRow 1: SAME Oathguard in four genuinely different restrained idle breathing frames: weathered charcoal iron helmet, narrow eye slit, brown padded coat, bone-colored scarf, sturdy boots, short worn sword down in right hand and small angular buckler in left. Stocky adult human realistic proportions, NOT chibi; no horns or copied game character.\nRow 2: SAME Wayfinder scout in four restrained idle breathing frames: hooded olive wool cloak, leather bracers, travel pack, bow held diagonally, arrow quiver, face partly shadowed, lean adult human.\nRow 3: SAME Hearthcaravan in four idle frames: weathered small two-wheeled handcart with covered ash canvas, crates, old brass oath bell, and one hooded adult traveler walking beside it. Clear wagon/traveler silhouette, not a horse or knight.\nVisual style: authentic carefully hand-placed 64px pixel art, crisp square pixel clusters, hard edges, NO anti-aliasing, NO smooth gradients, NO blur, NO painterly texture, NO tiny dithering confetti. About 12-18 shared colors per row. Restrained charcoal/umber/oxidized iron/old bone palette with readable warm highlights. Northwest key light, dark but readable medium value bodies; serious worn fantasy craftsmanship. Animation registration and equipment identical throughout each row; only cloth/breathing posture subtle motion, feet remain planted. Make the whole sheet exact and useful as runtime game sprites, not a concept illustration.",
+  "frames": [
+    {
+      "id": "unit.colonist/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.colonist/idle-se-0.png"
+    },
+    {
+      "id": "unit.colonist/idle/se/1",
+      "direction": "se",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.colonist/idle-se-1.png"
+    },
+    {
+      "id": "unit.colonist/idle/se/2",
+      "direction": "se",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.colonist/idle-se-2.png"
+    },
+    {
+      "id": "unit.colonist/idle/se/3",
+      "direction": "se",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.colonist/idle-se-3.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 4,
+        "loop": true
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bca3d2a668f44e654bb28cebf509e2fbe1de8713ec7dd901c7a3ff34d2652c24",
+    "sourceRefs": [
+      "assets/art/source/units-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "8cfeac679957b1530c7a7f33c14309d35470a2014e0ef7350dfe4c6e5942fe4c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "b321549a791120fd5e1f80cf792f7e0b64719e670e997dca3c132ba2993dbe79",
+      "inputHash": "8cfeac679957b1530c7a7f33c14309d35470a2014e0ef7350dfe4c6e5942fe4c",
+      "outputHash": "5f62affe269a4569c3ade50fb86b53dc84baedc6c985b55d74b4e92a85700f8b"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

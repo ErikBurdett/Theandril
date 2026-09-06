@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "source": "assets/art/source/factions/reedbound_council-v1.png",
+  "sourceHash": "3815981ffa4216ae24d72cc196439b912d10af2b74666226bf49c412acad02e9",
+  "width": 1254,
+  "height": 1254,
+  "crops": [
+    {
+      "role": "unit.colonist",
+      "rect": {
+        "x": 14,
+        "y": 49,
+        "w": 271,
+        "h": 257
+      }
+    },
+    {
+      "role": "unit.scout",
+      "rect": {
+        "x": 387,
+        "y": 29,
+        "w": 166,
+        "h": 268
+      }
+    },
+    {
+      "role": "unit.guard",
+      "rect": {
+        "x": 727,
+        "y": 35,
+        "w": 152,
+        "h": 264
+      }
+    },
+    {
+      "role": "unit.spearman",
+      "rect": {
+        "x": 1047,
+        "y": 4,
+        "w": 112,
+        "h": 303
+      }
+    },
+    {
+      "role": "unit.heavy_infantry",
+      "rect": {
+        "x": 72,
+        "y": 323,
+        "w": 175,
+        "h": 285
+      }
+    },
+    {
+      "role": "unit.cavalry",
+      "rect": {
+        "x": 357,
+        "y": 307,
+        "w": 259,
+        "h": 330
+      }
+    },
+    {
+      "role": "character.marshal",
+      "rect": {
+        "x": 695,
+        "y": 316,
+        "w": 266,
+        "h": 303
+      }
+    },
+    {
+      "role": "character.surveyor",
+      "rect": {
+        "x": 1034,
+        "y": 349,
+        "w": 142,
+        "h": 259
+      }
+    },
+    {
+      "role": "character.engineer",
+      "rect": {
+        "x": 75,
+        "y": 637,
+        "w": 170,
+        "h": 281
+      }
+    },
+    {
+      "role": "settlement.village",
+      "rect": {
+        "x": 324,
+        "y": 643,
+        "w": 285,
+        "h": 280
+      }
+    },
+    {
+      "role": "settlement.town",
+      "rect": {
+        "x": 643,
+        "y": 626,
+        "w": 288,
+        "h": 305
+      }
+    },
+    {
+      "role": "settlement.city",
+      "rect": {
+        "x": 948,
+        "y": 625,
+        "w": 299,
+        "h": 316
+      }
+    },
+    {
+      "role": "ui.crest",
+      "rect": {
+        "x": 37,
+        "y": 937,
+        "w": 238,
+        "h": 300
+      }
+    },
+    {
+      "role": "ui.banner",
+      "rect": {
+        "x": 408,
+        "y": 937,
+        "w": 126,
+        "h": 303
+      }
+    },
+    {
+      "role": "ui.badge",
+      "rect": {
+        "x": 703,
+        "y": 991,
+        "w": 162,
+        "h": 174
+      }
+    }
+  ],
+  "cropsHash": "7acc4a8690e47c3bcb3487172921cf3d14bc2e58871cee4370c2a8426561d906",
+  "evidence": [
+    {
+      "path": "assets/art/source/factions/crop-evidence/reedbound_council-1x.png",
+      "sha256": "78309ebdca3545fb0ee9a4040b708d69a5b9524b25ad8c72665364a30c4e36da",
+      "scale": 1
+    },
+    {
+      "path": "assets/art/source/factions/crop-evidence/reedbound_council-4x.png",
+      "sha256": "16b31666f6315120d74845de002108fc0fff78964667d612d5f23e4237e75ad2",
+      "scale": 4
+    }
+  ],
+  "review": {"reviewer":"Codex root visual review","reviewedAt":"2026-09-06T01:53:04.000Z","cropsHash":"7acc4a8690e47c3bcb3487172921cf3d14bc2e58871cee4370c2a8426561d906","notes":"Inspected original transparent source and every role in native1x/4x contact sheets. All fifteen distinct silhouettes remain isolated; caravan wheels/traveler, bow scout, shield guard, pike, broad heavy infantry, horse/rider, officer pennant, chart/staff witness, hammer/apron engineer, increasing village/town/city and matching three heraldry forms are present. Green woven oval equipment and timber/reed architecture read consistently. Pike reaches original sheet top but fitted native point remains narrow and enclosed in padding; retained source-edge limitation. This approves crop mapping only, NOT processed runtime art.","sourceHash":"3815981ffa4216ae24d72cc196439b912d10af2b74666226bf49c412acad02e9"},
+  "warnings": [],
+  "note": "Source rectangle proposal only; contact sheet follows exact original prompt order. Retains every alpha>=128 source pixel once. Native fitting/normalization is not visual approval."
+}

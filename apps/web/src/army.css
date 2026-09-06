@@ -1,0 +1,17 @@
+.army-composition { --line: #414a40; --parchment: #e0ddcb; --muted: #a1aa9d; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 20px 0; padding: 13px 0; }
+.army-composition > summary { cursor: pointer; color: var(--parchment); line-height: 1.5; }
+.army-composition > summary span { display: block; color: var(--muted); font-size: .78rem; padding-left: 15px; }
+.army-capabilities { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.army-capabilities dt { color: var(--muted); font-size: .72rem; }
+.army-capabilities dd { margin: 4px 0 0; font-size: .87rem; }
+.formation-choices { border: 0; padding: 0; min-width: 0; margin: 18px 0; }
+.formation-choices legend { font-size: .75rem; color: var(--muted); padding: 0 0 9px; }
+.formation-choice { display: flex; align-items: flex-start; gap: 10px; border: 1px solid var(--line); padding: 10px; margin: 7px 0; cursor: pointer; }
+.formation-choice input { flex: 0 0 17px; width: 17px; height: 17px; margin: 3px 0 0; }
+.formation-choice span { min-width: 0; }
+.formation-choice strong { font-weight: 500; color: var(--parchment); }
+.formation-choice small { display: block; color: var(--muted); margin-top: 4px; overflow-wrap: anywhere; font-size: .69rem; }
+.army-reorganization { display: flex; flex-direction: column; gap: 10px; }
+.army-reorganization label { min-width: 0; }
+.army-reorganization select { width: 100%; min-width: 0; }
+.army-reorganization .field-help { margin: 0; }

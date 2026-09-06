@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.melee",
+  "type": "effect",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.melee"
+  ],
+  "prompt": "Original four-frame ember-and-iron impact arc: approach, impact flash, outward sparks, recovery fleck. Fixed impact anchor 32,32 on 64x64; 100ms per frame, one-shot idle/se packaging. Preview-only foundation: no timing or combat authority, no weapon-facing set.",
+  "frames": [
+    {
+      "id": "effect.melee/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.melee/7b09889ecf1968577a2f096af7a6208e2c819487ccd525d4b424ad1bb1c764df/frame-0.png"
+    },
+    {
+      "id": "effect.melee/idle/se/1",
+      "direction": "se",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.melee/7b09889ecf1968577a2f096af7a6208e2c819487ccd525d4b424ad1bb1c764df/frame-1.png"
+    },
+    {
+      "id": "effect.melee/idle/se/2",
+      "direction": "se",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.melee/7b09889ecf1968577a2f096af7a6208e2c819487ccd525d4b424ad1bb1c764df/frame-2.png"
+    },
+    {
+      "id": "effect.melee/idle/se/3",
+      "direction": "se",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.melee/7b09889ecf1968577a2f096af7a6208e2c819487ccd525d4b424ad1bb1c764df/frame-3.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "theandril-integer-overlay",
+    "model": "integer-overlay-v1",
+    "promptHash": "12772ccad3c63b353a80a842117123739175d95746cecd48c98274ed2b4a2072",
+    "sourceRefs": [
+      "tools/art/create-overlay-briefs.ts"
+    ],
+    "licenseNotes": [
+      "Original integer-coordinate code-authored artwork for Theandril; no external bitmap references, model weights, or provider output used.",
+      "Source generator is retained in this repository; assets follow the project licensing policy. No third-party license rights are asserted."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-integer-overlay",
+      "version": "1",
+      "profile": "centered-overlay-64",
+      "settingsHash": "92d203289f3fc003cd461b8d35b10c5b38944f2a2d0e5ee471e5bd6c9a420db0",
+      "inputHash": "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff",
+      "outputHash": "9e2d2016f262cb875eae672597e9bd2ef47784df0ae17dc92cdf023271af87b1"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "897b4243263c6531f93127a18e38b37297d85a938b2e8d1683ba3b2becf7ee6c",
+      "outputHash": "dcaacf30d5cda340126323a397dae935d17a5d0b0ffc1300aca42f7204928e4d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "dcaacf30d5cda340126323a397dae935d17a5d0b0ffc1300aca42f7204928e4d",
+      "outputHash": "3366c98d6b9292169aa720ac11a48536cd5278e98d878a327422a98e27376f70"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "8cab96bfbcb94cad5b12fdabd290b3bec15efd5be5f61da3a044139df9adacd4",
+      "outputHash": "ef85cb70d54d82a9b64ee76bac269c42052b6834ccd94b94ae4640b2d15dab04"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "fcb0c0d07109209c22520d777dc771967837fe1c4432f911bbdce116c24718b1",
+      "outputHash": "3e4b6a8cd02c3bc69ce7d653e945eb85b4f2e876ca9413041f93d48ae63d44d7"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3e4b6a8cd02c3bc69ce7d653e945eb85b4f2e876ca9413041f93d48ae63d44d7",
+      "outputHash": "e52916e998f03cace4b7f79d0918c8543798c3d9b11d15c1c279bd3e9435dd1e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "37254a97308c881e2707e129aceb0fff91457565ec1076096043f7ad5d78ab1e",
+      "outputHash": "65b58abe75bf7eb5db8b6126e1f3c2edd4cc970ba731ee8a61ef44e8dca1e646"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "3a588eaf010b18ea2533dbc7a9111f10bd5f2c59f245cbb173d06d60feee2080",
+      "outputHash": "81dbea9e3b1f0fae21f40afe1868af53afe1c91304e576239888dd6c071e8e5b"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "81dbea9e3b1f0fae21f40afe1868af53afe1c91304e576239888dd6c071e8e5b",
+      "outputHash": "8b1d6d295281b29f047100d336d25d0b7ef12f4d1ef7923051fbc4cc13e9647d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "cc217b219309d75771ff7e2d7dda84d4d77a9b95ae8e2f11f50fac8021383be7",
+      "outputHash": "f83359a30de3ea9cdb028368b991fdacd9b58a5c214ac9882aa801aedcaebe2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "fcedcff233bbaf75f07ca6a1de15f9802c5f4770dba68d41551a4c4bdb9edd0b",
+      "outputHash": "479dc52b264dbd1298a122e4f4cd50b562c02352234e63baccb702d307253ae9"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "479dc52b264dbd1298a122e4f4cd50b562c02352234e63baccb702d307253ae9",
+      "outputHash": "2d7988250ccaef21400f338edc74dc3af7d547f3bbf72426ea2a5be3dc5e6a29"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "dc07cd5c085041c3f599769518ce1cae773ba130ba48de7c335817399adb93cb",
+      "outputHash": "bb81c2a1dfc3e7c95167d867ca004bdf3616c281d4f62a89a7f2d7385c3bcd6a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "eb55d25ad0f5a93c8f46ee9546f7dbc3eaff6ab20ea3e688c0188fb5b854ccf2",
+      "inputHash": "8592aac886f3b282075af9a1463c6f47322430768213b4a4ebc14e36b68c4e64",
+      "outputHash": "3feb3137e130c7b7f2d0d97784e36bdefe47eb2d2961d66535f5c5fc71c60d4b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "2acf7be0f12a24150a7c02d9b40452105bbeff9a1021a0ad4dec88adcefc4f4e",
+      "outputHash": "cbcadab1724910fec53bd741e46df17b11d0d95e55f685fe590bbdf9bc325978"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/effect.melee.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-05T21:03:23.116Z",
+    "notes": "Native and4x: four distinct approach/impact/spark/recovery poses,100ms each, fixed center. Hard alpha and controlled ember clusters; one-shot presentation only, no damage-timing authority.\nReviewed candidate 7b09889ecf1968577a2f096af7a6208e2c819487ccd525d4b424ad1bb1c764df; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/6677df15a33d21411f3db9658825ce5f2e70e44bc7e651411f8a0e3927ad17d5.png"
+    ],
+    "inputHash": "08ced46d4a68bec80b70f6c994abc624a88c8935bdfd0cd0cb4b531286939896"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 16,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 32,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

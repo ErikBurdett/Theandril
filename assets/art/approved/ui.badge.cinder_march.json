@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.cinder_march",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.cinder_march"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: one original faction sprite-sheet kit for Theandril, a gritty dark-fantasy strategic hex game.\nCreate a precisely aligned FOUR-column by FOUR-row sheet of equal square cells on a genuinely TRANSPARENT background. Fifteen separate cutout sprites; last bottom-right cell EMPTY. No text, labels, grid, frames, ground patches, checkerboard, drop shadows or watermark. Every object stays within its own cell with clear transparent margins. Each cell is a native pixel-art design presented at consistent integer enlargement, NOT a painted illustration with a pixel filter. Crisp intentional chunky square pixel clusters, binary silhouette edges, restrained 16–24-color subsets, no antialiasing, blur, gradients, tiny confetti or glossy effects. Upper-left diffuse light; worn materials, readable medium-value bodies, dark local-color outlines. Adult proportions, not chibi.\nAll people use the same slightly elevated orthographic three-quarter southeast view, fully visible, centered with feet at a consistent baseline. Same culture across equipment, civilians, cloth, settlements and heraldry. Distinguish the roles strongly at 64-pixel strategic scale.\nExact reading order, left to right:\nROW 1: (1) civilian Hearth caravan: one traveler beside a small covered two-wheel cart; (2) Wayfinder: lightly equipped hooded traveler holding a bow, quiver and pack; (3) Oath guard: practical helmet, sword and small shield; (4) pike infantry: long upright pike, open-face helmet, medium armor.\nROW 2: (1) heavy infantry: visibly broad heavy armor, large protective shield and short weapon; (2) cavalry: one armored adult rider on a fully visible horse, facing right/southeast; (3) Hearth marshal: experienced field officer with baton and plain rank pennant, no crown or spell effect; (4) Road witness: lightly dressed map surveyor with rolled chart and measuring staff, NOT bow or wizard.\nROW 3: (1) March engineer: adult specialist with leather work apron, hammer and tool satchel, NOT spellcaster; (2) village: three humble closely grouped dwellings with one focal hearth; (3) town: a denser cluster with practical workshop/market and modest hall; (4) fortified city: broader fortified architecture with readable gateway and stepped silhouette.\nROW 4: (1) faction crest: large ORIGINAL simple cloth/metal heraldic emblem; (2) same faction symbol on a narrow upright weathered banner with pole, complete foot of pole visible; (3) simplified same-symbol badge, few broad shapes suitable for a native32px icon; (4) completely empty transparent cell.\nHumanoid native target64x64 with feet at(32,56), cavalry96x96 ground(48,80), village/town96x96 ground(48,80), city128x128 ground(64,112), crest/banner64x64, badge32x32. Compose generously so extraction preserves each silhouette. Keep faction-color accents on cloth/shield/architecture rather than tinting skin and steel. Original setting and designs only, no existing-game symbols, costumes, names or licensed artwork.\nFaction art direction: CINDER MARCH: fortified burnt uplands financed by miners. Dark angular riveted iron, rust-red patched cloth, ash-gray stone, battered chamfered rectangular shields, angular kettle helmets, thick mining leather and short squared capes. Cart carries stone-cutting work gear under a dark red canvas. Settlements use terraced stone foundations, compact watch platforms, heavy lintels, squat square fortifications and a few restrained ember windows. Original insignia: a stepped three-block watchwall enclosing one small red ember. Angular stepped silhouette grammar; red is cloth/insignia, not globally red skin or metal; no horns or skull armor.",
+  "frames": [
+    {
+      "id": "ui.badge.cinder_march/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.cinder_march/cea674e493d5307cb5db41b020e2bcb65e58689b9edd4fc4f76d9c0bd5cbe1aa/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "a60c13e2384e3e1af9d1d5f6da66bf44539ab4d01aa1656e3a6d7bf582161630",
+    "sourceRefs": [
+      "assets/art/source/factions/cinder_march-v1.png",
+      "assets/art/source/faction-generation-prompts.json",
+      "assets/art/source/factions/crops-cinder_march.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game asset used. Service terms apply; model/seed not exposed and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "dddd0a48e3efae38655ba0a5fd960eca68212d0b41cf2f58de50a785b9a26997"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-faction-extraction",
+      "version": "1",
+      "profile": "registered-32",
+      "settingsHash": "142d20b15f2e3292c51ef3a62b55f163c2605cc364e2bee559b07ff8442f83c5",
+      "inputHash": "dddd0a48e3efae38655ba0a5fd960eca68212d0b41cf2f58de50a785b9a26997",
+      "outputHash": "25e8c0c01055edc87e205dc174ec3382e01b2435d6243f3762164d9fcbeac6e6"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "25e8c0c01055edc87e205dc174ec3382e01b2435d6243f3762164d9fcbeac6e6",
+      "outputHash": "9490abaee614364c11e7a0bb4f3a3d3d31ed3506cb4cd6e83ddb2251338742e2"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9490abaee614364c11e7a0bb4f3a3d3d31ed3506cb4cd6e83ddb2251338742e2",
+      "outputHash": "a3a9f156b61bed82e4ab208736f6c1028f3e502698d58abd6baedde97b9f74e3"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "f0420410fc7391b0e97dbb7330540b3a0cb84e6d84bdc8efa5e1cadd2d1e1cbe",
+      "outputHash": "3fb9f76dff076c3f306592e19700f67fe8e591d24b641ddc83452005c4f744db"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "ab18626931d652096ff5ede54fe8992c913bac223d76f67dd1037dd1a7029ed6",
+      "outputHash": "348088d867283d5eff4f2b5a267de3c9014b0a704d1fc5580e232b36a49a4674"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "f860ec7daff1847fc02bbbeeeeb8a41ebcee0b8c270f4e2076343d9d588737b7",
+      "outputHash": "dbf6223aef13a1857644f6c3d541ad525777a555ad49fff4347ff17eeb05b769"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.cinder_march.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-06T02:08:57.700Z",
+    "notes": "Native1x and exact4x processed contact sheet inspected against its explicit stable-ID order. Rust-red cloth, angular iron and stepped wall/ember heraldry; dark material values are deliberate, skin/metal accents remain readable. Simplified culture emblem remains isolated on32px canvas; silhouette and major heraldic shapes readable, fine detail intentionally reduced. Hard alpha, complete padded silhouette and consistent anchors; one static southeast pose only. Additional facings/action animation and live camera pixel-perfect fit are not approved by this review. Refreshed source-bound crop provenance; final processed PNG and decoded RGBA verified byte-identical to these inspected pixels.\nReviewed candidate cea674e493d5307cb5db41b020e2bcb65e58689b9edd4fc4f76d9c0bd5cbe1aa; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/247e32d4210f17835d5da3c3a428373ed74744c5145267dba9907e174f6d0088.png"
+    ],
+    "inputHash": "e95d9c8be1bf41b4dea202f1bb44adcf6aca4b420dc40f6098d9900b26ccc54e"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

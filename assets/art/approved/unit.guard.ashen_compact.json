@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.ashen_compact",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 4,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.ashen_compact"
+  ],
+  "prompt": "Create an original dark-fantasy pixel-art SPRITE SHEET PNG with a TRANSPARENT BACKGROUND (alpha channel, empty pixels have alpha 0). Square layout: 4 columns x 4 rows, 15 isolated sprites with generous clear spacing, last cell empty. Every sprite entirely inside its cell, including spear tips and banners. Consistent southeast three-quarter view. Restrained charcoal iron, warm ochre and bone cloth, dull brass; practical rectangular equipment, gabled timber and kiln-brick buildings. Culture: Ashen Compact, displaced craft households bound by public oaths. Original emblem: open square hearth frame enclosing an ember diamond. Adult proportions, weathered materials, crisp hard pixel edges, upper-left light. No text or labels.\nRow1: caravan traveler with covered cart; hooded scout with bow; guard sword/square shield; infantry upright pike.\nRow2: heavily armored shield infantry; armored horse and rider; officer with baton and pennant; surveyor with rolled chart and staff.\nRow3: engineer apron/hammer/satchel; small workshop village; larger market town; fortified gabled city.\nRow4: square-hearth crest; same emblem on standing narrow banner; simplified same emblem badge; empty.\nEXPORT PNG WITH REAL TRANSPARENCY; the area around the sprites is empty alpha, suitable for compositing directly onto a game map.",
+  "frames": [
+    {
+      "id": "unit.guard.ashen_compact/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard.ashen_compact/0ca26582386f941a4b60e2a7e8daba458f8587ed4739b446b86b198fae5832e5/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9fc9776c9a8eabc289eb1269c6121508469edd8463de7a58b54e8847c098dec9",
+    "sourceRefs": [
+      "assets/art/source/factions/ashen_compact-v4.png",
+      "assets/art/source/faction-revisions.json",
+      "assets/art/source/factions/crops-ashen_compact.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game asset used. Service terms apply; model/seed not exposed and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "a2522355c43e550a66c5b94a556c55385330f4d1b7fb9d89c0e8316101588de1"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-faction-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "dd7807f8a81768df18fd60d2fb3aa9381d1362de467d0e69ce20181878c35b95",
+      "inputHash": "a2522355c43e550a66c5b94a556c55385330f4d1b7fb9d89c0e8316101588de1",
+      "outputHash": "06716a992f85621b21dcff8323cde1cb30378e51256e0615bc7e9a618a7f7387"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "06716a992f85621b21dcff8323cde1cb30378e51256e0615bc7e9a618a7f7387",
+      "outputHash": "4a5a5be6269bf981e1ec345fffe4a670f7aa24bc84feaf277efb83e9aee515a4"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4a5a5be6269bf981e1ec345fffe4a670f7aa24bc84feaf277efb83e9aee515a4",
+      "outputHash": "e38b119e9d3bf69dab6d792de912eacaa715bb4bd61d9c906bb19b12a0b1b7bd"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "cbb50481c203312aab5440b48c5d897ace2800e7104663cf314668c60fd3967d",
+      "outputHash": "fc845d352c033b8d353eeacef72907426ce27777fa71be84b84e555eb1eb4748"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "36c2773e282a0b2cd3d38d5e034fbb2d4871c47ca241ef16b65d5e489e9d84c7",
+      "outputHash": "fd028702b7b1027bc5cca838de17717632869fb31219ea5b61d3ff87b024a589"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "b82fd25b2ac020eb6d27ef7fed4b662463b8ca8601627b8c6af9d12d63bb88ed",
+      "outputHash": "57754bd109c76f3b710e70888ee2c398bfd2cbfd64465007c072188fecd6bbfb"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.guard.ashen_compact.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-06T02:08:51.070Z",
+    "notes": "Native1x and enlarged processed contact sheet inspected in explicit stable-ID order. Ashen Compact ochre/bone cloth, rectangular iron and warm ember/brass equipment identity. Rectangular sword/shield, light helmet and ochre/bone cloth read as guard; complete feet and sword tip. Hard alpha, complete padded silhouette and registered pivot. One static southeast pose only; no additional action animation or pixel-perfect live camera claim.\nReviewed candidate 0ca26582386f941a4b60e2a7e8daba458f8587ed4739b446b86b198fae5832e5; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/bce3e6caa8d68305b168eb5663ac704593156c36416f751165792d90b7dd880d.png"
+    ],
+    "inputHash": "22b18d9519fb192edfed5eb70599c542116d83a02780752b5657add32f9aca3a"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

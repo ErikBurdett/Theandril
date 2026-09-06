@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "assetId": "terrain.ocean",
+  "inputHash": "c421c0ebfbb896bf2c7d6b72800acdd8de8c822d93c72be70a644cd88e3740c3",
+  "specificationHash": "fe21ea4d6b1018fa23ab8cc9641226ba4201cbd6ded87f54c034affc3f2f16c8",
+  "score": 100,
+  "passed": true,
+  "errors": [],
+  "warnings": [],
+  "manualChecks": [
+    "Originality, licensing and provenance review",
+    "Silhouette and role readability at native and zoomed scale",
+    "Anatomy, equipment continuity, lighting and material consistency",
+    "Inspect repeated/randomized terrain with neighboring biomes at every zoom; transitions and semantic road/river continuity are not established by mask tests"
+  ],
+  "metrics": [
+    {
+      "id": "terrain.ocean/idle/se/0",
+      "hash": "68e0afaf160a26b2c6a9b41540413be126f13d55e657ee2e13f9c1808b95a58d",
+      "colors": 13,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 2688,
+      "padding": 0,
+      "bounds": {
+        "x": 4,
+        "y": 0,
+        "w": 56,
+        "h": 64
+      },
+      "logicalGridErrors": 0
+    }
+  ]
+}

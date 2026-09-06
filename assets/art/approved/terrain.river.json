@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.river",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.river"
+  ],
+  "prompt": "Original muted blue east-west river overlay with dark banks and broken reflections on transparent 64x64, center anchor 32,32. Matching edge-e/edge-w endpoints x4/x59 around y32; one static idle/se piece, no turns, mouths, bridges, or junctions. Future art only; does not invent canonical rivers.",
+  "frames": [
+    {
+      "id": "terrain.river/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.river/28466956fd4147a51e3ab312e1cf5d29f2136d21cb439e475c51f8e81fcdf7ef/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "theandril-integer-overlay",
+    "model": "integer-overlay-v1",
+    "promptHash": "6e4169ab381a70848c3378a6067ccb6cb382a00e09beba12ea4d914efd7e3c0e",
+    "sourceRefs": [
+      "tools/art/create-overlay-briefs.ts"
+    ],
+    "licenseNotes": [
+      "Original integer-coordinate code-authored artwork for Theandril; no external bitmap references, model weights, or provider output used.",
+      "Source generator is retained in this repository; assets follow the project licensing policy. No third-party license rights are asserted."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-integer-overlay",
+      "version": "1",
+      "profile": "centered-overlay-64",
+      "settingsHash": "92d203289f3fc003cd461b8d35b10c5b38944f2a2d0e5ee471e5bd6c9a420db0",
+      "inputHash": "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff",
+      "outputHash": "1ddb34b60a2e98965702d05b9438046651bba558991ab2ab2a24ad02b94d00bb"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ddce7450763d79ab6435f7d07d4b3e1a6d9fc0a80a3d004801597931545f8a0e",
+      "outputHash": "058bccd5f0dc2900777c8493feddd2e57b46f22b9473455ef6d8abaf57697d23"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "058bccd5f0dc2900777c8493feddd2e57b46f22b9473455ef6d8abaf57697d23",
+      "outputHash": "7803e1dde8a5e6ac4cf2e065a0cf956c0a16d23709e50453dd6a4cea100b3cc1"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "4c97b523009c6c690158972b63ad5bb37f2d1ec14dc2871f09d36945e3033314",
+      "outputHash": "21a0510339749c13071972bef2600ecd496a1c8f8548c0aa99dc02cbd7e3452c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "038c63ab9d368f67491aa5c6f38f484db9bf67f292b5f25924bcaf34c79c1e33",
+      "outputHash": "08fa2889b8dd3d1e0748e8767454ee21557ae33f25d376a3468cb7f8fbd85889"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "f491a428ea684f72817f5b84ec74687dfcfe14a72bc38b279a8ee71e8e75b42c",
+      "outputHash": "8f1b9df836b876818339d69ab9b0be3573991eed4ffac7c26585b7b61ad2e0f9"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.river.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-05T21:03:24.693Z",
+    "notes": "Native and4x: dark banks, muted blue water and broken reflections form a readable straight east/west segment. Approved only for this isolated future piece; no mouths, turns, junctions or canonical rivers.\nReviewed candidate 28466956fd4147a51e3ab312e1cf5d29f2136d21cb439e475c51f8e81fcdf7ef; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0223190dafbba2c71c619bec551fe7be0a2dfdafe90280f5dee337a9113a1458.png"
+    ],
+    "inputHash": "2db1e560268b72a93f53a1adb8b154bab9d59863c9fec06699eb1b87672c36d8"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 16,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 32,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

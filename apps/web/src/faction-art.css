@@ -1,0 +1,28 @@
+.faction-art{display:inline-block;position:relative;flex:none;vertical-align:middle;background-repeat:no-repeat;image-rendering:pixelated;image-rendering:crisp-edges;overflow:hidden;color:#b8a475;box-sizing:content-box}
+.faction-art--loading,.faction-art--fallback{background-color:#17201980;outline:1px dashed #75674766;outline-offset:-1px}
+.faction-art-symbol{position:absolute;inset:0;display:grid;place-content:center;font-size:25px;line-height:1;opacity:.65}
+.faction-art-note{position:absolute;bottom:1px;left:0;right:0;text-align:center;background:#19211ee8;color:#c6bea1;font:8px/11px Arial,sans-serif;letter-spacing:0}
+.public-cultures{grid-column:1/-1;margin-top:24px;border-top:1px solid #60583e;padding-top:20px;min-width:0}
+.public-cultures>h3{font-size:calc(20px * var(--text-scale,1));margin-bottom:8px}
+.public-cultures>p,.public-culture-grid p{font-size:calc(11px * var(--text-scale,1));line-height:1.6;color:#abb19a;margin:0}
+.public-culture-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:15px}
+.public-culture-grid article{display:flex;align-items:center;gap:9px;min-width:0}
+.public-culture-grid h4{font-size:calc(13px * var(--text-scale,1));font-weight:500;color:#d8ca9f;margin:0 0 5px;overflow-wrap:anywhere}
+.faction-art-heading{display:flex;align-items:center;gap:10px;min-width:0}
+.faction-art-heading>div,.faction-art-heading>span:not(.faction-art){min-width:0}
+.faction-art-heading h2,.faction-art-heading h3{overflow-wrap:anywhere}
+.faction-art-card{display:flex;gap:8px;align-items:center;min-width:0}
+.faction-art-card>span:last-child{display:block;min-width:0;flex:1}
+.faction-art-card strong,.faction-art-card small{display:block}
+.build-options .faction-art-card strong{font-size:calc(12px * var(--text-scale,1));font-weight:500}
+.build-options .faction-art-card small{font-size:calc(10px * var(--text-scale,1));line-height:1.6;color:#b0b99e;margin-top:4px}
+/* Outrank the shell's later narrow two-column rule: native cavalry needs room for its text. */
+.inspector .build-options.faction-recruit-options,.inspector .character-appointments .build-options{grid-template-columns:minmax(0,1fr)}
+.peace-builder-heading h3{min-width:0;overflow-wrap:anywhere}
+.faction-encounter .faction-art-heading{margin-bottom:4px;font-size:calc(11px * var(--text-scale,1));font-weight:500}
+.character-row .faction-art{float:left;margin-right:8px}
+.character-row::after{content:'';display:block;clear:both}
+.character-sheet .faction-art-heading{align-items:flex-start}
+.character-identity .faction-art-heading{flex:1}
+.formation-choice .faction-art{margin-top:2px}
+@media(max-width:700px){.public-culture-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.character-identity{flex-wrap:wrap}.character-identity>.faction-art-heading{flex-basis:100%}.character-identity>button{margin-left:74px}.faction-art-card{gap:5px}}

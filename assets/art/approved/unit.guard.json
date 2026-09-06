@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard"
+  ],
+  "prompt": "Create an ORIGINAL production sprite sheet for Theandril, a gritty dark-fantasy hex strategy game about hearthland communities after the fall of the Witness Roads.\nExact sheet layout: 4 columns by 3 rows of equal square cells, no gutters, on a genuinely transparent background. Each cell is a 64 by 64 logical-pixel canvas shown at identical integer enlargement. Total logical sheet 256 x 192. Every figure fully contained inside its cell with generous transparent margins, feet on the same baseline at logical y=56, centered x=32. Orthographic three-quarter front view facing southeast, slightly seen from above, NOT isometric floor bases. No labels, grid lines, ground patches, shadows outside silhouette, text or watermarks.\nRow 1: SAME Oathguard in four genuinely different restrained idle breathing frames: weathered charcoal iron helmet, narrow eye slit, brown padded coat, bone-colored scarf, sturdy boots, short worn sword down in right hand and small angular buckler in left. Stocky adult human realistic proportions, NOT chibi; no horns or copied game character.\nRow 2: SAME Wayfinder scout in four restrained idle breathing frames: hooded olive wool cloak, leather bracers, travel pack, bow held diagonally, arrow quiver, face partly shadowed, lean adult human.\nRow 3: SAME Hearthcaravan in four idle frames: weathered small two-wheeled handcart with covered ash canvas, crates, old brass oath bell, and one hooded adult traveler walking beside it. Clear wagon/traveler silhouette, not a horse or knight.\nVisual style: authentic carefully hand-placed 64px pixel art, crisp square pixel clusters, hard edges, NO anti-aliasing, NO smooth gradients, NO blur, NO painterly texture, NO tiny dithering confetti. About 12-18 shared colors per row. Restrained charcoal/umber/oxidized iron/old bone palette with readable warm highlights. Northwest key light, dark but readable medium value bodies; serious worn fantasy craftsmanship. Animation registration and equipment identical throughout each row; only cloth/breathing posture subtle motion, feet remain planted. Make the whole sheet exact and useful as runtime game sprites, not a concept illustration.",
+  "frames": [
+    {
+      "id": "unit.guard/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard/71d4f2855958dc5302dfaf8cc9501dc97247bd6419a826de6ce0cda878e4913d/frame-0.png"
+    },
+    {
+      "id": "unit.guard/idle/se/1",
+      "direction": "se",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard/71d4f2855958dc5302dfaf8cc9501dc97247bd6419a826de6ce0cda878e4913d/frame-1.png"
+    },
+    {
+      "id": "unit.guard/idle/se/2",
+      "direction": "se",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard/71d4f2855958dc5302dfaf8cc9501dc97247bd6419a826de6ce0cda878e4913d/frame-2.png"
+    },
+    {
+      "id": "unit.guard/idle/se/3",
+      "direction": "se",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard/71d4f2855958dc5302dfaf8cc9501dc97247bd6419a826de6ce0cda878e4913d/frame-3.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 4,
+        "loop": true
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bca3d2a668f44e654bb28cebf509e2fbe1de8713ec7dd901c7a3ff34d2652c24",
+    "sourceRefs": [
+      "assets/art/source/units-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "8cfeac679957b1530c7a7f33c14309d35470a2014e0ef7350dfe4c6e5942fe4c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "2cda6ae24d873dd3420d4e774fce600166746e2af299f1c4bc74025aab79302f",
+      "inputHash": "8cfeac679957b1530c7a7f33c14309d35470a2014e0ef7350dfe4c6e5942fe4c",
+      "outputHash": "dcefdb3d51c36b6459c77a6148fb18730bf04b98c51d82829ffc2ab0dc4bacc0"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "692044dbff60ab307bce4108e7a9e73b9096909d982466a34b194ceb228e1d53",
+      "outputHash": "7e677927eed9f0bc28dadda88844a61b1a58dca10cb7f4122d50f210f44dacea"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7e677927eed9f0bc28dadda88844a61b1a58dca10cb7f4122d50f210f44dacea",
+      "outputHash": "84f3ef26f0dd53a586c03fb52c2ad8fb16168c255a1abe4948aaa4b6a99815f8"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "c516abe666f63caae58eb3e51639dc10c26b18329457a05554cc5a1c30c389d7",
+      "outputHash": "df396743722da3edcc909f2da6d7f330679b607720c7ab788e5a00bed41cbb5a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "29689b12dacb806f25afb7c884ac292a25582f1dec46e03d697548a91d83ffa0",
+      "outputHash": "bf6ace1d339bd5255d4829585579b42cb95e7f593ed3523b55075ff909286622"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "bf6ace1d339bd5255d4829585579b42cb95e7f593ed3523b55075ff909286622",
+      "outputHash": "6dfb078fb8bfee84883a6383a9a0bd6365be584363b8411b3ef3764a17f88290"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "4ba5334571f9d47afcd5bf3cedbd8afae269125f3e156a44a39ff2b0d2241c3d",
+      "outputHash": "852df0ce3692f71df8f8de4e6f0c7b3fc9a06875dcb4110a74af0b8163beaef9"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "84458fb0968a6c1d7ead73de66950d5ee2555c49159c39c8a5969d8c1a6c4745",
+      "outputHash": "a1d6bb978d707faf897d7df56dcebdc1da9603201bbb21f0232cea6dea80119c"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a1d6bb978d707faf897d7df56dcebdc1da9603201bbb21f0232cea6dea80119c",
+      "outputHash": "e82301725e6fe79ce740ac0feb58c86afbd9347b4300b26760e05053ae73eeb6"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "b480e7166b60312169c0e2e09e8b655fa80eda78a3ccc7de211c1c282587fc8a",
+      "outputHash": "ba8d3b42ed3826af316fd0b2fa09461eb447ea5dadefea7b2dfdb8bd277b16fc"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "dc95825fcca63a0ea18d466e71fb6ffe386710f7b14d9330b01e7760eee76513",
+      "outputHash": "c678d1e723ffc2f393ab58babaa3b6d014b8714aa0ca8c81122b26a74187a849"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c678d1e723ffc2f393ab58babaa3b6d014b8714aa0ca8c81122b26a74187a849",
+      "outputHash": "ad4f170c7c728e6387fa4b4cdf5774e9fe58d713dc4a75bcba0b35c3b0531784"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "79929dbfb9220690f3fdcbab027aba9042af94fdac3e36e1a95fdb6e55a8bf2c",
+      "outputHash": "1d06231116ad119abe5f37f83a57f2fcef92f1046c9b4e869fdc6dc18f66ddfa"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "e6aabddc954b7e62131c05efeb7a4f4ddbcb703da03f73bcfee8e0184c594025",
+      "inputHash": "1adc270e32b36144d67e7d3c5bdb9e236a4857a5a60aae32740065168c8cbd15",
+      "outputHash": "9bac073ee33641800b362803b1c4ef4fafd1e655f6e4b9dc6c5cd317a0be5565"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "776da3d3084197c549ceebbd4b65fc953aef24904fd0d1c87f6d44d82695fb4e",
+      "outputHash": "28d39847b10b51ed5707d8382d320941caebb25e1af531ae29d49b7d38a5efbc"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.guard.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex and independent renderer review",
+    "reviewedAt": "2026-09-05T20:37:32.213Z",
+    "notes": "Native and 4x review: helmet, pale collar, sword and shield readable; all four supplied idle frames hold the same foot baseline, with at most one pixel head/edge variation. Playback loop and neighbor overlap require in-game check.\nReviewed candidate 71d4f2855958dc5302dfaf8cc9501dc97247bd6419a826de6ce0cda878e4913d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5afe60bc3d3dd690f1c5bfcd899bb89e8426845c1d7076cd178b2498abdc20cf.png"
+    ],
+    "inputHash": "17a150c6bba51a2d1cd58cb3dbce2d1aaa2511937d5eed171490f33f3d728206"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

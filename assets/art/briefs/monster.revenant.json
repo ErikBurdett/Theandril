@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "monster.revenant",
+  "type": "monster",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "monster.revenant"
+  ],
+  "prompt": "Create ONE original strategic unit sprite for Theandril, dark fantasy pixel art. A Witness revenant: an upright dry skeletal human in patched umber burial wrappings, small battered dark iron face mask, tiny pale-green eye slits, one broad cracked stone oath tablet held firmly against the chest by BOTH visibly connected bony forearms and hands. Fingers visibly wrap the tablet edges; no detached or floating equipment. No sword, shield, cape, separate objects or ground. Full body with boots/wrapped feet, facing three-quarter southeast, slightly seen from above. Adult proportions, serious unsettling ancient guardian, original design. North-west lighting. Strong readable skeleton silhouette, bone ivory contrasts with weathered brown straps and charcoal mask. Native 64x64 logical pixels, figure only44pixels high and26pixels wide; square canvas with generous transparent margins on all sides. Feet on logical y56, center x32. Genuinely transparent background alpha, no backdrop, no painted checkerboard, no label, no typography, no watermark. Authentic hard square pixel clusters, not smooth painting; about12 muted colors, no antialias, no blur, no tiny noise. Produce crisp useful game sprite rather than concept illustration. Image may be integer-enlarged but preserve true square pixel clusters and simple native-scale anatomy.",
+  "frames": [
+    {
+      "id": "monster.revenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/monster.revenant/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "aee46e517cd397c8cf0aa01f6c0644e39b6a66511c728d450b6da9dd3c5a97c2",
+    "sourceRefs": [
+      "assets/art/source/revenant-v2.png",
+      "assets/art/source/revisions.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "c9601cb3c90606ccecb04dcbcc3fc91cf111f90cf662af5be31bd1dee8b468b2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "b321549a791120fd5e1f80cf792f7e0b64719e670e997dca3c132ba2993dbe79",
+      "inputHash": "c9601cb3c90606ccecb04dcbcc3fc91cf111f90cf662af5be31bd1dee8b468b2",
+      "outputHash": "8b511d96c475891c7f46e3c4e23fe64fcea2b80c6f8480034d7e0c257f72c04b"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

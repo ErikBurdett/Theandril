@@ -1,0 +1,3599 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    "unit.colonist.ashen_compact",
+    "unit.scout.ashen_compact",
+    "unit.guard.ashen_compact",
+    "unit.spearman.ashen_compact",
+    "unit.heavy_infantry.ashen_compact",
+    "unit.cavalry.ashen_compact",
+    "character.marshal.ashen_compact",
+    "character.surveyor.ashen_compact",
+    "character.engineer.ashen_compact",
+    "settlement.village.ashen_compact",
+    "settlement.town.ashen_compact",
+    "settlement.city.ashen_compact",
+    "ui.crest.ashen_compact",
+    "ui.badge.ashen_compact",
+    "ui.banner.ashen_compact",
+    "unit.colonist.reedbound_council",
+    "unit.scout.reedbound_council",
+    "unit.guard.reedbound_council",
+    "unit.spearman.reedbound_council",
+    "unit.heavy_infantry.reedbound_council",
+    "unit.cavalry.reedbound_council",
+    "character.marshal.reedbound_council",
+    "character.surveyor.reedbound_council",
+    "character.engineer.reedbound_council",
+    "settlement.village.reedbound_council",
+    "settlement.town.reedbound_council",
+    "settlement.city.reedbound_council",
+    "ui.crest.reedbound_council",
+    "ui.badge.reedbound_council",
+    "ui.banner.reedbound_council",
+    "unit.colonist.cinder_march",
+    "unit.scout.cinder_march",
+    "unit.guard.cinder_march",
+    "unit.spearman.cinder_march",
+    "unit.heavy_infantry.cinder_march",
+    "unit.cavalry.cinder_march",
+    "character.marshal.cinder_march",
+    "character.surveyor.cinder_march",
+    "character.engineer.cinder_march",
+    "settlement.village.cinder_march",
+    "settlement.town.cinder_march",
+    "settlement.city.cinder_march",
+    "ui.crest.cinder_march",
+    "ui.badge.cinder_march",
+    "ui.banner.cinder_march",
+    "unit.colonist.glass_tide",
+    "unit.scout.glass_tide",
+    "unit.guard.glass_tide",
+    "unit.spearman.glass_tide",
+    "unit.heavy_infantry.glass_tide",
+    "unit.cavalry.glass_tide",
+    "character.marshal.glass_tide",
+    "character.surveyor.glass_tide",
+    "character.engineer.glass_tide",
+    "settlement.village.glass_tide",
+    "settlement.town.glass_tide",
+    "settlement.city.glass_tide",
+    "ui.crest.glass_tide",
+    "ui.badge.glass_tide",
+    "ui.banner.glass_tide"
+  ],
+  "families": {
+    "ashen_compact": {
+      "source": "assets/art/source/factions/ashen_compact-v4.png",
+      "sourceHash": "a2522355c43e550a66c5b94a556c55385330f4d1b7fb9d89c0e8316101588de1",
+      "version": 4,
+      "assets": [
+        "unit.colonist.ashen_compact",
+        "unit.scout.ashen_compact",
+        "unit.guard.ashen_compact",
+        "unit.spearman.ashen_compact",
+        "unit.heavy_infantry.ashen_compact",
+        "unit.cavalry.ashen_compact",
+        "character.marshal.ashen_compact",
+        "character.surveyor.ashen_compact",
+        "character.engineer.ashen_compact",
+        "settlement.village.ashen_compact",
+        "settlement.town.ashen_compact",
+        "settlement.city.ashen_compact",
+        "ui.crest.ashen_compact",
+        "ui.banner.ashen_compact",
+        "ui.badge.ashen_compact"
+      ],
+      "extraction": [
+        {
+          "id": "unit.colonist.ashen_compact",
+          "role": "unit.colonist",
+          "cell": {
+            "x": 25,
+            "y": 45,
+            "w": 272,
+            "h": 274
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 272,
+            "h": 274
+          },
+          "nativeBounds": {
+            "x": 8,
+            "y": 8,
+            "w": 47,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 25,
+              "y": 45,
+              "w": 272,
+              "h": 274
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 272,
+              "h": 274
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "86f6f6eb88ae5d0e37f063dd36406c14dd130a6c719553ee9067d7b25de17215"
+        },
+        {
+          "id": "unit.scout.ashen_compact",
+          "role": "unit.scout",
+          "cell": {
+            "x": 399,
+            "y": 57,
+            "w": 210,
+            "h": 243
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 210,
+            "h": 243
+          },
+          "nativeBounds": {
+            "x": 12,
+            "y": 8,
+            "w": 40,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 399,
+              "y": 57,
+              "w": 210,
+              "h": 243
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 210,
+              "h": 243
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "1b43fca498c29ebf121db3c9d645a0067c1d9907a7ed05f91fe7abe9ddd30a9c"
+        },
+        {
+          "id": "unit.guard.ashen_compact",
+          "role": "unit.guard",
+          "cell": {
+            "x": 669,
+            "y": 48,
+            "w": 219,
+            "h": 247
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 219,
+            "h": 247
+          },
+          "nativeBounds": {
+            "x": 11,
+            "y": 8,
+            "w": 42,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 669,
+              "y": 48,
+              "w": 219,
+              "h": 247
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 219,
+              "h": 247
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "06716a992f85621b21dcff8323cde1cb30378e51256e0615bc7e9a618a7f7387"
+        },
+        {
+          "id": "unit.spearman.ashen_compact",
+          "role": "unit.spearman",
+          "cell": {
+            "x": 1049,
+            "y": 13,
+            "w": 167,
+            "h": 299
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 167,
+            "h": 299
+          },
+          "nativeBounds": {
+            "x": 17,
+            "y": 3,
+            "w": 30,
+            "h": 53
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 1049,
+              "y": 13,
+              "w": 167,
+              "h": 299
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 167,
+              "h": 299
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 54,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "f7e53c745376b63bed63081c98adaf445136705b56825bd706b01e41264c2a4f"
+        },
+        {
+          "id": "unit.heavy_infantry.ashen_compact",
+          "role": "unit.heavy_infantry",
+          "cell": {
+            "x": 50,
+            "y": 344,
+            "w": 199,
+            "h": 266
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 199,
+            "h": 266
+          },
+          "nativeBounds": {
+            "x": 14,
+            "y": 8,
+            "w": 35,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 50,
+              "y": 344,
+              "w": 199,
+              "h": 266
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 199,
+              "h": 266
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "3eae4f94e43b162d8736936daa373f5cfcd3cf254884551f6fde7a5e691f670c"
+        },
+        {
+          "id": "unit.cavalry.ashen_compact",
+          "role": "unit.cavalry",
+          "cell": {
+            "x": 343,
+            "y": 321,
+            "w": 261,
+            "h": 300
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 261,
+            "h": 300
+          },
+          "nativeBounds": {
+            "x": 14,
+            "y": 2,
+            "w": 67,
+            "h": 78
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 343,
+              "y": 321,
+              "w": 261,
+              "h": 300
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 261,
+              "h": 300
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "9ee8c15e545f002435a828d99dbf2dcb30719532d2a029d8b24f6982cb27d22d"
+        },
+        {
+          "id": "character.marshal.ashen_compact",
+          "role": "character.marshal",
+          "cell": {
+            "x": 688,
+            "y": 318,
+            "w": 255,
+            "h": 298
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 255,
+            "h": 298
+          },
+          "nativeBounds": {
+            "x": 11,
+            "y": 8,
+            "w": 41,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 688,
+              "y": 318,
+              "w": 255,
+              "h": 298
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 255,
+              "h": 298
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "4044b0baef94d1c05334ea078c2e7785ea3f51b286bd56edda9380c1fdb9829a"
+        },
+        {
+          "id": "character.surveyor.ashen_compact",
+          "role": "character.surveyor",
+          "cell": {
+            "x": 1036,
+            "y": 346,
+            "w": 151,
+            "h": 272
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 151,
+            "h": 272
+          },
+          "nativeBounds": {
+            "x": 19,
+            "y": 8,
+            "w": 26,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 1036,
+              "y": 346,
+              "w": 151,
+              "h": 272
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 151,
+              "h": 272
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "283b9629aebfd972b3156896a3a85ce1cb5bf955c3c49147ac732dd1001755f5"
+        },
+        {
+          "id": "character.engineer.ashen_compact",
+          "role": "character.engineer",
+          "cell": {
+            "x": 80,
+            "y": 653,
+            "w": 161,
+            "h": 263
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 161,
+            "h": 263
+          },
+          "nativeBounds": {
+            "x": 17,
+            "y": 8,
+            "w": 29,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 80,
+              "y": 653,
+              "w": 161,
+              "h": 263
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 161,
+              "h": 263
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "bcee441cee2dea9b9da4eb77116bf91f390744abdc60ff547d9c47180c535192"
+        },
+        {
+          "id": "settlement.village.ashen_compact",
+          "role": "settlement.village",
+          "cell": {
+            "x": 321,
+            "y": 641,
+            "w": 295,
+            "h": 282
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 295,
+            "h": 282
+          },
+          "nativeBounds": {
+            "x": 7,
+            "y": 3,
+            "w": 81,
+            "h": 77
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 321,
+              "y": 641,
+              "w": 295,
+              "h": 282
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 295,
+              "h": 282
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "34e93364776bda630a4f65ab8a7cc049927afde5fd41b583eed82614b91c38d2"
+        },
+        {
+          "id": "settlement.town.ashen_compact",
+          "role": "settlement.town",
+          "cell": {
+            "x": 635,
+            "y": 628,
+            "w": 300,
+            "h": 304
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 300,
+            "h": 304
+          },
+          "nativeBounds": {
+            "x": 10,
+            "y": 3,
+            "w": 76,
+            "h": 77
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 635,
+              "y": 628,
+              "w": 300,
+              "h": 304
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 300,
+              "h": 304
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "2aca392581de69a8df5460cefdd86b36f9d21dc15f9473292a24ac0d8e5e93f2"
+        },
+        {
+          "id": "settlement.city.ashen_compact",
+          "role": "settlement.city",
+          "cell": {
+            "x": 948,
+            "y": 629,
+            "w": 301,
+            "h": 306
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 301,
+            "h": 306
+          },
+          "nativeBounds": {
+            "x": 10,
+            "y": 2,
+            "w": 108,
+            "h": 110
+          },
+          "pivot": [
+            64,
+            112
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 948,
+              "y": 629,
+              "w": 301,
+              "h": 306
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 301,
+              "h": 306
+            },
+            "contract": {
+              "native": 128,
+              "pivot": [
+                64,
+                112
+              ],
+              "maxHeight": 110,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "4787721196bcc3154815cda71c6669d351e5f449c0b43c5b855b1a21b84f0b0d"
+        },
+        {
+          "id": "ui.crest.ashen_compact",
+          "role": "ui.crest",
+          "cell": {
+            "x": 38,
+            "y": 945,
+            "w": 240,
+            "h": 282
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 240,
+            "h": 282
+          },
+          "nativeBounds": {
+            "x": 6,
+            "y": 2,
+            "w": 51,
+            "h": 60
+          },
+          "pivot": [
+            32,
+            32
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 38,
+              "y": 945,
+              "w": 240,
+              "h": 282
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 240,
+              "h": 282
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                32
+              ],
+              "maxHeight": 60,
+              "centered": true,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "83ef7be64dff5a7fd8341e0bea6b4e5627d7003693ef1b94249dc32e19baff54"
+        },
+        {
+          "id": "ui.banner.ashen_compact",
+          "role": "ui.banner",
+          "cell": {
+            "x": 400,
+            "y": 937,
+            "w": 142,
+            "h": 297
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 142,
+            "h": 297
+          },
+          "nativeBounds": {
+            "x": 19,
+            "y": 2,
+            "w": 25,
+            "h": 54
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 400,
+              "y": 937,
+              "w": 142,
+              "h": 297
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 142,
+              "h": 297
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 54,
+              "centered": false,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "6d7529045c30c037e637ea09a534cad593c93c6b01272af85c46c76b9f7c899e"
+        },
+        {
+          "id": "ui.badge.ashen_compact",
+          "role": "ui.badge",
+          "cell": {
+            "x": 684,
+            "y": 980,
+            "w": 205,
+            "h": 205
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 205,
+            "h": 205
+          },
+          "nativeBounds": {
+            "x": 2,
+            "y": 2,
+            "w": 28,
+            "h": 28
+          },
+          "pivot": [
+            16,
+            16
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 684,
+              "y": 980,
+              "w": 205,
+              "h": 205
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 205,
+              "h": 205
+            },
+            "contract": {
+              "native": 32,
+              "pivot": [
+                16,
+                16
+              ],
+              "maxHeight": 28,
+              "centered": true,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "70a7f06634d5769be117c3b6471323cf19f0bc7708d5f7c747b56a3fc2661b59"
+        }
+      ],
+      "warnings": []
+    },
+    "reedbound_council": {
+      "source": "assets/art/source/factions/reedbound_council-v1.png",
+      "sourceHash": "3815981ffa4216ae24d72cc196439b912d10af2b74666226bf49c412acad02e9",
+      "version": 1,
+      "assets": [
+        "unit.colonist.reedbound_council",
+        "unit.scout.reedbound_council",
+        "unit.guard.reedbound_council",
+        "unit.spearman.reedbound_council",
+        "unit.heavy_infantry.reedbound_council",
+        "unit.cavalry.reedbound_council",
+        "character.marshal.reedbound_council",
+        "character.surveyor.reedbound_council",
+        "character.engineer.reedbound_council",
+        "settlement.village.reedbound_council",
+        "settlement.town.reedbound_council",
+        "settlement.city.reedbound_council",
+        "ui.crest.reedbound_council",
+        "ui.banner.reedbound_council",
+        "ui.badge.reedbound_council"
+      ],
+      "extraction": [
+        {
+          "id": "unit.colonist.reedbound_council",
+          "role": "unit.colonist",
+          "cell": {
+            "x": 14,
+            "y": 49,
+            "w": 271,
+            "h": 257
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 271,
+            "h": 257
+          },
+          "nativeBounds": {
+            "x": 7,
+            "y": 8,
+            "w": 50,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 14,
+              "y": 49,
+              "w": 271,
+              "h": 257
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 271,
+              "h": 257
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "8c8470e214fa4fc6b4d5eadeb06cb7cc7fc3aae3b0805505fb62b484970d0b72"
+        },
+        {
+          "id": "unit.scout.reedbound_council",
+          "role": "unit.scout",
+          "cell": {
+            "x": 387,
+            "y": 29,
+            "w": 166,
+            "h": 268
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 166,
+            "h": 268
+          },
+          "nativeBounds": {
+            "x": 17,
+            "y": 8,
+            "w": 29,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 387,
+              "y": 29,
+              "w": 166,
+              "h": 268
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 166,
+              "h": 268
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "5470c0b19c3afd1584c6b4d6b96c2206326907b3735583c1b3ca00740fc6b6f3"
+        },
+        {
+          "id": "unit.guard.reedbound_council",
+          "role": "unit.guard",
+          "cell": {
+            "x": 727,
+            "y": 35,
+            "w": 152,
+            "h": 264
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 152,
+            "h": 264
+          },
+          "nativeBounds": {
+            "x": 18,
+            "y": 8,
+            "w": 27,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 727,
+              "y": 35,
+              "w": 152,
+              "h": 264
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 152,
+              "h": 264
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "9ddf40f515e4a1b764e8699ac37207e5e2bd0e75e1ce02f98d49ff2d4ec92ce7"
+        },
+        {
+          "id": "unit.spearman.reedbound_council",
+          "role": "unit.spearman",
+          "cell": {
+            "x": 1047,
+            "y": 4,
+            "w": 112,
+            "h": 303
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 112,
+            "h": 303
+          },
+          "nativeBounds": {
+            "x": 22,
+            "y": 2,
+            "w": 19,
+            "h": 54
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 1047,
+              "y": 4,
+              "w": 112,
+              "h": 303
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 112,
+              "h": 303
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 54,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "025339fba42d50ce762242e20626f0c369949e64de0baed0c3db2ddb44fce559"
+        },
+        {
+          "id": "unit.heavy_infantry.reedbound_council",
+          "role": "unit.heavy_infantry",
+          "cell": {
+            "x": 72,
+            "y": 323,
+            "w": 175,
+            "h": 285
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 175,
+            "h": 285
+          },
+          "nativeBounds": {
+            "x": 17,
+            "y": 8,
+            "w": 29,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 72,
+              "y": 323,
+              "w": 175,
+              "h": 285
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 175,
+              "h": 285
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "babf03df0848545b6b5c0e5e5040f3936a0a7fc44d7a54738f5493b36e58c453"
+        },
+        {
+          "id": "unit.cavalry.reedbound_council",
+          "role": "unit.cavalry",
+          "cell": {
+            "x": 357,
+            "y": 307,
+            "w": 259,
+            "h": 330
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 259,
+            "h": 330
+          },
+          "nativeBounds": {
+            "x": 17,
+            "y": 2,
+            "w": 61,
+            "h": 78
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 357,
+              "y": 307,
+              "w": 259,
+              "h": 330
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 259,
+              "h": 330
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "b3ec6213fec827b76e11ded71a701e693a48404c795d59a2867745a1267dc6c8"
+        },
+        {
+          "id": "character.marshal.reedbound_council",
+          "role": "character.marshal",
+          "cell": {
+            "x": 695,
+            "y": 316,
+            "w": 266,
+            "h": 303
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 266,
+            "h": 303
+          },
+          "nativeBounds": {
+            "x": 11,
+            "y": 8,
+            "w": 42,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 695,
+              "y": 316,
+              "w": 266,
+              "h": 303
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 266,
+              "h": 303
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "d68226a769d37a28c6f3ec97d8fe13e3a1e9cfe1873e20cb148e39bf22929e6d"
+        },
+        {
+          "id": "character.surveyor.reedbound_council",
+          "role": "character.surveyor",
+          "cell": {
+            "x": 1034,
+            "y": 349,
+            "w": 142,
+            "h": 259
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 142,
+            "h": 259
+          },
+          "nativeBounds": {
+            "x": 19,
+            "y": 8,
+            "w": 26,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 1034,
+              "y": 349,
+              "w": 142,
+              "h": 259
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 142,
+              "h": 259
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "ac31cc6a9b2b1886df7600d90872502e216128fab5547d5d6ea2b71b11b93acd"
+        },
+        {
+          "id": "character.engineer.reedbound_council",
+          "role": "character.engineer",
+          "cell": {
+            "x": 75,
+            "y": 637,
+            "w": 170,
+            "h": 281
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 170,
+            "h": 281
+          },
+          "nativeBounds": {
+            "x": 17,
+            "y": 8,
+            "w": 29,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 75,
+              "y": 637,
+              "w": 170,
+              "h": 281
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 170,
+              "h": 281
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "415820ab20628f4ce782690442ec37fa6414d3c7cdeb7416b2d3a669ded96a1c"
+        },
+        {
+          "id": "settlement.village.reedbound_council",
+          "role": "settlement.village",
+          "cell": {
+            "x": 324,
+            "y": 643,
+            "w": 285,
+            "h": 280
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 285,
+            "h": 280
+          },
+          "nativeBounds": {
+            "x": 8,
+            "y": 2,
+            "w": 79,
+            "h": 78
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 324,
+              "y": 643,
+              "w": 285,
+              "h": 280
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 285,
+              "h": 280
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "78faf545ce77c968814de99687c26ebbf67a7d63a0c2f6ef105662852452d23a"
+        },
+        {
+          "id": "settlement.town.reedbound_council",
+          "role": "settlement.town",
+          "cell": {
+            "x": 643,
+            "y": 626,
+            "w": 288,
+            "h": 305
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 288,
+            "h": 305
+          },
+          "nativeBounds": {
+            "x": 11,
+            "y": 3,
+            "w": 73,
+            "h": 77
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 643,
+              "y": 626,
+              "w": 288,
+              "h": 305
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 288,
+              "h": 305
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "f040cb7737c8ccae55cb2941c9c2041567e8bed5a41329144a1bc3e9ca8f115e"
+        },
+        {
+          "id": "settlement.city.reedbound_council",
+          "role": "settlement.city",
+          "cell": {
+            "x": 948,
+            "y": 625,
+            "w": 299,
+            "h": 316
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 299,
+            "h": 316
+          },
+          "nativeBounds": {
+            "x": 12,
+            "y": 2,
+            "w": 104,
+            "h": 110
+          },
+          "pivot": [
+            64,
+            112
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 948,
+              "y": 625,
+              "w": 299,
+              "h": 316
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 299,
+              "h": 316
+            },
+            "contract": {
+              "native": 128,
+              "pivot": [
+                64,
+                112
+              ],
+              "maxHeight": 110,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "0308fd8a70e06c1708ce56b96082f94c22db6ebaa2176cdea551a4a77728e3a6"
+        },
+        {
+          "id": "ui.crest.reedbound_council",
+          "role": "ui.crest",
+          "cell": {
+            "x": 37,
+            "y": 937,
+            "w": 238,
+            "h": 300
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 238,
+            "h": 300
+          },
+          "nativeBounds": {
+            "x": 8,
+            "y": 2,
+            "w": 47,
+            "h": 60
+          },
+          "pivot": [
+            32,
+            32
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 37,
+              "y": 937,
+              "w": 238,
+              "h": 300
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 238,
+              "h": 300
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                32
+              ],
+              "maxHeight": 60,
+              "centered": true,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "dde9c6a716c307b84c550eebc7f92238b6b2265bb61a1a9be695f524aad3a524"
+        },
+        {
+          "id": "ui.banner.reedbound_council",
+          "role": "ui.banner",
+          "cell": {
+            "x": 408,
+            "y": 937,
+            "w": 126,
+            "h": 303
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 126,
+            "h": 303
+          },
+          "nativeBounds": {
+            "x": 21,
+            "y": 2,
+            "w": 22,
+            "h": 54
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 408,
+              "y": 937,
+              "w": 126,
+              "h": 303
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 126,
+              "h": 303
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 54,
+              "centered": false,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "be4b74b1d8b7a1562820c7bd25d333d1e3ff807ee8e4eb9ae7bd37453ceb6578"
+        },
+        {
+          "id": "ui.badge.reedbound_council",
+          "role": "ui.badge",
+          "cell": {
+            "x": 703,
+            "y": 991,
+            "w": 162,
+            "h": 174
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 162,
+            "h": 174
+          },
+          "nativeBounds": {
+            "x": 3,
+            "y": 2,
+            "w": 26,
+            "h": 28
+          },
+          "pivot": [
+            16,
+            16
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 703,
+              "y": 991,
+              "w": 162,
+              "h": 174
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 162,
+              "h": 174
+            },
+            "contract": {
+              "native": 32,
+              "pivot": [
+                16,
+                16
+              ],
+              "maxHeight": 28,
+              "centered": true,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "e2a4dcc6906f37df3675ac5831bfc85621fb5a2c73be88c0f1664bb019ee18a0"
+        }
+      ],
+      "warnings": []
+    },
+    "cinder_march": {
+      "source": "assets/art/source/factions/cinder_march-v1.png",
+      "sourceHash": "dddd0a48e3efae38655ba0a5fd960eca68212d0b41cf2f58de50a785b9a26997",
+      "version": 1,
+      "assets": [
+        "unit.colonist.cinder_march",
+        "unit.scout.cinder_march",
+        "unit.guard.cinder_march",
+        "unit.spearman.cinder_march",
+        "unit.heavy_infantry.cinder_march",
+        "unit.cavalry.cinder_march",
+        "character.marshal.cinder_march",
+        "character.surveyor.cinder_march",
+        "character.engineer.cinder_march",
+        "settlement.village.cinder_march",
+        "settlement.town.cinder_march",
+        "settlement.city.cinder_march",
+        "ui.crest.cinder_march",
+        "ui.banner.cinder_march",
+        "ui.badge.cinder_march"
+      ],
+      "extraction": [
+        {
+          "id": "unit.colonist.cinder_march",
+          "role": "unit.colonist",
+          "cell": {
+            "x": 24,
+            "y": 65,
+            "w": 287,
+            "h": 235
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 287,
+            "h": 235
+          },
+          "nativeBounds": {
+            "x": 3,
+            "y": 8,
+            "w": 58,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 24,
+              "y": 65,
+              "w": 287,
+              "h": 235
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 287,
+              "h": 235
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "8491f9c06a16a5477645d9009519741af3ba8e1161b46e0601e6103f29f4899b"
+        },
+        {
+          "id": "unit.scout.cinder_march",
+          "role": "unit.scout",
+          "cell": {
+            "x": 406,
+            "y": 43,
+            "w": 175,
+            "h": 255
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 175,
+            "h": 255
+          },
+          "nativeBounds": {
+            "x": 16,
+            "y": 8,
+            "w": 32,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 406,
+              "y": 43,
+              "w": 175,
+              "h": 255
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 175,
+              "h": 255
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "8f7f3a289d2d698d685885c5dc4d9159cb23ccbccdf67a3f2e803befc955b61c"
+        },
+        {
+          "id": "unit.guard.cinder_march",
+          "role": "unit.guard",
+          "cell": {
+            "x": 711,
+            "y": 49,
+            "w": 153,
+            "h": 250
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 153,
+            "h": 250
+          },
+          "nativeBounds": {
+            "x": 17,
+            "y": 8,
+            "w": 29,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 711,
+              "y": 49,
+              "w": 153,
+              "h": 250
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 153,
+              "h": 250
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "9e8b28ad0c94ab9b805650d2a5218ec9a87bd1c77e660aff14931e3031c84a74"
+        },
+        {
+          "id": "unit.spearman.cinder_march",
+          "role": "unit.spearman",
+          "cell": {
+            "x": 1058,
+            "y": 0,
+            "w": 123,
+            "h": 300
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 123,
+            "h": 300
+          },
+          "nativeBounds": {
+            "x": 21,
+            "y": 3,
+            "w": 22,
+            "h": 53
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 1058,
+              "y": 0,
+              "w": 123,
+              "h": 300
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 123,
+              "h": 300
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 54,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "429d28939cf45fb605fa671d7775359ef1f387b4b33977765317e6a9c7ea12fb"
+        },
+        {
+          "id": "unit.heavy_infantry.cinder_march",
+          "role": "unit.heavy_infantry",
+          "cell": {
+            "x": 63,
+            "y": 345,
+            "w": 181,
+            "h": 263
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 181,
+            "h": 263
+          },
+          "nativeBounds": {
+            "x": 15,
+            "y": 8,
+            "w": 33,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 63,
+              "y": 345,
+              "w": 181,
+              "h": 263
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 181,
+              "h": 263
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "a7c0b4203f74e47615c5573fee3b4acab11277ef70c54bccf5dc6ee80dc80a50"
+        },
+        {
+          "id": "unit.cavalry.cinder_march",
+          "role": "unit.cavalry",
+          "cell": {
+            "x": 353,
+            "y": 311,
+            "w": 264,
+            "h": 314
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 264,
+            "h": 314
+          },
+          "nativeBounds": {
+            "x": 15,
+            "y": 2,
+            "w": 65,
+            "h": 78
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 353,
+              "y": 311,
+              "w": 264,
+              "h": 314
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 264,
+              "h": 314
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "ab5384f2c6a9c0e342b1b9da94b8ca58493c6baaec0611075e45ca5ba4944e08"
+        },
+        {
+          "id": "character.marshal.cinder_march",
+          "role": "character.marshal",
+          "cell": {
+            "x": 668,
+            "y": 305,
+            "w": 252,
+            "h": 315
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 252,
+            "h": 315
+          },
+          "nativeBounds": {
+            "x": 13,
+            "y": 8,
+            "w": 38,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 668,
+              "y": 305,
+              "w": 252,
+              "h": 315
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 252,
+              "h": 315
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "449bcedff31808897ddfc30e73d5d74ee975094f10b8299157ac3076e40149ee"
+        },
+        {
+          "id": "character.surveyor.cinder_march",
+          "role": "character.surveyor",
+          "cell": {
+            "x": 1048,
+            "y": 365,
+            "w": 135,
+            "h": 243
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 135,
+            "h": 243
+          },
+          "nativeBounds": {
+            "x": 19,
+            "y": 8,
+            "w": 26,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 1048,
+              "y": 365,
+              "w": 135,
+              "h": 243
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 135,
+              "h": 243
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "175a34ff696b99548bb8efa16cb0924bcc7b7dc800a1fa7f4a52371e8e93c8dc"
+        },
+        {
+          "id": "character.engineer.cinder_march",
+          "role": "character.engineer",
+          "cell": {
+            "x": 100,
+            "y": 665,
+            "w": 135,
+            "h": 246
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 135,
+            "h": 246
+          },
+          "nativeBounds": {
+            "x": 19,
+            "y": 8,
+            "w": 26,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 100,
+              "y": 665,
+              "w": 135,
+              "h": 246
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 135,
+              "h": 246
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "fe7bc905490799cf7606d73b8d1dd6bd09555f20ed75d9e6e623429089c02b48"
+        },
+        {
+          "id": "settlement.village.cinder_march",
+          "role": "settlement.village",
+          "cell": {
+            "x": 331,
+            "y": 647,
+            "w": 285,
+            "h": 272
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 285,
+            "h": 272
+          },
+          "nativeBounds": {
+            "x": 7,
+            "y": 2,
+            "w": 81,
+            "h": 78
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 331,
+              "y": 647,
+              "w": 285,
+              "h": 272
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 285,
+              "h": 272
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "877dd64b402d584c5bca62c10b10ed4028313475f244c0ff8ef6baf3ce82bc49"
+        },
+        {
+          "id": "settlement.town.cinder_march",
+          "role": "settlement.town",
+          "cell": {
+            "x": 638,
+            "y": 652,
+            "w": 291,
+            "h": 280
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 291,
+            "h": 280
+          },
+          "nativeBounds": {
+            "x": 7,
+            "y": 2,
+            "w": 81,
+            "h": 78
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 638,
+              "y": 652,
+              "w": 291,
+              "h": 280
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 291,
+              "h": 280
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "97500cd3a1442028a47c01a01afdaa28e089334266b1c1bb64d17e0d2bfd2014"
+        },
+        {
+          "id": "settlement.city.cinder_march",
+          "role": "settlement.city",
+          "cell": {
+            "x": 944,
+            "y": 628,
+            "w": 304,
+            "h": 317
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 304,
+            "h": 317
+          },
+          "nativeBounds": {
+            "x": 11,
+            "y": 2,
+            "w": 105,
+            "h": 110
+          },
+          "pivot": [
+            64,
+            112
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 944,
+              "y": 628,
+              "w": 304,
+              "h": 317
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 304,
+              "h": 317
+            },
+            "contract": {
+              "native": 128,
+              "pivot": [
+                64,
+                112
+              ],
+              "maxHeight": 110,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "bf452ec07e633612aa919d37cf6ac0c990ae73d7cd5f8f12311814abd680bd4b"
+        },
+        {
+          "id": "ui.crest.cinder_march",
+          "role": "ui.crest",
+          "cell": {
+            "x": 49,
+            "y": 955,
+            "w": 215,
+            "h": 257
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 215,
+            "h": 257
+          },
+          "nativeBounds": {
+            "x": 7,
+            "y": 2,
+            "w": 50,
+            "h": 60
+          },
+          "pivot": [
+            32,
+            32
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 49,
+              "y": 955,
+              "w": 215,
+              "h": 257
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 215,
+              "h": 257
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                32
+              ],
+              "maxHeight": 60,
+              "centered": true,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "05d99cbd3cdf869bda49c9d23ef72b7102f4c8c67afaee3bf464fbb64b2c5916"
+        },
+        {
+          "id": "ui.banner.cinder_march",
+          "role": "ui.banner",
+          "cell": {
+            "x": 420,
+            "y": 934,
+            "w": 116,
+            "h": 295
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 116,
+            "h": 295
+          },
+          "nativeBounds": {
+            "x": 21,
+            "y": 2,
+            "w": 21,
+            "h": 54
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 420,
+              "y": 934,
+              "w": 116,
+              "h": 295
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 116,
+              "h": 295
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 54,
+              "centered": false,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "ae1562efaafc5bf46f3e1ebca62625187d427e512f5e7b6ba03e7b843bf421d1"
+        },
+        {
+          "id": "ui.badge.cinder_march",
+          "role": "ui.badge",
+          "cell": {
+            "x": 716,
+            "y": 1026,
+            "w": 135,
+            "h": 107
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 135,
+            "h": 107
+          },
+          "nativeBounds": {
+            "x": 2,
+            "y": 5,
+            "w": 28,
+            "h": 22
+          },
+          "pivot": [
+            16,
+            16
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 716,
+              "y": 1026,
+              "w": 135,
+              "h": 107
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 135,
+              "h": 107
+            },
+            "contract": {
+              "native": 32,
+              "pivot": [
+                16,
+                16
+              ],
+              "maxHeight": 28,
+              "centered": true,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "25e8c0c01055edc87e205dc174ec3382e01b2435d6243f3762164d9fcbeac6e6"
+        }
+      ],
+      "warnings": [
+        "unit.spearman: crop touches original source edge; inspect for an already-clipped source feature."
+      ]
+    },
+    "glass_tide": {
+      "source": "assets/art/source/factions/glass_tide-v1.png",
+      "sourceHash": "86d56e6c3c731f7dc19e27078a047b8b61db2933de9daa7562360dfe68aee054",
+      "version": 1,
+      "assets": [
+        "unit.colonist.glass_tide",
+        "unit.scout.glass_tide",
+        "unit.guard.glass_tide",
+        "unit.spearman.glass_tide",
+        "unit.heavy_infantry.glass_tide",
+        "unit.cavalry.glass_tide",
+        "character.marshal.glass_tide",
+        "character.surveyor.glass_tide",
+        "character.engineer.glass_tide",
+        "settlement.village.glass_tide",
+        "settlement.town.glass_tide",
+        "settlement.city.glass_tide",
+        "ui.crest.glass_tide",
+        "ui.banner.glass_tide",
+        "ui.badge.glass_tide"
+      ],
+      "extraction": [
+        {
+          "id": "unit.colonist.glass_tide",
+          "role": "unit.colonist",
+          "cell": {
+            "x": 34,
+            "y": 99,
+            "w": 277,
+            "h": 217
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 277,
+            "h": 217
+          },
+          "nativeBounds": {
+            "x": 2,
+            "y": 9,
+            "w": 60,
+            "h": 47
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 34,
+              "y": 99,
+              "w": 277,
+              "h": 217
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 277,
+              "h": 217
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "7115f74e7433f5d8ba2572cafecdce22d35d2f12f5f30ae5191932071f4704fe"
+        },
+        {
+          "id": "unit.scout.glass_tide",
+          "role": "unit.scout",
+          "cell": {
+            "x": 400,
+            "y": 48,
+            "w": 186,
+            "h": 260
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 186,
+            "h": 260
+          },
+          "nativeBounds": {
+            "x": 15,
+            "y": 8,
+            "w": 34,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 400,
+              "y": 48,
+              "w": 186,
+              "h": 260
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 186,
+              "h": 260
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "a2e0c331cfafd0829715cd6eb10ae55e66c77745eb2621f68f8a461667d3ab93"
+        },
+        {
+          "id": "unit.guard.glass_tide",
+          "role": "unit.guard",
+          "cell": {
+            "x": 659,
+            "y": 64,
+            "w": 222,
+            "h": 246
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 222,
+            "h": 246
+          },
+          "nativeBounds": {
+            "x": 10,
+            "y": 8,
+            "w": 43,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 659,
+              "y": 64,
+              "w": 222,
+              "h": 246
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 222,
+              "h": 246
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "7d9d5276953abbc6ba867d45a74bde388e6866516c8fad61a3c0a5119d2d36d5"
+        },
+        {
+          "id": "unit.spearman.glass_tide",
+          "role": "unit.spearman",
+          "cell": {
+            "x": 981,
+            "y": 6,
+            "w": 181,
+            "h": 304
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 181,
+            "h": 304
+          },
+          "nativeBounds": {
+            "x": 16,
+            "y": 2,
+            "w": 32,
+            "h": 54
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 981,
+              "y": 6,
+              "w": 181,
+              "h": 304
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 181,
+              "h": 304
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 54,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "3fb793f44ed4be2c5ca2c1b49b3f739e0a3b53c453c529043ffaaffaf086add7"
+        },
+        {
+          "id": "unit.heavy_infantry.glass_tide",
+          "role": "unit.heavy_infantry",
+          "cell": {
+            "x": 63,
+            "y": 353,
+            "w": 185,
+            "h": 268
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 185,
+            "h": 268
+          },
+          "nativeBounds": {
+            "x": 15,
+            "y": 8,
+            "w": 33,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 63,
+              "y": 353,
+              "w": 185,
+              "h": 268
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 185,
+              "h": 268
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "bff1dfeef7a7272366f263f474ad79b2bed02c1bd1f8d8beb9b958b33d9c74a8"
+        },
+        {
+          "id": "unit.cavalry.glass_tide",
+          "role": "unit.cavalry",
+          "cell": {
+            "x": 328,
+            "y": 325,
+            "w": 290,
+            "h": 312
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 290,
+            "h": 312
+          },
+          "nativeBounds": {
+            "x": 12,
+            "y": 2,
+            "w": 72,
+            "h": 78
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 328,
+              "y": 325,
+              "w": 290,
+              "h": 312
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 290,
+              "h": 312
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "36421d621a32fc0100608de5be2b395f3aa7c047b590088b86ece4ba30dc6350"
+        },
+        {
+          "id": "character.marshal.glass_tide",
+          "role": "character.marshal",
+          "cell": {
+            "x": 688,
+            "y": 314,
+            "w": 240,
+            "h": 316
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 240,
+            "h": 316
+          },
+          "nativeBounds": {
+            "x": 14,
+            "y": 8,
+            "w": 36,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 688,
+              "y": 314,
+              "w": 240,
+              "h": 316
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 240,
+              "h": 316
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "7c1044066f62eee2c9ade4e8439161b99273439c7789771d5e5d4304db506e89"
+        },
+        {
+          "id": "character.surveyor.glass_tide",
+          "role": "character.surveyor",
+          "cell": {
+            "x": 1012,
+            "y": 373,
+            "w": 195,
+            "h": 251
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 195,
+            "h": 251
+          },
+          "nativeBounds": {
+            "x": 13,
+            "y": 8,
+            "w": 37,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 1012,
+              "y": 373,
+              "w": 195,
+              "h": 251
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 195,
+              "h": 251
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e",
+            "componentIds": [
+              468845
+            ],
+            "componentAlgorithm": "alpha128-8connected-first-visible-pixel-v1"
+          },
+          "outputHash": "d821d56f12c9165f0d03e14d8ee1b0b7ed30bc1a44ab6091a2e06f4bc3c5d0ad"
+        },
+        {
+          "id": "character.engineer.glass_tide",
+          "role": "character.engineer",
+          "cell": {
+            "x": 71,
+            "y": 673,
+            "w": 178,
+            "h": 253
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 178,
+            "h": 253
+          },
+          "nativeBounds": {
+            "x": 15,
+            "y": 8,
+            "w": 33,
+            "h": 48
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 71,
+              "y": 673,
+              "w": 178,
+              "h": 253
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 178,
+              "h": 253
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 48,
+              "centered": false,
+              "type": "unit"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "a37291a74ba9153889018baa7b5a8c0687657b13c9a328dde10c36a5a265f102"
+        },
+        {
+          "id": "settlement.village.glass_tide",
+          "role": "settlement.village",
+          "cell": {
+            "x": 326,
+            "y": 690,
+            "w": 283,
+            "h": 225
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 283,
+            "h": 225
+          },
+          "nativeBounds": {
+            "x": 2,
+            "y": 8,
+            "w": 92,
+            "h": 72
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 326,
+              "y": 690,
+              "w": 283,
+              "h": 225
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 283,
+              "h": 225
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "75135ef4157d5d0f029dac441c5758d31d478507fcd60c98827c89774c200818"
+        },
+        {
+          "id": "settlement.town.glass_tide",
+          "role": "settlement.town",
+          "cell": {
+            "x": 645,
+            "y": 658,
+            "w": 280,
+            "h": 274
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 280,
+            "h": 274
+          },
+          "nativeBounds": {
+            "x": 8,
+            "y": 2,
+            "w": 79,
+            "h": 78
+          },
+          "pivot": [
+            48,
+            80
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 645,
+              "y": 658,
+              "w": 280,
+              "h": 274
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 280,
+              "h": 274
+            },
+            "contract": {
+              "native": 96,
+              "pivot": [
+                48,
+                80
+              ],
+              "maxHeight": 78,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "d64ea09b7f0b9eca375d0ebbe7c3902b037764aca46e9ec78ad60e9645c885be"
+        },
+        {
+          "id": "settlement.city.glass_tide",
+          "role": "settlement.city",
+          "cell": {
+            "x": 943,
+            "y": 617,
+            "w": 303,
+            "h": 330
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 303,
+            "h": 330
+          },
+          "nativeBounds": {
+            "x": 13,
+            "y": 2,
+            "w": 101,
+            "h": 110
+          },
+          "pivot": [
+            64,
+            112
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 943,
+              "y": 617,
+              "w": 303,
+              "h": 330
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 303,
+              "h": 330
+            },
+            "contract": {
+              "native": 128,
+              "pivot": [
+                64,
+                112
+              ],
+              "maxHeight": 110,
+              "centered": false,
+              "type": "settlement"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e",
+            "componentIds": [
+              774894,
+              794951
+            ],
+            "componentAlgorithm": "alpha128-8connected-first-visible-pixel-v1"
+          },
+          "outputHash": "761739fee7cd034d30fc8219d5d03cfffa6a0bd50e6b3f25099af2ea591af528"
+        },
+        {
+          "id": "ui.crest.glass_tide",
+          "role": "ui.crest",
+          "cell": {
+            "x": 45,
+            "y": 948,
+            "w": 223,
+            "h": 281
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 223,
+            "h": 281
+          },
+          "nativeBounds": {
+            "x": 8,
+            "y": 2,
+            "w": 47,
+            "h": 60
+          },
+          "pivot": [
+            32,
+            32
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 45,
+              "y": 948,
+              "w": 223,
+              "h": 281
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 223,
+              "h": 281
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                32
+              ],
+              "maxHeight": 60,
+              "centered": true,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "d00d77de3911b2212875628f738afc6d34dd5add4fde0d80354aa0ac6232ccab"
+        },
+        {
+          "id": "ui.banner.glass_tide",
+          "role": "ui.banner",
+          "cell": {
+            "x": 421,
+            "y": 936,
+            "w": 108,
+            "h": 306
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 108,
+            "h": 306
+          },
+          "nativeBounds": {
+            "x": 22,
+            "y": 2,
+            "w": 19,
+            "h": 54
+          },
+          "pivot": [
+            32,
+            56
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 421,
+              "y": 936,
+              "w": 108,
+              "h": 306
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 108,
+              "h": 306
+            },
+            "contract": {
+              "native": 64,
+              "pivot": [
+                32,
+                56
+              ],
+              "maxHeight": 54,
+              "centered": false,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "55752d68ed0597202b7283f81f337cf65ad69c73aa6881f0b02f925e30748119"
+        },
+        {
+          "id": "ui.badge.glass_tide",
+          "role": "ui.badge",
+          "cell": {
+            "x": 723,
+            "y": 997,
+            "w": 122,
+            "h": 170
+          },
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "w": 122,
+            "h": 170
+          },
+          "nativeBounds": {
+            "x": 6,
+            "y": 2,
+            "w": 20,
+            "h": 28
+          },
+          "pivot": [
+            16,
+            16
+          ],
+          "settings": {
+            "method": "nearest-pixel-center",
+            "layout": "reviewed-irregular-rectangles",
+            "cell": {
+              "x": 723,
+              "y": 997,
+              "w": 122,
+              "h": 170
+            },
+            "crop": {
+              "x": 0,
+              "y": 0,
+              "w": 122,
+              "h": 170
+            },
+            "contract": {
+              "native": 32,
+              "pivot": [
+                16,
+                16
+              ],
+              "maxHeight": 28,
+              "centered": true,
+              "type": "ui"
+            },
+            "alphaThreshold": 128,
+            "transparentPadding": 2,
+            "paletteHash": "aa9103094a938b8594ef93311317c8430b9c8038b8f851e01044de1006db8d97",
+            "scriptHash": "9f28bb5711c0fdaba93cc43367f5960f9df9a2da07852906b2ffb960afb9e58e"
+          },
+          "outputHash": "089817f0240fc8b7577f92f26de81e0333f8099368055c4df19d407e684f8a5a"
+        }
+      ],
+      "warnings": []
+    }
+  },
+  "note": "Prepared single-facing static candidates only. Pixel Snapper, Aseprite, validation and individual visual approval remain required."
+}

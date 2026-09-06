@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.ashen_compact",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 4,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.ashen_compact"
+  ],
+  "prompt": "Create an original dark-fantasy pixel-art SPRITE SHEET PNG with a TRANSPARENT BACKGROUND (alpha channel, empty pixels have alpha 0). Square layout: 4 columns x 4 rows, 15 isolated sprites with generous clear spacing, last cell empty. Every sprite entirely inside its cell, including spear tips and banners. Consistent southeast three-quarter view. Restrained charcoal iron, warm ochre and bone cloth, dull brass; practical rectangular equipment, gabled timber and kiln-brick buildings. Culture: Ashen Compact, displaced craft households bound by public oaths. Original emblem: open square hearth frame enclosing an ember diamond. Adult proportions, weathered materials, crisp hard pixel edges, upper-left light. No text or labels.\nRow1: caravan traveler with covered cart; hooded scout with bow; guard sword/square shield; infantry upright pike.\nRow2: heavily armored shield infantry; armored horse and rider; officer with baton and pennant; surveyor with rolled chart and staff.\nRow3: engineer apron/hammer/satchel; small workshop village; larger market town; fortified gabled city.\nRow4: square-hearth crest; same emblem on standing narrow banner; simplified same emblem badge; empty.\nEXPORT PNG WITH REAL TRANSPARENCY; the area around the sprites is empty alpha, suitable for compositing directly onto a game map.",
+  "frames": [
+    {
+      "id": "settlement.village.ashen_compact/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/settlement.village.ashen_compact/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9fc9776c9a8eabc289eb1269c6121508469edd8463de7a58b54e8847c098dec9",
+    "sourceRefs": [
+      "assets/art/source/factions/ashen_compact-v4.png",
+      "assets/art/source/faction-revisions.json",
+      "assets/art/source/factions/crops-ashen_compact.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game asset used. Service terms apply; model/seed not exposed and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "a2522355c43e550a66c5b94a556c55385330f4d1b7fb9d89c0e8316101588de1"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-faction-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "a33a2512ca9cb94b1c252930dfd907d71b3236678e39ed200b1c2f92c04454e2",
+      "inputHash": "a2522355c43e550a66c5b94a556c55385330f4d1b7fb9d89c0e8316101588de1",
+      "outputHash": "34e93364776bda630a4f65ab8a7cc049927afde5fd41b583eed82614b91c38d2"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

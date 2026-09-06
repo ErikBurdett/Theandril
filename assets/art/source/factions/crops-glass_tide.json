@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "source": "assets/art/source/factions/glass_tide-v1.png",
+  "sourceHash": "86d56e6c3c731f7dc19e27078a047b8b61db2933de9daa7562360dfe68aee054",
+  "width": 1254,
+  "height": 1254,
+  "crops": [
+    {
+      "role": "unit.colonist",
+      "rect": {
+        "x": 34,
+        "y": 99,
+        "w": 277,
+        "h": 217
+      }
+    },
+    {
+      "role": "unit.scout",
+      "rect": {
+        "x": 400,
+        "y": 48,
+        "w": 186,
+        "h": 260
+      }
+    },
+    {
+      "role": "unit.guard",
+      "rect": {
+        "x": 659,
+        "y": 64,
+        "w": 222,
+        "h": 246
+      }
+    },
+    {
+      "role": "unit.spearman",
+      "rect": {
+        "x": 981,
+        "y": 6,
+        "w": 181,
+        "h": 304
+      }
+    },
+    {
+      "role": "unit.heavy_infantry",
+      "rect": {
+        "x": 63,
+        "y": 353,
+        "w": 185,
+        "h": 268
+      }
+    },
+    {
+      "role": "unit.cavalry",
+      "rect": {
+        "x": 328,
+        "y": 325,
+        "w": 290,
+        "h": 312
+      }
+    },
+    {
+      "role": "character.marshal",
+      "rect": {
+        "x": 688,
+        "y": 314,
+        "w": 240,
+        "h": 316
+      }
+    },
+    {
+      "role": "character.surveyor",
+      "rect": {
+        "x": 1012,
+        "y": 373,
+        "w": 195,
+        "h": 251
+      },
+      "componentIds": [
+        468845
+      ]
+    },
+    {
+      "role": "character.engineer",
+      "rect": {
+        "x": 71,
+        "y": 673,
+        "w": 178,
+        "h": 253
+      }
+    },
+    {
+      "role": "settlement.village",
+      "rect": {
+        "x": 326,
+        "y": 690,
+        "w": 283,
+        "h": 225
+      }
+    },
+    {
+      "role": "settlement.town",
+      "rect": {
+        "x": 645,
+        "y": 658,
+        "w": 280,
+        "h": 274
+      }
+    },
+    {
+      "role": "settlement.city",
+      "rect": {
+        "x": 943,
+        "y": 617,
+        "w": 303,
+        "h": 330
+      },
+      "componentIds": [
+        774894,
+        794951
+      ]
+    },
+    {
+      "role": "ui.crest",
+      "rect": {
+        "x": 45,
+        "y": 948,
+        "w": 223,
+        "h": 281
+      }
+    },
+    {
+      "role": "ui.banner",
+      "rect": {
+        "x": 421,
+        "y": 936,
+        "w": 108,
+        "h": 306
+      }
+    },
+    {
+      "role": "ui.badge",
+      "rect": {
+        "x": 723,
+        "y": 997,
+        "w": 122,
+        "h": 170
+      }
+    }
+  ],
+  "cropsHash": "3b2b658c81648a689c091874b6a0f63b4b11ec82f0180e6779f1c29bcae3678f",
+  "components": {
+    "algorithm": "alpha128-8connected-first-visible-pixel-v1",
+    "hash": "c400251f11648a3b4dce1a587f5d526c70955a96ddd8d1820183a1d8a79f3ecd",
+    "definitions": [
+      {
+        "id": 8529,
+        "rect": {
+          "x": 981,
+          "y": 6,
+          "w": 181,
+          "h": 304
+        },
+        "count": 23082
+      },
+      {
+        "id": 60664,
+        "rect": {
+          "x": 400,
+          "y": 48,
+          "w": 186,
+          "h": 260
+        },
+        "count": 23159
+      },
+      {
+        "id": 81050,
+        "rect": {
+          "x": 659,
+          "y": 64,
+          "w": 222,
+          "h": 246
+        },
+        "count": 23939
+      },
+      {
+        "id": 124274,
+        "rect": {
+          "x": 34,
+          "y": 99,
+          "w": 277,
+          "h": 217
+        },
+        "count": 43016
+      },
+      {
+        "id": 169839,
+        "rect": {
+          "x": 549,
+          "y": 135,
+          "w": 1,
+          "h": 2
+        },
+        "count": 2
+      },
+      {
+        "id": 172345,
+        "rect": {
+          "x": 547,
+          "y": 137,
+          "w": 1,
+          "h": 1
+        },
+        "count": 1
+      },
+      {
+        "id": 174851,
+        "rect": {
+          "x": 543,
+          "y": 139,
+          "w": 3,
+          "h": 3
+        },
+        "count": 3
+      },
+      {
+        "id": 182369,
+        "rect": {
+          "x": 539,
+          "y": 145,
+          "w": 1,
+          "h": 1
+        },
+        "count": 1
+      },
+      {
+        "id": 184875,
+        "rect": {
+          "x": 535,
+          "y": 147,
+          "w": 3,
+          "h": 4
+        },
+        "count": 4
+      },
+      {
+        "id": 189887,
+        "rect": {
+          "x": 533,
+          "y": 151,
+          "w": 1,
+          "h": 1
+        },
+        "count": 1
+      },
+      {
+        "id": 193646,
+        "rect": {
+          "x": 530,
+          "y": 154,
+          "w": 1,
+          "h": 1
+        },
+        "count": 1
+      },
+      {
+        "id": 196152,
+        "rect": {
+          "x": 525,
+          "y": 156,
+          "w": 4,
+          "h": 5
+        },
+        "count": 7
+      },
+      {
+        "id": 394600,
+        "rect": {
+          "x": 688,
+          "y": 314,
+          "w": 240,
+          "h": 316
+        },
+        "count": 34270
+      },
+      {
+        "id": 408026,
+        "rect": {
+          "x": 328,
+          "y": 325,
+          "w": 290,
+          "h": 312
+        },
+        "count": 44701
+      },
+      {
+        "id": 442810,
+        "rect": {
+          "x": 63,
+          "y": 353,
+          "w": 185,
+          "h": 268
+        },
+        "count": 33444
+      },
+      {
+        "id": 468845,
+        "rect": {
+          "x": 1012,
+          "y": 373,
+          "w": 195,
+          "h": 251
+        },
+        "count": 24906
+      },
+      {
+        "id": 774894,
+        "rect": {
+          "x": 943,
+          "y": 617,
+          "w": 303,
+          "h": 330
+        },
+        "count": 64238
+      },
+      {
+        "id": 794951,
+        "rect": {
+          "x": 1169,
+          "y": 633,
+          "w": 1,
+          "h": 1
+        },
+        "count": 1
+      },
+      {
+        "id": 825968,
+        "rect": {
+          "x": 645,
+          "y": 658,
+          "w": 280,
+          "h": 274
+        },
+        "count": 46773
+      },
+      {
+        "id": 844081,
+        "rect": {
+          "x": 71,
+          "y": 673,
+          "w": 178,
+          "h": 253
+        },
+        "count": 22210
+      },
+      {
+        "id": 865700,
+        "rect": {
+          "x": 326,
+          "y": 690,
+          "w": 283,
+          "h": 223
+        },
+        "count": 31581
+      },
+      {
+        "id": 1073915,
+        "rect": {
+          "x": 465,
+          "y": 856,
+          "w": 54,
+          "h": 59
+        },
+        "count": 1796
+      },
+      {
+        "id": 1174209,
+        "rect": {
+          "x": 421,
+          "y": 936,
+          "w": 108,
+          "h": 306
+        },
+        "count": 15952
+      },
+      {
+        "id": 1188945,
+        "rect": {
+          "x": 45,
+          "y": 948,
+          "w": 223,
+          "h": 281
+        },
+        "count": 38359
+      },
+      {
+        "id": 1251017,
+        "rect": {
+          "x": 723,
+          "y": 997,
+          "w": 122,
+          "h": 170
+        },
+        "count": 11033
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "assets/art/source/factions/crop-evidence/glass_tide-1x.png",
+      "sha256": "2c3288d0af2475138898d4f23c36f19ca0b8a2b601d9dcab42e2c3be90641b25",
+      "scale": 1
+    },
+    {
+      "path": "assets/art/source/factions/crop-evidence/glass_tide-4x.png",
+      "sha256": "59507410d5e87da38ef0b438f31a8e0e54963c239e2bc3829d4ea869aaa84b8a",
+      "scale": 4
+    },
+    {
+      "path": "assets/art/source/factions/crop-evidence/glass_tide-source.png",
+      "sha256": "e2e0d6da45c2f47bdc87d3c1c3c43c2c6ff17d9ebb9a5bc908242c78c1d8ff44",
+      "scale": 1
+    }
+  ],
+  "review": {"reviewer":"Codex root visual review","cropsHash":"3b2b658c81648a689c091874b6a0f63b4b11ec82f0180e6779f1c29bcae3678f","notes":"Inspected original source, source-isolation evidence and each of fifteen roles at native1x/4x. Blue/linen curved shields, sail-diamond heraldry and light-stone beacon architecture consistent. Surveyor is a complete independent figure with staff/scroll; city tower/flame remains complete, with no boots or staff fragments. Reviewed exact connected-component masks only for these two neighboring crops; all source alpha>=128 pixels retained once. All other role, horse, weapon and heraldry silhouettes isolated. Native compact badge retains diamond and two horizontal bars. Crop mapping review only, not processed runtime approval.","reviewedAt":"2026-09-06T01:53:04.000Z","sourceHash":"86d56e6c3c731f7dc19e27078a047b8b61db2933de9daa7562360dfe68aee054"},
+  "warnings": [],
+  "note": "Source rectangle proposal only; contact sheet follows exact original prompt order. Retains every alpha>=128 source pixel once. Component masks only isolate disconnected foreign sprites; no repainting/keying. Source evidence preserves original RGB at full resolution with the disclosed alpha128 threshold. Native fitting/normalization is not visual approval."
+}

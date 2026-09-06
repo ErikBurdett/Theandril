@@ -1,0 +1,9 @@
+# The broken witness
+
+The present begins after the failure of the Witness Roads, an ancient network once trusted to preserve bargains between distant communities. Whether its builders spoke to the dead or merely recorded them remains disputed. Their ruined waystations divide the inhabited world into isolated hearthlands. Maps and promises have become valuable again.
+
+The Ashen Compact joins displaced craft households under public oaths. Its hearth councils prize reliable workshops but dispute how much grain frontier settlers may take. The Reedbound Council binds wetland villages through seasonal assemblies; upstream landholders and downstream boat families compete over drainage. Cinder March fortifies the burnt uplands, where hereditary wardens face demands from the miners who finance them. Glass Tide consists of coastal charter towns arguing over who pays to reopen dangerous routes.
+
+These are four introductory identities, not completed 1.0 factions. Their names use concrete civic and geographic language. Named histories, magical traditions and deeper faction asymmetry will be authored against this baseline before expanding the roster. No borrowed game artwork or setting text is used.
+
+Hearth marshals hold a public appointment to lead a field column; road witnesses chart routes and preserve observations; march engineers maintain the force and study hostile defenses. These are practical professions, not evidence of supernatural aptitude. Their names combine short personal names with household names drawn from each culture’s work and geography: kiln and hearth for the Compact, banks and ferries for the Council, mines and watchposts for the March, charters and quays for the Tide. The small deterministic pools in character content supply original names, not 150 fully authored notable biographies. Campaign chronicles record their actual appointments, actions and losses without inventing motives or speeches.

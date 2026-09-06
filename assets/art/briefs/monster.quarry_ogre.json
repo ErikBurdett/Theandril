@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "monster.quarry_ogre",
+  "type": "monster",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "monster.quarry_ogre"
+  ],
+  "prompt": "Original production sprite sheet for THEANDRIL, gritty dark-fantasy hex strategy. Exactly 4 columns x 2 rows of equal square cells, eight independent full-body character sprites. Real fully transparent RGBA background, NOT a drawn checkerboard, no backdrop, labels, text, ground bases, shadows outside silhouette or grid. Center each sprite in its cell, generous clear margin all sides, feet baseline consistent. Orthographic three-quarter front facing southeast, slightly seen from above. Authentic hand-crafted pixel-art clusters designed for native 64x64 humanoids, 96x96 large creatures; crisp hard square pixels, no antialias, no smooth gradients or noise. Adult realistic proportions, no chibi. Northwest light, weathered charcoal iron/brown leather/old bone/olive cloth, distinct silhouettes. Original civic/hearthland setting after ancient Witness Roads failed, no copied costumes or designs.\nRow1 left-right:\n1 Ashen Compact SPEARMAN: plain round iron helmet, long upright spear, rough oval plank shield, patched brown coat, ivory scarf;\n2 Ashen Compact HEAVY INFANTRY: wide stance, layered battered iron plates, squared kite shield, short mace, ash scarf, heavy boots;\n3 Ashen Compact CAVALRY: cloaked armored rider on sturdy dark brown horse, travel tack, short pennant lance, both fully visible;\n4 Ashen Compact MAGE: mature hooded traveler in weathered charcoal/umber layers carrying bound oath tablets and a forked copper staff with a tiny dim ember, austere scholar not glowing wizard spectacle.\nRow2:\n1 Ashen Compact COMMANDER: veteran with visible weathered face, plain iron open helmet, bone scarf, dark coat, old bronze civic oath banner and straight sword;\n2 UNDEAD Witness revenant: dry skeletal human wrapped in weathered burial straps and broken iron mask, carrying a cracked stone vow tablet, restrained pale green eyes, no copied monster;\n3 MONSTROUS INFANTRY: massive hunched slate-skinned quarry ogre wearing timber harness and rust iron scraps, one heavy stone hammer, original nonhuman face;\n4 LARGE CREATURE: original six-legged low-bodied slate-backed carrion beast with blunt armored snout, dark bristle mane and bone ridges, strong readable animal silhouette, no wings or dragon imitation.\nOne exact character per cell. Same palette and scale discipline throughout. Small legible silhouette first, material texture second. No crowd, scene, concepts, portraits or extra weapons floating outside cells.",
+  "frames": [
+    {
+      "id": "monster.quarry_ogre/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/monster.quarry_ogre/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9f7c224c6cd3a8824688d9bce7912b6cdd145b907dbcbe90413272bcd517546e",
+    "sourceRefs": [
+      "assets/art/source/roster-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "087ca777ef8accfacbcaf64d6d89d1a53180675a56b638148d734945979916d3"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "b321549a791120fd5e1f80cf792f7e0b64719e670e997dca3c132ba2993dbe79",
+      "inputHash": "087ca777ef8accfacbcaf64d6d89d1a53180675a56b638148d734945979916d3",
+      "outputHash": "42113b6f4d670e805b2a2cb8c1f0f53b13fd3b4d9cedc9a074824e0e390be253"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

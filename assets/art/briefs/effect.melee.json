@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.melee",
+  "type": "effect",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.melee"
+  ],
+  "prompt": "Original four-frame ember-and-iron impact arc: approach, impact flash, outward sparks, recovery fleck. Fixed impact anchor 32,32 on 64x64; 100ms per frame, one-shot idle/se packaging. Preview-only foundation: no timing or combat authority, no weapon-facing set.",
+  "frames": [
+    {
+      "id": "effect.melee/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/effect.melee/idle-se-0.png"
+    },
+    {
+      "id": "effect.melee/idle/se/1",
+      "direction": "se",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/effect.melee/idle-se-1.png"
+    },
+    {
+      "id": "effect.melee/idle/se/2",
+      "direction": "se",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/effect.melee/idle-se-2.png"
+    },
+    {
+      "id": "effect.melee/idle/se/3",
+      "direction": "se",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/effect.melee/idle-se-3.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "theandril-integer-overlay",
+    "model": "integer-overlay-v1",
+    "promptHash": "12772ccad3c63b353a80a842117123739175d95746cecd48c98274ed2b4a2072",
+    "sourceRefs": [
+      "tools/art/create-overlay-briefs.ts"
+    ],
+    "licenseNotes": [
+      "Original integer-coordinate code-authored artwork for Theandril; no external bitmap references, model weights, or provider output used.",
+      "Source generator is retained in this repository; assets follow the project licensing policy. No third-party license rights are asserted."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-integer-overlay",
+      "version": "1",
+      "profile": "centered-overlay-64",
+      "settingsHash": "92d203289f3fc003cd461b8d35b10c5b38944f2a2d0e5ee471e5bd6c9a420db0",
+      "inputHash": "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff",
+      "outputHash": "9e2d2016f262cb875eae672597e9bd2ef47784df0ae17dc92cdf023271af87b1"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 16,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 32,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

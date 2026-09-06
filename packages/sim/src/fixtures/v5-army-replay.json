@@ -1,0 +1,506 @@
+{
+  "provenance": "Captured from the actual schema-5 implementation before army-container changes on 2026-09-05; authored border scenario, real commands and outcomes. Pending battle object references were not detached during capture and are intentionally omitted; original string checkpoints and detached reports remain unchanged.",
+  "initialSave": "{\"version\":5,\"gameVersion\":\"0.1.0\",\"contentHash\":\"3139d4e7\",\"stateChecksum\":\"de60eab3\",\"state\":{\"turn\":1,\"nextId\":7,\"turnOwnerId\":\"faction.ashen_compact\",\"world\":{\"seed\":20260905,\"width\":48,\"height\":32,\"terrain\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,1,1,1,1,1,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,1,1,1,1,2,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,2,2,2,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,2,2,2,3,1,1,1,1,1,1,2,2,2,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,2,2,1,1,1,1,2,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,4,3,2,2,3,1,1,1,2,2,2,2,0,0,0,0,0,0,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2,2,0,0,0,0,0,0,1,1,1,1,1,2,2,2,4,2,3,3,4,1,4,1,2,2,2,2,2,0,0,0,2,2,2,2,1,1,1,1,1,1,1,1,3,1,1,1,2,2,2,0,0,0,0,0,1,1,3,3,2,2,2,2,2,3,3,3,3,1,1,3,1,2,2,2,2,2,0,0,2,2,2,2,1,3,3,1,1,3,3,1,3,3,1,1,2,2,2,0,0,0,0,0,1,1,4,4,4,2,1,1,4,4,4,3,1,1,3,3,3,1,3,2,1,1,1,1,1,1,2,1,1,3,4,3,1,3,4,1,3,4,4,3,2,2,2,0,0,0,0,1,1,3,2,3,4,3,1,1,3,1,1,1,3,3,3,1,1,1,3,1,1,1,1,1,1,1,1,1,1,3,4,3,3,3,4,3,1,2,2,3,2,1,0,0,0,0,0,1,1,3,4,3,3,3,4,3,1,3,4,3,3,3,3,4,4,1,3,1,3,1,1,1,1,1,1,3,1,3,4,1,4,1,4,3,3,4,4,3,2,1,0,0,0,0,0,1,1,2,4,3,2,1,3,1,3,1,1,3,3,4,4,4,4,3,1,3,1,1,1,1,1,1,1,1,3,1,1,1,3,1,1,3,4,4,4,4,1,1,1,0,0,0,0,1,1,1,1,3,3,2,3,3,4,1,4,4,4,4,4,4,3,3,3,1,1,1,0,0,1,1,1,1,4,4,3,1,3,3,4,1,4,4,4,4,3,1,1,1,0,0,0,2,1,1,1,1,2,2,2,3,3,1,3,3,1,3,4,3,1,3,3,2,1,0,0,0,1,2,2,3,2,3,4,3,2,1,1,1,3,1,1,3,4,1,1,1,1,0,0,2,1,1,1,1,3,2,4,3,1,1,1,1,3,1,4,3,1,3,4,2,1,0,0,0,1,2,2,3,4,2,4,3,2,1,3,1,1,3,4,1,3,1,1,1,1,0,0,2,1,1,1,1,3,2,4,2,3,1,1,1,1,1,1,1,3,3,3,2,1,0,0,0,0,2,2,2,3,3,4,2,3,1,1,1,1,1,3,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,4,1,4,3,1,1,1,3,4,1,4,3,1,1,1,0,0,0,0,2,2,2,2,3,4,2,4,1,4,3,1,1,1,1,3,3,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,2,2,2,2,2,2,1,1,1,4,1,3,2,3,3,3,3,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,3,1,4,1,1,1,1,0,0,0,0,0,0,0,2,2,2,2,1,1,4,3,3,2,4,2,4,4,3,3,2,2,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,2,2,2,2,1,1,1,3,3,1,4,3,3,3,3,2,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,1,1,3,1,4,3,2,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,2,2,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,1,1,1,1,3,3,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,1,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"fertility\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,67,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,65,63,70,64,61,64,69,0,0,0,0,68,69,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,64,66,64,59,67,65,67,70,61,0,0,67,69,70,0,0,0,0,0,0,0,0,0,0,0,60,62,68,61,64,63,61,71,70,0,0,0,0,0,0,0,0,0,0,0,65,67,73,65,67,66,64,46,73,72,71,71,70,73,65,70,72,0,0,0,0,0,0,0,0,64,71,65,62,64,68,72,61,61,72,71,70,72,62,0,0,0,0,0,0,0,0,68,67,69,74,66,68,68,0,53,67,65,45,67,65,68,63,71,74,73,0,0,0,0,0,0,70,67,73,67,64,65,68,70,72,71,71,71,70,72,63,67,0,0,0,0,0,0,73,70,68,70,75,67,69,70,0,71,57,53,0,66,0,67,63,72,76,75,72,0,0,0,70,71,71,68,75,69,66,66,68,70,71,71,43,71,71,73,65,69,71,0,0,0,0,0,74,72,43,45,63,67,69,69,70,55,56,53,46,67,64,40,75,70,73,72,69,67,0,0,68,69,70,67,74,41,38,67,68,42,42,71,44,45,74,75,65,68,70,0,0,0,0,0,76,76,0,0,0,66,75,70,0,0,0,50,73,69,39,40,44,76,50,65,76,75,74,75,76,77,64,76,72,40,0,38,67,39,0,69,45,0,0,51,66,66,66,0,0,0,0,74,77,52,69,53,0,49,77,77,49,77,77,76,45,42,41,69,70,70,43,70,70,69,69,69,71,72,72,71,69,39,0,38,37,37,0,40,74,68,71,55,66,76,0,0,0,0,0,74,78,55,0,55,52,49,0,48,76,48,0,47,45,43,42,0,0,68,40,68,39,67,67,68,69,70,71,42,69,40,0,66,0,64,0,39,47,0,0,57,67,75,0,0,0,0,0,76,79,69,0,55,68,80,51,78,49,76,75,47,46,0,0,0,0,43,71,43,70,69,68,69,71,73,74,74,45,72,72,71,41,67,66,41,0,0,0,0,79,75,73,0,0,0,0,79,80,81,81,53,54,71,56,54,0,74,0,0,0,0,0,0,48,49,50,77,74,71,0,0,75,79,80,80,0,0,53,79,48,45,0,72,0,0,0,0,47,72,71,74,0,0,0,70,81,79,78,80,71,74,76,58,51,72,41,42,72,47,0,49,80,55,57,70,78,0,0,0,79,71,74,59,75,61,0,60,70,78,76,76,46,73,72,44,0,70,70,72,79,0,0,71,81,78,76,78,56,76,0,59,79,71,67,68,44,75,0,50,82,58,0,72,79,0,0,0,80,73,76,62,0,80,0,63,73,80,50,77,73,42,0,69,40,68,68,71,78,0,0,69,79,76,74,76,53,72,0,71,49,70,67,69,72,75,76,78,52,55,56,69,78,0,0,0,0,73,76,76,62,62,0,75,56,79,77,76,74,72,44,71,71,70,70,72,77,0,0,0,75,72,71,73,75,78,0,78,0,42,69,70,73,48,0,77,0,50,78,78,78,0,0,0,0,75,77,76,74,58,0,71,0,78,0,49,78,79,79,79,49,47,74,75,0,0,0,0,0,69,69,69,70,71,71,71,71,70,70,71,74,77,78,77,75,73,72,74,0,0,0,0,0,76,77,76,72,68,66,79,78,77,0,78,54,72,59,58,55,52,79,78,0,0,0,0,0,67,67,67,67,67,67,68,69,70,70,72,46,76,0,76,73,70,69,0,0,0,0,0,0,0,77,75,70,65,76,76,0,48,48,65,0,75,0,0,57,54,67,65,0,0,0,0,0,0,68,68,69,69,69,70,70,70,70,71,73,75,76,75,73,71,0,0,0,0,0,0,0,0,77,74,70,65,76,76,75,46,46,75,0,56,58,57,54,66,77,0,0,0,0,0,0,0,0,0,0,0,76,75,74,72,72,72,72,73,73,73,73,0,0,0,0,0,0,0,0,0,76,74,70,66,65,63,74,71,41,71,0,49,65,64,75,73,72,0,0,0,0,0,0,0,0,0,0,0,0,68,65,75,73,73,72,70,0,0,0,0,0,0,0,0,0,0,0,0,76,74,71,68,66,64,72,67,65,66,40,41,70,70,69,67,0,0,0,0,0,0,0,0,0,0,0,0,0,0,66,62,73,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,75,74,71,68,66,64,71,0,0,63,64,65,66,66,65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,60,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,67,64,63,61,71,0,0,0,66,66,66,66,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,70,70,71,0,0,0,71,70,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"starts\":[488,1052],\"biome\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,6,6,6,6,6,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,6,6,6,6,3,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,6,6,6,3,3,3,3,6,6,0,0,0,0,0,0,0,0,0,0,0,6,6,6,3,3,3,3,6,6,6,6,6,6,6,3,3,3,0,0,0,0,0,0,0,0,3,6,6,6,6,6,6,3,3,6,6,6,6,2,0,0,0,0,0,0,0,0,6,6,6,6,3,2,2,9,1,2,2,6,6,6,6,2,2,7,7,0,0,0,0,0,0,3,3,6,6,6,6,6,6,6,6,6,6,6,6,2,7,0,0,0,0,0,0,6,6,5,5,6,2,2,2,9,2,1,1,9,5,9,5,2,2,2,2,7,0,0,0,2,7,7,2,6,5,5,5,5,5,5,5,6,5,5,5,2,2,7,0,0,0,0,0,5,5,5,5,2,2,2,2,2,1,1,6,5,5,5,5,5,2,2,2,2,2,0,0,2,2,2,2,5,5,5,5,5,5,5,5,5,5,5,5,2,2,2,0,0,0,0,0,5,5,9,9,9,2,6,6,9,9,9,6,5,5,5,5,5,5,6,2,5,5,5,5,5,5,2,5,5,5,9,5,5,5,9,5,5,9,9,6,2,2,2,0,0,0,0,5,6,6,2,6,9,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,9,5,5,5,9,5,5,2,2,1,2,6,0,0,0,0,0,6,6,1,9,1,1,6,9,6,6,6,9,6,6,5,5,9,9,5,5,5,5,5,5,5,5,5,5,5,5,5,9,5,9,5,9,5,6,9,9,1,8,6,0,0,0,0,0,6,1,8,9,1,8,1,1,1,1,6,6,6,6,9,9,9,9,6,6,6,5,5,5,5,6,6,6,6,6,6,6,6,5,5,5,5,9,9,9,9,1,6,6,0,0,0,0,7,1,1,1,1,1,8,1,1,9,6,9,9,9,9,9,9,1,1,1,1,6,6,0,0,1,1,1,1,9,9,1,1,1,6,9,6,9,9,9,9,1,6,6,6,0,0,0,7,1,1,1,1,8,8,8,1,1,6,6,6,6,1,9,1,1,1,1,8,1,0,0,0,7,8,8,1,8,1,9,1,8,1,1,1,1,6,6,6,9,6,6,6,7,0,0,7,1,1,1,1,1,8,9,1,1,6,5,6,6,1,9,1,1,1,9,8,7,0,0,0,7,7,8,1,9,8,9,1,8,1,1,1,6,6,9,6,6,6,6,6,7,0,0,7,1,1,6,1,1,8,9,8,1,6,5,5,6,1,1,1,1,1,1,8,7,0,0,0,0,7,8,8,1,1,9,8,1,1,1,1,1,6,6,6,6,6,6,6,1,0,0,0,6,6,6,6,6,1,9,1,9,5,5,5,6,6,9,1,9,1,1,1,1,0,0,0,0,7,8,8,8,1,9,8,9,1,9,1,1,1,1,1,1,6,6,6,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,5,6,0,0,0,0,0,7,8,8,8,8,2,1,6,6,9,6,1,8,1,1,1,1,1,6,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,5,6,9,6,5,5,5,0,0,0,0,0,0,0,7,2,2,2,6,6,9,6,6,2,9,2,9,9,1,6,2,2,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,7,2,2,2,5,5,5,5,5,5,9,1,1,1,6,2,5,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,7,2,2,2,2,2,5,5,5,5,9,5,2,2,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,2,2,6,6,6,5,5,0,0,0,0,0,0,0,0,0,0,0,0,7,2,2,2,2,2,5,5,5,5,6,6,5,5,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,2,2,2,6,0,0,5,5,6,6,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,6,0,0,0,6,6,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,6,0,0,0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"generatorVersion\":2},\"factions\":[{\"id\":\"faction.ashen_compact\",\"definitionId\":\"faction.ashen_compact\",\"name\":\"Ashen Compact\",\"color\":13215339,\"treasury\":60,\"knowledge\":0},{\"id\":\"faction.reedbound_council\",\"definitionId\":\"faction.reedbound_council\",\"name\":\"Reedbound Council\",\"color\":8566176,\"treasury\":60,\"knowledge\":0}],\"armies\":[{\"id\":\"army.2\",\"factionId\":\"faction.ashen_compact\",\"name\":\"Ashen Vanguard\",\"unitId\":\"unit.guard\",\"cell\":489,\"movement\":3,\"strength\":60,\"morale\":75,\"fatigue\":0},{\"id\":\"army.4\",\"factionId\":\"faction.reedbound_council\",\"name\":\"Reedbound Watch\",\"unitId\":\"unit.guard\",\"cell\":537,\"movement\":3,\"strength\":60,\"morale\":75,\"fatigue\":0}],\"settlements\":[{\"id\":\"settlement.5\",\"factionId\":\"faction.ashen_compact\",\"name\":\"Ashen Hearth\",\"cell\":488,\"population\":1,\"food\":0,\"buildings\":[],\"queue\":[],\"founderFactionId\":\"faction.ashen_compact\",\"devastation\":0,\"occupationTurns\":0},{\"id\":\"settlement.6\",\"factionId\":\"faction.reedbound_council\",\"name\":\"Reedbound Hold\",\"cell\":1052,\"population\":1,\"food\":0,\"buildings\":[],\"queue\":[],\"founderFactionId\":\"faction.reedbound_council\",\"devastation\":0,\"occupationTurns\":0}],\"explored\":[{\"factionId\":\"faction.ashen_compact\",\"cells\":[294,295,296,297,298,341,342,343,344,345,346,389,390,391,392,393,394,395,436,437,438,439,440,441,442,443,484,485,486,487,488,489,490,491,492,532,533,534,535,536,537,538,539,581,582,583,584,585,586,587,629,630,631,632,633,634,678,679,680,681,682]},{\"factionId\":\"faction.reedbound_council\",\"cells\":[440,441,442,488,489,490,491,535,536,537,538,539,584,585,586,587,632,633,634,858,859,860,861,862,906,907,908,909,910,911,953,954,955,956,957,958,959,1001,1002,1003,1004,1005,1006,1007,1048,1049,1050,1051,1052,1053,1054,1055,1097,1098,1099,1100,1101,1102,1103,1145,1146,1147,1148,1149,1150,1151,1194,1195,1196,1197,1198,1199,1242,1243,1244,1245,1246]}],\"events\":[{\"turn\":1,\"type\":\"campaign_started\",\"message\":\"Your hearth caravan awaits a place to settle.\",\"factionId\":\"faction.ashen_compact\",\"cell\":488},{\"turn\":1,\"type\":\"campaign_started\",\"message\":\"Your hearth caravan awaits a place to settle.\",\"factionId\":\"faction.reedbound_council\",\"cell\":1052},{\"turn\":1,\"type\":\"settlement_founded\",\"message\":\"Ashen Hearth was founded. The hearth caravan has settled.\",\"factionId\":\"faction.ashen_compact\",\"cell\":488},{\"turn\":1,\"type\":\"settlement_founded\",\"message\":\"Reedbound Hold was founded. The hearth caravan has settled.\",\"factionId\":\"faction.reedbound_council\",\"cell\":1052}],\"wars\":[],\"battle\":null,\"battleReports\":[],\"sieges\":[],\"pendingCapture\":null,\"ruins\":[],\"diplomacy\":{\"offers\":[],\"treaties\":[],\"relations\":[]},\"pace\":\"standard\",\"progression\":[{\"factionId\":\"faction.ashen_compact\",\"technologies\":[],\"institutionId\":null,\"doctrineId\":null},{\"factionId\":\"faction.reedbound_council\",\"technologies\":[],\"institutionId\":null,\"doctrineId\":null}],\"projects\":[],\"victory\":null,\"routes\":[]}}",
+  "records": [
+    {
+      "command": {
+        "type": "declareWar",
+        "factionId": "faction.ashen_compact",
+        "targetFactionId": "faction.reedbound_council"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 1,
+            "type": "war_declared",
+            "factionId": "faction.ashen_compact",
+            "message": "Ashen Compact declared war on Reedbound Council."
+          },
+          {
+            "turn": 1,
+            "type": "war_declared",
+            "factionId": "faction.reedbound_council",
+            "message": "Ashen Compact declared war on Reedbound Council."
+          }
+        ]
+      },
+      "hash": "203583a4",
+      "reports": []
+    },
+    {
+      "command": {
+        "type": "attack",
+        "factionId": "faction.ashen_compact",
+        "armyId": "army.2",
+        "targetArmyId": "army.4"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 1,
+            "factionId": "faction.ashen_compact",
+            "type": "battle_started",
+            "cell": 537,
+            "message": "Ashen Vanguard engaged Reedbound Watch at hex 537."
+          },
+          {
+            "turn": 1,
+            "factionId": "faction.reedbound_council",
+            "type": "battle_started",
+            "cell": 537,
+            "message": "Ashen Vanguard engaged Reedbound Watch at hex 537."
+          }
+        ]
+      },
+      "hash": "fec4d3b7",
+      "reports": []
+    },
+    {
+      "command": {
+        "type": "battleOrder",
+        "factionId": "faction.ashen_compact",
+        "order": "brace"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 1,
+            "factionId": "faction.ashen_compact",
+            "type": "battle_round",
+            "cell": 537,
+            "message": "Battle round 1 resolved."
+          },
+          {
+            "turn": 1,
+            "factionId": "faction.reedbound_council",
+            "type": "battle_round",
+            "cell": 537,
+            "message": "Battle round 1 resolved."
+          }
+        ]
+      },
+      "hash": "3ee8c04a",
+      "reports": []
+    },
+    {
+      "command": {
+        "type": "autoResolveBattle",
+        "factionId": "faction.ashen_compact"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 1,
+            "type": "army_retreated",
+            "factionId": "faction.reedbound_council",
+            "cell": 538,
+            "message": "Reedbound Watch retreated to hex 538 with 33 strength."
+          },
+          {
+            "turn": 1,
+            "type": "battle_finished",
+            "factionId": "faction.ashen_compact",
+            "cell": 537,
+            "message": "Ashen Compact prevailed at hex 537: ordered withdrawal."
+          },
+          {
+            "turn": 1,
+            "type": "battle_finished",
+            "factionId": "faction.reedbound_council",
+            "cell": 537,
+            "message": "Ashen Compact prevailed at hex 537: ordered withdrawal."
+          }
+        ]
+      },
+      "hash": "cf2006bd",
+      "reports": [
+        {
+          "id": "battle.7",
+          "turn": 1,
+          "attackerId": "army.2",
+          "defenderId": "army.4",
+          "defenderIds": [
+            "army.4"
+          ],
+          "attackerFactionId": "faction.ashen_compact",
+          "defenderFactionId": "faction.reedbound_council",
+          "attackerCell": 489,
+          "defenderCell": 537,
+          "settlementId": null,
+          "militiaId": null,
+          "fortification": 0,
+          "attackerDoctrineId": null,
+          "defenderDoctrineId": null,
+          "initialStrengths": [
+            {
+              "armyId": "army.2",
+              "strength": 60
+            },
+            {
+              "armyId": "army.4",
+              "strength": 60
+            }
+          ],
+          "aftermath": [
+            {
+              "armyId": "army.2",
+              "strength": 45,
+              "cell": 537,
+              "outcome": "advanced"
+            },
+            {
+              "armyId": "army.4",
+              "strength": 33,
+              "cell": 538,
+              "outcome": "retreated"
+            }
+          ],
+          "combat": {
+            "seed": 688947903,
+            "terrain": 1,
+            "attacker": [
+              {
+                "id": "army.2",
+                "unitId": "unit.guard",
+                "strength": 45,
+                "maxStrength": 60,
+                "morale": 32,
+                "fatigue": 51,
+                "row": 0,
+                "column": 2,
+                "attack": 14,
+                "armor": 5,
+                "initiative": 6,
+                "range": 0
+              }
+            ],
+            "defender": [
+              {
+                "id": "army.4",
+                "unitId": "unit.guard",
+                "strength": 33,
+                "maxStrength": 60,
+                "morale": 23,
+                "fatigue": 66,
+                "row": 0,
+                "column": 2,
+                "attack": 14,
+                "armor": 5,
+                "initiative": 6,
+                "range": 0
+              }
+            ],
+            "rngState": 1850778774,
+            "round": 8,
+            "log": [
+              "Round 1: attacker brace, defender advance.",
+              "army.2 struck army.4 for 5 strength.",
+              "army.4 struck army.2 for 1 strength.",
+              "Round 2: attacker advance, defender advance.",
+              "army.2 struck army.4 for 5 strength.",
+              "army.4 struck army.2 for 4 strength.",
+              "Round 3: attacker advance, defender advance.",
+              "army.2 struck army.4 for 4 strength.",
+              "army.4 struck army.2 for 4 strength.",
+              "Round 4: attacker advance, defender advance.",
+              "army.2 struck army.4 for 3 strength.",
+              "army.4 struck army.2 for 2 strength.",
+              "Round 5: attacker advance, defender advance.",
+              "army.2 struck army.4 for 3 strength.",
+              "army.4 struck army.2 for 1 strength.",
+              "Round 6: attacker advance, defender advance.",
+              "army.2 struck army.4 for 2 strength.",
+              "army.4 struck army.2 for 1 strength.",
+              "Round 7: attacker advance, defender advance.",
+              "army.2 struck army.4 for 2 strength.",
+              "army.4 struck army.2 for 2 strength.",
+              "Round 8: attacker advance, defender withdraw.",
+              "army.4 lost 3 strength during pursuit.",
+              "attacker: ordered withdrawal."
+            ],
+            "result": {
+              "winner": "attacker",
+              "reason": "ordered withdrawal"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "command": {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 2,
+            "type": "turn_started",
+            "factionId": "faction.ashen_compact",
+            "message": "Turn 2: orders are ready."
+          },
+          {
+            "turn": 2,
+            "type": "turn_started",
+            "factionId": "faction.reedbound_council",
+            "message": "Turn 2: orders are ready."
+          }
+        ]
+      },
+      "hash": "2813fe99",
+      "reports": [
+        {
+          "id": "battle.7",
+          "turn": 1,
+          "attackerId": "army.2",
+          "defenderId": "army.4",
+          "defenderIds": [
+            "army.4"
+          ],
+          "attackerFactionId": "faction.ashen_compact",
+          "defenderFactionId": "faction.reedbound_council",
+          "attackerCell": 489,
+          "defenderCell": 537,
+          "settlementId": null,
+          "militiaId": null,
+          "fortification": 0,
+          "attackerDoctrineId": null,
+          "defenderDoctrineId": null,
+          "initialStrengths": [
+            {
+              "armyId": "army.2",
+              "strength": 60
+            },
+            {
+              "armyId": "army.4",
+              "strength": 60
+            }
+          ],
+          "aftermath": [
+            {
+              "armyId": "army.2",
+              "strength": 45,
+              "cell": 537,
+              "outcome": "advanced"
+            },
+            {
+              "armyId": "army.4",
+              "strength": 33,
+              "cell": 538,
+              "outcome": "retreated"
+            }
+          ],
+          "combat": {
+            "seed": 688947903,
+            "terrain": 1,
+            "attacker": [
+              {
+                "id": "army.2",
+                "unitId": "unit.guard",
+                "strength": 45,
+                "maxStrength": 60,
+                "morale": 32,
+                "fatigue": 51,
+                "row": 0,
+                "column": 2,
+                "attack": 14,
+                "armor": 5,
+                "initiative": 6,
+                "range": 0
+              }
+            ],
+            "defender": [
+              {
+                "id": "army.4",
+                "unitId": "unit.guard",
+                "strength": 33,
+                "maxStrength": 60,
+                "morale": 23,
+                "fatigue": 66,
+                "row": 0,
+                "column": 2,
+                "attack": 14,
+                "armor": 5,
+                "initiative": 6,
+                "range": 0
+              }
+            ],
+            "rngState": 1850778774,
+            "round": 8,
+            "log": [
+              "Round 1: attacker brace, defender advance.",
+              "army.2 struck army.4 for 5 strength.",
+              "army.4 struck army.2 for 1 strength.",
+              "Round 2: attacker advance, defender advance.",
+              "army.2 struck army.4 for 5 strength.",
+              "army.4 struck army.2 for 4 strength.",
+              "Round 3: attacker advance, defender advance.",
+              "army.2 struck army.4 for 4 strength.",
+              "army.4 struck army.2 for 4 strength.",
+              "Round 4: attacker advance, defender advance.",
+              "army.2 struck army.4 for 3 strength.",
+              "army.4 struck army.2 for 2 strength.",
+              "Round 5: attacker advance, defender advance.",
+              "army.2 struck army.4 for 3 strength.",
+              "army.4 struck army.2 for 1 strength.",
+              "Round 6: attacker advance, defender advance.",
+              "army.2 struck army.4 for 2 strength.",
+              "army.4 struck army.2 for 1 strength.",
+              "Round 7: attacker advance, defender advance.",
+              "army.2 struck army.4 for 2 strength.",
+              "army.4 struck army.2 for 2 strength.",
+              "Round 8: attacker advance, defender withdraw.",
+              "army.4 lost 3 strength during pursuit.",
+              "attacker: ordered withdrawal."
+            ],
+            "result": {
+              "winner": "attacker",
+              "reason": "ordered withdrawal"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "command": {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 3,
+            "type": "turn_started",
+            "factionId": "faction.ashen_compact",
+            "message": "Turn 3: orders are ready."
+          },
+          {
+            "turn": 3,
+            "type": "turn_started",
+            "factionId": "faction.reedbound_council",
+            "message": "Turn 3: orders are ready."
+          }
+        ]
+      },
+      "hash": "794bc952",
+      "reports": [
+        {
+          "id": "battle.7",
+          "turn": 1,
+          "attackerId": "army.2",
+          "defenderId": "army.4",
+          "defenderIds": [
+            "army.4"
+          ],
+          "attackerFactionId": "faction.ashen_compact",
+          "defenderFactionId": "faction.reedbound_council",
+          "attackerCell": 489,
+          "defenderCell": 537,
+          "settlementId": null,
+          "militiaId": null,
+          "fortification": 0,
+          "attackerDoctrineId": null,
+          "defenderDoctrineId": null,
+          "initialStrengths": [
+            {
+              "armyId": "army.2",
+              "strength": 60
+            },
+            {
+              "armyId": "army.4",
+              "strength": 60
+            }
+          ],
+          "aftermath": [
+            {
+              "armyId": "army.2",
+              "strength": 45,
+              "cell": 537,
+              "outcome": "advanced"
+            },
+            {
+              "armyId": "army.4",
+              "strength": 33,
+              "cell": 538,
+              "outcome": "retreated"
+            }
+          ],
+          "combat": {
+            "seed": 688947903,
+            "terrain": 1,
+            "attacker": [
+              {
+                "id": "army.2",
+                "unitId": "unit.guard",
+                "strength": 45,
+                "maxStrength": 60,
+                "morale": 32,
+                "fatigue": 51,
+                "row": 0,
+                "column": 2,
+                "attack": 14,
+                "armor": 5,
+                "initiative": 6,
+                "range": 0
+              }
+            ],
+            "defender": [
+              {
+                "id": "army.4",
+                "unitId": "unit.guard",
+                "strength": 33,
+                "maxStrength": 60,
+                "morale": 23,
+                "fatigue": 66,
+                "row": 0,
+                "column": 2,
+                "attack": 14,
+                "armor": 5,
+                "initiative": 6,
+                "range": 0
+              }
+            ],
+            "rngState": 1850778774,
+            "round": 8,
+            "log": [
+              "Round 1: attacker brace, defender advance.",
+              "army.2 struck army.4 for 5 strength.",
+              "army.4 struck army.2 for 1 strength.",
+              "Round 2: attacker advance, defender advance.",
+              "army.2 struck army.4 for 5 strength.",
+              "army.4 struck army.2 for 4 strength.",
+              "Round 3: attacker advance, defender advance.",
+              "army.2 struck army.4 for 4 strength.",
+              "army.4 struck army.2 for 4 strength.",
+              "Round 4: attacker advance, defender advance.",
+              "army.2 struck army.4 for 3 strength.",
+              "army.4 struck army.2 for 2 strength.",
+              "Round 5: attacker advance, defender advance.",
+              "army.2 struck army.4 for 3 strength.",
+              "army.4 struck army.2 for 1 strength.",
+              "Round 6: attacker advance, defender advance.",
+              "army.2 struck army.4 for 2 strength.",
+              "army.4 struck army.2 for 1 strength.",
+              "Round 7: attacker advance, defender advance.",
+              "army.2 struck army.4 for 2 strength.",
+              "army.4 struck army.2 for 2 strength.",
+              "Round 8: attacker advance, defender withdraw.",
+              "army.4 lost 3 strength during pursuit.",
+              "attacker: ordered withdrawal."
+            ],
+            "result": {
+              "winner": "attacker",
+              "reason": "ordered withdrawal"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

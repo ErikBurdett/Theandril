@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", "module": "ESNext", "moduleResolution": "Bundler",
+    "strict": true, "noUncheckedIndexedAccess": true, "skipLibCheck": true,
+    "esModuleInterop": true, "resolveJsonModule": true, "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"], "types": ["node"],
+    "paths": {
+      "@theandril/art-pipeline": ["./packages/art-pipeline/src/index.ts"],
+      "@theandril/art-pipeline/runtime": ["./packages/art-pipeline/src/runtime.ts"],
+      "@theandril/sim": ["./packages/sim/src/index.ts"],
+      "@theandril/mapgen": ["./packages/mapgen/src/index.ts"],
+      "@theandril/content": ["./packages/content/src/index.ts"],
+      "@theandril/ai": ["./packages/ai/src/index.ts"],
+      "@theandril/persistence": ["./packages/persistence/src/index.ts"],
+      "@theandril/chronicle": ["./packages/chronicle/src/index.ts"],
+      "@theandril/protocol": ["./packages/protocol/src/index.ts"]
+    }
+  },
+  "include": ["apps", "packages", "scripts", "tests", "*.ts"],
+  "exclude": ["node_modules", "**/dist", "THEANDRIL_ASTRA_HANDOFF"]
+}

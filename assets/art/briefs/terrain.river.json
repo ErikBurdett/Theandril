@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.river",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.river"
+  ],
+  "prompt": "Original muted blue east-west river overlay with dark banks and broken reflections on transparent 64x64, center anchor 32,32. Matching edge-e/edge-w endpoints x4/x59 around y32; one static idle/se piece, no turns, mouths, bridges, or junctions. Future art only; does not invent canonical rivers.",
+  "frames": [
+    {
+      "id": "terrain.river/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.river/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "theandril-integer-overlay",
+    "model": "integer-overlay-v1",
+    "promptHash": "6e4169ab381a70848c3378a6067ccb6cb382a00e09beba12ea4d914efd7e3c0e",
+    "sourceRefs": [
+      "tools/art/create-overlay-briefs.ts"
+    ],
+    "licenseNotes": [
+      "Original integer-coordinate code-authored artwork for Theandril; no external bitmap references, model weights, or provider output used.",
+      "Source generator is retained in this repository; assets follow the project licensing policy. No third-party license rights are asserted."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-integer-overlay",
+      "version": "1",
+      "profile": "centered-overlay-64",
+      "settingsHash": "92d203289f3fc003cd461b8d35b10c5b38944f2a2d0e5ee471e5bd6c9a420db0",
+      "inputHash": "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff",
+      "outputHash": "1ddb34b60a2e98965702d05b9438046651bba558991ab2ab2a24ad02b94d00bb"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 16,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 32,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

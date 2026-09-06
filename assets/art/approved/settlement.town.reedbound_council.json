@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.reedbound_council",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.reedbound_council"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: one original faction sprite-sheet kit for Theandril, a gritty dark-fantasy strategic hex game.\nCreate a precisely aligned FOUR-column by FOUR-row sheet of equal square cells on a genuinely TRANSPARENT background. Fifteen separate cutout sprites; last bottom-right cell EMPTY. No text, labels, grid, frames, ground patches, checkerboard, drop shadows or watermark. Every object stays within its own cell with clear transparent margins. Each cell is a native pixel-art design presented at consistent integer enlargement, NOT a painted illustration with a pixel filter. Crisp intentional chunky square pixel clusters, binary silhouette edges, restrained 16–24-color subsets, no antialiasing, blur, gradients, tiny confetti or glossy effects. Upper-left diffuse light; worn materials, readable medium-value bodies, dark local-color outlines. Adult proportions, not chibi.\nAll people use the same slightly elevated orthographic three-quarter southeast view, fully visible, centered with feet at a consistent baseline. Same culture across equipment, civilians, cloth, settlements and heraldry. Distinguish the roles strongly at 64-pixel strategic scale.\nExact reading order, left to right:\nROW 1: (1) civilian Hearth caravan: one traveler beside a small covered two-wheel cart; (2) Wayfinder: lightly equipped hooded traveler holding a bow, quiver and pack; (3) Oath guard: practical helmet, sword and small shield; (4) pike infantry: long upright pike, open-face helmet, medium armor.\nROW 2: (1) heavy infantry: visibly broad heavy armor, large protective shield and short weapon; (2) cavalry: one armored adult rider on a fully visible horse, facing right/southeast; (3) Hearth marshal: experienced field officer with baton and plain rank pennant, no crown or spell effect; (4) Road witness: lightly dressed map surveyor with rolled chart and measuring staff, NOT bow or wizard.\nROW 3: (1) March engineer: adult specialist with leather work apron, hammer and tool satchel, NOT spellcaster; (2) village: three humble closely grouped dwellings with one focal hearth; (3) town: a denser cluster with practical workshop/market and modest hall; (4) fortified city: broader fortified architecture with readable gateway and stepped silhouette.\nROW 4: (1) faction crest: large ORIGINAL simple cloth/metal heraldic emblem; (2) same faction symbol on a narrow upright weathered banner with pole, complete foot of pole visible; (3) simplified same-symbol badge, few broad shapes suitable for a native32px icon; (4) completely empty transparent cell.\nHumanoid native target64x64 with feet at(32,56), cavalry96x96 ground(48,80), village/town96x96 ground(48,80), city128x128 ground(64,112), crest/banner64x64, badge32x32. Compose generously so extraction preserves each silhouette. Keep faction-color accents on cloth/shield/architecture rather than tinting skin and steel. Original setting and designs only, no existing-game symbols, costumes, names or licensed artwork.\nFaction art direction: REEDBOUND COUNCIL: wetland village assemblies and ferry households. Woven reed panels, gray-green layered rain capes, oxidized bronze fittings, bent willow shields with tall oval silhouettes, cord-bound open helmets and ankle wraps. Cart has woven panniers and reed canopy. Architecture uses raised timber pilings, steep reed-thatch roofs, small boardwalk supports contained inside settlement silhouette (no landscape/water patch). Original insignia: three reed stems passing through a single broad incomplete oval river loop. Tall rounded/arched shape language, muted moss/sea-green accents, weather-worn wood; functional armor still clearly iron, skin natural.",
+  "frames": [
+    {
+      "id": "settlement.town.reedbound_council/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.reedbound_council/bc73de83f53da67fadf9250fefc259e11c50c4818f988df054beae69639fbfa5/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "ad21b01ac378cf20d3059b09cc4a68787547c909c0fb9313ecfc18cf21a7867f",
+    "sourceRefs": [
+      "assets/art/source/factions/reedbound_council-v1.png",
+      "assets/art/source/faction-generation-prompts.json",
+      "assets/art/source/factions/crops-reedbound_council.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game asset used. Service terms apply; model/seed not exposed and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "3815981ffa4216ae24d72cc196439b912d10af2b74666226bf49c412acad02e9"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-faction-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "9d512a8b6bd80de20776040097e73f477f0e11a4a2800ee3aca30b02445016c4",
+      "inputHash": "3815981ffa4216ae24d72cc196439b912d10af2b74666226bf49c412acad02e9",
+      "outputHash": "f040cb7737c8ccae55cb2941c9c2041567e8bed5a41329144a1bc3e9ca8f115e"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "f040cb7737c8ccae55cb2941c9c2041567e8bed5a41329144a1bc3e9ca8f115e",
+      "outputHash": "142ebbf81595db72466506ce68406f9487463ad031d9432ff6d3793b4bb767c7"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "142ebbf81595db72466506ce68406f9487463ad031d9432ff6d3793b4bb767c7",
+      "outputHash": "c8378bf3843e50e4437c71a7146aa30f4c86a2ec9cab7acbadecdeae54f72120"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "5197e4fd79efdc0639a24fbf57bd61bed35cfa479862d7fb89726084d4b887cc",
+      "outputHash": "c23d7f0d968c1314e445cd919f7177f56c40748442d60d77ba7bbf06bf7df4c8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "527475275087aca243ce8856a6f44621ae4a3d23dcfdf2ad4e7d47cbc5fa531c",
+      "outputHash": "1b5f3f1f73952e2cb70ffda9b00acd9f8182f2551dffdd7864724be66b5c5d03"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "9b13a3134a04201e60f7a176ae4e6ae43960ecb1dd78b25cdb7ef73bdded6dcb",
+      "outputHash": "45e07e39c1aadc8411e4abdbf253644962a16fd61b8b925a4519f88c804cde11"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.reedbound_council.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-06T02:08:55.800Z",
+    "notes": "Native1x and exact4x processed contact sheet inspected against its explicit stable-ID order. Green woven oval heraldry and raised reed/timber architecture. Dense workshop/market hall cluster reads larger than village and lacks the city outer fortification. Hard alpha, complete padded silhouette and consistent anchors; one static southeast pose only. Additional facings/action animation and live camera pixel-perfect fit are not approved by this review. Refreshed source-bound crop provenance; final processed PNG and decoded RGBA verified byte-identical to these inspected pixels.\nReviewed candidate bc73de83f53da67fadf9250fefc259e11c50c4818f988df054beae69639fbfa5; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/67383c12d78d975263cc248552d0cc454374011f41131ce1f72bd8d04234a986.png"
+    ],
+    "inputHash": "583af5332c3e492a51e35e26e4a74eed53a12be6b808ed0a0ba7e3880ff3c2fd"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

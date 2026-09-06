@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.road",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.road"
+  ],
+  "prompt": "Original worn ochre east-west road overlay on a transparent 64x64 pointy hex, center anchor 32,32. Equal edge-e/edge-w endpoints at x4/x59 around y32; single static idle/se packaging. One straight piece only, no turns or junctions. Future art: roads are not canonical world infrastructure and must not be drawn as existing routes.",
+  "frames": [
+    {
+      "id": "terrain.road/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.road/c9709cadc49ff9e569448fe92ed5155a0edef6432594de8ed42e518bc7bb0c0f/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "theandril-integer-overlay",
+    "model": "integer-overlay-v1",
+    "promptHash": "9d9a4e21b9068553ef419eac1e84f1b919351f19cffd6e9228d37b7872764b2c",
+    "sourceRefs": [
+      "tools/art/create-overlay-briefs.ts"
+    ],
+    "licenseNotes": [
+      "Original integer-coordinate code-authored artwork for Theandril; no external bitmap references, model weights, or provider output used.",
+      "Source generator is retained in this repository; assets follow the project licensing policy. No third-party license rights are asserted."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-integer-overlay",
+      "version": "1",
+      "profile": "centered-overlay-64",
+      "settingsHash": "92d203289f3fc003cd461b8d35b10c5b38944f2a2d0e5ee471e5bd6c9a420db0",
+      "inputHash": "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff",
+      "outputHash": "68911e30cc8bccd5ae4ea660798cd0cbcb1c917f31772a5f9fb01033fb8be01b"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "fdb48b359dafe807dbd6ab556e20d72ea4d334675de1c653f89e725e53373fab",
+      "outputHash": "6ec90aa831f98c0d0e6f33841cd7ec1bb825542df9cdce66935c2f520a609542"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "6ec90aa831f98c0d0e6f33841cd7ec1bb825542df9cdce66935c2f520a609542",
+      "outputHash": "69bebf4b61f132d4b1d1b1caa7e063f8c572802364cc49050be86cf79d320e0a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "14be7fff09d1c2c7fef4e6bd5b88a9789615d868b8addefefef48cb9d2e9301b",
+      "outputHash": "a99dccddef5acfc063a329dee3b1b9b8907d002f1024c2ee9ff5e799fda661a5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "bee6eacd994a285476ae1606e1b7c5d0fceca0071d9542e523169ba5c117f7d1",
+      "outputHash": "bf4043fffe1f8adcbdc433334dd9278ea9f6fdc0c90543c7a174db344f3e5f96"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "94133f7f6c12316397eab04f6a7de7c3c06c8bd4fe3bea82986b3fe4a9fa6476",
+      "outputHash": "27f01f7853abc276729c6923d196d91bf729ceee6b06be72d94d897e3952a33e"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.road.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-05T21:03:24.311Z",
+    "notes": "Native and4x: ochre road strip with hard transparent boundaries and aligned east/west endpoints. Approved only as one straight future overlay; turns, junctions, road networks and gameplay remain unimplemented.\nReviewed candidate c9709cadc49ff9e569448fe92ed5155a0edef6432594de8ed42e518bc7bb0c0f; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0223190dafbba2c71c619bec551fe7be0a2dfdafe90280f5dee337a9113a1458.png"
+    ],
+    "inputHash": "61013fd21a04bc2123fef168c893ef97a91fca70ffd47ef603fb2173ad143471"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 16,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 32,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

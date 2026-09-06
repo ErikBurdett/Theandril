@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.ashen_compact",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 4,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.ashen_compact"
+  ],
+  "prompt": "Create an original dark-fantasy pixel-art SPRITE SHEET PNG with a TRANSPARENT BACKGROUND (alpha channel, empty pixels have alpha 0). Square layout: 4 columns x 4 rows, 15 isolated sprites with generous clear spacing, last cell empty. Every sprite entirely inside its cell, including spear tips and banners. Consistent southeast three-quarter view. Restrained charcoal iron, warm ochre and bone cloth, dull brass; practical rectangular equipment, gabled timber and kiln-brick buildings. Culture: Ashen Compact, displaced craft households bound by public oaths. Original emblem: open square hearth frame enclosing an ember diamond. Adult proportions, weathered materials, crisp hard pixel edges, upper-left light. No text or labels.\nRow1: caravan traveler with covered cart; hooded scout with bow; guard sword/square shield; infantry upright pike.\nRow2: heavily armored shield infantry; armored horse and rider; officer with baton and pennant; surveyor with rolled chart and staff.\nRow3: engineer apron/hammer/satchel; small workshop village; larger market town; fortified gabled city.\nRow4: square-hearth crest; same emblem on standing narrow banner; simplified same emblem badge; empty.\nEXPORT PNG WITH REAL TRANSPARENCY; the area around the sprites is empty alpha, suitable for compositing directly onto a game map.",
+  "frames": [
+    {
+      "id": "unit.colonist.ashen_compact/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.ashen_compact/16015482e1bfb5ada91dac7a0a032098d2aa8335f0fe020d33acab43171f5e54/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9fc9776c9a8eabc289eb1269c6121508469edd8463de7a58b54e8847c098dec9",
+    "sourceRefs": [
+      "assets/art/source/factions/ashen_compact-v4.png",
+      "assets/art/source/faction-revisions.json",
+      "assets/art/source/factions/crops-ashen_compact.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game asset used. Service terms apply; model/seed not exposed and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "a2522355c43e550a66c5b94a556c55385330f4d1b7fb9d89c0e8316101588de1"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-faction-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "c5171336d6794945781cd359c1287e5da11b68c111bac87c3564f4474278face",
+      "inputHash": "a2522355c43e550a66c5b94a556c55385330f4d1b7fb9d89c0e8316101588de1",
+      "outputHash": "86f6f6eb88ae5d0e37f063dd36406c14dd130a6c719553ee9067d7b25de17215"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "86f6f6eb88ae5d0e37f063dd36406c14dd130a6c719553ee9067d7b25de17215",
+      "outputHash": "dfd5ca1d03f3e31c1e2cd1c0420038a525df6d0b05db99ab4e69655d3bd9ec70"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "dfd5ca1d03f3e31c1e2cd1c0420038a525df6d0b05db99ab4e69655d3bd9ec70",
+      "outputHash": "3e1336aa30404a53e3d3d0c203e56d727987d0878a81b2f6f9ab043f03c6d67d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "1760817f7fe004ce6aa5d76bb4be93d0ab1cc880e7b0b610e42eb18b025637c0",
+      "outputHash": "6d4e369f19e086be238db19a1a7719f0e43bea10ef5af2768cccdc1c29f8daf2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "de0d5024044c0887ce2e90e18799eb7831b0008ee4cfaf5bca6b138e40dd17e3",
+      "outputHash": "d357cb80eafde6de62e178ca6bba226f21915083567d45c8d3b7522b896991cf"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "cf588019271a4c07c9d49b5d7b2d314d94d4b6a3710d1a173ed85d0164a653f9",
+      "outputHash": "e386507dc47b13e91d1b938c8dcb3a0ddd379a9f5970316bc7e6c0afc25147f8"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.ashen_compact.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-06T02:08:49.860Z",
+    "notes": "Native1x and enlarged processed contact sheet inspected in explicit stable-ID order. Ashen Compact ochre/bone cloth, rectangular iron and warm ember/brass equipment identity. Complete covered cart with hooded civilian driver and ox; whole wide silhouette preserves load/wheels and distinguishes a caravan from cavalry. Hard alpha, complete padded silhouette and registered pivot. One static southeast pose only; no additional action animation or pixel-perfect live camera claim.\nReviewed candidate 16015482e1bfb5ada91dac7a0a032098d2aa8335f0fe020d33acab43171f5e54; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/bce3e6caa8d68305b168eb5663ac704593156c36416f751165792d90b7dd880d.png"
+    ],
+    "inputHash": "7a9c0fff3a990226487b28f1d59a7e45b49feb6775875c35fb1ec8bf54271860"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

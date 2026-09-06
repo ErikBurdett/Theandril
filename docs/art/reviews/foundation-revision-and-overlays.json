@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Codex native review",
+  "scope": "Candidate acceptance for native integration/Art Lab, not new gameplay or complete directional systems.",
+  "decisions": [
+    {
+      "id": "monster.revenant",
+      "hash": "6a7f8ff9ed62ce5ecd6e76963d311b2120e70b7694e40bc4cc48104c71d5a7dd",
+      "decision": "APPROVED",
+      "notes": "Revision 2 inspected at native and4x: both forearms connect the broad chest-held tablet to the torso; skeletal legs and masked green eyes read without detached equipment. Replaces rejected revision1. Single-pose future roster artwork only.",
+      "evidence": "assets/art/review-previews/all-monster-4x.png"
+    },
+    {
+      "id": "effect.selection",
+      "hash": "5620059a2b89822eff4aa41aa33ff9715bb12d4c9a033d8d193363ac380219c5",
+      "decision": "APPROVED",
+      "notes": "Native and4x: crisp brass pointy-hex ring with dark backing and pale cardinal marks. Transparent center leaves terrain readable. Static future overlay, not a hit target or replacement game rule.",
+      "evidence": "assets/art/review-previews/all-effect-4x.png"
+    },
+    {
+      "id": "effect.movement",
+      "hash": "41ba9c5a3597247424aa3c2823a87ea7aa1c307b80b87861027ac1aadfdadd54",
+      "decision": "APPROVED",
+      "notes": "Native and4x: pale chevron and gold destination bracket read against dark/checker backgrounds. Static north-pointing cue only; se is packaging, not a directional movement implementation.",
+      "evidence": "assets/art/review-previews/all-effect-4x.png"
+    },
+    {
+      "id": "effect.melee",
+      "hash": "7b09889ecf1968577a2f096af7a6208e2c819487ccd525d4b424ad1bb1c764df",
+      "decision": "APPROVED",
+      "notes": "Native and4x: four distinct approach/impact/spark/recovery poses,100ms each, fixed center. Hard alpha and controlled ember clusters; one-shot presentation only, no damage-timing authority.",
+      "evidence": "assets/art/review-previews/all-effect-4x.png"
+    },
+    {
+      "id": "effect.projectile",
+      "hash": "68b9b9d21c6be573546231873b95339080d2165508710a872de24e0e6f287e02",
+      "decision": "APPROVED",
+      "notes": "Native and4x: arrow approach, centered impact, outward splinters and darkened short fade are distinct genuine100ms frames. One-shot future projectile-hit presentation only.",
+      "evidence": "assets/art/review-previews/all-effect-4x.png"
+    },
+    {
+      "id": "effect.magic",
+      "hash": "0f07610fa0bf87c0280aa9dac2a97fb0c164a81e909de4df9e25628b41713876",
+      "decision": "APPROVED",
+      "notes": "Native and4x: four distinct gather/release/expansion/dissipation rune poses,125ms each, fixed pivot and restrained violet ramp. Future presentation only; no casting system is implied.",
+      "evidence": "assets/art/review-previews/all-effect-4x.png"
+    },
+    {
+      "id": "terrain.road",
+      "hash": "c9709cadc49ff9e569448fe92ed5155a0edef6432594de8ed42e518bc7bb0c0f",
+      "decision": "APPROVED",
+      "notes": "Native and4x: ochre road strip with hard transparent boundaries and aligned east/west endpoints. Approved only as one straight future overlay; turns, junctions, road networks and gameplay remain unimplemented.",
+      "evidence": "assets/art/review-previews/all-terrain-4x.png"
+    },
+    {
+      "id": "terrain.river",
+      "hash": "28466956fd4147a51e3ab312e1cf5d29f2136d21cb439e475c51f8e81fcdf7ef",
+      "decision": "APPROVED",
+      "notes": "Native and4x: dark banks, muted blue water and broken reflections form a readable straight east/west segment. Approved only for this isolated future piece; no mouths, turns, junctions or canonical rivers.",
+      "evidence": "assets/art/review-previews/all-terrain-4x.png"
+    },
+    {
+      "id": "terrain.transitions",
+      "hash": "81c01257404de816aca19efaa76bd6fefa7b1b452decf69b476d9db334a0bfe6",
+      "decision": "APPROVED",
+      "notes": "Native and4x: small hard-edged moss fringe aligned to east hex boundary. Approved only for this one-edge source piece; not a complete adjacency-mask or biome-transition system.",
+      "evidence": "assets/art/review-previews/all-terrain-4x.png"
+    }
+  ]
+}

@@ -1,0 +1,358 @@
+import Dexie, { type Table, type Transaction } from 'dexie';
+import { z } from 'zod';
+import { checksum } from '@theandril/content';
+import { deserializeGame, serializeGame, type GameState } from '@theandril/sim';
+import { resumeJournal, type CampaignArchive, type CampaignJournal } from '@theandril/chronicle';
+import { MAX_SAVE_BYTES } from './size';
+
+export type SaveKind = 'manual' | 'auto';
+export const MAX_CHUNK_BYTES = 256 * 1024;
+export const MAX_CHUNK_RECORDS = 256;
+export const HISTORY_REPLICAS = 3;
+export const MAX_GARBAGE_BLOBS_PER_COMMIT = 64;
+export const CAMPAIGN_STORES = {
+  saves: '++id,kind', campaignGenerations: '++id,kind', campaignManifests: '&generationId',
+  campaignBlobs: '&digest', campaignPayloads: '[digest+replica],digest', campaignGarbage: '&digest',
+} as const;
+const digestSchema = z.string().regex(/^[a-f0-9]{64}$/);
+const count = z.number().int().min(0).max(1_000_000);
+const bytes = z.number().int().min(0).max(MAX_SAVE_BYTES);
+const version = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7)]);
+const headerSchema = z.object({
+  version: z.literal(2), mode: z.enum(['player', 'watch']), coverage: z.enum(['complete', 'from-save']),
+  initialHash: z.string().regex(/^[a-f0-9]{8}$/), initialSaveVersion: version, initialTurn: count.min(1),
+  finalHash: z.string().regex(/^[a-f0-9]{8}$/).nullable(), finalHashVersion: version.nullable(),
+}).strict();
+const manifestSchema = z.object({
+  version: z.literal(1), snapshot: z.string().max(MAX_SAVE_BYTES), header: headerSchema,
+  originDigest: digestSchema, headDigest: digestSchema.nullable(), recordCount: count,
+  recordBytes: bytes, originEscapedBytes: bytes, logicalBytes: bytes,
+}).strict();
+const originSchema = z.object({ version: z.literal(1), type: z.literal('origin'), initialSave: z.string().max(MAX_SAVE_BYTES) }).strict();
+const chunkSchema = z.object({
+  version: z.literal(1), type: z.literal('chunk'), originDigest: digestSchema, previousDigest: digestSchema.nullable(),
+  from: count, to: count, records: z.array(z.unknown()).min(1).max(MAX_CHUNK_RECORDS),
+}).strict();
+const fragmentSchema = z.object({
+  version: z.literal(1), type: z.literal('fragment'), originDigest: digestSchema, previousDigest: digestSchema.nullable(),
+  from: count, to: count, sequence: count.min(1), part: count, parts: count.min(1), json: z.string().min(1).max(MAX_CHUNK_BYTES),
+}).strict();
+const historySchema = z.discriminatedUnion('type', [chunkSchema, fragmentSchema]);
+const generationSchema = z.object({
+  id: z.number().int().positive(), kind: z.enum(['manual', 'auto']), type: z.enum(['legacy', 'chunks']),
+  turn: count.min(1), legacyId: z.number().int().positive().nullable(), manifestDigest: digestSchema.nullable(), originDigest: digestSchema.nullable(), headDigest: digestSchema.nullable(),
+  metadataChecksum: z.string().regex(/^[a-f0-9]{8}$/),
+}).strict();
+const blobSchema = z.object({
+  digest: digestSchema, type: z.enum(['origin', 'chunk', 'fragment']), previousDigest: digestSchema.nullable(),
+  refs: z.number().int().min(0).max(1_000_000), byteLength: bytes, from: count, to: count,
+  metadataChecksum: z.string().regex(/^[a-f0-9]{8}$/),
+}).strict();
+type Generation = z.infer<typeof generationSchema>;
+type GenerationRow = Omit<Generation, 'id'> & { id?: number };
+type BlobRow = z.infer<typeof blobSchema>;
+interface PayloadRow { digest: string; replica: number; payload: string }
+interface ManifestRow { generationId: number; payload: string }
+export interface LegacySaveRow { id?: number; kind: SaveKind; turn: number; text: string }
+interface PreparedBlob extends Omit<BlobRow, 'refs' | 'metadataChecksum'> { payload: string }
+interface Cursor { generationId: number; from: number; headDigest: string | null; originDigest: string; recordBytes: number; originEscapedBytes: number }
+export interface CampaignSaveStats { suffixRecords: number; encodedHistoryBytes: number; newBlobs: number; historyPayloadWrites: number; logicalBytes: number }
+interface LegacyAdapters {
+  validate(text: string): GameState;
+  parse(text: string): { game: GameState; archive: CampaignArchive };
+  serialize(game: GameState, archive: CampaignArchive): string;
+}
+const encoder = new TextEncoder();
+const byteLength = (text: string): number => encoder.encode(text).byteLength;
+function fail(message: string): never { throw new Error('Campaign storage: ' + message); }
+function sealGeneration(row: Omit<GenerationRow, 'metadataChecksum'>): GenerationRow {
+  const { id: _id, ...body } = row;
+  return { ...row, metadataChecksum: checksum(JSON.stringify(body)) };
+}
+function checkedGeneration(raw: unknown): Generation {
+  const row = generationSchema.parse(raw);
+  const expected = sealGeneration({ kind: row.kind, type: row.type, turn: row.turn, legacyId: row.legacyId, manifestDigest: row.manifestDigest, originDigest: row.originDigest, headDigest: row.headDigest });
+  if (expected.metadataChecksum !== row.metadataChecksum) fail('Generation reference metadata is corrupt.');
+  return row;
+}
+function sealBlob(row: Omit<BlobRow, 'metadataChecksum'>): BlobRow {
+  return { ...row, metadataChecksum: checksum(JSON.stringify({ digest: row.digest, type: row.type, previousDigest: row.previousDigest, refs: row.refs, byteLength: row.byteLength, from: row.from, to: row.to })) };
+}
+function checkedBlob(raw: unknown): BlobRow {
+  const row = blobSchema.parse(raw);
+  if (sealBlob(row).metadataChecksum !== row.metadataChecksum) fail('Blob reference metadata is corrupt.');
+  return row;
+}
+export async function historyDigest(text: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', encoder.encode(text));
+  return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+/** Counts exactly the existing envelope's UTF-8 encoding, without revisiting archived records. */
+export function logicalCampaignBytes(snapshot: string, header: Omit<CampaignArchive, 'records' | 'initialSave'>, originEscapedBytes: number, recordBytes: number, recordCount: number): number {
+  const empty = JSON.stringify({ format: 'theandril-campaign', version: 1, checksum: '00000000', snapshot, archive: { ...header, initialSave: '', records: [] } });
+  return byteLength(empty) + originEscapedBytes - 2 + recordBytes + Math.max(0, recordCount - 1);
+}
+
+async function prepared(payload: string, type: BlobRow['type'], previousDigest: string | null, from: number, to: number): Promise<PreparedBlob> {
+  const byteCount = byteLength(payload);
+  if (byteCount > (type === 'origin' ? MAX_SAVE_BYTES : MAX_CHUNK_BYTES)) fail('A history blob exceeds its supported byte limit.');
+  return { digest: await historyDigest(payload), type, previousDigest, from, to, byteLength: byteCount, payload };
+}
+
+async function encodeSuffix(originDigest: string, head: string | null, from: number, records: CampaignArchive['records']): Promise<{ blobs: PreparedBlob[]; head: string | null; recordBytes: number }> {
+  const blobs: PreparedBlob[] = []; let cursor = from; let recordBytes = 0;
+  let pending: string[] = []; let pendingBytes = 0;
+  const chunkText = (json: string[]) => `{"version":1,"type":"chunk","originDigest":${JSON.stringify(originDigest)},"previousDigest":${JSON.stringify(head)},"from":${cursor},"to":${cursor + json.length},"records":[${json.join(',')}]}`;
+  const flush = async () => {
+    if (!pending.length) return;
+    const item = await prepared(chunkText(pending), 'chunk', head, cursor, cursor + pending.length);
+    blobs.push(item); head = item.digest; cursor += pending.length; pending = []; pendingBytes = 0;
+  };
+  for (const record of records) {
+    const json = JSON.stringify(record); const size = byteLength(json); recordBytes += size;
+    if (recordBytes > MAX_SAVE_BYTES) fail('Save exceeds the 64 MiB limit.');
+    // The small constant reserves all bounded sequence/digest/header overhead, without re-encoding a growing pending array.
+    if (pending.length && (pending.length >= MAX_CHUNK_RECORDS || pendingBytes + size + pending.length + 512 > MAX_CHUNK_BYTES)) await flush();
+    if (size + 512 <= MAX_CHUNK_BYTES) { pending.push(json); pendingBytes += size; continue; }
+    await flush();
+    // A legitimate single turn may emit more than one chunk of events. UTF-16 slices are rejoined exactly before JSON parsing.
+    const pieces: string[] = [];
+    for (let offset = 0; offset < json.length;) {
+      let length = Math.min(32_000, json.length - offset);
+      while (byteLength(JSON.stringify(json.slice(offset, offset + length))) + 512 > MAX_CHUNK_BYTES) length = Math.floor(length / 2);
+      pieces.push(json.slice(offset, offset + length)); offset += length;
+    }
+    for (const [part, piece] of pieces.entries()) {
+      const to = part === pieces.length - 1 ? cursor + 1 : cursor;
+      const payload = JSON.stringify({ version: 1, type: 'fragment', originDigest, previousDigest: head, from: cursor, to, sequence: cursor + 1, part, parts: pieces.length, json: piece });
+      const item = await prepared(payload, 'fragment', head, cursor, to); blobs.push(item); head = item.digest;
+    }
+    cursor++;
+  }
+  await flush(); return { blobs, head, recordBytes };
+}
+
+/** DB1 rows remain intact; only small chronological metadata is added during the one-time upgrade. */
+export async function migrateLegacyGenerations(transaction: Transaction): Promise<void> {
+  const saves = transaction.table<LegacySaveRow, number>('saves');
+  const generations = transaction.table<GenerationRow, number>('campaignGenerations');
+  for (const key of await saves.orderBy('id').primaryKeys()) {
+    const row = await saves.get(key);
+    if (row?.id !== undefined) await generations.add(sealGeneration({ kind: row.kind, type: 'legacy', turn: row.turn, legacyId: row.id, manifestDigest: null, originDigest: null, headDigest: null }));
+  }
+}
+
+/** Storage ownership is private and append-only; canonical state and replay formats are unchanged. */
+export class CampaignStorage {
+  private readonly generations: Table<GenerationRow, number>;
+  private readonly manifests: Table<ManifestRow, number>;
+  private readonly blobs: Table<BlobRow, string>;
+  private readonly payloads: Table<PayloadRow, [string, number]>;
+  private readonly garbage: Table<{ digest: string }, string>;
+  private readonly saves: Table<LegacySaveRow, number>;
+  private readonly cursors = new WeakMap<CampaignJournal, Map<SaveKind, Cursor>>();
+  private queue: Promise<unknown> = Promise.resolve();
+  private stats: CampaignSaveStats | null = null;
+  constructor(private readonly db: Dexie, private readonly legacy: LegacyAdapters) {
+    this.generations = db.table('campaignGenerations'); this.manifests = db.table('campaignManifests'); this.blobs = db.table('campaignBlobs'); this.payloads = db.table('campaignPayloads'); this.saves = db.table('saves'); this.garbage = db.table('campaignGarbage');
+  }
+  get lastSaveStats(): Readonly<CampaignSaveStats> | null { return this.stats ? { ...this.stats } : null; }
+  private serial<T>(run: () => Promise<T>): Promise<T> { const operation = this.queue.catch(() => undefined).then(run); this.queue = operation; return operation; }
+  private get tables() { return [this.generations, this.manifests, this.blobs, this.payloads, this.saves, this.garbage]; }
+
+  async saveCampaign(game: GameState, journal: CampaignJournal, kind: SaveKind): Promise<void> {
+    z.enum(['manual', 'auto']).parse(kind);
+    return this.serial(async () => {
+      let cursor = this.cursors.get(journal)?.get(kind);
+      let prefixProof: { digest: string; payload: string } | undefined;
+      // Rotation by another journal/window can invalidate a once-durable prefix. Fall back to a cold suffix before preparing state.
+      if (cursor) {
+        const row = await this.generations.get(cursor.generationId);
+        if (!row || row.originDigest !== cursor.originDigest || row.headDigest !== cursor.headDigest) cursor = undefined;
+        else {
+          checkedGeneration(row);
+          const digest = cursor.headDigest ?? cursor.originDigest;
+          const payload = await this.verifiedPayload(digest);
+          if (cursor.headDigest) {
+            const head = historySchema.parse(JSON.parse(payload));
+            if (head.originDigest !== cursor.originDigest || head.to !== cursor.from) fail('Durable prefix head differs from the journal cursor.');
+          } else originSchema.parse(JSON.parse(payload));
+          prefixProof = { digest, payload };
+        }
+      }
+      const packet = journal.prepareCommit(game, cursor?.from ?? 0);
+      const snapshot = serializeGame(game); const turn = game.turn; deserializeGame(snapshot);
+      const { initialSave, ...header } = packet.header;
+      const originEscapedBytes = cursor?.originEscapedBytes ?? byteLength(JSON.stringify(initialSave));
+      const origin = cursor ? undefined : await prepared(JSON.stringify({ version: 1, type: 'origin', initialSave }), 'origin', null, 0, 0);
+      const originDigest = cursor?.originDigest ?? origin!.digest;
+      const suffix = await encodeSuffix(originDigest, cursor?.headDigest ?? null, packet.from, packet.records);
+      const recordBytes = (cursor?.recordBytes ?? 0) + suffix.recordBytes;
+      const logicalBytes = logicalCampaignBytes(snapshot, header, originEscapedBytes, recordBytes, packet.to);
+      if (logicalBytes > MAX_SAVE_BYTES) fail('Save exceeds the 64 MiB limit.');
+      const manifest = manifestSchema.parse({ version: 1, snapshot, header, originDigest, headDigest: suffix.head, recordCount: packet.to, recordBytes, originEscapedBytes, logicalBytes });
+      const payload = JSON.stringify(manifest); const manifestDigest = await historyDigest(payload);
+      const additions = [...(origin ? [origin] : []), ...suffix.blobs];
+      const installed: PreparedBlob[] = [];
+      let newBlobs = 0; let generationId = 0;
+      // Do not advance or invalidate the previous cursor unless this transaction commits.
+      await this.db.transaction('rw', this.tables, async () => {
+          if (cursor) {
+            const row = await this.generations.get(cursor.generationId);
+            if (!row || row.originDigest !== cursor.originDigest || row.headDigest !== cursor.headDigest) fail('The committed prefix was rotated concurrently. Retry this save.');
+            checkedGeneration(row);
+            const copies = await this.payloads.bulkGet([0, 1, 2].map(replica => [prefixProof!.digest, replica]));
+            if (!copies.some(copy => copy?.payload === prefixProof!.payload)) fail('The durable prefix head was corrupted during this commit.');
+          }
+          for (const addition of additions) if (await this.install(addition)) { newBlobs++; installed.push(addition); }
+          await this.retain(originDigest); if (suffix.head) await this.retain(suffix.head);
+          generationId = await this.generations.add(sealGeneration({ kind, type: 'chunks', turn, legacyId: null, manifestDigest, originDigest, headDigest: suffix.head }));
+          await this.manifests.add({ generationId, payload });
+          for (const addition of installed) await this.release(addition.digest);
+          await this.rotate(kind);
+          await this.collectGarbage();
+      });
+      const contexts = this.cursors.get(journal) ?? new Map<SaveKind, Cursor>();
+      contexts.set(kind, { generationId, from: packet.to, headDigest: suffix.head, originDigest, recordBytes, originEscapedBytes }); this.cursors.set(journal, contexts);
+      this.stats = { suffixRecords: packet.records.length, encodedHistoryBytes: additions.reduce((sum, item) => sum + item.byteLength, 0), newBlobs, historyPayloadWrites: newBlobs * HISTORY_REPLICAS, logicalBytes };
+    });
+  }
+
+  private async install(item: PreparedBlob): Promise<boolean> {
+    const existing = await this.blobs.get(item.digest);
+    if (existing) {
+      const checked = checkedBlob(existing);
+      if (checked.type !== item.type || checked.previousDigest !== item.previousDigest || checked.byteLength !== item.byteLength || checked.from !== item.from || checked.to !== item.to) fail('Content-addressed blob metadata collision.');
+      const copies = await this.payloads.bulkGet([0, 1, 2].map(replica => [item.digest, replica]));
+      if (!copies.some(copy => copy?.payload === item.payload)) fail('Existing blob does not match its content address.');
+      return false;
+    }
+    // New blob references start with an installation lease, released after its first real owner is present.
+    await this.blobs.add(sealBlob({ digest: item.digest, type: item.type, previousDigest: item.previousDigest, byteLength: item.byteLength, from: item.from, to: item.to, refs: 1 }));
+    await this.payloads.bulkAdd([0, 1, 2].map(replica => ({ digest: item.digest, replica, payload: item.payload })));
+    if (item.previousDigest) await this.retain(item.previousDigest);
+    return true;
+  }
+  private async retain(digest: string): Promise<void> {
+    const row = checkedBlob(await this.blobs.get(digest)); await this.blobs.put(sealBlob({ ...row, refs: row.refs + 1 }));
+    if (row.refs === 0) await this.garbage.delete(digest);
+  }
+  private async release(digest: string): Promise<void> {
+    const row = checkedBlob(await this.blobs.get(digest));
+    if (row.refs < 1) fail('History reference count underflow.');
+    await this.blobs.put(sealBlob({ ...row, refs: row.refs - 1 }));
+    if (row.refs === 1) await this.garbage.put({ digest });
+  }
+  private async collectGarbage(): Promise<void> {
+    for (let removed = 0; removed < MAX_GARBAGE_BLOBS_PER_COMMIT; removed++) {
+      const job = await this.garbage.orderBy('digest').first(); if (!job) return;
+      const row = checkedBlob(await this.blobs.get(job.digest));
+      if (row.refs !== 0) fail('Garbage collection encountered a live history reference.');
+      await this.payloads.bulkDelete([0, 1, 2].map(replica => [row.digest, replica])); await this.blobs.delete(row.digest); await this.garbage.delete(row.digest);
+      if (row.previousDigest) await this.release(row.previousDigest);
+    }
+  }
+  private async rotate(kind: SaveKind): Promise<void> {
+    const keys = await this.generations.where('kind').equals(kind).primaryKeys();
+    for (const key of keys.sort((a, b) => a - b).slice(0, Math.max(0, keys.length - 3))) {
+      const row = checkedGeneration(await this.generations.get(key));
+      if (row.type === 'legacy') { if (row.legacyId !== null) await this.saves.delete(row.legacyId); }
+      else { if (row.headDigest) await this.release(row.headDigest); if (row.originDigest) await this.release(row.originDigest); await this.manifests.delete(key); }
+      await this.generations.delete(key);
+    }
+  }
+
+  async saveLegacy(text: string, kind: SaveKind, turn: number): Promise<void> {
+    z.enum(['manual', 'auto']).parse(kind);
+    return this.serial(async () => {
+      await this.db.transaction('rw', this.tables, async () => {
+        const legacyId = await this.saves.add({ kind, turn, text });
+        await this.generations.add(sealGeneration({ kind, type: 'legacy', turn, legacyId, manifestDigest: null, originDigest: null, headDigest: null }));
+        await this.rotate(kind);
+        await this.collectGarbage();
+      });
+    });
+  }
+
+  private async verifiedPayload(digest: string): Promise<string> {
+    if (!digestSchema.safeParse(digest).success) fail('Invalid blob reference.');
+    const copies = await this.payloads.bulkGet([0, 1, 2].map(replica => [digest, replica]));
+    for (const copy of copies) if (copy && typeof copy.payload === 'string' && copy.payload.length <= MAX_SAVE_BYTES && byteLength(copy.payload) <= MAX_SAVE_BYTES && await Dexie.waitFor(historyDigest(copy.payload)) === digest) return copy.payload;
+    return fail('All three payload replicas are missing or corrupt.');
+  }
+
+  private async reconstruct(row: Generation): Promise<{ game: GameState; journal: CampaignJournal }> {
+    if (!row.manifestDigest || !row.originDigest || row.legacyId !== null) fail('Incomplete chunked generation metadata.');
+    const stored = await this.manifests.get(row.id);
+    if (!stored || typeof stored.payload !== 'string' || stored.payload.length > MAX_SAVE_BYTES || byteLength(stored.payload) > MAX_SAVE_BYTES || await Dexie.waitFor(historyDigest(stored.payload)) !== row.manifestDigest) fail('Snapshot manifest is missing or corrupt.');
+    const manifest = manifestSchema.parse(JSON.parse(stored.payload));
+    if (manifest.originDigest !== row.originDigest || manifest.headDigest !== row.headDigest) fail('Manifest and generation references differ.');
+    const origin = originSchema.parse(JSON.parse(await this.verifiedPayload(manifest.originDigest)));
+    const history: z.infer<typeof historySchema>[] = []; const visited = new Set<string>(); let head = manifest.headDigest;
+    let encodedBytes = 0;
+    while (head) {
+      if (visited.has(head) || visited.size >= 1_000_000) fail('History chain is cyclic or exceeds its bound.'); visited.add(head);
+      const payload = await this.verifiedPayload(head); const size = byteLength(payload); encodedBytes += size;
+      if (size > MAX_CHUNK_BYTES || encodedBytes > MAX_SAVE_BYTES * 3) fail('History chain exceeds its byte bound.');
+      const item = historySchema.parse(JSON.parse(payload));
+      if (item.originDigest !== manifest.originDigest) fail('History chunk belongs to a different origin.');
+      history.push(item); head = item.previousDigest;
+    }
+    const records: unknown[] = []; let fragments: string[] = []; let expectedParts = 0; let recordBytes = 0;
+    for (const item of history.reverse()) {
+      if (item.from !== records.length) fail('History sequence is discontinuous.');
+      if (item.type === 'chunk') {
+        if (fragments.length || item.to !== item.from + item.records.length) fail('History chunk count differs.');
+        for (const record of item.records) { recordBytes += byteLength(JSON.stringify(record)); records.push(record); }
+      } else {
+        if (item.sequence !== records.length + 1 || item.part !== fragments.length || (fragments.length && item.parts !== expectedParts)) fail('Record fragment sequence differs.');
+        expectedParts = item.parts; fragments.push(item.json);
+        const complete = fragments.length === expectedParts;
+        if (item.to !== records.length + Number(complete)) fail('Record fragment endpoint differs.');
+        if (complete) { const text = fragments.join(''); recordBytes += byteLength(text); records.push(JSON.parse(text)); fragments = []; expectedParts = 0; }
+      }
+      if (records.length > manifest.recordCount || recordBytes > MAX_SAVE_BYTES) fail('History exceeds its declared logical bound.');
+    }
+    if (fragments.length || records.length !== manifest.recordCount || recordBytes !== manifest.recordBytes) fail('History does not reach the saved record count.');
+    const escaped = byteLength(JSON.stringify(origin.initialSave));
+    const logical = logicalCampaignBytes(manifest.snapshot, manifest.header, escaped, recordBytes, records.length);
+    if (escaped !== manifest.originEscapedBytes || logical !== manifest.logicalBytes || logical > MAX_SAVE_BYTES) fail('Logical envelope byte count differs.');
+    const game = deserializeGame(manifest.snapshot);
+    if (game.turn !== row.turn) fail('Snapshot turn differs from its generation.');
+    const journal = resumeJournal(game, { ...manifest.header, initialSave: origin.initialSave, records });
+    const contexts = new Map<SaveKind, Cursor>(); contexts.set(row.kind, { generationId: row.id, from: records.length, headDigest: row.headDigest, originDigest: row.originDigest, recordBytes, originEscapedBytes: escaped }); this.cursors.set(journal, contexts);
+    return { game, journal };
+  }
+
+  async loadCampaign(kind: SaveKind): Promise<{ game: GameState; journal: CampaignJournal }> {
+    return this.db.transaction('r', this.tables, async () => {
+      const keys = (await this.generations.where('kind').equals(kind).primaryKeys()).sort((a, b) => b - a);
+      for (const key of keys) {
+        try {
+          const row = checkedGeneration(await this.generations.get(key));
+          if (row.type === 'chunks') return await this.reconstruct(row);
+          const saved = row.legacyId === null ? undefined : await this.saves.get(row.legacyId);
+          if (!saved || saved.kind !== kind || saved.turn !== row.turn) fail('Legacy save metadata differs.');
+          const { game, archive } = this.legacy.parse(saved.text); return { game, journal: resumeJournal(game, archive) };
+        } catch { /* Recovery never deletes or repairs potentially recoverable evidence. */ }
+      }
+      return fail(keys.length ? 'No valid save remains in this slot. Import a backup.' : `No ${kind} save exists yet.`);
+    });
+  }
+  async loadText(kind: SaveKind): Promise<string> {
+    return this.db.transaction('r', this.tables, async () => {
+      const keys = (await this.generations.where('kind').equals(kind).primaryKeys()).sort((a, b) => b - a);
+      for (const key of keys) {
+        try {
+          const row = checkedGeneration(await this.generations.get(key));
+          if (row.type === 'chunks') { const { game, journal } = await this.reconstruct(row); return this.legacy.serialize(game, journal.materialize()); }
+          const saved = row.legacyId === null ? undefined : await this.saves.get(row.legacyId);
+          if (!saved || saved.kind !== kind || saved.turn !== row.turn) fail('Legacy save metadata differs.');
+          this.legacy.validate(saved.text); return saved.text;
+        } catch { /* Try the preceding generation, preserving all rows. */ }
+      }
+      return fail(keys.length ? 'No valid save remains in this slot. Import a backup.' : `No ${kind} save exists yet.`);
+    });
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city"
+  ],
+  "prompt": "Generate an original game production sprite sheet for THEANDRIL: 3 columns x 2 rows, exactly six equal square cells. True transparent background, no text, borders, grid lines, watermarks, floor tiles or ground bases. Every asset centered within its own cell and fully isolated with 12 percent transparent margin, nothing crossing cells. Same oblique top-down three-quarter strategic-map camera, roof planes visible, north-west light. Actual crisp pixel art with deliberately placed hard square clusters, no smooth illustration, no antialias, no blurry fake pixel filter. Each cell designed at native 96x96 pixels; sheet logical 288x192, may be enlarged by integer nearest-neighbor. Muted old stone, brown timbers, faded ash canvas, rust iron, straw, small warm hearth lights. Gritty serious adult dark fantasy original architecture, no borrowed game designs. Detailed but readable large value shapes.\nExact cells left to right:\nTOP ROW: 1 a poor hearthland VILLAGE, three small steep-roof timber cottages around an oath stone and rough wooden fence; 2 a TOWN, compact five-store cluster of weathered stone/timber buildings, slate roofs, bell house and central kiln, clearly bigger architectural density; 3 a FORTIFIED CITY, crenellated compact stone enclosure, gate and four squat towers sheltering slate-roof town and a taller hearth hall, no cathedral copied from a game.\nBOTTOM ROW: 1 ancient Witness Road RUIN, a broken freestanding arched waystation of dark stone with weathered vow tablets, rubble and sparse dead grass; 2 isolated weathered stone WATCHTOWER, square battered tower with wood porch and ash-colored banner, distinct silhouette; 3 a mineral RESOURCE DEPOSIT, jagged low iron-rich rocks, streaks of oxidized orange, compact excavation with two worn timbers, no cart.\nStrong silhouette edges. Transparent pixels around and between all six objects. No continuous landscape, scene, labels or people. Consistent shared palette and pixel scale, restrained cluster-based shading.",
+  "frames": [
+    {
+      "id": "settlement.city/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city/0bb23bc1cf8cca04df3ff23f836099d4f2421db706327521ce8c9ae91c7e4656/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "4f0fa494ea6131de73c6f8b34d139e2e998780f12c19b1a065f370336d8333b7",
+    "sourceRefs": [
+      "assets/art/source/objects-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "20774ab45de76572ce66dd19a6e601989c9fe9a82b2d8bd581f876ccf54f9d2c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "registered-128",
+      "settingsHash": "2cda6ae24d873dd3420d4e774fce600166746e2af299f1c4bc74025aab79302f",
+      "inputHash": "20774ab45de76572ce66dd19a6e601989c9fe9a82b2d8bd581f876ccf54f9d2c",
+      "outputHash": "311276e9dd723005ebc3cbcf57390ab90439c86223e467e59a1a3f18b71c4ba8"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "374d371c7bc36c27f9e07e4dbe105959e7e41cb004affe3c90f3649a8a998d91",
+      "outputHash": "d03b8390a33968eceee41fb57bdbf3f6ab10c63b547074413e67ae196ad31e7f"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d03b8390a33968eceee41fb57bdbf3f6ab10c63b547074413e67ae196ad31e7f",
+      "outputHash": "74b638fe93e309b4da1e1e459a1712f8349b9ca35c84dadc9b43faeac8745c27"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "3aa88002dd86620836b2716fb68657c025ce84216a3222d2a845ff83d49eabf4",
+      "outputHash": "d60f4feec901398eacdc6e99983037b387fcdf4bad7e8fb33723f908b0fc60bc"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "b802573fa797171bee70078546a862c67d1870998f2f84ce298f683e8bb6a6c9",
+      "outputHash": "bb1297afef043dbc891ee848d5551772f3f95a267cf16bc0286f76cb269ce3db"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "ddbe53c2dbf021251da3bd08c1714c94f68d2ba6bd9d1e9a9a71545d9d63a68e",
+      "outputHash": "137e0f2262d2fc2c9f57f90dd474d3fbd715cbde66c029beb65a059cd320bad3"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex and independent renderer review",
+    "reviewedAt": "2026-09-05T20:37:17.592Z",
+    "notes": "Native and 4x review: village/town/fortified city densities and roof silhouettes are distinct; weathered material palette and ground anchors consistent. City overhang must be checked in gameplay before integration signoff.\nReviewed candidate 0bb23bc1cf8cca04df3ff23f836099d4f2421db706327521ce8c9ae91c7e4656; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5afe60bc3d3dd690f1c5bfcd899bb89e8426845c1d7076cd178b2498abdc20cf.png"
+    ],
+    "inputHash": "45dde872d6cee0dae73df91869630ebb35a3f53dd1c5fa41bcf5258270477795"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

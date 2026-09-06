@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "map.resource",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "map.resource"
+  ],
+  "prompt": "Generate an original game production sprite sheet for THEANDRIL: 3 columns x 2 rows, exactly six equal square cells. True transparent background, no text, borders, grid lines, watermarks, floor tiles or ground bases. Every asset centered within its own cell and fully isolated with 12 percent transparent margin, nothing crossing cells. Same oblique top-down three-quarter strategic-map camera, roof planes visible, north-west light. Actual crisp pixel art with deliberately placed hard square clusters, no smooth illustration, no antialias, no blurry fake pixel filter. Each cell designed at native 96x96 pixels; sheet logical 288x192, may be enlarged by integer nearest-neighbor. Muted old stone, brown timbers, faded ash canvas, rust iron, straw, small warm hearth lights. Gritty serious adult dark fantasy original architecture, no borrowed game designs. Detailed but readable large value shapes.\nExact cells left to right:\nTOP ROW: 1 a poor hearthland VILLAGE, three small steep-roof timber cottages around an oath stone and rough wooden fence; 2 a TOWN, compact five-store cluster of weathered stone/timber buildings, slate roofs, bell house and central kiln, clearly bigger architectural density; 3 a FORTIFIED CITY, crenellated compact stone enclosure, gate and four squat towers sheltering slate-roof town and a taller hearth hall, no cathedral copied from a game.\nBOTTOM ROW: 1 ancient Witness Road RUIN, a broken freestanding arched waystation of dark stone with weathered vow tablets, rubble and sparse dead grass; 2 isolated weathered stone WATCHTOWER, square battered tower with wood porch and ash-colored banner, distinct silhouette; 3 a mineral RESOURCE DEPOSIT, jagged low iron-rich rocks, streaks of oxidized orange, compact excavation with two worn timbers, no cart.\nStrong silhouette edges. Transparent pixels around and between all six objects. No continuous landscape, scene, labels or people. Consistent shared palette and pixel scale, restrained cluster-based shading.",
+  "frames": [
+    {
+      "id": "map.resource/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/map.resource/949a7577324a5aa1d3941d8582dcacb50a19ad4c7add0644e88d3de12e40606b/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "4f0fa494ea6131de73c6f8b34d139e2e998780f12c19b1a065f370336d8333b7",
+    "sourceRefs": [
+      "assets/art/source/objects-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "20774ab45de76572ce66dd19a6e601989c9fe9a82b2d8bd581f876ccf54f9d2c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "2cda6ae24d873dd3420d4e774fce600166746e2af299f1c4bc74025aab79302f",
+      "inputHash": "20774ab45de76572ce66dd19a6e601989c9fe9a82b2d8bd581f876ccf54f9d2c",
+      "outputHash": "48be8f8bc4d292a0ad987cd55107cf41cb05771987c622f0b293321baf1bddaa"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "3c658b10ced542458275922c00e7839c3b541259cd79f6c3f12fa4dfe093f92c",
+      "outputHash": "7ae731206e9fb109cec9615bf816ae6110d8b998316f2c2e443f85cf89fd8200"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7ae731206e9fb109cec9615bf816ae6110d8b998316f2c2e443f85cf89fd8200",
+      "outputHash": "8cfaee27286a8a62746253dfb1af4c128444f9018ee902ee266d7232ac79c82e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "194bef3c0967d613ef0760ca7aef92e113fb0333658a9cc0ee21712b0c7d594a",
+      "outputHash": "32b58017ee623ec5beb556c5cb8129c34f6a3984ae553bdf23741eb967f08d29"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "6615a9e28722aca0bb5341849fdd7c09fbac0e040762317de0a69eedec2c0667",
+      "outputHash": "460531e744483040eb203571f499fed6466259b54461f1167317e42c14db8f38"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "b71ad9721253881e5252d9f44a466bb21e2cf2c840b202697c57f6a2d0f397a5",
+      "outputHash": "feaf9ce90c115ae7702704b80a7eadfded73705b170fc58676813a1042071616"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/map.resource.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex and independent renderer review",
+    "reviewedAt": "2026-09-05T20:37:13.540Z",
+    "notes": "Native and 4x review: original single-pose silhouette and weathered material clusters readable for map.resource. Future content artwork only; no canonical gameplay consumer or completed directional/combat animation is claimed.\nReviewed candidate 949a7577324a5aa1d3941d8582dcacb50a19ad4c7add0644e88d3de12e40606b; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5afe60bc3d3dd690f1c5bfcd899bb89e8426845c1d7076cd178b2498abdc20cf.png"
+    ],
+    "inputHash": "1a9fcfe594177a0e202abb868461da8cc42a28b825c453b4e97ea851d111625b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

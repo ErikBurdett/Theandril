@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.movement",
+  "type": "effect",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.movement"
+  ],
+  "prompt": "Original high-contrast stacked directional chevron and destination bracket, 64x64 native, center anchor 32,32. Single static idle/se clip with artwork pointing north; the se label is only the current packaging convention, not a six-facing set. Candidate destination cue for explicit observed movement only.",
+  "frames": [
+    {
+      "id": "effect.movement/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.movement/41ba9c5a3597247424aa3c2823a87ea7aa1c307b80b87861027ac1aadfdadd54/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "theandril-integer-overlay",
+    "model": "integer-overlay-v1",
+    "promptHash": "a6ac7604a8f19a3170d49ad6e2d50c715ee22b69d396fa15c05b6bedec67fbf4",
+    "sourceRefs": [
+      "tools/art/create-overlay-briefs.ts"
+    ],
+    "licenseNotes": [
+      "Original integer-coordinate code-authored artwork for Theandril; no external bitmap references, model weights, or provider output used.",
+      "Source generator is retained in this repository; assets follow the project licensing policy. No third-party license rights are asserted."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-integer-overlay",
+      "version": "1",
+      "profile": "centered-overlay-64",
+      "settingsHash": "92d203289f3fc003cd461b8d35b10c5b38944f2a2d0e5ee471e5bd6c9a420db0",
+      "inputHash": "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff",
+      "outputHash": "e0e0492a776781f1b98d5ce465696e419388d595c2381eebcdb1163b9978f543"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "3e6b4434f70d8ea384c9e5d8779cb36229bf5a8c064ccb39b84daf752a8e3333",
+      "outputHash": "94dfd3d53cb28865f722e41f537dbf12c9245754ae4c24a68550fba8064505b2"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "94dfd3d53cb28865f722e41f537dbf12c9245754ae4c24a68550fba8064505b2",
+      "outputHash": "670ab2f5a4760732d56dd182e21a18a2f8c5e7ab171acb2317ca1e9b5bb02381"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "969f674948a637d2bf9bd493e17e3ed7b23a6445b19ce6714a9e2b84a6fb8c41",
+      "outputHash": "3b9af37bc82a748874d78a76ca3f390b4abe433d7cd1469c3b97610066d4759e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "c3456b0f5ff41ac69d891ea51e06f5a876102677c5b7dcc7f7e0d18b714b8264",
+      "outputHash": "c8ee68ebce6ce36f3ee93ee4acfacdb490ff517c66deece9a29d8cbf01110f7b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "63b329cc5b262aec87c99024631eeb3dbc625f9ff51b9dce8fc893e835fbc2b0",
+      "outputHash": "56b0ef5bb30b4d721fae32ed5e8263b89940494a7c2097c2ab7255e67d4c5794"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/effect.movement.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-05T21:03:22.715Z",
+    "notes": "Native and4x: pale chevron and gold destination bracket read against dark/checker backgrounds. Static north-pointing cue only; se is packaging, not a directional movement implementation.\nReviewed candidate 41ba9c5a3597247424aa3c2823a87ea7aa1c307b80b87861027ac1aadfdadd54; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/6677df15a33d21411f3db9658825ce5f2e70e44bc7e651411f8a0e3927ad17d5.png"
+    ],
+    "inputHash": "08fba0eab8f0c52a1f0122af7b471a08fbcc06e662dd887769a6a005480ada85"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 16,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 32,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

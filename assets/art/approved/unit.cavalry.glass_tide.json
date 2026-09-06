@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.glass_tide",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.glass_tide"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: one original faction sprite-sheet kit for Theandril, a gritty dark-fantasy strategic hex game.\nCreate a precisely aligned FOUR-column by FOUR-row sheet of equal square cells on a genuinely TRANSPARENT background. Fifteen separate cutout sprites; last bottom-right cell EMPTY. No text, labels, grid, frames, ground patches, checkerboard, drop shadows or watermark. Every object stays within its own cell with clear transparent margins. Each cell is a native pixel-art design presented at consistent integer enlargement, NOT a painted illustration with a pixel filter. Crisp intentional chunky square pixel clusters, binary silhouette edges, restrained 16–24-color subsets, no antialiasing, blur, gradients, tiny confetti or glossy effects. Upper-left diffuse light; worn materials, readable medium-value bodies, dark local-color outlines. Adult proportions, not chibi.\nAll people use the same slightly elevated orthographic three-quarter southeast view, fully visible, centered with feet at a consistent baseline. Same culture across equipment, civilians, cloth, settlements and heraldry. Distinguish the roles strongly at 64-pixel strategic scale.\nExact reading order, left to right:\nROW 1: (1) civilian Hearth caravan: one traveler beside a small covered two-wheel cart; (2) Wayfinder: lightly equipped hooded traveler holding a bow, quiver and pack; (3) Oath guard: practical helmet, sword and small shield; (4) pike infantry: long upright pike, open-face helmet, medium armor.\nROW 2: (1) heavy infantry: visibly broad heavy armor, large protective shield and short weapon; (2) cavalry: one armored adult rider on a fully visible horse, facing right/southeast; (3) Hearth marshal: experienced field officer with baton and plain rank pennant, no crown or spell effect; (4) Road witness: lightly dressed map surveyor with rolled chart and measuring staff, NOT bow or wizard.\nROW 3: (1) March engineer: adult specialist with leather work apron, hammer and tool satchel, NOT spellcaster; (2) village: three humble closely grouped dwellings with one focal hearth; (3) town: a denser cluster with practical workshop/market and modest hall; (4) fortified city: broader fortified architecture with readable gateway and stepped silhouette.\nROW 4: (1) faction crest: large ORIGINAL simple cloth/metal heraldic emblem; (2) same faction symbol on a narrow upright weathered banner with pole, complete foot of pole visible; (3) simplified same-symbol badge, few broad shapes suitable for a native32px icon; (4) completely empty transparent cell.\nHumanoid native target64x64 with feet at(32,56), cavalry96x96 ground(48,80), village/town96x96 ground(48,80), city128x128 ground(64,112), crest/banner64x64, badge32x32. Compose generously so extraction preserves each silhouette. Keep faction-color accents on cloth/shield/architecture rather than tinting skin and steel. Original setting and designs only, no existing-game symbols, costumes, names or licensed artwork.\nFaction art direction: GLASS TIDE: salt-scoured coastal charter towns and rigging workers. Slate-blue short coats, pale salt linen, gunmetal scale plates, rope lashings, curved seafarer bucklers, low rounded helmets, split shoulder mantles and restrained blue-green glass beads. Civilian cart has rolled sailcloth, tightly lashed crates and chart case. Architecture has weathered white-gray stone, asymmetrical blue slate roofs, rope-railed lookout balconies and a charter hall with a narrow beacon; no ocean floor or terrain base. Original insignia: a hollow angular sail diamond above two short parallel tide bars. Slender sloping/diamond grammar, blue/sea-gray accents; no anchors copied from existing factions, no magic or glitter.",
+  "frames": [
+    {
+      "id": "unit.cavalry.glass_tide/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.glass_tide/29fa0ca5f8051c0d67f0c00ac21b6b1de57752ed1eafb3704e92a0df9368bc23/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "511cee5870e1d81e540a010ee860cf22c0fd8559885c8a6f1cafa8b81b8e6d78",
+    "sourceRefs": [
+      "assets/art/source/factions/glass_tide-v1.png",
+      "assets/art/source/faction-generation-prompts.json",
+      "assets/art/source/factions/crops-glass_tide.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game asset used. Service terms apply; model/seed not exposed and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "86d56e6c3c731f7dc19e27078a047b8b61db2933de9daa7562360dfe68aee054"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-faction-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "93f255821e12e34c95482f6d8ac68256560d4e6390695f1b67973daa816369c7",
+      "inputHash": "86d56e6c3c731f7dc19e27078a047b8b61db2933de9daa7562360dfe68aee054",
+      "outputHash": "36421d621a32fc0100608de5be2b395f3aa7c047b590088b86ece4ba30dc6350"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "36421d621a32fc0100608de5be2b395f3aa7c047b590088b86ece4ba30dc6350",
+      "outputHash": "9324e5cc4b4204e07eec3311b636e8d4af1b2bd6c9a38f77d677a764eb6f4805"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9324e5cc4b4204e07eec3311b636e8d4af1b2bd6c9a38f77d677a764eb6f4805",
+      "outputHash": "7a3ec4c517f77fac2839f636cbb511423f228ddfec9a68cfbe4efd0aa455855b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "d85aeeb5140230ee37dfff17ff129b7c566e3d9b1cd24fe8e070075fd96fd3fb",
+      "outputHash": "c53efe6760f9f5928c63f22d90cfd525cdaaacfdc4c3003b6249cd979308341c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "e98146ad2d78cf9e5c75d676097f907aea4691bdda5416f4dbb30d76b3bd7b7d",
+      "outputHash": "2c9aea25c2a64db579d53d3f627d60aab6f9022ecd392a94a6724b76a485404c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "e670fedc866c5ce162983caf5c1c64d6282c083f5077c85a519f386777d12dd3",
+      "outputHash": "0c13aab2413b51cd72d3e48a1d22a05746d8e11fbf17cb93e54b9091da8224b4"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.glass_tide.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-06T02:08:52.871Z",
+    "notes": "Native1x and exact4x processed contact sheet inspected against its explicit stable-ID order. Slate blue/salt linen, curved sail-diamond shields and light stone beacon architecture. Complete rider, horse, reins and separated hooves on96px canvas; mounted silhouette and culture tack clear. Hard alpha, complete padded silhouette and consistent anchors; one static southeast pose only. Additional facings/action animation and live camera pixel-perfect fit are not approved by this review. Refreshed source-bound crop provenance; final processed PNG and decoded RGBA verified byte-identical to these inspected pixels.\nReviewed candidate 29fa0ca5f8051c0d67f0c00ac21b6b1de57752ed1eafb3704e92a0df9368bc23; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/cd744171c3028fcbadb3211f5859b28bea162a464bd1d002119da0e460473bcb.png"
+    ],
+    "inputHash": "cafd167316b5151ba8c645ec4bcccecd10fd67653802741d011cd3c3a61e4b7f"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

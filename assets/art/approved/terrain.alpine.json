@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.alpine",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.alpine"
+  ],
+  "prompt": "Original THEANDRIL terrain spritesheet, 4 columns by 3 rows of exactly equal square cells, all cells aligned. Each cell contains ONE pointy-top hex terrain tile, 64 by64 logical-pixel canvas with hex vertices (32,0),(60,16),(60,48),(32,64),(4,48),(4,16), no extrusion or bevel, no thick outline. Full flat hex top surface, orthographic top-down strategic map view. Transparent outside each hex; no other background, shadows, text, grid, labels. North-west lighting for raised trees/rocks. All tiles equally sized. Gritty original dark fantasy pixel-art craftsmanship; genuine small deliberate hard square pixel clusters, 8-12 colors per tile, restrained muted palette, no smoothing, no painterly grain, no micro-noise, no floating diorama bases. Broad readable ground value, clustered details, leave edge terrain simple for adjoining neighbors.\nExact left-to-right row order:\nROW1: temperate green grassland with sparse ochre grass tufts; dense dark temperate broadleaf forest canopy with visible earth; dark blue-green evergreen taiga with sparse snow; pale cold tundra with dry low scrub and stones.\nROW2: warm ochre desert low sand ripples; dry yellow-brown steppe with sparse pale bunchgrass; dark muddy marsh with shallow pools and reeds; dense deep green rainforest large broadleaf crowns.\nROW3: alpine gray rocky mountain mass with restrained pale snowcap; deep dark blue open ocean with short muted wave clusters; low stony brown green hills with visible ridges; shallow teal coastal water meeting a small worn sand spit on upper side.\nNatural readable low-frequency shapes. Tile art should be beautiful at actual64pixel size. No rivers or roads painted across unrelated land, no buildings, no characters. Clearly distinguish the twelve terrain silhouettes/materials while matching one palette and perspective.",
+  "frames": [
+    {
+      "id": "terrain.alpine/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.alpine/b0be667584e8d9fdc0ee0bd761184d9fe1c98a918120292d5807460aaa1e0e31/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bd93c1f86d7eba9636a06144a1ecbca1d13dff55a040946b28bfe0adde6ca67c",
+    "sourceRefs": [
+      "assets/art/source/terrain-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1cf3155b8ee2dbc389ba841f6bcf09227ddf055b8e2b897693dd50135f2ae2bc"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "2cda6ae24d873dd3420d4e774fce600166746e2af299f1c4bc74025aab79302f",
+      "inputHash": "1cf3155b8ee2dbc389ba841f6bcf09227ddf055b8e2b897693dd50135f2ae2bc",
+      "outputHash": "cc7c7823560d2a491b16647455b276798ae4c68123504e00247e797a28672c2d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "53570e99f86291e51426f01a9c79b3de0222b3cb29b816b346bb280350bdb5b6",
+      "outputHash": "54df16b9e844e5f71eddc1d47c7829ca65091e5a5fc62b6c137a935efd0e0def"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "54df16b9e844e5f71eddc1d47c7829ca65091e5a5fc62b6c137a935efd0e0def",
+      "outputHash": "8fcb05282dbb8667d856ad1ddf6f9606a0de0820e7d623015b0f5c9033973376"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "38ffa35d96d735af3083552ee4ce736ad9968a1d4160c5e95d25ebebe6aa66aa",
+      "outputHash": "dd69b371db01d10546a9b0621afedfaf923607ef3a2df608fd9964918afd26f1"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "b3cb216aa18394fa58111a808e439df3af0b358f1aca6b91ccd42fef692bb414",
+      "outputHash": "cce384157473de5831b78b4593013e25bf18372a8788108eb11f7be2c719d10d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "3351f1824dab2e9aa010869eb9f5f262f986c7c6bb71af731592c7cf6962772e",
+      "outputHash": "b2164873ef59a1d8d2b52ec37b8a7301b22ffcc256b021750fe5c417805549da"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.alpine.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex and independent renderer review",
+    "reviewedAt": "2026-09-05T20:37:20.000Z",
+    "notes": "Native and 4x review: distinct ground material/value clusters, exact pointy ground mask and hard palette edges. Single-tile repeated stamps and unblended biome transitions remain visible limitations; no claim of seamless ecology.\nReviewed candidate b0be667584e8d9fdc0ee0bd761184d9fe1c98a918120292d5807460aaa1e0e31; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5afe60bc3d3dd690f1c5bfcd899bb89e8426845c1d7076cd178b2498abdc20cf.png"
+    ],
+    "inputHash": "4ecb2c49a8a82cec8d919c7a71486a53c107097c609e1786c93fd6ef5f0f579c"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

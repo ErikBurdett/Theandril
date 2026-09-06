@@ -1,0 +1,460 @@
+{
+  "date": "2026-09-05",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "browser": "Chromium 151.0.7922.173 / WebGL, software-assisted test configuration",
+  "starting": {
+    "generationMs": 118.19999998807907,
+    "commandMs": 0,
+    "aiMs": 0,
+    "transferBytes": 7477,
+    "totalTransferBytes": 7477,
+    "renderer": "webgl",
+    "frameCount": 75,
+    "frameMs": 16.700000000000045,
+    "frameP95Ms": 16.799999999999955,
+    "renderCpuMs": 0.09999996423721313,
+    "visibleCells": 61,
+    "visibleChunks": 1,
+    "cachedChunks": 1,
+    "chunkRebuilds": 2,
+    "visibleEntities": 2,
+    "zoom": 1.030637842872933,
+    "highlightedCells": 36,
+    "routeCells": 0,
+    "previewCells": 0,
+    "atlasPages": 1,
+    "residentAtlasBytesEstimate": 4194304,
+    "artLoadMs": 154.60000002384186,
+    "artFirstRenderCpuMs": 10.5,
+    "visibleSprites": 2,
+    "terrainSpriteCells": 61,
+    "pooledSprites": 63
+  },
+  "fullyExplored": {
+    "workload": "Synthetic fully explored Huge, 32 factions, 1,500 global armies, 32 towns; fog still limits currently visible entities. No turn advancement or claims about late-game strategic load.",
+    "cells": 196608,
+    "stateHash": "e811a425",
+    "samples": [
+      {
+        "stage": "fully-explored-static",
+        "metrics": {
+          "generationMs": 0,
+          "commandMs": 0,
+          "aiMs": 0,
+          "transferBytes": 13361070,
+          "totalTransferBytes": 13361070,
+          "renderer": "webgl",
+          "frameCount": 133,
+          "frameMs": 16.700000000000273,
+          "frameP95Ms": 16.800000000000182,
+          "renderCpuMs": 0.10000002384185791,
+          "visibleCells": 2304,
+          "visibleChunks": 9,
+          "cachedChunks": 9,
+          "chunkRebuilds": 18,
+          "visibleEntities": 48,
+          "zoom": 1,
+          "highlightedCells": 36,
+          "routeCells": 0,
+          "previewCells": 0,
+          "atlasPages": 1,
+          "residentAtlasBytesEstimate": 4194304,
+          "artLoadMs": 320.10000002384186,
+          "artFirstRenderCpuMs": 34.90000003576279,
+          "visibleSprites": 48,
+          "terrainSpriteCells": 2304,
+          "pooledSprites": 2352
+        },
+        "art": {
+          "state": "ready",
+          "message": "Approved pixel atlases loaded.",
+          "atlasPages": 1,
+          "residentBytesEstimate": 4194304,
+          "downloadBytes": 341764,
+          "loadMs": 320.10000002384186,
+          "warnings": [],
+          "visibleAssetIds": [
+            "settlement.village",
+            "unit.guard",
+            "unit.scout"
+          ],
+          "visibleAnimationFrames": [],
+          "reducedMotion": false,
+          "visibleSprites": 48,
+          "terrainSpriteCells": 2304,
+          "lod": "static-sprites",
+          "terrainPresentation": {
+            "nativeFootprint": [
+              56,
+              64
+            ],
+            "scaleX": 0.8969548824910257,
+            "scaleY": 0.90625,
+            "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+          }
+        }
+      },
+      {
+        "stage": "near-animated",
+        "metrics": {
+          "generationMs": 0,
+          "commandMs": 0,
+          "aiMs": 0,
+          "transferBytes": 13361070,
+          "totalTransferBytes": 13361070,
+          "renderer": "webgl",
+          "frameCount": 266,
+          "frameMs": 16.699999999999818,
+          "frameP95Ms": 16.800000000000182,
+          "renderCpuMs": 0.09999996423721313,
+          "visibleCells": 2304,
+          "visibleChunks": 9,
+          "cachedChunks": 9,
+          "chunkRebuilds": 18,
+          "visibleEntities": 48,
+          "zoom": 1.25,
+          "highlightedCells": 36,
+          "routeCells": 0,
+          "previewCells": 0,
+          "atlasPages": 1,
+          "residentAtlasBytesEstimate": 4194304,
+          "artLoadMs": 320.10000002384186,
+          "artFirstRenderCpuMs": 34.90000003576279,
+          "visibleSprites": 48,
+          "terrainSpriteCells": 2304,
+          "pooledSprites": 2352
+        },
+        "art": {
+          "state": "ready",
+          "message": "Approved pixel atlases loaded.",
+          "atlasPages": 1,
+          "residentBytesEstimate": 4194304,
+          "downloadBytes": 341764,
+          "loadMs": 320.10000002384186,
+          "warnings": [],
+          "visibleAssetIds": [
+            "settlement.village",
+            "unit.guard",
+            "unit.scout"
+          ],
+          "visibleAnimationFrames": [
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.scout",
+              "frameId": "unit.scout/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/3"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/0"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/1"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            },
+            {
+              "contentId": "unit.guard",
+              "frameId": "unit.guard/idle/se/2"
+            }
+          ],
+          "reducedMotion": false,
+          "visibleSprites": 48,
+          "terrainSpriteCells": 2304,
+          "lod": "near-sprites",
+          "terrainPresentation": {
+            "nativeFootprint": [
+              56,
+              64
+            ],
+            "scaleX": 0.8969548824910257,
+            "scaleY": 0.90625,
+            "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+          }
+        }
+      },
+      {
+        "stage": "six-camera-drags",
+        "metrics": {
+          "generationMs": 0,
+          "commandMs": 0,
+          "aiMs": 0,
+          "transferBytes": 13361070,
+          "totalTransferBytes": 13361070,
+          "renderer": "webgl",
+          "frameCount": 516,
+          "frameMs": 16.799999999999272,
+          "frameP95Ms": 16.799999999999272,
+          "renderCpuMs": 0.10000002384185791,
+          "visibleCells": 1024,
+          "visibleChunks": 4,
+          "cachedChunks": 11,
+          "chunkRebuilds": 20,
+          "visibleEntities": 0,
+          "zoom": 1.25,
+          "highlightedCells": 36,
+          "routeCells": 0,
+          "previewCells": 0,
+          "atlasPages": 1,
+          "residentAtlasBytesEstimate": 4194304,
+          "artLoadMs": 320.10000002384186,
+          "artFirstRenderCpuMs": 34.90000003576279,
+          "visibleSprites": 0,
+          "terrainSpriteCells": 1024,
+          "pooledSprites": 2864
+        },
+        "art": {
+          "state": "ready",
+          "message": "Approved pixel atlases loaded.",
+          "atlasPages": 1,
+          "residentBytesEstimate": 4194304,
+          "downloadBytes": 341764,
+          "loadMs": 320.10000002384186,
+          "warnings": [],
+          "visibleAssetIds": [],
+          "visibleAnimationFrames": [],
+          "reducedMotion": false,
+          "visibleSprites": 0,
+          "terrainSpriteCells": 1024,
+          "lod": "near-sprites",
+          "terrainPresentation": {
+            "nativeFootprint": [
+              56,
+              64
+            ],
+            "scaleX": 0.8969548824910257,
+            "scaleY": 0.90625,
+            "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+          }
+        }
+      },
+      {
+        "stage": "far-strategic",
+        "metrics": {
+          "generationMs": 0,
+          "commandMs": 0,
+          "aiMs": 0,
+          "transferBytes": 13361070,
+          "totalTransferBytes": 13361070,
+          "renderer": "webgl",
+          "frameCount": 649,
+          "frameMs": 16.69999999999891,
+          "frameP95Ms": 16.799999999999272,
+          "renderCpuMs": 0.10000002384185791,
+          "visibleCells": 2304,
+          "visibleChunks": 9,
+          "cachedChunks": 16,
+          "chunkRebuilds": 25,
+          "visibleEntities": 0,
+          "zoom": 0.5120000000000001,
+          "highlightedCells": 36,
+          "routeCells": 0,
+          "previewCells": 0,
+          "atlasPages": 1,
+          "residentAtlasBytesEstimate": 4194304,
+          "artLoadMs": 320.10000002384186,
+          "artFirstRenderCpuMs": 34.90000003576279,
+          "visibleSprites": 0,
+          "terrainSpriteCells": 2304,
+          "pooledSprites": 4144
+        },
+        "art": {
+          "state": "ready",
+          "message": "Approved pixel atlases loaded.",
+          "atlasPages": 1,
+          "residentBytesEstimate": 4194304,
+          "downloadBytes": 341764,
+          "loadMs": 320.10000002384186,
+          "warnings": [],
+          "visibleAssetIds": [],
+          "visibleAnimationFrames": [],
+          "reducedMotion": false,
+          "visibleSprites": 0,
+          "terrainSpriteCells": 2304,
+          "lod": "strategic-glyphs",
+          "terrainPresentation": {
+            "nativeFootprint": [
+              56,
+              64
+            ],
+            "scaleX": 0.8969548824910257,
+            "scaleY": 0.90625,
+            "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+          }
+        }
+      }
+    ]
+  }
+}

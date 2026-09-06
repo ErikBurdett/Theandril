@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "monster.revenant",
+  "type": "monster",
+  "status": "REJECTED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "monster.revenant"
+  ],
+  "prompt": "Original production sprite sheet for THEANDRIL, gritty dark-fantasy hex strategy. Exactly 4 columns x 2 rows of equal square cells, eight independent full-body character sprites. Real fully transparent RGBA background, NOT a drawn checkerboard, no backdrop, labels, text, ground bases, shadows outside silhouette or grid. Center each sprite in its cell, generous clear margin all sides, feet baseline consistent. Orthographic three-quarter front facing southeast, slightly seen from above. Authentic hand-crafted pixel-art clusters designed for native 64x64 humanoids, 96x96 large creatures; crisp hard square pixels, no antialias, no smooth gradients or noise. Adult realistic proportions, no chibi. Northwest light, weathered charcoal iron/brown leather/old bone/olive cloth, distinct silhouettes. Original civic/hearthland setting after ancient Witness Roads failed, no copied costumes or designs.\nRow1 left-right:\n1 Ashen Compact SPEARMAN: plain round iron helmet, long upright spear, rough oval plank shield, patched brown coat, ivory scarf;\n2 Ashen Compact HEAVY INFANTRY: wide stance, layered battered iron plates, squared kite shield, short mace, ash scarf, heavy boots;\n3 Ashen Compact CAVALRY: cloaked armored rider on sturdy dark brown horse, travel tack, short pennant lance, both fully visible;\n4 Ashen Compact MAGE: mature hooded traveler in weathered charcoal/umber layers carrying bound oath tablets and a forked copper staff with a tiny dim ember, austere scholar not glowing wizard spectacle.\nRow2:\n1 Ashen Compact COMMANDER: veteran with visible weathered face, plain iron open helmet, bone scarf, dark coat, old bronze civic oath banner and straight sword;\n2 UNDEAD Witness revenant: dry skeletal human wrapped in weathered burial straps and broken iron mask, carrying a cracked stone vow tablet, restrained pale green eyes, no copied monster;\n3 MONSTROUS INFANTRY: massive hunched slate-skinned quarry ogre wearing timber harness and rust iron scraps, one heavy stone hammer, original nonhuman face;\n4 LARGE CREATURE: original six-legged low-bodied slate-backed carrion beast with blunt armored snout, dark bristle mane and bone ridges, strong readable animal silhouette, no wings or dragon imitation.\nOne exact character per cell. Same palette and scale discipline throughout. Small legible silhouette first, material texture second. No crowd, scene, concepts, portraits or extra weapons floating outside cells.",
+  "frames": [
+    {
+      "id": "monster.revenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/rejected/monster.revenant/43dd1cd828869b03c72f31b0f2f9b924926659cd43f9f614179d3aadba262b0a/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9f7c224c6cd3a8824688d9bce7912b6cdd145b907dbcbe90413272bcd517546e",
+    "sourceRefs": [
+      "assets/art/source/roster-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "087ca777ef8accfacbcaf64d6d89d1a53180675a56b638148d734945979916d3"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "registered-64",
+      "settingsHash": "2cda6ae24d873dd3420d4e774fce600166746e2af299f1c4bc74025aab79302f",
+      "inputHash": "087ca777ef8accfacbcaf64d6d89d1a53180675a56b638148d734945979916d3",
+      "outputHash": "acf08d4d60f6b308a91bf79996c40b213efb2be7ba7723950cdb23453c32fb70"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "0cca38428312bb36e85e1bbe197c80372e8b8aa61d4db34fc05254acce83045c",
+      "outputHash": "1491eea3ffb906543024d259fc82d47e2c62078317c6a521b2a1a51f0c05377a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1491eea3ffb906543024d259fc82d47e2c62078317c6a521b2a1a51f0c05377a",
+      "outputHash": "08e28b88c0ce21dfa0451f4577262e0fd86379bb7d3d98a5972e15b06934a5d5"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "1d3b9674d86ef9689044c181e75b89780cda75163505a5e0b848028ada2b8d33",
+      "outputHash": "f8082b27443d7ec15c0d64e465ff4837c57867e8894bcfe36e17bd53d922dfcb"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "cac5c98b4abb5908cba97770ab2c4c7020e0cf11c0cf80d3978c4ca06a6cda79",
+      "outputHash": "b17d34dc1c9ee811d6a87e1eb1e396127f14731d45d492c1d7f6c54a83f32d84"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "adcf1f1d41920fc77eabf5477d98b19e149a1623a05a8330d35bb0e70b60dfa4",
+      "outputHash": "8827c50eca2fb08929e3291ccf9ff7b22111875d15734d29406f6b8bff630111"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/monster.revenant.rejected.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-05T20:49:10.806Z",
+    "notes": "Independent native review found detached floating tablet equipment and no readable hand connection. Reject this revision; do not publish it.\nReviewed candidate 43dd1cd828869b03c72f31b0f2f9b924926659cd43f9f614179d3aadba262b0a; byte-identical frames and evidence retained in the rejected source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/39754c44ce566fcf5f30ac8285213e815927215cd3679b0e57b1892e02105932.png"
+    ],
+    "inputHash": "1bf1951fc1fa4c8e1186993cc83871e32196530f8c7e78b58bb10f1addf9bc78"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

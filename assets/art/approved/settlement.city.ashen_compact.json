@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.ashen_compact",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 4,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.ashen_compact"
+  ],
+  "prompt": "Create an original dark-fantasy pixel-art SPRITE SHEET PNG with a TRANSPARENT BACKGROUND (alpha channel, empty pixels have alpha 0). Square layout: 4 columns x 4 rows, 15 isolated sprites with generous clear spacing, last cell empty. Every sprite entirely inside its cell, including spear tips and banners. Consistent southeast three-quarter view. Restrained charcoal iron, warm ochre and bone cloth, dull brass; practical rectangular equipment, gabled timber and kiln-brick buildings. Culture: Ashen Compact, displaced craft households bound by public oaths. Original emblem: open square hearth frame enclosing an ember diamond. Adult proportions, weathered materials, crisp hard pixel edges, upper-left light. No text or labels.\nRow1: caravan traveler with covered cart; hooded scout with bow; guard sword/square shield; infantry upright pike.\nRow2: heavily armored shield infantry; armored horse and rider; officer with baton and pennant; surveyor with rolled chart and staff.\nRow3: engineer apron/hammer/satchel; small workshop village; larger market town; fortified gabled city.\nRow4: square-hearth crest; same emblem on standing narrow banner; simplified same emblem badge; empty.\nEXPORT PNG WITH REAL TRANSPARENCY; the area around the sprites is empty alpha, suitable for compositing directly onto a game map.",
+  "frames": [
+    {
+      "id": "settlement.city.ashen_compact/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.ashen_compact/9a4b61a44224994318bb1d022c1da2a55be004a1359f817aa4b6b39cc2071ab8/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9fc9776c9a8eabc289eb1269c6121508469edd8463de7a58b54e8847c098dec9",
+    "sourceRefs": [
+      "assets/art/source/factions/ashen_compact-v4.png",
+      "assets/art/source/faction-revisions.json",
+      "assets/art/source/factions/crops-ashen_compact.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game asset used. Service terms apply; model/seed not exposed and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "a2522355c43e550a66c5b94a556c55385330f4d1b7fb9d89c0e8316101588de1"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-faction-extraction",
+      "version": "1",
+      "profile": "registered-128",
+      "settingsHash": "0c4e04318ea665a085004494432de03544aa9d30e387233c2657ec869c85d132",
+      "inputHash": "a2522355c43e550a66c5b94a556c55385330f4d1b7fb9d89c0e8316101588de1",
+      "outputHash": "4787721196bcc3154815cda71c6669d351e5f449c0b43c5b855b1a21b84f0b0d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "4787721196bcc3154815cda71c6669d351e5f449c0b43c5b855b1a21b84f0b0d",
+      "outputHash": "c9ec6d0b06aeaa5cb7c9ccd91f6dfb5c42d3b91d1a82bb7cc7c333cfc72ea565"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c9ec6d0b06aeaa5cb7c9ccd91f6dfb5c42d3b91d1a82bb7cc7c333cfc72ea565",
+      "outputHash": "3b39ee4ac15672d039f1bddbfda2d70a5dccb48ea6b5df8884518ff0c77560f3"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "6902301c103b6833f4ca5a3d481289809c5ec9a576b247a56d8e7713a78420e5",
+      "outputHash": "c4c1e69960d0f0a0d14c8876ff13b7475e6cf2ca39d1439a5478dd01cc9379a2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "8c4413a3aeeb26116cc76bef635acf139a232dc28e7b7c1923eaa1a02cba5821",
+      "outputHash": "39bdfe3790ddfac6d6317cc7005569e7e2619e9d6d4ddadccbd005cceb143a4a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "42e417a49e2a7d293fb0d719ff6a6b0ea2a645eda0eafb6ba40bfc97b7a1250a",
+      "outputHash": "8469c2686753a7c462491f372b9696c7b9bcf0af05047d1c9aee6d7bec47c859"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.ashen_compact.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-06T02:08:56.413Z",
+    "notes": "Native1x and enlarged processed contact sheet inspected in explicit stable-ID order. Ashen Compact ochre/bone cloth, rectangular iron and warm ember/brass equipment identity. Largest fortified gateway, twin approaches and tall civic tower readable; deliberate ornate brass/forge and fixed foundation overhang. Hard alpha, complete padded silhouette and registered pivot. One static southeast pose only; no additional action animation or pixel-perfect live camera claim.\nReviewed candidate 9a4b61a44224994318bb1d022c1da2a55be004a1359f817aa4b6b39cc2071ab8; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/bce3e6caa8d68305b168eb5663ac704593156c36416f751165792d90b7dd880d.png"
+    ],
+    "inputHash": "8237bb757351b4c8597222f75387082fbf09473a867849f93ec4e39e3e9cf14b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

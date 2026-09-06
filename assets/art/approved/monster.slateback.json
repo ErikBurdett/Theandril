@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "monster.slateback",
+  "type": "monster",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "monster.slateback"
+  ],
+  "prompt": "Original production sprite sheet for THEANDRIL, gritty dark-fantasy hex strategy. Exactly 4 columns x 2 rows of equal square cells, eight independent full-body character sprites. Real fully transparent RGBA background, NOT a drawn checkerboard, no backdrop, labels, text, ground bases, shadows outside silhouette or grid. Center each sprite in its cell, generous clear margin all sides, feet baseline consistent. Orthographic three-quarter front facing southeast, slightly seen from above. Authentic hand-crafted pixel-art clusters designed for native 64x64 humanoids, 96x96 large creatures; crisp hard square pixels, no antialias, no smooth gradients or noise. Adult realistic proportions, no chibi. Northwest light, weathered charcoal iron/brown leather/old bone/olive cloth, distinct silhouettes. Original civic/hearthland setting after ancient Witness Roads failed, no copied costumes or designs.\nRow1 left-right:\n1 Ashen Compact SPEARMAN: plain round iron helmet, long upright spear, rough oval plank shield, patched brown coat, ivory scarf;\n2 Ashen Compact HEAVY INFANTRY: wide stance, layered battered iron plates, squared kite shield, short mace, ash scarf, heavy boots;\n3 Ashen Compact CAVALRY: cloaked armored rider on sturdy dark brown horse, travel tack, short pennant lance, both fully visible;\n4 Ashen Compact MAGE: mature hooded traveler in weathered charcoal/umber layers carrying bound oath tablets and a forked copper staff with a tiny dim ember, austere scholar not glowing wizard spectacle.\nRow2:\n1 Ashen Compact COMMANDER: veteran with visible weathered face, plain iron open helmet, bone scarf, dark coat, old bronze civic oath banner and straight sword;\n2 UNDEAD Witness revenant: dry skeletal human wrapped in weathered burial straps and broken iron mask, carrying a cracked stone vow tablet, restrained pale green eyes, no copied monster;\n3 MONSTROUS INFANTRY: massive hunched slate-skinned quarry ogre wearing timber harness and rust iron scraps, one heavy stone hammer, original nonhuman face;\n4 LARGE CREATURE: original six-legged low-bodied slate-backed carrion beast with blunt armored snout, dark bristle mane and bone ridges, strong readable animal silhouette, no wings or dragon imitation.\nOne exact character per cell. Same palette and scale discipline throughout. Small legible silhouette first, material texture second. No crowd, scene, concepts, portraits or extra weapons floating outside cells.",
+  "frames": [
+    {
+      "id": "monster.slateback/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/monster.slateback/e2ec93b4d6ca7cf7335cabe16e5267662d2b5754304b0d1d3fd5771aeea28f61/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9f7c224c6cd3a8824688d9bce7912b6cdd145b907dbcbe90413272bcd517546e",
+    "sourceRefs": [
+      "assets/art/source/roster-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "087ca777ef8accfacbcaf64d6d89d1a53180675a56b638148d734945979916d3"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "registered-128",
+      "settingsHash": "2cda6ae24d873dd3420d4e774fce600166746e2af299f1c4bc74025aab79302f",
+      "inputHash": "087ca777ef8accfacbcaf64d6d89d1a53180675a56b638148d734945979916d3",
+      "outputHash": "faa245c998cc37328d9f77a6d04ccb9bc9444deb29e4f8be4735faeae44286d4"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "7c91de4b891771752909ce6de830440ead6faef5e9110e2c31b5229e4530a702",
+      "outputHash": "b400044b50d5b79d368957be58b365b66b18e0b8d22ab8439bc5354a9ea00221"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b400044b50d5b79d368957be58b365b66b18e0b8d22ab8439bc5354a9ea00221",
+      "outputHash": "8d8f20e79e06ee3636a8caf39f621889d6bd576690084f9e1728d62592994d75"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "14c6869a4ba142214369c4cff8bbd7383237a568d82ffcb6b2065b0e75d780ae",
+      "outputHash": "64bdc6f1be59d795ef896af4a9c7d07b594ce458fff1922289c8aa28b0ba5835"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-monster-128",
+      "settingsHash": "6e6a50f8db4d01b6f6f3af7d9f89c00889eb89438cc606dff467f92f822b2a4e",
+      "inputHash": "030a60fbae265ef3a2684302d788b9dbd9c4a36dbd27bc4ded187375c94874ba",
+      "outputHash": "b009c9f4d6d5c82f52194014ded543fc34529be3d3739ff8bb15f5c3044ecd6f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-monster-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "23a8a31cde2dc013f78b8a2181bfe5d2ef82e5d7e2df2bdac6e9324f23488030",
+      "outputHash": "3049954e2a15fa63912a09ffd3f1f7cae042316a0728779c96bf5556fc8d430e"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/monster.slateback.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex and independent renderer review",
+    "reviewedAt": "2026-09-05T20:37:16.782Z",
+    "notes": "Native and 4x review: original single-pose silhouette and weathered material clusters readable for monster.slateback. Future content artwork only; no canonical gameplay consumer or completed directional/combat animation is claimed.\nReviewed candidate e2ec93b4d6ca7cf7335cabe16e5267662d2b5754304b0d1d3fd5771aeea28f61; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5afe60bc3d3dd690f1c5bfcd899bb89e8426845c1d7076cd178b2498abdc20cf.png"
+    ],
+    "inputHash": "a4e9309d44631e5e03100fa45ab6d4f174231e0a16b76f517004747fd23f81ad"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

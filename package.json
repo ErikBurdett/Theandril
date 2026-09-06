@@ -1,0 +1,38 @@
+{
+  "name": "theandril", "version": "0.1.0", "private": true, "type": "module",
+  "packageManager": "pnpm@10.32.1",
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "dev": "pnpm --filter @theandril/web dev",
+    "art:doctor": "tsx scripts/art.ts doctor",
+    "art:prepare": "tsx scripts/art-foundation.ts",
+    "art:factions": "tsx scripts/art-factions.ts",
+    "art:overlays": "tsx tools/art/create-overlay-briefs.ts",
+    "art:verify-tools": "tsx tools/art/verify-toolchain.ts",
+    "art:status": "tsx scripts/art.ts status",
+    "art:generate": "tsx scripts/art.ts generate",
+    "art:validate": "tsx scripts/art.ts validate",
+    "art:review": "tsx scripts/art.ts review",
+    "art:atlas": "tsx scripts/art.ts atlas",
+    "art:integrate": "tsx scripts/art.ts integrate",
+    "art:aseprite": "bash tools/art/aseprite-wrapper.sh",
+    "build": "turbo run build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:gameplay": "playwright test",
+    "bench": "tsx scripts/benchmark.ts",
+    "bench:chronicles": "tsx scripts/benchmark-chronicle.ts",
+    "bench:characters": "tsx scripts/benchmark-characters.ts",
+    "bench:storage": "tsx scripts/benchmark-storage.ts",
+    "bench:art": "tsx scripts/benchmark-art.ts",
+    "content:validate": "tsx scripts/validate-content.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0", "@playwright/test": "^1.58.2", "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0", "@types/react-dom": "^19.2.0",
+    "eslint": "^9.39.0", "typescript-eslint": "^8.56.0", "globals": "^16.5.0",
+    "fast-check": "^4.5.0", "fake-indexeddb": "^6.2.0", "tsx": "^4.21.0",
+    "turbo": "^2.8.0", "typescript": "^5.9.3", "vitest": "^4.0.18"
+  }
+}

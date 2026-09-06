@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.reedbound_council",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.reedbound_council"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: one original faction sprite-sheet kit for Theandril, a gritty dark-fantasy strategic hex game.\nCreate a precisely aligned FOUR-column by FOUR-row sheet of equal square cells on a genuinely TRANSPARENT background. Fifteen separate cutout sprites; last bottom-right cell EMPTY. No text, labels, grid, frames, ground patches, checkerboard, drop shadows or watermark. Every object stays within its own cell with clear transparent margins. Each cell is a native pixel-art design presented at consistent integer enlargement, NOT a painted illustration with a pixel filter. Crisp intentional chunky square pixel clusters, binary silhouette edges, restrained 16–24-color subsets, no antialiasing, blur, gradients, tiny confetti or glossy effects. Upper-left diffuse light; worn materials, readable medium-value bodies, dark local-color outlines. Adult proportions, not chibi.\nAll people use the same slightly elevated orthographic three-quarter southeast view, fully visible, centered with feet at a consistent baseline. Same culture across equipment, civilians, cloth, settlements and heraldry. Distinguish the roles strongly at 64-pixel strategic scale.\nExact reading order, left to right:\nROW 1: (1) civilian Hearth caravan: one traveler beside a small covered two-wheel cart; (2) Wayfinder: lightly equipped hooded traveler holding a bow, quiver and pack; (3) Oath guard: practical helmet, sword and small shield; (4) pike infantry: long upright pike, open-face helmet, medium armor.\nROW 2: (1) heavy infantry: visibly broad heavy armor, large protective shield and short weapon; (2) cavalry: one armored adult rider on a fully visible horse, facing right/southeast; (3) Hearth marshal: experienced field officer with baton and plain rank pennant, no crown or spell effect; (4) Road witness: lightly dressed map surveyor with rolled chart and measuring staff, NOT bow or wizard.\nROW 3: (1) March engineer: adult specialist with leather work apron, hammer and tool satchel, NOT spellcaster; (2) village: three humble closely grouped dwellings with one focal hearth; (3) town: a denser cluster with practical workshop/market and modest hall; (4) fortified city: broader fortified architecture with readable gateway and stepped silhouette.\nROW 4: (1) faction crest: large ORIGINAL simple cloth/metal heraldic emblem; (2) same faction symbol on a narrow upright weathered banner with pole, complete foot of pole visible; (3) simplified same-symbol badge, few broad shapes suitable for a native32px icon; (4) completely empty transparent cell.\nHumanoid native target64x64 with feet at(32,56), cavalry96x96 ground(48,80), village/town96x96 ground(48,80), city128x128 ground(64,112), crest/banner64x64, badge32x32. Compose generously so extraction preserves each silhouette. Keep faction-color accents on cloth/shield/architecture rather than tinting skin and steel. Original setting and designs only, no existing-game symbols, costumes, names or licensed artwork.\nFaction art direction: REEDBOUND COUNCIL: wetland village assemblies and ferry households. Woven reed panels, gray-green layered rain capes, oxidized bronze fittings, bent willow shields with tall oval silhouettes, cord-bound open helmets and ankle wraps. Cart has woven panniers and reed canopy. Architecture uses raised timber pilings, steep reed-thatch roofs, small boardwalk supports contained inside settlement silhouette (no landscape/water patch). Original insignia: three reed stems passing through a single broad incomplete oval river loop. Tall rounded/arched shape language, muted moss/sea-green accents, weather-worn wood; functional armor still clearly iron, skin natural.",
+  "frames": [
+    {
+      "id": "ui.badge.reedbound_council/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.reedbound_council/333331ec625d54a87a16151a52c47ae7133b2babe278847c2d3d300c59f673db/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "ad21b01ac378cf20d3059b09cc4a68787547c909c0fb9313ecfc18cf21a7867f",
+    "sourceRefs": [
+      "assets/art/source/factions/reedbound_council-v1.png",
+      "assets/art/source/faction-generation-prompts.json",
+      "assets/art/source/factions/crops-reedbound_council.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party game asset used. Service terms apply; model/seed not exposed and rights not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "3815981ffa4216ae24d72cc196439b912d10af2b74666226bf49c412acad02e9"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-faction-extraction",
+      "version": "1",
+      "profile": "registered-32",
+      "settingsHash": "b4db3acfa4925545a586b592840a3163c584ae14550e33b1447a8a5cc914d8c2",
+      "inputHash": "3815981ffa4216ae24d72cc196439b912d10af2b74666226bf49c412acad02e9",
+      "outputHash": "e2a4dcc6906f37df3675ac5831bfc85621fb5a2c73be88c0f1664bb019ee18a0"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "e2a4dcc6906f37df3675ac5831bfc85621fb5a2c73be88c0f1664bb019ee18a0",
+      "outputHash": "3f6ee8bac00fbd4aa5f5d7abeaa70498d2ea0dba27218d9885302518c43f981f"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3f6ee8bac00fbd4aa5f5d7abeaa70498d2ea0dba27218d9885302518c43f981f",
+      "outputHash": "9747bbed49f8eb4cadae3f6fc0016445c9edd665a7bb1e58d66ef22b53aca24f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "142203ec1ec525646cc486ae45064cfdef11bda29dbd8ed9699b3200c07f54c2",
+      "outputHash": "f23b6183a58f6c7909571aa8efe93ac52dc2ef16ac7b70c4a118cc3a9bafad01"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "06007205a38fb4232d88da78f02b07a85e6f481815b2d36ff09cdf60da7d8cb0",
+      "outputHash": "933fddafbb33d89ba649fb77aa8d1b553b3e6f11fbb573f2c9ce26adbcc938b7"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "46860bf4f011d1f7371a8ef93a73e000d54adee23631b7d050d53dcf074f9e54",
+      "outputHash": "fec25499fd0a47ba37c156b36d0d72ae2b66051f5e40de838df90012b06a2437"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.reedbound_council.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-06T02:08:57.636Z",
+    "notes": "Native1x and exact4x processed contact sheet inspected against its explicit stable-ID order. Green woven oval heraldry and raised reed/timber architecture. Simplified culture emblem remains isolated on32px canvas; silhouette and major heraldic shapes readable, fine detail intentionally reduced. Hard alpha, complete padded silhouette and consistent anchors; one static southeast pose only. Additional facings/action animation and live camera pixel-perfect fit are not approved by this review. Refreshed source-bound crop provenance; final processed PNG and decoded RGBA verified byte-identical to these inspected pixels.\nReviewed candidate 333331ec625d54a87a16151a52c47ae7133b2babe278847c2d3d300c59f673db; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/67383c12d78d975263cc248552d0cc454374011f41131ce1f72bd8d04234a986.png"
+    ],
+    "inputHash": "973675a712c7a8beb836be6cbfbd4f3f8b551dea99e41314d8971646b26a2a86"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

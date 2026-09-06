@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.magic",
+  "type": "effect",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.magic"
+  ],
+  "prompt": "Original four-frame restrained violet witness-rune pulse: gather, release, expansion, dissipating outer ring. Fixed center anchor 32,32 on 64x64; 125ms per frame, one-shot idle/se packaging. Future magic visual only; does not add casting rules, spells, or magical state.",
+  "frames": [
+    {
+      "id": "effect.magic/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 125,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.magic/0f07610fa0bf87c0280aa9dac2a97fb0c164a81e909de4df9e25628b41713876/frame-0.png"
+    },
+    {
+      "id": "effect.magic/idle/se/1",
+      "direction": "se",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 125,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.magic/0f07610fa0bf87c0280aa9dac2a97fb0c164a81e909de4df9e25628b41713876/frame-1.png"
+    },
+    {
+      "id": "effect.magic/idle/se/2",
+      "direction": "se",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 125,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.magic/0f07610fa0bf87c0280aa9dac2a97fb0c164a81e909de4df9e25628b41713876/frame-2.png"
+    },
+    {
+      "id": "effect.magic/idle/se/3",
+      "direction": "se",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 125,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.magic/0f07610fa0bf87c0280aa9dac2a97fb0c164a81e909de4df9e25628b41713876/frame-3.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 8,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "theandril-integer-overlay",
+    "model": "integer-overlay-v1",
+    "promptHash": "a9eae9879bb9b4ffa52f16df0a873639c7dffe5009b73b4be60dac84b31f0ac3",
+    "sourceRefs": [
+      "tools/art/create-overlay-briefs.ts"
+    ],
+    "licenseNotes": [
+      "Original integer-coordinate code-authored artwork for Theandril; no external bitmap references, model weights, or provider output used.",
+      "Source generator is retained in this repository; assets follow the project licensing policy. No third-party license rights are asserted."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-integer-overlay",
+      "version": "1",
+      "profile": "centered-overlay-64",
+      "settingsHash": "92d203289f3fc003cd461b8d35b10c5b38944f2a2d0e5ee471e5bd6c9a420db0",
+      "inputHash": "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff",
+      "outputHash": "7ce54406115bb96edf3b98d86301ae7fdd2b65da1f370ca3437bddc878756b3a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2ac0da339758322dfb7cf2932a8087ccd4443a54f01f3a38b0a1eeb3147138c3",
+      "outputHash": "2d62174060255386ed281b6297af31646e86590e3450e5e1c811e735b0086184"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "2d62174060255386ed281b6297af31646e86590e3450e5e1c811e735b0086184",
+      "outputHash": "25327226096559a5d048755751de296fe1501341136a9f20ab46d2705884f449"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "3608a76fb084b2ea7785e8abfc23247340db383254c2b8689cf0b9e735851d64",
+      "outputHash": "77a7dff3a5f6c3ec75233bbeaf6e0dde24ebb05d0362a997fc6f2fff97916e5a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "f62f685eb8765ab7f5a0b0198e41a5e8acdcd2634b1c10e97ad1f99e17e76446",
+      "outputHash": "65b4bbd97f66acc3ad8ba9fb735f260bf5bd820339a464f96ea54fcec98fa2e6"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "65b4bbd97f66acc3ad8ba9fb735f260bf5bd820339a464f96ea54fcec98fa2e6",
+      "outputHash": "e13b7796665be62f01e64fc2689a4c39ed67602f7484ec7a46bcaaadee503236"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "fcc86cf2d2853927036c222205d8b23468bf21cd1d3ed70d9114269b62dc818e",
+      "outputHash": "3badf9e6486faba85ee01dbdedf4b7518a629f21604dcd9d4fb131ff1c47a8e2"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "a6036d7b7b060726c694a32b5c67e813e4d01041d83f92dcae2130874e55e89e",
+      "outputHash": "ad00da846d3aaeeb638b6498faab8df71a82139aa0549876bebbb6a2d09af267"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ad00da846d3aaeeb638b6498faab8df71a82139aa0549876bebbb6a2d09af267",
+      "outputHash": "826e3ec13019c476aaf9e7583cc7f32139ee7f51b9518474d3b329547f8dbdbe"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "a873676cc07dba3bd5929ac54ed8dd979f4895a9b07b731886234f154192bf24",
+      "outputHash": "de818597fe929d2d33cd08927f3a7023a72b028ddb3707aa885cdd147b646e41"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "a3b4a450291d94e40e5ca79792179dc42c1d72f6b0fb6403de8367d60940b957",
+      "outputHash": "07ec79ecb5535be4fe7bb9c65c0a90f390e93a6a72a3ddb58ff53494d9d32f56"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "07ec79ecb5535be4fe7bb9c65c0a90f390e93a6a72a3ddb58ff53494d9d32f56",
+      "outputHash": "15e299ae5e4145dccf35a671f25e835bed9fe1e6a19b42cb71c459a3551d8a06"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "e2df09181cf32fdcd5c89cb2ad7251fb3fb95e3ba06b7cf3f34535fff44dfa23",
+      "outputHash": "149d9f6321f2184ef8955117119051ef3ed330f952eccb50a3e0fd587d8c01c2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "64d0f820dc85b0a019c93c00d4323a39a8db1ac921d997d524d995d60b124c58",
+      "inputHash": "b9bab072d4847f53f8d55ab4d78a3cc4d621f60e15da19c83ed25df72eebbde8",
+      "outputHash": "8fc4b7415e5018c16497d5064f928e5add1999831ead9506bf5a7d9a1071bfb8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "5296011707e5b917410574eab5af71f7a02c9910607fd2901f327f07c2cee1b2",
+      "outputHash": "c3c23f3055effc4d6a2c09f4ed33b1f1d14cf0144375aa0cf308bbb1461fe1a2"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/effect.magic.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-05T21:03:23.904Z",
+    "notes": "Native and4x: four distinct gather/release/expansion/dissipation rune poses,125ms each, fixed pivot and restrained violet ramp. Future presentation only; no casting system is implied.\nReviewed candidate 0f07610fa0bf87c0280aa9dac2a97fb0c164a81e909de4df9e25628b41713876; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/6677df15a33d21411f3db9658825ce5f2e70e44bc7e651411f8a0e3927ad17d5.png"
+    ],
+    "inputHash": "bb24e3fe91bedd1b15ab7c74435c4cf074480e4ab68e543eb7ad1097cef98bfd"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 16,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 32,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

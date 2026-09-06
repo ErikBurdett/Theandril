@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.rainforest",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.rainforest"
+  ],
+  "prompt": "Original THEANDRIL terrain spritesheet, 4 columns by 3 rows of exactly equal square cells, all cells aligned. Each cell contains ONE pointy-top hex terrain tile, 64 by64 logical-pixel canvas with hex vertices (32,0),(60,16),(60,48),(32,64),(4,48),(4,16), no extrusion or bevel, no thick outline. Full flat hex top surface, orthographic top-down strategic map view. Transparent outside each hex; no other background, shadows, text, grid, labels. North-west lighting for raised trees/rocks. All tiles equally sized. Gritty original dark fantasy pixel-art craftsmanship; genuine small deliberate hard square pixel clusters, 8-12 colors per tile, restrained muted palette, no smoothing, no painterly grain, no micro-noise, no floating diorama bases. Broad readable ground value, clustered details, leave edge terrain simple for adjoining neighbors.\nExact left-to-right row order:\nROW1: temperate green grassland with sparse ochre grass tufts; dense dark temperate broadleaf forest canopy with visible earth; dark blue-green evergreen taiga with sparse snow; pale cold tundra with dry low scrub and stones.\nROW2: warm ochre desert low sand ripples; dry yellow-brown steppe with sparse pale bunchgrass; dark muddy marsh with shallow pools and reeds; dense deep green rainforest large broadleaf crowns.\nROW3: alpine gray rocky mountain mass with restrained pale snowcap; deep dark blue open ocean with short muted wave clusters; low stony brown green hills with visible ridges; shallow teal coastal water meeting a small worn sand spit on upper side.\nNatural readable low-frequency shapes. Tile art should be beautiful at actual64pixel size. No rivers or roads painted across unrelated land, no buildings, no characters. Clearly distinguish the twelve terrain silhouettes/materials while matching one palette and perspective.",
+  "frames": [
+    {
+      "id": "terrain.rainforest/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.rainforest/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bd93c1f86d7eba9636a06144a1ecbca1d13dff55a040946b28bfe0adde6ca67c",
+    "sourceRefs": [
+      "assets/art/source/terrain-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1cf3155b8ee2dbc389ba841f6bcf09227ddf055b8e2b897693dd50135f2ae2bc"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "b321549a791120fd5e1f80cf792f7e0b64719e670e997dca3c132ba2993dbe79",
+      "inputHash": "1cf3155b8ee2dbc389ba841f6bcf09227ddf055b8e2b897693dd50135f2ae2bc",
+      "outputHash": "4453e827195194930112a3ef24c66d5787ede7ecd9f62a19f6dd247eeb36e2dd"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

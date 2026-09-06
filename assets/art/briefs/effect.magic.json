@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.magic",
+  "type": "effect",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.magic"
+  ],
+  "prompt": "Original four-frame restrained violet witness-rune pulse: gather, release, expansion, dissipating outer ring. Fixed center anchor 32,32 on 64x64; 125ms per frame, one-shot idle/se packaging. Future magic visual only; does not add casting rules, spells, or magical state.",
+  "frames": [
+    {
+      "id": "effect.magic/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 125,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/effect.magic/idle-se-0.png"
+    },
+    {
+      "id": "effect.magic/idle/se/1",
+      "direction": "se",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 125,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/effect.magic/idle-se-1.png"
+    },
+    {
+      "id": "effect.magic/idle/se/2",
+      "direction": "se",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 125,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/effect.magic/idle-se-2.png"
+    },
+    {
+      "id": "effect.magic/idle/se/3",
+      "direction": "se",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 125,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/effect.magic/idle-se-3.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 8,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "theandril-integer-overlay",
+    "model": "integer-overlay-v1",
+    "promptHash": "a9eae9879bb9b4ffa52f16df0a873639c7dffe5009b73b4be60dac84b31f0ac3",
+    "sourceRefs": [
+      "tools/art/create-overlay-briefs.ts"
+    ],
+    "licenseNotes": [
+      "Original integer-coordinate code-authored artwork for Theandril; no external bitmap references, model weights, or provider output used.",
+      "Source generator is retained in this repository; assets follow the project licensing policy. No third-party license rights are asserted."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-integer-overlay",
+      "version": "1",
+      "profile": "centered-overlay-64",
+      "settingsHash": "92d203289f3fc003cd461b8d35b10c5b38944f2a2d0e5ee471e5bd6c9a420db0",
+      "inputHash": "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff",
+      "outputHash": "7ce54406115bb96edf3b98d86301ae7fdd2b65da1f370ca3437bddc878756b3a"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 16,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 32,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

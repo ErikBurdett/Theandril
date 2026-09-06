@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.projectile",
+  "type": "effect",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.projectile"
+  ],
+  "prompt": "Original four-frame projectile-hit effect: southwest approach, impact flash at 32,32, broken wooden shaft splinters, then shortened dark fading fragments. Fixed impact anchor 32,32 on 64x64; 100ms per frame, one-shot idle/se packaging. Hard alpha throughout, no duplicate poses or invented direction set. Future presentation-only foundation: canonical ranged projectile travel is not implemented and this effect never determines a hit or damage.",
+  "frames": [
+    {
+      "id": "effect.projectile/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.projectile/68b9b9d21c6be573546231873b95339080d2165508710a872de24e0e6f287e02/frame-0.png"
+    },
+    {
+      "id": "effect.projectile/idle/se/1",
+      "direction": "se",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.projectile/68b9b9d21c6be573546231873b95339080d2165508710a872de24e0e6f287e02/frame-1.png"
+    },
+    {
+      "id": "effect.projectile/idle/se/2",
+      "direction": "se",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.projectile/68b9b9d21c6be573546231873b95339080d2165508710a872de24e0e6f287e02/frame-2.png"
+    },
+    {
+      "id": "effect.projectile/idle/se/3",
+      "direction": "se",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.projectile/68b9b9d21c6be573546231873b95339080d2165508710a872de24e0e6f287e02/frame-3.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "theandril-integer-overlay",
+    "model": "integer-overlay-v1",
+    "promptHash": "8b7c2380681e791fbd0a7264988f55d327a14645589f8469da5db8e356f39a01",
+    "sourceRefs": [
+      "tools/art/create-overlay-briefs.ts"
+    ],
+    "licenseNotes": [
+      "Original integer-coordinate code-authored artwork for Theandril; no external bitmap references, model weights, or provider output used.",
+      "Source generator is retained in this repository; assets follow the project licensing policy. No third-party license rights are asserted."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-integer-overlay",
+      "version": "1",
+      "profile": "centered-overlay-64",
+      "settingsHash": "92d203289f3fc003cd461b8d35b10c5b38944f2a2d0e5ee471e5bd6c9a420db0",
+      "inputHash": "1bc1dcee3c49d8455de5b30444f24e62c48386c7038ee045827808f14ced7fff",
+      "outputHash": "1da2e10d1a2ea951791936d2ec6b92a07e72a54bb09f579828f5dbb985aa66e7"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "cb78ec9de1c22df5a9a33b8c3109f26423ee32d33fb0929e24988c720a586238",
+      "outputHash": "0fd3ede53a47eb7991a5299df838f19e94a8a3a1db501f42deb844e4a0dcc02c"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0fd3ede53a47eb7991a5299df838f19e94a8a3a1db501f42deb844e4a0dcc02c",
+      "outputHash": "6307bd52448da95592d615b4142227d1c74b505f660bb7dc8f6fe52dc6130000"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "89f6c2bceb5c57df6e3d055ffa73177c73b81aeb9702cfe009bc147ec356f3be",
+      "outputHash": "7eeb70cc384a17bf388274854db4ce2c0e09aa9332f16f6699294a70f0cc4374"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "5687c2e425251791a6095d43a0ae922b6e4cc368177b667ebb27820718775b21",
+      "outputHash": "c6d44876df96e64b5e16507501913def9949e873e17924e47d0cfc353dbabf19"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c6d44876df96e64b5e16507501913def9949e873e17924e47d0cfc353dbabf19",
+      "outputHash": "e9f63f6bb6c10f91a1c283914810f137de0c2aba0bfdee0957aea91232173ad0"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "2b65c1f5deff3e59f4b2a9ef62d2bbb4eeac55efd926f45b9301dd15f866bda9",
+      "outputHash": "9afb7bd3a757c00454277a2e01a936f16f6433565ffeb46857ad0f3957ac5371"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2c7e058b39b9760d6d3db3659c6830e3a5a07d4c5b6e80120a34cebd19fa9ec5",
+      "outputHash": "e7326ee005b31b8d048151830992386f8a6dca3290635396dd7b3a5b845477de"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e7326ee005b31b8d048151830992386f8a6dca3290635396dd7b3a5b845477de",
+      "outputHash": "c9f8d83f2cde11edbe867ed6b329baf70db76b15e5e66c33d58eb8d89ed64190"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "df2c6c9afbcb8d8097070d5ff881825268135e27504f67816bb73c6a023531ad",
+      "outputHash": "23f3d43bc0f28072da0fb34ae22e67e5fe301c714b88ae4031234c543f2b60b1"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "84b8d9678531c18dd5361d04410403515d001b4c232fcd682de618159eb2aed8",
+      "outputHash": "1a39aeaf6858ad620248d545a3ca6ba6e31bf742fbda760775719602c5a7a701"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1a39aeaf6858ad620248d545a3ca6ba6e31bf742fbda760775719602c5a7a701",
+      "outputHash": "b39e331a3e4d9dc193eaf8b55738bb48f518bcfdff9e2161644b7b39b10baf91"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "a92fe8d4270edc0af055f2f282d70955631b115b08841001f240890c3aca24c0",
+      "outputHash": "05f6cb76c71f51a0e160312d82009845b5f07841a09af23230490f1aab50b30a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "eb55d25ad0f5a93c8f46ee9546f7dbc3eaff6ab20ea3e688c0188fb5b854ccf2",
+      "inputHash": "5bdd423803635b7f05fd3b2fddbc7cda72930dfb72b223ed229d44ff5d1d8d90",
+      "outputHash": "7c63b7e911d01cf5c384028bf2b95273f7b449e2d597f0515a2446a29501b9ba"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "6c95735536bb6c9ce1c41d2588816a73d225a5e399d5f60cc7ee52e6fd5ded8c",
+      "outputHash": "d7c9ef7088e3e054cb76b04111ef6e5cb85b4d9ebc7488f5c3fece96c8111273"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/effect.projectile.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-09-05T21:03:23.513Z",
+    "notes": "Native and4x: arrow approach, centered impact, outward splinters and darkened short fade are distinct genuine100ms frames. One-shot future projectile-hit presentation only.\nReviewed candidate 68b9b9d21c6be573546231873b95339080d2165508710a872de24e0e6f287e02; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/6677df15a33d21411f3db9658825ce5f2e70e44bc7e651411f8a0e3927ad17d5.png"
+    ],
+    "inputHash": "6f76564bf29c64475ee91e161fccadde2bb37a38a65ab855f8b28c6591951688"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 16,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 32,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

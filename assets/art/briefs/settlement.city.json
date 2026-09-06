@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city"
+  ],
+  "prompt": "Generate an original game production sprite sheet for THEANDRIL: 3 columns x 2 rows, exactly six equal square cells. True transparent background, no text, borders, grid lines, watermarks, floor tiles or ground bases. Every asset centered within its own cell and fully isolated with 12 percent transparent margin, nothing crossing cells. Same oblique top-down three-quarter strategic-map camera, roof planes visible, north-west light. Actual crisp pixel art with deliberately placed hard square clusters, no smooth illustration, no antialias, no blurry fake pixel filter. Each cell designed at native 96x96 pixels; sheet logical 288x192, may be enlarged by integer nearest-neighbor. Muted old stone, brown timbers, faded ash canvas, rust iron, straw, small warm hearth lights. Gritty serious adult dark fantasy original architecture, no borrowed game designs. Detailed but readable large value shapes.\nExact cells left to right:\nTOP ROW: 1 a poor hearthland VILLAGE, three small steep-roof timber cottages around an oath stone and rough wooden fence; 2 a TOWN, compact five-store cluster of weathered stone/timber buildings, slate roofs, bell house and central kiln, clearly bigger architectural density; 3 a FORTIFIED CITY, crenellated compact stone enclosure, gate and four squat towers sheltering slate-roof town and a taller hearth hall, no cathedral copied from a game.\nBOTTOM ROW: 1 ancient Witness Road RUIN, a broken freestanding arched waystation of dark stone with weathered vow tablets, rubble and sparse dead grass; 2 isolated weathered stone WATCHTOWER, square battered tower with wood porch and ash-colored banner, distinct silhouette; 3 a mineral RESOURCE DEPOSIT, jagged low iron-rich rocks, streaks of oxidized orange, compact excavation with two worn timbers, no cart.\nStrong silhouette edges. Transparent pixels around and between all six objects. No continuous landscape, scene, labels or people. Consistent shared palette and pixel scale, restrained cluster-based shading.",
+  "frames": [
+    {
+      "id": "settlement.city/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/source/native/settlement.city/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "4f0fa494ea6131de73c6f8b34d139e2e998780f12c19b1a065f370336d8333b7",
+    "sourceRefs": [
+      "assets/art/source/objects-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "20774ab45de76572ce66dd19a6e601989c9fe9a82b2d8bd581f876ccf54f9d2c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "registered-128",
+      "settingsHash": "b321549a791120fd5e1f80cf792f7e0b64719e670e997dca3c132ba2993dbe79",
+      "inputHash": "20774ab45de76572ce66dd19a6e601989c9fe9a82b2d8bd581f876ccf54f9d2c",
+      "outputHash": "311276e9dd723005ebc3cbcf57390ab90439c86223e467e59a1a3f18b71c4ba8"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

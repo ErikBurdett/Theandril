@@ -1,0 +1,10 @@
+{
+  "name": "@theandril/web", "version": "0.1.0", "private": true, "type": "module",
+  "scripts": { "dev": "vite --host 127.0.0.1", "build": "vite build", "preview": "vite preview --host 127.0.0.1" },
+  "dependencies": {
+    "@theandril/ai": "workspace:*", "@theandril/art-pipeline": "workspace:*", "@theandril/chronicle": "workspace:*", "@theandril/content": "workspace:*", "@theandril/mapgen": "workspace:*",
+    "@theandril/persistence": "workspace:*", "@theandril/render": "workspace:*", "@theandril/sim": "workspace:*",
+    "react": "^19.2.0", "react-dom": "^19.2.0"
+  },
+  "devDependencies": { "vite": "^7.3.1" }
+}

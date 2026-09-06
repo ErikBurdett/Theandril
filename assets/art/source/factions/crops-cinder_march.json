@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "source": "assets/art/source/factions/cinder_march-v1.png",
+  "sourceHash": "dddd0a48e3efae38655ba0a5fd960eca68212d0b41cf2f58de50a785b9a26997",
+  "width": 1254,
+  "height": 1254,
+  "crops": [
+    {
+      "role": "unit.colonist",
+      "rect": {
+        "x": 24,
+        "y": 65,
+        "w": 287,
+        "h": 235
+      }
+    },
+    {
+      "role": "unit.scout",
+      "rect": {
+        "x": 406,
+        "y": 43,
+        "w": 175,
+        "h": 255
+      }
+    },
+    {
+      "role": "unit.guard",
+      "rect": {
+        "x": 711,
+        "y": 49,
+        "w": 153,
+        "h": 250
+      }
+    },
+    {
+      "role": "unit.spearman",
+      "rect": {
+        "x": 1058,
+        "y": 0,
+        "w": 123,
+        "h": 300
+      }
+    },
+    {
+      "role": "unit.heavy_infantry",
+      "rect": {
+        "x": 63,
+        "y": 345,
+        "w": 181,
+        "h": 263
+      }
+    },
+    {
+      "role": "unit.cavalry",
+      "rect": {
+        "x": 353,
+        "y": 311,
+        "w": 264,
+        "h": 314
+      }
+    },
+    {
+      "role": "character.marshal",
+      "rect": {
+        "x": 668,
+        "y": 305,
+        "w": 252,
+        "h": 315
+      }
+    },
+    {
+      "role": "character.surveyor",
+      "rect": {
+        "x": 1048,
+        "y": 365,
+        "w": 135,
+        "h": 243
+      }
+    },
+    {
+      "role": "character.engineer",
+      "rect": {
+        "x": 100,
+        "y": 665,
+        "w": 135,
+        "h": 246
+      }
+    },
+    {
+      "role": "settlement.village",
+      "rect": {
+        "x": 331,
+        "y": 647,
+        "w": 285,
+        "h": 272
+      }
+    },
+    {
+      "role": "settlement.town",
+      "rect": {
+        "x": 638,
+        "y": 652,
+        "w": 291,
+        "h": 280
+      }
+    },
+    {
+      "role": "settlement.city",
+      "rect": {
+        "x": 944,
+        "y": 628,
+        "w": 304,
+        "h": 317
+      }
+    },
+    {
+      "role": "ui.crest",
+      "rect": {
+        "x": 49,
+        "y": 955,
+        "w": 215,
+        "h": 257
+      }
+    },
+    {
+      "role": "ui.banner",
+      "rect": {
+        "x": 420,
+        "y": 934,
+        "w": 116,
+        "h": 295
+      }
+    },
+    {
+      "role": "ui.badge",
+      "rect": {
+        "x": 716,
+        "y": 1026,
+        "w": 135,
+        "h": 107
+      }
+    }
+  ],
+  "cropsHash": "70bc404c71f256c0f03062150c23754562289afe1baf29790b34c29cb8c0ab25",
+  "evidence": [
+    {
+      "path": "assets/art/source/factions/crop-evidence/cinder_march-1x.png",
+      "sha256": "45aed252a510488b64715963e4a607d1c42a0fe03d137814f33cc5c256b3eac1",
+      "scale": 1
+    },
+    {
+      "path": "assets/art/source/factions/crop-evidence/cinder_march-4x.png",
+      "sha256": "8491e5aceb49eb5211b7c76db442b363b40d92be723b40537a8ba3271044d028",
+      "scale": 4
+    }
+  ],
+  "review": {"reviewer":"Codex root visual review","reviewedAt":"2026-09-06T01:53:04.000Z","cropsHash":"70bc404c71f256c0f03062150c23754562289afe1baf29790b34c29cb8c0ab25","notes":"Inspected original transparent source and every role in native1x/4x contact sheets. All fifteen distinct silhouettes remain isolated; caravan wheels/traveler, bow scout, shield guard, pike, broad heavy infantry, horse/rider, officer pennant, chart/staff witness, hammer/apron engineer, increasing village/town/city and matching three heraldry forms are present. Rust-red angular iron equipment and stepped stone fortifications read consistently. Pike reaches original sheet top but fitted native point remains narrow and enclosed in padding; retained source-edge limitation. This approves crop mapping only, NOT processed runtime art.","sourceHash":"dddd0a48e3efae38655ba0a5fd960eca68212d0b41cf2f58de50a785b9a26997"},
+  "warnings": [
+    "unit.spearman: crop touches original source edge; inspect for an already-clipped source feature."
+  ],
+  "note": "Source rectangle proposal only; contact sheet follows exact original prompt order. Retains every alpha>=128 source pixel once. Native fitting/normalization is not visual approval."
+}

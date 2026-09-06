@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry"
+  ],
+  "prompt": "Original production sprite sheet for THEANDRIL, gritty dark-fantasy hex strategy. Exactly 4 columns x 2 rows of equal square cells, eight independent full-body character sprites. Real fully transparent RGBA background, NOT a drawn checkerboard, no backdrop, labels, text, ground bases, shadows outside silhouette or grid. Center each sprite in its cell, generous clear margin all sides, feet baseline consistent. Orthographic three-quarter front facing southeast, slightly seen from above. Authentic hand-crafted pixel-art clusters designed for native 64x64 humanoids, 96x96 large creatures; crisp hard square pixels, no antialias, no smooth gradients or noise. Adult realistic proportions, no chibi. Northwest light, weathered charcoal iron/brown leather/old bone/olive cloth, distinct silhouettes. Original civic/hearthland setting after ancient Witness Roads failed, no copied costumes or designs.\nRow1 left-right:\n1 Ashen Compact SPEARMAN: plain round iron helmet, long upright spear, rough oval plank shield, patched brown coat, ivory scarf;\n2 Ashen Compact HEAVY INFANTRY: wide stance, layered battered iron plates, squared kite shield, short mace, ash scarf, heavy boots;\n3 Ashen Compact CAVALRY: cloaked armored rider on sturdy dark brown horse, travel tack, short pennant lance, both fully visible;\n4 Ashen Compact MAGE: mature hooded traveler in weathered charcoal/umber layers carrying bound oath tablets and a forked copper staff with a tiny dim ember, austere scholar not glowing wizard spectacle.\nRow2:\n1 Ashen Compact COMMANDER: veteran with visible weathered face, plain iron open helmet, bone scarf, dark coat, old bronze civic oath banner and straight sword;\n2 UNDEAD Witness revenant: dry skeletal human wrapped in weathered burial straps and broken iron mask, carrying a cracked stone vow tablet, restrained pale green eyes, no copied monster;\n3 MONSTROUS INFANTRY: massive hunched slate-skinned quarry ogre wearing timber harness and rust iron scraps, one heavy stone hammer, original nonhuman face;\n4 LARGE CREATURE: original six-legged low-bodied slate-backed carrion beast with blunt armored snout, dark bristle mane and bone ridges, strong readable animal silhouette, no wings or dragon imitation.\nOne exact character per cell. Same palette and scale discipline throughout. Small legible silhouette first, material texture second. No crowd, scene, concepts, portraits or extra weapons floating outside cells.",
+  "frames": [
+    {
+      "id": "unit.cavalry/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry/257d26a75a0111a1d374f55910f7884cfbe2e23e650fdb4df0a833e4565a9727/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9f7c224c6cd3a8824688d9bce7912b6cdd145b907dbcbe90413272bcd517546e",
+    "sourceRefs": [
+      "assets/art/source/roster-original.png",
+      "assets/art/source/generation-prompts.json"
+    ],
+    "licenseNotes": [
+      "Original image generation commissioned for Theandril. No third-party game artwork or references used. Provider service terms apply; this record is not a legal ownership guarantee."
+    ]
+  },
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "referenceHashes": [
+    "087ca777ef8accfacbcaf64d6d89d1a53180675a56b638148d734945979916d3"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-native-extraction",
+      "version": "1",
+      "profile": "registered-96",
+      "settingsHash": "2cda6ae24d873dd3420d4e774fce600166746e2af299f1c4bc74025aab79302f",
+      "inputHash": "087ca777ef8accfacbcaf64d6d89d1a53180675a56b638148d734945979916d3",
+      "outputHash": "a49399c0a7eb0c0952e52c238d8193e1e108358ccc5d583dd8271d13e08541c3"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "13342c093d968934c9e32826d1c2ba75b95e7df03d2718ebd20b5c7771159bf4",
+      "outputHash": "74a0a247e39433e4d6bebb536d52d4a79b69c6a1d377a13dac8dbf13e877bd10"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "74a0a247e39433e4d6bebb536d52d4a79b69c6a1d377a13dac8dbf13e877bd10",
+      "outputHash": "d8ff65beff61353b329e102eacc5789b9f2849b84b24f044f8bcd7039dfcb37a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "638d1f5f2ea2403eb91b050799ff3302cb44b302783225e1be3ad4dfe5e0f785",
+      "outputHash": "2bedd8077a422a6c2ce65fb5690c583d676075adb3a16da511c069240ee0886b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "2c28169e65e91283237b3398678c84cbf6f12a8de42541d3dc683ab4539a0ecb",
+      "outputHash": "5589f5bd00a46278b63aa9831ef39bb6a9dbf7881885e956f45f900fb7e80985"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "ec5c8855e61a97627f895a096e13af156ded79d31518337feac4d03f6d802ed7",
+      "outputHash": "52a227781e3e46405bb71fba864a3fae24508a0f75fa9a5efca9e635fc48e615"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex and independent renderer review",
+    "reviewedAt": "2026-09-05T20:37:29.798Z",
+    "notes": "Native and 4x review: original single-pose silhouette and weathered material clusters readable for unit.cavalry. Future content artwork only; no canonical gameplay consumer or completed directional/combat animation is claimed.\nReviewed candidate 257d26a75a0111a1d374f55910f7884cfbe2e23e650fdb4df0a833e4565a9727; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5afe60bc3d3dd690f1c5bfcd899bb89e8426845c1d7076cd178b2498abdc20cf.png"
+    ],
+    "inputHash": "8c5a0ca4c2d6058701109ed618aa4a969b186ec353a5a2e8b91b51ac5986b6b2"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}
