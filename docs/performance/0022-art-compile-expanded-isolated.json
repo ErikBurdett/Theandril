@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-06",
+  "capture": "All other agents explicitly confirmed no browser or CPU-heavy jobs before launch; isolated warmed offline rerun. Original benchmark output follows.",
+  "workload": "Offline art compilation; warm code/data, filesystem reads excluded. Not renderer performance.",
+  "approvedAssets": 224,
+  "publishedFrames": 242,
+  "validation": {
+    "medianMs": 65.91354899999999,
+    "p95Ms": 68.98614700000002,
+    "minMs": 64.32439199999999,
+    "maxMs": 68.98614700000002,
+    "iterations": 7
+  },
+  "pages": [
+    {
+      "id": "foundation",
+      "width": 2048,
+      "height": 2048,
+      "pngBytes": 1076255,
+      "rgbaBytes": 16777216,
+      "pngHash": "f9ac4d64680b436311cc6c27a0d253ced11a56fe2a440cb1fdd420a9e43c9d4b",
+      "build": {
+        "medianMs": 155.26972899999987,
+        "p95Ms": 159.14055699999994,
+        "minMs": 146.88820800000008,
+        "maxMs": 159.14055699999994,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 55.97802300000012,
+        "p95Ms": 56.34402600000021,
+        "minMs": 48.07481200000029,
+        "maxMs": 56.34402600000021,
+        "iterations": 7
+      }
+    }
+  ],
+  "syntheticValidation": {
+    "description": "1,000 in-memory frame references repeating approved source pixels with distinct test IDs; not new production artwork or approval.",
+    "frames": 1000,
+    "processedPixelBytes": 16384000,
+    "status": "CANDIDATE",
+    "timing": {
+      "medianMs": 90.61591499999986,
+      "p95Ms": 91.95845199999985,
+      "minMs": 90.32778099999996,
+      "maxMs": 91.95845199999985,
+      "iterations": 5
+    }
+  },
+  "peakResidentMiB": 537.2890625
+}

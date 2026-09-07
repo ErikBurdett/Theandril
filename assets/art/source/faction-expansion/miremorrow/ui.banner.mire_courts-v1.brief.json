@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.mire_courts",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native64. ONE upright physical faction banner: worn cloth bearing a large simple culture seal, short crossbar and visible narrow pole down to bottom. Entire pole tip, finial and ragged cloth enclosed in alpha margins. No terrain, no figure, no letters.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears.",
+  "frames": [
+    {
+      "id": "ui.banner.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/ui.banner.mire_courts/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "db2f9d85fba5b3329c47ad1967e546a2a5f4360b8b80c12a2be57410c830d2ae",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/ui.banner.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/ui.banner.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:06:13.000Z",
+  "referenceHashes": [
+    "7b20ade2f2d71b8c786e38810464903a4c8e4c4d0804a1ce2b7b22f45ff1dcbf",
+    "6b0cdea1224e724e9be15bfae265485c6c80d569cbf68bee8d5000c82e71f66b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "8007ea167c92eabf572ecbefa2062528cbc6fedbd02037a974990279ed6642fa",
+      "inputHash": "7b20ade2f2d71b8c786e38810464903a4c8e4c4d0804a1ce2b7b22f45ff1dcbf",
+      "outputHash": "a0fb46af5075e41a00f2f43fc5d1dcbb6aef053ade605081bb61a35c4faf42b0"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

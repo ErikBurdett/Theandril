@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.ashen_compact",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.ashen_compact"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Ashen Compact culture: repaired charcoal iron brackets, low soot-dark practical workshop geometry, ochre and bone patched canvas, dull brass fittings. Original open square hearth with central ember diamond insignia kept tiny and simple. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.ashen_compact/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.ashen_compact/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0d4afad0c3859fbac3fea1945767c65db6ac93495d34d34ff7a78e2d8bafc7dc",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.ashen_compact-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.ashen_compact-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T22:51:50.300Z",
+  "referenceHashes": [
+    "ed836d58c67d5a50a0fb39f5ff43b9013515f99c9c9dff03ee6c9db337c6cf3e",
+    "56d39bdfb3b60f771366ca7b75f9ea5f4676b92f05b16fdc7e4606a9e636d592"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "9bde8f87a2e9eeba8daf4cb9ea9e781c13ef52f6e044ef95528654d09720c34e",
+      "inputHash": "ed836d58c67d5a50a0fb39f5ff43b9013515f99c9c9dff03ee6c9db337c6cf3e",
+      "outputHash": "982b70e56ccd20004e19297210fdf07ae378292cdc248c97b9d3628eff7feb9f"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

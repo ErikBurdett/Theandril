@@ -1,0 +1,19 @@
+# Top campaign menu: functional pass, unresolved narrow painting
+
+Measured and visually inspected 2026-09-06. The single native disclosure is beneath navigation and before the game/setup content. The final 71-scenario Chromium run passes, including three menu scenarios: keyboard focus/disclosure, actual save/load/autosave/export/import, replacement-world cancellation, 390×844 touch controls at 130% text scale, and return to the unchanged campaign. The [desktop capture](../screenshots/slice15-top-menu-desktop.png) is clean. These functional results do **not** close the narrow visual gate.
+
+## Reproduction and evidence
+
+The narrow test begins Tiny/Short seed 20260905, opens Campaign & settings, selects 130% text scale and scrolls the menu to the top. Both [ordinary wheel scrolling](../screenshots/slice15-unresolved-menu-wheel.png) and the subsequent [keyboard/touch focus-and-scroll sequence](../screenshots/slice15-unresolved-menu-focus.png) leave duplicate control pixels in the top of the map. The wheel comparison runs before programmatic scroll/focus stress; this is not only a `scrollIntoView` reproduction.
+
+The [exact geometry and hit probes](0023-menu-paint-geometry.json) are stable across three consecutive animation frames after fonts are ready. At scrollY 228, the menu ends and map starts at y361.140625. All ten actual controls are inside the menu; the last three uniquely named shortcut inputs accept focus/taps. All eight points tested in the apparent duplicate band hit the canvas, not a menu element. The visual viewport is unscaled, offset zero, DPR 1. There is no duplicate live input at the painted position.
+
+The independently captured [390×450 raw WebGL canvas](../screenshots/slice15-unresolved-menu-raw-canvas.png) is clean and fully opaque: all 175,500 pixels have alpha 255. At canvas-relative (250,5) and (280,7), the raw canvas is RGBA `[26,37,42,255]`, while the corresponding screenshot pixels at rounded map origin are `[28,35,34,255]`, matching the input background. At (280,9), the screenshot instead contains menu-background `[23,30,27,255]`. These probes are above the title/hint overlays. Ordinary surface screenshots and CDP `Page.captureScreenshot` with `fromSurface:false` both reproduce the defect; unique PNG paths and hashes ruled out re-viewing a cached old file.
+
+This evidence suggests stale painting/composition outside the canonical map pixels. It does **not** establish the exact cause, a Chromium-only defect, or whether a normal headed desktop session is affected. A requested headed comparison never launched: its approval remained pending and was aborted, returning no process/session or screenshot. Firefox/WebKit and real-device touch scrolling remain unverified.
+
+## Rejected trials and current code
+
+Paint containment, menu layer promotion, opaque canvas CSS background, map-section isolation, intrinsic grid layout and a controlled-button replacement for native details all left the artifact. A final [canvas-layer trial](../screenshots/slice15-rejected-canvas-layer-trial.png) also failed. The [earlier grid](../screenshots/slice15-rejected-menu-ghost.png) and [button trial](../screenshots/slice15-button-trial-unique.png) are retained as rejected evidence, not approvals. No ineffective workaround or screenshot-only style injection remains in production or the final test. Native details and the original flex flow are retained.
+
+The stronger test keeps real geometry, hit/focus, wheel and raw-canvas diagnostics; it does not contain a falsely passing pixel assertion or a skipped known-failure test. No canonical command, save format, renderer pixel source or atlas was changed to mask the issue. A further verified diagnosis/fix and visual rerun are required before claiming complete menu presentation acceptance. The independently inspected twelve-culture art publication remains covered by its [separate measured review](0022-faction-art.md).

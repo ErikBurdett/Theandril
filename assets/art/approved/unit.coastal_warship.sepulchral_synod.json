@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.sepulchral_synod",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Sepulchral Synod living caretakers and housed ancestors: narrow dignified hull, chalk-pale protective plates, deep indigo canvas, aged bronze ribs, terraced stern-house outline and small hollow ring above three steps insignia. Quiet funerary architecture influence, not skulls, ghosts, skeleton crew or magical ship. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.sepulchral_synod/208bbdd7ecd16a178a54d660922ffb1503e373cfad78e78b733307bfafb1fa57/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "01bf235301bf3b43bd216f6db2dfab95dd1d944212348abc3e99c8381c3da1d7",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.sepulchral_synod-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:08:53.068Z",
+  "referenceHashes": [
+    "e98ed8d0da7bdc4e6943e658f160da2bc7ec7ee67de42bfcdb6fc1a7fbf217be",
+    "d0e8bd135e027c14fb73f33e606d9ade84e3577be8b21c7db07951ecc758bb85"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "454dbc5db80fd4c621c6067edb19e98a7778984b9ea3fca13d102aecf8fe6d0a",
+      "inputHash": "e98ed8d0da7bdc4e6943e658f160da2bc7ec7ee67de42bfcdb6fc1a7fbf217be",
+      "outputHash": "1d0714115d977e7bebae511527f696800e4d48e3e8d8189872cd5069248e055d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "1d0714115d977e7bebae511527f696800e4d48e3e8d8189872cd5069248e055d",
+      "outputHash": "c444adc924224f05904f6f56b850e1b543142b11d54bd91edd112546e0dc6aeb"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c444adc924224f05904f6f56b850e1b543142b11d54bd91edd112546e0dc6aeb",
+      "outputHash": "d83344a050b467aa2255145f1a15ce33117d4cac6adfa1d2684dd7cc30d23b49"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "f74055986d576e18023508f43cd758fb96ca08a57c37778e9e6ab031fed67cc4",
+      "outputHash": "f57e5f238f4fecbd823588fd307dd83f7ee17a2c19247d84382e3ce72f85ee4b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "362c39fa320b4b3fa3c2f06d237f29c0d851459b829de3adc9b0aaf165afe2b4",
+      "outputHash": "8e60a5c579b66029dd338ad0a798628c7efeedea804418eaab7e89dd8a56d5b5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "3bbb4d41bdff1b9936c121e6ca1a7c4cd962851436c7d3a2953c2f9bae62d5f3",
+      "outputHash": "6d103b4bb1a673abf2ba2f84da507b6994e4816adfa3cad8ec3b26bb573eb2e3"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.sepulchral_synod.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:04.249Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Indigo sails and chalk-white side plates distinguish the narrow ceremonial hulls. The ocean version2 retains complete mast finials and a taller two-sail silhouette; no ghost or invented crew mechanics. Low oared hull and triangular sail read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate 208bbdd7ecd16a178a54d660922ffb1503e373cfad78e78b733307bfafb1fa57; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/dc40053b3f0c40cc66c772932887a64283925c9572f3c12e38411ee83390e057.png"
+    ],
+    "inputHash": "8361dda581691f847919967c87ae56049ba2a17152ffc11a97147160659c9519"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

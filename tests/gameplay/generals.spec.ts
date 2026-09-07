@@ -1,3 +1,4 @@
+import { openRealmAffairs } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { neighbors, isPassable } from '@theandril/mapgen';
 import { applyCommand, createArmyFormation, deserializeGame, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
@@ -141,6 +142,7 @@ test('twenty general-led formations enter a saved four-rank battle and resolve t
   const expectedRound = expected.battle!.combat.round;
   issue(expected, { type: 'autoResolveBattle', factionId: state.turnOwnerId });
   await importCampaign(page, state); await selectArmy(page, C.armyName);
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: `Declare war on ${state.factions[1]!.name}`, exact: true }).click();
   await page.getByRole('button', { name: `Attack Reedbound battle line (${enemyId})`, exact: true }).click();
   const battle = page.getByTestId('battle-panel');

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.morrow_spore",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Morrow Spore underwood symbiont households: dark umber grown-timber ribs, broad shelf-shaped layered deck shelter, dusty mauve sail cloth, pale lichen seam bands and overlapping carapace rail panels. Original hollow crescent cradling three seeds insignia. Practical ship built by adults, no whimsical mushroom cap, no spore cloud, no magical propulsion. Role: Charter transport: a broad deep-water wooden cargo cog with a rounded capacious hull, single patched square sail, low canvas-covered passenger shelter and neatly strapped crates. Lightly armed; no artillery, no warship ram. Chunky broad cargo silhouette. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.transport.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.morrow_spore/4e652a0f758db80a4924a07eba4904bbf1d4139da59875bbb8536fc4c48f6d7d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5cfacdeeafdcf436e1ef31c4723b371dbf409fb476c0b6a6b05cd23ef348bff4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.morrow_spore-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.morrow_spore-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:36:59.514Z",
+  "referenceHashes": [
+    "9f14cbeda70aa4e51df33dd538e51cec453ff0528a27a0be2d8f35b265458301",
+    "ccc1317f921b1fc008df5a5c169bff9ced49b590d7df302376e918adb162cd2f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "f29252a2a037a99f2040ad332a0a750e00fa567358abbb2c926dd636d8cddc2b",
+      "inputHash": "9f14cbeda70aa4e51df33dd538e51cec453ff0528a27a0be2d8f35b265458301",
+      "outputHash": "2eb03581a2022ecc73bdc010a5fba72cac25fa1cbc33df84eff7ecffcf748162"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2eb03581a2022ecc73bdc010a5fba72cac25fa1cbc33df84eff7ecffcf748162",
+      "outputHash": "13c03923a153359c6be81b858231112b18e5ac4741a9fed966f8cd65a578a8d8"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "13c03923a153359c6be81b858231112b18e5ac4741a9fed966f8cd65a578a8d8",
+      "outputHash": "2063016fb86a60877d32278a88e80335430f54d2aadbbe7effd02eb2b4fe6527"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "610c154e559580c37f26fff8adfd2629185daef4ad4f4e6220ae228167a03bfe",
+      "outputHash": "536ec8ca849da0da4dce1e992840e49f5d6912d75395c6b952341a0b4d18d280"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "2ab636d0289e8b61b7827a924dcf8256625b7544bcf10cf9239ba1bdbea06643",
+      "outputHash": "81eba3388b1f55b86314ce03806331a8d4fbf83f3d124939fcc61064d9c77a90"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "51c257ee7ddb5ba08545659534b677af05ef640e7d63007fbe7a25ec4c2d49c8",
+      "outputHash": "4a92db1a9d9cd33997fb18bcc256a34663520f72c4827dbc81dff01fb58a93f5"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.morrow_spore.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:50:21.267Z",
+    "notes": "Root inspected generated source, native1x cohort and nearest4x family pixels. Faded brown cloth, pale shelf-like hull fittings and curved fungal sail marks; bone highlights describe the rounded dark hull without a neon effect. Single square sail, cargo volume and passenger canopy read at96px. Palette and binary-alpha validation passed; native tips intact and no opaque background matte. Static southeast art only; fine rigging is texture. Runtime water, fog and ownership review is a separate gate.\nReviewed candidate 4e652a0f758db80a4924a07eba4904bbf1d4139da59875bbb8536fc4c48f6d7d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/ce04d69226b423c43b53b47c24a33dc8d5839206f9aecae745ad1f76e0a84699.png"
+    ],
+    "inputHash": "08b6c28cf08197db5ab3fd9f5fbfa61c7892c210e32235d9ce6d81ed04a69214"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

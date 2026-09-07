@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-06",
+  "capture": "CONTENDED DIAGNOSTIC ONLY: the menu agent launched a six-second Chromium test just before the root reservation message. Timings overlap and are excluded from the matched performance comparison. Original output retained; a separately named isolated rerun is required.",
+  "workload": "Offline art compilation; warm code/data, filesystem reads excluded. Not renderer performance.",
+  "approvedAssets": 224,
+  "publishedFrames": 242,
+  "validation": {
+    "medianMs": 68.27290900000003,
+    "p95Ms": 70.96736500000009,
+    "minMs": 66.54844199999991,
+    "maxMs": 70.96736500000009,
+    "iterations": 7
+  },
+  "pages": [
+    {
+      "id": "foundation",
+      "width": 2048,
+      "height": 2048,
+      "pngBytes": 1076255,
+      "rgbaBytes": 16777216,
+      "pngHash": "f9ac4d64680b436311cc6c27a0d253ced11a56fe2a440cb1fdd420a9e43c9d4b",
+      "build": {
+        "medianMs": 159.25280700000008,
+        "p95Ms": 165.68941800000005,
+        "minMs": 151.18183499999986,
+        "maxMs": 165.68941800000005,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 56.45003600000018,
+        "p95Ms": 62.967263,
+        "minMs": 48.74907899999971,
+        "maxMs": 62.967263,
+        "iterations": 7
+      }
+    }
+  ],
+  "syntheticValidation": {
+    "description": "1,000 in-memory frame references repeating approved source pixels with distinct test IDs; not new production artwork or approval.",
+    "frames": 1000,
+    "processedPixelBytes": 16384000,
+    "status": "CANDIDATE",
+    "timing": {
+      "medianMs": 96.77511600000025,
+      "p95Ms": 100.50569399999995,
+      "minMs": 95.17329600000039,
+      "maxMs": 100.50569399999995,
+      "iterations": 5
+    }
+  },
+  "peakResidentMiB": 537.2421875
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.saltwind_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Saltwind Remnant, successor charter households after the old Saltwind League's fall, not a revived empire. Muted petrol cloth and auburn patched sailcloth, tar-black leather, weathered driftwood and dull brass rigging. Narrow practical nautical equipment; original angular broken-keel insignia (a simple split V-shaped keel, not an anchor). No bright blue sails, round glass ornaments or generic pirate skulls.\nSubject: One adult charter oath guard, narrow tar-black brigandine under a short muted petrol coat, auburn sash, dull brass buckles. Carries a tall narrow driftwood shield marked with a simple broken-keel seal and one short practical cutlass held low. Low close-fitting helmet, visible face, full body and both boots.",
+  "frames": [
+    {
+      "id": "unit.guard.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard.saltwind_remnant/ef99d0c61968111b1cf564ac0194a16df6df964923fa0e6d1001a626fa86b6c0/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "57375f9966cde8685d4448ec0bf680cfbf3f12b4a7f733db04cf2a6863310fdb",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/unit.guard.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/unit.guard.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:35:37.000Z",
+  "referenceHashes": [
+    "687610ba8385be60de8cb84a7a921098154749e07bbcdf98f3e14c767cbba623",
+    "7bfe1d6dfe4558064ce9da69bc58553c822ab6461bb7720f325b1c8c82457dab"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "11734b7fbbee14aac272f4f3a45ac10a7f47edab43b82927e4ce0aca7df3ea68",
+      "inputHash": "687610ba8385be60de8cb84a7a921098154749e07bbcdf98f3e14c767cbba623",
+      "outputHash": "4441591a17dff0a622ecfbd3da3e341a699fde206d1b80a0bc4efa1686ae08e9"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "4441591a17dff0a622ecfbd3da3e341a699fde206d1b80a0bc4efa1686ae08e9",
+      "outputHash": "f57c0de2b6bd334363e7dd2311b684f595b2a8a73d21fcaf6148523a2729c0ed"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f57c0de2b6bd334363e7dd2311b684f595b2a8a73d21fcaf6148523a2729c0ed",
+      "outputHash": "f246a53a8821da89be29f86bcf5b19b4656fb30516f715bfd5e3ab3424ebb873"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "a26ed90b31267d938d9da3c5f38d52bb43784d0fc7813e462aef72b8540fd708",
+      "outputHash": "2998ab107a4fdf0867579666aada60d2bf7088564c05769f1eaeffda05ba5e0f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "07e04974b5a22ec99f6f967dd1fe087e3bbd04679107ab313fa901b74296e65d",
+      "outputHash": "5c80d88d2346880af2b5d68c1d9660e325b68abbb60f7dc8ab1bba63717fb363"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "4de5a66148fbae8c4d759688919fc479db5b0e5ab5718c3843ebc790a8978134",
+      "outputHash": "439758408ec65e354ed914f53ff4771a6cc111d0b60581ffd4ed3031a99faa8f"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.guard.saltwind_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:30.806Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Dark medium armor, separate sword and shield retain a clear guard role. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate ef99d0c61968111b1cf564ac0194a16df6df964923fa0e6d1001a626fa86b6c0; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a5caa24e863aeb2f3dc3d22c0d2c76ce681769339bebd598c6b65c3b0f481f74.png"
+    ],
+    "inputHash": "3983ed5d36405c5e38356448af9f6981c333378ce0953540aa90186bb18ec815"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

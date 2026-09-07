@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { UNITS } from '@theandril/content';
 import type { GameCommand, Observation } from '@theandril/sim';
 import { FactionArt } from './faction-art';
-import { NavalRoleMarker } from './naval';
 import './army.css';
 
 type ArmyView = Observation['armies'][number];
@@ -42,7 +41,7 @@ export function ArmyComposition({ army, view, busy, issue, inspectArmy }: {
       <div className="formation-selection-tools"><button type="button" onClick={() => setSelected(army.formations.map(formation => formation.id))}>Select all formations</button><button type="button" onClick={() => setSelected([])}>Clear formation selection</button><span>{chosen.length} selected</span></div>
       <div className="formation-roster" role="group" aria-label="Formation roster">{army.formations.map(formation => {
         const definition = UNITS.find(unit => unit.id === formation.unitId);
-        return <label key={formation.id} className="formation-choice"><input type="checkbox" checked={chosen.includes(formation.id)} aria-label={`Select formation ${formation.id}`} onChange={event => setSelected(current => event.target.checked ? [...current, formation.id] : current.filter(id => id !== formation.id))}/>{army.domain === 'naval' ? <NavalRoleMarker name={unitName(formation.unitId)}/> : <FactionArt contentId={formation.unitId} definitionId={view.factions.find(faction => faction.id === army.factionId)?.definitionId} label={unitName(formation.unitId)} decorative/>}<span><strong>{unitName(formation.unitId)}</strong><small>{formation.id}</small><small>{formation.strength} strength · {formation.morale} morale · {formation.fatigue} fatigue</small>{definition && <small>{definition.movement} base movement · {definition.range} range · {definition.armor} armor · {definition.initiative} initiative</small>}</span></label>;
+        return <label key={formation.id} className="formation-choice"><input type="checkbox" checked={chosen.includes(formation.id)} aria-label={`Select formation ${formation.id}`} onChange={event => setSelected(current => event.target.checked ? [...current, formation.id] : current.filter(id => id !== formation.id))}/><FactionArt contentId={formation.unitId} definitionId={view.factions.find(faction => faction.id === army.factionId)?.definitionId} label={unitName(formation.unitId)} decorative/><span><strong>{unitName(formation.unitId)}</strong><small>{formation.id}</small><small>{formation.strength} strength · {formation.morale} morale · {formation.fatigue} fatigue</small>{definition && <small>{definition.movement} base movement · {definition.range} range · {definition.armor} armor · {definition.initiative} initiative</small>}</span></label>;
       })}</div>
     </fieldset>
     {army.canFound && army.formations.length > 1 && <p className="field-help">Founding consumes one caravan formation only. Its escorts remain here, spend their remaining movement, and pause any travel order.</p>}

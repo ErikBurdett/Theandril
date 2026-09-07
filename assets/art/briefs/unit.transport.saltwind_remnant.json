@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.saltwind_remnant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Saltwind Remnant maritime charter crews: tar-black practical seaworthy hull, petrol-green sailcloth with auburn patched canvas, brass rigging fittings, raised guarded quay-like stern cabins, broken keel insignia. Asymmetrical repaired practical rigging, strong veteran seafarer silhouette distinct from Glass Tide pale-blue elegance. Role: Charter transport: a broad deep-water wooden cargo cog with a rounded capacious hull, single patched square sail, low canvas-covered passenger shelter and neatly strapped crates. Lightly armed; no artillery, no warship ram. Chunky broad cargo silhouette.",
+  "frames": [
+    {
+      "id": "unit.transport.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.transport.saltwind_remnant/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1e2576d1693f1dfc9b56c22fb32a9ae4f27641f14053d320601f9d7911e5530b",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:19:02.979Z",
+  "referenceHashes": [
+    "fe7f0c4121fe01975d60355eb72f5d5d92e4f49400813500cffc0205743ebb29",
+    "e111cce8347941915611ab8fb59635e4dd2032a7af2b965a07347212db2d9070"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "1cb9baf776f07a9238d3883fe678358dea2b4302e56074ac9412f0e5a038b8c0",
+      "inputHash": "fe7f0c4121fe01975d60355eb72f5d5d92e4f49400813500cffc0205743ebb29",
+      "outputHash": "141db292a1d2ae2b4672c6c10f02f2dc9f32f5e72340d3aec3b2e62580c68ce2"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

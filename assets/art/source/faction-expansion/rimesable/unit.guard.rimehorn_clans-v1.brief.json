@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.rimehorn_clans",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.rimehorn_clans"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: one original Theandril dark-fantasy strategic game sprite, unit.guard, static first-facing pose.\nScene/backdrop: genuinely TRANSPARENT RGBA background, alpha zero around the isolated sprite. Do NOT paint a checkerboard, white/black backdrop, landscape, scene, floor tile, drop-shadow oval or framing panel.\nFaction visual grammar: Rimehorn Clans, an original high-cold culture of broad adult giantkin and human shelter clans. Broad, grounded adult proportions; weathered ivory fittings, grey fur, dusky blue cloth and dark stone-grey iron. Antler-bone fittings are small practical clasps, never enormous Viking helmet horns. Heraldry is a very simple pair of crossed shelter beams. Cold stone winter lodges and snow-weight roof supports. No copied fantasy franchise costumes.\nSubject: One adult oath guard holding a short sword and a practical medium shield. Clear shield/body/weapon separation. Face and torso point southeast, toward screen right and slightly toward viewer. Entire body, feet and sword visible.\nStyle: serious weathered medieval pixel art designed for a 64x64 native sprite; intentional broad pixel clusters and restrained material ramps, selective dark local-color outlines, crisp hard edges, soft upper-left material lighting. Adult anatomy, modest head about one-seventh body height, NOT chibi/cartoon. Keep every role readable when reduced to its native size; no painterly texture soup, antialias blur, microtexture or bright confetti.\nComposition: exactly ONE sprite, centered with at least 15% fully transparent margin on EVERY edge. Shallow elevated three-quarter strategic view. Whole silhouette fully inside canvas; nothing cropped. Readable separated limbs and equipment; one static grounded pose.\nColor family: muted material colors only; steel stays grey, flesh stays natural, cloth carries faction accents. No glow, text, labels, watermark, logo, decorative page, multiple poses, sprite sheet or grid. Return an actual transparent PNG.",
+  "frames": [
+    {
+      "id": "unit.guard.rimehorn_clans/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.guard.rimehorn_clans/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not exposed",
+    "promptHash": "8b432525df027cbe00ff4b491d8898502f5f5119faaf676353a315c8d84de459",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/rimesable/unit.guard.rimehorn_clans-v1.png",
+      "assets/art/source/faction-expansion/rimesable/unit.guard.rimehorn_clans-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:38:27.960Z",
+  "referenceHashes": [
+    "52dd5c0ad24f2570210d6aeef8032a94303a634e026a4ddc8e2618fefebae0ea",
+    "583d9e7ebda4f2e47eaf1d0117bed830f39ee7cf03627f5e208a509ad7e0d851"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "3a63efbb556594e81058f09a19cb1a1aa9de9dc7defa19bee32bb81e14be2db1",
+      "inputHash": "52dd5c0ad24f2570210d6aeef8032a94303a634e026a4ddc8e2618fefebae0ea",
+      "outputHash": "7cfee3a6522e6f892020cc5fb64b1572a0d38a6de3aed08dafb04e6af78e4737"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

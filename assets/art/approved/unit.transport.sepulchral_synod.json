@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.sepulchral_synod",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Sepulchral Synod living caretakers and housed ancestors: narrow dignified hull, chalk-pale protective plates, deep indigo canvas, aged bronze ribs, terraced stern-house outline and small hollow ring above three steps insignia. Quiet funerary architecture influence, not skulls, ghosts, skeleton crew or magical ship. Role: Charter transport: a broad deep-water wooden cargo cog with a rounded capacious hull, single patched square sail, low canvas-covered passenger shelter and neatly strapped crates. Lightly armed; no artillery, no warship ram. Chunky broad cargo silhouette.",
+  "frames": [
+    {
+      "id": "unit.transport.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.sepulchral_synod/cd043b46974ba7c1dc0c375b31efab1d249c2fafd2a56f155b16bd7c9815df53/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "3a5a39cd652daf78aa5458f2322aa8baaea199157087561f35d8913119811082",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.sepulchral_synod-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:07:35.571Z",
+  "referenceHashes": [
+    "2f42e88f1249e6edbb7eb8ba909cf6ee61b98b48134ff387b96a11c72e5be908",
+    "f89a7f68355fcad262596eb9e988f618784d15705c5bf0959fb5c2849aa162a5"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "064778e62a72b90f3d74028422b3d972fdbd06edc2d57b48b94b585c0b3a3733",
+      "inputHash": "2f42e88f1249e6edbb7eb8ba909cf6ee61b98b48134ff387b96a11c72e5be908",
+      "outputHash": "b5e79dc95e04db625337876c4cff361645d2fdcb0af4f43617c6bfb445d53546"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "b5e79dc95e04db625337876c4cff361645d2fdcb0af4f43617c6bfb445d53546",
+      "outputHash": "9f459888cd69387fb2b07dd70220fa0de2f78ee47b3a61a810723c11eae95d77"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9f459888cd69387fb2b07dd70220fa0de2f78ee47b3a61a810723c11eae95d77",
+      "outputHash": "d9c23f5e10ef261c13d3333d921931432633d3daac23c0c4121600cd720b75ef"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "3b2e2965a3636d961e63992d22ddfd2b96770369679931dc59eddb599502a042",
+      "outputHash": "63d940e0c6a786c2cf16158a8bb34d574ee813b0b6a6946b490432876ba9f472"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "4509c5a9d055fe952ccf85b7a6d6d4dd8724d5fbcd783143dc6060c892532a6a",
+      "outputHash": "3ad2c01d2389f6ddecdaba7a95bb64751ff9cc220100a63bcc79f595cd195da7"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "05515975479d9cfd6eb588266def86882a1a8c91f90d570a97aafcdd0dd51009",
+      "outputHash": "06bb1632ebe6334154c1eb6a3c138f7e07abb06ce2e32e086b7f9d209c68152a"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.sepulchral_synod.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:03.947Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Indigo sails and chalk-white side plates distinguish the narrow ceremonial hulls. The ocean version2 retains complete mast finials and a taller two-sail silhouette; no ghost or invented crew mechanics. Broad cargo body and passenger canopy read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate cd043b46974ba7c1dc0c375b31efab1d249c2fafd2a56f155b16bd7c9815df53; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/dc40053b3f0c40cc66c772932887a64283925c9572f3c12e38411ee83390e057.png"
+    ],
+    "inputHash": "df74bb85ed70a89364ed502a7e716a5fa2e55c0b26c7754c5cc9ebfe725f1407"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

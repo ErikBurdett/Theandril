@@ -40,6 +40,13 @@ test('territory clicks, paid work, cultivation and saved continuation remain pla
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
   const armiesBefore = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.ownArmies.map(army => ({ id: army.id, cell: army.cell, movement: army.movement })));
   await selectTown(page); await expect(page.getByTestId('settlement-stage')).toHaveText('settlement · Capital');
+  const culture = page.getByTestId('realm-culture');
+  await expect(culture).not.toHaveAttribute('open');
+  await culture.locator(':scope > summary').click();
+  await expect(culture.getByTestId('faction-identity')).toHaveAttribute('data-definition-id', 'faction.ashen_compact');
+  await expect(culture.getByRole('list', { name: 'Biome affinities' })).toContainText('+1 food');
+  await expect(culture.getByRole('list', { name: 'Biome affinities' })).toContainText('−1 food');
+  await culture.locator(':scope > summary').click();
   await page.getByTestId('map-container').scrollIntoViewIfNeeded();
   const point = await page.evaluate(cell => window.__THEANDRIL__!.getCellScreenPoint(cell), owned.cell);
   expect(point?.inViewport).toBe(true); await page.mouse.click(point!.x, point!.y);

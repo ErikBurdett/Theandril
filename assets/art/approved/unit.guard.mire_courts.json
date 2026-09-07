@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.mire_courts",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Generate ONE original static strategic-game pixel-art sprite for Theandril: the Mire Courts oath guard. Genuine transparent PNG background, alpha zero; one isolated full-body subject, not a sprite sheet. Deepfen elder fenfolk: tall lean adult proportions, dark woven bark lamellar, muted plum cloth, moss green leather and aged copper bindings. One narrow leaf-shaped wooden shield with a simple original forked-root seal and one short practical sword; unhelmeted narrow weathered face under a low woven reed cap. No antlers on head; sculptural organic equipment rather than fantasy spikes. Southeast-facing shallow three-quarter camera. Deliberately coarse square pixel clusters, roughly64x64 logical detail enlarged, clear silhouette and grouped midtones, soft upper-left light, weathered serious dark fantasy. Entire head, sword, shield and both boots comfortably enclosed in central70% of square canvas with generous empty alpha margins. No text, letters, floor, scenery, glow, antialiasing, smooth gradients, noisy texture, border, baked checkerboard, franchise imagery, or chibi proportions.",
+  "frames": [
+    {
+      "id": "unit.guard.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard.mire_courts/25c23ce563979a51474e599b74079ccbf2542a56d5de1a81dc442855954a47f1/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "18a9a92bfbd0a8986da4c7d306d548fe3b9cf76a4dab4c6b67d0670714fb0572",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/unit.guard.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/unit.guard.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:35:49.000Z",
+  "referenceHashes": [
+    "976b0ea3e5882252c046e96e179d507e72e98a334de22b43a1dd049f1d4e8c44",
+    "4187e53f86ca7f2f54e821927a92a7df6715a5e58a7d3994358389d7adb59ad6"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "9fa8205799beb2d6955987c19c9b65691c2d89be5e0c26b8e47069a1b5391462",
+      "inputHash": "976b0ea3e5882252c046e96e179d507e72e98a334de22b43a1dd049f1d4e8c44",
+      "outputHash": "10fcaf24180f6622c1e5ba82df06df310888aa57e7c5f70ca100bb0a867e93c4"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "10fcaf24180f6622c1e5ba82df06df310888aa57e7c5f70ca100bb0a867e93c4",
+      "outputHash": "1746f3f068756f7c090391951566f177e409c87bb0fd2cdb3474d35d81ca5f9f"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1746f3f068756f7c090391951566f177e409c87bb0fd2cdb3474d35d81ca5f9f",
+      "outputHash": "d6ef8a0ea3972ec5a2201659300e861c9a72ff5860c080f839dcb1c6fb6ee415"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "5105a449e08d5c50b8535eddbcf68eeb87a7adcbdc746b8578d8d66ec9f40f75",
+      "outputHash": "5afefde5a8a427c58f18c5ff831d635510b63046dd2c43feb8c683671e9efac8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "4da1cd05abc9c2d256aaa1febd96851aa4ab1412959d31ce5c9c8fbd84d07a7d",
+      "outputHash": "1d26611d6afeb2f2de6bb355ded28c0b234de4cf64b7de54b6247075c23d81cd"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "397443dc7de48957c37154050ee828a64bbf9e8aef2bb397a6fb3aa710e0d1cb",
+      "outputHash": "77cbe6a9eb2f19bedef4974f3b78ca261bb8ba2164e71da7373f9475695189d3"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.guard.mire_courts.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:29.087Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Leaf-shaped shield and separate sword define the medium infantry. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 25c23ce563979a51474e599b74079ccbf2542a56d5de1a81dc442855954a47f1; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d8be3b2df82887727e53bd6ae03f45aba440c8dbff04c61f9677a7d2c17461c8.png"
+    ],
+    "inputHash": "70c7b35e49f6fb94a605f0f75910c0a759a0e3bb1a793156eac2bbed706acc37"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.wardhall_remnant",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: ONE compact settlement cluster of three chalk-grey masonry work cottages around a small open square yard, low slate-violet pitched roofs, straight black timber/riveted door reinforcements, simple square lintels. One modest crenellated gatehouse, no tall spires. Southeast top-down strategic view. No terrain base, plants, people, water or scenery. Every roof enclosed in margins;96x96 logical detail.",
+  "frames": [
+    {
+      "id": "settlement.village.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.village.wardhall_remnant/2a49f174ab8a8fcd3f67a07403227a1d8a679756caca79f2f9f5b68f2c6b45f1/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "3e40731d1474a2b5aa2554e511672b4b91a2390554fe94755b17020ccecd7d33",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/settlement.village.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/settlement.village.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:57:59.000Z",
+  "referenceHashes": [
+    "373c9055af2a252c4459ed7661f33e2337456c010ee80fcd80c07acbb4c58154",
+    "aedecfb4fd50b3d413e5c4fc21713c942b307f1e602408f37e7ef5198184e691"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "c2562c5093a56aa448923fcf7afa0a1fd97b25d76a202431f3dcd5000fd4f33b",
+      "inputHash": "373c9055af2a252c4459ed7661f33e2337456c010ee80fcd80c07acbb4c58154",
+      "outputHash": "f126498b426b06d63d467f87198c2c3688b14ef7d747423a3b71067cf26d38bc"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "f126498b426b06d63d467f87198c2c3688b14ef7d747423a3b71067cf26d38bc",
+      "outputHash": "12bf1736f901d30ab6ff5c6f2b44dda67eb49d654ddf8e5d86f892308c28db7a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "12bf1736f901d30ab6ff5c6f2b44dda67eb49d654ddf8e5d86f892308c28db7a",
+      "outputHash": "c6b5e93eea525787314732c03194999d53d90d51e5e2a0011c229ebd8d013b98"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "b695018485d775ba8deff637f477cbe82a45c6baf41a367839d2f6acc799ab78",
+      "outputHash": "f05cc9c58883068ba9b9ef99dcce7adfe05189f6fc3468b1ff08d29370d3d280"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "f1b64f4a40bfe2df26705ca3c4119ce70b925afa6bcdaf1065f510e2c872472f",
+      "outputHash": "3ca71567e6e4ba880ad2e7af7bf0dbf4084eec2ce99ea13e857c4cec76ffb318"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "6d25d3478ada6c9866143d93aad2a63499aa19f5b9f324c48abbbb90377d19f8",
+      "outputHash": "fb925a11f53dc713f1d8ab73252c59f2c0d6887af54f4ffdd320facce0fb36b7"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.village.wardhall_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:15.763Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Several open pale buildings with purple roofs remain less enclosed than town. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 2a49f174ab8a8fcd3f67a07403227a1d8a679756caca79f2f9f5b68f2c6b45f1; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/63b62a81d8a129dfaf5a5781137e588ad5bc16dfcee21d6173fca001fd924282.png"
+    ],
+    "inputHash": "4c96871af53f8acd4a5c5b417bbe1dd8dd89715cbedb13e476317c3b594c3e17"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

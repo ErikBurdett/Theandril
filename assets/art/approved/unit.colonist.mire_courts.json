@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.mire_courts",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native64. One compact covered migration handcart on the LEFT being pulled by one full-body adult civilian on the RIGHT, walking toward the LOWER RIGHT. All wheels/handles/puller connected and fully visible, adult smaller than canopy. Cloth canopy, seed sacks and bundled household tools; no weapons.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears.",
+  "frames": [
+    {
+      "id": "unit.colonist.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.mire_courts/96e86142df77e30ea82dc18dcd504e173506b6ae1ec64a2a98a9858f99bf8057/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "470639ab004fdd3f0542ee5a84b585ea35dc4711b7501640c97cf47e5a3c9c7b",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/unit.colonist.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/unit.colonist.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:40:12.000Z",
+  "referenceHashes": [
+    "88583d20c6abe6aa22ac7341c20bad88405abc96c3a6180b16c9c0678733b45d",
+    "0ded9117ec24e1f67616bf6e237c54fb6c13f7256fa6d9ca4b72c7686ac27268"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "cbb92b749fb1738d0a2cd69fc2dce4ed1196fe3955ea79aae2fe9dca6f1965e3",
+      "inputHash": "88583d20c6abe6aa22ac7341c20bad88405abc96c3a6180b16c9c0678733b45d",
+      "outputHash": "858b0b5e8366642b725397c3547552d3469d0d935480b7aec41c612cd342a369"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "858b0b5e8366642b725397c3547552d3469d0d935480b7aec41c612cd342a369",
+      "outputHash": "1023daf3c9595af0f38c81d0d976e92c86c58f958f0b8496b7ae81cbc7a1f1c1"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1023daf3c9595af0f38c81d0d976e92c86c58f958f0b8496b7ae81cbc7a1f1c1",
+      "outputHash": "9ada8b217c7d1bc03b737359285df6782a651a691fa1458af24d9ea084e5439e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "4991e178577cb45b7ee55ddeb283608240fcbbe0c2830f5a5bfaebe195641c83",
+      "outputHash": "79693c2fe1fe31db04ef765e2209be881fb22e428e83d966d717e089447d16aa"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "a79201b4f39685943a365f73c1d4b68d3247b94ed17672884070c91181cb2c26",
+      "outputHash": "dc679d1926c5f2aff85344988a66b936fb3a45a742fc74f8fd1ac3d6efcb5f5a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "fd65d21d6fc0b74800e4db53a611adfbfd5f42a4518a58b74c684865d1d35dbb",
+      "outputHash": "d3ddb6772309e3fb611dbaea3905c0b402d50d0f92184712dbd3fd5ca072a27c"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.mire_courts.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:26.488Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Cart wheels, linked shafts and right-facing adult puller form a coherent colonist. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 96e86142df77e30ea82dc18dcd504e173506b6ae1ec64a2a98a9858f99bf8057; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d8be3b2df82887727e53bd6ae03f45aba440c8dbff04c61f9677a7d2c17461c8.png"
+    ],
+    "inputHash": "8619dcc631eb7a9a9261abd25e0d8adb2edb3fdfaee936b44f0fb34852b3e926"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

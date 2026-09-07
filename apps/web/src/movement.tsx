@@ -160,6 +160,6 @@ export function MovementOrders({ movement, view, issue, locate }: { movement: Ma
 export function MovementMapHint({ movement }: { movement: MapMovement }) {
   const hovered = useSyncExternalStore(movement.subscribeHover, movement.getHover);
   const preview = hovered ?? movement.candidate;
-  if (!movement.army) return <div className="map-order-hint">Select an army to show its movement range.</div>;
-  return <div className="map-order-hint" data-testid="map-route-preview">{preview ? <><strong>{preview.action === 'attack' ? 'Attack' : preview.action === 'besiege' ? 'Siege required' : preview.action === 'blocked' ? 'Blocked' : 'Route'} · hex {preview.target}</strong><span>{preview.cost} movement · {preview.path.length} steps{preview.canMoveNow ? ' · available now' : preview.canQueue ? ' · can queue' : ''}</span></> : <><strong>{movement.army.name}</strong><span>{movement.canAct ? movement.army.movement ? 'Click a highlighted hex to move. Hover to preview.' : 'No movement remains. End the turn to refresh movement.' : 'Campaign orders are currently unavailable.'}</span></>}</div>;
+  if (!movement.army || !preview) return null;
+  return <div className="map-order-hint" data-testid="map-route-preview"><strong>{preview.action === 'attack' ? 'Attack' : preview.action === 'besiege' ? 'Siege required' : preview.action === 'blocked' ? 'Blocked' : 'Route'} · hex {preview.target}</strong><span>{preview.cost} movement · {preview.path.length} steps{preview.canMoveNow ? ' · available now' : preview.canQueue ? ' · can queue' : ''}</span></div>;
 }

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.wardhall_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: One broad adult human Wardhall heavy infantry veteran in blocky black riveted plate reinforcements over chalk-grey lamellar, short slate-violet mantle and closed squared helmet. Tall heavy kite shield marked with an open-square seal, one practical square-headed war hammer held low. Straight architectural shape language, not a dwarf/anvil warrior or undead sentinel; grounded full-body stance.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.heavy_infantry.wardhall_remnant/8bdd5cc16f37bd9743d9428e70dbd4bfefb76ca4baabb00e4c8e899f03b56bb4/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "3804f3b451445468105662ad0b89b90025957600bff6220a090c1392ca3cc4e7",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/unit.heavy_infantry.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/unit.heavy_infantry.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:53:53.000Z",
+  "referenceHashes": [
+    "7ee982557e2e44ec88b900714e06bda93ff9d55a7d4d7f44c900f1a78634fb10",
+    "ed85f16a48200c733e49fbbda8e96dd7516840f1d8e6fb7c6050ee612e360c82"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "690ca22994c8f66c06d5b9318e89eeee035b370444472b4e296097b2447dcb40",
+      "inputHash": "7ee982557e2e44ec88b900714e06bda93ff9d55a7d4d7f44c900f1a78634fb10",
+      "outputHash": "da780da16797adf72ffb71df21ba0efd9e0eebbe9c94f846f8f165efe1849e82"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "da780da16797adf72ffb71df21ba0efd9e0eebbe9c94f846f8f165efe1849e82",
+      "outputHash": "68653661d13d2b478aae4e9b86b6116ea7897795334c07b2ce44503495d1d9c7"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "68653661d13d2b478aae4e9b86b6116ea7897795334c07b2ce44503495d1d9c7",
+      "outputHash": "c605edf982502b5194667ddb89e9ef59288bf51a14336854f258aaf08737707d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "53247d5dfe469e7c9ebf2a01043950a6179aa6baebc09272715217e7a6b8ae73",
+      "outputHash": "eb777306109206fc96e3f804e1cc91c863ba32a6feb87788a6b987ee43ce545c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "ebe0ed2f623bb756d7d9572cc006b4ff7db60ba9ce7112d522915bcbd9f32c2e",
+      "outputHash": "cebee73642d85e73157dea1253ed1c4afc3951183998bd037cb4182d6590738c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "fc0869f21b10b72b3653ed8b4d44dd9e760da377a21b25857b358c7e15c4feec",
+      "outputHash": "061585c217b3e909fbb489de37950eead69310cf3958e08838a64aee5216b456"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.heavy_infantry.wardhall_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:33.785Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Broader pale plate and large geometric shield remain heavier than guard. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 8bdd5cc16f37bd9743d9428e70dbd4bfefb76ca4baabb00e4c8e899f03b56bb4; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/63b62a81d8a129dfaf5a5781137e588ad5bc16dfcee21d6173fca001fd924282.png"
+    ],
+    "inputHash": "a51ade9f5b114eb6dc3c8f44c1bb1b98381d8b3557a6692e0f907a489eb92ec7"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

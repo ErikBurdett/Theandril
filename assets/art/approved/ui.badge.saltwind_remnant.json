@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.saltwind_remnant",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Saltwind Remnant, successor charter households after the old Saltwind League's fall, not a revived empire. Muted petrol cloth and auburn patched sailcloth, tar-black leather, weathered driftwood and dull brass rigging. Narrow practical nautical equipment; original angular broken-keel insignia (a simple split V-shaped keel, not an anchor). No bright blue sails, round glass ornaments or generic pirate skulls.\nSubject: ONE front-facing tiny strategic badge, extremely simple original broken-keel mark: two offset chunky dull-brass angled keel segments on a narrow muted-petrol lozenge with a tar-black outline. Only a few broad pixel masses, designed for native32x32, not a miniature detailed crest. Centered, no pole, text, crown, rope circle or scenery.",
+  "frames": [
+    {
+      "id": "ui.badge.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.saltwind_remnant/c23ebf807803c10e96f6f5e2c7e2227195e7a41ab9cdb73d45cc737ee67056a2/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9103a45a2abf70d68f006c34b5e34621de2242293cb0ee5fce084b976806ec9e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/ui.badge.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/ui.badge.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:47:25.000Z",
+  "referenceHashes": [
+    "694ac6ad4781622a4fe90c810dcafb86012456d8b41ba247e0b8d8375db39ce2",
+    "6ef83dc87467bb350e0ba94620efc8e9c70598837245b866679c6f10cb65fb56"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "11890212e44526a54fe3f939b527c42519269c617fa95194f8976257a0eea438",
+      "inputHash": "694ac6ad4781622a4fe90c810dcafb86012456d8b41ba247e0b8d8375db39ce2",
+      "outputHash": "fc9f7a769149d974ddbb6779773b1fedf1c02913a56d1c49f7dd12ac0f1c119c"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "fc9f7a769149d974ddbb6779773b1fedf1c02913a56d1c49f7dd12ac0f1c119c",
+      "outputHash": "0628e70f986de959159cb885d54136ddfcc257b2d83d126f13b5abdcad2a367e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0628e70f986de959159cb885d54136ddfcc257b2d83d126f13b5abdcad2a367e",
+      "outputHash": "80061b5d085338cb6e5951ae635a6fd829f36ff963fa10fc1a4463baa6c3df82"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "78336bd8183422249e204059e9d80248e7f315d75e69d7e12d8021165f244e1e",
+      "outputHash": "9e0ad7d7849b1523868809baadd12af0a9befc171235fab4d4dcfbc9f542e941"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "3b84fb0377251757539b21e307cab98c5393acce2726cf1b9436adf5878d9188",
+      "outputHash": "94ee5333e2fce96ab9234e48aa8e33e53057069aa0fb2cda5fe3066d5eed5e5d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "a036cacd321878a1447caaea2a985fa9bf5e77d6ef30002d0371e612bec9142c",
+      "outputHash": "b027643e1f02885c345f1979f4ffe9f6ed72c7924f340bfe58702e0cd3bbda09"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.saltwind_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:17.899Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Small dark diamond with pale forked center remains distinct from the square Wardhall mark. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate c23ebf807803c10e96f6f5e2c7e2227195e7a41ab9cdb73d45cc737ee67056a2; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a5caa24e863aeb2f3dc3d22c0d2c76ce681769339bebd598c6b65c3b0f481f74.png"
+    ],
+    "inputHash": "7574282a09a51d0c51e989921bbd0ac37c5d800d38467569104d3c951aa22d8f"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

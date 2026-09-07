@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.rimehorn_clans",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.rimehorn_clans"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Rimehorn Clans winter shelter households: massive weathered grey-timber hull with protective dark iron prow bracing, dusky blue sails, grey fur-lined closed shelter, ivory lashings and small crossed shelter beams insignia. Strong broad winter-lodge silhouette; restrained bone fittings, no giant horned figurehead, no snow/water backdrop. Role: Charter transport: a broad deep-water wooden cargo cog with a rounded capacious hull, single patched square sail, low canvas-covered passenger shelter and neatly strapped crates. Lightly armed; no artillery, no warship ram. Chunky broad cargo silhouette. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.transport.rimehorn_clans/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.rimehorn_clans/bbfb362a0e24b499f936a7ff6f653e056fa2c8394c9d6c5ed52d01414819dea0/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b89bb43da407cf2b3764936f6bc7a13dcced935706a845c836c77c0bf4f54e25",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.rimehorn_clans-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.rimehorn_clans-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:33:42.056Z",
+  "referenceHashes": [
+    "81faf2a29602fdd8f17f370b5bb221914df6949cfd2f2a853e4ae798780edbef",
+    "92386675bba5ef57026d9321aa5f89c2e5325c4f12bd07a00d0697f3832fa4c4"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "55ddc55e022cdfc57ef40616fc6fc46880fb24e65ec6e7605d036ac9f19889a7",
+      "inputHash": "81faf2a29602fdd8f17f370b5bb221914df6949cfd2f2a853e4ae798780edbef",
+      "outputHash": "3eb040016abada8d39c84ba89192a09d107a1b4acdf1acdde99b4129bd8ab63f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "3eb040016abada8d39c84ba89192a09d107a1b4acdf1acdde99b4129bd8ab63f",
+      "outputHash": "4c98254d79ecdb170bf863c4f2eb5602ae9f724a63ecff451bec78a1456c3c18"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4c98254d79ecdb170bf863c4f2eb5602ae9f724a63ecff451bec78a1456c3c18",
+      "outputHash": "4fc4ec2ff10f20f73b55e7ad887b298094a80b1cead8439673437a3953315245"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "24e61e9bb4bc8b552917c795fb08f83b2b22fc9e1fa6774409184b36ad26905f",
+      "outputHash": "4d5f1f7b0145d25356c7667a70be9184ad10def4f94b77ec5437af7424417098"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "e1f90c7287d64f0a8528fede88d0a5562fd5bd90f6a8ff8af5967ff05e8dbb4a",
+      "outputHash": "c011dbaa8636a9252780272f0ec3e1d0c85d4573c02a569502dd33ce4948c22e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "4b0f691513ea9e4641610c5b298a90c65fc722102266226e88f9df7eb6e040fb",
+      "outputHash": "3a9f69a4ea19cc8592647992eec0c111001ecea98023e94887ecdf2b1047de1f"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.rimehorn_clans.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:50:19.014Z",
+    "notes": "Root inspected generated source, native1x cohort and nearest4x family pixels. Cold blue cloth, bone-horn fittings and pale stitched marks; broad cargo hull and armoured fighting decks remain legible in the muted palette. Single square sail, cargo volume and passenger canopy read at96px. Palette and binary-alpha validation passed; native tips intact and no opaque background matte. Static southeast art only; fine rigging is texture. Runtime water, fog and ownership review is a separate gate.\nReviewed candidate bbfb362a0e24b499f936a7ff6f653e056fa2c8394c9d6c5ed52d01414819dea0; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b5cf15e1771bd4c432e5257e798c60160ae67f16cfce48c37b3037ef669c3074.png"
+    ],
+    "inputHash": "97713ca542bbfd4ccf825e3ec469a1d989f3e5c6b843445ad613236ed0b1a3ce"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

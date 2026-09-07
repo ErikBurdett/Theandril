@@ -324,7 +324,7 @@ function matureWorkload(size: 'tiny' | 'huge' | 'legendary', smoke: boolean) {
 }
 
 export function benchmarkTerritory(options: { smoke?: boolean } = {}) {
-  invariant(SAVE_VERSION === 9 && CONTENT_HASH === EXPECTED_CONTENT, 'refuse timing unsealed rules/content; update benchmark guard only after an intentional new report');
+  invariant(Number(SAVE_VERSION) === 9 && CONTENT_HASH === EXPECTED_CONTENT, 'refuse timing unsealed rules/content; update benchmark guard only after an intentional new report');
   const smoke = options.smoke ?? false;
   return { capturedAt: new Date().toISOString(), command: 'node --import tsx scripts/benchmark-territory.ts' + (smoke ? ' --smoke' : ''), runtime: process.version, cpu: cpus()[0]?.model,
     logicalCpus: cpus().length, installedMemoryBytes: totalmem(), os: platform() + ' ' + release(), saveVersion: SAVE_VERSION, contentHash: CONTENT_HASH, generatorVersion: 4, smoke, cultures: FACTIONS.map(faction => faction.id),

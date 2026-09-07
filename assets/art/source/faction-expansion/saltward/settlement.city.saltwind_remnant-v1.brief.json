@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.saltwind_remnant",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Saltwind Remnant, successor charter households after the old Saltwind League's fall, not a revived empire. Muted petrol cloth and auburn patched sailcloth, tar-black leather, weathered driftwood and dull brass rigging. Narrow practical nautical equipment; original angular broken-keel insignia (a simple split V-shaped keel, not an anchor). No bright blue sails, round glass ornaments or generic pirate skulls.\nSubject: ONE dense yet readable successor charter port citadel cluster: elevated narrow counting towers and weathered timber warehouses around a central angular quay hall, auburn sailcloth roofs and petrol shutters, dark piles and dull brass structural bindings. Strong tall varied skyline, not round glass domes, blue sails or giant ship. No water, terrain base, background or people; 128x128 logical detail.",
+  "frames": [
+    {
+      "id": "settlement.city.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/source/native/settlement.city.saltwind_remnant/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "caafe7095120f09b372a00571072eecacca07ce473cb07ef4778b2b845f551cb",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/settlement.city.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/settlement.city.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:48:00.000Z",
+  "referenceHashes": [
+    "b4a019f8490cd1dc76b355a45e0506a7ff11aa978a280649c401693d37ca5c1f",
+    "f3bd429a2b479a7214c9760a41bccc310052c96614eadbdc98594892d1136624"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "93b577c5982e901942c5c118bc074a708aedf5f182d0325e0f5c5edbe3633568",
+      "inputHash": "b4a019f8490cd1dc76b355a45e0506a7ff11aa978a280649c401693d37ca5c1f",
+      "outputHash": "0026b3c1662640a1ea845930163b8c965c7a774a1b1f910735f305644191c491"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

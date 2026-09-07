@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.saltwind_remnant",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Saltwind Remnant, successor charter households after the old Saltwind League's fall, not a revived empire. Muted petrol cloth and auburn patched sailcloth, tar-black leather, weathered driftwood and dull brass rigging. Narrow practical nautical equipment; original angular broken-keel insignia (a simple split V-shaped keel, not an anchor). No bright blue sails, round glass ornaments or generic pirate skulls.\nSubject: ONE compact charter town cluster: a tall narrow timber counting hall, two dock warehouses and linked angular stilt quays, with varied auburn sailcloth roofs and restrained petrol shutters. Tar-black braces and dull brass crane fittings, small folded empty pennant. No water, terrain base, people or surrounding scene. All roofs/quay piles inside margin; 96x96 logical detail.",
+  "frames": [
+    {
+      "id": "settlement.town.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/settlement.town.saltwind_remnant/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "ca5e42412ca42fb0403f8a97a8f2f82944706054f6959ac4a7d273400507c972",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/settlement.town.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/settlement.town.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:48:00.000Z",
+  "referenceHashes": [
+    "f69e51ba6a46afcfd589848a4a13da81d0695f443a2567134b4bd6da7bb82913",
+    "ec1413588adddfc5c61f8a4a2b652fa75835ebf64e438a03f88970d0cb0a02c7"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "90cc79ba01e7e38348894007050736aa66fbb0ccb1ff02423197b5cd7647ab8d",
+      "inputHash": "f69e51ba6a46afcfd589848a4a13da81d0695f443a2567134b4bd6da7bb82913",
+      "outputHash": "af333fc8e88fcd39e00e0d57d6b4a030e31d2b4bb27fe4cb32cf227d69db4d5d"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

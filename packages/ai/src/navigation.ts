@@ -14,12 +14,39 @@ export function createNavigation(view: Observation) {
   // journey through currently visible ground, so those revelations cannot invalidate its cost.
   const travelView = { ...view, cells: view.cells.filter(cell => cell.visible) };
   const gains = new Map<string, number>();
+  const topology = new Map<number, { adjacent: number[]; touchesUnknown: boolean }>();
+  // Low two bits retain the integer movement cost; other bits permit land,
+  // coastal or deep-water entry. Claimed destinations are never cached here.
+  const landEntry = 4, coastalEntry = 8, oceanEntry = 16;
+  const entryCache = new Map<number, number>();
   let expandedNodes = 0;
-  const canEnter = (army: ObservedArmy, cell: number): boolean => {
+  const entryMask = (army: ObservedArmy): number => army.carrierId ? 0 : army.domain === 'naval'
+    ? coastalEntry | (army.canEnterDeepWater ? oceanEntry : 0) : landEntry;
+  const entryAt = (cell: number): number => {
+    const cached = entryCache.get(cell); if (cached !== undefined) return cached;
     const known = cells.get(cell);
-    return Boolean(known && !army.carrierId && !occupied.has(cell) && (army.domain === 'naval'
-      ? known.terrain === TERRAIN.water && (known.waterDepth === WATER_DEPTH.shallow || known.waterDepth === WATER_DEPTH.deep && army.canEnterDeepWater)
-      : isPassable(known.terrain)));
+    let entry = 0;
+    if (known && !occupied.has(cell)) {
+      entry = costOf(known.terrain);
+      if (isPassable(known.terrain)) entry |= landEntry;
+      else if (known.terrain === TERRAIN.water) {
+        if (known.waterDepth === WATER_DEPTH.shallow) entry |= coastalEntry;
+        else if (known.waterDepth === WATER_DEPTH.deep) entry |= oceanEntry;
+      }
+    }
+    // Range/edge probes may outnumber expanded nodes: cap the optional cache,
+    // then compute normally. This changes neither eligibility nor search work.
+    if (entryCache.size < MAX_FRONTIER_NODES) entryCache.set(cell, entry);
+    return entry;
+  };
+  const topologyAt = (cell: number) => {
+    let known = topology.get(cell);
+    if (!known) {
+      const adjacent = neighbors(cell, view.width, view.height);
+      known = { adjacent, touchesUnknown: adjacent.some(next => !cells.has(next)) };
+      topology.set(cell, known);
+    }
+    return known;
   };
   const informationGain = (cell: number, sight: number): number => {
     const key = cell + ':' + sight;
@@ -38,20 +65,25 @@ export function createNavigation(view: Observation) {
     // Integer edge costs permit deterministic cost buckets without an unbounded sorted frontier.
     const costs = new Map([[army.cell, 0]]); const parents = new Map<number, number>();
     const buckets: number[][] = [[army.cell]];
+    const allowed = entryMask(army);
     let localNodes = 0;
     for (let distance = 0; distance < buckets.length; distance++) for (const cell of buckets[distance] ?? []) {
       if (costs.get(cell) !== distance) continue;
       if (expandedNodes >= MAX_FRONTIER_NODES || localNodes >= MAX_ARMY_FRONTIER_NODES) return undefined;
       expandedNodes++; localNodes++;
-      if (cell !== army.cell && neighbors(cell, view.width, view.height).some(next => !cells.has(next))) {
+      // Called only after charging an expansion: at most8192 distinct topology
+      // entries per plan. Repeated armies still consume every original node.
+      const local = topologyAt(cell);
+      if (cell !== army.cell && local.touchesUnknown) {
         const path: number[] = []; let cursor = cell;
         while (cursor !== army.cell) { path.push(cursor); cursor = parents.get(cursor)!; }
         path.reverse();
         return path.filter(next => (costs.get(next) ?? Infinity) <= army.movement && !claimed.has(next)).at(-1);
       }
-      for (const next of neighbors(cell, view.width, view.height)) {
-        if (!canEnter(army, next)) continue;
-        const cost = distance + costOf(cells.get(next)!.terrain);
+      for (const next of local.adjacent) {
+        const entry = entryAt(next);
+        if (!(entry & allowed)) continue;
+        const cost = distance + (entry & 3);
         if (cost >= (costs.get(next) ?? Infinity)) continue;
         costs.set(next, cost); parents.set(next, cell); (buckets[cost] ??= []).push(next);
       }
@@ -63,7 +95,8 @@ export function createNavigation(view: Observation) {
     informationGain,
     destination(army: ObservedArmy, sight: number, claimed: Set<number>, strategicScore?: (cell: number) => number): number | undefined {
       if (army.carrierId || army.movementBlocker) return undefined;
-      const range = getMovementQuery(travelView, army.id).reachable.filter(item => canEnter(army, item.cell) && !claimed.has(item.cell));
+      const allowed = entryMask(army);
+      const range = getMovementQuery(travelView, army.id).reachable.filter(item => (entryAt(item.cell) & allowed) && !claimed.has(item.cell));
       const candidates = range.map(item => ({ ...item, gain: informationGain(item.cell, sight), strategic: strategicScore?.(item.cell) ?? 0 }));
       // Stable per-army tie breaking spreads scouts without changing their objective each turn.
       let salt = 0; for (let i = 0; i < army.id.length; i++) salt = Math.imul(salt, 31) + army.id.charCodeAt(i) | 0;

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.sepulchral_synod",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Sepulchral Synod living caretakers and housed ancestors: narrow dignified hull, chalk-pale protective plates, deep indigo canvas, aged bronze ribs, terraced stern-house outline and small hollow ring above three steps insignia. Quiet funerary architecture influence, not skulls, ghosts, skeleton crew or magical ship. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.coastal_warship.sepulchral_synod/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "01bf235301bf3b43bd216f6db2dfab95dd1d944212348abc3e99c8381c3da1d7",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.sepulchral_synod-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.sepulchral_synod-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:08:53.068Z",
+  "referenceHashes": [
+    "e98ed8d0da7bdc4e6943e658f160da2bc7ec7ee67de42bfcdb6fc1a7fbf217be",
+    "d0e8bd135e027c14fb73f33e606d9ade84e3577be8b21c7db07951ecc758bb85"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "454dbc5db80fd4c621c6067edb19e98a7778984b9ea3fca13d102aecf8fe6d0a",
+      "inputHash": "e98ed8d0da7bdc4e6943e658f160da2bc7ec7ee67de42bfcdb6fc1a7fbf217be",
+      "outputHash": "1d0714115d977e7bebae511527f696800e4d48e3e8d8189872cd5069248e055d"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

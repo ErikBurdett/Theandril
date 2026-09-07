@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.wardhall_remnant",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: ONE compact settlement cluster of three chalk-grey masonry work cottages around a small open square yard, low slate-violet pitched roofs, straight black timber/riveted door reinforcements, simple square lintels. One modest crenellated gatehouse, no tall spires. Southeast top-down strategic view. No terrain base, plants, people, water or scenery. Every roof enclosed in margins;96x96 logical detail.",
+  "frames": [
+    {
+      "id": "settlement.village.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/settlement.village.wardhall_remnant/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "3e40731d1474a2b5aa2554e511672b4b91a2390554fe94755b17020ccecd7d33",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/settlement.village.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/settlement.village.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:57:59.000Z",
+  "referenceHashes": [
+    "373c9055af2a252c4459ed7661f33e2337456c010ee80fcd80c07acbb4c58154",
+    "aedecfb4fd50b3d413e5c4fc21713c942b307f1e602408f37e7ef5198184e691"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "c2562c5093a56aa448923fcf7afa0a1fd97b25d76a202431f3dcd5000fd4f33b",
+      "inputHash": "373c9055af2a252c4459ed7661f33e2337456c010ee80fcd80c07acbb4c58154",
+      "outputHash": "f126498b426b06d63d467f87198c2c3688b14ef7d747423a3b71067cf26d38bc"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

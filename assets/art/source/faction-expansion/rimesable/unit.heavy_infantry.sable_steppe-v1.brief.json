@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.sable_steppe",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.sable_steppe"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: one original Theandril dark-fantasy strategic game sprite, unit.heavy_infantry, static first-facing pose.\nScene/backdrop: genuinely TRANSPARENT RGBA background, alpha zero around the isolated sprite. Do NOT paint a checkerboard, white/black backdrop, landscape, scene, floor tile, drop-shadow oval or framing panel.\nFaction visual grammar: Sable Steppe, an original mixed-human steppe camp confederation. Lean adult proportions; rust felt, muted ochre cloth, indigo accents and black lamellar leather/iron. Mobile angular cloth cuts, practical travel equipment, no lavish imperial ornaments. Heraldry is exactly three broad wind-notch cuts arranged as a compact original simple seal. Settlement architecture combines yurts, taut angular tension roofs and protective walls, not medieval European castles. No copied fantasy franchise costumes.\nSubject: One adult heavy infantry veteran in layered dark protective armor, visibly heavier than an ordinary guard, holding one broad sword and large shield. Face southeast, toward screen right and slightly toward viewer. Whole helmet, weapon and feet visible. No huge helmet ornament.\nStyle: serious weathered medieval pixel art designed for a 64x64 native sprite; intentional broad pixel clusters and restrained material ramps, selective dark local-color outlines, crisp hard edges, soft upper-left material lighting. Adult anatomy, modest head about one-seventh body height, NOT chibi/cartoon. Keep every role readable when reduced to its native size; no painterly texture soup, antialias blur, microtexture or bright confetti.\nComposition: exactly ONE sprite, centered with at least 15% fully transparent margin on EVERY edge. Shallow elevated three-quarter strategic view. Whole silhouette fully inside canvas; nothing cropped. Readable separated limbs and equipment; one static grounded pose.\nColor family: muted material colors only; steel stays grey, flesh stays natural, cloth carries faction accents. No glow, text, labels, watermark, logo, decorative page, multiple poses, sprite sheet or grid. Return an actual transparent PNG.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.sable_steppe/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.heavy_infantry.sable_steppe/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not exposed",
+    "promptHash": "5028f74d3bff3d1205bae1961b4f8e62423e4fceed8f9988644cd25d77748971",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/rimesable/unit.heavy_infantry.sable_steppe-v1.png",
+      "assets/art/source/faction-expansion/rimesable/unit.heavy_infantry.sable_steppe-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:01:33.107Z",
+  "referenceHashes": [
+    "8be73385c2c3066bbf94d6431be8440b9bd8955179e9d9dd07b4ac54634cb4e3",
+    "d410966af704b11506ba4289e8d893395cd68f8504cafd0b574445c80bc7118d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "e253227fd1df506503ccd376ed96d279a95df90fc3ebdf573436b6ba39dc7f51",
+      "inputHash": "8be73385c2c3066bbf94d6431be8440b9bd8955179e9d9dd07b4ac54634cb4e3",
+      "outputHash": "16c202133e949d7a398317f11cdde4b43136c1dbd2b885b0e08f676f812c2554"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

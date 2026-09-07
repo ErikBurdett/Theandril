@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.morrow_spore",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Morrow Spore: original underwood commonwealth of adult humans and solemn fungal symbionts. Umber layered fungal carapace, dusty mauve cloth, pale lichen seams and dark leather. Strong broad overlapping shelf-fungus planes rather than cute mushroom caps. Original hollow crescent cradling three seeds seal. Practical mature woodland society, no spores in air, neon, gore or chibi figures. Native64. One full-body adult spearman holding one long uninterrupted spear shaft with leaf tip, small round buckler and travel lamellar. Entire spear tip and both boots enclosed in generous empty alpha margins, spear not cut off.  Buildings: broad layered shelf-roofs and grown timber ribs with umber walls, pale lichen door frames and mauve canopy accents, not freestanding mushroom doodles; heraldry bonecrescent around threeseeds on umber. Humanoids adult serious humans with fungal grown armor and scarves.",
+  "frames": [
+    {
+      "id": "unit.spearman.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.spearman.morrow_spore/450416e73e7ebd2cf8a3b9a79b1a3eccde3efe37b0b7327e30e66d99aaad51b8/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b0dd48ebc30b9e6dda4e1ba62d4dcda9f4603432b4c77486e2c3ed1768c602c2",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/morrow/unit.spearman.morrow_spore-v1.png",
+      "assets/art/source/faction-expansion/morrow/unit.spearman.morrow_spore-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:01:03.871Z",
+  "referenceHashes": [
+    "a8d9f2712ae40d58d8206237d24c035b4750e6cad17db47545b1c9208408ee73",
+    "cd512c2dec1c85a60426fd58f36ee45e493a7854710b7ed6427c03edad186867"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "bd62f9e523c75c470bef85d35e87637a7b2e0f69782acb54d5704f3f531c8cb3",
+      "inputHash": "a8d9f2712ae40d58d8206237d24c035b4750e6cad17db47545b1c9208408ee73",
+      "outputHash": "c87cc3b7c3f37d41073b3fec9da9d0a92863ab8d5dbab20dc98900d0b93b17b4"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "c87cc3b7c3f37d41073b3fec9da9d0a92863ab8d5dbab20dc98900d0b93b17b4",
+      "outputHash": "0b6354d03561dcbcb6d02aea1319e2559c4c504be11d14f0f129d539dc8eed60"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0b6354d03561dcbcb6d02aea1319e2559c4c504be11d14f0f129d539dc8eed60",
+      "outputHash": "14182cdf094f80fcb833702881630010b0310e4f3822032086918fd531500061"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "752cce6d5af71ba3f549a55aaf37fe34b1c07f0dbe62adc3864045992786902a",
+      "outputHash": "f396fb617237d60c3328094b9acb64d5c6f25f83308474f3a75a921ebfbf416e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "81bca2f42e1244539c73c16b2d8c09998d8eb8d66ae61d385b6844c1ab235c34",
+      "outputHash": "13454c737a3c075549125aa478e6e97495aa2728d68b82d9a098b29a5d67024b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "993f89a4f12abcc9e3bd6c809a5c85750a67e41527a0759a9c0f86099092a2d6",
+      "outputHash": "7f08c89d085f5cce8feb161bb8725c86a948acee1f153c7e29c2f0d20de82a7b"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.spearman.morrow_spore.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:37.187Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Upright spearhead above figure and separate shield retain clear long-weapon role. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 450416e73e7ebd2cf8a3b9a79b1a3eccde3efe37b0b7327e30e66d99aaad51b8; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0ad7250b8e085933726ab4d5b6c892fd68f0b59fcd4c90137084dbcc278a7137.png"
+    ],
+    "inputHash": "ce25d4244a36c45d2f891b3b014ad182cf95d08854519a2891a01e517038d769"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

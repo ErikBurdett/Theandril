@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.morrow_spore",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Morrow Spore underwood symbiont households: dark umber grown-timber ribs, broad shelf-shaped layered deck shelter, dusty mauve sail cloth, pale lichen seam bands and overlapping carapace rail panels. Original hollow crescent cradling three seeds insignia. Practical ship built by adults, no whimsical mushroom cap, no spore cloud, no magical propulsion. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.morrow_spore/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7abf22fd269d1f29e95068ad530b9c5555f4029602f0231df5854308aa10aee9",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.morrow_spore-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.morrow_spore-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:37:41.210Z",
+  "referenceHashes": [
+    "4118c4edf53d5c899daecb1dbd33cbdf0e0d9c9fe14c997c56287bb7b27d6775",
+    "797751e25085071dc04e4075b9e013bedebca74604dfe898c075f4340633e6ab"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "84ab334f809466c3cb9f2f9a3b3797767f88471e712fd1577e46afe9349cbc87",
+      "inputHash": "4118c4edf53d5c899daecb1dbd33cbdf0e0d9c9fe14c997c56287bb7b27d6775",
+      "outputHash": "c98507b3ec7885a7bedb124e203482745e45a0c814041a8de1c601ae06bdb3b2"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

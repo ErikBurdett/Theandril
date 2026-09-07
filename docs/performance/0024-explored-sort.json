@@ -1,0 +1,179 @@
+{
+  "date": "2026-09-06",
+  "purpose": "Synthetic copy plus sort microbenchmark, not a campaign timing.",
+  "note": "The retained raw row key 'typed' is a historical harness variable name. This candidate uses only a copied ordinary JavaScript array, an adjacent-number monotonic scan, and the original numeric-sort fallback; no typed-array conversion.",
+  "raw": {
+    "at": "2026-09-06T22:20:05.599Z",
+    "node": "v26.7.0",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+    "logicalCpus": 32,
+    "ramBytes": 33317580800,
+    "allocationScope": "Both paths allocate one copied JS array. Candidate scans adjacent values and returns only when monotonically numeric; otherwise invokes the original numeric sort. All copy, scan and fallback-sort time is included; equality/JSON verification and fixture creation are excluded. No forced GC.",
+    "malformedCasesExact": 10,
+    "rows": [
+      {
+        "count": 512,
+        "order": "shuffled",
+        "iterations": 40,
+        "batch": 10,
+        "exactArrayAndJson": true,
+        "old": {
+          "meanMs": 0.033891752500000025,
+          "medianMs": 0.03363170000000011,
+          "p95Ms": 0.03706449999999961
+        },
+        "typed": {
+          "meanMs": 0.033884757499999994,
+          "medianMs": 0.03342510000000019,
+          "p95Ms": 0.036844900000000534
+        },
+        "meanRatioMonotonicOverOld": 0.999793607604091
+      },
+      {
+        "count": 512,
+        "order": "nearly-sorted",
+        "iterations": 40,
+        "batch": 10,
+        "exactArrayAndJson": true,
+        "old": {
+          "meanMs": 0.005556204999999981,
+          "medianMs": 0.005075399999999774,
+          "p95Ms": 0.008190900000000311
+        },
+        "typed": {
+          "meanMs": 0.005240177500000041,
+          "medianMs": 0.005063900000000387,
+          "p95Ms": 0.005625200000000064
+        },
+        "meanRatioMonotonicOverOld": 0.9431216990733889
+      },
+      {
+        "count": 512,
+        "order": "monotonic",
+        "iterations": 40,
+        "batch": 10,
+        "exactArrayAndJson": true,
+        "old": {
+          "meanMs": 0.004190147499999953,
+          "medianMs": 0.0039006999999998014,
+          "p95Ms": 0.006772500000000292
+        },
+        "typed": {
+          "meanMs": 0.0014831874999999964,
+          "medianMs": 0.001190199999999919,
+          "p95Ms": 0.001668599999999998
+        },
+        "meanRatioMonotonicOverOld": 0.3539702361313088
+      },
+      {
+        "count": 4096,
+        "order": "shuffled",
+        "iterations": 40,
+        "batch": 10,
+        "exactArrayAndJson": true,
+        "old": {
+          "meanMs": 0.4226852449999998,
+          "medianMs": 0.4210082999999997,
+          "p95Ms": 0.4365425999999985
+        },
+        "typed": {
+          "meanMs": 0.42006616500000027,
+          "medianMs": 0.41856490000000124,
+          "p95Ms": 0.44043949999999654
+        },
+        "meanRatioMonotonicOverOld": 0.9938037108439886
+      },
+      {
+        "count": 4096,
+        "order": "nearly-sorted",
+        "iterations": 40,
+        "batch": 10,
+        "exactArrayAndJson": true,
+        "old": {
+          "meanMs": 0.03860080000000039,
+          "medianMs": 0.03749829999999861,
+          "p95Ms": 0.04304169999999772
+        },
+        "typed": {
+          "meanMs": 0.03844142999999989,
+          "medianMs": 0.037404000000003636,
+          "p95Ms": 0.042869600000000216
+        },
+        "meanRatioMonotonicOverOld": 0.995871329091612
+      },
+      {
+        "count": 4096,
+        "order": "monotonic",
+        "iterations": 40,
+        "batch": 10,
+        "exactArrayAndJson": true,
+        "old": {
+          "meanMs": 0.03129215249999902,
+          "medianMs": 0.03014329999999745,
+          "p95Ms": 0.035218999999995046
+        },
+        "typed": {
+          "meanMs": 0.009465724999999738,
+          "medianMs": 0.009077300000001287,
+          "p95Ms": 0.012484700000004522
+        },
+        "meanRatioMonotonicOverOld": 0.30249517031466705
+      },
+      {
+        "count": 200000,
+        "order": "shuffled",
+        "iterations": 40,
+        "batch": 1,
+        "exactArrayAndJson": true,
+        "old": {
+          "meanMs": 30.091445899999986,
+          "medianMs": 30.014616999999816,
+          "p95Ms": 30.956980999999814
+        },
+        "typed": {
+          "meanMs": 30.125998725,
+          "medianMs": 30.023480000000063,
+          "p95Ms": 30.92287000000033
+        },
+        "meanRatioMonotonicOverOld": 1.0011482607088684
+      },
+      {
+        "count": 200000,
+        "order": "nearly-sorted",
+        "iterations": 40,
+        "batch": 1,
+        "exactArrayAndJson": true,
+        "old": {
+          "meanMs": 2.242605425000022,
+          "medianMs": 2.127903999999944,
+          "p95Ms": 2.669061000000056
+        },
+        "typed": {
+          "meanMs": 2.216871599999945,
+          "medianMs": 2.052824000000328,
+          "p95Ms": 2.614067999999861
+        },
+        "meanRatioMonotonicOverOld": 0.9885250322177934
+      },
+      {
+        "count": 200000,
+        "order": "monotonic",
+        "iterations": 40,
+        "batch": 1,
+        "exactArrayAndJson": true,
+        "old": {
+          "meanMs": 1.8669316750000007,
+          "medianMs": 1.7254470000002584,
+          "p95Ms": 2.2936500000000706
+        },
+        "typed": {
+          "meanMs": 0.6599239250000324,
+          "medianMs": 0.561605000000327,
+          "p95Ms": 0.8819600000001628
+        },
+        "meanRatioMonotonicOverOld": 0.35348049092371425
+      }
+    ],
+    "sink": 0
+  }
+}

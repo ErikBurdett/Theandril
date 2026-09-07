@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "batchId": "rimesable",
+  "reviewedAt": "2026-09-06T09:28:22.183Z",
+  "stage": "processed-candidate review, not approval",
+  "approved": false,
+  "evidence": [
+    {
+      "path": "assets/art/review-previews/rimehorn_clans-1x.png",
+      "sha256": "20eb61eea0f53b99f0b24e75ee390349ce9180e2c94375c77107de901652cfcf"
+    },
+    {
+      "path": "assets/art/review-previews/rimehorn_clans-4x.png",
+      "sha256": "f5e9d8811b9a464895c27a49003f4ee627723bf41207a733bdf0554a83aba8d3"
+    },
+    {
+      "path": "assets/art/review-previews/sable_steppe-1x.png",
+      "sha256": "d399c5586dd9324573d992ee4866c65ecf93577b2865f9e070ef1bcf61197c1f"
+    },
+    {
+      "path": "assets/art/review-previews/sable_steppe-4x.png",
+      "sha256": "ae122a0b841cd15ad70339908a698dad62afd662720dbeb948346c8e295ae1df"
+    }
+  ],
+  "observed": [
+    "Rimehorn uses dusky blue, grey fur, weathered ivory and broad adult bodies; Sable uses rust/ochre cloth, indigo and black lamellar. They read as separate faction sets at native scale.",
+    "Each colonist has a cart on screen left and one adult puller on screen right. Each cavalry image contains one complete horse and rider facing screen right.",
+    "Guards, heavy infantry and spearmen retain separate shield and weapon silhouettes. Full long spear poles fit inside 64-pixel canvases, so spearman bodies are smaller than guards; final art direction acceptance remains with the root reviewer.",
+    "Engineers retain a hammer/tool-apron silhouette, surveyors a staff/map silhouette, and marshals a command mantle. Equipment remains compact and static; no animation claim is made.",
+    "Rimehorn settlement tiers distinguish open snow-roof lodges, an enclosed town and a larger stone-walled city. Sable version2 village is a dry three-yurt/awning cluster; town and city introduce progressively larger enclosed civic structures.",
+    "Rimehorn crossed-beam heraldry and Sable three-notch heraldry remain readable. Sable crest has ivory framing from the original generation; its center seal is three ochre notches, not the Rimehorn cross.",
+    "No processed contact-sheet silhouette visibly overlaps a neighboring asset or its own canvas edge. Native palette mapping is high contrast, especially fur, armor and dense settlement roofs; final acceptance should consider that material texture at gameplay zoom."
+  ],
+  "validation": {
+    "activeAssets": 30,
+    "generatedOriginals": 31,
+    "originalAlpha": "Every active original has genuine alpha-zero pixels and passed the preparer transparent-margin/edge gate.",
+    "frames": "Exactly one static idle/se/0 frame per asset, 250 ms; native role dimensions and pivots preserved.",
+    "palette": "All 30 reports pass; 18–58 colors, zero off-palette/partial-alpha/hidden-color/logical-grid errors; padding 2–9 pixels.",
+    "tools": [
+      "spritefusion-pixel-snapper 1.0.0",
+      "Aseprite 1.3.18.3-x64"
+    ],
+    "cache": "Second real generate invocation produced 30 verified cache hits."
+  },
+  "retainedRejection": {
+    "id": "settlement.village.sable_steppe",
+    "version": 1,
+    "reason": "Unwanted snow contradicted dry-steppe visual identity.",
+    "firstPassIndex": "assets/art/source/faction-expansion/rimesable/generation-first-pass.json",
+    "rejectionRecord": "assets/art/source/faction-expansion/rimesable/settlement.village.sable_steppe-v1.rejection.json",
+    "activeReplacementVersion": 2
+  },
+  "handoff": "Root reviewer must inspect processed native/enlarged evidence and approve individual exact validation hashes. This batch has not approved assets or changed runtime catalogs."
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.mire_courts",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native64. One full-body adult spearman holding one long uninterrupted spear shaft with leaf tip, small round buckler and travel lamellar. Entire spear tip and both boots enclosed in generous empty alpha margins, spear not cut off.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears. Mandatory correction: one spearman whose head, nose, chest, hips and boots point toward the RIGHT-HAND side, front-right southeast view, NOT LEFT. Keep spear upright on the figure's left side so face clearly points right. No haze or shadow on transparent canvas.",
+  "frames": [
+    {
+      "id": "unit.spearman.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.spearman.mire_courts/v2/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "10d968293ee658fa9aeea71cfe5747eca92ceaec6b19e13779944ed6c876f461",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/unit.spearman.mire_courts-v2.png",
+      "assets/art/source/faction-expansion/miremorrow/unit.spearman.mire_courts-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:06:13.000Z",
+  "referenceHashes": [
+    "461a10b4931e7dd0f4886e5084d4419bacfddfd2e6c82cd2ef7cb5113a937a5b",
+    "9bd6b250226d2438d57993b29524ba64ecaea8c9b63565d0a00f9a1790eee086"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "356d2290c4bed402417f2b550ea7d1bd87d875390475db34cc3e61fe4b5d2061",
+      "inputHash": "461a10b4931e7dd0f4886e5084d4419bacfddfd2e6c82cd2ef7cb5113a937a5b",
+      "outputHash": "318f82a320d667a5abd80bc30230e7739dbaea7fb942f19231e34899eba62f06"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

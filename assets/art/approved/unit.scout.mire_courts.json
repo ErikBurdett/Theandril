@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.scout.mire_courts",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.scout.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native64. One lean full-body adult wayfinder with a short travel mantle, compact bow held low, small quiver and route satchel, two visible boots. Open light scouting silhouette, no shield or long staff.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears.",
+  "frames": [
+    {
+      "id": "unit.scout.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.scout.mire_courts/357ee156cc2c42b458bc3b7d8515979fa8a0eb81ea165e4366a369079e6c1901/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "320cecd04ba7b3f2af85e7905063fff1e7187468249ec9d9d5b1bfd1f6b6d463",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/unit.scout.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/unit.scout.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:40:12.000Z",
+  "referenceHashes": [
+    "7e3dc4292b424918a03139182d6cbb562151ad710c99bcf6e795afdabebe853c",
+    "748d2a9806bc5731d8ca32cc246323e07eaf82d4a4d67d071bb2b6e335c286b9"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "975a67412a98f5cce14727f807b3487651181ff4a3fa05dae0224806eeff17f9",
+      "inputHash": "7e3dc4292b424918a03139182d6cbb562151ad710c99bcf6e795afdabebe853c",
+      "outputHash": "1630eb2745e45b1592629abf1b0351a052be188a9bc9b1f0da1f811c727fe664"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "1630eb2745e45b1592629abf1b0351a052be188a9bc9b1f0da1f811c727fe664",
+      "outputHash": "1ef640fa8024d550284d0a7ce403290741f4231829cfdb2b458fd148593fa082"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1ef640fa8024d550284d0a7ce403290741f4231829cfdb2b458fd148593fa082",
+      "outputHash": "1c721c084c5310083e168d672dcc03fe8c4f05f244f676d0b0586713dfc6522a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "cd57eccc73f37fa7b893ebe9890bcf35281e23bd0882f7bfe8c6ea5f72d5260c",
+      "outputHash": "831d355ca5de2aadfc2340d64f190e8bf5d0290698f0079604d1de50fd8feff4"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "56c108eeab078301151996903a54a9bc0855fd3fb6cae5d43133fd319318ea20",
+      "outputHash": "c18cd3bd10f77f89c9d35bf03bac317236188845378acf6d5771839655ba8b20"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "32b9172d2f1e8323a680a4cc926802001d8efb21539d189bf0be637ddc968c8b",
+      "outputHash": "84f78a7a3c402b7c5a08a80fcbbb4f270adec582cb6f800c56f4355458d884fb"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.scout.mire_courts.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:34.200Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Low bow-bearing stance and light equipment distinguish the scout. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 357ee156cc2c42b458bc3b7d8515979fa8a0eb81ea165e4366a369079e6c1901; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d8be3b2df82887727e53bd6ae03f45aba440c8dbff04c61f9677a7d2c17461c8.png"
+    ],
+    "inputHash": "d12d2556d0df56b865ce474c44ea472f3cdef863597249865f8b7a7e6a2f249b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

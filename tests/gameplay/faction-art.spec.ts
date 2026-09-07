@@ -1,17 +1,23 @@
 import { expect, test, type Page } from '@playwright/test';
 import { FACTION_ART_FAMILIES, factionArtId, type RuntimeCatalog } from '@theandril/art-pipeline/runtime';
 import { neighbors } from '@theandril/mapgen';
-import { applyCommand, createArmyFormation, createGame, deserializeGame, serializeGame, type GameState } from '@theandril/sim';
+import { applyCommand, createArmyFormation, createGame, deserializeGame, getObservation, serializeGame, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
 import { rebaseAuthoredLand } from '../../packages/test-fixtures/src/authored-land';
 
 const ROLES = ['unit.colonist', 'unit.scout', 'unit.guard', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry'];
+const TOWN_ROLES = ['settlement.village', 'settlement.town', 'settlement.city'];
 const HIDDEN_ARMY_NAME = 'Unseen Glass detachment';
-const cell = (column: number, row: number) => row * 48 + column;
+const GALLERY_WIDTH = 256;
+const cell = (column: number, row: number) => row * GALLERY_WIDTH + column;
+const COHORTS = Array.from({ length: Math.ceil(FACTION_ART_FAMILIES.length / 6) }, (_, index) => ({
+  label: `culture-cohort-${index + 1}`, offset: index * 80, families: FACTION_ART_FAMILIES.slice(index * 6, index * 6 + 6),
+}));
 
 /** Authored initial placement, never a runtime mutator. Every subsequent input is real UI. */
 function factionGallery(): GameState {
-  const state = createGame({ seed: 20260905, size: 'tiny', factionCount: 6, pace: 'short' });
+  const state = createGame({ seed: 20260905, size: 'small', factionCount: FACTION_ART_FAMILIES.length, pace: 'short' });
+  if (state.world.width !== GALLERY_WIDTH || COHORTS.at(-1)!.offset + 65 >= state.world.width) throw new Error('Gallery exceeds its authored map bounds');
   for (const faction of state.factions) {
     const colonist = Object.values(state.armies).find(army => army.factionId === faction.id && army.formations[0]?.unitId === 'unit.colonist');
     if (!colonist) throw new Error('Gallery requires a founding caravan');
@@ -25,13 +31,23 @@ function factionGallery(): GameState {
     state.armies[id] = { id, factionId, name, cell: location, movement: 0, formations: [createArmyFormation(id, unitId)] };
   }
   state.factions.forEach((faction, family) => {
-    ROLES.forEach((role, index) => addArmy(faction.id, role, cell(15 + index * 2, 10 + family * 2), `${FACTION_ART_FAMILIES[family]} ${role.slice(5)}`));
+    const offset = COHORTS[Math.floor(family / 6)]!.offset, row = family % 6;
+    ROLES.forEach((role, index) => addArmy(faction.id, role, cell(offset + 15 + index * 2, 10 + row * 2), `${FACTION_ART_FAMILIES[family]} ${role.slice(5)}`));
     const town = Object.values(state.settlements).find(town => town.factionId === faction.id)!;
-    town.cell = cell(15 + (family % 3) * 5, family < 3 ? 8 : 22); town.population = [2, 3, 8, 2, 3, 8][family]!;
+    TOWN_ROLES.forEach((role, stage) => {
+      const id = stage === 0 ? town.id : `settlement.${state.nextId++}`;
+      state.settlements[id] = { ...town, id, name: `${FACTION_ART_FAMILIES[family]} ${role.slice(11)}`, cell: cell(offset + 15 + (row % 3) * 5 + stage * 20, row < 3 ? 8 : 22), population: [2, 3, 8][stage]!, queue: [], buildings: [] };
+    });
   });
-  for (const [column, row] of [[16, 14], [24, 14], [16, 18], [24, 18]]) addArmy(state.turnOwnerId, 'unit.scout', cell(column!, row!), 'Gallery observer');
-  addArmy(state.turnOwnerId, 'unit.scout', cell(20, 19), 'Southern town observer');
-  addArmy(state.turnOwnerId, 'unit.scout', cell(22, 15), 'Culture survey');
+  for (const cohort of COHORTS) {
+    for (const [column, row] of [[16, 14], [24, 14], [16, 18], [24, 18], [20, 19]]) addArmy(state.turnOwnerId, 'unit.scout', cell(cohort.offset + column!, row!), 'Gallery observer');
+    addArmy(state.turnOwnerId, 'unit.scout', cell(cohort.offset + 22, 15), `${cohort.label} unit survey`);
+    for (let stage = 0; stage < TOWN_ROLES.length; stage++) {
+      const offset = cohort.offset + stage * 20;
+      for (const [column, row] of [[18, 8], [23, 8], [18, 22], [23, 22]]) addArmy(state.turnOwnerId, 'unit.scout', cell(offset + column!, row!), 'Town observer');
+      if (stage > 0) addArmy(state.turnOwnerId, 'unit.scout', cell(offset + 22, 15), `${cohort.label} stage-${stage + 1} survey`);
+    }
+  }
   addArmy(state.turnOwnerId, 'unit.guard', cell(19, 10), 'Co-located hearth reserve');
   // The same authored family also has a genuine unseen army, never sent to the renderer.
   addArmy(state.factions[3]!.id, 'unit.guard', 0, HIDDEN_ARMY_NAME);
@@ -40,7 +56,7 @@ function factionGallery(): GameState {
     const seen = new Set([origin]); let frontier = [origin];
     for (let distance = 0; distance < radius; distance++) {
       const next: number[] = [];
-      for (const origin of frontier) for (const adjacent of neighbors(origin, 48, 32)) if (!seen.has(adjacent)) { seen.add(adjacent); next.push(adjacent); }
+      for (const origin of frontier) for (const adjacent of neighbors(origin, state.world.width, state.world.height)) if (!seen.has(adjacent)) { seen.add(adjacent); next.push(adjacent); }
       frontier = next;
     }
     for (const origin of seen) state.explored[factionId]!.add(origin);
@@ -48,62 +64,138 @@ function factionGallery(): GameState {
   for (const army of Object.values(state.armies)) reveal(army.factionId, army.cell, 4);
   for (const town of Object.values(state.settlements)) reveal(town.factionId, town.cell, 3);
   rebaseAuthoredLand(state);
-  return deserializeGame(serializeGame(state));
+  const restored = deserializeGame(serializeGame(state)), view = getObservation(restored, restored.turnOwnerId, { landDetails: 'none' });
+  if (view.factions.length !== FACTION_ART_FAMILIES.length || view.settlements.length !== FACTION_ART_FAMILIES.length * TOWN_ROLES.length || view.armies.some(army => army.name === HIDDEN_ARMY_NAME)) throw new Error('Gallery must expose every culture/town but not its genuinely unseen army');
+  for (const faction of state.factions) for (const role of ROLES) if (!view.armies.some(army => army.factionId === faction.id && army.unitId === role)) throw new Error(`Gallery sight misses ${faction.definitionId}/${role}`);
+  return restored;
+}
+
+// Construct once even during --list: validates the authored save and actual fog before a browser run.
+const GALLERY_SAVE = serializeGame(factionGallery());
+
+async function selectGalleryArmy(page: Page, name: string): Promise<void> {
+  await page.getByRole('tab', { name: /Armies/ }).click();
+  // Search through the real paginated registry; later cohort surveyors are
+  // intentionally not required to fit on its first25-row page.
+  await page.getByRole('searchbox', { name: 'Search your realm', exact: true }).fill(name);
+  await page.getByTestId('army-registry').getByRole('button', { name: new RegExp(`^${name} `) }).click();
 }
 
 async function loadGallery(page: Page): Promise<void> {
   await page.setViewportSize({ width: 1680, height: 1320 });
   await page.goto('/');
-  await page.locator('input[type=file]').setInputFiles({ name: 'six-observed-cultures.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(factionGallery()))) });
+  await page.locator('input[type=file]').setInputFiles({ name: `${FACTION_ART_FAMILIES.length}-observed-cultures.theandril`, mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(GALLERY_SAVE)) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
-  await page.getByTestId('army-registry').getByRole('button', { name: /Culture survey/ }).click();
+  await selectGalleryArmy(page, `${COHORTS[0]!.label} unit survey`);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.state)).toBe('ready');
 }
 
-test('all six observed cultures select distinct untinted role art and bounded strategic heraldry without changing canonical input or fog', async ({ page }, testInfo) => {
+test(`all ${FACTION_ART_FAMILIES.length} observed cultures select distinct untinted role art and bounded strategic heraldry without changing canonical input or fog`, async ({ page }, testInfo) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await loadGallery(page);
   await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
-  const expectedUnits = FACTION_ART_FAMILIES.flatMap(family => ROLES.map(role => `${role}.${family}`));
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAssetIds)).toEqual(expect.arrayContaining(expectedUnits));
   const hash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
   const summary = await page.evaluate(() => window.__THEANDRIL__?.getSummary());
   expect(summary?.factions.map(faction => faction.definitionId)).toEqual(FACTION_ART_FAMILIES.map(family => `faction.${family}`));
   expect(summary?.armies.some(army => army.name === HIDDEN_ARMY_NAME)).toBe(false);
-  const near = await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics());
-  expect(near?.lod).toBe('near-sprites'); expect(near?.warnings).toEqual([]);
-  expect(near?.visibleAnimationFrames).toEqual([]); // These approved faction poses are static, not a fabricated idle cycle.
-  for (const entity of near?.visibleEntityArt ?? []) {
-    expect(entity.assetId).toBe(factionArtId(entity.role, entity.definitionId!));
-    expect(entity.tint).toBe(0xffffff);
-    expect(entity.nativeWidth).toBe(entity.role === 'settlement.city' ? 128 : entity.role.startsWith('settlement.') || entity.role === 'unit.cavalry' ? 96 : 64);
-    expect(entity.nativeHeight).toBe(entity.nativeWidth);
+  const inspections: unknown[] = [], allNearAssets = new Set<string>(), allFarAssets = new Set<string>();
+  const inspectNear = async (label: string, expected: string[]) => {
+    // Real player camera input, not hidden CSS: clear the tall selected-army
+    // overlay, then move the first town right of the retained map title/hint.
+    // At this viewport/zoom +275px clears the map title (and any active hint)
+    // and keeps even the rightmost 128px city inside with a measured margin.
+    const zoomBefore = await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters()?.zoom);
+    await page.keyboard.press('Escape');
+    await expect(page.getByTestId('map-route-preview')).toHaveCount(0);
+    const canvas = await page.getByTestId('map-container').locator('canvas').boundingBox();
+    if (!canvas) throw new Error('Gallery camera requires the real map canvas');
+    const start = { x: canvas.x + canvas.width * .42, y: canvas.y + Math.min(canvas.height * .55, 600) };
+    await page.mouse.move(start.x, start.y);
+    await page.mouse.down();
+    await page.mouse.move(start.x + 275, start.y, { steps: 10 });
+    await page.mouse.up();
+    await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAssetIds)).toEqual(expect.arrayContaining(expected));
+    const framing = await page.evaluate(expectedIds => {
+      const diagnostics = window.__THEANDRIL__?.getArtDiagnostics(), view = window.__THEANDRIL__?.getSummary();
+      const canvas = document.querySelector('[data-testid="map-container"] canvas')?.getBoundingClientRect();
+      const title = document.querySelector('.map-title')?.getBoundingClientRect();
+      const hint = document.querySelector('.map-order-hint')?.getBoundingClientRect();
+      const towns = (diagnostics?.visibleEntityArt ?? []).filter(art => art.role.startsWith('settlement.') && art.assetId && expectedIds.includes(art.assetId)).map(art => {
+        const town = view?.settlements.find(town => town.id === art.entityId);
+        const point = town && window.__THEANDRIL__?.getCellScreenPoint(town.cell);
+        const adjacent = town && window.__THEANDRIL__?.getCellScreenPoint(town.cell + 1);
+        if (!point || !adjacent || !art.nativeWidth) throw new Error('Missing observed town projection');
+        // The approved centered native canvas uses the renderer's 56px tile
+        // width fit; infer live zoom/spacing from adjacent projected hexes.
+        const half = art.nativeWidth * (adjacent.x - point.x) / 56 / 2;
+        return { assetId: art.assetId, left: point.x - half, right: point.x + half };
+      });
+      return { panPixels: 275, zoom: window.__THEANDRIL__?.getPerformanceCounters()?.zoom, titleRight: title?.right, hintRight: hint?.right, canvasRight: canvas?.right, towns };
+    }, expected);
+    expect(framing.zoom).toBe(zoomBefore);
+    expect(framing.towns).toHaveLength(expected.filter(id => id.startsWith('settlement.')).length);
+    expect(framing.titleRight).toBeDefined();
+    // The title remains mandatory. The removed neutral hint has no rectangle
+    // to clear; a real active hint, when present, still constrains every town.
+    expect(Math.min(...framing.towns.map(town => town.left))).toBeGreaterThan(Math.max(framing.titleRight ?? Infinity, framing.hintRight ?? -Infinity) + 2);
+    expect(Math.max(...framing.towns.map(town => town.right))).toBeLessThan((framing.canvasRight ?? -Infinity) - 4);
+    expect(await page.evaluate(() => window.__THEANDRIL__?.getSelection()?.armyId)).toBeUndefined();
+    const near = await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics());
+    expect(near?.lod).toBe('near-sprites'); expect(near?.warnings).toEqual([]);
+    expect(near?.visibleAnimationFrames).toEqual([]); // Approved faction poses are static, not a fabricated idle cycle.
+    for (const entity of near?.visibleEntityArt ?? []) {
+      expect(entity.assetId).toBe(factionArtId(entity.role, entity.definitionId!));
+      expect(entity.tint).toBe(0xffffff);
+      expect(entity.nativeWidth).toBe(entity.role === 'settlement.city' ? 128 : entity.role.startsWith('settlement.') || entity.role === 'unit.cavalry' ? 96 : 64);
+      expect(entity.nativeHeight).toBe(entity.nativeWidth);
+    }
+    for (const id of near?.visibleAssetIds ?? []) allNearAssets.add(id);
+    inspections.push({ label, near, framing });
+    await page.screenshot({ path: testInfo.outputPath(`${label}-near.png`), fullPage: true });
+  };
+  for (const [index, cohort] of COHORTS.entries()) {
+    if (index > 0) for (let zoom = 0; zoom < 4; zoom++) await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
+    await selectGalleryArmy(page, `${cohort.label} unit survey`);
+    await inspectNear(`${cohort.label}-units-and-villages`, cohort.families.flatMap(family => [...ROLES, TOWN_ROLES[0]!].map(role => `${role}.${family}`)));
+    if (index === 0) {
+      // A sprite's larger visual canvas does not replace the canonical hex hit target.
+      await page.keyboard.press('Escape');
+      const target = cell(19, 12);
+      const point = await page.evaluate(cell => window.__THEANDRIL__?.getCellScreenPoint(cell), target);
+      if (!point?.inViewport) throw new Error('Visible Reedbound guard is not on the real map canvas');
+      await page.mouse.click(point.x, point.y);
+      await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSelection()?.cell)).toBe(target);
+    }
+    // Keep every development stage at the same native camera scale, not squeezed into one giant screenshot.
+    for (let stage = 1; stage < TOWN_ROLES.length; stage++) {
+      await selectGalleryArmy(page, `${cohort.label} stage-${stage + 1} survey`);
+      await inspectNear(`${cohort.label}-stage-${stage + 1}`, cohort.families.map(family => `${TOWN_ROLES[stage]}.${family}`));
+    }
+    await selectGalleryArmy(page, `${cohort.label} unit survey`);
+    for (let zoom = 0; zoom < 4; zoom++) await page.getByRole('button', { name: 'Zoom out', exact: true }).click();
+    await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.lod)).toBe('strategic-glyphs');
+    const expectedFar = cohort.families.flatMap(family => [`ui.badge.${family}`, `ui.banner.${family}`]);
+    await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAssetIds)).toEqual(expect.arrayContaining(expectedFar));
+    const far = await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics());
+    expect(far?.visibleAnimationFrames).toEqual([]);
+    expect(far?.visibleEntityArt.every(entity => entity.presentation === 'strategic' && entity.tint === 0xffffff)).toBe(true);
+    expect(far?.visibleEntityArt.every(entity => entity.nativeWidth === (entity.role.startsWith('settlement.') ? 64 : 32))).toBe(true);
+    const metrics = await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters());
+    expect(metrics?.visibleSprites).toBeLessThanOrEqual(metrics?.visibleEntities ?? 0);
+    if (index === 0) expect(metrics?.visibleSprites).toBeLessThan(metrics?.visibleEntities ?? 0); // Actual co-located reserve grouping.
+    for (const id of far?.visibleAssetIds ?? []) allFarAssets.add(id);
+    inspections.push({ label: cohort.label, far, metrics });
+    await page.screenshot({ path: testInfo.outputPath(`${cohort.label}-far.png`), fullPage: true });
   }
-  await page.screenshot({ path: testInfo.outputPath('six-cultures-near.png'), fullPage: true });
-  // A sprite's larger visual canvas does not replace the canonical hex hit target.
-  await page.keyboard.press('Escape');
-  const target = cell(19, 12);
-  const point = await page.evaluate(cell => window.__THEANDRIL__?.getCellScreenPoint(cell), target);
-  if (!point?.inViewport) throw new Error('Visible Reedbound guard is not on the real map canvas');
-  await page.mouse.click(point.x, point.y);
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSelection()?.cell)).toBe(target);
-  for (let zoom = 0; zoom < 4; zoom++) await page.getByRole('button', { name: 'Zoom out', exact: true }).click();
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.lod)).toBe('strategic-glyphs');
-  const far = await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics());
-  expect(far?.visibleAssetIds).toEqual(expect.arrayContaining(FACTION_ART_FAMILIES.flatMap(family => [`ui.badge.${family}`, `ui.banner.${family}`])));
-  expect(far?.visibleAnimationFrames).toEqual([]);
-  expect(far?.visibleEntityArt.every(entity => entity.presentation === 'strategic')).toBe(true);
-  expect(far?.visibleEntityArt.every(entity => entity.nativeWidth === (entity.role.startsWith('settlement.') ? 64 : 32))).toBe(true);
-  const farMetrics = await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters());
-  expect(farMetrics?.visibleSprites).toBeLessThan(farMetrics?.visibleEntities ?? 0);
-  await page.screenshot({ path: testInfo.outputPath('six-cultures-far.png'), fullPage: true });
+  expect([...allNearAssets]).toEqual(expect.arrayContaining(FACTION_ART_FAMILIES.flatMap(family => [...ROLES, ...TOWN_ROLES].map(role => `${role}.${family}`))));
+  expect([...allFarAssets]).toEqual(expect.arrayContaining(FACTION_ART_FAMILIES.flatMap(family => [`ui.badge.${family}`, `ui.banner.${family}`])));
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole('button', { name: 'Focus selection', exact: true }).click();
   await page.getByTestId('map-container').scrollIntoViewIfNeeded();
-  await page.screenshot({ path: testInfo.outputPath('six-cultures-narrow.png') });
+  await page.screenshot({ path: testInfo.outputPath(`${FACTION_ART_FAMILIES.length}-cultures-narrow.png`) });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(hash);
-  await testInfo.attach('faction-art-inspection.json', { body: JSON.stringify({ near, far, metrics: await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters()), notes: ['Authored placement imported through validated save boundary; no runtime mutation hooks.', 'Only actually visible enemies supplied art metadata.', 'Static one-pose faction art; native 32px badges and 64px banners use exact nearest 2:1 reduction at strategic zoom.', 'Selection, zoom and narrow resizing did not alter canonical state.'] }, null, 2), contentType: 'application/json' });
+  await testInfo.attach('faction-art-inspection.json', { body: JSON.stringify({ inspections, coveredNearAssetIds: [...allNearAssets].sort(), coveredStrategicAssetIds: [...allFarAssets].sort(), notes: ['Authored Small-map placement imported through validated save boundary; no runtime mutation hooks.', 'Two separate six-culture unit cohorts plus same-scale village/town/city cameras; all twelve families covered across screenshots, never by shrinking native art.', 'Only actually visible enemies supplied art metadata; an off-gallery army remains genuinely unseen.', 'Static one-pose faction art; native 32px badges and 64px banners use exact nearest 2:1 reduction at strategic zoom.', 'Selection, zoom and narrow resizing did not alter canonical state.'] }, null, 2), contentType: 'application/json' });
   expect(errors).toEqual([]);
 });
 

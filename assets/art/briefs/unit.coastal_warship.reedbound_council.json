@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.reedbound_council",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.reedbound_council"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Reedbound Council river-working culture: shallow curved weathered timber and woven reed screens, moss-green patched sails, pale straw canopy ribs, oval wicker shield rails, simple three upright reeds within open oval emblem. Practical riverboat-derived hull traditions. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.reedbound_council/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.coastal_warship.reedbound_council/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "adc39279b9f7d7ad5cf499f1279c80f28e6f6df05da216dc936dffe43b872d02",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.reedbound_council-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.reedbound_council-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T22:56:37.253Z",
+  "referenceHashes": [
+    "2f7ed327243806e418dc62395dd13a7ac31e152b59f7ae5ac615d54bc148ab95",
+    "b075730383795bcc7bb84ef1e3104fe8df2cc9964ba87a4b015df59281f10af2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a39b4584dddf49859ba211499e7a118dfc1dc8c24826be8acfda9f62ff8458e7",
+      "inputHash": "2f7ed327243806e418dc62395dd13a7ac31e152b59f7ae5ac615d54bc148ab95",
+      "outputHash": "2178a36f29943012bf334a90fcfaa67e85dad3e7e55e7aee02d7aea79227cc15"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

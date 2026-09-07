@@ -1,3 +1,4 @@
+import { openRealmAffairs, openProduction } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { serializeGame, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -9,6 +10,7 @@ async function beginSiege(page: Page): Promise<GameState> {
   await page.goto('/');
   await page.locator('input[type=file]').setInputFiles({ name: 'reedwatch.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(fixture))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
   await page.getByRole('button', { name: 'Besiege Reedwatch', exact: true }).click();
   await expect(page.getByTestId(`siege-${CONQUEST_FIXTURE.settlementId}`)).toContainText('Besieging Reedwatch');
@@ -80,6 +82,7 @@ test('confirm razing and resettle the visible ruins with a normally recruited ca
   await page.screenshot({ path: testInfo.outputPath('reedwatch-ruins.png'), fullPage: true });
   await page.getByRole('tab', { name: /Settlements/ }).click();
   await page.getByTestId('settlement-registry').getByRole('button', { name: /Ashen Hearth/ }).click();
+  await openProduction(page, 'land');
   await page.getByRole('button', { name: 'Recruit Hearth caravan', exact: true }).click();
   let turn = 4;
   for (let i = 0; i < 5; i++) {

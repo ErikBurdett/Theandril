@@ -1,0 +1,11 @@
+{
+  "schema": 11, "content": "3c54fb02", "runtime": "v26.7.0", "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "seed": 20260905, "size": "tiny", "pace": "epic", "factions": 4,
+  "victoryTurn": 1244, "orders": 27843, "events": 73630, "battles": 1331, "rejected": 0,
+  "totalMs": 34870.693535, "aiMs": 7519.82084100009, "observationMs": 12419.676941000082,
+  "commandAndArchiveMs": 14395.7887730001, "replayMs": 14935.924790000005,
+  "saveBytes": 25076089, "compressedBytes": 2193968, "technicalBytes": 41283686,
+  "historyBytes": 2138688, "chapters": 1246, "hash": "c62e5459", "heapMiB": 568,
+  "isolatedIntegrationTestMs": 81271, "integrationBudgetMs": 60000,
+  "note": "Actual pre-optimization schema11 campaign. Archive benchmark verifies envelope, gzip and complete replay. Separate unchanged integration test also mirrors from turn500 and replays technical history twice; it timed out. No shortened campaign or raised timeout retained."
+}

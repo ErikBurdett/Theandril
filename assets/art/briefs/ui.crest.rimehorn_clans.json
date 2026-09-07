@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.rimehorn_clans",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.rimehorn_clans"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: one original Theandril dark-fantasy strategic game sprite, ui.crest, static first-facing pose.\nScene/backdrop: genuinely TRANSPARENT RGBA background, alpha zero around the isolated sprite. Do NOT paint a checkerboard, white/black backdrop, landscape, scene, floor tile, drop-shadow oval or framing panel.\nFaction visual grammar: Rimehorn Clans, an original high-cold culture of broad adult giantkin and human shelter clans. Broad, grounded adult proportions; weathered ivory fittings, grey fur, dusky blue cloth and dark stone-grey iron. Antler-bone fittings are small practical clasps, never enormous Viking helmet horns. Heraldry is a very simple pair of crossed shelter beams. Cold stone winter lodges and snow-weight roof supports. No copied fantasy franchise costumes.\nSubject: One original compact faction crest rendered as a simple centered heraldic emblem, no letters. Rimehorn: exactly TWO weathered ivory shelter beams crossed over a dusky-blue dark-stone shield. Sable: exactly THREE broad wind-notch cuts in ochre on a rust/indigo angular shield. Use ONLY the stated family symbol. Big clear strokes, no tiny runic decoration. Complete centered crest.\nStyle: serious weathered medieval pixel art designed for a 64x64 native sprite; intentional broad pixel clusters and restrained material ramps, selective dark local-color outlines, crisp hard edges, soft upper-left material lighting. Adult anatomy, modest head about one-seventh body height, NOT chibi/cartoon. Keep every role readable when reduced to its native size; no painterly texture soup, antialias blur, microtexture or bright confetti.\nComposition: exactly ONE sprite, centered with at least 15% fully transparent margin on EVERY edge. Shallow elevated three-quarter strategic view. Whole silhouette fully inside canvas; nothing cropped. Simple heraldic object only; no surrounding ornament.\nColor family: muted material colors only; steel stays grey, flesh stays natural, cloth carries faction accents. No glow, text, labels, watermark, logo, decorative page, multiple poses, sprite sheet or grid. Return an actual transparent PNG.",
+  "frames": [
+    {
+      "id": "ui.crest.rimehorn_clans/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/ui.crest.rimehorn_clans/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not exposed",
+    "promptHash": "20dbcf9d3f5b16b77648943cd03769e203e0306f8745702e4ff6a74f4981ea3d",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/rimesable/ui.crest.rimehorn_clans-v1.png",
+      "assets/art/source/faction-expansion/rimesable/ui.crest.rimehorn_clans-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:54:16.608Z",
+  "referenceHashes": [
+    "216397d84e98475e33fb7fddab8e6a5efe97d40e1526409adaba8671c0d7bde0",
+    "271f42378b06c78d6c3fa9825009f5bae2eabdbddba220ce91be92b38da9b9b3"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "d721d158092d99edfdeb0f8bd2efad23276d4c290c37f63b25557ad91d29a1a7",
+      "inputHash": "216397d84e98475e33fb7fddab8e6a5efe97d40e1526409adaba8671c0d7bde0",
+      "outputHash": "0351e0411bfc22339e6d2be0de3d862471a51d19369276b36dc94f96b255cf8b"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

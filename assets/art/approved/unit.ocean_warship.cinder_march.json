@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.cinder_march",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.cinder_march"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Cinder March upland watch culture: angular broad dark iron reinforcing plates, squared protective parapets, rust-red heavy canvas sails, soot timber, stepped watch-wall around one ember emblem. Heavy practical forge and defensive masonry-inspired silhouette, never an actual stone ship. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.cinder_march/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.cinder_march/b30f17085d1a87fd76757afdb06b5aef14c462c182f0662ce7f54b149965d0d3/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bbf8e582334f53ab365b45b4f41ea26829443d8d25b2a860ddca71cfcc531ef5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.cinder_march-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.cinder_march-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:02:10.584Z",
+  "referenceHashes": [
+    "c0198271d5c3afe9abe712173613290078cf2a2079ee718ad47d661f23797985",
+    "9b555dec2ff64106523e33383a3669651c7b6c5935ce47017cd906e6f9f431fd"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "bcfd28b5d7cf2a86ad5d84abfa53519d406ce08a478135590b5890fa20663c3a",
+      "inputHash": "c0198271d5c3afe9abe712173613290078cf2a2079ee718ad47d661f23797985",
+      "outputHash": "ec448ef8f3c688eee6092b9bdc2dad5d774d548342ff1aa303035f1d545e2977"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ec448ef8f3c688eee6092b9bdc2dad5d774d548342ff1aa303035f1d545e2977",
+      "outputHash": "8bab26c3313d76aaec43b9a03c95f57ac7322d0b283d5f40aee2be19e9845b9b"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "8bab26c3313d76aaec43b9a03c95f57ac7322d0b283d5f40aee2be19e9845b9b",
+      "outputHash": "36626a5f83fe4d90a283d71393c7d78652d0c52fa4a4b03d653bac69751ee9cc"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "cbc2170453414e3eb9aafd3c91a201d071c9d2bd10b35c7a695b36fd67fb4d0b",
+      "outputHash": "139700bfc5cea842ef0c574c25cee23bbebcf072c5d40d7815eb1d3e00eef2c7"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "f40f6de2d42f1049b560bff8dbfae75932420ff41d07714d43662c528f381db9",
+      "outputHash": "b5eb416a81ee6b4b3ad66c502db5ebe132d2dd6da0999c6f6fe3e00fe7a713e2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "40a8116048c5ac8b5f80b1500ca9e737c3876cc4fcd2512cde30f81a8adbd2ce",
+      "outputHash": "46b7543e3becd59b678927de003ece11083470f5c5651eddbe5af0f0fcdc34f5"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.cinder_march.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:01.785Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Rust-red sails and squared iron fighting decks retained; complete dark hull silhouette and restrained metal edges. Native hull contrast is subdued and must also be inspected over actual water. Raised fighting decks and separate square sails read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate b30f17085d1a87fd76757afdb06b5aef14c462c182f0662ce7f54b149965d0d3; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/cff275ccf21d255a3cd1e2acb9fb9da2c1ea4e2c259da85c525f54f4f2b9ee1f.png"
+    ],
+    "inputHash": "56c8dddf7c147e44e964255fc11d3941c65fe427549c1094c3a21d8dc9824b6b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

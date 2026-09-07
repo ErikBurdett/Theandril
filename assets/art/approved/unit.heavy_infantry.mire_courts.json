@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.mire_courts",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native64. One full-body adult heavy-infantry veteran, broad thick overlapping armor plates and a very broad reinforced shield plus a short mace. Wider and heavier silhouette than guard, closed low helmet with no tall ornament; all equipment and both boots entirely visible.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears. IMPORTANT: the face and gaze point toward the RIGHT edge, NOT the left; front-right (southeast) three-quarter pose. Transparent background with absolutely NO surrounding colored haze or ground shadow.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.heavy_infantry.mire_courts/2cd229a0ef81741ab02cce1165b8dc7a9e676db4e6d7a3d7b65e659843bb0b68/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "4bdc50101e257d571ee2114a467b74090a2f61a6641bfefa178a75c3cf38734f",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/unit.heavy_infantry.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/unit.heavy_infantry.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:45:29.000Z",
+  "referenceHashes": [
+    "78554410dd92171da33cf5fa2158ae2f905d7fd9194781f576d0dcff84d6343d",
+    "f5ec09b71b02df59fd71ae6fa4a2e93b266b18ff5f6d91fa4213697d353d2873"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "5736deb88add55b29df41da7d952eab24ebba57120b4bbd62022380e277b72f4",
+      "inputHash": "78554410dd92171da33cf5fa2158ae2f905d7fd9194781f576d0dcff84d6343d",
+      "outputHash": "2e71ac29a103b6f975f58d78e3a7675e43548d71354c4f41be6a70e16b6b3d68"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2e71ac29a103b6f975f58d78e3a7675e43548d71354c4f41be6a70e16b6b3d68",
+      "outputHash": "3f79eeaa9ea3b59ef95735a0c50000c810eae619a38dd8e21976d363099bb095"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3f79eeaa9ea3b59ef95735a0c50000c810eae619a38dd8e21976d363099bb095",
+      "outputHash": "e11fcee50056efdfbd48787d41e21f2682c394ae72462a1b9ab3b476050c67cf"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "4694d5169aa5059e2048d087084fb5f9c57fe7aa5379976bef8ec825a87fe9aa",
+      "outputHash": "0701b2b168a9ffeb29f8bfad5474d57902ccea3b3574c1dcdda01ecf99cb08de"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "6a25c9f6217a9f8eeed6c758ce1d473b4907ded283fa51338284426da817cb7b",
+      "outputHash": "ca835ecfa315ef63c7e691a7c7600100ba1fe13ee8748bb88b6f8be44555c8b3"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "bce8a5046ff28da587812b73e2b55fca91faeeb47279973085b584a1713add8d",
+      "outputHash": "ec92f74b00775182dc5a4abeeeacd0e8217fe6d97728276ca57df086297d120a"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.heavy_infantry.mire_courts.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:31.645Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Broader layered plate shoulders and heavy shield separate this from the guard. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 2cd229a0ef81741ab02cce1165b8dc7a9e676db4e6d7a3d7b65e659843bb0b68; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d8be3b2df82887727e53bd6ae03f45aba440c8dbff04c61f9677a7d2c17461c8.png"
+    ],
+    "inputHash": "565f3053abad4baf44dad0202d2f71e46c1a5f92b706d31220109320e19791d6"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.morrow_spore",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Morrow Spore underwood symbiont households: dark umber grown-timber ribs, broad shelf-shaped layered deck shelter, dusty mauve sail cloth, pale lichen seam bands and overlapping carapace rail panels. Original hollow crescent cradling three seeds insignia. Practical ship built by adults, no whimsical mushroom cap, no spore cloud, no magical propulsion. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.morrow_spore/b559596e6e944086d0da5364384df871368db945f310cea520064627523be884/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5fb283f4a202ad92fce80d73f018743c5c1152c84cff36415887faa3d84e5bbf",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.morrow_spore-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.morrow_spore-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:34:21.120Z",
+  "referenceHashes": [
+    "033be5bd6543c12fec7f33af76eb0bcea61b0d828c9a733e45cc20f233114d2d",
+    "a92566a341ebd9c6125882d8b116cc024a9e8e9a82183a0949cd83bcd4e2e055"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a991b3ee62b559ad18e5eddbf800d2c7409042699ea7eddef31eb80ee0166879",
+      "inputHash": "033be5bd6543c12fec7f33af76eb0bcea61b0d828c9a733e45cc20f233114d2d",
+      "outputHash": "0e65dd9d5fa3c4771018bf80e07655d4da1280e1bb1cd8cfa645c4cea58209c1"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "0e65dd9d5fa3c4771018bf80e07655d4da1280e1bb1cd8cfa645c4cea58209c1",
+      "outputHash": "7ec48fe79980c364f7854171e6897b5503e165fcd2a7bf0c3c30d6dac49e5274"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7ec48fe79980c364f7854171e6897b5503e165fcd2a7bf0c3c30d6dac49e5274",
+      "outputHash": "2740c07c42a68189945f02febfae903a7297c0f16e4928a0f364dd478bb90535"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "7c09dcb9ff0275e10783a594befb450ffec0a7bb65abc03bf4383ab2bf7d900b",
+      "outputHash": "68f5cde7eb552f0386ea854957c2311e16aceb29539a7338d2941b96631fc523"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "127475433bd78c4c46d43a5d6514a728b866652bd56101007fd25629c4a676b3",
+      "outputHash": "a759340714a8371c89a4ed01300d270799d3245fd044f8dd9942acf0b64388c4"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "992b586fce57604f905ce329ad9fd2770fa3386f5f1582d3984c0415ffe73242",
+      "outputHash": "6b50c79cfe927115ff9378ade9e5849ed4feb687ae3920434b22a15124d94dd7"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.morrow_spore.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:50:20.592Z",
+    "notes": "Root inspected generated source, native1x cohort and nearest4x family pixels. Faded brown cloth, pale shelf-like hull fittings and curved fungal sail marks; bone highlights describe the rounded dark hull without a neon effect. Low oared hull and triangular sail read at96px. Palette and binary-alpha validation passed; native tips intact and no opaque background matte. Static southeast art only; fine rigging is texture. Runtime water, fog and ownership review is a separate gate.\nReviewed candidate b559596e6e944086d0da5364384df871368db945f310cea520064627523be884; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/ce04d69226b423c43b53b47c24a33dc8d5839206f9aecae745ad1f76e0a84699.png"
+    ],
+    "inputHash": "925f873419032317699ad5366230d50638a0a5c5cd1439529e38a3008d59eb3d"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.sable_steppe",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.sable_steppe"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Sable Steppe mobile camp assemblies: lean dark-timber hull with tension-roof deck awnings, rust felt and dull-ochre patched sail planes, indigo rope bindings, dark lamellar rail screens, original three wind notches emblem. Dry camp-derived craft traditions made into functional ships, no horse figurehead, no steppe ground. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.sable_steppe/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.sable_steppe/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "54615556ec93f846a77b213ff48183ec2ba28a85486837abda8b4fab3bdface5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.sable_steppe-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.sable_steppe-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:35:44.191Z",
+  "referenceHashes": [
+    "d801489cdaf9e1f8acdb3062804af9294bc3ddd68c8144bb49caa921b4820777",
+    "49b45c9ebc5f8f69a26e0726cf22f9d0e67c6dc7c655a8812ad1545a1b5a0f5f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "f384797e1d9a533108d3e602e4805024567f14a6ede1adfc47e6357c4f12d295",
+      "inputHash": "d801489cdaf9e1f8acdb3062804af9294bc3ddd68c8144bb49caa921b4820777",
+      "outputHash": "c588636d93fefb15338005f1c5dd1ea062139de10c6b7798a4364d28e81630e3"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

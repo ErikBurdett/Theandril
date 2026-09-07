@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.rimehorn_clans",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.rimehorn_clans"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Rimehorn Clans winter shelter households: massive weathered grey-timber hull with protective dark iron prow bracing, dusky blue sails, grey fur-lined closed shelter, ivory lashings and small crossed shelter beams insignia. Strong broad winter-lodge silhouette; restrained bone fittings, no giant horned figurehead, no snow/water backdrop. Role: Charter transport: a broad deep-water wooden cargo cog with a rounded capacious hull, single patched square sail, low canvas-covered passenger shelter and neatly strapped crates. Lightly armed; no artillery, no warship ram. Chunky broad cargo silhouette. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.transport.rimehorn_clans/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.transport.rimehorn_clans/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b89bb43da407cf2b3764936f6bc7a13dcced935706a845c836c77c0bf4f54e25",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.rimehorn_clans-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.rimehorn_clans-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:33:42.056Z",
+  "referenceHashes": [
+    "81faf2a29602fdd8f17f370b5bb221914df6949cfd2f2a853e4ae798780edbef",
+    "92386675bba5ef57026d9321aa5f89c2e5325c4f12bd07a00d0697f3832fa4c4"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "55ddc55e022cdfc57ef40616fc6fc46880fb24e65ec6e7605d036ac9f19889a7",
+      "inputHash": "81faf2a29602fdd8f17f370b5bb221914df6949cfd2f2a853e4ae798780edbef",
+      "outputHash": "3eb040016abada8d39c84ba89192a09d107a1b4acdf1acdde99b4129bd8ab63f"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

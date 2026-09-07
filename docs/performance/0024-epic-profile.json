@@ -1,0 +1,678 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-06",
+  "contended": true,
+  "purpose": "Diagnostic CPU profile before the single-pass save-envelope optimization, not an isolated performance baseline.",
+  "contention": "The root agent's Chromium gameplay suite overlapped this profile. Sampling adds profiler overhead; no final latency or improvement claim is made.",
+  "command": "node --cpu-prof --cpu-prof-dir=/tmp/theandril-epic-profile.PogP0d --cpu-prof-name=epic-contended.cpuprofile --import tsx scripts/benchmark-chronicle.ts --size=tiny --pace=epic --factions=4 --limit=1400",
+  "workdir": "/home/telephoneheater/Work/Theandril",
+  "exitCode": 0,
+  "profilePath": "/tmp/theandril-epic-profile.PogP0d/epic-contended.cpuprofile",
+  "analysisPaths": [
+    "/tmp/theandril-epic-profile.PogP0d/summarize.mjs",
+    "/tmp/theandril-epic-profile.PogP0d/branches.mjs"
+  ],
+  "stdoutRetention": "Benchmark JSON values transcribed from the completed command's tool output. Raw stdout whitespace was not separately redirected; this is not a byte-for-byte stdout artifact.",
+  "stdoutValues": {
+    "runtime": "v26.7.0",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+    "measurements": [
+      {
+        "seed": 20260905,
+        "size": "tiny",
+        "pace": "epic",
+        "factions": 4,
+        "victory": {
+          "path": "prosperity",
+          "factionId": "faction.cinder_march",
+          "projectId": "project.3285",
+          "settlementId": "settlement.1078",
+          "turn": 1244
+        },
+        "turns": 1243,
+        "orders": 27843,
+        "events": 73630,
+        "battleReportsArchived": 1331,
+        "rejected": 0,
+        "totalMs": 33030.012669,
+        "aiMs": 8665.933555999934,
+        "observationMs": 9915.554419999879,
+        "commandAndArchiveMs": 13955.320837999905,
+        "winnerSettlements": 20,
+        "livingCharacters": 23,
+        "retainedMemorials": 2,
+        "characterActivity": {
+          "character_recruited": 25,
+          "character_assigned": 32,
+          "character_mission_started": 740,
+          "character_mission_progress": 739,
+          "character_mission_completed": 724,
+          "character_promoted": 75,
+          "character_battle_experience": 2039,
+          "character_recovered": 337,
+          "commander_rallied": 243,
+          "character_mission_cancelled": 11,
+          "character_mission_interrupted": 5,
+          "character_died": 2
+        },
+        "conquestNotifications": 536,
+        "averageRoundWithArchiveMs": 26.572817915526954,
+        "saveMs": 125.107894,
+        "loadMs": 328.019745,
+        "exportMs": 670.457567,
+        "importMs": 536.606663,
+        "compressedBytes": 2193968,
+        "logMs": 688.150258,
+        "replayMs": 14406.057074,
+        "saveBytes": 25076089,
+        "technicalBytes": 41283686,
+        "historyBytes": 2138688,
+        "chapters": 1246,
+        "hash": "c62e5459",
+        "heapMiB": 562
+      }
+    ]
+  },
+  "sampleMethod": "Each V8 sample is weighted by its corresponding timeDeltas value. Self time is assigned to its leaf; inclusive time counts a frame at most once per sample. Inclusive rows overlap and must not be added. TSX transforms collapse source lines; anonymous callsites were checked against cached source columns.",
+  "samples": {
+    "totalSampledMs": 50440.5,
+    "samples": 47379,
+    "self": [
+      {
+        "frame": "serializeGameForVersion | packages/sim/src/save.ts:1",
+        "ms": 6344.6,
+        "percent": 12.58
+      },
+      {
+        "frame": "checksum | packages/content/src/index.ts:1",
+        "ms": 4533.6,
+        "percent": 8.99
+      },
+      {
+        "frame": "inst._zod.run | node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js:97",
+        "ms": 3087.3,
+        "percent": 6.12
+      },
+      {
+        "frame": "(garbage collector) | :0",
+        "ms": 3038.4,
+        "percent": 6.02
+      },
+      {
+        "frame": "(anonymous) | packages/sim/src/territory.ts:1",
+        "ms": 2997.4,
+        "percent": 5.94
+      },
+      {
+        "frame": "(anonymous) | packages/ai/src/navigation.ts:1",
+        "ms": 2126,
+        "percent": 4.21
+      },
+      {
+        "frame": "(anonymous) | packages/sim/src/save.ts:1",
+        "ms": 1418.1,
+        "percent": 2.81
+      },
+      {
+        "frame": "runChecks | node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js:34",
+        "ms": 1250.4,
+        "percent": 2.48
+      },
+      {
+        "frame": "getObservation | packages/sim/src/simulation.ts:1",
+        "ms": 1165.4,
+        "percent": 2.31
+      },
+      {
+        "frame": "inst._zod.parse | node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js:1594",
+        "ms": 1041,
+        "percent": 2.06
+      },
+      {
+        "frame": "destination | packages/ai/src/navigation.ts:1",
+        "ms": 954.5,
+        "percent": 1.89
+      },
+      {
+        "frame": "writeNeighbors | packages/mapgen/src/index.ts:1",
+        "ms": 935.1,
+        "percent": 1.85
+      },
+      {
+        "frame": "(anonymous) | packages/sim/src/simulation.ts:1",
+        "ms": 707.2,
+        "percent": 1.4
+      },
+      {
+        "frame": "addYield | packages/sim/src/territory.ts:1",
+        "ms": 645.2,
+        "percent": 1.28
+      },
+      {
+        "frame": "planTurnWithReasons | packages/ai/src/index.ts:1",
+        "ms": 629.1,
+        "percent": 1.25
+      },
+      {
+        "frame": "improvementOption | packages/sim/src/territory.ts:1",
+        "ms": 602.1,
+        "percent": 1.19
+      },
+      {
+        "frame": "planNaval | packages/ai/src/naval.ts:1",
+        "ms": 562,
+        "percent": 1.11
+      },
+      {
+        "frame": "inst._zod.check | node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/checks.js:440",
+        "ms": 520.6,
+        "percent": 1.03
+      },
+      {
+        "frame": "(anonymous) | packages/chronicle/src/index.ts:1",
+        "ms": 519.3,
+        "percent": 1.03
+      },
+      {
+        "frame": "(anonymous) | packages/ai/src/naval.ts:1",
+        "ms": 513.1,
+        "percent": 1.02
+      },
+      {
+        "frame": "(anonymous) | packages/sim/src/characters.ts:1",
+        "ms": 469.6,
+        "percent": 0.93
+      },
+      {
+        "frame": "advanceBorderGrowth | packages/sim/src/territory.ts:1",
+        "ms": 443.9,
+        "percent": 0.88
+      },
+      {
+        "frame": "createNavigation | packages/ai/src/navigation.ts:1",
+        "ms": 427.1,
+        "percent": 0.85
+      },
+      {
+        "frame": "(anonymous) | :3",
+        "ms": 411.1,
+        "percent": 0.81
+      },
+      {
+        "frame": "settlementLandObservation | packages/sim/src/territory.ts:1",
+        "ms": 396.4,
+        "percent": 0.79
+      },
+      {
+        "frame": "getArmyView | packages/sim/src/army-composition.ts:1",
+        "ms": 394.7,
+        "percent": 0.78
+      },
+      {
+        "frame": "localHostiles | packages/sim/src/movement.ts:1",
+        "ms": 394.1,
+        "percent": 0.78
+      },
+      {
+        "frame": "cellYields | packages/sim/src/territory.ts:1",
+        "ms": 385.4,
+        "percent": 0.76
+      },
+      {
+        "frame": "canonicalPayload | packages/sim/src/save.ts:1",
+        "ms": 382.8,
+        "percent": 0.76
+      },
+      {
+        "frame": "cellsWithin | packages/sim/src/visibility.ts:1",
+        "ms": 376.1,
+        "percent": 0.75
+      },
+      {
+        "frame": "(anonymous) | packages/sim/src/movement.ts:1",
+        "ms": 361.1,
+        "percent": 0.72
+      },
+      {
+        "frame": "changeSight | packages/sim/src/visibility.ts:1",
+        "ms": 357.5,
+        "percent": 0.71
+      },
+      {
+        "frame": "hexDistance | packages/mapgen/src/index.ts:1",
+        "ms": 344.5,
+        "percent": 0.68
+      },
+      {
+        "frame": "observedKnowledge | packages/sim/src/movement.ts:1",
+        "ms": 327.5,
+        "percent": 0.65
+      },
+      {
+        "frame": "applyCommand | packages/sim/src/simulation.ts:1",
+        "ms": 314.6,
+        "percent": 0.62
+      }
+    ],
+    "repositoryInclusive": [
+      {
+        "frame": "(anonymous) | scripts/benchmark-chronicle.ts:1",
+        "ms": 46589.3,
+        "percent": 92.36
+      },
+      {
+        "frame": "serializeGameForVersion | packages/sim/src/save.ts:1",
+        "ms": 16501.2,
+        "percent": 32.71
+      },
+      {
+        "frame": "replayArchive | packages/chronicle/src/index.ts:1",
+        "ms": 14006.7,
+        "percent": 27.77
+      },
+      {
+        "frame": "applyRecordedCommand | packages/chronicle/src/index.ts:1",
+        "ms": 13072.5,
+        "percent": 25.92
+      },
+      {
+        "frame": "stateHashForVersion | packages/sim/src/save.ts:1",
+        "ms": 10414.5,
+        "percent": 20.65
+      },
+      {
+        "frame": "getObservation | packages/sim/src/simulation.ts:1",
+        "ms": 9375.5,
+        "percent": 18.59
+      },
+      {
+        "frame": "stateHash | packages/sim/src/save.ts:1",
+        "ms": 9329.9,
+        "percent": 18.5
+      },
+      {
+        "frame": "canonicalPayload | packages/sim/src/save.ts:1",
+        "ms": 9003.5,
+        "percent": 17.85
+      },
+      {
+        "frame": "serializeGame | packages/sim/src/save.ts:1",
+        "ms": 8172,
+        "percent": 16.2
+      },
+      {
+        "frame": "planTurn | packages/ai/src/index.ts:1",
+        "ms": 7997,
+        "percent": 15.85
+      },
+      {
+        "frame": "planTurnWithReasons | packages/ai/src/index.ts:1",
+        "ms": 7965.3,
+        "percent": 15.79
+      },
+      {
+        "frame": "applyCommand | packages/sim/src/simulation.ts:1",
+        "ms": 6299.7,
+        "percent": 12.49
+      },
+      {
+        "frame": "(anonymous) | packages/sim/src/territory.ts:1",
+        "ms": 5831.2,
+        "percent": 11.56
+      },
+      {
+        "frame": "getLandObservation | packages/sim/src/territory.ts:1",
+        "ms": 5558.9,
+        "percent": 11.02
+      },
+      {
+        "frame": "settlementLandObservation | packages/sim/src/territory.ts:1",
+        "ms": 5386.3,
+        "percent": 10.68
+      },
+      {
+        "frame": "canonicalLand | packages/sim/src/save.ts:1",
+        "ms": 4960.6,
+        "percent": 9.83
+      },
+      {
+        "frame": "(anonymous) | packages/sim/src/simulation.ts:1",
+        "ms": 4876.2,
+        "percent": 9.67
+      },
+      {
+        "frame": "checksum | packages/content/src/index.ts:1",
+        "ms": 4533.6,
+        "percent": 8.99
+      },
+      {
+        "frame": "destination | packages/ai/src/navigation.ts:1",
+        "ms": 4275.9,
+        "percent": 8.48
+      },
+      {
+        "frame": "(anonymous) | packages/sim/src/save.ts:1",
+        "ms": 3787.2,
+        "percent": 7.51
+      },
+      {
+        "frame": "applyCommandForVersion | packages/sim/src/simulation.ts:1",
+        "ms": 3139.8,
+        "percent": 6.22
+      },
+      {
+        "frame": "withRules | packages/sim/src/rules.ts:1",
+        "ms": 3057.3,
+        "percent": 6.06
+      },
+      {
+        "frame": "planNaval | packages/ai/src/naval.ts:1",
+        "ms": 3001.8,
+        "percent": 5.95
+      },
+      {
+        "frame": "(anonymous) | packages/ai/src/navigation.ts:1",
+        "ms": 2578.4,
+        "percent": 5.11
+      },
+      {
+        "frame": "moveTo | packages/sim/src/movement.ts:1",
+        "ms": 2456.1,
+        "percent": 4.87
+      },
+      {
+        "frame": "resolveTurn | packages/sim/src/simulation.ts:1",
+        "ms": 1846.8,
+        "percent": 3.66
+      },
+      {
+        "frame": "getMovementQuery | packages/sim/src/movement.ts:1",
+        "ms": 1198,
+        "percent": 2.38
+      },
+      {
+        "frame": "takeStep | packages/sim/src/movement.ts:1",
+        "ms": 1187.4,
+        "percent": 2.35
+      },
+      {
+        "frame": "cellYields | packages/sim/src/territory.ts:1",
+        "ms": 1129.7,
+        "percent": 2.24
+      },
+      {
+        "frame": "(anonymous) | packages/ai/src/naval.ts:1",
+        "ms": 1120.1,
+        "percent": 2.22
+      },
+      {
+        "frame": "deserializeCampaign | packages/persistence/src/index.ts:1",
+        "ms": 1106.6,
+        "percent": 2.19
+      },
+      {
+        "frame": "improvementOption | packages/sim/src/territory.ts:1",
+        "ms": 1045,
+        "percent": 2.07
+      },
+      {
+        "frame": "updateSight | packages/sim/src/visibility.ts:1",
+        "ms": 1022.1,
+        "percent": 2.03
+      },
+      {
+        "frame": "getArmyView | packages/sim/src/army-composition.ts:1",
+        "ms": 1008.5,
+        "percent": 2
+      },
+      {
+        "frame": "neighbors | packages/mapgen/src/index.ts:1",
+        "ms": 987.6,
+        "percent": 1.96
+      }
+    ],
+    "deepestTrackedCategory": [
+      {
+        "frame": "planTurn",
+        "ms": 7997,
+        "percent": 15.85
+      },
+      {
+        "frame": "serializeGameForVersion",
+        "ms": 7497.8,
+        "percent": 14.86
+      },
+      {
+        "frame": "applyCommand",
+        "ms": 6299.7,
+        "percent": 12.49
+      },
+      {
+        "frame": "other",
+        "ms": 5732.3,
+        "percent": 11.36
+      },
+      {
+        "frame": "getLandObservation",
+        "ms": 5558.9,
+        "percent": 11.02
+      },
+      {
+        "frame": "canonicalLand",
+        "ms": 4960.6,
+        "percent": 9.83
+      },
+      {
+        "frame": "canonicalPayload",
+        "ms": 4042.8,
+        "percent": 8.02
+      },
+      {
+        "frame": "getObservation",
+        "ms": 3816.6,
+        "percent": 7.57
+      },
+      {
+        "frame": "stateHashForVersion",
+        "ms": 2082.1,
+        "percent": 4.13
+      },
+      {
+        "frame": "stateHash",
+        "ms": 1180.1,
+        "percent": 2.34
+      },
+      {
+        "frame": "stableJson",
+        "ms": 680.5,
+        "percent": 1.35
+      },
+      {
+        "frame": "replayArchive",
+        "ms": 335.4,
+        "percent": 0.67
+      },
+      {
+        "frame": "generateChronicles",
+        "ms": 256.6,
+        "percent": 0.51
+      }
+    ],
+    "trackedStacks": [
+      {
+        "frame": "replayArchive | packages/chronicle/src/index.ts:1 <- (anonymous) | scripts/benchmark-chronicle.ts:1",
+        "ms": 14006.7,
+        "percent": 27.77
+      },
+      {
+        "frame": "stateHashForVersion | packages/sim/src/save.ts:1 <- replayArchive | packages/chronicle/src/index.ts:1",
+        "ms": 10317.9,
+        "percent": 20.46
+      },
+      {
+        "frame": "getObservation | packages/sim/src/simulation.ts:1 <- (anonymous) | scripts/benchmark-chronicle.ts:1",
+        "ms": 9375.5,
+        "percent": 18.59
+      },
+      {
+        "frame": "stateHash | packages/sim/src/save.ts:1 <- applyRecordedCommand | packages/chronicle/src/index.ts:1",
+        "ms": 9257.4,
+        "percent": 18.35
+      },
+      {
+        "frame": "canonicalPayload | packages/sim/src/save.ts:1 <- serializeGameForVersion | packages/sim/src/save.ts:1",
+        "ms": 9003.5,
+        "percent": 17.85
+      },
+      {
+        "frame": "serializeGameForVersion | packages/sim/src/save.ts:1 <- stateHashForVersion | packages/sim/src/save.ts:1",
+        "ms": 8332.4,
+        "percent": 16.52
+      },
+      {
+        "frame": "serializeGameForVersion | packages/sim/src/save.ts:1 <- serializeGame | packages/sim/src/save.ts:1",
+        "ms": 8168.8,
+        "percent": 16.19
+      },
+      {
+        "frame": "planTurn | packages/ai/src/index.ts:1 <- (anonymous) | scripts/benchmark-chronicle.ts:1",
+        "ms": 7997,
+        "percent": 15.85
+      },
+      {
+        "frame": "getLandObservation | packages/sim/src/territory.ts:1 <- getObservation | packages/sim/src/simulation.ts:1",
+        "ms": 5558.9,
+        "percent": 11.02
+      },
+      {
+        "frame": "canonicalLand | packages/sim/src/save.ts:1 <- canonicalPayload | packages/sim/src/save.ts:1",
+        "ms": 4960.6,
+        "percent": 9.83
+      },
+      {
+        "frame": "applyCommand | packages/sim/src/simulation.ts:1 <- applyRecordedCommand | packages/chronicle/src/index.ts:1",
+        "ms": 3268.1,
+        "percent": 6.48
+      },
+      {
+        "frame": "applyCommand | packages/sim/src/simulation.ts:1 <- (anonymous) | packages/sim/src/simulation.ts:1",
+        "ms": 3031.5,
+        "percent": 6.01
+      },
+      {
+        "frame": "generateChronicles | packages/chronicle/src/index.ts:1 <- (anonymous) | scripts/benchmark-chronicle.ts:1",
+        "ms": 641.9,
+        "percent": 1.27
+      },
+      {
+        "frame": "stableJson | packages/chronicle/src/index.ts:1 <- replayArchive | packages/chronicle/src/index.ts:1",
+        "ms": 303.8,
+        "percent": 0.6
+      },
+      {
+        "frame": "stableJson | packages/chronicle/src/index.ts:1 <- (anonymous) | packages/chronicle/src/index.ts:1",
+        "ms": 195,
+        "percent": 0.39
+      },
+      {
+        "frame": "stableJson | packages/chronicle/src/index.ts:1 <- generateChronicles | packages/chronicle/src/index.ts:1",
+        "ms": 181.7,
+        "percent": 0.36
+      },
+      {
+        "frame": "stateHashForVersion | packages/sim/src/save.ts:1 <- parseArchive | packages/chronicle/src/index.ts:1",
+        "ms": 88.1,
+        "percent": 0.17
+      },
+      {
+        "frame": "stateHash | packages/sim/src/save.ts:1 <- (anonymous) | scripts/benchmark-chronicle.ts:1",
+        "ms": 71.8,
+        "percent": 0.14
+      },
+      {
+        "frame": "stateHashForVersion | packages/sim/src/save.ts:1 <- generateChronicles | packages/chronicle/src/index.ts:1",
+        "ms": 8.5,
+        "percent": 0.02
+      },
+      {
+        "frame": "stateHash | packages/sim/src/save.ts:1 <- createArchive | packages/chronicle/src/index.ts:1",
+        "ms": 0.7,
+        "percent": 0
+      }
+    ]
+  },
+  "inspectedCallsites": [
+    {
+      "parent": "canonicalPayload",
+      "child": "canonicalLand",
+      "sampledMs": 4960.6
+    },
+    {
+      "parent": "canonicalLand",
+      "child": "landStateSchema.parse",
+      "sampledMs": 4659.7
+    },
+    {
+      "parent": "canonicalLand",
+      "child": "plain-record prototype guards",
+      "sampledMs": 144.8
+    },
+    {
+      "parent": "canonicalLand",
+      "child": "lexical record sort",
+      "sampledMs": 75.5
+    },
+    {
+      "parent": "canonicalPayload",
+      "child": "battleReports.map(campaignBattleSchema.parse)",
+      "compiledColumn": 14459,
+      "sampledMs": 1808.1
+    },
+    {
+      "parent": "canonicalPayload",
+      "child": "explored set copying and numeric sorting",
+      "compiledColumn": 14064,
+      "sampledMs": 1112.9
+    },
+    {
+      "parent": "canonicalPayload",
+      "child": "army and formation projection",
+      "compiledColumn": 13388,
+      "sampledMs": 350.3
+    },
+    {
+      "parent": "canonicalPayload",
+      "child": "characterSchema.parse",
+      "compiledColumn": 15373,
+      "sampledMs": 166.5
+    },
+    {
+      "parent": "serializeGameForVersion",
+      "child": "self/native serialization",
+      "sampledMs": 6344.6
+    },
+    {
+      "parent": "replayArchive",
+      "child": "stateHashForVersion",
+      "sampledMs": 10317.9
+    },
+    {
+      "parent": "replayArchive",
+      "child": "applyCommandForVersion",
+      "sampledMs": 3139.8
+    },
+    {
+      "parent": "replayArchive",
+      "child": "stableJson",
+      "sampledMs": 303.8
+    }
+  ],
+  "findings": [
+    "Replay checkpoint hashing accounts for 10317.9 of 14006.7 inclusive sampled replay milliseconds (about 73.7%).",
+    "stableJson totals 680.5 sampled milliseconds across the entire workload, with 303.8 inside replay; final chronicles generation takes 688.150258 measured milliseconds. It is not the dominant bottleneck in this trace.",
+    "The profiled serializer stringifies the same validated canonical payload once for stateChecksum and again as the state property of the outer envelope.",
+    "The bounded candidate reuses only JSON.stringify-produced state bytes to assemble the exact existing envelope after JSON-stringifying its ordered header; all canonical projection and strict parsing remain in place.",
+    "Payload checksum and complete-envelope stateHash are different existing seals. The latter includes the former in its header, so the two checksum scans cannot simply be replaced with the same value.",
+    "No conclusion about meeting the unchanged 60-second Epic integration gate follows from this contended profile; root owns the isolated post-change full integration measurement."
+  ]
+}

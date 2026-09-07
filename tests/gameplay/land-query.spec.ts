@@ -34,6 +34,7 @@ async function ready(page: Page, settlementId: string) {
   await expect(panel).toHaveAttribute('data-query-hash', await page.evaluate(() => window.__THEANDRIL__!.getStateHash()));
 }
 async function selectTown(page: Page, town: { id: string; name: string }) {
+  await page.getByRole('tab', { name: /Settlements/ }).click();
   await page.getByTestId('settlement-registry').getByRole('button', { name: new RegExp(town.name) }).click();
   await ready(page, town.id);
 }

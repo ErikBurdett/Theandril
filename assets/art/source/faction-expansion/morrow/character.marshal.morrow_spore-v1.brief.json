@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.morrow_spore",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Morrow Spore: original underwood commonwealth of adult humans and solemn fungal symbionts. Umber layered fungal carapace, dusty mauve cloth, pale lichen seams and dark leather. Strong broad overlapping shelf-fungus planes rather than cute mushroom caps. Original hollow crescent cradling three seeds seal. Practical mature woodland society, no spores in air, neon, gore or chibi figures. Native64. One full-body adult female field marshal with visible older weathered face, uncovered greying hair, structured short shoulder mantle, one short command baton held outward and folded dispatch case. Clearly a leader not ordinary guard, no shield or horse.  Buildings: broad layered shelf-roofs and grown timber ribs with umber walls, pale lichen door frames and mauve canopy accents, not freestanding mushroom doodles; heraldry bonecrescent around threeseeds on umber. Humanoids adult serious humans with fungal grown armor and scarves.",
+  "frames": [
+    {
+      "id": "character.marshal.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.morrow_spore/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "ba7e1c3cebc0edb00cf03740b8e58658fdb448270d396dfa55d394dc473e86c7",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/morrow/character.marshal.morrow_spore-v1.png",
+      "assets/art/source/faction-expansion/morrow/character.marshal.morrow_spore-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:07:20.834Z",
+  "referenceHashes": [
+    "ee99f537b24aad47f4e39f1ae9b89a6f7dcd5c857bb7b9f21104e2d259d51bcf",
+    "ef1f6e731e16f6dc9be02dc244a8662d18802ca53d121d6655909a29c02a3bb6"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "afbea5e3465aa510ceeff2fc38afc71b6d32ca2e1de60297e8631632dfab901b",
+      "inputHash": "ee99f537b24aad47f4e39f1ae9b89a6f7dcd5c857bb7b9f21104e2d259d51bcf",
+      "outputHash": "26808555731482afb5d7f9163cf144d8701895a6d23c72d6679154fe6440e7ad"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

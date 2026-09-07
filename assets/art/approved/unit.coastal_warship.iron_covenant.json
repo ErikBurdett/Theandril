@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.iron_covenant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Iron Covenant mountain craft culture: squat broad hull, blue-black riveted iron belt plates, dull brass rivets, charcoal leather rigging protectors, broad squared deck shelters and dark navy sails. Original split anvil emblem with divided stem. Ordinary sail-and-oar vessel, no engine, no smokestack. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.iron_covenant/574cd4ade90c5d1ace6fbd550c208bc9cb820009185692cc547beece75135402/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1ff70ddc46a1a56384ac9c67efa7e5ef2af774217f8ed5c93f56f876aa4c3b71",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.iron_covenant-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:08:53.017Z",
+  "referenceHashes": [
+    "41cb3f0f7b2dfd5140b04b02842a4e9fcbacef4a62137d8feedfd43e2a6622c9",
+    "20967cd2ed35361121724ae35465d204c4042c13c79ab8e41e7a40c6be9051c5"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "6a82db7ffa012176182612914e98d8db47f39b0f7bfa7672058d777f04f177a2",
+      "inputHash": "41cb3f0f7b2dfd5140b04b02842a4e9fcbacef4a62137d8feedfd43e2a6622c9",
+      "outputHash": "c1e2bef41912a1316bfc1955330a2101af38f64e3ef66035c73f6bdc3b48af6c"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "c1e2bef41912a1316bfc1955330a2101af38f64e3ef66035c73f6bdc3b48af6c",
+      "outputHash": "0885b321a14005baf68e18dcace80429cd3b79a70707c1e31032ece891bcda3b"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0885b321a14005baf68e18dcace80429cd3b79a70707c1e31032ece891bcda3b",
+      "outputHash": "0025f7523c3f4e224a40dde658c47dd691ee4d94c65eed5b17ae2ba41baae44a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "2c2e7a6d69fca4ab074591c66b5aa0f6c1c97614811d2187e8001a8b45b4dca9",
+      "outputHash": "41373d5ed07e12525fe1838255e1a499db4fa663d8e6f631ed2024617c12eab9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "f8633e2c7df7a23a36b0227bc7eff1a020e6f3b1da606e262f8830754a9990cf",
+      "outputHash": "df320cdb74bc1eb4c8d30d0a193fa4ae78d3a6ac63f12b6e63d4c1f045ca44a8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "3745b80e11e6ff9da8a6b199efc4f68d090ca1f8c53c04948fa2583b02f52881",
+      "outputHash": "10760f9abbce4fae531b8e267015b845365828e60a2c8f2865f039367e2e60ea"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:03.315Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Navy canvas, broad riveted belt plating and brass edges retained. Dark iron masses remain subdued; whole oars and mast tips enclosed, with three distinct hull profiles. Low oared hull and triangular sail read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate 574cd4ade90c5d1ace6fbd550c208bc9cb820009185692cc547beece75135402; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/49ef88f92cc91afdc412db198d29416a27f0e34b7b79df681239de7b785d902a.png"
+    ],
+    "inputHash": "34af8f8286629eab4cf2bb64c5e1b42a4bae5239f027e61348b5f802faf6c8c9"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

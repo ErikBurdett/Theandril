@@ -143,9 +143,9 @@ describe('roster-versioned schema-10 archives', () => {
     if (work.kind === 'improve') expect(game.land.settlements['settlement.13']!.improvements[work.cell]).toBe(work.improvementId);
     else expect(game.land.biomes[work.cell]).toBe(work.biome);
     const suffix = journal.prepareCommit(game, original.to), archive = journal.materialize();
-    expect(SAVE_VERSION).toBe(10); expect(game.rosterVersion).toBe(2);
+    expect(game.rosterVersion).toBe(2);
     expect(suffix.records).toHaveLength(work.remainingTurns);
-    expect(suffix.records.every(record => record.ok && record.rulesVersion === 10 && record.checkpointVersion === 10)).toBe(true);
+    expect(suffix.records.every(record => record.ok && record.rulesVersion === SAVE_VERSION && record.checkpointVersion === SAVE_VERSION)).toBe(true);
     expect(suffix.records.at(-1)!.checkpoint).toBe(stateHash(game));
     expect(suffix.records.flatMap(record => record.events).some(event => event.type === 'land_work_completed')).toBe(true);
     expect(archive.initialSave).toBe(initialSave); expect(archive.initialSaveVersion).toBe(9);
@@ -178,7 +178,7 @@ describe('roster-versioned schema-10 archives', () => {
     expect(new Set(game.factions.map(faction => faction.definitionId)).size).toBe(12);
     expect(game.rosterVersion).toBe(3); expect(game.world.generatorVersion).toBe(4);
     const archive = createArchive(game, { mode: 'player' });
-    expect(archive.initialSaveVersion).toBe(10);
+    expect(archive.initialSaveVersion).toBe(SAVE_VERSION);
     expect(serializeGame(replayArchive(parseArchive(archive, game)))).toBe(serializeGame(game));
   });
 

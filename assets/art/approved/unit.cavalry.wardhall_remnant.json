@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.wardhall_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: ONE mounted adult human hall courier-warrior on a sturdy grey horse, chalk-grey padded riding coat, slate-violet square-edged saddle cloth, black iron bridle fittings, low squared helmet. Rider holds reins with a short sheathed straight sword at hip. Calm static down-right walking pose; entire horse ears/tail/four legs and rider enclosed inside central70%.96x96 logical pixel detail.",
+  "frames": [
+    {
+      "id": "unit.cavalry.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.wardhall_remnant/21fbfcc6d7c21968533facc9cfb7df327357f7ec514104583af18bf0ecfce28a/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "93296a3ab4109cf6f4e62811dd2ae315cb7c137e062a18afe3036fd8381e5ac4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/unit.cavalry.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/unit.cavalry.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:58:45.000Z",
+  "referenceHashes": [
+    "663d308716f7a2a6513b0d14814e0c0d445dc8024e184783dc95abe6a59a9fc4",
+    "79de173a94ce9e77df76fd287b030fce9068dae89875e1ae96de69c0b2866f83"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "d57e8f1aca9d5773d2745fdc8146a505cc41a70e6d8e54740ac72f0437335363",
+      "inputHash": "663d308716f7a2a6513b0d14814e0c0d445dc8024e184783dc95abe6a59a9fc4",
+      "outputHash": "b6170ea5b35fb41d3dc7fc3893e11944965f11b9646f222439d73f9ae2345536"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "b6170ea5b35fb41d3dc7fc3893e11944965f11b9646f222439d73f9ae2345536",
+      "outputHash": "8e36802df25f74df87777457e18e8388e73fe310e44ddbbf5e3cd09c1bafdf06"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "8e36802df25f74df87777457e18e8388e73fe310e44ddbbf5e3cd09c1bafdf06",
+      "outputHash": "ee1d07f303c93df2efe9f6b0d2df613e3c1949474a7fcf070f8eda1762712b4b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "20a0ceeaf0d1037adb6307cf3e2323ef7a0bb02e131d23f8f0eff77452dd7d0e",
+      "outputHash": "fc8a876e73f2f0354f5f1ff1b5716ca8cd6536dbebdad6d24e09cfde9910aab2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "39aba0af8d070329b23301a0dc10820fb46e78dd0065593f211fea0ba7fdfd5b",
+      "outputHash": "01d653ad88b21deac6351bb0bc973c8bf4270e922ac343f47270d90f6e4a49d2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "4d0e2c4fc9a3b0ec1ab1b98c1d51ed2619e8192ceacfee1859f23aff1c1309cb",
+      "outputHash": "f93459d8c0da3438ba9250bfc6135abe2da370b16ab3592e9d8ff05244d6c0e7"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.wardhall_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:26.059Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Complete pale right-facing horse and armored rider, legs and weapon not clipped. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 21fbfcc6d7c21968533facc9cfb7df327357f7ec514104583af18bf0ecfce28a; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/63b62a81d8a129dfaf5a5781137e588ad5bc16dfcee21d6173fca001fd924282.png"
+    ],
+    "inputHash": "6519f7ef7f9381649190ca7850f70057124948db1f3e2f7e58e0adfe4e62b8c2"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

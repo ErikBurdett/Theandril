@@ -1,7 +1,7 @@
 import { performance } from 'node:perf_hooks';
 import { cpus } from 'node:os';
 import { createGame, getObservation, stateHash, type GameCommand } from '@theandril/sim';
-import { planTurn } from '@theandril/ai';
+import { aiObservationOptions, planTurn } from '@theandril/ai';
 import { applyRecordedCommand, createArchive, generateChronicles, replayArchive } from '@theandril/chronicle';
 import { deserializeCampaign, serializeCampaign, exportSave, importSave } from '@theandril/persistence';
 import type { CampaignPace } from '@theandril/content';
@@ -45,7 +45,7 @@ for (const { size, pace, factions, limit } of cases) {
   while (!state.victory && state.turn <= limit) {
     for (const faction of state.factions) {
       const before = performance.now();
-      const view = getObservation(state, faction.id);
+      const view = getObservation(state, faction.id, aiObservationOptions(state.turn));
       observationMs += performance.now() - before;
       const planning = performance.now();
       const proposals = planTurn(view);
@@ -57,7 +57,7 @@ for (const { size, pace, factions, limit } of cases) {
           issue({ type: 'autoResolveBattle', factionId: [battle.attackerFactionId, battle.defenderFactionId].includes(state.turnOwnerId) ? state.turnOwnerId : battle.attackerFactionId });
         }
         if (state.pendingCapture) {
-          const decision = planTurn(getObservation(state, state.pendingCapture.factionId))[0];
+          const decision = planTurn(getObservation(state, state.pendingCapture.factionId, aiObservationOptions(state.turn)))[0];
           if (!decision || decision.type !== 'resolveCapture') throw new Error('No capture decision');
           issue(decision);
         }

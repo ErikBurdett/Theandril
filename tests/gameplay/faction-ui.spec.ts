@@ -1,3 +1,4 @@
+import { openRealmAffairs, openProduction } from './ui-navigation';
 import { expect, test, type Page, type Locator } from '@playwright/test';
 import { FACTIONS } from '@theandril/content';
 import { factionArtId } from '@theandril/art-pipeline/runtime';
@@ -28,7 +29,7 @@ async function unobstructed(element: Locator): Promise<void> {
   })).toBe(true);
 }
 
-test('six public culture crests are reference art, while campaign heraldry follows only observed faction definitions', async ({ page }, testInfo) => {
+test(`${FACTIONS.length} public culture crests are reference art, while campaign heraldry follows only observed faction definitions`, async ({ page }, testInfo) => {
   const requests: string[] = [];
   page.on('request', request => { if (new URL(request.url()).pathname.startsWith('/art/')) requests.push(new URL(request.url()).pathname); });
   await page.goto('/');
@@ -36,11 +37,12 @@ test('six public culture crests are reference art, while campaign heraldry follo
   await expect(cultures).toContainText('not a player-seat selector');
   await expect(cultures.getByRole('button')).toHaveCount(0);
   await expect(cultures.locator('input,select')).toHaveCount(0);
+  await expect(cultures.locator('article')).toHaveCount(FACTIONS.length);
   for (const faction of FACTIONS) {
     await approved(art(cultures, factionArtId('ui.crest', faction.id)!));
     await expect(cultures.getByRole('heading', { name: faction.name, exact: true })).toBeVisible();
   }
-  await cultures.screenshot({ path: testInfo.outputPath('six-public-culture-crests.png') });
+  await cultures.screenshot({ path: testInfo.outputPath(`${FACTIONS.length}-public-culture-crests.png`) });
   await page.setViewportSize({ width: 390, height: 844 });
   const cards = cultures.locator('article');
   for (let index = 0; index < FACTIONS.length; index++) {
@@ -48,7 +50,7 @@ test('six public culture crests are reference art, while campaign heraldry follo
     await card.evaluate(element => element.scrollIntoView({ block: 'center' }));
     await unobstructed(card);
     await unobstructed(card.locator('[data-art-id]'));
-    if (index % 2 === 1) await page.screenshot({ path: testInfo.outputPath(`six-public-culture-crests-narrow-pair-${(index + 1) / 2}.png`) });
+    if (index % 2 === 1) await page.screenshot({ path: testInfo.outputPath(`${FACTIONS.length}-public-culture-crests-narrow-pair-${(index + 1) / 2}.png`) });
   }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -108,17 +110,18 @@ test('renamed realms retain their authored family, real appointments gain role a
     await page.getByRole('button', { name: `Appoint ${name}`, exact: true }).click();
     await expect.poll(() => page.evaluate(id => window.__THEANDRIL__?.getSummary()?.characters.some(character => character.definitionId === id), definition)).toBe(true);
   }
+  await openProduction(page, 'land');
   for (const unit of ['colonist', 'scout', 'guard', 'spearman', 'heavy_infantry', 'cavalry']) await approved(art(page.locator('.inspector'), `unit.${unit}.ashen_compact`));
   await page.setViewportSize({ width: 390, height: 844 });
-  const recruitment = page.getByTestId('production-land').locator('.faction-recruit-options');
+  const recruitment = page.getByTestId('production-land').locator('.production-cards');
   expect(await recruitment.evaluate(element => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length)).toBe(1);
   const outriders = page.getByRole('button', { name: 'Recruit Charter outriders', exact: true });
   await outriders.evaluate(element => element.scrollIntoView({ block: 'center' }));
-  expect(await outriders.locator('.faction-art-card > span:last-child').evaluate(element => element.getBoundingClientRect().width)).toBeGreaterThanOrEqual(180);
+  expect(await page.getByTestId('production-card-unit.cavalry').locator('.production-card-heading > div').evaluate(element => element.getBoundingClientRect().width)).toBeGreaterThanOrEqual(180);
   await unobstructed(outriders);
   await page.screenshot({ path: testInfo.outputPath('faction-recruitment-narrow.png') });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  expect(await page.locator('.faction-recruit-options button').evaluateAll(elements => elements.every(element => element.scrollWidth <= element.clientWidth))).toBe(true);
+  expect(await page.locator('[data-testid="production-land"] .production-card > button').evaluateAll(elements => elements.every(element => element.scrollWidth <= element.clientWidth))).toBe(true);
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Characters & agents', exact: true });
@@ -137,7 +140,9 @@ test('renamed realms retain their authored family, real appointments gain role a
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(await dialog.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
   await page.keyboard.press('Escape');
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Ashen Pretenders', exact: true }).click();
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Negotiate peace with Ashen Pretenders', exact: true }).click();
   await approved(art(page.getByTestId('peace-builder'), 'ui.crest.reedbound_council'));
   await page.getByTestId('peace-builder').screenshot({ path: testInfo.outputPath('renamed-realm-diplomatic-crest.png') });

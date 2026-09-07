@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.morrow_spore",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Morrow Spore: original underwood commonwealth of adult humans and solemn fungal symbionts. Umber layered fungal carapace, dusty mauve cloth, pale lichen seams and dark leather. Strong broad overlapping shelf-fungus planes rather than cute mushroom caps. Original hollow crescent cradling three seeds seal. Practical mature woodland society, no spores in air, neon, gore or chibi figures. Native64. One compact covered migration handcart on the LEFT being pulled by one full-body adult civilian on the RIGHT, walking toward the LOWER RIGHT. All wheels/handles/puller connected and fully visible, adult smaller than canopy. Cloth canopy, seed sacks and bundled household tools; no weapons.  Buildings: broad layered shelf-roofs and grown timber ribs with umber walls, pale lichen door frames and mauve canopy accents, not freestanding mushroom doodles; heraldry bonecrescent around threeseeds on umber. Humanoids adult serious humans with fungal grown armor and scarves.",
+  "frames": [
+    {
+      "id": "unit.colonist.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.morrow_spore/1ccafb1ad768f2e3e7a95c35667b16009f1aa26eaadcf0c266ff868bdd06dd17/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "744dec4a5ccc52d103fa635e6251ac7749a8bace0da0691543a0dfb407d0df5a",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/morrow/unit.colonist.morrow_spore-v1.png",
+      "assets/art/source/faction-expansion/morrow/unit.colonist.morrow_spore-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:59:00.944Z",
+  "referenceHashes": [
+    "c4c424c6cc095039f2040a1b1560dd81920570a94fdd1c91a1695d37a4e090a0",
+    "35eb0455bc508705ff474473969e4b64fcd251e341394bc5ed7cbf0f0a3b420c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "6a8d1dad025d0ec3e4c8b7c0a72fec796b94ff748cd87c98d0d2f40b48c7f89b",
+      "inputHash": "c4c424c6cc095039f2040a1b1560dd81920570a94fdd1c91a1695d37a4e090a0",
+      "outputHash": "893856ee48430b897ded4801054aeed8c4767c20f95ccb911952262a8594625c"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "893856ee48430b897ded4801054aeed8c4767c20f95ccb911952262a8594625c",
+      "outputHash": "4409f44cf40bf0b5eac2e40a1727dea714040af8b49de19d1dd1fa7b939189cf"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4409f44cf40bf0b5eac2e40a1727dea714040af8b49de19d1dd1fa7b939189cf",
+      "outputHash": "81d094811cab9aa5c2b5180bad86f4a5c4998386fb421ee19a57b2184d083045"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "0f9c9d914d0a37f43c2deb958c7df4c1a2876744855c427cd1b1578e22f54084",
+      "outputHash": "5a6d7d077516c427a8b68627ee03cb1767343f6a3f7526f31637caba26bbfd82"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "2e4400c7e721d9076454924474107e11863b4004d7de590e4f89d60d31f985dd",
+      "outputHash": "99e4460b91b4a17bac08bef487d66eb63548d5eb869de2c4406c279c73934f98"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "3c33adc9c5717c74515d203fb6bb4ce4aa95156396550543345a0cc35d169f0d",
+      "outputHash": "18a80e958f56b66d5a4f10966532a4c0c7d4da3ee775fb6e9b56965669f3e925"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.morrow_spore.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:26.931Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Shelf-canopy handcart, visible wheels and right-facing adult have connected shafts. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 1ccafb1ad768f2e3e7a95c35667b16009f1aa26eaadcf0c266ff868bdd06dd17; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0ad7250b8e085933726ab4d5b6c892fd68f0b59fcd4c90137084dbcc278a7137.png"
+    ],
+    "inputHash": "1b18ece150df8a9798d4fb115308be14c71577da580dfb4462291b84c49e8f2e"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

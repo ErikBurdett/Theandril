@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.mire_courts",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native128. One joined developed city complex, substantial culture-specific central civic hall surrounded by eight dense stepped roof volumes, reinforced walls and one unmistakable gate. Monumental but practical, broad readable architectural silhouette; no base tile or surrounding terrain.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears. IMPORTANT: the subject faces toward the RIGHT (front-right southeast), not left. Genuine alpha-zero transparent background, no surrounding colored haze or ground shadow.",
+  "frames": [
+    {
+      "id": "settlement.city.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/source/native/settlement.city.mire_courts/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e066cac4c065dc59178bfdfbbeaa564bfdec48953960aa1717c7f17264781d8c",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/settlement.city.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/settlement.city.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:58:57.000Z",
+  "referenceHashes": [
+    "8bb0bac551762ba08185e8d580389f6e4d9582ff1fabc6a0d5d48833e9114303",
+    "bd9dba6ad7905ab17fa6015e3ef73df5fbe05328b2cc9b61764334d096de421b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "23c4e4d3082be7902d1096e612a812b72877fd17ad590ce0abfa49ef7a031ee1",
+      "inputHash": "8bb0bac551762ba08185e8d580389f6e4d9582ff1fabc6a0d5d48833e9114303",
+      "outputHash": "89150dc5ccc662ad16af8f283c5167d1e3a731d04f7207d110f357c2348166ff"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

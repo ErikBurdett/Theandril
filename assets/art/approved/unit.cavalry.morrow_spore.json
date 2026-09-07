@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.morrow_spore",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Morrow Spore: original underwood commonwealth of adult humans and solemn fungal symbionts. Umber layered fungal carapace, dusty mauve cloth, pale lichen seams and dark leather. Strong broad overlapping shelf-fungus planes rather than cute mushroom caps. Original hollow crescent cradling three seeds seal. Practical mature woodland society, no spores in air, neon, gore or chibi figures. Native96. One adult outrider mounted on one complete sturdy dark brown horse facing toward the LOWER RIGHT. Entire muzzle, rider head, lance tip, four horse legs, hooves and tail visible. Culture-specific saddlecloth and practical light tack. No second mount or figure, no zoomed crop.  Buildings: broad layered shelf-roofs and grown timber ribs with umber walls, pale lichen door frames and mauve canopy accents, not freestanding mushroom doodles; heraldry bonecrescent around threeseeds on umber. Humanoids adult serious humans with fungal grown armor and scarves.",
+  "frames": [
+    {
+      "id": "unit.cavalry.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.morrow_spore/adda2959e01d03e18bce7f36c8221028121602672353011c71fd7ee89e385aef/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7cbbee255498aaf5269be7a05b792ea6dd66d4dfb8ea6a3193eb435ff44c505f",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/morrow/unit.cavalry.morrow_spore-v1.png",
+      "assets/art/source/faction-expansion/morrow/unit.cavalry.morrow_spore-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:06:26.118Z",
+  "referenceHashes": [
+    "7a1904ab543f4f0ed38e5260a0aa16cafa56ceebaf2ffd8d183328ec396b4b91",
+    "fab244d4ec0fcfcb8b738b1e3b82a900edec41c0e88122d4058fe8c67d4e28cf"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "b909a552142dbeb4c7be0c37bb6826a841325bdcd4a9fac3d6f252e44c35e93b",
+      "inputHash": "7a1904ab543f4f0ed38e5260a0aa16cafa56ceebaf2ffd8d183328ec396b4b91",
+      "outputHash": "452ade60971742ed8ee82a4d73ab170e6b4a8ce04b878560eab6770d234235d6"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "452ade60971742ed8ee82a4d73ab170e6b4a8ce04b878560eab6770d234235d6",
+      "outputHash": "3cc6aa00b52ce87481c627a2aeae9d77af408da001db1df81d29432d7968287b"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3cc6aa00b52ce87481c627a2aeae9d77af408da001db1df81d29432d7968287b",
+      "outputHash": "57548dea221e6e57a28f6647d21b81046c1a62cb30025e6d8e1a708c1ca89708"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "cf9648c1050513cc2069c7697c082e774a550b4d6611f4393e10b1c3377ca012",
+      "outputHash": "b592990e56c81df315c26e74479faf000ebfb1dfb6e15d21e6c7202160ad19f4"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "937f18ff3a7fec4e47003eeb956b49cf13e09c611765fd1ec036601b9e2cd4ca",
+      "outputHash": "3e1923882bf39d0821c09368e0383396ebabb56e1b15562e3e61663c500a7830"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "767f53afe3f35025a5e3e29bd16b2ddff0565b85eef1c703ed00699d215170c6",
+      "outputHash": "1b1139a808ae4894b5cd843a8f359e168476b080de354a84b3719f2445b8b906"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.morrow_spore.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:24.354Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Complete right-facing dark horse and rider with diagonal lance, tail and hooves retained. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate adda2959e01d03e18bce7f36c8221028121602672353011c71fd7ee89e385aef; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0ad7250b8e085933726ab4d5b6c892fd68f0b59fcd4c90137084dbcc278a7137.png"
+    ],
+    "inputHash": "549fca5a1b2c5c7e2fdb27628acc9f6c47ba748953a0a49d00ebe9d3698a7d42"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

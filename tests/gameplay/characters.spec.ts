@@ -1,3 +1,4 @@
+import { openRealmAffairs } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { applyCommand, deserializeGame, serializeGame } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -120,6 +121,7 @@ test('a named marshal rallies real formations once, saves its used ability, and 
   const marshal = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.characters.find(item => item.role === 'marshal'));
   await page.getByRole('tab', { name: /Armies/ }).click();
   await page.getByTestId('army-registry').getByRole('button', { name: new RegExp(FIXTURE.armyName) }).click();
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.wars.length)).toBe(1);
   await page.getByTestId(`attack-${FIXTURE.enemyArmyId}`).click();
@@ -200,6 +202,7 @@ test('siege sabotage changes real defenses, and a failed mission preserves wound
     await page.getByRole('button', { name: 'Review route', exact: true }).click();
     await page.getByRole('button', { name: 'Move now', exact: true }).click();
     await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ownArmies.find(army => army.id === 'army.2')?.cell)).toBe(approach);
+    await openRealmAffairs(page);
     await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
     await page.getByRole('button', { name: 'Besiege Reedwatch', exact: true }).click();
     await expect(page.getByTestId(`siege-${CONQUEST_FIXTURE.settlementId}`)).toContainText('Besieging Reedwatch');

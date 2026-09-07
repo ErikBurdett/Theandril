@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.wardhall_remnant",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: ONE front-facing tiny strategic badge, very simple slate-violet OPEN SQUARE with one missing lower-right corner on a chalk-grey square field with chunky black corner braces. A few broad orthogonal pixel masses only, designed at32x32 native; no detailed crest, lettering, crown, anvil, circle or glow. Centered with transparent margins.",
+  "frames": [
+    {
+      "id": "ui.badge.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.wardhall_remnant/6deb583786887ad991a93ad62bffc9954d53b5ef1c4eae31c9ad5112194fe9f7/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "964bf572daf6e847c307919aa1da9875839093f0ff9b65e08904c97c716332ed",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/ui.badge.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/ui.badge.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:02:14.000Z",
+  "referenceHashes": [
+    "d62a5e58eac110a9499f0ac0f9994aec4926162e3bd3a6208ed3a9e49fb548d6",
+    "4e7313bfb6431af54ce2aa57ac1f16e34d4fa674024feba962a57c2a40469cde"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "e6a85e1cfa9d7c0e37a2d779be8ec46724d94cee445b6c7751947cf79ff2f281",
+      "inputHash": "d62a5e58eac110a9499f0ac0f9994aec4926162e3bd3a6208ed3a9e49fb548d6",
+      "outputHash": "fa64bf6decc63c3a8ca68d84e82978ffd7548086fade4e2cf0725789834319cd"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "fa64bf6decc63c3a8ca68d84e82978ffd7548086fade4e2cf0725789834319cd",
+      "outputHash": "2544a3fded90c089f3c3d38602d8e5a16ba422dc14255f945c3f7de1ee081ef8"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "2544a3fded90c089f3c3d38602d8e5a16ba422dc14255f945c3f7de1ee081ef8",
+      "outputHash": "fd751f457a1aa8f081a9b6e5cb641f3d1aadf326e5eac1f37a7d1928e3d1dfce"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "3f7817db17b1a1548ae4b3462f5bfb703fd34cb26d8dbb7c1dad21a5c34521ca",
+      "outputHash": "c4383ced2b814abded03686abd8bd306ce50455f4ecbea9de5454a5bf4bc75d3"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "d3f0a3cbb49943e30993e9cfd251f1bfde629c7da64e97369900649a291e2265",
+      "outputHash": "f77e9dd2d9a3e4645ef29dda93cfc26003c7f588f43343a610df2c6bf93d29b9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "610ceee21bdf7f868ed1914b51737b5d93614ec13c2828c44143d9a27af3e069",
+      "outputHash": "42801e672417193c028f9077004f62b6b75af49ed07f7090adfe44e1030d1111"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.wardhall_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:18.324Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. One square open-court motif stays recognizable at 32 pixels. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 6deb583786887ad991a93ad62bffc9954d53b5ef1c4eae31c9ad5112194fe9f7; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/63b62a81d8a129dfaf5a5781137e588ad5bc16dfcee21d6173fca001fd924282.png"
+    ],
+    "inputHash": "2ef97a62fb58945c392dbdc9c82c6f25423f9454da56579171bd809406a10d8e"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

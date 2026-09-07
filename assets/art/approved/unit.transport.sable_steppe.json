@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.sable_steppe",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.sable_steppe"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Sable Steppe mobile camp assemblies: lean dark-timber hull with tension-roof deck awnings, rust felt and dull-ochre patched sail planes, indigo rope bindings, dark lamellar rail screens, original three wind notches emblem. Dry camp-derived craft traditions made into functional ships, no horse figurehead, no steppe ground. Role: Charter transport: a broad deep-water wooden cargo cog with a rounded capacious hull, single patched square sail, low canvas-covered passenger shelter and neatly strapped crates. Lightly armed; no artillery, no warship ram. Chunky broad cargo silhouette. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.transport.sable_steppe/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.sable_steppe/3f7d3837253143335ee4d59d09f32d866894c5d8d884ba1f54a8891e8ffbbd17/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7588738098c3ba3bcfe8370ca0d84c38a3d3d7fa9a5ce9f1ab62a5c3896a8a2a",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.sable_steppe-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.sable_steppe-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:32:02.492Z",
+  "referenceHashes": [
+    "ceb356142c16f03ef80e4879790009854aa4fb6eff18c364a77604486e682f1f",
+    "6d5f248ac4f302487010b6d55ccc7854a109feb21fdc37bae19f97914847143e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "b0c1e6e8f0f2f6a51b462b97b16f3c524230632529bf10c51c96195923e6ef0a",
+      "inputHash": "ceb356142c16f03ef80e4879790009854aa4fb6eff18c364a77604486e682f1f",
+      "outputHash": "da854099cdd251ccc59918e141ac9bbc707f313cedbc6c3635c89ef5c1e0803b"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "da854099cdd251ccc59918e141ac9bbc707f313cedbc6c3635c89ef5c1e0803b",
+      "outputHash": "137903d35157b79dcfdce9068e2c1a024bcda6e55a01d2de821e5f1bcfd9776a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "137903d35157b79dcfdce9068e2c1a024bcda6e55a01d2de821e5f1bcfd9776a",
+      "outputHash": "a35abca498900201b6a9f83250c108f537f5877857f3e4f915a097d6116e75a7"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "11de2cc64fb54d8cf6cf52aca00c8e3fd84e36a0019fe99097b95b25e48c9276",
+      "outputHash": "56e29249c90f5ed0683be843e7008333789d28793795e49855c54dc3c1e04347"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "c8e75488690decc8df896fc925a709edd93dfdadaf5cd39004e73570fdba4c26",
+      "outputHash": "6c1451c2b54df2b7a7cd82c4ce3c6fee4bdcd5b112690ca10792550758714412"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "7bfffe6e99c2be80a3540487668aced2f0cc98dd774dc099e8e8e2519987f465",
+      "outputHash": "30f8ccdd0d1eef228332fecd3dc50f3ffbe9a5dfe86134ab38057929eb48b034"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.sable_steppe.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:50:20.262Z",
+    "notes": "Root inspected generated source, native1x cohort and nearest4x family pixels. Ochre canvas and dark leather-like hull panels make a warm, distinct family. Small sail marks vary and are decorative, not certified exact crest reproductions. Single square sail, cargo volume and passenger canopy read at96px. Palette and binary-alpha validation passed; native tips intact and no opaque background matte. Static southeast art only; fine rigging is texture. Runtime water, fog and ownership review is a separate gate.\nReviewed candidate 3f7d3837253143335ee4d59d09f32d866894c5d8d884ba1f54a8891e8ffbbd17; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/32fa9b368816a4e508a509d9f73949b1188430d90669b938fd1c91f05f63f6ae.png"
+    ],
+    "inputHash": "8e3ed9d0fdc19baab7cc68307ed8ba6d82f967f0e5be896b8deefed026574880"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

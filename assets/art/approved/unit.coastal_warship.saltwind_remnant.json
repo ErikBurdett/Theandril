@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.saltwind_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Saltwind Remnant maritime charter crews: tar-black practical seaworthy hull, petrol-green sailcloth with auburn patched canvas, brass rigging fittings, raised guarded quay-like stern cabins, broken keel insignia. Asymmetrical repaired practical rigging, strong veteran seafarer silhouette distinct from Glass Tide pale-blue elegance. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.saltwind_remnant/b7b5d1926ba0e0767c73cc26342f9e5e43ffb424cc78f11cff948b9ad467144d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "8e879ca3edcf6bdedb62a657ea2a91afdbab9c65c9574d8c8f828a60fb608093",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:21:11.802Z",
+  "referenceHashes": [
+    "2623becd909070a47b8ba7fbda10a8005b2eeb7cb5d0f112c47c6dbf3ff821ba",
+    "7d8fd1e5c65e49a523ae27ffd0af1db2a224b21e1f9cfbf3c17d0b7bea806aaf"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a687a0d336035c253bd633e70f135ed5539f315db94eedea5743442f9f422cda",
+      "inputHash": "2623becd909070a47b8ba7fbda10a8005b2eeb7cb5d0f112c47c6dbf3ff821ba",
+      "outputHash": "63d0bb23719a1897856badc1b9fc01faa6245d46949a4765212329154a014e90"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "63d0bb23719a1897856badc1b9fc01faa6245d46949a4765212329154a014e90",
+      "outputHash": "512763074af03a469c17a276e74068c04ec9c8b7e284438ac1bb3826efeaecff"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "512763074af03a469c17a276e74068c04ec9c8b7e284438ac1bb3826efeaecff",
+      "outputHash": "46d77edf97265ba2ebd79ad0fde193650add623f063cb3dbca06bb93a36cbb52"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "7bfa761f123bac02095cf824b45232e353658b289da3ab57dbf839ed83e1da71",
+      "outputHash": "c0b417f32fe03cc8ff23c2d6eb759ba88c3490ce80360eaee5d5efbad41fd2e2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "c0fb81231fab30ef01c3d7c51b923116076a97afc2a2dfc8a2405d1c393ec30d",
+      "outputHash": "383a852ce6542b82c164712f459903778448e041c751b0f245914bd65735846d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "f0636e5ba6eebf5b08688a36c7c96b0082d9f9fb6d5c9bfea3174be0230030df",
+      "outputHash": "f35add617dc00ef8e4ce11363dc824d673e9a6b769c32bc5368208a99030f890"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.saltwind_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:06.012Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Petrol sail planes, rust repairs and tar-dark practical hulls retained; separate low galley, guarded two-mast escort and rounded cargo deck are recognizable. Low oared hull and triangular sail read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate b7b5d1926ba0e0767c73cc26342f9e5e43ffb424cc78f11cff948b9ad467144d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/3189d279dd504f2afa39861589b96576df696708363b2efcffd3de378341bd9e.png"
+    ],
+    "inputHash": "24aa3528041462d1badd2ac43fb17c5fe974661408adbcb7e9e562c0c8de96fb"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

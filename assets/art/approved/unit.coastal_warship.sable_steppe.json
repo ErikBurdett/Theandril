@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.sable_steppe",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.sable_steppe"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Sable Steppe mobile camp assemblies: lean dark-timber hull with tension-roof deck awnings, rust felt and dull-ochre patched sail planes, indigo rope bindings, dark lamellar rail screens, original three wind notches emblem. Dry camp-derived craft traditions made into functional ships, no horse figurehead, no steppe ground. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.sable_steppe/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.sable_steppe/c95bd2f4529504f4bfcb21ff43b52585c24c90723df94496a26361a2e51df8a0/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "41067cdbe9bb00e65501e64a6184233d698fc3cc1f91aaac44d13df96d95332e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.sable_steppe-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.sable_steppe-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:35:03.360Z",
+  "referenceHashes": [
+    "45cf36f8e37cc88c5f2656ffe49e4fdc3a1c0a6a0efea47d04598c767dc77002",
+    "536901c7d817ab99ff23d3045d06fbd835ec294a27247f8ea5034b2d64eb83e9"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "ef8dd6fe3272975f4b2417e9b60522f6954e5356d115df2fc02f2dbb4561460c",
+      "inputHash": "45cf36f8e37cc88c5f2656ffe49e4fdc3a1c0a6a0efea47d04598c767dc77002",
+      "outputHash": "fc13e192f303e8d367acbabe7d98161567349d0966ffdce7af6e3241255707a9"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "fc13e192f303e8d367acbabe7d98161567349d0966ffdce7af6e3241255707a9",
+      "outputHash": "42b10c197a70534710ce649c1c2497a206ca29680c97ab3fcc80329662b5fbe2"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "42b10c197a70534710ce649c1c2497a206ca29680c97ab3fcc80329662b5fbe2",
+      "outputHash": "e9b27b3e5afbf2219b6619a96b219863e4927354ede471fd8d8be85fa5f2cb0d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "d275dcd0bbb025c1d4b67762b4c7aecfcb3be74f0da2ce7f5ea5572bf12d3fbd",
+      "outputHash": "e5ea63b278927eb0cd9ddbccceaaad89a9ca17252073249d5c9c7712880cedda"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "2cbf983aa77d56a609163e3821178a1cc5ad5c1f5239efed179302d0f7deee91",
+      "outputHash": "76378920e5ba51e3178ea93d25c1a7a7c5a6b55d840befdbb8bfb6851797e451"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "f30f4d36d826b570e5f04d42d9da6d6e29a04f504305594202720780be6c77f1",
+      "outputHash": "3136ff499a3ffc40b8bed6da868a6b916c79dd0dca6b77119355ad879e74e660"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.sable_steppe.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:50:19.408Z",
+    "notes": "Root inspected generated source, native1x cohort and nearest4x family pixels. Ochre canvas and dark leather-like hull panels make a warm, distinct family. Small sail marks vary and are decorative, not certified exact crest reproductions. Low oared hull and triangular sail read at96px. Palette and binary-alpha validation passed; native tips intact and no opaque background matte. Static southeast art only; fine rigging is texture. Runtime water, fog and ownership review is a separate gate.\nReviewed candidate c95bd2f4529504f4bfcb21ff43b52585c24c90723df94496a26361a2e51df8a0; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/32fa9b368816a4e508a509d9f73949b1188430d90669b938fd1c91f05f63f6ae.png"
+    ],
+    "inputHash": "66120fac6c7274e1151b5d30c1535ca1193cd15d4573dc2d94355dbcecd7bad4"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

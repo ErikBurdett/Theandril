@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-06",
+  "status": "rejected-and-reverted",
+  "synthetic": true,
+  "isolatedGameplayBaseline": false,
+  "command": "node --import tsx /tmp/theandril-epic-profile.PogP0d/benchmark-known.mts",
+  "workdir": "/home/telephoneheater/Work/Theandril",
+  "runtime": "v26.7.0",
+  "method": "Three sequential before/experiment/restored processes run the same serializer workload. Each creates Tiny seed74 four-faction Epic origins and replaces only their known-land input with4096 schema-valid records spread over four1024-cell dictionaries. These are deliberate projection inputs, not globally validated campaigns. Each mode performs10 warmups followed by60 timed serializeGame calls; reported medians use sorted index30, p95 index57. All other simulation/save code remains unchanged between these three runs.",
+  "tupleConstruction": "duplicates: tuple=index%12, settlementId=null; unique: tuple=index, settlementId='settlement.'+(tuple+1); overflow: tuple=index%1100 with the same settlementId construction. Each has biome=tuple%12, factionId=turnOwnerId, improvementId=null for odd tuples and improvement.quarry for even tuples.",
+  "experiment": "A call-local1024-entry tuple cache replaced only knownLandSchema leaves through a Zod transform. All original record keys, strict outer schema, plain-record guards and leaf parsing on cache misses remained. Hits required schema-derived exact ordinary enumerable data properties and exact typed primitive values; accessors/unusual shapes fell back to the original parser. No persistent cache existed.",
+  "retention": "Benchmark JSON values retained from tool output; this file does not claim byte-for-byte raw stdout retention.",
+  "runs": {
+    "before": {
+      "note": "Synthetic schema-valid known-memory projections for serializer validation cost; not a globally valid campaign or an isolated game benchmark.",
+      "repetitions": 60,
+      "warmup": 10,
+      "results": [
+        {
+          "mode": "duplicates",
+          "records": 4096,
+          "distinct": 12,
+          "bytes": 440678,
+          "sha256": "480c46a8d5e637e175f5be4fb15427720263529a3bedcf3573f16143066af864",
+          "meanMs": 3.1872340333333335,
+          "medianMs": 3.1622879999999896,
+          "p95Ms": 3.527672000000024
+        },
+        {
+          "mode": "unique",
+          "records": 4096,
+          "distinct": 4096,
+          "bytes": 492819,
+          "sha256": "ca3c5419dada270bf88bbcfb0bf35c42cc12c543136dd6edb04cdc07403ece50",
+          "meanMs": 3.512509416666664,
+          "medianMs": 3.4771120000000337,
+          "p95Ms": 3.863420000000019
+        },
+        {
+          "mode": "overflow",
+          "records": 4096,
+          "distinct": 1100,
+          "bytes": 489697,
+          "sha256": "d272890894bde0e342ecddc7987350351703863d1f97d59c5c33315d2facc18c",
+          "meanMs": 3.6962305666666624,
+          "medianMs": 3.555231000000049,
+          "p95Ms": 5.002669999999966
+        }
+      ]
+    },
+    "experiment": {
+      "note": "Synthetic schema-valid known-memory projections for serializer validation cost; not a globally valid campaign or an isolated game benchmark.",
+      "repetitions": 60,
+      "warmup": 10,
+      "results": [
+        {
+          "mode": "duplicates",
+          "records": 4096,
+          "distinct": 12,
+          "bytes": 440678,
+          "sha256": "480c46a8d5e637e175f5be4fb15427720263529a3bedcf3573f16143066af864",
+          "meanMs": 4.062132433333334,
+          "medianMs": 3.6905309999999645,
+          "p95Ms": 6.3167899999999975
+        },
+        {
+          "mode": "unique",
+          "records": 4096,
+          "distinct": 4096,
+          "bytes": 492819,
+          "sha256": "ca3c5419dada270bf88bbcfb0bf35c42cc12c543136dd6edb04cdc07403ece50",
+          "meanMs": 5.8450428000000105,
+          "medianMs": 5.565571999999975,
+          "p95Ms": 7.084728000000041
+        },
+        {
+          "mode": "overflow",
+          "records": 4096,
+          "distinct": 1100,
+          "bytes": 489697,
+          "sha256": "d272890894bde0e342ecddc7987350351703863d1f97d59c5c33315d2facc18c",
+          "meanMs": 4.29706105,
+          "medianMs": 4.085272000000032,
+          "p95Ms": 5.063248999999814
+        }
+      ]
+    },
+    "restored": {
+      "note": "Synthetic schema-valid known-memory projections for serializer validation cost; not a globally valid campaign or an isolated game benchmark.",
+      "repetitions": 60,
+      "warmup": 10,
+      "results": [
+        {
+          "mode": "duplicates",
+          "records": 4096,
+          "distinct": 12,
+          "bytes": 440678,
+          "sha256": "480c46a8d5e637e175f5be4fb15427720263529a3bedcf3573f16143066af864",
+          "meanMs": 3.0629492166666616,
+          "medianMs": 3.03589199999999,
+          "p95Ms": 3.4231379999999945
+        },
+        {
+          "mode": "unique",
+          "records": 4096,
+          "distinct": 4096,
+          "bytes": 492819,
+          "sha256": "ca3c5419dada270bf88bbcfb0bf35c42cc12c543136dd6edb04cdc07403ece50",
+          "meanMs": 3.5416142666666626,
+          "medianMs": 3.5364190000000235,
+          "p95Ms": 3.8091229999999996
+        },
+        {
+          "mode": "overflow",
+          "records": 4096,
+          "distinct": 1100,
+          "bytes": 489697,
+          "sha256": "d272890894bde0e342ecddc7987350351703863d1f97d59c5c33315d2facc18c",
+          "meanMs": 3.6351334500000028,
+          "medianMs": 3.4815439999999853,
+          "p95Ms": 5.101059999999961
+        }
+      ]
+    }
+  },
+  "decision": "Reject. The attempted cache is slower in all three modes, including highly repetitive inputs; restored timings return close to the original baseline. Cache eligibility, transform/wrapper and lookup overhead outweigh avoided parsing in this implementation. All three serialized byte lengths and SHA256 values match across all runs. No cache helper, schema change or experiment-only test remains in production/source.",
+  "verification": "After restoring the original parser, the existing canonical-land and serialization-performance suites pass32 tests; scoped save lint passes. This is not evidence that the unchanged60-second Epic integration gate passes."
+}

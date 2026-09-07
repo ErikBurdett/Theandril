@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.morrow_spore",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Morrow Spore: original underwood commonwealth of adult humans and solemn fungal symbionts. Umber layered fungal carapace, dusty mauve cloth, pale lichen seams and dark leather. Strong broad overlapping shelf-fungus planes rather than cute mushroom caps. Original hollow crescent cradling three seeds seal. Practical mature woodland society, no spores in air, neon, gore or chibi figures. Native32. ONE very simple original strategic faction badge, front-facing culture seal with compact silhouette, just three to five broad color groups, no ornate frame or tiny details. Readable at32pixels; no letters, pole or scenery.  Buildings: broad layered shelf-roofs and grown timber ribs with umber walls, pale lichen door frames and mauve canopy accents, not freestanding mushroom doodles; heraldry bonecrescent around threeseeds on umber. Humanoids adult serious humans with fungal grown armor and scarves.\nCORRECTION FOR THIS ASSET: Render ONLY ONE small faction badge, a hollow pale-lichen crescent cupping exactly three mauve seeds, on a single flat umber medallion backing. Center that one simple emblem with generous fully transparent margins. The references to humanoids, armor, buildings and architecture above describe the culture only and MUST NOT become additional objects. NO person, character, house, town, roof, staff, landscape, collage, concept sheet or secondary icon. Exactly one isolated badge. Native 32x32 legibility with very simple broad pixel clusters, a near-circular silhouette, no decorative fringe. Genuine alpha-zero surrounding background and no haze.",
+  "frames": [
+    {
+      "id": "ui.badge.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.morrow_spore/28531afaa71e95c3f5b4cf259a9ef4d4c57df93a5655dd2c63334fee2456828f/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "fdf7c33d7d7d170b60c6865de21b4cb9388984a2b7aadc13e64656db32332f6c",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/morrow/ui.badge.morrow_spore-v2.png",
+      "assets/art/source/faction-expansion/morrow/ui.badge.morrow_spore-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:16:28.044Z",
+  "referenceHashes": [
+    "7a6ab6b9c725548828b11e4b79af51cd3a983b611a75793391fcb848b334b004",
+    "d6b31c1398db4007b16823d0171edaecb01e1a6365a7e5b756e174609d9554fb"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "98a506cd49eca29166d643770e97d1680bcad05193e3ae74bc96e1f27eec6630",
+      "inputHash": "7a6ab6b9c725548828b11e4b79af51cd3a983b611a75793391fcb848b334b004",
+      "outputHash": "2fa096b0f5dc2af3667eefccbde0731f672b4ccca0c14036e99da4afee9ccf85"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2fa096b0f5dc2af3667eefccbde0731f672b4ccca0c14036e99da4afee9ccf85",
+      "outputHash": "641c4846603ae84b9cb116d55d3f977dcb7bdc5df33fe37ea60beb404ebc6c43"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "641c4846603ae84b9cb116d55d3f977dcb7bdc5df33fe37ea60beb404ebc6c43",
+      "outputHash": "29ccd0538d0688f2401845c439ec9aaba3fa947de27476a1726a0f8359da9118"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "798470f5925cb838a50ebba094d65c0c7a647cc47f6957d5d3bca9fd090cf166",
+      "outputHash": "4ed103da1cb1379bab9edd2d3915528fb5d9b64db2b5651fb4420413a1ed0294"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "822c3c661820de4946bd3d50f12df631f2698c1c245d7b856a8d6e1452b33694",
+      "outputHash": "19753f6aeb33fc0bcc25cbc0e9e4e23b0ae18f73de7b8014bccf57d40f247e18"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "a3943aedd4255f25c7f635973f3e38eb2596f8db2e1eb8da8099918c100c888f",
+      "outputHash": "8f4d92c7884d8f9c1349472ec0593ab4e1d29f2753fcdcd89625dd545f17282a"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.morrow_spore.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:16.617Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Revision 2 is one round crescent-and-seed medallion; rejected montage source is not cropped into service. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 28531afaa71e95c3f5b4cf259a9ef4d4c57df93a5655dd2c63334fee2456828f; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0ad7250b8e085933726ab4d5b6c892fd68f0b59fcd4c90137084dbcc278a7137.png"
+    ],
+    "inputHash": "3a2b379ab9c32ea981995892aa74c02beb7eb1f3dd3f26a46f13d2777f8d52c1"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

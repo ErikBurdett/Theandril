@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.wardhall_remnant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: ONE adult human woman hall surveyor in a chalk-grey hooded working coat with slate-violet panels, holding a large open parchment grid survey at waist and one short black measuring rod. Visible practical face, booted full-body stance, small rectangular peg pouch; no weapon, bow, armor or magical staff.",
+  "frames": [
+    {
+      "id": "character.surveyor.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.surveyor.wardhall_remnant/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9bb1086f22ebee7d8d0c20f56ce622491e0bcb185befbdeb79ff96a376a0da99",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/character.surveyor.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/character.surveyor.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:58:45.000Z",
+  "referenceHashes": [
+    "601288e4d32fdccc33b236a981d9bd95da2d4dad2179edbff771973c4aa5d709",
+    "250de1f5f59849c8cbcbd0356a4cddaf6e9473bda47bff894ad7fde40c6a03b5"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "a9699cd9503c5094ba2ad2e09254e2f1cf23858e772cb8c9ee0c5ae5b3513493",
+      "inputHash": "601288e4d32fdccc33b236a981d9bd95da2d4dad2179edbff771973c4aa5d709",
+      "outputHash": "e3c2e5cd7c5ff2521c03770bfbd3d3bc3005cb409717e9dcffb451dc21705e54"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

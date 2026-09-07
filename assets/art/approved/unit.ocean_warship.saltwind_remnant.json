@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.saltwind_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Saltwind Remnant maritime charter crews: tar-black practical seaworthy hull, petrol-green sailcloth with auburn patched canvas, brass rigging fittings, raised guarded quay-like stern cabins, broken keel insignia. Asymmetrical repaired practical rigging, strong veteran seafarer silhouette distinct from Glass Tide pale-blue elegance. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.saltwind_remnant/ce2335506dc0a23ca75e14d48cc30fd70943e0f3f9b4b5765139219e101e39a3/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "76d2aa922960b245c049aa3c1ea38c6054dc8c7a8e3089b66aabdff497317702",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:21:11.799Z",
+  "referenceHashes": [
+    "05b49f8e758bdd2162fc030cf1f099b8a55d8fd06596dd9718fee019fbad9156",
+    "e4c2469cfef16ad8ff279f3c88b8e4398a602b81a9dfd58cdf13013bd3663c4d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a7fc11266f30b807fffe1434c8287736f6482f7135c4c9a0378ec1c038bf393b",
+      "inputHash": "05b49f8e758bdd2162fc030cf1f099b8a55d8fd06596dd9718fee019fbad9156",
+      "outputHash": "39e4cc98058769bd83ea91600e48c24aec06c49c35b351c34ec041f3af25321e"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "39e4cc98058769bd83ea91600e48c24aec06c49c35b351c34ec041f3af25321e",
+      "outputHash": "fe44294fbc06db80d72040c23d0e884ab1a3edcc1c18e88444feac4a0a38e642"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "fe44294fbc06db80d72040c23d0e884ab1a3edcc1c18e88444feac4a0a38e642",
+      "outputHash": "baeca1701ebc2afe88bc67ad983d22ac0c190171505e6c59c97b4b2685108bf8"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "60bef9870d092cb099aceffffff3779428a74f30f839f0d2b67da985b97c395a",
+      "outputHash": "023f5489b8865a5471004c51261d4df5bb9f653cc7a85be24b71d595b5b41606"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "fd32f89c9d78d95950195cc837fc4a24f6f1a525c252fe272576acc0141011e4",
+      "outputHash": "686fd198733ff5a110e77fce2b2ed3902d5cf51e98fa2deda6d8dfbb0d344093"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "de7fd4af4fe0532e89927fe2614cee0f3bf03fec7ce8c575ee4d656f02ef7cfe",
+      "outputHash": "91135a604c5b447da0b98bee061ec7fea29513da1e88ccd032b527126f3ef0a5"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.saltwind_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:06.325Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Petrol sail planes, rust repairs and tar-dark practical hulls retained; separate low galley, guarded two-mast escort and rounded cargo deck are recognizable. Raised fighting decks and separate square sails read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate ce2335506dc0a23ca75e14d48cc30fd70943e0f3f9b4b5765139219e101e39a3; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/3189d279dd504f2afa39861589b96576df696708363b2efcffd3de378341bd9e.png"
+    ],
+    "inputHash": "b57d9e8c87ada26a73a8dbb436c97e61cdd62b1fff05439a732b7eac261cfb5f"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

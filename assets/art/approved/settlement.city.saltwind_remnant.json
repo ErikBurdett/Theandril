@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.saltwind_remnant",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Saltwind Remnant, successor charter households after the old Saltwind League's fall, not a revived empire. Muted petrol cloth and auburn patched sailcloth, tar-black leather, weathered driftwood and dull brass rigging. Narrow practical nautical equipment; original angular broken-keel insignia (a simple split V-shaped keel, not an anchor). No bright blue sails, round glass ornaments or generic pirate skulls.\nSubject: ONE dense yet readable successor charter port citadel cluster: elevated narrow counting towers and weathered timber warehouses around a central angular quay hall, auburn sailcloth roofs and petrol shutters, dark piles and dull brass structural bindings. Strong tall varied skyline, not round glass domes, blue sails or giant ship. No water, terrain base, background or people; 128x128 logical detail.",
+  "frames": [
+    {
+      "id": "settlement.city.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.saltwind_remnant/bb470586988a4b46aa7ad139a77825e3d1bb42846b2f5fb04eff24e8a541614f/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "caafe7095120f09b372a00571072eecacca07ce473cb07ef4778b2b845f551cb",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/settlement.city.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/settlement.city.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:48:00.000Z",
+  "referenceHashes": [
+    "b4a019f8490cd1dc76b355a45e0506a7ff11aa978a280649c401693d37ca5c1f",
+    "f3bd429a2b479a7214c9760a41bccc310052c96614eadbdc98594892d1136624"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "93b577c5982e901942c5c118bc074a708aedf5f182d0325e0f5c5edbe3633568",
+      "inputHash": "b4a019f8490cd1dc76b355a45e0506a7ff11aa978a280649c401693d37ca5c1f",
+      "outputHash": "0026b3c1662640a1ea845930163b8c965c7a774a1b1f910735f305644191c491"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "0026b3c1662640a1ea845930163b8c965c7a774a1b1f910735f305644191c491",
+      "outputHash": "36855f42ba46bfcc9956b5a39ad5dd82941c65d25d3cc4faf58486967187b69c"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "36855f42ba46bfcc9956b5a39ad5dd82941c65d25d3cc4faf58486967187b69c",
+      "outputHash": "7b6428d0fbb304ec33997d14d08e1d4a467289783a8993409834eee595320273"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "0d791fc3600de2488e91f71d62224de91b31ba1b7d69be2088ba520be7f0230e",
+      "outputHash": "cdf94ac8ef61db312e7e3d1ae6b8b7a96617061254d00db1f0dcbaddb2939607"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "ecce33cc3f0ba0a7b70a19e6cdd27d85b3ca4ff16f6aba632d8ae59bd28772b6",
+      "outputHash": "7bddd40cbb445f3c18440cdbd1eae6e62525fd00cec7500002e16f419f907ea4"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "1c874e525c0474d2b62eb28285d457e486cf9e99e8cfd2c009e11e29ae65ddaa",
+      "outputHash": "906b9111a42d2306b06afb2170f749e92ab6482bd7188d1258f8147657ff3e5d"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.saltwind_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:10.186Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Tall narrow towers and rust roofs create a larger port-city skyline than the low town. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate bb470586988a4b46aa7ad139a77825e3d1bb42846b2f5fb04eff24e8a541614f; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a5caa24e863aeb2f3dc3d22c0d2c76ce681769339bebd598c6b65c3b0f481f74.png"
+    ],
+    "inputHash": "fafff1bfc8f1bad2aba5f9d8d4a00d5ec51447e0e5aa952f1df88189a9e27f87"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

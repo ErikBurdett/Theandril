@@ -1,5 +1,5 @@
 import { useEffect, useState, type CSSProperties } from 'react';
-import { FACTIONS } from '@theandril/content';
+import { FACTIONS, UNITS } from '@theandril/content';
 import { factionArtId, parseRuntimeCatalog, type RuntimeAsset, type RuntimeCatalog } from '@theandril/art-pipeline/runtime';
 import { loadArtImageBytes } from './art-image';
 import './faction-art.css';
@@ -110,17 +110,18 @@ export function FactionArt(props: FactionArtProps) {
 /** Pure presentation boundary, also exercised without a running browser or art publication. */
 export function FactionArtDisplay({ contentId, definitionId, label, compact = false, decorative = false, value: art, error, loading = false }: FactionArtProps & { value?: ApprovedFrame; error?: string; loading?: boolean }) {
   const requested = factionArtId(contentId, definitionId ?? '') ?? `${contentId}.unbound`;
-  const native = contentId === 'ui.badge' ? 32 : contentId === 'unit.cavalry' || contentId === 'settlement.village' || contentId === 'settlement.town' ? 96 : contentId === 'settlement.city' ? 128 : 64;
+  const naval = UNITS.some(unit => unit.id === contentId && unit.movementDomain === 'naval');
+  const native = contentId === 'ui.badge' ? 32 : naval || contentId === 'unit.cavalry' || contentId === 'settlement.village' || contentId === 'settlement.town' ? 96 : contentId === 'settlement.city' ? 128 : 64;
   const scale = compact ? 0.5 : 1;
   const validSize = !art || art.asset.nativeResolution.width === native && art.asset.nativeResolution.height === native;
   const ready = Boolean(art && validSize);
   const state = loading ? 'loading' : ready ? art?.generic ? 'generic' : 'ready' : 'fallback';
-  const message = state === 'ready' ? `${label} · approved faction artwork` : state === 'loading' ? `${label} · loading approved artwork` : `${label} · generic presentation. ${error ?? (!validSize ? 'Approved frame dimensions differ from this native slot.' : 'Faction-specific artwork is not published; using approved generic role artwork.')}`;
+  const message = state === 'ready' ? `${label} · approved faction artwork` : state === 'loading' ? `${label} · loading approved artwork` : `${label} · ${naval && !ready ? 'procedural ship marker, approved naval artwork unavailable' : 'generic presentation'}. ${error ?? (!validSize ? 'Approved frame dimensions differ from this native slot.' : 'Faction-specific artwork is not published; using the available role fallback.')}`;
   const style: CSSProperties = { width: native * scale, height: native * scale,
     ...(ready && art ? { backgroundImage: `url("${art.image.url}")`, backgroundSize: `${art.image.width * scale}px ${art.image.height * scale}px`, backgroundPosition: `${-art.frame.frame.x * scale}px ${-art.frame.frame.y * scale}px` } : {}) };
   return <span className={`faction-art faction-art--${state}`} style={style} role={decorative ? undefined : 'img'} aria-label={decorative ? undefined : message} aria-hidden={decorative || undefined} title={message} data-art-id={requested} data-art-rendered-id={ready ? art?.asset.id : undefined} data-art-definition={definitionId} data-art-state={state}>
-    {!ready && <span className="faction-art-symbol" aria-hidden="true">{contentId.startsWith('character.') ? '♟' : contentId.startsWith('unit.') ? '△' : '◇'}</span>}
-    {state !== 'ready' && <span className="faction-art-note" aria-hidden="true">{state === 'loading' ? 'Loading' : 'Generic'}</span>}
+    {!ready && (naval ? <svg className="faction-art-ship" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 43h44l-9 10H21ZM32 9v33M29 13 15 36h14M36 17l13 19H36M8 57l8-2 9 2 8-2 9 2 10-2 6 2" fill="none" stroke="currentColor" strokeWidth="2"/></svg> : <span className="faction-art-symbol" aria-hidden="true">{contentId.startsWith('character.') ? '♟' : contentId.startsWith('unit.') ? '△' : '◇'}</span>)}
+    {state !== 'ready' && <span className="faction-art-note" aria-hidden="true">{state === 'loading' ? 'Loading' : naval && !ready ? 'Ship marker' : 'Generic'}</span>}
   </span>;
 }
 

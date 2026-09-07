@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.saltwind_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Saltwind Remnant, successor charter households after the old Saltwind League's fall, not a revived empire. Muted petrol cloth and auburn patched sailcloth, tar-black leather, weathered driftwood and dull brass rigging. Narrow practical nautical equipment; original angular broken-keel insignia (a simple split V-shaped keel, not an anchor). No bright blue sails, round glass ornaments or generic pirate skulls.\nSubject: One adult mounted coast-road outrider on a lean dark bay horse, muted petrol riding coat, auburn saddle cloth, tar-black bridle with dull brass fittings. Short sheathed saber at hip and held reins; horse walks down-right in a calm static pose. Horse and rider ONE subject, entire ears, tail, four legs and rider inside margin. 96x96 logical canvas detail.",
+  "frames": [
+    {
+      "id": "unit.cavalry.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.saltwind_remnant/98f32d7518298088c7719698591593ba8497455f9ea0a90bac2f76984345adc1/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5b81892a26f260db8949f38955b7ca8ef12ab6f0b3f4a99c1f932398f1819a01",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/unit.cavalry.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/unit.cavalry.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:43:59.000Z",
+  "referenceHashes": [
+    "fbc9c544d988f3fc43b8ae0d4c83b73c0e32dec25941563ebe54dc3d84c0fbc7",
+    "b7c9f16632a0a722505735f12fc4552dd59b5ed0a2b285311032657f480b9b05"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "88b974d701eb06b6495e08b741c8b5f4f4557cb5f528a5cb4e5411a16ba40d5c",
+      "inputHash": "fbc9c544d988f3fc43b8ae0d4c83b73c0e32dec25941563ebe54dc3d84c0fbc7",
+      "outputHash": "3e803bb24b9bc41e1188a7564b2e508d700ee6a2e3426ce69d6dee57b24a5724"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "3e803bb24b9bc41e1188a7564b2e508d700ee6a2e3426ce69d6dee57b24a5724",
+      "outputHash": "58a32ef53c66d2bce64507d624b42939e43d06c791487d5d0f8dee97c34728e9"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "58a32ef53c66d2bce64507d624b42939e43d06c791487d5d0f8dee97c34728e9",
+      "outputHash": "fec426742e1f9957d8bfb0c42552e749444c034c61411c4b36089a8c9cc47edb"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "925834886f3e046b179ec0b745efe3ca650b0eba214567e3e70eaf62d3776efc",
+      "outputHash": "968985414ec5b04090163f4679ad806576b5bf12a046a1362e13eb5530c7393c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "c3c204401c62dd15d50791113228c02af9616b3d8e0d486f12c4f3720d35d45d",
+      "outputHash": "563f78e3bad5de7d3d997c400f48e842183f12bf9027cd40b75b6e5b7a0dacb8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "d116e3ce9325f9c22455f9b943194717b83167b7e9f69bcacc53dea7050cc9f5",
+      "outputHash": "dce0b6ab091f4c0c8da83399fbbe845a91609043abe3706c9b2edb2ef4db215a"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.saltwind_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:25.622Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Complete right-facing chestnut horse and rider with contained long weapon and hooves. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 98f32d7518298088c7719698591593ba8497455f9ea0a90bac2f76984345adc1; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a5caa24e863aeb2f3dc3d22c0d2c76ce681769339bebd598c6b65c3b0f481f74.png"
+    ],
+    "inputHash": "c5d4417be05bc45b061e43e0d2a1a09414c46d4b2496465d729c00499ea32852"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.mire_courts",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native96. One joined developed town complex of six closely nested culture-specific dwellings, raised market hall and low defensive enclosure with a visible gate. Architecture expresses faction materials; larger and denser than village. No base tile, no terrain landscape.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears. IMPORTANT: the subject faces toward the RIGHT (front-right southeast), not left. Genuine alpha-zero transparent background, no surrounding colored haze or ground shadow.",
+  "frames": [
+    {
+      "id": "settlement.town.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.mire_courts/bfbc798640d02d6a52f2958d4f90a88557e7bfe2abaf028e595c9099118d7bbc/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e168297a5b833da5201d308eef66f590d977d8fd2b837a49f4eed154f56d1d99",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/settlement.town.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/settlement.town.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:58:23.000Z",
+  "referenceHashes": [
+    "0ab819724e383527c028fc9c6c769b4a1a081250a78800a1ecea1941191bab2b",
+    "d23e83b153a0f22a8f4a41345ef822fa7c3cc04ca6e396b850007614172acdeb"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "23735a82b0aee022ea4d008ceda7279eeba93ee174a9e44cde67f8355a17598f",
+      "inputHash": "0ab819724e383527c028fc9c6c769b4a1a081250a78800a1ecea1941191bab2b",
+      "outputHash": "95072538987cbcf0763d7626fa17dd2eb178056d30a9e3e509a77a308aba2d92"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "95072538987cbcf0763d7626fa17dd2eb178056d30a9e3e509a77a308aba2d92",
+      "outputHash": "de4eac697fcc91b5450cf689e5efa1ff0a6f79d8b71ef36559b7aa6c5319b847"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "de4eac697fcc91b5450cf689e5efa1ff0a6f79d8b71ef36559b7aa6c5319b847",
+      "outputHash": "f71704d2ee4fb66fc77f04cc15815237069ad9a11952723856ef9c05ff8020bd"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "637ee2be6f04a380277e9680295583edd1c6f38a4fb7854dfba18ad766d07ab7",
+      "outputHash": "0c2a80088bde2b42edbc869b52875e547c32ec9182d6454cb03260eab9214eb6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "b8c26210e47619d0927eb338af64bdc4d727c0c8df0909c7f7eaff368ff1d071",
+      "outputHash": "697c25c90453d6a199156d9a267cbf089dd93b9af4c44e056c64975438ae9871"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "901f203f56c04f08a45f3d04450e7011e3906c6348d67deb77076e486111e266",
+      "outputHash": "82519d12f686d21ce490786523b5a7c4cece97fb4168f52dd9ab3a7723ae3a03"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.mire_courts.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:11.052Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Enclosed gate and several leaf-roof dwellings make a denser stage than the open village. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate bfbc798640d02d6a52f2958d4f90a88557e7bfe2abaf028e595c9099118d7bbc; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d8be3b2df82887727e53bd6ae03f45aba440c8dbff04c61f9677a7d2c17461c8.png"
+    ],
+    "inputHash": "ec1ed9ea6247653eb39b43dcc8640b06869167c523d0da4518ce88d489d84f5f"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

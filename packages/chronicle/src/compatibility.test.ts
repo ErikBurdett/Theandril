@@ -7,6 +7,7 @@ import { prosperityCampaign, PROSPERITY_FIXTURE } from '../../test-fixtures/src/
 import { applyRecordedCommand, generateChronicles, parseArchive, replayArchive } from './index';
 import type { CampaignArchive, ArchiveRecord } from './index';
 import { planTurn } from './fixtures/legacy-planner';
+import { initializeLegacyLand } from '../../sim/src/simulation';
 
 type LegacyRecord = Omit<ArchiveRecord, 'checkpointVersion' | 'rulesVersion'>;
 type LegacyArchive = Omit<CampaignArchive, 'version' | 'records' | 'initialSaveVersion' | 'finalHashVersion'> & { version: 1; records: LegacyRecord[] };
@@ -95,6 +96,9 @@ describe('preserved schema-4 archives and mixed-version continuation', () => {
 
   it('preserves original victory seals and postgame records after importing an old completed campaign', () => {
     const state = prosperityCampaign(); state.rosterVersion = 1; state.world.generatorVersion = 1; state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, 1);
+    // This is deliberately authored prior-format setup, not a captured user file.
+    // Remove modern land development explicitly before the frozen-rule replay.
+    initializeLegacyLand(state);
     const prior = legacyOrigin(state, 'from-save');
     for (const command of [
       { type: 'research', factionId, technologyId: 'technology.civic_accounts' },

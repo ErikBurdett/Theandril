@@ -1,8 +1,9 @@
-import { PROSPERITY_PROJECT } from '@theandril/content';
+import { IMPROVEMENTS, PROSPERITY_PROJECT } from '@theandril/content';
 import { hexDistance, neighbors } from '@theandril/mapgen';
 import type { GameCommand, Observation } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
 import { hasNavalOpportunity } from './naval';
+import { landPlanningTowns } from './observation-options';
 
 export interface ProgressionPlan extends AiPlan { coinSpent: number; reserve: number }
 
@@ -13,6 +14,28 @@ export interface ProjectHostAssessment {
   uncoveredPressure: number; nearestThreat: number; friendlyDepth: number;
 }
 const byId = (a: { id: string }, b: { id: string }): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+
+/** Bounded owned-land assessment: research responds to usable sites, not hidden geography. */
+function landResearch(view: Observation) {
+  const towns = landPlanningTowns(view.land.settlements, view.turn);
+  const sites = towns.flatMap(town => town.cells.filter(cell => cell.claimed && cell.canWork));
+  const scores = new Map<string, number>();
+  for (const improvement of IMPROVEMENTS) {
+    if (!improvement.requiredTechnologies) continue;
+    const matches = sites.filter(cell => improvement.sites.some(site => site.terrainIds.includes(cell.terrain)
+      && (!site.biomeIds || site.biomeIds.includes(cell.biome))
+      // canWork excludes deep ocean; these authored maritime sites require shallows.
+      && (!site.requiredFeatures || (cell.features & site.requiredFeatures) === site.requiredFeatures)
+      && (!site.forbiddenFeatures || !(cell.features & site.forbiddenFeatures))));
+    for (const technology of improvement.requiredTechnologies) scores.set(technology, (scores.get(technology) ?? 0) + matches.length * 3);
+  }
+  const frontier = towns.filter(town => town.borderExpansion.nextCell !== null && town.borderExpansion.rate > 0).length;
+  scores.set('technology.surveyed_estates', frontier * 4);
+  // Stewardship opens several dependent techniques, even without a local spring.
+  scores.set('technology.stewardship', (scores.get('technology.stewardship') ?? 0) + frontier + (scores.get('technology.waterworks') ?? 0) + (scores.get('technology.charter_forestry') ?? 0));
+  return view.progression.technologyChoices.filter(choice => choice.available && (scores.get(choice.id) ?? 0) > 0)
+    .sort((a, b) => (scores.get(b.id) ?? 0) - (scores.get(a.id) ?? 0) || a.knowledgeCost - b.knowledgeCost || byId(a, b))[0];
+}
 /** Even geographic sampling bounds comparison work without privileging early numeric IDs. */
 function sampleGeography<T extends { id: string; cell: number }>(items: T[], limit: number): T[] {
   const sorted = [...items].sort((a, b) => a.cell - b.cell || byId(a, b));
@@ -70,10 +93,11 @@ export function planProgression(view: Observation): ProgressionPlan {
     return { commands: [{ type: 'startVictoryProject', factionId: view.factionId, settlementId: host.settlementId }], reasons: [`Begin ${project.name} at ${host.settlementId}: infrastructure, progression and ${project.coinCost} coin are ready. Prefer observed safety: ${host.uncoveredPressure} uncovered nearby enemy strength, friendly support ${host.friendlySupport}, known hostile distance ${host.nearestThreat}, friendly depth ${host.friendlyDepth}.`], coinSpent: project.coinCost, reserve: 0 };
   }
   const technology = progression.technologyChoices.find(choice => choice.id === 'technology.cinder_masonry' && choice.available)
-    ?? progression.technologyChoices.find(choice => choice.id === 'technology.civic_accounts' && choice.available);
+    ?? progression.technologyChoices.find(choice => choice.id === 'technology.civic_accounts' && choice.available)
+    ?? landResearch(view);
   if (technology) {
     commands.push({ type: 'research', factionId: view.factionId, technologyId: technology.id });
-    reasons.push(`Research ${technology.name} to improve the economic foundation for Prosperity.`);
+    reasons.push(`Research ${technology.name} for the economy and the settlement sites currently observed; spend ${technology.knowledgeCost} knowledge.`);
   }
   let budget = view.treasury;
   if (!progression.institutionId && ownTowns.length > 0) {

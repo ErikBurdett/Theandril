@@ -13,7 +13,7 @@ import { armyCanFound, effectiveArmyMovement, armySight, armyUpkeep, createArmyF
 import { armyTerrainBlocker, carriedArmyBlocker, disembarkArmy, embarkArmy, moveFleetCargo, navalLaunchCell, observeProductionOptions, productionRequirementBlocker } from './naval';
 import { LEGACY_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './rules';
 import { factionStarts } from './faction-starts';
-import { applyLandCommand, emptyLandState, getLandObservation, handleLandCapture, initializeSettlementLand, landCommandSchemas, observeLandCell, refreshLandKnowledge, resolveLandTurn, settlementLandYield } from './territory';
+import { applyLandCommand, emptyLandState, getLandObservation, handleLandCapture, initializeSettlementLand, landCommandSchemas, observeLandCell, refreshLandKnowledge, resolveLandTurn, settlementLandYield, type LandDetails } from './territory';
 import { advanceCharacters, armyHasCharacterMission, assignCharacter, cancelCharacterMission, characterUpkeep, getCharacterObservation, observeCommanderAbilities, promoteCharacter, recruitCharacter, reconcileCharacterMissions, removeArmyCharacters, startCharacterMission, unassignCharacter, useCommanderAbility } from './characters';
 
 const identifier = z.string().min(1).max(100);
@@ -457,7 +457,7 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
   return { ok: true, events: emitted.map(event => ({ ...event })), ...(diagnostics.length ? { diagnostics } : {}) };
 }
 
-export interface ObservationOptions { landDetails?: 'all' | 'none' | readonly string[] }
+export interface ObservationOptions { landDetails?: LandDetails }
 
 export function getObservation(state: GameState, factionId: string, options: ObservationOptions = {}): Observation {
   const faction = state.factions.find(item => item.id === factionId);

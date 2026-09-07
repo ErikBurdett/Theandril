@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.mire_courts",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native96. One adult outrider mounted on one complete sturdy dark brown horse facing toward the LOWER RIGHT. Entire muzzle, rider head, lance tip, four horse legs, hooves and tail visible. Culture-specific saddlecloth and practical light tack. No second mount or figure, no zoomed crop.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears. IMPORTANT: the face and gaze point toward the RIGHT edge, NOT the left; front-right (southeast) three-quarter pose. Transparent background with absolutely NO surrounding colored haze or ground shadow.",
+  "frames": [
+    {
+      "id": "unit.cavalry.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.mire_courts/b8768bb64e8d27fafd948ee7e6eda08ac546cb40ea368644ffc129318e5da5d4/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e4f87c21d03f66e2cfe612781dffb054d1afaa5acf3a30956ad8ee0c0962ab40",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/unit.cavalry.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/unit.cavalry.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:45:29.000Z",
+  "referenceHashes": [
+    "f1f2e3e8eceba87adb436b17f163892ef683406b840b920e95bfeb9fe5c7ac10",
+    "8dda667fff86a0cf4cc61b72f073fc1a8d34f8e8062dd67c114e69ec458f5665"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "36c9da82289bf77e05c878f546b63f8ca8bb9e8d84a232895729621590a37b0a",
+      "inputHash": "f1f2e3e8eceba87adb436b17f163892ef683406b840b920e95bfeb9fe5c7ac10",
+      "outputHash": "248aea34d4a98f91c1f8e5ce413e14aa01a2da535667cbcb018b980c4e20776e"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "248aea34d4a98f91c1f8e5ce413e14aa01a2da535667cbcb018b980c4e20776e",
+      "outputHash": "c28af50aaeba119158d01c9409b5ca2caaca1efb4206518d486ab6c9b86af55d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c28af50aaeba119158d01c9409b5ca2caaca1efb4206518d486ab6c9b86af55d",
+      "outputHash": "d9853dcc8672e4a1b7d92426ef09aebb37bfdeeccdd8f0998cf4b3114de1cb20"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "870a8d644ea207e26c6f8fa8b4786ff1fe0d790d50c0ef763fd361bdf84b2d63",
+      "outputHash": "a7d0247c0c28ce1f66687985a24d14e83312a1d65e3aca89b7656886ece7189b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "6705ed5f8586285bba15d56ef41f48bdaa51525720a055c8632d864b718aee8f",
+      "outputHash": "ca5faf6237afe3d338383986103037fd30591653d7862f62ee9afc7d80b48aff"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "61d4ad2a6b7c346f9a915ddcfab52fa78c6e20b41ab09d54da0866f6322f7cda",
+      "outputHash": "a6c89dfc8883fda0f4c6f2c3a5cf9a3b984f8d30f3b64d91644594cd90491d28"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.mire_courts.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:23.899Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Complete right-facing horse and rider, long upright lance and separate hooves remain readable. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate b8768bb64e8d27fafd948ee7e6eda08ac546cb40ea368644ffc129318e5da5d4; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d8be3b2df82887727e53bd6ae03f45aba440c8dbff04c61f9677a7d2c17461c8.png"
+    ],
+    "inputHash": "e6cf56ffe111a0d3d376119de0bba39d244054784e0a1f8d26b419f95172cbb6"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.sable_steppe",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.sable_steppe"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: one original Theandril dark-fantasy strategic game sprite, unit.colonist, static first-facing pose.\nScene/backdrop: genuinely TRANSPARENT RGBA background, alpha zero around the isolated sprite. Do NOT paint a checkerboard, white/black backdrop, landscape, scene, floor tile, drop-shadow oval or framing panel.\nFaction visual grammar: Sable Steppe, an original mixed-human steppe camp confederation. Lean adult proportions; rust felt, muted ochre cloth, indigo accents and black lamellar leather/iron. Mobile angular cloth cuts, practical travel equipment, no lavish imperial ornaments. Heraldry is exactly three broad wind-notch cuts arranged as a compact original simple seal. Settlement architecture combines yurts, taut angular tension roofs and protective walls, not medieval European castles. No copied fantasy franchise costumes.\nSubject: One adult civilian pulling a small two-wheeled loaded hearth cart. Civilian is on the RIGHT of the cart, pulling the shafts toward screen RIGHT/southeast; cart trails LEFT. Entire person, both feet, cart, two coherent wheels and bundled supplies visible. No horse, no weapon. This is one connected strategic caravan sprite.\nStyle: serious weathered medieval pixel art designed for a 64x64 native sprite; intentional broad pixel clusters and restrained material ramps, selective dark local-color outlines, crisp hard edges, soft upper-left material lighting. Adult anatomy, modest head about one-seventh body height, NOT chibi/cartoon. Keep every role readable when reduced to its native size; no painterly texture soup, antialias blur, microtexture or bright confetti.\nComposition: exactly ONE sprite, centered with at least 15% fully transparent margin on EVERY edge. Shallow elevated three-quarter strategic view. Whole silhouette fully inside canvas; nothing cropped. Readable separated limbs and equipment; one static grounded pose.\nColor family: muted material colors only; steel stays grey, flesh stays natural, cloth carries faction accents. No glow, text, labels, watermark, logo, decorative page, multiple poses, sprite sheet or grid. Return an actual transparent PNG.",
+  "frames": [
+    {
+      "id": "unit.colonist.sable_steppe/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.sable_steppe/20898d42b1ec5e8e9dd4428a07cf80b9f23d675a598dba76b0d563f605f89f7c/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not exposed",
+    "promptHash": "cccefb9e4ff98e4d8aba49f89022c1692bde209741a66d27b450547750a6db8e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/rimesable/unit.colonist.sable_steppe-v1.png",
+      "assets/art/source/faction-expansion/rimesable/unit.colonist.sable_steppe-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:57:13.030Z",
+  "referenceHashes": [
+    "161ecde28ff36dda9df9e0b8dee6b92b8e67b523cada15ca6bda085dc2a78957",
+    "1938be6709bf99860055e757fc0e53691a641a3c2212b226d08e107d52f02255"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "f9d7b4da5e578ed648f0a9a1555409f217d9e588bd7a4026b095ccff8560987f",
+      "inputHash": "161ecde28ff36dda9df9e0b8dee6b92b8e67b523cada15ca6bda085dc2a78957",
+      "outputHash": "75ba4f18f293c438ae95c5630679acd2f6c7fe2e5352fba63c429556b0b15de1"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "75ba4f18f293c438ae95c5630679acd2f6c7fe2e5352fba63c429556b0b15de1",
+      "outputHash": "403bf0995df8714379c3d6247c4b228806bcd535e116ae1d6330c42aabd3bfca"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "403bf0995df8714379c3d6247c4b228806bcd535e116ae1d6330c42aabd3bfca",
+      "outputHash": "022c8e7983a81fc4c7a626261268f0d95930d6688436f53dce7c0641afa6e32c"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "8c064a4848378354aa78c84e2e0df75b5d91250b20319e4909a42f8973b7b172",
+      "outputHash": "ca395a296ef57dac99c7cd627645a0176ed137a4a1e1668ec515896131363a91"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "a142bb76fde6172f3e14c36670e0a3711f2eb4d2025c7952876c521d55d48db0",
+      "outputHash": "7213ebab9bc481fc9d17ec21df7da1eac4795691861d00be9d44ee686eddb48f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "8202b8fc39aa88dd94403fdb3183d88d7f58a12db23afe13730fd3b72e06b28c",
+      "outputHash": "8e951210f4f3344792d7a8e9e5a614352f0d372867068fa1cb143bdb10760265"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.sable_steppe.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:27.795Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Rust-clad adult pulls a laden dry-travel cart with connected wheels and shafts. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 20898d42b1ec5e8e9dd4428a07cf80b9f23d675a598dba76b0d563f605f89f7c; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/ae122a0b841cd15ad70339908a698dad62afd662720dbeb948346c8e295ae1df.png"
+    ],
+    "inputHash": "e651d4526e0d5755728bb9fedaba646afe3e8db8b904e8aaf029bad9c719da30"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

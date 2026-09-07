@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.wardhall_remnant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: One broad adult human Wardhall heavy infantry veteran in blocky black riveted plate reinforcements over chalk-grey lamellar, short slate-violet mantle and closed squared helmet. Tall heavy kite shield marked with an open-square seal, one practical square-headed war hammer held low. Straight architectural shape language, not a dwarf/anvil warrior or undead sentinel; grounded full-body stance.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.heavy_infantry.wardhall_remnant/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "3804f3b451445468105662ad0b89b90025957600bff6220a090c1392ca3cc4e7",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/unit.heavy_infantry.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/unit.heavy_infantry.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:53:53.000Z",
+  "referenceHashes": [
+    "7ee982557e2e44ec88b900714e06bda93ff9d55a7d4d7f44c900f1a78634fb10",
+    "ed85f16a48200c733e49fbbda8e96dd7516840f1d8e6fb7c6050ee612e360c82"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "690ca22994c8f66c06d5b9318e89eeee035b370444472b4e296097b2447dcb40",
+      "inputHash": "7ee982557e2e44ec88b900714e06bda93ff9d55a7d4d7f44c900f1a78634fb10",
+      "outputHash": "da780da16797adf72ffb71df21ba0efd9e0eebbe9c94f846f8f165efe1849e82"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

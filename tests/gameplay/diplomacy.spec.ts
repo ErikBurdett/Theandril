@@ -1,3 +1,4 @@
+import { openRealmAffairs } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { applyCommand, serializeGame, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -13,7 +14,9 @@ test('review a funded peace package, receive AI acceptance, and restore the bind
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await importCampaign(page, borderBattleCampaign());
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Negotiate peace with Reedbound Council', exact: true }).click();
   await page.getByLabel('Coin offered', { exact: true }).fill('40');
   await page.getByLabel('Coin requested', { exact: true }).fill('0');

@@ -1,0 +1,3606 @@
+{
+  "schema": 10,
+  "contentHash": "4c2fed32",
+  "rosterVersion": 3,
+  "smoke": false,
+  "startedAt": "2026-09-06T08:58:39.217Z",
+  "endedAt": "2026-09-06T08:58:50.971Z",
+  "totalWallMs": 11753.924745,
+  "environment": {
+    "node": "v26.7.0",
+    "os": "linux 7.1.9-arch1-2",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+    "logicalCpus": 32,
+    "memoryBytes": 33317580800,
+    "finalHeapBytes": 130660824,
+    "finalRssBytes": 495497216
+  },
+  "warmups": 4,
+  "samples": 20,
+  "recruitmentWeights": {
+    "faction.ashen_compact": {
+      "unit.guard": 2,
+      "unit.spearman": 1,
+      "unit.scout": 1,
+      "unit.heavy_infantry": 1,
+      "unit.cavalry": 1
+    },
+    "faction.reedbound_council": {
+      "unit.guard": 2,
+      "unit.spearman": 1,
+      "unit.scout": 1,
+      "unit.heavy_infantry": 1,
+      "unit.cavalry": 1
+    },
+    "faction.cinder_march": {
+      "unit.guard": 2,
+      "unit.spearman": 1,
+      "unit.scout": 1,
+      "unit.heavy_infantry": 1,
+      "unit.cavalry": 1
+    },
+    "faction.glass_tide": {
+      "unit.guard": 2,
+      "unit.spearman": 1,
+      "unit.scout": 1,
+      "unit.heavy_infantry": 1,
+      "unit.cavalry": 1
+    },
+    "faction.iron_covenant": {
+      "unit.guard": 2,
+      "unit.spearman": 1,
+      "unit.scout": 1,
+      "unit.heavy_infantry": 1,
+      "unit.cavalry": 1
+    },
+    "faction.sepulchral_synod": {
+      "unit.guard": 2,
+      "unit.spearman": 1,
+      "unit.scout": 1,
+      "unit.heavy_infantry": 1,
+      "unit.cavalry": 1
+    },
+    "faction.mire_courts": {
+      "unit.guard": 2,
+      "unit.spearman": 3,
+      "unit.scout": 3,
+      "unit.heavy_infantry": 1,
+      "unit.cavalry": 1
+    },
+    "faction.saltwind_remnant": {
+      "unit.guard": 3,
+      "unit.spearman": 2,
+      "unit.scout": 2,
+      "unit.heavy_infantry": 1,
+      "unit.cavalry": 1
+    },
+    "faction.wardhall_remnant": {
+      "unit.guard": 2,
+      "unit.spearman": 3,
+      "unit.scout": 1,
+      "unit.heavy_infantry": 3,
+      "unit.cavalry": 1
+    },
+    "faction.rimehorn_clans": {
+      "unit.guard": 3,
+      "unit.spearman": 2,
+      "unit.scout": 1,
+      "unit.heavy_infantry": 2,
+      "unit.cavalry": 1
+    },
+    "faction.sable_steppe": {
+      "unit.guard": 1,
+      "unit.spearman": 2,
+      "unit.scout": 2,
+      "unit.heavy_infantry": 1,
+      "unit.cavalry": 4
+    },
+    "faction.morrow_spore": {
+      "unit.guard": 2,
+      "unit.spearman": 2,
+      "unit.scout": 4,
+      "unit.heavy_infantry": 1,
+      "unit.cavalry": 1
+    }
+  },
+  "historical": [
+    {
+      "name": "sixOrigin",
+      "seed": 20260905,
+      "seats": 6,
+      "distinctCultures": 6,
+      "rosterVersion": 2,
+      "generatorVersion": 4,
+      "oldSaveVersion": 9,
+      "oldContentHash": "9418e598",
+      "oldHash": "1754cd12",
+      "oldSaveSha256": "9c4b384c770a8c58c58e7fd88875fafaa14270d6ce2b081337efe55de225f1a6",
+      "modernHash": "bcb4b647",
+      "physicalSha256": "4225c00ecca477c2c4caf357d8ee9200b2769a1847435033d1a61655df189c83",
+      "provenance": "Generated starts and ordinary recorded commands only; no authored state grants, no AI/balance claim. Captured by the guarded script before content mutation.",
+      "note": "Exact initial saved bytes regenerated from frozen roster2 and compared with genuine pre-change schema9 evidence. No timing or modern AI-equivalence claim."
+    },
+    {
+      "name": "eightOrigin",
+      "seed": 74,
+      "seats": 8,
+      "distinctCultures": 6,
+      "rosterVersion": 2,
+      "generatorVersion": 4,
+      "oldSaveVersion": 9,
+      "oldContentHash": "9418e598",
+      "oldHash": "58aa6b37",
+      "oldSaveSha256": "4068929b80330f93c410d6076a0e739c8e768156f576a72c2cff03113b0f36eb",
+      "modernHash": "3a5cb55e",
+      "physicalSha256": "3ccfe240e447d2c121d6941324adb84e18624649b6cac0c81c0697ae3bf4c8df",
+      "provenance": "Generated starts and ordinary recorded commands only; no authored state grants, no AI/balance claim. Captured by the guarded script before content mutation.",
+      "note": "Exact initial saved bytes regenerated from frozen roster2 and compared with genuine pre-change schema9 evidence. No timing or modern AI-equivalence claim."
+    }
+  ],
+  "campaign": {
+    "seed": 748291,
+    "size": "tiny",
+    "pace": "epic",
+    "synthetic": false,
+    "rounds": 100,
+    "initial": {
+      "turn": 1,
+      "cells": 1536,
+      "seats": 12,
+      "distinctCultures": 12,
+      "armies": 24,
+      "formations": 24,
+      "settlements": 0,
+      "characters": 0,
+      "claimed": 0,
+      "worked": 0,
+      "improvements": 0,
+      "cultivatedCells": 0,
+      "pendingLandWorks": 0,
+      "retainedBattleReports": 0
+    },
+    "final": {
+      "turn": 101,
+      "cells": 1536,
+      "seats": 12,
+      "distinctCultures": 12,
+      "armies": 108,
+      "formations": 182,
+      "settlements": 40,
+      "characters": 50,
+      "claimed": 316,
+      "worked": 226,
+      "improvements": 102,
+      "cultivatedCells": 5,
+      "pendingLandWorks": 0,
+      "retainedBattleReports": 20
+    },
+    "generationMs": 1.7591859999999997,
+    "commandCount": 4774,
+    "rejectedCommands": 0,
+    "commandTypes": {
+      "found": 40,
+      "moveTo": 1935,
+      "endTurn": 100,
+      "adoptInstitution": 12,
+      "queue": 390,
+      "setWorkedTiles": 371,
+      "improveTile": 103,
+      "claimCell": 40,
+      "research": 33,
+      "recruitCharacter": 50,
+      "assignCharacter": 49,
+      "mergeArmies": 79,
+      "startCharacterMission": 93,
+      "declareWar": 182,
+      "attack": 300,
+      "autoResolveBattle": 343,
+      "adoptDoctrine": 11,
+      "besiege": 107,
+      "assault": 43,
+      "resolveCapture": 32,
+      "proposePeace": 174,
+      "embarkArmy": 20,
+      "respondPeace": 170,
+      "promoteCharacter": 40,
+      "terraformTile": 7,
+      "disembarkArmy": 16,
+      "liftSiege": 34
+    },
+    "eventTypes": {
+      "settlement_founded": 40,
+      "army_moved": 4721,
+      "turn_started": 1200,
+      "institution_adopted": 12,
+      "production_queued": 390,
+      "worked_tiles_changed": 371,
+      "settlement_grew": 306,
+      "building_completed": 167,
+      "land_work_started": 110,
+      "land_work_progress": 159,
+      "territory_claimed": 40,
+      "land_work_completed": 109,
+      "technology_researched": 33,
+      "unit_recruited": 212,
+      "character_recruited": 50,
+      "character_assigned": 59,
+      "formations_transferred": 79,
+      "character_mission_started": 93,
+      "character_mission_progress": 93,
+      "war_declared": 364,
+      "battle_started": 686,
+      "army_retreated": 312,
+      "battle_finished": 686,
+      "character_mission_completed": 91,
+      "doctrine_adopted": 11,
+      "movement_interrupted": 310,
+      "siege_started": 214,
+      "siege_progress": 366,
+      "army_command_changed": 36,
+      "capture_pending": 32,
+      "settlement_captured": 64,
+      "character_battle_experience": 210,
+      "peace_proposed": 348,
+      "army_embarked": 20,
+      "peace_accepted": 328,
+      "character_recovered": 23,
+      "army_destroyed": 9,
+      "upkeep_shortfall": 81,
+      "siege_lifted": 146,
+      "character_promoted": 40,
+      "capital_changed": 6,
+      "peace_expired": 294,
+      "army_disembarked": 16,
+      "commander_rallied": 16,
+      "character_mission_failed": 1,
+      "peace_offer_expired": 4,
+      "formation_destroyed": 9,
+      "production_paused": 2,
+      "land_work_cancelled": 1,
+      "character_died": 1,
+      "peace_rejected": 12
+    },
+    "recruitmentOrdersByCulture": {
+      "faction.ashen_compact": {
+        "unit.colonist": 1,
+        "unit.guard": 1,
+        "unit.spearman": 1,
+        "unit.heavy_infantry": 1
+      },
+      "faction.reedbound_council": {
+        "unit.colonist": 6,
+        "unit.guard": 7,
+        "unit.spearman": 4,
+        "unit.transport": 2,
+        "unit.heavy_infantry": 4,
+        "unit.cavalry": 4,
+        "unit.scout": 3,
+        "unit.ocean_warship": 1
+      },
+      "faction.cinder_march": {
+        "unit.colonist": 3,
+        "unit.guard": 7,
+        "unit.spearman": 4,
+        "unit.transport": 1,
+        "unit.heavy_infantry": 4,
+        "unit.cavalry": 3,
+        "unit.ocean_warship": 1,
+        "unit.scout": 4
+      },
+      "faction.glass_tide": {
+        "unit.colonist": 4,
+        "unit.guard": 3,
+        "unit.spearman": 2,
+        "unit.heavy_infantry": 2,
+        "unit.cavalry": 1,
+        "unit.transport": 1,
+        "unit.coastal_warship": 1,
+        "unit.scout": 1
+      },
+      "faction.iron_covenant": {
+        "unit.colonist": 3,
+        "unit.guard": 5,
+        "unit.spearman": 2,
+        "unit.heavy_infantry": 2,
+        "unit.cavalry": 2,
+        "unit.scout": 2,
+        "unit.transport": 1
+      },
+      "faction.sepulchral_synod": {
+        "unit.colonist": 3,
+        "unit.guard": 3,
+        "unit.spearman": 3,
+        "unit.heavy_infantry": 1,
+        "unit.cavalry": 1,
+        "unit.scout": 1
+      },
+      "faction.mire_courts": {
+        "unit.colonist": 2,
+        "unit.guard": 3,
+        "unit.spearman": 4,
+        "unit.heavy_infantry": 1,
+        "unit.transport": 1,
+        "unit.cavalry": 1,
+        "unit.scout": 3,
+        "unit.ocean_warship": 1
+      },
+      "faction.saltwind_remnant": {
+        "unit.colonist": 4,
+        "unit.guard": 5,
+        "unit.spearman": 4,
+        "unit.transport": 1,
+        "unit.coastal_warship": 1,
+        "unit.heavy_infantry": 2,
+        "unit.cavalry": 2,
+        "unit.scout": 3
+      },
+      "faction.wardhall_remnant": {
+        "unit.colonist": 4,
+        "unit.guard": 2,
+        "unit.spearman": 3,
+        "unit.heavy_infantry": 3,
+        "unit.cavalry": 1,
+        "unit.scout": 2,
+        "unit.transport": 1,
+        "unit.coastal_warship": 1
+      },
+      "faction.rimehorn_clans": {
+        "unit.colonist": 4,
+        "unit.guard": 5,
+        "unit.spearman": 4,
+        "unit.heavy_infantry": 3,
+        "unit.cavalry": 2,
+        "unit.scout": 2,
+        "unit.transport": 1,
+        "unit.ocean_warship": 1
+      },
+      "faction.sable_steppe": {
+        "unit.colonist": 3,
+        "unit.guard": 3,
+        "unit.spearman": 3,
+        "unit.heavy_infantry": 2,
+        "unit.transport": 1,
+        "unit.cavalry": 5,
+        "unit.ocean_warship": 1,
+        "unit.scout": 3
+      },
+      "faction.morrow_spore": {
+        "unit.colonist": 2,
+        "unit.guard": 2,
+        "unit.spearman": 2,
+        "unit.heavy_infantry": 1,
+        "unit.cavalry": 1,
+        "unit.scout": 5
+      }
+    },
+    "landOrdersByCulture": {
+      "faction.ashen_compact": 16,
+      "faction.reedbound_council": 49,
+      "faction.cinder_march": 57,
+      "faction.glass_tide": 45,
+      "faction.iron_covenant": 45,
+      "faction.sepulchral_synod": 33,
+      "faction.mire_courts": 25,
+      "faction.saltwind_remnant": 57,
+      "faction.wardhall_remnant": 48,
+      "faction.rimehorn_clans": 49,
+      "faction.sable_steppe": 59,
+      "faction.morrow_spore": 38
+    },
+    "visibleEntityContactPairs": 66,
+    "firstVisibleContactTurn": {
+      "faction.iron_covenant": 1,
+      "faction.wardhall_remnant": 1,
+      "faction.sable_steppe": 1,
+      "faction.morrow_spore": 1,
+      "faction.ashen_compact": 2,
+      "faction.reedbound_council": 2,
+      "faction.cinder_march": 2,
+      "faction.glass_tide": 2,
+      "faction.sepulchral_synod": 2,
+      "faction.mire_courts": 2,
+      "faction.saltwind_remnant": 2,
+      "faction.rimehorn_clans": 2
+    },
+    "playerFirstVisibleContactTurn": 2,
+    "allFactionObservation": {
+      "samples": 100,
+      "meanMs": 10.237833300000133,
+      "medianMs": 11.12729800000011,
+      "p95Ms": 16.64034199999969,
+      "maxMs": 17.345932000001085
+    },
+    "allFactionPlanning": {
+      "samples": 100,
+      "meanMs": 4.1536634699999855,
+      "medianMs": 3.647848000000124,
+      "p95Ms": 7.786922999998751,
+      "maxMs": 9.56134499999871
+    },
+    "submittedCommands": {
+      "samples": 100,
+      "meanMs": 3.679694050000003,
+      "medianMs": 3.379562000002352,
+      "p95Ms": 6.296690000000126,
+      "maxMs": 7.165682999999916
+    },
+    "endTurn": {
+      "samples": 100,
+      "meanMs": 0.6857750500000214,
+      "medianMs": 0.6990260000000035,
+      "p95Ms": 1.2928469999999948,
+      "maxMs": 1.9835170000001199
+    },
+    "fullRoundWithoutVerification": {
+      "samples": 100,
+      "meanMs": 18.756965870000144,
+      "medianMs": 18.72984799999989,
+      "p95Ms": 29.518816000001607,
+      "maxMs": 30.797273999997742
+    },
+    "midpoint": {
+      "turn": 51,
+      "hash": "2304af83",
+      "saveBytes": 449149
+    },
+    "mirroredCommands": 2490,
+    "replayedCommands": 4774,
+    "commandResultSha256": "f2bae2bd5a2eabec231c868004a9cd2982cf6794322e281812555f85fb905f8b",
+    "finalHash": "c38e2946",
+    "saveBytes": 572991,
+    "saveMs": 9.859260999999606,
+    "loadMs": 16.346927000000505,
+    "playerRead": {
+      "permittedCells": 709,
+      "knownSeats": 12,
+      "ownArmies": 3,
+      "observedArmies": 9,
+      "ownSettlements": 0,
+      "observedSettlements": 4,
+      "productionOptions": 0,
+      "canQueue": 0,
+      "readBytes": 93635
+    },
+    "victory": null,
+    "note": "Generated geography and earned play only. One filtered plan per faction/round plus bounded observed battle/capture decisions; no fake grants, terminal-project deferral or difficulty/pacing override. Recruitment counts are paid queue orders, not completed troops. Contacts require another realm’s permitted army/town entity. Timings exclude duplicate-plan checks, mirror/replay, history copies and seals; this 100-round campaign is not a victory-duration or browser/worker benchmark."
+  },
+  "origins": [
+    {
+      "size": "huge",
+      "seats": 12,
+      "distinctCultures": 12,
+      "rosterVersion": 3,
+      "generatorVersion": 4,
+      "initial": {
+        "turn": 1,
+        "cells": 196608,
+        "seats": 12,
+        "distinctCultures": 12,
+        "armies": 24,
+        "formations": 24,
+        "settlements": 0,
+        "characters": 0,
+        "claimed": 0,
+        "worked": 0,
+        "improvements": 0,
+        "cultivatedCells": 0,
+        "pendingLandWorks": 0,
+        "retainedBattleReports": 0
+      },
+      "originGenerationMs": 57.66987699999936,
+      "originGenerationSamples": 1,
+      "repeatedOriginIdentical": true,
+      "originHash": "13735610",
+      "originSaveBytes": 1711288,
+      "originRead": {
+        "permittedCells": 61,
+        "knownSeats": 1,
+        "ownArmies": 2,
+        "observedArmies": 2,
+        "ownSettlements": 0,
+        "observedSettlements": 0,
+        "productionOptions": 0,
+        "canQueue": 0,
+        "readBytes": 10971
+      },
+      "physicalGeographySha256": "b57180d2533e035a8eb4fefc323963b712e84aca90317f3ebd3da124afbaa8b8",
+      "oldRoster2PhysicalGeographyIdentical": true,
+      "generatedSeatBindings": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact"
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council"
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march"
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide"
+        },
+        {
+          "id": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant"
+        },
+        {
+          "id": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod"
+        },
+        {
+          "id": "faction.mire_courts",
+          "definitionId": "faction.mire_courts"
+        },
+        {
+          "id": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant"
+        },
+        {
+          "id": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant"
+        },
+        {
+          "id": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans"
+        },
+        {
+          "id": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe"
+        },
+        {
+          "id": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore"
+        }
+      ],
+      "firstTownState": {
+        "turn": 1,
+        "cells": 196608,
+        "seats": 12,
+        "distinctCultures": 12,
+        "armies": 12,
+        "formations": 12,
+        "settlements": 12,
+        "characters": 0,
+        "claimed": 84,
+        "worked": 0,
+        "improvements": 0,
+        "cultivatedCells": 0,
+        "pendingLandWorks": 0,
+        "retainedBattleReports": 0
+      },
+      "firstTownHash": "237b3c4e",
+      "firstTownSaveBytes": 1724398,
+      "production": [
+        {
+          "factionId": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36662,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.09088404999979502,
+            "medianMs": 0.06412300000010873,
+            "p95Ms": 0.5570079999997688,
+            "maxMs": 0.5570079999997688
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.45249085000004924,
+            "medianMs": 0.19963199999983772,
+            "p95Ms": 5.510980000000018,
+            "maxMs": 5.510980000000018
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36495,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.059975649999796585,
+            "medianMs": 0.05971199999930832,
+            "p95Ms": 0.07202899999992951,
+            "maxMs": 0.07202899999992951
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.10356670000010126,
+            "medianMs": 0.09930399999939254,
+            "p95Ms": 0.18043200000010984,
+            "maxMs": 0.18043200000010984
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36975,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05692050000002382,
+            "medianMs": 0.05596700000023702,
+            "p95Ms": 0.06657000000086555,
+            "maxMs": 0.06657000000086555
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.08012274999987312,
+            "medianMs": 0.07977499999924476,
+            "p95Ms": 0.08511499999985972,
+            "maxMs": 0.08511499999985972
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34073,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05814315000002353,
+            "medianMs": 0.05701500000031956,
+            "p95Ms": 0.07387699999981123,
+            "maxMs": 0.07387699999981123
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.17762705000000095,
+            "medianMs": 0.13616199999978562,
+            "p95Ms": 0.8752679999997781,
+            "maxMs": 0.8752679999997781
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34535,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05546394999992117,
+            "medianMs": 0.054984000000331434,
+            "p95Ms": 0.059130999999979394,
+            "maxMs": 0.059130999999979394
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.05196550000009666,
+            "medianMs": 0.05123900000035064,
+            "p95Ms": 0.05600800000047457,
+            "maxMs": 0.05600800000047457
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36018,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05736350000011044,
+            "medianMs": 0.057021999999960826,
+            "p95Ms": 0.06279400000039459,
+            "maxMs": 0.06279400000039459
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.1173088000000007,
+            "medianMs": 0.11700400000063382,
+            "p95Ms": 0.12548100000003615,
+            "maxMs": 0.12548100000003615
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.mire_courts",
+          "definitionId": "faction.mire_courts",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36184,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06027604999999312,
+            "medianMs": 0.05673899999965215,
+            "p95Ms": 0.10676999999941472,
+            "maxMs": 0.10676999999941472
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.07947379999991426,
+            "medianMs": 0.0783080000001064,
+            "p95Ms": 0.0903279999993174,
+            "maxMs": 0.0903279999993174
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34361,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05481334999990395,
+            "medianMs": 0.05436399999962305,
+            "p95Ms": 0.059760999999525666,
+            "maxMs": 0.059760999999525666
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.08897325000002639,
+            "medianMs": 0.08784800000012183,
+            "p95Ms": 0.09852600000067468,
+            "maxMs": 0.09852600000067468
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36237,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05896785000009004,
+            "medianMs": 0.05838800000037736,
+            "p95Ms": 0.07135999999991327,
+            "maxMs": 0.07135999999991327
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.0920448499999111,
+            "medianMs": 0.09154800000032992,
+            "p95Ms": 0.10102999999980966,
+            "maxMs": 0.10102999999980966
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36387,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.057161849999920376,
+            "medianMs": 0.056190999999671476,
+            "p95Ms": 0.06323299999985466,
+            "maxMs": 0.06323299999985466
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.06467884999979105,
+            "medianMs": 0.06400500000017928,
+            "p95Ms": 0.07047399999919435,
+            "maxMs": 0.07047399999919435
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36832,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.057351049999942914,
+            "medianMs": 0.05643999999938387,
+            "p95Ms": 0.06866600000012113,
+            "maxMs": 0.06866600000012113
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.06825554999986708,
+            "medianMs": 0.06702899999982037,
+            "p95Ms": 0.07510199999978795,
+            "maxMs": 0.07510199999978795
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36445,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.058347449999973836,
+            "medianMs": 0.059060999999928754,
+            "p95Ms": 0.06447399999979098,
+            "maxMs": 0.06447399999979098
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.059424050000052374,
+            "medianMs": 0.05705699999998615,
+            "p95Ms": 0.0740300000006755,
+            "maxMs": 0.0740300000006755
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        }
+      ],
+      "note": "24 seats reuse twelve distinct cultures, not twenty-four authored identities. Single cold generation sample plus untimed exact regeneration. Planning/read samples use real founded, otherwise unmodified first-town states and filtered full observations; actual queue proposals are separately validated. This is origin/young production cost, not a mature empire, end-turn, worker transfer or rendering measurement."
+    },
+    {
+      "size": "huge",
+      "seats": 24,
+      "distinctCultures": 12,
+      "rosterVersion": 3,
+      "generatorVersion": 4,
+      "initial": {
+        "turn": 1,
+        "cells": 196608,
+        "seats": 24,
+        "distinctCultures": 12,
+        "armies": 48,
+        "formations": 48,
+        "settlements": 0,
+        "characters": 0,
+        "claimed": 0,
+        "worked": 0,
+        "improvements": 0,
+        "cultivatedCells": 0,
+        "pendingLandWorks": 0,
+        "retainedBattleReports": 0
+      },
+      "originGenerationMs": 53.36290099999951,
+      "originGenerationSamples": 1,
+      "repeatedOriginIdentical": true,
+      "originHash": "537ab962",
+      "originSaveBytes": 1727398,
+      "originRead": {
+        "permittedCells": 61,
+        "knownSeats": 1,
+        "ownArmies": 2,
+        "observedArmies": 2,
+        "ownSettlements": 0,
+        "observedSettlements": 0,
+        "productionOptions": 0,
+        "canQueue": 0,
+        "readBytes": 10971
+      },
+      "physicalGeographySha256": "753a1949398e183bdca950ac852b244622e14a2384697db100613cb3a692d789",
+      "oldRoster2PhysicalGeographyIdentical": true,
+      "generatedSeatBindings": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact"
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council"
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march"
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide"
+        },
+        {
+          "id": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant"
+        },
+        {
+          "id": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod"
+        },
+        {
+          "id": "faction.mire_courts",
+          "definitionId": "faction.mire_courts"
+        },
+        {
+          "id": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant"
+        },
+        {
+          "id": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant"
+        },
+        {
+          "id": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans"
+        },
+        {
+          "id": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe"
+        },
+        {
+          "id": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore"
+        },
+        {
+          "id": "faction.ashen_compact.13",
+          "definitionId": "faction.ashen_compact"
+        },
+        {
+          "id": "faction.reedbound_council.14",
+          "definitionId": "faction.reedbound_council"
+        },
+        {
+          "id": "faction.cinder_march.15",
+          "definitionId": "faction.cinder_march"
+        },
+        {
+          "id": "faction.glass_tide.16",
+          "definitionId": "faction.glass_tide"
+        },
+        {
+          "id": "faction.iron_covenant.17",
+          "definitionId": "faction.iron_covenant"
+        },
+        {
+          "id": "faction.sepulchral_synod.18",
+          "definitionId": "faction.sepulchral_synod"
+        },
+        {
+          "id": "faction.mire_courts.19",
+          "definitionId": "faction.mire_courts"
+        },
+        {
+          "id": "faction.saltwind_remnant.20",
+          "definitionId": "faction.saltwind_remnant"
+        },
+        {
+          "id": "faction.wardhall_remnant.21",
+          "definitionId": "faction.wardhall_remnant"
+        },
+        {
+          "id": "faction.rimehorn_clans.22",
+          "definitionId": "faction.rimehorn_clans"
+        },
+        {
+          "id": "faction.sable_steppe.23",
+          "definitionId": "faction.sable_steppe"
+        },
+        {
+          "id": "faction.morrow_spore.24",
+          "definitionId": "faction.morrow_spore"
+        }
+      ],
+      "firstTownState": {
+        "turn": 1,
+        "cells": 196608,
+        "seats": 24,
+        "distinctCultures": 12,
+        "armies": 24,
+        "formations": 24,
+        "settlements": 24,
+        "characters": 0,
+        "claimed": 168,
+        "worked": 0,
+        "improvements": 0,
+        "cultivatedCells": 0,
+        "pendingLandWorks": 0,
+        "retainedBattleReports": 0
+      },
+      "firstTownHash": "2c903076",
+      "firstTownSaveBytes": 1754003,
+      "production": [
+        {
+          "factionId": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36662,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06926629999993565,
+            "medianMs": 0.06836800000019139,
+            "p95Ms": 0.08016499999939697,
+            "maxMs": 0.08016499999939697
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.15101680000002488,
+            "medianMs": 0.1610049999999319,
+            "p95Ms": 0.17436799999995856,
+            "maxMs": 0.17436799999995856
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36495,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06769160000008015,
+            "medianMs": 0.06700499999988097,
+            "p95Ms": 0.07821899999999005,
+            "maxMs": 0.07821899999999005
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.11707390000010491,
+            "medianMs": 0.1137590000007549,
+            "p95Ms": 0.16779899999983172,
+            "maxMs": 0.16779899999983172
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36862,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06996300000009796,
+            "medianMs": 0.06731899999977031,
+            "p95Ms": 0.10835600000064005,
+            "maxMs": 0.10835600000064005
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.11473590000009608,
+            "medianMs": 0.11509000000023661,
+            "p95Ms": 0.12651199999982055,
+            "maxMs": 0.12651199999982055
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34062,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06599120000005314,
+            "medianMs": 0.06582299999990937,
+            "p95Ms": 0.07175999999981286,
+            "maxMs": 0.07175999999981286
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.1329446000000644,
+            "medianMs": 0.12525800000003073,
+            "p95Ms": 0.21717099999932543,
+            "maxMs": 0.21717099999932543
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34535,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.0661698499999602,
+            "medianMs": 0.0656699999999546,
+            "p95Ms": 0.07244599999921775,
+            "maxMs": 0.07244599999921775
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.05011510000003909,
+            "medianMs": 0.048755000000710425,
+            "p95Ms": 0.06827900000007503,
+            "maxMs": 0.06827900000007503
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36018,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06720680000016728,
+            "medianMs": 0.06705700000020443,
+            "p95Ms": 0.06942800000069838,
+            "maxMs": 0.06942800000069838
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.11940144999994118,
+            "medianMs": 0.1169289999998,
+            "p95Ms": 0.13621400000010908,
+            "maxMs": 0.13621400000010908
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.mire_courts",
+          "definitionId": "faction.mire_courts",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36322,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.07048174999999901,
+            "medianMs": 0.07055200000013429,
+            "p95Ms": 0.07224799999949028,
+            "maxMs": 0.07224799999949028
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.0715585999999803,
+            "medianMs": 0.07051700000010896,
+            "p95Ms": 0.08371600000009494,
+            "maxMs": 0.08371600000009494
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34225,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06931309999999939,
+            "medianMs": 0.06927499999983411,
+            "p95Ms": 0.08028899999953865,
+            "maxMs": 0.08028899999953865
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.11736789999999928,
+            "medianMs": 0.11457999999947788,
+            "p95Ms": 0.16624200000023848,
+            "maxMs": 0.16624200000023848
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36648,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06904700000000048,
+            "medianMs": 0.06897399999979825,
+            "p95Ms": 0.07711899999958405,
+            "maxMs": 0.07711899999958405
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.12931954999999107,
+            "medianMs": 0.1283499999999549,
+            "p95Ms": 0.14109800000005635,
+            "maxMs": 0.14109800000005635
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36387,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06588295000015024,
+            "medianMs": 0.06481600000006438,
+            "p95Ms": 0.0860660000007556,
+            "maxMs": 0.0860660000007556
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.060864450000008216,
+            "medianMs": 0.06014800000048126,
+            "p95Ms": 0.06587899999976798,
+            "maxMs": 0.06587899999976798
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36395,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06647009999992406,
+            "medianMs": 0.06464899999991758,
+            "p95Ms": 0.0960190000005241,
+            "maxMs": 0.0960190000005241
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.10396479999994881,
+            "medianMs": 0.10453899999993155,
+            "p95Ms": 0.11320599999999104,
+            "maxMs": 0.11320599999999104
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36445,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06393419999990328,
+            "medianMs": 0.0628339999993841,
+            "p95Ms": 0.06871099999989383,
+            "maxMs": 0.06871099999989383
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.05786200000002282,
+            "medianMs": 0.054909000000407104,
+            "p95Ms": 0.07941399999981513,
+            "maxMs": 0.07941399999981513
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.ashen_compact.13",
+          "definitionId": "faction.ashen_compact",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36815,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.0633887000001323,
+            "medianMs": 0.0628050000004805,
+            "p95Ms": 0.07558799999969779,
+            "maxMs": 0.07558799999969779
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.054089200000044,
+            "medianMs": 0.053302000000257976,
+            "p95Ms": 0.06433899999956338,
+            "maxMs": 0.06433899999956338
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.reedbound_council.14",
+          "definitionId": "faction.reedbound_council",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36406,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06508335000016814,
+            "medianMs": 0.06060700000034558,
+            "p95Ms": 0.11880100000053062,
+            "maxMs": 0.11880100000053062
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.06921484999998029,
+            "medianMs": 0.06892599999991944,
+            "p95Ms": 0.07579299999997602,
+            "maxMs": 0.07579299999997602
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.cinder_march.15",
+          "definitionId": "faction.cinder_march",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36517,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06418299999991177,
+            "medianMs": 0.06330799999977899,
+            "p95Ms": 0.07348699999965902,
+            "maxMs": 0.07348699999965902
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.11737305000006018,
+            "medianMs": 0.11687100000017381,
+            "p95Ms": 0.13127299999996467,
+            "maxMs": 0.13127299999996467
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.glass_tide.16",
+          "definitionId": "faction.glass_tide",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34147,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06095924999981435,
+            "medianMs": 0.06065599999965343,
+            "p95Ms": 0.06759200000033161,
+            "maxMs": 0.06759200000033161
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.11846530000011626,
+            "medianMs": 0.11777100000017526,
+            "p95Ms": 0.12799400000039896,
+            "maxMs": 0.12799400000039896
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.iron_covenant.17",
+          "definitionId": "faction.iron_covenant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34463,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.059140350000052425,
+            "medianMs": 0.05882400000064081,
+            "p95Ms": 0.06504799999947863,
+            "maxMs": 0.06504799999947863
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.04821100000003753,
+            "medianMs": 0.04784699999981967,
+            "p95Ms": 0.0520409999999174,
+            "maxMs": 0.0520409999999174
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sepulchral_synod.18",
+          "definitionId": "faction.sepulchral_synod",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36169,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06240489999995589,
+            "medianMs": 0.0621209999999337,
+            "p95Ms": 0.06517499999972642,
+            "maxMs": 0.06517499999972642
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.09417800000010175,
+            "medianMs": 0.0937130000002071,
+            "p95Ms": 0.10218900000018039,
+            "maxMs": 0.10218900000018039
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.mire_courts.19",
+          "definitionId": "faction.mire_courts",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36270,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06378810000010163,
+            "medianMs": 0.06233599999995931,
+            "p95Ms": 0.07303300000057789,
+            "maxMs": 0.07303300000057789
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.0537015499998688,
+            "medianMs": 0.05244499999935215,
+            "p95Ms": 0.07155099999999948,
+            "maxMs": 0.07155099999999948
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.saltwind_remnant.20",
+          "definitionId": "faction.saltwind_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34433,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06006189999993694,
+            "medianMs": 0.05850599999939732,
+            "p95Ms": 0.06866700000045967,
+            "maxMs": 0.06866700000045967
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.0791907499998615,
+            "medianMs": 0.07660699999996723,
+            "p95Ms": 0.11801699999978155,
+            "maxMs": 0.11801699999978155
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.wardhall_remnant.21",
+          "definitionId": "faction.wardhall_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36309,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06046444999988125,
+            "medianMs": 0.05965799999921728,
+            "p95Ms": 0.06638800000018819,
+            "maxMs": 0.06638800000018819
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.07924564999998437,
+            "medianMs": 0.07825700000012148,
+            "p95Ms": 0.09681300000011106,
+            "maxMs": 0.09681300000011106
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.rimehorn_clans.22",
+          "definitionId": "faction.rimehorn_clans",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36819,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.060081600000148686,
+            "medianMs": 0.058606999999938125,
+            "p95Ms": 0.06664700000055745,
+            "maxMs": 0.06664700000055745
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.06629754999999023,
+            "medianMs": 0.06537699999989854,
+            "p95Ms": 0.07265499999994063,
+            "maxMs": 0.07265499999994063
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sable_steppe.23",
+          "definitionId": "faction.sable_steppe",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36904,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.058508450000090306,
+            "medianMs": 0.057947999999669264,
+            "p95Ms": 0.06238500000017666,
+            "maxMs": 0.06238500000017666
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.06116495000010218,
+            "medianMs": 0.06020100000023376,
+            "p95Ms": 0.0744169999998121,
+            "maxMs": 0.0744169999998121
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.morrow_spore.24",
+          "definitionId": "faction.morrow_spore",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36606,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06093240000000151,
+            "medianMs": 0.060711000000083004,
+            "p95Ms": 0.06591300000036426,
+            "maxMs": 0.06591300000036426
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.0743115000000671,
+            "medianMs": 0.07423500000004424,
+            "p95Ms": 0.07924199999979464,
+            "maxMs": 0.07924199999979464
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        }
+      ],
+      "note": "24 seats reuse twelve distinct cultures, not twenty-four authored identities. Single cold generation sample plus untimed exact regeneration. Planning/read samples use real founded, otherwise unmodified first-town states and filtered full observations; actual queue proposals are separately validated. This is origin/young production cost, not a mature empire, end-turn, worker transfer or rendering measurement."
+    },
+    {
+      "size": "legendary",
+      "seats": 12,
+      "distinctCultures": 12,
+      "rosterVersion": 3,
+      "generatorVersion": 4,
+      "initial": {
+        "turn": 1,
+        "cells": 307200,
+        "seats": 12,
+        "distinctCultures": 12,
+        "armies": 24,
+        "formations": 24,
+        "settlements": 0,
+        "characters": 0,
+        "claimed": 0,
+        "worked": 0,
+        "improvements": 0,
+        "cultivatedCells": 0,
+        "pendingLandWorks": 0,
+        "retainedBattleReports": 0
+      },
+      "originGenerationMs": 68.67916200000036,
+      "originGenerationSamples": 1,
+      "repeatedOriginIdentical": true,
+      "originHash": "d82dc992",
+      "originSaveBytes": 2664667,
+      "originRead": {
+        "permittedCells": 61,
+        "knownSeats": 1,
+        "ownArmies": 2,
+        "observedArmies": 2,
+        "ownSettlements": 0,
+        "observedSettlements": 0,
+        "productionOptions": 0,
+        "canQueue": 0,
+        "readBytes": 11035
+      },
+      "physicalGeographySha256": "7895191e1fc711a3433c8a3a1570bfa649bf705c38cbfc36642ba36667a567ab",
+      "oldRoster2PhysicalGeographyIdentical": true,
+      "generatedSeatBindings": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact"
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council"
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march"
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide"
+        },
+        {
+          "id": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant"
+        },
+        {
+          "id": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod"
+        },
+        {
+          "id": "faction.mire_courts",
+          "definitionId": "faction.mire_courts"
+        },
+        {
+          "id": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant"
+        },
+        {
+          "id": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant"
+        },
+        {
+          "id": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans"
+        },
+        {
+          "id": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe"
+        },
+        {
+          "id": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore"
+        }
+      ],
+      "firstTownState": {
+        "turn": 1,
+        "cells": 307200,
+        "seats": 12,
+        "distinctCultures": 12,
+        "armies": 12,
+        "formations": 12,
+        "settlements": 12,
+        "characters": 0,
+        "claimed": 84,
+        "worked": 0,
+        "improvements": 0,
+        "cultivatedCells": 0,
+        "pendingLandWorks": 0,
+        "retainedBattleReports": 0
+      },
+      "firstTownHash": "b7a03be2",
+      "firstTownSaveBytes": 2677782,
+      "production": [
+        {
+          "factionId": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36311,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05911020000003191,
+            "medianMs": 0.05659800000103132,
+            "p95Ms": 0.08592499999940628,
+            "maxMs": 0.08592499999940628
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.14286590000010618,
+            "medianMs": 0.15228899999965506,
+            "p95Ms": 0.16366299999936018,
+            "maxMs": 0.16366299999936018
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "permittedCells": 60,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36410,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.054882699999870964,
+            "medianMs": 0.05405099999916274,
+            "p95Ms": 0.06449099999917962,
+            "maxMs": 0.06449099999917962
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.07863104999996721,
+            "medianMs": 0.07763399999930698,
+            "p95Ms": 0.08446300000105111,
+            "maxMs": 0.08446300000105111
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36351,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05700890000034633,
+            "medianMs": 0.055692999998427695,
+            "p95Ms": 0.08466000000044005,
+            "maxMs": 0.08466000000044005
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.10175725000035526,
+            "medianMs": 0.1009009999997943,
+            "p95Ms": 0.1085800000000745,
+            "maxMs": 0.1085800000000745
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34078,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.053407750000042144,
+            "medianMs": 0.05310000000099535,
+            "p95Ms": 0.06056600000010803,
+            "maxMs": 0.06056600000010803
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.16324704999997267,
+            "medianMs": 0.1274409999987256,
+            "p95Ms": 0.8281520000000455,
+            "maxMs": 0.8281520000000455
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34475,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05401629999987563,
+            "medianMs": 0.05324000000109663,
+            "p95Ms": 0.06105999999999767,
+            "maxMs": 0.06105999999999767
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.052641800000128566,
+            "medianMs": 0.052026999999725376,
+            "p95Ms": 0.05717000000004191,
+            "maxMs": 0.05717000000004191
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 37013,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.0536802999999054,
+            "medianMs": 0.05313000000023749,
+            "p95Ms": 0.0569550000000163,
+            "maxMs": 0.0569550000000163
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.07597294999986844,
+            "medianMs": 0.07403300000078161,
+            "p95Ms": 0.08566700000119454,
+            "maxMs": 0.08566700000119454
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.mire_courts",
+          "definitionId": "faction.mire_courts",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36100,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05920210000040242,
+            "medianMs": 0.05444600000009814,
+            "p95Ms": 0.14195400000062364,
+            "maxMs": 0.14195400000062364
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.043283299999893644,
+            "medianMs": 0.04190999999991618,
+            "p95Ms": 0.06132599999909871,
+            "maxMs": 0.06132599999909871
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34649,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05496085000004314,
+            "medianMs": 0.052983000001404434,
+            "p95Ms": 0.0649489999996149,
+            "maxMs": 0.0649489999996149
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.03975085000010949,
+            "medianMs": 0.03964599999926577,
+            "p95Ms": 0.04281499999888183,
+            "maxMs": 0.04281499999888183
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36551,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.056009700000140585,
+            "medianMs": 0.05446200000005774,
+            "p95Ms": 0.07352200000059383,
+            "maxMs": 0.07352200000059383
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.08180194999977175,
+            "medianMs": 0.08149599999887869,
+            "p95Ms": 0.09226599999965401,
+            "maxMs": 0.09226599999965401
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36470,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05462865000026795,
+            "medianMs": 0.05426699999952689,
+            "p95Ms": 0.058727000001454144,
+            "maxMs": 0.058727000001454144
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.042066799999793146,
+            "medianMs": 0.04053600000042934,
+            "p95Ms": 0.06262400000014168,
+            "maxMs": 0.06262400000014168
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36179,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05269219999963752,
+            "medianMs": 0.053391999999803375,
+            "p95Ms": 0.06523500000002969,
+            "maxMs": 0.06523500000002969
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.10483179999982895,
+            "medianMs": 0.10378700000001118,
+            "p95Ms": 0.11607000000003609,
+            "maxMs": 0.11607000000003609
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36365,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05025034999989657,
+            "medianMs": 0.05013200000030338,
+            "p95Ms": 0.05267899999853398,
+            "maxMs": 0.05267899999853398
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.06602975000005244,
+            "medianMs": 0.06395999999949709,
+            "p95Ms": 0.08646299999963958,
+            "maxMs": 0.08646299999963958
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        }
+      ],
+      "note": "24 seats reuse twelve distinct cultures, not twenty-four authored identities. Single cold generation sample plus untimed exact regeneration. Planning/read samples use real founded, otherwise unmodified first-town states and filtered full observations; actual queue proposals are separately validated. This is origin/young production cost, not a mature empire, end-turn, worker transfer or rendering measurement."
+    },
+    {
+      "size": "legendary",
+      "seats": 24,
+      "distinctCultures": 12,
+      "rosterVersion": 3,
+      "generatorVersion": 4,
+      "initial": {
+        "turn": 1,
+        "cells": 307200,
+        "seats": 24,
+        "distinctCultures": 12,
+        "armies": 48,
+        "formations": 48,
+        "settlements": 0,
+        "characters": 0,
+        "claimed": 0,
+        "worked": 0,
+        "improvements": 0,
+        "cultivatedCells": 0,
+        "pendingLandWorks": 0,
+        "retainedBattleReports": 0
+      },
+      "originGenerationMs": 70.39360500000112,
+      "originGenerationSamples": 1,
+      "repeatedOriginIdentical": true,
+      "originHash": "80a3aa18",
+      "originSaveBytes": 2680933,
+      "originRead": {
+        "permittedCells": 61,
+        "knownSeats": 1,
+        "ownArmies": 2,
+        "observedArmies": 2,
+        "ownSettlements": 0,
+        "observedSettlements": 0,
+        "productionOptions": 0,
+        "canQueue": 0,
+        "readBytes": 11035
+      },
+      "physicalGeographySha256": "18d53795a145afec7de416f59e8c46d23467f4ab89182a6e90defd06a853362b",
+      "oldRoster2PhysicalGeographyIdentical": true,
+      "generatedSeatBindings": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact"
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council"
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march"
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide"
+        },
+        {
+          "id": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant"
+        },
+        {
+          "id": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod"
+        },
+        {
+          "id": "faction.mire_courts",
+          "definitionId": "faction.mire_courts"
+        },
+        {
+          "id": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant"
+        },
+        {
+          "id": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant"
+        },
+        {
+          "id": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans"
+        },
+        {
+          "id": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe"
+        },
+        {
+          "id": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore"
+        },
+        {
+          "id": "faction.ashen_compact.13",
+          "definitionId": "faction.ashen_compact"
+        },
+        {
+          "id": "faction.reedbound_council.14",
+          "definitionId": "faction.reedbound_council"
+        },
+        {
+          "id": "faction.cinder_march.15",
+          "definitionId": "faction.cinder_march"
+        },
+        {
+          "id": "faction.glass_tide.16",
+          "definitionId": "faction.glass_tide"
+        },
+        {
+          "id": "faction.iron_covenant.17",
+          "definitionId": "faction.iron_covenant"
+        },
+        {
+          "id": "faction.sepulchral_synod.18",
+          "definitionId": "faction.sepulchral_synod"
+        },
+        {
+          "id": "faction.mire_courts.19",
+          "definitionId": "faction.mire_courts"
+        },
+        {
+          "id": "faction.saltwind_remnant.20",
+          "definitionId": "faction.saltwind_remnant"
+        },
+        {
+          "id": "faction.wardhall_remnant.21",
+          "definitionId": "faction.wardhall_remnant"
+        },
+        {
+          "id": "faction.rimehorn_clans.22",
+          "definitionId": "faction.rimehorn_clans"
+        },
+        {
+          "id": "faction.sable_steppe.23",
+          "definitionId": "faction.sable_steppe"
+        },
+        {
+          "id": "faction.morrow_spore.24",
+          "definitionId": "faction.morrow_spore"
+        }
+      ],
+      "firstTownState": {
+        "turn": 1,
+        "cells": 307200,
+        "seats": 24,
+        "distinctCultures": 12,
+        "armies": 24,
+        "formations": 24,
+        "settlements": 24,
+        "characters": 0,
+        "claimed": 168,
+        "worked": 0,
+        "improvements": 0,
+        "cultivatedCells": 0,
+        "pendingLandWorks": 0,
+        "retainedBattleReports": 0
+      },
+      "firstTownHash": "bd27c952",
+      "firstTownSaveBytes": 2707567,
+      "production": [
+        {
+          "factionId": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36311,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06611434999977064,
+            "medianMs": 0.06454800000028627,
+            "p95Ms": 0.08442399999876216,
+            "maxMs": 0.08442399999876216
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.1331930499997725,
+            "medianMs": 0.14321299999937764,
+            "p95Ms": 0.16749299999901268,
+            "maxMs": 0.16749299999901268
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "permittedCells": 60,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36410,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06454029999995328,
+            "medianMs": 0.0641589999995631,
+            "p95Ms": 0.07066500000109954,
+            "maxMs": 0.07066500000109954
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.0757771500000672,
+            "medianMs": 0.0739819999998872,
+            "p95Ms": 0.08851300000060291,
+            "maxMs": 0.08851300000060291
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36351,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.0692340499996135,
+            "medianMs": 0.06523199999901408,
+            "p95Ms": 0.12044299999979557,
+            "maxMs": 0.12044299999979557
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.0954529999998158,
+            "medianMs": 0.09499099999993632,
+            "p95Ms": 0.10658900000089488,
+            "maxMs": 0.10658900000089488
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34073,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06304444999996121,
+            "medianMs": 0.062216000000262284,
+            "p95Ms": 0.07136700000046403,
+            "maxMs": 0.07136700000046403
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.1275850500002889,
+            "medianMs": 0.1231709999992745,
+            "p95Ms": 0.17148699999961536,
+            "maxMs": 0.17148699999961536
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34475,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06529599999985294,
+            "medianMs": 0.06447899999875517,
+            "p95Ms": 0.08381999999983236,
+            "maxMs": 0.08381999999983236
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.053797149999809335,
+            "medianMs": 0.05336700000043493,
+            "p95Ms": 0.05771699999968405,
+            "maxMs": 0.05771699999968405
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36023,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06977495000010095,
+            "medianMs": 0.06564400000024762,
+            "p95Ms": 0.13096299999961047,
+            "maxMs": 0.13096299999961047
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.119023549999838,
+            "medianMs": 0.11678599999868311,
+            "p95Ms": 0.12750299999970593,
+            "maxMs": 0.12750299999970593
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.mire_courts",
+          "definitionId": "faction.mire_courts",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36197,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06467665000018315,
+            "medianMs": 0.06398400000034599,
+            "p95Ms": 0.06966500000089582,
+            "maxMs": 0.06966500000089582
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.05545780000029481,
+            "medianMs": 0.05521700000099372,
+            "p95Ms": 0.05931299999974726,
+            "maxMs": 0.05931299999974726
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34356,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06312169999973775,
+            "medianMs": 0.06223300000056042,
+            "p95Ms": 0.06900300000052084,
+            "maxMs": 0.06900300000052084
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.05308759999988979,
+            "medianMs": 0.05185900000105903,
+            "p95Ms": 0.06185399999958463,
+            "maxMs": 0.06185399999958463
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36551,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.06056274999991729,
+            "medianMs": 0.05953199999930803,
+            "p95Ms": 0.06614000000081433,
+            "maxMs": 0.06614000000081433
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.08356599999979153,
+            "medianMs": 0.08272200000101293,
+            "p95Ms": 0.09412399999928311,
+            "maxMs": 0.09412399999928311
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36284,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.060217550000106715,
+            "medianMs": 0.05874900000162597,
+            "p95Ms": 0.07233199999973294,
+            "maxMs": 0.07233199999973294
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.05339349999994738,
+            "medianMs": 0.05269399999997404,
+            "p95Ms": 0.05948999999964144,
+            "maxMs": 0.05948999999964144
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36900,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05928705000023911,
+            "medianMs": 0.058267000000341795,
+            "p95Ms": 0.0640849999999773,
+            "maxMs": 0.0640849999999773
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.10179314999986673,
+            "medianMs": 0.1004400000001624,
+            "p95Ms": 0.13638800000080664,
+            "maxMs": 0.13638800000080664
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36435,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.059730399999989456,
+            "medianMs": 0.05908199999976205,
+            "p95Ms": 0.06361900000047171,
+            "maxMs": 0.06361900000047171
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.043247900000187654,
+            "medianMs": 0.04052100000080827,
+            "p95Ms": 0.06948199999897042,
+            "maxMs": 0.06948199999897042
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.ashen_compact.13",
+          "definitionId": "faction.ashen_compact",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36819,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05883350000012797,
+            "medianMs": 0.05799200000001292,
+            "p95Ms": 0.06328399999983958,
+            "maxMs": 0.06328399999983958
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.1122476500002449,
+            "medianMs": 0.11178000000109023,
+            "p95Ms": 0.12001099999906728,
+            "maxMs": 0.12001099999906728
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.reedbound_council.14",
+          "definitionId": "faction.reedbound_council",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36164,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05852670000022044,
+            "medianMs": 0.057950000000346336,
+            "p95Ms": 0.062380000001212466,
+            "maxMs": 0.062380000001212466
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.09145910000006552,
+            "medianMs": 0.09114500000032422,
+            "p95Ms": 0.10000899999977264,
+            "maxMs": 0.10000899999977264
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.cinder_march.15",
+          "definitionId": "faction.cinder_march",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 37101,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05854369999997289,
+            "medianMs": 0.058070999999472406,
+            "p95Ms": 0.06290699999954086,
+            "maxMs": 0.06290699999954086
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.11784985000012967,
+            "medianMs": 0.11533600000075239,
+            "p95Ms": 0.1363390000005893,
+            "maxMs": 0.1363390000005893
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.glass_tide.16",
+          "definitionId": "faction.glass_tide",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34571,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.058094599999913045,
+            "medianMs": 0.05709999999999127,
+            "p95Ms": 0.0720870000004652,
+            "maxMs": 0.0720870000004652
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.0385158500002035,
+            "medianMs": 0.038395999999920605,
+            "p95Ms": 0.04215000000112923,
+            "maxMs": 0.04215000000112923
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.iron_covenant.17",
+          "definitionId": "faction.iron_covenant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 34633,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.057373999999981606,
+            "medianMs": 0.05622899999980291,
+            "p95Ms": 0.0669610000004468,
+            "maxMs": 0.0669610000004468
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.039137200000095615,
+            "medianMs": 0.038494999998874846,
+            "p95Ms": 0.043087000000014086,
+            "maxMs": 0.043087000000014086
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sepulchral_synod.18",
+          "definitionId": "faction.sepulchral_synod",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 37133,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.07574665000011009,
+            "medianMs": 0.06454200000007404,
+            "p95Ms": 0.11908700000094541,
+            "maxMs": 0.11908700000094541
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.10055954999997993,
+            "medianMs": 0.0995889999994688,
+            "p95Ms": 0.10933700000168756,
+            "maxMs": 0.10933700000168756
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.mire_courts.19",
+          "definitionId": "faction.mire_courts",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36168,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.057967649999864077,
+            "medianMs": 0.05650500000047032,
+            "p95Ms": 0.07062799999948766,
+            "maxMs": 0.07062799999948766
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.07322484999995141,
+            "medianMs": 0.07228199999917706,
+            "p95Ms": 0.10091599999941536,
+            "maxMs": 0.10091599999941536
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.saltwind_remnant.20",
+          "definitionId": "faction.saltwind_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 35060,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.054794700000002194,
+            "medianMs": 0.054389000000810483,
+            "p95Ms": 0.05921399999897403,
+            "maxMs": 0.05921399999897403
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.0765253999995366,
+            "medianMs": 0.07579200000145647,
+            "p95Ms": 0.08613399999921967,
+            "maxMs": 0.08613399999921967
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.wardhall_remnant.21",
+          "definitionId": "faction.wardhall_remnant",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36799,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05812144999981683,
+            "medianMs": 0.057555999999749474,
+            "p95Ms": 0.06160300000010466,
+            "maxMs": 0.06160300000010466
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.10090710000022227,
+            "medianMs": 0.1007049999989249,
+            "p95Ms": 0.10940800000025774,
+            "maxMs": 0.10940800000025774
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.rimehorn_clans.22",
+          "definitionId": "faction.rimehorn_clans",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36370,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.05820684999998775,
+            "medianMs": 0.05751099999906728,
+            "p95Ms": 0.06498199999987264,
+            "maxMs": 0.06498199999987264
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.06256139999995866,
+            "medianMs": 0.06227200000103039,
+            "p95Ms": 0.0704120000009425,
+            "maxMs": 0.0704120000009425
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.sable_steppe.23",
+          "definitionId": "faction.sable_steppe",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 35933,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.058063250000031985,
+            "medianMs": 0.05742599999939557,
+            "p95Ms": 0.06235299999934796,
+            "maxMs": 0.06235299999934796
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.051645550000284854,
+            "medianMs": 0.05117699999937031,
+            "p95Ms": 0.05706100000134029,
+            "maxMs": 0.05706100000134029
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        },
+        {
+          "factionId": "faction.morrow_spore.24",
+          "definitionId": "faction.morrow_spore",
+          "permittedCells": 61,
+          "knownSeats": 1,
+          "ownArmies": 1,
+          "observedArmies": 1,
+          "ownSettlements": 1,
+          "observedSettlements": 1,
+          "productionOptions": 14,
+          "canQueue": 10,
+          "readBytes": 36609,
+          "observation": {
+            "samples": 20,
+            "meanMs": 0.057067450000067764,
+            "medianMs": 0.05669999999918218,
+            "p95Ms": 0.06052000000090629,
+            "maxMs": 0.06052000000090629
+          },
+          "planning": {
+            "samples": 20,
+            "meanMs": 0.03634270000011384,
+            "medianMs": 0.03564900000128546,
+            "p95Ms": 0.043777000000773114,
+            "maxMs": 0.043777000000773114
+          },
+          "proposalTypes": [
+            "adoptInstitution",
+            "queue",
+            "setWorkedTiles",
+            "moveTo"
+          ],
+          "productionItems": [
+            "building.granary"
+          ]
+        }
+      ],
+      "note": "24 seats reuse twelve distinct cultures, not twenty-four authored identities. Single cold generation sample plus untimed exact regeneration. Planning/read samples use real founded, otherwise unmodified first-town states and filtered full observations; actual queue proposals are separately validated. This is origin/young production cost, not a mature empire, end-turn, worker transfer or rendering measurement."
+    }
+  ],
+  "timingScope": "Run in an explicitly reserved host window. Total wall time includes verification; labeled operation distributions do not. No renderer, browser, chronicle materialization or incremental-storage performance is measured. --smoke uses eight campaign rounds/two samples and is never a full-workload result."
+}

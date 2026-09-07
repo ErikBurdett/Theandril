@@ -1,0 +1,2009 @@
+{
+  "schemaVersion": 1,
+  "batchId": "saltward",
+  "status": "PRELIMINARY_REVIEW_NOT_APPROVED",
+  "reviewer": "Codex mapgen art-preparation agent; final independent approval reserved to root reviewer",
+  "reviewedAt": "2026-09-06T09:08:59.354Z",
+  "generation": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "seed": null,
+    "sourceIndex": "assets/art/source/faction-expansion/saltward/generation.json",
+    "originals": 30,
+    "toolCalls": 30,
+    "rejectedAttempts": 0,
+    "firstObservedCompletion": "2026-09-06T08:35:37.000Z",
+    "lastObservedCompletion": "2026-09-06T09:03:33.000Z",
+    "timestampMeaning": "UTC completion observed immediately after each built-in tool result; not an invented provider-side timestamp."
+  },
+  "validation": {
+    "nativePassed": 30,
+    "processedPassed": 30,
+    "candidates": 30,
+    "approvedByThisReview": 0,
+    "processedRgbaIdenticalToNative": 0,
+    "staticContract": "One idle/se frame at 250 ms, loop false. No movement/attack animation claimed.",
+    "commands": [
+      "node --import tsx scripts/art.ts generate --family saltwind_remnant",
+      "node --import tsx scripts/art.ts generate --family wardhall_remnant",
+      "node --import tsx scripts/art.ts review --family saltwind_remnant",
+      "node --import tsx scripts/art.ts review --family wardhall_remnant"
+    ],
+    "checks": "validateAsset against retained master palette on all native and processed frames; originals passed bounded PNG/genuine-alpha and silhouette-margin preflight before preparation."
+  },
+  "layout": {
+    "native": {
+      "columns": 5,
+      "order": "Lexicographic asset ID, row-major",
+      "families": {
+        "saltwind_remnant": [
+          "character.engineer.saltwind_remnant",
+          "character.marshal.saltwind_remnant",
+          "character.surveyor.saltwind_remnant",
+          "settlement.city.saltwind_remnant",
+          "settlement.town.saltwind_remnant",
+          "settlement.village.saltwind_remnant",
+          "ui.badge.saltwind_remnant",
+          "ui.banner.saltwind_remnant",
+          "ui.crest.saltwind_remnant",
+          "unit.cavalry.saltwind_remnant",
+          "unit.colonist.saltwind_remnant",
+          "unit.guard.saltwind_remnant",
+          "unit.heavy_infantry.saltwind_remnant",
+          "unit.scout.saltwind_remnant",
+          "unit.spearman.saltwind_remnant"
+        ],
+        "wardhall_remnant": [
+          "character.engineer.wardhall_remnant",
+          "character.marshal.wardhall_remnant",
+          "character.surveyor.wardhall_remnant",
+          "settlement.city.wardhall_remnant",
+          "settlement.town.wardhall_remnant",
+          "settlement.village.wardhall_remnant",
+          "ui.badge.wardhall_remnant",
+          "ui.banner.wardhall_remnant",
+          "ui.crest.wardhall_remnant",
+          "unit.cavalry.wardhall_remnant",
+          "unit.colonist.wardhall_remnant",
+          "unit.guard.wardhall_remnant",
+          "unit.heavy_infantry.wardhall_remnant",
+          "unit.scout.wardhall_remnant",
+          "unit.spearman.wardhall_remnant"
+        ]
+      }
+    },
+    "processed": {
+      "columns": 6,
+      "order": "See retained per-family processed-order-v1.json, row-major"
+    }
+  },
+  "inspection": {
+    "nativeAndProcessedAt1xAnd4x": true,
+    "approved": false,
+    "inGameReviewed": false,
+    "notes": [
+      "Saltwind: petrol/tar-dark human kit with auburn and brass accents, broken-keel heraldry, stilt/quay buildings and angular sail-like roofs; distinct from Wardhall masonry and purple cloth.",
+      "Saltwind: infantry, heavy shield-bearer, spear, bow scout, cart colonist, mounted cavalry and surveyor map have distinguishable silhouettes; the small human figures remain dark and densely detailed at native size, which requires final reviewer judgment.",
+      "Saltwind: town flag consumes some of its native height, so body mass is smaller than the city; all three development stages remain visibly distinct.",
+      "Wardhall: chalk-grey/slate-violet practical military and masonry vocabulary, riveted armor and kite shields; no glow, nullification or revived-throne claims.",
+      "Wardhall: square heraldry is readable in badge, banner and crest; the tiny armor/shield motifs can simplify to a closed-looking square at native size.",
+      "No visible clipping or opaque checkerboard rectangle in the reviewed candidate silhouettes. Checkerboard in contact sheets is the review background, not candidate alpha.",
+      "Pixel Snapper/Aseprite processing is not RGBA-lossless here: all thirty processed frames differ from their pre-tool native frames, including contour alpha changes. Both stages and their exact hashes remain available; no fabricated bit-identical claim.",
+      "These are thirty static role illustrations, not animation clips or naval-unit artwork. Final independent approval, in-game contrast/fog/LOD review and atlas publication remain pending."
+    ]
+  },
+  "contacts": [
+    {
+      "path": "assets/art/source/faction-expansion/saltward/saltwind_remnant-native-1x-v1.png",
+      "sha256": "29e2a0e10c65877ccbd107d6dcaa1c086292d46da254db022df2cf568bbe09a7",
+      "bytes": 343518
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/saltwind_remnant-native-4x-v1.png",
+      "sha256": "8698ee1354046658aeed5be49af5933f67c832eb25558a277755a8f705e2697a",
+      "bytes": 4640673
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/saltwind_remnant-processed-1x-v1.png",
+      "sha256": "b6bca176226da33ae8161f9d802247a3b61327dff341fb1b896293aaef979a26",
+      "bytes": 400697
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/saltwind_remnant-processed-4x-v1.png",
+      "sha256": "8072f8dd05941160a951b3500f18f0c5100d95f0fa8566955aa116655e0ad754",
+      "bytes": 5399285
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/saltwind_remnant-processed-order-v1.json",
+      "sha256": "f9e8f65276c9e9a093a365e20d6002b97f6fe23f66985a84ae6285a8b178d00c",
+      "bytes": 1699
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/wardhall_remnant-native-1x-v1.png",
+      "sha256": "6f0a649ef94473f162aba44e83df4ffc804f59bc4c464d948488030f41d8b5cd",
+      "bytes": 359467
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/wardhall_remnant-native-4x-v1.png",
+      "sha256": "2720be987c618ba0082bfba1b0755acb25573c45aa71d934bf104b5bc044d920",
+      "bytes": 4894938
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/wardhall_remnant-processed-1x-v1.png",
+      "sha256": "f056a942d458c7ecb8516383761438ba126710f451383369651cebca2355140f",
+      "bytes": 415885
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/wardhall_remnant-processed-4x-v1.png",
+      "sha256": "4379232accb9baceb6d41ab407dea020a08ff588aec659eb9cc2484342ad32e2",
+      "bytes": 5643564
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/wardhall_remnant-processed-order-v1.json",
+      "sha256": "5b615f5263176c06dacfe88cf060b9d64f689b5ae60b9ed37f4eafcb30b0e2e2",
+      "bytes": 1699
+    }
+  ],
+  "assets": [
+    {
+      "id": "unit.guard.saltwind_remnant",
+      "sourceHash": "687610ba8385be60de8cb84a7a921098154749e07bbcdf98f3e14c767cbba623",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "ef99d0c61968111b1cf564ac0194a16df6df964923fa0e6d1001a626fa86b6c0",
+      "nativeRgbaHash": "72fe8c166c5fb5d0c2d1622696bb8366fe2b786aa5e4a2fc093f103a2e2b739f",
+      "processedRgbaHash": "2917131017e583e525cb181d0f221966c25c180479a7dfe309b445e0d5a1900f",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "11734b7fbbee14aac272f4f3a45ac10a7f47edab43b82927e4ce0aca7df3ea68",
+          "inputHash": "687610ba8385be60de8cb84a7a921098154749e07bbcdf98f3e14c767cbba623",
+          "outputHash": "4441591a17dff0a622ecfbd3da3e341a699fde206d1b80a0bc4efa1686ae08e9"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "4441591a17dff0a622ecfbd3da3e341a699fde206d1b80a0bc4efa1686ae08e9",
+          "outputHash": "f57c0de2b6bd334363e7dd2311b684f595b2a8a73d21fcaf6148523a2729c0ed"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "f57c0de2b6bd334363e7dd2311b684f595b2a8a73d21fcaf6148523a2729c0ed",
+          "outputHash": "f246a53a8821da89be29f86bcf5b19b4656fb30516f715bfd5e3ab3424ebb873"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "a26ed90b31267d938d9da3c5f38d52bb43784d0fc7813e462aef72b8540fd708",
+          "outputHash": "2998ab107a4fdf0867579666aada60d2bf7088564c05769f1eaeffda05ba5e0f"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "07e04974b5a22ec99f6f967dd1fe087e3bbd04679107ab313fa901b74296e65d",
+          "outputHash": "5c80d88d2346880af2b5d68c1d9660e325b68abbb60f7dc8ab1bba63717fb363"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "4de5a66148fbae8c4d759688919fc479db5b0e5ab5718c3843ebc790a8978134",
+          "outputHash": "439758408ec65e354ed914f53ff4771a6cc111d0b60581ffd4ed3031a99faa8f"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.guard.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/unit.guard.saltwind_remnant.json"
+    },
+    {
+      "id": "unit.heavy_infantry.saltwind_remnant",
+      "sourceHash": "14e096cfdd0189c8f430eef6640b91c82ef2b063a73e830f4afaf4f3e9eb4e40",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "48b8fa202d42ec346b78f0acc999216f1dc7ec5b97bb80ece2d0cdce15b08bde",
+      "nativeRgbaHash": "d087aaf8a40d17f6e01275ac1406b59c07e098741ee3c3dc285936515c52a25a",
+      "processedRgbaHash": "89d1375513bb877c5ce3a6a6170ccf4966728de106dd1facd02f759c6b17b056",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "159a89a1b7e87426b08539e57da9b2fe11626bcccf4e5088c85cff31557fc288",
+          "inputHash": "14e096cfdd0189c8f430eef6640b91c82ef2b063a73e830f4afaf4f3e9eb4e40",
+          "outputHash": "0fc7c68c6ba3cfdf646a8c669f966012e08eeeeb8dcd6c23bc289d5703f5c68e"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "0fc7c68c6ba3cfdf646a8c669f966012e08eeeeb8dcd6c23bc289d5703f5c68e",
+          "outputHash": "b261181088fd8665d1cc89236545747c1552e2fc1704b6dbc57fc3eed369d308"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "b261181088fd8665d1cc89236545747c1552e2fc1704b6dbc57fc3eed369d308",
+          "outputHash": "4d5576700343d563be4e22924d262a3f5a20cb1b3c59fa59614ea09dabfa3463"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "d6f8650c552bbddc44f5c24de0c2030b5a04999b21fa7ffa545aff00a482e1de",
+          "outputHash": "4ca273ac9837f94d38ce609a402be57dc42ae89d9dbfefc473b1c5172325c943"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "aeddd567e07f85a3714685f283cda444d654d54dc2257cfddcebbf97b2f08d62",
+          "outputHash": "8150dc5ea268461e3a5308fd3da3e09e51c3677d4f917af25526435ff3fb4d17"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "f7ca9bae9818e706e95973a210122bb89f716702992fcd803330e87bb4c72ec2",
+          "outputHash": "2e9b705fc4946ae75934b0dc2d47ca7bf12dec1a543473ca3093dc04c51a36d8"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.heavy_infantry.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/unit.heavy_infantry.saltwind_remnant.json"
+    },
+    {
+      "id": "unit.colonist.saltwind_remnant",
+      "sourceHash": "3c710793aa6818cb10191ef8665d25a3e8f631e3d7d6de60cd1ed715c572b295",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "f9a7d0199ff48d61a1b3cc540fab33bde8ec2d5c6a73d7eedc0bfd388768b3a6",
+      "nativeRgbaHash": "ec8628cbf3306929da66a98764535c33157fb75ef74e4e966e2d5b0347ed9729",
+      "processedRgbaHash": "7d6f42c6532dd59ce3d0943cdf4da6fe0fa188bb4d90250108becad7ddd6e77c",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "3f351f3c98bcf75b35ffa907689a2ec749ab316b1448855adb6f54d837d8fbc8",
+          "inputHash": "3c710793aa6818cb10191ef8665d25a3e8f631e3d7d6de60cd1ed715c572b295",
+          "outputHash": "7918d00c35847027c6817009eab5d576205deff8026ca376136164e4eb7fbf1a"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "7918d00c35847027c6817009eab5d576205deff8026ca376136164e4eb7fbf1a",
+          "outputHash": "07f392ec4d48242941c57839dce175ee7b82cd0713d7104fcce88d86ace6cfa7"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "07f392ec4d48242941c57839dce175ee7b82cd0713d7104fcce88d86ace6cfa7",
+          "outputHash": "7f246a889d07818f218bbf16c3e459528871cce8a63afe8e6604382bc2fee4b7"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "73f27dc0aa8e2b17093f9c4e5a890b29084aaa82f18d2e7a5159cf7e7269a957",
+          "outputHash": "bee07764d4b29173d031da6fe96790e3bfb64c338c6ae6cf08b189a74db654c0"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "1cd2b800fdc93bbd7d809bb98ce680e49a9208d446376b0ec2ecbbdaa48d4302",
+          "outputHash": "ba21ef73fa046ff73d32429eb2cbe610ae797f80c6b23cc5de84e10f38d36770"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "ba33cb3d17efa1ff0db69a4055490e7a89a0877edee9153c93a74b29da63a3c9",
+          "outputHash": "0b1b7634d3700a1630485e7f02bec017c6df56d9f69d137e966763cfc4effc8d"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.colonist.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/unit.colonist.saltwind_remnant.json"
+    },
+    {
+      "id": "unit.spearman.saltwind_remnant",
+      "sourceHash": "2b58b184915025c6a96a47bd5e94985cb5460f0e33cd61f97e570f4c76264cf1",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "94c150ac0809b9dbd958e7afcd4489de4876a4e51b533ad10fef638515ba8937",
+      "nativeRgbaHash": "f0d6f4773c9657d848e60c73713629c8a2d2a08ac4f799aee5ca05ea8f6a58f9",
+      "processedRgbaHash": "511cffe65290d7934453ba836d0964de552b12e038ba32e38bda47f65c7db50c",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "97ae05d8f2f25a1d3b6a912a1973d474177cf79cd70234f03f1c060410074b07",
+          "inputHash": "2b58b184915025c6a96a47bd5e94985cb5460f0e33cd61f97e570f4c76264cf1",
+          "outputHash": "bd6388bfe5ef1fff23b6bbd1dde923ab424bb94f6b253e967214b7aafe56cdb3"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "bd6388bfe5ef1fff23b6bbd1dde923ab424bb94f6b253e967214b7aafe56cdb3",
+          "outputHash": "8014639a7878531bbe82e23c81ae1e23ef10f20be7ec96f1d46789921c229d02"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "8014639a7878531bbe82e23c81ae1e23ef10f20be7ec96f1d46789921c229d02",
+          "outputHash": "05e1651402dfb52d5fabb216ae69c68af383e4ea286c0281cd62df29354c1909"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "c6cd03c6b05f3200e42c0a818460d25fc88c9842e12ebc6a2c5e2881e5b4af73",
+          "outputHash": "a513d2200659bbb0b4799da54169a128e02369d50979c0c3c70d9a1e3c9044f1"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "b022d12ae1c077ddffad251b43c257177d9c999578032c91342feba9b12cfb9d",
+          "outputHash": "33033519affb624a230f16290420ea5264e16fda3a5717a55a74074433b44a25"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "edadf4df9c541f28515476813c16a1c703d0be5b88b5e5d6ac3996ef52db2491",
+          "outputHash": "7b9db84748827f91eb5c5decf75a73cf00fedb3535642817538c7485dee099ec"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.spearman.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/unit.spearman.saltwind_remnant.json"
+    },
+    {
+      "id": "unit.scout.saltwind_remnant",
+      "sourceHash": "f3a6400a2bf02727876cddbfccdd1e1a240870300adc364a31607557c2c879ac",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "4683388c34a11d7bfd173b4b107633002b234d4536df03449dc31e9f098f6d68",
+      "nativeRgbaHash": "12d73338065e4e5f19a79e7c2ba04d3ff3fbaddde9977284cd7e02959ac1fe79",
+      "processedRgbaHash": "e5303350dd9ec0ecbab1250e99ebb4b96af2cf3d554793ffff7db6c69bf7c5b4",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "d02c87931aaa8a1888757983d04a92816087bdcd86e74c2ebc9c94bf1633d1b8",
+          "inputHash": "f3a6400a2bf02727876cddbfccdd1e1a240870300adc364a31607557c2c879ac",
+          "outputHash": "cba7aea47496765c4ffd8e1545b15c6507cf92ec3972a97caecfb04501233d82"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "cba7aea47496765c4ffd8e1545b15c6507cf92ec3972a97caecfb04501233d82",
+          "outputHash": "2d6f6968b46900d55cd32db6a82fec0f6901623a3ed6cdc96b9254726b21bee7"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "2d6f6968b46900d55cd32db6a82fec0f6901623a3ed6cdc96b9254726b21bee7",
+          "outputHash": "8a6f92fd54d57dd8de506c3a19d35f8d85c3433fe1aab48e25ffed59166abe26"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "467b1cfb6b4dce135829166d7f02471201823ca1bac5fa0a75ba32e77b4cfcfe",
+          "outputHash": "689081747a5ccc597c4c9d2e85bb713bc7eaa030fc6973cb06b19e1d219c3e7b"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "5e93c3b04af29f67d6b14518aa3a183f70e06fce3a715b12adb2bbbb911af3d2",
+          "outputHash": "41555b45e4f7716aa43ba78b7ab44be6d70c4909c7affdbdcbd10649f0d61da1"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "aad26cf203ff46beca6fc86693bc6f675322223044af779b38cdf53bd0c83289",
+          "outputHash": "55ad63dd6ea4ccc9ff86c4eaee558733c0a0faddaea60d57b79be4b0901c5a4c"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.scout.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/unit.scout.saltwind_remnant.json"
+    },
+    {
+      "id": "character.engineer.saltwind_remnant",
+      "sourceHash": "d872ff291d55ad34e21df0a0cda103c69c38cce16cf10e5733eda0fffed0e53d",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "7d7c0b782b83123a8c994a96b1d0ca150ae5e31751fe0c5afe52fd90a9585425",
+      "nativeRgbaHash": "989ede4b0a6aafa851fe75262124efff68626266a48dbe06d301eccc0996ccff",
+      "processedRgbaHash": "c4435d1ff0600cfee9056f220acbe26f81cfc8ec8eba9220f9c700d5b8d05ab5",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "c784de1552ca8159264565e2e3f5aeff5154c586b76b4a304b8203af011a5924",
+          "inputHash": "d872ff291d55ad34e21df0a0cda103c69c38cce16cf10e5733eda0fffed0e53d",
+          "outputHash": "4926dcfb3ecb8ddf205c2f943b417986feb319368755b282a1f111d5e9534fd6"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "4926dcfb3ecb8ddf205c2f943b417986feb319368755b282a1f111d5e9534fd6",
+          "outputHash": "f27322358fcf4123a885c0e68d4577a8a1cdfddecb1a7603669404b6e5566ab5"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "f27322358fcf4123a885c0e68d4577a8a1cdfddecb1a7603669404b6e5566ab5",
+          "outputHash": "7b871bca69ffbc0270cd36b08100686c17930291d2552276d7887acf586d60eb"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "403bf459bfdfbe130dfa4672fb8bdb0207cb03e2fbf0f376404e15cda0954058",
+          "outputHash": "07f6f2fb2de3e0ad24254cfdb0f6e89144a1aef4938521a9af472fcd4bda5d70"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "808ea1b9b48eb5bc3e5f597607298ccc446539b1a0060feb42f49c9aeae67ecb",
+          "outputHash": "ccb4e55fc22c4b5cf51a615657f9e5ac998ca62650ef1d9f76bb5c652a2cc0fd"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "0b77d75f0e46e177b91e2ef12fb27126eac98fed441141653214edfb9a670fee",
+          "outputHash": "2459f837fb0056d737eeda92376fa75fe5518401547239da19ee344b5f0f1606"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/character.engineer.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/character.engineer.saltwind_remnant.json"
+    },
+    {
+      "id": "character.surveyor.saltwind_remnant",
+      "sourceHash": "1086f09c73d8a57ed170aa3eb52b48b2a0a6fa81aedca952c7fd2ab7ecb693a6",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "556177662f47b5098ab78932a602dd5fe9c13daed6b2817e9daa90b884bb0f6b",
+      "nativeRgbaHash": "5fee2008ddff427dd70719f96c04849cc73114246e65c2e73abf26ecab22d23a",
+      "processedRgbaHash": "bd0994d5c49ca4e41935c17ae897e71f1e017eaeeb1b195ff07e4c249be00b57",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "bfccddbb26b8ca9f6ab5fd144ccbc2764ff5648c0cab9e8e8591c10b34c423d0",
+          "inputHash": "1086f09c73d8a57ed170aa3eb52b48b2a0a6fa81aedca952c7fd2ab7ecb693a6",
+          "outputHash": "d5461e5eb587c2af21ad43e2aba448c0ffe0102f652e0dacab62ac8c841a5176"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "d5461e5eb587c2af21ad43e2aba448c0ffe0102f652e0dacab62ac8c841a5176",
+          "outputHash": "9ac07636ee6a9a269c5259c4d2e016661c4422549dc107bb69370f9a7d88fcfb"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "9ac07636ee6a9a269c5259c4d2e016661c4422549dc107bb69370f9a7d88fcfb",
+          "outputHash": "871bcc3776e7de4aa49eeaa887707dccaa0e69d242da73ad222edae24c6d94f8"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "fbe8149b460289e101008430d553bda669592afd1e34802fe2d3d006669da21e",
+          "outputHash": "621777d259a611f112354e11f499c956bee329ff62f29c4fe5252d117e0efdd6"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "08158713fa187b060605c7ade3e46bb325d0f9d780c663f7fa3cecce19537552",
+          "outputHash": "7463f3c523eb830931cf5ca4fe2316e306ae586dc0af8605e8093784de087be0"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "53a07d85110485ec19d1ddd814fbacfd4f472aca081a1f09483ed4294ef6f135",
+          "outputHash": "f49ea47efecf67d6c2291374f8b557d22e89444cab549892335ee1631e7b1cbd"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/character.surveyor.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/character.surveyor.saltwind_remnant.json"
+    },
+    {
+      "id": "unit.cavalry.saltwind_remnant",
+      "sourceHash": "fbc9c544d988f3fc43b8ae0d4c83b73c0e32dec25941563ebe54dc3d84c0fbc7",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "98f32d7518298088c7719698591593ba8497455f9ea0a90bac2f76984345adc1",
+      "nativeRgbaHash": "e51ac0a01bd9e21368819c1865f7ae6c7dd250cc9eaa112ffe4b4b0c7af3ff01",
+      "processedRgbaHash": "57d787e29515a00b6a5a42804f17f6208670fb7928b221567068b67d10b444a5",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-96",
+          "settingsHash": "88b974d701eb06b6495e08b741c8b5f4f4557cb5f528a5cb4e5411a16ba40d5c",
+          "inputHash": "fbc9c544d988f3fc43b8ae0d4c83b73c0e32dec25941563ebe54dc3d84c0fbc7",
+          "outputHash": "3e803bb24b9bc41e1188a7564b2e508d700ee6a2e3426ce69d6dee57b24a5724"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "3e803bb24b9bc41e1188a7564b2e508d700ee6a2e3426ce69d6dee57b24a5724",
+          "outputHash": "58a32ef53c66d2bce64507d624b42939e43d06c791487d5d0f8dee97c34728e9"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "58a32ef53c66d2bce64507d624b42939e43d06c791487d5d0f8dee97c34728e9",
+          "outputHash": "fec426742e1f9957d8bfb0c42552e749444c034c61411c4b36089a8c9cc47edb"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+          "inputHash": "925834886f3e046b179ec0b745efe3ca650b0eba214567e3e70eaf62d3776efc",
+          "outputHash": "968985414ec5b04090163f4679ad806576b5bf12a046a1362e13eb5530c7393c"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-96",
+          "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+          "inputHash": "c3c204401c62dd15d50791113228c02af9616b3d8e0d486f12c4f3720d35d45d",
+          "outputHash": "563f78e3bad5de7d3d997c400f48e842183f12bf9027cd40b75b6e5b7a0dacb8"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-96",
+          "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+          "inputHash": "d116e3ce9325f9c22455f9b943194717b83167b7e9f69bcacc53dea7050cc9f5",
+          "outputHash": "dce0b6ab091f4c0c8da83399fbbe845a91609043abe3706c9b2edb2ef4db215a"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.cavalry.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/unit.cavalry.saltwind_remnant.json"
+    },
+    {
+      "id": "settlement.village.saltwind_remnant",
+      "sourceHash": "c2668b466a180eb0574386f065a63151f04008a626f7a4205230ef850ce926eb",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "850d5334e6be995311b520bfa3cf30bb39df5ed01a1098b9213dd914f48312b6",
+      "nativeRgbaHash": "86a64d2c46f17ad2aa7a2be7d001910678b3e6b3d0c854ad1c2ebffb74b2f968",
+      "processedRgbaHash": "5e702703ae8e190a86fc7b91b8147a4148015be821f258eb31ce5982258cb267",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-96",
+          "settingsHash": "a17e61958b6d066e32f8ef07da3dc0bd94727306c9bae32b24c565a09a5e3538",
+          "inputHash": "c2668b466a180eb0574386f065a63151f04008a626f7a4205230ef850ce926eb",
+          "outputHash": "ad06938a2ce0e232a6f4e37ab808da3e7f12ea357d4fc4d6c39097d74f9be6dc"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "ad06938a2ce0e232a6f4e37ab808da3e7f12ea357d4fc4d6c39097d74f9be6dc",
+          "outputHash": "3d8c17c0516842737d1bac3c71cc7375fe4f0fb6ff5addcfbbfd73257bd22108"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "3d8c17c0516842737d1bac3c71cc7375fe4f0fb6ff5addcfbbfd73257bd22108",
+          "outputHash": "2f976e57c37593ef10ef6bdbf91401cd65e65d0bbb2f073b2cd578dfafb0a7cd"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+          "inputHash": "f2ec204b22c46931198d03a64d2f6553565cddf82c7ce9f828e05d0bca8e7023",
+          "outputHash": "765f519960ed892dbc5e36bc44104e919209642efdc6df68e72265eb8807f892"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+          "inputHash": "d79676ee1798d693998426a697a26001814bea6eafacfe171c82f4c95acc0d3f",
+          "outputHash": "26918db04c7dc66ea2cb481528a5cdd689a7d2ee66be12814271f05f886edd2f"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+          "inputHash": "52dd223a6a5d3efac797f4070d8144c7a722aa76997acec31a278b40ee61d9da",
+          "outputHash": "c514ea377f824c497ee44c852c62531d02409e3a0beacddaf06a649617746206"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/settlement.village.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/settlement.village.saltwind_remnant.json"
+    },
+    {
+      "id": "character.marshal.saltwind_remnant",
+      "sourceHash": "fcff36ee7d78e1e9e247e52a4a1c02b80201de021ca2d050cfd5259eab668e0c",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "c8df8dee6a58679c37675e9cdf5f31c26c4d81a190492a262cc0ab9565f6505d",
+      "nativeRgbaHash": "820a38baf185467f01508cb123b40d27c7ba5a626f6602dd8372bf318e405b0b",
+      "processedRgbaHash": "d8ab63d4a2c83d74558e6d76f4eca7cf69d3e94fbaaab058bc62d785e5792dc7",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "d61b3d5b71f1c066f679343f23218eb18fb1cd3f6dce805e24a2447b37031c76",
+          "inputHash": "fcff36ee7d78e1e9e247e52a4a1c02b80201de021ca2d050cfd5259eab668e0c",
+          "outputHash": "e930eb0cc5df916244c8ea800f503f8a208c0eb2ea1f16ad00495923d76e268f"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "e930eb0cc5df916244c8ea800f503f8a208c0eb2ea1f16ad00495923d76e268f",
+          "outputHash": "fa01d974a0790bc85c1bd8f36285cdfaa7ca2125735b846313ce310173d7fcb1"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "fa01d974a0790bc85c1bd8f36285cdfaa7ca2125735b846313ce310173d7fcb1",
+          "outputHash": "76b0a05120b388ca41686aea65519d662257b6a04071620e83226ecfacd531d0"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "9f0beea958c08951996cd85b53ce9f018e3778f7454fa6032a24d8d8416abc24",
+          "outputHash": "c417b0e7e1308e6aeaf5dcf8bca0365b1fa9e9186a3cf69683ee36d2f47d6383"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "981b355740befbbac45805dfa6e03e187c807c8e59cf20ff162311950443de02",
+          "outputHash": "64d20cea0b617283ec48b227292e9ec13d22827d5fa1651d9bc602748ccd3879"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "5f35685fe4300a14ab85469a57fb50cd57f9b138aee4a5b08518d1d544c511dc",
+          "outputHash": "c3ae39e404d33e3a4e48a2bc424acf941bfa127f8d7116093c6cf38dbe4af49d"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/character.marshal.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/character.marshal.saltwind_remnant.json"
+    },
+    {
+      "id": "ui.crest.saltwind_remnant",
+      "sourceHash": "6659df7dade31a3e80811e56eb523bf48dd24eaf5bcd3a041ee7c69caae9ea91",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "a5e24c2fc4c12b5bd21382f9a049c218ada49ff63f719365cbf2a9796bc78ea2",
+      "nativeRgbaHash": "58e3738638b985dcb76ca84f59f2629867c96d2beafbee3a0358e8a1b2847790",
+      "processedRgbaHash": "a7b4b3d972b75c8fc2d251cc8e2be6f0fd8b53ea97a036ea15f0d936c7815fe0",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "a766579b878354166919737ce3c215e2cd1b1a7cdc8af27c10d8bf951c8d2d7f",
+          "inputHash": "6659df7dade31a3e80811e56eb523bf48dd24eaf5bcd3a041ee7c69caae9ea91",
+          "outputHash": "7cca2cd79bf90db456e83b80f9aed3839652f2c8f9733448d58c828823082d16"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "7cca2cd79bf90db456e83b80f9aed3839652f2c8f9733448d58c828823082d16",
+          "outputHash": "7d0c4eefca60597eb64e53ee5a622a3f39d4b0a21e586b0e449370d3613b8fbe"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "7d0c4eefca60597eb64e53ee5a622a3f39d4b0a21e586b0e449370d3613b8fbe",
+          "outputHash": "93e93d04ae41d95e354bbc0be4f55a159bb2b645148b69282b45890e226fd45f"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "47529ea2d317e15f4d92878b758110a358701fa668630b83b2fb811f25291091",
+          "outputHash": "cda09916b40cb1531b45ea2d56fe6e3f546439ca0330f905c49f46007272ec0a"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "b0aff0151de0d4f10baa78359931deff1ee85edad04c28e8be330099cb32feeb",
+          "outputHash": "4a4147565a4006c0f5835353ed64942c38b45d9f5255795df24e15927745df96"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "32bc33680c0409b80484917974658e9f52543d2cfdb2e8401ddd29511031b478",
+          "outputHash": "4f9d9686a712558e62d8bc7f72f2eca9df264ece34d11f15987ade9854cd53a1"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/ui.crest.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/ui.crest.saltwind_remnant.json"
+    },
+    {
+      "id": "ui.badge.saltwind_remnant",
+      "sourceHash": "694ac6ad4781622a4fe90c810dcafb86012456d8b41ba247e0b8d8375db39ce2",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "c23ebf807803c10e96f6f5e2c7e2227195e7a41ab9cdb73d45cc737ee67056a2",
+      "nativeRgbaHash": "a30b2f20ce5af021173b6c70e409933e5e44fa15396780b552781c517bea254e",
+      "processedRgbaHash": "2757b97e829b88bfb6f1f4d166f2921ebd02acb3cbff06e0711c8b48b838f8cb",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-32",
+          "settingsHash": "11890212e44526a54fe3f939b527c42519269c617fa95194f8976257a0eea438",
+          "inputHash": "694ac6ad4781622a4fe90c810dcafb86012456d8b41ba247e0b8d8375db39ce2",
+          "outputHash": "fc9f7a769149d974ddbb6779773b1fedf1c02913a56d1c49f7dd12ac0f1c119c"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "fc9f7a769149d974ddbb6779773b1fedf1c02913a56d1c49f7dd12ac0f1c119c",
+          "outputHash": "0628e70f986de959159cb885d54136ddfcc257b2d83d126f13b5abdcad2a367e"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "0628e70f986de959159cb885d54136ddfcc257b2d83d126f13b5abdcad2a367e",
+          "outputHash": "80061b5d085338cb6e5951ae635a6fd829f36ff963fa10fc1a4463baa6c3df82"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+          "inputHash": "78336bd8183422249e204059e9d80248e7f315d75e69d7e12d8021165f244e1e",
+          "outputHash": "9e0ad7d7849b1523868809baadd12af0a9befc171235fab4d4dcfbc9f542e941"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-ui-32",
+          "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+          "inputHash": "3b84fb0377251757539b21e307cab98c5393acce2726cf1b9436adf5878d9188",
+          "outputHash": "94ee5333e2fce96ab9234e48aa8e33e53057069aa0fb2cda5fe3066d5eed5e5d"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-ui-32",
+          "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+          "inputHash": "a036cacd321878a1447caaea2a985fa9bf5e77d6ef30002d0371e612bec9142c",
+          "outputHash": "b027643e1f02885c345f1979f4ffe9f6ed72c7924f340bfe58702e0cd3bbda09"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/ui.badge.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/ui.badge.saltwind_remnant.json"
+    },
+    {
+      "id": "settlement.town.saltwind_remnant",
+      "sourceHash": "f69e51ba6a46afcfd589848a4a13da81d0695f443a2567134b4bd6da7bb82913",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "6852b5039858451e9ede33d1bcc8c1f2cfcb3c0de5ca4d6e5539c97a358af7fb",
+      "nativeRgbaHash": "6aed22ebb450783a0d012108f90bf5f63d322a98c56536e2be4bc9890e8034e6",
+      "processedRgbaHash": "b45698a1ecd5d1bdd25e085daeb21c0069449622e0fcbb28344e593fedfd6cb6",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-96",
+          "settingsHash": "90cc79ba01e7e38348894007050736aa66fbb0ccb1ff02423197b5cd7647ab8d",
+          "inputHash": "f69e51ba6a46afcfd589848a4a13da81d0695f443a2567134b4bd6da7bb82913",
+          "outputHash": "af333fc8e88fcd39e00e0d57d6b4a030e31d2b4bb27fe4cb32cf227d69db4d5d"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "af333fc8e88fcd39e00e0d57d6b4a030e31d2b4bb27fe4cb32cf227d69db4d5d",
+          "outputHash": "8da9002387bacebceb0a75c8d92037cee0d1695ab1490be5d2951d862255c1e6"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "8da9002387bacebceb0a75c8d92037cee0d1695ab1490be5d2951d862255c1e6",
+          "outputHash": "703e2d97708d07e1011947cf7f291435bfed81a0b13b24b6ed30ccce2238db3f"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+          "inputHash": "a1c51db20710b6f574cb7cb96e4e9e03349369ba8e5d4be505865a65187ea3c6",
+          "outputHash": "0dea9ef96d03ded97aa461d3bd94b2c7ab640aabe7249df28ddc24ed00bef84c"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+          "inputHash": "117cc3d90a4406e0949c1b6bf83aaa72b5add9d8af611392f2d95c3f8406bbb7",
+          "outputHash": "04d355b77c4161730a83987595454a0394a668ad8f5079d95b395fbffc03ede8"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+          "inputHash": "3f5517e85ad6d20f342b58e9f1552e80b309cad071e9addeb6a629540dc4eca9",
+          "outputHash": "279310bf5a7a56a73130fc8554c6ffc624353fb6d0e775aecbdbf401a42b1729"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/settlement.town.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/settlement.town.saltwind_remnant.json"
+    },
+    {
+      "id": "settlement.city.saltwind_remnant",
+      "sourceHash": "b4a019f8490cd1dc76b355a45e0506a7ff11aa978a280649c401693d37ca5c1f",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "bb470586988a4b46aa7ad139a77825e3d1bb42846b2f5fb04eff24e8a541614f",
+      "nativeRgbaHash": "6ca922b8a995ae86ca9679fc35c05411d16eda4849f7fbf86e11ccd2c52c3b1a",
+      "processedRgbaHash": "76b21eee05566bd5e7340e86a6bc2e0c97b07e2c4c0bf563012ad8cfb291c2ba",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-128",
+          "settingsHash": "93b577c5982e901942c5c118bc074a708aedf5f182d0325e0f5c5edbe3633568",
+          "inputHash": "b4a019f8490cd1dc76b355a45e0506a7ff11aa978a280649c401693d37ca5c1f",
+          "outputHash": "0026b3c1662640a1ea845930163b8c965c7a774a1b1f910735f305644191c491"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "0026b3c1662640a1ea845930163b8c965c7a774a1b1f910735f305644191c491",
+          "outputHash": "36855f42ba46bfcc9956b5a39ad5dd82941c65d25d3cc4faf58486967187b69c"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "36855f42ba46bfcc9956b5a39ad5dd82941c65d25d3cc4faf58486967187b69c",
+          "outputHash": "7b6428d0fbb304ec33997d14d08e1d4a467289783a8993409834eee595320273"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+          "inputHash": "0d791fc3600de2488e91f71d62224de91b31ba1b7d69be2088ba520be7f0230e",
+          "outputHash": "cdf94ac8ef61db312e7e3d1ae6b8b7a96617061254d00db1f0dcbaddb2939607"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-128",
+          "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+          "inputHash": "ecce33cc3f0ba0a7b70a19e6cdd27d85b3ca4ff16f6aba632d8ae59bd28772b6",
+          "outputHash": "7bddd40cbb445f3c18440cdbd1eae6e62525fd00cec7500002e16f419f907ea4"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-128",
+          "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+          "inputHash": "1c874e525c0474d2b62eb28285d457e486cf9e99e8cfd2c009e11e29ae65ddaa",
+          "outputHash": "906b9111a42d2306b06afb2170f749e92ab6482bd7188d1258f8147657ff3e5d"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/settlement.city.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/settlement.city.saltwind_remnant.json"
+    },
+    {
+      "id": "ui.banner.saltwind_remnant",
+      "sourceHash": "a9281f0a702c25f464fc5bf12475034ac8f699c8ba9e0630bee40f571a2d0da9",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "b144cbda488f443c679fc58bbe39a8dcb24b4909c65f96f53fa07a4afcd96147",
+      "nativeRgbaHash": "aedded5e057bb851e3037358664c1c06f3019ac3e822f045e51af02f633ade37",
+      "processedRgbaHash": "aefff3c2038da5bddad3982d0851a6b3520e4dd9cbd6fa2001105c4d6a90dd91",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "f2137c223b8d8731b86865fa4bc2c06d8c2206c4c7d7ae6b63db57bae7b7c5c1",
+          "inputHash": "a9281f0a702c25f464fc5bf12475034ac8f699c8ba9e0630bee40f571a2d0da9",
+          "outputHash": "e9f52912d8be12b36261aa8e677741078fadb8f431f12ec6198c77bfd22391f5"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "e9f52912d8be12b36261aa8e677741078fadb8f431f12ec6198c77bfd22391f5",
+          "outputHash": "b4e5218050d4dc4f0614cc8b1dbc6bf77e605d8b9bc1fa5d68768bf39585e18f"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "b4e5218050d4dc4f0614cc8b1dbc6bf77e605d8b9bc1fa5d68768bf39585e18f",
+          "outputHash": "da4f7da986bf75f5eaa68012e6addf8cd9cafcf8e3c725705a4bdfb04f046bdd"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "4e9c8ddfee8ba3e448bfcf3de161d6228d10f220f15981d0945331127fcedf50",
+          "outputHash": "2d62a7d041a8533278a48785eb0eb58ec90b000dda74806587bda406d22df570"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "5c2b4ef122534b8aec926f3f4147ba133e51f7953a12dcb2811399b65114f4ba",
+          "outputHash": "c76a611a2eacb8ac04a311f672a849adf9b41093865949879f7d9ac27b9634be"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "0292cfcdb75dc93e00bb471df24fa7d2123a6091075a5a4a8da74df813a6709e",
+          "outputHash": "865df706b43d7e13d164f2c9914e29c8d9e6429c544ac49f4d1ecb879cbda399"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/ui.banner.saltwind_remnant.json",
+      "briefPath": "assets/art/briefs/ui.banner.saltwind_remnant.json"
+    },
+    {
+      "id": "unit.spearman.wardhall_remnant",
+      "sourceHash": "0baff8ba1d2f768c3b1c183ef3421698dffda6ad1b3c4f1751ed5df2b3058310",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "5963498a4d55b4ab6103517a9a9671968779bd8c76322f5ddb0f533ed3e8591d",
+      "nativeRgbaHash": "46875d9100a13fb9933819186aa816b70cbd7ce4117ba7f552c1b0482867b23f",
+      "processedRgbaHash": "320d8940162f8c12f712817409fe49ef4f4d1d1e9f18f8f1ca47975abe151d2e",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "cfd7925ee6d5cb4e242373fafd242bb1c5d7e8e19e639d35eaca857badcaeefc",
+          "inputHash": "0baff8ba1d2f768c3b1c183ef3421698dffda6ad1b3c4f1751ed5df2b3058310",
+          "outputHash": "debf755d671969e17db32c309469913669a5ef968af5874c48c7cd3d11c2b4cf"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "debf755d671969e17db32c309469913669a5ef968af5874c48c7cd3d11c2b4cf",
+          "outputHash": "38f315aeabcbdfa32663de2204aa257d78f0709ab597cc0664c5ad1c314cfefa"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "38f315aeabcbdfa32663de2204aa257d78f0709ab597cc0664c5ad1c314cfefa",
+          "outputHash": "e17da62b800b141af62d27490f888d59d8be6cb6c618a534b12cd9410dd0228a"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "9571387d715e19fdba4e70f2d41c14912bca8f3fe33832dd25d9c48721b9c5cb",
+          "outputHash": "88beec747f62b2198d42185b40821b3b6224cdbd631bb6cae807712418d8a295"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "e11db162316627258c9c92e1384fa96386fc933bfa758bdfa7fbd00a96962e13",
+          "outputHash": "4aad355434d43f75d0466aad200c6ab7cebedfaf7e138bc87c4973ee15f7778b"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "279716737b9e6442f039530b0bb6584a114d5d899d1c729861a6d165160699ce",
+          "outputHash": "25653263b5b62f8f40288f675fe39f193ec767436ff6a7ee1c670579852d606e"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.spearman.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/unit.spearman.wardhall_remnant.json"
+    },
+    {
+      "id": "unit.scout.wardhall_remnant",
+      "sourceHash": "cb7c23b1fb41df27672029d76bf9cb9eca35872b65e4424e5a00aadafc6de319",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "fda002eda889153f074d78e811f0a4507c1a16685d010be8f57e0b98d74e22ee",
+      "nativeRgbaHash": "d34976b3f2b98ebe9998110764cb7dce5aba0be39f09abcc247c79f2264b9a5e",
+      "processedRgbaHash": "9f17e712b83d837ddcc97f07a2f780792745d221526ef3ad66e81dca10c9ffce",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "678eaceb175b221185338f277ebcf731e326a45c65531aafd88bbf8f9b25d411",
+          "inputHash": "cb7c23b1fb41df27672029d76bf9cb9eca35872b65e4424e5a00aadafc6de319",
+          "outputHash": "e1e4f4b63c19e2bd0ed1fcf3cb6088d675c1889c2de60ce4adff6fdcbc066f7e"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "e1e4f4b63c19e2bd0ed1fcf3cb6088d675c1889c2de60ce4adff6fdcbc066f7e",
+          "outputHash": "f08949138bca15c373a7a5f420dc5edf9524fefdea4f3830d47c1ab7a75d344f"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "f08949138bca15c373a7a5f420dc5edf9524fefdea4f3830d47c1ab7a75d344f",
+          "outputHash": "31530c9699a3a249ffac8ecc98480cc42edc9e5b27f3ea8ed41e7f29e53963fd"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "605f9fd2c5c8e802b698bc64ccc16cccf67db85ccce737e4acfb625e42188c48",
+          "outputHash": "b7fe6a1e05d46d6de91ef4d7958729421a6acbf5b6d92ac35bbb779b1303a02f"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "8c1a9c4c8f050ec48192c027626363f20e88001129f72c98ea505ae4e638e5f4",
+          "outputHash": "1a1c3b619831ed2ca207dae450a23f71478bd39548f59cae888cfd8c755c2eec"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "36e626e9c7976624a0f841515d0bbb8b55bf1665a6d0e6c5edc6137075f391c6",
+          "outputHash": "96248ff0030d2dff0a0714b79023cc84c39add16a65917e74d5e9d32fe44a98f"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.scout.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/unit.scout.wardhall_remnant.json"
+    },
+    {
+      "id": "unit.colonist.wardhall_remnant",
+      "sourceHash": "467b8c62fac33b717c7480e344c8efe9d7d956e626edc3393f04dfcfb52356a1",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "a55458cb8bffefb8a82d8564001ee476aec619223a61422ef8a874136bf0354a",
+      "nativeRgbaHash": "b250bc4b02c671a3897cbaa0c6d45fd204ea538f862a2f6e7d4dd900871df632",
+      "processedRgbaHash": "7dfc468fb4e35ef3a2da2a19a2aef093f4fe905d20581f057986455a96315d7e",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "81ca5964c8384bd3721ee1d62ed9200700c69fda4609062f19475e1d14e0df30",
+          "inputHash": "467b8c62fac33b717c7480e344c8efe9d7d956e626edc3393f04dfcfb52356a1",
+          "outputHash": "e3c32d819d051ef9fa9c089fcffd033e7fe3ddd47e101ec0e2be02ee0309cf5c"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "e3c32d819d051ef9fa9c089fcffd033e7fe3ddd47e101ec0e2be02ee0309cf5c",
+          "outputHash": "7b8bd0cf77a711c329c5d0fd4719e1a12b6a9916712e71b77f603566a9036443"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "7b8bd0cf77a711c329c5d0fd4719e1a12b6a9916712e71b77f603566a9036443",
+          "outputHash": "7b8c68491144afd9434c6a4b595f596103abcc8d83fcbc52425763ab9b378e73"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "00d3b4aa068b393040e1b926cd2c879c6d8ae4a8acb65d0f1483955f5236e295",
+          "outputHash": "da55641b61c1ceb05c0ae140ea5f600a0e953550d9be00a89300d1b3f4f2a2c8"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "3880227df6f4a7f54998b343a3283f414c2c6e89d6a5c28a6378cc4d22dc0092",
+          "outputHash": "d16e1cbcecc5d58acca24fc33ce5613a017b675f89a6cc8914dea259de746d03"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "a243a33f866e093bb8322b7c66c20ca352a4912ef0d39432d3ee26bc4bd652e5",
+          "outputHash": "d6ddbb9d05401ee3dd122769fc6048b97ffbbfd399a95db26072b3117da16553"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.colonist.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/unit.colonist.wardhall_remnant.json"
+    },
+    {
+      "id": "unit.guard.wardhall_remnant",
+      "sourceHash": "287b7bc46ca8952d5ce80ec32b8b537c1a3a61e82470b49bc7f7338a3b2fdfa8",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "cf789a14bf15006d7a6988ba144773012b35e027e2b5f17252efe19020f74f66",
+      "nativeRgbaHash": "e038d32528ef267599707b26b24d0f4791f54b01c719efdd941aabd85ccb2c4e",
+      "processedRgbaHash": "e07b615a6c8b558343ad72197299c48b76b3361135775c70f0c2d817efcb09b0",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "ae97875b3fe3db62364ac2d6d82f0059cda5f8f6433085251c205c80eee0ba7a",
+          "inputHash": "287b7bc46ca8952d5ce80ec32b8b537c1a3a61e82470b49bc7f7338a3b2fdfa8",
+          "outputHash": "8e028f8c21920d45c8f5b7a9a10464d8cd1ab607580a6baccbe05fa1ebdd7733"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "8e028f8c21920d45c8f5b7a9a10464d8cd1ab607580a6baccbe05fa1ebdd7733",
+          "outputHash": "3273e78b1437b4696e220dc1021079daba08d2f45aaf25f7574ba9788f4d7c11"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "3273e78b1437b4696e220dc1021079daba08d2f45aaf25f7574ba9788f4d7c11",
+          "outputHash": "fa5d040719d6d0baad946f1175596695c3093380f8d8a990938e55969c2fddb5"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "3b42a4d74699f293b0b00d30957ac78ca79eaed2dd28e1bb2c446ff6820e6214",
+          "outputHash": "d3ac48cf95950e68aadd48be41a941c1ead9dbe300e44d27ae4ad49c9c1fb3ff"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "c78582fdccc7aaa453abf7f177278888c8079a7d32305630bdfab1a6bdcb9bb1",
+          "outputHash": "778835060556c940961c176e4cbbd6179ca41d50be1df8b9c340f760544be185"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "9c97dcff05edefc08fd4e23be0c3b4d56a6cb774462800115ef3a8242551f86c",
+          "outputHash": "3d9dfc9279d690d95055d30f7d204c2685656e3745170554052229b32d605a5a"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.guard.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/unit.guard.wardhall_remnant.json"
+    },
+    {
+      "id": "unit.heavy_infantry.wardhall_remnant",
+      "sourceHash": "7ee982557e2e44ec88b900714e06bda93ff9d55a7d4d7f44c900f1a78634fb10",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "8bdd5cc16f37bd9743d9428e70dbd4bfefb76ca4baabb00e4c8e899f03b56bb4",
+      "nativeRgbaHash": "cda7c9ac9b9a0d28c66cec2368c86994c9ba2e802bf00be2026eacb21aa2d558",
+      "processedRgbaHash": "092cf0ebb5aa14b5fadd89e99c39c16c6f6d903d06fb51b0ce42485bde41d627",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "690ca22994c8f66c06d5b9318e89eeee035b370444472b4e296097b2447dcb40",
+          "inputHash": "7ee982557e2e44ec88b900714e06bda93ff9d55a7d4d7f44c900f1a78634fb10",
+          "outputHash": "da780da16797adf72ffb71df21ba0efd9e0eebbe9c94f846f8f165efe1849e82"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "da780da16797adf72ffb71df21ba0efd9e0eebbe9c94f846f8f165efe1849e82",
+          "outputHash": "68653661d13d2b478aae4e9b86b6116ea7897795334c07b2ce44503495d1d9c7"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "68653661d13d2b478aae4e9b86b6116ea7897795334c07b2ce44503495d1d9c7",
+          "outputHash": "c605edf982502b5194667ddb89e9ef59288bf51a14336854f258aaf08737707d"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "53247d5dfe469e7c9ebf2a01043950a6179aa6baebc09272715217e7a6b8ae73",
+          "outputHash": "eb777306109206fc96e3f804e1cc91c863ba32a6feb87788a6b987ee43ce545c"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "ebe0ed2f623bb756d7d9572cc006b4ff7db60ba9ce7112d522915bcbd9f32c2e",
+          "outputHash": "cebee73642d85e73157dea1253ed1c4afc3951183998bd037cb4182d6590738c"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "fc0869f21b10b72b3653ed8b4d44dd9e760da377a21b25857b358c7e15c4feec",
+          "outputHash": "061585c217b3e909fbb489de37950eead69310cf3958e08838a64aee5216b456"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.heavy_infantry.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/unit.heavy_infantry.wardhall_remnant.json"
+    },
+    {
+      "id": "character.marshal.wardhall_remnant",
+      "sourceHash": "68ad4a0f66b1614a9bb906aab804e2796129c8e2f7ad8b4dcd0f4cce513e02c0",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "e12da12d776d88a705205e1e0802fef4b334a7d87baa82f9803c234a271365fb",
+      "nativeRgbaHash": "9b71746bead6f6d1c5d37d389c3c27cc6f512ff92a4c17080aea27f798caec26",
+      "processedRgbaHash": "488b17d778568af1109bb984d175f00ee2c7ae776c2122c225c79078aee1ecc1",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "f43ac291aecf75b17081f4544b2d67feec70185b4c638ffeed3b2cc1650dc54d",
+          "inputHash": "68ad4a0f66b1614a9bb906aab804e2796129c8e2f7ad8b4dcd0f4cce513e02c0",
+          "outputHash": "4d092a9ae7e0333d7a7a137233b86ff2ba8fc0894d86a332a0c07b650b244a90"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "4d092a9ae7e0333d7a7a137233b86ff2ba8fc0894d86a332a0c07b650b244a90",
+          "outputHash": "9029f00d16e85e685586cc112a7f71e952d29f5d01b43b6cd3b2280d878270ec"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "9029f00d16e85e685586cc112a7f71e952d29f5d01b43b6cd3b2280d878270ec",
+          "outputHash": "783bd32e83d3e74e0127bc90788d4776e31d605f38b9da90e36c0ce215492d61"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "93eaeb2aec8747f455aed0d0b2692f7dc07a000b7186f1ddd80d99ac55df3adf",
+          "outputHash": "bb46ad25ebc95ce809fd91fbbe4353e86fe1ac90fffd0d9cfbee748c997e85cb"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "1054a8d9f6e82da837410e7f77eba4212eb40b7f53cb4edc2fd2ad2319868f76",
+          "outputHash": "49aefdffaed3114107bee63032f5ac0918f6e2055ee472424a1706e79c1684b2"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "24cd5f142341d694c72996e4906592919c499e9f1583d735cfa64f69b4f3c377",
+          "outputHash": "4642e52defdc68464f9f9bb4dd7a2ce7fc65770440a8615c528c0ac2dbb72536"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/character.marshal.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/character.marshal.wardhall_remnant.json"
+    },
+    {
+      "id": "settlement.village.wardhall_remnant",
+      "sourceHash": "373c9055af2a252c4459ed7661f33e2337456c010ee80fcd80c07acbb4c58154",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "2a49f174ab8a8fcd3f67a07403227a1d8a679756caca79f2f9f5b68f2c6b45f1",
+      "nativeRgbaHash": "96eadf722c132a6024c125a3edc8435045f87d19810bdae706a43748e53c9282",
+      "processedRgbaHash": "933a592ed94712279dda1c2d0e8e24bb40368bb29487d7f4170fc9fed3b19856",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-96",
+          "settingsHash": "c2562c5093a56aa448923fcf7afa0a1fd97b25d76a202431f3dcd5000fd4f33b",
+          "inputHash": "373c9055af2a252c4459ed7661f33e2337456c010ee80fcd80c07acbb4c58154",
+          "outputHash": "f126498b426b06d63d467f87198c2c3688b14ef7d747423a3b71067cf26d38bc"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "f126498b426b06d63d467f87198c2c3688b14ef7d747423a3b71067cf26d38bc",
+          "outputHash": "12bf1736f901d30ab6ff5c6f2b44dda67eb49d654ddf8e5d86f892308c28db7a"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "12bf1736f901d30ab6ff5c6f2b44dda67eb49d654ddf8e5d86f892308c28db7a",
+          "outputHash": "c6b5e93eea525787314732c03194999d53d90d51e5e2a0011c229ebd8d013b98"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+          "inputHash": "b695018485d775ba8deff637f477cbe82a45c6baf41a367839d2f6acc799ab78",
+          "outputHash": "f05cc9c58883068ba9b9ef99dcce7adfe05189f6fc3468b1ff08d29370d3d280"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+          "inputHash": "f1b64f4a40bfe2df26705ca3c4119ce70b925afa6bcdaf1065f510e2c872472f",
+          "outputHash": "3ca71567e6e4ba880ad2e7af7bf0dbf4084eec2ce99ea13e857c4cec76ffb318"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+          "inputHash": "6d25d3478ada6c9866143d93aad2a63499aa19f5b9f324c48abbbb90377d19f8",
+          "outputHash": "fb925a11f53dc713f1d8ab73252c59f2c0d6887af54f4ffdd320facce0fb36b7"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/settlement.village.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/settlement.village.wardhall_remnant.json"
+    },
+    {
+      "id": "character.surveyor.wardhall_remnant",
+      "sourceHash": "601288e4d32fdccc33b236a981d9bd95da2d4dad2179edbff771973c4aa5d709",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "23abc368cc774dbe5156e34b5db2893a56bcfca68b99f733742b854d1eb1095d",
+      "nativeRgbaHash": "1e75788de3b3348cd813f1e1a9fc5e281bc3911e217f3561446832f2addfb224",
+      "processedRgbaHash": "57f4afe15f6b297fe7ee89cf97b08eead9efe96237f0aabf7d52ba25117a61f6",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "a9699cd9503c5094ba2ad2e09254e2f1cf23858e772cb8c9ee0c5ae5b3513493",
+          "inputHash": "601288e4d32fdccc33b236a981d9bd95da2d4dad2179edbff771973c4aa5d709",
+          "outputHash": "e3c2e5cd7c5ff2521c03770bfbd3d3bc3005cb409717e9dcffb451dc21705e54"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "e3c2e5cd7c5ff2521c03770bfbd3d3bc3005cb409717e9dcffb451dc21705e54",
+          "outputHash": "ffc1676e6f6d67284d50a260023381912ee5f4dd0007304a6ade681edc358201"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "ffc1676e6f6d67284d50a260023381912ee5f4dd0007304a6ade681edc358201",
+          "outputHash": "e11c4f5aff145047294ed6b1a75d3940c510ff1e2c2efd21a6015fc1572773e4"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "577665440678d9719ee55f2d8f9b4999fa4473cf280201e55c5f4196ef5e3734",
+          "outputHash": "06db7178c782363ea52978afff70b6d24af5951333dc5da830df2ee87e1df3ab"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "d7b30444a311db00893819d802a5d44958e4b1fa2bd98315a966043744a09d12",
+          "outputHash": "6ddf5f3a64ba6c78f9e9aa1ff8ebafabc3a7616c33b7dc23c905792281d96cde"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "7870599bee7af7ec5e160b702cf4e3f8ec057c719e7b1cfafa94a821dd058b8f",
+          "outputHash": "eac5ee12f5a784fcab7028f12673c8ca0c5de13b916b7e98356cea4574360b31"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/character.surveyor.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/character.surveyor.wardhall_remnant.json"
+    },
+    {
+      "id": "unit.cavalry.wardhall_remnant",
+      "sourceHash": "663d308716f7a2a6513b0d14814e0c0d445dc8024e184783dc95abe6a59a9fc4",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "21fbfcc6d7c21968533facc9cfb7df327357f7ec514104583af18bf0ecfce28a",
+      "nativeRgbaHash": "9674ee4da6c2b8ef22d4ba4aac77cd4a241990cac169aa3cac4b9f159170f128",
+      "processedRgbaHash": "3599df4b619e42caf04adbb35587359b26a6a0e7ab69416f52daccb476f260e3",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-96",
+          "settingsHash": "d57e8f1aca9d5773d2745fdc8146a505cc41a70e6d8e54740ac72f0437335363",
+          "inputHash": "663d308716f7a2a6513b0d14814e0c0d445dc8024e184783dc95abe6a59a9fc4",
+          "outputHash": "b6170ea5b35fb41d3dc7fc3893e11944965f11b9646f222439d73f9ae2345536"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "b6170ea5b35fb41d3dc7fc3893e11944965f11b9646f222439d73f9ae2345536",
+          "outputHash": "8e36802df25f74df87777457e18e8388e73fe310e44ddbbf5e3cd09c1bafdf06"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "8e36802df25f74df87777457e18e8388e73fe310e44ddbbf5e3cd09c1bafdf06",
+          "outputHash": "ee1d07f303c93df2efe9f6b0d2df613e3c1949474a7fcf070f8eda1762712b4b"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+          "inputHash": "20a0ceeaf0d1037adb6307cf3e2323ef7a0bb02e131d23f8f0eff77452dd7d0e",
+          "outputHash": "fc8a876e73f2f0354f5f1ff1b5716ca8cd6536dbebdad6d24e09cfde9910aab2"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-96",
+          "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+          "inputHash": "39aba0af8d070329b23301a0dc10820fb46e78dd0065593f211fea0ba7fdfd5b",
+          "outputHash": "01d653ad88b21deac6351bb0bc973c8bf4270e922ac343f47270d90f6e4a49d2"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-96",
+          "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+          "inputHash": "4d0e2c4fc9a3b0ec1ab1b98c1d51ed2619e8192ceacfee1859f23aff1c1309cb",
+          "outputHash": "f93459d8c0da3438ba9250bfc6135abe2da370b16ab3592e9d8ff05244d6c0e7"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/unit.cavalry.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/unit.cavalry.wardhall_remnant.json"
+    },
+    {
+      "id": "character.engineer.wardhall_remnant",
+      "sourceHash": "d300cff9fe6bf920e6d9c07b23bd8c4429be3f5cfae4a94b8e7e5316a3580be7",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "0ed137511f76c0e1339e738fd30297488dd8d56763617172d8518bcda6b81e9e",
+      "nativeRgbaHash": "95462bc49bf53490a317e6319874f981a7c70b53e3a267100e949672924e96c4",
+      "processedRgbaHash": "ea1f06a5a4976b1289d07f5693260b23c74cf940cc6bd22eb7c7002d06f654a0",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "1da7bcf75e28e6e73bba5d7d93f9fd173e20d7dbd03723d5f2ab7544c2c4a355",
+          "inputHash": "d300cff9fe6bf920e6d9c07b23bd8c4429be3f5cfae4a94b8e7e5316a3580be7",
+          "outputHash": "cf3f9badb533f10c51dbb85e823b1a817cd598dc9dde43a167cccdf655df68ba"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "cf3f9badb533f10c51dbb85e823b1a817cd598dc9dde43a167cccdf655df68ba",
+          "outputHash": "2e4bdcab9da45b62c4dfac516933a69313dd436467fb786f7b82a25064811c76"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "2e4bdcab9da45b62c4dfac516933a69313dd436467fb786f7b82a25064811c76",
+          "outputHash": "463fb364dd5f411de0d8df7eaa42199b28fd1b78d9ffee91c029ff1c4f582d2a"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "74bd3ac2ae6287149037f0c3fa39b26b2b77d0aa823813607a4d3579069880d4",
+          "outputHash": "e0f5baa19d949a27340c75e4daf2db60bf6fef8f175e96478a013a3cba3310e7"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "8e7a31c61071ba45b8e61d16acef41ade85758d55404243b83fa5004da181c3b",
+          "outputHash": "fa3f1d0a5326c0a5bc84d345b465f5efb1f9190ca02b8b098154d9d136ad47b9"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "9fc5b0d1ee03876ea927d763dcda90555d9afa56f182145d7dd3780c9087198f",
+          "outputHash": "5fad8301ba2f19ae1980f3a629c73cad577f1b9e976bdb545cc5eb0c6076f48d"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/character.engineer.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/character.engineer.wardhall_remnant.json"
+    },
+    {
+      "id": "ui.badge.wardhall_remnant",
+      "sourceHash": "d62a5e58eac110a9499f0ac0f9994aec4926162e3bd3a6208ed3a9e49fb548d6",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "6deb583786887ad991a93ad62bffc9954d53b5ef1c4eae31c9ad5112194fe9f7",
+      "nativeRgbaHash": "6177214c6396eb7c0c82ee9bfa6a318fbf761ec4b7d8900a654c38fcbbb550ed",
+      "processedRgbaHash": "73e951814d9c65342b582a4c553620622c7d92f17b28d93cb2ebbc7f25a6dd6e",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-32",
+          "settingsHash": "e6a85e1cfa9d7c0e37a2d779be8ec46724d94cee445b6c7751947cf79ff2f281",
+          "inputHash": "d62a5e58eac110a9499f0ac0f9994aec4926162e3bd3a6208ed3a9e49fb548d6",
+          "outputHash": "fa64bf6decc63c3a8ca68d84e82978ffd7548086fade4e2cf0725789834319cd"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "fa64bf6decc63c3a8ca68d84e82978ffd7548086fade4e2cf0725789834319cd",
+          "outputHash": "2544a3fded90c089f3c3d38602d8e5a16ba422dc14255f945c3f7de1ee081ef8"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "2544a3fded90c089f3c3d38602d8e5a16ba422dc14255f945c3f7de1ee081ef8",
+          "outputHash": "fd751f457a1aa8f081a9b6e5cb641f3d1aadf326e5eac1f37a7d1928e3d1dfce"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+          "inputHash": "3f7817db17b1a1548ae4b3462f5bfb703fd34cb26d8dbb7c1dad21a5c34521ca",
+          "outputHash": "c4383ced2b814abded03686abd8bd306ce50455f4ecbea9de5454a5bf4bc75d3"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-ui-32",
+          "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+          "inputHash": "d3f0a3cbb49943e30993e9cfd251f1bfde629c7da64e97369900649a291e2265",
+          "outputHash": "f77e9dd2d9a3e4645ef29dda93cfc26003c7f588f43343a610df2c6bf93d29b9"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-ui-32",
+          "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+          "inputHash": "610ceee21bdf7f868ed1914b51737b5d93614ec13c2828c44143d9a27af3e069",
+          "outputHash": "42801e672417193c028f9077004f62b6b75af49ed07f7090adfe44e1030d1111"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/ui.badge.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/ui.badge.wardhall_remnant.json"
+    },
+    {
+      "id": "ui.banner.wardhall_remnant",
+      "sourceHash": "36ba9150eacf7881513e8103c825a8cca911df7413a3229fd4364b3c8d9a646e",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "0e57c94454f9f27b62a21ceb2cc6f697e3cc1730a498105cd87de3a57d06b437",
+      "nativeRgbaHash": "a4da3a349055ab4a81bde05261f2fbdf73d2653ff453a8e031d1c9c83cc2f1d5",
+      "processedRgbaHash": "fe6374274b1b8d6b1b01d1e69523c59b8036ca04ececfb7cfe8b0ebc1a9e8951",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "c127061745f6489a1851b6c377deec6f663f1dccca2f821fe3dd436bc21ad70e",
+          "inputHash": "36ba9150eacf7881513e8103c825a8cca911df7413a3229fd4364b3c8d9a646e",
+          "outputHash": "a9981396c452488538d1e21be93e5bd847f06058d5c9845b9b0ead6719fe979c"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "a9981396c452488538d1e21be93e5bd847f06058d5c9845b9b0ead6719fe979c",
+          "outputHash": "39a694bca2d8da3cc440188054dbe12b92acc9bf0820cab4437d7bdaff8d7d0e"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "39a694bca2d8da3cc440188054dbe12b92acc9bf0820cab4437d7bdaff8d7d0e",
+          "outputHash": "e92b73d48808fd512b07eae0ce52a7b215c8d537ef40c6eefe4601df32fc73f2"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "15de20ad9172c8462edc667ac23c3b20662e1eaa402e21631af9161e08deba4c",
+          "outputHash": "a74b033a1b4fdd2a916179a0bb2f0fed685af1ba8d2a18867886a6c5f45a4ecd"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "b3cec1b3e44108182dbbb3a3c134f7367255387a4714dbbd07efec62561b519d",
+          "outputHash": "8746139162864eb97383f35f6e870c4483bccba9d61363a0c194c409ebd18005"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "f8e2b703230ada97bd6e78d3f49709b92eea2ad3617805d9bba954a6e40f84c6",
+          "outputHash": "f099ec5ffddc47cf69e501544b66cf7b2a601a27f3a05be0ef9ccf55b7b16c23"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/ui.banner.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/ui.banner.wardhall_remnant.json"
+    },
+    {
+      "id": "settlement.town.wardhall_remnant",
+      "sourceHash": "f272d71549bf13d96f555da5b2e931e8de2f5d6d58364550607dfcaf22214bbc",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "399a3f08d494020dbf88cc563c7a1ddfa45968675b70ed47fd561dddb0cc541b",
+      "nativeRgbaHash": "d447c29baf33e6d98fe4656b90549ee1ccb4d36322d0c3e426dcf97522420832",
+      "processedRgbaHash": "9a22c0a0b6b51b6d77175442f1b57c073e7ea5a036d018628826071e30ffc15b",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-96",
+          "settingsHash": "b8ed2235eb4355ee8a890caee639ec8a0d0a94bdda8caad5ae1de9cb0ca2b5ab",
+          "inputHash": "f272d71549bf13d96f555da5b2e931e8de2f5d6d58364550607dfcaf22214bbc",
+          "outputHash": "efabc0d684d396c6530edbcdf325d4db3d30a767528106adf8f07dd881ff05c8"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "efabc0d684d396c6530edbcdf325d4db3d30a767528106adf8f07dd881ff05c8",
+          "outputHash": "71ba9ea779c753468247889472444c48d8c38f7ee5d2e1440a55dce6d8540dc9"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "71ba9ea779c753468247889472444c48d8c38f7ee5d2e1440a55dce6d8540dc9",
+          "outputHash": "d3bee104de04f09b2e63d3c8300bc257c2a45b73e5619bc5111a462771382b9d"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+          "inputHash": "c1b55e6cd7fbe7f6e42854d12cede2ba95df94b6588178cbefe237b3fbbb4567",
+          "outputHash": "63393e2b16aa09069137dd8fb8e29d971f4b0a3535c26d76750dfb7fc2d52e0a"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+          "inputHash": "8f2f07372cce972d72d1f9d9000079f8a3ad0428533252461d6bf0bafa1a34aa",
+          "outputHash": "407682a1fac75d7e5c58d17cb88719b529053fc968f446becbb55a26602a053a"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+          "inputHash": "e37fb3d8d5e38444558a8534419c8c1031bf952fdef6ab8774ccebe15cb923dc",
+          "outputHash": "7a674b6207eccfdd5209f1f47d6198ba67f14ae1bcbee1b06953161884ea1a2c"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/settlement.town.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/settlement.town.wardhall_remnant.json"
+    },
+    {
+      "id": "settlement.city.wardhall_remnant",
+      "sourceHash": "313d71b446c51ca5661ec1531ecb056ba2b27f3f9848cd9cfc13f7b9fcc62410",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "1f7d215e29fed957abb6c67306be6567e8046183d5c284bc755180913d3a954f",
+      "nativeRgbaHash": "f4a784304f8e0bb1835a52a416b39d94d8201f891994321c563b9d64fddd9e6a",
+      "processedRgbaHash": "baa3b7ec2d13b6a7604b1bb874dace589f3c2ffc10fd15cb5b46c0a892cc095a",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-128",
+          "settingsHash": "566ba1889ed9b6cb790e8a0193b4a2265651cf344829596b7ed1b98a1c2e3c00",
+          "inputHash": "313d71b446c51ca5661ec1531ecb056ba2b27f3f9848cd9cfc13f7b9fcc62410",
+          "outputHash": "ebbd0cb21090c3c9d76d84987bbc20b3219a249fb73113527cd8e138cb3131f7"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "ebbd0cb21090c3c9d76d84987bbc20b3219a249fb73113527cd8e138cb3131f7",
+          "outputHash": "0f432b10af069b1142a43fd25905f0cac374b585d18540e8c5ac27f88afb9ce5"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "0f432b10af069b1142a43fd25905f0cac374b585d18540e8c5ac27f88afb9ce5",
+          "outputHash": "0f984d9ab48591887e8f9696e1270d2f1d3aafd2636d5d7c563a38bc0b352621"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+          "inputHash": "799567753f2e4880e645eb06b040b213028b265cd589ab095630232a346d1c85",
+          "outputHash": "7673c930a3b76b30741a372fcd0579f62b41080c36151176666cd43af1023492"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-128",
+          "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+          "inputHash": "11151829a5c71d73335558fea0bd77ddcc04b39200e3503032bcc028b8ddbbbe",
+          "outputHash": "8298a81bee337fb08ea4fcc6a6f2d71cc0c5a2d8de228810809afd06d35812e0"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-128",
+          "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+          "inputHash": "3fa520c4d032ae94f0fb40445ada0b005ecdae43fe887ff2a8477042cdb0782a",
+          "outputHash": "de3c1456380969c48276142acf2e67733711992762fb9ce24460b5ac8dae21ab"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/settlement.city.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/settlement.city.wardhall_remnant.json"
+    },
+    {
+      "id": "ui.crest.wardhall_remnant",
+      "sourceHash": "13a944addf4410d761ca81a9b8f7bf2adf2b91605fa5646b1462fac5458c9b05",
+      "status": "CANDIDATE",
+      "passed": true,
+      "errors": [],
+      "inputHash": "91af41542e6106d2de2f371bb470a2f4bb73cd02dec688a3ac03d4c9b48d4ac0",
+      "nativeRgbaHash": "5cbb4b749dc8f95fb2eff18b5a7548c733f3100efdabc49f5c3e706e77ce8587",
+      "processedRgbaHash": "0feb01272eaca6c25d7c9348804aa96841ea773136fb4df3b7e78ea5b9442add",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-64",
+          "settingsHash": "64d404ea1f88f8bc34605243c778b71ef23ae30c8e648cbc3cfe88702830c09d",
+          "inputHash": "13a944addf4410d761ca81a9b8f7bf2adf2b91605fa5646b1462fac5458c9b05",
+          "outputHash": "2eea4d1c23b97adfce3d8af1aa45d85c0d0c7796a852a646e8042944a69a3e05"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "2eea4d1c23b97adfce3d8af1aa45d85c0d0c7796a852a646e8042944a69a3e05",
+          "outputHash": "0c23b4f1ae435a7edb77d8e5cb83bc3650c90c94885e21b24d97414fc4a9d6e8"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "0c23b4f1ae435a7edb77d8e5cb83bc3650c90c94885e21b24d97414fc4a9d6e8",
+          "outputHash": "13ee0077653ab9fd2e7d8e864a3196c94459e8de0537db1c41adfde24a0cdbe9"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+          "inputHash": "564c02e503e27a74b197de344430b0efa54d9402c810fbcb16206cddd1bdc699",
+          "outputHash": "9ec8fdec37ff8601b4031123e43c82d03bd6f2981e65411579e0202ab1eddfb3"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+          "inputHash": "3af058bdc177e9c564a549012d110149ffa3d01c5c55a74158beb075a80d52ec",
+          "outputHash": "ada150d4c563ff0f1390221b0b146f98ca86495b7af88dfcf0c029a37373e4f1"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-unit-64",
+          "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+          "inputHash": "055a617963fe05a0d9058e7f43ebfc7fa36c042c18733f8c05ffdf1d46ee9e6d",
+          "outputHash": "2420213f47a8258f590416e7533a371d6be9b0076a806fc69c61f164148e3fb0"
+        }
+      ],
+      "candidatePath": "assets/art/candidates/ui.crest.wardhall_remnant.json",
+      "briefPath": "assets/art/briefs/ui.crest.wardhall_remnant.json"
+    }
+  ]
+}

@@ -8,7 +8,24 @@
 .skill-branch-panel .character-promotion{margin-top:8px;min-width:0;display:flex;flex-direction:column}
 .skill-branch-panel .character-promotion>small{font-size:10px;color:#b4ac8f;margin-bottom:7px}
 .skill-branch-panel .character-promotion>button{margin-top:auto;min-height:40px}
+.character-skills .skill-branch-panel .character-promotion>button{min-height:44px}
+.character-skills .character-promotion:focus{outline:2px solid #d8bc7a;outline-offset:3px}
+.character-skills [data-state=excluded]{border-style:dashed;border-color:#976f66}
+.skill-roadmap{margin:15px 0 20px;border:1px solid #4d5841;background:#121e18;padding:12px}
+.skill-roadmap>p{font-size:calc(11px * var(--text-scale,1));line-height:1.6;color:#afbb9f;margin:0 0 12px}
+.skill-roadmap>section+section{margin-top:13px}
+.skill-roadmap h5{font-size:calc(11px * var(--text-scale,1));color:#c9b98b;margin:0 0 7px;font-weight:500}
+.skill-roadmap ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:0;padding:0;list-style:none;border-left:1px solid #7c7753;padding-left:9px}
+.skill-roadmap li{min-width:0}
+.skill-roadmap button{display:block;text-align:left;width:100%;height:100%;min-height:44px;padding:9px;font-size:calc(11px * var(--text-scale,1));overflow-wrap:anywhere}
+.skill-roadmap button small{display:block;font-size:calc(10px * var(--text-scale,1));margin-top:5px;color:#bcb79b}
+.skill-roadmap button[data-state=learned]{border-color:#819765;background:#50634233}
+.skill-roadmap button[data-state=available]{border-color:#b8995d}
+.skill-dependencies{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.character-skills .skill-dependency{min-height:44px;margin:0;padding:7px 9px;text-align:left;font-size:calc(11px * var(--text-scale,1))}
+.skill-dependency span{color:#b9b093}
 .skill-branch-panel .skill-prerequisite{color:#d0c39b}
 .skill-acquired{background:#60784b17;border-color:#81895a}
 .army-command-warning{border-left:3px solid #ba9461;padding-left:10px}
 @media(max-width:700px){.skill-branch-panel{grid-template-columns:minmax(0,1fr)}.skill-branches button{min-width:85px}}
+@media(max-width:420px){.skill-roadmap ol{grid-template-columns:minmax(0,1fr)}}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.saltwind_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Saltwind Remnant, successor charter households after the old Saltwind League's fall, not a revived empire. Muted petrol cloth and auburn patched sailcloth, tar-black leather, weathered driftwood and dull brass rigging. Narrow practical nautical equipment; original angular broken-keel insignia (a simple split V-shaped keel, not an anchor). No bright blue sails, round glass ornaments or generic pirate skulls.\nSubject: One adult human quay engineer with rolled auburn sleeves, tar-black leather work apron, petrol cap, brass goggles pushed up on forehead. Carries a compact heavy wooden mallet and a loop of thick rigging rope, square tool satchel at hip. Full body and practical boots, no shield or magic.",
+  "frames": [
+    {
+      "id": "character.engineer.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.engineer.saltwind_remnant/7d7c0b782b83123a8c994a96b1d0ca150ae5e31751fe0c5afe52fd90a9585425/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "52a5e149bbfe2a72a7ecf254b9a3901e13442096cdd7846b0a521a5ec2e8608f",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/character.engineer.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/character.engineer.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:42:34.000Z",
+  "referenceHashes": [
+    "d872ff291d55ad34e21df0a0cda103c69c38cce16cf10e5733eda0fffed0e53d",
+    "9eb6b9bbae2dc519875a3fd4061d3c71348fd7480dbd119e869df73285850b59"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "c784de1552ca8159264565e2e3f5aeff5154c586b76b4a304b8203af011a5924",
+      "inputHash": "d872ff291d55ad34e21df0a0cda103c69c38cce16cf10e5733eda0fffed0e53d",
+      "outputHash": "4926dcfb3ecb8ddf205c2f943b417986feb319368755b282a1f111d5e9534fd6"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "4926dcfb3ecb8ddf205c2f943b417986feb319368755b282a1f111d5e9534fd6",
+      "outputHash": "f27322358fcf4123a885c0e68d4577a8a1cdfddecb1a7603669404b6e5566ab5"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f27322358fcf4123a885c0e68d4577a8a1cdfddecb1a7603669404b6e5566ab5",
+      "outputHash": "7b871bca69ffbc0270cd36b08100686c17930291d2552276d7887acf586d60eb"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "403bf459bfdfbe130dfa4672fb8bdb0207cb03e2fbf0f376404e15cda0954058",
+      "outputHash": "07f6f2fb2de3e0ad24254cfdb0f6e89144a1aef4938521a9af472fcd4bda5d70"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "808ea1b9b48eb5bc3e5f597607298ccc446539b1a0060feb42f49c9aeae67ecb",
+      "outputHash": "ccb4e55fc22c4b5cf51a615657f9e5ac998ca62650ef1d9f76bb5c652a2cc0fd"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "0b77d75f0e46e177b91e2ef12fb27126eac98fed441141653214edfb9a670fee",
+      "outputHash": "2459f837fb0056d737eeda92376fa75fe5518401547239da19ee344b5f0f1606"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.engineer.saltwind_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:02.482Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Visible hammer, rust work apron and pale plans distinguish the engineer. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 7d7c0b782b83123a8c994a96b1d0ca150ae5e31751fe0c5afe52fd90a9585425; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a5caa24e863aeb2f3dc3d22c0d2c76ce681769339bebd598c6b65c3b0f481f74.png"
+    ],
+    "inputHash": "ceb7afd8f3c6b530afd1eb587a909661612418705ad86652a9bf036c788b998f"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

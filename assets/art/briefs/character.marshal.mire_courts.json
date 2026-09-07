@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.mire_courts",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native64. One full-body adult female field marshal with visible older weathered face, uncovered greying hair, structured short shoulder mantle, one short command baton held outward and folded dispatch case. Clearly a leader not ordinary guard, no shield or horse.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears. IMPORTANT: the face and gaze point toward the RIGHT edge, NOT the left; front-right (southeast) three-quarter pose. Transparent background with absolutely NO surrounding colored haze or ground shadow.",
+  "frames": [
+    {
+      "id": "character.marshal.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.mire_courts/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5df2f61e80f966e5b39480eb79e34e0992f8559cff3476fc0f6df981c49c3f89",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/character.marshal.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/character.marshal.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:45:29.000Z",
+  "referenceHashes": [
+    "810e74d35be5fb86163419a0dbe8a1dabc60c8abbeed0706ce87c44057d37e4f",
+    "5210afefa812cabfa18c27d888ce8ed4aaf89f201f3d872a5101f48d8213387e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "725415a5d830b9d7b2d18645f8fe1488e65ee1cde01eefbcf79b531ce73c9ce0",
+      "inputHash": "810e74d35be5fb86163419a0dbe8a1dabc60c8abbeed0706ce87c44057d37e4f",
+      "outputHash": "459626052d76fadbbb150b00c9431c900d7eea7f435ef9286985e436be6a8708"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

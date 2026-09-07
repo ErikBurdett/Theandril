@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.mire_courts",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native128. One joined developed city complex, substantial culture-specific central civic hall surrounded by eight dense stepped roof volumes, reinforced walls and one unmistakable gate. Monumental but practical, broad readable architectural silhouette; no base tile or surrounding terrain.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears. IMPORTANT: the subject faces toward the RIGHT (front-right southeast), not left. Genuine alpha-zero transparent background, no surrounding colored haze or ground shadow.",
+  "frames": [
+    {
+      "id": "settlement.city.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.mire_courts/0a2620e594b05f3a5652b8fd7b737cf174e8ad4431d0c2800b5db8c0e4995b1b/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e066cac4c065dc59178bfdfbbeaa564bfdec48953960aa1717c7f17264781d8c",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/settlement.city.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/settlement.city.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:58:57.000Z",
+  "referenceHashes": [
+    "8bb0bac551762ba08185e8d580389f6e4d9582ff1fabc6a0d5d48833e9114303",
+    "bd9dba6ad7905ab17fa6015e3ef73df5fbe05328b2cc9b61764334d096de421b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "23c4e4d3082be7902d1096e612a812b72877fd17ad590ce0abfa49ef7a031ee1",
+      "inputHash": "8bb0bac551762ba08185e8d580389f6e4d9582ff1fabc6a0d5d48833e9114303",
+      "outputHash": "89150dc5ccc662ad16af8f283c5167d1e3a731d04f7207d110f357c2348166ff"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "89150dc5ccc662ad16af8f283c5167d1e3a731d04f7207d110f357c2348166ff",
+      "outputHash": "d222ef53fd3be72a9f0973160383015e9048de163f374f447be8c2de4aba24c8"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d222ef53fd3be72a9f0973160383015e9048de163f374f447be8c2de4aba24c8",
+      "outputHash": "8cb5346ae72cd0ba76349d42a2bb80e8ed78511ae7cc4492d9ebcaffc1c89a58"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "7ef6900454a66748e28e3455b34c2029f1d5891156d108fdc34b1bb1a9de1bf8",
+      "outputHash": "6e259bcf2edb97c784fa3ff411a6c9da90b7a3372a22bed2bf4087e692398923"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "ef0ab354b8c5a2d79b2f91ee2b425993885e8ee0960746ee5171b07d0a650ccf",
+      "outputHash": "0e99c634efd0891bf57f39b668b7534a6380442dc612a2fffaff2e5a0ee42acf"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "e2d4c953e4225f16d017455bab1b2dbb85e90a1d3a4e33253c939d27a4c3a937",
+      "outputHash": "93f0b3caa8bcce436bf5367d45e0c436680bf98248aeb36f3e58930957bc5407"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.mire_courts.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:08.432Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Broad tiered leaf-roof hall and tall central civic mass read larger than town. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 0a2620e594b05f3a5652b8fd7b737cf174e8ad4431d0c2800b5db8c0e4995b1b; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d8be3b2df82887727e53bd6ae03f45aba440c8dbff04c61f9677a7d2c17461c8.png"
+    ],
+    "inputHash": "ec5b213611cf6628013ca942289f0c7f3fbef1ddb86f7849d5f1a14146218954"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

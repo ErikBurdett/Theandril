@@ -1,5 +1,5 @@
 import { createGame, getMovementQuery, getObservation, getSettlementLandObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
-import { planTurn } from '@theandril/ai';
+import { aiObservationOptions, planTurn } from '@theandril/ai';
 import { createJournal, resumeJournal, generateChronicles, type CampaignJournal, type ChronicleDocuments } from '@theandril/chronicle';
 import { SaveStore, deserializeCampaign, exportSave, importSave, serializeCampaign } from '@theandril/persistence';
 import type { Request, Response, WorkerMetrics } from './protocol';
@@ -63,7 +63,7 @@ function settleDecisions(game: GameState): 'battle' | 'capture' | null {
     const capture = game.pendingCapture;
     if (capture) {
       if (!watching && capture.factionId === game.turnOwnerId) return 'capture';
-      const proposal = planTurn(getObservation(game, capture.factionId)).find(command => command.type === 'resolveCapture' && command.settlementId === capture.settlementId);
+      const proposal = planTurn(getObservation(game, capture.factionId, aiObservationOptions(game.turn))).find(command => command.type === 'resolveCapture' && command.settlementId === capture.settlementId);
       if (!proposal) throw new Error('The capturing faction did not propose a settlement outcome.');
       const result = applyCommand(game, proposal);
       if (!result.ok) throw new Error(result.error ?? 'An AI settlement decision could not be resolved.');
@@ -153,7 +153,7 @@ async function handle(request: Request): Promise<void> {
       for (const faction of state.factions) {
         if (state.victory) break;
         try {
-          for (const command of planTurn(getObservation(state, faction.id))) {
+          for (const command of planTurn(getObservation(state, faction.id, aiObservationOptions(state.turn)))) {
             if (state.victory) break;
             applyCommand(state, command);
             settleDecisions(state);
@@ -188,7 +188,7 @@ async function handle(request: Request): Promise<void> {
         const aiStarted = performance.now();
         for (const faction of state.factions.filter(faction => faction.id !== state!.turnOwnerId)) {
           try {
-            for (const command of planTurn(getObservation(state, faction.id))) {
+            for (const command of planTurn(getObservation(state, faction.id, aiObservationOptions(state.turn)))) {
               applyCommand(state, command);
               const pending = settleDecisions(state);
               if (!pending) continue;

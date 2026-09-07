@@ -7,7 +7,7 @@ import {
   paletteSchema, parseAssetManifest, safeAssetPath, sha256,
   type AssetManifest, type ImageRect, type RgbaImage,
 } from '../packages/art-pipeline/src/index';
-import { FACTION_ART_FAMILIES, FACTION_ART_ROLES, factionArtId, type FactionArtFamily, type FactionArtRole } from '../packages/art-pipeline/src/faction-art';
+import { FACTION_ART_FAMILIES, FACTION_ART_ROLES, factionArtId, isFactionNavalArtRole, type FactionArtFamily, type FactionArtRole } from '../packages/art-pipeline/src/faction-art';
 
 // The source prompt's row-major order is authoritative; registry ordering is not layout.
 export const FACTION_SHEET_ROLES = [
@@ -63,6 +63,7 @@ export function inspectFactionSheet(image: RgbaImage): SheetInspection {
 }
 
 export function factionFrameContract(role: FactionArtRole): { native: number; pivot: [number, number]; maxHeight: number; centered: boolean; type: AssetManifest['type'] } {
+  if (isFactionNavalArtRole(role)) return { native: 96, pivot: [48, 80], maxHeight: 78, centered: false, type: 'unit' };
   const native = role === 'unit.cavalry' || role === 'settlement.village' || role === 'settlement.town' ? 96 : role === 'settlement.city' ? 128 : role === 'ui.badge' ? 32 : 64;
   const centered = role === 'ui.badge' || role === 'ui.crest';
   const ground = centered ? native / 2 : native > 64 ? native - 16 : 56;
@@ -93,7 +94,7 @@ function overlaps(a: ImageRect, b: ImageRect): boolean { return a.x < b.x + b.w 
 export function inspectFactionCrops(image: RgbaImage, crops: readonly FactionCrop[]): SheetInspection {
   assertImage(image);
   const report: SheetInspection = { width: image.width, height: image.height, cells: [], errors: [], warnings: [] };
-  if (crops.length !== 15 || new Set(crops.map((crop) => crop.role)).size !== 15 || crops.some((crop) => !FACTION_SHEET_ROLES.includes(crop.role))) throw new Error('Explicit crops require exactly the fifteen distinct faction roles.');
+  if (crops.length !== 15 || new Set(crops.map((crop) => crop.role)).size !== 15 || crops.some((crop) => !FACTION_SHEET_ROLES.some(role => role === crop.role))) throw new Error('Explicit crops require exactly the fifteen distinct faction roles.');
   const coverage = new Uint8Array(image.width * image.height);
   const segmentation = crops.some((crop) => crop.componentIds) ? connectedComponents(image) : null;
   let transparent = 0;
@@ -186,13 +187,13 @@ export function proposeFactionCrops(image: RgbaImage, allowComponentMasks = fals
   if (new Set(crops.map((crop) => crop.role)).size !== 15) throw new Error('Multiple substantial components occupy the same role slot; explicit human layout is needed.');
   for (const component of components.slice(15)) {
     const distance = (rect: ImageRect) => Math.max(0, rect.x - component.rect.x - component.rect.w, component.rect.x - rect.x - rect.w) ** 2 + Math.max(0, rect.y - component.rect.y - component.rect.h, component.rect.y - rect.y - rect.h) ** 2;
-    const owner = [...crops].sort((a, b) => distance(a.rect) - distance(b.rect) || FACTION_SHEET_ROLES.indexOf(a.role) - FACTION_SHEET_ROLES.indexOf(b.role))[0]!;
+    const owner = [...crops].sort((a, b) => distance(a.rect) - distance(b.rect) || FACTION_SHEET_ROLES.findIndex(role => role === a.role) - FACTION_SHEET_ROLES.findIndex(role => role === b.role))[0]!;
     assigned.get(owner.role)!.push(component.id);
     const x = Math.min(owner.rect.x, component.rect.x), y = Math.min(owner.rect.y, component.rect.y);
     owner.rect = { x, y, w: Math.max(owner.rect.x + owner.rect.w, component.rect.x + component.rect.w) - x, h: Math.max(owner.rect.y + owner.rect.h, component.rect.y + component.rect.h) - y };
   }
   if (allowComponentMasks) for (const crop of crops) if (crops.some((other) => other.role !== crop.role && overlaps(crop.rect, other.rect))) crop.componentIds = assigned.get(crop.role)!.sort((a, b) => a - b);
-  crops.sort((a, b) => FACTION_SHEET_ROLES.indexOf(a.role) - FACTION_SHEET_ROLES.indexOf(b.role));
+  crops.sort((a, b) => FACTION_SHEET_ROLES.findIndex(role => role === a.role) - FACTION_SHEET_ROLES.findIndex(role => role === b.role));
   const report = inspectFactionCrops(image, crops);
   if (report.errors.length) throw new Error(report.errors.join('\n'));
   return crops;

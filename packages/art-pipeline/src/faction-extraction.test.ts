@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promis
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { decodePng, encodePng, paletteSchema, parseAssetManifest, sha256, type RgbaImage } from './index';
-import { FACTION_ART_ROLES } from './faction-art';
+import { FACTION_LAND_ART_ROLES } from './faction-art';
 import { extractFactionSheet, factionFrameContract, factionCropContactSheet, inspectFactionCrops, inspectFactionSheet, parseFactionArguments, prepareFactionArt, prepareFactionCropEvidence, proposeFactionCrops, FACTION_SHEET_ROLES } from '../../../scripts/art-factions';
 
 const palette = paletteSchema.parse({ id: 'test.palette', version: 1, colors: ['#000000', '#ffffff'], ramps: {} });
@@ -28,7 +28,7 @@ async function setup(image = source()) {
 
 describe('faction source preparation', () => {
   it('uses the exact prompt order while preserving every registered qualified role', () => {
-    expect(new Set(FACTION_SHEET_ROLES)).toEqual(new Set(FACTION_ART_ROLES));
+    expect(new Set(FACTION_SHEET_ROLES)).toEqual(new Set(FACTION_LAND_ART_ROLES));
     expect(FACTION_SHEET_ROLES.slice(12)).toEqual(['ui.crest', 'ui.banner', 'ui.badge']);
     expect(parseFactionArguments(['--family=glass_tide'])).toEqual(['glass_tide']);
     expect(() => parseFactionArguments(['--family=../ashen_compact-v1-rejected'])).toThrow('Unknown faction');

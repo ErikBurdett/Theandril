@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.wardhall_remnant",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static settlement-town pixel-art sprite for the dark-fantasy strategy game Theandril, replacing a rejected underdeveloped town design.\nBackground: GENUINE TRANSPARENT PNG alpha-zero outside the isolated settlement. No painted checkerboard, floor tile, scenery, text, captions, border, or watermark.\nStyle: deliberate coarse square pixel clusters readable at 96x96 logical pixels, enlarged on the source canvas. Restrained upper-left light, selective dark outline, strong roof/masonry midtone planes. No gradients, bloom, antialiasing, blur, painterly microtexture or speckled confetti.\nComposition: shallow southeast three-quarter/isometric view. One coherent LOW, BROAD town enclosure, dense 7–9 buildings clustered tightly around a substantial central market hall. The town itself occupies a broad near-square silhouette, about 70% of canvas width and 60–65% of height, with at least 15% genuinely transparent empty margin on all four sides. All pixels contained. Most of the silhouette is usable building mass, NOT empty ground.\nDevelopment: unequivocally MORE developed than a simple three-house village: numerous connected two-storey workhouses, a large low market hall, short enclosing walls and a modest gate. Still NOT a grand capital/city: no towering keep, large cathedral, tall corner towers or palace.\nCRITICAL: NO flags, banners, poles, needles, spires or high narrow towers above the roofline. No high feature consuming native sprite height. No detached satellite buildings. Keep clear low broad roof masses and building count legible. No people.\nCulture: Wardhall Remnant, surviving practical human work halls after the old Null Throne fell, NOT a revived throne. CHALK-GREY stone and SLATE-VIOLET roofs, black riveted reinforcements, straight ward-grid masonry. A dense, low, broad walled town of eight substantial two-storey workshops and homes surrounding a wide central market/work hall; low crenellated enclosure and a modest wide gatehouse. Broad roof surfaces and square masonry masses. Practical engineering, no magical null powers/glow, no Iron anvil icon, no stepped Sepulchral funerary terraces, no throne/crown. More enclosed buildings and floor area than the three-house village, without high city towers.",
+  "frames": [
+    {
+      "id": "settlement.town.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/settlement.town.wardhall_remnant/v2/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "925d8278d4addc1e1c3b06cbbd6689dab0d7cb763ab52b47b1d229f718afdbba",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/settlement.town.wardhall_remnant-v2.png",
+      "assets/art/source/faction-expansion/saltward/settlement.town.wardhall_remnant-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:26:19.000Z",
+  "referenceHashes": [
+    "00d4ed7e74d9e51cbe0f897fb082a70e7b8ec5e583b9d8729bb4f664d8cb3dd6",
+    "5e10cc236264b1f49272c0e1d87a724989591626bcdf7e69339649ec61581163"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "de8beab46dd1ef20b5df922821aa5d90c3d2f58cd4a0705b82bf333d34d15ea4",
+      "inputHash": "00d4ed7e74d9e51cbe0f897fb082a70e7b8ec5e583b9d8729bb4f664d8cb3dd6",
+      "outputHash": "5c39ad1c628031efe0756e5cd9d93c46a465e3db79eec1ef242bbe89adb24029"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.mire_courts",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native64. One full-body adult route surveyor, practical hood thrown back, open route map in one hand and short dividers in other, measuring cord and travel satchel at belt. No spear, shield, bow or weapon. Character distinct from engineer.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears. IMPORTANT: the face and gaze point toward the RIGHT edge, NOT the left; front-right (southeast) three-quarter pose. Transparent background with absolutely NO surrounding colored haze or ground shadow.",
+  "frames": [
+    {
+      "id": "character.surveyor.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.surveyor.mire_courts/162bd0e040112c6ff851dd34eb78f6b6ce206e1053d62889b37f140b8f0f8daf/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "ef1848d6ee9a89f79ac779c0a3279f77af80a8fb623abc640012739ec55a6b83",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/character.surveyor.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/character.surveyor.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:45:29.000Z",
+  "referenceHashes": [
+    "c8247013fcef08629a9cc3b89ac3b460d5f1ab4439fa1b2f72b3e7a33a36aebb",
+    "91b74e1820c8dc4fac535c18edccfe297dd56f0ce8b507ea90dd4e7e7d989190"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "c85d17100122583f655ebb40cd37692b7f624184cd2c7c69468f225aa514d898",
+      "inputHash": "c8247013fcef08629a9cc3b89ac3b460d5f1ab4439fa1b2f72b3e7a33a36aebb",
+      "outputHash": "0b4fb93ebc1e881bcba2879d5e7884656b9314ce76b067e75cd9078561c79a74"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "0b4fb93ebc1e881bcba2879d5e7884656b9314ce76b067e75cd9078561c79a74",
+      "outputHash": "e2ff97bc89d33ab512f9e15e8847a352b6a52c9ffd2d43439c3996ebcc8a49bc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e2ff97bc89d33ab512f9e15e8847a352b6a52c9ffd2d43439c3996ebcc8a49bc",
+      "outputHash": "ba825910024e368e08e8ec305aa16939c99f46d394eac3eef47d91da86ecd7fb"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "2feb1d6ab51265578f77d4031c5ab5d10e933f6d62a067d306e111398b8837b4",
+      "outputHash": "a95e05d7a826c1f533095347c36bd1636fcfc1315240e95b0577717edf7eed1b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "236b37fd0de383f7af984da5a374e427b7eb7dacf75cc6cb877614d72720a941",
+      "outputHash": "57608bc1ca9be1847530a42f03b090580e3fdb97a110b4cb5f2dddda16c12e18"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "96a58ade71c1835c33d7d5d150340ed00803ba9d605b12489ea0fcc4c5085b1b",
+      "outputHash": "f4ca5d842921e7b2fa0c4ef4f1c012d7b80e165887299f5fdfa5674b472a3192"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.surveyor.mire_courts.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:05.862Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Raised pale map and slender staff separate the surveyor from military roles. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 162bd0e040112c6ff851dd34eb78f6b6ce206e1053d62889b37f140b8f0f8daf; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d8be3b2df82887727e53bd6ae03f45aba440c8dbff04c61f9677a7d2c17461c8.png"
+    ],
+    "inputHash": "655ff2e44b0f27d0eb74ea2c05f99ff4621fb502bf0940e2f5ee309adf176a40"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

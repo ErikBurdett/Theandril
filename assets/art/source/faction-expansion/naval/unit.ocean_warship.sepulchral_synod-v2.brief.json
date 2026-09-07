@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.sepulchral_synod",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Sepulchral Synod living caretakers and housed ancestors: narrow dignified hull, chalk-pale protective plates, deep indigo canvas, aged bronze ribs, terraced stern-house outline and small hollow ring above three steps insignia. Quiet funerary architecture influence, not skulls, ghosts, skeleton crew or magical ship. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion. FRAMING CORRECTION: the entire mast finial, all pennants and rigging must be enclosed well within the image. Reduce subject to fit ONLY THE CENTRAL 65% of the canvas. Leave at least 15% genuinely alpha-zero empty space above the tallest mast and on every side. No clipping or off-canvas feature.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.sepulchral_synod/v2/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c280a78eb437f853874bbcf1e9199a47a87cfc85ccb1e2d35531f9b90e6b5913",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.sepulchral_synod-v2.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.sepulchral_synod-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:20:02.447Z",
+  "referenceHashes": [
+    "a193c5bfd3e2028a17a4d4a19aac4d5e7b5ebbe0030bb8dbf713f5a89a879ef1",
+    "09e550594eeecc126e5f461c2ee28d49279a5a2c7ade1824955fcc88dfef76df"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "6f6d6c36254ce7acd48ba11099d8ba931a1ff6e664b20998f8b7707d135631f0",
+      "inputHash": "a193c5bfd3e2028a17a4d4a19aac4d5e7b5ebbe0030bb8dbf713f5a89a879ef1",
+      "outputHash": "4d9ee0d24cc327a76ef4d7e7fa835115a94e46716cd5ee70457935c4835dc244"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

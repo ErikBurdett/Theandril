@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CAMPAIGN_PACES, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, TECHNOLOGIES } from '@theandril/content';
+import { CAMPAIGN_PACES, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, technologiesForRules, technologyBranch, type ResearchBranch } from '@theandril/content';
 import { isPassable } from '@theandril/mapgen';
 import type { CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
@@ -18,7 +18,7 @@ export const victorySchema = z.object({ path: z.literal('prosperity'), factionId
 export type Victory = z.infer<typeof victorySchema>;
 interface Choice { id: string; name: string; description: string; available: boolean; blocker: string | null }
 export interface ProgressionObservation extends FactionProgression {
-  technologyChoices: (Choice & { knowledgeCost: number })[];
+  technologyChoices: (Choice & { knowledgeCost: number; requires: string[]; branch: ResearchBranch })[];
   institutionChoices: (Choice & { coinCost: number })[];
   doctrineChoices: (Choice & { coinCost: number })[];
   project: { id: string; name: string; description: string; coinCost: number; activeTurns: number; eligibleSettlementIds: string[]; blockers: string[] };
@@ -35,7 +35,7 @@ export function progressionYields(state: GameState, factionId: string) {
   const progress = state.progression[factionId];
   const effects = { food: 0, industry: 0, coin: 0, knowledge: 0 };
   if (!progress) return effects;
-  const definitions = [...TECHNOLOGIES.filter(item => progress.technologies.includes(item.id)), ...INSTITUTIONS.filter(item => item.id === progress.institutionId)];
+  const definitions = [...technologiesForRules(rulesVersion(state)).filter(item => progress.technologies.includes(item.id)), ...INSTITUTIONS.filter(item => item.id === progress.institutionId)];
   for (const definition of definitions) for (const key of ['food', 'industry', 'coin', 'knowledge'] as const) effects[key] += definition.effects[key];
   return effects;
 }
@@ -74,10 +74,10 @@ export function getProgressionObservation(state: GameState, factionId: string): 
   if (!faction || !progress) throw new Error('Unknown progression faction');
   const pace = campaignProfile(state);
   const strategic = strategicBlocker(state);
-  const technologyChoices = TECHNOLOGIES.map(item => {
+  const technologyChoices = technologiesForRules(rulesVersion(state)).map(item => {
     const knowledgeCost = item.id === 'technology.civic_accounts' ? pace.civicKnowledgeCost : item.knowledgeCost;
     const blocker = strategic ?? (progress.technologies.includes(item.id) ? 'Already researched.' : item.requires.some(id => !progress.technologies.includes(id)) ? 'Research the prerequisite technologies.' : faction.knowledge < knowledgeCost ? `Requires ${knowledgeCost} knowledge.` : null);
-    return { id: item.id, name: item.name, description: item.description, knowledgeCost, available: !blocker, blocker };
+    return { id: item.id, name: item.name, description: item.description, knowledgeCost, requires: [...item.requires], branch: technologyBranch(item), available: !blocker, blocker };
   });
   const institutionChoices = INSTITUTIONS.map(item => {
     const blocker = strategic ?? (progress.institutionId ? 'An institution has already been adopted; this choice is permanent.' : faction.treasury < item.coinCost ? `Requires ${item.coinCost} coin.` : null);
@@ -160,7 +160,7 @@ export function validateProgression(state: GameState): void {
   const owners = new Set(state.factions.map(item => item.id));
   assert(Object.keys(state.progression).length === owners.size && Object.keys(state.progression).every(id => owners.has(id)), 'progression must cover exactly the campaign factions');
   for (const progress of Object.values(state.progression)) {
-    assert(progress.technologies.every((id, i) => TECHNOLOGIES.some(item => item.id === id && item.requires.every(required => progress.technologies.includes(required))) && (i === 0 || id > (progress.technologies[i - 1] ?? ''))), 'invalid, duplicate or unordered researched technology');
+    assert(progress.technologies.every((id, i) => technologiesForRules(rulesVersion(state)).some(item => item.id === id && item.requires.every(required => progress.technologies.includes(required))) && (i === 0 || id > (progress.technologies[i - 1] ?? ''))), 'invalid, duplicate or unordered researched technology');
     assert(progress.institutionId === null || INSTITUTIONS.some(item => item.id === progress.institutionId), 'unknown institution');
     assert(progress.doctrineId === null || DOCTRINES.some(item => item.id === progress.doctrineId), 'unknown doctrine');
   }

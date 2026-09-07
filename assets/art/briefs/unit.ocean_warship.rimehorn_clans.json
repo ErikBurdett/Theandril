@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.rimehorn_clans",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.rimehorn_clans"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Rimehorn Clans winter shelter households: massive weathered grey-timber hull with protective dark iron prow bracing, dusky blue sails, grey fur-lined closed shelter, ivory lashings and small crossed shelter beams insignia. Strong broad winter-lodge silhouette; restrained bone fittings, no giant horned figurehead, no snow/water backdrop. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.rimehorn_clans/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.rimehorn_clans/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5d5d221ecd457e7485c241fb2e2f65d33c1828db39d3c39256d6f8af938b88d4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.rimehorn_clans-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.rimehorn_clans-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:33:02.726Z",
+  "referenceHashes": [
+    "b73f88c3846a208f550ef94384efe61c293629824b24f11b9e9117dd6ac13d3f",
+    "e0d7c8c39d1c9bc72f6c83d938e7931f21d3d73b1b2a526d9fa0ad04fa23a64b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "fe3476795ec6e2ff0e21efb3fde73dfbdf59dda80bb1b99c071376caf069d7f0",
+      "inputHash": "b73f88c3846a208f550ef94384efe61c293629824b24f11b9e9117dd6ac13d3f",
+      "outputHash": "e2d9e8ef7249dac4b8043731edb62ecf50a05d64d8180f9335d9a268772c165b"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

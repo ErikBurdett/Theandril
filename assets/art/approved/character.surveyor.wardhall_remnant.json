@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.wardhall_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: ONE adult human woman hall surveyor in a chalk-grey hooded working coat with slate-violet panels, holding a large open parchment grid survey at waist and one short black measuring rod. Visible practical face, booted full-body stance, small rectangular peg pouch; no weapon, bow, armor or magical staff.",
+  "frames": [
+    {
+      "id": "character.surveyor.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.surveyor.wardhall_remnant/23abc368cc774dbe5156e34b5db2893a56bcfca68b99f733742b854d1eb1095d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9bb1086f22ebee7d8d0c20f56ce622491e0bcb185befbdeb79ff96a376a0da99",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/character.surveyor.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/character.surveyor.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:58:45.000Z",
+  "referenceHashes": [
+    "601288e4d32fdccc33b236a981d9bd95da2d4dad2179edbff771973c4aa5d709",
+    "250de1f5f59849c8cbcbd0356a4cddaf6e9473bda47bff894ad7fde40c6a03b5"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "a9699cd9503c5094ba2ad2e09254e2f1cf23858e772cb8c9ee0c5ae5b3513493",
+      "inputHash": "601288e4d32fdccc33b236a981d9bd95da2d4dad2179edbff771973c4aa5d709",
+      "outputHash": "e3c2e5cd7c5ff2521c03770bfbd3d3bc3005cb409717e9dcffb451dc21705e54"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "e3c2e5cd7c5ff2521c03770bfbd3d3bc3005cb409717e9dcffb451dc21705e54",
+      "outputHash": "ffc1676e6f6d67284d50a260023381912ee5f4dd0007304a6ade681edc358201"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ffc1676e6f6d67284d50a260023381912ee5f4dd0007304a6ade681edc358201",
+      "outputHash": "e11c4f5aff145047294ed6b1a75d3940c510ff1e2c2efd21a6015fc1572773e4"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "577665440678d9719ee55f2d8f9b4999fa4473cf280201e55c5f4196ef5e3734",
+      "outputHash": "06db7178c782363ea52978afff70b6d24af5951333dc5da830df2ee87e1df3ab"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "d7b30444a311db00893819d802a5d44958e4b1fa2bd98315a966043744a09d12",
+      "outputHash": "6ddf5f3a64ba6c78f9e9aa1ff8ebafabc3a7616c33b7dc23c905792281d96cde"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "7870599bee7af7ec5e160b702cf4e3f8ec057c719e7b1cfafa94a821dd058b8f",
+      "outputHash": "eac5ee12f5a784fcab7028f12673c8ca0c5de13b916b7e98356cea4574360b31"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.surveyor.wardhall_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:08.009Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Large pale map, staff and lighter clothing retain surveyor readability. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 23abc368cc774dbe5156e34b5db2893a56bcfca68b99f733742b854d1eb1095d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/63b62a81d8a129dfaf5a5781137e588ad5bc16dfcee21d6173fca001fd924282.png"
+    ],
+    "inputHash": "6668a79ac61e29b05e264c85c11e8702d2c8133c9e32d0e461682655a8d483a0"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

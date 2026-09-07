@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.rimehorn_clans",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.rimehorn_clans"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: one original Theandril dark-fantasy strategic game sprite, character.surveyor, static first-facing pose.\nScene/backdrop: genuinely TRANSPARENT RGBA background, alpha zero around the isolated sprite. Do NOT paint a checkerboard, white/black backdrop, landscape, scene, floor tile, drop-shadow oval or framing panel.\nFaction visual grammar: Rimehorn Clans, an original high-cold culture of broad adult giantkin and human shelter clans. Broad, grounded adult proportions; weathered ivory fittings, grey fur, dusky blue cloth and dark stone-grey iron. Antler-bone fittings are small practical clasps, never enormous Viking helmet horns. Heraldry is a very simple pair of crossed shelter beams. Cold stone winter lodges and snow-weight roof supports. No copied fantasy franchise costumes.\nSubject: One adult travelling surveyor with a rolled map and a simple measuring staff, light field pack, no magic, no glowing spell. Face southeast, toward screen right and slightly toward viewer. Entire body, staff and feet visible.\nStyle: serious weathered medieval pixel art designed for a 64x64 native sprite; intentional broad pixel clusters and restrained material ramps, selective dark local-color outlines, crisp hard edges, soft upper-left material lighting. Adult anatomy, modest head about one-seventh body height, NOT chibi/cartoon. Keep every role readable when reduced to its native size; no painterly texture soup, antialias blur, microtexture or bright confetti.\nComposition: exactly ONE sprite, centered with at least 15% fully transparent margin on EVERY edge. Shallow elevated three-quarter strategic view. Whole silhouette fully inside canvas; nothing cropped. Readable separated limbs and equipment; one static grounded pose.\nColor family: muted material colors only; steel stays grey, flesh stays natural, cloth carries faction accents. No glow, text, labels, watermark, logo, decorative page, multiple poses, sprite sheet or grid. Return an actual transparent PNG.",
+  "frames": [
+    {
+      "id": "character.surveyor.rimehorn_clans/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.surveyor.rimehorn_clans/0be0645069cef50bae708afc77034090b43a283e619567ec48672a1738e567e5/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not exposed",
+    "promptHash": "1f1a4fd6d0ff6bc8d6c6f73e651849f9c9471349bca5ad5c6458b3d00942299b",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/rimesable/character.surveyor.rimehorn_clans-v1.png",
+      "assets/art/source/faction-expansion/rimesable/character.surveyor.rimehorn_clans-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:48:48.343Z",
+  "referenceHashes": [
+    "b47c3a0a6931eeeb01ad0233c4329616251dee796ff9e5ec771874ee6b79c279",
+    "c669230d9771d708485218929a45fec08357d75c079b41c4cdd1100d0a5bad39"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "7f1832ae9462b840ee240b831882ef6317f0d82a4822a97226da4f1473c9c0b2",
+      "inputHash": "b47c3a0a6931eeeb01ad0233c4329616251dee796ff9e5ec771874ee6b79c279",
+      "outputHash": "6e74e4dfbf0a2311db3cb386195c54221213364395eb859a6fb1dcbf296e380d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "6e74e4dfbf0a2311db3cb386195c54221213364395eb859a6fb1dcbf296e380d",
+      "outputHash": "3983a03e016e865954b94e045ace9ba3677501228276e3a574e8845ed7ec7b43"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3983a03e016e865954b94e045ace9ba3677501228276e3a574e8845ed7ec7b43",
+      "outputHash": "922155870dc10612aba9261aa3404f4d0d264b458ec57ebfaa1a6eb3ad221d51"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "a584481fc86eef49a5f5f41f941c0173c20c2e6870c7c03fc42ce4a05de2eed4",
+      "outputHash": "11e51b5dcaf680e5bbde30ed7f5730bd10943bbed3edd177e069271defa802ed"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "9a819daa44069c1232e5ba3a010664e986f94714c9d0ad8c6ba9977341c46b90",
+      "outputHash": "693a25091fdf5186326417cb9a506d564e73a8604425a49a451388a8cd64e94d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "e65dc828a1c9a2b3c3b06124146ae4e9ee9ea48788bb31328d76edcf298eefe5",
+      "outputHash": "71256219a7a13792f00297e9a7b367469fe401b10d999d6b4b2faf0c3cfeffaa"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.surveyor.rimehorn_clans.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:06.709Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Raised pale map and staff retain surveyor identity through the cold-weather clothing. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 0be0645069cef50bae708afc77034090b43a283e619567ec48672a1738e567e5; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/f5e9d8811b9a464895c27a49003f4ee627723bf41207a733bdf0554a83aba8d3.png"
+    ],
+    "inputHash": "bcd4231fc75a46aeb85a120c812a62aa19b122afc490c8c8a4227d9e6fbbc2af"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,3 +1,4 @@
+import { openRealmAffairs } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { UNITS } from '@theandril/content';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
@@ -92,6 +93,7 @@ test('map targeting refuses implicit war and impassable land, then executes a mu
   await clickCell(page, ORIGIN + 3);
   await expect(page.getByTestId('route-preview')).toContainText('Declare war before attacking');
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(peacefulHash);
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.wars.length)).toBe(1);
   await clickCell(page, ORIGIN + 3);
@@ -147,6 +149,7 @@ test('map settlement targeting requires siege instead of bypassing defenses and 
   state = deserializeGame(serializeGame(state));
   order(state, { type: 'found', factionId: state.factions[1]!.id, armyId: 'army.4', name: 'Roadgate' });
   await importFrontier(page, state);
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.wars.length)).toBe(1);
   const before = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());

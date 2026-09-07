@@ -1,3 +1,4 @@
+import { openRealmAffairs, openProduction } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { applyCommand, createArmyFormation, deserializeGame, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -59,7 +60,7 @@ test('an embarked expedition crosses researched deep ocean by a saved queued voy
   await selectArmy(page, N.coastalName); await review(page, N.deepCell);
   await expect(page.getByTestId('route-preview')).toContainText('ocean-capable hull');
   await selectArmy(page, N.fleetName);
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.visibleEntityArt.some(item => item.entityId === 'army.2' && item.presentation === 'procedural-transport'))).toBe(true);
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.visibleEntityArt.find(item => item.entityId === 'army.2'))).toMatchObject({ assetId: 'unit.transport.ashen_compact', role: 'unit.transport', presentation: 'faction', nativeWidth: 96, nativeHeight: 96, tint: 0xffffff });
   expect(await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!.visibleEntityArt.some(item => item.entityId === 'army.9'))).toBe(false);
   expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell), N.shallowCell)).toMatchObject({ waterDepth: 1, waterPresentation: 'shallows' });
   expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell), N.deepCell)).toMatchObject({ waterDepth: 2, waterPresentation: 'deep' });
@@ -68,7 +69,7 @@ test('an embarked expedition crosses researched deep ocean by a saved queued voy
   expect(point?.inViewport).toBe(true);
   await page.keyboard.press('Escape'); await page.mouse.click(point!.x, point!.y);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSelection().armyId)).toBe(N.fleetId);
-  await page.screenshot({ path: testInfo.outputPath('coastal-depths-and-procedural-fleets.png') });
+  await page.screenshot({ path: testInfo.outputPath('coastal-depths-and-approved-fleets.png') });
   await review(page, N.landingWaterCell); await page.getByRole('button', { name: 'Queue route', exact: true }).click();
   await expect(page.getByTestId('queued-route')).toBeVisible();
   await saveReload(page);
@@ -99,6 +100,7 @@ test('harbor recruitment launches real hulls and an adjacent harbor marshal take
   await importCampaign(page, navalCampaign({ enemyFleet: false }));
   await page.getByRole('tab', { name: /Settlements/ }).click();
   await page.getByTestId('settlement-registry').getByRole('button', { name: new RegExp(N.homeName) }).click();
+  await openProduction(page, 'naval');
   const production = page.getByTestId('production-naval');
   await expect(production.getByRole('button', { name: 'Recruit Deepwake warship', exact: true })).toBeDisabled();
   await expect(production).toContainText('Research Ocean navigation first');
@@ -152,6 +154,7 @@ test('a saved naval battle resolves exact transport casualties without deploying
   await importCampaign(page, state); await selectArmy(page, N.cargoName);
   await page.getByRole('button', { name: 'Embark army', exact: true }).click();
   await page.getByRole('button', { name: 'Select carrying fleet', exact: true }).click();
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: `Declare war on ${state.factions[1]!.name}`, exact: true }).click();
   await page.getByRole('button', { name: `Attack ${N.enemyFleetName} (${N.enemyFleetId})`, exact: true }).click();
   const battle = page.getByTestId('battle-panel');

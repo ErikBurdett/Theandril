@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TECHNOLOGIES } from './progression';
 
 /** Signed contributions. Clamp only the final worked-tile sum, not individual penalties. */
 export interface LandYield { food: number; industry: number; coin: number; knowledge: number }
@@ -51,16 +52,25 @@ export const FACTION_ECOLOGIES: Readonly<Record<string, FactionEcology>> = {
 
 /** Sites are OR clauses; every supplied predicate inside a site must match. */
 export interface ImprovementSite { terrainIds: readonly number[]; biomeIds?: readonly number[]; waterDepthIds?: readonly number[]; requiredFeatures?: number; forbiddenFeatures?: number }
-export interface ImprovementDefinition { id: string; name: string; description: string; coinCost: number; turns: number; yields: LandYield; sites: readonly ImprovementSite[]; featureModifiers: readonly { feature: number; yields: LandYield }[] }
+export interface ImprovementDefinition { id: string; name: string; description: string; coinCost: number; turns: number; yields: LandYield; sites: readonly ImprovementSite[]; featureModifiers: readonly { feature: number; yields: LandYield }[]; introducedInRules?: 11; requiredTechnologies?: readonly string[] }
 export const improvementSiteSchema = z.object({ terrainIds: z.array(z.number().int().min(0).max(4)).min(1).max(5).refine(unique, 'Duplicate terrain'), biomeIds: biomeIds.optional(), waterDepthIds: z.array(z.number().int().min(0).max(2)).min(1).max(3).refine(unique, 'Duplicate water depth').optional(), requiredFeatures: featureMask.optional(), forbiddenFeatures: featureMask.optional() }).strict().refine(site => !((site.requiredFeatures ?? 0) & (site.forbiddenFeatures ?? 0)), 'Required and forbidden features overlap');
-export const improvementSchema = z.object({ id: identifier, name: z.string().min(1).max(80), description: z.string().min(1).max(500), coinCost: z.number().int().min(1).max(1_000_000), turns: z.number().int().min(1).max(100), yields: landYieldSchema, sites: z.array(improvementSiteSchema).min(1).max(8), featureModifiers: z.array(z.object({ feature: featureBit, yields: landYieldSchema }).strict()).max(7).refine(values => unique(values.map(value => value.feature)), 'Duplicate feature modifier') }).strict();
+export const improvementSchema = z.object({ id: identifier, name: z.string().min(1).max(80), description: z.string().min(1).max(500), coinCost: z.number().int().min(1).max(1_000_000), turns: z.number().int().min(1).max(100), yields: landYieldSchema, sites: z.array(improvementSiteSchema).min(1).max(8), featureModifiers: z.array(z.object({ feature: featureBit, yields: landYieldSchema }).strict()).max(7).refine(values => unique(values.map(value => value.feature)), 'Duplicate feature modifier'), introducedInRules: z.literal(11).optional(), requiredTechnologies: z.array(identifier).min(1).max(8).refine(values => new Set(values).size === values.length, 'Duplicate improvement prerequisite').optional() }).strict();
 export const IMPROVEMENTS: readonly ImprovementDefinition[] = [
   { id: 'improvement.terraced_fields', name: 'Terraced fields', description: 'Cultivated field steps add 2 food. Springs add 1 more food; waterlogging costs 1 food.', coinCost: 18, turns: 2, yields: yieldOf(2), sites: [{ terrainIds: [1, 2, 3], biomeIds: [1, 6, 11] }], featureModifiers: [{ feature: 1, yields: yieldOf(1) }, { feature: 8, yields: yieldOf(-1) }] },
   { id: 'improvement.managed_woodlot', name: 'Managed woodlot', description: 'Selective woodland use adds 2 industry and 1 food. Old growth adds 1 knowledge; glass fragments cost 1 industry.', coinCost: 24, turns: 3, yields: yieldOf(1, 2), sites: [{ terrainIds: [1, 2, 3], biomeIds: [2, 3, 8] }], featureModifiers: [{ feature: 4, yields: yieldOf(0, 0, 0, 1) }, { feature: 64, yields: yieldOf(0, -1) }] },
   { id: 'improvement.quarry', name: 'Measured quarry', description: 'Stone cutting adds 3 industry but costs 1 food. Ore adds 1 industry; waterlogging costs 1 industry.', coinCost: 28, turns: 3, yields: yieldOf(-1, 3), sites: [{ terrainIds: [3, 4] }, { terrainIds: [1, 2], biomeIds: [11] }], featureModifiers: [{ feature: 2, yields: yieldOf(0, 1) }, { feature: 8, yields: yieldOf(0, -1) }] },
   { id: 'improvement.reedworks', name: 'Reedworks', description: 'Wetland beds add 1 food, 1 industry and 1 coin. Peat adds 1 industry; glass fragments cost 1 coin.', coinCost: 22, turns: 2, yields: yieldOf(1, 1, 1), sites: [{ terrainIds: [1, 2, 3], biomeIds: [7] }], featureModifiers: [{ feature: 16, yields: yieldOf(0, 1) }, { feature: 64, yields: yieldOf(0, 0, -1) }] },
   { id: 'improvement.shore_fishery', name: 'Shore fishery', description: 'A shallow-water fishery adds 2 food and 1 coin. Rich shoals add 1 food; glass fragments cost 1 coin.', coinCost: 24, turns: 2, yields: yieldOf(2, 0, 1), sites: [{ terrainIds: [0], biomeIds: [0], waterDepthIds: [1] }], featureModifiers: [{ feature: 32, yields: yieldOf(1) }, { feature: 64, yields: yieldOf(0, 0, -1) }] },
+  { id: 'improvement.spring_garden', name: 'Spring garden', description: 'A fresh-water garden adds 3 food but costs 1 industry. Its spring adds 1 coin; waterlogging costs 1 food. Requires a spring on habitable land.', coinCost: 34, turns: 3, yields: yieldOf(3, -1), sites: [{ terrainIds: [1, 2, 3], requiredFeatures: 1 }], featureModifiers: [{ feature: 1, yields: yieldOf(0, 0, 1) }, { feature: 8, yields: yieldOf(-1) }], introducedInRules: 11, requiredTechnologies: ['technology.stewardship'] },
+  { id: 'improvement.polder', name: 'Polder', description: 'Sluiced wetland adds 4 food and 1 industry but costs 1 coin. Peat adds 1 industry; old growth costs 1 knowledge and Ashfall glass costs 1 food. Natural features remain intact.', coinCost: 46, turns: 4, yields: yieldOf(4, 1, -1), sites: [{ terrainIds: [1, 2, 3], biomeIds: [7, 8] }, { terrainIds: [1, 2, 3], requiredFeatures: 8 }], featureModifiers: [{ feature: 16, yields: yieldOf(0, 1) }, { feature: 4, yields: yieldOf(0, 0, 0, -1) }, { feature: 64, yields: yieldOf(-1) }], introducedInRules: 11, requiredTechnologies: ['technology.waterworks'] },
+  { id: 'improvement.grove_archive', name: 'Grove archive', description: 'Protected woodland records add 1 industry and 2 knowledge. Old growth adds 1 knowledge; peat gathering restrictions cost 1 industry. Requires old-growth woodland.', coinCost: 48, turns: 4, yields: yieldOf(0, 1, 0, 2), sites: [{ terrainIds: [1, 2, 3], biomeIds: [2, 3, 8], requiredFeatures: 4 }], featureModifiers: [{ feature: 4, yields: yieldOf(0, 0, 0, 1) }, { feature: 16, yields: yieldOf(0, -1) }], introducedInRules: 11, requiredTechnologies: ['technology.charter_forestry'] },
+  { id: 'improvement.oreworks', name: 'Oreworks', description: 'A crane-served seam adds 4 industry but costs 1 food and 1 coin. Ore adds 1 industry; waterlogging costs 2 industry. Requires a mineral seam, not merely a hill.', coinCost: 52, turns: 4, yields: yieldOf(-1, 4, -1), sites: [{ terrainIds: [1, 2, 3, 4], requiredFeatures: 2 }], featureModifiers: [{ feature: 2, yields: yieldOf(0, 1) }, { feature: 8, yields: yieldOf(0, -2) }], introducedInRules: 11, requiredTechnologies: ['technology.quarry_cranes'] },
+  { id: 'improvement.tide_observatory', name: 'Tide observatory', description: 'A shallow-water observing station adds 3 knowledge and 1 coin, not a fishery’s food. Ashfall glass adds 1 knowledge; protected rich shoals cost 1 coin.', coinCost: 56, turns: 4, yields: yieldOf(0, 0, 1, 3), sites: [{ terrainIds: [0], biomeIds: [0], waterDepthIds: [1] }], featureModifiers: [{ feature: 64, yields: yieldOf(0, 0, 0, 1) }, { feature: 32, yields: yieldOf(0, 0, -1) }], introducedInRules: 11, requiredTechnologies: ['technology.deep_soundings'] },
 ];
+
+export function improvementsForRules(version: number): readonly ImprovementDefinition[] {
+  return IMPROVEMENTS.filter(item => (item.introducedInRules ?? 9) <= version);
+}
 
 /** Cross-reference checks are separate from shape checks so imported packs cannot invent IDs. */
 export function validateEcologyContent(factionIds: ReadonlySet<string>, ecologies = FACTION_ECOLOGIES, improvements = IMPROVEMENTS, features = NATURAL_FEATURES, biomeYields = BIOME_YIELDS): void {
@@ -84,6 +94,11 @@ export function validateEcologyContent(factionIds: ReadonlySet<string>, ecologie
   const featureBits = new Set(features.map(item => item.feature));
   for (const improvement of improvements) {
     improvementSchema.parse(improvement);
+    for (const id of improvement.requiredTechnologies ?? []) {
+      const technology = TECHNOLOGIES.find(item => item.id === id);
+      if (!technology) throw new Error('Unknown improvement technology: ' + id);
+      if ((technology.introducedInRules ?? 4) > (improvement.introducedInRules ?? 9)) throw new Error('Improvement requires future research: ' + id);
+    }
     if (!improvement.id.startsWith('improvement.')) throw new Error('Invalid improvement ID');
     for (const modifier of improvement.featureModifiers) if (!featureBits.has(modifier.feature)) throw new Error('Unknown improvement feature');
     for (const site of improvement.sites) {

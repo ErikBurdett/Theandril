@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.morrow_spore",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Morrow Spore: original underwood commonwealth of adult humans and solemn fungal symbionts. Umber layered fungal carapace, dusty mauve cloth, pale lichen seams and dark leather. Strong broad overlapping shelf-fungus planes rather than cute mushroom caps. Original hollow crescent cradling three seeds seal. Practical mature woodland society, no spores in air, neon, gore or chibi figures. Native96. One joined developed town complex of six closely nested culture-specific dwellings, raised market hall and low defensive enclosure with a visible gate. Architecture expresses faction materials; larger and denser than village. No base tile, no terrain landscape.  Buildings: broad layered shelf-roofs and grown timber ribs with umber walls, pale lichen door frames and mauve canopy accents, not freestanding mushroom doodles; heraldry bonecrescent around threeseeds on umber. Humanoids adult serious humans with fungal grown armor and scarves.",
+  "frames": [
+    {
+      "id": "settlement.town.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.morrow_spore/4412f82546f45144622030946fc9b51712f42c761b382f7b2f04cf278db5977c/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0c0e51f729e3783bf76526a3459b207f1a6ecc90a745fa0f14dcaeb8c416d814",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/morrow/settlement.town.morrow_spore-v1.png",
+      "assets/art/source/faction-expansion/morrow/settlement.town.morrow_spore-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:11:18.567Z",
+  "referenceHashes": [
+    "2b363d29e32e3dfc7c4fe27d7d96a570b512373a17a2eeb7ba8fd298d11626a8",
+    "a492aa3e15c0b809b4afcb9c7e99ed62487dc4357315832616ccde0931191e39"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "c2e66abef2e625003b1b346715dab4a4880c6e51ff34191ce480ff70b3fbd9b5",
+      "inputHash": "2b363d29e32e3dfc7c4fe27d7d96a570b512373a17a2eeb7ba8fd298d11626a8",
+      "outputHash": "c143682be8f906df0502cafd1b56904988218839abe77a4f914cbb30a8c0e072"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "c143682be8f906df0502cafd1b56904988218839abe77a4f914cbb30a8c0e072",
+      "outputHash": "8a9501b14bae1baefd7b71a33d5246cfec7b8a4abb00f7acc8e0e58dbf48ecda"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "8a9501b14bae1baefd7b71a33d5246cfec7b8a4abb00f7acc8e0e58dbf48ecda",
+      "outputHash": "837abdd80b8bb1fa3f6ea6f6b1caa94ffec10a13b9e738663d6bab0591a0c117"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "0b7b61e88b90d5706bf78316e8dae269c46739c5dda866b779a8e6eddf436d08",
+      "outputHash": "0a5d9e8e4399a9120744bf420697a4764ef32a71219ffba4bd706eff9565c9f6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "af005f0d0e9516705b344cf02563d902f26d23794a9e6ecf96623afe011888ac",
+      "outputHash": "7c3184ef459aac3dd7f88b3ed4f9bfc2b1c77e8ea262ef36e2a0bb53d7180eb9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "a57ee15a4627caa3db0a455ebfb26ec2b980a9c14db9df5cf84fe6f75e7017ec",
+      "outputHash": "e8e64fead8a89a72feedf6b37b7fe03abcd376061869992b73fbef1b5b208278"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.morrow_spore.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:11.494Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Dense connected shelf roofs, perimeter wall and raised hall exceed the open village mass. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 4412f82546f45144622030946fc9b51712f42c761b382f7b2f04cf278db5977c; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0ad7250b8e085933726ab4d5b6c892fd68f0b59fcd4c90137084dbcc278a7137.png"
+    ],
+    "inputHash": "e257d5c4b5b652e1d47a0c30eedb03b91138ca780d701f3de5954b40471878de"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

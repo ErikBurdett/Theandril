@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.glass_tide",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.glass_tide"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Glass Tide salt coast culture: pale salt-linen and slate-blue sails, elegant sweeping hull lines, grey weathered timber, curved shield rails, blue beacon-shaped mast caps, simple hollow sail diamond above two horizontal bars emblem. Slender chartered maritime design, no magical glass hull. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.glass_tide/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.glass_tide/24c9cd13f34bdadd8c17988c0c24cb024cf9f38bed7da7ebc299e99ceb36f453/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "3412c484e0ef66fd573c0b170091227e9d996640dfaf5b6ee530078133101bab",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.glass_tide-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.glass_tide-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:02:10.600Z",
+  "referenceHashes": [
+    "e47cd3f47077276c963375a60190bd7b66d02a2684f5550cd8d27d72f7a8c325",
+    "e69fa348b488a970615672fd078b13c1c44a27b4e66557f1ba36e6621a25d20c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "3e5dbaeb7350b30cc8086272dc5d45a2484a3c1149c09dacf9f30e4c9856889e",
+      "inputHash": "e47cd3f47077276c963375a60190bd7b66d02a2684f5550cd8d27d72f7a8c325",
+      "outputHash": "957e331dc5ed233afafd25ea04c22650b024bfa9d4f80a92bcf1a9d7a99d8fcd"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "957e331dc5ed233afafd25ea04c22650b024bfa9d4f80a92bcf1a9d7a99d8fcd",
+      "outputHash": "d3269beda177d4afbccaf1930ba4edb8d5b3308ac0f018b688a640b4f7a8a6d2"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d3269beda177d4afbccaf1930ba4edb8d5b3308ac0f018b688a640b4f7a8a6d2",
+      "outputHash": "562e01ac4e3f23907670493b8a6c900b3c1b6c96bd24bcc92f0b780bf23d5a18"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "bc588e489c33aa836b31eb4d28988e376be6bc2e9c5f48fa29ba2282a7cc7b1b",
+      "outputHash": "f707b3b42156cc76ac094eb4fb2124788601f223e4f7a83c321d47092bbc37a7"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "500922ab35cd1428ce75a7a6b8d39ec378065258ea2c75b37b7321a13ec81bbc",
+      "outputHash": "2f7ec8bd01feead37357cddc68eedc6c0ba9d3ea040752514c61d0125b702850"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "93c6630ae01ee7885644182dabd6cf5512180076df362a7ca2c4949b402c2143",
+      "outputHash": "0a0a57bc5459c00566b84d536bbf58b127f5588236b88760a9c3de16688de641"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.glass_tide.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:02.703Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Pale blue-white sail masses and curved salt-grey hull contours are legible; narrow oared galley, broad cargo canopy and paired-sail warship remain distinct. Raised fighting decks and separate square sails read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate 24c9cd13f34bdadd8c17988c0c24cb024cf9f38bed7da7ebc299e99ceb36f453; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d9b9f34f5fdec7637831b584f6ece45e2f4ce2a3fd2c6976545ec628ae31fca9.png"
+    ],
+    "inputHash": "86d345fb5eac45af33def9504d18e1a33a5039d3276c281e4d47a8ab66ec2603"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

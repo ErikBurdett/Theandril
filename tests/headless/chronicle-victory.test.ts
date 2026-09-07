@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { createGame, getObservation, stateHash, type GameCommand } from '../../packages/sim/src/index';
-import { planTurn } from '../../packages/ai/src/index';
+import { aiObservationOptions, planTurn } from '../../packages/ai/src/index';
 import { applyRecordedCommand, createArchive, generateChronicles, replayArchive } from '../../packages/chronicle/src/index';
 import { deserializeCampaign, serializeCampaign } from '../../packages/persistence/src/index';
 
@@ -19,7 +19,7 @@ test.each(['short', 'epic'] as const)('generated-start %s AI victory produces co
   };
   while (!game.victory && game.turn <= (pace === 'short' ? 150 : 1400)) {
     for (const faction of game.factions) {
-      for (const command of planTurn(getObservation(game, faction.id))) {
+      for (const command of planTurn(getObservation(game, faction.id, aiObservationOptions(game.turn)))) {
         issue(command);
         for (let decisions = 0; game.battle || game.pendingCapture; decisions++) {
           if (decisions > 4) throw new Error('AI decision loop did not terminate.');
@@ -28,7 +28,7 @@ test.each(['short', 'epic'] as const)('generated-start %s AI victory produces co
             const controller = [battle.attackerFactionId, battle.defenderFactionId].includes(game.turnOwnerId) ? game.turnOwnerId : battle.attackerFactionId;
             issue({ type: 'autoResolveBattle', factionId: controller });
           } else if (game.pendingCapture) {
-            const command = planTurn(getObservation(game, game.pendingCapture.factionId))[0];
+            const command = planTurn(getObservation(game, game.pendingCapture.factionId, aiObservationOptions(game.turn)))[0];
             if (!command || command.type !== 'resolveCapture') throw new Error('Missing AI capture decision.');
             issue(command);
           }

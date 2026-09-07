@@ -3,14 +3,14 @@ import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { CHARACTER_DEFINITIONS, FACTIONS, UNITS } from '../../content/src/index';
 import {
-  FACTION_ART_FAMILIES, FACTION_ART_IDS, FACTION_ART_ROLES, factionArtId,
+  FACTION_ART_FAMILIES, FACTION_ART_IDS, FACTION_ART_ROLES, factionArtId, isFactionNavalArtRole,
   cropImage, decodePng, parseAssetManifest, parseRuntimeCatalog, safeAssetPath, sha256, validateAsset,
   type RgbaImage, type RuntimeCatalog,
 } from './index';
 import { FACTION_SOURCE_KINDS, isFactionOriginalSource } from './faction-source';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
-const expectedRoles = [...UNITS.filter(unit => unit.movementDomain !== 'naval').map(unit => unit.id), ...CHARACTER_DEFINITIONS.map(character => character.id),
+const expectedRoles = [...UNITS.map(unit => unit.id), ...CHARACTER_DEFINITIONS.map(character => character.id),
   'settlement.village', 'settlement.town', 'settlement.city', 'ui.crest', 'ui.badge', 'ui.banner'];
 const bytes = new Map<string, Promise<Buffer>>();
 function retained(path: string): Promise<Buffer> {
@@ -55,7 +55,7 @@ describe('published faction art release coverage — real retained files, no fix
     }
   });
 
-  it('covers every released culture, land unit and character plus all town stages and heraldry exactly once', () => {
+  it('covers every released culture, land/naval unit and character plus all town stages and heraldry exactly once', () => {
     const missing = FACTION_ART_IDS.filter(id => !catalog.assets.some(asset => asset.id === id));
     expect(missing, 'Every culture must be approved and published; missing families are never skipped').toEqual([]);
     expect(FACTIONS.map(faction => faction.id).sort()).toEqual(FACTION_ART_FAMILIES.map(family => `faction.${family}`).sort());
@@ -72,12 +72,14 @@ describe('published faction art release coverage — real retained files, no fix
     }
   });
 
-  it('explicitly leaves the three new naval roles pending rather than borrowing approved infantry artwork', () => {
+  it('publishes all36 qualified naval roles without generic or infantry substitutions', () => {
     const navalRoles = UNITS.filter(unit => unit.movementDomain === 'naval').map(unit => unit.id).sort();
     expect(navalRoles).toEqual(['unit.coastal_warship', 'unit.ocean_warship', 'unit.transport']);
     for (const faction of FACTIONS) for (const role of navalRoles) {
-      expect(factionArtId(role, faction.id)).toBeUndefined();
-      expect(catalog.assets.some(asset => asset.contentIds.includes(role) || asset.contentIds.includes(`${role}.${faction.id.slice('faction.'.length)}`))).toBe(false);
+      const id = factionArtId(role, faction.id)!;
+      expect(id).toBe(`${role}.${faction.id.slice('faction.'.length)}`);
+      expect(catalog.assets.filter(asset => asset.contentIds.includes(id))).toEqual([expect.objectContaining({ id, contentIds: [id], nativeResolution: { width: 96, height: 96 }, pivot: [48, 80] })]);
+      expect(catalog.assets.some(asset => asset.contentIds.includes(role))).toBe(false);
     }
   });
 
@@ -106,7 +108,7 @@ describe('published faction art release coverage — real retained files, no fix
       const asset = catalog.assets.find(asset => asset.id === id);
       expect(asset, `Missing approved runtime artwork: ${id}`).toBeDefined();
       if (!asset) throw new Error(`Missing approved runtime artwork: ${id}`);
-      const native = role === 'settlement.city' ? 128 : role === 'unit.cavalry' || role === 'settlement.village' || role === 'settlement.town' ? 96 : role === 'ui.badge' ? 32 : 64;
+      const native = role === 'settlement.city' ? 128 : isFactionNavalArtRole(role) || role === 'unit.cavalry' || role === 'settlement.village' || role === 'settlement.town' ? 96 : role === 'ui.badge' ? 32 : 64;
       const pivot = [native / 2, role === 'ui.badge' || role === 'ui.crest' ? native / 2 : native > 64 ? native - 16 : 56];
       expect(asset.nativeResolution, id).toEqual({ width: native, height: native });
       expect(asset.pivot, id).toEqual(pivot);
@@ -128,7 +130,7 @@ describe('published faction art release coverage — real retained files, no fix
       const original = manifest.provenance.sourceRefs.find(path => isFactionOriginalSource(family, role, path));
       expect(original, `${id} needs its own retained original source, never a cache/approval copy`).toBeDefined();
       expect(manifest.referenceHashes).toContain(sha256(await retained(original!)));
-      if (FACTION_SOURCE_KINDS[family] === 'batch') {
+      if (isFactionNavalArtRole(role) || FACTION_SOURCE_KINDS[family] === 'batch') {
         const recordPath = original!.slice(0, -4) + '.json';
         const recordBytes = await retained(recordPath), record = JSON.parse(recordBytes.toString('utf8'));
         expect(manifest.provenance.sourceRefs).toContain(recordPath);
@@ -143,7 +145,7 @@ describe('published faction art release coverage — real retained files, no fix
         expect(path).not.toContain('/cache/'); expect(path).not.toContain('/rejected/');
         expect((await retained(path)).byteLength, `Retained provenance/evidence ${path}`).toBeGreaterThan(0);
       }
-      expect(manifest.processing.map(step => step.tool)).toEqual(expect.arrayContaining([FACTION_SOURCE_KINDS[family] === 'sheet' ? 'theandril-faction-extraction' : 'theandril-single-asset-extraction', 'spritefusion-pixel-snapper', 'aseprite']));
+      expect(manifest.processing.map(step => step.tool)).toEqual(expect.arrayContaining([!isFactionNavalArtRole(role) && FACTION_SOURCE_KINDS[family] === 'sheet' ? 'theandril-faction-extraction' : 'theandril-single-asset-extraction', 'spritefusion-pixel-snapper', 'aseprite']));
       const framePath = manifest.frames[0]!.sourcePath;
       expect(framePath).toMatch(new RegExp(`^assets/art/approved/${id}/[a-f0-9]{64}/frame-0\\.png$`));
       const frame = decodePng(await retained(framePath));

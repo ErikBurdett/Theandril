@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.mire_courts",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Mire Courts elder fenfolk craft: organic swept rootwood hull, woven bark screens, deep plum sails, moss leather lashings, copper bindings and long leaf-shaped shield panels. Small forked root insignia. Graceful pointed root contours, no neon magical plants or whimsical fantasy flowers. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.mire_courts/fdf0858cb1b6663a798674f9e005a1fefa55d65925c40fd1609139a19e67ecd0/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "61892ddaa7f7aa85bd182b3dd321e4b5764c341d42c989ef4a0ec7e273af9690",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:21:11.837Z",
+  "referenceHashes": [
+    "df29243720312b572cf222f9baf114f1091fddfaca4bff7f4eb2367e3bfe844e",
+    "3a81d3a57c37a83ddd065d957609225528447d88aedc04e249dd269f77671863"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "ca6782e0e6c07253973d308c856aa367abe94d8f9d34088df95ab06312432441",
+      "inputHash": "df29243720312b572cf222f9baf114f1091fddfaca4bff7f4eb2367e3bfe844e",
+      "outputHash": "cea6746891840365350cf63808ab2156895936833c256a2a3bbfbe51f79da7d2"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "cea6746891840365350cf63808ab2156895936833c256a2a3bbfbe51f79da7d2",
+      "outputHash": "e19c754fabfe27dddc406370934702740bbc8c6478eeb0185a01b1fae6425245"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e19c754fabfe27dddc406370934702740bbc8c6478eeb0185a01b1fae6425245",
+      "outputHash": "01b7ed6a53ee2dfbb351f43b2ef0b43c7a046d558ddbf3e21dc19a12f00f850a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "14d0e4243a5a4ff10911081bc89a87df80b1fc991d2a9225354b697fec74467b",
+      "outputHash": "8a5af53783f67cc81c4090a3f6460593df77f096abe8609c436a6c0d4210a4d6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "18cbdda9d0d0413e5f0fe4fb88a5f4d0ef4b893bb69ba3d3ce3fa0e8f8c4ef1c",
+      "outputHash": "0657d55e35b1f87847780d1674e64d531c400835d3e2248c228c61989d17b099"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "ef385305cd81c51860f42a264e971411838e34472a259a9c4fab0076a52ed462",
+      "outputHash": "c66f17fe203d8b9a48086d3b0f1b1f049aa4fdfb8d7516b25a30dcedbc08f36c"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.mire_courts.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:05.123Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Rootwood curves, leaf-shaped fittings and fork-root cloth motifs survive the fixed palette. Plum sources become muted earth/plum tones; complete oars and organic prow remain intact. Low oared hull and triangular sail read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate fdf0858cb1b6663a798674f9e005a1fefa55d65925c40fd1609139a19e67ecd0; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/2f6c15c7128f84a793f4eda1861a43183d2e1eddf33f30e01359d4242cfb8d32.png"
+    ],
+    "inputHash": "bcba2601d57ccf79fdaaa85f68ec74198bd54c08862b5b082a24c06e64ba2d92"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,5 +1,30 @@
 # Theandril Magic, Technology & Research Design
 
+## Implementation checkpoint — slice 17, 2026-09-06
+
+This checkpoint describes playable rules, not completion of the specification below. Current definitions are in [practical progression](../packages/content/src/progression.ts), [land improvements](../packages/content/src/ecology.ts) and [character skills](../packages/content/src/characters.ts). Overall verification and remaining release gates belong to [implementation status](IMPLEMENTATION_STATUS.md).
+
+There are **ten mundane technology nodes**, grouped into four branches. Research immediately spends accumulated knowledge once its prerequisites are met; there is no research queue or assigned research workforce yet. Costs below are knowledge, not coin.
+
+| Branch | Actual nodes and prerequisites | Implemented effect |
+|---|---|---|
+| Craft | Cinder masonry (24) → Counterweighted cranes (60) | Masonry adds 2 industry per settlement; cranes unlock paid Oreworks on mineral seams. |
+| Stewardship | Seasonal stewardship (36) → Sluice waterworks (64) or Charter forestry (72) | Unlocks Spring gardens, Polders and Grove archives respectively, with distinct site requirements and signed yield tradeoffs. Both child branches may be researched. |
+| Navigation | Coastal navigation (30) → Ocean navigation (80) → Deep soundings (120) | Unlocks harbors/coastal vessels, eligible ocean traversal, then paid Tide observatories on shallow water. Coastal-only hulls and deep-water worker restrictions remain. |
+| Civic | Civic accounts (40/400/800/1600 for Short/Standard/Long/Epic); Surveyed estates (60, requires Seasonal stewardship) | Accounts adds 1 coin and 1 knowledge per settlement and helps qualify for the Hearth Exchange. Surveyed estates adds 1 civic border progress per eligible settlement-turn. |
+
+An improvement unlock does not construct or work a tile: coin, a suitable owned site, active construction turns and worker assignment are still required. Automatic border growth grants claims, not workers or free tile income; siege, occupation and unavailable local frontier block it. The six added technologies and five added improvements execute under rules 11; genuine earlier command histories retain their original eligibility and outcomes.
+
+The **eleven distinct earned character skills** are a separate personal progression system, not eleven technologies or magical Paths. Four 12-XP specializations lead to seven prerequisite-based upgrades (18 XP each, except Field orders at 24 XP):
+
+- Marshals choose Keeper of the line or Decisive orders. Either opens Muster rolls → Field orders, raising healthy command capacity from 16 to 18 to 20 formations. Unbroken line follows Keeper of the line; Measured advance follows Decisive orders. These armor/attack branches can coexist with command expansion, but the two specializations remain exclusive.
+- Surveyors take Patient fieldcraft → Horizon studies, extending the actual survey radius from 6 to 7 to 8 hexes without revealing hidden armies.
+- Engineers choose Patient fieldcraft → Column workshops (refit capacity 5 → 7 → 10 missing strength per surviving formation), or Siege craft → Sapper watch (sabotage failure risk 25% → 10% → 0%). Enemy action can still interrupt missions; destroyed formations are not recreated. Patient fieldcraft is shared with surveyors and counted once in the eleven definitions.
+
+Experience comes from actual missions/battle outcomes and is spent on eligible skills; it is not national knowledge. Marshal leadership and the once-per-battle Rally ability are implemented mundane command effects. The two coin-paid institutional choices and two coin-paid doctrine choices also remain separate, permanently exclusive within their respective slots.
+
+**Not implemented:** national Arcane Theory, individual caster aptitudes/Paths, battle spells, strategic rituals, summons, magical-resource economies, sacred/occult progression, or magical crafting. Paid biome cultivation, frontier surveys, Rally and practical research do not stand in for these systems. The examples and larger targets below remain an aspirational design, not selectable content or a 1.0 signoff.
+
 ## Design goal
 
 Theandril's progression should combine:
@@ -190,4 +215,3 @@ The player needs to see:
 - site-based and artifact-based discoveries.
 
 Depth should be legible.
-

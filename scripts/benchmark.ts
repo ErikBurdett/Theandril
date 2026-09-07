@@ -1,7 +1,7 @@
 import { cpus, platform, release } from 'node:os';
 import { performance } from 'node:perf_hooks';
 import { createGame, applyCommand, getObservation, serializeGame, deserializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
-import { planTurn } from '@theandril/ai';
+import { aiObservationOptions, planTurn } from '@theandril/ai';
 import type { MapSize } from '@theandril/mapgen';
 import { matureCampaign } from '../packages/test-fixtures/src/index';
 import { autoResolveBattle, createBattle, type BattleFormation } from '../packages/sim/src/combat';
@@ -42,7 +42,7 @@ for (const size of ['huge', 'legendary'] satisfies MapSize[]) {
       const planning = performance.now();
       // Fixed-length scale workload intentionally defers the terminal project.
       // A separate benchmark-chronicle run measures real generated-start victory.
-      const proposals = planTurn(getObservation(state, faction.id)).filter(command => command.type !== 'startVictoryProject');
+      const proposals = planTurn(getObservation(state, faction.id, aiObservationOptions(state.turn))).filter(command => command.type !== 'startVictoryProject');
       aiMs += performance.now() - planning;
       for (const command of proposals) {
         issue(command);
@@ -92,7 +92,7 @@ for (const size of ['huge', 'legendary'] satisfies MapSize[]) {
     saveBytes: Buffer.byteLength(saved), fullObservationBytes: Buffer.byteLength(JSON.stringify(view)),
     heapSamplesMiB: memory.map(bytes => Math.round(bytes / 1048576)), hashes, saveHash: stateHash(state),
     averagePhaseMs: Object.fromEntries(Object.entries(phases).map(([phase, ms]) => [phase, ms / 100])),
-    note: (mature ? 'Synthetic 1500/4000-singleton-army starting position; real command validation, AI, economy and movement for 100 turns. Field battles resolve when encountered.' : 'Young campaign with real AI; content roster reused for stress faction counts.') + ' Army containers and canonical formations are counted separately: merging lowers container count without erasing formation workload. Victory project proposals are intentionally deferred for this 100-turn workload; full archived victory is benchmarked separately.' });
+    note: (mature ? 'Synthetic 1500/4000-singleton-army starting position; real command validation, AI, economy and movement for 100 turns. Field battles resolve when encountered.' : 'Young campaign with real AI; content roster reused for stress faction counts.') + ' AI timing includes observations using the production rotating eight-town detail window; fullObservationBytes is a separate unscoped diagnostic read. Army containers and canonical formations are counted separately: merging lowers container count without erasing formation workload. Victory project proposals are intentionally deferred for this 100-turn workload; full archived victory is benchmarked separately.' });
   }
 }
 // Keep the original kernel workload comparable when the campaign content roster grows.

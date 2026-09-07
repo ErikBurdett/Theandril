@@ -95,7 +95,9 @@ function improvedLandGallery() {
   const town = Object.values(state.settlements)[0]!;
   town.population = 6; state.factions[0]!.treasury = 5000;
   expect(applyCommand(state, { type: 'setWorkedTiles', factionId: state.turnOwnerId, settlementId: town.id, cells }).ok).toBe(true);
-  IMPROVEMENTS.forEach((definition, index) => {
+  // This gallery owns the five approved original props. Research-gated sites
+  // have separate real-command and procedural-only coverage in city-growth.
+  IMPROVEMENTS.slice(0, 5).forEach((definition, index) => {
     expect(applyCommand(state, { type: 'improveTile', factionId: state.turnOwnerId, settlementId: town.id, cell: cells[index]!, improvementId: definition.id }).ok).toBe(true);
     for (let turn = 0; turn < definition.turns; turn++) expect(applyCommand(state, { type: 'endTurn', factionId: state.turnOwnerId }).ok).toBe(true);
   });

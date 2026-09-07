@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.iron_covenant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.iron_covenant"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Iron Covenant mountain craft culture: squat broad hull, blue-black riveted iron belt plates, dull brass rivets, charcoal leather rigging protectors, broad squared deck shelters and dark navy sails. Original split anvil emblem with divided stem. Ordinary sail-and-oar vessel, no engine, no smokestack. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.iron_covenant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.iron_covenant/c2a81b6be8aec6b0c66b6c15295cd88335456f8ddcaa1aa0947be1e1564569bc/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "31c14d03ee556b0bfcf0d3a7cfed29f925da1509436a21bee94d7bf78eb34735",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.iron_covenant-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.iron_covenant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:08:17.323Z",
+  "referenceHashes": [
+    "f1cb75bfe915c2cccfb1897187962df9ed65deb4c9fefd20190858d52f3a2ea9",
+    "eb8d6b72d96c1a89a1e7125dbbd61f03e0b2f1c8aad33ede1aecb912bf6f3657"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "5fbbae0338010e6667ec50a2d83cdb30f0a381f725086e83c15121d250026564",
+      "inputHash": "f1cb75bfe915c2cccfb1897187962df9ed65deb4c9fefd20190858d52f3a2ea9",
+      "outputHash": "4662bab4a7c434ce0728b83c07b113c0ba9f87cf6686591f71e2cca5869a2e65"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "4662bab4a7c434ce0728b83c07b113c0ba9f87cf6686591f71e2cca5869a2e65",
+      "outputHash": "4085618922bef244a01f7f7d23dfa322b5e893ddd4700a03d8129e3f3a75074e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4085618922bef244a01f7f7d23dfa322b5e893ddd4700a03d8129e3f3a75074e",
+      "outputHash": "3f2081b5b192bd9e53d820185deb6c7d4dc09cfa38682d654959ac84980166b1"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "12cfbb1aae18cd0ae74df78470463624983ecb201e3ce30db6cc07a227b682a2",
+      "outputHash": "1275df5e6aeb73f5b5432f4ae812099be996de186f29be5c2000e9e8683e7942"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "fef213561461261707b2ab31cca0358020d5d3c6a358bdf23377e1737a1a6d1d",
+      "outputHash": "8f237e8ec33b6ac17224c1a469698f16afbedd68b6b005818c96f4a920fa295f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "09d277e525a67d54901cc3b5cb086838ffc47b3e8ae59f602dd0e347e995e3bb",
+      "outputHash": "dabaefcaff216fda968c2dfce06dc46c928247806d28cefa765b1db405f83639"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.iron_covenant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:03.639Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Navy canvas, broad riveted belt plating and brass edges retained. Dark iron masses remain subdued; whole oars and mast tips enclosed, with three distinct hull profiles. Raised fighting decks and separate square sails read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate c2a81b6be8aec6b0c66b6c15295cd88335456f8ddcaa1aa0947be1e1564569bc; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/49ef88f92cc91afdc412db198d29416a27f0e34b7b79df681239de7b785d902a.png"
+    ],
+    "inputHash": "1b20d05315bd6e987c8b6628676817e89a73280b7a1e48cc9aab025a64b27e93"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

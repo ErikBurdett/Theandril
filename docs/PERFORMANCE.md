@@ -1,10 +1,104 @@
 # Performance measurements
 
-**Latest:** [slices 13–14 — integrated large-empire UI and browser evidence](performance/0019-large-empire-ui.md), [next-action navigation](performance/0019-next-action.md), [slice 13 — scoped town details and unchanged Epic replay](performance/0018-read-models.md), with [matched packed-cell measurements](performance/0017-cell-transfer.md). Historical comparisons: [slice 12 — territory campaigns, six-culture art, Epic archives and corrected rendering](performance/0016-territory-integration.md), [dedicated paid-land and many-town observations](performance/0015-territory.md), [slice 11 — military campaigns and rendering](performance/0014-integrated-military-campaigns.md), [general-led armies and loaded voyages](performance/0012-armies-fleets.md), [pacing investigation](performance/0013-pacing-diagnostics.md), [slice 10 — four-culture art](performance/0010-faction-art.md), [slice 9 — incremental local storage](performance/0009-incremental-storage.md), and [slice 8 — named officers and missions](performance/0008-characters-and-missions.md). [Slice 7](performance/0007-contact-and-armies.md) retains the contact/composed-army comparison, [slice 6](performance/0006-art-factory.md) the reviewed-art baseline, and [slice 5](performance/0005-travel-biomes.md) the earlier movement/biome measurements. The tables below remain the older pre-travel/schema-4 comparison, not current totals.
+## Slice 18 — navigation, quiet overlays and naval publication
+
+[Current report](performance/0025-ui-navies.md) separates offline compiler cost, actual browser rendering and the exact-save hashing optimization. All twelve playable cultures now have three individually approved naval hulls; 260 assets / 278 frames fit the existing 2048² map page. The expanded PNG is 1,333,608 bytes; decoded map atlas remains 16 MiB, not total presentation memory. Warm median compiler validation/packing+encode/decode are 77.837/178.700/59.502 ms, compared with 67.338/152.911/52.480 ms for the prior 224 assets. [Before](performance/0025-art-before.json), [after](performance/0025-art-after.json).
+
+The first integrated fully explored Huge rendering capture preserves schema-11 seal `9a97cc37` and 1,973,594 worker-transfer bytes. Its five camera stages retain 16.7–16.8 ms rolling frame p95, 1,024–4,096 drawn terrain cells, at most 48 near sprites/two home strategic heraldic aggregates and one contextual home label. The 26 cached chunks have maximum 837×711 bounds and 104 MiB estimated cache backing, separate from map/DOM atlases and uncounted GPU allocations. [Raw capture](performance/0025-art-render.json). This authored mature-entity world does not advance turns or prove a thousand-turn giant campaign.
+
+[Streamed envelope measurements](performance/0025-envelope-hash.json) compare forty alternating complete hash operations per path after six warmups, with strict projection, JSON, both FNV checksums and ordinary GC included. Huge/Legendary synthetic-scale medians improve 3.35–3.50%; Tiny is unchanged within noise, while Legendary p95 worsens. Exact complete saves, checksums, strict restoration, arbitrary UTF-16 and historical seals remain verified. This is a modest allocation reduction, not a whole-campaign speedup claim.
+
+Current automated checkpoint: 965/966 tests across 100 files; the Epic 60-second integration test still times out under parallel load (71.133 seconds). Its isolated file passes both Short and Epic, including turn-500 continuation and both full replays, in 61.13 seconds total / 60.28 seconds combined test time; the individual Epic elapsed time was not emitted by this reporter. The unchanged per-test limit is respected in isolation, but the broad-run timing gate remains open. Typecheck, lint, content validation and production build pass. **All 82 final frozen-source Chromium scenarios pass (5.6 minutes)**; earlier failures and concrete corrections remain recorded in the slice report. The [final renderer capture](performance/0025-art-render-final.json) retains 16.7–16.8 ms warmed rolling p95 with 292.8 ms art load / 40.6 ms first-render CPU. The separate [generated-start capture](performance/0025-starting-map-final.json) records 33.3 ms p95 after 80 frames; it is not substituted with the steadier fully explored sample.
+
+**Preceding slice-17 checkpoint:** [slice 17 — civic borders, researched construction and bounded read/save work](performance/0024-city-research.md), with [generated 100-round results](performance/0024-city-research-after.json), [same-state AI detail windows](performance/0024-ai-land-window.json) and [schema-11 Epic archive](performance/0024-epic-after.json). The unchanged 60-second Epic saved-mirror/two-replay integration gate remains **open**. The slice-17 browser attempt was 76/77 with one hot-reload-interrupted failure; see the slice-18 checkpoint above for its replacement. Prior complete browser/art evidence: [twelve-culture matched publication and final 71-scenario run](performance/0022-faction-art.md), with a separately open [narrow-menu painting defect](performance/0023-menu-paint.md). Earlier headless evidence: [twelve-culture roster measurements](performance/0020-faction-roster.json) and [schema-10 Epic archive](performance/0021-roster-epic.json), preserved below. Previous integrated browser evidence: [slices 13–14 — large-empire UI](performance/0019-large-empire-ui.md), [next-action navigation](performance/0019-next-action.md), [scoped town details and Epic replay](performance/0018-read-models.md), with [matched packed-cell measurements](performance/0017-cell-transfer.md). Historical comparisons: [slice 12 — territory campaigns, six-culture art, Epic archives and corrected rendering](performance/0016-territory-integration.md), [dedicated paid-land and many-town observations](performance/0015-territory.md), [slice 11 — military campaigns and rendering](performance/0014-integrated-military-campaigns.md), [general-led armies and loaded voyages](performance/0012-armies-fleets.md), [pacing investigation](performance/0013-pacing-diagnostics.md), [slice 10 — four-culture art](performance/0010-faction-art.md), [slice 9 — incremental local storage](performance/0009-incremental-storage.md), and [slice 8 — named officers and missions](performance/0008-characters-and-missions.md). [Slice 7](performance/0007-contact-and-armies.md) retains the contact/composed-army comparison, [slice 6](performance/0006-art-factory.md) the reviewed-art baseline, and [slice 5](performance/0005-travel-biomes.md) the earlier movement/biome measurements. The separately labeled schema-4 tables remain historical, not current totals.
+
+## Schema-11 civic research checkpoint — remaining gates open
+
+Measured 2026-09-06, content `3c54fb02`, roster 3/generator 4; Node v26.7.0 on the i9-13900K development host. `node --import tsx scripts/benchmark-city-research.ts` starts generated Tiny/Epic seed 20260906 with twelve cultures and runs 100 ordinary all-faction rounds to turn 101. No treasury/building grants or deferred victories: 6,102 accepted commands, zero refusals, 49 towns, 655 claims, 287 worked cells and 81 retained improvements. All 3,178 commands after the turn-51 mirror match; all 6,102 commands/results replay from origin. Final restore/replay save strings match at **956,318 bytes**, seal **`8d7bd333`**. [Full scope, counts and raw evidence](performance/0024-city-research.md).
+
+The 1,200 **per-faction** scoped-observation-plus-plan samples have median/p95 **1.096/2.749 ms**; 100 End-turn commands have **1.242/1.852 ms**. These exclude mirror/replay, persistence, archive recording and rendering, and are not whole-round totals. Final-player summary/full/AI-scoped/single-town query medians are **0.479/0.606/0.594/0.130 ms** after four warmups and twenty samples. That player owns one town, so full/scoped detail both cover 37 cells and do not represent the large-empire optimization benefit. Changed schema-10 versus schema-11 growth/research economics produce different campaigns; their timings are not a pure optimization comparison.
+
+`node --import tsx scripts/benchmark-ai-land-window.ts` separately alternates full/scoped warm reads on unchanged synthetic turn-one empires. Population/ownership/army placement are authored; claims and worker assignments use paid/public commands before timing. All summaries remain, with eight towns receiving detailed quotes. No turns, planner execution, archival work, persistence or renderer work are timed. [Raw same-state measurements](performance/0024-ai-land-window.json).
+
+| Synthetic workload | Full → scoped detailed cells | Full read median / p95 | Scoped read median / p95 | Diagnostic observation bytes: full → scoped |
+|---|---:|---:|---:|---:|
+| Huge, 1,500 global armies, 32 owned towns | 1,184 → 296 | 26.775 / 31.883 ms | 24.029 / 27.689 ms | 7,314,658 → 3,131,873 |
+| Legendary, 4,000 global armies, 40 owned towns | 1,480 → 296 | 73.019 / 79.952 ms | 70.038 / 78.894 ms | 11,079,186 → 5,501,733 |
+
+Twenty samples per mode follow four warmups. Outside timing, all commands/reasons match exactly (58/89 proposals) and save bytes remain unchanged, seals `5347045a`/`953a4ff2`. These JSON sizes are **not packed worker transfers**; other observation work still accounts for the substantial remaining cost.
+
+The current [Epic benchmark](performance/0024-epic-after.json), reproduced with `node --import tsx scripts/benchmark-chronicle.ts --seed=20260905 --size=tiny --pace=epic --factions=4 --limit=1400`, reaches Cinder March victory on **turn 1,244 after 1,243 rounds**. It retains the genuine pre-optimization **27,843 orders / 73,630 events / 1,331 battles**, zero refusals and seal **`c62e5459`**. Envelope/gzip/technical/history sizes and 1,246 chapters also remain exact. Recorded play is **25.730 seconds**, mean **20.700 ms/round** with recording; observed read/plan/command-and-recording counters are **7.172/6.653/11.559 seconds**, excluding some loop work.
+
+Final envelope save/load takes **146.033/310.906 ms** for **25,076,089 bytes**. Compressed export/import takes **596.145/555.167 ms** for **2,193,968 bytes**. Generating both documents takes **638.714 ms** (technical **41,283,686 bytes**, history **2,138,688 bytes**); complete archive replay takes **12,113.899 ms** and matches the final seal. The final 559 MiB heap sample is not peak/retained-memory proof. Five asset-processing operations briefly overlapped this run for approximately one second, so it is **not an isolated whole-run speedup measurement**. It verifies final envelope restoration and one complete replay, **not a turn-500 mirror or second technical replay**, and is not a thousand-turn giant-map campaign.
+
+The independent integration test retains all saved-mirror/document/two-replay assertions and its original 60-second timeout. Latest broad verification is **941/942 passing**, with Epic at **66.387 seconds**; serial verification still records **61.556 seconds** for Epic (**179.140 seconds** for the complete suite). The timing gate is open, not hidden by successful standalone benchmarking. Slice-17 functionality and targeted evidence are implemented; the clean final browser run and slice-18 rendering/art measurements remain separate pending work. No 1.0 completion claim is made.
+
+## Schema-10 twelve-culture roster: generated play and historical origins
+
+Measured 2026-09-06 in reserved host windows: save/rules 10, content `4c2fed32`, roster 3, physical generator 4; Node v26.7.0, Linux 7.1.9-arch1-2, i9-13900K (32 logical CPUs), 33,317,580,800 bytes installed RAM. Reproduce the roster workload with `node --import tsx scripts/benchmark-faction-roster.ts`; the script prints JSON and asserts the exact schema/content/roster before work. `--smoke` is a smaller diagnostic, not these results. [Raw report](performance/0020-faction-roster.json), [runner](../scripts/benchmark-faction-roster.ts).
+
+The generated Tiny/Epic campaign uses seed 748291 and all twelve distinct cultures. It executes **100 complete rounds, turn 1→101**, with no authored grants or deferred victory commands: 4,774 accepted commands, zero refusals, 343 battle resolutions and 32 capture decisions. Participant notifications are not unique conflicts: the corresponding battle-finished/capture event counts are 686/64. Every culture issues paid recruitment and land orders; recruitment counts describe queued orders, not completed troops. Four factions first observe a foreign army/town at turn 1, all twelve have such contact by turn 2, and the player first does at turn 2. Across the run all 66 unordered faction pairs make permitted entity contact; this dense Tiny fixture is not evidence for large-map contact times.
+
+| Timed work per round | Mean | Median | p95 |
+|---|---:|---:|---:|
+| All-faction full observations, including battle/capture decision reads | 10.238 ms | 11.127 ms | 16.640 ms |
+| Planning from those observations | 4.154 ms | 3.648 ms | 7.787 ms |
+| Submitted commands excluding End turn | 3.680 ms | 3.380 ms | 6.297 ms |
+| End-turn command/phases | 0.686 ms | 0.699 ms | 1.293 ms |
+| Sum of the four measured intervals | 18.757 ms | 18.730 ms | 29.519 ms |
+
+Each distribution contains 100 samples. These intervals exclude duplicate-plan checks, mirror/replay, history copying, save/hash verification and browser/worker work; their sum is not whole-process wall time. The complete script, including all origin workloads and verification, takes 11.754 seconds. End state: 108 armies / 182 formations, 40 towns, 50 character records, 316 claimed and 226 worked cells, 102 retained improvements and five cultivated cells. No victory is reached; the player has lost its towns, so this does not establish balanced success for every culture.
+
+The exact midpoint at turn 51 (`2304af83`, 449,149-byte save) continues through 2,490 mirrored commands; all 4,774 commands/results also replay from the initial save to `c38e2946`. Final canonical save/load takes 9.859/16.347 ms, 572,991 bytes. The final player's full observation is 93,635 JSON bytes (709 permitted cells, nine observed armies, four observed towns), not actual packed worker traffic. Final process heap/RSS are 130,660,824/495,497,216 bytes across the whole script, without forced GC; neither figure is peak or retained-memory proof.
+
+Historical checks use genuine pre-change schema-9 evidence (`9418e598`), not regenerated golden expectations. Explicit roster 2 regenerates byte-for-byte identical initial saves, physical arrays and starts for both sources; eight seats still reuse six cultures. Modern serialization has different identity metadata and therefore a different modern seal. This proves origin compatibility, not equivalence between old and current AI planning.
+
+| Captured Tiny/Short origin | Selected culture | Exact schema-9 seal | Modern loaded seal |
+|---|---|---|---|
+| Seed 20260905, six seats | Reedbound Council | `1754cd12` | `bcb4b647` |
+| Seed 74, eight seats | Sepulchral Synod | `58aa6b37` | `3a5cb55e` |
+
+The raw report retains both original save SHA-256 values; the runner compares complete saved strings with the frozen [schema-9 fixture](../packages/chronicle/src/fixtures/v9-archives.json).
+
+## Huge/Legendary roster costs: origins and freshly founded towns
+
+The same report measures seed 20260905, Epic pace, twelve or twenty-four seats on 196,608/307,200 cells. **Every case has twelve authored cultures, not twenty-four**. Origin creation is one timed sample, followed by untimed exact regeneration and strict saves. The physical-array seal matches roster 2 at equal size/seed/seat count; modern faction-affinity start assignments are not claimed identical to roster 2.
+
+Each faction then founds its first town through an ordinary command: 12/24 scouts and 12/24 towns remain, with 84/168 claims and no paid improvements, cultivation, characters or elapsed turns. Read/planning samples use this otherwise unmodified state. Four warmups and twenty timed repetitions run per seat; deterministic comparisons and actual proposal validation on a separate state are outside the timing intervals. Every view contains one owned town and army, 60–61 permitted cells, fourteen production options and ten currently legal options.
+
+| World / seats | Origin generation* | Origin / founded save bytes | Full per-seat observation bytes | Per-seat median read range | Per-seat median plan range |
+|---|---:|---:|---:|---:|---:|
+| Huge / 12 | 57.670 ms | 1,711,288 / 1,724,398 | 34,073–36,975 | 0.054–0.064 ms | 0.051–0.200 ms |
+| Huge / 24 | 53.363 ms | 1,727,398 / 1,754,003 | 34,062–36,904 | 0.058–0.071 ms | 0.048–0.161 ms |
+| Legendary / 12 | 68.679 ms | 2,664,667 / 2,677,782 | 34,078–37,013 | 0.050–0.057 ms | 0.040–0.152 ms |
+| Legendary / 24 | 70.394 ms | 2,680,933 / 2,707,567 | 34,073–37,133 | 0.054–0.066 ms | 0.036–0.143 ms |
+
+*One generation operation per case, not a cold-process distribution or measured speedup. Read/plan ranges are minimum–maximum **per-seat medians**, not an aggregate all-faction round. Tails remain visible in the raw report: maximum read/plan samples are 0.557/5.511 ms, 0.119/0.217 ms, 0.142/0.828 ms and 0.131/0.171 ms in table order. With twenty samples, the runner's p95 index selects that seat's maximum sample. Initial player reads contain 61 cells and one known seat, at 10,971 bytes on Huge or 11,035 on Legendary.
+
+Origin→first-town seals are `13735610`→`237b3c4e`, `537ab962`→`2c903076`, `d82dc992`→`b7a03be2`, and `80a3aa18`→`bd27c952`. Queries/planners leave these states unchanged; fresh plans execute legally on the separately validated copy. These are fresh-start production/read costs, **not mature empires, 100-turn giant campaigns, end-turn throughput, transport bytes or renderer measurements**.
+
+## Schema-10 complete Epic archive
+
+`node --import tsx scripts/benchmark-chronicle.ts --seed=20260905 --size=tiny --pace=epic --factions=4 --limit=1400` reaches actual Prosperity victory on **turn 863 after 862 rounds**, with 18,935 orders, 54,448 events, 888 archived battles and zero rejected commands. The Reedbound winner holds 34 towns. These outcome/activity counts, including all recorded character-activity counts, match the earlier [schema-9 run](performance/0016-territory-chronicle.json); the modern seal is **`a39584dc`**, not `177160fb`. This is a four-seat run of the original four cultures under current roster/schema rules, not a twelve-culture victory. [Current raw report](performance/0021-roster-epic.json), [runner](../scripts/benchmark-chronicle.ts).
+
+Generation precedes the campaign timer. Recorded play takes 18.341 seconds, mean 21.278 ms/round including archive work and end-turn checkpoints; observation/planning/command-and-recording counters are 5.672/5.562/6.768 seconds. The counters do not partition every loop operation (capture decision reads/plans, for example, remain in total time). No periodic storage, compression, final logs or rendering is included in this round mean.
+
+| Final operation | Time | Retained payload |
+|---|---:|---:|
+| Serialize / deserialize full campaign envelope | 80.424 / 206.815 ms | 17,011,577 bytes |
+| Export / import compressed envelope | 448.852 / 344.781 ms | 1,475,600 bytes |
+| Generate technical log and factual history | 427.065 ms | 27,815,983 / 1,308,675 bytes |
+| Replay complete archive from origin | 6,818.774 ms | Exact final seal `a39584dc` |
+
+Envelope restoration, compressed import and complete command replay all match the final state. This benchmark does **not** perform a turn-500 saved-resume comparison; earlier independently tested midpoint evidence is not relabeled as part of this run. Compared with schema 9, envelope/technical sizes increase by 19,841/19,849 bytes and gzip by 114 bytes, while history bytes and 865 chapters remain unchanged. The raw Epic format does not embed schema/content fields; run identity here is the verified current schema-10/content-`4c2fed32` checkpoint and explicit command, not an additional field claimed in that JSON.
+
+The 381 MiB final heap sample includes complete archives, document strings, restored games and replay work; it is neither peak memory nor a leak proof. No twelve-/twenty-four-faction thousand-turn giant campaign, difficulty balance, worker/autosave performance or final expanded-art rendering is established by these headless measurements.
+
+## Historical schema-4 baseline
 
 Measured 2026-09-05 on the integrated progression/pacing/chronicle working tree (starting commit `59c6dbe`). Linux 7.1.9-arch1-2, Intel i9-13900K, Node v26.7.0, save schema 4, content `3139d4e7`. Reproduce with `pnpm bench` and `pnpm bench:chronicles`. These development-machine results are not mainstream-device release claims.
 
-## Current campaign measurements
+### Campaign measurements
 
 Each fixture runs real AI, command validation, movement/visibility, economy, recruitment and recovery for 100 turns. Every fixture restores a midpoint save and verifies another 50 turns against uninterrupted execution, then checks the final save/load hash. There were zero rejected AI proposals. These fixed-length scale workloads explicitly defer `startVictoryProject` proposals so terminal victory does not truncate the measurement; separate complete-victory runs below do not defer any orders.
 
@@ -32,17 +126,17 @@ Full observations are diagnostic sizes, not per-frame traffic. The browser worke
 
 Raw heap samples across mature Huge: 60/66/111/116/119 MiB; mature Legendary: 38/63/143/137/156 MiB. These include a second resumed campaign after turn 50 and were not measured with forced GC. GC-timing noise requires a longer retained-memory investigation before release; this is not a leak proof. HUD events are capped at 200, HUD battle reports at 20, and diplomatic records at the supported faction-pair count. The separate full campaign archive is intentionally not represented in these canonical-only timings.
 
-## Combat
+### Combat
 
 The same benchmark script warms 20 battles, then measures 200 seeded 12-versus-12 formation battles using the production tactical/autoresolve kernel: median **0.444 ms**, p95 **1.347 ms**, maximum **3.600 ms**. Input validation, cloning and all rounds are included. Median is close to the prior 0.428 ms; tail latency is higher in this sample despite the unchanged kernel, so GC/host variance needs continued measurement. Browser gameplay scenarios separately prove tactical orders, AI intervention, strategic retreat and identical continuation from a saved battle round.
 
-## Conquest and peace
+### Conquest and peace
 
 After five warmups, 50 repeatable Reedwatch scenarios run a real three-turn blockade, militia assault, occupation, paid peace and treaty expiry. Assault command plus full autoresolve: median **0.258 ms**, p95 **0.438 ms**, excluding fixture setup. Proposal plus acceptance: median **0.025 ms**, p95 **0.039 ms**; this deliberately includes commands on the resumed mirror too. Every run reloads the pending capture decision and verifies subsequent capture/diplomacy and 11 resumed turns. Final hash: `7353c748`.
 
 An additional unit scenario runs **100 AI-led frontier turns** with actual siege, capture and accepted peace events, no rejected commands, save/load verification every turn and an uninterrupted-versus-restored mirror for the last 50 turns. It also explicitly defers terminal project proposals. This complements the large, geographically separated fixtures; it is not a dense late-game diplomatic stress test.
 
-## Complete campaigns and full archives
+### Complete campaigns and full archives
 
 `pnpm bench:chronicles` starts generated worlds with seed 20260905, gives every faction ordinary AI control, records every command/event/completed battle, and runs to actual Prosperity victory. It verifies complete replay, final envelope restoration, and compressed export/import. No project is skipped in this benchmark.
 
@@ -70,13 +164,13 @@ Raw post-case process heaps were 26/144/127/208/313 MiB, including temporary dec
 
 Duration calibration used generated four-AI Tiny games, three seeds per long profile: Standard **233–252**, Long **479–498**, Epic **996–1,021** turns, all with zero rejected commands. Standard is the default; Short is explicitly for regression/skirmish play. Four permanent Standard/Epic regressions verify midpoint continuation and continued late production. These profiles scale late knowledge/funding and a public response window; they do not implement difficulty behavior or prove sufficient long-campaign strategic variety.
 
-## Browser map
+### Browser map
 
 Chromium 151.0.7922.173 on Arch Linux, WebGL, 1440×1000 viewport; 390×844 responsive layout also inspected. The Huge camera scenario generates 196,608 canonical cells but initially reveals only 61. After pan/zoom, the final 68-frame sample measured 16.7 ms latest frame and 16.8 ms rolling p95, 0.20 ms CPU update/render submission, one cached/visible chunk, two entities, and a 6,855-byte initial worker update including progression choices. Playwright checks WebGL selection, bounded geometry/cache/transfer and absence of horizontal overflow. Visible ruin glyphs reuse the existing chunk-indexed marker layer. The complete Short watch/download/replay/reader scenario took 15.7 seconds including intentional watch delays and UI assertions; all 14 browser scenarios took 35.6 seconds.
 
 This short fog-limited, software-assisted Chromium result does not establish the frame budget of a fully explored mature empire.
 
-## Remaining performance gates
+### Remaining performance gates at that checkpoint
 
 No hierarchical pathfinder exists; adjacent movement is bounded neighbor lookup, so long-distance route timings remain pending. Fully explored/mature giant browser fixtures, virtualized registries, mainstream hardware, Firefox/WebKit, multiplayer and mixed late-game battle/magic/diplomacy workloads are still required. Rendering and simulation budgets remain separate.
 

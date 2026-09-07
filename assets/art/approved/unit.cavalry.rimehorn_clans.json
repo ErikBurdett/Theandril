@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.rimehorn_clans",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.rimehorn_clans"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: one original Theandril dark-fantasy strategic game sprite, unit.cavalry, static first-facing pose.\nScene/backdrop: genuinely TRANSPARENT RGBA background, alpha zero around the isolated sprite. Do NOT paint a checkerboard, white/black backdrop, landscape, scene, floor tile, drop-shadow oval or framing panel.\nFaction visual grammar: Rimehorn Clans, an original high-cold culture of broad adult giantkin and human shelter clans. Broad, grounded adult proportions; weathered ivory fittings, grey fur, dusky blue cloth and dark stone-grey iron. Antler-bone fittings are small practical clasps, never enormous Viking helmet horns. Heraldry is a very simple pair of crossed shelter beams. Cold stone winter lodges and snow-weight roof supports. No copied fantasy franchise costumes.\nSubject: One adult mounted trooper on exactly ONE horse facing screen RIGHT, slight southeast three-quarter view. Entire horse with coherent four-leg anatomy, head, tail and rider visible, practical lance carried close upright. Rimehorn horse is heavy and stocky with grey-fur caparison; Sable horse is lean with angular rust-felt saddle gear; use ONLY the horse appropriate to the stated family.\nStyle: serious weathered medieval pixel art designed for a 96x96 native sprite; intentional broad pixel clusters and restrained material ramps, selective dark local-color outlines, crisp hard edges, soft upper-left material lighting. Adult anatomy, modest head about one-seventh body height, NOT chibi/cartoon. Keep every role readable when reduced to its native size; no painterly texture soup, antialias blur, microtexture or bright confetti.\nComposition: exactly ONE sprite, centered with at least 15% fully transparent margin on EVERY edge. Shallow elevated three-quarter strategic view. Whole silhouette fully inside canvas; nothing cropped. Readable separated limbs and equipment; one static grounded pose.\nColor family: muted material colors only; steel stays grey, flesh stays natural, cloth carries faction accents. No glow, text, labels, watermark, logo, decorative page, multiple poses, sprite sheet or grid. Return an actual transparent PNG.",
+  "frames": [
+    {
+      "id": "unit.cavalry.rimehorn_clans/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.rimehorn_clans/54e19b93764c86a760bc9b0b95d7c2f52c4170bf06aad822bfb0896613ecab4d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not exposed",
+    "promptHash": "8eb384ab0cc7a3b572f0f418073f247e693f4fda3eae6ddc60d19d495aea90ce",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/rimesable/unit.cavalry.rimehorn_clans-v1.png",
+      "assets/art/source/faction-expansion/rimesable/unit.cavalry.rimehorn_clans-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:43:46.985Z",
+  "referenceHashes": [
+    "876ffd6570c191995bca4c05c8be6099237500b3d33d6b20725466a74b532cc1",
+    "0e0e0935f7df26b414f3268914602e4c17493c8efafd4d62ad98b6172c12ca56"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "4f5d55db74ba80523bf902db10c1384ea24745d41fa80112cc183ff596d87b3e",
+      "inputHash": "876ffd6570c191995bca4c05c8be6099237500b3d33d6b20725466a74b532cc1",
+      "outputHash": "65c998f9d552c13b7ae0e0fb76f7b278aad6fa2f49b1c5b998e20ec1c02eccc2"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "65c998f9d552c13b7ae0e0fb76f7b278aad6fa2f49b1c5b998e20ec1c02eccc2",
+      "outputHash": "797f921870a0ee63b7e9415abf4b15deb1c1550dfd6c17e83a6acf6f78292bc5"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "797f921870a0ee63b7e9415abf4b15deb1c1550dfd6c17e83a6acf6f78292bc5",
+      "outputHash": "5d0f21062d14d20e445e274cb7e89d33b4134b9a7c4af75ef631d6e0984feff3"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "6b37eda83489368318f5794d17c19263d1688c170ce03c573d2630ad70064b8c",
+      "outputHash": "ea85272253744a3523c96c4cb44fcd80f5a11071d0b804024c53542ce24605a6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "f16856558e5c49922741f3f016cb206409010ef5b7eb43f9b1b02985c46dc0a6",
+      "outputHash": "1970038507d7f255c15433417677646c399750b1f868227660fccea66745ce61"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "73a5c3a67671b293c5c5f4ef97d7bf165aa69f3561843e821361e724b7ea6ffe",
+      "outputHash": "5385b0cc8edc0df126ec93a20bc9e7d7448345473b8993d33424c334b6b72d87"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.rimehorn_clans.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:24.768Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Complete right-facing pale horse, fur-clad rider and tall spear have intact hooves and tail. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 54e19b93764c86a760bc9b0b95d7c2f52c4170bf06aad822bfb0896613ecab4d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/f5e9d8811b9a464895c27a49003f4ee627723bf41207a733bdf0554a83aba8d3.png"
+    ],
+    "inputHash": "628a8bcecd9e306595155271b45c1b30f09cabccb557e97102e2e0fa0b2685bc"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

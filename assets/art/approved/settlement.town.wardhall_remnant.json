@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.wardhall_remnant",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static settlement-town pixel-art sprite for the dark-fantasy strategy game Theandril, replacing a rejected underdeveloped town design.\nBackground: GENUINE TRANSPARENT PNG alpha-zero outside the isolated settlement. No painted checkerboard, floor tile, scenery, text, captions, border, or watermark.\nStyle: deliberate coarse square pixel clusters readable at 96x96 logical pixels, enlarged on the source canvas. Restrained upper-left light, selective dark outline, strong roof/masonry midtone planes. No gradients, bloom, antialiasing, blur, painterly microtexture or speckled confetti.\nComposition: shallow southeast three-quarter/isometric view. One coherent LOW, BROAD town enclosure, dense 7–9 buildings clustered tightly around a substantial central market hall. The town itself occupies a broad near-square silhouette, about 70% of canvas width and 60–65% of height, with at least 15% genuinely transparent empty margin on all four sides. All pixels contained. Most of the silhouette is usable building mass, NOT empty ground.\nDevelopment: unequivocally MORE developed than a simple three-house village: numerous connected two-storey workhouses, a large low market hall, short enclosing walls and a modest gate. Still NOT a grand capital/city: no towering keep, large cathedral, tall corner towers or palace.\nCRITICAL: NO flags, banners, poles, needles, spires or high narrow towers above the roofline. No high feature consuming native sprite height. No detached satellite buildings. Keep clear low broad roof masses and building count legible. No people.\nCulture: Wardhall Remnant, surviving practical human work halls after the old Null Throne fell, NOT a revived throne. CHALK-GREY stone and SLATE-VIOLET roofs, black riveted reinforcements, straight ward-grid masonry. A dense, low, broad walled town of eight substantial two-storey workshops and homes surrounding a wide central market/work hall; low crenellated enclosure and a modest wide gatehouse. Broad roof surfaces and square masonry masses. Practical engineering, no magical null powers/glow, no Iron anvil icon, no stepped Sepulchral funerary terraces, no throne/crown. More enclosed buildings and floor area than the three-house village, without high city towers.",
+  "frames": [
+    {
+      "id": "settlement.town.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.wardhall_remnant/feef4ac0c94be95aa69ccc2fb5ff256f6739fe907d65fb0b0b007538338a1624/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "925d8278d4addc1e1c3b06cbbd6689dab0d7cb763ab52b47b1d229f718afdbba",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/settlement.town.wardhall_remnant-v2.png",
+      "assets/art/source/faction-expansion/saltward/settlement.town.wardhall_remnant-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:26:19.000Z",
+  "referenceHashes": [
+    "00d4ed7e74d9e51cbe0f897fb082a70e7b8ec5e583b9d8729bb4f664d8cb3dd6",
+    "5e10cc236264b1f49272c0e1d87a724989591626bcdf7e69339649ec61581163"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "de8beab46dd1ef20b5df922821aa5d90c3d2f58cd4a0705b82bf333d34d15ea4",
+      "inputHash": "00d4ed7e74d9e51cbe0f897fb082a70e7b8ec5e583b9d8729bb4f664d8cb3dd6",
+      "outputHash": "5c39ad1c628031efe0756e5cd9d93c46a465e3db79eec1ef242bbe89adb24029"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "5c39ad1c628031efe0756e5cd9d93c46a465e3db79eec1ef242bbe89adb24029",
+      "outputHash": "69a6873ae2404bd0b37dfc26af678884637a3841fb9b8da6d1a663e0fe494cd2"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "69a6873ae2404bd0b37dfc26af678884637a3841fb9b8da6d1a663e0fe494cd2",
+      "outputHash": "c2d6adbadf6d4891542ba99ee78c403cc3e7f75c0bf2fa9e43a99ac551e2d717"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "f48fdc3f2df9005a69ec53e8902aa4122996d889212953d6b0ac7bf56778284f",
+      "outputHash": "f42083c6bdd12b8006b2b8458dc59773609375403c3191638dbbb5fc82e46091"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "555b76f2c55ede6ecf85d6a9424a9580db2901b24540afa9aabf095e02f97696",
+      "outputHash": "c84c3af186fcbb5899d9f6599ccd7114f12a01e0a526896b766596967344e380"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "a366057c04e33fdc782ab47442fc1423fd5335313ecdb05e0d25a7d9d3826bd0",
+      "outputHash": "c087439cb392f3d3587f1cc17b266888abd36b2fd3927e929dc3216a27316571"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.wardhall_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:13.201Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Revision 2 shows an enclosed low civic block with many purple roofs, clearly denser than the open village. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate feef4ac0c94be95aa69ccc2fb5ff256f6739fe907d65fb0b0b007538338a1624; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/63b62a81d8a129dfaf5a5781137e588ad5bc16dfcee21d6173fca001fd924282.png"
+    ],
+    "inputHash": "638df4f0b74da4457dc50d8e965d920aca35251f3461853c5bb44f9f8b2cd5c3"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

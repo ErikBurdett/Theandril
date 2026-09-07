@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.sable_steppe",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.sable_steppe"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: one original Theandril dark-fantasy strategic game sprite, character.surveyor, static first-facing pose.\nScene/backdrop: genuinely TRANSPARENT RGBA background, alpha zero around the isolated sprite. Do NOT paint a checkerboard, white/black backdrop, landscape, scene, floor tile, drop-shadow oval or framing panel.\nFaction visual grammar: Sable Steppe, an original mixed-human steppe camp confederation. Lean adult proportions; rust felt, muted ochre cloth, indigo accents and black lamellar leather/iron. Mobile angular cloth cuts, practical travel equipment, no lavish imperial ornaments. Heraldry is exactly three broad wind-notch cuts arranged as a compact original simple seal. Settlement architecture combines yurts, taut angular tension roofs and protective walls, not medieval European castles. No copied fantasy franchise costumes.\nSubject: One adult travelling surveyor with a rolled map and a simple measuring staff, light field pack, no magic, no glowing spell. Face southeast, toward screen right and slightly toward viewer. Entire body, staff and feet visible.\nStyle: serious weathered medieval pixel art designed for a 64x64 native sprite; intentional broad pixel clusters and restrained material ramps, selective dark local-color outlines, crisp hard edges, soft upper-left material lighting. Adult anatomy, modest head about one-seventh body height, NOT chibi/cartoon. Keep every role readable when reduced to its native size; no painterly texture soup, antialias blur, microtexture or bright confetti.\nComposition: exactly ONE sprite, centered with at least 15% fully transparent margin on EVERY edge. Shallow elevated three-quarter strategic view. Whole silhouette fully inside canvas; nothing cropped. Readable separated limbs and equipment; one static grounded pose.\nColor family: muted material colors only; steel stays grey, flesh stays natural, cloth carries faction accents. No glow, text, labels, watermark, logo, decorative page, multiple poses, sprite sheet or grid. Return an actual transparent PNG.",
+  "frames": [
+    {
+      "id": "character.surveyor.sable_steppe/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.surveyor.sable_steppe/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not exposed",
+    "promptHash": "bc8d3a2ed8f90606aec4a13610a3078cb309a345786481ba6a63932073cb9ce3",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/rimesable/character.surveyor.sable_steppe-v1.png",
+      "assets/art/source/faction-expansion/rimesable/character.surveyor.sable_steppe-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:04:29.621Z",
+  "referenceHashes": [
+    "3adc44f34894329078ea9426f8f55e5e752fb02c9cc8b8deef318744358d65a2",
+    "24641c186f2d74f9a2e5962fc8c40c5ac8604cbea828a28b46711eadc99d8bff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "879a54543564e0fc4264da65bee7f7001be87ce6feeaf28237f11a4b0b65df95",
+      "inputHash": "3adc44f34894329078ea9426f8f55e5e752fb02c9cc8b8deef318744358d65a2",
+      "outputHash": "0d6d62ec9b5c1960ce4e975d8e4327afadeea028d9040ea1b8fcadb94a198e1d"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

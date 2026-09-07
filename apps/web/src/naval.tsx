@@ -18,7 +18,7 @@ export function NavalTransport({ army, view, busy, issue, selectArmy }: { army: 
     <h3 className="section-title">{army.domain === 'naval' ? 'Fleet & passengers' : army.carrierId ? 'Aboard a transport' : 'Embark for sea'}</h3>
     {army.domain === 'naval' ? <>
       <p className="field-help">{army.canEnterDeepWater ? 'This fleet can navigate shallow water and deep ocean.' : 'Shallow-water passage only. Deep ocean requires Ocean navigation and ocean-capable hulls throughout the fleet.'}</p>
-      <p className="field-help">Chart key: paired pale waves mark coastal shallows; three slate waves mark deep ocean. Ship silhouettes are procedural while naval artwork awaits approval.</p>
+      <details className="naval-chart-help"><summary>Read the naval chart</summary><p className="field-help">Paired pale waves mark coastal shallows; three slate waves mark deep ocean. Approved hull artwork identifies the fleet; a labeled ship marker remains if its approved artwork is unavailable.</p></details>
       <p className="transport-capacity" data-testid="transport-capacity">Passengers: {army.transportUsed} / {army.transportCapacity} formation spaces</p>
       {army.cargo.length ? <><p className="field-help">Select a carried army to review its landing shores. Loaded fleets must unload before reorganizing.</p><ul className="transport-cargo">{army.cargo.map(cargo => <li key={cargo.armyId}><button aria-label={`Select embarked ${cargo.name} (${cargo.armyId})`} onClick={() => selectArmy(cargo.armyId)}>{cargo.name}<small>{cargo.formations} formations · {cargo.armyId}</small></button></li>)}</ul></> : <p className="field-help">No passengers aboard. Select a land army on an adjacent shore to embark it.</p>}
       {army.transportCapacity > 0 && <p className="transport-warning">{lossWarning}</p>}
@@ -44,24 +44,25 @@ export function NavalTransport({ army, view, busy, issue, selectArmy }: { army: 
 export function SettlementProduction({ view, settlementId, busy, issue }: { view: Observation; settlementId: string; busy: boolean; issue: Issue }) {
   const options = view.productionOptions.filter(option => option.settlementId === settlementId);
   const definitionId = view.factions.find(faction => faction.id === view.factionId)?.definitionId;
-  return <>{(['building', 'land', 'naval'] as const).map(kind => <section key={kind} data-testid={`production-${kind}`}>
-    <h3 className="section-title">{kind === 'building' ? 'Construction' : kind === 'land' ? 'Recruitment' : 'Fleet recruitment'}</h3>
+  return <div className="production-catalog" aria-label="Settlement production">{(['building', 'land', 'naval'] as const).map(kind => <details key={kind} className="production-category" open={kind === 'building'} data-testid={`production-${kind}`}>
+    <summary>{kind === 'building' ? 'Construction' : kind === 'land' ? 'Recruit land forces' : 'Recruit fleet hulls'}<span>{options.filter(option => option.kind === kind && option.canQueue).length} available</span></summary>
     {kind === 'land' && <p className="field-help">Each company arrives as a separate detachment. Assign a healthy marshal and use Army composition to combine co-located formations under their command limit.</p>}
-    {kind === 'naval' && <p className="field-help">Harbors launch completed hull formations onto an adjacent water hex. Select a fleet in your army registry to sail it. Naval artwork is not yet approved; clearly marked ship silhouettes are used.</p>}
-    <div className={`build-options ${kind === 'building' ? '' : 'faction-recruit-options'}`}>{options.filter(option => option.kind === kind).map(option => {
+    {kind === 'naval' && <p className="field-help">Harbors launch completed hull formations onto an adjacent water hex. Select a fleet in the army registry to sail it.</p>}
+    <div className="production-cards">{options.filter(option => option.kind === kind).map(option => {
       const unit = UNITS.find(item => item.id === option.itemId), building = BUILDINGS.find(item => item.id === option.itemId), definition = unit ?? building;
       if (!definition) return null;
-      return <button key={option.itemId} disabled={busy || !option.canQueue} aria-label={`${kind === 'building' ? 'Build' : 'Recruit'} ${definition.name}`} onClick={() => issue({ type: 'queue', factionId: view.factionId, settlementId, itemId: option.itemId })}>
-        <span className="faction-art-card">{unit && (kind === 'naval' ? <NavalRoleMarker name={unit.name}/> : <FactionArt contentId={unit.id} definitionId={definitionId} label={unit.name} decorative/>)}<span><strong>{definition.name}</strong><small>{definition.cost} industry · {definition.coinCost} coin{unit ? ` · ${unit.upkeep} upkeep` : ''}</small>
-          {unit && <small>{unit.movement} movement · {unit.range} range · {unit.armor} armor</small>}
-          {unit?.naval && <small>{unit.naval.transportCapacity} passenger formation spaces · {unit.naval.oceanCapable ? 'Ocean-capable hull' : 'Coastal hull'}</small>}
-          {unit?.description && <small>{unit.description}</small>}
-          {building && <small>{building.food || building.industry || building.coin || building.knowledge ? `${[building.food ? `+${building.food} food` : '', building.industry ? `+${building.industry} industry` : '', building.coin ? `+${building.coin} coin` : '', building.knowledge ? `+${building.knowledge} knowledge` : ''].filter(Boolean).join(' · ')} each turn` : 'Permanent infrastructure for naval recruitment'}</small>}
-          {option.blocker && <small className="production-blocker">{option.blocker}</small>}
-        </span></span>
-      </button>;
+      return <article className="production-card" key={option.itemId} data-testid={`production-card-${option.itemId}`}>
+        <div className="production-card-heading">{unit && <FactionArt contentId={unit.id} definitionId={definitionId} label={unit.name} compact decorative/>}<div><h4>{definition.name}</h4><p>{definition.cost} industry · {definition.coinCost} coin{unit ? ` · ${unit.upkeep} upkeep` : ''}</p>
+          {unit && <p>{unit.movement} movement · {unit.range} range · {unit.armor} armor</p>}
+          {unit?.naval && <p>{unit.naval.transportCapacity} passenger formation spaces · {unit.naval.oceanCapable ? 'Ocean-capable hull' : 'Coastal hull'}</p>}
+          {building && <p>{building.food || building.industry || building.coin || building.knowledge ? `${[building.food ? `+${building.food} food` : '', building.industry ? `+${building.industry} industry` : '', building.coin ? `+${building.coin} coin` : '', building.knowledge ? `+${building.knowledge} knowledge` : ''].filter(Boolean).join(' · ')} each turn` : 'Permanent infrastructure for naval recruitment'}</p>}
+        </div></div>
+        {unit?.description && <details className="production-description"><summary>Details: {definition.name}</summary><p>{unit.description}</p></details>}
+        {option.blocker && <p className="production-blocker" id={`production-blocker-${settlementId}-${option.itemId}`}>{option.blocker}</p>}
+        <button disabled={busy || !option.canQueue} aria-describedby={option.blocker ? `production-blocker-${settlementId}-${option.itemId}` : undefined} aria-label={`${kind === 'building' ? 'Build' : 'Recruit'} ${definition.name}`} onClick={() => issue({ type: 'queue', factionId: view.factionId, settlementId, itemId: option.itemId })}>{kind === 'building' ? 'Build' : 'Recruit'} {definition.name}</button>
+      </article>;
     })}</div>
-  </section>)}</>;
+  </details>)}</div>;
 }
 
 export function NavalRoleMarker({ name }: { name: string }) {

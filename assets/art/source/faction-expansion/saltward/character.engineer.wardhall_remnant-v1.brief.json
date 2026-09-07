@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.wardhall_remnant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: ONE stocky adult human woman Wardhall master mason with dark tied hair, chalk-dusted grey apron over slate-violet rolled sleeves, black riveted shoulder guard and thick boots. Carries one broad carpenter square and a compact stone hammer, leather chisel roll at belt. Full body, practical construction silhouette; no anvil logo, goggles, shield or magic.",
+  "frames": [
+    {
+      "id": "character.engineer.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.engineer.wardhall_remnant/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "11e94f4d42760b73f948e3a391df2cbb49eda8d0662fcb19c80a80d41df00099",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/character.engineer.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/character.engineer.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:58:45.000Z",
+  "referenceHashes": [
+    "d300cff9fe6bf920e6d9c07b23bd8c4429be3f5cfae4a94b8e7e5316a3580be7",
+    "a9e81f897a65b27ce3e73b8c46f0b0933cd1b92699583e7c1a91f62fc7b6fa5d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "1da7bcf75e28e6e73bba5d7d93f9fd173e20d7dbd03723d5f2ab7544c2c4a355",
+      "inputHash": "d300cff9fe6bf920e6d9c07b23bd8c4429be3f5cfae4a94b8e7e5316a3580be7",
+      "outputHash": "cf3f9badb533f10c51dbb85e823b1a817cd598dc9dde43a167cccdf655df68ba"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

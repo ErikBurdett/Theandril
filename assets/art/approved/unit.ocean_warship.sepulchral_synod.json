@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.sepulchral_synod",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.sepulchral_synod"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Sepulchral Synod living caretakers and housed ancestors: narrow dignified hull, chalk-pale protective plates, deep indigo canvas, aged bronze ribs, terraced stern-house outline and small hollow ring above three steps insignia. Quiet funerary architecture influence, not skulls, ghosts, skeleton crew or magical ship. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion. FRAMING CORRECTION: the entire mast finial, all pennants and rigging must be enclosed well within the image. Reduce subject to fit ONLY THE CENTRAL 65% of the canvas. Leave at least 15% genuinely alpha-zero empty space above the tallest mast and on every side. No clipping or off-canvas feature.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.sepulchral_synod/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.sepulchral_synod/2e7dbf002034c2e8eaba0b1df0371572a4650c57fc1ad33694b6380f77f3ef41/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c280a78eb437f853874bbcf1e9199a47a87cfc85ccb1e2d35531f9b90e6b5913",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.sepulchral_synod-v2.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.sepulchral_synod-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:20:02.447Z",
+  "referenceHashes": [
+    "a193c5bfd3e2028a17a4d4a19aac4d5e7b5ebbe0030bb8dbf713f5a89a879ef1",
+    "09e550594eeecc126e5f461c2ee28d49279a5a2c7ade1824955fcc88dfef76df"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "6f6d6c36254ce7acd48ba11099d8ba931a1ff6e664b20998f8b7707d135631f0",
+      "inputHash": "a193c5bfd3e2028a17a4d4a19aac4d5e7b5ebbe0030bb8dbf713f5a89a879ef1",
+      "outputHash": "4d9ee0d24cc327a76ef4d7e7fa835115a94e46716cd5ee70457935c4835dc244"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "4d9ee0d24cc327a76ef4d7e7fa835115a94e46716cd5ee70457935c4835dc244",
+      "outputHash": "eacc251bd6b953a461ebfaf43fd654c398f34ef9957f2daf0082b1d12e62eaf9"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "eacc251bd6b953a461ebfaf43fd654c398f34ef9957f2daf0082b1d12e62eaf9",
+      "outputHash": "2679db05f8efb597133a678b49c30172fb45861b3113e2ed6ccbd50f85dd583f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "43a7ccd7f72c90e56a325051dec2066f20447fc0a504a8e83dd807e5698925e2",
+      "outputHash": "2a1b045e73b3b42b40d3a9dc2e4929196bf4ffaffd1633ec68099588d98140e5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "e69ecbea8b29cfe7f27ecef12c538c08e58d8505a6d118021f3daa1a4e49389a",
+      "outputHash": "4f3d3cf77c9a5f56cdbc330b25368c28b00127d21a2ee720cd7e1a88fffd4089"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "b853183dd43b11390b63d457030880e0c8a8f7047fe3e56cb3b294c0bf91a203",
+      "outputHash": "4ed0997fe17e42a6b06e782e1065db02e7a65bbe8fc6b20b212374092133f386"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.sepulchral_synod.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:04.555Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Indigo sails and chalk-white side plates distinguish the narrow ceremonial hulls. The ocean version2 retains complete mast finials and a taller two-sail silhouette; no ghost or invented crew mechanics. Raised fighting decks and separate square sails read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate 2e7dbf002034c2e8eaba0b1df0371572a4650c57fc1ad33694b6380f77f3ef41; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/dc40053b3f0c40cc66c772932887a64283925c9572f3c12e38411ee83390e057.png"
+    ],
+    "inputHash": "a2159b44713236f7a703819cee153c0fc2e0baaab4076670947358a45ff06bf2"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.wardhall_remnant",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: ONE front-facing tiny strategic badge, very simple slate-violet OPEN SQUARE with one missing lower-right corner on a chalk-grey square field with chunky black corner braces. A few broad orthogonal pixel masses only, designed at32x32 native; no detailed crest, lettering, crown, anvil, circle or glow. Centered with transparent margins.",
+  "frames": [
+    {
+      "id": "ui.badge.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/source/native/ui.badge.wardhall_remnant/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "964bf572daf6e847c307919aa1da9875839093f0ff9b65e08904c97c716332ed",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/ui.badge.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/ui.badge.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:02:14.000Z",
+  "referenceHashes": [
+    "d62a5e58eac110a9499f0ac0f9994aec4926162e3bd3a6208ed3a9e49fb548d6",
+    "4e7313bfb6431af54ce2aa57ac1f16e34d4fa674024feba962a57c2a40469cde"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "e6a85e1cfa9d7c0e37a2d779be8ec46724d94cee445b6c7751947cf79ff2f281",
+      "inputHash": "d62a5e58eac110a9499f0ac0f9994aec4926162e3bd3a6208ed3a9e49fb548d6",
+      "outputHash": "fa64bf6decc63c3a8ca68d84e82978ffd7548086fade4e2cf0725789834319cd"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

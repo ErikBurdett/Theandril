@@ -1,0 +1,153 @@
+{
+  "date": "2026-09-07T00:06:42.256Z",
+  "schema": 11,
+  "content": "3c54fb02",
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "logicalCpus": 32,
+  "ramBytes": 33317580800,
+  "warmupsPerPath": 6,
+  "scope": "Alternating whole-operation checksum(serializeGame(state)) versus streamed current-envelope stateHash(state), including canonical projection, strict parsing, JSON.stringify and both FNV passes. All normal allocations and GC costs remain inside timed operations. No forced GC. Fixtures are actual validated canonical states with authored army/ownership/population/funding setup, not earned late campaigns. Setup, restore/equality checks, saves used only for verification, file output, AI, turn advancement, archives and browser work are excluded.",
+  "mechanism": "Candidate folds the exact header, payload and closing brace as UTF-16 code units without joining a full outer envelope string. No checksum or canonical validation is removed. Legacy versions remain on the original serialized path.",
+  "measurements": [
+    {
+      "name": "Tiny authored border encounter",
+      "seed": 20260905,
+      "turn": 1,
+      "cells": 1536,
+      "factions": 2,
+      "armies": 2,
+      "formations": 2,
+      "towns": 2,
+      "knownLandCells": 19,
+      "saveBytes": 18761,
+      "envelopeUtf16Units": 18761,
+      "hash": "a79feff8",
+      "exactHashes": true,
+      "unchangedSave": true,
+      "strictRoundtrip": true,
+      "baseline": {
+        "samples": 40,
+        "meanMs": 0.3294562500000005,
+        "medianMs": 0.2799660000000017,
+        "p95Ms": 0.5019170000000202,
+        "maxMs": 0.5552580000000091
+      },
+      "candidate": {
+        "samples": 40,
+        "meanMs": 0.3256518500000006,
+        "medianMs": 0.28632399999997915,
+        "p95Ms": 0.48651900000001547,
+        "maxMs": 0.5013570000000129
+      },
+      "meanRatioCandidateOverBaseline": 0.9884524880010626,
+      "medianRatioCandidateOverBaseline": 1.0227099004878357
+    },
+    {
+      "name": "Huge synthetic mature armies",
+      "seed": 20260905,
+      "turn": 1,
+      "cells": 196608,
+      "factions": 32,
+      "armies": 1500,
+      "formations": 1500,
+      "towns": 32,
+      "knownLandCells": 224,
+      "saveBytes": 2069983,
+      "envelopeUtf16Units": 2069983,
+      "hash": "fbe01cdc",
+      "exactHashes": true,
+      "unchangedSave": true,
+      "strictRoundtrip": true,
+      "baseline": {
+        "samples": 40,
+        "meanMs": 32.74772650000001,
+        "medianMs": 32.219928999999865,
+        "p95Ms": 38.17110700000012,
+        "maxMs": 39.67856500000016
+      },
+      "candidate": {
+        "samples": 40,
+        "meanMs": 31.421034374999966,
+        "medianMs": 31.14047299999993,
+        "p95Ms": 35.13726299999962,
+        "maxMs": 38.33471200000008
+      },
+      "meanRatioCandidateOverBaseline": 0.9594875044226339,
+      "medianRatioCandidateOverBaseline": 0.9664972570237526
+    },
+    {
+      "name": "Legendary synthetic mature armies",
+      "seed": 20260905,
+      "turn": 1,
+      "cells": 307200,
+      "factions": 40,
+      "armies": 4000,
+      "formations": 4000,
+      "towns": 40,
+      "knownLandCells": 280,
+      "saveBytes": 3551067,
+      "envelopeUtf16Units": 3551067,
+      "hash": "7098ac80",
+      "exactHashes": true,
+      "unchangedSave": true,
+      "strictRoundtrip": true,
+      "baseline": {
+        "samples": 40,
+        "meanMs": 53.78953310000013,
+        "medianMs": 53.78392900000017,
+        "p95Ms": 56.48406700000032,
+        "maxMs": 60.20714599999883
+      },
+      "candidate": {
+        "samples": 40,
+        "meanMs": 52.88281195000002,
+        "medianMs": 51.94526700000006,
+        "p95Ms": 60.29176599999937,
+        "maxMs": 72.34128100000089
+      },
+      "meanRatioCandidateOverBaseline": 0.9831431674947908,
+      "medianRatioCandidateOverBaseline": 0.9658139144129818
+    },
+    {
+      "name": "Huge synthetic many-town land",
+      "seed": 20260905,
+      "turn": 1,
+      "cells": 196608,
+      "factions": 32,
+      "armies": 1500,
+      "formations": 1500,
+      "towns": 32,
+      "knownLandCells": 2331,
+      "saveBytes": 2335741,
+      "envelopeUtf16Units": 2335741,
+      "hash": "5347045a",
+      "exactHashes": true,
+      "unchangedSave": true,
+      "strictRoundtrip": true,
+      "baseline": {
+        "samples": 40,
+        "meanMs": 35.477448125,
+        "medianMs": 34.44140100000004,
+        "p95Ms": 42.02030200000081,
+        "maxMs": 46.27594499999941
+      },
+      "candidate": {
+        "samples": 40,
+        "meanMs": 33.30813502499977,
+        "medianMs": 33.234370000000126,
+        "p95Ms": 35.318763999999646,
+        "maxMs": 36.37967799999933
+      },
+      "meanRatioCandidateOverBaseline": 0.9388537447125016,
+      "medianRatioCandidateOverBaseline": 0.9649540679254043
+    }
+  ],
+  "finalMemory": {
+    "rss": 276492288,
+    "heapTotal": 120053760,
+    "heapUsed": 49485200,
+    "external": 5508925,
+    "arrayBuffers": 2947919
+  }
+}

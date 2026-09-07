@@ -1,0 +1,63 @@
+{
+  "schema": 11,
+  "content": "3c54fb02",
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "note": "Same-state warm reads; four warmups and twenty samples per mode, alternating full/scoped order. Synthetic ownership/population/army setup; all additional land claims use actual paid commands. No elapsed campaign turns, archive, disk persistence, rendering or plan execution in these timings. Complete AI commands/reasons and unchanged saved bytes checked outside timing. JSON sizes are diagnostic, not worker transfers.",
+  "measurements": [
+    {
+      "size": "huge",
+      "turn": 1,
+      "cells": 196608,
+      "globalArmies": 1500,
+      "ownedTowns": 32,
+      "fullDetailedTowns": 32,
+      "scopedDetailedTowns": 8,
+      "fullDetailedCells": 1184,
+      "scopedDetailedCells": 296,
+      "full": {
+        "samples": 20,
+        "medianMs": 26.775344000000132,
+        "p95Ms": 31.88257499999986
+      },
+      "scoped": {
+        "samples": 20,
+        "medianMs": 24.02853099999993,
+        "p95Ms": 27.688722000000098
+      },
+      "diagnosticFullObservationBytes": 7314658,
+      "diagnosticScopedObservationBytes": 3131873,
+      "proposedCommands": 58,
+      "exactCommandsAndReasons": true,
+      "unchangedSave": true,
+      "hash": "5347045a"
+    },
+    {
+      "size": "legendary",
+      "turn": 1,
+      "cells": 307200,
+      "globalArmies": 4000,
+      "ownedTowns": 40,
+      "fullDetailedTowns": 40,
+      "scopedDetailedTowns": 8,
+      "fullDetailedCells": 1480,
+      "scopedDetailedCells": 296,
+      "full": {
+        "samples": 20,
+        "medianMs": 73.01916700000038,
+        "p95Ms": 79.95182600000044
+      },
+      "scoped": {
+        "samples": 20,
+        "medianMs": 70.03819300000032,
+        "p95Ms": 78.89364000000023
+      },
+      "diagnosticFullObservationBytes": 11079186,
+      "diagnosticScopedObservationBytes": 5501733,
+      "proposedCommands": 89,
+      "exactCommandsAndReasons": true,
+      "unchangedSave": true,
+      "hash": "953a4ff2"
+    }
+  ]
+}

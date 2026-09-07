@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.rimehorn_clans",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.rimehorn_clans"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: one original Theandril dark-fantasy strategic game sprite, settlement.town, static first-facing pose.\nScene/backdrop: genuinely TRANSPARENT RGBA background, alpha zero around the isolated sprite. Do NOT paint a checkerboard, white/black backdrop, landscape, scene, floor tile, drop-shadow oval or framing panel.\nFaction visual grammar: Rimehorn Clans, an original high-cold culture of broad adult giantkin and human shelter clans. Broad, grounded adult proportions; weathered ivory fittings, grey fur, dusky blue cloth and dark stone-grey iron. Antler-bone fittings are small practical clasps, never enormous Viking helmet horns. Heraldry is a very simple pair of crossed shelter beams. Cold stone winter lodges and snow-weight roof supports. No copied fantasy franchise costumes.\nSubject: One compact established town cluster of SIX or SEVEN dwellings, a larger communal hall and a low protective enclosure with one gate. Medium tier, wider and more organized than a village. Rimehorn: grey stone winter lodges, reinforced snowy pitched roofs, shared timber-beamed stone hall. Sable: grouped ochre/rust yurts, angular tension-roof market hall, practical timber/adobe perimeter. Choose ONLY stated family architecture. No people, trees, landscape or rectangular slab.\nStyle: serious weathered medieval pixel art designed for a 96x96 native sprite; intentional broad pixel clusters and restrained material ramps, selective dark local-color outlines, crisp hard edges, soft upper-left material lighting. Adult anatomy, modest head about one-seventh body height, NOT chibi/cartoon. Keep every role readable when reduced to its native size; no painterly texture soup, antialias blur, microtexture or bright confetti.\nComposition: exactly ONE sprite, centered with at least 15% fully transparent margin on EVERY edge. Shallow elevated three-quarter strategic view. Whole silhouette fully inside canvas; nothing cropped. Compact clearly separated roof masses; structural silhouette over tiny detail.\nColor family: muted material colors only; steel stays grey, flesh stays natural, cloth carries faction accents. No glow, text, labels, watermark, logo, decorative page, multiple poses, sprite sheet or grid. Return an actual transparent PNG.",
+  "frames": [
+    {
+      "id": "settlement.town.rimehorn_clans/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.rimehorn_clans/77bcf88de546c9a633c6f9ef68136d754495b16d63a38259549dcc00b4c32ef1/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not exposed",
+    "promptHash": "5f77316ae413b01ef290ad51ac5e09eb4fa3f1ce9caf856fb5238114dfd576dd",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/rimesable/settlement.town.rimehorn_clans-v1.png",
+      "assets/art/source/faction-expansion/rimesable/settlement.town.rimehorn_clans-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:52:07.904Z",
+  "referenceHashes": [
+    "e4fe89e13f3996705f6ee9d203ab374f4733b392e4052106685065d95c2a868a",
+    "ccd170de0fd057c1ad596dcbbef851fb1dce19129de41e9159c4f334b4653a8e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "3245af2721523c4616516f4186b0676047f6542e712c2154160e05ea33a0138f",
+      "inputHash": "e4fe89e13f3996705f6ee9d203ab374f4733b392e4052106685065d95c2a868a",
+      "outputHash": "01f079fe5d9a21261a330ad2e4b2ea292332b702424fe70e043a4e6a2ebf5072"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "01f079fe5d9a21261a330ad2e4b2ea292332b702424fe70e043a4e6a2ebf5072",
+      "outputHash": "39c3ad91f6a95cea0d101e551d38f6d193c36b3fb8a6b1230f21bd4de68ce4ed"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "39c3ad91f6a95cea0d101e551d38f6d193c36b3fb8a6b1230f21bd4de68ce4ed",
+      "outputHash": "89848f39d3f647ec8be55ff5985c4a1df3f8b9c7757671f5201979a1d9793223"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "160d580fefad5f32e6c5fd20bf163a75e6b529248dceb258cdedc1ffb14a58cf",
+      "outputHash": "19b11b82812b2bf4e4bb30d7ce2300dcdaf8daa0b58804b8191ffdc12287a3d2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "6797f6257c4d4ac1634fc5e0fece8bf7b46f610984a5389a85a9d499171025fb",
+      "outputHash": "b04c4e1edb1d3a8b26366e7a1804e6704e9787e6f5dbde494e2ecd4feef74edc"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "8458abe5f162573c84cfc64f91f25cdd814955244269033a055505870c584368",
+      "outputHash": "ba7152693a5ac9a411bc6a8af16bf3f8d2b415a0d6301e7d363ecb14b2b44f18"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.rimehorn_clans.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:11.924Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Snowy walled hall and multiple roofs are a clear stage above the open lodges. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 77bcf88de546c9a633c6f9ef68136d754495b16d63a38259549dcc00b4c32ef1; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/f5e9d8811b9a464895c27a49003f4ee627723bf41207a733bdf0554a83aba8d3.png"
+    ],
+    "inputHash": "2ace4017532267adedef28eb297dae487576797be7104a284d67aa6bd8648428"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

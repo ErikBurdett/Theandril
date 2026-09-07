@@ -1,3 +1,4 @@
+import { openRealmAffairs } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { serializeGame } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -12,6 +13,7 @@ async function importFrontier(page: Page): Promise<void> {
 }
 async function beginBattle(page: Page): Promise<void> {
   await importFrontier(page);
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
   await page.getByRole('button', { name: 'Attack Reedbound Watch (army.4)', exact: true }).click();
   await expect(page.getByTestId('battle-panel')).toBeVisible();

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.mire_courts",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native32. ONE very simple original strategic faction badge, front-facing culture seal with compact silhouette, just three to five broad color groups, no ornate frame or tiny details. Readable at32pixels; no letters, pole or scenery.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears.",
+  "frames": [
+    {
+      "id": "ui.badge.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.mire_courts/8f55ab8871a0dfbd8bcd55424a4a90be34f81c0b6409de3558096bc442021f11/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7c77c8c58958cca0498422494390593febfb7f7f7fda800c9019a84edaf9b684",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/ui.badge.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/ui.badge.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:06:13.000Z",
+  "referenceHashes": [
+    "bf78717ec6b49fd8b7cf7b33760614c4a8613f3724e400e9041702ad01f42b0b",
+    "aebad4e3c8e79b113ad03ba06bb06c0e726da10ad19cdb2332003c8708bf5b02"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "40671690b6659cf5aaff9df8a0b6ad75c9840207ad7bf0376c6a87562bcd3a7b",
+      "inputHash": "bf78717ec6b49fd8b7cf7b33760614c4a8613f3724e400e9041702ad01f42b0b",
+      "outputHash": "a6b170cf13cf5f5551934dfbf00bdb7acd190df323fc18e072759a2bf63b8fde"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "a6b170cf13cf5f5551934dfbf00bdb7acd190df323fc18e072759a2bf63b8fde",
+      "outputHash": "886f2ff334e7e59e44ff51f6821e57bea06e51ee709d951faef9e59fcec9d741"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "886f2ff334e7e59e44ff51f6821e57bea06e51ee709d951faef9e59fcec9d741",
+      "outputHash": "706cc3d255228e387ebd8db4afb66aea499db8b634f4c732fe25e84f796ae687"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "13523d328550e15efd6d8f330320f01ff39f6430df19420fe7a570983199adad",
+      "outputHash": "2cec720584efcadebd81118b3b7b9e3f8a43d50dcffda9ca422b64e7eca7f69e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "76f289588e1e2a4cb8a2b9cfbe7e6414207ebd0c9b3e2b08cd8f33e426f88a79",
+      "outputHash": "4b1d0d7c4f27c075266e5049f727f54b24e41e97637e4e44531e75dc4fb55640"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "8f6c77b4ccb1adb8e3f48d52c93c7e510b72a7ee8da4537c2acab396c0437578",
+      "outputHash": "38e33a69f5607624d45d2f8b793021f6701bda2170d43b00dabe7928d36cad1e"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.mire_courts.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:16.182Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Compact copper root seal remains a single legible strategic mark. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 8f55ab8871a0dfbd8bcd55424a4a90be34f81c0b6409de3558096bc442021f11; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d8be3b2df82887727e53bd6ae03f45aba440c8dbff04c61f9677a7d2c17461c8.png"
+    ],
+    "inputHash": "ce8c2e9cb293846de2de23688ea2dc39f7d808b66123e61dbe898bf9b87568d5"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.ashen_compact",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.ashen_compact"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Ashen Compact culture: repaired charcoal iron brackets, low soot-dark practical workshop geometry, ochre and bone patched canvas, dull brass fittings. Original open square hearth with central ember diamond insignia kept tiny and simple. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.ashen_compact/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.ashen_compact/87ce96a34a19891cee1eabaa501c304ba6b0d817d28c720fcedb90b11791e874/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "976445d3bc98cc751b357f57b4905a0d125d15e34d9488117a0a51ad740bc354",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.ashen_compact-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.ashen_compact-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T22:51:50.317Z",
+  "referenceHashes": [
+    "3107fa64bcc3e63bf15f2cf7cbf2b8025fc26be350aeac4b675c7c87a693a3ed",
+    "7ba64c694c8d2d33ebde8dc96a8a6aab7dcb12ad5bfec648c4ff6d709e8b31f0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "6099190dec8ed45792e32ef3fc79f45897bc4dbef2f374ecb9f5b6e6be6d06f5",
+      "inputHash": "3107fa64bcc3e63bf15f2cf7cbf2b8025fc26be350aeac4b675c7c87a693a3ed",
+      "outputHash": "dae5ebe772099eed0c115db47e67e5dbb9226bd0f9ae59e4b93b8e96c6c7b238"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "dae5ebe772099eed0c115db47e67e5dbb9226bd0f9ae59e4b93b8e96c6c7b238",
+      "outputHash": "db8263d6c5f18f7f8e976bafd992881a0990d721505e86169ca551187735f1f9"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "db8263d6c5f18f7f8e976bafd992881a0990d721505e86169ca551187735f1f9",
+      "outputHash": "77cbce8894f9075d70f4ed27a6fa53fd7445fc2d353decd52cd023aa30e2c95d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "e12c6ef354b593f5bf5957553a1bbba43cfae1c70abddaf1f5786301362b24b9",
+      "outputHash": "0903b0fac5fd0b7321177352df416b209a816249e806893b3ed41834fb9030a5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "73b704b7fece5850c27611eda123b1c0f3704a5a2f971b62d19b026800d06239",
+      "outputHash": "f1d5afd640972e948bfb0c67009bda9b6e1721a47a61faa8afa8e38426463bc4"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "94cc9db7df694e18775402f91ef78ea73bcc42bc7b66263464d07f92d2a74ad5",
+      "outputHash": "210831bf902f9026ad3419ec5a9d78717b00ce1eb4f422938ba8c7b54b79a988"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.ashen_compact.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:36:59.631Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Ochre and bone canvas, patched dark hull fittings; strong single-sail cargo, narrow triangular-sail galley and twin-square-sail heavy silhouette. Low oared hull and triangular sail read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate 87ce96a34a19891cee1eabaa501c304ba6b0d817d28c720fcedb90b11791e874; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/fae4ab149081f9faac562c1c473513c8a24f6783d00eed02f3940ef57dbc823b.png"
+    ],
+    "inputHash": "5f7cc560adf9e96767dd833284d19ac8be430dcd347d3e706c19079663cf4353"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

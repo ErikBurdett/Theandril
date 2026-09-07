@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { IMPROVEMENTS } from '../../content/src/index';
+import { drawImprovementGlyph, type GlyphPainter } from './improvement-glyphs';
 import { dirtyTerritoryChunks, IMPROVEMENT_GLYPHS, settlementArtRole, territoryEdges, type ObservedOwner } from './territory-style';
 
 describe('observed cached territory presentation', () => {
@@ -48,8 +50,21 @@ describe('observed cached territory presentation', () => {
       }
     }
   });
-  it('binds all five distinct props and correct settlement stages without conflating capital and size', () => {
-    expect(Object.keys(IMPROVEMENT_GLYPHS)).toHaveLength(5); expect(new Set(Object.values(IMPROVEMENT_GLYPHS)).size).toBe(5);
+  it('binds all ten real improvements to known sprite fallbacks or an actual procedural program', () => {
+    const approvedFallbacks = { 'improvement.terraced_fields': 'fields', 'improvement.managed_woodlot': 'woodlot',
+      'improvement.quarry': 'quarry', 'improvement.reedworks': 'reeds', 'improvement.shore_fishery': 'fishery' };
+    expect(IMPROVEMENTS).toHaveLength(10);
+    expect(Object.keys(IMPROVEMENT_GLYPHS).sort()).toEqual(IMPROVEMENTS.map(item => item.id).sort());
+    expect(new Set(Object.values(IMPROVEMENT_GLYPHS)).size).toBe(10);
+    for (const [id, glyph] of Object.entries(approvedFallbacks)) expect(IMPROVEMENT_GLYPHS[id]).toBe(glyph);
+    for (const improvement of IMPROVEMENTS.filter(item => !Object.hasOwn(approvedFallbacks, item.id))) {
+      let rectangles = 0;
+      const painter: GlyphPainter = { rect() { rectangles++; return this; }, fill() { return this; } };
+      expect(drawImprovementGlyph(painter, IMPROVEMENT_GLYPHS[improvement.id]!, 0, 0, .4)).toBe(true);
+      expect(rectangles).toBeGreaterThan(0);
+    }
+  });
+  it('binds correct settlement stages without conflating capital and size', () => {
     expect([1, 2, 3, 7, 8, 100].map(settlementArtRole)).toEqual(['settlement.village', 'settlement.village', 'settlement.town', 'settlement.town', 'settlement.city', 'settlement.city']);
   });
 });

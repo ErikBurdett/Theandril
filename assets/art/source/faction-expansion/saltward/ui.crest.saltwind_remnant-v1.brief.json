@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.saltwind_remnant",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Saltwind Remnant, successor charter households after the old Saltwind League's fall, not a revived empire. Muted petrol cloth and auburn patched sailcloth, tar-black leather, weathered driftwood and dull brass rigging. Narrow practical nautical equipment; original angular broken-keel insignia (a simple split V-shaped keel, not an anchor). No bright blue sails, round glass ornaments or generic pirate skulls.\nSubject: ONE front-facing original heraldic crest on a tall angular tar-black shield plaque: simple large broken-keel emblem consisting of two offset angular dull-brass V-shaped keel segments, petrol field and an auburn cloth edge. Strong broad negative space, readable at64x64; no lettering, crown, rope circle, anchor or skull. Centered flat icon, not perspective.",
+  "frames": [
+    {
+      "id": "ui.crest.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/ui.crest.saltwind_remnant/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "8d16e2bdac40331147a37354a21799d16bdd955594ba9c94cbc087b80a0a3edc",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/ui.crest.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/ui.crest.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:46:49.000Z",
+  "referenceHashes": [
+    "6659df7dade31a3e80811e56eb523bf48dd24eaf5bcd3a041ee7c69caae9ea91",
+    "744f3eb6bfb165f6f293fb4983be0eab9b49dfdd2da4b6a4d6dfe0daf1bde5d0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "a766579b878354166919737ce3c215e2cd1b1a7cdc8af27c10d8bf951c8d2d7f",
+      "inputHash": "6659df7dade31a3e80811e56eb523bf48dd24eaf5bcd3a041ee7c69caae9ea91",
+      "outputHash": "7cca2cd79bf90db456e83b80f9aed3839652f2c8f9733448d58c828823082d16"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

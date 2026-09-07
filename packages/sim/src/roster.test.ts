@@ -66,7 +66,13 @@ describe('versioned faction rosters and paid new-culture campaigns', () => {
     }
     const view = getObservation(game, factionId);
     expect(new Set(view.productionOptions.filter(option => option.settlementId === townId && option.itemId.startsWith('unit.')).map(option => option.itemId))).toEqual(new Set(UNITS.map(unit => unit.id)));
-    expect(() => serializeGameForVersion(game, 9)).toThrow(/frozen pack|roster/);
+    const hasGrowth = Object.values(game.land.settlements).some(land => land.borderGrowth !== 0);
+    expect(() => serializeGameForVersion(game, 9)).toThrow(hasGrowth ? 'border progress unavailable' : 'frozen pack or roster');
+    // A separate authored projection probe isolates roster rejection from the earlier
+    // modern-growth guard; the real paid campaign and its mirror remain untouched.
+    const rosterProbe = deserializeGame(serializeGame(game));
+    for (const land of Object.values(rosterProbe.land.settlements)) land.borderGrowth = 0;
+    expect(() => serializeGameForVersion(rosterProbe, 9)).toThrow('frozen pack or roster');
     const hash = stateHash(game);
     expect(() => applyCommandForVersion(game, { type: 'endTurn', factionId }, 9)).toThrow('frozen roster');
     expect(stateHash(game)).toBe(hash);

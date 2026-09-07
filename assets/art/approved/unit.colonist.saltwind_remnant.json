@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.saltwind_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Saltwind Remnant, successor charter households after the old Saltwind League's fall, not a revived empire. Muted petrol cloth and auburn patched sailcloth, tar-black leather, weathered driftwood and dull brass rigging. Narrow practical nautical equipment; original angular broken-keel insignia (a simple split V-shaped keel, not an anchor). No bright blue sails, round glass ornaments or generic pirate skulls.\nSubject: One adult civilian dock worker pulling a compact covered two-wheel migration handcart with an auburn patched sailcloth canopy, lashed household bundles and brass-rimmed tool chest. Worker and cart one joined silhouette, both wheels and handles fully visible; no weapons. Cart moves down-right.",
+  "frames": [
+    {
+      "id": "unit.colonist.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.saltwind_remnant/f9a7d0199ff48d61a1b3cc540fab33bde8ec2d5c6a73d7eedc0bfd388768b3a6/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "ee32321c5c4c8b9ecae1f56c224214d08696bfbd82545cd073c9dcfa8a856965",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/unit.colonist.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/unit.colonist.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:39:25.000Z",
+  "referenceHashes": [
+    "3c710793aa6818cb10191ef8665d25a3e8f631e3d7d6de60cd1ed715c572b295",
+    "8f35b73414610d9b8c5a32beff1b17eb2d648d0eb68fdfe231e3407f75c09a19"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "3f351f3c98bcf75b35ffa907689a2ec749ab316b1448855adb6f54d837d8fbc8",
+      "inputHash": "3c710793aa6818cb10191ef8665d25a3e8f631e3d7d6de60cd1ed715c572b295",
+      "outputHash": "7918d00c35847027c6817009eab5d576205deff8026ca376136164e4eb7fbf1a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "7918d00c35847027c6817009eab5d576205deff8026ca376136164e4eb7fbf1a",
+      "outputHash": "07f392ec4d48242941c57839dce175ee7b82cd0713d7104fcce88d86ace6cfa7"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "07f392ec4d48242941c57839dce175ee7b82cd0713d7104fcce88d86ace6cfa7",
+      "outputHash": "7f246a889d07818f218bbf16c3e459528871cce8a63afe8e6604382bc2fee4b7"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "73f27dc0aa8e2b17093f9c4e5a890b29084aaa82f18d2e7a5159cf7e7269a957",
+      "outputHash": "bee07764d4b29173d031da6fe96790e3bfb64c338c6ae6cf08b189a74db654c0"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "1cd2b800fdc93bbd7d809bb98ce680e49a9208d446376b0ec2ecbbdaa48d4302",
+      "outputHash": "ba21ef73fa046ff73d32429eb2cbe610ae797f80c6b23cc5de84e10f38d36770"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "ba33cb3d17efa1ff0db69a4055490e7a89a0877edee9153c93a74b29da63a3c9",
+      "outputHash": "0b1b7634d3700a1630485e7f02bec017c6df56d9f69d137e966763cfc4effc8d"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.saltwind_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:28.225Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Adult puller and rust-covered supply cart have connected shafts and visible wheels. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate f9a7d0199ff48d61a1b3cc540fab33bde8ec2d5c6a73d7eedc0bfd388768b3a6; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a5caa24e863aeb2f3dc3d22c0d2c76ce681769339bebd598c6b65c3b0f481f74.png"
+    ],
+    "inputHash": "b6a0818c21568dd18ce717c333ea3eeaa0a15de84fad9dcba8d811503138b12f"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

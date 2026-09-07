@@ -6,7 +6,11 @@ const description = z.string().min(1).max(500);
 const cost = z.number().int().min(1).max(1_000_000);
 const bonus = z.number().int().min(0).max(20);
 const yields = z.object({ food: bonus, industry: bonus, coin: bonus, knowledge: bonus }).strict();
-export const technologySchema = z.object({ id, name, description, knowledgeCost: cost, requires: z.array(id).max(20), effects: yields }).strict();
+export const researchBranchSchema = z.enum(['craft', 'stewardship', 'navigation', 'civic']);
+export type ResearchBranch = z.infer<typeof researchBranchSchema>;
+export const technologySchema = z.object({ id, name, description, knowledgeCost: cost, requires: z.array(id).max(20), effects: yields,
+  introducedInRules: z.literal(11).optional(), branch: researchBranchSchema.optional(), borderGrowthBonus: z.number().int().min(1).max(2).optional(),
+}).strict();
 export const institutionSchema = z.object({ id, name, description, coinCost: cost, effects: yields }).strict();
 export const doctrineSchema = z.object({ id, name, description, coinCost: cost, effects: z.object({ armor: bonus, attack: bonus, movement: bonus }).strict() }).strict();
 export const prosperityProjectSchema = z.object({
@@ -49,7 +53,20 @@ export const TECHNOLOGIES: readonly TechnologyDefinition[] = [
   { id: 'technology.civic_accounts', name: 'Civic accounts', description: 'Public ledgers reconnect the bargains once carried by the Witness Roads. Every settlement gains 1 coin and 1 knowledge before penalties; enables the Hearth Exchange.', knowledgeCost: 40, requires: [], effects: { food: 0, industry: 0, coin: 1, knowledge: 1 } },
   { id: 'technology.coastal_navigation', name: 'Coastal navigation', description: 'Soundings and shore charts reconnect coastal hearthlands. Enables Charter harbors, transports and Coastwatch galleys; vessels can travel coastal shallows. This practical knowledge does not confer magical aptitude.', knowledgeCost: 30, requires: [], effects: { food: 0, industry: 0, coin: 0, knowledge: 0 } },
   { id: 'technology.ocean_navigation', name: 'Ocean navigation', description: 'Deep-water charts and long-voyage rigging open the ocean. Ocean-capable transports and Deepwake warships may cross deep water; coastal galleys remain restricted to shallows.', knowledgeCost: 80, requires: ['technology.coastal_navigation'], effects: { food: 0, industry: 0, coin: 0, knowledge: 0 } },
+  { id: 'technology.stewardship', name: 'Seasonal stewardship', description: 'Record planting and water-sharing obligations. Unlocks Spring gardens on fresh-water land; opens the waterworks, forestry and surveyed-estates branches. Knowledge alone does not build or work a tile.', knowledgeCost: 36, requires: [], effects: { food: 0, industry: 0, coin: 0, knowledge: 0 }, introducedInRules: 11, branch: 'stewardship' },
+  { id: 'technology.waterworks', name: 'Sluice waterworks', description: 'Controlled sluices support worked wetland Polders. They can feed crowded settlements, but old growth and Ashfall glass make intensive planting less productive. Physical terrain and natural features remain intact.', knowledgeCost: 64, requires: ['technology.stewardship'], effects: { food: 0, industry: 0, coin: 0, knowledge: 0 }, introducedInRules: 11, branch: 'stewardship' },
+  { id: 'technology.surveyed_estates', name: 'Surveyed estates', description: 'Witnessed boundary surveys add one civic progress per active settlement turn toward automatic border expansion. Claims still require connected, charted land within the settlement’s reach; siege and occupation halt expansion.', knowledgeCost: 60, requires: ['technology.stewardship'], effects: { food: 0, industry: 0, coin: 0, knowledge: 0 }, introducedInRules: 11, branch: 'civic', borderGrowthBonus: 1 },
+  { id: 'technology.charter_forestry', name: 'Charter forestry', description: 'Bind cutting rights to the preservation of living records. Unlocks Grove archives on old-growth woodland: knowledge and modest industry instead of the woodlot’s stronger extraction.', knowledgeCost: 72, requires: ['technology.stewardship'], effects: { food: 0, industry: 0, coin: 0, knowledge: 0 }, introducedInRules: 11, branch: 'stewardship' },
+  { id: 'technology.quarry_cranes', name: 'Counterweighted cranes', description: 'Reusable lifting frames unlock Oreworks on mineral seams. Worked Oreworks favor industry at the cost of food and coin; wet ground complicates extraction.', knowledgeCost: 60, requires: ['technology.cinder_masonry'], effects: { food: 0, industry: 0, coin: 0, knowledge: 0 }, introducedInRules: 11, branch: 'craft' },
+  { id: 'technology.deep_soundings', name: 'Deep soundings', description: 'Observations from the shore compare returning ships’ ocean records. Unlocks Tide observatories on coastal shallows; knowledge replaces the food-focused role of a fishery. Does not extend worker reach into deep ocean.', knowledgeCost: 120, requires: ['technology.ocean_navigation'], effects: { food: 0, industry: 0, coin: 0, knowledge: 0 }, introducedInRules: 11, branch: 'navigation' },
 ];
+/** Frozen choices remain unavailable to historical command execution. */
+export function technologiesForRules(version: number): readonly TechnologyDefinition[] {
+  return TECHNOLOGIES.filter(item => (item.introducedInRules ?? (item.id === 'technology.coastal_navigation' || item.id === 'technology.ocean_navigation' ? 8 : 4)) <= version);
+}
+export function technologyBranch(item: TechnologyDefinition): ResearchBranch {
+  return item.branch ?? (item.id === 'technology.cinder_masonry' ? 'craft' : item.id === 'technology.civic_accounts' ? 'civic' : 'navigation');
+}
 export const INSTITUTIONS: readonly InstitutionDefinition[] = [
   { id: 'institution.charter_compact', name: 'Charter compact', description: 'Recognize shared market charters. Every settlement gains 2 coin before penalties; enables the Hearth Exchange. Permanently excludes Common stewardship.', coinCost: 30, effects: { food: 0, industry: 0, coin: 2, knowledge: 0 } },
   { id: 'institution.common_stewardship', name: 'Common stewardship', description: 'Communal stores take priority over merchant privileges. Every settlement gains 3 food before penalties; enables the Hearth Exchange. Permanently excludes Charter compact.', coinCost: 30, effects: { food: 3, industry: 0, coin: 0, knowledge: 0 } },
@@ -88,6 +105,7 @@ export function validateProgressionContent(
     checking.add(technologyId);
     if (new Set(technology.requires).size !== technology.requires.length) throw new Error('Duplicate technology requirement: ' + technologyId);
     technology.requires.forEach(visit);
+    for (const requirement of technology.requires) if ((technologyById.get(requirement)?.introducedInRules ?? 4) > (technology.introducedInRules ?? 4)) throw new Error('Technology requires a future rules definition: ' + technologyId);
     checking.delete(technologyId); checked.add(technologyId);
   };
   technologies.forEach(item => visit(item.id));

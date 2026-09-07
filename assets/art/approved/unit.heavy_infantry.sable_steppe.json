@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.sable_steppe",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.sable_steppe"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: one original Theandril dark-fantasy strategic game sprite, unit.heavy_infantry, static first-facing pose.\nScene/backdrop: genuinely TRANSPARENT RGBA background, alpha zero around the isolated sprite. Do NOT paint a checkerboard, white/black backdrop, landscape, scene, floor tile, drop-shadow oval or framing panel.\nFaction visual grammar: Sable Steppe, an original mixed-human steppe camp confederation. Lean adult proportions; rust felt, muted ochre cloth, indigo accents and black lamellar leather/iron. Mobile angular cloth cuts, practical travel equipment, no lavish imperial ornaments. Heraldry is exactly three broad wind-notch cuts arranged as a compact original simple seal. Settlement architecture combines yurts, taut angular tension roofs and protective walls, not medieval European castles. No copied fantasy franchise costumes.\nSubject: One adult heavy infantry veteran in layered dark protective armor, visibly heavier than an ordinary guard, holding one broad sword and large shield. Face southeast, toward screen right and slightly toward viewer. Whole helmet, weapon and feet visible. No huge helmet ornament.\nStyle: serious weathered medieval pixel art designed for a 64x64 native sprite; intentional broad pixel clusters and restrained material ramps, selective dark local-color outlines, crisp hard edges, soft upper-left material lighting. Adult anatomy, modest head about one-seventh body height, NOT chibi/cartoon. Keep every role readable when reduced to its native size; no painterly texture soup, antialias blur, microtexture or bright confetti.\nComposition: exactly ONE sprite, centered with at least 15% fully transparent margin on EVERY edge. Shallow elevated three-quarter strategic view. Whole silhouette fully inside canvas; nothing cropped. Readable separated limbs and equipment; one static grounded pose.\nColor family: muted material colors only; steel stays grey, flesh stays natural, cloth carries faction accents. No glow, text, labels, watermark, logo, decorative page, multiple poses, sprite sheet or grid. Return an actual transparent PNG.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.sable_steppe/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.heavy_infantry.sable_steppe/a2de78977e7a011f53b5084d97a2668aaeb2c47be1843eb06190de0286eee72c/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not exposed",
+    "promptHash": "5028f74d3bff3d1205bae1961b4f8e62423e4fceed8f9988644cd25d77748971",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/rimesable/unit.heavy_infantry.sable_steppe-v1.png",
+      "assets/art/source/faction-expansion/rimesable/unit.heavy_infantry.sable_steppe-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:01:33.107Z",
+  "referenceHashes": [
+    "8be73385c2c3066bbf94d6431be8440b9bd8955179e9d9dd07b4ac54634cb4e3",
+    "d410966af704b11506ba4289e8d893395cd68f8504cafd0b574445c80bc7118d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "e253227fd1df506503ccd376ed96d279a95df90fc3ebdf573436b6ba39dc7f51",
+      "inputHash": "8be73385c2c3066bbf94d6431be8440b9bd8955179e9d9dd07b4ac54634cb4e3",
+      "outputHash": "16c202133e949d7a398317f11cdde4b43136c1dbd2b885b0e08f676f812c2554"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "16c202133e949d7a398317f11cdde4b43136c1dbd2b885b0e08f676f812c2554",
+      "outputHash": "95d1be8ae65f3f1676606069ddca4ffdd68ac9e5621e5f9a0ead156525259687"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "95d1be8ae65f3f1676606069ddca4ffdd68ac9e5621e5f9a0ead156525259687",
+      "outputHash": "0ae094f8ef3918d2b218b2e08abea1ebfcb0d7dc9ec5657e9e5292aef6d56ae3"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "91aa36fe340e7ed1b6b4de3a4d13cd4bd7504a36150850bf0cdba07597c458f9",
+      "outputHash": "8e59318f68c52ab831be50887ca5dddcf357dcd82f2e0a593fc3c323211bd2e0"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "ff5e58198bd59523641e089971e8ef3b37f53168a743168a8755ce75303671a9",
+      "outputHash": "501e7c6c8a83adaf38c4236ef54006cf36721949c26a484786f33384ed179fd5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "4f938404a931a552fba72825d32da65653d0ec5a747ab5e8437c3a599c93bb09",
+      "outputHash": "9846341d95c8395e3515e06c62f953a7e634d386b0320d5a319f59084056be92"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.heavy_infantry.sable_steppe.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:32.927Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Broader lamellar shoulders and large rust-edged shield separate heavy infantry. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate a2de78977e7a011f53b5084d97a2668aaeb2c47be1843eb06190de0286eee72c; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/ae122a0b841cd15ad70339908a698dad62afd662720dbeb948346c8e295ae1df.png"
+    ],
+    "inputHash": "82dcc4288289597da77e17ba5d7a052c83b44b28e6bb70b161b46b4bb914d3a8"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

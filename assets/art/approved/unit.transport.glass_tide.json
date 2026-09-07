@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.glass_tide",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.glass_tide"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Glass Tide salt coast culture: pale salt-linen and slate-blue sails, elegant sweeping hull lines, grey weathered timber, curved shield rails, blue beacon-shaped mast caps, simple hollow sail diamond above two horizontal bars emblem. Slender chartered maritime design, no magical glass hull. Role: Charter transport: a broad deep-water wooden cargo cog with a rounded capacious hull, single patched square sail, low canvas-covered passenger shelter and neatly strapped crates. Lightly armed; no artillery, no warship ram. Chunky broad cargo silhouette.",
+  "frames": [
+    {
+      "id": "unit.transport.glass_tide/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.glass_tide/f35452ba91158dbdd5bd63a34649b7ea4524d34988a98abe8deee2d9b4228f97/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "80ba93c08a5c9e438a3482d150ae55e8ec751e02d460c6d6234a83d200d3450e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.glass_tide-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.glass_tide-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:02:10.623Z",
+  "referenceHashes": [
+    "fde2a79415cc855de4e05656a8a4bd40073b1bb224292da0fafc9dce680a5c94",
+    "cba1d7450d6f080fb2ed16cc809376a2148089c58452cc416cd0cc153c9a29ed"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "49af81984dedbbc71e66ee5bc12f40d0024eeb0a52b0c7abd9f0cd10d5b3579a",
+      "inputHash": "fde2a79415cc855de4e05656a8a4bd40073b1bb224292da0fafc9dce680a5c94",
+      "outputHash": "177130fa34ac0fefc17d742595ab661a287a7c5c79997b20fd38334bdfa78bc7"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "177130fa34ac0fefc17d742595ab661a287a7c5c79997b20fd38334bdfa78bc7",
+      "outputHash": "fcba368d901052429ef9ee7ee67a5391db3a59f1d28123b20e80bba24eb362fe"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "fcba368d901052429ef9ee7ee67a5391db3a59f1d28123b20e80bba24eb362fe",
+      "outputHash": "0ba4c5e5da1f38cd1a51548c820a84dff432f81da0eedd603ede8f53023e95f7"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "ca54796e4b846c4ea4fb3067dadaf6c8191bedeba538707935c8a003029a95fb",
+      "outputHash": "623d97d3d922ba0130118e6b0bc3da47259242041070cf29978402cb46065004"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "97f58dde829a595ec4dbee795778c2612a1af57a1b8e2c0b8f2857bcac4914ca",
+      "outputHash": "760eaf974f92e74576c7c81d3dc0cde6f648036fb9687ca8f51b4e2e7b3ea45d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "d26d96e3f5f0984614c91d4604f1f45c305cdcebc108c8910d02871637b86860",
+      "outputHash": "f5f2b299d451264385dbff58449b5543dd69f8518b861679fa57a8811b85868a"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.glass_tide.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:02.090Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Pale blue-white sail masses and curved salt-grey hull contours are legible; narrow oared galley, broad cargo canopy and paired-sail warship remain distinct. Broad cargo body and passenger canopy read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate f35452ba91158dbdd5bd63a34649b7ea4524d34988a98abe8deee2d9b4228f97; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d9b9f34f5fdec7637831b584f6ece45e2f4ce2a3fd2c6976545ec628ae31fca9.png"
+    ],
+    "inputHash": "e61200318d5bc4330f4140b5a81d9ab639f57d6de2d86901e680c0a1c40b9786"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.cinder_march",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.cinder_march"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Cinder March upland watch culture: angular broad dark iron reinforcing plates, squared protective parapets, rust-red heavy canvas sails, soot timber, stepped watch-wall around one ember emblem. Heavy practical forge and defensive masonry-inspired silhouette, never an actual stone ship. Role: Charter transport: a broad deep-water wooden cargo cog with a rounded capacious hull, single patched square sail, low canvas-covered passenger shelter and neatly strapped crates. Lightly armed; no artillery, no warship ram. Chunky broad cargo silhouette.",
+  "frames": [
+    {
+      "id": "unit.transport.cinder_march/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.transport.cinder_march/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5b195c659154b8fada7d109e9ace137d7df5c17f258cd61d1c2e4ed328a22dc0",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.cinder_march-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.cinder_march-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T22:56:37.295Z",
+  "referenceHashes": [
+    "9695644d1afc8cfb7117318ee08861d517e1e9f4fa612d0af274d7841851b1bd",
+    "eaa144e2e3403179b0f470bd9d1af8e44cd9bd2a8808d0ee49c976b11b01c2da"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "cf3c3cc4a2daa13e36afca6a1f774c102ada1eeeab62e9bea0422b46a5e2d6ba",
+      "inputHash": "9695644d1afc8cfb7117318ee08861d517e1e9f4fa612d0af274d7841851b1bd",
+      "outputHash": "0d57ac2312e0d9773857bc1156fe9e465e4377c4fd0f5f921d93cba2ac9294e5"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "batchId": "saltward",
+  "status": "REVISION_REVIEW_NOT_APPROVED",
+  "reviewedAt": "2026-09-06T09:28:23.057Z",
+  "revisionReason": "Independent root review rejected two visually reversed development progressions despite successful automated validation.",
+  "sourceIndex": "assets/art/source/faction-expansion/saltward/generation.json",
+  "previousSourceIndex": "assets/art/source/faction-expansion/saltward/generation-v1.json",
+  "originalGenerationCalls": 30,
+  "additionalGenerationCalls": 2,
+  "totalOriginalsRetained": 32,
+  "affectedAssets": 2,
+  "unchangedOtherAssets": 28,
+  "provider": "codex-imagegen",
+  "model": "not-exposed-by-tool",
+  "seed": null,
+  "rejections": [
+    {
+      "id": "settlement.town.saltwind_remnant",
+      "version": 1,
+      "candidateInputHash": "6852b5039858451e9ede33d1bcc8c1f2cfcb3c0de5ca4d6e5539c97a358af7fb",
+      "rejectedManifest": "assets/art/rejected/settlement.town.saltwind_remnant.json",
+      "reason": "Root independent review rejected v1: tall flag consumes the native 96px canvas, shrinking the town body below the village. Replace with a low broad dense 7-9-building town enclosure and market hall; retain every v1 source, native frame, editable export and reviewed evidence.",
+      "evidence": "assets/art/source/faction-expansion/saltward/saltwind_remnant-processed-4x-v1.png"
+    },
+    {
+      "id": "settlement.town.wardhall_remnant",
+      "version": 1,
+      "candidateInputHash": "399a3f08d494020dbf88cc563c7a1ddfa45968675b70ed47fd561dddb0cc541b",
+      "rejectedManifest": "assets/art/rejected/settlement.town.wardhall_remnant.json",
+      "reason": "Root independent review rejected v1: town has fewer and lower building masses than its village, reversing development progression. Replace with a low broad dense 7-9-building town enclosure and market hall; retain every v1 source, native frame, editable export and reviewed evidence.",
+      "evidence": "assets/art/source/faction-expansion/saltward/wardhall_remnant-processed-4x-v1.png"
+    }
+  ],
+  "sources": [
+    {
+      "family": "saltwind_remnant",
+      "path": "assets/art/source/faction-expansion/saltward/settlement.town.saltwind_remnant-v2.png",
+      "sha256": "2e94d71516b5fa31c53ecaec3057baa735ed0b8ca389977e72c2d3be9d313c00",
+      "width": 1312,
+      "height": 1199,
+      "bounds": {
+        "minX": 47,
+        "minY": 117,
+        "maxX": 1266,
+        "maxY": 1016
+      },
+      "transparent": 783435
+    },
+    {
+      "family": "wardhall_remnant",
+      "path": "assets/art/source/faction-expansion/saltward/settlement.town.wardhall_remnant-v2.png",
+      "sha256": "00d4ed7e74d9e51cbe0f897fb082a70e7b8ec5e583b9d8729bb4f664d8cb3dd6",
+      "width": 1312,
+      "height": 1199,
+      "bounds": {
+        "minX": 32,
+        "minY": 100,
+        "maxX": 1278,
+        "maxY": 1073
+      },
+      "transparent": 779920
+    }
+  ],
+  "processed": [
+    {
+      "id": "settlement.town.saltwind_remnant",
+      "version": 2,
+      "passed": true,
+      "inputHash": "d5fbc5131c4447bff4a7916f9e5a37ee1d3c05ac5bb97ff371188893e5c6a577",
+      "rgbaHash": "25f687fca0dc7a6d2686f40d0da34dc1649e2023b5e12e0e1b57754eee0c05b1",
+      "sourceHash": "2e94d71516b5fa31c53ecaec3057baa735ed0b8ca389977e72c2d3be9d313c00",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-96",
+          "settingsHash": "7fd9dbb08a08c853f6a09e84c48f47c184d08a45bc04756a5467d8264436cac8",
+          "inputHash": "2e94d71516b5fa31c53ecaec3057baa735ed0b8ca389977e72c2d3be9d313c00",
+          "outputHash": "e6afa322814d5a08efd6043bc76dc3170ff0a04dfcb2d0ba6b1c6de5939ca530"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "e6afa322814d5a08efd6043bc76dc3170ff0a04dfcb2d0ba6b1c6de5939ca530",
+          "outputHash": "4b478d4e7a4ca7780088a65aca07cb05505fa5ad032213f0dce4efd219c42a13"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "4b478d4e7a4ca7780088a65aca07cb05505fa5ad032213f0dce4efd219c42a13",
+          "outputHash": "4bebafdddec146fc8a4e231754b819c86330dc3013e74e2b3da7fc3c5a2dafae"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+          "inputHash": "8b5cb40e215c0e48c4ddae99dbd0b670a144bc7ea34c5ee76af6ec5f0491c1f6",
+          "outputHash": "3049fba8fa25f06d5996b5e1225906dd2d5e0f50d14bd92b2778625c3e8e1cc3"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+          "inputHash": "86eacde3a6dbde2f52f4f7c4492936cba808634a5a9447bd2420147f1df06ef2",
+          "outputHash": "131eeca9cef99e17d4dec28871fc6bc2d969c33f20890c5bca85ab6bb4b40759"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+          "inputHash": "3c8bd2b4cd60f7b1c3e761fd1a0d8a40a70852fd8346aa544a5b4136f5de725f",
+          "outputHash": "16d89f6fcc4af41c82a88479fd937302b657330e4bae67e330b0b708a353eec2"
+        }
+      ]
+    },
+    {
+      "id": "settlement.town.wardhall_remnant",
+      "version": 2,
+      "passed": true,
+      "inputHash": "feef4ac0c94be95aa69ccc2fb5ff256f6739fe907d65fb0b0b007538338a1624",
+      "rgbaHash": "87b5735f34be68718e15b5d9171fab9b2b0d918b425eb416712369cc05df4a8a",
+      "sourceHash": "00d4ed7e74d9e51cbe0f897fb082a70e7b8ec5e583b9d8729bb4f664d8cb3dd6",
+      "processing": [
+        {
+          "tool": "theandril-single-asset-extraction",
+          "version": "2",
+          "profile": "registered-96",
+          "settingsHash": "de8beab46dd1ef20b5df922821aa5d90c3d2f58cd4a0705b82bf333d34d15ea4",
+          "inputHash": "00d4ed7e74d9e51cbe0f897fb082a70e7b8ec5e583b9d8729bb4f664d8cb3dd6",
+          "outputHash": "5c39ad1c628031efe0756e5cd9d93c46a465e3db79eec1ef242bbe89adb24029"
+        },
+        {
+          "tool": "theandril-grid-enlarge",
+          "version": "1",
+          "profile": "nearest-4x",
+          "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+          "inputHash": "5c39ad1c628031efe0756e5cd9d93c46a465e3db79eec1ef242bbe89adb24029",
+          "outputHash": "69a6873ae2404bd0b37dfc26af678884637a3841fb9b8da6d1a663e0fe494cd2"
+        },
+        {
+          "tool": "spritefusion-pixel-snapper",
+          "version": "spritefusion-pixel-snapper 1.0.0",
+          "profile": "fixed-palette-pixel4",
+          "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+          "inputHash": "69a6873ae2404bd0b37dfc26af678884637a3841fb9b8da6d1a663e0fe494cd2",
+          "outputHash": "c2d6adbadf6d4891542ba99ee78c403cc3e7f75c0bf2fa9e43a99ac551e2d717"
+        },
+        {
+          "tool": "theandril-native-normalize",
+          "version": "1",
+          "profile": "nearest-alpha128",
+          "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+          "inputHash": "f48fdc3f2df9005a69ec53e8902aa4122996d889212953d6b0ac7bf56778284f",
+          "outputHash": "f42083c6bdd12b8006b2b8458dc59773609375403c3191638dbbb5fc82e46091"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+          "inputHash": "555b76f2c55ede6ecf85d6a9424a9580db2901b24540afa9aabf095e02f97696",
+          "outputHash": "c84c3af186fcbb5899d9f6599ccd7114f12a01e0a526896b766596967344e380"
+        },
+        {
+          "tool": "aseprite",
+          "version": "Aseprite 1.3.18.3-x64",
+          "profile": "aseprite-settlement-96",
+          "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+          "inputHash": "a366057c04e33fdc782ab47442fc1423fd5335313ecdb05e0d25a7d9d3826bd0",
+          "outputHash": "c087439cb392f3d3587f1cc17b266888abd36b2fd3927e929dc3216a27316571"
+        }
+      ]
+    }
+  ],
+  "contacts": [
+    {
+      "path": "assets/art/source/faction-expansion/saltward/town-development-processed-1x-v2.png",
+      "sha256": "c7dfd71f95262ab18b2d74dabca9c2fff141532b66b868cf77cc58fa4b57c091",
+      "bytes": 178059
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/town-development-processed-4x-v2.png",
+      "sha256": "a6df0ea5c15fc6bc094c1bb48b75f05a934aee8263cc4fe5251d2b7e6b4c1f8e",
+      "bytes": 2459383
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/saltwind_remnant-processed-1x-v2.png",
+      "sha256": "5ee1c6a41fddee4e61838831d9c575dab90c578f05d6d8484bac7d7ac1d1a088",
+      "bytes": 403544
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/saltwind_remnant-processed-4x-v2.png",
+      "sha256": "a5caa24e863aeb2f3dc3d22c0d2c76ce681769339bebd598c6b65c3b0f481f74",
+      "bytes": 5444750
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/saltwind_remnant-processed-order-v2.json",
+      "sha256": "f9e8f65276c9e9a093a365e20d6002b97f6fe23f66985a84ae6285a8b178d00c",
+      "bytes": 1699
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/wardhall_remnant-processed-1x-v2.png",
+      "sha256": "213a1c99d0a8945d64ff46d4e015b6c9ee98219ddfd31b5d041b3c3762bb65b0",
+      "bytes": 417184
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/wardhall_remnant-processed-4x-v2.png",
+      "sha256": "63b62a81d8a129dfaf5a5781137e588ad5bc16dfcee21d6173fca001fd924282",
+      "bytes": 5663746
+    },
+    {
+      "path": "assets/art/source/faction-expansion/saltward/wardhall_remnant-processed-order-v2.json",
+      "sha256": "5b615f5263176c06dacfe88cf060b9d64f689b5ae60b9ed37f4eafcb30b0e2e2",
+      "bytes": 1699
+    }
+  ],
+  "developmentComparison": {
+    "columns": 2,
+    "order": [
+      {
+        "id": "settlement.city.saltwind_remnant",
+        "version": 1
+      },
+      {
+        "id": "settlement.city.wardhall_remnant",
+        "version": 1
+      },
+      {
+        "id": "settlement.town.saltwind_remnant",
+        "version": 2
+      },
+      {
+        "id": "settlement.town.wardhall_remnant",
+        "version": 2
+      },
+      {
+        "id": "settlement.village.saltwind_remnant",
+        "version": 1
+      },
+      {
+        "id": "settlement.village.wardhall_remnant",
+        "version": 1
+      }
+    ],
+    "description": "Row-major: city v1 pair, town v2 pair, village v1 pair; Saltwind left, Wardhall right. All native dimensions retained, 1x and unfiltered 4x."
+  },
+  "visualReview": {
+    "nativeInspected": true,
+    "processedAt1xAnd4xInspected": true,
+    "approved": false,
+    "inGameReviewed": false,
+    "findings": [
+      "Saltwind town v2 has a wide auburn-roof market and dense connected stilt/quay buildings with substantial lower body mass. The tall flag from v1 is gone; it now reads as an enclosed trading town rather than a village-sized cluster under a pole.",
+      "Wardhall town v2 has a broad low wall enclosure, a central market/work hall and a dense group of surrounding workshops. Its building count and enclosed footprint exceed the three-house village; its lower roofline deliberately avoids competing with the 128px towered city.",
+      "Town native canvases remain 96x96, villages 96x96 and cities 128x128. No enlarged town runtime contract, copied village upgrade, fake animation, or changed atlas publication is introduced.",
+      "Original source margins are genuinely transparent and the full alpha>=128 silhouette is retained. Actual bounds are recorded; the generator did not satisfy the requested 15% side-margin preference, but neither silhouette touches an edge and preparation retains safe native padding.",
+      "Root independent reviewer retains final approval and in-game contrast/progression judgment. Other twenty-eight role candidates were not regenerated or reprocessed."
+    ]
+  }
+}

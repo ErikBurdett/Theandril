@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.reedbound_council",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.reedbound_council"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Reedbound Council river-working culture: shallow curved weathered timber and woven reed screens, moss-green patched sails, pale straw canopy ribs, oval wicker shield rails, simple three upright reeds within open oval emblem. Practical riverboat-derived hull traditions. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.reedbound_council/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.reedbound_council/ab3b14164fff3a6d468c9e4af2b186764476ce086982ff80275d16277f9b6832/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "adc39279b9f7d7ad5cf499f1279c80f28e6f6df05da216dc936dffe43b872d02",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.reedbound_council-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.reedbound_council-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T22:56:37.253Z",
+  "referenceHashes": [
+    "2f7ed327243806e418dc62395dd13a7ac31e152b59f7ae5ac615d54bc148ab95",
+    "b075730383795bcc7bb84ef1e3104fe8df2cc9964ba87a4b015df59281f10af2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a39b4584dddf49859ba211499e7a118dfc1dc8c24826be8acfda9f62ff8458e7",
+      "inputHash": "2f7ed327243806e418dc62395dd13a7ac31e152b59f7ae5ac615d54bc148ab95",
+      "outputHash": "2178a36f29943012bf334a90fcfaa67e85dad3e7e55e7aee02d7aea79227cc15"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2178a36f29943012bf334a90fcfaa67e85dad3e7e55e7aee02d7aea79227cc15",
+      "outputHash": "fe3a2931626c19e696fd26836f9d6c5d31cf15e0b0c56a871955588c256c1cd1"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "fe3a2931626c19e696fd26836f9d6c5d31cf15e0b0c56a871955588c256c1cd1",
+      "outputHash": "bc2f21ea478fc6b3503ffaf43a7328cd1679504d6bfadf4632d961f48c3d57e7"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "2151dbeafaf831ca7cdbbc480eba5fb3acec81af0f613ee22bf54e5c37f7a85f",
+      "outputHash": "7a2b5568dbac593e787eec7d443f17c9f589973674a22415f2d479fe3efefa82"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "d83297ea59307600a3c441370858c813241fcbb541274e3b6d1ecb4d9ecc7484",
+      "outputHash": "d3cfd75a34816ef40981f1a8a3f29103ef34b133d14a3dcfc13b7e3f6d36d154"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "c20bf52df2db773e5df576c67d7ec4a3b29699f6aec06c5abc73e1c32f02710e",
+      "outputHash": "20f8cdc3825b4127fc06d522af2ff5bbec2f16cd4b858660ddc2a6189e888096"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.reedbound_council.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:37:00.530Z",
+    "notes": "Root inspected source plus native1x and nearest4x processed pixels. Reed-green cloth and woven warm timber rails; pale triangular galley sail contrasts with the round cargo hull and paired warship sails. Low oared hull and triangular sail read at96px. Palette and binary-alpha validation passed; no background matte or clipped native tips. Static southeast art only; fine rigging is texture, not animation. Runtime water/fog/ownership review is a separate gate.\nReviewed candidate ab3b14164fff3a6d468c9e4af2b186764476ce086982ff80275d16277f9b6832; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/aa1ca2554c013e2ee0c0268f006513af7ba7c8c36d47ab9801450a641f751482.png"
+    ],
+    "inputHash": "b7d3da5de0adbad149b4a93e39d6b5241babecc1fea2babff4fdb39da5bf9abf"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

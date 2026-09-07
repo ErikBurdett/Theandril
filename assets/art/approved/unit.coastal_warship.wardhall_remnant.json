@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.wardhall_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Wardhall Remnant reconstruction work halls: straight sober black-iron girders over weathered timber hull, slate-violet squared canvas sails, chalk-painted low rectangular deckhouse, kite-shaped rail shields, original open-square seal. Practical angular civic reconstruction craft, no supernatural anti-magic glow. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.wardhall_remnant/298d585b23abe9ac5b5dafde3f6c6a6bfa413e7bff0cf558eaa02c959b1bc053/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "a85962ba26eb0a772fb04daf463230e7efc3e75f3a78249f328497130ccadc84",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:37:41.145Z",
+  "referenceHashes": [
+    "b8dc25d9eef3c17f04ba2a84d42af5f809771b7b220ddce59a063a88266b0eed",
+    "04930357ad480314e5b997d8a135e8dbf189d789d16ed0ad4032aa99c5d38580"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "bdd4328995d3a26b770b377e0fb54e0d119b052568c3bad0e2b94a3ff5a21338",
+      "inputHash": "b8dc25d9eef3c17f04ba2a84d42af5f809771b7b220ddce59a063a88266b0eed",
+      "outputHash": "1b4bf6ab64e07b72ac65016737a633b15e724add619cf04a807f7e72110b3604"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "1b4bf6ab64e07b72ac65016737a633b15e724add619cf04a807f7e72110b3604",
+      "outputHash": "47a8a2d68c56b61eedfd981217ae70598b4dd1312d61fd7d04046d079632ebc7"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "47a8a2d68c56b61eedfd981217ae70598b4dd1312d61fd7d04046d079632ebc7",
+      "outputHash": "2f7b5f07a952efd8d746b708c18055f851b52146e05aa8e91455ebcb56ce70d6"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "d6759338921dddd900a736a4a1510239d3c09178a3395280f680072a3bba79b7",
+      "outputHash": "6fd6242f4f1b202bcfa73b15bba3d613b6d8b8003110addec5ebe452d331fa80"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "eaeb0388afc39ffc62e2748f1ac29658530bf26e77a9757a8bf16a3bd09c10cc",
+      "outputHash": "152e5d1048f23313a4e876ca473294fa436300618600ffaef3fb1079edcfb4db"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "69b9f7005db0a6c60a76cf592b93ba5fb8e617444fce28da4f59853aef72c06e",
+      "outputHash": "e113ccf1f325a8e0843fcb5f9359a3f63026b5b610c1d11faba367d23843303b"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.wardhall_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:50:17.392Z",
+    "notes": "Root inspected generated source, native1x cohort and nearest4x family pixels. Weathered slate-violet cloth, pale gate-like marks and reinforced dark timber; pale sail fields separate clearly from the hull. Low oared hull and triangular sail read at96px. Palette and binary-alpha validation passed; native tips intact and no opaque background matte. Static southeast art only; fine rigging is texture. Runtime water, fog and ownership review is a separate gate.\nReviewed candidate 298d585b23abe9ac5b5dafde3f6c6a6bfa413e7bff0cf558eaa02c959b1bc053; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/39f3448538751e41c0e6f63f7d8d6f8ac9b5460a79ccc4a10657cf343c930946.png"
+    ],
+    "inputHash": "4e505ddf61e60c1fab6c2354282fad08883f67a7e6873a712d5c20d6c9e89bdf"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

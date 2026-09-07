@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import {
   BIOME_YIELDS, BUILDINGS, CAMPAIGN_PACES, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_NAMES, CHARACTER_SKILLS,
   COMMANDER_ABILITIES, DOCTRINES, FACTIONS, FACTION_ECOLOGIES, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, FACTION_ROSTERS,
-  IMPROVEMENTS, INSTITUTIONS, LOCALIZATION, NATURAL_FEATURES, PROSPERITY_PROJECT, ROSTER_VERSION, TECHNOLOGIES, UNITS,
-  characterName, checksum, factionRoster, validateFactionContent,
+  INSTITUTIONS, LOCALIZATION, NATURAL_FEATURES, PROSPERITY_PROJECT, ROSTER_VERSION, UNITS,
+  characterName, checksum, factionRoster, improvementsForRules, technologiesForRules, validateFactionContent,
 } from './index';
 
 describe('twelve-culture roster and frozen introductory content', () => {
@@ -11,9 +11,9 @@ describe('twelve-culture roster and frozen introductory content', () => {
     const oldNames = Object.fromEntries(Object.entries(CHARACTER_NAMES).slice(0, 6));
     const oldEcologies = Object.fromEntries(Object.entries(FACTION_ECOLOGIES).slice(0, 6));
     expect(checksum(JSON.stringify({
-      BUILDINGS, UNITS, FACTIONS: FACTIONS.slice(0, 6), TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES,
+      BUILDINGS, UNITS, FACTIONS: FACTIONS.slice(0, 6), TECHNOLOGIES: technologiesForRules(9), INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES,
       CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES: oldNames,
-      BIOME_YIELDS, FACTION_ECOLOGIES: oldEcologies, IMPROVEMENTS, NATURAL_FEATURES,
+      BIOME_YIELDS, FACTION_ECOLOGIES: oldEcologies, IMPROVEMENTS: improvementsForRules(9), NATURAL_FEATURES,
     }))).toBe('9418e598');
   });
 

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.wardhall_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: One adult human line spearman in straight chalk-grey padded armor and slate-violet sash, black iron shoulder strips, holding ONE long continuous ash spear with a simple steel leaf tip and a narrow kite shield bearing an open-square insignia. Upright ordered stance; full spear tip and both boots inside generous margins, no extra weapons.",
+  "frames": [
+    {
+      "id": "unit.spearman.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.spearman.wardhall_remnant/5963498a4d55b4ab6103517a9a9671968779bd8c76322f5ddb0f533ed3e8591d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b306c90caf02c1f2e8aa0f58247801081258ee74f3280679baaba14e8c630df9",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/unit.spearman.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/unit.spearman.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:53:11.000Z",
+  "referenceHashes": [
+    "0baff8ba1d2f768c3b1c183ef3421698dffda6ad1b3c4f1751ed5df2b3058310",
+    "02837b85c7175d0a1849c82f60b83082066f0d51076c0b208be2201f6d6a8fba"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "cfd7925ee6d5cb4e242373fafd242bb1c5d7e8e19e639d35eaca857badcaeefc",
+      "inputHash": "0baff8ba1d2f768c3b1c183ef3421698dffda6ad1b3c4f1751ed5df2b3058310",
+      "outputHash": "debf755d671969e17db32c309469913669a5ef968af5874c48c7cd3d11c2b4cf"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "debf755d671969e17db32c309469913669a5ef968af5874c48c7cd3d11c2b4cf",
+      "outputHash": "38f315aeabcbdfa32663de2204aa257d78f0709ab597cc0664c5ad1c314cfefa"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "38f315aeabcbdfa32663de2204aa257d78f0709ab597cc0664c5ad1c314cfefa",
+      "outputHash": "e17da62b800b141af62d27490f888d59d8be6cb6c618a534b12cd9410dd0228a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "9571387d715e19fdba4e70f2d41c14912bca8f3fe33832dd25d9c48721b9c5cb",
+      "outputHash": "88beec747f62b2198d42185b40821b3b6224cdbd631bb6cae807712418d8a295"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "e11db162316627258c9c92e1384fa96386fc933bfa758bdfa7fbd00a96962e13",
+      "outputHash": "4aad355434d43f75d0466aad200c6ab7cebedfaf7e138bc87c4973ee15f7778b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "279716737b9e6442f039530b0bb6584a114d5d899d1c729861a6d165160699ce",
+      "outputHash": "25653263b5b62f8f40288f675fe39f193ec767436ff6a7ee1c670579852d606e"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.spearman.wardhall_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:38.903Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Upright long spear and pale geometric shield stay distinct from guard sword. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 5963498a4d55b4ab6103517a9a9671968779bd8c76322f5ddb0f533ed3e8591d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/63b62a81d8a129dfaf5a5781137e588ad5bc16dfcee21d6173fca001fd924282.png"
+    ],
+    "inputHash": "1070efb07464654e08bc4f53fe6f449a154d8eb83dfa71911ec43c85066ac9dd"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

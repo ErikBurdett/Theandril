@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.morrow_spore",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Morrow Spore: original underwood commonwealth of adult humans and solemn fungal symbionts. Umber layered fungal carapace, dusty mauve cloth, pale lichen seams and dark leather. Strong broad overlapping shelf-fungus planes rather than cute mushroom caps. Original hollow crescent cradling three seeds seal. Practical mature woodland society, no spores in air, neon, gore or chibi figures. Native64. One full-body adult works engineer, broad leather apron, compact hammer held low, rolled construction plans under other arm, heavy tool belt and visible face. No weapon or shield, practical distinct builder silhouette.  Buildings: broad layered shelf-roofs and grown timber ribs with umber walls, pale lichen door frames and mauve canopy accents, not freestanding mushroom doodles; heraldry bonecrescent around threeseeds on umber. Humanoids adult serious humans with fungal grown armor and scarves.",
+  "frames": [
+    {
+      "id": "character.engineer.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.engineer.morrow_spore/d7e0188b645b073b8382927021d1bb992d3ae227328b7e86fefb702ec6723dfd/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9ff224b8608a56ff2a61c0db41d35806d1fcc12c57c803fa8e573f1371cd3af2",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/morrow/character.engineer.morrow_spore-v1.png",
+      "assets/art/source/faction-expansion/morrow/character.engineer.morrow_spore-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:09:14.057Z",
+  "referenceHashes": [
+    "269758aa0f03d9f92c97bc157fe0236703168f66fd5fcdb4704cc96541937aa9",
+    "d42eb0aa50dc0441f1e1595307bb3bdeb70049c1200f5a031817679b2c69c65d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "86e28bf4a0e21b4b917f7f784822133f27ddc658ada3a1c9e1ee9f68369b6592",
+      "inputHash": "269758aa0f03d9f92c97bc157fe0236703168f66fd5fcdb4704cc96541937aa9",
+      "outputHash": "69187676e8b30c568d993591c60338b2b7fdada07b5263dc9b62a5e0f4b00260"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "69187676e8b30c568d993591c60338b2b7fdada07b5263dc9b62a5e0f4b00260",
+      "outputHash": "b0a7f556d63228db73e7d22aa75daffa3622f2c7c66fcd8b1110f7b15f406641"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b0a7f556d63228db73e7d22aa75daffa3622f2c7c66fcd8b1110f7b15f406641",
+      "outputHash": "3b2c3c66043cd9ee27225afb32f0da5e654712de45e1f555a5f4ace88e1e655b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "44280e62f1ba34aa96ff3d48c9b76e2548b44024da06e060d498140da4fcd5e5",
+      "outputHash": "04a005115a97d3af2b46fad4ef056ee910a53b8c2e6ca0f6b3142e0bd162a341"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "79cbf2e552387dbae05338a8b4aa4c9e828021a52bdd88e7dea616a26271930a",
+      "outputHash": "0cf428f399ee5a8eb6efa176b644561e7c1650bc6fdd91ab4fcb597b746a5716"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "815a2e9fd1830f00cd6e12c29486c13b1d5bbe77cc6c8895a78a7fb87a43df2c",
+      "outputHash": "bef860fdfd2a52e39c9b9524fb3dcf8453523ad5dd07335d895bba8e2d3bea13"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.engineer.morrow_spore.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:01.210Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Pale rolled plans, hammer and work apron separate the engineer; tiny tool details remain simplified. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate d7e0188b645b073b8382927021d1bb992d3ae227328b7e86fefb702ec6723dfd; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0ad7250b8e085933726ab4d5b6c892fd68f0b59fcd4c90137084dbcc278a7137.png"
+    ],
+    "inputHash": "f2557148c5d90eb2abd89a5705e81c3171116aa9fa4f026341be8eeac066a994"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

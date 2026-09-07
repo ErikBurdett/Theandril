@@ -8,8 +8,10 @@ import { createNavigation } from './navigation';
 import { planCharacters } from './characters';
 import { planNaval } from './naval';
 import { planLand } from './land';
+import { recruitmentRoster } from './recruitment';
 
 export { chooseCaptureOption } from './conquest';
+export { aiObservationOptions, landPlanningTowns, LAND_PLANNING_TOWN_LIMIT } from './observation-options';
 export type { AiPlan } from './diplomacy';
 const units = new Map(UNITS.map(unit => [unit.id, unit]));
 
@@ -59,7 +61,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const areaPerFaction = view.width * view.height / Math.max(1, view.factionCount);
   const settlementTarget = areaPerFaction > 12_000 ? 8 : areaPerFaction > 3000 ? 6 : 4;
   const formationTarget = ownSettlements.length * 3 + 1;
-  const roster = ['unit.guard', 'unit.spearman', 'unit.scout', 'unit.heavy_infantry', 'unit.cavalry', 'unit.guard'];
+  const roster = recruitmentRoster(view.factions.find(faction => faction.id === factionId)?.definitionId);
   const rosterCounts = new Map(UNITS.map(unit => [unit.id, formations.filter(formation => formation.unitId === unit.id).length + ownSettlements.reduce((sum, town) => sum + town.queue.filter(order => order.itemId === unit.id).length, 0)]));
   const rotate = <T,>(items: T[], stride: number): T[] => {
     const offset = items.length ? ((view.turn - 1) * stride) % items.length : 0;

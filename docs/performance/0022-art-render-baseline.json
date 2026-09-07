@@ -1,0 +1,109 @@
+{
+  "date": "2026-09-06",
+  "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium ./node_modules/.bin/playwright test tests/gameplay/art-performance.spec.ts --output=test-results-roster-art-baseline",
+  "capture": "Selected metrics transcribed from the completed test JSON output; not a hardware-GPU profile.",
+  "workload": "Synthetic fully explored Huge, 32 factions, 1500 global armies,32 towns. Fog filters currently visible entities. No turns advanced; no mature strategic AI timing claim.",
+  "result": {
+    "passed": 1,
+    "durationSeconds": 16.7
+  },
+  "cells": 196608,
+  "stateHash": "892b6614",
+  "canvas": {
+    "x": 260,
+    "y": 205,
+    "width": 890,
+    "height": 786
+  },
+  "atlas": {
+    "assets": 134,
+    "frames": 152,
+    "width": 2048,
+    "height": 2048,
+    "pngBytes": 692034,
+    "sha256": "7a22a84c0c4623cea16327af27313e6796560024f38fbafde1491a0afe27ceb7",
+    "residentBytes": 16777216,
+    "artLoadMs": 272.30000001192093,
+    "firstRenderCpuMs": 41.5
+  },
+  "unchanged": {
+    "transferBytes": 1970720,
+    "cellTransferBytes": 1769695,
+    "landQueryCount": 0,
+    "maxCachedChunkWidth": 837,
+    "maxCachedChunkHeight": 712
+  },
+  "samples": [
+    {
+      "stage": "fully-explored-static",
+      "frameP95Ms": 16.800000000000182,
+      "renderCpuMs": 0.10000002384185791,
+      "visibleCells": 1024,
+      "visibleChunks": 4,
+      "cachedChunks": 4,
+      "chunkRebuilds": 8,
+      "visibleEntities": 48,
+      "zoom": 1,
+      "visibleSprites": 48,
+      "pooledSprites": 1072,
+      "cachedTextureBytesEstimate": 16777216
+    },
+    {
+      "stage": "near-static-faction-poses",
+      "frameP95Ms": 16.799999999999727,
+      "renderCpuMs": 0.10000002384185791,
+      "visibleCells": 1024,
+      "visibleChunks": 4,
+      "cachedChunks": 4,
+      "chunkRebuilds": 8,
+      "visibleEntities": 48,
+      "zoom": 1.25,
+      "visibleSprites": 48,
+      "pooledSprites": 1072,
+      "cachedTextureBytesEstimate": 16777216
+    },
+    {
+      "stage": "six-camera-drags",
+      "frameP95Ms": 16.800000000000182,
+      "renderCpuMs": 0.10000002384185791,
+      "visibleCells": 1024,
+      "visibleChunks": 4,
+      "cachedChunks": 10,
+      "chunkRebuilds": 14,
+      "visibleEntities": 0,
+      "zoom": 1.25,
+      "visibleSprites": 0,
+      "pooledSprites": 2608,
+      "cachedTextureBytesEstimate": 41943040
+    },
+    {
+      "stage": "far-strategic",
+      "frameP95Ms": 16.799999999999272,
+      "renderCpuMs": 0,
+      "visibleCells": 4096,
+      "visibleChunks": 16,
+      "cachedChunks": 18,
+      "chunkRebuilds": 22,
+      "visibleEntities": 0,
+      "zoom": 0.5120000000000001,
+      "visibleSprites": 0,
+      "pooledSprites": 4656,
+      "cachedTextureBytesEstimate": 75497472
+    },
+    {
+      "stage": "far-strategic-home-aggregates",
+      "frameP95Ms": 16.700000000000728,
+      "renderCpuMs": 0.10000002384185791,
+      "visibleCells": 4096,
+      "visibleChunks": 16,
+      "cachedChunks": 26,
+      "chunkRebuilds": 30,
+      "visibleEntities": 48,
+      "zoom": 0.5120000000000001,
+      "visibleSprites": 2,
+      "pooledSprites": 6704,
+      "cachedTextureBytesEstimate": 109051904
+    }
+  ],
+  "limits": "Power-of-two cache backing estimate excludes returned texture-pool resources, DOM decode and other GPU allocations; not total GPU memory. Single run."
+}

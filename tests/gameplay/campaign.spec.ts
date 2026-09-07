@@ -1,3 +1,4 @@
+import { openProduction } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 
@@ -28,6 +29,7 @@ test('settle, grow, build, recruit, explore and resume the same campaign', async
   await page.getByRole('button', { name: /Build Root cellar/ }).click();
   for (let turn = 2; turn <= 4; turn++) await endTurn(page, turn);
   await expect(page.getByTestId('chronicle')).toContainText('completed Root cellar');
+  await openProduction(page, 'land');
   await page.getByRole('button', { name: /Recruit Wayfinder/ }).click();
   for (let turn = 5; turn <= 7; turn++) await endTurn(page, turn);
   await page.getByRole('tab', { name: /Armies/ }).click();

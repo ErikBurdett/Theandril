@@ -1,3 +1,4 @@
+import { openRealmAffairs, openProduction } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { createArmyFormation, createGame, deserializeGame, serializeGame, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -79,13 +80,17 @@ test('mixed armies merge, split and transfer stable formations without refreshin
   await page.getByRole('button', { name: 'Found settlement', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ownSettlements[0]?.name)).toBe('Escort Hearth');
   expect(await page.evaluate(id => window.__THEANDRIL__?.getSummary()?.ownArmies.find(army => army.id === id), patrol!.id)).toMatchObject({ movement: 0, formations: [{ id: scoutId, unitId: 'unit.scout', strength: 20 }] });
+  await openProduction(page, 'land');
   await expect(page.getByRole('button', { name: 'Recruit Ash pike company', exact: true })).toBeEnabled();
+  await openProduction(page, 'land');
   await expect(page.getByRole('button', { name: 'Recruit Cinder plate cohort', exact: true })).toBeEnabled();
+  await openProduction(page, 'land');
   await expect(page.getByRole('button', { name: 'Recruit Charter outriders', exact: true })).toBeEnabled();
 });
 
 test('mixed formation battles deploy each real role and preserve exact losses through a saved tactical round', async ({ page }, testInfo) => {
   await importRoster(page, rosterCampaign('battle'));
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.wars.length)).toBe(1);
   await page.getByRole('button', { name: 'Attack Reedbound rear guard (army.4)', exact: true }).click();

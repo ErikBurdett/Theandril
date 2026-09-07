@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.wardhall_remnant",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: ONE older adult human male Wardhall marshal with cropped iron-grey hair and weathered unhelmeted face, chalk-grey officer brigandine and slate-violet short square-cut command cloak. Holds a short black measuring-baton-like command rod, sealed dispatch folio under other arm. Full body, clear leader silhouette, no horse, crown, shield or glowing artifact.",
+  "frames": [
+    {
+      "id": "character.marshal.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.wardhall_remnant/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "25ff3592a397ee88a84d630ce16e8f3348a3bfd9021ee2e37a14c8a1790e9eb5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/character.marshal.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/character.marshal.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:57:13.000Z",
+  "referenceHashes": [
+    "68ad4a0f66b1614a9bb906aab804e2796129c8e2f7ad8b4dcd0f4cce513e02c0",
+    "eb412c7e289390fb0ce96fe33705a37aacfc827fd54b1bfebbe6abc93a49d6a0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "f43ac291aecf75b17081f4544b2d67feec70185b4c638ffeed3b2cc1650dc54d",
+      "inputHash": "68ad4a0f66b1614a9bb906aab804e2796129c8e2f7ad8b4dcd0f4cce513e02c0",
+      "outputHash": "4d092a9ae7e0333d7a7a137233b86ff2ba8fc0894d86a332a0c07b650b244a90"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.saltwind_remnant",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.saltwind_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Saltwind Remnant, successor charter households after the old Saltwind League's fall, not a revived empire. Muted petrol cloth and auburn patched sailcloth, tar-black leather, weathered driftwood and dull brass rigging. Narrow practical nautical equipment; original angular broken-keel insignia (a simple split V-shaped keel, not an anchor). No bright blue sails, round glass ornaments or generic pirate skulls.\nSubject: ONE compact coastal village cluster of three low weathered stilt cottages linked by a short timber quay. Auburn patched sailcloth lean-to roofs, petrol shutter accents, thin dark supporting piles and brass lantern housings unlit. No water, land base, scenery or people. Shallow southeast top-down strategic view; every piling/roof included. 96x96 logical detail.",
+  "frames": [
+    {
+      "id": "settlement.village.saltwind_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.village.saltwind_remnant/850d5334e6be995311b520bfa3cf30bb39df5ed01a1098b9213dd914f48312b6/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f2d57dba373e92c6760b7b5e26fa9490621dda6fd7c50d930ce02649b1cde487",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/settlement.village.saltwind_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/settlement.village.saltwind_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:43:59.000Z",
+  "referenceHashes": [
+    "c2668b466a180eb0574386f065a63151f04008a626f7a4205230ef850ce926eb",
+    "2d900a22860f1e91ce269ad80b6e6bf054e4d6f35475ff178989c8b7a744b67d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a17e61958b6d066e32f8ef07da3dc0bd94727306c9bae32b24c565a09a5e3538",
+      "inputHash": "c2668b466a180eb0574386f065a63151f04008a626f7a4205230ef850ce926eb",
+      "outputHash": "ad06938a2ce0e232a6f4e37ab808da3e7f12ea357d4fc4d6c39097d74f9be6dc"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ad06938a2ce0e232a6f4e37ab808da3e7f12ea357d4fc4d6c39097d74f9be6dc",
+      "outputHash": "3d8c17c0516842737d1bac3c71cc7375fe4f0fb6ff5addcfbbfd73257bd22108"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3d8c17c0516842737d1bac3c71cc7375fe4f0fb6ff5addcfbbfd73257bd22108",
+      "outputHash": "2f976e57c37593ef10ef6bdbf91401cd65e65d0bbb2f073b2cd578dfafb0a7cd"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "f2ec204b22c46931198d03a64d2f6553565cddf82c7ce9f828e05d0bca8e7023",
+      "outputHash": "765f519960ed892dbc5e36bc44104e919209642efdc6df68e72265eb8807f892"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "d79676ee1798d693998426a697a26001814bea6eafacfe171c82f4c95acc0d3f",
+      "outputHash": "26918db04c7dc66ea2cb481528a5cdd689a7d2ee66be12814271f05f886edd2f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "52dd223a6a5d3efac797f4070d8144c7a722aa76997acec31a278b40ee61d9da",
+      "outputHash": "c514ea377f824c497ee44c852c62531d02409e3a0beacddaf06a649617746206"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.village.saltwind_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:15.322Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Three low rust-roof buildings and raised frontage read as an open small port. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 850d5334e6be995311b520bfa3cf30bb39df5ed01a1098b9213dd914f48312b6; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a5caa24e863aeb2f3dc3d22c0d2c76ce681769339bebd598c6b65c3b0f481f74.png"
+    ],
+    "inputHash": "7ccf69e33471acf7a4a41384af4fa2a2297a4be20ace0f5c84471809759361eb"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

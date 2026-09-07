@@ -46,6 +46,26 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe('approved faction DOM artwork boundary', () => {
+  it('renders approved naval roles at 96 pixels and uses a ship silhouette for absent, failed or wrongly sized hull art', async () => {
+    const { FactionArtDisplay } = await import('./faction-art');
+    for (const role of ['transport', 'coastal_warship', 'ocean_warship']) {
+      const definition = asset(`unit.${role}.ashen_compact`, 0);
+      definition.nativeResolution = { width: 96, height: 96 }; definition.pivot = [48, 80];
+      definition.frames[0]!.frame = { x: 0, y: 0, w: 96, h: 96 };
+      const value = { asset: definition, frame: definition.frames[0]!, image: { url: 'blob:verified-test-hull', width: 256, height: 96 }, generic: false };
+      const ready = renderToStaticMarkup(createElement(FactionArtDisplay, { contentId: `unit.${role}`, definitionId: 'faction.ashen_compact', label: 'Actual hull', value }));
+      expect(ready).toContain('width:96px;height:96px'); expect(ready).toContain('data-art-state="ready"');
+      expect(ready).toContain(`data-art-rendered-id="unit.${role}.ashen_compact"`); expect(ready).not.toContain('<svg');
+      for (const extra of [{}, { error: 'Atlas hash mismatch.' }, { loading: true }, { value: { ...value, asset: { ...definition, nativeResolution: { width: 64, height: 64 } } } }]) {
+        const missing = renderToStaticMarkup(createElement(FactionArtDisplay, { contentId: `unit.${role}`, definitionId: 'faction.ashen_compact', label: 'Actual hull', ...extra }));
+        expect(missing).toContain('<svg'); expect(missing).not.toContain('△'); expect(missing).not.toContain('data-art-rendered-id=');
+        expect(missing).toContain('width:96px;height:96px');
+      }
+      const compact = renderToStaticMarkup(createElement(FactionArtDisplay, { contentId: `unit.${role}`, definitionId: 'faction.ashen_compact', label: 'Actual hull', value, compact: true }));
+      expect(compact).toContain('width:48px;height:48px');
+    }
+  });
+
   it('binds exact culture definitions and shares one verified image across distinct role icons', async () => {
     const bytes = png(), fetch = responses(await pack(bytes), bytes);
     const { loadFactionArtFrame, FactionArtDisplay } = await import('./faction-art');

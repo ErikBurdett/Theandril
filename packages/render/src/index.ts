@@ -1,17 +1,20 @@
-import { Application, Container, Graphics, Sprite, Text } from 'pixi.js';
+import { Application, CanvasTextMetrics, Container, Graphics, Sprite, Text, TextStyle } from 'pixi.js';
 import type { Observation } from '@theandril/sim';
 import { BIOME_ART_IDS, RuntimeArt, type ArtStatus } from './art';
 import { terrainRelief } from './terrain-style';
 import { selectEntityArt } from './faction-style';
 import { mapArmyVisible, navalMarker, waterPresentation } from './naval-style';
-import { dirtyTerritoryChunks, IMPROVEMENT_GLYPHS, settlementArtRole, territoryEdges } from './territory-style';
+import { dirtyTerritoryChunks, hexPerimeterAngles, IMPROVEMENT_GLYPHS, settlementArtRole, territoryEdges } from './territory-style';
+import { drawImprovementGlyph } from './improvement-glyphs';
 import { finishChunkBorders, measureChunkCache, type ChunkCacheSize } from './chunk-cache';
+import { layoutMapLabels, type MapLabel, type MapLabelCandidate } from './map-overlays';
 export type { ArtStatus } from './art';
 
 const RADIUS = 29;
 const HEX_WIDTH = Math.sqrt(3) * RADIUS;
 const ROW_HEIGHT = RADIUS * 1.5;
 const CHUNK = 16;
+const MAP_LABEL_STYLE = new TextStyle({ fontFamily: 'Georgia', fontSize: 12, fill: 0xf0e6ce, stroke: { color: 0x172324, width: 3 }, padding: 4 });
 const TERRAIN_COLORS = [0x25404b, 0x747658, 0x3f5a49, 0x877963, 0x777a76];
 // Indexed by the map generator's stable biome IDs; these are visual colors only.
 const BIOME_COLORS = [0x25404b, 0x747658, 0x3f5a49, 0x496668, 0x8d9993, 0xa28b62, 0x8b8760, 0x526e66, 0x345d45, 0x92958e, 0x786b60, 0xb8b8a0];
@@ -29,6 +32,7 @@ export interface RenderMetrics {
   atlasPages: number; residentAtlasBytesEstimate: number; artLoadMs: number; artFirstRenderCpuMs: number;
   visibleSprites: number; terrainSpriteCells: number; pooledSprites: number;
   territoryEdges: number; improvementProps: number;
+  rangePerimeterEdges: number; visibleLabels: number; selectedCells: number; hoveredCells: number;
   maxCachedChunkWidth: number; maxCachedChunkHeight: number; cachedTextureBytesEstimate: number;
 }
 
@@ -55,6 +59,9 @@ export class WorldRenderer {
   private labelPool: Text[] = [];
   private observation: Observation | undefined;
   private selected: number | undefined;
+  private selectedEntityId: string | undefined;
+  private hovered: number | undefined;
+  private visibleLabels: MapLabel[] = [];
   private cameraDirty = true;
   private markerDirty = true;
   private viewportKey = '';
@@ -76,7 +83,7 @@ export class WorldRenderer {
   private visibleEntityArt: { entityId: string; factionId: string; definitionId: string | null; role: string; assetId: string | null; presentation: string; nativeWidth: number | null; nativeHeight: number | null; tint: number | null }[] = [];
   private visibleArtWarnings: string[] = [];
   private reducedMotion = false;
-  private metrics: RenderMetrics = { renderer: 'webgl', frameCount: 0, frameMs: 0, frameP95Ms: 0, renderCpuMs: 0, visibleCells: 0, visibleChunks: 0, cachedChunks: 0, chunkRebuilds: 0, visibleEntities: 0, zoom: 1, highlightedCells: 0, routeCells: 0, previewCells: 0, atlasPages: 0, residentAtlasBytesEstimate: 0, artLoadMs: 0, artFirstRenderCpuMs: -1, visibleSprites: 0, terrainSpriteCells: 0, pooledSprites: 0, territoryEdges: 0, improvementProps: 0, maxCachedChunkWidth: 0, maxCachedChunkHeight: 0, cachedTextureBytesEstimate: 0 };
+  private metrics: RenderMetrics = { renderer: 'webgl', frameCount: 0, frameMs: 0, frameP95Ms: 0, renderCpuMs: 0, visibleCells: 0, visibleChunks: 0, cachedChunks: 0, chunkRebuilds: 0, visibleEntities: 0, zoom: 1, highlightedCells: 0, routeCells: 0, previewCells: 0, atlasPages: 0, residentAtlasBytesEstimate: 0, artLoadMs: 0, artFirstRenderCpuMs: -1, visibleSprites: 0, terrainSpriteCells: 0, pooledSprites: 0, territoryEdges: 0, improvementProps: 0, rangePerimeterEdges: 0, visibleLabels: 0, selectedCells: 0, hoveredCells: 0, maxCachedChunkWidth: 0, maxCachedChunkHeight: 0, cachedTextureBytesEstimate: 0 };
 
   constructor(private readonly onArtStatus?: (status: ArtStatus) => void) {}
 
@@ -86,7 +93,7 @@ export class WorldRenderer {
     if (this.disposed) { this.app.destroy({ removeView: true, releaseGlobalResources: true }, { children: true }); return; }
     host.appendChild(this.app.canvas);
     this.app.canvas.setAttribute('aria-hidden', 'true');
-    this.world.addChild(this.terrain, this.figures, this.movementRange, this.plannedRoute, this.routePreview, this.markers, this.labels, this.selection);
+    this.world.addChild(this.terrain, this.movementRange, this.figures, this.plannedRoute, this.routePreview, this.markers, this.labels, this.selection);
     this.app.stage.addChild(this.world);
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     const motion = () => { this.reducedMotion = media.matches; this.markerDirty = true; this.cameraDirty = true; };
@@ -98,7 +105,9 @@ export class WorldRenderer {
       this.metrics.atlasPages = art.status.atlasPages; this.metrics.residentAtlasBytesEstimate = art.status.residentBytesEstimate; this.metrics.artLoadMs = art.status.loadMs;
       for (const chunk of this.chunks.values()) this.destroyChunk(chunk);
       this.chunks.clear(); this.viewportKey = ''; this.markerDirty = true; this.cameraDirty = true;
-      this.onArtStatus?.(this.artStatus);
+      // A glyph may already have reported its warning while the atlas loaded.
+      // Preserve it here: the next frame only publishes changed warning sets.
+      this.onArtStatus?.({ ...this.artStatus, warnings: [...this.artStatus.warnings, ...this.visibleArtWarnings] });
     }).catch(error => {
       if (this.disposed) return;
       this.artStatus = { ...this.artStatus, state: 'fallback', message: 'Pixel art unavailable. Procedural role markers remain active.', warnings: [error instanceof Error ? error.message : String(error)] };
@@ -107,7 +116,7 @@ export class WorldRenderer {
     const canvas = this.app.canvas;
     const activePointers = new Set<number>();
     let hovered: number | undefined;
-    const hover = (cell: number | undefined) => { if (cell !== hovered) { hovered = cell; onHover(cell); } };
+    const hover = (cell: number | undefined) => { if (cell !== hovered) { hovered = cell; this.hovered = cell; this.markerDirty = true; this.cameraDirty = true; this.redrawSelection(); onHover(cell); } };
     this.clearHovered = () => hover(undefined);
     const down = (event: PointerEvent) => {
       if (event.button !== 0) return;
@@ -165,6 +174,7 @@ export class WorldRenderer {
   update(observation: Observation, reset: boolean): void {
     this.observation = observation;
     if (reset) {
+      this.resetHover(); this.selectedEntityId = undefined;
       this.cellData.clear(); this.chunkVersions.clear();
       this.setMovementRange([]); this.setRoute(); this.setPreview();
       for (const view of this.chunks.values()) this.destroyChunk(view);
@@ -187,6 +197,7 @@ export class WorldRenderer {
       list.push(entity); this.markerChunks.set(key, list);
     }
     this.cameraDirty = true; this.markerDirty = true;
+    this.redrawSelection();
     if (reset && this.initialized) this.focus(observation.armies.find(army => army.factionId === observation.factionId)?.cell ?? observation.settlements[0]?.cell ?? 0);
   }
 
@@ -199,6 +210,7 @@ export class WorldRenderer {
       settlementId: observed.settlementId ?? null, factionId: observed.factionId ?? null, improvementId: observed.improvementId ?? null,
       improvementPresentation: observed.improvementId ? this.art?.frame(observed.improvementId) ? 'approved' : 'procedural' : null,
       territoryEdges: this.observation ? territoryEdges(observed, this.observation.width, this.observation.height, id => this.cellData.get(id)) : [],
+      renderedTerritoryEdges: this.observation ? territoryEdges(observed, this.observation.width, this.observation.height, id => this.cellData.get(id), 'realm') : [],
     };
   }
   resetHover(): void { this.clearHovered?.(); }
@@ -210,14 +222,22 @@ export class WorldRenderer {
     return { x: rect.left + x, y: rect.top + y, inViewport: x >= 0 && y >= 0 && x < rect.width && y < rect.height };
   }
   setMovementRange(cells: readonly { cell: number; cost: number }[]): void {
-    this.movementRange.clear(); this.metrics.highlightedCells = cells.length;
+    this.movementRange.clear(); this.metrics.highlightedCells = cells.length; this.metrics.rangePerimeterEdges = 0;
     if (!this.observation) return;
-    for (const entry of cells) { const [x, y] = this.center(entry.cell); this.hex(this.movementRange, x, y, RADIUS - 3).fill({ color: 0xd3e3a7, alpha: 0.12 }).stroke({ color: 0xd3e3a7, width: 1.4, alpha: 0.7 }); }
+    const reachable = new Set(cells.filter(entry => this.cellData.has(entry.cell)).map(entry => entry.cell));
+    for (const cell of reachable) {
+      const [x, y] = this.center(cell);
+      this.hex(this.movementRange, x, y).fill({ color: 0xa8cabe, alpha: .1 });
+      for (const angle of hexPerimeterAngles(cell, this.observation.width, this.observation.height, id => reachable.has(id))) {
+        this.edge(this.movementRange, x, y, angle).stroke({ color: 0xa8cabe, width: 1.6, alpha: .75 });
+        this.metrics.rangePerimeterEdges++;
+      }
+    }
   }
   setRoute(route?: RouteVisual): void { this.drawRoute(this.plannedRoute, route, false); this.metrics.routeCells = route?.path.length ?? 0; }
   setPreview(route?: RouteVisual): void { this.drawRoute(this.routePreview, route, true); this.metrics.previewCells = route?.path.length ?? 0; }
   getExploredCount(): number { return this.cellData.size; }
-  getArtDiagnostics() { return { ...this.artStatus, warnings: [...this.artStatus.warnings, ...this.visibleArtWarnings], visibleAssetIds: [...this.visibleAssetIds].sort(), visibleEntityArt: this.visibleEntityArt.map(item => ({ ...item })), visibleAnimationFrames: this.visibleAnimations.map(({ contentId, frameId }) => ({ contentId, frameId })), reducedMotion: this.reducedMotion, visibleSprites: this.metrics.visibleSprites, terrainSpriteCells: this.metrics.terrainSpriteCells, lod: this.world.scale.x < .65 ? 'strategic-glyphs' : this.world.scale.x < 1.2 ? 'static-sprites' : 'near-sprites', terrainPresentation: { nativeFootprint: [56, 64], scaleX: HEX_WIDTH / 56, scaleY: RADIUS / 32, note: 'Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect.' } }; }
+  getArtDiagnostics() { return { ...this.artStatus, warnings: [...this.artStatus.warnings, ...this.visibleArtWarnings], visibleAssetIds: [...this.visibleAssetIds].sort(), visibleEntityArt: this.visibleEntityArt.map(item => ({ ...item })), visibleAnimationFrames: this.visibleAnimations.map(({ contentId, frameId }) => ({ contentId, frameId })), reducedMotion: this.reducedMotion, visibleSprites: this.metrics.visibleSprites, terrainSpriteCells: this.metrics.terrainSpriteCells, overlays: { territoryMode: 'realm-perimeter', ambientGrid: false, unselectedRings: false, labels: this.visibleLabels.map(label => ({ ...label })), selectedCell: this.selected ?? null, hoveredCell: this.hovered ?? null }, lod: this.world.scale.x < .65 ? 'strategic-glyphs' : this.world.scale.x < 1.2 ? 'static-sprites' : 'near-sprites', terrainPresentation: { nativeFootprint: [56, 64], scaleX: HEX_WIDTH / 56, scaleY: RADIUS / 32, note: 'Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect.' } }; }
   getMetrics(): RenderMetrics {
     const sorted = [...this.samples].sort((a, b) => a - b);
     let pooledSprites = this.figurePool.length + this.terrainPool.length, maxCachedChunkWidth = 0, maxCachedChunkHeight = 0, cachedTextureBytesEstimate = 0;
@@ -231,14 +251,15 @@ export class WorldRenderer {
     }
     return { ...this.metrics, pooledSprites, maxCachedChunkWidth, maxCachedChunkHeight, cachedTextureBytesEstimate, frameP95Ms: sorted[Math.floor(sorted.length * 0.95)] ?? 0, cachedChunks: this.chunks.size, zoom: this.world.scale.x };
   }
-  select(cell: number | undefined): void { this.selected = cell; this.redrawSelection(); }
+  select(cell: number | undefined, entityId?: string): void { this.selected = cell; this.selectedEntityId = entityId; this.markerDirty = true; this.cameraDirty = true; this.redrawSelection(); }
   focus(cell: number): void {
     this.resetHover();
+    if (this.selected !== cell) this.selectedEntityId = undefined;
     this.selected = cell;
     if (!this.initialized) return;
     const [x, y] = this.center(cell);
     this.world.position.set(this.app.screen.width / 2 - x * this.world.scale.x, this.app.screen.height / 2 - y * this.world.scale.x);
-    this.cameraDirty = true; this.redrawSelection();
+    this.cameraDirty = true; this.markerDirty = true; this.redrawSelection();
   }
   pan(dx: number, dy: number): void { this.resetHover(); this.world.x += dx; this.world.y += dy; this.cameraDirty = true; }
   zoom(factor: number, x?: number, y?: number): void {
@@ -279,6 +300,10 @@ export class WorldRenderer {
     return closest;
   }
   private hex(graphics: Graphics, x: number, y: number, radius = RADIUS): Graphics { return graphics.regularPoly(x, y, radius, 6); }
+  private edge(graphics: Graphics, x: number, y: number, angle: number): Graphics {
+    const nx = Math.cos(angle), ny = Math.sin(angle), distance = HEX_WIDTH / 2, half = RADIUS / 2;
+    return graphics.moveTo(x + nx * distance - ny * half, y + ny * distance + nx * half).lineTo(x + nx * distance + ny * half, y + ny * distance - nx * half);
+  }
   private drawRoute(graphics: Graphics, route: RouteVisual | undefined, preview: boolean): void {
     graphics.clear();
     if (!route || !this.observation || !route.path.length) return;
@@ -315,8 +340,7 @@ export class WorldRenderer {
         // Exact regular-hex footprint fit; no canonical projection or picking changes.
         sprite.scale.set(HEX_WIDTH / 56, RADIUS / 32); sprite.position.set(x, y); sprite.alpha = alpha; sprite.visible = true; sprite.roundPixels = true;
         tiles.addChild(sprite); sprites.push(sprite); artCells++;
-        this.hex(graphics, x, y).stroke({ color: 0x202d29, width: 0.7, alpha: 0.55 });
-      } else this.hex(graphics, x, y).fill({ color, alpha }).stroke({ color: 0x202d29, width: 0.7, alpha: 0.55 });
+      } else this.hex(graphics, x, y).fill({ color, alpha });
       if (water !== 'land') {
         // Separate original depth marks, not a tint/recolor of the approved ocean tile.
         // Paired pale shelf lines vs a dark-backed triple wave remain distinct without hue.
@@ -366,21 +390,19 @@ export class WorldRenderer {
           else if (glyph === 'woodlot') graphics.poly([x - 8, y + 5, x, y - 8, x + 8, y + 5]).stroke({ color: 0xdbce95, width: 2, alpha }).moveTo(x, y + 5).lineTo(x, y + 9).stroke({ color: 0xdbce95, width: 2, alpha });
           else if (glyph === 'quarry') graphics.poly([x - 8, y + 7, x - 5, y - 5, x + 5, y - 7, x + 8, y + 7]).stroke({ color: 0xdbce95, width: 2, alpha });
           else if (glyph === 'reeds') for (const offset of [-6, 0, 6]) graphics.moveTo(x + offset, y + 8).lineTo(x + offset, y - 7).moveTo(x + offset, y).lineTo(x + offset + 4, y - 4).stroke({ color: 0xdbce95, width: 2, alpha });
-          else graphics.ellipse(x - 2, y, 6, 4).stroke({ color: 0xdbce95, width: 2, alpha }).poly([x + 4, y, x + 9, y - 5, x + 9, y + 5]).stroke({ color: 0xdbce95, width: 2, alpha });
+          else if (glyph === 'fishery') graphics.ellipse(x - 2, y, 6, 4).stroke({ color: 0xdbce95, width: 2, alpha }).poly([x + 4, y, x + 9, y - 5, x + 9, y + 5]).stroke({ color: 0xdbce95, width: 2, alpha });
+          else drawImprovementGlyph(graphics, glyph, x, y, alpha);
         }
       }
-      for (const edge of territoryEdges(cell, width, height, id => this.cellData.get(id))) {
+      for (const edge of territoryEdges(cell, width, height, id => this.cellData.get(id), 'realm')) {
         borderEdges++;
-        const normalX = Math.cos(edge.angle), normalY = Math.sin(edge.angle), distance = HEX_WIDTH / 2 - 1;
-        const middleX = x + normalX * distance, middleY = y + normalY * distance, half = RADIUS / 2 - 1;
-        const ax = middleX - normalY * half, ay = middleY + normalX * half, bx = middleX + normalY * half, by = middleY - normalX * half;
-        borders.moveTo(ax, ay).lineTo(bx, by).stroke({ color: 0x182323, width: edge.kind === 'realm' ? 4.5 : 2.5, alpha: .85 * alpha });
-        borders.moveTo(ax, ay).lineTo(bx, by).stroke({ color: this.factionColors.get(edge.factionId) ?? 0xd2c09b, width: edge.kind === 'realm' ? 2.5 : 1, alpha: alpha * (edge.kind === 'realm' ? 1 : .6) });
+        this.edge(borders, x, y, edge.angle).stroke({ color: 0x182323, width: 3.5, alpha: .7 * alpha });
+        this.edge(borders, x, y, edge.angle).stroke({ color: this.factionColors.get(edge.factionId) ?? 0xd2c09b, width: 1.6, alpha: alpha * .78 });
       }
     }
     finishChunkBorders(root, borders, borderEdges);
     // Empty neighbor chunks are deliberately uncached; remove their empty leaf too.
-    if (!count) { graphics.removeFromParent(); graphics.destroy(); }
+    if (!graphics.context.instructions.length) { graphics.removeFromParent(); graphics.destroy(); }
     const cache = measureChunkCache(root, count);
     if (count) root.cacheAsTexture({ resolution: 1, antialias: false, scaleMode: 'nearest' });
     this.metrics.chunkRebuilds++;
@@ -388,10 +410,18 @@ export class WorldRenderer {
   }
   private redrawSelection(): void {
     this.selection.clear();
-    if (this.selected === undefined || !this.observation) return;
+    this.metrics.selectedCells = 0; this.metrics.hoveredCells = 0;
+    if (!this.observation) return;
+    if (this.hovered !== undefined && this.hovered !== this.selected && this.cellData.has(this.hovered)) {
+      const [x, y] = this.center(this.hovered);
+      this.hex(this.selection, x, y, RADIUS - 1).stroke({ color: 0xbad7d3, width: 1.3, alpha: .85 });
+      this.metrics.hoveredCells = 1;
+    }
+    if (this.selected === undefined || !this.cellData.has(this.selected)) return;
     const [x, y] = this.center(this.selected);
+    this.hex(this.selection, x, y, RADIUS - 2).stroke({ color: 0x172324, width: 4.5 });
     this.hex(this.selection, x, y, RADIUS - 2).stroke({ color: 0xffdfa0, width: 2.5 });
-    this.hex(this.selection, x, y, RADIUS + 2).stroke({ color: 0xffdfa0, width: 0.6, alpha: 0.6 });
+    this.metrics.selectedCells = 1;
   }
   private refreshViewport(): void {
     if (!this.observation) return;
@@ -426,12 +456,18 @@ export class WorldRenderer {
       this.figurePool.forEach(sprite => { sprite.visible = false; }); this.visibleAnimations = []; this.visibleAssetIds.clear(); this.visibleEntityArt = [];
       const warnings = new Set<string>(), strategicGroups = new Set<string>();
       if (missingProps) warnings.add('Some land improvements lack approved artwork; their distinct procedural glyphs are shown.');
-      let labels = 0, entities = 0, figures = 0;
+      let entities = 0, figures = 0;
+      const labelCandidates: MapLabelCandidate[] = [];
       for (const key of visible) for (const entity of this.markerChunks.get(key) ?? []) {
         const [x, y] = this.center(entity.cell), own = entity.factionId === this.observation.factionId;
         const sx = x * zoom + this.world.x, sy = y * zoom + this.world.y;
         if (sx < -100 || sy < -100 || sx > this.app.screen.width + 100 || sy > this.app.screen.height + 100) continue;
         entities++;
+        const hostile = this.enemyFactions.has(entity.factionId);
+        const labelOffset = !entity.settlement && !entity.ruin && this.settlementCells.has(entity.cell) ? 16 : 0;
+        // Preserve selected stack-member names even when its far badge is aggregated.
+        if (sx >= 0 && sy >= 0 && sx < this.app.screen.width && sy < this.app.screen.height) labelCandidates.push({ id: entity.id, cell: entity.cell, name: entity.name, settlement: entity.settlement, ruin: entity.ruin, own, hostile,
+          x: sx + labelOffset * zoom, y: sy + (labelOffset + 22) * zoom });
         const far = zoom < .65;
         // One far badge per observed cell/culture, not a pile of identical co-located sprites.
         if (far) {
@@ -439,16 +475,15 @@ export class WorldRenderer {
           if (strategicGroups.has(group)) continue;
           strategicGroups.add(group);
         }
-        const hostile = this.enemyFactions.has(entity.factionId);
         const color = this.factionColors.get(entity.factionId) ?? 0xc9a66b;
         const contentId = entity.ruin ? 'map.ruin' : entity.settlement ? settlementArtRole(entity.population ?? 1) : entity.unitId ?? '';
         const definitionId = this.factionDefinitions.get(entity.factionId);
         const naval = entity.domain === 'naval';
-        const selectedArt = naval ? { contentId: null, presentation: `procedural-${navalMarker(contentId)}`, warning: 'Naval artwork is not yet approved; visible fleets use procedural ship silhouettes.' } : selectEntityArt(contentId, definitionId, far, id => this.art?.byContent.has(id) ?? false);
+        const selectedArt = selectEntityArt(contentId, definitionId, far, id => this.art?.byContent.has(id) ?? false);
         const artFrame = selectedArt.contentId ? this.art?.frame(selectedArt.contentId) : undefined;
         if (entity.settlement && this.observation.land.capitalSettlementId === entity.id) this.markers.poly([x - 7, y - 24, x - 4, y - 30, x, y - 26, x + 4, y - 30, x + 7, y - 24]).stroke({ color: 0xffdfa0, width: 2 });
         if (this.art && selectedArt.warning) warnings.add(selectedArt.warning);
-        this.visibleEntityArt.push({ entityId: entity.id, factionId: entity.factionId, definitionId: definitionId ?? null, role: contentId, assetId: artFrame?.asset.id ?? null, presentation: selectedArt.presentation, nativeWidth: artFrame?.asset.nativeResolution.width ?? null, nativeHeight: artFrame?.asset.nativeResolution.height ?? null, tint: artFrame ? 0xffffff : null });
+        this.visibleEntityArt.push({ entityId: entity.id, factionId: entity.factionId, definitionId: definitionId ?? null, role: contentId, assetId: artFrame?.asset.id ?? null, presentation: naval && !artFrame ? `procedural-${navalMarker(contentId)}` : selectedArt.presentation, nativeWidth: artFrame?.asset.nativeResolution.width ?? null, nativeHeight: artFrame?.asset.nativeResolution.height ?? null, tint: artFrame ? 0xffffff : null });
         if (artFrame) {
           const sprite = this.figurePool[figures] ?? new Sprite();
           if (!this.figurePool[figures]) { this.figures.addChild(sprite); this.figurePool.push(sprite); }
@@ -461,11 +496,14 @@ export class WorldRenderer {
           sprite.tint = 0xffffff; sprite.alpha = 1; sprite.visible = true; sprite.roundPixels = true;
           this.visibleAssetIds.add(artFrame.asset.id); figures++;
           if (!entity.settlement && !entity.ruin && !this.reducedMotion && zoom >= 1.2 && artFrame.asset.clips.some(clip => clip.state === 'idle' && clip.frames.length > 1)) this.visibleAnimations.push({ sprite, contentId: selectedArt.contentId!, phase: Number(entity.id.split('.').at(-1) ?? 0) * 37, frameId: artFrame.frameId });
-          // A separate ownership/status base stays readable without tinting the art.
-          this.markers.ellipse(x + offset, y + offset + 2, 13, 5).stroke({ color, width: 2 });
-          if (own) this.markers.poly([x + offset - 3, y + offset + 2, x + offset, y + offset - 3, x + offset + 3, y + offset + 2]).fill(color);
-          else if (hostile) this.markers.moveTo(x + offset - 4, y + offset - 3).lineTo(x + offset + 4, y + offset + 4).moveTo(x + offset + 4, y + offset - 3).lineTo(x + offset - 4, y + offset + 4).stroke({ color, width: 2 });
-          else this.markers.poly([x + offset, y + offset - 4, x + offset + 4, y + offset, x + offset, y + offset + 4, x + offset - 4, y + offset]).stroke({ color, width: 1.5 });
+          // Quiet shape-coded ownership ticks; a ring is reserved for actual selection.
+          // At far LOD the separately authored badge/banner already identifies the realm.
+          if (!far) {
+            const by = y + offset + 8;
+            if (own) this.markers.poly([x + offset - 3, by + 2, x + offset, by - 3, x + offset + 3, by + 2]).fill({ color, alpha: .85 });
+            else if (hostile) this.markers.moveTo(x + offset - 3, by - 3).lineTo(x + offset + 3, by + 3).moveTo(x + offset + 3, by - 3).lineTo(x + offset - 3, by + 3).stroke({ color, width: 1.7 });
+            else this.markers.poly([x + offset, by - 3, x + offset + 3, by, x + offset, by + 3, x + offset - 3, by]).stroke({ color, width: 1.3, alpha: .85 });
+          }
         } else if (naval) {
           const scale = far ? .7 / zoom : 1;
           this.markers.save().translateTransform(x, y).scaleTransform(scale, scale);
@@ -494,14 +532,16 @@ export class WorldRenderer {
           else if (hostile) this.markers.moveTo(x - 4 + offset, y - 4 + offset).lineTo(x + 4 + offset, y + 4 + offset).moveTo(x + 4 + offset, y - 4 + offset).lineTo(x - 4 + offset, y + 4 + offset).stroke({ color, width: 2 });
           else this.markers.poly([x + offset, y - 5 + offset, x + 4 + offset, y + offset, x + offset, y + 5 + offset, x - 4 + offset, y + offset]).stroke({ color, width: 1.5 });
         }
-        if (zoom >= 0.65 && (entity.settlement || !own)) {
-          let label = this.labelPool[labels];
-          if (!label) { label = new Text({ text: '', style: { fontFamily: 'Georgia', fontSize: 12, fill: 0xf0e6ce, stroke: { color: 0x172324, width: 4 }, padding: 4 } }); label.anchor.set(0.5, 0); this.labels.addChild(label); this.labelPool.push(label); }
-          const text = entity.ruin ? `Ruins of ${entity.name}` : `${own ? '◆' : hostile ? '⚔' : '◇'} ${entity.name}`;
-          if (label.text !== text) label.text = text;
-          label.position.set(x, y + 20); label.visible = true; labels++;
-        }
       }
+      this.visibleLabels = layoutMapLabels(labelCandidates, { width: this.app.screen.width, height: this.app.screen.height, zoom, selected: this.selected, selectedEntityId: this.selectedEntityId, hovered: this.hovered }, text => CanvasTextMetrics.measureText(text, MAP_LABEL_STYLE));
+      for (const [index, placed] of this.visibleLabels.entries()) {
+        let label = this.labelPool[index];
+        if (!label) { label = new Text({ text: '', style: MAP_LABEL_STYLE }); label.anchor.set(.5, 0); this.labels.addChild(label); this.labelPool.push(label); }
+        if (label.text !== placed.text) label.text = placed.text;
+        label.position.set((placed.x - this.world.x) / zoom, (placed.y - this.world.y) / zoom);
+        label.scale.set(1 / zoom); label.alpha = placed.priority < 2 ? 1 : .85; label.visible = true; label.roundPixels = true;
+      }
+      this.metrics.visibleLabels = this.visibleLabels.length;
       const nextWarnings = [...warnings].sort();
       if (nextWarnings.length !== this.visibleArtWarnings.length || nextWarnings.some((warning, index) => warning !== this.visibleArtWarnings[index])) {
         this.visibleArtWarnings = nextWarnings;

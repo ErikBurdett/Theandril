@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.rimehorn_clans",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.rimehorn_clans"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Rimehorn Clans winter shelter households: massive weathered grey-timber hull with protective dark iron prow bracing, dusky blue sails, grey fur-lined closed shelter, ivory lashings and small crossed shelter beams insignia. Strong broad winter-lodge silhouette; restrained bone fittings, no giant horned figurehead, no snow/water backdrop. Role: Coastwatch galley: long slender shallow-draft oared escort, low open deck, one compact triangular lateen sail, clearly separated banks of broad oars, a practical low bow ram and shield-lined rails with one small defensive crossbow platform. Fast low narrow silhouette; no large cargo cabins, no cannons. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.rimehorn_clans/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.rimehorn_clans/5a62fda346fd41ec75f54513725c9e10704d5b50e49592a4c0515b4233e195d3/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "67de03750583cb71377d7b0b51762bf7b4950334e5c9947d429cdbc66644f0c1",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.rimehorn_clans-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.rimehorn_clans-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:36:22.922Z",
+  "referenceHashes": [
+    "0bf0f2de5bcdec853b1a06d6d5233cc6e5abbf632b2f8b9a80571787322cf495",
+    "081e86f3ac9e4553a6fee28b8c95f1f0568113d824ada7357599ee3eaa9416ff"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "7ece06028b79f59c4f1c8bfd92163ab457916fa52a25127c233e8d352f7e87df",
+      "inputHash": "0bf0f2de5bcdec853b1a06d6d5233cc6e5abbf632b2f8b9a80571787322cf495",
+      "outputHash": "375c34de2238ab8119b5b9677654f7d9f0a07f3944c820f210cb2184d3d6108c"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "375c34de2238ab8119b5b9677654f7d9f0a07f3944c820f210cb2184d3d6108c",
+      "outputHash": "36a901ac3ceb3fb5199726beadb9ed96b4afaf8b80b9656b5519819bd4442714"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "36a901ac3ceb3fb5199726beadb9ed96b4afaf8b80b9656b5519819bd4442714",
+      "outputHash": "a7027a56f3b3fa66662a4276cf72a3d2356d5e14ff41e6526c49aa640bc8e983"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "054784ec0d582857ac8fc1f6a95815c03b6c799b05c4c46301d13ce4c6369223",
+      "outputHash": "cf56e6152a204ce6ba532d505939e30ed18a1d2e790141b64c064f1aca384327"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "5301d383e8a2f7da26a03bd58a8b3d3c80f29adcc72559ad1c3c1b1b8448fc03",
+      "outputHash": "da48bf46f8ae9dc843bb149014b5f4e87f58113265c2e8295df048c2845b244b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "33eed6a7852077a71bef5896ab7e8f67af925de97a67c26bee5c2b444f19a6c8",
+      "outputHash": "4a7938c721509319a895012c026bc2921e6d7a167bccfbaee7ee3f4018037719"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.rimehorn_clans.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:50:18.382Z",
+    "notes": "Root inspected generated source, native1x cohort and nearest4x family pixels. Cold blue cloth, bone-horn fittings and pale stitched marks; broad cargo hull and armoured fighting decks remain legible in the muted palette. Low oared hull and triangular sail read at96px. Palette and binary-alpha validation passed; native tips intact and no opaque background matte. Static southeast art only; fine rigging is texture. Runtime water, fog and ownership review is a separate gate.\nReviewed candidate 5a62fda346fd41ec75f54513725c9e10704d5b50e49592a4c0515b4233e195d3; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b5cf15e1771bd4c432e5257e798c60160ae67f16cfce48c37b3037ef669c3074.png"
+    ],
+    "inputHash": "41d5cbc333732df03a4ced259db394db1551fd25e7957d141115ca77d2522a3d"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

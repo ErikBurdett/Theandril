@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.sable_steppe",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.sable_steppe"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Sable Steppe mobile camp assemblies: lean dark-timber hull with tension-roof deck awnings, rust felt and dull-ochre patched sail planes, indigo rope bindings, dark lamellar rail screens, original three wind notches emblem. Dry camp-derived craft traditions made into functional ships, no horse figurehead, no steppe ground. Role: Deepwake warship: broad tall-sided armoured ocean-going medieval warship, heavy reinforced prow, two stout masts with separate broad square sails, raised fortified forecastle and stern fighting deck, one clearly readable heavy deck crossbow. Weighty protected hull distinct from slim galley and round cargo transport; no guns or modern propulsion. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.sable_steppe/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.sable_steppe/08a86228d7e686306b17b819355dd6e1c8cc29bf617cef9999cd6082e516abf1/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "54615556ec93f846a77b213ff48183ec2ba28a85486837abda8b4fab3bdface5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.sable_steppe-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.sable_steppe-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:35:44.191Z",
+  "referenceHashes": [
+    "d801489cdaf9e1f8acdb3062804af9294bc3ddd68c8144bb49caa921b4820777",
+    "49b45c9ebc5f8f69a26e0726cf22f9d0e67c6dc7c655a8812ad1545a1b5a0f5f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "f384797e1d9a533108d3e602e4805024567f14a6ede1adfc47e6357c4f12d295",
+      "inputHash": "d801489cdaf9e1f8acdb3062804af9294bc3ddd68c8144bb49caa921b4820777",
+      "outputHash": "c588636d93fefb15338005f1c5dd1ea062139de10c6b7798a4364d28e81630e3"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "c588636d93fefb15338005f1c5dd1ea062139de10c6b7798a4364d28e81630e3",
+      "outputHash": "5aa21774d4acf3872207f82640961f26579591a7fd4d7ee250546f8f99acf2c8"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "5aa21774d4acf3872207f82640961f26579591a7fd4d7ee250546f8f99acf2c8",
+      "outputHash": "63d27a376d26ea2337bd7d6df8fb29a84f296b2bab3e425c932718cfb1ece0f9"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "611c63e7d1015e688a7953f1234aa2432d98ab6e06ccf326188de75c8a344cfc",
+      "outputHash": "ae0501b04cef3a44953f31cb5266b9853f468241038b33cd9f499beebc3e373a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "8a19f5f4beae6b87ba52de4dc144734cec514e6473edc9c090fd5dc2c40032ba",
+      "outputHash": "38d22f0b180244af19f9b8cd58704dfcee31f63a344dd64d6fb102ca631fccb1"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "bc57726ef065cd28c7beb0f44a83a795bc3549667daf53a9af753e7b5642f5d1",
+      "outputHash": "b6d01356dd05a2acb08dbef0036c0cc179724db4793bfeccd0826754bd3f6124"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.sable_steppe.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:50:19.890Z",
+    "notes": "Root inspected generated source, native1x cohort and nearest4x family pixels. Ochre canvas and dark leather-like hull panels make a warm, distinct family. Small sail marks vary and are decorative, not certified exact crest reproductions. Two square sails and raised fighting decks read at96px. Palette and binary-alpha validation passed; native tips intact and no opaque background matte. Static southeast art only; fine rigging is texture. Runtime water, fog and ownership review is a separate gate.\nReviewed candidate 08a86228d7e686306b17b819355dd6e1c8cc29bf617cef9999cd6082e516abf1; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/32fa9b368816a4e508a509d9f73949b1188430d90669b938fd1c91f05f63f6ae.png"
+    ],
+    "inputHash": "2cb9b1f016ba31e50491376a739bf6566a79ffbfac6c70eac14ca2361239b466"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

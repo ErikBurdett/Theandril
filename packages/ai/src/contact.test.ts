@@ -56,8 +56,9 @@ function contactCampaign(size: MapSize, factionCount: number, limit: number) {
     if (!game.victory) issue({ type: 'endTurn', factionId: game.turnOwnerId });
     for (const faction of game.factions) observe(getObservation(game, faction.id));
     if (game.turn === 26) mirror = deserializeGame(serializeGame(game));
-    // Preserve at least60 real rounds for reorganization, diplomacy and combat after contact.
-    if (game.turn > 60 && firstContact.get(game.turnOwnerId) !== null) break;
+    // Preserve at least60 real rounds and exercise the all-seat assertion below.
+    // Player contact can precede the last faction's next legal scouting order.
+    if (game.turn > 60 && [...firstContact.values()].every(turn => turn !== null)) break;
   }
   const hash = stateHash(game);
   expect(stateHash(deserializeGame(serializeGame(game)))).toBe(hash);

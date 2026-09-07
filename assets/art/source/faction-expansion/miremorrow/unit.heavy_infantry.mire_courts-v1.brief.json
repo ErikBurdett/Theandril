@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.mire_courts",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.mire_courts"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Mire Courts: ancient Deepfen elder fenfolk, tall lean adult figures, woven bark lamellar, moss-green leather and muted plum sashes, aged copper bindings, organic leaf/root silhouettes. Original forked-root seal. Not human reedboat peasants, not whimsical forest elves. Native64. One full-body adult heavy-infantry veteran, broad thick overlapping armor plates and a very broad reinforced shield plus a short mace. Wider and heavier silhouette than guard, closed low helmet with no tall ornament; all equipment and both boots entirely visible.  Buildings: interlocked old rootwood, swept leaf-thatched roofs, timber stilts and copper leaf ribs; heraldry forkedroot in oldcopper on plum. Humanoid fenfolk narrow long faces, not exaggerated ears. IMPORTANT: the face and gaze point toward the RIGHT edge, NOT the left; front-right (southeast) three-quarter pose. Transparent background with absolutely NO surrounding colored haze or ground shadow.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.mire_courts/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.heavy_infantry.mire_courts/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "4bdc50101e257d571ee2114a467b74090a2f61a6641bfefa178a75c3cf38734f",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/miremorrow/unit.heavy_infantry.mire_courts-v1.png",
+      "assets/art/source/faction-expansion/miremorrow/unit.heavy_infantry.mire_courts-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T08:45:29.000Z",
+  "referenceHashes": [
+    "78554410dd92171da33cf5fa2158ae2f905d7fd9194781f576d0dcff84d6343d",
+    "f5ec09b71b02df59fd71ae6fa4a2e93b266b18ff5f6d91fa4213697d353d2873"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "5736deb88add55b29df41da7d952eab24ebba57120b4bbd62022380e277b72f4",
+      "inputHash": "78554410dd92171da33cf5fa2158ae2f905d7fd9194781f576d0dcff84d6343d",
+      "outputHash": "2e71ac29a103b6f975f58d78e3a7675e43548d71354c4f41be6a70e16b6b3d68"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

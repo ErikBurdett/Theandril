@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.morrow_spore",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.morrow_spore"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static pixel-art game sprite for Theandril, genuine transparent PNG background (alpha zero), NOT a sprite sheet. Entire isolated subject fully visible inside generous empty margins, nothing cropped. Deliberately coarse square clusters and strong grouped midtones, native logical pixel detail shown enlarged, clear readable silhouette, weathered serious medieval dark fantasy. Shallow southeast three-quarter viewpoint, soft upper-left light, crisp hard pixel edges. No text, letters, border, floor tile, background scenery, neon, glow, antialiasing, smooth gradients, painterly texture confetti, baked checkerboard, franchise imagery or chibi proportions. Morrow Spore: original underwood commonwealth of adult humans and solemn fungal symbionts. Umber layered fungal carapace, dusty mauve cloth, pale lichen seams and dark leather. Strong broad overlapping shelf-fungus planes rather than cute mushroom caps. Original hollow crescent cradling three seeds seal. Practical mature woodland society, no spores in air, neon, gore or chibi figures. Native32. ONE very simple original strategic faction badge, front-facing culture seal with compact silhouette, just three to five broad color groups, no ornate frame or tiny details. Readable at32pixels; no letters, pole or scenery.  Buildings: broad layered shelf-roofs and grown timber ribs with umber walls, pale lichen door frames and mauve canopy accents, not freestanding mushroom doodles; heraldry bonecrescent around threeseeds on umber. Humanoids adult serious humans with fungal grown armor and scarves.\nCORRECTION FOR THIS ASSET: Render ONLY ONE small faction badge, a hollow pale-lichen crescent cupping exactly three mauve seeds, on a single flat umber medallion backing. Center that one simple emblem with generous fully transparent margins. The references to humanoids, armor, buildings and architecture above describe the culture only and MUST NOT become additional objects. NO person, character, house, town, roof, staff, landscape, collage, concept sheet or secondary icon. Exactly one isolated badge. Native 32x32 legibility with very simple broad pixel clusters, a near-circular silhouette, no decorative fringe. Genuine alpha-zero surrounding background and no haze.",
+  "frames": [
+    {
+      "id": "ui.badge.morrow_spore/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/source/native/ui.badge.morrow_spore/v2/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "fdf7c33d7d7d170b60c6865de21b4cb9388984a2b7aadc13e64656db32332f6c",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/morrow/ui.badge.morrow_spore-v2.png",
+      "assets/art/source/faction-expansion/morrow/ui.badge.morrow_spore-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:16:28.044Z",
+  "referenceHashes": [
+    "7a6ab6b9c725548828b11e4b79af51cd3a983b611a75793391fcb848b334b004",
+    "d6b31c1398db4007b16823d0171edaecb01e1a6365a7e5b756e174609d9554fb"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "98a506cd49eca29166d643770e97d1680bcad05193e3ae74bc96e1f27eec6630",
+      "inputHash": "7a6ab6b9c725548828b11e4b79af51cd3a983b611a75793391fcb848b334b004",
+      "outputHash": "2fa096b0f5dc2af3667eefccbde0731f672b4ccca0c14036e99da4afee9ccf85"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

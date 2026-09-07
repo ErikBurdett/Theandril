@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.wardhall_remnant",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static naval-unit pixel-art sprite for Theandril, a serious weathered dark-fantasy strategy game. Genuine transparent PNG background with alpha zero, not a drawn checkerboard. No sheet, text, border, floor tile, sea rectangle, wake, reflection, shadow puddle or scenery. Complete isolated ship entirely visible in generous empty margins, sails, stern, prow and oars uncut. Shallow southeast three-quarter view with prow facing LOWER RIGHT, soft upper-left light. Deliberately coarse square clusters, broad readable midtone planes and hard pixel edges; compose as a native 96x96 sprite enlarged, not photorealistic or painterly. Muted practical timber, metal and cloth; restrained selective dark outline, no neon/glow, no texture confetti, no franchise designs. One static pose only. Wardhall Remnant reconstruction work halls: straight sober black-iron girders over weathered timber hull, slate-violet squared canvas sails, chalk-painted low rectangular deckhouse, kite-shaped rail shields, original open-square seal. Practical angular civic reconstruction craft, no supernatural anti-magic glow. Role: Charter transport: a broad deep-water wooden cargo cog with a rounded capacious hull, single patched square sail, low canvas-covered passenger shelter and neatly strapped crates. Lightly armed; no artillery, no warship ram. Chunky broad cargo silhouette. FRAMING: Fit the entire ship, including every pennant, mast tip, oar and prow, within the central65% of the image, with at least15% genuine alpha-zero empty margin around ALL sides. Nothing may touch the image edge.",
+  "frames": [
+    {
+      "id": "unit.transport.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.wardhall_remnant/80b8c6c23e1a5aef38083dd7d4fbcff9be9b33605b4f5f7cbf93cc95337e59d3/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c0331095c424ab517e2c4437206e601bf4333531c3da81db6ef670cd29f0c82d",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T23:31:02.499Z",
+  "referenceHashes": [
+    "bb92706cf9322657ce1df35ab5a747c0eff3797baa1f7082a8690d2490e6da01",
+    "fda809107a67c3f9e844b6c385c418ec78d29cdfce8ff031abdfe6c0e10a61b5"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "1f69117cba97aee90a6be5b886e5141ab0d334ffffdf9450dfc6c0076abcf248",
+      "inputHash": "bb92706cf9322657ce1df35ab5a747c0eff3797baa1f7082a8690d2490e6da01",
+      "outputHash": "0c7368d536ad9c307fdb3d2f13bdb0461fa8a508b30325dd5f133ade19f9e5f2"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "0c7368d536ad9c307fdb3d2f13bdb0461fa8a508b30325dd5f133ade19f9e5f2",
+      "outputHash": "4bde82a68ffb56b1f5215f4864e936ad9d0f7de2e5faa8624c06f989863fe0ff"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4bde82a68ffb56b1f5215f4864e936ad9d0f7de2e5faa8624c06f989863fe0ff",
+      "outputHash": "8dbfd42ffd7b8c464dd89eda521003f0867e041e3bd1d4da8f341ab260dc9f9d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "d59d5d3ab3a968de37c23205b454fd64025e4c553cea2e3cacdaaeb9a0fcc489",
+      "outputHash": "a80f2e8eaead1bf014ebc18366cabdb6794680e92f1d39073efb84ccb2c25141"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "d493d50e29eb91f59ccd76c2cd5c687e07a6ab062e5b430d0df51fbeba3614c2",
+      "outputHash": "9d9ad753c5cceec1f8856480e0b4e24d0dd7ecddbb9040c6b046d1feafbee945"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "fea04dc4d70573a0a17c68fa14d32277e7161623438b905c9f9f82df5561affa",
+      "outputHash": "c9dfbe753d14aa7fa394399839faa896614e2d249f88233d54e5d3b1d54d60ad"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.wardhall_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T23:50:18.065Z",
+    "notes": "Root inspected generated source, native1x cohort and nearest4x family pixels. Weathered slate-violet cloth, pale gate-like marks and reinforced dark timber; pale sail fields separate clearly from the hull. Single square sail, cargo volume and passenger canopy read at96px. Palette and binary-alpha validation passed; native tips intact and no opaque background matte. Static southeast art only; fine rigging is texture. Runtime water, fog and ownership review is a separate gate.\nReviewed candidate 80b8c6c23e1a5aef38083dd7d4fbcff9be9b33605b4f5f7cbf93cc95337e59d3; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/39f3448538751e41c0e6f63f7d8d6f8ac9b5460a79ccc4a10657cf343c930946.png"
+    ],
+    "inputHash": "b3e65a800510232a8bb35f9acca08631a8f8c58feb366435c47cc1747bee0f3e"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.wardhall_remnant",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.wardhall_remnant"
+  ],
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE original static strategic-game pixel-art asset for Theandril. Genuine transparent PNG alpha-zero background; no scenery, floor tile, checkerboard, text, labels, watermark, border or sprite sheet.\nStyle: serious weathered medieval dark fantasy; deliberate coarse square pixel clusters and broad midtone planes, restrained upper-left highlights, selective dark outlines. About 64x64 logical pixel detail shown enlarged, not a painterly miniature. No gradients, antialiasing, tiny texture confetti, glow or franchise designs.\nComposition: shallow southeast three-quarter view (facing down-right) unless a front-facing insignia is specified. Entire silhouette and all equipment confined to the CENTRAL70% of a square canvas, at least15% genuinely transparent empty margin on EVERY side; nothing clipped. One isolated subject only.\nCulture: Wardhall Remnant, surviving human work halls after the old Null Throne's fall, not a revived throne. Chalk-grey masonry and cloth with slate-violet fabric, black riveted reinforcements, straight ward-grid framing and kite shields. Simple original open-square insignia. Practical engineers and soldiers, no magical nullification, glow, anvil heraldry or stepped funerary terraces.\nSubject: ONE dense yet readable Wardhall capital-like city hall cluster: broad chalk-grey fortified great work hall with square crenellated corner towers, slate-violet roofs and black riveted structural strips, adjoining low masonry workshops around an open inner square. Upright rectangular architecture with tiered roof heights but NOT stepped terraces or mausoleums. No people, terrain base, scenery, glow or revived throne;128x128 logical detail.",
+  "frames": [
+    {
+      "id": "settlement.city.wardhall_remnant/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.wardhall_remnant/1f7d215e29fed957abb6c67306be6567e8046183d5c284bc755180913d3a954f/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "15d213ba3c2a94c643f3daab79fcba02bbf309c3327475920db1c30f128a6282",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/saltward/settlement.city.wardhall_remnant-v1.png",
+      "assets/art/source/faction-expansion/saltward/settlement.city.wardhall_remnant-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-06T09:03:33.000Z",
+  "referenceHashes": [
+    "313d71b446c51ca5661ec1531ecb056ba2b27f3f9848cd9cfc13f7b9fcc62410",
+    "784eb7e24b0a0b69af9f3fed01ebe8b515f4900c0701d5ac9feb341d17448f70"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "566ba1889ed9b6cb790e8a0193b4a2265651cf344829596b7ed1b98a1c2e3c00",
+      "inputHash": "313d71b446c51ca5661ec1531ecb056ba2b27f3f9848cd9cfc13f7b9fcc62410",
+      "outputHash": "ebbd0cb21090c3c9d76d84987bbc20b3219a249fb73113527cd8e138cb3131f7"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ebbd0cb21090c3c9d76d84987bbc20b3219a249fb73113527cd8e138cb3131f7",
+      "outputHash": "0f432b10af069b1142a43fd25905f0cac374b585d18540e8c5ac27f88afb9ce5"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0f432b10af069b1142a43fd25905f0cac374b585d18540e8c5ac27f88afb9ce5",
+      "outputHash": "0f984d9ab48591887e8f9696e1270d2f1d3aafd2636d5d7c563a38bc0b352621"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "799567753f2e4880e645eb06b040b213028b265cd589ab095630232a346d1c85",
+      "outputHash": "7673c930a3b76b30741a372fcd0579f62b41080c36151176666cd43af1023492"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "11151829a5c71d73335558fea0bd77ddcc04b39200e3503032bcc028b8ddbbbe",
+      "outputHash": "8298a81bee337fb08ea4fcc6a6f2d71cc0c5a2d8de228810809afd06d35812e0"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "3fa520c4d032ae94f0fb40445ada0b005ecdae43fe887ff2a8477042cdb0782a",
+      "outputHash": "de3c1456380969c48276142acf2e67733711992762fb9ce24460b5ac8dae21ab"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.wardhall_remnant.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root",
+    "reviewedAt": "2026-09-06T10:13:10.620Z",
+    "notes": "Root inspected the processed native-size and nearest-neighbor 4x sheets, alpha edges, contained equipment and cross-role silhouettes. Four pale civic towers and high purple hall form the largest development stage. Original generated sources and actual Pixel Snapper/Aseprite processing records are retained. Accepted as one static southeast idle frame, not animation or exclusive gameplay. Real-map contrast and fallback regression review follows integration.\nReviewed candidate 1f7d215e29fed957abb6c67306be6567e8046183d5c284bc755180913d3a954f; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/63b62a81d8a129dfaf5a5781137e588ad5bc16dfcee21d6173fca001fd924282.png"
+    ],
+    "inputHash": "e7c56485cdfd6d3237d331032c261692746a8515019f5aa4b96395efd17422ad"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}
