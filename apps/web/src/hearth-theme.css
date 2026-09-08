@@ -1,0 +1,226 @@
+/* Hearth & Card's reviewed materials, copied unchanged. DOM only: no atlas,
+   geometry, visibility, scrolling or command behavior belongs to this sheet. */
+.application {
+  --hearth-ink: #352619;
+  --hearth-text: #f0dfb7;
+  --hearth-muted: #c5b89b;
+  --hearth-brass: #c5a46a;
+  --hearth-edge: #8a704b;
+  --hearth-paper: linear-gradient(#ead8b3e6, #ead8b3e6), url('/ui/hearth-card/parchment.webp');
+  --hearth-wood: linear-gradient(#261a13dc, #261a13dc), url('/ui/hearth-card/wood.webp');
+  --hearth-leather: linear-gradient(120deg, #35261d, #251b15);
+  --parchment: var(--hearth-text);
+  --muted: var(--hearth-muted);
+  --line: #68553d;
+  --gold: var(--hearth-brass);
+  color: var(--hearth-text);
+  background-color: #1b1713;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color-scheme: dark;
+}
+
+.application :is(h1, h2, h3, h4, .section-title, .campaign-brand) {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #efdbad;
+}
+.application :is(button, input, select, textarea) {
+  font-family: inherit;
+}
+.application :is(.campaign-topbar, .command-bar, .hud-tools, .campaign-window,
+  .masthead, .campaign-tools, .campaign-options, .options-content, .art-dev-launch, .panel, .map-actions,
+  .chronicles-dialog, .progression-dialog, .character-dialog) {
+  color: var(--hearth-text);
+  background-color: #302119;
+  background-image: var(--hearth-wood);
+  background-size: auto, 512px 512px;
+  border-color: var(--hearth-edge);
+}
+.application :is(.campaign-window, .map-actions, .chronicles-dialog,
+  .progression-dialog, .character-dialog, .setup) {
+  border: 3px double #bfa068;
+  border-radius: 9px;
+  box-shadow: inset 0 0 0 2px #17110c, 0 12px 32px #0008;
+  scrollbar-color: #a48a5e #271d16;
+}
+.application :is(.campaign-window-header, .map-actions-heading, .map-actions-footer) {
+  background-color: #302119;
+  background-image: var(--hearth-leather);
+  color: var(--hearth-text);
+  border-color: var(--hearth-edge);
+}
+/* Layout reserves space for this one decorative, non-interactive corner.
+   It is the original static idle image, not an invented animation. */
+.application .campaign-window-header {
+  background-image: url('/ui/hearth-card/ornament.corner-idle.webp'), var(--hearth-leather);
+  background-repeat: no-repeat;
+  background-position: right top, center;
+  background-size: 48px 48px, auto;
+}
+.application :is(.campaign-window-header, .map-actions-heading, .chronicles-header) :is(h1, h2) {
+  color: #efdbad;
+  text-shadow: 0 1px 2px #0008;
+}
+.application :is(.chronicles-dialog, .progression-dialog, .character-dialog)::backdrop {
+  background-color: #130f0bcc;
+}
+
+/* A quiet leather surface keeps dense rules and quoted costs readable.
+   Do not recolor faction crests, unit art, the world canvas or its ownership cues. */
+.application :is(.campaign-window-body, .map-actions-body, .production-category,
+  .production-card, .progression-choice, .character-promotion, .character-mission,
+  .skill-roadmap, .public-project, .border-growth, .peace-builder, .peace-offer,
+  .capture-option, .battle-panel, .battle-history, .battle-report,
+  .battlefield-inspection, .battlefield-ability-list article,
+  .route-preview, .queued-route, .technical-reader) {
+  background-color: #2a2119;
+  background-image: var(--hearth-leather);
+  border-color: #756044;
+  color: var(--hearth-text);
+}
+.application :is(.map-title, .map-legend, .map-order-hint) {
+  background: #241c16ed;
+  border-color: #9b805980;
+  color: var(--hearth-muted);
+}
+.application :is(.resources small, .resources strong span, .turn small,
+  .field-help, .subtle, .empty, .archive-note, .campaign-pace,
+  .map-actions-heading p, .map-actions-choice-summary, .production-card p,
+  .progression-choice p, .character-promotion p, .character-mission p,
+  .character-values dt, .character-pagination span, .registry-item small,
+  .realm-tip p, .chronicle li, .chronicle li small, .stat-pair small,
+  .hex-inspector p, .nearby-cells small, .production-queue small, .build-options small,
+  .route-preview > p, .queued-route > p, .queued-route li,
+  .research-key, .research-root, .progression-explanation,
+  .skill-roadmap > p, .skill-branches button span, .battlefield-context,
+  .battlefield-footnote, .battle-orders small, .battle-autoresolve > p,
+  .battle-report > div > p, .peace-treaties p, .capture-option > p) {
+  color: var(--hearth-muted);
+}
+.application :is(label, summary, .section-title, .resources strong, .stat-pair strong,
+  .character-values dd, .land-stage, .land-tile-total, .production-category > summary) {
+  color: var(--hearth-text);
+}
+.application :is(.eyebrow, .crest, .entity-symbol, .status-mark, .progression-cost) {
+  color: #dcc18b;
+}
+.application :is(.production-category > summary > span, .production-description > summary,
+  .realm-switcher button span, .selection-command small, .registry-tools > span,
+  .registry-pages span, .tabs button span, .character-row small) {
+  color: var(--hearth-muted);
+}
+.application :is(.stat-pair, .chronicle, .chronicle li, .tabs, .map-actions-tabs,
+  .character-skills, .character-appointments, .character-pagination,
+  .faction-encounter, .faction-encounters, .public-projects, .land-panel,
+  .land-cell, .land-option, .land-work, .land-town-overview, .land-tile-facts,
+  .naval-transport, .army-characters, .hex-inspector, .realm-culture,
+  .faction-recruitment, .faction-recruitment li, .save-actions) {
+  border-color: #68553d;
+}
+.application :is(.formation-table th, .formation-table td, .land-yields th, .land-yields td) {
+  border-color: #68553d;
+}
+.application .formation-table thead th {
+  background: #241b14;
+  color: var(--hearth-muted);
+}
+
+/* Embossed plaques. No translation or filtering of nested sprite artwork. */
+.application button,
+.application :is(.map-actions, .campaign, .progression-dialog, .character-dialog,
+  .chronicles-dialog, .campaign-window, .hud-tools, .command-bar, .setup) button {
+  color: var(--hearth-text);
+  background-color: #35261b;
+  background-image: linear-gradient(#ffffff08, #0002), var(--hearth-leather);
+  border-color: #9b7f50;
+  box-shadow: inset 0 1px #ecd6a333, inset 0 -1px #160f09, 0 2px 3px #0004;
+  text-shadow: 0 1px #0005;
+  transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+.application button:hover:not(:disabled) {
+  color: #fff0cd;
+  background-image: linear-gradient(#cba66720, #0001), var(--hearth-leather);
+  border-color: #e9c176;
+  box-shadow: inset 0 1px #ffe7af55, 0 3px 6px #0005;
+}
+.application button:active:not(:disabled) {
+  box-shadow: inset 0 2px 4px #0007;
+}
+.application button:is(.primary, .end-turn, [aria-selected=true], [aria-pressed=true], .selected),
+.application .progression-dialog button[aria-selected=true],
+.application .character-dialog button[aria-pressed=true] {
+  color: #fff0cd;
+  background-image: linear-gradient(120deg, #694a28, #47301c);
+  border-color: #e9c176;
+  box-shadow: inset 0 0 0 1px #e9c17626, inset 0 1px #ffe7af55, 0 2px 3px #0004;
+}
+.application button:disabled {
+  color: #c8b99a;
+  background-image: linear-gradient(#3d3328, #302820);
+  border-color: #74644c;
+  box-shadow: inset 0 1px #efddb311;
+  opacity: .68;
+}
+.application :is(button, input, select, textarea, summary, a, [tabindex]):focus-visible {
+  outline: 2px solid #f1cd81;
+  outline-offset: 3px;
+}
+.application :is(input, select, textarea) {
+  color: var(--hearth-ink);
+  background: #ead8b3;
+  border-color: #8d7049;
+  box-shadow: inset 0 2px 3px #563d262e;
+  accent-color: #9b7440;
+  color-scheme: light;
+}
+.application :is(input, textarea)::placeholder {
+  color: #705b40;
+  opacity: 1;
+}
+.application select option {
+  color: var(--hearth-ink);
+  background: #ead8b3;
+}
+.application :is(.danger, button.danger) {
+  color: #ffe0c9;
+  background: linear-gradient(#603e2f, #43291f);
+  border-color: #c08964;
+}
+.application :is(.feedback.error, .negotiation-error, .battle-blocker,
+  .land-blocker, .production-card .production-blocker, .character-blocker,
+  .transport-warning, .war-state, .policy-exclusion) {
+  color: #efba98;
+}
+.application :is(.peace-state, .feedback) {
+  color: #d8c8a5;
+}
+.application .feedback.error { color: #efba98; }
+.application .progression-dialog .progression-choice:is([data-state=researched], [data-state=adopted]),
+.application .skill-acquired,
+.application .skill-roadmap button[data-state=learned] {
+  background: linear-gradient(#4c3c27, #35291d);
+  border-color: #c9ac70;
+}
+.application :is(.progression-choice, .character-promotion)[data-state=excluded] {
+  border-color: #b18a70;
+  border-style: dashed;
+}
+
+/* Restrained writing inset: every inherited text tone is dark here; controls
+   retain their own explicit contrast. Broad panel backgrounds stay dark. */
+.application .setup .faction-card {
+  color: var(--hearth-ink);
+  background-image: var(--hearth-paper);
+  background-color: #ead8b3;
+  background-size: auto, 512px 512px;
+  border-color: #8a683f;
+  box-shadow: inset 0 0 0 2px #f8e7bc66, 0 3px 7px #0003;
+}
+.application .setup .faction-card :is(h2, h3, h4, p, small, label, summary,
+  strong, .eyebrow, .field-help, .faction-recruitment li > span) {
+  color: var(--hearth-ink);
+  text-shadow: none;
+}
+.application ::selection { color: #fff4d9; background: #816139; }
+@media (prefers-reduced-motion: reduce) {
+  .application button { transition: none; }
+}

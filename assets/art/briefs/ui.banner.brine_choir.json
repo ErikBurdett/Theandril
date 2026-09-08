@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.brine_choir",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.banner for Theandril, Brine Choir.\nSubject: ONE complete faction cloth banner on one short practical pole, hanging mostly straight with one gentle fold, original faction emblem on a broad readable cloth plane. Full pole and small finial inside the image; no person or base stand. Maximum height54 in a native64 square; broad compact cloth, no long streamers.\nCulture-specific identity: A broken concentric ripple: two unequal open rings, clearly legible gaps, matte shell against wet slate; not a keel or sail. Cloth uses Coral-clay accents, pale eelgrass cloth, wet-slate armor, matte shell inlay and practical woven salt-cloaks. Broad fin-fold collar and low crescent shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "ui.banner.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/ui.banner.brine_choir/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7a46cee12d982b051487cccb780407286951b91ff25a802c78910680f71504f5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.banner.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.banner.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:20:36Z",
+  "referenceHashes": [
+    "54f5bdeb05aa5eee541319bbe52ccc5a2de8ad9b227d08185856fbde2b40c647",
+    "09731460d7cab703cb96faea23c469e7a003c14acb3d769076369abf503e56c7"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "51a48cd203d9f5118f2bfaf18a405fdffbfec0d60590911187f8ea12becc451f",
+      "inputHash": "54f5bdeb05aa5eee541319bbe52ccc5a2de8ad9b227d08185856fbde2b40c647",
+      "outputHash": "98032dfd6efb964796001cdf609dc015abc35ef74567fa0763e5e0175fc51e4c"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

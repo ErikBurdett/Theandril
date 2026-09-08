@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.underhush_exchange",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.transport for Theandril, Underhush Exchange.\nSubject: ONE broad capacious wooden transport cog: rounded deep cargo hull, one square sail, low enclosed passenger shelter, neatly strapped crates, minimal defenses. Chunky broad useful deck distinguishes troop carrier from galley and warship. Entire ship visible; no people large enough to compete.\nCulture-specific identity: Broad low timber hull, clay-brown cloth and pale-lime sails, pewter rounded bracing, shallow keyhole-arched cabin entrance and nested compact vent caps. Practical surface boat, not an underground vehicle.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.\nNAVAL TECHNOLOGY GUARDRAIL: absolutely NO firearms, cannons, gunpowder weapons, gunports or visible gun barrels anywhere. Ranged crew would use ordinary bows/crossbows; one small open-deck wooden ballista is acceptable only for the deep warship. Side panels are solid timber or simple ventilation lattice, never cannon ports or black tubes. No smoke or firing effects.",
+  "frames": [
+    {
+      "id": "unit.transport.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.underhush_exchange/8180e1c451a983a60a0b50a4a17fb843a6bdb2d5aa828ece2755f8f324bea4c9/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7831bf11528bc63f7fd75ffeaabfeddfd931361ff3299770084a8c722e6a078e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:32:49Z",
+  "referenceHashes": [
+    "44f8d680e03fc7c4743632781b05f9a4f0a6ae750591cb2f46a84b75eb6beed4",
+    "adc3abfd9d27f3c3908220244c700fcc9175f23c4cc04502281534eba35901dd"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "241244517d95ea827733d28605d961f225834df4d7e38d83a9102c8701339cf2",
+      "inputHash": "44f8d680e03fc7c4743632781b05f9a4f0a6ae750591cb2f46a84b75eb6beed4",
+      "outputHash": "a897e732f92fa239878f82e513109b1ea2597b72aeadd9446330c417b017c044"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "a897e732f92fa239878f82e513109b1ea2597b72aeadd9446330c417b017c044",
+      "outputHash": "53838f879813e259efdde3549f60c331cf352202d0f8529a2dfaeb38e225da9d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "53838f879813e259efdde3549f60c331cf352202d0f8529a2dfaeb38e225da9d",
+      "outputHash": "6aaaf0d82a7e92655fded4197df1bea587c04236f7920bab8ba68fe377995665"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "676336f4e98866349f7b575256bfdfe0ec25284293351ecebb15f58b462e3907",
+      "outputHash": "debb9dd0360fb1a68bd8e5562545cb092e0a05dc629b7d0081b4aebc438cb656"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "d887b781c806a6aae751770e1af181054925e59733d5fbd350fd998bbbf469c2",
+      "outputHash": "245ab786474aeefe67d19b9b573f0e3e732448f528734d27a1ef82060fa4c9be"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "31b0fb99f463720cbe335b79b3bebdfd6c98bf407bf772982a7ba35636ec6da2",
+      "outputHash": "66947b807c2a3c37f5e739e9c0623d6102e9ec028e36724a9c1561898e4ff6ed"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:33.793Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Single square sail, low covered cabin and visible loaded deck identify cargo transport; leaflike cultural trim is ornamental, not literal crest. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 8180e1c451a983a60a0b50a4a17fb843a6bdb2d5aa828ece2755f8f324bea4c9; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/51d90a048904165aa274371b29db2d5f0d84c3c689e46367cde662584703a856.png"
+    ],
+    "inputHash": "b4c29c1a365e0f6cb6a494b187042ab181930d506d24b5eac9f1611ec2b8347c"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

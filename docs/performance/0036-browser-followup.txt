@@ -1,0 +1,30 @@
+[WebServer] (node:3443177) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3443189) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 19 tests using 1 worker
+
+(node:3443231) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/campaign-menu.spec.ts:91:1 › top campaign disclosure works by keyboard and preserves real save, load, autosave and import controls (2.5s)
+  ✓   2 tests/gameplay/campaign-menu.spec.ts:140:1 › narrow touch settings stay in flow above setup and return to the unchanged campaign (2.5s)
+  ✓   3 tests/gameplay/campaign-menu.spec.ts:211:1 › new campaign generation can be cancelled without losing the existing worker or campaign (1.6s)
+  ✓   4 tests/gameplay/map-actions.spec.ts:49:1 › a real canvas caravan founds, builds and continues in the same side-panel controls without issuing inspection orders (1.8s)
+  ✓   5 tests/gameplay/map-actions.spec.ts:86:1 › a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders (3.4s)
+  ✓   6 tests/gameplay/map-actions.spec.ts:141:1 › map-only diplomacy uses the one real encountered-faction consumer and ordinary war command (1.5s)
+  ✓   7 tests/gameplay/map-actions.spec.ts:168:1 › 390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer (2.4s)
+  ✓   8 tests/gameplay/map-readability.spec.ts:38:1 › realm perimeters and contextual names stay quiet while real selection, hover, range and land inspection remain clear (2.5s)
+  ✓   9 tests/gameplay/movement.spec.ts:67:1 › canvas selects and cycles friendly units, previews bounded multi-step movement, and distinguishes dragging from orders (2.8s)
+  ✓  10 tests/gameplay/movement.spec.ts:100:1 › map targeting refuses implicit war and impassable land, then executes a multi-step field attack without issuing locked orders (2.5s)
+  ✓  11 tests/gameplay/movement.spec.ts:124:1 › queued waypoints consume current movement, survive save/load, continue after the round, and cancel through the real controls (4.1s)
+  ✓  12 tests/gameplay/movement.spec.ts:158:1 › map settlement targeting requires siege instead of bypassing defenses and inspection names the visible biome (1.7s)
+  ✓  13 tests/gameplay/movement.spec.ts:179:1 › a saved route interrupted by a real foreign move retains its reason and safely replans on resume (1.7s)
+  ✓  14 tests/gameplay/movement.spec.ts:197:1 › narrow touch map moves on taps and keyboard route controls remain usable without hover (1.8s)
+  ✓  15 tests/gameplay/naval.spec.ts:47:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker (7.1s)
+  ✓  16 tests/gameplay/naval.spec.ts:99:1 › harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet (4.8s)
+  ✓  17 tests/gameplay/naval.spec.ts:135:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships (5.1s)
+  ✓  18 tests/gameplay/tile-footprints.spec.ts:43:1 › all ten paid improvements and camp, town, capital use contained untinted tile footprints at near and far zoom (4.7s)
+  ✓  19 tests/gameplay/tile-footprints.spec.ts:107:1 › a previously scouted empty foreign field does not reveal its later improvement while zooming and inspecting fog (2.0s)
+
+  19 passed (57.7s)

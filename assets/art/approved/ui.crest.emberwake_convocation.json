@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.emberwake_convocation",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.crest for Theandril, Emberwake Convocation.\nSubject: ONE front-facing coarse heraldic crest alone, clear large original faction mark, no enclosing shield or extra medallion. Strong silhouette and generous clean negative spaces, the exact described emblem.\nCulture-specific identity: A half-blackened seed wheel enclosing a single pale seed, clear coarse silhouette, no flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "ui.crest.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/ui.crest.emberwake_convocation/ddf7f59729347dd713eae5eb1aee922b5c70a847bf1cfab4b572e5a63dcdb0e9/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "4bef78262e7415e0d699570f28012cc5e13f9e67e1bd0263dc35dff124713300",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.crest.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.crest.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:58:46Z",
+  "referenceHashes": [
+    "37bd56b55d707f9b332939bb4228cb7b1686c7855316ed70f090a3b5663ad0d7",
+    "063238990258a0062da93aed31aff7d3ca24df4509b381bdbfafb290e9ce9bf7"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "f25b3575bdb1d79463a0c8a700854b1c42e3ec785c8cd2bfb6dfa09e0400285a",
+      "inputHash": "37bd56b55d707f9b332939bb4228cb7b1686c7855316ed70f090a3b5663ad0d7",
+      "outputHash": "1a4e1da4a54b871881e5080358fd6dc8bad1d6cc164f8e61159ce8bf433cdc38"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "1a4e1da4a54b871881e5080358fd6dc8bad1d6cc164f8e61159ce8bf433cdc38",
+      "outputHash": "adae97702f194c20dbe8edf38f2f2385ea1477164356396991c5e8adae52f226"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "adae97702f194c20dbe8edf38f2f2385ea1477164356396991c5e8adae52f226",
+      "outputHash": "47e2f42040e97ecbf44c4353c61027765be3b7a4542c085fc11f87e305541280"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "b0893ab05403a6e3c590cd68a8cd6cb52e8ef452f3cde2208b822730bbcf6c6c",
+      "outputHash": "973176b0696b532a9791f2eff87a4a431a0b95dc01ff900ac44640babe49ae42"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "6469f2afe264c00aa4c595287784aa9bf058e1aefaa527666f4682d16047a8d3",
+      "outputHash": "a56f493df9b50c46f36dfde3522276ba19465a5ccbda2c412428781e9a08da88"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "70e2b52248726c1b1a5742217b9f6d11fde56f5763c28a6f059473d0f969cd85",
+      "outputHash": "965c23a996f27b7095abc4028c64f99cc8cd603b8eac747159ac00164fbd5725"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.crest.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:30.838Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Half-blackened wheel encloses one pale seed; dark side has deliberately low contrast, but light seed/left rim keeps the emblem legible. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate ddf7f59729347dd713eae5eb1aee922b5c70a847bf1cfab4b572e5a63dcdb0e9; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/03acb2f4d4a06901c4b10811987503f1ea6d4e673680001dad37777e1126b78e.png"
+    ],
+    "inputHash": "43d05f4fb0e78631042975354c483b4b83eacc2db614b5f225c780c70fa129e7"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

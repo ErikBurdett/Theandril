@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.scout.unsealed_companies",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.scout.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native64. One lean full-body adult wayfinder in a short travel cloak, compact bow held lowered, quiver and route satchel, two complete boots. Open lightweight silhouette, no shield, no long staff, no firing pose.",
+  "frames": [
+    {
+      "id": "unit.scout.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.scout.unsealed_companies/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "298e84d2f0648315e6b3665d053976a60008c15dcc2a2dd6f07252772e248544",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/unit.scout.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/wellroads/unit.scout.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:11:31.455Z",
+  "referenceHashes": [
+    "c4911dc71b5532ec9595095aaf19a54951bf311b95a0d049a13d2ad610ffd41d",
+    "4f192946a973ced95e95b34a15c79ab328d71c444b6e68ac0406bb43964a1f04"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "d298201471746deb8329e03025f49b43309879610c2866da0ce94499ebb71aef",
+      "inputHash": "c4911dc71b5532ec9595095aaf19a54951bf311b95a0d049a13d2ad610ffd41d",
+      "outputHash": "0fa2daa51649e9fbfef348c4e6e5cc795a902b7393eb6501c6b8f789b42564c6"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.unsealed_companies",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native96. One adult mounted outrider riding one ordinary lean horse facing screen RIGHT/lower right, short lowered spear and compact shield, worn saddle and tied baggage. Entire horse with all four legs, ears, tail and rider enclosed. No giant pennant shrinking the horse, no floating hooves.",
+  "frames": [
+    {
+      "id": "unit.cavalry.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.cavalry.unsealed_companies/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2a7f2c4c40e3b6b9a462d20d4c6d6d7a4fe01512d66fed91fd7f2920e2370f6f",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/unit.cavalry.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/wellroads/unit.cavalry.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:14:01.171Z",
+  "referenceHashes": [
+    "bacc34bd143de5ab45e13a324fc8ab9bb24906ea813375ff8b52912d0a92f4e0",
+    "2d538b759afd7cdbbefec4c4c216e54e148492ce5c1ef16a90947f0cc7a019f8"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "d2c60e391b4df5b7ad9e6bba23cc2437033c9388d793f04d66f03c38a89144f5",
+      "inputHash": "bacc34bd143de5ab45e13a324fc8ab9bb24906ea813375ff8b52912d0a92f4e0",
+      "outputHash": "7411e26542d836034548de319078253c6d4781b04dd4f53d0bb311e0e628a63a"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

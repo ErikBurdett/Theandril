@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.emberwake_convocation",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.spearman for Theandril, Emberwake Convocation.\nSubject: One adult spear-watch soldier with a straight compact spear held nearly vertical at the side, plain metal spearhead and a modest faction shield. Spear tip wholly inside generous top margin and no more than one head-height above helmet. Both hands anatomically clear.\nCulture-specific identity: Adult human seedkeeper or kiln-worker household escort, practical proportions, visible tool-hands and ordinary boots. No fire elemental or undead. Ash-white ceramic face screens and small ceramic plates, smoked-orange cloth, muted sulfur-green straps, charcoal padded kiln aprons and short heat-resistant wraps. Seed jars and split-vent motifs, no open flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "unit.spearman.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.spearman.emberwake_convocation/62bf0ee363467004dfb6c6f16f12e509f56cbdaa0d7bea57a244a0e2b0f82a2d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "8b7f56d445c5409c11e97501171a126f5747de6ffe340bc032d1d0948bd60327",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.spearman.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.spearman.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:39:24Z",
+  "referenceHashes": [
+    "09dd192ef556219d7fe1c94800b41e981d4b1982b89a481f3f582ffa80c3173c",
+    "f79a05993ff89687b0d4fe0fd73c6f8d86ff4c647d1e7f15cebf8ae11f0af6a9"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "0fde4f30099c4fc646f734d68bfae8771a3625c394c75cbfa29443d7805b93c6",
+      "inputHash": "09dd192ef556219d7fe1c94800b41e981d4b1982b89a481f3f582ffa80c3173c",
+      "outputHash": "13538bdf6104b38c9f3c853f322a784f3d5c4849fc012bba25643105370896a3"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "13538bdf6104b38c9f3c853f322a784f3d5c4849fc012bba25643105370896a3",
+      "outputHash": "5675e96a45cf2b7032e9c63d62c31222a84122019c0252ba14edd9ef7704d287"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "5675e96a45cf2b7032e9c63d62c31222a84122019c0252ba14edd9ef7704d287",
+      "outputHash": "b80490bb6b61df206025266103a9a6fa0aa594fb19882da6e38b7ee8741f8bbf"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "c260230c0761e4a2bd3186e74cc1233f31c72946bdf51268c204122efd05359d",
+      "outputHash": "bf952d8b9250e5ba7f925cad665fef59fa8b5f63108ec6be839a176b9fccd7ce"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "58466075ec110d3d4053da5d0ac01eef3dacf2e8ce7efe5cb41d8eac5bfc2899",
+      "outputHash": "ffdc3aead0e6c3780c1d80e9abb6285e8ef6ae0991f0aef2b84da9c3be07767a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "1df070b8248acc0a672b77fc7590a4c4f9040d2559f6d7f27a1ad875ed5aae56",
+      "outputHash": "66329d1360554a9a9b56b26f1fd50a74f46ae38ab2ae756a7cdc21389741ef97"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.spearman.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:27.212Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Tall spear, smaller rounded shield and narrow body distinguish spearman. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 62bf0ee363467004dfb6c6f16f12e509f56cbdaa0d7bea57a244a0e2b0f82a2d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/610e401ae7deced3de6910829cee4ca59e4f9e25a164df78cf5308a09c267709.png"
+    ],
+    "inputHash": "ddcb0bd3dbd3a70693e38f8c5c49ffb46a14bb629792751382d01396f72a96b4"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

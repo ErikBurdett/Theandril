@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.red_sluice",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.red_sluice"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Red Sluice Directorate, role ui.banner.\nSUBJECT: ONE complete freestanding slender standard pole with heavy cultural cloth and the specified heraldic emblem, simple readable motif, quiet drape, weighted hem. Pole and base intact, no ground or shadow. Native64x64 maximum54px pivot32,56.\nCULTURE: Brick red, dull celadon cloth, tarred oak, black chain and weathered bronze. Broad rectangular rain shields, hooded crew coats, horizontal bar motifs. Low sluice-gate inspired maintenance halls, wheel-braced gantries, thick brick channelside courtyards; no surrounding waterrectangle or actualtile.\nPEOPLE if character or rider: Human waterworks crew households and disciplined municipal escorts.\nHERALDRY if UI or flag: A barred spillway with three broad vertical openings and one horizontal lifting bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nKEEP THE HERALDIC SYMBOL SIMPLE: exactly one lifting bar above three broad vertical spillway openings. No other emblems, scrolls, crossed tools, wreaths, swords, skulls, architectural skyline, or circular shield backing. The badge/crest is the symbol itself; banner may show that symbol on cloth. Prefer a bold uncluttered silhouette.",
+  "frames": [
+    {
+      "id": "ui.banner.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/ui.banner.red_sluice/02db0e0c8158742ed4604de9d0a9c3e69f556b83cbc1a358d5f731686fa0a7e4/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d88fa7d4ed5875928c174b21cb2e8db716ad4d939d7dc5514ce760063a686005",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/ui.banner.red_sluice-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/ui.banner.red_sluice-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T16:59:43Z",
+  "referenceHashes": [
+    "9207c456ac2615b9492b56e53486a119626b216987e695ac8e10b5f2f0d9352f",
+    "e53172d8a2b769e675d92ba4c11e44c7e8e9a346c018d887693e82cede4353f4"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "9d1e26d774bd86408f267d68e981c3cd9381eeb7ec7194c4b4f23705866c6fe0",
+      "inputHash": "9207c456ac2615b9492b56e53486a119626b216987e695ac8e10b5f2f0d9352f",
+      "outputHash": "0478dc058f57c46637dce5244a6c22d70dee1a9de4cc508f8392a867162990f1"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "0478dc058f57c46637dce5244a6c22d70dee1a9de4cc508f8392a867162990f1",
+      "outputHash": "bbb5bc63576fdf056047c11ec19b546954421b0dae07067764e1c153e5c773c7"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "bbb5bc63576fdf056047c11ec19b546954421b0dae07067764e1c153e5c773c7",
+      "outputHash": "fbc4847de5a08a8e73b2d2ee85951608a5bb8612368d12f4bc893dd866a9661f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "5c96d266055ce3a6d5cf4f88db1c907f1583cd8f0fe00caa5f0cb58a1204f3dd",
+      "outputHash": "567cc2dc3168136eca5dd0efa49140640667f6696573c81ba173755f5f2f69c3"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "55507421461f259814547236c27b87f8a1ed94d9610f888484466e3aa64181d6",
+      "outputHash": "6b4406455c9049e3871c57d22147d24f00fa84b455452e0cc39351d810cceb83"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "286aaedd847692f6a8c7b14058fc5029628976da703779d91d65b89fc975d0f9",
+      "outputHash": "342dcb1dc9955b372c2cd8686d89eb26a86413ef549672452fe4dc7d0e6fb09f"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.banner.red_sluice.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:04:51.100Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Full vertical standard with pale spillway motif; low-alpha original backdrop haze absent after unchanged processing. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 02db0e0c8158742ed4604de9d0a9c3e69f556b83cbc1a358d5f731686fa0a7e4; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/7e72bf952fe06a3bd44159d24f4238045d25a4465ddc6e3f445b749045e60f1e.png"
+    ],
+    "inputHash": "1f51f4d66adada6652402d38e1bc7d6a805491f5d0e08a809fc47424a196da3a"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.velvet_meridian",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.velvet_meridian"
+  ],
+  "prompt": "Use case: stylized-concept. ONE tiny simple original pixel-art heraldic emblem for Velvet Meridian in Theandril. The complete design consists ONLY of one straight vertical plumb cord with a small dark silver plumb bob at its bottom, crossed by exactly three unequal short horizontal madder-red stitches. No banner, draped cloth, hanging rod, tassels, shield, ribbon, jewelry, chains, extra discs, figures, buildings, text, logo or frame. Bold flat coarse stepped pixel clusters with very few matte colors: smoke silver, madder red, muted blue-black. Centered front-facing emblem, maximum60pixels at native64x64, pivot32,32, ample simple negative space. Entire mark in the central65percent of the source canvas; fully complete and generously padded. TRUE transparent zero-alpha PNG background, never checkerboard or a colored background. No glow, cast shadow, gradients, surrounding scenery, animation, variants or sheet. Quiet original political craft symbol, not a decorative illustration.",
+  "frames": [
+    {
+      "id": "ui.crest.velvet_meridian/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/ui.crest.velvet_meridian/v2/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bc7b2663d448a3ee16fa6d8c30448bf27c0699ab116596f375e0d7388cc3a9c5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/ui.crest.velvet_meridian-v2.png",
+      "assets/art/source/faction-expansion/canalmeridian/ui.crest.velvet_meridian-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T16:45:06.000Z",
+  "referenceHashes": [
+    "239050e6525992b143728c320088150747451d2d30c9b6f9ac0c2383d80f73b0",
+    "8ba2924883bb2a67e397c9b725d7172ad5b1b96f5b2063bab169df91aa31c70c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "6cf60e045a3e8741726fc72c843dd39a9f32d267e63b9aab4ca9b21b9caed8ba",
+      "inputHash": "239050e6525992b143728c320088150747451d2d30c9b6f9ac0c2383d80f73b0",
+      "outputHash": "25a3d7c8fd894348c46b859415b2f2b502a6384a3fd84c7531e9451d15977343"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

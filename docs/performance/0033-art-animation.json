@@ -1,0 +1,50 @@
+{
+  "workload": "Offline art compilation; warm code/data, filesystem reads excluded. Not renderer performance.",
+  "approvedAssets": 284,
+  "publishedFrames": 305,
+  "validation": {
+    "medianMs": 88.95988299999999,
+    "p95Ms": 100.00591099999997,
+    "minMs": 86.59714599999995,
+    "maxMs": 100.00591099999997,
+    "iterations": 7
+  },
+  "pages": [
+    {
+      "id": "foundation",
+      "width": 2048,
+      "height": 2048,
+      "pngBytes": 1520156,
+      "rgbaBytes": 16777216,
+      "pngHash": "4a272092509bccfc906150917974be29488bdec6525b9dd872ee2809d91ca5bf",
+      "build": {
+        "medianMs": 195.120042,
+        "p95Ms": 207.29185500000017,
+        "minMs": 184.3223539999999,
+        "maxMs": 207.29185500000017,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 59.36516300000039,
+        "p95Ms": 59.96334999999999,
+        "minMs": 52.616145999999844,
+        "maxMs": 59.96334999999999,
+        "iterations": 7
+      }
+    }
+  ],
+  "syntheticValidation": {
+    "description": "1,000 in-memory frame references repeating approved source pixels with distinct test IDs; not new production artwork or approval.",
+    "frames": 1000,
+    "processedPixelBytes": 16384000,
+    "status": "CANDIDATE",
+    "timing": {
+      "medianMs": 92.14174700000012,
+      "p95Ms": 92.3821869999997,
+      "minMs": 91.58001000000013,
+      "maxMs": 92.3821869999997,
+      "iterations": 5
+    }
+  },
+  "peakResidentMiB": 562.54296875
+}

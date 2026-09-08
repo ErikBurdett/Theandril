@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.margin_observance",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.margin_observance"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Margin Observance, role character.surveyor.\nSUBJECT: ONE adult field surveyor, cultural work layers and complete boots, folded measuring tripod at side and compact map tube, no floating parchment or legiblewriting. Clear surveying tools not combatweapon. Native64x64 maxheight48px pivot32,56.\nCULTURE: Parchment grey, dull cinnabar, matte ink black, weathered lead. Narrow document cases, interrupted stripe patterns, practical slate shoulder covers and pale-edged shields. Slab-roof archive stations, protected empty wall recesses and enclosed supply yards; no levitatingglyphs or blackwizardcliche.\nPEOPLE if character or rider: Human copyists, custodians and supplyhouseholds; work-conscious guardedcamp equipment.\nHERALDRY if UI or flag: One broken bracket with a deliberate open corner and small offset registration bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "character.surveyor.margin_observance/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.surveyor.margin_observance/6a91235fad7230954f40155c7b17f6f6b5a8b7bf85bc769416bbd54e5a92c7af/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "84413bc6f8ffcfae708c908937da034ca2b72a5ea801ec7a0e4ae9298c09017a",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/character.surveyor.margin_observance-v1.png",
+      "assets/art/source/faction-expansion/reedstars/character.surveyor.margin_observance-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:03:14.000Z",
+  "referenceHashes": [
+    "1c61783e056ca4f2ffaac4e38d6b10b390a8d8df24f59bb492b244458490ab3d",
+    "e03712d41676f831ea6b922394a46380953853c9eda71756867dfdc1dbc06eeb"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "f37bf4c8f5330f91802cf9c3ba5ceea7c83873e8fff78fd11654fa8739377cff",
+      "inputHash": "1c61783e056ca4f2ffaac4e38d6b10b390a8d8df24f59bb492b244458490ab3d",
+      "outputHash": "16d8ac074072f299edb3fa57daab7d57e014590f904361a4e46ab07f22d0d0be"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "16d8ac074072f299edb3fa57daab7d57e014590f904361a4e46ab07f22d0d0be",
+      "outputHash": "8ba603b8efb641143bc2031942ed2578bfe83a294117edf21c87abef85253496"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "8ba603b8efb641143bc2031942ed2578bfe83a294117edf21c87abef85253496",
+      "outputHash": "e832885747ecdec949f53d6b349b8a190633f95dc130fd30650427b0e3b78110"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "9ec02e63b6aede1f1b6db980d911cc35dafe92ad088490e64fa9ea2a93ebfc0b",
+      "outputHash": "7fcc39a5be979249f30bff47d391484142874ed7f9507368f5950d0c47bd2502"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "ec07ab94e1ab26763d2e799722c6fb0af7ce77b74b098bc9bfb5a4179ec6ebae",
+      "outputHash": "5a73b02aa89f27aa6f0cb8542d2c47ed4b5ee1248a19a4fc613b34e21386a227"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "180456c29937074c834a0a0a3460aa31c8615b86171952134e49a265483feb1d",
+      "outputHash": "41878724255c8365b9edb7352dc61fc9d0a36afcc1d8bd9be7ac70565afb0075"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.surveyor.margin_observance.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:16:05.731Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Hooded surveyor with tall folded tripod and small instrument case, separate complete tool shapes. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 6a91235fad7230954f40155c7b17f6f6b5a8b7bf85bc769416bbd54e5a92c7af; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/87a541dec04cf1bee9e1cccef36c1acfcd10bf227719ba9f172fac63726277bc.png"
+    ],
+    "inputHash": "207dfcb15681cf063a027eaf3c46addb24e2cac18b129d96a8fa64a22b19d7d4"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

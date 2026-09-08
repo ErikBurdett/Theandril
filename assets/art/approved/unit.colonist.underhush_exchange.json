@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.underhush_exchange",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.colonist for Theandril, Underhush Exchange.\nSubject: One practical adult founding-caravan leader walking in a quiet planted stance, bearing a large strapped household pack with bedroll, seed crate and compact tools. Unarmed civilian silhouette: weight of carried supplies clearly distinguishes this role from a scout. No separate cart that dwarfs the person.\nCulture-specific identity: An adult short broad-handed burrowfolk: compact furred body, small rounded ears, blunt face, visible dexterous fingers. Upright two-legged working citizen, not a bearded dwarf, pet or exposed-tooth rodent caricature. Clay-brown padded work coats, pewter fittings, pale-lime panels, tiny dull amber route markers, tactile tally beads, low padded helmets and rounded work shields. Generous compact horizontal shapes.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "unit.colonist.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.underhush_exchange/5d375398d102908bc28011df0a927b341849c965a8c98ee95a354439748dbf90/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "dedbfaa0adf3dbcbf70d0301c73137d39f8572bc660f6b37ea384a90cd76a336",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.colonist.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.colonist.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:06:16Z",
+  "referenceHashes": [
+    "67539c27fecc4274e44cd9dca51893a1792492f28d74edd35ff151df88b964d5",
+    "18bd2b8dac5b1faaa66076173ad705d54f0fc88aa2756d5c3e486622d0409972"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "1fedb3013cb57373c4f2fd9ea664e772ee4a60509c359827a9f18ce255af0f8c",
+      "inputHash": "67539c27fecc4274e44cd9dca51893a1792492f28d74edd35ff151df88b964d5",
+      "outputHash": "e3d8d33191f502a92496376dde759a51b55f7f04750c2d34fb96932e7045ba4a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "e3d8d33191f502a92496376dde759a51b55f7f04750c2d34fb96932e7045ba4a",
+      "outputHash": "9913c4dabd636e2e5b0b9b8ea43dd6e161c74b9fb5678fdd977873d777040d21"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9913c4dabd636e2e5b0b9b8ea43dd6e161c74b9fb5678fdd977873d777040d21",
+      "outputHash": "281ef4de940f08a5701899f67aa1e789f318674c497e4684c64ecd2a2358d04d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "c505921db643e160636365458239a4afe8c2f6aea1428015c02f0e6eb3e68978",
+      "outputHash": "bd46936e1e156980a1b187c451f34cbf3f2ca38ce3b7834c5345203088c1e5e9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "d9df9773f62f8b915379b5019d996f9d892a42a36f115e57e72e9a0cbeb2fe27",
+      "outputHash": "dde85924b8c126bd686e74b8b4289304155928ec792ad634a95412d36675eece"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "5a99ba02b087d4ff5777b2499c91cfc87f16bd9b169ed5150a5fd38cbd76229a",
+      "outputHash": "a65489fe62102f101dc0a6c541cb368efe946700c1e2268143d1a6af376806b2"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:27.904Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Compact furred civilian carries seed pack and walking staff; broad hands, short legs and rounded ears distinct from Covenant dwarf art. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 5d375398d102908bc28011df0a927b341849c965a8c98ee95a354439748dbf90; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a5069fd965c75600b5050fc0a5c49392ccdea19aa250354ebffa2b78648446cc.png"
+    ],
+    "inputHash": "29281d6f288d8183713073b41a06538fb3b3f1e595f62e924ec8f2d83cf47437"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

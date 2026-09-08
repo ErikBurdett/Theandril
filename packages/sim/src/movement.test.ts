@@ -13,7 +13,7 @@ const end: GameCommand = { type: 'endTurn', factionId };
 const issue = (state: GameState, command: GameCommand): void => { expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true }); };
 const reject = (state: GameState, command: unknown): void => { const hash = stateHash(state); expect(applyCommand(state, command).ok).toBe(false); expect(stateHash(state)).toBe(hash); };
 function field(war = false): GameState {
-  const state = createGame({ seed: 88, size: 'tiny', factionCount: 2, pace: 'short' });
+  const state = createGame({ seed: 88, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4 });
   state.world.terrain.fill(1); state.world.waterDepth.fill(0); state.world.fertility.fill(75); state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, state.world.generatorVersion);
   delete state.armies['army.1']; delete state.armies['army.3'];
   const guard = UNITS.find(unit => unit.id === 'unit.guard')!;

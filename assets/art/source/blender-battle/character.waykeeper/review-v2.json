@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "character.waykeeper",
+  "version": 2,
+  "reviewedAt": "2026-09-07 21:12:57 UTC",
+  "stage": "native Blender source review",
+  "decision": "inspected-candidate-not-approved",
+  "manifestSha256": "64cad4cd0d1bd83c87179cfbacaf4467f723f2d0cab4f693ab10969a611d85b5",
+  "evidence": [
+    {
+      "path": "v2/review-1x.png",
+      "sha256": "0b5577d29c00ae840174447c8a744626149fa7862f2bb0a6ed1d43205f80f93e",
+      "inspection": "Viewed full image at native scale."
+    },
+    {
+      "path": "v2/review-4x.png",
+      "sha256": "7881f393202f30431bed435eddff0c4cfe5cbada1eee2e696b1d55bd51d1f206",
+      "inspection": "Viewed enlarged nearest-neighbor contact sheet."
+    }
+  ],
+  "findings": [
+    "Adult narrow traveler silhouette with long planted legs, split patched blue-gray coat, copper tablet and caged coal staff; no oversized head or wizard hat.",
+    "Preparation, extended tablet release, and recovery are visible across the eight poses; arms and carried equipment are individually keyed rather than whole-body translations.",
+    "v2 increases physical key-light energy from 150 to 300 and uses lighter authored material albedos before palette reduction. Coat/face/equipment remain visible on peat/linen/olive. Hair/nose/brow now inherit the head turn.",
+    "Declared ground pivot is fixed at (32,56); perspective toes occupy the same bottom row 58 throughout. Deliberate extended arm changes left bounds from x19 to x13; body is not re-centered or cropped per frame.",
+    "This is one southeast cast pilot, not a finished 24-culture character kit, idle/walk set, or all-facing animation."
+  ],
+  "timing": {
+    "frames": 8,
+    "durationMs": 100,
+    "blenderFps": 10,
+    "totalDurationMs": 800
+  },
+  "limitations": [
+    "Studio source images inspected; preview.html temporal playback not browser-tested by this reviewer.",
+    "PixelSnapper/Aseprite processed review, gameplay/background review and final approval remain parent-owned. No approval or runtime publication granted here."
+  ]
+}

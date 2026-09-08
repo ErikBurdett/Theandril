@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.red_sluice",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.red_sluice"
+  ],
+  "prompt": "Create one ORIGINAL Theandril Red Sluice Directorate deep ocean warship pixel sprite, facing southeast in isometric strategy view. ONE complete seaworthy wooden sailing vessel with two stout masts, broad deep hull, raised stern quarterdeck, barred shields hung on sides, muted brick-red and dull celadon sails with a simple lifting-bar/three-spillway mark. Weathered tarred oak, bronze fasteners, black chains, municipal human crew; small OPEN-DECK WOODEN BALLISTA, never cannons/firearms/gunports. No magical powers or modern engines. Very IMPORTANT composition: ship occupies only the central60percent of the image, leaving at least20percent completely transparent empty space on EACH of all four sides; topmast finial and full long bow and stern must be entirely inside with that padding. Do NOT crop mast tips or hull. Broad stepped coarse pixel clusters designed for eventual96x96 native sprite, matte weathered dark fantasy aesthetic, soft upper-left flat pixel lighting, no shiny toy rendering. Real zero-alpha PNG background everywhere outside hull/rigging/crew. No background glow, haze, cast shadow, sea, scenery, tile, text, labels, sheet or multiple ships. Keep all fine ropes sparse; primary sail and hull silhouette must remain readable at96x96.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.red_sluice/v2/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e85c8ec28b5a5c142327346e7fa24d8b0ec37f0cf52ec4578366952ee2dec0a8",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.red_sluice-v2.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.red_sluice-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:58:51Z",
+  "referenceHashes": [
+    "6dc397f4850945fa1a24bde64dbc65ce9ad6da677768320e44af57e61bdf24ac",
+    "cef79d8524cc0a78d93837a569607197b766d4e3f328e42b742b36d156acfdbc"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "f2e53c6ab7c1bf3637c1a6ab587403a955de1c16681a2a88e327d389ca0ecd0e",
+      "inputHash": "6dc397f4850945fa1a24bde64dbc65ce9ad6da677768320e44af57e61bdf24ac",
+      "outputHash": "58e491bd2295d913e31bfee169163479aa9faa03d2b3195cbd92acd0446e2305"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

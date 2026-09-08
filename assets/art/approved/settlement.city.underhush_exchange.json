@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.underhush_exchange",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.city for Theandril, Underhush Exchange.\nSubject: ONE complete grand developed civic settlement, eleven to thirteen distinct connected building/roof masses around a broad major court hall, full inhabited enclosure, gates and multiple protected work courts. Strong larger denser city silhouette than town; no single giant tower. All buildings belong to one compact complete cluster.\nCulture-specific identity: Low keyhole arches, nested vent stacks, broad squat dwelling halls and covered exchange courts. Clay-brown stone, pewter braces, pale-lime plaster, tiny amber markers; not Covenant square buttresses or Morrow living roofs.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 128x128 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "settlement.city.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.underhush_exchange/e70781e0f72608a666e847e9741a36427fcab0c77f5e7087d30b02c8244588eb/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "4ce1304a1c120f787676426c0f11df29b97fa8a8205dfafe9dbb2bccdea28a35",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.city.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.city.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:27:32Z",
+  "referenceHashes": [
+    "d18b1c08d0b1471842b7ab45c372a151516a203b99178da9c51ab5f2e28f4d20",
+    "270e7257647ed006ea610171e2b7f1119b37e825c038d1de0b477be76878a87a"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "bba7d14684ccbf54746446e2fb33f2251550f3761423d729b1215cf8cd5087fa",
+      "inputHash": "d18b1c08d0b1471842b7ab45c372a151516a203b99178da9c51ab5f2e28f4d20",
+      "outputHash": "7436142e0bf7369f8f04078b198e12c74971aa8e9baa094589005c5decd1e61a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "7436142e0bf7369f8f04078b198e12c74971aa8e9baa094589005c5decd1e61a",
+      "outputHash": "78a34a9bc5932b37b665e8c0c95be51684f2b0b986df5680efce9b61cc530265"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "78a34a9bc5932b37b665e8c0c95be51684f2b0b986df5680efce9b61cc530265",
+      "outputHash": "4684ac787469a19ad5b552d61945bfe5d79d9f8c692193ccc23854eefff7587e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "ee0adc6a241f141e1bc40815275fb7e8f3180924c0a083c3816ef154e52392aa",
+      "outputHash": "a5c1e0f4d9716ee1bc2444fc260b84fc07fc94169d8d039e742fee4234317ff9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "a165069cf17c96603e219c40be3db58c76f8e7f13fbd43074ae415e3847df961",
+      "outputHash": "6d70a86a198cf1aa517a6d00dd98e9cfd02949a1fc834a61df389744d3e601cf"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "d4b3e179dc526694122738d64c8a1363ed72d9dbfd7aa38e6347de6eb718a2b9",
+      "outputHash": "ca68b7eef76c0c9174df54944cd3e68377b88c781fe0d800bcc147081c69d81e"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:32.261Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Large128px stepped archive/work compound retains three small ordinary static chimney wisps; these are source detail, not implemented smoke animation. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate e70781e0f72608a666e847e9741a36427fcab0c77f5e7087d30b02c8244588eb; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/bb353728a8ebaba60889e87c496f4c904d3f3831820565d2cdb634a2d1db3460.png"
+    ],
+    "inputHash": "cc2b100d75e79ce13abe073f38ce8f9d1337316cd4010ac4b7ef6faaa529d133"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

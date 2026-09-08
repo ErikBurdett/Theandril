@@ -11,7 +11,7 @@ function issue(state: GameState, command: GameCommand) { const result = applyCom
 function refresh(state: GameState): void { for (const owner of state.factions) refreshLandKnowledge(state, owner.id, indexes(state).visible.get(owner.id)!); }
 function restore(state: GameState): GameState { const mirror = deserializeGame(serializeGame(state)); expect(stateHash(mirror)).toBe(stateHash(state)); return mirror; }
 function scenario(biome = 1, terrain = 1): GameState {
-  const state = createGame({ seed: 17, size: 'tiny', factionCount: 2, pace: 'short' });
+  const state = createGame({ seed: 17, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4 });
   // Authored local sites isolate economics; ordinary founding establishes all
   // territory, visibility and capital state. This is not a generated balance run.
   for (const cell of cellsWithin(state, state.armies['army.1']!.cell, 3)) {

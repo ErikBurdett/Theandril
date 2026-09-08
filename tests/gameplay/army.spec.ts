@@ -1,4 +1,4 @@
-import { openRealmAffairs, openProduction } from './ui-navigation';
+import { closeManagement, selectFromRegistry, openSelectedOrders, openRealmAffairs, openCampaignJournal, openProduction } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { createArmyFormation, createGame, deserializeGame, serializeGame, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -7,7 +7,7 @@ const ORIGIN = 500;
 function formation(state: GameState, unitId: string) { return createArmyFormation(`army.${state.nextId++}`, unitId); }
 /** Authored formations enter through the production save validator, never a browser mutation hook. */
 function rosterCampaign(kind: 'reorganize' | 'battle' | 'capacity' = 'reorganize'): GameState {
-  const state = createGame({ seed: 20260905, size: 'tiny', pace: 'short', factionCount: 2 });
+  const state = createGame({ generatorVersion: 4, seed: 20260905, size: 'tiny', pace: 'short', factionCount: 2 });
   state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60); state.world.waterDepth.fill(0);
   const first = state.armies['army.1']!; const second = state.armies['army.2']!;
   const guard = formation(state, 'unit.guard'); guard.strength = 40; guard.morale = 65; guard.fatigue = 7;
@@ -30,14 +30,16 @@ async function importRoster(page: Page, state = rosterCampaign()) {
   await page.goto('/');
   await page.locator('input[type=file]').setInputFiles({ name: 'formation-column.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
-  await page.getByTestId('army-registry').getByRole('button', { name: /Roadguard column/ }).click();
+  await selectFromRegistry(page, 'armies', /Roadguard column/); await openSelectedOrders(page);
 }
 async function openComposition(page: Page) {
+  await openSelectedOrders(page);
   const panel = page.getByTestId('army-composition');
   if (!await panel.evaluate(element => (element as HTMLDetailsElement).open)) await panel.locator('summary').click();
   return panel;
 }
 async function saveReload(page: Page): Promise<void> {
+  await closeManagement(page);
   await page.getByText('Campaign & settings', { exact: true }).click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
   await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
@@ -72,7 +74,7 @@ test('mixed armies merge, split and transfer stable formations without refreshin
   await panel.getByRole('button', { name: 'Transfer selected formations', exact: true }).click();
   await expect.poll(() => page.evaluate(id => window.__THEANDRIL__?.getSummary()?.ownArmies.find(army => army.id === id)?.formations.length, patrol!.id)).toBe(2);
   await saveReload(page);
-  await page.getByTestId('army-registry').getByRole('button', { name: /Farlook patrol/ }).click();
+  await selectFromRegistry(page, 'armies', /Farlook patrol/); await openSelectedOrders(page);
   panel = await openComposition(page);
   await expect(panel).toContainText('Founding consumes one caravan formation only');
   await panel.screenshot({ path: testInfo.outputPath('mixed-army-roster.png') });
@@ -93,9 +95,11 @@ test('mixed formation battles deploy each real role and preserve exact losses th
   await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.wars.length)).toBe(1);
+  await openSelectedOrders(page);
   await page.getByRole('button', { name: 'Attack Reedbound rear guard (army.4)', exact: true }).click();
   const battle = page.getByTestId('battle-panel');
   await expect(battle).toBeVisible();
+  await battle.locator('summary').filter({ hasText: 'Formation details & round account' }).click();
   await expect(battle.getByRole('table', { name: 'Attacking formations', exact: true }).locator('tbody tr')).toHaveCount(4);
   await expect(battle).toContainText('Ash pike company'); await expect(battle).toContainText('Charter outriders');
   await battle.getByRole('button', { name: 'Brace', exact: true }).click();
@@ -103,6 +107,7 @@ test('mixed formation battles deploy each real role and preserve exact losses th
   await saveReload(page);
   await battle.screenshot({ path: testInfo.outputPath('mixed-formation-battle.png') });
   await battle.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
+  await openCampaignJournal(page);
   const report = page.getByTestId('battle-report'); await expect(report).toBeVisible();
   const record = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.battleReports.at(-1));
   expect(record?.formationBindings).toHaveLength(6);
@@ -124,7 +129,7 @@ test('twelve-formation limits and proper-subset splitting stay explicit in the n
   await expect(panel.getByRole('button', { name: 'Transfer selected formations', exact: true })).toBeDisabled();
   await expect(panel.getByRole('button', { name: 'Split selected formations', exact: true })).toBeDisabled();
   await expect(panel).toContainText('The combined army exceeds its 12-formation command capacity.');
-  await page.getByTestId('army-registry').getByRole('button', { name: /Iron detachment/ }).click();
+  await selectFromRegistry(page, 'armies', /Iron detachment/); await openSelectedOrders(page);
   panel = await openComposition(page);
   await expect(panel.getByRole('checkbox')).toHaveCount(12);
   for (const checkbox of await panel.getByRole('checkbox').all()) await checkbox.check();
@@ -138,7 +143,7 @@ test('twelve-formation limits and proper-subset splitting stay explicit in the n
   await page.screenshot({ path: testInfo.outputPath('army-capacity-narrow.png') });
   await split.click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ownArmies.find(army => army.name === 'Narrow march')?.formations.length)).toBe(11);
-  await page.getByTestId('army-registry').getByRole('button', { name: /Iron detachment/ }).click();
+  await selectFromRegistry(page, 'armies', /Iron detachment/); await openSelectedOrders(page);
   panel = await openComposition(page);
   await panel.getByRole('checkbox').check();
   const detached = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ownArmies.find(army => army.name === 'Narrow march'));

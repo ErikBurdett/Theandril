@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.emberwake_convocation",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.village for Theandril, Emberwake Convocation.\nSubject: ONE small complete inhabited village cluster of three modest buildings around a little open working court. Clear low simple roofs, one small store and a practical low enclosure. This is the smallest settlement stage, no great hall, no high tower, no tall flag.\nCulture-specific identity: Low firebreak compounds, split-vent clay kilns, seed stores and broad ceramic roofs. Ash-white washed clay, smoked-orange roof tiles, muted sulfur-green shutters. Recovery workshops rather than Cinder military walls.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "settlement.village.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.village.emberwake_convocation/16e11d3ebdf5bd54d007985d66675a0cec2fc678c3450773d0f8c45de4ff525c/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9df190655a2889b6abefc8f0226cb412f71f44663723b3961d629ce506deb9bd",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.village.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.village.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:49:43Z",
+  "referenceHashes": [
+    "dd57ea32b62f4d80a72fcef911720a44542dc123eb711faa360d4f8bbf15f60a",
+    "4855245ab875d3753978108063eab8913b78e08b9641bb779ac9aef28bb92d22"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "8b5fb5e372b1cdcf2518316090dc694fa1146273ae6a22552d3fa0dfeeab8dd4",
+      "inputHash": "dd57ea32b62f4d80a72fcef911720a44542dc123eb711faa360d4f8bbf15f60a",
+      "outputHash": "24d7af23548f42f1b6628d9d4d0bb21da30f57c078ce4736fbe44c74a89463d0"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "24d7af23548f42f1b6628d9d4d0bb21da30f57c078ce4736fbe44c74a89463d0",
+      "outputHash": "5eda56844f66fce02e405a2dc3e9fd404ccf20f116835ebea06ea7c94bb1f14a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "5eda56844f66fce02e405a2dc3e9fd404ccf20f116835ebea06ea7c94bb1f14a",
+      "outputHash": "8db7a9c9a6d8e31c946939151dd9fc8507ef25b5c2a24c0051f04bd02e7e8d61"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "51642cda7ca94f40dd7bc88a72753a1049aaa532c6d04015d20ecdae30d976cf",
+      "outputHash": "4e505f1a322f5f23a97c1ebfec941c4154f74daa29c198bce2eada0ffc8f3136"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "9e92c0a582548c8e1757330c659a1e301c720741dbec8ab59ffa5d4a0778f3e7",
+      "outputHash": "6da43ceb73f9b73918720fe7aac5ed5a8e74c77ed811279ebbd4ed4e9a1de613"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "075e6cead1bc0dc1e604167ad935fdf789c654a553f1c2dfa007243b4966c346",
+      "outputHash": "8ee09ae9e704088dc95698e2443b54843aa31e6a6dc70fccaff48d237ea508c8"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.village.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:29.664Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Three low working structures with two kilns and seed storage create the compact village. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 16e11d3ebdf5bd54d007985d66675a0cec2fc678c3450773d0f8c45de4ff525c; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/be2a1f254bbf965941c25130ec1d10b6c4413561cb7b4129bced31ef745704d8.png"
+    ],
+    "inputHash": "239f4badd8b01b85b3161d2cc0a5edb28e6a0a3a228c1b1b0371a84c8a44d5e7"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

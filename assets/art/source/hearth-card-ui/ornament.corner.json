@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "id": "ornament.corner",
+  "type": "effect",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ornament.corner"
+  ],
+  "prompt": "Use case: stylized-concept. Production high quality pixel art interface animation sprite sheet for Theandril medieval ancient tome trading card tavern. 1536x1024 landscape, exact FOUR columns and FOUR rows. Genuinely transparent background, no backdrop, no grid, no lettering, no checkerboard. Each row depicts ONE object in four sequential animation frames; consistent scale and generous margins. Row1: richly ornate dark forest green leather grimoire with aged gold metal corner pieces and parchment pages, opening from closed cover to half open to pages turning to fully open book. Row2: a sealed upright dark green trading card booster sleeve tied with gold cord and a ruby wax seal, then cord loosening, wrapper splitting, then three face-down ornate cards emerging. Row3: face-down upright trading card, elaborate gold filigree frame, black green velvet center with tiny blue lich-flame insignia, FOUR frames of a small crisp glint traveling around the unchanged ornate frame, no haze over central card design. Row4: elaborate antique gold ornamental corner flourish of curling acanthus leaves and a small ruby, four frames of a small moving gem glint, identical silhouette; each is an L-shaped top left corner ornament with empty transparent center. Rich detailed pixel clusters, no smooth vector outlines, warm candlelight, ancient precious materials, cohesive serious cozy medieval fantasy. No portraits and no readable text.\n",
+  "frames": [
+    {
+      "id": "ornament.corner/active/se/0",
+      "direction": "se",
+      "state": "active",
+      "index": 0,
+      "durationMs": 180,
+      "pivot": [
+        64,
+        120
+      ],
+      "sourcePath": "assets/art/animation/frames/ornament.corner-0.png"
+    },
+    {
+      "id": "ornament.corner/active/se/1",
+      "direction": "se",
+      "state": "active",
+      "index": 1,
+      "durationMs": 180,
+      "pivot": [
+        64,
+        120
+      ],
+      "sourcePath": "assets/art/animation/frames/ornament.corner-1.png"
+    },
+    {
+      "id": "ornament.corner/active/se/2",
+      "direction": "se",
+      "state": "active",
+      "index": 2,
+      "durationMs": 180,
+      "pivot": [
+        64,
+        120
+      ],
+      "sourcePath": "assets/art/animation/frames/ornament.corner-2.png"
+    },
+    {
+      "id": "ornament.corner/active/se/3",
+      "direction": "se",
+      "state": "active",
+      "index": 3,
+      "durationMs": 180,
+      "pivot": [
+        64,
+        120
+      ],
+      "sourcePath": "assets/art/animation/frames/ornament.corner-3.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "active": {
+        "frames": 4,
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e92255fd40e62fd072f1fc76198cb270af6b4785c4a2302e468009bad7b0372b",
+    "sourceRefs": [
+      "assets/art/source/animation/interface-original.png",
+      "assets/art/source/animation/interface-prompt.txt"
+    ],
+    "licenseNotes": [
+      "Original generated Hearth & Card animation, not a canonical historical portrait. No native editor export claimed."
+    ]
+  },
+  "createdAt": "2026-09-07T05:55:33.851Z",
+  "referenceHashes": [
+    "3a5d30b0b6bd96e4457c9de33d4c68d87059f0f80c91363d69ffbbd347aa441f"
+  ],
+  "processing": [
+    {
+      "tool": "hearth-animation-extraction",
+      "version": "1",
+      "profile": "shared-scale-foot-registration-alpha220-nearest",
+      "settingsHash": "79215c49be9254c91bab30535858503dff91812356b7c1edce67aa8559e93e0d",
+      "inputHash": "3a5d30b0b6bd96e4457c9de33d4c68d87059f0f80c91363d69ffbbd347aa441f",
+      "outputHash": "e0bb984cb67dccc52766a56fddd9fef3c4c6502e7f7a170fba796bbebf41cad8"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/animation/reports/ornament.corner.json"
+  },
+  "review": {
+    "reviewer": "Codex visual review",
+    "reviewedAt": "2026-09-07T05:57:43.731Z",
+    "notes": "Four L-shaped gold leaf and gem ornaments have consistent silhouettes and moving highlights, with transparent inner area for readable UI content.",
+    "evidencePaths": [
+      "assets/art/animation/reviews/ornament.corner.png"
+    ],
+    "inputHash": "01af735c28bded283945ec8c0bf4d49f8a2b06df92898283befc5e3f99bbcd3a"
+  },
+  "constraints": {
+    "transparentPadding": 4,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 112,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

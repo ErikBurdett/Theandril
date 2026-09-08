@@ -6,6 +6,8 @@ import type { Army, CampaignBattle, CommandResult, DomainEvent, GameState } from
 import { cellsWithin, indexes } from './visibility';
 import { rulesVersion } from './rules';
 import { armyDomain, carriedArmyBlocker } from './naval';
+import { WAYKEEPER_APTITUDES } from '@theandril/content';
+import { characterSpellIds, personalAptitudesSchema } from './magic';
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 const bounded = (max: number) => z.number().int().min(0).max(max);
@@ -17,13 +19,15 @@ export const legacyCharacterSchema = z.object({
   location: z.discriminatedUnion('kind', [z.object({ kind: z.literal('army'), armyId: id }).strict(), z.object({ kind: z.literal('settlement'), settlementId: id }).strict()]).nullable(),
   mission: characterMissionSchema.nullable(),
 }).strict();
-export const characterSchema = legacyCharacterSchema.extend({ learnedSkillIds: z.array(id).max(16) }).strict();
+export const schema13CharacterSchema = legacyCharacterSchema.extend({ learnedSkillIds: z.array(id).max(16) }).strict();
+export const characterSchema = schema13CharacterSchema.extend({ aptitudes: personalAptitudesSchema.optional() }).strict();
 export type Character = z.infer<typeof characterSchema>;
-export type CharacterRole = 'marshal' | 'surveyor' | 'engineer';
+export type CharacterRole = 'marshal' | 'surveyor' | 'engineer' | 'waykeeper';
 export type CharacterStatus = 'ready' | 'mission' | 'wounded' | 'dead';
 export interface CharacterSummary { id: string; name: string; definitionId: string; role: CharacterRole; status: CharacterStatus; rank: number; experience: number; skillId: string | null; learnedSkillIds: string[]; woundedTurns: number }
 export interface CharacterMissionOption { missionId: string; name: string; description: string; duration: number; coinCost: number; risk: 'low' | 'exposed' | 'dangerous'; riskText: string; effectText: string; targetCell?: number; settlementId?: string; canStart: boolean; blocker: string | null }
 export interface CharacterView extends Character, CharacterSummary {
+  spellIds?: string[];
   cell: number | null;
   assignmentOptions: { armyId: string; label: string; canAssign: boolean; blocker: string | null }[];
   unassignmentOptions: { settlementId: string; label: string; canUnassign: boolean; blocker: string | null }[];
@@ -34,7 +38,8 @@ export interface CharacterRecruitmentOption { settlementId: string; definitionId
 export interface CommanderAbilityOption { characterId: string; armyId: string; abilityId: string; name: string; effectText: string; used: boolean; canUse: boolean; blocker: string | null }
 const leadershipSchema = z.object({ attack: bounded(20), armor: bounded(20) }).strict();
 export const legacyCharacterBattleSnapshotSchema = z.object({ characterId: id, armyId: id, factionId: id, name, definitionId: id, skillId: id.nullable(), experience: bounded(1_000_000), woundedTurns: bounded(20), leadership: leadershipSchema, rallyRestore: bounded(100) }).strict();
-export const characterBattleSnapshotSchema = legacyCharacterBattleSnapshotSchema.extend({ learnedSkillIds: z.array(id).max(16) }).strict();
+export const schema13CharacterBattleSnapshotSchema = legacyCharacterBattleSnapshotSchema.extend({ learnedSkillIds: z.array(id).max(16) }).strict();
+export const characterBattleSnapshotSchema = schema13CharacterBattleSnapshotSchema.extend({ aptitudes: personalAptitudesSchema.optional(), spellIds: z.array(id).max(8).optional() }).strict();
 export type CharacterBattleSnapshot = z.infer<typeof characterBattleSnapshotSchema>;
 export const characterAftermathSchema = z.object({ characterId: id, name, outcome: z.enum(['survived', 'wounded', 'dead']), experience: bounded(1_000_000), woundedTurns: bounded(20) }).strict();
 export type CharacterAftermath = z.infer<typeof characterAftermathSchema>;
@@ -133,7 +138,7 @@ function townObjection(state: GameState, factionId: string, settlementId: string
 }
 function recruitmentObjection(state: GameState, factionId: string, settlementId: string, definitionId: string): string | null {
   const definition = definitions.get(definitionId);
-  if (!definition) return 'Unknown character appointment.';
+  if (!definition || (rulesVersion(state) < 14 && definition.role === 'waykeeper')) return 'Unknown character appointment.';
   const objection = townObjection(state, factionId, settlementId); if (objection) return objection;
   if (state.victory || state.battle || state.pendingCapture) return 'Resolve the current campaign decision first.';
   if (charactersForFaction(state, factionId).filter(item => !item.dead).length >= MAX_LIVING_CHARACTERS) return 'This faction already supports sixty-four living characters.';
@@ -221,6 +226,7 @@ export function recruitCharacter(state: GameState, factionId: string, settlement
   const error = recruitmentObjection(state, factionId, settlementId, definitionId); if (error) return fail(error);
   const faction = treasury(state, factionId)!; const definition = definitions.get(definitionId)!; const next = state.nextId;
   const character: Character = { id: `character.${next}`, factionId, definitionId, name: characterName(faction.definitionId, next), experience: 0, skillId: null, learnedSkillIds: [], woundedTurns: 0, dead: false, location: { kind: 'settlement', settlementId }, mission: null };
+  if (definition.role === 'waykeeper') character.aptitudes = { ...WAYKEEPER_APTITUDES };
   faction.treasury -= definition.coinCost; state.nextId++; state.characters[character.id] = character; rebuildCharacterIndexes(state);
   return { ok: true, events: [notice(state, character, 'character_recruited', `${character.name} was appointed ${definition.name} for ${definition.coinCost} coin.`)] };
 }
@@ -363,7 +369,9 @@ export function armyCharacterLeadership(state: GameState, armyId: string): { att
   return charactersForArmy(state, armyId).reduce((sum, character) => { const effect = characterLeadership(character, rulesVersion(state)); return { attack: sum.attack + effect.attack, armor: sum.armor + effect.armor }; }, { attack: 0, armor: 0 });
 }
 export function snapshotArmyCharacters(state: GameState, armies: Army[]): CharacterBattleSnapshot[] {
-  return armies.flatMap(army => charactersForArmy(state, army.id).map(character => ({ characterId: character.id, armyId: army.id, factionId: character.factionId, name: character.name, definitionId: character.definitionId, skillId: character.skillId, learnedSkillIds: rulesVersion(state) >= 8 ? [...character.learnedSkillIds] : [], experience: character.experience, woundedTurns: character.woundedTurns, leadership: characterLeadership(character, rulesVersion(state)), rallyRestore: role(character) === 'marshal' && !character.woundedTurns ? (COMMANDER_ABILITIES.find(item => item.id === 'ability.rally')?.moraleRestore ?? 0) + characterSkillEffects(character, rulesVersion(state)).rallyBonus : 0 }))).sort((a, b) => a.characterId < b.characterId ? -1 : 1);
+  return armies.flatMap(army => charactersForArmy(state, army.id).map(character => ({ characterId: character.id, armyId: army.id, factionId: character.factionId, name: character.name, definitionId: character.definitionId, skillId: character.skillId, learnedSkillIds: rulesVersion(state) >= 8 ? [...character.learnedSkillIds] : [], experience: character.experience, woundedTurns: character.woundedTurns, leadership: characterLeadership(character, rulesVersion(state)), rallyRestore: role(character) === 'marshal' && !character.woundedTurns ? (COMMANDER_ABILITIES.find(item => item.id === 'ability.rally')?.moraleRestore ?? 0) + characterSkillEffects(character, rulesVersion(state)).rallyBonus : 0,
+    ...(rulesVersion(state) >= 14 && character.aptitudes ? { aptitudes: { ...character.aptitudes }, spellIds: characterSpellIds(character.aptitudes, state.arcaneResearch[character.factionId] ?? []) } : {}),
+  }))).sort((a, b) => a.characterId < b.characterId ? -1 : 1);
 }
 export function finishBattleCharacters(state: GameState, battle: CampaignBattle, events: DomainEvent[]): void {
   if (battle.rulesVersion < 7) return;
@@ -440,14 +448,14 @@ export function getCharacterObservation(state: GameState, factionId: string): { 
         return { missionId, name: mission.name, description: mission.description, duration: mission.duration, coinCost: mission.coinCost, risk: failureChance ? 'dangerous' as const : 'exposed' as const, riskText: failureChance ? `The operation may fail and wound its agent for ${mission.woundTurns} turns. Combat or displacement interrupts it without refund.` : 'The army must remain in position; combat or displacement interrupts the mission without refund.', effectText, ...(cell === null ? {} : { targetCell: cell }), ...(settlementId ? { settlementId } : {}), canStart: blocker === null, blocker };
       });
     });
-    return { ...character, location: character.location ? { ...character.location } : null, mission: character.mission ? { ...character.mission } : null, ...summary(character), cell,
+    return { ...character, ...(character.aptitudes ? { aptitudes: { ...character.aptitudes }, spellIds: characterSpellIds(character.aptitudes, state.arcaneResearch[factionId] ?? []) } : {}), location: character.location ? { ...character.location } : null, mission: character.mission ? { ...character.mission } : null, ...summary(character), cell,
       assignmentOptions: coLocated.map(army => { const blocker = assignmentObjection(state, factionId, character, army.id); return { armyId: army.id, label: army.name, canAssign: blocker === null, blocker }; }),
       unassignmentOptions: receivingTowns.map(town => { const blocker = unassignmentObjection(state, factionId, character, town.id); return { settlementId: town.id, label: town.name, canUnassign: blocker === null, blocker }; }),
       missions: missionOptions,
       promotions: definition.skillIds.map(skillId => { const skill = skills.get(skillId)!; const blocker = promotionObjection(state, factionId, character, skillId); return { skillId, name: skill.name, description: skill.description, experienceCost: skill.experienceCost, canPromote: blocker === null, blocker, acquired: ownedSkills(character).includes(skillId), requiresAll: [...skill.requiresAll], requiresAny: [...skill.requiresAny], branch: skill.branch, tier: skill.tier, exclusiveGroup: skill.exclusiveGroup }; }),
     };
   });
-  const characterRecruitment = Object.values(state.settlements).filter(town => town.factionId === factionId).sort(byId).flatMap(town => CHARACTER_DEFINITIONS.map(definition => { const blocker = recruitmentObjection(state, factionId, town.id, definition.id); return { settlementId: town.id, definitionId: definition.id, name: definition.name, role: definition.role, coinCost: definition.coinCost, upkeep: definition.upkeep, canRecruit: blocker === null, blocker }; }));
+  const characterRecruitment = Object.values(state.settlements).filter(town => town.factionId === factionId).sort(byId).flatMap(town => CHARACTER_DEFINITIONS.filter(definition => rulesVersion(state) >= 14 || definition.role !== 'waykeeper').map(definition => { const blocker = recruitmentObjection(state, factionId, town.id, definition.id); return { settlementId: town.id, definitionId: definition.id, name: definition.name, role: definition.role, coinCost: definition.coinCost, upkeep: definition.upkeep, canRecruit: blocker === null, blocker }; }));
   return { characters, characterRecruitment };
 }
 export const characterUpkeep = (state: GameState, factionId: string): number => charactersForFaction(state, factionId).reduce((sum, item) => sum + (item.dead ? 0 : definitions.get(item.definitionId)?.upkeep ?? 0), 0);

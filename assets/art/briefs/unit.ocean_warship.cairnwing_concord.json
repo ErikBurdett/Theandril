@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.cairnwing_concord",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.cairnwing_concord"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Cairnwing Concord, role unit.ocean_warship.\nSUBJECT: ONE complete substantial ocean warship, deep high-sided broad hull, armored bow and elevated stern gallery, two short masts with separated compact sails and fortified deck. Cultural materials/cloth, clearly heavier than coastalgalley. Southeast isometric bowright, fullhull and sails insideframe, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Tawny feathers, oxblood cord, oxidized copper, pale scree. Narrow harnesses, folded feathered forearms, ribbed narrow shields, ledge tools. Bracketed low stone halls, terraced load courts and wind-braced lift housings integrated into freestanding settlement silhouette; no giant scenery rock or inaccessible floating castle.\nPEOPLE if character or rider: Tool-using feathered cairnfolk with short avian beaks, two legs and two dexterous arms with folded forearm feather fans; human port households. No spread wings, flying poses or implied flight.\nHERALDRY if UI or flag: A single stepped feather with three unequal notches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.cairnwing_concord/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.cairnwing_concord/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "848f2f4a484ebdf02a3a5df6b7dc9e1010ca4b32943830263e0bf4daf5b4c6fa",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.cairnwing_concord-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.cairnwing_concord-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:07:33Z",
+  "referenceHashes": [
+    "87eddc06b95aec64904149462ffcaf9e9e2606709fc175e419fd9f882a202be4",
+    "c922a4ed152b317a48ea5169cef65011594e077d72c9793614d137a2900c0b17"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "df742932eea7a8c5818d31ad99cd9e34431500a4aa0d574f03b9a560c338d035",
+      "inputHash": "87eddc06b95aec64904149462ffcaf9e9e2606709fc175e419fd9f882a202be4",
+      "outputHash": "bd9d9cda3107d6bb881969370b59f649acdbce69c5027ee30b7787867d92ef4a"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

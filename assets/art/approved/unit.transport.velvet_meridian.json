@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.velvet_meridian",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.velvet_meridian"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Velvet Meridian, role unit.transport.\nSUBJECT: ONE complete transport ship, broad short unarmed cargo hull, readable open cargo deck and small covered passenger cabin, single small furled sail and short mast. Cultural materials and painted cloth; stout transport silhouette distinct fromwarships. Southeast isometric view bowtowardright, dry isolated entirehull includingkeel, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Madder red, smoke silver, blue-black woven cloth. Weighted long hems, small calibrated discs, half-round shields and layered soft scholar coats. Low round slate observatories, cloth-measure galleries, concentric open courtyards and dark-curtained study halls; no glowingastralwizardtowers.\nPEOPLE if character or rider: Human weavers, night navigators and school households; practical escorts and scholars.\nHERALDRY if UI or flag: A plumb line crossing three unequal stitches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "unit.transport.velvet_meridian/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.velvet_meridian/c05cfeecf8f8f525f2445fbb3b07f3b5488c27917769208128ea20cc509d37db/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c0dd8e8e6165ef70248b7980a7b4d36cd36eb4f7edfebe3818b29e370c1e973e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.velvet_meridian-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.velvet_meridian-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:32:38.000Z",
+  "referenceHashes": [
+    "8604fe9b8e74000fb92f9adaa9a842eaac74c3007f8689810c7ff82590a3fc3e",
+    "f972c6306dd72749edc4257a6190f9a6123d402b207e5cb710be181d1639a45d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "864965e1c1cdf9696fd5c9fe7abab89708e866849c9e4e1b96c12d09ea621eb3",
+      "inputHash": "8604fe9b8e74000fb92f9adaa9a842eaac74c3007f8689810c7ff82590a3fc3e",
+      "outputHash": "546c9dbe4011fd020da44512b1357e53451f9cf76db0bbf8049abcbe5b6eacad"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "546c9dbe4011fd020da44512b1357e53451f9cf76db0bbf8049abcbe5b6eacad",
+      "outputHash": "3b3ed30cc1fc9f86f824e2fd32e71f351178b34276015d5bdb985e2538d5559a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3b3ed30cc1fc9f86f824e2fd32e71f351178b34276015d5bdb985e2538d5559a",
+      "outputHash": "5066aa70910fdedb4d77e64378de80864696df6b6865cf34cc23a6a4d641b698"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "8d3b3b47a36fe6458c3a4a698bd0fb8fab6aaaedb9bf47eb75c0dbf40bd35201",
+      "outputHash": "e8f72b67d277030f7c77c599bd53c133aaa4a7b56a3daf0c8dbe9c52e5d848fa"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "f0663e58e75794aa558a69a4bd96f8e19ec84bedc513316000af403e63a0f4fc",
+      "outputHash": "fadbbbf4cb06ffa6421f96efae6963bb87934bba8464cc9355f79bfe3283ba5e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "661eb229e34be848dd804a4eda2286a2833dc6ddd3782cbf6fbda4f5581761a1",
+      "outputHash": "cb978937d56292c7f994402f5fd565ca2d1290b198e7831face1a7c7d13e03aa"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.velvet_meridian.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:20:44.523Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Broad open cargo hold, covered cabin and furled sail distinguish transport. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate c05cfeecf8f8f525f2445fbb3b07f3b5488c27917769208128ea20cc509d37db; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/f570ae05af4cd895341c7c9d3db994c6c72f9b4ae39867aab1eca25b66ac9853.png"
+    ],
+    "inputHash": "621b5c34d6af0c50a882ce1f01484496fef521eca5f44fc26804d98f5ac2142b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

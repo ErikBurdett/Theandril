@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.lantern_hospices",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.lantern_hospices"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Lantern Hospices, role unit.spearman.\nSUBJECT: ONE adult disciplined spearman, upright practical spear fully contained, narrow shield, clear two feet and tool hands. Spear not absurdly tall; whole silhouette including spear54px at native64x64, pivot32,56.\nCULTURE: Beeswax yellow, washed blue, soot-black lantern cages, plain linen. Hooded service coats, broad shields, shielded lamps not glowing magical haloes. Open hospice courtyards with wide ventilated slate roofs, covered galleries, clean cisterns and small enclosed lamp niches.\nPEOPLE if character or rider: Human care-house attendants and paid escorts; adultsturdyclothlayers, no religious caricatures.\nHERALDRY if UI or flag: A small hooded lamp framed by two protective shutters.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.spearman.lantern_hospices/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.spearman.lantern_hospices/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "52299b2a95ee559b05963a243066782188ef09c3755ba009105255382a3b7cf4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/unit.spearman.lantern_hospices-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/unit.spearman.lantern_hospices-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:37:06Z",
+  "referenceHashes": [
+    "ae6d79c48c98dc65cfdb3a99d3ee2a62811c45ef4d83bd5cc1f3061bab871495",
+    "dad9e40139942725fcb4a3b25553e088f7ca2d6b8e73ec3695746003c4083d45"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "69455ee10aa5ae7ebc1eea981208ed9963f2c107e706192676852295507c843a",
+      "inputHash": "ae6d79c48c98dc65cfdb3a99d3ee2a62811c45ef4d83bd5cc1f3061bab871495",
+      "outputHash": "6786e2f362c650308cad28a6e41137e747e7f42eb7ffc8ed9e11c18ef23ba01d"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

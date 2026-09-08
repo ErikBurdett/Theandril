@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.brine_choir",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.guard for Theandril, Brine Choir.\nSubject: One adult guard in a planted ready stance, practical close armor, short straight sword held downward and a broad readable faction-specific shield. No attack swing.\nCulture-specific identity: Adult brinefolk humanoid with matte blue-grey skin, small folded neck fins, broad fin-fold collar, normal two legs and visible dexterous humanlike tool-hands. A practical shore citizen, not a fish-tailed creature. Coral-clay accents, pale eelgrass cloth, wet-slate armor, matte shell inlay and practical woven salt-cloaks. Broad fin-fold collar and low crescent shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "unit.guard.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard.brine_choir/5b3a0102dd6db00efd8d1cf473dde15136957d660720103a22cfe328749c02a5/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f50951d8380f451641984f8deefaa31c843a2732df2c6a9ec7d6761411fdd266",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.guard.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.guard.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:06:50Z",
+  "referenceHashes": [
+    "2d07aa4c6ba3bb9c54a57d180d163e7028ee8ee50dbdbd03a5c8481ed99dcdce",
+    "98d0b75beab5546c9b3e1f24f2a9b63686b81668b542ba4c89006168f785866c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "6c3d7a37109003067493bff649dd36a577bb861b0258ae4663b2aea533f7a0d1",
+      "inputHash": "2d07aa4c6ba3bb9c54a57d180d163e7028ee8ee50dbdbd03a5c8481ed99dcdce",
+      "outputHash": "2850e6901211e9dd2507cd782f843021bd05ab1c301f49751d817c663cd8c86a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2850e6901211e9dd2507cd782f843021bd05ab1c301f49751d817c663cd8c86a",
+      "outputHash": "cf9486535341c59c7179db5f80a93f11f1f08c68b8526a4766603a02f45e7676"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "cf9486535341c59c7179db5f80a93f11f1f08c68b8526a4766603a02f45e7676",
+      "outputHash": "1535c691062e62fb522b73e84b947fab9e5687a3e3be893bf86994db53e096c2"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "89043f660f8c1f4919329d33d0de7518a888da573ce4f331216d7cbd28704b3c",
+      "outputHash": "6236b53592dbcc117802dcbbe7e5d5dc205aab42be71a8a18bb9f8d0557e5472"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "87847196b84b12b899fa2b170c9f4fab160465ab6a21c91ac1fecfb33d56de83",
+      "outputHash": "43a4ed7a80c308f90e1cf44f522e16fb8746d7e367e164607a63296cca8ec94f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "aeb210acf00d4f0b4544f2c15bd29361aa0d430baff7badb411aab9d8f32111f",
+      "outputHash": "88dd07523212fd7d8651efcf0711149ca6c0deafd9be24c1244340f666828676"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.guard.brine_choir.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:18:10.644Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Narrow shell-trim shield and short sword identify guard; body distinct from broad heavy plate. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 5b3a0102dd6db00efd8d1cf473dde15136957d660720103a22cfe328749c02a5; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/c3dabdcda2b0f481601b9bc9ba723e76f1b177ead09f2274389d1c5c9225d35a.png"
+    ],
+    "inputHash": "417472cd879dd405fa826e53878e5d90ad128dd67d050c2e6720edb221ed58d9"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

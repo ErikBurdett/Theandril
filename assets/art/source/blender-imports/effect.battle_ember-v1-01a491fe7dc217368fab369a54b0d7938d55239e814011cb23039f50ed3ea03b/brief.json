@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.battle_ember",
+  "type": "effect",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.battle_ember"
+  ],
+  "prompt": "Original Theandril ember battlefield effect, authored and animated in Blender. Fixed native 64x64 canvas, registered effect center (32,32), retained keyframed scene, raw renders and exact palette normalization. 8 supplied cast frames; no synthesized pose, mirrored faction art or independently fitted frames. Exact production brief/profile and source evidence: assets/art/source/blender-battle/effect.battle_ember/v1/manifest.json.",
+  "frames": [
+    {
+      "id": "effect.battle_ember/cast/se/0",
+      "direction": "se",
+      "state": "cast",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ember/v1/native/frame-000.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/1",
+      "direction": "se",
+      "state": "cast",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ember/v1/native/frame-001.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/2",
+      "direction": "se",
+      "state": "cast",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ember/v1/native/frame-002.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/3",
+      "direction": "se",
+      "state": "cast",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ember/v1/native/frame-003.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/4",
+      "direction": "se",
+      "state": "cast",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ember/v1/native/frame-004.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/5",
+      "direction": "se",
+      "state": "cast",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ember/v1/native/frame-005.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/6",
+      "direction": "se",
+      "state": "cast",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ember/v1/native/frame-006.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/7",
+      "direction": "se",
+      "state": "cast",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ember/v1/native/frame-007.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "cast": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "b101de1bf9c52b47118dcb15972bcc15522cb5e428311bddf1b638be9b26add8",
+    "sourceRefs": [
+      "assets/art/source/blender-battle/effect.battle_ember/v1/manifest.json",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/source.blend",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/profile.json",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/recipe.py",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-000.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-001.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-002.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-003.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-004.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-005.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-006.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-007.png"
+    ],
+    "licenseNotes": [
+      "Original Theandril project-authored Blender geometry and keyframes; no third-party game sprites or copyrighted setting assets. The retained factory source/profile record identifies production dependencies. This import neither grants a new license nor substitutes for native/in-game visual review."
+    ]
+  },
+  "createdAt": "2026-09-07T21:05:32.852Z",
+  "referenceHashes": [
+    "01a491fe7dc217368fab369a54b0d7938d55239e814011cb23039f50ed3ea03b",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "fixed-camera-native-battle64",
+      "settingsHash": "72cd41ac97fb91976454eea112be8be870b35eafe3fde488f07c32e6f97ad1cd",
+      "inputHash": "01a491fe7dc217368fab369a54b0d7938d55239e814011cb23039f50ed3ea03b",
+      "outputHash": "e9470e4da5ae3ac610f658a1ca29cb12ffb480c29f01f9cc4fc3930630e5bd13"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 60,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

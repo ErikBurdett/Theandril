@@ -8,8 +8,8 @@ The reference present is **RR 2447**. The Mire Courts withdrew from the Roads in
 
 There are two deliberately different registers here:
 
-- **Part I: twelve registered cultures.** Their base identities are current setting canon. The current definitions, name pools, signed worked-biome affinities and paid AI recruitment preferences are implemented. Additional social detail and named character seeds below are writing foundations, not new runtime systems.
-- **Part II: twelve proposed cultures.** These are a cohesive development proposal toward twenty-four, not an assertion that twenty-four factions are playable. Their identifiers are proposed, not registered. None has a completed faction art kit or implemented faction-specific rules by virtue of this document. Their histories, peoples and regional names remain proposed until adopted explicitly.
+- **Part I: the original twelve registered cultures.** Their base identities are current setting canon. Definitions, name pools, signed worked-biome affinities and paid AI recruitment preferences are implemented. Additional social detail and named character seeds below are writing foundations, not new runtime systems.
+- **Part II: twelve newly registered cultures.** Their stable IDs, distinct biome affinities/cultivation targets, name pools and paid AI recruitment preferences are implemented in roster 4/schema 13. Their base societies and regional lore are adopted here, bringing the actual selectable roster to 24. All eighteen original art roles per culture are separately reviewed, published and covered by in-game acceptance; registration alone does not certify artwork, exclusive units or supernatural rules.
 
 The executable authorities are [factions](../../packages/content/src/factions.ts), [ecology](../../packages/content/src/ecology.ts) and [characters](../../packages/content/src/characters.ts). All current cultures can use the common land troops and ordinary naval rules; a culturally suggestive unit name is not an exclusive recruitment right. Current identity does not include faction-specific spells, magical immunities, undead logistics, flying armies or new diplomacy commands. Existing paid improvement/cultivation and officer rules are not supernatural aptitude. Consult the [implementation status](../IMPLEMENTATION_STATUS.md) for newly integrated systems, rather than treating a lore hook as a feature flag.
 
@@ -23,7 +23,7 @@ A faction is a political bargain, not an ancestry with one opinion. Households c
 
 The [fourteen traditions](<The Book of Broken Roads/Appendix — The Fourteen Traditions.md>) are inheritances of blood, place or pact; the nine disciplines are learned knowledge. A culture's favored traditions are neither a universal aptitude nor a monopoly. A scholar may know workings they cannot perform. No entry adds a fifteenth spring, makes Void comprehensible, proves a creation story, or declares the Witness Roads secretly restored.
 
-Geography in this bible supplies regional relationships, not fixed coordinates on generated maps. The Anvilheights, Deepfen, Reedfen margin, Middle Reach, Outer Isles, southern chalklands, Sallow and Glass Coast come from the Book. Proposed regions in Part II occupy its incompletely described margins; they do not become a sixth ancient great power by retrospective assertion. All campaign borders, founding dates, wars and victories still emerge from the actual campaign.
+Geography in this bible supplies regional relationships, not fixed coordinates on generated maps. The Anvilheights, Deepfen, Reedfen margin, Middle Reach, Outer Isles, southern chalklands, Sallow and Glass Coast come from the Book. Newly authored regions in Part II occupy its incompletely described margins; they do not become a sixth ancient great power by retrospective assertion. All campaign borders, founding dates, wars and victories still emerge from the actual campaign.
 
 Names favor pronounceable personal names and meaningful household, work or geographic names. Preserve the registered cultures' current name pools when writing game content. New pools need their own reviewed fragments; the few examples here are not a license to reuse one culture's generator for another.
 
@@ -240,13 +240,13 @@ These are the registered culture contributions to **worked** tiles, not their en
 | Sable Steppe | Steppe +1 food; desert +1 coin | Marsh −1 food; taiga −1 coin | Steppe, desert |
 | Morrow Spore | Temperate forest +1 knowledge; rainforest +1 food | Chalkland −1 food; ash scrub −1 coin | Temperate forest, rainforest |
 
-## Part II — Twelve proposed cultures toward twenty-four
+## Part II — Twelve newly registered cultures
 
-**Everything in this part is planned, not playable or art-complete.** Proposed IDs are reserved in this document only, not in a runtime registry. Biome interests are qualitative design directions, not balanced numerical bonuses or granted cultivation choices. Regional names and new ancestries are proposed additions, not claims that Ilthen already attested them. Each concept must earn its place through distinct paid choices, AI behavior and reviewed art before implementation.
+**All twelve IDs in this part are registered and playable; art production remains a separate gate.** The content registry is authoritative for numerical worked-biome yields, cultivation targets, paid recruitment weights and procedural names. Base lore below is adopted without claiming that Ilthen attested these new regions or ancestries. Cairnfolk, brinefolk, burrowfolk and Manytrack peoples use normal land movement, paid troop/character rules and actual ship transport; anatomy does not grant free flight, tunneling or amphibious movement. Tests cover all24 paid founding/land campaigns, new paid AI preferences and exact historical save/replay compatibility. This is not long-campaign balance signoff.
 
-### 13. Cistern Assembly — proposed
+### 13. Cistern Assembly — registered
 
-Proposed ID: `faction.cistern_assembly`. Proposed region: the dry basins beyond the cultivated southern chalk, connected to existing caravan routes rather than replacing the Synod's heartland.
+ID: `faction.cistern_assembly`. Region: the dry basins beyond the cultivated southern chalk, connected to existing caravan routes rather than replacing the Synod's heartland.
 
 **Origin and culture.** Well keepers, displaced gardeners and caravan households pooled cistern maintenance during the Long Ash. Membership rests on work and residence, not ownership of a spring. Households read a public water measure before each allocation; readers can be challenged, but the committee choosing them can still entrench its own interests.
 
@@ -258,9 +258,9 @@ Proposed ID: `faction.cistern_assembly`. Proposed region: the dry basins beyond 
 
 **Art, ecology and names.** Limewashed stone, muted turquoise, rust-red cord and dark glazed jars; squat cistern rings, shade galleries and broad lidded-vessel shields. A three-notch water measure is the seal. Favor desert and chalkland with springs; waterlogged marsh and cold taiga require costly adaptation. Names use clear vowels and offices that can change: **Demin Thirdmeasure**, a reader exposing his founding house's extra draw; **Alta Sillkeeper**, a gardener arguing that emergency guests must become members, not permanent supplicants.
 
-### 14. Unsealed Companies — proposed
+### 14. Unsealed Companies — registered
 
-Proposed ID: `faction.unsealed_companies`. Proposed range: ruined toll corridors between established hearthlands, not the land or government of every road company.
+ID: `faction.unsealed_companies`. Range: ruined toll corridors between established hearthlands, not the land or government of every road company.
 
 **Origin and culture.** A coalition of companies traces parts of its membership to soldiers erased during the Reckoning, joined by families who survived on transport, repair and hired defense. It rejects inherited oath-debt without rejecting obligations made by living people. A pay roll records work owed; it is deliberately not a pledge of descendants or remembrance.
 
@@ -272,9 +272,9 @@ Proposed ID: `faction.unsealed_companies`. Proposed range: ruined toll corridors
 
 **Art, ecology and names.** Faded vermilion, undyed canvas, pewter and reused dark plate; asymmetrical repair panels, broad roll cases, wagon-court buildings and banners cut open at the foot. Favor steppe exchange and ash-scrub salvage work; rainforest logistics and marsh extraction are harder. Keep the broken-seal mark distinct from Saltwind's broken keel. Earned names can be refused: **Berr Oncepaid**, a veteran refusing an illicit bonus; **Sova Rollkeeper**, a town-born quartermaster demanding a civilian audit.
 
-### 15. Lantern Hospices — proposed
+### 15. Lantern Hospices — registered
 
-Proposed ID: `faction.lantern_hospices`. Proposed region: a chain of inhabited hospice towns at former plague-road junctions, not an intact continent-wide service.
+ID: `faction.lantern_hospices`. Region: a chain of inhabited hospice towns at former plague-road junctions, not an intact continent-wide service.
 
 **Origin and culture.** Households that maintained refuge, burial and clean stores during recurrent ash-lung joined care houses across several traditions. Their charter protects the sick and makes sanitation a civic duty. Admission is a decision with real costs; there are reformers, exhausted attendants, wealthy donors and officials who mistake control for care.
 
@@ -286,9 +286,9 @@ Proposed ID: `faction.lantern_hospices`. Proposed region: a chain of inhabited h
 
 **Art, ecology and names.** Beeswax yellow, washed blue, soot-black lantern cages and plain linen; hooded service coats, shielded lamps, open courtyards and wide ventilated roofs. A lamp behind two protective shutters replaces a triumphant sunburst. Favor grassland provisions and chalkland learning; ash scrub and rainforest damp complicate storage. Service names stay modest: **Enna Wickward**, an attendant protecting a foreign patient from her own governor; **Tovel Cleanstep**, a burial officer challenging a profitable quarantine.
 
-### 16. Cairnwing Concord — proposed
+### 16. Cairnwing Concord — registered
 
-Proposed ID: `faction.cairnwing_concord`. Proposed region and ancestry: cliff settlements of the Broken Escarpments, inhabited by newly authored feathered cairnfolk and human lift-port households. Neither ancestry nor polity is retroactively attributed to the Book's named witnesses.
+ID: `faction.cairnwing_concord`. Region and ancestry: cliff settlements of the Broken Escarpments, inhabited by newly authored feathered cairnfolk and human lift-port households. Neither ancestry nor polity is retroactively attributed to the Book's named witnesses.
 
 **Origin and culture.** Communities sharing ledges, landing courts and load-bearing lifts formed a concord when surface routes failed. Membership depends on maintaining both upper roosts and lower supply yards. Cairnfolk wing anatomy and any capacity for gliding remain design decisions; feathers on art must not silently become a strategic flight rule.
 
@@ -300,9 +300,9 @@ Proposed ID: `faction.cairnwing_concord`. Proposed region and ancestry: cliff se
 
 **Art, ecology and names.** Tawny feathers, oxblood cord, oxidized copper and pale scree; folded layered wings, narrow harnesses and bracketed buildings hung beneath broad ledges. A stepped feather serves as seal, not a royal eagle. Favor alpine industry and adjacent steppe supply; marsh and dense rainforest challenge established construction. Clipped names join named ledges: **Kirr Lowbracket**, a lift inspector from the lower ports; **Sevet Redledge**, a roost delegate returning an inherited exclusive landing claim.
 
-### 17. Red Sluice Directorate — proposed
+### 17. Red Sluice Directorate — registered
 
-Proposed ID: `faction.red_sluice`. Proposed region: the Red Channels, an eastern wet-lowland reconstruction district outside the Book's described Reedfen assemblies.
+ID: `faction.red_sluice`. Region: the Red Channels, an eastern wet-lowland reconstruction district outside the Book's described Reedfen assemblies.
 
 **Origin and culture.** Canal labor communes consolidated their emergency boards into a directorate. Authority is justified by water levels, maintenance schedules and the ability to deliver a harvest. Some boards are genuinely answerable to working crews; others preserve emergency powers long after the immediate crisis has passed.
 
@@ -314,9 +314,9 @@ Proposed ID: `faction.red_sluice`. Proposed region: the Red Channels, an eastern
 
 **Art, ecology and names.** Brick red, dull celadon, tarred oak and blackened chain; horizontal gate housings, broad rectangular rain shields, visible wheel braces and low maintenance gantries. The seal is a barred spillway, not Wardhall's open square. Favor marsh industry and grassland food; alpine access and desert maintenance are difficult. Work-register names become household forms: **Pella Gatefive**, a scheduler publishing the cost to outlying farms; **Rusk Barwright**, a crew representative asked to enforce another emergency extension.
 
-### 18. Velvet Meridian — proposed
+### 18. Velvet Meridian — registered
 
-Proposed ID: `faction.velvet_meridian`. Proposed region: dry upland observatory towns called the Night Measures, linked by ordinary roads and seasonal scholar caravans.
+ID: `faction.velvet_meridian`. Region: dry upland observatory towns called the Night Measures, linked by ordinary roads and seasonal scholar caravans.
 
 **Origin and culture.** Weavers, night navigators and sleep-house teachers established competing schools whose cloth measures and observation records became reliable trade goods. Their association protects multiple interpretations rather than declaring one academy the owner of truth. Wealthy sponsors nevertheless decide which questions get measured.
 
@@ -328,9 +328,9 @@ Proposed ID: `faction.velvet_meridian`. Proposed region: dry upland observatory 
 
 **Art, ecology and names.** Madder red, smoke silver and blue-black woven cloth; weighted hems, small calibrated discs, long sleeved silhouettes and low round observatory roofs. The seal is a plumb line crossing three unequal stitches, not a generic magical eye. Favor desert knowledge and chalkland exchange; wet rainforest storage and ash scrub's abrasive dust are drawbacks. Flowing given names pair with measured objects: **Aveline Hemscale**, a weaver whose disputed standard was copied abroad; **Orel Pendline**, a teacher publishing a patron's failed prediction.
 
-### 19. Brine Choir — proposed
+### 19. Brine Choir — registered
 
-Proposed ID: `faction.brine_choir`. Proposed region and people: coastal shelf communities of newly authored brinefolk alongside human shore households. This is not proof of the Book's unspecified deep-water powers' identity.
+ID: `faction.brine_choir`. Region and people: coastal shelf communities of newly authored brinefolk alongside human shore households. This is not proof of the Book's unspecified deep-water powers' identity.
 
 **Origin and culture.** Interdependent shore and sheltered-pool households formed a political choir: public response establishes that all represented settlements heard a proposal. Speaking together is a procedure, not a hive mind. Tide-dependent residence and care for young make access to suitable shore as important as ownership of a house.
 
@@ -342,9 +342,9 @@ Proposed ID: `faction.brine_choir`. Proposed region and people: coastal shelf co
 
 **Art, ecology and names.** Coral clay, pale eelgrass, wet slate and matte shell inlay; broad fin-fold collars, low crescent shields, perforated wind walls and paired pool courts. A broken concentric ripple distinguishes it from the coastal cultures' keels and sails. Favor ocean provisions and marsh exchange; taiga storage and desert settlement demand adaptation. Resonant personal names meet shore forms: **Olumi Poolmouth**, a delegate refusing a lucrative exclusive quay; **Dessa Ringlow**, a human repairer seeking a vote for year-round shore workers.
 
-### 20. Emberwake Convocation — proposed
+### 20. Emberwake Convocation — registered
 
-Proposed ID: `faction.emberwake_convocation`. Proposed region: communities among the outer ash belts, not an asserted birthplace of the Ashfall.
+ID: `faction.emberwake_convocation`. Region: communities among the outer ash belts, not an asserted birthplace of the Ashfall.
 
 **Origin and culture.** Seed keepers, kiln workers and survivor congregations organized recurring gatherings around recovery from repeated local burns. Some regard controlled loss as necessary renewal; others see that doctrine used to destroy inconvenient property and records. They remember disaster without possessing privileged knowledge of its cause.
 
@@ -356,9 +356,9 @@ Proposed ID: `faction.emberwake_convocation`. Proposed region: communities among
 
 **Art, ecology and names.** Ash white, smoked orange and muted sulfur green; ceramic face screens, split kiln vents, seed jars and low firebreak compounds. A half-blackened seed wheel replaces Cinder's military masonry. Favor ash-scrub knowledge and dry steppe recovery; wet marsh and rainforest make established methods unreliable. Plain names take recovery crafts: **Isca Seedwheel**, a keeper refusing to surrender a viable garden to ritual burning; **Toren Claybreath**, a furnace teacher publishing his own failed safeguard.
 
-### 21. Underhush Exchange — proposed
+### 21. Underhush Exchange — registered
 
-Proposed ID: `faction.underhush_exchange`. Proposed region and people: inhabited shallow galleries beneath the eastern wooded escarpments, including newly authored broad-handed burrowfolk and surface trading households. They are not another name for the Covenant's deep-folk.
+ID: `faction.underhush_exchange`. Region and people: inhabited shallow galleries beneath the eastern wooded escarpments, including newly authored broad-handed burrowfolk and surface trading households. They are not another name for the Covenant's deep-folk.
 
 **Origin and culture.** Refuge galleries became linked markets where leases include obligations concerning vibration, smoke and structural disturbance. Different bodies and trades need different conditions; quiet is a negotiated public resource rather than a mystical lack of speech. Market translators work through voice, touch marks and written tallies.
 
@@ -370,23 +370,23 @@ Proposed ID: `faction.underhush_exchange`. Proposed region and people: inhabited
 
 **Art, ecology and names.** Clay brown, pewter, pale lime and tiny amber markers; rounded work shields, tactile tally beads, low keyhole arches and nested vent stacks. Avoid the Covenant's massive square buttresses and Morrow's living roofs. Favor taiga craft and chalkland exchange; marsh saturation and exposed tundra are difficult. Compact names use work sounds and passage names: **Demm Softcut**, a fitter challenging an unsafe furnace lease; **Luva Neararch**, a surface translator demanding equal dwelling rights.
 
-### 22. Testament Union — proposed
+### 22. Vesper Court — registered
 
-Proposed ID: `faction.testament_union`. Proposed region: mixed farming towns on the living margins of the southern chalklands, not a secession declared to have conquered the Synod's terraces.
+ID: `faction.vesper_court`. Region: the Duskward, a wooded upland of shuttered estates and inhabited vineyard valleys beyond the Book's principal itinerary. This new regional culture replaces the never-registered Testament Union proposal; it is not another Synod faction or a renamed historical power. Registration is implemented; full art qualification remains a separate gate.
 
-**Origin and culture.** Living families, mortuary workers and remembrance societies formed a union around a disputed rule: a continuing obligation must remain open to challenge by those carrying it. Representatives read household testaments alongside present needs. The union disputes the interpretation and ownership of the dead's labor without treating the dead as a uniform political party.
+**Origin and culture.** Vampiric patrons and living valley households maintain an uneasy court whose oldest protections outlived the people who negotiated them. The patrons are blood-dependent arrested dead: lucid individuals, neither the Synod's ranked laboring dead nor a species with a single allegiance. Living keepers, growers and court officers hold the stores, maintain the shuttered halls and insist that shelter cannot justify an unlimited claim upon their bodies. Some patrons defend revocable provisions; others call every refusal a breach of ancestral hospitality. Hunger and durable memory explain their politics without excusing coercion.
 
-**Strategy, economy and military.** Patient settlement, public knowledge and dependable food support a defense-first polity. Guards and ordinary officers protect household autonomy. Ancestral voting, consent-bound undead service and inheritance litigation are future systems; the existing game does not turn a memorial into an extra worker or a permanent council seat.
+**Strategy, economy and military.** Invest in wooded estate knowledge and dependable valley revenue, supporting smaller deliberate concentrations of armored retainers and mounted escorts. Surveyed forest holdings and costly combined arms distinguish the Court from the Synod's dry-country provisions and the Sable camps' mobile economy. Living troops and a few blood-bound officers share the same paid recruitment, upkeep, refit, command and transport rules. No free resurrection, life-steal, flight, recruitment of skeletons, nocturnal turn bonus or feeding system is implemented by this identity. Those would need explicit costs, public counterplay and saved rules.
 
-**Conflict and diplomacy.** Older households use preserved testaments to secure advantages; newly admitted families ask who speaks for people whose records were erased. Synod officers reject some Union interpretations while continuing useful seed exchange. Ashen auditors admire public procedure but question authority attributed to absent speakers. Diplomacy favors revocable guarantees and named avenues of appeal.
+**Conflict and diplomacy.** Living household delegates demand an enforceable right to end a blood provision without losing their homes. Younger patrons question why an elder's recollection outweighs a living witness. Lantern Hospices contest coerced provision while treating victims; the Synod disputes the Court's refusal to place its enduring dead under mortuary rank. Morrow stewards bargain over old woods the patrons regard as ancestral seclusion. Diplomacy favors protected households, finite hospitality and publicly witnessed renewal, but the Court's own nobles can resist the very limits its envoys promise.
 
-**Supernatural outlook.** Spirit, Grave and Oath traditions make testimony possible in lore without making every purported ancestor trustworthy. Protection against soul-collateral must not be written as proof that all binding magic is harmless when the Union uses it.
+**Supernatural outlook.** Grave accounts for arrested decay; Shadow veiling and Oath practices surround particular households, not every citizen. The origin and transmissibility of their condition remain disputed in-world, not a new fifteenth spring or a proven explanation for the Ashfall. Sunlight is endured through shuttered travel and layered clothing in the lore; it is not an unimplemented day/night combat modifier. Their blood dependence is described without converting people into an abstract free resource.
 
-**Art, ecology and names.** Warm russet, linen cream, faded verdigris and pale wood; paired testimony tablets, knotted household cords, low garden pavilions and communal remembrance courts. A reopened folded testament replaces the Synod's ranked processional forms. Favor chalkland food and grassland knowledge; alpine supply and rainforest preservation are harder. Clear personal names carry chosen household forms: **Marel Newleaf**, a delegate for erased families; **Iven Twowitness**, a mortuary reader asked to discredit his own ancestor's claim.
+**Art, ecology and names.** Muted garnet, tarnished silver, charcoal velvet and restrained cool ivory skin; high folded collars, narrow ribbed cuirasses, long split court coats and covered carriage silhouettes. Buildings develop from shuttered vineyard houses to enclosed slate manor courts with tall narrow chimneys and covered walks, not bone terraces, bat-covered caricatures or copied castles. Ships use dark enclosed cabins, garnet square/lateen sails and silver-edged stern galleries while keeping each hull's transport/escort role legible. Heraldry is an open silver vessel beneath two unequal dusk bars, with one small garnet bead: no skull, bat, fanged mouth or real-world crest. Favor temperate-forest knowledge and taiga exchange; exposed desert and ash-scrub livelihood impose costs. Court names are lyrical but pronounceable; household names remember shelter and maintained boundaries. **Veyra Closedglass**, a vampiric patron supporting a living tenant's right to revoke an old provision; **Dellan Redshutter**, a living estate reader exposing a protection contract that never specified an end.
 
-### 23. Manytrack Moot — proposed
+### 23. Manytrack Moot — registered
 
-Proposed ID: `faction.manytrack_moot`. Proposed region and peoples: the Bough Marches, a forest-steppe boundary inhabited by several newly authored speaking horned and furred lineages alongside human households. These are political persons, not units owned by beast handlers. Their presence develops the Book's unenumerated far domains without claiming a previously named empire.
+ID: `faction.manytrack_moot`. Region and peoples: the Bough Marches, a forest-steppe boundary inhabited by several newly authored speaking horned and furred lineages alongside human households. These are political persons, not units owned by beast handlers. Their presence develops the Book's unenumerated far domains without claiming a previously named empire.
 
 **Origin and culture.** Communities with incompatible sizes, diets and seasonal routes negotiated shared gathering grounds. The moot recognizes use by maintained obligations rather than one household's permanent enclosure. Its common law is young; a powerful lineage can still call its own habits the natural order.
 
@@ -398,9 +398,9 @@ Proposed ID: `faction.manytrack_moot`. Proposed region and peoples: the Bough Ma
 
 **Art, ecology and names.** Bark black, pale tawny hide, moss blue and stitched raw linen; varied body silhouettes united by crossed path cords, open gathering rings and broad clearance arches. A fork of three unlike tracks is the seal. Favor temperate forest provisions and steppe exchange; desert water and alpine storage are difficulties. Names are translated civic forms, not animal jokes: **Venn Broadpath**, a horned field negotiator; **Seli Reedstride**, a human route keeper opposing her town's new fence.
 
-### 24. Margin Observance — proposed
+### 24. Margin Observance — registered
 
-Proposed ID: `faction.margin_observance`. Proposed region: sparse archive stations along the cold, ash-scarred edges of renewed settlement, with no claimed access to the machinery beneath the world.
+ID: `faction.margin_observance`. Region: sparse archive stations along the cold, ash-scarred edges of renewed settlement, with no claimed access to the machinery beneath the world.
 
 **Origin and culture.** Copyists, surviving ruin custodians and families who maintain their supplies formed an observance around preserving contradictions, missing pages and the conditions under which a record was found. They are not the Witnessry restored, Ilthen's authorized successors or keepers of the definitive answer to the Failing.
 
@@ -414,14 +414,14 @@ Proposed ID: `faction.margin_observance`. Proposed region: sparse archive statio
 
 ## Relationships and implementation order
 
-The proposed cohort should enlarge the existing political web rather than arrive as twelve unrelated enemies. Cistern, Testament and Lantern communities make different claims on Synod knowledge and obligations. Unsealed companies challenge the meaning of law along Cinder and Ashen routes. Cairnwing, Underhush and Manytrack societies contest what settled powers call unused space. Red Sluice and Brine institutions complicate Reedbound and coastal arguments over shared water. Meridian and Margin schools disagree over what counts as knowable; Emberwake communities give the aftermath of fire a politics beyond hereditary pass defense.
+The new cohort enlarges the existing political web rather than arriving as twelve unrelated enemies. Cistern, Vesper and Lantern communities make different claims on Synod knowledge and obligations. Unsealed companies challenge the meaning of law along Cinder and Ashen routes. Cairnwing, Underhush and Manytrack societies contest what settled powers call unused space. Red Sluice and Brine institutions complicate Reedbound and coastal arguments over shared water. Meridian and Margin schools disagree over what counts as knowable; Emberwake communities give the aftermath of fire a politics beyond hereditary pass defense.
 
 These are relationships for future authored encounters, not preloaded wars, hidden trust values or mandatory alliances. A campaign must be able to produce cooperation across an apparent rivalry and conflict between apparently compatible societies.
 
-Recommended next implementation order:
+Implementation boundaries and remaining work:
 
-1. **Cistern Assembly and Unsealed Companies.** Existing feature-aware paid land work and general-led combined arms provide credible first expressions without inventing a second water or mercenary simulation. Their resource duties and contract politics distinguish them from the current dryland, maritime and mobile cultures.
-2. **Lantern Hospices and Cairnwing Concord.** The former can begin with practical refit, learning and supplies while magical care remains aspirational. The latter adds a genuinely different body/settlement silhouette, but needs explicit anatomy and movement decisions before any artist or UI implies flight.
-3. **The remaining eight, in reviewed pairs.** Numerical affinity, recruitment and research differences must be justified and tested, not mechanically copied from a neighbor merely to reach twenty-four. Art briefs, approved kits, name pools, player setup, AI use, save origins and integration evidence are separate gates.
+1. **Registered gameplay identities.** All24 have their own numerical ecological strengths/penalties, paid cultivation choices, names and recruitment profiles over the shared unit, research and character systems. There is no extra water market, mercenary contract simulator or faction-exclusive research tree in this cohort.
+2. **Original art and body readability.** Each culture has eighteen distinct approved art roles: six land troops, three naval hulls, three characters, three settlement tiers and three heraldic assets. All 432 qualified assets are published after native/enlarged review, with the [art catalog](../art/FACTION_ASSET_CATALOG.md) retaining original-source and actual gameplay evidence. Cairnwing characters have two legs and two dexterous arms with folded forearm feathers; their visual identity does not promise flying movement.
+3. **Later faction systems and stories.** Magical care, blood provisions, specialized units and authored diplomatic events require explicit paid decisions, counterplay, AI behavior and saved rules. Named seeds remain writing foundations. Broad balance, every biome/background combination and complete animation remain independent unfinished gates.
 
-This bible adds no registered faction, localization key, exclusive unit, technology, spell, diplomatic command or approved asset. When a proposal enters executable content, assign and validate its stable references there, preserve historical roster identities, and move its entry from proposed to current only after the corresponding implementation has been verified.
+This bible accompanies the verified24-culture registry; it is not itself an exclusive unit, technology, spell, diplomatic command or asset approval. Original roster1–3 and the entire preceding twelve-culture content seal remain frozen, while new campaigns use roster4. See the implementation and art status documents for actual publication and integration evidence rather than inferring completion from lore.

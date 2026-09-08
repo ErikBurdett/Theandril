@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.emberwake_convocation",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.city for Theandril, Emberwake Convocation.\nSubject: ONE complete grand developed civic settlement, eleven to thirteen distinct connected building/roof masses around a broad major court hall, full inhabited enclosure, gates and multiple protected work courts. Strong larger denser city silhouette than town; no single giant tower. All buildings belong to one compact complete cluster.\nCulture-specific identity: Low firebreak compounds, split-vent clay kilns, seed stores and broad ceramic roofs. Ash-white washed clay, smoked-orange roof tiles, muted sulfur-green shutters. Recovery workshops rather than Cinder military walls.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 128x128 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "settlement.city.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.emberwake_convocation/33093afe466bf5f1ab648ffd14e83c42a6c6d68eae329eb5c670c55f0095ad75/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "882ddfe15544d766d2ad8f09a5a8e9dba802f54f0c4114bc4b9330213723c9d7",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.city.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.city.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:58:46Z",
+  "referenceHashes": [
+    "90439c7431b01eb2bb0eea97696aaa84f7124280781830feb61c10b9365e0f80",
+    "2bb5f26b203607ca47e5434c9cd0dacaafd72db5f0cc20a62122928a96e6e3d3"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "7973ea82d80394e658a16e7e40dd85a5aabc9985c1a77b05935a8947a116f9e8",
+      "inputHash": "90439c7431b01eb2bb0eea97696aaa84f7124280781830feb61c10b9365e0f80",
+      "outputHash": "2fe28970279e3ffecbba603f1d6367211c36a18c50dabf3ef5096d7e1f9263dd"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2fe28970279e3ffecbba603f1d6367211c36a18c50dabf3ef5096d7e1f9263dd",
+      "outputHash": "4b064c776b3ec43ffc24939c20dd869854d46683694fcbadfe3a7b14bbe7663b"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4b064c776b3ec43ffc24939c20dd869854d46683694fcbadfe3a7b14bbe7663b",
+      "outputHash": "ad7900ff74ef7b7c1f043dfe38d59bb797690b0dfba014a59bce2191072d4888"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "7b257c10456d81977bbce1e023c409901fc939c942831d817b1f1c644f1c1d10",
+      "outputHash": "2330a6a77dc60fe537e84e2dc3d634c78f1bc858327e3a757361a30c9b4d19f2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "a6db6d74a05c0f6ee3da314705facc226cdc844d9a5e478490d9c3548103daca",
+      "outputHash": "9efb3df8081f719b577001358fc7af70b4ea49ee8fae47a49c05d0e4a78aa009"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "6ae0c81ac93e76b428b04f422946c86cfdca80e4d1fc4fd5ae1d4f8d88e7dfc7",
+      "outputHash": "3444cfdce55dd4f0d726d478fd289c8249156142a1742745fdeda6ed6fb02a0c"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:30.466Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Large128px white firebreak compound and orange ceramic roofs read as occupied city, not burning terrain. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 33093afe466bf5f1ab648ffd14e83c42a6c6d68eae329eb5c670c55f0095ad75; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/be2a1f254bbf965941c25130ec1d10b6c4413561cb7b4129bced31ef745704d8.png"
+    ],
+    "inputHash": "5102510d6566a1d66d71353be7f4748ad05ecb96bb13d41c8b90ab2d8ac677a4"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

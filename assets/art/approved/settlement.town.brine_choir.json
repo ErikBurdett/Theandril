@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.brine_choir",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.town for Theandril, Brine Choir.\nSubject: ONE complete substantially developed dense town, low and broad, with seven to nine distinct roof/building masses around a clear central market/work hall and a compact enclosure. More numerous and substantial buildings than a three-house village, but not a grand city. No tall flag or needle consuming canvas; broad full body and practical connected lanes.\nCulture-specific identity: Paired sheltered pool courts, perforated clay wind walls and low rounded roofed shore buildings. Coral-clay masonry, pale eelgrass roof mats, wet slate, matte shell inlay; not Reedbound stilts or glass palaces.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "settlement.town.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.brine_choir/364ce3a8c686cf01fe243ef60f069a57593cfa4a4a1a48864c462542afab7a48/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2c00c58be30046f1998e3187064db5424be88bf9540bca9c9eb00af249dafce0",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.town.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.town.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:15:11Z",
+  "referenceHashes": [
+    "6a33a8205424661c5209a037883177be0a59ea9c715fb1f16f5a461c250fda06",
+    "22f9200d462e23d206f7ee01bc232931f3f28565d1dfc1faae9acff7274d4484"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "ad4ea46dbc0b30d958a7756474303c01a4a07f1aee2449669493af68b44eb77c",
+      "inputHash": "6a33a8205424661c5209a037883177be0a59ea9c715fb1f16f5a461c250fda06",
+      "outputHash": "96a2c880a03310ea779569afaa291239164e8bbab7e37364cca0fb4aaf189878"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "96a2c880a03310ea779569afaa291239164e8bbab7e37364cca0fb4aaf189878",
+      "outputHash": "5f3e6c34c6d8db91f130b43e3f506aab4d688691653fd1ff4d81d7b3ff970591"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "5f3e6c34c6d8db91f130b43e3f506aab4d688691653fd1ff4d81d7b3ff970591",
+      "outputHash": "e3981958d9848ee2512bef93f39206ec09397c1330511f599baf4ea209f72b6e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "74873775e69c4d009be4f985480c4ef455af71b214ba00688e31c900353b4830",
+      "outputHash": "bc52f15ca6aa5e14622d2222edbf51fc531f11a469c664b5e9f5f378090a1797"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "e65bb0296a8cac35f8e1943bda8f37e2e5a0505550f38f86f1adea4999339234",
+      "outputHash": "35733eb5bbc6e0b22412886ee1c6bd099d160c108693fb4777cd2695a6f29b19"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "9c4d02650ff8b3d34d4168dc1c3e571cd923732379204463f85adb3ba9c9b058",
+      "outputHash": "368c62b68a10f7a3474badae2fbadbe78bbbdd33922152742fb781e8a3e2395b"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.brine_choir.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:18:13.942Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Paired pool courts, thick pierced wind walls and mixed low roof forms distinguish the denser town. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 364ce3a8c686cf01fe243ef60f069a57593cfa4a4a1a48864c462542afab7a48; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/4642816a3ab47a27768a48c45815db721e73c45b0ab8c9c7ddbf4c287ef539f8.png"
+    ],
+    "inputHash": "9a128cb105f3e4713b48ad9be1d02547617543013e550d83849f7126383a3041"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

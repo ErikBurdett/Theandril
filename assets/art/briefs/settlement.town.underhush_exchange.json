@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.underhush_exchange",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.town for Theandril, Underhush Exchange.\nSubject: ONE complete substantially developed dense town, low and broad, with seven to nine distinct roof/building masses around a clear central market/work hall and a compact enclosure. More numerous and substantial buildings than a three-house village, but not a grand city. No tall flag or needle consuming canvas; broad full body and practical connected lanes.\nCulture-specific identity: Low keyhole arches, nested vent stacks, broad squat dwelling halls and covered exchange courts. Clay-brown stone, pewter braces, pale-lime plaster, tiny amber markers; not Covenant square buttresses or Morrow living roofs.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "settlement.town.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/settlement.town.underhush_exchange/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b856544f09e82ada454fc060b8e3b80276cfd5b1b3007beea8801780dc8ae2da",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.town.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.town.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:26:26Z",
+  "referenceHashes": [
+    "6b2453afafb2f044f16eac43086436b056fc53cf9ef46ee55f8e93fba84383b3",
+    "7e7a399a51a4205d1efefe4b4100ab4fdf21356a9b0e6b6e531887a74e47d94e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "8eba2796f44e28b26530b546e402db67f89d37eb878547b4c2714f8ab6bcff32",
+      "inputHash": "6b2453afafb2f044f16eac43086436b056fc53cf9ef46ee55f8e93fba84383b3",
+      "outputHash": "5f945a2f3364efaa92852883b62efa14e8a075d80197d6065a43f98a275ff62d"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

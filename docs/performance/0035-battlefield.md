@@ -1,0 +1,31 @@
+# Battlefield integration evidence
+
+## Final checkpoint — 2026-09-07
+
+Node 26.7.0, Intel i9-13900K, Linux 7.1.9; save/rules 14, content `b6e3bce2`. Offline measurements ran sequentially without competing Blender/browser/campaign jobs. Browser timing and compiler CPU/RSS are separate workloads, not interchangeable GPU measurements.
+
+## Deterministic combat and campaigns
+
+The retained historical kernel uses identical supplied three-unit mixes and hills, seven warmups and 200 samples per size. Before/final median creation plus autoresolve is 0.4027/0.4426 ms for 12 formations per side and 0.5197/0.5749 ms for 20. Outcomes remain `bd17446a` / `84bbd5c3`, with exact manual mirrors. This is not a demonstrated speedup or a recruited-caster workload. [Before](0035-battle-kernel-before.json), [final](0035-shield-after.json).
+
+The separate authored/funded campaign laboratory constructs a Witness archive, recruits/attaches a paid Waykeeper and purchases both discoveries through 11 accepted ordinary commands. Three formations/two officers fight four rounds using Cinder thread, Bound ward and Set shields. Final alternating untraced/traced timings over 100 samples after seven warmups are median 0.2415/0.2679 ms, p95 0.3675/0.3866 ms. The detached packet contains 20 facts / 9,681 JSON bytes. Complete save/replay and manual/automatic combat equality retain `9dae8e55`; tracing never changes canonical results. Setup, restoration and equality checks are outside timers. Skipping spent/disabled shield candidate scans preserves results but does not demonstrate a microbenchmark speedup. [Previous sample](0035-shield-before.json), [final samples](0035-shield-after.json), [script](../../scripts/benchmark-battle-presentation.ts).
+
+Tiny/Standard seed 99, generator 5, reaches turn-205 victory after 5,361 accepted commands, zero refusals and exact replay `d4f393d3`. An initial turn-188 failure led to correcting caster placement/research eligibility, not prices or the 200-turn target. [Diagnostic](0035-standard-pacing-diagnostic.json), [final](0035-standard-pacing-after.json).
+
+The separate complete Tiny/four-realm Epic campaign reaches victory at turn 1,020: 23,123 accepted commands, zero refusals, 593 archived battle reports. Campaign execution is 27.825 s; full replay 10.178 s. Save/load and compressed export/import agree at `b128dc55`. Save/export sizes are 19,036,706/1,521,622 bytes; technical/history logs 30,778,485/1,539,730 bytes, 1,022 chapters. This is not a 24-culture giant-world soak or the integration test's extra turn-500 mirror. [Complete run](0035-epic-campaign.json).
+
+## Publication and actual rendering
+
+There are 506 approved assets / 569 frames. Unchanged foundation: 2048², 16 MiB decoded, 2,628,301 PNG bytes, SHA-256 `e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de`. Lazy battle: 1024², 4 MiB, 26,100 PNG bytes, SHA-256 `6e7cbcc86537efea76ba24e4cad54858b5e77bbbf46f2c87ceb7cd9e9addea7b`. Reversed-input rebuilds are byte-identical. Warm seven-sample validation median is 154.711 ms; foundation build/decode 307.467/66.304 ms, battle 18.054/7.946 ms. Source reads are excluded; 659.074 MiB compiler max RSS is not GPU residency. [Compiler samples](0035-art-after.json), [native/live art review](../art/reviews/slice23-battlefield.md).
+
+The final isolated browser workload contains 40 real formations and six officers, using an actual Brace command (`8c59e743` → `e4903641`) and 120 warmed animation frames. The actual context is Chromium WebGL2, ANGLE/Vulkan **SwiftShader Device (Subzero)**. Frame p50/p95/max is **16.7/33.4/50.1 ms**; renderer CPU p50/p95 is 0.3/1.2 ms. One existing canvas/context, 46 actors, at most five active effects/six pooled sprites (cap 12), 20 MiB atlas, no animation-time chunk builds, no page errors and no canonical changes through playback/pause/skip. This is software rendering, not physical-GPU evidence or 60 fps acceptance. [Final raw diagnostics](0035-battle-render.json), [isolated invocation](0035-battle-render-isolated.txt).
+
+Native sprite/label overlap correction increases the 20-versus-20 field from roughly 500 to 964 px high. The old overlapping capture measured p95 16.7 ms; both the full-suite and isolated clear layouts measure 33.4 ms. Do not hide the regression by restoring overlap or quoting only the earlier result. Optimization and hardware verification remain open. [Original](0035-battle-render-checkpoint.json), [first corrected layout](0035-battle-render-spacing.json), [full-suite sample](0035-battle-render-full.json).
+
+The separate 196,608-cell Huge-world run retains one 16 MiB foundation atlas and at most 26 cached chunks / 104 MiB estimated backing. Settled near/pan/strategic frame p95 is 16.7–16.8 ms, but the initial sample is 33.3 ms. Packed/total worker bytes are 1,769,695/1,974,826; seal `b14aa18a`. These are different workload and memory categories from the battlefield. [World diagnostics](0035-world-art-render.json).
+
+## Verification and open gates
+
+Whole typecheck, lint, content validation and production build pass. All 116 Chromium scenarios pass together (8.4 minutes); final target-reveal/portrait-title adjustments subsequently pass 17/17 focused scenarios. The actual built bundle passes 2/2 production cases, verifying exact approved battle image bytes, manual abilities, complete restored outcomes and no development hooks. [Full](0035-browser-full.txt), [final UI](0035-browser-final-ux.txt), [production](0035-production-final.txt).
+
+Final default headless: **1,393/1,396**, 148 files, 71.85 s, zero skips. Remaining failures: Standard/four-seat contact, Huge/32-seat contact (31/32), and Epic's unchanged 60-second parallel test budget. The exact Short/Epic archive file passes 2/2 alone (57.78 s test time / 58.59 s invocation) after stricter `deepStrictEqual` comparisons remove matcher overhead, retaining both complete chronicle documents and mirrored command results. No assertion coverage, timeout or campaign target was weakened. All genuine pre-change save/command fixtures and new battle rules pass. [Final headless](0035-headless-final-ux.txt), [isolated strict archive tests](0035-epic-strict-comparison.txt). Neither functional acceptance nor this bounded magic/art foundation completes 1.0.

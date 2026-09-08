@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.red_sluice",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.red_sluice"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Red Sluice Directorate, role settlement.town.\nSUBJECT: ONE developed compact town with5to6 distinct roof masses, culturally specific central communal workhall, connected shaded walks, enclosed inhabited courtyard and modest perimeter wall with clear gate. Native96x96 height≤78px pivot48,80. Not a single building, not city-sized keep; no landscape or tile.\nCULTURE: Brick red, dull celadon cloth, tarred oak, black chain and weathered bronze. Broad rectangular rain shields, hooded crew coats, horizontal bar motifs. Low sluice-gate inspired maintenance halls, wheel-braced gantries, thick brick channelside courtyards; no surrounding waterrectangle or actualtile.\nPEOPLE if character or rider: Human waterworks crew households and disciplined municipal escorts.\nHERALDRY if UI or flag: A barred spillway with three broad vertical openings and one horizontal lifting bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "settlement.town.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.red_sluice/419b7e1f0b38bb4a16cb9607b9706133739d62d8c0e513966b90403b5c1fe1be/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "48a905875a61d6e386a9abf1d34fa1b8c61241d93a21b0d5eb563277c7df8721",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/settlement.town.red_sluice-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/settlement.town.red_sluice-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T16:57:36Z",
+  "referenceHashes": [
+    "78a4f8146e26c2ecc9b5202b2e8eb9c8fd3baca1745bcd3aee613d50041d9441",
+    "6756e86dfd9411df63faf7d7ebb8c2a96f03b1d5d737fc219236990301c44b18"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "681f648e2584cf4afdd8c2fa54ca452ac5aeeb4faed6c820b60acfe193387996",
+      "inputHash": "78a4f8146e26c2ecc9b5202b2e8eb9c8fd3baca1745bcd3aee613d50041d9441",
+      "outputHash": "52498259e266a879b15b56613b99ee4fbca9152368177021f981d79d6a77c8fd"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "52498259e266a879b15b56613b99ee4fbca9152368177021f981d79d6a77c8fd",
+      "outputHash": "b515663c2bd7ef5af727129b8f7a98849df84682b33af48d471cefca2099eb9f"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b515663c2bd7ef5af727129b8f7a98849df84682b33af48d471cefca2099eb9f",
+      "outputHash": "7f8d700352a3d0a1856e3aa04dcc50907f3a88efa5c5a4427f93e92c23c3058b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "e21b0f0aaf135b01824c0fcaafdf47d54bfc49202ec4d9b885a32dd50745039e",
+      "outputHash": "83ea83e7270726d34d6e0d91c7fc69d7303dcc43859a513ce6cb07abf9da9b97"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "d4bc502473dbdfd702afda5a174fca51a90134d7d9046d578ca2034b898b0fe5",
+      "outputHash": "e930b11708a0f5b114bca48780b319b5fca27d57c271476ed046ab19b7770c76"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "8301b3ec65f6e276930b1295e20baea93ad268ddd7c5003f87ec0e3843fe82fe",
+      "outputHash": "bd36cf69fa2c601569e59aea8b44845760c41504793afa8d2ca603095cb04560"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.red_sluice.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:04:49.602Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Larger96px hall court, waterwork wheels and lift cranes create denser town; one ordinary static chimney wisp retained. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 419b7e1f0b38bb4a16cb9607b9706133739d62d8c0e513966b90403b5c1fe1be; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/9575c14295d8f7bedbaafcf02c4a84f37551331bc3ab9caa926cf1c0621b7d8f.png"
+    ],
+    "inputHash": "9befa6961d81487c43178752c43e7b90c9c964c57a93b124a7ce3eba0a55500d"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.lantern_hospices",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.lantern_hospices"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Lantern Hospices, role unit.ocean_warship.\nSUBJECT: ONE complete substantial ocean warship, deep high-sided broad hull, armored bow and elevated stern gallery, two short masts with separated compact sails and fortified deck. Cultural materials/cloth, clearly heavier than coastalgalley. Southeast isometric bowright, fullhull and sails insideframe, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Beeswax yellow, washed blue, soot-black lantern cages, plain linen. Hooded service coats, broad shields, shielded lamps not glowing magical haloes. Open hospice courtyards with wide ventilated slate roofs, covered galleries, clean cisterns and small enclosed lamp niches.\nPEOPLE if character or rider: Human care-house attendants and paid escorts; adultsturdyclothlayers, no religious caricatures.\nHERALDRY if UI or flag: A small hooded lamp framed by two protective shutters.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.lantern_hospices/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.lantern_hospices/e4940b43788848957b906c404a1be9c5e7462c6223fd8a70f396fad1873c89ab/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "509c68092f96806035f13b8cce09a2d2a5b5ec41bfffafaa8a8b53e3270e03e9",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.lantern_hospices-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.lantern_hospices-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:59:33Z",
+  "referenceHashes": [
+    "c133468073f6bc5c28eda85e3cacbef1dea950a66b6fca1b6abd856abe9ec931",
+    "eb23cfbc3e58b29495ba87f7f9e6c101b86cd7d7d97fd214845b153333f58d4c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "52164168bd2d43a956bee1ba47e2f4dc52577dbec57317e6f7d060904f57d105",
+      "inputHash": "c133468073f6bc5c28eda85e3cacbef1dea950a66b6fca1b6abd856abe9ec931",
+      "outputHash": "2f7c3817a251cdaf8b0cad4fe345384e71765241f7890473ef933f4b49be4e2b"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2f7c3817a251cdaf8b0cad4fe345384e71765241f7890473ef933f4b49be4e2b",
+      "outputHash": "58a97839d2d9acbb0820b29dd2f8fdb221c166ef676a0f0b5a8ea4f160e53ca8"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "58a97839d2d9acbb0820b29dd2f8fdb221c166ef676a0f0b5a8ea4f160e53ca8",
+      "outputHash": "4b3e30f43d16c85da143b07ff5bf68bfe67993e1a7377c3c524fa931f28e4b55"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "bc85a79b927812da36b93f336e6217ec185d6f98544740cafc6f1cd6856eb253",
+      "outputHash": "0978e8a5d98a1a5aec8fb8419abe8f237c9cf94a56ab66fda138624082e29baf"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "6a04f0faa0fc16760ae602705a08314bb70af4b7226df5450dcab331fa179880",
+      "outputHash": "46aa6b57898be7fa66bbe763de35be93ac17d5cd546281653d4ae357f9e4c00a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "c56c79f3a073ea9a2e5d7cabfa11cbd672c9b96eb9d5d02addc187de75fffa3c",
+      "outputHash": "c9da17cc227635cef3c5087795015390184c657f3635392b29629b8a893f79b9"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.lantern_hospices.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T09:19:48.743Z",
+    "notes": "Inspected independently generated original, all18 exact processed frames at native1x and this role at nearest4x. Two separate raised sails, deep broad hull and elevated stern provide a visibly heavier ocean fighting deck than the coastal galley. Muted cream, slate blue and ochre normalized through the shared Theandril palette; hard pixel clusters and transparent padding remain coherent. Tiny source ornament is subordinate to silhouette. One static southeast pose only, not animation. In-game/fog/UI integration remains a separate acceptance gate.\nReviewed candidate e4940b43788848957b906c404a1be9c5e7462c6223fd8a70f396fad1873c89ab; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/78d85674307741d8ddca5826eb6f5a7fce7bbb4593aedb8928f1340a36cf0995.png"
+    ],
+    "inputHash": "2ee4f14545d6a7aa6f795f07136b5d87d81f4cdb16282f3ef4e4cf2198596e1b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

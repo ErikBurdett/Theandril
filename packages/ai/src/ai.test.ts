@@ -9,7 +9,8 @@ function run(state: GameState, count: number): void {
       const commands = planTurn(getObservation(state, faction.id));
       expect(commands.length).toBeLessThanOrEqual(128);
       for (const command of commands) {
-        applyCommand(state, command);
+        const result = applyCommand(state, command);
+        expect(result.ok, `Turn ${state.turn}: ${JSON.stringify(command)}: ${result.error}`).toBe(true);
         if (state.battle) {
           const battle = state.battle;
           const controller = [battle.attackerFactionId, battle.defenderFactionId].includes(state.turnOwnerId) ? state.turnOwnerId : battle.attackerFactionId;

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.lantern_hospices",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.lantern_hospices"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Lantern Hospices, role unit.transport.\nSUBJECT: ONE complete transport ship, broad short unarmed cargo hull, readable open cargo deck and small covered passenger cabin, single small furled sail and short mast. Cultural materials and painted cloth; stout transport silhouette distinct fromwarships. Southeast isometric view bowtowardright, dry isolated entirehull includingkeel, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Beeswax yellow, washed blue, soot-black lantern cages, plain linen. Hooded service coats, broad shields, shielded lamps not glowing magical haloes. Open hospice courtyards with wide ventilated slate roofs, covered galleries, clean cisterns and small enclosed lamp niches.\nPEOPLE if character or rider: Human care-house attendants and paid escorts; adultsturdyclothlayers, no religious caricatures.\nHERALDRY if UI or flag: A small hooded lamp framed by two protective shutters.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.transport.lantern_hospices/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.lantern_hospices/954dd0604506c75424816a2886caadc524ef7ff4e89e025fc73bd5c2b3290df8/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "205ae0d98f6db5ed56982009d601e1c35c9f5169dc24ea5385f6dc7a44f4f66d",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.lantern_hospices-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.lantern_hospices-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:00:43Z",
+  "referenceHashes": [
+    "3125508a295e6621e6f9902763218f79f7221971cceb1eff8f7e3e73668c9869",
+    "768ad5355753af079ed6698ba6787d585bf34880591bb6875b37405ed593ffc1"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "aae70042e206f87d79c4fc755b671944c271702a99b767c02471adb8ea822ef5",
+      "inputHash": "3125508a295e6621e6f9902763218f79f7221971cceb1eff8f7e3e73668c9869",
+      "outputHash": "a542ce7882f8ea135a9e6b6b290615eb321da84c8eaf469337252afe763c5298"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "a542ce7882f8ea135a9e6b6b290615eb321da84c8eaf469337252afe763c5298",
+      "outputHash": "1c2e70f8ad870cbce3442d7d295dd0d18e5310ac5dcc0f98db73ac12a81fdfca"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1c2e70f8ad870cbce3442d7d295dd0d18e5310ac5dcc0f98db73ac12a81fdfca",
+      "outputHash": "e47991835efe330b19531711e358aae5f02bd7e843f33e4122e86f3ef6cc6a6d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "fd77f67d2ee9b3a7f83941cac87a00328c5375f13526e1a7cf3218b79574adb9",
+      "outputHash": "d5b9798eee071fdbd400b870b79b6ad6c56a4d89e03c030cef016dfc5eb833a8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "3bdc3c6b5d67c5e35cc231352b03fa57cbdb9ed60781f1d3da4d9093547dd447",
+      "outputHash": "84d16507a8b5c5768054cb5fe56373a8d15f15aac6efbcdef32ff09fee831908"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "265fdfd890d5b09703e2daa2ff3439c79671425114d398e74798424304c76bf6",
+      "outputHash": "26d44eaa68b2c650e98d9bb9fde359b3cb548c10fd39fca6830c99fa47480ffc"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.lantern_hospices.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T09:19:48.085Z",
+    "notes": "Inspected independently generated original, all18 exact processed frames at native1x and this role at nearest4x. Broad cargo deck and covered cabin with furled sail distinguish this working transport from armed sail silhouettes; complete hull and small hanging bow lamp. Muted cream, slate blue and ochre normalized through the shared Theandril palette; hard pixel clusters and transparent padding remain coherent. Tiny source ornament is subordinate to silhouette. One static southeast pose only, not animation. In-game/fog/UI integration remains a separate acceptance gate.\nReviewed candidate 954dd0604506c75424816a2886caadc524ef7ff4e89e025fc73bd5c2b3290df8; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/78d85674307741d8ddca5826eb6f5a7fce7bbb4593aedb8928f1340a36cf0995.png"
+    ],
+    "inputHash": "56f5a43a266081ab302429c24ad83d88700115ffa56e504f1e2e72cde823bbe6"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

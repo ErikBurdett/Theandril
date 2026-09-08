@@ -2,6 +2,7 @@ import { useEffect, useState, type CSSProperties } from 'react';
 import { FACTIONS, UNITS } from '@theandril/content';
 import { factionArtId, parseRuntimeCatalog, type RuntimeAsset, type RuntimeCatalog } from '@theandril/art-pipeline/runtime';
 import { loadArtImageBytes } from './art-image';
+import { publicAssetUrl } from './asset-url';
 import './faction-art.css';
 
 interface AtlasImage { url: string; width: number; height: number }
@@ -17,7 +18,7 @@ let disposed = false;
 /** One bounded approved catalog for the DOM, never the development/candidate catalog. */
 function catalog(): Promise<RuntimeCatalog> {
   return catalogPromise ??= (async () => {
-    const response = await fetch('/art/catalog.json', { signal: controller.signal });
+    const response = await fetch(publicAssetUrl('/art/catalog.json'), { signal: controller.signal });
     if (!response.ok) throw new Error(`Approved catalog unavailable (${response.status}).`);
     const limit = 8 * 1024 * 1024;
     if (Number(response.headers.get('content-length')) > limit) throw new Error('Approved catalog exceeds its download limit.');

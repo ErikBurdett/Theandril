@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.cistern_assembly",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native128. One joined substantial city complex: broad central civic hall, eight dense supporting roof volumes, organized courtyards and reinforced perimeter with one unmistakable gate. Monumental through horizontal mass and organization, not an enormous spire. Entire roofs/walls inside central65% with extra upper padding. No surrounding terrain or base tile.",
+  "frames": [
+    {
+      "id": "settlement.city.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.cistern_assembly/49346ec5ae1c9caaa720c4646d460ba2711661e9367eba21052ef0216743c6a3/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "ea3de8d897ab01972247534fa1bbbb4f7e17b1e9f226b4fcb231944e7d83c6ec",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/settlement.city.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/settlement.city.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:56:05.888Z",
+  "referenceHashes": [
+    "2350e9b5e3b98665a01d508d188bc93efbfe870790c3541212a90adc0718e664",
+    "e4b7107a76dd00af074b87cd9da3e6280b7ab10877acb7b17692981dcea04af7"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "e1c5cc9424a59ed52a6b84c6d38637d387f4f1056252737bade9537c9847077c",
+      "inputHash": "2350e9b5e3b98665a01d508d188bc93efbfe870790c3541212a90adc0718e664",
+      "outputHash": "2c711df5ee6207cea6e9cb39630b69cdf791b26c3ce0caf6e1b188a7f0815af7"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2c711df5ee6207cea6e9cb39630b69cdf791b26c3ce0caf6e1b188a7f0815af7",
+      "outputHash": "5183706fc2fbaaf36b2add3977432d3306fa2c90258a8027acfa06cfcbab3f51"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "5183706fc2fbaaf36b2add3977432d3306fa2c90258a8027acfa06cfcbab3f51",
+      "outputHash": "76093c5e97f1ea448c33b57c6db6f8367d69c6a1f5c044b9a44395213fe92316"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "fc28b13de456b99c9d1d4bfc00eb1a5c0bd3be7b3f5fad78126044c92f1f870b",
+      "outputHash": "8cce266453c46d4eeb6e4e185d7cc4fc84acbcdf1b67416cb84e8bf1540fad47"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "9c36bda4fad6f2b5ac360cbb32fa66f054cb5b0770ee9949476ceb1e6f4c2406",
+      "outputHash": "fef5d434615ced2bc893e398e8f704624b5a28f61eb3f22641c2035a28e90517"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "360069f0ccd32b83d79deb73d3370a0fda0fad3e92cc3dc8f7813e03f484718b",
+      "outputHash": "a1f9c7e13ad960b2cc0a0f18f337eb08f56820c2556c278868609c11cf8457ad"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.cistern_assembly.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:10.044Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Tall central domed cistern and enclosing pale walls create the largest128px settlement; no detached scenery tile. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 49346ec5ae1c9caaa720c4646d460ba2711661e9367eba21052ef0216743c6a3; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/9116e48e88a762b8d7f9d7816a5018a3dd295f9524ebe98b21cc084225b2723d.png"
+    ],
+    "inputHash": "eaaf134cd002b9e8fe528997315c3bafbed548530e642070ea8d882488469b27"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

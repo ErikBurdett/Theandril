@@ -1,0 +1,183 @@
+Theandril cohort24 — corrected checkpoint, complete default headless verification
+Recorded 2026-09-07; repository /home/telephoneheater/Work/Theandril
+
+Scope
+One complete verification sequence after the approved test corrections:
+naval-source fixture/counts, 24-faction land assertion, exact Buffer.equals art
+coverage, and browser contact/geography/army-performance evidence wording.
+This run changes no production code, assertions, timeouts, or test selection.
+The earlier 0034-final-headless.txt is preserved as the original failed run.
+The corrected browser tests are NOT executed by this headless Vitest command.
+
+Results
+- pnpm typecheck: PASS, exit 0; real 5.42s.
+- pnpm lint: PASS, exit 0; real 3.82s.
+- pnpm content:validate: PASS, exit 0; real 0.28s.
+  24 factions; content hash 07a58d4f. No sandbox retry was needed.
+- pnpm test: FAIL, exit 1; default vitest run, no exclusions or changed timeout.
+  Vitest duration 66.43s; time -p real 66.81s, user 507.44s, sys 26.51s.
+- Test files: 134 passed, 2 failed, 136 total.
+- Tests: 1318 passed, 3 failed, zero skipped, 1321 total.
+- The previously failing land/naval-source assertions and art coverage hook now
+  pass in the complete default suite.
+
+Remaining failures
+1. packages/ai/src/contact.test.ts:85:94
+   Standard 4 seats: player Ashen Compact still has no first contact at the
+   existing 100-turn bound. Reedbound is also uncontacted; Cinder and Glass
+   first contact remains turn 63. Full observed diagnostics are retained below.
+2. packages/ai/src/contact.test.ts:89:163
+   Huge 32 seats: 31 factions have contact at the existing 60-turn bound,
+   expected 32. Margin Observance is missing. Full diagnostics retained below.
+3. tests/headless/chronicle-victory.test.ts:10:37
+   Epic test exceeds the unchanged 60000ms gate. Printed Epic test runtime:
+   62280ms. No timeout increase, exclusion, or expensive rerun was performed.
+
+Evidence and timing
+All checks executed sequentially inside the coordinated CPU window. Vitest used
+its ordinary parallel configuration. This is not an isolated single-Epic timing.
+The time -p lines are actual process timings; observed tool start/finish stamps
+can include polling delay and are not substitute benchmark timings.
+Exact output below concatenates each command's returned chunks without changing
+diagnostics. No production build or browser run is claimed by this report.
+CPU reservation was released immediately after the final process exited.
+
+
+===== CHECK 1 =====
+Command: time -p pnpm typecheck
+Observed start UTC: 2026-09-07T19:31:07.677Z
+Observed finish UTC: 2026-09-07T19:31:13.227Z
+Exit code: 0
+--- BEGIN EXACT OUTPUT ---
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+real 5.42
+user 8.98
+sys 0.40
+--- END EXACT OUTPUT ---
+
+===== CHECK 2 =====
+Command: time -p pnpm lint
+Observed start UTC: 2026-09-07T19:31:13.227Z
+Observed finish UTC: 2026-09-07T19:31:17.170Z
+Exit code: 0
+--- BEGIN EXACT OUTPUT ---
+
+> theandril@0.1.0 lint /home/telephoneheater/Work/Theandril
+> eslint .
+
+real 3.82
+user 6.36
+sys 0.37
+--- END EXACT OUTPUT ---
+
+===== CHECK 3 =====
+Command: time -p pnpm content:validate
+Observed start UTC: 2026-09-07T19:31:17.170Z
+Observed finish UTC: 2026-09-07T19:31:17.548Z
+Exit code: 0
+--- BEGIN EXACT OUTPUT ---
+
+> theandril@0.1.0 content:validate /home/telephoneheater/Work/Theandril
+> tsx scripts/validate-content.ts
+
+{
+  "buildings": 5,
+  "units": 9,
+  "factions": 24,
+  "technologies": 10,
+  "institutions": 2,
+  "doctrines": 2,
+  "projects": 1,
+  "characterRoles": 3,
+  "characterMissions": 3,
+  "characterSkills": 11,
+  "commanderAbilities": 1,
+  "improvements": 10,
+  "naturalFeatures": 7,
+  "hash": "07a58d4f"
+}
+real 0.28
+user 0.30
+sys 0.05
+--- END EXACT OUTPUT ---
+
+===== CHECK 4 =====
+Command: time -p pnpm test
+Observed start UTC: 2026-09-07T19:31:17.548Z
+Observed finish UTC: 2026-09-07T19:32:24.480Z
+Exit code: 1
+--- BEGIN EXACT OUTPUT ---
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ packages/ai/src/contact.test.ts (4 tests | 2 failed) 33110ms
+     × standard / 4 seats makes player contact through legal bounded plans with save replay 12869ms
+     × huge / 32 seats makes player contact through legal bounded plans with save replay 11800ms
+ ❯ tests/headless/chronicle-victory.test.ts (2 tests | 1 failed) 65495ms
+   × generated-start epic AI victory produces complete factual logs identical after archive save/resume 62280ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/headless/chronicle-victory.test.ts > generated-start epic AI victory produces complete factual logs identical after archive save/resume
+Error: Test timed out in 60000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/headless/chronicle-victory.test.ts:10:37
+      8| // post500 order and replays the complete technical history twice. Giv…
+      9| // archive integration test its own wall-time budget; keep all turn/co…
+     10| test.each(['short', 'epic'] as const)('generated-start %s AI victory p…
+       |                                     ^
+     11|   const game = createGame({ seed: 20260905, size: 'tiny', factionCount…
+     12|   const archive = createArchive(game, { mode: 'watch' });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 4 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.ashen_compact","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":34306,"harbor":false},{"cell":41616,"harbor":false},{"cell":38153,"harbor":false},{"cell":51938,"harbor":false},{"cell":39308,"harbor":false},{"cell":38917,"harbor":true},{"cell":35844,"harbor":false},{"cell":37381,"harbor":false},{"cell":36994,"harbor":false},{"cell":38530,"harbor":false}],"fleets":[{"id":"army.121","cell":56182,"cargo":[],"ocean":true},{"id":"army.169","cell":57331,"cargo":[],"ocean":true},{"id":"army.81","cell":47380,"cargo":[],"ocean":false}],"reasons":["Charter transport: chart unknown water while no passengers await a rendezvous.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.reedbound_council","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":71362,"harbor":false},{"cell":72900,"harbor":false},{"cell":70971,"harbor":false},{"cell":71743,"harbor":true},{"cell":69822,"harbor":false},{"cell":69442,"harbor":false},{"cell":68678,"harbor":false}],"fleets":[{"id":"army.110","cell":85123,"cargo":[{"armyId":"army.136","name":"Hearth caravan","formations":1}],"ocean":true},{"id":"army.154","cell":62415,"cargo":[],"ocean":true},{"id":"army.82","cell":83169,"cargo":[],"ocean":false}],"reasons":["Charter transport: sail the known water route toward a viable landing.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.cinder_march","firstContact":63,"foreignBorders":[],"witnessedBattleTurns":[73],"wars":[],"towns":[{"cell":8708,"harbor":false},{"cell":14079,"harbor":false},{"cell":12159,"harbor":true},{"cell":13293,"harbor":false},{"cell":18353,"harbor":false},{"cell":13699,"harbor":false},{"cell":12923,"harbor":false},{"cell":9449,"harbor":false},{"cell":25948,"harbor":false},{"cell":15621,"harbor":false},{"cell":15617,"harbor":false},{"cell":13303,"harbor":false}],"fleets":[{"id":"army.102","cell":40521,"cargo":[],"ocean":true},{"id":"army.46","cell":13715,"cargo":[],"ocean":false},{"id":"army.57","cell":33635,"cargo":[],"ocean":true}],"reasons":["Deepwake warship: patrol and chart permitted coastal water.","Coastwatch galley: patrol and chart permitted coastal water.","Charter transport: chart unknown water while no passengers await a rendezvous."]},{"factionId":"faction.glass_tide","firstContact":63,"foreignBorders":[{"cell":11390,"factionId":"faction.cinder_march","visible":false},{"cell":11391,"factionId":"faction.cinder_march","visible":false},{"cell":11392,"factionId":"faction.cinder_march","visible":false},{"cell":11774,"factionId":"faction.cinder_march","visible":false},{"cell":11775,"factionId":"faction.cinder_march","visible":false},{"cell":11776,"factionId":"faction.cinder_march","visible":false},{"cell":11777,"factionId":"faction.cinder_march","visible":false},{"cell":12154,"factionId":"faction.cinder_march","visible":false},{"cell":12155,"factionId":"faction.cinder_march","visible":false},{"cell":12156,"factionId":"faction.cinder_march","visible":false},{"cell":12157,"factionId":"faction.cinder_march","visible":false},{"cell":12158,"factionId":"faction.cinder_march","visible":false},{"cell":12159,"factionId":"faction.cinder_march","visible":false},{"cell":12160,"factionId":"faction.cinder_march","visible":false},{"cell":12161,"factionId":"faction.cinder_march","visible":false},{"cell":12524,"factionId":"faction.cinder_march","visible":true},{"cell":12525,"factionId":"faction.cinder_march","visible":true},{"cell":12526,"factionId":"faction.cinder_march","visible":true},{"cell":12534,"factionId":"faction.cinder_march","visible":false},{"cell":12535,"factionId":"faction.cinder_march","visible":false},{"cell":12536,"factionId":"faction.cinder_march","visible":false},{"cell":12538,"factionId":"faction.cinder_march","visible":false},{"cell":12539,"factionId":"faction.cinder_march","visible":false},{"cell":12540,"factionId":"faction.cinder_march","visible":false},{"cell":12541,"factionId":"faction.cinder_march","visible":false},{"cell":12542,"factionId":"faction.cinder_march","visible":false},{"cell":12543,"factionId":"faction.cinder_march","visible":false},{"cell":12544,"factionId":"faction.cinder_march","visible":false},{"cell":12545,"factionId":"faction.cinder_march","visible":false},{"cell":12907,"factionId":"faction.cinder_march","visible":true},{"cell":12908,"factionId":"faction.cinder_march","visible":true},{"cell":12909,"factionId":"faction.cinder_march","visible":true},{"cell":12917,"factionId":"faction.cinder_march","visible":false},{"cell":12918,"factionId":"faction.cinder_march","visible":false},{"cell":12919,"factionId":"faction.cinder_march","visible":false},{"cell":12930,"factionId":"faction.cinder_march","visible":false},{"cell":12931,"factionId":"faction.cinder_march","visible":false},{"cell":12932,"factionId":"faction.cinder_march","visible":false},{"cell":13292,"factionId":"faction.cinder_march","visible":true},{"cell":13293,"factionId":"faction.cinder_march","visible":true},{"cell":13294,"factionId":"faction.cinder_march","visible":true},{"cell":13301,"factionId":"faction.cinder_march","visible":false},{"cell":13302,"factionId":"faction.cinder_march","visible":false},{"cell":13303,"factionId":"faction.cinder_march","visible":false},{"cell":13315,"factionId":"faction.cinder_march","visible":false},{"cell":13316,"factionId":"faction.cinder_march","visible":false},{"cell":13676,"factionId":"faction.cinder_march","visible":true},{"cell":13677,"factionId":"faction.cinder_march","visible":true},{"cell":13686,"factionId":"faction.cinder_march","visible":false},{"cell":13698,"factionId":"faction.cinder_march","visible":false},{"cell":13699,"factionId":"faction.cinder_march","visible":false},{"cell":13700,"factionId":"faction.cinder_march","visible":false},{"cell":14083,"factionId":"faction.cinder_march","visible":false},{"cell":14084,"factionId":"faction.cinder_march","visible":false},{"cell":17969,"factionId":"faction.cinder_march","visible":false},{"cell":17970,"factionId":"faction.cinder_march","visible":false},{"cell":18352,"factionId":"faction.cinder_march","visible":false},{"cell":18353,"factionId":"faction.cinder_march","visible":false},{"cell":18354,"factionId":"faction.cinder_march","visible":false},{"cell":18737,"factionId":"faction.cinder_march","visible":false},{"cell":18738,"factionId":"faction.cinder_march","visible":false}],"witnessedBattleTurns":[73],"wars":[],"towns":[{"cell":7245,"harbor":false},{"cell":6474,"harbor":false},{"cell":14520,"harbor":false},{"cell":8779,"harbor":true},{"cell":7623,"harbor":false}],"fleets":[{"id":"army.174","cell":12524,"cargo":[],"ocean":true},{"id":"army.83","cell":7632,"cargo":[],"ocean":false},{"id":"army.96","cell":11076,"cargo":[],"ocean":true}],"reasons":["Deepwake warship: patrol and chart permitted coastal water.","Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore."]}]: expected null not to be null
+ ❯ packages/ai/src/contact.test.ts:85:94
+     83|   ] as const)('%s / %i seats makes player contact through legal bounde…
+     84|     const result = contactCampaign(size, count, limit);
+     85|     expect(result.firstContact.get(result.playerId), JSON.stringify(re…
+       |                                                                                              ^
+     86|     expect(result.firstContact.get(result.playerId)!).toBeLessThanOrEq…
+     87|     expect(result.types.has('moveTo')).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > huge / 32 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.margin_observance","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":14130,"harbor":false},{"cell":26938,"harbor":false},{"cell":18743,"harbor":true},{"cell":25906,"harbor":false},{"cell":15157,"harbor":false},{"cell":19249,"harbor":false},{"cell":16696,"harbor":false}],"fleets":[{"id":"army.1100","cell":37671,"cargo":[],"ocean":true},{"id":"army.838","cell":20276,"cargo":[],"ocean":false},{"id":"army.953","cell":23857,"cargo":[],"ocean":true}],"reasons":["Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore.","Deepwake warship: patrol and chart permitted coastal water."]}]: expected 31 to be 32 // Object.is equality
+
+- Expected
++ Received
+
+- 32
++ 31
+
+ ❯ packages/ai/src/contact.test.ts:89:163
+     87|     expect(result.types.has('moveTo')).toBe(true);
+     88|     expect(result.types.has('mergeArmies')).toBe(true);
+     89|     expect([...result.firstContact.values()].filter(turn => turn !== n…
+       |                                                                                                                                                                   ^
+     90|   });
+     91|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed | 134 passed (136)
+      Tests  3 failed | 1318 passed (1321)
+   Start at  14:31:17
+   Duration  66.43s (transform 14.84s, setup 0ms, import 47.36s, tests 447.99s, environment 16ms)
+
+ ELIFECYCLE  Test failed. See above for more details.
+real 66.81
+user 507.44
+sys 26.51
+--- END EXACT OUTPUT ---
+

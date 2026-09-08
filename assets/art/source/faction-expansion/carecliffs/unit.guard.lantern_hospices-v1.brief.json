@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.lantern_hospices",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.lantern_hospices"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Lantern Hospices, role unit.guard.\nSUBJECT: ONE adult full-body guard, compact broad shield and short downward sword, sturdy layered armor, planted feet; quiet southeast three-quarter facing right. Native64x64 maximum body48px, pivot32,56.\nCULTURE: Beeswax yellow, washed blue, soot-black lantern cages, plain linen. Hooded service coats, broad shields, shielded lamps not glowing magical haloes. Open hospice courtyards with wide ventilated slate roofs, covered galleries, clean cisterns and small enclosed lamp niches.\nPEOPLE if character or rider: Human care-house attendants and paid escorts; adultsturdyclothlayers, no religious caricatures.\nHERALDRY if UI or flag: A small hooded lamp framed by two protective shutters.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.guard.lantern_hospices/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.guard.lantern_hospices/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "057b26248d5fad2c7d7d7031e90d270020d394582076c6ef4f5f558b8d24c575",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/unit.guard.lantern_hospices-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/unit.guard.lantern_hospices-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:37:06Z",
+  "referenceHashes": [
+    "a1c825d9144bcb8b5838498f79472288c8fb7c957e89cf7780357938936adc6d",
+    "2ba283a3e6dd8843cc1755e1558595d152ff418fb85ec80b971deca02ae1c91e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "7f9ca5703217ca57f20109d406e261b8f44ed8b04ff531a1df9b7791b683a08a",
+      "inputHash": "a1c825d9144bcb8b5838498f79472288c8fb7c957e89cf7780357938936adc6d",
+      "outputHash": "de8d22efa58962ea3616b947f7f6f1178b0c517abbbde505432b5c8afbc4b5e4"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

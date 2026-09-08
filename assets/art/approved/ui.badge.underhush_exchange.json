@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.underhush_exchange",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.badge for Theandril, Underhush Exchange.\nSubject: ONE extremely simplified front-facing miniature faction badge. Native 32x32 readability: reduce the exact faction emblem to broad thick contiguous pixel masses and obvious gaps, at most a few flat tones. No outer plaque, tiny ornament, text or border.\nCulture-specific identity: A keyhole passage nested inside two low open arches, clay-brown and pale-lime silhouette with a tiny amber marker.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 32x32 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "ui.badge.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.underhush_exchange/240d582e2bdd897fd1d2d20a855fe14cbe6fd78686cf19ec65694a8e10a33d78/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "970ab1a3a283965fccb721c5b2d642de3cff1cc04e27b106a079ef900251c8ab",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.badge.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.badge.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:34:37Z",
+  "referenceHashes": [
+    "8c9b961d7a00d5b4bc75ae2a740921a1305a73f3d5fbeffba8e88a7545f6b0bb",
+    "749212c5b525241f2e7b5597e39e2211199431e4fa676686c61bd0ba438c895b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "bdd06bf0ae7642b8e89c250ec652748c6c26878cf4b33a68497291983f88737e",
+      "inputHash": "8c9b961d7a00d5b4bc75ae2a740921a1305a73f3d5fbeffba8e88a7545f6b0bb",
+      "outputHash": "72d840a70427c1d63a21fca086ba153683bf79b3c757df3618b21208568ab7b6"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "72d840a70427c1d63a21fca086ba153683bf79b3c757df3618b21208568ab7b6",
+      "outputHash": "0b7d24ae6a763307613425c6e887f8f81def39bdf4f8bc0ac5195cb52bf61faa"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0b7d24ae6a763307613425c6e887f8f81def39bdf4f8bc0ac5195cb52bf61faa",
+      "outputHash": "66c351c0846a92fc555ab54515a51b5c3065ac73738ef583a9902fc492ae2cd8"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "cbfe8591a1ba28b99fc384f755a8e8e5887908a8fe07bca296215fc7fd7a12dd",
+      "outputHash": "e182dc0f627178e92df6a046b52c7114578945a4249442b9e03e9c6e0cab0f24"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "f1759f1fe9720fe7573f7929354172e1f68a9f4021613d9b6cb1b986edb71375",
+      "outputHash": "9582b11e57fa4110021dfcebeaa891f5d579f54860a3a132d58844859b7a7e09"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "a6b089cacefe1daff548bc71796e2ac68b7fc9dcee5323a40a381a877b51a67a",
+      "outputHash": "2a7bf782f705ad099dedc2afa59c175017585bb128b5fbab013cb729f93ddec7"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:33.039Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Small keyhole badge retains open passage and simple side arches at32px. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 240d582e2bdd897fd1d2d20a855fe14cbe6fd78686cf19ec65694a8e10a33d78; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/e1915ed9076f7cf08aa66326c120a37f79a4dd096424272dd75d05df5fe9df30.png"
+    ],
+    "inputHash": "b700d3b4b11ba366bf24eb3e965bb39261744c5c074f60a2b4e555dc3c895792"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

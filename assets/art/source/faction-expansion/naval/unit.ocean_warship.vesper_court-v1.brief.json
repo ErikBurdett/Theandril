@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.vesper_court",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.ocean_warship for Theandril, Vesper Court.\nSubject: ONE substantial deep-ocean sailing warship, broad high-sided reinforced wooden hull, two compact distinct masts and square/lateen sails, raised foredeck and a fortified aft command gallery, restrained deck ballista. Clearly more massive armed fighting ship than transport, no cannons. Entire ship complete.\nCulture-specific identity: Dark timber hull, enclosed shuttered charcoal cabins, muted burgundy/dusty-plum sails, tarnished silver-edged stern gallery. Keep role silhouette readable; not a bat ship.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.vesper_court/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "31fa5087e8c065bc729b3b35a5b2485342017ba034e1307741e97237feb8c9d1",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:00:38Z",
+  "referenceHashes": [
+    "cf5c636cf63f0e8f8a49e7e60a7da636489110fc03275f7df486b86f98634d2a",
+    "6cc172a170d93c339ebac02c03c0054a5cc2e3bbcd2971679f9129a432140e71"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "b1ed97bab2798b4e2b5681684f082fe236a2bcb8e1f61a79441db8ad1da13cea",
+      "inputHash": "cf5c636cf63f0e8f8a49e7e60a7da636489110fc03275f7df486b86f98634d2a",
+      "outputHash": "9324b75e15ff3ea2ce99ae4f84ce7688ecf8c5e57513f04924810c19df306d47"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

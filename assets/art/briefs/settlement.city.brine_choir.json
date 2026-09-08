@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.brine_choir",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.city for Theandril, Brine Choir.\nSubject: ONE complete grand developed civic settlement, eleven to thirteen distinct connected building/roof masses around a broad major court hall, full inhabited enclosure, gates and multiple protected work courts. Strong larger denser city silhouette than town; no single giant tower. All buildings belong to one compact complete cluster.\nCulture-specific identity: Paired sheltered pool courts, perforated clay wind walls and low rounded roofed shore buildings. Coral-clay masonry, pale eelgrass roof mats, wet slate, matte shell inlay; not Reedbound stilts or glass palaces.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 128x128 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "settlement.city.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/source/native/settlement.city.brine_choir/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "413061b7a884c4cd00c78aa76ac29de76297605b6ce4513e6535765e016450c8",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.city.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.city.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:23:01Z",
+  "referenceHashes": [
+    "e2084972b3ff8dfdecad492ab4e72bcdb084c67d6afa421675ed5caad2387887",
+    "d68417d163b5f40c00d985b445990f72c55dbfef373a61a6c50576558ddcb8a7"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "2408678033f54b28ef5c31e210b7de222a031f1cd900f47c832eefa970ef4f16",
+      "inputHash": "e2084972b3ff8dfdecad492ab4e72bcdb084c67d6afa421675ed5caad2387887",
+      "outputHash": "b6864d9a88dc850acaa390acdb49d373c295ef032ecb65475738d88391862220"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

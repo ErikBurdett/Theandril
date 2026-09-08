@@ -1,4 +1,5 @@
 import { stateHashForVersion, type CommandResult, type GameCommand, type GameState, type PhaseObserver } from '@theandril/sim';
+import type { BattlePresentationObserver } from '@theandril/sim';
 import { applyRecordedCommand, createArchive, parseArchive, type ArchiveCoverage, type ArchiveRecord, type ArchiveRulesVersion, type CampaignArchive, type CampaignMode } from './index';
 
 export type JournalHeader = Omit<CampaignArchive, 'records'>;
@@ -10,7 +11,7 @@ function requireValue(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error('Campaign journal: ' + message);
 }
 function campaignIdentity(game: GameState): string {
-  return JSON.stringify([game.world.seed, game.world.width, game.world.height, game.world.generatorVersion, game.rosterVersion,
+  return JSON.stringify([game.world.seed, game.world.width, game.world.height, game.world.generatorVersion, game.world.layout, game.rosterVersion,
     game.turnOwnerId, game.pace, game.factions.map(faction => faction.id)]);
 }
 
@@ -69,12 +70,12 @@ export class CampaignJournal {
     if (finalHash && finalHashVersion) requireValue(currentHash(finalHashVersion) === finalHash, 'victory seal does not match the game.');
   }
 
-  record(game: GameState, command: GameCommand, observe?: PhaseObserver): CommandResult {
+  record(game: GameState, command: GameCommand, observe?: PhaseObserver, onBattle?: BattlePresentationObserver): CommandResult {
     this.#assertPosition(game);
     requireValue(this.recordCount < MAX_RECORDS, 'the archive record limit has been reached.');
     const beforeTurn = this.#expectedTurn, beforeCount = this.recordCount;
     try {
-      const result = applyRecordedCommand(game, this.#archive, command, observe);
+      const result = applyRecordedCommand(game, this.#archive, command, observe, onBattle);
       const record = this.#archive.records.at(-1)!;
       requireValue(this.recordCount === beforeCount + 1 && record.sequence === beforeCount + 1 && record.turn === beforeTurn,
         'the recorder did not append exactly one continuous order.');

@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.battle_rally",
+  "type": "effect",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.battle_rally"
+  ],
+  "prompt": "Original Theandril rally battlefield effect, authored and animated in Blender. Fixed native 64x64 canvas, registered effect center (32,32), retained keyframed scene, raw renders and exact palette normalization. 8 supplied attack frames; no synthesized pose, mirrored faction art or independently fitted frames. Exact production brief/profile and source evidence: assets/art/source/blender-battle/effect.battle_rally/v1/manifest.json.",
+  "frames": [
+    {
+      "id": "effect.battle_rally/attack/se/0",
+      "direction": "se",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_rally/d45b97f422bb002455616e3e37b382f22ac768cc69bcd8cba73859cc1aa78e33/frame-0.png"
+    },
+    {
+      "id": "effect.battle_rally/attack/se/1",
+      "direction": "se",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_rally/d45b97f422bb002455616e3e37b382f22ac768cc69bcd8cba73859cc1aa78e33/frame-1.png"
+    },
+    {
+      "id": "effect.battle_rally/attack/se/2",
+      "direction": "se",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_rally/d45b97f422bb002455616e3e37b382f22ac768cc69bcd8cba73859cc1aa78e33/frame-2.png"
+    },
+    {
+      "id": "effect.battle_rally/attack/se/3",
+      "direction": "se",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_rally/d45b97f422bb002455616e3e37b382f22ac768cc69bcd8cba73859cc1aa78e33/frame-3.png"
+    },
+    {
+      "id": "effect.battle_rally/attack/se/4",
+      "direction": "se",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_rally/d45b97f422bb002455616e3e37b382f22ac768cc69bcd8cba73859cc1aa78e33/frame-4.png"
+    },
+    {
+      "id": "effect.battle_rally/attack/se/5",
+      "direction": "se",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_rally/d45b97f422bb002455616e3e37b382f22ac768cc69bcd8cba73859cc1aa78e33/frame-5.png"
+    },
+    {
+      "id": "effect.battle_rally/attack/se/6",
+      "direction": "se",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_rally/d45b97f422bb002455616e3e37b382f22ac768cc69bcd8cba73859cc1aa78e33/frame-6.png"
+    },
+    {
+      "id": "effect.battle_rally/attack/se/7",
+      "direction": "se",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_rally/d45b97f422bb002455616e3e37b382f22ac768cc69bcd8cba73859cc1aa78e33/frame-7.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "attack": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "3469787c29c13b774d9d81e37efba9d154f841bc81b407384b9b78fc0f0450c4",
+    "sourceRefs": [
+      "assets/art/source/blender-battle/effect.battle_rally/v1/manifest.json",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/source.blend",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/profile.json",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/recipe.py",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/raw/frame-000.png",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/raw/frame-001.png",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/raw/frame-002.png",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/raw/frame-003.png",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/raw/frame-004.png",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/raw/frame-005.png",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/raw/frame-006.png",
+      "assets/art/source/blender-battle/effect.battle_rally/v1/raw/frame-007.png"
+    ],
+    "licenseNotes": [
+      "Original Theandril project-authored Blender geometry and keyframes; no third-party game sprites or copyrighted setting assets. The retained factory source/profile record identifies production dependencies. This import neither grants a new license nor substitutes for native/in-game visual review."
+    ]
+  },
+  "createdAt": "2026-09-07T21:05:35.250Z",
+  "referenceHashes": [
+    "30284698f59070541e73b7807b04fbc35a9b63e8cf662a1fa0b8f9a4bf930e8c",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "fixed-camera-native-battle64",
+      "settingsHash": "4618ef0366eb4105bb4f702958cefa44bc006dcdecfac1d79863dedaedfb734f",
+      "inputHash": "30284698f59070541e73b7807b04fbc35a9b63e8cf662a1fa0b8f9a4bf930e8c",
+      "outputHash": "a86aef6d391582aab6b831fc35b6e945cd6cb63a0216cb67083ba1f186eabaf4"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "3b91750b97c093337d427d12257c49020f3a968b808e1b452c9077c2e30b090a",
+      "outputHash": "682c4bc4b5e4a0cd93b7f1ee723c775795372fe6da47dbccb80be99f40cb5416"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "682c4bc4b5e4a0cd93b7f1ee723c775795372fe6da47dbccb80be99f40cb5416",
+      "outputHash": "8cdbf3aef2a4d230568fa5e5a79fe5870ca30a12e3d788a1fba98475cb7ddb43"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "fcf448b43a2f72f58fe3e60a1120f2ffe114abb4f82a7f43a19d9bc1ff2058ab",
+      "outputHash": "d868c494bbbe1065d43bf41f6727c2ad5dd62ee278c97c05617d1e92f3c969c7"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "35f6d34bc1f82bc863d9b90774fd49ff3b2a78c454158fde729d8e38408cb4f7",
+      "outputHash": "9bd5004845bcfbf6fa9996de2a29d9fa71d68d14cb51d982821825d228b938ec"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9bd5004845bcfbf6fa9996de2a29d9fa71d68d14cb51d982821825d228b938ec",
+      "outputHash": "1a42eee860d57b2562daa2c3c011652a6326d8306ff39ef95aea0a5f2966485e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "0411aeaebc529270df143fb4a3ffaa8f68a937246aa35fd6140d3a803c15fa61",
+      "outputHash": "41c13e81387fe38690576851075c153018273bb57ee8f114ab54ec6b0d852c43"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "e22e60202ea01bcbfa4714dd68837b5286492acd4533841eeffb54cde170e70f",
+      "outputHash": "6df5711d7941ecaad7fc7e9741876bddbe6fb66c36e56494f139aed6a36d7458"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "6df5711d7941ecaad7fc7e9741876bddbe6fb66c36e56494f139aed6a36d7458",
+      "outputHash": "611f9fffe8ca811fa1b22ca0fe72d29d5812603326db72742450f7cc340baca3"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "c92687a12ecf8f1db2292d0cc16734f6720d83be8e7480ac23b25fe11e8f12f5",
+      "outputHash": "fa8a317262d1054844782e54a014b755664b043628bd51b984b6ff744ee1d863"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "90eebebc01fd4395e2483d36ceb51d8f5fdbcfa8c5ce508fb9f66bf019ddcb68",
+      "outputHash": "0e1f2456f613711b72c3dc86753f7088e36d1db0bbfef3c87ad5a374d1bed078"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0e1f2456f613711b72c3dc86753f7088e36d1db0bbfef3c87ad5a374d1bed078",
+      "outputHash": "208d7ced30dd0094381d0af34178900163a6125e3ad1b22df0d555f460b1b45b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "5d977b55db0acece47a9f47466cba4d39cc0fd859ea8fe41a5ca699410e5f266",
+      "outputHash": "de13586383416495d9f682518c78480d1609c34f87148589a59abb6fcbf51ba2"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "a69c457e4a1b372972276111f7b44f9bd2d6decd97c7504b4aa9f3ea09ec3d82",
+      "outputHash": "0075b25f70cdd07f4242becf0cc8cdea3d244168165925554db41cdab4dccb2e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0075b25f70cdd07f4242becf0cc8cdea3d244168165925554db41cdab4dccb2e",
+      "outputHash": "c5fb7b9236d40fd1ac6ab9e5649787035705152678345c9fcbbdd7fa67a7eb4a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "a428b80b438a4739a37b69fe1f1c2c03ad44878bde950e6dc728aaa7c53148a2",
+      "outputHash": "b1760b9204ee4ee7e5d8ae5861c1dc6034c26c10d3e76906852fadf54b7a253b"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2f2fc68a98b320028d95c983206fa5b4233fe6ad24045749fa5fd1761e185311",
+      "outputHash": "a69a97b26c0bfdc88349ab0cfc8e60681de1e1f362f70d03a89cff19b380b52d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a69a97b26c0bfdc88349ab0cfc8e60681de1e1f362f70d03a89cff19b380b52d",
+      "outputHash": "2f4b7f10ef3b7fd9a2e8a78f745a29f626166222ab92d77ca162e17a57bab892"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "28f29a48441794186c83e93302317f2a802ca40a023fbf276da3006ddffa2746",
+      "outputHash": "c9ff9da69dd7a1a1f3979fb20f982c56bfecf3af4a477b2294898ce5cc77fe02"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "172b8f28fd8b5c697e9694538860901e78ac6626fa78266f1c96639ccccc1dc3",
+      "outputHash": "90b68a286905ca9435d19b3c4e788e4e07aa7238651efb99336ad07a43172a76"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "90b68a286905ca9435d19b3c4e788e4e07aa7238651efb99336ad07a43172a76",
+      "outputHash": "18ffa904f2cfb45a2129e8b16be6df6ac008c3cf1f78c635507fea84ce446726"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "cb456d321fc9e323390d3f773e99212f0934fe2b1842d9f177fec6b4e91f1bb1",
+      "outputHash": "3a6da421c6150a50af940a150ed12e5d03b3e8e52094c8791109097750cfec3d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "cfd708a1e8d9eadf7228f90c90b901e00fcaada7153f611033c466af5eb9c622",
+      "outputHash": "147dd7922139b1850b9f5c4d10988f00c32324fce25ac85f890b1a79a6266d1d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "147dd7922139b1850b9f5c4d10988f00c32324fce25ac85f890b1a79a6266d1d",
+      "outputHash": "c8221977e4fc1335d2f4e8b59f70036356fbb2744c739b322a9ccdfb57e0eb10"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "d31009584dfe50f49c255d971c765d3f0f28a7e52049b5475aad6c9c4f90b432",
+      "outputHash": "b696015e46d2939deaefc818d77eb166e3ba3a1e8011fd89916a185f903dedf6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "2c828c148917b0ffa65e8e0d5b18d569b8aebb68e1ba11d106ee590d40fcae31",
+      "inputHash": "52405acf2e53310d2e3ded72eb2b61ad25c3f25c5cb0d8b37d85eb3930f73ddc",
+      "outputHash": "9441ecacdc6c61e310bc3a1655b6d93514b9382e4e527cf5f38b32c865b230df"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "a021b86c2570ef795872562df64b0f7660ecd13fd4c1d0b4ba919eb52cf82b9a",
+      "outputHash": "b9f644d513606151d5ee04b8da2967245df38310113347b4c8f9e09b6d99c6b0"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/effect.battle_rally.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main native visual review",
+    "reviewedAt": "2026-09-07T21:17:33.774Z",
+    "notes": "Inspected processed native and4x plus three source backgrounds. Staggered muted gold chevrons rise and contract with darker lower edges readable on light ground; compact silhouette does not bury units. Integration approval pending actual combat review.\nReviewed candidate d45b97f422bb002455616e3e37b382f22ac768cc69bcd8cba73859cc1aa78e33; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/65569def5073e73f750504c32ab8fbce45aaa35f05ac24026c377738c2d923c8.png"
+    ],
+    "inputHash": "23282f26b745f7b1945ae8ff17e49a3d2a0c127ade07580ff5c8db600904bfb6"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 60,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

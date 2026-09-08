@@ -1,0 +1,2953 @@
+{
+  "date": "2026-09-07T06:21:39.091Z",
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "logicalCpus": 32,
+  "ramBytes": 33317580800,
+  "generatorVersion": 7,
+  "scope": "Whole warm generation including ordinary allocation/GC, drainage, starts and strict hydrology validation; one reference warmup plus5samples. Hash comparisons, component/depth/shore diagnostics, prior6 generation and regenerated relief are outside timing. No AI/save/archive/browser/mature campaign throughput claim.",
+  "policy": "At most3/2/1 basins on Continents/Islands/Archipelago, host-relative target12–18%/8–14%/5–10%, totalexcavationcap3%/2%/1.5% ofmap, at least3original landhexes toexistingwater. Minimumretained macro-land15%, actualfreshlakes countedseparately. Tiny retains6physical carving for48-seat viability. Salt seas are not freshwater lakes; usable shore counts are not guaranteed town foundations.",
+  "memory": "canonicalBufferBytes counts the5 canonical Uint8Array buffers only. Final process memory is not a peak or retained-memory measurement.",
+  "measurements": [
+    {
+      "size": "tiny",
+      "seed": 20260905,
+      "factionCount": 4,
+      "sha256": "28bea5e12493c443bcd00cb84cda830cda6c88fa6ba4fe33436f499ee3245445",
+      "cells": 1536,
+      "layout": "continents",
+      "landCells": 536,
+      "landComponents": [
+        318,
+        181,
+        11,
+        11,
+        7,
+        5,
+        3
+      ],
+      "meaningfulLandmasses": 2,
+      "coastalLandCells": 254,
+      "mountainCells": 44,
+      "mountainChains": [
+        15,
+        5,
+        4,
+        3,
+        3,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "riverCells": 46,
+      "lakeCells": 7,
+      "lakeBodies": 1,
+      "inlandWaterBodies": [
+        6,
+        5,
+        5,
+        5
+      ],
+      "inlandSeaBodies": 0,
+      "startComponents": 2,
+      "startingRegions": [
+        {
+          "cell": 317,
+          "passableCells": 300,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 722,
+          "passableCells": 163,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1101,
+          "passableCells": 300,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 992,
+          "passableCells": 300,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 7680,
+      "inlandSeas": [
+        {
+          "cells": 6,
+          "deepCells": 0,
+          "passableShoreCells": 15,
+          "broadShoreCells": 14
+        },
+        {
+          "cells": 5,
+          "deepCells": 0,
+          "passableShoreCells": 10,
+          "broadShoreCells": 9
+        },
+        {
+          "cells": 5,
+          "deepCells": 0,
+          "passableShoreCells": 10,
+          "broadShoreCells": 7
+        },
+        {
+          "cells": 5,
+          "deepCells": 0,
+          "passableShoreCells": 12,
+          "broadShoreCells": 8
+        }
+      ],
+      "inlandSeaCarvings": [],
+      "priorV6": {
+        "sha256": "e48f7983e4fb6c94c3fc49e65c4ad7be4eacc018767d13dd0029974cc1b96f30",
+        "landCells": 536,
+        "inlandSeas": [
+          {
+            "cells": 6,
+            "deepCells": 0,
+            "passableShoreCells": 15,
+            "broadShoreCells": 14
+          },
+          {
+            "cells": 5,
+            "deepCells": 0,
+            "passableShoreCells": 10,
+            "broadShoreCells": 9
+          },
+          {
+            "cells": 5,
+            "deepCells": 0,
+            "passableShoreCells": 10,
+            "broadShoreCells": 7
+          },
+          {
+            "cells": 5,
+            "deepCells": 0,
+            "passableShoreCells": 12,
+            "broadShoreCells": 8
+          }
+        ]
+      },
+      "samplesMs": [
+        6.279820999999998,
+        4.630749000000009,
+        4.091487000000001,
+        3.9104640000000046,
+        3.522802999999996
+      ],
+      "meanMs": 4.4870648000000015,
+      "medianMs": 4.091487000000001,
+      "maxMs": 6.279820999999998,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "tiny",
+      "seed": 20260905,
+      "factionCount": 4,
+      "sha256": "fb6ce3b687366c0f69032f112cfaf371a0f78fb667e930c441d72fb0a05673b9",
+      "cells": 1536,
+      "layout": "islands",
+      "landCells": 529,
+      "landComponents": [
+        190,
+        145,
+        86,
+        79,
+        10,
+        7,
+        3,
+        3,
+        3,
+        2,
+        1
+      ],
+      "meaningfulLandmasses": 4,
+      "coastalLandCells": 283,
+      "mountainCells": 33,
+      "mountainChains": [
+        4,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "riverCells": 28,
+      "lakeCells": 7,
+      "lakeBodies": 1,
+      "inlandWaterBodies": [
+        8,
+        5
+      ],
+      "inlandSeaBodies": 0,
+      "startComponents": 4,
+      "startingRegions": [
+        {
+          "cell": 1044,
+          "passableCells": 178,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 449,
+          "passableCells": 138,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 962,
+          "passableCells": 82,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1409,
+          "passableCells": 75,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 7680,
+      "inlandSeas": [
+        {
+          "cells": 8,
+          "deepCells": 0,
+          "passableShoreCells": 13,
+          "broadShoreCells": 9
+        },
+        {
+          "cells": 5,
+          "deepCells": 0,
+          "passableShoreCells": 10,
+          "broadShoreCells": 6
+        }
+      ],
+      "inlandSeaCarvings": [],
+      "priorV6": {
+        "sha256": "1dffdbc2a695b5d42a84ddd5c9d28d4bcdf758770fa993ae4363fe5f2f9bab95",
+        "landCells": 529,
+        "inlandSeas": [
+          {
+            "cells": 8,
+            "deepCells": 0,
+            "passableShoreCells": 13,
+            "broadShoreCells": 9
+          },
+          {
+            "cells": 5,
+            "deepCells": 0,
+            "passableShoreCells": 10,
+            "broadShoreCells": 6
+          }
+        ]
+      },
+      "samplesMs": [
+        4.131167000000005,
+        5.126204000000001,
+        3.752533999999997,
+        3.6608559999999954,
+        3.528764999999993
+      ],
+      "meanMs": 4.039905199999998,
+      "medianMs": 3.752533999999997,
+      "maxMs": 5.126204000000001,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "tiny",
+      "seed": 20260905,
+      "factionCount": 4,
+      "sha256": "bacf1f0fc593d3dd1cb84de46a0c7cb8b1361914985cc14094afbbe036df881e",
+      "cells": 1536,
+      "layout": "archipelago",
+      "landCells": 581,
+      "landComponents": [
+        87,
+        84,
+        79,
+        74,
+        73,
+        62,
+        55,
+        51,
+        8,
+        3,
+        2,
+        2,
+        1
+      ],
+      "meaningfulLandmasses": 8,
+      "coastalLandCells": 279,
+      "mountainCells": 40,
+      "mountainChains": [
+        5,
+        4,
+        4,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "riverCells": 30,
+      "lakeCells": 7,
+      "lakeBodies": 1,
+      "inlandWaterBodies": [],
+      "inlandSeaBodies": 0,
+      "startComponents": 4,
+      "startingRegions": [
+        {
+          "cell": 904,
+          "passableCells": 81,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1399,
+          "passableCells": 78,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 310,
+          "passableCells": 72,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 434,
+          "passableCells": 71,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 7680,
+      "inlandSeas": [],
+      "inlandSeaCarvings": [],
+      "priorV6": {
+        "sha256": "a82adf44c6d34ec39dda431b43fbf7d3e7009fa5c5aed9e83a90fdb7f2daec15",
+        "landCells": 581,
+        "inlandSeas": []
+      },
+      "samplesMs": [
+        3.3303160000000105,
+        3.545476999999977,
+        3.367114000000015,
+        3.2833559999999977,
+        3.238188000000008
+      ],
+      "meanMs": 3.352890200000002,
+      "medianMs": 3.3303160000000105,
+      "maxMs": 3.545476999999977,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "small",
+      "seed": 20260905,
+      "factionCount": 12,
+      "sha256": "906112c391647a5fe2179625a46b1b34cc507406be1f35d06ef2bc91a6ce59b7",
+      "cells": 40960,
+      "layout": "continents",
+      "landCells": 10102,
+      "landComponents": [
+        5619,
+        3501,
+        190,
+        124,
+        113,
+        113,
+        100,
+        77,
+        65,
+        40,
+        40,
+        39,
+        38,
+        23,
+        20
+      ],
+      "meaningfulLandmasses": 11,
+      "coastalLandCells": 1579,
+      "mountainCells": 670,
+      "mountainChains": [
+        95,
+        87,
+        74,
+        52,
+        48,
+        45,
+        40,
+        33,
+        22,
+        20,
+        20,
+        19,
+        17,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        8,
+        7,
+        3,
+        2,
+        1
+      ],
+      "riverCells": 488,
+      "lakeCells": 56,
+      "lakeBodies": 8,
+      "inlandWaterBodies": [
+        1074,
+        154
+      ],
+      "inlandSeaBodies": 2,
+      "startComponents": 11,
+      "startingRegions": [
+        {
+          "cell": 19877,
+          "passableCells": 5328,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 17178,
+          "passableCells": 3321,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 35192,
+          "passableCells": 160,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 33192,
+          "passableCells": 104,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 4540,
+          "passableCells": 98,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 17905,
+          "passableCells": 91,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 12130,
+          "passableCells": 80,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 9010,
+          "passableCells": 63,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 9433,
+          "passableCells": 48,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 9548,
+          "passableCells": 26,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 27267,
+          "passableCells": 25,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 4487,
+          "passableCells": 5328,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 204800,
+      "inlandSeas": [
+        {
+          "cells": 1074,
+          "deepCells": 838,
+          "passableShoreCells": 125,
+          "broadShoreCells": 89
+        },
+        {
+          "cells": 154,
+          "deepCells": 69,
+          "passableShoreCells": 55,
+          "broadShoreCells": 42
+        }
+      ],
+      "inlandSeaCarvings": [
+        {
+          "center": 11145,
+          "hostCells": 6714,
+          "targetCells": 1074,
+          "carvedCells": 1074,
+          "usableShoreCells": 89
+        },
+        {
+          "center": 25932,
+          "hostCells": 3669,
+          "targetCells": 154,
+          "carvedCells": 154,
+          "usableShoreCells": 42
+        }
+      ],
+      "priorV6": {
+        "sha256": "f9504d9ec72b69c2734ff1822f305091536615ce0c5023acd5f897452bf2bb34",
+        "landCells": 11124,
+        "inlandSeas": [
+          {
+            "cells": 97,
+            "deepCells": 30,
+            "passableShoreCells": 46,
+            "broadShoreCells": 36
+          },
+          {
+            "cells": 65,
+            "deepCells": 13,
+            "passableShoreCells": 26,
+            "broadShoreCells": 16
+          },
+          {
+            "cells": 44,
+            "deepCells": 4,
+            "passableShoreCells": 28,
+            "broadShoreCells": 19
+          }
+        ]
+      },
+      "samplesMs": [
+        94.60087199999998,
+        90.72224800000004,
+        81.66353199999998,
+        76.98408100000006,
+        88.2477990000001
+      ],
+      "meanMs": 86.44370640000002,
+      "medianMs": 88.2477990000001,
+      "maxMs": 94.60087199999998,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "small",
+      "seed": 20260905,
+      "factionCount": 12,
+      "sha256": "7133503203d9959a158412e847ee9e4cf705dc4694c831b411b46d406c295a50",
+      "cells": 40960,
+      "layout": "islands",
+      "landCells": 7803,
+      "landComponents": [
+        2523,
+        1544,
+        1214,
+        793,
+        646,
+        173,
+        147,
+        145,
+        103,
+        100,
+        69,
+        66,
+        58,
+        53,
+        47,
+        46,
+        32,
+        27,
+        15,
+        2
+      ],
+      "meaningfulLandmasses": 16,
+      "coastalLandCells": 1774,
+      "mountainCells": 641,
+      "mountainChains": [
+        127,
+        47,
+        40,
+        36,
+        33,
+        27,
+        25,
+        24,
+        23,
+        22,
+        20,
+        20,
+        19,
+        19,
+        17,
+        15,
+        15,
+        12,
+        11,
+        11,
+        11,
+        8,
+        8,
+        8,
+        8,
+        6,
+        6,
+        6,
+        5,
+        4,
+        4,
+        2,
+        1,
+        1
+      ],
+      "riverCells": 271,
+      "lakeCells": 105,
+      "lakeBodies": 15,
+      "inlandWaterBodies": [
+        345,
+        136
+      ],
+      "inlandSeaBodies": 2,
+      "startComponents": 12,
+      "startingRegions": [
+        {
+          "cell": 10644,
+          "passableCells": 2353,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 34073,
+          "passableCells": 1469,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 30863,
+          "passableCells": 1079,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 15391,
+          "passableCells": 767,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 22771,
+          "passableCells": 633,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 12119,
+          "passableCells": 156,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 32114,
+          "passableCells": 128,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 17481,
+          "passableCells": 105,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 6969,
+          "passableCells": 80,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 35598,
+          "passableCells": 76,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 10049,
+          "passableCells": 58,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 3021,
+          "passableCells": 47,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 204800,
+      "inlandSeas": [
+        {
+          "cells": 345,
+          "deepCells": 216,
+          "passableShoreCells": 73,
+          "broadShoreCells": 52
+        },
+        {
+          "cells": 136,
+          "deepCells": 60,
+          "passableShoreCells": 41,
+          "broadShoreCells": 31
+        }
+      ],
+      "inlandSeaCarvings": [
+        {
+          "center": 7855,
+          "hostCells": 2882,
+          "targetCells": 345,
+          "carvedCells": 345,
+          "usableShoreCells": 52
+        },
+        {
+          "center": 34379,
+          "hostCells": 1701,
+          "targetCells": 136,
+          "carvedCells": 136,
+          "usableShoreCells": 31
+        }
+      ],
+      "priorV6": {
+        "sha256": "2699a445c525810e9fbcdae217409c56d310b1265a1d626853c9544241c2b8af",
+        "landCells": 8175,
+        "inlandSeas": [
+          {
+            "cells": 65,
+            "deepCells": 13,
+            "passableShoreCells": 33,
+            "broadShoreCells": 27
+          },
+          {
+            "cells": 44,
+            "deepCells": 6,
+            "passableShoreCells": 18,
+            "broadShoreCells": 13
+          }
+        ]
+      },
+      "samplesMs": [
+        76.64066500000001,
+        71.958799,
+        72.75930999999991,
+        71.30479500000001,
+        73.20421300000021
+      ],
+      "meanMs": 73.17355640000002,
+      "medianMs": 72.75930999999991,
+      "maxMs": 76.64066500000001,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "small",
+      "seed": 20260905,
+      "factionCount": 12,
+      "sha256": "8d5ffd5d62f029dc2e71375101e049b7defef143b77e0202254deddf6cd43746",
+      "cells": 40960,
+      "layout": "archipelago",
+      "landCells": 11292,
+      "landComponents": [
+        2798,
+        2098,
+        1148,
+        1001,
+        792,
+        644,
+        440,
+        431,
+        323,
+        313,
+        302,
+        219,
+        192,
+        130,
+        113,
+        87,
+        60,
+        58,
+        46,
+        37,
+        30,
+        29,
+        1
+      ],
+      "meaningfulLandmasses": 19,
+      "coastalLandCells": 2203,
+      "mountainCells": 1215,
+      "mountainChains": [
+        153,
+        113,
+        87,
+        76,
+        71,
+        61,
+        58,
+        58,
+        52,
+        43,
+        37,
+        37,
+        35,
+        34,
+        33,
+        32,
+        30,
+        28,
+        22,
+        19,
+        16,
+        16,
+        14,
+        13,
+        11,
+        11,
+        10,
+        10,
+        9,
+        9,
+        6,
+        5,
+        3,
+        3
+      ],
+      "riverCells": 365,
+      "lakeCells": 154,
+      "lakeBodies": 22,
+      "inlandWaterBodies": [
+        245,
+        1
+      ],
+      "inlandSeaBodies": 1,
+      "startComponents": 12,
+      "startingRegions": [
+        {
+          "cell": 15405,
+          "passableCells": 2601,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 31383,
+          "passableCells": 1890,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 10979,
+          "passableCells": 1067,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 31463,
+          "passableCells": 848,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 5512,
+          "passableCells": 733,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 29989,
+          "passableCells": 557,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 26460,
+          "passableCells": 401,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 18579,
+          "passableCells": 370,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 23674,
+          "passableCells": 297,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 29878,
+          "passableCells": 286,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 16058,
+          "passableCells": 268,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 12173,
+          "passableCells": 161,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 204800,
+      "inlandSeas": [
+        {
+          "cells": 245,
+          "deepCells": 135,
+          "passableShoreCells": 62,
+          "broadShoreCells": 44
+        },
+        {
+          "cells": 1,
+          "deepCells": 0,
+          "passableShoreCells": 6,
+          "broadShoreCells": 5
+        }
+      ],
+      "inlandSeaCarvings": [
+        {
+          "center": 8816,
+          "hostCells": 3071,
+          "targetCells": 245,
+          "carvedCells": 245,
+          "usableShoreCells": 44
+        }
+      ],
+      "priorV6": {
+        "sha256": "788ca3d42711e4a24b1df5d3fd912db4c5e2d8c78d0f84ef9552616bd33a062d",
+        "landCells": 11472,
+        "inlandSeas": [
+          {
+            "cells": 65,
+            "deepCells": 13,
+            "passableShoreCells": 28,
+            "broadShoreCells": 23
+          },
+          {
+            "cells": 1,
+            "deepCells": 0,
+            "passableShoreCells": 6,
+            "broadShoreCells": 5
+          }
+        ]
+      },
+      "samplesMs": [
+        83.29896799999983,
+        84.96007699999996,
+        79.9717320000002,
+        81.25972999999999,
+        76.90041700000006
+      ],
+      "meanMs": 81.2781848,
+      "medianMs": 81.25972999999999,
+      "maxMs": 84.96007699999996,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "huge",
+      "seed": 20260905,
+      "factionCount": 32,
+      "sha256": "ceb4f855bde6b12afb83d6be9e93f0af35d00bfb4bc8182da9db2d51008e6226",
+      "cells": 196608,
+      "layout": "continents",
+      "landCells": 48632,
+      "landComponents": [
+        26958,
+        16571,
+        1019,
+        640,
+        602,
+        582,
+        433,
+        359,
+        325,
+        192,
+        174,
+        170,
+        170,
+        163,
+        124,
+        115,
+        33,
+        1,
+        1
+      ],
+      "meaningfulLandmasses": 9,
+      "coastalLandCells": 3579,
+      "mountainCells": 3680,
+      "mountainChains": [
+        557,
+        452,
+        429,
+        333,
+        233,
+        228,
+        186,
+        164,
+        141,
+        141,
+        136,
+        84,
+        84,
+        80,
+        61,
+        57,
+        55,
+        54,
+        50,
+        50,
+        47,
+        29,
+        23,
+        4,
+        1,
+        1
+      ],
+      "riverCells": 2112,
+      "lakeCells": 444,
+      "lakeBodies": 12,
+      "inlandWaterBodies": [
+        5155,
+        844,
+        743
+      ],
+      "inlandSeaBodies": 3,
+      "startComponents": 17,
+      "startingRegions": [
+        {
+          "cell": 133996,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 86587,
+          "passableCells": 15547,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 168688,
+          "passableCells": 802,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 153905,
+          "passableCells": 518,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 85993,
+          "passableCells": 476,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 24937,
+          "passableCells": 427,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 59082,
+          "passableCells": 396,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 41572,
+          "passableCells": 304,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 44468,
+          "passableCells": 241,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 141655,
+          "passableCells": 174,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 128770,
+          "passableCells": 142,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 160479,
+          "passableCells": 141,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 180018,
+          "passableCells": 116,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 47768,
+          "passableCells": 109,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 13039,
+          "passableCells": 101,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 142574,
+          "passableCells": 41,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 42321,
+          "passableCells": 33,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 137678,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 80663,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 143993,
+          "passableCells": 15547,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 86913,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 107187,
+          "passableCells": 15547,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 99657,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 102837,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 96377,
+          "passableCells": 15547,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 21798,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 70984,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 138420,
+          "passableCells": 15547,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 142235,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 75420,
+          "passableCells": 15547,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 40176,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 75690,
+          "passableCells": 25359,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 983040,
+      "inlandSeas": [
+        {
+          "cells": 5155,
+          "deepCells": 4614,
+          "passableShoreCells": 271,
+          "broadShoreCells": 190
+        },
+        {
+          "cells": 844,
+          "deepCells": 589,
+          "passableShoreCells": 146,
+          "broadShoreCells": 104
+        },
+        {
+          "cells": 743,
+          "deepCells": 543,
+          "passableShoreCells": 112,
+          "broadShoreCells": 82
+        }
+      ],
+      "inlandSeaCarvings": [
+        {
+          "center": 48404,
+          "hostCells": 32224,
+          "targetCells": 5155,
+          "carvedCells": 5155,
+          "usableShoreCells": 190
+        },
+        {
+          "center": 126621,
+          "hostCells": 17388,
+          "targetCells": 743,
+          "carvedCells": 743,
+          "usableShoreCells": 82
+        }
+      ],
+      "priorV6": {
+        "sha256": "35e0b85e75f6f566b8397b09a39f026ccd6733ba88cd24184867fe4ee2c16734",
+        "landCells": 53614,
+        "inlandSeas": [
+          {
+            "cells": 844,
+            "deepCells": 589,
+            "passableShoreCells": 146,
+            "broadShoreCells": 104
+          },
+          {
+            "cells": 386,
+            "deepCells": 236,
+            "passableShoreCells": 90,
+            "broadShoreCells": 66
+          },
+          {
+            "cells": 317,
+            "deepCells": 183,
+            "passableShoreCells": 41,
+            "broadShoreCells": 33
+          },
+          {
+            "cells": 213,
+            "deepCells": 106,
+            "passableShoreCells": 52,
+            "broadShoreCells": 38
+          }
+        ]
+      },
+      "samplesMs": [
+        345.4298719999997,
+        336.27022499999975,
+        340.69450400000005,
+        333.86830899999995,
+        336.4260159999999
+      ],
+      "meanMs": 338.53778519999986,
+      "medianMs": 336.4260159999999,
+      "maxMs": 345.4298719999997,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "huge",
+      "seed": 20260905,
+      "factionCount": 32,
+      "sha256": "7def3b61fba88b66c4c04a86836a3649fbe3c87aa7a62fafac7241c05c50b964",
+      "cells": 196608,
+      "layout": "islands",
+      "landCells": 39754,
+      "landComponents": [
+        12442,
+        7105,
+        5985,
+        3946,
+        3920,
+        958,
+        891,
+        656,
+        634,
+        543,
+        511,
+        342,
+        308,
+        284,
+        255,
+        211,
+        180,
+        174,
+        165,
+        126,
+        64,
+        51,
+        1,
+        1,
+        1
+      ],
+      "meaningfulLandmasses": 16,
+      "coastalLandCells": 4329,
+      "mountainCells": 2851,
+      "mountainChains": [
+        559,
+        192,
+        179,
+        141,
+        136,
+        134,
+        118,
+        106,
+        103,
+        94,
+        83,
+        78,
+        76,
+        70,
+        64,
+        60,
+        60,
+        52,
+        48,
+        47,
+        47,
+        42,
+        37,
+        35,
+        35,
+        33,
+        33,
+        32,
+        30,
+        27,
+        26,
+        26,
+        19,
+        15,
+        14
+      ],
+      "riverCells": 1399,
+      "lakeCells": 814,
+      "lakeBodies": 22,
+      "inlandWaterBodies": [
+        1706,
+        627
+      ],
+      "inlandSeaBodies": 2,
+      "startComponents": 22,
+      "startingRegions": [
+        {
+          "cell": 52523,
+          "passableCells": 11726,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 160819,
+          "passableCells": 6866,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 148760,
+          "passableCells": 5379,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 112099,
+          "passableCells": 3873,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 73785,
+          "passableCells": 3823,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 51878,
+          "passableCells": 865,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 155367,
+          "passableCells": 799,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 82288,
+          "passableCells": 596,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 73854,
+          "passableCells": 500,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 174612,
+          "passableCells": 407,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 33394,
+          "passableCells": 393,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 107261,
+          "passableCells": 238,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 134742,
+          "passableCells": 236,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 53362,
+          "passableCells": 232,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 10130,
+          "passableCells": 218,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 129704,
+          "passableCells": 176,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 92557,
+          "passableCells": 135,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 62592,
+          "passableCells": 126,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 74542,
+          "passableCells": 116,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 30417,
+          "passableCells": 91,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 44976,
+          "passableCells": 64,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 89830,
+          "passableCells": 37,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 15155,
+          "passableCells": 11726,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 42864,
+          "passableCells": 11726,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 182419,
+          "passableCells": 6866,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 60122,
+          "passableCells": 11726,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 122188,
+          "passableCells": 5379,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 39168,
+          "passableCells": 11726,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 152192,
+          "passableCells": 6866,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 16229,
+          "passableCells": 11726,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 132010,
+          "passableCells": 3873,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 102492,
+          "passableCells": 3823,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 983040,
+      "inlandSeas": [
+        {
+          "cells": 1706,
+          "deepCells": 1403,
+          "passableShoreCells": 162,
+          "broadShoreCells": 117
+        },
+        {
+          "cells": 627,
+          "deepCells": 445,
+          "passableShoreCells": 93,
+          "broadShoreCells": 71
+        }
+      ],
+      "inlandSeaCarvings": [
+        {
+          "center": 41820,
+          "hostCells": 14222,
+          "targetCells": 1706,
+          "carvedCells": 1706,
+          "usableShoreCells": 117
+        },
+        {
+          "center": 163985,
+          "hostCells": 7843,
+          "targetCells": 627,
+          "carvedCells": 627,
+          "usableShoreCells": 71
+        }
+      ],
+      "priorV6": {
+        "sha256": "23db05c652593023abc8ff62da937672d25ff2da994f17662a5ff16ab2b4f8cc",
+        "landCells": 41557,
+        "inlandSeas": [
+          {
+            "cells": 317,
+            "deepCells": 183,
+            "passableShoreCells": 77,
+            "broadShoreCells": 58
+          },
+          {
+            "cells": 213,
+            "deepCells": 105,
+            "passableShoreCells": 43,
+            "broadShoreCells": 31
+          }
+        ]
+      },
+      "samplesMs": [
+        342.82686100000046,
+        338.2430400000003,
+        359.75083899999936,
+        352.70064399999956,
+        337.42015000000083
+      ],
+      "meanMs": 346.1883068000001,
+      "medianMs": 342.82686100000046,
+      "maxMs": 359.75083899999936,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "huge",
+      "seed": 20260905,
+      "factionCount": 32,
+      "sha256": "41f3c820cc46c6a27deaf26c38ecc33bd587b289fc91e3b9443b1148bd0249e5",
+      "cells": 196608,
+      "layout": "archipelago",
+      "landCells": 54474,
+      "landComponents": [
+        16692,
+        7737,
+        5552,
+        4502,
+        3228,
+        2525,
+        2331,
+        2157,
+        2141,
+        1457,
+        1447,
+        1095,
+        973,
+        570,
+        474,
+        405,
+        266,
+        252,
+        235,
+        184,
+        144,
+        107
+      ],
+      "meaningfulLandmasses": 19,
+      "coastalLandCells": 4977,
+      "mountainCells": 5976,
+      "mountainChains": [
+        806,
+        473,
+        404,
+        387,
+        367,
+        326,
+        280,
+        272,
+        266,
+        256,
+        223,
+        201,
+        189,
+        178,
+        167,
+        143,
+        139,
+        132,
+        123,
+        100,
+        82,
+        62,
+        60,
+        59,
+        46,
+        44,
+        39,
+        32,
+        24,
+        24,
+        21,
+        21,
+        11,
+        10,
+        9
+      ],
+      "riverCells": 1739,
+      "lakeCells": 962,
+      "lakeBodies": 26,
+      "inlandWaterBodies": [
+        1470
+      ],
+      "inlandSeaBodies": 1,
+      "startComponents": 22,
+      "startingRegions": [
+        {
+          "cell": 51887,
+          "passableCells": 15136,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 177362,
+          "passableCells": 7204,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 70085,
+          "passableCells": 5269,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 155065,
+          "passableCells": 3696,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 133680,
+          "passableCells": 2861,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 114840,
+          "passableCells": 2285,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 109315,
+          "passableCells": 2208,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 168564,
+          "passableCells": 1861,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 88891,
+          "passableCells": 1831,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 76148,
+          "passableCells": 1290,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 153417,
+          "passableCells": 1258,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 120704,
+          "passableCells": 839,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 63243,
+          "passableCells": 707,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 112046,
+          "passableCells": 427,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 191185,
+          "passableCells": 342,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 168841,
+          "passableCells": 323,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 115665,
+          "passableCells": 228,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 9950,
+          "passableCells": 207,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 94854,
+          "passableCells": 196,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 122150,
+          "passableCells": 152,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 82086,
+          "passableCells": 86,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 5937,
+          "passableCells": 84,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 71203,
+          "passableCells": 15136,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 31599,
+          "passableCells": 15136,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 57963,
+          "passableCells": 15136,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 138958,
+          "passableCells": 7204,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 98889,
+          "passableCells": 15136,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 46495,
+          "passableCells": 5269,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 38194,
+          "passableCells": 15136,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 158984,
+          "passableCells": 7204,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 45284,
+          "passableCells": 15136,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 24336,
+          "passableCells": 15136,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 983040,
+      "inlandSeas": [
+        {
+          "cells": 1470,
+          "deepCells": 1190,
+          "passableShoreCells": 144,
+          "broadShoreCells": 101
+        }
+      ],
+      "inlandSeaCarvings": [
+        {
+          "center": 82001,
+          "hostCells": 18384,
+          "targetCells": 1470,
+          "carvedCells": 1470,
+          "usableShoreCells": 101
+        }
+      ],
+      "priorV6": {
+        "sha256": "2f55096b6a02d96a7881107b1b93e8601703af31a92492bd7a9e1cbeb784f517",
+        "landCells": 55627,
+        "inlandSeas": [
+          {
+            "cells": 317,
+            "deepCells": 185,
+            "passableShoreCells": 71,
+            "broadShoreCells": 54
+          }
+        ]
+      },
+      "samplesMs": [
+        362.5627169999998,
+        358.07464400000026,
+        350.9486140000008,
+        355.3809190000011,
+        356.11528199999884
+      ],
+      "meanMs": 356.6164352000002,
+      "medianMs": 356.11528199999884,
+      "maxMs": 362.5627169999998,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "legendary",
+      "seed": 20260905,
+      "factionCount": 40,
+      "sha256": "1621dd43216fb0aa35f2f78d040b1250348201bd547aca8896e6e76e5d04e7a8",
+      "cells": 307200,
+      "layout": "continents",
+      "landCells": 74863,
+      "landComponents": [
+        41749,
+        25360,
+        1617,
+        1020,
+        914,
+        899,
+        693,
+        573,
+        454,
+        256,
+        245,
+        243,
+        235,
+        232,
+        186,
+        177,
+        7,
+        1,
+        1,
+        1
+      ],
+      "meaningfulLandmasses": 9,
+      "coastalLandCells": 4534,
+      "mountainCells": 5693,
+      "mountainChains": [
+        887,
+        726,
+        593,
+        585,
+        343,
+        323,
+        309,
+        292,
+        234,
+        201,
+        190,
+        147,
+        133,
+        114,
+        111,
+        94,
+        89,
+        87,
+        76,
+        65,
+        39,
+        21,
+        18,
+        13,
+        3
+      ],
+      "riverCells": 2449,
+      "lakeCells": 629,
+      "lakeBodies": 17,
+      "inlandWaterBodies": [
+        7973,
+        1276,
+        1243,
+        1,
+        1
+      ],
+      "inlandSeaBodies": 3,
+      "startComponents": 17,
+      "startingRegions": [
+        {
+          "cell": 142565,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 163271,
+          "passableCells": 23840,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 265902,
+          "passableCells": 1293,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 242980,
+          "passableCells": 767,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 135013,
+          "passableCells": 697,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 33103,
+          "passableCells": 677,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 94336,
+          "passableCells": 607,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 64762,
+          "passableCells": 459,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 69665,
+          "passableCells": 343,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 223171,
+          "passableCells": 256,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 249880,
+          "passableCells": 214,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 207048,
+          "passableCells": 204,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 278130,
+          "passableCells": 180,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 20777,
+          "passableCells": 165,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 74433,
+          "passableCells": 159,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 223014,
+          "passableCells": 53,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 229409,
+          "passableCells": 35,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 119410,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 216254,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 226077,
+          "passableCells": 23840,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 49657,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 146743,
+          "passableCells": 23840,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 177035,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 90675,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 164103,
+          "passableCells": 23840,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 163753,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 204030,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 118521,
+          "passableCells": 23840,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 102076,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 205018,
+          "passableCells": 23840,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 115089,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 182862,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 208109,
+          "passableCells": 23840,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 61097,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 178527,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 186400,
+          "passableCells": 23840,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 140573,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 242135,
+          "passableCells": 23840,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 104799,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 36176,
+          "passableCells": 39210,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 1536000,
+      "inlandSeas": [
+        {
+          "cells": 7973,
+          "deepCells": 7304,
+          "passableShoreCells": 335,
+          "broadShoreCells": 240
+        },
+        {
+          "cells": 1276,
+          "deepCells": 895,
+          "passableShoreCells": 207,
+          "broadShoreCells": 153
+        },
+        {
+          "cells": 1243,
+          "deepCells": 981,
+          "passableShoreCells": 144,
+          "broadShoreCells": 105
+        },
+        {
+          "cells": 1,
+          "deepCells": 0,
+          "passableShoreCells": 6,
+          "broadShoreCells": 5
+        },
+        {
+          "cells": 1,
+          "deepCells": 0,
+          "passableShoreCells": 6,
+          "broadShoreCells": 2
+        }
+      ],
+      "inlandSeaCarvings": [
+        {
+          "center": 73302,
+          "hostCells": 49833,
+          "targetCells": 7973,
+          "carvedCells": 7973,
+          "usableShoreCells": 240
+        },
+        {
+          "center": 195397,
+          "hostCells": 26677,
+          "targetCells": 1243,
+          "carvedCells": 1243,
+          "usableShoreCells": 105
+        }
+      ],
+      "priorV6": {
+        "sha256": "d8c870980da525db65061ea2c80c563d495d8b0b53aa3fb5ea5ab1003e9d230b",
+        "landCells": 82559,
+        "inlandSeas": [
+          {
+            "cells": 1276,
+            "deepCells": 895,
+            "passableShoreCells": 207,
+            "broadShoreCells": 153
+          },
+          {
+            "cells": 628,
+            "deepCells": 434,
+            "passableShoreCells": 114,
+            "broadShoreCells": 82
+          },
+          {
+            "cells": 506,
+            "deepCells": 332,
+            "passableShoreCells": 52,
+            "broadShoreCells": 38
+          },
+          {
+            "cells": 386,
+            "deepCells": 240,
+            "passableShoreCells": 62,
+            "broadShoreCells": 46
+          },
+          {
+            "cells": 1,
+            "deepCells": 0,
+            "passableShoreCells": 6,
+            "broadShoreCells": 5
+          },
+          {
+            "cells": 1,
+            "deepCells": 0,
+            "passableShoreCells": 6,
+            "broadShoreCells": 2
+          }
+        ]
+      },
+      "samplesMs": [
+        525.4846010000001,
+        521.7288540000009,
+        527.6425449999988,
+        525.4296670000003,
+        528.8533060000009
+      ],
+      "meanMs": 525.8277946000002,
+      "medianMs": 525.4846010000001,
+      "maxMs": 528.8533060000009,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "legendary",
+      "seed": 20260905,
+      "factionCount": 40,
+      "sha256": "13fa15750c766f77a7fbadf0ebd025e60abd9aca66d1fb5eb46329bf38e5b0eb",
+      "cells": 307200,
+      "layout": "islands",
+      "landCells": 62556,
+      "landComponents": [
+        20707,
+        11036,
+        9492,
+        6326,
+        6259,
+        1450,
+        1079,
+        1003,
+        930,
+        790,
+        543,
+        525,
+        473,
+        423,
+        351,
+        306,
+        241,
+        236,
+        190,
+        92,
+        78,
+        19,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "meaningfulLandmasses": 15,
+      "coastalLandCells": 5562,
+      "mountainCells": 4748,
+      "mountainChains": [
+        909,
+        350,
+        313,
+        252,
+        244,
+        231,
+        227,
+        205,
+        179,
+        164,
+        164,
+        148,
+        127,
+        125,
+        100,
+        90,
+        88,
+        80,
+        78,
+        74,
+        65,
+        62,
+        52,
+        49,
+        48,
+        47,
+        46,
+        41,
+        41,
+        36,
+        32,
+        30,
+        25,
+        17,
+        8,
+        1
+      ],
+      "riverCells": 1728,
+      "lakeCells": 888,
+      "lakeBodies": 24,
+      "inlandWaterBodies": [
+        2838,
+        969,
+        3,
+        1
+      ],
+      "inlandSeaBodies": 2,
+      "startComponents": 21,
+      "startingRegions": [
+        {
+          "cell": 77163,
+          "passableCells": 19411,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 252863,
+          "passableCells": 10657,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 235884,
+          "passableCells": 8434,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 158039,
+          "passableCells": 6171,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 115276,
+          "passableCells": 6072,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 243489,
+          "passableCells": 1297,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 129100,
+          "passableCells": 952,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 124358,
+          "passableCells": 776,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 275224,
+          "passableCells": 686,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 44953,
+          "passableCells": 585,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 167358,
+          "passableCells": 400,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 87188,
+          "passableCells": 395,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 15225,
+          "passableCells": 376,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 210667,
+          "passableCells": 364,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 203092,
+          "passableCells": 315,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 147052,
+          "passableCells": 244,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 103837,
+          "passableCells": 190,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 116218,
+          "passableCells": 167,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 49546,
+          "passableCells": 136,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 70299,
+          "passableCells": 92,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 137252,
+          "passableCells": 61,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 29861,
+          "passableCells": 19411,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 78545,
+          "passableCells": 19411,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 286908,
+          "passableCells": 10657,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 95609,
+          "passableCells": 19411,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 196277,
+          "passableCells": 8434,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 86706,
+          "passableCells": 19411,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 237603,
+          "passableCells": 10657,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 80202,
+          "passableCells": 19411,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 208537,
+          "passableCells": 6171,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 157567,
+          "passableCells": 6072,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 165509,
+          "passableCells": 8434,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 97702,
+          "passableCells": 19411,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 272760,
+          "passableCells": 10657,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 42068,
+          "passableCells": 19411,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 63769,
+          "passableCells": 19411,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 263917,
+          "passableCells": 10657,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 206403,
+          "passableCells": 8434,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 198352,
+          "passableCells": 6171,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 165186,
+          "passableCells": 6072,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 1536000,
+      "inlandSeas": [
+        {
+          "cells": 2838,
+          "deepCells": 2442,
+          "passableShoreCells": 209,
+          "broadShoreCells": 144
+        },
+        {
+          "cells": 969,
+          "deepCells": 734,
+          "passableShoreCells": 117,
+          "broadShoreCells": 82
+        },
+        {
+          "cells": 3,
+          "deepCells": 0,
+          "passableShoreCells": 10,
+          "broadShoreCells": 10
+        },
+        {
+          "cells": 1,
+          "deepCells": 0,
+          "passableShoreCells": 6,
+          "broadShoreCells": 6
+        }
+      ],
+      "inlandSeaCarvings": [
+        {
+          "center": 65074,
+          "hostCells": 23656,
+          "targetCells": 2838,
+          "carvedCells": 2838,
+          "usableShoreCells": 144
+        },
+        {
+          "center": 258101,
+          "hostCells": 12116,
+          "targetCells": 969,
+          "carvedCells": 969,
+          "usableShoreCells": 82
+        }
+      ],
+      "priorV6": {
+        "sha256": "308faaad53a1cc89b3eb79bdb1301fdbdb3948f68c65c34cdd247b0a5295d47e",
+        "landCells": 65471,
+        "inlandSeas": [
+          {
+            "cells": 506,
+            "deepCells": 330,
+            "passableShoreCells": 96,
+            "broadShoreCells": 70
+          },
+          {
+            "cells": 386,
+            "deepCells": 240,
+            "passableShoreCells": 53,
+            "broadShoreCells": 39
+          },
+          {
+            "cells": 3,
+            "deepCells": 0,
+            "passableShoreCells": 10,
+            "broadShoreCells": 10
+          },
+          {
+            "cells": 1,
+            "deepCells": 0,
+            "passableShoreCells": 6,
+            "broadShoreCells": 6
+          }
+        ]
+      },
+      "samplesMs": [
+        530.226725999999,
+        537.5358969999997,
+        534.7867709999991,
+        535.3087530000012,
+        523.9168079999981
+      ],
+      "meanMs": 532.3549909999995,
+      "medianMs": 534.7867709999991,
+      "maxMs": 537.5358969999997,
+      "deterministicSamples": 5
+    },
+    {
+      "size": "legendary",
+      "seed": 20260905,
+      "factionCount": 40,
+      "sha256": "3a22a1306f7ef6db30e1c830fe9a205b342a15f97de2808c719ce7363678370a",
+      "cells": 307200,
+      "layout": "archipelago",
+      "landCells": 86556,
+      "landComponents": [
+        13801,
+        13459,
+        11965,
+        8782,
+        6953,
+        4976,
+        3960,
+        3691,
+        3418,
+        3297,
+        2437,
+        2291,
+        1839,
+        1463,
+        972,
+        767,
+        595,
+        452,
+        382,
+        356,
+        334,
+        184,
+        181,
+        1
+      ],
+      "meaningfulLandmasses": 21,
+      "coastalLandCells": 6248,
+      "mountainCells": 9809,
+      "mountainChains": [
+        1275,
+        758,
+        660,
+        658,
+        604,
+        568,
+        465,
+        448,
+        433,
+        419,
+        393,
+        392,
+        328,
+        313,
+        278,
+        261,
+        225,
+        203,
+        183,
+        173,
+        117,
+        104,
+        94,
+        60,
+        57,
+        57,
+        50,
+        41,
+        34,
+        29,
+        28,
+        26,
+        24,
+        18,
+        16,
+        12,
+        5
+      ],
+      "riverCells": 2230,
+      "lakeCells": 1036,
+      "lakeBodies": 28,
+      "inlandWaterBodies": [
+        1180
+      ],
+      "inlandSeaBodies": 1,
+      "startComponents": 23,
+      "startingRegions": [
+        {
+          "cell": 39406,
+          "passableCells": 12724,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 126119,
+          "passableCells": 12066,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 266526,
+          "passableCells": 10975,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 108729,
+          "passableCells": 8306,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 242437,
+          "passableCells": 5678,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 211976,
+          "passableCells": 4318,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 183272,
+          "passableCells": 3553,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 176328,
+          "passableCells": 3508,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 286262,
+          "passableCells": 3026,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 134151,
+          "passableCells": 2729,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 115665,
+          "passableCells": 2109,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 231445,
+          "passableCells": 2013,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 178377,
+          "passableCells": 1374,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 97614,
+          "passableCells": 1030,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 168212,
+          "passableCells": 711,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 290163,
+          "passableCells": 542,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 260966,
+          "passableCells": 536,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 13062,
+          "passableCells": 348,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 182981,
+          "passableCells": 327,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 148645,
+          "passableCells": 322,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 189809,
+          "passableCells": 261,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 126929,
+          "passableCells": 147,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 9329,
+          "passableCells": 127,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 44627,
+          "passableCells": 12724,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 84620,
+          "passableCells": 12066,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 237026,
+          "passableCells": 10975,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 71300,
+          "passableCells": 12724,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 69004,
+          "passableCells": 8306,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 156252,
+          "passableCells": 12066,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 243541,
+          "passableCells": 10975,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 49589,
+          "passableCells": 12724,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 98003,
+          "passableCells": 12066,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 228421,
+          "passableCells": 5678,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 126600,
+          "passableCells": 8306,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 227491,
+          "passableCells": 10975,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 59935,
+          "passableCells": 12724,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 80842,
+          "passableCells": 12066,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 213452,
+          "passableCells": 10975,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 217022,
+          "passableCells": 4318,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 24748,
+          "passableCells": 12724,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 1536000,
+      "inlandSeas": [
+        {
+          "cells": 1180,
+          "deepCells": 926,
+          "passableShoreCells": 125,
+          "broadShoreCells": 85
+        }
+      ],
+      "inlandSeaCarvings": [
+        {
+          "center": 129381,
+          "hostCells": 14750,
+          "targetCells": 1180,
+          "carvedCells": 1180,
+          "usableShoreCells": 85
+        }
+      ],
+      "priorV6": {
+        "sha256": "4f4c1aa085d19706502683076f5a04e3c263a7c7af4e47ccf69f6573d4af0a0d",
+        "landCells": 87230,
+        "inlandSeas": [
+          {
+            "cells": 506,
+            "deepCells": 332,
+            "passableShoreCells": 86,
+            "broadShoreCells": 63
+          }
+        ]
+      },
+      "samplesMs": [
+        560.9889030000013,
+        562.5537860000004,
+        555.7219430000005,
+        569.3382889999993,
+        553.4957749999994
+      ],
+      "meanMs": 560.4197392000002,
+      "medianMs": 560.9889030000013,
+      "maxMs": 569.3382889999993,
+      "deterministicSamples": 5
+    }
+  ],
+  "finalMemory": {
+    "rss": 258465792,
+    "heapTotal": 77897728,
+    "heapUsed": 38292672,
+    "external": 25012062,
+    "arrayBuffers": 22454999
+  }
+}

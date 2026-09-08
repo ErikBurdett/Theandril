@@ -1,6 +1,9 @@
 import { expect, test } from 'vitest';
 import fc from 'fast-check';
-import { BIOME, BIOME_NAMES, deriveBiomes, deriveClimate, generateWorld, isValidBiome, MAP_DIMENSIONS, neighbors, TERRAIN, type GeneratorVersion, type MapSize } from './index';
+import { BIOME, BIOME_NAMES, deriveBiomes, deriveClimate, generateWorld as generateCurrentWorld, isValidBiome, MAP_DIMENSIONS, neighbors, TERRAIN, type GeneratorVersion, type MapSize } from './index';
+
+// Freeze the original climate stages on their actual historical physical map.
+const generateWorld: typeof generateCurrentWorld = (seed, size, count, version = 4, options) => generateCurrentWorld(seed, size, count, version, options);
 
 function fingerprint(values: Iterable<number>): string {
   let hash = 0x811c9dc5;
@@ -90,7 +93,7 @@ test.each(['huge', 'legendary'] as const)('%s climate has coherent diverse distr
 });
 
 test('rejects unsupported versions, mismatched dimensions and invalid physical inputs', () => {
-  expect(() => generateWorld(1, 'tiny', 4, 5 as GeneratorVersion)).toThrow(RangeError);
+  expect(() => generateWorld(1, 'tiny', 4, 8 as GeneratorVersion)).toThrow(RangeError);
   expect(() => deriveBiomes(1, 1, 1, new Uint8Array([0]), 0 as GeneratorVersion)).toThrow(RangeError);
   expect(() => deriveBiomes(NaN, 1, 1, new Uint8Array([0]))).toThrow(RangeError);
   expect(() => deriveBiomes(1, 2, 1, new Uint8Array([0]))).toThrow(RangeError);

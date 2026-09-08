@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.underhush_exchange",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art character.marshal for Theandril, Underhush Exchange.\nSubject: One adult faction commander on foot, authoritative quiet upright stance, heavier formal faction coat and practical armor, a compact command baton in one hand and a folded campaign plan in the other. Full body, not portrait. Distinct senior officer silhouette without a crown or huge banner.\nCulture-specific identity: An adult short broad-handed burrowfolk: compact furred body, small rounded ears, blunt face, visible dexterous fingers. Upright two-legged working citizen, not a bearded dwarf, pet or exposed-tooth rodent caricature. Clay-brown padded work coats, pewter fittings, pale-lime panels, tiny dull amber route markers, tactile tally beads, low padded helmets and rounded work shields. Generous compact horizontal shapes.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "character.marshal.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.underhush_exchange/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5f928aeb25f623bcb6c7a92ded4e60db0116aeace3a04a0c030e18b4f617cc30",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/character.marshal.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/character.marshal.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:17:16Z",
+  "referenceHashes": [
+    "6a79f76afe2e9375c9656e0480d24cf814a51652d1be56b6377b61adfe4263b3",
+    "9f99d59c30e9ea02e23b3019b0391d6b120e700ba0c73271085dca877263b2be"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "f941cb8ac4076e0e2356ccdf31a87c0e415449a7642150425e4bead34250c66d",
+      "inputHash": "6a79f76afe2e9375c9656e0480d24cf814a51652d1be56b6377b61adfe4263b3",
+      "outputHash": "20f1e069e3760731224a91734d5bf92485c896fa8388c3b73d08364e3ffd302f"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

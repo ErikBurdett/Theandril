@@ -15,7 +15,8 @@ interface SaveFixture {
     rosterVersion: GameState['rosterVersion'];
     pace: CampaignPace;
     turn: number; nextId: number; nextEntityId?: number; turnOwnerId: string;
-    world: { width: number; height: number; seed: number; terrain: number[]; fertility: number[]; starts: number[]; biome: number[]; waterDepth: number[]; generatorVersion: 1 | 2 | 3 | 4 };
+    world: { width: number; height: number; seed: number; terrain: number[]; fertility: number[]; starts: number[]; biome: number[]; waterDepth: number[]; generatorVersion: 1 | 2 | 3 | 4; layout: string; hydrology: number[] };
+    roads: GameState['roads'];
     land: GameState['land'];
     armies: Army[]; settlements: Settlement[]; factions: FactionState[];
     explored: { factionId: string; cells: number[] }[]; events: DomainEvent[];
@@ -25,6 +26,7 @@ interface SaveFixture {
     routes: MovementRoute[];
     characters: GameState['characters'][string][];
     transports: { armyId: string; fleetId: string }[];
+    arcaneResearch: { factionId: string; discoveries: string[] }[];
   };
 }
 
@@ -53,8 +55,9 @@ function previousV2State(save: SaveFixture) {
 }
 
 function previousV3State(save: SaveFixture) {
-  const { progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, ...state } = save.state;
-  const { biome: _biome, generatorVersion: _generatorVersion, waterDepth: _waterDepth, ...world } = state.world;
+  if (save.state.arcaneResearch.some(item => item.discoveries.length)) throw new Error('Synthetic historical projection cannot discard arcane discoveries.');
+  const { progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, roads: _roads, arcaneResearch: _arcaneResearch, ...state } = save.state;
+  const { biome: _biome, generatorVersion: _generatorVersion, waterDepth: _waterDepth, layout: _layout, hydrology: _hydrology, ...world } = state.world;
   const previousBattle = (battle: CampaignBattle) => {
     const { attackerDoctrineId: _attackerDoctrine, defenderDoctrineId: _defenderDoctrine, ...previous } = legacyCampaignBattleSchema.parse(battleReportForVersion(battle, 5));
     return previous;
@@ -106,6 +109,10 @@ describe('save validation and migration', () => {
     expect(() => deserializeGame(JSON.stringify({ ...legacy, contentHash: 'unknown' }))).toThrow(/v1 content hash/);
     const damaged = { ...legacy, state: { ...state, turn: state.turn + 1 } };
     expect(() => deserializeGame(JSON.stringify(damaged))).toThrow(/v1 snapshot checksum/);
+    const modernField = { ...state, arcaneResearch: current.state.arcaneResearch };
+    expect(() => deserializeGame(JSON.stringify({ ...legacy, state: modernField, stateChecksum: checksum(JSON.stringify(modernField)) }))).toThrow(/arcaneResearch/);
+    current.state.arcaneResearch[0]!.discoveries.push('arcane.ember_projection');
+    expect(() => previousState(current)).toThrow(/cannot discard/);
   });
 
   it('migrates checked v2 state into settlement provenance and diplomacy defaults', () => {

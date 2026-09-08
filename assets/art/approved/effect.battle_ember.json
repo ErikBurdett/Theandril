@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.battle_ember",
+  "type": "effect",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.battle_ember"
+  ],
+  "prompt": "Original Theandril ember battlefield effect, authored and animated in Blender. Fixed native 64x64 canvas, registered effect center (32,32), retained keyframed scene, raw renders and exact palette normalization. 8 supplied cast frames; no synthesized pose, mirrored faction art or independently fitted frames. Exact production brief/profile and source evidence: assets/art/source/blender-battle/effect.battle_ember/v1/manifest.json.",
+  "frames": [
+    {
+      "id": "effect.battle_ember/cast/se/0",
+      "direction": "se",
+      "state": "cast",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_ember/0c9e6faa2644d14985c186c19c5784ef48d3fb934c77492f0ed649c27eafe58c/frame-0.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/1",
+      "direction": "se",
+      "state": "cast",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_ember/0c9e6faa2644d14985c186c19c5784ef48d3fb934c77492f0ed649c27eafe58c/frame-1.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/2",
+      "direction": "se",
+      "state": "cast",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_ember/0c9e6faa2644d14985c186c19c5784ef48d3fb934c77492f0ed649c27eafe58c/frame-2.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/3",
+      "direction": "se",
+      "state": "cast",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_ember/0c9e6faa2644d14985c186c19c5784ef48d3fb934c77492f0ed649c27eafe58c/frame-3.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/4",
+      "direction": "se",
+      "state": "cast",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_ember/0c9e6faa2644d14985c186c19c5784ef48d3fb934c77492f0ed649c27eafe58c/frame-4.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/5",
+      "direction": "se",
+      "state": "cast",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_ember/0c9e6faa2644d14985c186c19c5784ef48d3fb934c77492f0ed649c27eafe58c/frame-5.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/6",
+      "direction": "se",
+      "state": "cast",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_ember/0c9e6faa2644d14985c186c19c5784ef48d3fb934c77492f0ed649c27eafe58c/frame-6.png"
+    },
+    {
+      "id": "effect.battle_ember/cast/se/7",
+      "direction": "se",
+      "state": "cast",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/effect.battle_ember/0c9e6faa2644d14985c186c19c5784ef48d3fb934c77492f0ed649c27eafe58c/frame-7.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "cast": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "b101de1bf9c52b47118dcb15972bcc15522cb5e428311bddf1b638be9b26add8",
+    "sourceRefs": [
+      "assets/art/source/blender-battle/effect.battle_ember/v1/manifest.json",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/source.blend",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/profile.json",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/recipe.py",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-000.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-001.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-002.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-003.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-004.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-005.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-006.png",
+      "assets/art/source/blender-battle/effect.battle_ember/v1/raw/frame-007.png"
+    ],
+    "licenseNotes": [
+      "Original Theandril project-authored Blender geometry and keyframes; no third-party game sprites or copyrighted setting assets. The retained factory source/profile record identifies production dependencies. This import neither grants a new license nor substitutes for native/in-game visual review."
+    ]
+  },
+  "createdAt": "2026-09-07T21:05:32.852Z",
+  "referenceHashes": [
+    "01a491fe7dc217368fab369a54b0d7938d55239e814011cb23039f50ed3ea03b",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "fixed-camera-native-battle64",
+      "settingsHash": "72cd41ac97fb91976454eea112be8be870b35eafe3fde488f07c32e6f97ad1cd",
+      "inputHash": "01a491fe7dc217368fab369a54b0d7938d55239e814011cb23039f50ed3ea03b",
+      "outputHash": "e9470e4da5ae3ac610f658a1ca29cb12ffb480c29f01f9cc4fc3930630e5bd13"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "762d8f678b9205af66bb660c5160fb07802a50776f7bd90f1e0e6dd7d05dfb77",
+      "outputHash": "3adf1adbf63a1e6981f3a60f28f703950d0e57b49d2538cfa0fde30bda276905"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3adf1adbf63a1e6981f3a60f28f703950d0e57b49d2538cfa0fde30bda276905",
+      "outputHash": "61397403fa30b9d0e12b7509e4d145f8abc0af6511db16b84f31584b3d134692"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "7016565019b73bc1263f1a96b7e6e91ac0e9d86bace101700c1d646cf0b17951",
+      "outputHash": "42f370c78af28e738dfcbf852136fec7f3bc91add53183c02e3e554f73714e97"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "208e8ddfca3df9b9f8084dea197ecfae83b5679e0651feb2527c28744c0dc192",
+      "outputHash": "6b8dfe2596f01a5d04c605c1bbfcf5c185be63b16381bb3e86c72f17f4959eb3"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "6b8dfe2596f01a5d04c605c1bbfcf5c185be63b16381bb3e86c72f17f4959eb3",
+      "outputHash": "968e5a9408a94fbdcddef057a47a3045f7822a11082d7162b9ec75b2aea56ca6"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "77563d24bb4f6ad528b87c7d202e56a38bfc28f08df97891e8b06d463d5fdeeb",
+      "outputHash": "a33d82e3fa3e076356c0e5864ac8ff2ea80ac088443827e9daee8482b82950d4"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "4f6e84f5e9b002d5b80870ebedb9ba53a429dee8419e496ac0de6d6eb6d44386",
+      "outputHash": "9b47897a0b172378d217b0f4ae1955b360a2609f5ad088357a750b4e7618ce4a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9b47897a0b172378d217b0f4ae1955b360a2609f5ad088357a750b4e7618ce4a",
+      "outputHash": "f8e4ed2c75c395c6acb09dd87dedd6968eced83e2153e6fc7f6411acdb21a3ea"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "c183a5af8a15f968cad22aa318abddb9710e51f43e841af2ccb27f0baf5e22b3",
+      "outputHash": "2944611973d22dd7565c144b2e659fb90631ce10430a5567bbeaf4e0cc527f94"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ec99e30bcc5fba8e654314a5f7de042559c7148a3c38cc498b38c0d5b9df217f",
+      "outputHash": "afcef3fdc426afa5d82f6d92fc611877d0b55c5f133886880668ffc347eda790"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "afcef3fdc426afa5d82f6d92fc611877d0b55c5f133886880668ffc347eda790",
+      "outputHash": "b112b80802ab9575df97a3aebefc6f6cedc1e42fd1e763ce937dba566c12f75d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "907710ee7a79bf4704667251bd2682c189b67cffb035f829af1c3f3feae25432",
+      "outputHash": "90c13f408e8808faeff12dde1b1da14bf23def0f2e79a5495aee71829da59aa4"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "06de0771d430b749fdb3671a10d58d15e0930a4c4ecfa58ffc6813810e26f336",
+      "outputHash": "f73743c81b8189f26d64ea2a652ed4c7a24b9d9bed1db460c8089059c61fc01e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f73743c81b8189f26d64ea2a652ed4c7a24b9d9bed1db460c8089059c61fc01e",
+      "outputHash": "c081283e6d19d1374b618ecf13840a78bb351c46c757ec6b32d9073097536bdd"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "beb9d999c5f7704cca5817ded66f3f18cc44f5026b10d4b0b86515eb255aa077",
+      "outputHash": "94dd917f2b6f361419bf90c52dbbce3d2716a508382cb76e237a25af606bd614"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "e841b9da7705886fbd98107a6d251258cff7b6866d13bf9ad7be9d625a6e8919",
+      "outputHash": "d96a31d72ffa341c450e37a4a0dc41153b61671ab2c756e7c98c3e1f9a1faec0"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d96a31d72ffa341c450e37a4a0dc41153b61671ab2c756e7c98c3e1f9a1faec0",
+      "outputHash": "98bb2690553ef1ab71813070176dc4abd6052c712a3bc233acbcaeed88c1796c"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "7a554b1409306e624b3fba7f93813cbfe6c3fbde6b7ecefcf0aede0936016ee9",
+      "outputHash": "10cc8ebec0f15a6d99d5c9df59b83125d8483dc34d49163bca476edce96ff116"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "57ee1072e537c8f5472c531dd2e7dd7c2967422e3772056888a1be2f2c7bbe77",
+      "outputHash": "01b19ad0741552e3fb1837a1a441b275a20c5dc3cc0bcbaa18bc24c4225fd00d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "01b19ad0741552e3fb1837a1a441b275a20c5dc3cc0bcbaa18bc24c4225fd00d",
+      "outputHash": "78140251108fc8ed0cf29e0f5e2b184995bac667bc618b10b45898f6dd247b18"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "eacb17ecb77c0d1c1a0a20de6a905f2999fd02dd90152654891c15c395475d3c",
+      "outputHash": "f31fb3f29a1c5b54e6303a9f75a61596b2007e632729a7cbd83e20856d63876d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "f2daeba515f3c6074e1112514784b15237a63d2272f4998e52e0ae123396af6c",
+      "outputHash": "524b2ec6d9aae2b8ff5b3e45725dc15da7ab878660e51c78551ed0d0104cf63e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "524b2ec6d9aae2b8ff5b3e45725dc15da7ab878660e51c78551ed0d0104cf63e",
+      "outputHash": "3dd053aac8ef3f103495eb794a8bf7d02ac5514e4343ca76ca5321d67cb53cfd"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "ed6723680ec3170e5828c5a1386db15ea9b44cf36a9093772b57c45d3258436a",
+      "outputHash": "075f814924ccb2e812c6518fd4f93de046cd0e7887e0ae1906bdf9f4ad74b1d6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "848195d1999965d68c4e1851551d49f6214e0baaf6c18dec70d24f3f36b5507c",
+      "inputHash": "11e9121bb29601cc57c787552462708e924d0f17ab9a65cb4dfdec5acca91107",
+      "outputHash": "f587cb0af31502ade9f1e256f89335874492d5b014de2e6ba674823367090165"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "5df7c2fc86fddb8cb3a428b3ae1d79b61a8a4eb70527ff66d44ad56338ee8700",
+      "outputHash": "1b48fd6468d0d54073ff760c99a8a2e1d03ece6de42f0b60b90cad0a9cd1ddc3"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/effect.battle_ember.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main native visual review",
+    "reviewedAt": "2026-09-07T21:17:32.892Z",
+    "notes": "Inspected processed native and4x plus three source backgrounds. Asymmetric amber tongues grow then release separated embers, dark ochre edges preserve bright-ground readability; no clipping or alpha haze. Original restrained Flame effect, integration approval pending temporal gameplay review.\nReviewed candidate 0c9e6faa2644d14985c186c19c5784ef48d3fb934c77492f0ed649c27eafe58c; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/9a423b164c3e589b0de5943887eabbb4cb8c0ab6456b4381ba5e245dc2eb2f97.png"
+    ],
+    "inputHash": "79236eb8f1fe30dfb46d3aefeaf3a2b46797bc2978f761702f57941c73a103e6"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 60,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

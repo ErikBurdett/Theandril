@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.cairnwing_concord",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.cairnwing_concord"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Cairnwing Concord, role character.marshal.\nSUBJECT: ONE senior adult marshal, culturally specific armor and dignified long coat or equivalent ceremonial harness, short command baton and small document pouch, no oversized pole or throne. Discernible leadership fromtroops via silhouette and restrained silver trim. Native64x64 maxheight48px pivot32,56.\nCULTURE: Tawny feathers, oxblood cord, oxidized copper, pale scree. Narrow harnesses, folded feathered forearms, ribbed narrow shields, ledge tools. Bracketed low stone halls, terraced load courts and wind-braced lift housings integrated into freestanding settlement silhouette; no giant scenery rock or inaccessible floating castle.\nPEOPLE if character or rider: Tool-using feathered cairnfolk with short avian beaks, two legs and two dexterous arms with folded forearm feather fans; human port households. No spread wings, flying poses or implied flight.\nHERALDRY if UI or flag: A single stepped feather with three unequal notches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "character.marshal.cairnwing_concord/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.cairnwing_concord/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "dcc2857d35d11c207bfca42cb347a43b12458fb0d4df84c1ef5d42ac2e3f4d05",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/character.marshal.cairnwing_concord-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/character.marshal.cairnwing_concord-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:17:39Z",
+  "referenceHashes": [
+    "64626c3f6c9169bb9bd23f17b61d6256e687545164fb0d00aa21a2fabc8c2b6f",
+    "1ef1a9e8621a9c2bd8288c39223153e0fbe007e07b4a9c13746be06703d15a85"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "dcfa040855986865dda73de7b3a4196cf24b7296c6f989f543d27379d00dd243",
+      "inputHash": "64626c3f6c9169bb9bd23f17b61d6256e687545164fb0d00aa21a2fabc8c2b6f",
+      "outputHash": "c8615c5b1bacfd236744e60d1a920ac977d89b7b460a30bd25de2f522968b2ee"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

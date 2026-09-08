@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.lantern_hospices",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.lantern_hospices"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Lantern Hospices, role character.engineer.\nSUBJECT: ONE adult engineer with culturally specific practical work apron, rolled sleeves and small tool satchel, compact mallet held down at side, visible hand and full boots. Native64x64 maxheight48px pivot32,56.\nCULTURE: Beeswax yellow, washed blue, soot-black lantern cages, plain linen. Hooded service coats, broad shields, shielded lamps not glowing magical haloes. Open hospice courtyards with wide ventilated slate roofs, covered galleries, clean cisterns and small enclosed lamp niches.\nPEOPLE if character or rider: Human care-house attendants and paid escorts; adultsturdyclothlayers, no religious caricatures.\nHERALDRY if UI or flag: A small hooded lamp framed by two protective shutters.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "character.engineer.lantern_hospices/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.engineer.lantern_hospices/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "099795b7992b270babb3bd9820d64de008ddb922d0d1722e5994898aeb4f9914",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/character.engineer.lantern_hospices-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/character.engineer.lantern_hospices-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:43:51Z",
+  "referenceHashes": [
+    "25661b4972c7707ae04148c6cfcf40a4c6e688596399d9cfd6af0a13aa2d40d3",
+    "8d6cc110f80b1121a6c117f4f3c857eb85ee8eb78df466c79a57dcc2f3b5d27d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "970c86093543edb69fcaf438080b21d7c2cf97c59c92c50e08f52b990c80fbf3",
+      "inputHash": "25661b4972c7707ae04148c6cfcf40a4c6e688596399d9cfd6af0a13aa2d40d3",
+      "outputHash": "48b6ff5ebbfb7145624db831dbcfeea6add396e473e613ff7c6691618a4428d9"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

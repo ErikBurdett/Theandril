@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.unsealed_companies",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native64. One full-body adult appointed field marshal, confident grounded posture, richer but practical protective coat and armor, short baton in one hand, sheathed sword at hip. Head and both boots complete, no giant flag or magical staff; a command officer not a king.",
+  "frames": [
+    {
+      "id": "character.marshal.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.unsealed_companies/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f988e55a30b96b12b9315ac75d16f627f98337b5ef711481531633c5f764f7c4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/character.marshal.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/wellroads/character.marshal.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:16:48.309Z",
+  "referenceHashes": [
+    "5dfe00e77cbbf1422cc091a5e566b1a377d2409055c2900bfaf25e62c3a2cadf",
+    "85fa4282a4520ea360d0c8c65edf9894ecd6eeae40389c721a01abd74f3e112b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "323d5e294fbf5da35fd9744f4834fbcc3c9248cfdbe89053e833bbb61e418408",
+      "inputHash": "5dfe00e77cbbf1422cc091a5e566b1a377d2409055c2900bfaf25e62c3a2cadf",
+      "outputHash": "7ad5a9b69d1b9ebbe011d8f6a6c7166b3f8d8553d21af003eb01bfd24e5aa1e0"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

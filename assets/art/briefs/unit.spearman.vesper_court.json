@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.vesper_court",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.spearman for Theandril, Vesper Court.\nSubject: One adult spear-watch soldier with a straight compact spear held nearly vertical at the side, plain metal spearhead and a modest faction shield. Spear tip wholly inside generous top margin and no more than one head-height above helmet. Both hands anatomically clear.\nCulture-specific identity: Living adult human retainers and artisans, cool ivory skin and dark hair; no pointed ears. Only the marshal may be a pale vampiric court patron with subtle severe human features. Charcoal velvet and leather, narrow ribbed dark iron, tarnished silver, muted burgundy and dusty plum cloth (dark #49312b, #642f26, #685375, #96738e; NO bright red). High folded collars, long split court coats and silver-edged narrow kite shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "unit.spearman.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.spearman.vesper_court/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "69f58a0bc91cdb18ef7e29baa5ad4f54cb0f377b42b7b1069b07ce1b10b3507e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.spearman.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.spearman.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:45:48Z",
+  "referenceHashes": [
+    "f5eb86f972ea27f0b2e1ef1d9afbd0098286a61410012c3b4e5ab6c0f0960d31",
+    "2e728905214d73b8c38d6ba9786717448d320059b0b1a6e38397e706fe94b04f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "bfc30a86dcc6599e52a7e27f77a79e6c40fd68ca7284eb7399e57278c2083acc",
+      "inputHash": "f5eb86f972ea27f0b2e1ef1d9afbd0098286a61410012c3b4e5ab6c0f0960d31",
+      "outputHash": "a32d1b0774d104f4973c57c689b641f40ed6d41f581af2d6d28183df3539478d"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

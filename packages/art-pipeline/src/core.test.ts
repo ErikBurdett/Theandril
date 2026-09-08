@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { PNG } from 'pngjs';
 import { deflateSync } from 'node:zlib';
+import { buildSceneAtlases } from './scene-atlases';
 import { approveAsset, assetInputHash, assetManifestSchema, buildAtlas, buildContactSheet, cacheKey, canonicalJson, createAssetCacheReceipt, cropImage, decodePng, encodePng, insideHex, normalizePalette, parseRuntimeCatalog, safeAssetPath, sha256, validateAsset, verifyAssetCacheReceipt, verifyCachedFiles, type AssetManifest, type FrameImage, type Palette, type Review, type RgbaImage } from './index';
 
 const palette: Palette = { id: 'palette.test', version: 1, colors: ['#222222', '#dddddd'] };
@@ -27,6 +28,25 @@ function approved(item = fixture()): typeof item {
   return { ...item, manifest: approveAsset(item.manifest, report, review) };
 }
 const options = { id: 'foundation', pageSize: 1024 as const, imageUrl: '/art/foundation.png', jsonUrl: '/art/foundation.json', palette };
+
+describe('lazy battlefield atlas partition', () => {
+  it('keeps the world page byte-identical while adding a separately bounded combat page', () => {
+    const world = approved(fixture('unit.world')), effect = approved(fixture('effect.battle_melee'));
+    const original = buildAtlas([world], options), combined = buildSceneAtlases([effect, world], options);
+    expect(combined.pages[0]).toEqual(original);
+    expect(combined.catalog.atlases.map(page => page.id)).toEqual(['foundation', 'battle']);
+    expect(combined.catalog.atlases[1]).toMatchObject({ width: 1024, height: 1024, imageUrl: '/art/battle.png' });
+    expect(combined.catalog.assets.find(asset => asset.id === effect.manifest.id)?.atlasId).toBe('battle');
+    expect(buildSceneAtlases([world, effect], options)).toEqual(combined);
+  });
+  it('does not create an empty tactical page and preserves shared approval checks', () => {
+    const world = approved(fixture('unit.world'));
+    expect(buildSceneAtlases([world], options).catalog.atlases).toHaveLength(1);
+    expect(() => buildSceneAtlases([world, fixture('effect.battle_ward')], options)).toThrow(/approval/);
+    const changed = approved(fixture('character.waykeeper')); changed.frames[0]!.image.data.fill(0);
+    expect(() => buildSceneAtlases([world, changed], options)).toThrow(/changed/);
+  });
+});
 function chunk(type: string, payload: Uint8Array): Buffer {
   const data = Buffer.concat([Buffer.from(type), payload]);
   let crc = 0xffffffff;

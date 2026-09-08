@@ -8,7 +8,7 @@ import { planTurn } from './index';
 
 function issue(state: GameState, command: GameCommand) { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); }
 function scene() {
-  const state = createGame({ seed: 20260906, size: 'tiny', factionCount: 1, pace: 'epic' });
+  const state = createGame({ seed: 20260906, size: 'tiny', factionCount: 1, pace: 'epic', generatorVersion: 4 });
   for (const cell of cellsWithin(state, state.armies['army.1']!.cell, 3)) {
     state.world.terrain[cell] = 1; state.world.biome[cell] = 7; state.world.waterDepth[cell] = 0; state.world.fertility[cell] = 80;
   }
@@ -67,7 +67,7 @@ test('missing detailed land quotes never cause invented research opportunities o
 });
 
 test('food demand cannot repeatedly demolish paid spring gardens and oreworks on the same real ore-and-spring hex', () => {
-  const state = createGame({ seed: 74, size: 'small', factionCount: 12, pace: 'epic' });
+  const state = createGame({ seed: 74, size: 'small', factionCount: 12, pace: 'epic', generatorVersion: 4 });
   const factionId = state.turnOwnerId, target = 22593;
   expect(state.world.terrain[target]).toBe(3); expect(state.world.biome[target]).toBe(6);
   expect(naturalFeatures(state.world, target)).toBe(3);

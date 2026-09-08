@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.cistern_assembly",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native96. ONE lean coastal escort galley, southeast view with prow screen RIGHT/lower right. Long low hull, one triangular lateen sail, short complete oars and low practical fighting rail, little cargo. Complete mast tip, yard, oars, rigging, bow and stern within central65%. No sea, wake, waterplane or ground. Lower and leaner than the transport.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.cistern_assembly/356a2dc27bbb812f3ca4e12c1e889929c3b9faedf93ab81e65979187812ccb5d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "8402977529c688df98582b8e62228b4588ad3a16acfcccc71cf3cfc105dc6d11",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:02:45.191Z",
+  "referenceHashes": [
+    "c3f225aafee6724f4356e125ef839c7d5789665ff34a853591ab6f45f9e0188c",
+    "7bb4533d984eed9ab520626ffb49a1b3da51d42ae8c57584e1b38c7742b95f22"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "763f662bc556c1b3dc6f2fd92a0a879b10042f5053084bd2b4d438e0e96b4d6e",
+      "inputHash": "c3f225aafee6724f4356e125ef839c7d5789665ff34a853591ab6f45f9e0188c",
+      "outputHash": "41ab85222df4bbd84fe74321c8aaae32d8e3157e46e019ac8581355a319301ca"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "41ab85222df4bbd84fe74321c8aaae32d8e3157e46e019ac8581355a319301ca",
+      "outputHash": "a96e8ba72ce5a1fc40fea592d1f0573975ed688eed6dc4d4225512cb373a4c02"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a96e8ba72ce5a1fc40fea592d1f0573975ed688eed6dc4d4225512cb373a4c02",
+      "outputHash": "338781673670d87568fa3a2400ff2cfa60f338948378c487372ac10bdffef091"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "33613fe2b57a57492a13d9519ee99dc6cee0c8fac06ffaab4e8df5dc6db965a5",
+      "outputHash": "63d02b08ee7f397fd4bd3a209d610f90a9da89e8be23b985a488bacd0398efd4"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "f26677b1310e313b6a1e5cd4b1f5cb78c5826c2ff52c6f33b184080bb17b8267",
+      "outputHash": "9765104d55f1e82451be7a37f516a1b8907cc2aac6638ca70f07dfdf964f98af"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "24a8ef9e4400a86ec1a8cf30d24bc5a1bcd50bfd58cd1b28b6881865bd818188",
+      "outputHash": "cb8be49baccd76d881db3b85b1e4619d9be954c131e22cb74686eab4618c6178"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.cistern_assembly.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:11.736Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Low oared hull and single triangular sail identify the galley; oars and ram remain complete. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 356a2dc27bbb812f3ca4e12c1e889929c3b9faedf93ab81e65979187812ccb5d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/808e8d8a619a9f9612e7cd7ccfd2092a7d64708797a4a4694d95f53144cdd410.png"
+    ],
+    "inputHash": "fe1fd776cb796a8a13cf81647a71c06b527bfa59473e6949378140784fad11fe"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

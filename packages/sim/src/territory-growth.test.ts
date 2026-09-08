@@ -10,7 +10,7 @@ import { withRules } from './rules';
 function issue(state: GameState, command: GameCommand) { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); return result; }
 const end = (state: GameState) => issue(state, { type: 'endTurn', factionId: state.turnOwnerId });
 function scene(population = 8): GameState {
-  const state = createGame({ seed: 17, size: 'tiny', factionCount: 2, pace: 'short' });
+  const state = createGame({ seed: 17, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4 });
   // Authored physical clearing/population isolates expansion. All claims and
   // canonical visibility are then initialized by actual founding commands.
   const origin = state.armies['army.1']!.cell;
@@ -137,6 +137,7 @@ describe('automatic city boundary growth', () => {
 
   it('leaves historical turns without civic accumulation and preserves modern save continuation', () => {
     const state = scene(), legacy = deserializeGame(serializeGame(state)), before = [...land(state).claimed];
+    legacy.rosterVersion = 3; // Authored old-rule comparison, not a migrated archive.
     for (let i = 0; i < 20; i++) expect(applyCommandForVersion(legacy, { type: 'endTurn', factionId: legacy.turnOwnerId }, 10).ok).toBe(true);
     expect(land(legacy).borderGrowth).toBe(0); expect(land(legacy).claimed).toEqual(before);
     for (let i = 0; i < 7; i++) end(state);

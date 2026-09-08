@@ -18,7 +18,7 @@ const markup = (game: ReturnType<typeof characterCampaign>) => renderToStaticMar
 }));
 
 describe('real character skill trees', () => {
-  it('covers exactly the eleven shipped skills through their three compatible roles', () => {
+  it('covers exactly eleven earned skills through three compatible roles and no invented Waykeeper nodes', () => {
     const shown = new Set<string>();
     for (const definition of CHARACTER_DEFINITIONS) {
       const { game } = appointed(definition.id), before = stateHash(game), html = markup(game);
@@ -26,8 +26,9 @@ describe('real character skill trees', () => {
         if (definition.skillIds.includes(skill.id)) { expect(html).toContain(`aria-label="Inspect skill ${skill.name}"`); shown.add(skill.id); }
         else expect(html).not.toContain(`aria-label="Inspect skill ${skill.name}"`);
       }
-      expect(html.match(/aria-label="Inspect skill /g)).toHaveLength(definition.skillIds.length);
-      expect(html).toContain('Root skill · no learned prerequisite.');
+      expect(html.match(/aria-label="Inspect skill /g) ?? []).toHaveLength(definition.skillIds.length);
+      if (definition.skillIds.length) expect(html).toContain('Root skill · no learned prerequisite.');
+      else { expect(definition.id).toBe('character.waykeeper'); expect(html).not.toContain('Promote'); }
       expect(stateHash(game)).toBe(before);
     }
     expect([...shown].sort()).toEqual(CHARACTER_SKILLS.map(skill => skill.id).sort());

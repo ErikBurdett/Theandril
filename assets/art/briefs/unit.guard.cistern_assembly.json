@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.cistern_assembly",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native64. One full-body adult guard in medium practical armor, one broad culture-shaped shield and a short sword held low, balanced alert stance, two complete boots. Restrained helmet or low hood; readable human face, no tall ornament.",
+  "frames": [
+    {
+      "id": "unit.guard.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.guard.cistern_assembly/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e21827c45e2480d551799b64d52396a4bbfd634e01fdb28f10341b221af7900b",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/unit.guard.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/unit.guard.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:34:25.463Z",
+  "referenceHashes": [
+    "23639deaa9f0b61acbb7090e89f96649e8d3ddd75281142f74b19cabcb8c0a02",
+    "31f041ca4aef9bb68ae7c156b3b29d68f22613633e4250e63350113e556edd2f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "54879e3468a26b7e11f302227584bf24ed043c053b738946ff63a2a6e9557c78",
+      "inputHash": "23639deaa9f0b61acbb7090e89f96649e8d3ddd75281142f74b19cabcb8c0a02",
+      "outputHash": "eb36622ed34b2e992b8ff3cb180550b3f1416d9207942fc1ffa7bedadc639c23"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

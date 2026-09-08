@@ -1,0 +1,841 @@
+Theandril slice21 headless checkpoint
+Started UTC: 2026-09-07 06:48:01 UTC
+Checks finished UTC: 2026-09-07 06:51:59 UTC
+Working tree: current schema12/content3c54fb02/roster3/generator7 with bounded tri-state basin AI; uncommitted integration work.
+Execution context: full Vitest's normal parallelism; root remote image generation/light art processing allowed. These are correctness checks, not isolated performance measurements.
+Limits unchanged. No tests disabled, assertions weakened, or runtime policy retuned for this checkpoint.
+
+Repository HEAD, Node and pnpm (exact tool output):
+b17900d143e330cbc0014ce6fc288896b1e6ea57
+v26.7.0
+10.32.1
+
+Command: pnpm exec vitest run
+Exit code: 1
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ packages/ai/src/contact.test.ts (4 tests | 3 failed) 35400ms
+     × standard / 4 seats makes player contact through legal bounded plans with save replay 13715ms
+     × standard / 24 seats makes player contact through legal bounded plans with save replay 8345ms
+     × huge / 32 seats makes player contact through legal bounded plans with save replay 12890ms
+ ❯ tests/headless/chronicle-victory.test.ts (2 tests | 1 failed) 70507ms
+   × generated-start epic AI victory produces complete factual logs identical after archive save/resume 67532ms
+ ❯ packages/ai/src/pacing.test.ts (5 tests | 1 failed) 75113ms
+   × 'standard' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation 10791ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/headless/chronicle-victory.test.ts > generated-start epic AI victory produces complete factual logs identical after archive save/resume
+Error: Test timed out in 60000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/headless/chronicle-victory.test.ts:10:37
+      8| // post500 order and replays the complete technical history twice. Giv…
+      9| // archive integration test its own wall-time budget; keep all turn/co…
+     10| test.each(['short', 'epic'] as const)('generated-start %s AI victory p…
+       |                                     ^
+     11|   const game = createGame({ seed: 20260905, size: 'tiny', factionCount…
+     12|   const archive = createArchive(game, { mode: 'watch' });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 4 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.ashen_compact","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":34306,"harbor":false},{"cell":41616,"harbor":false},{"cell":38153,"harbor":false},{"cell":51938,"harbor":false},{"cell":39308,"harbor":false},{"cell":38917,"harbor":true},{"cell":35844,"harbor":false},{"cell":37381,"harbor":false},{"cell":36994,"harbor":false},{"cell":38530,"harbor":false}],"fleets":[{"id":"army.121","cell":56182,"cargo":[],"ocean":true},{"id":"army.169","cell":57331,"cargo":[],"ocean":true},{"id":"army.81","cell":47380,"cargo":[],"ocean":false}],"reasons":["Charter transport: chart unknown water while no passengers await a rendezvous.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.reedbound_council","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":71362,"harbor":false},{"cell":72900,"harbor":false},{"cell":70971,"harbor":false},{"cell":71743,"harbor":true},{"cell":69822,"harbor":false},{"cell":69442,"harbor":false},{"cell":68678,"harbor":false}],"fleets":[{"id":"army.110","cell":85123,"cargo":[{"armyId":"army.136","name":"Hearth caravan","formations":1}],"ocean":true},{"id":"army.154","cell":62415,"cargo":[],"ocean":true},{"id":"army.82","cell":83169,"cargo":[],"ocean":false}],"reasons":["Charter transport: sail the known water route toward a viable landing.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.cinder_march","firstContact":63,"foreignBorders":[],"witnessedBattleTurns":[73],"wars":[],"towns":[{"cell":8708,"harbor":false},{"cell":14079,"harbor":false},{"cell":12159,"harbor":true},{"cell":13293,"harbor":false},{"cell":18353,"harbor":false},{"cell":13699,"harbor":false},{"cell":12923,"harbor":false},{"cell":9449,"harbor":false},{"cell":25948,"harbor":false},{"cell":15621,"harbor":false},{"cell":15617,"harbor":false},{"cell":13303,"harbor":false}],"fleets":[{"id":"army.102","cell":40521,"cargo":[],"ocean":true},{"id":"army.46","cell":13715,"cargo":[],"ocean":false},{"id":"army.57","cell":33635,"cargo":[],"ocean":true}],"reasons":["Deepwake warship: patrol and chart permitted coastal water.","Coastwatch galley: patrol and chart permitted coastal water.","Charter transport: chart unknown water while no passengers await a rendezvous."]},{"factionId":"faction.glass_tide","firstContact":63,"foreignBorders":[{"cell":11390,"factionId":"faction.cinder_march","visible":false},{"cell":11391,"factionId":"faction.cinder_march","visible":false},{"cell":11392,"factionId":"faction.cinder_march","visible":false},{"cell":11774,"factionId":"faction.cinder_march","visible":false},{"cell":11775,"factionId":"faction.cinder_march","visible":false},{"cell":11776,"factionId":"faction.cinder_march","visible":false},{"cell":11777,"factionId":"faction.cinder_march","visible":false},{"cell":12154,"factionId":"faction.cinder_march","visible":false},{"cell":12155,"factionId":"faction.cinder_march","visible":false},{"cell":12156,"factionId":"faction.cinder_march","visible":false},{"cell":12157,"factionId":"faction.cinder_march","visible":false},{"cell":12158,"factionId":"faction.cinder_march","visible":false},{"cell":12159,"factionId":"faction.cinder_march","visible":false},{"cell":12160,"factionId":"faction.cinder_march","visible":false},{"cell":12161,"factionId":"faction.cinder_march","visible":false},{"cell":12524,"factionId":"faction.cinder_march","visible":true},{"cell":12525,"factionId":"faction.cinder_march","visible":true},{"cell":12526,"factionId":"faction.cinder_march","visible":true},{"cell":12534,"factionId":"faction.cinder_march","visible":false},{"cell":12535,"factionId":"faction.cinder_march","visible":false},{"cell":12536,"factionId":"faction.cinder_march","visible":false},{"cell":12538,"factionId":"faction.cinder_march","visible":false},{"cell":12539,"factionId":"faction.cinder_march","visible":false},{"cell":12540,"factionId":"faction.cinder_march","visible":false},{"cell":12541,"factionId":"faction.cinder_march","visible":false},{"cell":12542,"factionId":"faction.cinder_march","visible":false},{"cell":12543,"factionId":"faction.cinder_march","visible":false},{"cell":12544,"factionId":"faction.cinder_march","visible":false},{"cell":12545,"factionId":"faction.cinder_march","visible":false},{"cell":12907,"factionId":"faction.cinder_march","visible":true},{"cell":12908,"factionId":"faction.cinder_march","visible":true},{"cell":12909,"factionId":"faction.cinder_march","visible":true},{"cell":12917,"factionId":"faction.cinder_march","visible":false},{"cell":12918,"factionId":"faction.cinder_march","visible":false},{"cell":12919,"factionId":"faction.cinder_march","visible":false},{"cell":12930,"factionId":"faction.cinder_march","visible":false},{"cell":12931,"factionId":"faction.cinder_march","visible":false},{"cell":12932,"factionId":"faction.cinder_march","visible":false},{"cell":13292,"factionId":"faction.cinder_march","visible":true},{"cell":13293,"factionId":"faction.cinder_march","visible":true},{"cell":13294,"factionId":"faction.cinder_march","visible":true},{"cell":13301,"factionId":"faction.cinder_march","visible":false},{"cell":13302,"factionId":"faction.cinder_march","visible":false},{"cell":13303,"factionId":"faction.cinder_march","visible":false},{"cell":13315,"factionId":"faction.cinder_march","visible":false},{"cell":13316,"factionId":"faction.cinder_march","visible":false},{"cell":13676,"factionId":"faction.cinder_march","visible":true},{"cell":13677,"factionId":"faction.cinder_march","visible":true},{"cell":13686,"factionId":"faction.cinder_march","visible":false},{"cell":13698,"factionId":"faction.cinder_march","visible":false},{"cell":13699,"factionId":"faction.cinder_march","visible":false},{"cell":13700,"factionId":"faction.cinder_march","visible":false},{"cell":14083,"factionId":"faction.cinder_march","visible":false},{"cell":14084,"factionId":"faction.cinder_march","visible":false},{"cell":17969,"factionId":"faction.cinder_march","visible":false},{"cell":17970,"factionId":"faction.cinder_march","visible":false},{"cell":18352,"factionId":"faction.cinder_march","visible":false},{"cell":18353,"factionId":"faction.cinder_march","visible":false},{"cell":18354,"factionId":"faction.cinder_march","visible":false},{"cell":18737,"factionId":"faction.cinder_march","visible":false},{"cell":18738,"factionId":"faction.cinder_march","visible":false}],"witnessedBattleTurns":[73],"wars":[],"towns":[{"cell":7245,"harbor":false},{"cell":6474,"harbor":false},{"cell":14520,"harbor":false},{"cell":8779,"harbor":true},{"cell":7623,"harbor":false}],"fleets":[{"id":"army.174","cell":12524,"cargo":[],"ocean":true},{"id":"army.83","cell":7632,"cargo":[],"ocean":false},{"id":"army.96","cell":11076,"cargo":[],"ocean":true}],"reasons":["Deepwake warship: patrol and chart permitted coastal water.","Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore."]}]: expected null not to be null
+ ❯ packages/ai/src/contact.test.ts:85:94
+     83|   ] as const)('%s / %i seats makes player contact through legal bounde…
+     84|     const result = contactCampaign(size, count, limit);
+     85|     expect(result.firstContact.get(result.playerId), JSON.stringify(re…
+       |                                                                                              ^
+     86|     expect(result.firstContact.get(result.playerId)!).toBeLessThanOrEq…
+     87|     expect(result.types.has('moveTo')).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 24 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.rimehorn_clans","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":8779,"harbor":true},{"cell":6474,"harbor":false},{"cell":8007,"harbor":false},{"cell":7245,"harbor":false},{"cell":16820,"harbor":false}],"fleets":[{"id":"army.436","cell":7632,"cargo":[],"ocean":false},{"id":"army.569","cell":14908,"cargo":[],"ocean":true},{"id":"army.774","cell":22594,"cargo":[],"ocean":true}],"reasons":["Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore.","Deepwake warship: patrol and chart permitted coastal water."]}]: expected 23 to be 24 // Object.is equality
+
+- Expected
++ Received
+
+- 24
++ 23
+
+ ❯ packages/ai/src/contact.test.ts:89:163
+     87|     expect(result.types.has('moveTo')).toBe(true);
+     88|     expect(result.types.has('mergeArmies')).toBe(true);
+     89|     expect([...result.firstContact.values()].filter(turn => turn !== n…
+       |                                                                                                                                                                   ^
+     90|   });
+     91|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > huge / 32 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.rimehorn_clans.22","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":18695,"harbor":false},{"cell":21253,"harbor":false},{"cell":17668,"harbor":true}],"fleets":[{"id":"army.304","cell":15623,"cargo":[],"ocean":false},{"id":"army.366","cell":61710,"cargo":[{"armyId":"army.443","name":"Hearth caravan","formations":1}],"ocean":true},{"id":"army.584","cell":62199,"cargo":[],"ocean":true}],"reasons":["Charter transport: chart water while seeking a safe landing.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.mire_courts.31","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":25929,"harbor":false},{"cell":12133,"harbor":false},{"cell":14183,"harbor":false},{"cell":11104,"harbor":true}],"fleets":[{"id":"army.1019","cell":21821,"cargo":[],"ocean":true},{"id":"army.523","cell":11608,"cargo":[],"ocean":false},{"id":"army.629","cell":26951,"cargo":[],"ocean":true}],"reasons":["Charter transport: chart unknown water while no passengers await a rendezvous.","Deepwake warship: patrol and chart permitted coastal water."]}]: expected 30 to be 32 // Object.is equality
+
+- Expected
++ Received
+
+- 32
++ 30
+
+ ❯ packages/ai/src/contact.test.ts:89:163
+     87|     expect(result.types.has('moveTo')).toBe(true);
+     88|     expect(result.types.has('mergeArmies')).toBe(true);
+     89|     expect([...result.firstContact.values()].filter(turn => turn !== n…
+       |                                                                                                                                                                   ^
+     90|   });
+     91|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  packages/ai/src/pacing.test.ts > 'standard' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation
+AssertionError: expected 6 to be greater than or equal to 8
+ ❯ packages/ai/src/pacing.test.ts:63:113
+     61|   // Permit that earned result only with a substantially larger winnin…
+     62|   if (state.turn < (pace === 'epic' ? 800 : 200)) {
+     63|     expect(Object.values(state.settlements).filter(town => town.factio…
+       |                                                                                                                 ^
+     64|     expect(battles).toBeGreaterThanOrEqual(pace === 'epic' ? 100 : 10);
+     65|     expect(captures).toBeGreaterThanOrEqual(10);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  3 failed | 126 passed (129)
+      Tests  5 failed | 1177 passed (1182)
+   Start at  01:48:01
+   Duration  76.17s (transform 17.04s, setup 0ms, import 53.85s, tests 429.47s, environment 14ms)
+
+Command: pnpm exec tsc --noEmit
+Exit code: 0
+(No stdout/stderr.)
+
+Command: pnpm exec eslint .
+Exit code: 0
+(No stdout/stderr.)
+
+Command: pnpm content:validate
+Exit code: 0
+
+> theandril@0.1.0 content:validate /home/telephoneheater/Work/Theandril
+> tsx scripts/validate-content.ts
+
+{
+  "buildings": 5,
+  "units": 9,
+  "factions": 12,
+  "technologies": 10,
+  "institutions": 2,
+  "doctrines": 2,
+  "projects": 1,
+  "characterRoles": 3,
+  "characterMissions": 3,
+  "characterSkills": 11,
+  "commanderAbilities": 1,
+  "improvements": 10,
+  "naturalFeatures": 7,
+  "hash": "3c54fb02"
+}
+
+Failure classification:
+- Previously open dense contact: Standard24 23/24 by60; Huge32 30/32 by60.
+- Newly failing current-default Standard4 contact: 2/4 by100; Ashen/Reed remain isolated, Cinder/Glass contact63 and witnessed battle73.
+- Newly failing current-default Standard74 pacing: Prosperity and150–400turn gate pass, but an early (<200turn) winner owns6towns instead of the required8. Exact victory turn/battle/capture diagnostic is pending.
+- Previously open full-parallel Epic archive60000ms limit: test body67532ms. Isolated rerun pending reserved CPU window.
+- No failed illegal-command, deterministic replay, save or historical compatibility assertion was reported.
+
+Pending: isolated Epic timing/outcome and separately reserved generator7 three-voyage benchmark. This checkpoint is not a release signoff.
+
+
+Follow-up diagnosis (same content3c54fb02, before any faction mutation):
+
+ISOLATED EPIC — BEFORE NARROW FOUNDER FIX
+Command: pnpm exec vitest run tests/headless/chronicle-victory.test.ts
+Exit: 0
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  01:53:25
+   Duration  58.34s (transform 355ms, setup 0ms, import 460ms, tests 57.82s, environment 0ms)
+
+
+The unchanged60000ms test gate passes in isolation, but its margin remains narrow. The full-parallel failure above is retained, not reclassified as a pass. Final-source isolated verification is still pending.
+
+MATCHED POLICY / GENERATION DIAGNOSTIC
+Policy comparison uses call-local Node module load hooks: previous1024-node proof helper and only the pre-tri-state naval policy are reconstructed in memory; no production file is overwritten and no old Git snapshot is mistaken for the complete prior working tree. Each variant follows the real current contact/pacing test command ordering, default full observations, actual commands and bounded battle/capture decisions. Diagnostic omits the every-command mirror for speed, and verifies strict final save reload; it is not a replacement for the original tests. Timings are diagnostic only.
+[
+  {
+    "generatorVersion": 6,
+    "policy": "prior",
+    "workload": "pacing",
+    "turn": 194,
+    "hash": "c4153bbe",
+    "commands": 5254,
+    "battles": 71,
+    "captures": 11,
+    "winner": "faction.ashen_compact",
+    "winnerTowns": 14,
+    "firstContact": {
+      "faction.ashen_compact": 43,
+      "faction.reedbound_council": 5,
+      "faction.cinder_march": 42,
+      "faction.glass_tide": 5
+    }
+  },
+  {
+    "generatorVersion": 6,
+    "policy": "prior",
+    "workload": "contact",
+    "turn": 88,
+    "hash": "c2e56dc6",
+    "commands": 3515,
+    "battles": 1,
+    "captures": 1,
+    "winner": null,
+    "winnerTowns": null,
+    "firstContact": {
+      "faction.ashen_compact": 87,
+      "faction.reedbound_council": 87,
+      "faction.cinder_march": 67,
+      "faction.glass_tide": 68
+    }
+  },
+  {
+    "generatorVersion": 6,
+    "policy": "current",
+    "workload": "pacing",
+    "turn": 188,
+    "hash": "5e9be4c3",
+    "commands": 5266,
+    "battles": 80,
+    "captures": 14,
+    "winner": "faction.glass_tide",
+    "winnerTowns": 6,
+    "firstContact": {
+      "faction.ashen_compact": 43,
+      "faction.reedbound_council": 5,
+      "faction.cinder_march": 42,
+      "faction.glass_tide": 5
+    }
+  },
+  {
+    "generatorVersion": 6,
+    "policy": "current",
+    "workload": "contact",
+    "turn": 88,
+    "hash": "c2e56dc6",
+    "commands": 3515,
+    "battles": 1,
+    "captures": 1,
+    "winner": null,
+    "winnerTowns": null,
+    "firstContact": {
+      "faction.ashen_compact": 87,
+      "faction.reedbound_council": 87,
+      "faction.cinder_march": 67,
+      "faction.glass_tide": 68
+    }
+  },
+  {
+    "generatorVersion": 7,
+    "policy": "prior",
+    "workload": "pacing",
+    "turn": 194,
+    "hash": "ffe3ab7c",
+    "commands": 5254,
+    "battles": 71,
+    "captures": 11,
+    "winner": "faction.ashen_compact",
+    "winnerTowns": 14,
+    "firstContact": {
+      "faction.ashen_compact": 43,
+      "faction.reedbound_council": 5,
+      "faction.cinder_march": 42,
+      "faction.glass_tide": 5
+    }
+  },
+  {
+    "generatorVersion": 7,
+    "policy": "prior",
+    "workload": "contact",
+    "turn": 101,
+    "hash": "7b5245e7",
+    "commands": 4040,
+    "battles": 1,
+    "captures": 1,
+    "winner": null,
+    "winnerTowns": null,
+    "firstContact": {
+      "faction.ashen_compact": null,
+      "faction.reedbound_council": null,
+      "faction.cinder_march": 63,
+      "faction.glass_tide": 63
+    }
+  },
+  {
+    "generatorVersion": 7,
+    "policy": "current",
+    "workload": "pacing",
+    "turn": 188,
+    "hash": "8154f6c5",
+    "commands": 5266,
+    "battles": 80,
+    "captures": 14,
+    "winner": "faction.glass_tide",
+    "winnerTowns": 6,
+    "firstContact": {
+      "faction.ashen_compact": 43,
+      "faction.reedbound_council": 5,
+      "faction.cinder_march": 42,
+      "faction.glass_tide": 5
+    }
+  },
+  {
+    "generatorVersion": 7,
+    "policy": "current",
+    "workload": "contact",
+    "turn": 101,
+    "hash": "7b5245e7",
+    "commands": 4040,
+    "battles": 1,
+    "captures": 1,
+    "winner": null,
+    "winnerTowns": null,
+    "firstContact": {
+      "faction.ashen_compact": null,
+      "faction.reedbound_council": null,
+      "faction.cinder_march": 63,
+      "faction.glass_tide": 63
+    }
+  }
+]
+
+Confirmed pacing cause: the new coastal founding ranking redirected a ready land founder to a proven-open coast merely because an existing coastal opportunity was unknown, not proven enclosed. Reed's third founding shifted from23 to25, changing the later economy/campaign. A one-condition correction now seeks a replacement port only after all existing coastal opportunities are positively enclosed; unknown is not treated as enclosure or open-water proof. The corrected generator7 diagnostic exactly restores the reconstructed previous-policy pacing save ffe3ab7c: turn194,71 battles,11 captures,14 winning towns. No price, limit, test assertion or scoring constant changed. New naval.test.ts regression keeps an incomplete inland chart unknown while a separately charted edge sea is open; only filling the missing shore and proving enclosure permits founder diversion.
+
+Confirmed Standard4 contact cause: both policies are byte-identical within each generator. Generator7 introduces a2677-cell enclosed sea at Ashen's harbor; at100 its public chart still has516 observed-water frontier cells, so it correctly remains unknown. Reed is sailing the actual outer ocean. No closure is inferred from hidden world components; the canonical component size is read-only diagnostic evidence, never planner input.
+An unchanged-rules continuation from the real turn101 save yields530 accepted additional commands, strict final saveb83b5c44, real Reed landing107 and founding108, then Reed contact117 and Ashen contact118. Reed's loaded ferry uses6 distinct legal steps before landing; no repeated-location deadlock. All four have actual entity contact by118, which still FAILS the unchanged100-turn acceptance gate. No claim that all contact tests now pass.
+
+Final-source scoped checks and three generator7 voyage reports are pending below.
+
+FINAL-SOURCE FOLLOW-UP CHECKS
+The initial full suite above predates the narrow unknown-port founding fix. It has not been rerun here after that fix; no claim of a green full suite is made. The focused final run includes the new regression and every original pacing case, with all original assertions unchanged.
+Command: pnpm exec vitest run packages/ai/src/sea-knowledge.test.ts packages/ai/src/large-basin.test.ts packages/ai/src/naval.test.ts packages/ai/src/naval-assembly.test.ts packages/ai/src/enclosed-sea.test.ts packages/ai/src/overseas.test.ts packages/ai/src/pacing.test.ts
+Exit: 0
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+
+ Test Files  7 passed (7)
+      Tests  34 passed (34)
+   Start at  02:08:12
+   Duration  55.02s (transform 1.36s, setup 0ms, import 2.18s, tests 56.50s, environment 0ms)
+
+
+Command: pnpm exec tsc --noEmit
+Exit:0; no output.
+Command: pnpm exec eslint packages/ai/src/naval.ts packages/ai/src/naval.test.ts
+Exit:0; no output.
+
+FINAL-SOURCE ISOLATED EPIC
+Command: pnpm exec vitest run tests/headless/chronicle-victory.test.ts
+Exit: 0
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  02:10:18
+   Duration  58.19s (transform 373ms, setup 0ms, import 472ms, tests 57.65s, environment 0ms)
+
+
+Unchanged60000ms gate passes in isolation. Narrow timing margin and the original parallel failure remain documented; no timeout was increased.
+
+FINAL GENERATOR7 OVERSEAS EVIDENCE
+Recorded sequentially in the parent-reserved CPU window on2026-09-07, final completion07:12:01UTC. No concurrent tests, browser or CPU benchmark; remote image generation/light review may continue. These are three bounded generated-campaign samples, not a statistical before/after performance comparison. Normal starting resources and fog; no setup grants. Each requires real paid navigation/harbor/hull/colonist, transport, separate-landmass founding, strict loaded save continuation, every-result mirror and complete original command replay. Tiny/Small islands additionally require a genuinely deep-water passenger voyage; Tiny archipelago retains its explicit shallow-crossing allowance, not a claim of deep sailing.
+
+Command: node --import tsx scripts/benchmark-overseas-ai.ts --generator=7 --seed=20260905 --size=tiny --factions=4 --layout=islands --limit=180
+Exit: 0
+{
+  "schema": 12,
+  "contentHash": "3c54fb02",
+  "seed": 20260905,
+  "size": "tiny",
+  "factionCount": 4,
+  "layout": "islands",
+  "limit": 180,
+  "requireDeep": true,
+  "generatorVersion": 7,
+  "turn": 39,
+  "hash": "ba953ef7",
+  "noGrants": true,
+  "initialSaveBytes": 21437,
+  "finalSaveBytes": 101618,
+  "commands": 631,
+  "rejected": 0,
+  "counts": {
+    "found": 18,
+    "moveTo": 168,
+    "endTurn": 38,
+    "adoptInstitution": 4,
+    "queue": 124,
+    "setWorkedTiles": 138,
+    "improveTile": 21,
+    "claimCell": 10,
+    "research": 25,
+    "recruitCharacter": 13,
+    "assignCharacter": 13,
+    "adoptDoctrine": 4,
+    "accelerateRoad": 9,
+    "startCharacterMission": 10,
+    "mergeArmies": 22,
+    "embarkArmy": 6,
+    "disembarkArmy": 6,
+    "promoteCharacter": 1,
+    "terraformTile": 1
+  },
+  "first": {
+    "found": 1,
+    "moveTo": 1,
+    "endTurn": 2,
+    "adoptInstitution": 2,
+    "building.granary": 2,
+    "setWorkedTiles": 2,
+    "building.workshop": 4,
+    "improveTile": 6,
+    "building.market": 7,
+    "claimCell": 7,
+    "technology.cinder_masonry": 9,
+    "building.archive": 9,
+    "unit.colonist": 11,
+    "unit.guard": 13,
+    "technology.coastal_navigation": 14,
+    "technology.stewardship": 15,
+    "recruitCharacter": 15,
+    "unit.spearman": 15,
+    "building.harbor": 16,
+    "assignCharacter": 16,
+    "adoptDoctrine": 17,
+    "accelerateRoad": 17,
+    "startCharacterMission": 17,
+    "unit.heavy_infantry": 19,
+    "unit.transport": 19,
+    "mergeArmies": 19,
+    "technology.surveyed_estates": 22,
+    "unit.cavalry": 23,
+    "embarkArmy": 24,
+    "technology.ocean_navigation": 25,
+    "disembarkArmy": 26,
+    "unit.ocean_warship": 27,
+    "unit.scout": 28,
+    "unit.coastal_warship": 31,
+    "technology.waterworks": 32,
+    "promoteCharacter": 32,
+    "technology.quarry_cranes": 34,
+    "technology.charter_forestry": 36,
+    "terraformTile": 36
+  },
+  "landings": [
+    {
+      "turn": 26,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.46",
+      "cell": 1153,
+      "landmass": 9,
+      "deepVoyage": false
+    },
+    {
+      "turn": 29,
+      "factionId": "faction.reedbound_council",
+      "armyId": "army.49",
+      "cell": 161,
+      "landmass": 2,
+      "deepVoyage": false
+    },
+    {
+      "turn": 33,
+      "factionId": "faction.ashen_compact",
+      "armyId": "army.65",
+      "cell": 1332,
+      "landmass": 10,
+      "deepVoyage": false
+    },
+    {
+      "turn": 33,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.59",
+      "cell": 1159,
+      "landmass": 8,
+      "deepVoyage": false
+    },
+    {
+      "turn": 36,
+      "factionId": "faction.reedbound_council",
+      "armyId": "army.72",
+      "cell": 349,
+      "landmass": 4,
+      "deepVoyage": false
+    },
+    {
+      "turn": 37,
+      "factionId": "faction.glass_tide",
+      "armyId": "army.61",
+      "cell": 732,
+      "landmass": 7,
+      "deepVoyage": true
+    }
+  ],
+  "colonies": [
+    {
+      "turn": 27,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.46",
+      "cell": 1153,
+      "landmass": 9,
+      "originLandmass": 5,
+      "deepVoyage": false
+    },
+    {
+      "turn": 30,
+      "factionId": "faction.reedbound_council",
+      "armyId": "army.49",
+      "cell": 161,
+      "landmass": 2,
+      "originLandmass": 1,
+      "deepVoyage": false
+    },
+    {
+      "turn": 34,
+      "factionId": "faction.ashen_compact",
+      "armyId": "army.65",
+      "cell": 1332,
+      "landmass": 10,
+      "originLandmass": 6,
+      "deepVoyage": false
+    },
+    {
+      "turn": 34,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.59",
+      "cell": 1159,
+      "landmass": 8,
+      "originLandmass": 5,
+      "deepVoyage": false
+    },
+    {
+      "turn": 37,
+      "factionId": "faction.reedbound_council",
+      "armyId": "army.72",
+      "cell": 349,
+      "landmass": 4,
+      "originLandmass": 1,
+      "deepVoyage": false
+    },
+    {
+      "turn": 38,
+      "factionId": "faction.glass_tide",
+      "armyId": "army.61",
+      "cell": 732,
+      "landmass": 7,
+      "originLandmass": 8,
+      "deepVoyage": true
+    }
+  ],
+  "mirroredCommands": 334,
+  "fullReplayCommands": 631,
+  "exactReplay": true,
+  "exactSave": true,
+  "planningIncludes": "permitted AI-scoped observation plus proposal generation",
+  "planning": {
+    "samples": 152,
+    "medianMs": 1.0062309999999854,
+    "p95Ms": 2.159745999999984,
+    "maxMs": 4.372425000000021
+  },
+  "roundIncludes": "all factions, commands, result recording and saved mirror; excludes final full replay",
+  "rounds": {
+    "samples": 38,
+    "medianMs": 6.606251999999984,
+    "p95Ms": 13.64260900000005,
+    "maxMs": 24.559304999999995
+  },
+  "replayMs": 36.12107400000002,
+  "totalMs": 356.38545400000004
+}
+
+Command: node --import tsx scripts/benchmark-overseas-ai.ts --generator=7 --seed=20260905 --size=small --factions=4 --layout=islands --limit=180
+Exit: 0
+{
+  "schema": 12,
+  "contentHash": "3c54fb02",
+  "seed": 20260905,
+  "size": "small",
+  "factionCount": 4,
+  "layout": "islands",
+  "limit": 180,
+  "requireDeep": true,
+  "generatorVersion": 7,
+  "turn": 42,
+  "hash": "025d64ee",
+  "noGrants": true,
+  "initialSaveBytes": 424414,
+  "finalSaveBytes": 530608,
+  "commands": 874,
+  "rejected": 0,
+  "counts": {
+    "found": 18,
+    "moveTo": 406,
+    "endTurn": 41,
+    "adoptInstitution": 4,
+    "queue": 125,
+    "setWorkedTiles": 126,
+    "claimCell": 10,
+    "improveTile": 32,
+    "research": 26,
+    "recruitCharacter": 11,
+    "assignCharacter": 10,
+    "adoptDoctrine": 4,
+    "startCharacterMission": 21,
+    "accelerateRoad": 15,
+    "mergeArmies": 14,
+    "embarkArmy": 4,
+    "disembarkArmy": 2,
+    "promoteCharacter": 4,
+    "terraformTile": 1
+  },
+  "first": {
+    "found": 1,
+    "moveTo": 1,
+    "endTurn": 2,
+    "adoptInstitution": 2,
+    "building.granary": 2,
+    "setWorkedTiles": 2,
+    "building.workshop": 5,
+    "claimCell": 5,
+    "improveTile": 6,
+    "technology.cinder_masonry": 8,
+    "building.market": 8,
+    "building.archive": 10,
+    "unit.colonist": 12,
+    "technology.stewardship": 14,
+    "technology.coastal_navigation": 14,
+    "unit.guard": 14,
+    "recruitCharacter": 16,
+    "building.harbor": 16,
+    "assignCharacter": 17,
+    "unit.spearman": 18,
+    "adoptDoctrine": 18,
+    "startCharacterMission": 18,
+    "technology.waterworks": 20,
+    "unit.heavy_infantry": 20,
+    "unit.coastal_warship": 20,
+    "accelerateRoad": 21,
+    "mergeArmies": 22,
+    "unit.transport": 23,
+    "unit.cavalry": 25,
+    "technology.ocean_navigation": 26,
+    "unit.ocean_warship": 27,
+    "embarkArmy": 27,
+    "technology.surveyed_estates": 28,
+    "disembarkArmy": 29,
+    "promoteCharacter": 31,
+    "technology.charter_forestry": 32,
+    "unit.scout": 32,
+    "terraformTile": 33,
+    "technology.quarry_cranes": 36
+  },
+  "landings": [
+    {
+      "turn": 29,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.47",
+      "cell": 35351,
+      "landmass": 20,
+      "deepVoyage": false
+    },
+    {
+      "turn": 40,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.56",
+      "cell": 29217,
+      "landmass": 16,
+      "deepVoyage": true
+    }
+  ],
+  "colonies": [
+    {
+      "turn": 30,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.47",
+      "cell": 35351,
+      "landmass": 20,
+      "originLandmass": 18,
+      "deepVoyage": false
+    },
+    {
+      "turn": 41,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.56",
+      "cell": 29217,
+      "landmass": 16,
+      "originLandmass": 18,
+      "deepVoyage": true
+    }
+  ],
+  "mirroredCommands": 494,
+  "fullReplayCommands": 874,
+  "exactReplay": true,
+  "exactSave": true,
+  "planningIncludes": "permitted AI-scoped observation plus proposal generation",
+  "planning": {
+    "samples": 164,
+    "medianMs": 1.5472039999999652,
+    "p95Ms": 3.747070000000008,
+    "maxMs": 5.582408999999984
+  },
+  "roundIncludes": "all factions, commands, result recording and saved mirror; excludes final full replay",
+  "rounds": {
+    "samples": 41,
+    "medianMs": 8.681114000000036,
+    "p95Ms": 21.68292800000006,
+    "maxMs": 64.79953699999999
+  },
+  "replayMs": 69.41793600000005,
+  "totalMs": 880.4541509999999
+}
+
+Command: node --import tsx scripts/benchmark-overseas-ai.ts --generator=7 --seed=74 --size=tiny --factions=4 --layout=archipelago --limit=180 --require-deep=false
+Exit: 0
+{
+  "schema": 12,
+  "contentHash": "3c54fb02",
+  "seed": 74,
+  "size": "tiny",
+  "factionCount": 4,
+  "layout": "archipelago",
+  "limit": 180,
+  "requireDeep": false,
+  "generatorVersion": 7,
+  "turn": 34,
+  "hash": "567c4527",
+  "noGrants": true,
+  "initialSaveBytes": 21497,
+  "finalSaveBytes": 78354,
+  "commands": 388,
+  "rejected": 0,
+  "counts": {
+    "found": 11,
+    "moveTo": 84,
+    "endTurn": 33,
+    "adoptInstitution": 4,
+    "queue": 82,
+    "setWorkedTiles": 76,
+    "improveTile": 19,
+    "claimCell": 8,
+    "research": 16,
+    "recruitCharacter": 12,
+    "assignCharacter": 12,
+    "startCharacterMission": 4,
+    "adoptDoctrine": 4,
+    "mergeArmies": 12,
+    "accelerateRoad": 5,
+    "embarkArmy": 4,
+    "disembarkArmy": 2
+  },
+  "first": {
+    "found": 1,
+    "moveTo": 1,
+    "endTurn": 2,
+    "adoptInstitution": 2,
+    "building.granary": 2,
+    "setWorkedTiles": 2,
+    "building.workshop": 5,
+    "improveTile": 6,
+    "claimCell": 6,
+    "building.market": 8,
+    "building.archive": 10,
+    "technology.cinder_masonry": 11,
+    "unit.colonist": 12,
+    "unit.guard": 14,
+    "recruitCharacter": 16,
+    "unit.spearman": 16,
+    "assignCharacter": 17,
+    "technology.coastal_navigation": 17,
+    "startCharacterMission": 18,
+    "building.harbor": 19,
+    "unit.cavalry": 19,
+    "adoptDoctrine": 19,
+    "technology.stewardship": 20,
+    "mergeArmies": 20,
+    "unit.scout": 21,
+    "unit.heavy_infantry": 21,
+    "unit.transport": 24,
+    "accelerateRoad": 25,
+    "technology.surveyed_estates": 26,
+    "embarkArmy": 29,
+    "disembarkArmy": 32,
+    "technology.ocean_navigation": 33
+  },
+  "landings": [
+    {
+      "turn": 32,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.51",
+      "cell": 1327,
+      "landmass": 10,
+      "deepVoyage": false
+    },
+    {
+      "turn": 33,
+      "factionId": "faction.ashen_compact",
+      "armyId": "army.28",
+      "cell": 546,
+      "landmass": 3,
+      "deepVoyage": false
+    }
+  ],
+  "colonies": [
+    {
+      "turn": 33,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.51",
+      "cell": 1327,
+      "landmass": 10,
+      "originLandmass": 8,
+      "deepVoyage": false
+    }
+  ],
+  "mirroredCommands": 61,
+  "fullReplayCommands": 388,
+  "exactReplay": true,
+  "exactSave": true,
+  "planningIncludes": "permitted AI-scoped observation plus proposal generation",
+  "planning": {
+    "samples": 132,
+    "medianMs": 0.83275900000001,
+    "p95Ms": 1.6969420000000355,
+    "maxMs": 4.620236000000006
+  },
+  "roundIncludes": "all factions, commands, result recording and saved mirror; excludes final full replay",
+  "rounds": {
+    "samples": 33,
+    "medianMs": 4.652494000000019,
+    "p95Ms": 11.133769000000001,
+    "maxMs": 27.98821700000002
+  },
+  "replayMs": 23.13870000000003,
+  "totalMs": 252.49587400000001
+}
+
+FINAL HANDOFF
+- Final source is frozen; only naval.ts unknown-port founder diversion was corrected after the full checkpoint, with a pure-observation regression in naval.test.ts.
+- No contact/pacing limit, assertion, pricing, geography, content or canonical schema changed in this follow-up.
+- Standard74 pacing is repaired and all five original pacing cases pass. The isolated full Epic archive gate passes.
+- Current generator7 Standard4 contact still fails100turns; a diagnostic continuation reaches all four by118 without deadlock. This is not an acceptance pass.
+- The measured pre-fix Standard24/Huge32 dense contact misses remain open; no final dense-contact rerun is claimed.
+- All three final generator7 voyages pass, including deep-water colonies for Tiny andSmall islands, with zero rejects and exact mirror/full replay.
+- CPU released to parent at07:12:01UTC. This artifact is an honest checkpoint, not a release or1.0 signoff.

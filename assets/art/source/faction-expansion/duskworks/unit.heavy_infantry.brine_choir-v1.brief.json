@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.brine_choir",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.heavy_infantry for Theandril, Brine Choir.\nSubject: One adult heavily armored infantry veteran, broad layered chest and shoulder plates over padded working cloth, short thick sword held down close to the body and a strong large shield. More solid wide mass than ordinary guard without enormous pauldrons or weapon.\nCulture-specific identity: Adult brinefolk humanoid with matte blue-grey skin, small folded neck fins, broad fin-fold collar, normal two legs and visible dexterous humanlike tool-hands. A practical shore citizen, not a fish-tailed creature. Coral-clay accents, pale eelgrass cloth, wet-slate armor, matte shell inlay and practical woven salt-cloaks. Broad fin-fold collar and low crescent shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.heavy_infantry.brine_choir/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e8a75decf06cfce370d8b30c4b0556344b2b38b881ee3e67499099bf3e563b02",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.heavy_infantry.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.heavy_infantry.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:05:32Z",
+  "referenceHashes": [
+    "9d70c8bec9c56ed0b5550cbac302c07e482f295145b4e3c8a059c9bc1c8ae144",
+    "6946071d5b215ec9878e1b30e5753dc7fe2c490f47035157af36e18051616a1e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "a661c71159796fe2e5b3b57b1bbd751eaa3d56709e8f20ce97b6365b296f9693",
+      "inputHash": "9d70c8bec9c56ed0b5550cbac302c07e482f295145b4e3c8a059c9bc1c8ae144",
+      "outputHash": "374cc0cf4cbdec0f0de0f389623b4680b90c9c67b921151a41f2521da8876d0b"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

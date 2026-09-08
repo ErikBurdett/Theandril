@@ -8,7 +8,11 @@ import { rulesVersion } from './rules';
 
 export interface TransportAftermath { armyId: string; name: string; lostFormationIds: string[]; outcome: 'damaged' | 'lost' }
 export interface TransportSnapshot { armyId: string; fleetId: string; factionId: string; name: string; formationIds: string[] }
-export interface ProductionOption { settlementId: string; itemId: string; kind: 'building' | 'land' | 'naval'; canQueue: boolean; blocker: string | null }
+export interface ProductionOption {
+  settlementId: string; itemId: string; kind: 'building' | 'land' | 'naval'; canQueue: boolean; blocker: string | null;
+  /** Naval quotes only: currently legal, visible berth. Not reserved; completion rechecks it. */
+  launchCell?: number | null;
+}
 export interface NavalArmyView {
   domain: 'land' | 'naval'; carrierId: string | null;
   cargo: { armyId: string; name: string; formations: number }[];
@@ -167,7 +171,10 @@ export function observeProductionOptions(state: GameState, factionId: string): P
       ?? (town.queue.length >= 5 ? 'The production queue is full (five items).' : null)
       ?? (building && (town.buildings.includes(item.id) || town.queue.some(order => order.itemId === item.id)) ? 'That building is already built or queued.' : null)
       ?? (treasury < item.coinCost ? 'Not enough coin to fund that order.' : null);
-    return { settlementId: town.id, itemId: item.id, kind: building ? 'building' as const : units.get(item.id)?.movementDomain === 'naval' ? 'naval' as const : 'land' as const, canQueue: !blocker, blocker };
+    const naval = !building && units.get(item.id)?.movementDomain === 'naval';
+    const launch = naval && !blocker ? navalLaunchCell(state, town, item.id) : null;
+    return { settlementId: town.id, itemId: item.id, kind: building ? 'building' as const : naval ? 'naval' as const : 'land' as const, canQueue: !blocker, blocker,
+      ...(naval ? { launchCell: launch !== null && indexes(state).visible.get(factionId)?.has(launch) ? launch : null } : {}) };
   }));
 }
 export function validateTransports(state: GameState): void {

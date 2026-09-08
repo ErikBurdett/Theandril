@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.lantern_hospices",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.lantern_hospices"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Lantern Hospices, role unit.cavalry.\nSUBJECT: ONE adult mounted rider on an ordinary complete sturdy horse, helmet/cloak and short lance held almost upright, complete hooves, tail and head. Distinct culturally crafted tack. Grounded quiet southeast facingright, no rearing or dust. Native96x96 maxheight78px pivot48,80.\nCULTURE: Beeswax yellow, washed blue, soot-black lantern cages, plain linen. Hooded service coats, broad shields, shielded lamps not glowing magical haloes. Open hospice courtyards with wide ventilated slate roofs, covered galleries, clean cisterns and small enclosed lamp niches.\nPEOPLE if character or rider: Human care-house attendants and paid escorts; adultsturdyclothlayers, no religious caricatures.\nHERALDRY if UI or flag: A small hooded lamp framed by two protective shutters.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.cavalry.lantern_hospices/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.lantern_hospices/efeccb9d2b7cc23cd96c2373e27bfbb6710e3b47546d048638a566436f1c4942/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "acb6c511f01cc694e8a338abcde3370c1a9c3f499c6aef69a6f00866bd481870",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/unit.cavalry.lantern_hospices-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/unit.cavalry.lantern_hospices-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:43:51Z",
+  "referenceHashes": [
+    "a68908e56b6132cf51717a7c04284832536885f4e42d70366bafdbc0e49ba262",
+    "30b300fb1e685a3f024dfe84ad201ee7342758fd35d5267ec81a4978b084e835"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "c25b0fb1c95695405c6a2b278c92fc26c53521f8725d5a93e0336d20be01463b",
+      "inputHash": "a68908e56b6132cf51717a7c04284832536885f4e42d70366bafdbc0e49ba262",
+      "outputHash": "5036785e4538fca1d16c1ad53453220f91da1a34f9ff7991a6087a118a2c1829"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "5036785e4538fca1d16c1ad53453220f91da1a34f9ff7991a6087a118a2c1829",
+      "outputHash": "c45d786a0b8de01bb1cf1c64ac9bd472046dfd4383518bc9f57c4e768742ed11"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c45d786a0b8de01bb1cf1c64ac9bd472046dfd4383518bc9f57c4e768742ed11",
+      "outputHash": "079f620747225ca010b4d6903b8d5e5970eddca3da1428ac68a4c903a1e6a20a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "799e44b6777eb344e872a93a2329c29b7571427ca944b4edb6371fd1351e3099",
+      "outputHash": "36b13287d9c9842430ffda67a5183cd165d950bf75ef2a5e2436126c0cda0c31"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "7937cd1641c16f12665e2e621bf64ad0fbd591b771f95d285dda97dd9c3c8358",
+      "outputHash": "e33c1857fc64d5fde615a382bb9bdab931757d30eadf1c989ba4a49ad9055ba9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "c491584da32758f6052ba748550033b928befa044e552e4a28b236584e62cec7",
+      "outputHash": "3346dd57a1950b64f28e28c70131d08133f2242ee6040169dacd3946ec6cc099"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.lantern_hospices.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T09:19:44.784Z",
+    "notes": "Inspected independently generated original, all18 exact processed frames at native1x and this role at nearest4x. Complete ordinary horse, rider, short lance, reins and pale tack survive the96px frame; no severed hooves or weapon. Muted cream, slate blue and ochre normalized through the shared Theandril palette; hard pixel clusters and transparent padding remain coherent. Tiny source ornament is subordinate to silhouette. One static southeast pose only, not animation. In-game/fog/UI integration remains a separate acceptance gate.\nReviewed candidate efeccb9d2b7cc23cd96c2373e27bfbb6710e3b47546d048638a566436f1c4942; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/12abbeebeeeb15965f5ecb9fefedd7a05e44a57bd00eb6a234ad9cc3109a3361.png"
+    ],
+    "inputHash": "24ead73b68602ac8a737e6024ff7b107fffabfaf746834d4f7abc7492fcd5f42"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,101 @@
+[WebServer] (node:3616438) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3616455) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 52 tests using 1 worker
+
+(node:3616499) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/battlefield.spec.ts:91:1 › battlefield pauses for orders, presents actual strikes and restores a saved round and map without replay mutations (4.2s)
+  ✓   2 tests/gameplay/battlefield.spec.ts:132:1 › paid personal Waykeeper and separate research enable actual ward and ember target controls at narrow width (8.1s)
+  ✓   3 tests/gameplay/battlefield.spec.ts:196:1 › fortified assault opens the shared battlefield and reduced motion keeps decisions explicit (2.6s)
+  ✓   4 tests/gameplay/battlefield.spec.ts:217:1 › naval battlefield renders the actual hull formations and excludes embarked cargo (10.5s)
+  ✓   5 tests/gameplay/campaign-hud.spec.ts:23:1 › the full-width map has top/bottom HUD, working floating windows and a compact unit menu (2.7s)
+  ✓   6 tests/gameplay/campaign-hud.spec.ts:67:1 › town popup retains production and land actions while full orders and roster stay separate (2.1s)
+  ✓   7 tests/gameplay/campaign-hud.spec.ts:91:1 › 390px enlarged-text HUD and modal controls stay readable and close without clearing selection (1.7s)
+  ✓   8 tests/gameplay/campaign-menu.spec.ts:109:1 › top campaign disclosure works by keyboard and preserves real save, load, autosave and import controls (2.8s)
+  ✓   9 tests/gameplay/campaign-menu.spec.ts:160:1 › narrow touch settings scroll within their top-bar overlay and return to the unchanged campaign (3.0s)
+  ✓  10 tests/gameplay/campaign-menu.spec.ts:239:1 › new campaign generation can be cancelled without losing the existing worker or campaign (1.8s)
+  ✓  11 tests/gameplay/characters.spec.ts:71:1 › locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map (1.5s)
+  ✓  12 tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery (6.9s)
+  ✓  13 tests/gameplay/characters.spec.ts:120:1 › field refits restore actual formation losses and earned specialization improves the next mission (6.3s)
+  ✓  14 tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath (6.0s)
+  ✓  15 tests/gameplay/characters.spec.ts:175:1 › a narrow paginated roster finds and assigns a specialist in a hundred-army realm without bypassing companion limits (1.7s)
+  ✓  16 tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (11.3s)
+  ✓  17 tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (3.3s)
+  ✓  18 tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (1.3s)
+  ✓  19 tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (1.3s)
+  ✓  20 tests/gameplay/faction-art.spec.ts:107:50 › culture-cohort-1: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (13.2s)
+  ✓  21 tests/gameplay/faction-art.spec.ts:107:50 › culture-cohort-2: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (14.2s)
+  ✓  22 tests/gameplay/faction-art.spec.ts:107:50 › culture-cohort-3: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (14.0s)
+  ✓  23 tests/gameplay/faction-art.spec.ts:107:50 › culture-cohort-4: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (13.7s)
+  ✓  24 tests/gameplay/faction-art.spec.ts:223:1 › a missing approved culture variant uses its generic role and explicit warning, never a different culture (3.1s)
+  ✓  25 tests/gameplay/land-query.spec.ts:67:1 › selected-town queries are reused for tile clicks and fast registry changes never retain another town’s options (4.6s)
+  ✓  26 tests/gameplay/land-query.spec.ts:95:1 › same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width (5.3s)
+  ✓  27 tests/gameplay/land-query.spec.ts:144:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail (4.1s)
+  ✓  28 tests/gameplay/map-actions.spec.ts:51:1 › a real canvas caravan founds, builds and continues in the same full-orders controls without issuing inspection orders (2.2s)
+  ✓  29 tests/gameplay/map-actions.spec.ts:93:1 › a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders (3.4s)
+  ✓  30 tests/gameplay/map-actions.spec.ts:148:1 › map-only diplomacy uses the one real encountered-faction consumer and ordinary war command (1.4s)
+  ✓  31 tests/gameplay/map-actions.spec.ts:174:1 › 390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer (2.4s)
+  ✓  32 tests/gameplay/map-readability.spec.ts:39:1 › realm perimeters and contextual names stay quiet while real selection, hover, range and land inspection remain clear (2.7s)
+  ✓  33 tests/gameplay/movement.spec.ts:69:1 › canvas selects and cycles friendly units, previews bounded multi-step movement, and distinguishes dragging from orders (4.6s)
+  ✓  34 tests/gameplay/movement.spec.ts:102:1 › map targeting refuses implicit war and impassable land, then executes a multi-step field attack without issuing locked orders (5.2s)
+  ✓  35 tests/gameplay/movement.spec.ts:129:1 › queued waypoints consume current movement, survive save/load, continue after the round, and cancel through the real controls (7.0s)
+  ✓  36 tests/gameplay/movement.spec.ts:169:1 › map settlement targeting requires siege instead of bypassing defenses and inspection names the visible biome (4.1s)
+  ✓  37 tests/gameplay/movement.spec.ts:193:1 › a saved route interrupted by a real foreign move retains its reason and safely replans on resume (4.5s)
+  ✓  38 tests/gameplay/movement.spec.ts:216:1 › narrow touch map moves on taps and keyboard route controls remain usable without hover (2.1s)
+  ✓  39 tests/gameplay/next-action.spec.ts:48:1 › hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders (7.5s)
+  ✓  40 tests/gameplay/next-action.spec.ts:88:1 › paused routes need attention while standing journeys, stationary missions and embarked troops are skipped (5.6s)
+  ✓  41 tests/gameplay/next-action.spec.ts:129:1 › remapped shortcuts persist and previous/next touch controls remain usable at narrow width (2.9s)
+  ✘  42 tests/gameplay/realm-navigation.spec.ts:27:1 › unified registry finds the hundredth army and fortieth town without rendering the whole empire or changing orders (11.8s)
+(node:3623222) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  43 tests/gameplay/realm-navigation.spec.ts:89:1 › narrow town categories expose real production, blockers and character-to-army navigation with save restoration (2.8s)
+  ✓  44 tests/gameplay/tile-footprints.spec.ts:44:1 › all ten paid improvements retain containment while camp, town, capital fill their hex with untinted opaque bodies (7.4s)
+  ✓  45 tests/gameplay/tile-footprints.spec.ts:119:1 › a previously scouted empty foreign field does not reveal its later improvement while zooming and inspecting fog (1.9s)
+  ✓  46 tests/gameplay/world-geography.spec.ts:45:1 › AI-watch fog is a reversible UI/console presentation and saves retain only genuine faction sight (3.9s)
+  ✓  47 tests/gameplay/world-geography.spec.ts:86:73 › continents geography renders actual lakes and joined rivers and can be inspected from the whole-world overview (2.7s)
+  ✓  48 tests/gameplay/world-geography.spec.ts:86:73 › islands geography renders actual lakes and joined rivers and can be inspected from the whole-world overview (2.1s)
+  ✓  49 tests/gameplay/world-geography.spec.ts:86:73 › archipelago geography renders actual lakes and joined rivers and can be inspected from the whole-world overview (2.5s)
+  ✓  50 tests/gameplay/world-geography.spec.ts:131:1 › Huge revealed world overview is one bounded texture and restoring fog removes unknown geography on a narrow viewport (2.9s)
+  ✓  51 tests/gameplay/world-geography.spec.ts:196:1 › player campaigns reject both public fog commands and expose no reveal button (1.4s)
+  ✓  52 tests/gameplay/world-geography.spec.ts:214:1 › a paid road segment has joined map geometry, preserves progress in a save and is suppressed only at far zoom (4.3s)
+
+
+  1) tests/gameplay/realm-navigation.spec.ts:27:1 › unified registry finds the hundredth army and fortieth town without rendering the whole empire or changing orders 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: 'Show on map', exact: true }) resolved to 2 elements:
+        1) <button class="window-map-link">Show on map</button> aka getByRole('region', { name: 'Selected entity orders' }).getByRole('button', { name: 'Show on map' })
+        2) <button>Show on map</button> aka getByTestId('current-selection').getByRole('button', { name: 'Show on map' })
+
+    Call log:
+      - waiting for getByRole('button', { name: 'Show on map', exact: true })
+
+
+      75 |   await expect(page.getByTestId('land-panel')).toHaveAttribute('data-settlement-id', towns.at(-1)!.id);
+      76 |   await expect(page.getByTestId('land-panel')).toHaveAttribute('data-query-state', 'ready');
+    > 77 |   await page.getByRole('button', { name: 'Show on map', exact: true }).click();
+         |                                                                        ^
+      78 |   await expect(page.getByTestId('map-container')).toBeFocused();
+      79 |   await closeManagement(page);
+      80 |   await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/realm-navigation.spec.ts:77:72
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice25-final-ui/realm-navigation-unified-r-52012-e-empire-or-changing-orders/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice25-final-ui/realm-navigation-unified-r-52012-e-empire-or-changing-orders/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice25-final-ui/realm-navigation-unified-r-52012-e-empire-or-changing-orders/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice25-final-ui/realm-navigation-unified-r-52012-e-empire-or-changing-orders/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/realm-navigation.spec.ts:27:1 › unified registry finds the hundredth army and fortieth town without rendering the whole empire or changing orders 
+  51 passed (4.2m)

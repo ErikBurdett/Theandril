@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.margin_observance",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.margin_observance"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Margin Observance, role unit.transport.\nSUBJECT: ONE complete transport ship, broad short unarmed cargo hull, readable open cargo deck and small covered passenger cabin, single small furled sail and short mast. Cultural materials and painted cloth; stout transport silhouette distinct fromwarships. Southeast isometric view bowtowardright, dry isolated entirehull includingkeel, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Parchment grey, dull cinnabar, matte ink black, weathered lead. Narrow document cases, interrupted stripe patterns, practical slate shoulder covers and pale-edged shields. Slab-roof archive stations, protected empty wall recesses and enclosed supply yards; no levitatingglyphs or blackwizardcliche.\nPEOPLE if character or rider: Human copyists, custodians and supplyhouseholds; work-conscious guardedcamp equipment.\nHERALDRY if UI or flag: One broken bracket with a deliberate open corner and small offset registration bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "unit.transport.margin_observance/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.margin_observance/cad1a3c2ca1f68245fac8ac68fec7e57dd25afe922068e430bb55a8471fd4c2f/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "4c6acc7e614295cd3ebe3c5c371e0b46330e2c1069422f6876f344c6b9f2de8b",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.margin_observance-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.margin_observance-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:32:38.000Z",
+  "referenceHashes": [
+    "30479d9d9f7294af522ee709161c8175df0b6028e3caa1de0017869829f46b26",
+    "e061f3ca2c3ad1c752c6a074caffb5d01d86c4eb3a9e4b1838c5ca6491198948"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "081236745112fa3959370b3a15ff4b645335c2674eb60af4e59f3d56054bd858",
+      "inputHash": "30479d9d9f7294af522ee709161c8175df0b6028e3caa1de0017869829f46b26",
+      "outputHash": "939289a37ff67abd1dfee39484260a17afcab34e0c9ba65d272bf39f7977dc8d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "939289a37ff67abd1dfee39484260a17afcab34e0c9ba65d272bf39f7977dc8d",
+      "outputHash": "f09509be661b35d5cb888c6a767c16218634bb34eb3320cbcd484da306cfe541"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f09509be661b35d5cb888c6a767c16218634bb34eb3320cbcd484da306cfe541",
+      "outputHash": "ad6a8be5a36cd97867b70621b24c195fdf144ab756e1bff1186cdd6d8a0e2718"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "b3e49e6ceff431b1782153281f3f1f8d3a7b95d078c77af03cec89c83b8b625b",
+      "outputHash": "a61672ca534aee04c058bf8474bfc0b039a20651bfbea342b3012db91f3d15c9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "4fcdb92f968edbf03a9e60c52f99e23a00366b7887c13146ee9e11db9354f5a9",
+      "outputHash": "e8b50f8e272a552dd7b2574aa1b00250019553f3c9e1dcc683a103ea9ef96a11"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "5c700320e8f463b87c8b522e90514cf6d61b8166da45444c6b8fa54ac089f1af",
+      "outputHash": "ca4cd5cd55d9bb037f3d85c61ff11714fd757f23cc36e33b46da9e64913f83c2"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.margin_observance.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:16:08.876Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Cargo vessel with furled sail, covered cabin and loaded open hold clearly identifies transport. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate cad1a3c2ca1f68245fac8ac68fec7e57dd25afe922068e430bb55a8471fd4c2f; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/dba75e6bdbb13e3dd0c54e2416ec64a5ea3789fbcef6c2c0ed4b38747a82b59a.png"
+    ],
+    "inputHash": "0fc91951b8ea79154b21995a04ffe131a5c48658a7b217b18c3b88d948d0f7da"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

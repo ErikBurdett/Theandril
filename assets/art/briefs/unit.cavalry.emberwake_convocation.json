@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.emberwake_convocation",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.cavalry for Theandril, Emberwake Convocation.\nSubject: One mounted adult escort on one complete ordinary sturdy horse, horse and rider both facing southeast, quiet four-hoof standing pose. Compact saddle packs, faction cloth saddle blanket and practical light barding; rider holds reins and a short sheathed or downward sword, no long lance. All ears, tail and hooves complete.\nCulture-specific identity: Adult human seedkeeper or kiln-worker household escort, practical proportions, visible tool-hands and ordinary boots. No fire elemental or undead. Ash-white ceramic face screens and small ceramic plates, smoked-orange cloth, muted sulfur-green straps, charcoal padded kiln aprons and short heat-resistant wraps. Seed jars and split-vent motifs, no open flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "unit.cavalry.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.cavalry.emberwake_convocation/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "989f93256b8c24268d25b96ad0f5f6a84b3f803dfe1a6808837c7bcb4f46dba0",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:38:37Z",
+  "referenceHashes": [
+    "7c50d960ad76b8a2f08152d557d8d5068f907dda22b84d5d8e9b2756957a087f",
+    "4d37b41cbcc42a95ef6f74ea46bb6b7b3c271571d0e7cf8b43797c4ab4a5ec7c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "f517caae3bc7393d36d8df180f0ab638b03ee08ed67a8a03236dc9f865554141",
+      "inputHash": "7c50d960ad76b8a2f08152d557d8d5068f907dda22b84d5d8e9b2756957a087f",
+      "outputHash": "c74466936bb6ae31605e557899f32d81b3e8d592217a3052c464353b9d68827f"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

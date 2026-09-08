@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.ash_scrub.variant_1",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.ash_scrub.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. ASH SCRUB: broad grey-brown ash-rich soil with irregular charcoal cinder patches and two low muted sage regrowth clusters. Dull rusty pebbles, no lava, fire, ruins or tall rocks. Living dry regrowth on soot-grey ground. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.ash_scrub.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.ash_scrub.variant_1/51548757b8fab3fdcb0f469d837dcfbb633ac9b08f6d30c5eefc35330682e75d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "a7fe8566eb68aa6bebacf53ad6b85cd9bad0cff4fa6d8fd19b0aeebd3bf2abf4",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.ash_scrub.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.ash_scrub.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:49:49.877Z",
+  "referenceHashes": [
+    "ae604835d7429232245d07a480ea44f4d6b7f6b3914edcc74aa7289736372ff2",
+    "46cbc528e9a004a0def44c1230662a86f673600d3b0ce35ef1232b587d09ba14"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "1a1abf4ca92f59b7644df127a987ca45ae580d258cbcdd9f32e6c033fd544be6",
+      "inputHash": "ae604835d7429232245d07a480ea44f4d6b7f6b3914edcc74aa7289736372ff2",
+      "outputHash": "337720987316afd57ab0fea82b4a5b26b1430af37e5d3cb41cc1564b5058ffb6"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "337720987316afd57ab0fea82b4a5b26b1430af37e5d3cb41cc1564b5058ffb6",
+      "outputHash": "1800155a1effb33a97b3afcc46926820685c2702885e961ec1389076157966e9"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1800155a1effb33a97b3afcc46926820685c2702885e961ec1389076157966e9",
+      "outputHash": "457a3f96561bd2f0c53384a94ac8370a110e5d9fb2fac4b1f008c823b3b69c95"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "92fd2e0edb5dc4c8ac4bc4cfc15c1f3680431b66017c54435a01d53cf880de87",
+      "outputHash": "a70257e48d03411c619ddc4b2eb9342b8c8c60625dcc70a21ddc273cd4f55e7b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "ffc5bc306f61f06ebb5f05901031e7001665791f44e074a405225c651fc5f2a2",
+      "outputHash": "ddbc1925f9f55614331cd0e81d4fc76e5b531554d30a69decaea4c3237d74b1d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "9fc834e32aca2deb8608ff8e9660d1d20d78db4912ee584f076c272ff74767cb",
+      "outputHash": "3b564ffee41b6dd1b41c3247f66d1d830aee48569977e1ae111362ea51e32265"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.ash_scrub.variant_1.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:20.106Z",
+    "notes": "Charcoal scorched clumps and subdued scrub preserve the ashen biome with a different distribution. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 51548757b8fab3fdcb0f469d837dcfbb633ac9b08f6d30c5eefc35330682e75d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/1507e67905c6bd1ed9b6033349a5c74cfa66d079021d698c12c3f72fe6be31b9.png"
+    ],
+    "inputHash": "5e942ad4a1aa42bc413621c272ed20c61a9f240f2e040ff558b05ac4c064cc0a"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

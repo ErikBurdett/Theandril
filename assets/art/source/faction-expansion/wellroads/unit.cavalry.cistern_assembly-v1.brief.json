@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.cistern_assembly",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native96. One adult mounted outrider riding one ordinary lean horse facing screen RIGHT/lower right, short lowered spear and compact shield, worn saddle and tied baggage. Entire horse with all four legs, ears, tail and rider enclosed. No giant pennant shrinking the horse, no floating hooves.",
+  "frames": [
+    {
+      "id": "unit.cavalry.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.cavalry.cistern_assembly/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b8fcfbce2f8f5010a7d7fb75d023a5b303bec84261bd7d01379f778253ace2bf",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/unit.cavalry.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/unit.cavalry.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:48:21.106Z",
+  "referenceHashes": [
+    "6b0e8a1ea2bede062964c93fc57c2ba3bcd53ed8564f6f999d1dec0d33caa716",
+    "042641bd58e4c997ce4a00ad4f96d5d90925db7fe9551887d0013e3f72e1c382"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "07550609e864beffa05395b94415c759a5f97a1caf33144a06f7d8c2a15c0497",
+      "inputHash": "6b0e8a1ea2bede062964c93fc57c2ba3bcd53ed8564f6f999d1dec0d33caa716",
+      "outputHash": "395f12b4587a2ee651a04c12d6aef727a7abdd3b6fcb6bd27b3620d99e0d6adb"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

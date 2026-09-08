@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.margin_observance",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.margin_observance"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Margin Observance, role unit.spearman.\nSUBJECT: ONE adult disciplined spearman, upright practical spear fully contained, narrow shield, clear two feet and tool hands. Spear not absurdly tall; whole silhouette including spear54px at native64x64, pivot32,56.\nCULTURE: Parchment grey, dull cinnabar, matte ink black, weathered lead. Narrow document cases, interrupted stripe patterns, practical slate shoulder covers and pale-edged shields. Slab-roof archive stations, protected empty wall recesses and enclosed supply yards; no levitatingglyphs or blackwizardcliche.\nPEOPLE if character or rider: Human copyists, custodians and supplyhouseholds; work-conscious guardedcamp equipment.\nHERALDRY if UI or flag: One broken bracket with a deliberate open corner and small offset registration bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "unit.spearman.margin_observance/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.spearman.margin_observance/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "3b0b3640ef823e05d9054549d302db9674a57a0f78fc026e43159de6fa9e379f",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/unit.spearman.margin_observance-v1.png",
+      "assets/art/source/faction-expansion/reedstars/unit.spearman.margin_observance-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T16:55:08.000Z",
+  "referenceHashes": [
+    "cda2c3faed6a5de6d7185c9b50c3d461cf7044d1f0fbeecaf21b7f17ea3bf73b",
+    "83e816b266c7be039c2dc6df944b9aed7c4971d0c452c5edc21d79be832f486b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "b68983a0d7656d4ef49ebb9a52a25fa601fe0ae3f0a3507450f5b172e073f330",
+      "inputHash": "cda2c3faed6a5de6d7185c9b50c3d461cf7044d1f0fbeecaf21b7f17ea3bf73b",
+      "outputHash": "23d78a236d4e47477b3ce1ff33729a156df92e3b29a65dd19c9934341fbe80e9"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

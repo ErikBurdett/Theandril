@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.velvet_meridian",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.velvet_meridian"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Velvet Meridian, role ui.banner.\nSUBJECT: ONE complete freestanding slender standard pole with heavy cultural cloth and the specified heraldic emblem, simple readable motif, quiet drape, weighted hem. Pole and base intact, no ground or shadow. Native64x64 maximum54px pivot32,56.\nCULTURE: Madder red, smoke silver, blue-black woven cloth. Weighted long hems, small calibrated discs, half-round shields and layered soft scholar coats. Low round slate observatories, cloth-measure galleries, concentric open courtyards and dark-curtained study halls; no glowingastralwizardtowers.\nPEOPLE if character or rider: Human weavers, night navigators and school households; practical escorts and scholars.\nHERALDRY if UI or flag: A plumb line crossing three unequal stitches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "ui.banner.velvet_meridian/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/ui.banner.velvet_meridian/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d737c5702f2b80dd7a8311138e260eefe26c0ebe02c9bcb38b0cffdd2da84249",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/ui.banner.velvet_meridian-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/ui.banner.velvet_meridian-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:21:04.000Z",
+  "referenceHashes": [
+    "41b4a8bd4fc243ac16ee73c4902d0768004fe882ea4a70625a99274850968deb",
+    "932ff6d8425dcfaf6e4356a7e2d3a8b3e8dcaa3fca4c1c4d1602423cfd65e5b2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "822d0580903df3740df4307459bc562286fcd84b80d10f1df8da5499c3dc2a9d",
+      "inputHash": "41b4a8bd4fc243ac16ee73c4902d0768004fe882ea4a70625a99274850968deb",
+      "outputHash": "67aacc4057eb3d77c2272de38993e5b73cda04072feddc32f39f1e785ff48b61"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

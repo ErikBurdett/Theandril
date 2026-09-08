@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.vesper_court",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.badge for Theandril, Vesper Court.\nSubject: ONE extremely simplified front-facing miniature faction badge. Native 32x32 readability: reduce the exact faction emblem to broad thick contiguous pixel masses and obvious gaps, at most a few flat tones. No outer plaque, tiny ornament, text or border.\nCulture-specific identity: An open silver vessel beneath two unequal horizontal dusk bars with one small muted burgundy bead.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 32x32 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "ui.badge.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/source/native/ui.badge.vesper_court/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bd340ea0d951e346be5870747c43fdb40a487630afb37ca7b44ccc0222fb6cba",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.badge.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.badge.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:56:40Z",
+  "referenceHashes": [
+    "44e11dd449d8fc83d9a8d4361f56f109ac7ee8655e9cf22684470eb1a65e5a67",
+    "8ff7bdd32832f5bbc96564109cab29fb4c621cea5203815bec85aa87ba36f624"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "c559133c0e19552cddd04944fbff15dbea3a503ff0c09ee5a5ce57726a9a5deb",
+      "inputHash": "44e11dd449d8fc83d9a8d4361f56f109ac7ee8655e9cf22684470eb1a65e5a67",
+      "outputHash": "ad247d0eca5fbd81ad223f8e278a9d080993eeaa3537b2fec02ab60d8e110be6"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { closeManagement, openSelectedOrders, selectFromRegistry } from './ui-navigation';
 
 test('a selected new culture owns the actual player seat and persists through save/load', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 }); await page.goto('/');
@@ -11,9 +12,13 @@ test('a selected new culture owns the actual player seat and persists through sa
   await page.getByRole('button', { name: /Begin campaign/ }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
   expect(await page.evaluate(() => { const view = window.__THEANDRIL__!.getSummary()!; return view.factions.find(item => item.id === view.factionId)?.definitionId; })).toBe('faction.iron_covenant');
+  await selectFromRegistry(page, 'armies', /Hearth caravan/);
+  await openSelectedOrders(page);
   await page.getByRole('textbox', { name: 'Settlement name', exact: true }).fill('Iron Hearth');
   await page.getByRole('button', { name: 'Found settlement', exact: true }).click();
+  await openSelectedOrders(page);
   await expect(page.getByTestId('land-panel')).toBeVisible(); await expect(page.getByTestId('settlement-stage')).toHaveText('colony · Capital');
+  await closeManagement(page);
   const options = page.locator('.campaign-options'); await options.locator('summary').click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click(); await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
   const hash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());

@@ -55,6 +55,7 @@ describe('siege economy, combat and control', () => {
     state.factions.push({ id: definition.id, definitionId: definition.id, name: definition.name, color: definition.color, treasury: 60, knowledge: 0 });
     state.progression[definition.id] = { technologies: [], institutionId: null, doctrineId: null };
     state.explored[definition.id] = new Set();
+    state.arcaneResearch[definition.id] = [];
     state.world.starts.push(state.world.terrain.findIndex((terrain, cell) => isPassable(terrain) && !state.world.starts.includes(cell)));
     const thirdArmyId = `army.${state.nextId++}`;
     state.armies[thirdArmyId] = { ...template, id: thirdArmyId, factionId: definition.id, cell, formations: [createArmyFormation(thirdArmyId, template.formations[0]!.unitId)] };
@@ -252,6 +253,7 @@ describe('settlement capture consequences', () => {
     state.factions.push({ id: definition.id, definitionId: definition.id, name: definition.name, color: definition.color, treasury: 60, knowledge: 0 });
     state.progression[definition.id] = { technologies: [], institutionId: null, doctrineId: null };
     state.world.starts.push(start); state.explored[definition.id] = new Set();
+    state.arcaneResearch[definition.id] = [];
     requireTown(state).founderFactionId = definition.id;
     rebaseAuthoredLand(state);
     fallen(state);

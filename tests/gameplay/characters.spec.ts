@@ -1,4 +1,4 @@
-import { openRealmAffairs } from './ui-navigation';
+import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders, openRealmAffairs, openCampaignJournal } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { applyCommand, deserializeGame, serializeGame } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -12,7 +12,10 @@ async function loadScenario(page: Page, state = characterCampaign()) {
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
 }
 async function inspect(page: Page, id: string) {
-  if (!await roster(page).isVisible()) await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
+  if (!await roster(page).isVisible()) {
+    await closeManagement(page);
+    await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
+  }
   const character = await page.evaluate(id => window.__THEANDRIL__?.getSummary()?.characters.find(item => item.id === id), id);
   if (!character) throw new Error('Missing observed scenario character');
   await roster(page).getByRole('searchbox', { name: 'Search characters', exact: true }).fill(character.name);
@@ -22,8 +25,8 @@ async function inspect(page: Page, id: string) {
 async function closeRoster(page: Page) { if (await roster(page).isVisible()) await roster(page).getByRole('button', { name: 'Close characters', exact: true }).click(); }
 async function appoint(page: Page, name: string, definitionId: string) {
   await closeRoster(page);
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: new RegExp(FIXTURE.homeName) }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', new RegExp(FIXTURE.homeName)); await openSelectedOrders(page);
   const appointments = page.getByTestId('character-appointments');
   if (!await appointments.evaluate(element => (element as HTMLDetailsElement).open)) await appointments.locator('summary').click();
   const before = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.characters.map(item => item.id) ?? []);
@@ -48,11 +51,13 @@ async function startMission(page: Page, characterId: string, name: string) {
 async function endTurn(page: Page) {
   await closeRoster(page);
   const turn = await page.evaluate(() => window.__THEANDRIL__?.getTurn() ?? 0);
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText(`Turn ${turn + 1}`);
 }
 async function saveReload(page: Page) {
   await closeRoster(page);
+  await closeManagement(page);
   const settings = page.locator('.campaign-options');
   if (!await settings.evaluate(element => (element as HTMLDetailsElement).open)) await settings.locator('summary').click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
@@ -62,6 +67,26 @@ async function saveReload(page: Page) {
   await expect(page.getByTestId('feedback')).toContainText('Campaign restored');
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(hash);
 }
+
+test('locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map', async ({ page }) => {
+  await loadScenario(page, characterBattleCampaign());
+  await selectFromRegistry(page, 'armies', FIXTURE.armyName);
+  const selection = await page.evaluate(() => window.__THEANDRIL__!.getSelection());
+  const hash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
+  expect(selection.armyId).toBe(FIXTURE.armyId);
+  const orders = await openSelectedOrders(page);
+  await orders.getByRole('button', { name: `Manage characters for ${FIXTURE.armyName}`, exact: true }).click();
+  await expect(roster(page)).toBeVisible();
+  // Verify the actual nested-window entry path, not the standalone HUD launcher.
+  await expect(page.locator('dialog.campaign-window')).toHaveAttribute('open');
+  await roster(page).getByRole('button', { name: 'Locate character', exact: true }).click();
+  await expect(roster(page)).toHaveCount(0);
+  await expect(page.locator('dialog.campaign-window')).toHaveCount(0);
+  await expect(page.getByTestId('map-container')).toBeFocused();
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual(selection);
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(hash);
+  expect(await page.evaluate(cell => window.__THEANDRIL__!.getCellScreenPoint(cell)?.inViewport, selection.cell!)).toBe(true);
+});
 
 test('named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery', async ({ page }, testInfo) => {
   await loadScenario(page);
@@ -88,6 +113,7 @@ test('named appointments attach to a real army, cancel without refund, and prese
   await expect.poll(() => page.evaluate(id => window.__THEANDRIL__?.getSummary()?.characters.find(item => item.id === id)?.mission, surveyor)).toBeNull();
   expect(await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.exploredCells)).toBeGreaterThan(before.explored!);
   expect(await page.evaluate(id => window.__THEANDRIL__?.getSummary()?.characters.find(item => item.id === id)?.experience, surveyor)).toBe(4);
+  await openCampaignJournal(page);
   await expect(page.getByTestId('chronicle')).toContainText('hidden armies were not revealed');
 });
 
@@ -119,11 +145,12 @@ test('field refits restore actual formation losses and earned specialization imp
 test('a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath', async ({ page }, testInfo) => {
   await loadScenario(page, characterBattleCampaign());
   const marshal = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.characters.find(item => item.role === 'marshal'));
-  await page.getByRole('tab', { name: /Armies/ }).click();
-  await page.getByTestId('army-registry').getByRole('button', { name: new RegExp(FIXTURE.armyName) }).click();
+  await openRegistry(page, 'armies');
+  await selectFromRegistry(page, 'armies', new RegExp(FIXTURE.armyName)); await openSelectedOrders(page);
   await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.wars.length)).toBe(1);
+  await openSelectedOrders(page);
   await page.getByTestId(`attack-${FIXTURE.enemyArmyId}`).click();
   const battle = page.getByTestId('battle-panel'); await expect(battle).toBeVisible();
   await expect(page.getByTestId('commander-battle')).toContainText(marshal!.name);
@@ -137,8 +164,10 @@ test('a named marshal rallies real formations once, saves its used ability, and 
   await expect(page.getByTestId('commander-battle')).toContainText('already rallied');
   await battle.screenshot({ path: testInfo.outputPath('named-marshal-rally.png') });
   await battle.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
+  await openCampaignJournal(page);
   await expect(page.getByTestId('character-battle-aftermath')).toContainText(marshal!.name);
   const aftermath = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.battleReports.at(-1)?.characterAftermath[0]);
+  await openCampaignJournal(page);
   await expect(page.getByTestId('character-battle-aftermath')).toContainText(`${aftermath!.experience} experience`);
   await saveReload(page);
 });
@@ -157,6 +186,7 @@ test('a narrow paginated roster finds and assigns a specialist in a hundred-army
   state = deserializeGame(serializeGame(state));
   await page.setViewportSize({ width: 390, height: 844 });
   await loadScenario(page, state);
+  await closeManagement(page);
   await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
   await expect(roster(page).getByTestId('character-roster').getByRole('button')).toHaveCount(25);
   await roster(page).getByRole('button', { name: 'Next characters', exact: true }).click();
@@ -196,14 +226,15 @@ test('siege sabotage changes real defenses, and a failed mission preserves wound
     if (failure) await appoint(page, 'Hearth marshal', 'character.marshal');
     await assign(page, engineer);
     await closeRoster(page);
-    await page.getByRole('tab', { name: /Armies/ }).click();
-    await page.getByTestId('army-registry').getByRole('button', { name: new RegExp(CONQUEST_FIXTURE.playerArmyName) }).click();
+    await openRegistry(page, 'armies');
+    await selectFromRegistry(page, 'armies', new RegExp(CONQUEST_FIXTURE.playerArmyName)); await openSelectedOrders(page);
     await page.getByRole('spinbutton', { name: 'Destination hex', exact: true }).fill(String(approach));
     await page.getByRole('button', { name: 'Review route', exact: true }).click();
     await page.getByRole('button', { name: 'Move now', exact: true }).click();
     await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ownArmies.find(army => army.id === 'army.2')?.cell)).toBe(approach);
     await openRealmAffairs(page);
     await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
+    await openSelectedOrders(page);
     await page.getByRole('button', { name: 'Besiege Reedwatch', exact: true }).click();
     await expect(page.getByTestId(`siege-${CONQUEST_FIXTURE.settlementId}`)).toContainText('Besieging Reedwatch');
     await inspect(page, engineer);
@@ -240,7 +271,7 @@ test('siege sabotage changes real defenses, and a failed mission preserves wound
       }
       await inspect(page, engineer);
       await expect(roster(page).getByTestId('character-sheet')).toContainText('ready');
-      await closeRoster(page); await expect(page.getByTestId('chronicle')).toContainText('recovered from wounds');
+      await closeRoster(page); await openCampaignJournal(page); await expect(page.getByTestId('chronicle')).toContainText('recovered from wounds');
     }
   }
 });

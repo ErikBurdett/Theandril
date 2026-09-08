@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.brine_choir",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art character.marshal for Theandril, Brine Choir.\nSubject: One adult faction commander on foot, authoritative quiet upright stance, heavier formal faction coat and practical armor, a compact command baton in one hand and a folded campaign plan in the other. Full body, not portrait. Distinct senior officer silhouette without a crown or huge banner.\nCulture-specific identity: Adult brinefolk humanoid with matte blue-grey skin, small folded neck fins, broad fin-fold collar, normal two legs and visible dexterous humanlike tool-hands. A practical shore citizen, not a fish-tailed creature. Coral-clay accents, pale eelgrass cloth, wet-slate armor, matte shell inlay and practical woven salt-cloaks. Broad fin-fold collar and low crescent shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "character.marshal.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.brine_choir/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d46674db299915ce0e6c32278f6d7ce19428d874bd6ae2ee64ff025fbf674234",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/character.marshal.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/character.marshal.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:15:11Z",
+  "referenceHashes": [
+    "6344d8f1885cf3ab81fb91c9589bc6cc008b459e39ea56d875dbb77a6c065d14",
+    "d3d4ebf342a50a825bf0153cba2988f2b28f2a3dff8bc98b4503b0b1eb9451f4"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "2b5f0c2894211f0f6280f00ad2d187f665d1857370cdd360408239291db9d080",
+      "inputHash": "6344d8f1885cf3ab81fb91c9589bc6cc008b459e39ea56d875dbb77a6c065d14",
+      "outputHash": "93eb80e6e5c887ccd86fd7d7ae8526bac5d4f532fad9d5bfdca393e426796685"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

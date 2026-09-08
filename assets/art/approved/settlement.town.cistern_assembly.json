@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.cistern_assembly",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native96. One joined developed town of six closely nested culture-specific roofs around a broad civic work hall and low protective enclosure with one clear gate. Building mass appreciably broader and denser than a three-house village at the same96native scale. No giant tall pole, background terrain or base tile.",
+  "frames": [
+    {
+      "id": "settlement.town.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.cistern_assembly/6a470678617712c79b156f3804c8eaf521488ebce35e60951d91fcc724510d71/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "065571843c1ef2536e9b00a2b05747c278e2ccf7ba59362e2ba597c0a3a2593d",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/settlement.town.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/settlement.town.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:54:29.532Z",
+  "referenceHashes": [
+    "cc71c311eb907e9f09c614ce4a86f961eaa56704a10187cc3a6ed52359697151",
+    "125b1f90ca8642a2dca00915787cf83ca601f61bb6a4c663cd8d147c752fd9cd"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a8d960088de8015cf7ded493f5b5dcd34731ca4eed4e818428b87d6099a8f255",
+      "inputHash": "cc71c311eb907e9f09c614ce4a86f961eaa56704a10187cc3a6ed52359697151",
+      "outputHash": "70c73af3c4adb1166ad6add2020b9ebc7c393f77d84c5cac137da7c2779cd557"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "70c73af3c4adb1166ad6add2020b9ebc7c393f77d84c5cac137da7c2779cd557",
+      "outputHash": "344a73a3af0d39f1ba57bd4c87393356aba2573bdc3ff810fe837f2babff2f67"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "344a73a3af0d39f1ba57bd4c87393356aba2573bdc3ff810fe837f2babff2f67",
+      "outputHash": "dbba459de78710801e81aa5ddcafea9d7cc0bdf58bc7c06ec19dd7148ef7f331"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "53c258829429a91650b9eb970d05f1e7da8d235d2f6aef39b33774bb6a63592c",
+      "outputHash": "d974751edf5c0e1983c26dc4c1bdbb9fe8fad200dca1f9d23c48d850a352c616"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "b5cf535d3d4f7e43dabbdad42b1ea9667f3d301ab1f85aac59389ad8363ed468",
+      "outputHash": "a8cc6df56dc0547195e28bed656dee6e058e330f69afefbe78b584888493307c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "fc5d4dc33a4a8b8af5f07e15e3ee1a93bd9899f1295f3375dcfc332447ca2491",
+      "outputHash": "e1e09b0e7a29776841f628a5a076b65ab2566588e2b6f323c583ecd7e3460804"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.cistern_assembly.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:09.687Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Open terraced compound with stairs, canvas and round cistern roofs has greater density than the village. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 6a470678617712c79b156f3804c8eaf521488ebce35e60951d91fcc724510d71; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/9116e48e88a762b8d7f9d7816a5018a3dd295f9524ebe98b21cc084225b2723d.png"
+    ],
+    "inputHash": "4c56be2fac2bdccdc27c9750408d2afe5a82c585f6f69e12c285e7637729bf02"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

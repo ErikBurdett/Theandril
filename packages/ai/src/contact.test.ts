@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { RECOMMENDED_FACTION_COUNTS, type MapSize } from '@theandril/mapgen';
 import { applyCommand, createGame, deserializeGame, getObservation, serializeGame, stateHash } from '@theandril/sim';
 import type { GameCommand, GameState, Observation } from '@theandril/sim';
-import { planTurn } from './index';
+import { planTurn, planTurnWithReasons } from './index';
 import { createNavigation, MAX_FRONTIER_NODES } from './navigation';
 
 /** One real watch plan per faction per turn. No changed proposals or canonical input to AI. */
@@ -10,6 +10,7 @@ function contactCampaign(size: MapSize, factionCount: number, limit: number) {
   const game = createGame({ seed: 748291, size, factionCount, pace: 'long' });
   const firstContact = new Map(game.factions.map(faction => [faction.id, null as number | null]));
   const types = new Set<GameCommand['type']>();
+  const lastReasons: Record<string, string[]> = {};
   let mirror: GameState | undefined;
   let mirroredCommands = 0;
   const observe = (view: Observation): void => {
@@ -43,7 +44,8 @@ function contactCampaign(size: MapSize, factionCount: number, limit: number) {
     for (const faction of game.factions) {
       if (game.victory) break;
       const view = getObservation(game, faction.id); observe(view);
-      const proposals = planTurn(view);
+      const planned = planTurnWithReasons(view), proposals = planned.commands;
+      lastReasons[faction.id] = planned.reasons.filter(reason => /fleet|harbor|water|shore|passenger|expedition|transport|boards|lands/.test(reason)).slice(-6);
       expect(proposals.length).toBeLessThanOrEqual(128);
       if (round % 25 === 0 && faction.id === game.turnOwnerId) {
         const before = stateHash(game);
@@ -65,7 +67,12 @@ function contactCampaign(size: MapSize, factionCount: number, limit: number) {
   expect(mirror).toBeDefined();
   expect(stateHash(mirror!)).toBe(hash);
   expect(mirroredCommands).toBeGreaterThan(0);
-  return { firstContact, types, playerId: game.turnOwnerId, game };
+  const diagnostics = game.factions.map(faction => {
+    const view = getObservation(game, faction.id);
+    return { factionId: faction.id, firstContact: firstContact.get(faction.id), foreignBorders: view.cells.filter(cell => cell.factionId && cell.factionId !== faction.id).map(cell => ({ cell: cell.cell, factionId: cell.factionId, visible: cell.visible })), witnessedBattleTurns: view.battleReports.map(report => report.turn), wars: view.wars, towns: view.settlements.filter(town => town.factionId === faction.id).map(town => ({ cell: town.cell, harbor: town.buildings.includes('building.harbor') })),
+      fleets: view.armies.filter(army => army.factionId === faction.id && army.domain === 'naval').map(army => ({ id: army.id, cell: army.cell, cargo: army.cargo, ocean: army.canEnterDeepWater })), reasons: lastReasons[faction.id] };
+  });
+  return { firstContact, types, playerId: game.turnOwnerId, game, diagnostics };
 }
 
 describe('generated large-map faction contact', () => {
@@ -75,11 +82,11 @@ describe('generated large-map faction contact', () => {
     ['huge', RECOMMENDED_FACTION_COUNTS.huge, 60],
   ] as const)('%s / %i seats makes player contact through legal bounded plans with save replay', (size, count, limit) => {
     const result = contactCampaign(size, count, limit);
-    expect(result.firstContact.get(result.playerId)).not.toBeNull();
+    expect(result.firstContact.get(result.playerId), JSON.stringify(result.diagnostics)).not.toBeNull();
     expect(result.firstContact.get(result.playerId)!).toBeLessThanOrEqual(limit);
     expect(result.types.has('moveTo')).toBe(true);
     expect(result.types.has('mergeArmies')).toBe(true);
-    expect([...result.firstContact.values()].filter(turn => turn !== null).length).toBe(count);
+    expect([...result.firstContact.values()].filter(turn => turn !== null).length, JSON.stringify(result.diagnostics.filter(item => item.firstContact === null))).toBe(count);
   });
 
   it('has explicit frontier work bounds and deterministic destinations from detached observed cells', () => {

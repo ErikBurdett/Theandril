@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.underhush_exchange",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.badge for Theandril, Underhush Exchange.\nSubject: ONE extremely simplified front-facing miniature faction badge. Native 32x32 readability: reduce the exact faction emblem to broad thick contiguous pixel masses and obvious gaps, at most a few flat tones. No outer plaque, tiny ornament, text or border.\nCulture-specific identity: A keyhole passage nested inside two low open arches, clay-brown and pale-lime silhouette with a tiny amber marker.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 32x32 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "ui.badge.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/source/native/ui.badge.underhush_exchange/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "970ab1a3a283965fccb721c5b2d642de3cff1cc04e27b106a079ef900251c8ab",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.badge.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.badge.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:34:37Z",
+  "referenceHashes": [
+    "8c9b961d7a00d5b4bc75ae2a740921a1305a73f3d5fbeffba8e88a7545f6b0bb",
+    "749212c5b525241f2e7b5597e39e2211199431e4fa676686c61bd0ba438c895b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "bdd06bf0ae7642b8e89c250ec652748c6c26878cf4b33a68497291983f88737e",
+      "inputHash": "8c9b961d7a00d5b4bc75ae2a740921a1305a73f3d5fbeffba8e88a7545f6b0bb",
+      "outputHash": "72d840a70427c1d63a21fca086ba153683bf79b3c757df3618b21208568ab7b6"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

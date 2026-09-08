@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.manytrack_moot",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. A maintained practical culture of several humanoid lineages and human households; not a feral beast camp. Native96. ONE substantial ocean fighting ship, southeast view with prow screen RIGHT/lower right. Strong broad hull, two distinct short masts with two square sails, raised stern fighting deck and restrained reinforced prow. Complete rigging, all mast tips, sails and hull within central65% with extra upper padding. No sea, wake, waterplane, gigantic ornament or scenery. Heavier twin-mast silhouette, not a copied one-sail transport. No guns, cannons, gunports, gunpowder weapons, engines or industrial metal funnels. Defensive equipment may be bows or one small wooden deck ballista only; no new magical effects.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.manytrack_moot/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1caf9cf8d00b937e721100c3e24a0ba796c43c589c18a09b9ac9a5327404ec0c",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:24:03.066Z",
+  "referenceHashes": [
+    "f71aa8028fa81af0d2b1ba564f28114fea13b70d0fafc68676995668dc0599b9",
+    "34771b7240b92cb1cdf21b1142e5f223356001872e3090cf6c317e4b45033584"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a285b913307a5cc5abba47dd6ccf8567c2bd0359bc8a0818c35c7cf02bf75ff6",
+      "inputHash": "f71aa8028fa81af0d2b1ba564f28114fea13b70d0fafc68676995668dc0599b9",
+      "outputHash": "d54971c271c8a689fd2c621f2b592464c06f1bc83800d9d9b392b90707c3c663"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.brine_choir",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.ocean_warship for Theandril, Brine Choir.\nSubject: ONE substantial deep-ocean sailing warship, broad high-sided reinforced wooden hull, two compact distinct masts and square/lateen sails, raised foredeck and a fortified aft command gallery, restrained deck ballista. Clearly more massive armed fighting ship than transport, no cannons. Entire ship complete.\nCulture-specific identity: Rounded wet-slate timber hulls with coral-clay edge caps, pale eelgrass woven sails, matte shell bands and practical perforated wind screens. No underwater ship or living monster.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.brine_choir/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "459471ad186790ded6367b4b7bb9d8187f1711d7a0a9fcd3e950c5f52d67f981",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:30:14Z",
+  "referenceHashes": [
+    "e1304fa17cd199ca7c1ae156b62fa5c49ee0689bdf9432e84c025f3a798dc063",
+    "33863739d231b0d7f0f4ac7d269d8e5a64b923871c2890280a48f3788bce75e7"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "b8f1d102a3b2b424a26ed1af2d088e227e6ed2b0cd79d2dc14b2c7460abbb313",
+      "inputHash": "e1304fa17cd199ca7c1ae156b62fa5c49ee0689bdf9432e84c025f3a798dc063",
+      "outputHash": "4a9dabfa7494539ac117c12e459014400e5173fd45c7b41607cabc50acbe79b1"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "id": "theandril-battle-waykeeper",
+  "workflow": "pixel_2d",
+  "recipe": "../recipes/waykeeper.py",
+  "description": "Original adult Waykeeper with planted feet, separately keyed arms/tablet/staff and one southeast cast.",
+  "palette": {
+    "file": "../../../../assets/palettes/theandril-master.json",
+    "dither": false
+  },
+  "render": {
+    "engine": "CYCLES",
+    "samples": 16,
+    "resolution": [
+      256,
+      256
+    ],
+    "transparent": true,
+    "filterSize": 0.01,
+    "viewTransform": "Standard",
+    "exposure": 0,
+    "keyEnergy": 300,
+    "motionBlur": false,
+    "depthOfField": false,
+    "camera": {
+      "projection": "ORTHO",
+      "orthoScale": 2.3,
+      "position": [
+        4,
+        -6,
+        4
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "textures": {
+    "size": 8,
+    "filter": "nearest",
+    "mipmaps": false
+  },
+  "export": {
+    "formats": [
+      "blend",
+      "png"
+    ],
+    "runtimeFormat": "png",
+    "preserveNamedParts": true
+  },
+  "sprites": {
+    "size": [
+      64,
+      64
+    ],
+    "anchor": [
+      32,
+      56
+    ],
+    "alphaThreshold": 0.5,
+    "paddingPixels": 3,
+    "facings": 1
+  },
+  "animation": {
+    "state": "cast",
+    "direction": "se",
+    "loop": false,
+    "durationsMs": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ]
+  },
+  "budgets": {
+    "triangles": 9000,
+    "materials": 10,
+    "objects": 80,
+    "maxBytes": 16777216
+  },
+  "quality": {
+    "binarySpriteAlpha": true,
+    "requireAlphaPadding": true,
+    "requiresVisualReview": true
+  },
+  "provenance": {
+    "origin": "Original Theandril Blender mesh construction and authored object keyframes; no downloaded artwork or generated bitmap input.",
+    "license": "Project-authored source; no new third-party art license or automatic CC0 dedication inferred."
+  }
+}

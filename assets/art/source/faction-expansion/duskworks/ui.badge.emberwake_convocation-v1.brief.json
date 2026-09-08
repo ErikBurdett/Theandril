@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.emberwake_convocation",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.badge for Theandril, Emberwake Convocation.\nSubject: ONE extremely simplified front-facing miniature faction badge. Native 32x32 readability: reduce the exact faction emblem to broad thick contiguous pixel masses and obvious gaps, at most a few flat tones. No outer plaque, tiny ornament, text or border.\nCulture-specific identity: A half-blackened seed wheel enclosing a single pale seed, clear coarse silhouette, no flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 32x32 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "ui.badge.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/source/native/ui.badge.emberwake_convocation/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "112d5d13ecf66b232a5a46e67d39eb9a3ed274be723af81631a1352ef0c2eeb1",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.badge.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.badge.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:56:31Z",
+  "referenceHashes": [
+    "92c93db95eb11239a52f9c4274ce6c7b689eea0f2946acca7b0326b6754bcb08",
+    "bd6722d9e59f7cca47bba78a3e95fb2b205a1fde21fb8e355d1707e60255f76b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "c604b5387eefdf0614560a30e0f4f7fe890dd0df9c17bb6a879b0a91ef1e6dfe",
+      "inputHash": "92c93db95eb11239a52f9c4274ce6c7b689eea0f2946acca7b0326b6754bcb08",
+      "outputHash": "69deb60a65c5b714cb251ffd00d1bb749cbbfaadf6e6c586e56499b28ba79a39"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

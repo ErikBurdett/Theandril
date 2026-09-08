@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.velvet_meridian",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.velvet_meridian"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Velvet Meridian, role character.engineer.\nSUBJECT: ONE adult engineer with culturally specific practical work apron, rolled sleeves and small tool satchel, compact mallet held down at side, visible hand and full boots. Native64x64 maxheight48px pivot32,56.\nCULTURE: Madder red, smoke silver, blue-black woven cloth. Weighted long hems, small calibrated discs, half-round shields and layered soft scholar coats. Low round slate observatories, cloth-measure galleries, concentric open courtyards and dark-curtained study halls; no glowingastralwizardtowers.\nPEOPLE if character or rider: Human weavers, night navigators and school households; practical escorts and scholars.\nHERALDRY if UI or flag: A plumb line crossing three unequal stitches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "character.engineer.velvet_meridian/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.engineer.velvet_meridian/1035a6c8d1b81b001d3168652cdf899fa9f31d0407bafe6ae3b3985cab81c8b0/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "859f56579f6c36afcebf0f89cbd58de33cf7eda89f61de328acb17f402a181b6",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/character.engineer.velvet_meridian-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/character.engineer.velvet_meridian-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:01:25.000Z",
+  "referenceHashes": [
+    "64866aec4a80917e045e80c6505a7b99a8b45e76a2c3f35eed0091c0a8994470",
+    "9639c61f90b818e70e51c15d948b0165699772d20dde3715186cf8a668b3d6ce"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "de47607c626057fa9da6417e8800073cf7a4ba866b4e493f397cd52b400b347c",
+      "inputHash": "64866aec4a80917e045e80c6505a7b99a8b45e76a2c3f35eed0091c0a8994470",
+      "outputHash": "157f0a053e35b07e7c2f8b8935cc49b0ceca9aa334d752f011cc4cc08e41fa48"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "157f0a053e35b07e7c2f8b8935cc49b0ceca9aa334d752f011cc4cc08e41fa48",
+      "outputHash": "697510b9cb13edeb48e40d924bbfa4b0c1bdfd935f9c03a37edcc0d1373b6bfa"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "697510b9cb13edeb48e40d924bbfa4b0c1bdfd935f9c03a37edcc0d1373b6bfa",
+      "outputHash": "2e5521ad9ce799a0b14175c878a556d96eaca908b3e134ac154483caf062dd04"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "a919b9c4a8bd5e61fa9972d3ae542d26ee21888e0510eb10ada7c2a84a50a66b",
+      "outputHash": "201f4badc63ad01c6278fc680c0c8deaef6db300deef99657a704b6656ffb3c1"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "667060f3964dfbf19c2eab170ea1d804ae0d64f179e095125ce3dcda0ac75508",
+      "outputHash": "08dc1936414cb34528dc9d8d82409c2e406fc24c2a8c961243cdba6d0606569b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "95e50392ca954aef5b1125bc844d483148a5980a834511b85da9914466ae20e8",
+      "outputHash": "fe021b7511625f8d2ea71a95b753dace8f1a2d635caf16bd6fc03069e84e5e31"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.engineer.velvet_meridian.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:20:41.705Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Engineer in pale long apron carrying mallet and document rolls, full work boots and hands. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 1035a6c8d1b81b001d3168652cdf899fa9f31d0407bafe6ae3b3985cab81c8b0; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/8ce217fa3310bb04caf73be9b52507c51acbbcbc06c3f887e4ecd9d52a321437.png"
+    ],
+    "inputHash": "b2658b1efd3b29d04cf03a0cdd767b98b59b99b774cc75748cf18ce43d4822c3"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

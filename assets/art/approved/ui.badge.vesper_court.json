@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.vesper_court",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.badge for Theandril, Vesper Court.\nSubject: ONE extremely simplified front-facing miniature faction badge. Native 32x32 readability: reduce the exact faction emblem to broad thick contiguous pixel masses and obvious gaps, at most a few flat tones. No outer plaque, tiny ornament, text or border.\nCulture-specific identity: An open silver vessel beneath two unequal horizontal dusk bars with one small muted burgundy bead.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 32x32 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "ui.badge.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.vesper_court/9bee0079b43ab1e63c889246b52e1eb2d559642710409579ee8ef317a9c11450/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bd340ea0d951e346be5870747c43fdb40a487630afb37ca7b44ccc0222fb6cba",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.badge.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.badge.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:56:40Z",
+  "referenceHashes": [
+    "44e11dd449d8fc83d9a8d4361f56f109ac7ee8655e9cf22684470eb1a65e5a67",
+    "8ff7bdd32832f5bbc96564109cab29fb4c621cea5203815bec85aa87ba36f624"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "c559133c0e19552cddd04944fbff15dbea3a503ff0c09ee5a5ce57726a9a5deb",
+      "inputHash": "44e11dd449d8fc83d9a8d4361f56f109ac7ee8655e9cf22684470eb1a65e5a67",
+      "outputHash": "ad247d0eca5fbd81ad223f8e278a9d080993eeaa3537b2fec02ab60d8e110be6"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ad247d0eca5fbd81ad223f8e278a9d080993eeaa3537b2fec02ab60d8e110be6",
+      "outputHash": "df374c7cdefd42e5535c2ebce3a973687efecda22032f250e58e2939a80fc1b8"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "df374c7cdefd42e5535c2ebce3a973687efecda22032f250e58e2939a80fc1b8",
+      "outputHash": "4cae0be699270ea7a1b042e37e5e9409fce303d21f95f8eadb228759a78727a5"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "a4e1eef7b1fb27b5a8d3adbc4802c0eb49de27e89ccb7a1db8b7072acc8414e8",
+      "outputHash": "c758ef2e5e8eed94d3488589eabeaf06993a9759a6c4db0295351f9eff607ec2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "a5eec598b55e6fc6816eaa3d7fe5a8d3e95b101e04932fa02b56c03bcff4fba2",
+      "outputHash": "682ba07f7b464bdfb0ed0baa5e6805ec987e156a24381e3663ded6492d0382e9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "c03af543abcc3ff3192e42879a3ac06f2cad8593e8f8b22449c11249b2bce24b",
+      "outputHash": "98e2e019490ff902aa529ab4c55f792b8dbbc4ce4fc0fc70cde61af321df9d3a"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:04.379Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Compact handled-vessel interpretation keeps the open bar motif visible at32px; no loss of the small silhouette. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 9bee0079b43ab1e63c889246b52e1eb2d559642710409579ee8ef317a9c11450; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/14eb0bf93612d2a989798e7e72999d2c9e4cf4d5f7371a6cf61a77a2be2a779a.png"
+    ],
+    "inputHash": "be472768ff0e781384b23c1aa8882ca29bf094e7aa3a2aa5b34c292cfb58aacf"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

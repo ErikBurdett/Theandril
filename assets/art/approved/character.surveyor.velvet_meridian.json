@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.velvet_meridian",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.velvet_meridian"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Velvet Meridian, role character.surveyor.\nSUBJECT: ONE adult field surveyor, cultural work layers and complete boots, folded measuring tripod at side and compact map tube, no floating parchment or legiblewriting. Clear surveying tools not combatweapon. Native64x64 maxheight48px pivot32,56.\nCULTURE: Madder red, smoke silver, blue-black woven cloth. Weighted long hems, small calibrated discs, half-round shields and layered soft scholar coats. Low round slate observatories, cloth-measure galleries, concentric open courtyards and dark-curtained study halls; no glowingastralwizardtowers.\nPEOPLE if character or rider: Human weavers, night navigators and school households; practical escorts and scholars.\nHERALDRY if UI or flag: A plumb line crossing three unequal stitches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "character.surveyor.velvet_meridian/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.surveyor.velvet_meridian/5a993c679bcbd96c2bce44b82d9198ac269dbbbeb68c88c192e1e6d0bcf260e9/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "14a6084acaa076f461baad814e51bccd684b9bd2ddb796600df2d3b57a7313f5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/character.surveyor.velvet_meridian-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/character.surveyor.velvet_meridian-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:05:04.000Z",
+  "referenceHashes": [
+    "98d7457a038f12b71467a007eeaea077c1a9ba67c8a9fb70906f807fab2b6976",
+    "c7e7eadac3228a161dc7b267fadac95c0b4d55180df7dfe5349ab6a950c597e2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "0e3e160a61506977a3e34f7ac0df6253ef734411ff9bfade0192bbd915a6f7e7",
+      "inputHash": "98d7457a038f12b71467a007eeaea077c1a9ba67c8a9fb70906f807fab2b6976",
+      "outputHash": "81bc1a79308179d696b93bdeca2c0e29506025400537f1adb55a510f343c5ff4"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "81bc1a79308179d696b93bdeca2c0e29506025400537f1adb55a510f343c5ff4",
+      "outputHash": "f1f44f92af6f5081121405e3420c312ce794bb6f8735877dd35f4df76716893e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f1f44f92af6f5081121405e3420c312ce794bb6f8735877dd35f4df76716893e",
+      "outputHash": "25c3af302351d44a7298fe024519d5441c9e5823279fd84418a74064ede55e84"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "ca9e1db5b11b88e9b1ed3e52a5f39e71e8628bff2970eca5ba8a21c2066792ae",
+      "outputHash": "2eab8f61206752374489996e162cc64664a3346db611ea18d815eead9693155d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "9af86a4f7529896fc371cd7065d9f6d8219934762224742f60e0b2de10e60b50",
+      "outputHash": "8b8b10941bbdad73fa43994877b24bb088f7000b23657d0ea9f6c11a99e9e9a4"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "ff209969d51c67c4474a41be36a64a36613d159e163872def780c639d7a26e75",
+      "outputHash": "1f93115dad1f3c4ad69f97c3b0ee931bffeb26c15b9014ccf9055be05c205588"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.surveyor.velvet_meridian.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:20:41.318Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Complete folded tripod and instrument case distinguish surveyor; practical scholar layers. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 5a993c679bcbd96c2bce44b82d9198ac269dbbbeb68c88c192e1e6d0bcf260e9; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/8ce217fa3310bb04caf73be9b52507c51acbbcbc06c3f887e4ecd9d52a321437.png"
+    ],
+    "inputHash": "f82d922615c23d482e0f7ae5a7a629d85145b31cf7c2af7a2d3fca96e05dabc3"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -195,7 +195,7 @@ describe('formation save invariants and preserved historical rules', () => {
   });
 
   it('does not reinterpret new commands/content as legacy rules or fabricate old seals for transferred formations', () => {
-    const state = createGame({ seed: 2, size: 'tiny', factionCount: 1, generatorVersion: 1 });
+    const state = createGame({ seed: 2, size: 'tiny', factionCount: 1, generatorVersion: 1, rosterVersion: 1 });
     const before = stateHash(state);
     expect(applyCommandForVersion(state, merge, 5).ok).toBe(false); expect(stateHash(state)).toBe(before);
     issue(state, { type: 'found', factionId, armyId: 'army.1', name: 'Legacy Hearth' });
@@ -204,7 +204,7 @@ describe('formation save invariants and preserved historical rules', () => {
     const old = stateHash(state); expect(applyCommandForVersion(state, command, 5).ok).toBe(false); expect(stateHash(state)).toBe(old);
     issue(state, command);
     expect(() => serializeGameForVersion(state, 5)).toThrow(/legacy content/);
-    const mixed = field(); issue(mixed, merge);
+    const mixed = field(); mixed.rosterVersion = 1; issue(mixed, merge);
     expect(() => serializeGameForVersion(mixed, 5)).toThrow(/legacy singleton/);
     issue(mixed, { type: 'splitArmy', factionId, armyId: 'army.2', formationIds: ['formation.1'] });
     expect(() => serializeGameForVersion(mixed, 5)).toThrow(/legacy singleton/);

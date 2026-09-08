@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.marsh.variant_2",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.marsh.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. MARSH: saturated dark peat hummocks and sparse sedge in an uneven horseshoe cluster around a small dim slate-water puddle, low green-brown reed heads. No trees, quiet wet ground at tile edges. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.marsh.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.marsh.variant_2/96c59100d343b16f90b729de2f857f575ef5f09efeb666a8427242470f4ef22c/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "50878a5db7904de8298f8868fef0a9a7c09530268fe1ba508b5cb51d49fe1dd7",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.marsh.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.marsh.variant_2-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:51:23.400Z",
+  "referenceHashes": [
+    "7043a8bb7ea7a69c0526fba9a7eb353fa99b1d8ad3e7a8063da4c07ce6284143",
+    "192106e2356d7855681a0fdaee1d687728130b8473f92e7181733462bd0d4407"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "0b8d05eb296bb95fe00afda13fc0b6138f24df7b0b578eece1431efdcb2750f9",
+      "inputHash": "7043a8bb7ea7a69c0526fba9a7eb353fa99b1d8ad3e7a8063da4c07ce6284143",
+      "outputHash": "f8f1d54737daa9f0b8bc2e5097056f8a23584eda8c2d93c20a4b2b332010b8db"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "f8f1d54737daa9f0b8bc2e5097056f8a23584eda8c2d93c20a4b2b332010b8db",
+      "outputHash": "7c5859578848cdbc0c5a5a2fc4e4235802d85923e1da91728439c972161a5c00"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7c5859578848cdbc0c5a5a2fc4e4235802d85923e1da91728439c972161a5c00",
+      "outputHash": "9b347afad0f3f9b4ec9fb093f05b01c33fa857f04aa2f510e81ba534154adcc6"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "90c505961340db77e518551b6cd04d8d684b675d36737f1498dd4754bb7d57c3",
+      "outputHash": "c6afbc598884f94b130ef90a5b24618ce0defb868132d3362ef0d97c3370432f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "f7fa91865c00211def99317d7befcd06bf426e748dd9edd3ba46a5cc2cb0e3b1",
+      "outputHash": "03f571f81886db1b05bfd9d1ce2ec7770b005485d6ba65d27c3255b45caac6ce"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "057cd7d7f582d8bebb0544e3faf36210410da6c7c6a66f2b22732e9944234832",
+      "outputHash": "2ef623db7df83aa4be8cc4b141b9b883b34a530ead6b2294f49d189b7ac490b9"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.marsh.variant_2.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:18.698Z",
+    "notes": "Dark peat hummocks and quieter disconnected pools contrast with reedier variant1; no transparent water holes. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 96c59100d343b16f90b729de2f857f575ef5f09efeb666a8427242470f4ef22c; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/79040ba089d2b54b5a6f42bf84f24c2af71a67ab73761e7b2216a063cf5938d4.png"
+    ],
+    "inputHash": "42aa6d68f073c357e09d154fbe8f4573bdd6436aa1e8e97e667d637994b25305"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

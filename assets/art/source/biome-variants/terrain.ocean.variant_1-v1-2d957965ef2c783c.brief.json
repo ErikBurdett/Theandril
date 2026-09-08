@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.ocean.variant_1",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.ocean.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. OPEN OCEAN: deep muted blue-slate water filling entire hex, just three broad short broken wave reflections spaced irregularly, very restrained desaturated blue-grey highlights. Most surface calm deep blue. No land, shore, rock, reef, white foam, boats or glossy sparkles. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.ocean.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.ocean.variant_1/v1/2d957965ef2c783c/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0bccb7db246756334343ed0b49deb79223e952001a8710569235057429ebccf5",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.ocean.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.ocean.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:58:57.947Z",
+  "referenceHashes": [
+    "adc59782e5e4a6dbca78164b616ab6d9881957dacff4692f7b712ee6c4e38277",
+    "0ec0acb8de6f6dde74eea12b28f67aebced599322f30b917ff1143c9d025f647"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "f86ee4bba741fd4179f29635fbc54df7b39d94a30dd1864d52d2930d4d7f7176",
+      "inputHash": "adc59782e5e4a6dbca78164b616ab6d9881957dacff4692f7b712ee6c4e38277",
+      "outputHash": "1d542fe6bb649bc9c1c380ea097c2aa71aa90309d44243a18d447152051c3a54"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

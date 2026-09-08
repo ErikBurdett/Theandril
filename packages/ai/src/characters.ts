@@ -5,6 +5,9 @@ import type { AiPlan } from './diplomacy';
 export interface CharacterPlan extends AiPlan { coinSpent: number; heldArmyIds: Set<string> }
 const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 
+/** Operational investment threshold, not a different character-assignment rule. */
+export const isWaykeeperBattleArmy = (army: ArmyView): boolean => army.domain === 'land' && !army.carrierId && army.canAttack && !army.canFound && army.formations.length >= 4;
+
 /** Sparse functional planner: eligibility comes from sim, priority only from observed facts. */
 export function planCharacters(view: Observation, coinBudget: number): CharacterPlan {
   const commands: GameCommand[] = [], reasons: string[] = [];
@@ -23,7 +26,7 @@ export function planCharacters(view: Observation, coinBudget: number): Character
   const marshals = new Set(own.filter(army => army.commander).map(army => army.id));
   const companions = new Map(own.map(army => [army.id, army.agents.length]));
   const useful = (army: ArmyView): boolean => !army.carrierId && army.canAttack && !army.canFound && !exposed(army);
-  const priority = (army: ArmyView, role: string): number => role === 'marshal'
+  const priority = (army: ArmyView, role: string): number => role === 'marshal' || role === 'waykeeper'
     ? army.formations.length * 100 + army.strength
     : role === 'engineer' ? (army.maxStrength - army.strength) * 4 + army.formations.length * 30
       : (army.formations.length === 1 ? 100 : 0) + army.maxMovement * 10;
@@ -53,7 +56,7 @@ export function planCharacters(view: Observation, coinBudget: number): Character
     if (!carrier) {
       const targets = character.assignmentOptions.filter(option => option.canAssign).flatMap(option => {
         const army = armies.get(option.armyId);
-        return army && useful(army) && (character.role === 'marshal' || army.domain === 'land') && !heldArmyIds.has(army.id) && !besiegers.has(army.id)
+        return army && useful(army) && (character.role === 'marshal' || army.domain === 'land') && (character.role !== 'waykeeper' || isWaykeeperBattleArmy(army)) && !heldArmyIds.has(army.id) && !besiegers.has(army.id)
           && (character.role === 'marshal' ? !marshals.has(army.id) : (companions.get(army.id) ?? 0) < 2) ? [army] : [];
       }).sort((a, b) => priority(b, character.role) - priority(a, character.role) || byId(a, b));
       const target = targets[0];
@@ -81,16 +84,17 @@ export function planCharacters(view: Observation, coinBudget: number): Character
   }
   // At most six appointed specialists initially: retain room for armies and long-term investment.
   if (living.length >= 6 || commands.length >= 6) return result();
-  const counts = new Map(['marshal', 'surveyor', 'engineer'].map(role => [role, living.filter(character => character.role === role).length]));
+  const counts = new Map(['marshal', 'surveyor', 'engineer', 'waykeeper'].map(role => [role, living.filter(character => character.role === role).length]));
   const fieldArmies = own.filter(army => useful(army) && army.formations.length >= 2);
-  const desired = new Map([['marshal', Math.min(3, fieldArmies.length)], ['surveyor', 1], ['engineer', fieldArmies.length ? Math.min(2, Math.ceil(fieldArmies.length / 3)) : 0]]);
-  const rolePriority = ['marshal', 'engineer', 'surveyor'];
+  const needsCaster = view.wars.length > 0 && fieldArmies.some(isWaykeeperBattleArmy) && view.arcaneResearch.choices.some(choice => choice.canResearch || choice.researched);
+  const desired = new Map([['marshal', Math.min(3, fieldArmies.length)], ['surveyor', 1], ['waykeeper', needsCaster ? 1 : 0], ['engineer', fieldArmies.length ? Math.min(needsCaster ? 1 : 2, Math.ceil(fieldArmies.length / 3)) : 0]]);
+  const rolePriority = ['marshal', 'waykeeper', 'engineer', 'surveyor'];
   const opportunities = view.characterRecruitment.filter(option => option.canRecruit && option.coinCost <= budget && (counts.get(option.role) ?? 0) < (desired.get(option.role) ?? 0))
     .sort((a, b) => rolePriority.indexOf(a.role) - rolePriority.indexOf(b.role) || (a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0));
   for (const option of opportunities) {
     const town = view.settlements.find(town => town.id === option.settlementId);
     if (!town) continue;
-    const candidate = own.filter(army => army.cell === town.cell && army.domain === 'land' && useful(army) && !besiegers.has(army.id) && !heldArmyIds.has(army.id)
+    const candidate = own.filter(army => army.cell === town.cell && army.domain === 'land' && useful(army) && (option.role !== 'waykeeper' || isWaykeeperBattleArmy(army)) && !besiegers.has(army.id) && !heldArmyIds.has(army.id)
       && (option.role === 'marshal' ? army.formations.length >= 2 && !marshals.has(army.id) : (companions.get(army.id) ?? 0) < 2))
       .sort((a, b) => priority(b, option.role) - priority(a, option.role) || byId(a, b))[0];
     if (!candidate) continue;

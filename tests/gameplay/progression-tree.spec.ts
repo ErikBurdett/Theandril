@@ -50,6 +50,8 @@ test('research dependencies support keyboard inspection, exact purchases and per
   await dialog.screenshot({ path: testInfo.outputPath('research-branch-tree-desktop.png') });
   await dialog.getByRole('tab', { name: 'Technology', exact: true }).focus();
   await page.keyboard.press('ArrowRight');
+  await expect(dialog.getByRole('tab', { name: 'Arcane Theory', exact: true })).toBeFocused();
+  await page.keyboard.press('ArrowRight');
   await expect(dialog.getByRole('tab', { name: 'Institutions', exact: true })).toBeFocused();
   await dialog.getByRole('button', { name: 'Adopt Common stewardship', exact: true }).click();
   const excluded = dialog.getByTestId('progression-institution.charter_compact');

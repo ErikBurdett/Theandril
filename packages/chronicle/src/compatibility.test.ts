@@ -99,6 +99,7 @@ describe('preserved schema-4 archives and mixed-version continuation', () => {
     // This is deliberately authored prior-format setup, not a captured user file.
     // Remove modern land development explicitly before the frozen-rule replay.
     initializeLegacyLand(state);
+    state.roads = { edges: {}, projects: {}, known: Object.fromEntries(state.factions.map(faction => [faction.id, {}])) };
     const prior = legacyOrigin(state, 'from-save');
     for (const command of [
       { type: 'research', factionId, technologyId: 'technology.civic_accounts' },

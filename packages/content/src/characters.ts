@@ -3,13 +3,13 @@ import { z } from 'zod';
 const id = z.string().regex(/^[a-z]+\.[a-z_]+$/);
 const text = z.string().min(1).max(320);
 const bounded = (max: number) => z.number().int().min(0).max(max);
-export const characterRoleSchema = z.enum(['marshal', 'surveyor', 'engineer']);
+export const characterRoleSchema = z.enum(['marshal', 'surveyor', 'engineer', 'waykeeper']);
 export type CharacterRole = z.infer<typeof characterRoleSchema>;
 const leadership = z.object({ attack: bounded(5), armor: bounded(5) }).strict();
 export const characterDefinitionSchema = z.object({
   id, role: characterRoleSchema, name: text, description: text,
   coinCost: bounded(500), upkeep: bounded(20), leadership,
-  missionIds: z.array(id).max(8), skillIds: z.array(id).min(1).max(8),
+  missionIds: z.array(id).max(8), skillIds: z.array(id).max(8),
 }).strict();
 export type CharacterDefinition = z.infer<typeof characterDefinitionSchema>;
 export const characterMissionSchema = z.object({
@@ -37,6 +37,7 @@ export const CHARACTER_DEFINITIONS: readonly CharacterDefinition[] = [
   { id: 'character.marshal', role: 'marshal', name: 'Hearth marshal', description: 'An appointed field commander. Leads the attached army, rallies shaken formations once per battle, and earns experience from its outcomes.', coinCost: 32, upkeep: 2, leadership: { attack: 1, armor: 0 }, missionIds: [], skillIds: ['skill.steadfast', 'skill.decisive', 'skill.muster_rolls', 'skill.field_orders', 'skill.measured_advance', 'skill.unbroken_line'] },
   { id: 'character.surveyor', role: 'surveyor', name: 'Road witness', description: 'A travelling surveyor who charts terrain from an escorted camp. Surveys preserve geographic knowledge, not the positions of unseen foreign troops.', coinCost: 20, upkeep: 1, leadership: { attack: 0, armor: 0 }, missionIds: ['mission.survey'], skillIds: ['skill.fieldcraft', 'skill.horizon_studies'] },
   { id: 'character.engineer', role: 'engineer', name: 'March engineer', description: 'A field specialist who must travel with an army. Refits replenish real formation losses; siege sabotage trades coin and exposure for damage to defenses.', coinCost: 28, upkeep: 2, leadership: { attack: 0, armor: 0 }, missionIds: ['mission.refit', 'mission.sabotage'], skillIds: ['skill.fieldcraft', 'skill.siegecraft', 'skill.column_workshops', 'skill.sapper_watch'] },
+  { id: 'character.waykeeper', role: 'waykeeper', name: 'Waykeeper', description: 'A paid travelling practitioner with personal Flame and Rune aptitude. Researched Cinder thread and Bound ward consume limited battle strain. Occupies a companion slot, not an army command.', coinCost: 40, upkeep: 3, leadership: { attack: 0, armor: 0 }, missionIds: [], skillIds: [] },
 ];
 export const CHARACTER_MISSIONS: readonly CharacterMissionDefinition[] = [
   { id: 'mission.survey', kind: 'survey', name: 'Survey the frontier', description: 'Hold the escort in place for two turns to chart terrain within six hexes. Unseen armies remain hidden. Moving or fighting interrupts the work without a refund.', duration: 2, coinCost: 4, experience: 4, radius: 6, strengthRestore: 0, defenseDamage: 0, woundTurns: 0, failureChance: 0 },
@@ -78,6 +79,18 @@ export const CHARACTER_NAMES: Readonly<Record<string, CharacterNamePool>> = {
   'faction.rimehorn_clans': { given: ['Ruva', 'Torrin', 'Kelda', 'Varek', 'Olva', 'Hedrin', 'Norna', 'Sivren'], family: ['Rimeledge', 'Hornkeeper', 'Snowbeam', 'Shelterstone', 'Coldhearth', 'Tundrafold', 'Hightallow', 'Wintershare'] },
   'faction.sable_steppe': { given: ['Saren', 'Ivara', 'Odan', 'Rilka', 'Tamar', 'Veshi', 'Alen', 'Kora'], family: ['Grassknot', 'Farbridle', 'Campward', 'Duskrein', 'Openmile', 'Grazingmark', 'Saddlewrit', 'Windtether'] },
   'faction.morrow_spore': { given: ['Melli', 'Ovenna', 'Issa', 'Nelun', 'Vaeri', 'Somen', 'Erla', 'Tavvi'], family: ['Threadgrove', 'Morrowcap', 'Loamkeeper', 'Rootwitness', 'Sporeweft', 'Underleaf', 'Fallenbough', 'Ringmemory'] },
+  'faction.cistern_assembly': { given: ['Demin', 'Alta', 'Emin', 'Tavia', 'Ludo', 'Ilara', 'Numa', 'Sadin'], family: ['Thirdmeasure', 'Sillkeeper', 'Drawcord', 'Lidstone', 'Basinstep', 'Shadewell', 'Jarreader', 'Chalkspout'] },
+  'faction.unsealed_companies': { given: ['Berr', 'Sova', 'Jerrin', 'Hask', 'Nolda', 'Rudda', 'Perr', 'Avik'], family: ['Oncepaid', 'Rollkeeper', 'Termend', 'Wagonvote', 'Openseal', 'Canvasmend', 'Roadwage', 'Lastreceipt'] },
+  'faction.lantern_hospices': { given: ['Enna', 'Tovel', 'Sunea', 'Miren', 'Pela', 'Ansel', 'Dovi', 'Elia'], family: ['Wickward', 'Cleanstep', 'Linencourt', 'Lamprest', 'Doorplace', 'Quietcot', 'Bluewash', 'Shuttertend'] },
+  'faction.cairnwing_concord': { given: ['Kirr', 'Sevet', 'Tekk', 'Avrit', 'Kessi', 'Rekk', 'Iset', 'Vekri'], family: ['Lowbracket', 'Redledge', 'Liftcord', 'Screestep', 'Upperstay', 'Windbolt', 'Cairnspan', 'Landingbrace'] },
+  'faction.red_sluice': { given: ['Pella', 'Rusk', 'Daska', 'Verrit', 'Orda', 'Gessin', 'Tekla', 'Padrin'], family: ['Gatefive', 'Barwright', 'Chaincourse', 'Spillreader', 'Bankgauge', 'Wheeltend', 'Sluicetally', 'Lowerreach'] },
+  'faction.velvet_meridian': { given: ['Aveline', 'Orel', 'Celune', 'Ivelle', 'Lorian', 'Nevane', 'Amiel', 'Sereva'], family: ['Hemscale', 'Pendline', 'Nightstitch', 'Plumbweft', 'Skyinterval', 'Discweight', 'Veilthread', 'Roundmeasure'] },
+  'faction.brine_choir': { given: ['Olumi', 'Dessa', 'Aruva', 'Omeli', 'Ussa', 'Lumeo', 'Yali', 'Dosani'], family: ['Poolmouth', 'Ringlow', 'Shoreanswer', 'Shellinterval', 'Eelgrass', 'Covevoice', 'Ripplebreak', 'Quayreply'] },
+  'faction.emberwake_convocation': { given: ['Isca', 'Toren', 'Pava', 'Neris', 'Udel', 'Senna', 'Jorin', 'Asel'], family: ['Seedwheel', 'Claybreath', 'Burnaccount', 'Jarwake', 'Ventkeeper', 'Firebreak', 'Fallowproof', 'Safekiln'] },
+  'faction.underhush_exchange': { given: ['Demm', 'Luva', 'Udden', 'Pemm', 'Otta', 'Besk', 'Nummi', 'Tulla'], family: ['Softcut', 'Neararch', 'Ventlease', 'Stillfitting', 'Touchmark', 'Quietjoint', 'Lowtally', 'Smokeclause'] },
+  'faction.vesper_court': { given: ['Veyra', 'Dellan', 'Lysene', 'Corvin', 'Ismera', 'Valeth', 'Nerelle', 'Osvan'], family: ['Closedglass', 'Redshutter', 'Duskvessel', 'Slatewalk', 'Vineward', 'Silverlintel', 'Lastguest', 'Garnetbound'] },
+  'faction.manytrack_moot': { given: ['Venn', 'Seli', 'Haren', 'Mova', 'Endri', 'Keli', 'Uvan', 'Rali'], family: ['Broadpath', 'Reedstride', 'Boughmeeting', 'Crosscord', 'Widearch', 'Fieldhearing', 'Openfork', 'Trailshare'] },
+  'faction.margin_observance': { given: ['Edda', 'Ravel', 'Imren', 'Nella', 'Tavin', 'Edrel', 'Pera', 'Soval'], family: ['Foldmark', 'Lastmargin', 'Blankbracket', 'Pagecondition', 'Gapkeeper', 'Copyline', 'Leadcase', 'Ashfolio'] },
 };
 export function characterName(factionDefinitionId: string, serial: number): string {
   const pool = CHARACTER_NAMES[factionDefinitionId];

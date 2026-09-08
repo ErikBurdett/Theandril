@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.vesper_court",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art character.engineer for Theandril, Vesper Court.\nSubject: One adult engineer on foot in a sturdy faction work apron and compact protective headgear, holding a small mallet and carrying a square tool satchel with a folded carpenter square. Practical repair worker, not a combat giant, full body.\nCulture-specific identity: Living adult human retainers and artisans, cool ivory skin and dark hair; no pointed ears. Only the marshal may be a pale vampiric court patron with subtle severe human features. Charcoal velvet and leather, narrow ribbed dark iron, tarnished silver, muted burgundy and dusty plum cloth (dark #49312b, #642f26, #685375, #96738e; NO bright red). High folded collars, long split court coats and silver-edged narrow kite shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "character.engineer.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.engineer.vesper_court/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7dab8f1be4ab8215f2adc784afc56dba46a95bfaabef2837b049178dc104d82a",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/character.engineer.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/character.engineer.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:53:08Z",
+  "referenceHashes": [
+    "53e293cb8ce6ac5c014d9432496b1d888569b84fb058e5069859386d121ade04",
+    "d1e5f79298c171a400662ba953ad6a46e0102468b35eb86155815d175a4202e0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "2faaf341696556bbaef52f6d4820c25d2cce109f44ef1432a6e7a31e9afdc1f2",
+      "inputHash": "53e293cb8ce6ac5c014d9432496b1d888569b84fb058e5069859386d121ade04",
+      "outputHash": "530871f094ca20ae815132f36bb92f9020549c96cf88583959158007449ffa4e"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

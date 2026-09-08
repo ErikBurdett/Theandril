@@ -1,8 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { UNITS } from '@theandril/content';
 import { neighbors } from '@theandril/mapgen';
-import type { ArmyView, BattleOrder, BattleReport, BattleState, GameCommand, Observation } from '@theandril/sim';
-import { CommanderBattleControls } from './characters';
+import type { ArmyView, BattleReport, BattleState, GameCommand, Observation } from '@theandril/sim';
 
 type IssueOrder = (command: GameCommand) => void;
 const terrainNames = ['Water', 'Plains', 'Forest', 'Hills', 'Mountains'];
@@ -30,7 +29,7 @@ export function AttackOrders({ army, view, busy, issue, terrain }: { army: ArmyV
   </section>;
 }
 
-function FormationTable({ formations, label }: { formations: BattleState['attacker']; label: string }) {
+export function FormationTable({ formations, label }: { formations: BattleState['attacker']; label: string }) {
   return <div className="formation-table-wrap"><table className="formation-table" aria-label={label}>
     <caption>{label}</caption>
     <thead><tr><th scope="col">Formation & position</th><th scope="col">Strength</th><th scope="col">Morale</th><th scope="col">Fatigue</th></tr></thead>
@@ -41,32 +40,6 @@ function FormationTable({ formations, label }: { formations: BattleState['attack
   </table></div>;
 }
 
-const orders: { id: BattleOrder; name: string; description: string }[] = [
-  { id: 'advance', name: 'Advance', description: 'Close the ranks and engage the enemy line.' },
-  { id: 'brace', name: 'Brace', description: 'Favor defense and preserve stamina.' },
-  { id: 'flank', name: 'Flank', description: 'Pressure exposed formations at greater fatigue.' },
-  { id: 'withdraw', name: 'Withdraw', description: 'Leave the field; survivors face enemy pursuit.' },
-];
-
-export function BattlePanel({ view, busy, issue }: { view: Observation; busy: boolean; issue: IssueOrder }) {
-  const heading = useRef<HTMLHeadingElement>(null);
-  const battle = view.battle;
-  useEffect(() => { heading.current?.focus(); }, [battle?.id]);
-  if (!battle) return null;
-  const ownSide = battle.attackerFactionId === view.factionId ? 'attacker' : 'defender';
-  return <section className="battle-panel" data-testid="battle-panel" aria-labelledby="battle-heading">
-    <div className="battle-heading"><div><span className="eyebrow">{battle.domain === 'naval' ? 'The contested waters' : 'The field of oaths'}</span><h2 id="battle-heading" tabIndex={-1} ref={heading}>{battle.domain === 'naval' ? 'Naval battle' : 'Battle'} at hex {battle.defenderCell}</h2></div><div className="battle-round" aria-live="polite">ROUND <strong data-testid="battle-round">{battle.combat.round}</strong></div></div>
-    <p className="battle-context">{terrainNames[battle.combat.terrain]} · You command the {ownSide === 'attacker' ? 'attacking' : 'defending'} {battle.domain === 'naval' ? 'fleet' : 'forces'}.{battle.settlementId && ` Settlement assault · fortification ${battle.fortification}.`}{battle.domain === 'naval' && ' Carried troops do not enter the line. Sunk carriers lose their passengers; destroyed transport formations may leave too little carrying space.'}</p>
-    <div className="battle-autoresolve"><p>Each order resolves one round for both sides. Your officers use these same battle rules when given command.</p><button className="primary" disabled={busy} onClick={() => issue({ type: 'autoResolveBattle', factionId: view.factionId })}>Auto-resolve battle</button></div>
-    <CommanderBattleControls view={view} busy={busy} issue={issue}/>
-    <div className="battle-sides">
-      <div><h3>{factionName(view, battle.attackerFactionId)} <span>{ownSide === 'attacker' ? 'YOUR FORCES' : 'OPPONENT'}</span></h3><FormationTable formations={battle.combat.attacker} label="Attacking formations"/></div>
-      <div><h3>{factionName(view, battle.defenderFactionId)} <span>{ownSide === 'defender' ? 'YOUR FORCES' : 'OPPONENT'}</span></h3><FormationTable formations={battle.combat.defender} label="Defending formations"/></div>
-    </div>
-    <div className="battle-orders" aria-label="Tactical orders">{orders.map(order => <button key={order.id} disabled={busy} className={order.id === 'withdraw' ? 'danger' : ''} aria-label={order.name} title={order.description} onClick={() => issue({ type: 'battleOrder', factionId: view.factionId, order: order.id })}><strong>{order.name}</strong><small>{order.description}</small></button>)}</div>
-    {battle.combat.log.length > 0 && <details className="battle-log" open><summary>Round account</summary><ol>{battle.combat.log.slice(-12).map((entry, index) => <li key={index}>{entry}</li>)}</ol></details>}
-  </section>;
-}
 
 function Report({ report, view }: { report: BattleReport; view: Observation }) {
   const result = report.combat.result;
@@ -87,13 +60,13 @@ function Report({ report, view }: { report: BattleReport; view: Observation }) {
   </article>;
 }
 
-export function BattleHistory({ view }: { view: Observation }) {
+export function BattleHistory({ view, replayId, replay }: { view: Observation; replayId?: string; replay?: () => void }) {
   const heading = useRef<HTMLHeadingElement>(null);
   const latest = view.battleReports.at(-1);
   useEffect(() => { if (!view.pendingCapture) heading.current?.focus(); }, [latest?.id, view.pendingCapture]);
   if (!latest) return null;
   return <section className="battle-history" aria-label="Battle reports">
-    <h2 ref={heading} tabIndex={-1}>After the clash</h2><Report report={latest} view={view}/>
+    <h2 ref={heading} tabIndex={-1}>After the clash</h2>{replayId === latest.id && <button onClick={replay}>Watch recorded battle actions</button>}<Report report={latest} view={view}/>
     {view.battleReports.length > 1 && <details className="past-battles"><summary>Earlier battles ({view.battleReports.length - 1})</summary>{view.battleReports.slice(0, -1).reverse().map(report => <Report key={report.id} report={report} view={view}/>)}</details>}
   </section>;
 }

@@ -1,4 +1,4 @@
-import { openRealmAffairs, openProduction } from './ui-navigation';
+import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders, openRealmAffairs, openCampaignJournal, openProduction } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { applyCommand, createArmyFormation, deserializeGame, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -12,21 +12,24 @@ async function importCampaign(page: Page, state: GameState) {
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
 }
 async function selectArmy(page: Page, name: string) {
-  await page.getByRole('tab', { name: /Armies/ }).click();
-  await page.getByTestId('army-registry').getByRole('button', { name: new RegExp(`^${name} `) }).click();
+  await openRegistry(page, 'armies');
+  await selectFromRegistry(page, 'armies', new RegExp(`^${name} `)); await openSelectedOrders(page);
 }
 async function review(page: Page, cell: number) {
+  await openSelectedOrders(page);
   await page.getByRole('spinbutton', { name: 'Destination hex', exact: true }).fill(String(cell));
   await page.getByRole('button', { name: 'Review route', exact: true }).click();
   await expect(page.getByTestId('route-preview')).toContainText(`hex ${cell}`);
 }
 async function endTurn(page: Page) {
   const turn = await page.evaluate(() => window.__THEANDRIL__!.getTurn());
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getTurn())).toBe(turn + 1);
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
 }
 async function research(page: Page, name: string) {
+  await closeManagement(page);
   await page.getByRole('button', { name: 'Realm progression', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Realm progression', exact: true });
   await dialog.getByRole('button', { name: `Research ${name}`, exact: true }).click();
@@ -34,6 +37,7 @@ async function research(page: Page, name: string) {
   await dialog.getByRole('button', { name: 'Close realm progression', exact: true }).click();
 }
 async function saveReload(page: Page) {
+  await closeManagement(page);
   const options = page.locator('.campaign-options');
   if (!await options.evaluate(element => (element as HTMLDetailsElement).open)) await options.locator('summary').click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
@@ -49,9 +53,11 @@ test('an embarked expedition crosses researched deep ocean by a saved queued voy
   await importCampaign(page, state); await selectArmy(page, N.cargoName);
   await expect(page.getByTestId('naval-transport')).toContainText('can drown passengers');
   await page.getByRole('button', { name: 'Embark army', exact: true }).click();
+  await openSelectedOrders(page);
   await expect(page.getByRole('button', { name: 'Review route', exact: true })).toBeDisabled();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSummary()!.ownArmies.find(army => army.id === 'army.9')!.carrierId)).toBe(N.fleetId);
   await page.getByRole('button', { name: 'Select carrying fleet', exact: true }).click();
+  await openSelectedOrders(page);
   await expect(page.getByTestId('transport-capacity')).toHaveText('Passengers: 2 / 24 formation spaces');
   await review(page, N.deepCell);
   await expect(page.getByTestId('route-preview')).toContainText('Deep ocean requires Ocean navigation');
@@ -64,6 +70,7 @@ test('an embarked expedition crosses researched deep ocean by a saved queued voy
   expect(await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!.visibleEntityArt.some(item => item.entityId === 'army.9'))).toBe(false);
   expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell), N.shallowCell)).toMatchObject({ waterDepth: 1, waterPresentation: 'shallows' });
   expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell), N.deepCell)).toMatchObject({ waterDepth: 2, waterPresentation: 'deep' });
+  await closeManagement(page);
   await page.getByTestId('map-container').scrollIntoViewIfNeeded();
   const point = await page.evaluate(cell => window.__THEANDRIL__!.getCellScreenPoint(cell), N.fleetCell);
   expect(point?.inViewport).toBe(true);
@@ -71,6 +78,7 @@ test('an embarked expedition crosses researched deep ocean by a saved queued voy
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSelection().armyId)).toBe(N.fleetId);
   await page.screenshot({ path: testInfo.outputPath('coastal-depths-and-approved-fleets.png') });
   await review(page, N.landingWaterCell); await page.getByRole('button', { name: 'Queue route', exact: true }).click();
+  await openSelectedOrders(page);
   await expect(page.getByTestId('queued-route')).toBeVisible();
   await saveReload(page);
   for (let round = 0; round < 5; round++) {
@@ -98,8 +106,8 @@ test('an embarked expedition crosses researched deep ocean by a saved queued voy
 
 test('harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet', async ({ page }, testInfo) => {
   await importCampaign(page, navalCampaign({ enemyFleet: false }));
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: new RegExp(N.homeName) }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', new RegExp(N.homeName)); await openSelectedOrders(page);
   await openProduction(page, 'naval');
   const production = page.getByTestId('production-naval');
   await expect(production.getByRole('button', { name: 'Recruit Deepwake warship', exact: true })).toBeDisabled();
@@ -154,11 +162,14 @@ test('a saved naval battle resolves exact transport casualties without deploying
   await importCampaign(page, state); await selectArmy(page, N.cargoName);
   await page.getByRole('button', { name: 'Embark army', exact: true }).click();
   await page.getByRole('button', { name: 'Select carrying fleet', exact: true }).click();
+  await openSelectedOrders(page);
   await openRealmAffairs(page);
   await page.getByRole('button', { name: `Declare war on ${state.factions[1]!.name}`, exact: true }).click();
+  await openSelectedOrders(page);
   await page.getByRole('button', { name: `Attack ${N.enemyFleetName} (${N.enemyFleetId})`, exact: true }).click();
   const battle = page.getByTestId('battle-panel');
   await expect(battle.getByRole('heading', { name: /Naval battle/ })).toBeVisible();
+  await battle.locator('summary').filter({ hasText: 'Formation details & round account' }).click();
   await expect(battle.getByRole('table', { name: 'Attacking formations', exact: true }).locator('tbody tr')).toHaveCount(3);
   await expect(battle).not.toContainText('Hearth caravan');
   await saveReload(page);
@@ -166,6 +177,7 @@ test('a saved naval battle resolves exact transport casualties without deploying
   await page.getByRole('button', { name: 'Brace', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSummary()!.battle?.combat.round ?? null)).toBe(expectedRound);
   if (expectedRound !== null) await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
+  await openCampaignJournal(page);
   await expect(page.getByTestId('transport-aftermath').first()).toContainText('the entire army');
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(stateHash(expected));
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.ownArmies.some(army => army.id === 'army.9'))).toBe(false);

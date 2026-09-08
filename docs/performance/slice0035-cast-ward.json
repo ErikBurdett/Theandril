@@ -1,0 +1,134 @@
+{
+  "hash": "dd3f8c97",
+  "visibleFrames": 31,
+  "effects": [
+    "effect.battle_ward/cast/se/0",
+    "effect.battle_ward/cast/se/1",
+    "effect.battle_ward/cast/se/2",
+    "effect.battle_ward/cast/se/3"
+  ],
+  "poses": [
+    "character.waykeeper/cast/se/0",
+    "character.waykeeper/cast/se/1",
+    "character.waykeeper/cast/se/2",
+    "character.waykeeper/cast/se/3"
+  ],
+  "held": {
+    "active": true,
+    "battleId": "battle.10",
+    "revision": 3,
+    "round": 0,
+    "domain": "land",
+    "fortification": 0,
+    "eventCount": 0,
+    "eventTotal": 1,
+    "completed": false,
+    "reducedMotion": false,
+    "elapsedMs": 374.9499999999998,
+    "paused": true,
+    "formations": [
+      {
+        "id": "formation.2",
+        "strength": 55,
+        "morale": 30,
+        "ward": 0,
+        "side": "attacker"
+      },
+      {
+        "id": "formation.7",
+        "strength": 60,
+        "morale": 35,
+        "ward": 0,
+        "side": "attacker"
+      },
+      {
+        "id": "formation.4",
+        "strength": 60,
+        "morale": 75,
+        "ward": 0,
+        "side": "defender"
+      }
+    ],
+    "width": 1440,
+    "height": 802,
+    "actorScale": 1,
+    "actors": [
+      {
+        "id": "formation.2",
+        "assetId": "unit.guard.ashen_compact",
+        "frameId": "unit.guard.ashen_compact/idle/se/0",
+        "x": 654,
+        "y": 106,
+        "bounds": {
+          "x": 612,
+          "y": 40,
+          "width": 84,
+          "height": 115
+        }
+      },
+      {
+        "id": "formation.7",
+        "assetId": "unit.spearman.ashen_compact",
+        "frameId": "unit.spearman.ashen_compact/idle/se/0",
+        "x": 654,
+        "y": 229,
+        "bounds": {
+          "x": 612,
+          "y": 163,
+          "width": 84,
+          "height": 115
+        }
+      },
+      {
+        "id": "formation.4",
+        "assetId": "unit.guard.reedbound_council",
+        "frameId": "unit.guard.reedbound_council/idle/se/0",
+        "x": 786,
+        "y": 352,
+        "bounds": {
+          "x": 744,
+          "y": 286,
+          "width": 84,
+          "height": 115
+        }
+      },
+      {
+        "id": "character.8",
+        "assetId": "character.marshal.ashen_compact",
+        "frameId": "character.marshal.ashen_compact/idle/se/0",
+        "x": 58,
+        "y": 745,
+        "bounds": {
+          "x": 12,
+          "y": 679,
+          "width": 92,
+          "height": 115
+        }
+      },
+      {
+        "id": "character.9",
+        "assetId": "character.waykeeper",
+        "frameId": "character.waykeeper/cast/se/3",
+        "x": 158,
+        "y": 745,
+        "bounds": {
+          "x": 112,
+          "y": 679,
+          "width": 92,
+          "height": 115
+        }
+      }
+    ],
+    "effects": [
+      {
+        "assetId": "effect.battle_ward",
+        "frameId": "effect.battle_ward/cast/se/3",
+        "sourceId": "character.9",
+        "targetId": "formation.2"
+      }
+    ],
+    "pooledActors": 5,
+    "pooledEffects": 1,
+    "missingArt": []
+  }
+}

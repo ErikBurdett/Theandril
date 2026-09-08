@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.ocean.variant_2",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.ocean.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. OPEN OCEAN: quiet dark slate-blue water with sparse offset softly curving current bands in muted blue teal; four short low-contrast broken reflection marks. No dramatic white waves or busy ripple texture, no land or shoreline. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.ocean.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.ocean.variant_2/4e690eab58e2d7f244c84fdd19c06cd546253ae5928523ec9501a6b56b3c40ec/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "73290b5e397adf9c90b9d75746f6a26edc4f1a2de37cd3d8384f32169ddf5ea5",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.ocean.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.ocean.variant_2-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:59:33.522Z",
+  "referenceHashes": [
+    "6cb88d816662f9a1b289271036527e5e3a1a8de8948cf5bcdee1937ba1401ce0",
+    "283fc2b47b8ba09333ecb1d8223c60e159fc91ab201c24899bdbce9d19a10c02"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "7c3b233a179142e8d05a511a128c35742dcf6450a9da1991f9fb38e6f10a7306",
+      "inputHash": "6cb88d816662f9a1b289271036527e5e3a1a8de8948cf5bcdee1937ba1401ce0",
+      "outputHash": "74cd405969f7200fc2e3db1ab9ae4bde57819266f3559af2cca3c0fe0d5b3737"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "74cd405969f7200fc2e3db1ab9ae4bde57819266f3559af2cca3c0fe0d5b3737",
+      "outputHash": "cc853d4c9d54a5d2d9144c2b24fcf1a332a6f42ee10ac5ee2d8713446f9ef363"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "cc853d4c9d54a5d2d9144c2b24fcf1a332a6f42ee10ac5ee2d8713446f9ef363",
+      "outputHash": "58a0bae2237c827da6b461a3e436807cadfc6211e102ce8c6940a177dbf6c3a4"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "7331afa497046f544aa139342d014f795d6d741b96a5fe4d184c3c3f455f45cb",
+      "outputHash": "15ddf78ac7c05f6c13c106cfebfc83558b7ad1895149a943777bdff19deb84ac"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "25a1292979b3522e1c1e12422511772c8cea27a07a6b088176db7877ac3d396f",
+      "outputHash": "2eec66599c6943283de326f20b351dc7e8c786cd585ab21773ae3dc82b30eeed"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "f8400a67f473a6b4d4212e114b103d941e9dd3e98de82558304c242dad696025",
+      "outputHash": "eefe6d282a21b41446a61ff41d15b036c28813127ded30a0f924bd794094b057"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.ocean.variant_2.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:15.311Z",
+    "notes": "Broad dark diagonal ripple clusters differ from fine waves, without false coasts or islands. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 4e690eab58e2d7f244c84fdd19c06cd546253ae5928523ec9501a6b56b3c40ec; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/ceab2e032208ed51ae5126068ca543b31928eb1965f3b48b983be50a4ad352d2.png"
+    ],
+    "inputHash": "2a4820cd226faab0b88cc0e9b96451130dc7502470f87e67b1f853dbf11f9aac"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

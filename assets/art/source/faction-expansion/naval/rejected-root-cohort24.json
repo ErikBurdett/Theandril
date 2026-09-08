@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "rejections": [
+    {
+      "id": "unit.ocean_warship.red_sluice",
+      "role": "unit.ocean_warship",
+      "family": "red_sluice",
+      "version": 1,
+      "sourcePath": "assets/art/source/faction-expansion/naval/unit.ocean_warship.red_sluice-v1.png",
+      "sourceHash": "ad2b53904c1fee91262f758c39710547bb8e82a35778f4b3583f6cdf3448e744",
+      "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Red Sluice Directorate, role unit.ocean_warship.\nSUBJECT: ONE complete substantial ocean warship, deep high-sided broad hull, armored bow and elevated stern gallery, two short masts with separated compact sails and fortified deck. Cultural materials/cloth, clearly heavier than coastalgalley. Southeast isometric bowright, fullhull and sails insideframe, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Brick red, dull celadon cloth, tarred oak, black chain and weathered bronze. Broad rectangular rain shields, hooded crew coats, horizontal bar motifs. Low sluice-gate inspired maintenance halls, wheel-braced gantries, thick brick channelside courtyards; no surrounding waterrectangle or actualtile.\nPEOPLE if character or rider: Human waterworks crew households and disciplined municipal escorts.\nHERALDRY if UI or flag: A barred spillway with three broad vertical openings and one horizontal lifting bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nNO firearms, cannons, gun barrels, gunports or gunpowder equipment. Wooden ballista on an open warship deck is permissible; transport carries cargo not weapons.",
+      "provider": "codex-imagegen",
+      "model": "not-exposed-by-tool",
+      "seed": null,
+      "generatedAt": "2026-09-07T17:29:45Z",
+      "referenceHashes": [],
+      "reason": "Source preflight rejects alpha>=128 canvas-edge contact. Main visual inspection confirms topmast touches the source top edge and stern nearly touches left edge. Original retained unmodified and never prepared or approved; requires a fully contained newly generated ship."
+    }
+  ]
+}

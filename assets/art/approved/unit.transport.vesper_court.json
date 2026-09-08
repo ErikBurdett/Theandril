@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.vesper_court",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.transport for Theandril, Vesper Court.\nSubject: ONE broad capacious wooden transport cog: rounded deep cargo hull, one square sail, low enclosed passenger shelter, neatly strapped crates, minimal defenses. Chunky broad useful deck distinguishes troop carrier from galley and warship. Entire ship visible; no people large enough to compete.\nCulture-specific identity: Dark timber hull, enclosed shuttered charcoal cabins, muted burgundy/dusty-plum sails, tarnished silver-edged stern gallery. Keep role silhouette readable; not a bat ship.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "unit.transport.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.vesper_court/9cd6db461b395c0e3bf4d2a0fa79bb111d7f4518740d4c1f152446c5f39fbc3f/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "fb6f70151750d333e897128490b3cdf2fb48924bfca867032325b86788950559",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:56:40Z",
+  "referenceHashes": [
+    "1d0d35c5a9d2a8ad650f5a3cb893828b1af061a1f76aaa35ce8da2034b1cd719",
+    "ae77676056b37f15694a15ac9f00db47f6163c123a6331cb68f08b6de681be14"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "72a89b2231110bacb8e4c1c55cb69e0fa1f15cda1696b38357edef3cfe8db258",
+      "inputHash": "1d0d35c5a9d2a8ad650f5a3cb893828b1af061a1f76aaa35ce8da2034b1cd719",
+      "outputHash": "4c794894a3e80bc1180e1e5a1b77e964e023ef9a368ba53c262f297488ca8ca8"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "4c794894a3e80bc1180e1e5a1b77e964e023ef9a368ba53c262f297488ca8ca8",
+      "outputHash": "35bdc7456b9f0b14b500a76d06ed9e592cec60483cc481b07cf965cb77541514"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "35bdc7456b9f0b14b500a76d06ed9e592cec60483cc481b07cf965cb77541514",
+      "outputHash": "ffa945904c767451cc7700441908093a9d341a047e9189102ba36661f8b60171"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "9a3d0f5bbf0bc047328e0d77e58125f5d9df38f730b04e1d4a811b5fef6e9097",
+      "outputHash": "526572ff8e64951f1767c3d9d385e0af03b7231a763c506f53a7831990dfee73"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "4e298667d3d4fa894536d8e4d66d44a1e5efc5e9cb70cd67fe6596ffe221fe93",
+      "outputHash": "c055b51f712b9c1914fc44233f8d05e22e6a3df4b889d78dd699ecf1c09b04a9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "3335f0faff4e7309404af13fcafcb5821eef6fbb7ade0023209c1e985a1401b0",
+      "outputHash": "f40a32d311506a2daa960fe7db3ccb48b9ba4561b93fd30482cd6b092e563005"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:05.099Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Cargo vessel has an enclosed stern cabin, broad hold and a single principal sail, visibly separate from the fighting ships. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 9cd6db461b395c0e3bf4d2a0fa79bb111d7f4518740d4c1f152446c5f39fbc3f; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5ccc8b97e0685a2bde7d11f37ffab11b487a3039b20f06260747189210d4ed8a.png"
+    ],
+    "inputHash": "ae9f3fb7f6e6a4ea32003a40d3729da3c5e1c9e00f6a8ab6ff6e13e68e351eef"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

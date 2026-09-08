@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.vesper_court",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: one original strategic pixel-art city sprite for Theandril, Vesper Court.\nCreate ONE complete developed walled vineyard manor-city: a dense, inhabited court of shuttered estate houses grouped around an enclosed slate-roof manor hall, covered walks connecting the buildings, narrow tall masonry chimneys, practical walls and gate, and a few tightly contained vineyard trellises inside the enclosure. Roughly seven to nine distinct roof/building masses, a broad compact developed footprint, layered slate roofs and folded garnet shutter cloth. Architecture is sheltered, cultivated and old, with refined narrow windows and covered passages; not a generic grey medieval fortress, huge single keep, cathedral, fairy castle or bone city. All roofs, walls, gate and chimneys must fit completely inside the sprite.\nStyle: crisp deliberate COARSE PIXEL ART with readable clustered pixels at a native 128x128 strategic canvas, ground pivot64,112 and maximum visible height110pixels. Broad quiet color/material planes rather than painterly detail or one-pixel noise. Muted garnet shutters, charcoal and blue-grey slate, weathered grey masonry, tarnished silver details, restrained deep vineyard green. Consistent diffuse upper-left lighting using flat stepped pixel tones, no glowing windows or magic.\nComposition: southeast isometric three-quarter view, complete compact building cluster with at least 12% empty transparent margin around ALL extremities, square PNG. TRUE alpha0 background, no painted checkerboard or solid backdrop. No terrain tile, ground plinth, hex, surrounding landscape, detached trees, standalone paths outside the walls, cast shadow, text, label, banner pole consuming the canvas, bat motifs, skulls, blood imagery or imported fantasy architecture. One static city only, no collage or multiple alternatives.",
+  "frames": [
+    {
+      "id": "settlement.city.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/source/native/settlement.city.vesper_court/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "194c71c7a0c96ab66b9605396ea5f1192cf3bcfa32a5aef6b1047633402f7903",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.city.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.city.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:20:13Z",
+  "referenceHashes": [
+    "64c5dd4eb3e0db297ef7352d79df6431c416816e8d31cbb4784c7f3d4edae977",
+    "860eb131518b971f7eb79143a2797c64928d172133f872694fda7f390fac20ed"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "85a5db61d7133f238a2a88e04926b93304033b729dc6098afbafb28797b76326",
+      "inputHash": "64c5dd4eb3e0db297ef7352d79df6431c416816e8d31cbb4784c7f3d4edae977",
+      "outputHash": "15a6a57f50169132268b4e17ce8abb8d589d5561991ed098ba8704781243c7e0"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

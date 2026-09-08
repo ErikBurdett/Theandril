@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.brine_choir",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.transport for Theandril, Brine Choir.\nSubject: ONE broad capacious wooden transport cog: rounded deep cargo hull, one square sail, low enclosed passenger shelter, neatly strapped crates, minimal defenses. Chunky broad useful deck distinguishes troop carrier from galley and warship. Entire ship visible; no people large enough to compete.\nCulture-specific identity: Rounded wet-slate timber hulls with coral-clay edge caps, pale eelgrass woven sails, matte shell bands and practical perforated wind screens. No underwater ship or living monster.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "unit.transport.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.brine_choir/421718e26f323f272a133cfd3a5e05275d9ee63ec341d92c8c05128e09e3752d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c776cb0b5f131160db479421ac2dd2599d216c1c25e73ea5058317360e1c71fd",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:22:18Z",
+  "referenceHashes": [
+    "88f1a8392961884d68551138420173159c6318f252233b7b622cc3deaac43cb2",
+    "e2695c22a34cef9a9bd6630e90f00cd3698e1b41a9ba215fd784c020e826bef2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "7c9e90a1f75a4d44f79c0ad7782c5545c06a0609fab6f7a8c33e116f5ddca88e",
+      "inputHash": "88f1a8392961884d68551138420173159c6318f252233b7b622cc3deaac43cb2",
+      "outputHash": "b33dde1d17027652142df11b2f8191a15a4f4f3dba798a5ea5e0284ed73d1b42"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "b33dde1d17027652142df11b2f8191a15a4f4f3dba798a5ea5e0284ed73d1b42",
+      "outputHash": "2ba3c07fd7f730681f890889345c638df6b7e5d64e84a3cf5fd3f89fe4ea7b16"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "2ba3c07fd7f730681f890889345c638df6b7e5d64e84a3cf5fd3f89fe4ea7b16",
+      "outputHash": "beddaf2e6d8329152cfeb88e0e7e8308a871e440d0aa3a8ed34afc81935b9e21"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "768b191d6c1ba138e96f774d672f4ec077f490a5bbd62d53625993515530ba9a",
+      "outputHash": "df715cb610178032002544b52843b5121202f4a1156c9f6db333a98d6762a4dc"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "4f64ad571e0ffc7e0b31c1d2e08a16c60ed16ba22653b9d86eb24db2a7a5be2e",
+      "outputHash": "3614f4015dbff27abb9aadd50006dfc68f7d15b4088251a6fabb154ef460c3e5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "4b94bedd5e7183e33180e786a87471db635ea05cedb8f95ed3a6c0bd93d71cc9",
+      "outputHash": "3a629ac2160442f8381a600cbb006eff201ab4723717c1c431b4193fa4c3a1d7"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.brine_choir.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:18:15.959Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Broad cargo vessel with single rounded square sail and loaded open hold; complete stern/cabin. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 421718e26f323f272a133cfd3a5e05275d9ee63ec341d92c8c05128e09e3752d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/6b20acf709240ada46df5cd29882ec3b4750a7c2fb6c6ec488a7ab3046bd52a8.png"
+    ],
+    "inputHash": "5a9ac4127b017206abf20a6e891695b7a5dfc575e5e219a12a91a48477fc43c8"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "assetId": "unit.scout.ashen_compact",
-  "inputHash": "f0f5b15e386b2a35c8cb3c6e9f2b47460b068f766f42892f4a566ce4e4bcf949",
-  "specificationHash": "4d5d84451f27245fdf9bc237ca7a86cfbb3e13c5229de49943ec8dbaf57dc174",
+  "inputHash": "7fac58b334cf177fe8377630205d460474b7c1fc11a365b5c6c48098dbc7e28e",
+  "specificationHash": "1e537cd1d3161cebc0cc18a52eb38671ced5e3958e1f1251328281ff5614d7dc",
   "score": 100,
   "passed": true,
   "errors": [],
@@ -10,23 +10,75 @@
   "manualChecks": [
     "Originality, licensing and provenance review",
     "Silhouette and role readability at native and zoomed scale",
-    "Anatomy, equipment continuity, lighting and material consistency"
+    "Anatomy, equipment continuity, lighting and material consistency",
+    "idle/se: review temporal flicker, direction, equipment, visual identity and loop seam"
   ],
   "metrics": [
     {
       "id": "unit.scout.ashen_compact/idle/se/0",
-      "hash": "3255ba65c3cd3fa194fe29b80621ae05a6dd19e2ac916f9e88c57afffcf8a142",
-      "colors": 30,
+      "hash": "caeb3bbfea09ceab85120b3c357c6cfbbd93094f9935d3e41eb6e1bcf14c29fc",
+      "colors": 28,
       "offPalettePixels": 0,
       "partialAlphaPixels": 0,
       "hiddenColorPixels": 0,
-      "opaquePixels": 746,
+      "opaquePixels": 895,
+      "padding": 8,
+      "bounds": {
+        "x": 14,
+        "y": 8,
+        "w": 41,
+        "h": 46
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "unit.scout.ashen_compact/idle/se/1",
+      "hash": "567fd8cb16ad225d60e280c8c7516b08bf155f5d07b21d816f4896f016095b12",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 902,
       "padding": 8,
       "bounds": {
         "x": 12,
         "y": 8,
-        "w": 39,
-        "h": 47
+        "w": 42,
+        "h": 46
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "unit.scout.ashen_compact/idle/se/2",
+      "hash": "3923d16fdeddb17c8eea87ce9fa0eb88e3d0bdd9108cbdbe79cc8b7db6b12f34",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 907,
+      "padding": 8,
+      "bounds": {
+        "x": 12,
+        "y": 8,
+        "w": 43,
+        "h": 46
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "unit.scout.ashen_compact/idle/se/3",
+      "hash": "8e148f54e0e62ac363085e03caaf16a251e69ace11c9dcc35e69b14a812fc592",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 916,
+      "padding": 8,
+      "bounds": {
+        "x": 12,
+        "y": 8,
+        "w": 43,
+        "h": 46
       },
       "logicalGridErrors": 0
     }

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "terrain.alpine.variant_1",
+    "version": 1,
+    "sourcePath": "assets/art/source/biome-variants/terrain.alpine.variant_1-v1.png",
+    "sourceHash": "888b704b12a0665f0095b9a060185ec7bc9a4e026dfdd1074422b65c6467fb8e",
+    "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. ALPINE: low craggy mountain ridge across upper half, two angular slate grey peaks with restrained pale old snow on upper-left facets; a broad scree saddle between, muted stone foreground. No raised hex block; ridge rises from fully flat overhead ground. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "seed": null,
+    "generatedAt": "2026-09-07T06:55:26.675Z",
+    "rejectionReason": "The tallest left mountain peak extends beyond the required flat pointy-hex top-left silhouette. Original retained unchanged; no crop or masking repair. Root review confirmed rejection before native preparation."
+  },
+  {
+    "id": "terrain.marsh.variant_1",
+    "version": 1,
+    "sourcePath": "assets/art/source/biome-variants/terrain.marsh.variant_1-v1.png",
+    "sourceHash": "c6dd94fb275cee2929bea9b58f741967afd6957c1c6bce84a080aa4c8f19de97",
+    "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. MARSH: low peat-black wetland surface, muted muddy olive-brown ground with two small irregular shallow blue-grey puddles, uneven reed clusters along their edges. Pools stay wholly inside tile, not rivers or coast. No bright reflections. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "seed": null,
+    "generatedAt": "2026-09-07T06:50:08.474Z",
+    "rejectionReason": "Strict source-alpha preflight rejects one 2-pixel alpha-threshold pocket at original coordinates (415,166) and (416,166), both alpha114. It lies along the top-left outer hex antialias fringe, not inside a mud patch or pool. Four- and eight-neighbor background floods both classify it enclosed. Nearest alpha0 pixels are 3/4 source pixels away; nearest alpha255 pixels are 8/7 pixels away. One pocket pixel is just outside and one just inside the normalized hex edge. Root requested regeneration rather than relaxing the stable validator. Original source retained unchanged; not cropped or alpha-repaired."
+  }
+]

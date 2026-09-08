@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.manytrack_moot",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. The rider is a horned humanoid adult person with short swept deerlike horns and dexterous hands, mounted on an ORDINARY HORSE with four legs, not a deer mount or centaur. Native96. One adult mounted outrider riding one ordinary lean horse facing screen RIGHT/lower right, short lowered spear and compact shield, worn saddle and tied baggage. Entire horse with all four legs, ears, tail and rider enclosed. No giant pennant shrinking the horse, no floating hooves.",
+  "frames": [
+    {
+      "id": "unit.cavalry.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.cavalry.manytrack_moot/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c80c37cda6f79f078709e2ec11c2ed027157df09a43f9bbd3a23aa7357fd75a4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/unit.cavalry.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/unit.cavalry.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:00:41.742Z",
+  "referenceHashes": [
+    "067990b8ed5f8537381ebe6108bb18f836bce8e5409d6a713bb6f137760951d1",
+    "da4c6e3a18521f80d7833b3e6b05ac2385992ed10f90dd4fe63a00336338a713"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "fb3bc8528219af8075a09999fbed3434c091973d2208955edf4c3aceef7cb2ba",
+      "inputHash": "067990b8ed5f8537381ebe6108bb18f836bce8e5409d6a713bb6f137760951d1",
+      "outputHash": "35a353083f783e4a04244c8ec8488df79436343eff4bfad33a26ef3869c8e613"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

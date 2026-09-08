@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.cistern_assembly",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native64. ONE front-facing culture crest only, broad exact original heraldic motif in a restrained worn material frame. Simple readable geometry and large negative spaces, no letters or extra marks. Front-facing UI view overrides world camera. No character, collage, banner pole or background plaque reaching image edges.",
+  "frames": [
+    {
+      "id": "ui.crest.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/ui.crest.cistern_assembly/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "44cb9ab48dafbc2cc790f0f225e6610fad633648ea0b341713e254c066ad08e4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/ui.crest.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/ui.crest.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:56:54.327Z",
+  "referenceHashes": [
+    "03f18d1a0e8eb6719985708cee95384b64dc467a327b3681508364e80138cc5c",
+    "71c93dfa951b0c28e0482ad5feac3d2da898054664938ba8d7df92c7691e1fa0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "942b9eb65471d188aec45e24705a57b6868b5f7170865a2a630b76c9f2455cf7",
+      "inputHash": "03f18d1a0e8eb6719985708cee95384b64dc467a327b3681508364e80138cc5c",
+      "outputHash": "840cf365816595bccefcb15e4ff49a8a42b2cadb95ea25d202f3e0a0ab8a4068"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

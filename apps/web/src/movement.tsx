@@ -133,8 +133,15 @@ export function MovementOrders({ movement, view, issue, locate }: { movement: Ma
   const routeActions = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (candidate?.canQueue && !candidate.canMoveNow) {
-      routeActions.current?.focus({ preventScroll: true });
-      routeActions.current?.scrollIntoView({ block: 'nearest' });
+      // The same controls can move from the side inspector into the floating
+      // map surface. Wait for that surface's heading/scroll initialization, and
+      // cancel if this instance was replaced, so keyboard route review lands
+      // on its actual confirmation without scrolling an obsolete inspector.
+      const frame = requestAnimationFrame(() => {
+        routeActions.current?.focus({ preventScroll: true });
+        routeActions.current?.scrollIntoView({ block: 'nearest' });
+      });
+      return () => cancelAnimationFrame(frame);
     }
   }, [candidate]);
   if (!army) return null;

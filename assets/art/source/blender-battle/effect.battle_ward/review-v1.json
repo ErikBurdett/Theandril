@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.battle_ward",
+  "version": 1,
+  "reviewedAt": "2026-09-07 21:12:57 UTC",
+  "stage": "native Blender source review",
+  "decision": "inspected-candidate-not-approved",
+  "manifestSha256": "a6dbf72ee8831103d1de3403c02c70ddde04fb2372c35e51e6a75f6385a5769a",
+  "evidence": [
+    {
+      "path": "v1/review-1x.png",
+      "sha256": "e3f6d311aa8f19d187d0c5284f23799b86a1931bb4b3e9af9ad7385e0c16f997",
+      "inspection": "Viewed full image at native scale."
+    },
+    {
+      "path": "v1/review-4x.png",
+      "sha256": "32ce4bdf4f33130e39cca10dc3a3f128752e3263ab3bf4247559c3225bc9ed6a",
+      "inspection": "Viewed enlarged nearest-neighbor contact sheet."
+    }
+  ],
+  "findings": [
+    "Cool blue-green angular bracket segments close around a pale binding mark, then break apart; the native opening/peak/closing shapes differ.",
+    "The thin cool outer rim carries contrast on linen where the pale core is quieter; no screen-wide or opaque shield panel."
+  ],
+  "timing": {
+    "frames": 8,
+    "durationMs": 100,
+    "blenderFps": 10,
+    "totalDurationMs": 800
+  },
+  "limitations": [
+    "Studio source images inspected; preview.html temporal playback not browser-tested by this reviewer.",
+    "PixelSnapper/Aseprite processed review, gameplay/background review and final approval remain parent-owned. No approval or runtime publication granted here."
+  ]
+}

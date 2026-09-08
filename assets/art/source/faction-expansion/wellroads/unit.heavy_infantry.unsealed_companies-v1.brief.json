@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.unsealed_companies",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native64. One full-body adult heavy infantry veteran with broad overlapping thick plate, reinforced broad shield and short mace. Wider and heavier than the guard, closed low helmet without tall ornament, visible complete boots and coherent hands.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.heavy_infantry.unsealed_companies/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2598e93eef9bd074a9a6faf6d5298a2c4c86163ebc666715dec4b766489b99ad",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/unit.heavy_infantry.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/wellroads/unit.heavy_infantry.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:13:11.658Z",
+  "referenceHashes": [
+    "2b434b1ba98403b4ee45daa6882b6c022e07c2d0868c4150e20cbd79dccf0da6",
+    "1101fcb3d8ad56327a0432ff3703509b45f3e2b4eace38769e43542972144c40"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "9578995e5fc1672ec154b833ad6d1f01fcb1caad14cbe636196806245ec6788e",
+      "inputHash": "2b434b1ba98403b4ee45daa6882b6c022e07c2d0868c4150e20cbd79dccf0da6",
+      "outputHash": "df3ff06d0a5dac156a286958cb9bddadfd3c124ea8c9a0afa7611d58792a25cf"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

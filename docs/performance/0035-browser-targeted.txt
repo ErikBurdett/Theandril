@@ -1,0 +1,34 @@
+Corrected slice23 combat/layout checkpoint:17/17,1.4minutes, no skipped scenarios.
+Actual paid spells, field/siege/naval, cargo exclusion, native/390px spacing,20vs20 rendering, saved rounds and replay.
+Root reviewed corrected native20vs20 and navy/narrow captures. Spell timing evidence was subsequently refined to capture the real midclip rather than its tiny first frame; final full regression remains separate.
+
+[WebServer] (node:3186159) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3186172) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 17 tests using 1 worker
+
+(node:3186216) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/army.spec.ts:50:1 › mixed armies merge, split and transfer stable formations without refreshing movement; an escorted caravan founds without consuming its scouts (4.3s)
+  ✓   2 tests/gameplay/army.spec.ts:91:1 › mixed formation battles deploy each real role and preserve exact losses through a saved tactical round (4.6s)
+  ✓   3 tests/gameplay/army.spec.ts:119:1 › twelve-formation limits and proper-subset splitting stay explicit in the narrow keyboard roster (2.2s)
+BATTLE_RENDER {"originHash":"8c59e743","commandHash":"e4903641","frameMs":{"p50":16.699999999999818,"p95":33.400000000000546,"max":50},"maxActors":46,"maxEffects":5,"atlasBytes":20971520}
+  ✓   4 tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX (9.9s)
+  ✓   5 tests/gameplay/battlefield.spec.ts:43:1 › battlefield pauses for orders, presents actual strikes and restores a saved round and map without replay mutations (3.8s)
+  ✓   6 tests/gameplay/battlefield.spec.ts:81:1 › paid personal Waykeeper and separate research enable actual ward and ember target controls at narrow width (6.5s)
+  ✓   7 tests/gameplay/battlefield.spec.ts:140:1 › fortified assault opens the shared battlefield and reduced motion keeps decisions explicit (2.2s)
+  ✓   8 tests/gameplay/battlefield.spec.ts:159:1 › naval battlefield renders the actual hull formations and excludes embarked cargo (9.3s)
+  ✓   9 tests/gameplay/combat.spec.ts:22:1 › field battle permits tactical orders and resumes to the identical result from a saved round (3.7s)
+  ✓  10 tests/gameplay/combat.spec.ts:50:1 › withdrawal applies strategic retreat and pursuit through the player order (1.9s)
+  ✓  11 tests/gameplay/combat.spec.ts:64:1 › an AI attack pauses for the human defender to choose an order (1.5s)
+  ✓  12 tests/gameplay/generals.spec.ts:60:1 › a real marshal assignment and prerequisite skill branches expand command from twelve through sixteen to twenty (4.7s)
+  ✓  13 tests/gameplay/generals.spec.ts:104:1 › a wounded general retains every formation and permits narrow-screen command-capacity repair (3.5s)
+  ✓  14 tests/gameplay/generals.spec.ts:130:1 › twenty general-led formations enter a saved four-rank battle and resolve through the same kernel (5.6s)
+  ✓  15 tests/gameplay/naval.spec.ts:47:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker (7.5s)
+  ✓  16 tests/gameplay/naval.spec.ts:99:1 › harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet (5.2s)
+  ✓  17 tests/gameplay/naval.spec.ts:135:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships (5.6s)
+
+  17 passed (1.4m)
+

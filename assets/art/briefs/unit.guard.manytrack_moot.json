@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.manytrack_moot",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. This guard is a DEERLIKE HUMANOID adult person: two short swept-back horns, restrained deerlike muzzle, upright two-legged stance and dexterous hands. Short horns must fit beneath a practical low helmet; no huge antler crown. Native64. One full-body adult guard in medium practical armor, one broad culture-shaped shield and a short sword held low, balanced alert stance, two complete boots. Restrained helmet or low hood; readable deerlike face, no tall ornament.",
+  "frames": [
+    {
+      "id": "unit.guard.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.guard.manytrack_moot/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "34f3c11ff3073a1181757dfbe1ea1b2431163370a0be6ffbe11fce0aedc518ce",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/unit.guard.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/unit.guard.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:46:11.845Z",
+  "referenceHashes": [
+    "dc3854d6eb097dc970474c903f26da9ab91f27c52522f6e3714fe6f39ca60543",
+    "1506f53c3d30aa7e6e38a496eca73c8985f943cffa084198e3a2f29112615f3e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "7301bdbe22688f3f3549284fac94d0e87ec8b2c42ee27cdd78f063369aeb8dcd",
+      "inputHash": "dc3854d6eb097dc970474c903f26da9ab91f27c52522f6e3714fe6f39ca60543",
+      "outputHash": "cd584d47795a5b3d458500e5eaac909a102b2064f0f2469c76a0996e75d9dd32"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

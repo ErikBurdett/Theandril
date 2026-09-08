@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { CONTENT_HASH, PROSPERITY_PROJECT } from '@theandril/content';
 import { MAP_DIMENSIONS, type MapSize } from '@theandril/mapgen';
+import { schema13CampaignBattleSchema, type BattlePresentationObserver } from '@theandril/sim';
 import { applyCommand, applyCommandForVersion, battleReportForVersion, commandSchemaForVersion, createGame, deserializeGame, eventSchema, campaignBattleSchema, legacyCampaignBattleSchema, schema6CampaignBattleSchema, schema7CampaignBattleSchema, serializeGame, stateHash, stateHashForVersion, SAVE_VERSION, type BattleReport, type CommandResult, type DomainEvent, type GameCommand, type GameState, type PhaseObserver } from '@theandril/sim';
 
 export { CampaignJournal, createJournal, resumeJournal } from './journal';
@@ -8,7 +9,7 @@ export type { JournalHeader, JournalCommit, JournalOptions } from './journal';
 
 export type CampaignMode = 'player' | 'watch';
 export type ArchiveCoverage = 'complete' | 'from-save';
-export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14;
 export type ArchivedBattleReport = BattleReport | z.infer<typeof legacyCampaignBattleSchema> | z.infer<typeof schema6CampaignBattleSchema> | z.infer<typeof schema7CampaignBattleSchema>;
 export interface ArchiveRecord {
   sequence: number;
@@ -55,17 +56,20 @@ const legacyArchiveSchema = z.object({
   initialSave: z.string().max(64 * 1024 * 1024), initialHash: hash, initialTurn: turn,
   records: z.array(legacyRecordSchema).max(1_000_000), finalHash: hash.nullable(),
 }).strict();
-const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11)]);
+const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14)]);
 // Reports are validated in their original format. Never add modern metadata to old evidence.
 const recordSchema = z.discriminatedUnion('rulesVersion', [
   legacyRecordSchema.extend({ checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(4) }).strict(),
   legacyRecordSchema.extend({ checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(5) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(schema6CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(6) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(schema7CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(7) }).strict(),
-  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(8) }).strict(),
-  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(9) }).strict(),
-  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(10) }).strict(),
-  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(11) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(schema13CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(8) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(schema13CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(9) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(schema13CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(10) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(schema13CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(11) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(schema13CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(12) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(schema13CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(13) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(14) }).strict(),
 ]);
 const archiveSchema = legacyArchiveSchema.extend({ version: z.literal(2), initialSaveVersion: hashVersion, records: z.array(recordSchema).max(1_000_000), finalHashVersion: hashVersion.nullable() }).strict();
 
@@ -101,11 +105,11 @@ export function createArchive(game: GameState, options: { mode: CampaignMode; co
 }
 
 /** The only worker command entry point: capture results before the bounded feeds rotate. */
-export function applyRecordedCommand(game: GameState, archive: CampaignArchive, command: GameCommand, observe?: PhaseObserver): CommandResult {
+export function applyRecordedCommand(game: GameState, archive: CampaignArchive, command: GameCommand, observe?: PhaseObserver, onBattle?: BattlePresentationObserver): CommandResult {
   // Detach before applying: caller-owned proposals must not rewrite old records later.
   const submitted: unknown = structuredClone(command);
   const beforeTurn = game.turn;
-  const result = applyCommand(game, command, observe);
+  const result = applyCommand(game, command, observe, onBattle);
   const finishedBattle = result.events.some(event => event.type === 'battle_finished') ? game.battleReports.at(-1) : undefined;
   const checkpoint = result.ok && (command.type === 'endTurn' || game.victory) ? stateHash(game) : null;
   archive.records.push({ sequence: archive.records.length + 1, turn: beforeTurn, afterTurn: game.turn, command: submitted,
@@ -121,9 +125,9 @@ export function parseArchive(raw: unknown, current: GameState): CampaignArchive 
   const initial = deserializeGame(archive.initialSave);
   if (snapshotVersion(archive.initialSave) !== archive.initialSaveVersion || stateHashForVersion(initial, archive.initialSaveVersion) !== archive.initialHash || initial.turn !== archive.initialTurn) throw new Error('Archive initial snapshot mismatch.');
   if (initial.world.seed !== current.world.seed || initial.world.width !== current.world.width || initial.world.height !== current.world.height
-    || initial.turnOwnerId !== current.turnOwnerId || initial.pace !== current.pace || initial.world.generatorVersion !== current.world.generatorVersion || initial.rosterVersion !== current.rosterVersion || initial.factions.map(f => f.id).join('|') !== current.factions.map(f => f.id).join('|')) throw new Error('Archive belongs to a different campaign.');
+    || initial.turnOwnerId !== current.turnOwnerId || initial.pace !== current.pace || initial.world.generatorVersion !== current.world.generatorVersion || initial.world.layout !== current.world.layout || initial.rosterVersion !== current.rosterVersion || initial.factions.map(f => f.id).join('|') !== current.factions.map(f => f.id).join('|')) throw new Error('Archive belongs to a different campaign.');
   if (archive.coverage === 'complete') {
-    const generated = createGame({ seed: initial.world.seed, size: mapSize(initial), factionCount: initial.factions.length, pace: initial.pace, generatorVersion: initial.world.generatorVersion, rosterVersion: initial.rosterVersion, ...(archive.initialSaveVersion >= 9 ? { factionDefinitionId: initial.factions[0]!.definitionId } : {}) });
+    const generated = createGame({ seed: initial.world.seed, size: mapSize(initial), factionCount: initial.factions.length, pace: initial.pace, generatorVersion: initial.world.generatorVersion, rosterVersion: initial.rosterVersion, ...(initial.world.layout !== 'legacy' ? { layout: initial.world.layout } : {}), ...(archive.initialSaveVersion >= 9 ? { factionDefinitionId: initial.factions[0]!.definitionId } : {}) });
     if (stateHashForVersion(generated, archive.initialSaveVersion) !== archive.initialHash) throw new Error('Complete history must begin at the generated campaign start.');
   }
   let expectedTurn = initial.turn;

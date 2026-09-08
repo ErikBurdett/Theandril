@@ -42,6 +42,13 @@ describe('quiet observation-only map overlays', () => {
     const labels = layoutMapLabels(candidates, { ...context, zoom: .35, selectedEntityId: '3', hovered: 1 }, measure);
     expect(labels.map(item => item.id)).toEqual(['3', '1']); expect(labels[1]!.text).toMatch(/^⚔ /u);
   });
+  it('keeps the selected member name and exact group count in contextual stack labels', () => {
+    const entries = [{ ...town('1'), settlement: false, name: 'Chosen scout', stackArmyCount: 17 },
+      { ...town('2'), settlement: false, name: 'Other army', stackArmyCount: 17 }];
+    const labels = layoutMapLabels(entries, { ...context, selectedEntityId: '1' }, measure);
+    expect(labels).toHaveLength(1); expect(labels[0]!.text).toBe('◆ Chosen scout · 17 armies');
+    expect(layoutMapLabels([{ ...entries[0]!, domain: 'naval' }], { ...context, selectedEntityId: '1' }, measure)[0]!.text).toContain('17 fleets');
+  });
   it('ellipsizes long names without broken Unicode and preserves the complete name for diagnostics/DOM', () => {
     expect(compactMapName('  Long\n name  ', 12)).toBe('Long name');
     expect(compactMapName('A🜁BCDEF', 5)).toBe('A🜁BC…');

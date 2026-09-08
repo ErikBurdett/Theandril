@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.battle_ward",
+  "type": "effect",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.battle_ward"
+  ],
+  "prompt": "Original Theandril ward battlefield effect, authored and animated in Blender. Fixed native 64x64 canvas, registered effect center (32,32), retained keyframed scene, raw renders and exact palette normalization. 8 supplied cast frames; no synthesized pose, mirrored faction art or independently fitted frames. Exact production brief/profile and source evidence: assets/art/source/blender-battle/effect.battle_ward/v1/manifest.json.",
+  "frames": [
+    {
+      "id": "effect.battle_ward/cast/se/0",
+      "direction": "se",
+      "state": "cast",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ward/v1/native/frame-000.png"
+    },
+    {
+      "id": "effect.battle_ward/cast/se/1",
+      "direction": "se",
+      "state": "cast",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ward/v1/native/frame-001.png"
+    },
+    {
+      "id": "effect.battle_ward/cast/se/2",
+      "direction": "se",
+      "state": "cast",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ward/v1/native/frame-002.png"
+    },
+    {
+      "id": "effect.battle_ward/cast/se/3",
+      "direction": "se",
+      "state": "cast",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ward/v1/native/frame-003.png"
+    },
+    {
+      "id": "effect.battle_ward/cast/se/4",
+      "direction": "se",
+      "state": "cast",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ward/v1/native/frame-004.png"
+    },
+    {
+      "id": "effect.battle_ward/cast/se/5",
+      "direction": "se",
+      "state": "cast",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ward/v1/native/frame-005.png"
+    },
+    {
+      "id": "effect.battle_ward/cast/se/6",
+      "direction": "se",
+      "state": "cast",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ward/v1/native/frame-006.png"
+    },
+    {
+      "id": "effect.battle_ward/cast/se/7",
+      "direction": "se",
+      "state": "cast",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_ward/v1/native/frame-007.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "cast": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "d4604e5fd351bf9c9a77600ff414540e35b025bb1f1c620c7d00e059c3dff1c3",
+    "sourceRefs": [
+      "assets/art/source/blender-battle/effect.battle_ward/v1/manifest.json",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/source.blend",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/profile.json",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/recipe.py",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/raw/frame-000.png",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/raw/frame-001.png",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/raw/frame-002.png",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/raw/frame-003.png",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/raw/frame-004.png",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/raw/frame-005.png",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/raw/frame-006.png",
+      "assets/art/source/blender-battle/effect.battle_ward/v1/raw/frame-007.png"
+    ],
+    "licenseNotes": [
+      "Original Theandril project-authored Blender geometry and keyframes; no third-party game sprites or copyrighted setting assets. The retained factory source/profile record identifies production dependencies. This import neither grants a new license nor substitutes for native/in-game visual review."
+    ]
+  },
+  "createdAt": "2026-09-07T21:05:34.052Z",
+  "referenceHashes": [
+    "a6dbf72ee8831103d1de3403c02c70ddde04fb2372c35e51e6a75f6385a5769a",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "fixed-camera-native-battle64",
+      "settingsHash": "1602f56136db45a328ef7c44ac4b3d57e9a19d88f6406175f4c23f471b2283d9",
+      "inputHash": "a6dbf72ee8831103d1de3403c02c70ddde04fb2372c35e51e6a75f6385a5769a",
+      "outputHash": "aa1da3c8d5979778fb0f16ea86f6850ef641dd452ca8f6e0addfea88cc408940"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 60,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

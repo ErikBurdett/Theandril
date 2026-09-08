@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.manytrack_moot",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. This surveyor is a FOXLIKE HUMANOID adult person with pointed furred ears, restrained foxlike muzzle, one visible tail, two legs and dexterous tool-hands. Serious cartographer, not cute or a pet. Native64. One full-body adult route surveyor holding an open small route map in one hand and short dividers in the other; travel satchel and measuring cord at belt, visible face, both boots. Unarmed, no shield/bow/spear; distinct from the engineer.",
+  "frames": [
+    {
+      "id": "character.surveyor.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.surveyor.manytrack_moot/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0a667bd994091bfaddde5e2313332d6c2f94781176054ebe1a13a8630b29c837",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/character.surveyor.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/character.surveyor.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:05:33.926Z",
+  "referenceHashes": [
+    "251149b611298a150b42dba5c003c9f82f34191597dbebd4844690f85c785fca",
+    "71af348cf53cdb49124e1e55190afb6c0d37dbd65b59b6728613e143676608bd"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "149e2987707ded1b24c45613f0b0d3dca16a5a60bdc2d27d3e4a5ba0077a4423",
+      "inputHash": "251149b611298a150b42dba5c003c9f82f34191597dbebd4844690f85c785fca",
+      "outputHash": "b158edebd62369be2ef9fd1c28fd5f89367d44084130029ba3f8f5d426bfeba4"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

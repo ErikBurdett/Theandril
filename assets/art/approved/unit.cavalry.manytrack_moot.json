@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.manytrack_moot",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. The rider is a horned humanoid adult person with short swept deerlike horns and dexterous hands, mounted on an ORDINARY HORSE with four legs, not a deer mount or centaur. Native96. One adult mounted outrider riding one ordinary lean horse facing screen RIGHT/lower right, short lowered spear and compact shield, worn saddle and tied baggage. Entire horse with all four legs, ears, tail and rider enclosed. No giant pennant shrinking the horse, no floating hooves.",
+  "frames": [
+    {
+      "id": "unit.cavalry.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.manytrack_moot/8e8349c1a1fd88a81d9e4403bb1efeaad2d62efa0272a738d8a3337bb0b54622/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c80c37cda6f79f078709e2ec11c2ed027157df09a43f9bbd3a23aa7357fd75a4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/unit.cavalry.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/unit.cavalry.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:00:41.742Z",
+  "referenceHashes": [
+    "067990b8ed5f8537381ebe6108bb18f836bce8e5409d6a713bb6f137760951d1",
+    "da4c6e3a18521f80d7833b3e6b05ac2385992ed10f90dd4fe63a00336338a713"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "fb3bc8528219af8075a09999fbed3434c091973d2208955edf4c3aceef7cb2ba",
+      "inputHash": "067990b8ed5f8537381ebe6108bb18f836bce8e5409d6a713bb6f137760951d1",
+      "outputHash": "35a353083f783e4a04244c8ec8488df79436343eff4bfad33a26ef3869c8e613"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "35a353083f783e4a04244c8ec8488df79436343eff4bfad33a26ef3869c8e613",
+      "outputHash": "eee1607e1ee6e7da932320244da033a7133b3cfc23d1d0d5be8b4ecd893b4da7"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "eee1607e1ee6e7da932320244da033a7133b3cfc23d1d0d5be8b4ecd893b4da7",
+      "outputHash": "930175be60d9d1822b8d904e76b741973b8739f12b550ff3a2726db7aca519ba"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "5a75cc49840cdb63d1f31de6277b252f8ee60dd68e735e41dad1b2c0530c50b2",
+      "outputHash": "991f5f7cedcc44f65ca253b3f35286367eee03f2b450b7fb9c97057727af3122"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "67991d3de4d33ee0606a3683350cbdce6cd7ef4a45de2c85696ab6172c7fd16e",
+      "outputHash": "677af2ed333640fce9156d973083605a87e6279c6465f262ad42b55adc5144c8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "987c233761e278a08bbe60f115ad8600644c8a5bdca0320293655d8ad1ad5eea",
+      "outputHash": "c8c69a4725e9a1411c75201d397f0ae36d2a482ef83cd188f0b9bc6bd59bb8b0"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.manytrack_moot.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:45:32.717Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Short-horned rider on an ordinary complete horse; no invented racial mount ability. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 8e8349c1a1fd88a81d9e4403bb1efeaad2d62efa0272a738d8a3337bb0b54622; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/f71fee7fabb45a2e43d0d2d7be83d371bef9cb246fe4657ae7c94c1001d6a6eb.png"
+    ],
+    "inputHash": "4f7e806a5fc6121e0a94d04ce988264df2a7f87306176cdf9c4147f4c941a4f0"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

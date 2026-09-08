@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.steppe.variant_2",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.steppe.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. STEPPE: broad pale dusty grass heath with a sparse crescent of dark dry tufts and two shallow exposed earth patches, desaturated straw and cool umber palette. Quiet open terrain, no paths. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.steppe.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.steppe.variant_2/v1/2d957965ef2c783c/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "66056a0776beab3c31034259feeac11f451ba6a9ceef415ad7645386324bf312",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.steppe.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.steppe.variant_2-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:49:30.098Z",
+  "referenceHashes": [
+    "2bbb79fec8561e87c26a904f1f8c71aa915724f131bc98368ee1265e61bd978b",
+    "5192e9515bf2e36950f8135ebc3ca39e8f1a5816c072c10368043b74b8989277"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "83241f02508c810494efb1f1a14bf4482c1ea4933a720357e22601c6821dfbc0",
+      "inputHash": "2bbb79fec8561e87c26a904f1f8c71aa915724f131bc98368ee1265e61bd978b",
+      "outputHash": "7f47bfc329fef41e3014e90f5edd018378643669f528ed40ca675feee50e10f8"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

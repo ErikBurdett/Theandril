@@ -18,9 +18,10 @@ export function registryEntries(view: Observation, kind: RegistryKind, search: s
   return entries.sort((a, b) => sort === 'name' ? a.name.localeCompare(b.name) || a.id.localeCompare(b.id) : a.id.localeCompare(b.id));
 }
 
-export function RealmNavigation({ registry, armyCount, townCount, characterCount, choose, characters, selectionName, selectionKind, showMap, showOrders }: {
+export function RealmNavigation({ registry, armyCount, townCount, characterCount, choose, characters, selectionName, selectionKind, showMap, showOrders, selectionControls = true }: {
   registry: RegistryKind; armyCount: number; townCount: number; characterCount: number;
   choose: (kind: RegistryKind) => void; characters: () => void; selectionName?: string; selectionKind?: string; showMap: () => void; showOrders: () => void;
+  selectionControls?: boolean;
 }) {
   const changeTab = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
@@ -33,7 +34,7 @@ export function RealmNavigation({ registry, armyCount, townCount, characterCount
       <button id="realm-tab-armies" role="tab" aria-controls="realm-registry-panel" aria-selected={registry === 'armies'} tabIndex={registry === 'armies' ? 0 : -1} onKeyDown={changeTab} onClick={() => choose('armies')}>Armies <span>{armyCount}</span></button>
       <button id="realm-tab-settlements" role="tab" aria-controls="realm-registry-panel" aria-selected={registry === 'settlements'} tabIndex={registry === 'settlements' ? 0 : -1} onKeyDown={changeTab} onClick={() => choose('settlements')}>Settlements <span>{townCount}</span></button>
     </div><button aria-label="Characters & agents" onClick={characters}>Characters <span>{characterCount}</span></button></div>
-    <div className="selection-command" data-testid="current-selection"><div><small>{selectionKind ?? 'Your realm'}</small><strong>{selectionName ?? 'Select a force or town'}</strong></div><button onClick={showMap}>Show on map</button><button disabled={!selectionName} onClick={showOrders}>Show selected orders</button></div>
+    {selectionControls && <div className="selection-command" data-testid="current-selection"><div><small>{selectionKind ?? 'Your realm'}</small><strong>{selectionName ?? 'Select a force or town'}</strong></div><button onClick={showMap}>Show on map</button><button disabled={!selectionName} onClick={showOrders}>Show selected orders</button></div>}
   </div>;
 }
 

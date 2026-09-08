@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.vesper_court",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.coastal_warship for Theandril, Vesper Court.\nSubject: ONE long slender shallow-draft coastal galley, low open deck, one compact triangular lateen sail, separated banks of broad oars, low practical bow ram and shield-lined rails. Fast narrow silhouette, no large cargo cabin or cannons. Entire sail, prow, stern and every oar complete.\nCulture-specific identity: Dark timber hull, enclosed shuttered charcoal cabins, muted burgundy/dusty-plum sails, tarnished silver-edged stern gallery. Keep role silhouette readable; not a bat ship.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.vesper_court/acd302a94c75ee39165c3363bca5ec187a5fe948322e5472ab72e803b784e548/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "a0352046a8bd73d14b7ca55b2ec0c495b2b8bdf0c5df65992ccb4eaba654623c",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:00:38Z",
+  "referenceHashes": [
+    "d3dbd4ac4cff668f2978da4439c14fbc506943b171cd6c2c5d3b20e543cb09d9",
+    "3a02cbcd3e602eefad76c600bf0406a2f06e269c097ec7b029a9f3bb019c47e4"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "8f06a21314ee631bc23f68ce29e99d1bd408fc0e53b789b4950643f5dee29b7d",
+      "inputHash": "d3dbd4ac4cff668f2978da4439c14fbc506943b171cd6c2c5d3b20e543cb09d9",
+      "outputHash": "b74f3a121226e79255eeb3299b537f38839176f0a84a9e16b88c2ea063092c5e"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "b74f3a121226e79255eeb3299b537f38839176f0a84a9e16b88c2ea063092c5e",
+      "outputHash": "b4640d9e5564303ea3bf411889d4037af1f675f2a021c251e69d13e746b4f9e0"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b4640d9e5564303ea3bf411889d4037af1f675f2a021c251e69d13e746b4f9e0",
+      "outputHash": "0147ca6d89e82927151578e0a6e3d388af85220aeefc6786743886774e73f608"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "a758e13f73b577acddb6519fc1ae9e270cdbd3097c8cbb86d5141775d9c9c12f",
+      "outputHash": "2854663069ddc3d84cd3b616f33dafdbb51b88879f9cfd63377558f8ba1c38dd"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "0e4ac6d763d7542ed7df6f14ca697806711796a9360de76b985ae9e428f1b409",
+      "outputHash": "5589720e89bc739cabfca58bcb022774d9ee063187246be3758934fde3e90b44"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "c4552577885dcb1c03b0ff464dd5419bd5c9346dd92cd555eb0a49b258498bf9",
+      "outputHash": "b9ace0abd53b98dadedccaf643d1a08fcbb6c4c310c51072e891a9142c9e7875"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:05.433Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Long shallow hull, triangular lateen sail and projecting oars distinguish the galley; no cannon or gunport geometry. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate acd302a94c75ee39165c3363bca5ec187a5fe948322e5472ab72e803b784e548; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5ccc8b97e0685a2bde7d11f37ffab11b487a3039b20f06260747189210d4ed8a.png"
+    ],
+    "inputHash": "c62200cc976cbd49fa845492fcfbaf96ec27d2677dad0f7219fbadbf64ade3b7"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

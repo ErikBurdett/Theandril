@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.parchment",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 512,
+    "height": 512
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.parchment"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: seamless game UI material texture. Create a square edge-to-edge medieval parchment surface for Theandril Hearth & Card, a cozy lich's tavern card game. Genuine detailed pixel art, warm light tan and honey cream aged vellum, subtle uneven fibers, tiny quiet speckles, barely visible faded ornamental blind tooling near edges. Flat top-down evenly lit, center very calm and light for dark readable HTML text. No writing, letters, icons, objects, folds across center, green, black border, perspective, watermark or gradients of dramatic lighting. Tileable subdued material, visible intentional pixel clusters, high quality.",
+  "frames": [
+    {
+      "id": "ui.parchment/idle/front/0",
+      "direction": "front",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 1000,
+      "pivot": [
+        256,
+        256
+      ],
+      "sourcePath": "assets/art/candidates/ui.parchment.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 1,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "07fb760422fc24e51e495ddbaa28ba6e6d45f2cfbd137ab6eb5e3f8d663cf3e6",
+    "sourceRefs": [
+      "assets/art/source/ui/parchment-original.png",
+      "assets/art/source/ui/parchment-prompt.txt"
+    ],
+    "licenseNotes": [
+      "Original project illustration generated with the built-in tool. Service terms apply. Interface material texture; not canonical world history."
+    ]
+  },
+  "createdAt": "2026-09-07T07:06:42.219Z",
+  "referenceHashes": [
+    "97c987d6bfc32f7b866a94dc2f2a425fe7ae459f7ab934a2265a9bc4c458e18b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-ui-prepare",
+      "version": "1",
+      "profile": "nearest-512-wide-palette",
+      "settingsHash": "e8c8a077803b990951d2e72c463c4c282bf8ac48bc1db147d7aa72be22c5a41e",
+      "inputHash": "97c987d6bfc32f7b866a94dc2f2a425fe7ae459f7ab934a2265a9bc4c458e18b",
+      "outputHash": "f402f5f9c0674e944435f7eabc3e83f7fa5ae59b02dd21b22d18a91275d3bce0"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.parchment.json"
+  },
+  "review": {
+    "reviewer": "Codex visual review",
+    "reviewedAt": "2026-09-07T07:09:18.202Z",
+    "notes": "Reviewed 512-square factory pixels: cream vellum with ochre wear and corner tooling, no text or green. Fine palette speckling; use a pale translucent backing where small text needs quieter contrast. Edges are decorative, not perfectly seamless.",
+    "evidencePaths": [
+      "assets/art/reviews/ui.parchment.png"
+    ],
+    "inputHash": "1f182e3fa0c1445f9142a522ef181d41d714f3daa461818fb1b3174ff3423502"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

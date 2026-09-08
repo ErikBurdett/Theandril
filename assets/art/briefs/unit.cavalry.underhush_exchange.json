@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.underhush_exchange",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.cavalry for Theandril, Underhush Exchange.\nSubject: One mounted adult escort on one complete ordinary sturdy horse, horse and rider both facing southeast, quiet four-hoof standing pose. Compact saddle packs, faction cloth saddle blanket and practical light barding; rider holds reins and a short sheathed or downward sword, no long lance. All ears, tail and hooves complete.\nCulture-specific identity: An adult short broad-handed burrowfolk: compact furred body, small rounded ears, blunt face, visible dexterous fingers. Upright two-legged working citizen, not a bearded dwarf, pet or exposed-tooth rodent caricature. Clay-brown padded work coats, pewter fittings, pale-lime panels, tiny dull amber route markers, tactile tally beads, low padded helmets and rounded work shields. Generous compact horizontal shapes.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "unit.cavalry.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.cavalry.underhush_exchange/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5bc584787e85e8855bcae26d987af93fbcc40c5d4c458dd8446f7db7d2610708",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:16:10Z",
+  "referenceHashes": [
+    "de4c6ca49e47573ffe02f5fb3d8a1e8b09862774c663df762b52683ee4151ab9",
+    "25c538a45f0e1e5083da27eea10f4f698eab4802ee117b2ac5133a9c7dbd7346"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "9377c14bacdd2389b878e1050e3b4ba5dd709aec4a2c1a330d3c290414bf96ab",
+      "inputHash": "de4c6ca49e47573ffe02f5fb3d8a1e8b09862774c663df762b52683ee4151ab9",
+      "outputHash": "f628b932a949a31623b317eaf35bf7d9c4ef9e556857fcaf7cadea9d82558508"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

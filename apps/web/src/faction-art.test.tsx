@@ -27,8 +27,8 @@ async function pack(bytes = png()): Promise<RuntimeCatalog> {
     atlases: [{ id: 'test.atlas', imageUrl: '/art/test.png', jsonUrl: '/art/test.json', width: 256, height: 64, sha256: await digest(bytes) }],
     assets: [asset('unit.guard', 0), asset('unit.guard.ashen_compact', 64), asset('unit.guard.reedbound_council', 128)] };
 }
-function responses(catalog: unknown, bytes: Uint8Array<ArrayBuffer>) {
-  const fetch = vi.fn(async (url: string) => url === '/art/catalog.json'
+function responses(catalog: unknown, bytes: Uint8Array<ArrayBuffer>, base = '/') {
+  const fetch = vi.fn(async (url: string) => url === `${base}art/catalog.json`
     ? new Response(JSON.stringify(catalog), { headers: { 'content-type': 'application/json' } })
     : new Response(bytes, { headers: { 'content-type': 'image/png' } }));
   vi.stubGlobal('fetch', fetch);
@@ -43,9 +43,31 @@ beforeEach(() => {
   vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:verified-test-atlas');
   vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined);
 });
-afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
 
 describe('approved faction DOM artwork boundary', () => {
+  it.each(['/', '/Theandril/'])('loads verified faction artwork at %s without rewriting its approved catalog', async base => {
+    vi.stubEnv('BASE_URL', base);
+    const bytes = png(), catalog = await pack(bytes), original = JSON.stringify(catalog);
+    const fetch = responses(catalog, bytes, base);
+    const { loadFactionArtFrame } = await import('./faction-art');
+    const result = await loadFactionArtFrame('unit.guard', 'faction.ashen_compact');
+    expect(result.asset.id).toBe('unit.guard.ashen_compact');
+    expect(fetch.mock.calls.map(([url]) => url)).toEqual([`${base}art/catalog.json`, `${base}art/test.png`]);
+    expect(decode).toHaveBeenCalledTimes(1);
+    expect(JSON.stringify(catalog)).toBe(original);
+  });
+
+  it('retains hash rejection for altered subpath atlas bytes', async () => {
+    vi.stubEnv('BASE_URL', '/Theandril/');
+    const bytes = png(), catalog = await pack(bytes); bytes[32] = 1;
+    const fetch = responses(catalog, bytes, '/Theandril/');
+    const { loadFactionArtFrame } = await import('./faction-art');
+    await expect(loadFactionArtFrame('unit.guard', 'faction.ashen_compact')).rejects.toThrow('hash mismatch');
+    expect(fetch.mock.calls.map(([url]) => url)).toEqual(['/Theandril/art/catalog.json', '/Theandril/art/test.png']);
+    expect(decode).not.toHaveBeenCalled(); expect(URL.createObjectURL).not.toHaveBeenCalled();
+  });
+
   it('renders approved naval roles at 96 pixels and uses a ship silhouette for absent, failed or wrongly sized hull art', async () => {
     const { FactionArtDisplay } = await import('./faction-art');
     for (const role of ['transport', 'coastal_warship', 'ocean_warship']) {

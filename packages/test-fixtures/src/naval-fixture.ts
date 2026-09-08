@@ -22,7 +22,7 @@ function command(state: GameState, input: GameCommand): void {
  * Both sides know the authored geography, while live entities still use normal current sight.
  */
 export function navalCampaign({ enemyFleet = true }: { enemyFleet?: boolean } = {}): GameState {
-  let state = createGame({ seed: 20260905, size: 'tiny', factionCount: 2, pace: 'short' });
+  let state = createGame({ seed: 20260905, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4 });
   const world = state.world;
   world.terrain.fill(0); world.biome.fill(0); world.fertility.fill(0);
   for (let y = 8; y <= 24; y++) for (let x = 5; x <= 12; x++) {

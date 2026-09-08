@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.emberwake_convocation",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.badge for Theandril, Emberwake Convocation.\nSubject: ONE extremely simplified front-facing miniature faction badge. Native 32x32 readability: reduce the exact faction emblem to broad thick contiguous pixel masses and obvious gaps, at most a few flat tones. No outer plaque, tiny ornament, text or border.\nCulture-specific identity: A half-blackened seed wheel enclosing a single pale seed, clear coarse silhouette, no flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 32x32 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "ui.badge.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.emberwake_convocation/839f90aea882b9feb0a740de1152f2e8ecaf6f1cdc0c78e151f60a6fe6e3ba40/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "112d5d13ecf66b232a5a46e67d39eb9a3ed274be723af81631a1352ef0c2eeb1",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.badge.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.badge.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:56:31Z",
+  "referenceHashes": [
+    "92c93db95eb11239a52f9c4274ce6c7b689eea0f2946acca7b0326b6754bcb08",
+    "bd6722d9e59f7cca47bba78a3e95fb2b205a1fde21fb8e355d1707e60255f76b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "c604b5387eefdf0614560a30e0f4f7fe890dd0df9c17bb6a879b0a91ef1e6dfe",
+      "inputHash": "92c93db95eb11239a52f9c4274ce6c7b689eea0f2946acca7b0326b6754bcb08",
+      "outputHash": "69deb60a65c5b714cb251ffd00d1bb749cbbfaadf6e6c586e56499b28ba79a39"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "69deb60a65c5b714cb251ffd00d1bb749cbbfaadf6e6c586e56499b28ba79a39",
+      "outputHash": "097d7fcf03d70555d1f5c51bec7185555303806e639f4708cdbd778285f29ce4"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "097d7fcf03d70555d1f5c51bec7185555303806e639f4708cdbd778285f29ce4",
+      "outputHash": "65ce4f79f37e434b20c4f720a097db7c95e53f124693845d1f982a962d992e0e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "582a32f8b0196435ad86e8ab56cdf2a86edc56929111b49e53c0f18fd0545be1",
+      "outputHash": "5e142a068bbb72ea2677e30e3b2da3c2eaa94322eeb0b12df0702426276398e2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "0b32205b7dfc06e1434b0ade64d3f52880b342c98c97ab51ff318b63b7be64da",
+      "outputHash": "36725db860308ee7255f12036419882c4708155fab97cfcb943c0fda8069e8c1"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "dd8c0bcc03a6ef2a448f0300ce0a25c27aff179bf1d591bde7e097d662adc026",
+      "outputHash": "82431e62d207ad46894cebcddb7afbedc34d1843e8aa7f9cd903581b7f29b4fd"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:31.229Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Tiny half-black seed-wheel badge retains strong pale central seed and contained spoked silhouette. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 839f90aea882b9feb0a740de1152f2e8ecaf6f1cdc0c78e151f60a6fe6e3ba40; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/03acb2f4d4a06901c4b10811987503f1ea6d4e673680001dad37777e1126b78e.png"
+    ],
+    "inputHash": "bf40739e67266a81b7362b29d12df67b467d30ca4e3e3eeb4410f74c4e67a5af"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

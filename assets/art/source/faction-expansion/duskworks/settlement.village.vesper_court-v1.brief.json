@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.vesper_court",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.village for Theandril, Vesper Court.\nSubject: ONE small complete inhabited village cluster of three modest buildings around a little open working court. Clear low simple roofs, one small store and a practical low enclosure. This is the smallest settlement stage, no great hall, no high tower, no tall flag.\nCulture-specific identity: Shuttered vineyard manor houses, enclosed slate courts, narrow chimneys and covered walks. Inhabited cultivated estate architecture, not a generic grey fortress or gothic cathedral. Restrained burgundy shutters, charcoal blue-grey slate and weathered masonry.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "settlement.village.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/settlement.village.vesper_court/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "92ea5786e9db04b78dafd6e3ec932ef7f6071504ef22bcfab83827b4e33fb91b",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.village.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.village.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:53:09Z",
+  "referenceHashes": [
+    "4a6e3b7352065373ae4648ad48197b0ba634994b92085af837aa0646ecddf644",
+    "e07dad91d43285e31015df981144b91e535961e47d3f98d6aecbba85f4c4e608"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a6cd36ce7443848313b9fae104c5f37ba32ec05c05be2f82fea16169e134cc24",
+      "inputHash": "4a6e3b7352065373ae4648ad48197b0ba634994b92085af837aa0646ecddf644",
+      "outputHash": "2c86699abd243de6b2fec0f267b4c41371f41f54103f54568c8adac5d4edc256"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "workload": "Offline art compilation; warm code/data, filesystem reads excluded. Not renderer performance.",
+  "approvedAssets": 506,
+  "publishedFrames": 569,
+  "validation": {
+    "medianMs": 154.71124899999995,
+    "p95Ms": 157.72466899999995,
+    "minMs": 150.44850700000006,
+    "maxMs": 157.72466899999995,
+    "iterations": 7
+  },
+  "pages": [
+    {
+      "id": "foundation",
+      "width": 2048,
+      "height": 2048,
+      "pngBytes": 2628301,
+      "rgbaBytes": 16777216,
+      "pngHash": "e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de",
+      "build": {
+        "medianMs": 307.4673150000003,
+        "p95Ms": 315.68055300000015,
+        "minMs": 297.98368800000026,
+        "maxMs": 315.68055300000015,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 66.3038289999995,
+        "p95Ms": 73.44975499999964,
+        "minMs": 64.08439100000032,
+        "maxMs": 73.44975499999964,
+        "iterations": 7
+      }
+    },
+    {
+      "id": "battle",
+      "width": 1024,
+      "height": 1024,
+      "pngBytes": 26100,
+      "rgbaBytes": 4194304,
+      "pngHash": "6e7cbcc86537efea76ba24e4cad54858b5e77bbbf46f2c87ceb7cd9e9addea7b",
+      "build": {
+        "medianMs": 18.05445399999917,
+        "p95Ms": 26.075604999999996,
+        "minMs": 17.874728000000687,
+        "maxMs": 26.075604999999996,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 7.9458480000002965,
+        "p95Ms": 9.860818000000108,
+        "minMs": 7.266029000000344,
+        "maxMs": 9.860818000000108,
+        "iterations": 7
+      }
+    }
+  ],
+  "syntheticValidation": {
+    "description": "1,000 in-memory frame references repeating approved source pixels with distinct test IDs; not new production artwork or approval.",
+    "frames": 1000,
+    "processedPixelBytes": 16384000,
+    "status": "CANDIDATE",
+    "timing": {
+      "medianMs": 90.79949699999997,
+      "p95Ms": 91.89349300000049,
+      "minMs": 90.41524500000014,
+      "maxMs": 91.89349300000049,
+      "iterations": 5
+    }
+  },
+  "peakResidentMiB": 659.07421875
+}

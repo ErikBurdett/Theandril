@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.lantern_hospices",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.lantern_hospices"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Lantern Hospices, role unit.colonist.\nSUBJECT: ONE adult civilian colonist with a loaded compact backpack and hand-held folded tent roll, walking staff within frame, clear ordinary tool-hands and complete boots. No weapon or animal. Native64x64 maxheight48px pivot32,56.\nCULTURE: Beeswax yellow, washed blue, soot-black lantern cages, plain linen. Hooded service coats, broad shields, shielded lamps not glowing magical haloes. Open hospice courtyards with wide ventilated slate roofs, covered galleries, clean cisterns and small enclosed lamp niches.\nPEOPLE if character or rider: Human care-house attendants and paid escorts; adultsturdyclothlayers, no religious caricatures.\nHERALDRY if UI or flag: A small hooded lamp framed by two protective shutters.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.colonist.lantern_hospices/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.lantern_hospices/ac480090bd8b6dbecc2730907d9714ec9567291cde156f15a3065f1642c39736/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "239dae6b481fdc8a88aa763bac88773bc832f2299e5c0484d65424dfa08a0da7",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/unit.colonist.lantern_hospices-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/unit.colonist.lantern_hospices-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:41:47Z",
+  "referenceHashes": [
+    "7e4daf2adae3234dbb755d4d9789df27b8238ea18edce59ca19a2580b21d44d7",
+    "6e3b613f5b069c255397d6ffe0f7007279adb93ea8fa99ecad743d0881daf816"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "87fde64a17b1c87338e4a1649d69a6674b3631b673fd767165806064726d3716",
+      "inputHash": "7e4daf2adae3234dbb755d4d9789df27b8238ea18edce59ca19a2580b21d44d7",
+      "outputHash": "e2346fd89612fedaa6380f5f7d6055775676f54e439cfcd8e1c57640f29000c4"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "e2346fd89612fedaa6380f5f7d6055775676f54e439cfcd8e1c57640f29000c4",
+      "outputHash": "299c5ac5462ed5f8ab189fdf5085d72296013c2a4fe3eb1853827c14d935d797"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "299c5ac5462ed5f8ab189fdf5085d72296013c2a4fe3eb1853827c14d935d797",
+      "outputHash": "f2313a238a24c33533ec8498b685feacf17808648435bd0cad91b267ee13bbe3"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "ef0e3cbc93bfcfa3cb59683837a2430e46fa706e5b27acdea885fe1d73c96822",
+      "outputHash": "44cc6dd570c8e90556fdd13c59f46346dac52a2ab34817c2861b5ca48b3d87ee"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "58d5c4d49a4ecdd5369fa1e21eaf3e0a0e9206da4452a207586f4950e20c5530",
+      "outputHash": "a091ae68d886735bcf79c9817d30a335c305f67af5fefa15f39659498a276988"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "c9083cb041a75671bd680cda0872bae036a49b8c35cbf705e7ec55609909e0a3",
+      "outputHash": "e1417fe0a659cdf48fded9983a89de09049674f3851dd27f62f86b62901ab0b0"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.lantern_hospices.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T09:19:43.013Z",
+    "notes": "Inspected independently generated original, all18 exact processed frames at native1x and this role at nearest4x. Loaded civilian pack and carried roll remain distinct from weapons; both legs and staff end are complete. Muted cream, slate blue and ochre normalized through the shared Theandril palette; hard pixel clusters and transparent padding remain coherent. Tiny source ornament is subordinate to silhouette. One static southeast pose only, not animation. In-game/fog/UI integration remains a separate acceptance gate.\nReviewed candidate ac480090bd8b6dbecc2730907d9714ec9567291cde156f15a3065f1642c39736; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/12abbeebeeeb15965f5ecb9fefedd7a05e44a57bd00eb6a234ad9cc3109a3361.png"
+    ],
+    "inputHash": "39b8a4df29e8a5ee043123686280e5a92d393b99e90f0b79896fc96309f52436"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

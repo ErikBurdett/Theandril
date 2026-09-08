@@ -1,0 +1,836 @@
+{
+  "workload": "Matched normal Tiny Standard seed99 generator5 current observation-only AI; all commands via rules13 or14; no injected resources; no archive/mirror in this diagnostic",
+  "cases": [
+    {
+      "version": 13,
+      "turn": 200,
+      "victory": {
+        "path": "prosperity",
+        "factionId": "faction.glass_tide",
+        "projectId": "project.437",
+        "settlementId": "settlement.12",
+        "turn": 200
+      },
+      "winnerTowns": 8,
+      "orders": 5377,
+      "battles": 98,
+      "captures": 32,
+      "casts": {
+        "shield": 0,
+        "rally": 12,
+        "fire": 0,
+        "ward": 0
+      },
+      "victories": {
+        "faction.ashen_compact": 38,
+        "faction.reedbound_council": 17,
+        "faction.cinder_march": 20,
+        "draw": 6,
+        "faction.glass_tide": 17
+      },
+      "projects": [
+        {
+          "turn": 180,
+          "command": {
+            "type": "startVictoryProject",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.12"
+          },
+          "before": 18104
+        },
+        {
+          "turn": 199,
+          "command": {
+            "type": "startVictoryProject",
+            "factionId": "faction.reedbound_council",
+            "settlementId": "settlement.43"
+          },
+          "before": 18158
+        }
+      ],
+      "officers": [
+        {
+          "turn": 15,
+          "faction": "faction.cinder_march",
+          "role": "character.surveyor"
+        },
+        {
+          "turn": 16,
+          "faction": "faction.ashen_compact",
+          "role": "character.surveyor"
+        },
+        {
+          "turn": 20,
+          "faction": "faction.glass_tide",
+          "role": "character.surveyor"
+        },
+        {
+          "turn": 22,
+          "faction": "faction.ashen_compact",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 24,
+          "faction": "faction.ashen_compact",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 25,
+          "faction": "faction.reedbound_council",
+          "role": "character.surveyor"
+        },
+        {
+          "turn": 25,
+          "faction": "faction.cinder_march",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 28,
+          "faction": "faction.cinder_march",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 31,
+          "faction": "faction.cinder_march",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 36,
+          "faction": "faction.reedbound_council",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 37,
+          "faction": "faction.ashen_compact",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 37,
+          "faction": "faction.reedbound_council",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 37,
+          "faction": "faction.cinder_march",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 38,
+          "faction": "faction.glass_tide",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 39,
+          "faction": "faction.glass_tide",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 41,
+          "faction": "faction.reedbound_council",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 46,
+          "faction": "faction.reedbound_council",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 47,
+          "faction": "faction.reedbound_council",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 52,
+          "faction": "faction.glass_tide",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 64,
+          "faction": "faction.glass_tide",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 81,
+          "faction": "faction.glass_tide",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 88,
+          "faction": "faction.ashen_compact",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 91,
+          "faction": "faction.ashen_compact",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 131,
+          "faction": "faction.cinder_march",
+          "role": "character.engineer"
+        }
+      ],
+      "discoveries": [],
+      "milestones": [
+        {
+          "turn": 50,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 437,
+              "knowledge": 191,
+              "towns": 5,
+              "armies": 8
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 492,
+              "knowledge": 199,
+              "towns": 6,
+              "armies": 14
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 241,
+              "knowledge": 127,
+              "towns": 4,
+              "armies": 8
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 161,
+              "knowledge": 68,
+              "towns": 4,
+              "armies": 11
+            }
+          ],
+          "battles": 12,
+          "captures": 1
+        },
+        {
+          "turn": 100,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 4194,
+              "knowledge": 1678,
+              "towns": 7,
+              "armies": 10
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 4443,
+              "knowledge": 2002,
+              "towns": 7,
+              "armies": 11
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 3806,
+              "knowledge": 1590,
+              "towns": 6,
+              "armies": 11
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 5065,
+              "knowledge": 914,
+              "towns": 6,
+              "armies": 10
+            }
+          ],
+          "battles": 43,
+          "captures": 9
+        },
+        {
+          "turn": 125,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 6102,
+              "knowledge": 2752,
+              "towns": 5,
+              "armies": 11
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 7348,
+              "knowledge": 3356,
+              "towns": 8,
+              "armies": 12
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 6329,
+              "knowledge": 2692,
+              "towns": 8,
+              "armies": 10
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 8917,
+              "knowledge": 2021,
+              "towns": 7,
+              "armies": 13
+            }
+          ],
+          "battles": 61,
+          "captures": 15
+        },
+        {
+          "turn": 150,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 7904,
+              "knowledge": 3802,
+              "towns": 6,
+              "armies": 10
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 9998,
+              "knowledge": 4639,
+              "towns": 6,
+              "armies": 10
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 10025,
+              "knowledge": 4116,
+              "towns": 9,
+              "armies": 14
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 12752,
+              "knowledge": 3124,
+              "towns": 8,
+              "armies": 10
+            }
+          ],
+          "battles": 71,
+          "captures": 19
+        },
+        {
+          "turn": 175,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 8669,
+              "knowledge": 4585,
+              "towns": 4,
+              "armies": 11
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 13510,
+              "knowledge": 6167,
+              "towns": 9,
+              "armies": 12
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 14224,
+              "knowledge": 5534,
+              "towns": 8,
+              "armies": 13
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 17058,
+              "knowledge": 4290,
+              "towns": 9,
+              "armies": 11
+            }
+          ],
+          "battles": 90,
+          "captures": 27
+        },
+        {
+          "turn": 188,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 8925,
+              "knowledge": 4908,
+              "towns": 4,
+              "armies": 11
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 15876,
+              "knowledge": 7060,
+              "towns": 9,
+              "armies": 10
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 16178,
+              "knowledge": 6216,
+              "towns": 9,
+              "armies": 12
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 1173,
+              "knowledge": 5021,
+              "towns": 8,
+              "armies": 10
+            }
+          ],
+          "battles": 93,
+          "captures": 29
+        },
+        {
+          "turn": 200,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 9255,
+              "knowledge": 5240,
+              "towns": 5,
+              "armies": 10
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 370,
+              "knowledge": 7952,
+              "towns": 10,
+              "armies": 9
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 18005,
+              "knowledge": 6856,
+              "towns": 8,
+              "armies": 14
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 1965,
+              "knowledge": 5716,
+              "towns": 8,
+              "armies": 10
+            }
+          ],
+          "battles": 98,
+          "captures": 32
+        }
+      ],
+      "hash": "95660e48"
+    },
+    {
+      "version": 14,
+      "turn": 188,
+      "victory": {
+        "path": "prosperity",
+        "factionId": "faction.glass_tide",
+        "projectId": "project.425",
+        "settlementId": "settlement.121",
+        "turn": 188
+      },
+      "winnerTowns": 8,
+      "orders": 4950,
+      "battles": 113,
+      "captures": 20,
+      "casts": {
+        "shield": 206,
+        "rally": 11,
+        "fire": 5,
+        "ward": 36
+      },
+      "victories": {
+        "faction.ashen_compact": 36,
+        "faction.reedbound_council": 15,
+        "faction.glass_tide": 31,
+        "faction.cinder_march": 25,
+        "draw": 6
+      },
+      "projects": [
+        {
+          "turn": 168,
+          "command": {
+            "type": "startVictoryProject",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.121"
+          },
+          "before": 18149
+        }
+      ],
+      "officers": [
+        {
+          "turn": 15,
+          "faction": "faction.cinder_march",
+          "role": "character.surveyor"
+        },
+        {
+          "turn": 16,
+          "faction": "faction.ashen_compact",
+          "role": "character.surveyor"
+        },
+        {
+          "turn": 20,
+          "faction": "faction.glass_tide",
+          "role": "character.surveyor"
+        },
+        {
+          "turn": 22,
+          "faction": "faction.ashen_compact",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 24,
+          "faction": "faction.ashen_compact",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 25,
+          "faction": "faction.reedbound_council",
+          "role": "character.surveyor"
+        },
+        {
+          "turn": 25,
+          "faction": "faction.cinder_march",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 28,
+          "faction": "faction.cinder_march",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 31,
+          "faction": "faction.cinder_march",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 32,
+          "faction": "faction.ashen_compact",
+          "role": "character.waykeeper"
+        },
+        {
+          "turn": 36,
+          "faction": "faction.reedbound_council",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 37,
+          "faction": "faction.reedbound_council",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 37,
+          "faction": "faction.cinder_march",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 38,
+          "faction": "faction.glass_tide",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 39,
+          "faction": "faction.ashen_compact",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 39,
+          "faction": "faction.glass_tide",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 42,
+          "faction": "faction.reedbound_council",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 43,
+          "faction": "faction.ashen_compact",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 48,
+          "faction": "faction.reedbound_council",
+          "role": "character.waykeeper"
+        },
+        {
+          "turn": 53,
+          "faction": "faction.glass_tide",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 56,
+          "faction": "faction.glass_tide",
+          "role": "character.marshal"
+        },
+        {
+          "turn": 59,
+          "faction": "faction.cinder_march",
+          "role": "character.waykeeper"
+        },
+        {
+          "turn": 68,
+          "faction": "faction.glass_tide",
+          "role": "character.engineer"
+        },
+        {
+          "turn": 156,
+          "faction": "faction.reedbound_council",
+          "role": "character.engineer"
+        }
+      ],
+      "discoveries": [
+        {
+          "turn": 33,
+          "type": "researchArcane",
+          "factionId": "faction.ashen_compact",
+          "discoveryId": "arcane.ember_projection"
+        },
+        {
+          "turn": 41,
+          "type": "researchArcane",
+          "factionId": "faction.ashen_compact",
+          "discoveryId": "arcane.rune_binding"
+        },
+        {
+          "turn": 49,
+          "type": "researchArcane",
+          "factionId": "faction.reedbound_council",
+          "discoveryId": "arcane.ember_projection"
+        },
+        {
+          "turn": 50,
+          "type": "researchArcane",
+          "factionId": "faction.reedbound_council",
+          "discoveryId": "arcane.rune_binding"
+        },
+        {
+          "turn": 61,
+          "type": "researchArcane",
+          "factionId": "faction.cinder_march",
+          "discoveryId": "arcane.ember_projection"
+        },
+        {
+          "turn": 62,
+          "type": "researchArcane",
+          "factionId": "faction.cinder_march",
+          "discoveryId": "arcane.rune_binding"
+        }
+      ],
+      "milestones": [
+        {
+          "turn": 50,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 353,
+              "knowledge": 113,
+              "towns": 4,
+              "armies": 11
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 484,
+              "knowledge": 161,
+              "towns": 6,
+              "armies": 12
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 261,
+              "knowledge": 126,
+              "towns": 4,
+              "armies": 9
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 271,
+              "knowledge": 68,
+              "towns": 5,
+              "armies": 12
+            }
+          ],
+          "battles": 12,
+          "captures": 2
+        },
+        {
+          "turn": 100,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 3121,
+              "knowledge": 1315,
+              "towns": 6,
+              "armies": 13
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 4318,
+              "knowledge": 1920,
+              "towns": 6,
+              "armies": 10
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 3420,
+              "knowledge": 1475,
+              "towns": 8,
+              "armies": 14
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 5766,
+              "knowledge": 1438,
+              "towns": 8,
+              "armies": 11
+            }
+          ],
+          "battles": 42,
+          "captures": 9
+        },
+        {
+          "turn": 125,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 5181,
+              "knowledge": 2527,
+              "towns": 8,
+              "armies": 14
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 7068,
+              "knowledge": 3271,
+              "towns": 8,
+              "armies": 14
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 6242,
+              "knowledge": 2674,
+              "towns": 6,
+              "armies": 11
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 9806,
+              "knowledge": 2694,
+              "towns": 7,
+              "armies": 10
+            }
+          ],
+          "battles": 62,
+          "captures": 14
+        },
+        {
+          "turn": 150,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 7998,
+              "knowledge": 3842,
+              "towns": 7,
+              "armies": 13
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 10566,
+              "knowledge": 4812,
+              "towns": 9,
+              "armies": 13
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 8520,
+              "knowledge": 3684,
+              "towns": 5,
+              "armies": 8
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 14461,
+              "knowledge": 3987,
+              "towns": 8,
+              "armies": 9
+            }
+          ],
+          "battles": 78,
+          "captures": 16
+        },
+        {
+          "turn": 175,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 11136,
+              "knowledge": 5139,
+              "towns": 8,
+              "armies": 12
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 14949,
+              "knowledge": 6669,
+              "towns": 10,
+              "armies": 16
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 9773,
+              "knowledge": 4392,
+              "towns": 4,
+              "armies": 8
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 1185,
+              "knowledge": 5350,
+              "towns": 7,
+              "armies": 9
+            }
+          ],
+          "battles": 100,
+          "captures": 18
+        },
+        {
+          "turn": 188,
+          "factions": [
+            {
+              "id": "faction.ashen_compact",
+              "treasury": 13157,
+              "knowledge": 5881,
+              "towns": 8,
+              "armies": 12
+            },
+            {
+              "id": "faction.reedbound_council",
+              "treasury": 17388,
+              "knowledge": 7641,
+              "towns": 10,
+              "armies": 16
+            },
+            {
+              "id": "faction.cinder_march",
+              "treasury": 10323,
+              "knowledge": 4719,
+              "towns": 4,
+              "armies": 9
+            },
+            {
+              "id": "faction.glass_tide",
+              "treasury": 2692,
+              "knowledge": 6048,
+              "towns": 8,
+              "armies": 9
+            }
+          ],
+          "battles": 113,
+          "captures": 20
+        }
+      ],
+      "hash": "68bb9a0b"
+    }
+  ]
+}

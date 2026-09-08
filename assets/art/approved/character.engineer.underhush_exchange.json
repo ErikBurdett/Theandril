@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.underhush_exchange",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art character.engineer for Theandril, Underhush Exchange.\nSubject: One adult engineer on foot in a sturdy faction work apron and compact protective headgear, holding a small mallet and carrying a square tool satchel with a folded carpenter square. Practical repair worker, not a combat giant, full body.\nCulture-specific identity: An adult short broad-handed burrowfolk: compact furred body, small rounded ears, blunt face, visible dexterous fingers. Upright two-legged working citizen, not a bearded dwarf, pet or exposed-tooth rodent caricature. Clay-brown padded work coats, pewter fittings, pale-lime panels, tiny dull amber route markers, tactile tally beads, low padded helmets and rounded work shields. Generous compact horizontal shapes.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "character.engineer.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.engineer.underhush_exchange/3a4d53c88f2ae10143488e652c0fe35cd56a08730f7e222398302fbc87d910a9/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c6a58f1b82731326edf6eb22a34ab69d80d1691cd6e98e374491d9d6708f0bbb",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/character.engineer.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/character.engineer.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:25:18Z",
+  "referenceHashes": [
+    "2698aaa1a76d3483ab812234c7d4e663d420a4caf7461f0773dd2e8b6b4cf8d2",
+    "eaa3a1dcb500832960ced22155216094cc05db6c36a04df62c8d1bf5f8368a6a"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "bb3d0c26e17225afdb28f50ac5a663c7ed40167af0e975f1e5c8d70364a77141",
+      "inputHash": "2698aaa1a76d3483ab812234c7d4e663d420a4caf7461f0773dd2e8b6b4cf8d2",
+      "outputHash": "81b6440c6845ca94b8d7df244ff339ff70c195c15b6053b30647de585bb11d6f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "81b6440c6845ca94b8d7df244ff339ff70c195c15b6053b30647de585bb11d6f",
+      "outputHash": "34c4b4833f964345c1d0ceb4feb5e68ef5ff7934e1299946468423068a391ad1"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "34c4b4833f964345c1d0ceb4feb5e68ef5ff7934e1299946468423068a391ad1",
+      "outputHash": "142078e9aa9ba3d8465c71e638022a626489f689973aa2e6e77f157021bb8f97"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "af164cd7c0f075ba7fc70cbb8cc854806afc121770824fce5e5463fb7d4b89d3",
+      "outputHash": "19907e856d1690d3acfeb0f8c7617744234f507578e740bf32d95b681c3acde6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "dc78abae2e52bd8dfa273537ccbe2ef828738dcac8db2ec86b5ae4860ef7c3f7",
+      "outputHash": "cb996056091b9fb7e521e76a612e19d5d85ddf43d371733de314e2b7ed2daa4d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "4e6d8ad38b5771467eb7ba0e11aa4bf5cb16749e60826a02155a35e2b04aedee",
+      "outputHash": "ea455d54d919cf2913ce8fad554613a88c8e24a193c1646be78f448c9e60e317"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.engineer.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:31.050Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Broad-handed engineer in apron with mallet and visible belt tools; no dwarf-beard stereotype. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 3a4d53c88f2ae10143488e652c0fe35cd56a08730f7e222398302fbc87d910a9; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/60a98666f6f5c71397178204fce4943a98025dce7d21a4991900a07d73de37d6.png"
+    ],
+    "inputHash": "f561814bd67300810a211a8ff83c86fb3dcfe12c59dc25ae61f0583f5fcf5f7e"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

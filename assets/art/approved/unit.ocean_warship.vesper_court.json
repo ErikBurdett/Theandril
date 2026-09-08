@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.vesper_court",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.ocean_warship for Theandril, Vesper Court.\nSubject: ONE substantial deep-ocean sailing warship, broad high-sided reinforced wooden hull, two compact distinct masts and square/lateen sails, raised foredeck and a fortified aft command gallery, restrained deck ballista. Clearly more massive armed fighting ship than transport, no cannons. Entire ship complete.\nCulture-specific identity: Dark timber hull, enclosed shuttered charcoal cabins, muted burgundy/dusty-plum sails, tarnished silver-edged stern gallery. Keep role silhouette readable; not a bat ship.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.vesper_court/48b8fe59a9ad0708f94118f31b2a467a80924c03a65fc4ce2f091affbde5666d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "31fa5087e8c065bc729b3b35a5b2485342017ba034e1307741e97237feb8c9d1",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:00:38Z",
+  "referenceHashes": [
+    "cf5c636cf63f0e8f8a49e7e60a7da636489110fc03275f7df486b86f98634d2a",
+    "6cc172a170d93c339ebac02c03c0054a5cc2e3bbcd2971679f9129a432140e71"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "b1ed97bab2798b4e2b5681684f082fe236a2bcb8e1f61a79441db8ad1da13cea",
+      "inputHash": "cf5c636cf63f0e8f8a49e7e60a7da636489110fc03275f7df486b86f98634d2a",
+      "outputHash": "9324b75e15ff3ea2ce99ae4f84ce7688ecf8c5e57513f04924810c19df306d47"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "9324b75e15ff3ea2ce99ae4f84ce7688ecf8c5e57513f04924810c19df306d47",
+      "outputHash": "002c1604d3e3eec78479f5bf69fa6c2a0060a078f1107dac7750f4d7df609804"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "002c1604d3e3eec78479f5bf69fa6c2a0060a078f1107dac7750f4d7df609804",
+      "outputHash": "e3e7bb32448fdae0a8e0b61a4bb53d44de4b48b24555ad54542180fc193d600e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "e5cd5d2858eed9ea9f27b8dbdaa95d0d5d8450262b4cd3442f75e2a122385559",
+      "outputHash": "e05e3bd457aa7dcd926f8bfec3c9816cfa57b72cf66017bb56532f35bfdd2bca"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "0f9aa3055547a38586c6ef4a2d3e9b5a08f17b6fa3a458edcfb8a91aa5d14393",
+      "outputHash": "0b73e0cd82d0ff2ce87e751d120d14897e543362be8c924003715b1363d9c1b5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "d66c4a5a4e05cc2531e99e134c658549b89434599dca860afee268adf3801959",
+      "outputHash": "9becd0a2493bb34daa0b694f68b99cbbf845d7dd65198b4b30ae8a057e01c65c"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:05.783Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Two square masts and deeper fighting deck distinguish the ocean hull; complete rigging, no obvious firearms. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 48b8fe59a9ad0708f94118f31b2a467a80924c03a65fc4ce2f091affbde5666d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5ccc8b97e0685a2bde7d11f37ffab11b487a3039b20f06260747189210d4ed8a.png"
+    ],
+    "inputHash": "aea20339c3833988c07bae1663a24d39c2802c32ae506cca104e3f4341cfaddf"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

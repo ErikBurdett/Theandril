@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.scout.ashen_compact",
+  "clip": "idle",
+  "sourceVersion": 2,
+  "layout": {
+    "columns": 2,
+    "rows": 2
+  },
+  "reference": {
+    "path": "assets/art/approved/unit.scout.ashen_compact/829619119f8ac12e03c4f8b5ad35636a7a53063cfbeb0bd74272fb4bd8418d4b/frame-0.png",
+    "sha256": "e84206034bf22e6ea66b4c9ec956c8c4e581d112a4a519b58949de7e07a083ec"
+  },
+  "generations": [
+    {
+      "sourcePath": "assets/art/source/animations/unit.scout.ashen_compact-idle-v1.png",
+      "sha256": "9c5faa6e1ed1a1549d903b8ce59e9e45ade10acd784a4036ecc6b47c8f608393",
+      "prompt": "Use case: edit / pixel sprite animation. Create a genuine FOUR-FRAME quiet IDLE animation SPRITE SHEET of the exact supplied Theandril Ashen Compact scout. This is one character animation, not four different units. Preserve its ochre-brown hood and short weathered cape, dark iron and leather equipment, visible bow and quiver, adult proportions, southeast three-quarter facing toward the right, original muted ochre/bone/charcoal colors and hard coarse 64x64 logical pixel-art style. Keep the SAME silhouette proportions, feet, bow hands, gear, lighting and ground anchor across all frames. Both feet stay planted; body never walks, rotates, attacks or jumps. Actual subtle animation: cloth hem softly drifts out then settles and chest breathes gently. Frame1 relaxed at rest, frame2 cloth moves outward slightly/chest rises about one logical pixel, frame3 cloth at crest, frame4 returning close to frame1. Four poses should have meaningful localized differences, not global translation or four identical stills. Make the loop restrained and smooth with no equipment swapping. Layout exactly 2 columns by 2 rows of equal square cells in a square PNG, order left-to-right/top-to-bottom; the SAME sprite size and same ground level in every cell (feet centered horizontally at 85 percent cell height). Each sprite entirely inside its own cell with at least 10 percent transparent padding on all sides; no sprite crosses a row or column boundary. Background TRUE alpha transparency, not painted checkerboard. No labels, numbers, borders, glows, shadows, scene, hex, selection ring, floor, particles or UI. Do not modernize/redesign or brighten the character. Clean deliberate square pixel clusters not a smooth illustration. This source will be registered to four 64x64 frames; avoid tiny new details.",
+      "provider": "codex-imagegen",
+      "model": "not-exposed-by-tool",
+      "seed": null,
+      "decision": "rejected",
+      "reason": "All 1572516 pixels alpha255: opaque painted checkerboard, not transparency. Retained as edit reference only."
+    },
+    {
+      "sourcePath": "assets/art/source/animations/unit.scout.ashen_compact-idle-v2.png",
+      "sha256": "8a7435f320b5b884be400cd574dbfdc9864cf78f2c91540116f899d4d7daebe4",
+      "prompt": "OUTPUT A PNG WITH A REAL TRANSPARENT ALPHA BACKGROUND. Edit the supplied four-frame sprite sheet: remove the entire white/light-grey CHECKERBOARD background and replace it with actual zero-alpha transparent pixels. This checker pattern is an unwanted opaque backdrop, it must not be painted or retained anywhere. Preserve the four dark hooded scout sprites exactly in their positions, equipment, original hard square pixel colors and cloth motion poses; retain the tiny light arrow fletchings as part of the characters. No checkerboard, no white matte, no grey matte, no shadows. Areas outside each character silhouette and between character equipment must be fully transparent alpha0. Leave generous real transparent margin around each sprite. The result remains one 2x2 sprite-sheet image with four complete independent frames on a transparent PNG. Do not replace background with another color or simulated transparency.",
+      "provider": "codex-imagegen",
+      "model": "not-exposed-by-tool",
+      "seed": null,
+      "referencePath": "assets/art/source/animations/unit.scout.ashen_compact-idle-v1.png",
+      "decision": "selected-for-native-review",
+      "reason": "Actual alpha0 background; native threshold/palette processing, registration and motion review still required."
+    }
+  ],
+  "note": "Built-in image-generation original followed by background edit. Tool does not expose model, seed or authoritative generation timestamp. This index records provenance, not approval."
+}

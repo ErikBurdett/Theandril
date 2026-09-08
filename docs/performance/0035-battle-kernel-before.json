@@ -1,0 +1,14 @@
+{
+  "capturedAt": "2026-09-07T20:48:42.835Z",
+  "command": "./node_modules/.bin/tsx scripts/benchmark-armies-fleets.ts --section=kernel",
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "os": "linux 7.1.9-arch1-2",
+  "saveVersion": 13,
+  "contentHash": "07a58d4f",
+  "kernel": [
+    { "formationsPerSide": 12, "deploymentRanks": 3, "samples": 200, "warmups": 7, "createAndAutoResolve": { "medianMs": 0.4026720000000239, "p95Ms": 1.1587300000000198, "maxMs": 2.1034070000000042, "meanMs": 0.5218534050000003 }, "minRounds": 5, "maxRounds": 6, "outcomeSeal": "bd17446a", "historical12Parity": true, "manualParity": true },
+    { "formationsPerSide": 20, "deploymentRanks": 4, "samples": 200, "warmups": 7, "createAndAutoResolve": { "medianMs": 0.5196909999999662, "p95Ms": 1.398649999999975, "maxMs": 4.246544999999969, "meanMs": 0.6342209100000034 }, "minRounds": 4, "maxRounds": 5, "outcomeSeal": "84bbd5c3", "historical12Parity": null, "manualParity": true }
+  ],
+  "scope": "Existing benchmark's supplied tactical stats, repeated original three-unit roster on hills. Validated creation and kernel autoresolve timed; separate parity checks excluded. No recruited casters, campaign, AI, archive, browser or rendering costs. Captured before combat changes."
+}

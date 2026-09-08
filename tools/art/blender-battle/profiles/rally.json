@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "id": "theandril-battle-rally",
+  "workflow": "pixel_2d",
+  "recipe": "../recipes/rally.py",
+  "description": "Original eight-pose rally effect, fixed registration and real Blender geometry/keyframes.",
+  "palette": {
+    "file": "../../../../assets/palettes/theandril-master.json",
+    "dither": false
+  },
+  "render": {
+    "engine": "CYCLES",
+    "samples": 8,
+    "resolution": [
+      256,
+      256
+    ],
+    "transparent": true,
+    "filterSize": 0.01,
+    "viewTransform": "Standard",
+    "exposure": 0,
+    "motionBlur": false,
+    "depthOfField": false,
+    "camera": {
+      "projection": "ORTHO",
+      "orthoScale": 4,
+      "position": [
+        0,
+        -10,
+        0
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "textures": {
+    "size": 8,
+    "filter": "nearest",
+    "mipmaps": false
+  },
+  "export": {
+    "formats": [
+      "blend",
+      "png"
+    ],
+    "runtimeFormat": "png",
+    "preserveNamedParts": true
+  },
+  "sprites": {
+    "size": [
+      64,
+      64
+    ],
+    "anchor": [
+      32,
+      32
+    ],
+    "alphaThreshold": 0.5,
+    "paddingPixels": 3,
+    "facings": 1
+  },
+  "animation": {
+    "state": "attack",
+    "direction": "se",
+    "loop": false,
+    "durationsMs": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ]
+  },
+  "budgets": {
+    "triangles": 256,
+    "materials": 8,
+    "objects": 24,
+    "maxBytes": 16777216
+  },
+  "quality": {
+    "binarySpriteAlpha": true,
+    "requireAlphaPadding": true,
+    "requiresVisualReview": true
+  },
+  "provenance": {
+    "origin": "Original Theandril Blender mesh construction and authored object keyframes; no downloaded artwork or generated bitmap input.",
+    "license": "Project-authored source; no new third-party art license or automatic CC0 dedication inferred."
+  }
+}

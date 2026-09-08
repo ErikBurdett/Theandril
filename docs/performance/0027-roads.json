@@ -1,0 +1,2229 @@
+{
+  "measuredAt": "2026-09-07T02:52:51.802Z",
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "logicalCpus": 32,
+  "ramBytes": 33317580800,
+  "saveVersion": 12,
+  "contentHash": "3c54fb02",
+  "command": "node --import tsx scripts/benchmark-roads.ts --output",
+  "scope": "Standalone production advanceRoads and all-faction observeRoads. Survey samples each start from a fresh strictly validated identical snapshot (3 warmups +20 measured). Active samples are20 consecutive phase calls with every project still active; they are NOT20 full turns, and their turn counter stays fixed. Setup, validation, clones, JSON/hash comparison, mirrors and final ordinary paid/end-turn commands are excluded from timing. No AI/browser/render or giant full-campaign throughput claim.",
+  "memory": "Save/roads UTF8 bytes are exact; process final memory is not peak or retained-memory evidence. Matched32-faction local roads differ only in global map size and cell row stride;40 is a separately labeled workload increase.",
+  "results": [
+    {
+      "size": "huge",
+      "factionCount": 32,
+      "synthetic": true,
+      "cells": 196608,
+      "towns": 64,
+      "armies": 32,
+      "exploredCells": 4064,
+      "generation": {
+        "version": 4,
+        "authored": "All-hill uniform-biome world, same local12-segment corridors at both sizes; one independent scout at each corridor midpoint. Initial extra caravans are authored; both towns per realm use ordinary found commands. No whole-map reveal."
+      },
+      "baselineHash": "e2227048",
+      "baselineSaveBytes": 2299462,
+      "planned": {
+        "projects": 32,
+        "completedProjects": 0,
+        "completedSegments": 0,
+        "workProgress": 32,
+        "totalPlannedSegments": 384,
+        "maxPathCells": 13,
+        "roadCells": 0,
+        "physicalEdges": 0,
+        "knownRoadCells": 0,
+        "jsonBytes": 8375
+      },
+      "surveyAndFirstWork": {
+        "samplesMs": [
+          1.3938640000001215,
+          1.4557629999999335,
+          2.372003000000177,
+          1.4278070000000298,
+          1.5343740000000707,
+          1.3873160000000553,
+          1.2747529999999188,
+          1.2250649999996313,
+          1.2119699999998375,
+          1.3032830000001923,
+          1.2255890000001273,
+          1.2768889999997555,
+          1.317066000000068,
+          1.1857060000002093,
+          1.2093410000002223,
+          1.2339630000001307,
+          1.1955199999997603,
+          1.1907920000003287,
+          1.2357419999998456,
+          1.2726430000002438
+        ],
+        "meanMs": 1.346472450000033,
+        "medianMs": 1.2747529999999188,
+        "p95Ms": 2.372003000000177,
+        "maxMs": 2.372003000000177
+      },
+      "allFactionRoadQuotes": {
+        "samplesMs": [
+          0.10934100000008584,
+          0.22240599999986443,
+          0.20378299999993033,
+          0.11024600000018836,
+          0.1098939999999402,
+          0.127578000000085,
+          0.10825999999997293,
+          0.1081890000000385,
+          0.10791799999969953,
+          0.11189299999978175,
+          0.10642199999983859,
+          0.11608099999966726,
+          0.13156200000003082,
+          0.09949300000016592,
+          0.09754999999995562,
+          0.09243500000002314,
+          0.08861500000011802,
+          0.09109099999977843,
+          0.10764800000015384,
+          0.1212719999998626
+        ],
+        "meanMs": 0.11858384999995905,
+        "medianMs": 0.10934100000008584,
+        "p95Ms": 0.22240599999986443,
+        "maxMs": 0.22240599999986443
+      },
+      "activePhase": {
+        "samplesMs": [
+          0.07603299999937008,
+          0.04482400000051712,
+          0.4595930000004955,
+          0.05656100000032893,
+          0.06923899999947025,
+          0.05320600000050035,
+          0.1654260000004797,
+          0.03943299999991723,
+          0.03635599999961414,
+          0.028695999999399646,
+          0.18859900000006746,
+          0.035213000000112515,
+          0.030217999999877065,
+          0.02739000000019587,
+          0.1460240000005797,
+          0.03252599999996164,
+          0.026393999999527296,
+          0.024034000000028755,
+          0.14755400000012742,
+          0.04152799999974377
+        ],
+        "meanMs": 0.08644235000001572,
+        "medianMs": 0.04482400000051712,
+        "p95Ms": 0.4595930000004955,
+        "maxMs": 0.4595930000004955
+      },
+      "activeSamples": [
+        {
+          "step": 1,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 8375
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 8375
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 2,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 8375
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 8375
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 3,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 8375
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "eventCount": 32
+        },
+        {
+          "step": 4,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 5,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 6,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 7,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "eventCount": 32
+        },
+        {
+          "step": 8,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 9,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 10,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 11,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "eventCount": 32
+        },
+        {
+          "step": 12,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 13,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 14,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 15,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "eventCount": 32
+        },
+        {
+          "step": 16,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 17,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 18,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 19,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 192,
+            "physicalEdges": 160,
+            "knownRoadCells": 192,
+            "jsonBytes": 12182
+          },
+          "eventCount": 32
+        },
+        {
+          "step": 20,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 192,
+            "physicalEdges": 160,
+            "knownRoadCells": 192,
+            "jsonBytes": 12182
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 192,
+            "physicalEdges": 160,
+            "knownRoadCells": 192,
+            "jsonBytes": 12182
+          },
+          "eventCount": 0
+        }
+      ],
+      "final": {
+        "projects": 32,
+        "completedProjects": 0,
+        "completedSegments": 161,
+        "workProgress": 63,
+        "totalPlannedSegments": 384,
+        "maxPathCells": 13,
+        "roadCells": 193,
+        "physicalEdges": 161,
+        "knownRoadCells": 193,
+        "jsonBytes": 12202
+      },
+      "finalHash": "6399fd71",
+      "finalSaveBytes": 2314527,
+      "finalSaveSha256": "ed09711d0365fa48b9e877be4865caf7a5f8bfaa509dcb9ecaa9b9397b4656f8",
+      "phaseEventSha256": "f73879c95a23a259bc79507aabefecc655021e14b73cc236bc2eda1f732ab45b",
+      "paidContinuation": {
+        "command": {
+          "type": "accelerateRoad",
+          "factionId": "faction.ashen_compact",
+          "settlementId": "settlement.98"
+        },
+        "quotedCost": 21,
+        "chargedCost": 21
+      },
+      "verification": {
+        "deterministicSurveySamples": 23,
+        "mirroredActivePhases": 20,
+        "strictMidpoint": true,
+        "strictFinal": true,
+        "publicContinuationOrders": 2,
+        "rejectedCommands": 0
+      },
+      "bounds": {
+        "sourceLimits": {
+          "candidateEndpointsPerAttempt": 8,
+          "visitedNodesPerAttempt": 4096,
+          "pathCells": 129,
+          "surveyAttemptsPerRealmPerCall": 1
+        },
+        "measuredMaxPathCells": 13,
+        "note": "Source limits are inspected production constants, not intrusive measured node counters. This nearby-target case does not establish saturated4096-node search throughput."
+      }
+    },
+    {
+      "size": "legendary",
+      "factionCount": 32,
+      "synthetic": true,
+      "cells": 307200,
+      "towns": 64,
+      "armies": 32,
+      "exploredCells": 4064,
+      "generation": {
+        "version": 4,
+        "authored": "All-hill uniform-biome world, same local12-segment corridors at both sizes; one independent scout at each corridor midpoint. Initial extra caravans are authored; both towns per realm use ordinary found commands. No whole-map reveal."
+      },
+      "baselineHash": "16842b85",
+      "baselineSaveBytes": 3515981,
+      "planned": {
+        "projects": 32,
+        "completedProjects": 0,
+        "completedSegments": 0,
+        "workProgress": 32,
+        "totalPlannedSegments": 384,
+        "maxPathCells": 13,
+        "roadCells": 0,
+        "physicalEdges": 0,
+        "knownRoadCells": 0,
+        "jsonBytes": 8375
+      },
+      "surveyAndFirstWork": {
+        "samplesMs": [
+          1.5472549999994953,
+          1.2969510000002629,
+          1.2357200000005832,
+          1.2231629999996585,
+          1.185034000000087,
+          1.2433519999995042,
+          1.1913359999998647,
+          1.301886000000195,
+          7.993314999999711,
+          1.19685600000048,
+          1.21349999999984,
+          1.2927039999995031,
+          1.22244899999896,
+          1.1733619999995426,
+          1.2128240000001824,
+          1.1941970000007132,
+          1.1849529999999504,
+          1.2145630000013625,
+          1.2063760000000912,
+          2.2704979999998613
+        ],
+        "meanMs": 1.6300146999999925,
+        "medianMs": 1.22244899999896,
+        "p95Ms": 7.993314999999711,
+        "maxMs": 7.993314999999711
+      },
+      "allFactionRoadQuotes": {
+        "samplesMs": [
+          0.12249400000018795,
+          0.12393300000076124,
+          0.1187870000003386,
+          0.10443100000065897,
+          0.1193860000003042,
+          0.1046329999999216,
+          0.10465800000019954,
+          0.11141899999984162,
+          0.10359100000005128,
+          0.1082829999995738,
+          0.10830100000021048,
+          0.10761400000046706,
+          0.10698600000068836,
+          0.10284099999989849,
+          0.11428200000045763,
+          0.10760200000004261,
+          0.12829700000111188,
+          0.11385199999858742,
+          0.10867900000084774,
+          0.18973799999912444
+        ],
+        "meanMs": 0.11549035000016375,
+        "medianMs": 0.10867900000084774,
+        "p95Ms": 0.18973799999912444,
+        "maxMs": 0.18973799999912444
+      },
+      "activePhase": {
+        "samplesMs": [
+          0.06001300000025367,
+          0.03718699999990349,
+          0.18448799999896437,
+          0.03741900000022724,
+          0.03465899999901012,
+          0.035760999999183696,
+          0.15838000000076136,
+          0.035969000000477536,
+          0.03390399999989313,
+          0.03387499999917054,
+          0.19627399999990303,
+          0.03928799999994226,
+          0.035057000000961125,
+          0.033665999999357155,
+          0.17086399999971036,
+          0.04194100000131584,
+          0.036992999999711174,
+          0.036733999999341904,
+          0.16364900000007765,
+          0.03914999999869906
+        ],
+        "meanMs": 0.07226354999984323,
+        "medianMs": 0.03741900000022724,
+        "p95Ms": 0.19627399999990303,
+        "maxMs": 0.19627399999990303
+      },
+      "activeSamples": [
+        {
+          "step": 1,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 8375
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 8375
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 2,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 8375
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 8375
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 3,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 8375
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "eventCount": 32
+        },
+        {
+          "step": 4,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 5,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 6,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 7,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 32,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 64,
+            "physicalEdges": 32,
+            "knownRoadCells": 64,
+            "jsonBytes": 9622
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "eventCount": 32
+        },
+        {
+          "step": 8,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 9,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 10,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 11,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 64,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 96,
+            "physicalEdges": 64,
+            "knownRoadCells": 96,
+            "jsonBytes": 10262
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "eventCount": 32
+        },
+        {
+          "step": 12,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 13,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 14,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 15,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 96,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 128,
+            "physicalEdges": 96,
+            "knownRoadCells": 128,
+            "jsonBytes": 10902
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "eventCount": 32
+        },
+        {
+          "step": 16,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 17,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 18,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 64,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 19,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 128,
+            "workProgress": 96,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 128,
+            "knownRoadCells": 160,
+            "jsonBytes": 11542
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 192,
+            "physicalEdges": 160,
+            "knownRoadCells": 192,
+            "jsonBytes": 12182
+          },
+          "eventCount": 32
+        },
+        {
+          "step": 20,
+          "activeProjects": 32,
+          "before": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 0,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 192,
+            "physicalEdges": 160,
+            "knownRoadCells": 192,
+            "jsonBytes": 12182
+          },
+          "after": {
+            "projects": 32,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 32,
+            "totalPlannedSegments": 384,
+            "maxPathCells": 13,
+            "roadCells": 192,
+            "physicalEdges": 160,
+            "knownRoadCells": 192,
+            "jsonBytes": 12182
+          },
+          "eventCount": 0
+        }
+      ],
+      "final": {
+        "projects": 32,
+        "completedProjects": 0,
+        "completedSegments": 161,
+        "workProgress": 63,
+        "totalPlannedSegments": 384,
+        "maxPathCells": 13,
+        "roadCells": 193,
+        "physicalEdges": 161,
+        "knownRoadCells": 193,
+        "jsonBytes": 12202
+      },
+      "finalHash": "502727bc",
+      "finalSaveBytes": 3531046,
+      "finalSaveSha256": "7fe4f443a6340c7b30a753b684ac0764821293a19713fa70789096737a09ca9a",
+      "phaseEventSha256": "c6682cf0bf103ba43c60514a29188eea0b4258a57fce269aa1bfbb675be10695",
+      "paidContinuation": {
+        "command": {
+          "type": "accelerateRoad",
+          "factionId": "faction.ashen_compact",
+          "settlementId": "settlement.98"
+        },
+        "quotedCost": 21,
+        "chargedCost": 21
+      },
+      "verification": {
+        "deterministicSurveySamples": 23,
+        "mirroredActivePhases": 20,
+        "strictMidpoint": true,
+        "strictFinal": true,
+        "publicContinuationOrders": 2,
+        "rejectedCommands": 0
+      },
+      "bounds": {
+        "sourceLimits": {
+          "candidateEndpointsPerAttempt": 8,
+          "visitedNodesPerAttempt": 4096,
+          "pathCells": 129,
+          "surveyAttemptsPerRealmPerCall": 1
+        },
+        "measuredMaxPathCells": 13,
+        "note": "Source limits are inspected production constants, not intrusive measured node counters. This nearby-target case does not establish saturated4096-node search throughput."
+      }
+    },
+    {
+      "size": "legendary",
+      "factionCount": 40,
+      "synthetic": true,
+      "cells": 307200,
+      "towns": 80,
+      "armies": 40,
+      "exploredCells": 5080,
+      "generation": {
+        "version": 4,
+        "authored": "All-hill uniform-biome world, same local12-segment corridors at both sizes; one independent scout at each corridor midpoint. Initial extra caravans are authored; both towns per realm use ordinary found commands. No whole-map reveal."
+      },
+      "baselineHash": "e992e487",
+      "baselineSaveBytes": 3550238,
+      "planned": {
+        "projects": 40,
+        "completedProjects": 0,
+        "completedSegments": 0,
+        "workProgress": 40,
+        "totalPlannedSegments": 480,
+        "maxPathCells": 13,
+        "roadCells": 0,
+        "physicalEdges": 0,
+        "knownRoadCells": 0,
+        "jsonBytes": 10479
+      },
+      "surveyAndFirstWork": {
+        "samplesMs": [
+          1.6453270000001794,
+          1.6634439999997994,
+          1.6368139999995037,
+          1.882701000000452,
+          1.6682070000006206,
+          1.5733220000001893,
+          1.617999999998574,
+          1.6057999999993626,
+          1.8205049999996845,
+          1.8763579999995272,
+          1.6261350000004313,
+          1.681869000000006,
+          1.6056979999993928,
+          7.934445000002597,
+          1.6261500000000524,
+          1.6355980000007548,
+          1.6710300000013376,
+          1.6403239999999641,
+          1.6087950000001001,
+          1.6121300000013434
+        ],
+        "meanMs": 1.9816326000001936,
+        "medianMs": 1.6403239999999641,
+        "p95Ms": 7.934445000002597,
+        "maxMs": 7.934445000002597
+      },
+      "allFactionRoadQuotes": {
+        "samplesMs": [
+          0.16344799999933457,
+          0.1840250000004744,
+          0.1628099999998085,
+          0.2053830000004382,
+          0.16998299999977462,
+          0.15227599999889208,
+          0.1510550000002695,
+          0.15384999999878346,
+          0.16343400000005204,
+          0.21075199999904726,
+          0.16561600000022736,
+          0.16697400000157359,
+          0.1628180000006978,
+          0.1587150000013935,
+          0.16612200000236044,
+          0.1752299999971001,
+          0.16694799999822862,
+          0.16489699999874574,
+          0.16183000000091852,
+          0.16868799999792827
+        ],
+        "meanMs": 0.16874269999980243,
+        "medianMs": 0.16561600000022736,
+        "p95Ms": 0.21075199999904726,
+        "maxMs": 0.21075199999904726
+      },
+      "activePhase": {
+        "samplesMs": [
+          0.0730150000017602,
+          0.03903300000092713,
+          0.2594199999984994,
+          0.038263000002189074,
+          0.03196899999966263,
+          0.030312999999296153,
+          0.2068299999991723,
+          0.03975999999966007,
+          0.03211899999951129,
+          0.030355999999301275,
+          0.24413400000048568,
+          0.04074899999977788,
+          0.03704300000026706,
+          0.03282300000137184,
+          0.2038330000032147,
+          0.041736999999557156,
+          0.034543999998277286,
+          0.03480399999898509,
+          0.22454699999798322,
+          0.04270899999755784
+        ],
+        "meanMs": 0.08590004999987286,
+        "medianMs": 0.03975999999966007,
+        "p95Ms": 0.2594199999984994,
+        "maxMs": 0.2594199999984994
+      },
+      "activeSamples": [
+        {
+          "step": 1,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 40,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 10479
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 80,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 10479
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 2,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 80,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 10479
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 120,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 10479
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 3,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 0,
+            "workProgress": 120,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 0,
+            "physicalEdges": 0,
+            "knownRoadCells": 0,
+            "jsonBytes": 10479
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 40,
+            "workProgress": 0,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 80,
+            "physicalEdges": 40,
+            "knownRoadCells": 80,
+            "jsonBytes": 12038
+          },
+          "eventCount": 40
+        },
+        {
+          "step": 4,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 40,
+            "workProgress": 0,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 80,
+            "physicalEdges": 40,
+            "knownRoadCells": 80,
+            "jsonBytes": 12038
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 40,
+            "workProgress": 40,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 80,
+            "physicalEdges": 40,
+            "knownRoadCells": 80,
+            "jsonBytes": 12038
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 5,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 40,
+            "workProgress": 40,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 80,
+            "physicalEdges": 40,
+            "knownRoadCells": 80,
+            "jsonBytes": 12038
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 40,
+            "workProgress": 80,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 80,
+            "physicalEdges": 40,
+            "knownRoadCells": 80,
+            "jsonBytes": 12038
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 6,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 40,
+            "workProgress": 80,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 80,
+            "physicalEdges": 40,
+            "knownRoadCells": 80,
+            "jsonBytes": 12038
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 40,
+            "workProgress": 120,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 80,
+            "physicalEdges": 40,
+            "knownRoadCells": 80,
+            "jsonBytes": 12038
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 7,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 40,
+            "workProgress": 120,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 80,
+            "physicalEdges": 40,
+            "knownRoadCells": 80,
+            "jsonBytes": 12038
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 80,
+            "workProgress": 0,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 120,
+            "physicalEdges": 80,
+            "knownRoadCells": 120,
+            "jsonBytes": 12838
+          },
+          "eventCount": 40
+        },
+        {
+          "step": 8,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 80,
+            "workProgress": 0,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 120,
+            "physicalEdges": 80,
+            "knownRoadCells": 120,
+            "jsonBytes": 12838
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 80,
+            "workProgress": 40,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 120,
+            "physicalEdges": 80,
+            "knownRoadCells": 120,
+            "jsonBytes": 12838
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 9,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 80,
+            "workProgress": 40,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 120,
+            "physicalEdges": 80,
+            "knownRoadCells": 120,
+            "jsonBytes": 12838
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 80,
+            "workProgress": 80,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 120,
+            "physicalEdges": 80,
+            "knownRoadCells": 120,
+            "jsonBytes": 12838
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 10,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 80,
+            "workProgress": 80,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 120,
+            "physicalEdges": 80,
+            "knownRoadCells": 120,
+            "jsonBytes": 12838
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 80,
+            "workProgress": 120,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 120,
+            "physicalEdges": 80,
+            "knownRoadCells": 120,
+            "jsonBytes": 12838
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 11,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 80,
+            "workProgress": 120,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 120,
+            "physicalEdges": 80,
+            "knownRoadCells": 120,
+            "jsonBytes": 12838
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 120,
+            "workProgress": 0,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 120,
+            "knownRoadCells": 160,
+            "jsonBytes": 13638
+          },
+          "eventCount": 40
+        },
+        {
+          "step": 12,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 120,
+            "workProgress": 0,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 120,
+            "knownRoadCells": 160,
+            "jsonBytes": 13638
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 120,
+            "workProgress": 40,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 120,
+            "knownRoadCells": 160,
+            "jsonBytes": 13638
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 13,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 120,
+            "workProgress": 40,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 120,
+            "knownRoadCells": 160,
+            "jsonBytes": 13638
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 120,
+            "workProgress": 80,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 120,
+            "knownRoadCells": 160,
+            "jsonBytes": 13638
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 14,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 120,
+            "workProgress": 80,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 120,
+            "knownRoadCells": 160,
+            "jsonBytes": 13638
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 120,
+            "workProgress": 120,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 120,
+            "knownRoadCells": 160,
+            "jsonBytes": 13638
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 15,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 120,
+            "workProgress": 120,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 160,
+            "physicalEdges": 120,
+            "knownRoadCells": 160,
+            "jsonBytes": 13638
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 0,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 200,
+            "physicalEdges": 160,
+            "knownRoadCells": 200,
+            "jsonBytes": 14438
+          },
+          "eventCount": 40
+        },
+        {
+          "step": 16,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 0,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 200,
+            "physicalEdges": 160,
+            "knownRoadCells": 200,
+            "jsonBytes": 14438
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 40,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 200,
+            "physicalEdges": 160,
+            "knownRoadCells": 200,
+            "jsonBytes": 14438
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 17,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 40,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 200,
+            "physicalEdges": 160,
+            "knownRoadCells": 200,
+            "jsonBytes": 14438
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 80,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 200,
+            "physicalEdges": 160,
+            "knownRoadCells": 200,
+            "jsonBytes": 14438
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 18,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 80,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 200,
+            "physicalEdges": 160,
+            "knownRoadCells": 200,
+            "jsonBytes": 14438
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 120,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 200,
+            "physicalEdges": 160,
+            "knownRoadCells": 200,
+            "jsonBytes": 14438
+          },
+          "eventCount": 0
+        },
+        {
+          "step": 19,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 160,
+            "workProgress": 120,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 200,
+            "physicalEdges": 160,
+            "knownRoadCells": 200,
+            "jsonBytes": 14438
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 200,
+            "workProgress": 0,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 240,
+            "physicalEdges": 200,
+            "knownRoadCells": 240,
+            "jsonBytes": 15238
+          },
+          "eventCount": 40
+        },
+        {
+          "step": 20,
+          "activeProjects": 40,
+          "before": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 200,
+            "workProgress": 0,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 240,
+            "physicalEdges": 200,
+            "knownRoadCells": 240,
+            "jsonBytes": 15238
+          },
+          "after": {
+            "projects": 40,
+            "completedProjects": 0,
+            "completedSegments": 200,
+            "workProgress": 40,
+            "totalPlannedSegments": 480,
+            "maxPathCells": 13,
+            "roadCells": 240,
+            "physicalEdges": 200,
+            "knownRoadCells": 240,
+            "jsonBytes": 15238
+          },
+          "eventCount": 0
+        }
+      ],
+      "final": {
+        "projects": 40,
+        "completedProjects": 0,
+        "completedSegments": 201,
+        "workProgress": 79,
+        "totalPlannedSegments": 480,
+        "maxPathCells": 13,
+        "roadCells": 241,
+        "physicalEdges": 201,
+        "knownRoadCells": 241,
+        "jsonBytes": 15258
+      },
+      "finalHash": "5fed9789",
+      "finalSaveBytes": 3568705,
+      "finalSaveSha256": "8ede8b6d773358637e8683d448716fd35f3f66f021795eea4ac0cc2bf7369050",
+      "phaseEventSha256": "825c5f85e45d851feeb9bd5cb948e7ed0b06cf0fea86f076d23db462fa68c03a",
+      "paidContinuation": {
+        "command": {
+          "type": "accelerateRoad",
+          "factionId": "faction.ashen_compact",
+          "settlementId": "settlement.122"
+        },
+        "quotedCost": 21,
+        "chargedCost": 21
+      },
+      "verification": {
+        "deterministicSurveySamples": 23,
+        "mirroredActivePhases": 20,
+        "strictMidpoint": true,
+        "strictFinal": true,
+        "publicContinuationOrders": 2,
+        "rejectedCommands": 0
+      },
+      "bounds": {
+        "sourceLimits": {
+          "candidateEndpointsPerAttempt": 8,
+          "visitedNodesPerAttempt": 4096,
+          "pathCells": 129,
+          "surveyAttemptsPerRealmPerCall": 1
+        },
+        "measuredMaxPathCells": 13,
+        "note": "Source limits are inspected production constants, not intrusive measured node counters. This nearby-target case does not establish saturated4096-node search throughput."
+      }
+    }
+  ],
+  "finalProcessMemory": {
+    "rss": 388816896,
+    "heapTotal": 247189504,
+    "heapUsed": 183915512,
+    "external": 11381868,
+    "arrayBuffers": 8872447
+  }
+}

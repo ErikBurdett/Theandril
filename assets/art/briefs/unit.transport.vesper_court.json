@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.vesper_court",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.transport for Theandril, Vesper Court.\nSubject: ONE broad capacious wooden transport cog: rounded deep cargo hull, one square sail, low enclosed passenger shelter, neatly strapped crates, minimal defenses. Chunky broad useful deck distinguishes troop carrier from galley and warship. Entire ship visible; no people large enough to compete.\nCulture-specific identity: Dark timber hull, enclosed shuttered charcoal cabins, muted burgundy/dusty-plum sails, tarnished silver-edged stern gallery. Keep role silhouette readable; not a bat ship.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "unit.transport.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.transport.vesper_court/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "fb6f70151750d333e897128490b3cdf2fb48924bfca867032325b86788950559",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:56:40Z",
+  "referenceHashes": [
+    "1d0d35c5a9d2a8ad650f5a3cb893828b1af061a1f76aaa35ce8da2034b1cd719",
+    "ae77676056b37f15694a15ac9f00db47f6163c123a6331cb68f08b6de681be14"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "72a89b2231110bacb8e4c1c55cb69e0fa1f15cda1696b38357edef3cfe8db258",
+      "inputHash": "1d0d35c5a9d2a8ad650f5a3cb893828b1af061a1f76aaa35ce8da2034b1cd719",
+      "outputHash": "4c794894a3e80bc1180e1e5a1b77e964e023ef9a368ba53c262f297488ca8ca8"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

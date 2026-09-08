@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.scout.red_sluice",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.scout.red_sluice"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Red Sluice Directorate, role unit.scout.\nSUBJECT: ONE adult light scout, readable shortbow held down, hood or culturally specific head shape, small travel pack, grounded cautious stance. No long trailing prop. Native64x64 maximum body48px, pivot32,56.\nCULTURE: Brick red, dull celadon cloth, tarred oak, black chain and weathered bronze. Broad rectangular rain shields, hooded crew coats, horizontal bar motifs. Low sluice-gate inspired maintenance halls, wheel-braced gantries, thick brick channelside courtyards; no surrounding waterrectangle or actualtile.\nPEOPLE if character or rider: Human waterworks crew households and disciplined municipal escorts.\nHERALDRY if UI or flag: A barred spillway with three broad vertical openings and one horizontal lifting bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.scout.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.scout.red_sluice/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "92af1a5bdc5fa575a64dd35b2218dd3416cb91aaa6275b4adcf24eed804976fe",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/unit.scout.red_sluice-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/unit.scout.red_sluice-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:10:25Z",
+  "referenceHashes": [
+    "605b7cb22123dcb70d5c85f32cb3015709ac3221ea512390f8ed4cb43ebe4d2d",
+    "f0c1ad492b61c44d914e12f7628ad5cbd849ff19000540fbe2cf2d62bd122b3d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "bc367f89b2bb5f37f020dfa5eb74eb985308dad6794dcb6a6443acd03c38c2cf",
+      "inputHash": "605b7cb22123dcb70d5c85f32cb3015709ac3221ea512390f8ed4cb43ebe4d2d",
+      "outputHash": "627ff8f2e83fa14751502d794f7ddfb8b310072b8885d70d290a5d917e8a73ce"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

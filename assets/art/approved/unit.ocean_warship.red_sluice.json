@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.red_sluice",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.red_sluice"
+  ],
+  "prompt": "Create one ORIGINAL Theandril Red Sluice Directorate deep ocean warship pixel sprite, facing southeast in isometric strategy view. ONE complete seaworthy wooden sailing vessel with two stout masts, broad deep hull, raised stern quarterdeck, barred shields hung on sides, muted brick-red and dull celadon sails with a simple lifting-bar/three-spillway mark. Weathered tarred oak, bronze fasteners, black chains, municipal human crew; small OPEN-DECK WOODEN BALLISTA, never cannons/firearms/gunports. No magical powers or modern engines. Very IMPORTANT composition: ship occupies only the central60percent of the image, leaving at least20percent completely transparent empty space on EACH of all four sides; topmast finial and full long bow and stern must be entirely inside with that padding. Do NOT crop mast tips or hull. Broad stepped coarse pixel clusters designed for eventual96x96 native sprite, matte weathered dark fantasy aesthetic, soft upper-left flat pixel lighting, no shiny toy rendering. Real zero-alpha PNG background everywhere outside hull/rigging/crew. No background glow, haze, cast shadow, sea, scenery, tile, text, labels, sheet or multiple ships. Keep all fine ropes sparse; primary sail and hull silhouette must remain readable at96x96.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.red_sluice/7c6c2a0d9634b0e5cf5230807da7c80693bbfa6f1bf1b9d2e5179d0c95c64156/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e85c8ec28b5a5c142327346e7fa24d8b0ec37f0cf52ec4578366952ee2dec0a8",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.red_sluice-v2.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.red_sluice-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:58:51Z",
+  "referenceHashes": [
+    "6dc397f4850945fa1a24bde64dbc65ce9ad6da677768320e44af57e61bdf24ac",
+    "cef79d8524cc0a78d93837a569607197b766d4e3f328e42b742b36d156acfdbc"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "f2e53c6ab7c1bf3637c1a6ab587403a955de1c16681a2a88e327d389ca0ecd0e",
+      "inputHash": "6dc397f4850945fa1a24bde64dbc65ce9ad6da677768320e44af57e61bdf24ac",
+      "outputHash": "58e491bd2295d913e31bfee169163479aa9faa03d2b3195cbd92acd0446e2305"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "58e491bd2295d913e31bfee169163479aa9faa03d2b3195cbd92acd0446e2305",
+      "outputHash": "0c7e3e0ed9b5c198b1a549435647549e48d12e1ed369fce06d2192b56b216b2f"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0c7e3e0ed9b5c198b1a549435647549e48d12e1ed369fce06d2192b56b216b2f",
+      "outputHash": "117e161a7dde6cdf39e07749cfec23289be56b9820183a8754a05ed945bdff3f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "66ab41ce0bd113ffc00c6ceaff2d4e1f92fdd24978221f65e8b90581939e1c36",
+      "outputHash": "94ebea5ec2eaee542b7dd5b619ba5d3b99aa93574052d8ae4449fe15511f0c90"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "15b18b7a75f89228bdf7987a14c01a49fe170c3d4c8879933beefa19dee01841",
+      "outputHash": "0d20a3c23c93a926e6703ea6f9ea43a16a37f3c839abb5b44c9f7248148fc1e6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "c8f92a7239719d204eef8de372c68571ebcefb3665366eb1956aaf588af7c1bf",
+      "outputHash": "0ede7b3e0f7d1b2fbf6ea87ae908206e92105ec58ebd8a56a3993bbdd20f1955"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.red_sluice.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:04:52.242Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Selectedv2 regenerated full vessel after v1 source clipping rejection: two mast tips, bow and stern now entirely contained; deep hull and open-deck ballista without gunports. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 7c6c2a0d9634b0e5cf5230807da7c80693bbfa6f1bf1b9d2e5179d0c95c64156; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/48ca0aa3b157cf057acbe4d764306516084c1e80076d003669bb9a919221dab3.png"
+    ],
+    "inputHash": "96e3262b53ae8da2341eee7daccea12f24f6d1a55d621a6b2934a84e203bfed8"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

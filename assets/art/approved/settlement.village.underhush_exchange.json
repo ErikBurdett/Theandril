@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.underhush_exchange",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.village for Theandril, Underhush Exchange.\nSubject: ONE small complete inhabited village cluster of three modest buildings around a little open working court. Clear low simple roofs, one small store and a practical low enclosure. This is the smallest settlement stage, no great hall, no high tower, no tall flag.\nCulture-specific identity: Low keyhole arches, nested vent stacks, broad squat dwelling halls and covered exchange courts. Clay-brown stone, pewter braces, pale-lime plaster, tiny amber markers; not Covenant square buttresses or Morrow living roofs.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "settlement.village.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.village.underhush_exchange/cec08e1eea659d4ed44a8ed0e4be5b882b95e26d3cadf67b3dbdad6ea53a2fb0/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b673747cb38a9c76b577a0e9abf5ea4b69a6760d6db0df6b413b41576c061295",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.village.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.village.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:27:32Z",
+  "referenceHashes": [
+    "f3ceeb57636768c0d3f2768a1590a4b67342765c1b3e42008ad02a52b2f3d766",
+    "fd9b93a9c75017bbdbac8d2204a9a4189d8a8983f5073dfc3ccb949c17bcba64"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "5c8f9d00f3d1733818b42b93b595c9215003b49fc807136de9511a70526ba472",
+      "inputHash": "f3ceeb57636768c0d3f2768a1590a4b67342765c1b3e42008ad02a52b2f3d766",
+      "outputHash": "a5b7a45d12a4f5b34b6b1fd37a36a02da35392c9c4e9b9bf9f1f42820526c780"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "a5b7a45d12a4f5b34b6b1fd37a36a02da35392c9c4e9b9bf9f1f42820526c780",
+      "outputHash": "db1dac83e6d58686908ffef625d053a74742d836eb55415cc1e32d1569df6211"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "db1dac83e6d58686908ffef625d053a74742d836eb55415cc1e32d1569df6211",
+      "outputHash": "4873653b09086989001b0b01611aa60f9947d38992fdcb87d43640194c882934"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "1558f6741ef6047700b95707dbad8fe3e9911483cb5ac225f68c17604e85a22c",
+      "outputHash": "bead274fbb3ccf57898810602f03c8cfc7d2a6c59c136a24ab661b242a2a0c98"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "105dc007c6cbc48740175e5059705aaa68791c4131f9ce1f811e51cd36416f90",
+      "outputHash": "a18850995efa2534fa2fbec4d095c50b88c45e47adaf7edee283061cfb426940"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "f2b80301c543e7041547e429afe6e3baa3bc31d21659625f88973fbb292eb652",
+      "outputHash": "54ef5d29dc76a1742886d2ee7b4b078bd23ffcc3a57b243a35a5f39025fd9163"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.village.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:31.448Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Three low keyhole-arched work halls with generous horizontal forms, contained yard and amber route markers. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate cec08e1eea659d4ed44a8ed0e4be5b882b95e26d3cadf67b3dbdad6ea53a2fb0; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/bb353728a8ebaba60889e87c496f4c904d3f3831820565d2cdb634a2d1db3460.png"
+    ],
+    "inputHash": "7755d027759e8ceb8044e0b4f08b6e668df1c6112968c40bc99ff45660d39092"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

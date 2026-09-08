@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.battle_projectile",
+  "version": 1,
+  "createdAt": "2026-09-07T21:05:31.607765+00:00",
+  "blenderVersion": "5.2.1 LTS",
+  "paletteHash": "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce",
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "pivot": {
+    "x": 32,
+    "y": 32
+  },
+  "durationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "clip": {
+    "state": "attack",
+    "direction": "se",
+    "loop": false
+  },
+  "frames": [
+    {
+      "path": "native/frame-000.png",
+      "rawPath": "raw/frame-000.png",
+      "index": 0,
+      "durationMs": 100,
+      "sha256": "7e1802405dce5fd287d012ffba17283abcc86339afde31368cc2ff867caefb31"
+    },
+    {
+      "path": "native/frame-001.png",
+      "rawPath": "raw/frame-001.png",
+      "index": 1,
+      "durationMs": 100,
+      "sha256": "4d9c144a2645336573187f2a3b2d39de15745ff3fc2a4af9de53673d0f2a611d"
+    },
+    {
+      "path": "native/frame-002.png",
+      "rawPath": "raw/frame-002.png",
+      "index": 2,
+      "durationMs": 100,
+      "sha256": "84bcd56b3057a037f32467b048bbd2e396e2c6e868ff3e49eb4541562aaea76e"
+    },
+    {
+      "path": "native/frame-003.png",
+      "rawPath": "raw/frame-003.png",
+      "index": 3,
+      "durationMs": 100,
+      "sha256": "a258d8176471cc7f163292fc31a07a3abb8a2f056aa62679fd416958dd96e282"
+    },
+    {
+      "path": "native/frame-004.png",
+      "rawPath": "raw/frame-004.png",
+      "index": 4,
+      "durationMs": 100,
+      "sha256": "6dbb865ab5a3b7cdc6fbff5117d47cc62153254f5de526a914745e28b6033b9c"
+    },
+    {
+      "path": "native/frame-005.png",
+      "rawPath": "raw/frame-005.png",
+      "index": 5,
+      "durationMs": 100,
+      "sha256": "b968d89a5418fb7d80275efd402089cb9d23465432f5710668a02b177c9a2a47"
+    },
+    {
+      "path": "native/frame-006.png",
+      "rawPath": "raw/frame-006.png",
+      "index": 6,
+      "durationMs": 100,
+      "sha256": "dffdbb192e4a34680cc4113db2f3b87bfe9b54850bb5e45185d73142a081c5ec"
+    },
+    {
+      "path": "native/frame-007.png",
+      "rawPath": "raw/frame-007.png",
+      "index": 7,
+      "durationMs": 100,
+      "sha256": "09285c2dd641fa9cb669c46b67c70ad510d49986b6503d9a09456bc8e5dcf5d1"
+    }
+  ],
+  "files": [
+    {
+      "path": "authored-profile.json",
+      "sha256": "0b53529605a39a77a13a68e883ad065009bd67905ec271379017dff4d47df42c",
+      "bytes": 1888
+    },
+    {
+      "path": "battle_authoring.py",
+      "sha256": "ac56a94b78385b0fdb65487b2ed9816ba58ede65b2f0620187651c0b159056b5",
+      "bytes": 2410
+    },
+    {
+      "path": "build.log",
+      "sha256": "c1cc7c17bfedf676c5aaeae11e4c0a427c1614e5df9f08e9ffff898eb502b93d",
+      "bytes": 1523
+    },
+    {
+      "path": "build.py",
+      "sha256": "791c46e67feec22abf0ef75db636aa77919bcfdcebcda534657c3261883b7bbd",
+      "bytes": 12527
+    },
+    {
+      "path": "dependencies/factory/__init__.py",
+      "sha256": "e7bca005fcf3cc07d21422fa977c422b49243aae2564c4a928a6fdcdc11023cd",
+      "bytes": 83
+    },
+    {
+      "path": "dependencies/factory/core.py",
+      "sha256": "4e741a008c9ae4e210a11103070480d014539927ee6f22b2e1d6e687bb268eb3",
+      "bytes": 21322
+    },
+    {
+      "path": "dependencies/factory/png.py",
+      "sha256": "5826f0e4a145ba67255c665f27338781e58779c979622371e3f3a9bc5192072a",
+      "bytes": 5983
+    },
+    {
+      "path": "dependencies/recipes/common.py",
+      "sha256": "f27e6864caf108160b96946b4df785fe3cb043c74ae5cdaea3ec194f1aef11c2",
+      "bytes": 11476
+    },
+    {
+      "path": "driver.py",
+      "sha256": "c31f3d453eace30d4577bf27dc2642dfacdb61a792c93d9debb2f2757aadb6c8",
+      "bytes": 5846
+    },
+    {
+      "path": "job.json",
+      "sha256": "09e110000644c1761a744d5d3d79fef4c621aa90bc4e661b58813f23b05c98e3",
+      "bytes": 3477
+    },
+    {
+      "path": "native/frame-000.png",
+      "sha256": "7e1802405dce5fd287d012ffba17283abcc86339afde31368cc2ff867caefb31",
+      "bytes": 147
+    },
+    {
+      "path": "native/frame-001.png",
+      "sha256": "4d9c144a2645336573187f2a3b2d39de15745ff3fc2a4af9de53673d0f2a611d",
+      "bytes": 147
+    },
+    {
+      "path": "native/frame-002.png",
+      "sha256": "84bcd56b3057a037f32467b048bbd2e396e2c6e868ff3e49eb4541562aaea76e",
+      "bytes": 169
+    },
+    {
+      "path": "native/frame-003.png",
+      "sha256": "a258d8176471cc7f163292fc31a07a3abb8a2f056aa62679fd416958dd96e282",
+      "bytes": 208
+    },
+    {
+      "path": "native/frame-004.png",
+      "sha256": "6dbb865ab5a3b7cdc6fbff5117d47cc62153254f5de526a914745e28b6033b9c",
+      "bytes": 180
+    },
+    {
+      "path": "native/frame-005.png",
+      "sha256": "b968d89a5418fb7d80275efd402089cb9d23465432f5710668a02b177c9a2a47",
+      "bytes": 158
+    },
+    {
+      "path": "native/frame-006.png",
+      "sha256": "dffdbb192e4a34680cc4113db2f3b87bfe9b54850bb5e45185d73142a081c5ec",
+      "bytes": 156
+    },
+    {
+      "path": "native/frame-007.png",
+      "sha256": "09285c2dd641fa9cb669c46b67c70ad510d49986b6503d9a09456bc8e5dcf5d1",
+      "bytes": 122
+    },
+    {
+      "path": "palette.json",
+      "sha256": "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce",
+      "bytes": 2478
+    },
+    {
+      "path": "preview.html",
+      "sha256": "9158a87e98fb2db431d7af6e7bdb5d7f8cd0e020e00c194e2b0261efeef75d3b",
+      "bytes": 1357
+    },
+    {
+      "path": "profile.json",
+      "sha256": "a28b0ec933c9d10477af25febdb9fc46b6d162e20b5de17e3f495349bf967058",
+      "bytes": 3086
+    },
+    {
+      "path": "raw/frame-000.png",
+      "sha256": "9aaee35a5bf762e28b67507e14c8000b8c5ba996c304c25160193c2aba39bf1a",
+      "bytes": 16485
+    },
+    {
+      "path": "raw/frame-001.png",
+      "sha256": "89c11c4f14a7546c849259e4834e8823118652ba9c7670241efbfa888351bc8c",
+      "bytes": 16576
+    },
+    {
+      "path": "raw/frame-002.png",
+      "sha256": "c3ea3a398450834d9314e6fab5c9be42036c746067dd40f70ced8dae345de7cb",
+      "bytes": 17126
+    },
+    {
+      "path": "raw/frame-003.png",
+      "sha256": "3d810cbc4486fd4b1faf9a61fb3064522d2386f75a22e033936b90e3f4b69524",
+      "bytes": 18037
+    },
+    {
+      "path": "raw/frame-004.png",
+      "sha256": "6d35f2d8d6269fade5b8f75bb428e493166c4721ae485fbfef71f076fe9ba128",
+      "bytes": 17983
+    },
+    {
+      "path": "raw/frame-005.png",
+      "sha256": "148ea0072ce1af94f034f9737847cd9701b97b7aab01fde8c31d6473bc770484",
+      "bytes": 17590
+    },
+    {
+      "path": "raw/frame-006.png",
+      "sha256": "4bd1fa7552e9d0ce3d38ab3630ead46fecef6601c3f6db7d5715bb63f8b653ed",
+      "bytes": 16983
+    },
+    {
+      "path": "raw/frame-007.png",
+      "sha256": "0d293dcb19dd878092887afbc1d1e9088704ef1fc03a60dad84fb69287e52aea",
+      "bytes": 15807
+    },
+    {
+      "path": "recipe.py",
+      "sha256": "0eff9bff843d7b3fb9ffddf9584b58b0900b32879b061ca603c31f8cf98e4588",
+      "bytes": 1521
+    },
+    {
+      "path": "render-settings.json",
+      "sha256": "3e81bc29425f44e50b125a8c4a404fb66131849d0dfd102bab8a5acc8c1c70df",
+      "bytes": 24675
+    },
+    {
+      "path": "review-1x.png",
+      "sha256": "7eb5bcaad1c9dcfb0bb92ee183049438fd4c8440f3faae4a5086372b448fe873",
+      "bytes": 1682
+    },
+    {
+      "path": "review-4x.png",
+      "sha256": "c367561d633227e03463a2a48f87e3d50f80b6ae538f23d510f6b48cad413fd0",
+      "bytes": 11837
+    },
+    {
+      "path": "source.blend",
+      "sha256": "ab4b939a5e1b95d5aea12bf7e9f748a52363dac4493a92d2de9ee14b512c4b4e",
+      "bytes": 105852
+    },
+    {
+      "path": "validation.json",
+      "sha256": "5498d61d6aa4858dfca9c8918aaac490c7854dc51f2b48ec52d7645272a11606",
+      "bytes": 2208
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "dependencies/factory/__init__.py",
+      "sha256": "e7bca005fcf3cc07d21422fa977c422b49243aae2564c4a928a6fdcdc11023cd",
+      "role": "actual BlenderArtFactory dependency"
+    },
+    {
+      "path": "dependencies/factory/core.py",
+      "sha256": "4e741a008c9ae4e210a11103070480d014539927ee6f22b2e1d6e687bb268eb3",
+      "role": "actual BlenderArtFactory dependency"
+    },
+    {
+      "path": "dependencies/factory/png.py",
+      "sha256": "5826f0e4a145ba67255c665f27338781e58779c979622371e3f3a9bc5192072a",
+      "role": "actual BlenderArtFactory dependency"
+    },
+    {
+      "path": "dependencies/recipes/common.py",
+      "sha256": "f27e6864caf108160b96946b4df785fe3cb043c74ae5cdaea3ec194f1aef11c2",
+      "role": "actual BlenderArtFactory dependency"
+    },
+    {
+      "path": "recipe.py",
+      "sha256": "0eff9bff843d7b3fb9ffddf9584b58b0900b32879b061ca603c31f8cf98e4588",
+      "role": "project recipe/profile/driver/palette"
+    },
+    {
+      "path": "driver.py",
+      "sha256": "c31f3d453eace30d4577bf27dc2642dfacdb61a792c93d9debb2f2757aadb6c8",
+      "role": "project recipe/profile/driver/palette"
+    },
+    {
+      "path": "build.py",
+      "sha256": "791c46e67feec22abf0ef75db636aa77919bcfdcebcda534657c3261883b7bbd",
+      "role": "project recipe/profile/driver/palette"
+    },
+    {
+      "path": "battle_authoring.py",
+      "sha256": "ac56a94b78385b0fdb65487b2ed9816ba58ede65b2f0620187651c0b159056b5",
+      "role": "project recipe/profile/driver/palette"
+    },
+    {
+      "path": "authored-profile.json",
+      "sha256": "0b53529605a39a77a13a68e883ad065009bd67905ec271379017dff4d47df42c",
+      "role": "project recipe/profile/driver/palette"
+    },
+    {
+      "path": "palette.json",
+      "sha256": "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce",
+      "role": "project recipe/profile/driver/palette"
+    }
+  ],
+  "camera": {
+    "projection": "ORTHO",
+    "orthoScale": 4,
+    "position": [
+      0,
+      -10,
+      0
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "anchorProof": [
+    {
+      "x": 32.0,
+      "y": 32.000027
+    },
+    {
+      "x": 32.0,
+      "y": 32.000027
+    },
+    {
+      "x": 32.0,
+      "y": 32.000027
+    },
+    {
+      "x": 32.0,
+      "y": 32.000027
+    },
+    {
+      "x": 32.0,
+      "y": 32.000027
+    },
+    {
+      "x": 32.0,
+      "y": 32.000027
+    },
+    {
+      "x": 32.0,
+      "y": 32.000027
+    },
+    {
+      "x": 32.0,
+      "y": 32.000027
+    }
+  ],
+  "status": "candidate",
+  "validation": "validation.json",
+  "provenance": {
+    "origin": "Original Theandril Blender mesh construction and authored object keyframes; no downloaded artwork or generated bitmap input.",
+    "license": "Project-authored source; no new third-party art license or automatic CC0 dedication inferred."
+  },
+  "pipelineStages": {
+    "BlenderGeometryKeyframes": "executed",
+    "factoryNearestPaletteAlpha": "executed",
+    "PixelSnapper": "pending root integration",
+    "Aseprite": "pending root integration",
+    "visualApproval": "not granted",
+    "runtime": "not integrated"
+  }
+}

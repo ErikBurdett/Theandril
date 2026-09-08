@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.red_sluice",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.red_sluice"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Red Sluice Directorate, role character.marshal.\nSUBJECT: ONE senior adult marshal, culturally specific armor and dignified long coat or equivalent ceremonial harness, short command baton and small document pouch, no oversized pole or throne. Discernible leadership fromtroops via silhouette and restrained silver trim. Native64x64 maxheight48px pivot32,56.\nCULTURE: Brick red, dull celadon cloth, tarred oak, black chain and weathered bronze. Broad rectangular rain shields, hooded crew coats, horizontal bar motifs. Low sluice-gate inspired maintenance halls, wheel-braced gantries, thick brick channelside courtyards; no surrounding waterrectangle or actualtile.\nPEOPLE if character or rider: Human waterworks crew households and disciplined municipal escorts.\nHERALDRY if UI or flag: A barred spillway with three broad vertical openings and one horizontal lifting bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "character.marshal.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.red_sluice/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "38883e92f74ca478fe8b165a11df516b35bc51242e8a1c01bc5539c3d043f163",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/character.marshal.red_sluice-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/character.marshal.red_sluice-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T16:37:21Z",
+  "referenceHashes": [
+    "4f7b6cc4fd3f66f5875bd47838927f41ca69a88f1dbf8f4e71203186ac865475",
+    "00a4ee4cff9821237b05baaa1d5d479635c321e3a506290eabf6366f4beec807"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "804a9c5d2ab0a9a60ecd89f556566d32f7b8420d927ec8a92e5c15fa6c212494",
+      "inputHash": "4f7b6cc4fd3f66f5875bd47838927f41ca69a88f1dbf8f4e71203186ac865475",
+      "outputHash": "5972a129eaaf8bf0cb93cfc7a56601b0c881c191182587bf8f5d6b69c5376037"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

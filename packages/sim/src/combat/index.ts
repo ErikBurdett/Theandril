@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { SeededRandom } from '@theandril/mapgen';
+import type { BattleFact, BattleFactObserver, BattleStatChange } from './presentation';
 
 export const MAX_BATTLE_ROUNDS = 12;
 const MAX_LOG = 256;
@@ -15,7 +16,8 @@ const formationSchema = z.object({
   morale: bounded(100), fatigue: bounded(100), row: bounded(3), column: bounded(4),
   attack: bounded(100), armor: bounded(100), initiative: bounded(100), range: bounded(4),
 }).strict().refine(unit => unit.strength <= unit.maxStrength, 'Strength exceeds formation capacity.');
-export type BattleFormation = z.infer<typeof formationSchema>;
+const abilityFormationSchema = formationSchema.safeExtend({ ward: bounded(16).optional() });
+export type BattleFormation = z.infer<typeof abilityFormationSchema>;
 const formations = z.array(formationSchema).min(1).max(20);
 const inputSchema = z.object({ seed: bounded(0xffffffff), terrain: bounded(4), attacker: formations, defender: formations }).strict();
 const legacyInputSchema = inputSchema.extend({ attacker: formations.max(12), defender: formations.max(12) }).superRefine((input, context) => {
@@ -24,7 +26,7 @@ const legacyInputSchema = inputSchema.extend({ attacker: formations.max(12), def
 export type BattleInput = z.infer<typeof inputSchema>;
 
 /** rngState is canonical: saves resume the combat stream independently of the campaign. */
-export const battleStateSchema = inputSchema.extend({
+export const schema13BattleStateSchema = inputSchema.extend({
   rngState: bounded(0xffffffff), round: bounded(MAX_BATTLE_ROUNDS),
   result: z.object({ winner: z.enum(['attacker', 'defender', 'draw']), reason: z.string().min(1).max(120) }).strict().optional(),
   log: z.array(z.string().max(240)).max(MAX_LOG),
@@ -43,8 +45,9 @@ export const battleStateSchema = inputSchema.extend({
     context.addIssue({ code: 'custom', message: 'A battle at its round limit requires a result.' });
   }
 });
+export const battleStateSchema = schema13BattleStateSchema.safeExtend({ attacker: z.array(abilityFormationSchema).min(1).max(20), defender: z.array(abilityFormationSchema).min(1).max(20) });
 export type BattleState = z.infer<typeof battleStateSchema>;
-export const legacyBattleStateSchema = battleStateSchema.superRefine((state, context) => {
+export const legacyBattleStateSchema = schema13BattleStateSchema.superRefine((state, context) => {
   if (state.attacker.length > 12 || state.defender.length > 12 || [...state.attacker, ...state.defender].some(formation => formation.row > 2)) context.addIssue({ code: 'custom', message: 'Historical battles support at most twelve formations and three ranks per side.' });
 });
 
@@ -63,12 +66,18 @@ export function createBattle(input: BattleInput, version = 8): BattleState {
     throw new Error('Starting formations must have positive strength and morale.');
   }
   const state = battleStateSchema.parse({ ...checked, rngState: checked.seed, round: 0, log: [] });
+  if (version >= 9) for (const formation of [...state.attacker, ...state.defender]) formation.ward = 0;
   state.attacker.sort(byId); state.defender.sort(byId);
   return state;
 }
 
 /** A defeated force retains survivors. The campaign integration chooses their retreat hex. */
-function finish(state: BattleState, winner: Side | 'draw', reason: string, rng: SeededRandom, rout = false): void {
+export interface BattleRoundHooks { observe?: BattleFactObserver; beforeRound?: (state: BattleState) => void }
+const fact = (round: number, type: BattleFact['type'], values: Partial<BattleFact> = {}): BattleFact => ({ round, type, sourceId: null, sourceKind: null, targetIds: [], abilityId: null, attackKind: null, changes: [], winner: null, reason: null, ...values });
+export function battleStatChange(before: BattleFormation, after: BattleFormation): BattleStatChange {
+  return { formationId: after.id, strengthDelta: after.strength - before.strength, moraleDelta: after.morale - before.morale, fatigueDelta: after.fatigue - before.fatigue, wardDelta: (after.ward ?? 0) - (before.ward ?? 0) };
+}
+function finish(state: BattleState, winner: Side | 'draw', reason: string, rng: SeededRandom, rout = false, observe?: BattleFactObserver): void {
   state.result = { winner, reason };
   if (winner !== 'draw') {
     const pursuers = state[winner].filter(active);
@@ -77,25 +86,38 @@ function finish(state: BattleState, winner: Side | 'draw', reason: string, rng: 
     const capacity = Math.floor(totalStrength(pursuers) / Math.max(1, defeated.length * 4));
     const cover = state.terrain === 2 ? 5 : state.terrain >= 3 ? 2 : 0;
     for (const unit of defeated) {
+      const before = observe ? { ...unit } : undefined;
       const rate = Math.max(0, (rout ? 12 : 6) + Math.floor(Math.max(0, fastest - unit.initiative) / 4) + Math.floor(unit.fatigue / 10) - cover + rng.nextInt(3));
-      const lost = Math.min(unit.strength, capacity, Math.floor(unit.strength * rate / 100));
+      const incoming = Math.min(unit.strength, capacity, Math.floor(unit.strength * rate / 100));
+      const absorbed = Math.min(unit.ward ?? 0, incoming), lost = incoming - absorbed;
+      if (unit.ward !== undefined) unit.ward -= absorbed;
       unit.strength -= lost;
       unit.fatigue = Math.min(100, unit.fatigue + 10);
       append(state, `${unit.id} lost ${lost} strength during pursuit.`);
+      if (observe && before) observe(fact(state.round, 'pursuit', { targetIds: [unit.id], changes: [battleStatChange(before, unit)] }));
     }
   }
   state.rngState = rng.state;
   append(state, `${winner}: ${reason}.`);
+  observe?.(fact(state.round, 'result', { winner, reason }));
 }
 
-function checkRout(state: BattleState, rng: SeededRandom): boolean {
+function checkRout(state: BattleState, rng: SeededRandom, observe?: BattleFactObserver): boolean {
   const attacking = state.attacker.some(active);
   const defending = state.defender.some(active);
   if (attacking && defending) return false;
   const winner = attacking ? 'attacker' : defending ? 'defender' : 'draw';
   const routed = winner !== 'draw' && state[other(winner)].some(unit => unit.strength > 0);
-  finish(state, winner, routed ? 'morale rout' : 'formations destroyed', rng, routed);
+  finish(state, winner, routed ? 'morale rout' : 'formations destroyed', rng, routed, observe);
   return true;
+}
+
+/** A manual ability can end the engagement without inventing another round.
+ * This is the same casualty/rout/pursuit path used by ordinary round resolution. */
+export function settleBattleTerminal(input: BattleState, observe?: BattleFactObserver): BattleState {
+  const state = battleStateSchema.parse(input);
+  if (!state.result) checkRout(state, new SeededRandom(state.rngState), observe);
+  return state;
 }
 
 function targetFor(state: BattleState, side: Side, actor: BattleFormation, order: BattleOrder): BattleFormation | undefined {
@@ -120,18 +142,21 @@ function targetFor(state: BattleState, side: Side, actor: BattleFormation, order
 }
 
 /** Validates and clones input, then resolves one shared tactical/autoresolve round. */
-export function resolveBattleRound(input: BattleState, orders: { attacker: BattleOrder; defender: BattleOrder }, version = 8): BattleState {
-  const state = (version < 8 ? legacyBattleStateSchema : battleStateSchema).parse(input);
+export function resolveBattleRound(input: BattleState, orders: { attacker: BattleOrder; defender: BattleOrder }, version = 8, hooks: BattleRoundHooks = {}): BattleState {
+  const state: BattleState = (version < 8 ? legacyBattleStateSchema : version < 9 ? schema13BattleStateSchema : battleStateSchema).parse(input);
   const checked = z.object({ attacker: orderSchema, defender: orderSchema }).strict().parse(orders);
   state.attacker.sort(byId); state.defender.sort(byId);
   if (state.result) return state;
   state.round++;
+  const observe = hooks.observe;
   const rng = new SeededRandom(state.rngState);
   append(state, `Round ${state.round}: attacker ${checked.attacker}, defender ${checked.defender}.`);
-  if (checkRout(state, rng)) return state;
+  observe?.(fact(state.round, 'round', { reason: `attacker ${checked.attacker}; defender ${checked.defender}` }));
+  if (version >= 9) hooks.beforeRound?.(state);
+  if (checkRout(state, rng, observe)) return state;
   if (checked.attacker === 'withdraw' || checked.defender === 'withdraw') {
     const winner = checked.attacker === checked.defender ? 'draw' : checked.attacker === 'withdraw' ? 'defender' : 'attacker';
-    finish(state, winner, winner === 'draw' ? 'mutual withdrawal' : 'ordered withdrawal', rng);
+    finish(state, winner, winner === 'draw' ? 'mutual withdrawal' : 'ordered withdrawal', rng, false, observe);
     return state;
   }
   const sequence = (['attacker', 'defender'] as const).flatMap(side => state[side].map(unit => ({ side, unit })))
@@ -141,7 +166,9 @@ export function resolveBattleRound(input: BattleState, orders: { attacker: Battl
     const order = checked[side];
     const target = targetFor(state, side, unit, order);
     if (!target) {
+      const before = observe ? { ...unit } : undefined;
       unit.fatigue = Math.max(0, unit.fatigue - (order === 'brace' ? 8 : 2));
+      if (observe && before) observe(fact(state.round, 'rest', { sourceId: unit.id, sourceKind: 'formation', targetIds: [unit.id], changes: [battleStatChange(before, unit)] }));
       continue;
     }
     const opponentOrder = checked[other(side)];
@@ -150,24 +177,31 @@ export function resolveBattleRound(input: BattleState, orders: { attacker: Battl
     const attack = unit.attack + (order === 'flank' ? 5 : order === 'brace' ? -3 : 0) - Math.floor(unit.fatigue / 8) - rangedPenalty;
     const armor = target.armor + terrainGuard + (opponentOrder === 'brace' ? 6 : opponentOrder === 'flank' ? -3 : 0);
     const rolledPower = Math.max(3, attack - armor + rng.nextInt(5));
-    const damage = Math.min(target.strength, Math.max(1, Math.floor(unit.strength * rolledPower / 120)));
+    const before = observe ? { ...target } : undefined, actorBefore = observe ? { ...unit } : undefined;
+    const rawDamage = Math.min(target.strength, Math.max(1, Math.floor(unit.strength * rolledPower / 120)));
+    const absorbed = version >= 9 ? Math.min(target.ward ?? 0, rawDamage) : 0;
+    if (version >= 9) target.ward = (target.ward ?? 0) - absorbed;
+    const damage = rawDamage - absorbed;
     target.strength -= damage;
-    target.morale = Math.max(0, target.morale - 4 - Math.floor(damage * 70 / target.maxStrength) - (order === 'flank' ? 6 : 0));
+    if (damage || version < 9) target.morale = Math.max(0, target.morale - 4 - Math.floor(damage * 70 / target.maxStrength) - (order === 'flank' ? 6 : 0));
     unit.fatigue = Math.min(100, unit.fatigue + (order === 'flank' ? 14 : order === 'brace' ? 3 : 8));
     append(state, `${unit.id} struck ${target.id} for ${damage} strength.`);
+    if (observe && before && actorBefore) observe(fact(state.round, 'attack', { sourceId: unit.id, sourceKind: 'formation', targetIds: [target.id], attackKind: unit.unitId === 'unit.spearman' ? 'reach' : unit.range > 0 ? 'projectile' : 'melee', changes: [battleStatChange(before, target), battleStatChange(actorBefore, unit)] }));
     if (!active(target)) {
       append(state, `${target.id} ${target.strength === 0 ? 'was destroyed' : 'routed'}.`);
-      for (const ally of state[other(side)]) if (active(ally)) ally.morale = Math.max(0, ally.morale - 8);
+      const changes: BattleStatChange[] = [];
+      for (const ally of state[other(side)]) if (active(ally)) { const morale = ally.morale; ally.morale = Math.max(0, ally.morale - 8); if (observe) changes.push({ formationId: ally.id, strengthDelta: 0, moraleDelta: ally.morale - morale, fatigueDelta: 0, wardDelta: 0 }); }
+      observe?.(fact(state.round, target.strength === 0 ? 'destroyed' : 'rout', { sourceId: unit.id, sourceKind: 'formation', targetIds: [target.id], changes }));
     }
   }
   state.rngState = rng.state;
-  if (checkRout(state, rng)) return state;
+  if (checkRout(state, rng, observe)) return state;
   if (state.round === MAX_BATTLE_ROUNDS) {
     const power = (side: Side): number => state[side].filter(active).reduce((sum, unit) => sum + unit.strength * (unit.morale + 25), 0);
     const attacker = power('attacker');
     const defender = power('defender');
     const winner = attacker * 10 > defender * 11 ? 'attacker' : defender * 10 > attacker * 11 ? 'defender' : 'draw';
-    finish(state, winner, 'round limit', rng);
+    finish(state, winner, 'round limit', rng, false, observe);
   }
   return state;
 }
@@ -189,7 +223,7 @@ export function chooseBattleOrder(state: BattleState, side: Side): BattleOrder {
 }
 
 export function autoResolveBattle(input: BattleState, version = 8): BattleState {
-  let state = (version < 8 ? legacyBattleStateSchema : battleStateSchema).parse(input);
+  let state: BattleState = (version < 8 ? legacyBattleStateSchema : version < 9 ? schema13BattleStateSchema : battleStateSchema).parse(input);
   state.attacker.sort(byId); state.defender.sort(byId);
   while (!state.result) {
     state = resolveBattleRound(state, { attacker: chooseBattleOrder(state, 'attacker'), defender: chooseBattleOrder(state, 'defender') }, version);

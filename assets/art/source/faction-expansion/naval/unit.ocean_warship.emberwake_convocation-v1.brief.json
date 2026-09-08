@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.emberwake_convocation",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.ocean_warship for Theandril, Emberwake Convocation.\nSubject: ONE substantial deep-ocean sailing warship, broad high-sided reinforced wooden hull, two compact distinct masts and square/lateen sails, raised foredeck and a fortified aft command gallery, restrained deck ballista. Clearly more massive armed fighting ship than transport, no cannons. Entire ship complete.\nCulture-specific identity: Dark practical timber, ash-white ceramic protective panels, smoked-orange and muted sulfur-green patched sails, enclosed seed cargo shelters and split-vent cabin roofs. No flaming ship or magic propulsion.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.\nNAVAL TECHNOLOGY GUARDRAIL: absolutely NO firearms, cannons, gunpowder weapons, gunports or visible gun barrels anywhere. Ranged crew would use ordinary bows/crossbows; one small open-deck wooden ballista is acceptable only for the deep warship. Side panels are solid timber or simple ventilation lattice, never cannon ports or black tubes. No smoke or firing effects.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.ocean_warship.emberwake_convocation/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "a2aab6821b7bcb2cf224519277f4690f3f9ba92f2eacd083c4dca5c24e751529",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:06:16Z",
+  "referenceHashes": [
+    "a14e30228744c40f06e0166e6f92a31ccfc9d6c3b759f9101c13efa6c422500c",
+    "124ea274999a4713423772cd37c90646e84b2de3a235e815703d07fc6740a688"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "1cdd8eb611249dd318ffea19e97f8a762f11c754bd3880563fe51c717186649e",
+      "inputHash": "a14e30228744c40f06e0166e6f92a31ccfc9d6c3b759f9101c13efa6c422500c",
+      "outputHash": "98e38c0f3418798f7643d42e8095d159c9530f046e3f79eb89fc486137809d2d"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

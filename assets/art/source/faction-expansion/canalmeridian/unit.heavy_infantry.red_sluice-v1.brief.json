@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.red_sluice",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.red_sluice"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Red Sluice Directorate, role unit.heavy_infantry.\nSUBJECT: ONE adult broad heavy infantry soldier, thick layered cultural armor, compact two-handed blunt warhammer across chest, firmly planted feet. Substantial distinct mass from guard, complete weapon head and boots. Native64x64 body48px pivot32,56.\nCULTURE: Brick red, dull celadon cloth, tarred oak, black chain and weathered bronze. Broad rectangular rain shields, hooded crew coats, horizontal bar motifs. Low sluice-gate inspired maintenance halls, wheel-braced gantries, thick brick channelside courtyards; no surrounding waterrectangle or actualtile.\nPEOPLE if character or rider: Human waterworks crew households and disciplined municipal escorts.\nHERALDRY if UI or flag: A barred spillway with three broad vertical openings and one horizontal lifting bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.heavy_infantry.red_sluice/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "43eb83b86193d0146a716e67145f6be1a637f79674edfad50a1a2cd18d166ade",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/unit.heavy_infantry.red_sluice-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/unit.heavy_infantry.red_sluice-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T16:38:25Z",
+  "referenceHashes": [
+    "e6b84cf828b1c5aea58595e28128c41360090bd0eb8360e4ac072d4f5ef21b58",
+    "cf862b2824eb49b60242f13f9c9aeffc8a94896609706c39cdf8dedde7e6a61e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "d85dfb9d69e4041cbff317c95d6c98071b977fc642ebcff4a7e0333efd39ae47",
+      "inputHash": "e6b84cf828b1c5aea58595e28128c41360090bd0eb8360e4ac072d4f5ef21b58",
+      "outputHash": "ff21021f6a5fae303a1aeccd13bde8f5857d5f60c6ff91895ba80f22cbc79cc7"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

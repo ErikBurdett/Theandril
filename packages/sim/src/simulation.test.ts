@@ -41,7 +41,7 @@ describe('canonical campaign commands', () => {
   });
 
   it('founds a settlement, consumes exactly its colonist, builds, grows and recruits', () => {
-    const state = createGame({ seed: 42, size: 'tiny', factionCount: 2 });
+    const state = createGame({ seed: 42, size: 'tiny', factionCount: 2, generatorVersion: 4 });
     const settlementId = found(state);
     expect(Object.values(state.armies).filter(army => army.factionId === player)).toHaveLength(1);
     const moneyBefore = state.factions[0]?.treasury ?? 0;

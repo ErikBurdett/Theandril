@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.unsealed_companies",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native96. ONE substantial ocean fighting ship, southeast view with prow screen RIGHT/lower right. Strong broad hull, two distinct short masts with two square sails, raised stern fighting deck and restrained reinforced prow. Complete rigging, all mast tips, sails and hull within central65% with extra upper padding. No sea, wake, waterplane, gigantic ornament or scenery. Heavier twin-mast silhouette, not a copied one-sail transport. Strict correction: NO guns, cannons, gunports, gunpowder, bombards or metal barrels anywhere. Hull sides must be continuous repaired wooden planking and shields, with no gun openings or cannon tubes. Visible defenders use bows or one compact wooden deck ballista only. This is a pre-gunpowder naval culture. Preserve two short masts/two square sails, complete padded hull, southeast prow-right composition and true alpha.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.unsealed_companies/12819d9c74d257ebb10a21f0e00127e1a5ebff784647cc7b7fa47e50a8825793/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "414178f113594878d9549dfbec813077caaee325e6512e2c757265e813af999f",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.unsealed_companies-v2.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.unsealed_companies-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:45:20.901Z",
+  "referenceHashes": [
+    "4b07065e206fe3d99cbc2f7e40257d3080de2b8c55172e15c0abbf6f0474c872",
+    "34c1598f7dcc6d7e37bfd56ac57303e70b009b90aade3f89bdb177c952660800"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "103b9a7cc1b4eb914cc73f22929ba77afd5c09bcf5fb7b62056c961efc607802",
+      "inputHash": "4b07065e206fe3d99cbc2f7e40257d3080de2b8c55172e15c0abbf6f0474c872",
+      "outputHash": "f4f61ec93b792e94f024c6d3df71626d9d1550fb1ba03e1c7e841d126e908139"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "f4f61ec93b792e94f024c6d3df71626d9d1550fb1ba03e1c7e841d126e908139",
+      "outputHash": "85eee5e523989110841e8b53ff56cdb61d5e6d2ab2763efffc337dbf38d83cc9"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "85eee5e523989110841e8b53ff56cdb61d5e6d2ab2763efffc337dbf38d83cc9",
+      "outputHash": "d2d7a3c068950dd37e6535e8fc86808d86cadec739cf77331e6893a5beb4eff5"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "77a4cca6937e1361b4fe64b0cb9e19891cc2f5895f7ee927139199e78cf7b92e",
+      "outputHash": "f1a903825f7c30611d2bdba4d064df15edd3805992443375c01497b1b4dd2fb3"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "c5f39f5b742c6780b6a2ef3d7109d7429f8c8338ca99ddc4ff3a8d71efb50004",
+      "outputHash": "2ac3d6e8866d7f0934f9f38d52a6928676f7d6ae57f83caa60d0503819bd900c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "a547acb549ebea47a97d02929157bf68030c6e3712fcfa290b173db15ca57a7b",
+      "outputHash": "59e00610cc4cf1d0fc3cc3e9e0a65f5f4bdd47e6e1ed268665ca0cd7e047bd91"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.unsealed_companies.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:07:16.846Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Replacementv2 has complete wooden hull sides, archers and open-deck ballista; rejectedv1 cannon barrels are absent. Two masts retain deep-ship silhouette. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 12819d9c74d257ebb10a21f0e00127e1a5ebff784647cc7b7fa47e50a8825793; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/52c11af437aa33e0b55730a1d3a6ff91c5e864f1074f269f94a5af253b703637.png"
+    ],
+    "inputHash": "53700c417d01353e0baf107e3c7a6cbafd55b22586fe12a827c0e12c3d0442f2"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -3,10 +3,12 @@ import { TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PAC
 import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, validateCharacterContent } from './characters';
 import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, validateEcologyContent } from './ecology';
 import { FACTIONS, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, factionSchema, validateFactionContent } from './factions';
+import { ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, validateMagicContent } from './magic';
 export * from './progression';
 export * from './characters';
 export * from './ecology';
 export * from './factions';
+export * from './magic';
 
 const id = z.string().regex(/^[a-z]+\.[a-z_]+$/);
 const nonnegative = z.number().int().nonnegative();
@@ -50,9 +52,10 @@ export function checksum(text: string): string {
   for (let i = 0; i < text.length; i++) hash = Math.imul(hash ^ text.charCodeAt(i), 16777619);
   return (hash >>> 0).toString(16).padStart(8, '0');
 }
-export const CONTENT_HASH = checksum(JSON.stringify({ BUILDINGS, UNITS, FACTIONS, TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS }));
+export const CONTENT_HASH = checksum(JSON.stringify({ BUILDINGS, UNITS, FACTIONS, TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES }));
 export const LOCALIZATION: Readonly<Record<string, string>> = Object.fromEntries([
-  ...[...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...Object.entries(CAMPAIGN_PACES).map(([key, profile]) => ({ ...profile, id: 'pace.' + key }))].flatMap(item => [[item.id + '.name', item.name], ...('description' in item ? [[item.id + '.description', item.description]] : [])]),
+  ...INNATE_BATTLE_ABILITIES.flatMap(item => [[item.id + '.name', item.name], [item.id + '.description', item.description]]),
+  ...[...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...MAGIC_PATHS, ...Object.entries(CAMPAIGN_PACES).map(([key, profile]) => ({ ...profile, id: 'pace.' + key }))].flatMap(item => [[item.id + '.name', item.name], ...('description' in item ? [[item.id + '.description', item.description]] : [])]),
   ...Object.entries(FACTION_PROFILES).flatMap(([id, profile]) => [[id + '.description', profile.description], [id + '.recruitmentRationale', profile.recruitmentRationale]]),
 ]);
 
@@ -72,15 +75,17 @@ export function validateProductionContent(buildings = BUILDINGS, units = UNITS, 
     if (unit.naval && !unit.requiredBuildings?.some(buildingId => buildingById.get(buildingId)?.coastalOnly)) throw new Error('Naval recruitment requires coastal infrastructure: ' + unit.id);
   }
 }
-export function validateContent(): { buildings: number; units: number; factions: number; technologies: number; institutions: number; doctrines: number; projects: number; characterRoles: number; characterMissions: number; characterSkills: number; commanderAbilities: number; improvements: number; naturalFeatures: number; hash: string } {
-  const definitions = [...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES];
+export function validateContent(): { buildings: number; units: number; factions: number; technologies: number; institutions: number; doctrines: number; projects: number; characterRoles: number; characterMissions: number; characterSkills: number; commanderAbilities: number; improvements: number; naturalFeatures: number; arcaneDiscoveries: number; battleSpells: number; magicPaths: number; innateBattleAbilities: number; hash: string } {
+  const definitions = [...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...MAGIC_PATHS, ...INNATE_BATTLE_ABILITIES];
   if (new Set(definitions.map(item => item.id)).size !== definitions.length) throw new Error('Duplicate content ID');
   validateProductionContent();
   FACTIONS.forEach(item => factionSchema.parse(item));
   validateFactionContent(UNITS);
   validateProgressionContent(new Set(BUILDINGS.map(item => item.id)));
   validateCharacterContent(new Set(FACTIONS.map(item => item.id)));
+  validateMagicContent(new Set(CHARACTER_DEFINITIONS.map(item => item.id)), new Set(BUILDINGS.map(item => item.id)));
+  for (const ability of INNATE_BATTLE_ABILITIES) if (!UNITS.some(unit => unit.id === ability.unitId)) throw new Error('Unknown innate-ability unit: ' + ability.unitId);
   validateEcologyContent(new Set(FACTIONS.map(item => item.id)));
   for (const item of definitions) if (!LOCALIZATION[item.id + '.name']) throw new Error('Missing localization: ' + item.id);
-  return { buildings: BUILDINGS.length, units: UNITS.length, factions: FACTIONS.length, technologies: TECHNOLOGIES.length, institutions: INSTITUTIONS.length, doctrines: DOCTRINES.length, projects: 1, characterRoles: CHARACTER_DEFINITIONS.length, characterMissions: CHARACTER_MISSIONS.length, characterSkills: CHARACTER_SKILLS.length, commanderAbilities: COMMANDER_ABILITIES.length, improvements: IMPROVEMENTS.length, naturalFeatures: NATURAL_FEATURES.length, hash: CONTENT_HASH };
+  return { buildings: BUILDINGS.length, units: UNITS.length, factions: FACTIONS.length, technologies: TECHNOLOGIES.length, institutions: INSTITUTIONS.length, doctrines: DOCTRINES.length, projects: 1, characterRoles: CHARACTER_DEFINITIONS.length, characterMissions: CHARACTER_MISSIONS.length, characterSkills: CHARACTER_SKILLS.length, commanderAbilities: COMMANDER_ABILITIES.length, improvements: IMPROVEMENTS.length, naturalFeatures: NATURAL_FEATURES.length, arcaneDiscoveries: ARCANE_DISCOVERIES.length, battleSpells: BATTLE_SPELLS.length, magicPaths: MAGIC_PATHS.length, innateBattleAbilities: INNATE_BATTLE_ABILITIES.length, hash: CONTENT_HASH };
 }

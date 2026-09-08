@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.manytrack_moot",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. A maintained practical culture of several humanoid lineages and human households; not a feral beast camp. Native96. One joined developed town of six closely nested culture-specific roofs around a broad civic work hall and low protective enclosure with one clear gate. Building mass appreciably broader and denser than a three-house village at the same96native scale. No giant tall pole, background terrain or base tile.",
+  "frames": [
+    {
+      "id": "settlement.town.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/settlement.town.manytrack_moot/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1db76334beef8658b9310e6e029eca6833cde395c191772dca6000e485717055",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/settlement.town.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/settlement.town.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:14:32.100Z",
+  "referenceHashes": [
+    "b8f7663d23df069b8f72cfa495cc980387f8f65dd8ddd2148f393e63aa09d33b",
+    "651b4415225ab1addc06e4121077ff36c318578f0c080996984beed55f10e55d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "f9db1a095b3d74f81d240b332488e97f392b404f86ae1c0a0bfc0a970f97bac7",
+      "inputHash": "b8f7663d23df069b8f72cfa495cc980387f8f65dd8ddd2148f393e63aa09d33b",
+      "outputHash": "76d61f99cad79c7810708e4fe3dcfbb51c24a368489ca1b2fa7ca5f0ecdf5f0c"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

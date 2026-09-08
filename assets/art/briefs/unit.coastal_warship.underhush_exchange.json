@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.underhush_exchange",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.coastal_warship for Theandril, Underhush Exchange.\nSubject: ONE long slender shallow-draft coastal galley, low open deck, one compact triangular lateen sail, separated banks of broad oars, low practical bow ram and shield-lined rails. Fast narrow silhouette, no large cargo cabin or cannons. Entire sail, prow, stern and every oar complete.\nCulture-specific identity: Broad low timber hull, clay-brown cloth and pale-lime sails, pewter rounded bracing, shallow keyhole-arched cabin entrance and nested compact vent caps. Practical surface boat, not an underground vehicle.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.\nNAVAL TECHNOLOGY GUARDRAIL: absolutely NO firearms, cannons, gunpowder weapons, gunports or visible gun barrels anywhere. Ranged crew would use ordinary bows/crossbows; one small open-deck wooden ballista is acceptable only for the deep warship. Side panels are solid timber or simple ventilation lattice, never cannon ports or black tubes. No smoke or firing effects.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.coastal_warship.underhush_exchange/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "89c40618d38bdaaf7329ba320526d534315d123ed10b89e4897316ac708c1b94",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:34:37Z",
+  "referenceHashes": [
+    "d53a66d27dbae1283830c2a2ca40748d09297e0d6aa1aee18a5815ab588c7def",
+    "9a88ca01f3d5d4796ee713eb2bf27b2b4f5972baf070e5b6455823c66504e1b7"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "65868997e33f4a6e3daaebb1ff2ef781810841f99ceebea3d1833c160fba9f11",
+      "inputHash": "d53a66d27dbae1283830c2a2ca40748d09297e0d6aa1aee18a5815ab588c7def",
+      "outputHash": "a61fb18b88c11c7cb6d9790edf4bb674cb25c1ba115360a6d5a969ffb8f7283e"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.cistern_assembly",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native96. ONE substantial ocean fighting ship, southeast view with prow screen RIGHT/lower right. Strong broad hull, two distinct short masts with two square sails, raised stern fighting deck and restrained reinforced prow. Complete rigging, all mast tips, sails and hull within central65% with extra upper padding. No sea, wake, waterplane, gigantic ornament or scenery. Heavier twin-mast silhouette, not a copied one-sail transport.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.cistern_assembly/cc306f2da14bfbff564c3d3b392a7e5c7a06345a5ecbdf3d1f2996726ae9d527/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e71956b750a1d67aa92531b59a99ff9195f7b1aeecb7d2679b5ae4833d4a0266",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:04:02.877Z",
+  "referenceHashes": [
+    "82e71839ff9315ad5b7a2ac64db2b2b4d77417581a66080c24a70fad70a39caa",
+    "3878bb3c532e622203c2bd3cb8ae7947a54a736af09167d9b3a43d56cc84776e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "d1e31c91990d0f5d2ff38cb7901688d8db9655e261916f041f1c00407685807b",
+      "inputHash": "82e71839ff9315ad5b7a2ac64db2b2b4d77417581a66080c24a70fad70a39caa",
+      "outputHash": "041f5b90ab0a7f15a1673c6f469dce2bba4b189f5b79e20c3aa311873c1047ae"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "041f5b90ab0a7f15a1673c6f469dce2bba4b189f5b79e20c3aa311873c1047ae",
+      "outputHash": "8b63c6f5b9348a091b7ddfc110f0c6c23482f03bc6a4557cc23fd2ff1a16555a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "8b63c6f5b9348a091b7ddfc110f0c6c23482f03bc6a4557cc23fd2ff1a16555a",
+      "outputHash": "c7c1484e07cc0fa86e0e5764c942330e8603c4f2aafc45f10b32d38665a6f1a9"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "e85d828a4fa1896cfe311b00e97e8de6f0a21328e4bfdddf24ee6d9cbf31da73",
+      "outputHash": "c81d706391034d58dd4a5d1357269b52ea40ea246d599208a653cb5dd851481e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "061d9ef48f1c65a47b9bea32201a38ceb2f7edc47561dd54d2fc8b8d20ec11cb",
+      "outputHash": "50625be423c0d5be9875733e2763ef063436ed440c07ef08e6fee6a334bd2a88"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "e6796bdabcda4f18c77f28b9510d3da2518b12d497a16ae51c50b44953ac8acb",
+      "outputHash": "1b63ca4d66aa44583224db8a15d0c502782e7b0e501a1f9f013ebd944cb61a51"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.cistern_assembly.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:12.069Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Two square sails, high stern deck and broad hull distinguish the heavy ship; no cannon/gunports visible. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate cc306f2da14bfbff564c3d3b392a7e5c7a06345a5ecbdf3d1f2996726ae9d527; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/808e8d8a619a9f9612e7cd7ccfd2092a7d64708797a4a4694d95f53144cdd410.png"
+    ],
+    "inputHash": "8bc3757edf000afb8e354bf24ea60658166055d7579d42fac659078a2b2d9579"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

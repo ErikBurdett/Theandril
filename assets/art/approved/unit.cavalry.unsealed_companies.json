@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.unsealed_companies",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native96. One adult mounted outrider riding one ordinary lean horse facing screen RIGHT/lower right, short lowered spear and compact shield, worn saddle and tied baggage. Entire horse with all four legs, ears, tail and rider enclosed. No giant pennant shrinking the horse, no floating hooves.",
+  "frames": [
+    {
+      "id": "unit.cavalry.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.unsealed_companies/569452c171d3322f4b44f3caddc1fe1ef7460cfdc705426e624ce2ec5f529bbc/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2a7f2c4c40e3b6b9a462d20d4c6d6d7a4fe01512d66fed91fd7f2920e2370f6f",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/unit.cavalry.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/wellroads/unit.cavalry.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:14:01.171Z",
+  "referenceHashes": [
+    "bacc34bd143de5ab45e13a324fc8ab9bb24906ea813375ff8b52912d0a92f4e0",
+    "2d538b759afd7cdbbefec4c4c216e54e148492ce5c1ef16a90947f0cc7a019f8"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "d2c60e391b4df5b7ad9e6bba23cc2437033c9388d793f04d66f03c38a89144f5",
+      "inputHash": "bacc34bd143de5ab45e13a324fc8ab9bb24906ea813375ff8b52912d0a92f4e0",
+      "outputHash": "7411e26542d836034548de319078253c6d4781b04dd4f53d0bb311e0e628a63a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "7411e26542d836034548de319078253c6d4781b04dd4f53d0bb311e0e628a63a",
+      "outputHash": "ed344fa520631626c96890f48b33af53e4857691ff8acfd4df0f2c871a9c1434"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ed344fa520631626c96890f48b33af53e4857691ff8acfd4df0f2c871a9c1434",
+      "outputHash": "3174afb7d61e1dceecd44f2473994891bd50d01eeda6233e432106c55e428a35"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "df2b3da8ea754935c8b6dd28c9d79a5f470ade2cec20d80b2f9e936e251b438d",
+      "outputHash": "b5f019463832d9656dcc8e8b7282a5661a8463527a833545483e371ad5368a3b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "134783ae73c72e12d644f23acb097b4b173870584be71a7f8cbb761b3e336967",
+      "outputHash": "93f1efecaa3c4f78d930d5154edfcd95064e9d45c3ffc3ad0dc398fc30da42ca"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "6ef7fedadb56d968fbdc9a8633fcac82cdf721785e0ece3fcda3a5827b1e501f",
+      "outputHash": "578485a96b8dd77cd080a5e2d2f2f9b39c5afe552f10215d16e411c2d88cf951"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.unsealed_companies.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:07:12.308Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Mounted lancer on a complete ordinary horse; reins, lance end and horse feet remain contained. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 569452c171d3322f4b44f3caddc1fe1ef7460cfdc705426e624ce2ec5f529bbc; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/05e4356a8926a9ef72df54308826e2ea6e1cd8f69e44af30c9521600c2304e3e.png"
+    ],
+    "inputHash": "64f36b3817367ffda5f224e4e7afec2ee5317d25d54b1d5c7876bebb453c5fe1"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

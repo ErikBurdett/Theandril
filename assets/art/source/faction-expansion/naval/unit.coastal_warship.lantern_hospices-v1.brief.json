@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.lantern_hospices",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.lantern_hospices"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Lantern Hospices, role unit.coastal_warship.\nSUBJECT: ONE complete slender shallow coastal galley, long narrow low hull with clearly grouped short oars, forward ram, one compact mast and modest sail, low ranged-crew deck. Cultural materials and cloth; nottransport. Southeast isometric bowtowardright, all oarsandhull complete, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Beeswax yellow, washed blue, soot-black lantern cages, plain linen. Hooded service coats, broad shields, shielded lamps not glowing magical haloes. Open hospice courtyards with wide ventilated slate roofs, covered galleries, clean cisterns and small enclosed lamp niches.\nPEOPLE if character or rider: Human care-house attendants and paid escorts; adultsturdyclothlayers, no religious caricatures.\nHERALDRY if UI or flag: A small hooded lamp framed by two protective shutters.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.lantern_hospices/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.coastal_warship.lantern_hospices/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d261eeee2111a7ba2f85c40d56733e8bd6cb1f8068d7a386f619fbba3f140ed4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.lantern_hospices-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.lantern_hospices-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:01:45Z",
+  "referenceHashes": [
+    "5e0073393f81f625fbcad480c9cb1fe2ed0e09c6c99d1339714ff2971dc3ad76",
+    "df375798238f551da6cce96ed4839f202ae33973ef7c060fd61492cc09f13a78"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "d3d3482dea3156fd6fbec3de216111eb8a8180b77c04284a8452442a2267727c",
+      "inputHash": "5e0073393f81f625fbcad480c9cb1fe2ed0e09c6c99d1339714ff2971dc3ad76",
+      "outputHash": "b13b2b60f8e0fd91783515d5cb9da519c8bed2e0daae2808000aa24f7acdf17c"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { FACTIONS, FACTION_ECOLOGIES, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, UNITS } from '@theandril/content';
-import { applyCommand, createGame, getObservation } from '@theandril/sim';
+import { applyCommand, createGame, getObservation, serializeGame } from '@theandril/sim';
 import { FactionSelection, SettlementLand, yieldText } from './land';
 
 function campaign() {
@@ -21,11 +21,11 @@ describe('authoritative settlement land controls', () => {
     expect(html).toContain('value="faction.iron_covenant" selected=""');
     expect(html).toContain('−1'); expect(html).toContain('+1 industry'); expect(html).toContain('Cultivation traditions');
   });
-  it('uses all twelve real profiles, signed ecology and shared-unit AI weights without borrowing another culture', () => {
-    expect(FACTIONS).toHaveLength(12);
+  it('uses all twenty-four real profiles, signed ecology and shared-unit AI weights without borrowing another culture', () => {
+    expect(FACTIONS).toHaveLength(24);
     for (const faction of FACTIONS) {
       const html = renderToStaticMarkup(createElement(FactionSelection, { value: faction.id, onChange: () => undefined }));
-      expect(html.match(/<option /g)).toHaveLength(12);
+      expect(html.match(/<option /g)).toHaveLength(24);
       expect(html).toContain(`data-definition-id="${faction.id}"`);
       // Check prose through the same HTML escaping as React's text nodes.
       expect(html).toContain(renderToStaticMarkup(createElement('p', { className: 'faction-profile' }, FACTION_PROFILES[faction.id]!.description)));
@@ -73,5 +73,49 @@ describe('authoritative settlement land controls', () => {
     expect(html).toContain('Loading current land details'); expect(html).toContain('data-query-state="loading"');
     expect(html).not.toContain('outside this settlement'); expect(html).not.toContain('Yield breakdown per worked turn');
     expect(html).not.toContain('Build Terraced'); expect(html).toContain('<button type="button" disabled="" aria-expanded="false">Select tiles');
+  });
+  it('puts compact tile actions before the closed town overview while keeping exact buttons, prices and refusals', () => {
+    const game = campaign(), view = getObservation(game, game.turnOwnerId), town = view.land.settlements[0]!;
+    const cell = town.cells.find(item => item.cell !== view.settlements[0]!.cell)!;
+    const props = { view, settlementId: town.settlementId, selectedCell: cell.cell, busy: false, selectCell: () => undefined, issue: () => undefined };
+    const saved = serializeGame(game), before = JSON.stringify(view);
+    const normal = renderToStaticMarkup(createElement(SettlementLand, props));
+    const compact = renderToStaticMarkup(createElement(SettlementLand, { ...props, compact: true }));
+    expect(compact).toContain('class="land-panel land-panel-compact"');
+    expect(compact).toContain('<details class="land-town-overview" data-testid="land-town-overview"><summary>Settlement overview');
+    expect(compact).toContain('<details class="land-tile-facts" data-testid="land-tile-facts"><summary>Features &amp; yield details</summary>');
+    expect(compact.indexOf('data-testid="land-cell"')).toBeLessThan(compact.indexOf('data-testid="land-town-overview"'));
+    expect(compact.indexOf('Tile improvements')).toBeLessThan(compact.indexOf('Features &amp; yield details'));
+    expect(compact.indexOf('data-testid="land-town-overview"')).toBeLessThan(compact.indexOf('data-testid="border-growth"'));
+    expect(normal.indexOf('data-testid="border-growth"')).toBeLessThan(normal.indexOf('data-testid="land-cell"'));
+    expect(normal).not.toContain('data-testid="land-town-overview"');
+    expect(compact).toContain(`<strong>Per worked turn:</strong> ${yieldText(cell.yields.total)}`);
+    expect(compact.match(/<button\b[^>]*>[\s\S]*?<\/button>/g)?.sort()).toEqual(normal.match(/<button\b[^>]*>[\s\S]*?<\/button>/g)?.sort());
+    for (const option of [...cell.improvementOptions, ...cell.terraformOptions]) {
+      expect(compact).toContain(`${option.coinCost} coin upfront · ${option.turns} turns`);
+      if (option.blocker) expect(compact).toContain(renderToStaticMarkup(createElement('p', { className: 'land-blocker' }, option.blocker)));
+    }
+    expect(JSON.stringify(view)).toBe(before); expect(serializeGame(game)).toBe(saved);
+  });
+  it('keeps actual paid work and its no-refund cancel control ahead of compact tile actions', () => {
+    const game = campaign(), initial = getObservation(game, game.turnOwnerId), town = initial.land.settlements[0]!;
+    const tile = town.cells.find(cell => cell.improvementOptions.some(option => option.canStart))!;
+    const option = tile.improvementOptions.find(item => item.canStart)!;
+    expect(applyCommand(game, { type: 'improveTile', factionId: initial.factionId, settlementId: town.settlementId, cell: tile.cell, improvementId: option.improvementId }).ok).toBe(true);
+    const view = getObservation(game, game.turnOwnerId), saved = serializeGame(game);
+    const html = renderToStaticMarkup(createElement(SettlementLand, { view, settlementId: town.settlementId, selectedCell: tile.cell, busy: false, compact: true, selectCell: () => undefined, issue: () => undefined }));
+    expect(html.indexOf('data-testid="land-work"')).toBeLessThan(html.indexOf('data-testid="land-cell"'));
+    expect(html).toContain(`${option.coinCost} coin paid`);
+    expect(html.match(/Cancel land work · no refund/g)).toHaveLength(1);
+    expect(html.match(/data-testid="land-cell"/g)).toHaveLength(1);
+    expect(serializeGame(game)).toBe(saved);
+  });
+  it('shows compact lazy loading first and never renders tile actions from summary or stale detail props', () => {
+    const game = campaign(), view = getObservation(game, game.turnOwnerId), town = view.land.settlements[0]!;
+    const html = renderToStaticMarkup(createElement(SettlementLand, { view, settlementId: town.settlementId, selectedCell: town.cells[0]!.cell, busy: false, compact: true, selectCell: () => undefined, issue: () => undefined, stateHash: 'current', query: async () => ({ settlementId: town.settlementId, town, hash: 'current' }) }));
+    expect(html.indexOf('data-testid="land-query-status"')).toBeLessThan(html.indexOf('data-testid="land-town-overview"'));
+    expect(html).not.toContain('data-testid="land-cell"');
+    expect(html).not.toContain('Build Terraced');
+    expect(html).toContain('Loading current land details');
   });
 });

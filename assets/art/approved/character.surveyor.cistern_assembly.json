@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.cistern_assembly",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native64. One full-body adult route surveyor holding an open small route map in one hand and short dividers in the other; travel satchel and measuring cord at belt, visible face, both boots. Unarmed, no shield/bow/spear; distinct from the engineer.",
+  "frames": [
+    {
+      "id": "character.surveyor.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.surveyor.cistern_assembly/9d844437c33d41d5446f1b2322f686e9f38f9adb3b94c311d0b2baf06cd25097/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1c50d2443ee9775eafca1ff18f2566e3c73a0dc7492063197ce7fe3ab5cecf94",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/character.surveyor.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/character.surveyor.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:51:45.865Z",
+  "referenceHashes": [
+    "2ef6e9360c1e0088d786b20b70b20489f425f16cfff0f5321fc7cb7fd324f207",
+    "2e1dfd29588c34968ff172522ebc6b77777f11dd82d01f3efe3e1cef810fe25b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "be15a93a99f98dcf37bf91fc6014d7f6553ced6037a1a4c47c65681bd73f52c0",
+      "inputHash": "2ef6e9360c1e0088d786b20b70b20489f425f16cfff0f5321fc7cb7fd324f207",
+      "outputHash": "1b3d9f0c0bab594694292442acbc9cdf30c7d3742872a6604ee699661dab7a12"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "1b3d9f0c0bab594694292442acbc9cdf30c7d3742872a6604ee699661dab7a12",
+      "outputHash": "591dcafd60a5ae60583ad2a89059c1a264e02629d6bfd8237097d6887f593e96"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "591dcafd60a5ae60583ad2a89059c1a264e02629d6bfd8237097d6887f593e96",
+      "outputHash": "03cbb3c878a582424e9e65019f6704f565247dcc5eaf3d239a74d076213dfcd4"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "7f9db8db3e77008eb2c9888d51729870c16f36cd5dc3ba60c403975a79f38e37",
+      "outputHash": "ae226442300ff2c4b382dae29e4e7d91bd68da987ca5e83cec2e2aba9f0772ad"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "e3c15875baa5538fc5d312d1342b385277b540fe4ea6ed59e7a0a25715b5522e",
+      "outputHash": "539ca46687b6a22bf921eb26d0b321e341ac71c99cb36d0dd1a2892b0ea23d53"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "a816f9ac9eec1579aaa6eef464941a0ce8f862af49277efb91ae9d23c28d0871",
+      "outputHash": "aacb1775daef3e36b5563bf16a6a27e2477f5885752d4370e4bf476c7fa3b993"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.surveyor.cistern_assembly.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:08.615Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Open chart held forward and blue shoulder cloth form a distinct noncombat pose. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 9d844437c33d41d5446f1b2322f686e9f38f9adb3b94c311d0b2baf06cd25097; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/89d7f40411347d33b0d09389242118940d56bdbc2594e826f00d90668bd9d847.png"
+    ],
+    "inputHash": "6799022b552c58c9de63a70477a0a5606da2832f71134794b967a352e57b044b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

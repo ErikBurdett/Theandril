@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.cairnwing_concord",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.cairnwing_concord"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Cairnwing Concord, role character.engineer.\nSUBJECT: ONE adult engineer with culturally specific practical work apron, rolled sleeves and small tool satchel, compact mallet held down at side, visible hand and full boots. Native64x64 maxheight48px pivot32,56.\nCULTURE: Tawny feathers, oxblood cord, oxidized copper, pale scree. Narrow harnesses, folded feathered forearms, ribbed narrow shields, ledge tools. Bracketed low stone halls, terraced load courts and wind-braced lift housings integrated into freestanding settlement silhouette; no giant scenery rock or inaccessible floating castle.\nPEOPLE if character or rider: Tool-using feathered cairnfolk with short avian beaks, two legs and two dexterous arms with folded forearm feather fans; human port households. No spread wings, flying poses or implied flight.\nHERALDRY if UI or flag: A single stepped feather with three unequal notches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "character.engineer.cairnwing_concord/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.engineer.cairnwing_concord/d008001c04dc01ba9677546d186f0788a81b45a5fc87707290d51b6387b5516b/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5a0b8a7287e3b4f983276959793421d948f933a5b9955b141063dbc54c314094",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/character.engineer.cairnwing_concord-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/character.engineer.cairnwing_concord-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:15:57Z",
+  "referenceHashes": [
+    "a267ce13144a757bac3e27c63244ae64a5443e7f4fc6c74c8e30137416e4c90c",
+    "ed3053f402a977113e37f010d196138dffd5d43fb60add4711db5939ca9a7671"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "e27da50b5fe21f7be8f9f9d902507beca83e04d3ae7cefab1f7c1f2e0a8e444c",
+      "inputHash": "a267ce13144a757bac3e27c63244ae64a5443e7f4fc6c74c8e30137416e4c90c",
+      "outputHash": "b588ee06d248ac81cac4444db5327b51c79032792e050b1a740cbcbdae2264f7"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "b588ee06d248ac81cac4444db5327b51c79032792e050b1a740cbcbdae2264f7",
+      "outputHash": "046b0775a160d0b7f1bb293761ad75ae7d367d6933777f4a685a848dba5339c9"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "046b0775a160d0b7f1bb293761ad75ae7d367d6933777f4a685a848dba5339c9",
+      "outputHash": "5ebae2c436876fc367d2b1ea81f91d5970932d15e39088ca2f1818b6b8e69b2e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "3734010053b3d573afdf45746f2d15ccfcfbe72660a24424b2c24544056016c0",
+      "outputHash": "f93a699529b374ab1b1eb6e75f16a836987398eca35b2b1345303a134759b5f1"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "dd26ab0b3d30ce89128fce0c0efe07d616f2f0935d3dd8177c8f719c5c298b29",
+      "outputHash": "d9bcafe7fe4bd7f8926006c2eee655fc1afe326ca3db275151efdc6f8fd1e3df"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "add0ebce272187892c23626d535ed2e72deffb21b5ca74fbb3cfd12e5f5b0a7f",
+      "outputHash": "2f4160cbb2685135a4f1cb973ac3212deefc4a1d902fd98caf6599107fa1b341"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.engineer.cairnwing_concord.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:48:10.902Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Aproned engineer with mallet, small tool belt and folded arm feathers; working pose distinct from officer. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate d008001c04dc01ba9677546d186f0788a81b45a5fc87707290d51b6387b5516b; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/f91d14283a25a76b63c0040467f8d8ce08ad7ae38d8168347a0fc78faa49309f.png"
+    ],
+    "inputHash": "55c720e4670543ab8ec3f6221388187704ecb73a02c2f93ad5b57f1228971a0b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

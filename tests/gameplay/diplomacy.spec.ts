@@ -1,4 +1,4 @@
-import { openRealmAffairs } from './ui-navigation';
+import { closeManagement, openRealmAffairs } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { applyCommand, serializeGame, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -29,11 +29,14 @@ test('review a funded peace package, receive AI acceptance, and restore the bind
   await page.screenshot({ path: testInfo.outputPath('peace-review.png'), fullPage: true });
   await page.getByRole('button', { name: 'Send peace offer', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.diplomacy.offers.length)).toBe(1);
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.diplomacy.treaties.length)).toBe(1);
   expect(await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.wars)).toEqual([]);
+  await openRealmAffairs(page);
   await expect(page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true })).toBeDisabled();
+  await closeManagement(page);
   await page.getByText('Campaign & settings', { exact: true }).click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
   await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
@@ -42,6 +45,7 @@ test('review a funded peace package, receive AI acceptance, and restore the bind
   await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(hash);
+  await openRealmAffairs(page);
   await page.screenshot({ path: testInfo.outputPath('binding-peace.png'), fullPage: true });
   expect(errors).toEqual([]);
 });
@@ -54,6 +58,7 @@ test('a human can accept an incoming proposal and receive its actual payment', a
   const offer = state.diplomacy.offers[0]!;
   const before = player!.treasury;
   await importCampaign(page, state);
+  await openRealmAffairs(page);
   await page.getByRole('button', { name: `Accept peace offer ${offer.id}`, exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.treasury)).toBe(before + 30);
   expect(await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.wars)).toEqual([]);
@@ -69,6 +74,7 @@ test('an unfundable incoming offer explains its blocker and remains rejectable',
   for (const itemId of ['building.granary', 'building.workshop', 'building.market']) expect(applyCommand(state, { type: 'queue', factionId: opponent!.id, settlementId: town.id, itemId }).ok).toBe(true);
   const offer = state.diplomacy.offers[0]!;
   await importCampaign(page, state);
+  await openRealmAffairs(page);
   await expect(page.getByTestId(`peace-offer-${offer.id}`)).toContainText('no longer fund');
   await expect(page.getByRole('button', { name: `Accept peace offer ${offer.id}`, exact: true })).toBeDisabled();
   await page.getByRole('button', { name: `Reject peace offer ${offer.id}`, exact: true }).click();

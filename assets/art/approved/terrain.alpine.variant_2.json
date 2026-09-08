@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.alpine.variant_2",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.alpine.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. ALPINE: irregular fractured grey mountain escarpment with three unequal short ridges, dark angular creases and restrained pale snow remnants on north-facing slopes, broad stone-and-scree ground below. Not symmetrical triangular icons or glowing white peaks. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.alpine.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.alpine.variant_2/862f197f42730707fa28e3cd2c1ff6b47e3444e1ee0b4ab1a6f68d1a5ea9374e/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e47ef108964a9873ff38faf20683f03c06a372e0aead0a3ad16feeda2622c460",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.alpine.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.alpine.variant_2-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:56:32.153Z",
+  "referenceHashes": [
+    "a9ee052c58c41f1f0f71c5480656975014b5a9da463a8dd5e8fd3fbec870f312",
+    "acb722c15cdbc3bbb3af1dcb1eadb542ed6911c44bc21c52637fff43e1c233fe"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "80181c492aeb82cef41dec060e1095979e67df78bebfd2962aaf2f8a5668e6bb",
+      "inputHash": "a9ee052c58c41f1f0f71c5480656975014b5a9da463a8dd5e8fd3fbec870f312",
+      "outputHash": "1c4e2d61868bee5900b66aff9123bf2828fa9a219f8a246cda2470b5f7cac974"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "1c4e2d61868bee5900b66aff9123bf2828fa9a219f8a246cda2470b5f7cac974",
+      "outputHash": "ef4a87201b7e9c06d2dec836cf1108d21b87dc9c7f7601eaa44ebd1b46f8035f"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ef4a87201b7e9c06d2dec836cf1108d21b87dc9c7f7601eaa44ebd1b46f8035f",
+      "outputHash": "fcd0db19613a17fb300d2b6806ec6a337900cd0e2214acb11a03a002639b2562"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "bf076fa0dce47eadfc9673aecb04dac43c6ba106a6c94af46912ebab7a99a5ed",
+      "outputHash": "e6fd8b8e1bd35c7bc9c6a94b8f17ee85fa6233545317edc7fd6b6e55414bcf1f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "7b0c9fce833c9af08b6538a06cf79b007ee06e10dc7799673d5e14cc867f6776",
+      "outputHash": "67ab08f58417728eba86fea5be9c8f229d0bbfb2ef4c28fe1156a91cf80dab63"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "87c624cc38156dc5de0fee49e4e74b3767b1f5b64fd06945af110a4a2db4fef6",
+      "outputHash": "0b7ac80a483e966570c62a6e95065314bc6b16b69b84efde8c9849dec8098aaf"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.alpine.variant_2.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:19.824Z",
+    "notes": "Unequal angular ridges and restrained snow pockets give a second readable mountain mass without clipping. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 862f197f42730707fa28e3cd2c1ff6b47e3444e1ee0b4ab1a6f68d1a5ea9374e; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/8708d760039a6538ab71ff84a6755ca307589305fabee9a16db8c247325587e8.png"
+    ],
+    "inputHash": "5ea999dec3af972e7d3095ccaa2770274f3dad7bf1d077810d70bd90726925d8"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

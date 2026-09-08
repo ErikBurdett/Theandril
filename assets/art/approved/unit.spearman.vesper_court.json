@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.vesper_court",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.spearman for Theandril, Vesper Court.\nSubject: One adult spear-watch soldier with a straight compact spear held nearly vertical at the side, plain metal spearhead and a modest faction shield. Spear tip wholly inside generous top margin and no more than one head-height above helmet. Both hands anatomically clear.\nCulture-specific identity: Living adult human retainers and artisans, cool ivory skin and dark hair; no pointed ears. Only the marshal may be a pale vampiric court patron with subtle severe human features. Charcoal velvet and leather, narrow ribbed dark iron, tarnished silver, muted burgundy and dusty plum cloth (dark #49312b, #642f26, #685375, #96738e; NO bright red). High folded collars, long split court coats and silver-edged narrow kite shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "unit.spearman.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.spearman.vesper_court/622b6bf92d041e34722ee20be274ef5168ccd4d68331e38afd145bd410e6bcbc/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "69f58a0bc91cdb18ef7e29baa5ad4f54cb0f377b42b7b1069b07ce1b10b3507e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.spearman.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.spearman.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:45:48Z",
+  "referenceHashes": [
+    "f5eb86f972ea27f0b2e1ef1d9afbd0098286a61410012c3b4e5ab6c0f0960d31",
+    "2e728905214d73b8c38d6ba9786717448d320059b0b1a6e38397e706fe94b04f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "bfc30a86dcc6599e52a7e27f77a79e6c40fd68ca7284eb7399e57278c2083acc",
+      "inputHash": "f5eb86f972ea27f0b2e1ef1d9afbd0098286a61410012c3b4e5ab6c0f0960d31",
+      "outputHash": "a32d1b0774d104f4973c57c689b641f40ed6d41f581af2d6d28183df3539478d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "a32d1b0774d104f4973c57c689b641f40ed6d41f581af2d6d28183df3539478d",
+      "outputHash": "0715d62d6d36002eb09562123e61f1ba083e47c52a0e833ef142215b6a08a475"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0715d62d6d36002eb09562123e61f1ba083e47c52a0e833ef142215b6a08a475",
+      "outputHash": "daedf0ce0e0028d544882d3765a4e576f55f9addd406359ba53393424120da3f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "a7cbb1554d3faf987eb905c0b372b3907209811091b54b27d1843d237c81db9c",
+      "outputHash": "370ced558fca4f886b8ae3ff60c41f8b509853ae1d14a3cdd7e277e88b8a8c8e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "d11e20a8384b76940211973fe7a7f8042d25b4ad0dd36159c1a58d1057f80bd0",
+      "outputHash": "b6fd416a3b479699e11c76c8a1a051bb7bd42bc853e9a33983f65b8e8097b24d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "3645a6ef280b0fabac2ea325288f952f77863aa49285f612d65de82cf8b1f10e",
+      "outputHash": "4ac3e088d6b3c7dfe8a527c61798e45e9abe4772f86af518b7405b914ece9166"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.spearman.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:00.564Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Upright long shaft and narrow shield remain intact and separated from the body. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 622b6bf92d041e34722ee20be274ef5168ccd4d68331e38afd145bd410e6bcbc; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/1fa153759f7da4d34dea8a4397b9ecd49719c7958c1635fcc6557a834e61b12c.png"
+    ],
+    "inputHash": "b22833fcdc11c64fe090ddbe5846c98b826da5ac75be26ccdf6d7082c3d3893b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

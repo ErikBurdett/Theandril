@@ -1,0 +1,336 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ packages/sim/src/save.test.ts (30 tests | 6 failed) 635ms
+     × migrates explicit v0 nextEntityId snapshots without changing campaign state 51ms
+     × verifies v1 checksums and the known content pack before adding warfare defaults 9ms
+     × migrates checked v2 state into settlement provenance and diplomacy defaults 9ms
+     × continues a synthetic v2 field-battle shape with an initialized war memory 28ms
+     × migrates the recognized v3 content pack and verifies its checksum before defaults 11ms
+     × preserves a synthetic v3 siege-battle shape and its pending conquest decision 28ms
+ ❯ packages/sim/src/army-combat.test.ts (10 tests | 1 failed) 594ms
+     × deploys all formations, saves mid-battle, and persists exact per-formation casualties and army movement 71ms
+ ❯ apps/web/src/character-skills.test.tsx (3 tests | 1 failed) 336ms
+     × covers exactly the eleven shipped skills through their three compatible roles 238ms
+ ❯ apps/web/src/progression.test.tsx (5 tests | 1 failed) 205ms
+     × keeps the established four advancement systems separate and exposes only real research branches 57ms
+ ❯ packages/ai/src/contact.test.ts (4 tests | 2 failed) 33421ms
+     × standard / 4 seats makes player contact through legal bounded plans with save replay 12967ms
+     × huge / 32 seats makes player contact through legal bounded plans with save replay 12127ms
+Warning: truncated output (original token count: 8396)
+Total output lines: 323
+
+ ❯ tests/headless/chronicle-victory.test.ts (2 tests | 1 failed) 67555ms
+   × generated-start epic AI victory produces complete factual logs identical after archive save/resume 64433ms
+ ❯ packages/ai/src/pacing.test.ts (5 tests | 1 failed) 75388ms
+   × 'standard' seed 99 generator 5 reaches an earned long-form victory with legal orders and save continuation 4697ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 13 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/headless/chronicle-victory.test.ts > generated-start epic AI victory produces complete factual logs identical after archive save/resume
+Error: Test timed out in 60000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/headless/chronicle-victory.test.ts:10:37
+      8| // post500 order and replays the complete technical history twice. Giv…
+      9| // archive integration test its own wall-time budget; keep all turn/co…
+     10| test.each(['short', 'epic'] as const)('generated-start %s AI victory p…
+       |                                     ^
+     11|   const game = createGame({ seed: 20260905, size: 'tiny', factionCount…
+     12|   const archive = createArchive(game, { mode: 'watch' });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯
+
+ FAIL  apps/web/src/character-skills.test.tsx > real character skill trees > covers exactly the eleven shipped skills through their three compatible roles
+AssertionError: Target cannot be null or undefined.
+ ❯ apps/web/src/character-skills.test.tsx:29:57
+     27|         else expect(html).not.toContain(`aria-label="Inspect skill ${s…
+     28|       }
+     29|       expect(html.match(/aria-label="Inspect skill /g)).toHaveLength(d…
+       |                                                         ^
+     30|       expect(html).toContain('Root skill · no learned prerequisite.');
+     31|       expect(stateHash(game)).toBe(before);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯
+
+ FAIL  apps/web/src/progression.test.tsx > authoritative research tree presentation > keeps the established four advancement systems separate and exposes only real research branches
+AssertionError: expected '<dialog class="progression-dialog" ar…' not to contain 'Arcane Theory'
+
+Expected: "Arcane Theory"
+Received: "<dialog class="progression-dialog" aria-labelledby="progression-title"><div class="chronicles-header"><div><span class="eyebrow">The work of generations</span><h2 id="progression-title">Realm progression</h2></div><button aria-label="Close realm progression">Close ×</button></div><p class="progression-resources">1000 knowledge · 60 coin</p><div role="tablist" aria-label="Advancement systems" class="progression-tabs"><button role="tab" id="progression-technology-tab" aria-controls="progression-panel" aria-selected="true" tabindex="0">Technology</button><button role="tab" id="progression-institutions-tab" aria-controls="progression-panel" aria-selected="false" tabindex="-1">Institutions</button><button role="tab" id="progression-doctrine-tab" aria-controls="progression-panel" aria-selected="false" tabindex="-1">Military doctrine</button><button role="tab" id="progression-prosperity-tab" aria-controls="progression-panel" aria-selected="false" tabindex="-1">Prosperity</button></div><section class="progression-panel" role="tabpanel" id="progression-panel" aria-labelledby="progression-technology-tab"><p class="progression-explanation">Spend accumulated knowledge on permanent practical discoveries. Their effects add to the realm’s existing capabilities.</p><section aria-label="Research tree" data-testid="research-tree"><p class="research-key">◆ Researched · ◇ Available · ⊘ Locked. Follow the prerequisite links to plan a route; inspection never spends knowledge.</p><nav aria-label="Research branches" class="research-branch-links"><button type="button">Craft &amp; construction</button><button type="button">Civic knowledge</button><button type="button">Navigation</button><button type="button">Land stewardship</button></nav><div class="research-lanes"><section class="research-lane" aria-label="Craft &amp; construction research"><h3>Craft &amp; construction</h3><ol><li data-depth="0"><article class="progression-choice research-node" data-testid="progression-technology.cinder_masonry" data-state="available" tabindex="-1" aria-label="Cinder masonry discovery"><span class="research-node-status">◇ Available · Root discovery</span><h4>Cinder masonry</h4><p>Reusable kiln forms strengthen hearthland workshops. Every settlement gains 2 industry before devastation, occupation and blockade penalties.</p><p class="research-root">No discovery prerequisite.</p><span class="progression-cost">24 knowledge</span><button class="primary wide" aria-label="Research Cinder masonry">Research discovery</button></article></li><li data-depth="1"><article class="progression-choice research-node" data-testid="progression-technology.quarry_cranes" data-state="locked" tabindex="-1" aria-label="Counterweighted cranes discovery"><span class="research-node-status">⊘ Locked · Stage 2</span><h4>Counterweighted cranes</h4><p>Reusable lifting frames unlock Oreworks on mineral seams. Worked Oreworks favor industry at the cost of food and coin; wet ground complicates extraction.</p><div class="research-prerequisites"><span>Requires all:</span><button type="button" aria-label="View prerequisite Cinder masonry">Cinder masonry · not researched</button></div><span class="progression-cost">60 knowledge</span><p class="progression-blocker" id="blocker-technology.quarry_cranes">Research the prerequisite technologies.</p><button class="primary wide" disabled="" aria-describedby="blocker-technology.quarry_cranes" aria-label="Research Counterweighted cranes">Research discovery</button></article></li></ol></section><section class="research-lane" aria-label="Civic knowledge research"><h3>Civic knowledge</h3><ol><li data-depth="0"><article class="progression-choice research-node" data-testid="progression-technology.civic_accounts" data-state="available" tabindex="-1" aria-label="Civic accounts discovery"><span class="research-node-status">◇ Available · Root discovery</span><h4>Civic accounts</h4><p>Public ledgers reconnect the bargains once carried by the Witness Roads. Every settlement gains 1 coin and 1 knowledge before penalties; enables the Hearth Exchange.</p><p class="research-root">No discovery prerequisite.</p><span class="progression-cost">400 knowledge</span><button class="primary wide" aria-label="Research Civic accounts">Research discovery</button></article></li><li data-depth="1"><article class="progression-choice research-node" data-testid="progression-technology.surveyed_estates" data-state="locked" tabindex="-1" aria-label="Surveyed estates discovery"><span class="research-node-status">⊘ Locked · Stage 2</span><h4>Surveyed estates</h4><p>Witnessed boundary surveys add one civic progress per active settlement turn toward automatic border expansion. Claims still require connected, charted land within the settlement’s reach; siege and occupation halt expansion.</p><div class="research-prerequisites"><span>Requires all:</span><button type="button" aria-label="View prerequisite Seasonal stewardship">Seasonal stewardship · not researched</button></div><span class="progression-cost">60 knowledge</span><p class="progression-blocker" id="blocker-technology.surveyed_estates">Research the prerequisite technologies.</p><button class="primary wide" disabled="" aria-describedby="blocker-technology.surveyed_estates" aria-label="Research Surveyed estates">Research discovery</button></article></li></ol></section><section class="research-lane" aria-label="Navigation research"><h3>Navigation</h3><ol><li data-depth="0"><article class="progression-choice research-node" data-testid="progression-technology.coastal_navigation" data-state="available" tabindex="-1" aria-label="Coastal navigation discovery"><span class="research-node-status">◇ Available · Root discovery</span><h4>Coastal navigation</h4><p>Soundings and shore charts reconnect coastal hearthlands. Enables Charter harbors, transports and Coastwatch galleys; vessels can travel coastal shallows. This practical knowledge does not confer magical aptitude.</p><p class="research-root">No discovery prerequisite.</p><span class="progression-cost">30 knowledge</span><button class="primary wide" aria-label="Research Coastal navigation">Research discovery</button></article></li><li data-depth="1"><article class="progression-choice research-node" data-testid="progression-technology.ocean_navigation" data-state="locked" tabindex="-1" aria-label="Ocean navigation discovery"><span class="research-node-status">⊘ Locked · Stage 2</span><h4>Ocean navigation</h4><p>Deep-water charts and long-voyage rigging open the ocean. Ocean-capable transports and Deepwake warships may cross deep water; coastal galleys remain restricted to shallows.</p><div class="research-prerequisites"><span>Requires all:</span><button type="button" aria-label="View prerequisite Coastal navigation">Coastal navigation · not researched</button></div><span class="progression-cost">80 knowledge</span><p class="progression-blocker" id="blocker-technology.ocean_navigation">Research the prerequisite technologies.</p><button class="primary wide" disabled="" aria-describedby="blocker-technology.ocean_navigation" aria-label="Research Ocean navigation">Research discovery</button></article></li><li data-depth="2"><article class="progression-choice research-node" data-testid="progression-technology.deep_soundings" data-state="locked" tabindex="-1" aria-label="Deep soundings discovery"><span class="research-node-status">⊘ Locked · Stage 3</span><h4>Deep soundings</h4><p>Observations from the shore compare returning ships’ ocean records. Unlocks Tide observatories on coastal shallows; knowledge replaces the food-focused role of a fishery. Does not extend worker reach into deep ocean.</p><div class="research-prerequisites"><span>Requires all:</span><button type="button" aria-label="View prerequisite Ocean navigation">Ocean navigation · not researched</button></div><span class="progression-cost">120 knowledge</span><p class="progression-blocker" id="blocker-technology.deep_soundings">Research the prerequisite technologies.</p><button class="primary wide" disabled="" aria-describedby="blocker-technology.deep_soundings" aria-label="Research Deep soundings">Research discovery</button></article></li></ol></section><section class="research-lane" aria-label="Land stewardship research"><h3>Land stewardship</h3><ol><li data-depth="0"><article class="progression-choice research-node" data-testid="progression-technology.stewardship" data-state="available" tabindex="-1" aria-label="Seasonal stewardship discovery"><span class="research-node-status">◇ Available · Root discovery</span><h4>Seasonal stewardship</h4><p>Record planting and water-sharing obligations. Unlocks Spring gardens on fresh-water land; opens the waterworks, forestry and surveyed-estates branches. Knowledge alone does not build or work a tile.</p><p class="research-root">No discovery prerequisite.</p><span class="progression-cost">36 knowledge</span><button class="primary wide" aria-label="Research Seasonal stewardship">Research discovery</button></article></li><li data-depth="1"><article class="progression-choice research-node" data-testid="progression-technology.charter_forestry" data-state="locked" tabindex="-1" aria-label="Charter forestry discovery"><span class="research-node-status">⊘ Locked · Stage 2</span><h4>Charter forestry</h4><p>Bind cutting rights to the preservation of living records. Unlocks Grove archives on old-growth woodland: knowledge and modest industry instead of the woodlot’s stronger extraction.</p><div class="research-prerequisites"><span>Requires all:</span><button type="button" aria-label="View prerequisite Seasonal stewardship">Seasonal stewardship · not researched</button></div><span class="progression-cost">72 knowledge</span><p class="progression-blocker" id="blocker-technology.charter_forestry">Research the prerequisite technologies.</p><button class="primary wide" disabled="" aria-describedby="blocker-technology.charter_forestry" aria-label="Research Charter forestry">Research discovery</button></article></li><li data-depth="1"><article class="progression-choice research-node" data-testid="progression-technology.waterworks" data-state="locked" tabindex="-1" aria-label="Sluice waterworks discovery"><span class="research-node-status">⊘ Locked · Stage 2</span><h4>Sluice waterworks</h4><p>Controlled sluices support worked wetland Polders. They can feed crowded settlements, but old growth and Ashfall glass make intensive planting less productive. Physical terrain and natural features remain intact.</p><div class="research-prerequisites"><span>Requires all:</span><button type="butt…1896 tokens truncated…l":12544,"factionId":"faction.cinder_march","visible":false},{"cell":12545,"factionId":"faction.cinder_march","visible":false},{"cell":12917,"factionId":"faction.cinder_march","visible":true},{"cell":12918,"factionId":"faction.cinder_march","visible":true},{"cell":12919,"factionId":"faction.cinder_march","visible":false},{"cell":12920,"factionId":"faction.cinder_march","visible":false},{"cell":12921,"factionId":"faction.cinder_march","visible":false},{"cell":12922,"factionId":"faction.cinder_march","visible":false},{"cell":12923,"factionId":"faction.cinder_march","visible":false},{"cell":12924,"factionId":"faction.cinder_march","visible":false},{"cell":12925,"factionId":"faction.cinder_march","visible":false},{"cell":12926,"factionId":"faction.cinder_march","visible":false},{"cell":12930,"factionId":"faction.cinder_march","visible":false},{"cell":12931,"factionId":"faction.cinder_march","visible":false},{"cell":12932,"factionId":"faction.cinder_march","visible":false},{"cell":13301,"factionId":"faction.cinder_march","visible":true},{"cell":13302,"factionId":"faction.cinder_march","visible":true},{"cell":13303,"factionId":"faction.cinder_march","visible":false},{"cell":13304,"factionId":"faction.cinder_march","visible":false},{"cell":13307,"factionId":"faction.cinder_march","visible":false},{"cell":13308,"factionId":"faction.cinder_march","visible":false},{"cell":13310,"factionId":"faction.cinder_march","visible":false},{"cell":13311,"factionId":"faction.cinder_march","visible":false},{"cell":13312,"factionId":"faction.cinder_march","visible":false},{"cell":13315,"factionId":"faction.cinder_march","visible":false},{"cell":13316,"factionId":"faction.cinder_march","visible":false},{"cell":13696,"factionId":"faction.cinder_march","visible":false},{"cell":13698,"factionId":"faction.cinder_march","visible":false},{"cell":13699,"factionId":"faction.cinder_march","visible":false},{"cell":13700,"factionId":"faction.cinder_march","visible":false},{"cell":14083,"factionId":"faction.cinder_march","visible":false},{"cell":14084,"factionId":"faction.cinder_march","visible":false}],"witnessedBattleTurns":[73,88,89,90,91,92,93,94,95],"wars":[],"towns":[{"cell":7245,"harbor":false},{"cell":6474,"harbor":false},{"cell":18353,"harbor":false},{"cell":9928,"harbor":false},{"cell":8779,"harbor":true},{"cell":7623,"harbor":false}],"fleets":[{"id":"army.174","cell":11764,"cargo":[],"ocean":true},{"id":"army.83","cell":7632,"cargo":[],"ocean":false},{"id":"army.96","cell":16458,"cargo":[{"armyId":"army.241","name":"Hearth caravan","formations":1}],"ocean":true}],"reasons":["Deepwake warship: patrol and chart permitted coastal water.","Charter transport: chart water while seeking a safe landing."]}]: expected null not to be null
+ ❯ packages/ai/src/contact.test.ts:85:94
+     83|   ] as const)('%s / %i seats makes player contact through legal bounde…
+     84|     const result = contactCampaign(size, count, limit);
+     85|     expect(result.firstContact.get(result.playerId), JSON.stringify(re…
+       |                                                                                              ^
+     86|     expect(result.firstContact.get(result.playerId)!).toBeLessThanOrEq…
+     87|     expect(result.types.has('moveTo')).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/13]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > huge / 32 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.margin_observance","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":14130,"harbor":false},{"cell":26938,"harbor":false},{"cell":18743,"harbor":true},{"cell":25906,"harbor":false},{"cell":15157,"harbor":false},{"cell":19249,"harbor":false},{"cell":16696,"harbor":false}],"fleets":[{"id":"army.1100","cell":37671,"cargo":[],"ocean":true},{"id":"army.838","cell":20276,"cargo":[],"ocean":false},{"id":"army.953","cell":23857,"cargo":[],"ocean":true}],"reasons":["Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore.","Deepwake warship: patrol and chart permitted coastal water."]}]: expected 31 to be 32 // Object.is equality
+
+- Expected
++ Received
+
+- 32
++ 31
+
+ ❯ packages/ai/src/contact.test.ts:89:163
+     87|     expect(result.types.has('moveTo')).toBe(true);
+     88|     expect(result.types.has('mergeArmies')).toBe(true);
+     89|     expect([...result.firstContact.values()].filter(turn => turn !== n…
+       |                                                                                                                                                                   ^
+     90|   });
+     91|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/13]⎯
+
+ FAIL  packages/ai/src/pacing.test.ts > 'standard' seed 99 generator 5 reaches an earned long-form victory with legal orders and save continuation
+AssertionError: expected 188 to be greater than or equal to 200
+ ❯ packages/ai/src/pacing.test.ts:58:22
+     56|   }
+     57|   expect(state.victory?.path).toBe('prosperity');
+     58|   expect(state.turn).toBeGreaterThanOrEqual(minimum);
+       |                      ^
+     59|   expect(state.turn).toBeLessThanOrEqual(maximum);
+     60|   // Active conquest can fund the project earlier than the old four-to…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/13]⎯
+
+ FAIL  packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > deploys all formations, saves mid-battle, and persists exact per-formation casualties and army movement
+ZodError: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "ward"
+    ],
+    "path": [
+      "attacker",
+      0
+    ],
+    "message": "Unrecognized key: \"ward\""
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "ward"
+    ],
+    "path": [
+      "attacker",
+      1
+    ],
+    "message": "Unrecognized key: \"ward\""
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "ward"
+    ],
+    "path": [
+      "attacker",
+      2
+    ],
+    "message": "Unrecognized key: \"ward\""
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "ward"
+    ],
+    "path": [
+      "defender",
+      0
+    ],
+    "message": "Unrecognized key: \"ward\""
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "ward"
+    ],
+    "path": [
+      "defender",
+      1
+    ],
+    "message": "Unrecognized key: \"ward\""
+  },
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "ward"
+    ],
+    "path": [
+      "defender",
+      2
+    ],
+    "message": "Unrecognized key: \"ward\""
+  }
+]
+ ❯ autoResolveBattle packages/sim/src/combat/index.ts:226:130
+    224|
+    225| export function autoResolveBattle(input: BattleState, version = 8): Ba…
+    226|   let state: BattleState = (version < 8 ? legacyBattleStateSchema : ve…
+       |                                                                                                                                  ^
+    227|   state.attacker.sort(byId); state.defender.sort(byId);
+    228|   while (!state.result) {
+ ❯ packages/sim/src/army-combat.test.ts:53:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/13]⎯
+
+ FAIL  packages/sim/src/save.test.ts > save validation and migration > migrates explicit v0 nextEntityId snapshots without changing campaign state
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "arcaneResearch"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"arcaneResearch\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:557:25
+    555|   let originalVersion: number;
+    556|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    557|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    558|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    559|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:94:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/13]⎯
+
+ FAIL  packages/sim/src/save.test.ts > save validation and migration > verifies v1 checksums and the known content pack before adding warfare defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "arcaneResearch"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"arcaneResearch\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:557:25
+    555|   let originalVersion: number;
+    556|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    557|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    558|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    559|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:102:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/13]⎯
+
+ FAIL  packages/sim/src/save.test.ts > save validation and migration > migrates checked v2 state into settlement provenance and diplomacy defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "arcaneResearch"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"arcaneResearch\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:557:25
+    555|   let originalVersion: number;
+    556|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    557|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    558|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    559|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:116:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/13]⎯
+
+ FAIL  packages/sim/src/save.test.ts > save validation and migration > continues a synthetic v2 field-battle shape with an initialized war memory
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "arcaneResearch"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"arcaneResearch\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:557:25
+    555|   let originalVersion: number;
+    556|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    557|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    558|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    559|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:135:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/13]⎯
+
+ FAIL  packages/sim/src/save.test.ts > save validation and migration > migrates the recognized v3 content pack and verifies its checksum before defaults
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "arcaneResearch"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"arcaneResearch\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:557:25
+    555|   let originalVersion: number;
+    556|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    557|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    558|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    559|   const data = envelope.state;
+ ❯ packages/sim/src/save.test.ts:148:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/13]⎯
+
+ FAIL  packages/sim/src/save.test.ts > save validation and migration > preserves a synthetic v3 siege-battle shape and its pending conquest decision
+Error: Cannot read save: [
+  {
+    "code": "unrecognized_keys",
+    "keys": [
+      "arcaneResearch"
+    ],
+    "path": [
+      "state"
+    ],
+    "message": "Unrecognized key: \"arcaneResearch\""
+  }
+]
+ ❯ deserializeGame packages/sim/src/save.ts:557:25
+    555|   let originalVersion: number;
+    556|   try { const raw: unknown = JSON.parse(text); originalVersion = z.obj…
+    557|   catch (error) { throw new Error('Cannot read save: ' + (error instan…
+       |                         ^
+    558|   assert(envelope.contentHash === CONTENT_HASH, 'content hash does not…
+    559|   const data = envelope.state;
+ ❯ migrateCurrent packages/sim/src/save.test.ts:170:24
+ ❯ packages/sim/src/save.test.ts:174:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/13]⎯
+
+
+ Test Files  7 failed | 140 passed (147)
+      Tests  13 failed | 1376 passed (1389)
+   Start at  16:34:53
+   Duration  76.19s (transform 14.51s, setup 0ms, import 52.18s, tests 465.47s, environment 16ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

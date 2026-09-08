@@ -23,7 +23,10 @@ test('AI recruits varied formations and assembles real mixed armies through lega
     issue({ type: 'endTurn', factionId: state.turnOwnerId });
     if (round === 24) mirror = deserializeGame(serializeGame(state));
   }
-  expect(recruited).toEqual(new Set(['unit.colonist', 'unit.guard', 'unit.spearman', 'unit.scout', 'unit.heavy_infantry', 'unit.cavalry']));
+  // Modern generated geography may also require paid ships; every land role must still
+  // be recruited rather than replacing this composition regression with naval activity.
+  expect(new Set([...recruited].filter(id => UNITS.find(unit => unit.id === id)?.movementDomain !== 'naval'))).toEqual(new Set(['unit.colonist', 'unit.guard', 'unit.spearman', 'unit.scout', 'unit.heavy_infantry', 'unit.cavalry']));
+  expect([...recruited].every(id => UNITS.some(unit => unit.id === id))).toBe(true);
   expect(merges).toBeGreaterThan(0);
   expect(largestArmy).toBeGreaterThanOrEqual(3);
   expect(largestArmy).toBeLessThanOrEqual(12);

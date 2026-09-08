@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.underhush_exchange",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.ocean_warship for Theandril, Underhush Exchange.\nSubject: ONE substantial deep-ocean sailing warship, broad high-sided reinforced wooden hull, two compact distinct masts and square/lateen sails, raised foredeck and a fortified aft command gallery, restrained deck ballista. Clearly more massive armed fighting ship than transport, no cannons. Entire ship complete.\nCulture-specific identity: Broad low timber hull, clay-brown cloth and pale-lime sails, pewter rounded bracing, shallow keyhole-arched cabin entrance and nested compact vent caps. Practical surface boat, not an underground vehicle.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.\nNAVAL TECHNOLOGY GUARDRAIL: absolutely NO firearms, cannons, gunpowder weapons, gunports or visible gun barrels anywhere. Ranged crew would use ordinary bows/crossbows; one small open-deck wooden ballista is acceptable only for the deep warship. Side panels are solid timber or simple ventilation lattice, never cannon ports or black tubes. No smoke or firing effects.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.underhush_exchange/2f708e855066d88a63b180e91a47f861597b279636619d942bcc37e3187982aa/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0f36c9334d894f166755df17571878bdfcce47e87dde122096cb8621bb9490de",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:33:52Z",
+  "referenceHashes": [
+    "854d32fc1ff394da5c6d9b5cff301553b607fb27c70bedc06fb65418e0bdceff",
+    "5efbb17039d878b8db8f065b90d3870f3f08680f23f404326c8b3d318a715096"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "5c651a94436d04f1fb6cebf106a7ed1cef7fb711bfbd7747396bd012f42b7c41",
+      "inputHash": "854d32fc1ff394da5c6d9b5cff301553b607fb27c70bedc06fb65418e0bdceff",
+      "outputHash": "bcfdea6925671a9a6f9430c1d05feaeb498245d57788dceabf286a449186d530"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "bcfdea6925671a9a6f9430c1d05feaeb498245d57788dceabf286a449186d530",
+      "outputHash": "e45a1c493bd233fd88d2ce3fefd5c6bbad2041718856a08bd80a598ba98254b4"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e45a1c493bd233fd88d2ce3fefd5c6bbad2041718856a08bd80a598ba98254b4",
+      "outputHash": "4918a4170dde5e8ddc6663bf07b40c37422eb62db8a62c577ac2c6f5d438ef09"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "6a5c1309e30dbb6a7086f72788aa966da74040c033754319556b381ce0c6c21f",
+      "outputHash": "b82974e5d6bdd46c3d0d4fcff30776a2bd8f4e5e9075b2d62ed88cca424d7ecf"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "b5f96699bf73411ec9bd17de046410e30d776f73e0ddeb5eb500e342dd2f6c95",
+      "outputHash": "11362d3a3658dd8bb87af7e6f8a5bd41ee530d2ff53372dba47825dba3ecdc94"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "6a0e79c64c335bb77d6de4e94bbb5b27b35be615af2312f64a1dcde2d6e88cde",
+      "outputHash": "7b5947d3d933e19b8889d4ac1b2839f45ee3cf27c1db0b1c523c50da9feabc02"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:34.582Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Deeper hull with two masts and high covered stern; open-deck ballista, no gun barrels or gunports. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 2f708e855066d88a63b180e91a47f861597b279636619d942bcc37e3187982aa; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/51d90a048904165aa274371b29db2d5f0d84c3c689e46367cde662584703a856.png"
+    ],
+    "inputHash": "ca546a4996f2d5d874ec57e50b444eeec95372bddd03f70d6e8136d82c34143a"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

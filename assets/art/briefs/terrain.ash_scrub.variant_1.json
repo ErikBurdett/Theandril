@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.ash_scrub.variant_1",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.ash_scrub.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. ASH SCRUB: broad grey-brown ash-rich soil with irregular charcoal cinder patches and two low muted sage regrowth clusters. Dull rusty pebbles, no lava, fire, ruins or tall rocks. Living dry regrowth on soot-grey ground. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.ash_scrub.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.ash_scrub.variant_1/v1/2d957965ef2c783c/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "a7fe8566eb68aa6bebacf53ad6b85cd9bad0cff4fa6d8fd19b0aeebd3bf2abf4",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.ash_scrub.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.ash_scrub.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:49:49.877Z",
+  "referenceHashes": [
+    "ae604835d7429232245d07a480ea44f4d6b7f6b3914edcc74aa7289736372ff2",
+    "46cbc528e9a004a0def44c1230662a86f673600d3b0ce35ef1232b587d09ba14"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "1a1abf4ca92f59b7644df127a987ca45ae580d258cbcdd9f32e6c033fd544be6",
+      "inputHash": "ae604835d7429232245d07a480ea44f4d6b7f6b3914edcc74aa7289736372ff2",
+      "outputHash": "337720987316afd57ab0fea82b4a5b26b1430af37e5d3cb41cc1564b5058ffb6"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

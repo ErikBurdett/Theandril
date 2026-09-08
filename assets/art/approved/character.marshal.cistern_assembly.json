@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.cistern_assembly",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native64. One full-body adult appointed field marshal, confident grounded posture, richer but practical protective coat and armor, short baton in one hand, sheathed sword at hip. Head and both boots complete, no giant flag or magical staff; a command officer not a king.",
+  "frames": [
+    {
+      "id": "character.marshal.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.marshal.cistern_assembly/586e68ef0eb834d4d399ca4e756c047bce8e723c3e0c6bccfd6250a939a30665/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "ac96fdcbf28f2c84d23021a3be1cfc59467d71e014f4ecaf2f711ff5ffff9ad5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/character.marshal.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/character.marshal.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:49:08.107Z",
+  "referenceHashes": [
+    "30730cc3d3affe46fd194bb3d7ea51bdcfba6d6df4aa9d6ff175ecf3e0c1c790",
+    "7772700898d7e61e6628513120ceb68e4ace86980ad4e40b78a9c0ee255250fa"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "bbc6813279595ac87d9d8779ec1529fcd9144e582adb732dcbd402936fd347de",
+      "inputHash": "30730cc3d3affe46fd194bb3d7ea51bdcfba6d6df4aa9d6ff175ecf3e0c1c790",
+      "outputHash": "159d42537ac861b778aaba4676ad53d6638369e59f7cd6c13c591fd63f96d919"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "159d42537ac861b778aaba4676ad53d6638369e59f7cd6c13c591fd63f96d919",
+      "outputHash": "b825334ef4da0de184bdcedd7b496a764c353fb6bc8cd0e91deb472578ca7b68"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b825334ef4da0de184bdcedd7b496a764c353fb6bc8cd0e91deb472578ca7b68",
+      "outputHash": "5f74330357bef6e67028fb86080dba7fa309ca13eb1ae0468ea4947d2a9df75f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "3475f9988e39a717413a176ea7c9b7fc31c4e5a91150612c29e522873ca6bf19",
+      "outputHash": "8e660b8f76e5d072af1ddc5ef2ac401f006e20d9eafb532f2f490b93c84d551a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "76abcfae5458d89856bc1dac0421170c2fe101cfd425cee44f4395889f42714b",
+      "outputHash": "0270f7beb7e5cce7cde3cc8d0b5b2048ebfd664f43d8294c4949f22ba7976dda"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "dc8901bb1e0cd885375e362797078fee7f713ccac9a42c51292f862d860c4a18",
+      "outputHash": "393391b408472838e71b343a7ecddf978e08d9329424dbcd8b6a536c5c9a7122"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.marshal.cistern_assembly.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:08.280Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Cream wrapped officer with blue sash, baton and ceremonial helmet; full feet and hands distinguish the leader. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 586e68ef0eb834d4d399ca4e756c047bce8e723c3e0c6bccfd6250a939a30665; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/89d7f40411347d33b0d09389242118940d56bdbc2594e826f00d90668bd9d847.png"
+    ],
+    "inputHash": "651e128c57578c046c7bd119214e2348b03de1f036f427a4dcf2101b3f75f141"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

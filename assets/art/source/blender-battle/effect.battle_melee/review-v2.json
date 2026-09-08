@@ -1,0 +1,30 @@
+{
+  "id": "effect.battle_melee",
+  "version": 2,
+  "reviewedAt": "2026-09-07T20:56:51.879Z",
+  "reviewer": "Codex mapgen agent",
+  "decision": "inspected-candidate-not-approved",
+  "manifestSha256": "385fbce8e3549911a71fd1f804171fa0a5bd9d940f6888f1f316d50b31bdb20b",
+  "evidence": [
+    {
+      "path": "v2/review-1x.png",
+      "sha256": "03223a91a7071d844e2ff111468815524eeeff8c0d737d60f5538a36ca282f4a"
+    },
+    {
+      "path": "v2/review-4x.png",
+      "sha256": "6a91f834c6f4d5d86fb8f64ba0f8dec5335b9550a7c1d4bb0cf39896c99c2792"
+    }
+  ],
+  "findings": [
+    "All eight ordered poses inspected at native size and integer enlargement on dark, light and muted earth/vegetation studio backgrounds.",
+    "The diagonal preparation and unequal cream/copper impact silhouette read clearly. Later chips separate in different directions and remain visible through the final frame; no static-facing substitution.",
+    "Warm sparks are appropriately highest contrast on dark ground. Tail flecks and pale strike are subdued on the light background; actual battlefield contrast remains to be checked.",
+    "Every pose fits transparent padding; measured camera anchor has zero inter-frame drift. The constant 0.000027-pixel projection offset is numerical precision, below the explicit 0.0001-pixel tolerance."
+  ],
+  "limits": [
+    "Temporal playback not independently opened in a browser; retained preview.html supplies the exact one-shot order/timing for main review.",
+    "Pixel Snapper, Aseprite, approved catalog, runtime presentation and in-game visual acceptance remain pending.",
+    "Original Blender-rendered flat mesh effect with keyframed individual parts, not hand-drawn pixel art or a volumetric simulation."
+  ],
+  "approval": "None; parent must inspect before batch/approval/publication."
+}

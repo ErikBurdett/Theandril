@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.red_sluice",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.red_sluice"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Red Sluice Directorate, role character.surveyor.\nSUBJECT: ONE adult field surveyor, cultural work layers and complete boots, folded measuring tripod at side and compact map tube, no floating parchment or legiblewriting. Clear surveying tools not combatweapon. Native64x64 maxheight48px pivot32,56.\nCULTURE: Brick red, dull celadon cloth, tarred oak, black chain and weathered bronze. Broad rectangular rain shields, hooded crew coats, horizontal bar motifs. Low sluice-gate inspired maintenance halls, wheel-braced gantries, thick brick channelside courtyards; no surrounding waterrectangle or actualtile.\nPEOPLE if character or rider: Human waterworks crew households and disciplined municipal escorts.\nHERALDRY if UI or flag: A barred spillway with three broad vertical openings and one horizontal lifting bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "character.surveyor.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.surveyor.red_sluice/3b37a58478cd2dc6f88d8a25ae74f4cb9d1c928c1a037d6ee5e2a968c77213c3/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "eea374e9735f55c0e2b4c9a2272d1bd3fbcb2a58db22dcbe77c243da2c52749e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/character.surveyor.red_sluice-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/character.surveyor.red_sluice-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T16:38:25Z",
+  "referenceHashes": [
+    "b129e561bb37258e391a8ea05f418cd3c4d16a2d479967456758ea2b22878cc4",
+    "f66806fad01a8b9fd34be69a15e6f4fbbafca3f73e5db80e25dd89ccaf710d5f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "e8f38aee13645beb3521a4d219ffe5e869d273ca112f42d8f01f3248afc110db",
+      "inputHash": "b129e561bb37258e391a8ea05f418cd3c4d16a2d479967456758ea2b22878cc4",
+      "outputHash": "c4f1e6513e33c20e9efc9b8daba4f6c000010da7c499196e4aa080649f36285d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "c4f1e6513e33c20e9efc9b8daba4f6c000010da7c499196e4aa080649f36285d",
+      "outputHash": "a281d8c42a9ad5671bdf11c908d4b45bb1d19333ecadce8c9ee429d61bce0315"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a281d8c42a9ad5671bdf11c908d4b45bb1d19333ecadce8c9ee429d61bce0315",
+      "outputHash": "8f96e23b924ce58cadb5ece65a2b31d6757daeca4aec858f2628ae16e36286f1"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "0e3d42a92aa7931dd6172f36322406379fe6d45cc8c3a348e53bda189fd7332f",
+      "outputHash": "5219076e4cac598df96b0afd1835b7b9a846b8acb7cabd149884557994fe4d5b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "2d0e65d22eddb98b88f5acec8ec461249c1c258c603c111fb38cf86f60f4d559",
+      "outputHash": "3efdae7957b6406541ed74b8f7ffce46d944e7064c3ff3d2b88e623324de76ce"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "3f266d24a85f4a647ba5dd595e1756b7c02afacc5e0bf9c069288867bf8d4038",
+      "outputHash": "81223ab41fd1390916e6b346c2f806f886f1ddbf0875efbb27a284a42d062cfe"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.surveyor.red_sluice.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:04:48.400Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Folded survey tripod and long instrument case remain contained; no firearm interpretation. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 3b37a58478cd2dc6f88d8a25ae74f4cb9d1c928c1a037d6ee5e2a968c77213c3; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5f08f263ca9f3fa8f83bdbe0ead4b74651614ce31c1469603d058fd9729175bb.png"
+    ],
+    "inputHash": "4b62eb87dc1ef92d0754a027d86b72367460436dc1d090e34f2d31398f2ff6e3"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

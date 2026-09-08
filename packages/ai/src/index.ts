@@ -6,9 +6,10 @@ import { planConquestDecision } from './conquest';
 import { planProgression } from './progression';
 import { createNavigation } from './navigation';
 import { planCharacters } from './characters';
-import { planNaval } from './naval';
+import { coastalFoundingSite, planNaval } from './naval';
 import { planLand } from './land';
 import { recruitmentRoster } from './recruitment';
+import { planRoadAcceleration } from './roads';
 
 export { chooseCaptureOption } from './conquest';
 export { aiObservationOptions, landPlanningTowns, LAND_PLANNING_TOWN_LIMIT } from './observation-options';
@@ -54,7 +55,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const projectHosts = new Set(view.projects.filter(project => project.factionId !== factionId && (project.status === 'active' || project.status === 'paused')).map(project => project.settlementId));
   const objectives = enemyTowns.filter(town => !protectedIds.has(town.factionId)).sort((a, b) => Number(projectHosts.has(b.id)) - Number(projectHosts.has(a.id)) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)).slice(0, 64);
   const approachCells = [...new Set([...enemies, ...enemyTowns].filter(entity => !protectedIds.has(entity.factionId)).map(entity => entity.cell))].slice(0, 64);
-  const hasColonist = allOwnArmies.some(army => army.formations.some(formation => units.get(formation.unitId)?.canFound));
+  // An embarked founder belongs to a separate expedition. It must not freeze
+  // affordable overland expansion while a distant fleet searches for a landing.
+  const hasColonist = ownArmies.some(army => army.formations.some(formation => units.get(formation.unitId)?.canFound));
   let plannedColonist = hasColonist || ownSettlements.some(town => town.queue.some(order => order.itemId === 'unit.colonist'));
   const formations = allOwnArmies.filter(army => army.domain !== 'naval').flatMap(army => army.formations);
   const militaryCount = formations.filter(formation => !units.get(formation.unitId)?.canFound).length;
@@ -76,8 +79,10 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const specialists = planCharacters(view, Math.max(0, budget - economyReserve));
   plans.push(...specialists.commands); reasons.push(...specialists.reasons);
   budget -= specialists.coinSpent;
-  const knowledgeSpent = advancement.commands.reduce((sum, command) => sum + (command.type === 'research' ? view.progression.technologyChoices.find(choice => choice.id === command.technologyId)?.knowledgeCost ?? 0 : 0), 0);
-  const naval = planNaval(view, Math.max(0, budget - economyReserve), { heldArmyIds: specialists.heldArmyIds, knowledgeBudget: Math.max(0, view.knowledge - knowledgeSpent) });
+  const knowledgeSpent = advancement.commands.reduce((sum, command) => sum + (command.type === 'research' ? view.progression.technologyChoices.find(choice => choice.id === command.technologyId)?.knowledgeCost ?? 0 : command.type === 'researchArcane' ? view.arcaneResearch.choices.find(choice => choice.id === command.discoveryId)?.knowledgeCost ?? 0 : 0), 0);
+  // Keep one caravan's funding, but do not require every inland building before a port
+  // can launch its first ship. That circular reservation stranded mature island realms.
+  const naval = planNaval(view, Math.max(0, budget - Math.min(economyReserve, 16)), { heldArmyIds: specialists.heldArmyIds, knowledgeBudget: Math.max(0, view.knowledge - knowledgeSpent) });
   plans.push(...naval.commands); reasons.push(...naval.reasons); budget -= naval.coinSpent;
   if (naval.interrupts) return { commands: plans, reasons };
   if (naval.commands.some(command => command.type === 'queue' && command.itemId === 'unit.colonist')) plannedColonist = true;
@@ -97,7 +102,11 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       if (units.has(item.id) && item.id !== 'unit.colonist') { plannedMilitary++; rosterCounts.set(item.id, (rosterCounts.get(item.id) ?? 0) + 1); }
     }
   }
-  const land = planLand(view, Math.max(0, budget - 24));
+  const road = planRoadAcceleration(view, Math.max(0, budget - 24));
+  // Its quote depends on current worker sight. Execute before any officer/boarding/march
+  // proposal can remove that sight; the total budget already accounts for every order.
+  if (road.command) { plans.unshift(road.command); reasons.push(road.reason!); budget -= road.coinSpent; }
+  const land = planLand(view, Math.max(0, budget - 24), new Set(plans.flatMap(command => command.type === 'queue' ? [command.settlementId] : [])));
   plans.push(...land.commands); reasons.push(...land.reasons); budget -= land.coinSpent;
   const claimed = new Set<number>();
   const navigation = createNavigation(view);
@@ -107,6 +116,11 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   let hearthNumber = ownSettlements.length;
   const reorganized = new Set<string>();
   const ownTownCells = new Set(ownSettlements.map(town => town.cell));
+  // A charted foreign border is a discovery clue, not permission to attack or a
+  // revealed settlement. A nearby wayfinder can approach it to establish contact.
+  const foreignBorders = view.cells.filter(cell => cell.factionId && cell.factionId !== factionId);
+  const borderStride = Math.max(1, Math.ceil(foreignBorders.length / 64));
+  const contactClues = foreignBorders.filter((_, index) => index % borderStride === 0).slice(0, 64);
   // Keep one fast reconnaissance detachment independent. Other recruits join real field armies.
   const explorerId = ownArmies.find(army => army.formations.length === 1 && army.unitId === 'unit.scout')?.id;
   const groups = new Map<number, typeof ownArmies>();
@@ -134,7 +148,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   for (const army of rotate(ownArmies, 32).slice(0, 128)) {
     if (plans.length >= 128) break;
     if (besiegers.has(army.id) || reorganized.has(army.id) || naval.heldArmyIds.has(army.id)) continue; // Composition/assignment/transport changes need fresh facts.
-    if (army.canFound && army.movement > 0 && !cells.get(army.cell)?.settlementId && foundingCells.every(cell => hexDistance(cell, army.cell, view.width) >= 4)) {
+    const portSite = coastalFoundingSite(view, army);
+    if (army.canFound && (portSite === null || portSite === army.cell) && army.movement > 0 && !cells.get(army.cell)?.settlementId && foundingCells.every(cell => hexDistance(cell, army.cell, view.width) >= 4)) {
       let name: string;
       do { name = `Hearth ${++hearthNumber}`; } while (settlementNames.has(name));
       settlementNames.add(name);
@@ -187,6 +202,8 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       }
     }
     const nearbyObjectives = military ? objectives.filter(town => hexDistance(army.cell, town.cell, view.width) <= 18) : [];
+    const nearbyContacts = army.id === explorerId && !enemyTowns.length && !enemies.length
+      ? contactClues.filter(cell => hexDistance(army.cell, cell.cell, view.width) <= 18) : [];
     const nearbyThreat = enemies.filter(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10 && enemy.strength > army.strength).slice(0, 64);
     const score = (cell: number): number => {
       const distance = Math.min(20, ...ownSettlements.map(town => hexDistance(cell, town.cell, view.width)));
@@ -194,9 +211,10 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       const approach = invading ? Math.max(...nearbyObjectives.map(town => (projectHosts.has(town.id) ? 1000 : 0) - hexDistance(cell, town.cell, view.width) * 500))
         : military && approachCells.length ? -Math.min(...approachCells.map(enemy => hexDistance(cell, enemy, view.width))) * 100 : 0;
       const danger = nearbyThreat.reduce((sum, enemy) => sum + Math.max(0, 5 - hexDistance(cell, enemy.cell, view.width)) * 1200, 0);
-      return (army.canFound ? distance * 100 : approach) - danger;
+      return (portSite !== null ? -hexDistance(cell, portSite, view.width) * 500 : army.canFound ? distance * 100
+        : nearbyContacts.length ? -Math.min(...nearbyContacts.map(clue => hexDistance(cell, clue.cell, view.width))) * 500 : approach) - danger;
     };
-    const strategic = army.canFound || military && approachCells.length > 0 || enemies.some(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10);
+    const strategic = army.canFound || nearbyContacts.length > 0 || military && approachCells.length > 0 || enemies.some(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10);
     const target = navigation.destination(army, army.sight, claimed, strategic ? score : undefined);
     if (target !== undefined) {
       claimed.add(target);

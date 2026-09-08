@@ -1,0 +1,74 @@
+Initial actual-build smoke: battle art hash/manual shield/save/restored round all succeeded; final report assertion mixed CSS-transformed visible innerText with complete textContent. Corrected test uses full textContent on both sides, preserving hidden formation and round-account comparison. No runtime fix or gate reduction.
+
+[WebServer] (node:3236234) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3236246) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:3236285) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (7.6s)
+(node:3236574) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks (1.3s)
+
+
+  1) tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: getByTestId('battle-report')
+    Timeout: 5000ms
+    - Expected  - 12
+    + Received  +  1
+
+    - TURN 1 · HEX 537 · LAND BATTLE
+    - The field was left contested
+    -
+    - mutual withdrawal · 11 rounds · Plains
+    -
+    - Ashen Compact
+    - 15 strength lost · 45 survivors
+    - Reedbound Council
+    - 18 strength lost · 42 survivors
+    - army.2: retreated at hex 440 · 45 remaining strength
+    - army.4: retreated at hex 538 · 42 remaining strength
+    - Formations & battle account
+    + Turn 1 · hex 537 · Land battleThe field was left contestedmutual withdrawal · 11 rounds · PlainsAshen Compact15 strength lost · 45 survivorsReedbound Council18 strength lost · 42 survivorsarmy.2: retreated at hex 440 · 45 remaining strengtharmy.4: retreated at hex 538 · 42 remaining strengthFormations & battle accountAttacking formations at round endFormation & positionStrengthMoraleFatigueOath guardformation.2 · rank 1, file 345 / 602478Defending formations at round endFormation & positionStrengthMoraleFatigueOath guardformation.4 · rank 1, file 342 / 602178Round 1: attacker advance, defender advance.formation.2 struck formation.4 for 0 strength.formation.4 struck formation.2 for 0 strength.Round 2: attacker advance, defender advance.formation.2 struck formation.4 for 4 strength.formation.4 struck formation.2 for 2 strength.Round 3: attacker advance, defender advance.formation.2 struck formation.4 for 3 strength.formation.4 struck formation.2 for 4 strength.Round 4: attacker advance, defender advance.formation.2 struck formation.4 for 2 strength.formation.4 struck formation.2 for 2 strength.Round 5: attacker advance, defender advance.formation.2 struck formation.4 for 3 strength.formation.4 struck formation.2 for 1 strength.Round 6: attacker advance, defender advance.formation.2 struck formation.4 for 1 strength.formation.4 struck formation.2 for 1 strength.Round 7: attacker advance, defender advance.formation.2 struck formation.4 for 2 strength.formation.4 struck formation.2 for 2 strength.Round 8: attacker advance, defender advance.formation.2 struck formation.4 for 1 strength.formation.4 struck formation.2 for 1 strength.Round 9: attacker brace, defender brace.formation.2 struck formation.4 for 1 strength.formation.4 struck formation.2 for 1 strength.Round 10: attacker brace, defender brace.formation.2 struck formation.4 for 1 strength.formation.4 struck formation.2 for 1 strength.Round 11: attacker withdraw, defender withdraw.draw: mutual withdrawal.
+
+    Call log:
+      - Expect "toHaveText" getByTestId('battle-report') with timeout 5000ms
+      - waiting for getByTestId('battle-report')
+        14 × locator resolved to <article class="battle-report" data-testid="battle-report">…</article>
+           - unexpected value "Turn 1 · hex 537 · Land battleThe field was left contestedmutual withdrawal · 11 rounds · PlainsAshen Compact15 strength lost · 45 survivorsReedbound Council18 strength lost · 42 survivorsarmy.2: retreated at hex 440 · 45 remaining strengtharmy.4: retreated at hex 538 · 42 remaining strengthFormations & battle accountAttacking formations at round endFormation & positionStrengthMoraleFatigueOath guardformation.2 · rank 1, file 345 / 602478Defending formations at round endFormation & positionStrengthMoraleFatigueOath guardformation.4 · rank 1, file 342 / 602178Round 1: attacker advance, defender advance.formation.2 struck formation.4 for 0 strength.formation.4 struck formation.2 for 0 strength.Round 2: attacker advance, defender advance.formation.2 struck formation.4 for 4 strength.formation.4 struck formation.2 for 2 strength.Round 3: attacker advance, defender advance.formation.2 struck formation.4 for 3 strength.formation.4 struck formation.2 for 4 strength.Round 4: attacker advance, defender advance.formation.2 struck formation.4 for 2 strength.formation.4 struck formation.2 for 2 strength.Round 5: attacker advance, defender advance.formation.2 struck formation.4 for 3 strength.formation.4 struck formation.2 for 1 strength.Round 6: attacker advance, defender advance.formation.2 struck formation.4 for 1 strength.formation.4 struck formation.2 for 1 strength.Round 7: attacker advance, defender advance.formation.2 struck formation.4 for 2 strength.formation.4 struck formation.2 for 2 strength.Round 8: attacker advance, defender advance.formation.2 struck formation.4 for 1 strength.formation.4 struck formation.2 for 1 strength.Round 9: attacker brace, defender brace.formation.2 struck formation.4 for 1 strength.formation.4 struck formation.2 for 1 strength.Round 10: attacker brace, defender brace.formation.2 struck formation.4 for 1 strength.formation.4 struck formation.2 for 1 strength.Round 11: attacker withdraw, defender withdraw.draw: mutual withdrawal."
+
+
+      41 |   await expect(page.getByTestId('battle-round')).toHaveText('1');
+      42 |   await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
+    > 43 |   await expect(page.getByTestId('battle-report')).toHaveText(outcome);
+         |                                                   ^
+      44 |   expect(await page.evaluate(() => typeof window.__THEANDRIL__)).toBe('undefined');
+      45 |   expect(errors).toEqual([]);
+      46 | });
+        at /home/telephoneheater/Work/Theandril/tests/production/battlefield.spec.ts:43:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice22-production/battlefield-built-battlefi-7a66d-s-without-development-hooks/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice22-production/battlefield-built-battlefi-7a66d-s-without-development-hooks/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice22-production/battlefield-built-battlefi-7a66d-s-without-development-hooks/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice22-production/battlefield-built-battlefi-7a66d-s-without-development-hooks/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks 
+  1 passed (10.4s)
+

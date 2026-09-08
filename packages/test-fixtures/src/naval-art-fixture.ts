@@ -7,8 +7,8 @@ export const NAVAL_ART_ROLES = ['unit.transport', 'unit.coastal_warship', 'unit.
 export const NAVAL_ART_GALLERY_WIDTH = 256;
 export const NAVAL_ART_HIDDEN_NAME = 'Unseen naval reserve';
 export const NAVAL_ART_CARGO_NAME = 'Embarked gallery guard';
-export const NAVAL_ART_COHORTS = [0, 1].map(index => ({
-  label: `naval-cohort-${index + 1}`, offset: index * 80,
+export const NAVAL_ART_COHORTS = [0, 1, 2, 3].map(index => ({
+  label: `naval-cohort-${index + 1}`, offset: index * 60,
   families: FACTIONS.slice(index * 6, index * 6 + 6).map(faction => faction.id.slice('faction.'.length)),
 }));
 export const navalArtCell = (column: number, row: number): number => row * NAVAL_ART_GALLERY_WIDTH + column;
@@ -18,8 +18,8 @@ export const navalArtCell = (column: number, row: number): number => row * NAVAL
  * The passenger boards through the real command; no transport result is injected.
  */
 export function navalArtGallery(): GameState {
-  const state = createGame({ seed: 20260905, size: 'small', factionCount: 12, pace: 'short' });
-  if (state.world.width !== NAVAL_ART_GALLERY_WIDTH || FACTIONS.length !== 12) throw new Error('Review the twelve-culture naval gallery layout after a roster/map change.');
+  const state = createGame({ seed: 20260905, size: 'small', factionCount: 24, pace: 'short', generatorVersion: 4 });
+  if (state.world.width !== NAVAL_ART_GALLERY_WIDTH || FACTIONS.length !== 24) throw new Error('Review the twenty-four-culture naval gallery layout after a roster/map change.');
   const world = state.world;
   world.terrain.fill(1); world.biome.fill(1); world.fertility.fill(60);
   function water(cell: number): void { world.terrain[cell] = 0; world.biome[cell] = 0; world.fertility[cell] = 0; }
@@ -58,7 +58,7 @@ export function navalArtGallery(): GameState {
   if (!boarding.ok) throw new Error(`Gallery boarding failed: ${boarding.error}`);
   const restored = deserializeGame(serializeGame(state));
   const view = getObservation(restored, restored.turnOwnerId, { landDetails: 'none' });
-  if (view.factions.length !== 12 || view.armies.some(item => item.name === NAVAL_ART_HIDDEN_NAME)) throw new Error('Naval gallery must reveal all twelve cultures without its unseen reserve.');
+  if (view.factions.length !== 24 || view.armies.some(item => item.name === NAVAL_ART_HIDDEN_NAME)) throw new Error('Naval gallery must reveal all twenty-four cultures without its unseen reserve.');
   for (const faction of restored.factions) for (const role of NAVAL_ART_ROLES) {
     if (!view.armies.some(item => item.factionId === faction.id && item.unitId === role)) throw new Error(`Naval gallery sight omitted ${role}/${faction.id}.`);
   }

@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { openSelectedOrders, selectFromRegistry } from './ui-navigation';
 import { writeFile } from 'node:fs/promises';
 import { factionArtId, type RuntimeCatalog } from '@theandril/art-pipeline/runtime';
 import { exportSave } from '@theandril/persistence';
@@ -7,24 +8,24 @@ import { NAVAL_ART_CARGO_NAME, NAVAL_ART_COHORTS, NAVAL_ART_HIDDEN_NAME, NAVAL_A
 
 const SAVE = serializeGame(navalArtGallery());
 async function selectArmy(page: Page, name: string): Promise<void> {
-  await page.getByRole('tab', { name: /Armies/ }).click();
-  await page.getByTestId('army-registry').getByRole('button', { name: new RegExp(`^${name} `) }).click();
+  await selectFromRegistry(page, 'armies', name);
 }
 async function loadGallery(page: Page): Promise<void> {
   await page.setViewportSize({ width: 1680, height: 1320 });
   await page.goto('/');
-  await page.locator('input[type=file]').setInputFiles({ name: 'twelve-culture-navies.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(SAVE)) });
+  await page.locator('input[type=file]').setInputFiles({ name: 'twenty-four-culture-navies.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(SAVE)) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
   await selectArmy(page, `${NAVAL_ART_COHORTS[0]!.label} harbor survey`);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.state)).toBe('ready');
 }
 
-test('all twelve cultures show three distinct approved naval hulls, stable strategic badges and canonical fog without duplicate passengers', async ({ page }, testInfo) => {
+test('all twenty-four cultures show three distinct approved naval hulls, stable strategic badges and canonical fog without duplicate passengers', async ({ page }, testInfo) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await loadGallery(page);
   const hash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
   const summary = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!);
-  expect(summary.armies.filter(army => army.domain === 'naval')).toHaveLength(36);
+  expect(summary.factions).toHaveLength(24);
+  expect(summary.armies.filter(army => army.domain === 'naval')).toHaveLength(72);
   expect(summary.armies.some(army => army.name === NAVAL_ART_HIDDEN_NAME)).toBe(false);
   const cargoId = summary.ownArmies.find(army => army.name === NAVAL_ART_CARGO_NAME)!.id;
   const covered = new Set<string>(), inspections: unknown[] = [];
@@ -72,7 +73,12 @@ test('all twelve cultures show three distinct approved naval hulls, stable strat
     }
     await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.visibleAssetIds)).toEqual(expect.arrayContaining(expected));
     const near = await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!);
-    expect(near.lod).toBe('near-sprites'); expect(near.warnings).toEqual([]); expect(near.visibleAnimationFrames).toEqual([]);
+    expect(near.lod).toBe('near-sprites'); expect(near.warnings).toEqual([]);
+    // Shore observers can use the one approved faction idle animation; the
+    // seventy-two hulls remain static and never inherit a land-unit clip.
+    const animatedScouts = near.visibleEntityArt.filter(entity => entity.assetId === 'unit.scout.ashen_compact');
+    expect(near.visibleAnimationFrames).toHaveLength(animatedScouts.length);
+    for (const animation of near.visibleAnimationFrames) expect(animation).toEqual({ contentId: 'unit.scout.ashen_compact', frameId: expect.stringMatching(/^unit\.scout\.ashen_compact\/idle\/se\/[0-3]$/) });
     expect(near.visibleEntityArt.some(entity => entity.entityId === cargoId)).toBe(false);
     const hulls = near.visibleEntityArt.filter(entity => expected.includes(entity.assetId ?? ''));
     expect(hulls).toHaveLength(18);
@@ -119,10 +125,12 @@ test('all twelve cultures show three distinct approved naval hulls, stable strat
     await page.screenshot({ path: testInfo.outputPath(`${cohort.label}-naval-strategic.png`), fullPage: true });
     inspections.push({ cohort: cohort.label, pan, beforePan, near, framing, far });
   }
-  expect(covered.size).toBe(36);
+  expect(covered.size).toBe(72);
+  expect([...covered].sort()).toEqual(NAVAL_ART_COHORTS.flatMap(cohort => cohort.families.flatMap(family => NAVAL_ART_ROLES.map(role => `${role}.${family}`))).sort());
   await page.setViewportSize({ width: 390, height: 844 });
   const transportName = summary.ownArmies.find(army => army.unitId === 'unit.transport')!.name;
   await selectArmy(page, transportName);
+  await openSelectedOrders(page);
   await page.getByTestId('army-composition').locator(':scope > summary').click();
   const frame = page.locator('.formation-choice [data-art-id="unit.transport.ashen_compact"]');
   await expect(frame).toHaveAttribute('data-art-state', 'ready');
@@ -132,7 +140,7 @@ test('all twelve cultures show three distinct approved naval hulls, stable strat
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(hash);
   const evidence = testInfo.outputPath('naval-art-inspection.json');
-  await writeFile(evidence, JSON.stringify({ covered: [...covered].sort(), inspections, notes: ['Authored placement and shallow geography, validated by canonical save import; actual existing hull definitions.', 'A real embark command carries the guard; cargo remains in its observed army read model but never receives a duplicate map marker.', 'Two six-culture galleries retain native96 framing; one static southeast pose, no invented animation.', 'Fog-hidden reserve never entered the renderer. Camera/selection/resizing left canonical state unchanged.'] }, null, 2));
+  await writeFile(evidence, JSON.stringify({ covered: [...covered].sort(), inspections, notes: ['Authored placement and shallow geography, validated by canonical save import; actual existing hull definitions.', 'A real embark command carries the guard; cargo remains in its observed army read model but never receives a duplicate map marker.', 'Four six-culture galleries retain native96 framing; all72 hulls use one static southeast pose. Only approved Ashen scout observers animate.', 'Fog-hidden reserve never entered the renderer. Camera/selection/resizing left canonical state unchanged.'] }, null, 2));
   await testInfo.attach('naval-art-inspection.json', { path: evidence, contentType: 'application/json' });
   expect(errors).toEqual([]);
 });

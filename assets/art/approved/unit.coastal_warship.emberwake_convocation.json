@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.emberwake_convocation",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.coastal_warship for Theandril, Emberwake Convocation.\nSubject: ONE long slender shallow-draft coastal galley, low open deck, one compact triangular lateen sail, separated banks of broad oars, low practical bow ram and shield-lined rails. Fast narrow silhouette, no large cargo cabin or cannons. Entire sail, prow, stern and every oar complete.\nCulture-specific identity: Dark practical timber, ash-white ceramic protective panels, smoked-orange and muted sulfur-green patched sails, enclosed seed cargo shelters and split-vent cabin roofs. No flaming ship or magic propulsion.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.\nNAVAL TECHNOLOGY GUARDRAIL: absolutely NO firearms, cannons, gunpowder weapons, gunports or visible gun barrels anywhere. Ranged crew would use ordinary bows/crossbows; one small open-deck wooden ballista is acceptable only for the deep warship. Side panels are solid timber or simple ventilation lattice, never cannon ports or black tubes. No smoke or firing effects.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.emberwake_convocation/43db2a496aab638c6ff0ec3669a879c64d3080ac11d67013a38d94c52c33f6dd/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "91b01e781fd25467001fafae7885ecabb4c40988197f4368a2247944013a70e3",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:06:16Z",
+  "referenceHashes": [
+    "8bfbfb68bbe72278acdbd99505513e65a77406d4bcf8522e1099d43302ce8535",
+    "d5d8d0ddeba9680d0bc1d75fb97866b704375212c234f191318dbb3cf240b2de"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "25568094db914f58e020550e140337248641c45110f806008988c02554906863",
+      "inputHash": "8bfbfb68bbe72278acdbd99505513e65a77406d4bcf8522e1099d43302ce8535",
+      "outputHash": "9a9c157b3e0ef0b4b70e527d39d08e6a9c3785d7cabf7de22a2b28b9ea202d1d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "9a9c157b3e0ef0b4b70e527d39d08e6a9c3785d7cabf7de22a2b28b9ea202d1d",
+      "outputHash": "c8fc4f3f83cc81afdef0b128484eba2b5677b5d4ac38fcf667a2cbce6edcabff"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c8fc4f3f83cc81afdef0b128484eba2b5677b5d4ac38fcf667a2cbce6edcabff",
+      "outputHash": "87959e2cd6bd043fb5f9f2c8d836dd0c44df26e7b3035a065a7adfdb8a79b738"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "30ebae26c339a38f45dcb479e9233f6f8f9f9c9fcc8828c5c2704690e04a6144",
+      "outputHash": "a0c87ef0fdec56d1901118e8bb7ec4a4bd753e023cb12cc6b94fa4b6127d97eb"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "d1e897b2f1405d4c3876f670ac36b64df3f2349d7baddcb829950f874c34c44d",
+      "outputHash": "2f1c52fee86cf207d6b352288d15e340d83f29e209a6f730ea96a15a7081c0e2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "be3fa1a83629fa62d614a7d562d2c8ce209adc8753760d2413e6f6bb96271ec7",
+      "outputHash": "1c98a8d2d3026cf600d5833f4d6a58781325b40a7eafce9271579fff1934753e"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:32.411Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Long low oared galley with triangular patched sail and complete ram; no gun ports. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 43db2a496aab638c6ff0ec3669a879c64d3080ac11d67013a38d94c52c33f6dd; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a340c352316f33979d0cade3af13b8a6e7facab2314e6e7a20ee820a72ccfce7.png"
+    ],
+    "inputHash": "b905dcfc63f77dae4a1e390989d22cad2b0f72221af8bd07c92fa093aee8a026"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

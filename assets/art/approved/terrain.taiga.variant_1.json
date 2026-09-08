@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.taiga.variant_1",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.taiga.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. TAIGA: five irregular slender evergreen crowns in muted blue-green slate shadow, grouped asymmetrically on peat-brown earth with small grey frost patches. Trees narrower than broadleaf forest. Cold sparse conifer woodland, substantial quiet clearing. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.taiga.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.taiga.variant_1/06b0d35dec4ecedb28690b19bd261c9845cd1d67165e9b09b11981c3cfbb5d3e/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7c527cdbc15d77ddd66d99a1aeae79c170d007975120fe2a2371fba0faf0a2c8",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.taiga.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.taiga.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:23:33.965Z",
+  "referenceHashes": [
+    "34f9fcf84a85d7411670e7c3cc3738d70f97a4f81897340390b3738eef2b825a",
+    "87a34786f0fb909035530fca3a378f4ae2fc1af425e5d33b2b2869d30dc94dcb"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "a96d04694e9a8c3b48f6fcd6bba39ac4d7610f329ec3c6017de68c367cff604a",
+      "inputHash": "34f9fcf84a85d7411670e7c3cc3738d70f97a4f81897340390b3738eef2b825a",
+      "outputHash": "d1e076a64e3dffc58c25d588736743163d83cd5c71c1593159f1675e57f14658"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "d1e076a64e3dffc58c25d588736743163d83cd5c71c1593159f1675e57f14658",
+      "outputHash": "ddeff3f401a7b7f0bef2a4b5b5e12644b8976f5d0623edbe5944501704aea8f4"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ddeff3f401a7b7f0bef2a4b5b5e12644b8976f5d0623edbe5944501704aea8f4",
+      "outputHash": "d0357238505ae17e0ecc1a6bac32f8c3573ff654933684223e90aace4704a4e2"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "3f1078bd854be91035381f04a111a1370913395aae55ef20056cc157290d6609",
+      "outputHash": "a3497cffd40d01814b7971e790589ba494272b3f863730c86b0ef8e058cb4a50"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "4300b97f2ea7d95d4a8cbd11d5d294f3d9e5a0b7212f6776ecd17b6d47d60c95",
+      "outputHash": "145f1ab2e60945cbe801f1b5d495e68b7b6db2cad3323d85dc4ba22cff5e76c0"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "011d34a530ac133eed051e65593c05c55ef7e1478798b24f4a52a39b14e9a573",
+      "outputHash": "118f8880ad32e7172588f8952e7b305a30a7f3c6ce6fe8b92e0053f3ec8ebaed"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.taiga.variant_1.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:16.171Z",
+    "notes": "Sparse blue-black conifers with small snow patches vary the dense snowy base; trunks and tips remain complete. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 06b0d35dec4ecedb28690b19bd261c9845cd1d67165e9b09b11981c3cfbb5d3e; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/f602175ebb13007e39fecb5f7e4c1f53910d35ea5ecdab7b46d2a70285a6215a.png"
+    ],
+    "inputHash": "3bac156d08a0cfffdd6e35757f8f03446de3f9e870b7820a813d610c0131e2fd"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

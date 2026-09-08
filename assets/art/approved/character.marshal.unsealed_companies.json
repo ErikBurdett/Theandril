@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.unsealed_companies",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native64. One full-body adult appointed field marshal, confident grounded posture, richer but practical protective coat and armor, short baton in one hand, sheathed sword at hip. Head and both boots complete, no giant flag or magical staff; a command officer not a king.",
+  "frames": [
+    {
+      "id": "character.marshal.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.marshal.unsealed_companies/1debdacb7b400e2ec5f5a2732fefdf9330636d914711e763041abee4e5721a0b/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f988e55a30b96b12b9315ac75d16f627f98337b5ef711481531633c5f764f7c4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/character.marshal.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/wellroads/character.marshal.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:16:48.309Z",
+  "referenceHashes": [
+    "5dfe00e77cbbf1422cc091a5e566b1a377d2409055c2900bfaf25e62c3a2cadf",
+    "85fa4282a4520ea360d0c8c65edf9894ecd6eeae40389c721a01abd74f3e112b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "323d5e294fbf5da35fd9744f4834fbcc3c9248cfdbe89053e833bbb61e418408",
+      "inputHash": "5dfe00e77cbbf1422cc091a5e566b1a377d2409055c2900bfaf25e62c3a2cadf",
+      "outputHash": "7ad5a9b69d1b9ebbe011d8f6a6c7166b3f8d8553d21af003eb01bfd24e5aa1e0"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "7ad5a9b69d1b9ebbe011d8f6a6c7166b3f8d8553d21af003eb01bfd24e5aa1e0",
+      "outputHash": "65e90d513ae686330b7efde2455e5d81ef0f9f01e0e39e37c74ab54b59597a30"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "65e90d513ae686330b7efde2455e5d81ef0f9f01e0e39e37c74ab54b59597a30",
+      "outputHash": "cad90533a5bdf45fa76db05aa982317a628c5b70e683aa501dfce1b03880b40e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "1454aa91a29eeed9083636590de6dbf35342a3a2477187754fc6646740022926",
+      "outputHash": "e28ca173a9688e2d1bf434c12d80766592f1f2edf787c1088bee501dec0e1b59"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "bc41cac7ba70f2a1d83dccd768f49b3a0a5aee1d53260132890b094610cc2d6f",
+      "outputHash": "6abbd56c640f0c118ef2178a56fe2ed8ebb3e177396951cb13e48675aa2ee331"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "eb4c85ad251889b195cc562e4c19f5078fc9b1fff372d42e061407e3ab436166",
+      "outputHash": "40489fb4266bc6bff827c9c87cbf354ce68c86149f13454b99eab4ffb6eb2007"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.marshal.unsealed_companies.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:07:12.662Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Officer with worn formal cape, baton and split military skirt reads as a leader rather than a spellcaster. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 1debdacb7b400e2ec5f5a2732fefdf9330636d914711e763041abee4e5721a0b; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5e17d51a8cfe040188a9870a90ce841159abaf38648546d2cab3233b99c34336.png"
+    ],
+    "inputHash": "171fc118539857a23974c452433e021a60fcf7f7821642f82b9d9009ce97a68e"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

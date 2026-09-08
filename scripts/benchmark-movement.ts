@@ -86,7 +86,7 @@ export function benchmarkMovement() {
       if (stateHash(game) !== stateHash(mirror)) throw new Error('Queued movement hash diverged.');
     }
     if (guards.some(id => game.armies[id]?.cell !== target) || Object.keys(game.routes).length) throw new Error('Queued benchmark did not finish all routes.');
-    return { size, cells: game.world.terrain.length, explored: view.cells.length, fullObservationMs, coldQueryMs,
+    return { size, generatorVersion: game.world.generatorVersion, layout: game.world.layout, cells: game.world.terrain.length, explored: view.cells.length, fullObservationMs, coldQueryMs,
       range: distribution(ranges), route: distribution(paths), rangeCells: cold.reachable.length,
       pathCells: cold.preview.path.length, pathCost: cold.preview.cost, expandedNodes: cold.expandedNodes,
       farQueryMs, farQueryLimited: capped.limited, farQueryNodes: capped.expandedNodes,

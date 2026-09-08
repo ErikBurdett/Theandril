@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.temperate_forest.variant_1",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.temperate_forest.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. TEMPERATE FOREST: an irregular open broadleaf wood of five low grouped mature moss-green crowns, large uneven oak-like canopy masses around a dark brown grassy clearing. Muted ochre leaves very sparse; no autumn blaze. Different crown sizes; shadow under trees, grounded not floating. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.temperate_forest.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.temperate_forest.variant_1/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "25d6fd1855437b764e3ec894789eb1c4fe5ba11913609e736a609ac92427506e",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.temperate_forest.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.temperate_forest.variant_1-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:19:15.274Z",
+  "referenceHashes": [
+    "bf543292df7c2262cc0568dd0b33d818d1f7f7af7443c6f9001dc19a568828ad",
+    "2dd54886436840c072eb9e47d6779dc34a4d6a654a13c4198fd92e44ce6230a7"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "47770248021d695e1a8153cd967acd3bd3fa9a84cd7262b295f001ba6540b92e",
+      "inputHash": "bf543292df7c2262cc0568dd0b33d818d1f7f7af7443c6f9001dc19a568828ad",
+      "outputHash": "dbb8057558c1b2265ec9f7c11342e36457e3333a0710ef2e49cec291f2fb28f5"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

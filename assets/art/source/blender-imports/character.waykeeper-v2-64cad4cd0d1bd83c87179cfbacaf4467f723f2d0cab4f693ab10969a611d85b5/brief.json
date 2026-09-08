@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "id": "character.waykeeper",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.waykeeper"
+  ],
+  "prompt": "Original Theandril Waykeeper casting figure, authored and animated in Blender. Fixed native 64x64 canvas, registered feet (32,56), retained keyframed scene, raw renders and exact palette normalization. 8 supplied cast frames; no synthesized pose, mirrored faction art or independently fitted frames. Exact production brief/profile and source evidence: assets/art/source/blender-battle/character.waykeeper/v2/manifest.json.",
+  "frames": [
+    {
+      "id": "character.waykeeper/cast/se/0",
+      "direction": "se",
+      "state": "cast",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-battle/character.waykeeper/v2/native/frame-000.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/1",
+      "direction": "se",
+      "state": "cast",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-battle/character.waykeeper/v2/native/frame-001.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/2",
+      "direction": "se",
+      "state": "cast",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-battle/character.waykeeper/v2/native/frame-002.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/3",
+      "direction": "se",
+      "state": "cast",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-battle/character.waykeeper/v2/native/frame-003.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/4",
+      "direction": "se",
+      "state": "cast",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-battle/character.waykeeper/v2/native/frame-004.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/5",
+      "direction": "se",
+      "state": "cast",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-battle/character.waykeeper/v2/native/frame-005.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/6",
+      "direction": "se",
+      "state": "cast",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-battle/character.waykeeper/v2/native/frame-006.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/7",
+      "direction": "se",
+      "state": "cast",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-battle/character.waykeeper/v2/native/frame-007.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "cast": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "7a142a19d8918cffd3e2b65408b23b928051bb3fb8efde2e411beb87ca7f6f2d",
+    "sourceRefs": [
+      "assets/art/source/blender-battle/character.waykeeper/v2/manifest.json",
+      "assets/art/source/blender-battle/character.waykeeper/v2/source.blend",
+      "assets/art/source/blender-battle/character.waykeeper/v2/profile.json",
+      "assets/art/source/blender-battle/character.waykeeper/v2/recipe.py",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-000.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-001.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-002.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-003.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-004.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-005.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-006.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-007.png"
+    ],
+    "licenseNotes": [
+      "Original Theandril project-authored Blender geometry and keyframes; no third-party game sprites or copyrighted setting assets. The retained factory source/profile record identifies production dependencies. This import neither grants a new license nor substitutes for native/in-game visual review."
+    ]
+  },
+  "createdAt": "2026-09-07T21:10:43.170Z",
+  "referenceHashes": [
+    "64cad4cd0d1bd83c87179cfbacaf4467f723f2d0cab4f693ab10969a611d85b5",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "fixed-camera-native-battle64",
+      "settingsHash": "6609ef4d3a800314a5408d732b9ea25f5ab0912b29bd790e1badb4a9cb1b594b",
+      "inputHash": "64cad4cd0d1bd83c87179cfbacaf4467f723f2d0cab4f693ab10969a611d85b5",
+      "outputHash": "9a49ccaa6f30320897051ac24a862930ac687303f1ec6b83d630ffe2ca647682"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 20,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

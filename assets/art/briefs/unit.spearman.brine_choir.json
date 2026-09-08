@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.brine_choir",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.spearman for Theandril, Brine Choir.\nSubject: One adult spear-watch soldier with a straight compact spear held nearly vertical at the side, plain metal spearhead and a modest faction shield. Spear tip wholly inside generous top margin and no more than one head-height above helmet. Both hands anatomically clear.\nCulture-specific identity: Adult brinefolk humanoid with matte blue-grey skin, small folded neck fins, broad fin-fold collar, normal two legs and visible dexterous humanlike tool-hands. A practical shore citizen, not a fish-tailed creature. Coral-clay accents, pale eelgrass cloth, wet-slate armor, matte shell inlay and practical woven salt-cloaks. Broad fin-fold collar and low crescent shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "unit.spearman.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.spearman.brine_choir/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5c19577d055b94367e36b7063c4fb7f2eb1ed14cef94d1438b505f1766b92aa8",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.spearman.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.spearman.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:04:44Z",
+  "referenceHashes": [
+    "27481ad9e3d23de7001de78ba50750b66951141983c07dd01594fd45a32fcde7",
+    "b802b661b77bd6fc82ee8b3420fac6ff922d0b0eac6a93dc871295a6cd6adfde"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "99724b734b73f9b2823b7e0d4d0e2d30e0fdf6164211d0dc0b6fe4fcf3e50a66",
+      "inputHash": "27481ad9e3d23de7001de78ba50750b66951141983c07dd01594fd45a32fcde7",
+      "outputHash": "13732cfe740a711041356a7c4615b767904651c590af23991fea124a4f0c3980"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

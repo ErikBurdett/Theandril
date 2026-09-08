@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.vesper_court",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.banner for Theandril, Vesper Court.\nSubject: ONE complete faction cloth banner on one short practical pole, hanging mostly straight with one gentle fold, original faction emblem on a broad readable cloth plane. Full pole and small finial inside the image; no person or base stand. Maximum height54 in a native64 square; broad compact cloth, no long streamers.\nCulture-specific identity: An open silver vessel beneath two unequal horizontal dusk bars with one small muted burgundy bead. Cloth uses Charcoal velvet and leather, narrow ribbed dark iron, tarnished silver, muted burgundy and dusty plum cloth (dark #49312b, #642f26, #685375, #96738e; NO bright red). High folded collars, long split court coats and silver-edged narrow kite shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "ui.banner.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/ui.banner.vesper_court/81f2680794289cef5d60f6af673fa3159b1f1070250842317cc670260d893b45/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7fc70b11f39788bd93422d72a04938727714cdf7f9ac91be494d8730cdfa9e03",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.banner.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.banner.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:56:40Z",
+  "referenceHashes": [
+    "275633e72e4285b208012ef7c4d91083c5d57ec104f69e4fb1e168efd38c4797",
+    "3524bb606200ebdf601db923c44b699c237f8494a67a0b28a541b24af734cfca"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "2d5c9d5e9c517087db5f4c0832e004f527d4089b51304f1e697fa9f4e826e31d",
+      "inputHash": "275633e72e4285b208012ef7c4d91083c5d57ec104f69e4fb1e168efd38c4797",
+      "outputHash": "5d74343a1e369cb82969a56478c82e94073ff030c43cd444ea1888207851fa68"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "5d74343a1e369cb82969a56478c82e94073ff030c43cd444ea1888207851fa68",
+      "outputHash": "f482e835d73ecc75680a2342506ab7f0ab3954ab0b06eb2f3f57fc1a2811c440"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f482e835d73ecc75680a2342506ab7f0ab3954ab0b06eb2f3f57fc1a2811c440",
+      "outputHash": "02242457287d5e46ba0b40558c1104d0f9055373f318ec45002f270275fad79b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "317acd00d7aa54779ce63c65f520bc52e8eba7ac7705358bd6d9f222049da9aa",
+      "outputHash": "a9ccedd5a5a2bdcdf6a843fcbb1bae4e7c3a6370ffcbe251e054a7b92a76f167"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "2d1a7e13d1411d7e83fb03593d0c70906859ca8c76af8639277a32a3f9975105",
+      "outputHash": "099113744e4f988e0eb217833e5a2f7be78d570534996f11c75bf49c7fe255f7"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "e400e40eea75bb159fa7ae0c052f1b66717c35006b36c77e31a46274aacb09b8",
+      "outputHash": "5478d8707f4126d899cb6229a7097734150379a6faff7a7fde96425557937679"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.banner.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:04.734Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Full dark cloth banner and pole retain the vessel theme and contained base; ornamental detail stays subordinate. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 81f2680794289cef5d60f6af673fa3159b1f1070250842317cc670260d893b45; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/14eb0bf93612d2a989798e7e72999d2c9e4cf4d5f7371a6cf61a77a2be2a779a.png"
+    ],
+    "inputHash": "6bae6c26c253d9199874c701fbfcf286ed172486312b7766ccf91479f29f97ea"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

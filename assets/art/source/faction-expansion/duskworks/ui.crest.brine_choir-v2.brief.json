@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.brine_choir",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.crest for Theandril, Brine Choir.\nSubject: ONE front-facing coarse heraldic crest alone, clear large original faction mark, no enclosing shield or extra medallion. Strong silhouette and generous clean negative spaces, the exact described emblem.\nCulture-specific identity: A broken concentric ripple: two unequal open rings, clearly legible gaps, matte shell against wet slate; not a keel or sail.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.\nSTRICT EMBLEM CORRECTION: EXACTLY TWO SIMPLE CONCENTRIC C-SHAPED OPEN RINGS, one large and one small, centered on the same point. Both have a clearly visible small opening at the upper-right. The central area inside the inner ring is completely empty transparent space. No central motif whatsoever: NO flame, curling water tongue, pearl, bead, shell object, trident, droplets, leaves or extra arcs. Rings themselves are flat matte shell-ivory edged in wet slate, simple broad coarse stepped pixel bands. This is a crisp two-ring symbol, not ornate jewelry. Keep the whole simple mark inside the central70% of the image with broad fully transparent margins.",
+  "frames": [
+    {
+      "id": "ui.crest.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/ui.crest.brine_choir/v2/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "36a91aca7158060b5031ec3223cb5c7271a1b950f7bc0f003d5e67bb0ea9f665",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.crest.brine_choir-v2.png",
+      "assets/art/source/faction-expansion/duskworks/ui.crest.brine_choir-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:30:14Z",
+  "referenceHashes": [
+    "84709c660fe6e3bd7eaa3eafaee57a5988404546ccb79bd7909cccbde15c2b22",
+    "662397130b900bbfca1bf60e25b9f0383cebbb91c5c90ffe4d79342db60914fd"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "83b9a37b6587f99ef8384e4af74d650b675e29aa42c618b6a72eb6f81bfc9552",
+      "inputHash": "84709c660fe6e3bd7eaa3eafaee57a5988404546ccb79bd7909cccbde15c2b22",
+      "outputHash": "3b0a861633ccdbfb7a092bd3f39f5b4ab8211ba17bc8d0b91b360cf675c5ef07"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.vesper_court",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.banner for Theandril, Vesper Court.\nSubject: ONE complete faction cloth banner on one short practical pole, hanging mostly straight with one gentle fold, original faction emblem on a broad readable cloth plane. Full pole and small finial inside the image; no person or base stand. Maximum height54 in a native64 square; broad compact cloth, no long streamers.\nCulture-specific identity: An open silver vessel beneath two unequal horizontal dusk bars with one small muted burgundy bead. Cloth uses Charcoal velvet and leather, narrow ribbed dark iron, tarnished silver, muted burgundy and dusty plum cloth (dark #49312b, #642f26, #685375, #96738e; NO bright red). High folded collars, long split court coats and silver-edged narrow kite shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "ui.banner.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/ui.banner.vesper_court/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7fc70b11f39788bd93422d72a04938727714cdf7f9ac91be494d8730cdfa9e03",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.banner.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.banner.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:56:40Z",
+  "referenceHashes": [
+    "275633e72e4285b208012ef7c4d91083c5d57ec104f69e4fb1e168efd38c4797",
+    "3524bb606200ebdf601db923c44b699c237f8494a67a0b28a541b24af734cfca"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "2d5c9d5e9c517087db5f4c0832e004f527d4089b51304f1e697fa9f4e826e31d",
+      "inputHash": "275633e72e4285b208012ef7c4d91083c5d57ec104f69e4fb1e168efd38c4797",
+      "outputHash": "5d74343a1e369cb82969a56478c82e94073ff030c43cd444ea1888207851fa68"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

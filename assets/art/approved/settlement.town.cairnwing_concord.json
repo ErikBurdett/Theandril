@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.cairnwing_concord",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.cairnwing_concord"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Cairnwing Concord, role settlement.town.\nSUBJECT: ONE developed compact town with5to6 distinct roof masses, culturally specific central communal workhall, connected shaded walks, enclosed inhabited courtyard and modest perimeter wall with clear gate. Native96x96 height≤78px pivot48,80. Not a single building, not city-sized keep; no landscape or tile.\nCULTURE: Tawny feathers, oxblood cord, oxidized copper, pale scree. Narrow harnesses, folded feathered forearms, ribbed narrow shields, ledge tools. Bracketed low stone halls, terraced load courts and wind-braced lift housings integrated into freestanding settlement silhouette; no giant scenery rock or inaccessible floating castle.\nPEOPLE if character or rider: Tool-using feathered cairnfolk with short avian beaks, two legs and two dexterous arms with folded forearm feather fans; human port households. No spread wings, flying poses or implied flight.\nHERALDRY if UI or flag: A single stepped feather with three unequal notches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "settlement.town.cairnwing_concord/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.cairnwing_concord/c51519a1c7df35e326981be69e144fde166a0bfc40a4581222340d1f24cf100e/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c94166ef116e7f8611d7801b1be3ed0a6543c73e5dbd388fd84cb9b903efc335",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/settlement.town.cairnwing_concord-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/settlement.town.cairnwing_concord-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:30:39Z",
+  "referenceHashes": [
+    "72b81bf551d8c88d935b9391b1b3e09d456947322892d4dbdd8ad820d738013a",
+    "3d3b539c82b6ead5d3aa94077b3d6443e0ac9257c58a6cb8cb247a93460f529f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "2b6adf28831af4ace75133f7532834f94486fc34cf45ccbf70d787cb0a4523ae",
+      "inputHash": "72b81bf551d8c88d935b9391b1b3e09d456947322892d4dbdd8ad820d738013a",
+      "outputHash": "d943b331c19e1a45e5edf2e32a97711ab7f6ca7b52660791aac140ec4f397e89"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "d943b331c19e1a45e5edf2e32a97711ab7f6ca7b52660791aac140ec4f397e89",
+      "outputHash": "ae58396ba6547bbedd83b547ceca8f4189d8b3975e0c0b0c0f11b7e69f6ab862"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ae58396ba6547bbedd83b547ceca8f4189d8b3975e0c0b0c0f11b7e69f6ab862",
+      "outputHash": "f7bce39d237bf8207edc670cb00355a3c720e395348ab9c9754cd21b4e545d0e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "e1832fbb774264afa19c74bbab90eb2dc20d85e00c040ad52c608c1ede79792c",
+      "outputHash": "b7adbe08665ffc7b17e07e0400fe51e89fb8a0638592c275c38910c4c10bd02f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "0a84a9d5126ee4f9ed5bef46a8a7af065e31f43ce8d6589840178c7a007a206e",
+      "outputHash": "a858e3b03d43f5fd5483b4b446a09eb2a89459d0812572f4acc6c02265aeb8ba"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "e65aef68755592f89e463f8f82edb7cab80a6a2eb6648f00ba58687ec37e1250",
+      "outputHash": "d219b2febe98bb9d0213c5b8db68ae42c6c78c5bcbca75e116a71f215ef6c6f4"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.cairnwing_concord.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:48:11.712Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Broader stair-linked hall court and load crane form a denser96px settlement than the village. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate c51519a1c7df35e326981be69e144fde166a0bfc40a4581222340d1f24cf100e; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/4b9e82294fb9df4d3dda69f959cc309363af9b9823356141a5eed0fb308b55bb.png"
+    ],
+    "inputHash": "9ad05930bded38831c7b391121b75844139da9824cc04c3c1b8f240fec25ddfa"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

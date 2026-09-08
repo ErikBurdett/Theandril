@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.scout.ashen_compact",
+  "assetVersion": 5,
+  "sourceVersion": 2,
+  "inputHash": "65a2b9dd7994d94efcc3a6e8204cc479b09a09522ad2b9d4b308af5b41f62e48",
+  "preparedAt": "2026-09-07T07:46:48.015Z",
+  "generatedAt": null,
+  "sourceIndexPath": "assets/art/source/animations/unit.scout.ashen_compact-idle-generation.json",
+  "sourceIndexHash": "9e3231f04f7df3fca48fc546e85b3f71af585c09f8585f5126df150a2a960215",
+  "sourceIndex": {
+    "schemaVersion": 1,
+    "id": "unit.scout.ashen_compact",
+    "clip": "idle",
+    "sourceVersion": 2,
+    "layout": {
+      "columns": 2,
+      "rows": 2
+    },
+    "reference": {
+      "path": "assets/art/approved/unit.scout.ashen_compact/829619119f8ac12e03c4f8b5ad35636a7a53063cfbeb0bd74272fb4bd8418d4b/frame-0.png",
+      "sha256": "e84206034bf22e6ea66b4c9ec956c8c4e581d112a4a519b58949de7e07a083ec"
+    },
+    "generations": [
+      {
+        "sourcePath": "assets/art/source/animations/unit.scout.ashen_compact-idle-v1.png",
+        "sha256": "9c5faa6e1ed1a1549d903b8ce59e9e45ade10acd784a4036ecc6b47c8f608393",
+        "prompt": "Use case: edit / pixel sprite animation. Create a genuine FOUR-FRAME quiet IDLE animation SPRITE SHEET of the exact supplied Theandril Ashen Compact scout. This is one character animation, not four different units. Preserve its ochre-brown hood and short weathered cape, dark iron and leather equipment, visible bow and quiver, adult proportions, southeast three-quarter facing toward the right, original muted ochre/bone/charcoal colors and hard coarse 64x64 logical pixel-art style. Keep the SAME silhouette proportions, feet, bow hands, gear, lighting and ground anchor across all frames. Both feet stay planted; body never walks, rotates, attacks or jumps. Actual subtle animation: cloth hem softly drifts out then settles and chest breathes gently. Frame1 relaxed at rest, frame2 cloth moves outward slightly/chest rises about one logical pixel, frame3 cloth at crest, frame4 returning close to frame1. Four poses should have meaningful localized differences, not global translation or four identical stills. Make the loop restrained and smooth with no equipment swapping. Layout exactly 2 columns by 2 rows of equal square cells in a square PNG, order left-to-right/top-to-bottom; the SAME sprite size and same ground level in every cell (feet centered horizontally at 85 percent cell height). Each sprite entirely inside its own cell with at least 10 percent transparent padding on all sides; no sprite crosses a row or column boundary. Background TRUE alpha transparency, not painted checkerboard. No labels, numbers, borders, glows, shadows, scene, hex, selection ring, floor, particles or UI. Do not modernize/redesign or brighten the character. Clean deliberate square pixel clusters not a smooth illustration. This source will be registered to four 64x64 frames; avoid tiny new details.",
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "seed": null,
+        "decision": "rejected",
+        "reason": "All 1572516 pixels alpha255: opaque painted checkerboard, not transparency. Retained as edit reference only."
+      },
+      {
+        "sourcePath": "assets/art/source/animations/unit.scout.ashen_compact-idle-v2.png",
+        "sha256": "8a7435f320b5b884be400cd574dbfdc9864cf78f2c91540116f899d4d7daebe4",
+        "prompt": "OUTPUT A PNG WITH A REAL TRANSPARENT ALPHA BACKGROUND. Edit the supplied four-frame sprite sheet: remove the entire white/light-grey CHECKERBOARD background and replace it with actual zero-alpha transparent pixels. This checker pattern is an unwanted opaque backdrop, it must not be painted or retained anywhere. Preserve the four dark hooded scout sprites exactly in their positions, equipment, original hard square pixel colors and cloth motion poses; retain the tiny light arrow fletchings as part of the characters. No checkerboard, no white matte, no grey matte, no shadows. Areas outside each character silhouette and between character equipment must be fully transparent alpha0. Leave generous real transparent margin around each sprite. The result remains one 2x2 sprite-sheet image with four complete independent frames on a transparent PNG. Do not replace background with another color or simulated transparency.",
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "seed": null,
+        "referencePath": "assets/art/source/animations/unit.scout.ashen_compact-idle-v1.png",
+        "decision": "selected-for-native-review",
+        "reason": "Actual alpha0 background; native threshold/palette processing, registration and motion review still required."
+      }
+    ],
+    "note": "Built-in image-generation original followed by background edit. Tool does not expose model, seed or authoritative generation timestamp. This index records provenance, not approval."
+  },
+  "referenceHash": "e84206034bf22e6ea66b4c9ec956c8c4e581d112a4a519b58949de7e07a083ec",
+  "recipe": {
+    "sourceHash": "8a7435f320b5b884be400cd574dbfdc9864cf78f2c91540116f899d4d7daebe4",
+    "sourceSize": {
+      "width": 1254,
+      "height": 1254
+    },
+    "scale": {
+      "numerator": 47,
+      "denominator": 369
+    },
+    "frames": [
+      {
+        "crop": {
+          "x": 0,
+          "y": 0,
+          "w": 627,
+          "h": 627
+        },
+        "anchor": [
+          310,
+          539
+        ]
+      },
+      {
+        "crop": {
+          "x": 627,
+          "y": 0,
+          "w": 627,
+          "h": 627
+        },
+        "anchor": [
+          893,
+          539
+        ]
+      },
+      {
+        "crop": {
+          "x": 0,
+          "y": 627,
+          "w": 627,
+          "h": 627
+        },
+        "anchor": [
+          310,
+          1086
+        ]
+      },
+      {
+        "crop": {
+          "x": 627,
+          "y": 627,
+          "w": 627,
+          "h": 627
+        },
+        "anchor": [
+          893,
+          1086
+        ]
+      }
+    ],
+    "nativeSize": 64,
+    "pivot": [
+      32,
+      56
+    ],
+    "alphaThreshold": 128,
+    "transparentPadding": 2,
+    "maxBoundingBoxDrift": 2
+  },
+  "toolHash": "c114e3b17990b6853ada564013f3af940f0081f8e52b3da30ccd68ce8f53d879",
+  "tools": [
+    {
+      "path": "scripts/art-animation-source.ts",
+      "sha256": "88d44fdc8847ed523d658c25aec1c31535c079b1b46d583fcb2485809abb48c6"
+    },
+    {
+      "path": "packages/art-pipeline/src/animation-source.ts",
+      "sha256": "e38c89c310df8ec49e5ed4e486b46f052f85bce47dd5993ca0cc97101e0c6e85"
+    },
+    {
+      "path": "packages/art-pipeline/src/png.ts",
+      "sha256": "7214649fb613ef7b1b6d7172f2c29d43c386bcc9259bd66c3ec325191ef73b6d"
+    },
+    {
+      "path": "packages/art-pipeline/src/palette.ts",
+      "sha256": "ba93980bff64ff4a5715729132b62818c0de61640aa11346a1a1225211197d00"
+    },
+    {
+      "path": "packages/art-pipeline/src/provenance.ts",
+      "sha256": "9c84fb282399a538584cf297874c03d7adf7452f2952bed54e8c2fda8fee10d8"
+    }
+  ],
+  "settingsHash": "6b8312a717ea61049295bb5e8546e06407c956db15971511274d414c5a3a05d0",
+  "frames": [
+    {
+      "index": 0,
+      "path": "assets/art/source/native/unit.scout.ashen_compact/animation-v5/65a2b9dd7994d94efcc3a6e8204cc479b09a09522ad2b9d4b308af5b41f62e48/idle-se-0.png",
+      "sha256": "97e2a874888a534637e651bf9d97689b2fa895d6867e5bbceaa89fca4dccf5ae",
+      "pixelHash": "a1c1b4aecf4d1dd203d7c899257f92947911d10d019a75544797745ac528917a",
+      "bounds": {
+        "x": 13,
+        "y": 8,
+        "w": 43,
+        "h": 47
+      },
+      "source": {
+        "bounds": {
+          "x": 164,
+          "y": 162,
+          "w": 331,
+          "h": 369
+        },
+        "transparent": 322103,
+        "fractional": 70718,
+        "opaque": 308
+      }
+    },
+    {
+      "index": 1,
+      "path": "assets/art/source/native/unit.scout.ashen_compact/animation-v5/65a2b9dd7994d94efcc3a6e8204cc479b09a09522ad2b9d4b308af5b41f62e48/idle-se-1.png",
+      "sha256": "0a856d283b36597f7d11b58ccaa8b28e96bacf00c0e87d9451bf3194059c7692",
+      "pixelHash": "673f6cd1113b6578ec35d3e7df19538b0ed244a1afab4123006bc443b04d7fd4",
+      "bounds": {
+        "x": 12,
+        "y": 8,
+        "w": 43,
+        "h": 47
+      },
+      "source": {
+        "bounds": {
+          "x": 733,
+          "y": 162,
+          "w": 344,
+          "h": 369
+        },
+        "transparent": 320051,
+        "fractional": 72792,
+        "opaque": 286
+      }
+    },
+    {
+      "index": 2,
+      "path": "assets/art/source/native/unit.scout.ashen_compact/animation-v5/65a2b9dd7994d94efcc3a6e8204cc479b09a09522ad2b9d4b308af5b41f62e48/idle-se-2.png",
+      "sha256": "54f634ac2f9ef083a1d65a90dee7907f57635f42960241d509021ad3e9e7aa57",
+      "pixelHash": "375e641914f3b2a5d72a54027c38a1715311c44a81988b74bf5d7411c896e10b",
+      "bounds": {
+        "x": 12,
+        "y": 8,
+        "w": 44,
+        "h": 47
+      },
+      "source": {
+        "bounds": {
+          "x": 154,
+          "y": 710,
+          "w": 342,
+          "h": 368
+        },
+        "transparent": 319830,
+        "fractional": 73060,
+        "opaque": 239
+      }
+    },
+    {
+      "index": 3,
+      "path": "assets/art/source/native/unit.scout.ashen_compact/animation-v5/65a2b9dd7994d94efcc3a6e8204cc479b09a09522ad2b9d4b308af5b41f62e48/idle-se-3.png",
+      "sha256": "4fd5acbc67b13191bc52103fa857173e5b9ee294577b41321d447aeec06114db",
+      "pixelHash": "a89e89ebc868d172ecd37d41040afdcb4f5e9e240bc0ebed8e2d58bbcf83824e",
+      "bounds": {
+        "x": 12,
+        "y": 8,
+        "w": 44,
+        "h": 47
+      },
+      "source": {
+        "bounds": {
+          "x": 736,
+          "y": 710,
+          "w": 342,
+          "h": 368
+        },
+        "transparent": 318191,
+        "fractional": 74641,
+        "opaque": 297
+      }
+    }
+  ],
+  "note": "Original four-pose sheet followed by a built-in alpha-background edit. No source generation timestamp/model/seed inferred. Native import uses one common scale, four measured foot anchors, nearest sampling, threshold128 and the master palette. No redrawing, synthetic translation frames or interpolation. Identity, equipment, grounding and loop require visual review; this record is not approval."
+}

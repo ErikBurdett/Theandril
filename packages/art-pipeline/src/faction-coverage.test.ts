@@ -4,19 +4,65 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { CHARACTER_DEFINITIONS, FACTIONS, UNITS } from '../../content/src/index';
 import {
   FACTION_ART_FAMILIES, FACTION_ART_IDS, FACTION_ART_ROLES, factionArtId, isFactionNavalArtRole,
-  cropImage, decodePng, parseAssetManifest, parseRuntimeCatalog, safeAssetPath, sha256, validateAsset,
-  type RgbaImage, type RuntimeCatalog,
+  cacheKey, cropImage, decodePng, measureFrame, parseAssetManifest, parseRuntimeCatalog, safeAssetPath, sha256, validateAsset,
+  type AssetManifest, type RgbaImage, type RuntimeCatalog,
 } from './index';
 import { FACTION_SOURCE_KINDS, isFactionOriginalSource } from './faction-source';
+import { animationSourceIndexSchema, scoutIdleRecipe } from './animation-source';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
-const expectedRoles = [...UNITS.map(unit => unit.id), ...CHARACTER_DEFINITIONS.map(character => character.id),
+// Slice23 introduces one explicit shared Waykeeper cast pilot, not24 newly
+// approved culture variants. Keep every pre-existing qualified role mandatory.
+const sharedCharacterPilots = ['character.waykeeper'];
+const expectedRoles = [...UNITS.map(unit => unit.id), ...CHARACTER_DEFINITIONS.filter(character => !sharedCharacterPilots.includes(character.id)).map(character => character.id),
   'settlement.village', 'settlement.town', 'settlement.city', 'ui.crest', 'ui.badge', 'ui.banner'];
 const bytes = new Map<string, Promise<Buffer>>();
+const animatedScoutId = 'unit.scout.ashen_compact';
 function retained(path: string): Promise<Buffer> {
   let pending = bytes.get(path);
   if (!pending) { pending = safeAssetPath(root, path).then(path => readFile(path)); bytes.set(path, pending); }
   return pending;
+}
+
+async function verifyScoutAnimationProvenance(manifest: AssetManifest, palette: RuntimeCatalog['palette']): Promise<void> {
+  const indexPath = 'assets/art/source/animations/unit.scout.ashen_compact-idle-generation.json';
+  const indexBytes = await retained(indexPath), index = animationSourceIndexSchema.parse(JSON.parse(indexBytes.toString('utf8')));
+  expect(manifest.version).toBe(5);
+  expect(manifest.provenance.sourceRefs).toContain(indexPath);
+  expect(manifest.referenceHashes).toContain(sha256(indexBytes));
+  for (const source of index.generations) {
+    expect(manifest.provenance.sourceRefs).toContain(source.sourcePath);
+    expect(sha256(await retained(source.sourcePath))).toBe(source.sha256);
+    expect(manifest.referenceHashes).toContain(source.sha256);
+    expect(manifest.prompt).toContain(source.prompt);
+  }
+  expect(manifest.provenance.sourceRefs).toContain(index.reference.path);
+  expect(sha256(await retained(index.reference.path))).toBe(index.reference.sha256);
+  expect(manifest.referenceHashes).toContain(index.reference.sha256);
+  const recordPath = manifest.provenance.sourceRefs.find(path => path.startsWith(`assets/art/source/animations/prepared/${animatedScoutId}-v5-`) && path.endsWith('/record.json'));
+  expect(recordPath, 'Retain the measured four-pose importer record, not a static-sheet extraction receipt').toBeDefined();
+  const recordBytes = await retained(recordPath!), record = JSON.parse(recordBytes.toString('utf8')) as {
+    id: string; assetVersion: number; sourceVersion: number; sourceIndex: unknown; sourceIndexHash: string; preparedAt: string; generatedAt: null;
+    recipe: unknown; settingsHash: string; frames: { index: number; path: string; sha256: string; pixelHash: string }[];
+  };
+  expect(manifest.referenceHashes).toContain(sha256(recordBytes));
+  expect(record).toMatchObject({ id: animatedScoutId, assetVersion: 5, sourceVersion: 2, sourceIndex: index, sourceIndexHash: sha256(indexBytes), generatedAt: null, preparedAt: manifest.createdAt });
+  expect(record.recipe).toEqual(scoutIdleRecipe(index.generations[1]!.sha256));
+  expect(record.frames).toHaveLength(4);
+  for (const [frameIndex, frame] of record.frames.entries()) {
+    expect(frame.index).toBe(frameIndex);
+    const native = await retained(frame.path);
+    const image = decodePng(native);
+    expect(sha256(native)).toBe(frame.sha256); expect(sha256(image.data)).toBe(frame.pixelHash);
+    expect(measureFrame({ id: `${animatedScoutId}/idle/se/${frameIndex}`, image }, palette).bounds).toEqual([
+      { x: 13, y: 8, w: 43, h: 47 }, { x: 12, y: 8, w: 43, h: 47 }, { x: 12, y: 8, w: 44, h: 47 }, { x: 12, y: 8, w: 44, h: 47 },
+    ][frameIndex]);
+    expect(manifest.processing).toContainEqual(expect.objectContaining({ tool: 'theandril-grid-enlarge', inputHash: frame.sha256 }));
+  }
+  expect(new Set(record.frames.map(frame => frame.pixelHash)).size).toBe(4);
+  expect(manifest.processing).toContainEqual(expect.objectContaining({ tool: 'theandril-animation-source', version: '1', profile: 'common-scale-foot-registered-idle64',
+    inputHash: index.generations[1]!.sha256, settingsHash: record.settingsHash, outputHash: cacheKey(record.frames.map(frame => frame.sha256)) }));
+  expect(manifest.processing.filter(step => step.tool === 'spritefusion-pixel-snapper')).toHaveLength(4);
 }
 
 /** Color-renaming invariant: a palette-only recolor retains this exact pixel partition. */
@@ -40,22 +86,28 @@ describe('published faction art release coverage — real retained files, no fix
   const atlasImages = new Map<string, RgbaImage>();
   beforeAll(async () => {
     const retainedCatalog = await retained('assets/art/runtime/catalog.json');
-    expect(await retained('apps/web/public/art/catalog.json')).toEqual(retainedCatalog);
+    // Compare exact bytes without recursively asserting millions of Buffer
+    // indices. The expanded pack must still match the public copy byte-for-byte.
+    expect((await retained('apps/web/public/art/catalog.json')).equals(retainedCatalog)).toBe(true);
     catalog = parseRuntimeCatalog(JSON.parse(retainedCatalog.toString('utf8')));
     for (const atlas of catalog.atlases) {
       const imagePath = atlas.imageUrl.slice('/art/'.length), jsonPath = atlas.jsonUrl.slice('/art/'.length);
       const image = await retained(`assets/art/runtime/${imagePath}`);
-      expect(await retained(`apps/web/public/art/${imagePath}`)).toEqual(image);
+      expect((await retained(`apps/web/public/art/${imagePath}`)).equals(image)).toBe(true);
       expect(sha256(image)).toBe(atlas.sha256);
       const metadata = await retained(`assets/art/runtime/${jsonPath}`);
-      expect(await retained(`apps/web/public/art/${jsonPath}`)).toEqual(metadata);
+      expect((await retained(`apps/web/public/art/${jsonPath}`)).equals(metadata)).toBe(true);
       const decoded = decodePng(image);
       expect([decoded.width, decoded.height]).toEqual([atlas.width, atlas.height]);
       atlasImages.set(atlas.id, decoded);
     }
   });
 
-  it('covers every released culture, land/naval unit and character plus all town stages and heraldry exactly once', () => {
+  it('covers every released culture, land/naval unit and culture-qualified character plus town stages and heraldry exactly once', () => {
+    expect(FACTIONS).toHaveLength(24);
+    expect(FACTION_ART_FAMILIES).toHaveLength(24);
+    expect(FACTION_ART_ROLES).toHaveLength(18);
+    expect(FACTION_ART_IDS).toHaveLength(432);
     const missing = FACTION_ART_IDS.filter(id => !catalog.assets.some(asset => asset.id === id));
     expect(missing, 'Every culture must be approved and published; missing families are never skipped').toEqual([]);
     expect(FACTIONS.map(faction => faction.id).sort()).toEqual(FACTION_ART_FAMILIES.map(family => `faction.${family}`).sort());
@@ -72,9 +124,18 @@ describe('published faction art release coverage — real retained files, no fix
     }
   });
 
-  it('publishes all36 qualified naval roles without generic or infantry substitutions', () => {
+  it('keeps the new shared Waykeeper pilot explicit rather than claiming24 culture-specific casting kits', () => {
+    expect(CHARACTER_DEFINITIONS.filter(character => !FACTION_ART_ROLES.some(role => role === character.id)).map(character => character.id)).toEqual(sharedCharacterPilots);
+    const asset = catalog.assets.find(item => item.id === 'character.waykeeper');
+    expect(asset).toMatchObject({ atlasId: 'battle', contentIds: ['character.waykeeper'], pivot: [32, 56] });
+    expect(asset!.clips).toEqual([expect.objectContaining({ state: 'cast', direction: 'se', loop: false, durationsMs: Array(8).fill(100) })]);
+    for (const faction of FACTIONS) expect(factionArtId('character.waykeeper', faction.id)).toBeUndefined();
+  });
+
+  it('publishes all72 qualified naval roles without generic or infantry substitutions', () => {
     const navalRoles = UNITS.filter(unit => unit.movementDomain === 'naval').map(unit => unit.id).sort();
     expect(navalRoles).toEqual(['unit.coastal_warship', 'unit.ocean_warship', 'unit.transport']);
+    expect(FACTION_ART_IDS.filter(id => navalRoles.some(role => id.startsWith(`${role}.`)))).toHaveLength(72);
     for (const faction of FACTIONS) for (const role of navalRoles) {
       const id = factionArtId(role, faction.id)!;
       expect(id).toBe(`${role}.${faction.id.slice('faction.'.length)}`);
@@ -102,9 +163,12 @@ describe('published faction art release coverage — real retained files, no fix
     }
   });
 
-  it('preserves reviewed native pixels, exact static pivots, source provenance and executable tool records for every family asset', async () => {
+  it('preserves all reviewed pixels and tool provenance: one real four-pose scout and431 static faction assets', async () => {
+    let animatedCount = 0, staticCount = 0;
     for (const family of FACTION_ART_FAMILIES) for (const role of FACTION_ART_ROLES) {
       const id = factionArtId(role, `faction.${family}`)!;
+      const animated = id === animatedScoutId, frameCount = animated ? 4 : 1;
+      if (animated) animatedCount++; else staticCount++;
       const asset = catalog.assets.find(asset => asset.id === id);
       expect(asset, `Missing approved runtime artwork: ${id}`).toBeDefined();
       if (!asset) throw new Error(`Missing approved runtime artwork: ${id}`);
@@ -113,23 +177,28 @@ describe('published faction art release coverage — real retained files, no fix
       expect(asset.nativeResolution, id).toEqual({ width: native, height: native });
       expect(asset.pivot, id).toEqual(pivot);
       expect(['APPROVED', 'ATLASED', 'INTEGRATED']).toContain(asset.status);
-      expect(asset.frames, `${id} is a single static pose, not fabricated animation`).toHaveLength(1);
-      expect(asset.frames[0]).toMatchObject({ id: `${id}/idle/se/0`, direction: 'se', state: 'idle', index: 0, durationMs: 250 });
-      expect(asset.clips).toEqual([{ id: `${id}/idle/se`, direction: 'se', state: 'idle', frames: [`${id}/idle/se/0`], durationsMs: [250], loop: false }]);
+      expect(asset.frames, `${id}: only the approved Ashen scout has four real poses`).toHaveLength(frameCount);
+      for (let index = 0; index < frameCount; index++) expect(asset.frames[index]).toMatchObject({ id: `${id}/idle/se/${index}`, direction: 'se', state: 'idle', index, durationMs: 250 });
+      expect(asset.clips).toEqual([{ id: `${id}/idle/se`, direction: 'se', state: 'idle', frames: Array.from({ length: frameCount }, (_, index) => `${id}/idle/se/${index}`), durationsMs: Array(frameCount).fill(250), loop: animated }]);
 
       const manifest = parseAssetManifest(JSON.parse((await retained(`assets/art/approved/${id}.json`)).toString('utf8')));
       expect(manifest.status).toBe('APPROVED'); expect(manifest.contentIds).toEqual([id]);
       expect(manifest.nativeResolution).toEqual(asset.nativeResolution);
-      expect(manifest.frames).toHaveLength(1); expect(manifest.frames[0]!.pivot).toEqual(pivot);
-      expect(manifest.constraints.requireMotion).toBe(false);
-      expect(manifest.animation.states).toEqual({ idle: { frames: 1, fps: 4, loop: false } });
+      expect(manifest.frames).toHaveLength(frameCount);
+      for (const [index, frame] of manifest.frames.entries()) expect(frame).toMatchObject({ id: `${id}/idle/se/${index}`, direction: 'se', state: 'idle', index, durationMs: 250, pivot });
+      expect(manifest.constraints.requireMotion).toBe(animated);
+      expect(manifest.animation.states).toEqual({ idle: { frames: frameCount, fps: 4, loop: animated } });
+      if (animated) expect(manifest.constraints).toMatchObject({ maxPivotDrift: 0, maxBoundingBoxDrift: 2 });
       expect(manifest.provenance).toEqual(asset.provenance); expect(manifest.review).toEqual(asset.review);
       expect(manifest.provenance.promptHash).toBe(sha256(manifest.prompt));
       expect(manifest.provenance.provider).toBe('codex-imagegen');
       expect(manifest.provenance.licenseNotes.length).toBeGreaterThan(0);
       const original = manifest.provenance.sourceRefs.find(path => isFactionOriginalSource(family, role, path));
-      expect(original, `${id} needs its own retained original source, never a cache/approval copy`).toBeDefined();
-      expect(manifest.referenceHashes).toContain(sha256(await retained(original!)));
+      if (animated) await verifyScoutAnimationProvenance(manifest, catalog.palette);
+      else {
+        expect(original, `${id} needs its own retained original source, never a cache/approval copy`).toBeDefined();
+        expect(manifest.referenceHashes).toContain(sha256(await retained(original!)));
+      }
       if (isFactionNavalArtRole(role) || FACTION_SOURCE_KINDS[family] === 'batch') {
         const recordPath = original!.slice(0, -4) + '.json';
         const recordBytes = await retained(recordPath), record = JSON.parse(recordBytes.toString('utf8'));
@@ -145,18 +214,45 @@ describe('published faction art release coverage — real retained files, no fix
         expect(path).not.toContain('/cache/'); expect(path).not.toContain('/rejected/');
         expect((await retained(path)).byteLength, `Retained provenance/evidence ${path}`).toBeGreaterThan(0);
       }
-      expect(manifest.processing.map(step => step.tool)).toEqual(expect.arrayContaining([!isFactionNavalArtRole(role) && FACTION_SOURCE_KINDS[family] === 'sheet' ? 'theandril-faction-extraction' : 'theandril-single-asset-extraction', 'spritefusion-pixel-snapper', 'aseprite']));
+      expect(manifest.processing.map(step => step.tool)).toEqual(expect.arrayContaining([animated ? 'theandril-animation-source' : !isFactionNavalArtRole(role) && FACTION_SOURCE_KINDS[family] === 'sheet' ? 'theandril-faction-extraction' : 'theandril-single-asset-extraction', 'spritefusion-pixel-snapper', 'aseprite']));
       const framePath = manifest.frames[0]!.sourcePath;
-      expect(framePath).toMatch(new RegExp(`^assets/art/approved/${id}/[a-f0-9]{64}/frame-0\\.png$`));
-      const frame = decodePng(await retained(framePath));
+      const frames = await Promise.all(manifest.frames.map(async (frame, index) => {
+        expect(frame.sourcePath).toMatch(new RegExp(`^assets/art/approved/${id}/[a-f0-9]{64}/frame-${index}\\.png$`));
+        return { id: frame.id, image: decodePng(await retained(frame.sourcePath)) };
+      }));
       const approvedDirectory = framePath.slice(0, framePath.lastIndexOf('/'));
-      expect((await retained(`${approvedDirectory}/editable.aseprite`)).byteLength).toBeGreaterThan(0);
-      const validation = validateAsset(manifest, [{ id: manifest.frames[0]!.id, image: frame }], catalog.palette);
+      const editable = await retained(`${approvedDirectory}/editable.aseprite`);
+      expect(editable.byteLength).toBeGreaterThan(0);
+      const validation = validateAsset(manifest, frames, catalog.palette);
       expect(validation.errors, id).toEqual([]); expect(validation.passed).toBe(true);
       expect(validation.inputHash).toBe(asset.review.inputHash);
-      const packed = cropImage(atlasImages.get(asset.atlasId)!, asset.frames[0]!.frame);
-      expect(sha256(packed.data), `${id} published atlas must preserve exact approved RGBA`).toBe(sha256(frame.data));
+      for (const [index, frame] of frames.entries()) {
+        const packed = cropImage(atlasImages.get(asset.atlasId)!, asset.frames[index]!.frame);
+        expect(sha256(packed.data), `${id}/${index} published atlas must preserve exact approved RGBA`).toBe(sha256(frame.image.data));
+      }
+      if (animated) {
+        expect(new Set(frames.map(frame => sha256(frame.image.data))).size).toBe(4);
+        // Actual reviewed Snapper outputs end at y53; the separately retained
+        // pre-Snapper source frames above end at y54. Never conflate the stages.
+        expect(validation.metrics.map(metric => metric.bounds)).toEqual([
+          { x: 14, y: 8, w: 41, h: 46 }, { x: 12, y: 8, w: 42, h: 46 }, { x: 12, y: 8, w: 43, h: 46 }, { x: 12, y: 8, w: 43, h: 46 },
+        ]);
+        for (const metric of validation.metrics) {
+          const first = validation.metrics[0]!.bounds!;
+          for (const key of ['x', 'y', 'w', 'h'] as const) expect(Math.abs(metric.bounds![key] - first[key])).toBeLessThanOrEqual(2);
+        }
+        const exportedPng = await retained(`${approvedDirectory}/aseprite/sprite.png`), exportedJson = await retained(`${approvedDirectory}/aseprite/sprite.json`);
+        expect(manifest.processing).toContainEqual(expect.objectContaining({ tool: 'aseprite', inputHash: sha256(editable), outputHash: cacheKey([sha256(exportedPng), sha256(exportedJson)]) }));
+        const exported = JSON.parse(exportedJson.toString('utf8')) as { frames: { frame: { x: number; y: number; w: number; h: number }; filename: string; duration: number }[]; meta: { frameTags: unknown[] } };
+        expect(exported.frames).toHaveLength(4); expect(exported.meta.frameTags).toEqual([expect.objectContaining({ name: 'idle', from: 0, to: 3, direction: 'forward' })]);
+        const sheet = decodePng(exportedPng);
+        for (const [index, frame] of exported.frames.entries()) {
+          expect(frame).toMatchObject({ filename: `sprite/idle/${index}`, duration: 250 });
+          expect(sha256(cropImage(sheet, frame.frame).data)).toBe(sha256(frames[index]!.image.data));
+        }
+      }
     }
+    expect(animatedCount).toBe(1); expect(staticCount).toBe(431);
   });
 
   it('has distinct frame hashes and does not implement cultures as identical pixel patterns with renamed colors', () => {
@@ -168,14 +264,16 @@ describe('published faction art release coverage — real retained files, no fix
         const asset = catalog.assets.find(asset => asset.id === id);
         if (!asset) throw new Error(`Missing approved runtime artwork: ${id}`);
         const image = cropImage(atlasImages.get(asset.atlasId)!, asset.frames[0]!.frame);
-        const hash = `${image.width}x${image.height}:${sha256(image.data)}`;
-        expect(allHashes.has(hash), `${id} duplicates another approved faction frame`).toBe(false); allHashes.add(hash);
+        for (const frame of asset.frames) {
+          const pose = cropImage(atlasImages.get(asset.atlasId)!, frame.frame), hash = `${pose.width}x${pose.height}:${sha256(pose.data)}`;
+          expect(allHashes.has(hash), `${frame.id} duplicates another approved faction frame`).toBe(false); allHashes.add(hash);
+        }
         const partition = colorPartitionHash(image);
         expect(partitions.has(partition), `${role}: a culture is only a palette permutation of another`).toBe(false); partitions.add(partition);
       }
       expect(partitions.size).toBe(FACTION_ART_FAMILIES.length);
     }
-    expect(allHashes.size).toBe(FACTION_ART_IDS.length);
+    expect(allHashes.size).toBe(FACTION_ART_IDS.length + 3);
   });
 });
 

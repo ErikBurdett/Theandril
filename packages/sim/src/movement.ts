@@ -5,6 +5,7 @@ import type { Army, CommandResult, DomainEvent, GameState, Observation } from '.
 import { cellsWithin, indexes, updateSight } from './visibility';
 import { startCampaignBattle } from './warfare';
 import { rulesVersion } from './rules';
+import { hasRoadEdge, roadMovementCost } from './roads';
 import { armyHasCharacterMission } from './characters';
 import { armyDomain, armyTerrainBlocker, carriedArmyBlocker, fleetCanEnterDeepWater, moveFleetCargo, travelTerrainBlocker } from './naval';
 
@@ -18,6 +19,7 @@ export type MovementRoute = z.infer<typeof movementRouteSchema>;
 export interface MovementPreview { target: number; path: number[]; cost: number; action: 'move' | 'attack' | 'besiege' | 'blocked'; canMoveNow: boolean; canQueue: boolean; blocker: string | null; limited: boolean; expandedNodes: number }
 export interface MovementQuery { reachable: { cell: number; cost: number }[]; preview: MovementPreview | null; limited: boolean; expandedNodes: number }
 interface Knowledge {
+  stepCost(from: number, to: number): number;
   legacy: boolean;
   battleLimit: number;
   terrainBlocker(cell: number): string | null;
@@ -31,17 +33,18 @@ const compareId = (a: { id: string }, b: { id: string }): number => a.id < b.id 
 const blocked = (state: GameState): string | null => state.victory ? 'This campaign has ended in victory.' : state.battle ? 'Resolve the pending battle first.' : state.pendingCapture ? 'Resolve the settlement capture first.' : null;
 
 /** Index one detached observation once, not once for every hovered hex. */
-const observed = new WeakMap<Observation, { terrain: Map<number, number>; depths: Map<number, number>; armies: Map<number, Army[]>; towns: Map<number, string> }>();
+const observed = new WeakMap<Observation, { terrain: Map<number, number>; roads: Map<number, number>; depths: Map<number, number>; armies: Map<number, Army[]>; towns: Map<number, string> }>();
 function observedKnowledge(view: Observation, armyId: string): Knowledge {
   let known = observed.get(view);
   if (!known) {
-    known = { terrain: new Map(view.cells.map(item => [item.cell, item.terrain])), depths: new Map(view.cells.map(item => [item.cell, item.waterDepth])), armies: new Map(), towns: new Map(view.settlements.map(town => [town.cell, town.factionId])) };
+    known = { terrain: new Map(view.cells.map(item => [item.cell, item.terrain])), roads: new Map(view.cells.filter(item => item.roadMask).map(item => [item.cell, item.roadMask!])), depths: new Map(view.cells.map(item => [item.cell, item.waterDepth])), armies: new Map(), towns: new Map(view.settlements.map(town => [town.cell, town.factionId])) };
     for (const army of view.armies) { if (army.carrierId) continue; const occupants = known.armies.get(army.cell) ?? []; occupants.push(army); known.armies.set(army.cell, occupants); }
     observed.set(view, known);
   }
   const index = known;
   const army = view.armies.find(army => army.id === armyId && army.factionId === view.factionId);
   return { legacy: false, battleLimit: 20, terrainBlocker: cell => travelTerrainBlocker(army?.domain ?? 'land', army?.canEnterDeepWater ?? false, index.terrain.get(cell) ?? 0, index.depths.get(cell) ?? 0), width: view.width, height: view.height, factionId: view.factionId, army, wars: new Set(view.wars),
+    stepCost: (from, to) => hasRoadEdge(from, to, view.width, index.roads.get(from) ?? 0) ? 1 : stepCost(index.terrain.get(to) ?? 0),
     terrain: cell => index.terrain.get(cell), armies: cell => index.armies.get(cell) ?? [], townOwner: cell => index.towns.get(cell), route: view.routes.find(route => route.armyId === armyId),
     strategicBlocker: view.victory ? 'This campaign has ended in victory.' : view.battle ? 'Resolve the pending battle first.' : view.pendingCapture ? 'Resolve the settlement capture first.' : view.armies.find(army => army.id === armyId)?.movementBlocker ?? null,
     besieging: view.sieges.some(siege => siege.armyId === armyId),
@@ -52,6 +55,7 @@ function canonicalKnowledge(state: GameState, factionId: string, armyId: string)
   return { legacy: rulesVersion(state) < 6, battleLimit: rulesVersion(state) < 8 ? 12 : 20, terrainBlocker: cell => army ? armyTerrainBlocker(state, army, cell) : 'Unknown army.', width: state.world.width, height: state.world.height, factionId, army: army?.factionId === factionId ? army : undefined,
     wars: new Set(state.wars.filter(pair => pair.includes(factionId)).map(pair => pair[0] === factionId ? pair[1] : pair[0])),
     terrain: cell => state.explored[factionId]?.has(cell) ? state.world.terrain[cell] : undefined,
+    stepCost: (from, to) => rulesVersion(state) >= 12 && hasRoadEdge(from, to, state.world.width, state.roads.known[factionId]?.[from] ?? 0) ? 1 : stepCost(state.world.terrain[to] ?? 0),
     armies: cell => visible?.has(cell) ? [...(index.armies.get(cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => Boolean(army)) : [],
     townOwner: cell => visible?.has(cell) ? state.settlements[index.settlements.get(cell) ?? '']?.factionId : undefined,
     route: state.routes[armyId], strategicBlocker: blocked(state) ?? carriedArmyBlocker(state, armyId) ?? (armyHasCharacterMission(state, armyId) ? 'Cancel the active character mission before moving this army.' : null), besieging: Object.values(state.sieges).some(siege => siege.armyId === armyId),
@@ -83,7 +87,7 @@ function search(knowledge: Knowledge, origin: number, target: number | undefined
     if (node.cell === target) { reached = true; break; }
     for (const adjacent of neighbors(node.cell, knowledge.width, knowledge.height)) {
       if (!mayEnter(knowledge, adjacent, attackTarget)) continue;
-      const cost = node.cost + stepCost(knowledge.terrain(adjacent) ?? 0);
+      const cost = node.cost + knowledge.stepCost(node.cell, adjacent);
       if (cost > maxCost || cost >= (costs.get(adjacent) ?? Infinity)) continue;
       costs.set(adjacent, cost); parents.set(adjacent, node.cell);
       open.push({ cell: adjacent, cost, priority: cost + (target === undefined ? 0 : hexDistance(adjacent, target, knowledge.width)) });
@@ -144,7 +148,7 @@ export function getMovementQuery(view: Observation, armyId: string, target?: num
     const enemies = knowledge.armies(next).filter(other => other.factionId !== knowledge.factionId);
     const owner = knowledge.townOwner(next); const terrain = knowledge.terrain(next);
     if (terrain === undefined || knowledge.terrainBlocker(next) || owner && owner !== knowledge.factionId || !enemies.length || enemies.reduce((sum, enemy) => sum + enemy.formations.length, 0) > knowledge.battleLimit || enemies.some(other => !knowledge.wars.has(other.factionId))) continue;
-    const attackCost = cost + stepCost(terrain);
+    const attackCost = cost + knowledge.stepCost(cell, next);
     if (attackCost <= army.movement && attackCost < (reachable.get(next) ?? Infinity)) reachable.set(next, attackCost);
   }
   const targetPreview = target === undefined ? null : preview(knowledge, target, options?.append, budget);
@@ -182,7 +186,7 @@ function stepObjection(state: GameState, army: Army, target: number): string | n
 function takeStep(state: GameState, army: Army, target: number, events: DomainEvent[]): void {
   const index = indexes(state); const sight = armySight(army);
   updateSight(state, army.factionId, army.cell, sight, -1); index.armies.get(army.cell)?.delete(army.id);
-  army.cell = target; army.movement -= stepCost(state.world.terrain[target] ?? 0);
+  army.movement -= roadMovementCost(state, army.cell, target); army.cell = target;
   moveFleetCargo(state, army.id);
   const occupants = index.armies.get(target) ?? new Set<string>(); occupants.add(army.id); index.armies.set(target, occupants);
   updateSight(state, army.factionId, target, sight, 1);
@@ -197,7 +201,7 @@ function followRoute(state: GameState, route: MovementRoute, events: DomainEvent
     if (objection) { pauseMovement(state, army.id, objection, events); return; }
     const nextTown = indexes(state).settlements.get(target);
     if (nextTown && state.sieges[nextTown]) { pauseMovement(state, army.id, 'The next settlement is under blockade.', events); return; }
-    if (army.movement < stepCost(state.world.terrain[target] ?? 0)) break;
+    if (army.movement < roadMovementCost(state, army.cell, target)) break;
     takeStep(state, army, target, events); route.origin = army.cell; route.path.shift();
     while (route.waypoints[0] === army.cell) route.waypoints.shift();
     if (route.path.length && localHostiles(state, army).some(id => !known.has(id))) { pauseMovement(state, army.id, 'New hostile forces or a hostile settlement were sighted nearby.', events); return; }

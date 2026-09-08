@@ -1,0 +1,1995 @@
+{
+  "schema": 13,
+  "postRunCountingClarification": {
+    "note": "The measured script's snapshot battlesStarted/battlesFinished fields count per-faction event notifications, not unique battles. warfare.ts emits each event once for each of the two participants. The original fields, timings, measured script hash and canonical seals are retained unchanged; the following unique counts are derived from those paired events and the final ordinary autoResolveBattle command count.",
+    "uniqueBattlesAt60CompletedRounds": 19,
+    "uniqueBattlesAt100CompletedRounds": 133,
+    "finalAutoResolveBattleCommands": 133,
+    "finalCaptureDecisions": 15,
+    "settlementCapturedEventNotifications": 30,
+    "validation": "Read-only inspection of packages/sim/src/warfare.ts start/finish event emission and commandTypes.autoResolveBattle; no new campaign or timing samples."
+  },
+  "contentHash": "07a58d4f",
+  "generatorVersion": 7,
+  "rosterVersion": 4,
+  "settings": {
+    "seed": 74,
+    "size": "standard",
+    "factionCount": 24,
+    "pace": "standard",
+    "generatorVersion": 7,
+    "rosterVersion": 4,
+    "layout": "continents"
+  },
+  "startedAt": "2026-09-07T17:12:22.385Z",
+  "finishedAt": "2026-09-07T17:12:40.301Z",
+  "scriptSha256": "c5ca2417ba2fff69707a0baae19be1504254bfee332935d4d712d49fad8c0d0c",
+  "environment": {
+    "node": "v26.7.0",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+    "logicalCpus": 32,
+    "os": "linux 7.1.9-arch1-2",
+    "memoryBytes": 33317580800,
+    "finalRssBytes": 525545472
+  },
+  "completedRounds": 100,
+  "finalTurn": 101,
+  "abortReason": null,
+  "victory": null,
+  "initialHash": "92514484",
+  "finalHash": "a7fb3c16",
+  "commandCount": 17282,
+  "commandTypes": {
+    "found": 168,
+    "moveTo": 11510,
+    "endTurn": 100,
+    "adoptInstitution": 24,
+    "queue": 1447,
+    "setWorkedTiles": 2157,
+    "improveTile": 149,
+    "claimCell": 68,
+    "research": 222,
+    "recruitCharacter": 130,
+    "assignCharacter": 130,
+    "terraformTile": 2,
+    "startCharacterMission": 212,
+    "mergeArmies": 271,
+    "adoptDoctrine": 24,
+    "accelerateRoad": 81,
+    "promoteCharacter": 36,
+    "embarkArmy": 47,
+    "declareWar": 54,
+    "attack": 113,
+    "autoResolveBattle": 133,
+    "disembarkArmy": 32,
+    "proposePeace": 48,
+    "respondPeace": 47,
+    "besiege": 35,
+    "liftSiege": 7,
+    "assault": 20,
+    "resolveCapture": 15
+  },
+  "eventTypes": {
+    "settlement_founded": 168,
+    "army_moved": 33132,
+    "turn_started": 2400,
+    "institution_adopted": 24,
+    "production_queued": 1447,
+    "worked_tiles_changed": 2157,
+    "settlement_grew": 1323,
+    "building_completed": 680,
+    "land_work_started": 151,
+    "land_work_progress": 210,
+    "land_work_completed": 151,
+    "territory_claimed": 68,
+    "technology_researched": 222,
+    "unit_recruited": 757,
+    "character_recruited": 130,
+    "character_assigned": 136,
+    "road_planned": 130,
+    "character_mission_started": 212,
+    "road_segment_built": 458,
+    "character_mission_progress": 212,
+    "formations_transferred": 271,
+    "character_mission_completed": 211,
+    "doctrine_adopted": 24,
+    "road_accelerated": 81,
+    "army_command_changed": 75,
+    "territory_expanded": 856,
+    "road_completed": 113,
+    "character_promoted": 36,
+    "army_embarked": 47,
+    "war_declared": 108,
+    "battle_started": 266,
+    "army_retreated": 124,
+    "battle_finished": 266,
+    "army_disembarked": 32,
+    "movement_interrupted": 117,
+    "peace_proposed": 96,
+    "peace_accepted": 94,
+    "character_battle_experience": 90,
+    "peace_expired": 70,
+    "siege_started": 70,
+    "siege_progress": 92,
+    "siege_lifted": 38,
+    "production_paused": 2,
+    "commander_rallied": 9,
+    "capture_pending": 15,
+    "settlement_captured": 30,
+    "character_recovered": 7,
+    "road_segment_reused": 11,
+    "character_mission_interrupted": 1,
+    "formation_destroyed": 2
+  },
+  "paidQueueOrders": {
+    "building.granary": 168,
+    "building.workshop": 169,
+    "building.market": 163,
+    "building.archive": 164,
+    "unit.colonist": 169,
+    "unit.guard": 142,
+    "unit.spearman": 121,
+    "unit.heavy_infantry": 83,
+    "building.harbor": 24,
+    "unit.cavalry": 76,
+    "unit.coastal_warship": 24,
+    "unit.transport": 31,
+    "unit.scout": 89,
+    "unit.ocean_warship": 24
+  },
+  "commandRefusals": [],
+  "snapshots": [
+    {
+      "completedRounds": 0,
+      "turn": 1,
+      "factionsWithContact": 0,
+      "contactPairs": 0,
+      "settlements": 0,
+      "armies": 48,
+      "formations": 48,
+      "hullFormations": {
+        "unit.transport": 0,
+        "unit.coastal_warship": 0,
+        "unit.ocean_warship": 0
+      },
+      "battlesStarted": 0,
+      "battlesFinished": 0,
+      "landings": 0,
+      "overseasLandings": 0,
+      "overseasColonies": 0,
+      "hash": "92514484",
+      "factions": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.mire_courts",
+          "definitionId": "faction.mire_courts",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.cistern_assembly",
+          "definitionId": "faction.cistern_assembly",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.unsealed_companies",
+          "definitionId": "faction.unsealed_companies",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.lantern_hospices",
+          "definitionId": "faction.lantern_hospices",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.cairnwing_concord",
+          "definitionId": "faction.cairnwing_concord",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.red_sluice",
+          "definitionId": "faction.red_sluice",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.velvet_meridian",
+          "definitionId": "faction.velvet_meridian",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.brine_choir",
+          "definitionId": "faction.brine_choir",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.emberwake_convocation",
+          "definitionId": "faction.emberwake_convocation",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.underhush_exchange",
+          "definitionId": "faction.underhush_exchange",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.vesper_court",
+          "definitionId": "faction.vesper_court",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.manytrack_moot",
+          "definitionId": "faction.manytrack_moot",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.margin_observance",
+          "definitionId": "faction.margin_observance",
+          "settlements": 0,
+          "treasury": 60,
+          "contacts": [],
+          "firstContactTurn": null
+        }
+      ]
+    },
+    {
+      "completedRounds": 60,
+      "turn": 61,
+      "factionsWithContact": 22,
+      "contactPairs": 32,
+      "settlements": 136,
+      "armies": 282,
+      "formations": 507,
+      "hullFormations": {
+        "unit.transport": 23,
+        "unit.coastal_warship": 22,
+        "unit.ocean_warship": 21
+      },
+      "battlesStarted": 38,
+      "battlesFinished": 38,
+      "landings": 17,
+      "overseasLandings": 10,
+      "overseasColonies": 10,
+      "hash": "f9a10aa9",
+      "factions": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "settlements": 7,
+          "treasury": 687,
+          "contacts": [
+            "faction.cistern_assembly",
+            "faction.morrow_spore",
+            "faction.sable_steppe",
+            "faction.saltwind_remnant",
+            "faction.wardhall_remnant"
+          ],
+          "firstContactTurn": 34
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "settlements": 7,
+          "treasury": 832,
+          "contacts": [
+            "faction.brine_choir",
+            "faction.iron_covenant",
+            "faction.morrow_spore"
+          ],
+          "firstContactTurn": 32
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "settlements": 6,
+          "treasury": 1090,
+          "contacts": [
+            "faction.red_sluice",
+            "faction.sepulchral_synod",
+            "faction.underhush_exchange"
+          ],
+          "firstContactTurn": 46
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "settlements": 6,
+          "treasury": 1945,
+          "contacts": [
+            "faction.mire_courts",
+            "faction.sepulchral_synod"
+          ],
+          "firstContactTurn": 24
+        },
+        {
+          "id": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant",
+          "settlements": 6,
+          "treasury": 567,
+          "contacts": [
+            "faction.morrow_spore",
+            "faction.reedbound_council"
+          ],
+          "firstContactTurn": 51
+        },
+        {
+          "id": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod",
+          "settlements": 6,
+          "treasury": 1200,
+          "contacts": [
+            "faction.cinder_march",
+            "faction.glass_tide",
+            "faction.underhush_exchange"
+          ],
+          "firstContactTurn": 52
+        },
+        {
+          "id": "faction.mire_courts",
+          "definitionId": "faction.mire_courts",
+          "settlements": 8,
+          "treasury": 749,
+          "contacts": [
+            "faction.glass_tide"
+          ],
+          "firstContactTurn": 23
+        },
+        {
+          "id": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant",
+          "settlements": 5,
+          "treasury": 962,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.brine_choir",
+            "faction.cairnwing_concord",
+            "faction.cistern_assembly",
+            "faction.morrow_spore",
+            "faction.sable_steppe"
+          ],
+          "firstContactTurn": 30
+        },
+        {
+          "id": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant",
+          "settlements": 4,
+          "treasury": 830,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans",
+          "settlements": 4,
+          "treasury": 237,
+          "contacts": [
+            "faction.unsealed_companies",
+            "faction.velvet_meridian",
+            "faction.vesper_court"
+          ],
+          "firstContactTurn": 26
+        },
+        {
+          "id": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe",
+          "settlements": 6,
+          "treasury": 679,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.morrow_spore",
+            "faction.saltwind_remnant"
+          ],
+          "firstContactTurn": 45
+        },
+        {
+          "id": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore",
+          "settlements": 6,
+          "treasury": 937,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.iron_covenant",
+            "faction.reedbound_council",
+            "faction.sable_steppe",
+            "faction.saltwind_remnant"
+          ],
+          "firstContactTurn": 31
+        },
+        {
+          "id": "faction.cistern_assembly",
+          "definitionId": "faction.cistern_assembly",
+          "settlements": 2,
+          "treasury": 82,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.brine_choir",
+            "faction.morrow_spore",
+            "faction.saltwind_remnant"
+          ],
+          "firstContactTurn": 29
+        },
+        {
+          "id": "faction.unsealed_companies",
+          "definitionId": "faction.unsealed_companies",
+          "settlements": 6,
+          "treasury": 1262,
+          "contacts": [
+            "faction.rimehorn_clans",
+            "faction.vesper_court"
+          ],
+          "firstContactTurn": 38
+        },
+        {
+          "id": "faction.lantern_hospices",
+          "definitionId": "faction.lantern_hospices",
+          "settlements": 6,
+          "treasury": 784,
+          "contacts": [],
+          "firstContactTurn": null
+        },
+        {
+          "id": "faction.cairnwing_concord",
+          "definitionId": "faction.cairnwing_concord",
+          "settlements": 6,
+          "treasury": 294,
+          "contacts": [
+            "faction.brine_choir",
+            "faction.saltwind_remnant"
+          ],
+          "firstContactTurn": 45
+        },
+        {
+          "id": "faction.red_sluice",
+          "definitionId": "faction.red_sluice",
+          "settlements": 5,
+          "treasury": 885,
+          "contacts": [
+            "faction.emberwake_convocation"
+          ],
+          "firstContactTurn": 52
+        },
+        {
+          "id": "faction.velvet_meridian",
+          "definitionId": "faction.velvet_meridian",
+          "settlements": 7,
+          "treasury": 674,
+          "contacts": [
+            "faction.rimehorn_clans",
+            "faction.vesper_court"
+          ],
+          "firstContactTurn": 26
+        },
+        {
+          "id": "faction.brine_choir",
+          "definitionId": "faction.brine_choir",
+          "settlements": 6,
+          "treasury": 1824,
+          "contacts": [
+            "faction.cairnwing_concord",
+            "faction.cistern_assembly",
+            "faction.reedbound_council",
+            "faction.saltwind_remnant"
+          ],
+          "firstContactTurn": 26
+        },
+        {
+          "id": "faction.emberwake_convocation",
+          "definitionId": "faction.emberwake_convocation",
+          "settlements": 5,
+          "treasury": 751,
+          "contacts": [
+            "faction.manytrack_moot",
+            "faction.red_sluice"
+          ],
+          "firstContactTurn": 56
+        },
+        {
+          "id": "faction.underhush_exchange",
+          "definitionId": "faction.underhush_exchange",
+          "settlements": 6,
+          "treasury": 763,
+          "contacts": [
+            "faction.cinder_march",
+            "faction.margin_observance",
+            "faction.sepulchral_synod"
+          ],
+          "firstContactTurn": 42
+        },
+        {
+          "id": "faction.vesper_court",
+          "definitionId": "faction.vesper_court",
+          "settlements": 6,
+          "treasury": 720,
+          "contacts": [
+            "faction.rimehorn_clans",
+            "faction.unsealed_companies",
+            "faction.velvet_meridian"
+          ],
+          "firstContactTurn": 18
+        },
+        {
+          "id": "faction.manytrack_moot",
+          "definitionId": "faction.manytrack_moot",
+          "settlements": 4,
+          "treasury": 740,
+          "contacts": [
+            "faction.emberwake_convocation"
+          ],
+          "firstContactTurn": 58
+        },
+        {
+          "id": "faction.margin_observance",
+          "definitionId": "faction.margin_observance",
+          "settlements": 6,
+          "treasury": 957,
+          "contacts": [
+            "faction.underhush_exchange"
+          ],
+          "firstContactTurn": 41
+        }
+      ]
+    },
+    {
+      "completedRounds": 100,
+      "turn": 101,
+      "factionsWithContact": 24,
+      "contactPairs": 96,
+      "settlements": 168,
+      "armies": 366,
+      "formations": 635,
+      "hullFormations": {
+        "unit.transport": 31,
+        "unit.coastal_warship": 24,
+        "unit.ocean_warship": 24
+      },
+      "battlesStarted": 266,
+      "battlesFinished": 266,
+      "landings": 32,
+      "overseasLandings": 23,
+      "overseasColonies": 21,
+      "hash": "a7fb3c16",
+      "factions": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "settlements": 10,
+          "treasury": 5657,
+          "contacts": [
+            "faction.brine_choir",
+            "faction.cairnwing_concord",
+            "faction.cistern_assembly",
+            "faction.iron_covenant",
+            "faction.morrow_spore",
+            "faction.reedbound_council",
+            "faction.sable_steppe",
+            "faction.saltwind_remnant",
+            "faction.wardhall_remnant"
+          ],
+          "firstContactTurn": 34
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "settlements": 10,
+          "treasury": 5503,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.brine_choir",
+            "faction.cairnwing_concord",
+            "faction.cinder_march",
+            "faction.cistern_assembly",
+            "faction.glass_tide",
+            "faction.iron_covenant",
+            "faction.manytrack_moot",
+            "faction.mire_courts",
+            "faction.morrow_spore",
+            "faction.red_sluice",
+            "faction.saltwind_remnant",
+            "faction.underhush_exchange"
+          ],
+          "firstContactTurn": 32
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "settlements": 7,
+          "treasury": 4409,
+          "contacts": [
+            "faction.brine_choir",
+            "faction.cairnwing_concord",
+            "faction.glass_tide",
+            "faction.iron_covenant",
+            "faction.manytrack_moot",
+            "faction.margin_observance",
+            "faction.red_sluice",
+            "faction.reedbound_council",
+            "faction.sepulchral_synod",
+            "faction.underhush_exchange"
+          ],
+          "firstContactTurn": 46
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "settlements": 6,
+          "treasury": 6666,
+          "contacts": [
+            "faction.cairnwing_concord",
+            "faction.cinder_march",
+            "faction.iron_covenant",
+            "faction.lantern_hospices",
+            "faction.margin_observance",
+            "faction.mire_courts",
+            "faction.red_sluice",
+            "faction.reedbound_council",
+            "faction.sepulchral_synod"
+          ],
+          "firstContactTurn": 24
+        },
+        {
+          "id": "faction.iron_covenant",
+          "definitionId": "faction.iron_covenant",
+          "settlements": 6,
+          "treasury": 3949,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.brine_choir",
+            "faction.cairnwing_concord",
+            "faction.cinder_march",
+            "faction.cistern_assembly",
+            "faction.glass_tide",
+            "faction.manytrack_moot",
+            "faction.margin_observance",
+            "faction.morrow_spore",
+            "faction.red_sluice",
+            "faction.reedbound_council",
+            "faction.sepulchral_synod",
+            "faction.underhush_exchange"
+          ],
+          "firstContactTurn": 51
+        },
+        {
+          "id": "faction.sepulchral_synod",
+          "definitionId": "faction.sepulchral_synod",
+          "settlements": 7,
+          "treasury": 4558,
+          "contacts": [
+            "faction.cinder_march",
+            "faction.glass_tide",
+            "faction.iron_covenant",
+            "faction.margin_observance",
+            "faction.red_sluice",
+            "faction.underhush_exchange"
+          ],
+          "firstContactTurn": 52
+        },
+        {
+          "id": "faction.mire_courts",
+          "definitionId": "faction.mire_courts",
+          "settlements": 8,
+          "treasury": 6016,
+          "contacts": [
+            "faction.glass_tide",
+            "faction.lantern_hospices",
+            "faction.manytrack_moot",
+            "faction.red_sluice",
+            "faction.reedbound_council",
+            "faction.wardhall_remnant"
+          ],
+          "firstContactTurn": 23
+        },
+        {
+          "id": "faction.saltwind_remnant",
+          "definitionId": "faction.saltwind_remnant",
+          "settlements": 8,
+          "treasury": 4711,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.brine_choir",
+            "faction.cairnwing_concord",
+            "faction.cistern_assembly",
+            "faction.morrow_spore",
+            "faction.reedbound_council",
+            "faction.sable_steppe",
+            "faction.wardhall_remnant"
+          ],
+          "firstContactTurn": 30
+        },
+        {
+          "id": "faction.wardhall_remnant",
+          "definitionId": "faction.wardhall_remnant",
+          "settlements": 4,
+          "treasury": 3088,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.cairnwing_concord",
+            "faction.cistern_assembly",
+            "faction.manytrack_moot",
+            "faction.sable_steppe",
+            "faction.saltwind_remnant",
+            "faction.velvet_meridian",
+            "faction.vesper_court"
+          ],
+          "firstContactTurn": 76
+        },
+        {
+          "id": "faction.rimehorn_clans",
+          "definitionId": "faction.rimehorn_clans",
+          "settlements": 6,
+          "treasury": 1968,
+          "contacts": [
+            "faction.emberwake_convocation",
+            "faction.manytrack_moot",
+            "faction.unsealed_companies",
+            "faction.velvet_meridian",
+            "faction.vesper_court"
+          ],
+          "firstContactTurn": 26
+        },
+        {
+          "id": "faction.sable_steppe",
+          "definitionId": "faction.sable_steppe",
+          "settlements": 8,
+          "treasury": 4438,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.cairnwing_concord",
+            "faction.morrow_spore",
+            "faction.saltwind_remnant",
+            "faction.wardhall_remnant"
+          ],
+          "firstContactTurn": 45
+        },
+        {
+          "id": "faction.morrow_spore",
+          "definitionId": "faction.morrow_spore",
+          "settlements": 11,
+          "treasury": 4583,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.brine_choir",
+            "faction.cistern_assembly",
+            "faction.iron_covenant",
+            "faction.reedbound_council",
+            "faction.sable_steppe",
+            "faction.saltwind_remnant"
+          ],
+          "firstContactTurn": 31
+        },
+        {
+          "id": "faction.cistern_assembly",
+          "definitionId": "faction.cistern_assembly",
+          "settlements": 5,
+          "treasury": 696,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.brine_choir",
+            "faction.cairnwing_concord",
+            "faction.iron_covenant",
+            "faction.morrow_spore",
+            "faction.reedbound_council",
+            "faction.saltwind_remnant",
+            "faction.wardhall_remnant"
+          ],
+          "firstContactTurn": 29
+        },
+        {
+          "id": "faction.unsealed_companies",
+          "definitionId": "faction.unsealed_companies",
+          "settlements": 9,
+          "treasury": 6153,
+          "contacts": [
+            "faction.emberwake_convocation",
+            "faction.manytrack_moot",
+            "faction.rimehorn_clans",
+            "faction.vesper_court"
+          ],
+          "firstContactTurn": 38
+        },
+        {
+          "id": "faction.lantern_hospices",
+          "definitionId": "faction.lantern_hospices",
+          "settlements": 7,
+          "treasury": 4078,
+          "contacts": [
+            "faction.glass_tide",
+            "faction.mire_courts"
+          ],
+          "firstContactTurn": 64
+        },
+        {
+          "id": "faction.cairnwing_concord",
+          "definitionId": "faction.cairnwing_concord",
+          "settlements": 6,
+          "treasury": 3619,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.brine_choir",
+            "faction.cinder_march",
+            "faction.cistern_assembly",
+            "faction.glass_tide",
+            "faction.iron_covenant",
+            "faction.morrow_spore",
+            "faction.red_sluice",
+            "faction.reedbound_council",
+            "faction.sable_steppe",
+            "faction.saltwind_remnant",
+            "faction.underhush_exchange",
+            "faction.wardhall_remnant"
+          ],
+          "firstContactTurn": 45
+        },
+        {
+          "id": "faction.red_sluice",
+          "definitionId": "faction.red_sluice",
+          "settlements": 5,
+          "treasury": 3111,
+          "contacts": [
+            "faction.cairnwing_concord",
+            "faction.cinder_march",
+            "faction.emberwake_convocation",
+            "faction.glass_tide",
+            "faction.iron_covenant",
+            "faction.manytrack_moot",
+            "faction.margin_observance",
+            "faction.mire_courts",
+            "faction.reedbound_council",
+            "faction.sepulchral_synod",
+            "faction.underhush_exchange"
+          ],
+          "firstContactTurn": 52
+        },
+        {
+          "id": "faction.velvet_meridian",
+          "definitionId": "faction.velvet_meridian",
+          "settlements": 8,
+          "treasury": 4587,
+          "contacts": [
+            "faction.emberwake_convocation",
+            "faction.manytrack_moot",
+            "faction.rimehorn_clans",
+            "faction.vesper_court",
+            "faction.wardhall_remnant"
+          ],
+          "firstContactTurn": 26
+        },
+        {
+          "id": "faction.brine_choir",
+          "definitionId": "faction.brine_choir",
+          "settlements": 6,
+          "treasury": 3261,
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.cairnwing_concord",
+            "faction.cinder_march",
+            "faction.cistern_assembly",
+            "faction.iron_covenant",
+            "faction.morrow_spore",
+            "faction.reedbound_council",
+            "faction.saltwind_remnant",
+            "faction.underhush_exchange"
+          ],
+          "firstContactTurn": 26
+        },
+        {
+          "id": "faction.emberwake_convocation",
+          "definitionId": "faction.emberwake_convocation",
+          "settlements": 6,
+          "treasury": 3501,
+          "contacts": [
+            "faction.manytrack_moot",
+            "faction.red_sluice",
+            "faction.rimehorn_clans",
+            "faction.velvet_meridian",
+            "faction.vesper_court"
+          ],
+          "firstContactTurn": 56
+        },
+        {
+          "id": "faction.underhush_exchange",
+          "definitionId": "faction.underhush_exchange",
+          "settlements": 6,
+          "treasury": 3881,
+          "contacts": [
+            "faction.brine_choir",
+            "faction.cairnwing_concord",
+            "faction.cinder_march",
+            "faction.iron_covenant",
+            "faction.manytrack_moot",
+            "faction.margin_observance",
+            "faction.red_sluice",
+            "faction.reedbound_council",
+            "faction.sepulchral_synod"
+          ],
+          "firstContactTurn": 42
+        },
+        {
+          "id": "faction.vesper_court",
+          "definitionId": "faction.vesper_court",
+          "settlements": 6,
+          "treasury": 3730,
+          "contacts": [
+            "faction.emberwake_convocation",
+            "faction.manytrack_moot",
+            "faction.rimehorn_clans",
+            "faction.unsealed_companies",
+            "faction.velvet_meridian",
+            "faction.wardhall_remnant"
+          ],
+          "firstContactTurn": 18
+        },
+        {
+          "id": "faction.manytrack_moot",
+          "definitionId": "faction.manytrack_moot",
+          "settlements": 5,
+          "treasury": 3480,
+          "contacts": [
+            "faction.cinder_march",
+            "faction.emberwake_convocation",
+            "faction.iron_covenant",
+            "faction.mire_courts",
+            "faction.red_sluice",
+            "faction.reedbound_council",
+            "faction.rimehorn_clans",
+            "faction.underhush_exchange",
+            "faction.unsealed_companies",
+            "faction.velvet_meridian",
+            "faction.vesper_court",
+            "faction.wardhall_remnant"
+          ],
+          "firstContactTurn": 58
+        },
+        {
+          "id": "faction.margin_observance",
+          "definitionId": "faction.margin_observance",
+          "settlements": 8,
+          "treasury": 4790,
+          "contacts": [
+            "faction.cinder_march",
+            "faction.iron_covenant",
+            "faction.red_sluice",
+            "faction.sepulchral_synod",
+            "faction.underhush_exchange"
+          ],
+          "firstContactTurn": 41
+        }
+      ]
+    }
+  ],
+  "final": {
+    "completedRounds": 100,
+    "turn": 101,
+    "factionsWithContact": 24,
+    "contactPairs": 96,
+    "settlements": 168,
+    "armies": 366,
+    "formations": 635,
+    "hullFormations": {
+      "unit.transport": 31,
+      "unit.coastal_warship": 24,
+      "unit.ocean_warship": 24
+    },
+    "battlesStarted": 266,
+    "battlesFinished": 266,
+    "landings": 32,
+    "overseasLandings": 23,
+    "overseasColonies": 21,
+    "hash": "a7fb3c16",
+    "factions": [
+      {
+        "id": "faction.ashen_compact",
+        "definitionId": "faction.ashen_compact",
+        "settlements": 10,
+        "treasury": 5657,
+        "contacts": [
+          "faction.brine_choir",
+          "faction.cairnwing_concord",
+          "faction.cistern_assembly",
+          "faction.iron_covenant",
+          "faction.morrow_spore",
+          "faction.reedbound_council",
+          "faction.sable_steppe",
+          "faction.saltwind_remnant",
+          "faction.wardhall_remnant"
+        ],
+        "firstContactTurn": 34
+      },
+      {
+        "id": "faction.reedbound_council",
+        "definitionId": "faction.reedbound_council",
+        "settlements": 10,
+        "treasury": 5503,
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.brine_choir",
+          "faction.cairnwing_concord",
+          "faction.cinder_march",
+          "faction.cistern_assembly",
+          "faction.glass_tide",
+          "faction.iron_covenant",
+          "faction.manytrack_moot",
+          "faction.mire_courts",
+          "faction.morrow_spore",
+          "faction.red_sluice",
+          "faction.saltwind_remnant",
+          "faction.underhush_exchange"
+        ],
+        "firstContactTurn": 32
+      },
+      {
+        "id": "faction.cinder_march",
+        "definitionId": "faction.cinder_march",
+        "settlements": 7,
+        "treasury": 4409,
+        "contacts": [
+          "faction.brine_choir",
+          "faction.cairnwing_concord",
+          "faction.glass_tide",
+          "faction.iron_covenant",
+          "faction.manytrack_moot",
+          "faction.margin_observance",
+          "faction.red_sluice",
+          "faction.reedbound_council",
+          "faction.sepulchral_synod",
+          "faction.underhush_exchange"
+        ],
+        "firstContactTurn": 46
+      },
+      {
+        "id": "faction.glass_tide",
+        "definitionId": "faction.glass_tide",
+        "settlements": 6,
+        "treasury": 6666,
+        "contacts": [
+          "faction.cairnwing_concord",
+          "faction.cinder_march",
+          "faction.iron_covenant",
+          "faction.lantern_hospices",
+          "faction.margin_observance",
+          "faction.mire_courts",
+          "faction.red_sluice",
+          "faction.reedbound_council",
+          "faction.sepulchral_synod"
+        ],
+        "firstContactTurn": 24
+      },
+      {
+        "id": "faction.iron_covenant",
+        "definitionId": "faction.iron_covenant",
+        "settlements": 6,
+        "treasury": 3949,
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.brine_choir",
+          "faction.cairnwing_concord",
+          "faction.cinder_march",
+          "faction.cistern_assembly",
+          "faction.glass_tide",
+          "faction.manytrack_moot",
+          "faction.margin_observance",
+          "faction.morrow_spore",
+          "faction.red_sluice",
+          "faction.reedbound_council",
+          "faction.sepulchral_synod",
+          "faction.underhush_exchange"
+        ],
+        "firstContactTurn": 51
+      },
+      {
+        "id": "faction.sepulchral_synod",
+        "definitionId": "faction.sepulchral_synod",
+        "settlements": 7,
+        "treasury": 4558,
+        "contacts": [
+          "faction.cinder_march",
+          "faction.glass_tide",
+          "faction.iron_covenant",
+          "faction.margin_observance",
+          "faction.red_sluice",
+          "faction.underhush_exchange"
+        ],
+        "firstContactTurn": 52
+      },
+      {
+        "id": "faction.mire_courts",
+        "definitionId": "faction.mire_courts",
+        "settlements": 8,
+        "treasury": 6016,
+        "contacts": [
+          "faction.glass_tide",
+          "faction.lantern_hospices",
+          "faction.manytrack_moot",
+          "faction.red_sluice",
+          "faction.reedbound_council",
+          "faction.wardhall_remnant"
+        ],
+        "firstContactTurn": 23
+      },
+      {
+        "id": "faction.saltwind_remnant",
+        "definitionId": "faction.saltwind_remnant",
+        "settlements": 8,
+        "treasury": 4711,
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.brine_choir",
+          "faction.cairnwing_concord",
+          "faction.cistern_assembly",
+          "faction.morrow_spore",
+          "faction.reedbound_council",
+          "faction.sable_steppe",
+          "faction.wardhall_remnant"
+        ],
+        "firstContactTurn": 30
+      },
+      {
+        "id": "faction.wardhall_remnant",
+        "definitionId": "faction.wardhall_remnant",
+        "settlements": 4,
+        "treasury": 3088,
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.cairnwing_concord",
+          "faction.cistern_assembly",
+          "faction.manytrack_moot",
+          "faction.sable_steppe",
+          "faction.saltwind_remnant",
+          "faction.velvet_meridian",
+          "faction.vesper_court"
+        ],
+        "firstContactTurn": 76
+      },
+      {
+        "id": "faction.rimehorn_clans",
+        "definitionId": "faction.rimehorn_clans",
+        "settlements": 6,
+        "treasury": 1968,
+        "contacts": [
+          "faction.emberwake_convocation",
+          "faction.manytrack_moot",
+          "faction.unsealed_companies",
+          "faction.velvet_meridian",
+          "faction.vesper_court"
+        ],
+        "firstContactTurn": 26
+      },
+      {
+        "id": "faction.sable_steppe",
+        "definitionId": "faction.sable_steppe",
+        "settlements": 8,
+        "treasury": 4438,
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.cairnwing_concord",
+          "faction.morrow_spore",
+          "faction.saltwind_remnant",
+          "faction.wardhall_remnant"
+        ],
+        "firstContactTurn": 45
+      },
+      {
+        "id": "faction.morrow_spore",
+        "definitionId": "faction.morrow_spore",
+        "settlements": 11,
+        "treasury": 4583,
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.brine_choir",
+          "faction.cistern_assembly",
+          "faction.iron_covenant",
+          "faction.reedbound_council",
+          "faction.sable_steppe",
+          "faction.saltwind_remnant"
+        ],
+        "firstContactTurn": 31
+      },
+      {
+        "id": "faction.cistern_assembly",
+        "definitionId": "faction.cistern_assembly",
+        "settlements": 5,
+        "treasury": 696,
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.brine_choir",
+          "faction.cairnwing_concord",
+          "faction.iron_covenant",
+          "faction.morrow_spore",
+          "faction.reedbound_council",
+          "faction.saltwind_remnant",
+          "faction.wardhall_remnant"
+        ],
+        "firstContactTurn": 29
+      },
+      {
+        "id": "faction.unsealed_companies",
+        "definitionId": "faction.unsealed_companies",
+        "settlements": 9,
+        "treasury": 6153,
+        "contacts": [
+          "faction.emberwake_convocation",
+          "faction.manytrack_moot",
+          "faction.rimehorn_clans",
+          "faction.vesper_court"
+        ],
+        "firstContactTurn": 38
+      },
+      {
+        "id": "faction.lantern_hospices",
+        "definitionId": "faction.lantern_hospices",
+        "settlements": 7,
+        "treasury": 4078,
+        "contacts": [
+          "faction.glass_tide",
+          "faction.mire_courts"
+        ],
+        "firstContactTurn": 64
+      },
+      {
+        "id": "faction.cairnwing_concord",
+        "definitionId": "faction.cairnwing_concord",
+        "settlements": 6,
+        "treasury": 3619,
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.brine_choir",
+          "faction.cinder_march",
+          "faction.cistern_assembly",
+          "faction.glass_tide",
+          "faction.iron_covenant",
+          "faction.morrow_spore",
+          "faction.red_sluice",
+          "faction.reedbound_council",
+          "faction.sable_steppe",
+          "faction.saltwind_remnant",
+          "faction.underhush_exchange",
+          "faction.wardhall_remnant"
+        ],
+        "firstContactTurn": 45
+      },
+      {
+        "id": "faction.red_sluice",
+        "definitionId": "faction.red_sluice",
+        "settlements": 5,
+        "treasury": 3111,
+        "contacts": [
+          "faction.cairnwing_concord",
+          "faction.cinder_march",
+          "faction.emberwake_convocation",
+          "faction.glass_tide",
+          "faction.iron_covenant",
+          "faction.manytrack_moot",
+          "faction.margin_observance",
+          "faction.mire_courts",
+          "faction.reedbound_council",
+          "faction.sepulchral_synod",
+          "faction.underhush_exchange"
+        ],
+        "firstContactTurn": 52
+      },
+      {
+        "id": "faction.velvet_meridian",
+        "definitionId": "faction.velvet_meridian",
+        "settlements": 8,
+        "treasury": 4587,
+        "contacts": [
+          "faction.emberwake_convocation",
+          "faction.manytrack_moot",
+          "faction.rimehorn_clans",
+          "faction.vesper_court",
+          "faction.wardhall_remnant"
+        ],
+        "firstContactTurn": 26
+      },
+      {
+        "id": "faction.brine_choir",
+        "definitionId": "faction.brine_choir",
+        "settlements": 6,
+        "treasury": 3261,
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.cairnwing_concord",
+          "faction.cinder_march",
+          "faction.cistern_assembly",
+          "faction.iron_covenant",
+          "faction.morrow_spore",
+          "faction.reedbound_council",
+          "faction.saltwind_remnant",
+          "faction.underhush_exchange"
+        ],
+        "firstContactTurn": 26
+      },
+      {
+        "id": "faction.emberwake_convocation",
+        "definitionId": "faction.emberwake_convocation",
+        "settlements": 6,
+        "treasury": 3501,
+        "contacts": [
+          "faction.manytrack_moot",
+          "faction.red_sluice",
+          "faction.rimehorn_clans",
+          "faction.velvet_meridian",
+          "faction.vesper_court"
+        ],
+        "firstContactTurn": 56
+      },
+      {
+        "id": "faction.underhush_exchange",
+        "definitionId": "faction.underhush_exchange",
+        "settlements": 6,
+        "treasury": 3881,
+        "contacts": [
+          "faction.brine_choir",
+          "faction.cairnwing_concord",
+          "faction.cinder_march",
+          "faction.iron_covenant",
+          "faction.manytrack_moot",
+          "faction.margin_observance",
+          "faction.red_sluice",
+          "faction.reedbound_council",
+          "faction.sepulchral_synod"
+        ],
+        "firstContactTurn": 42
+      },
+      {
+        "id": "faction.vesper_court",
+        "definitionId": "faction.vesper_court",
+        "settlements": 6,
+        "treasury": 3730,
+        "contacts": [
+          "faction.emberwake_convocation",
+          "faction.manytrack_moot",
+          "faction.rimehorn_clans",
+          "faction.unsealed_companies",
+          "faction.velvet_meridian",
+          "faction.wardhall_remnant"
+        ],
+        "firstContactTurn": 18
+      },
+      {
+        "id": "faction.manytrack_moot",
+        "definitionId": "faction.manytrack_moot",
+        "settlements": 5,
+        "treasury": 3480,
+        "contacts": [
+          "faction.cinder_march",
+          "faction.emberwake_convocation",
+          "faction.iron_covenant",
+          "faction.mire_courts",
+          "faction.red_sluice",
+          "faction.reedbound_council",
+          "faction.rimehorn_clans",
+          "faction.underhush_exchange",
+          "faction.unsealed_companies",
+          "faction.velvet_meridian",
+          "faction.vesper_court",
+          "faction.wardhall_remnant"
+        ],
+        "firstContactTurn": 58
+      },
+      {
+        "id": "faction.margin_observance",
+        "definitionId": "faction.margin_observance",
+        "settlements": 8,
+        "treasury": 4790,
+        "contacts": [
+          "faction.cinder_march",
+          "faction.iron_covenant",
+          "faction.red_sluice",
+          "faction.sepulchral_synod",
+          "faction.underhush_exchange"
+        ],
+        "firstContactTurn": 41
+      }
+    ]
+  },
+  "landings": [
+    {
+      "turn": 32,
+      "factionId": "faction.vesper_court",
+      "armyId": "army.356",
+      "cell": 13529,
+      "landmass": 2,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 37,
+      "factionId": "faction.emberwake_convocation",
+      "armyId": "army.334",
+      "cell": 39318,
+      "landmass": 6,
+      "differentHomeland": false,
+      "deepVoyage": false
+    },
+    {
+      "turn": 39,
+      "factionId": "faction.cairnwing_concord",
+      "armyId": "army.203",
+      "cell": 91250,
+      "landmass": 5,
+      "differentHomeland": true,
+      "deepVoyage": false
+    },
+    {
+      "turn": 42,
+      "factionId": "faction.unsealed_companies",
+      "armyId": "army.439",
+      "cell": 12375,
+      "landmass": 2,
+      "differentHomeland": false,
+      "deepVoyage": false
+    },
+    {
+      "turn": 42,
+      "factionId": "faction.manytrack_moot",
+      "armyId": "army.323",
+      "cell": 25547,
+      "landmass": 1,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 43,
+      "factionId": "faction.sable_steppe",
+      "armyId": "army.280",
+      "cell": 38722,
+      "landmass": 7,
+      "differentHomeland": false,
+      "deepVoyage": false
+    },
+    {
+      "turn": 45,
+      "factionId": "faction.cairnwing_concord",
+      "armyId": "army.619",
+      "cell": 88953,
+      "landmass": 18,
+      "differentHomeland": true,
+      "deepVoyage": false
+    },
+    {
+      "turn": 47,
+      "factionId": "faction.red_sluice",
+      "armyId": "army.387",
+      "cell": 49344,
+      "landmass": 5,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 49,
+      "factionId": "faction.reedbound_council",
+      "armyId": "army.561",
+      "cell": 60924,
+      "landmass": 5,
+      "differentHomeland": false,
+      "deepVoyage": true
+    },
+    {
+      "turn": 51,
+      "factionId": "faction.cairnwing_concord",
+      "armyId": "army.765",
+      "cell": 93559,
+      "landmass": 19,
+      "differentHomeland": false,
+      "deepVoyage": false
+    },
+    {
+      "turn": 53,
+      "factionId": "faction.mire_courts",
+      "armyId": "army.408",
+      "cell": 41559,
+      "landmass": 9,
+      "differentHomeland": false,
+      "deepVoyage": true
+    },
+    {
+      "turn": 53,
+      "factionId": "faction.velvet_meridian",
+      "armyId": "army.353",
+      "cell": 12118,
+      "landmass": 1,
+      "differentHomeland": false,
+      "deepVoyage": true
+    },
+    {
+      "turn": 53,
+      "factionId": "faction.emberwake_convocation",
+      "armyId": "army.559",
+      "cell": 47787,
+      "landmass": 10,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 54,
+      "factionId": "faction.unsealed_companies",
+      "armyId": "army.666",
+      "cell": 16220,
+      "landmass": 1,
+      "differentHomeland": true,
+      "deepVoyage": false
+    },
+    {
+      "turn": 56,
+      "factionId": "faction.ashen_compact",
+      "armyId": "army.769",
+      "cell": 39868,
+      "landmass": 7,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 57,
+      "factionId": "faction.sable_steppe",
+      "armyId": "army.527",
+      "cell": 46401,
+      "landmass": 5,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 57,
+      "factionId": "faction.underhush_exchange",
+      "armyId": "army.300",
+      "cell": 73498,
+      "landmass": 15,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 62,
+      "factionId": "faction.sepulchral_synod",
+      "armyId": "army.516",
+      "cell": 69283,
+      "landmass": 15,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 63,
+      "factionId": "faction.saltwind_remnant",
+      "armyId": "army.279",
+      "cell": 41410,
+      "landmass": 7,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 69,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.721",
+      "cell": 49734,
+      "landmass": 5,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 69,
+      "factionId": "faction.sepulchral_synod",
+      "armyId": "army.494",
+      "cell": 69656,
+      "landmass": 15,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 71,
+      "factionId": "faction.manytrack_moot",
+      "armyId": "army.540",
+      "cell": 47428,
+      "landmass": 5,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 73,
+      "factionId": "faction.morrow_spore",
+      "armyId": "army.662",
+      "cell": 61325,
+      "landmass": 5,
+      "differentHomeland": false,
+      "deepVoyage": true
+    },
+    {
+      "turn": 73,
+      "factionId": "faction.red_sluice",
+      "armyId": "army.412",
+      "cell": 49347,
+      "landmass": 5,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 74,
+      "factionId": "faction.margin_observance",
+      "armyId": "army.778",
+      "cell": 74271,
+      "landmass": 15,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 78,
+      "factionId": "faction.reedbound_council",
+      "armyId": "army.947",
+      "cell": 58647,
+      "landmass": 5,
+      "differentHomeland": false,
+      "deepVoyage": true
+    },
+    {
+      "turn": 83,
+      "factionId": "faction.sepulchral_synod",
+      "armyId": "army.1108",
+      "cell": 69274,
+      "landmass": 15,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 83,
+      "factionId": "faction.unsealed_companies",
+      "armyId": "army.860",
+      "cell": 25056,
+      "landmass": 1,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 84,
+      "factionId": "faction.emberwake_convocation",
+      "armyId": "army.796",
+      "cell": 31647,
+      "landmass": 1,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 87,
+      "factionId": "faction.lantern_hospices",
+      "armyId": "army.529",
+      "cell": 58401,
+      "landmass": 9,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 94,
+      "factionId": "faction.red_sluice",
+      "armyId": "army.1043",
+      "cell": 50121,
+      "landmass": 5,
+      "differentHomeland": true,
+      "deepVoyage": true
+    },
+    {
+      "turn": 100,
+      "factionId": "faction.vesper_court",
+      "armyId": "army.520",
+      "cell": 15447,
+      "landmass": 2,
+      "differentHomeland": true,
+      "deepVoyage": true
+    }
+  ],
+  "overseasColonies": [
+    {
+      "turn": 33,
+      "factionId": "faction.vesper_court",
+      "armyId": "army.356",
+      "cell": 13529,
+      "landmass": 2,
+      "deepVoyage": true
+    },
+    {
+      "turn": 40,
+      "factionId": "faction.cairnwing_concord",
+      "armyId": "army.203",
+      "cell": 91250,
+      "landmass": 5,
+      "deepVoyage": false
+    },
+    {
+      "turn": 43,
+      "factionId": "faction.manytrack_moot",
+      "armyId": "army.323",
+      "cell": 25547,
+      "landmass": 1,
+      "deepVoyage": true
+    },
+    {
+      "turn": 46,
+      "factionId": "faction.cairnwing_concord",
+      "armyId": "army.619",
+      "cell": 88953,
+      "landmass": 18,
+      "deepVoyage": false
+    },
+    {
+      "turn": 48,
+      "factionId": "faction.red_sluice",
+      "armyId": "army.387",
+      "cell": 49344,
+      "landmass": 5,
+      "deepVoyage": true
+    },
+    {
+      "turn": 54,
+      "factionId": "faction.emberwake_convocation",
+      "armyId": "army.559",
+      "cell": 47787,
+      "landmass": 10,
+      "deepVoyage": true
+    },
+    {
+      "turn": 55,
+      "factionId": "faction.unsealed_companies",
+      "armyId": "army.666",
+      "cell": 16220,
+      "landmass": 1,
+      "deepVoyage": false
+    },
+    {
+      "turn": 57,
+      "factionId": "faction.ashen_compact",
+      "armyId": "army.769",
+      "cell": 39868,
+      "landmass": 7,
+      "deepVoyage": true
+    },
+    {
+      "turn": 58,
+      "factionId": "faction.sable_steppe",
+      "armyId": "army.527",
+      "cell": 46401,
+      "landmass": 5,
+      "deepVoyage": true
+    },
+    {
+      "turn": 58,
+      "factionId": "faction.underhush_exchange",
+      "armyId": "army.300",
+      "cell": 73498,
+      "landmass": 15,
+      "deepVoyage": true
+    },
+    {
+      "turn": 63,
+      "factionId": "faction.sepulchral_synod",
+      "armyId": "army.516",
+      "cell": 69283,
+      "landmass": 15,
+      "deepVoyage": true
+    },
+    {
+      "turn": 64,
+      "factionId": "faction.saltwind_remnant",
+      "armyId": "army.279",
+      "cell": 41410,
+      "landmass": 7,
+      "deepVoyage": true
+    },
+    {
+      "turn": 70,
+      "factionId": "faction.cinder_march",
+      "armyId": "army.721",
+      "cell": 49734,
+      "landmass": 5,
+      "deepVoyage": true
+    },
+    {
+      "turn": 72,
+      "factionId": "faction.manytrack_moot",
+      "armyId": "army.540",
+      "cell": 47428,
+      "landmass": 5,
+      "deepVoyage": true
+    },
+    {
+      "turn": 74,
+      "factionId": "faction.red_sluice",
+      "armyId": "army.412",
+      "cell": 49347,
+      "landmass": 5,
+      "deepVoyage": true
+    },
+    {
+      "turn": 75,
+      "factionId": "faction.margin_observance",
+      "armyId": "army.778",
+      "cell": 74271,
+      "landmass": 15,
+      "deepVoyage": true
+    },
+    {
+      "turn": 84,
+      "factionId": "faction.sepulchral_synod",
+      "armyId": "army.1108",
+      "cell": 69274,
+      "landmass": 15,
+      "deepVoyage": true
+    },
+    {
+      "turn": 84,
+      "factionId": "faction.unsealed_companies",
+      "armyId": "army.860",
+      "cell": 25056,
+      "landmass": 1,
+      "deepVoyage": true
+    },
+    {
+      "turn": 85,
+      "factionId": "faction.emberwake_convocation",
+      "armyId": "army.796",
+      "cell": 31647,
+      "landmass": 1,
+      "deepVoyage": true
+    },
+    {
+      "turn": 88,
+      "factionId": "faction.lantern_hospices",
+      "armyId": "army.529",
+      "cell": 58401,
+      "landmass": 9,
+      "deepVoyage": true
+    },
+    {
+      "turn": 95,
+      "factionId": "faction.red_sluice",
+      "armyId": "army.1043",
+      "cell": 50121,
+      "landmass": 5,
+      "deepVoyage": true
+    }
+  ],
+  "physicalLandmassCount": 19,
+  "verification": {
+    "initialSaveExact": true,
+    "finalSaveExact": true,
+    "finalLoadedHash": "a7fb3c16",
+    "fullReplayExact": true,
+    "replayHash": "a7fb3c16",
+    "replayedCommands": 17282,
+    "commandResultSha256": "5b6dc82e948fc8fd33bc0dc78fa1abe4a4a8660e7c213a290140bf796aba676b",
+    "midpoint": {
+      "turn": 31,
+      "hash": "20834a92",
+      "saveBytes": 1322379
+    },
+    "mirroredCommands": 14853,
+    "initialSaveBytes": 1041541,
+    "finalSaveBytes": 2646796,
+    "initialSaveSha256": "220061b1df1387c67920891c29a3e9484b01094366f3ba0068784f895b0c8a8f",
+    "finalSaveSha256": "7e06bc0a9cbc07aac765c899d9c518dc1da957ae7cfbea6aa2df57bbc81d30d4"
+  },
+  "timing": {
+    "campaignMs": 15023.925152,
+    "replayMs": 1934.8001599999989,
+    "finalLoadMs": 138.30732399999943,
+    "overallMs": 18022.104215,
+    "roundMeanMs": 146.08790201999994,
+    "roundP95Ms": 313.13562699999966
+  },
+  "scope": "One unmodified generated Standard24 seed74 campaign; ordinary AI-scoped observations, paid commands, one plan per seat/round and bounded public battle/capture replans. No grants/reveals/project suppression. Contacts mean a permitted foreign army/town was observed at a planning or reported checkpoint boundary, not omniscient registry presence. Physical-component labels are diagnostic-only; transported founders on another component count as overseas colonies. Hull counts are surviving formations, queues are paid orders not completions. Exact plain command/result replay from the initial save is verified; no chronicle archive export, storage or browser performance claim. Campaign timings include history copies, checkpoint reads and midpoint-mirror command execution; replay is separate. The reserved CPU window is a single observational run, not evidence of all-faction balance or 1.0 release."
+}

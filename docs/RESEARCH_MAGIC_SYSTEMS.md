@@ -1,6 +1,6 @@
 # Theandril Magic, Technology & Research Design
 
-## Implementation checkpoint — slice 17, 2026-09-06
+## Implementation checkpoint — slice 23, 2026-09-07
 
 This checkpoint describes playable rules, not completion of the specification below. Current definitions are in [practical progression](../packages/content/src/progression.ts), [land improvements](../packages/content/src/ecology.ts) and [character skills](../packages/content/src/characters.ts). Overall verification and remaining release gates belong to [implementation status](IMPLEMENTATION_STATUS.md).
 
@@ -23,7 +23,16 @@ The **eleven distinct earned character skills** are a separate personal progress
 
 Experience comes from actual missions/battle outcomes and is spent on eligible skills; it is not national knowledge. Marshal leadership and the once-per-battle Rally ability are implemented mundane command effects. The two coin-paid institutional choices and two coin-paid doctrine choices also remain separate, permanently exclusive within their respective slots.
 
-**Not implemented:** national Arcane Theory, individual caster aptitudes/Paths, battle spells, strategic rituals, summons, magical-resource economies, sacred/occult progression, or magical crafting. Paid biome cultivation, frontier surveys, Rally and practical research do not stand in for these systems. The examples and larger targets below remain an aspirational design, not selectable content or a 1.0 signoff.
+Slice23 adds a deliberately small, separate Arcane Theory foundation. A functioning unoccupied/unbesieged Witness archive permits knowledge-paid Contained ember projection (36) and Measured rune binding (48). A Waykeeper costs40 crowns plus upkeep, occupies an army companion slot, and has explicitly saved personal Flame1/Rune1 aptitudes. National knowledge does not grant a missing personal path; wounds, lack of an active escort and being carried aboard a fleet block independent casting.
+
+| Spell | Personal requirement | Actual battle action |
+| --- | --- | --- |
+| Cinder thread | Flame1 and Contained ember projection | One active enemy formation within range4;10 base damage reduced by armor and protection. Costs4 strain, at most2 uses per battle. |
+| Bound ward | Rune1 and Measured rune binding | One active friendly formation within range4; up to8 damage-absorbing protection, never healing existing casualties. Costs3 strain, at most2 uses per battle. |
+
+Each caster may act once for an upcoming combat round and has a10-strain battle limit shared by its spells. Automatic use is the default; manual target commands and individually saved automatic policies use the same legality/cost checks. Ordinary Oath guards can Set shields once for8 fatigue and6 protection; this is mundane drill, not magic. Marshal Rally remains a separate once-per-battle command ability. New battle rules9/save14 freeze the original behavior of pending historical battles. [Actual definitions](../packages/content/src/magic.ts) and [battlefield verification status](IMPLEMENTATION_STATUS.md) distinguish the verified playable foundation from remaining release and broader magic-system work.
+
+**Not implemented:** earned magical path growth, full asymmetric faction spell lists, strategic rituals, summons, magical-resource economies, sacred/occult progression, or magical crafting. Paid biome cultivation, frontier surveys, Rally and practical research do not stand in for these systems. The examples and larger targets below remain an aspirational design, not selectable content or a1.0 signoff.
 
 ## Design goal
 

@@ -1,22 +1,35 @@
-import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, type LandYield } from '@theandril/content';
+import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, PROSPERITY_PROJECT, type LandYield } from '@theandril/content';
 import type { GameCommand, Observation } from '@theandril/sim';
 import { landPlanningTowns } from './observation-options';
 
 const value = (yields: LandYield, needsFood: boolean): number => yields.food * (needsFood ? 5 : 2) + yields.industry * 3 + yields.coin + yields.knowledge * 2;
 
 /** At most eight worker orders and one paid work order, using only quoted public facts. */
-export function planLand(view: Observation, budget: number): { commands: GameCommand[]; reasons: string[]; coinSpent: number } {
+export function planLand(view: Observation, budget: number, plannedProduction: ReadonlySet<string> = new Set()): { commands: GameCommand[]; reasons: string[]; coinSpent: number } {
   const commands: GameCommand[] = [], reasons: string[] = [];
   const towns = new Map(view.settlements.map(town => [town.id, town]));
   const candidates = landPlanningTowns(view.land.settlements, view.turn);
   const ecology = FACTION_ECOLOGIES[view.factions.find(faction => faction.id === view.factionId)?.definitionId ?? ''];
+  const prepared = view.settlements.filter(town => town.factionId === view.factionId
+    && PROSPERITY_PROJECT.requiredBuildings.every(id => town.buildings.includes(id)));
+  const fundingProject = prepared.length >= PROSPERITY_PROJECT.settlementCount && view.treasury < view.progression.project.coinCost
+    && !view.projects.some(project => project.factionId === view.factionId && (project.status === 'active' || project.status === 'paused'));
   let coinSpent = 0;
   for (const land of candidates) {
     const town = towns.get(land.settlementId);
     if (!town || land.workPaused || !land.cells.length) continue;
     const needsFood = town.food < town.population * 8;
+    // Industry is not stored. A developed idle town funding the public project can
+    // employ its workers for coin and growth instead of producing discarded industry.
+    // Only allocation changes: paid replacement/cultivation keeps its stable utility
+    // so a temporary queue or project phase cannot cause demolition churn.
+    const fiscalWorkers = fundingProject && !town.queue.length && !plannedProduction.has(town.id)
+      && PROSPERITY_PROJECT.requiredBuildings.every(id => town.buildings.includes(id));
+    const workerValue = (yields: LandYield): number => fiscalWorkers
+      ? yields.food * (needsFood ? 5 : 2) + yields.industry + yields.coin * 4 + yields.knowledge * 2
+      : value(yields, needsFood);
     const workers = land.cells.filter(cell => cell.claimed && cell.canWork)
-      .sort((a, b) => value(b.yields.total, needsFood) - value(a.yields.total, needsFood) || a.cell - b.cell)
+      .sort((a, b) => workerValue(b.yields.total) - workerValue(a.yields.total) || a.cell - b.cell)
       .slice(0, land.workerCapacity).map(cell => cell.cell).sort((a, b) => a - b);
     if (workers.join(',') !== land.worked.join(',')) commands.push({ type: 'setWorkedTiles', factionId: view.factionId, settlementId: town.id, cells: workers });
     if (coinSpent || land.work) continue;

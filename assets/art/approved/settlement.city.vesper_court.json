@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.vesper_court",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: one original strategic pixel-art city sprite for Theandril, Vesper Court.\nCreate ONE complete developed walled vineyard manor-city: a dense, inhabited court of shuttered estate houses grouped around an enclosed slate-roof manor hall, covered walks connecting the buildings, narrow tall masonry chimneys, practical walls and gate, and a few tightly contained vineyard trellises inside the enclosure. Roughly seven to nine distinct roof/building masses, a broad compact developed footprint, layered slate roofs and folded garnet shutter cloth. Architecture is sheltered, cultivated and old, with refined narrow windows and covered passages; not a generic grey medieval fortress, huge single keep, cathedral, fairy castle or bone city. All roofs, walls, gate and chimneys must fit completely inside the sprite.\nStyle: crisp deliberate COARSE PIXEL ART with readable clustered pixels at a native 128x128 strategic canvas, ground pivot64,112 and maximum visible height110pixels. Broad quiet color/material planes rather than painterly detail or one-pixel noise. Muted garnet shutters, charcoal and blue-grey slate, weathered grey masonry, tarnished silver details, restrained deep vineyard green. Consistent diffuse upper-left lighting using flat stepped pixel tones, no glowing windows or magic.\nComposition: southeast isometric three-quarter view, complete compact building cluster with at least 12% empty transparent margin around ALL extremities, square PNG. TRUE alpha0 background, no painted checkerboard or solid backdrop. No terrain tile, ground plinth, hex, surrounding landscape, detached trees, standalone paths outside the walls, cast shadow, text, label, banner pole consuming the canvas, bat motifs, skulls, blood imagery or imported fantasy architecture. One static city only, no collage or multiple alternatives.",
+  "frames": [
+    {
+      "id": "settlement.city.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.vesper_court/d9a7783eee097a68b7083d7fb1fdd62626c720bc5b0644f5dfaaf54484378bb1/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "194c71c7a0c96ab66b9605396ea5f1192cf3bcfa32a5aef6b1047633402f7903",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.city.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.city.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:20:13Z",
+  "referenceHashes": [
+    "64c5dd4eb3e0db297ef7352d79df6431c416816e8d31cbb4784c7f3d4edae977",
+    "860eb131518b971f7eb79143a2797c64928d172133f872694fda7f390fac20ed"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "85a5db61d7133f238a2a88e04926b93304033b729dc6098afbafb28797b76326",
+      "inputHash": "64c5dd4eb3e0db297ef7352d79df6431c416816e8d31cbb4784c7f3d4edae977",
+      "outputHash": "15a6a57f50169132268b4e17ce8abb8d589d5561991ed098ba8704781243c7e0"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "15a6a57f50169132268b4e17ce8abb8d589d5561991ed098ba8704781243c7e0",
+      "outputHash": "7fc4ba7d37e360b92e69fb72a98b039a56076acb2a7036aeb115b266d2803e9d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7fc4ba7d37e360b92e69fb72a98b039a56076acb2a7036aeb115b266d2803e9d",
+      "outputHash": "6eeb499f22b534f46f74c2ae5bfc7858e8675e399b8d42ea905dd0a15e9ee6c9"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "f7dce504555a646ca4a8e36abac238e76ba9790f7439fcdf698bc25ef64381c0",
+      "outputHash": "2e74f2a86f5ca0fa00242c34bc536a3519f8190ba2c65504952bbf103b564ab6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "90bb325fc312dd4c0109f9ebe672f420f7a3cd68bdc83c52ae7720ba9fbd24ad",
+      "outputHash": "8a3074915e14ba43a6e300010f79c832991acc3a1b7eaf3e34ec3cf1d7bf7e98"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "3ba6312e410c63c6265f312082bb1455362dbdb0c87a80a6316d79dfcaf1bb0c",
+      "outputHash": "469231851a0e7bc93ec31abe1682f8cfa80e5f5461c0223dcbc72276d6e5799c"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:03.648Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Enclosed upper manor, covered walks and vines form the largest128px silhouette; not the Synod skeleton-city design. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate d9a7783eee097a68b7083d7fb1fdd62626c720bc5b0644f5dfaaf54484378bb1; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/13b1bceed44320ae20192cdecc602084aab7fe88d70626cbe9bfe4c312abecff.png"
+    ],
+    "inputHash": "91cf00f39114fc8939b5cc02ddebd17957e79d8666aa08f430c4ef74065b2cad"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

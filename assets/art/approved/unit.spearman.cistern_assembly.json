@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.cistern_assembly",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native64. One full-body adult pike soldier with one uninterrupted long spear shaft and leaf tip, a small culture-shaped buckler and medium armor. Spear near upright on screen right, its entire tip and both boots inside generous alpha margins.",
+  "frames": [
+    {
+      "id": "unit.spearman.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.spearman.cistern_assembly/0fc69b379470e6b371536b04e7fe59563e194bc980ecd70da913bc156ab400b5/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "022f75b867278b74da39f32d0f430734ea947e1ae43eeaf77614dcd219913dac",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/unit.spearman.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/unit.spearman.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:46:48.205Z",
+  "referenceHashes": [
+    "3d710ceb2879a3dc2f595787186ef7709f3c8387f42a0ff895ae8fa72acfbd14",
+    "766774d0dc696a39d37677d2cc10cc92446a5d574ef2627d9c67953248f65281"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "63817c1adde5c63bdd20b43c32773eb7bfbfa450ce986f33eb9c1ff44764bdc3",
+      "inputHash": "3d710ceb2879a3dc2f595787186ef7709f3c8387f42a0ff895ae8fa72acfbd14",
+      "outputHash": "85bbbca508d5e9dd28b4560853d82830a01c417902d33c74015956fb5b088792"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "85bbbca508d5e9dd28b4560853d82830a01c417902d33c74015956fb5b088792",
+      "outputHash": "e668b7aac49cb75f9c5c1f9db9020ad646113c70d7c7149f3386823cc58cfdc6"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e668b7aac49cb75f9c5c1f9db9020ad646113c70d7c7149f3386823cc58cfdc6",
+      "outputHash": "9ff55bd2d63a1812d5f05829b8c5c6753364a63cf705b9381d5f69aaa94983bb"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "116b577c951426107c943dd1c5365549ac4e7325b803bd0db836a2f3908de477",
+      "outputHash": "b0df867619decab5752c15319411a513dcabeccdc38030e8be69015f23205495"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "b23d18fed127ccc38f52c67334a616305d588d1247affb0862d02680c28c0f6b",
+      "outputHash": "35f1eccf3b9b9b002c656a3553e3ceee638678d0196a1c83bd8b918353afa2e2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "4efe6849292d86c106b9f03798f6a1ff511aab9f5b1320cc296fab4f183acb1e",
+      "outputHash": "f2c2c796e115d573460a77c340f60ac80622ab9b6ac2312f7c9400f4205326bc"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.spearman.cistern_assembly.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:07.220Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Complete tall spear remains inside the processed canvas with padding; circular buckler differentiates it from the guard. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 0fc69b379470e6b371536b04e7fe59563e194bc980ecd70da913bc156ab400b5; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d0b751b797ee8e7b30e657d226d23ac5dc4dc3de1fdf607ab0ab3f59919afbe5.png"
+    ],
+    "inputHash": "8cc899334ea33f7a6e151757c60eb162309586c719963eb0f8e2854ec3859afa"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

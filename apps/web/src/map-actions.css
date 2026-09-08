@@ -1,0 +1,30 @@
+.map-actions{position:fixed;z-index:30;display:flex;flex-direction:column;width:420px;max-width:calc(100vw - 16px);min-width:0;color:#e0ddcb;background:#202927;border:1px solid #99815a;border-radius:7px;box-shadow:0 12px 36px #0008;overflow:hidden;font-size:calc(13px * var(--text-scale,1));}
+.map-actions[hidden]{display:none}
+.map-actions-heading{display:flex;align-items:flex-start;gap:12px;flex:none;padding:14px 14px 12px;border-bottom:1px solid #485145;background:#26302b}
+.map-actions-heading>div{min-width:0;flex:1}.map-actions-heading h2{font-size:calc(25px * var(--text-scale,1));overflow-wrap:anywhere;margin-top:3px}.map-actions-heading p{color:#b0b8a7;font-size:.85em;margin-top:5px;overflow-wrap:anywhere}.map-actions .eyebrow{font-size:10px;letter-spacing:1.5px}
+.map-actions .map-actions-close{flex:none;width:44px;height:44px;padding:0;font-size:25px;background:transparent;border-color:#65705b}
+.map-actions-body{overflow:auto;overscroll-behavior:contain;min-height:0;scrollbar-width:thin;padding:12px 14px 16px;scroll-padding-block:10px}
+.map-actions :is(button,input,select,summary){min-height:44px;scroll-margin-block:10px}.map-actions :is(button,input,select,summary):focus-visible,.map-actions [tabindex]:focus-visible{outline:2px solid #e7c27e;outline-offset:2px}
+.map-actions-context{font-size:.85em}.map-actions-context select{margin:5px 0 0;max-width:100%;text-overflow:ellipsis}
+.map-actions-choice-summary{font-size:.85em;line-height:1.6;color:#b2bcaa;margin-top:7px;overflow-wrap:anywhere}
+.map-actions-summary{margin-top:12px}.map-actions-summary:empty{display:none}
+.map-actions-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;margin-top:13px;padding:3px 3px 7px;border-bottom:1px solid #515a4a}
+.map-actions-tabs button{flex:1 0 auto;max-width:100%;font-size:.9em;white-space:normal;background:transparent;border-color:transparent;padding:8px 10px}.map-actions-tabs button[aria-selected=true]{color:#f1d9a3;border-color:#978055;background:#9f894524}
+.map-actions-pane{min-width:0;padding-top:14px;overflow-wrap:anywhere}.map-actions-pane>h3:first-child{margin-top:0}.map-actions-pane :is(input,select){max-width:100%}.map-actions-pane :is(fieldset,.formation-list,.formation-table){min-width:0;max-width:100%}.map-actions-pane fieldset{margin-inline:0}
+.map-actions-footer{flex:none;padding:10px 14px;border-top:1px solid #485145;background:#26302b}.map-actions-footer button{width:100%;font-size:.85em}
+@media(max-width:600px){.map-actions{width:calc(100vw - 16px);border-radius:8px}.map-actions-heading{padding:11px 12px;gap:8px}.map-actions-body{padding:10px 12px 14px}.map-actions-heading h2{font-size:calc(23px * var(--text-scale,1))}.map-actions-footer{padding:8px 12px}}
+/* Compact unit chrome preserves the same typography and 44px control minimums.
+   Content remains naturally sized; longer supplied tabs use the shared scroller. */
+.map-actions-compact{width:320px}
+.map-actions-compact .map-actions-heading{padding:8px 10px;gap:8px}
+.map-actions-compact .map-actions-heading h2{margin-top:0}
+.map-actions-compact .map-actions-heading p{margin-top:3px}
+.map-actions-compact .map-actions-body{padding:8px 10px 10px}
+.map-actions-compact .map-actions-context select{margin-top:3px}
+.map-actions-compact .map-actions-choice-summary{margin-top:4px}
+.map-actions-compact .map-actions-summary{margin-top:4px}
+.map-actions-compact .map-actions-summary>p{margin-block:4px}
+.map-actions-compact .map-actions-tabs{margin-top:6px;padding-bottom:4px}
+.map-actions-compact .map-actions-tabs button{padding:4px 6px}
+.map-actions-compact .map-actions-pane{padding-top:8px}
+.map-actions-compact .map-actions-footer{padding:6px 10px}

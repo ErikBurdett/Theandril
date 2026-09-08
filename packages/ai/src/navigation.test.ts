@@ -31,3 +31,19 @@ test('navigation is detached, repeatable, movement-cost-aware and bounded across
   expect(nav.destination(forestView.armies.find(army => army.id === scout.id)!, 4, new Set())).toBeUndefined();
   expect(nav.expandedNodes).toBeLessThanOrEqual(MAX_FRONTIER_NODES);
 });
+
+test('a public discovery bearing only breaks equal information gain, never replaces the frontier objective', () => {
+  const state = createGame({ seed: 748291, size: 'standard', factionCount: 4, pace: 'long' });
+  const view = getObservation(state, state.turnOwnerId), original = structuredClone(view), hash = stateHash(state);
+  const scout = view.armies.find(army => army.unitId === 'unit.scout')!;
+  const center = Math.floor(view.height / 2) * view.width + Math.floor(view.width / 2);
+  const bearing = (cell: number) => -hexDistance(cell, center, view.width);
+  const baseline = createNavigation(view), directed = createNavigation(view);
+  const ordinary = baseline.destination(scout, scout.sight, new Set())!;
+  const destination = directed.destination(scout, scout.sight, new Set(), undefined, bearing)!;
+  expect(destination).toBeDefined();
+  expect(directed.informationGain(destination, scout.sight)).toBe(baseline.informationGain(ordinary, scout.sight));
+  expect(bearing(destination)).toBeGreaterThanOrEqual(bearing(ordinary));
+  expect(createNavigation(structuredClone(view)).destination(scout, scout.sight, new Set(), undefined, bearing)).toBe(destination);
+  expect(view).toEqual(original); expect(stateHash(state)).toBe(hash);
+});

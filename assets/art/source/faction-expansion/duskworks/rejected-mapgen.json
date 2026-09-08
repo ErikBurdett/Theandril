@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "rejections": [
+    {
+      "source": {
+        "id": "ui.crest.brine_choir",
+        "role": "ui.crest",
+        "family": "brine_choir",
+        "version": 1,
+        "sourcePath": "assets/art/source/faction-expansion/duskworks/ui.crest.brine_choir-v1.png",
+        "sourceHash": "055e0c0465d5a6cd97716d672f7bf49510743d693985a7c56005a1440130628b",
+        "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.crest for Theandril, Brine Choir.\nSubject: ONE front-facing coarse heraldic crest alone, clear large original faction mark, no enclosing shield or extra medallion. Strong silhouette and generous clean negative spaces, the exact described emblem.\nCulture-specific identity: A broken concentric ripple: two unequal open rings, clearly legible gaps, matte shell against wet slate; not a keel or sail.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+        "provider": "codex-imagegen",
+        "model": "not-exposed-by-tool",
+        "seed": null,
+        "generatedAt": "2026-09-07T09:21:25Z",
+        "referenceHashes": []
+      },
+      "decision": "rejected",
+      "reason": "Raw crest adds a large central curling flame/water-shaped device and pearl, changing the authored two unequal open-ring emblem. Transparent and unclipped, but the extra central symbol is not accepted as Brine Choir heraldry.",
+      "evidence": "assets/art/source/faction-expansion/duskworks/ui.crest.brine_choir-v1.png",
+      "reviewedAt": "2026-09-07T09:24:21Z"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.marsh.variant_2",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.marsh.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. MARSH: saturated dark peat hummocks and sparse sedge in an uneven horseshoe cluster around a small dim slate-water puddle, low green-brown reed heads. No trees, quiet wet ground at tile edges. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.marsh.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.marsh.variant_2/v1/2d957965ef2c783c/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "50878a5db7904de8298f8868fef0a9a7c09530268fe1ba508b5cb51d49fe1dd7",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.marsh.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.marsh.variant_2-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:51:23.400Z",
+  "referenceHashes": [
+    "7043a8bb7ea7a69c0526fba9a7eb353fa99b1d8ad3e7a8063da4c07ce6284143",
+    "192106e2356d7855681a0fdaee1d687728130b8473f92e7181733462bd0d4407"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "0b8d05eb296bb95fe00afda13fc0b6138f24df7b0b578eece1431efdcb2750f9",
+      "inputHash": "7043a8bb7ea7a69c0526fba9a7eb353fa99b1d8ad3e7a8063da4c07ce6284143",
+      "outputHash": "f8f1d54737daa9f0b8bc2e5097056f8a23584eda8c2d93c20a4b2b332010b8db"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

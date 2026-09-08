@@ -1,0 +1,200 @@
+{
+  "seed": 20260905,
+  "width": 1440,
+  "height": 376,
+  "note": "Code-native odd-row overview: left continents, middle islands, right archipelago. Gold crosses are starts; cyan lines rivers, light blue upland lakes. Not live renderer/art approval evidence.",
+  "panels": [
+    {
+      "panel": 1,
+      "sha256": "c892b3d7f215a827e43e7e1e673d1c3341006a1ef0428bd2ab657261420763a7",
+      "cells": 1536,
+      "layout": "continents",
+      "landCells": 519,
+      "landComponents": [
+        318,
+        191,
+        10
+      ],
+      "meaningfulLandmasses": 2,
+      "coastalLandCells": 181,
+      "mountainCells": 42,
+      "mountainChains": [
+        16,
+        7,
+        5,
+        5,
+        4,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "riverCells": 58,
+      "lakeCells": 14,
+      "lakeBodies": 2,
+      "inlandWaterBodies": [
+        3
+      ],
+      "inlandSeaBodies": 0,
+      "startComponents": 2,
+      "startingRegions": [
+        {
+          "cell": 413,
+          "passableCells": 287,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 722,
+          "passableCells": 182,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1101,
+          "passableCells": 287,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1040,
+          "passableCells": 287,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 7680
+    },
+    {
+      "panel": 2,
+      "sha256": "abf20105b733c94d9d9896df6ebde03f7487c92d0845a13f01f50e873477d06a",
+      "cells": 1536,
+      "layout": "islands",
+      "landCells": 518,
+      "landComponents": [
+        189,
+        158,
+        83,
+        71,
+        14,
+        2,
+        1
+      ],
+      "meaningfulLandmasses": 4,
+      "coastalLandCells": 237,
+      "mountainCells": 42,
+      "mountainChains": [
+        15,
+        4,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "riverCells": 36,
+      "lakeCells": 7,
+      "lakeBodies": 1,
+      "inlandWaterBodies": [
+        8
+      ],
+      "inlandSeaBodies": 0,
+      "startComponents": 4,
+      "startingRegions": [
+        {
+          "cell": 950,
+          "passableCells": 166,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 449,
+          "passableCells": 151,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1252,
+          "passableCells": 77,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 482,
+          "passableCells": 68,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 7680
+    },
+    {
+      "panel": 3,
+      "sha256": "7ebf7b93538f9ba1ad8db3fc433486dd1335ab72763ce913e2808eb16acf15bf",
+      "cells": 1536,
+      "layout": "archipelago",
+      "landCells": 582,
+      "landComponents": [
+        85,
+        80,
+        80,
+        74,
+        72,
+        72,
+        63,
+        56
+      ],
+      "meaningfulLandmasses": 8,
+      "coastalLandCells": 252,
+      "mountainCells": 51,
+      "mountainChains": [
+        16,
+        8,
+        7,
+        5,
+        4,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "riverCells": 32,
+      "lakeCells": 7,
+      "lakeBodies": 1,
+      "inlandWaterBodies": [],
+      "inlandSeaBodies": 0,
+      "startComponents": 4,
+      "startingRegions": [
+        {
+          "cell": 606,
+          "passableCells": 77,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1399,
+          "passableCells": 74,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1102,
+          "passableCells": 72,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 434,
+          "passableCells": 70,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 7680
+    }
+  ]
+}

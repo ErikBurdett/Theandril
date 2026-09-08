@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.ocean.variant_1",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.ocean.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. OPEN OCEAN: deep muted blue-slate water filling entire hex, just three broad short broken wave reflections spaced irregularly, very restrained desaturated blue-grey highlights. Most surface calm deep blue. No land, shore, rock, reef, white foam, boats or glossy sparkles. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.ocean.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.ocean.variant_1/b5e933f9e4ace54241723063d246a6fc0a602c559ae5d8514a6d1d59b6cb7574/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0bccb7db246756334343ed0b49deb79223e952001a8710569235057429ebccf5",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.ocean.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.ocean.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:58:57.947Z",
+  "referenceHashes": [
+    "adc59782e5e4a6dbca78164b616ab6d9881957dacff4692f7b712ee6c4e38277",
+    "0ec0acb8de6f6dde74eea12b28f67aebced599322f30b917ff1143c9d025f647"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "f86ee4bba741fd4179f29635fbc54df7b39d94a30dd1864d52d2930d4d7f7176",
+      "inputHash": "adc59782e5e4a6dbca78164b616ab6d9881957dacff4692f7b712ee6c4e38277",
+      "outputHash": "1d542fe6bb649bc9c1c380ea097c2aa71aa90309d44243a18d447152051c3a54"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "1d542fe6bb649bc9c1c380ea097c2aa71aa90309d44243a18d447152051c3a54",
+      "outputHash": "c2e7586b200d3dc498c53101dccad8b729375f899ba574d5d457d33be6f58482"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c2e7586b200d3dc498c53101dccad8b729375f899ba574d5d457d33be6f58482",
+      "outputHash": "9bde18cb303934c22b2483f9ee6f8c9ee1b177b2ee503d5119d81254686e1d73"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "f0d187dfce7467ae4d2d21c90ba574d969546d053e5d38e07375f13ea98a9c1b",
+      "outputHash": "82a51b93022eec6259604dc243f136a042dacf2a41b247bec9a96ff8d5e37abe"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "6311a452f0c80c3a2a0f0083ec07b3d436518ca5997dbcf287451efca370817e",
+      "outputHash": "925deadacdaccc0007b470ca6597b94be1578adf81488093f6eab0e2492f33b7"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "2f80d9668682c39099a8ed4d5f13db2ef5b9fc6e727c9806f12e926c6467aaad",
+      "outputHash": "e099441555b5210985f643f263b5f7da2bf845e35bccd5f62ea19baa1c7feab3"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.ocean.variant_1.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:15.041Z",
+    "notes": "Fine slate wave bands have quieter highlights than original water and retain a continuous opaque hex. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate b5e933f9e4ace54241723063d246a6fc0a602c559ae5d8514a6d1d59b6cb7574; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/ceab2e032208ed51ae5126068ca543b31928eb1965f3b48b983be50a4ad352d2.png"
+    ],
+    "inputHash": "aa48bbe99c8e6d43ce9a1f1d74d62ce74cedada4d2fd9df6929738fea7465a7c"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

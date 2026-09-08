@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.manytrack_moot",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. A maintained practical culture of several humanoid lineages and human households; not a feral beast camp. Native64. ONE complete freestanding short standard: one simple dark pole with entire foot, one hanging cloth carrying the culture's original broad heraldic motif. Modest cloth folds, culture-specific hem, generous alpha around whole pole and cloth. No marching figure, base tile, duplicate banner, lettering or wind particles.",
+  "frames": [
+    {
+      "id": "ui.banner.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/ui.banner.manytrack_moot/f6780965d27f17efd4cb0def91642d60be254a6e19cdffef13fc489577700dc3/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "cf46db2c5ca7de364d82f1556ea7e279cfc2e991a86ac6e8e9b57d9881feee09",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/ui.banner.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/ui.banner.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:21:20.137Z",
+  "referenceHashes": [
+    "33ecf2ff6249b67e7076f03cd7611014fc88cf3db83fb5b24708ee57abd00ce7",
+    "19190e96e61548460058caec73a9f39021c08140f03591090167d68b979fe0b5"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "e8036efbb8b342b22588286748d161daaffd62bd138859b37def4391e3a3dc28",
+      "inputHash": "33ecf2ff6249b67e7076f03cd7611014fc88cf3db83fb5b24708ee57abd00ce7",
+      "outputHash": "480f98f33a912d2ed2247e61a8c857a2b2d0da8523a88963c90c5b2bd5cf7dea"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "480f98f33a912d2ed2247e61a8c857a2b2d0da8523a88963c90c5b2bd5cf7dea",
+      "outputHash": "facf4aceaacdd9ca0735b8e81b44bee7a90aab80a6ec9e54c69f807c533174c8"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "facf4aceaacdd9ca0735b8e81b44bee7a90aab80a6ec9e54c69f807c533174c8",
+      "outputHash": "ca7be9d5cec2867fa5a58b7c1b4ca653eb6f2882df5af731e76410c6363d3702"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "66ea21ced6de68ebd9ff124a98877b657ae1e060bb7b9281e51571d8cf178509",
+      "outputHash": "761c71d9466f9a5e7a87717fc8c5c894242fedee508d4bb05114e5bb2f7f6713"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "4f10647fe72ad0f5da122fb7b5a823e20574d9b7e1f3693347e01c7f81371d7f",
+      "outputHash": "555e97b4002a6d756b1c15530c6f75fd59904fbd9a3716171532fc64c2223e32"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "612ef7df79e89cc379cc946965926f4f635b2565126f44d0eda9799946915998",
+      "outputHash": "2a2c63f25273615773e7adee07246ad2588502a803d1eca1cd9d81b9749d5825"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.banner.manytrack_moot.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:45:36.365Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Full blue path-fork standard, complete pole and base; original low-alpha fringe does not survive processed sprite. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate f6780965d27f17efd4cb0def91642d60be254a6e19cdffef13fc489577700dc3; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/26ac800d6af1106776f97bf2b53b5e473c7e20ca9322e61034a77af972fe5c75.png"
+    ],
+    "inputHash": "6a51d7d1f7d353b3a4faa8c1293aeabeb850783b883d455d9d9ad8c2742b17e1"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

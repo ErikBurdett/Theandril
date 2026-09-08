@@ -6,6 +6,7 @@ import { exportSave } from '@theandril/persistence';
 import { borderBattleCampaign } from '../../packages/test-fixtures/src/combat-fixture';
 import { refreshAuthoredSight } from '../../packages/test-fixtures/src/authored-land';
 import { cellsWithin } from '../../packages/sim/src/visibility';
+import { selectFromRegistry } from './ui-navigation';
 
 /** Authored terrain/population/funds isolate presentation; all claims use public paid commands. */
 function readabilityCampaign() {
@@ -43,8 +44,7 @@ test('realm perimeters and contextual names stay quiet while real selection, hov
   await page.locator('input[type=file]').setInputFiles({ name: 'readable-border.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.state)).toBe('ready');
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: new RegExp(town.name) }).click();
+  await selectFromRegistry(page, 'settlements', town.name);
   await page.keyboard.press('Escape');
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.overlays.labels.every(label => label.settlement))).toBe(true);
   const quiet = await page.evaluate(() => ({ art: window.__THEANDRIL__!.getArtDiagnostics(), metrics: window.__THEANDRIL__!.getPerformanceCounters() }));
@@ -62,8 +62,7 @@ test('realm perimeters and contextual names stay quiet while real selection, hov
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.overlays.labels.some(label => label.id === 'army.4' && label.priority === 1))).toBe(true);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(hash);
 
-  await page.getByRole('tab', { name: /Armies/ }).click();
-  await page.getByTestId('army-registry').getByRole('button', { name: new RegExp(player.name) }).click();
+  await selectFromRegistry(page, 'armies', player.name);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().highlightedCells ?? 0)).toBeGreaterThan(6);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.overlays.labels.some(label => label.id === 'army.2' && label.priority === 0))).toBe(true);
   const range = await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters());
@@ -78,7 +77,12 @@ test('realm perimeters and contextual names stay quiet while real selection, hov
   expect(point?.inViewport).toBe(true); await page.mouse.click(point!.x, point!.y);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual({ settlementId: town.id, cell: tile });
   await expect(page.getByTestId('land-cell')).toContainText(`Hex ${tile}`);
-  await expect(page.getByRole('tab', { name: /Settlements/ })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByTestId('map-actions').getByRole('tab', { name: 'Land & tiles', exact: true })).toHaveAttribute('aria-selected', 'true');
+  // A claimed-tile click keeps the tile as the local context while the owning
+  // settlement supplies its authoritative Land pane; it is not a town-center click.
+  await expect(page.getByTestId('map-actions').getByRole('heading', { name: `Hex ${tile}`, exact: true })).toBeVisible();
+  await expect(page.getByTestId('map-actions').locator('.map-actions-choice-summary')).toHaveText(`Land review · ${town.name}`);
+  await expect(page.getByTestId('land-panel')).toHaveAttribute('data-settlement-id', town.id);
   expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell)?.settlementId, tile)).toBe(town.id);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(hash);
 
@@ -88,15 +92,30 @@ test('realm perimeters and contextual names stay quiet while real selection, hov
   expect(playerPoint?.inViewport).toBe(true); await page.mouse.click(playerPoint!.x, playerPoint!.y);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual({ armyId: player.id, cell: player.cell });
   expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(hash);
+  await expect(page.getByTestId('map-actions')).toBeVisible();
+  // Escape first dismisses local management without dropping its army. A
+  // second Escape explicitly clears the army before inspection-only clicks.
   await page.keyboard.press('Escape');
+  await expect(page.getByTestId('map-actions')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual({ armyId: player.id, cell: player.cell });
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(hash);
+  await page.keyboard.press('Escape');
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual({});
   const candidates = neighbors(tile, state.world.width, state.world.height).filter(cell => !cells.includes(cell) && cell !== enemy.cell && cell !== player.cell);
   const unclaimed = (await page.evaluate(cells => cells.map(cell => ({ cell, point: window.__THEANDRIL__!.getCellScreenPoint(cell) })), candidates)).find(item => item.point?.inViewport);
   expect(unclaimed).toBeDefined();
   await page.mouse.click(unclaimed!.point!.x, unclaimed!.point!.y);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual({ cell: unclaimed!.cell });
   expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(hash);
+  // Keep the read-only cell selection, while exposing the next map target.
+  await page.keyboard.press('Escape');
+  await expect(page.getByTestId('map-actions')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual({ cell: unclaimed!.cell });
   await page.mouse.click(point!.x, point!.y);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual({ settlementId: town.id, cell: tile });
+  await page.keyboard.press('Escape');
+  await expect(page.getByTestId('map-actions')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual({ settlementId: town.id, cell: tile });
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByTestId('map-container').scrollIntoViewIfNeeded();

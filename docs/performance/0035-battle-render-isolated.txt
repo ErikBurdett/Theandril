@@ -1,0 +1,18 @@
+Final isolated20vs20battlefield:1/1passed11.8seconds. One Chromiumworker, no concurrentagenttests, Blender, build or campaignbenchmark.
+Same40formations6officers and actualBrace command,120warmed animationframes. TheactualcontextreportsANGLE/VulkanSwiftShaderDevice(Subzero),WebGL2, not assumed physicalGPUperformance.
+Framep5016.7ms,p9533.4ms,max50.1ms;renderCPUp951.2ms;46actors,max5activeFX/6pooledFX;20MiBatlas. No60fpssignoff. Exactstructuredsamples are0035-battle-render.json.
+
+[WebServer] (node:3242237) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3242249) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:3242299) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+BATTLE_RENDER {"originHash":"8c59e743","commandHash":"e4903641","frameMs":{"p50":16.700000000000728,"p95":33.400000000000546,"max":50.100000000000364},"maxActors":46,"maxEffects":5,"atlasBytes":20971520}
+  ✓  1 tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX (10.9s)
+
+  1 passed (11.8s)
+

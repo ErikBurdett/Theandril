@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.red_sluice",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.red_sluice"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Red Sluice Directorate, role unit.coastal_warship.\nSUBJECT: ONE complete slender shallow coastal galley, long narrow low hull with clearly grouped short oars, forward ram, one compact mast and modest sail, low ranged-crew deck. Cultural materials and cloth; nottransport. Southeast isometric bowtowardright, all oarsandhull complete, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Brick red, dull celadon cloth, tarred oak, black chain and weathered bronze. Broad rectangular rain shields, hooded crew coats, horizontal bar motifs. Low sluice-gate inspired maintenance halls, wheel-braced gantries, thick brick channelside courtyards; no surrounding waterrectangle or actualtile.\nPEOPLE if character or rider: Human waterworks crew households and disciplined municipal escorts.\nHERALDRY if UI or flag: A barred spillway with three broad vertical openings and one horizontal lifting bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nNO firearms, cannons, gun barrels, gunports or gunpowder equipment. Wooden ballista on an open warship deck is permissible; transport carries cargo not weapons.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.red_sluice/321c7fb5e1784ad973321e8214fd9b925629cf71004b23c3af3634d966eb9438/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "aa8b864633d25dbc4db5417a871e8d46656a7f507a94a5570432047e4ad14476",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.red_sluice-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.red_sluice-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:28:38Z",
+  "referenceHashes": [
+    "e58767ea7192a93dbf7240fe1436ebc2aa57c46e9615df2554578046ca01809b",
+    "a29f48b13963f8fdb36dbb999efba0dfd325366e1cf8d6cf1b3407815327d69d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "eb246a711c8bf220089b73d82da7805bbda3b5bd22488923c0c7ea36ed242481",
+      "inputHash": "e58767ea7192a93dbf7240fe1436ebc2aa57c46e9615df2554578046ca01809b",
+      "outputHash": "ea792d7cebc451ed09a5f536dd88cb99bf465f9b54151a6dedda9374d03aced2"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ea792d7cebc451ed09a5f536dd88cb99bf465f9b54151a6dedda9374d03aced2",
+      "outputHash": "f358919363089fe8e3dfc8b224c10c1944f9134cb34aba356289d70c76ece637"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f358919363089fe8e3dfc8b224c10c1944f9134cb34aba356289d70c76ece637",
+      "outputHash": "a9b2c313dc9ca8e6537ed83283cc2b3a5342d6d7f8722a1c017acb0896fdc2ea"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "f77df2ef0c46873b5cb21ab64367244341e63ac9e7c26c9c63f37c1de09708cb",
+      "outputHash": "e8db5958c7dde058abdf04226227f9c2be6fd10d10dd4bd18069d6711aa6f621"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "51a8a01c9ecfc4f59b2bf1a31386cc1d685deb446fb9d82cad681f1632a58fc1",
+      "outputHash": "ced9faa94ac9ea7c344bfb713808cc7fa7d900efb449d9eb6698080b27f7e800"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "7a6aebae4d7ecedc7f24ffc54c01af6137b8a52fb7e4a092253873a622a61e20",
+      "outputHash": "836d33a376fceada90aad44d731d9f7669f71c3a6ed8c8f252e8bdf4234c49d4"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.red_sluice.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:04:51.858Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Single square sail, long oared hull, full ram and visible open wooden ballista identify the galley; no cannon. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 321c7fb5e1784ad973321e8214fd9b925629cf71004b23c3af3634d966eb9438; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/48ca0aa3b157cf057acbe4d764306516084c1e80076d003669bb9a919221dab3.png"
+    ],
+    "inputHash": "c7c048d1078fc0580b110dabc108d15f5cd1b2f724750c9fe0e57e22a3a27da6"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.taiga.variant_2",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.taiga.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. TAIGA: low windswept conifer grove with shorter dense dark pine silhouettes clustered toward one side, grey-green lichen ground and a restrained strip of old frost. No giant snow mountain or cliffs, only low tree crowns in overhead view. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.taiga.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.taiga.variant_2/v1/2d957965ef2c783c/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "3157056257b653105fb560b5ed8d98450f8bfc06b72f3741c10b2a0d0ae77369",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.taiga.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.taiga.variant_2-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:24:54.663Z",
+  "referenceHashes": [
+    "a87c507acbd1601b31a41263412fee9cfc5654058f949519860c9d130e7fcf1b",
+    "e5756d9686f3a8ddda093db5640312852f1d574d17c173006414b884a74bcd90"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "9d1369004ad88dc9162cdc6f475f79bd75b594c5960beacf440a9deee929f525",
+      "inputHash": "a87c507acbd1601b31a41263412fee9cfc5654058f949519860c9d130e7fcf1b",
+      "outputHash": "a98f149db4ff7f7b675fead2e938493491155a67a6c288c69e87a0e81d0ac087"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

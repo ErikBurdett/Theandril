@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.wood",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 512,
+    "height": 512
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.wood"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: seamless square game UI material texture. Original detailed medieval pixel art for Theandril Hearth & Card, cozy lich's tavern. Flat top-down dark warm walnut and mahogany tabletop, broad horizontal wooden boards with subtle carved knotwork at edges and tiny antique brass nail heads. Entire image filled by timber, quiet dark brown center for cream interface text, restrained grain at pixel scale. No green, writing, letters, objects, illustration of room, perspective, watermark, large motifs or shiny plastic. Consistent diffuse candle-warm lighting, texture suited to repeating across game buttons, dock, table panels and card reader.",
+  "frames": [
+    {
+      "id": "ui.wood/idle/front/0",
+      "direction": "front",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 1000,
+      "pivot": [
+        256,
+        256
+      ],
+      "sourcePath": "assets/art/candidates/ui.wood.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 1,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2c987049ebf2b9b082136a433e60f25da1c3ab420904f820532da5368f108a98",
+    "sourceRefs": [
+      "assets/art/source/ui/wood-original.png",
+      "assets/art/source/ui/wood-prompt.txt"
+    ],
+    "licenseNotes": [
+      "Original project illustration generated with the built-in tool. Service terms apply. Interface material texture; not canonical world history."
+    ]
+  },
+  "createdAt": "2026-09-07T07:06:42.474Z",
+  "referenceHashes": [
+    "1ca064a1a3034d3ba23339054d93e18159b00e35e98552c607bd43e7b6969ea3"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-ui-prepare",
+      "version": "1",
+      "profile": "nearest-512-wide-palette",
+      "settingsHash": "e8c8a077803b990951d2e72c463c4c282bf8ac48bc1db147d7aa72be22c5a41e",
+      "inputHash": "1ca064a1a3034d3ba23339054d93e18159b00e35e98552c607bd43e7b6969ea3",
+      "outputHash": "b4fe51aefd6b3c82b6e37c70bcbbb45cdef07f2a8793960f98bcb1fe349cff1c"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.wood.json"
+  },
+  "review": {
+    "reviewer": "Codex visual review",
+    "reviewedAt": "2026-09-07T07:09:18.346Z",
+    "notes": "Reviewed 512-square factory pixels: dark walnut boards with restrained brass pins and carved corners. No writing, green or perspective. Grain remains visible; use a dark backing for dense text. Not a new room expansion illustration.",
+    "evidencePaths": [
+      "assets/art/reviews/ui.wood.png"
+    ],
+    "inputHash": "35c171b15a8bf1e243b0558a0322e7769bc63cad1d4242b2dacb4c6a7a626db7"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

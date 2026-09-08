@@ -50,7 +50,10 @@ describe('mixed campaign forces use the real formation battlefield', () => {
     expect(pending.formationBindings).toHaveLength(6);
     expect(new Set([...pending.combat.attacker, ...pending.combat.defender].map(item => item.unitId)).size).toBe(5);
     expect(state.armies['army.2']!.movement).toBe(0); expect(state.armies['army.4']!.movement).toBe(0);
-    const engine = autoResolveBattle(pending.combat);
+    // Both sides already spent their only innate action during the first round;
+    // the remaining bare-kernel comparison must use this battle's frozen rules.
+    expect(pending.abilityState!.sources.every(source => source.usesRemaining === 0)).toBe(true);
+    const engine = autoResolveBattle(pending.combat, pending.rulesVersion);
     const resumed = deserializeGame(serializeGame(state));
     issue(state, auto); issue(resumed, auto);
     expect(stateHash(resumed)).toBe(stateHash(state));

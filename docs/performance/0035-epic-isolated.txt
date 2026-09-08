@@ -1,0 +1,32 @@
+Final-rules/AI isolated chronicle victory test, 2026-09-07.
+No browser, Blender, other campaign benchmark or agent test was active during this run.
+Command: ./node_modules/.bin/vitest run tests/headless/chronicle-victory.test.ts
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ tests/headless/chronicle-victory.test.ts (2 tests | 1 failed) 60933ms
+   × generated-start epic AI victory produces complete factual logs identical after archive save/resume 60100ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/headless/chronicle-victory.test.ts > generated-start epic AI victory produces complete factual logs identical after archive save/resume
+Error: Test timed out in 60000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/headless/chronicle-victory.test.ts:10:37
+      8| // post500 order and replays the complete technical history twice. Giv…
+      9| // archive integration test its own wall-time budget; keep all turn/co…
+     10| test.each(['short', 'epic'] as const)('generated-start %s AI victory p…
+       |                                     ^
+     11|   const game = createGame({ seed: 20260905, size: 'tiny', factionCount…
+     12|   const archive = createArchive(game, { mode: 'watch' });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  17:01:49
+   Duration  61.51s (transform 382ms, setup 0ms, import 490ms, tests 60.93s, environment 0ms)
+
+

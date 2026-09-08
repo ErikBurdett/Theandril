@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.steppe.variant_1",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.steppe.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. STEPPE: dry low ochre-grey grassland with irregular patches of short rust-brown bunchgrass and quiet dusty soil, subtly curved wind-combed clumps, less green than temperate meadow. No trees or large rocks, subdued highlights. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.steppe.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.steppe.variant_1/30012f67aca299214271616508d7bbedbe03aea9c3e62f022fa21d18904ed06d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "feabc5037649d1b543b837db9141a5704c209bab3ed2f20f133bc116154b3ab5",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.steppe.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.steppe.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:47:50.825Z",
+  "referenceHashes": [
+    "3a3f5f86826d8eba6a4c0e516672b8dcdae2dc7c5dc8d0945564ab99e2342b76",
+    "c57fb85fa4f1a6612b0dfad1cd58bb85f1748a4f98eabedf7b9275d740d8e15c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "3f8e164de25be64a8112795f71089c3db1e5917c5d8c76036007a45faaa9587c",
+      "inputHash": "3a3f5f86826d8eba6a4c0e516672b8dcdae2dc7c5dc8d0945564ab99e2342b76",
+      "outputHash": "125f6ef744ae840d960783c1d6c7b428268905aeedbaab9a6bf5c1b8af8559ac"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "125f6ef744ae840d960783c1d6c7b428268905aeedbaab9a6bf5c1b8af8559ac",
+      "outputHash": "1263cdad44a0f8fbcd4b3a7431f254d93bfae28d20401d836876beadffbbf7b9"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1263cdad44a0f8fbcd4b3a7431f254d93bfae28d20401d836876beadffbbf7b9",
+      "outputHash": "3290717e9972d56297d20198fb979590382f7f15a361c65f3adbc50f215924c4"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "60a80f5f168e6d2c30d9dc2f1f50ff9857ba37ffe3c26159acbc902c724c30a2",
+      "outputHash": "7bb0e44484e241b7aeb86957d5f9ecaaa564f78df242c9137c566c0b31aed8ed"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "69a1121ca16747e773c38454411dbfec722ffdfd34f73f484dae15deb1a204d5",
+      "outputHash": "a88735650bec4283bab66c1b5b3c2934ad0f2969200c860cc99e4dd99c13c1de"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "2f0264751a0c2c9732d01a664e286a5032fa9438d4c442e0b9f8d7b7fdc9c855",
+      "outputHash": "76c03132865e37dbb136378d53786af833c38facbe0b98a73d85fb9c783ac55e"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.steppe.variant_1.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:17.891Z",
+    "notes": "Rust bunchgrass clumps over dusty ground are clearly different from the base dry plain. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 30012f67aca299214271616508d7bbedbe03aea9c3e62f022fa21d18904ed06d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/68d92a9aa05307de1e73870eef5e5e8632498c67572e400a9218d85481d9e70f.png"
+    ],
+    "inputHash": "82919b4bfa168ca0be419e9f9164e075fe3dc58634ce85d590a1e5db6308bf01"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "stage": "raw-source-rejected",
+  "approved": false,
+  "decisionBy": "root main reviewer",
+  "reason": "v1 is only a very thin line and tiny plumb dot at32px; regenerate the same authored plumb-line crossing three unequal stitches with a bolder native silhouette. Retain v1 image and exact provenance; other17roles are unaffected.",
+  "source": {
+    "id": "ui.badge.velvet_meridian",
+    "role": "ui.badge",
+    "family": "velvet_meridian",
+    "version": 1,
+    "sourcePath": "assets/art/source/faction-expansion/canalmeridian/ui.badge.velvet_meridian-v1.png",
+    "sourceHash": "207f06b50b4d9de5b189d42aabd951a451a54881a86317567b57842f66873971",
+    "prompt": "Use case: stylized-concept. ONE tiny simple original pixel-art army identification badge for Velvet Meridian in Theandril. The complete design consists ONLY of one straight vertical plumb cord with a small dark silver plumb bob at its bottom, crossed by exactly three unequal short horizontal madder-red stitches. No banner, draped cloth, hanging rod, tassels, shield, ribbon, jewelry, chains, extra discs, figures, buildings, text, logo or frame. Bold flat coarse stepped pixel clusters with very few matte colors: smoke silver, madder red, muted blue-black. Centered front-facing emblem, maximum28pixels at native32x32, pivot16,16, ample simple negative space. Entire mark in the central65percent of the source canvas; fully complete and generously padded. TRUE transparent zero-alpha PNG background, never checkerboard or a colored background. No glow, cast shadow, gradients, surrounding scenery, animation, variants or sheet. Quiet original political craft symbol, not a decorative illustration.\nSimplify into the smallest bold readable version of the same crest, just its principal shapes. This is the separate tiny army badge asset.",
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "seed": null,
+    "generatedAt": "2026-09-07T17:21:04.000Z",
+    "referenceHashes": []
+  },
+  "replacement": {
+    "id": "ui.badge.velvet_meridian",
+    "version": 2,
+    "sourcePath": "assets/art/source/faction-expansion/canalmeridian/ui.badge.velvet_meridian-v2.png",
+    "sourceHash": "a073320bd7b540922c9af9984174289a472ea078856f0abc1ec1e005fc653a9e",
+    "prompt": "Use case: stylized-concept. Asset type: ONE independently generated tiny raster pixel-art army identification badge, ui.badge.velvet_meridian version2, for Theandril. Design only the authored Velvet Meridian symbol: ONE straight vertical PLUMB LINE crossing EXACTLY THREE UNEQUAL HORIZONTAL STITCHES, ending in ONE substantial hanging PLUMB BOB. It must remain BOLD and immediately readable at native32x32 pixels, not a hairline ornament. Imagine an exact28-pixel-high emblem: vertical stem at least3pixels thick, three stitches about18,14,and10pixels wide respectively and each3pixels thick, large simple plumb bob at least6pixels wide and6pixels tall. Separate the three unequal stitches by clearly visible negative gaps. Longest stitch span must be at least14pixels wide in the eventual native badge. Use pale bright matte silver for the continuous thick stem and large simple diamond-shaped plumb bob, with muted brick-red horizontal stitches and only minimal dark local-color edge contrast. No thin cord, tiny dot bob, bevel clutter or fine dangling details. Crisp coarse square pixel clusters and flat grouped values, worn medieval craft identity, not glossy jewelry. Front-facing flat emblem, centered and fully contained within the central60percent of a square source canvas, with generous actual transparent padding and complete tips. TRUE transparent PNG alpha zero outside this single emblem; preserve genuine alpha, never draw a checkerboard or background. ONLY the line, three unequal stitches, and bob. No frame, scenery, scroll ornament, ring, shield, plaque, ribbon, cloth, tassel, tree, feathers, crown, extra symbols, figures, text, letters, numbers, logo, watermark, glow, ambient haze, smooth gradients or cast shadow. One original static badge, no sheet, variants, annotations or multiple marks.",
+    "generatedAt": "2026-09-07T18:10:07.464Z"
+  },
+  "replacementInspection": {
+    "stage": "isolated unchanged-fitter review only; not approved",
+    "nativeHash": "a80eadfb77ac48c817b9228a999e4d8c1c2e77fb5e126a2433656bdc76d7a56f",
+    "nativePath": "assets/art/source/faction-expansion/canalmeridian/review-web-velvet-badge-v2-1x.png",
+    "enlargedPath": "assets/art/source/faction-expansion/canalmeridian/review-web-velvet-badge-v2-4x.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "crop": {
+      "x": 350,
+      "y": 99,
+      "w": 554,
+      "h": 1040
+    },
+    "nativeBounds": {
+      "width": 14,
+      "height": 27
+    },
+    "stitchWidths": [
+      14,
+      10,
+      8
+    ],
+    "stemWidth": 2,
+    "bobMaximumWidth": 8,
+    "findings": [
+      "Complete alpha silhouette, generous source margins, no frame/scenery/scroll ornament.",
+      "Original and native1x/4x inspected; three unequal stitches and substantial bob remain readable.",
+      "The measured stem is2px, below requested3px. Root notified; no full compliance or approval claimed.",
+      "No generated-simulation/canonicalindex/brief/candidate/approval changed."
+    ]
+  },
+  "timestampBasis": "generatedAt is local UTC recorded after builtin tool completion; model/seed not exposed. No invented timestamp for earlier root rejection."
+}

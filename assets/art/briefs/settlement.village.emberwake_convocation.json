@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.emberwake_convocation",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.village for Theandril, Emberwake Convocation.\nSubject: ONE small complete inhabited village cluster of three modest buildings around a little open working court. Clear low simple roofs, one small store and a practical low enclosure. This is the smallest settlement stage, no great hall, no high tower, no tall flag.\nCulture-specific identity: Low firebreak compounds, split-vent clay kilns, seed stores and broad ceramic roofs. Ash-white washed clay, smoked-orange roof tiles, muted sulfur-green shutters. Recovery workshops rather than Cinder military walls.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "settlement.village.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/settlement.village.emberwake_convocation/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9df190655a2889b6abefc8f0226cb412f71f44663723b3961d629ce506deb9bd",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.village.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.village.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:49:43Z",
+  "referenceHashes": [
+    "dd57ea32b62f4d80a72fcef911720a44542dc123eb711faa360d4f8bbf15f60a",
+    "4855245ab875d3753978108063eab8913b78e08b9641bb779ac9aef28bb92d22"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "8b5fb5e372b1cdcf2518316090dc694fa1146273ae6a22552d3fa0dfeeab8dd4",
+      "inputHash": "dd57ea32b62f4d80a72fcef911720a44542dc123eb711faa360d4f8bbf15f60a",
+      "outputHash": "24d7af23548f42f1b6628d9d4d0bb21da30f57c078ce4736fbe44c74a89463d0"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

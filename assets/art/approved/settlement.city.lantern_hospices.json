@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.lantern_hospices",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.lantern_hospices"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Lantern Hospices, role settlement.city.\nSUBJECT: ONE mature compact city with7to9 distinct roof/building masses, culturally specific civic hall and several inhabited working courtyards, gate and enclosing walls. Native128x128 height≤110px pivot64,112. Clear hierarchy and varied roofs; no dominant generic medievalcastle, no scenery or terrain tile.\nCULTURE: Beeswax yellow, washed blue, soot-black lantern cages, plain linen. Hooded service coats, broad shields, shielded lamps not glowing magical haloes. Open hospice courtyards with wide ventilated slate roofs, covered galleries, clean cisterns and small enclosed lamp niches.\nPEOPLE if character or rider: Human care-house attendants and paid escorts; adultsturdyclothlayers, no religious caricatures.\nHERALDRY if UI or flag: A small hooded lamp framed by two protective shutters.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "settlement.city.lantern_hospices/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.lantern_hospices/c9b68ed5e448bbe53278ec6dea4161f1b9214ac35546a2e1cb3be69a171b32cd/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bdaa2dd4a938397d10c573501317d03d9e593d582582091a5840963f7d0bbd18",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/settlement.city.lantern_hospices-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/settlement.city.lantern_hospices-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:51:45Z",
+  "referenceHashes": [
+    "60eb511cc570875c2ac8144ea774cd440b3f991e778ec25a302b2cb72068e7ae",
+    "c0582d605cb300d83567e50be26868f5f13d92adfc0f659b9aa5f349417095b0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "a5bd8acd1f23e123c1fc38875c219f6077c4181f4c97911028c57d0622b89f76",
+      "inputHash": "60eb511cc570875c2ac8144ea774cd440b3f991e778ec25a302b2cb72068e7ae",
+      "outputHash": "fdcbed1972b0b13969f2312d63f639b8927b51a0c9eac974f86d7908defee6e4"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "fdcbed1972b0b13969f2312d63f639b8927b51a0c9eac974f86d7908defee6e4",
+      "outputHash": "896d3d14fdf8290f458bcad4af4a909f46c78b77b6f8faa90d0b2aefc5ca360e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "896d3d14fdf8290f458bcad4af4a909f46c78b77b6f8faa90d0b2aefc5ca360e",
+      "outputHash": "8b242967436f0208d920146a702506ea83e0a4c3ba2f2ccc297b91df705cb5bc"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "34454db67a0b64bdaf0678e909381bd297fcd1a55f0d24db3b92c883f3bf86c5",
+      "outputHash": "aa8bbcfb9b053e967c9d6b0032569bc3e89975a31d7bfa56c38e582f8741bae0"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "505767324ca752eaa59445f59b36e15bf73aef23711635fd095563601ffb10f0",
+      "outputHash": "317960833656ea5e58c7b27d4c6af45fdc80dc218df1b1ba8bfa14b8840f968e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "4ea840f21e068b0f1eaaec7f903e3720d64a8c17b7bad756df077342868ee1ad",
+      "outputHash": "e197deb77e8d855e8d5edd9f6e0d52b7836caf3619e803784bad2ca46e298a71"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.lantern_hospices.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T09:19:46.822Z",
+    "notes": "Inspected independently generated original, all18 exact processed frames at native1x and this role at nearest4x. Larger128px walled hospice court, central shared yard, tall lamp tower and additional wings give a clear developed tier; all gate/wall/roof edges and small flag tips are contained. Muted cream, slate blue and ochre normalized through the shared Theandril palette; hard pixel clusters and transparent padding remain coherent. Tiny source ornament is subordinate to silhouette. One static southeast pose only, not animation. In-game/fog/UI integration remains a separate acceptance gate.\nReviewed candidate c9b68ed5e448bbe53278ec6dea4161f1b9214ac35546a2e1cb3be69a171b32cd; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a6ad37922ebbeae78f44ecd60a09f2e5f6a549f6517da5f8d6b03a5ab9a1e1be.png"
+    ],
+    "inputHash": "7b27f2b8297ca9df722cc4b909f43c7770425817382315fd4df42546c561e37e"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

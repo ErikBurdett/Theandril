@@ -1,3 +1,4 @@
+import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { applyCommand, createGame, deserializeGame, getObservation, serializeGame, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -5,7 +6,7 @@ import { cellsWithin } from '../../packages/sim/src/visibility';
 import { prosperityCampaign } from '../../packages/test-fixtures/src/victory-fixture';
 
 function landCampaign(): GameState {
-  const state = createGame({ seed: 17, size: 'tiny', pace: 'short', factionCount: 2 });
+  const state = createGame({ generatorVersion: 4, seed: 17, size: 'tiny', pace: 'short', factionCount: 2 });
   // Authored local soil, population and purse isolate UI actions; territory and
   // all subsequent work are created by the actual command rules, not UI mocks.
   for (const cell of cellsWithin(state, state.armies['army.1']!.cell, 3)) {
@@ -16,10 +17,11 @@ function landCampaign(): GameState {
   return deserializeGame(serializeGame(state));
 }
 async function selectTown(page: Page) {
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: /Soil witness/ }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', /Soil witness/); await openSelectedOrders(page);
 }
 async function selectLand(page: Page, cell: number) {
+  await openSelectedOrders(page);
   const tiles = page.getByRole('button', { name: 'Select tiles', exact: true });
   if (await tiles.getAttribute('aria-expanded') !== 'true') await tiles.click();
   await page.getByRole('button', { name: `Inspect land hex ${cell}`, exact: true }).click();
@@ -27,6 +29,7 @@ async function selectLand(page: Page, cell: number) {
 }
 async function nextTurn(page: Page) {
   const turn = await page.evaluate(() => window.__THEANDRIL__!.getTurn());
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getTurn())).toBe(turn + 1);
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
@@ -47,12 +50,14 @@ test('territory clicks, paid work, cultivation and saved continuation remain pla
   await expect(culture.getByRole('list', { name: 'Biome affinities' })).toContainText('+1 food');
   await expect(culture.getByRole('list', { name: 'Biome affinities' })).toContainText('−1 food');
   await culture.locator(':scope > summary').click();
+  await closeManagement(page);
   await page.getByTestId('map-container').scrollIntoViewIfNeeded();
   const point = await page.evaluate(cell => window.__THEANDRIL__!.getCellScreenPoint(cell), owned.cell);
   expect(point?.inViewport).toBe(true); await page.mouse.click(point!.x, point!.y);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual({ settlementId: 'settlement.5', cell: owned.cell });
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.ownArmies.map(army => ({ id: army.id, cell: army.cell, movement: army.movement })))).toEqual(armiesBefore);
   const cost = owned.improvementOptions.find(option => option.improvementId === 'improvement.terraced_fields')!;
+  await openSelectedOrders(page);
   await page.getByRole('button', { name: 'Assign worker', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSummary()!.land.settlements[0]!.worked)).toEqual([owned.cell]);
   await selectLand(page, claim.cell);
@@ -62,6 +67,7 @@ test('territory clicks, paid work, cultivation and saved continuation remain pla
   await page.locator('.land-options').filter({ has: page.locator('summary', { hasText: 'Tile improvements' }) }).locator('summary').click();
   await page.getByRole('button', { name: 'Build Terraced fields', exact: true }).click();
   await expect(page.getByTestId('land-work')).toContainText(`${cost.coinCost} coin paid`);
+  await closeManagement(page);
   const options = page.locator('.campaign-options'); await options.locator('summary').click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click(); await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
   const saved = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
@@ -69,11 +75,13 @@ test('territory clicks, paid work, cultivation and saved continuation remain pla
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(saved);
   await selectTown(page); await expect(page.getByTestId('land-work')).toContainText('0 / 2 turns');
   await nextTurn(page); await nextTurn(page);
+  await openSelectedOrders(page);
   await expect(page.getByTestId('land-work')).toHaveCount(0);
   await expect.poll(() => page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell)?.improvementId, owned.cell)).toBe('improvement.terraced_fields');
   await selectLand(page, owned.cell);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().improvementProps ?? 0)).toBeGreaterThan(0);
   const atlasBytes = await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().residentAtlasBytesEstimate);
+  await closeManagement(page);
   await page.locator('.campaign-options > summary').click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click(); await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
   const improvedHash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
@@ -84,6 +92,7 @@ test('territory clicks, paid work, cultivation and saved continuation remain pla
   await selectTown(page); await selectLand(page, owned.cell);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().improvementProps ?? 0)).toBeGreaterThan(0);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().residentAtlasBytesEstimate)).toBe(atlasBytes);
+  await closeManagement(page);
   await page.getByTestId('map-container').screenshot({ path: testInfo.outputPath('territory-and-recycled-improvement.png') });
   // A separate unimproved tile can change biome without invalidating fields.
   await selectLand(page, claim.cell); await page.locator('.land-options summary').filter({ hasText: 'Cultivate biome' }).click();
@@ -113,16 +122,16 @@ test('capital designation is paid and independent of colony, settlement and city
   const checked = deserializeGame(serializeGame(state));
   await page.goto('/'); await page.locator('input[type=file]').setInputFiles({ name: 'capital-witness.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(checked))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: /Ledger Hearth/ }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', /Ledger Hearth/); await openSelectedOrders(page);
   await expect(page.getByTestId('settlement-stage')).toHaveText('city · Capital');
-  await page.getByTestId('settlement-registry').getByRole('button', { name: new RegExp(state.settlements[target.settlementId]!.name) }).click();
+  await selectFromRegistry(page, 'settlements', new RegExp(state.settlements[target.settlementId]!.name)); await openSelectedOrders(page);
   await expect(page.getByTestId('settlement-stage')).toHaveText('colony');
   const coin = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.treasury);
   await page.getByRole('button', { name: `Designate capital · ${target.capitalOption.coinCost} coin`, exact: true }).click();
   await expect(page.getByTestId('settlement-stage')).toHaveText('colony · Capital');
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.treasury)).toBe(coin - target.capitalOption.coinCost);
-  await page.getByTestId('settlement-registry').getByRole('button', { name: /Ledger Hearth/ }).click();
+  await selectFromRegistry(page, 'settlements', /Ledger Hearth/); await openSelectedOrders(page);
   await expect(page.getByTestId('settlement-stage')).toHaveText('city');
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.land.settlements.filter(town => town.isCapital).length)).toBe(1);
 });

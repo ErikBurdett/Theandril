@@ -1,0 +1,51 @@
+Theandril cohort24 — isolated unchanged chronicle victory verification
+Recorded 2026-09-07; repository /home/telephoneheater/Work/Theandril
+
+Scope
+One isolated invocation of the complete unchanged chronicle-victory test file:
+both generated-start Short and Epic cases, with their existing 60000ms per-test
+limits. No tests excluded, assertions weakened, timeouts raised, or production
+files edited. This is current rules13 checkpoint verification, not a replacement
+for the complete default suite.
+
+Result
+PASS: 1 test file, 2 tests, zero failures or skips; exit 0.
+Vitest duration 58.66s, combined test time 58.07s; process real time 59.05s.
+The reporter did not print an individual Epic duration or final campaign hash.
+The unusual raw system-time line is preserved verbatim below, not interpreted.
+
+What the passing unchanged assertions verify
+- Ordinary observation-driven AI commands; no rejected commands.
+- Prosperity victory; Epic finish remains within the existing 800–1400-turn gate.
+- Epic archive save/resume at turn 500 and identical subsequent command results.
+- Final campaign save/reload equality and complete archive replay equality.
+- Continued, restored and original chronicle documents agree.
+- Replay of the exported technical history has the same final state hash.
+
+Limits
+This run was isolated from sibling browser/tests/benchmarks in a coordinated
+CPU window. It does NOT close the full-parallel Epic timeout: the corrected
+default suite retained in 0034-headless-corrected.txt still failed that unchanged
+gate at a printed 62280ms. No additional full-suite pass or repeated Epic attempt
+is claimed. Earlier failed reports remain unchanged.
+CPU was released immediately when this process exited.
+
+Command: time -p pnpm exec vitest run tests/headless/chronicle-victory.test.ts
+Observed start UTC: 2026-09-07T20:25:41.554Z
+Observed finish UTC: 2026-09-07T20:26:40.736Z
+Exit code: 0
+--- BEGIN EXACT OUTPUT ---
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  15:25:42
+   Duration  58.66s (transform 389ms, setup 0ms, import 512ms, tests 58.07s, environment 0ms)
+
+real 59.05
+user 69.40
+sys 0.:0
+--- END EXACT OUTPUT ---
+

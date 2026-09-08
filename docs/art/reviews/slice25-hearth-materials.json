@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "importedAt": "2026-09-08T03:00:42Z",
+  "purpose": "Owner-requested Hearth & Card material theme for Theandril's DOM HUD and management windows.",
+  "sourceProject": {
+    "name": "Theandril: Hearth & Card",
+    "packageName": "theandril-hearth-and-card",
+    "repository": "https://github.com/ErikBurdett/theandril-hearth-and-card",
+    "commit": "f2ddbb04e4aefd832d45db282f9645ef0d516f7d",
+    "readOnly": true
+  },
+  "importMethod": "Byte-identical copies of three already-reviewed lossless WebP runtime files. No regeneration, raster editing, palette conversion, resizing, native-tool run, atlas packing or sibling-project write.",
+  "license": {
+    "owner": "Erik Burdett",
+    "authorization": "The owner-requested local Theandril UI integration reuses these three original same-world materials. Preserve the original project attribution and retained separate asset-license terms; this is not a blanket MIT license for game artwork.",
+    "softwareLicense": "MIT",
+    "artLicense": "Separately reserved; see retained ASSET_LICENSE.md. No claim of hand-drawn or third-party game art.",
+    "retainedDirectory": "assets/art/source/hearth-card-ui"
+  },
+  "atlas": {
+    "integration": "DOM CSS background images only",
+    "changesToMapAtlas": false,
+    "additionalMapAtlasPages": 0,
+    "additionalMapAtlasAssets": 0,
+    "downloadBytes": 68784,
+    "decodedRgbaBytesEstimate": 2162688,
+    "memoryNote": "512² × 4 bytes for each material plus 128² × 4 bytes for the corner = 2.0625 MiB potential separate DOM decode. Not measured GPU memory or part of the map atlas budget."
+  },
+  "assets": [
+    {
+      "sourceAssetId": "ornament.corner",
+      "sourceVersion": 1,
+      "sourceRuntime": "public/art/optimized/animation/ornament.corner-idle.webp",
+      "runtimePath": "apps/web/public/ui/hearth-card/ornament.corner-idle.webp",
+      "sha256": "4bcccf32b83b6d5ac93f13b9430bfc1d2a9bbcfb7614e22a5d47765a1a103ac3",
+      "bytes": 2072,
+      "width": 128,
+      "height": 128,
+      "framesUsed": 1,
+      "animation": "Static frame-zero idle extraction only; the source's four-frame clip is not imported or played.",
+      "sourceApproval": "assets/art/source/hearth-card-ui/ornament.corner.json",
+      "sourcePngHash": "45e837e33be8c3f5b8b24ea5ed15f574f24590d34daa1e90f578e97235fdecad",
+      "visiblePixelsHash": "54300c9e11d10952d2c3bc018ac13b15a8d051fbe07155c60ae02892b9854a4b"
+    },
+    {
+      "sourceAssetId": "ui.parchment",
+      "sourceVersion": 1,
+      "sourceRuntime": "public/art/optimized/materials/parchment.webp",
+      "runtimePath": "apps/web/public/ui/hearth-card/parchment.webp",
+      "sha256": "f43d231a4815ed557517898a09ef2c6489b9834ea0c3a7789bf391fa98923baa",
+      "bytes": 30180,
+      "width": 512,
+      "height": 512,
+      "framesUsed": 1,
+      "animation": "Static material.",
+      "sourceApproval": "assets/art/source/hearth-card-ui/ui.parchment.json",
+      "sourcePngHash": "f402f5f9c0674e944435f7eabc3e83f7fa5ae59b02dd21b22d18a91275d3bce0",
+      "visiblePixelsHash": "0624322f0baf23ef0b124340caa614ca57acdccefeb497e2b4c663dacd3d5965"
+    },
+    {
+      "sourceAssetId": "ui.wood",
+      "sourceVersion": 1,
+      "sourceRuntime": "public/art/optimized/materials/wood.webp",
+      "runtimePath": "apps/web/public/ui/hearth-card/wood.webp",
+      "sha256": "e23cae5a422a038a32b6990f4443db84c81e55c883451b5d30e56e7b039342bc",
+      "bytes": 36532,
+      "width": 512,
+      "height": 512,
+      "framesUsed": 1,
+      "animation": "Static material.",
+      "sourceApproval": "assets/art/source/hearth-card-ui/ui.wood.json",
+      "sourcePngHash": "b4fe51aefd6b3c82b6e37c70bcbbb45cdef07f2a8793960f98bcb1fe349cff1c",
+      "visiblePixelsHash": "3bc2a2f6f5fdd59b8f26bb5be699065b49aa44e95ea782d27e89be6d42e48abb"
+    }
+  ],
+  "sourceEvidence": {
+    "approvedManifestsRetainedVerbatim": true,
+    "optimizedEntries": "assets/art/source/hearth-card-ui/optimized-entries.json",
+    "upstreamSourcePngsPresent": false,
+    "note": "The sibling lightweight checkout retains reviewed optimized runtime WebPs and original approval/provenance JSON. Referenced original generation PNGs and native PNG evidence remain upstream archive paths, not newly imported or fabricated source files."
+  },
+  "inspection": {
+    "reviewer": "Codex /root/web",
+    "stage": "Inspected the three existing runtime images at their original native dimensions and the retained Card Shop desktop/mobile/binder screenshots before copying.",
+    "observations": [
+      "Wood: broad dark walnut/mahogany boards, brass pins and carved edge flourishes; a dark CSS wash keeps dense text readable.",
+      "Parchment: ochre-worn decorative edges and visible palette speckling; a quiet cream CSS writing wash is required. It is not perfectly seamless.",
+      "Corner: a single transparent L-shaped gold acanthus/gem ornament. Imported unchanged as a static decorative background, separate from live text."
+    ],
+    "siblingScreenshotPaths": [
+      "docs/screenshots/parchment-workshop-desktop.png",
+      "docs/screenshots/parchment-workshop-mobile.png",
+      "docs/screenshots/tome-materials-binder.png"
+    ],
+    "theandrilGameplayReview": "Main /root inspected the original Card Shop materials/reference and the actual Theandril desktop compact-army, town-land, full-orders and 390px/130%-text screenshots. Retained in docs/art/reviews/slice25/. The first narrow orders layout was rejected for a float-induced skinny text column; the corrected one-column layout was reviewed. See docs/art/reviews/slice25-hud-and-towns.md for scope and limits. Source approval alone does not constitute HUD/layout acceptance."
+  },
+  "limitations": [
+    "Theme CSS changes materials, palette, typography, borders and shadows only; parent-owned campaign-hud.css supplies layout.",
+    "No new game content, faction meanings, gameplay animation, renderer textures or canonical state.",
+    "Native pixel sources stay unchanged. CSS background fitting/washes are presentation, not newly processed raster art.",
+    "No font downloads; Georgia/Times headings and system sans body text."
+  ]
+}

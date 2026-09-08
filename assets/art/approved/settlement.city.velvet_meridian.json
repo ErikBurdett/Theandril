@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.velvet_meridian",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.velvet_meridian"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Velvet Meridian, role settlement.city.\nSUBJECT: ONE mature compact city with7to9 distinct roof/building masses, culturally specific civic hall and several inhabited working courtyards, gate and enclosing walls. Native128x128 height≤110px pivot64,112. Clear hierarchy and varied roofs; no dominant generic medievalcastle, no scenery or terrain tile.\nCULTURE: Madder red, smoke silver, blue-black woven cloth. Weighted long hems, small calibrated discs, half-round shields and layered soft scholar coats. Low round slate observatories, cloth-measure galleries, concentric open courtyards and dark-curtained study halls; no glowingastralwizardtowers.\nPEOPLE if character or rider: Human weavers, night navigators and school households; practical escorts and scholars.\nHERALDRY if UI or flag: A plumb line crossing three unequal stitches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "settlement.city.velvet_meridian/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.velvet_meridian/3af49b1d88daad608e5502d88966aa314b6d47057743dbe5ba9122c9017f67ff/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5a0a8aaf54b5a6f0244a96a5d181e010a05ac0c22a9d493c29d46db40b48e702",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/settlement.city.velvet_meridian-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/settlement.city.velvet_meridian-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:11:08.000Z",
+  "referenceHashes": [
+    "fb225784ac1c68de672a96ad2a047613314ec061cde8b53d39b557e31a3472ef",
+    "e24d92f7b2a73c9e3332f2ab52507b557b85ab7f58d6631a389821e4edc8c925"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "122d5e6c1247153ab2f06edd1ecaded9436a287f4dd46f8e574ec979fe61a12f",
+      "inputHash": "fb225784ac1c68de672a96ad2a047613314ec061cde8b53d39b557e31a3472ef",
+      "outputHash": "24a61a4ac140dcc1029264a36c4d71f8b9c5014ee50151b6152f470e92a85ca5"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "24a61a4ac140dcc1029264a36c4d71f8b9c5014ee50151b6152f470e92a85ca5",
+      "outputHash": "4771f0b1157407b0db737303f2d07345f957ff0f894da01eca6293efc7b6cace"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4771f0b1157407b0db737303f2d07345f957ff0f894da01eca6293efc7b6cace",
+      "outputHash": "7e05d33735e74253764f63a7b3ca7dde4460b51685292fcb6bf709ce3ee201e9"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "c1187b89a6c077392bf737b77722e054eeea160aaf2c0c34cf9dd272111a486b",
+      "outputHash": "5ec637f9e9dcec5a5c3f129a8fed741a310e720c8277d4b59ffddf4b08c27745"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "2b4a8651b293bbda709b373fd9a270e6ab79bcdb4c99ff59a1e17f7c4442fff7",
+      "outputHash": "eab2e64027be5ed5ac09dfe8954e073077b592551276cb11eadb1d3b3a7a423c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "d6d97147a657096d75b0ddef44d76b4b8ac9c3562b1dcd4243a3ac7cfd322e9a",
+      "outputHash": "6259b658ac368bc1742e06ef54acdeeefd7a85db8a445cdd32dec4dacc1ce92f"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.velvet_meridian.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:20:42.947Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Large128px slate-roof school compound with round observatory and concentric court; no glowing wizard tower. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 3af49b1d88daad608e5502d88966aa314b6d47057743dbe5ba9122c9017f67ff; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/cad647fdb1f20e7cdd3d57daac52b34ba422f8865528faef6d4f23d4b3b5aed9.png"
+    ],
+    "inputHash": "cd62979567f93b67ef8537ee397fec7787956bd25cbed6e2a0119b6486e228ae"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

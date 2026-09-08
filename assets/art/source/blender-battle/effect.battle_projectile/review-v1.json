@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.battle_projectile",
+  "version": 1,
+  "reviewedAt": "2026-09-07 21:12:57 UTC",
+  "stage": "native Blender source review",
+  "decision": "inspected-candidate-not-approved",
+  "manifestSha256": "ea3edd919dc1b784f1e4e4a7971cc829927ae754f872217ddd781d82a3d15040",
+  "evidence": [
+    {
+      "path": "v1/review-1x.png",
+      "sha256": "7eb5bcaad1c9dcfb0bb92ee183049438fd4c8440f3faae4a5086372b448fe873",
+      "inspection": "Viewed full image at native scale."
+    },
+    {
+      "path": "v1/review-4x.png",
+      "sha256": "c367561d633227e03463a2a48f87e3d50f80b6ae538f23d510f6b48cad413fd0",
+      "inspection": "Viewed enlarged nearest-neighbor contact sheet."
+    }
+  ],
+  "findings": [
+    "Arrow visibly approaches in frames 0–2, breaks at the center, and separates into wood/linen fragments across frames 3–7.",
+    "Native arrow and final tiny fragments are intentionally restrained; pale fletching has lower contrast on linen than on peat/olive. No clipping or firearm imagery."
+  ],
+  "timing": {
+    "frames": 8,
+    "durationMs": 100,
+    "blenderFps": 10,
+    "totalDurationMs": 800
+  },
+  "limitations": [
+    "Studio source images inspected; preview.html temporal playback not browser-tested by this reviewer.",
+    "PixelSnapper/Aseprite processed review, gameplay/background review and final approval remain parent-owned. No approval or runtime publication granted here."
+  ]
+}

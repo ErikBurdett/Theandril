@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.red_sluice",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.red_sluice"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Red Sluice Directorate, role unit.transport.\nSUBJECT: ONE complete transport ship, broad short unarmed cargo hull, readable open cargo deck and small covered passenger cabin, single small furled sail and short mast. Cultural materials and painted cloth; stout transport silhouette distinct fromwarships. Southeast isometric view bowtowardright, dry isolated entirehull includingkeel, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Brick red, dull celadon cloth, tarred oak, black chain and weathered bronze. Broad rectangular rain shields, hooded crew coats, horizontal bar motifs. Low sluice-gate inspired maintenance halls, wheel-braced gantries, thick brick channelside courtyards; no surrounding waterrectangle or actualtile.\nPEOPLE if character or rider: Human waterworks crew households and disciplined municipal escorts.\nHERALDRY if UI or flag: A barred spillway with three broad vertical openings and one horizontal lifting bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nNO firearms, cannons, gun barrels, gunports or gunpowder equipment. Wooden ballista on an open warship deck is permissible; transport carries cargo not weapons.",
+  "frames": [
+    {
+      "id": "unit.transport.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.transport.red_sluice/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "79489e14339e8d7458992208a5946d3aaecf494230ac186aed534291e7bdcd40",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.red_sluice-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.red_sluice-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:29:45Z",
+  "referenceHashes": [
+    "388423e52641df78c8912ce9459069f7bdd38a9847b4c1f838fdc291bbbe9686",
+    "90eff11865960f77ea13bfaaacb22916b3b7a4fc974952a05ec6129b262c6d80"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "327c00a8222d0a40583bd52f7411c4103c9cc1af42eb6c8e611e5f54ea9719e7",
+      "inputHash": "388423e52641df78c8912ce9459069f7bdd38a9847b4c1f838fdc291bbbe9686",
+      "outputHash": "31cbe93f45688dacaadfb4584972a8ece3e16661320b99b079cd6ab72fc86c69"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

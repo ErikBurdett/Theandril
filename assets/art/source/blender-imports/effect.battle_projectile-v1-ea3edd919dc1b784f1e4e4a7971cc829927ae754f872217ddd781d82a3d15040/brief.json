@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.battle_projectile",
+  "type": "effect",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "effect.battle_projectile"
+  ],
+  "prompt": "Original Theandril projectile battlefield effect, authored and animated in Blender. Fixed native 64x64 canvas, registered effect center (32,32), retained keyframed scene, raw renders and exact palette normalization. 8 supplied attack frames; no synthesized pose, mirrored faction art or independently fitted frames. Exact production brief/profile and source evidence: assets/art/source/blender-battle/effect.battle_projectile/v1/manifest.json.",
+  "frames": [
+    {
+      "id": "effect.battle_projectile/attack/se/0",
+      "direction": "se",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_projectile/v1/native/frame-000.png"
+    },
+    {
+      "id": "effect.battle_projectile/attack/se/1",
+      "direction": "se",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_projectile/v1/native/frame-001.png"
+    },
+    {
+      "id": "effect.battle_projectile/attack/se/2",
+      "direction": "se",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_projectile/v1/native/frame-002.png"
+    },
+    {
+      "id": "effect.battle_projectile/attack/se/3",
+      "direction": "se",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_projectile/v1/native/frame-003.png"
+    },
+    {
+      "id": "effect.battle_projectile/attack/se/4",
+      "direction": "se",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_projectile/v1/native/frame-004.png"
+    },
+    {
+      "id": "effect.battle_projectile/attack/se/5",
+      "direction": "se",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_projectile/v1/native/frame-005.png"
+    },
+    {
+      "id": "effect.battle_projectile/attack/se/6",
+      "direction": "se",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_projectile/v1/native/frame-006.png"
+    },
+    {
+      "id": "effect.battle_projectile/attack/se/7",
+      "direction": "se",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/blender-battle/effect.battle_projectile/v1/native/frame-007.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "attack": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "c27b69e52eb4ca445b218c2e7ed02d9509fc0c30afb1f5bbbf717b679a04bd79",
+    "sourceRefs": [
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/manifest.json",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/source.blend",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/profile.json",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/recipe.py",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/raw/frame-000.png",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/raw/frame-001.png",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/raw/frame-002.png",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/raw/frame-003.png",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/raw/frame-004.png",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/raw/frame-005.png",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/raw/frame-006.png",
+      "assets/art/source/blender-battle/effect.battle_projectile/v1/raw/frame-007.png"
+    ],
+    "licenseNotes": [
+      "Original Theandril project-authored Blender geometry and keyframes; no third-party game sprites or copyrighted setting assets. The retained factory source/profile record identifies production dependencies. This import neither grants a new license nor substitutes for native/in-game visual review."
+    ]
+  },
+  "createdAt": "2026-09-07T21:05:31.607Z",
+  "referenceHashes": [
+    "ea3edd919dc1b784f1e4e4a7971cc829927ae754f872217ddd781d82a3d15040",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "fixed-camera-native-battle64",
+      "settingsHash": "a28b0ec933c9d10477af25febdb9fc46b6d162e20b5de17e3f495349bf967058",
+      "inputHash": "ea3edd919dc1b784f1e4e4a7971cc829927ae754f872217ddd781d82a3d15040",
+      "outputHash": "2ee2bcdf3ea5893c92f970d191b9d1273cdcf225689858f0141427f40109e43a"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 60,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

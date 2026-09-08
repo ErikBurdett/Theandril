@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.margin_observance",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.margin_observance"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Margin Observance, role unit.ocean_warship.\nSUBJECT: ONE complete substantial ocean warship, deep high-sided broad hull, armored bow and elevated stern gallery, two short masts with separated compact sails and fortified deck. Cultural materials/cloth, clearly heavier than coastalgalley. Southeast isometric bowright, fullhull and sails insideframe, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Parchment grey, dull cinnabar, matte ink black, weathered lead. Narrow document cases, interrupted stripe patterns, practical slate shoulder covers and pale-edged shields. Slab-roof archive stations, protected empty wall recesses and enclosed supply yards; no levitatingglyphs or blackwizardcliche.\nPEOPLE if character or rider: Human copyists, custodians and supplyhouseholds; work-conscious guardedcamp equipment.\nHERALDRY if UI or flag: One broken bracket with a deliberate open corner and small offset registration bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.margin_observance/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.margin_observance/cad08b01fc52afd016fbd218995668f98c7a1adf237f193077c526a5522d15fa/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d00f774dfc833be9336388fa078fc64788c48b84a0ce1623d973bff1064f6109",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.margin_observance-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.margin_observance-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:30:33.000Z",
+  "referenceHashes": [
+    "16c695cccedb77efda4181203010aa0f62ecb26abbe8b85407f4216de0cf72d1",
+    "0c2e12eb3338e25857878b9fd731614050ac5b2182ad31bf493ecba4a49001f9"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "f9a8c5f5c4a9c0099018a9db6ad16a5830c71d5cd1bb00825a3b7bc1a51d3fae",
+      "inputHash": "16c695cccedb77efda4181203010aa0f62ecb26abbe8b85407f4216de0cf72d1",
+      "outputHash": "17cd1b0c7193f390cdd94b066a3e7ba950600809f5773f90c3dfe511c80eca20"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "17cd1b0c7193f390cdd94b066a3e7ba950600809f5773f90c3dfe511c80eca20",
+      "outputHash": "4f0a9263a11f28ed0b004087560700da24c3be43e4d58b49c61db16ce69ebc55"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4f0a9263a11f28ed0b004087560700da24c3be43e4d58b49c61db16ce69ebc55",
+      "outputHash": "4d06cfa7ec92665e9d100d358724f020e11c37a5cf14d88266975085583cd7cf"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "8241ea314ee2045de3b828719de451487d210ea2426356fc0358bce664a481ce",
+      "outputHash": "a90f8c80aed6c3d5ea1bad6d584647f14ff2e9a0ca4083a2baff656c5282d117"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "309ee2e24797946d885475c0f13fa512cd0d28e8ea997cd44fed985560591dca",
+      "outputHash": "c1d0c61910a2ca6f438e15574e864801a1698251223d6075ced87dabc9f3775c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "2f45d14988f42254e1518af137e4079f9b3d2e98f9a4a770908ca575c5a3af80",
+      "outputHash": "3fa5756d4dd3f3c50db61444ed1ece0faae56d696d88439b3cd3bf4f3e54ff78"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.margin_observance.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:16:09.684Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Two square masts and deep boarded fighting hull distinguish ocean ship, with crossbow crew and no cannon/gunport silhouette. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate cad08b01fc52afd016fbd218995668f98c7a1adf237f193077c526a5522d15fa; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/dba75e6bdbb13e3dd0c54e2416ec64a5ea3789fbcef6c2c0ed4b38747a82b59a.png"
+    ],
+    "inputHash": "c37e84af613a30ccc13a9e3b26d7e9acf7589b226125626976686e8a4ea4a8d2"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

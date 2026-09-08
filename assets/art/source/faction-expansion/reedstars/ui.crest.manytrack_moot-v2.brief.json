@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.manytrack_moot",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone raster pixel-art culture crest for Theandril, ui.crest.manytrack_moot version2. Create a genuinely transparent PNG with alpha zero outside the emblem: no painted checkerboard, background, ground plane, ambient haze, glow or shadow. Primary subject: ONLY a bold three-way fork joining THREE UNLIKE BROAD FOOT/ROAD TRACKS. Exactly three broad arms meet at one clear central junction, like a simple upright Y-shaped crossing viewed straight-on; no enclosing frame. One arm is moss-blue and has a few broad squared tread notches, one is tawny and has a few broad rounded footstep/tread impressions, and one is raw-linen cream with two wide parallel route grooves. Their different broad edge/tread shapes remain legible as three different kinds of travelled track joining peacefully. These are a heraldic mark, NOT actual scenery or a map, NOT flowing water. Keep each arm simple and substantial, with large clean transparent wedges between arms. Serious weathered medieval fantasy pixel art, restrained bark-dark edge accents and tiny grouped worn highlights only, crisp square pixel clusters designed to remain clear after fitting to a 64x64 native canvas. Front-facing flat emblem, balanced centered silhouette fully inside the central 60% of a square canvas, generous genuine transparent margins on every side. Colors limited visually to moss-blue, tawny hide, raw-linen cream and very restrained bark-dark edging. No other objects or ornament. ABSOLUTELY NO trees, forest, river, water, antlers, horns, feathers, ring, circle, shield, plaque, scene, wreath, foliage, cord border, ribbon, arrowhead, text, letters, numbers, watermark, character, animal, weapon, skyline, mountain, polished jewel or decorative background. The crest itself is only the three unlike broad tracks meeting at the fork.",
+  "frames": [
+    {
+      "id": "ui.crest.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/ui.crest.manytrack_moot/v2/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b4decfa3ce88e1e84d5eddc341cec0d9145f4d74291e23ff0a81f4a5384327b3",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/ui.crest.manytrack_moot-v2.png",
+      "assets/art/source/faction-expansion/reedstars/ui.crest.manytrack_moot-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:06:12.323Z",
+  "referenceHashes": [
+    "96b6622d8208c5b275c623f0c3b6b0e3a581eafebcce4529801380277866343a",
+    "b92c22901f8047c6fd89aee0e944cdec5f1221bd287354741f38246da865b0d9"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "d27b5a90ea6aeab92f35fa866c59346a7e472f783e7585be27f1e451edc5b8ba",
+      "inputHash": "96b6622d8208c5b275c623f0c3b6b0e3a581eafebcce4529801380277866343a",
+      "outputHash": "3900192e3d8a21cdfb68cc254ee32bffe0c2abf1182a5bd099af355fd7f4f905"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

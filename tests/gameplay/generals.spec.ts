@@ -1,4 +1,4 @@
-import { openRealmAffairs } from './ui-navigation';
+import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders, openRealmAffairs } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { neighbors, isPassable } from '@theandril/mapgen';
 import { applyCommand, createArmyFormation, deserializeGame, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
@@ -38,15 +38,17 @@ async function importCampaign(page: Page, state: GameState) {
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
 }
 async function selectArmy(page: Page, name: string) {
-  await page.getByRole('tab', { name: /Armies/ }).click();
-  await page.getByTestId('army-registry').getByRole('button', { name: new RegExp(name) }).click();
+  await openRegistry(page, 'armies');
+  await selectFromRegistry(page, 'armies', new RegExp(name)); await openSelectedOrders(page);
 }
 async function composition(page: Page) {
+  await openSelectedOrders(page);
   const panel = page.getByTestId('army-composition');
   if (!await panel.evaluate(element => (element as HTMLDetailsElement).open)) await panel.locator('summary').click();
   return panel;
 }
 async function saveReload(page: Page) {
+  await closeManagement(page);
   const settings = page.locator('.campaign-options');
   if (!await settings.evaluate(element => (element as HTMLDetailsElement).open)) await settings.locator('summary').click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
@@ -144,8 +146,10 @@ test('twenty general-led formations enter a saved four-rank battle and resolve t
   await importCampaign(page, state); await selectArmy(page, C.armyName);
   await openRealmAffairs(page);
   await page.getByRole('button', { name: `Declare war on ${state.factions[1]!.name}`, exact: true }).click();
+  await openSelectedOrders(page);
   await page.getByRole('button', { name: `Attack Reedbound battle line (${enemyId})`, exact: true }).click();
   const battle = page.getByTestId('battle-panel');
+  await battle.locator('summary').filter({ hasText: 'Formation details & round account' }).click();
   await expect(battle.getByRole('table', { name: 'Attacking formations', exact: true }).locator('tbody tr')).toHaveCount(20);
   await expect(battle).toContainText('rank 4');
   await saveReload(page);

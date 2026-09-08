@@ -14,17 +14,32 @@ export const FACTIONS = [
   { id: 'faction.rimehorn_clans', name: 'Rimehorn Clans', color: 0xa1bfce, motto: 'Share the shelter. Answer the horn.' },
   { id: 'faction.sable_steppe', name: 'Sable Steppe', color: 0xc1aa72, motto: 'The road moves with the camp.' },
   { id: 'faction.morrow_spore', name: 'Morrow Spore', color: 0xaa8ca7, motto: 'What falls shall feed what follows.' },
+  { id: 'faction.cistern_assembly', name: 'Cistern Assembly', color: 0x6db7b0, motto: 'Read the measure. Share the draw.' },
+  { id: 'faction.unsealed_companies', name: 'Unsealed Companies', color: 0xcb8271, motto: 'The living make their own terms.' },
+  { id: 'faction.lantern_hospices', name: 'Lantern Hospices', color: 0xcebe82, motto: 'Keep a place beside the lamp.' },
+  { id: 'faction.cairnwing_concord', name: 'Cairnwing Concord', color: 0xb59c7d, motto: 'No ledge stands without the lift.' },
+  { id: 'faction.red_sluice', name: 'Red Sluice Directorate', color: 0xb77569, motto: 'Count the harvest. Answer the banks.' },
+  { id: 'faction.velvet_meridian', name: 'Velvet Meridian', color: 0x8986b8, motto: 'A measure is not the final word.' },
+  { id: 'faction.brine_choir', name: 'Brine Choir', color: 0x79a39e, motto: 'Let every shore be heard.' },
+  { id: 'faction.emberwake_convocation', name: 'Emberwake Convocation', color: 0xb7b170, motto: 'Keep the seed. Account for the fire.' },
+  { id: 'faction.underhush_exchange', name: 'Underhush Exchange', color: 0x9c917e, motto: 'Leave room for those who dwell.' },
+  { id: 'faction.vesper_court', name: 'Vesper Court', color: 0xb66b83, motto: 'Hospitality must have an ending.' },
+  { id: 'faction.manytrack_moot', name: 'Manytrack Moot', color: 0x799783, motto: 'Unlike tracks may share a road.' },
+  { id: 'faction.margin_observance', name: 'Margin Observance', color: 0xb3aaa0, motto: 'Keep the gap beside the record.' },
 ] as const;
 
 /** Roster identity is separate from physical map generation and never grows by modulo accident. */
-export const rosterVersionSchema = z.union([z.literal(1), z.literal(2), z.literal(3)]);
+export const legacyRosterVersionSchema = z.union([z.literal(1), z.literal(2), z.literal(3)]);
+export const rosterVersionSchema = z.union([...legacyRosterVersionSchema.options, z.literal(4)]);
 export type RosterVersion = z.infer<typeof rosterVersionSchema>;
-export const ROSTER_VERSION: RosterVersion = 3;
+export const ROSTER_VERSION: RosterVersion = 4;
 const four = ['faction.ashen_compact', 'faction.reedbound_council', 'faction.cinder_march', 'faction.glass_tide'] as const;
 const six = [...four, 'faction.iron_covenant', 'faction.sepulchral_synod'] as const;
+const twelve = [...six, 'faction.mire_courts', 'faction.saltwind_remnant', 'faction.wardhall_remnant', 'faction.rimehorn_clans', 'faction.sable_steppe', 'faction.morrow_spore'] as const;
 export const FACTION_ROSTERS = {
   1: four, 2: six,
-  3: [...six, 'faction.mire_courts', 'faction.saltwind_remnant', 'faction.wardhall_remnant', 'faction.rimehorn_clans', 'faction.sable_steppe', 'faction.morrow_spore'],
+  3: twelve,
+  4: [...twelve, 'faction.cistern_assembly', 'faction.unsealed_companies', 'faction.lantern_hospices', 'faction.cairnwing_concord', 'faction.red_sluice', 'faction.velvet_meridian', 'faction.brine_choir', 'faction.emberwake_convocation', 'faction.underhush_exchange', 'faction.vesper_court', 'faction.manytrack_moot', 'faction.margin_observance'],
 } as const;
 export function factionRoster(version: RosterVersion): (typeof FACTIONS)[number][] {
   const ids = FACTION_ROSTERS[rosterVersionSchema.parse(version)];
@@ -52,6 +67,18 @@ export const FACTION_RECRUITMENT_WEIGHTS: Readonly<Record<string, RecruitmentWei
   'faction.rimehorn_clans': weights(3, 2, 1, 2, 1),
   'faction.sable_steppe': weights(1, 2, 2, 1, 4),
   'faction.morrow_spore': weights(2, 2, 4, 1, 1),
+  'faction.cistern_assembly': weights(3, 4, 1, 1, 1),
+  'faction.unsealed_companies': weights(2, 3, 2, 2, 3),
+  'faction.lantern_hospices': weights(4, 2, 1, 2, 1),
+  'faction.cairnwing_concord': weights(1, 4, 4, 1, 1),
+  'faction.red_sluice': weights(2, 4, 1, 4, 1),
+  'faction.velvet_meridian': weights(2, 2, 3, 1, 2),
+  'faction.brine_choir': weights(3, 3, 1, 1, 2),
+  'faction.emberwake_convocation': weights(3, 1, 2, 3, 1),
+  'faction.underhush_exchange': weights(4, 3, 1, 2, 1),
+  'faction.vesper_court': weights(1, 2, 1, 4, 3),
+  'faction.manytrack_moot': weights(2, 3, 4, 1, 2),
+  'faction.margin_observance': weights(2, 1, 4, 2, 1),
 };
 
 export interface FactionProfile { description: string; recruitmentRationale: string }
@@ -69,6 +96,18 @@ export const FACTION_PROFILES: Readonly<Record<string, FactionProfile>> = {
   'faction.rimehorn_clans': { description: 'High-cold shelter clans balance common winter stores against the autonomy of distant households and their seasonal gatherings.', recruitmentRationale: 'Prefers oath guards supported by spears and heavy infantry, keeping a dependable core without exclusive troops.' },
   'faction.sable_steppe': { description: 'Mobile camp assemblies negotiate grazing claims and road access without agreeing that a fixed town should speak for every camp.', recruitmentRationale: 'Prefers cavalry with wayfinder and spear support. Mounted companies retain their real recruitment, upkeep and armor tradeoffs.' },
   'faction.morrow_spore': { description: 'Underwood households share living records and managed growth while disputing how much of the common forest each settlement may cut.', recruitmentRationale: 'Prefers wayfinders with guard and spear support for dispersed woodland holdings. Forest affinity does not remove terrain costs.' },
+  'faction.cistern_assembly': { description: 'Well keepers, gardeners and caravan households pool dry-country maintenance while disputing whether an inherited draw outweighs a newcomer’s work.', recruitmentRationale: 'Prefers spearmen and guards to protect carefully improved dryland stops. Water measures grant no free irrigation or supplies.' },
+  'faction.unsealed_companies': { description: 'Veterans and road-town households reject ancestral oath-debt while arguing over who may commit the coin earned by living workers.', recruitmentRationale: 'Prefers spears and mounted escorts within a varied paid force. No mercenary income, portable town or extra loot is granted.' },
+  'faction.lantern_hospices': { description: 'Care-house towns protect clean stores and refuge while attendants contest governors who turn emergency quarantine into permanent exclusion.', recruitmentRationale: 'Prefers guards with spear and heavy support to escort supplies and protect refit bases. Care grants no free healing or disease immunity.' },
+  'faction.cairnwing_concord': { description: 'Feathered cairnfolk and human lift-port households share escarpment approaches while upper councils and lower workers dispute who sustains them.', recruitmentRationale: 'Prefers spear watches and wayfinders for difficult approaches. Folded feathers confer no flight; every formation uses ordinary ground movement.' },
+  'faction.red_sluice': { description: 'Canal labor boards maintain wetland works while outlying households challenge emergency schedules that protect the center at their expense.', recruitmentRationale: 'Prefers spear and heavy-infantry lines to protect costly fixed works. Paid cultivation cannot redirect rivers or flood enemies.' },
+  'faction.velvet_meridian': { description: 'Weavers and observatory schools trade measured knowledge while public observers challenge patrons who buy exclusive interpretations.', recruitmentRationale: 'Prefers wayfinders with balanced escorts for guarded learning and exchange. No prediction, espionage or hidden-map knowledge is granted.' },
+  'faction.brine_choir': { description: 'Brinefolk pool settlements and human shore households answer proposals together while disputing whether permanent quays enclose shared rights.', recruitmentRationale: 'Prefers guards and spears to secure shore works and crossings. All peoples require paid ships and ordinary embarkation; no amphibious access.' },
+  'faction.emberwake_convocation': { description: 'Seed keepers and kiln congregations rebuild ash-country livelihoods while resident gardeners contest teachers who promise renewal through loss.', recruitmentRationale: 'Prefers guards and heavy infantry with survey support for working parties. Ash-country knowledge grants no flame attacks or scorched-earth bonus.' },
+  'faction.underhush_exchange': { description: 'Burrowfolk gallery wards and surface traders bargain over smoke, vibration and repair duties without agreeing that a market lease may silence its residents.', recruitmentRationale: 'Prefers compact guards and spear watches for defended exchange towns. Entrances grant no tunnel shortcuts, tremor sight or second map.' },
+  'faction.vesper_court': { description: 'Vampiric patrons and living valley households maintain shuttered woodland estates while tenants demand the right to end inherited blood provisions.', recruitmentRationale: 'Prefers costly heavy retainers and mounted escorts. Living and vampiric officers share paid upkeep and refit; no life-steal, resurrection or night bonus.' },
+  'faction.manytrack_moot': { description: 'Speaking horned and furred lineages join human households at a forest-steppe boundary where new fences divide routes that unlike bodies still share.', recruitmentRationale: 'Prefers wayfinders and spear escorts for dispersed holdings. Different bodies receive no hidden movement, beast mounts or free reconnaissance.' },
+  'faction.margin_observance': { description: 'Archive custodians and their supply households preserve disputed records while arguing over the cost and danger of opening what earlier keepers sealed.', recruitmentRationale: 'Prefers wayfinders backed by ordinary defenders for costly frontier study. Preserved mysteries grant no spells or victory shortcut.' },
 };
 
 export function validateFactionContent(units: readonly { id: string; canFound: boolean; movementDomain?: 'land' | 'naval' }[],

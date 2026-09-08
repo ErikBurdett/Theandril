@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.margin_observance",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.margin_observance"
+  ],
+  "prompt": "Use case: stylized-concept. ONE tiny simple original pixel-art heraldic emblem for Margin Observance in Theandril. The complete design consists ONLY of one broad angular broken bracket with a deliberately open upper-right corner, plus one small separate offset horizontal cinnabar registration bar near that opening. No scroll, document, quill, seal, shield, book, ribbon, lettering, jewelry, figures, buildings or extra frame. Bold flat coarse stepped pixel clusters with just parchment-grey, ink-black and dull cinnabar; weathered lead edge only one restrained tone. Centered front-facing mark, maximum60pixels at native64x64, pivot32,32. Keep large deliberate negative space open; this is an abstract bracket emblem, not a pictured archive. Entire mark in central65percent, all corners complete with generous empty padding. TRUE transparent zero-alpha PNG background, never checkerboard or a colored background. No glow, cast shadow, scenery, animation, variants or sheet.",
+  "frames": [
+    {
+      "id": "ui.crest.margin_observance/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/ui.crest.margin_observance/v2/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7e811b2108943abeb6a86e567b4c0a2023a1bfa40a44d9cd221c8c7e394be7d9",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/ui.crest.margin_observance-v2.png",
+      "assets/art/source/faction-expansion/reedstars/ui.crest.margin_observance-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T16:46:01.000Z",
+  "referenceHashes": [
+    "78e88e3a7c4dba43ecd21ffd42f81763a8d77dd2dfe0e9d92b4bb4db7e744cb5",
+    "554986fd892833566ed140e4fa4dac8515c4f9c083ad6ca03e4c5f32a82aedcc"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "92f0b4aee8968b4a1553d8a2ec72ea7d614512caa86b08424c6e8585c1fc41aa",
+      "inputHash": "78e88e3a7c4dba43ecd21ffd42f81763a8d77dd2dfe0e9d92b4bb4db7e744cb5",
+      "outputHash": "e03e060b53304bcc09730eb0b2ea92ecb9198197a800451806546aed6c229bab"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.unsealed_companies",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native96. One joined humble village grouping with three low dwellings and one small communal work court, one small gate and useful stores integrated into the same architectural footprint. Clear compact settlement silhouette. No landscape, ground tile, city tower, separate distant structures or huge flag.",
+  "frames": [
+    {
+      "id": "settlement.village.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.village.unsealed_companies/bcd257aee8d82c515cf5c3e74b889fe0218b09dd5932e57a23f43e24b345ac5d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f99dd4bbabc922eef7279852860abc3f9a0a248fd45ee177230765eb57811033",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/settlement.village.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/wellroads/settlement.village.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:19:50.647Z",
+  "referenceHashes": [
+    "38f470c85f47da11a15c07c2b682a6d133c1a935118c069a0a82a25db98d6002",
+    "00d46003990de4bd6470d274e8d55b69b740ada1e06c92e0ff83cd6b80b05f22"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "0d9a7c9186dede0d64a5fcb08e8657fe8f47aea2789273e6b7d619e614906ed1",
+      "inputHash": "38f470c85f47da11a15c07c2b682a6d133c1a935118c069a0a82a25db98d6002",
+      "outputHash": "50b7f517d1f675b186c3cabb057fcf4d1699be8c4539fbc5cd1f3206b24784b8"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "50b7f517d1f675b186c3cabb057fcf4d1699be8c4539fbc5cd1f3206b24784b8",
+      "outputHash": "70600a1fe28c16f7d5e04e00053cd8fc7a8b2237c6016dedc0f1eb57ddd58d84"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "70600a1fe28c16f7d5e04e00053cd8fc7a8b2237c6016dedc0f1eb57ddd58d84",
+      "outputHash": "c275eef7214f3ac6f25b4ba22104db4e94fb50e03060a6756f1d9952f5cec5e7"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "6c85bc13bc3362294fc115c2c8a9b286c8a57054f98851bfe80bc0369e825492",
+      "outputHash": "e0e5cd47e305fa1d336129aa247f4cbd4eeacaa1cee3112e7b1bcb3aa358d520"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "735cc06477c298a982ba9389a9f5f70fed8562a5faaa811c67957735fc28fee7",
+      "outputHash": "c802db21a55ce7d6f8c8979d6554e5263b95db900e39d6164315cebf460dd3c5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "d4f23b7d4d23f135b337749f7e1ccb68555004a902bca4600e4127a5834bead2",
+      "outputHash": "dadf2676737a5201124f4391d3ce0765f38ae78f7d21c3e083b9dbfe8e3bec9f"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.village.unsealed_companies.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:07:13.814Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Three timber repair halls around a store court, wagons/canvas and palisade base remain contained. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate bcd257aee8d82c515cf5c3e74b889fe0218b09dd5932e57a23f43e24b345ac5d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/4d2e3e5e630ff229c726f5fe36fde588aa8c18f389fd82ee614c32a985bea12a.png"
+    ],
+    "inputHash": "6a33efb5a2889ad3080818ac84ef1b524610ed6e29290ab81ccb2343fffeb52b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

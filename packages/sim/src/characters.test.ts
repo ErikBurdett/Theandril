@@ -390,6 +390,7 @@ describe('named campaign characters', () => {
     corrupt(data => { data.characters[0]!.dead = true; });
     corrupt(data => { data.characters[0]!.skillId = 'skill.siegecraft'; });
     state.world.generatorVersion = 2; // This authored fixture isolates the character boundary; real legacy origins are separately captured.
+    state.rosterVersion = 1;
     expect(() => serializeGameForVersion(state, 6)).toThrow(/characters/); expect(() => applyCommandForVersion(state, { type: 'endTurn', factionId: player }, 6)).toThrow(/characters/);
     issue(state, { type: 'declareWar', factionId: player, targetFactionId: rival }); issue(state, { type: 'attack', factionId: player, armyId: 'army.2', targetArmyId: 'army.4' });
     corrupt(data => { data.battle!.characterSnapshots[0]!.leadership.attack++; });
@@ -397,6 +398,6 @@ describe('named campaign characters', () => {
     corrupt(data => { data.battle!.usedAbilities = [{ characterId: marshal.id, abilityId: 'ability.teleport' }]; });
     issue(state, { type: 'useCommanderAbility', factionId: player, characterId: marshal.id, abilityId: 'ability.rally' });
     corrupt(data => { data.battle!.usedAbilities.push({ ...data.battle!.usedAbilities[0]! }); });
-    expect(CHARACTER_DEFINITIONS).toHaveLength(3);
+    expect(CHARACTER_DEFINITIONS).toHaveLength(4);
   });
 });

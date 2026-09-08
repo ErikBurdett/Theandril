@@ -1,4 +1,4 @@
-import { openProduction } from './ui-navigation';
+import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders, openCampaignJournal, openProduction } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 
@@ -11,6 +11,7 @@ async function begin(page: Page, size = 'tiny'): Promise<void> {
   await expect(page.locator('canvas')).toBeVisible();
 }
 async function endTurn(page: Page, expectedTurn: number): Promise<void> {
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toContainText(String(expectedTurn));
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
@@ -20,23 +21,26 @@ test('settle, grow, build, recruit, explore and resume the same campaign', async
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await begin(page);
-  await page.getByTestId('army-registry').getByRole('button', { name: /Hearth caravan/ }).first().click();
+  await selectFromRegistry(page, 'armies', /Hearth caravan/); await openSelectedOrders(page);
   await page.getByLabel('Settlement name').fill('Emberwatch');
   await page.getByRole('button', { name: 'Found settlement', exact: true }).click();
-  await page.getByRole('tab', { name: /Settlements/ }).click();
+  await openRegistry(page, 'settlements');
   await expect(page.getByTestId('settlement-registry')).toContainText('Emberwatch');
-  await page.getByTestId('settlement-registry').getByRole('button', { name: /Emberwatch/ }).click();
+  await selectFromRegistry(page, 'settlements', /Emberwatch/); await openSelectedOrders(page);
+  await openProduction(page, 'building');
   await page.getByRole('button', { name: /Build Root cellar/ }).click();
   for (let turn = 2; turn <= 4; turn++) await endTurn(page, turn);
+  await openCampaignJournal(page);
   await expect(page.getByTestId('chronicle')).toContainText('completed Root cellar');
   await openProduction(page, 'land');
   await page.getByRole('button', { name: /Recruit Wayfinder/ }).click();
   for (let turn = 5; turn <= 7; turn++) await endTurn(page, turn);
-  await page.getByRole('tab', { name: /Armies/ }).click();
+  await openRegistry(page, 'armies');
   await expect(page.getByTestId('army-registry').getByRole('button', { name: /Wayfinder/ })).toHaveCount(2);
-  await page.getByTestId('army-registry').getByRole('button', { name: /Wayfinder/ }).first().click();
+  await selectFromRegistry(page, 'armies', /Wayfinder/); await openSelectedOrders(page);
   await page.getByRole('button', { name: /Move to cell/ }).filter({ hasText: /Plains|Forest|Hills/ }).first().click();
   await expect(page.getByTestId('feedback')).toContainText('explored hex');
+  await closeManagement(page);
   await page.getByText('Campaign & settings', { exact: true }).click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
   await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
@@ -54,6 +58,7 @@ test('settle, grow, build, recruit, explore and resume the same campaign', async
 test('compressed export/import and corrupt-save handling use the real controls', async ({ page }) => {
   await begin(page);
   const hash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
+  await closeManagement(page);
   await page.getByText('Campaign & settings', { exact: true }).click();
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Export campaign', exact: true }).click();

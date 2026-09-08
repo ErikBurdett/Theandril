@@ -1,4 +1,4 @@
-import { openRealmAffairs } from './ui-navigation';
+import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders, openRealmAffairs, openCampaignJournal } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { UNITS } from '@theandril/content';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
@@ -11,7 +11,7 @@ function order(state: GameState, command: GameCommand): void {
 }
 /** Authored local scenario, validated through the real save loader. No browser mutation hook. */
 function frontier(options: { enemy?: number; war?: boolean; stack?: boolean } = {}): GameState {
-  let state = createGame({ seed: 20260905, size: 'tiny', pace: 'short', factionCount: 2 });
+  let state = createGame({ generatorVersion: 4, seed: 20260905, size: 'tiny', pace: 'short', factionCount: 2 });
   state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60); state.world.waterDepth.fill(0);
   state.world.terrain[ORIGIN - 1] = 0; state.world.biome[ORIGIN - 1] = 0; state.world.waterDepth[ORIGIN - 1] = 1;
   // A visible climate sample preserves separate, passable physical terrain.
@@ -34,10 +34,11 @@ async function importFrontier(page: Page, state = frontier()): Promise<void> {
   await page.locator('input[type=file]').setInputFiles({ name: 'old-road.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
   await expect(page.locator('canvas')).toBeVisible();
-  await page.getByTestId('army-registry').getByRole('button', { name: /Roadward scouts/ }).click();
+  await selectFromRegistry(page, 'armies', /Roadward scouts/);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getMovement()?.reachable.length ?? 0)).toBeGreaterThan(1);
 }
 async function point(page: Page, cell: number): Promise<{ x: number; y: number }> {
+  await closeManagement(page);
   await page.getByTestId('map-container').scrollIntoViewIfNeeded();
   const value = await page.evaluate(cell => window.__THEANDRIL__?.getCellScreenPoint(cell), cell);
   if (!value?.inViewport) throw new Error(`Hex ${cell} is outside the actual canvas viewport`);
@@ -48,11 +49,22 @@ async function clickCell(page: Page, cell: number, touch = false): Promise<void>
   if (touch) await page.touchscreen.tap(x, y); else await page.mouse.click(x, y);
 }
 async function review(page: Page, cell: number): Promise<void> {
+  await openSelectedOrders(page);
   await page.getByLabel('Destination hex', { exact: true }).fill(String(cell));
   await page.getByRole('button', { name: 'Review route', exact: true }).click();
   await expect(page.getByTestId('route-preview')).toContainText(`hex ${cell}`);
 }
 async function armyCell(page: Page): Promise<number | undefined> { return page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ownArmies.find(army => army.id === 'army.2')?.cell); }
+async function moveOnMap(page: Page): Promise<void> {
+  const selection = await page.evaluate(() => window.__THEANDRIL__!.getSelection());
+  const hash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
+  const popup = page.getByTestId('map-actions');
+  await expect(popup).toBeVisible();
+  await popup.getByRole('button', { name: 'Move on map', exact: true }).click();
+  await expect(popup).toHaveCount(0);
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getSelection())).toEqual(selection);
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(hash);
+}
 
 test('canvas selects and cycles friendly units, previews bounded multi-step movement, and distinguishes dragging from orders', async ({ page }, testInfo) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
@@ -63,6 +75,9 @@ test('canvas selects and cycles friendly units, previews bounded multi-step move
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSelection().armyId)).toBe('army.1');
   await clickCell(page, ORIGIN);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSelection().armyId)).toBe('army.2');
+  // Explicitly leave local management before hovering a map destination that
+  // would otherwise be underneath the floating surface. This issues no order.
+  await moveOnMap(page);
   const { x, y } = await point(page, ORIGIN + 2);
   await page.mouse.move(x, y);
   await expect(page.getByTestId('map-route-preview')).toContainText('2 movement · 2 steps');
@@ -88,9 +103,11 @@ test('map targeting refuses implicit war and impassable land, then executes a mu
   await importFrontier(page, frontier({ enemy: ORIGIN + 3 }));
   const peacefulHash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
   await clickCell(page, ORIGIN - 1);
+  await openSelectedOrders(page);
   await expect(page.getByTestId('route-preview')).toContainText('Water and mountains are impassable');
   await expect(page.getByRole('button', { name: 'Queue route', exact: true })).toBeDisabled();
   await clickCell(page, ORIGIN + 3);
+  await openSelectedOrders(page);
   await expect(page.getByTestId('route-preview')).toContainText('Declare war before attacking');
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(peacefulHash);
   await openRealmAffairs(page);
@@ -105,6 +122,7 @@ test('map targeting refuses implicit war and impassable land, then executes a mu
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(battleHash);
   await expect(page.getByRole('button', { name: 'Review route', exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
+  await openCampaignJournal(page);
   await expect(page.getByTestId('battle-report')).toBeVisible();
 });
 
@@ -116,6 +134,7 @@ test('queued waypoints consume current movement, survive save/load, continue aft
   await expect(page.getByRole('button', { name: 'Move now', exact: true })).toBeDisabled();
   await page.getByRole('button', { name: 'Queue route', exact: true }).click();
   await expect.poll(() => armyCell(page)).toBe(ORIGIN + 5);
+  await openSelectedOrders(page);
   await expect(page.getByTestId('queued-route')).toContainText('3 known steps remaining');
   await expect(page.getByRole('button', { name: 'Resume route', exact: true })).toBeDisabled();
   await page.getByLabel('Add waypoint mode', { exact: true }).check();
@@ -123,20 +142,25 @@ test('queued waypoints consume current movement, survive save/load, continue aft
   await page.getByRole('button', { name: 'Add waypoint', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.routes[0]?.waypoints)).toEqual([ORIGIN + 8, ORIGIN + 12]);
   await page.getByLabel('Add waypoint mode', { exact: true }).uncheck();
+  await closeManagement(page);
   await page.getByText('Campaign & settings', { exact: true }).click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
   await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
   const savedHash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
   await page.reload(); await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+  await openSelectedOrders(page);
   await expect(page.getByTestId('queued-route')).toBeVisible();
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(savedHash);
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
   expect(await armyCell(page)).toBe(ORIGIN + 10);
+  await openSelectedOrders(page);
   await expect(page.getByTestId('queued-route')).toContainText('2 known steps remaining');
   await page.screenshot({ path: testInfo.outputPath('saved-waypoints.png'), fullPage: true });
   await page.getByRole('button', { name: 'Cancel route', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.routes.length)).toBe(0);
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 3');
   expect(await armyCell(page)).toBe(ORIGIN + 10);
@@ -154,12 +178,15 @@ test('map settlement targeting requires siege instead of bypassing defenses and 
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.wars.length)).toBe(1);
   const before = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
   await clickCell(page, ORIGIN + 3);
+  await openSelectedOrders(page);
   await expect(page.getByTestId('route-preview')).toContainText('Besiege this settlement and assault its defenses');
   await expect(page.getByRole('button', { name: 'Move now', exact: true })).toBeDisabled();
   await expect(page.getByRole('button', { name: 'Queue route', exact: true })).toBeDisabled();
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(before);
+  await closeManagement(page);
   await page.keyboard.press('Escape');
   await clickCell(page, ORIGIN - 46);
+  await openSelectedOrders(page);
   await expect(page.locator('.hex-inspector')).toContainText('Desert · Plains');
 });
 
@@ -170,9 +197,14 @@ test('a saved route interrupted by a real foreign move retains its reason and sa
   order(state, { type: 'endTurn', factionId: state.turnOwnerId });
   expect(state.routes['army.2']?.status).toBe('paused');
   await importFrontier(page, state);
+  await openSelectedOrders(page);
   await expect(page.getByTestId('queued-route')).toContainText('Another faction now blocks the next step');
+  await openRegistry(page, 'armies');
   await expect(page.getByTestId('army-registry')).toContainText('Route interrupted');
+  await openSelectedOrders(page);
+  await page.getByRole('button', { name: 'Resume route', exact: true }).scrollIntoViewIfNeeded();
   await expect(page.getByRole('button', { name: 'Resume route', exact: true })).toBeInViewport();
+  await page.getByRole('button', { name: 'Cancel route', exact: true }).scrollIntoViewIfNeeded();
   await expect(page.getByRole('button', { name: 'Cancel route', exact: true })).toBeInViewport();
   await page.screenshot({ path: testInfo.outputPath('interrupted-route.png'), fullPage: true });
   await page.getByRole('button', { name: 'Resume route', exact: true }).click();
@@ -189,12 +221,15 @@ test('narrow touch map moves on taps and keyboard route controls remain usable w
     await page.keyboard.press('Escape');
     await clickCell(page, ORIGIN, true);
     await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSelection().armyId)).toBe('army.2');
+    await moveOnMap(page);
     await clickCell(page, ORIGIN + 1, true);
     await expect.poll(() => armyCell(page)).toBe(ORIGIN + 1);
+    await openSelectedOrders(page);
     await page.getByLabel('Destination hex', { exact: true }).fill(String(ORIGIN + 8));
     await page.getByLabel('Destination hex', { exact: true }).press('Enter');
     await expect(page.getByRole('group', { name: `Reviewed destination ${ORIGIN + 8}`, exact: true })).toBeFocused();
     await page.getByRole('button', { name: 'Queue route', exact: true }).click();
+    await openSelectedOrders(page);
     await expect(page.getByTestId('queued-route')).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.screenshot({ path: testInfo.outputPath('touch-route.png'), fullPage: true });

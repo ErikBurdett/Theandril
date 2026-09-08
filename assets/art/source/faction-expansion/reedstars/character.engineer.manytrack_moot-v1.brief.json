@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.manytrack_moot",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. This works engineer is HUMAN with ordinary human face and dexterous human hands; no animal anatomy. Native64. One full-body adult works engineer with broad work apron, compact hammer held low, rolled construction plans under other arm and useful tool belt. Readable face and both boots; unarmed craft worker, no spell effect.",
+  "frames": [
+    {
+      "id": "character.engineer.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.engineer.manytrack_moot/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d731a71791c5c7a65a3d4471bcc3791d491e8859c1e89a75a1f73cdff53866f4",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/character.engineer.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/character.engineer.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:06:27.354Z",
+  "referenceHashes": [
+    "b3425cfede03d26c2e49c3369c9c3972a49c5960a29b8b712aeab997828d71bd",
+    "91f5dc3f9d84ab1df3948c5cec7e184578b97395c1ae407e50bb5f94fa37d995"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "58409abe5cad4b39e279a6015f1aeb87aebe5f94101fea280bfdbde8c1a4f145",
+      "inputHash": "b3425cfede03d26c2e49c3369c9c3972a49c5960a29b8b712aeab997828d71bd",
+      "outputHash": "1eed7b09077df16246623ac2c0ab822cb48f54cfb277963b560ff2955c1a8008"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

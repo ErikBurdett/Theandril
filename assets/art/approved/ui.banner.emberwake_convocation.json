@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.emberwake_convocation",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.banner for Theandril, Emberwake Convocation.\nSubject: ONE complete faction cloth banner on one short practical pole, hanging mostly straight with one gentle fold, original faction emblem on a broad readable cloth plane. Full pole and small finial inside the image; no person or base stand. Maximum height54 in a native64 square; broad compact cloth, no long streamers.\nCulture-specific identity: A half-blackened seed wheel enclosing a single pale seed, clear coarse silhouette, no flame. Cloth uses Ash-white ceramic face screens and small ceramic plates, smoked-orange cloth, muted sulfur-green straps, charcoal padded kiln aprons and short heat-resistant wraps. Seed jars and split-vent motifs, no open flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "ui.banner.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/ui.banner.emberwake_convocation/41bcfef543a3ed7128b116e3e8a8bf422c4f5c472f82d28d42ad9a357f44c425/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "54f7b36d23e705650cb06f02ecc136b43b27619892c1c490cb94d234ab841671",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.banner.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.banner.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:57:39Z",
+  "referenceHashes": [
+    "c9e11136f01848b12e66170aa9dbf67cbdc1a2b7587e3f7ddf1e711db521a983",
+    "b75c2afd5d11eeffa8a7befdbb26e31198565e08c4fe9bcd3fbac09c0db9c1b4"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "e803f6a232d0510864dc4e465257629ccb79f1cab71585a82326d16b718cba9a",
+      "inputHash": "c9e11136f01848b12e66170aa9dbf67cbdc1a2b7587e3f7ddf1e711db521a983",
+      "outputHash": "5d02316cf315634d9841268e932e0e7eccb73b01f23568c6fedbb9d31feda858"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "5d02316cf315634d9841268e932e0e7eccb73b01f23568c6fedbb9d31feda858",
+      "outputHash": "c62b4c3eb99d067e948c4b5d01a8bb55e3576b5f509ae11a195d0e4a37a96095"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c62b4c3eb99d067e948c4b5d01a8bb55e3576b5f509ae11a195d0e4a37a96095",
+      "outputHash": "164ba3262feb001834bf48d0a6dcd1b3552faa51a57ffbd523516cff6b90eafe"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "e9e52822cc6a944ae11581c9085e1018d2d22e8ba0f726dcdd22b20e3782a15f",
+      "outputHash": "3a42c618734e3df2258b9292042555ac86eab62f75141f74afaad981ff99c7e8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "2101065a9cdd038799707487ee25c6d2dcd2cfc5501d966945da74c2a6fbe262",
+      "outputHash": "9f99f377268d00bfe4ffc4e0c6fd9c894b23e1e31d8174e29a8170d2367b0823"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "f8ca8c8ef8846bc56ff532f5c7933da11830b1058362be931521587a39483948",
+      "outputHash": "dae824c702cf598ad097bcebf299e9eebee83c3b37b9d7765b9970076e17d6c7"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.banner.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:31.618Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Seed-wheel banner on cream/orange cloth with complete support; small ceramic ornaments subordinate. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 41bcfef543a3ed7128b116e3e8a8bf422c4f5c472f82d28d42ad9a357f44c425; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/03acb2f4d4a06901c4b10811987503f1ea6d4e673680001dad37777e1126b78e.png"
+    ],
+    "inputHash": "a06dafe33b2322621247077d8ab6a94176da55dcc19d8e1532714eead1e830ad"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

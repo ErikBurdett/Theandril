@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.unsealed_companies",
+  "type": "settlement",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native128. One joined substantial city complex: broad central civic hall, eight dense supporting roof volumes, organized courtyards and reinforced perimeter with one unmistakable gate. Monumental through horizontal mass and organization, not an enormous spire. Entire roofs/walls inside central65% with extra upper padding. No surrounding terrain or base tile.",
+  "frames": [
+    {
+      "id": "settlement.city.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/source/native/settlement.city.unsealed_companies/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0edf1accf5c265fbd582eea7df3a65d73a72dab854292422aaf788deca4e687c",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/settlement.city.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/wellroads/settlement.city.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:23:36.273Z",
+  "referenceHashes": [
+    "5ad1c1e4c11fb762c4c2e295bdaf872ef7259cf18addde74c5b295f99dea95ea",
+    "3d721533c5720b9236660b2f892c23e8345e3c306c0eeb515b631f69793befb2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "df9e20991980a84465b2847eaa03f751d317376f85e5ad7f1568857c80b9f741",
+      "inputHash": "5ad1c1e4c11fb762c4c2e295bdaf872ef7259cf18addde74c5b295f99dea95ea",
+      "outputHash": "65dcf138ce6f5cddd4fbd1221c39604253d6481ff8d9416a200853aa78f4a3bf"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

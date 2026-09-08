@@ -15,23 +15,37 @@ async function begin(page: Page) {
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
 }
 
-async function directlyBelowNavigation(page: Page, campaign: boolean) {
+async function topbarMenu(page: Page, campaign: boolean) {
   await expect(menu(page)).toHaveCount(1);
+  await summary(page).scrollIntoViewIfNeeded();
   expect(await menu(page).evaluate((element, inCampaign) => {
     const previous = element.previousElementSibling;
-    const next = element.nextElementSibling;
+    const topbar = element.parentElement;
+    const next = topbar?.nextElementSibling;
     return previous?.matches(inCampaign ? 'nav.campaign-tools' : 'header.masthead') &&
+      topbar?.matches('.campaign-topbar') &&
       next?.matches(inCampaign ? 'main.campaign' : 'main.landing');
   }, campaign)).toBe(true);
-  await expect(menu(page)).toHaveCSS('position', 'static');
+  await expect(menu(page)).toHaveCSS('position', 'absolute');
   const [above, disclosure, below] = await Promise.all([
-    page.locator(campaign ? '.campaign-tools' : '.masthead').boundingBox(),
-    menu(page).boundingBox(),
+    page.locator('.campaign-topbar').boundingBox(),
+    summary(page).boundingBox(),
     page.locator(campaign ? 'main.campaign' : 'main.landing').boundingBox(),
   ]);
   expect(above).not.toBeNull(); expect(disclosure).not.toBeNull(); expect(below).not.toBeNull();
-  expect(disclosure!.y).toBeGreaterThanOrEqual(above!.y + above!.height - 1);
-  expect(below!.y).toBeGreaterThanOrEqual(disclosure!.y + disclosure!.height - 1);
+  expect(disclosure!.height).toBeGreaterThanOrEqual(44);
+  expect(disclosure!.x).toBeGreaterThanOrEqual(above!.x);
+  expect(disclosure!.x + disclosure!.width).toBeLessThanOrEqual(above!.x + above!.width);
+  expect(disclosure!.y).toBeGreaterThanOrEqual(above!.y - 1);
+  expect(disclosure!.y + disclosure!.height).toBeLessThanOrEqual(above!.y + above!.height + 1);
+  expect(below!.y).toBeGreaterThanOrEqual(above!.y + above!.height - 1);
+  if (await menu(page).getAttribute('open') !== null) {
+    const content = (await menu(page).locator('.options-content').boundingBox())!;
+    expect(content.x).toBeGreaterThanOrEqual(0);
+    expect(content.x + content.width).toBeLessThanOrEqual(page.viewportSize()!.width);
+    expect(content.y).toBeGreaterThanOrEqual(disclosure!.y + disclosure!.height - 1);
+    expect(content.y + content.height).toBeLessThanOrEqual(page.viewportSize()!.height);
+  }
 }
 
 async function reachable(control: Locator) {
@@ -45,12 +59,13 @@ async function reachable(control: Locator) {
 }
 
 async function settledMenuGeometry(page: Page) {
-  // Observe actual post-scroll layout across painted frames. Do not change styles,
-  // hide the sticky footer, or force a repaint to conceal a compositing defect.
+  // Observe actual overlay/internal-scroll geometry across painted frames. Do
+  // not change styles or force a repaint to conceal a compositing defect.
   return page.evaluate(async () => {
     await document.fonts.ready;
     const disclosure = document.querySelector<HTMLElement>('[data-testid="campaign-menu"]')!;
-    const controls = [...disclosure.querySelector('.options-content')!.querySelectorAll<HTMLElement>('button,input,select')];
+    const content = disclosure.querySelector<HTMLElement>('.options-content')!;
+    const controls = [...content.querySelectorAll<HTMLElement>('button,input,select')];
     const map = document.querySelector<HTMLElement>('.map-section')!;
     const bounds = (element: Element) => {
       const { x, y, width, height, bottom } = element.getBoundingClientRect();
@@ -59,20 +74,24 @@ async function settledMenuGeometry(page: Page) {
     let previous = '', stable = 0;
     for (let frame = 0; frame < 30; frame++) {
       await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
-      const current = JSON.stringify([scrollX, scrollY, bounds(disclosure), bounds(map), controls.map(bounds)]);
+      const current = JSON.stringify([scrollX, scrollY, content.scrollTop, bounds(content), bounds(disclosure), bounds(map), controls.map(bounds)]);
       stable = current === previous ? stable + 1 : 0;
       previous = current;
       if (stable < 3) continue;
-      const menuBounds = bounds(disclosure);
+      const menuBounds = bounds(content);
       return {
-        scrollY, frames: frame + 1, menu: menuBounds, map: bounds(map),
+        scrollY, frames: frame + 1, menu: menuBounds, summary: bounds(disclosure), map: bounds(map),
+        contentScroll: { top: content.scrollTop, height: content.scrollHeight, clientHeight: content.clientHeight },
         viewport: { width: innerWidth, height: innerHeight, devicePixelRatio,
           visual: visualViewport ? { offsetLeft: visualViewport.offsetLeft, offsetTop: visualViewport.offsetTop,
             pageLeft: visualViewport.pageLeft, pageTop: visualViewport.pageTop,
             width: visualViewport.width, height: visualViewport.height, scale: visualViewport.scale } : null },
         controls: controls.map(element => ({
-          name: element.closest('label')?.firstChild?.textContent ?? element.textContent,
-          ...bounds(element), insideMenu: element.getBoundingClientRect().bottom <= menuBounds.bottom,
+          name: element.matches('input[type="checkbox"]') ? element.closest('label')?.textContent?.trim()
+            : element.closest('label')?.firstChild?.textContent ?? element.textContent,
+          ...bounds(element), insideMenu: element.getBoundingClientRect().x >= menuBounds.x &&
+            element.getBoundingClientRect().right <= menuBounds.x + menuBounds.width &&
+            element.getBoundingClientRect().bottom <= menuBounds.y + content.clientTop + content.scrollHeight - content.scrollTop,
         })),
         // Probe the band containing the alleged duplicate shortcut controls.
         // Map labels may legitimately intercept it; menu controls may not.
@@ -89,16 +108,21 @@ async function settledMenuGeometry(page: Page) {
 
 test('top campaign disclosure works by keyboard and preserves real save, load, autosave and import controls', async ({ page }, testInfo) => {
   await page.goto('/');
-  await directlyBelowNavigation(page, false);
+  await topbarMenu(page, false);
   await summary(page).focus(); await page.keyboard.press('Enter');
   await expect(menu(page)).toHaveAttribute('open', '');
+  await page.keyboard.press('Tab');
+  const mapMenus = menu(page).getByRole('checkbox', { name: 'Map click menus', exact: true });
+  await expect(mapMenus).toHaveCount(1);
+  await expect(mapMenus).toBeChecked();
+  await expect(mapMenus).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(menu(page).getByRole('combobox', { name: 'Text scale', exact: true })).toBeFocused();
   await summary(page).focus(); await page.keyboard.press('Space');
   await expect(menu(page)).not.toHaveAttribute('open');
 
   await begin(page);
-  await directlyBelowNavigation(page, true);
+  await topbarMenu(page, true);
   await summary(page).focus(); await page.keyboard.press('Enter');
   await page.keyboard.press('Tab');
   await expect(menu(page).getByRole('button', { name: 'Save campaign', exact: true })).toBeFocused();
@@ -112,11 +136,13 @@ test('top campaign disclosure works by keyboard and preserves real save, load, a
   const path = await download.path();
   if (!path) throw new Error('The campaign export did not produce a file.');
   const exported = await readFile(path);
+  await summary(page).click();
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
   const auto = await currentHash(page);
   expect(auto).not.toBe(saved);
+  await summary(page).click();
   await menu(page).getByRole('button', { name: 'Load campaign', exact: true }).click();
   await expect.poll(() => currentHash(page)).toBe(saved);
   await menu(page).getByRole('button', { name: 'Restore autosave', exact: true }).click();
@@ -126,12 +152,12 @@ test('top campaign disclosure works by keyboard and preserves real save, load, a
   await (await chooserReady).setFiles({ name: 'menu-export.theandril', mimeType: 'application/gzip', buffer: exported });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
   expect(await currentHash(page)).toBe(saved);
-  await directlyBelowNavigation(page, true);
+  await topbarMenu(page, true);
   await summary(page).scrollIntoViewIfNeeded();
   await page.screenshot({ path: testInfo.outputPath('top-campaign-menu-desktop.png') });
 });
 
-test('narrow touch settings stay in flow above setup and return to the unchanged campaign', async ({ browser }, testInfo) => {
+test('narrow touch settings scroll within their top-bar overlay and return to the unchanged campaign', async ({ browser }, testInfo) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
   const page = await context.newPage();
   try {
@@ -139,14 +165,18 @@ test('narrow touch settings stay in flow above setup and return to the unchanged
     const hash = await currentHash(page);
     await summary(page).tap();
     await menu(page).getByRole('combobox', { name: 'Text scale', exact: true }).selectOption('1.3');
-    await directlyBelowNavigation(page, true);
-    // Compare ordinary user wheel scrolling before the programmatic focus/
-    // scrolling stress below. Preserve both captures; a clean wheel capture
-    // must not conceal an artifact in the later keyboard/touch sequence.
-    const wheelTarget = (await menu(page).boundingBox())!.y;
-    await page.mouse.move(380, 20);
-    await page.mouse.wheel(0, wheelTarget);
-    await expect.poll(() => page.evaluate(() => scrollY)).toBeCloseTo(wheelTarget, 0);
+    await topbarMenu(page, true);
+    // Real wheel input must scroll the bounded options pane, not move the map
+    // and command tray. Later keyboard/touch reachability remains independent.
+    const content = menu(page).locator('.options-content');
+    await reachable(menu(page).getByRole('button', { name: 'Save campaign', exact: true }));
+    const beforeWheel = await content.evaluate(element => ({ page: scrollY, top: element.scrollTop, scrollable: element.scrollHeight > element.clientHeight }));
+    expect(beforeWheel.scrollable).toBe(true);
+    const wheelTarget = (await content.boundingBox())!;
+    await page.mouse.move(wheelTarget.x + wheelTarget.width / 2, wheelTarget.y + 80);
+    await page.mouse.wheel(0, 180);
+    await expect.poll(() => content.evaluate(element => element.scrollTop)).toBeGreaterThan(beforeWheel.top);
+    expect(await page.evaluate(() => scrollY)).toBe(beforeWheel.page);
     const wheelGeometry = await settledMenuGeometry(page);
     await writeFile(testInfo.outputPath('narrow-menu-wheel-geometry.json'), JSON.stringify(wheelGeometry, null, 2));
     await page.screenshot({ path: testInfo.outputPath('top-campaign-menu-narrow-wheel.png') });
@@ -155,6 +185,11 @@ test('narrow touch settings stay in flow above setup and return to the unchanged
       await reachable(control);
       expect((await control.boundingBox())!.height).toBeGreaterThanOrEqual(44);
     }
+    const mapMenus = menu(page).getByRole('checkbox', { name: 'Map click menus', exact: true });
+    await expect(mapMenus).toHaveCount(1);
+    await expect(mapMenus).toBeChecked();
+    await reachable(mapMenus);
+    expect((await mapMenus.boundingBox())!.height).toBeGreaterThanOrEqual(44);
     for (const name of ['End turn shortcut', 'Next army shortcut', 'Next settlement shortcut']) {
       const control = menu(page).getByRole('textbox', { name, exact: true });
       await expect(page.getByRole('textbox', { name, exact: true })).toHaveCount(1);
@@ -166,9 +201,13 @@ test('narrow touch settings stay in flow above setup and return to the unchanged
     await summary(page).evaluate(element => element.scrollIntoView({ block: 'start' }));
     await page.screenshot({ path: testInfo.outputPath('top-campaign-menu-narrow-before-settle.png') });
     const geometry = await settledMenuGeometry(page);
-    expect(geometry.controls).toHaveLength(10);
+    expect(geometry.controls).toHaveLength(11);
+    expect(geometry.controls.filter(control => control.name === 'Map click menus')).toHaveLength(1);
     expect(geometry.controls.every(control => control.insideMenu)).toBe(true);
-    expect(geometry.map.y).toBeGreaterThanOrEqual(geometry.menu.bottom - 1);
+    expect(geometry.map.y).toBeGreaterThanOrEqual(geometry.summary.bottom - 1);
+    expect(geometry.menu.x).toBeGreaterThanOrEqual(0);
+    expect(geometry.menu.x + geometry.menu.width).toBeLessThanOrEqual(geometry.viewport.width);
+    expect(geometry.menu.bottom).toBeLessThanOrEqual(geometry.viewport.height);
     expect(geometry.belowMenuHits.every(hit => !hit.isMenu)).toBe(true);
     const geometryPath = testInfo.outputPath('narrow-menu-geometry-and-hits.json');
     await writeFile(geometryPath, JSON.stringify(geometry, null, 2));
@@ -184,12 +223,13 @@ test('narrow touch settings stay in flow above setup and return to the unchanged
     await captureSession.detach();
     await menu(page).getByRole('button', { name: 'New campaign', exact: true }).tap();
     await expect(page.getByRole('heading', { name: 'Establish your campaign', exact: true })).toBeVisible();
-    await directlyBelowNavigation(page, false);
+    await topbarMenu(page, false);
     await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeDisabled();
     expect(await currentHash(page)).toBe(hash);
     await page.getByRole('button', { name: 'Return to campaign', exact: true }).tap();
-    await directlyBelowNavigation(page, true);
+    await topbarMenu(page, true);
     expect(await currentHash(page)).toBe(hash);
+    if (await menu(page).getAttribute('open') === null) await summary(page).tap();
     await summary(page).tap();
     await expect(menu(page)).not.toHaveAttribute('open');
     await expect(page.getByTestId('map-container')).toBeVisible();
@@ -201,7 +241,7 @@ test('new campaign generation can be cancelled without losing the existing worke
   const hash = await currentHash(page);
   await summary(page).click();
   await menu(page).getByRole('button', { name: 'New campaign', exact: true }).click();
-  await directlyBelowNavigation(page, false);
+  await topbarMenu(page, false);
   // Hold only the replacement worker's real script load, making cancellation deterministic
   // even on fast hosts. No simulation messages, observations or commands are fabricated.
   let release!: () => void;
@@ -216,6 +256,7 @@ test('new campaign generation can be cancelled without losing the existing worke
     await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('legendary');
     await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
     await requested;
+    if (await menu(page).getAttribute('open') === null) await summary(page).click();
     await expect(menu(page).getByRole('button', { name: 'Save campaign', exact: true })).toBeDisabled();
     await expect(menu(page).getByRole('button', { name: 'New campaign', exact: true })).toBeDisabled();
     await page.getByRole('button', { name: 'Cancel generation', exact: true }).click();
@@ -224,7 +265,7 @@ test('new campaign generation can be cancelled without losing the existing worke
     expect(await currentHash(page)).toBe(hash);
   } finally { release(); await page.unrouteAll({ behavior: 'wait' }); }
   await page.getByRole('button', { name: 'Return to campaign', exact: true }).click();
-  await directlyBelowNavigation(page, true);
+  await topbarMenu(page, true);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.unsealed_companies",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native96. ONE lean coastal escort galley, southeast view with prow screen RIGHT/lower right. Long low hull, one triangular lateen sail, short complete oars and low practical fighting rail, little cargo. Complete mast tip, yard, oars, rigging, bow and stern within central65%. No sea, wake, waterplane or ground. Lower and leaner than the transport.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/native/unit.coastal_warship.unsealed_companies/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f693f7ab396c98f82e73b248637a2dffcb141490b8dc7f803327e0d8f7421021",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:31:53.904Z",
+  "referenceHashes": [
+    "ad7f2d4fa6e5300efe0a93b2e74464df206d73a24573f7ee9a779050a4e466de",
+    "1d47698eea391ea1d7c74ddd358eba99b1621b24ed9772bed72f4c5b0330853e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "e0f114bd07f36f2751a44d8aee6dd292fdb0b149d3cdc2b3e459a78dbde0fe02",
+      "inputHash": "ad7f2d4fa6e5300efe0a93b2e74464df206d73a24573f7ee9a779050a4e466de",
+      "outputHash": "17a1a5d76754ab573069da140f9a0f7386c1d6ff422e8ef897e99684e88e38d5"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

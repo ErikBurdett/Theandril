@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.manytrack_moot",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone raster pixel-art culture crest for Theandril, ui.crest.manytrack_moot version2. Create a genuinely transparent PNG with alpha zero outside the emblem: no painted checkerboard, background, ground plane, ambient haze, glow or shadow. Primary subject: ONLY a bold three-way fork joining THREE UNLIKE BROAD FOOT/ROAD TRACKS. Exactly three broad arms meet at one clear central junction, like a simple upright Y-shaped crossing viewed straight-on; no enclosing frame. One arm is moss-blue and has a few broad squared tread notches, one is tawny and has a few broad rounded footstep/tread impressions, and one is raw-linen cream with two wide parallel route grooves. Their different broad edge/tread shapes remain legible as three different kinds of travelled track joining peacefully. These are a heraldic mark, NOT actual scenery or a map, NOT flowing water. Keep each arm simple and substantial, with large clean transparent wedges between arms. Serious weathered medieval fantasy pixel art, restrained bark-dark edge accents and tiny grouped worn highlights only, crisp square pixel clusters designed to remain clear after fitting to a 64x64 native canvas. Front-facing flat emblem, balanced centered silhouette fully inside the central 60% of a square canvas, generous genuine transparent margins on every side. Colors limited visually to moss-blue, tawny hide, raw-linen cream and very restrained bark-dark edging. No other objects or ornament. ABSOLUTELY NO trees, forest, river, water, antlers, horns, feathers, ring, circle, shield, plaque, scene, wreath, foliage, cord border, ribbon, arrowhead, text, letters, numbers, watermark, character, animal, weapon, skyline, mountain, polished jewel or decorative background. The crest itself is only the three unlike broad tracks meeting at the fork.",
+  "frames": [
+    {
+      "id": "ui.crest.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/ui.crest.manytrack_moot/a909c71d8b7d9ba112b482ffdd6863d96fb51c5a8acef97a1bbfde68af03535c/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b4decfa3ce88e1e84d5eddc341cec0d9145f4d74291e23ff0a81f4a5384327b3",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/ui.crest.manytrack_moot-v2.png",
+      "assets/art/source/faction-expansion/reedstars/ui.crest.manytrack_moot-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:06:12.323Z",
+  "referenceHashes": [
+    "96b6622d8208c5b275c623f0c3b6b0e3a581eafebcce4529801380277866343a",
+    "b92c22901f8047c6fd89aee0e944cdec5f1221bd287354741f38246da865b0d9"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "d27b5a90ea6aeab92f35fa866c59346a7e472f783e7585be27f1e451edc5b8ba",
+      "inputHash": "96b6622d8208c5b275c623f0c3b6b0e3a581eafebcce4529801380277866343a",
+      "outputHash": "3900192e3d8a21cdfb68cc254ee32bffe0c2abf1182a5bd099af355fd7f4f905"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "3900192e3d8a21cdfb68cc254ee32bffe0c2abf1182a5bd099af355fd7f4f905",
+      "outputHash": "4d34b4280c698116faf1edb5ee0eb4b693b9984dddfaa9c39e13b5509c9d4d4d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4d34b4280c698116faf1edb5ee0eb4b693b9984dddfaa9c39e13b5509c9d4d4d",
+      "outputHash": "ae9fd149a529595cb09501d944b30aea733060c9b3243bb1d858bbb74bc08fca"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "c8bacb383ef690277fbc0ab106ed89bb5702203d992bc5caebf01bab8c868ce5",
+      "outputHash": "212be65f5b8d36a81e404e512ddfa1d08ddcec34396600a41223a5c4f1e38cc8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "a5253a7d02faa42cc322787886eb838c630da86168e4c4e3c186843dfa26dc94",
+      "outputHash": "20e22ff8526acd96c674b5c4d798f4042700bca9a543fdcdd2a25ca786bba74d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "7850957bba6ca042847974db5d104b6fd57a61525dd572f1c5560fb726915ca2",
+      "outputHash": "f4c3c2a106b1ff9f7c7957a115816026a5b84318f3d235be3045327813f5096b"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.crest.manytrack_moot.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:45:35.582Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Replacementv2 is only three unlike broad tracks joined as a fork: blue square treads, tawny footprints and pale parallel grooves. Rejected river/forest crest excluded. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate a909c71d8b7d9ba112b482ffdd6863d96fb51c5a8acef97a1bbfde68af03535c; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/26ac800d6af1106776f97bf2b53b5e473c7e20ca9322e61034a77af972fe5c75.png"
+    ],
+    "inputHash": "a0519d4a0992a518d5ffe4147d217851a10c0643bad00cec7c673e123af3e76b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

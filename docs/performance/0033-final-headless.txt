@@ -1,0 +1,659 @@
+Theandril slice 21 — final headless/checks evidence
+Recorded started: 2026-09-07T07:55:43.571Z
+Recorded completed: 2026-09-07T08:16:37.634Z
+Workspace: /home/telephoneheater/Work/Theandril
+Status: Final whole typecheck (corrected rerun), lint, content validation, production build and read-only 284-asset validation passed. Initial full suite 1204/1209 passed with five retained failures; later scout-only coverage correction 6/6 passed (owner report). No final full-suite rerun: three contact gates and parallel Epic timeout remain open. No all-pass or 1.0 claim.
+
+Environment (raw):
+b17900d143e330cbc0014ce6fc288896b1e6ea57
+v26.7.0
+10.32.1
+2026-09-07T07:55:43Z
+
+Scope / limitations:
+- Frozen-source integration validation, not an isolated performance benchmark.
+- No runtime/content/mapgen/AI/art-source changes or test-gate weakening authorized.
+- Browser agent acknowledged CPU hold before the run.
+- After full Vitest, root-authorized Art Lab consumer-label fix landed (LIVE_ART_IDS import/export only); later checks use that final source. No validation commands ran concurrently with browser/performance jobs.
+- Initial full Vitest: 1204 passed / 5 failed / 1209 total, 129 passed / 3 failed / 132 files. Known failures: Standard 4/24 and Huge 32 contact gates; parallel Epic 60000ms timeout. Fifth failure: obsolete all-faction-assets-static assertion after genuine four-frame Ashen scout publication.
+- Root authorized another agent to update only the Ashen scout coverage contract; initial full-suite output is retained unmodified, not presented as final all-pass.
+- Read-only asset validation passed 284/284 approved assets, 305 native frames, one 2048x2048 / 16777216-byte decoded atlas; no visual approval or publication performed.
+- Faction coverage author reports scout-only correction frozen, focused test 6/6 passed (3.66s), scoped lint/diff clean; this delegated result is not substituted for raw output of the initial full suite.
+- Final whole-check pass begins after both Art Lab consumer-label and scout coverage test corrections froze.
+- CPU released to the browser agent after the build exited. This evidence makes no browser/performance/1.0 signoff claim.
+- Reporting correction: second whole typecheck exited 2 (TS2307 test-only @theandril/render import). An orchestration progress summary incorrectly displayed 0; raw output was retained correctly and root/web were notified immediately after evidence audit. Earlier pre-test-edit typecheck passed. Final status must not claim typecheck success until an actual corrected rerun.
+- The test-only relative import was corrected by its owner. A third actual pnpm typecheck rerun exited 0; the failed second run and reporting correction remain in this evidence.
+- After initial integration checks, the next capture-only task added guarded generator7 history tooling/fixtures and 9 passing focused historical tests. Those 9 new tests are NOT included in the earlier 1209-test full-suite count. The final typecheck also covered these new files; no canonical/content source changed.
+
+=== CHECK 1 ===
+Command: pnpm test
+Started: 2026-09-07T07:55:43.577Z
+Finished: 2026-09-07T07:57:22.085Z
+Exit code: 1
+--- Raw combined stdout/stderr begins ---
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ packages/art-pipeline/src/faction-coverage.test.ts (6 tests | 1 failed) 7701ms
+     × preserves reviewed native pixels, exact static pivots, source provenance and executable tool records for every family asset 60ms
+ ❯ packages/ai/src/contact.test.ts (4 tests | 3 failed) 32549ms
+     × standard / 4 seats makes player contact through legal bounded plans with save replay 12538ms
+     × standard / 24 seats makes player contact through legal bounded plans with save replay 7670ms
+     × huge / 32 seats makes player contact through legal bounded plans with save replay 11913ms
+ ❯ tests/headless/chronicle-victory.test.ts (2 tests | 1 failed) 66509ms
+   × generated-start epic AI victory produces complete factual logs identical after archive save/resume 63083ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/headless/chronicle-victory.test.ts > generated-start epic AI victory produces complete factual logs identical after archive save/resume
+Error: Test timed out in 60000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/headless/chronicle-victory.test.ts:10:37
+      8| // post500 order and replays the complete technical history twice. Giv…
+      9| // archive integration test its own wall-time budget; keep all turn/co…
+     10| test.each(['short', 'epic'] as const)('generated-start %s AI victory p…
+       |                                     ^
+     11|   const game = createGame({ seed: 20260905, size: 'tiny', factionCount…
+     12|   const archive = createArchive(game, { mode: 'watch' });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 4 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.ashen_compact","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":34306,"harbor":false},{"cell":41616,"harbor":false},{"cell":38153,"harbor":false},{"cell":51938,"harbor":false},{"cell":39308,"harbor":false},{"cell":38917,"harbor":true},{"cell":35844,"harbor":false},{"cell":37381,"harbor":false},{"cell":36994,"harbor":false},{"cell":38530,"harbor":false}],"fleets":[{"id":"army.121","cell":56182,"cargo":[],"ocean":true},{"id":"army.169","cell":57331,"cargo":[],"ocean":true},{"id":"army.81","cell":47380,"cargo":[],"ocean":false}],"reasons":["Charter transport: chart unknown water while no passengers await a rendezvous.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.reedbound_council","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":71362,"harbor":false},{"cell":72900,"harbor":false},{"cell":70971,"harbor":false},{"cell":71743,"harbor":true},{"cell":69822,"harbor":false},{"cell":69442,"harbor":false},{"cell":68678,"harbor":false}],"fleets":[{"id":"army.110","cell":85123,"cargo":[{"armyId":"army.136","name":"Hearth caravan","formations":1}],"ocean":true},{"id":"army.154","cell":62415,"cargo":[],"ocean":true},{"id":"army.82","cell":83169,"cargo":[],"ocean":false}],"reasons":["Charter transport: sail the known water route toward a viable landing.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.cinder_march","firstContact":63,"foreignBorders":[],"witnessedBattleTurns":[73],"wars":[],"towns":[{"cell":8708,"harbor":false},{"cell":14079,"harbor":false},{"cell":12159,"harbor":true},{"cell":13293,"harbor":false},{"cell":18353,"harbor":false},{"cell":13699,"harbor":false},{"cell":12923,"harbor":false},{"cell":9449,"harbor":false},{"cell":25948,"harbor":false},{"cell":15621,"harbor":false},{"cell":15617,"harbor":false},{"cell":13303,"harbor":false}],"fleets":[{"id":"army.102","cell":40521,"cargo":[],"ocean":true},{"id":"army.46","cell":13715,"cargo":[],"ocean":false},{"id":"army.57","cell":33635,"cargo":[],"ocean":true}],"reasons":["Deepwake warship: patrol and chart permitted coastal water.","Coastwatch galley: patrol and chart permitted coastal water.","Charter transport: chart unknown water while no passengers await a rendezvous."]},{"factionId":"faction.glass_tide","firstContact":63,"foreignBorders":[{"cell":11390,"factionId":"faction.cinder_march","visible":false},{"cell":11391,"factionId":"faction.cinder_march","visible":false},{"cell":11392,"factionId":"faction.cinder_march","visible":false},{"cell":11774,"factionId":"faction.cinder_march","visible":false},{"cell":11775,"factionId":"faction.cinder_march","visible":false},{"cell":11776,"factionId":"faction.cinder_march","visible":false},{"cell":11777,"factionId":"faction.cinder_march","visible":false},{"cell":12154,"factionId":"faction.cinder_march","visible":false},{"cell":12155,"factionId":"faction.cinder_march","visible":false},{"cell":12156,"factionId":"faction.cinder_march","visible":false},{"cell":12157,"factionId":"faction.cinder_march","visible":false},{"cell":12158,"factionId":"faction.cinder_march","visible":false},{"cell":12159,"factionId":"faction.cinder_march","visible":false},{"cell":12160,"factionId":"faction.cinder_march","visible":false},{"cell":12161,"factionId":"faction.cinder_march","visible":false},{"cell":12524,"factionId":"faction.cinder_march","visible":true},{"cell":12525,"factionId":"faction.cinder_march","visible":true},{"cell":12526,"factionId":"faction.cinder_march","visible":true},{"cell":12534,"factionId":"faction.cinder_march","visible":false},{"cell":12535,"factionId":"faction.cinder_march","visible":false},{"cell":12536,"factionId":"faction.cinder_march","visible":false},{"cell":12538,"factionId":"faction.cinder_march","visible":false},{"cell":12539,"factionId":"faction.cinder_march","visible":false},{"cell":12540,"factionId":"faction.cinder_march","visible":false},{"cell":12541,"factionId":"faction.cinder_march","visible":false},{"cell":12542,"factionId":"faction.cinder_march","visible":false},{"cell":12543,"factionId":"faction.cinder_march","visible":false},{"cell":12544,"factionId":"faction.cinder_march","visible":false},{"cell":12545,"factionId":"faction.cinder_march","visible":false},{"cell":12907,"factionId":"faction.cinder_march","visible":true},{"cell":12908,"factionId":"faction.cinder_march","visible":true},{"cell":12909,"factionId":"faction.cinder_march","visible":true},{"cell":12917,"factionId":"faction.cinder_march","visible":false},{"cell":12918,"factionId":"faction.cinder_march","visible":false},{"cell":12919,"factionId":"faction.cinder_march","visible":false},{"cell":12930,"factionId":"faction.cinder_march","visible":false},{"cell":12931,"factionId":"faction.cinder_march","visible":false},{"cell":12932,"factionId":"faction.cinder_march","visible":false},{"cell":13292,"factionId":"faction.cinder_march","visible":true},{"cell":13293,"factionId":"faction.cinder_march","visible":true},{"cell":13294,"factionId":"faction.cinder_march","visible":true},{"cell":13301,"factionId":"faction.cinder_march","visible":false},{"cell":13302,"factionId":"faction.cinder_march","visible":false},{"cell":13303,"factionId":"faction.cinder_march","visible":false},{"cell":13315,"factionId":"faction.cinder_march","visible":false},{"cell":13316,"factionId":"faction.cinder_march","visible":false},{"cell":13676,"factionId":"faction.cinder_march","visible":true},{"cell":13677,"factionId":"faction.cinder_march","visible":true},{"cell":13686,"factionId":"faction.cinder_march","visible":false},{"cell":13698,"factionId":"faction.cinder_march","visible":false},{"cell":13699,"factionId":"faction.cinder_march","visible":false},{"cell":13700,"factionId":"faction.cinder_march","visible":false},{"cell":14083,"factionId":"faction.cinder_march","visible":false},{"cell":14084,"factionId":"faction.cinder_march","visible":false},{"cell":17969,"factionId":"faction.cinder_march","visible":false},{"cell":17970,"factionId":"faction.cinder_march","visible":false},{"cell":18352,"factionId":"faction.cinder_march","visible":false},{"cell":18353,"factionId":"faction.cinder_march","visible":false},{"cell":18354,"factionId":"faction.cinder_march","visible":false},{"cell":18737,"factionId":"faction.cinder_march","visible":false},{"cell":18738,"factionId":"faction.cinder_march","visible":false}],"witnessedBattleTurns":[73],"wars":[],"towns":[{"cell":7245,"harbor":false},{"cell":6474,"harbor":false},{"cell":14520,"harbor":false},{"cell":8779,"harbor":true},{"cell":7623,"harbor":false}],"fleets":[{"id":"army.174","cell":12524,"cargo":[],"ocean":true},{"id":"army.83","cell":7632,"cargo":[],"ocean":false},{"id":"army.96","cell":11076,"cargo":[],"ocean":true}],"reasons":["Deepwake warship: patrol and chart permitted coastal water.","Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore."]}]: expected null not to be null
+ ❯ packages/ai/src/contact.test.ts:85:94
+     83|   ] as const)('%s / %i seats makes player contact through legal bounde…
+     84|     const result = contactCampaign(size, count, limit);
+     85|     expect(result.firstContact.get(result.playerId), JSON.stringify(re…
+       |                                                                                              ^
+     86|     expect(result.firstContact.get(result.playerId)!).toBeLessThanOrEq…
+     87|     expect(result.types.has('moveTo')).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 24 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.rimehorn_clans","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":8779,"harbor":true},{"cell":6474,"harbor":false},{"cell":8007,"harbor":false},{"cell":7245,"harbor":false},{"cell":16820,"harbor":false}],"fleets":[{"id":"army.436","cell":7632,"cargo":[],"ocean":false},{"id":"army.569","cell":14908,"cargo":[],"ocean":true},{"id":"army.774","cell":22594,"cargo":[],"ocean":true}],"reasons":["Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore.","Deepwake warship: patrol and chart permitted coastal water."]}]: expected 23 to be 24 // Object.is equality
+
+- Expected
++ Received
+
+- 24
++ 23
+
+ ❯ packages/ai/src/contact.test.ts:89:163
+     87|     expect(result.types.has('moveTo')).toBe(true);
+     88|     expect(result.types.has('mergeArmies')).toBe(true);
+     89|     expect([...result.firstContact.values()].filter(turn => turn !== n…
+       |                                                                                                                                                                   ^
+     90|   });
+     91|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > huge / 32 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.rimehorn_clans.22","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":18695,"harbor":false},{"cell":21253,"harbor":false},{"cell":17668,"harbor":true}],"fleets":[{"id":"army.304","cell":15623,"cargo":[],"ocean":false},{"id":"army.366","cell":61710,"cargo":[{"armyId":"army.443","name":"Hearth caravan","formations":1}],"ocean":true},{"id":"army.584","cell":62199,"cargo":[],"ocean":true}],"reasons":["Charter transport: chart water while seeking a safe landing.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.mire_courts.31","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":25929,"harbor":false},{"cell":12133,"harbor":false},{"cell":14183,"harbor":false},{"cell":11104,"harbor":true}],"fleets":[{"id":"army.1019","cell":21821,"cargo":[],"ocean":true},{"id":"army.523","cell":11608,"cargo":[],"ocean":false},{"id":"army.629","cell":26951,"cargo":[],"ocean":true}],"reasons":["Charter transport: chart unknown water while no passengers await a rendezvous.","Deepwake warship: patrol and chart permitted coastal water."]}]: expected 30 to be 32 // Object.is equality
+
+- Expected
++ Received
+
+- 32
++ 30
+
+ ❯ packages/ai/src/contact.test.ts:89:163
+     87|     expect(result.types.has('moveTo')).toBe(true);
+     88|     expect(result.types.has('mergeArmies')).toBe(true);
+     89|     expect([...result.firstContact.values()].filter(turn => turn !== n…
+       |                                                                                                                                                                   ^
+     90|   });
+     91|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  packages/art-pipeline/src/faction-coverage.test.ts > published faction art release coverage — real retained files, no fixture substitutes > preserves reviewed native pixels, exact static pivots, source provenance and executable tool records for every family asset
+AssertionError: unit.scout.ashen_compact is a single static pose, not fabricated animation: expected [ { …(6) }, { …(6) }, { …(6) }, …(1) ] to have a length of 1 but got 4
+
+- Expected
++ Received
+
+- 1
++ 4
+
+ ❯ packages/art-pipeline/src/faction-coverage.test.ts:116:87
+    114|       expect(asset.pivot, id).toEqual(pivot);
+    115|       expect(['APPROVED', 'ATLASED', 'INTEGRATED']).toContain(asset.st…
+    116|       expect(asset.frames, `${id} is a single static pose, not fabrica…
+       |                                                                                       ^
+    117|       expect(asset.frames[0]).toMatchObject({ id: `${id}/idle/se/0`, d…
+    118|       expect(asset.clips).toEqual([{ id: `${id}/idle/se`, direction: '…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  3 failed | 129 passed (132)
+      Tests  5 failed | 1204 passed (1209)
+   Start at  02:55:44
+   Duration  67.65s (transform 17.01s, setup 0ms, import 52.15s, tests 411.28s, environment 13ms)
+
+ ELIFECYCLE  Test failed. See above for more details.
+
+--- Raw combined stdout/stderr ends ---
+
+=== CHECK 2 ===
+Command: pnpm typecheck
+Started: 2026-09-07T07:58:02.664Z
+Finished: 2026-09-07T07:58:22.627Z
+Exit code: 0
+--- Raw combined stdout/stderr begins ---
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+
+--- Raw combined stdout/stderr ends ---
+
+=== CHECK 3 ===
+Command: pnpm lint
+Started: 2026-09-07T07:58:36.312Z
+Finished: 2026-09-07T07:59:53.023Z
+Exit code: 0
+--- Raw combined stdout/stderr begins ---
+
+> theandril@0.1.0 lint /home/telephoneheater/Work/Theandril
+> eslint .
+
+
+--- Raw combined stdout/stderr ends ---
+
+=== CHECK 4 ===
+Command: node --import tsx --input-type=module -e '
+import {readFile,readdir} from "node:fs/promises";
+import {resolve} from "node:path";
+import {parseAssetManifest,parseRuntimeCatalog,decodePng,cropImage,safeAssetPath,sha256,validateAsset} from "./packages/art-pipeline/src/index.ts";
+const root=process.cwd();
+const catalogBytes=await readFile(resolve(root,"assets/art/runtime/catalog.json"));
+const publicBytes=await readFile(resolve(root,"apps/web/public/art/catalog.json"));
+if(!catalogBytes.equals(publicBytes)) throw new Error("Durable/public catalogs differ");
+const catalog=parseRuntimeCatalog(JSON.parse(catalogBytes.toString("utf8")));
+const actualIds=(await readdir(resolve(root,"assets/art/approved"))).filter(name=>name.endsWith(".json")).map(name=>name.slice(0,-5)).sort();
+const expectedIds=catalog.assets.map(asset=>asset.id).sort();
+if(JSON.stringify(actualIds)!==JSON.stringify(expectedIds)) throw new Error("Approved/public asset ID sets differ");
+console.log("Read-only approved/public validation; no candidate report writes, approval, publication or native processing.");
+console.log("Catalog SHA-256 "+sha256(catalogBytes));
+const atlases=new Map();
+for(const atlas of catalog.atlases){
+ const filename=atlas.imageUrl.slice("/art/".length);
+ const bytes=await readFile(await safeAssetPath(root,"assets/art/runtime/"+filename));
+ const published=await readFile(await safeAssetPath(root,"apps/web/public/art/"+filename));
+ if(!bytes.equals(published)||sha256(bytes)!==atlas.sha256) throw new Error("Atlas publication hash mismatch: "+atlas.id);
+ const image=decodePng(bytes);
+ if(image.width!==atlas.width||image.height!==atlas.height) throw new Error("Atlas dimension mismatch: "+atlas.id);
+ atlases.set(atlas.id,image);
+ console.log("Atlas "+atlas.id+": "+image.width+"x"+image.height+", "+bytes.length+" PNG bytes, "+atlas.sha256);
+}
+let passed=0,failed=0,frameCount=0;
+for(const asset of [...catalog.assets].sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0)){
+ try{
+  const manifest=parseAssetManifest(JSON.parse(await readFile(await safeAssetPath(root,"assets/art/approved/"+asset.id+".json"),"utf8")));
+  if(manifest.id!==asset.id||manifest.status!=="APPROVED")throw new Error("Approval identity/status mismatch");
+  const frames=await Promise.all(manifest.frames.map(async frame=>({id:frame.id,image:decodePng(await readFile(await safeAssetPath(root,frame.sourcePath)))})));
+  const report=validateAsset(manifest,frames,catalog.palette);
+  if(!report.passed||report.inputHash!==manifest.review?.inputHash||report.inputHash!==asset.review.inputHash)throw new Error("Validation/review seal mismatch: "+JSON.stringify(report.errors));
+  if(frames.length!==asset.frames.length)throw new Error("Published frame count mismatch");
+  for(const frame of frames){
+   const packed=asset.frames.find(item=>item.id===frame.id);
+   if(!packed||sha256(cropImage(atlases.get(asset.atlasId),packed.frame).data)!==sha256(frame.image.data))throw new Error("Published native pixels differ: "+frame.id);
+  }
+  for(const path of [...manifest.provenance.sourceRefs,...manifest.review.evidencePaths]){
+   if(path.includes("/cache/"))throw new Error("Ignored-cache approval dependency");
+   if(!(await readFile(await safeAssetPath(root,path))).length)throw new Error("Empty retained evidence: "+path);
+  }
+  passed++;frameCount+=frames.length;
+  console.log("PASS "+asset.id+" frames="+frames.length+" inputHash="+report.inputHash);
+ }catch(error){failed++;console.error("FAIL "+asset.id+": "+String(error));}
+}
+console.log(JSON.stringify({assets:catalog.assets.length,passed,failed,approvedFrames:frameCount,atlasPages:catalog.atlases.length,decodedAtlasBytes:catalog.atlases.reduce((sum,atlas)=>sum+atlas.width*atlas.height*4,0),readOnly:true,visualApprovalPerformed:false}));
+if(failed)process.exitCode=1;
+'
+Started: 2026-09-07T08:00:31.938Z
+Finished: 2026-09-07T08:00:46.657Z
+Exit code: 0
+--- Raw combined stdout/stderr begins ---
+Read-only approved/public validation; no candidate report writes, approval, publication or native processing.
+Catalog SHA-256 0a6f6a5fcc0af75aff4c4cf7b418edaa2ce919b5ad974e7ac1a6a48857c50cec
+Atlas foundation: 2048x2048, 1520156 PNG bytes, 4a272092509bccfc906150917974be29488bdec6525b9dd872ee2809d91ca5bf
+PASS character.engineer.ashen_compact frames=1 inputHash=ad41c19e676786b58633d0f25791581e99abedb2ad9ff4dc025c8e167079ab88
+PASS character.engineer.cinder_march frames=1 inputHash=4fcd6a031f271aedd0b69f38391d5441b6dc1742347144ec739a1c728e02582a
+PASS character.engineer.glass_tide frames=1 inputHash=a6f9fc8a4aa73fff49eca44d24f4c2f77dec5d7e6c3f39864159e52145cf4f47
+PASS character.engineer.iron_covenant frames=1 inputHash=2402478cf41dbdba3728076718ab5258882126e64b3c65f812f2c30eb67b7aa2
+PASS character.engineer.mire_courts frames=1 inputHash=cc2013e74cdabe1e144d9503e9ec715f0abc429a6d8490d4da24ec3e1205b8fe
+PASS character.engineer.morrow_spore frames=1 inputHash=f2557148c5d90eb2abd89a5705e81c3171116aa9fa4f026341be8eeac066a994
+PASS character.engineer.reedbound_council frames=1 inputHash=b265a9ca301920ff171ff9c58c01a7edf503ce2a502c8aba007152631e2f2b06
+PASS character.engineer.rimehorn_clans frames=1 inputHash=1d6fca98b55192530e43e43c4d98cd102d01c3538d2a18721579d927e4007e94
+PASS character.engineer.sable_steppe frames=1 inputHash=d3e9b43720fea712389185944d15c9583ba3a98f201bb08270198cb6f29721cb
+PASS character.engineer.saltwind_remnant frames=1 inputHash=ceb7afd8f3c6b530afd1eb587a909661612418705ad86652a9bf036c788b998f
+PASS character.engineer.sepulchral_synod frames=1 inputHash=ba1d5a860a84e18da1065d7cc28e9513bd58a682676f8181d5f7b7830a08cbe8
+PASS character.engineer.wardhall_remnant frames=1 inputHash=0dc2654eecc5895b646d1fc59e1f0960c4f6ea96b82b024503019eda2abadaef
+PASS character.marshal.ashen_compact frames=1 inputHash=e94bdffde184ec493425fa9140519cc52cefa4d3cd58a1f09f2b004683919a77
+PASS character.marshal.cinder_march frames=1 inputHash=ef5f994e2693157e228c6e0fbb4ead06c442d7158ddd5617e3f2db4ff2cf427c
+PASS character.marshal.glass_tide frames=1 inputHash=510fd79b55ae9f085767ba9aaa0585fb77e574a559314bf9bab7ce8976828447
+PASS character.marshal.iron_covenant frames=1 inputHash=ac7b0143df0756161fb55067aaa6a479f32ef37d389f1de5c36d155a9c534a19
+PASS character.marshal.mire_courts frames=1 inputHash=038873a040a8a4d4787156abb28fc49fc08cf873dd9d4421114082be07604618
+PASS character.marshal.morrow_spore frames=1 inputHash=29d7b1d3f6f120ed73422687e1a8d20269e963a3d0370665d2c228f081750700
+PASS character.marshal.reedbound_council frames=1 inputHash=58f4196ed7c5da0eb07da00b93203b85d56387c3e50af85b67a47c9763859ff8
+PASS character.marshal.rimehorn_clans frames=1 inputHash=45840746951f9ae1ec8e71db38694ca0c7475059a71dbd544bc72f547849f84c
+PASS character.marshal.sable_steppe frames=1 inputHash=8224ddaf6b54223db48acecb8e146d30efdc4d0504a82d22f573319147f26628
+PASS character.marshal.saltwind_remnant frames=1 inputHash=e21d1b62713daac5ba97601f03789b6d0b1575d41cf61bb934c60837e6a435be
+PASS character.marshal.sepulchral_synod frames=1 inputHash=4c3049f26dfceb15b8a2db272bdc3bcde48fa461eccca2214e4111a482732be8
+PASS character.marshal.wardhall_remnant frames=1 inputHash=b07fdba1bd9bf79efa1abb3f146c9acad0d47d3969adb56f084bc91331eb7710
+PASS character.surveyor.ashen_compact frames=1 inputHash=32cc1e0e78fcdd98148d8f10386a2a0ec124aeaf9e52377dc884f4dd545f3fd6
+PASS character.surveyor.cinder_march frames=1 inputHash=c573d4fc84e872bf75defcb24124511679c5986d14084cd476b930f903aba801
+PASS character.surveyor.glass_tide frames=1 inputHash=bff599b6ce4f9bd280fe5889216f48a084d9c46e5ea0650e46429c3ddaad9cb3
+PASS character.surveyor.iron_covenant frames=1 inputHash=0b75dd9855528aa07ac3c1bda628d56b10d94f46474e296f416d50a44ba52f2a
+PASS character.surveyor.mire_courts frames=1 inputHash=655ff2e44b0f27d0eb74ea2c05f99ff4621fb502bf0940e2f5ee309adf176a40
+PASS character.surveyor.morrow_spore frames=1 inputHash=89340a245c0a004ae8b4698c68e0ba7cca58359ab1617d469a44510cddff6888
+PASS character.surveyor.reedbound_council frames=1 inputHash=ab34911102ff290f2f051429af746ef8ba3a6c8a0c763436e6b0902e0009a598
+PASS character.surveyor.rimehorn_clans frames=1 inputHash=bcd4231fc75a46aeb85a120c812a62aa19b122afc490c8c8a4227d9e6fbbc2af
+PASS character.surveyor.sable_steppe frames=1 inputHash=2b5535019a64acf815ab37cec9ebcaf584c0ae7f1b6703132d2fe964d4268f9c
+PASS character.surveyor.saltwind_remnant frames=1 inputHash=c8939d3a75a2e64fcba4039f517a17929df2fef0c9cdf4e1bc02c07d5ac3b876
+PASS character.surveyor.sepulchral_synod frames=1 inputHash=a6052fa1b468ad1c668cd694d54e854e9c404110962e06ff70029d4c0bf748d3
+PASS character.surveyor.wardhall_remnant frames=1 inputHash=6668a79ac61e29b05e264c85c11e8702d2c8133c9e32d0e461682655a8d483a0
+PASS effect.magic frames=4 inputHash=bb24e3fe91bedd1b15ab7c74435c4cf074480e4ab68e543eb7ad1097cef98bfd
+PASS effect.melee frames=4 inputHash=08ced46d4a68bec80b70f6c994abc624a88c8935bdfd0cd0cb4b531286939896
+PASS effect.movement frames=1 inputHash=08fba0eab8f0c52a1f0122af7b471a08fbcc06e662dd887769a6a005480ada85
+PASS effect.projectile frames=4 inputHash=6f76564bf29c64475ee91e161fccadde2bb37a38a65ab855f8b28c6591951688
+PASS effect.selection frames=1 inputHash=831a1b4f6d688057a10d08a4e6d04b51ac2751ac85dc81738711db1a1496bed9
+PASS improvement.managed_woodlot frames=1 inputHash=d5324c34b625a34398c1de4bbec7b62076ad39388216f23d2e3bdb9887d386bc
+PASS improvement.quarry frames=1 inputHash=2feb734e5983eee55f960ce0137a79d399fe5058616e5d30667541dee0e0626f
+PASS improvement.reedworks frames=1 inputHash=689c2b68221488e50da820af0877717628cf37313c6c53de50b2ab86627082db
+PASS improvement.shore_fishery frames=1 inputHash=93790493a999817455dfe422f6f2b0965acefa513a274e34ffd52a4a8bcdf5b6
+PASS improvement.terraced_fields frames=1 inputHash=2f4fcd4908a1b4fc8062f61a641a65387718526fa6fbc5005163fe35c8cddb1a
+PASS map.resource frames=1 inputHash=1a9fcfe594177a0e202abb868461da8cc42a28b825c453b4e97ea851d111625b
+PASS map.ruin frames=1 inputHash=74a76be691fe2f102bd902c1e56b4415659b75dfe8963d51a172005681c73bb1
+PASS map.watchtower frames=1 inputHash=3f9ba20187c8245d07330805eaebad4ce098df4808e67910f1fcaf300d221e00
+PASS monster.quarry_ogre frames=1 inputHash=275312be6802b21ffa5973329f4e9321384c8ac077c66a3d19aa4026269b63f8
+PASS monster.revenant frames=1 inputHash=a69377f00e88cb97bcfd00035716904407516f5e70ee12b7e0889eacc83461f4
+PASS monster.slateback frames=1 inputHash=a4e9309d44631e5e03100fa45ab6d4f174231e0a16b76f517004747fd23f81ad
+PASS settlement.city frames=1 inputHash=45dde872d6cee0dae73df91869630ebb35a3f53dd1c5fa41bcf5258270477795
+PASS settlement.city.ashen_compact frames=1 inputHash=8237bb757351b4c8597222f75387082fbf09473a867849f93ec4e39e3e9cf14b
+PASS settlement.city.cinder_march frames=1 inputHash=187d691c5f2703b3f24edf78f83258b35000a21d106a432da647f2ff132e5042
+PASS settlement.city.glass_tide frames=1 inputHash=8d2159b75b937a6dac43454850a393cba9ad6e274a064e639e179ecb045ae6c5
+PASS settlement.city.iron_covenant frames=1 inputHash=1283e4ff7d7b989ab3688d7acff8d51beae8f8088965df915e3f8e289ad39563
+PASS settlement.city.mire_courts frames=1 inputHash=ec5b213611cf6628013ca942289f0c7f3fbef1ddb86f7849d5f1a14146218954
+PASS settlement.city.morrow_spore frames=1 inputHash=5fa3582bc514cfa7db1b1bfbdb2eb929c86e0f1c5875adef7b6efef448e81e58
+PASS settlement.city.reedbound_council frames=1 inputHash=089e4acb57e0e4c957bfd67923ce937dbd8013cfa49a55c76743d8ffb6bd2ca0
+PASS settlement.city.rimehorn_clans frames=1 inputHash=23f4875c1d2376136945d6b6e283db52af6cb61d586ea6b57a867cb047eb4c69
+PASS settlement.city.sable_steppe frames=1 inputHash=6d2dabd5e315c4ce3ed5cfdf79c4fea464298bd4223b0dbba7ebcde094dde8dc
+PASS settlement.city.saltwind_remnant frames=1 inputHash=fafff1bfc8f1bad2aba5f9d8d4a00d5ec51447e0e5aa952f1df88189a9e27f87
+PASS settlement.city.sepulchral_synod frames=1 inputHash=2ec7df03a2d209c1422832d30703dc0edf99e560347f855024c2c039dd6769c4
+PASS settlement.city.wardhall_remnant frames=1 inputHash=e7c56485cdfd6d3237d331032c261692746a8515019f5aa4b96395efd17422ad
+PASS settlement.town frames=1 inputHash=e60e8d1cce3bf0ccc3665427b25ccbd2282f3c8611ef1e2aa892d5a98a8973e1
+PASS settlement.town.ashen_compact frames=1 inputHash=1a06f22e39700c16affe84d34df40ef4b90c4afed4c682d3fcb4cbeadb86d7e0
+PASS settlement.town.cinder_march frames=1 inputHash=a3d289f11ebfda62e6521fafdcd572378b76d929cfe19811512ff9f33d1d4778
+PASS settlement.town.glass_tide frames=1 inputHash=0338b81b3799b250749045f88cd968c245b533cbba8624158f9f0c4fc2b0f28f
+PASS settlement.town.iron_covenant frames=1 inputHash=e3b9378af969394073b1bb4870c17d1bbaf34b071bdf0988683b66754a930c6d
+PASS settlement.town.mire_courts frames=1 inputHash=ec1ed9ea6247653eb39b43dcc8640b06869167c523d0da4518ce88d489d84f5f
+PASS settlement.town.morrow_spore frames=1 inputHash=e257d5c4b5b652e1d47a0c30eedb03b91138ca780d701f3de5954b40471878de
+PASS settlement.town.reedbound_council frames=1 inputHash=583af5332c3e492a51e35e26e4a74eed53a12be6b808ed0a0ba7e3880ff3c2fd
+PASS settlement.town.rimehorn_clans frames=1 inputHash=2ace4017532267adedef28eb297dae487576797be7104a284d67aa6bd8648428
+PASS settlement.town.sable_steppe frames=1 inputHash=0a5d1c4c5e45a1ed35b160235b775cbcf049c44ea6c155562e91cbfb962a5d3d
+PASS settlement.town.saltwind_remnant frames=1 inputHash=47c1efbeb84de563ee002595b2620225560caa818cc2453d9e51845f4ff91135
+PASS settlement.town.sepulchral_synod frames=1 inputHash=1367b31f795f145ab227526f1a36285c574fe95a6c188103af4dae90ffc158b5
+PASS settlement.town.wardhall_remnant frames=1 inputHash=638df4f0b74da4457dc50d8e965d920aca35251f3461853c5bb44f9f8b2cd5c3
+PASS settlement.village frames=1 inputHash=d9b103eb6d5fd69147749e6b11fd457487926c6631384b9fd216f97db307be80
+PASS settlement.village.ashen_compact frames=1 inputHash=625f23b4614fccc71e461f0be8d0552db00f5c101d136d7a5ee776207e634634
+PASS settlement.village.cinder_march frames=1 inputHash=0be2ff410e7461dc3914a9fbb17d476d37162516ad159ee95ca0d8cbe36927fc
+PASS settlement.village.glass_tide frames=1 inputHash=6c168432473c7886496c9ab66b0e8ffff432cd536abd3b0f557b2d72730900c6
+PASS settlement.village.iron_covenant frames=1 inputHash=66b02d19d25eddf930581a9fec69b6499f9a7f1811c481badaf4b5f59484f570
+PASS settlement.village.mire_courts frames=1 inputHash=3bc9cd746e80aa2f90a73c7fdf5ad5e98f28f661b7abf913efb99450aa0e9466
+PASS settlement.village.morrow_spore frames=1 inputHash=312af74da84c377f120c84613e150bc24be88030f28f5879cbe29d982490f84b
+PASS settlement.village.reedbound_council frames=1 inputHash=28956405bd6c4a226229f07d751057d64a8be19712fa82b878059b73f838acfb
+PASS settlement.village.rimehorn_clans frames=1 inputHash=873f4593c758b69bb68ce6aa24085fc44a4c96006718daba6c66ae9d71251cf1
+PASS settlement.village.sable_steppe frames=1 inputHash=354b5708fdba3a87967627406b134ed6fc225fdb91815ff5e19bd01b8897d43b
+PASS settlement.village.saltwind_remnant frames=1 inputHash=7ccf69e33471acf7a4a41384af4fa2a2297a4be20ace0f5c84471809759361eb
+PASS settlement.village.sepulchral_synod frames=1 inputHash=9853eae38fcab89b1420a31031c5fc65eca1fea6c09cd67ff4265f702a2ce427
+PASS settlement.village.wardhall_remnant frames=1 inputHash=4c96871af53f8acd4a5c5b417bbe1dd8dd89715cbedb13e476317c3b594c3e17
+PASS terrain.alpine frames=1 inputHash=4ecb2c49a8a82cec8d919c7a71486a53c107097c609e1786c93fd6ef5f0f579c
+PASS terrain.alpine.variant_1 frames=1 inputHash=21feea398b55df426fb1c3066ec1cc70f8ae23a37e5f811a1612be09bfceeb6e
+PASS terrain.alpine.variant_2 frames=1 inputHash=5ea999dec3af972e7d3095ccaa2770274f3dad7bf1d077810d70bd90726925d8
+PASS terrain.ash_scrub frames=1 inputHash=4d2c89f19e87b9c3ed8ba8d3e22a4e51cc0dd06698d07289abd4e3c15834c77b
+PASS terrain.ash_scrub.variant_1 frames=1 inputHash=5e942ad4a1aa42bc413621c272ed20c61a9f240f2e040ff558b05ac4c064cc0a
+PASS terrain.ash_scrub.variant_2 frames=1 inputHash=c7ccea37b54fecd7f61fa50f6df63133a94101de76b96bd66d5f99dd151f4692
+PASS terrain.chalkland frames=1 inputHash=972f391d4a66bf4f11ec4812d93126bd30bbff08c08dcbcf246528c466f3369f
+PASS terrain.chalkland.variant_1 frames=1 inputHash=8b8d40540df2d2fcf130bfb8f0e2bb69d8e52611ec94e5f3f33f675a04f11caa
+PASS terrain.chalkland.variant_2 frames=1 inputHash=3d0cfbc0b66286e70dfcd47b40b77e19f61b76b2e7ebc61e460e4b1318a2c22e
+PASS terrain.coast frames=1 inputHash=7815c2f5043e78d9aaefc53a9739b5b441d93cf4880f9e1c24a6e5846b9726cd
+PASS terrain.desert frames=1 inputHash=a0979ac83c36070e90d395727f39c01e1e04152c8295b3a2576f9e28f9e2654b
+PASS terrain.desert.variant_1 frames=1 inputHash=f18f962783e540e817ce51b049b87b2ce897f5c88b859e9653c60729a100e702
+PASS terrain.desert.variant_2 frames=1 inputHash=0dd64298223d46b26c3c632725c2491a044bb8f6bbb42f84f98ca73481440aa4
+PASS terrain.grassland frames=1 inputHash=62d6b814cabc23a52e87123f8767b6480b6987985fc04c26560258202b7d61e8
+PASS terrain.grassland.variant_1 frames=1 inputHash=843416a635d3d900ba7819292e86c42fc528e660c4017eb0d2f9063047c91d57
+PASS terrain.grassland.variant_2 frames=1 inputHash=210d319ed8681084bad997e5de7b31f2ff8413f40882e8cec08a2063816370be
+PASS terrain.hills frames=1 inputHash=7ba5c2b2701da72f85321001effc16cf6109db15650450922b1a25fdcd18d07f
+PASS terrain.marsh frames=1 inputHash=fb40eae0245cde5ec59a142f41fced48a5af19190ef04e5e5ff75cb6d7816c4a
+PASS terrain.marsh.variant_1 frames=1 inputHash=d8dfac31f321f88821266e1e6c85333c3fe926d3a1d9b3764fb2f73e8d2d0728
+PASS terrain.marsh.variant_2 frames=1 inputHash=42aa6d68f073c357e09d154fbe8f4573bdd6436aa1e8e97e667d637994b25305
+PASS terrain.ocean frames=1 inputHash=796e3027d90afbd3bf3b99ab13661964c2fb4732481a010caad51ceda399cd48
+PASS terrain.ocean.variant_1 frames=1 inputHash=aa48bbe99c8e6d43ce9a1f1d74d62ce74cedada4d2fd9df6929738fea7465a7c
+PASS terrain.ocean.variant_2 frames=1 inputHash=2a4820cd226faab0b88cc0e9b96451130dc7502470f87e67b1f853dbf11f9aac
+PASS terrain.rainforest frames=1 inputHash=623766c850aefd44b9a10330b7d59205bbea4a2c3c8e2383d6870a96b2773353
+PASS terrain.rainforest.variant_1 frames=1 inputHash=f802a2daaefbbfb52bed27ca07ceb7bdc42e1a552eba5abbdcc262318c57f083
+PASS terrain.rainforest.variant_2 frames=1 inputHash=d1692ed37cf462ba741ddfa302f6d1718dfe5fecef024c98fee7e76534016d21
+PASS terrain.river frames=1 inputHash=2db1e560268b72a93f53a1adb8b154bab9d59863c9fec06699eb1b87672c36d8
+PASS terrain.road frames=1 inputHash=61013fd21a04bc2123fef168c893ef97a91fca70ffd47ef603fb2173ad143471
+PASS terrain.steppe frames=1 inputHash=5ee645cd017ca3480bb40a61daf1daaca85ccfda2b34117e031a8234e57263fc
+PASS terrain.steppe.variant_1 frames=1 inputHash=82919b4bfa168ca0be419e9f9164e075fe3dc58634ce85d590a1e5db6308bf01
+PASS terrain.steppe.variant_2 frames=1 inputHash=ca0e44f05e3ccc979084203e108a522c46de880c40b6a08277c6544200a11b53
+PASS terrain.taiga frames=1 inputHash=6d25f65c0f7d8254f3034b6e581643010c37863565b4008c60d5f6d3c3e67a3a
+PASS terrain.taiga.variant_1 frames=1 inputHash=3bac156d08a0cfffdd6e35757f8f03446de3f9e870b7820a813d610c0131e2fd
+PASS terrain.taiga.variant_2 frames=1 inputHash=07afba8b54c67c4b9b1c1d3143f314d4ab6e4e8afea845c05cd04ea192cd19cc
+PASS terrain.temperate_forest frames=1 inputHash=4616c54c561a2defcfcf354f81a825dcdbd24a0e904004587b2f34e9837fd47f
+PASS terrain.temperate_forest.variant_1 frames=1 inputHash=15d27224aedd3dfe6caf408db845fbf98e10f371237cbe06c8ef20237f85f29d
+PASS terrain.temperate_forest.variant_2 frames=1 inputHash=dbcdbdc0fdbdcbcd3c058c111c03bb966cb19d875415bf51e3a48764384916dc
+PASS terrain.transitions frames=1 inputHash=971fdfc72d64debb92c87245c770bb8017d4da230a34868ff0a9c4376562a3a4
+PASS terrain.tundra frames=1 inputHash=7eb32abbf37d71a5848038e858062c805267b5d5f90cd71e5b4cc098a491f3da
+PASS terrain.tundra.variant_1 frames=1 inputHash=be0f8442e074f6806f9bc4c4eced07b74ce44b316253355d3e0ddb4a632a2888
+PASS terrain.tundra.variant_2 frames=1 inputHash=3c04c029ced10ca3e5512c8e0af4cfc66231e02847df954eea1a7db2fa3229d5
+PASS ui.badge.ashen_compact frames=1 inputHash=ce3b0d6cee73d6f48bd96678d45acdb01fc56080d5ec02d3694c7cc8642702f7
+PASS ui.badge.cinder_march frames=1 inputHash=e95d9c8be1bf41b4dea202f1bb44adcf6aca4b420dc40f6098d9900b26ccc54e
+PASS ui.badge.glass_tide frames=1 inputHash=a11a56034b5d49c5781e5558541d8b861aadf398c7b4632e57210e6f263614ef
+PASS ui.badge.iron_covenant frames=1 inputHash=67c60141c2c5c09e255b86773378ad1b109aa89e40ab77014c71681c4ac32512
+PASS ui.badge.mire_courts frames=1 inputHash=ce8c2e9cb293846de2de23688ea2dc39f7d808b66123e61dbe898bf9b87568d5
+PASS ui.badge.morrow_spore frames=1 inputHash=3a2b379ab9c32ea981995892aa74c02beb7eb1f3dd3f26a46f13d2777f8d52c1
+PASS ui.badge.reedbound_council frames=1 inputHash=973675a712c7a8beb836be6cbfbd4f3f8b551dea99e41314d8971646b26a2a86
+PASS ui.badge.rimehorn_clans frames=1 inputHash=8a685beec3c07462a922f720467f94225549f556b661d3d7a4431d9bcd114836
+PASS ui.badge.sable_steppe frames=1 inputHash=b6cc2a701d2a7e35205823c0770e5204462d9a7d71cc559da581b9911830b642
+PASS ui.badge.saltwind_remnant frames=1 inputHash=7574282a09a51d0c51e989921bbd0ac37c5d800d38467569104d3c951aa22d8f
+PASS ui.badge.sepulchral_synod frames=1 inputHash=e79f8455ad2d7499ec6b9bc47e438c1206b0b467da3c2e7dcce88adc771ab3b7
+PASS ui.badge.wardhall_remnant frames=1 inputHash=2ef97a62fb58945c392dbdc9c82c6f25423f9454da56579171bd809406a10d8e
+PASS ui.banner.ashen_compact frames=1 inputHash=a41aab18a0545249829300cb242118cf24965345f0a38550209355709f0db1f1
+PASS ui.banner.cinder_march frames=1 inputHash=5c8d6c61bd51a1247c2a41176c1f2960c1ace4d4bff11a39011da740bdead863
+PASS ui.banner.glass_tide frames=1 inputHash=a017080ef874ccc0527b7b2e78a3f7964d5f7867a34c45e4dc19057f0adfb2b3
+PASS ui.banner.iron_covenant frames=1 inputHash=0dfebd7c0187d6253e0746e2e686ec94051edd5b6bb83cc856d470686ef2c13a
+PASS ui.banner.mire_courts frames=1 inputHash=1e0ff713556463a1847fb0399949057df10c13e1eb7aa029d54b0049c09a707f
+PASS ui.banner.morrow_spore frames=1 inputHash=c5938f2ef5933f8e2dd395951566aeb6b5891b4eb9462cafac66abf952568066
+PASS ui.banner.reedbound_council frames=1 inputHash=7a07ca01345e104b84e610aa051bf5d0b0c6f44cbb9bf058e23be254bc1462d3
+PASS ui.banner.rimehorn_clans frames=1 inputHash=f38cd0650a511b523676532fd27f939eb460e914839bfd01e8b7035c2ccbaeba
+PASS ui.banner.sable_steppe frames=1 inputHash=a064810a851c4d51ca2f135a9dbde3dff6459071ae993a44ca62f5028839926d
+PASS ui.banner.saltwind_remnant frames=1 inputHash=3a78bc9c3b05838f9eab9445c56d8c1d6d2d9bb40e7e7b21631b711ba5398ef1
+PASS ui.banner.sepulchral_synod frames=1 inputHash=2dc46332a4f5ea835d502ecec797b0ef04406eb6f5aa43b574a9daede3ca11d1
+PASS ui.banner.wardhall_remnant frames=1 inputHash=c2f03f298e9945903bd4bba659dc8d567e23eccb144861d1af17bd66ce4368dd
+PASS ui.crest.ashen_compact frames=1 inputHash=df45af163cb38ae75fec3a169192e2404ac56618f101b5042911ec24b3e00a71
+PASS ui.crest.cinder_march frames=1 inputHash=0768fc398c446557583f2ba82e8d0111fe77c28a0682ac706bf4f4bddc77f73c
+PASS ui.crest.glass_tide frames=1 inputHash=9205c501a9c9f911654312319ac73371e1c2760b81c29a96b7a22ecbac580c28
+PASS ui.crest.iron_covenant frames=1 inputHash=95377d955b90fcd42c624a4e6a6056ded781a98c8d20edbaca655f57d2be8c73
+PASS ui.crest.mire_courts frames=1 inputHash=6697392cafbe8e6a37918e358bd63df8535051593fd553f98366ea1c826a3482
+PASS ui.crest.morrow_spore frames=1 inputHash=fc8e6ac678c7732b9aeea727f7c6516b8d01eec4283ce5bd5b94d4fb2c11d365
+PASS ui.crest.reedbound_council frames=1 inputHash=cbc014e6f5aead9ef823cfc3a51098406515fee2aa4912dfbf70ee7f1f2b0612
+PASS ui.crest.rimehorn_clans frames=1 inputHash=b09288861b5294a01986172c6b6cdf67b2480caf496016390be5e980588eb0d5
+PASS ui.crest.sable_steppe frames=1 inputHash=22ab97590e2bc70f67f5a8e690f97eadc8d86a196c51749621a1914e2f861dfa
+PASS ui.crest.saltwind_remnant frames=1 inputHash=b86b1219e88053d3aee16c696880c597d6c6ceeda720a6588cc0bb984a348b3b
+PASS ui.crest.sepulchral_synod frames=1 inputHash=ed0b8d1f5d212c0360cf6bee58e2627b7a0e8b6385758325b7b8d9a9f07e1569
+PASS ui.crest.wardhall_remnant frames=1 inputHash=cedd1dd2a847813de4aa269bb5e8fe4a0b96f6299d82db1d1389601017702d1e
+PASS unit.cavalry frames=1 inputHash=8c5a0ca4c2d6058701109ed618aa4a969b186ec353a5a2e8b91b51ac5986b6b2
+PASS unit.cavalry.ashen_compact frames=1 inputHash=f5fd758f7ec711edc2e7664e26a9c5b52a7c1e2a9f9c038736d5a5a57f67d06d
+PASS unit.cavalry.cinder_march frames=1 inputHash=2719fed61ffc7765dd809f454b399310c8847dabf8e2f518b469492731647c6f
+PASS unit.cavalry.glass_tide frames=1 inputHash=cafd167316b5151ba8c645ec4bcccecd10fd67653802741d011cd3c3a61e4b7f
+PASS unit.cavalry.iron_covenant frames=1 inputHash=14e1c977579f72519807bad9902f6133796da21bf35fd57d17de85a1b98be9e6
+PASS unit.cavalry.mire_courts frames=1 inputHash=e6cf56ffe111a0d3d376119de0bba39d244054784e0a1f8d26b419f95172cbb6
+PASS unit.cavalry.morrow_spore frames=1 inputHash=549fca5a1b2c5c7e2fdb27628acc9f6c47ba748953a0a49d00ebe9d3698a7d42
+PASS unit.cavalry.reedbound_council frames=1 inputHash=28ad6d5b352ee7a35319671252efd16596fc5ddd2e395f6cca81de955802f7f9
+PASS unit.cavalry.rimehorn_clans frames=1 inputHash=628a8bcecd9e306595155271b45c1b30f09cabccb557e97102e2e0fa0b2685bc
+PASS unit.cavalry.sable_steppe frames=1 inputHash=a9dbd10ff00001860b4110fcafc10a2368b687dd7d111e3061a8c7a7e8b1cf7a
+PASS unit.cavalry.saltwind_remnant frames=1 inputHash=c5d4417be05bc45b061e43e0d2a1a09414c46d4b2496465d729c00499ea32852
+PASS unit.cavalry.sepulchral_synod frames=1 inputHash=9083b7a033e067eec28a2c8df8cef7de20e1ff4f185db95a933660e131f6ad3d
+PASS unit.cavalry.wardhall_remnant frames=1 inputHash=6519f7ef7f9381649190ca7850f70057124948db1f3e2f7e58e0adfe4e62b8c2
+PASS unit.coastal_warship.ashen_compact frames=1 inputHash=5f7cc560adf9e96767dd833284d19ac8be430dcd347d3e706c19079663cf4353
+PASS unit.coastal_warship.cinder_march frames=1 inputHash=db15b7049a5e81b01bbd1dc781d8ff81514ef32b4cfb1c5cfd5cf5a4c2043cef
+PASS unit.coastal_warship.glass_tide frames=1 inputHash=df0b3e11a2912cca6406640a1edfe926102bcdaa955dbcb3f718e21262229f47
+PASS unit.coastal_warship.iron_covenant frames=1 inputHash=34af8f8286629eab4cf2bb64c5e1b42a4bae5239f027e61348b5f802faf6c8c9
+PASS unit.coastal_warship.mire_courts frames=1 inputHash=bcba2601d57ccf79fdaaa85f68ec74198bd54c08862b5b082a24c06e64ba2d92
+PASS unit.coastal_warship.morrow_spore frames=1 inputHash=925f873419032317699ad5366230d50638a0a5c5cd1439529e38a3008d59eb3d
+PASS unit.coastal_warship.reedbound_council frames=1 inputHash=b7d3da5de0adbad149b4a93e39d6b5241babecc1fea2babff4fdb39da5bf9abf
+PASS unit.coastal_warship.rimehorn_clans frames=1 inputHash=41d5cbc333732df03a4ced259db394db1551fd25e7957d141115ca77d2522a3d
+PASS unit.coastal_warship.sable_steppe frames=1 inputHash=66120fac6c7274e1151b5d30c1535ca1193cd15d4573dc2d94355dbcecd7bad4
+PASS unit.coastal_warship.saltwind_remnant frames=1 inputHash=24aa3528041462d1badd2ac43fb17c5fe974661408adbcb7e9e562c0c8de96fb
+PASS unit.coastal_warship.sepulchral_synod frames=1 inputHash=8361dda581691f847919967c87ae56049ba2a17152ffc11a97147160659c9519
+PASS unit.coastal_warship.wardhall_remnant frames=1 inputHash=4e505ddf61e60c1fab6c2354282fad08883f67a7e6873a712d5c20d6c9e89bdf
+PASS unit.colonist frames=4 inputHash=3a8b4203b7d98bcf81a9d138a867eed7fff1037bbe5dcc8b3b34acc7dd2ebe60
+PASS unit.colonist.ashen_compact frames=1 inputHash=7a9c0fff3a990226487b28f1d59a7e45b49feb6775875c35fb1ec8bf54271860
+PASS unit.colonist.cinder_march frames=1 inputHash=1065382d8523f60d29af2468b9dfb918ab0c4db0382780c63c67859661fd1fa8
+PASS unit.colonist.glass_tide frames=1 inputHash=6195655cfa74f69a9667c53a9ed048832197be3335aab54ad4d8428bedcd1f73
+PASS unit.colonist.iron_covenant frames=1 inputHash=c623903e007b2d7c00a5c71ae503cd07498955eec9d8cb95a476f44ff0e35923
+PASS unit.colonist.mire_courts frames=1 inputHash=8619dcc631eb7a9a9261abd25e0d8adb2edb3fdfaee936b44f0fb34852b3e926
+PASS unit.colonist.morrow_spore frames=1 inputHash=1b18ece150df8a9798d4fb115308be14c71577da580dfb4462291b84c49e8f2e
+PASS unit.colonist.reedbound_council frames=1 inputHash=8074baa636186658e3e3a545678cdb648125ff5f382b9ec40205607c5c3144ba
+PASS unit.colonist.rimehorn_clans frames=1 inputHash=d38956c2048738492bf8b0c103a649aab7f67e6b3a57e40c31feb5425b925157
+PASS unit.colonist.sable_steppe frames=1 inputHash=e651d4526e0d5755728bb9fedaba646afe3e8db8b904e8aaf029bad9c719da30
+PASS unit.colonist.saltwind_remnant frames=1 inputHash=b6a0818c21568dd18ce717c333ea3eeaa0a15de84fad9dcba8d811503138b12f
+PASS unit.colonist.sepulchral_synod frames=1 inputHash=e2bd4f034da8e2758f4a3809e716827e3dfb140fba07147690caf12af7ab4f0d
+PASS unit.colonist.wardhall_remnant frames=1 inputHash=8d2870a90416730c9fdfbdd8a73e2b72b2b6e177d5a6c80ab4f743d3abba7276
+PASS unit.commander frames=1 inputHash=061dc06064a75f4fe10bdc58e49f5093f4e13f43aeebfa42b3404374f6c7939c
+PASS unit.guard frames=4 inputHash=17a150c6bba51a2d1cd58cb3dbce2d1aaa2511937d5eed171490f33f3d728206
+PASS unit.guard.ashen_compact frames=1 inputHash=22b18d9519fb192edfed5eb70599c542116d83a02780752b5657add32f9aca3a
+PASS unit.guard.cinder_march frames=1 inputHash=de19aa91b9c64e596d493f67eb41f52fda9c7955e37e1c08f602b38200a9eff7
+PASS unit.guard.glass_tide frames=1 inputHash=d9d7251e89577328afd8b1c10038a895ba7ac1eb00a3a7fb410ac818a7a9ba15
+PASS unit.guard.iron_covenant frames=1 inputHash=c602bfc2cce20f352016e63a4d8dc96708e8314a9ed278a56251619b45f438e3
+PASS unit.guard.mire_courts frames=1 inputHash=70c7b35e49f6fb94a605f0f75910c0a759a0e3bb1a793156eac2bbed706acc37
+PASS unit.guard.morrow_spore frames=1 inputHash=063d9c3f1e85bd3e8d13bf1271720130c07af4d4c0d62479ab8bd08ae44edf7c
+PASS unit.guard.reedbound_council frames=1 inputHash=a4aa028fe7de271f38f0abc1d3352af49cd6e188f146067f53b760787e759eaa
+PASS unit.guard.rimehorn_clans frames=1 inputHash=7d9bb74e6a34e7509b19cacbb02b060210eea6abbb5084e973aa3117a28c82c4
+PASS unit.guard.sable_steppe frames=1 inputHash=8bd7b79129deb6a730ebadd830cf0831dc3102ee3b51c9e318dba67203062416
+PASS unit.guard.saltwind_remnant frames=1 inputHash=3983ed5d36405c5e38356448af9f6981c333378ce0953540aa90186bb18ec815
+PASS unit.guard.sepulchral_synod frames=1 inputHash=ccb20e89f530f2df9fffacc2ce5ba451b2f3d7dd74c2315bda90acb5deee5028
+PASS unit.guard.wardhall_remnant frames=1 inputHash=ca46877a63804ac5bc177107b8bb1ea0b1baad8e117d2116874d8463c2e92ae1
+PASS unit.heavy_infantry frames=1 inputHash=aa632c6286a337c873969bdfd4c0b427d3b89cd2d3146f8b80116ab09972d4a0
+PASS unit.heavy_infantry.ashen_compact frames=1 inputHash=c7daf6b45db8f842ce2dfddb8393d2a187b166af7bfe4f389f6b8cb5fc98d717
+PASS unit.heavy_infantry.cinder_march frames=1 inputHash=9c3be3478efe39bde6e6bac69e15493adfdbc10a1e032849c17dc2c8561177c5
+PASS unit.heavy_infantry.glass_tide frames=1 inputHash=8d264cda6dcfeb6d5dd763359295ea4d6fcf397cecb89599ca16830228011fc9
+PASS unit.heavy_infantry.iron_covenant frames=1 inputHash=4b5b067a2fbcb0bc98f49914344c22b82bfc536c7c03003600c4ca5670946fc0
+PASS unit.heavy_infantry.mire_courts frames=1 inputHash=565f3053abad4baf44dad0202d2f71e46c1a5f92b706d31220109320e19791d6
+PASS unit.heavy_infantry.morrow_spore frames=1 inputHash=211a4b67d6140495e9d455e92b8226d8d31075b8511983c4a47a855d5e7c0a59
+PASS unit.heavy_infantry.reedbound_council frames=1 inputHash=7e57612bc63eb2cc532c599a657fb3ad27866d93e3837d77e4869e859bc21266
+PASS unit.heavy_infantry.rimehorn_clans frames=1 inputHash=f07dc11d389dbfa29162ea1cd55fb4546ae31170ad138478d0ccf1fafcdeb826
+PASS unit.heavy_infantry.sable_steppe frames=1 inputHash=82dcc4288289597da77e17ba5d7a052c83b44b28e6bb70b161b46b4bb914d3a8
+PASS unit.heavy_infantry.saltwind_remnant frames=1 inputHash=f22380e3e0495825868a0c9adede6b25bd5fccf792ab41da1b8f63da399c02d5
+PASS unit.heavy_infantry.sepulchral_synod frames=1 inputHash=589e366a5aa708213cdaaf19ed0563a3f76cc9991edf7f1faec2f184bd09beb4
+PASS unit.heavy_infantry.wardhall_remnant frames=1 inputHash=a51ade9f5b114eb6dc3c8f44c1bb1b98381d8b3557a6692e0f907a489eb92ec7
+PASS unit.mage frames=1 inputHash=a594d84be12bb7d43dc8a5886846eb12bba684c6518b967a0484b7aece91d3a7
+PASS unit.ocean_warship.ashen_compact frames=1 inputHash=9cc4855c8350aae071fdab76802a8ea7a5e26761f715151ffee1c7bdfdaef38e
+PASS unit.ocean_warship.cinder_march frames=1 inputHash=56c8dddf7c147e44e964255fc11d3941c65fe427549c1094c3a21d8dc9824b6b
+PASS unit.ocean_warship.glass_tide frames=1 inputHash=86d345fb5eac45af33def9504d18e1a33a5039d3276c281e4d47a8ab66ec2603
+PASS unit.ocean_warship.iron_covenant frames=1 inputHash=1b20d05315bd6e987c8b6628676817e89a73280b7a1e48cc9aab025a64b27e93
+PASS unit.ocean_warship.mire_courts frames=1 inputHash=2c5d2da117bfac77e14ba227ab3baccf1b4eae4cdb6e5392f40e0969beb64578
+PASS unit.ocean_warship.morrow_spore frames=1 inputHash=7bf10f779b49d2bdd89381d3c923198230e77d7c84d93c7e89bea72e26215188
+PASS unit.ocean_warship.reedbound_council frames=1 inputHash=20d28d2f4e854c41e725c03d69d6be971c7966fbdcc65ac8a9d03a361995687f
+PASS unit.ocean_warship.rimehorn_clans frames=1 inputHash=124c5a42c0aae8b64e37651e3920ac6a3e002b82580807d96fb86ec8da97e6aa
+PASS unit.ocean_warship.sable_steppe frames=1 inputHash=2cb9b1f016ba31e50491376a739bf6566a79ffbfac6c70eac14ca2361239b466
+PASS unit.ocean_warship.saltwind_remnant frames=1 inputHash=b57d9e8c87ada26a73a8dbb436c97e61cdd62b1fff05439a732b7eac261cfb5f
+PASS unit.ocean_warship.sepulchral_synod frames=1 inputHash=a2159b44713236f7a703819cee153c0fc2e0baaab4076670947358a45ff06bf2
+PASS unit.ocean_warship.wardhall_remnant frames=1 inputHash=f691d0a734e90ee9bbaab430cbe189949c13e874494effcf5a26d20b31fca986
+PASS unit.scout frames=4 inputHash=93622cabfa53cacfc99319021ff2514b6606d01b2a9a58d9715d3b8d8d6fb296
+PASS unit.scout.ashen_compact frames=4 inputHash=7fac58b334cf177fe8377630205d460474b7c1fc11a365b5c6c48098dbc7e28e
+PASS unit.scout.cinder_march frames=1 inputHash=e3cabe1eb01d5053656b6c0924d7cfa333e2ab67f877a4d793b18d9fff8c7ea3
+PASS unit.scout.glass_tide frames=1 inputHash=98da36e3e45eea34262ce5cf46fe569cace60de6af767aac079547ed512bea72
+PASS unit.scout.iron_covenant frames=1 inputHash=3ea29a290da1dccdc46bdeb6cdb923aa3970744db4f7532f23b4d71c270da356
+PASS unit.scout.mire_courts frames=1 inputHash=d12d2556d0df56b865ce474c44ea472f3cdef863597249865f8b7a7e6a2f249b
+PASS unit.scout.morrow_spore frames=1 inputHash=79b87c330ade5b42fae64b5c5ddd2e976962cf9932322f5ce8f408b429494de0
+PASS unit.scout.reedbound_council frames=1 inputHash=7cbdf0117d9c21e5edd54148ea0046029b6914384b4e10c46564076cf84f5662
+PASS unit.scout.rimehorn_clans frames=1 inputHash=815b86ce083bb05f7c42c2a3b45b08cffb4d687e529b3cb2afeefd31290960ab
+PASS unit.scout.sable_steppe frames=1 inputHash=eccd7bed40827761d3ac7486ccd2bcd03c52a1057e5da4d28b3b115cc1c47630
+PASS unit.scout.saltwind_remnant frames=1 inputHash=a0c0ffc52af65d966b1126a24af3bff0aebc4145000fd95009e2fea50738ea24
+PASS unit.scout.sepulchral_synod frames=1 inputHash=f7c5547a4e82e75db6a82b5a064190ccd8c31f0dbfb3ba5f2f06b8b3566b2c53
+PASS unit.scout.wardhall_remnant frames=1 inputHash=de2a30d81a93dd17eef9d640a506da9bf2e54832c18ca5f5842c697ad5f5f166
+PASS unit.spearman frames=1 inputHash=d44fc98a69960abb5d5680664715ccd3069a007ae9383086c3daa501474f2191
+PASS unit.spearman.ashen_compact frames=1 inputHash=0dd1cdcbba2f0e342187a64e8837dac3a3ae5ec6a54e0fd88ca016acd0b34903
+PASS unit.spearman.cinder_march frames=1 inputHash=b08a1bbb4cd4d109209454dc71832938dd23ef0f77a3066b20278e340a24db09
+PASS unit.spearman.glass_tide frames=1 inputHash=a932b53532e199e68d449d89e021281befdf5c7936378225d5ba37e1a3760649
+PASS unit.spearman.iron_covenant frames=1 inputHash=d08a8ae6a640d85dba7077141b6445313d401a1501b27ab537e3aef7cfa8ea2a
+PASS unit.spearman.mire_courts frames=1 inputHash=e3479ed081cc92158f12112ed91ed4a3961dc7ed8b7ee6adb41ee4a129434013
+PASS unit.spearman.morrow_spore frames=1 inputHash=ce25d4244a36c45d2f891b3b014ad182cf95d08854519a2891a01e517038d769
+PASS unit.spearman.reedbound_council frames=1 inputHash=2528db72a1a37df340f93b91078b42b955de00148087500eca51687808eb6a65
+PASS unit.spearman.rimehorn_clans frames=1 inputHash=2eb8219aabf89cdb8b10e42d72da5a9f76b02f3fd39e5f8ad4d3a216059b3639
+PASS unit.spearman.sable_steppe frames=1 inputHash=908545f8b3676eee175647ca1e102800b44e445db80882c29e1f899dfea4cec7
+PASS unit.spearman.saltwind_remnant frames=1 inputHash=4332eb07ed25798de91208cba573eb0041d398cba6697693473634fde097a7e4
+PASS unit.spearman.sepulchral_synod frames=1 inputHash=7fd06a1025fe4cfc916c1d2b360d94d4e665815187f7ed659116294098a3f8c0
+PASS unit.spearman.wardhall_remnant frames=1 inputHash=1070efb07464654e08bc4f53fe6f449a154d8eb83dfa71911ec43c85066ac9dd
+PASS unit.transport.ashen_compact frames=1 inputHash=e97fa1bc5178e0169e00d2153dfb306895349203938499d1f18895f033df8760
+PASS unit.transport.cinder_march frames=1 inputHash=28796eff47bace4c9f775108e7d11c4ce568a87b5d9e179eb54666635cd06724
+PASS unit.transport.glass_tide frames=1 inputHash=e61200318d5bc4330f4140b5a81d9ab639f57d6de2d86901e680c0a1c40b9786
+PASS unit.transport.iron_covenant frames=1 inputHash=d87e8cbd08e1d5061bd9f7ea400f3f97d48d7749d42c4123dfc02b947092f28e
+PASS unit.transport.mire_courts frames=1 inputHash=8bc35c62359c87ece8036232d77aeeb4501970bfc3022cb99e0cc8261d928e6a
+PASS unit.transport.morrow_spore frames=1 inputHash=08b6c28cf08197db5ab3fd9f5fbfa61c7892c210e32235d9ce6d81ed04a69214
+PASS unit.transport.reedbound_council frames=1 inputHash=3a8ac288481103dbaaf25c4950b3873f217b7ebf3006f90a65f8721a3f92836a
+PASS unit.transport.rimehorn_clans frames=1 inputHash=97713ca542bbfd4ccf825e3ec469a1d989f3e5c6b843445ad613236ed0b1a3ce
+PASS unit.transport.sable_steppe frames=1 inputHash=8e3ed9d0fdc19baab7cc68307ed8ba6d82f967f0e5be896b8deefed026574880
+PASS unit.transport.saltwind_remnant frames=1 inputHash=ff640fca1387e7ddbef3470c7f622343d4df7093c0df86f493600cd73b8238b6
+PASS unit.transport.sepulchral_synod frames=1 inputHash=df74bb85ed70a89364ed502a7e716a5fa2e55c0b26c7754c5cc9ebfe725f1407
+PASS unit.transport.wardhall_remnant frames=1 inputHash=b3e65a800510232a8bb35f9acca08631a8f8c58feb366435c47cc1747bee0f3e
+{"assets":284,"passed":284,"failed":0,"approvedFrames":305,"atlasPages":1,"decodedAtlasBytes":16777216,"readOnly":true,"visualApprovalPerformed":false}
+
+--- Raw combined stdout/stderr ends ---
+
+=== CHECK 5 ===
+Command: pnpm typecheck
+Started: 2026-09-07T08:05:08.719Z
+Finished: 2026-09-07T08:05:39.619Z
+Exit code: 2
+--- Raw combined stdout/stderr begins ---
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+tests/gameplay/selected-asset.spec.ts(5,36): error TS2307: Cannot find module '@theandril/render' or its corresponding type declarations.
+ ELIFECYCLE  Command failed with exit code 2.
+
+--- Raw combined stdout/stderr ends ---
+
+=== CHECK 6 ===
+Command: pnpm lint
+Started: 2026-09-07T08:05:39.619Z
+Finished: 2026-09-07T08:05:55.430Z
+Exit code: 0
+--- Raw combined stdout/stderr begins ---
+
+> theandril@0.1.0 lint /home/telephoneheater/Work/Theandril
+> eslint .
+
+
+--- Raw combined stdout/stderr ends ---
+
+=== CHECK 7 ===
+Command: pnpm content:validate
+Started: 2026-09-07T08:05:55.430Z
+Finished: 2026-09-07T08:05:55.817Z
+Exit code: 0
+--- Raw combined stdout/stderr begins ---
+
+> theandril@0.1.0 content:validate /home/telephoneheater/Work/Theandril
+> tsx scripts/validate-content.ts
+
+{
+  "buildings": 5,
+  "units": 9,
+  "factions": 12,
+  "technologies": 10,
+  "institutions": 2,
+  "doctrines": 2,
+  "projects": 1,
+  "characterRoles": 3,
+  "characterMissions": 3,
+  "characterSkills": 11,
+  "commanderAbilities": 1,
+  "improvements": 10,
+  "naturalFeatures": 7,
+  "hash": "3c54fb02"
+}
+
+--- Raw combined stdout/stderr ends ---
+
+=== CHECK 8 ===
+Command: pnpm build
+Started: 2026-09-07T08:06:05.525Z
+Finished: 2026-09-07T08:06:22.710Z
+Exit code: 0
+--- Raw combined stdout/stderr begins ---
+
+> theandril@0.1.0 build /home/telephoneheater/Work/Theandril
+> turbo run build
+
+• turbo 2.10.12
+
+   • Packages in scope: @theandril/ai, @theandril/art-pipeline, @theandril/chronicle, @theandril/content, @theandril/mapgen, @theandril/persistence, @theandril/render, @theandril/sim, @theandril/test-fixtures, @theandril/web
+   • Running build in 10 packages
+   • Remote caching disabled
+
+@theandril/web:build: cache miss, executing 46927c56d3013fd3
+@theandril/web:build: 
+@theandril/web:build: > @theandril/web@0.1.0 build /home/telephoneheater/Work/Theandril/apps/web
+@theandril/web:build: > vite build
+@theandril/web:build: 
+@theandril/web:build: vite v7.3.6 building client environment for production...
+@theandril/web:build: ../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js (330:0): A comment
+@theandril/web:build: 
+@theandril/web:build: "// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+@theandril/web:build: 
+@theandril/web:build: in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+@theandril/web:build: ../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js (70:0): A comment
+@theandril/web:build: 
+@theandril/web:build: "/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+@theandril/web:build:  * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+@theandril/web:build:  * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+@theandril/web:build: 
+@theandril/web:build: in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+@theandril/web:build: transforming...
+@theandril/web:build: ../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js (70:0): A comment
+@theandril/web:build: 
+@theandril/web:build: "/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+@theandril/web:build:  * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+@theandril/web:build:  * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+@theandril/web:build: 
+@theandril/web:build: in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+@theandril/web:build: ../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js (330:0): A comment
+@theandril/web:build: 
+@theandril/web:build: "// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+@theandril/web:build: 
+@theandril/web:build: in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+@theandril/web:build: ✓ 900 modules transformed.
+@theandril/web:build: rendering chunks...
+@theandril/web:build: computing gzip size...
+@theandril/web:build: dist/index.html                               0.58 kB │ gzip:   0.36 kB
+@theandril/web:build: dist/assets/simulation.worker-CHRJX-Tb.js   568.00 kB
+@theandril/web:build: dist/assets/index-BbCBnn6O.css               67.70 kB │ gzip:  13.20 kB
+@theandril/web:build: dist/assets/Filter-TkNpzfcU.js                0.90 kB │ gzip:   0.48 kB
+@theandril/web:build: dist/assets/BufferResource-B6qgJbft.js       11.12 kB │ gzip:   2.85 kB
+@theandril/web:build: dist/assets/webworkerAll-DpSi0TGn.js         15.42 kB │ gzip:   4.87 kB
+@theandril/web:build: dist/assets/CanvasRenderer-Bzy7vrvr.js       17.79 kB │ gzip:   5.97 kB
+@theandril/web:build: dist/assets/browserAll-xgxZZG8M.js           43.09 kB │ gzip:  11.29 kB
+@theandril/web:build: dist/assets/WebGPURenderer-DW4xEyeQ.js       45.99 kB │ gzip:  13.21 kB
+@theandril/web:build: dist/assets/RenderTargetSystem-zWvGXFR4.js   52.14 kB │ gzip:  14.38 kB
+@theandril/web:build: dist/assets/WebGLRenderer-_eWERILx.js        72.09 kB │ gzip:  19.63 kB
+@theandril/web:build: dist/assets/index-D00b7G4F.js               821.87 kB │ gzip: 251.53 kB
+@theandril/web:build: 
+@theandril/web:build: (!) Some chunks are larger than 500 kB after minification. Consider:
+@theandril/web:build: - Using dynamic import() to code-split the application
+@theandril/web:build: - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+@theandril/web:build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+@theandril/web:build: ✓ built in 2.73s
+
+ Tasks:    1 successful, 1 total
+Cached:    0 cached, 1 total
+  Time:    3.068s 
+
+
+--- Raw combined stdout/stderr ends ---
+
+=== CHECK 9 ===
+Command: pnpm typecheck
+Started: 2026-09-07T08:15:40.721Z
+Finished: 2026-09-07T08:15:58.745Z
+Exit code: 0
+--- Raw combined stdout/stderr begins ---
+
+> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril
+> tsc --noEmit
+
+
+--- Raw combined stdout/stderr ends ---

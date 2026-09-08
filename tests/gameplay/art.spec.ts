@@ -3,6 +3,7 @@ import { parseRuntimeCatalog } from '@theandril/art-pipeline/runtime';
 import { serializeGame } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
 import { borderBattleCampaign } from '../../packages/test-fixtures/src/combat-fixture';
+import { closeManagement, openCampaignJournal, openSelectedOrders, selectFromRegistry } from './ui-navigation';
 
 async function begin(page: Page): Promise<void> {
   await page.goto('/');
@@ -28,12 +29,29 @@ test('approved native assets power the map while Art Lab inspects real animation
   await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
   const starterIds = ['unit.colonist.ashen_compact', 'unit.scout.ashen_compact'];
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.lod)).toBe('near-sprites');
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAssetIds)).toEqual(expect.arrayContaining(starterIds));
-  for (const id of starterIds) expect(catalog.assets.find(asset => asset.id === id)?.frames).toHaveLength(1);
-  expect(await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAnimationFrames)).toEqual([]);
+  // Co-located starters now share one drawn group. Select each actual army to
+  // verify both approved roles, instead of requiring redundant simultaneous art.
+  const starters = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.ownArmies);
+  expect(starters).toHaveLength(2);
+  expect(starters[0]!.cell).toBe(starters[1]!.cell);
+  for (const [index, unitId] of ['unit.colonist', 'unit.scout'].entries()) {
+    const starter = starters.find(army => army.unitId === unitId)!;
+    expect(starter).toBeTruthy();
+    await selectFromRegistry(page, 'armies', starter.name);
+    await expect.poll(() => page.evaluate(id => window.__THEANDRIL__!.getArtDiagnostics()?.visibleEntityArt.find(entity => entity.entityId === id), starter.id))
+      .toMatchObject({ assetId: starterIds[index], representativeCount: 1, stackArmyCount: 2, stackFormationCount: 2 });
+    expect(await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!.visibleEntityArt.filter(entity => entity.formationCount !== null).length)).toBe(1);
+    expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(original);
+  }
+  expect(catalog.assets.find(asset => asset.id === starterIds[0])?.frames).toHaveLength(1);
+  const scout = catalog.assets.find(asset => asset.id === starterIds[1])!;
+  expect(scout.frames).toHaveLength(4);
+  expect(scout.clips).toEqual([expect.objectContaining({ state: 'idle', direction: 'se', loop: true, durationsMs: [250, 250, 250, 250] })]);
+  const animatedScout = await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!.visibleAnimationFrames);
+  expect(animatedScout).toEqual([{ contentId: scout.id, frameId: expect.stringMatching(/^unit\.scout\.ashen_compact\/idle\/se\/[0-3]$/) }]);
   const renderedFrame = await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters().frameCount ?? 0);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters().frameCount ?? 0)).toBeGreaterThan(renderedFrame + 15);
-  expect(await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAnimationFrames)).toEqual([]);
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!.visibleAnimationFrames[0]?.frameId)).not.toBe(animatedScout[0]!.frameId);
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(original);
   await page.screenshot({ path: testInfo.outputPath('approved-sprites-near.png'), fullPage: true });
   await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -84,7 +102,7 @@ test('approved native assets power the map while Art Lab inspects real animation
   await expect(lab).not.toBeVisible();
   await expect(page.getByRole('button', { name: 'Art Lab', exact: true })).toBeFocused();
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(original);
-  await testInfo.attach('art-review-metadata.json', { body: JSON.stringify({ annotations: ['Approved faction sprites keep separate ownership shapes; selected range remains above art.', 'Faction starter poses are genuinely static; the retained generic guard demonstrates distinct frame pixels and real playback in Art Lab.', 'Native preview uses exact nearest integer zoom; the live regular hex grid uses explicitly disclosed fractional fit.', 'Tile-repeat view is native 56x64/48-row seam inspection, not generated geography.', 'Changing animation, zoom, reduced motion and inspecting assets preserved the initial canonical hash.'], catalogAssets: catalog.assets.length, diagnostics: await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()), metrics: await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters()) }, null, 2), contentType: 'application/json' });
+  await testInfo.attach('art-review-metadata.json', { body: JSON.stringify({ annotations: ['Approved faction sprites keep separate ownership shapes; selected range remains above art.', 'The Ashen scout alone has its approved four-frame faction idle; the colonist remains static. The retained generic guard also demonstrates distinct frame pixels and real playback in Art Lab.', 'Native preview uses exact nearest integer zoom; the live regular hex grid uses explicitly disclosed fractional fit.', 'Tile-repeat view is native 56x64/48-row seam inspection, not generated geography.', 'Changing animation, zoom, reduced motion and inspecting assets preserved the initial canonical hash.'], catalogAssets: catalog.assets.length, diagnostics: await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()), metrics: await page.evaluate(() => window.__THEANDRIL__?.getPerformanceCounters()) }, null, 2), contentType: 'application/json' });
   expect(errors).toEqual([]);
 });
 
@@ -121,9 +139,12 @@ test('a failed approved-art load is reported and retains playable procedural fal
   await expect(page.getByTestId('art-runtime-status')).toContainText('procedural fallback');
   expect(await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.warnings.length)).toBeGreaterThan(0);
   expect(await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleSprites)).toBe(0);
+  await openSelectedOrders(page);
   await page.getByLabel('Settlement name', { exact: true }).fill('Honest Hearth');
   await page.getByRole('button', { name: 'Found settlement', exact: true }).click();
+  await openCampaignJournal(page);
   await expect(page.getByTestId('chronicle')).toContainText('Honest Hearth');
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
 });

@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { selectFromRegistry } from './ui-navigation';
 import { BIOME_NAMES, neighbors } from '@theandril/mapgen';
 import { IMPROVEMENTS } from '@theandril/content';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, serializeGame, type GameState } from '@theandril/sim';
@@ -8,7 +9,7 @@ import { refreshAuthoredSight } from '../../packages/test-fixtures/src/authored-
 const ORIGIN = 500;
 const SAMPLES = [-98, -97, -96, -95, -94, -50, -49, -48, -47, -46, -2, -1].map(offset => ORIGIN + offset);
 function climateGallery(): GameState {
-  const state = createGame({ seed: 20260905, size: 'tiny', factionCount: 2 });
+  const state = createGame({ generatorVersion: 4, seed: 20260905, size: 'tiny', factionCount: 2 });
   state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60); state.world.waterDepth.fill(0);
   delete state.armies['army.1']; delete state.armies['army.3']; delete state.armies['army.4'];
   state.armies['army.2']!.cell = ORIGIN;
@@ -29,7 +30,7 @@ async function loadGallery(page: Page): Promise<void> {
   await page.goto('/');
   await page.locator('input[type=file]').setInputFiles({ name: 'observed-climate-gallery.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(climateGallery()))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
-  await page.getByTestId('army-registry').getByRole('button', { name: /Climate survey/ }).click();
+  await selectFromRegistry(page, 'armies', 'Climate survey');
   await expect(page.getByTestId('map-container').locator('canvas')).toBeVisible();
 }
 async function inspectCell(page: Page, cell: number): Promise<void> {
@@ -49,16 +50,17 @@ test('all twelve approved biome tiles remain distinct beneath compact hills reli
   const tiles = await page.evaluate(cells => cells.map(cell => window.__THEANDRIL__?.getTerrainArt(cell)), SAMPLES);
   tiles.forEach((tile, biome) => expect(tile).toMatchObject({ cell: SAMPLES[biome], biome, approved: true }));
   expect(new Set(tiles.map(tile => tile?.assetId)).size).toBe(12);
-  expect(tiles[5]).toMatchObject({ terrain: 3, relief: 'hill-ridges', assetId: 'terrain.desert' });
-  expect(tiles[6]).toMatchObject({ terrain: 3, relief: 'hill-ridges', assetId: 'terrain.steppe' });
-  expect(tiles[9]).toMatchObject({ terrain: 4, relief: 'pixel-mountains', assetId: 'terrain.alpine' });
-  expect(tiles[10]).toMatchObject({ terrain: 1, assetId: 'terrain.ash_scrub' });
-  expect(tiles[11]).toMatchObject({ terrain: 1, assetId: 'terrain.chalkland' });
+  expect(tiles[5]).toMatchObject({ terrain: 3, relief: 'hill-ridges', baseId: 'terrain.desert' });
+  expect(tiles[6]).toMatchObject({ terrain: 3, relief: 'hill-ridges', baseId: 'terrain.steppe' });
+  expect(tiles[9]).toMatchObject({ terrain: 4, relief: 'pixel-mountains', baseId: 'terrain.alpine' });
+  expect(tiles[10]).toMatchObject({ terrain: 1, baseId: 'terrain.ash_scrub' });
+  expect(tiles[11]).toMatchObject({ terrain: 1, baseId: 'terrain.chalkland' });
   await inspectCell(page, SAMPLES[5]!);
   await expect(page.locator('.hex-inspector')).toContainText('Desert · Hills');
+  await page.getByRole('button', { name: 'Close map actions', exact: true }).click();
   await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.lod)).toBe('near-sprites');
-  expect(await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAnimationFrames)).toEqual([]);
+  expect(await page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.visibleAnimationFrames)).toEqual([{ contentId: 'unit.scout.ashen_compact', frameId: expect.stringMatching(/^unit\.scout\.ashen_compact\/idle\/se\/[0-3]$/) }]);
   await page.screenshot({ path: testInfo.outputPath('biome-hills-and-alpine.png'), fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole('button', { name: 'Focus selection', exact: true }).click();
@@ -79,11 +81,12 @@ test('missing approved terrain art keeps explicit physical hill and mountain fal
   expect(tiles[9]).toMatchObject({ biome: 9, terrain: 4, approved: false, assetId: null, relief: 'procedural-peak' });
   await inspectCell(page, SAMPLES[5]!);
   await expect(page.locator('.hex-inspector')).toContainText('Desert · Hills');
+  await page.getByRole('button', { name: 'Close map actions', exact: true }).click();
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
 });
 
 function improvedLandGallery() {
-  const state = createGame({ seed: 17, size: 'tiny', factionCount: 2 }), origin = state.armies['army.1']!.cell;
+  const state = createGame({ generatorVersion: 4, seed: 17, size: 'tiny', factionCount: 2 }), origin = state.armies['army.1']!.cell;
   const cells = neighbors(origin, state.world.width, state.world.height).slice(0, 5);
   const biomes = [1, 2, 11, 7, 0], terrain = [1, 2, 3, 1, 0];
   // Authored terrain isolates all five legal sites. Each improvement below is

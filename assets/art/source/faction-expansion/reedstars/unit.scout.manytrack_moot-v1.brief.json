@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.scout.manytrack_moot",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.scout.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. This scout is a FOXLIKE HUMANOID adult person: short fur, pointed furred ears and one visible natural tail, short foxlike muzzle, two legs and two dexterous tool-hands. Serious alert face, not a pet, toy or cute fox. Native64. One lean full-body adult wayfinder in a short travel cloak, compact bow held lowered, quiver and route satchel, two complete boots. Open lightweight silhouette, no shield, no long staff, no firing pose.",
+  "frames": [
+    {
+      "id": "unit.scout.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.scout.manytrack_moot/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "52ca207f24076d0559f115d77d96a4ae8432a95646c134dac103a8a60fff0662",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/unit.scout.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/unit.scout.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:46:56.691Z",
+  "referenceHashes": [
+    "739f4f306224fdbf202534915e92018e7c8e2178fbc80742fd9766bf8d740135",
+    "b6bcc917c4c03e58dc1977b5cc757872260bd8d7f091dae5bb8ac542a447e276"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "638b76f3c2bbab8988cdc635498eb8a0b7db3484255ca8c62420a6704aa49268",
+      "inputHash": "739f4f306224fdbf202534915e92018e7c8e2178fbc80742fd9766bf8d740135",
+      "outputHash": "893434a95f379e3a28c9371c0748417356c408069459d41136430ca501b40327"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

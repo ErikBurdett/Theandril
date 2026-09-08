@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.desert.variant_1",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.desert.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. DESERT: broad gently sweeping low ochre dune ripples around a calm muted tan sandy hollow. Only two or three soft-edged PIXEL clusters of wind-shaped sand bands; not high-contrast repeated waves. Desaturated earth tan and umber, no bright orange or yellow highlights. No vegetation or cliffs. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.desert.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.desert.variant_1/48269c65a31c547bdd52ac85bac02279e0db141057e2180dc9b3ff116c058966/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "823717a93478fefdb9fa179c5779492fa34637cb07586aadf135aa936a74cf0f",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.desert.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.desert.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:31:04.717Z",
+  "referenceHashes": [
+    "872a2017e48f3055a3bb4b563235869a24f6f311f40c95b29a3c9c19fc91aa44",
+    "e64a52b0ae912b679c144c05de69c370adc868ab42e70b975b24e37bf207f674"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "f8b9637bf67873c1bdc0a67100d9b4d791453ab4282550592e451716acb0add5",
+      "inputHash": "872a2017e48f3055a3bb4b563235869a24f6f311f40c95b29a3c9c19fc91aa44",
+      "outputHash": "2ed61cd06a549f3e39e6281f983d2dc232337907bbfe3826d0e4be9405e9c335"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2ed61cd06a549f3e39e6281f983d2dc232337907bbfe3826d0e4be9405e9c335",
+      "outputHash": "4ec597ec1a37874ad2cc2cbb788deaa2958a0b1b965c65ebd3792eab7fa78c94"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4ec597ec1a37874ad2cc2cbb788deaa2958a0b1b965c65ebd3792eab7fa78c94",
+      "outputHash": "ae594a5098c3abc451fe114a6b9a746dc254d37efd8ef28ce102903ce896b3f2"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "809796950634812bff7e3eae9cd15f8b76fdef79427aa20b05dd22399e9c2e94",
+      "outputHash": "1c5090ae7fb185a9efae989e12f76853509a8dcc0bba7f20e2b13f327a702da8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "8d5ca3109ef3e2d892fa777b3eefe6576dbd9ba5d2bb5c8162a961dff0d0bb2c",
+      "outputHash": "6248da536a297c69a9f63cad0bb6b00f99b6362d614cbd19c5f3971b71767b75"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "f18f7a6cd6a01eba4569cbdf4ae990b67cb7d9f2620bc010fc795fd7398b5fb1",
+      "outputHash": "36dec871b82aa486f623575bb853c5c5593f17c985e9d90a1a83b3ec5d942f12"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.desert.variant_1.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:17.333Z",
+    "notes": "Broad restrained sand ripples create quiet dune space; no tiny repeating mountain symbols. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 48269c65a31c547bdd52ac85bac02279e0db141057e2180dc9b3ff116c058966; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/f6f03707d518600f5bf18f1ec90a934b1f9ce140f9b1f5fb0a3a684d7e34c7d6.png"
+    ],
+    "inputHash": "f18f962783e540e817ce51b049b87b2ce897f5c88b859e9653c60729a100e702"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

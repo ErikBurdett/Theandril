@@ -1,4 +1,4 @@
-import { openRealmAffairs, openProduction } from './ui-navigation';
+import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders, openRealmAffairs, openProduction } from './ui-navigation';
 import { expect, test, type Page, type Locator } from '@playwright/test';
 import { FACTIONS } from '@theandril/content';
 import { factionArtId } from '@theandril/art-pipeline/runtime';
@@ -58,9 +58,12 @@ test(`${FACTIONS.length} public culture crests are reference art, while campaign
   await expect(cultures).toHaveCount(0);
   const summary = await page.evaluate(() => window.__THEANDRIL__?.getSummary());
   const own = summary!.factions.find(faction => faction.id === summary!.factionId)!;
+  await openRegistry(page, 'armies');
   await approved(art(page.locator('.realm-heading'), factionArtId('ui.crest', own.definitionId)!));
+  await openSelectedOrders(page);
   await approved(art(page.locator('.inspector'), factionArtId('ui.banner', own.definitionId)!));
   const known = summary!.factions.filter(faction => faction.id !== summary!.factionId);
+  await openRealmAffairs(page);
   const badges = page.getByTestId('faction-encounters').locator('[data-art-id]');
   await expect(badges).toHaveCount(known.length);
   expect(await badges.evaluateAll(elements => elements.map(element => element.getAttribute('data-art-definition')).sort())).toEqual(known.map(faction => faction.definitionId).sort());
@@ -68,6 +71,7 @@ test(`${FACTIONS.length} public culture crests are reference art, while campaign
   expect(requests.filter(path => path === '/art/catalog.json').length).toBeLessThanOrEqual(2);
   expect(requests.some(path => path.includes('lab-catalog') || path.includes('preview-'))).toBe(false);
   const hash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
+  await closeManagement(page);
   await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -89,20 +93,22 @@ test('renamed realms retain their authored family, real appointments gain role a
   await page.locator('input[type=file]').setInputFiles({ name: 'named-faction-art.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(fixture))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign.');
   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(stateHash(fixture));
+  await openRegistry(page, 'armies');
   await expect(page.locator('.realm-heading')).toContainText('Renamed Hearth Council');
   await approved(art(page.locator('.realm-heading'), 'ui.crest.ashen_compact'));
+  await openRealmAffairs(page);
   await approved(art(page.getByTestId('faction-encounters'), 'ui.badge.reedbound_council'));
   await expect(page.getByTestId('faction-encounters')).toContainText('Ashen Pretenders');
   await expect(art(page.getByTestId('faction-encounters'), 'ui.badge.ashen_compact')).toHaveCount(0);
-  await page.getByTestId('army-registry').getByRole('button', { name: /Witness column/ }).click();
+  await selectFromRegistry(page, 'armies', /Witness column/); await openSelectedOrders(page);
   await approved(art(page.locator('.inspector'), 'ui.banner.ashen_compact'));
   const composition = page.getByTestId('army-composition');
   await composition.locator('summary').click();
   await approved(art(composition, 'unit.guard.ashen_compact'));
   await approved(art(composition, 'unit.spearman.ashen_compact'));
   await composition.screenshot({ path: testInfo.outputPath('faction-native-formation-art.png') });
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: new RegExp(CHARACTER_FIXTURE.homeName) }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', new RegExp(CHARACTER_FIXTURE.homeName)); await openSelectedOrders(page);
   const appointments = page.getByTestId('character-appointments');
   await appointments.locator('summary').click();
   for (const [name, definition] of [['Road witness', 'character.surveyor'], ['March engineer', 'character.engineer']] as const) {
@@ -123,6 +129,7 @@ test('renamed realms retain their authored family, real appointments gain role a
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(await page.locator('[data-testid="production-land"] .production-card > button').evaluateAll(elements => elements.every(element => element.scrollWidth <= element.clientWidth))).toBe(true);
   await page.setViewportSize({ width: 1440, height: 1000 });
+  await closeManagement(page);
   await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Characters & agents', exact: true });
   await expect(dialog.getByTestId('character-roster').getByRole('button')).toHaveCount(3);
@@ -158,10 +165,14 @@ test('missing approved faction art is visibly generic without broken images or b
     await expect(icon).toContainText('Generic');
   }
   await begin(page);
+  await openRegistry(page, 'armies');
   await expect(art(page.locator('.realm-heading'), 'ui.crest.ashen_compact')).toHaveAttribute('data-art-state', 'fallback');
+  await selectFromRegistry(page, 'armies', /Hearth caravan/);
+  await openSelectedOrders(page);
   await expect(page.getByTestId('art-runtime-status')).toContainText('procedural fallback');
   await page.getByRole('textbox', { name: 'Settlement name', exact: true }).fill('Unpainted Hearth');
   await page.getByRole('button', { name: 'Found settlement', exact: true }).click();
+  await openRegistry(page, 'settlements');
   await expect(page.getByTestId('settlement-registry')).toContainText('Unpainted Hearth');
   await expect(page.locator('img')).toHaveCount(0);
 });

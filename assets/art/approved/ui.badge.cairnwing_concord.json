@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.cairnwing_concord",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.cairnwing_concord"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Cairnwing Concord, role ui.badge.\nSUBJECT: ONE very small front-facing army identification badge, simplified bold version of culture's specified heraldry with only its 2to3 principal shapes, no shield border or decorative details. Native32x32 centered16,16 maximum28px; readable at tiny size.\nCULTURE: Tawny feathers, oxblood cord, oxidized copper, pale scree. Narrow harnesses, folded feathered forearms, ribbed narrow shields, ledge tools. Bracketed low stone halls, terraced load courts and wind-braced lift housings integrated into freestanding settlement silhouette; no giant scenery rock or inaccessible floating castle.\nPEOPLE if character or rider: Tool-using feathered cairnfolk with short avian beaks, two legs and two dexterous arms with folded forearm feather fans; human port households. No spread wings, flying poses or implied flight.\nHERALDRY if UI or flag: A single stepped feather with three unequal notches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "ui.badge.cairnwing_concord/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.cairnwing_concord/d1be7538421080943111c750e0782ea54d55f0a55a6bdf50ed53cddeafa725ba/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7dd5abd1a9c975eb0739ea4394e24e28e17deff3df970367c97d245b0f72c2dd",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/ui.badge.cairnwing_concord-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/ui.badge.cairnwing_concord-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:34:04Z",
+  "referenceHashes": [
+    "106f684d4e946497ee55b851c8c8a81114113373ff6edcfd7b0dcc0f85d35990",
+    "55731367f95d123c8d573885229a7bdeb9c31449b74f049543e1cba2e15cbb21"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "78db4745a208b14f6ca1ce27f3da6c614c23e0f805eeb9d5e41c6a6a0003510d",
+      "inputHash": "106f684d4e946497ee55b851c8c8a81114113373ff6edcfd7b0dcc0f85d35990",
+      "outputHash": "8afb0492ac595b34e94e0ba321512cd4f994817b80d78da46662d38792a6b3a2"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "8afb0492ac595b34e94e0ba321512cd4f994817b80d78da46662d38792a6b3a2",
+      "outputHash": "1a70e862b10e35f39f2c5964e13e9a8e067df66e0844cd52da624fa549656f69"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1a70e862b10e35f39f2c5964e13e9a8e067df66e0844cd52da624fa549656f69",
+      "outputHash": "d397b3760c43bdb4008b8438e51ced92dd658313cdcf307afb1702d02cfe536b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "3c4c96a218c30ac81965342c191826e8298d6329c88cc61df7a78f72da7d75b6",
+      "outputHash": "0e34554811ffe428ff4f95e1fe8d92c2aadeb0342081a63b2652b3d5fcad68b5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "793ed1643cfd45fff37722cb55a6da942b79ecbd6bbf84fc6af450ee7554f15a",
+      "outputHash": "8d63fcf41ca3ab802003e5ef51c2796f93d5b503b79a7f4d01f246a09cdcbe78"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "247e1cdbb2745ff32f260a914eb77570caa154bf15d78e9cc3d55c277598e9f6",
+      "outputHash": "c2e737c427d926124da877802361b92b7a7a6218666b8d03ed0d258fc1682cc0"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.cairnwing_concord.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:48:12.871Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Tiny feather and cord badge stays narrow and distinct at32px; hanging cords contained. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate d1be7538421080943111c750e0782ea54d55f0a55a6bdf50ed53cddeafa725ba; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/2690036adb110562931f99bf1c0f75f6435aca3df23aee80800d96f6042d154e.png"
+    ],
+    "inputHash": "50c485a22f41b0150e9aa4e8859025b88d07fc7440264b100354ad1588ed658f"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

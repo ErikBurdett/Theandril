@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.emberwake_convocation",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.cavalry for Theandril, Emberwake Convocation.\nSubject: One mounted adult escort on one complete ordinary sturdy horse, horse and rider both facing southeast, quiet four-hoof standing pose. Compact saddle packs, faction cloth saddle blanket and practical light barding; rider holds reins and a short sheathed or downward sword, no long lance. All ears, tail and hooves complete.\nCulture-specific identity: Adult human seedkeeper or kiln-worker household escort, practical proportions, visible tool-hands and ordinary boots. No fire elemental or undead. Ash-white ceramic face screens and small ceramic plates, smoked-orange cloth, muted sulfur-green straps, charcoal padded kiln aprons and short heat-resistant wraps. Seed jars and split-vent motifs, no open flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "unit.cavalry.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.emberwake_convocation/2108e3c2a129e671873b17f871a744743fb1beca286f521e6b5128468f3e499b/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "989f93256b8c24268d25b96ad0f5f6a84b3f803dfe1a6808837c7bcb4f46dba0",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:38:37Z",
+  "referenceHashes": [
+    "7c50d960ad76b8a2f08152d557d8d5068f907dda22b84d5d8e9b2756957a087f",
+    "4d37b41cbcc42a95ef6f74ea46bb6b7b3c271571d0e7cf8b43797c4ab4a5ec7c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "f517caae3bc7393d36d8df180f0ab638b03ee08ed67a8a03236dc9f865554141",
+      "inputHash": "7c50d960ad76b8a2f08152d557d8d5068f907dda22b84d5d8e9b2756957a087f",
+      "outputHash": "c74466936bb6ae31605e557899f32d81b3e8d592217a3052c464353b9d68827f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "c74466936bb6ae31605e557899f32d81b3e8d592217a3052c464353b9d68827f",
+      "outputHash": "b79410f969152daf6c7be104e8b0fed578a87d6b9d5de8f98e1c75e18ce573e8"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b79410f969152daf6c7be104e8b0fed578a87d6b9d5de8f98e1c75e18ce573e8",
+      "outputHash": "0beea8e0448ba5d51c63a183ebf1b05365dfe6744fc89ec4703d2a77d9cabffb"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "e3eecd992af19941a278dcc98a5759633b803167a87450318d542856f6815112",
+      "outputHash": "fecaeee46bdfd2e8c65b5d957ef083c61676341aa88b51dabb8d2a319f18770b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "40efabfeea6c2595cd5a17755788749644631d6cdfcc02d0f57baa2de7d6ea72",
+      "outputHash": "d12934ac0608fcd445c0c3b593cdecba975f1188d343d36dd05e104d081a5b16"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "973a4d56818ddb2d1422750394c673126e156cb43e87e629a0680a18b9068d52",
+      "outputHash": "500da441359f7bc6390e7adb048cc1c99da7ac831d6ec7eec93c9f66ca05cb9f"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:28.025Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Masked rider on ordinary complete horse, seed jars and heat wraps; no fiery mount. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 2108e3c2a129e671873b17f871a744743fb1beca286f521e6b5128468f3e499b; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/610e401ae7deced3de6910829cee4ca59e4f9e25a164df78cf5308a09c267709.png"
+    ],
+    "inputHash": "d67067b50d9955fcece21ebc93c8d81d890f0906f63130f15a85bb61aca3be33"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

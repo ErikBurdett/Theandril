@@ -1,0 +1,166 @@
+{
+  "profile": {
+    "schemaVersion": 1,
+    "id": "theandril-battle-melee",
+    "workflow": "pixel_2d",
+    "recipe": "../recipes/melee.py",
+    "description": "Original eight-pose metal impact. Geometry and keyframes, not rotated facings or a filtered still.",
+    "palette": {
+      "file": "../../../../assets/palettes/theandril-master.json",
+      "dither": false,
+      "colors": [
+        "#151519",
+        "#28272d",
+        "#45414b",
+        "#67606a",
+        "#544938",
+        "#88765a",
+        "#b7a07a",
+        "#e1cf9f",
+        "#49312b",
+        "#785046",
+        "#a67358",
+        "#d4a478",
+        "#2e2521",
+        "#553e2c",
+        "#806042",
+        "#aa8050",
+        "#252b26",
+        "#434733",
+        "#696b45",
+        "#929063",
+        "#222c34",
+        "#3c4d58",
+        "#657680",
+        "#a1afb1",
+        "#333438",
+        "#515352",
+        "#7b7b70",
+        "#aca592",
+        "#182d27",
+        "#2c4931",
+        "#4d6540",
+        "#7c8850",
+        "#382e27",
+        "#63513b",
+        "#8e7550",
+        "#b9a174",
+        "#142733",
+        "#234353",
+        "#396574",
+        "#659093",
+        "#394952",
+        "#637985",
+        "#9fb5b9",
+        "#d2ddcf",
+        "#642f26",
+        "#a14c27",
+        "#d67e35",
+        "#f2bc60",
+        "#25372b",
+        "#466347",
+        "#829b69",
+        "#c0cca0",
+        "#584527",
+        "#977544",
+        "#ccb36b",
+        "#efe2b0",
+        "#322d50",
+        "#56527c",
+        "#8c84aa",
+        "#beb7d0",
+        "#221f31",
+        "#3e334e",
+        "#685375",
+        "#96738e"
+      ],
+      "sourceSha256": "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+    },
+    "render": {
+      "engine": "CYCLES",
+      "samples": 8,
+      "resolution": [
+        256,
+        256
+      ],
+      "transparent": true,
+      "filterSize": 0.01,
+      "viewTransform": "Standard",
+      "exposure": 0,
+      "motionBlur": false,
+      "depthOfField": false,
+      "camera": {
+        "projection": "ORTHO",
+        "orthoScale": 4,
+        "position": [
+          0,
+          -10,
+          0
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "textures": {
+      "size": 8,
+      "filter": "nearest",
+      "mipmaps": false
+    },
+    "export": {
+      "formats": [
+        "blend",
+        "png"
+      ],
+      "runtimeFormat": "png",
+      "preserveNamedParts": true
+    },
+    "sprites": {
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "alphaThreshold": 0.5,
+      "paddingPixels": 3,
+      "facings": 1
+    },
+    "animation": {
+      "state": "attack",
+      "direction": "se",
+      "loop": false,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    "budgets": {
+      "triangles": 256,
+      "materials": 8,
+      "objects": 24,
+      "maxBytes": 16777216
+    },
+    "quality": {
+      "binarySpriteAlpha": true,
+      "requireAlphaPadding": true,
+      "requiresVisualReview": true
+    },
+    "provenance": {
+      "origin": "Original Theandril Blender mesh construction and authored object keyframes; no downloaded artwork or generated bitmap input.",
+      "license": "Project-authored source; no new third-party art license or automatic CC0 dedication inferred."
+    }
+  },
+  "id": "effect.battle_melee",
+  "version": 1
+}

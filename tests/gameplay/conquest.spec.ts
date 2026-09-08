@@ -1,4 +1,4 @@
-import { openRealmAffairs, openProduction } from './ui-navigation';
+import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders, openRealmAffairs, openCampaignJournal, openProduction } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { serializeGame, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -12,13 +12,16 @@ async function beginSiege(page: Page): Promise<GameState> {
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
   await openRealmAffairs(page);
   await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
+  await openSelectedOrders(page);
   await page.getByRole('button', { name: 'Besiege Reedwatch', exact: true }).click();
   await expect(page.getByTestId(`siege-${CONQUEST_FIXTURE.settlementId}`)).toContainText('Besieging Reedwatch');
   for (let turn = 2; turn <= 4; turn++) {
+    await closeManagement(page);
     await page.getByRole('button', { name: 'End turn', exact: true }).click();
     await expect(page.getByTestId('turn-counter')).toHaveText(`Turn ${turn}`);
   }
   expect(await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.sieges[0]?.defenses)).toBe(0);
+  await openSelectedOrders(page);
   await page.getByRole('button', { name: 'Assault Reedwatch', exact: true }).click();
   await expect(page.getByTestId('battle-panel')).toBeVisible();
   await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
@@ -32,6 +35,7 @@ test('besiege and assault a town, save the capture decision, and apply distinct 
   page.on('pageerror', error => errors.push(error.message));
   await beginSiege(page);
   await page.screenshot({ path: testInfo.outputPath('capture-choices.png'), fullPage: true });
+  await closeManagement(page);
   await page.getByText('Campaign & settings', { exact: true }).click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
   await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
@@ -56,8 +60,8 @@ test('besiege and assault a town, save the capture decision, and apply distinct 
   expect(sacked?.devastation).toBe(60);
   expect(sacked?.occupationTurns).toBe(5);
   expect(await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.treasury)).toBe(before! + loot!);
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: /Reedwatch/ }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', /Reedwatch/); await openSelectedOrders(page);
   await expect(page.getByTestId('settlement-defense')).toContainText('60/100');
   await page.screenshot({ path: testInfo.outputPath('occupied-town.png'), fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
@@ -77,20 +81,21 @@ test('confirm razing and resettle the visible ruins with a normally recruited ca
   await page.getByRole('button', { name: 'Raze settlement', exact: true }).click();
   await page.getByRole('button', { name: 'Confirm raze', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ruins.length)).toBe(1);
-  await page.getByTestId('army-registry').getByRole('button', { name: /Ashen Vanguard/ }).click();
+  await selectFromRegistry(page, 'armies', /Ashen Vanguard/); await openSelectedOrders(page);
   await expect(page.getByTestId('ruin-inspection')).toContainText('Reedwatch');
   await page.screenshot({ path: testInfo.outputPath('reedwatch-ruins.png'), fullPage: true });
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: /Ashen Hearth/ }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', /Ashen Hearth/); await openSelectedOrders(page);
   await openProduction(page, 'land');
   await page.getByRole('button', { name: 'Recruit Hearth caravan', exact: true }).click();
   let turn = 4;
   for (let i = 0; i < 5; i++) {
+    await closeManagement(page);
     await page.getByRole('button', { name: 'End turn', exact: true }).click();
     await expect(page.getByTestId('turn-counter')).toHaveText(`Turn ${++turn}`);
   }
-  await page.getByRole('tab', { name: /Armies/ }).click();
-  await page.getByTestId('army-registry').getByRole('button', { name: /Hearth caravan/ }).click();
+  await openRegistry(page, 'armies');
+  await selectFromRegistry(page, 'armies', /Hearth caravan/); await openSelectedOrders(page);
   const paths = new Map<number, number[]>([[home.cell, []]]);
   const frontier = [home.cell];
   for (let cursor = 0; cursor < frontier.length && !paths.has(ruinCell); cursor++) {
@@ -106,16 +111,21 @@ test('confirm razing and resettle the visible ruins with a normally recruited ca
     const cost = [2, 3].includes(fixture.world.terrain[cell]!) ? 2 : 1;
     const movement = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ownArmies.find(army => army.unitId === 'unit.colonist')?.movement);
     if (movement! < cost) {
+      await closeManagement(page);
       await page.getByRole('button', { name: 'End turn', exact: true }).click();
       await expect(page.getByTestId('turn-counter')).toHaveText(`Turn ${++turn}`);
     }
+    await openSelectedOrders(page);
     await page.getByRole('button', { name: `Move to cell ${cell}`, exact: true }).click();
     await expect(page.getByTestId('feedback')).toContainText(`explored hex ${cell}`);
   }
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText(`Turn ${++turn}`);
+  await openSelectedOrders(page);
   await page.getByLabel('Settlement name', { exact: true }).fill('New Reedwatch');
   await page.getByRole('button', { name: 'Found settlement', exact: true }).click();
+  await openRegistry(page, 'settlements');
   await expect(page.getByTestId('settlement-registry')).toContainText('New Reedwatch');
   expect(await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ruins.length)).toBe(0);
   const rebuilt = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ownSettlements.find(town => town.name === 'New Reedwatch'));
@@ -130,8 +140,10 @@ test('defending a settlement pauses the AI assault and resolves the AI capture a
   await page.goto('/');
   await page.locator('input[type=file]').setInputFiles({ name: 'defend-reedwatch.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(fixture))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('battle-panel')).toBeVisible();
   const battle = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.battle);
@@ -141,6 +153,8 @@ test('defending a settlement pauses the AI assault and resolves the AI capture a
   await expect(page.getByTestId('battle-panel')).toHaveCount(0);
   await expect(page.getByTestId('capture-panel')).toHaveCount(0);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.ownSettlements.length)).toBe(0);
+  await openCampaignJournal(page);
   await expect(page.getByTestId('chronicle')).toContainText(/Reedwatch: occupy|Reedwatch: sack/);
+  await closeManagement(page);
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
 });

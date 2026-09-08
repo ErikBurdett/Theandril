@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.coastal_warship.unsealed_companies",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.coastal_warship.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native96. ONE lean coastal escort galley, southeast view with prow screen RIGHT/lower right. Long low hull, one triangular lateen sail, short complete oars and low practical fighting rail, little cargo. Complete mast tip, yard, oars, rigging, bow and stern within central65%. No sea, wake, waterplane or ground. Lower and leaner than the transport.",
+  "frames": [
+    {
+      "id": "unit.coastal_warship.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.coastal_warship.unsealed_companies/e4f326ddb8c7ee8934289bab9f51bd47b4d9814c073b895ca297346bc4965548/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f693f7ab396c98f82e73b248637a2dffcb141490b8dc7f803327e0d8f7421021",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.coastal_warship.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:31:53.904Z",
+  "referenceHashes": [
+    "ad7f2d4fa6e5300efe0a93b2e74464df206d73a24573f7ee9a779050a4e466de",
+    "1d47698eea391ea1d7c74ddd358eba99b1621b24ed9772bed72f4c5b0330853e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "e0f114bd07f36f2751a44d8aee6dd292fdb0b149d3cdc2b3e459a78dbde0fe02",
+      "inputHash": "ad7f2d4fa6e5300efe0a93b2e74464df206d73a24573f7ee9a779050a4e466de",
+      "outputHash": "17a1a5d76754ab573069da140f9a0f7386c1d6ff422e8ef897e99684e88e38d5"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "17a1a5d76754ab573069da140f9a0f7386c1d6ff422e8ef897e99684e88e38d5",
+      "outputHash": "c6f1dd3a29980d2170ffb0b7060bf6380d563bdef2e03375c18ca5a671ea621d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c6f1dd3a29980d2170ffb0b7060bf6380d563bdef2e03375c18ca5a671ea621d",
+      "outputHash": "21062e980d82ab782b5ea53345ab11cb97cfe70e6391e369cf26e7109e94768b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "702cd63737ba6e3d8462543b82e4919735e35debca32098868d471e723dbc5fe",
+      "outputHash": "a636efce2f6a8570956c2629018a3968890f2b069f7ddf46ae067f4ad0439457"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "caf58e616ab7aceac314df45870669fa190bb7321c49d3c53e6a854efa6304e4",
+      "outputHash": "82fdc0e1f2c6f6275b2ef04a9178fe3f77c36f66510a32f3e2e2593b7a951c4c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "4cbde96ac4117d5a85fa11c0e00f832edff0fd224692c5be1014e40478f5755d",
+      "outputHash": "8e0f471a37cfc74eaa2909816fe2125d5be1b4641dae03c27ced1e6cbe44ed11"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.coastal_warship.unsealed_companies.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:07:16.469Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Single triangular lateen sail, narrow hull and projecting oars/ram identify the galley. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate e4f326ddb8c7ee8934289bab9f51bd47b4d9814c073b895ca297346bc4965548; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/52c11af437aa33e0b55730a1d3a6ff91c5e864f1074f269f94a5af253b703637.png"
+    ],
+    "inputHash": "88cd2c705e506947994f36b67c86b566aa67f9b39c238a033e5e43dc24d61f93"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

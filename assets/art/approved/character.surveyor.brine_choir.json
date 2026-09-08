@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.brine_choir",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art character.surveyor for Theandril, Brine Choir.\nSubject: One adult field surveyor on foot carrying a small rolled survey chart, simple folding measuring rod and a broad cross-body map case. Light working coat, clearly a practical scholar and route worker, not a wizard. Full body, readable hands.\nCulture-specific identity: Adult brinefolk humanoid with matte blue-grey skin, small folded neck fins, broad fin-fold collar, normal two legs and visible dexterous humanlike tool-hands. A practical shore citizen, not a fish-tailed creature. Coral-clay accents, pale eelgrass cloth, wet-slate armor, matte shell inlay and practical woven salt-cloaks. Broad fin-fold collar and low crescent shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "character.surveyor.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.surveyor.brine_choir/66f56f870af13d2a1c57163b1e63b73ccccf40f2d68aa2f9a5130f3f08af6d03/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b9d1621ae208557c3d6d930ef619f18e963d3fff7d3da81c4b6cf78ba0604510",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/character.surveyor.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/character.surveyor.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:12:29Z",
+  "referenceHashes": [
+    "fa7464fd3be2cdce7ab5a495dfbef190d79317bcf77f3febe91e795b0e2226ff",
+    "ea7d4c34cd7d07b367c7ee3858610eea093f4fa332730a9a8fe0eba216c9baf4"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "ffa2b6010e2a50c0d5fcefe7703da4f737303ccaf99a98f31b8dd562c5ea6d8a",
+      "inputHash": "fa7464fd3be2cdce7ab5a495dfbef190d79317bcf77f3febe91e795b0e2226ff",
+      "outputHash": "25e900cd038da8ef222995981e56723d52a35bc13662b893ced488cc28dc5ae3"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "25e900cd038da8ef222995981e56723d52a35bc13662b893ced488cc28dc5ae3",
+      "outputHash": "f1ecb27b7919edac95b28828f92a8dc8bb26daa71d536ad785dbf4ebd30942f3"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f1ecb27b7919edac95b28828f92a8dc8bb26daa71d536ad785dbf4ebd30942f3",
+      "outputHash": "0eaf60309804b01611df9141a90ce59a4d9804e0751d405d8986ac6e97e7e82e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "ba3474f3b62dfac8ca7cfdeecf235f65ef7a82530b1d5d03c290e75b7a755bb2",
+      "outputHash": "7760c727ace0b3844e6798a70c94ee09be75a5ae5c9aac0fd1e773796fae5078"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "91de8a3bf030b8a013fa389dafff9ba3ea12141c777ae81710272f2d9baa0c92",
+      "outputHash": "d1ee1e9120c9ea37e63a9c9d96637981b968b95457f250b42666292eb500385d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "b9d91c1727c71361aa47eac3584916e3a9aa5c6a020144e13ea43136b4e02802",
+      "outputHash": "6f8c24f726cc4ca341d85c52a5b5d7f02e618ecc7a5f77ef737cb82e4bc554ed"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.surveyor.brine_choir.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:18:12.715Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Survey rod and rolled chart form separate tool silhouette; boots and instrument end intact. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 66f56f870af13d2a1c57163b1e63b73ccccf40f2d68aa2f9a5130f3f08af6d03; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b8961f8e2497f32ca29ee542db7ea6f916a07207648d8f8ff1a49d15aec6bb6e.png"
+    ],
+    "inputHash": "a6a4c63367dc3ba41b5fd125fcde9858668e65873a4dfa9d896e54d4ced64f84"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

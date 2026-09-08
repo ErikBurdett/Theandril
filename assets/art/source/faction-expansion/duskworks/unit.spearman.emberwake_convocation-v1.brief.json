@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.emberwake_convocation",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.spearman for Theandril, Emberwake Convocation.\nSubject: One adult spear-watch soldier with a straight compact spear held nearly vertical at the side, plain metal spearhead and a modest faction shield. Spear tip wholly inside generous top margin and no more than one head-height above helmet. Both hands anatomically clear.\nCulture-specific identity: Adult human seedkeeper or kiln-worker household escort, practical proportions, visible tool-hands and ordinary boots. No fire elemental or undead. Ash-white ceramic face screens and small ceramic plates, smoked-orange cloth, muted sulfur-green straps, charcoal padded kiln aprons and short heat-resistant wraps. Seed jars and split-vent motifs, no open flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "unit.spearman.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.spearman.emberwake_convocation/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "8b7f56d445c5409c11e97501171a126f5747de6ffe340bc032d1d0948bd60327",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.spearman.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.spearman.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:39:24Z",
+  "referenceHashes": [
+    "09dd192ef556219d7fe1c94800b41e981d4b1982b89a481f3f582ffa80c3173c",
+    "f79a05993ff89687b0d4fe0fd73c6f8d86ff4c647d1e7f15cebf8ae11f0af6a9"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "0fde4f30099c4fc646f734d68bfae8771a3625c394c75cbfa29443d7805b93c6",
+      "inputHash": "09dd192ef556219d7fe1c94800b41e981d4b1982b89a481f3f582ffa80c3173c",
+      "outputHash": "13538bdf6104b38c9f3c853f322a784f3d5c4849fc012bba25643105370896a3"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

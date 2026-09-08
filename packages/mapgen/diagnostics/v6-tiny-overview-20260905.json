@@ -1,0 +1,306 @@
+{
+  "generatorVersion": 6,
+  "seed": 20260905,
+  "width": 1440,
+  "height": 376,
+  "note": "Code-native odd-row overview: left continents, middle islands, right archipelago. Gold crosses are starts; cyan lines rivers, light blue upland lakes. Not live renderer/art approval evidence.",
+  "panels": [
+    {
+      "panel": 1,
+      "sha256": "e48f7983e4fb6c94c3fc49e65c4ad7be4eacc018767d13dd0029974cc1b96f30",
+      "cells": 1536,
+      "layout": "continents",
+      "landCells": 536,
+      "landComponents": [
+        318,
+        181,
+        11,
+        11,
+        7,
+        5,
+        3
+      ],
+      "meaningfulLandmasses": 2,
+      "coastalLandCells": 254,
+      "mountainCells": 44,
+      "mountainChains": [
+        15,
+        5,
+        4,
+        3,
+        3,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "riverCells": 46,
+      "lakeCells": 7,
+      "lakeBodies": 1,
+      "inlandWaterBodies": [
+        6,
+        5,
+        5,
+        5
+      ],
+      "inlandSeaBodies": 0,
+      "startComponents": 2,
+      "startingRegions": [
+        {
+          "cell": 317,
+          "passableCells": 300,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 722,
+          "passableCells": 163,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1101,
+          "passableCells": 300,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 992,
+          "passableCells": 300,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 7680,
+      "biomeCounts": {
+        "Ocean": 1000,
+        "Temperate grassland": 157,
+        "Temperate forest": 56,
+        "Taiga": 26,
+        "Tundra": 51,
+        "Desert": 4,
+        "Steppe": 59,
+        "Marsh": 39,
+        "Rainforest": 20,
+        "Alpine": 44,
+        "Ash scrub": 36,
+        "Chalkland": 44
+      },
+      "landBiomeNeighborAgreement": 0.5620915032679739,
+      "riverSizeCells": [
+        33,
+        13,
+        0
+      ],
+      "longestRiverCellsToSea": 7,
+      "longestConnectedMajorTrunk": 0,
+      "passRegions": 2,
+      "passCells": 3,
+      "passDefinition": "Connected passable candidates with opposing mountain barriers within2hexes and a different open opposing axis; not a strategic route-connectivity guarantee."
+    },
+    {
+      "panel": 2,
+      "sha256": "1dffdbc2a695b5d42a84ddd5c9d28d4bcdf758770fa993ae4363fe5f2f9bab95",
+      "cells": 1536,
+      "layout": "islands",
+      "landCells": 529,
+      "landComponents": [
+        190,
+        145,
+        86,
+        79,
+        10,
+        7,
+        3,
+        3,
+        3,
+        2,
+        1
+      ],
+      "meaningfulLandmasses": 4,
+      "coastalLandCells": 283,
+      "mountainCells": 33,
+      "mountainChains": [
+        4,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "riverCells": 28,
+      "lakeCells": 7,
+      "lakeBodies": 1,
+      "inlandWaterBodies": [
+        8,
+        5
+      ],
+      "inlandSeaBodies": 0,
+      "startComponents": 4,
+      "startingRegions": [
+        {
+          "cell": 1044,
+          "passableCells": 178,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 449,
+          "passableCells": 138,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 962,
+          "passableCells": 82,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1409,
+          "passableCells": 75,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 7680,
+      "biomeCounts": {
+        "Ocean": 1007,
+        "Temperate grassland": 147,
+        "Temperate forest": 71,
+        "Taiga": 31,
+        "Tundra": 103,
+        "Desert": 2,
+        "Steppe": 49,
+        "Marsh": 12,
+        "Rainforest": 14,
+        "Alpine": 33,
+        "Ash scrub": 16,
+        "Chalkland": 51
+      },
+      "landBiomeNeighborAgreement": 0.6734234234234234,
+      "riverSizeCells": [
+        28,
+        0,
+        0
+      ],
+      "longestRiverCellsToSea": 4,
+      "longestConnectedMajorTrunk": 0,
+      "passRegions": 4,
+      "passCells": 6,
+      "passDefinition": "Connected passable candidates with opposing mountain barriers within2hexes and a different open opposing axis; not a strategic route-connectivity guarantee."
+    },
+    {
+      "panel": 3,
+      "sha256": "a82adf44c6d34ec39dda431b43fbf7d3e7009fa5c5aed9e83a90fdb7f2daec15",
+      "cells": 1536,
+      "layout": "archipelago",
+      "landCells": 581,
+      "landComponents": [
+        87,
+        84,
+        79,
+        74,
+        73,
+        62,
+        55,
+        51,
+        8,
+        3,
+        2,
+        2,
+        1
+      ],
+      "meaningfulLandmasses": 8,
+      "coastalLandCells": 279,
+      "mountainCells": 40,
+      "mountainChains": [
+        5,
+        4,
+        4,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "riverCells": 30,
+      "lakeCells": 7,
+      "lakeBodies": 1,
+      "inlandWaterBodies": [],
+      "inlandSeaBodies": 0,
+      "startComponents": 4,
+      "startingRegions": [
+        {
+          "cell": 904,
+          "passableCells": 81,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 1399,
+          "passableCells": 78,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 310,
+          "passableCells": 72,
+          "freshwaterWithin3": true
+        },
+        {
+          "cell": 434,
+          "passableCells": 71,
+          "freshwaterWithin3": true
+        }
+      ],
+      "canonicalBufferBytes": 7680,
+      "biomeCounts": {
+        "Ocean": 955,
+        "Temperate grassland": 137,
+        "Temperate forest": 52,
+        "Taiga": 38,
+        "Tundra": 127,
+        "Desert": 3,
+        "Steppe": 77,
+        "Marsh": 24,
+        "Rainforest": 9,
+        "Alpine": 40,
+        "Ash scrub": 23,
+        "Chalkland": 51
+      },
+      "landBiomeNeighborAgreement": 0.7073170731707317,
+      "riverSizeCells": [
+        25,
+        5,
+        0
+      ],
+      "longestRiverCellsToSea": 4,
+      "longestConnectedMajorTrunk": 0,
+      "passRegions": 4,
+      "passCells": 5,
+      "passDefinition": "Connected passable candidates with opposing mountain barriers within2hexes and a different open opposing axis; not a strategic route-connectivity guarantee."
+    }
+  ]
+}

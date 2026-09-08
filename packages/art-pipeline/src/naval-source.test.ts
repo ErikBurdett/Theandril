@@ -12,9 +12,11 @@ const roots: string[] = [];
 afterEach(async () => { for (const root of roots.splice(0)) await rm(root, { recursive: true, force: true }); });
 const palette = paletteSchema.parse({ id: 'test.palette', version: 1, colors: ['#000000', '#ffffff'] });
 function source(index: number, family: typeof FACTION_ART_FAMILIES[number], role: typeof FACTION_NAVAL_ART_ROLES[number]) {
-  // Thirty-six distinct synthetic silhouette fixtures, never production artwork.
+  // Nine widths × eight heights give 72 distinct, inset synthetic silhouettes,
+  // never production artwork. Increasing the family count must not touch an edge.
   const image = { width: 96, height: 96, data: new Uint8Array(96 * 96 * 4) };
-  for (let y = 24; y < 70; y++) for (let x = 24; x < 32 + index; x++) image.data.set([255, 255, 255, 255], (y * 96 + x) * 4);
+  const width = 8 + index % 9, height = 32 + Math.floor(index / 9);
+  for (let y = 24; y < 24 + height; y++) for (let x = 24; x < 24 + width; x++) image.data.set([255, 255, 255, 255], (y * 96 + x) * 4);
   const bytes = encodePng(image), id = `${role}.${family}`;
   const record: FactionExpansionBatch['sources'][number] = { id, role, family, version: 1,
     sourcePath: `assets/art/source/faction-expansion/naval/${id}-v1.png`, sourceHash: sha256(bytes),
@@ -26,9 +28,20 @@ function source(index: number, family: typeof FACTION_ART_FAMILIES[number], role
 const sources = FACTION_ART_FAMILIES.flatMap((family, i) => FACTION_NAVAL_ART_ROLES.map((role, j) => source(i * 3 + j, family, role)));
 const batch: FactionExpansionBatch = { schemaVersion: 1, batchId: 'naval', sources: sources.map(item => item.record) };
 
-describe('twelve-culture static naval source contract', () => {
-  it('accepts all36 unique original identities while preserving land source routes', () => {
-    expect(factionExpansionBatchSchema.parse(batch).sources).toHaveLength(36);
+describe('twenty-four-culture static naval source contract', () => {
+  it('accepts all72 unique original identities while preserving land source routes', () => {
+    expect(FACTION_ART_FAMILIES).toHaveLength(24);
+    expect(factionExpansionBatchSchema.parse(batch).sources).toHaveLength(72);
+    expect(new Set(sources.map(item => item.record.sourceHash)).size).toBe(72);
+    for (const family of FACTION_ART_FAMILIES) expect(batch.sources.filter(item => item.family === family).map(item => item.role)).toEqual(FACTION_NAVAL_ART_ROLES);
+    for (const item of sources) {
+      const image = decodePng(item.bytes), edgeAlpha: number[] = [];
+      for (let offset = 0; offset < 96; offset++) edgeAlpha.push(
+        image.data[offset * 4 + 3]!, image.data[(95 * 96 + offset) * 4 + 3]!,
+        image.data[(offset * 96) * 4 + 3]!, image.data[(offset * 96 + 95) * 4 + 3]!,
+      );
+      expect(edgeAlpha.every(alpha => alpha === 0)).toBe(true);
+    }
     for (const role of FACTION_NAVAL_ART_ROLES) expect(factionFrameContract(role)).toEqual({ native: 96, pivot: [48, 80], maxHeight: 78, centered: false, type: 'unit' });
     expect(factionFrameContract('unit.guard')).toEqual({ native: 64, pivot: [32, 56], maxHeight: 48, centered: false, type: 'unit' });
     expect(factionFrameContract('unit.cavalry')).toEqual({ native: 96, pivot: [48, 80], maxHeight: 78, centered: false, type: 'unit' });
@@ -41,7 +54,7 @@ describe('twelve-culture static naval source contract', () => {
     expect(() => factionExpansionBatchSchema.parse({ ...batch, sources: [{ ...first, id: 'unit.transport.other_family' }] })).toThrow('Unregistered expansion');
   });
 
-  it('prepares exact96px static briefs for all12 families without approval or touching historical inputs', async () => {
+  it('prepares exact96px static briefs for all24 families without approval or touching historical inputs', async () => {
     const root = await mkdtemp(join(tmpdir(), 'theandril-naval-source-')); roots.push(root);
     const put = async (path: string, value: string | Uint8Array) => { await mkdir(dirname(join(root, path)), { recursive: true }); await writeFile(join(root, path), value); };
     await put('assets/palettes/theandril-master.json', JSON.stringify(palette));
@@ -51,7 +64,7 @@ describe('twelve-culture static naval source contract', () => {
     for (const path of untouched) await put(path, 'Retained historical sentinel');
     const options = { repoRoot: root, batchId: 'naval', write: true };
     const prepared = await prepareFactionExpansion(options);
-    expect(prepared).toHaveLength(36);
+    expect(prepared).toHaveLength(72);
     for (const result of prepared) {
       expect(result.approved).toBe(false); expect(result.createdPaths).toHaveLength(4);
       const manifest = parseAssetManifest(JSON.parse(await readFile(join(root, result.briefPath), 'utf8')));

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.chalkland.variant_1",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.chalkland.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. CHALKLAND: pale warm grey limestone soil in broad flat weathered plates, sparse muted sage ground cover and small chalk fragments. Bone-grey and taupe rather than bright white; no tall crag, snow or uniformly pebbled confetti. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.chalkland.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.chalkland.variant_1/d77866019e3b333cde561eee9f418c77f3835c9dc0a5dc2104ae9d74f15578ea/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "86aa229b932139554e11c4fba27767254384d8590a7f58656531b0dbe750e9aa",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.chalkland.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.chalkland.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:51:12.477Z",
+  "referenceHashes": [
+    "d2d3f0355357ca23ed065ba3df037221a834484f6386f8923a67bfc028b654d7",
+    "e21d06fc4e1e7a9f5b8f8e694291a37832e5dc94487d66d440eb4c187f6fb4ea"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "6a7b62bba2a8733486e91b21410ed7f98e20cfa262e0f2c36c8c09469d99b7b2",
+      "inputHash": "d2d3f0355357ca23ed065ba3df037221a834484f6386f8923a67bfc028b654d7",
+      "outputHash": "5513c7f9b1896675ca592d3bdcc5680054fdff134d2d7cf5b9a8ee715a9b5e67"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "5513c7f9b1896675ca592d3bdcc5680054fdff134d2d7cf5b9a8ee715a9b5e67",
+      "outputHash": "d50010cb4918e5740b8d47956eec19964c94c05ea4f475c992657b953688929b"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d50010cb4918e5740b8d47956eec19964c94c05ea4f475c992657b953688929b",
+      "outputHash": "a010146d27a24a0b8b2d68de8988e1ae2bf625d67a98dcaab76454a2c2bfbf9c"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "6445e24ab3ad9205f213b31cd7827157d8f8d5e1488bfd2d05bc96492f3c6853",
+      "outputHash": "fc71be5b46ddd79ead39ccebd33f239fe23576b337ad1a686599fafe5e840402"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "34b09f9730d1f485d3076994834715bb2b3f5d3edead8c5779398d604a77a069",
+      "outputHash": "3c5de732b827c8b56b8dbcf78b41e6c236e56255fea999d9df355d71d3a66609"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "c69e2fffaa15f64da2e4287c8322a784daf0c3a13f5f7c302bdbe464120c89fb",
+      "outputHash": "c5f80c0f199f1f67751c4ee27b1fdab7790f27f7c2c75f6e3e346ea5948911c6"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.chalkland.variant_1.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:20.669Z",
+    "notes": "Pale broken chalk slabs and muted fissures read as chalk rather than snow; mask remains fully filled. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate d77866019e3b333cde561eee9f418c77f3835c9dc0a5dc2104ae9d74f15578ea; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/82c72ecb4e48b94c507d420da24b62d7444d8539640110ea5c3f0500ce915855.png"
+    ],
+    "inputHash": "8b8d40540df2d2fcf130bfb8f0e2bb69d8e52611ec94e5f3f33f675a04f11caa"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

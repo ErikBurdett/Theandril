@@ -1,0 +1,20 @@
+Theandril slice22 final bounded follow-ups, 2026-09-07.
+
+Production command:
+PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium ./node_modules/.bin/playwright test --config playwright.production.config.ts --output=test-results/slice22-production
+Result: 1 passed (1.9s); actual watch-only fog command/no-development-hook scenario.
+Production build pnpm build passed; existing large-bundle and dependency-comment warnings remain.
+
+Durable evidence command:
+PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium ./node_modules/.bin/playwright test tests/gameplay/faction-art.spec.ts tests/gameplay/contact.spec.ts --output=test-results/slice22-durable-evidence
+Result: 4 passed (1.1m).
+Observed individual durations: density/save 2.2s; actual entity contact 28.6s;
+24-culture land/town/strategic gallery 32.2s; missing-culture fallback 2.3s.
+Only evidence persistence changed after the preceding corrected browser pass:
+actual JSON files now accompany reporter attachments, with unchanged assertions/runtime.
+Retained: 0034-faction-art-inspection.json,0034-contact-witness.json,0034-contact-post-pause.json.
+
+After these final test-file imports/writes, pnpm typecheck and pnpm lint both
+exited0. Final git diff --check exited0. No additional full headless/browser
+rerun is implied; the earlier exact full/corrected reports remain retained.
+The separate unchanged Short/Epic isolated report is0034-epic-isolated.txt.

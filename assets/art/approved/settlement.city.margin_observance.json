@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.city.margin_observance",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 128,
+    "height": 128
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.city.margin_observance"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Margin Observance, role settlement.city.\nSUBJECT: ONE mature compact city with7to9 distinct roof/building masses, culturally specific civic hall and several inhabited working courtyards, gate and enclosing walls. Native128x128 height≤110px pivot64,112. Clear hierarchy and varied roofs; no dominant generic medievalcastle, no scenery or terrain tile.\nCULTURE: Parchment grey, dull cinnabar, matte ink black, weathered lead. Narrow document cases, interrupted stripe patterns, practical slate shoulder covers and pale-edged shields. Slab-roof archive stations, protected empty wall recesses and enclosed supply yards; no levitatingglyphs or blackwizardcliche.\nPEOPLE if character or rider: Human copyists, custodians and supplyhouseholds; work-conscious guardedcamp equipment.\nHERALDRY if UI or flag: One broken bracket with a deliberate open corner and small offset registration bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "settlement.city.margin_observance/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        112
+      ],
+      "sourcePath": "assets/art/approved/settlement.city.margin_observance/9b2d2da131a4d10a45de19413b6ce63f6bf2d453b56c8cb7fce9475e126f2e8e/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "473f0b22b1ac06df5f1f0b88c61ee90d4cafe492170b3301e846c9d0bd545c66",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/settlement.city.margin_observance-v1.png",
+      "assets/art/source/faction-expansion/reedstars/settlement.city.margin_observance-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:12:01.000Z",
+  "referenceHashes": [
+    "5d18460cadab3d617756acda1edbf774546e346150ceebad3e17a0d16620c728",
+    "21a6c320824589bf4e9d013e2c4d510bb1b1ac240ed18ba59a67aa24206c775f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-128",
+      "settingsHash": "53fce5b6a183a86a29894d65ee8ebdc99df0d4fe630bff2cd6606d18996d2810",
+      "inputHash": "5d18460cadab3d617756acda1edbf774546e346150ceebad3e17a0d16620c728",
+      "outputHash": "3eaacce9306dc824d3a44a2f45fa526bf0b8e863e64d8147c0039ef328022a98"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "3eaacce9306dc824d3a44a2f45fa526bf0b8e863e64d8147c0039ef328022a98",
+      "outputHash": "a95d44b4b4d08a8480708a3d984ad01ae7156153f29513b82351333bf8fe670d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a95d44b4b4d08a8480708a3d984ad01ae7156153f29513b82351333bf8fe670d",
+      "outputHash": "1d9c177706410640dee7030141af31692d48a467800da25644dfd92cbe14ec05"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fa246599bd4d45cb3336893f16ff28dd6b11b363a35b0cafb6364108e2d76a0",
+      "inputHash": "a8e450b673d53221fdb16760f06fe7a7764f8ba8a14d8e9c597edc7567f6742f",
+      "outputHash": "f1a1687ee7933f2775a514aa52bcb60ef34fb56dd7b2f3475d801fa4d278c29f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "607988b62c0efdbe9780abb0a76ac7e2684def7acb50cba08dbb208fe619e6a9",
+      "inputHash": "bd7940da7be49ddc71f64d3e226a87d65d970200145b9dbed86ea3766063a92f",
+      "outputHash": "124418450a4fc8a1ca8975ac2652d961333a9b4e075c988f248265b4c236d99c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-128",
+      "settingsHash": "a2798c59465679277c9ee46c0626e4d48f1984c72b28c425a33888efb8caf9a9",
+      "inputHash": "46859383a4bdc7911e8ea6ce90564d374e926b26e6b1c0c4c103c127e127bee2",
+      "outputHash": "682ac0036b6543066f5019721944b504ca21d9e93d385b5d494bd8b2c5eb287a"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.city.margin_observance.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:16:07.359Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Largest128px bounded archive compound with roof recesses and protected supply yards, no magical wizard tower. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 9b2d2da131a4d10a45de19413b6ce63f6bf2d453b56c8cb7fce9475e126f2e8e; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/86e3b7ec72ffcb71d3e56d6f4b7c81fe79114ca6c8252bb75992cfb9cf07d531.png"
+    ],
+    "inputHash": "fbea848ff78655d7a3a65d22d984a59bc11e1fa74f6220e56b523aa3764dd041"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

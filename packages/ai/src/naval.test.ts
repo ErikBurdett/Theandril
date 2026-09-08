@@ -1,12 +1,13 @@
 import { expect, test } from 'vitest';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { UNITS } from '@theandril/content';
-import { hexDistance, WATER_DEPTH } from '@theandril/mapgen';
+import { hexDistance, neighbors, TERRAIN, WATER_DEPTH } from '@theandril/mapgen';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
 import { navalCampaign, NAVAL_FIXTURE } from '../../test-fixtures/src/naval-fixture';
 import { planTurn } from './index';
 import { createNavigation } from './navigation';
-import { hasNavalOpportunity, planNaval } from './naval';
+import { coastalFoundingSite, hasNavalOpportunity, needsNavalInvestment, planNaval } from './naval';
+import { createSeaKnowledge } from './sea-knowledge';
 
 function issue(state: GameState, command: GameCommand): ReturnType<typeof applyCommand> {
   const result = applyCommand(state, command);
@@ -169,4 +170,91 @@ test('shared navigation respects sea hull restrictions and cannot give carried t
   const passengerIds = new Set(cargo.formations.map(formation => formation.id));
   expect(planTurn(view).some(command => 'armyId' in command && command.armyId === cargo.id && command.type !== 'disembarkArmy')).toBe(false);
   expect(cargo.formations.filter(formation => UNITS.find(unit => unit.id === formation.unitId)?.canFound).map(formation => passengerIds.has(formation.id))).toEqual([true]);
+});
+
+test('ocean reconnaissance is paid before foreign naval contact, then its temporary funding need ends', () => {
+  const state = navalCampaign({ enemyFleet: false });
+  delete state.armies[NAVAL_FIXTURE.coastalId]; // Explicit hull setup; paid replacement below is real production.
+  refreshAuthoredSight(state);
+  issue(state, { type: 'research', factionId: state.turnOwnerId, technologyId: 'technology.ocean_navigation' });
+  issue(state, { type: 'embarkArmy', factionId: state.turnOwnerId, armyId: NAVAL_FIXTURE.cargoId, fleetId: NAVAL_FIXTURE.fleetId });
+  const view = getObservation(state, state.turnOwnerId), original = structuredClone(view);
+  expect(view.armies.some(army => army.factionId !== view.factionId && army.domain === 'naval')).toBe(false);
+  expect(needsNavalInvestment(view)).toBe(true);
+  expect(planNaval(view, 47).commands.some(command => command.type === 'queue' && command.itemId === 'unit.ocean_warship')).toBe(false);
+  const plan = planNaval(view, 48);
+  expect(plan.coinSpent).toBe(48);
+  expect(plan.commands).toContainEqual({ type: 'queue', factionId: view.factionId, settlementId: NAVAL_FIXTURE.homeId, itemId: 'unit.ocean_warship' });
+  expect(view).toEqual(original);
+  for (const command of plan.commands) issue(state, command);
+  for (let turn = 0; turn < 20 && state.settlements[NAVAL_FIXTURE.homeId]!.queue.length; turn++) round(state);
+  const ready = getObservation(state, state.turnOwnerId);
+  expect(ready.armies.some(army => army.factionId === state.turnOwnerId && army.formations.some(formation => formation.unitId === 'unit.ocean_warship'))).toBe(true);
+  expect(needsNavalInvestment(ready)).toBe(false);
+  expect(planNaval(ready, 1000).commands.some(command => command.type === 'queue' && command.itemId === 'unit.ocean_warship')).toBe(false);
+  expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+});
+
+test('unknown remote hull connectivity neither supplies a local charter nor funds unlimited replacements', () => {
+  for (const remoteHulls of [3, 7]) {
+    // Authored deployment isolates policy uncertainty. The geography and normal
+    // current sight stay real; no hidden canonical component enters the planner.
+    let state = navalCampaign({ enemyFleet: false });
+    const ferry = state.armies[NAVAL_FIXTURE.fleetId]!;
+    ferry.cell = 16 * state.world.width + 31; // Legal shallows at the far island's eastern coast.
+    while (ferry.formations.length < remoteHulls) ferry.formations.push(createArmyFormation(`army.${state.nextId++}`, 'unit.transport'));
+    ferry.formations.sort((a, b) => a.id < b.id ? -1 : 1);
+    state.explored[state.turnOwnerId] = new Set();
+    refreshAuthoredSight(state);
+    state = deserializeGame(serializeGame(state));
+    const view = getObservation(state, state.turnOwnerId), before = structuredClone(view);
+    const launch = view.productionOptions.find(option => option.settlementId === NAVAL_FIXTURE.homeId && option.itemId === 'unit.transport')!.launchCell;
+    expect(launch).not.toBeNull(); expect(launch).toBeDefined();
+    const knowledge = createSeaKnowledge(view);
+    expect(knowledge.basinRelation(launch!, ferry.cell)).toBe('unknown');
+    expect(knowledge.basinStatus(launch!)).toBe('unknown');
+    const held = new Set([NAVAL_FIXTURE.fleetId, NAVAL_FIXTURE.coastalId]);
+    const plan = planNaval(view, 24, { heldArmyIds: held });
+    const charter = { type: 'queue', factionId: state.turnOwnerId, settlementId: NAVAL_FIXTURE.homeId, itemId: 'unit.transport' } as const;
+    if (remoteHulls === 3) {
+      expect(needsNavalInvestment(view)).toBe(true);
+      expect(plan.commands).toContainEqual(charter); expect(plan.coinSpent).toBe(24);
+      const mirror = deserializeGame(serializeGame(state));
+      const result = issue(state, charter); expect(issue(mirror, charter)).toEqual(result);
+      expect(serializeGame(mirror)).toBe(serializeGame(state));
+      expect(state.factions[0]!.treasury).toBe(before.treasury - 24);
+    } else {
+      // Seven remote transports plus the existing local galley reach the
+      // conservative eight-hull investment ceiling. No fictitious connection.
+      expect(needsNavalInvestment(view)).toBe(false);
+      expect(plan.commands.some(command => command.type === 'queue' && UNITS.find(unit => unit.id === command.itemId)?.movementDomain === 'naval')).toBe(false);
+    }
+    expect(view).toEqual(before); expect(held).toEqual(new Set([NAVAL_FIXTURE.fleetId, NAVAL_FIXTURE.coastalId]));
+  }
+});
+
+test('only proven enclosure diverts a founder toward a replacement port, not an unknown chart boundary', () => {
+  // Synthetic public chart isolates the proof decision without granting knowledge
+  // to a canonical campaign: one inland berth and a separately charted edge sea.
+  const state = navalCampaign({ enemyFleet: false }), base = getObservation(state, state.turnOwnerId);
+  const width = 16, height = 12, townCell = 65, berth = 66, missingShore = 67;
+  const town = { ...base.settlements.find(town => town.factionId === base.factionId)!, cell: townCell };
+  const founder = { ...base.armies.find(army => army.canFound)!, cell: 135 };
+  const template = base.cells[0]!;
+  const cells = Array.from({ length: width * height }, (_, cell) => ({ ...template, cell,
+    terrain: cell === berth || cell % width === width - 1 ? TERRAIN.water : TERRAIN.plains,
+    waterDepth: cell === berth || cell % width === width - 1 ? WATER_DEPTH.shallow : WATER_DEPTH.land,
+    hydrology: 0, settlementId: cell === townCell ? town.id : null, factionId: null }));
+  const view = { ...base, width, height, cells: cells.filter(cell => cell.cell !== missingShore),
+    settlements: [town], armies: [founder], productionOptions: [] };
+  const before = structuredClone(view), unknown = createSeaKnowledge(view);
+  expect(unknown.basinStatus(berth)).toBe('unknown');
+  expect(unknown.basinStatus(width - 1)).toBe('open');
+  expect(coastalFoundingSite(view, founder)).toBeNull();
+  expect(view).toEqual(before);
+  const complete = { ...view, cells }, proof = createSeaKnowledge(complete);
+  expect(proof.basinStatus(berth)).toBe('enclosed');
+  const replacement = coastalFoundingSite(complete, founder);
+  expect(replacement).not.toBeNull();
+  expect(neighbors(replacement!, width, height).some(cell => proof.basinStatus(cell) === 'open')).toBe(true);
 });

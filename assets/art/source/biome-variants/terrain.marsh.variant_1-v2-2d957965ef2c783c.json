@@ -1,0 +1,25 @@
+{
+  "id": "terrain.marsh.variant_1",
+  "version": 2,
+  "sourcePath": "assets/art/source/biome-variants/terrain.marsh.variant_1-v2.png",
+  "sourceHash": "7178cb5e903656a1bb15026754400bbadb4ed75571ace3a5d728bd7c34b63228",
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. MARSH: low peat-black wetland surface, muted muddy olive-brown ground with two small irregular shallow blue-grey puddles, uneven reed clusters along their edges. Pools stay wholly inside tile, not rivers or coast. No bright reflections. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs. Revision constraint: the complete ground, mud, reeds and every puddle must be FULLY OPAQUE (alpha255) throughout the entire hex interior, right up to its hard stair-stepped pixel boundary. Absolutely no graded alpha, semitransparent edge pixels, translucent fringe, feathering, soft edge or isolated alpha pinholes anywhere in or along the hex silhouette. The only transparent pixels belong to the generous external background. Preserve a clean continuous filled flat pointy-hex shape; pools are opaque painted slate colors, never transparency.",
+  "provider": "codex-imagegen",
+  "model": "not-exposed-by-tool",
+  "seed": null,
+  "generatedAt": "2026-09-07T07:06:18.994Z",
+  "sourceSize": [
+    1173,
+    1341
+  ],
+  "crop": {
+    "x": 63,
+    "y": 49,
+    "w": 1047,
+    "h": 1201
+  },
+  "nativePath": "assets/art/source/native/terrain.marsh.variant_1/v2/2d957965ef2c783c/idle-se-0.png",
+  "nativeHash": "a4a16593282fcaf68286ca471e218baa4484074884cdb66395b7fc3caae97e79",
+  "toolHash": "2d957965ef2c783cf4f0d632b6b8574a6bddd1ce072da2fdb4681cbf1f667be7",
+  "note": "One original built-in generation. Nearest pixel-center fitting, existing pointy-hex mask, nearest-interior fill limited to four native pixels, binary alpha and master palette. Not visual approval."
+}

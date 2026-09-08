@@ -8,6 +8,7 @@ import { indexes, updateSight } from './visibility';
 import { recordConquest } from './diplomacy';
 import { captureSettlementCharacters } from './characters';
 import { armyDomain, carriedArmyBlocker } from './naval';
+import { roadMovementCost } from './roads';
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 const bounded = (maximum: number) => z.number().int().min(0).max(maximum);
@@ -64,8 +65,7 @@ export function assaultObjection(state: GameState, factionId: string, settlement
   const army = state.armies[siege.armyId];
   if (!army || army.factionId !== factionId || !neighbors(army.cell, state.world.width, state.world.height).includes(town.cell)) return 'The besieging army is no longer in position.';
   if (!atWar(state, factionId, town.factionId)) return 'An assault requires an active war.';
-  const terrain = state.world.terrain[town.cell];
-  if (army.movement < (terrain === 2 || terrain === 3 ? 2 : 1)) return 'The besieging army needs movement to assault; wait for the next turn.';
+  if (army.movement < roadMovementCost(state, army.cell, town.cell)) return 'The besieging army needs movement to assault; wait for the next turn.';
   if ([...(indexes(state).armies.get(town.cell) ?? [])].reduce((sum, id) => sum + (state.armies[id]?.formations.length ?? 0), 0) > (rulesVersion(state) < 8 ? 12 : 20)) return rulesVersion(state) >= 8 ? 'An assault supports at most twenty defending formations.' : rulesVersion(state) < 6 ? 'An assault supports at most twelve defending armies.' : 'An assault supports at most twelve defending formations.';
   return null;
 }

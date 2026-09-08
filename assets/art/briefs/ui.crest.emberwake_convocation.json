@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.crest.emberwake_convocation",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.crest.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.crest for Theandril, Emberwake Convocation.\nSubject: ONE front-facing coarse heraldic crest alone, clear large original faction mark, no enclosing shield or extra medallion. Strong silhouette and generous clean negative spaces, the exact described emblem.\nCulture-specific identity: A half-blackened seed wheel enclosing a single pale seed, clear coarse silhouette, no flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "ui.crest.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/ui.crest.emberwake_convocation/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "4bef78262e7415e0d699570f28012cc5e13f9e67e1bd0263dc35dff124713300",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.crest.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.crest.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:58:46Z",
+  "referenceHashes": [
+    "37bd56b55d707f9b332939bb4228cb7b1686c7855316ed70f090a3b5663ad0d7",
+    "063238990258a0062da93aed31aff7d3ca24df4509b381bdbfafb290e9ce9bf7"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "f25b3575bdb1d79463a0c8a700854b1c42e3ec785c8cd2bfb6dfa09e0400285a",
+      "inputHash": "37bd56b55d707f9b332939bb4228cb7b1686c7855316ed70f090a3b5663ad0d7",
+      "outputHash": "1a4e1da4a54b871881e5080358fd6dc8bad1d6cc164f8e61159ce8bf433cdc38"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

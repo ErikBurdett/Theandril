@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.temperate_forest.variant_1",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.temperate_forest.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. TEMPERATE FOREST: an irregular open broadleaf wood of five low grouped mature moss-green crowns, large uneven oak-like canopy masses around a dark brown grassy clearing. Muted ochre leaves very sparse; no autumn blaze. Different crown sizes; shadow under trees, grounded not floating. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.temperate_forest.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.temperate_forest.variant_1/70c5b1e4be5f875269a87903146c5e007e20723aea3c9703af41576d7d808132/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "25d6fd1855437b764e3ec894789eb1c4fe5ba11913609e736a609ac92427506e",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.temperate_forest.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.temperate_forest.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:19:15.274Z",
+  "referenceHashes": [
+    "bf543292df7c2262cc0568dd0b33d818d1f7f7af7443c6f9001dc19a568828ad",
+    "36c0dd4e0d3aaf894cffa1abd38299a63d2d4cd2afd10c8251e4eef39ee32937"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "a49ab35e740ac86a167b9c8757866d39b6fe68977529cd78cfff7a4a74f59b70",
+      "inputHash": "bf543292df7c2262cc0568dd0b33d818d1f7f7af7443c6f9001dc19a568828ad",
+      "outputHash": "dbb8057558c1b2265ec9f7c11342e36457e3333a0710ef2e49cec291f2fb28f5"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "dbb8057558c1b2265ec9f7c11342e36457e3333a0710ef2e49cec291f2fb28f5",
+      "outputHash": "51d9c66c0c2f5c3e06219defed0dc1499b37b9386c04368549bc7cafc26ff0da"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "51d9c66c0c2f5c3e06219defed0dc1499b37b9386c04368549bc7cafc26ff0da",
+      "outputHash": "58639391106580bc15aa32c7543a3219e7b3abdbd8a405c379877e5cbcf85c95"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "b96e3f2dc779c9b01324321452ca2e917e704a405b85fdfb5c05711844df873e",
+      "outputHash": "4fb74457f640b768e5c2d0adbe72d72cee2c5025b130e35e05e6f195c0eb294d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "926d992836a7077db02ff391515d5a9b97e53441e59d26ff3a848cbb868b19f1",
+      "outputHash": "6c4fc858dcef1ffaf4dfdf0d72c44977993031406b5112cbc5a69da2bab416c8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "6c25b6152ef635d2e76227af810d744e17d0618d62c8ae3d032956c106f2b05f",
+      "outputHash": "b3af79a098ddf707a8b9f038318b879d3adcdb0c630dc95c992491b86a4804bf"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.temperate_forest.variant_1.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:15.601Z",
+    "notes": "Open autumn-toned coppice breaks dense forest repetition; crowns and clear ground remain within the mask. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 70c5b1e4be5f875269a87903146c5e007e20723aea3c9703af41576d7d808132; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5ca14c9b8a90475cb5f9bdfd03ddc500fc13098b407379527a06abe17f1b57c0.png"
+    ],
+    "inputHash": "15d27224aedd3dfe6caf408db845fbf98e10f371237cbe06c8ef20237f85f29d"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

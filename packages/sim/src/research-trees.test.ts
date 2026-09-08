@@ -8,7 +8,8 @@ import { withRules } from './rules';
 
 function issue(state: GameState, command: GameCommand) { const result = applyCommand(state, command); expect(result.ok, result.error).toBe(true); }
 function scenario() {
-  const state = createGame({ seed: 20260906, size: 'tiny', factionCount: 2, pace: 'epic' });
+  // Authored marsh sites preserve the pre-hydrology terrain/feature contract.
+  const state = createGame({ seed: 20260906, size: 'tiny', factionCount: 2, pace: 'epic', generatorVersion: 4 });
   for (const cell of cellsWithin(state, state.armies['army.1']!.cell, 3)) {
     state.world.terrain[cell] = 1; state.world.biome[cell] = 7; state.world.fertility[cell] = 80; state.world.waterDepth[cell] = 0;
   }

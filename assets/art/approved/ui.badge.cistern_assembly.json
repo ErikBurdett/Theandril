@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.cistern_assembly",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native32. ONE single front-facing simple compact strategic insignia depicting only the original heraldic motif. Broad connected shapes and large negative spaces, two or three muted tones, readable at32pixels. No montage, sheet, multiple alternatives, character, shield collection, frame, tiny writing or decoration. Front-facing UI overrides world camera.",
+  "frames": [
+    {
+      "id": "ui.badge.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.cistern_assembly/64f5c26ce975d428fe7db33a816ce814567815e2acde2764d937330d88f420d1/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "951aefe891c5dae1d99018e1e7bddd34430b7892a6a2cde6304ae7d778b421aa",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/ui.badge.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/ui.badge.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:57:39.880Z",
+  "referenceHashes": [
+    "1c2784333e67a9e8b24efaee14f51f3d150f61f13670e1bd28088cdd6d87a738",
+    "6917823fd9ca05565a2e7019d78c16eb5aa07bd254d714db8e97691bcd9130bf"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "88f5b0bc646d805412fbca184e40f44885ffd38e446800e8f10a4642a5ce7dac",
+      "inputHash": "1c2784333e67a9e8b24efaee14f51f3d150f61f13670e1bd28088cdd6d87a738",
+      "outputHash": "fb49e4cd6ba10852028ab41ea762528e25609ba7fa3fc68361d9101d5d0776df"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "fb49e4cd6ba10852028ab41ea762528e25609ba7fa3fc68361d9101d5d0776df",
+      "outputHash": "c105935e515cf01919551a31b9bc864aa4e495775fa48d1cd5c1e3bb7e6824c1"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c105935e515cf01919551a31b9bc864aa4e495775fa48d1cd5c1e3bb7e6824c1",
+      "outputHash": "a83cff7e1f3e2e6b3a447eb0bcc6c430ccc9d4a8833496a34107056302317979"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "b6299d1d2cc5f4fdf0b3b33d5e4473602301023f6d7320abe06e43bb9c040ae6",
+      "outputHash": "d3d1af4353f62a55e0ff335a09e4b4f50562705aa10a52d2417e887d33aecd65"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "d609261a1dd8a3dae9c50f8a3b1f3053426ae6cd000608ca97bc902d3ec1847b",
+      "outputHash": "dd3b207d9c8e5c107196cb3b1fcb8675352104b7d2d8ab9f393d85fd8ece2b67"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "a1ed953a097fee01dbefe9175e2407883156947c0805bb7ef3a7350a3cba0df8",
+      "outputHash": "154bbcec6cdd9ac34639a333acf075efb1935feeccca998f89f2de2319e3bdf6"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.cistern_assembly.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:10.693Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Simple jar with three horizontal marks is readable at32px; low-detail outline survives palette fitting. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 64f5c26ce975d428fe7db33a816ce814567815e2acde2764d937330d88f420d1; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/f452878d9b9597f03859f8477095938d3556c827ac489ec411868f9fb51b214a.png"
+    ],
+    "inputHash": "816d8605f856e5b013bdddb160ce8c62039e13b3c16fd2baa5aa1d4b74da41ad"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

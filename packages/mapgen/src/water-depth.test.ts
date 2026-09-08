@@ -62,12 +62,12 @@ test.each(Object.keys(MAP_DIMENSIONS) as MapSize[])('generator3 preserves old ph
 test.each([
   ['tiny', '46301137'], ['huge', 'cbbea0e5'], ['legendary', 'c922fb2b'],
 ] as const)('freezes generator3 seed20260905 %s water-depth fingerprint', (size, expected) => {
-  expect(fingerprint(generateWorld(20260905, size, 8).waterDepth)).toBe(expected);
+  expect(fingerprint(generateWorld(20260905, size, 8, 3).waterDepth)).toBe(expected);
 });
 
 test.each(['huge', 'legendary'] as const)('%s has real shallow/deep regions, consistent shores and unchanged safe starts', size => {
   for (const seed of [42, 20260905]) {
-    const world = generateWorld(seed, size, 48);
+    const world = generateWorld(seed, size, 48, 4);
     const counts = new Uint32Array(3);
     let consistent = true;
     for (let cell = 0; cell < world.terrain.length; cell++) {

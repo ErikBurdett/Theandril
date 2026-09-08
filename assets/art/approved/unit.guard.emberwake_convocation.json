@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.emberwake_convocation",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.guard for Theandril, Emberwake Convocation.\nSubject: One adult guard in a planted ready stance, practical close armor, short straight sword held downward and a broad readable faction-specific shield. No attack swing.\nCulture-specific identity: Adult human seedkeeper or kiln-worker household escort, practical proportions, visible tool-hands and ordinary boots. No fire elemental or undead. Ash-white ceramic face screens and small ceramic plates, smoked-orange cloth, muted sulfur-green straps, charcoal padded kiln aprons and short heat-resistant wraps. Seed jars and split-vent motifs, no open flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "unit.guard.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard.emberwake_convocation/6a6998017dc109c9424efd21db64e1fce485169f48d1d3f6e30df64f6996ef5b/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "cec406f7db2f0f30a8b3bc08b187ebdabdcba47fa54412895bd78c7f0fe70fc6",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.guard.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.guard.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:39:24Z",
+  "referenceHashes": [
+    "1cd6241e0f6e7fe1a1105e9b35d3c20e33c29f3234d5f37e2e4327ba4d3e5cd6",
+    "9c9962a30756597e8c22bc99cd63c34ca36b003f4694e1a03a0bff39b4b66229"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "ed4bfcb51b5d34ba18b89cdd6cf600739ab7fed99c2039439cb86a8325a7af4f",
+      "inputHash": "1cd6241e0f6e7fe1a1105e9b35d3c20e33c29f3234d5f37e2e4327ba4d3e5cd6",
+      "outputHash": "ce07f100ff9155d98d37be3a0cbda446b6510ae7b09dfab4a15b61805d821512"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ce07f100ff9155d98d37be3a0cbda446b6510ae7b09dfab4a15b61805d821512",
+      "outputHash": "9add61db3d99f96c1282e970094323cae1acf9eb7ba754c7cbddf9d8e60a5e42"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9add61db3d99f96c1282e970094323cae1acf9eb7ba754c7cbddf9d8e60a5e42",
+      "outputHash": "23cdd2a35e3a043a3611f49845659bee00503b94fa45572dadc95d296b6334a2"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "a2e02b24534f13c77a9d40220bc1246663d58aa117b90b80e38be5c64078d783",
+      "outputHash": "871a86a43fc06b3d023940cef3c47e0d874a0dfd45156f13e008b16aaf0c87f6"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "8ff63b51e00798393f31844b2e5f102d992e015f459efab80cdfe8755c8cefff",
+      "outputHash": "7c9a6a6f66a5a82d47e74b461199063166679ec2b666f856073a1f3139e0e45e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "b9d96a3f8daa49a19ae593f1642625567a8db59e177fa19fb7b87d1bb09f42eb",
+      "outputHash": "394e794b0bae7e4ce7a7719bf1db0207ac02ffa3ce8077b7dad800ad81e88370"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.guard.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:26.797Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Ceramic face screen, pale long shield and short sword identify guard without magical fire. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 6a6998017dc109c9424efd21db64e1fce485169f48d1d3f6e30df64f6996ef5b; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/610e401ae7deced3de6910829cee4ca59e4f9e25a164df78cf5308a09c267709.png"
+    ],
+    "inputHash": "363f445f7130268d45b082f9ed25fb9d73c23f66f7fd50f12696c3729a121d6e"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.manytrack_moot",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. A maintained practical culture of several humanoid lineages and human households; not a feral beast camp. Native96. One joined humble village grouping with three low dwellings and one small communal work court, one small gate and useful stores integrated into the same architectural footprint. Clear compact settlement silhouette. No landscape, ground tile, city tower, separate distant structures or huge flag.",
+  "frames": [
+    {
+      "id": "settlement.village.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.village.manytrack_moot/2dbc3764d71b259c19ad45ba2ccd6906123e2f7dce83f50b13c496425df9e00f/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "3f8087ddb3b6a90ad98d2c30a0cc6a09950046d2f59f644f6de8b6402272ec45",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/settlement.village.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/settlement.village.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:07:41.094Z",
+  "referenceHashes": [
+    "a79e78bc79865b24a4e728a701abaa6d93ac7ab5d2f34f7131c680e3a9386887",
+    "b579080f12d7e306f2430f84cb82bdaa16c7c06336c2890cd379d8940ab8f2bb"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "2789434defe2442c706ef6d6a6162c8d91861f44eb60e3430d4fc955c32377d4",
+      "inputHash": "a79e78bc79865b24a4e728a701abaa6d93ac7ab5d2f34f7131c680e3a9386887",
+      "outputHash": "49d5278562a978bdfb64c595763717c1c3b6c49a7c25a309bcf448f7a8949e2a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "49d5278562a978bdfb64c595763717c1c3b6c49a7c25a309bcf448f7a8949e2a",
+      "outputHash": "ad0b7ca20543dc2e936b654634dae0032bc6e292dad993a1fb1d750622227026"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ad0b7ca20543dc2e936b654634dae0032bc6e292dad993a1fb1d750622227026",
+      "outputHash": "29d0356a137652ce2b831cf8ecee135bab092842be54507a7c38062ac181e43b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "de0f6d8ede6a2b6fd89590d52c5d89fb677933b2d29623cec2250589a8f3e4ef",
+      "outputHash": "b3aaa48abfd00ded2c40545deef23ba5c4bb6013bf7a4fd8ce5021ec7b6c5f95"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "82857fb8660117e2e834d7a8bd4b9bad69ccc644226668f57ff080a98ab75e4c",
+      "outputHash": "ef79300ddc921f78765d26e2ec3eb6483571e3bc773584115a5ef42f423d14cd"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "dd2a3c4e2a3aedb3a3b0356057a0d5def16a3078b77963edc6c27405b5185535",
+      "outputHash": "0125dad27cc8354e2eab99fef595146fea031f77da46da2222eceb86c18f8eb4"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.village.manytrack_moot.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:45:34.292Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Three maintained timber/hide halls around an open gathering ring; small skull-like roof ornament remains secondary, not an untamed camp. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 2dbc3764d71b259c19ad45ba2ccd6906123e2f7dce83f50b13c496425df9e00f; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/296b48c892f260cd2b42618bced9062eced733a051e5c6cec41582d9ffe90df0.png"
+    ],
+    "inputHash": "06cdcd5e77cb2058269cb2ac0980ce6c6c34706a8313edf7fdf3ef78936f2860"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
 import { checksum } from '@theandril/content';
-import { applyCommand, createGame, deserializeGame, serializeGame, stateHash } from './index';
+import { applyCommand, createGame, deserializeGame, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion } from './index';
 import { landStateSchema, type LandState } from './territory';
 import type { GameState } from './types';
 
@@ -25,7 +25,7 @@ function reverseProperties(value: unknown): unknown {
   return Object.fromEntries(Object.entries(value).reverse().map(([key, child]) => [key, reverseProperties(child)]));
 }
 function founded(seed = 17, turns = 0): GameState {
-  const game = createGame({ seed, size: 'tiny', factionCount: 2, pace: 'short' });
+  const game = createGame({ seed, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
   for (const faction of game.factions) {
     const army = Object.values(game.armies).find(army => army.factionId === faction.id && army.formations.some(item => item.unitId === 'unit.colonist'))!;
     const result = applyCommand(game, { type: 'found', factionId: faction.id, armyId: army.id, name: faction.name });
@@ -40,12 +40,12 @@ describe('strict deterministic canonical land projection', () => {
     [17, '49492132', 16084, 'eef991e0', 21387],
     [20260905, '83ff6d7a', 16253, '940bcf02', 21431],
   ] as const)('preserves seed %i save bytes and seals captured before optimizing the helper', (seed, originHash, originBytes, developedHash, developedBytes) => {
-    const origin = createGame({ seed, size: 'tiny', factionCount: 2, pace: 'short' });
-    expect(stateHash(origin)).toBe(originHash); expect(serializeGame(origin)).toHaveLength(originBytes);
+    const origin = createGame({ seed, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
+    expect(stateHashForVersion(origin, 11)).toBe(originHash); expect(serializeGameForVersion(origin, 11)).toHaveLength(originBytes);
     const developed = founded(seed, 12);
-    expect(stateHash(developed)).toBe(developedHash); expect(serializeGame(developed)).toHaveLength(developedBytes);
+    expect(stateHashForVersion(developed, 11)).toBe(developedHash); expect(serializeGameForVersion(developed, 11)).toHaveLength(developedBytes);
     assertOriginalBytes(origin); assertOriginalBytes(developed);
-    expect(stateHash(deserializeGame(serializeGame(developed)))).toBe(developedHash);
+    expect(stateHashForVersion(deserializeGame(serializeGame(developed)), 11)).toBe(developedHash);
   });
   it('matches the old complete serialized envelope for shuffled object insertion orders and real developed towns', () => {
     fc.assert(fc.property(fc.integer({ min: 0, max: 1_000_000 }), fc.integer({ min: 0, max: 14 }), (seed, turns) => {

@@ -1,11 +1,16 @@
 import { expect, test } from 'vitest';
 import { createGame, applyCommand, getObservation, deserializeGame, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
 import type { CampaignPace } from '@theandril/content';
+import type { GeneratorVersion } from '@theandril/mapgen';
 import { planTurn } from './index';
 
-const campaigns: { pace: CampaignPace; seed: number; minimum: number; maximum: number }[] = [
+const campaigns: { pace: CampaignPace; seed: number; minimum: number; maximum: number; generatorVersion?: GeneratorVersion }[] = [
   { pace: 'standard', seed: 74, minimum: 150, maximum: 400 },
-  { pace: 'standard', seed: 99, minimum: 200, maximum: 400 },
+  // Preserve the original geography's200-turn floor as its own regression. New
+  // generator6 has deliberately different geography and can earn earlier conquest;
+  // the strict empire/battle/capture guard below remains required before turn200.
+  { pace: 'standard', seed: 99, generatorVersion: 5, minimum: 200, maximum: 400 },
+  { pace: 'standard', seed: 99, generatorVersion: 6, minimum: 150, maximum: 400 },
   { pace: 'epic', seed: 74, minimum: 500, maximum: 1400 },
   // Earlier character rules let seed99 earn victory at648 with14towns/514battles.
   // Apply the same earned-conquest exception as seed 74; the separate archived
@@ -13,8 +18,8 @@ const campaigns: { pace: CampaignPace; seed: number; minimum: number; maximum: n
   { pace: 'epic', seed: 99, minimum: 500, maximum: 1400 },
 ];
 
-test.each(campaigns)('$pace seed $seed reaches an earned long-form victory with legal orders and save continuation', ({ pace, seed, minimum, maximum }) => {
-  const state = createGame({ seed, pace, size: 'tiny', factionCount: 4 });
+test.each(campaigns)('$pace seed $seed generator $generatorVersion reaches an earned long-form victory with legal orders and save continuation', ({ pace, seed, minimum, maximum, generatorVersion }) => {
+  const state = createGame({ seed, pace, size: 'tiny', factionCount: 4, ...(generatorVersion === undefined ? {} : { generatorVersion }) });
   let mirror: GameState | undefined;
   let lateProduction = 0;
   let battles = 0, captures = 0;

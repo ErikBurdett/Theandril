@@ -13,6 +13,13 @@ const tsxLoader = pathToFileURL(createRequire(import.meta.url).resolve('tsx')).h
 const palette: Palette = { id: 'palette.fixture', version: 1, colors: ['#222222'] };
 const prompt = 'Programmatic CLI boundary fixture, not production artwork or visual approval.';
 
+/** Exact dimensions and every RGBA byte, without recursive assertions on millions of numeric keys. */
+function expectExactImage(actual: RgbaImage, expected: RgbaImage, id: string): void {
+  expect(actual.width, `${id}: width`).toBe(expected.width);
+  expect(actual.height, `${id}: height`).toBe(expected.height);
+  expect(Buffer.from(actual.data).equals(Buffer.from(expected.data)), `${id}: exact RGBA bytes`).toBe(true);
+}
+
 async function write(root: string, path: string, value: string | Uint8Array) {
   await mkdir(dirname(join(root, path)), { recursive: true });
   await writeFile(join(root, path), value);
@@ -163,7 +170,7 @@ describe('published artwork and retained clean-checkout inputs', () => {
         expect(frame.duration).toBe(manifest.frames[index]!.durationMs);
         expect(frame.rotated).toBe(false); expect(frame.trimmed).toBe(false);
         expect(frame.sourceSize).toEqual({ w: manifest.nativeResolution.width, h: manifest.nativeResolution.height });
-        expect(cropImage(sheet, frame.frame)).toEqual(frames[index]!.image);
+        expectExactImage(cropImage(sheet, frame.frame), frames[index]!.image, manifest.frames[index]!.id);
       }
     }
   });
@@ -182,12 +189,12 @@ describe('published artwork and retained clean-checkout inputs', () => {
       const imageName = page.imageUrl.split('/').at(-1)!, jsonName = page.jsonUrl.split('/').at(-1)!;
       const png = await artifact(`assets/art/runtime/${imageName}`), raw = JSON.parse((await artifact(`assets/art/runtime/${jsonName}`)).toString());
       const runtimeAssets = catalog.assets.filter((asset) => asset.atlasId === page.id);
-      expect(sha256(png)).toBe(page.sha256); expect(new Uint8Array(png)).toEqual(rebuilt.png); expect(raw).toEqual(rebuilt.json);
+      expect(sha256(png)).toBe(page.sha256); expect(png.equals(Buffer.from(rebuilt.png)), `${page.id}: exact rebuilt PNG`).toBe(true); expect(raw).toEqual(rebuilt.json);
       expect(rebuilt.catalog.assets).toEqual(runtimeAssets);
-      expect(await artifact(`apps/web/public/art/${imageName}`)).toEqual(png);
+      expect((await artifact(`apps/web/public/art/${imageName}`)).equals(png), `${page.id}: exact browser PNG`).toBe(true);
       expect(JSON.parse((await artifact(`apps/web/public/art/${jsonName}`)).toString())).toEqual(raw);
       const pixi = validateAtlasData(raw, page, runtimeAssets), decoded = decodePng(png);
-      for (const item of selected) for (const frame of item.frames) expect(cropImage(decoded, pixi.frames[frame.id]!.frame)).toEqual(frame.image);
+      for (const item of selected) for (const frame of item.frames) expectExactImage(cropImage(decoded, pixi.frames[frame.id]!.frame), frame.image, frame.id);
     }
     const liveBindings = new Set(catalog.assets.flatMap((asset) => asset.contentIds));
     for (const required of ['unit.guard', 'unit.scout', 'unit.colonist', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', ...['ocean', 'grassland', 'temperate_forest', 'taiga', 'tundra', 'desert', 'steppe', 'marsh', 'rainforest', 'alpine'].map((biome) => `terrain.${biome}`)]) expect(liveBindings.has(required), `Missing live art binding ${required}`).toBe(true);

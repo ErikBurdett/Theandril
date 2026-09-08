@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.tundra.variant_1",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.tundra.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. TUNDRA: broad low frost-grey earth plates with sparse rusty dwarf scrub and dull slate stones, wind-polished exposed ground, no trees. Subdued blue-grey midtones, only small restrained bone-grey snow remnants. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.tundra.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.tundra.variant_1/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0f862bbaf03cbe38e99eeb7c8ac58b00925dc2ab63783610914aaf2c9929fce7",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.tundra.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.tundra.variant_1-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:24:13.488Z",
+  "referenceHashes": [
+    "0d4fe37f4586d37cf6fb5418825bb73ace289997d1d1e535d02ed0dc417905cb",
+    "4fc98a5886f37867bb2d2ffacdeba590f6e43811e03ae44388a5c15c5ebedd3b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "358bc4c96679bd87a35e83eabb9c3cdcb379f80c2f8f201961b5e14e4cef737e",
+      "inputHash": "0d4fe37f4586d37cf6fb5418825bb73ace289997d1d1e535d02ed0dc417905cb",
+      "outputHash": "ed50c334bca35befdef949db38c2431a393cbe93ba63561d9c5aaa9deacdbcca"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

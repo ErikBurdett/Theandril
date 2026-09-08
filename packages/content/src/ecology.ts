@@ -48,6 +48,18 @@ export const FACTION_ECOLOGIES: Readonly<Record<string, FactionEcology>> = {
   'faction.rimehorn_clans': { factionId: 'faction.rimehorn_clans', terraformBiomeIds: [3, 4], affinities: [affinity(4, yieldOf(1)), affinity(3, yieldOf(0, 1)), affinity(5, yieldOf(-1)), affinity(7, yieldOf(0, -1))] },
   'faction.sable_steppe': { factionId: 'faction.sable_steppe', terraformBiomeIds: [6, 5], affinities: [affinity(6, yieldOf(1)), affinity(5, yieldOf(0, 0, 1)), affinity(7, yieldOf(-1)), affinity(3, yieldOf(0, 0, -1))] },
   'faction.morrow_spore': { factionId: 'faction.morrow_spore', terraformBiomeIds: [2, 8], affinities: [affinity(2, yieldOf(0, 0, 0, 1)), affinity(8, yieldOf(1)), affinity(11, yieldOf(-1)), affinity(10, yieldOf(0, 0, -1))] },
+  'faction.cistern_assembly': { factionId: 'faction.cistern_assembly', terraformBiomeIds: [5, 11], affinities: [affinity(5, yieldOf(0, 1)), affinity(11, yieldOf(1)), affinity(7, yieldOf(0, -1)), affinity(3, yieldOf(-1))] },
+  'faction.unsealed_companies': { factionId: 'faction.unsealed_companies', terraformBiomeIds: [6, 10], affinities: [affinity(6, yieldOf(0, 0, 1)), affinity(10, yieldOf(0, 0, 0, 1)), affinity(8, yieldOf(0, -1)), affinity(7, yieldOf(0, 0, -1))] },
+  'faction.lantern_hospices': { factionId: 'faction.lantern_hospices', terraformBiomeIds: [1, 11], affinities: [affinity(1, yieldOf(0, 0, 0, 1)), affinity(11, yieldOf(1)), affinity(10, yieldOf(-1)), affinity(8, yieldOf(0, -1))] },
+  'faction.cairnwing_concord': { factionId: 'faction.cairnwing_concord', terraformBiomeIds: [6], affinities: [affinity(9, yieldOf(0, 1)), affinity(6, yieldOf(1)), affinity(7, yieldOf(0, -1)), affinity(8, yieldOf(0, 0, -1))] },
+  'faction.red_sluice': { factionId: 'faction.red_sluice', terraformBiomeIds: [7, 1], affinities: [affinity(7, yieldOf(0, 1)), affinity(1, yieldOf(1)), affinity(9, yieldOf(-1)), affinity(5, yieldOf(0, -1))] },
+  'faction.velvet_meridian': { factionId: 'faction.velvet_meridian', terraformBiomeIds: [5, 11], affinities: [affinity(5, yieldOf(0, 0, 0, 1)), affinity(11, yieldOf(0, 0, 1)), affinity(8, yieldOf(0, 0, 0, -1)), affinity(10, yieldOf(0, 0, -1))] },
+  'faction.brine_choir': { factionId: 'faction.brine_choir', terraformBiomeIds: [7], affinities: [affinity(0, yieldOf(1)), affinity(7, yieldOf(0, 0, 1)), affinity(3, yieldOf(-1)), affinity(5, yieldOf(0, -1))] },
+  'faction.emberwake_convocation': { factionId: 'faction.emberwake_convocation', terraformBiomeIds: [10, 6], affinities: [affinity(10, yieldOf(0, 0, 0, 1)), affinity(6, yieldOf(0, 1)), affinity(7, yieldOf(-1)), affinity(8, yieldOf(0, 0, 0, -1))] },
+  'faction.underhush_exchange': { factionId: 'faction.underhush_exchange', terraformBiomeIds: [3, 11], affinities: [affinity(3, yieldOf(0, 1)), affinity(11, yieldOf(0, 0, 1)), affinity(7, yieldOf(0, -1)), affinity(4, yieldOf(-1))] },
+  'faction.vesper_court': { factionId: 'faction.vesper_court', terraformBiomeIds: [2, 3], affinities: [affinity(2, yieldOf(0, 0, 0, 1)), affinity(3, yieldOf(0, 0, 1)), affinity(5, yieldOf(-1)), affinity(10, yieldOf(0, 0, -1))] },
+  'faction.manytrack_moot': { factionId: 'faction.manytrack_moot', terraformBiomeIds: [2, 6], affinities: [affinity(2, yieldOf(1)), affinity(6, yieldOf(0, 0, 1)), affinity(5, yieldOf(-1)), affinity(9, yieldOf(0, -1))] },
+  'faction.margin_observance': { factionId: 'faction.margin_observance', terraformBiomeIds: [10], affinities: [affinity(9, yieldOf(0, 0, 0, 1)), affinity(10, yieldOf(0, 0, 0, 1)), affinity(8, yieldOf(0, 0, 0, -1)), affinity(7, yieldOf(0, -1))] },
 };
 
 /** Sites are OR clauses; every supplied predicate inside a site must match. */

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.scout.cairnwing_concord",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.scout.cairnwing_concord"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Cairnwing Concord, role unit.scout.\nSUBJECT: ONE adult light scout, readable shortbow held down, hood or culturally specific head shape, small travel pack, grounded cautious stance. No long trailing prop. Native64x64 maximum body48px, pivot32,56.\nCULTURE: Tawny feathers, oxblood cord, oxidized copper, pale scree. Narrow harnesses, folded feathered forearms, ribbed narrow shields, ledge tools. Bracketed low stone halls, terraced load courts and wind-braced lift housings integrated into freestanding settlement silhouette; no giant scenery rock or inaccessible floating castle.\nPEOPLE if character or rider: Tool-using feathered cairnfolk with short avian beaks, two legs and two dexterous arms with folded forearm feather fans; human port households. No spread wings, flying poses or implied flight.\nHERALDRY if UI or flag: A single stepped feather with three unequal notches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.scout.cairnwing_concord/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.scout.cairnwing_concord/e93035029a154230d8a5f86f87f51967f7058d7267c07e97291cfe869a8b6bc2/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "70334d6f3d34d07a36e1d0225bbc4ef8805e8586c1f4ba533710695e2efac4cf",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/unit.scout.cairnwing_concord-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/unit.scout.cairnwing_concord-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:02:32Z",
+  "referenceHashes": [
+    "c79125cf8c2066ebc5c0969040b9a51a0ffbf0c6a1f4d9e37bcaadd1b40a7c4f",
+    "d81012ba377ca19ebfc24b7516376294e89ce6525febea0010a062d0262f7f9f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "5929f16ba32b6e18940d6b7029915740565c5c9c0a59779d56ba3d246aecabb3",
+      "inputHash": "c79125cf8c2066ebc5c0969040b9a51a0ffbf0c6a1f4d9e37bcaadd1b40a7c4f",
+      "outputHash": "974b80c12d58d1a5d06163059cc381e2e1c45df1731341e098e7ff9ee49d71f6"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "974b80c12d58d1a5d06163059cc381e2e1c45df1731341e098e7ff9ee49d71f6",
+      "outputHash": "b5945b4c8686d4b6c796b3996fcbd9c64f4ba5301a874bcc87a10d43909ca84b"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b5945b4c8686d4b6c796b3996fcbd9c64f4ba5301a874bcc87a10d43909ca84b",
+      "outputHash": "9b42c69ea9e8ce5189261f24ba6e1eeb88d63a4fb973cf82aaf87aacb281782f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "1a45cb5568095d2550278fc512382390bb4791f2ea126d33d482562852c9d3cf",
+      "outputHash": "3a90a6e62e5234645be78da110a8eb0ba6a1ede1d1e416fdf05aac553a16c676"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "8a89ffb01f1b6f6078d65cb521683f260b8a3cadd818755a9f106c639aaaa6f5",
+      "outputHash": "dbddf84a2e135f2fd846a49c7f6e5a8ac8641f939560bd93ef6067cb7d7f6e95"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "726c3e6e8f5083ae2d7477a51fc9524a9b3d9fe6d28a20c6288047492bf3ec6c",
+      "outputHash": "1298de89da6675cbac5091a77ebeac1af60007998d81def4b59aff8b0da9ae5e"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.scout.cairnwing_concord.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:48:08.107Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Hooded avian bow scout has a distinct light body, complete bow and clawed feet. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate e93035029a154230d8a5f86f87f51967f7058d7267c07e97291cfe869a8b6bc2; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0db2e63a43e78d5b0fbb892ec945d373c5a862fb16e1f5250b63225111015250.png"
+    ],
+    "inputHash": "d5aff8e9d37162a9ed4bab07e97f669059bc5eede96fda4919d108afe971f8d5"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

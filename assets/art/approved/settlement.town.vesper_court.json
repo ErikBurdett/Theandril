@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.vesper_court",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.town for Theandril, Vesper Court.\nSubject: ONE complete substantially developed dense town, low and broad, with seven to nine distinct roof/building masses around a clear central market/work hall and a compact enclosure. More numerous and substantial buildings than a three-house village, but not a grand city. No tall flag or needle consuming canvas; broad full body and practical connected lanes.\nCulture-specific identity: Shuttered vineyard manor houses, enclosed slate courts, narrow chimneys and covered walks. Inhabited cultivated estate architecture, not a generic grey fortress or gothic cathedral. Restrained burgundy shutters, charcoal blue-grey slate and weathered masonry.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "settlement.town.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.vesper_court/379891b416a95769eab4ab69219b96fe49deb0c78b604f420005e68cce6b3b95/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c9f91f420549aa3baed5b53a6de49b9f57d2f1b0ec7206b08ab027d26e5b2dbb",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.town.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.town.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:53:08Z",
+  "referenceHashes": [
+    "8fd830dc1e30e5a87e008b605f537d41c0d92345a7a425728d2d37807fce8da0",
+    "304492c5c67cd5d3cc9b9188b298423442dd0fc5be952038e7963e45f2f0fa70"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "e1c1ce28249b175363dc8b1d2c2f91d2e6242798218e6dbcd98c8d2b365f49f0",
+      "inputHash": "8fd830dc1e30e5a87e008b605f537d41c0d92345a7a425728d2d37807fce8da0",
+      "outputHash": "856911a51c271c7c2a3396acb6c46568d81a2466700a9a3829a9751f16506106"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "856911a51c271c7c2a3396acb6c46568d81a2466700a9a3829a9751f16506106",
+      "outputHash": "20f994c98bafa372c49f4651ae0e6446be5bf68f78c07a6cd6a6ec8a48e57ad5"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "20f994c98bafa372c49f4651ae0e6446be5bf68f78c07a6cd6a6ec8a48e57ad5",
+      "outputHash": "c9baf80fd985da762620f79eae9bca90192e32c33dfa25afefcabd6bb28aea46"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "9597f0c097efcd7b7ff5eea4ee3441a283ffdc91c96fddec0a001a4a30e09dd7",
+      "outputHash": "15c59ac25243ccdadc6b6cd954beb7bf3f941d0f993e9b03ab5b40418f4ad262"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "0ad94f3e28d67f5583179279b4fb89cc64b3492cae8225c55efe43329b93d0d9",
+      "outputHash": "fa0af0067bf46d6b0cc78d538986d7e2827810670df46a2c9bc9d5cbc75b9428"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "0b821bd28256ecadeaf8bd0949260820f44b6511dc88c3bea1f8290d5a490eb3",
+      "outputHash": "d0363e2fc1fa7a32d1d9a05f23673920327967c7426831dfdc62410779336a5c"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:03.256Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Denser seven-to-nine-roof manor compound remains distinct from the smaller open village. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 379891b416a95769eab4ab69219b96fe49deb0c78b604f420005e68cce6b3b95; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/13b1bceed44320ae20192cdecc602084aab7fe88d70626cbe9bfe4c312abecff.png"
+    ],
+    "inputHash": "2d2c40ec522a7f528ca8aa84d87dfffd86e622528462788d57a0bf0dd42a137d"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

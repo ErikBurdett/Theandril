@@ -137,6 +137,8 @@ describe('field battles in the campaign', () => {
     if (!attacker) throw new Error('Missing attacker');
     attacker.formations[0]!.strength = 40;
     begin(state);
+    // Isolate unprotected pursuit; the separate ward test covers protected retreat.
+    checked(state, { type: 'setBattleAbilityAuto', factionId: player, battleId: state.battle!.id, sourceId: attacker.formations[0]!.id, abilityId: 'ability.set_shields', automatic: false });
     checked(state, { type: 'battleOrder', factionId: player, order: 'withdraw' });
     const report = state.battleReports[0];
     expect(report?.initialStrengths.find(army => army.armyId === attacker.id)?.strength).toBe(40);
@@ -160,6 +162,8 @@ describe('field battles in the campaign', () => {
     checked(state, war);
     checked(state, { type: 'attack', factionId: rival, armyId: 'army.4', targetArmyId: 'army.2' });
     checked(state, { type: 'battleOrder', factionId: player, order: 'advance' });
+    // Modern guard drill can absorb the first blow; routing still follows real damage.
+    if (state.battle) checked(state, { type: 'battleOrder', factionId: player, order: 'advance' });
     expect(state.battle).toBeNull();
     expect(state.battleReports[0]?.combat.result?.reason).toBe('morale rout');
     expect(state.armies['army.4']?.cell).toBe(destination);
@@ -188,6 +192,7 @@ describe('field battles in the campaign', () => {
     plain.world.terrain[target] = 1; hills.world.terrain[target] = 3;
     for (const state of [plain, hills]) {
       begin(state);
+      checked(state, { type: 'battleOrder', factionId: player, order: 'advance' });
       checked(state, { type: 'battleOrder', factionId: player, order: 'advance' });
     }
     expect(hills.battle?.combat.defender[0]?.strength).toBeGreaterThan(plain.battle?.combat.defender[0]?.strength ?? 0);

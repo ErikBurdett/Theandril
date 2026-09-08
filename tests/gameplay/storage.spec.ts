@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { deserializeCampaign, importSave } from '@theandril/persistence';
 import { replayArchive } from '@theandril/chronicle';
 import { stateHash } from '@theandril/sim';
+import { closeCampaignOptions, closeManagement, openRegistry, openSelectedOrders, selectFromRegistry } from './ui-navigation';
 
 interface Generation { id: number; kind: 'auto' | 'manual'; type: 'chunks' | 'legacy'; turn: number; manifestDigest: string; originDigest: string; headDigest: string | null; legacyId: number | null }
 interface StoredBlob { digest: string; type: 'origin' | 'chunk' | 'fragment'; previousDigest: string | null; refs: number; byteLength: number; from: number; to: number }
@@ -29,6 +30,7 @@ async function databaseImage(page: Page): Promise<DatabaseImage> {
 }
 
 async function settings(page: Page): Promise<void> {
+  await closeManagement(page);
   const section = page.locator('.campaign-options');
   if (!await section.evaluate(element => (element as HTMLDetailsElement).open)) await section.locator('summary').click();
 }
@@ -38,6 +40,8 @@ async function save(page: Page): Promise<void> {
   await expect(page.getByTestId('feedback')).toContainText('Campaign saved.');
 }
 async function endTurn(page: Page, turn: number): Promise<void> {
+  await closeManagement(page);
+  await closeCampaignOptions(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText(`Turn ${turn}`);
   await expect(page.getByTestId('feedback')).toContainText('Autosaved.');
@@ -51,9 +55,11 @@ test('incremental browser saves share journal chunks and recover an older manife
   await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('tiny');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
-  await page.getByTestId('army-registry').getByRole('button', { name: /Hearth caravan/ }).first().click();
+  await selectFromRegistry(page, 'armies', /Hearth caravan/);
+  await openSelectedOrders(page);
   await page.getByRole('textbox', { name: 'Settlement name', exact: true }).fill('Ledger Hearth');
   await page.getByRole('button', { name: 'Found settlement', exact: true }).click();
+  await openRegistry(page, 'settlements');
   await expect(page.getByTestId('settlement-registry')).toContainText('Ledger Hearth');
   await endTurn(page, 2);
   await save(page);

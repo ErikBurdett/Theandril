@@ -1,0 +1,48 @@
+.campaign.battle-active { grid-template-columns: minmax(0,1fr); height: auto; min-height: 0; }
+.campaign.battle-active > .empire, .campaign.battle-active > .inspector { display: none; }
+.campaign.battle-active > .map-section { height: auto; min-height: 0; overflow: visible; background: #1b292c; }
+.battle-active .map-title, .battle-active .map-compass, .battle-active .map-controls, .battle-active .map-legend, .battle-active .movement-map-hint { display: none; }
+.battle-active .map-host { position: absolute; top: var(--battlefield-top, 220px); height: var(--battlefield-height,500px); inset-inline: 0; width: 100%; }
+.command-bar.battle-command-bar { position: static; }
+.battle-workspace { position: relative; color: #e5ddcb; padding: 22px 24px; pointer-events: none; }
+.battle-workspace > :not(.battlefield-window) { pointer-events: auto; position: relative; z-index: 2; }
+.battlefield-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.battlefield-heading h2 { margin: 6px 0; font-size: clamp(1.25rem, 2.3vw, 1.9rem); }
+.battlefield-heading .battle-round { flex-shrink: 0; }
+.battlefield-context, .battlefield-footnote { font-size: .82rem; color: #b3bcae; line-height: 1.5; }
+.battlefield-transport { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; padding: 12px 0 16px; }
+.battlefield-transport label { display: grid; gap: 3px; font-size: .75rem; color: #c4c7b8; }
+.battlefield-transport button, .battlefield-transport select { min-height: 44px; }
+.battlefield-window { height: var(--battlefield-height,500px); position: relative; pointer-events: none; margin-inline: -24px; border-block: 1px solid #9a8b603b; display: flex; justify-content: space-between; padding: 12px 22px; box-sizing: border-box; color: #e1d4b5; font: 11px Georgia, serif; letter-spacing: .14em; }
+.battlefield-window span:first-child { order: 2; }
+.battlefield-window[data-portrait=true] { flex-direction: column; align-items: center; }
+.battlefield-window[data-portrait=true] span:first-child { order: 0; }
+.battlefield-footnote { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; }
+.battlefield-inspection { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; padding: 12px; background: #172326; border: 1px solid #ffffff12; }
+.battlefield-inspection label { display: grid; gap: 6px; flex: 1 1 260px; min-width: 0; }
+.battlefield-inspection p { flex: 2 1 320px; margin: 0; font-size: .85rem; line-height: 1.7; }
+.battlefield-inspection select { width: 100%; min-width: 0; }
+.battlefield-orders { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 9px; margin: 14px 0; }
+.battlefield-orders button { text-align: left; padding: 13px; }
+.battlefield-orders strong, .battlefield-orders small { display: block; }
+.battlefield-orders small { margin-top: 5px; color: #bcc2b6; }
+.battlefield-abilities, .battlefield-account, .battlefield-tables { margin-top: 16px; padding-top: 12px; border-top: 1px solid #ffffff19; }
+.battle-workspace summary { min-height: 44px; cursor: pointer; padding-block: 10px; box-sizing: border-box; }
+.battlefield-ability-list { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,280px),1fr)); gap: 12px; }
+.battlefield-ability-list article { background: #202f30; padding: 14px; border: 1px solid #ffffff14; }
+.battlefield-ability-list h3 { margin: 0 0 8px; font-size: 1rem; }
+.battlefield-ability-list h3 small { display: block; margin-top: 4px; color: #bebda8; }
+.battlefield-ability-list p, .battlefield-abilities > p { font-size: .82rem; line-height: 1.5; }
+.battlefield-ability-list label { display: block; margin: 10px 0; }
+.battlefield-ability-list input { width: 20px; height: 20px; vertical-align: middle; margin-right: 8px; }
+.battlefield-ability-list select { width: 100%; min-width: 0; margin-top: 6px; }
+.battlefield-account ol { min-height: 30px; font-size: .85rem; line-height: 1.7; }
+@media(max-width:719px) {
+  .battle-workspace { padding: 16px 12px; }
+  .battlefield-transport { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .battlefield-transport button, .battlefield-transport select { width: 100%; min-width: 0; }
+  .battlefield-window { margin-inline: -12px; flex-direction: column; align-items: center; }
+  .battlefield-window span:first-child { order: 0; }
+  .battlefield-footnote { flex-direction: column; gap: 5px; }
+  .battlefield-orders { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}

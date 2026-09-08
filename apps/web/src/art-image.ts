@@ -1,11 +1,12 @@
 import { validatePngDimensions } from '@theandril/render/image-validation';
+import { publicAssetUrl } from './asset-url';
 
 export interface ArtImageExpectation { width: number; height: number; sha256: string }
 const MAX_IMAGE_BYTES = 64 * 1024 * 1024;
 
 /** Check encoded dimensions before browser decode, including unnormalized candidates. */
 export async function loadArtImageBytes(url: string, signal: AbortSignal, expected?: ArtImageExpectation): Promise<{ bytes: Uint8Array<ArrayBuffer>; width: number; height: number }> {
-  const response = await fetch(url, { signal, cache: 'no-store' });
+  const response = await fetch(publicAssetUrl(url), { signal, cache: 'no-store' });
   if (!response.ok) throw new Error(`Cannot load art image (${response.status}): ${url}`);
   if (Number(response.headers.get('content-length')) > MAX_IMAGE_BYTES) throw new Error('Art preview exceeds the 64 MiB download limit.');
   const chunks: Uint8Array[] = []; let length = 0;

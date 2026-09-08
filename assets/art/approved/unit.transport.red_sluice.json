@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.red_sluice",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.red_sluice"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Red Sluice Directorate, role unit.transport.\nSUBJECT: ONE complete transport ship, broad short unarmed cargo hull, readable open cargo deck and small covered passenger cabin, single small furled sail and short mast. Cultural materials and painted cloth; stout transport silhouette distinct fromwarships. Southeast isometric view bowtowardright, dry isolated entirehull includingkeel, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Brick red, dull celadon cloth, tarred oak, black chain and weathered bronze. Broad rectangular rain shields, hooded crew coats, horizontal bar motifs. Low sluice-gate inspired maintenance halls, wheel-braced gantries, thick brick channelside courtyards; no surrounding waterrectangle or actualtile.\nPEOPLE if character or rider: Human waterworks crew households and disciplined municipal escorts.\nHERALDRY if UI or flag: A barred spillway with three broad vertical openings and one horizontal lifting bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nNO firearms, cannons, gun barrels, gunports or gunpowder equipment. Wooden ballista on an open warship deck is permissible; transport carries cargo not weapons.",
+  "frames": [
+    {
+      "id": "unit.transport.red_sluice/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.red_sluice/51c6d51b0acfd02b2620048eb619684f9071ce8291961ac3ae4450b6a2a2a0ee/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "79489e14339e8d7458992208a5946d3aaecf494230ac186aed534291e7bdcd40",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.red_sluice-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.red_sluice-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:29:45Z",
+  "referenceHashes": [
+    "388423e52641df78c8912ce9459069f7bdd38a9847b4c1f838fdc291bbbe9686",
+    "90eff11865960f77ea13bfaaacb22916b3b7a4fc974952a05ec6129b262c6d80"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "327c00a8222d0a40583bd52f7411c4103c9cc1af42eb6c8e611e5f54ea9719e7",
+      "inputHash": "388423e52641df78c8912ce9459069f7bdd38a9847b4c1f838fdc291bbbe9686",
+      "outputHash": "31cbe93f45688dacaadfb4584972a8ece3e16661320b99b079cd6ab72fc86c69"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "31cbe93f45688dacaadfb4584972a8ece3e16661320b99b079cd6ab72fc86c69",
+      "outputHash": "a176036a5d6358e1301676882f5350bb86291a1f1c16392c01b7b7a391efb1eb"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a176036a5d6358e1301676882f5350bb86291a1f1c16392c01b7b7a391efb1eb",
+      "outputHash": "1bfed7f5cd2a63985e3d0f1c06b72d55fc1bf03c39716d366e2b8952abd4ec3d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "89b5c224bf474b9638fbaeb23067843cdcf8d05e0e02d7e5e82f93b93af41abc",
+      "outputHash": "f3f477d2a00ac43f6539865f7d867ec8e1b4fb2e01d9f02f8321a475710f4ef2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "5e878b350919072584cac9951cc38435d785d6bc7d3acd8f0d14c33418184500",
+      "outputHash": "65dc15b326311713983aa5d5aaa367f38987d528fc8442979002334a84af812b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "b43b16a2017379ae5e69763552548bb6d8571a82fd047f3e6f635d0d6a0d449a",
+      "outputHash": "2540a17ff0eae5cd7c98611fe42950dd4fa8bc58ab5b328a2beaedbfbd475adc"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.red_sluice.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:04:51.484Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Broad cargo barge hull, covered stern and furled mast clearly separate the civilian transport; low-alpha source fringe excluded by unchanged fitter. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 51c6d51b0acfd02b2620048eb619684f9071ce8291961ac3ae4450b6a2a2a0ee; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/48ca0aa3b157cf057acbe4d764306516084c1e80076d003669bb9a919221dab3.png"
+    ],
+    "inputHash": "e184c9903e74e8bb41fbdf41a589d824a8862874e56430afacb69955d88a8529"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

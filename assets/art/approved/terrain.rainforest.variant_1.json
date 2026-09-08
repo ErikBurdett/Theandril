@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.rainforest.variant_1",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.rainforest.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. RAINFOREST: dense layered large broadleaf crowns in deep teal-green and peat shadow, a few broad dull jade leaf planes and small earthy clearing, humid dark woodland. No bright flowers, no vines spilling outside hex, no identical spherical tree rows. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.rainforest.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.rainforest.variant_1/27a4a70a896c3c39ae9eab971c9ec6b5cfba64c7a3d57ad41c7b268e1428e4a2/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e9636c8cc5f77f37d69d28585e1e155cbd9b3b898d8d682dc191a357663a794b",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.rainforest.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.rainforest.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:52:20.496Z",
+  "referenceHashes": [
+    "e634f199744b8bfccfa8f5358c318fab70870636ad4b66c0bf1f9c83f37ee766",
+    "5c1ef43c8c05393eb63bffcc606c3481d959b21abd72173bd9a24c74b9577391"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "1464d518451df62e88b3dd6fde152f674056f76a379a914dcf43aaf8065221c2",
+      "inputHash": "e634f199744b8bfccfa8f5358c318fab70870636ad4b66c0bf1f9c83f37ee766",
+      "outputHash": "d894a16fbf1a8540c7e4986625f6b24b1a13fb96d7c901a307c536c602961130"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "d894a16fbf1a8540c7e4986625f6b24b1a13fb96d7c901a307c536c602961130",
+      "outputHash": "0b195e9f47af3114f45c89571b63b987af1908f2b07a480c7fdc59ee8e571b03"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0b195e9f47af3114f45c89571b63b987af1908f2b07a480c7fdc59ee8e571b03",
+      "outputHash": "7c38947bb3855fbb8ea6afb24a7c5867af65dbffbfd3475e8d2be3647758a313"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "d282f8251c7c9cae6b12a3097f91c80f79b69bd0435886a89ff5941b27c4937b",
+      "outputHash": "03acce1cebec1a236a1075417efa43eb8721a865ea6491207dd1586fd24c2e09"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "0b0c4de54f4e3dd0dd6d5afc0358257a32244895232668c7a2c3b1d484dc055b",
+      "outputHash": "82e82eb6d19d57dbb9e019c52ee3056609ea579b556d3544da53371169e47adf"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "8cc4e2be6f9be1b8e9168adda08b384de42a22ca47acf53e143c064cae3f9069",
+      "outputHash": "b61d910230b9f5117fb43b12cd3018bfa89a4fe7fbd2d70dabea0a3bd4f2d5a3"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.rainforest.variant_1.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:18.958Z",
+    "notes": "Deep blue-green rounded canopy clusters and shaded understory vary tropical density without false river geometry. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 27a4a70a896c3c39ae9eab971c9ec6b5cfba64c7a3d57ad41c7b268e1428e4a2; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0e157daec152b72f86ddb56c9400663e5efaedb92107c013c6c986fb70428746.png"
+    ],
+    "inputHash": "f802a2daaefbbfb52bed27ca07ceb7bdc42e1a552eba5abbdcc262318c57f083"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

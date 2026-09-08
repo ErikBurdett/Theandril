@@ -1,6 +1,14 @@
 /** Increment whenever the same seed/settings can produce different geography. */
-export const GENERATOR_VERSION = 4;
-export type GeneratorVersion = 1 | 2 | 3 | 4;
+import { generateV5, generateV6, generateV7 } from './geography-v5';
+export { describeGeography, inspectV6Climate, inspectV7Climate } from './geography-v5';
+export { deriveV6Climate, deriveV6Biomes, type V6ClimateFields } from './climate-v6';
+export { geographicDiversity } from './geography-metrics';
+export { FLOW_DIRECTION, HYDROLOGY_MASK, LAKE_BIT, directionNeighbor, hydrologyDownstream, isLake, riverDirection, riverSize, validateHydrology } from './hydrology';
+import { isLake, riverSize } from './hydrology';
+export const GENERATOR_VERSION = 7;
+export type GeneratorVersion = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type MapLayout = 'legacy' | 'continents' | 'islands' | 'archipelago';
+export interface WorldGenerationOptions { layout?: Exclude<MapLayout, 'legacy'> }
 
 export const MAP_DIMENSIONS = {
   tiny: { width: 48, height: 32 },
@@ -37,6 +45,9 @@ export interface World {
   /** Canonical unsigned 32-bit seed. */
   seed: number;
   generatorVersion: GeneratorVersion;
+  layout: MapLayout;
+  /** Downstream direction bits0–2, river size bits3–4, lake bit5; upper bits zero. */
+  hydrology: Uint8Array;
   width: number;
   height: number;
   terrain: Uint8Array;
@@ -218,9 +229,12 @@ export function deriveClimate(seed: number, width: number, height: number, terra
   return { temperature, moisture };
 }
 
-/** Derive labels from existing terrain, including authored/legacy maps; never mutate it. */
-export function deriveBiomes(seed: number, width: number, height: number, terrain: Uint8Array, generatorVersion: GeneratorVersion = GENERATOR_VERSION): Uint8Array {
-  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3 && generatorVersion !== 4) throw new RangeError('Unknown generator version.');
+/** Historical terrain-only classifier. Generator6 needs relief/hydrology and uses
+ * deriveV6Biomes instead; this helper's default stays on the played generator5. */
+export function deriveBiomes(seed: number, width: number, height: number, terrain: Uint8Array, generatorVersion: GeneratorVersion = 5): Uint8Array {
+  if (generatorVersion === 6) throw new RangeError('Generator6 biomes require relief and hydrology; use deriveV6Biomes.');
+  if (generatorVersion === 7) throw new RangeError('Generator7 biomes require relief and hydrology; use deriveV6Biomes.');
+  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3 && generatorVersion !== 4 && generatorVersion !== 5) throw new RangeError('Unknown generator version.');
   validateClimateInput(seed, width, height, terrain);
   const result = new Uint8Array(terrain.length);
   const climate = generatorVersion >= 2 ? deriveClimate(seed, width, height, terrain) : undefined;
@@ -269,6 +283,7 @@ export function naturalFeatures(world: World, cell: number): number {
   }
   const physical = terrain[cell]!;
   if (physical > TERRAIN.mountain || !isValidWaterDepth(waterDepth[cell]!) || (physical === TERRAIN.water) === (waterDepth[cell] === WATER_DEPTH.land)) throw new RangeError('Natural feature terrain and depth disagree.');
+  if (world.generatorVersion >= 5 && (!(world.hydrology instanceof Uint8Array) || world.hydrology.length !== terrain.length || world.hydrology[cell]! > 63)) throw new RangeError('Natural features require bounded matching hydrology.');
   const x = cell % width, y = Math.floor(cell / width);
   const geology = noise(x, y, Math.max(4, Math.floor(width / 9)), seed ^ 0x47454f4c);
   const roll = mix32(seed ^ Math.imul(cell + 1, 0x4e415455));
@@ -283,6 +298,7 @@ export function naturalFeatures(world: World, cell: number): number {
   if ((physical === TERRAIN.hills || physical === TERRAIN.mountain) && roll % 3 === 0) result |= FEATURE.ore;
   if (physical === TERRAIN.mountain) return result;
   if (roll % 17 === 0) result |= FEATURE.spring;
+  if (world.generatorVersion >= 5 && (riverSize(world.hydrology[cell]!) || neighbors(cell, width, height).some(next => isLake(world.hydrology[next]!) || riverSize(world.hydrology[next]!)))) result |= FEATURE.spring;
   if (physical === TERRAIN.forest && (roll >>> 8) % 3 === 0) result |= FEATURE.oldGrowth;
   const coastal = neighbors(cell, width, height).some(next => terrain[next] === TERRAIN.water);
   const wet = noise(x, y, Math.max(4, Math.floor(width / 11)), seed ^ 0x5241494e) > 3500;
@@ -375,21 +391,24 @@ function placeStarts(world: World, count: number): void {
   }
 }
 
-/**
- * Two irregular continental envelopes with coherent coast, upland and woodland fields.
- * Call in a simulation worker. Terrain is O(cells); starts use O(cells + 8192 × factions).
- * The foundation uses terrestrial starts together on the largest reachable landmass.
- */
-export function generateWorld(seed: number, size: MapSize, factionCount: number, generatorVersion: GeneratorVersion = GENERATOR_VERSION): World {
+/** Versioned, worker-safe geography. V5/6 use independent relief/drainage;
+ * the original two-envelope generator below remains frozen for versions1–4. */
+export function generateWorld(seed: number, size: MapSize, factionCount: number, generatorVersion: GeneratorVersion = GENERATOR_VERSION, options: WorldGenerationOptions = {}): World {
   if (!Number.isSafeInteger(seed)) throw new RangeError('Seed must be a safe integer.');
   if (!Object.hasOwn(MAP_DIMENSIONS, size)) throw new RangeError('Unknown map size.');
-  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3 && generatorVersion !== 4) throw new RangeError('Unknown generator version.');
+  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3 && generatorVersion !== 4 && generatorVersion !== 5 && generatorVersion !== 6 && generatorVersion !== 7) throw new RangeError('Unknown generator version.');
   if (!Number.isInteger(factionCount) || factionCount < 1 || factionCount > 48) {
     throw new RangeError('Faction count must be an integer between 1 and 48.');
   }
+  if (!options || typeof options !== 'object' || Array.isArray(options) || Object.keys(options).some(key => key !== 'layout') ||
+    (options.layout !== undefined && !['continents', 'islands', 'archipelago'].includes(options.layout))) throw new RangeError('Unknown world layout.');
+  if (generatorVersion <= 4 && options.layout !== undefined) throw new RangeError('Historical generators do not accept layout settings.');
+  if (generatorVersion === 5) return generateV5(seed, size, factionCount, options.layout ?? 'continents');
+  if (generatorVersion === 6) return generateV6(seed, size, factionCount, options.layout ?? 'continents');
+  if (generatorVersion === 7) return generateV7(seed, size, factionCount, options.layout ?? 'continents');
   const { width, height } = MAP_DIMENSIONS[size];
   const world: World = {
-    seed: seed >>> 0, width, height, generatorVersion,
+    seed: seed >>> 0, width, height, generatorVersion, layout: 'legacy', hydrology: new Uint8Array(width * height),
     terrain: new Uint8Array(width * height),
     waterDepth: new Uint8Array(width * height),
     biome: new Uint8Array(width * height),

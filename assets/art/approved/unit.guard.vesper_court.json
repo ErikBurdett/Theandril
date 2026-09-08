@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.vesper_court",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: one original strategic pixel-art unit sprite for Theandril, Vesper Court.\nCreate ONE full-body living pale human court retainer, adult proportions, in a quiet planted guard stance, southeast three-quarter view facing toward the right. Narrow vertically ribbed dark iron cuirass over a muted garnet long split coat, high folded cloth collar, charcoal leather gloves and complete boots. Straight practical sword held downward at the side, slender kite shield with a restrained tarnished-silver edge. Ordinary human face, cool ivory skin, dark hair. This is a living sworn household guard of a court of vampiric patrons, not a monster or vampire caricature.\nStyle: deliberate crisp COARSE PIXEL ART designed to read as a 47-pixel-high body in a native 64x64 frame; visible hard square pixel clusters, broad quiet value masses, restrained detail, muted garnet/charcoal/tarnished silver/cool ivory. Soft upper-left light expressed in a few flat pixel tones, not blur or a smooth painting. Distinct silhouette of folded collar, narrow cuirass, split coat and kite shield. One static pose only.\nComposition: entire sword, shield, head, coat and both boots complete and isolated, centered, with at least 15% clear TRANSPARENT margin on every side. Square PNG with REAL zero-alpha transparency outside the sprite, not a painted checkerboard or white/black backdrop. No ground, floor, base, hex, scenery, cast shadow, glow, particles, labels, text, border or UI. No skulls, bats, bat wings, fangs, blood effects, crown, copied crest or familiar fictional costume. No other subjects, no sheet, no motion variants.",
+  "frames": [
+    {
+      "id": "unit.guard.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.guard.vesper_court/22d02cfc5b5b6212cb56648cf7379ffe97a1c47ba6b60c5fb944a33e17969b65/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d6cb9c10ccd7b7f147ee5c56d524a7b1a21614319401b5371808594035cb8ea9",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.guard.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.guard.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:18:31Z",
+  "referenceHashes": [
+    "63d1d3c73b3e76c36bb6f36a0a381342ce7113692cab48601c652f305cca2680",
+    "8e33907494d44a8b2ec110dbeab4c9d3a19f0465ee5e26f7f749c314285c30ba"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "e6e5b94eee7ba7ea808733334e57019bc624c0a1b8fa834ff12287ebefd087e2",
+      "inputHash": "63d1d3c73b3e76c36bb6f36a0a381342ce7113692cab48601c652f305cca2680",
+      "outputHash": "d1f7ad818e6486ca1ce349a803a2ff3e5636e4f226ccf41bf84bc6ee8743f1dc"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "d1f7ad818e6486ca1ce349a803a2ff3e5636e4f226ccf41bf84bc6ee8743f1dc",
+      "outputHash": "94b57536b26d9ca1b1e6aad10166259ff0ccd0951e2d88ed9b3c5b46a7e08793"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "94b57536b26d9ca1b1e6aad10166259ff0ccd0951e2d88ed9b3c5b46a7e08793",
+      "outputHash": "10fdd166d8673305027cc6e20c163604be20c116d9c3918c218756c3d5bef975"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "119a8bfcbfcc692f315c042d00e0062ba1b2de65c3647985d944d5339e9b2662",
+      "outputHash": "ab7b82cab6c2c22733127b7bb2c5a6e8df7bf4d256084d84f0c0aade0171e466"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "ed22c8625f5b288626cb4182842240375296aec12e4b73a0ce84bd6f43239581",
+      "outputHash": "d484be0bbce470e679b96b211734ad24c7a0cce663f9f397322f9351ea62af84"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "2731e1eddce85420e6fe0f47d2cabb3dc7e845067ab841f5a61b1ad467b69153",
+      "outputHash": "b2a1942b51d233beb67464c2059165cc5fe0f0e8f48f957dadc28552077e6e20"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.guard.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:00.164Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Narrow ribbed cuirass, long kite shield and sword distinguish the ordinary retainer from heavy infantry. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 22d02cfc5b5b6212cb56648cf7379ffe97a1c47ba6b60c5fb944a33e17969b65; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/1fa153759f7da4d34dea8a4397b9ecd49719c7958c1635fcc6557a834e61b12c.png"
+    ],
+    "inputHash": "2b14086a235cca553507a31ce8e6d42cb60a050682a253b59ac50f1227977d77"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

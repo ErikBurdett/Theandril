@@ -1,6 +1,6 @@
 import { BUILDINGS } from '@theandril/content';
 import { hexDistance, isPassable, neighbors } from '@theandril/mapgen';
-import { applyCommand, createGame, deserializeGame, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
+import { applyCommandForVersion, createGame, deserializeGame, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
 
 export const PROSPERITY_FIXTURE = { hostName: 'Ledger Hearth', hostId: 'settlement.5', seed: 20260905 } as const;
 
@@ -27,9 +27,10 @@ function expansionRoute(state: GameState, origin: number): number[] {
 
 /** Prepared infrastructure, not a fabricated victory: every later choice/project uses normal rules. */
 export function prosperityCampaign(): GameState {
-  const state = createGame({ seed: PROSPERITY_FIXTURE.seed, size: 'tiny', factionCount: 2, pace: 'short' });
+  const state = createGame({ seed: PROSPERITY_FIXTURE.seed, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
   const issue = (command: GameCommand): void => {
-    const result = applyCommand(state, command);
+    // Freeze authored setup before roads; subsequent gameplay uses current rules.
+    const result = applyCommandForVersion(state, command, 11);
     if (!result.ok) throw new Error('Prosperity fixture command failed: ' + result.error);
   };
   const advance = (): void => issue({ type: 'endTurn', factionId: state.turnOwnerId });

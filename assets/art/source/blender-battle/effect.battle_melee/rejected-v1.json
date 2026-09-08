@@ -1,0 +1,12 @@
+{
+  "id": "effect.battle_melee",
+  "version": 1,
+  "decision": "rejected",
+  "evidence": ["v1/review-1x.png", "v1/review-4x.png", "v1/validation.json", "v1/render-settings.json"],
+  "findings": [
+    "Inspected all eight poses on dark, light and muted ground-colored studio backgrounds at native and integer enlargement. Directional strike and unequal impact star are readable; no clipped geometry.",
+    "Final two thin chips vanish during the recorded nearest reduction: native/frame-007.png is empty. Their authored geometry must remain thicker in a new source version, not painted into this rejected frame.",
+    "Fixed camera projection is identical across all frames at x32,y32.000027. Exact floating-point equality rejected a constant numerical offset, not visible or per-frame pivot movement. New validation uses a documented 0.0001-native-pixel epsilon while retaining a strict drift regression."
+  ],
+  "approval": "Not approved; original scene, renders, frames and manifest retained unchanged."
+}

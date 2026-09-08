@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.manytrack_moot",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. This marshal is a broad BOARLIKE HUMANOID adult person: blunt broad face, small rounded ears, no exaggerated tusks and ordinary tool-hands. Measured professional presence, not a feral beast. Native64. One full-body adult appointed field marshal, confident grounded posture, richer but practical protective coat and armor, short baton in one hand, sheathed sword at hip. Head and both boots complete, no giant flag or magical staff; a command officer not a king.",
+  "frames": [
+    {
+      "id": "character.marshal.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.marshal.manytrack_moot/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b198703a79b5633d9a79af9be9d520a2bf590693cb6a5866b75f595fd3689808",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/character.marshal.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/character.marshal.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:04:48.627Z",
+  "referenceHashes": [
+    "54afcd17fa41748631b4bff836f9c8487e0f6fe33c1eae9b82329f38fae43480",
+    "bae2a813055829c48b8cebd6728453f1283fad451f08aff2228853a81d11aab1"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "31aea31712c147ee7cc54aae5fb7d6673dad488ed76c470df6ee70d9ddabacdd",
+      "inputHash": "54afcd17fa41748631b4bff836f9c8487e0f6fe33c1eae9b82329f38fae43480",
+      "outputHash": "344b49d6a66204599e79327e9dc515406be392e59f311fa1910afdc92668f6e5"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

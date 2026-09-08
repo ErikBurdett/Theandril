@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.unsealed_companies",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.unsealed_companies"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Unsealed Companies. Original society of human veterans and civilian repair households. Faded vermilion, undyed canvas, pewter and reused dark plate. Asymmetrically repaired armor panels, broad roll cases and split-bottom standards; practiced military discipline without royal dress. Architecture uses wagon courts, repair yards, canvas canopies, squared portable palisades and occupied store halls, not yurts or massive Cinder forts. Ships use patched canvas sails, reused metal fittings and practical deck repair stores while retaining their specified hull role. Original heraldry: A broken wax seal with an unmistakable open lower gap and one short horizontal tie. Native64. ONE complete freestanding short standard: one simple dark pole with entire foot, one hanging cloth carrying the culture's original broad heraldic motif. Modest cloth folds, culture-specific hem, generous alpha around whole pole and cloth. No marching figure, base tile, duplicate banner, lettering or wind particles.",
+  "frames": [
+    {
+      "id": "ui.banner.unsealed_companies/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/ui.banner.unsealed_companies/edb2a4efcc6086a6fe161506fd51cfadb61e4308283a0bbe68989b24f1090a16/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d3277a6f73554f3f71c0db36b71754174664ee5572ac591809cf7c15dc734448",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/ui.banner.unsealed_companies-v1.png",
+      "assets/art/source/faction-expansion/wellroads/ui.banner.unsealed_companies-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:28:53.384Z",
+  "referenceHashes": [
+    "9acf479bafe9e8b4e6944230e4f0127a92c46e26d65ad823b4f8f97b4e1f240e",
+    "57393adb90f88e11deaf45b2e4436e334fa0a4d5195ee0970498c68ba8c7b780"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "25d44271bd5c2035875a4aac16dc22fc245f4eae1e381cedd28c9c4cf943ecc4",
+      "inputHash": "9acf479bafe9e8b4e6944230e4f0127a92c46e26d65ad823b4f8f97b4e1f240e",
+      "outputHash": "8261aa2d2cdb80d7faf6f3a2fc869ec568202f3b714ff7b889c92cf2ebf91eb9"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "8261aa2d2cdb80d7faf6f3a2fc869ec568202f3b714ff7b889c92cf2ebf91eb9",
+      "outputHash": "26801234544acb5b611613440e12f3f6934d57b23f3e82f201c14ab6643fc4ec"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "26801234544acb5b611613440e12f3f6934d57b23f3e82f201c14ab6643fc4ec",
+      "outputHash": "8ed7ef9a1bc66bb4f128ffcbef7e9536eed89bdf95b9399336cc1875ea83a10b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "d8955fca41c3140e7669cc9904717da7b6bbae0dbc9b8861f98b846ce06940b0",
+      "outputHash": "23485f3bcca4b2434478376b29c0a3a874970d67cadbbb2620e1224c88320bf1"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "5a2a6018fb64f72b1d7e27ade0543525ed61493223fe6c3831bfd7962145fac4",
+      "outputHash": "809cdc0e041c89cccac018d3abafb2ced3e6498764a0a7421842b32bf96fe79e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "7c74e3cf866bf1eebe4b43b340060d1d313dc4330f45e27778baaefda58285bf",
+      "outputHash": "63277d123c1ec7f3bc8587b2be8e974e828bfa3e9f7903e3a0fd0489d45a0166"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.banner.unsealed_companies.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:07:15.679Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Split-bottom standard keeps the open seal symbol and complete freestanding base. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate edb2a4efcc6086a6fe161506fd51cfadb61e4308283a0bbe68989b24f1090a16; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/ead581206bccc7533c819348a5e1788167eb2d3af789a1d4cc7214a3746beda1.png"
+    ],
+    "inputHash": "0e385d0116ee47e1cd5debb2ed58a633d4e3ef4d2bde312749b4b6641a12db3c"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

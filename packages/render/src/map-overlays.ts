@@ -2,6 +2,7 @@
 export interface MapLabelCandidate {
   id: string; cell: number; name: string; x: number; y: number;
   settlement: boolean; ruin?: boolean; own: boolean; hostile: boolean;
+  stackArmyCount?: number; domain?: 'land' | 'naval';
 }
 export interface MapLabel extends MapLabelCandidate {
   text: string; priority: number; width: number; height: number;
@@ -30,7 +31,8 @@ export function layoutMapLabels(
   for (const [priority, group] of groups.entries()) for (const candidate of group) {
     if (labels.length === MAX_MAP_LABELS) return labels;
     const prefix = candidate.ruin ? 'Ruins · ' : `${candidate.own ? '◆' : candidate.hostile ? '⚔' : '◇'} `;
-    const text = prefix + compactMapName(candidate.name, priority < 2 ? 28 : 22);
+    const stack = (candidate.stackArmyCount ?? 0) > 1 ? ` · ${candidate.stackArmyCount} ${candidate.domain === 'naval' ? 'fleets' : 'armies'}` : '';
+    const text = prefix + compactMapName(candidate.name, priority < 2 ? 28 : 22) + stack;
     const measured = measure(text), width = measured.width + 8, height = measured.height + 6;
     if (width > context.width - 12 || height > context.height - 12) continue;
     // Clamp labels inside the canvas, never shrink the text or change the map camera.

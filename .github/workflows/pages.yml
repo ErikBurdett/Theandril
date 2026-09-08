@@ -1,0 +1,99 @@
+name: Publish development demo to Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# This publishes a development demo, not a 1.0 release. The independent full
+# campaign/test/benchmark gates in verify.yml remain unchanged and visible.
+permissions: {}
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Check out the requested master revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Read the configured Pages URL
+        id: pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+        with:
+          # Enable Actions as the repository's Pages source in Settings first.
+          # No administrative token or automatic repository mutation is needed.
+          enablement: false
+
+      - name: Set up the package-manager version from package.json
+        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Validate game content
+        run: pnpm content:validate
+
+      - name: Check asset URL and integrity boundaries
+        run: pnpm exec vitest run apps/web/src/asset-url.test.ts apps/web/src/runtime-art.test.ts packages/render/src/art-validation.test.ts
+
+      - name: Build the actual Pages subpath
+        env:
+          # base_path is /Theandril for this project, or empty on a custom domain.
+          VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+        run: pnpm build
+
+      - name: Install Chromium for the production smoke
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Smoke the built game at its Pages subpath
+        env:
+          VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+        run: pnpm exec playwright test --config playwright.pages.config.ts
+
+      - name: Upload only the verified production bundle
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: apps/web/dist
+          retention-days: 1
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the verified Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

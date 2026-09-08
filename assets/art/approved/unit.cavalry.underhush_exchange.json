@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.underhush_exchange",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.cavalry for Theandril, Underhush Exchange.\nSubject: One mounted adult escort on one complete ordinary sturdy horse, horse and rider both facing southeast, quiet four-hoof standing pose. Compact saddle packs, faction cloth saddle blanket and practical light barding; rider holds reins and a short sheathed or downward sword, no long lance. All ears, tail and hooves complete.\nCulture-specific identity: An adult short broad-handed burrowfolk: compact furred body, small rounded ears, blunt face, visible dexterous fingers. Upright two-legged working citizen, not a bearded dwarf, pet or exposed-tooth rodent caricature. Clay-brown padded work coats, pewter fittings, pale-lime panels, tiny dull amber route markers, tactile tally beads, low padded helmets and rounded work shields. Generous compact horizontal shapes.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "unit.cavalry.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.underhush_exchange/58b1ecd5cbc436ad75173e46e4e3ef5a5ab26cd257780b2b38617a08fba13be1/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5bc584787e85e8855bcae26d987af93fbcc40c5d4c458dd8446f7db7d2610708",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:16:10Z",
+  "referenceHashes": [
+    "de4c6ca49e47573ffe02f5fb3d8a1e8b09862774c663df762b52683ee4151ab9",
+    "25c538a45f0e1e5083da27eea10f4f698eab4802ee117b2ac5133a9c7dbd7346"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "9377c14bacdd2389b878e1050e3b4ba5dd709aec4a2c1a330d3c290414bf96ab",
+      "inputHash": "de4c6ca49e47573ffe02f5fb3d8a1e8b09862774c663df762b52683ee4151ab9",
+      "outputHash": "f628b932a949a31623b317eaf35bf7d9c4ef9e556857fcaf7cadea9d82558508"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "f628b932a949a31623b317eaf35bf7d9c4ef9e556857fcaf7cadea9d82558508",
+      "outputHash": "1999de078018502c6def37f4fc049022975362d27c72acc4776e93263aa99217"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1999de078018502c6def37f4fc049022975362d27c72acc4776e93263aa99217",
+      "outputHash": "598b9b9bd608888447f69bbb68336c5f9a663d30d931f2c81c60d635fb0ec1ee"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "f43e0eda63ead4bc61a9fa5ccdd7c7140ad7b7315f08a7e6daadf11e7a3915cb",
+      "outputHash": "e28dfe6bd1e6b2fc1a0670f63192d533a918d3df11bf7f9f0751253570ac532e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "a3083088de370068b1d26d2cbc8225bc29def4be559652de7c6caa2d03e22bd8",
+      "outputHash": "5f4e642da5705c40b504ae98556fe3deeaa0addc25c7b5f6c018324f780e1a95"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "3d51f095ff8037361d182e33b5f92f1ae86c1144efb07f7dcf3e76e96da13ec0",
+      "outputHash": "d857ae4db51ff5135d35371fc0058ba3ef397010eb3469af5228908e57874239"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:29.940Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Small rider on complete ordinary horse, fitted work tack and no invented burrowing mount. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 58b1ecd5cbc436ad75173e46e4e3ef5a5ab26cd257780b2b38617a08fba13be1; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a5069fd965c75600b5050fc0a5c49392ccdea19aa250354ebffa2b78648446cc.png"
+    ],
+    "inputHash": "a678d1d3376c024561a8d655e0d78d487d2adbe105bde9eabc82b7b12ee3b0d8"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

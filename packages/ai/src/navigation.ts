@@ -93,15 +93,21 @@ export function createNavigation(view: Observation) {
   return {
     get expandedNodes() { return expandedNodes; },
     informationGain,
-    destination(army: ObservedArmy, sight: number, claimed: Set<number>, strategicScore?: (cell: number) => number): number | undefined {
+    destination(army: ObservedArmy, sight: number, claimed: Set<number>, strategicScore?: (cell: number) => number, explorationTieBreak?: (cell: number) => number,
+      explorationUtility?: (cell: number, gain: number) => number): number | undefined {
       if (army.carrierId || army.movementBlocker) return undefined;
       const allowed = entryMask(army);
       const range = getMovementQuery(travelView, army.id).reachable.filter(item => (entryAt(item.cell) & allowed) && !claimed.has(item.cell));
-      const candidates = range.map(item => ({ ...item, gain: informationGain(item.cell, sight), strategic: strategicScore?.(item.cell) ?? 0 }));
+      const candidates = range.map(item => {
+        const gain = informationGain(item.cell, sight);
+        return { ...item, gain, strategic: strategicScore?.(item.cell) ?? 0, exploration: explorationUtility?.(item.cell, gain) ?? gain * 100 };
+      });
       // Stable per-army tie breaking spreads scouts without changing their objective each turn.
       let salt = 0; for (let i = 0; i < army.id.length; i++) salt = Math.imul(salt, 31) + army.id.charCodeAt(i) | 0;
       const tie = (cell: number): number => (Math.imul(cell + 1, 1103515245) ^ salt) >>> 0;
-      candidates.sort((a, b) => (b.strategic + b.gain * 100) - (a.strategic + a.gain * 100) || b.cost - a.cost || tie(a.cell) - tie(b.cell) || a.cell - b.cell);
+      candidates.sort((a, b) => (b.strategic + b.exploration) - (a.strategic + a.exploration)
+        || (explorationTieBreak?.(b.cell) ?? 0) - (explorationTieBreak?.(a.cell) ?? 0)
+        || b.cost - a.cost || tie(a.cell) - tie(b.cell) || a.cell - b.cell);
       const best = candidates[0];
       if (!best) return undefined;
       if (strategicScore || best.gain > 0) return best.cell;

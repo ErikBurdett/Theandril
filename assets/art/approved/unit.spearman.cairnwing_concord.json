@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.spearman.cairnwing_concord",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.spearman.cairnwing_concord"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Cairnwing Concord, role unit.spearman.\nSUBJECT: ONE adult disciplined spearman, upright practical spear fully contained, narrow shield, clear two feet and tool hands. Spear not absurdly tall; whole silhouette including spear54px at native64x64, pivot32,56.\nCULTURE: Tawny feathers, oxblood cord, oxidized copper, pale scree. Narrow harnesses, folded feathered forearms, ribbed narrow shields, ledge tools. Bracketed low stone halls, terraced load courts and wind-braced lift housings integrated into freestanding settlement silhouette; no giant scenery rock or inaccessible floating castle.\nPEOPLE if character or rider: Tool-using feathered cairnfolk with short avian beaks, two legs and two dexterous arms with folded forearm feather fans; human port households. No spread wings, flying poses or implied flight.\nHERALDRY if UI or flag: A single stepped feather with three unequal notches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.spearman.cairnwing_concord/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.spearman.cairnwing_concord/256d7b3e85d6d5c659e7a92dbcaa56f4acd8700da2754425ee5e2a0f86eca9b1/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "ad8886d588846ef7abb2a1a04dacc842f8f7eb5060135a19220232af4db0f4c3",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/carecliffs/unit.spearman.cairnwing_concord-v1.png",
+      "assets/art/source/faction-expansion/carecliffs/unit.spearman.cairnwing_concord-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:02:32Z",
+  "referenceHashes": [
+    "dcf98713b32e72ae5322332bcbb586e330a2b687a78c6f7bc8ac7845d0f9b634",
+    "eef8eaaec2dadf4ac7854de51e07a178cc61248c4e1c0419e7a6ffe343d22512"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "55e1bbb5f63191d1983ed55386a11367d0a94e7bd8dbca991c3983c0e9555150",
+      "inputHash": "dcf98713b32e72ae5322332bcbb586e330a2b687a78c6f7bc8ac7845d0f9b634",
+      "outputHash": "76a17eb3d76acb87a490cd50a4bcf2d5bbae218c59b2af2a90cc95e3e8ee13e3"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "76a17eb3d76acb87a490cd50a4bcf2d5bbae218c59b2af2a90cc95e3e8ee13e3",
+      "outputHash": "b7603b2d480a049d2502bc74fea9fff83c5f5ccb7ac37d7121b46b489fb73e99"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b7603b2d480a049d2502bc74fea9fff83c5f5ccb7ac37d7121b46b489fb73e99",
+      "outputHash": "7ae17779270f0800252dec3ea5a571c3eb8fb5dffd302a9f33870052fc13efd2"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "f8ba9e5b468c0decac2b24f049456629842025d3837b872e5af2adf89512e417",
+      "outputHash": "b9588bd07a71cffb46179303e552f6a5b7f5b493c811788e7105b08059825c4f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "e672c9d374170ed6f08e129df75945ee1efffb4c222898a1553e0eac180c44ba",
+      "outputHash": "f6c2f6ac527441af97ccf91a7233f46652fa0c0878568c1fbee692f375193c35"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "d4ee775867ee555d440a0b27aeed74d5a918c36ed76417c456470bc496fdc645",
+      "outputHash": "7af1a9f1c58020098db8b81d6e04da9cc4febfebc3350d780d60b86f7f6748ff"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.spearman.cairnwing_concord.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:48:08.944Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Full upright spear and narrow tall shield separate the spearman from the sword guard. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 256d7b3e85d6d5c659e7a92dbcaa56f4acd8700da2754425ee5e2a0f86eca9b1; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/0db2e63a43e78d5b0fbb892ec945d373c5a862fb16e1f5250b63225111015250.png"
+    ],
+    "inputHash": "ce04ae7f14643bacef6b719ce6f4a96fe747bfc3b66e0abbeba31de58874ec27"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

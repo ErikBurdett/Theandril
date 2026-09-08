@@ -2,6 +2,8 @@
 export const FACTION_ART_FAMILIES = [
   'ashen_compact', 'reedbound_council', 'cinder_march', 'glass_tide', 'iron_covenant', 'sepulchral_synod',
   'mire_courts', 'saltwind_remnant', 'wardhall_remnant', 'rimehorn_clans', 'sable_steppe', 'morrow_spore',
+  'cistern_assembly', 'unsealed_companies', 'lantern_hospices', 'cairnwing_concord', 'red_sluice', 'velvet_meridian',
+  'brine_choir', 'emberwake_convocation', 'underhush_exchange', 'vesper_court', 'manytrack_moot', 'margin_observance',
 ] as const;
 export const FACTION_LAND_ART_ROLES = [
   'unit.colonist', 'unit.scout', 'unit.guard', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry',

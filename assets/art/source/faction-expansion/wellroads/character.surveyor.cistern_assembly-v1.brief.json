@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.cistern_assembly",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native64. One full-body adult route surveyor holding an open small route map in one hand and short dividers in the other; travel satchel and measuring cord at belt, visible face, both boots. Unarmed, no shield/bow/spear; distinct from the engineer.",
+  "frames": [
+    {
+      "id": "character.surveyor.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/character.surveyor.cistern_assembly/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1c50d2443ee9775eafca1ff18f2566e3c73a0dc7492063197ce7fe3ab5cecf94",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/character.surveyor.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/character.surveyor.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:51:45.865Z",
+  "referenceHashes": [
+    "2ef6e9360c1e0088d786b20b70b20489f425f16cfff0f5321fc7cb7fd324f207",
+    "2e1dfd29588c34968ff172522ebc6b77777f11dd82d01f3efe3e1cef810fe25b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "be15a93a99f98dcf37bf91fc6014d7f6553ced6037a1a4c47c65681bd73f52c0",
+      "inputHash": "2ef6e9360c1e0088d786b20b70b20489f425f16cfff0f5321fc7cb7fd324f207",
+      "outputHash": "1b3d9f0c0bab594694292442acbc9cdf30c7d3742872a6604ee699661dab7a12"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -15,6 +15,7 @@ export function ArmyComposition({ army, view, busy, issue, inspectArmy }: {
   const [targetId, setTargetId] = useState('');
   const [name, setName] = useState('');
   const options = army.mergeOptions;
+  const stackCount = army.carrierId ? 0 : view.armies.filter(other => !other.carrierId && other.cell === army.cell && other.factionId === army.factionId && other.domain === army.domain).length;
   const targetOption = options.find(other => other.armyId === targetId) ?? options[0];
   const target = view.armies.find(other => other.id === targetOption?.armyId);
   const chosen = army.formations.filter(formation => selected.includes(formation.id)).map(formation => formation.id);
@@ -35,6 +36,8 @@ export function ArmyComposition({ army, view, busy, issue, inspectArmy }: {
     <p className="field-help" data-testid="army-capacity-reason">{army.capacityReason}</p>
     {army.commandBlocker && <p className="character-blocker" role="status">{army.commandBlocker}</p>}
     <p className="field-help">An army moves and fights together. Each newly recruited unit arrives as a separate detachment; bring detachments to the same hex to combine their formations.</p>
+    <p className="field-help">Near-map figures summarize force size: one for 1 formation, two for 2–5, three for 6+. Co-located forces share the selected army’s figures, or the largest army’s when none is selected; ×N counts armies on that hex, not formations. Click the hex again to cycle your armies. The roster below lists this force’s real formations. Embarked troops appear only in the passenger roster.</p>
+    {stackCount > 1 && <p className="field-help" data-testid="army-stack-count">{stackCount} owned {army.domain === 'naval' ? 'fleets' : 'armies'} on this hex. Selected: {army.name} · {army.formations.length} formations.</p>}
     <dl className="army-capabilities" data-testid="army-capabilities"><div><dt>Shared movement</dt><dd>{army.movement} / {army.maxMovement}</dd></div><div><dt>Strength</dt><dd>{army.strength} / {army.maxStrength}</dd></div><div><dt>Sight</dt><dd>{army.sight} hexes</dd></div><div><dt>Upkeep</dt><dd>{army.upkeep} coin / turn</dd></div></dl>
     <p className="field-help">Shared morale {army.morale} · fatigue {army.fatigue}. The slowest formation sets the army’s movement limit.</p>
     <fieldset className="formation-choices" disabled={locked}><legend>Select formations to transfer or detach</legend>

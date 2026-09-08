@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.alpine.variant_1",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.alpine.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. ALPINE: low craggy mountain ridge across upper half, two angular slate grey peaks with restrained pale old snow on upper-left facets; a broad scree saddle between, muted stone foreground. No raised hex block; ridge rises from fully flat overhead ground. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs. Revision constraint: all mountain peaks, ridges, snow and rocks must remain wholly INSIDE the central 70% of the flat hex surface. Leave an uninterrupted quiet flat ground band around the entire perimeter. No peak, rock, shadow or height may cross or alter the six straight hex silhouette edges; top-left and top-right hex edges must remain clean straight boundaries. Show low, compact ridges rather than tall projecting peaks.",
+  "frames": [
+    {
+      "id": "terrain.alpine.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.alpine.variant_1/3046ab367bc41d4a7f9141abeaa20afed8efcd3fad8dd4007b8da8cffdaa19f3/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e240039bd3e581bc3880a5b03e3cb79d2f3e9d51212e4484f0d9ce0d686d673d",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.alpine.variant_1-v2.png",
+      "assets/art/source/biome-variants/terrain.alpine.variant_1-v2-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:58:10.835Z",
+  "referenceHashes": [
+    "08d280d0fcb023a4de0394045607707527409bb72d90159c126733c56fc33b44",
+    "302c0495769359a0125720684c2db4c54ae353b1cf0792c2481292c94847ee62"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "588aa9e677fc132bec54d1db2b5b3ee66e8ed7d2b64f43f37e6d4212acafa073",
+      "inputHash": "08d280d0fcb023a4de0394045607707527409bb72d90159c126733c56fc33b44",
+      "outputHash": "dad2c3786ffbc3b6d135ad00b4b169fbb09ebbbd8dffc1270e3cfd28facfc81d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "dad2c3786ffbc3b6d135ad00b4b169fbb09ebbbd8dffc1270e3cfd28facfc81d",
+      "outputHash": "6f5752a35fedc812ce21544bb4e23e1e85582fc9119c0344651aff0d3bc6edb9"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "6f5752a35fedc812ce21544bb4e23e1e85582fc9119c0344651aff0d3bc6edb9",
+      "outputHash": "28ff167b81506741f3c643e83a0ab98d3ecd4170bd2cf9b05980189af54acb75"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "3dcd4eda15fffe1328c3d591fbbb42b0aab8bbc083d4d5fdc5929024f3f9660b",
+      "outputHash": "fd22302bf3e1d7a0648f50ec36190c05b613ee1ead02a2a75e589a1c26acaf02"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "79a7ecc1a19df27c285125f1484ba6aa35d1ef24e7e7cc24e44fff52f7ce09b7",
+      "outputHash": "bc0d726506b6b314f183fce01d4678a8a08ae6a2d42625641380661a5c584260"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "306149cdd20bf21d4f9bb2fd8a2e149126c8dcfa491e5d55475c56faf0b16551",
+      "outputHash": "823b37b50c87cb14ae2723a95dfeb283dbb5af5734e2f2580cd72eafa0f01300"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.alpine.variant_1.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:19.511Z",
+    "notes": "Regenerated compact low ridge stays inside all six tile edges with a quiet scree perimeter; no projecting peak. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 3046ab367bc41d4a7f9141abeaa20afed8efcd3fad8dd4007b8da8cffdaa19f3; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/8708d760039a6538ab71ff84a6755ca307589305fabee9a16db8c247325587e8.png"
+    ],
+    "inputHash": "21feea398b55df426fb1c3066ec1cc70f8ae23a37e5f811a1612be09bfceeb6e"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

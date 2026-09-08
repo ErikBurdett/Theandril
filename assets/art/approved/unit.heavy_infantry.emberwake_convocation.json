@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.emberwake_convocation",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.heavy_infantry for Theandril, Emberwake Convocation.\nSubject: One adult heavily armored infantry veteran, broad layered chest and shoulder plates over padded working cloth, short thick sword held down close to the body and a strong large shield. More solid wide mass than ordinary guard without enormous pauldrons or weapon.\nCulture-specific identity: Adult human seedkeeper or kiln-worker household escort, practical proportions, visible tool-hands and ordinary boots. No fire elemental or undead. Ash-white ceramic face screens and small ceramic plates, smoked-orange cloth, muted sulfur-green straps, charcoal padded kiln aprons and short heat-resistant wraps. Seed jars and split-vent motifs, no open flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.heavy_infantry.emberwake_convocation/6d507f40e75f78b286ebf5ba7ebf4896b3e1ae128c3783129e6da930f3688f1c/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2157e0985d4948a80bce58089e5970b309a01dccdd247fefc3a0567a5e0218a5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.heavy_infantry.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.heavy_infantry.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:39:24Z",
+  "referenceHashes": [
+    "c387492d8c34c25e860d9c1b3da79436c2e3148160bdc3fc65d98e40e829ffda",
+    "cc8d861c1792c6e7ec559cee1d307e907dc07aa9318d3ac69510f89d7514ac01"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "6d482df6c38eb9024b3897064658b906a5202b88a252d5d5a94bf5e8043ad421",
+      "inputHash": "c387492d8c34c25e860d9c1b3da79436c2e3148160bdc3fc65d98e40e829ffda",
+      "outputHash": "ec4674203eb5b4ce3cee14a1a51516b8c822024a0b54e938e7e29338cd1e447d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ec4674203eb5b4ce3cee14a1a51516b8c822024a0b54e938e7e29338cd1e447d",
+      "outputHash": "23a2e2f637a4ff29c6738163affb84de621eb5008bcfb02b6f73c46f4a8d2c5c"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "23a2e2f637a4ff29c6738163affb84de621eb5008bcfb02b6f73c46f4a8d2c5c",
+      "outputHash": "40856b116714c2588c7c0e4384f4685e2c82e0305088d6f2a891bf612533857f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "1788106ae2f5b08f0fd940027e0e7f5e75c178bcb2fce5f4c721ab8ca34330a6",
+      "outputHash": "6ed5cf210e5f5d96b0fd271917b93e1c95389d951e4af8499b16562a4972fc3e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "94549f6be1a37e95dcfe15ed609b3eece757e009c8e04136c46b29b06192446c",
+      "outputHash": "1d86c05b6ab50ed513651094baf372571a6a5419fca3f46dbe0d74f5c95ceafd"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "8fa8d6c88505d9cb10ab28f3ff1f9c77d16389dab1400234a8ca8298ace4aa05",
+      "outputHash": "e5970a24157604e5896bcf382bed7046b39d590409269f09dc01df3b6809b4b7"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.heavy_infantry.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:27.617Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Broad padded silhouette, large plate-covered shield and heavier sword visibly distinguish heavy infantry. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 6d507f40e75f78b286ebf5ba7ebf4896b3e1ae128c3783129e6da930f3688f1c; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/610e401ae7deced3de6910829cee4ca59e4f9e25a164df78cf5308a09c267709.png"
+    ],
+    "inputHash": "c78ab2bb921923fc665184049b87d1a1df03ef7eff9fbe696d4422c246f05b26"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

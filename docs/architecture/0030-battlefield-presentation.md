@@ -1,0 +1,11 @@
+# Battlefield presentation and bounded combat abilities
+
+The battle screen is a presentation of the existing deterministic formation kernel, not a real-time simulation. Field engagements, siege assaults and naval engagements retain the same command, casualty, retreat and conquest boundaries.
+
+An optional observer records typed, detached facts from the actual resolving kernel. It consumes no random numbers, changes no command results and does not enter canonical hashes or the campaign archive. The worker retains only the current/latest battle presentation. Loading a pending battle reconstructs its current pose; it does not invent unrecorded historical attacks. Archived canonical commands remain sufficient for exact replay without storing hundreds of visual micro-events per battle.
+
+The battlefield shares the strategic renderer's Pixi application and approved foundation atlas. New combat clips occupy a separately hash-checked1024² page, lazily loaded once on first battle. This preserves the byte-identical2048² world page and16MiB normal map atlas residency; battle art adds4MiB in the same context. Only its bounded formation scene animates during battle; the world camera and selection are restored afterward. DOM controls provide textual rosters, orders, targets and outcomes. Animation clocks, playback speed, reduced motion and visibility cannot apply damage or spend resources.
+
+New mechanics use a separately versioned battle-rules variant and save migration. Historical battles retain their old rules. Automatic abilities are the new default; a player's explicit per-source override and manual actions are canonical. National Arcane Theory and a character's personal aptitude are separate requirements, not aliases for mundane research or experience. The initial spells are a bounded foundation, not the complete magic/ritual progression scope.
+
+Blender authors new original effect geometry and animation through project-owned recipes, fixed projection and retained editable sources. Native frames go through actual Pixel Snapper, palette validation and Aseprite tag exports. Only inspected, hash-approved candidates enter runtime publication. Shared unit sprites remain their existing approved art; transform-based battlefield motion is not claimed as newly authored per-faction attack poses.

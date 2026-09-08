@@ -75,6 +75,57 @@ afterAll(async () => {
 });
 
 describe('actual worker scoped-query boundary', () => {
+  it('rejects fog requests in player campaigns, including forged nonboolean input', async () => {
+    await request({ type: 'new', seed: 17, size: 'tiny', factionCount: 2, pace: 'short', mode: 'player' }, 'state');
+    const before = await exported();
+    const rejected = await request({ type: 'watchFog', enabled: false }, 'error');
+    expect(rejected.message).toContain('only in AI-watch');
+    expect((await exported()).text).toBe(before.text);
+    await request({ type: 'new', seed: 17, size: 'tiny', factionCount: 2, pace: 'short', mode: 'watch' }, 'state');
+    expect((await request({ type: 'watchFog', enabled: 'false' as unknown as boolean }, 'error')).message).toContain('boolean');
+  });
+
+  it('replaces revealed map cells on restore without contaminating ordinary queries or recording a command', async () => {
+    const initial = await request({ type: 'new', seed: 17, size: 'tiny', factionCount: 4, pace: 'short', mode: 'watch' }, 'state');
+    const before = await exported(), ordinaryCells = unpackCells(initial.cells);
+    const movement = await request({ type: 'movementQuery', armyId: 'army.2' }, 'movementQuery');
+    const revealed = await request({ type: 'watchFog', enabled: false }, 'state');
+    expect(revealed).toMatchObject({ reset: false, mapReset: true, fogEnabled: false, hash: initial.hash });
+    expect(revealed.mapRevision).toBeGreaterThan(initial.mapRevision);
+    expect(unpackCells(revealed.cells)).toHaveLength(1536);
+    expect(revealed.map?.armies.length).toBeGreaterThan(initial.observation.armies.length);
+    expect(revealed.observation).toEqual(initial.observation);
+    expect((await request({ type: 'movementQuery', armyId: 'army.2' }, 'movementQuery')).query).toEqual(movement.query);
+    const same = await request({ type: 'watchFog', enabled: false }, 'state');
+    expect(same.mapReset).toBe(false); expect(unpackCells(same.cells)).toHaveLength(0);
+    const restored = await request({ type: 'watchFog', enabled: true }, 'state');
+    expect(restored.map).toBeUndefined(); expect(restored.mapReset).toBe(true);
+    expect(unpackCells(restored.cells)).toEqual(ordinaryCells);
+    expect((await exported()).text).toBe(before.text);
+    await request({ type: 'watchFog', enabled: false }, 'state');
+    await request({ type: 'save' }, 'message');
+    const loaded = await request({ type: 'load' }, 'state');
+    expect(loaded).toMatchObject({ fogEnabled: true, reset: true, mapReset: true, hash: initial.hash });
+    expect(loaded.map).toBeUndefined(); expect(unpackCells(loaded.cells)).toEqual(ordinaryCells);
+  });
+
+  it('keeps actual AI orders and saved continuation identical when fog changes between queued rounds', async () => {
+    const setup = { type: 'new', seed: 17, size: 'tiny', factionCount: 2, pace: 'short', mode: 'watch' } as const;
+    await request(setup, 'state');
+    await request({ type: 'watchRound' }, 'state');
+    await request({ type: 'watchRound' }, 'state');
+    const baseline = await exported();
+    await request(setup, 'state');
+    const first = dispatch({ type: 'watchRound' }, 'state');
+    const reveal = dispatch({ type: 'watchFog', enabled: false }, 'state');
+    const second = dispatch({ type: 'watchRound' }, 'state');
+    const restore = dispatch({ type: 'watchFog', enabled: true }, 'state');
+    const replies = await Promise.all([first.response, reveal.response, second.response, restore.response]);
+    expect(replies[2]!.map).toBeDefined();
+    expect(replies[2]!.hash).toBe(replies[3]!.hash);
+    expect((await exported()).text).toBe(baseline.text);
+  });
+
   it('publishes summary-only land with fresh transferred cells and preserves later cached movement queries', async () => {
     const setup = { seed: 17, size: 'tiny', factionCount: 2, pace: 'short' } as const;
     const generated = createGame(setup), owner = generated.turnOwnerId;

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.brine_choir",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.badge for Theandril, Brine Choir.\nSubject: ONE extremely simplified front-facing miniature faction badge. Native 32x32 readability: reduce the exact faction emblem to broad thick contiguous pixel masses and obvious gaps, at most a few flat tones. No outer plaque, tiny ornament, text or border.\nCulture-specific identity: A broken concentric ripple: two unequal open rings, clearly legible gaps, matte shell against wet slate; not a keel or sail.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 32x32 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Front-facing emblem.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "ui.badge.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.brine_choir/300c79fb1e65003e5cd886b81faa20fe8a69e0b6119229abde131c8bf2dbd822/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "3e905e85ebc181583cecd96c7f11e083ef12c4325c1399be962e8cb674eaed69",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.badge.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.badge.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:23:01Z",
+  "referenceHashes": [
+    "d7a228eabb9f6d691c88f85a830afd1933042664c430f6e41e91c01c9b3fb23d",
+    "6c5b0f36e3161c727ab6513712b4a4dfd5d694cafd947f2b8e5af7b7e28f2993"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "9f57126bf568351bd356971a4d7a416957a092b81031b7690b96460ce71159b4",
+      "inputHash": "d7a228eabb9f6d691c88f85a830afd1933042664c430f6e41e91c01c9b3fb23d",
+      "outputHash": "bc76740b200883a89a3b2978f632c8b32a092d5c1bae30646b69909c266984eb"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "bc76740b200883a89a3b2978f632c8b32a092d5c1bae30646b69909c266984eb",
+      "outputHash": "3f91d406b6f2b42e759daf0228ab5b8627eadea8fba6806600bc1af9d35053ab"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3f91d406b6f2b42e759daf0228ab5b8627eadea8fba6806600bc1af9d35053ab",
+      "outputHash": "e25f8f7748f8da619af2c5a5c2c8c0fb66385e443bf4882196e31390adf2f66d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "3e71ac7419f1bc73c36ff34495a1123eed534943ff14c5342fabb8d87583d81d",
+      "outputHash": "39fdeff18bac9b9ce74e7cf32e9873ba4f2606be2aa8a2a819d4d9ef14030b01"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "f721ab07cedee9eead19a1e98d1e6a97f95b5180ec10da7c830281c6554cb6f6",
+      "outputHash": "4fc51fb7df08476c0ef85cb93120fdf1923007b72ced2e2a2c70c4b6d58884da"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "c9e288df18354cd38b3225952f035217628d8c92676cf2a5d2eecebbe3ba4ed1",
+      "outputHash": "ead3f8849f81f5028988d69e6c1820e1e9ed17a5c68a0e49dcf8b24ef7ad77e2"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.brine_choir.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:18:15.188Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Nested open ripple badge retains clear gaps and pale edge at32px. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 300c79fb1e65003e5cd886b81faa20fe8a69e0b6119229abde131c8bf2dbd822; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/8c5159ff3f6affb28016a85adea638e63efd6d23dcdf84bbe87cf1ceb0988eb2.png"
+    ],
+    "inputHash": "25a0594cefb61bb22f4306c045861a732d4d9183a80442cf7d5146bb1dcc363c"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

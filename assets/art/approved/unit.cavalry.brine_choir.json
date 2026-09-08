@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.brine_choir",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.cavalry for Theandril, Brine Choir.\nSubject: One mounted adult escort on one complete ordinary sturdy horse, horse and rider both facing southeast, quiet four-hoof standing pose. Compact saddle packs, faction cloth saddle blanket and practical light barding; rider holds reins and a short sheathed or downward sword, no long lance. All ears, tail and hooves complete.\nCulture-specific identity: Adult brinefolk humanoid with matte blue-grey skin, small folded neck fins, broad fin-fold collar, normal two legs and visible dexterous humanlike tool-hands. A practical shore citizen, not a fish-tailed creature. Coral-clay accents, pale eelgrass cloth, wet-slate armor, matte shell inlay and practical woven salt-cloaks. Broad fin-fold collar and low crescent shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "unit.cavalry.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.brine_choir/55bb0bf2248bd44918b3878686e06f72f14e1e7030f427c0c5d93cf903f71f81/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "734c721852e540f5f35a2a502421a0058b4d640a181700b76b688510af7c6e8e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:06:50Z",
+  "referenceHashes": [
+    "8a1d7bf3814cfbb9719b7a2944bed32185ad2308b22c1b56c092c008bd4e7447",
+    "2b5ad20863c8f3780e8c9ee81d9966ffd313f24291e4b2ba0176aecbe865b36d"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a2f198938a69588e521c50179fd6006f4caa7a6a9cfb68dcb238bd2bb3ee5ff1",
+      "inputHash": "8a1d7bf3814cfbb9719b7a2944bed32185ad2308b22c1b56c092c008bd4e7447",
+      "outputHash": "a6248ca11010d16670b9ab976086b272074c5ed4a6cd8c2e2936b13406fa7d28"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "a6248ca11010d16670b9ab976086b272074c5ed4a6cd8c2e2936b13406fa7d28",
+      "outputHash": "48b04284f622d445da3b4e9b6725f0b022c787105e6b970e73afc0cc2e1e8875"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "48b04284f622d445da3b4e9b6725f0b022c787105e6b970e73afc0cc2e1e8875",
+      "outputHash": "1691ca452187e74b17571925d6fd587432d3e6554777a550937d159e1600a3da"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "98fe82dfaa11f01df2e1330a45399f482327fdb7645a4dd68397dd5d8c2cdc63",
+      "outputHash": "8f785374c289262d95aa8ee9a07e17315bea3863014c2fe0706024556b6fd509"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "f3c2f88133607c67aa889f4843babc0f08c06b5ef2825e6c5e35ecdc67ac1797",
+      "outputHash": "971dae81842460df0f93b959538e3c6df4a80c542329c8c284e8a3a4d34646de"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "00f32f265ff549fad39fabdd68a9ffe2cb061c4386fb00055e9f31ca7ef52255",
+      "outputHash": "16051826b3aaf7274e3547832c3537ffc542e87ab36007c36a3e8a9771aeff1d"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.brine_choir.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:18:11.926Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Blue-grey rider uses an ordinary complete horse; no fish tail or new amphibious mount. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 55bb0bf2248bd44918b3878686e06f72f14e1e7030f427c0c5d93cf903f71f81; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/c3dabdcda2b0f481601b9bc9ba723e76f1b177ead09f2274389d1c5c9225d35a.png"
+    ],
+    "inputHash": "6ffa0caa63472e6a798a7a83c863db4c905995eec68a0ee6d3523a766c5db0bc"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

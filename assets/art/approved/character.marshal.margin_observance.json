@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.marshal.margin_observance",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.marshal.margin_observance"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Margin Observance, role character.marshal.\nSUBJECT: ONE senior adult marshal, culturally specific armor and dignified long coat or equivalent ceremonial harness, short command baton and small document pouch, no oversized pole or throne. Discernible leadership fromtroops via silhouette and restrained silver trim. Native64x64 maxheight48px pivot32,56.\nCULTURE: Parchment grey, dull cinnabar, matte ink black, weathered lead. Narrow document cases, interrupted stripe patterns, practical slate shoulder covers and pale-edged shields. Slab-roof archive stations, protected empty wall recesses and enclosed supply yards; no levitatingglyphs or blackwizardcliche.\nPEOPLE if character or rider: Human copyists, custodians and supplyhouseholds; work-conscious guardedcamp equipment.\nHERALDRY if UI or flag: One broken bracket with a deliberate open corner and small offset registration bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "character.marshal.margin_observance/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.marshal.margin_observance/76a8ca97fd851df73ed9aa80d291bf1dcd20f084838e9f4b01e7375da7bf469a/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9987de6bd4d4111b9129f0aaac8b21e5cafe8ebfcabc38eac931b89fa94bfacb",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/character.marshal.margin_observance-v1.png",
+      "assets/art/source/faction-expansion/reedstars/character.marshal.margin_observance-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:04:20.000Z",
+  "referenceHashes": [
+    "88a354c1629942299866fab77115a0f2f99c5970693ba61414d1664b467d7ffc",
+    "e031aa118d71da4b2fb8e0a16f29fa28a7b316468c15c0dd6d803cd653887763"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "a3bb0363acb88b7d072f072a9de49651c7a208a217aa36ba152fea461b8c6a2b",
+      "inputHash": "88a354c1629942299866fab77115a0f2f99c5970693ba61414d1664b467d7ffc",
+      "outputHash": "d1ed9f804ddce6a6661ec3db8c8fd82d5b99fdb7f7a04e2f5c89e20f9c3f2082"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "d1ed9f804ddce6a6661ec3db8c8fd82d5b99fdb7f7a04e2f5c89e20f9c3f2082",
+      "outputHash": "d06c4dc720b03644effb01cd5e092e8ae5b5817270aebe3c4697e0f6095e55e8"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d06c4dc720b03644effb01cd5e092e8ae5b5817270aebe3c4697e0f6095e55e8",
+      "outputHash": "2091093e5ddecee9e4a42fde8038e58e84d3619655c9634421da1267149d92e4"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "998d4b3af39257ce12f795e5dc8202a9629c5f592bda19da0dc99e338192f87a",
+      "outputHash": "d45a755c8151d686bb60667936177209d4891b0f5495f9b19d5e3b4b091661df"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "4b19e329b82913d6eb1e45baf427e13158dceadc0b65c0f35305ee0ff52242b8",
+      "outputHash": "a0a2402c1ffbb89cae3ded05e032c7bd56ae17365e146f4d2e21e7985017fe34"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "5942c39cd42a5f326b92ab1eb946aa4f45adef5073bdd1e5ecce13052aee37b5",
+      "outputHash": "1fe3e771a7cf35c26dd40712e8c0764903c65e45015bb87a6e17831510a9d7fd"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.marshal.margin_observance.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:16:05.334Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. White-haired officer with long pale coat, baton and carried documents reads clearly as marshal. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 76a8ca97fd851df73ed9aa80d291bf1dcd20f084838e9f4b01e7375da7bf469a; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/87a541dec04cf1bee9e1cccef36c1acfcd10bf227719ba9f172fac63726277bc.png"
+    ],
+    "inputHash": "261010f47c2743101e1f160365ba592e7f50111132c7f56852973f1fadbca3af"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

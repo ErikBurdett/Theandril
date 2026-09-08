@@ -1,12 +1,15 @@
 import 'fake-indexeddb/auto';
+import { gunzipSync } from 'node:zlib';
 import Dexie from 'dexie';
 import { afterEach, expect, test, vi } from 'vitest';
-import { createGame, serializeGame, stateHash, type GameState } from '@theandril/sim';
+import { createGame, deserializeGame, serializeGame, stateHash, type GameState } from '@theandril/sim';
 import { createJournal, replayArchive, resumeJournal, type CampaignJournal } from '@theandril/chronicle';
 import { checksum } from '@theandril/content';
 import { SaveStore, serializeCampaign, deserializeCampaign, exportSave, importSave } from './index';
 import { historyDigest, logicalCampaignBytes, MAX_CHUNK_BYTES, MAX_CHUNK_RECORDS, MAX_GARBAGE_BLOBS_PER_COMMIT } from './campaign-storage';
 import { MAX_SAVE_BYTES } from './size';
+import preExpansion from '../../chronicle/src/fixtures/v12-faction-history.json';
+import preBattle from '../../chronicle/src/fixtures/v13-battle-history.json';
 
 const stores: SaveStore[] = [];
 let serial = 0;
@@ -15,6 +18,49 @@ afterEach(async () => { vi.restoreAllMocks(); for (const db of stores.splice(0))
 function campaign(seed = 74): { game: GameState; journal: CampaignJournal } { const game = createGame({ seed, size: 'tiny', factionCount: 2, pace: 'short' }); return { game, journal: createJournal(game, { mode: 'watch' }) }; }
 function end(game: GameState, journal: CampaignJournal): void { expect(journal.record(game, { type: 'endTurn', factionId: game.turnOwnerId }).ok).toBe(true); }
 const generations = async (db: SaveStore, kind = 'auto') => db.table('campaignGenerations').where('kind').equals(kind).sortBy('id') as Promise<{ id: number; kind: string; type: string; originDigest: string; headDigest: string | null; manifestDigest: string }[]>;
+
+test('incremental storage retains a genuine schema12 origin and immutable prefix while appending schema14', async () => {
+  const fixture = (JSON.parse(gunzipSync(Buffer.from(preExpansion.payload, 'base64')).toString('utf8')) as { activeWork: { save: string; archive: unknown } }).activeWork;
+  const game = deserializeGame(fixture.save), journal = resumeJournal(game, fixture.archive), before = journal.materialize(), db = store();
+  await db.saveCampaign(game, journal, 'manual');
+  end(game, journal);
+  await db.saveCampaign(game, journal, 'manual');
+  expect(db.lastCampaignSaveStats!.suffixRecords).toBe(1);
+  const loaded = await db.loadLatestCampaign('manual'), archive = loaded.journal.materialize();
+  expect(archive.initialSaveVersion).toBe(12); expect(archive.initialSave).toBe(before.initialSave);
+  expect(archive.records.slice(0, before.records.length)).toEqual(before.records);
+  expect(archive.records.at(-1)).toMatchObject({ rulesVersion: 14, checkpointVersion: 14 });
+  expect(serializeGame(loaded.game)).toBe(serializeGame(game));
+  expect(serializeGame(replayArchive(archive))).toBe(serializeGame(game));
+  const exported = deserializeCampaign(await importSave(await exportSave(serializeCampaign(loaded.game, archive))));
+  expect(exported.archive).toEqual(archive); expect(serializeGame(exported.game)).toBe(serializeGame(game));
+});
+
+test.each([
+  ['fieldRally', 'fieldRoundOne', 'battleOrder'],
+  ['fieldRoundOne', 'fieldCompleted', 'autoResolveBattle'],
+  ['siegeRoundOne', 'siegeCompleted', 'autoResolveBattle'],
+] as const)('incremental storage preserves the genuine schema13 %s battle through modern commands and portable replay', async (start, finish, type) => {
+  const captures = (JSON.parse(gunzipSync(Buffer.from(preBattle.payload, 'base64')).toString()) as { cases: Record<string, { save: string; archive: unknown }> }).cases;
+  const source = captures[start]!, expected = deserializeGame(captures[finish]!.save);
+  const game = deserializeGame(source.save), journal = resumeJournal(game, source.archive), before = journal.materialize(), db = store();
+  expect(game.battle?.rulesVersion).toBe(8);
+  await db.saveCampaign(game, journal, 'manual');
+  const command = type === 'battleOrder' ? { type, factionId: game.turnOwnerId, order: 'brace' as const } : { type, factionId: game.turnOwnerId };
+  expect(journal.record(game, command).ok).toBe(true);
+  expect(game.battle?.combat).toEqual(expected.battle?.combat);
+  expect(game.battleReports).toEqual(expected.battleReports);
+  await db.saveCampaign(game, journal, 'manual');
+  expect(db.lastCampaignSaveStats!.suffixRecords).toBe(1);
+  const loaded = await db.loadLatestCampaign('manual'), archive = loaded.journal.materialize();
+  expect(archive.initialSaveVersion).toBe(13); expect(archive.initialSave).toBe(before.initialSave);
+  expect(archive.records.slice(0, before.records.length)).toEqual(before.records);
+  expect(archive.records.at(-1)).toMatchObject({ rulesVersion: 14, checkpointVersion: null });
+  expect(serializeGame(loaded.game)).toBe(serializeGame(game));
+  const imported = deserializeCampaign(await importSave(await exportSave(serializeCampaign(loaded.game, archive))));
+  expect(imported.archive).toEqual(archive);
+  expect(serializeGame(replayArchive(imported.archive))).toBe(serializeGame(game));
+});
 
 test('incremental commit preserves replay, counts exact envelope bytes, and writes no history for a no-op save', async () => {
   const db = store(); const { game, journal } = campaign(); end(game, journal);

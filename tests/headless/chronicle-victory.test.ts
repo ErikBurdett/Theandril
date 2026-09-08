@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+import { deepStrictEqual } from 'node:assert';
 import { createGame, getObservation, stateHash, type GameCommand } from '../../packages/sim/src/index';
 import { aiObservationOptions, planTurn } from '../../packages/ai/src/index';
 import { applyRecordedCommand, createArchive, generateChronicles, replayArchive } from '../../packages/chronicle/src/index';
@@ -15,7 +16,9 @@ test.each(['short', 'epic'] as const)('generated-start %s AI victory produces co
   const issue = (command: GameCommand) => {
     const result = applyRecordedCommand(game, archive, command);
     if (!result.ok) errors.push(`${game.turn}: ${JSON.stringify(command)}: ${result.error}`);
-    if (resumed) expect(applyRecordedCommand(resumed.game, resumed.archive, command)).toEqual(result);
+    // Compare the complete result (including absent/undefined distinctions) without
+    // a general matcher wrapper for every mirrored command in a thousand-turn run.
+    if (resumed) deepStrictEqual(applyRecordedCommand(resumed.game, resumed.archive, command), result);
   };
   while (!game.victory && game.turn <= (pace === 'short' ? 150 : 1400)) {
     for (const faction of game.factions) {
@@ -54,8 +57,8 @@ test.each(['short', 'epic'] as const)('generated-start %s AI victory produces co
   expect(stateHash(replayArchive(restored.archive))).toBe(stateHash(game));
   expect(restored.archive.records.flatMap(record => record.events).length).toBeGreaterThan(200);
   const documents = generateChronicles(game, archive);
-  expect(documents).toEqual(generateChronicles(resumed!.game, resumed!.archive));
-  expect(documents).toEqual(generateChronicles(restored.game, restored.archive));
+  deepStrictEqual(documents, generateChronicles(resumed!.game, resumed!.archive));
+  deepStrictEqual(documents, generateChronicles(restored.game, restored.archive));
   expect(documents.history.coverage).toContain('Complete record');
   expect(documents.historyText).toContain('Turn 1 — New hearths');
   expect(documents.historyText).toContain('achieved Prosperity');

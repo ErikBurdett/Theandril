@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.velvet_meridian",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.velvet_meridian"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Velvet Meridian, role unit.colonist.\nSUBJECT: ONE adult civilian colonist with a loaded compact backpack and hand-held folded tent roll, walking staff within frame, clear ordinary tool-hands and complete boots. No weapon or animal. Native64x64 maxheight48px pivot32,56.\nCULTURE: Madder red, smoke silver, blue-black woven cloth. Weighted long hems, small calibrated discs, half-round shields and layered soft scholar coats. Low round slate observatories, cloth-measure galleries, concentric open courtyards and dark-curtained study halls; no glowingastralwizardtowers.\nPEOPLE if character or rider: Human weavers, night navigators and school households; practical escorts and scholars.\nHERALDRY if UI or flag: A plumb line crossing three unequal stitches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "unit.colonist.velvet_meridian/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.velvet_meridian/bd49b014f5d4a3b442229d98239c7ad688fa943cc518726380229174f7d73e0d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "11a4bbfb934e29298d3e0e8de68bd872c457e331a27460fbf4df14438e6f72a3",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/unit.colonist.velvet_meridian-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/unit.colonist.velvet_meridian-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:05:04.000Z",
+  "referenceHashes": [
+    "99c4cd76811c4be8f64939d39e1fe42198aabbc6b0fd22b7b785e217678c9035",
+    "9b6a6479cff8e14db155ee7749afa0741009121263337011e8485098d5302bbb"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "3f16f41b8a4ff1cb1b590109ddaec8c8efb74ac185c676fe5ca15893ad256f99",
+      "inputHash": "99c4cd76811c4be8f64939d39e1fe42198aabbc6b0fd22b7b785e217678c9035",
+      "outputHash": "795048a6e57d30a1bf500e84accaf4276eb8101b5beef65995e1240fb09e8bc5"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "795048a6e57d30a1bf500e84accaf4276eb8101b5beef65995e1240fb09e8bc5",
+      "outputHash": "c2dad8543379c8bf1fe2c40798a1589762e5fdf7d62576883a0cee589e86292c"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c2dad8543379c8bf1fe2c40798a1589762e5fdf7d62576883a0cee589e86292c",
+      "outputHash": "46e39b872b32a211757da50e7f8a123a2962d8f4245e0588e69060f15b3bb8ed"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "4a90787047f6fbb9a72646826b03484243cf56d099afcfddebafc8bcc6ae3f58",
+      "outputHash": "b35bb3b20ae3c1c15887ea7e3bc66dbb2c866f3f398cf89a1f06cc6f1e1a1688"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "d2c9c31e1a959ca4cc880f805530783c00ea1b8a182f07656d5cf4c850ac848b",
+      "outputHash": "c5196abb4752ad6c68b5d1c33977121b423d6d567dccc8b99e874187fd4eb81d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "ddfc30697a72480acb47b73ba306f858be2324ccceee78904b1f385b5da3c800",
+      "outputHash": "ffb9f8bebab5346ea5b06b0b241b220689140ccf39c6c0b0d9790c69caecc22d"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.velvet_meridian.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:20:38.414Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Traveller with weighted layered hems, tall pack, pale discs, blanket and complete walking staff. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate bd49b014f5d4a3b442229d98239c7ad688fa943cc518726380229174f7d73e0d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/557c10c5ccd2a1a9c9c541620569f15ad6371accad279c4465743df3215ded10.png"
+    ],
+    "inputHash": "9464c4da9fb6bfafdeedd6acfba307cd17feea4af5016df9c3e173d74f4fa099"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

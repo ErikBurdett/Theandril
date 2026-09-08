@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.battle_rally",
+  "version": 1,
+  "reviewedAt": "2026-09-07 21:12:57 UTC",
+  "stage": "native Blender source review",
+  "decision": "inspected-candidate-not-approved",
+  "manifestSha256": "30284698f59070541e73b7807b04fbc35a9b63e8cf662a1fa0b8f9a4bf930e8c",
+  "evidence": [
+    {
+      "path": "v1/review-1x.png",
+      "sha256": "33f916bed12fbe4b8bbdd4e462f5697d99217c8be14ac4c59b453851796112c5",
+      "inspection": "Viewed full image at native scale."
+    },
+    {
+      "path": "v1/review-4x.png",
+      "sha256": "24fd7727fcb23a041f9fe52fda76d561ff0a76f7d7fd7e8d5da31585a92eaeb2",
+      "inspection": "Viewed enlarged nearest-neighbor contact sheet."
+    }
+  ],
+  "findings": [
+    "Three staggered bronze/gold chevrons rise and reduce independently from an initial signal seed; restrained warm commander signal, not a national emblem.",
+    "Distinct from the ward's enclosed cool brackets and ember's irregular tongues. Pale highlight is subtler on linen; native silhouette remains readable."
+  ],
+  "timing": {
+    "frames": 8,
+    "durationMs": 100,
+    "blenderFps": 10,
+    "totalDurationMs": 800
+  },
+  "limitations": [
+    "Studio source images inspected; preview.html temporal playback not browser-tested by this reviewer.",
+    "PixelSnapper/Aseprite processed review, gameplay/background review and final approval remain parent-owned. No approval or runtime publication granted here."
+  ]
+}

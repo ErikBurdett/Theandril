@@ -1,3 +1,4 @@
+import { closeManagement, closeCampaignOptions, openRegistry, selectFromRegistry, openSelectedOrders, openProduction } from './ui-navigation';
 import { expect, test, type Locator, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { BUILDINGS, FACTIONS, FACTION_ECOLOGIES, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS } from '@theandril/content';
@@ -10,6 +11,7 @@ const menu = (page: Page) => page.getByTestId('campaign-menu');
 const hash = (page: Page) => page.evaluate(() => window.__THEANDRIL__!.getStateHash());
 
 async function openMenu(page: Page) {
+  await closeManagement(page);
   if (await menu(page).getAttribute('open') === null) await menu(page).locator('summary').click();
 }
 async function exportCampaign(page: Page) {
@@ -57,10 +59,13 @@ for (const faction of newCultures) test(`${faction.name} is a real chosen cultur
   await begin(page, faction.id);
   const colonyName = `${faction.name} witness`;
   const caravan = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.ownArmies.find(army => army.canFound)!.id);
-  await page.getByTestId('army-registry').getByRole('button', { name: /Hearth caravan/ }).click();
+  await selectFromRegistry(page, 'armies', /Hearth caravan/); await openSelectedOrders(page);
   await page.getByRole('textbox', { name: 'Settlement name', exact: true }).fill(colonyName);
   await page.getByRole('button', { name: 'Found settlement', exact: true }).click();
+  await openRegistry(page, 'settlements');
   await expect(page.getByTestId('settlement-registry')).toContainText(colonyName);
+  await selectFromRegistry(page, 'settlements', colonyName);
+  await openSelectedOrders(page);
   expect(await page.evaluate(id => window.__THEANDRIL__!.getSummary()!.ownArmies.some(army => army.id === id), caravan)).toBe(false);
   const town = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.ownSettlements[0]!.id);
   const culture = page.getByTestId('realm-culture');
@@ -70,6 +75,7 @@ for (const faction of newCultures) test(`${faction.name} is a real chosen cultur
   await culture.locator(':scope > summary').click();
   const beforeCoin = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.treasury);
   const cellar = BUILDINGS.find(building => building.id === 'building.granary')!;
+  await openProduction(page, 'building');
   await page.getByRole('button', { name: /^Build Root cellar/ }).click();
   await expect.poll(() => page.evaluate(id => window.__THEANDRIL__!.getSummary()!.ownSettlements.find(item => item.id === id)!.queue[0]?.itemId, town)).toBe(cellar.id);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.treasury)).toBe(beforeCoin - cellar.coinCost);
@@ -81,38 +87,47 @@ for (const faction of newCultures) test(`${faction.name} is a real chosen cultur
   await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
   await expect.poll(() => hash(page)).toBe(saved);
   const bytes = await exportCampaign(page), portable = deserializeCampaign(await importSave(bytes));
-  expect(portable.game.rosterVersion).toBe(3);
+  expect(portable.game.rosterVersion).toBe(4);
   expect(portable.game.factions.find(item => item.id === portable.game.turnOwnerId)!.definitionId).toBe(faction.id);
   expect(stateHash(portable.game)).toBe(saved);
   expect(portable.archive.records).toEqual(expect.arrayContaining([
     expect.objectContaining({ ok: true, command: expect.objectContaining({ type: 'found' }) }),
     expect.objectContaining({ ok: true, command: expect.objectContaining({ type: 'queue' }) }),
   ]));
+  await closeCampaignOptions(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
   expect(await hash(page)).not.toBe(saved);
+  await openMenu(page);
   const chooser = page.waitForEvent('filechooser');
   await menu(page).getByRole('button', { name: 'Import campaign', exact: true }).click();
   await (await chooser).setFiles({ name: 'culture-witness.theandril', mimeType: 'application/gzip', buffer: bytes });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
   expect(await hash(page)).toBe(saved);
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: new RegExp(colonyName) }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', new RegExp(colonyName)); await openSelectedOrders(page);
   await page.getByTestId('realm-culture').locator(':scope > summary').click();
   await expect(page.getByTestId('realm-culture').getByTestId('faction-identity')).toHaveAttribute('data-definition-id', faction.id);
   await page.getByTestId('realm-culture').scrollIntoViewIfNeeded();
   await page.screenshot({ path: testInfo.outputPath(`${faction.id}-saved-economy.png`) });
 });
 
-test('twelve authored choices remain distinct in a real twenty-four-seat campaign without disclosing unseen realms', async ({ page }) => {
-  await setup(page, 'faction.morrow_spore', 24);
+test('twenty-four unique authored choices include accessible Vesper in a real twenty-four-seat campaign without disclosing unseen realms', async ({ page }) => {
+  await setup(page, 'faction.vesper_court', 24);
   const selector = page.getByRole('combobox', { name: 'Player faction', exact: true });
-  await expect(selector.locator('option')).toHaveCount(12);
-  expect(await selector.locator('option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value))).toEqual(FACTIONS.map(faction => faction.id));
-  await expect(page.getByTestId('faction-density-help')).toContainText('12 introductory faction templates are authored');
+  await reachable(selector);
+  await expect(selector.locator('option')).toHaveCount(24);
+  const choices = await selector.locator('option').evaluateAll(options => options.map(option => ({ value: (option as HTMLOptionElement).value, name: option.textContent })));
+  expect(choices).toEqual(FACTIONS.map(faction => ({ value: faction.id, name: faction.name })));
+  expect(new Set(choices.map(choice => choice.value)).size).toBe(24);
+  expect(new Set(choices.map(choice => choice.name)).size).toBe(24);
+  await expect(selector.getByRole('option', { name: 'Vesper Court', exact: true })).toHaveCount(1);
+  await expect(selector).toHaveValue('faction.vesper_court');
+  await expect(page.getByTestId('faction-identity')).toHaveAttribute('data-definition-id', 'faction.vesper_court');
+  await expect(page.getByTestId('faction-density-help')).toContainText('24 introductory faction templates are authored');
   await expect(page.getByTestId('faction-density-help')).toContainText('Additional seats are generated variants');
-  await begin(page, 'faction.morrow_spore');
+  await begin(page, 'faction.vesper_court');
   await expect(page.getByTestId('campaign-faction-count')).toHaveText('24 realms');
   const observed = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!);
   expect(observed.factions.length).toBeLessThan(24);
@@ -121,12 +136,14 @@ test('twelve authored choices remain distinct in a real twenty-four-seat campaig
   // never an extra production publication or a debug-state mutation hook.
   const portable = deserializeCampaign(await importSave(await exportCampaign(page)));
   expect(portable.game.factions).toHaveLength(24);
+  expect(portable.game.rosterVersion).toBe(4);
+  expect(portable.game.factions[0]!.definitionId).toBe('faction.vesper_court');
   const definitions = portable.game.factions.map(faction => faction.definitionId);
   expect(new Set(definitions)).toEqual(new Set(FACTIONS.map(faction => faction.id)));
-  for (const definition of FACTIONS) expect(definitions.filter(id => id === definition.id)).toHaveLength(2);
+  for (const definition of FACTIONS) expect(definitions.filter(id => id === definition.id)).toHaveLength(1);
 });
 
-test('all new profiles and actual drawbacks remain readable by touch and keyboard at narrow width', async ({ browser }, testInfo) => {
+test('all twenty-four profiles and actual drawbacks remain readable by touch and keyboard at narrow width', async ({ browser }, testInfo) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
   const page = await context.newPage();
   try {
@@ -135,7 +152,8 @@ test('all new profiles and actual drawbacks remain readable by touch and keyboar
     await page.getByRole('combobox', { name: 'Text scale', exact: true }).selectOption('1.3');
     await page.getByTestId('campaign-menu').locator('summary').tap();
     const selector = page.getByRole('combobox', { name: 'Player faction', exact: true });
-    for (const faction of newCultures) {
+    await expect(selector.locator('option')).toHaveCount(24);
+    for (const faction of FACTIONS) {
       await reachable(selector); await selector.selectOption(faction.id);
       const identity = page.getByTestId('faction-identity');
       await expect(identity).toHaveAttribute('data-definition-id', faction.id);

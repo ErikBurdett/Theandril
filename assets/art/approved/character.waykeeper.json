@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "id": "character.waykeeper",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.waykeeper"
+  ],
+  "prompt": "Original Theandril Waykeeper casting figure, authored and animated in Blender. Fixed native 64x64 canvas, registered feet (32,56), retained keyframed scene, raw renders and exact palette normalization. 8 supplied cast frames; no synthesized pose, mirrored faction art or independently fitted frames. Exact production brief/profile and source evidence: assets/art/source/blender-battle/character.waykeeper/v2/manifest.json.",
+  "frames": [
+    {
+      "id": "character.waykeeper/cast/se/0",
+      "direction": "se",
+      "state": "cast",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.waykeeper/1dab095ff27141bf88665bda9e7756dffc27afc3bfa9810aef42cc4e182d5c4e/frame-0.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/1",
+      "direction": "se",
+      "state": "cast",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.waykeeper/1dab095ff27141bf88665bda9e7756dffc27afc3bfa9810aef42cc4e182d5c4e/frame-1.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/2",
+      "direction": "se",
+      "state": "cast",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.waykeeper/1dab095ff27141bf88665bda9e7756dffc27afc3bfa9810aef42cc4e182d5c4e/frame-2.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/3",
+      "direction": "se",
+      "state": "cast",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.waykeeper/1dab095ff27141bf88665bda9e7756dffc27afc3bfa9810aef42cc4e182d5c4e/frame-3.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/4",
+      "direction": "se",
+      "state": "cast",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.waykeeper/1dab095ff27141bf88665bda9e7756dffc27afc3bfa9810aef42cc4e182d5c4e/frame-4.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/5",
+      "direction": "se",
+      "state": "cast",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.waykeeper/1dab095ff27141bf88665bda9e7756dffc27afc3bfa9810aef42cc4e182d5c4e/frame-5.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/6",
+      "direction": "se",
+      "state": "cast",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.waykeeper/1dab095ff27141bf88665bda9e7756dffc27afc3bfa9810aef42cc4e182d5c4e/frame-6.png"
+    },
+    {
+      "id": "character.waykeeper/cast/se/7",
+      "direction": "se",
+      "state": "cast",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.waykeeper/1dab095ff27141bf88665bda9e7756dffc27afc3bfa9810aef42cc4e182d5c4e/frame-7.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "cast": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "7a142a19d8918cffd3e2b65408b23b928051bb3fb8efde2e411beb87ca7f6f2d",
+    "sourceRefs": [
+      "assets/art/source/blender-battle/character.waykeeper/v2/manifest.json",
+      "assets/art/source/blender-battle/character.waykeeper/v2/source.blend",
+      "assets/art/source/blender-battle/character.waykeeper/v2/profile.json",
+      "assets/art/source/blender-battle/character.waykeeper/v2/recipe.py",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-000.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-001.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-002.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-003.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-004.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-005.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-006.png",
+      "assets/art/source/blender-battle/character.waykeeper/v2/raw/frame-007.png"
+    ],
+    "licenseNotes": [
+      "Original Theandril project-authored Blender geometry and keyframes; no third-party game sprites or copyrighted setting assets. The retained factory source/profile record identifies production dependencies. This import neither grants a new license nor substitutes for native/in-game visual review."
+    ]
+  },
+  "createdAt": "2026-09-07T21:10:43.170Z",
+  "referenceHashes": [
+    "64cad4cd0d1bd83c87179cfbacaf4467f723f2d0cab4f693ab10969a611d85b5",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "fixed-camera-native-battle64",
+      "settingsHash": "6609ef4d3a800314a5408d732b9ea25f5ab0912b29bd790e1badb4a9cb1b594b",
+      "inputHash": "64cad4cd0d1bd83c87179cfbacaf4467f723f2d0cab4f693ab10969a611d85b5",
+      "outputHash": "9a49ccaa6f30320897051ac24a862930ac687303f1ec6b83d630ffe2ca647682"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "03a47ca7a99951505a09f30104d5e6ce4324d8ed6643d98c0f3e2d1795e14c1d",
+      "outputHash": "1c795b613453749510d3c26c6a9bb3dd71a2b501ccd29c467ef43f1061d6f910"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1c795b613453749510d3c26c6a9bb3dd71a2b501ccd29c467ef43f1061d6f910",
+      "outputHash": "564621fe0f5d1f48e7a35fa138cc70229f4bdaee345f802fb86d580c7d26c940"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "a17ab3f33d5718afe8df715f7be196cdff40069ced1c5ad408073e56ee3c9b05",
+      "outputHash": "f1850e1363c2e7e7d362792ce1a462417ebabc9c4b77b53de5362237327028bd"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "3f311608c4f8574089c0f3712052b5e1e01f9676b5a0a0a1d431996306845475",
+      "outputHash": "19c313c956b37693fd3b9e9931bf567bf83d7f764e501d2a4776630eb13bbcae"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "19c313c956b37693fd3b9e9931bf567bf83d7f764e501d2a4776630eb13bbcae",
+      "outputHash": "a4839d3f423785d6e7093fa7df3370661e52758f2d430e18268040410fcf53e3"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "052f804d7de1b854888763684ef736e07d6d28d5e9d1195e94ad34612b8417c6",
+      "outputHash": "c5bccb0c642815a6ecc7d3024f99df9917d365420d7e74e2266e8cbeeb77b6d3"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "249c5a606d71e5797f5ac555a0d6da3ce04773c059e19ffd6be1b9cdab648a69",
+      "outputHash": "6ee2a582c9f6dbd29c8e22554670302207676659e32fa346d181a2cdd8a17b8d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "6ee2a582c9f6dbd29c8e22554670302207676659e32fa346d181a2cdd8a17b8d",
+      "outputHash": "0f165de3f2ff9c6fb9406ec5421cb0ab139e1d961f509ba2172014119abdb0fb"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "f390de12b41397a9289deaef2c9f795f2a2036388d6aaa70716fdb2ca86fffb0",
+      "outputHash": "97e62ce98033f6d6ccc55ee6b5791ceaad9ebb3c6c743f86303a492791eda5b0"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "9d5e2684e129e596579d8b6ef02e2a4bf94f43081ac00a8d172565ce2427e97b",
+      "outputHash": "659de6a72f8f129547a1451aa98e02c25b138708263aad354ee7cad9d34e2b9e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "659de6a72f8f129547a1451aa98e02c25b138708263aad354ee7cad9d34e2b9e",
+      "outputHash": "1bf5eed39891a5f9a1ea5f091f9cf9d4ce5ad89fdd8ef05cee58def34a4594e6"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "093821d7869228a5023eb6ad3e74e4bf8ac31a2fb1de057f5549cf216dc13849",
+      "outputHash": "d3311d341d9fc2a6cde60d1b7d33c6343155646d41eaec491a337f41635c0417"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "e0a7e21af9ff0669d6f17fad450329e2978b25696a916fc377a98a03ebd2dce2",
+      "outputHash": "37ee4de5cbd106fb5781d57a6e09b2ce613ea2b8d7be2c67e6d4bbb4440b9b70"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "37ee4de5cbd106fb5781d57a6e09b2ce613ea2b8d7be2c67e6d4bbb4440b9b70",
+      "outputHash": "ce5f1f0c5a825a8827e5cccd30e46bf4c7df89cec4524eabd2c60ddb331d38c5"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "4017911cbd2b280913d1a804f85b010a3269cb24bba6df00f603868076ca1822",
+      "outputHash": "e4c7e1677ae2a0f52256ab062970096e5d48ca4454d854d374db78b7158a5e97"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "274652ba9dac1f9cd8de25b3db82b814ad8a11b99a96b77d39347ac112fe2e6d",
+      "outputHash": "ce3ccfa85d8d17bb17116970c27a3ccdea6da849e20f7ea22cf300eed70addc3"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ce3ccfa85d8d17bb17116970c27a3ccdea6da849e20f7ea22cf300eed70addc3",
+      "outputHash": "a4ce245fa02efe72d2ec0a6418a8a41b89982171a710541d3b499cf5331dbaf2"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "369de1bbef768b8cd2648922d45ef7b3b985be0e63c2a852914e0831d4cc6665",
+      "outputHash": "40bc8b214d32df3b03692f7813db709c14566be1e4cfabab6c4314132abec15d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "958e1674a3109aec9c3bc7b0a6616ce47e51060a746ce48a457d7516bcee1547",
+      "outputHash": "e6531923dad381fd44292cd9071b42e116c8e4f3a3d0d1cbae5c778bb1d6a711"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e6531923dad381fd44292cd9071b42e116c8e4f3a3d0d1cbae5c778bb1d6a711",
+      "outputHash": "59d00025d92e51713b45af4fdb11764218391eddb2cdd9ac7610e0e8dc0cff78"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "1f36ef9664d25c0728faa984e479a3a2550682128a948c19b6835b96dbbb7ad1",
+      "outputHash": "ac9400dc3d9039ede3ba6d92ebfa6166b2442717f949fe90a42722ab445e3f22"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "edf0c0e31c0def20ba12b203db03899aba2c2164f7189319f1b7c3e6408e9042",
+      "outputHash": "0675c7ced2bc5396754a5b3fbe52679f5ba634aa151f739f34e9fa96bc18ed93"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0675c7ced2bc5396754a5b3fbe52679f5ba634aa151f739f34e9fa96bc18ed93",
+      "outputHash": "a584af6f50c21941c9c9c2168d1f40a924901755d3a07e0e85c416f4e2694725"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "67603c1b79e3ea5675c8e830a11e202cf6f9d4243196562b15e01b6e036c23c8",
+      "outputHash": "c62bc81ece658f42e82fd9e688ed233072c83b1f9fb438fbf5d4871818d0db05"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "848195d1999965d68c4e1851551d49f6214e0baaf6c18dec70d24f3f36b5507c",
+      "inputHash": "7dddcc897913967f4c0340d61102d2d733a28da57a1e746914698961ba0dd386",
+      "outputHash": "20d5e397c9ce7c6c509e8abcfca5c6afcfe80997296da4d1b5439d6760f14b3d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "fe67f85cd7f0af11701c1f7e756aeb8c0dcf5720b7bdc6a614b246a5177f0073",
+      "outputHash": "31e4ec610f797c18d3c70d9ef7a5e1d3c2d13318bdb2e40dcdece416c655e8d9"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.waykeeper.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main native visual review",
+    "reviewedAt": "2026-09-07T21:17:34.173Z",
+    "notes": "Inspected processed native and4x plus three source backgrounds. Adult narrow patched blue-gray traveler, copper tablet and caged coal staff; genuine arm extension and recovery, planted boots and fixed canvas. Brighter v2 materials distinguish peat background. One modest-detail SE cast pilot only, not all-faction or all-state coverage. Integration approval pending gameplay review.\nReviewed candidate 1dab095ff27141bf88665bda9e7756dffc27afc3bfa9810aef42cc4e182d5c4e; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/eee355c5756bf5baa94a3efc368fdc9aa0ca155131ea295cb90092da83728ac3.png"
+    ],
+    "inputHash": "208a9bdcb61638d45fca4c915f78c5f223af17ff3b44bf8c075991e10fbe6ea7"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 20,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

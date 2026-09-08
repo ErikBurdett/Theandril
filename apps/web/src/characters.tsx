@@ -3,11 +3,12 @@ import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS } from '@th
 import type { CharacterView, GameCommand, Observation } from '@theandril/sim';
 import { FactionArt } from './faction-art';
 import { CharacterSkills } from './character-skills';
+import { PersonalMagic } from './magic';
 import './characters.css';
 
 type Issue = (command: GameCommand) => void;
 const PAGE_SIZE = 25;
-const roles = { marshal: 'Marshal', surveyor: 'Surveyor', engineer: 'Engineer' };
+const roles = { marshal: 'Marshal', surveyor: 'Surveyor', engineer: 'Engineer', waykeeper: 'Waykeeper' };
 const definitionName = (id: string) => CHARACTER_DEFINITIONS.find(item => item.id === id)?.name ?? id;
 const skillName = (id: string) => CHARACTER_SKILLS.find(item => item.id === id)?.name ?? id;
 function locationName(character: CharacterView, view: Observation): string {
@@ -97,6 +98,7 @@ function CharacterSheet({ character, view, busy, initialArmyId, issue, locate }:
     <div className="character-identity"><div className="faction-art-heading"><FactionArt contentId={character.definitionId} definitionId={view.factions.find(faction => faction.id === character.factionId)?.definitionId} label={`${character.name}, ${definitionName(character.definitionId)}`}/><div><h3>{character.name}</h3><p className="field-help">{definitionName(character.definitionId)} · {character.id}<br/>{locationName(character, view)}{character.cell === null ? '' : ` · hex ${character.cell}`}</p></div></div><button disabled={character.cell === null} onClick={() => locate(character)}>Locate character</button></div>
     <dl className="character-values"><div><dt>Condition</dt><dd>{character.status}{character.woundedTurns ? ` · ${character.woundedTurns} turns` : ''}</dd></div><div><dt>Available experience</dt><dd>{character.experience} · rank {character.rank}</dd></div><div><dt>Specialization</dt><dd>{character.skillId ? skillName(character.skillId) : 'Not chosen'}</dd></div></dl>
     {character.dead && <p className="character-blocker">This character has died. Their record remains; no further appointments, missions or promotions are possible.</p>}
+    <PersonalMagic character={character}/>
     {character.mission && <ActiveMission character={character} busy={busy} factionId={view.factionId} issue={issue}/>}
     <CharacterSkills character={character} factionId={view.factionId} busy={busy || character.dead} issue={issue}/>
     {!character.dead && <>
@@ -117,13 +119,13 @@ function ActiveMission({ character, busy, factionId, issue }: { character: Chara
   return <section className="character-mission" data-testid="active-character-mission"><h4>{definition?.name ?? mission.definitionId}</h4><p>{mission.remainingTurns} stationary {mission.remainingTurns === 1 ? 'turn' : 'turns'} remaining · anchored at hex {mission.anchorCell}</p>{definition && <progress aria-label="Mission progress" max={definition.duration} value={definition.duration - mission.remainingTurns}/>}<p>The attached army is holding position. Cancel the mission before changing its movement or composition.</p><button className="danger" disabled={busy} onClick={() => issue({ type: 'cancelCharacterMission', factionId, characterId: character.id })}>Cancel mission</button><p>Cancellation stops the work without refunding spent coin or restoring spent movement.</p></section>;
 }
 
-export function CommanderBattleControls({ view, busy, issue }: { view: Observation; busy: boolean; issue: Issue }) {
+export function CommanderBattleControls({ view, busy, issue, controls = true }: { view: Observation; busy: boolean; issue: Issue; controls?: boolean }) {
   const battle = view.battle;
   if (!battle?.characterSnapshots.length) return null;
   const commanders = battle.characterSnapshots.filter(character => CHARACTER_DEFINITIONS.find(definition => definition.id === character.definitionId)?.role === 'marshal');
   if (!commanders.length) return null;
   return <section className="commander-battle" aria-label="Commanders on the field" data-testid="commander-battle"><h3>Commanders on the field</h3>{commanders.map(commander => {
     const ability = view.commanderAbilities.find(option => option.characterId === commander.characterId && option.abilityId === 'ability.rally');
-    return <article key={commander.characterId}><p><strong>{commander.name}</strong> · {commander.factionId === view.factionId ? 'Your commander' : 'Opposing commander'} · {commander.armyId}</p><p>Battle leadership: +{commander.leadership.attack} attack · +{commander.leadership.armor} armor.{commander.woundedTurns ? ' Wounds suppress this commander’s contribution.' : ''}</p>{ability && <><p>{ability.effectText}</p>{ability.blocker && <p className="character-blocker">{ability.blocker}</p>}<button className="primary" disabled={busy || !ability.canUse} aria-label={`Rally the line (${commander.characterId})`} onClick={() => issue({ type: 'useCommanderAbility', factionId: view.factionId, characterId: commander.characterId, abilityId: 'ability.rally' })}>{ability.used ? 'Rally already used' : 'Rally the line'}</button></>}</article>;
+    return <article key={commander.characterId}><p><strong>{commander.name}</strong> · {commander.factionId === view.factionId ? 'Your commander' : 'Opposing commander'} · {commander.armyId}</p><p>Battle leadership: +{commander.leadership.attack} attack · +{commander.leadership.armor} armor.{commander.woundedTurns ? ' Wounds suppress this commander’s contribution.' : ''}</p>{ability && <><p>{ability.effectText}</p>{ability.blocker && <p className="character-blocker">{ability.blocker}</p>}{controls && <button className="primary" disabled={busy || !ability.canUse} aria-label={`Rally the line (${commander.characterId})`} onClick={() => issue({ type: 'useCommanderAbility', factionId: view.factionId, characterId: commander.characterId, abilityId: 'ability.rally' })}>{ability.used ? 'Rally already used' : 'Rally the line'}</button>}</>}</article>;
   })}<p>These values were committed when the battle began. Autoresolve uses the same commander effects and Rally rules.</p></section>;
 }

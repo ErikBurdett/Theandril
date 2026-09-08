@@ -8,6 +8,9 @@ export const FACTION_SOURCE_KINDS = {
   iron_covenant: 'slice12', sepulchral_synod: 'slice12',
   mire_courts: 'batch', saltwind_remnant: 'batch', wardhall_remnant: 'batch',
   rimehorn_clans: 'batch', sable_steppe: 'batch', morrow_spore: 'batch',
+  cistern_assembly: 'batch', unsealed_companies: 'batch', lantern_hospices: 'batch', cairnwing_concord: 'batch',
+  red_sluice: 'batch', velvet_meridian: 'batch', brine_choir: 'batch', emberwake_convocation: 'batch',
+  underhush_exchange: 'batch', vesper_court: 'batch', manytrack_moot: 'batch', margin_observance: 'batch',
 } as const satisfies Record<FactionArtFamily, 'sheet' | 'slice12' | 'batch'>;
 
 export const factionExpansionBatchIdSchema = z.string().regex(/^[a-z][a-z0-9_-]{0,47}$/);
@@ -37,6 +40,6 @@ export function isFactionOriginalSource(family: FactionArtFamily, role: FactionA
   if (isFactionNavalArtRole(role)) return new RegExp(`^assets/art/source/faction-expansion/naval/${id.replaceAll('.', '\\.')}\u002dv[1-9][0-9]*\\.png$`).test(path);
   const kind = FACTION_SOURCE_KINDS[family];
   const name = (kind === 'sheet' ? family : id).replaceAll('.', '\\.');
-  const prefix = kind === 'sheet' ? 'assets/art/source/factions/' : kind === 'slice12' ? 'assets/art/source/slice12/' : 'assets/art/source/faction-expansion/[a-z][a-z0-9_-]{0,47}/';
+  const prefix = kind === 'sheet' ? 'assets/art/source/factions/' : kind === 'slice12' ? 'assets/art/source/slice12/' : 'assets/art/source/faction-expansion/(?!naval/)[a-z][a-z0-9_-]{0,47}/';
   return new RegExp(`^${prefix}${name}-v[1-9][0-9]*\\.png$`).test(path);
 }

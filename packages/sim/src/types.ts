@@ -1,4 +1,5 @@
-import type { GeneratorVersion, MapSize, World } from '@theandril/mapgen';
+import type { GeneratorVersion, MapSize, MapLayout, World } from '@theandril/mapgen';
+import type { RoadState, RoadObservation } from './roads';
 import type { CampaignPace, RosterVersion } from '@theandril/content';
 import type { BattleOrder, BattleState } from './combat';
 import type { DiplomacyObservation, DiplomacyState, PeaceTerms } from './diplomacy';
@@ -7,6 +8,9 @@ import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
 import type { NavalArmyView, ProductionOption, TransportAftermath } from './naval';
 import type { LandState, LandObservation, LandCommand } from './territory';
+import type { ArcaneResearchState, ArcaneResearchObservation } from './magic';
+import type { BattleAbilityState, BattleAbilityOption } from './battle-abilities';
+import type { BattleSceneSnapshot } from './combat/presentation';
 
 export interface ArmyFormation {
   id: string;
@@ -129,7 +133,8 @@ export interface DomainEvent {
 }
 
 export interface CampaignBattle {
-  rulesVersion: 5 | 6 | 7 | 8;
+  rulesVersion: 5 | 6 | 7 | 8 | 9;
+  abilityState?: BattleAbilityState;
   domain: 'land' | 'naval';
   transportAftermath: TransportAftermath[];
   transportSnapshots: import('./naval').TransportSnapshot[];
@@ -162,6 +167,10 @@ export interface CampaignBattle {
 export type BattleReport = CampaignBattle;
 
 export type GameCommand =
+  | { type: 'researchArcane'; factionId: string; discoveryId: string }
+  | { type: 'setBattleAbilityAuto'; factionId: string; battleId: string; sourceId: string; abilityId: string; automatic: boolean }
+  | { type: 'useBattleAbility'; factionId: string; battleId: string; sourceId: string; abilityId: string; targetId?: string }
+  | { type: 'accelerateRoad'; factionId: string; settlementId: string }
   | LandCommand
   | { type: 'embarkArmy'; factionId: string; armyId: string; fleetId: string }
   | { type: 'disembarkArmy'; factionId: string; armyId: string; target: number }
@@ -200,6 +209,8 @@ export type GameCommand =
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
 export interface GameState {
+  arcaneResearch: ArcaneResearchState;
+  roads: RoadState;
   rosterVersion: RosterVersion;
   land: LandState;
   /** Land army ID -> carrying fleet ID; sparse, no nested transports. */
@@ -229,6 +240,12 @@ export interface GameState {
 }
 
 export interface Observation {
+  battleScene: BattleSceneSnapshot | null;
+  battleAbilities: BattleAbilityOption[];
+  arcaneResearch: ArcaneResearchObservation;
+  /** Public world-generation choice; legacy saves retain their original geography. */
+  layout?: MapLayout;
+  roads?: RoadObservation[];
   land: LandObservation;
   productionOptions: ProductionOption[];
   characters: CharacterView[];
@@ -245,7 +262,7 @@ export interface Observation {
   armies: ArmyView[];
   routes: MovementRoute[];
   events: DomainEvent[];
-  cells: { cell: number; terrain: number; biome: number; waterDepth: number; fertility: number; visible: boolean; featureMask?: number; settlementId?: string | null; factionId?: string | null; improvementId?: string | null }[];
+  cells: { cell: number; terrain: number; biome: number; waterDepth: number; fertility: number; visible: boolean; hydrology?: number; roadMask?: number; featureMask?: number; settlementId?: string | null; factionId?: string | null; improvementId?: string | null }[];
   width: number;
   height: number;
   seed: number;
@@ -264,6 +281,7 @@ export interface Observation {
 }
 
 export interface NewGameOptions {
+  layout?: Exclude<MapLayout, 'legacy'>;
   rosterVersion?: RosterVersion;
   seed: number;
   size: MapSize;

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.scout.brine_choir",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.scout.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.scout for Theandril, Brine Choir.\nSubject: One lightly equipped adult wayfinder, slim open stance, short travel cloak, small cross-body map satchel and a short walking staff held close beside the body. Head turned attentively southeast; no heavy shield, no oversized bow.\nCulture-specific identity: Adult brinefolk humanoid with matte blue-grey skin, small folded neck fins, broad fin-fold collar, normal two legs and visible dexterous humanlike tool-hands. A practical shore citizen, not a fish-tailed creature. Coral-clay accents, pale eelgrass cloth, wet-slate armor, matte shell inlay and practical woven salt-cloaks. Broad fin-fold collar and low crescent shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "unit.scout.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.scout.brine_choir/5fb1165a81e3c4c4e73e552380ededaf7cc48d3910e94e86c0ff0ff9984132a4/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "a30d94b1ff6e80c824cb304bf8749d261f6ac805e43e268574ad7d6f1a0f618d",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.scout.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.scout.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:06:50Z",
+  "referenceHashes": [
+    "44614ff9b96c450bc760c7087a2cbbbb36fd32c077fc0184bca23bd85f2c48eb",
+    "702b2b45a785f7d95000d39737ee6eb92d7975ebb9755bd04e80b9b0c4eddab2"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "9ddb34a9c8ba93c347ca896d2f35204797ba5beb114830ba0eaebd53ae64578e",
+      "inputHash": "44614ff9b96c450bc760c7087a2cbbbb36fd32c077fc0184bca23bd85f2c48eb",
+      "outputHash": "711a20aa325590ff08ed7e4265a619917e83ec5bd13a8888df204e46cc4f72cb"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "711a20aa325590ff08ed7e4265a619917e83ec5bd13a8888df204e46cc4f72cb",
+      "outputHash": "375f9eec42fdb86e6d40524b35c0bd3d8068f99c97d4daf7542ee1b11e44da6e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "375f9eec42fdb86e6d40524b35c0bd3d8068f99c97d4daf7542ee1b11e44da6e",
+      "outputHash": "63cf677a95528accf1f24ead20a6222af6c6303b5d2029a5b6a3b60bca28c794"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "11e387a4cdcfea7f9a93cad706d1f6f8cc676372f5db44793a678f68efcf4c43",
+      "outputHash": "495676550c32471ba41222e02fd43d2ba93a206a40ac7af9cf10ab6277c79c4c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "2a223b915a1999e1bd4d79b0f943a4b5db88b5d0efa8c10a64e45721b6a419d7",
+      "outputHash": "71cbbaf222c4ba68772e35fbf9bc311c9a4ad3201ec7eaab7970487f88091bdf"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "2bf5530a31f60458fd9468bf0c7313ab3c04c38d4063611b1b542fdf89359e6c",
+      "outputHash": "d60eec58d3e24056f76b58a9cf44ee23ac25d84e647df990b48f827ffbf764ef"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.scout.brine_choir.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:18:10.218Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Lightly clothed blue-grey bow scout with upright bow, full feet and small fin collar. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 5fb1165a81e3c4c4e73e552380ededaf7cc48d3910e94e86c0ff0ff9984132a4; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/c3dabdcda2b0f481601b9bc9ba723e76f1b177ead09f2274389d1c5c9225d35a.png"
+    ],
+    "inputHash": "30942d2e2f52f42449847de18c9722f491b96c1f1566e2e9e178f26681fe2833"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

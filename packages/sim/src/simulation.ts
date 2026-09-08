@@ -1,9 +1,10 @@
 import { z } from 'zod';
+import { accelerateRoad, accelerateRoadSchema, advanceRoads, emptyRoadState, observeRoads, reconcileRoads, roadMovementCost } from './roads';
 import { BUILDINGS, FACTIONS, FACTION_ROSTERS, ROSTER_VERSION, UNITS, campaignPaceSchema, factionRoster, rosterVersionSchema } from '@theandril/content';
 import { GENERATOR_VERSION, generateWorld, isPassable, neighbors } from '@theandril/mapgen';
 import type { Army, CommandResult, DomainEvent, GameState, NewGameOptions, Observation, PhaseObserver, Settlement } from './types';
 import { cellsWithin, indexes, rebuildIndexes, updateSight } from './visibility';
-import { cloneCampaignBattle, declareCampaignWar, resolveCampaignBattle, startCampaignBattle } from './warfare';
+import { cloneCampaignBattle, declareCampaignWar, resolveCampaignBattle, settleCampaignAbility, startCampaignBattle } from './warfare';
 import { advanceDiplomacy, createDiplomacy, getDiplomacyObservation, peaceCommandSchemas, proposePeace, respondPeace } from './diplomacy';
 import { advanceSieges, assaultSettlement, besiegeSettlement, captureOutcomeSchema, liftSettlementSiege, observeSieges, reconcileSieges, resolveSettlementCapture } from './siege';
 import { advanceProgression, chooseProgression, createFactionProgression, doctrineEffects, getProgressionObservation, progressionYields, reconcileProjects, startVictoryProject } from './progression';
@@ -15,6 +16,9 @@ import { LEGACY_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './r
 import { factionStarts } from './faction-starts';
 import { applyLandCommand, emptyLandState, getLandObservation, handleLandCapture, initializeSettlementLand, landCommandSchemas, observeLandCell, refreshLandKnowledge, resolveLandTurn, settlementLandYield, type LandDetails } from './territory';
 import { advanceCharacters, armyHasCharacterMission, assignCharacter, cancelCharacterMission, characterUpkeep, getCharacterObservation, observeCommanderAbilities, promoteCharacter, recruitCharacter, reconcileCharacterMissions, removeArmyCharacters, startCharacterMission, unassignCharacter, useCommanderAbility } from './characters';
+import { emptyArcaneResearch, observeArcaneResearch, researchArcane } from './magic';
+import { battleAbilityCommand, getBattleScene, observeBattleAbilities } from './battle-abilities';
+import type { BattleFactObserver, BattlePresentationEvent, BattlePresentationObserver } from './combat/presentation';
 
 const identifier = z.string().min(1).max(100);
 const name = z.string().trim().min(1).max(40).refine(value => [...value].every(char => char.charCodeAt(0) >= 32 && char !== '<' && char !== '>'), 'Use plain text for names');
@@ -71,8 +75,14 @@ const version8CommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('splitArmy'), factionId: identifier, armyId: identifier, formationIds: z.array(identifier).min(1).max(20), name: armyName.optional() }).strict(),
   z.object({ type: z.literal('disembarkArmy'), factionId: identifier, armyId: identifier, target: z.number().int().min(0).max(349_999) }).strict(),
 ]);
-export const commandSchema = z.discriminatedUnion('type', [...version8CommandSchema.options, ...landCommandSchemas]);
-export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : commandSchema;
+const version11CommandSchema = z.discriminatedUnion('type', [...version8CommandSchema.options, ...landCommandSchemas]);
+const version13CommandSchema = z.discriminatedUnion('type', [...version11CommandSchema.options, accelerateRoadSchema]);
+export const commandSchema = z.discriminatedUnion('type', [...version13CommandSchema.options,
+  z.object({ type: z.literal('researchArcane'), factionId: identifier, discoveryId: identifier }).strict(),
+  z.object({ type: z.literal('setBattleAbilityAuto'), factionId: identifier, battleId: identifier, sourceId: identifier, abilityId: identifier, automatic: z.boolean() }).strict(),
+  z.object({ type: z.literal('useBattleAbility'), factionId: identifier, battleId: identifier, sourceId: identifier, abilityId: identifier, targetId: identifier.optional() }).strict(),
+]);
+export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
 export function initializeLegacyLand(state: GameState): void {
@@ -85,6 +95,9 @@ export function initializeLegacyLand(state: GameState): void {
 export function applyCommandForVersion(state: GameState, input: unknown, version: RulesVersion): CommandResult {
   const parsed = commandSchemaForVersion(version).safeParse(input);
   if (!parsed.success) return { ok: false, error: 'Malformed command: ' + parsed.error.issues[0]?.message, events: [] };
+  if (version < 14 && (Object.values(state.arcaneResearch).some(items => items.length) || Object.values(state.characters).some(item => item.aptitudes || item.definitionId === 'character.waykeeper') || state.battle?.rulesVersion === 9 || state.battleReports.some(item => item.rulesVersion === 9))) throw new Error('Historical rules cannot execute arcane research or modern battle abilities.');
+  if (version < 13 && (state.rosterVersion > 3 || state.factions.some(faction => !(FACTION_ROSTERS[3] as readonly string[]).includes(faction.definitionId)))) throw new Error('Historical rules cannot execute cultures absent from their frozen roster.');
+  if (version < 12 && (state.world.generatorVersion > 4 || Object.keys(state.roads.edges).length || Object.keys(state.roads.projects).length)) throw new Error('Historical rules cannot execute modern geography or roads.');
   const historicalRoster: readonly string[] = FACTION_ROSTERS[version < 9 || state.world.generatorVersion < 4 ? 1 : 2];
   if (version < 10 && state.factions.some(faction => !historicalRoster.includes(faction.definitionId))) throw new Error('Historical rules cannot execute cultures absent from their frozen roster.');
   if (version < 7 && Object.keys(state.characters).length) throw new Error('Historical rules cannot execute a campaign containing characters.');
@@ -107,7 +120,8 @@ export function createGame(options: NewGameOptions): GameState {
     factionCount: z.number().int().min(1).max(48).default(4),
     factionDefinitionId: z.string().refine(id => FACTIONS.some(faction => faction.id === id), 'Unknown faction culture').optional(),
     pace: campaignPaceSchema.default('standard'),
-    generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]).default(GENERATOR_VERSION),
+    generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6), z.literal(7)]).default(GENERATOR_VERSION),
+    layout: z.enum(['continents', 'islands', 'archipelago']).optional(),
     rosterVersion: rosterVersionSchema.default(ROSTER_VERSION),
   }).strict().parse(options);
   // Physical generation never implicitly changes the roster used by a saved origin.
@@ -124,9 +138,11 @@ export function createGame(options: NewGameOptions): GameState {
   });
   const owner = selected[0];
   if (!owner) throw new Error('A campaign requires a player faction');
-  const world = generateWorld(checked.seed, checked.size, checked.factionCount, checked.generatorVersion);
+  const world = generateWorld(checked.seed, checked.size, checked.factionCount, checked.generatorVersion, checked.layout ? { layout: checked.layout } : {});
   world.starts = factionStarts(world, selected.map(faction => faction.definitionId));
   const state: GameState = {
+    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)),
+    roads: emptyRoadState(selected.map(faction => faction.id)),
     rosterVersion: checked.rosterVersion,
     land: emptyLandState(selected.map(faction => faction.id)),
     turn: 1, nextId: 1, turnOwnerId: owner.id, world, pace: checked.pace,
@@ -195,6 +211,7 @@ function resolveTurn(state: GameState, emitted: DomainEvent[], observe: PhaseObs
   advanceSieges(state, emitted);
   observe('sieges', 'end');
   observe('settlements', 'start');
+  advanceRoads(state, emitted);
   const factionById = new Map(state.factions.map(faction => [faction.id, faction]));
   // Canonical phases: settlement yields/production, growth, upkeep, movement refresh.
   // O(settlements + armies + built content), independent of global map dimensions.
@@ -293,7 +310,7 @@ export function validateEndTurn(state: GameState, input: unknown): CommandResult
 }
 
 /** Every rejection occurs before any mutation. AI and players use this same boundary. */
-export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseObserver): CommandResult {
+export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseObserver, onBattle?: BattlePresentationObserver): CommandResult {
   const parsed = commandSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: 'Malformed command: ' + parsed.error.issues[0]?.message, events: [] };
   const command = parsed.data;
@@ -302,10 +319,15 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
   const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
   if (state.victory) return fail('This campaign has ended in victory.');
   if (state.pendingCapture && command.type !== 'resolveCapture') return fail('Resolve the settlement capture before issuing strategic commands.');
-  if (state.battle && command.type !== 'battleOrder' && command.type !== 'autoResolveBattle' && command.type !== 'useCommanderAbility') {
+  if (state.battle && command.type !== 'battleOrder' && command.type !== 'autoResolveBattle' && command.type !== 'useCommanderAbility' && command.type !== 'useBattleAbility' && command.type !== 'setBattleAbilityAuto') {
     return command.type === 'endTurn' ? validateEndTurn(state, command) : fail('Resolve the pending battle before issuing strategic commands.');
   }
   const emitted: DomainEvent[] = [];
+  // Only this bounded command's actual facts are collected. No callback receives live state.
+  const presentedBattle = onBattle && state.battle?.rulesVersion === 9 ? state.battle : null;
+  const beforeScene = presentedBattle ? getBattleScene(state, presentedBattle) : null;
+  const battleFacts: BattlePresentationEvent[] = [];
+  const observeFact: BattleFactObserver | undefined = presentedBattle ? fact => { if (battleFacts.length >= 4096) throw new Error('Battle fact bound exceeded.'); battleFacts.push({ ...fact, sequence: battleFacts.length, targetIds: [...fact.targetIds], changes: fact.changes.map(change => ({ ...change })) }); } : undefined;
   const affectedArmies = state.battle ? [state.battle.attackerId, ...state.battle.defenderIds] : [];
   if (state.pendingCapture) affectedArmies.push(state.pendingCapture.armyId);
   const diagnostics: string[] = [];
@@ -348,10 +370,9 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     if (command.target >= state.world.width * state.world.height) return fail('The destination is outside the world.');
     if (!neighbors(army.cell, state.world.width, state.world.height).includes(command.target)) return fail('Choose an adjacent hex.');
     if (!index.visible.get(faction.id)?.has(command.target)) return fail('The destination is not currently visible.');
-    const terrain = state.world.terrain[command.target] ?? 0;
     const terrainBlocker = armyTerrainBlocker(state, army, command.target);
     if (terrainBlocker) return fail(terrainBlocker);
-    const cost = terrain === 2 || terrain === 3 ? 2 : 1;
+    const cost = roadMovementCost(state, army.cell, command.target);
     if (army.movement < cost) return fail('Not enough movement remains for this terrain.');
     const occupants = index.armies.get(command.target);
     if (occupants && [...occupants].some(id => state.armies[id]?.factionId !== faction.id)) return fail('Another faction occupies this hex.');
@@ -371,6 +392,10 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     const result = command.type === 'moveTo' ? moveTo(state, faction.id, command.armyId, command.target)
       : command.type === 'queueMovement' ? queueMovement(state, faction.id, command.armyId, command.target, command.append)
         : command.type === 'cancelMovement' ? cancelMovement(state, faction.id, command.armyId) : resumeMovement(state, faction.id, command.armyId);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
+  } else if (command.type === 'accelerateRoad') {
+    const result = accelerateRoad(state, faction.id, command.settlementId);
     if (!result.ok) return result;
     emitted.push(...result.events);
   } else if (command.type === 'embarkArmy' || command.type === 'disembarkArmy') {
@@ -399,7 +424,7 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
   } else if (command.type === 'declareWar' || command.type === 'attack' || command.type === 'battleOrder' || command.type === 'autoResolveBattle') {
     const result = command.type === 'declareWar' ? declareCampaignWar(state, faction.id, command.targetFactionId)
       : command.type === 'attack' ? startCampaignBattle(state, faction.id, command.armyId, command.targetArmyId)
-        : resolveCampaignBattle(state, faction.id, command.type === 'battleOrder' ? command.order : undefined);
+        : resolveCampaignBattle(state, faction.id, command.type === 'battleOrder' ? command.order : undefined, observeFact);
     if (!result.ok) return result;
     emitted.push(...result.events);
   } else if (command.type === 'besiege' || command.type === 'liftSiege' || command.type === 'assault' || command.type === 'resolveCapture') {
@@ -415,6 +440,15 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     const result = command.type === 'proposePeace' ? proposePeace(state, faction.id, command.targetFactionId, command.terms) : respondPeace(state, faction.id, command.offerId, command.accept);
     if (!result.ok) return result;
     emitted.push(...result.events);
+  } else if (command.type === 'researchArcane') {
+    const result = researchArcane(state, faction.id, command.discoveryId);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
+  } else if (command.type === 'setBattleAbilityAuto' || command.type === 'useBattleAbility' || command.type === 'useCommanderAbility' && state.battle?.rulesVersion === 9) {
+    const input = command.type === 'useCommanderAbility' ? { type: 'useBattleAbility' as const, factionId: faction.id, battleId: state.battle!.id, sourceId: command.characterId, abilityId: command.abilityId } : command;
+    const error = battleAbilityCommand(state, input, emitted, observeFact);
+    if (error) return fail(error);
+    if (command.type !== 'setBattleAbilityAuto') settleCampaignAbility(state, emitted, observeFact);
   } else if (command.type === 'research' || command.type === 'adoptInstitution' || command.type === 'adoptDoctrine' || command.type === 'startVictoryProject') {
     if (rulesVersion(state) < 8 && command.type === 'research' && (command.technologyId === 'technology.coastal_navigation' || command.technologyId === 'technology.ocean_navigation')) return fail('Unknown progression choice.');
     const result = command.type === 'startVictoryProject' ? startVictoryProject(state, faction.id, command.settlementId)
@@ -449,11 +483,16 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
   if (state.battle) affectedArmies.push(state.battle.attackerId, ...state.battle.defenderIds);
   if (command.type === 'besiege') pauseMovement(state, command.armyId, 'This army is maintaining a siege.', emitted);
   reconcileMovement(state, emitted, affectedArmies);
+  if (rulesVersion(state) >= 12 && command.type === 'resolveCapture') reconcileRoads(state);
   if (rulesVersion(state) >= 9 && (command.type === 'found' || command.type === 'resolveCapture' || command.type === 'claimCell' || command.type === 'endTurn')) {
     for (const party of state.factions) refreshLandKnowledge(state, party.id, index.visible.get(party.id) ?? new Map());
   }
   state.events.push(...emitted);
   if (state.events.length > MAX_EVENTS) state.events.splice(0, state.events.length - MAX_EVENTS);
+  if (onBattle && presentedBattle && beforeScene) {
+    try { onBattle({ battleId: presentedBattle.id, before: beforeScene, after: getBattleScene(state, presentedBattle), events: battleFacts }); }
+    catch (error) { diagnostics.push(`Battle presentation observer failed: ${error instanceof Error ? error.message : String(error)}`); }
+  }
   return { ok: true, events: emitted.map(event => ({ ...event })), ...(diagnostics.length ? { diagnostics } : {}) };
 }
 
@@ -480,6 +519,10 @@ export function getObservation(state: GameState, factionId: string, options: Obs
   for (const project of state.projects) knownFactions.add(project.factionId);
   const involved = (battle: { attackerFactionId: string; defenderFactionId: string }): boolean => battle.attackerFactionId === factionId || battle.defenderFactionId === factionId;
   return {
+    battleScene: state.battle && involved(state.battle) ? getBattleScene(state, state.battle) : null,
+    battleAbilities: observeBattleAbilities(state, factionId), arcaneResearch: observeArcaneResearch(state, factionId),
+    roads: observeRoads(state, factionId),
+    layout: state.world.layout,
     land: getLandObservation(state, factionId, visible, options.landDetails),
     turn: state.turn, factionId, factionCount: state.factions.length, pace: state.pace,
     factions: state.factions.filter(item => knownFactions.has(item.id)).map(item => ({ id: item.id, definitionId: item.definitionId, name: item.name, color: item.color })),
@@ -494,7 +537,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     events: state.events.filter(event => event.factionId === factionId).map(event => ({ ...event })),
     cells: [...(state.explored[factionId] ?? [])].sort((a, b) => a - b).map(cell => {
       const known = state.land.known[factionId]?.[cell];
-      return { cell, terrain: state.world.terrain[cell] ?? 0, biome: known?.biome ?? state.world.biome[cell] ?? 0, waterDepth: state.world.waterDepth[cell] ?? 0, fertility: state.world.fertility[cell] ?? 0, visible: visible.has(cell), ...(known?.settlementId ? { settlementId: known.settlementId, factionId: known.factionId } : {}), ...(known?.improvementId ? { improvementId: known.improvementId } : {}) };
+      return { cell, terrain: state.world.terrain[cell] ?? 0, biome: known?.biome ?? state.world.biome[cell] ?? 0, waterDepth: state.world.waterDepth[cell] ?? 0, fertility: state.world.fertility[cell] ?? 0, visible: visible.has(cell), ...(state.world.hydrology[cell] ? { hydrology: state.world.hydrology[cell] } : {}), ...(state.roads.known[factionId]?.[cell] ? { roadMask: state.roads.known[factionId]![cell] } : {}), ...(known?.settlementId ? { settlementId: known.settlementId, factionId: known.factionId } : {}), ...(known?.improvementId ? { improvementId: known.improvementId } : {}) };
     }),
     width: state.world.width, height: state.world.height, seed: state.world.seed,
     wars, battle: state.battle && involved(state.battle) ? cloneCampaignBattle(state.battle, factionId) : null,

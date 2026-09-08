@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.vesper_court",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.cavalry for Theandril, Vesper Court.\nSubject: One mounted adult escort on one complete ordinary sturdy horse, horse and rider both facing southeast, quiet four-hoof standing pose. Compact saddle packs, faction cloth saddle blanket and practical light barding; rider holds reins and a short sheathed or downward sword, no long lance. All ears, tail and hooves complete.\nCulture-specific identity: Living adult human retainers and artisans, cool ivory skin and dark hair; no pointed ears. Only the marshal may be a pale vampiric court patron with subtle severe human features. Charcoal velvet and leather, narrow ribbed dark iron, tarnished silver, muted burgundy and dusty plum cloth (dark #49312b, #642f26, #685375, #96738e; NO bright red). High folded collars, long split court coats and silver-edged narrow kite shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "unit.cavalry.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.vesper_court/79a3691b7f268250c855d1ae4ebb81b08d363e534ec92c21fcd2780c2861b87c/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "86f84624c2bc6c2dfd4322ed59a585a3ca5be0ccc3a7ac58d6611c043910cb70",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.cavalry.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:49:35Z",
+  "referenceHashes": [
+    "5f405371acc978aaf4b0aed7a2bcec98d875031a5b016b5b8b059dd961b61ae8",
+    "7f99277bdb19460b5d08c4d66b81029bcbb29414f649a6f1ef6c7fea635b912c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "3e598370572063caf6f13b2c2c7d3b049aea6fcfe5a7b7e9fe47d89817c787e8",
+      "inputHash": "5f405371acc978aaf4b0aed7a2bcec98d875031a5b016b5b8b059dd961b61ae8",
+      "outputHash": "7a3d956ed899aab8b23949e1a4732d9423876578d89862d8cd6e0f852af70a88"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "7a3d956ed899aab8b23949e1a4732d9423876578d89862d8cd6e0f852af70a88",
+      "outputHash": "f851278823612adf8cf3e4a755d19ab9e4b59f78cde5d90e613eff4cf6150a3d"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f851278823612adf8cf3e4a755d19ab9e4b59f78cde5d90e613eff4cf6150a3d",
+      "outputHash": "708840ec71bf96a193a38a16dd90fe4dcf1b384a94f306a925b72c8123c37c0a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "557b148d31a87bff940c21b900743ad8248229176920c7260675286446c5cb74",
+      "outputHash": "0e83c44abc05282bd1df4d39cf6050a6f71deade3e9befa1cd59a84228dd0c49"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "6acb32370edc9f49b16843a5e78629f81403759c841e49ecc3d2a3d9dd45c96e",
+      "outputHash": "ffac491622e599778068bc0abcbd4ed433c75039a9a2c217ed59e8ad351b06a5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "150dbf62363977400c02409e90851b6b128081e661e7f26e3edcf79295ef79f1",
+      "outputHash": "151aaad04ff2eeed220440b4bfeef1a1e6e40e6781e5b82b55fd39b401532cff"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:01.359Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Mounted retainer on a complete ordinary horse; pale hooves and head separate clearly, with no invented flying mount. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 79a3691b7f268250c855d1ae4ebb81b08d363e534ec92c21fcd2780c2861b87c; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/1fa153759f7da4d34dea8a4397b9ecd49719c7958c1635fcc6557a834e61b12c.png"
+    ],
+    "inputHash": "db1a3b525e3137d0427fe31c26825047d7c4f8638442638046d2e9acb6cbb1ce"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

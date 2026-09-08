@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.grassland.variant_2",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.grassland.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. Temperate GRASSLAND: quiet muted grey olive-brown meadow, a broad crescent of sparse low sage weeds in the lower half with a few dull slate pebbles and bare earth patches. Flat, no trees; distinguish from yellow bunchgrass. Mostly calm low-contrast mid-value ground. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.grassland.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.grassland.variant_2/06c93680d85e2bbe6cfbd2b183da0d280db8f5250ac213cb69361f5f83ecce5d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2958838fa08301041579319184d1b7116180f5c713e2e3a950347d9d90924eb2",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.grassland.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.grassland.variant_2-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:19:54.062Z",
+  "referenceHashes": [
+    "a17c6433c43009b6bfd72047c922bb0fe32e2aad379c66fac900d4985a500b82",
+    "9f7c5e73ba9c1dd1b45be07433c29c2c38611d725a464d6bf01e28e9ae48808c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "17a7ad36e09ca2a32ef14a5957f02e449078d577e3e98d61c98c95d0c8d502fb",
+      "inputHash": "a17c6433c43009b6bfd72047c922bb0fe32e2aad379c66fac900d4985a500b82",
+      "outputHash": "1c8088d32c22f5f753011e26dbfbb02b65919a5577591e3d57cd4ba9c4e09e4f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "1c8088d32c22f5f753011e26dbfbb02b65919a5577591e3d57cd4ba9c4e09e4f",
+      "outputHash": "a77494741ff5832aef5e51101d51ecf365f7cbdce7f6c804014d49be616d7f8c"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a77494741ff5832aef5e51101d51ecf365f7cbdce7f6c804014d49be616d7f8c",
+      "outputHash": "859c2c2228cdd822b2fc148d56bd9d4ac291f22e87b70f322d336d96e46b0cd8"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "34d1f11b84d24c450a500375345ab829bcb26e9df10f45fc05acc73c34bac590",
+      "outputHash": "0b7653e980ca91e3a64dbcad53ccd1a00c41515d32e4202a445d425f01482a50"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "293ba83981fbcebb249be525240fbd51790576ae6ed4a3a3771746f7d008087b",
+      "outputHash": "6a78c5e225fa76e4672ac5eac648485ef4037921423e37e3d03201b3ceb2c56b"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "6927dd5285fe325b191f4097c000e56006d0ceca602162e1d43034bb41ff5ff9",
+      "outputHash": "a8dd99a82d17f7a6458fd7e9c1057149737d4f3c17efd329852ebb49ae8c9596"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.grassland.variant_2.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:14.757Z",
+    "notes": "Broken sage-green grass clumps and exposed soil give a different ground rhythm without adding gameplay deposits. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate 06c93680d85e2bbe6cfbd2b183da0d280db8f5250ac213cb69361f5f83ecce5d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/79df441522df4b1adc29d850f656f7bafe25b6f0d401e8eec85ce6b7f1182383.png"
+    ],
+    "inputHash": "210d319ed8681084bad997e5de7b31f2ff8413f40882e8cec08a2063816370be"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

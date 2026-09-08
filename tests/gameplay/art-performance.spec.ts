@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { writeFile } from 'node:fs/promises';
 import { deserializeGame, serializeGame, stateHash } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
 import { matureCampaign } from '../../packages/test-fixtures/src/index';
@@ -87,7 +88,9 @@ test('fully explored Huge art rendering stays viewport-bounded across static fac
   const canvas = await page.getByTestId('map-container').locator('canvas').boundingBox();
   const homeCell = Object.values(state.armies).find(army => army.factionId === state.turnOwnerId)!.cell;
   const report = { workload: 'Synthetic fully explored Huge, 32 factions, 1,500 global armies, 32 towns; fog still limits currently visible entities. Static qualified faction poses at near zoom; co-located armies aggregate to heraldic badges at far zoom. No turn advancement or claims about late-game strategic load. Cache backing is separately estimated with power-of-two dimensions; returned texture-pool resources and other GPU allocations are not included.', homeCell, canvas, mapAtlases, expectedResidency, cells, stateHash: hash, samples };
-  await testInfo.attach('fully-explored-art-performance.json', { body: JSON.stringify(report, null, 2), contentType: 'application/json' });
+  const reportPath = testInfo.outputPath('fully-explored-art-performance.json');
+  await writeFile(reportPath, JSON.stringify(report, null, 2));
+  await testInfo.attach('fully-explored-art-performance.json', { path: reportPath, contentType: 'application/json' });
   // Retain detailed entity evidence in the attachment; keep the console measurement summary bounded.
   console.log('Fully explored Huge art measurements:', JSON.stringify({ ...report, samples: samples.map(({ stage, metrics }) => ({ stage, metrics })) }));
   expect(errors).toEqual([]);

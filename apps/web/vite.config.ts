@@ -25,6 +25,8 @@ function omitDevelopmentArt(): Plugin {
 }
 
 export default defineConfig({
+  // Pages supplies /Theandril/; an ordinary local build/dev server stays at /.
+  base: process.env.VITE_BASE_PATH || '/',
   plugins: [omitDevelopmentArt()],
   // These dependencies are reached through the simulation worker only after a
   // campaign starts. Discovering them then invalidates the browser dependency

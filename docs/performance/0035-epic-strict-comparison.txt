@@ -1,0 +1,14 @@
+Isolated final Epic/Short archive integration test after replacing matcher-wrapper comparisons with Node deepStrictEqual.
+Complete mirrored command results and both full chronicle documents still compared; stricter absent/undefined handling. No timeout/count/turn/assertion coverage reduction, no runtime change.
+Both cases pass under their unchanged60-second limit;2/2,57.78s test time,58.59s invocation. This is test-harness overhead improvement, not a simulation speedup claim or default-parallel-suite signoff.
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  17:38:05
+   Duration  58.59s (transform 648ms, setup 0ms, import 754ms, tests 57.78s, environment 0ms)
+
+

@@ -1,3 +1,4 @@
+import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { IMPROVEMENTS, TECHNOLOGIES } from '@theandril/content';
 import { hexDistance, naturalFeatures } from '@theandril/mapgen';
@@ -7,7 +8,7 @@ import { cellsWithin } from '../../packages/sim/src/visibility';
 
 function issue(state: GameState, command: GameCommand) { const result = applyCommand(state, command); if (!result.ok) throw new Error(result.error); }
 function cityScene() {
-  const state = createGame({ seed: 17, size: 'tiny', factionCount: 1, pace: 'epic' });
+  const state = createGame({ generatorVersion: 4, seed: 17, size: 'tiny', factionCount: 1, pace: 'epic' });
   const origin = state.armies['army.1']!.cell;
   for (const cell of cellsWithin(state, origin, 3)) {
     state.world.terrain[cell] = 1; state.world.biome[cell] = 7; state.world.waterDepth[cell] = 0; state.world.fertility[cell] = 80;
@@ -21,11 +22,12 @@ async function importCity(page: Page, state: GameState) {
   await page.goto('/');
   await page.locator('input[type=file]').setInputFiles({ name: 'city-witness.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: /Boundary Hearth/ }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', /Boundary Hearth/); await openSelectedOrders(page);
 }
 async function endTurn(page: Page) {
   const turn = await page.evaluate(() => window.__THEANDRIL__!.getTurn());
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getTurn())).toBe(turn + 1);
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
@@ -40,11 +42,13 @@ test('city borders expand through a saved turn while researched tile constructio
   const target = view.cells.find(cell => cell.canWork)!.cell, next = view.borderExpansion.nextCell!;
   await importCity(page, state);
   await expect(page.getByTestId('border-growth')).toContainText('39 / 40');
+  await closeManagement(page);
   await page.getByRole('button', { name: 'Realm progression', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Realm progression' });
   await dialog.getByRole('button', { name: 'Research Seasonal stewardship', exact: true }).click();
   await dialog.getByRole('button', { name: 'Research Sluice waterworks', exact: true }).click();
   await page.keyboard.press('Escape');
+  await openSelectedOrders(page);
   await page.getByRole('button', { name: 'Select tiles', exact: true }).click();
   await page.getByRole('button', { name: `Inspect land hex ${target}`, exact: true }).click();
   await page.locator('.land-options > summary').filter({ hasText: 'Tile improvements' }).click();
@@ -52,28 +56,33 @@ test('city borders expand through a saved turn while researched tile constructio
   await page.getByRole('button', { name: 'Build Polder', exact: true }).click();
   const paid = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.land.settlements[0]!.work!.coinCost);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.treasury)).toBe(treasury - paid);
+  await closeManagement(page);
   await page.getByTestId('campaign-menu').locator('summary').click();
   await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
   await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
   const saved = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
   await page.reload(); await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(saved);
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: /Boundary Hearth/ }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', /Boundary Hearth/); await openSelectedOrders(page);
   await endTurn(page);
   const expanded = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.land.settlements[0]!);
   expect(expanded.claimed).toContain(next); expect(expanded.claimed).toHaveLength(8); expect(expanded.worked).toEqual([]);
   expect(expanded.borderExpansion.threshold).toBe(44);
   expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell)?.settlementId, next)).toBe(town.id);
+  await openSelectedOrders(page);
   await expect(page.getByTestId('land-work')).toContainText('1 / 4 turns');
   for (let turn = 0; turn < 3; turn++) await endTurn(page);
   expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell)?.improvementId, target)).toBe('improvement.polder');
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.land.settlements[0]!.worked)).toEqual([]);
+  await openSelectedOrders(page);
   await page.getByRole('button', { name: 'Select tiles', exact: true }).click();
   await page.getByRole('button', { name: `Inspect land hex ${target}`, exact: true }).click();
   await page.getByRole('button', { name: 'Assign worker', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSummary()!.land.settlements[0]!.worked)).toEqual([target]);
+  await closeManagement(page);
   await page.getByTestId('map-container').screenshot({ path: testInfo.outputPath('expanded-city-and-polder.png') });
+  await openSelectedOrders(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByTestId('border-growth').scrollIntoViewIfNeeded();
   await expect(page.getByTestId('border-growth')).toBeInViewport();
@@ -83,7 +92,7 @@ test('city borders expand through a saved turn while researched tile constructio
 });
 
 test('all five research-gated sites have visible distinct procedural identifiers and stable idle chunks', async ({ page }, testInfo) => {
-  const state = createGame({ seed: 17, size: 'tiny', factionCount: 1, pace: 'short' }), factionId = state.turnOwnerId, origin = state.armies['army.1']!.cell;
+  const state = createGame({ generatorVersion: 4, seed: 17, size: 'tiny', factionCount: 1, pace: 'short' }), factionId = state.turnOwnerId, origin = state.armies['army.1']!.cell;
   const cells = cellsWithin(state, origin, 3).filter(cell => cell !== origin);
   for (const cell of [origin, ...cells]) { state.world.terrain[cell] = 2; state.world.biome[cell] = 2; state.world.waterDepth[cell] = 0; state.world.fertility[cell] = 80; }
   const spring = cells.find(cell => naturalFeatures(state.world, cell) & 1)!;
@@ -108,6 +117,7 @@ test('all five research-gated sites have visible distinct procedural identifiers
   }
   const checked = deserializeGame(serializeGame(state)); expect(stateHash(checked)).toBe(stateHash(state));
   await importCity(page, checked);
+  await closeManagement(page);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().improvementProps)).toBe(5);
   await expect(page.getByTestId('art-runtime-status')).toContainText('partial pixel pack');
   await expect(page.getByTestId('art-runtime-status')).toHaveAttribute('title', /land improvements lack approved artwork/);

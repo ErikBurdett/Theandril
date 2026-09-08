@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.velvet_meridian",
+  "type": "ui",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.velvet_meridian"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE independently generated tiny raster pixel-art army identification badge, ui.badge.velvet_meridian version2, for Theandril. Design only the authored Velvet Meridian symbol: ONE straight vertical PLUMB LINE crossing EXACTLY THREE UNEQUAL HORIZONTAL STITCHES, ending in ONE substantial hanging PLUMB BOB. It must remain BOLD and immediately readable at native32x32 pixels, not a hairline ornament. Imagine an exact28-pixel-high emblem: vertical stem at least3pixels thick, three stitches about18,14,and10pixels wide respectively and each3pixels thick, large simple plumb bob at least6pixels wide and6pixels tall. Separate the three unequal stitches by clearly visible negative gaps. Longest stitch span must be at least14pixels wide in the eventual native badge. Use pale bright matte silver for the continuous thick stem and large simple diamond-shaped plumb bob, with muted brick-red horizontal stitches and only minimal dark local-color edge contrast. No thin cord, tiny dot bob, bevel clutter or fine dangling details. Crisp coarse square pixel clusters and flat grouped values, worn medieval craft identity, not glossy jewelry. Front-facing flat emblem, centered and fully contained within the central60percent of a square source canvas, with generous actual transparent padding and complete tips. TRUE transparent PNG alpha zero outside this single emblem; preserve genuine alpha, never draw a checkerboard or background. ONLY the line, three unequal stitches, and bob. No frame, scenery, scroll ornament, ring, shield, plaque, ribbon, cloth, tassel, tree, feathers, crown, extra symbols, figures, text, letters, numbers, logo, watermark, glow, ambient haze, smooth gradients or cast shadow. One original static badge, no sheet, variants, annotations or multiple marks.",
+  "frames": [
+    {
+      "id": "ui.badge.velvet_meridian/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/source/native/ui.badge.velvet_meridian/v2/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1b621f839e8d33b9d12c297e0d2f401eb46c3f53c3ca8dc9a04cb445cfdc3c29",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/ui.badge.velvet_meridian-v2.png",
+      "assets/art/source/faction-expansion/canalmeridian/ui.badge.velvet_meridian-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T18:10:07.464Z",
+  "referenceHashes": [
+    "a073320bd7b540922c9af9984174289a472ea078856f0abc1ec1e005fc653a9e",
+    "585970bd83fa2717fef4832eaa4828eadc083204bf31ffcbd9cff9ec390dd7a5"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "6156ed72ec6e9dce154aa6bcc5280bf0466ada00bee2972de154007f8d61b70f",
+      "inputHash": "a073320bd7b540922c9af9984174289a472ea078856f0abc1ec1e005fc653a9e",
+      "outputHash": "a80eadfb77ac48c817b9228a999e4d8c1c2e77fb5e126a2433656bdc76d7a56f"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

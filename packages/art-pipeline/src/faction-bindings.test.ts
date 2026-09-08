@@ -1,18 +1,35 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { FACTION_ART_FAMILIES, FACTION_ART_IDS, FACTION_ART_ROLES, FACTION_LAND_ART_ROLES, FACTION_NAVAL_ART_ROLES, factionArtId } from './faction-art';
 import { FACTION_SOURCE_KINDS, isFactionOriginalSource } from './faction-source';
 
-describe('twelve authored culture bindings', () => {
+describe('twenty-four authored culture bindings', () => {
   it('resolves each role exclusively from its exact definition ID', () => {
-    expect(FACTION_ART_FAMILIES).toHaveLength(12);
+    expect(FACTION_ART_FAMILIES).toHaveLength(24);
     expect(FACTION_LAND_ART_ROLES).toHaveLength(15); expect(FACTION_NAVAL_ART_ROLES).toHaveLength(3);
-    expect(FACTION_ART_IDS).toHaveLength(216);
+    expect(FACTION_ART_ROLES).toHaveLength(18);
+    expect(new Set(FACTION_ART_ROLES).size).toBe(18);
+    expect(new Set(FACTION_ART_FAMILIES).size).toBe(24);
+    expect(FACTION_ART_IDS).toHaveLength(432);
     expect(new Set(FACTION_ART_IDS).size).toBe(FACTION_ART_FAMILIES.length * FACTION_ART_ROLES.length);
     for (const family of FACTION_ART_FAMILIES) for (const role of FACTION_ART_ROLES) {
       expect(factionArtId(role, `faction.${family}`)).toBe(`${role}.${family}`);
       expect(factionArtId(role, family)).toBeUndefined();
       expect(factionArtId(role, `seat.${family}`)).toBeUndefined();
     }
+  });
+
+  it('retains the twelve historical identities and registers exactly the adopted next twelve directions', () => {
+    expect(FACTION_ART_FAMILIES.slice(0, 12)).toEqual(['ashen_compact', 'reedbound_council', 'cinder_march', 'glass_tide', 'iron_covenant', 'sepulchral_synod', 'mire_courts', 'saltwind_remnant', 'wardhall_remnant', 'rimehorn_clans', 'sable_steppe', 'morrow_spore']);
+    const directions = JSON.parse(readFileSync(new URL('../../../assets/art/source/faction-expansion/cohort24-art-direction.json', import.meta.url), 'utf8')) as { designs: { family: string }[] };
+    expect(FACTION_ART_FAMILIES.slice(12)).toEqual(directions.designs.map(design => design.family));
+    expect(FACTION_ART_FAMILIES).not.toContain('testament_union');
+    expect(Object.fromEntries(FACTION_ART_FAMILIES.slice(0, 12).map(family => [family, FACTION_SOURCE_KINDS[family]]))).toEqual({
+      ashen_compact: 'sheet', reedbound_council: 'sheet', cinder_march: 'sheet', glass_tide: 'sheet',
+      iron_covenant: 'slice12', sepulchral_synod: 'slice12', mire_courts: 'batch', saltwind_remnant: 'batch',
+      wardhall_remnant: 'batch', rimehorn_clans: 'batch', sable_steppe: 'batch', morrow_spore: 'batch',
+    });
+    for (const family of FACTION_ART_FAMILIES.slice(12)) expect(FACTION_SOURCE_KINDS[family]).toBe('batch');
   });
 
   it('keeps old source layouts and new individual batches explicit without implying publication', () => {
@@ -25,10 +42,11 @@ describe('twelve authored culture bindings', () => {
       expect(isFactionOriginalSource(family, 'unit.scout', original)).toBe(false);
       expect(isFactionOriginalSource(family, 'unit.guard', original.replace('cohort12/', '../'))).toBe(false);
       expect(isFactionOriginalSource(family, 'unit.guard', original.replace('source/faction-expansion', 'approved'))).toBe(false);
+      expect(isFactionOriginalSource(family, 'unit.guard', original.replace('/cohort12/', '/naval/'))).toBe(false);
     }
   });
 
-  it('registers naval originals for all twelve cultures without reclassifying any historical land sources', () => {
+  it('registers naval originals for all twenty-four cultures without reclassifying any historical land sources', () => {
     for (const family of FACTION_ART_FAMILIES) for (const role of FACTION_NAVAL_ART_ROLES) {
       const id = `${role}.${family}`, original = `assets/art/source/faction-expansion/naval/${id}-v1.png`;
       expect(factionArtId(role, `faction.${family}`)).toBe(id);

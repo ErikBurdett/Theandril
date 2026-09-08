@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.cistern_assembly",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native64. One full-body adult works engineer with broad work apron, compact hammer held low, rolled construction plans under other arm and useful tool belt. Readable face and both boots; unarmed craft worker, no spell effect.",
+  "frames": [
+    {
+      "id": "character.engineer.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.engineer.cistern_assembly/b0a2c2b4ece65c7d3f66c3c97fba097f301c53114c6c5e3f3a1f6112b24ba4a5/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f3b0347143225e68372dad1e866ff2020d52f92ee524c3c863de05c5958c15e9",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/character.engineer.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/character.engineer.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:52:26.061Z",
+  "referenceHashes": [
+    "bede4e031b9e2ed448edb09c3e649ef0fd7f87f6636309bdc324e0ab296e2c9e",
+    "6f54be2883d12f526b14d2f3438e6659e43548a9b9e6d149083a608ce47db23c"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "609cd32b26762f6e39e8148af51b938fdb24a7815cbbe75e4a4ddaf0b3ec4c8b",
+      "inputHash": "bede4e031b9e2ed448edb09c3e649ef0fd7f87f6636309bdc324e0ab296e2c9e",
+      "outputHash": "6ab897389e89738419e9659ee1e2fa4c0ef4e3722576ca4e11a57b35a1365f99"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "6ab897389e89738419e9659ee1e2fa4c0ef4e3722576ca4e11a57b35a1365f99",
+      "outputHash": "19baaedb015e2c50ccf50752077b1d8ad8637f20dd46e8a24ed20e0ce50b9dc5"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "19baaedb015e2c50ccf50752077b1d8ad8637f20dd46e8a24ed20e0ce50b9dc5",
+      "outputHash": "8555ec89da11859741889f5014d2818cd5aff6e75157726d51246deaa2532ad6"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "7f91eefdecbffc4a705d0e080d522340f04666d43b034754d38368945aaa4e71",
+      "outputHash": "dc94eb733a801ac64bb4b74960ca76f8606d07303e9532bc47c1196118575072"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "2eab1de74d01911308665df5be9824ae1ac7094fe856db73a67c4b5534e6acbf",
+      "outputHash": "0e9f739a3c6f56f2fa45b69d628bf625b6e6ae339d65406d2e212853e91584e5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "f0222ca56e08766cdea82eeed3e2a3c32201b6f463b2e9fce843d5fbcbc834b8",
+      "outputHash": "1fbf76895624194dba572e7980c513bee6f72aeb9410a6cd91ef9d4b09010808"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.engineer.cistern_assembly.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:08.942Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Working woman carries a mallet and rolls, with tool belt and tied hair; complete practical silhouette. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate b0a2c2b4ece65c7d3f66c3c97fba097f301c53114c6c5e3f3a1f6112b24ba4a5; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/89d7f40411347d33b0d09389242118940d56bdbc2594e826f00d90668bd9d847.png"
+    ],
+    "inputHash": "9ad6c5c22458e17e6ceedc65bf37418191f073b099788fb4278437f3398470e7"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

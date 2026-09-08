@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.ocean_warship.manytrack_moot",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.ocean_warship.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. A maintained practical culture of several humanoid lineages and human households; not a feral beast camp. Native96. ONE substantial ocean fighting ship, southeast view with prow screen RIGHT/lower right. Strong broad hull, two distinct short masts with two square sails, raised stern fighting deck and restrained reinforced prow. Complete rigging, all mast tips, sails and hull within central65% with extra upper padding. No sea, wake, waterplane, gigantic ornament or scenery. Heavier twin-mast silhouette, not a copied one-sail transport. No guns, cannons, gunports, gunpowder weapons, engines or industrial metal funnels. Defensive equipment may be bows or one small wooden deck ballista only; no new magical effects.",
+  "frames": [
+    {
+      "id": "unit.ocean_warship.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.ocean_warship.manytrack_moot/2b57db4d5d57f7ef6f16e9a7cc906a3de89354f62839808923062b31faf26757/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1caf9cf8d00b937e721100c3e24a0ba796c43c589c18a09b9ac9a5327404ec0c",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.ocean_warship.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:24:03.066Z",
+  "referenceHashes": [
+    "f71aa8028fa81af0d2b1ba564f28114fea13b70d0fafc68676995668dc0599b9",
+    "34771b7240b92cb1cdf21b1142e5f223356001872e3090cf6c317e4b45033584"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "a285b913307a5cc5abba47dd6ccf8567c2bd0359bc8a0818c35c7cf02bf75ff6",
+      "inputHash": "f71aa8028fa81af0d2b1ba564f28114fea13b70d0fafc68676995668dc0599b9",
+      "outputHash": "d54971c271c8a689fd2c621f2b592464c06f1bc83800d9d9b392b90707c3c663"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "d54971c271c8a689fd2c621f2b592464c06f1bc83800d9d9b392b90707c3c663",
+      "outputHash": "f44fef2009016dace7e4eebc454c3d18dc2fd10a43e59a3ba2c676ab78d595ca"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f44fef2009016dace7e4eebc454c3d18dc2fd10a43e59a3ba2c676ab78d595ca",
+      "outputHash": "8836274ab7af5e8df172d7e125a3701f045fa7c3d67476d5c47caa2d0964ffc8"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "52019c34fb51b147e525229a7098f9db523b989c22009621104c52821daad619",
+      "outputHash": "4fb1848a807032aed320f577f60e61de0ddcc2dabd44bf7319331687e642a6c0"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "060ff935ff8e0c13787db763314926d8c5c0808b4880cfe7a7048a12ca1f0d7a",
+      "outputHash": "5b343e055fae16ee007a5b425b9182ae8ec7e347c05af257a8bc5ee11d656b3d"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "8ca76ea0550155c38f7ff9a4e55aea69f2d80d276509175d6d2dc6385acd908c",
+      "outputHash": "3cb26cac16bffe0ae1e48202cc24fc5901aaa8c99624635bdf3563e2ff3b7ee2"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.ocean_warship.manytrack_moot.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:45:37.547Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Two square sails and taller deeper hull with continuous wood sides distinguish ocean ship; no visible cannons or gunports. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 2b57db4d5d57f7ef6f16e9a7cc906a3de89354f62839808923062b31faf26757; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5e6b11b6162ca3ba0f002bae69b5200916a85c7f3dd1c21750cf9af01883cdf1.png"
+    ],
+    "inputHash": "ebb53e0b4e6dce7aeeb2313f4699f5f36eb7be4043824fa62525e840fb3a5710"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

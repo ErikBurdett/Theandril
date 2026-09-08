@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.alpine.variant_2",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.alpine.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. ALPINE: irregular fractured grey mountain escarpment with three unequal short ridges, dark angular creases and restrained pale snow remnants on north-facing slopes, broad stone-and-scree ground below. Not symmetrical triangular icons or glowing white peaks. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.alpine.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.alpine.variant_2/v1/2d957965ef2c783c/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "e47ef108964a9873ff38faf20683f03c06a372e0aead0a3ad16feeda2622c460",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.alpine.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.alpine.variant_2-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:56:32.153Z",
+  "referenceHashes": [
+    "a9ee052c58c41f1f0f71c5480656975014b5a9da463a8dd5e8fd3fbec870f312",
+    "acb722c15cdbc3bbb3af1dcb1eadb542ed6911c44bc21c52637fff43e1c233fe"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "80181c492aeb82cef41dec060e1095979e67df78bebfd2962aaf2f8a5668e6bb",
+      "inputHash": "a9ee052c58c41f1f0f71c5480656975014b5a9da463a8dd5e8fd3fbec870f312",
+      "outputHash": "1c4e2d61868bee5900b66aff9123bf2828fa9a219f8a246cda2470b5f7cac974"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

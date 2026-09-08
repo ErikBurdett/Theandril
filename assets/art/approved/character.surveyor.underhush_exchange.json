@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.surveyor.underhush_exchange",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.surveyor.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art character.surveyor for Theandril, Underhush Exchange.\nSubject: One adult field surveyor on foot carrying a small rolled survey chart, simple folding measuring rod and a broad cross-body map case. Light working coat, clearly a practical scholar and route worker, not a wizard. Full body, readable hands.\nCulture-specific identity: An adult short broad-handed burrowfolk: compact furred body, small rounded ears, blunt face, visible dexterous fingers. Upright two-legged working citizen, not a bearded dwarf, pet or exposed-tooth rodent caricature. Clay-brown padded work coats, pewter fittings, pale-lime panels, tiny dull amber route markers, tactile tally beads, low padded helmets and rounded work shields. Generous compact horizontal shapes.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "character.surveyor.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.surveyor.underhush_exchange/03b395fc41ee1205c9038e6a084bd6c3c2827aaabb37cdba9516eebe3a3b83ca/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "44f867b2512f58c7d925d9fd22cadf7af14d03ae5a3e028013d8f22bf7b2bec0",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/character.surveyor.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/character.surveyor.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:15:22Z",
+  "referenceHashes": [
+    "43e015b4cb07ec72372988b069a49d202a7a3f67ecd1c4666564427c73442557",
+    "98a80342d3271b937d465a52d62cdfc3edceba0288f38be08312b2536915efbf"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "46fa7e64237972addf5a7d3beeee0e1b99a6a22247d1b87a0dd1dd32ffa82223",
+      "inputHash": "43e015b4cb07ec72372988b069a49d202a7a3f67ecd1c4666564427c73442557",
+      "outputHash": "ec2ea453e9067ba3c06925ad668ae369cf339772d4adb93fc80c58a107ffc297"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ec2ea453e9067ba3c06925ad668ae369cf339772d4adb93fc80c58a107ffc297",
+      "outputHash": "f864552febf5b1e1fb5460d28b5ce6dd2a88ce597ee78a21747266772967ced1"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f864552febf5b1e1fb5460d28b5ce6dd2a88ce597ee78a21747266772967ced1",
+      "outputHash": "78951f80da8957aa507a60f9e45fa436d4e13784bd3d743c43226d407479025c"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "396937732a8f02f6b1038b3275d4f327fc07d9591c46b769c3c211385c1ca41c",
+      "outputHash": "4710bc5e402309aade202f0cf24e250d0a1131151eaec935c1b0d574e31d148a"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "ab43e2bb3c863873f566f5c61c166d608d5e7707c736d21b59092660b6ccd41b",
+      "outputHash": "a98dcc1acaf5c1a420f1995263f5ac71838b261b2db510c2fa16b6e66630cc51"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "9e77ad991bbc963ba7d0c1847f48d3fa974f249c24582a0cee4435cb8e6c7298",
+      "outputHash": "b93a3be3fd594d9dc20c2c03f0401ad6cc0084512fedde0e560c840d0fd66fbb"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.surveyor.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:30.679Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Long survey rod, satchel and padded working gear identify surveyor; tool remains contained. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 03b395fc41ee1205c9038e6a084bd6c3c2827aaabb37cdba9516eebe3a3b83ca; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/60a98666f6f5c71397178204fce4943a98025dce7d21a4991900a07d73de37d6.png"
+    ],
+    "inputHash": "d24d3e2fcbbaf611582acc7f299a40814424bd7aceca41bc18ca55f55c632a7f"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

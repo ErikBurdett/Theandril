@@ -2,10 +2,13 @@ import { readFile, writeFile, mkdir, readdir, stat } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { performance } from 'node:perf_hooks';
-import { parseAssetManifest, paletteSchema, decodePng, encodePng, normalizePalette, cropImage, validateAsset, approveAsset, buildAtlas, buildContactSheet, safeAssetPath, sha256, cacheKey, createAssetCacheReceipt, verifyAssetCacheReceipt, insideHex, type AssetManifest, type FrameImage, type ArtLabCatalog, type Palette } from '../packages/art-pipeline/src/index';
+import { parseAssetManifest, paletteSchema, decodePng, encodePng, normalizePalette, cropImage, validateAsset, approveAsset, buildContactSheet, safeAssetPath, sha256, cacheKey, createAssetCacheReceipt, verifyAssetCacheReceipt, insideHex, type AssetManifest, type FrameImage, type ArtLabCatalog, type Palette } from '../packages/art-pipeline/src/index';
 import { asepriteVersion, findPixelSnapper, runTool, runPixelSnapper, createAsepriteSource, exportAseprite, type AsepriteProfile, type ToolProcessResult } from '../packages/art-pipeline/src/toolchain';
 import { PixelLabGenerator, PerfectPixelGenerator, ComfyUIGenerator, type ArtGenerator } from '../packages/art-pipeline/src/generators';
 import { FACTION_ART_FAMILIES, FACTION_ART_IDS } from '../packages/art-pipeline/src/faction-art';
+import { singleSourceClip } from '../packages/art-pipeline/src/source-clip';
+import { BLENDER_BATTLE_IDS } from '../packages/art-pipeline/src/blender-source';
+import { buildSceneAtlases } from '../packages/art-pipeline/src/scene-atlases';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2).filter(value => value !== '--');
@@ -60,13 +63,13 @@ function nativeFrame(image: FrameImage['image'], asset: AssetManifest): FrameIma
 }
 const processing = (tool: ToolProcessResult, profile: string): AssetManifest['processing'][number] => ({ tool: tool.tool, version: tool.version, profile, settingsHash: tool.settingsHash, inputHash: tool.inputHash, outputHash: cacheKey(tool.files.map(file => file.sha256)) });
 async function generate(brief: AssetManifest) {
-  if (new Set(brief.frames.map(frame => frame.state)).size !== 1 || brief.frames[0]!.state !== 'idle' || new Set(brief.frames.map(frame => frame.direction)).size !== 1) throw new Error('Foundation CLI supports one facing and one idle clip; use explicit tagged toolchain exports for multi-state/directional assets.');
+  const sourceClip = singleSourceClip(brief);
   const started = performance.now(), provider = option('provider') ?? 'source';
   const aseprite = await asepriteVersion({ repoRoot: root }), snapper = await findPixelSnapper({ repoRoot: root });
   if (!snapper) throw new Error('Pixel Snapper is required: run tools/art/install-pixel-snapper.sh or set PIXEL_SNAPPER_BIN.');
   const snapperVersion = (await runTool(snapper, ['--version'])).stdout.trim();
   const sourceHashes = await Promise.all(brief.frames.map(async frame => sha256(await readFile(await safeAssetPath(root, frame.sourcePath)))));
-  const toolchainHashes = await Promise.all(['packages/art-pipeline/src/toolchain/aseprite.ts', 'packages/art-pipeline/src/toolchain/pixelsnapper.ts', 'packages/art-pipeline/src/toolchain/process.ts', 'packages/art-pipeline/src/png.ts', 'packages/art-pipeline/src/palette.ts', 'tools/art/import-frames.lua'].map(async path => ({ path, hash: sha256(await readFile(resolve(root, path))) })));
+  const toolchainHashes = await Promise.all(['packages/art-pipeline/src/toolchain/aseprite.ts', 'packages/art-pipeline/src/toolchain/pixelsnapper.ts', 'packages/art-pipeline/src/toolchain/process.ts', 'packages/art-pipeline/src/png.ts', 'packages/art-pipeline/src/palette.ts', 'packages/art-pipeline/src/source-clip.ts', 'tools/art/import-frames.lua'].map(async path => ({ path, hash: sha256(await readFile(resolve(root, path))) })));
   const key = cacheKey({ brief, sourceHashes, palette, provider, aseprite: aseprite.version, snapper: snapperVersion, toolchainHashes, cli: sha256(await readFile(fileURLToPath(import.meta.url))) });
   const folder = `assets/art/cache/${brief.id}/${key}`;
   const cachePath = `${folder}/receipt.json`;
@@ -115,11 +118,13 @@ async function generate(brief: AssetManifest) {
     const nativePath = `${folder}/native-${index}.png`, bytes = encodePng(image); await save(nativePath, bytes, true); nativePaths.push(nativePath);
     steps.push({ tool: 'theandril-native-normalize', version: '1', profile: 'nearest-alpha128', inputHash: result.files[0]!.sha256, outputHash: sha256(bytes), settingsHash: cacheKey({ native: brief.nativeResolution, palette, mask: brief.constraints.terrain }) });
   }
-  const source = await createAsepriteSource({ frames: nativePaths.map((path, index) => ({ path: resolve(root, path), durationMs: brief.frames[index]!.durationMs })), tags: [{ name: 'idle', from: 0, to: nativePaths.length - 1 }], outputPath: await safeAssetPath(root, `${folder}/editable.aseprite`), profile: profile(brief) });
+  const source = await createAsepriteSource({ frames: nativePaths.map((path, index) => ({ path: resolve(root, path), durationMs: brief.frames[index]!.durationMs })), tags: [sourceClip], outputPath: await safeAssetPath(root, `${folder}/editable.aseprite`), profile: profile(brief) });
   steps.push(processing(source, profile(brief)));
   const exported = await exportAseprite({ sourcePath: source.files[0]!.path, outputDirectory: await safeAssetPath(root, `${folder}/aseprite`), profile: profile(brief), stem: 'sprite' }); steps.push(processing(exported, profile(brief)));
   const sheet = decodePng(await readFile(exported.files[0]!.path));
   if (exported.metadata.frames.length !== brief.frames.length) throw new Error('Aseprite frame count differs from the brief');
+  const tags = exported.metadata.meta.frameTags;
+  if (tags?.length !== 1 || tags[0]!.name !== sourceClip.name || tags[0]!.from !== sourceClip.from || tags[0]!.to !== sourceClip.to) throw new Error('Aseprite changed the authored animation tag or frame range.');
   const finalFrames: AssetManifest['frames'] = [];
   for (const [index, frame] of exported.metadata.frames.entries()) {
     const path = `${folder}/frame-${index}.png`;
@@ -141,22 +146,28 @@ async function atlas(integrate: boolean) {
   const requestedSize = option('page-size') ?? '2048';
   if (requestedSize !== '1024' && requestedSize !== '2048') throw new Error('Atlas page-size must be1024 or2048');
   const pageSize = requestedSize === '1024' ? 1024 : 2048;
-  const started = performance.now(), result = buildAtlas(inputs, { id: 'foundation', pageSize, imageUrl: '/art/foundation.png', jsonUrl: '/art/foundation.json', palette });
-  const second = buildAtlas([...inputs].reverse(), { id: 'foundation', pageSize, imageUrl: '/art/foundation.png', jsonUrl: '/art/foundation.json', palette });
-  if (sha256(result.png) !== sha256(second.png) || cacheKey(result.catalog) !== cacheKey(second.catalog)) throw new Error('Atlas determinism check failed');
-  await save('assets/art/runtime/foundation.png', result.png, true); await save('assets/art/runtime/foundation.json', result.json); await save('assets/art/runtime/catalog.json', result.catalog);
+  const started = performance.now(), result = buildSceneAtlases(inputs, { pageSize, palette });
+  const second = buildSceneAtlases([...inputs].reverse(), { pageSize, palette });
+  if (result.pages.some((page, index) => sha256(page.png) !== sha256(second.pages[index]!.png) || cacheKey(page.json) !== cacheKey(second.pages[index]!.json))
+    || cacheKey(result.catalog) !== cacheKey(second.catalog)) throw new Error('Atlas determinism check failed');
+  for (const page of result.pages) {
+    const id = page.catalog.atlases[0]!.id;
+    await save(`assets/art/runtime/${id}.png`, page.png, true); await save(`assets/art/runtime/${id}.json`, page.json);
+    if (integrate) { await save(`apps/web/public/art/${id}.png`, page.png, true); await save(`apps/web/public/art/${id}.json`, page.json); }
+  }
+  await save('assets/art/runtime/catalog.json', result.catalog);
   if (integrate) {
-    await save('apps/web/public/art/foundation.png', result.png, true); await save('apps/web/public/art/foundation.json', result.json); await save('apps/web/public/art/catalog.json', result.catalog);
+    await save('apps/web/public/art/catalog.json', result.catalog);
     const runtimeById = new Map(result.catalog.assets.map(asset => [asset.id, asset]));
     const allBriefs = await Promise.all((await entries('assets/art/briefs')).map(file => json('assets/art/briefs/' + file).then(parseAssetManifest)));
-    const live = new Set([...FACTION_ART_IDS, 'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', ...['ocean', 'grassland', 'temperate_forest', 'taiga', 'tundra', 'desert', 'steppe', 'marsh', 'rainforest', 'alpine', 'ash_scrub', 'chalkland'].map(id => 'terrain.' + id), ...['terraced_fields', 'managed_woodlot', 'quarry', 'reedworks', 'shore_fishery'].map(id => 'improvement.' + id)]);
+    const live = new Set([...FACTION_ART_IDS, ...BLENDER_BATTLE_IDS, 'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', ...['ocean', 'grassland', 'temperate_forest', 'taiga', 'tundra', 'desert', 'steppe', 'marsh', 'rainforest', 'alpine', 'ash_scrub', 'chalkland'].flatMap(id => [`terrain.${id}`, `terrain.${id}.variant_1`, `terrain.${id}.variant_2`]), ...['terraced_fields', 'managed_woodlot', 'quarry', 'reedworks', 'shore_fishery'].map(id => 'improvement.' + id)]);
     const lab: ArtLabCatalog = { schemaVersion: 1, palette, atlases: result.catalog.atlases, assets: allBriefs.map(asset => {
       const runtime = runtimeById.get(asset.id) ?? null;
       return { id: asset.id, type: asset.type, status: runtime?.status ?? asset.status, contentIds: asset.contentIds, nativeResolution: asset.nativeResolution, pivot: asset.frames[0]!.pivot, previewUrl: null, runtime, validation: runtime?.validation ?? null, provenance: runtime?.provenance ?? asset.provenance, review: runtime?.review ?? null, reasons: [live.has(asset.id) ? 'Bound to an existing observation-derived gameplay renderer or faction UI.' : 'Foundation artwork for future content. No canonical gameplay consumer exists yet.', ...(!runtime ? ['Not approved or not published. Candidate files are never served in production.'] : [])] };
     }) };
     await save('apps/web/public/art/lab-catalog.json', lab);
   }
-  console.log(`${integrate ? 'Published' : 'Built'} ${inputs.length} approved assets, ${Object.keys(result.json.frames).length} frames; ${pageSize}x${pageSize} / ${pageSize * pageSize * 4 / 1024 / 1024} MiB per decoded page; PNG ${result.png.length} bytes; ${result.catalog.atlases[0]!.sha256}; two-order rebuild ${(performance.now() - started).toFixed(1)} ms. In-game review remains separate.`);
+  console.log(`${integrate ? 'Published' : 'Built'} ${inputs.length} approved assets, ${result.pages.reduce((sum, page) => sum + Object.keys(page.json.frames).length, 0)} frames; ${result.catalog.atlases.map(page => `${page.id} ${page.width}x${page.height} (${page.width * page.height * 4 / 1024 / 1024} MiB)`).join(', ')}; PNG ${result.pages.reduce((sum, page) => sum + page.png.length, 0)} bytes; two-order rebuild ${(performance.now() - started).toFixed(1)} ms. In-game review remains separate.`);
 }
 
 try {

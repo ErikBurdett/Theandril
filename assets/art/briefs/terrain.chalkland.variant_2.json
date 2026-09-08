@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.chalkland.variant_2",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.chalkland.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. CHALKLAND: rolling low chalk heath depicted overhead, warm pale stone patches beside dusty olive-brown earth and a few grey-green scrub cushions. Broad irregular light/dark groups, gentle shallow fissures, no road or cliff. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.chalkland.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.chalkland.variant_2/v1/2d957965ef2c783c/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "fe64523d590e422078f5bc0c4204d0b2225ad857d6f7784d03b5d0e436724d33",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.chalkland.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.chalkland.variant_2-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:58:19.789Z",
+  "referenceHashes": [
+    "bc8dd628c323c28315bab29f03d5d41f999e42faa9c8a80155d65f7f055dd0c2",
+    "9f7b064ba9413d58e33b830811b547db666da6199a7072b7e6cff97545b79fca"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "04fcb6b0b8b43ceadb68a8fb035e079bc139c59164adf92f3627d6b40d045e8f",
+      "inputHash": "bc8dd628c323c28315bab29f03d5d41f999e42faa9c8a80155d65f7f055dd0c2",
+      "outputHash": "425a65b56353d721b5f3c13b44e676f509f3b38f41dc48467ff700f91796f2d6"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

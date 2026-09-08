@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.emberwake_convocation",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.colonist for Theandril, Emberwake Convocation.\nSubject: One practical adult founding-caravan leader walking in a quiet planted stance, bearing a large strapped household pack with bedroll, seed crate and compact tools. Unarmed civilian silhouette: weight of carried supplies clearly distinguishes this role from a scout. No separate cart that dwarfs the person.\nCulture-specific identity: Adult human seedkeeper or kiln-worker household escort, practical proportions, visible tool-hands and ordinary boots. No fire elemental or undead. Ash-white ceramic face screens and small ceramic plates, smoked-orange cloth, muted sulfur-green straps, charcoal padded kiln aprons and short heat-resistant wraps. Seed jars and split-vent motifs, no open flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "unit.colonist.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.colonist.emberwake_convocation/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0f9df28ecb4877b532d5e1d8484402a071bd161d9570e3a44e529efde0cca050",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.colonist.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.colonist.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:30:14Z",
+  "referenceHashes": [
+    "df29390b1270063b53ec186f58c669de872fc154239e7e82dd25ce10ef20202a",
+    "f3d48bbd89f9e65542f3f6eaf3e1bf0c7171417cf820bedd13868f637d3b5dbc"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "f0a591dac380c64705b3c82421c0248563811e6bb0a525f8c0bde39b1a89d35f",
+      "inputHash": "df29390b1270063b53ec186f58c669de872fc154239e7e82dd25ce10ef20202a",
+      "outputHash": "da3c34393b25df35cad42fc70859cac97bde6765aad24ea5d5494c01ce4a3dbd"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

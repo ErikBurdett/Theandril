@@ -1,11 +1,14 @@
 import { z } from 'zod';
-import { BUILDINGS, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, rosterVersionSchema } from '@theandril/content';
-import { BIOME, deriveBiomes, deriveWaterDepth, isPassable, isValidBiome, neighbors, SeededRandom } from '@theandril/mapgen';
+import { BUILDINGS, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
+import { BIOME, deriveBiomes, deriveWaterDepth, isLake, isPassable, isValidBiome, neighbors, SeededRandom, validateHydrology } from '@theandril/mapgen';
+import { emptyRoadState, roadStateSchema, validateRoads } from './roads';
 import { applyCommand, initializeLegacyLand, MAX_EVENTS } from './simulation';
 import { emptyLandState, landStateSchema, landStateV10Schema, validateLand, validateLandKnowledge } from './territory';
 import { cellsWithin, rebuildIndexes } from './visibility';
 import type { Army, CampaignBattle, GameCommand, GameState } from './types';
-import { battleStateSchema, legacyBattleStateSchema } from './combat';
+import { battleStateSchema, legacyBattleStateSchema, schema13BattleStateSchema } from './combat';
+import { arcaneResearchSchema, validateArcaneResearch } from './magic';
+import { battleAbilityStateSchema, validateBattleAbilities } from './battle-abilities';
 import { MAX_BATTLE_REPORTS } from './warfare';
 import { createDiplomacy, diplomacyStateSchema, validateDiplomacy } from './diplomacy';
 import { captureDecisionSchema, ruinSchema, siegeSchema, validateSieges } from './siege';
@@ -15,9 +18,12 @@ import { movementRouteSchema, validateMovement } from './movement';
 import { armyMovement, effectiveArmyMovement, armySight } from './army-composition';
 import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
 import { LEGACY_UNIT_IDS, type RulesVersion } from './rules';
-import { characterAftermathSchema, characterBattleSnapshotSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
+import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 11;
+export const SAVE_VERSION = 14;
+export const PRE_BATTLE_CONTENT_HASH = '07a58d4f';
+export const PRE_EXPANDED_ROSTER_CONTENT_HASH = '3c54fb02';
+export const PRE_GEOGRAPHY_CONTENT_HASH = '3c54fb02';
 export const PRE_CITY_RESEARCH_CONTENT_HASH = '4c2fed32';
 export const PRE_ROSTER_CONTENT_HASH = '9418e598';
 export const PRE_TERRITORY_CONTENT_HASH = '257e1e91';
@@ -85,19 +91,23 @@ export const schema7CampaignBattleSchema = schema6CampaignBattleSchema.extend({
 }).strict();
 const transportAftermathSchema = z.object({ armyId: id, name, lostFormationIds: z.array(id).min(1).max(20), outcome: z.enum(['damaged', 'lost']) }).strict();
 const transportSnapshotSchema = z.object({ armyId: id, fleetId: id, factionId: id, name, formationIds: z.array(id).min(1).max(20) }).strict();
-export const campaignBattleSchema = schema7CampaignBattleSchema.extend({
+export const schema13CampaignBattleSchema = schema7CampaignBattleSchema.extend({
   rulesVersion: z.union([z.literal(5), z.literal(6), z.literal(7), z.literal(8)]),
   domain: z.enum(['land', 'naval']), transportAftermath: z.array(transportAftermathSchema).max(320),
   transportSnapshots: z.array(transportSnapshotSchema).max(320),
   defenderIds: z.array(id).min(1).max(20),
   initialStrengths: z.array(z.object({ armyId: id, strength: integer.positive() }).strict()).min(2).max(21),
   aftermath: z.array(z.object({ armyId: id, strength: integer, cell: cell.nullable(), outcome: z.enum(['held', 'advanced', 'retreated', 'destroyed']) }).strict()).max(21),
-  combat: battleStateSchema,
+  combat: schema13BattleStateSchema,
   formationBindings: z.array(z.object({ battleFormationId: id, formationId: id, armyId: id.nullable() }).strict()).min(2).max(40),
   formationStrengths: z.array(z.object({ formationId: id, strength: integer.positive() }).strict()).min(2).max(40),
   formationAftermath: z.array(z.object({ formationId: id, strength: integer }).strict()).max(40),
-  characterSnapshots: z.array(characterBattleSnapshotSchema).max(63), characterAftermath: z.array(characterAftermathSchema).max(63),
+  characterSnapshots: z.array(schema13CharacterBattleSnapshotSchema).max(63), characterAftermath: z.array(characterAftermathSchema).max(63),
   usedAbilities: z.array(z.object({ characterId: id, abilityId: id }).strict()).max(21),
+}).strict();
+export const campaignBattleSchema = schema13CampaignBattleSchema.extend({
+  rulesVersion: z.union([z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9)]),
+  combat: battleStateSchema, characterSnapshots: z.array(characterBattleSnapshotSchema).max(63), abilityState: battleAbilityStateSchema.optional(),
 }).strict();
 const stateV1Schema = z.object(stateV1Shape).strict();
 const stateV2Shape = {
@@ -121,11 +131,19 @@ const stateV4Schema = stateV3Schema.extend({
 const stateV5Schema = stateV4Schema.extend({ world: worldV7Schema, routes: z.array(movementRouteSchema).max(60_000) }).strict();
 const stateV6Schema = stateV5Schema.extend({ armies: z.array(armyV7Schema).max(60_000), battle: schema6CampaignBattleSchema.nullable(), battleReports: z.array(schema6CampaignBattleSchema).max(MAX_BATTLE_REPORTS) }).strict();
 const stateV7Schema = stateV6Schema.extend({ characters: z.array(legacyCharacterSchema).max(4608), battle: schema7CampaignBattleSchema.nullable(), battleReports: z.array(schema7CampaignBattleSchema).max(MAX_BATTLE_REPORTS) }).strict();
-const stateV8Schema = stateV7Schema.extend({ world: worldV8Schema, armies: z.array(armySchema).max(60_000), characters: z.array(characterSchema).max(4608), battle: campaignBattleSchema.nullable(), battleReports: z.array(campaignBattleSchema).max(MAX_BATTLE_REPORTS), transports: z.array(z.object({ armyId: id, fleetId: id }).strict()).max(60_000) }).strict();
+const stateV8Schema = stateV7Schema.extend({ world: worldV8Schema, armies: z.array(armySchema).max(60_000), characters: z.array(schema13CharacterSchema).max(4608), battle: schema13CampaignBattleSchema.nullable(), battleReports: z.array(schema13CampaignBattleSchema).max(MAX_BATTLE_REPORTS), transports: z.array(z.object({ armyId: id, fleetId: id }).strict()).max(60_000) }).strict();
 const stateV9Schema = stateV8Schema.extend({ world: worldSchema, land: landStateV10Schema }).strict();
-const stateV10Schema = stateV9Schema.extend({ rosterVersion: rosterVersionSchema }).strict();
-const stateSchema = stateV10Schema.extend({ land: landStateSchema }).strict();
-const saveSchema = z.object({ version: z.literal(11), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+// This schema must never inherit a later roster enum through an expanded alias.
+const stateV10Schema = stateV9Schema.extend({ rosterVersion: legacyRosterVersionSchema }).strict();
+const stateV11Schema = stateV10Schema.extend({ land: landStateSchema }).strict();
+const modernWorldSchema = worldSchema.extend({ generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6), z.literal(7)]), layout: z.enum(['legacy', 'continents', 'islands', 'archipelago']), hydrology: z.array(z.number().int().min(0).max(63)).max(350_000) }).strict();
+const stateV12Schema = stateV11Schema.extend({ world: modernWorldSchema, roads: roadStateSchema }).strict();
+const stateV13Schema = stateV12Schema.extend({ rosterVersion: rosterVersionSchema }).strict();
+const stateSchema = stateV13Schema.extend({ characters: z.array(characterSchema).max(4608), battle: campaignBattleSchema.nullable(), battleReports: z.array(campaignBattleSchema).max(MAX_BATTLE_REPORTS), arcaneResearch: arcaneResearchSchema }).strict();
+const saveSchema = z.object({ version: z.literal(14), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV13Schema = saveSchema.extend({ version: z.literal(13), state: stateV13Schema }).strict();
+const saveV12Schema = saveSchema.extend({ version: z.literal(12), state: stateV12Schema }).strict();
+const saveV11Schema = saveSchema.extend({ version: z.literal(11), state: stateV11Schema }).strict();
 const saveV10Schema = saveSchema.extend({ version: z.literal(10), state: stateV10Schema }).strict();
 const saveV9Schema = saveSchema.extend({ version: z.literal(9), state: stateV9Schema }).strict();
 const saveV8Schema = saveSchema.extend({ version: z.literal(8), state: stateV8Schema }).strict();
@@ -185,10 +203,21 @@ function sortedExploredCells(cells: Iterable<number>): number[] {
   return copied;
 }
 
+function canonicalRoads(state: GameState) {
+  const plain = (value: object) => { const prototype: unknown = Object.getPrototypeOf(value); if (prototype !== Object.prototype && prototype !== null) throw new Error('Canonical roads require plain data records.'); };
+  plain(state.roads); plain(state.roads.edges); plain(state.roads.projects); plain(state.roads.known);
+  for (const project of Object.values(state.roads.projects)) plain(project);
+  for (const known of Object.values(state.roads.known)) plain(known);
+  const roads = roadStateSchema.parse(state.roads);
+  roads.projects = Object.fromEntries(Object.entries(roads.projects).sort(([a], [b]) => a < b ? -1 : 1));
+  roads.known = Object.fromEntries(Object.entries(roads.known).sort(([a], [b]) => a < b ? -1 : 1));
+  return roads;
+}
+
 function canonicalPayload(state: GameState) {
   const payload = {
       turn: state.turn, nextId: state.nextId, turnOwnerId: state.turnOwnerId,
-      world: { seed: state.world.seed, width: state.world.width, height: state.world.height, terrain: [...state.world.terrain], fertility: [...state.world.fertility], starts: [...state.world.starts], biome: [...state.world.biome], generatorVersion: state.world.generatorVersion, waterDepth: [...state.world.waterDepth] },
+      world: { seed: state.world.seed, width: state.world.width, height: state.world.height, terrain: [...state.world.terrain], fertility: [...state.world.fertility], starts: [...state.world.starts], biome: [...state.world.biome], generatorVersion: state.world.generatorVersion, waterDepth: [...state.world.waterDepth], layout: state.world.layout, hydrology: [...state.world.hydrology] },
       factions: state.factions.map(faction => ({ id: faction.id, definitionId: faction.definitionId, name: faction.name, color: faction.color, treasury: faction.treasury, knowledge: faction.knowledge })),
       armies: Object.values(state.armies).sort(compareId).map(army => ({ id: army.id, factionId: army.factionId, name: army.name, cell: army.cell, movement: army.movement, formations: army.formations.map(item => armyFormationSchema.parse(item)) })),
       settlements: Object.values(state.settlements).sort(compareId).map(settlement => ({ id: settlement.id, factionId: settlement.factionId, name: settlement.name, cell: settlement.cell, population: settlement.population, food: settlement.food, buildings: [...settlement.buildings].sort(), queue: settlement.queue.map(queued => ({ itemId: queued.itemId, progress: queued.progress })), founderFactionId: settlement.founderFactionId, devastation: settlement.devastation, occupationTurns: settlement.occupationTurns })),
@@ -208,13 +237,17 @@ function canonicalPayload(state: GameState) {
       transports: Object.entries(state.transports).sort(([a], [b]) => a < b ? -1 : 1).map(([armyId, fleetId]) => ({ armyId, fleetId })),
       land: canonicalLand(state),
       rosterVersion: state.rosterVersion,
+      roads: canonicalRoads(state),
+      arcaneResearch: arcaneResearchSchema.parse(Object.entries(state.arcaneResearch).sort(([a], [b]) => a < b ? -1 : 1).map(([factionId, discoveries]) => ({ factionId, discoveries: [...discoveries] }))),
   };
   return payload;
 }
 
 /** Old reports retain their original battlefield IDs and factual logs. */
 export function battleReportForVersion(battle: CampaignBattle, version: RulesVersion) {
-  if (version >= 8) return campaignBattleSchema.parse(battle);
+  if (version >= 14) return campaignBattleSchema.parse(battle);
+  if (battle.rulesVersion >= 9 || battle.abilityState || battle.characterSnapshots.some(item => item.aptitudes || item.spellIds)) throw new Error('This battle cannot be represented by pre-ability rules.');
+  if (version >= 8) return schema13CampaignBattleSchema.parse(battle);
   if (battle.rulesVersion >= 8 || battle.domain !== 'land' || battle.transportAftermath.length || battle.transportSnapshots.length || battle.characterSnapshots.some(item => item.learnedSkillIds.length)) throw new Error('This battle cannot be represented by pre-naval rules.');
   const { domain: _domain, transportAftermath: _transport, transportSnapshots: _cargo, ...beforeNaval } = battle;
   const schema7 = { ...beforeNaval, characterSnapshots: beforeNaval.characterSnapshots.map(({ learnedSkillIds: _learned, ...snapshot }) => snapshot) };
@@ -254,8 +287,19 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
-  const currentPayload = canonicalPayload(state);
-  if (version === 11) return serializeEnvelope(SAVE_VERSION, CONTENT_HASH, currentPayload);
+  const canonical = canonicalPayload(state);
+  if (version === 14) return serializeEnvelope(SAVE_VERSION, CONTENT_HASH, canonical);
+  if (canonical.arcaneResearch.some(item => item.discoveries.length) || canonical.characters.some(item => item.aptitudes || !v9Characters.has(item.definitionId))) throw new Error('This campaign has magic unavailable in the frozen pre-ability pack.');
+  const { arcaneResearch: _arcane, ...beforeAbilities } = canonical;
+  const modernPayload = { ...beforeAbilities, battle: beforeAbilities.battle ? schema13CampaignBattleSchema.parse(beforeAbilities.battle) : null, battleReports: beforeAbilities.battleReports.map(battle => schema13CampaignBattleSchema.parse(battle)) };
+  if (version === 13) return serializeEnvelope(13, PRE_BATTLE_CONTENT_HASH, modernPayload);
+  assertLegacyRoster(modernPayload);
+  if (version === 12) return serializeEnvelope(12, PRE_EXPANDED_ROSTER_CONTENT_HASH, modernPayload);
+  if (state.world.generatorVersion > 4 || state.world.layout !== 'legacy' || state.world.hydrology.some(value => value !== 0) || Object.keys(state.roads.edges).length || Object.keys(state.roads.projects).length || Object.values(state.roads.known).some(cells => Object.keys(cells).length)) throw new Error('This campaign has geography or roads unavailable in historical rules.');
+  const { roads: _roads, ...priorPayload } = modernPayload;
+  const { layout: _layout, hydrology: _hydrology, ...priorWorld } = priorPayload.world;
+  const currentPayload = { ...priorPayload, world: worldSchema.parse(priorWorld) };
+  if (version === 11) return serializeEnvelope(11, PRE_GEOGRAPHY_CONTENT_HASH, currentPayload);
   if (Object.values(currentPayload.land.settlements).some(land => land.borderGrowth !== 0)) throw new Error('This campaign has border progress unavailable in pre-city-growth rules.');
   const previousLand = { ...currentPayload.land, settlements: Object.fromEntries(Object.entries(currentPayload.land.settlements).map(([id, { borderGrowth: _growth, ...land }]) => [id, land])) };
   const beforeCityGrowth = { ...currentPayload, land: landStateV10Schema.parse(previousLand) };
@@ -319,6 +363,10 @@ function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error('Invalid save: ' + message);
 }
 
+function assertLegacyRoster(state: { rosterVersion: number; factions: readonly { definitionId: string }[] }): void {
+  assert(state.rosterVersion <= 3 && state.factions.every(faction => (FACTION_ROSTERS[3] as readonly string[]).includes(faction.definitionId)), 'culture or roster unavailable in the frozen pre-expansion pack');
+}
+
 /** IDs, not the current pack's length: later additions cannot masquerade as old content. */
 const v9Units = new Set(['unit.colonist', 'unit.scout', 'unit.guard', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'unit.transport', 'unit.coastal_warship', 'unit.ocean_warship']);
 const v9Buildings = new Set(['building.granary', 'building.workshop', 'building.market', 'building.archive', 'building.harbor']);
@@ -347,12 +395,32 @@ function assertV9Content(state: Pick<z.infer<typeof stateV9Schema>, 'world' | 'f
 
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
+  const migrateV13 = (prior: z.infer<typeof saveV13Schema>): z.infer<typeof saveSchema> => {
+    assert(prior.contentHash === PRE_BATTLE_CONTENT_HASH, 'v13 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v13 snapshot checksum does not match its contents');
+    assert([...prior.state.characters, ...[...(prior.state.battle ? [prior.state.battle] : []), ...prior.state.battleReports].flatMap(battle => battle.characterSnapshots)].every(character => v9Characters.has(character.definitionId)), 'v13 references a character absent from its frozen pack');
+    const state = stateSchema.parse({ ...prior.state, arcaneResearch: prior.state.factions.map(faction => ({ factionId: faction.id, discoveries: [] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1) });
+    return { ...prior, version: 14, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
+  };
+  const migrateV12 = (prior: z.infer<typeof saveV12Schema>): z.infer<typeof saveSchema> => {
+    assert(prior.contentHash === PRE_EXPANDED_ROSTER_CONTENT_HASH, 'v12 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v12 snapshot checksum does not match its contents');
+    assertLegacyRoster(prior.state);
+    return migrateV13({ ...prior, version: 13, contentHash: PRE_BATTLE_CONTENT_HASH });
+  };
+  const migrateV11 = (prior: z.infer<typeof saveV11Schema>): z.infer<typeof saveSchema> => {
+    assert(prior.contentHash === PRE_GEOGRAPHY_CONTENT_HASH, 'v11 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v11 snapshot checksum does not match its contents');
+    assertLegacyRoster(prior.state);
+    const state = stateV12Schema.parse({ ...prior.state, world: { ...prior.state.world, layout: 'legacy', hydrology: Array<number>(prior.state.world.terrain.length).fill(0) }, roads: emptyRoadState(prior.state.factions.map(faction => faction.id)) });
+    return migrateV12({ version: 12, gameVersion: '0.1.0', contentHash: PRE_EXPANDED_ROSTER_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
+  };
   const migrateV10 = (prior: z.infer<typeof saveV10Schema>): z.infer<typeof saveSchema> => {
     assert(prior.contentHash === PRE_CITY_RESEARCH_CONTENT_HASH, 'v10 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v10 snapshot checksum does not match its contents');
     assertV9Content(prior.state, 10);
-    const state = stateSchema.parse({ ...prior.state, land: { ...prior.state.land, settlements: Object.fromEntries(Object.entries(prior.state.land.settlements).map(([id, land]) => [id, { ...land, borderGrowth: 0 }])) } });
-    return { version: 11, gameVersion: '0.1.0', contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
+    const state = stateV11Schema.parse({ ...prior.state, land: { ...prior.state.land, settlements: Object.fromEntries(Object.entries(prior.state.land.settlements).map(([id, land]) => [id, { ...land, borderGrowth: 0 }])) } });
+    return migrateV11({ version: 11, gameVersion: '0.1.0', contentHash: PRE_GEOGRAPHY_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
   const migrateV9 = (prior: z.infer<typeof saveV9Schema>): z.infer<typeof saveSchema> => {
     assert(prior.contentHash === PRE_ROSTER_CONTENT_HASH, 'v9 content hash is not a recognized compatible pack');
@@ -474,6 +542,9 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   if (version === 8) return migrateV8(saveV8Schema.parse(raw));
   if (version === 9) return migrateV9(saveV9Schema.parse(raw));
   if (version === 10) return migrateV10(saveV10Schema.parse(raw));
+  if (version === 11) return migrateV11(saveV11Schema.parse(raw));
+  if (version === 12) return migrateV12(saveV12Schema.parse(raw));
+  if (version === 13) return migrateV13(saveV13Schema.parse(raw));
   if (version !== SAVE_VERSION) throw new Error(`Unsupported save version ${version}.`);
   return saveSchema.parse(raw);
 }
@@ -491,6 +562,10 @@ export function deserializeGame(text: string): GameState {
   assert(totalCells <= 350_000, 'world exceeds the supported cell limit');
   assert(data.world.terrain.length === totalCells && data.world.fertility.length === totalCells && data.world.biome.length === totalCells && data.world.waterDepth.length === totalCells, 'world array dimensions disagree');
   assert(data.world.waterDepth.every((depth, cell) => data.world.terrain[cell] === 0 ? depth === 1 || depth === 2 : depth === 0), 'water depth disagrees with physical terrain');
+  assert(data.world.hydrology.length === totalCells, 'hydrology dimensions disagree');
+  assert(data.world.hydrology.every((value, cell) => !isLake(value) || data.world.waterDepth[cell] === 1), 'freshwater lakes must use shallow water depth');
+  assert(data.world.generatorVersion < 5 ? data.world.layout === 'legacy' && data.world.hydrology.every(value => value === 0) : data.world.layout !== 'legacy', 'geography does not match generator version');
+  validateHydrology({ width: data.world.width, height: data.world.height, terrain: Uint8Array.from(data.world.terrain), hydrology: Uint8Array.from(data.world.hydrology) });
   assert(data.world.biome.every((biome, cell) => {
     const terrain = data.world.terrain[cell];
     if (data.world.generatorVersion < 4 && biome > 9) return false;
@@ -610,7 +685,9 @@ export function deserializeGame(text: string): GameState {
     const serial = Number(battle.id.slice('battle.'.length));
     const expectedSeed = new SeededRandom((data.world.seed ^ serial) >>> 0).nextUint32();
     assert(battle.combat.seed === expectedSeed, 'battle random stream has the wrong seed');
-    assert(pending ? !battle.combat.result : battle.combat.result && battle.combat.round > 0, 'pending battle/report completion state disagrees');
+    const terminalCast = battle.rulesVersion === 9 && battle.abilityState?.sources.some(source => source.abilityId === 'spell.cinder_thread' && source.usesRemaining < 2)
+      && (battle.combat.result?.reason === 'formations destroyed' || battle.combat.result?.reason === 'morale rout');
+    assert(pending ? !battle.combat.result : battle.combat.result && (battle.combat.round > 0 || terminalCast), 'pending battle/report completion state disagrees');
     const formations = [...battle.combat.attacker, ...battle.combat.defender];
     const bindings = new Map(battle.formationBindings.map(binding => [binding.battleFormationId, binding]));
     const formationIds = new Set(battle.formationBindings.map(binding => binding.formationId));
@@ -773,10 +850,12 @@ export function deserializeGame(text: string): GameState {
   if (data.battle) validateBattle(data.battle, true);
   for (const report of data.battleReports) validateBattle(report, false);
   const state: GameState = {
+    arcaneResearch: Object.fromEntries(data.arcaneResearch.map(item => [item.factionId, item.discoveries])),
+    roads: data.roads,
     rosterVersion: data.rosterVersion,
     land: data.land,
     turn: data.turn, nextId: data.nextId, turnOwnerId: data.turnOwnerId, pace: data.pace,
-    world: { ...data.world, terrain: Uint8Array.from(data.world.terrain), fertility: Uint8Array.from(data.world.fertility), biome: Uint8Array.from(data.world.biome), waterDepth: Uint8Array.from(data.world.waterDepth) },
+    world: { ...data.world, terrain: Uint8Array.from(data.world.terrain), fertility: Uint8Array.from(data.world.fertility), biome: Uint8Array.from(data.world.biome), waterDepth: Uint8Array.from(data.world.waterDepth), hydrology: Uint8Array.from(data.world.hydrology) },
     factions: data.factions, armies: Object.fromEntries(data.armies.map(army => [army.id, army])),
     settlements: Object.fromEntries(data.settlements.map(settlement => [settlement.id, settlement])),
     explored, events: data.events, wars: data.wars, battle: data.battle, battleReports: data.battleReports,
@@ -793,6 +872,10 @@ export function deserializeGame(text: string): GameState {
   validateProgression(state);
   assert(Object.keys(state.characters).length === data.characters.length && data.characters.every((character, i) => i === 0 || character.id > (data.characters[i - 1]?.id ?? '')), 'duplicate or unordered character records');
   validateCharacters(state);
+  assert(data.arcaneResearch.length === state.factions.length && data.arcaneResearch.every((item, i) => i === 0 || item.factionId > data.arcaneResearch[i - 1]!.factionId), 'duplicate or unordered arcane research');
+  validateArcaneResearch(state);
+  if (state.battle) validateBattleAbilities(state, state.battle, true);
+  for (const report of state.battleReports) validateBattleAbilities(state, report, false);
   rebuildCharacterIndexes(state);
   assert(Object.keys(state.transports).length === data.transports.length && data.transports.every((item, index) => index === 0 || item.armyId > (data.transports[index - 1]?.armyId ?? '')), 'duplicate or unordered transport bindings');
   validateTransports(state);
@@ -822,6 +905,7 @@ export function deserializeGame(text: string): GameState {
   }
   if (originalVersion < 9) initializeLegacyLand(state);
   validateLand(state);
+  validateRoads(state, requiredSight);
   for (const faction of state.factions) validateLandKnowledge(state, faction.id, requiredSight.get(faction.id)!);
   rebuildIndexes(state);
   return state;

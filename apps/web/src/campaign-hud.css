@@ -1,0 +1,149 @@
+/* Spatial layout only. Hearth material/color rules live in hearth-theme.css. */
+.application.campaign-session { height: 100dvh; min-height: 600px; display: flex; flex-direction: column; }
+.campaign-topbar { position: relative; z-index: 20; flex: none; }
+.application .masthead { min-height: 70px; padding: 10px 22px; gap: 24px; }
+.application .masthead .crest { height: 42px; width: 36px; }
+.application .wordmark { gap: 10px; }
+.application .wordmark h1 { font-size: calc(26px * var(--text-scale,1)); }
+.application .wordmark .eyebrow { margin-bottom: 3px; }
+.hud-realm { min-width: 0; }
+.hud-realm strong { font: calc(17px * var(--text-scale,1))/1.3 Georgia,serif; }
+.application .resources { gap: 26px; }
+.application .resources > div { min-width: 50px; }
+.application .resources strong { font-size: calc(21px * var(--text-scale,1)); }
+.application .campaign-tools { min-height: 40px; padding: 5px 200px 5px 22px; gap: 12px; }
+.application .campaign-options { position: absolute; right: 16px; bottom: 0; margin: 0; padding: 0; border: 0; }
+.application .campaign-options > summary { min-height: 44px; padding: 12px; cursor: pointer; font-size: calc(12px * var(--text-scale,1)); }
+.application .campaign-options .options-content { position: absolute; z-index: 40; right: 0; top: 100%; width: min(590px,calc(100vw - 24px)); max-height: min(620px,calc(100dvh - 150px)); overflow: auto; overscroll-behavior: contain; padding: 20px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.application .campaign-options .options-content > .field-help { grid-column: 1/-1; }
+.application .campaign-options:not([open]) .options-content { display: none; }
+.application .watch-controls { flex: 1 1 100%; }
+.application .watch-controls > #spectator-fog-help { flex-basis: 100%; }
+.application.campaign-session .campaign { display: block; flex: 1 1 auto; height: auto; min-height: 260px; width: 100%; }
+.application.campaign-session .campaign > .map-section { height: 100%; min-height: 0; width: 100%; border: 0; }
+.application .campaign:not(.battle-active) .map-host { position: absolute; inset: 0; height: 100%; width: 100%; }
+.application .map-title { left: 20px; top: 15px; padding: 10px 14px; pointer-events: none; }
+.application .map-order-hint { top: 96px; left: 20px; max-width: min(420px,calc(100% - 160px)); }
+.application .map-compass { display: none; }
+.application .map-legend { display: none; }
+.hud-tools { position: absolute; top: 15px; right: 16px; z-index: 4; display: flex; flex-direction: column; gap: 6px; padding: 7px; max-height: calc(100% - 94px); overflow: auto; scrollbar-width: thin; overscroll-behavior: contain; border-radius: 8px; }
+.hud-tools > button { display: flex; align-items: center; gap: 10px; width: 146px; min-height: 44px; padding: 8px 10px; text-align: left; font-size: calc(12px * var(--text-scale,1)); line-height: 1.3; }
+.hud-icon { width: 24px; height: 24px; flex: none; }
+.application .map-controls { left: 18px; bottom: 16px; z-index: 4; gap: 5px; padding: 5px; border-radius: 6px; max-width: calc(100% - 36px); }
+.application .campaign .map-controls > button { min-height: 44px; font-size: calc(12px * var(--text-scale,1)); }
+.application .campaign .map-controls > button[aria-label="Map guide"] { width: 44px; padding: 8px; }
+.application .command-bar { position: relative; bottom: auto; flex: none; display: grid; grid-template-columns: minmax(240px,1fr) auto auto; align-items: center; gap: 10px 22px; padding: 12px 22px 0; min-height: 0; }
+.hud-selection { display: flex; align-items: center; gap: 13px; min-width: 0; }
+.hud-selection > .faction-art { flex: none; }
+.hud-selection-copy { min-width: 0; }
+.hud-selection-copy > small,.hud-selection-copy > strong,.hud-selection-copy > span { display: block; }
+.hud-selection-copy > small { text-transform: uppercase; letter-spacing: .13em; font-size: calc(10px * var(--text-scale,1)); }
+.hud-selection-copy > strong { font: calc(19px * var(--text-scale,1))/1.3 Georgia,serif; overflow-wrap: anywhere; }
+.hud-selection-copy > span { font-size: calc(12px * var(--text-scale,1)); }
+.hud-selection-actions { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.hud-selection-actions button { min-height: 44px; font-size: calc(12px * var(--text-scale,1)); padding: 8px 12px; }
+.hud-next-actions { min-width: 0; }
+.hud-next-actions > div { display: grid; grid-template-columns: 44px auto 44px auto; gap: 5px; margin-top: 7px; }
+.hud-next-actions button { min-height: 44px; padding: 8px; font-size: calc(12px * var(--text-scale,1)); }
+.hud-next-actions [data-testid="next-action-notice"] { display: block; max-width: 330px; overflow-wrap: anywhere; }
+.hud-next-actions .field-help { font-size: calc(11px * var(--text-scale,1)); }
+.hud-end-turn { display: flex; gap: 14px; align-items: center; justify-content: flex-end; }
+.application .hud-end-turn .turn { min-width: 70px; margin: 0; text-align: center; }
+.application .hud-end-turn .turn strong { font-size: calc(23px * var(--text-scale,1)); }
+.application .hud-end-turn .end-turn { min-width: 125px; min-height: 60px; padding: 12px 16px; }
+.application .command-bar .feedback { grid-column: 1/-1; width: 100%; padding: 7px 0; font-size: calc(12px * var(--text-scale,1)); gap: 9px; }
+.application .command-bar .feedback .status-mark { font-size: 10px; }
+.application .art-dev-launch { flex: none; padding: 3px 12px; font-size: 10px; min-height: 0; }
+.application .art-dev-launch button { padding: 2px 8px; min-height: 24px; font-size: 10px; }
+.campaign-window { width: min(860px,calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px); padding: 0; margin: auto; overflow: hidden; font-size: calc(14px * var(--text-scale,1)); }
+.campaign-window[open] { display: flex; flex-direction: column; }
+.campaign-window::backdrop { background: #100b086b; }
+.campaign-window-header { display: flex; align-items: flex-start; justify-content: space-between; flex: none; gap: 18px; padding: 20px 22px; }
+.campaign-window-header > div { min-width: 0; padding-right: 40px; }
+.campaign-window-header h2 { margin: 5px 0; overflow-wrap: anywhere; }
+.campaign-window-header p { font-size: .85em; }
+.campaign-window-header > button { width: 44px; min-height: 44px; padding: 0; font-size: 25px; flex: none; }
+.campaign-window-body { min-height: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; padding: 20px 24px 24px; }
+.campaign-window :is(button,input,select,summary) { min-height: 44px; scroll-margin-block: 12px; }
+.campaign-window input[type=checkbox] { min-height: 20px; }
+.campaign-window :is(.inspector,.strategic-orders) { padding: 0; margin: 0; border: 0; min-width: 0; }
+.campaign-window .window-map-link { display: block; margin: 0 0 16px; }
+.campaign-window .inspector h2 { font-size: calc(25px * var(--text-scale,1)); }
+.campaign-window .registry { max-height: none; overflow: visible; }
+.campaign-window .registry-item { min-height: 66px; }
+.campaign-window .registry-item strong { font-size: 1em; }
+.campaign-window .registry-item small { font-size: .85em; }
+.campaign-window .realm-command-strip { margin: 14px 0; }
+.campaign-window .chronicle { margin: 0; padding: 0; }
+.campaign-window .chronicle ol { max-height: none; }
+.campaign-window .battle-history { margin: 0; }
+.map-guide p { margin: 14px 0 22px; line-height: 1.8; }
+.army-quick-actions { display: grid; gap: 8px; }
+.army-quick-actions .found-form { margin-top: 0; }
+.army-quick-actions .found-form .field-help { display: none; }
+.army-quick-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.army-quick-links button { padding: 8px; font-size: .92em; }
+/* Battles retain their tested document-flow field and responsive order deck. */
+.application.campaign-session:has(.battle-active) { height: auto; }
+.application.campaign-session .campaign.battle-active { flex: none; height: auto; min-height: 0; }
+.application.campaign-session .campaign.battle-active > .map-section { height: auto; }
+.battle-active .hud-tools { display: none; }
+@media(max-width:1100px) {
+  .hud-realm { display: none; }
+  .application .command-bar { grid-template-columns: minmax(220px,1fr) auto; gap: 10px 16px; }
+  .hud-next-actions { grid-column: 1; grid-row: 2; }
+  .hud-end-turn { grid-column: 2; grid-row: 1/3; }
+  .hud-next-actions > div { grid-template-columns: 44px minmax(70px,1fr) 44px minmax(70px,1fr); }
+}
+@media(max-width:650px) {
+  .application.campaign-session { min-height: 600px; }
+  .application .masthead { min-height: 60px; padding: 9px 12px; gap: 12px; }
+  .application .masthead .crest { display: none; }
+  .application .wordmark h1 { font-size: calc(20px * var(--text-scale,1)); letter-spacing: 1px; }
+  .application .wordmark .eyebrow { display: none; }
+  .application .resources { gap: 13px; }
+  .application .resources > div { min-width: 0; }
+  .application .resources > div:last-child { display: none; }
+  .application .resources strong { font-size: calc(17px * var(--text-scale,1)); }
+  .application .resources small { font-size: 9px; }
+  .application .campaign-tools { padding: 3px 172px 3px 12px; min-height: 44px; }
+  .application .campaign-tools .archive-note { display: none; }
+  .application .campaign-options { right: 4px; }
+  .application .campaign-options > summary { padding-inline: 8px; font-size: calc(11px * var(--text-scale,1)); }
+  .application .campaign-options .options-content { right: 4px; grid-template-columns: 1fr; width: calc(100vw - 16px); padding: 16px; }
+  .application .watch-controls { width: calc(100vw - 24px); flex: none; }
+  .application .campaign-tools:has(.watch-controls) { padding-right: 12px; padding-bottom: 44px; }
+  .application .campaign-tools:has(.watch-controls) > .campaign-pace { margin-bottom: 4px; }
+  .application .map-title { display: none; }
+  .application .hud-tools { flex-direction: row; top: 9px; left: 9px; right: 9px; padding: 4px; max-height: none; gap: 4px; border-radius: 5px; }
+  .hud-tools > button { width: 80px; flex: none; flex-direction: column; gap: 4px; padding: 6px; min-height: 64px; text-align: center; font-size: calc(11px * var(--text-scale,1)); }
+  .hud-tools .hud-icon { width: 21px; height: 21px; }
+  .application .map-order-hint { top: 94px; left: 12px; max-width: calc(100% - 24px); padding: 6px 9px; font-size: calc(10px * var(--text-scale,1)); }
+  .application .map-order-hint > span { display: none; }
+  .application .map-controls { left: 8px; bottom: 8px; max-width: calc(100% - 16px); flex-wrap: nowrap; overflow-x: auto; }
+  .application .map-controls > button { flex: none; }
+  .application .command-bar { padding: 9px 12px 0; gap: 8px; grid-template-columns: minmax(0,1fr) 105px; }
+  .hud-selection { gap: 6px; }
+  .hud-selection > .faction-art { display: none; }
+  .hud-selection-copy > strong { font-size: calc(16px * var(--text-scale,1)); }
+  .hud-selection-copy > span { font-size: calc(10px * var(--text-scale,1)); }
+  .hud-selection-actions { margin-top: 5px; gap: 4px; }
+  .hud-selection-actions button { padding: 6px 8px; font-size: calc(11px * var(--text-scale,1)); }
+  .hud-selection-actions button + button { display: none; }
+  .hud-end-turn { flex-direction: column; gap: 4px; grid-row: 1; }
+  .application .hud-end-turn .end-turn { min-width: 0; width: 100%; min-height: 52px; padding: 8px; }
+  .application .hud-end-turn .turn strong { font-size: calc(21px * var(--text-scale,1)); }
+  .hud-end-turn .turn small { display: none; }
+  .hud-next-actions { grid-column: 1/-1; grid-row: 2; }
+  .hud-next-actions > div { margin: 0; gap: 4px; }
+  .hud-next-actions [data-testid=next-action-counts] { display: none; }
+  .hud-next-actions [data-testid=next-action-notice]:empty { display: none; }
+  .application .command-bar .feedback { padding: 5px 0; font-size: calc(10px * var(--text-scale,1)); }
+  .campaign-window { width: calc(100vw - 16px); max-height: calc(100dvh - 16px); }
+  .campaign-window-header { padding: 14px; gap: 10px; }
+  .campaign-window-header > div { padding-right: 0; }
+  .campaign-window-header h2 { font-size: calc(24px * var(--text-scale,1)); }
+  .campaign-window-body { padding: 14px; }
+  .campaign-window .registry-item { padding: 10px 8px; }
+  .campaign-window .window-map-link { width: 100%; }
+}

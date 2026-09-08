@@ -7,6 +7,27 @@ const cell = (overrides: Partial<ObservedCell> = {}): ObservedCell => ({ cell: 0
 const rich = () => packCells([cell({ cell: 9, terrain: 3, biome: 11, waterDepth: 0, fertility: 255, visible: true, featureMask: 127, settlementId: 'settlement.9', factionId: 'faction.ashen_compact', improvementId: 'improvement.quarry' }), cell({ cell: 2, settlementId: null })]);
 
 describe('packed observed-cell transport', () => {
+  it('preserves v1 packets and roundtrips optional v2 hydrology/roads with absent, undefined and zero distinct', () => {
+    expect(packCells([cell()]).version).toBe(1);
+    const input = [cell(), cell({ cell: 1, hydrology: 0 }), cell({ cell: 2, hydrology: undefined, roadMask: undefined }), cell({ cell: 3, hydrology: 33, roadMask: 63 }), cell({ cell: 4, roadMask: 0 })];
+    const packet = packCells(input);
+    expect(packet.version).toBe(2); expect(packet.scalars.length).toBe(input.length * 7);
+    expect(cellTransferBuffers(packet).reduce((sum, buffer) => sum + buffer.byteLength, 0)).toBe(input.length * 11);
+    expect(unpackCells(structuredClone(packet, { transfer: cellTransferBuffers(packet) }))).toStrictEqual(input);
+  });
+
+  it('rejects malformed geography masks and presence bits before interpreting v2 cells', () => {
+    for (const value of [-1, 64, NaN, Infinity, 1.5, null, '0']) {
+      expect(() => packCells([cell({ hydrology: value as number })])).toThrow('geography mask');
+      expect(() => packCells([cell({ roadMask: value as number })])).toThrow('geography mask');
+    }
+    for (const [flag, offset, value] of [[32, 5, 0], [128, 6, 0], [0, 5, 1], [0, 6, 1], [16, 5, 64], [64, 6, 64]]) {
+      const packet = packCells([cell({ hydrology: 0, roadMask: 0 })]);
+      packet.scalars[4] = flag!; packet.scalars[offset!] = value!;
+      expect(() => unpackCells(packet)).toThrow(/geography/);
+    }
+  });
+
   it('roundtrips an empty message with three independent transferable buffers', () => {
     const packet = packCells([]), buffers = cellTransferBuffers(packet);
     expect(new Set(buffers).size).toBe(3); expect(buffers.every(buffer => buffer.byteLength === 0)).toBe(true);

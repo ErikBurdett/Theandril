@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.vesper_court",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.colonist for Theandril, Vesper Court.\nSubject: One practical adult founding-caravan leader walking in a quiet planted stance, bearing a large strapped household pack with bedroll, seed crate and compact tools. Unarmed civilian silhouette: weight of carried supplies clearly distinguishes this role from a scout. No separate cart that dwarfs the person.\nCulture-specific identity: Living adult human retainers and artisans, cool ivory skin and dark hair; no pointed ears. Only the marshal may be a pale vampiric court patron with subtle severe human features. Charcoal velvet and leather, narrow ribbed dark iron, tarnished silver, muted burgundy and dusty plum cloth (dark #49312b, #642f26, #685375, #96738e; NO bright red). High folded collars, long split court coats and silver-edged narrow kite shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "unit.colonist.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.vesper_court/0a836e2afc1361ff12dbb6b4df288b05c5b8e8fab17508634b550511348e4ed4/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "003483781e6ee2fe5bf3087e17dbf881ca72b64c49a09c8421a06c69ebc9348d",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.colonist.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.colonist.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:40:56.835Z",
+  "referenceHashes": [
+    "eaa81b76a46ee11aa08e406c336bb678da38e3f0ddd5ac3826315ac801813c89",
+    "c6b36353c9c248d18b811fefed241611abcd65949eb1cb629a86fb643879028f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "d365cfbe5057490f796b9a9a2619f7c9e75a5d3c7ee646742f47bbb4d81f59ca",
+      "inputHash": "eaa81b76a46ee11aa08e406c336bb678da38e3f0ddd5ac3826315ac801813c89",
+      "outputHash": "6b1d8ab7b567e17bbaca9e73a008b4e730eb806144d8f9dadfcb08b99f342ba1"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "6b1d8ab7b567e17bbaca9e73a008b4e730eb806144d8f9dadfcb08b99f342ba1",
+      "outputHash": "2b360230ec63b34e84080cf35d7e8afe9e6b7a8ad74dd8339788375061bc977a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "2b360230ec63b34e84080cf35d7e8afe9e6b7a8ad74dd8339788375061bc977a",
+      "outputHash": "1990f81d726390c119ae698964e6878950ed37e86405d11d25a0540188ae1940"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "11eb21ae860d4b2d17d49aa0bd591b7c31450f20966e6a24120d33a1c5de287f",
+      "outputHash": "46026388d890bb299287b1b018a8848a8c413e1bee8c1c0eb24afa0e91698147"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "fc39dc8295c8329ab332796f0f41762dbae46c91946f47b41443cc7bc24adf8a",
+      "outputHash": "1bc552217872591aa72eb68ca27fe6c3ef52caecdd822fa8c2378a1ad2d64572"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "6a06a1b0de3dabdc751966207764564b1bbff5fb388a9363d21606364ea94b3d",
+      "outputHash": "512c82a263cd54bb0c36810eec0bad781903cda16d7e6a6b748baa4dbdfbacab"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:28:57.863Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Loaded civilian with bundled plants and travelling bags; grounded ordinary body, complete feet and carried load. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 0a836e2afc1361ff12dbb6b4df288b05c5b8e8fab17508634b550511348e4ed4; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/1fa153759f7da4d34dea8a4397b9ecd49719c7958c1635fcc6557a834e61b12c.png"
+    ],
+    "inputHash": "e2ee85cb89d610ca77d338641bf5b9593db9e510ad4f23402b4b86a233de0d59"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

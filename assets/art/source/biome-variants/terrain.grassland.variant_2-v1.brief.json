@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.grassland.variant_2",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.grassland.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. Temperate GRASSLAND: quiet muted grey olive-brown meadow, a broad crescent of sparse low sage weeds in the lower half with a few dull slate pebbles and bare earth patches. Flat, no trees; distinguish from yellow bunchgrass. Mostly calm low-contrast mid-value ground. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.grassland.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.grassland.variant_2/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2958838fa08301041579319184d1b7116180f5c713e2e3a950347d9d90924eb2",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.grassland.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.grassland.variant_2-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:19:54.062Z",
+  "referenceHashes": [
+    "a17c6433c43009b6bfd72047c922bb0fe32e2aad379c66fac900d4985a500b82",
+    "1e5456a4a93879fbfed4efff1b92f47df4f900eb57c945e2afdf0d1b8df1b15f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "e467d575eb2f843f8c015cb9c2ef345b680160f7cdb758e6c5ac3f623d2df90a",
+      "inputHash": "a17c6433c43009b6bfd72047c922bb0fe32e2aad379c66fac900d4985a500b82",
+      "outputHash": "1c8088d32c22f5f753011e26dbfbb02b65919a5577591e3d57cd4ba9c4e09e4f"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

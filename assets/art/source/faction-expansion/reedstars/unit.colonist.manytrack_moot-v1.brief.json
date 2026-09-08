@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.manytrack_moot",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.manytrack_moot"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Manytrack Moot. Bark black, pale tawny hide, moss blue, stitched raw linen. Crossed path cords, broad clearance arch motifs and wood/hide shields. Open gathering rings, broad low communal halls, varied-height doors and maintained route gates; not an untamed beastcamp. Original heraldry: A fork joining three unlike broad tracks. This civilian puller is HUMAN, with human face and ordinary tool-hands, not an animal. Native64. One compact covered migration handcart on the LEFT connected to one full-body adult civilian puller on the RIGHT, traveling toward screen right. Both wheels, handle and both boots fully visible; household jars, rolled bedding and tools under a practical canopy, no weapons. One connected caravan subject.",
+  "frames": [
+    {
+      "id": "unit.colonist.manytrack_moot/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.colonist.manytrack_moot/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "67b22e427d1e3641ffc1ad3177ffce9df1e1932208079a124e033f827bb248cd",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/unit.colonist.manytrack_moot-v1.png",
+      "assets/art/source/faction-expansion/reedstars/unit.colonist.manytrack_moot-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:57:35.955Z",
+  "referenceHashes": [
+    "e3c468a25711716a60be4a0ce8aaecc9a996e61acd7c8be4bdfe9075467705ad",
+    "332a006eabb3b51ad0bc9c02761b7b52b7f6569b8a3d35927925d0e9aeb4b161"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "01d13e23c20bb47a456253ecbff9c0651dea85ef155a53a9bb8a269edc68593c",
+      "inputHash": "e3c468a25711716a60be4a0ce8aaecc9a996e61acd7c8be4bdfe9075467705ad",
+      "outputHash": "e74d9ec2033a45ade39454547eba831347c4054a2781a0b854067daf283cc70b"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

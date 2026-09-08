@@ -1,9 +1,10 @@
-import { createGame, getMovementQuery, getObservation, getSettlementLandObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
+import { createGame, getMovementQuery, getObservation, getSettlementLandObservation, getSpectatorObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
 import { aiObservationOptions, planTurn } from '@theandril/ai';
 import { createJournal, resumeJournal, generateChronicles, type CampaignJournal, type ChronicleDocuments } from '@theandril/chronicle';
 import { SaveStore, deserializeCampaign, exportSave, importSave, serializeCampaign } from '@theandril/persistence';
 import type { Request, Response, WorkerMetrics } from './protocol';
 import { cellTransferBuffers, cellTransferBytes, packCells } from './cell-transfer';
+import { BattlePresentationMailbox } from './battle-transfer';
 
 let state: GameState | undefined;
 let journal: CampaignJournal | undefined;
@@ -12,30 +13,39 @@ let recordingFailed = false;
 let queryObservation: Observation | undefined;
 let queryHash = '';
 let publishedHash = '';
+// Presentation state only: never serialized, journaled, or used by AI/query caches.
+let fogEnabled = true;
+let mapRevision = 0;
+const battlePresentations = new BattlePresentationMailbox();
 const saves = new SaveStore();
 let knownCells = new Map<number, Observation['cells'][number]>();
 const metrics: WorkerMetrics = { generationMs: 0, commandMs: 0, aiMs: 0, transferBytes: 0, totalTransferBytes: 0, cellTransferBytes: 0, landQueryCount: 0, landQueryBytes: 0, totalLandQueryBytes: 0 };
 const textEncoder = new TextEncoder();
 
 function send(message: Response, transfer: Transferable[] = []): void { self.postMessage(message, { transfer }); }
-function publish(id: number, message: string, reset = false): void {
+function publish(id: number, message: string, reset = false, replaceMap = false): void {
   if (!state || !journal) throw new Error('Begin or load a campaign first.');
   const observation = queryObservation ??= getObservation(state, state.turnOwnerId, { landDetails: 'none' });
-  if (reset) knownCells = new Map();
-  const cells = observation.cells.filter(cell => {
+  if (reset) { fogEnabled = true; battlePresentations.reset(); }
+  const battlePresentation = battlePresentations.take(observation);
+  const mapReset = reset || replaceMap;
+  if (mapReset) { knownCells = new Map(); mapRevision++; }
+  const spectator = !fogEnabled && journal.mode === 'watch' ? getSpectatorObservation(state, state.turnOwnerId) : undefined;
+  const cells = (spectator?.cells ?? observation.cells).filter(cell => {
     const old = knownCells.get(cell.cell);
-    return !old || old.terrain !== cell.terrain || old.biome !== cell.biome || old.waterDepth !== cell.waterDepth || old.fertility !== cell.fertility || old.visible !== cell.visible || old.featureMask !== cell.featureMask || old.settlementId !== cell.settlementId || old.factionId !== cell.factionId || old.improvementId !== cell.improvementId;
+    return !old || old.terrain !== cell.terrain || old.biome !== cell.biome || old.waterDepth !== cell.waterDepth || old.fertility !== cell.fertility || old.visible !== cell.visible || old.featureMask !== cell.featureMask || old.settlementId !== cell.settlementId || old.factionId !== cell.factionId || old.improvementId !== cell.improvementId || old.hydrology !== cell.hydrology || old.roadMask !== cell.roadMask;
   });
   for (const cell of cells) knownCells.set(cell.cell, cell);
   const { cells: observedCells, ...summary } = observation;
   void observedCells;
+  const map = spectator ? (({ cells: _cells, ...summary }) => { void _cells; return summary; })(spectator) : undefined;
   const packed = packCells(cells);
   metrics.cellTransferBytes = cellTransferBytes(packed);
-  metrics.transferBytes = textEncoder.encode(JSON.stringify(summary)).byteLength + metrics.cellTransferBytes;
+  metrics.transferBytes = textEncoder.encode(JSON.stringify(summary)).byteLength + (map ? textEncoder.encode(JSON.stringify(map)).byteLength : 0) + (battlePresentation ? textEncoder.encode(JSON.stringify(battlePresentation)).byteLength : 0) + metrics.cellTransferBytes;
   metrics.totalTransferBytes += metrics.transferBytes;
   publishedHash = stateHash(state);
   queryHash = publishedHash;
-  send({ id, type: 'state', observation: summary, cells: packed, campaign: { mode: journal.mode, coverage: journal.coverage }, reset, hash: publishedHash, metrics: { ...metrics }, message }, cellTransferBuffers(packed));
+  send({ id, type: 'state', observation: summary, cells: packed, ...(map ? { map } : {}), ...(battlePresentation ? { battlePresentation } : {}), fogEnabled, mapRevision, mapReset, campaign: { mode: journal.mode, coverage: journal.coverage }, reset, hash: publishedHash, metrics: { ...metrics }, message }, cellTransferBuffers(packed));
 }
 
 function applyCommand(game: GameState, command: GameCommand) {
@@ -43,7 +53,10 @@ function applyCommand(game: GameState, command: GameCommand) {
   if (recordingFailed) throw new Error('Recording was interrupted. Restore a saved campaign before issuing more orders.');
   queryObservation = undefined;
   // Includes rejected AI proposals and automatic decisions, before the next command.
-  try { return journal.record(game, command); }
+  try {
+    const involved = game.battle && (game.battle.attackerFactionId === game.turnOwnerId || game.battle.defenderFactionId === game.turnOwnerId);
+    return journal.record(game, command, undefined, involved ? packet => battlePresentations.capture(packet, game.turnOwnerId) : undefined);
+  }
   catch (error) {
     recordingFailed = true;
     throw new Error('Recording was interrupted. Restore a saved campaign before issuing more orders. ' + (error instanceof Error ? error.message : String(error)));
@@ -84,7 +97,7 @@ async function handle(request: Request): Promise<void> {
     if (request.type === 'new') {
       send({ id: request.id, type: 'progress', message: 'Raising continents and finding a place for the first hearth…' });
       const started = performance.now();
-      const generated = createGame({ seed: request.seed, size: request.size, factionCount: request.factionCount ?? 4, pace: request.pace, ...(request.factionDefinitionId ? { factionDefinitionId: request.factionDefinitionId } : {}) });
+      const generated = createGame({ seed: request.seed, size: request.size, factionCount: request.factionCount ?? 4, pace: request.pace, ...(request.factionDefinitionId ? { factionDefinitionId: request.factionDefinitionId } : {}), ...(request.layout ? { layout: request.layout } : {}) });
       const record = createJournal(generated, { mode: request.mode });
       state = generated; journal = record; chronicles = undefined; recordingFailed = false; queryObservation = undefined;
       metrics.generationMs = performance.now() - started;
@@ -110,6 +123,14 @@ async function handle(request: Request): Promise<void> {
     }
     if (!state || !journal) throw new Error('Begin or load a campaign first.');
     if (recordingFailed) throw new Error('Recording was interrupted. Restore a saved campaign before continuing.');
+    if (request.type === 'watchFog') {
+      if (journal.mode !== 'watch') throw new Error('Fog controls are available only in AI-watch campaigns.');
+      if (typeof request.enabled !== 'boolean') throw new Error('Fog of war must be enabled or disabled with a boolean.');
+      const changed = fogEnabled !== request.enabled;
+      fogEnabled = request.enabled;
+      publish(request.id, fogEnabled ? 'Fog of war restored to your realm’s sight.' : 'Spectator map revealed. AI still uses each faction’s own sight.', false, changed);
+      return;
+    }
     if (request.type === 'landQuery') {
       // A read selector checks seat ownership and sight; this is not a game order
       // and must not enter the journal or advance a turn. Use a fresh hash only

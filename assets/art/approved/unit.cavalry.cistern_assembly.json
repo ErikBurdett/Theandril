@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.cavalry.cistern_assembly",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.cavalry.cistern_assembly"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original standalone Theandril strategic pixel-art sprite, not a sheet or concept scene. Genuine transparent PNG background, alpha zero outside the isolated subject, no painted checkerboard and no ambient haze. Entire subject and every tip, boot, wheel, rope or roof enclosed in central 65% of a square canvas with generous transparent padding. Weathered serious medieval dark fantasy, adult practical proportions, no cute/chibi anatomy. Crisp square pixel clusters, strong grouped midtones and restrained material highlights, detail intended for a small native sprite rather than a smooth painting. Soft upper-left light, selective dark local-color outlines. Shallow front-right southeast strategic view, figures and hulls face screen RIGHT/lower right. No text, letters, numbers, labels, watermark, copied heraldry, neon, glow, floor tile, pedestal, background scenery, cast shadow plane, smooth gradient or isolated noise. Culture: Cistern Assembly. Original practical society of human well keepers, gardeners and caravan households. Limewashed limestone and muted turquoise cloth, rust-red cords, dark glazed jars and weathered bronze closures. Wrapped shade hoods, broad lidded-vessel shield silhouettes. Architecture uses squat cistern rings, low parapets, thick shade galleries and roofed well courts, never a desert palace. Ships use dark glazed cargo jars, limewashed cabin sides and turquoise sail fields while retaining their specified hull role. Original heraldry: A three-notch water measure inside one broad lidded vessel silhouette. Native96. One adult mounted outrider riding one ordinary lean horse facing screen RIGHT/lower right, short lowered spear and compact shield, worn saddle and tied baggage. Entire horse with all four legs, ears, tail and rider enclosed. No giant pennant shrinking the horse, no floating hooves.",
+  "frames": [
+    {
+      "id": "unit.cavalry.cistern_assembly/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.cavalry.cistern_assembly/7d3616d643735fc7735c27ee49ed006f87c3cde64a7f88d81b34eb3d2ff80e7d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b8fcfbce2f8f5010a7d7fb75d023a5b303bec84261bd7d01379f778253ace2bf",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/wellroads/unit.cavalry.cistern_assembly-v1.png",
+      "assets/art/source/faction-expansion/wellroads/unit.cavalry.cistern_assembly-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:48:21.106Z",
+  "referenceHashes": [
+    "6b0e8a1ea2bede062964c93fc57c2ba3bcd53ed8564f6f999d1dec0d33caa716",
+    "042641bd58e4c997ce4a00ad4f96d5d90925db7fe9551887d0013e3f72e1c382"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "07550609e864beffa05395b94415c759a5f97a1caf33144a06f7d8c2a15c0497",
+      "inputHash": "6b0e8a1ea2bede062964c93fc57c2ba3bcd53ed8564f6f999d1dec0d33caa716",
+      "outputHash": "395f12b4587a2ee651a04c12d6aef727a7abdd3b6fcb6bd27b3620d99e0d6adb"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "395f12b4587a2ee651a04c12d6aef727a7abdd3b6fcb6bd27b3620d99e0d6adb",
+      "outputHash": "7331bff6d20fca110d061f84c6806dba39e018f8aae3e43583be53f160f8240c"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7331bff6d20fca110d061f84c6806dba39e018f8aae3e43583be53f160f8240c",
+      "outputHash": "3948b3144dc530a8575377d8127b69596e0ecbe6a51c063f0a5e9485afe758c6"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "ec4cead2e56b13f0fdc6ac6c00b28b7ead14c1a6c07cbc283778fb985f92c90a",
+      "outputHash": "9e9f2acf571c81216dd96701c638a9b3bdefd0c2d81c017d2159076e4e5a449c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "40600dc07e9da647d0ea29c62e253325b95fc769ccead5d5bd4f03b051f0009f",
+      "outputHash": "d3079d51643f1b64faf2d81cbe0ea899a8029cf834e871b0d3087b0f736ede19"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "21678420af4f054a5c64ca8ec56a82d29e97835687d00e3ddc7039cce4eed187",
+      "outputHash": "b36cbc63d6f2f0f178a719924ea3a14d9842368fa039d0bceb43956cdb134c4c"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.cavalry.cistern_assembly.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:07.944Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Ordinary mounted rider with long spear and jar-pattern cloth; complete horse legs, tail and head stay inside canvas. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 7d3616d643735fc7735c27ee49ed006f87c3cde64a7f88d81b34eb3d2ff80e7d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/d0b751b797ee8e7b30e657d226d23ac5dc4dc3de1fdf607ab0ab3f59919afbe5.png"
+    ],
+    "inputHash": "628a31d746134c0d5e1c9bf245f80d2e957f02b507930387de0735f5c66c0641"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

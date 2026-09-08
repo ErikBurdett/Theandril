@@ -1,11 +1,12 @@
 import { cpus, platform, release } from 'node:os';
+import { writeFileSync } from 'node:fs';
 import { performance } from 'node:perf_hooks';
-import { createGame, applyCommand, getObservation, serializeGame, deserializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
+import { createGame, applyCommand, getObservation, serializeGame, deserializeGame, stateHash, SAVE_VERSION, type GameCommand, type GameState } from '@theandril/sim';
 import { aiObservationOptions, planTurn } from '@theandril/ai';
 import type { MapSize } from '@theandril/mapgen';
 import { matureCampaign } from '../packages/test-fixtures/src/index';
 import { autoResolveBattle, createBattle, type BattleFormation } from '../packages/sim/src/combat';
-import { UNITS } from '@theandril/content';
+import { CONTENT_HASH, UNITS } from '@theandril/content';
 import { conquestCampaign, CONQUEST_FIXTURE } from '../packages/test-fixtures/src/conquest-fixture';
 import { benchmarkMovement } from './benchmark-movement';
 
@@ -81,7 +82,7 @@ for (const size of ['huge', 'legendary'] satisfies MapSize[]) {
   const loadMs = performance.now() - restoreStart;
   if (stateHash(restored) !== stateHash(state)) throw new Error('Benchmark save determinism failed');
   const view = getObservation(state, state.turnOwnerId);
-  measurements.push({ size, mature, cells: state.world.width * state.world.height, factions: state.factions.length,
+  measurements.push({ size, mature, generatorVersion: state.world.generatorVersion, layout: state.world.layout, cells: state.world.width * state.world.height, factions: state.factions.length,
     initialArmies, initialFormations, armies: Object.keys(state.armies).length,
     formations: Object.values(state.armies).reduce((sum, army) => sum + army.formations.length, 0),
     largestArmyFormations: Math.max(0, ...Object.values(state.armies).map(army => army.formations.length)), settlements: Object.keys(state.settlements).length,
@@ -142,8 +143,11 @@ for (let i = 0; i < 55; i++) {
   conquestHash = hash;
 }
 siegeTimes.sort((a, b) => a - b); peaceTimes.sort((a, b) => a - b);
-console.log(JSON.stringify({ runtime: process.version, cpu: cpus()[0]?.model, os: platform() + ' ' + release(), measurements,
+const report = { measuredAt: new Date().toISOString(), saveVersion: SAVE_VERSION, contentHash: CONTENT_HASH,
+  runtime: process.version, cpu: cpus()[0]?.model, os: platform() + ' ' + release(), measurements,
   movement: benchmarkMovement(),
   battleKernel: { iterations: 200, formationsPerSide: 12, unitIds: kernelUnitIds, medianMs: battleTimes[100], p95Ms: battleTimes[190], maxMs: battleTimes.at(-1) },
   conquestAndPeace: { iterations: 50, siegeAssaultMedianMs: siegeTimes[25], siegeAssaultP95Ms: siegeTimes[47], peacePackageWithMirrorMedianMs: peaceTimes[25], peacePackageWithMirrorP95Ms: peaceTimes[47], finalHash: conquestHash,
-    note: 'Real blockade, militia assault, occupation, paid peace and treaty expiry. Capture-decision midpoint save plus 11 resumed turns verified every run. Siege timing excludes setup; peace timing includes separately applied mirror commands.' } }, null, 2));
+    note: 'Real blockade, militia assault, occupation, paid peace and treaty expiry. Capture-decision midpoint save plus 11 resumed turns verified every run. Siege timing excludes setup; peace timing includes separately applied mirror commands.' } };
+if (process.argv.includes('--output')) writeFileSync('docs/performance/0029-campaign-scale.json', JSON.stringify(report, null, 2) + '\n');
+console.log(JSON.stringify(report, null, 2));

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "effect.battle_melee",
+  "version": 3,
+  "reviewedAt": "2026-09-07 21:12:57 UTC",
+  "stage": "native Blender source review",
+  "decision": "inspected-candidate-not-approved",
+  "manifestSha256": "58e014439cb97d8322fee8ceb9d735d2efd3f4f319ddd4369554f183c13aef94",
+  "evidence": [
+    {
+      "path": "v3/review-1x.png",
+      "sha256": "03223a91a7071d844e2ff111468815524eeeff8c0d737d60f5538a36ca282f4a",
+      "inspection": "Viewed full image at native scale."
+    },
+    {
+      "path": "v3/review-4x.png",
+      "sha256": "6a91f834c6f4d5d86fb8f64ba0f8dec5335b9550a7c1d4bb0cf39896c99c2792",
+      "inspection": "Viewed enlarged nearest-neighbor contact sheet."
+    }
+  ],
+  "findings": [
+    "Retains the inspected v2 diagonal silver strike, unequal warm metal burst and separated declining chips; all native frame and review image hashes are byte-identical to v2.",
+    "v3 corrects the editable source timeline to 10fps, matching eight 100ms manifest frames; v2 retained unchanged."
+  ],
+  "timing": {
+    "frames": 8,
+    "durationMs": 100,
+    "blenderFps": 10,
+    "totalDurationMs": 800
+  },
+  "limitations": [
+    "Studio source images inspected; preview.html temporal playback not browser-tested by this reviewer.",
+    "PixelSnapper/Aseprite processed review, gameplay/background review and final approval remain parent-owned. No approval or runtime publication granted here."
+  ]
+}

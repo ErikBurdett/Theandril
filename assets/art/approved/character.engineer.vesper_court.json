@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "character.engineer.vesper_court",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "character.engineer.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art character.engineer for Theandril, Vesper Court.\nSubject: One adult engineer on foot in a sturdy faction work apron and compact protective headgear, holding a small mallet and carrying a square tool satchel with a folded carpenter square. Practical repair worker, not a combat giant, full body.\nCulture-specific identity: Living adult human retainers and artisans, cool ivory skin and dark hair; no pointed ears. Only the marshal may be a pale vampiric court patron with subtle severe human features. Charcoal velvet and leather, narrow ribbed dark iron, tarnished silver, muted burgundy and dusty plum cloth (dark #49312b, #642f26, #685375, #96738e; NO bright red). High folded collars, long split court coats and silver-edged narrow kite shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No skulls, bones, bats, fangs, glowing eyes, blood effects or borrowed vampire costumes.",
+  "frames": [
+    {
+      "id": "character.engineer.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/character.engineer.vesper_court/2e8b5e99b8b160895301f4ca3edbb50dfaadeae3c14e1bf160d517e967a2ab1f/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7dab8f1be4ab8215f2adc784afc56dba46a95bfaabef2837b049178dc104d82a",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/character.engineer.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/character.engineer.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:53:08Z",
+  "referenceHashes": [
+    "53e293cb8ce6ac5c014d9432496b1d888569b84fb058e5069859386d121ade04",
+    "d1e5f79298c171a400662ba953ad6a46e0102468b35eb86155815d175a4202e0"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "2faaf341696556bbaef52f6d4820c25d2cce109f44ef1432a6e7a31e9afdc1f2",
+      "inputHash": "53e293cb8ce6ac5c014d9432496b1d888569b84fb058e5069859386d121ade04",
+      "outputHash": "530871f094ca20ae815132f36bb92f9020549c96cf88583959158007449ffa4e"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "530871f094ca20ae815132f36bb92f9020549c96cf88583959158007449ffa4e",
+      "outputHash": "1996d1c40f9ec408228829023a9029611a363cdc428d406c5fe7133993f0e2c3"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1996d1c40f9ec408228829023a9029611a363cdc428d406c5fe7133993f0e2c3",
+      "outputHash": "70eef6a67a7089a1513b48690d8111d3c269fda282bae690f33a4a3e737d1aba"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "c916f3d221682647f0754020165e26fcad619bea377563ecafdcd60080d3c29e",
+      "outputHash": "d76e14ee6ea84a1fdd7443c66e0d03c7bbc802559b226592482f51d304fb14b7"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "8cb08df20c54ba238f7429842c217f9aa987c89e95cc269bb80aa3f47e0644a1",
+      "outputHash": "376cdae5471e9597ef598e06739ce02a1cfe5295e8e3df8463e2bf5b18500fba"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "223cf13f1371992e762c4e82c231f9ea5f149afaa19babdb97b7cefd9d91a5de",
+      "outputHash": "3a8697925202e3fe8ea97c82d1d5f89d2c745be78afa097cf5b74e733f3d2b8e"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/character.engineer.vesper_court.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:29:02.467Z",
+    "notes": "Main inspected all18 independently retained original compositions, exact native1x and nearest4x processed sprites. Living woman in working apron carrying a mallet; practical tools and lighter sleeves separate her silhouette from vampire retainers. Shared master-palette normalization deliberately reduces source saturation and fine ornament; role, cultural silhouette and transparent padding remain readable. One static southeast pose only; no new animation or implied racial power. In-game/fog/UI acceptance remains a separate gate.\nReviewed candidate 2e8b5e99b8b160895301f4ca3edbb50dfaadeae3c14e1bf160d517e967a2ab1f; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/837193b51abeebde02d95d96221ab1d962243d95f17152faf70403d738fa7946.png"
+    ],
+    "inputHash": "171ae47eeedc63d10d9956811dc2b103dc12d87ad7c12392b8e4ba4f2a738868"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

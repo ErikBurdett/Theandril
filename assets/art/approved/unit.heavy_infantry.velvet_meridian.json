@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.velvet_meridian",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.velvet_meridian"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Velvet Meridian, role unit.heavy_infantry.\nSUBJECT: ONE adult broad heavy infantry soldier, thick layered cultural armor, compact two-handed blunt warhammer across chest, firmly planted feet. Substantial distinct mass from guard, complete weapon head and boots. Native64x64 body48px pivot32,56.\nCULTURE: Madder red, smoke silver, blue-black woven cloth. Weighted long hems, small calibrated discs, half-round shields and layered soft scholar coats. Low round slate observatories, cloth-measure galleries, concentric open courtyards and dark-curtained study halls; no glowingastralwizardtowers.\nPEOPLE if character or rider: Human weavers, night navigators and school households; practical escorts and scholars.\nHERALDRY if UI or flag: A plumb line crossing three unequal stitches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.velvet_meridian/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.heavy_infantry.velvet_meridian/a5d78dcfc33b94a867754f5cced41dcbb2c05f66a200dbc9fdd5f6b42e360a1e/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "de2d9e1f794f25af5d94214b1ecdd01abdf711f13ba04bd510d7c939b17593c0",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/unit.heavy_infantry.velvet_meridian-v1.png",
+      "assets/art/source/faction-expansion/canalmeridian/unit.heavy_infantry.velvet_meridian-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T16:55:08.000Z",
+  "referenceHashes": [
+    "1b7ace8f1899af5d9f8e20b7f8f89263621fc9457b6f05986b75d4adaf5fbe39",
+    "a16a46642606b53a1f0dcdd66590d94670f11199b20fa976b51637cb31c813d3"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "b5f00073ec0972f6c69bc74698b9b27937ffa9e950a1a79da0a028652b499d85",
+      "inputHash": "1b7ace8f1899af5d9f8e20b7f8f89263621fc9457b6f05986b75d4adaf5fbe39",
+      "outputHash": "27966ae1be2ffc33e0a70aef3e217ec2d1142875466a0caadaa1ebe29f0efe67"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "27966ae1be2ffc33e0a70aef3e217ec2d1142875466a0caadaa1ebe29f0efe67",
+      "outputHash": "ad695d56ec897bd19f518b61ca908d6e2077142106e80ce1728b8286828fc88b"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ad695d56ec897bd19f518b61ca908d6e2077142106e80ce1728b8286828fc88b",
+      "outputHash": "8427808425cb4b9ff7388879cf7050cfa862764581746253c9dc982052df7d5c"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "5ed2a7f010e75f54dd8a07ed59b4234d0356f56e049b2ce1c3e6cba8ddd723c7",
+      "outputHash": "24b2ec9b69a341ce7bf3d1e5b0f416666e8acca2a521d38c723a4d1ee49ccb38"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "22bda3504d9d565e1dd9b88960889d9806c54f46373f20d2fbfb22f155338762",
+      "outputHash": "82d3def0bcfbaac2fb21b248c8908ee5b9d72a43a4b729c13fe249116550953e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "cb6b4a5662dc92e44dde41ab25a432611075d77338f2e6cd507192dce43af72f",
+      "outputHash": "e6e2ac3d72f391f07f23a7d92f255dc5e936f85ad9f3ea54abf357218ead10bb"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.heavy_infantry.velvet_meridian.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:20:40.145Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Broad shoulders and two-handed square hammer create a heavier silhouette with separate feet. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate a5d78dcfc33b94a867754f5cced41dcbb2c05f66a200dbc9fdd5f6b42e360a1e; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/557c10c5ccd2a1a9c9c541620569f15ad6371accad279c4465743df3215ded10.png"
+    ],
+    "inputHash": "d67576235e762e956bdcd702f7ced5cd9290c6c62744af167e3c75e788842026"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

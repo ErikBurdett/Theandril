@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.emberwake_convocation",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.transport for Theandril, Emberwake Convocation.\nSubject: ONE broad capacious wooden transport cog: rounded deep cargo hull, one square sail, low enclosed passenger shelter, neatly strapped crates, minimal defenses. Chunky broad useful deck distinguishes troop carrier from galley and warship. Entire ship visible; no people large enough to compete.\nCulture-specific identity: Dark practical timber, ash-white ceramic protective panels, smoked-orange and muted sulfur-green patched sails, enclosed seed cargo shelters and split-vent cabin roofs. No flaming ship or magic propulsion.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite. Ground pivot48,80; full ship visible height at most78 native pixels. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.\nNAVAL TECHNOLOGY GUARDRAIL: absolutely NO firearms, cannons, gunpowder weapons, gunports or visible gun barrels anywhere. Ranged crew would use ordinary bows/crossbows; one small open-deck wooden ballista is acceptable only for the deep warship. Side panels are solid timber or simple ventilation lattice, never cannon ports or black tubes. No smoke or firing effects.",
+  "frames": [
+    {
+      "id": "unit.transport.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.emberwake_convocation/6f97ff72809182f0ab63e897c4ab9f2404c35e169449987df3d4ecd05ef01f1a/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "966798d05cfea702b700d92c880b3627322703b13d9f1a82ac9d6ca643bdd57a",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:58:46Z",
+  "referenceHashes": [
+    "2f73e325fc09b9cb6051a98676d095adb4a93f21230a7127ffb2901894a563fc",
+    "8e183157ac6a6b2b1b40bad993ef6fe7118bb34359fdad6f355ab60fa3bdfc59"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "b9a758204ff15fb019eeda9ddb577a9682f38a13b1bcaea9cc8c4ba12b6b002e",
+      "inputHash": "2f73e325fc09b9cb6051a98676d095adb4a93f21230a7127ffb2901894a563fc",
+      "outputHash": "f957b8380ce7e2f884b18dd3ca3c79997ce11a90f8f126c09dfb74430a33060f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "f957b8380ce7e2f884b18dd3ca3c79997ce11a90f8f126c09dfb74430a33060f",
+      "outputHash": "8458b4814fda002c9351e81ea2d4dfc93f3552f1ad8210803ecf0929fc4c97ef"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "8458b4814fda002c9351e81ea2d4dfc93f3552f1ad8210803ecf0929fc4c97ef",
+      "outputHash": "3351782169edd0ab45c212f4ecb3c10c5e80c8f8a4d31e45fb8d7a60eae91076"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "8da62185f81133711f5bb84ee66030ff631b4b2403488b451af4ce87b369235a",
+      "outputHash": "7364c5a04b439f67b15287297d29eb57eee12943d55f32fe03d59d259fc10a83"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "406afe45c5276db99d8b0d3300ae6d3bc29aaeab7ff824d90873c9566750fdfb",
+      "outputHash": "c35e9a6cfcff8c00bbdbc1c96ef8507896767bc7ae7526a9b870386c5beb3afb"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "80176a5a11fa7bf11d78da8d5e084c4fba250f54a16be4eef7686fcb07cc5601",
+      "outputHash": "df7fbbf2e76211d878841a406522f5b75564829017b71d71984dbbef39716254"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:32.014Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Single square sail, stored seed cargo and covered hold distinguish transport. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 6f97ff72809182f0ab63e897c4ab9f2404c35e169449987df3d4ecd05ef01f1a; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a340c352316f33979d0cade3af13b8a6e7facab2314e6e7a20ee820a72ccfce7.png"
+    ],
+    "inputHash": "d714fb00a5eb0907ee32f083b6eb0c92061d624fa89cc3e8e39fc2581d0bbb11"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

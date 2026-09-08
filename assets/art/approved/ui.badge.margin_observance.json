@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.margin_observance",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.margin_observance"
+  ],
+  "prompt": "Use case: stylized-concept. ONE tiny simple original pixel-art army identification badge for Margin Observance in Theandril. The complete design consists ONLY of one broad angular broken bracket with a deliberately open upper-right corner, plus one small separate offset horizontal cinnabar registration bar near that opening. No scroll, document, quill, seal, shield, book, ribbon, lettering, jewelry, figures, buildings or extra frame. Bold flat coarse stepped pixel clusters with just parchment-grey, ink-black and dull cinnabar; weathered lead edge only one restrained tone. Centered front-facing mark, maximum28pixels at native32x32, pivot16,16. Keep large deliberate negative space open; this is an abstract bracket emblem, not a pictured archive. Entire mark in central65percent, all corners complete with generous empty padding. TRUE transparent zero-alpha PNG background, never checkerboard or a colored background. No glow, cast shadow, scenery, animation, variants or sheet.\nSimplify into the smallest bold readable version of the same crest, just its principal shapes. This is the separate tiny army badge asset.",
+  "frames": [
+    {
+      "id": "ui.badge.margin_observance/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.margin_observance/b2342995ba24990011f103203ca6bf52714a1fd5b13f07c80038ee9b9737d9ba/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b91b2047162d1bd9db659541bdbf48cb32c440bee35a3b2cd841300ab7bd8312",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/ui.badge.margin_observance-v1.png",
+      "assets/art/source/faction-expansion/reedstars/ui.badge.margin_observance-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T17:20:27.000Z",
+  "referenceHashes": [
+    "c4cf1ef1d163795c29ca6250d384efa1cfc160d09302e9d68e8735fb9499b488",
+    "64f86f1773a3d241662a4ecc5b47fce5650a03d71708d5e7b59f1ad0c11ef030"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "4d82886168e3ae5c4c368703a3953084a5cfe98379b68e3eaebbab5fbdae2a7b",
+      "inputHash": "c4cf1ef1d163795c29ca6250d384efa1cfc160d09302e9d68e8735fb9499b488",
+      "outputHash": "9ff442f9b86dadc86184017851d8509fd5bc5c32e251660e48f9d1625f67c4ee"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "9ff442f9b86dadc86184017851d8509fd5bc5c32e251660e48f9d1625f67c4ee",
+      "outputHash": "d14ae5080cc86ea6ed535768b93121ca4ff90686d9e5643fc7b38725a3d93391"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d14ae5080cc86ea6ed535768b93121ca4ff90686d9e5643fc7b38725a3d93391",
+      "outputHash": "3c4fcf61496a73b960a681a9f0cc7e4f68c000648b4b2da6b93f79d0cf51c257"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "d20366e78ec0addb51a816422e68b05e70cd304dc1f3fd0795faac902c58b210",
+      "outputHash": "d82053f42eaa57349beaa6a1bf3e86df8d53e2d3510b3a43ce22ff5ec6bf7d8f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "923221c56c96a75939ac8a9ef68a2effa494a151bc3d1abbcfeb277e336b9fcd",
+      "outputHash": "f21cfe49fd2e29f1b9ba34513b14e02eefa5aa9866e14de9018db83430661f89"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "b248c341bdadc724d68e32f2a472f45305afb7446b34a4fb147238c53b82623f",
+      "outputHash": "0a52c489c1136ab4995bd56dcae37aa6df9a1dce0e974bcd1871be23fb91c9f3"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.margin_observance.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:16:08.119Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Bold simple broken bracket and offset bar remain highly readable at32px. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate b2342995ba24990011f103203ca6bf52714a1fd5b13f07c80038ee9b9737d9ba; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5e7034bf0296b52b1b5fbe5d3192dc116b20d3afdfde8d8f6282d9643e71a5c9.png"
+    ],
+    "inputHash": "17eab96042735fd9e3649cd390bf2c7106cc7a35904a61fcb6772062a2062e92"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { IMPROVEMENTS, TECHNOLOGIES } from '@theandril/content';
 import * as mapgen from '@theandril/mapgen';
-import { applyCommand, createGame, deserializeGame, getLandObservation, getSettlementLandObservation, serializeGame, stateHash, type GameState } from './index';
+import { applyCommand, createGame, deserializeGame, getLandObservation, getSettlementLandObservation, serializeGame, stateHash, stateHashForVersion, type GameState } from './index';
 import { applyLandCommand, type LandCommand, type LandObservation } from './territory';
 import { indexes } from './visibility';
 import { withRules } from './rules';
@@ -51,7 +51,7 @@ describe('call-local territory quote derivation', () => {
   it('retains genuine pre-optimization observation bytes, including historical filters, fog and blocker ordering', () => {
     // SHA-256/UTF-8 lengths captured from the unoptimized schema-11 selector before this change.
     const game = quoteCampaign(), save = serializeGame(game);
-    expect(stateHash(game)).toBe('14e7f89e');
+    expect(stateHashForVersion(game, 11)).toBe('14e7f89e');
     expect(beforeTextCompaction(view(game))).toEqual({ sha: '9393b44496daebd51f59834ab73f0cb1b24abe1715d85c55a73dfe6230a6c5b4', bytes: 208693 });
     expect(withRules(game, 10, () => seal(view(game)))).toEqual({ sha: '945f8e14f2eafbccd0db66ade4239a8dd9a166a3b85f0db254a8f761f7dd8865', bytes: 124995 });
     expect(beforeTextCompaction(getLandObservation(game, game.turnOwnerId, { has: cell => indexes(game).visible.get(game.turnOwnerId)!.has(cell) && cell % 2 === 0 })))
@@ -62,7 +62,7 @@ describe('call-local territory quote derivation', () => {
     const busy = deserializeGame(save);
     expect(applyCommand(busy, busyCommand).ok).toBe(true);
     expect(beforeTextCompaction(view(busy))).toEqual({ sha: '6b17c1e5d6273614b01eb50a8109e82d7997d5b60c8b5420dbb7138f78ed2b9d', bytes: 199766 });
-    expect(stateHash(busy)).toBe('69ab5224');
+    expect(stateHashForVersion(busy, 11)).toBe('69ab5224');
     expect(serializeGame(game)).toBe(save);
   });
 

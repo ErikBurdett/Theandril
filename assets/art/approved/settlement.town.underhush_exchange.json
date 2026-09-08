@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.town.underhush_exchange",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.town.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.town for Theandril, Underhush Exchange.\nSubject: ONE complete substantially developed dense town, low and broad, with seven to nine distinct roof/building masses around a clear central market/work hall and a compact enclosure. More numerous and substantial buildings than a three-house village, but not a grand city. No tall flag or needle consuming canvas; broad full body and practical connected lanes.\nCulture-specific identity: Low keyhole arches, nested vent stacks, broad squat dwelling halls and covered exchange courts. Clay-brown stone, pewter braces, pale-lime plaster, tiny amber markers; not Covenant square buttresses or Morrow living roofs.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "settlement.town.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.town.underhush_exchange/286146249bbf4b7d5d1157449c92c66400ecabd44169433f086bd0e3380d9d73/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b856544f09e82ada454fc060b8e3b80276cfd5b1b3007beea8801780dc8ae2da",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.town.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.town.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:26:26Z",
+  "referenceHashes": [
+    "6b2453afafb2f044f16eac43086436b056fc53cf9ef46ee55f8e93fba84383b3",
+    "7e7a399a51a4205d1efefe4b4100ab4fdf21356a9b0e6b6e531887a74e47d94e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "8eba2796f44e28b26530b546e402db67f89d37eb878547b4c2714f8ab6bcff32",
+      "inputHash": "6b2453afafb2f044f16eac43086436b056fc53cf9ef46ee55f8e93fba84383b3",
+      "outputHash": "5f945a2f3364efaa92852883b62efa14e8a075d80197d6065a43f98a275ff62d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "5f945a2f3364efaa92852883b62efa14e8a075d80197d6065a43f98a275ff62d",
+      "outputHash": "9bf69d57e39ab11c6a4650b0991a8ab09c0468bf39289d0b454d669f5e001e0e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9bf69d57e39ab11c6a4650b0991a8ab09c0468bf39289d0b454d669f5e001e0e",
+      "outputHash": "16d44672e01afbea854f1e15261dc6720ae4d4e500962fdf3466378631bf06c6"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "d10d4b5f796d7ea9dfc72fc97c304f4a45db3d304a6cbacf5b4e44bcd1e776c6",
+      "outputHash": "7ab8e83e8d17f61812bd6ec432d6c6bc23f5f2d3b5b4cf6022492a9978532d6c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "e0763cd5f63dc9c0d4e240f162bfd07dae14cad311100fa60bec9984c96a9b8a",
+      "outputHash": "0fe905dd6006307d4e47c83c7d4066b147214d2b08cc830f7cf2ab802d1c6340"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "83d5cfc6a0fb6a1fb1972c5ca5e746a215546bbd11d9aaea59b56432753692ba",
+      "outputHash": "b5a7d972805932c92df63facef2cf8de7c013dcbdaaa714467c70b21f11cb43a"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.town.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:31.862Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Nested barrel roofs, low arches and wider store courts provide a clearly denser town. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 286146249bbf4b7d5d1157449c92c66400ecabd44169433f086bd0e3380d9d73; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/bb353728a8ebaba60889e87c496f4c904d3f3831820565d2cdb634a2d1db3460.png"
+    ],
+    "inputHash": "9855ce53d3eb49ae43f03973ab3346929e14e76016a90d1d5436600c8c259bdc"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -7,7 +7,7 @@ export { navalCampaign, NAVAL_FIXTURE } from './naval-fixture';
 export function matureCampaign(size: 'huge' | 'legendary'): GameState {
   const count = size === 'huge' ? 32 : 40;
   const totalArmies = size === 'huge' ? 1500 : 4000;
-  const state = createGame({ seed: 20260905, size, factionCount: count });
+  const state = createGame({ seed: 20260905, size, factionCount: count, generatorVersion: 4 });
   for (const faction of state.factions) {
     const colonist = Object.values(state.armies).find(army => army.factionId === faction.id && army.formations.some(item => item.unitId === 'unit.colonist'));
     if (!colonist) throw new Error('Fixture has no caravan');

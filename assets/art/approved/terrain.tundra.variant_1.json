@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.tundra.variant_1",
+  "type": "terrain",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.tundra.variant_1"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. TUNDRA: broad low frost-grey earth plates with sparse rusty dwarf scrub and dull slate stones, wind-polished exposed ground, no trees. Subdued blue-grey midtones, only small restrained bone-grey snow remnants. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.tundra.variant_1/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/approved/terrain.tundra.variant_1/e14e010509152387d4e3d5c21d82d2f33d00b8c35867078dea846d4aea8b34b0/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0f862bbaf03cbe38e99eeb7c8ac58b00925dc2ab63783610914aaf2c9929fce7",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.tundra.variant_1-v1.png",
+      "assets/art/source/biome-variants/terrain.tundra.variant_1-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:24:13.488Z",
+  "referenceHashes": [
+    "0d4fe37f4586d37cf6fb5418825bb73ace289997d1d1e535d02ed0dc417905cb",
+    "bbaa007bf987df88287fc63d0920abddeeac2e8ae9e5ac008ea98a92550b8953"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "abb5b89b90373580cc96b863660f5f4979e92943a85d95b1f9cbf77e367008cf",
+      "inputHash": "0d4fe37f4586d37cf6fb5418825bb73ace289997d1d1e535d02ed0dc417905cb",
+      "outputHash": "ed50c334bca35befdef949db38c2431a393cbe93ba63561d9c5aaa9deacdbcca"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "ed50c334bca35befdef949db38c2431a393cbe93ba63561d9c5aaa9deacdbcca",
+      "outputHash": "148cd75ecf9ef5c3255c16399c32a0a7c5ae68dda573e487153e0315074ce048"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "148cd75ecf9ef5c3255c16399c32a0a7c5ae68dda573e487153e0315074ce048",
+      "outputHash": "a86849ffbc2176b9ed9e30a854ed354725d579a23eb8467ba4ab88886c1e18cd"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "36f6dbb4d4c4bfaa52ac6f44a0c29cd08109cc83a9474ed0a0fea50646074e68",
+      "inputHash": "bb1af4079b7e78eace3921482b26efeb36a7f952e22ad8acd982639ce770c50f",
+      "outputHash": "a7aaa00eeada742ba8a88fff2809b917a97c43e2771279a5edabf08ae4831dc9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "cfc1d61a3de2e55f682127d336466b688f9075b2c3c02a515c2178d68a19f9c0",
+      "inputHash": "67563b885ddd67a10a71ccacf5328a58a6797819a2f1d8015b780a3211a8b3e7",
+      "outputHash": "d88eaa811ffcaeaf445505cff1a17f5ec055ff4cb16c92e1ed582d93fcf466dc"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-terrain-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "00c0348253f3e64b72b9a324c5f8f01920970f48aee8b8e610d4b1f6dca38fad",
+      "outputHash": "f430670425ba37dca050915f7946c87930acef555d96e0f32b7b66cb53d03683"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/terrain.tundra.variant_1.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex root visual review",
+    "reviewedAt": "2026-09-07T07:21:16.745Z",
+    "notes": "Broken cold pale frost and low stone/lichen clusters read as open treeless tundra. Inspected raw source, native1x, nearest4x and mixed-repeat with original base. Complete padded silhouette, hard alpha, registered 56x64 footprint and restrained material identity. Original base remains brighter in several families, especially desert/taiga; this slice reduces repetition, not a seamless biome-transition or completed value-unification pass. Static terrain only. In-game acceptance follows publication.\nReviewed candidate e14e010509152387d4e3d5c21d82d2f33d00b8c35867078dea846d4aea8b34b0; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/bdd809b74771387a8c69db78cf4979b9945834a4b00465681a883885697d8019.png"
+    ],
+    "inputHash": "be0f8442e074f6806f9bc4c4eced07b74ce44b316253355d3e0ddb4a632a2888"
+  },
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

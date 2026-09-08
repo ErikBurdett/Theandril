@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.transport.cairnwing_concord",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.transport.cairnwing_concord"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Cairnwing Concord, role unit.transport.\nSUBJECT: ONE complete transport ship, broad short unarmed cargo hull, readable open cargo deck and small covered passenger cabin, single small furled sail and short mast. Cultural materials and painted cloth; stout transport silhouette distinct fromwarships. Southeast isometric view bowtowardright, dry isolated entirehull includingkeel, no waterorwake. Native96x96 maxheight78px pivot48,80.\nCULTURE: Tawny feathers, oxblood cord, oxidized copper, pale scree. Narrow harnesses, folded feathered forearms, ribbed narrow shields, ledge tools. Bracketed low stone halls, terraced load courts and wind-braced lift housings integrated into freestanding settlement silhouette; no giant scenery rock or inaccessible floating castle.\nPEOPLE if character or rider: Tool-using feathered cairnfolk with short avian beaks, two legs and two dexterous arms with folded forearm feather fans; human port households. No spread wings, flying poses or implied flight.\nHERALDRY if UI or flag: A single stepped feather with three unequal notches.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.",
+  "frames": [
+    {
+      "id": "unit.transport.cairnwing_concord/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/unit.transport.cairnwing_concord/56ab2e6efd710e48bf1c77b75f065bd45796d74693be3af3142e3ed2a8e0555e/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2c7453f78830d1eaa6b488bd831ae90b6a92075376b4ba49c2acb40478ff812e",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/naval/unit.transport.cairnwing_concord-v1.png",
+      "assets/art/source/faction-expansion/naval/unit.transport.cairnwing_concord-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:10:25Z",
+  "referenceHashes": [
+    "1ec3e882c7ef830adf126c33a9d5f05402880a7665593daaacc0d35da41e4a8a",
+    "d44194732dd4bf8b0c1d4780f24f61a42a9994838af1df9933a274e87a585b7a"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "aa60efae5cab7d0a775ca28b80f567ff26695717f7f96ba16521ac1aa4d70955",
+      "inputHash": "1ec3e882c7ef830adf126c33a9d5f05402880a7665593daaacc0d35da41e4a8a",
+      "outputHash": "c3e1200197fbb8c1e720d5666ddf4ac11f56f9fe02791ead4e8076b9ee9f8251"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "c3e1200197fbb8c1e720d5666ddf4ac11f56f9fe02791ead4e8076b9ee9f8251",
+      "outputHash": "8e0e3a7108dbaa2bd1d21fb37e64f7f0881d9efb6fe02d62c8a0d366f1dc5331"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "8e0e3a7108dbaa2bd1d21fb37e64f7f0881d9efb6fe02d62c8a0d366f1dc5331",
+      "outputHash": "9a338e42220de2980abf827eb881284ffeaddd64dbc83ec0889e1b35ccc1fdce"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "0fea701ccd5d8ef86c66e6172fe9571a7b2c4ee2e8dc26d3e8fb2a5d56592370",
+      "outputHash": "fa93c3e1bd8ffd6a0f468e3b9638fab4b4eeac0ae32dfcd24cb0dd6fc519e219"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "50ba7aa9628eafb7dba47ab2b395ff23d6147ebda64247060a76ee48194e5232",
+      "inputHash": "b0e52e5058fdbc432a2f99ece45e5a17d4340533846f1aa31edeb49073f68f32",
+      "outputHash": "2e16c18d4946547515f9c37201698a50d469c22af79eff2d33ba94ac46269cd8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "6fc5d6a819f0fce332195e52ef7e0685dcc1c88c81bbb6c077405c750eabdb6d",
+      "outputHash": "1c7e7715163192ef348e586ad840cafbd463b37de391c748523786644d0b118c"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.transport.cairnwing_concord.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T16:48:13.672Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Cargo holds, covered cabin and furled sail distinguish the unarmed transport; ordinary hull with no sea backdrop. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 56ab2e6efd710e48bf1c77b75f065bd45796d74693be3af3142e3ed2a8e0555e; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/622a99af7f0f87fe6951b2a93de6855547620e5b25eb71cd109998ad84626bed.png"
+    ],
+    "inputHash": "6c1fabe40605562125d271e8460660f46de19acffa025dd7652d3018b09bee72"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

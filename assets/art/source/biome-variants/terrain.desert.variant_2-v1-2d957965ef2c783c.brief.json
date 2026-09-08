@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "terrain.desert.variant_2",
+  "type": "terrain",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "terrain.desert.variant_2"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original native pixel-art terrain tile for Theandril, a serious weathered dark-fantasy strategy map. DESERT: flat wind-scoured stony desert pavement, muted sandy ochre and grey-brown grit in broad irregular patches, a small isolated cluster of dark low flat rocks and tiny dry scrub. Predominantly calm ground; no dunes across every pixel. Exact flat overhead pointy-top HEXAGON with top and bottom vertices; width:height 7:8, no sides, thickness, bevel, outline, shadow or isometric platform. Full opaque terrain inside the hex; genuinely transparent PNG everywhere outside, not a checkerboard. Complete hex inside generous transparent margins. Intentional coarse 64x64 logical pixel detail, hard square pixel clusters, only 8–12 subdued material colors, large readable 3–8 pixel shapes; consistent diffuse upper-left light. Quiet low-contrast outer fifth blends with adjoining variants. No roads, rivers, usable resource deposits, buildings, characters, borders, text, labels or UI. No tiny scattered noise, no smooth painting or blur, no glowing or glossy mobile-game colors. Original fantasy artwork, not copied designs.",
+  "frames": [
+    {
+      "id": "terrain.desert.variant_2/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        32
+      ],
+      "sourcePath": "assets/art/source/native/terrain.desert.variant_2/v1/2d957965ef2c783c/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "6104e32178937ae8987c6513a2f723e0cfa0a04d18ab43d80e237fb01e58c5a6",
+    "sourceRefs": [
+      "assets/art/source/biome-variants/terrain.desert.variant_2-v1.png",
+      "assets/art/source/biome-variants/terrain.desert.variant_2-v1-2d957965ef2c783c.json"
+    ],
+    "licenseNotes": [
+      "Original built-in generation commissioned for Theandril; no third-party game artwork used. Service terms apply; unavailable model/seed are not invented, rights are not independently guaranteed."
+    ]
+  },
+  "createdAt": "2026-09-07T06:31:45.286Z",
+  "referenceHashes": [
+    "7a2ae90f3b1df2e3c7dfe732e38825bc2c7adaa7a59efe6e9fe6b2059f64efd9",
+    "8877ac5f3d1d066de3e4688e07ac3a7610fdfe6606b936f4e271dc4587fcf4da"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-biome-native",
+      "version": "1",
+      "profile": "pointy-hex64",
+      "settingsHash": "36fc83fd815e3bde16cf86fe54df49bac87bb459fce1408170b8327fc7ced0d4",
+      "inputHash": "7a2ae90f3b1df2e3c7dfe732e38825bc2c7adaa7a59efe6e9fe6b2059f64efd9",
+      "outputHash": "1b41ceda9bf991c7d7fa7b9573c4cbab8ae01808d012ce683e956031b6055430"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 0,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 16,
+    "requireMotion": false,
+    "terrain": "hex"
+  }
+}

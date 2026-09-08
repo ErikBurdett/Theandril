@@ -4,11 +4,20 @@ export type {
   Siege, SiegeObservation, CaptureDecision, CaptureOption, CaptureOutcome, Ruin,
 } from './types';
 export type { BattleOrder, BattleState, BattleFormation } from './combat';
+export type * from './combat/presentation';
+export { getBattleScene, observeBattleAbilities } from './battle-abilities';
+export type { BattleAbilityOption, BattleAbilityState } from './battle-abilities';
+export { schema13CampaignBattleSchema } from './save';
+export type { ArcaneResearchState, ArcaneResearchObservation, ArcaneResearchOption } from './magic';
 export type { CampaignPace, RosterVersion } from '@theandril/content';
 export { createGame, applyCommand, applyCommandForVersion, getObservation, settlementYields, validateEndTurn, commandSchema, commandSchemaForVersion } from './simulation';
 export type { ObservationOptions } from './simulation';
 export { stateHash, stateHashForVersion, serializeGame, serializeGameForVersion, deserializeGame, replayGame, SAVE_VERSION, eventSchema, campaignBattleSchema, schema7CampaignBattleSchema, schema6CampaignBattleSchema, legacyCampaignBattleSchema, battleReportForVersion } from './save';
 export * from './territory';
+export { getSpectatorObservation } from './spectator';
+export type { MapObservation } from './spectator';
+export { observeRoads, hasRoadEdge, roadDirection } from './roads';
+export type { RoadState, RoadObservation } from './roads';
 export type { FactionProgression, ProgressionObservation, VictoryProject, Victory } from './progression';
 export { getProgressionObservation } from './progression';
 export type { MovementRoute, MovementPreview, MovementQuery } from './movement';

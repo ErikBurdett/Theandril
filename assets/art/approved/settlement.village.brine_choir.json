@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "settlement.village.brine_choir",
+  "type": "settlement",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "settlement.village.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art settlement.village for Theandril, Brine Choir.\nSubject: ONE small complete inhabited village cluster of three modest buildings around a little open working court. Clear low simple roofs, one small store and a practical low enclosure. This is the smallest settlement stage, no great hall, no high tower, no tall flag.\nCulture-specific identity: Paired sheltered pool courts, perforated clay wind walls and low rounded roofed shore buildings. Coral-clay masonry, pale eelgrass roof mats, wet slate, matte shell inlay; not Reedbound stilts or glass palaces.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 96x96 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "settlement.village.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/settlement.village.brine_choir/3b3565815197a766256332e578824e70d26bf9a47a67c1e11635f8dd884d5361/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "afa136ac22cbe31b447855768ad61bf0971936bd09823ba50f591bab2702184a",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/settlement.village.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/settlement.village.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:13:14Z",
+  "referenceHashes": [
+    "bf8722c045e637014fa342cd51d29f7c25410dd7b67e8617f25b2dc022bced49",
+    "b8f971dc866bb37dc7bd1691bf9e0886ba5e1f386ce4a1aa7cd36166c5191e1e"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-96",
+      "settingsHash": "cd1cb595cb465edfae34ef8b53e00ee44736b962e9681ba13924257085ca739d",
+      "inputHash": "bf8722c045e637014fa342cd51d29f7c25410dd7b67e8617f25b2dc022bced49",
+      "outputHash": "2e874b5bf03944995da684cdc35a29bc40cc5b047b851f528fd4e25fe9d1c2cf"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "2e874b5bf03944995da684cdc35a29bc40cc5b047b851f528fd4e25fe9d1c2cf",
+      "outputHash": "273280dae4e48e966a34ef2f5f300a8beee4a7c626cfb63caa67d06f22f93d9a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "273280dae4e48e966a34ef2f5f300a8beee4a7c626cfb63caa67d06f22f93d9a",
+      "outputHash": "b729f7d128b9b7d25712f284d2dc82cf5fef53a3f17b5bd872297b8ac99bcb3d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "513105e925d414ad025c6f5f0958be35ad280877fa9bd52fc0a5430be72e5ebe",
+      "inputHash": "ccbb111f17cdae31c035978bc16c662389510af687bfddfc6f5f8dceba29abeb",
+      "outputHash": "763a4ab76a7ce4f7256b51b5bcd1735a000fd458800781a875750747e51e15d3"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "c14af2879df99451230d96c94464ba7e064e811383ebde493c1fac8069f35231",
+      "inputHash": "6e7a9562f389781aa561526841c98b892da5dcff4d522bf76f1ccdf90f949cee",
+      "outputHash": "abef0aaa9096185da50a59cb7131050bdefb08ef692c9d80068cd815589b5cf3"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-settlement-96",
+      "settingsHash": "fc0582578a316e84861c5e284ee261ef6eb1d4949fba286d5421d8662fdb6cac",
+      "inputHash": "a007db901fba9c238dd89134692143ee6bdc043fa38d56f855143c94520ccd5d",
+      "outputHash": "77747e5c877df7f0833233602e441c6cc116802ab9a3278b3e751d90e52b0ee8"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/settlement.village.brine_choir.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:18:13.517Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Three low rounded reed-roof houses around a maintained working courtyard, no water scenery rectangle. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 3b3565815197a766256332e578824e70d26bf9a47a67c1e11635f8dd884d5361; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/4642816a3ab47a27768a48c45815db721e73c45b0ab8c9c7ddbf4c287ef539f8.png"
+    ],
+    "inputHash": "fd10c382d62ec8d239b2d6baa5e9f4441e03d7db01fef3476d1626711a19a892"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

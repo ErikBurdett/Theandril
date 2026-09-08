@@ -1,9 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
 import {
-  generateWorld, GENERATOR_VERSION, hexDistance, isPassable, MAP_DIMENSIONS, neighbors,
+  generateWorld as generateCurrentWorld, GENERATOR_VERSION, hexDistance, isPassable, MAP_DIMENSIONS, neighbors,
   SeededRandom, TERRAIN, type MapSize, type World,
 } from './index';
+
+// These are the original connected-continent guarantees. V5 has independent
+// multi-landmass fairness/topology tests; do not weaken historical expectations.
+const generateWorld: typeof generateCurrentWorld = (seed, size, count, version = 4, options) => generateCurrentWorld(seed, size, count, version, options);
 
 function fingerprint(world: World): string {
   let hash = 0x811c9dc5;
@@ -120,7 +124,7 @@ describe('odd-row hex geometry', () => {
 describe('world generation', () => {
   it('preserves the versioned seed fixture for saves and replays', () => {
     const world = generateWorld(20260905, 'tiny', 8, 1);
-    expect(GENERATOR_VERSION).toBe(4);
+    expect(GENERATOR_VERSION).toBe(7);
     expect({ version: world.generatorVersion, fingerprint: fingerprint(world), starts: world.starts })
       .toEqual({
         version: 1,

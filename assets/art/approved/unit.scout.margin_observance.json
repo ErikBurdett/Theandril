@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.scout.margin_observance",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.scout.margin_observance"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original Theandril dark fantasy strategy pixel sprite, Margin Observance, role unit.scout.\nSUBJECT: ONE adult light scout, readable shortbow held down, hood or culturally specific head shape, small travel pack, grounded cautious stance. No long trailing prop. Native64x64 maximum body48px, pivot32,56.\nCULTURE: Parchment grey, dull cinnabar, matte ink black, weathered lead. Narrow document cases, interrupted stripe patterns, practical slate shoulder covers and pale-edged shields. Slab-roof archive stations, protected empty wall recesses and enclosed supply yards; no levitatingglyphs or blackwizardcliche.\nPEOPLE if character or rider: Human copyists, custodians and supplyhouseholds; work-conscious guardedcamp equipment.\nHERALDRY if UI or flag: One broken bracket with a deliberate open corner and small offset registration bar.\nSTYLE: deliberately coarse CRISP PIXEL ART with broad stepped square-pixel clusters, restrained readable detail at the stated native resolution, weathered matte materials, muted palette, soft upper-left lighting conveyed by flat value steps. Entire isolated silhouette, generous at least15percent REAL transparent empty padding on every side. Request true zero-alpha PNG background, NOT a painted checkerboard or white/black background. Do not create a smooth painting or finely noisy illustration. Respect full native silhouette extent including tools and poles. ONE subject only, NOT a sheet, variants or collage. No text, labels, UI, border, ground plane, hex, scenery, cast shadow, particle effects, magical glow, copying known franchise characters or real world logos. It must belong to a harsh inhabited fantasy world, functional and handcrafted, readable and dignified rather than toy/chibi. Buildings may have contained courtyard flooring only within their walls; ships have no surrounding sea. No terrain tiles or animation frames.\nFACING AND TECHNOLOGY: All people, riders and buildings use a grounded southeast three-quarter view facing toward the right; heraldry is front-facing. No firearms, cannons, gunports or gunpowder. Any armed ship crew uses ordinary bows or crossbows only.",
+  "frames": [
+    {
+      "id": "unit.scout.margin_observance/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.scout.margin_observance/82e0c9e9560663468bfcf24fb8fb8ab95c6cce59870edb54ce6825022a8bac1e/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "f9567707e78a38308965f2b185fc843608ac14946945c0d582a83e15cf23bc06",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/reedstars/unit.scout.margin_observance-v1.png",
+      "assets/art/source/faction-expansion/reedstars/unit.scout.margin_observance-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T16:46:01.000Z",
+  "referenceHashes": [
+    "3c14d79d12048c6e20da512512b4ca6433b90c87b56dc833dec584d9c1a60196",
+    "ece60a59160b45b8be7808b973e3ddd9b532607bce3ac99462eb38e2f5802f15"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "02894f36c8a2d1bf0e1211fef69bac6bb931b235b00e8d5c334a12af95f04a86",
+      "inputHash": "3c14d79d12048c6e20da512512b4ca6433b90c87b56dc833dec584d9c1a60196",
+      "outputHash": "8e504a95df65ea5943a9bdc07309392e8b3e1ac7c3f2c7812ddc1c4fe0e0d34a"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "8e504a95df65ea5943a9bdc07309392e8b3e1ac7c3f2c7812ddc1c4fe0e0d34a",
+      "outputHash": "d576246f1da1dd7964457490c22bda2df4fb03361ed1fc8e2a5ec62cd5d3f8d3"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d576246f1da1dd7964457490c22bda2df4fb03361ed1fc8e2a5ec62cd5d3f8d3",
+      "outputHash": "0b37257ea59d99cf431f56b9480734e3514484fd8fb2b6f33d3fdcee23b6fff8"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "703196cf23dd6d8395b2636444c5c0e91ac28c5a394f8439c37634a60568e289",
+      "outputHash": "9b59562d79f1d36df78d89bf009fd499ff86734a143554fa10a8543baea742d7"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "faf7d4f073a6ee6dc532a561468d4889eb24dcbbd1c883a518e2d49bc9e0b162",
+      "outputHash": "50c0533b286870f308541d4b36a1b7c54748bb560ca94f400e93e8eb8643f400"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "58d6590b9fb95a6bc6e81a3eee1220d24dfea953f35c2759fd0b936fb32ecd31",
+      "outputHash": "ed999f30d43083401bde50d5b86359aebb9daa285a90e9c46f24e394e360b99d"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.scout.margin_observance.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:16:03.327Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Cream hood, low shortbow and quiver distinguish lightly armored scout; both boots and bow contained. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 82e0c9e9560663468bfcf24fb8fb8ab95c6cce59870edb54ce6825022a8bac1e; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/146b9abef0f2980a92c0b9f57344e8a6cbbad1688c3a9b89e99aa9a13ddbf164.png"
+    ],
+    "inputHash": "426dc98eaf39e06fd2a798ee84384639c854a7212b7948400ff10e1932a0fb3f"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

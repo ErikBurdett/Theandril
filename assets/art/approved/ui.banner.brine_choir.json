@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.banner.brine_choir",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.banner.brine_choir"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art ui.banner for Theandril, Brine Choir.\nSubject: ONE complete faction cloth banner on one short practical pole, hanging mostly straight with one gentle fold, original faction emblem on a broad readable cloth plane. Full pole and small finial inside the image; no person or base stand. Maximum height54 in a native64 square; broad compact cloth, no long streamers.\nCulture-specific identity: A broken concentric ripple: two unequal open rings, clearly legible gaps, matte shell against wet slate; not a keel or sail. Cloth uses Coral-clay accents, pale eelgrass cloth, wet-slate armor, matte shell inlay and practical woven salt-cloaks. Broad fin-fold collar and low crescent shields.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite.  Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No fish tails, tentacles, magic bubbles, glowing water or underwater pose; no giant shells as buildings.",
+  "frames": [
+    {
+      "id": "ui.banner.brine_choir/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/ui.banner.brine_choir/1319c9874427b3c9007de20173ddd9409eaba961185f8385e9c84b58cc1ff031/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7a46cee12d982b051487cccb780407286951b91ff25a802c78910680f71504f5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/ui.banner.brine_choir-v1.png",
+      "assets/art/source/faction-expansion/duskworks/ui.banner.brine_choir-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:20:36Z",
+  "referenceHashes": [
+    "54f5bdeb05aa5eee541319bbe52ccc5a2de8ad9b227d08185856fbde2b40c647",
+    "09731460d7cab703cb96faea23c469e7a003c14acb3d769076369abf503e56c7"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "51a48cd203d9f5118f2bfaf18a405fdffbfec0d60590911187f8ea12becc451f",
+      "inputHash": "54f5bdeb05aa5eee541319bbe52ccc5a2de8ad9b227d08185856fbde2b40c647",
+      "outputHash": "98032dfd6efb964796001cdf609dc015abc35ef74567fa0763e5e0175fc51e4c"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "98032dfd6efb964796001cdf609dc015abc35ef74567fa0763e5e0175fc51e4c",
+      "outputHash": "06ff51198da49e83a4a4886ad72697f0313a997d5de6ac2596ea6fb531dcc692"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "06ff51198da49e83a4a4886ad72697f0313a997d5de6ac2596ea6fb531dcc692",
+      "outputHash": "da1ed91e8985d1c5c9c3379e0f81435cd3b001e3b515f2e7501ac97bf654c7f4"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "ad2c6b5de3ba5d7cbd71b64ade805b9a374b957769aeb6571eb60016e49b6116",
+      "outputHash": "690ef289a0d80cfe425ebb90dee1905a178ded2e56dd8de1f86ed9c1fdc163de"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "f12e8d16c6253b555f4c5bac08d41295afa1d1bfb46f2e66fd5cc6d646068720",
+      "outputHash": "6309349dfffbba46a7d8819d05169fdc9cb7ab8747c25b58e2a58c44809b1504"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "3c79319130662a1eab01c0192c324411e95bba4c82313afc3b337fe99aad309f",
+      "outputHash": "2b428a9dc948f34029ab9d2a80ca533df076d090500ca41e89a084bd8142ce46"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.banner.brine_choir.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:18:15.562Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Banner bears nested open rings on dark cloth; full support and shell ornaments remain contained. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 1319c9874427b3c9007de20173ddd9409eaba961185f8385e9c84b58cc1ff031; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/8c5159ff3f6affb28016a85adea638e63efd6d23dcdf84bbe87cf1ceb0988eb2.png"
+    ],
+    "inputHash": "668563c4d7e20ce27fb72cec39cba76eb68f1246fab27702d764881f90a993bd"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

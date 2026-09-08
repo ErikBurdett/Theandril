@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.colonist.emberwake_convocation",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.colonist.emberwake_convocation"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.colonist for Theandril, Emberwake Convocation.\nSubject: One practical adult founding-caravan leader walking in a quiet planted stance, bearing a large strapped household pack with bedroll, seed crate and compact tools. Unarmed civilian silhouette: weight of carried supplies clearly distinguishes this role from a scout. No separate cart that dwarfs the person.\nCulture-specific identity: Adult human seedkeeper or kiln-worker household escort, practical proportions, visible tool-hands and ordinary boots. No fire elemental or undead. Ash-white ceramic face screens and small ceramic plates, smoked-orange cloth, muted sulfur-green straps, charcoal padded kiln aprons and short heat-resistant wraps. Seed jars and split-vent motifs, no open flame.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No flames, lava, burning scenery, smoke clouds, fire effects, glowing embers or Cinder fortress costumes.",
+  "frames": [
+    {
+      "id": "unit.colonist.emberwake_convocation/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.colonist.emberwake_convocation/eddc69840d9c8de557f40a69a16748ec68d566feb965d85a26432cd51e9d419b/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0f9df28ecb4877b532d5e1d8484402a071bd161d9570e3a44e529efde0cca050",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.colonist.emberwake_convocation-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.colonist.emberwake_convocation-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T09:30:14Z",
+  "referenceHashes": [
+    "df29390b1270063b53ec186f58c669de872fc154239e7e82dd25ce10ef20202a",
+    "f3d48bbd89f9e65542f3f6eaf3e1bf0c7171417cf820bedd13868f637d3b5dbc"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "f0a591dac380c64705b3c82421c0248563811e6bb0a525f8c0bde39b1a89d35f",
+      "inputHash": "df29390b1270063b53ec186f58c669de872fc154239e7e82dd25ce10ef20202a",
+      "outputHash": "da3c34393b25df35cad42fc70859cac97bde6765aad24ea5d5494c01ce4a3dbd"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "da3c34393b25df35cad42fc70859cac97bde6765aad24ea5d5494c01ce4a3dbd",
+      "outputHash": "0f3e1498d31bfaf6e5a77fb911611e43dca1b9da35f6c47124e4298255ded5bc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0f3e1498d31bfaf6e5a77fb911611e43dca1b9da35f6c47124e4298255ded5bc",
+      "outputHash": "94998a326089e4a0334dd52e01b5a5bad7c813119256eb9ddd35caec02d67e62"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "f7a3f3784030b93a72eaa7ec83e9b9f844def9d3919035a49ff33ae145389c36",
+      "outputHash": "bf2ffa4286524f74d32af9aaa93573f43fde85b2abb070c19c3f8b5642637b37"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "873e11db4b69f4d5a26fe984804a7d6f900c9c9da9ac177a0ebfedd661503ce5",
+      "outputHash": "fe8356e155366cb9b228545de0323956124588a6aaa713e78a76fed5fe0ad76e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "4bf575a648cd182d598ee1b264da3bc2b61068dd8d33969e4070f70e0ade3faa",
+      "outputHash": "5d648c0c80a145e8f0e1f4b02c11dc9a3056ba5d773c1f0c09a5e7508aa19370"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.colonist.emberwake_convocation.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:38:25.982Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Seed jars, padded pack and walking staff identify civilian; masked face, both boots and bags contained. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate eddc69840d9c8de557f40a69a16748ec68d566feb965d85a26432cd51e9d419b; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/610e401ae7deced3de6910829cee4ca59e4f9e25a164df78cf5308a09c267709.png"
+    ],
+    "inputHash": "5ce5620464053d070abbe7391c4754927112fc2fd54b5a92eeccfcc5d4ebcb64"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

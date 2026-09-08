@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "ui.badge.velvet_meridian",
+  "type": "ui",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 32,
+    "height": 32
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "ui.badge.velvet_meridian"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE independently generated tiny raster pixel-art army identification badge, ui.badge.velvet_meridian version2, for Theandril. Design only the authored Velvet Meridian symbol: ONE straight vertical PLUMB LINE crossing EXACTLY THREE UNEQUAL HORIZONTAL STITCHES, ending in ONE substantial hanging PLUMB BOB. It must remain BOLD and immediately readable at native32x32 pixels, not a hairline ornament. Imagine an exact28-pixel-high emblem: vertical stem at least3pixels thick, three stitches about18,14,and10pixels wide respectively and each3pixels thick, large simple plumb bob at least6pixels wide and6pixels tall. Separate the three unequal stitches by clearly visible negative gaps. Longest stitch span must be at least14pixels wide in the eventual native badge. Use pale bright matte silver for the continuous thick stem and large simple diamond-shaped plumb bob, with muted brick-red horizontal stitches and only minimal dark local-color edge contrast. No thin cord, tiny dot bob, bevel clutter or fine dangling details. Crisp coarse square pixel clusters and flat grouped values, worn medieval craft identity, not glossy jewelry. Front-facing flat emblem, centered and fully contained within the central60percent of a square source canvas, with generous actual transparent padding and complete tips. TRUE transparent PNG alpha zero outside this single emblem; preserve genuine alpha, never draw a checkerboard or background. ONLY the line, three unequal stitches, and bob. No frame, scenery, scroll ornament, ring, shield, plaque, ribbon, cloth, tassel, tree, feathers, crown, extra symbols, figures, text, letters, numbers, logo, watermark, glow, ambient haze, smooth gradients or cast shadow. One original static badge, no sheet, variants, annotations or multiple marks.",
+  "frames": [
+    {
+      "id": "ui.badge.velvet_meridian/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        16,
+        16
+      ],
+      "sourcePath": "assets/art/approved/ui.badge.velvet_meridian/1ad012bf982ea59858a1b09bc042d20a3106ad9e9f2aa23bf7306ec99bd0ff8b/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "1b621f839e8d33b9d12c297e0d2f401eb46c3f53c3ca8dc9a04cb445cfdc3c29",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/canalmeridian/ui.badge.velvet_meridian-v2.png",
+      "assets/art/source/faction-expansion/canalmeridian/ui.badge.velvet_meridian-v2.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T18:10:07.464Z",
+  "referenceHashes": [
+    "a073320bd7b540922c9af9984174289a472ea078856f0abc1ec1e005fc653a9e",
+    "585970bd83fa2717fef4832eaa4828eadc083204bf31ffcbd9cff9ec390dd7a5"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-32",
+      "settingsHash": "6156ed72ec6e9dce154aa6bcc5280bf0466ada00bee2972de154007f8d61b70f",
+      "inputHash": "a073320bd7b540922c9af9984174289a472ea078856f0abc1ec1e005fc653a9e",
+      "outputHash": "a80eadfb77ac48c817b9228a999e4d8c1c2e77fb5e126a2433656bdc76d7a56f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "a80eadfb77ac48c817b9228a999e4d8c1c2e77fb5e126a2433656bdc76d7a56f",
+      "outputHash": "7e147da0036c00329e27128025e024037a09b8fa1352182dc533a1e1e6186795"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7e147da0036c00329e27128025e024037a09b8fa1352182dc533a1e1e6186795",
+      "outputHash": "677625b6ef6550466e35b0ca2690d7fefbf44dcdeecc97983740b624c2f17232"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "fa2c4614388596385d4dac5a6a2151963fcca5e02555e487c977c356c1085fad",
+      "inputHash": "f1ec6b2dff58c00e61fe4f89b1597f938b6c57490a52b9fa6a3bdb0570f390e6",
+      "outputHash": "ea0cdce6046f89d6e597bf0500b5b4a6a39076cfdff2f43fc34c3b14b93b3847"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0cb4328cfc0e8752669a9872b123f0499a758e9b57fe4fe5d96e92fdf2f531aa",
+      "inputHash": "6e3c02c1cabf593ac2a4a6668d57910782dc3e7d0ad7b9dfc6bcbdc7c27280e5",
+      "outputHash": "c3a37b2bf9fba7440ef0702e3ce4da5bfbfc6421898faffaa6318f3b1b50ebb5"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-ui-32",
+      "settingsHash": "0538a866880e3d97f6db6d2d3fadb228e3bf5779eadd9d6097f656b2053753da",
+      "inputHash": "26003226a9b0e57db68a8ae4e194e3ee51528a22e3cd88b3970e869771429e27",
+      "outputHash": "044ee4e376aae2a67505aa4fbcbd9169b51bddebf0d0fad162216d05084afa27"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/ui.badge.velvet_meridian.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T18:20:43.757Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Selectedv2 substantially improves tiny badge:14px-wide unequal stitch span and8px bob. Actual2px stem accepted as readable, not falsely claimed3px. Rejected thinv1 retained. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 1ad012bf982ea59858a1b09bc042d20a3106ad9e9f2aa23bf7306ec99bd0ff8b; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/de1aa96eed65c9788c17f8577b51dc1fb5297a372e45ecdc8b5ee0287e73b195.png"
+    ],
+    "inputHash": "4b8bc0c6bdecbd92bbec1982e26ba68c5491faf8be1da5083240d3e6cb62fa64"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

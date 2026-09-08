@@ -1,0 +1,21 @@
+{
+  "checkpoint": "Schema12/generator5, prior to continuous-zoom, army-stack and generator6 changes",
+  "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium ./node_modules/.bin/playwright test tests/gameplay/geography-performance.spec.ts --output=test-results/slice20-geography-before",
+  "result": "1 passed (13.0s), browser scenario12.1s",
+  "scope": "Selected exact console measurements, not a copy of the complete raw console record. Sole browser/benchmark CPU job. Actual new Huge archipelago seed74,32 factions, Short pace, paused AI watch,1440x1000,196608 cells; no turns, imports or canonical mutations.",
+  "hash": "74cc112f",
+  "generationMs": 628.4000000357628,
+  "normalCells": 61,
+  "atlasBytesEstimate": 16777216,
+  "reveal": { "acknowledgementMs": 233, "packedCellBytes": 2162732, "totalTransferBytes": 2194000 },
+  "restore": { "acknowledgementMs": 43, "packedCellBytes": 711, "totalTransferBytes": 2203375 },
+  "phases": [
+    { "stage": "normal-faction-sight", "warmedFrames": 75, "frameP95Ms": 16.799999999999955, "renderCpuMs": 0.19999998807907104, "visibleCells": 61, "visibleChunks": 3, "cachedChunks": 3, "cachedTextureBytesEstimate": 1048576, "visibleSprites": 2, "riverSegments": 18, "zoom": 1 },
+    { "stage": "revealed-river-near", "warmedFrames": 75, "frameP95Ms": 16.800000000000182, "renderCpuMs": 0.19999998807907104, "visibleCells": 1024, "visibleChunks": 4, "cachedChunks": 8, "cachedTextureBytesEstimate": 33554432, "visibleSprites": 2, "riverSegments": 52, "zoom": 1 },
+    { "stage": "three-local-camera-drags", "warmedFrames": 75, "frameP95Ms": 16.800000000000182, "renderCpuMs": 0.10000002384185791, "visibleCells": 2304, "visibleChunks": 9, "cachedChunks": 13, "cachedTextureBytesEstimate": 54525952, "visibleSprites": 0, "riverSegments": 52, "zoom": 1 },
+    { "stage": "revealed-strategic-zoom", "warmedFrames": 75, "frameP95Ms": 16.800000000000182, "renderCpuMs": 0.10000002384185791, "visibleCells": 4096, "visibleChunks": 16, "cachedChunks": 20, "cachedTextureBytesEstimate": 83886080, "visibleSprites": 1, "riverSegments": 74, "zoom": 0.40960000000000013 },
+    { "stage": "revealed-whole-world-overview", "warmedFrames": 75, "frameP95Ms": 16.800000000000182, "renderCpuMs": 0.10000002384185791, "visibleCells": 196608, "visibleChunks": 0, "cachedChunks": 20, "cachedTextureBytesEstimate": 83886080, "visibleSprites": 1, "overviewTextureBytes": 3148800, "zoom": 0.03364072888936693 },
+    { "stage": "restored-faction-sight-focused", "warmedFrames": 75, "frameP95Ms": 16.799999999999272, "renderCpuMs": 0, "visibleCells": 61, "visibleChunks": 3, "cachedChunks": 3, "cachedTextureBytesEstimate": 1048576, "visibleSprites": 2, "riverSegments": 18, "zoom": 1 }
+  ],
+  "caveats": "frameP95Ms is rolling240frames, not independent per-phase percentile; acknowledgements do not measure completed GPU presentation; cache estimates exclude atlas/overview/DOM and other GPU memory. Changed physical map after generator6 means a workload contrast, not an isolated renderer speedup."
+}

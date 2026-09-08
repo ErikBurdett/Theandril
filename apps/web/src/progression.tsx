@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import type { GameCommand, Observation } from '@theandril/sim';
+import { ArcaneResearch } from './magic';
 import './progression.css';
 
-type ProgressionTab = 'technology' | 'institutions' | 'doctrine' | 'prosperity';
+type ProgressionTab = 'technology' | 'arcane' | 'institutions' | 'doctrine' | 'prosperity';
 const tabs: { id: ProgressionTab; label: string }[] = [
-  { id: 'technology', label: 'Technology' }, { id: 'institutions', label: 'Institutions' },
+  { id: 'technology', label: 'Technology' }, { id: 'arcane', label: 'Arcane Theory' }, { id: 'institutions', label: 'Institutions' },
   { id: 'doctrine', label: 'Military doctrine' }, { id: 'prosperity', label: 'Prosperity' },
 ];
 type TechnologyChoice = Observation['progression']['technologyChoices'][number];
@@ -89,12 +90,12 @@ export function CampaignProgression({ view, busy, issue, locate, close }: { view
     <p className="progression-resources">{view.knowledge} knowledge · {view.treasury} coin</p>
     <div role="tablist" aria-label="Advancement systems" className="progression-tabs" onKeyDown={event => {
       const index = tabs.findIndex(item => item.id === tab);
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); selectTab(tabs[(index + (event.key === 'ArrowLeft' ? 3 : 1)) % tabs.length]!.id); }
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); selectTab(tabs[(index + (event.key === 'ArrowLeft' ? tabs.length - 1 : 1)) % tabs.length]!.id); }
       if (event.key === 'Home') { event.preventDefault(); selectTab('technology'); }
       if (event.key === 'End') { event.preventDefault(); selectTab('prosperity'); }
     }}>{tabs.map(item => <button role="tab" id={`progression-${item.id}-tab`} aria-controls="progression-panel" aria-selected={tab === item.id} tabIndex={tab === item.id ? 0 : -1} key={item.id} onClick={() => setTab(item.id)}>{item.label}</button>)}</div>
     <section className="progression-panel" role="tabpanel" id="progression-panel" aria-labelledby={`progression-${tab}-tab`}>
-      {tab !== 'prosperity' ? <>
+      {tab === 'arcane' ? view.arcaneResearch?.choices.length ? <ArcaneResearch view={view} blocked={blocked} issue={issue}/> : <p>Arcane Theory is unavailable under this campaign’s historical rules.</p> : tab !== 'prosperity' ? <>
         <p className="progression-explanation">{tab === 'technology' ? 'Spend accumulated knowledge on permanent practical discoveries. Their effects add to the realm’s existing capabilities.' : tab === 'institutions' ? 'Choose how your society is organized. Adopt one institution with coin; this choice permanently excludes the other institution.' : 'Choose how your armies fight and march. Adopt one doctrine with coin; this choice permanently excludes the other doctrine.'}</p>
         {tab === 'technology' ? <ResearchTree view={view} blocked={blocked} issue={issue}/> : <div className="progression-choices">{choices.map(choice => <article className="progression-choice" key={choice.id} data-testid={`progression-${choice.id}`} tabIndex={-1} aria-label={`${choice.name} policy`} data-state={(tab === 'institutions' ? progression.institutionId === choice.id : progression.doctrineId === choice.id) ? 'adopted' : (tab === 'institutions' ? progression.institutionId : progression.doctrineId) ? 'excluded' : choice.available ? 'available' : 'locked'}>
           <h3>{choice.name}</h3><span className="research-node-status">{(tab === 'institutions' ? progression.institutionId === choice.id : progression.doctrineId === choice.id) ? '◆ Adopted' : (tab === 'institutions' ? progression.institutionId : progression.doctrineId) ? '⊘ Excluded' : choice.available ? '◇ Available' : '⊘ Locked'}</span><p>{choice.description}</p><span className="progression-cost">{choice.coinCost} coin</span>

@@ -1,0 +1,140 @@
+{
+  "seed": 20260905,
+  "width": 1788,
+  "height": 700,
+  "note": "Top row preserved generator6; bottom generator7. Left Continents, middle Islands, right Archipelago. Gold crosses starts; shallow saltwater teal, deep saltwater darkblue, freshwater lakes cyan. Code-native diagnostic pixels, not production art or renderer performance evidence.",
+  "panels": [
+    {
+      "row": 0,
+      "column": 0,
+      "generatorVersion": 6,
+      "layout": "continents",
+      "sha256": "f9504d9ec72b69c2734ff1822f305091536615ce0c5023acd5f897452bf2bb34",
+      "inlandSeas": [
+        {
+          "cells": 97,
+          "deepCells": 30,
+          "passableShoreCells": 46,
+          "broadShoreCells": 36
+        },
+        {
+          "cells": 65,
+          "deepCells": 13,
+          "passableShoreCells": 26,
+          "broadShoreCells": 16
+        },
+        {
+          "cells": 44,
+          "deepCells": 4,
+          "passableShoreCells": 28,
+          "broadShoreCells": 19
+        }
+      ]
+    },
+    {
+      "row": 0,
+      "column": 1,
+      "generatorVersion": 6,
+      "layout": "islands",
+      "sha256": "2699a445c525810e9fbcdae217409c56d310b1265a1d626853c9544241c2b8af",
+      "inlandSeas": [
+        {
+          "cells": 65,
+          "deepCells": 13,
+          "passableShoreCells": 33,
+          "broadShoreCells": 27
+        },
+        {
+          "cells": 44,
+          "deepCells": 6,
+          "passableShoreCells": 18,
+          "broadShoreCells": 13
+        }
+      ]
+    },
+    {
+      "row": 0,
+      "column": 2,
+      "generatorVersion": 6,
+      "layout": "archipelago",
+      "sha256": "788ca3d42711e4a24b1df5d3fd912db4c5e2d8c78d0f84ef9552616bd33a062d",
+      "inlandSeas": [
+        {
+          "cells": 65,
+          "deepCells": 13,
+          "passableShoreCells": 28,
+          "broadShoreCells": 23
+        },
+        {
+          "cells": 1,
+          "deepCells": 0,
+          "passableShoreCells": 6,
+          "broadShoreCells": 5
+        }
+      ]
+    },
+    {
+      "row": 1,
+      "column": 0,
+      "generatorVersion": 7,
+      "layout": "continents",
+      "sha256": "906112c391647a5fe2179625a46b1b34cc507406be1f35d06ef2bc91a6ce59b7",
+      "inlandSeas": [
+        {
+          "cells": 1074,
+          "deepCells": 838,
+          "passableShoreCells": 125,
+          "broadShoreCells": 89
+        },
+        {
+          "cells": 154,
+          "deepCells": 69,
+          "passableShoreCells": 55,
+          "broadShoreCells": 42
+        }
+      ]
+    },
+    {
+      "row": 1,
+      "column": 1,
+      "generatorVersion": 7,
+      "layout": "islands",
+      "sha256": "7133503203d9959a158412e847ee9e4cf705dc4694c831b411b46d406c295a50",
+      "inlandSeas": [
+        {
+          "cells": 345,
+          "deepCells": 216,
+          "passableShoreCells": 73,
+          "broadShoreCells": 52
+        },
+        {
+          "cells": 136,
+          "deepCells": 60,
+          "passableShoreCells": 41,
+          "broadShoreCells": 31
+        }
+      ]
+    },
+    {
+      "row": 1,
+      "column": 2,
+      "generatorVersion": 7,
+      "layout": "archipelago",
+      "sha256": "8d5ffd5d62f029dc2e71375101e049b7defef143b77e0202254deddf6cd43746",
+      "inlandSeas": [
+        {
+          "cells": 245,
+          "deepCells": 135,
+          "passableShoreCells": 62,
+          "broadShoreCells": 44
+        },
+        {
+          "cells": 1,
+          "deepCells": 0,
+          "passableShoreCells": 6,
+          "broadShoreCells": 5
+        }
+      ]
+    }
+  ]
+}

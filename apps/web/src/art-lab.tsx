@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { parseArtLabCatalog, parseRuntimeCatalog, type ArtLabCatalog } from '@theandril/art-pipeline/runtime';
+import { LIVE_ART_IDS } from '@theandril/render';
 import { ArtPreview, AtlasPreview, inspectPixels, useAtlasImage, type AlphaBackground, type PreviewFrame } from './art-preview';
+import { publicAssetUrl } from './asset-url';
 import './art-lab.css';
 
 type LabAsset = ArtLabCatalog['assets'][number];
-const LIVE = new Set(['unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', 'terrain.ocean', 'terrain.grassland', 'terrain.temperate_forest', 'terrain.taiga', 'terrain.tundra', 'terrain.desert', 'terrain.steppe', 'terrain.marsh', 'terrain.rainforest', 'terrain.alpine']);
 const assetFrames = (asset: LabAsset): PreviewFrame[] => asset.runtime ? asset.runtime.frames.map(frame => ({ id: frame.id, rect: frame.frame, native: { w: asset.nativeResolution.width, h: asset.nativeResolution.height }, trim: { x: 0, y: 0 }, pivot: { x: asset.pivot[0], y: asset.pivot[1] } })) : [{ id: asset.id, rect: { x: 0, y: 0, w: asset.nativeResolution.width, h: asset.nativeResolution.height }, native: { w: asset.nativeResolution.width, h: asset.nativeResolution.height }, trim: { x: 0, y: 0 }, pivot: { x: asset.pivot[0], y: asset.pivot[1] } }];
 
 function AssetInspector({ asset, catalog }: { asset: LabAsset; catalog: ArtLabCatalog }) {
@@ -33,7 +34,7 @@ function AssetInspector({ asset, catalog }: { asset: LabAsset; catalog: ArtLabCa
   const inspectionLimited = frame.native.w * frame.native.h > 1_048_576;
   const inspection = useMemo(() => image && !unnormalized && !inspectionLimited ? inspectPixels(image, frame) : undefined, [image, frame, unnormalized, inspectionLimited]);
   const unexpectedColors = inspection?.colors.filter(color => !catalog.palette.colors.some(allowed => allowed.toLowerCase() === color)) ?? [];
-  const live = asset.contentIds.some(id => LIVE.has(id)) || LIVE.has(asset.id);
+  const live = asset.contentIds.some(id => LIVE_ART_IDS.has(id)) || LIVE_ART_IDS.has(asset.id);
   const atlasFrames = useMemo(() => catalog.assets.filter(item => item.runtime?.atlasId === atlas?.id && item.runtime).flatMap(assetFrames), [catalog, atlas]);
   useEffect(() => { const update = () => setDocumentVisible(!document.hidden); document.addEventListener('visibilitychange', update); return () => document.removeEventListener('visibilitychange', update); }, []);
   useEffect(() => {
@@ -88,7 +89,7 @@ export default function ArtLab({ close }: { close: () => void }) {
     let cancelled = false; setError(''); setCatalog(undefined);
     void (async () => {
       try {
-        const response = await fetch('/art/lab-catalog.json', { cache: 'no-store' });
+        const response = await fetch(publicAssetUrl('/art/lab-catalog.json'), { cache: 'no-store' });
         if (!response.ok) throw new Error(`Art Lab catalog unavailable (${response.status}). Generate and integrate the approved art pack first.`);
         const next = parseArtLabCatalog(await response.json());
         parseRuntimeCatalog({ schemaVersion: next.schemaVersion, palette: next.palette, atlases: next.atlases, assets: next.assets.flatMap(asset => asset.runtime ? [asset.runtime] : []) });

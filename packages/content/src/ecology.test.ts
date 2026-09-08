@@ -3,7 +3,7 @@ import { BIOME, FEATURE, TERRAIN, WATER_DEPTH } from '../../mapgen/src/index';
 import { BIOME_YIELDS, CHARACTER_NAMES, FACTIONS, FACTION_ECOLOGIES, IMPROVEMENTS, LOCALIZATION, NATURAL_FEATURES, checksum, factionEcologySchema, improvementSchema, landYieldSchema, validateEcologyContent } from './index';
 
 const factionIds = new Set<string>(FACTIONS.map(item => item.id));
-test('twelve ecologies cover the exact faction catalogue without altering original factions or naming pools', () => {
+test('twenty-four ecologies cover the exact faction catalogue without altering original factions or naming pools', () => {
   // Sealed raw pre-ecology values; no claim that the dirty worktree was a commit.
   expect(checksum(JSON.stringify(FACTIONS.slice(0, 4)))).toBe('8c0b2c55');
   expect(checksum(JSON.stringify(Object.fromEntries(Object.entries(CHARACTER_NAMES).slice(0, 4))))).toBe('35e973fa');

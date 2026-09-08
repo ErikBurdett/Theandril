@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.guard.vesper_court",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.guard.vesper_court"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: one original strategic pixel-art unit sprite for Theandril, Vesper Court.\nCreate ONE full-body living pale human court retainer, adult proportions, in a quiet planted guard stance, southeast three-quarter view facing toward the right. Narrow vertically ribbed dark iron cuirass over a muted garnet long split coat, high folded cloth collar, charcoal leather gloves and complete boots. Straight practical sword held downward at the side, slender kite shield with a restrained tarnished-silver edge. Ordinary human face, cool ivory skin, dark hair. This is a living sworn household guard of a court of vampiric patrons, not a monster or vampire caricature.\nStyle: deliberate crisp COARSE PIXEL ART designed to read as a 47-pixel-high body in a native 64x64 frame; visible hard square pixel clusters, broad quiet value masses, restrained detail, muted garnet/charcoal/tarnished silver/cool ivory. Soft upper-left light expressed in a few flat pixel tones, not blur or a smooth painting. Distinct silhouette of folded collar, narrow cuirass, split coat and kite shield. One static pose only.\nComposition: entire sword, shield, head, coat and both boots complete and isolated, centered, with at least 15% clear TRANSPARENT margin on every side. Square PNG with REAL zero-alpha transparency outside the sprite, not a painted checkerboard or white/black backdrop. No ground, floor, base, hex, scenery, cast shadow, glow, particles, labels, text, border or UI. No skulls, bats, bat wings, fangs, blood effects, crown, copied crest or familiar fictional costume. No other subjects, no sheet, no motion variants.",
+  "frames": [
+    {
+      "id": "unit.guard.vesper_court/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/native/unit.guard.vesper_court/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "d6cb9c10ccd7b7f147ee5c56d524a7b1a21614319401b5371808594035cb8ea9",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.guard.vesper_court-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.guard.vesper_court-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T08:18:31Z",
+  "referenceHashes": [
+    "63d1d3c73b3e76c36bb6f36a0a381342ce7113692cab48601c652f305cca2680",
+    "8e33907494d44a8b2ec110dbeab4c9d3a19f0465ee5e26f7f749c314285c30ba"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "e6e5b94eee7ba7ea808733334e57019bc624c0a1b8fa834ff12287ebefd087e2",
+      "inputHash": "63d1d3c73b3e76c36bb6f36a0a381342ce7113692cab48601c652f305cca2680",
+      "outputHash": "d1f7ad818e6486ca1ce349a803a2ff3e5636e4f226ccf41bf84bc6ee8743f1dc"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

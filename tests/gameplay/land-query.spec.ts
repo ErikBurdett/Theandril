@@ -1,3 +1,4 @@
+import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
 import { deserializeGame, getObservation, serializeGame } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
@@ -25,17 +26,18 @@ async function importCampaign(page: Page, text: string) {
   await page.goto('/');
   await page.locator('input[type=file]').setInputFiles({ name: 'land-query.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(text)) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
-  await page.getByRole('tab', { name: /Settlements/ }).click();
+  await openRegistry(page, 'settlements');
 }
 async function ready(page: Page, settlementId: string) {
+  await openSelectedOrders(page);
   const panel = page.getByTestId('land-panel');
   await expect(panel).toHaveAttribute('data-settlement-id', settlementId);
   await expect(panel).toHaveAttribute('data-query-state', 'ready');
   await expect(panel).toHaveAttribute('data-query-hash', await page.evaluate(() => window.__THEANDRIL__!.getStateHash()));
 }
 async function selectTown(page: Page, town: { id: string; name: string }) {
-  await page.getByRole('tab', { name: /Settlements/ }).click();
-  await page.getByTestId('settlement-registry').getByRole('button', { name: new RegExp(town.name) }).click();
+  await openRegistry(page, 'settlements');
+  await selectFromRegistry(page, 'settlements', new RegExp(town.name)); await openSelectedOrders(page);
   await ready(page, town.id);
 }
 async function selectTile(page: Page, cell: number) {
@@ -50,11 +52,13 @@ async function openImprovements(page: Page) {
   return details;
 }
 async function settings(page: Page) {
+  await closeManagement(page);
   const panel = page.locator('.campaign-options');
   if (await panel.getAttribute('open') === null) await panel.locator('summary').click();
 }
 async function endTurn(page: Page) {
   const turn = await page.evaluate(() => window.__THEANDRIL__!.getTurn());
+  await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getTurn())).toBe(turn + 1);
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
@@ -73,7 +77,10 @@ test('selected-town queries are reused for tile clicks and fast registry changes
   expect(await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().landQueryCount)).toBe(count);
   // Click without awaiting details between changes; correctness also has reversed
   // asynchronous-response unit witnesses rather than assuming worker timing.
-  for (const town of [second, first, third, second]) await page.getByTestId('settlement-registry').getByRole('button', { name: new RegExp(town.name) }).click();
+  for (const town of [second, first, third, second]) {
+    await selectFromRegistry(page, 'settlements', town.name);
+    await openSelectedOrders(page); // Mount the query owner, without waiting for its response.
+  }
   await ready(page, second.id);
   await expect(page.getByTestId('land-cell')).toContainText(`Hex ${second.cell}`);
   const options = view.land.settlements.find(town => town.settlementId === second.id)!.cells;
@@ -110,6 +117,7 @@ test('same-turn land orders refresh quotes, cancellation spends honestly and sav
   await settings(page); await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
   await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
   const savedHash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
+  await openSelectedOrders(page);
   await page.getByRole('button', { name: 'Cancel land work · no refund', exact: true }).click(); await ready(page, town.id);
   await expect(page.getByTestId('land-work')).toHaveCount(0);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.treasury)).toBe(coin - price);

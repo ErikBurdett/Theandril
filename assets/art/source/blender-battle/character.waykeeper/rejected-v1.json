@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "character.waykeeper",
+  "version": 1,
+  "reviewedAt": "2026-09-07 21:12:57 UTC",
+  "decision": "rejected-for-native-contrast",
+  "manifestSha256": "12d6cce60cc4527d57f95743cdf3fd01068d3a1fe7b83a91b2c79b5d7272bae5",
+  "evidence": [
+    {
+      "path": "v1/review-1x.png",
+      "sha256": "ab5991d619454d625755b8a9b3179120f961d420c5f1c01ec06b0bcedd730145"
+    },
+    {
+      "path": "v1/review-4x.png",
+      "sha256": "b4f830fe5ccfd73e07135008eab27eec09c0df648a9110a7f887d49d8c7a7f60"
+    }
+  ],
+  "reason": "Actual native review found dark coat/face/boots merged into peat background. Geometry and animation passed technical validation, but contrast was insufficient. No bitmap repainting or deletion; full v1 source/raw/native retained.",
+  "replacement": "v2"
+}

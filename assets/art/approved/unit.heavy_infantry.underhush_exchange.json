@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "unit.heavy_infantry.underhush_exchange",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "unit.heavy_infantry.underhush_exchange"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static strategic pixel-art unit.heavy_infantry for Theandril, Underhush Exchange.\nSubject: One adult heavily armored infantry veteran, broad layered chest and shoulder plates over padded working cloth, short thick sword held down close to the body and a strong large shield. More solid wide mass than ordinary guard without enormous pauldrons or weapon.\nCulture-specific identity: An adult short broad-handed burrowfolk: compact furred body, small rounded ears, blunt face, visible dexterous fingers. Upright two-legged working citizen, not a bearded dwarf, pet or exposed-tooth rodent caricature. Clay-brown padded work coats, pewter fittings, pale-lime panels, tiny dull amber route markers, tactile tally beads, low padded helmets and rounded work shields. Generous compact horizontal shapes.\nStyle: deliberate COARSE PIXEL ART, visible hard square clusters and broad quiet value masses, intended to read in a native 64x64 sprite. Body height about47 native pixels, feet centered at32,56. Muted weathered materials, restrained selective outline and diffuse upper-left light expressed in a few flat pixel tones, no smooth painted shading, no decorative pixel noise. Southeast three-quarter view facing lower right.\nFraming: square PNG, entire subject centered and isolated with at least15% clear transparent margin around ALL extremities. REAL alpha0 transparent background, not painted checkerboard or white/black background. No clipping anywhere. No ground, floor, plinth, terrain tile, sea or water rectangle, hex, cast shadow, reflections, landscape, text, lettering, labels, border, UI, glow or particles. One asset only, one static pose, not a sheet, not multiple alternatives. No dwarf beard stereotype, exposed rodent teeth, mole claws instead of hands, living mushroom roofs, industrial machinery or tunnel scenery.",
+  "frames": [
+    {
+      "id": "unit.heavy_infantry.underhush_exchange/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/unit.heavy_infantry.underhush_exchange/4deb67c1449af7e38e0bbcd9eb8adda7a1c68b62723ebccbbe1a0667ba053068/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "b000551c183f5551717829e5b8db1e6505c45d2f547b66156ae02e462cc3f7d5",
+    "sourceRefs": [
+      "assets/art/source/faction-expansion/duskworks/unit.heavy_infantry.underhush_exchange-v1.png",
+      "assets/art/source/faction-expansion/duskworks/unit.heavy_infantry.underhush_exchange-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril. Service terms apply; no model or provider rights independently inferred. Seed/model unavailability is recorded explicitly in retained source metadata."
+    ]
+  },
+  "createdAt": "2026-09-07T10:17:16Z",
+  "referenceHashes": [
+    "c7e22220e707b3c86c74e6163717b48b8e8ac6a457a261ae5c5c7828bea17dda",
+    "64739a88cd3362a37ed5071ffedfeb896f7d297beb5230c09e6c70144ceb1af5"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-single-asset-extraction",
+      "version": "2",
+      "profile": "registered-64",
+      "settingsHash": "25360cfd8d359059ecf395a266ef0de1db8aacd2acbb41815e067be0e82e0b21",
+      "inputHash": "c7e22220e707b3c86c74e6163717b48b8e8ac6a457a261ae5c5c7828bea17dda",
+      "outputHash": "bf920d23cdf1382f98370c78ac38630b3bbc1276a442da394a64ff6f7c2e4fb2"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "bf920d23cdf1382f98370c78ac38630b3bbc1276a442da394a64ff6f7c2e4fb2",
+      "outputHash": "adda07e8959838b27b2bde0b0b701ac0834cd9fd945df2afb8211dad3a93ac9e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "adda07e8959838b27b2bde0b0b701ac0834cd9fd945df2afb8211dad3a93ac9e",
+      "outputHash": "f1f14319a9eea95164702011f8dfa606dfad69d92fc352253f451281a33862bc"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "e24838caaba54ae4161e3d5103c823bbdbb74eb591988223576cac05547f00c9",
+      "outputHash": "7d6da4a86b41fbe74188a90a4dbb9fc873e6ba37bd070007b1bd079af9d349ce"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "13422c31353b6da10748fd6ffc728d200ecedfe696bca847851dcba487445d92",
+      "outputHash": "78e6bcca6fdcd80288733e6c8130272c693106402109d9489eefce8eff5c8045"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "7a6bb8ac79329fe432a5ea9c7f96fd2337d5db8fde3e8cf3506529c469f7ccc8",
+      "outputHash": "5258f6806b1d3f959f1439880bf84588f8a8f19f4684ab8ac0cd0f05b917fd8a"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/unit.heavy_infantry.underhush_exchange.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex main visual review",
+    "reviewedAt": "2026-09-07T17:49:29.559Z",
+    "notes": "Main reviewed each independently retained whole original, exact native1x and nearest4x processed frame. Broad layered shoulders and wider protected body distinguish heavy infantry, with full sword and shield. Shared master-palette normalization reduces source saturation and fine ornament; complete silhouette and role remain readable. One static southeast pose only, not animation or an implied new racial ability. In-game/fog/UI acceptance remains separate.\nReviewed candidate 4deb67c1449af7e38e0bbcd9eb8adda7a1c68b62723ebccbbe1a0667ba053068; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/a5069fd965c75600b5050fc0a5c49392ccdea19aa250354ebffa2b78648446cc.png"
+    ],
+    "inputHash": "8487efc6f81a363c3256e4797ea7ca3ed01767e1ff61b50c685c4b5229a7740a"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}
