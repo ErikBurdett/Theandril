@@ -1,0 +1,4 @@
+$ sha256sum packages/sim/src/save.ts packages/sim/src/pending-assault-save.test.ts && git diff --check -- packages/sim/src/save.ts
+217673aa986ece9dcdc6472eacb225b7790ff9847553b2d0fb14511cc77f68a9  packages/sim/src/save.ts
+5c43163a8ebb02115c35878301db1089950dd268c7b6c35b422322c98ffe1c4d  packages/sim/src/pending-assault-save.test.ts
+EXIT_CODE=0

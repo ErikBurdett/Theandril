@@ -1,0 +1,135 @@
+{
+  "config": {
+    "argv": [
+      "/home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node",
+      "/home/telephoneheater/Work/Theandril/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "docs/development/ui-followup/playwright.config.ts",
+      "battle-defense",
+      "--grep",
+      "R03 narrow"
+    ],
+    "configFile": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/playwright.config.ts",
+    "rootDir": "/home/telephoneheater/Work/Theandril/tests/gameplay",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/capture-green",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ui-followup-5193",
+        "name": "ui-followup-5193",
+        "testDir": "/home/telephoneheater/Work/Theandril/tests/gameplay",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/capture-green/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "battle-defense.spec.ts",
+      "file": "battle-defense.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "R03 narrow public assaults complete occupation at 390px without intercepted controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3000,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-09T08:21:00.952Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "narrow-capture-before",
+                      "contentType": "application/json",
+                      "body": "ewogICJiZWZvcmUiOiB7CiAgICAic2V0dGxlbWVudElkIjogInNldHRsZW1lbnQuNiIsCiAgICAiYXJteUlkIjogImFybXkuMiIsCiAgICAiZmFjdGlvbklkIjogImZhY3Rpb24uYXNoZW5fY29tcGFjdCIsCiAgICAic3RhcnRlZFR1cm4iOiAxLAogICAgImRlZmVuc2VzIjogMCwKICAgICJzdXBwbGllcyI6IDAsCiAgICAibWlsaXRpYVN0cmVuZ3RoIjogMzAsCiAgICAibWlsaXRpYU1vcmFsZSI6IDY1LAogICAgIm1pbGl0aWFGYXRpZ3VlIjogMCwKICAgICJiYXR0bGVEZWZlbnNlIjogewogICAgICAiZW5nYWdlZEZvcm1hdGlvbnMiOiAyMCwKICAgICAgImVuZ2FnZWRTdHJlbmd0aCI6IDIwLAogICAgICAicmVzZXJ2ZUZvcm1hdGlvbnMiOiAxLAogICAgICAicmVzZXJ2ZVN0cmVuZ3RoIjogMQogICAgfSwKICAgICJjYW5Bc3NhdWx0IjogdHJ1ZSwKICAgICJhc3NhdWx0QmxvY2tlciI6IG51bGwsCiAgICAiZGVmZW5kZXJTdHJlbmd0aCI6IDIxCiAgfSwKICAiY29udGVzdGVkU2llZ2VzIjogWwogICAgewogICAgICAic2V0dGxlbWVudElkIjogInNldHRsZW1lbnQuNiIsCiAgICAgICJhcm15SWQiOiAiYXJteS4yIiwKICAgICAgImZhY3Rpb25JZCI6ICJmYWN0aW9uLmFzaGVuX2NvbXBhY3QiLAogICAgICAic3RhcnRlZFR1cm4iOiAxLAogICAgICAiZGVmZW5zZXMiOiAwLAogICAgICAic3VwcGxpZXMiOiAwLAogICAgICAibWlsaXRpYVN0cmVuZ3RoIjogMzAsCiAgICAgICJtaWxpdGlhTW9yYWxlIjogNjUsCiAgICAgICJtaWxpdGlhRmF0aWd1ZSI6IDAsCiAgICAgICJjYW5Bc3NhdWx0IjogZmFsc2UsCiAgICAgICJhc3NhdWx0QmxvY2tlciI6ICJUaGUgYmVzaWVnaW5nIGFybXkgbmVlZHMgbW92ZW1lbnQgdG8gYXNzYXVsdDsgd2FpdCBmb3IgdGhlIG5leHQgdHVybi4iLAogICAgICAiZGVmZW5kZXJTdHJlbmd0aCI6IDEKICAgIH0KICBdLAogICJsYXlvdXQiOiB7CiAgICAidmlld3BvcnQiOiB7CiAgICAgICJ3aWR0aCI6IDM5MCwKICAgICAgImhlaWdodCI6IDg0NAogICAgfSwKICAgICJidXR0b24iOiB7CiAgICAgICJ4IjogNDIsCiAgICAgICJ5IjogMTI2LjkyMTg3NSwKICAgICAgIndpZHRoIjogMzA2LAogICAgICAiaGVpZ2h0IjogMzYuNSwKICAgICAgInRvcCI6IDEyNi45MjE4NzUsCiAgICAgICJyaWdodCI6IDM0OCwKICAgICAgImJvdHRvbSI6IDE2My40MjE4NzUsCiAgICAgICJsZWZ0IjogNDIKICAgIH0sCiAgICAiaGl0IjogIjxidXR0b24gY2xhc3M9XCJ3aWRlXCIgYXJpYS1sYWJlbD1cIk9jY3VweSBzZXR0bGVtZW50XCI+T2NjdXB5PC9idXR0b24+IiwKICAgICJyZWNlaXZlc1BvaW50ZXIiOiB0cnVlLAogICAgImxheWVycyI6IFsKICAgICAgewogICAgICAgICJzZWxlY3RvciI6ICIubWFwLWhvc3QiLAogICAgICAgICJib3giOiB7CiAgICAgICAgICAieCI6IDAsCiAgICAgICAgICAieSI6IDEwNCwKICAgICAgICAgICJ3aWR0aCI6IDM5MCwKICAgICAgICAgICJoZWlnaHQiOiAzOTguODU5Mzc1LAogICAgICAgICAgInRvcCI6IDEwNCwKICAgICAgICAgICJyaWdodCI6IDM5MCwKICAgICAgICAgICJib3R0b20iOiA1MDIuODU5Mzc1LAogICAgICAgICAgImxlZnQiOiAwCiAgICAgICAgfSwKICAgICAgICAicG9zaXRpb24iOiAiYWJzb2x1dGUiLAogICAgICAgICJ6SW5kZXgiOiAiYXV0byIsCiAgICAgICAgIm92ZXJmbG93IjogInZpc2libGUiCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAic2VsZWN0b3IiOiAiLmh1ZC10b29scyIsCiAgICAgICAgImJveCI6IHsKICAgICAgICAgICJ4IjogOSwKICAgICAgICAgICJ5IjogMTEzLAogICAgICAgICAgIndpZHRoIjogMzcyLAogICAgICAgICAgImhlaWdodCI6IDc1LjU5Mzc1LAogICAgICAgICAgInRvcCI6IDExMywKICAgICAgICAgICJyaWdodCI6IDM4MSwKICAgICAgICAgICJib3R0b20iOiAxODguNTkzNzUsCiAgICAgICAgICAibGVmdCI6IDkKICAgICAgICB9LAogICAgICAgICJwb3NpdGlvbiI6ICJhYnNvbHV0ZSIsCiAgICAgICAgInpJbmRleCI6ICI0IiwKICAgICAgICAib3ZlcmZsb3ciOiAiYXV0byIKICAgICAgfSwKICAgICAgewogICAgICAgICJzZWxlY3RvciI6ICIuY2FwdHVyZS1wYW5lbCIsCiAgICAgICAgImJveCI6IHsKICAgICAgICAgICJ4IjogMTAsCiAgICAgICAgICAieSI6IDExNCwKICAgICAgICAgICJ3aWR0aCI6IDM3MCwKICAgICAgICAgICJoZWlnaHQiOiAzMzkuODU5Mzc1LAogICAgICAgICAgInRvcCI6IDExNCwKICAgICAgICAgICJyaWdodCI6IDM4MCwKICAgICAgICAgICJib3R0b20iOiA0NTMuODU5Mzc1LAogICAgICAgICAgImxlZnQiOiAxMAogICAgICAgIH0sCiAgICAgICAgInBvc2l0aW9uIjogImFic29sdXRlIiwKICAgICAgICAiekluZGV4IjogIjciLAogICAgICAgICJvdmVyZmxvdyI6ICJhdXRvIgogICAgICB9CiAgICBdCiAgfQp9"
+                    },
+                    {
+                      "name": "narrow-capture-after",
+                      "contentType": "application/json",
+                      "body": "ewogICJoYXNoIjogIjcwNDhmYzhhIiwKICAicGVuZGluZ0NhcHR1cmUiOiBudWxsLAogICJ0b3duIjogewogICAgImlkIjogInNldHRsZW1lbnQuNiIsCiAgICAiZmFjdGlvbklkIjogImZhY3Rpb24uYXNoZW5fY29tcGFjdCIsCiAgICAibmFtZSI6ICJSZWVkd2F0Y2giLAogICAgImNlbGwiOiA1MzgsCiAgICAicG9wdWxhdGlvbiI6IDIsCiAgICAiZm9vZCI6IDAsCiAgICAiYnVpbGRpbmdzIjogWwogICAgICAiYnVpbGRpbmcuZ3JhbmFyeSIsCiAgICAgICJidWlsZGluZy53b3Jrc2hvcCIKICAgIF0sCiAgICAicXVldWUiOiBbXSwKICAgICJmb3VuZGVyRmFjdGlvbklkIjogImZhY3Rpb24ucmVlZGJvdW5kX2NvdW5jaWwiLAogICAgImRldmFzdGF0aW9uIjogMjAsCiAgICAib2NjdXBhdGlvblR1cm5zIjogMwogIH0sCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53f2837ea9087a296b10-a416eef6ae23198135b3",
+          "file": "battle-defense.spec.ts",
+          "line": 117,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-09T08:21:00.581Z",
+    "duration": 3562.304,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "delegation": "deleg_17d85703",
+  "task": 1,
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "severity": "P2",
+      "file": "packages/sim/src/save.ts:852-854",
+      "title": "Pending assault validation trusts a target priority that assault commands do not permit",
+      "details": "The loader calls selectDefendingArmies(stack, battle.defenderId) for both field battles and settlement assaults. However, startSettlementAssault at warfare.ts:139-140 selects without target priority. A resealed pending assault can therefore omit a required garrison container by changing defenderId to a later included army.",
+      "reproduction": [
+        "Start conquestCampaign(). Add valid scout armies at settlement.6: army.100 with 12 formations, army.200 with 4, and army.300 with 9. Use unique, sorted formation IDs and nextId above every serial; refreshAuthoredSight and save/load.",
+        "Issue declareWar, besiege with army.2, then endTurn. Preserve this pre-assault state. A normal assault selects army.100 and army.200: 16 formations, matching the siege preview.",
+        "On a separate copy, temporarily remove army.100, refresh sight, and issue the real assault command. Its pending battle contains army.200 and army.300: 13 formations.",
+        "Restore army.100 and refresh sight. deserializeGame(serializeGame(state)) correctly rejects this with 'Invalid save: battle omitted a defending army'.",
+        "Change only battle.defenderId to 'army.300', then reseal using serializeGame. deserializeGame now accepts the same noncanonical 13-formation assault. The equivalent version-16 save still rejects it."
+      ],
+      "verification": "Executed an independent, in-memory reproduction. The rejection assertion failed with exit code 1 because the forged version-17 assault was accepted.",
+      "requested_change": "Validate assaults using untargeted stable-ID selection, reserving defenderId priority for field battles. Add the resealed-assault regression without changing historical-16 validation or the twenty-formation tactical budget."
+    }
+  ],
+  "suggestions": [],
+  "summary": "The two prior findings are closed, but this backend review remains blocked by the independently reproduced pending-assault validation defect. Read the entire captured patch and verified its 74,691-byte size, textual postimages, binary fixture, and all 20 manifest SHA256s; rechecked all 20 unchanged at completion. Added-line security scans were clear. Narrow Vitest runs with maxWorkers=2 and no cache passed 152/152 tests across 15 files, covering frontage, movement parity, reserves, officers/cargo, combat and compatibility. Independent paid-development probes verified morale 85 + nominal 18 deploys at 100 and returns to 85 after immediate attacker withdrawal; entering 84, 82 and 40 also preserve their entering morale, with per-command save/load and exact archive replay. Current working-tree persistence supports fresh version-17 manual and auto origins, loaded-journal continuation, compressed export/import and replay. Historical-16 hashes 602413fe, 289c01b6 and 58a2012d remain exact; mixed 16-to-17 replay preserves its historical prefix. No repository files were created or modified. No full-suite, UI, campaign-performance or broad persistence signoff is claimed."
+}

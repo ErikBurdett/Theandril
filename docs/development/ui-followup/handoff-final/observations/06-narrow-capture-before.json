@@ -1,0 +1,106 @@
+{
+  "before": {
+    "settlementId": "settlement.6",
+    "armyId": "army.2",
+    "factionId": "faction.ashen_compact",
+    "startedTurn": 1,
+    "defenses": 0,
+    "supplies": 0,
+    "militiaStrength": 30,
+    "militiaMorale": 65,
+    "militiaFatigue": 0,
+    "battleDefense": {
+      "engagedFormations": 20,
+      "engagedStrength": 20,
+      "reserveFormations": 1,
+      "reserveStrength": 1
+    },
+    "canAssault": true,
+    "assaultBlocker": null,
+    "defenderStrength": 21
+  },
+  "contestedSieges": [
+    {
+      "settlementId": "settlement.6",
+      "armyId": "army.2",
+      "factionId": "faction.ashen_compact",
+      "startedTurn": 1,
+      "defenses": 0,
+      "supplies": 0,
+      "militiaStrength": 30,
+      "militiaMorale": 65,
+      "militiaFatigue": 0,
+      "canAssault": false,
+      "assaultBlocker": "The besieging army needs movement to assault; wait for the next turn.",
+      "defenderStrength": 1
+    }
+  ],
+  "layout": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "button": {
+      "x": 42,
+      "y": 34.421875,
+      "width": 306,
+      "height": 41.4375,
+      "top": 34.421875,
+      "right": 348,
+      "bottom": 75.859375,
+      "left": 42
+    },
+    "hit": "<header class=\"masthead\"><div class=\"wordmark\"><svg class=\"crest\" viewBox=\"0 0 64 76\" aria-hidden=\"true\"><path d=\"M5 5h54v37c0 16-27 28-27 28S5 58 5 42Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"></path><path d=\"M16 49h32M22 44l10-28 10 28M26 35h12M32 16V9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path><path d=\"m13 13 5 3-5 3m38-6-5 3 5 3M27 57h10\" fill=\"none\" stroke=\"currentColor\"></path></svg><div><span class=\"eyebrow\">The age of fracture</span><h1>Theandril</h1></div></div><div class=\"hud-realm\"><span class=\"eyebrow\">Your realm</span><strong>Ashen Compact</strong></div><div class=\"resources\"><div><small>TREASURY</small><strong>0<span> coin</span></strong></div><div><small>KNOWLEDGE</small><strong>8</strong></div><div><small>HEARTHS</small><strong>1</strong></div></div></header>",
+    "receivesPointer": false,
+    "layers": [
+      {
+        "selector": ".map-host",
+        "box": {
+          "x": 0,
+          "y": 109.640625,
+          "width": 390,
+          "height": 319.0625,
+          "top": 109.640625,
+          "right": 390,
+          "bottom": 428.703125,
+          "left": 0
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "overflow": "visible"
+      },
+      {
+        "selector": ".hud-tools",
+        "box": {
+          "x": 9,
+          "y": 118.640625,
+          "width": 372,
+          "height": 84.15625,
+          "top": 118.640625,
+          "right": 381,
+          "bottom": 202.796875,
+          "left": 9
+        },
+        "position": "absolute",
+        "zIndex": "4",
+        "overflow": "auto"
+      },
+      {
+        "selector": ".capture-panel",
+        "box": {
+          "x": 10,
+          "y": 119.640625,
+          "width": 370,
+          "height": 260.0625,
+          "top": 119.640625,
+          "right": 380,
+          "bottom": 379.703125,
+          "left": 10
+        },
+        "position": "absolute",
+        "zIndex": "7",
+        "overflow": "auto"
+      }
+    ]
+  }
+}

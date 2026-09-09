@@ -1,0 +1,11 @@
+--- a/packages/sim/src/save.ts
++++ b/packages/sim/src/save.ts
+@@ -850,7 +850,7 @@
+       const pair = [battle.attackerFactionId, battle.defenderFactionId].sort().join(':');
+       assert(warKeys.has(pair), 'pending battle requires a declared war');
+       const stack = data.armies.filter(army => !transported.has(army.id) && army.cell === battle.defenderCell);
+-      const expected = (originalVersion >= 17 ? selectDefendingArmies(stack, battle.defenderId) : stack).map(army => army.id).sort();
++      const expected = (originalVersion >= 17 ? selectDefendingArmies(stack, battle.settlementId ? undefined : battle.defenderId) : stack).map(army => army.id).sort();
+       assert(battle.militiaId ? stack.length === 0 : stack.every(army => army.factionId === battle.defenderFactionId) && expected.length === defenderIds.length && expected.every((id, i) => id === defenderIds[i]), 'battle omitted a defending army');
+       assert([...liveFormations.keys()].every(id => formationIds.has(id)), 'battle omitted a participant formation');
+     } else {

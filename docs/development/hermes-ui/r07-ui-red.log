@@ -1,0 +1,47 @@
+
+Running 1 test using 1 worker
+
+(node:332129) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/household-attention.spec.ts:15:1 › R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order (6.3s)
+
+
+  1) tests/gameplay/household-attention.spec.ts:15:1 › R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator: getByRole('button', { name: 'Next settlement with unassigned households', exact: true })
+    Expected: disabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeDisabled" getByRole('button', { name: 'Next settlement with unassigned households', exact: true }) with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Next settlement with unassigned households', exact: true })
+
+
+      15 | test('R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order', async ({ page }, info) => {
+      16 |   await importCampaign(page, growingHouseholdCampaign());
+    > 17 |   await expect(review(page)).toBeDisabled();
+         |                              ^
+      18 |   await page.getByRole('button', { name: 'End turn', exact: true }).click();
+      19 |   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
+      20 |   const before = await page.evaluate(() => { const api = window.__THEANDRIL__!, view = api.getSummary()!; return { hash: api.getStateHash(), land: view.land.settlements[0]!, treasury: view.treasury, town: view.ownSettlements[0]!, routes: view.routes }; });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/household-attention.spec.ts:17:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r07-ui-red/household-attention-R07-gr-95551-ignments-until-a-real-order/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/hermes-ui/r07-ui-red/household-attention-R07-gr-95551-ignments-until-a-real-order/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r07-ui-red/household-attention-R07-gr-95551-ignments-until-a-real-order/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/hermes-ui/r07-ui-red/household-attention-R07-gr-95551-ignments-until-a-real-order/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/household-attention.spec.ts:15:1 › R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order 

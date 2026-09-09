@@ -2,6 +2,8 @@
 
 A browser-native dark-fantasy 4X, under active development. This checkout now contains the first campaign implementation. It is **not Theandril 1.0**; see [implementation status](docs/IMPLEMENTATION_STATUS.md) for the actual release gaps.
 
+For ongoing work, use the [audit-driven 1.0 development workflow](docs/1.0-DEVELOPMENT.md) and repository `/unlazy` skill. The original [premium-readiness audit](docs/hermes-analysis/README.md) is a historical baseline; newer fixes require separate regression and integration evidence. The current local campaign/save version is 17, so exported saves require a build that supports version 17; an older hosted build cannot import them until it is updated.
+
 ## Run locally
 
 Play the [hosted development demo](https://erikburdett.github.io/Theandril/). Updates pushed to `master` automatically build, smoke-test and publish through GitHub Actions. This is the current single-player/AI-watch development game, not a 1.0 release or an online multiplayer server. See [deployment and recovery](docs/DEPLOYMENT.md).

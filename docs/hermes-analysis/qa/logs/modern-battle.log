@@ -1,0 +1,13 @@
+COMMAND: node --expose-gc --import tsx docs/hermes-analysis/qa/modern-battle.mjs
+START: 2026-09-09T05:16:22.545556+00:00
+file:///home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/modern-battle.mjs:11
+const pending = serializeGame(state), entering = state.battle.combat.formations.reduce((sum, formation) => sum + formation.strength, 0);
+                                                                                ^
+
+TypeError: Cannot read properties of undefined (reading 'reduce')
+    at file:///home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/modern-battle.mjs:11:81
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v26.7.0

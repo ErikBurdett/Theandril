@@ -1,0 +1,12 @@
+# Reproducing this audit without altering production
+
+1. Read AGENTS.md and repository QA/performance/combat/UI skills. Restrict committed evidence to this directory. Record HEAD and tracked diff before/after.
+2. Inspect ports and preserve user/other-agent services. Use one owned Vite dev server on4173, built preview4174, and `/usr/bin/chromium`; never assume a flag proves GPU choice—query the live WebGL renderer.
+3. `run_check.py NAME 'COMMAND'` records UTC start, exact command/exit, process duration, child maxRSS and full log; it preloads `redirect-evidence.cjs` only to reroute legacy test writes in docs/performance. Check actual tracked bytes still match afterward.
+4. Use at most4Vitestworkers/1Playwrightworker. Keep full suites unchanged. A last command's exit0 in a shell sequence does not mean preceding gates passed; read each results/NAME.json.
+5. Playwright `defineConfig(base, overrides)` **concatenates webServer definitions**. For this nested audit config use `defineConfig({...base, overrides})` with an absolute cwd, not two positional objects. Otherwise the old relative cwd attempts to spawn in nonexistent qa/apps/web, producing misleading spawn/bin/shENOENT.
+6. Save raw data per fixture. Count observations/frames/results in code. Name synthetic generator4 populated fixtures separately from generated current-rules campaigns and actual grown checkpoints. Never call global army totals rendered sprite counts, rolling frameP95 an independent sample, or fake-indexeddb disk latency.
+7. Fresh low-concurrency frame probes must wait for prior QA browsers/soaks to stop. User desktop applications remain running: this is not physical-GPU/mobile or exclusive-host certification.
+8. A successful save serialization is insufficient: deserialize it, compare the exact state, and verify recorded origin replay when an archive is in scope. Retain minimal valid-input command repros. Battle stat bonuses that round-trip through strategic aftermath can expose errors only after another battle in the same turn.
+9. Observe console errors as well as pageerror. Duplicate React sibling keys can leak actual DOM controls on reload while screenshot geometry, canvas count, all gameplay assertions and top-level listener counts appear healthy.
+10. Stop only owned servers, confirm ports and tracked diff, aggregate checks.json, retain failed attempts with their harness-vs-product classification, and list missing certifications explicitly.

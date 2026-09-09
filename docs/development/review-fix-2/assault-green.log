@@ -1,0 +1,12 @@
+$ NO_COLOR=1 pnpm exec vitest run packages/sim/src/pending-assault-save.test.ts --reporter=verbose --reporter=json --outputFile=docs/development/review-fix-2/assault-green.json
+RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/sim/src/pending-assault-save.test.ts > pending assault save validation > rejects an omitted lower-ID garrison even when a resealed defenderId prioritizes the wrong contingent 81ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  03:55:11
+   Duration  529ms (transform 297ms, setup 0ms, import 387ms, tests 82ms, environment 0ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/review-fix-2/assault-green.json
+EXIT_CODE=0

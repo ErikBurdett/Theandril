@@ -1,0 +1,1146 @@
+{
+  "summary": {
+    "resources": {
+      "version": 1,
+      "marketSettlementIds": [],
+      "stockpiles": [
+        {
+          "resourceId": "resource.grain",
+          "name": "Hearthgrain",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 2,
+          "improvementId": "improvement.grange"
+        },
+        {
+          "resourceId": "resource.iron",
+          "name": "Ironstone",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 4,
+          "improvementId": "improvement.iron_mine"
+        },
+        {
+          "resourceId": "resource.copper",
+          "name": "Red copper",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 3,
+          "improvementId": "improvement.copper_mine"
+        },
+        {
+          "resourceId": "resource.salt",
+          "name": "White salt",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 3,
+          "improvementId": "improvement.salt_house"
+        },
+        {
+          "resourceId": "resource.timber",
+          "name": "Heartwood",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 3,
+          "improvementId": "improvement.timber_yard"
+        },
+        {
+          "resourceId": "resource.horses",
+          "name": "Steppe horses",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 5,
+          "improvementId": "improvement.remount_yard"
+        },
+        {
+          "resourceId": "resource.silver",
+          "name": "Witness silver",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 7,
+          "improvementId": "improvement.silver_mine"
+        },
+        {
+          "resourceId": "resource.ashglass",
+          "name": "Ashglass",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 6,
+          "improvementId": "improvement.glass_refinery"
+        }
+      ]
+    },
+    "development": {
+      "faction": {
+        "scope": "faction",
+        "entityId": "faction.ashen_compact",
+        "name": "Ashen Compact",
+        "cell": null,
+        "progress": 0,
+        "currency": "influence",
+        "treasury": 40,
+        "upkeep": 0,
+        "effects": {
+          "food": 0,
+          "industry": 0,
+          "coin": 0,
+          "knowledge": 0,
+          "attack": 0,
+          "armor": 0,
+          "initiative": 0,
+          "range": 0,
+          "morale": 0
+        },
+        "choices": [
+          {
+            "upkeep": 2,
+            "requiresAll": [],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": "institution.common_stewardship",
+            "requiredDoctrine": null,
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.store_pledges",
+            "scope": "faction",
+            "name": "Store pledges",
+            "description": "Extend Common stewardship through reciprocal reserve obligations. Every hearth gains 2 food before local penalties.",
+            "branch": "Common stewardship",
+            "tier": 1,
+            "coinCost": 60,
+            "progressCost": 6,
+            "effects": {
+              "food": 2,
+              "industry": 0,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 0,
+              "armor": 0,
+              "initiative": 0,
+              "range": 0,
+              "morale": 0
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Requires Common stewardship.",
+            "active": false
+          },
+          {
+            "upkeep": 3,
+            "requiresAll": [
+              "tradition.store_pledges"
+            ],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": "institution.common_stewardship",
+            "requiredDoctrine": null,
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.harvest_councils",
+            "scope": "faction",
+            "name": "Harvest councils",
+            "description": "Local stewards coordinate planting and shared repairs. Every hearth gains 2 food and 1 industry.",
+            "branch": "Common stewardship",
+            "tier": 2,
+            "coinCost": 120,
+            "progressCost": 12,
+            "effects": {
+              "food": 2,
+              "industry": 1,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 0,
+              "armor": 0,
+              "initiative": 0,
+              "range": 0,
+              "morale": 0
+            },
+            "resourceCosts": {
+              "resource.grain": 4,
+              "resource.salt": 2
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Requires Store pledges.",
+            "active": false
+          },
+          {
+            "upkeep": 2,
+            "requiresAll": [],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": "institution.charter_compact",
+            "requiredDoctrine": null,
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.open_ledgers",
+            "scope": "faction",
+            "name": "Open ledgers",
+            "description": "Extend the Charter compact with records that can travel between markets. Every hearth gains 2 coin and 1 knowledge.",
+            "branch": "Charter compact",
+            "tier": 1,
+            "coinCost": 60,
+            "progressCost": 6,
+            "effects": {
+              "food": 0,
+              "industry": 0,
+              "coin": 2,
+              "knowledge": 1,
+              "attack": 0,
+              "armor": 0,
+              "initiative": 0,
+              "range": 0,
+              "morale": 0
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Requires Charter compact.",
+            "active": false
+          },
+          {
+            "upkeep": 3,
+            "requiresAll": [
+              "tradition.open_ledgers"
+            ],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": "institution.charter_compact",
+            "requiredDoctrine": null,
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.itinerant_courts",
+            "scope": "faction",
+            "name": "Itinerant courts",
+            "description": "Travelling witnesses settle obligations across the realm. Every hearth gains 2 coin and 1 industry.",
+            "branch": "Charter compact",
+            "tier": 2,
+            "coinCost": 120,
+            "progressCost": 12,
+            "effects": {
+              "food": 0,
+              "industry": 1,
+              "coin": 2,
+              "knowledge": 0,
+              "attack": 0,
+              "armor": 0,
+              "initiative": 0,
+              "range": 0,
+              "morale": 0
+            },
+            "resourceCosts": {
+              "resource.horses": 4,
+              "resource.silver": 3
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Requires Open ledgers.",
+            "active": false
+          },
+          {
+            "upkeep": 2,
+            "requiresAll": [],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": null,
+            "requiredDoctrine": "doctrine.shield_cohesion",
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.watched_ranks",
+            "scope": "faction",
+            "name": "Watched ranks",
+            "description": "Carry Shield cohesion into an established system of mutual watches. Every fighting formation gains 1 armor and 4 battle morale.",
+            "branch": "Shield cohesion",
+            "tier": 1,
+            "coinCost": 60,
+            "progressCost": 6,
+            "effects": {
+              "food": 0,
+              "industry": 0,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 0,
+              "armor": 1,
+              "initiative": 0,
+              "range": 0,
+              "morale": 4
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Requires Shield cohesion.",
+            "active": false
+          },
+          {
+            "upkeep": 3,
+            "requiresAll": [
+              "tradition.watched_ranks"
+            ],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": null,
+            "requiredDoctrine": "doctrine.shield_cohesion",
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.standing_reserve",
+            "scope": "faction",
+            "name": "Standing reserve",
+            "description": "Keep trained replacements and reserve equipment ready for the line. Every fighting formation gains 1 armor and 1 attack; this does not heal existing losses.",
+            "branch": "Shield cohesion",
+            "tier": 2,
+            "coinCost": 120,
+            "progressCost": 12,
+            "effects": {
+              "food": 0,
+              "industry": 0,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 1,
+              "armor": 1,
+              "initiative": 0,
+              "range": 0,
+              "morale": 0
+            },
+            "resourceCosts": {
+              "resource.iron": 6,
+              "resource.grain": 6
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Requires Watched ranks.",
+            "active": false
+          },
+          {
+            "upkeep": 2,
+            "requiresAll": [],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": null,
+            "requiredDoctrine": "doctrine.march_columns",
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.dispatch_cells",
+            "scope": "faction",
+            "name": "Dispatch cells",
+            "description": "Extend March columns with compact groups trained to pass orders. Every fighting formation gains 2 initiative.",
+            "branch": "March columns",
+            "tier": 1,
+            "coinCost": 60,
+            "progressCost": 6,
+            "effects": {
+              "food": 0,
+              "industry": 0,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 0,
+              "armor": 0,
+              "initiative": 2,
+              "range": 0,
+              "morale": 0
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Requires March columns.",
+            "active": false
+          },
+          {
+            "upkeep": 3,
+            "requiresAll": [
+              "tradition.dispatch_cells"
+            ],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": null,
+            "requiredDoctrine": "doctrine.march_columns",
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.disciplined_momentum",
+            "scope": "faction",
+            "name": "Disciplined momentum",
+            "description": "A moving column keeps enough order to strike together. Every fighting formation gains 2 attack and 4 battle morale.",
+            "branch": "March columns",
+            "tier": 2,
+            "coinCost": 120,
+            "progressCost": 12,
+            "effects": {
+              "food": 0,
+              "industry": 0,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 2,
+              "armor": 0,
+              "initiative": 0,
+              "range": 0,
+              "morale": 4
+            },
+            "resourceCosts": {
+              "resource.horses": 6,
+              "resource.copper": 2
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Requires Dispatch cells.",
+            "active": false
+          }
+        ]
+      },
+      "focus": null,
+      "candidates": []
+    },
+    "growth": {
+      "founding": {
+        "coinCost": 14,
+        "canAfford": true,
+        "blocker": null,
+        "additionalUpkeep": 1,
+        "effectText": "Each additional hearth costs more to establish. Population, territory and realm administration add recurring coin upkeep; growth has no settlement, population or territory ceiling."
+      },
+      "settlements": [
+        {
+          "settlementId": "settlement.25",
+          "foodRequired": 12,
+          "foodConsumption": 2,
+          "civicUpkeep": {
+            "population": 1,
+            "territory": 0,
+            "administration": 0,
+            "total": 1
+          }
+        }
+      ],
+      "civicUpkeep": 1,
+      "economy": {
+        "income": 6,
+        "upkeep": 2,
+        "net": 4,
+        "queuedUpkeep": 0
+      }
+    },
+    "battleScene": null,
+    "battleAbilities": [],
+    "arcaneResearch": {
+      "discoveries": [],
+      "choices": [
+        {
+          "id": "arcane.ember_projection",
+          "name": "Contained ember projection",
+          "description": "National Arcane Theory for Cinder thread. A personally Flame-gifted Waykeeper is still required; research alone cannot cast it.",
+          "knowledgeCost": 36,
+          "requiredBuildingId": "building.archive",
+          "spellIds": [
+            "spell.cinder_thread"
+          ],
+          "researched": false,
+          "canResearch": false,
+          "blocker": "An unoccupied, unbesieged Witness archive is required for Arcane Theory.",
+          "casters": []
+        },
+        {
+          "id": "arcane.rune_binding",
+          "name": "Measured rune binding",
+          "description": "National Arcane Theory for Bound ward. A personally Rune-gifted Waykeeper is still required; wards absorb damage, not casualties already suffered.",
+          "knowledgeCost": 48,
+          "requiredBuildingId": "building.archive",
+          "spellIds": [
+            "spell.bound_ward"
+          ],
+          "researched": false,
+          "canResearch": false,
+          "blocker": "An unoccupied, unbesieged Witness archive is required for Arcane Theory.",
+          "casters": []
+        }
+      ]
+    },
+    "roads": [],
+    "layout": "continents",
+    "land": {
+      "settlements": [
+        {
+          "settlementId": "settlement.25",
+          "stage": "colony",
+          "isCapital": true,
+          "claimRadius": 2,
+          "claimCapacity": null,
+          "workerCapacity": 1,
+          "claimed": [
+            14228,
+            14229,
+            14484,
+            14485,
+            14486,
+            14740,
+            14741
+          ],
+          "worked": [],
+          "work": null,
+          "workPaused": null,
+          "yields": {
+            "food": 1,
+            "industry": 1,
+            "coin": 1,
+            "knowledge": 1
+          },
+          "cells": [],
+          "capitalOption": {
+            "coinCost": 60,
+            "turns": 0,
+            "canStart": false,
+            "blocker": "This settlement is already the capital.",
+            "effectText": "Move the capital here. Its center gains 1 coin and 1 knowledge per turn before settlement penalties."
+          },
+          "canCancelWork": false,
+          "cancelBlocker": "This settlement has no land-work order.",
+          "borderExpansion": {
+            "progress": 0,
+            "threshold": 40,
+            "rate": 1,
+            "nextCell": 13972,
+            "blocker": null
+          }
+        }
+      ],
+      "cultivation": 0,
+      "capitalSettlementId": "settlement.25"
+    },
+    "turn": 1,
+    "factionId": "faction.ashen_compact",
+    "factionCount": 12,
+    "pace": "standard",
+    "factions": [
+      {
+        "id": "faction.ashen_compact",
+        "definitionId": "faction.ashen_compact",
+        "name": "Ashen Compact",
+        "color": 13215339
+      }
+    ],
+    "treasury": 40,
+    "knowledge": 0,
+    "armies": [
+      {
+        "id": "army.2",
+        "factionId": "faction.ashen_compact",
+        "name": "Wayfinder",
+        "cell": 14485,
+        "movement": 5,
+        "formations": [
+          {
+            "id": "formation.2",
+            "unitId": "unit.scout",
+            "strength": 20,
+            "morale": 55,
+            "fatigue": 0
+          }
+        ],
+        "commander": null,
+        "agents": [],
+        "domain": "land",
+        "carrierId": null,
+        "cargo": [],
+        "transportCapacity": 0,
+        "transportUsed": 0,
+        "canEnterDeepWater": false,
+        "embarkOptions": [],
+        "disembarkOptions": [],
+        "transportOptionsTruncated": false,
+        "formationCapacity": 12,
+        "overCommand": false,
+        "commandBlocker": null,
+        "capacityReason": "Unled detachment: twelve-formation command capacity.",
+        "splitFormationLimit": 12,
+        "mergeOptions": [],
+        "mergeOptionsTruncated": false,
+        "movementBlocker": null,
+        "reorganizationBlocker": null,
+        "unitId": "unit.scout",
+        "displayUnitId": "unit.scout",
+        "strength": 20,
+        "maxStrength": 20,
+        "morale": 55,
+        "fatigue": 0,
+        "maxMovement": 5,
+        "sight": 4,
+        "upkeep": 1,
+        "canFound": false,
+        "canAttack": true
+      }
+    ],
+    "productionOptions": [
+      {
+        "settlementId": "settlement.25",
+        "itemId": "building.granary",
+        "kind": "building",
+        "canQueue": false,
+        "blocker": "That building is already built or queued."
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "building.workshop",
+        "kind": "building",
+        "canQueue": false,
+        "blocker": "That building is already built or queued."
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "building.market",
+        "kind": "building",
+        "canQueue": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "building.archive",
+        "kind": "building",
+        "canQueue": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "building.harbor",
+        "kind": "building",
+        "canQueue": false,
+        "blocker": "Research Coastal navigation first."
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.colonist",
+        "kind": "land",
+        "canQueue": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.scout",
+        "kind": "land",
+        "canQueue": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.guard",
+        "kind": "land",
+        "canQueue": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.spearman",
+        "kind": "land",
+        "canQueue": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.heavy_infantry",
+        "kind": "land",
+        "canQueue": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.cavalry",
+        "kind": "land",
+        "canQueue": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.transport",
+        "kind": "naval",
+        "canQueue": false,
+        "blocker": "Research Coastal navigation first.",
+        "launchCell": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.coastal_warship",
+        "kind": "naval",
+        "canQueue": false,
+        "blocker": "Research Coastal navigation first.",
+        "launchCell": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.ocean_warship",
+        "kind": "naval",
+        "canQueue": false,
+        "blocker": "Research Coastal navigation first.",
+        "launchCell": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.skirmisher",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Research Seasonal stewardship first."
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.arbalester",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Research Cinder masonry first."
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.halberdier",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Research Counterweighted cranes first."
+      },
+      {
+        "settlementId": "settlement.25",
+        "itemId": "unit.lancer",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Research Surveyed estates first."
+      }
+    ],
+    "characters": [],
+    "characterRecruitment": [
+      {
+        "settlementId": "settlement.25",
+        "definitionId": "character.marshal",
+        "name": "Hearth marshal",
+        "role": "marshal",
+        "coinCost": 32,
+        "upkeep": 2,
+        "canRecruit": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "definitionId": "character.surveyor",
+        "name": "Road witness",
+        "role": "surveyor",
+        "coinCost": 20,
+        "upkeep": 1,
+        "canRecruit": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "definitionId": "character.engineer",
+        "name": "March engineer",
+        "role": "engineer",
+        "coinCost": 28,
+        "upkeep": 2,
+        "canRecruit": true,
+        "blocker": null
+      },
+      {
+        "settlementId": "settlement.25",
+        "definitionId": "character.waykeeper",
+        "name": "Waykeeper",
+        "role": "waykeeper",
+        "coinCost": 40,
+        "upkeep": 3,
+        "canRecruit": true,
+        "blocker": null
+      }
+    ],
+    "commanderAbilities": [],
+    "routes": [],
+    "settlements": [
+      {
+        "id": "settlement.25",
+        "factionId": "faction.ashen_compact",
+        "name": "First Ember",
+        "cell": 14485,
+        "population": 1,
+        "food": 0,
+        "buildings": [],
+        "queue": [
+          {
+            "itemId": "building.workshop",
+            "progress": 0
+          },
+          {
+            "itemId": "building.granary",
+            "progress": 0
+          }
+        ],
+        "founderFactionId": "faction.ashen_compact",
+        "devastation": 0,
+        "occupationTurns": 0
+      }
+    ],
+    "events": [
+      {
+        "turn": 1,
+        "factionId": "faction.ashen_compact",
+        "type": "campaign_started",
+        "message": "Your hearth caravan awaits a place to settle.",
+        "cell": 14485
+      },
+      {
+        "turn": 1,
+        "factionId": "faction.ashen_compact",
+        "type": "settlement_founded",
+        "message": "First Ember was founded. The hearth caravan has settled.",
+        "cell": 14485
+      },
+      {
+        "turn": 1,
+        "factionId": "faction.ashen_compact",
+        "type": "production_queued",
+        "message": "First Ember queued Cinder workshop for 12 coin.",
+        "cell": 14485
+      },
+      {
+        "turn": 1,
+        "factionId": "faction.ashen_compact",
+        "type": "production_queued",
+        "message": "First Ember queued Root cellar for 8 coin.",
+        "cell": 14485
+      }
+    ],
+    "width": 256,
+    "height": 160,
+    "seed": 20260909,
+    "wars": [],
+    "battle": null,
+    "battleReports": [],
+    "diplomacy": {
+      "offers": [],
+      "treaties": [],
+      "relations": []
+    },
+    "sieges": [],
+    "visibleSiegeSettlementIds": [],
+    "progression": {
+      "technologies": [],
+      "institutionId": null,
+      "doctrineId": null,
+      "technologyChoices": [
+        {
+          "id": "technology.cinder_masonry",
+          "name": "Cinder masonry",
+          "description": "Reusable kiln forms strengthen hearthland workshops. Every settlement gains 2 industry before devastation, occupation and blockade penalties.",
+          "knowledgeCost": 24,
+          "requires": [],
+          "branch": "craft",
+          "available": false,
+          "blocker": "Requires 24 knowledge."
+        },
+        {
+          "id": "technology.civic_accounts",
+          "name": "Civic accounts",
+          "description": "Public ledgers reconnect the bargains once carried by the Witness Roads. Every settlement gains 1 coin and 1 knowledge before penalties; enables the Hearth Exchange.",
+          "knowledgeCost": 400,
+          "requires": [],
+          "branch": "civic",
+          "available": false,
+          "blocker": "Requires 400 knowledge."
+        },
+        {
+          "id": "technology.coastal_navigation",
+          "name": "Coastal navigation",
+          "description": "Soundings and shore charts reconnect coastal hearthlands. Enables Charter harbors, transports and Coastwatch galleys; vessels can travel coastal shallows. This practical knowledge does not confer magical aptitude.",
+          "knowledgeCost": 30,
+          "requires": [],
+          "branch": "navigation",
+          "available": false,
+          "blocker": "Requires 30 knowledge."
+        },
+        {
+          "id": "technology.ocean_navigation",
+          "name": "Ocean navigation",
+          "description": "Deep-water charts and long-voyage rigging open the ocean. Ocean-capable transports and Deepwake warships may cross deep water; coastal galleys remain restricted to shallows.",
+          "knowledgeCost": 80,
+          "requires": [
+            "technology.coastal_navigation"
+          ],
+          "branch": "navigation",
+          "available": false,
+          "blocker": "Research the prerequisite technologies."
+        },
+        {
+          "id": "technology.stewardship",
+          "name": "Seasonal stewardship",
+          "description": "Record planting and water-sharing obligations. Unlocks Spring gardens on fresh-water land; opens the waterworks, forestry and surveyed-estates branches. Knowledge alone does not build or work a tile.",
+          "knowledgeCost": 36,
+          "requires": [],
+          "branch": "stewardship",
+          "available": false,
+          "blocker": "Requires 36 knowledge."
+        },
+        {
+          "id": "technology.waterworks",
+          "name": "Sluice waterworks",
+          "description": "Controlled sluices support worked wetland Polders. They can feed crowded settlements, but old growth and Ashfall glass make intensive planting less productive. Physical terrain and natural features remain intact.",
+          "knowledgeCost": 64,
+          "requires": [
+            "technology.stewardship"
+          ],
+          "branch": "stewardship",
+          "available": false,
+          "blocker": "Research the prerequisite technologies."
+        },
+        {
+          "id": "technology.surveyed_estates",
+          "name": "Surveyed estates",
+          "description": "Witnessed boundary surveys add one civic progress per active settlement turn toward automatic border expansion. Claims still require connected, charted land within the settlement\u2019s reach; siege and occupation halt expansion.",
+          "knowledgeCost": 60,
+          "requires": [
+            "technology.stewardship"
+          ],
+          "branch": "civic",
+          "available": false,
+          "blocker": "Research the prerequisite technologies."
+        },
+        {
+          "id": "technology.charter_forestry",
+          "name": "Charter forestry",
+          "description": "Bind cutting rights to the preservation of living records. Unlocks Grove archives on old-growth woodland: knowledge and modest industry instead of the woodlot\u2019s stronger extraction.",
+          "knowledgeCost": 72,
+          "requires": [
+            "technology.stewardship"
+          ],
+          "branch": "stewardship",
+          "available": false,
+          "blocker": "Research the prerequisite technologies."
+        },
+        {
+          "id": "technology.quarry_cranes",
+          "name": "Counterweighted cranes",
+          "description": "Reusable lifting frames unlock Oreworks on mineral seams. Worked Oreworks favor industry at the cost of food and coin; wet ground complicates extraction.",
+          "knowledgeCost": 60,
+          "requires": [
+            "technology.cinder_masonry"
+          ],
+          "branch": "craft",
+          "available": false,
+          "blocker": "Research the prerequisite technologies."
+        },
+        {
+          "id": "technology.deep_soundings",
+          "name": "Deep soundings",
+          "description": "Observations from the shore compare returning ships\u2019 ocean records. Unlocks Tide observatories on coastal shallows; knowledge replaces the food-focused role of a fishery. Does not extend worker reach into deep ocean.",
+          "knowledgeCost": 120,
+          "requires": [
+            "technology.ocean_navigation"
+          ],
+          "branch": "navigation",
+          "available": false,
+          "blocker": "Research the prerequisite technologies."
+        }
+      ],
+      "institutionChoices": [
+        {
+          "id": "institution.charter_compact",
+          "name": "Charter compact",
+          "description": "Recognize shared market charters. Every settlement gains 2 coin before penalties; enables the Hearth Exchange. Permanently excludes Common stewardship.",
+          "coinCost": 30,
+          "available": true,
+          "blocker": null
+        },
+        {
+          "id": "institution.common_stewardship",
+          "name": "Common stewardship",
+          "description": "Communal stores take priority over merchant privileges. Every settlement gains 3 food before penalties; enables the Hearth Exchange. Permanently excludes Charter compact.",
+          "coinCost": 30,
+          "available": true,
+          "blocker": null
+        }
+      ],
+      "doctrineChoices": [
+        {
+          "id": "doctrine.shield_cohesion",
+          "name": "Shield cohesion",
+          "description": "Train formations to cover one another. Armies gain 2 armor in battle. Permanently excludes March columns.",
+          "coinCost": 24,
+          "available": true,
+          "blocker": null
+        },
+        {
+          "id": "doctrine.march_columns",
+          "name": "March columns",
+          "description": "Organize disciplined marching relays. Armies regain 1 additional strategic movement each turn. Permanently excludes Shield cohesion.",
+          "coinCost": 24,
+          "available": true,
+          "blocker": null
+        }
+      ],
+      "project": {
+        "id": "project.hearth_exchange",
+        "name": "Hearth Exchange",
+        "description": "Host a great exchange supported by three settlements with Charter markets and Witness archives. Sustain its full active period; blockades and conquest can interrupt the endeavor. Funding and duration depend on campaign pace.",
+        "coinCost": 18000,
+        "activeTurns": 20,
+        "eligibleSettlementIds": [],
+        "blockers": [
+          "Research Civic accounts.",
+          "Adopt an institution.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 18000 coin upfront; cancellation gives no refund.",
+          "A prepared host settlement must be free of siege and occupation."
+        ]
+      }
+    },
+    "projects": [],
+    "victory": null,
+    "pendingCapture": null,
+    "ruins": [],
+    "cells": [],
+    "campaign": {
+      "mode": "player",
+      "coverage": "complete"
+    },
+    "watch": {
+      "enabled": false,
+      "running": false,
+      "fogEnabled": true
+    },
+    "ownArmies": [
+      {
+        "id": "army.2",
+        "factionId": "faction.ashen_compact",
+        "name": "Wayfinder",
+        "cell": 14485,
+        "movement": 5,
+        "formations": [
+          {
+            "id": "formation.2",
+            "unitId": "unit.scout",
+            "strength": 20,
+            "morale": 55,
+            "fatigue": 0
+          }
+        ],
+        "commander": null,
+        "agents": [],
+        "domain": "land",
+        "carrierId": null,
+        "cargo": [],
+        "transportCapacity": 0,
+        "transportUsed": 0,
+        "canEnterDeepWater": false,
+        "embarkOptions": [],
+        "disembarkOptions": [],
+        "transportOptionsTruncated": false,
+        "formationCapacity": 12,
+        "overCommand": false,
+        "commandBlocker": null,
+        "capacityReason": "Unled detachment: twelve-formation command capacity.",
+        "splitFormationLimit": 12,
+        "mergeOptions": [],
+        "mergeOptionsTruncated": false,
+        "movementBlocker": null,
+        "reorganizationBlocker": null,
+        "unitId": "unit.scout",
+        "displayUnitId": "unit.scout",
+        "strength": 20,
+        "maxStrength": 20,
+        "morale": 55,
+        "fatigue": 0,
+        "maxMovement": 5,
+        "sight": 4,
+        "upkeep": 1,
+        "canFound": false,
+        "canAttack": true
+      }
+    ],
+    "ownSettlements": [
+      {
+        "id": "settlement.25",
+        "factionId": "faction.ashen_compact",
+        "name": "First Ember",
+        "cell": 14485,
+        "population": 1,
+        "food": 0,
+        "buildings": [],
+        "queue": [
+          {
+            "itemId": "building.workshop",
+            "progress": 0
+          },
+          {
+            "itemId": "building.granary",
+            "progress": 0
+          }
+        ],
+        "founderFactionId": "faction.ashen_compact",
+        "devastation": 0,
+        "occupationTurns": 0
+      }
+    ],
+    "exploredCells": 61
+  },
+  "hash": "158a19b1",
+  "selection": {
+    "settlementId": "settlement.25",
+    "cell": 14485
+  },
+  "perf": {
+    "generationMs": 350.29999999981374,
+    "commandMs": 0.19999999925494194,
+    "aiMs": 0,
+    "transferBytes": 20971,
+    "totalTransferBytes": 505160,
+    "cellTransferBytes": 39,
+    "landQueryCount": 3,
+    "landQueryBytes": 141583,
+    "totalLandQueryBytes": 424413,
+    "developmentQueryCount": 0,
+    "developmentQueryBytes": 0,
+    "totalDevelopmentQueryBytes": 0,
+    "renderer": "webgl",
+    "frameCount": 95,
+    "frameMs": 0,
+    "frameP95Ms": 0,
+    "renderCpuMs": 0.20000000018626451,
+    "visibleCells": 61,
+    "visibleChunks": 1,
+    "cachedChunks": 1,
+    "chunkRebuilds": 3,
+    "visibleEntities": 2,
+    "zoom": 1,
+    "highlightedCells": 0,
+    "routeCells": 0,
+    "previewCells": 0,
+    "atlasPages": 2,
+    "residentAtlasBytesEstimate": 17825792,
+    "artLoadMs": 87.70000000018626,
+    "artFirstRenderCpuMs": 94.20000000018626,
+    "visibleSprites": 2,
+    "terrainSpriteCells": 61,
+    "pooledSprites": 64,
+    "stackBadges": 0,
+    "pooledStackBadges": 1,
+    "territoryEdges": 18,
+    "improvementProps": 0,
+    "riverSegments": 0,
+    "roadSegments": 0,
+    "districtStreetSegments": 2,
+    "overview": false,
+    "overviewTextureBytes": 0,
+    "rangePerimeterEdges": 0,
+    "visibleLabels": 1,
+    "selectedCells": 1,
+    "hoveredCells": 0,
+    "maxCachedChunkWidth": 460,
+    "maxCachedChunkHeight": 406,
+    "cachedTextureBytesEstimate": 1048576
+  },
+  "errors": [],
+  "viewport": {
+    "w": 1440,
+    "h": 1000,
+    "scrollWidth": 1440
+  }
+}

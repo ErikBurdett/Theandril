@@ -23,6 +23,13 @@ Transport is a canonical relationship between an existing land army and a real f
 
 Land, shallow water and deep ocean are distinct travel constraints. Keep depth in compact static geography; use the same domain/capability query for previews, direct movement, queued routes, attack approach, retreat and AI. Deep-water unlocks do not create land access for ships. Cargo unloading does not bypass enemy occupancy, diplomacy, movement costs or settlement capture rules. A blocked route must explain why and remain recoverable.
 
+Verify large-stack legality through the movement quote as well as direct attack;
+a fixed command can remain unusable through map clicks and AI if the query retains
+an obsolete whole-stack cap. Compare the quoted command's actual participants with
+the same targeted direct attack. Consume canonical road costs, refresh after a new
+war declaration, and keep full reserve strength in threat estimates. Queued routes
+must still pause rather than starting battles automatically.
+
 A paused route may describe geography that was legal before a hull/capability change. Preserve that interrupted plan in a valid save, then replan on explicit resume; never accept a reorganization that makes its own save unloadable. Active routes must still satisfy current capability. Cargo casualty evidence must reconcile with actual surviving transport formations, with private passenger details removed from opposing observations.
 
 ## Verify the player outcome

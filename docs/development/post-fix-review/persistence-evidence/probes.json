@@ -1,0 +1,124 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "fragment-interior-loss-false",
+      "passed": true,
+      "result": {
+        "fragments": 6,
+        "fallbackReplayed": true,
+        "retrySuffix": 0
+      }
+    },
+    {
+      "name": "fragment-interior-loss-true",
+      "passed": true,
+      "result": {
+        "fragments": 6,
+        "fallbackReplayed": true,
+        "retrySuffix": 1
+      }
+    },
+    {
+      "name": "origin-loss-and-single-surviving-replica",
+      "passed": true
+    },
+    {
+      "name": "unrelated-GC-proof-previousDigest",
+      "passed": true,
+      "result": {
+        "atomicRefusal": "Error: Campaign storage: Blob reference metadata differs from its payload.",
+        "retrySuffix": 1
+      }
+    },
+    {
+      "name": "unrelated-GC-proof-type",
+      "passed": true,
+      "result": {
+        "atomicRefusal": "Error: Campaign storage: Blob reference metadata differs from its payload.",
+        "retrySuffix": 1
+      }
+    },
+    {
+      "name": "unrelated-GC-proof-byteLength",
+      "passed": true,
+      "result": {
+        "atomicRefusal": "Error: Campaign storage: Blob reference metadata differs from its payload.",
+        "retrySuffix": 1
+      }
+    },
+    {
+      "name": "unrelated-GC-proof-from",
+      "passed": true,
+      "result": {
+        "atomicRefusal": "Error: Campaign storage: Blob reference metadata differs from its payload.",
+        "retrySuffix": 1
+      }
+    },
+    {
+      "name": "unrelated-GC-proof-to",
+      "passed": true,
+      "result": {
+        "atomicRefusal": "Error: Campaign storage: Blob reference metadata differs from its payload.",
+        "retrySuffix": 1
+      }
+    },
+    {
+      "name": "unrelated-GC-proof-missingMetadata",
+      "passed": true,
+      "result": {
+        "atomicRefusal": "Error: Campaign storage: History reference points to missing blob metadata.",
+        "retrySuffix": 1
+      }
+    },
+    {
+      "name": "unrelated-GC-proof-missingPayload",
+      "passed": true,
+      "result": {
+        "atomicRefusal": "Error: Campaign storage: All three payload replicas are missing or corrupt.",
+        "retrySuffix": 1
+      }
+    },
+    {
+      "name": "unrelated-GC-proof-badManifest",
+      "passed": true,
+      "result": {
+        "atomicRefusal": "Error: Campaign storage: Snapshot manifest is missing or corrupt.",
+        "retrySuffix": 1
+      }
+    },
+    {
+      "name": "orphan-successor-leases-with-a-live-shared-fork",
+      "passed": true,
+      "result": {
+        "deletions": [
+          0,
+          0,
+          64
+        ],
+        "deferredQueueDrained": true,
+        "bothForksReplayed": true
+      }
+    },
+    {
+      "name": "physical-GC-failure-rolls-back-after-first-deletion",
+      "passed": true,
+      "result": {
+        "reachedSecondDeletion": true,
+        "allSixStoresRolledBack": true,
+        "retrySuffix": 1
+      }
+    },
+    {
+      "name": "second-connection-rotates-cursor-after-preflight",
+      "passed": true,
+      "result": {
+        "atomicRefusal": true,
+        "coldRetryRecords": 4
+      }
+    }
+  ],
+  "total": 14,
+  "databasesDeleted": 14,
+  "noRemainingDatabases": true
+}

@@ -1,0 +1,88 @@
+{
+  "checkpoint": "before",
+  "browser": "152.0.7977.82",
+  "server": "http://127.0.0.1:5197",
+  "reports": [
+    {
+      "database": "hermes-review-fix-2-before-missing-noop",
+      "variant": "missing-noop",
+      "saveVersion": 17,
+      "initialTurns": [
+        1,
+        2,
+        3
+      ],
+      "deletedReplicas": 3,
+      "deletionReadback": 0,
+      "intactHeadCopies": 3,
+      "recoveredBefore": 1,
+      "saveError": null,
+      "retainedTurns": [
+        2,
+        3,
+        3
+      ],
+      "loadError": "Campaign storage: No valid save remains in this slot. Import a backup."
+    },
+    {
+      "database": "hermes-review-fix-2-before-missing-append",
+      "variant": "missing-append",
+      "saveVersion": 17,
+      "initialTurns": [
+        1,
+        2,
+        3
+      ],
+      "deletedReplicas": 3,
+      "deletionReadback": 0,
+      "intactHeadCopies": 3,
+      "recoveredBefore": 1,
+      "saveError": null,
+      "retainedTurns": [
+        2,
+        3,
+        4
+      ],
+      "loadError": "Campaign storage: No valid save remains in this slot. Import a backup."
+    },
+    {
+      "database": "hermes-review-fix-2-before-undercount",
+      "variant": "undercount",
+      "saveVersion": 17,
+      "initialTurns": [
+        2,
+        3,
+        4
+      ],
+      "resealedRefs": 1,
+      "loadedBefore": 4,
+      "remainingOldestReplicas": 0,
+      "retainedTurns": [
+        3,
+        4,
+        4
+      ],
+      "loadError": "Campaign storage: No valid save remains in this slot. Import a backup."
+    }
+  ],
+  "reload": [
+    {
+      "database": "hermes-review-fix-2-before-missing-noop",
+      "error": "Campaign storage: No valid save remains in this slot. Import a backup.",
+      "deleted": true
+    },
+    {
+      "database": "hermes-review-fix-2-before-missing-append",
+      "error": "Campaign storage: No valid save remains in this slot. Import a backup.",
+      "deleted": true
+    },
+    {
+      "database": "hermes-review-fix-2-before-undercount",
+      "error": "Campaign storage: No valid save remains in this slot. Import a backup.",
+      "deleted": true
+    }
+  ],
+  "errors": [],
+  "sourceSha256": "2830105cf35c76491788c9f807c62c7107b4cafeee31245cb9a057d78c3260d4",
+  "scope": "Real Chromium IndexedDB in a private context; controlled payload deletion/resealed local metadata with readback, actual API save/load/replay, separate-page reopen and database deletion readback. Not UI-control, quota-exhaustion, process-kill/fsync, cross-browser, or authentication evidence."
+}

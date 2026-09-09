@@ -1,0 +1,777 @@
+COMMAND: date -Is; free -h; ss -ltnp; ps -eo pid,ppid,pcpu,pmem,comm,args --sort=-pcpu
+START: 2026-09-09T05:30:54.458291+00:00
+2026-09-09T00:30:54-05:00
+               total        used        free      shared  buff/cache   available
+Mem:            31Gi        16Gi       5.6Gi       288Mi        10Gi        14Gi
+Swap:           62Gi       5.4Gi        56Gi
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+LISTEN 0      4096       127.0.0.1:8888       0.0.0.0:*   
+LISTEN 0      4096       127.0.0.1:11434      0.0.0.0:*   
+LISTEN 0      10         127.0.0.1:44111      0.0.0.0:*    users:(("chromium",pid=204562,fd=82))
+LISTEN 0      128          0.0.0.0:9444       0.0.0.0:*    users:(("Civ7_linux_Vulk",pid=204842,fd=112))
+LISTEN 0      128          0.0.0.0:27036      0.0.0.0:*    users:(("steam",pid=201173,fd=150))
+LISTEN 0      128        127.0.0.1:33979      0.0.0.0:*    users:(("steam",pid=201173,fd=65))
+LISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*   
+LISTEN 0      4096       127.0.0.1:631        0.0.0.0:*   
+LISTEN 0      4096       127.0.0.1:33749      0.0.0.0:*   
+LISTEN 0      4096      172.17.0.1:53         0.0.0.0:*   
+LISTEN 0      5         172.28.0.1:11435      0.0.0.0:*   
+LISTEN 0      4096       127.0.0.1:35107      0.0.0.0:*    users:(("agent-browser-l",pid=204524,fd=9))
+LISTEN 0      4096       127.0.0.1:3000       0.0.0.0:*   
+LISTEN 0      511        127.0.0.1:5191       0.0.0.0:*    users:(("node-MainThread",pid=203814,fd=22))
+LISTEN 0      511        127.0.0.1:5173       0.0.0.0:*    users:(("node-MainThread",pid=185598,fd=25))
+LISTEN 0      511        127.0.0.1:4173       0.0.0.0:*    users:(("node-MainThread",pid=210365,fd=22))
+LISTEN 0      2048       127.0.0.1:37413      0.0.0.0:*    users:(("hermes",pid=71770,fd=35))
+LISTEN 0      128        127.0.0.1:57343      0.0.0.0:*    users:(("steam",pid=201173,fd=59))
+LISTEN 0      128        127.0.0.1:39887      0.0.0.0:*    users:(("steam",pid=201173,fd=104))
+LISTEN 0      4096      127.0.0.54:53         0.0.0.0:*   
+LISTEN 0      4096           [::1]:631           [::]:*   
+    PID    PPID %CPU %MEM COMMAND         COMMAND
+ 204842  204813  138  8.9 Civ7_linux_Vulk ./Civ7_linux_Vulkan_FinalRelease
+ 252273  252272 20.0  0.0 ps              ps -eo pid,ppid,pcpu,pmem,comm,args --sort=-pcpu
+ 185977   62883 19.0  4.6 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=39 --launch-time-ticks=5164028175 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,7448945246855291483,4022803735286489831,2097152 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190709022856503605
+ 201173  200590 16.1  0.5 steam           /home/telephoneheater/.local/share/Steam/ubuntu12_32/steam -srt-logger-opened
+ 252272  251914 14.2  0.0 python          python docs/hermes-analysis/qa/run_check.py perf-host-before date -Is; free -h; ss -ltnp; ps -eo pid,ppid,pcpu,pmem,comm,args --sort=-pcpu
+  72309   62883  7.7  1.5 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=23 --launch-time-ticks=4234033562 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,6170642303714639740,7764578506673783199,2097152 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190709007863834021
+  63403   62883  5.4  1.3 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=14 --launch-time-ticks=3927610667 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,14016437823962068346,1942619244181662641,2097152 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190708999430457380
+  71770   71549  4.7  1.9 hermes          /home/telephoneheater/.hermes/hermes-agent/venv/bin/python -m hermes_cli.main serve --host 127.0.0.1 --port 0
+  71686   71559  4.3  0.9 Hermes          /home/telephoneheater/.hermes/hermes-agent/apps/desktop/release/linux-unpacked/Hermes --type=zygote
+  72753   62883  4.1  0.3 chromium        /usr/lib/chromium/chromium --type=utility --utility-sub-type=media.mojom.CdmServiceBroker --lang=en-US --service-sandbox-type=cdm --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,3576989601533586968,13074688194418862744,524288 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190709013486085115
+  62908   62880  3.9  0.6 chromium        /usr/lib/chromium/chromium --type=gpu-process --ozone-platform=wayland --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --gpu-preferences=YAAAAAAAAAAgAQAEAAAAAAAAAAAAAGAASAAAAAAAAAABAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAQAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --shared-files --metrics-shmem-handle=4,i,7378779855070593428,2748198954244981809,262144 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190708988185955192
+ 205997  205984  3.5  3.7 node-MainThread /home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node /home/telephoneheater/Work/Theandril/node_modules/typescript/lib/tsserver.js --useInferredProjectPerProjectRoot --cancellationPipeName /tmp/e258cfa1bf6b54597a69433570fb0f76/tscancellation* --locale en --validateDefaultNpmLocation --useNodeIpc
+  84138   83052  2.6  1.2 electron        /usr/lib/electron42/electron --type=renderer --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/usr/share/cursor/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --force-gpu-mem-available-mb=1024 --js-flags=--nodecommit_pooled_pages --ozone-platform=wayland --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=13 --time-ticks-at-unix-epoch=-1788924059937834 --launch-time-ticks=4886212359 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190708998493415531 --vscode-window-config=vscode:79620da4-4837-4aeb-a721-182390bd162f
+   3450    1861  2.4  0.2 friend-wake-ser /home/telephoneheater/.local/share/friend-wake/venv/bin/python /home/telephoneheater/.local/share/friend-wake/venv/bin/friend-wake-service
+   2998    2986  2.3  0.5 Hyprland        Hyprland --watchdog-fd 4
+ 201719  201635  2.2  1.0 steamwebhelper  /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper --type=zygote --force-device-scale-factor=1 --crashpad-handler-pid=201622 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --enable-chrome-runtime --user-data-dir=/home/telephoneheater/.local/share/Steam/config/htmlcache --user-agent-product=Valve Steam Client --disablehighdpi --force-device-scale-factor=1 --buildid=1788652215 --steamid=0 --valve-initial-threadpool-size=20
+  62866    1861  1.7  0.9 chromium        /usr/lib/chromium/chromium --ozone-platform=wayland --ozone-platform-hint=wayland --password-store=gnome-libsecret --enable-features=TouchpadOverscrollHistoryNavigation --load-extension=/usr/share/omarchy/default/chromium/extensions/copy-url,/usr/share/omarchy/default/chromium/extensions/yt-dlp,/usr/share/omarchy/default/chromium/extensions/whatsapp-slim
+ 204758  204573  1.5  1.3 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --remote-debugging-port=0 --ozone-platform=headless --disable-gpu-compositing --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=13 --launch-time-ticks=6218701858 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,16095978743596044086,12121919549481243440,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=EyeDropper,PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=7,i,767549168869524423,4074941056227999620,4 --trace-process-track-uuid=3190708998493415531
+ 204595  204570  1.5  0.9 chromium        /usr/lib/chromium/chromium --type=gpu-process --headless=new --ozone-platform=headless --use-angle=swiftshader-webgl --enable-unsafe-swiftshader --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --gpu-preferences=YAAAAAAAAAAgAAAEAAAAAAAAAAAAAGAASAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAQAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --shared-files --field-trial-handle=3,i,16095978743596044086,12121919549481243440,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=EyeDropper,PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=7,i,767549168869524423,4074941056227999620,4 --trace-process-track-uuid=3190708988185955192
+ 201655  201632  1.3  0.6 steamwebhelper  /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper --type=zygote --no-zygote-sandbox --force-device-scale-factor=1 --crashpad-handler-pid=201622 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --enable-chrome-runtime --user-data-dir=/home/telephoneheater/.local/share/Steam/config/htmlcache --user-agent-product=Valve Steam Client --disablehighdpi --force-device-scale-factor=1 --buildid=1788652215 --steamid=0 --valve-initial-threadpool-size=20
+ 205984   71770  1.3  0.2 node-MainThread node /home/telephoneheater/.hermes/lsp/bin/typescript-language-server --stdio
+ 205914   71770  1.2  1.2 node-MainThread node /home/telephoneheater/.hermes/lsp/bin/pyright-langserver --stdio
+  71595   71556  1.2  0.4 Hermes          /home/telephoneheater/.hermes/hermes-agent/apps/desktop/release/linux-unpacked/Hermes --type=zygote --no-zygote-sandbox
+  84921   83046  1.0  0.6 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --dns-result-order=ipv4first --experimental-network-inspection --inspect-port=0 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190709005052708474
+ 251914   71770  1.0  0.0 bash            /usr/bin/bash -lic set +m; python docs/hermes-analysis/qa/run_check.py capture-minimal-save 'node --import tsx docs/hermes-analysis/qa/capture-minimal-save.mjs'; python docs/hermes-analysis/qa/run_check.py perf-host-before 'date -Is; free -h; ss -ltnp; ps -eo pid,ppid,pcpu,pmem,comm,args --sort=-pcpu'; python docs/hermes-analysis/qa/run_check.py map-probe 'node --import tsx docs/hermes-analysis/qa/map-probe.mjs'
+ 210365  210291  0.9  0.4 node-MainThread node ./node_modules/.bin/../vite/bin/vite.js --host 127.0.0.1 --port 4173 --strictPort
+ 238839  238822  0.8  1.3 node-MainThread /home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node /home/telephoneheater/Work/Theandril/node_modules/typescript/lib/tsserver.js --useInferredProjectPerProjectRoot --cancellationPipeName /tmp/a732da1ce5d4e25ff91ff4d296f6a6c6/tscancellation* --locale en --validateDefaultNpmLocation --useNodeIpc
+  84944   83046  0.8  0.4 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --dns-result-order=ipv4first --experimental-network-inspection --inspect-port=0 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190709005989750323
+ 201619  201595  0.7  0.5 steamwebhelper  ./steamwebhelper -nocrashdialog -lang=en_US -cachedir=/home/telephoneheater/.local/share/Steam/config/htmlcache -steampid=201173 -buildid=1788652215 -steamid=0 -logdir=/home/telephoneheater/.local/share/Steam/logs -uimode=7 -startcount=0 -steamuniverse=Public -realm=Global -clientui=/home/telephoneheater/.local/share/Steam/clientui -steampath=/home/telephoneheater/.local/share/Steam/ubuntu12_32/steam -launcher=0 -use_xcomposite_workaround --valve-initial-threadpool-size=20 --valve-enable-site-isolation --enable-smooth-scrolling --disablehighdpi --force-device-scale-factor=1 --device-scale-factor=1 --password-store=basic --log-file=/home/telephoneheater/.local/share/Steam/logs/cef_log.txt --disable-quick-menu --disable-component-update --gaia-url=http://disabled.invalid --enable-features=PlatformHEVCDecoderSupport --disable-features=WinRetrieveSuggestionsOnlyOnDemand,SpareRendererForSitePerProcess,DcheckIsFatal,BlockPromptsIfIgnoredOften,WebUsbDeviceDetection,ValveFFmpegAllowLowDelayHEVC
+  84946   83046  0.7  0.4 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --dns-result-order=ipv4first --experimental-network-inspection --inspect-port=0 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190709007863834021
+  84945   83046  0.7  0.4 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --dns-result-order=ipv4first --experimental-network-inspection --inspect-port=0 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190709006926792172
+  85222   83046  0.6  0.4 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190709008800875870
+  16286   16283  0.5  1.1 quickshell      quickshell -n -p /usr/share/omarchy/shell
+  83046    1861  0.5  0.7 cursor          /usr/lib/electron42/electron /usr/share/cursor/resources/app/cursor.mjs
+   1977    1861  0.5  0.0 wireplumber     /usr/bin/wireplumber
+ 204562  204524  0.5  0.7 chromium        /usr/lib/chromium/chromium --ozone-platform=wayland --ozone-platform-hint=wayland --password-store=gnome-libsecret --enable-features=TouchpadOverscrollHistoryNavigation --load-extension=/usr/share/omarchy/default/chromium/extensions/copy-url,/usr/share/omarchy/default/chromium/extensions/yt-dlp,/usr/share/omarchy/default/chromium/extensions/whatsapp-slim --remote-debugging-port=0 --no-first-run --no-default-browser-check --disable-background-networking --disable-backgrounding-occluded-windows --disable-component-update --disable-default-apps --disable-hang-monitor --disable-popup-blocking --disable-prompt-on-repost --disable-sync --disable-features=Translate --enable-features=NetworkService,NetworkServiceInProcess --metrics-recording-only --password-store=basic --use-mock-keychain --headless=new --enable-unsafe-swiftshader --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --window-size=1280,720 --noerrdialogs --ozone-platform=headless --ozone-override-screen-size=800,600 --use-angle=swiftshader-webgl
+ 205002  201173  0.5  0.0 gameoverlayui   /home/telephoneheater/.local/share/Steam/ubuntu12_32/gameoverlayui -pid 204842 -steampid 201173 -manuallyclearframes 0 -gameid 1295660
+  83106   83049  0.4  0.4 electron        /usr/lib/electron42/electron --type=gpu-process --ozone-platform=wayland --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --gpu-preferences=UAAAAAAAAAAgAQAEAAAAAAAAAAAAAGAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190708988185955192
+  62910   62866  0.4  0.2 chromium        /usr/lib/chromium/chromium --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,17360687310936369204,472864971129520258,524288 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190708989122997041
+  71549    1861  0.3  0.5 Hermes          /home/telephoneheater/.hermes/hermes-agent/apps/desktop/release/linux-unpacked/Hermes --disable-setuid-sandbox
+   1978    1861  0.3  0.1 pipewire-pulse  /usr/bin/pipewire-pulse
+  72716   62866  0.3  0.1 chromium        /usr/lib/chromium/chromium --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,14243664090504830509,4636298013936034213,524288 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190709012549043266
+ 194011   73379  0.3  0.5 codex           codex resume
+   1851    1827  0.3  0.1 python3         /usr/local/bin/python3 -m uvicorn open_webui.main:app --host 0.0.0.0 --port 8080 --forwarded-allow-ips * --workers 1 --ws-per-message-deflate true
+    243       2  0.3  0.0 kswapd0         [kswapd0]
+   3605    3446  0.2  0.2 voxtype-osd-gtk /usr/lib/voxtype/voxtype-osd-gtk4
+ 184046    2998  0.1  0.3 nautilus        /usr/bin/nautilus --new-window
+   3796    3657  0.1  0.3 1password       /opt/1Password/1password --type=gpu-process --ozone-platform=wayland --render-node-override=/dev/dri/renderD128 --enable-crash-reporter=f60e0ce6-ec41-4ff5-8e6c-2c0d0ff0cecc,no_channel --user-data-dir=/home/telephoneheater/.config/1Password --gpu-preferences=UAAAAAAAAAAgAQAEAAAAAAAAAAAAAGAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --field-trial-handle=3,i,6610786752456555641,11241252404083452210,262144 --enable-features=PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17023257920556021086,12026296016021349993,4 --trace-process-track-uuid=3190708988185955192
+   3178    2998  0.1  0.3 Xwayland        Xwayland :0 -rootless -core -listenfd 78 -listenfd 79 -displayfd 126 -wm 123
+  64944   62883  0.1  0.6 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=17 --launch-time-ticks=4012314413 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,14063744274735683534,1151600740536941153,2097152 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190709002241582927
+ 238838  238822  0.1  0.4 node-MainThread /home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node /home/telephoneheater/Work/Theandril/node_modules/typescript/lib/tsserver.js --serverMode partialSemantic --useInferredProjectPerProjectRoot --disableAutomaticTypingAcquisition --cancellationPipeName /tmp/847aed580a2493a2aa64e1e3fc5c2d45/tscancellation* --locale en --validateDefaultNpmLocation --useNodeIpc
+ 238822   71770  0.1  0.2 node-MainThread node /home/telephoneheater/.hermes/lsp/bin/typescript-language-server --stdio
+   1973    1861  0.1  0.0 pipewire        /usr/bin/pipewire
+    385       2  0.1  0.0 nvidia-modeset/ [nvidia-modeset/kthread_q]
+  84848   83046  0.0  0.2 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190709004115666625
+     16       2  0.0  0.0 rcu_preempt     [rcu_preempt]
+ 200746       2  0.0  0.0 kworker/u129:17 [kworker/u129:17-kcryptd-253:0-1]
+  83135   83046  0.0  0.3 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190708990997080739
+ 237391       2  0.0  0.0 kworker/u129:22 [kworker/u129:22-kcryptd-253:0-1]
+ 201671  201619  0.0  0.2 steamwebhelper  /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=201622 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --enable-chrome-runtime --user-data-dir=/home/telephoneheater/.local/share/Steam/config/htmlcache --user-agent-product=Valve Steam Client --disablehighdpi --force-device-scale-factor=1 --buildid=1788652215 --steamid=0 --valve-initial-threadpool-size=20 --shared-files --field-trial-handle=3,i,9756527347155907457,3550037676167230325,262144 --enable-features=PlatformHEVCDecoderSupport --disable-features=BlockPromptsIfIgnoredOften,DcheckIsFatal,SpareRendererForSitePerProcess,ValveFFmpegAllowLowDelayHEVC,WebUsbDeviceDetection,WinRetrieveSuggestionsOnlyOnDemand --variations-seed-version --log-file=/home/telephoneheater/.local/share/Steam/logs/cef_log.txt
+   3446    1861  0.0  0.0 voxtype         /usr/bin/voxtype daemon
+   1221       2  0.0  0.0 kworker/u132:1- [kworker/u132:1-hci0]
+ 204524    1861  0.0  0.0 agent-browser-l /home/telephoneheater/.npm/_npx/ad6c181e5b604bdb/node_modules/agent-browser/bin/agent-browser-linux-x64
+  73348    2998  0.0  0.0 foot            foot --working-directory=/home/telephoneheater
+ 205996  205984  0.0  0.5 node-MainThread /home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node /home/telephoneheater/Work/Theandril/node_modules/typescript/lib/tsserver.js --serverMode partialSemantic --useInferredProjectPerProjectRoot --disableAutomaticTypingAcquisition --cancellationPipeName /tmp/2717faa5a78fba7f3b41c9dd45568f37/tscancellation* --locale en --validateDefaultNpmLocation --useNodeIpc
+ 189949       2  0.0  0.0 kworker/u129:3- [kworker/u129:3-kcryptd-253:0-1]
+ 204815    1861  0.0  0.1 python          /home/telephoneheater/.local/share/uv/tools/browser-use/bin/python -m browser_harness.daemon
+  11603    1861  0.0  0.0 localsearch-3   /usr/lib/localsearch-3
+ 201001       2  0.0  0.0 kworker/u129:20 [kworker/u129:20-kcryptd-253:0-1]
+ 198361       2  0.0  0.0 kworker/u129:5- [kworker/u129:5-kcryptd-253:0-1]
+   1390       1  0.0  0.1 containerd      /usr/bin/containerd
+ 203814  203688  0.0  0.4 node-MainThread node ./node_modules/.bin/../vite/bin/vite.js --host 127.0.0.1 --port 5191 --strictPort
+ 201004       2  0.0  0.0 kworker/u129:24 [kworker/u129:24-btrfs-endio]
+   3439    1861  0.0  0.4 qs              /usr/bin/qs --no-duplicate --path=/home/telephoneheater/.local/share/friend-wake/overlay/shell.qml
+ 200677       2  0.0  0.0 kworker/u129:13 [kworker/u129:13-kcryptd-253:0-1]
+  57725       2  0.0  0.0 kworker/u129:8- [kworker/u129:8-btrfs-endio-meta]
+  63142   62883  0.0  0.5 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --extension-process --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=10 --launch-time-ticks=3925387654 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,10672017845418510846,17591768373132916564,2097152 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190708995682289984
+ 225201       2  0.0  0.0 kworker/u129:12 [kworker/u129:12-kcryptd-253:0-1]
+ 201000       2  0.0  0.0 kworker/u129:19 [kworker/u129:19-iou_exit]
+ 225202       2  0.0  0.0 kworker/u129:14 [kworker/u129:14-kcryptd-253:0-1]
+ 210408  210365  0.0  0.0 esbuild         /home/telephoneheater/Work/Theandril/node_modules/.pnpm/@esbuild+linux-x64@0.28.2/node_modules/@esbuild/linux-x64/bin/esbuild --service=0.28.2 --ping
+ 185598  185585  0.0  0.2 node-MainThread node /home/telephoneheater/Work/Theandril/apps/web/node_modules/.bin/../vite/bin/vite.js --host 127.0.0.1
+    811       2  0.0  0.0 btrfs-transacti [btrfs-transaction]
+ 237394       2  0.0  0.0 kworker/u129:27 [kworker/u129:27-btrfs-endio]
+   1231       1  0.0  0.0 systemd-oomd    /usr/lib/systemd/systemd-oomd
+ 201003       2  0.0  0.0 kworker/u129:23 [kworker/u129:23-kcryptd-253:0-1]
+ 203867  203814  0.0  0.0 esbuild         /home/telephoneheater/Work/Theandril/node_modules/.pnpm/@esbuild+linux-x64@0.28.2/node_modules/@esbuild/linux-x64/bin/esbuild --service=0.28.2 --ping
+  57181       2  0.0  0.0 kworker/u129:4- [kworker/u129:4-kcryptd-253:0-1]
+  83768       2  0.0  0.0 kworker/u129:16 [kworker/u129:16-kcryptd-253:0-1]
+ 114941       2  0.0  0.0 kworker/u129:21 [kworker/u129:21-btrfs-endio]
+  57727       2  0.0  0.0 kworker/u129:10 [kworker/u129:10-kcryptd-253:0-1]
+  64960   62883  0.0  0.4 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=18 --launch-time-ticks=4012551787 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,12801313362382689495,884848883989336143,2097152 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190709003178624776
+  83767       2  0.0  0.0 kworker/u129:7- [kworker/u129:7-kcryptd-253:0-1]
+  63111   62883  0.0  0.5 chromium        /usr/lib/chromium/chromium --type=renderer --top-chrome-webui --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=7 --launch-time-ticks=3925359810 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,8200026365710589132,5897551895536648228,2097152 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190708992871164437
+ 226426       2  0.0  0.0 kworker/u130:14 [kworker/u130:14-kcryptd-253:0-1]
+ 237392       2  0.0  0.0 kworker/u129:25 [kworker/u129:25-btrfs-endio]
+  49937       2  0.0  0.0 kworker/u129:2- [kworker/u129:2-kcryptd-253:0-1]
+ 205981       2  0.0  0.0 kworker/u130:17 [kworker/u130:17-kcryptd-253:0-1]
+  72084   71549  0.0  0.1 Hermes          /proc/self/exe --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --enable-crash-reporter=9468d171-9402-448c-9d3c-44bb34ba672d,no_channel --user-data-dir=/home/telephoneheater/.config/Hermes --standard-schemes=hermes-media --secure-schemes=hermes-media --fetch-schemes=hermes-media --streaming-schemes=hermes-media --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,14950693858129259835,1829075043525739652,262144 --enable-features=PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708990997080739
+ 185611  185598  0.0  0.0 esbuild         /home/telephoneheater/Work/Theandril/node_modules/.pnpm/@esbuild+linux-x64@0.28.2/node_modules/@esbuild/linux-x64/bin/esbuild --service=0.28.2 --ping
+  63413   62883  0.0  0.4 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=15 --launch-time-ticks=3928003633 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,11798950145723580710,18253851063932113901,2097152 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190709000367499229
+ 205983       2  0.0  0.0 kworker/u130:19 [kworker/u130:19-kcryptd-253:0-1]
+ 201434       2  0.0  0.0 kworker/u130:16 [kworker/u130:16-btrfs-endio-write]
+ 240581       2  0.0  0.0 kworker/u130:2- [kworker/u130:2-kcryptd-253:0-1]
+  83750       2  0.0  0.0 kworker/u129:6- [kworker/u129:6-kcryptd-253:0-1]
+ 204628  204573  0.0  0.6 chromium        /usr/lib/chromium/chromium --type=renderer --top-chrome-webui --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --remote-debugging-port=0 --ozone-platform=headless --disable-gpu-compositing --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=6218589078 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,16095978743596044086,12121919549481243440,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=EyeDropper,PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=7,i,767549168869524423,4074941056227999620,4 --trace-process-track-uuid=3190708990997080739
+ 175053   62883  0.0  0.4 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=32 --launch-time-ticks=4927229959 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,3429539066739905880,11893228343999163632,2097152 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190709016297210662
+   1383       1  0.0  0.0 ollama          /usr/bin/ollama serve
+   3443    1861  0.0  0.0 fcitx5          /usr/bin/fcitx5 --disable notificationitem
+  86158   84921  0.0  0.2 electron        /usr/lib/electron42/electron /home/telephoneheater/.cursor/extensions/dbaeumer.vscode-eslint-3.0.34-universal/server/out/eslintServer.js --node-ipc --clientProcessId=84921
+ 200752       2  0.0  0.0 kworker/u131:7- [kworker/u131:7-kcryptd-253:0-1]
+ 200615       2  0.0  0.0 kworker/u131:6- [kworker/u131:6-kcryptd-253:0-1]
+   1446       1  0.0  0.1 dockerd         /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 200758       2  0.0  0.0 kworker/u131:13 [kworker/u131:13-kcryptd-253:0-1]
+ 205982       2  0.0  0.0 kworker/u130:18 [kworker/u130:18-kcryptd-253:0-1]
+  83717       2  0.0  0.0 kworker/u130:7- [kworker/u130:7-btrfs-endio-meta]
+  83234   83046  0.0  0.2 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190708991934122588
+ 192715    2998  0.0  0.0 foot            foot --working-directory=/home/telephoneheater
+ 226430       2  0.0  0.0 kworker/u130:23 [kworker/u130:23-kcryptd-253:0-1]
+   3655    1861  0.0  0.0 xdg-desktop-por /usr/lib/xdg-desktop-portal-hyprland
+ 205016       2  0.0  0.0 kworker/u131:18 [kworker/u131:18-btrfs-endio-meta]
+ 204597  204562  0.0  0.2 chromium        /usr/lib/chromium/chromium --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --use-angle=swiftshader-webgl --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,16095978743596044086,12121919549481243440,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=EyeDropper,PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=7,i,767549168869524423,4074941056227999620,4 --trace-process-track-uuid=3190708989122997041
+ 190177       2  0.0  0.0 kworker/u131:1- [kworker/u131:1-events_unbound]
+   4661    3450  0.0  0.0 parec           parec --raw --device=alsa_input.usb-Logitech_G522_LIGHTSPEED_-_Wireless_Mode_0000000000000000-00.mono-fallback --rate=16000 --format=s16le --channels=1 --latency-msec=160
+ 191610       2  0.0  0.0 kworker/u131:3- [kworker/u131:3-kcryptd-253:0-1]
+ 200757       2  0.0  0.0 kworker/u131:12 [kworker/u131:12-kcryptd-253:0-1]
+  71605   71549  0.0  0.2 Hermes          /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --enable-crash-reporter=9468d171-9402-448c-9d3c-44bb34ba672d,no_channel --user-data-dir=/home/telephoneheater/.config/Hermes --standard-schemes=hermes-media --secure-schemes=hermes-media --fetch-schemes=hermes-media --streaming-schemes=hermes-media --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,14950693858129259835,1829075043525739652,262144 --enable-features=PdfUseShowSaveFilePicker --disable-features=LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708989122997041
+ 201070       2  0.0  0.0 kworker/u131:17 [kworker/u131:17-btrfs-endio-meta]
+ 233584       2  0.0  0.0 kworker/u131:19 [kworker/u131:19-btrfs-endio-meta]
+  79545       2  0.0  0.0 kworker/u130:4- [kworker/u130:4-kcryptd-253:0-1]
+ 237393       2  0.0  0.0 kworker/u129:26 [kworker/u129:26-kcryptd-253:0-1]
+ 204485  204484  0.0  0.0 srt-bwrap       /home/telephoneheater/.local/share/Steam/steamapps/common/SteamLinuxRuntime_soldier/pressure-vessel/libexec/steam-runtime-tools-0/srt-bwrap --args 26 /usr/lib/pressure-vessel/from-host/libexec/steam-runtime-tools-0/pv-adverb --prefix=/usr/lib/pressure-vessel/from-host --generate-locales --fd 11 --regenerate-ld.so-cache /var/pressure-vessel/ldso --add-ld.so-path /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu --add-ld.so-path /usr/lib/pressure-vessel/overrides/lib/i386-linux-gnu --set-ld-library-path /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/aliases:/usr/lib/pressure-vessel/overrides/lib/i386-linux-gnu/aliases --overrides-path /usr/lib/pressure-vessel/overrides --assign-fd=1=3 --assign-fd=2=4 --ld-preload=/home/telephoneheater/.local/share/Steam/ubuntu12_32/gameoverlayrenderer.so --ld-preload=/home/telephoneheater/.local/share/Steam/ubuntu12_64/gameoverlayrenderer.so -- /home/telephoneheater/.local/share/Steam/steamapps/common/SteamLinuxRuntime/scout-on-soldier-entry-point-v2 -- /home/telephoneheater/.local/share/Steam/steamapps/common/Sid Meier's Civilization VII/Base/Binaries/linux/Civ7_linux_Vulkan.sh
+  68544       2  0.0  0.0 kworker/u130:13 [kworker/u130:13-kcryptd-253:0-1]
+  57871       2  0.0  0.0 kworker/u130:8- [kworker/u130:8-btrfs-endio]
+  84844       2  0.0  0.0 kworker/u131:16 [kworker/u131:16-kcryptd-253:0-1]
+  83110   83046  0.0  0.2 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190708989122997041
+   3422    1861  0.0  0.2 1password       /opt/1Password/1password --silent
+    909       1  0.0  0.1 systemd-journal /usr/lib/systemd/systemd-journald
+  83397       2  0.0  0.0 kworker/u131:15 [kworker/u131:15-btrfs-endio]
+  57874       2  0.0  0.0 kworker/u130:10 [kworker/u130:10-kcryptd-253:0-1]
+     68       2  0.0  0.0 migration/16    [migration/16]
+  52156       2  0.0  0.0 kworker/u130:6- [kworker/u130:6-kcryptd-253:0-1]
+ 206032  205997  0.0  0.3 node-MainThread /home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node /home/telephoneheater/Work/Theandril/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/typingsInstaller.js --globalTypingsCacheLocation /home/telephoneheater/.cache/typescript/5.9 --typesMapLocation /home/telephoneheater/Work/Theandril/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/typesMap.json --validateDefaultNpmLocation
+   3151    2998  0.0  0.0 omarchy-hyprlan /bin/bash /usr/share/omarchy/bin/omarchy-hyprland-monitor-watch
+   1026       1  0.0  0.0 systemd-resolve /usr/lib/systemd/systemd-resolved
+  62968       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-148]
+ 201399  201173  0.0  0.0 srt-bwrap       /home/telephoneheater/.local/share/Steam/steamrt64/pv-runtime/steam-runtime-steamrt/pressure-vessel/libexec/steam-runtime-tools-0/srt-bwrap --args 27 /usr/lib/pressure-vessel/from-host/libexec/steam-runtime-tools-0/pv-adverb --prefix=/usr/lib/pressure-vessel/from-host --generate-locales --fd 11 --regenerate-ld.so-cache /var/pressure-vessel/ldso --add-ld.so-path /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu --add-ld.so-path /usr/lib/pressure-vessel/overrides/lib/i386-linux-gnu --set-ld-library-path /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/aliases:/usr/lib/pressure-vessel/overrides/lib/i386-linux-gnu/aliases --overrides-path /usr/lib/pressure-vessel/overrides --assign-fd=1=3 --assign-fd=2=4 -- /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper_sniper_wrap.sh -nocrashdialog -lang=en_US -cachedir=/home/telephoneheater/.local/share/Steam/config/htmlcache -steampid=201173 -buildid=1788652215 -steamid=0 -logdir=/home/telephoneheater/.local/share/Steam/logs -uimode=7 -startcount=0 -steamuniverse=Public -realm=Global -clientui=/home/telephoneheater/.local/share/Steam/clientui -steampath=/home/telephoneheater/.local/share/Steam/ubuntu12_32/steam -launcher=0 -use_xcomposite_workaround --valve-initial-threadpool-size=20 --valve-enable-site-isolation --enable-smooth-scrolling --disablehighdpi --force-device-scale-factor=1 --device-scale-factor=1 --password-store=basic --log-file=/home/telephoneheater/.local/share/Steam/logs/cef_log.txt --disable-quick-menu --disable-component-update --gaia-url=http://disabled.invalid --enable-features=PlatformHEVCDecoderSupport --disable-features=WinRetrieveSuggestionsOnlyOnDemand,SpareRendererForSitePerProcess,DcheckIsFatal,BlockPromptsIfIgnoredOften,WebUsbDeviceDetection,ValveFFmpegAllowLowDelayHEVC
+  57742       2  0.0  0.0 kworker/u131:9- [kworker/u131:9-btrfs-endio]
+ 226428       2  0.0  0.0 kworker/u130:21 [kworker/u130:21-kcryptd-253:0-1]
+    836       2  0.0  0.0 kworker/u130:5- [kworker/u130:5-kcryptd-253:0-1]
+  76924       2  0.0  0.0 kworker/10:0-ev [kworker/10:0-events]
+  83396       2  0.0  0.0 kworker/u131:14 [kworker/u131:14-kcryptd-253:0-1]
+ 203688   71770  0.0  0.2 node-MainThread node /home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/pnpm --filter @theandril/web exec vite --host 127.0.0.1 --port 5191 --strictPort
+  57717       2  0.0  0.0 kworker/u131:0- [kworker/u131:0-kcryptd-253:0-1]
+  57723       2  0.0  0.0 kworker/u131:8- [kworker/u131:8-kcryptd-253:0-1]
+ 243346       2  0.0  0.0 kworker/10:1-ev [kworker/10:1-events]
+  83718       2  0.0  0.0 kworker/u130:12 [kworker/u130:12-kcryptd-253:0-1]
+  83418   83046  0.0  0.1 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190708995682289984
+   1290       1  0.0  0.0 NetworkManager  /usr/bin/NetworkManager --no-daemon
+    752       2  0.0  0.0 dmcrypt_write/2 [dmcrypt_write/253:0]
+  83664   83046  0.0  0.2 electron        /usr/lib/electron42/electron --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=83084 --enable-crash-reporter=172faa4f-222e-421d-b6b8-9d61bf95651d,no_channel --user-data-dir=/home/telephoneheater/.config/Cursor --standard-schemes=vscode-webview,vscode-file,cursor-rpc-devtools --enable-sandbox --secure-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --fetch-schemes=vscode-webview,vscode-file,vscode-remote-resource,vscode-managed-remote-resource,cursor-rpc-devtools,sentry-ipc --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,3950410357520640638,11431962421082654170,262144 --enable-features=AlwaysLogLOAFURL,DocumentPolicyIncludeJSCallStacksInCrashReports,PdfUseShowSaveFilePicker --disable-features=CalculateNativeWinOcclusion,DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17073278371551968808,15832401682440080542,4 --trace-process-track-uuid=3190708996619331833
+ 234347       2  0.0  0.0 kworker/u131:20 [kworker/u131:20-kcryptd-253:0-1]
+ 204638  204573  0.0  0.4 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --remote-debugging-port=0 --ozone-platform=headless --disable-gpu-compositing --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=6218601687 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,16095978743596044086,12121919549481243440,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=EyeDropper,PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=7,i,767549168869524423,4074941056227999620,4 --trace-process-track-uuid=3190708991934122588
+ 238874  238839  0.0  0.3 node-MainThread /home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node /home/telephoneheater/Work/Theandril/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/typingsInstaller.js --globalTypingsCacheLocation /home/telephoneheater/.cache/typescript/5.9 --typesMapLocation /home/telephoneheater/Work/Theandril/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/typesMap.json --validateDefaultNpmLocation
+      1       0  0.0  0.0 systemd         /sbin/init splash
+   3128       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-17]
+ 194543  194364  0.0  0.0 python          /home/telephoneheater/.cache/uv/archive-v0/XzxZ0Pw1V___hJPd/bin/python /home/telephoneheater/.cache/uv/archive-v0/XzxZ0Pw1V___hJPd/bin/blender-mcp
+ 187945       2  0.0  0.0 kworker/u130:1- [kworker/u130:1-kcryptd-253:0-1]
+ 210291  210202  0.0  0.3 node-MainThread node /home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/pnpm exec vite --host 127.0.0.1 --port 4173 --strictPort
+  62930   62883  0.0  0.1 chromium        /usr/lib/chromium/chromium --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=utility --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,17472014779671297588,16435650397650347555,524288 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190708990060038890
+     76       2  0.0  0.0 migration/17    [migration/17]
+   1293       1  0.0  0.0 bluetoothd      /usr/lib/bluetooth/bluetoothd
+     20       2  0.0  0.0 migration/0     [migration/0]
+ 185585  185569  0.0  0.1 node-MainThread node /home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/pnpm --filter @theandril/web dev
+  85339   84921  0.0  0.2 electron        /usr/lib/electron42/electron /usr/share/cursor/resources/app/extensions/json-language-features/server/dist/node/jsonServerMain --node-ipc --clientProcessId=84921
+   1368       2  0.0  0.0 kworker/u131:11 [kworker/u131:11-kcryptd-253:0-1]
+ 204993       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-760]
+   3152    2998  0.0  0.1 udiskie         /usr/bin/python /usr/bin/udiskie --automount --no-notify --no-tray
+   1827       1  0.0  0.0 containerd-shim /usr/bin/containerd-shim-runc-v2 -namespace moby -id 917b16cecfadb43df953a8093c73cd9e317378327f01db79ddcc4214ea5b6cb2 -address /run/containerd/containerd.sock
+ 202614       2  0.0  0.0 kworker/0:1-eve [kworker/0:1-events]
+  16526   16286  0.0  0.0 voxtype         voxtype status --follow --extended --format json
+   3585    1861  0.0  0.0 xdg-desktop-por /usr/lib/xdg-desktop-portal-gtk
+ 247111       2  0.0  0.0 kworker/1:1-eve [kworker/1:1-events]
+ 226427       2  0.0  0.0 kworker/u130:20 [kworker/u130:20-kcryptd-253:0-1]
+  16542   16286  0.0  0.0 voxtype         voxtype status --follow --extended --format json
+     82       2  0.0  0.0 migration/18    [migration/18]
+  16636   16286  0.0  0.0 voxtype         voxtype status --follow --extended --format json
+  16645   16286  0.0  0.0 voxtype         voxtype status --follow --extended --format json
+  72354   72336  0.0  0.0 python          /home/telephoneheater/.cache/uv/archive-v0/XzxZ0Pw1V___hJPd/bin/python /home/telephoneheater/.cache/uv/archive-v0/XzxZ0Pw1V___hJPd/bin/blender-mcp
+     26       2  0.0  0.0 migration/2     [migration/2]
+    354       2  0.0  0.0 nv_mem_pool_scr [nv_mem_pool_scrubber_queue]
+ 248608       2  0.0  0.0 kworker/4:2-eve [kworker/4:2-events]
+ 204689  204573  0.0  0.3 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --remote-debugging-port=0 --ozone-platform=headless --disable-gpu-compositing --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=10 --launch-time-ticks=6218638240 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,16095978743596044086,12121919549481243440,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=EyeDropper,PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=7,i,767549168869524423,4074941056227999620,4 --trace-process-track-uuid=3190708995682289984
+   4354    3151  0.0  0.0 socat           socat -U - UNIX-CONNECT:/run/user/1000/hypr/efb50993780079460b0cbed1363e2166a2de1d9f_1788924081_1376546188/.socket2.sock
+  12000       2  0.0  0.0 kworker/8:0-eve [kworker/8:0-events]
+ 248345       2  0.0  0.0 kworker/2:0-mm_ [kworker/2:0-mm_percpu_wq]
+     15       2  0.0  0.0 ksoftirqd/0     [ksoftirqd/0]
+     32       2  0.0  0.0 migration/4     [migration/4]
+ 245963       2  0.0  0.0 kworker/5:0-eve [kworker/5:0-events]
+    225       2  0.0  0.0 kcompactd0      [kcompactd0]
+   1288    1286  0.0  0.0 dbus-broker     dbus-broker --log 10 --controller 9 --machine-id 3d2f129d64664210a0f83b512ce78544 --max-bytes 536870912 --max-fds 4096 --max-matches 131072 --audit
+     88       2  0.0  0.0 migration/19    [migration/19]
+ 236064       2  0.0  0.0 kworker/0:0-eve [kworker/0:0-events]
+   2988    1809  0.0  0.0 searxng worker- searxng worker-1
+  80051       2  0.0  0.0 kworker/6:0-eve [kworker/6:0-events]
+   3165       1  0.0  0.0 upowerd         /usr/lib/upowerd
+   1861       1  0.0  0.0 systemd         /usr/lib/systemd/systemd --user
+ 248018       2  0.0  0.0 kworker/14:1-ev [kworker/14:1-events]
+  82752       2  0.0  0.0 kworker/2:1-eve [kworker/2:1-events]
+     38       2  0.0  0.0 migration/6     [migration/6]
+     56       2  0.0  0.0 migration/12    [migration/12]
+  51388       2  0.0  0.0 kworker/4:1-eve [kworker/4:1-events]
+   1380       1  0.0  0.0 wpa_supplicant  /usr/bin/wpa_supplicant -u -s -O /run/wpa_supplicant
+     94       2  0.0  0.0 migration/20    [migration/20]
+ 237651       2  0.0  0.0 kworker/31:0-ev [kworker/31:0-events]
+ 231161       2  0.0  0.0 kworker/14:2-ev [kworker/14:2-events]
+   1015       2  0.0  0.0 kworker/11:2-ev [kworker/11:2-events]
+     62       2  0.0  0.0 migration/14    [migration/14]
+  85673   84945  0.0  0.1 electron        /usr/lib/electron42/electron --dns-result-order=ipv4first --experimental-network-inspection /usr/share/cursor/resources/app/extensions/cursor-always-local/dist/gitWorker.js
+ 243017       2  0.0  0.0 kworker/17:0-ev [kworker/17:0-events]
+     44       2  0.0  0.0 migration/8     [migration/8]
+ 218149       2  0.0  0.0 kworker/18:0-ev [kworker/18:0-events]
+ 187143       2  0.0  0.0 kworker/8:1-eve [kworker/8:1-events]
+   3458    1861  0.0  0.0 xdg-desktop-por /usr/lib/xdg-desktop-portal
+ 191359       2  0.0  0.0 kworker/16:2-ev [kworker/16:2-events]
+ 241715       2  0.0  0.0 kworker/16:1-ev [kworker/16:1-events]
+     50       2  0.0  0.0 migration/10    [migration/10]
+    227       2  0.0  0.0 khugepaged      [khugepaged]
+    167       2  0.0  0.0 ksoftirqd/1     [ksoftirqd/1]
+ 182912       2  0.0  0.0 kworker/6:1-eve [kworker/6:1-events]
+    100       2  0.0  0.0 migration/21    [migration/21]
+  64325       2  0.0  0.0 kworker/12:2-ev [kworker/12:2-events]
+ 188893       2  0.0  0.0 kworker/14:0-ev [kworker/14:0-events]
+ 239707       2  0.0  0.0 kworker/30:2-ev [kworker/30:2-events]
+ 246607       2  0.0  0.0 kworker/8:2-eve [kworker/8:2-events]
+ 196737       2  0.0  0.0 kworker/7:2-mm_ [kworker/7:2-mm_percpu_wq]
+ 195295  194011  0.0  0.0 codex-code-mode /home/telephoneheater/.local/share/mise/installs/codex/0.153.4/bin/codex-code-mode-host
+ 194364  194011  0.0  0.0 uv              /home/telephoneheater/.local/bin/uv tool uvx blender-mcp
+ 238061   71770  0.0  0.0 python          /home/telephoneheater/.hermes/hermes-agent/venv/bin/python /tmp/hermes_kernel_1vxn029p/hermes_kernel_runner.py
+   3454    3441  0.0  0.0 journalctl      journalctl -f -n 0 -o json MESSAGE_ID=fc2e22bc6ee647b6b90729ab34a250b1
+    295       2  0.0  0.0 kworker/12:1-ev [kworker/12:1-events]
+  50401       2  0.0  0.0 kworker/11:0-mm [kworker/11:0-mm_percpu_wq]
+   1292       1  0.0  0.0 avahi-daemon    avahi-daemon: running [omarchy-2.local]
+   1785       1  0.0  0.0 containerd-shim /usr/bin/containerd-shim-runc-v2 -namespace moby -id 0e3610f3ae0b06d15a3772f1d15e317309e33b3e53209072451af38228ccbb8e -address /run/containerd/containerd.sock
+   1745       1  0.0  0.0 containerd-shim /usr/bin/containerd-shim-runc-v2 -namespace moby -id c0233af7ad19a91fac00d0cebbf554c67a42c79a36d43767997af27ad5ae698c -address /run/containerd/containerd.sock
+    106       2  0.0  0.0 migration/22    [migration/22]
+ 185569   85021  0.0  0.1 npm run dev     npm run dev
+    118       2  0.0  0.0 migration/24    [migration/24]
+ 204813  204789  0.0  0.1 Civ7_linux_Vulk /bin/bash /home/telephoneheater/.local/share/Steam/steamapps/common/Sid Meier's Civilization VII/Base/Binaries/linux/Civ7_linux_Vulkan.sh
+ 204484  201173  0.0  0.0 reaper          /home/telephoneheater/.local/share/Steam/ubuntu12_32/reaper SteamLaunch AppId=1295660 -- /home/telephoneheater/.local/share/Steam/steamapps/common/SteamLinuxRuntime_soldier/_v2-entry-point --verb=waitforexitandrun -- /home/telephoneheater/.local/share/Steam/steamapps/common/SteamLinuxRuntime/scout-on-soldier-entry-point-v2 -- /home/telephoneheater/.local/share/Steam/steamapps/common/Sid Meier's Civilization VII/Base/Binaries/linux/Civ7_linux_Vulkan.sh
+  71697       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-21b]
+ 176717       2  0.0  0.0 kworker/1:2-eve [kworker/1:2-events]
+  86259   84921  0.0  0.0 ruff            /home/telephoneheater/.cursor/extensions/charliermarsh.ruff-2026.78.0-linux-x64/bundled/libs/bin/ruff server
+ 233307       2  0.0  0.0 kworker/4:0-eve [kworker/4:0-events]
+   3801    3422  0.0  0.0 1password       /opt/1Password/1password --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --enable-crash-reporter=f60e0ce6-ec41-4ff5-8e6c-2c0d0ff0cecc,no_channel --user-data-dir=/home/telephoneheater/.config/1Password --standard-schemes=resource,file-icon --enable-sandbox --bypasscsp-schemes=resource,file-icon --fetch-schemes=resource,file-icon --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,6610786752456555641,11241252404083452210,262144 --enable-features=PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,17023257920556021086,12026296016021349993,4 --trace-process-track-uuid=3190708989122997041
+    112       2  0.0  0.0 migration/23    [migration/23]
+ 231788       2  0.0  0.0 kworker/9:1-eve [kworker/9:1-events]
+  81500       2  0.0  0.0 kworker/3:0-mm_ [kworker/3:0-mm_percpu_wq]
+   1600       1  0.0  0.0 polkitd         /usr/lib/polkit-1/polkitd --no-debug --log-level=notice
+   1971    1951  0.0  0.0 dbus-broker     dbus-broker --log 10 --controller 9 --machine-id 3d2f129d64664210a0f83b512ce78544 --max-bytes 100000000000000 --max-fds 25000000000000 --max-matches 5000000000
+    124       2  0.0  0.0 migration/25    [migration/25]
+    142       2  0.0  0.0 migration/28    [migration/28]
+    320       2  0.0  0.0 kworker/20:1-ev [kworker/20:1-events]
+    296       2  0.0  0.0 kworker/18:1-ev [kworker/18:1-events]
+ 204662  204573  0.0  0.3 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --remote-debugging-port=0 --ozone-platform=headless --disable-gpu-compositing --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --launch-time-ticks=6218617029 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,16095978743596044086,12121919549481243440,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=EyeDropper,PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=7,i,767549168869524423,4074941056227999620,4 --trace-process-track-uuid=3190708993808206286
+ 204605  204573  0.0  0.1 chromium        /usr/lib/chromium/chromium --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=utility --use-angle=swiftshader-webgl --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,16095978743596044086,12121919549481243440,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=EyeDropper,PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=7,i,767549168869524423,4074941056227999620,4 --trace-process-track-uuid=3190708990060038890
+ 241313   71770  0.0  0.0 python          /home/telephoneheater/.hermes/hermes-agent/venv/bin/python /tmp/hermes_kernel_711xkt7u/hermes_kernel_runner.py
+ 201623  201173  0.0  0.0 steam-runtime-l steam-runtime-launcher-service --alongside-steam
+    291       2  0.0  0.0 kworker/25:1-ev [kworker/25:1-events]
+    234       2  0.0  0.0 kworker/24:1-ev [kworker/24:1-events]
+    114       2  0.0  0.0 kworker/23:0-mm [kworker/23:0-mm_percpu_wq]
+    130       2  0.0  0.0 migration/26    [migration/26]
+  76297       2  0.0  0.0 kworker/9:0-eve [kworker/9:0-events]
+   3168       2  0.0  0.0 kworker/31:2-ev [kworker/31:2-events]
+   1033       1  0.0  0.0 systemd-udevd   /usr/lib/systemd/systemd-udevd
+    148       2  0.0  0.0 migration/29    [migration/29]
+    297       2  0.0  0.0 kworker/26:1-mm [kworker/26:1-mm_percpu_wq]
+    136       2  0.0  0.0 migration/27    [migration/27]
+    150       2  0.0  0.0 kworker/29:0-ev [kworker/29:0-events]
+    154       2  0.0  0.0 migration/30    [migration/30]
+     12       2  0.0  0.0 kworker/u128:0- [kworker/u128:0-ipv6_addrconf]
+  15775       2  0.0  0.0 psimon          [psimon]
+  15589       1  0.0  0.0 gpg-agent       /usr/bin/gpg-agent --homedir /etc/pacman.d/gnupg --supervised
+    319       2  0.0  0.0 kworker/22:1-ev [kworker/22:1-events]
+    292       2  0.0  0.0 kworker/28:1-mm [kworker/28:1-mm_percpu_wq]
+    160       2  0.0  0.0 migration/31    [migration/31]
+ 210202   71770  0.0  0.0 bash            /usr/bin/bash -lic set +m; pnpm exec vite --host 127.0.0.1 --port 4173 --strictPort > /home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/vite-4173.log 2>&1
+   3453    1861  0.0  0.0 uwsm            /usr/bin/python3 /usr/bin/uwsm aux app-daemon
+   1809    1785  0.0  0.0 searxng         searxng
+    317       2  0.0  0.0 kworker/19:1-ev [kworker/19:1-events]
+    321       2  0.0  0.0 kworker/27:1-ev [kworker/27:1-events]
+    307       2  0.0  0.0 kworker/17:2-ev [kworker/17:2-events]
+ 204884       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-75d]
+ 204384  201635  0.0  0.1 steamwebhelper  /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper --type=zygote --force-device-scale-factor=1 --crashpad-handler-pid=201622 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --enable-chrome-runtime --user-data-dir=/home/telephoneheater/.local/share/Steam/config/htmlcache --user-agent-product=Valve Steam Client --disablehighdpi --force-device-scale-factor=1 --buildid=1788652215 --steamid=0 --valve-initial-threadpool-size=20
+ 203615   71770  0.0  0.0 python          /home/telephoneheater/.hermes/hermes-agent/venv/bin/python /tmp/hermes_kernel_9eky3bi7/hermes_kernel_runner.py
+ 203313   71770  0.0  0.0 python          /home/telephoneheater/.hermes/hermes-agent/venv/bin/python /tmp/hermes_kernel_xif19til/hermes_kernel_runner.py
+ 203237  201619  0.0  0.1 steamwebhelper  /proc/self/exe --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=201622 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --enable-chrome-runtime --user-data-dir=/home/telephoneheater/.local/share/Steam/config/htmlcache --user-agent-product=Valve Steam Client --disablehighdpi --force-device-scale-factor=1 --buildid=1788652215 --steamid=0 --valve-initial-threadpool-size=20 --shared-files --field-trial-handle=3,i,9756527347155907457,3550037676167230325,262144 --enable-features=PlatformHEVCDecoderSupport --disable-features=BlockPromptsIfIgnoredOften,DcheckIsFatal,SpareRendererForSitePerProcess,ValveFFmpegAllowLowDelayHEVC,WebUsbDeviceDetection,WinRetrieveSuggestionsOnlyOnDemand --variations-seed-version --log-file=/home/telephoneheater/.local/share/Steam/logs/cef_log.txt
+ 201660       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-6dd]
+ 201632  201619  0.0  0.2 steamwebhelper  /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper --type=zygote --no-zygote-sandbox --force-device-scale-factor=1 --crashpad-handler-pid=201622 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --enable-chrome-runtime --user-data-dir=/home/telephoneheater/.local/share/Steam/config/htmlcache --user-agent-product=Valve Steam Client --disablehighdpi --force-device-scale-factor=1 --buildid=1788652215 --steamid=0 --valve-initial-threadpool-size=20
+ 199715   62883  0.0  0.2 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=43 --launch-time-ticks=6119633084 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,6957452875595266497,10150832587079718583,2097152 --field-trial-handle=3,i,14470676077058248370,7036048284934373774,262144 --enable-features=TouchpadOverscrollHistoryNavigation --disable-features=EyeDropper --variations-seed-version --pseudonymization-salt-handle=7,i,4715385897597031226,6146607734330716175,4 --trace-process-track-uuid=3190709026604671001
+ 199381       2  0.0  0.0 kworker/2:2-eve [kworker/2:2-events]
+    247       2  0.0  0.0 hwrng           [hwrng]
+    166       2  0.0  0.0 migration/1     [migration/1]
+  62883   62881  0.0  0.0 chromium        /usr/lib/chromium/chromium --type=zygote --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable
+  83798       2  0.0  0.0 kworker/28:0-ev [kworker/28:0-events]
+   4366       1  0.0  0.0 udisksd         /usr/lib/udisks2/udisksd
+   1298       1  0.0  0.0 systemd-logind  /usr/lib/systemd/systemd-logind
+    298       2  0.0  0.0 kworker/30:1-ev [kworker/30:1-events]
+     45       2  0.0  0.0 ksoftirqd/8     [ksoftirqd/8]
+  18976       2  0.0  0.0 kworker/1:0-eve [kworker/1:0-events]
+   2045    1605  0.0  0.0 sh              /usr/bin/sh /usr/lib/uwsm/signal-handler.sh wayland-session-envelope@hyprland.desktop.target
+    311       2  0.0  0.0 kworker/7:1-eve [kworker/7:1-events]
+    235       2  0.0  0.0 kworker/5:1-mm_ [kworker/5:1-mm_percpu_wq]
+     51       2  0.0  0.0 ksoftirqd/10    [ksoftirqd/10]
+  72336   71770  0.0  0.0 uv              /home/telephoneheater/.local/bin/uv tool uvx blender-mcp
+  12150       2  0.0  0.0 kworker/21:2-ev [kworker/21:2-events]
+   3556    1861  0.0  0.0 xdg-document-po /usr/lib/xdg-document-portal
+   1983    1861  0.0  0.0 gnome-keyring-d /usr/bin/gnome-keyring-daemon --foreground --components=pkcs11,secrets --control-directory=/run/user/1000/keyring
+   1184       2  0.0  0.0 kworker/19:2-ev [kworker/19:2-events]
+    172       2  0.0  0.0 migration/3     [migration/3]
+  58508       2  0.0  0.0 kworker/27:2-ev [kworker/27:2-events]
+ 183723       2  0.0  0.0 kworker/23:2-ev [kworker/23:2-events]
+  85021   84848  0.0  0.0 bash            /usr/bin/bash --init-file /usr/share/cursor/resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
+   2986    1861  0.0  0.0 start-hyprland  /usr/bin/start-hyprland
+   1193       2  0.0  0.0 irq/181-iwlwifi [irq/181-iwlwifi:default_queue]
+    314       2  0.0  0.0 kworker/15:1-mm [kworker/15:1-mm_percpu_wq]
+     69       2  0.0  0.0 ksoftirqd/16    [ksoftirqd/16]
+     77       2  0.0  0.0 ksoftirqd/17    [ksoftirqd/17]
+ 204845  204573  0.0  0.2 chromium        /usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --remote-debugging-port=0 --ozone-platform=headless --disable-gpu-compositing --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=14 --launch-time-ticks=6219360701 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,16095978743596044086,12121919549481243440,262144 --enable-features=NetworkService,NetworkServiceInProcess --disable-features=EyeDropper,PaintHolding,Translate --variations-seed-version --pseudonymization-salt-handle=7,i,767549168869524423,4074941056227999620,4 --trace-process-track-uuid=3190708999430457380
+ 204573  204571  0.0  0.0 chromium        /usr/lib/chromium/chromium --type=zygote --headless=new --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --no-first-run --ozone-platform=headless --ozone-override-screen-size=800,600 --use-angle=swiftshader-webgl
+ 204570  204562  0.0  0.1 chromium        /usr/lib/chromium/chromium --type=zygote --no-zygote-sandbox --headless=new --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --no-first-run --ozone-platform=headless --ozone-override-screen-size=800,600 --use-angle=swiftshader-webgl
+ 204571  204562  0.0  0.1 chromium        /usr/lib/chromium/chromium --type=zygote --headless=new --crashpad-handler-pid=204564 --enable-crash-reporter=,Arch Linux --noerrdialogs --user-data-dir=/tmp/agent-browser-chrome-8eb2d7af-0b0a-4e48-a7b9-01da9b43547a --change-stack-guard-on-fork=enable --no-first-run --ozone-platform=headless --ozone-override-screen-size=800,600 --use-angle=swiftshader-webgl
+ 201672  201635  0.0  0.1 steamwebhelper  /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper --type=zygote --force-device-scale-factor=1 --crashpad-handler-pid=201622 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --enable-chrome-runtime --user-data-dir=/home/telephoneheater/.local/share/Steam/config/htmlcache --user-agent-product=Valve Steam Client --disablehighdpi --force-device-scale-factor=1 --buildid=1788652215 --steamid=0 --valve-initial-threadpool-size=20
+ 201633  201619  0.0  0.2 steamwebhelper  /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper --type=zygote --force-device-scale-factor=1 --crashpad-handler-pid=201622 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --enable-chrome-runtime --user-data-dir=/home/telephoneheater/.local/share/Steam/config/htmlcache --user-agent-product=Valve Steam Client --disablehighdpi --force-device-scale-factor=1 --buildid=1788652215 --steamid=0 --valve-initial-threadpool-size=20
+ 201622  201595  0.0  0.2 steamwebhelper  /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper --monitor-self-annotation=ptype=crashpad-handler --type=crashpad-handler --max-uploads=5 --max-db-size=20 --max-db-age=5 --database=/tmp/dumps --url=https://crash.steampowered.com/submit --annotation=lsb-release=Steam Runtime 3c (steamrt3c) --annotation=platform=linux64 --annotation=product=cefwebhelper --annotation=version=1788652215 --initial-client-fd=7 --shared-client-connection
+ 201595  201399  0.0  0.0 pv-adverb       /usr/lib/pressure-vessel/from-host/libexec/steam-runtime-tools-0/pv-adverb --prefix=/usr/lib/pressure-vessel/from-host --generate-locales --fd 11 --regenerate-ld.so-cache /var/pressure-vessel/ldso --add-ld.so-path /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu --add-ld.so-path /usr/lib/pressure-vessel/overrides/lib/i386-linux-gnu --set-ld-library-path /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/aliases:/usr/lib/pressure-vessel/overrides/lib/i386-linux-gnu/aliases --overrides-path /usr/lib/pressure-vessel/overrides --assign-fd=1=3 --assign-fd=2=4 -- /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper_sniper_wrap.sh -nocrashdialog -lang=en_US -cachedir=/home/telephoneheater/.local/share/Steam/config/htmlcache -steampid=201173 -buildid=1788652215 -steamid=0 -logdir=/home/telephoneheater/.local/share/Steam/logs -uimode=7 -startcount=0 -steamuniverse=Public -realm=Global -clientui=/home/telephoneheater/.local/share/Steam/clientui -steampath=/home/telephoneheater/.local/share/Steam/ubuntu12_32/steam -launcher=0 -use_xcomposite_workaround --valve-initial-threadpool-size=20 --valve-enable-site-isolation --enable-smooth-scrolling --disablehighdpi --force-device-scale-factor=1 --device-scale-factor=1 --password-store=basic --log-file=/home/telephoneheater/.local/share/Steam/logs/cef_log.txt --disable-quick-menu --disable-component-update --gaia-url=http://disabled.invalid --enable-features=PlatformHEVCDecoderSupport --disable-features=WinRetrieveSuggestionsOnlyOnDemand,SpareRendererForSitePerProcess,DcheckIsFatal,BlockPromptsIfIgnoredOften,WebUsbDeviceDetection,ValveFFmpegAllowLowDelayHEVC
+ 200590    1861  0.0  0.0 bash            bash /home/telephoneheater/.local/share/Steam/steam.sh -srt-logger-opened
+  73379   73348  0.0  0.0 bash            /usr/bin/bash
+   3276    1861  0.0  0.0 at-spi2-registr /usr/lib/at-spi2-registryd --use-gnome-session
+   3186       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-18]
+    394       2  0.0  0.0 kworker/13:2-mm [kworker/13:2-mm_percpu_wq]
+    178       2  0.0  0.0 migration/5     [migration/5]
+    184       2  0.0  0.0 migration/7     [migration/7]
+    210       2  0.0  0.0 kworker/15:0-ev [kworker/15:0-events]
+     27       2  0.0  0.0 ksoftirqd/2     [ksoftirqd/2]
+     33       2  0.0  0.0 ksoftirqd/4     [ksoftirqd/4]
+     57       2  0.0  0.0 ksoftirqd/12    [ksoftirqd/12]
+     63       2  0.0  0.0 ksoftirqd/14    [ksoftirqd/14]
+ 192741  192715  0.0  0.0 bash            /usr/bin/bash
+   3193    3192  0.0  0.0 dbus-broker     dbus-broker --log 10 --controller 9 --machine-id 3d2f129d64664210a0f83b512ce78544 --max-bytes 100000000000000 --max-fds 6400000 --max-matches 5000000000
+   1027       1  0.0  0.0 systemd-timesyn /usr/lib/systemd/systemd-timesyncd
+    928       1  0.0  0.0 systemd-userdbd /usr/lib/systemd/systemd-userdbd
+     83       2  0.0  0.0 ksoftirqd/18    [ksoftirqd/18]
+     95       2  0.0  0.0 ksoftirqd/20    [ksoftirqd/20]
+    101       2  0.0  0.0 ksoftirqd/21    [ksoftirqd/21]
+    107       2  0.0  0.0 ksoftirqd/22    [ksoftirqd/22]
+    137       2  0.0  0.0 ksoftirqd/27    [ksoftirqd/27]
+    155       2  0.0  0.0 ksoftirqd/30    [ksoftirqd/30]
+    173       2  0.0  0.0 ksoftirqd/3     [ksoftirqd/3]
+    190       2  0.0  0.0 migration/9     [migration/9]
+    191       2  0.0  0.0 ksoftirqd/9     [ksoftirqd/9]
+    202       2  0.0  0.0 migration/13    [migration/13]
+    208       2  0.0  0.0 migration/15    [migration/15]
+     39       2  0.0  0.0 ksoftirqd/6     [ksoftirqd/6]
+  85802   84848  0.0  0.0 bash            /usr/bin/bash --init-file /usr/share/cursor/resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
+  83130       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-305]
+  83049   83046  0.0  0.1 electron        /usr/lib/electron42/electron --type=zygote --no-zygote-sandbox
+  83050   83046  0.0  0.1 electron        /usr/lib/electron42/electron --type=zygote
+  72338   71770  0.0  0.0 python          /home/telephoneheater/.hermes/hermes-agent/venv/bin/python /home/telephoneheater/.hermes/hermes-agent/tools/mcp_death_supervisor.py --parent-pgid 71549
+  71556   71549  0.0  0.1 Hermes          /home/telephoneheater/.hermes/hermes-agent/apps/desktop/release/linux-unpacked/Hermes --type=zygote --no-zygote-sandbox
+  16422       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-a7]
+  63331   62866  0.0  0.0 1Password-Brows /opt/1Password/1Password-BrowserSupport chrome-extension://aeblfdkhhhdcdjpifhhbdiojplfjncoa/
+  62880   62866  0.0  0.1 chromium        /usr/lib/chromium/chromium --type=zygote --no-zygote-sandbox --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable
+   3658    3422  0.0  0.0 1password       /opt/1Password/1password --type=zygote
+   1538       1  0.0  0.0 power-profiles- /usr/lib/power-profiles-daemon
+   1286       1  0.0  0.0 dbus-broker-lau /usr/bin/dbus-broker-launch --scope system --audit
+     89       2  0.0  0.0 ksoftirqd/19    [ksoftirqd/19]
+    113       2  0.0  0.0 ksoftirqd/23    [ksoftirqd/23]
+    119       2  0.0  0.0 ksoftirqd/24    [ksoftirqd/24]
+    120       2  0.0  0.0 kworker/24:0-ev [kworker/24:0-events]
+    125       2  0.0  0.0 ksoftirqd/25    [ksoftirqd/25]
+    131       2  0.0  0.0 ksoftirqd/26    [ksoftirqd/26]
+    143       2  0.0  0.0 ksoftirqd/28    [ksoftirqd/28]
+    149       2  0.0  0.0 ksoftirqd/29    [ksoftirqd/29]
+    196       2  0.0  0.0 migration/11    [migration/11]
+    197       2  0.0  0.0 ksoftirqd/11    [ksoftirqd/11]
+    203       2  0.0  0.0 ksoftirqd/13    [ksoftirqd/13]
+  19604       2  0.0  0.0 kworker/20:2-ev [kworker/20:2-events]
+  11545    1861  0.0  0.0 gvfs-mtp-volume /usr/lib/gvfs-mtp-volume-monitor
+  11539    1861  0.0  0.0 gvfs-udisks2-vo /usr/lib/gvfs-udisks2-volume-monitor
+   3198    1861  0.0  0.0 gvfsd           /usr/lib/gvfsd
+   2987    1809  0.0  0.0 python3         /usr/local/searxng/.venv/bin/python3 -c from multiprocessing.resource_tracker import main;main(7)
+   1768    1745  0.0  0.0 socat           socat TCP-LISTEN:11435,bind=172.28.0.1,fork,reuseaddr TCP:127.0.0.1:11434
+   1294       1  0.0  0.0 bash            bash /usr/bin/limine-snapper-watcher
+    865       2  0.0  0.0 kworker/17:1H-k [kworker/17:1H-kblockd]
+    855       2  0.0  0.0 kworker/16:1H-k [kworker/16:1H-kblockd]
+    471       2  0.0  0.0 kworker/10:1H-k [kworker/10:1H-kblockd]
+    312       2  0.0  0.0 kworker/13:1-ev [kworker/13:1-events]
+    302       2  0.0  0.0 kworker/u132:0- [kworker/u132:0-hci0]
+    220       2  0.0  0.0 khungtaskd      [khungtaskd]
+    161       2  0.0  0.0 ksoftirqd/31    [ksoftirqd/31]
+    179       2  0.0  0.0 ksoftirqd/5     [ksoftirqd/5]
+    185       2  0.0  0.0 ksoftirqd/7     [ksoftirqd/7]
+    209       2  0.0  0.0 ksoftirqd/15    [ksoftirqd/15]
+      2       0  0.0  0.0 kthreadd        [kthreadd]
+     18       2  0.0  0.0 rcu_exp_par_gp_ [rcu_exp_par_gp_kthread_worker/1]
+     19       2  0.0  0.0 rcu_exp_gp_kthr [rcu_exp_gp_kthread_worker]
+      3       2  0.0  0.0 pool_workqueue_ [pool_workqueue_release]
+      4       2  0.0  0.0 kworker/R-rcu_g [kworker/R-rcu_gp]
+      5       2  0.0  0.0 kworker/R-sync_ [kworker/R-sync_wq]
+      6       2  0.0  0.0 kworker/R-kvfre [kworker/R-kvfree_rcu_reclaim]
+      7       2  0.0  0.0 kworker/R-slub_ [kworker/R-slub_flushwq]
+      8       2  0.0  0.0 kworker/R-netns [kworker/R-netns]
+     11       2  0.0  0.0 kworker/0:0H-kb [kworker/0:0H-kblockd]
+     14       2  0.0  0.0 kworker/R-mm_pe [kworker/R-mm_percpu_wq]
+     17       2  0.0  0.0 rcub/1          [rcub/1]
+     21       2  0.0  0.0 kprobe-optimize [kprobe-optimizer]
+     22       2  0.0  0.0 idle_inject/0   [idle_inject/0]
+     23       2  0.0  0.0 cpuhp/0         [cpuhp/0]
+     24       2  0.0  0.0 cpuhp/2         [cpuhp/2]
+     25       2  0.0  0.0 idle_inject/2   [idle_inject/2]
+     29       2  0.0  0.0 kworker/2:0H-kb [kworker/2:0H-kblockd]
+     30       2  0.0  0.0 cpuhp/4         [cpuhp/4]
+     31       2  0.0  0.0 idle_inject/4   [idle_inject/4]
+     35       2  0.0  0.0 kworker/4:0H-kb [kworker/4:0H-kblockd]
+     36       2  0.0  0.0 cpuhp/6         [cpuhp/6]
+     37       2  0.0  0.0 idle_inject/6   [idle_inject/6]
+     41       2  0.0  0.0 kworker/6:0H-kb [kworker/6:0H-kblockd]
+     42       2  0.0  0.0 cpuhp/8         [cpuhp/8]
+     43       2  0.0  0.0 idle_inject/8   [idle_inject/8]
+     47       2  0.0  0.0 kworker/8:0H-kb [kworker/8:0H-kblockd]
+     48       2  0.0  0.0 cpuhp/10        [cpuhp/10]
+     49       2  0.0  0.0 idle_inject/10  [idle_inject/10]
+     53       2  0.0  0.0 kworker/10:0H-i [kworker/10:0H-i915_cleanup]
+     54       2  0.0  0.0 cpuhp/12        [cpuhp/12]
+     55       2  0.0  0.0 idle_inject/12  [idle_inject/12]
+     59       2  0.0  0.0 kworker/12:0H-k [kworker/12:0H-kblockd]
+     60       2  0.0  0.0 cpuhp/14        [cpuhp/14]
+     61       2  0.0  0.0 idle_inject/14  [idle_inject/14]
+     65       2  0.0  0.0 kworker/14:0H-k [kworker/14:0H-kblockd]
+     66       2  0.0  0.0 cpuhp/16        [cpuhp/16]
+     67       2  0.0  0.0 idle_inject/16  [idle_inject/16]
+     71       2  0.0  0.0 kworker/16:0H-k [kworker/16:0H-kblockd]
+     72       2  0.0  0.0 rcub/2          [rcub/2]
+     73       2  0.0  0.0 rcu_exp_par_gp_ [rcu_exp_par_gp_kthread_worker/2]
+     74       2  0.0  0.0 cpuhp/17        [cpuhp/17]
+     75       2  0.0  0.0 idle_inject/17  [idle_inject/17]
+     79       2  0.0  0.0 kworker/17:0H-k [kworker/17:0H-kblockd]
+     80       2  0.0  0.0 cpuhp/18        [cpuhp/18]
+     81       2  0.0  0.0 idle_inject/18  [idle_inject/18]
+     85       2  0.0  0.0 kworker/18:0H-k [kworker/18:0H-kblockd]
+     86       2  0.0  0.0 cpuhp/19        [cpuhp/19]
+     87       2  0.0  0.0 idle_inject/19  [idle_inject/19]
+     91       2  0.0  0.0 kworker/19:0H-k [kworker/19:0H-kblockd]
+     92       2  0.0  0.0 cpuhp/20        [cpuhp/20]
+     93       2  0.0  0.0 idle_inject/20  [idle_inject/20]
+     97       2  0.0  0.0 kworker/20:0H-k [kworker/20:0H-kblockd]
+     98       2  0.0  0.0 cpuhp/21        [cpuhp/21]
+     99       2  0.0  0.0 idle_inject/21  [idle_inject/21]
+    103       2  0.0  0.0 kworker/21:0H-k [kworker/21:0H-kblockd]
+    104       2  0.0  0.0 cpuhp/22        [cpuhp/22]
+    105       2  0.0  0.0 idle_inject/22  [idle_inject/22]
+    109       2  0.0  0.0 kworker/22:0H-k [kworker/22:0H-kblockd]
+    110       2  0.0  0.0 cpuhp/23        [cpuhp/23]
+    111       2  0.0  0.0 idle_inject/23  [idle_inject/23]
+    115       2  0.0  0.0 kworker/23:0H-i [kworker/23:0H-i915_cleanup]
+    116       2  0.0  0.0 cpuhp/24        [cpuhp/24]
+    117       2  0.0  0.0 idle_inject/24  [idle_inject/24]
+    121       2  0.0  0.0 kworker/24:0H-k [kworker/24:0H-kblockd]
+    122       2  0.0  0.0 cpuhp/25        [cpuhp/25]
+    123       2  0.0  0.0 idle_inject/25  [idle_inject/25]
+    127       2  0.0  0.0 kworker/25:0H-k [kworker/25:0H-kblockd]
+    128       2  0.0  0.0 cpuhp/26        [cpuhp/26]
+    129       2  0.0  0.0 idle_inject/26  [idle_inject/26]
+    133       2  0.0  0.0 kworker/26:0H-k [kworker/26:0H-kblockd]
+    134       2  0.0  0.0 cpuhp/27        [cpuhp/27]
+    135       2  0.0  0.0 idle_inject/27  [idle_inject/27]
+    139       2  0.0  0.0 kworker/27:0H-k [kworker/27:0H-kblockd]
+    140       2  0.0  0.0 cpuhp/28        [cpuhp/28]
+    141       2  0.0  0.0 idle_inject/28  [idle_inject/28]
+    145       2  0.0  0.0 kworker/28:0H-k [kworker/28:0H-kblockd]
+    146       2  0.0  0.0 cpuhp/29        [cpuhp/29]
+    147       2  0.0  0.0 idle_inject/29  [idle_inject/29]
+    151       2  0.0  0.0 kworker/29:0H-k [kworker/29:0H-kblockd]
+    152       2  0.0  0.0 cpuhp/30        [cpuhp/30]
+    153       2  0.0  0.0 idle_inject/30  [idle_inject/30]
+    157       2  0.0  0.0 kworker/30:0H-k [kworker/30:0H-kblockd]
+    158       2  0.0  0.0 cpuhp/31        [cpuhp/31]
+    159       2  0.0  0.0 idle_inject/31  [idle_inject/31]
+    163       2  0.0  0.0 kworker/31:0H-k [kworker/31:0H-kblockd]
+    164       2  0.0  0.0 cpuhp/1         [cpuhp/1]
+    165       2  0.0  0.0 idle_inject/1   [idle_inject/1]
+    169       2  0.0  0.0 kworker/1:0H-kb [kworker/1:0H-kblockd]
+    170       2  0.0  0.0 cpuhp/3         [cpuhp/3]
+    171       2  0.0  0.0 idle_inject/3   [idle_inject/3]
+    175       2  0.0  0.0 kworker/3:0H-kb [kworker/3:0H-kblockd]
+    176       2  0.0  0.0 cpuhp/5         [cpuhp/5]
+    177       2  0.0  0.0 idle_inject/5   [idle_inject/5]
+    181       2  0.0  0.0 kworker/5:0H-kb [kworker/5:0H-kblockd]
+    182       2  0.0  0.0 cpuhp/7         [cpuhp/7]
+    183       2  0.0  0.0 idle_inject/7   [idle_inject/7]
+    187       2  0.0  0.0 kworker/7:0H-kb [kworker/7:0H-kblockd]
+    188       2  0.0  0.0 cpuhp/9         [cpuhp/9]
+    189       2  0.0  0.0 idle_inject/9   [idle_inject/9]
+    193       2  0.0  0.0 kworker/9:0H-kb [kworker/9:0H-kblockd]
+    194       2  0.0  0.0 cpuhp/11        [cpuhp/11]
+    195       2  0.0  0.0 idle_inject/11  [idle_inject/11]
+    199       2  0.0  0.0 kworker/11:0H-k [kworker/11:0H-kblockd]
+    200       2  0.0  0.0 cpuhp/13        [cpuhp/13]
+    201       2  0.0  0.0 idle_inject/13  [idle_inject/13]
+    205       2  0.0  0.0 kworker/13:0H-k [kworker/13:0H-kblockd]
+    206       2  0.0  0.0 cpuhp/15        [cpuhp/15]
+    207       2  0.0  0.0 idle_inject/15  [idle_inject/15]
+    211       2  0.0  0.0 kworker/15:0H-k [kworker/15:0H-kblockd]
+    215       2  0.0  0.0 kdevtmpfs       [kdevtmpfs]
+    216       2  0.0  0.0 kworker/R-inet_ [kworker/R-inet_frag_wq]
+    217       2  0.0  0.0 rcu_tasks_kthre [rcu_tasks_kthread]
+    218       2  0.0  0.0 rcu_tasks_rude_ [rcu_tasks_rude_kthread]
+    219       2  0.0  0.0 kauditd         [kauditd]
+    221       2  0.0  0.0 oom_reaper      [oom_reaper]
+    224       2  0.0  0.0 kworker/R-write [kworker/R-writeback]
+    226       2  0.0  0.0 ksmd            [ksmd]
+    228       2  0.0  0.0 kworker/R-kbloc [kworker/R-kblockd]
+    230       2  0.0  0.0 kworker/R-blkcg [kworker/R-blkcg_punt_bio]
+    231       2  0.0  0.0 kworker/R-kinte [kworker/R-kintegrityd]
+    233       2  0.0  0.0 irq/9-acpi      [irq/9-acpi]
+    236       2  0.0  0.0 kworker/R-tpm_d [kworker/R-tpm_dev_wq]
+    237       2  0.0  0.0 kworker/R-ata_s [kworker/R-ata_sff]
+    238       2  0.0  0.0 kworker/R-edac- [kworker/R-edac-poller]
+    239       2  0.0  0.0 kworker/R-devfr [kworker/R-devfreq_wq]
+    240       2  0.0  0.0 watchdogd       [watchdogd]
+    242       2  0.0  0.0 kworker/R-quota [kworker/R-quota_events_unbound]
+    244       2  0.0  0.0 kworker/R-kthro [kworker/R-kthrotld]
+    245       2  0.0  0.0 irq/123-pciehp  [irq/123-pciehp]
+    246       2  0.0  0.0 kworker/R-acpi_ [kworker/R-acpi_thermal_pm]
+    248       2  0.0  0.0 scsi_eh_0       [scsi_eh_0]
+    249       2  0.0  0.0 kworker/R-scsi_ [kworker/R-scsi_tmf_0]
+    250       2  0.0  0.0 scsi_eh_1       [scsi_eh_1]
+    251       2  0.0  0.0 kworker/R-scsi_ [kworker/R-scsi_tmf_1]
+    252       2  0.0  0.0 scsi_eh_2       [scsi_eh_2]
+    253       2  0.0  0.0 kworker/R-scsi_ [kworker/R-scsi_tmf_2]
+    254       2  0.0  0.0 scsi_eh_3       [scsi_eh_3]
+    255       2  0.0  0.0 kworker/R-scsi_ [kworker/R-scsi_tmf_3]
+    256       2  0.0  0.0 scsi_eh_4       [scsi_eh_4]
+    257       2  0.0  0.0 kworker/R-scsi_ [kworker/R-scsi_tmf_4]
+    258       2  0.0  0.0 scsi_eh_5       [scsi_eh_5]
+    259       2  0.0  0.0 kworker/R-scsi_ [kworker/R-scsi_tmf_5]
+    260       2  0.0  0.0 scsi_eh_6       [scsi_eh_6]
+    261       2  0.0  0.0 kworker/R-scsi_ [kworker/R-scsi_tmf_6]
+    262       2  0.0  0.0 scsi_eh_7       [scsi_eh_7]
+    263       2  0.0  0.0 kworker/R-scsi_ [kworker/R-scsi_tmf_7]
+    270       2  0.0  0.0 scsi_eh_8       [scsi_eh_8]
+    271       2  0.0  0.0 kworker/R-scsi_ [kworker/R-scsi_tmf_8]
+    272       2  0.0  0.0 scsi_eh_9       [scsi_eh_9]
+    273       2  0.0  0.0 kworker/R-scsi_ [kworker/R-scsi_tmf_9]
+    283       2  0.0  0.0 kworker/R-hfi-u [kworker/R-hfi-updates]
+    284       2  0.0  0.0 kworker/R-mld   [kworker/R-mld]
+    285       2  0.0  0.0 kworker/R-ipv6_ [kworker/R-ipv6_addrconf]
+    286       2  0.0  0.0 kworker/R-kstrp [kworker/R-kstrp]
+    293       2  0.0  0.0 kworker/29:1-mm [kworker/29:1-mm_percpu_wq]
+    303       2  0.0  0.0 kworker/u133:0  [kworker/u133:0]
+    304       2  0.0  0.0 kworker/u134:0  [kworker/u134:0]
+    305       2  0.0  0.0 kworker/u135:0- [kworker/u135:0-rb_allocator]
+    353       2  0.0  0.0 nv_queue        [nv_queue]
+    355       2  0.0  0.0 nv_mem_pool_scr [nv_mem_pool_scrubber_queue]
+    356       2  0.0  0.0 nv_mem_pool_scr [nv_mem_pool_scrubber_queue]
+    357       2  0.0  0.0 nv_queue        [nv_queue]
+    358       2  0.0  0.0 nv_open_q       [nv_open_q]
+    386       2  0.0  0.0 nvidia-modeset/ [nvidia-modeset/deferred_close_kthread_q]
+    387       2  0.0  0.0 UVM global queu [UVM global queue]
+    388       2  0.0  0.0 UVM deferred re [UVM deferred release queue]
+    389       2  0.0  0.0 UVM Tools Event [UVM Tools Event Queue]
+    391       2  0.0  0.0 irq/144-nvidia  [irq/144-nvidia]
+    392       2  0.0  0.0 nvidia          [nvidia]
+    393       2  0.0  0.0 nv_queue        [nv_queue]
+    462       2  0.0  0.0 kworker/R-nvme- [kworker/R-nvme-wq]
+    463       2  0.0  0.0 kworker/R-nvme- [kworker/R-nvme-reset-wq]
+    464       2  0.0  0.0 kworker/R-nvme- [kworker/R-nvme-delete-wq]
+    465       2  0.0  0.0 kworker/R-nvme- [kworker/R-nvme-auth-wq]
+    466       2  0.0  0.0 kworker/R-ttm   [kworker/R-ttm]
+    467       2  0.0  0.0 card0-crtc0     [card0-crtc0]
+    468       2  0.0  0.0 card0-crtc1     [card0-crtc1]
+    469       2  0.0  0.0 card0-crtc2     [card0-crtc2]
+    470       2  0.0  0.0 card0-crtc3     [card0-crtc3]
+    474       2  0.0  0.0 kworker/23:1H-k [kworker/23:1H-kblockd]
+    749       2  0.0  0.0 kworker/R-kdmfl [kworker/R-kdmflush/253:0]
+    750       2  0.0  0.0 kworker/R-kcryp [kworker/R-kcryptd_io-253:0-1]
+    751       2  0.0  0.0 kworker/R-kcryp [kworker/R-kcryptd-253:0-1]
+    797       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-worker]
+    798       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-delalloc]
+    799       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-flush_delalloc]
+    800       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-cache]
+    801       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-fixup]
+    802       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-endio]
+    803       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-endio-meta]
+    804       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-rmw]
+    805       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-endio-write]
+    806       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-freespace-write]
+    807       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-delayed-meta]
+    808       2  0.0  0.0 kworker/R-btrfs [kworker/R-btrfs-qgroup-rescan]
+    810       2  0.0  0.0 btrfs-cleaner   [btrfs-cleaner]
+    832       2  0.0  0.0 kworker/18:1H-k [kworker/18:1H-kblockd]
+    833       2  0.0  0.0 kworker/19:1H-k [kworker/19:1H-kblockd]
+    846       2  0.0  0.0 kworker/22:1H-k [kworker/22:1H-kblockd]
+    847       2  0.0  0.0 kworker/4:1H-kb [kworker/4:1H-kblockd]
+    849       2  0.0  0.0 kworker/29:1H-k [kworker/29:1H-kblockd]
+    850       2  0.0  0.0 kworker/8:1H-kb [kworker/8:1H-kblockd]
+    851       2  0.0  0.0 kworker/14:1H-k [kworker/14:1H-kblockd]
+    852       2  0.0  0.0 kworker/12:1H-k [kworker/12:1H-kblockd]
+    853       2  0.0  0.0 kworker/1:1H-kb [kworker/1:1H-kblockd]
+    854       2  0.0  0.0 kworker/11:1H-k [kworker/11:1H-kblockd]
+    856       2  0.0  0.0 kworker/21:1H-k [kworker/21:1H-kblockd]
+    857       2  0.0  0.0 kworker/24:1H-k [kworker/24:1H-kblockd]
+    858       2  0.0  0.0 kworker/26:1H-k [kworker/26:1H-kblockd]
+    859       2  0.0  0.0 kworker/5:1H-kb [kworker/5:1H-kblockd]
+    862       2  0.0  0.0 kworker/20:1H-k [kworker/20:1H-kblockd]
+    863       2  0.0  0.0 kworker/31:1H-k [kworker/31:1H-kblockd]
+    871       2  0.0  0.0 kworker/28:1H-k [kworker/28:1H-kblockd]
+    872       2  0.0  0.0 kworker/2:1H-kb [kworker/2:1H-kblockd]
+    896       2  0.0  0.0 kworker/30:1H-k [kworker/30:1H-kblockd]
+    897       2  0.0  0.0 kworker/0:1H-kb [kworker/0:1H-kblockd]
+    911       2  0.0  0.0 kworker/6:1H-kb [kworker/6:1H-kblockd]
+   1021       2  0.0  0.0 psimon          [psimon]
+   1035       2  0.0  0.0 psimon          [psimon]
+   1128       2  0.0  0.0 kworker/7:1H-kb [kworker/7:1H-kblockd]
+   1130       2  0.0  0.0 kworker/13:1H-k [kworker/13:1H-kblockd]
+   1132       2  0.0  0.0 irq/179-mei_me  [irq/179-mei_me]
+   1179       2  0.0  0.0 kworker/R-cfg80 [kworker/R-cfg80211]
+   1182       2  0.0  0.0 kworker/3:1H-kb [kworker/3:1H-kblockd]
+   1194       2  0.0  0.0 irq/182-iwlwifi [irq/182-iwlwifi:queue_1]
+   1195       2  0.0  0.0 irq/183-iwlwifi [irq/183-iwlwifi:queue_2]
+   1196       2  0.0  0.0 irq/184-iwlwifi [irq/184-iwlwifi:queue_3]
+   1197       2  0.0  0.0 irq/185-iwlwifi [irq/185-iwlwifi:queue_4]
+   1198       2  0.0  0.0 irq/186-iwlwifi [irq/186-iwlwifi:queue_5]
+   1199       2  0.0  0.0 irq/187-iwlwifi [irq/187-iwlwifi:queue_6]
+   1200       2  0.0  0.0 irq/188-iwlwifi [irq/188-iwlwifi:queue_7]
+   1201       2  0.0  0.0 irq/189-iwlwifi [irq/189-iwlwifi:queue_8]
+   1202       2  0.0  0.0 irq/190-iwlwifi [irq/190-iwlwifi:queue_9]
+   1203       2  0.0  0.0 irq/191-iwlwifi [irq/191-iwlwifi:queue_10]
+   1204       2  0.0  0.0 irq/192-iwlwifi [irq/192-iwlwifi:queue_11]
+   1205       2  0.0  0.0 irq/193-iwlwifi [irq/193-iwlwifi:queue_12]
+   1206       2  0.0  0.0 irq/194-iwlwifi [irq/194-iwlwifi:queue_13]
+   1207       2  0.0  0.0 irq/195-iwlwifi [irq/195-iwlwifi:queue_14]
+   1208       2  0.0  0.0 irq/196-iwlwifi [irq/196-iwlwifi:exception]
+   1233       2  0.0  0.0 kworker/9:1H-kb [kworker/9:1H-kblockd]
+   1246       2  0.0  0.0 kworker/u135:1- [kworker/u135:1-rb_allocator]
+   1275       2  0.0  0.0 kworker/R-zswap [kworker/R-zswap-shrink]
+   1307       1  0.0  0.0 nvidia-persiste /usr/bin/nvidia-persistenced --user nvidia-persistenced
+   1313       2  0.0  0.0 kworker/15:1H-k [kworker/15:1H-kblockd]
+   1323    1292  0.0  0.0 avahi-daemon    avahi-daemon: chroot helper
+   1353    1294  0.0  0.0 inotifywait     inotifywait -q -m -e create -e delete --format %e|%f /.snapshots
+   1355    1294  0.0  0.0 bash            bash /usr/bin/limine-snapper-watcher
+   1365       2  0.0  0.0 kworker/25:1H-k [kworker/25:1H-kblockd]
+   1382       1  0.0  0.0 cupsd           /usr/bin/cupsd -l
+   1387       2  0.0  0.0 kworker/27:1H-k [kworker/27:1H-kblockd]
+   1540       1  0.0  0.0 sddm            /usr/bin/sddm
+   1605    1540  0.0  0.0 sddm-helper     /usr/lib/sddm/sddm-helper --socket /tmp/sddm-auth-b6689001-61d0-472b-aa11-01fa90bc6b36 --id 1 --start uwsm start -g -1 -e -D Hyprland hyprland.desktop --user telephoneheater --autologin
+   1863    1861  0.0  0.0 (sd-pam)        (sd-pam)
+   1911    1446  0.0  0.0 docker-proxy    /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 8888 -container-ip 172.28.0.2 -container-port 8080 -use-listen-fd
+   1929    1446  0.0  0.0 docker-proxy    /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 3000 -container-ip 172.28.0.3 -container-port 8080 -use-listen-fd
+   1951    1861  0.0  0.0 dbus-broker-lau /usr/bin/dbus-broker-launch --scope user
+   2696       2  0.0  0.0 krfcommd        [krfcommd]
+   2745    1861  0.0  0.0 waitpid         waitpid -e 2045
+   2796    2045  0.0  0.0 systemctl       systemctl --user start --wait wayland-session-envelope@hyprland.desktop.target
+   2845    1861  0.0  0.0 bt-agent        /usr/bin/bt-agent -c NoInputNoOutput
+   3136    1861  0.0  0.0 dconf-service   /usr/lib/dconf-service
+   3162    3152  0.0  0.0 uwsm-app <defun [uwsm-app] <defunct>
+   3185    1861  0.0  0.0 at-spi-bus-laun /usr/lib/at-spi-bus-launcher
+   3192    3185  0.0  0.0 dbus-broker-lau /usr/bin/dbus-broker-launch --config-file=/usr/share/defaults/at-spi2/accessibility.conf --scope user
+   3236    1861  0.0  0.0 gvfsd-fuse      /usr/lib/gvfsd-fuse /run/user/1000/gvfs -f
+   3421    1861  0.0  0.0 systemd-inhibit systemd-inhibit --what=sleep --mode=delay --who=Omarchy --why=Lock screen before suspend /usr/share/omarchy/bin/omarchy-system-sleep-monitor --inhibited
+   3441    1861  0.0  0.0 omarchy-crash-w /bin/bash /usr/bin/omarchy-crash-watch
+   3448    3421  0.0  0.0 omarchy-system- /bin/bash /usr/share/omarchy/bin/omarchy-system-sleep-monitor --inhibited
+   3456    3441  0.0  0.0 omarchy-crash-w /bin/bash /usr/bin/omarchy-crash-watch
+   3457    3448  0.0  0.0 dbus-monitor    dbus-monitor --system type='signal',sender='org.freedesktop.login1',interface='org.freedesktop.login1.Manager',member='PrepareForSleep'
+   3492    1861  0.0  0.0 xdg-permission- /usr/lib/xdg-permission-store
+   3575    3556  0.0  0.0 fusermount3     fusermount3 -o rw,nosuid,nodev,fsname=portal,auto_unmount,subtype=portal -- /run/user/1000/doc
+   3657    3422  0.0  0.0 1password       /opt/1Password/1password --type=zygote --no-zygote-sandbox
+   3681    3658  0.0  0.0 1password       /opt/1Password/1password --type=zygote
+   3729       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-1e]
+   3732       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-1f]
+   3735       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-20]
+   4164       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-21]
+   4172       2  0.0  0.0 vidmem lazy fre [vidmem lazy free]
+   4173       2  0.0  0.0 UVM GPU1 BH     [UVM GPU1 BH]
+   4174       2  0.0  0.0 UVM GPU1 KC     [UVM GPU1 KC]
+   4306       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-24]
+   4309       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-25]
+   4314       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-26]
+   5182       2  0.0  0.0 kworker/25:2-cg [kworker/25:2-cgroup_release]
+  11550    3198  0.0  0.0 gvfsd-trash     /usr/lib/gvfsd-trash --spawner :1.24 /org/gtk/gvfs/exec_spaw/0
+  11604    3198  0.0  0.0 gvfsd-recent    /usr/lib/gvfsd-recent --spawner :1.24 /org/gtk/gvfs/exec_spaw/1
+  11617    3198  0.0  0.0 gvfsd-network   /usr/lib/gvfsd-network --spawner :1.24 /org/gtk/gvfs/exec_spaw/2
+  12822       2  0.0  0.0 kworker/22:2-ev [kworker/22:2-events]
+  16283    2998  0.0  0.0 omarchy-launch- /bin/bash /usr/share/omarchy/bin/omarchy-launch-shell
+  16489   16286  0.0  0.0 inotifywait     /usr/bin/inotifywait -m -r -q -e close_write,create,delete,move --format %w%f /home/telephoneheater/.config/omarchy/plugins
+  17170   16286  0.0  0.0 wl-paste        wl-paste --type text --watch /usr/share/omarchy/shell/plugins/clipboard/capture.sh text
+  17173   16286  0.0  0.0 wl-paste        wl-paste --type image/png --watch /usr/share/omarchy/shell/plugins/clipboard/capture.sh image/png
+  62867   62866  0.0  0.0 uwsm-app <defun [uwsm-app] <defunct>
+  62869   62866  0.0  0.0 systemctl <defu [systemctl] <defunct>
+  62872    1861  0.0  0.0 chrome_crashpad /usr/lib/chromium/chrome_crashpad_handler --monitor-self --monitor-self-annotation=ptype=crashpad-handler --database=/home/telephoneheater/.config/chromium/Crash Reports --annotation=channel=Arch Linux --annotation=lsb-release=Omarchy --annotation=plat=Linux --annotation=prod=Chrome_Linux --annotation=ver=152.0.7977.82 --initial-client-fd=5 --shared-client-connection
+  62874    1861  0.0  0.0 chrome_crashpad /usr/lib/chromium/chrome_crashpad_handler --no-periodic-tasks --monitor-self-annotation=ptype=crashpad-handler --database=/home/telephoneheater/.config/chromium/Crash Reports --annotation=channel=Arch Linux --annotation=lsb-release=Omarchy --annotation=plat=Linux --annotation=prod=Chrome_Linux --annotation=ver=152.0.7977.82 --initial-client-fd=4 --shared-client-connection
+  62881   62866  0.0  0.1 chromium        /usr/lib/chromium/chromium --type=zygote --crashpad-handler-pid=62872 --enable-crash-reporter=,Arch Linux --change-stack-guard-on-fork=enable
+  62977       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-149]
+  62980       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-14a]
+  62983       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-14b]
+  65577       2  0.0  0.0 kworker/26:0-ev [kworker/26:0-events]
+  71557   71549  0.0  0.1 Hermes          /home/telephoneheater/.hermes/hermes-agent/apps/desktop/release/linux-unpacked/Hermes --type=zygote
+  71559   71557  0.0  0.0 Hermes          /home/telephoneheater/.hermes/hermes-agent/apps/desktop/release/linux-unpacked/Hermes --type=zygote
+  72304       2  0.0  0.0 kworker/u128:2- [kworker/u128:2-i915]
+  83052   83050  0.0  0.0 electron        /usr/lib/electron42/electron --type=zygote
+  83084    1861  0.0  0.0 chrome_crashpad /usr/lib/electron42/chrome_crashpad_handler --monitor-self-annotation=ptype=crashpad-handler --no-rate-limit --database=/home/telephoneheater/.config/cursor/Crashpad --url=https://f.a.k/e --annotation=_productName=cursor --annotation=_version=3.19.13 --annotation=lsb-release=Omarchy --annotation=plat=Linux --annotation=prod=Electron --annotation=ver=42.9.3 --initial-client-fd=49 --shared-client-connection
+  83183       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-306]
+  83186       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-307]
+  83189       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-308]
+ 184047  184046  0.0  0.0 uwsm-app <defun [uwsm-app] <defunct>
+ 184048  184046  0.0  0.0 systemctl <defu [systemctl] <defunct>
+ 184092       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-34d]
+ 184095       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-34e]
+ 184098       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-34f]
+ 197455       2  0.0  0.0 kworker/3:2     [kworker/3:2]
+ 200611    1861  0.0  0.0 srt-logger      /home/telephoneheater/.local/share/Steam/ubuntu12_32/steam-runtime/usr/libexec/steam-runtime-tools-0/srt-logger --sh-syntax --rotate=8388608 --log-directory /home/telephoneheater/.local/share/Steam/logs --filename console-linux.txt --log-fd=7 --journal-fd=5 --parse-level-prefix
+ 201363       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-6da]
+ 201411    1861  0.0  0.0 srt-logger      /home/telephoneheater/.local/share/Steam/ubuntu12_32/steam-runtime/usr/libexec/steam-runtime-tools-0/srt-logger --sh-syntax --rotate=8388608 --log-directory /home/telephoneheater/.steam/steam/logs --filename webhelper-linux.txt --log-fd=7 --journal-fd=5 --parse-level-prefix --journal-level=info
+ 201635  201633  0.0  0.0 steamwebhelper  /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper --type=zygote --force-device-scale-factor=1 --crashpad-handler-pid=201622 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --enable-chrome-runtime --user-data-dir=/home/telephoneheater/.local/share/Steam/config/htmlcache --user-agent-product=Valve Steam Client --disablehighdpi --force-device-scale-factor=1 --buildid=1788652215 --steamid=0 --valve-initial-threadpool-size=20
+ 201661  201655  0.0  0.1 steamwebhelper  /home/telephoneheater/.local/share/Steam/ubuntu12_64/steamwebhelper --type=zygote --no-zygote-sandbox --force-device-scale-factor=1 --crashpad-handler-pid=201622 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --enable-chrome-runtime --user-data-dir=/home/telephoneheater/.local/share/Steam/config/htmlcache --user-agent-product=Valve Steam Client --disablehighdpi --force-device-scale-factor=1 --buildid=1788652215 --steamid=0 --valve-initial-threadpool-size=20
+ 201771       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-6e3]
+ 201776       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-6e5]
+ 201865       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-6f3]
+ 204564    1861  0.0  0.0 chrome_crashpad /usr/lib/chromium/chrome_crashpad_handler --monitor-self --monitor-self-annotation=ptype=crashpad-handler --database=/home/telephoneheater/.config/chromium/Crash Reports --annotation=channel=Arch Linux --annotation=lsb-release=Omarchy --annotation=plat=Linux --annotation=prod=Chrome_Linux --annotation=ver=152.0.7977.82 --initial-client-fd=5 --shared-client-connection
+ 204566    1861  0.0  0.0 chrome_crashpad /usr/lib/chromium/chrome_crashpad_handler --no-periodic-tasks --monitor-self-annotation=ptype=crashpad-handler --database=/home/telephoneheater/.config/chromium/Crash Reports --annotation=channel=Arch Linux --annotation=lsb-release=Omarchy --annotation=plat=Linux --annotation=prod=Chrome_Linux --annotation=ver=152.0.7977.82 --initial-client-fd=4 --shared-client-connection
+ 204789  204485  0.0  0.0 pv-adverb       /usr/lib/pressure-vessel/from-host/libexec/steam-runtime-tools-0/pv-adverb --prefix=/usr/lib/pressure-vessel/from-host --generate-locales --fd 11 --regenerate-ld.so-cache /var/pressure-vessel/ldso --add-ld.so-path /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu --add-ld.so-path /usr/lib/pressure-vessel/overrides/lib/i386-linux-gnu --set-ld-library-path /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/aliases:/usr/lib/pressure-vessel/overrides/lib/i386-linux-gnu/aliases --overrides-path /usr/lib/pressure-vessel/overrides --assign-fd=1=3 --assign-fd=2=4 --ld-preload=/home/telephoneheater/.local/share/Steam/ubuntu12_32/gameoverlayrenderer.so --ld-preload=/home/telephoneheater/.local/share/Steam/ubuntu12_64/gameoverlayrenderer.so -- /home/telephoneheater/.local/share/Steam/steamapps/common/SteamLinuxRuntime/scout-on-soldier-entry-point-v2 -- /home/telephoneheater/.local/share/Steam/steamapps/common/Sid Meier's Civilization VII/Base/Binaries/linux/Civ7_linux_Vulkan.sh
+ 204878       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-75b]
+ 204881       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-75c]
+ 204885       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-75e]
+ 204886       2  0.0  0.0 nvidia-drm/time [nvidia-drm/timeline-75f]
+ 225781       2  0.0  0.0 kworker/21:0-mm [kworker/21:0-mm_percpu_wq]
+ 243347       2  0.0  0.0 kworker/10:3-ev [kworker/10:3-events]
+ 246873       2  0.0  0.0 kworker/12:0    [kworker/12:0]
+ 248599     928  0.0  0.0 systemd-userwor systemd-userwork: waiting...
+ 248600     928  0.0  0.0 systemd-userwor systemd-userwork: waiting...
+ 248601     928  0.0  0.0 systemd-userwor systemd-userwork: waiting...
+ 249767       2  0.0  0.0 kworker/6:2     [kworker/6:2]
+ 251655       2  0.0  0.0 kworker/10:2    [kworker/10:2]
+ 252288    3450  0.0  0.0 omarchy-shell   /bin/bash /usr/share/omarchy/bin/omarchy-shell lock isLocked
+ 252289  252288  0.0  0.0 omarchy-shell   /bin/bash /usr/share/omarchy/bin/omarchy-shell lock isLocked
+ 252290  252289  0.0  0.0 timeout         timeout --kill-after=1s 2s qs ipc -n -p /usr/share/omarchy/shell call -- lock isLocked
+ 252291  252290  0.0  0.1 qs              qs ipc -n -p /usr/share/omarchy/shell call -- lock isLocked

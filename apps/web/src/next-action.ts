@@ -1,8 +1,9 @@
 import type { Observation } from '@theandril/sim';
 
 export interface ActionCandidate { id: string; name: string; cell: number; reason: string }
-export interface ActionCandidates { armies: ActionCandidate[]; settlements: ActionCandidate[] }
-export type ActionKind = 'army' | 'settlement';
+export interface HouseholdCandidate extends ActionCandidate { unassignedHouseholds: number }
+export interface ActionCandidates { armies: ActionCandidate[]; settlements: ActionCandidate[]; households: HouseholdCandidate[] }
+export type ActionKind = 'army' | 'settlement' | 'household';
 export type Direction = 1 | -1;
 export interface ShortcutBindings { army: string; settlement: string; turn: string }
 export const SHORTCUT_STORAGE_KEY = 'theandril.shortcuts.v1';
@@ -10,7 +11,7 @@ export const DEFAULT_SHORTCUTS: ShortcutBindings = { army: 'n', settlement: 's',
 const byId = (a: ActionCandidate, b: ActionCandidate) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 
 /** Navigation hints only: all actual orders remain validated by simulation. */
-export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'sieges'>): ActionCandidates {
+export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'sieges' | 'land'>): ActionCandidates {
   const routes = new Map(view.routes.map(route => [route.armyId, route]));
   const besiegers = new Set(view.sieges.map(siege => siege.armyId));
   const armies: ActionCandidate[] = [];
@@ -24,7 +25,16 @@ export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' 
   const canProduce = new Set(view.productionOptions.filter(option => option.canQueue).map(option => option.settlementId));
   const settlements = view.settlements.filter(town => town.factionId === view.factionId && town.queue.length === 0 && canProduce.has(town.id))
     .map(town => ({ id: town.id, name: town.name, cell: town.cell, reason: 'Empty production queue; an available project can be ordered.' }));
-  return { armies: armies.sort(byId), settlements: settlements.sort(byId) };
+  // Compact canonical totals, independent of queue status and paged tile quotes.
+  // Do not infer worker capacity from population or choose/spend on tiles here.
+  const ownedTowns = new Map(view.settlements.filter(town => town.factionId === view.factionId).map(town => [town.id, town]));
+  const households: HouseholdCandidate[] = [];
+  for (const land of view.land.settlements) {
+    const town = ownedTowns.get(land.settlementId), unassignedHouseholds = land.workerCapacity - land.worked.length;
+    if (town && unassignedHouseholds > 0) households.push({ id: town.id, name: town.name, cell: town.cell, unassignedHouseholds,
+      reason: `${unassignedHouseholds} unassigned household${unassignedHouseholds === 1 ? '' : 's'}. Review land to assign worked tiles; unassigned households add no tile yields.` });
+  }
+  return { armies: armies.sort(byId), settlements: settlements.sort(byId), households: households.sort(byId) };
 }
 
 /** Advance from the selected ID even if it stopped being eligible; stable wrap. */

@@ -1,0 +1,55 @@
+RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ packages/persistence/src/campaign-storage-durability.test.ts (3 tests | 1 failed) 284ms
+   × PERSIST-02 a resealed refcount undercount cannot reclaim a remaining history, and bounded GC still drains it when abandoned 45ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/persistence/src/campaign-storage-durability.test.ts > PERSIST-02 a resealed refcount undercount cannot reclaim a remaining history, and bounded GC still drains it when abandoned
+AssertionError: expected [ { …(3) }, { …(3) }, { …(3) }, …(6) ] to deeply equal [ { …(3) }, { …(3) }, { …(3) }, …(9) ]
+
+- Expected
++ Received
+
+@@ -13,25 +13,10 @@
+      "digest": "2e75a381b1fd7b7b6b32f797363e4da4c00a84b2c7b92c15d2498993794152ca",
+      "payload": "{\"version\":1,\"type\":\"chunk\",\"originDigest\":\"f323bc395c6b9b4df15fc9241d8390ad804d8f23815a8c16ad98ff6400f20a7b\",\"previousDigest\":\"d632261dd466c590c5397262969fbba06aefca3ced916bd9b51f5c0a0eca8d80\",\"from\":2,\"to\":3,\"records\":[{\"sequence\":3,\"turn\":3,\"afterTurn\":4,\"command\":{\"type\":\"endTurn\",\"factionId\":\"faction.ashen_compact\"},\"ok\":true,\"error\":null,\"events\":[{\"turn\":4,\"type\":\"turn_started\",\"factionId\":\"faction.ashen_compact\",\"message\":\"Turn 4: orders are ready.\"},{\"turn\":4,\"type\":\"turn_started\",\"factionId\":\"faction.reedbound_council\",\"message\":\"Turn 4: orders are ready.\"}],\"battles\":[],\"checkpoint\":\"6be71efb\",\"checkpointVersion\":17,\"rulesVersion\":17}]}",
+      "replica": 2,
+    },
+    {
+-     "digest": "cf298b88a7c4e033764fc7b21b2a4f25bbbcca7003192567ba59f4fb9f7b674b",
+-     "payload": "{\"version\":1,\"type\":\"chunk\",\"originDigest\":\"f323bc395c6b9b4df15fc9241d8390ad804d8f23815a8c16ad98ff6400f20a7b\",\"previousDigest\":null,\"from\":0,\"to\":1,\"records\":[{\"sequence\":1,\"turn\":1,\"afterTurn\":2,\"command\":{\"type\":\"endTurn\",\"factionId\":\"faction.ashen_compact\"},\"ok\":true,\"error\":null,\"events\":[{\"turn\":2,\"type\":\"turn_started\",\"factionId\":\"faction.ashen_compact\",\"message\":\"Turn 2: orders are ready.\"},{\"turn\":2,\"type\":\"turn_started\",\"factionId\":\"faction.reedbound_council\",\"message\":\"Turn 2: orders are ready.\"}],\"battles\":[],\"checkpoint\":\"7109f4c9\",\"checkpointVersion\":17,\"rulesVersion\":17}]}",
+-     "replica": 0,
+-   },
+-   {
+-     "digest": "cf298b88a7c4e033764fc7b21b2a4f25bbbcca7003192567ba59f4fb9f7b674b",
+-     "payload": "{\"version\":1,\"type\":\"chunk\",\"originDigest\":\"f323bc395c6b9b4df15fc9241d8390ad804d8f23815a8c16ad98ff6400f20a7b\",\"previousDigest\":null,\"from\":0,\"to\":1,\"records\":[{\"sequence\":1,\"turn\":1,\"afterTurn\":2,\"command\":{\"type\":\"endTurn\",\"factionId\":\"faction.ashen_compact\"},\"ok\":true,\"error\":null,\"events\":[{\"turn\":2,\"type\":\"turn_started\",\"factionId\":\"faction.ashen_compact\",\"message\":\"Turn 2: orders are ready.\"},{\"turn\":2,\"type\":\"turn_started\",\"factionId\":\"faction.reedbound_council\",\"message\":\"Turn 2: orders are ready.\"}],\"battles\":[],\"checkpoint\":\"7109f4c9\",\"checkpointVersion\":17,\"rulesVersion\":17}]}",
+-     "replica": 1,
+-   },
+-   {
+-     "digest": "cf298b88a7c4e033764fc7b21b2a4f25bbbcca7003192567ba59f4fb9f7b674b",
+-     "payload": "{\"version\":1,\"type\":\"chunk\",\"originDigest\":\"f323bc395c6b9b4df15fc9241d8390ad804d8f23815a8c16ad98ff6400f20a7b\",\"previousDigest\":null,\"from\":0,\"to\":1,\"records\":[{\"sequence\":1,\"turn\":1,\"afterTurn\":2,\"command\":{\"type\":\"endTurn\",\"factionId\":\"faction.ashen_compact\"},\"ok\":true,\"error\":null,\"events\":[{\"turn\":2,\"type\":\"turn_started\",\"factionId\":\"faction.ashen_compact\",\"message\":\"Turn 2: orders are ready.\"},{\"turn\":2,\"type\":\"turn_started\",\"factionId\":\"faction.reedbound_council\",\"message\":\"Turn 2: orders are ready.\"}],\"battles\":[],\"checkpoint\":\"7109f4c9\",\"checkpointVersion\":17,\"rulesVersion\":17}]}",
+-     "replica": 2,
+-   },
+-   {
+      "digest": "d632261dd466c590c5397262969fbba06aefca3ced916bd9b51f5c0a0eca8d80",
+      "payload": "{\"version\":1,\"type\":\"chunk\",\"originDigest\":\"f323bc395c6b9b4df15fc9241d8390ad804d8f23815a8c16ad98ff6400f20a7b\",\"previousDigest\":\"cf298b88a7c4e033764fc7b21b2a4f25bbbcca7003192567ba59f4fb9f7b674b\",\"from\":1,\"to\":2,\"records\":[{\"sequence\":2,\"turn\":2,\"afterTurn\":3,\"command\":{\"type\":\"endTurn\",\"factionId\":\"faction.ashen_compact\"},\"ok\":true,\"error\":null,\"events\":[{\"turn\":3,\"type\":\"turn_started\",\"factionId\":\"faction.ashen_compact\",\"message\":\"Turn 3: orders are ready.\"},{\"turn\":3,\"type\":\"turn_started\",\"factionId\":\"faction.reedbound_council\",\"message\":\"Turn 3: orders are ready.\"}],\"battles\":[],\"checkpoint\":\"41f9b6c9\",\"checkpointVersion\":17,\"rulesVersion\":17}]}",
+      "replica": 0,
+    },
+    {
+
+ ❯ packages/persistence/src/campaign-storage-durability.test.ts:71:56
+     69|   expect((await db.loadLatestCampaign('auto')).journal.materialize()).…
+     70|   await db.saveCampaign(game, journal, 'auto');
+     71|   expect(await db.table('campaignPayloads').toArray()).toEqual(copies);
+       |                                                        ^
+     72|   expect((await db.table('campaignBlobs').get(oldest)).refs).toBe(1); …
+     73|   expect(db.lastCampaignSaveStats?.historyPayloadWrites).toBe(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  03:58:44
+   Duration  775ms (transform 320ms, setup 0ms, import 427ms, tests 284ms, environment 0ms)

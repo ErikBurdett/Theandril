@@ -41,7 +41,7 @@ import './campaign-hud.css';
 import './hearth-theme.css';
 
 type Selection = { armyId?: string; settlementId?: string; cell?: number };
-type MapPopup = { cell: number; anchor: { x: number; y: number }; serial: number; choiceId: string; initialTab?: string };
+type MapPopup = { cell: number; anchor: { x: number; y: number }; serial: number; choiceId: string; initialTab?: string; revealContent?: boolean };
 type ManagementWindow = 'registry' | 'orders' | 'affairs' | 'journal' | 'guide';
 type RequestBody = Request extends infer R ? R extends Request ? Omit<R, 'id'> : never : never;
 const DevelopmentArtLab = import.meta.env.DEV ? lazy(() => import('./art-lab')) : null;
@@ -194,7 +194,7 @@ function App() {
     if (focus && next.cell !== undefined) renderer.current?.focus(next.cell);
   };
   const closeMapActions = () => { mapPopupRef.current = undefined; setMapPopup(undefined); };
-  const openMapActions = (cell: number, anchor?: { x: number; y: number }, choiceId?: string, initialTab?: string) => {
+  const openMapActions = (cell: number, anchor?: { x: number; y: number }, choiceId?: string, initialTab?: string, revealContent = false) => {
     const view = observationRef.current;
     if (!view || view.battle || view.pendingCapture || document.querySelector('dialog[open]')) return;
     const choices = getMapActionChoices(view, cell, selectionRef.current.settlementId, renderer.current?.inspect(cell));
@@ -207,7 +207,7 @@ function App() {
     select(choice.selection);
     const point = anchor ?? renderer.current?.projectCell(cell);
     const box = mapHost.current?.getBoundingClientRect();
-    const popup: MapPopup = { cell, anchor: point ?? { x: (box?.left ?? 0) + 40, y: (box?.top ?? 0) + 100 }, serial: ++popupSerial.current, choiceId: choice.id, initialTab };
+    const popup: MapPopup = { cell, anchor: point ?? { x: (box?.left ?? 0) + 40, y: (box?.top ?? 0) + 100 }, serial: ++popupSerial.current, choiceId: choice.id, initialTab, revealContent };
     mapPopupRef.current = popup; setMapPopup(popup);
   };
   const openPickedActions = (cell: number, input: MapPointerInput, initialTab?: string) => {
@@ -591,16 +591,19 @@ function App() {
   const battleActive = Boolean(observation?.battleScene || battleReview && battleTransfer);
   const ordersBusy = controlLocked || Boolean(observation?.battle || observation?.pendingCapture);
   const navigationLocked = ordersBusy || showSetup || !observation;
-  const nextActions = useMemo(() => observation ? actionCandidates(observation) : { armies: [], settlements: [] }, [observation]);
+  const nextActions = useMemo(() => observation ? actionCandidates(observation) : { armies: [], settlements: [], households: [] }, [observation]);
+  const unassignedHouseholds = nextActions.households.reduce((total, town) => total + town.unassignedHouseholds, 0);
   const jumpToAction = (kind: ActionKind, direction: Direction = 1) => {
     if (navigationLocked) return;
     const current = selectionRef.current;
-    const candidate = nextAction(kind === 'army' ? nextActions.armies : nextActions.settlements, kind === 'army' ? current.armyId : current.settlementId, direction);
-    if (!candidate) { setNavigationNotice(kind === 'army' ? 'No armies currently need orders or route review.' : 'No idle settlements have an available production order.'); return; }
+    const candidates = kind === 'army' ? nextActions.armies : kind === 'household' ? nextActions.households : nextActions.settlements;
+    const candidate = nextAction(candidates, kind === 'army' ? current.armyId : current.settlementId, direction);
+    if (!candidate) { setNavigationNotice(kind === 'army' ? 'No armies currently need orders or route review.' : kind === 'household' ? 'No settlements have unassigned households.' : 'No idle settlements have an available production order.'); return; }
     closeMapActions(); setManagementWindow(undefined);
     setSearch(''); setForceFilter('all'); setRegistry(kind === 'army' ? 'armies' : 'settlements');
     select({ ...(kind === 'army' ? { armyId: candidate.id } : { settlementId: candidate.id }), cell: candidate.cell }, true);
     setNavigationNotice(`${candidate.name} · ${candidate.reason}`);
+    if (kind === 'household') openMapActions(candidate.cell, undefined, candidate.id, 'land', true);
   };
   const changeShortcut = (kind: keyof ShortcutBindings, value: string) => {
     const problem = shortcutError({ army: armyKey, settlement: settlementKey, turn: turnKey }, kind, value);
@@ -710,7 +713,7 @@ function App() {
         <button aria-haspopup="dialog" aria-label="Realm affairs" onClick={() => openWindow('affairs')}><HudIcon symbol="diplomacy"/><span>Diplomacy{observation.diplomacy.offers.length > 0 && <b className="hud-alert"> {observation.diplomacy.offers.length}</b>}</span></button>
         <button aria-haspopup="dialog" onClick={() => openWindow('journal')}><HudIcon symbol="journal"/><span>Campaign journal</span></button>
         <button onClick={worldOverview}><HudIcon symbol="world"/><span>World overview</span></button>
-      </nav><div className="map-controls"><button aria-label="Zoom in" onClick={() => renderer.current?.zoom(1.25)}>+</button><button aria-label="Zoom out" onClick={() => renderer.current?.zoom(0.8)}>−</button><button onClick={showMap}>Focus selection</button><button disabled={battleActive || selection.cell === undefined} onClick={() => { if (selection.cell !== undefined) openMapActions(selection.cell); }}>Open map actions</button><button aria-label="Map guide" title="Map guide" aria-haspopup="dialog" onClick={() => openWindow('guide')}>?</button></div><FactionOverviewControl key={registryEpoch} hidden={battleActive} factions={mapFactions} onChange={(mode, ids) => renderer.current?.setWorldOverview(mode, ids)} onFit={() => renderer.current?.fitWorld()}/><div className="map-legend"><span>⌂ Settlement</span><span title="One figure: 1 formation; two: 2–5; three: 6+. A stack shows the selected army, otherwise its largest army. Exact composition is in the army inspector.">△ Army size: 1 / 2–5 / 6+</span><span title="Co-located armies share one representative group; fleets group separately and embarked troops are not drawn. Click a hex repeatedly to cycle your forces.">×N armies on hex</span><span>◆ Your realm</span><span>Dim terrain: explored</span>{artStatus && <span data-testid="art-runtime-status" title={[artStatus.message, ...artStatus.warnings].join(" ")}>Art: {artStatus.state === 'loading' ? 'loading' : artStatus.state === 'fallback' ? 'procedural fallback' : artStatus.warnings.length ? 'partial pixel pack' : 'approved pixel pack'}</span>}</div><BattlefieldPanel key={registryEpoch} view={observation} transfer={battleTransfer} busy={controlLocked} error={error} replay={battleReview} suspended={showSetup || progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen || Boolean(managementWindow) || generating} issue={command} setScene={setBattleScene} keepReview={() => setBattleReview(true)} closeReview={() => setBattleReview(false)}/><CapturePanel view={observation} busy={controlLocked} issue={command}/></section>
+      </nav><div className="map-controls"><button aria-label="Zoom in" onClick={() => renderer.current?.zoom(1.25)}>+</button><button aria-label="Zoom out" onClick={() => renderer.current?.zoom(0.8)}>−</button><button onClick={showMap}>Focus selection</button><button disabled={battleActive || selection.cell === undefined} onClick={() => { if (selection.cell !== undefined) openMapActions(selection.cell); }}>Open map actions</button><button aria-label="Map guide" title="Map guide" aria-haspopup="dialog" onClick={() => openWindow('guide')}>?</button></div><FactionOverviewControl key={`overview:${registryEpoch}`} hidden={battleActive} factions={mapFactions} onChange={(mode, ids) => renderer.current?.setWorldOverview(mode, ids)} onFit={() => renderer.current?.fitWorld()}/><div className="map-legend"><span>⌂ Settlement</span><span title="One figure: 1 formation; two: 2–5; three: 6+. A stack shows the selected army, otherwise its largest army. Exact composition is in the army inspector.">△ Army size: 1 / 2–5 / 6+</span><span title="Co-located armies share one representative group; fleets group separately and embarked troops are not drawn. Click a hex repeatedly to cycle your forces.">×N armies on hex</span><span>◆ Your realm</span><span>Dim terrain: explored</span>{artStatus && <span data-testid="art-runtime-status" title={[artStatus.message, ...artStatus.warnings].join(" ")}>Art: {artStatus.state === 'loading' ? 'loading' : artStatus.state === 'fallback' ? 'procedural fallback' : artStatus.warnings.length ? 'partial pixel pack' : 'approved pixel pack'}</span>}</div><BattlefieldPanel key={`battlefield:${registryEpoch}`} view={observation} transfer={battleTransfer} busy={controlLocked} error={error} replay={battleReview} suspended={showSetup || progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen || Boolean(managementWindow) || generating} issue={command} setScene={setBattleScene} keepReview={() => setBattleReview(true)} closeReview={() => setBattleReview(false)}/><CapturePanel view={observation} busy={controlLocked} issue={command}/></section>
     </main>}
     {observation && popupActive && mapPopup && popupChoice && <MapActions
       sessionKey={`${registryEpoch}:${mapPopup.serial}`} anchor={mapPopup.anchor} presentation={army ? 'compact' : 'default'} manageLabel="Open full orders"
@@ -722,7 +725,7 @@ function App() {
         mapPopupRef.current = next; setMapPopup(next);
       }}
       tabs={popupTabs.map(tab => ({ ...tab, render: () => <fieldset className="strategic-orders" disabled={ordersBusy}>{tab.render()}</fieldset> }))}
-      initialTab={mapPopup.initialTab} summary={<><p className="field-help">{army ? `${army.formations.length} / ${army.formationCapacity} formations · ${army.strength} strength · ${army.movement} movement` : settlement ? `${settlement.population} people · ${settlement.queue.length} queued projects` : 'Inspection only. Unknown or foreign tiles do not grant management access.'}</p>{busy && <p role="status">Resolving orders…</p>}{error && <p role="alert">{feedback}</p>}</>}
+      revealContent={mapPopup.revealContent} initialTab={mapPopup.initialTab} summary={<><p className="field-help">{army ? `${army.formations.length} / ${army.formationCapacity} formations · ${army.strength} strength · ${army.movement} movement` : settlement ? `${settlement.population} people · ${settlement.queue.length} queued projects` : 'Inspection only. Unknown or foreign tiles do not grant management access.'}</p>{busy && <p role="status">Resolving orders…</p>}{error && <p role="alert">{feedback}</p>}</>}
       onClose={closeMapActions} returnFocus={mapHost.current} onManageInPanel={manageInPanel}
       suspended={progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen}
     />}
@@ -738,6 +741,8 @@ function App() {
       {observation && !showSetup && !battleActive && <section className="hud-next-actions" aria-label="Next-action navigation" data-testid="next-action-navigation">
         <p className="field-help" data-testid="next-action-counts">{nextActions.armies.length} needing orders · {nextActions.settlements.length} idle settlements</p>
         <div><button disabled={navigationLocked || nextActions.armies.length === 0} aria-label="Previous army needing orders" title="Previous army needing orders" onClick={() => jumpToAction('army', -1)}>‹</button><button disabled={navigationLocked || nextActions.armies.length === 0} aria-label="Next army needing orders" aria-keyshortcuts={armyKey.toUpperCase()} onClick={() => jumpToAction('army')}>Next army <kbd>{armyKey.toUpperCase()}</kbd></button><button disabled={navigationLocked || nextActions.settlements.length === 0} aria-label="Previous idle settlement" title="Previous idle settlement" onClick={() => jumpToAction('settlement', -1)}>‹</button><button disabled={navigationLocked || nextActions.settlements.length === 0} aria-label="Next idle settlement" aria-keyshortcuts={settlementKey.toUpperCase()} onClick={() => jumpToAction('settlement')}>Next town <kbd>{settlementKey.toUpperCase()}</kbd></button></div>
+        <p className="field-help" data-testid="household-counts">Labor: {unassignedHouseholds} unassigned household{unassignedHouseholds === 1 ? '' : 's'} · {nextActions.households.length} settlement{nextActions.households.length === 1 ? '' : 's'}</p>
+        <div className="hud-household-actions"><button disabled={navigationLocked || nextActions.households.length === 0} aria-label="Previous settlement with unassigned households" title="Previous settlement with unassigned households" onClick={() => jumpToAction('household', -1)}>‹</button><button disabled={navigationLocked || nextActions.households.length === 0} aria-label="Next settlement with unassigned households" aria-haspopup="dialog" onClick={() => jumpToAction('household')}>Review households</button></div>
         <span role="status" aria-live="polite" data-testid="next-action-notice" className="field-help">{navigationNotice}</span>
       </section>}
       {observation && <div className="hud-end-turn">{(observation.battle || observation.pendingCapture) && <p id="battle-blocker" className="battle-blocker">{observation.pendingCapture ? 'Resolve the settlement capture before ending the turn.' : 'Resolve the pending battle before ending the turn.'}</p>}<div className="turn"><small>AGE OF FRACTURE</small><strong data-testid="turn-counter">Turn {observation.turn}</strong></div><button className="primary end-turn" aria-label="End turn" aria-describedby={observation.battle || observation.pendingCapture ? 'battle-blocker' : undefined} disabled={ordersBusy || showSetup} onClick={endTurn}>End turn <kbd>{turnKey.toUpperCase()}</kbd></button></div>}

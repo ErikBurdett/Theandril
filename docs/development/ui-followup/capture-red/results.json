@@ -1,0 +1,169 @@
+{
+  "config": {
+    "argv": [
+      "/home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node",
+      "/home/telephoneheater/Work/Theandril/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "docs/development/ui-followup/playwright.config.ts",
+      "battle-defense",
+      "--grep",
+      "R03 narrow"
+    ],
+    "configFile": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/playwright.config.ts",
+    "rootDir": "/home/telephoneheater/Work/Theandril/tests/gameplay",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/capture-red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ui-followup-5193",
+        "name": "ui-followup-5193",
+        "testDir": "/home/telephoneheater/Work/Theandril/tests/gameplay",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/capture-red/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "battle-defense.spec.ts",
+      "file": "battle-defense.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "R03 narrow public assaults complete occupation at 390px without intercepted controls",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 13077,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Occupy settlement', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"wide\" aria-label=\"Occupy settlement\">Occupy</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <canvas width=\"390\" height=\"399\" aria-hidden=\"true\"></canvas> from <div tabindex=\"0\" class=\"map-host\" data-testid=\"map-container\" aria-label=\"World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    4 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas width=\"390\" height=\"399\" aria-hidden=\"true\"></canvas> from <div tabindex=\"0\" class=\"map-host\" data-testid=\"map-container\" aria-label=\"World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <canvas width=\"390\" height=\"399\" aria-hidden=\"true\"></canvas> from <div tabindex=\"0\" class=\"map-host\" data-testid=\"map-container\" aria-label=\"World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Occupy settlement', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"wide\" aria-label=\"Occupy settlement\">Occupy</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <canvas width=\"390\" height=\"399\" aria-hidden=\"true\"></canvas> from <div tabindex=\"0\" class=\"map-host\" data-testid=\"map-container\" aria-label=\"World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    4 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas width=\"390\" height=\"399\" aria-hidden=\"true\"></canvas> from <div tabindex=\"0\" class=\"map-host\" data-testid=\"map-container\" aria-label=\"World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <canvas width=\"390\" height=\"399\" aria-hidden=\"true\"></canvas> from <div tabindex=\"0\" class=\"map-host\" data-testid=\"map-container\" aria-label=\"World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\n    at /home/telephoneheater/Work/Theandril/tests/gameplay/battle-defense.spec.ts:161:16",
+                    "location": {
+                      "file": "/home/telephoneheater/Work/Theandril/tests/gameplay/battle-defense.spec.ts",
+                      "column": 16,
+                      "line": 161
+                    },
+                    "snippet": "  159 |   await info.attach('narrow-capture-before', { body: JSON.stringify({ before, contestedSieges: contested.sieges, layout }, null, 2), contentType: 'application/json' });\n  160 |   // Ordinary pointer action is the acceptance boundary; no force or viewport escape.\n> 161 |   await occupy.click({ timeout: 10000 });\n      |                ^\n  162 |   await expect(page.getByTestId('capture-panel')).toHaveCount(0);\n  163 |   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();\n  164 |   const after = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), view: window.__THEANDRIL__!.getSummary()! }));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/telephoneheater/Work/Theandril/tests/gameplay/battle-defense.spec.ts",
+                        "column": 16,
+                        "line": 161
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Occupy settlement', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"wide\" aria-label=\"Occupy settlement\">Occupy</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <canvas width=\"390\" height=\"399\" aria-hidden=\"true\"></canvas> from <div tabindex=\"0\" class=\"map-host\" data-testid=\"map-container\" aria-label=\"World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    4 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas width=\"390\" height=\"399\" aria-hidden=\"true\"></canvas> from <div tabindex=\"0\" class=\"map-host\" data-testid=\"map-container\" aria-label=\"World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <canvas width=\"390\" height=\"399\" aria-hidden=\"true\"></canvas> from <div tabindex=\"0\" class=\"map-host\" data-testid=\"map-container\" aria-label=\"World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <button aria-haspopup=\"dialog\" aria-label=\"Characters & agents\">…</button> from <nav class=\"hud-tools\" aria-label=\"Map management\">…</nav> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\n\n  159 |   await info.attach('narrow-capture-before', { body: JSON.stringify({ before, contestedSieges: contested.sieges, layout }, null, 2), contentType: 'application/json' });\n  160 |   // Ordinary pointer action is the acceptance boundary; no force or viewport escape.\n> 161 |   await occupy.click({ timeout: 10000 });\n      |                ^\n  162 |   await expect(page.getByTestId('capture-panel')).toHaveCount(0);\n  163 |   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();\n  164 |   const after = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), view: window.__THEANDRIL__!.getSummary()! }));\n    at /home/telephoneheater/Work/Theandril/tests/gameplay/battle-defense.spec.ts:161:16"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-09T08:18:59.426Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "narrow-capture-before",
+                      "contentType": "application/json",
+                      "body": "ewogICJiZWZvcmUiOiB7CiAgICAic2V0dGxlbWVudElkIjogInNldHRsZW1lbnQuNiIsCiAgICAiYXJteUlkIjogImFybXkuMiIsCiAgICAiZmFjdGlvbklkIjogImZhY3Rpb24uYXNoZW5fY29tcGFjdCIsCiAgICAic3RhcnRlZFR1cm4iOiAxLAogICAgImRlZmVuc2VzIjogMCwKICAgICJzdXBwbGllcyI6IDAsCiAgICAibWlsaXRpYVN0cmVuZ3RoIjogMzAsCiAgICAibWlsaXRpYU1vcmFsZSI6IDY1LAogICAgIm1pbGl0aWFGYXRpZ3VlIjogMCwKICAgICJiYXR0bGVEZWZlbnNlIjogewogICAgICAiZW5nYWdlZEZvcm1hdGlvbnMiOiAyMCwKICAgICAgImVuZ2FnZWRTdHJlbmd0aCI6IDIwLAogICAgICAicmVzZXJ2ZUZvcm1hdGlvbnMiOiAxLAogICAgICAicmVzZXJ2ZVN0cmVuZ3RoIjogMQogICAgfSwKICAgICJjYW5Bc3NhdWx0IjogdHJ1ZSwKICAgICJhc3NhdWx0QmxvY2tlciI6IG51bGwsCiAgICAiZGVmZW5kZXJTdHJlbmd0aCI6IDIxCiAgfSwKICAiY29udGVzdGVkU2llZ2VzIjogWwogICAgewogICAgICAic2V0dGxlbWVudElkIjogInNldHRsZW1lbnQuNiIsCiAgICAgICJhcm15SWQiOiAiYXJteS4yIiwKICAgICAgImZhY3Rpb25JZCI6ICJmYWN0aW9uLmFzaGVuX2NvbXBhY3QiLAogICAgICAic3RhcnRlZFR1cm4iOiAxLAogICAgICAiZGVmZW5zZXMiOiAwLAogICAgICAic3VwcGxpZXMiOiAwLAogICAgICAibWlsaXRpYVN0cmVuZ3RoIjogMzAsCiAgICAgICJtaWxpdGlhTW9yYWxlIjogNjUsCiAgICAgICJtaWxpdGlhRmF0aWd1ZSI6IDAsCiAgICAgICJjYW5Bc3NhdWx0IjogZmFsc2UsCiAgICAgICJhc3NhdWx0QmxvY2tlciI6ICJUaGUgYmVzaWVnaW5nIGFybXkgbmVlZHMgbW92ZW1lbnQgdG8gYXNzYXVsdDsgd2FpdCBmb3IgdGhlIG5leHQgdHVybi4iLAogICAgICAiZGVmZW5kZXJTdHJlbmd0aCI6IDEKICAgIH0KICBdLAogICJsYXlvdXQiOiB7CiAgICAidmlld3BvcnQiOiB7CiAgICAgICJ3aWR0aCI6IDM5MCwKICAgICAgImhlaWdodCI6IDg0NAogICAgfSwKICAgICJidXR0b24iOiB7CiAgICAgICJ4IjogNDIsCiAgICAgICJ5IjogMTI2LjkyMTg3NSwKICAgICAgIndpZHRoIjogMzA2LAogICAgICAiaGVpZ2h0IjogMzYuNSwKICAgICAgInRvcCI6IDEyNi45MjE4NzUsCiAgICAgICJyaWdodCI6IDM0OCwKICAgICAgImJvdHRvbSI6IDE2My40MjE4NzUsCiAgICAgICJsZWZ0IjogNDIKICAgIH0sCiAgICAiaGl0IjogIjxidXR0b24gYXJpYS1oYXNwb3B1cD1cImRpYWxvZ1wiIGFyaWEtbGFiZWw9XCJDaGFyYWN0ZXJzICZhbXA7IGFnZW50c1wiPjxzdmcgY2xhc3M9XCJodWQtaWNvblwiIHZpZXdCb3g9XCIwIDAgMjQgMjRcIiBhcmlhLWhpZGRlbj1cInRydWVcIiBmaWxsPVwibm9uZVwiIHN0cm9rZT1cImN1cnJlbnRDb2xvclwiIHN0cm9rZS13aWR0aD1cIjEuMzVcIiBzdHJva2UtbGluZWNhcD1cInJvdW5kXCIgc3Ryb2tlLWxpbmVqb2luPVwicm91bmRcIj48cGF0aCBkPVwiTTggOGE0IDQgMCAxIDAgOCAwIDQgNCAwIDEgMC04IDBNNCAyMnYtNGMwLTYgMTYtNiAxNiAwdjRNOSAxNGwzIDUgMy01XCI+PC9wYXRoPjwvc3ZnPjxzcGFuPkNoYXJhY3RlcnM8L3NwYW4+PC9idXR0b24+IiwKICAgICJyZWNlaXZlc1BvaW50ZXIiOiBmYWxzZSwKICAgICJsYXllcnMiOiBbCiAgICAgIHsKICAgICAgICAic2VsZWN0b3IiOiAiLm1hcC1ob3N0IiwKICAgICAgICAiYm94IjogewogICAgICAgICAgIngiOiAwLAogICAgICAgICAgInkiOiAxMDQsCiAgICAgICAgICAid2lkdGgiOiAzOTAsCiAgICAgICAgICAiaGVpZ2h0IjogMzk4Ljg1OTM3NSwKICAgICAgICAgICJ0b3AiOiAxMDQsCiAgICAgICAgICAicmlnaHQiOiAzOTAsCiAgICAgICAgICAiYm90dG9tIjogNTAyLjg1OTM3NSwKICAgICAgICAgICJsZWZ0IjogMAogICAgICAgIH0sCiAgICAgICAgInBvc2l0aW9uIjogImFic29sdXRlIiwKICAgICAgICAiekluZGV4IjogImF1dG8iLAogICAgICAgICJvdmVyZmxvdyI6ICJ2aXNpYmxlIgogICAgICB9LAogICAgICB7CiAgICAgICAgInNlbGVjdG9yIjogIi5odWQtdG9vbHMiLAogICAgICAgICJib3giOiB7CiAgICAgICAgICAieCI6IDksCiAgICAgICAgICAieSI6IDExMywKICAgICAgICAgICJ3aWR0aCI6IDM3MiwKICAgICAgICAgICJoZWlnaHQiOiA3NS41OTM3NSwKICAgICAgICAgICJ0b3AiOiAxMTMsCiAgICAgICAgICAicmlnaHQiOiAzODEsCiAgICAgICAgICAiYm90dG9tIjogMTg4LjU5Mzc1LAogICAgICAgICAgImxlZnQiOiA5CiAgICAgICAgfSwKICAgICAgICAicG9zaXRpb24iOiAiYWJzb2x1dGUiLAogICAgICAgICJ6SW5kZXgiOiAiNCIsCiAgICAgICAgIm92ZXJmbG93IjogImF1dG8iCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAic2VsZWN0b3IiOiAiLmNhcHR1cmUtcGFuZWwiLAogICAgICAgICJib3giOiB7CiAgICAgICAgICAieCI6IDEwLAogICAgICAgICAgInkiOiAxMTQsCiAgICAgICAgICAid2lkdGgiOiAzNzAsCiAgICAgICAgICAiaGVpZ2h0IjogMzM5Ljg1OTM3NSwKICAgICAgICAgICJ0b3AiOiAxMTQsCiAgICAgICAgICAicmlnaHQiOiAzODAsCiAgICAgICAgICAiYm90dG9tIjogNDUzLjg1OTM3NSwKICAgICAgICAgICJsZWZ0IjogMTAKICAgICAgICB9LAogICAgICAgICJwb3NpdGlvbiI6ICJhYnNvbHV0ZSIsCiAgICAgICAgInpJbmRleCI6ICIyIiwKICAgICAgICAib3ZlcmZsb3ciOiAiYXV0byIKICAgICAgfQogICAgXQogIH0KfQ=="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/capture-red/battle-defense-R03-narrow--67f2b-ithout-intercepted-controls-ui-followup-5193/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/capture-red/battle-defense-R03-narrow--67f2b-ithout-intercepted-controls-ui-followup-5193/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/capture-red/battle-defense-R03-narrow--67f2b-ithout-intercepted-controls-ui-followup-5193/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/telephoneheater/Work/Theandril/tests/gameplay/battle-defense.spec.ts",
+                    "column": 16,
+                    "line": 161
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "53f2837ea9087a296b10-a416eef6ae23198135b3",
+          "file": "battle-defense.spec.ts",
+          "line": 117,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-09T08:18:58.956Z",
+    "duration": 14202.588,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "scope": "Reconciliation of independently reviewed captured backend, storage and UI checkpoints; not a current full-repository or release approval.",
+  "reviewedCheckpointsApproved": true,
+  "overallIntegrationApproved": false,
+  "releaseApproved": false,
+  "checkpoints": {
+    "backend": {
+      "passed": true,
+      "delegation": "deleg_a5c1f468",
+      "verdict": "backend.verdict.json",
+      "closedFinding": "pending-assault omission validation",
+      "independentTests": {
+        "passed": 152,
+        "total": 152,
+        "files": 14
+      },
+      "limitation": "Supplemental in-memory probe partly executed; historical fixture duplicate IDs prevented later assertions. Corrected probe consent-blocked, not retried. Independent Vitest regressions cover the affected behaviors."
+    },
+    "persistence": {
+      "passed": true,
+      "delegation": "deleg_a5c1f468",
+      "verdict": "persistence.verdict.json",
+      "closedFindings": [
+        "PERSIST-01",
+        "PERSIST-02"
+      ],
+      "independentTests": {
+        "passed": 52,
+        "total": 52,
+        "files": 5
+      },
+      "independentProbes": {
+        "passed": 14,
+        "total": 14,
+        "uniqueNames": 14
+      },
+      "retainedEvidence": "retained-persistence-evidence.json",
+      "limitations": [
+        "O(prefix-byte) publication verification and all-store queued-GC proof cost",
+        "Unverifiable unrelated branches can atomically refuse an otherwise valid save",
+        "Overcounts without queued garbage are not proactively scrubbed",
+        "Temporary probes retained, not promoted to permanent regression tests",
+        "No new Chromium or large-archive replay execution during independent re-review"
+      ]
+    },
+    "ui": {
+      "passed": true,
+      "delegation": "deleg_491c7acd",
+      "verdict": "../ui-review-v2/ui.verdict.json",
+      "closedFinding": "review capture integrity",
+      "limitation": "Final Git-status/all-artifact freshness sweep was consent-blocked, not retried"
+    }
+  },
+  "priorFailedVerdictsRetained": [
+    "../integrated-review/backend.verdict.json",
+    "../integrated-review/persistence.verdict.json",
+    "../ui-review-current/ui.verdict.json"
+  ],
+  "unresolved": [
+    {
+      "area": "AI",
+      "findings": [
+        "queued second-harbor funding",
+        "repeated founder geography/chart scans"
+      ],
+      "status": "authorization-blocked",
+      "verdict": "../integrated-review/ai.verdict.json"
+    },
+    {
+      "area": "full integration",
+      "status": "pending authorization and later full verification; scoped passing test sets overlap and are not summed"
+    }
+  ],
+  "noBlockedChecksRetried": true
+}

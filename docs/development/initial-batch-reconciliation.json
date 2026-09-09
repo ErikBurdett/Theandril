@@ -1,0 +1,82 @@
+{
+  "delegation": "deleg_a1a62578",
+  "scope": "Reconciliation of delayed original implementation batch against later parent checks; no repeated implementation, rendering, publication or new browser acceptance.",
+  "factories": {
+    "checks": [
+      {
+        "root": "/home/telephoneheater/Projects/BlenderArtFactory",
+        "verifiedMarkdownFiles": 10,
+        "changesSinceFinalValidation": []
+      },
+      {
+        "root": "/home/telephoneheater/Projects/pixel-art-factory",
+        "verifiedMarkdownFiles": 4,
+        "changesSinceFinalValidation": []
+      }
+    ],
+    "verifiedMarkdownFiles": 14,
+    "finalDocumentationRecheckPassed": true,
+    "portableTests": 38,
+    "skillValidator": 8,
+    "limits": "Earlier approval timeout is retained but superseded for documentation validation by authorized parent checks. No installer preflight, installation, artwork creation or visual asset approval is claimed."
+  },
+  "ui": {
+    "retainedCheckpointStats": {
+      "handoff-dev/results.json": {
+        "startTime": "2026-09-09T07:20:30.635Z",
+        "duration": 58107.436,
+        "expected": 16,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "r23-production-handoff/results.json": {
+        "startTime": "2026-09-09T07:19:32.117Z",
+        "duration": 8705.376,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "mutationWarningDisposition": "The failed intermediate hunk did not mean the test file was absent. Parent read the current untracked file and verified R18/R23 definitions; it now also contains follow-up map-pixel checks. Final current UI acceptance remains with the active narrow-capture/pixel integration follow-up.",
+    "currentTestPath": "tests/gameplay/hermes-ui-slices.spec.ts",
+    "currentTestSha256": "d36c4c4f8177ca22fdd26421c9ec928611d3aa8128f8c110335bad36574b7c1d",
+    "images": [
+      {
+        "path": "docs/development/hermes-ui/slices-dev-final/hermes-ui-slices-R18-paid--b0070-t-for-faction-ashen-compact/waykeeper-paid-desktop.png",
+        "sha256": "f6e7d59bb1ff0ba18178300a62e6770725ab5dccf2a2f1c3652fbbb4d5272b39",
+        "width": 1000,
+        "height": 750,
+        "visualBasis": "Parent native vision via vision_analyze; exact retained pixels, not a generated assessment",
+        "findings": "Native inspection: both roster and detail show a small humanoid Waykeeper figure, not a pawn. Aven Ashwell, Waykeeper, Flame1/Rune1, assignment controls and the 40-coin appointment feedback are readable. This is a panel crop, not full-viewport, financial-state, or current-source acceptance.",
+        "currentUiAcceptance": false
+      },
+      {
+        "path": "docs/development/hermes-ui/slices-dev-final/household-attention-R07-40-35faa--in-one-activation-at-390px/household-review-390.png",
+        "sha256": "9d6a1e3eab80a86ddea662aa127643f4bc25e24e83f76b16f67810c07a31fe32",
+        "width": 374,
+        "height": 355,
+        "visualBasis": "Parent native vision via vision_analyze; exact retained pixels, not a generated assessment",
+        "findings": "Native inspection: Map orders / Land & stewardship panel shows Hex17178 Marsh, the automatically worked settlement center and a readable Open full orders button. This panel crop does not show the Labor navigation control, assignment transaction or surrounding viewport, so does not independently prove those steps or full-screen overlap freedom.",
+        "currentUiAcceptance": false
+      },
+      {
+        "path": "docs/development/hermes-ui/r03-preview-ui-green-v3/battle-defense-R03-siege-p-3600a-ear-reserves-before-capture/siege-defense-390.png",
+        "sha256": "2453d362d65eb58f78b1ab8589e7a37ff975e94207c03f11152d4f47e7231264",
+        "width": 340,
+        "height": 360,
+        "visualBasis": "Parent native vision via vision_analyze; exact retained pixels, not a generated assessment",
+        "findings": "Native inspection: Besieging Reedwatch; defending strength21; committed20 formations/20strength; reserve1formation/1strength. Reserve-clearing explanation and Assault settlement / Lift siege buttons are readable in the supplied crop. No apparent overlapping controls inside this crop; no proof of later Occupy success.",
+        "currentUiAcceptance": false
+      }
+    ],
+    "remaining": "Actual narrow Occupy hit testing and post-battle full-map pixels at current source, independent UI review and broad final integration."
+  },
+  "archive": {
+    "artifactReadback": "docs/development/hermes-archive/parent-artifact-check.json",
+    "retainedBrowserEvidence": "docs/development/hermes-archive/retained-browser.json",
+    "retainedBrowserExportReplay": "docs/development/hermes-archive/retained-browser-replay.json",
+    "remaining": "Current independent integration verdict; large-case player controls, broader capacity/browsers, real quota/process-kill durability and memory certification."
+  }
+}

@@ -1,0 +1,41 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ apps/web/src/next-action.test.ts (9 tests | 1 failed | 8 skipped) 42ms
+     × reports newly unassigned households after real growth even while the town has a full production queue 41ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/next-action.test.ts > observed-only next-action navigation > reports newly unassigned households after real growth even while the town has a full production queue
+AssertionError: expected undefined to deeply equal [ { id: 'settlement.5', …(4) } ]
+
+- Expected:
+[
+  {
+    "cell": 752,
+    "id": "settlement.5",
+    "name": "Growing hearth",
+    "reason": "1 unassigned household. Review land to assign worked tiles; unassigned households add no tile yields.",
+    "unassignedHouseholds": 1,
+  },
+]
+
++ Received:
+undefined
+
+ ❯ apps/web/src/next-action.test.ts:28:34
+     26|     const attention = actionCandidates(view);
+     27|     expect(attention.settlements).toEqual([]);
+     28|     expect(attention.households).toEqual([{ id: town.id, name: town.na…
+       |                                  ^
+     29|       reason: '1 unassigned household. Review land to assign worked ti…
+     30|     expect(JSON.stringify(view)).toBe(observation); expect(stateHash(g…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 skipped (9)
+   Start at  01:48:33
+   Duration  566ms (transform 331ms, setup 0ms, import 457ms, tests 42ms, environment 0ms)
+

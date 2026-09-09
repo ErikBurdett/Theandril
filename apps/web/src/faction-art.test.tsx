@@ -46,6 +46,36 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
 
 describe('approved faction DOM artwork boundary', () => {
+  it('resolves the shared Waykeeper cast for two cultures with one bounded page and a truthful shared label', async () => {
+    const bytes = png(), catalog = await pack(bytes);
+    const waykeeper = asset('character.waykeeper', 192);
+    waykeeper.frames[0]!.state = 'cast';
+    waykeeper.frames[0]!.id = 'character.waykeeper/cast/se/0';
+    waykeeper.clips[0] = { id: 'cast.se', state: 'cast', direction: 'se', frames: [waykeeper.frames[0]!.id], durationsMs: [250], loop: false };
+    catalog.assets.push(waykeeper);
+    const fetch = responses(catalog, bytes);
+    const { loadFactionArtFrame, FactionArtDisplay } = await import('./faction-art');
+    const [ashen, reed, repeated] = await Promise.all([
+      loadFactionArtFrame('character.waykeeper', 'faction.ashen_compact'),
+      loadFactionArtFrame('character.waykeeper', 'faction.reedbound_council'),
+      loadFactionArtFrame('character.waykeeper', 'faction.ashen_compact'),
+    ]);
+    expect(ashen).toBe(reed); expect(repeated).toBe(ashen);
+    expect(ashen.asset.id).toBe('character.waykeeper'); expect(ashen.frame.state).toBe('cast');
+    expect(ashen.generic).toBe(false);
+    expect(fetch.mock.calls.map(([url]) => url)).toEqual(['/art/catalog.json', '/art/test.png']);
+    expect(decode).toHaveBeenCalledTimes(1);
+    for (const definitionId of ['faction.ashen_compact', 'faction.reedbound_council']) {
+      const html = renderToStaticMarkup(createElement(FactionArtDisplay, { contentId: 'character.waykeeper', definitionId, label: 'Paid Waykeeper', value: ashen }));
+      expect(html).toContain('data-art-state="shared"');
+      expect(html).toContain('data-art-id="character.waykeeper"');
+      expect(html).toContain('data-art-rendered-id="character.waykeeper"');
+      expect(html).toContain('shared Waykeeper silhouette');
+      expect(html).toContain('width:64px;height:64px');
+      expect(html).not.toContain('>Generic<'); expect(html).not.toContain('♟');
+      expect(html).not.toContain('approved faction artwork');
+    }
+  });
   it('labels specialist silhouette sharing, retains the real asset ID, and sizes mounted recruits from the source role', async () => {
     const { FactionArtDisplay } = await import('./faction-art');
     for (const [role, artworkRole, size] of [['unit.skirmisher', 'unit.scout', 64], ['unit.arbalester', 'unit.scout', 64], ['unit.halberdier', 'unit.spearman', 64], ['unit.lancer', 'unit.cavalry', 96]] as const) {

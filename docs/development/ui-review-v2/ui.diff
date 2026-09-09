@@ -1,0 +1,1072 @@
+diff --git c/apps/web/src/campaign-hud.css w/apps/web/src/campaign-hud.css
+index ad4dc4b..2190f09 100644
+--- c/apps/web/src/campaign-hud.css
++++ w/apps/web/src/campaign-hud.css
+@@ -47,6 +47,8 @@
+ .hud-next-actions button { min-height: 44px; padding: 8px; font-size: calc(12px * var(--text-scale,1)); }
+ .hud-next-actions [data-testid="next-action-notice"] { display: block; max-width: 330px; overflow-wrap: anywhere; }
+ .hud-next-actions .field-help { font-size: calc(11px * var(--text-scale,1)); }
++.hud-next-actions > .hud-household-actions { grid-template-columns: 44px minmax(0,1fr); }
++.hud-next-actions [data-testid="household-counts"] { margin: 6px 0 0; overflow-wrap: anywhere; }
+ .hud-end-turn { display: flex; gap: 14px; align-items: center; justify-content: flex-end; }
+ .application .hud-end-turn .turn { min-width: 70px; margin: 0; text-align: center; }
+ .application .hud-end-turn .turn strong { font-size: calc(23px * var(--text-scale,1)); }
+@@ -88,6 +90,8 @@
+ .application.campaign-session .campaign.battle-active { flex: none; height: auto; min-height: 0; }
+ .application.campaign-session .campaign.battle-active > .map-section { height: auto; }
+ .battle-active .hud-tools { display: none; }
++/* Capture is a blocking decision, above map tools (4) and the overview (6). */
++.application .capture-panel { z-index: 7; }
+ @media(max-width:1100px) {
+   .hud-realm { display: none; }
+   .application .command-bar { grid-template-columns: minmax(220px,1fr) auto; gap: 10px 16px; }
+diff --git c/apps/web/src/faction-art.test.tsx w/apps/web/src/faction-art.test.tsx
+index f2cafb8..bfe5659 100644
+--- c/apps/web/src/faction-art.test.tsx
++++ w/apps/web/src/faction-art.test.tsx
+@@ -46,6 +46,36 @@ beforeEach(() => {
+ afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
+ 
+ describe('approved faction DOM artwork boundary', () => {
++  it('resolves the shared Waykeeper cast for two cultures with one bounded page and a truthful shared label', async () => {
++    const bytes = png(), catalog = await pack(bytes);
++    const waykeeper = asset('character.waykeeper', 192);
++    waykeeper.frames[0]!.state = 'cast';
++    waykeeper.frames[0]!.id = 'character.waykeeper/cast/se/0';
++    waykeeper.clips[0] = { id: 'cast.se', state: 'cast', direction: 'se', frames: [waykeeper.frames[0]!.id], durationsMs: [250], loop: false };
++    catalog.assets.push(waykeeper);
++    const fetch = responses(catalog, bytes);
++    const { loadFactionArtFrame, FactionArtDisplay } = await import('./faction-art');
++    const [ashen, reed, repeated] = await Promise.all([
++      loadFactionArtFrame('character.waykeeper', 'faction.ashen_compact'),
++      loadFactionArtFrame('character.waykeeper', 'faction.reedbound_council'),
++      loadFactionArtFrame('character.waykeeper', 'faction.ashen_compact'),
++    ]);
++    expect(ashen).toBe(reed); expect(repeated).toBe(ashen);
++    expect(ashen.asset.id).toBe('character.waykeeper'); expect(ashen.frame.state).toBe('cast');
++    expect(ashen.generic).toBe(false);
++    expect(fetch.mock.calls.map(([url]) => url)).toEqual(['/art/catalog.json', '/art/test.png']);
++    expect(decode).toHaveBeenCalledTimes(1);
++    for (const definitionId of ['faction.ashen_compact', 'faction.reedbound_council']) {
++      const html = renderToStaticMarkup(createElement(FactionArtDisplay, { contentId: 'character.waykeeper', definitionId, label: 'Paid Waykeeper', value: ashen }));
++      expect(html).toContain('data-art-state="shared"');
++      expect(html).toContain('data-art-id="character.waykeeper"');
++      expect(html).toContain('data-art-rendered-id="character.waykeeper"');
++      expect(html).toContain('shared Waykeeper silhouette');
++      expect(html).toContain('width:64px;height:64px');
++      expect(html).not.toContain('>Generic<'); expect(html).not.toContain('♟');
++      expect(html).not.toContain('approved faction artwork');
++    }
++  });
+   it('labels specialist silhouette sharing, retains the real asset ID, and sizes mounted recruits from the source role', async () => {
+     const { FactionArtDisplay } = await import('./faction-art');
+     for (const [role, artworkRole, size] of [['unit.skirmisher', 'unit.scout', 64], ['unit.arbalester', 'unit.scout', 64], ['unit.halberdier', 'unit.spearman', 64], ['unit.lancer', 'unit.cavalry', 96]] as const) {
+diff --git c/apps/web/src/faction-art.tsx w/apps/web/src/faction-art.tsx
+index 179be72..559c5d7 100644
+--- c/apps/web/src/faction-art.tsx
++++ w/apps/web/src/faction-art.tsx
+@@ -14,6 +14,8 @@ const frames = new Map<string, Promise<ApprovedFrame>>();
+ const blobUrls = new Set<string>();
+ let decodedBytes = 0;
+ let disposed = false;
++// Intentional shared-only roles, not missing culture variants or failed loads.
++const SHARED_CHARACTER_ART: Readonly<Record<string, { label: string }>> = { 'character.waykeeper': { label: 'Waykeeper' } };
+ 
+ /** One bounded approved catalog for the DOM, never the development/candidate catalog. */
+ function catalog(): Promise<RuntimeCatalog> {
+@@ -68,20 +70,21 @@ function atlasImage(atlas: RuntimeCatalog['atlases'][number]): Promise<AtlasImag
+ export function loadFactionArtFrame(contentId: string, definitionId: string): Promise<ApprovedFrame> {
+   const artworkRole = unitArtRole(contentId);
+   const qualified = factionArtId(artworkRole, definitionId);
+-  if (!qualified) return Promise.reject(new Error('No approved visual family is bound to this faction definition.'));
+-  let promise = frames.get(qualified);
++  const requested = qualified ?? (SHARED_CHARACTER_ART[artworkRole] ? artworkRole : undefined);
++  if (!requested) return Promise.reject(new Error('No approved visual family is bound to this faction definition.'));
++  let promise = frames.get(requested);
+   if (!promise) {
+     promise = (async () => {
+       const pack = await catalog();
+       const find = (id: string) => pack.assets.find(asset => asset.id === id || asset.contentIds.includes(id));
+-      const asset = find(qualified) ?? find(artworkRole);
+-      if (!asset) throw new Error(`Approved artwork is not published for ${qualified}.`);
++      const asset = find(requested) ?? find(artworkRole);
++      if (!asset) throw new Error(`Approved artwork is not published for ${requested}.`);
+       const atlas = pack.atlases.find(item => item.id === asset.atlasId);
+       const frame = asset.frames.find(item => item.state === 'idle' && item.index === 0) ?? asset.frames[0];
+       if (!atlas || !frame) throw new Error(`Approved atlas frame is missing for ${asset.id}.`);
+-      return { asset, frame, image: await atlasImage(atlas), generic: asset.id !== qualified && !asset.contentIds.includes(qualified) };
++      return { asset, frame, image: await atlasImage(atlas), generic: asset.id !== requested && !asset.contentIds.includes(requested) };
+     })();
+-    frames.set(qualified, promise);
++    frames.set(requested, promise);
+   }
+   return promise;
+ }
+@@ -120,7 +123,7 @@ interface FactionArtProps {
+ /** Approved native frame with a fixed slot. Compact thumbnails are exact half-size, never tinted. */
+ export function FactionArt(props: FactionArtProps) {
+   const { contentId, definitionId } = props;
+-  const requested = factionArtId(unitArtRole(contentId), definitionId ?? '') ?? `${contentId}.unbound`;
++  const requested = factionArtId(unitArtRole(contentId), definitionId ?? '') ?? (SHARED_CHARACTER_ART[contentId] ? contentId : `${contentId}.unbound`);
+   const [result, setResult] = useState<{ requested: string; value?: ApprovedFrame; error?: string }>();
+   useEffect(() => {
+     let active = true;
+@@ -135,8 +138,8 @@ export function FactionArt(props: FactionArtProps) {
+ 
+ /** Pure presentation boundary, also exercised without a running browser or art publication. */
+ export function FactionArtDisplay({ contentId, definitionId, label, compact = false, decorative = false, value: art, error, loading = false }: FactionArtProps & { value?: ApprovedFrame; error?: string; loading?: boolean }) {
+-  const artworkRole = unitArtRole(contentId), shared = SHARED_UNIT_ART[contentId];
+-  const requested = factionArtId(artworkRole, definitionId ?? '') ?? `${contentId}.unbound`;
++  const artworkRole = unitArtRole(contentId), shared = SHARED_UNIT_ART[contentId] ?? SHARED_CHARACTER_ART[contentId];
++  const requested = factionArtId(artworkRole, definitionId ?? '') ?? (SHARED_CHARACTER_ART[contentId] ? contentId : `${contentId}.unbound`);
+   const naval = UNITS.some(unit => unit.id === contentId && unit.movementDomain === 'naval');
+   const native = contentId === 'ui.badge' ? 32 : naval || artworkRole === 'unit.cavalry' || contentId === 'settlement.village' || contentId === 'settlement.town' ? 96 : contentId === 'settlement.city' ? 128 : 64;
+   const scale = compact ? 0.5 : 1;
+diff --git c/apps/web/src/main.tsx w/apps/web/src/main.tsx
+index 164299b..72317c7 100644
+--- c/apps/web/src/main.tsx
++++ w/apps/web/src/main.tsx
+@@ -41,7 +41,7 @@ import './campaign-hud.css';
+ import './hearth-theme.css';
+ 
+ type Selection = { armyId?: string; settlementId?: string; cell?: number };
+-type MapPopup = { cell: number; anchor: { x: number; y: number }; serial: number; choiceId: string; initialTab?: string };
++type MapPopup = { cell: number; anchor: { x: number; y: number }; serial: number; choiceId: string; initialTab?: string; revealContent?: boolean };
+ type ManagementWindow = 'registry' | 'orders' | 'affairs' | 'journal' | 'guide';
+ type RequestBody = Request extends infer R ? R extends Request ? Omit<R, 'id'> : never : never;
+ const DevelopmentArtLab = import.meta.env.DEV ? lazy(() => import('./art-lab')) : null;
+@@ -194,7 +194,7 @@ function App() {
+     if (focus && next.cell !== undefined) renderer.current?.focus(next.cell);
+   };
+   const closeMapActions = () => { mapPopupRef.current = undefined; setMapPopup(undefined); };
+-  const openMapActions = (cell: number, anchor?: { x: number; y: number }, choiceId?: string, initialTab?: string) => {
++  const openMapActions = (cell: number, anchor?: { x: number; y: number }, choiceId?: string, initialTab?: string, revealContent = false) => {
+     const view = observationRef.current;
+     if (!view || view.battle || view.pendingCapture || document.querySelector('dialog[open]')) return;
+     const choices = getMapActionChoices(view, cell, selectionRef.current.settlementId, renderer.current?.inspect(cell));
+@@ -207,7 +207,7 @@ function App() {
+     select(choice.selection);
+     const point = anchor ?? renderer.current?.projectCell(cell);
+     const box = mapHost.current?.getBoundingClientRect();
+-    const popup: MapPopup = { cell, anchor: point ?? { x: (box?.left ?? 0) + 40, y: (box?.top ?? 0) + 100 }, serial: ++popupSerial.current, choiceId: choice.id, initialTab };
++    const popup: MapPopup = { cell, anchor: point ?? { x: (box?.left ?? 0) + 40, y: (box?.top ?? 0) + 100 }, serial: ++popupSerial.current, choiceId: choice.id, initialTab, revealContent };
+     mapPopupRef.current = popup; setMapPopup(popup);
+   };
+   const openPickedActions = (cell: number, input: MapPointerInput, initialTab?: string) => {
+@@ -591,16 +591,19 @@ function App() {
+   const battleActive = Boolean(observation?.battleScene || battleReview && battleTransfer);
+   const ordersBusy = controlLocked || Boolean(observation?.battle || observation?.pendingCapture);
+   const navigationLocked = ordersBusy || showSetup || !observation;
+-  const nextActions = useMemo(() => observation ? actionCandidates(observation) : { armies: [], settlements: [] }, [observation]);
++  const nextActions = useMemo(() => observation ? actionCandidates(observation) : { armies: [], settlements: [], households: [] }, [observation]);
++  const unassignedHouseholds = nextActions.households.reduce((total, town) => total + town.unassignedHouseholds, 0);
+   const jumpToAction = (kind: ActionKind, direction: Direction = 1) => {
+     if (navigationLocked) return;
+     const current = selectionRef.current;
+-    const candidate = nextAction(kind === 'army' ? nextActions.armies : nextActions.settlements, kind === 'army' ? current.armyId : current.settlementId, direction);
+-    if (!candidate) { setNavigationNotice(kind === 'army' ? 'No armies currently need orders or route review.' : 'No idle settlements have an available production order.'); return; }
++    const candidates = kind === 'army' ? nextActions.armies : kind === 'household' ? nextActions.households : nextActions.settlements;
++    const candidate = nextAction(candidates, kind === 'army' ? current.armyId : current.settlementId, direction);
++    if (!candidate) { setNavigationNotice(kind === 'army' ? 'No armies currently need orders or route review.' : kind === 'household' ? 'No settlements have unassigned households.' : 'No idle settlements have an available production order.'); return; }
+     closeMapActions(); setManagementWindow(undefined);
+     setSearch(''); setForceFilter('all'); setRegistry(kind === 'army' ? 'armies' : 'settlements');
+     select({ ...(kind === 'army' ? { armyId: candidate.id } : { settlementId: candidate.id }), cell: candidate.cell }, true);
+     setNavigationNotice(`${candidate.name} · ${candidate.reason}`);
++    if (kind === 'household') openMapActions(candidate.cell, undefined, candidate.id, 'land', true);
+   };
+   const changeShortcut = (kind: keyof ShortcutBindings, value: string) => {
+     const problem = shortcutError({ army: armyKey, settlement: settlementKey, turn: turnKey }, kind, value);
+@@ -710,7 +713,7 @@ function App() {
+         <button aria-haspopup="dialog" aria-label="Realm affairs" onClick={() => openWindow('affairs')}><HudIcon symbol="diplomacy"/><span>Diplomacy{observation.diplomacy.offers.length > 0 && <b className="hud-alert"> {observation.diplomacy.offers.length}</b>}</span></button>
+         <button aria-haspopup="dialog" onClick={() => openWindow('journal')}><HudIcon symbol="journal"/><span>Campaign journal</span></button>
+         <button onClick={worldOverview}><HudIcon symbol="world"/><span>World overview</span></button>
+-      </nav><div className="map-controls"><button aria-label="Zoom in" onClick={() => renderer.current?.zoom(1.25)}>+</button><button aria-label="Zoom out" onClick={() => renderer.current?.zoom(0.8)}>−</button><button onClick={showMap}>Focus selection</button><button disabled={battleActive || selection.cell === undefined} onClick={() => { if (selection.cell !== undefined) openMapActions(selection.cell); }}>Open map actions</button><button aria-label="Map guide" title="Map guide" aria-haspopup="dialog" onClick={() => openWindow('guide')}>?</button></div><FactionOverviewControl key={registryEpoch} hidden={battleActive} factions={mapFactions} onChange={(mode, ids) => renderer.current?.setWorldOverview(mode, ids)} onFit={() => renderer.current?.fitWorld()}/><div className="map-legend"><span>⌂ Settlement</span><span title="One figure: 1 formation; two: 2–5; three: 6+. A stack shows the selected army, otherwise its largest army. Exact composition is in the army inspector.">△ Army size: 1 / 2–5 / 6+</span><span title="Co-located armies share one representative group; fleets group separately and embarked troops are not drawn. Click a hex repeatedly to cycle your forces.">×N armies on hex</span><span>◆ Your realm</span><span>Dim terrain: explored</span>{artStatus && <span data-testid="art-runtime-status" title={[artStatus.message, ...artStatus.warnings].join(" ")}>Art: {artStatus.state === 'loading' ? 'loading' : artStatus.state === 'fallback' ? 'procedural fallback' : artStatus.warnings.length ? 'partial pixel pack' : 'approved pixel pack'}</span>}</div><BattlefieldPanel key={registryEpoch} view={observation} transfer={battleTransfer} busy={controlLocked} error={error} replay={battleReview} suspended={showSetup || progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen || Boolean(managementWindow) || generating} issue={command} setScene={setBattleScene} keepReview={() => setBattleReview(true)} closeReview={() => setBattleReview(false)}/><CapturePanel view={observation} busy={controlLocked} issue={command}/></section>
++      </nav><div className="map-controls"><button aria-label="Zoom in" onClick={() => renderer.current?.zoom(1.25)}>+</button><button aria-label="Zoom out" onClick={() => renderer.current?.zoom(0.8)}>−</button><button onClick={showMap}>Focus selection</button><button disabled={battleActive || selection.cell === undefined} onClick={() => { if (selection.cell !== undefined) openMapActions(selection.cell); }}>Open map actions</button><button aria-label="Map guide" title="Map guide" aria-haspopup="dialog" onClick={() => openWindow('guide')}>?</button></div><FactionOverviewControl key={`overview:${registryEpoch}`} hidden={battleActive} factions={mapFactions} onChange={(mode, ids) => renderer.current?.setWorldOverview(mode, ids)} onFit={() => renderer.current?.fitWorld()}/><div className="map-legend"><span>⌂ Settlement</span><span title="One figure: 1 formation; two: 2–5; three: 6+. A stack shows the selected army, otherwise its largest army. Exact composition is in the army inspector.">△ Army size: 1 / 2–5 / 6+</span><span title="Co-located armies share one representative group; fleets group separately and embarked troops are not drawn. Click a hex repeatedly to cycle your forces.">×N armies on hex</span><span>◆ Your realm</span><span>Dim terrain: explored</span>{artStatus && <span data-testid="art-runtime-status" title={[artStatus.message, ...artStatus.warnings].join(" ")}>Art: {artStatus.state === 'loading' ? 'loading' : artStatus.state === 'fallback' ? 'procedural fallback' : artStatus.warnings.length ? 'partial pixel pack' : 'approved pixel pack'}</span>}</div><BattlefieldPanel key={`battlefield:${registryEpoch}`} view={observation} transfer={battleTransfer} busy={controlLocked} error={error} replay={battleReview} suspended={showSetup || progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen || Boolean(managementWindow) || generating} issue={command} setScene={setBattleScene} keepReview={() => setBattleReview(true)} closeReview={() => setBattleReview(false)}/><CapturePanel view={observation} busy={controlLocked} issue={command}/></section>
+     </main>}
+     {observation && popupActive && mapPopup && popupChoice && <MapActions
+       sessionKey={`${registryEpoch}:${mapPopup.serial}`} anchor={mapPopup.anchor} presentation={army ? 'compact' : 'default'} manageLabel="Open full orders"
+@@ -722,7 +725,7 @@ function App() {
+         mapPopupRef.current = next; setMapPopup(next);
+       }}
+       tabs={popupTabs.map(tab => ({ ...tab, render: () => <fieldset className="strategic-orders" disabled={ordersBusy}>{tab.render()}</fieldset> }))}
+-      initialTab={mapPopup.initialTab} summary={<><p className="field-help">{army ? `${army.formations.length} / ${army.formationCapacity} formations · ${army.strength} strength · ${army.movement} movement` : settlement ? `${settlement.population} people · ${settlement.queue.length} queued projects` : 'Inspection only. Unknown or foreign tiles do not grant management access.'}</p>{busy && <p role="status">Resolving orders…</p>}{error && <p role="alert">{feedback}</p>}</>}
++      revealContent={mapPopup.revealContent} initialTab={mapPopup.initialTab} summary={<><p className="field-help">{army ? `${army.formations.length} / ${army.formationCapacity} formations · ${army.strength} strength · ${army.movement} movement` : settlement ? `${settlement.population} people · ${settlement.queue.length} queued projects` : 'Inspection only. Unknown or foreign tiles do not grant management access.'}</p>{busy && <p role="status">Resolving orders…</p>}{error && <p role="alert">{feedback}</p>}</>}
+       onClose={closeMapActions} returnFocus={mapHost.current} onManageInPanel={manageInPanel}
+       suspended={progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen}
+     />}
+@@ -738,6 +741,8 @@ function App() {
+       {observation && !showSetup && !battleActive && <section className="hud-next-actions" aria-label="Next-action navigation" data-testid="next-action-navigation">
+         <p className="field-help" data-testid="next-action-counts">{nextActions.armies.length} needing orders · {nextActions.settlements.length} idle settlements</p>
+         <div><button disabled={navigationLocked || nextActions.armies.length === 0} aria-label="Previous army needing orders" title="Previous army needing orders" onClick={() => jumpToAction('army', -1)}>‹</button><button disabled={navigationLocked || nextActions.armies.length === 0} aria-label="Next army needing orders" aria-keyshortcuts={armyKey.toUpperCase()} onClick={() => jumpToAction('army')}>Next army <kbd>{armyKey.toUpperCase()}</kbd></button><button disabled={navigationLocked || nextActions.settlements.length === 0} aria-label="Previous idle settlement" title="Previous idle settlement" onClick={() => jumpToAction('settlement', -1)}>‹</button><button disabled={navigationLocked || nextActions.settlements.length === 0} aria-label="Next idle settlement" aria-keyshortcuts={settlementKey.toUpperCase()} onClick={() => jumpToAction('settlement')}>Next town <kbd>{settlementKey.toUpperCase()}</kbd></button></div>
++        <p className="field-help" data-testid="household-counts">Labor: {unassignedHouseholds} unassigned household{unassignedHouseholds === 1 ? '' : 's'} · {nextActions.households.length} settlement{nextActions.households.length === 1 ? '' : 's'}</p>
++        <div className="hud-household-actions"><button disabled={navigationLocked || nextActions.households.length === 0} aria-label="Previous settlement with unassigned households" title="Previous settlement with unassigned households" onClick={() => jumpToAction('household', -1)}>‹</button><button disabled={navigationLocked || nextActions.households.length === 0} aria-label="Next settlement with unassigned households" aria-haspopup="dialog" onClick={() => jumpToAction('household')}>Review households</button></div>
+         <span role="status" aria-live="polite" data-testid="next-action-notice" className="field-help">{navigationNotice}</span>
+       </section>}
+       {observation && <div className="hud-end-turn">{(observation.battle || observation.pendingCapture) && <p id="battle-blocker" className="battle-blocker">{observation.pendingCapture ? 'Resolve the settlement capture before ending the turn.' : 'Resolve the pending battle before ending the turn.'}</p>}<div className="turn"><small>AGE OF FRACTURE</small><strong data-testid="turn-counter">Turn {observation.turn}</strong></div><button className="primary end-turn" aria-label="End turn" aria-describedby={observation.battle || observation.pendingCapture ? 'battle-blocker' : undefined} disabled={ordersBusy || showSetup} onClick={endTurn}>End turn <kbd>{turnKey.toUpperCase()}</kbd></button></div>}
+diff --git c/apps/web/src/map-actions.tsx w/apps/web/src/map-actions.tsx
+index a56393f..a53fb24 100644
+--- c/apps/web/src/map-actions.tsx
++++ w/apps/web/src/map-actions.tsx
+@@ -17,6 +17,8 @@ export type MapActionsProps = {
+   onSelect: (id: string) => void;
+   tabs: readonly MapActionTab[];
+   initialTab?: string;
++  /** Attention shortcuts reveal the requested pane, not offscreen context chrome. */
++  revealContent?: boolean;
+   summary?: ReactNode;
+   onClose: (reason: 'close' | 'escape' | 'outside') => void;
+   returnFocus?: HTMLElement | null;
+@@ -138,7 +140,16 @@ export function MapActions(props: MapActionsProps) {
+     else if (!opener.current?.isConnected) opener.current = null;
+     heading.current?.focus({ preventScroll: true });
+   }, [sessionKey, suspended]);
+-  useEffect(() => { body.current?.scrollTo({ top: 0 }); }, [selectionKey, active?.id]);
++  // Only explicit attention reveals follow the final measured HUD allocation;
++  // ordinary map inspectors retain their scroll position when the HUD resizes.
++  const revealHeight = props.revealContent ? position.maxHeight : 0;
++  useEffect(() => {
++    const scroller = body.current, pane = scroller?.querySelector<HTMLElement>('[role="tabpanel"]');
++    if (!scroller) return;
++    const top = props.revealContent && active?.id === initialTab && pane
++      ? scroller.scrollTop + pane.getBoundingClientRect().top - scroller.getBoundingClientRect().top : 0;
++    scroller.scrollTo({ top });
++  }, [selectionKey, active?.id, initialTab, props.revealContent, revealHeight]);
+ 
+   const dismiss = (reason: 'close' | 'escape' | 'outside') => {
+     latest.current.onClose(reason);
+diff --git c/apps/web/src/next-action.test.ts w/apps/web/src/next-action.test.ts
+index 54663cc..e0ac834 100644
+--- c/apps/web/src/next-action.test.ts
++++ w/apps/web/src/next-action.test.ts
+@@ -1,6 +1,7 @@
+ import { describe, expect, it } from 'vitest';
+ import { applyCommand, createGame, getObservation, stateHash, type ArmyView, type Observation } from '@theandril/sim';
+ import { conquestCampaign } from '../../../packages/test-fixtures/src/conquest-fixture';
++import { growingHouseholdCampaign } from '../../../tests/gameplay/household-fixture';
+ import { actionCandidates, actionShortcut, loadShortcuts, nextAction, saveShortcuts, shortcutError, type ActionCandidate } from './next-action';
+ 
+ const game = createGame({ seed: 20260905, size: 'tiny', factionCount: 2 });
+@@ -11,6 +12,46 @@ const bindings = { army: 'n', settlement: 's', turn: 'e' };
+ const keyEvent = { key: 'n', shiftKey: false, ctrlKey: false, altKey: false, metaKey: false, repeat: false, isComposing: false, defaultPrevented: false };
+ 
+ describe('observed-only next-action navigation', () => {
++  it('reports newly unassigned households after real growth even while the town has a full production queue', () => {
++    const game = growingHouseholdCampaign(), factionId = game.turnOwnerId;
++    const before = getObservation(game, factionId, { landDetails: 'none' });
++    expect(before.land.settlements[0]!.workerCapacity).toBe(before.land.settlements[0]!.worked.length);
++    expect(applyCommand(game, { type: 'endTurn', factionId }).ok).toBe(true);
++    const view = getObservation(game, factionId, { landDetails: 'none' });
++    const town = view.settlements.find(town => town.factionId === factionId)!;
++    expect(town.queue.length).toBeGreaterThan(0);
++    expect(view.land.settlements[0]!.cells).toEqual([]);
++    expect(view.land.settlements[0]!.workerCapacity - view.land.settlements[0]!.worked.length).toBe(1);
++    const hash = stateHash(game), observation = JSON.stringify(view);
++    const attention = actionCandidates(view);
++    expect(attention.settlements).toEqual([]);
++    expect(attention.households).toEqual([{ id: town.id, name: town.name, cell: town.cell, unassignedHouseholds: 1,
++      reason: '1 unassigned household. Review land to assign worked tiles; unassigned households add no tile yields.' }]);
++    expect(JSON.stringify(view)).toBe(observation); expect(stateHash(game)).toBe(hash);
++  });
++
++  it('uses observed capacity rather than population, excludes missing/foreign/full summaries and orders labor by stable ID', () => {
++    const game = growingHouseholdCampaign(), view = getObservation(game, game.turnOwnerId, { landDetails: 'none' });
++    const town = view.settlements[0]!, land = view.land.settlements[0]!;
++    view.settlements = [
++      { ...town, id: 'town.3', population: 99 }, { ...town, id: 'town.1', population: 99 },
++      { ...town, id: 'town.2' }, { ...town, id: 'town.foreign', factionId: 'foreign' }, { ...town, id: 'town.missing' },
++    ];
++    view.land.settlements = [
++      { ...land, settlementId: 'town.3', workerCapacity: 3 }, { ...land, settlementId: 'town.1', workerCapacity: 2 },
++      { ...land, settlementId: 'town.2' }, { ...land, settlementId: 'town.foreign', workerCapacity: 99 },
++      { ...land, settlementId: 'town.unknown', workerCapacity: 99 },
++    ];
++    const before = JSON.stringify(view), households = actionCandidates(view).households;
++    expect(households.map(({ id, unassignedHouseholds }) => ({ id, unassignedHouseholds }))).toEqual([
++      { id: 'town.1', unassignedHouseholds: 1 }, { id: 'town.3', unassignedHouseholds: 2 },
++    ]);
++    expect(nextAction(households, 'town.3')?.id).toBe('town.1');
++    expect(nextAction(households, 'town.1', -1)?.id).toBe('town.3');
++    expect(households[1]!.reason).toContain('2 unassigned households.');
++    expect(JSON.stringify(view)).toBe(before);
++  });
++
+   it('includes land/fleets and zero-movement paused routes but skips foreign, dead, embarked, busy and automatic forces', () => {
+     const view = {
+       ...initial,
+diff --git c/apps/web/src/next-action.ts w/apps/web/src/next-action.ts
+index 63c3e96..c21de05 100644
+--- c/apps/web/src/next-action.ts
++++ w/apps/web/src/next-action.ts
+@@ -1,8 +1,9 @@
+ import type { Observation } from '@theandril/sim';
+ 
+ export interface ActionCandidate { id: string; name: string; cell: number; reason: string }
+-export interface ActionCandidates { armies: ActionCandidate[]; settlements: ActionCandidate[] }
+-export type ActionKind = 'army' | 'settlement';
++export interface HouseholdCandidate extends ActionCandidate { unassignedHouseholds: number }
++export interface ActionCandidates { armies: ActionCandidate[]; settlements: ActionCandidate[]; households: HouseholdCandidate[] }
++export type ActionKind = 'army' | 'settlement' | 'household';
+ export type Direction = 1 | -1;
+ export interface ShortcutBindings { army: string; settlement: string; turn: string }
+ export const SHORTCUT_STORAGE_KEY = 'theandril.shortcuts.v1';
+@@ -10,7 +11,7 @@ export const DEFAULT_SHORTCUTS: ShortcutBindings = { army: 'n', settlement: 's',
+ const byId = (a: ActionCandidate, b: ActionCandidate) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+ 
+ /** Navigation hints only: all actual orders remain validated by simulation. */
+-export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'sieges'>): ActionCandidates {
++export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'sieges' | 'land'>): ActionCandidates {
+   const routes = new Map(view.routes.map(route => [route.armyId, route]));
+   const besiegers = new Set(view.sieges.map(siege => siege.armyId));
+   const armies: ActionCandidate[] = [];
+@@ -24,7 +25,16 @@ export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies'
+   const canProduce = new Set(view.productionOptions.filter(option => option.canQueue).map(option => option.settlementId));
+   const settlements = view.settlements.filter(town => town.factionId === view.factionId && town.queue.length === 0 && canProduce.has(town.id))
+     .map(town => ({ id: town.id, name: town.name, cell: town.cell, reason: 'Empty production queue; an available project can be ordered.' }));
+-  return { armies: armies.sort(byId), settlements: settlements.sort(byId) };
++  // Compact canonical totals, independent of queue status and paged tile quotes.
++  // Do not infer worker capacity from population or choose/spend on tiles here.
++  const ownedTowns = new Map(view.settlements.filter(town => town.factionId === view.factionId).map(town => [town.id, town]));
++  const households: HouseholdCandidate[] = [];
++  for (const land of view.land.settlements) {
++    const town = ownedTowns.get(land.settlementId), unassignedHouseholds = land.workerCapacity - land.worked.length;
++    if (town && unassignedHouseholds > 0) households.push({ id: town.id, name: town.name, cell: town.cell, unassignedHouseholds,
++      reason: `${unassignedHouseholds} unassigned household${unassignedHouseholds === 1 ? '' : 's'}. Review land to assign worked tiles; unassigned households add no tile yields.` });
++  }
++  return { armies: armies.sort(byId), settlements: settlements.sort(byId), households: households.sort(byId) };
+ }
+ 
+ /** Advance from the selected ID even if it stopped being eligible; stable wrap. */
+diff --git c/apps/web/src/siege.tsx w/apps/web/src/siege.tsx
+index ae06be9..a0a25eb 100644
+--- c/apps/web/src/siege.tsx
++++ w/apps/web/src/siege.tsx
+@@ -1,6 +1,7 @@
+ import { useEffect, useRef, useState } from 'react';
+ import { neighbors } from '@theandril/mapgen';
+ import type { ArmyView, GameCommand, Observation, Settlement } from '@theandril/sim';
++import { BattleDefensePreview } from './battle-defense';
+ 
+ type IssueOrder = (command: GameCommand) => void;
+ const factionName = (view: Observation, id: string): string => view.factions.find(faction => faction.id === id)?.name ?? id;
+@@ -19,6 +20,7 @@ export function SiegeOrders({ army, view, busy, issue }: { army: ArmyView; view:
+     {current ? <div className="siege-card" data-testid={`siege-${current.settlementId}`}>
+       <strong>Besieging {view.settlements.find(town => town.id === current.settlementId)?.name ?? current.settlementId}</strong>
+       <SiegeStrength siege={current}/>
++      <BattleDefensePreview defense={current.battleDefense}/>
+       {current.assaultBlocker && <p className="field-help" role="status">{current.assaultBlocker}</p>}
+       <button className="danger wide" disabled={busy || !current.canAssault} aria-label={`Assault ${view.settlements.find(town => town.id === current.settlementId)?.name ?? current.settlementId}`} onClick={() => issue({ type: 'assault', factionId: view.factionId, settlementId: current.settlementId })}>Assault settlement</button>
+       <button className="wide" disabled={busy} aria-label={`Lift siege of ${view.settlements.find(town => town.id === current.settlementId)?.name ?? current.settlementId}`} onClick={() => issue({ type: 'liftSiege', factionId: view.factionId, settlementId: current.settlementId })}>Lift siege</button>
+diff --git c/apps/web/src/warfare.tsx w/apps/web/src/warfare.tsx
+index e3e9ec7..d189dc4 100644
+--- c/apps/web/src/warfare.tsx
++++ w/apps/web/src/warfare.tsx
+@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
+ import { UNITS } from '@theandril/content';
+ import { neighbors } from '@theandril/mapgen';
+ import type { ArmyView, BattleReport, BattleState, GameCommand, Observation } from '@theandril/sim';
++import { BattleDefensePreview } from './battle-defense';
+ 
+ type IssueOrder = (command: GameCommand) => void;
+ const terrainNames = ['Water', 'Plains', 'Forest', 'Hills', 'Mountains'];
+@@ -21,11 +22,12 @@ export function AttackOrders({ army, view, busy, issue, terrain }: { army: ArmyV
+       <small>{factionName(view, target.factionId)} · hex {target.cell}</small>
+       <p>{target.strength} strength · {target.morale} morale · {target.fatigue} fatigue</p>
+       <p>{terrainNames[terrain(target.cell) ?? -1] ?? 'Unknown terrain'} · {view.armies.filter(other => other.cell === target.cell && other.factionId === target.factionId).reduce((sum, other) => sum + other.formations.length, 0)} defending formations</p>
++      <BattleDefensePreview defense={target.battleDefense}/>
+       {view.wars.includes(target.factionId)
+         ? <button className="danger wide" disabled={busy || Boolean(view.battle)} data-testid={`attack-${target.id}`} aria-label={`Attack ${target.name} (${target.id})`} onClick={() => issue({ type: 'attack', factionId: view.factionId, armyId: army.id, targetArmyId: target.id })}>Attack {target.name}</button>
+         : <p className="field-help">Declare war from the encountered factions list before attacking.</p>}
+     </div>)}
+-    {targets.length > 0 && <p className="field-help">The battle includes every defending {army.domain === 'naval' ? 'naval' : 'land'} formation at that hex. {army.domain === 'naval' ? 'Passengers do not fight as ship formations; destroyed transport capacity can drown them.' : 'Forests provide cover and hills favor defenders.'} Command each round or let your officers resolve the engagement.</p>}
++    {targets.length > 0 && <p className="field-help">{targets.some(target => target.battleDefense) ? 'Committed defenders and reserves are listed for each target.' : `The battle includes every defending ${army.domain === 'naval' ? 'naval' : 'land'} formation at that hex.`} {army.domain === 'naval' ? 'Passengers do not fight as ship formations; destroyed transport capacity can drown them.' : 'Forests provide cover and hills favor defenders.'} Command each round or let your officers resolve the engagement.</p>}
+   </section>;
+ }
+ 
+diff --git 1/apps/web/src/battle-defense.test.tsx 2/apps/web/src/battle-defense.test.tsx
+new file mode 100644
+index 0000000..1e37a07
+--- /dev/null
++++ 2/apps/web/src/battle-defense.test.tsx
+@@ -0,0 +1,41 @@
++import { createElement } from 'react';
++import { renderToStaticMarkup } from 'react-dom/server';
++import { describe, expect, it } from 'vitest';
++import { applyCommand, getObservation } from '@theandril/sim';
++import { borderBattleCampaign } from '../../../packages/test-fixtures/src/combat-fixture';
++import { conquestCampaign, CONQUEST_FIXTURE as C } from '../../../packages/test-fixtures/src/conquest-fixture';
++import { AttackOrders } from './warfare';
++import { SiegeOrders } from './siege';
++
++const noOrder = () => { throw new Error('Rendering an attack preview must never issue an order.'); };
++describe('canonical defending-contingent presentation', () => {
++  it('shows the canonical defending contingent and reserves beside an existing siege assault control', () => {
++    const state = conquestCampaign(), factionId = state.turnOwnerId;
++    expect(applyCommand(state, { type: 'declareWar', factionId, targetFactionId: state.settlements[C.settlementId]!.factionId }).ok).toBe(true);
++    expect(applyCommand(state, { type: 'besiege', factionId, armyId: C.playerArmyId, settlementId: C.settlementId }).ok).toBe(true);
++    const view = getObservation(state, factionId), siege = view.sieges[0]!;
++    siege.battleDefense = { engagedFormations: 12, engagedStrength: 193, reserveFormations: 1, reserveStrength: 17 };
++    const before = JSON.stringify(view);
++    const html = renderToStaticMarkup(createElement(SiegeOrders, { army: view.armies.find(army => army.id === C.playerArmyId)!, view, busy: false, issue: noOrder }));
++    expect(html).toContain('Assault settlement');
++    expect(html).toContain('Committed defense: 12 formations · 193 strength');
++    expect(html).toContain('Reserves: 1 formation · 17 strength');
++    expect(html).toContain('must be defeated before advancing or capturing this location');
++    expect(JSON.stringify(view)).toBe(before);
++  });
++
++  it('shows exact committed and reserve values beside attack controls without claiming all defenders will fight', () => {
++    const state = borderBattleCampaign(), view = getObservation(state, state.turnOwnerId);
++    const army = view.armies.find(army => army.id === 'army.2')!, target = view.armies.find(army => army.id === 'army.4')!;
++    // Deliberately non-derived read-model quote: presentation must not reconstruct
++    // a contingent from the nearby army list or enforce a client formation cap.
++    target.battleDefense = { engagedFormations: 7, engagedStrength: 113, reserveFormations: 3, reserveStrength: 29 };
++    const before = JSON.stringify(view);
++    const html = renderToStaticMarkup(createElement(AttackOrders, { army, view, busy: false, issue: noOrder, terrain: () => 1 }));
++    expect(html).toContain('Committed defense: 7 formations · 113 strength');
++    expect(html).toContain('Reserves: 3 formations · 29 strength');
++    expect(html).toContain('Whole armies fight together. Reserves defend in later engagements');
++    expect(html).not.toContain('The battle includes every defending');
++    expect(JSON.stringify(view)).toBe(before);
++  });
++});
+diff --git 1/apps/web/src/battle-defense.tsx 2/apps/web/src/battle-defense.tsx
+new file mode 100644
+index 0000000..785a5c0
+--- /dev/null
++++ 2/apps/web/src/battle-defense.tsx
+@@ -0,0 +1,11 @@
++import type { ArmyView } from '@theandril/sim';
++
++/** A canonical quote, not a client-side selection or combat-cap calculation. */
++export function BattleDefensePreview({ defense }: { defense: ArmyView['battleDefense'] }) {
++  if (!defense) return null;
++  return <div className="field-help" data-testid="battle-defense-preview">
++    <p>Committed defense: {defense.engagedFormations} formation{defense.engagedFormations === 1 ? '' : 's'} · {defense.engagedStrength} strength</p>
++    <p>Reserves: {defense.reserveFormations} formation{defense.reserveFormations === 1 ? '' : 's'} · {defense.reserveStrength} strength</p>
++    <p>Whole armies fight together. Reserves defend in later engagements and must be defeated before advancing or capturing this location.</p>
++  </div>;
++}
+diff --git 1/apps/web/src/campaign-lifecycle.test.ts 2/apps/web/src/campaign-lifecycle.test.ts
+new file mode 100644
+index 0000000..2b7c3f0
+--- /dev/null
++++ 2/apps/web/src/campaign-lifecycle.test.ts
+@@ -0,0 +1,34 @@
++import { readFileSync } from 'node:fs';
++import { runInNewContext } from 'node:vm';
++import ts from 'typescript';
++import { describe, expect, it } from 'vitest';
++
++// Source-level identity guard complements the real load/import browser scenario.
++// Do not mount App with a mocked worker or replace its imperative renderer.
++const source = ts.createSourceFile('main.tsx', readFileSync(new URL('./main.tsx', import.meta.url), 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
++function keyFor(component: string, epoch: number): unknown {
++  let expression: string | undefined;
++  function visit(node: ts.Node) {
++    if (ts.isJsxSelfClosingElement(node) && node.tagName.getText(source) === component) {
++      const key = node.attributes.properties.find(item => ts.isJsxAttribute(item) && item.name.getText(source) === 'key');
++      if (key && ts.isJsxAttribute(key) && key.initializer && ts.isJsxExpression(key.initializer)) expression = key.initializer.expression?.getText(source);
++    }
++    ts.forEachChild(node, visit);
++  }
++  visit(source);
++  if (!expression) throw new Error(`Missing campaign reset key on ${component}`);
++  return runInNewContext(expression, { registryEpoch: epoch });
++}
++
++describe('campaign presentation replacement identity', () => {
++  it('gives overview and battlefield distinct identities while resetting both on every campaign epoch', () => {
++    const overview: unknown[] = [], battlefield: unknown[] = [];
++    for (const epoch of [0, 1, 2, 8]) {
++      overview.push(keyFor('FactionOverviewControl', epoch));
++      battlefield.push(keyFor('BattlefieldPanel', epoch));
++      expect(overview.at(-1)).not.toBe(battlefield.at(-1));
++    }
++    expect(new Set(overview).size).toBe(4);
++    expect(new Set(battlefield).size).toBe(4);
++  });
++});
+diff --git 1/tests/gameplay/battle-defense.spec.ts 2/tests/gameplay/battle-defense.spec.ts
+new file mode 100644
+index 0000000..16f4f01
+--- /dev/null
++++ 2/tests/gameplay/battle-defense.spec.ts
+@@ -0,0 +1,197 @@
++import { expect, test, type Page, type Locator } from '@playwright/test';
++import { applyCommand, createArmyFormation, deserializeGame, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
++import { exportSave } from '@theandril/persistence';
++import { borderBattleCampaign } from '../../packages/test-fixtures/src/combat-fixture';
++import { conquestCampaign, CONQUEST_FIXTURE as C } from '../../packages/test-fixtures/src/conquest-fixture';
++import { refreshAuthoredSight } from '../../packages/test-fixtures/src/authored-land';
++import { closeManagement, openRealmAffairs, openSelectedOrders } from './ui-navigation';
++import { expectLocalMapPixels } from './map-pixel-evidence';
++
++/** Authored full-container reserve stress fixture; no naturally earned force-size claim.
++ * Uses the same setup as the parent's canonical frontage regression tests.
++ * Siege preparation uses three simulation ticks without AI scheduling; browser
++ * AI turns can legally change this deliberately fragile 21-defender setup.
++ * Assaults, autoresolve, the later live AI turn and capture use public controls. */
++function reserveCampaign(siege: boolean): GameState {
++  let state = siege ? conquestCampaign() : borderBattleCampaign();
++  const town = state.settlements[C.settlementId]!;
++  if (siege) {
++    const attackers = state.armies[C.playerArmyId]!;
++    attackers.formations = Array.from({ length: 12 }, (_, index) => createArmyFormation(index === 0 ? attackers.id : `army.${state.nextId++}`, 'unit.guard')).sort((a, b) => a.id < b.id ? -1 : 1);
++  }
++  for (let index = 0; index < 21; index++) {
++    const id = !siege && index === 0 ? 'army.4' : `army.${state.nextId++}`;
++    const original = state.armies['army.4'];
++    state.armies[id] = { id, name: `Reserve defender ${index}`, factionId: town.factionId,
++      cell: siege ? town.cell : original!.cell, movement: 0,
++      formations: [{ ...createArmyFormation(id, 'unit.scout'), strength: 1, morale: 1 }] };
++  }
++  refreshAuthoredSight(state);
++  state = deserializeGame(serializeGame(state));
++  if (siege) {
++    const factionId = state.turnOwnerId;
++    const issue = (command: GameCommand) => {
++      const result = applyCommand(state, command);
++      if (!result.ok) throw new Error(`Reserve fixture ${command.type}: ${result.error}`);
++    };
++    issue({ type: 'declareWar', factionId, targetFactionId: town.factionId });
++    issue({ type: 'besiege', factionId, armyId: C.playerArmyId, settlementId: town.id });
++    for (let turn = 0; turn < 3; turn++) issue({ type: 'endTurn', factionId });
++  }
++  return deserializeGame(serializeGame(state));
++}
++async function importAndDeclare(page: Page, game: GameState) {
++  await page.goto('/');
++  await page.locator('input[type=file]').setInputFiles({ name: 'reserve-contingent.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(game))) });
++  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
++  if (!Object.keys(game.sieges).length) {
++    await openRealmAffairs(page);
++    await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
++  }
++  await openSelectedOrders(page);
++}
++async function assertQuote(panel: Locator, quote: { engagedFormations: number; engagedStrength: number; reserveFormations: number; reserveStrength: number }) {
++  await expect(panel).toContainText(`Committed defense: ${quote.engagedFormations} formations · ${quote.engagedStrength} strength`);
++  await expect(panel).toContainText(`Reserves: ${quote.reserveFormations} formation · ${quote.reserveStrength} strength`);
++  await expect(panel).toContainText('Reserves defend in later engagements');
++}
++
++test('R03 public attack previews the canonical contingent and leaves its reserve on the map', async ({ page }, info) => {
++  const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
++  await importAndDeclare(page, reserveCampaign(false));
++  const target = page.locator('.attack-target').filter({ has: page.getByRole('button', { name: 'Attack Reserve defender 0 (army.4)', exact: true }) });
++  const before = await page.evaluate(() => { const api = window.__THEANDRIL__!, view = api.getSummary()!; return { hash: api.getStateHash(), army: view.ownArmies.find(army => army.id === 'army.2')!, target: view.armies.find(army => army.id === 'army.4')! }; });
++  expect(before.target.battleDefense).toBeDefined();
++  await assertQuote(target.getByTestId('battle-defense-preview'), before.target.battleDefense!);
++  await target.screenshot({ path: info.outputPath('field-defense-desktop.png') });
++  expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(before.hash);
++  await target.getByRole('button', { name: 'Attack Reserve defender 0 (army.4)', exact: true }).click();
++  await expect(page.getByTestId('battle-panel')).toBeVisible();
++  expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.battle!.combat.defender.length)).toBe(before.target.battleDefense!.engagedFormations);
++  await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
++  await expect(page.getByTestId('battle-panel')).toHaveCount(0);
++  const after = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!);
++  expect(after.ownArmies.find(army => army.id === before.army.id)!.cell).toBe(before.army.cell);
++  expect(after.armies.filter(army => army.cell === before.target.cell && army.factionId === before.target.factionId)).toHaveLength(1);
++  await info.attach('field-defense', { body: JSON.stringify({ before, afterArmies: after.armies, errors }, null, 2), contentType: 'application/json' });
++  expect(errors).toEqual([]);
++});
++
++test('R03 siege preview fits 390px and desktop public assaults clear reserves before capture', async ({ page }, info) => {
++  const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
++  await importAndDeclare(page, reserveCampaign(true));
++  await expect(page.getByTestId('turn-counter')).toHaveText('Turn 4');
++  await openSelectedOrders(page); await page.setViewportSize({ width: 390, height: 844 });
++  const card = page.getByTestId(`siege-${C.settlementId}`);
++  const before = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), siege: window.__THEANDRIL__!.getSummary()!.sieges[0]! }));
++  expect(before.siege.battleDefense?.reserveFormations).toBe(1);
++  await assertQuote(card.getByTestId('battle-defense-preview'), before.siege.battleDefense!);
++  await card.screenshot({ path: info.outputPath('siege-defense-390.png') });
++  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
++  expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(before.hash);
++  // Narrow coverage is the new preview. The capture panel has a
++  // separate 390px pointer-occlusion failure retained in the v2 run evidence.
++  await page.setViewportSize({ width: 1440, height: 1000 });
++  await page.getByRole('button', { name: 'Assault Reedwatch', exact: true }).click();
++  await expect(page.getByTestId('battle-panel')).toBeVisible();
++  await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
++  await expect(page.getByTestId('battle-panel')).toHaveCount(0);
++  await expect(page.getByTestId('capture-panel')).toHaveCount(0);
++  const contested = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!);
++  expect(contested.sieges).toHaveLength(1); expect(contested.pendingCapture).toBeNull();
++  await closeManagement(page);
++  await page.getByRole('button', { name: 'End turn', exact: true }).click();
++  await expect(page.getByTestId('turn-counter')).toHaveText('Turn 5');
++  await openSelectedOrders(page);
++  await expect(card.getByTestId('battle-defense-preview')).toHaveCount(0);
++  await page.getByRole('button', { name: 'Assault Reedwatch', exact: true }).click();
++  await expect(page.getByTestId('battle-panel')).toBeVisible();
++  await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
++  await expect(page.getByTestId('capture-panel')).toBeVisible();
++  await page.getByRole('button', { name: 'Occupy settlement', exact: true }).click();
++  await expect(page.getByTestId('capture-panel')).toHaveCount(0);
++  expect(await page.evaluate(id => window.__THEANDRIL__!.getSummary()!.ownSettlements.some(town => town.id === id), C.settlementId)).toBe(true);
++  await info.attach('siege-defense', { body: JSON.stringify({ before, contestedSieges: contested.sieges, errors }, null, 2), contentType: 'application/json' });
++  expect(errors).toEqual([]);
++});
++
++for (const textScale of ['1', '1.3']) test(`R03 narrow public assaults complete occupation at 390px without intercepted controls${textScale === '1' ? '' : ' at 130% text'}`, async ({ page }, info) => {
++  const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
++  await page.setViewportSize({ width: 390, height: 844 });
++  await importAndDeclare(page, reserveCampaign(true));
++  if (textScale !== '1') {
++    await closeManagement(page);
++    const settings = page.getByTestId('campaign-menu').locator(':scope > summary');
++    await settings.click();
++    await page.getByRole('combobox', { name: 'Text scale', exact: true }).selectOption(textScale);
++    await settings.click();
++    await openSelectedOrders(page);
++  }
++  const canvas = await page.locator('canvas').elementHandle();
++  const card = page.getByTestId(`siege-${C.settlementId}`);
++  const before = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.sieges[0]!);
++  expect(before.battleDefense?.reserveFormations).toBe(1);
++  await assertQuote(card.getByTestId('battle-defense-preview'), before.battleDefense!);
++  await page.getByRole('button', { name: 'Assault Reedwatch', exact: true }).click();
++  await expect(page.getByTestId('battle-panel')).toBeVisible();
++  await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
++  await expect(page.getByTestId('battle-panel')).toHaveCount(0);
++  await expect(page.getByTestId('capture-panel')).toHaveCount(0);
++  const contested = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!);
++  expect(contested.sieges).toHaveLength(1); expect(contested.pendingCapture).toBeNull();
++  await closeManagement(page);
++  // This is a real scheduled AI turn, not an in-browser resource/state grant.
++  await page.getByRole('button', { name: 'End turn', exact: true }).click();
++  await expect(page.getByTestId('turn-counter')).toHaveText('Turn 5');
++  await openSelectedOrders(page);
++  await page.getByRole('button', { name: 'Assault Reedwatch', exact: true }).click();
++  await expect(page.getByTestId('battle-panel')).toBeVisible();
++  await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
++  await expect(page.getByTestId('capture-panel')).toBeVisible();
++  await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeDisabled();
++  await page.screenshot({ path: info.outputPath('capture-prompt-390.png') });
++  const occupy = page.getByRole('button', { name: 'Occupy settlement', exact: true });
++  // Trial uses the same native scrolling/actionability checks as a real click;
++  // scrollIntoViewIfNeeded alone can leave enlarged text under the top bar.
++  await occupy.click({ trial: true, timeout: 10000 });
++  await page.screenshot({ path: info.outputPath('capture-occupy-ready-390.png') });
++  const layout = await occupy.evaluate(button => {
++    const box = button.getBoundingClientRect();
++    const hit = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
++    return {
++      viewport: { width: innerWidth, height: innerHeight }, button: box.toJSON(),
++      hit: hit?.outerHTML, receivesPointer: button.contains(hit),
++      layers: ['.map-host', '.hud-tools', '.capture-panel'].map(selector => {
++        const element = document.querySelector(selector)!;
++        const style = getComputedStyle(element);
++        return { selector, box: element.getBoundingClientRect().toJSON(), position: style.position, zIndex: style.zIndex, overflow: style.overflow };
++      }),
++    };
++  });
++  await info.attach('narrow-capture-before', { body: JSON.stringify({ before, contestedSieges: contested.sieges, layout }, null, 2), contentType: 'application/json' });
++  expect(layout.receivesPointer).toBe(true);
++  const decisionHash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
++  // Scroll to the lower destructive choice, then return without issuing it.
++  await page.getByRole('button', { name: 'Raze settlement', exact: true }).click();
++  await expect(page.getByRole('group', { name: 'Confirm settlement destruction', exact: true })).toBeVisible();
++  await expect(page.getByRole('button', { name: 'Keep settlement', exact: true })).toBeFocused();
++  await page.screenshot({ path: info.outputPath('capture-raze-review-390.png') });
++  await page.getByRole('button', { name: 'Keep settlement', exact: true }).click();
++  expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(decisionHash);
++  // Ordinary pointer action is the acceptance boundary; no force or viewport escape.
++  await occupy.click({ timeout: 10000 });
++  await expect(page.getByTestId('capture-panel')).toHaveCount(0);
++  await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
++  const after = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), view: window.__THEANDRIL__!.getSummary()! }));
++  expect(after.view.pendingCapture).toBeNull();
++  expect(after.view.ownSettlements.some(town => town.id === C.settlementId)).toBe(true);
++  expect(await canvas!.evaluate(element => element === document.querySelector('canvas'))).toBe(true);
++  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
++  expect(page.viewportSize()).toEqual({ width: 390, height: 844 });
++  await closeManagement(page);
++  await page.getByRole('button', { name: 'Focus selection', exact: true }).click();
++  await expectLocalMapPixels(page, info, 'capture-completed-390');
++  await page.screenshot({ path: info.outputPath('capture-completed-390.png') });
++  await info.attach('narrow-capture-after', { body: JSON.stringify({ hash: after.hash, pendingCapture: after.view.pendingCapture, town: after.view.ownSettlements.find(town => town.id === C.settlementId), errors }, null, 2), contentType: 'application/json' });
++  expect(errors).toEqual([]);
++});
+diff --git 1/tests/gameplay/hermes-ui-slices.spec.ts 2/tests/gameplay/hermes-ui-slices.spec.ts
+new file mode 100644
+index 0000000..4ecd523
+--- /dev/null
++++ 2/tests/gameplay/hermes-ui-slices.spec.ts
+@@ -0,0 +1,180 @@
++import { expect, test, type Page, type TestInfo } from '@playwright/test';
++import { readFile, writeFile } from 'node:fs/promises';
++import { deserializeGame, serializeGame, type GameState } from '@theandril/sim';
++import { exportSave } from '@theandril/persistence';
++import { FACTIONS } from '@theandril/content';
++import { characterCampaign, CHARACTER_FIXTURE as C } from '../../packages/test-fixtures/src/character-fixture';
++import { borderBattleCampaign } from '../../packages/test-fixtures/src/combat-fixture';
++import { closeCampaignOptions, closeManagement, openRealmAffairs, openSelectedOrders, selectFromRegistry } from './ui-navigation';
++import { expectLocalMapPixels } from './map-pixel-evidence';
++
++async function importCampaign(page: Page, state: GameState) {
++  await page.locator('input[type=file]').setInputFiles({ name: 'hermes-ui-slice.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
++  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
++}
++async function evidence(info: TestInfo, name: string, value: unknown) {
++  await info.attach(name, { body: JSON.stringify(value, null, 2), contentType: 'application/json' });
++}
++async function settings(page: Page) {
++  const menu = page.getByTestId('campaign-menu');
++  if (await menu.getAttribute('open') === null) await menu.locator(':scope > summary').click();
++}
++
++test('R23 repeated public loads and cross-size imports retain one responsive map control and canvas', async ({ page, browser }, info) => {
++  const consoleMessages: string[] = [], errors: string[] = [], records: unknown[] = [];
++  page.on('console', message => { if (message.type() === 'error' || message.type() === 'warning') consoleMessages.push(message.text()); });
++  page.on('pageerror', error => errors.push(error.message));
++  const cdp = await page.context().newCDPSession(page);
++  const saveEvidence = () => writeFile(info.outputPath('lifecycle.json'), JSON.stringify({ browser: browser.version(), consoleMessages, errors, records }, null, 2));
++  let initialListeners: Record<string, number> | undefined;
++  const capture = async (stage: string) => {
++    await expect(page.getByRole('button', { name: 'Save campaign', exact: true, includeHidden: true })).toBeEnabled();
++    const dom = await page.evaluate(() => ({ controls: document.querySelectorAll('[data-testid=faction-overview-control]').length, canvases: document.querySelectorAll('canvas').length, mapNodes: document.querySelector('[data-testid=map-container]')!.querySelectorAll('*').length, debugHookPresent: Boolean(window.__THEANDRIL__) }));
++    const listeners: Record<string, number> = {};
++    for (const expression of ['window', 'document', 'document.querySelector("canvas")']) {
++      const { result } = await cdp.send('Runtime.evaluate', { expression });
++      if (result.objectId) {
++        listeners[expression] = (await cdp.send('DOMDebugger.getEventListeners', { objectId: result.objectId })).listeners.length;
++        await cdp.send('Runtime.releaseObject', { objectId: result.objectId });
++      }
++    }
++    records.push({ stage, ...dom, listeners }); await saveEvidence();
++    console.log(JSON.stringify({ stage, ...dom, listeners }));
++    expect.soft(dom.controls, stage).toBe(1); expect.soft(dom.canvases, stage).toBe(1);
++    initialListeners ??= listeners;
++    expect.soft(listeners, `${stage} attached listener counts`).toEqual(initialListeners);
++  };
++  try {
++    await page.goto('/');
++    await page.getByRole('textbox', { name: 'World seed', exact: true }).fill('20260909');
++    await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('small');
++    await page.getByRole('spinbutton', { name: 'Faction count', exact: true }).fill('12');
++    await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
++    await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
++    const canvas = await page.locator('canvas').elementHandle();
++    await capture('generated-small12'); await settings(page);
++    await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
++    await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
++    const downloading = page.waitForEvent('download');
++    await page.getByRole('button', { name: 'Export campaign', exact: true }).click();
++    const download = await downloading, downloadedPath = await download.path();
++    if (!downloadedPath) throw new Error('Missing exported Small campaign');
++    const small = await readFile(downloadedPath);
++    for (let index = 1; index <= 4; index++) {
++      await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
++      await expect(page.getByTestId('feedback')).toContainText('Campaign restored');
++      await capture(`load-${index}`);
++    }
++    const tiny = Buffer.from(await exportSave(serializeGame(borderBattleCampaign())));
++    for (let index = 1; index <= 4; index++) {
++      await page.locator('input[type=file]').setInputFiles({ name: `replacement-${index}.theandril`, mimeType: 'application/gzip', buffer: index % 2 ? small : tiny });
++      await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
++      await capture(`import-${index}-${index % 2 ? 'small' : 'tiny'}`);
++    }
++    await page.locator('input[type=file]').setInputFiles({ name: 'corrupt.theandril', mimeType: 'application/gzip', buffer: Buffer.from('not a save') });
++    await expect(page.getByTestId('feedback')).toHaveClass(/error/);
++    await capture('failed-import');
++    await closeCampaignOptions(page);
++    // Use the newest actual control even during RED, so all replacement counts
++    // are retained instead of stopping at the first duplicate locator error.
++    const control = page.getByTestId('faction-overview-control').last();
++    await control.locator(':scope > summary').click();
++    await control.getByRole('button', { name: 'Realms', exact: true }).click();
++    await expect(control.getByRole('button', { name: 'Realms', exact: true })).toHaveAttribute('aria-pressed', 'true');
++    await control.getByRole('button', { name: 'Clear realms', exact: true }).click();
++    for (const checkbox of await control.getByRole('checkbox').all()) await expect(checkbox).not.toBeChecked();
++    await control.getByRole('button', { name: 'All known realms', exact: true }).click();
++    for (const checkbox of await control.getByRole('checkbox').all()) await expect(checkbox).toBeChecked();
++    await control.locator(':scope > summary').click();
++    await openRealmAffairs(page);
++    await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
++    await openSelectedOrders(page);
++    await page.getByRole('button', { name: 'Attack Reedbound Watch (army.4)', exact: true }).click();
++    await expect(page.getByTestId('battle-panel')).toBeVisible();
++    await expect(control).toBeHidden();
++    await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
++    await expect(page.getByTestId('battle-panel')).toHaveCount(0);
++    await expect(control.locator(':scope > summary')).toContainText('Realms');
++    await capture('after-battle');
++    expect(await canvas!.evaluate(element => element === document.querySelector('canvas'))).toBe(true);
++    await page.getByRole('button', { name: 'Focus selection', exact: true }).click();
++    await page.getByTestId('map-container').focus(); await page.keyboard.press('Enter');
++    await expect(page.getByTestId('map-actions')).toBeVisible();
++    await page.keyboard.press('Escape');
++    await expectLocalMapPixels(page, info, 'lifecycle-desktop');
++    await page.screenshot({ path: info.outputPath('lifecycle-after-battle.png') });
++    await page.setViewportSize({ width: 390, height: 844 });
++    await control.locator(':scope > summary').click();
++    await control.getByRole('button', { name: 'Terrain', exact: true }).click();
++    await expect(control.getByRole('button', { name: 'Terrain', exact: true })).toHaveAttribute('aria-pressed', 'true');
++    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
++    await page.screenshot({ path: info.outputPath('lifecycle-controls-390.png') });
++    // Mode selection deliberately fits the full world. Its small known patch
++    // can sit behind the open menu; inspect local terrain with that menu closed.
++    await control.locator(':scope > summary').click();
++    await page.screenshot({ path: info.outputPath('lifecycle-overview-390.png') });
++    await page.getByRole('button', { name: 'Focus selection', exact: true }).click();
++    await expectLocalMapPixels(page, info, 'lifecycle-390');
++    await page.screenshot({ path: info.outputPath('lifecycle-local-390.png') });
++    expect.soft(consoleMessages.filter(message => /same key|Encountered two children/.test(message))).toEqual([]);
++    expect(errors).toEqual([]);
++  } finally { await saveEvidence(); await cdp.detach(); }
++});
++
++for (const definitionId of ['faction.ashen_compact', 'faction.reedbound_council']) {
++  test(`R18 paid Waykeeper resolves shared art for ${definitionId}`, async ({ page }, info) => {
++    const consoleMessages: string[] = [], errors: string[] = [], requests: string[] = [];
++    page.on('console', message => { if (message.type() === 'error' || message.type() === 'warning') consoleMessages.push(message.text()); });
++    page.on('pageerror', error => errors.push(error.message));
++    page.on('request', request => { if (/\/art\/.*\.png/.test(request.url())) requests.push(new URL(request.url()).pathname); });
++    // Authored funded/infrastructure fixture, not a natural campaign. Appointment,
++    // attachment and all inspection below use public controls; no debug mutations.
++    const game = characterCampaign();
++    game.factions[0]!.definitionId = definitionId;
++    game.factions[0]!.color = FACTIONS.find(faction => faction.id === definitionId)!.color;
++    game.settlements[C.homeId]!.buildings.push('building.archive');
++    const validated = deserializeGame(serializeGame(game));
++    const catalog = JSON.parse(await readFile('apps/web/public/art/catalog.json', 'utf8'));
++    const asset = catalog.assets.find((item: { id: string }) => item.id === 'character.waykeeper');
++    const atlas = catalog.atlases.find((item: { id: string }) => item.id === asset.atlasId);
++    expect(atlas.width * atlas.height * 4).toBe(4 * 1024 * 1024);
++    await page.goto('/'); await importCampaign(page, validated);
++    await selectFromRegistry(page, 'settlements', C.homeName); await openSelectedOrders(page);
++    await page.getByTestId('character-appointments').locator('summary').click();
++    const before = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.treasury);
++    await page.getByRole('button', { name: 'Appoint Waykeeper', exact: true }).click();
++    await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSummary()!.characters.filter(item => item.definitionId === 'character.waykeeper').length)).toBe(1);
++    expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.treasury)).toBe(before - 40);
++    await page.getByRole('button', { name: 'Open character roster', exact: true }).click();
++    const caster = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.characters.find(item => item.definitionId === 'character.waykeeper')!);
++    const roster = page.getByRole('dialog', { name: 'Characters & agents', exact: true });
++    await roster.getByRole('button', { name: `Inspect ${caster.name} (${caster.id})`, exact: true }).click();
++    const art = roster.locator('[data-art-content-id="character.waykeeper"]');
++    await expect(art).toHaveCount(2);
++    for (const icon of await art.all()) {
++      await expect(icon).toHaveAttribute('data-art-state', 'shared');
++      await expect(icon).toHaveAttribute('data-art-rendered-id', 'character.waykeeper');
++      await expect(icon).toHaveAttribute('title', /shared Waykeeper silhouette/);
++      await expect(icon).not.toContainText('Generic');
++    }
++    await expect(roster.getByRole('img', { name: /shared Waykeeper silhouette/ })).toHaveCount(1);
++    await roster.screenshot({ path: info.outputPath('waykeeper-paid-desktop.png') });
++    const hash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
++    await page.setViewportSize({ width: 390, height: 844 });
++    await roster.getByRole('combobox', { name: 'Assign to army', exact: true }).selectOption(C.armyId);
++    await roster.getByRole('button', { name: 'Assign character', exact: true }).click();
++    await expect.poll(() => page.evaluate(id => window.__THEANDRIL__!.getSummary()!.characters.find(item => item.id === id)?.location, caster.id)).toEqual({ kind: 'army', armyId: C.armyId });
++    expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).not.toBe(hash);
++    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
++    await roster.screenshot({ path: info.outputPath('waykeeper-assigned-390.png') });
++    await roster.getByRole('button', { name: 'Close characters', exact: true }).click();
++    await closeManagement(page); await closeCampaignOptions(page);
++    await page.getByRole('button', { name: 'Characters & agents', exact: true }).click();
++    await expect(roster.locator('[data-art-content-id="character.waykeeper"][data-art-state="shared"]').first()).toBeVisible();
++    expect(requests.filter(url => url === atlas.imageUrl)).toHaveLength(1);
++    const otherBattlePages = catalog.atlases.filter((item: { id: string }) => item.id.startsWith('battle') && item.id !== atlas.id);
++    for (const other of otherBattlePages) expect(requests).not.toContain(other.imageUrl);
++    expect(errors).toEqual([]);
++    await evidence(info, 'waykeeper-evidence', { definitionId, caster, paidCoin: 40, atlas, requests, consoleMessages, errors });
++  });
++}
+diff --git 1/tests/gameplay/household-attention.spec.ts 2/tests/gameplay/household-attention.spec.ts
+new file mode 100644
+index 0000000..9090f74
+--- /dev/null
++++ 2/tests/gameplay/household-attention.spec.ts
+@@ -0,0 +1,85 @@
++import { expect, test, type Page } from '@playwright/test';
++import { serializeGame, type GameState } from '@theandril/sim';
++import { exportSave } from '@theandril/persistence';
++import { growingHouseholdCampaign, householdScaleCampaign } from './household-fixture';
++import { closeCampaignOptions } from './ui-navigation';
++
++async function importCampaign(page: Page, game: GameState) {
++  await page.goto('/');
++  await page.locator('input[type=file]').setInputFiles({ name: 'household-attention.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(game))) });
++  await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
++  await closeCampaignOptions(page);
++}
++const review = (page: Page) => page.getByRole('button', { name: 'Next settlement with unassigned households', exact: true });
++
++test('R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order', async ({ page }, info) => {
++  await importCampaign(page, growingHouseholdCampaign());
++  await expect(review(page)).toBeDisabled();
++  await page.getByRole('button', { name: 'End turn', exact: true }).click();
++  await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
++  const before = await page.evaluate(() => { const api = window.__THEANDRIL__!, view = api.getSummary()!; return { hash: api.getStateHash(), land: view.land.settlements[0]!, treasury: view.treasury, town: view.ownSettlements[0]!, routes: view.routes }; });
++  expect(before.town.queue.length).toBeGreaterThan(0);
++  expect(before.land.workerCapacity - before.land.worked.length).toBe(1);
++  await expect(page.getByTestId('household-counts')).toHaveText('Labor: 1 unassigned household · 1 settlement');
++  await expect(page.getByRole('button', { name: 'Next idle settlement', exact: true })).toBeDisabled();
++  await page.screenshot({ path: info.outputPath('household-growth-desktop.png') });
++  await review(page).focus(); await page.keyboard.press('Enter');
++  const popup = page.getByTestId('map-actions');
++  await expect(popup.getByRole('tab', { name: 'Land & tiles', exact: true })).toHaveAttribute('aria-selected', 'true');
++  await expect(popup.getByTestId('land-panel')).toHaveAttribute('data-query-state', 'ready');
++  expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(before.hash);
++  await expect(page.getByTestId('next-action-notice')).toContainText('unassigned households add no tile yields');
++  await popup.getByRole('button', { name: 'Select tiles', exact: true }).click();
++  await popup.locator('.land-tile-list button').filter({ hasText: /Owned/ }).first().click();
++  const cell = await page.evaluate(() => window.__THEANDRIL__!.getSelection().cell!);
++  expect(before.land.worked).not.toContain(cell);
++  await popup.getByRole('button', { name: 'Assign worker', exact: true }).click();
++  await expect(page.getByTestId('household-counts')).toHaveText('Labor: 0 unassigned households · 0 settlements');
++  const after = await page.evaluate(() => { const view = window.__THEANDRIL__!.getSummary()!; return { worked: view.land.settlements[0]!.worked, treasury: view.treasury, routes: view.routes }; });
++  expect(after.worked).toEqual([...before.land.worked, cell].sort((a, b) => a - b));
++  expect(after.treasury).toBe(before.treasury); expect(after.routes).toEqual(before.routes);
++  await popup.getByRole('button', { name: 'Close map actions', exact: true }).click();
++  await page.getByTestId('campaign-menu').locator(':scope > summary').click();
++  await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
++  await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
++  await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
++  await expect(page.getByTestId('feedback')).toContainText('Campaign restored');
++  await expect(review(page)).toBeDisabled();
++  expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.land.settlements[0]!.worked)).toEqual(after.worked);
++  await info.attach('household-growth', { body: JSON.stringify({ before, cell, after }, null, 2), contentType: 'application/json' });
++});
++
++for (const count of [2, 10, 40] as const) {
++  test(`R07 ${count}-town labor exception opens the exact hearth in one activation at 390px`, async ({ page }, info) => {
++    const game = householdScaleCampaign(count);
++    const towns = Object.values(game.settlements).sort((a, b) => a.id < b.id ? -1 : 1), target = towns.at(-1)!;
++    await importCampaign(page, game);
++    await page.setViewportSize({ width: 390, height: 844 });
++    const before = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), view: window.__THEANDRIL__!.getSummary()! }));
++    expect(before.view.ownSettlements).toHaveLength(count);
++    expect(before.view.land.settlements.every(town => town.cells.length === 0)).toBe(true);
++    await expect(page.getByTestId('household-counts')).toHaveText('Labor: 1 unassigned household · 1 settlement');
++    await page.screenshot({ path: info.outputPath('household-attention-390.png') });
++    await review(page).click();
++    const popup = page.getByTestId('map-actions');
++    await expect(popup.getByRole('heading', { name: target.name, exact: true })).toBeVisible();
++    await expect(popup.getByTestId('land-panel')).toHaveAttribute('data-settlement-id', target.id);
++    await expect(popup.getByTestId('land-panel')).toHaveAttribute('data-query-state', 'ready');
++    expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(before.hash);
++    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
++    await expect(popup.getByRole('heading', { name: 'Land & stewardship', exact: true })).toBeInViewport();
++    await popup.screenshot({ path: info.outputPath('household-review-390.png') });
++    await popup.getByRole('button', { name: 'Select tiles', exact: true }).click();
++    await popup.locator('.land-tile-list button').filter({ hasText: /Owned/ }).first().click();
++    await popup.getByRole('button', { name: 'Assign worker', exact: true }).click();
++    await expect(page.getByTestId('household-counts')).toHaveText('Labor: 0 unassigned households · 0 settlements');
++    const after = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!);
++    expect(after.treasury).toBe(before.view.treasury);
++    for (const land of before.view.land.settlements) {
++      const worked = after.land.settlements.find(item => item.settlementId === land.settlementId)!.worked;
++      if (land.settlementId !== target.id) expect(worked).toEqual(land.worked);
++      else expect(worked).toEqual(expect.arrayContaining(land.worked));
++    }
++    await info.attach('household-scale', { body: JSON.stringify({ count, target: target.id, locateActivations: 1, beforeHash: before.hash, before: before.view.land.settlements.map(({ settlementId, workerCapacity, worked }) => ({ settlementId, workerCapacity, worked })), after: after.land.settlements.map(({ settlementId, workerCapacity, worked }) => ({ settlementId, workerCapacity, worked })) }, null, 2), contentType: 'application/json' });
++  });
++}
+diff --git 1/tests/gameplay/household-fixture.ts 2/tests/gameplay/household-fixture.ts
+new file mode 100644
+index 0000000..f20465b
+--- /dev/null
++++ 2/tests/gameplay/household-fixture.ts
+@@ -0,0 +1,46 @@
++import { applyCommand, createGame, deserializeGame, getObservation, getSettlementLandObservation, serializeGame, type GameCommand, type GameState } from '../../packages/sim/src/index';
++import { rebaseAuthoredLand } from '../../packages/test-fixtures/src/authored-land';
++
++function issue(game: GameState, command: GameCommand) {
++  const result = applyCommand(game, command);
++  if (!result.ok) throw new Error(`Household fixture ${command.type}: ${result.error}`);
++}
++
++/** Authored food reserve, not naturally earned growth. Founding, queueing,
++ * assignment and the later test's growth turn are normal simulation commands. */
++export function growingHouseholdCampaign(): GameState {
++  const game = createGame({ seed: 17, size: 'tiny', factionCount: 2 });
++  const factionId = game.turnOwnerId;
++  issue(game, { type: 'found', factionId, armyId: 'army.1', name: 'Growing hearth' });
++  const home = Object.values(game.settlements).find(town => town.factionId === factionId)!;
++  const land = getSettlementLandObservation(game, factionId, home.id)!;
++  const cell = land.cells.find(cell => cell.canWork)!;
++  issue(game, { type: 'setWorkedTiles', factionId, settlementId: home.id, cells: [cell.cell] });
++  for (let index = 0; index < 3; index++) issue(game, { type: 'queue', factionId, settlementId: home.id, itemId: 'unit.guard' });
++  home.food = getObservation(game, factionId).growth!.settlements[0]!.foodRequired;
++  return deserializeGame(serializeGame(game));
++}
++
++/** Synthetic 2/10/40-town ownership and population. Only the last stable ID
++ * has spare labor; all queues and manual assignments use real paid commands. */
++export function householdScaleCampaign(count: 2 | 10 | 40): GameState {
++  const game = createGame({ seed: 20260905, size: 'small', factionCount: count });
++  for (const faction of game.factions) {
++    const caravan = Object.values(game.armies).find(army => army.factionId === faction.id && army.formations.some(item => item.unitId === 'unit.colonist'))!;
++    issue(game, { type: 'found', factionId: faction.id, armyId: caravan.id, name: `Hearth ${faction.id}` });
++  }
++  const towns = Object.values(game.settlements).sort((a, b) => a.id < b.id ? -1 : 1);
++  for (const town of towns) town.factionId = game.turnOwnerId;
++  for (const army of Object.values(game.armies)) if (army.factionId !== game.turnOwnerId) delete game.armies[army.id];
++  game.factions[0]!.treasury = 10_000;
++  rebaseAuthoredLand(game);
++  for (const town of towns) {
++    const land = getSettlementLandObservation(game, game.turnOwnerId, town.id)!;
++    const cell = land.cells.find(cell => cell.canWork);
++    if (!cell) throw new Error(`Household fixture has no assignable tile for ${town.id}`);
++    issue(game, { type: 'setWorkedTiles', factionId: game.turnOwnerId, settlementId: town.id, cells: [cell.cell] });
++    issue(game, { type: 'queue', factionId: game.turnOwnerId, settlementId: town.id, itemId: 'unit.guard' });
++  }
++  towns.at(-1)!.population = 2;
++  return deserializeGame(serializeGame(game));
++}
+diff --git 1/tests/gameplay/map-pixel-evidence.ts 2/tests/gameplay/map-pixel-evidence.ts
+new file mode 100644
+index 0000000..87bd6ca
+--- /dev/null
++++ 2/tests/gameplay/map-pixel-evidence.ts
+@@ -0,0 +1,46 @@
++import { expect, type Page, type TestInfo } from '@playwright/test';
++
++/** Inspect screenshot PNG pixels, not WebGL readPixels or renderer counters.
++ * Call with local detail focused and dialogs/overview menu closed. The whole
++ * sample must hit the original visible canvas, so DOM artwork cannot pass it. */
++export async function expectLocalMapPixels(page: Page, info: TestInfo, name: string) {
++  const canvas = page.locator('[data-testid=map-container] canvas');
++  await expect(canvas).toBeVisible();
++  // Enlarged text can move the overview trigger across the exact centre crop.
++  // Keep the same 14,400-pixel sample and thresholds, but locate an unobscured
++  // nearby patch rather than accidentally testing DOM artwork as map content.
++  const clip = await canvas.evaluate(element => {
++    const box = element.getBoundingClientRect();
++    for (const dy of [0, -10, 10, -20, 20, -30, 30, -40, 40]) {
++      const rect = { x: Math.floor(box.x + box.width / 2 - 60), y: Math.floor(box.y + box.height / 2 - 60 + dy), width: 120, height: 120 };
++      if ([0, 20, 40, 60, 80, 100, 119].every(x => [0, 20, 40, 60, 80, 100, 119].every(y => document.elementFromPoint(rect.x + x, rect.y + y) === element))) return rect;
++    }
++    return null;
++  });
++  expect(clip, 'A complete 120×120 local canvas patch must be unobscured').not.toBeNull();
++  if (!clip) throw new Error('No unobscured local map sample');
++  let png: Buffer | undefined;
++  let pixels: { colors: number; nonDominantFraction: number; dominantRgb: number[] } | undefined;
++  await expect.poll(async () => {
++    png = await page.screenshot({ clip, animations: 'disabled' });
++    pixels = await page.evaluate(async encoded => {
++      const binary = atob(encoded);
++      const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
++      const image = await createImageBitmap(new Blob([bytes], { type: 'image/png' }));
++      const canvas = new OffscreenCanvas(image.width, image.height);
++      const context = canvas.getContext('2d')!;
++      context.drawImage(image, 0, 0); image.close();
++      const { data } = context.getImageData(0, 0, canvas.width, canvas.height);
++      const colors = new Map<number, number>();
++      for (let index = 0; index < data.length; index += 4) {
++        const rgb = (data[index]! << 16) | (data[index + 1]! << 8) | data[index + 2]!;
++        colors.set(rgb, (colors.get(rgb) ?? 0) + 1);
++      }
++      const [dominant, count] = [...colors].sort((a, b) => b[1] - a[1])[0]!;
++      return { colors: colors.size, nonDominantFraction: 1 - count / (canvas.width * canvas.height), dominantRgb: [dominant >> 16, (dominant >> 8) & 255, dominant & 255] };
++    }, png.toString('base64'));
++    return pixels.colors > 100 && pixels.nonDominantFraction > .2;
++  }, { message: 'Known local terrain must produce nonblank screenshot pixels', timeout: 10000 }).toBe(true);
++  await info.attach(`${name}-pixels`, { body: png!, contentType: 'image/png' });
++  await info.attach(`${name}-pixels`, { body: JSON.stringify({ clip, ...pixels }, null, 2), contentType: 'application/json' });
++}

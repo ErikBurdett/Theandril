@@ -1,0 +1,27 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ apps/web/src/faction-art.test.tsx (13 tests | 1 failed | 12 skipped) 146ms
+     × resolves the shared Waykeeper cast for two cultures with one bounded page and a truthful shared label 145ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/faction-art.test.tsx > approved faction DOM artwork boundary > resolves the shared Waykeeper cast for two cultures with one bounded page and a truthful shared label
+Error: No approved visual family is bound to this faction definition.
+ ❯ loadFactionArtFrame apps/web/src/faction-art.tsx:71:41
+     69|   const artworkRole = unitArtRole(contentId);
+     70|   const qualified = factionArtId(artworkRole, definitionId);
+     71|   if (!qualified) return Promise.reject(new Error('No approved visual …
+       |                                         ^
+     72|   let promise = frames.get(qualified);
+     73|   if (!promise) {
+ ❯ apps/web/src/faction-art.test.tsx:59:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 12 skipped (13)
+   Start at  01:29:59
+   Duration  262ms (transform 118ms, setup 0ms, import 48ms, tests 146ms, environment 0ms)
+

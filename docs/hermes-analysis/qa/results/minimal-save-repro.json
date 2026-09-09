@@ -1,0 +1,12 @@
+{
+  "name": "minimal-save-repro",
+  "command": "node --import tsx docs/hermes-analysis/qa/minimal-save-repro.mjs",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:35:49.115687+00:00",
+  "durationSeconds": 0.2412102222442627,
+  "exitCode": 1,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/minimal-save-repro.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 125148,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

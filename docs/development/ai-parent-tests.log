@@ -1,0 +1,93 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/ai/src/contact.test.ts (4 tests) 29264ms
+     ✓ standard / 4 seats makes player contact through legal bounded plans with save replay  6022ms
+     ✓ standard / 24 seats makes player contact through legal bounded plans with save replay  8717ms
+     ✓ huge / 32 seats makes player contact through legal bounded plans with save replay  13980ms
+     ✓ has explicit frontier work bounds and deterministic destinations from detached observed cells  543ms
+ ✓ packages/ai/src/recruitment.test.ts (37 tests) 18444ms
+   ✓ 'Mire Courts' recruits and combines legal armies with exact saved continuation  1123ms
+   ✓ 'Saltwind Remnant' recruits and combines legal armies with exact saved continuation  977ms
+   ✓ 'Wardhall Remnant' recruits and combines legal armies with exact saved continuation  982ms
+   ✓ 'Rimehorn Clans' recruits and combines legal armies with exact saved continuation  934ms
+   ✓ 'Sable Steppe' recruits and combines legal armies with exact saved continuation  1044ms
+   ✓ 'Morrow Spore' recruits and combines legal armies with exact saved continuation  1040ms
+   ✓ 'Cistern Assembly' recruits and combines legal armies with exact saved continuation  991ms
+   ✓ 'Unsealed Companies' recruits and combines legal armies with exact saved continuation  937ms
+   ✓ 'Lantern Hospices' recruits and combines legal armies with exact saved continuation  1046ms
+   ✓ 'Cairnwing Concord' recruits and combines legal armies with exact saved continuation  970ms
+   ✓ 'Red Sluice Directorate' recruits and combines legal armies with exact saved continuation  1021ms
+   ✓ 'Velvet Meridian' recruits and combines legal armies with exact saved continuation  979ms
+   ✓ 'Brine Choir' recruits and combines legal armies with exact saved continuation  1038ms
+   ✓ 'Emberwake Convocation' recruits and combines legal armies with exact saved continuation  981ms
+   ✓ 'Underhush Exchange' recruits and combines legal armies with exact saved continuation  1007ms
+   ✓ 'Vesper Court' recruits and combines legal armies with exact saved continuation  1169ms
+   ✓ 'Manytrack Moot' recruits and combines legal armies with exact saved continuation  856ms
+   ✓ 'Margin Observance' recruits and combines legal armies with exact saved continuation  972ms
+ ✓ packages/ai/src/progression.test.ts (16 tests) 8321ms
+   ✓ generated-start AI seed 74 reaches true Prosperity with ordinary commands and deterministic save continuation  1068ms
+   ✓ generated-start AI seed 2026 reaches true Prosperity with ordinary commands and deterministic save continuation  1068ms
+   ✓ generated-start AI seed 20260905 reaches true Prosperity with ordinary commands and deterministic save continuation  539ms
+   ✓ generated-start AI seed 17 reaches true Prosperity with ordinary commands and deterministic save continuation  673ms
+   ✓ generated-start AI seed 99 reaches true Prosperity with ordinary commands and deterministic save continuation  740ms
+   ✓ generated-start AI seed 31415 reaches true Prosperity with ordinary commands and deterministic save continuation  1041ms
+   ✓ generated-start AI seed 2718 reaches true Prosperity with ordinary commands and deterministic save continuation  741ms
+   ✓ generated-start AI seed 8128 reaches true Prosperity with ordinary commands and deterministic save continuation  744ms
+   ✓ generated-start AI seed 4096 reaches true Prosperity with ordinary commands and deterministic save continuation  864ms
+   ✓ generated-start AI seed 65535 reaches true Prosperity with ordinary commands and deterministic save continuation  724ms
+ ✓ packages/ai/src/ai.test.ts (29 tests) 5835ms
+   ✓ 'Ashen Compact' AI settles, builds, recruits and expands through the public command API  408ms
+   ✓ 'Mire Courts' AI settles, builds, recruits and expands through the public command API  323ms
+   ✓ 'Red Sluice Directorate' AI settles, builds, recruits and expands through the public command API  304ms
+   ✓ AI cannot depend on hidden world state and resumes deterministically after save  599ms
+ ✓ packages/ai/src/resource-economy.test.ts (8 tests) 5940ms
+   ✓ AI funds and works its first observed 'Hearthgrain' deposit, then sells only actual surplus  699ms
+   ✓ AI funds and works its first observed 'Ironstone' deposit, then sells only actual surplus  722ms
+   ✓ AI funds and works its first observed 'Red copper' deposit, then sells only actual surplus  639ms
+   ✓ AI funds and works its first observed 'White salt' deposit, then sells only actual surplus  629ms
+   ✓ AI funds and works its first observed 'Heartwood' deposit, then sells only actual surplus  611ms
+   ✓ AI funds and works its first observed 'Steppe horses' deposit, then sells only actual surplus  858ms
+   ✓ AI funds and works its first observed 'Witness silver' deposit, then sells only actual surplus  918ms
+   ✓ AI funds and works its first observed 'Ashglass' deposit, then sells only actual surplus  862ms
+ ✓ packages/ai/src/land.test.ts (25 tests) 1611ms
+ ✓ packages/ai/src/overseas-generated.test.ts (3 tests) 1520ms
+   ✓ generated 'tiny' / 'islands' / 20260905 earns an overseas colony using observed commands  441ms
+   ✓ generated 'small' / 'islands' / 20260905 earns an overseas colony using observed commands  870ms
+ ✓ packages/ai/src/observation-options.test.ts (14 tests) 844ms
+ ✓ packages/ai/src/composition.test.ts (4 tests) 648ms
+   ✓ AI recruits varied formations and assembles real mixed armies through legal public commands  603ms
+ ✓ packages/ai/src/naval.test.ts (15 tests) 621ms
+ ✓ packages/ai/src/naval-funding.test.ts (2 tests) 522ms
+   ✓ an isolated open-sea harbor preserves knowledge for its first researched ocean expedition  450ms
+ ✓ packages/ai/src/navigation.test.ts (3 tests) 414ms
+ ✓ packages/ai/src/faction-cohort24.test.ts (13 tests) 435ms
+ ✓ packages/ai/src/overseas.test.ts (8 tests) 383ms
+ ✓ packages/ai/src/enclosed-sea.test.ts (1 test) 367ms
+   ✓ Mire Courts earn a same-landmass inland ferry colony, with a saved voyage and exact command replay  367ms
+ ✓ packages/ai/src/characters.test.ts (5 tests) 277ms
+ ✓ packages/ai/src/research-land.test.ts (5 tests) 269ms
+ ✓ packages/ai/src/naval-assembly.test.ts (1 test) 231ms
+ ✓ packages/ai/src/navigation-performance.test.ts (15 tests) 188ms
+ ✓ packages/ai/src/magic.test.ts (6 tests) 196ms
+ ✓ packages/ai/src/uncapped-expansion.test.ts (7 tests) 152ms
+ ✓ packages/ai/src/contact-reconnaissance.test.ts (3 tests) 117ms
+ ✓ packages/ai/src/large-basin.test.ts (2 tests) 119ms
+ ✓ packages/ai/src/diplomacy.test.ts (5 tests) 78ms
+ ✓ packages/ai/src/conquest.test.ts (5 tests) 88ms
+ ✓ packages/ai/src/fiscal-workers.test.ts (2 tests) 84ms
+ ✓ packages/ai/src/sea-knowledge.test.ts (6 tests) 63ms
+ ✓ packages/ai/src/roads.test.ts (2 tests) 58ms
+ ✓ packages/ai/src/pacing.test.ts (5 tests) 89202ms
+   ✓ 'standard' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation  6852ms
+   ✓ 'standard' seed 99 generator 5 reaches an earned long-form victory with legal orders and save continuation  5845ms
+   ✓ 'standard' seed 99 generator 6 reaches an earned long-form victory with legal orders and save continuation  4978ms
+   ✓ 'epic' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation  41556ms
+   ✓ 'epic' seed 99 generator undefined reaches an earned long-form victory with legal orders and save continuation  29969ms
+
+ Test Files  29 passed (29)
+      Tests  251 passed (251)
+   Start at  02:45:55
+   Duration  89.69s (transform 827ms, setup 0ms, import 3.47s, tests 166.29s, environment 1ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/ai-parent-tests.json

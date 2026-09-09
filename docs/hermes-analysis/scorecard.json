@@ -1,0 +1,25 @@
+{
+  "method": "Editorial player-facing quality scores, not automated test percentages or percentage of development complete. Equal-weight current-area mean times ten gives the overall index. Target rows are minimum quality floors; overall release threshold is 90+ and zero unresolved P0s, so merely touching every floor is insufficient.",
+  "scale": {"0": "absent", "2": "small proof or severely incomplete pillar", "4": "integrated foundation but shallow/unsafe", "6": "coherent playable system with substantial remaining quality work", "8": "commercially strong", "9": "premium, deeply exercised", "10": "exceptional"},
+  "areas": [
+    {"area":"Core Loop","current":4.5,"target":9,"reason":"Paid explore/invest/expand chain works, but late payoff converges on passive accumulation."},
+    {"area":"Strategic Depth","current":3.5,"target":9,"reason":"Meaningful land and combined-arms rules, few transforming inter-system strategies."},
+    {"area":"Faction Identity","current":3.5,"target":9,"reason":"Original cultures, ecology and names; common rosters, casters and victory rules."},
+    {"area":"Economy","current":4.5,"target":8,"reason":"Real workers, costs and extraction; weak sustained-deficit and logistics consequences."},
+    {"area":"Research","current":4,"target":9,"reason":"Ten practical unlocks and real development; trees finish far before Epic campaign ends."},
+    {"area":"Magic","current":2,"target":9,"reason":"Two well-gated battle spells; no strategic supernatural economy, rituals or summons."},
+    {"area":"Diplomacy","current":2.5,"target":8,"reason":"Working paid binding truces; no larger obligation or coalition system."},
+    {"area":"Warfare","current":4,"target":9,"reason":"Persistent formations, conquest and ships; legal over-cap stacks cannot be attacked."},
+    {"area":"AI","current":4,"target":8,"reason":"Legally uses many systems and wins; sparse-contact failure and long exact movement loops."},
+    {"area":"UI/UX","current":5,"target":9,"reason":"Map-first controls, search, quotes and hotkeys; weak attention and empire-scale comparison."},
+    {"area":"Art","current":6.5,"target":9,"reason":"Substantial validated culture/world library and preserved identity; Waykeeper binding, specialist aliases and biome/battle cohesion need targeted work."},
+    {"area":"Animation","current":5,"target":8,"reason":"Thirteen genuine shared battle action sets and real source rigs; battlefield readability, playback review and wider strategic life remain incomplete."},
+    {"area":"Audio","current":0,"target":8,"reason":"No implemented audio layer found by retained asset/source audit."},
+    {"area":"Performance","current":6,"target":9,"reason":"Strong bounded simulation/battle kernels; workload/device coverage and archive scale remain gaps."},
+    {"area":"Stability","current":2,"target":9,"reason":"Reproducible unloadable legal battle outcomes and oversized campaign archives override passing smoke tests."},
+    {"area":"Content","current":3.5,"target":9,"reason":"Validated existing content, but missing major playable fantasy/political/event registries."},
+    {"area":"Replayability","current":3.5,"target":9,"reason":"Geography/culture differences and emergent battles; common paths and long late-game convergence."},
+    {"area":"Onboarding","current":3,"target":8,"reason":"Useful local guidance and blockers, no graduated first-campaign teaching loop."},
+    {"area":"Game Feel","current":3.5,"target":9,"reason":"Cohesive interface, weak distinction between routine action and consequential milestones."}
+  ]
+}

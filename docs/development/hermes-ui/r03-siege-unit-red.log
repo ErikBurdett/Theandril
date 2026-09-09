@@ -1,0 +1,30 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ apps/web/src/battle-defense.test.tsx (2 tests | 1 failed) 58ms
+     × shows the canonical defending contingent and reserves beside an existing siege assault control 44ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/battle-defense.test.tsx > canonical defending-contingent presentation > shows the canonical defending contingent and reserves beside an existing siege assault control
+AssertionError: expected '<section class="siege-orders" data-te…' to contain 'Committed defense: 12 formations · 19…'
+
+Expected: "Committed defense: 12 formations · 193 strength"
+Received: "<section class="siege-orders" data-testid="siege-orders" aria-label="Settlement siege orders"><h3 class="section-title">Walls &amp; blockades</h3><div class="siege-card" data-testid="siege-settlement.6"><strong>Besieging Reedwatch</strong><dl class="siege-strength"><div><dt>Defenses</dt><dd>30</dd></div><div><dt>Supplies</dt><dd>3</dd></div><div><dt>Defending strength</dt><dd>30</dd></div></dl><p class="field-help" role="status">The besieging army needs movement to assault; wait for the next turn.</p><button class="danger wide" disabled="" aria-label="Assault Reedwatch">Assault settlement</button><button class="wide" aria-label="Lift siege of Reedwatch">Lift siege</button><p class="field-help">End turns to maintain the blockade. An assault commits your army to a battle with the defenders and militia.</p></div></section>"
+
+ ❯ apps/web/src/battle-defense.test.tsx:21:18
+     19|     const html = renderToStaticMarkup(createElement(SiegeOrders, { arm…
+     20|     expect(html).toContain('Assault settlement');
+     21|     expect(html).toContain('Committed defense: 12 formations · 193 str…
+       |                  ^
+     22|     expect(html).toContain('Reserves: 1 formation · 17 strength');
+     23|     expect(html).toContain('must be defeated before advancing or captu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  02:07:34
+   Duration  601ms (transform 354ms, setup 0ms, import 476ms, tests 58ms, environment 0ms)
+

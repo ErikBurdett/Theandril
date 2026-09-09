@@ -1,0 +1,44 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > round-trips after every accepted command from a captured ordinary battle 122ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > manual rounds and withdrawal save at the same boundary as autoresolve 60ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > does not compound training when the same company defends twice without an end turn 28ms
+ × packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > removes only the training morale actually granted at the tactical cap 43ms
+   → expected { id: 'formation.4', …(4) } to match object { morale: 85, strength: 85, …(1) }
+(2 matching properties omitted from actual)
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > retains independently captured rule-16 results rather than silently rewriting history 29ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > removes only the training morale actually granted at the tactical cap
+AssertionError: expected { id: 'formation.4', …(4) } to match object { morale: 85, strength: 85, …(1) }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "fatigue": 0,
+-   "morale": 85,
++   "morale": 82,
+    "strength": 85,
+  }
+
+ ❯ packages/sim/src/battle-morale.test.ts:110:53
+    108|     expect(game.battle).toBeNull();
+    109|     expect(game.battleReports.at(-1)!.combat.defender.find(item => ite…
+    110|     expect(game.armies[defender.id]!.formations[0]).toMatchObject({ mo…
+       |                                                     ^
+    111|   });
+    112|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  02:58:30
+   Duration  740ms (transform 292ms, setup 0ms, import 390ms, tests 283ms, environment 0ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/review-fix/capped-morale-red-authorized.json

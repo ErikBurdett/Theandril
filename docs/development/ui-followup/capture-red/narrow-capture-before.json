@@ -1,0 +1,106 @@
+{
+  "before": {
+    "settlementId": "settlement.6",
+    "armyId": "army.2",
+    "factionId": "faction.ashen_compact",
+    "startedTurn": 1,
+    "defenses": 0,
+    "supplies": 0,
+    "militiaStrength": 30,
+    "militiaMorale": 65,
+    "militiaFatigue": 0,
+    "battleDefense": {
+      "engagedFormations": 20,
+      "engagedStrength": 20,
+      "reserveFormations": 1,
+      "reserveStrength": 1
+    },
+    "canAssault": true,
+    "assaultBlocker": null,
+    "defenderStrength": 21
+  },
+  "contestedSieges": [
+    {
+      "settlementId": "settlement.6",
+      "armyId": "army.2",
+      "factionId": "faction.ashen_compact",
+      "startedTurn": 1,
+      "defenses": 0,
+      "supplies": 0,
+      "militiaStrength": 30,
+      "militiaMorale": 65,
+      "militiaFatigue": 0,
+      "canAssault": false,
+      "assaultBlocker": "The besieging army needs movement to assault; wait for the next turn.",
+      "defenderStrength": 1
+    }
+  ],
+  "layout": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "button": {
+      "x": 42,
+      "y": 126.921875,
+      "width": 306,
+      "height": 36.5,
+      "top": 126.921875,
+      "right": 348,
+      "bottom": 163.421875,
+      "left": 42
+    },
+    "hit": "<button aria-haspopup=\"dialog\" aria-label=\"Characters &amp; agents\"><svg class=\"hud-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.35\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 8a4 4 0 1 0 8 0 4 4 0 1 0-8 0M4 22v-4c0-6 16-6 16 0v4M9 14l3 5 3-5\"></path></svg><span>Characters</span></button>",
+    "receivesPointer": false,
+    "layers": [
+      {
+        "selector": ".map-host",
+        "box": {
+          "x": 0,
+          "y": 104,
+          "width": 390,
+          "height": 398.859375,
+          "top": 104,
+          "right": 390,
+          "bottom": 502.859375,
+          "left": 0
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "overflow": "visible"
+      },
+      {
+        "selector": ".hud-tools",
+        "box": {
+          "x": 9,
+          "y": 113,
+          "width": 372,
+          "height": 75.59375,
+          "top": 113,
+          "right": 381,
+          "bottom": 188.59375,
+          "left": 9
+        },
+        "position": "absolute",
+        "zIndex": "4",
+        "overflow": "auto"
+      },
+      {
+        "selector": ".capture-panel",
+        "box": {
+          "x": 10,
+          "y": 114,
+          "width": 370,
+          "height": 339.859375,
+          "top": 114,
+          "right": 380,
+          "bottom": 453.859375,
+          "left": 10
+        },
+        "position": "absolute",
+        "zIndex": "2",
+        "overflow": "auto"
+      }
+    ]
+  }
+}

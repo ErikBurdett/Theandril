@@ -1,0 +1,5635 @@
+{
+  "name": "D-sparse4-seed748291",
+  "strategy": "D",
+  "settings": {
+    "seed": 748291,
+    "size": "standard",
+    "factionCount": 4,
+    "pace": "long",
+    "generatorVersion": 7,
+    "rosterVersion": 4,
+    "rulesVersion": 16
+  },
+  "controlledFactionId": null,
+  "setup": "Unmodified generated rules16/schema16/generator7/roster4. B/C only control turn-owner seat; all opponents are ordinary production AI. No grants, terrain edits, fog reveals, hidden input, or disabled project rules. Diagnostic canonical observations never enter policies.",
+  "schema": 16,
+  "contentHash": "b79c78ed",
+  "generator": 7,
+  "startedAt": "2026-09-09T05:07:54.604Z",
+  "finishedAt": "2026-09-09T05:08:41.586Z",
+  "harnessSha256": "4624fd0a733b3a6174e2699fa46fd4521997229b850dee4958bb4aef390d84da",
+  "strategySha256": null,
+  "baseline": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+  "environment": {
+    "node": "v26.7.0",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+    "logicalCpus": 32,
+    "os": "linux 7.2.3-arch1-3",
+    "finalRssBytes": 477138944
+  },
+  "rounds": 300,
+  "finalTurn": 301,
+  "maxRounds": 300,
+  "abortReason": null,
+  "victory": null,
+  "initialHash": "e578d585",
+  "finalHash": "3c565118",
+  "initialSaveSha256": "fb94153048efa3c17361510fc7be5dbe6208d5e0a4201c00ff02603cb51fc732",
+  "finalSaveSha256": "3f592112c90a969e2db9c47546a0ba0c1becba2349bef8442c2611a1ff01f0e5",
+  "commandResultSha256": "40b4ee24e3ab3e3993f0c0ac8f5bb1c79ac2aa785db53b22f3ec798c68f86ffb",
+  "commandCount": 11051,
+  "commandTypes": {
+    "found": 44,
+    "moveTo": 8645,
+    "endTurn": 300,
+    "adoptInstitution": 4,
+    "queue": 379,
+    "setWorkedTiles": 1284,
+    "improveTile": 4,
+    "develop": 20,
+    "research": 38,
+    "recruitCharacter": 21,
+    "assignCharacter": 21,
+    "startCharacterMission": 78,
+    "mergeArmies": 58,
+    "adoptDoctrine": 4,
+    "promoteCharacter": 12,
+    "accelerateRoad": 6,
+    "embarkArmy": 15,
+    "disembarkArmy": 14,
+    "declareWar": 10,
+    "attack": 10,
+    "autoResolveBattle": 12,
+    "proposePeace": 9,
+    "respondPeace": 9,
+    "besiege": 28,
+    "liftSiege": 24,
+    "assault": 2
+  },
+  "rawEventCounts": {
+    "settlement_founded": 44,
+    "army_moved": 22533,
+    "turn_started": 1200,
+    "institution_adopted": 4,
+    "production_queued": 379,
+    "worked_tiles_changed": 1284,
+    "settlement_grew": 583,
+    "building_completed": 180,
+    "land_work_started": 4,
+    "land_work_progress": 4,
+    "development_acquired": 20,
+    "technology_researched": 38,
+    "land_work_completed": 4,
+    "unit_recruited": 199,
+    "character_recruited": 21,
+    "territory_expanded": 718,
+    "character_assigned": 22,
+    "character_mission_started": 78,
+    "road_planned": 33,
+    "character_mission_progress": 78,
+    "formations_transferred": 58,
+    "road_segment_built": 106,
+    "character_mission_completed": 78,
+    "doctrine_adopted": 4,
+    "army_command_changed": 10,
+    "road_completed": 27,
+    "character_promoted": 12,
+    "road_accelerated": 6,
+    "army_embarked": 15,
+    "army_disembarked": 14,
+    "war_declared": 20,
+    "battle_started": 24,
+    "army_retreated": 12,
+    "formation_experience": 21,
+    "battle_finished": 24,
+    "movement_interrupted": 16,
+    "peace_proposed": 18,
+    "peace_accepted": 18,
+    "peace_expired": 18,
+    "siege_started": 56,
+    "siege_progress": 64,
+    "siege_lifted": 54,
+    "battle_ability_used": 6,
+    "character_battle_experience": 4,
+    "army_destroyed": 1,
+    "character_recovered": 1
+  },
+  "uniqueBattleCount": 12,
+  "captureDecisionCount": 0,
+  "paidQueues": {
+    "building.granary": 44,
+    "building.workshop": 44,
+    "building.market": 44,
+    "building.archive": 44,
+    "unit.colonist": 45,
+    "unit.guard": 28,
+    "unit.spearman": 17,
+    "unit.heavy_infantry": 16,
+    "unit.scout": 19,
+    "building.harbor": 4,
+    "unit.cavalry": 14,
+    "unit.coastal_warship": 4,
+    "unit.ocean_warship": 8,
+    "unit.transport": 9,
+    "unit.skirmisher": 16,
+    "unit.arbalester": 14,
+    "unit.lancer": 5,
+    "unit.halberdier": 4
+  },
+  "refusalCount": 0,
+  "firstContacts": {
+    "faction.cinder_march": 57,
+    "faction.glass_tide": 57,
+    "faction.reedbound_council": 130,
+    "faction.ashen_compact": 137
+  },
+  "firstResearchSaturation": {
+    "faction.ashen_compact": 78,
+    "faction.reedbound_council": 119
+  },
+  "movement": {
+    "army.2": {
+      "orders": 112,
+      "moved": 112,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.4": {
+      "orders": 139,
+      "moved": 139,
+      "twoStepReturns": 4,
+      "noChangeOrders": 0
+    },
+    "army.6": {
+      "orders": 162,
+      "moved": 162,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.8": {
+      "orders": 66,
+      "moved": 66,
+      "twoStepReturns": 10,
+      "noChangeOrders": 0
+    },
+    "army.13": {
+      "orders": 5,
+      "moved": 5,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.14": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.18": {
+      "orders": 3,
+      "moved": 3,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.21": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.15": {
+      "orders": 32,
+      "moved": 32,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.36": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.25": {
+      "orders": 33,
+      "moved": 33,
+      "twoStepReturns": 4,
+      "noChangeOrders": 0
+    },
+    "army.38": {
+      "orders": 39,
+      "moved": 39,
+      "twoStepReturns": 3,
+      "noChangeOrders": 0
+    },
+    "army.44": {
+      "orders": 115,
+      "moved": 115,
+      "twoStepReturns": 5,
+      "noChangeOrders": 0
+    },
+    "army.46": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.28": {
+      "orders": 46,
+      "moved": 46,
+      "twoStepReturns": 3,
+      "noChangeOrders": 0
+    },
+    "army.50": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.55": {
+      "orders": 89,
+      "moved": 89,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.53": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.60": {
+      "orders": 33,
+      "moved": 33,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.17": {
+      "orders": 72,
+      "moved": 72,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.65": {
+      "orders": 78,
+      "moved": 78,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.64": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.70": {
+      "orders": 79,
+      "moved": 79,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.69": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.77": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.79": {
+      "orders": 104,
+      "moved": 104,
+      "twoStepReturns": 3,
+      "noChangeOrders": 0
+    },
+    "army.78": {
+      "orders": 74,
+      "moved": 74,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.83": {
+      "orders": 3,
+      "moved": 3,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.88": {
+      "orders": 64,
+      "moved": 64,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.62": {
+      "orders": 101,
+      "moved": 101,
+      "twoStepReturns": 5,
+      "noChangeOrders": 0
+    },
+    "army.76": {
+      "orders": 124,
+      "moved": 124,
+      "twoStepReturns": 4,
+      "noChangeOrders": 0
+    },
+    "army.89": {
+      "orders": 23,
+      "moved": 23,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.97": {
+      "orders": 69,
+      "moved": 69,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.85": {
+      "orders": 62,
+      "moved": 62,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.95": {
+      "orders": 63,
+      "moved": 63,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.96": {
+      "orders": 260,
+      "moved": 260,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.100": {
+      "orders": 226,
+      "moved": 226,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.101": {
+      "orders": 3,
+      "moved": 3,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.102": {
+      "orders": 118,
+      "moved": 118,
+      "twoStepReturns": 2,
+      "noChangeOrders": 0
+    },
+    "army.103": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.109": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.110": {
+      "orders": 255,
+      "moved": 255,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.111": {
+      "orders": 217,
+      "moved": 217,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.113": {
+      "orders": 245,
+      "moved": 245,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.117": {
+      "orders": 94,
+      "moved": 94,
+      "twoStepReturns": 4,
+      "noChangeOrders": 0
+    },
+    "army.116": {
+      "orders": 117,
+      "moved": 117,
+      "twoStepReturns": 3,
+      "noChangeOrders": 0
+    },
+    "army.125": {
+      "orders": 187,
+      "moved": 187,
+      "twoStepReturns": 2,
+      "noChangeOrders": 0
+    },
+    "army.129": {
+      "orders": 1,
+      "moved": 1,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.115": {
+      "orders": 90,
+      "moved": 90,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.130": {
+      "orders": 111,
+      "moved": 111,
+      "twoStepReturns": 3,
+      "noChangeOrders": 0
+    },
+    "army.137": {
+      "orders": 62,
+      "moved": 62,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.136": {
+      "orders": 51,
+      "moved": 51,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.138": {
+      "orders": 81,
+      "moved": 81,
+      "twoStepReturns": 6,
+      "noChangeOrders": 0
+    },
+    "army.132": {
+      "orders": 3,
+      "moved": 3,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.133": {
+      "orders": 57,
+      "moved": 57,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.134": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.144": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.147": {
+      "orders": 225,
+      "moved": 225,
+      "twoStepReturns": 29,
+      "noChangeOrders": 0
+    },
+    "army.152": {
+      "orders": 3,
+      "moved": 3,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.150": {
+      "orders": 38,
+      "moved": 38,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.154": {
+      "orders": 45,
+      "moved": 45,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.124": {
+      "orders": 108,
+      "moved": 108,
+      "twoStepReturns": 4,
+      "noChangeOrders": 0
+    },
+    "army.155": {
+      "orders": 1,
+      "moved": 1,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.156": {
+      "orders": 110,
+      "moved": 110,
+      "twoStepReturns": 4,
+      "noChangeOrders": 0
+    },
+    "army.157": {
+      "orders": 45,
+      "moved": 45,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.162": {
+      "orders": 44,
+      "moved": 44,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.165": {
+      "orders": 6,
+      "moved": 6,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.166": {
+      "orders": 72,
+      "moved": 72,
+      "twoStepReturns": 6,
+      "noChangeOrders": 0
+    },
+    "army.167": {
+      "orders": 5,
+      "moved": 5,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.170": {
+      "orders": 70,
+      "moved": 70,
+      "twoStepReturns": 22,
+      "noChangeOrders": 0
+    },
+    "army.174": {
+      "orders": 54,
+      "moved": 54,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.175": {
+      "orders": 42,
+      "moved": 42,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.173": {
+      "orders": 8,
+      "moved": 8,
+      "twoStepReturns": 2,
+      "noChangeOrders": 0
+    },
+    "army.178": {
+      "orders": 68,
+      "moved": 68,
+      "twoStepReturns": 9,
+      "noChangeOrders": 0
+    },
+    "army.179": {
+      "orders": 18,
+      "moved": 18,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.181": {
+      "orders": 40,
+      "moved": 40,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.188": {
+      "orders": 14,
+      "moved": 14,
+      "twoStepReturns": 7,
+      "noChangeOrders": 0
+    },
+    "army.193": {
+      "orders": 80,
+      "moved": 80,
+      "twoStepReturns": 73,
+      "noChangeOrders": 0
+    },
+    "army.194": {
+      "orders": 5,
+      "moved": 5,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.196": {
+      "orders": 48,
+      "moved": 48,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.197": {
+      "orders": 53,
+      "moved": 53,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.202": {
+      "orders": 30,
+      "moved": 30,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.203": {
+      "orders": 50,
+      "moved": 50,
+      "twoStepReturns": 4,
+      "noChangeOrders": 0
+    },
+    "army.206": {
+      "orders": 30,
+      "moved": 30,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.205": {
+      "orders": 188,
+      "moved": 188,
+      "twoStepReturns": 155,
+      "noChangeOrders": 0
+    },
+    "army.207": {
+      "orders": 195,
+      "moved": 195,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.139": {
+      "orders": 108,
+      "moved": 108,
+      "twoStepReturns": 43,
+      "noChangeOrders": 0
+    },
+    "army.145": {
+      "orders": 108,
+      "moved": 108,
+      "twoStepReturns": 31,
+      "noChangeOrders": 0
+    },
+    "army.176": {
+      "orders": 110,
+      "moved": 110,
+      "twoStepReturns": 52,
+      "noChangeOrders": 0
+    },
+    "army.213": {
+      "orders": 19,
+      "moved": 19,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.214": {
+      "orders": 18,
+      "moved": 18,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.217": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 29,
+      "noChangeOrders": 0
+    },
+    "army.218": {
+      "orders": 19,
+      "moved": 19,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.223": {
+      "orders": 10,
+      "moved": 10,
+      "twoStepReturns": 4,
+      "noChangeOrders": 0
+    },
+    "army.225": {
+      "orders": 6,
+      "moved": 6,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.226": {
+      "orders": 156,
+      "moved": 156,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.228": {
+      "orders": 2,
+      "moved": 2,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.235": {
+      "orders": 27,
+      "moved": 27,
+      "twoStepReturns": 21,
+      "noChangeOrders": 0
+    },
+    "army.237": {
+      "orders": 58,
+      "moved": 58,
+      "twoStepReturns": 3,
+      "noChangeOrders": 0
+    },
+    "army.240": {
+      "orders": 63,
+      "moved": 63,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.245": {
+      "orders": 27,
+      "moved": 27,
+      "twoStepReturns": 15,
+      "noChangeOrders": 0
+    },
+    "army.234": {
+      "orders": 106,
+      "moved": 106,
+      "twoStepReturns": 36,
+      "noChangeOrders": 0
+    },
+    "army.59": {
+      "orders": 101,
+      "moved": 101,
+      "twoStepReturns": 43,
+      "noChangeOrders": 0
+    },
+    "army.250": {
+      "orders": 149,
+      "moved": 149,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.247": {
+      "orders": 35,
+      "moved": 35,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.254": {
+      "orders": 150,
+      "moved": 150,
+      "twoStepReturns": 133,
+      "noChangeOrders": 0
+    },
+    "army.183": {
+      "orders": 59,
+      "moved": 59,
+      "twoStepReturns": 8,
+      "noChangeOrders": 0
+    },
+    "army.191": {
+      "orders": 58,
+      "moved": 58,
+      "twoStepReturns": 5,
+      "noChangeOrders": 0
+    },
+    "army.236": {
+      "orders": 60,
+      "moved": 60,
+      "twoStepReturns": 7,
+      "noChangeOrders": 0
+    },
+    "army.263": {
+      "orders": 175,
+      "moved": 175,
+      "twoStepReturns": 173,
+      "noChangeOrders": 0
+    },
+    "army.268": {
+      "orders": 137,
+      "moved": 137,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.276": {
+      "orders": 7,
+      "moved": 7,
+      "twoStepReturns": 2,
+      "noChangeOrders": 0
+    },
+    "army.280": {
+      "orders": 4,
+      "moved": 4,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.295": {
+      "orders": 7,
+      "moved": 7,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.296": {
+      "orders": 33,
+      "moved": 33,
+      "twoStepReturns": 9,
+      "noChangeOrders": 0
+    },
+    "army.284": {
+      "orders": 72,
+      "moved": 72,
+      "twoStepReturns": 19,
+      "noChangeOrders": 0
+    },
+    "army.288": {
+      "orders": 72,
+      "moved": 72,
+      "twoStepReturns": 20,
+      "noChangeOrders": 0
+    },
+    "army.289": {
+      "orders": 35,
+      "moved": 35,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.300": {
+      "orders": 6,
+      "moved": 6,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.308": {
+      "orders": 27,
+      "moved": 27,
+      "twoStepReturns": 2,
+      "noChangeOrders": 0
+    },
+    "army.309": {
+      "orders": 65,
+      "moved": 65,
+      "twoStepReturns": 7,
+      "noChangeOrders": 0
+    },
+    "army.310": {
+      "orders": 26,
+      "moved": 26,
+      "twoStepReturns": 2,
+      "noChangeOrders": 0
+    },
+    "army.317": {
+      "orders": 40,
+      "moved": 40,
+      "twoStepReturns": 34,
+      "noChangeOrders": 0
+    },
+    "army.316": {
+      "orders": 117,
+      "moved": 117,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.255": {
+      "orders": 21,
+      "moved": 21,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.257": {
+      "orders": 21,
+      "moved": 21,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.258": {
+      "orders": 21,
+      "moved": 21,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.277": {
+      "orders": 21,
+      "moved": 21,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.311": {
+      "orders": 21,
+      "moved": 21,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.335": {
+      "orders": 84,
+      "moved": 84,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.298": {
+      "orders": 18,
+      "moved": 18,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.337": {
+      "orders": 3,
+      "moved": 3,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.338": {
+      "orders": 59,
+      "moved": 59,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.342": {
+      "orders": 75,
+      "moved": 75,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.340": {
+      "orders": 4,
+      "moved": 4,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.343": {
+      "orders": 17,
+      "moved": 17,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.345": {
+      "orders": 71,
+      "moved": 71,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.352": {
+      "orders": 5,
+      "moved": 5,
+      "twoStepReturns": 4,
+      "noChangeOrders": 0
+    },
+    "army.355": {
+      "orders": 42,
+      "moved": 42,
+      "twoStepReturns": 1,
+      "noChangeOrders": 0
+    },
+    "army.358": {
+      "orders": 58,
+      "moved": 58,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.348": {
+      "orders": 15,
+      "moved": 15,
+      "twoStepReturns": 7,
+      "noChangeOrders": 0
+    },
+    "army.359": {
+      "orders": 57,
+      "moved": 57,
+      "twoStepReturns": 55,
+      "noChangeOrders": 0
+    },
+    "army.364": {
+      "orders": 12,
+      "moved": 12,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.365": {
+      "orders": 12,
+      "moved": 12,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.366": {
+      "orders": 11,
+      "moved": 11,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.369": {
+      "orders": 18,
+      "moved": 18,
+      "twoStepReturns": 0,
+      "noChangeOrders": 0
+    },
+    "army.371": {
+      "orders": 16,
+      "moved": 16,
+      "twoStepReturns": 14,
+      "noChangeOrders": 0
+    }
+  },
+  "checkpoints": [
+    {
+      "turn": 1,
+      "completedRounds": 0,
+      "hash": "e578d585",
+      "settlements": 0,
+      "population": 0,
+      "armies": 8,
+      "formations": 8,
+      "hulls": 0,
+      "wars": [
+        [
+          "faction.cinder_march",
+          "faction.glass_tide"
+        ]
+      ],
+      "uniqueBattles": 0,
+      "captures": 0,
+      "factionsWithContact": 0,
+      "contactPairs": 0,
+      "projects": [],
+      "victory": null,
+      "factions": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "treasury": 60,
+          "knowledge": 0,
+          "settlements": 0,
+          "population": 0,
+          "maxPopulation": 0,
+          "armies": 2,
+          "formations": 2,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": null,
+          "doctrine": null,
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 0,
+            "upkeep": 2,
+            "net": -2,
+            "queuedUpkeep": 0
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 61,
+          "characters": [],
+          "claimed": 0,
+          "worked": 0
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "treasury": 60,
+          "knowledge": 0,
+          "settlements": 0,
+          "population": 0,
+          "maxPopulation": 0,
+          "armies": 2,
+          "formations": 2,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": null,
+          "doctrine": null,
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 0,
+            "upkeep": 2,
+            "net": -2,
+            "queuedUpkeep": 0
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 61,
+          "characters": [],
+          "claimed": 0,
+          "worked": 0
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "treasury": 60,
+          "knowledge": 0,
+          "settlements": 0,
+          "population": 0,
+          "maxPopulation": 0,
+          "armies": 2,
+          "formations": 2,
+          "technologies": [
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": null,
+          "doctrine": null,
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 0,
+            "upkeep": 2,
+            "net": -2,
+            "queuedUpkeep": 0
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 61,
+          "characters": [],
+          "claimed": 0,
+          "worked": 0
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "treasury": 60,
+          "knowledge": 0,
+          "settlements": 0,
+          "population": 0,
+          "maxPopulation": 0,
+          "armies": 2,
+          "formations": 2,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": null,
+          "doctrine": null,
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 0,
+            "upkeep": 2,
+            "net": -2,
+            "queuedUpkeep": 0
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 61,
+          "characters": [],
+          "claimed": 0,
+          "worked": 0
+        }
+      ]
+    },
+    {
+      "turn": 30,
+      "completedRounds": 29,
+      "hash": "bc598899",
+      "settlements": 10,
+      "population": 50,
+      "armies": 13,
+      "formations": 21,
+      "hulls": 0,
+      "wars": [
+        [
+          "faction.cinder_march",
+          "faction.glass_tide"
+        ]
+      ],
+      "uniqueBattles": 0,
+      "captures": 0,
+      "factionsWithContact": 0,
+      "contactPairs": 0,
+      "projects": [],
+      "victory": null,
+      "factions": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "treasury": 74,
+          "knowledge": 86,
+          "settlements": 3,
+          "population": 15,
+          "maxPopulation": 9,
+          "armies": 3,
+          "formations": 5,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.26",
+              "settlement.9"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 53,
+            "upkeep": 20,
+            "net": 33,
+            "queuedUpkeep": 3
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 842,
+          "characters": [
+            {
+              "id": "character.16",
+              "definitionId": "character.surveyor",
+              "experience": 0
+            }
+          ],
+          "claimed": 23,
+          "worked": 13
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "treasury": 90,
+          "knowledge": 57,
+          "settlements": 2,
+          "population": 13,
+          "maxPopulation": 9,
+          "armies": 4,
+          "formations": 5,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.10"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 41,
+            "upkeep": 17,
+            "net": 24,
+            "queuedUpkeep": 6
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 1134,
+          "characters": [
+            {
+              "id": "character.29",
+              "definitionId": "character.surveyor",
+              "experience": 8
+            }
+          ],
+          "claimed": 16,
+          "worked": 12
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "treasury": 132,
+          "knowledge": 55,
+          "settlements": 3,
+          "population": 14,
+          "maxPopulation": 7,
+          "armies": 2,
+          "formations": 6,
+          "technologies": [
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.11",
+              "settlement.20"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 58,
+            "upkeep": 25,
+            "net": 33,
+            "queuedUpkeep": 2
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 1057,
+          "characters": [
+            {
+              "id": "character.19",
+              "definitionId": "character.surveyor",
+              "experience": 4
+            },
+            {
+              "id": "character.37",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.42",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 23,
+          "worked": 13
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "treasury": 90,
+          "knowledge": 65,
+          "settlements": 2,
+          "population": 8,
+          "maxPopulation": 5,
+          "armies": 4,
+          "formations": 5,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.12"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 35,
+            "upkeep": 15,
+            "net": 20,
+            "queuedUpkeep": 3
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 694,
+          "characters": [
+            {
+              "id": "character.27",
+              "definitionId": "character.surveyor",
+              "experience": 0
+            }
+          ],
+          "claimed": 15,
+          "worked": 8
+        }
+      ]
+    },
+    {
+      "turn": 60,
+      "completedRounds": 59,
+      "hash": "5ea94626",
+      "settlements": 21,
+      "population": 129,
+      "armies": 53,
+      "formations": 77,
+      "hulls": 12,
+      "wars": [
+        [
+          "faction.cinder_march",
+          "faction.glass_tide"
+        ]
+      ],
+      "uniqueBattles": 0,
+      "captures": 0,
+      "factionsWithContact": 2,
+      "contactPairs": 1,
+      "projects": [],
+      "victory": null,
+      "factions": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "treasury": 250,
+          "knowledge": 239,
+          "settlements": 5,
+          "population": 35,
+          "maxPopulation": 13,
+          "armies": 18,
+          "formations": 21,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.119",
+              "settlement.26",
+              "settlement.51",
+              "settlement.9"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 100,
+            "upkeep": 73,
+            "net": 27,
+            "queuedUpkeep": 0
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 5096,
+          "characters": [
+            {
+              "id": "character.16",
+              "definitionId": "character.surveyor",
+              "experience": 2
+            },
+            {
+              "id": "character.86",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 46,
+          "worked": 33
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "treasury": 173,
+          "knowledge": 112,
+          "settlements": 4,
+          "population": 31,
+          "maxPopulation": 13,
+          "armies": 11,
+          "formations": 16,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.10",
+              "settlement.30",
+              "settlement.61"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 87,
+            "upkeep": 63,
+            "net": 24,
+            "queuedUpkeep": 3
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 4557,
+          "characters": [
+            {
+              "id": "character.29",
+              "definitionId": "character.surveyor",
+              "experience": 10
+            },
+            {
+              "id": "character.72",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.121",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 37,
+          "worked": 28
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "treasury": 328,
+          "knowledge": 203,
+          "settlements": 7,
+          "population": 39,
+          "maxPopulation": 10,
+          "armies": 14,
+          "formations": 23,
+          "technologies": [
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.11",
+              "settlement.114",
+              "settlement.20",
+              "settlement.43",
+              "settlement.73"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 153,
+            "upkeep": 98,
+            "net": 55,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.glass_tide"
+          ],
+          "firstContactTurn": 57,
+          "exploredCells": 3434,
+          "characters": [
+            {
+              "id": "character.19",
+              "definitionId": "character.surveyor",
+              "experience": 4
+            },
+            {
+              "id": "character.37",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.42",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.141",
+              "definitionId": "character.marshal",
+              "experience": 0
+            }
+          ],
+          "claimed": 62,
+          "worked": 37
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "treasury": 233,
+          "knowledge": 515,
+          "settlements": 5,
+          "population": 24,
+          "maxPopulation": 7,
+          "armies": 10,
+          "formations": 17,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.12",
+              "settlement.32",
+              "settlement.57",
+              "settlement.99"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 96,
+            "upkeep": 63,
+            "net": 33,
+            "queuedUpkeep": 4
+          },
+          "contacts": [
+            "faction.cinder_march"
+          ],
+          "firstContactTurn": 57,
+          "exploredCells": 1546,
+          "characters": [
+            {
+              "id": "character.27",
+              "definitionId": "character.surveyor",
+              "experience": 8
+            },
+            {
+              "id": "character.74",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.81",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 45,
+          "worked": 24
+        }
+      ]
+    },
+    {
+      "turn": 100,
+      "completedRounds": 99,
+      "hash": "9751d148",
+      "settlements": 30,
+      "population": 247,
+      "armies": 82,
+      "formations": 113,
+      "hulls": 12,
+      "wars": [
+        [
+          "faction.cinder_march",
+          "faction.glass_tide"
+        ]
+      ],
+      "uniqueBattles": 0,
+      "captures": 0,
+      "factionsWithContact": 2,
+      "contactPairs": 1,
+      "projects": [],
+      "victory": null,
+      "factions": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "treasury": 1515,
+          "knowledge": 1316,
+          "settlements": 8,
+          "population": 72,
+          "maxPopulation": 17,
+          "armies": 27,
+          "formations": 30,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.119",
+              "settlement.131",
+              "settlement.164",
+              "settlement.189",
+              "settlement.222",
+              "settlement.26",
+              "settlement.51",
+              "settlement.9"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 193,
+            "upkeep": 120,
+            "net": 73,
+            "queuedUpkeep": 0
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 11143,
+          "characters": [
+            {
+              "id": "character.16",
+              "definitionId": "character.surveyor",
+              "experience": 6
+            },
+            {
+              "id": "character.86",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 94,
+          "worked": 70
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "treasury": 1542,
+          "knowledge": 728,
+          "settlements": 5,
+          "population": 53,
+          "maxPopulation": 16,
+          "armies": 16,
+          "formations": 21,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.10",
+              "settlement.153",
+              "settlement.187",
+              "settlement.30",
+              "settlement.61"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 137,
+            "upkeep": 81,
+            "net": 56,
+            "queuedUpkeep": 0
+          },
+          "contacts": [],
+          "firstContactTurn": null,
+          "exploredCells": 9132,
+          "characters": [
+            {
+              "id": "character.29",
+              "definitionId": "character.surveyor",
+              "experience": 6
+            },
+            {
+              "id": "character.72",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.121",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 64,
+          "worked": 52
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "treasury": 3134,
+          "knowledge": 1074,
+          "settlements": 9,
+          "population": 73,
+          "maxPopulation": 12,
+          "armies": 21,
+          "formations": 32,
+          "technologies": [
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.11",
+              "settlement.114",
+              "settlement.142",
+              "settlement.161",
+              "settlement.177",
+              "settlement.20",
+              "settlement.233",
+              "settlement.43",
+              "settlement.73"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 262,
+            "upkeep": 137,
+            "net": 125,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.glass_tide"
+          ],
+          "firstContactTurn": 57,
+          "exploredCells": 8917,
+          "characters": [
+            {
+              "id": "character.19",
+              "definitionId": "character.surveyor",
+              "experience": 2
+            },
+            {
+              "id": "character.37",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.42",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.141",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.195",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.198",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 106,
+          "worked": 72
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "treasury": 1408,
+          "knowledge": 1738,
+          "settlements": 8,
+          "population": 49,
+          "maxPopulation": 8,
+          "armies": 18,
+          "formations": 30,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.12",
+              "settlement.143",
+              "settlement.204",
+              "settlement.211",
+              "settlement.231",
+              "settlement.32",
+              "settlement.57",
+              "settlement.99"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 200,
+            "upkeep": 118,
+            "net": 82,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.cinder_march"
+          ],
+          "firstContactTurn": 57,
+          "exploredCells": 3152,
+          "characters": [
+            {
+              "id": "character.27",
+              "definitionId": "character.surveyor",
+              "experience": 8
+            },
+            {
+              "id": "character.74",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.81",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.168",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.242",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.244",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 88,
+          "worked": 47
+        }
+      ]
+    },
+    {
+      "turn": 200,
+      "completedRounds": 199,
+      "hash": "e8dcd7aa",
+      "settlements": 40,
+      "population": 463,
+      "armies": 89,
+      "formations": 142,
+      "hulls": 14,
+      "wars": [
+        [
+          "faction.cinder_march",
+          "faction.glass_tide"
+        ]
+      ],
+      "uniqueBattles": 11,
+      "captures": 0,
+      "factionsWithContact": 4,
+      "contactPairs": 3,
+      "projects": [],
+      "victory": null,
+      "factions": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "treasury": 11602,
+          "knowledge": 9307,
+          "settlements": 10,
+          "population": 136,
+          "maxPopulation": 24,
+          "armies": 31,
+          "formations": 35,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.119",
+              "settlement.131",
+              "settlement.164",
+              "settlement.189",
+              "settlement.222",
+              "settlement.248",
+              "settlement.26",
+              "settlement.265",
+              "settlement.51",
+              "settlement.9"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 313,
+            "upkeep": 175,
+            "net": 138,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.cinder_march"
+          ],
+          "firstContactTurn": 137,
+          "exploredCells": 14823,
+          "characters": [
+            {
+              "id": "character.16",
+              "definitionId": "character.surveyor",
+              "experience": 6
+            },
+            {
+              "id": "character.86",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.269",
+              "definitionId": "character.marshal",
+              "experience": 0
+            }
+          ],
+          "claimed": 192,
+          "worked": 135
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "treasury": 7869,
+          "knowledge": 7102,
+          "settlements": 11,
+          "population": 128,
+          "maxPopulation": 22,
+          "armies": 22,
+          "formations": 38,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.10",
+              "settlement.153",
+              "settlement.187",
+              "settlement.253",
+              "settlement.270",
+              "settlement.290",
+              "settlement.291",
+              "settlement.30",
+              "settlement.301",
+              "settlement.314",
+              "settlement.61"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 317,
+            "upkeep": 187,
+            "net": 130,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.glass_tide"
+          ],
+          "firstContactTurn": 130,
+          "exploredCells": 14222,
+          "characters": [
+            {
+              "id": "character.29",
+              "definitionId": "character.surveyor",
+              "experience": 6
+            },
+            {
+              "id": "character.72",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.121",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.278",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.282",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.285",
+              "definitionId": "character.marshal",
+              "experience": 0
+            }
+          ],
+          "claimed": 169,
+          "worked": 126
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "treasury": 18454,
+          "knowledge": 6564,
+          "settlements": 9,
+          "population": 109,
+          "maxPopulation": 15,
+          "armies": 19,
+          "formations": 32,
+          "technologies": [
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.11",
+              "settlement.114",
+              "settlement.142",
+              "settlement.161",
+              "settlement.177",
+              "settlement.20",
+              "settlement.233",
+              "settlement.43",
+              "settlement.73"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 335,
+            "upkeep": 155,
+            "net": 180,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.glass_tide"
+          ],
+          "firstContactTurn": 57,
+          "exploredCells": 14040,
+          "characters": [
+            {
+              "id": "character.19",
+              "definitionId": "character.surveyor",
+              "experience": 22
+            },
+            {
+              "id": "character.37",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.42",
+              "definitionId": "character.engineer",
+              "experience": 8
+            },
+            {
+              "id": "character.141",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.195",
+              "definitionId": "character.marshal",
+              "experience": 9
+            },
+            {
+              "id": "character.198",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 179,
+          "worked": 109
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "treasury": 13416,
+          "knowledge": 8560,
+          "settlements": 10,
+          "population": 90,
+          "maxPopulation": 12,
+          "armies": 17,
+          "formations": 37,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.12",
+              "settlement.143",
+              "settlement.204",
+              "settlement.211",
+              "settlement.231",
+              "settlement.275",
+              "settlement.303",
+              "settlement.32",
+              "settlement.57",
+              "settlement.99"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 347,
+            "upkeep": 164,
+            "net": 183,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.cinder_march",
+            "faction.reedbound_council"
+          ],
+          "firstContactTurn": 57,
+          "exploredCells": 7653,
+          "characters": [
+            {
+              "id": "character.27",
+              "definitionId": "character.surveyor",
+              "experience": 8
+            },
+            {
+              "id": "character.74",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.81",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.168",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.242",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.244",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 170,
+          "worked": 88
+        }
+      ]
+    },
+    {
+      "turn": 300,
+      "completedRounds": 299,
+      "hash": "80414618",
+      "settlements": 44,
+      "population": 625,
+      "armies": 104,
+      "formations": 162,
+      "hulls": 21,
+      "wars": [
+        [
+          "faction.cinder_march",
+          "faction.glass_tide"
+        ]
+      ],
+      "uniqueBattles": 12,
+      "captures": 0,
+      "factionsWithContact": 4,
+      "contactPairs": 6,
+      "projects": [],
+      "victory": null,
+      "factions": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "treasury": 27459,
+          "knowledge": 18795,
+          "settlements": 10,
+          "population": 174,
+          "maxPopulation": 28,
+          "armies": 31,
+          "formations": 35,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.119",
+              "settlement.131",
+              "settlement.164",
+              "settlement.189",
+              "settlement.222",
+              "settlement.248",
+              "settlement.26",
+              "settlement.265",
+              "settlement.51",
+              "settlement.9"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 376,
+            "upkeep": 199,
+            "net": 177,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.cinder_march",
+            "faction.glass_tide",
+            "faction.reedbound_council"
+          ],
+          "firstContactTurn": 137,
+          "exploredCells": 16836,
+          "characters": [
+            {
+              "id": "character.16",
+              "definitionId": "character.surveyor",
+              "experience": 6
+            },
+            {
+              "id": "character.86",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.269",
+              "definitionId": "character.marshal",
+              "experience": 0
+            }
+          ],
+          "claimed": 263,
+          "worked": 172
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "treasury": 20213,
+          "knowledge": 19456,
+          "settlements": 15,
+          "population": 206,
+          "maxPopulation": 26,
+          "armies": 37,
+          "formations": 55,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.10",
+              "settlement.153",
+              "settlement.187",
+              "settlement.253",
+              "settlement.270",
+              "settlement.290",
+              "settlement.291",
+              "settlement.30",
+              "settlement.301",
+              "settlement.314",
+              "settlement.339",
+              "settlement.363",
+              "settlement.370",
+              "settlement.372",
+              "settlement.61"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 497,
+            "upkeep": 298,
+            "net": 199,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.cinder_march",
+            "faction.glass_tide"
+          ],
+          "firstContactTurn": 130,
+          "exploredCells": 24760,
+          "characters": [
+            {
+              "id": "character.29",
+              "definitionId": "character.surveyor",
+              "experience": 10
+            },
+            {
+              "id": "character.72",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.121",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.278",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.282",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.285",
+              "definitionId": "character.marshal",
+              "experience": 0
+            }
+          ],
+          "claimed": 303,
+          "worked": 203
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "treasury": 37881,
+          "knowledge": 12064,
+          "settlements": 9,
+          "population": 131,
+          "maxPopulation": 17,
+          "armies": 20,
+          "formations": 33,
+          "technologies": [
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.11",
+              "settlement.114",
+              "settlement.142",
+              "settlement.161",
+              "settlement.177",
+              "settlement.20",
+              "settlement.233",
+              "settlement.43",
+              "settlement.73"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 385,
+            "upkeep": 172,
+            "net": 213,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.glass_tide",
+            "faction.reedbound_council"
+          ],
+          "firstContactTurn": 57,
+          "exploredCells": 19474,
+          "characters": [
+            {
+              "id": "character.19",
+              "definitionId": "character.surveyor",
+              "experience": 18
+            },
+            {
+              "id": "character.37",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.42",
+              "definitionId": "character.engineer",
+              "experience": 8
+            },
+            {
+              "id": "character.141",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.195",
+              "definitionId": "character.marshal",
+              "experience": 9
+            },
+            {
+              "id": "character.198",
+              "definitionId": "character.engineer",
+              "experience": 13
+            }
+          ],
+          "claimed": 238,
+          "worked": 130
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "treasury": 34531,
+          "knowledge": 16331,
+          "settlements": 10,
+          "population": 114,
+          "maxPopulation": 15,
+          "armies": 16,
+          "formations": 39,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.12",
+              "settlement.143",
+              "settlement.204",
+              "settlement.211",
+              "settlement.231",
+              "settlement.275",
+              "settlement.303",
+              "settlement.32",
+              "settlement.57",
+              "settlement.99"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 417,
+            "upkeep": 182,
+            "net": 235,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.cinder_march",
+            "faction.reedbound_council"
+          ],
+          "firstContactTurn": 57,
+          "exploredCells": 13472,
+          "characters": [
+            {
+              "id": "character.27",
+              "definitionId": "character.surveyor",
+              "experience": 8
+            },
+            {
+              "id": "character.74",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.81",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.168",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.242",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.244",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 218,
+          "worked": 114
+        }
+      ]
+    },
+    {
+      "turn": 301,
+      "completedRounds": 300,
+      "hash": "3c565118",
+      "settlements": 44,
+      "population": 627,
+      "armies": 104,
+      "formations": 162,
+      "hulls": 21,
+      "wars": [
+        [
+          "faction.cinder_march",
+          "faction.glass_tide"
+        ]
+      ],
+      "uniqueBattles": 12,
+      "captures": 0,
+      "factionsWithContact": 4,
+      "contactPairs": 6,
+      "projects": [],
+      "victory": null,
+      "factions": [
+        {
+          "id": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "treasury": 27639,
+          "knowledge": 18895,
+          "settlements": 10,
+          "population": 174,
+          "maxPopulation": 28,
+          "armies": 31,
+          "formations": 35,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.119",
+              "settlement.131",
+              "settlement.164",
+              "settlement.189",
+              "settlement.222",
+              "settlement.248",
+              "settlement.26",
+              "settlement.265",
+              "settlement.51",
+              "settlement.9"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 379,
+            "upkeep": 199,
+            "net": 180,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.cinder_march",
+            "faction.glass_tide",
+            "faction.reedbound_council"
+          ],
+          "firstContactTurn": 137,
+          "exploredCells": 16849,
+          "characters": [
+            {
+              "id": "character.16",
+              "definitionId": "character.surveyor",
+              "experience": 6
+            },
+            {
+              "id": "character.86",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.269",
+              "definitionId": "character.marshal",
+              "experience": 0
+            }
+          ],
+          "claimed": 263,
+          "worked": 174
+        },
+        {
+          "id": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "treasury": 20413,
+          "knowledge": 19613,
+          "settlements": 15,
+          "population": 208,
+          "maxPopulation": 26,
+          "armies": 37,
+          "formations": 55,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.10",
+              "settlement.153",
+              "settlement.187",
+              "settlement.253",
+              "settlement.270",
+              "settlement.290",
+              "settlement.291",
+              "settlement.30",
+              "settlement.301",
+              "settlement.314",
+              "settlement.339",
+              "settlement.363",
+              "settlement.370",
+              "settlement.372",
+              "settlement.61"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 500,
+            "upkeep": 298,
+            "net": 202,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.cinder_march",
+            "faction.glass_tide"
+          ],
+          "firstContactTurn": 130,
+          "exploredCells": 24850,
+          "characters": [
+            {
+              "id": "character.29",
+              "definitionId": "character.surveyor",
+              "experience": 10
+            },
+            {
+              "id": "character.72",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.121",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.278",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.282",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.285",
+              "definitionId": "character.marshal",
+              "experience": 0
+            }
+          ],
+          "claimed": 303,
+          "worked": 204
+        },
+        {
+          "id": "faction.cinder_march",
+          "definitionId": "faction.cinder_march",
+          "treasury": 38095,
+          "knowledge": 12119,
+          "settlements": 9,
+          "population": 131,
+          "maxPopulation": 17,
+          "armies": 20,
+          "formations": 33,
+          "technologies": [
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.quarry_cranes",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.11",
+              "settlement.114",
+              "settlement.142",
+              "settlement.161",
+              "settlement.177",
+              "settlement.20",
+              "settlement.233",
+              "settlement.43",
+              "settlement.73"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 386,
+            "upkeep": 172,
+            "net": 214,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.glass_tide",
+            "faction.reedbound_council"
+          ],
+          "firstContactTurn": 57,
+          "exploredCells": 19549,
+          "characters": [
+            {
+              "id": "character.19",
+              "definitionId": "character.surveyor",
+              "experience": 18
+            },
+            {
+              "id": "character.37",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.42",
+              "definitionId": "character.engineer",
+              "experience": 8
+            },
+            {
+              "id": "character.141",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.195",
+              "definitionId": "character.marshal",
+              "experience": 9
+            },
+            {
+              "id": "character.198",
+              "definitionId": "character.engineer",
+              "experience": 13
+            }
+          ],
+          "claimed": 238,
+          "worked": 131
+        },
+        {
+          "id": "faction.glass_tide",
+          "definitionId": "faction.glass_tide",
+          "treasury": 34749,
+          "knowledge": 16407,
+          "settlements": 10,
+          "population": 114,
+          "maxPopulation": 15,
+          "armies": 16,
+          "formations": 39,
+          "technologies": [
+            "technology.charter_forestry",
+            "technology.cinder_masonry",
+            "technology.civic_accounts",
+            "technology.coastal_navigation",
+            "technology.deep_soundings",
+            "technology.ocean_navigation",
+            "technology.stewardship",
+            "technology.surveyed_estates",
+            "technology.waterworks"
+          ],
+          "institution": "institution.charter_compact",
+          "doctrine": "doctrine.march_columns",
+          "arcaneResearch": [],
+          "resources": {
+            "version": 1,
+            "marketSettlementIds": [
+              "settlement.12",
+              "settlement.143",
+              "settlement.204",
+              "settlement.211",
+              "settlement.231",
+              "settlement.303",
+              "settlement.32",
+              "settlement.57",
+              "settlement.99"
+            ],
+            "stockpiles": [
+              {
+                "resourceId": "resource.grain",
+                "name": "Hearthgrain",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 2,
+                "improvementId": "improvement.grange"
+              },
+              {
+                "resourceId": "resource.iron",
+                "name": "Ironstone",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 4,
+                "improvementId": "improvement.iron_mine"
+              },
+              {
+                "resourceId": "resource.copper",
+                "name": "Red copper",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.copper_mine"
+              },
+              {
+                "resourceId": "resource.salt",
+                "name": "White salt",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.salt_house"
+              },
+              {
+                "resourceId": "resource.timber",
+                "name": "Heartwood",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 3,
+                "improvementId": "improvement.timber_yard"
+              },
+              {
+                "resourceId": "resource.horses",
+                "name": "Steppe horses",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 5,
+                "improvementId": "improvement.remount_yard"
+              },
+              {
+                "resourceId": "resource.silver",
+                "name": "Witness silver",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 7,
+                "improvementId": "improvement.silver_mine"
+              },
+              {
+                "resourceId": "resource.ashglass",
+                "name": "Ashglass",
+                "amount": 0,
+                "perTurn": 0,
+                "salePrice": 6,
+                "improvementId": "improvement.glass_refinery"
+              }
+            ]
+          },
+          "economy": {
+            "income": 400,
+            "upkeep": 182,
+            "net": 218,
+            "queuedUpkeep": 0
+          },
+          "contacts": [
+            "faction.ashen_compact",
+            "faction.cinder_march",
+            "faction.reedbound_council"
+          ],
+          "firstContactTurn": 57,
+          "exploredCells": 13551,
+          "characters": [
+            {
+              "id": "character.27",
+              "definitionId": "character.surveyor",
+              "experience": 8
+            },
+            {
+              "id": "character.74",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.81",
+              "definitionId": "character.engineer",
+              "experience": 0
+            },
+            {
+              "id": "character.168",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.242",
+              "definitionId": "character.marshal",
+              "experience": 0
+            },
+            {
+              "id": "character.244",
+              "definitionId": "character.engineer",
+              "experience": 0
+            }
+          ],
+          "claimed": 218,
+          "worked": 114
+        }
+      ]
+    }
+  ],
+  "final": {
+    "turn": 301,
+    "completedRounds": 300,
+    "hash": "3c565118",
+    "settlements": 44,
+    "population": 627,
+    "armies": 104,
+    "formations": 162,
+    "hulls": 21,
+    "wars": [
+      [
+        "faction.cinder_march",
+        "faction.glass_tide"
+      ]
+    ],
+    "uniqueBattles": 12,
+    "captures": 0,
+    "factionsWithContact": 4,
+    "contactPairs": 6,
+    "projects": [],
+    "victory": null,
+    "factions": [
+      {
+        "id": "faction.ashen_compact",
+        "definitionId": "faction.ashen_compact",
+        "treasury": 27639,
+        "knowledge": 18895,
+        "settlements": 10,
+        "population": 174,
+        "maxPopulation": 28,
+        "armies": 31,
+        "formations": 35,
+        "technologies": [
+          "technology.charter_forestry",
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.quarry_cranes",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institution": "institution.charter_compact",
+        "doctrine": "doctrine.march_columns",
+        "arcaneResearch": [],
+        "resources": {
+          "version": 1,
+          "marketSettlementIds": [
+            "settlement.119",
+            "settlement.131",
+            "settlement.164",
+            "settlement.189",
+            "settlement.222",
+            "settlement.248",
+            "settlement.26",
+            "settlement.265",
+            "settlement.51",
+            "settlement.9"
+          ],
+          "stockpiles": [
+            {
+              "resourceId": "resource.grain",
+              "name": "Hearthgrain",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 2,
+              "improvementId": "improvement.grange"
+            },
+            {
+              "resourceId": "resource.iron",
+              "name": "Ironstone",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 4,
+              "improvementId": "improvement.iron_mine"
+            },
+            {
+              "resourceId": "resource.copper",
+              "name": "Red copper",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.copper_mine"
+            },
+            {
+              "resourceId": "resource.salt",
+              "name": "White salt",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.salt_house"
+            },
+            {
+              "resourceId": "resource.timber",
+              "name": "Heartwood",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.timber_yard"
+            },
+            {
+              "resourceId": "resource.horses",
+              "name": "Steppe horses",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 5,
+              "improvementId": "improvement.remount_yard"
+            },
+            {
+              "resourceId": "resource.silver",
+              "name": "Witness silver",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 7,
+              "improvementId": "improvement.silver_mine"
+            },
+            {
+              "resourceId": "resource.ashglass",
+              "name": "Ashglass",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 6,
+              "improvementId": "improvement.glass_refinery"
+            }
+          ]
+        },
+        "economy": {
+          "income": 379,
+          "upkeep": 199,
+          "net": 180,
+          "queuedUpkeep": 0
+        },
+        "contacts": [
+          "faction.cinder_march",
+          "faction.glass_tide",
+          "faction.reedbound_council"
+        ],
+        "firstContactTurn": 137,
+        "exploredCells": 16849,
+        "characters": [
+          {
+            "id": "character.16",
+            "definitionId": "character.surveyor",
+            "experience": 6
+          },
+          {
+            "id": "character.86",
+            "definitionId": "character.engineer",
+            "experience": 0
+          },
+          {
+            "id": "character.269",
+            "definitionId": "character.marshal",
+            "experience": 0
+          }
+        ],
+        "claimed": 263,
+        "worked": 174
+      },
+      {
+        "id": "faction.reedbound_council",
+        "definitionId": "faction.reedbound_council",
+        "treasury": 20413,
+        "knowledge": 19613,
+        "settlements": 15,
+        "population": 208,
+        "maxPopulation": 26,
+        "armies": 37,
+        "formations": 55,
+        "technologies": [
+          "technology.charter_forestry",
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.quarry_cranes",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institution": "institution.charter_compact",
+        "doctrine": "doctrine.march_columns",
+        "arcaneResearch": [],
+        "resources": {
+          "version": 1,
+          "marketSettlementIds": [
+            "settlement.10",
+            "settlement.153",
+            "settlement.187",
+            "settlement.253",
+            "settlement.270",
+            "settlement.290",
+            "settlement.291",
+            "settlement.30",
+            "settlement.301",
+            "settlement.314",
+            "settlement.339",
+            "settlement.363",
+            "settlement.370",
+            "settlement.372",
+            "settlement.61"
+          ],
+          "stockpiles": [
+            {
+              "resourceId": "resource.grain",
+              "name": "Hearthgrain",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 2,
+              "improvementId": "improvement.grange"
+            },
+            {
+              "resourceId": "resource.iron",
+              "name": "Ironstone",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 4,
+              "improvementId": "improvement.iron_mine"
+            },
+            {
+              "resourceId": "resource.copper",
+              "name": "Red copper",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.copper_mine"
+            },
+            {
+              "resourceId": "resource.salt",
+              "name": "White salt",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.salt_house"
+            },
+            {
+              "resourceId": "resource.timber",
+              "name": "Heartwood",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.timber_yard"
+            },
+            {
+              "resourceId": "resource.horses",
+              "name": "Steppe horses",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 5,
+              "improvementId": "improvement.remount_yard"
+            },
+            {
+              "resourceId": "resource.silver",
+              "name": "Witness silver",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 7,
+              "improvementId": "improvement.silver_mine"
+            },
+            {
+              "resourceId": "resource.ashglass",
+              "name": "Ashglass",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 6,
+              "improvementId": "improvement.glass_refinery"
+            }
+          ]
+        },
+        "economy": {
+          "income": 500,
+          "upkeep": 298,
+          "net": 202,
+          "queuedUpkeep": 0
+        },
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.cinder_march",
+          "faction.glass_tide"
+        ],
+        "firstContactTurn": 130,
+        "exploredCells": 24850,
+        "characters": [
+          {
+            "id": "character.29",
+            "definitionId": "character.surveyor",
+            "experience": 10
+          },
+          {
+            "id": "character.72",
+            "definitionId": "character.marshal",
+            "experience": 0
+          },
+          {
+            "id": "character.121",
+            "definitionId": "character.engineer",
+            "experience": 0
+          },
+          {
+            "id": "character.278",
+            "definitionId": "character.marshal",
+            "experience": 0
+          },
+          {
+            "id": "character.282",
+            "definitionId": "character.engineer",
+            "experience": 0
+          },
+          {
+            "id": "character.285",
+            "definitionId": "character.marshal",
+            "experience": 0
+          }
+        ],
+        "claimed": 303,
+        "worked": 204
+      },
+      {
+        "id": "faction.cinder_march",
+        "definitionId": "faction.cinder_march",
+        "treasury": 38095,
+        "knowledge": 12119,
+        "settlements": 9,
+        "population": 131,
+        "maxPopulation": 17,
+        "armies": 20,
+        "formations": 33,
+        "technologies": [
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.quarry_cranes",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institution": "institution.charter_compact",
+        "doctrine": "doctrine.march_columns",
+        "arcaneResearch": [],
+        "resources": {
+          "version": 1,
+          "marketSettlementIds": [
+            "settlement.11",
+            "settlement.114",
+            "settlement.142",
+            "settlement.161",
+            "settlement.177",
+            "settlement.20",
+            "settlement.233",
+            "settlement.43",
+            "settlement.73"
+          ],
+          "stockpiles": [
+            {
+              "resourceId": "resource.grain",
+              "name": "Hearthgrain",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 2,
+              "improvementId": "improvement.grange"
+            },
+            {
+              "resourceId": "resource.iron",
+              "name": "Ironstone",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 4,
+              "improvementId": "improvement.iron_mine"
+            },
+            {
+              "resourceId": "resource.copper",
+              "name": "Red copper",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.copper_mine"
+            },
+            {
+              "resourceId": "resource.salt",
+              "name": "White salt",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.salt_house"
+            },
+            {
+              "resourceId": "resource.timber",
+              "name": "Heartwood",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.timber_yard"
+            },
+            {
+              "resourceId": "resource.horses",
+              "name": "Steppe horses",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 5,
+              "improvementId": "improvement.remount_yard"
+            },
+            {
+              "resourceId": "resource.silver",
+              "name": "Witness silver",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 7,
+              "improvementId": "improvement.silver_mine"
+            },
+            {
+              "resourceId": "resource.ashglass",
+              "name": "Ashglass",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 6,
+              "improvementId": "improvement.glass_refinery"
+            }
+          ]
+        },
+        "economy": {
+          "income": 386,
+          "upkeep": 172,
+          "net": 214,
+          "queuedUpkeep": 0
+        },
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.glass_tide",
+          "faction.reedbound_council"
+        ],
+        "firstContactTurn": 57,
+        "exploredCells": 19549,
+        "characters": [
+          {
+            "id": "character.19",
+            "definitionId": "character.surveyor",
+            "experience": 18
+          },
+          {
+            "id": "character.37",
+            "definitionId": "character.marshal",
+            "experience": 0
+          },
+          {
+            "id": "character.42",
+            "definitionId": "character.engineer",
+            "experience": 8
+          },
+          {
+            "id": "character.141",
+            "definitionId": "character.marshal",
+            "experience": 0
+          },
+          {
+            "id": "character.195",
+            "definitionId": "character.marshal",
+            "experience": 9
+          },
+          {
+            "id": "character.198",
+            "definitionId": "character.engineer",
+            "experience": 13
+          }
+        ],
+        "claimed": 238,
+        "worked": 131
+      },
+      {
+        "id": "faction.glass_tide",
+        "definitionId": "faction.glass_tide",
+        "treasury": 34749,
+        "knowledge": 16407,
+        "settlements": 10,
+        "population": 114,
+        "maxPopulation": 15,
+        "armies": 16,
+        "formations": 39,
+        "technologies": [
+          "technology.charter_forestry",
+          "technology.cinder_masonry",
+          "technology.civic_accounts",
+          "technology.coastal_navigation",
+          "technology.deep_soundings",
+          "technology.ocean_navigation",
+          "technology.stewardship",
+          "technology.surveyed_estates",
+          "technology.waterworks"
+        ],
+        "institution": "institution.charter_compact",
+        "doctrine": "doctrine.march_columns",
+        "arcaneResearch": [],
+        "resources": {
+          "version": 1,
+          "marketSettlementIds": [
+            "settlement.12",
+            "settlement.143",
+            "settlement.204",
+            "settlement.211",
+            "settlement.231",
+            "settlement.303",
+            "settlement.32",
+            "settlement.57",
+            "settlement.99"
+          ],
+          "stockpiles": [
+            {
+              "resourceId": "resource.grain",
+              "name": "Hearthgrain",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 2,
+              "improvementId": "improvement.grange"
+            },
+            {
+              "resourceId": "resource.iron",
+              "name": "Ironstone",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 4,
+              "improvementId": "improvement.iron_mine"
+            },
+            {
+              "resourceId": "resource.copper",
+              "name": "Red copper",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.copper_mine"
+            },
+            {
+              "resourceId": "resource.salt",
+              "name": "White salt",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.salt_house"
+            },
+            {
+              "resourceId": "resource.timber",
+              "name": "Heartwood",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 3,
+              "improvementId": "improvement.timber_yard"
+            },
+            {
+              "resourceId": "resource.horses",
+              "name": "Steppe horses",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 5,
+              "improvementId": "improvement.remount_yard"
+            },
+            {
+              "resourceId": "resource.silver",
+              "name": "Witness silver",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 7,
+              "improvementId": "improvement.silver_mine"
+            },
+            {
+              "resourceId": "resource.ashglass",
+              "name": "Ashglass",
+              "amount": 0,
+              "perTurn": 0,
+              "salePrice": 6,
+              "improvementId": "improvement.glass_refinery"
+            }
+          ]
+        },
+        "economy": {
+          "income": 400,
+          "upkeep": 182,
+          "net": 218,
+          "queuedUpkeep": 0
+        },
+        "contacts": [
+          "faction.ashen_compact",
+          "faction.cinder_march",
+          "faction.reedbound_council"
+        ],
+        "firstContactTurn": 57,
+        "exploredCells": 13551,
+        "characters": [
+          {
+            "id": "character.27",
+            "definitionId": "character.surveyor",
+            "experience": 8
+          },
+          {
+            "id": "character.74",
+            "definitionId": "character.marshal",
+            "experience": 0
+          },
+          {
+            "id": "character.81",
+            "definitionId": "character.engineer",
+            "experience": 0
+          },
+          {
+            "id": "character.168",
+            "definitionId": "character.marshal",
+            "experience": 0
+          },
+          {
+            "id": "character.242",
+            "definitionId": "character.marshal",
+            "experience": 0
+          },
+          {
+            "id": "character.244",
+            "definitionId": "character.engineer",
+            "experience": 0
+          }
+        ],
+        "claimed": 218,
+        "worked": 114
+      }
+    ]
+  },
+  "verification": {
+    "initialSaveExact": true,
+    "finalSaveExact": true,
+    "midpoint": {
+      "turn": 51,
+      "completedRounds": 50,
+      "commandSequence": 1040,
+      "hash": "6c45d60f",
+      "saveSha256": "c26496c460eb53fa34cb46676df37af2b3770eaaa3aa06e6ec546182e69f613a",
+      "bytes": 1172984
+    },
+    "mirroredCommands": 10011,
+    "midpointFinalExact": true,
+    "replayedCommands": 11051,
+    "replayExact": true,
+    "replayHash": "3c565118",
+    "immutableRefusals": 0,
+    "replayMs": 1394.9467520000035
+  },
+  "timing": {
+    "campaignMs": 45054.845003,
+    "totalMs": 46984.380449,
+    "rounds": 300,
+    "meanRoundMs": 117.71420112666686,
+    "p95RoundMs": 202.2688100000014,
+    "maxRoundMs": 455.36652499999764,
+    "note": "Exploratory concurrent timings include disk trace, per-turn diagnostics, snapshot compression and midpoint mirror. Not isolated performance certification."
+  }
+}

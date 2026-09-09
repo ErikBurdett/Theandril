@@ -1,0 +1,59 @@
+{
+  "runs": [
+    {
+      "name": "R17-C-tiny4-seed99",
+      "process": "proc_15bd4c803198",
+      "exitCode": 0,
+      "commands": 6724,
+      "refusals": 0,
+      "turn": 215,
+      "victory": {
+        "path": "prosperity",
+        "factionId": "faction.glass_tide",
+        "projectId": "project.467",
+        "settlementId": "settlement.85",
+        "turn": 215
+      },
+      "battles": 99,
+      "captures": 34,
+      "finalHash": "2b673dd6",
+      "battleBoundaryRoundTrips": true,
+      "finalSaveExact": true,
+      "midpointFinalExact": true,
+      "replayExact": true,
+      "verificationErrors": [],
+      "abortReason": null,
+      "sourceChangesDuringRun": []
+    },
+    {
+      "name": "R17-D-standard24-seed74",
+      "process": "proc_ad54d1c57483",
+      "exitCode": 1,
+      "commands": 52526,
+      "refusals": 0,
+      "turn": 227,
+      "victory": {
+        "path": "prosperity",
+        "factionId": "faction.mire_courts",
+        "projectId": "project.2878",
+        "settlementId": "settlement.136",
+        "turn": 227
+      },
+      "battles": 582,
+      "captures": 72,
+      "finalHash": "9f4ab79d",
+      "battleBoundaryRoundTrips": true,
+      "finalSaveExact": true,
+      "midpointFinalExact": true,
+      "replayExact": true,
+      "verificationErrors": [],
+      "abortReason": null,
+      "sourceChangesDuringRun": [
+        "packages/ai/src/index.ts",
+        "packages/ai/src/naval.ts"
+      ]
+    }
+  ],
+  "commands": 59250,
+  "scope": "Development rule17 snapshots before the reviewed capped-bonus correction; not final release certification. D exit1 is the source-stability guard, despite successful gameplay/save/replay checks. Rerun final integration after production edits settle."
+}

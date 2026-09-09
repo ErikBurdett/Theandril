@@ -1,0 +1,588 @@
+[
+  {
+    "sequence": 1119,
+    "turn": 60,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.glass_tide",
+      "settlementId": "settlement.142",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 60,
+        "factionId": "faction.glass_tide",
+        "type": "settlement_captured",
+        "cell": 763,
+        "message": "Hearth 3: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 60,
+        "factionId": "faction.cinder_march",
+        "type": "settlement_captured",
+        "cell": 763,
+        "message": "Hearth 3: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.142",
+      "factionId": "faction.reedbound_council",
+      "name": "Hearth 3 #142.1",
+      "cell": 763,
+      "population": 16,
+      "food": 0,
+      "buildings": [
+        "building.archive",
+        "building.granary",
+        "building.market",
+        "building.workshop"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.cinder_march",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 1323,
+    "turn": 68,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.cinder_march",
+      "settlementId": "settlement.159",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 68,
+        "factionId": "faction.cinder_march",
+        "type": "settlement_captured",
+        "cell": 371,
+        "message": "Hearth 6: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 68,
+        "factionId": "faction.reedbound_council",
+        "type": "settlement_captured",
+        "cell": 371,
+        "message": "Hearth 6: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.159",
+      "factionId": "faction.cinder_march",
+      "name": "Hearth 6",
+      "cell": 371,
+      "population": 16,
+      "food": 129,
+      "buildings": [
+        "building.granary",
+        "building.workshop",
+        "building.market",
+        "building.archive"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.reedbound_council",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 1687,
+    "turn": 78,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.glass_tide",
+      "settlementId": "settlement.110",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 78,
+        "factionId": "faction.glass_tide",
+        "type": "settlement_captured",
+        "cell": 609,
+        "message": "Hearth 2: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 78,
+        "factionId": "faction.ashen_compact",
+        "type": "settlement_captured",
+        "cell": 609,
+        "message": "Hearth 2: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.110",
+      "factionId": "faction.reedbound_council",
+      "name": "Hearth 2 #110.1",
+      "cell": 609,
+      "population": 24,
+      "food": 362,
+      "buildings": [
+        "building.archive",
+        "building.granary",
+        "building.market",
+        "building.workshop"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.ashen_compact",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 1691,
+    "turn": 79,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.11",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 79,
+        "factionId": "faction.ashen_compact",
+        "type": "settlement_captured",
+        "cell": 126,
+        "message": "Hearth 1: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 79,
+        "factionId": "faction.cinder_march",
+        "type": "settlement_captured",
+        "cell": 126,
+        "message": "Hearth 1: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 79,
+        "factionId": "faction.cinder_march",
+        "type": "capital_changed",
+        "message": "Hearth 6 became the capital after settlement ownership changed.",
+        "cell": 371
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.11",
+      "factionId": "faction.cinder_march",
+      "name": "Hearth 1 #11.1",
+      "cell": 126,
+      "population": 24,
+      "food": 2,
+      "buildings": [
+        "building.archive",
+        "building.granary",
+        "building.market",
+        "building.workshop"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.cinder_march",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 1718,
+    "turn": 80,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.cinder_march",
+      "settlementId": "settlement.11",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 80,
+        "factionId": "faction.cinder_march",
+        "type": "settlement_captured",
+        "cell": 126,
+        "message": "Hearth 1 #11.1: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 80,
+        "factionId": "faction.ashen_compact",
+        "type": "settlement_captured",
+        "cell": 126,
+        "message": "Hearth 1 #11.1: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.11",
+      "factionId": "faction.cinder_march",
+      "name": "Hearth 1 #11.1",
+      "cell": 126,
+      "population": 24,
+      "food": 2,
+      "buildings": [
+        "building.archive",
+        "building.granary",
+        "building.market",
+        "building.workshop"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.cinder_march",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 1842,
+    "turn": 84,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.reedbound_council",
+      "settlementId": "settlement.142",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 84,
+        "factionId": "faction.reedbound_council",
+        "type": "settlement_captured",
+        "cell": 763,
+        "message": "Hearth 3 #142.1: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 84,
+        "factionId": "faction.glass_tide",
+        "type": "settlement_captured",
+        "cell": 763,
+        "message": "Hearth 3 #142.1: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.142",
+      "factionId": "faction.reedbound_council",
+      "name": "Hearth 3 #142.1",
+      "cell": 763,
+      "population": 16,
+      "food": 0,
+      "buildings": [
+        "building.archive",
+        "building.granary",
+        "building.market",
+        "building.workshop"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.cinder_march",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 2136,
+    "turn": 93,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.204",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 93,
+        "factionId": "faction.ashen_compact",
+        "type": "settlement_captured",
+        "cell": 508,
+        "message": "Hearth 6: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 93,
+        "factionId": "faction.reedbound_council",
+        "type": "settlement_captured",
+        "cell": 508,
+        "message": "Hearth 6: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.204",
+      "factionId": "faction.cinder_march",
+      "name": "Hearth 6 #204.1",
+      "cell": 508,
+      "population": 16,
+      "food": 293,
+      "buildings": [
+        "building.archive",
+        "building.granary",
+        "building.market",
+        "building.workshop"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.reedbound_council",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 2318,
+    "turn": 97,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.270",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 97,
+        "factionId": "faction.ashen_compact",
+        "type": "settlement_captured",
+        "cell": 600,
+        "message": "Hearth 9: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 97,
+        "factionId": "faction.reedbound_council",
+        "type": "settlement_captured",
+        "cell": 600,
+        "message": "Hearth 9: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.270",
+      "factionId": "faction.ashen_compact",
+      "name": "Hearth 9",
+      "cell": 600,
+      "population": 26,
+      "food": 399,
+      "buildings": [
+        "building.granary",
+        "building.workshop",
+        "building.market",
+        "building.archive"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.reedbound_council",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 2460,
+    "turn": 101,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.cinder_march",
+      "settlementId": "settlement.204",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 101,
+        "factionId": "faction.cinder_march",
+        "type": "settlement_captured",
+        "cell": 508,
+        "message": "Hearth 6: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 101,
+        "factionId": "faction.ashen_compact",
+        "type": "settlement_captured",
+        "cell": 508,
+        "message": "Hearth 6: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 101,
+        "factionId": "faction.ashen_compact",
+        "type": "land_work_cancelled",
+        "cell": 509,
+        "message": "The capture of settlement.204 cancelled land work at hex 509; no coin was refunded."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.204",
+      "factionId": "faction.cinder_march",
+      "name": "Hearth 6 #204.1",
+      "cell": 508,
+      "population": 16,
+      "food": 293,
+      "buildings": [
+        "building.archive",
+        "building.granary",
+        "building.market",
+        "building.workshop"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.reedbound_council",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 2998,
+    "turn": 115,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.226",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 115,
+        "factionId": "faction.ashen_compact",
+        "type": "settlement_captured",
+        "cell": 357,
+        "message": "Hearth 4: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 115,
+        "factionId": "faction.cinder_march",
+        "type": "settlement_captured",
+        "cell": 357,
+        "message": "Hearth 4: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.226",
+      "factionId": "faction.ashen_compact",
+      "name": "Hearth 4",
+      "cell": 357,
+      "population": 12,
+      "food": 0,
+      "buildings": [
+        "building.archive",
+        "building.granary",
+        "building.market",
+        "building.workshop"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.cinder_march",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 5212,
+    "turn": 174,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.reedbound_council",
+      "settlementId": "settlement.110",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 174,
+        "factionId": "faction.reedbound_council",
+        "type": "settlement_captured",
+        "cell": 609,
+        "message": "Hearth 2 #110.1: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 174,
+        "factionId": "faction.glass_tide",
+        "type": "settlement_captured",
+        "cell": 609,
+        "message": "Hearth 2 #110.1: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.110",
+      "factionId": "faction.reedbound_council",
+      "name": "Hearth 2 #110.1",
+      "cell": 609,
+      "population": 24,
+      "food": 362,
+      "buildings": [
+        "building.archive",
+        "building.granary",
+        "building.market",
+        "building.workshop"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.ashen_compact",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 5349,
+    "turn": 178,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.reedbound_council",
+      "settlementId": "settlement.382",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 178,
+        "factionId": "faction.reedbound_council",
+        "type": "settlement_captured",
+        "cell": 804,
+        "message": "Hearth 13: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 178,
+        "factionId": "faction.glass_tide",
+        "type": "settlement_captured",
+        "cell": 804,
+        "message": "Hearth 13: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.382",
+      "factionId": "faction.reedbound_council",
+      "name": "Hearth 13",
+      "cell": 804,
+      "population": 25,
+      "food": 175,
+      "buildings": [
+        "building.granary",
+        "building.market",
+        "building.workshop",
+        "building.archive"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.glass_tide",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  },
+  {
+    "sequence": 9791,
+    "turn": 297,
+    "command": {
+      "type": "resolveCapture",
+      "factionId": "faction.ashen_compact",
+      "settlementId": "settlement.393",
+      "outcome": "occupy"
+    },
+    "events": [
+      {
+        "turn": 297,
+        "factionId": "faction.ashen_compact",
+        "type": "settlement_captured",
+        "cell": 360,
+        "message": "Hearth 7: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      },
+      {
+        "turn": 297,
+        "factionId": "faction.cinder_march",
+        "type": "settlement_captured",
+        "cell": 360,
+        "message": "Hearth 7: occupy. Keep the settlement and its buildings. Add 20 devastation and impose 3 turns of occupation. Existing production orders are cancelled."
+      }
+    ],
+    "settlementAfter": {
+      "id": "settlement.393",
+      "factionId": "faction.ashen_compact",
+      "name": "Hearth 7",
+      "cell": 360,
+      "population": 12,
+      "food": 0,
+      "buildings": [
+        "building.granary",
+        "building.workshop",
+        "building.market",
+        "building.archive"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.cinder_march",
+      "devastation": 0,
+      "occupationTurns": 0
+    }
+  }
+]

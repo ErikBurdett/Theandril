@@ -1,0 +1,12 @@
+{
+  "name": "environment",
+  "command": "date -Is; uname -a; lscpu; free -h; ss -ltnp; node --version; pnpm --version; /usr/bin/chromium --version; pnpm exec playwright --version; pnpm exec vitest --version; git status --short; git rev-parse HEAD; ps -eo pid,ppid,pcpu,pmem,comm,args --sort=-pcpu",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:06:43.952260+00:00",
+  "durationSeconds": 0.8078744411468506,
+  "exitCode": 0,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/environment.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 160556,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

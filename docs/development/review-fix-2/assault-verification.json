@@ -1,0 +1,80 @@
+{
+  "savePreimageSha256": "a4e80d17de3d88cf5eb7dc9784962c0f8c2024beba2a1c046b28dfe6d5b5060b",
+  "savePostimageSha256": "217673aa986ece9dcdc6472eacb225b7790ff9847553b2d0fb14511cc77f68a9",
+  "regressionSha256": "5c43163a8ebb02115c35878301db1089950dd268c7b6c35b422322c98ffe1c4d",
+  "onlyProductionChange": "--- a/packages/sim/src/save.ts\n+++ b/packages/sim/src/save.ts\n@@ -850,7 +850,7 @@\n       const pair = [battle.attackerFactionId, battle.defenderFactionId].sort().join(':');\n       assert(warKeys.has(pair), 'pending battle requires a declared war');\n       const stack = data.armies.filter(army => !transported.has(army.id) && army.cell === battle.defenderCell);\n-      const expected = (originalVersion >= 17 ? selectDefendingArmies(stack, battle.defenderId) : stack).map(army => army.id).sort();\n+      const expected = (originalVersion >= 17 ? selectDefendingArmies(stack, battle.settlementId ? undefined : battle.defenderId) : stack).map(army => army.id).sort();\n       assert(battle.militiaId ? stack.length === 0 : stack.every(army => army.factionId === battle.defenderFactionId) && expected.length === defenderIds.length && expected.every((id, i) => id === defenderIds[i]), 'battle omitted a defending army');\n       assert([...liveFormations.keys()].every(id => formationIds.has(id)), 'battle omitted a participant formation');\n     } else {\n",
+  "protected": {
+    "packages/sim/src/warfare.ts": {
+      "sha256": "118f2247ce5b79861f4f4f719814c06ed83235f4a0764dbc49cda34d8bf4980a",
+      "baselineSha256": "118f2247ce5b79861f4f4f719814c06ed83235f4a0764dbc49cda34d8bf4980a"
+    },
+    "packages/sim/src/battle-frontage.ts": {
+      "sha256": "f8d619b7c0894ac063824f5b19d4ebd8c804f0b845328822aee3c88f31c908a0",
+      "baselineSha256": "f8d619b7c0894ac063824f5b19d4ebd8c804f0b845328822aee3c88f31c908a0"
+    },
+    "packages/sim/src/rules.ts": {
+      "sha256": "92ba0e21dc3cd6a80bf32ac9a419e46bf58b0baf3b13c4fe92d9cbaff4054525",
+      "baselineSha256": "92ba0e21dc3cd6a80bf32ac9a419e46bf58b0baf3b13c4fe92d9cbaff4054525"
+    },
+    "packages/sim/src/types.ts": {
+      "sha256": "322c0e88719d581bede3ebe94532b3f4b33a5d67653da3cb32d9926eb2b0a2a9",
+      "baselineSha256": "322c0e88719d581bede3ebe94532b3f4b33a5d67653da3cb32d9926eb2b0a2a9"
+    },
+    "packages/sim/src/movement.ts": {
+      "sha256": "1921dc7560b362fae0d91b9f734799e163eef67302a43f613b4fcec894d0c60e",
+      "baselineSha256": "1921dc7560b362fae0d91b9f734799e163eef67302a43f613b4fcec894d0c60e"
+    },
+    "packages/sim/src/fixtures/v16-trained-battle-trace.json": {
+      "sha256": "a3774b540a14d872132497f8ee91b4c58ec5f70567630695c1a45fcd01521184",
+      "baselineSha256": "a3774b540a14d872132497f8ee91b4c58ec5f70567630695c1a45fcd01521184"
+    },
+    "packages/sim/src/fixtures/v16-trained-battle.json.gz": {
+      "sha256": "9820123d2753b5fe9d345a0e04dd21c2865d92b19c4850a9635944ba1c7677fb",
+      "baselineSha256": "9820123d2753b5fe9d345a0e04dd21c2865d92b19c4850a9635944ba1c7677fb"
+    }
+  },
+  "tests": {
+    "red": {
+      "success": false,
+      "numTotalTests": 1,
+      "numPassedTests": 0,
+      "numFailedTests": 1,
+      "numPendingTests": 0,
+      "numTodoTests": 0,
+      "files": 1,
+      "failedTests": [
+        "pending assault save validation rejects an omitted lower-ID garrison even when a resealed defenderId prioritizes the wrong contingent"
+      ]
+    },
+    "green": {
+      "success": true,
+      "numTotalTests": 1,
+      "numPassedTests": 1,
+      "numFailedTests": 0,
+      "numPendingTests": 0,
+      "numTodoTests": 0,
+      "files": 1,
+      "failedTests": []
+    },
+    "focused": {
+      "success": true,
+      "numTotalTests": 55,
+      "numPassedTests": 55,
+      "numFailedTests": 0,
+      "numPendingTests": 0,
+      "numTodoTests": 0,
+      "files": 6,
+      "failedTests": []
+    },
+    "sim-chronicle": {
+      "success": true,
+      "numTotalTests": 708,
+      "numPassedTests": 708,
+      "numFailedTests": 0,
+      "numPendingTests": 0,
+      "numTodoTests": 0,
+      "files": 62,
+      "failedTests": []
+    }
+  }
+}

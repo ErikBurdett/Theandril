@@ -1,0 +1,12 @@
+{
+  "name": "lifecycle",
+  "command": "node --import tsx docs/hermes-analysis/qa/lifecycle.mjs",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:35:49.374942+00:00",
+  "durationSeconds": 6.879324674606323,
+  "exitCode": 1,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/lifecycle.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 233104,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

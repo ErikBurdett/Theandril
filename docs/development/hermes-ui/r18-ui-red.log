@@ -1,0 +1,49 @@
+
+Running 1 test using 1 worker
+
+(node:303197) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/hermes-ui-slices.spec.ts:17:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact (7.3s)
+
+
+  1) tests/gameplay/hermes-ui-slices.spec.ts:17:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Characters & agents', exact: true }).locator('[data-art-content-id="character.waykeeper"]').first()
+    Expected: "shared"
+    Received: "fallback"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" getByRole('dialog', { name: 'Characters & agents', exact: true }).locator('[data-art-content-id="character.waykeeper"]').first() with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Characters & agents', exact: true }).locator('[data-art-content-id="character.waykeeper"]').first()
+        14 × locator resolved to <span aria-hidden="true" data-art-state="fallback" class="faction-art faction-art--fallback" data-art-content-id="character.waykeeper" data-art-id="character.waykeeper.unbound" data-art-definition="faction.ashen_compact" title="Aven Ashwell, Waykeeper · generic presentation. No approved visual family is bound to this faction definition.">…</span>
+           - unexpected value "fallback"
+
+
+      44 |     await expect(art).toHaveCount(2);
+      45 |     for (const icon of await art.all()) {
+    > 46 |       await expect(icon).toHaveAttribute('data-art-state', 'shared');
+         |                          ^
+      47 |       await expect(icon).toHaveAttribute('data-art-rendered-id', 'character.waykeeper');
+      48 |       await expect(icon).toHaveAccessibleName(/shared Waykeeper silhouette/);
+      49 |       await expect(icon).not.toContainText('Generic');
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:46:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r18-ui-red/hermes-ui-slices-R18-paid--b0070-t-for-faction-ashen-compact/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/hermes-ui/r18-ui-red/hermes-ui-slices-R18-paid--b0070-t-for-faction-ashen-compact/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r18-ui-red/hermes-ui-slices-R18-paid--b0070-t-for-faction-ashen-compact/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/hermes-ui/r18-ui-red/hermes-ui-slices-R18-paid--b0070-t-for-faction-ashen-compact/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/hermes-ui-slices.spec.ts:17:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact 

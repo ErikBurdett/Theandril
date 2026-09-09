@@ -1,0 +1,93 @@
+{
+  "checkpoint": "before",
+  "sha256": "56a81b5fbc91c0bea89b8cc5f78ace519d7fa0d6109545f7444af5dcce159780",
+  "browser": "152.0.7977.82",
+  "saved": {
+    "measurements": {
+      "cold": {
+        "ms": 2205.300000000745,
+        "stats": {
+          "suffixRecords": 114244,
+          "encodedHistoryBytes": 81486907,
+          "newBlobs": 448,
+          "historyPayloadWrites": 1344,
+          "logicalBytes": 93161744,
+          "snapshotBytes": 10912745,
+          "recordBytes": 80185627,
+          "historyBlobCount": 447,
+          "historyStoredBytes": 80402644
+        },
+        "heapSample": {
+          "used": 634583268,
+          "limit": 4395630592
+        }
+      },
+      "noop": {
+        "ms": 923.1999999992549,
+        "stats": {
+          "suffixRecords": 0,
+          "encodedHistoryBytes": 0,
+          "newBlobs": 0,
+          "historyPayloadWrites": 0,
+          "logicalBytes": 93161744,
+          "snapshotBytes": 10912745,
+          "recordBytes": 80185627,
+          "historyBlobCount": 447,
+          "historyStoredBytes": 80402644
+        },
+        "heapSample": {
+          "used": 728248140,
+          "limit": 4395630592
+        }
+      },
+      "appendResult": {
+        "ok": false,
+        "error": "This campaign has ended in victory.",
+        "events": []
+      },
+      "append": {
+        "ms": 919.4000000022352,
+        "stats": {
+          "suffixRecords": 1,
+          "encodedHistoryBytes": 487,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 93161999,
+          "snapshotBytes": 10912745,
+          "recordBytes": 80185881,
+          "historyBlobCount": 448,
+          "historyStoredBytes": 80403131
+        },
+        "heapSample": {
+          "used": 865830354,
+          "limit": 4395630592
+        }
+      }
+    },
+    "originalDigest": "c762ad9ab78d23c0bf13beba52b00563648d873b1a4f29b76f4b14b4db5a0307",
+    "originalRecords": 114244,
+    "originalBattles": 1496,
+    "expectedDigest": "47761cf7893f109dbaa8a2b360927297cedf90dbf9dfcde39b99999aebce27e9",
+    "snapshotDigest": "1a3655c43430bd414f2a6cd7f880ed7ca1bb8cb255f3da81125189bb25bffd16",
+    "hash16": "0f0b85f5"
+  },
+  "loaded": {
+    "loadMs": 2708.400000002235,
+    "records": 114245,
+    "digest": "47761cf7893f109dbaa8a2b360927297cedf90dbf9dfcde39b99999aebce27e9",
+    "snapshotDigest": "1a3655c43430bd414f2a6cd7f880ed7ca1bb8cb255f3da81125189bb25bffd16",
+    "storage": {
+      "generations": 3,
+      "blobs": 449,
+      "replicas": 1347
+    },
+    "heapSample": {
+      "used": 514028063,
+      "limit": 4395630592
+    },
+    "originalDigest": "c762ad9ab78d23c0bf13beba52b00563648d873b1a4f29b76f4b14b4db5a0307",
+    "databaseDeleted": true
+  },
+  "errors": [],
+  "scope": "One sequential real Chromium IndexedDB cold/noop/one-record append run. Original victorious capture preserved; append is a real refused endTurn, not invented post-victory gameplay. Separate-page load verifies SHA-256 of every original historical value plus the one-record suffix. Save timing excludes portable import/journal validation. Browser heap SAMPLES are not peaks or whole-browser RSS; Node retained harness reports process peak RSS separately. Prior retained full replay is not rerun or relabeled."
+}

@@ -1,0 +1,12 @@
+{
+  "name": "contact-repro",
+  "command": "pnpm exec vitest run packages/ai/src/contact.test.ts --maxWorkers=1 -t \"standard / 4 seats\" --reporter=verbose",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:12:37.639755+00:00",
+  "durationSeconds": 8.80650806427002,
+  "exitCode": 1,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/contact-repro.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 417536,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

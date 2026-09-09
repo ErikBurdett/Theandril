@@ -1,0 +1,106 @@
+{
+  "before": {
+    "settlementId": "settlement.6",
+    "armyId": "army.2",
+    "factionId": "faction.ashen_compact",
+    "startedTurn": 1,
+    "defenses": 0,
+    "supplies": 0,
+    "militiaStrength": 30,
+    "militiaMorale": 65,
+    "militiaFatigue": 0,
+    "battleDefense": {
+      "engagedFormations": 20,
+      "engagedStrength": 20,
+      "reserveFormations": 1,
+      "reserveStrength": 1
+    },
+    "canAssault": true,
+    "assaultBlocker": null,
+    "defenderStrength": 21
+  },
+  "contestedSieges": [
+    {
+      "settlementId": "settlement.6",
+      "armyId": "army.2",
+      "factionId": "faction.ashen_compact",
+      "startedTurn": 1,
+      "defenses": 0,
+      "supplies": 0,
+      "militiaStrength": 30,
+      "militiaMorale": 65,
+      "militiaFatigue": 0,
+      "canAssault": false,
+      "assaultBlocker": "The besieging army needs movement to assault; wait for the next turn.",
+      "defenderStrength": 1
+    }
+  ],
+  "layout": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "button": {
+      "x": 42,
+      "y": 132.421875,
+      "width": 306,
+      "height": 41.4375,
+      "top": 132.421875,
+      "right": 348,
+      "bottom": 173.859375,
+      "left": 42
+    },
+    "hit": "<button class=\"wide\" aria-label=\"Occupy settlement\">Occupy</button>",
+    "receivesPointer": true,
+    "layers": [
+      {
+        "selector": ".map-host",
+        "box": {
+          "x": 0,
+          "y": 109.640625,
+          "width": 390,
+          "height": 319.0625,
+          "top": 109.640625,
+          "right": 390,
+          "bottom": 428.703125,
+          "left": 0
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "overflow": "visible"
+      },
+      {
+        "selector": ".hud-tools",
+        "box": {
+          "x": 9,
+          "y": 118.640625,
+          "width": 372,
+          "height": 84.15625,
+          "top": 118.640625,
+          "right": 381,
+          "bottom": 202.796875,
+          "left": 9
+        },
+        "position": "absolute",
+        "zIndex": "4",
+        "overflow": "auto"
+      },
+      {
+        "selector": ".capture-panel",
+        "box": {
+          "x": 10,
+          "y": 119.640625,
+          "width": 370,
+          "height": 260.0625,
+          "top": 119.640625,
+          "right": 380,
+          "bottom": 379.703125,
+          "left": 10
+        },
+        "position": "absolute",
+        "zIndex": "7",
+        "overflow": "auto"
+      }
+    ]
+  }
+}

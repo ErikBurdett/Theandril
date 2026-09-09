@@ -1,0 +1,27 @@
+COMMAND: date -Is; ss -ltnp; git diff --exit-code; git status --short; git rev-parse HEAD; curl --fail --silent --output /dev/null --write-out "parent5191 HTTP%{http_code}\n" http://127.0.0.1:5191/; curl --fail --silent --output /dev/null --write-out "user5173 HTTP%{http_code}\n" http://127.0.0.1:5173/
+START: 2026-09-09T05:44:22.121775+00:00
+2026-09-09T00:44:22-05:00
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+LISTEN 0      4096       127.0.0.1:8888       0.0.0.0:*   
+LISTEN 0      4096       127.0.0.1:11434      0.0.0.0:*   
+LISTEN 0      128          0.0.0.0:9444       0.0.0.0:*    users:(("Civ7_linux_Vulk",pid=204842,fd=112))
+LISTEN 0      128          0.0.0.0:27036      0.0.0.0:*    users:(("steam",pid=201173,fd=150))
+LISTEN 0      128        127.0.0.1:33979      0.0.0.0:*    users:(("steam",pid=201173,fd=65))
+LISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*   
+LISTEN 0      4096       127.0.0.1:631        0.0.0.0:*   
+LISTEN 0      4096       127.0.0.1:33749      0.0.0.0:*   
+LISTEN 0      4096      172.17.0.1:53         0.0.0.0:*   
+LISTEN 0      5         172.28.0.1:11435      0.0.0.0:*   
+LISTEN 0      4096       127.0.0.1:3000       0.0.0.0:*   
+LISTEN 0      511        127.0.0.1:5191       0.0.0.0:*    users:(("node-MainThread",pid=203814,fd=22))
+LISTEN 0      511        127.0.0.1:5173       0.0.0.0:*    users:(("node-MainThread",pid=185598,fd=25))
+LISTEN 0      2048       127.0.0.1:37413      0.0.0.0:*    users:(("hermes",pid=71770,fd=35))
+LISTEN 0      128        127.0.0.1:57343      0.0.0.0:*    users:(("steam",pid=201173,fd=59))
+LISTEN 0      128        127.0.0.1:39887      0.0.0.0:*    users:(("steam",pid=201173,fd=104))
+LISTEN 0      4096      127.0.0.54:53         0.0.0.0:*   
+LISTEN 0      4096           [::1]:631           [::]:*   
+?? docs/hermes-analysis/
+?? hermes-analysis
+b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd
+parent5191 HTTP200
+user5173 HTTP200

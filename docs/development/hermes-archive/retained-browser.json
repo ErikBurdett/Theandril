@@ -1,0 +1,80 @@
+{
+  "browser": "152.0.7977.82",
+  "server": "http://127.0.0.1:5173",
+  "reports": {
+    "save": {
+      "importMs": 5146.9000000003725,
+      "saveMs": 2254.0999999996275,
+      "noopMs": 925.1999999992549,
+      "cold": {
+        "suffixRecords": 114244,
+        "encodedHistoryBytes": 81486907,
+        "newBlobs": 448,
+        "historyPayloadWrites": 1344,
+        "logicalBytes": 93161744,
+        "snapshotBytes": 10912745,
+        "recordBytes": 80185627,
+        "historyBlobCount": 447,
+        "historyStoredBytes": 80402644
+      },
+      "noop": {
+        "suffixRecords": 0,
+        "encodedHistoryBytes": 0,
+        "newBlobs": 0,
+        "historyPayloadWrites": 0,
+        "logicalBytes": 93161744,
+        "snapshotBytes": 10912745,
+        "recordBytes": 80185627,
+        "historyBlobCount": 447,
+        "historyStoredBytes": 80402644
+      },
+      "digest": "c762ad9ab78d23c0bf13beba52b00563648d873b1a4f29b76f4b14b4db5a0307",
+      "snapshotDigest": "1a3655c43430bd414f2a6cd7f880ed7ca1bb8cb255f3da81125189bb25bffd16",
+      "records": 114244,
+      "coverage": "complete",
+      "hash16": "0f0b85f5",
+      "envelopeBytes": 93161744,
+      "storageEstimate": {
+        "quota": 7556640768,
+        "usage": 40448000,
+        "usageDetails": {
+          "indexedDB": 40448000
+        }
+      },
+      "heapSample": {
+        "used": 1111922152,
+        "limit": 4395630592
+      }
+    },
+    "loadExport": {
+      "loadMs": 3058.699999999255,
+      "exportMs": 4748.300000000745,
+      "compressedBytes": 9032092,
+      "digest": "c762ad9ab78d23c0bf13beba52b00563648d873b1a4f29b76f4b14b4db5a0307",
+      "snapshotDigest": "1a3655c43430bd414f2a6cd7f880ed7ca1bb8cb255f3da81125189bb25bffd16",
+      "records": 114244,
+      "coverage": "complete",
+      "hash16": "0f0b85f5",
+      "heapSample": {
+        "used": 614343147,
+        "limit": 4395630592
+      }
+    },
+    "import": {
+      "importMs": 5086.799999998882,
+      "digest": "c762ad9ab78d23c0bf13beba52b00563648d873b1a4f29b76f4b14b4db5a0307",
+      "snapshotDigest": "1a3655c43430bd414f2a6cd7f880ed7ca1bb8cb255f3da81125189bb25bffd16",
+      "records": 114244,
+      "coverage": "complete",
+      "hash16": "0f0b85f5",
+      "databaseDeleted": true,
+      "heapSample": {
+        "used": 598230863,
+        "limit": 4395630592
+      }
+    }
+  },
+  "errors": [],
+  "portableSha256": "76bb55d90d3e7e5d78f036a22128ad3a1497b0efed1df6e4f8909ee7c64d1406",
+  "scope": "Actual headless Chromium IndexedDB, separate pages, native gzip decoder, Fflate streamed export. Pure persistence APIs, NOT UI/worker-control or cross-browser evidence. Single retained case, no forced GC; JS heap samples are NOT peaks or whole-browser RSS. Quota injection and corrupted-manifest recovery are separately covered by Node/fake-indexeddb tests."
+}

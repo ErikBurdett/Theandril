@@ -1,0 +1,12 @@
+{
+  "name": "benchmark-composed",
+  "command": "pnpm exec tsx scripts/benchmark-armies-fleets.ts --section=all",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:12:17.095253+00:00",
+  "durationSeconds": 41.53283405303955,
+  "exitCode": 0,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/benchmark-composed.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 701648,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

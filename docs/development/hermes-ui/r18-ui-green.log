@@ -1,0 +1,43 @@
+
+Running 2 tests using 1 worker
+
+(node:304969) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/hermes-ui-slices.spec.ts:17:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact (2.8s)
+  ✘  2 tests/gameplay/hermes-ui-slices.spec.ts:17:3 › R18 paid Waykeeper resolves shared art for faction.reedbound_council (153ms)
+
+
+  1) tests/gameplay/hermes-ui-slices.spec.ts:17:3 › R18 paid Waykeeper resolves shared art for faction.reedbound_council 
+
+    Error: Invalid save: faction color differs from content
+
+       at ../../packages/sim/src/save.ts:396
+
+      394 |
+      395 | function assert(condition: unknown, message: string): asserts condition {
+    > 396 |   if (!condition) throw new Error('Invalid save: ' + message);
+          |                         ^
+      397 | }
+      398 |
+      399 | function assertLegacyRoster(state: { rosterVersion: number; factions: readonly { definitionId: string }[] }): void {
+        at assert (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:396:25)
+        at deserializeGame (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:654:5)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:27:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r18-ui-green/hermes-ui-slices-R18-paid--70453-r-faction-reedbound-council/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/hermes-ui/r18-ui-green/hermes-ui-slices-R18-paid--70453-r-faction-reedbound-council/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r18-ui-green/hermes-ui-slices-R18-paid--70453-r-faction-reedbound-council/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/hermes-ui/r18-ui-green/hermes-ui-slices-R18-paid--70453-r-faction-reedbound-council/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/hermes-ui-slices.spec.ts:17:3 › R18 paid Waykeeper resolves shared art for faction.reedbound_council 
+  1 passed (3.5s)

@@ -1,0 +1,142 @@
+COMMAND: node --import tsx docs/hermes-analysis/qa/capture-minimal-save.mjs
+START: 2026-09-09T05:34:19.057433+00:00
+{
+  "finalHash": "a077cfb8",
+  "samples": [
+    {
+      "sequence": 5660,
+      "command": {
+        "type": "moveTo",
+        "factionId": "faction.reedbound_council",
+        "armyId": "army.461",
+        "target": 592
+      },
+      "turn": 236,
+      "hash": "602413fe",
+      "ok": true,
+      "restoreError": null,
+      "army8Morale": 55
+    },
+    {
+      "sequence": 5661,
+      "command": {
+        "type": "attack",
+        "factionId": "faction.reedbound_council",
+        "armyId": "army.478",
+        "targetArmyId": "army.8"
+      },
+      "turn": 236,
+      "hash": "289c01b6",
+      "ok": true,
+      "restoreError": null,
+      "army8Morale": 55,
+      "battleMorale": 59
+    },
+    {
+      "sequence": 5662,
+      "command": {
+        "type": "autoResolveBattle",
+        "factionId": "faction.reedbound_council"
+      },
+      "turn": 236,
+      "hash": "58a2012d",
+      "ok": true,
+      "restoreError": "Error: Invalid save: invalid formation definition, morale or strength",
+      "army8Morale": 59
+    },
+    {
+      "sequence": 5663,
+      "command": {
+        "type": "moveTo",
+        "factionId": "faction.cinder_march",
+        "armyId": "army.62",
+        "target": 349
+      },
+      "turn": 236,
+      "hash": "11de9489",
+      "ok": true,
+      "restoreError": "Error: Invalid save: invalid formation definition, morale or strength",
+      "army8Morale": 59
+    },
+    {
+      "sequence": 5664,
+      "command": {
+        "type": "besiege",
+        "factionId": "faction.cinder_march",
+        "armyId": "army.408",
+        "settlementId": "settlement.281"
+      },
+      "turn": 236,
+      "hash": "928fd3eb",
+      "ok": true,
+      "restoreError": "Error: Invalid save: invalid formation definition, morale or strength",
+      "army8Morale": 59
+    },
+    {
+      "sequence": 5665,
+      "command": {
+        "type": "declareWar",
+        "factionId": "faction.cinder_march",
+        "targetFactionId": "faction.glass_tide"
+      },
+      "turn": 236,
+      "hash": "f407c3c0",
+      "ok": true,
+      "restoreError": "Error: Invalid save: invalid formation definition, morale or strength",
+      "army8Morale": 59
+    },
+    {
+      "sequence": 5666,
+      "command": {
+        "type": "attack",
+        "factionId": "faction.cinder_march",
+        "armyId": "army.487",
+        "targetArmyId": "army.8"
+      },
+      "turn": 236,
+      "hash": "09ffe97f",
+      "ok": true,
+      "restoreError": "Error: Invalid save: invalid formation definition, morale or strength",
+      "army8Morale": 59,
+      "battleMorale": 63
+    },
+    {
+      "sequence": 5667,
+      "command": {
+        "type": "autoResolveBattle",
+        "factionId": "faction.cinder_march"
+      },
+      "turn": 236,
+      "hash": "2550ae3c",
+      "ok": true,
+      "restoreError": "Error: Invalid save: invalid formation definition, morale or strength",
+      "army8Morale": 63
+    },
+    {
+      "sequence": 5668,
+      "command": {
+        "type": "moveTo",
+        "factionId": "faction.glass_tide",
+        "armyId": "army.188",
+        "target": 320
+      },
+      "turn": 236,
+      "hash": "8f77c598",
+      "ok": true,
+      "restoreError": "Error: Invalid save: invalid formation definition, morale or strength",
+      "army8Morale": 63
+    },
+    {
+      "sequence": 5669,
+      "command": {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      "turn": 237,
+      "hash": "a077cfb8",
+      "ok": true,
+      "restoreError": "Error: Invalid save: battle formation differs from unit content",
+      "army8Morale": 55
+    }
+  ]
+}

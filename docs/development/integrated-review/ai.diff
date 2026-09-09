@@ -1,0 +1,572 @@
+diff --git c/packages/ai/src/index.ts w/packages/ai/src/index.ts
+index cd6e7f4..b87b5a2 100644
+--- c/packages/ai/src/index.ts
++++ w/packages/ai/src/index.ts
+@@ -1,12 +1,12 @@
+ import { BUILDINGS, UNITS } from '@theandril/content';
+ import { hexDistance, neighbors } from '@theandril/mapgen';
+-import { MAX_ARMY_FORMATIONS, foundingCoinCost, planDevelopment, type GameCommand, type Observation } from '@theandril/sim';
++import { MAX_ARMY_FORMATIONS, foundingCoinCost, getMovementQuery, planDevelopment, type GameCommand, type Observation } from '@theandril/sim';
+ import { planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
+ import { planConquestDecision } from './conquest';
+ import { planProgression } from './progression';
+ import { createNavigation } from './navigation';
+ import { planCharacters } from './characters';
+-import { coastalFoundingSite, coastalReconnaissanceUseful, planNaval } from './naval';
++import { coastalFoundingSite, oceanScoutReserve as reserveOceanScout, planNaval, sparseContactNeeded } from './naval';
+ import { planLand } from './land';
+ import { recruitmentRoster } from './recruitment';
+ import { planRoadAcceleration } from './roads';
+@@ -31,11 +31,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
+   if (diplomatic) return diplomatic;
+   const siegeDecision = planConquestDecision(view);
+   if (siegeDecision) return siegeDecision;
+-  const oceanScout = units.get('unit.ocean_warship')!;
+-  const oceanScoutReserve = coastalReconnaissanceUseful(view)
+-    && !view.armies.some(army => army.factionId === view.factionId && army.domain === 'naval' && army.canEnterDeepWater && army.formations.some(formation => units.get(formation.unitId)?.naval?.transportCapacity === 0))
+-    && !view.settlements.some(town => town.factionId === view.factionId && town.queue.some(order => order.itemId === oceanScout.id))
+-    && view.settlements.some(town => town.factionId === view.factionId && !town.queue.length && view.productionOptions.some(option => option.settlementId === town.id && option.itemId === oceanScout.id && option.canQueue)) ? oceanScout.coinCost : 0;
++  const oceanScoutReserve = reserveOceanScout(view);
+   const pendingFounder = view.armies.some(army => army.factionId === view.factionId && army.formations.some(formation => units.get(formation.unitId)?.canFound)) || view.settlements.some(town => town.factionId === view.factionId && town.queue.some(order => order.itemId === 'unit.colonist'));
+   const expansionAffordable = Boolean(view.growth && view.treasury >= view.growth.founding.coinCost + UNITS[0]!.coinCost + view.growth.founding.additionalUpkeep * 6 + 24);
+   const foundingReserve = view.growth && (pendingFounder || expansionAffordable) ? Math.min(Math.max(0, view.treasury - oceanScoutReserve), view.growth.founding.coinCost) : 0;
+@@ -195,6 +191,20 @@ export function planTurnWithReasons(view: Observation): AiPlan {
+     if (plans.length >= 128) break;
+     if (besiegers.has(army.id) || reorganized.has(army.id) || naval.heldArmyIds.has(army.id)) continue; // Composition/assignment/transport changes need fresh facts.
+     const portSite = coastalFoundingSite(view, army);
++    if (army.canFound && portSite !== null && portSite !== army.cell && view.growth && sparseContactNeeded(view) && view.factions.length === 1) {
++      const route = view.routes.find(route => route.armyId === army.id);
++      if (route?.status === 'active') {
++        if (reasons.length < 16) reasons.push(`${army.id} continues its saved maritime outlet route to ${portSite}; do not replace it with local exploration.`);
++        continue;
++      }
++      const preview = getMovementQuery(view, army.id, portSite).preview;
++      if (preview?.canQueue && preview.action === 'move') {
++        plans.push({ type: 'queueMovement', factionId, armyId: army.id, target: portSite });
++        reasons.push(`${army.id} retains a charted ${preview.cost}-movement route to a maritime outlet; pay founding and harbor costs on arrival.`);
++      }
++      else if (reasons.length < 16) reasons.push(`${army.id} waits on its maritime outlet route: ${preview?.blocker ?? 'no observed route is available'}`);
++      continue;
++    }
+     if (army.canFound && (portSite === null || portSite === army.cell) && army.movement > 0 && !cells.get(army.cell)?.settlementId && foundingCells.every(cell => hexDistance(cell, army.cell, view.width) >= settlementSpacing(view, army.cell)) && (!view.growth || foundingBudget >= foundingCoinCost(foundingCount))) {
+       let name: string;
+       do { name = `Hearth ${++hearthNumber}`; } while (settlementNames.has(name));
+@@ -206,10 +216,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
+     }
+     if (army.movement <= 0) continue;
+     const adjacent = neighbors(army.cell, view.width, view.height);
+-    const targets = adjacent.flatMap(cell => {
+-      const stack = enemyByCell.get(cell) ?? [];
+-      return stack.reduce((sum, defender) => sum + defender.formations.length, 0) <= MAX_ARMY_FORMATIONS ? stack : [];
+-    });
++    // One representative per adjacent stack bounds public attack queries to six;
++    // strengthByCell still includes every container and strategic reserve.
++    const targets = adjacent.flatMap(cell => (enemyByCell.get(cell) ?? []).slice(0, 1));
+     const military = army.canAttack && !army.canFound && army.id !== explorerId && !army.commandBlocker;
+     if (military) {
+       if (army.morale < 35 || army.fatigue > 65) {
+@@ -217,15 +226,26 @@ export function planTurnWithReasons(view: Observation): AiPlan {
+         continue;
+       }
+       const target = targets.find(other => {
++        // Reserves remain a strategic threat, even when only a contingent fights.
++        if (protectedIds.has(other.factionId) || (strengthByCell.get(other.cell) ?? 0) > army.strength || townByCell.has(other.cell)) return false;
++        if (wars.has(other.factionId)) {
++          const preview = getMovementQuery(view, army.id, other.cell).preview;
++          return preview?.action === 'attack' && preview.canMoveNow;
++        }
++        // Preserve the historical declaration policy. A new contingent still
++        // waits for post-declaration canonical legality before issuing its attack.
+         const defenders = enemyByCell.get(other.cell) ?? [];
+         const terrain = cells.get(other.cell)?.terrain;
+         const cost = terrain === 2 || terrain === 3 ? 2 : 1;
+-        return !protectedIds.has(other.factionId) && cost <= army.movement && defenders.reduce((sum, defender) => sum + defender.formations.length, 0) <= MAX_ARMY_FORMATIONS && (strengthByCell.get(other.cell) ?? 0) <= army.strength && !townByCell.has(other.cell);
++        return cost <= army.movement && (other.battleDefense?.engagedFormations ?? defenders.reduce((sum, defender) => sum + defender.formations.length, 0)) <= MAX_ARMY_FORMATIONS;
+       });
+       if (target && plans.length <= 126) {
+         if (!wars.has(target.factionId)) {
+           plans.push({ type: 'declareWar', factionId, targetFactionId: target.factionId });
+           wars.add(target.factionId);
++          // New contingent attacks need a real post-declaration movement quote;
++          // do not invent a war in the observation to bypass its current blocker.
++          if (target.battleDefense) return { commands: plans, reasons };
+         }
+         plans.push({ type: 'attack', factionId, armyId: army.id, targetArmyId: target.id });
+         // Retreats can change occupancy beyond the attacked hex: the next pass needs fresh sight.
+@@ -262,7 +282,13 @@ export function planTurnWithReasons(view: Observation): AiPlan {
+         : nearbyContacts.length ? -Math.min(...nearbyContacts.map(clue => hexDistance(cell, clue.cell, view.width))) * 500 : approach) - danger;
+     };
+     const strategic = army.canFound || nearbyContacts.length > 0 || military && approachCells.length > 0 || enemies.some(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10);
+-    const target = navigation.destination(army, army.sight, claimed, strategic ? score : undefined);
++    const distantContact = !strategic && sparseContactNeeded(view) && army.id === explorerId && view.factions.length === 1;
++    // One scout broadens the contact search while ordinary field armies retain
++    // local exploration. Only new sight earns the public inward bearing: zero
++    // gain still invokes the bounded frontier search, never a center magnet.
++    const chartCenter = Math.floor(view.height / 2) * view.width + Math.floor(view.width / 2);
++    const target = navigation.destination(army, army.sight, claimed, strategic ? score : undefined, undefined,
++      distantContact ? (cell, gain) => gain * 100 + (gain > 0 ? (hexDistance(army.cell, chartCenter, view.width) - hexDistance(cell, chartCenter, view.width)) * 500 : 0) : undefined);
+     if (target !== undefined) {
+       claimed.add(target);
+       plans.push({ type: 'moveTo', factionId, armyId: army.id, target });
+diff --git c/packages/ai/src/naval.ts w/packages/ai/src/naval.ts
+index b9509fa..41103c3 100644
+--- c/packages/ai/src/naval.ts
++++ w/packages/ai/src/naval.ts
+@@ -51,11 +51,21 @@ function relationToPort(water: readonly number[], cell: number, sea: SeaKnowledg
+   }
+   return unknown ? 'unknown' : 'separate';
+ }
++export function sparseContactNeeded(view: Pick<Observation, 'width' | 'height' | 'factionCount' | 'factions'>): boolean {
++  // Same broadest-realm scale as the existing expansion planner; no seed or
++  // hidden start locations. Dense realms retain their local contact policy.
++  return view.width * view.height / Math.max(1, view.factionCount) > 12_000 && view.factions.length < view.factionCount;
++}
+ function preferredPort(view: Observation, cells: ObservedCells, sea: SeaKnowledge) {
+-  return view.settlements.filter(town => town.factionId === view.factionId && !town.occupationTurns
+-    && !view.visibleSiegeSettlementIds.includes(town.id) && coastalWaters(view, town.cell, cells).some(cell => isSea(cells.get(cell))))
++  const isolated = Boolean(view.growth && sparseContactNeeded(view) && view.factions.length === 1);
++  const center = Math.floor(view.height / 2) * view.width + Math.floor(view.width / 2);
++  const ports = view.settlements.filter(town => town.factionId === view.factionId && !town.occupationTurns
++    && !view.visibleSiegeSettlementIds.includes(town.id) && coastalWaters(view, town.cell, cells).some(cell => isSea(cells.get(cell))));
++  const built = ports.filter(town => town.buildings.includes('building.harbor')).length;
++  return ports.filter(town => !isolated || built < 2 || town.buildings.includes('building.harbor'))
+     .map(town => ({ town, status: portStatus(view, town.cell, cells, sea) }))
+     .sort((a, b) => portRank[b.status] - portRank[a.status]
++      || (isolated ? hexDistance(a.town.cell, center, view.width) - hexDistance(b.town.cell, center, view.width) : 0)
+       || Number(b.town.buildings.includes('building.harbor')) - Number(a.town.buildings.includes('building.harbor'))
+       || Number(b.town.buildings.includes('building.workshop')) - Number(a.town.buildings.includes('building.workshop'))
+       || Number(b.town.buildings.includes('building.granary')) - Number(a.town.buildings.includes('building.granary')) || byId(a.town, b.town))[0]?.town;
+@@ -70,6 +80,26 @@ export function coastalReconnaissanceUseful(view: Pick<Observation, 'width' | 'h
+     || view.armies.some(army => army.factionId !== view.factionId && army.domain === 'naval');
+ }
+ 
++export function oceanScoutReserve(view: Observation): number {
++  if (!coastalReconnaissanceUseful(view)) return 0;
++  const scout = units.get('unit.ocean_warship')!;
++  const towns = view.settlements.filter(town => town.factionId === view.factionId);
++  // A ship in another observed basin cannot supply the new outlet. Keep its
++  // real, legal quote ahead of caravan/project savings as for the first hull.
++  const diversify = view.growth && sparseContactNeeded(view) && view.factions.length === 1
++    && towns.filter(town => town.buildings.includes('building.harbor')).length >= 2;
++  const cells = diversify ? new Map(view.cells.map(cell => [cell.cell, cell])) : undefined;
++  const sea = cells ? createSeaKnowledge(view, cells) : undefined;
++  const secondOutlet = cells && sea ? preferredPort(view, cells, sea) : undefined;
++  const water = secondOutlet && cells ? portWaters(view, secondOutlet, cells) : [];
++  const local = (cell: number) => !secondOutlet || relationToPort(water, cell, sea!) === 'connected';
++  if (view.armies.some(army => army.factionId === view.factionId && army.domain === 'naval' && army.canEnterDeepWater
++    && army.formations.some(formation => units.get(formation.unitId)?.naval?.transportCapacity === 0) && local(army.cell))) return 0;
++  if (towns.some(town => town.queue.some(order => order.itemId === scout.id) && (!secondOutlet || town.id === secondOutlet.id))) return 0;
++  return towns.some(town => !town.queue.length && (!secondOutlet || town.id === secondOutlet.id)
++    && view.productionOptions.some(option => option.settlementId === town.id && option.itemId === scout.id && option.canQueue)) ? scout.coinCost : 0;
++}
++
+ /** One prospective harbor, not an empire-wide building policy. No hidden coast scan.
+  * A single island hearth must be able to start the chain before a second town exists. */
+ export function hasNavalOpportunity(view: Observation): boolean {
+@@ -149,6 +179,37 @@ export function coastalFoundingSite(view: Observation, army: ArmyView): number |
+   if (!towns.length) return null;
+   const cells = new Map(view.cells.map(cell => [cell.cell, cell]));
+   const sea = createSeaKnowledge(view, cells);
++  if (view.growth && sparseContactNeeded(view) && view.factions.length === 1) {
++    const route = view.routes.find(route => route.armyId === army.id);
++    if (route) return route.waypoints.at(-1) ?? null;
++    const shores = towns.filter(town => coastalWaters(view, town.cell, cells).some(cell => isSea(cells.get(cell))));
++    const underway = view.armies.some(other => other.id !== army.id && other.canFound && view.routes.some(route => route.armyId === other.id));
++    const selected = view.armies.find(other => other.factionId === view.factionId && other.canFound && !other.carrierId && !other.movementBlocker)?.id;
++    if (shores.length === 1 && !underway && selected === army.id) {
++      const home = shores[0]!, water = portWaters(view, home, cells), center = Math.floor(view.height / 2) * view.width + Math.floor(view.width / 2);
++      const occupied = new Set([...view.armies, ...view.settlements].filter(entity => entity.factionId !== view.factionId).map(entity => entity.cell));
++      // Diversify access; "unknown" is a reason to try a second paid outlet,
++      // never proof that this coast reaches an ocean or any foreign realm.
++      const candidates: { cell: number; distance: number }[] = [];
++      // One observed-cell pass, four retained candidates and four public route
++      // queries. Do not raise the existing1024-node local founding search cap.
++      for (const cell of view.cells) {
++        const distance = hexDistance(army.cell, cell.cell, view.width);
++        if (candidates.length === 4 && (distance > candidates[3]!.distance || distance === candidates[3]!.distance && cell.cell > candidates[3]!.cell)) continue;
++        if (!isPassable(cell.terrain) || cell.settlementId || occupied.has(cell.cell)
++          || hexDistance(home.cell, center, view.width) - hexDistance(cell.cell, center, view.width) < 12
++          || !view.settlements.every(town => hexDistance(town.cell, cell.cell, view.width) >= settlementSpacing(view, cell.cell))
++          || !coastalWaters(view, cell.cell, cells).some(next => isSea(cells.get(next)) && relationToPort(water, next, sea) !== 'connected')) continue;
++        candidates.push({ cell: cell.cell, distance }); candidates.sort((a, b) => a.distance - b.distance || a.cell - b.cell);
++        if (candidates.length > 4) candidates.pop();
++      }
++      for (const candidate of candidates) {
++        if (candidate.cell === army.cell) return candidate.cell;
++        const preview = getMovementQuery(view, army.id, candidate.cell).preview;
++        if (preview?.canQueue && preview.action === 'move') return candidate.cell;
++      }
++    }
++  }
+   const currentRank = Math.max(...towns.map(town => portRank[portStatus(view, town.cell, cells, sea)]));
+   // A charting gap is not evidence that an existing port needs replacing. Keep
+   // normal land expansion until every existing coastal opportunity is positively
+@@ -200,6 +261,7 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
+     // Outbound rendezvous is near an owned hearth. Newly landed troops must found/invade,
+     // not immediately board again in a stateless embark/disembark loop.
+     && towns.some(town => hexDistance(army.cell, town.cell, view.width) <= 3)
++    && !(army.canFound && view.growth && sparseContactNeeded(view) && view.factions.length === 1 && coastalFoundingSite(view, army) !== null)
+     && (army.canFound || army.canAttack && army.formations.length >= 2 && enemyTowns.length > 0));
+   const nearest = (cell: number, locations: readonly { cell: number }[], limit = 1000): number => Math.min(limit, ...locations.map(other => hexDistance(cell, other.cell, view.width)));
+   const queue = (townId: string, itemId: string): boolean => {
+@@ -286,9 +348,10 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
+   // Fully charted destinations still use the bounded frontier fallback, not a
+   // permanent center objective that can trap a fleet in already-known water.
+   const chartCenter = Math.floor(view.height / 2) * view.width + Math.floor(view.width / 2);
++  const distantContact = sparseContactNeeded(view);
+   const explore = (fleet: ArmyView) => navigation.destination(fleet, fleet.sight, claimed, undefined,
+     fleet.transportCapacity ? undefined : cell => -hexDistance(cell, chartCenter, view.width),
+-    (cell, gain) => gain * (nearCoastalFrontier(cell) ? 250 : 100)
++    (cell, gain) => gain * (nearCoastalFrontier(cell) && (!distantContact || !fleet.canEnterDeepWater || fleet.transportCapacity > 0) ? 250 : 100)
+       + (gain > 0 && fleet.canEnterDeepWater ? (hexDistance(fleet.cell, chartCenter, view.width) - hexDistance(cell, chartCenter, view.width)) * 200 : 0),
+     // Independent reconnaissance uses observed local identity. Preserve the
+     // established expedition tie order for fleets that can carry passengers.
+@@ -346,11 +409,17 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
+     if (heldArmyIds.has(fleet.id) || fleet.movement <= 0 || fleet.movementBlocker) continue;
+     const passengers = fleet.cargo.flatMap(cargo => own.find(army => army.id === cargo.armyId) ?? []);
+     if (!passengers.length && fleet.canAttack && !fleet.commandBlocker && fleet.morale >= 40 && fleet.fatigue <= 60) {
+-      const target = foreign.find(enemy => enemy.domain === 'naval' && wars.has(enemy.factionId) && !protectedIds.has(enemy.factionId)
+-        && neighbors(fleet.cell, view.width, view.height).includes(enemy.cell)
+-        && foreign.filter(other => other.cell === enemy.cell).reduce((sum, other) => sum + other.strength, 0) <= fleet.strength
+-        && foreign.filter(other => other.cell === enemy.cell).reduce((sum, other) => sum + other.formations.length, 0) <= 20);
+-      if (target && getMovementQuery(view, fleet.id, target.cell).preview?.canMoveNow) {
++      const checkedCells = new Set<number>();
++      const target = foreign.find(enemy => {
++        if (enemy.domain !== 'naval' || !wars.has(enemy.factionId) || protectedIds.has(enemy.factionId)
++          || !neighbors(fleet.cell, view.width, view.height).includes(enemy.cell) || checkedCells.has(enemy.cell)) return false;
++        checkedCells.add(enemy.cell); // At most one public query per adjacent stack.
++        // Budget against every observed hull, not only this battle's contingent.
++        if (foreign.filter(other => other.cell === enemy.cell).reduce((sum, other) => sum + other.strength, 0) > fleet.strength) return false;
++        const preview = getMovementQuery(view, fleet.id, enemy.cell).preview;
++        return preview?.action === 'attack' && preview.canMoveNow;
++      });
++      if (target) {
+         commands.push({ type: 'attack', factionId, armyId: fleet.id, targetArmyId: target.id }); interrupts = true;
+         reasons.push(`${fleet.name} engages a visible weaker enemy fleet in the existing war.`); return result();
+       }
+diff --git 1/packages/ai/src/battle-defense.test.ts 2/packages/ai/src/battle-defense.test.ts
+new file mode 100644
+index 0000000..1f0ec95
+--- /dev/null
++++ 2/packages/ai/src/battle-defense.test.ts
+@@ -0,0 +1,253 @@
++import { describe, expect, it } from 'vitest';
++import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
++import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
++import { navalCampaign, NAVAL_FIXTURE } from '../../test-fixtures/src/naval-fixture';
++import { conquestCampaign, CONQUEST_FIXTURE } from '../../test-fixtures/src/conquest-fixture';
++import { withRules } from '../../sim/src/rules';
++import { roadDirection } from '../../sim/src/roads';
++import { applyCommand, createArmyFormation, deserializeGame, getMovementQuery, getObservation, replayGame, serializeGame, stateHash, type Army, type GameCommand, type GameState } from '@theandril/sim';
++import { planTurn } from './index';
++import { planNaval } from './naval';
++
++function issue(state: GameState, command: GameCommand): void {
++  expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true });
++}
++
++/** Authored wounded stack, no injected plans or command outcomes. */
++function stack(state: GameState, enemy: Army, unitId: string, sizes: number[]): void {
++  const ids = sizes.map((_, index) => index ? `army.${state.nextId++}` : enemy.id);
++  for (const [index, size] of sizes.entries()) {
++    const id = ids[index]!;
++    state.armies[id] = { ...enemy, id, formations: Array.from({ length: size }, (_, formation) => ({
++      ...createArmyFormation(formation ? `army.${state.nextId++}` : id, unitId), strength: 1, morale: 1,
++    })).sort((a, b) => a.id < b.id ? -1 : 1) };
++  }
++}
++
++function ready(state: GameState, war = true): GameState {
++  state.factions[0]!.treasury = 0; state.factions[0]!.knowledge = 0;
++  refreshAuthoredSight(state);
++  const checked = deserializeGame(serializeGame(state));
++  if (war) issue(checked, { type: 'declareWar', factionId: checked.turnOwnerId, targetFactionId: checked.factions[1]!.id });
++  return checked;
++}
++
++function field(sizes = Array.from({ length: 21 }, () => 1), war = true): GameState {
++  const state = borderBattleCampaign(), enemy = state.armies['army.4']!;
++  stack(state, enemy, 'unit.scout', sizes);
++  return ready(state, war);
++}
++
++function naval(sizes = Array.from({ length: 21 }, () => 1)): GameState {
++  const state = navalCampaign(), enemy = state.armies[NAVAL_FIXTURE.enemyFleetId]!;
++  for (const army of Object.values(state.armies)) if (army.factionId === state.turnOwnerId && army.id !== NAVAL_FIXTURE.coastalId) delete state.armies[army.id];
++  state.characters = {};
++  enemy.cell = 830;
++  stack(state, enemy, 'unit.coastal_warship', sizes);
++  return ready(state);
++}
++
++function siege(): GameState {
++  const state = conquestCampaign(), town = state.settlements[CONQUEST_FIXTURE.settlementId]!, army = state.armies['army.2']!;
++  const enemy: Army = { id: 'army.4', factionId: town.factionId, name: 'Authored garrison', cell: town.cell, movement: 3, formations: [] };
++  stack(state, enemy, 'unit.scout', Array.from({ length: 21 }, () => 1));
++  army.formations = Array.from({ length: 12 }, (_, index) => createArmyFormation(index ? `army.${state.nextId++}` : army.id, 'unit.guard')).sort((a, b) => a.id < b.id ? -1 : 1);
++  return ready(state);
++}
++
++describe('AI defending-contingent consumers', () => {
++  it('executes a query-approved field attack against 21 formations using an unchanged detached observation', () => {
++    const state = field(), initial = serializeGame(state), view = getObservation(state, state.turnOwnerId), detached = structuredClone(view);
++    const target = state.armies['army.4']!.cell;
++    expect(getMovementQuery(view, 'army.2', target).preview).toMatchObject({ action: 'attack', canMoveNow: true });
++    const commands = planTurn(view);
++    expect(commands).toContainEqual(expect.objectContaining({ type: 'attack', armyId: 'army.2' }));
++    expect(planTurn(structuredClone(view))).toEqual(commands);
++    expect(view).toEqual(detached); expect(serializeGame(state)).toBe(initial);
++    for (const command of commands) {
++      issue(state, command);
++      expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++    }
++    expect(state.battle?.combat.defender).toHaveLength(20);
++    expect(stateHash(replayGame(initial, commands))).toBe(stateHash(state));
++  });
++
++  it('executes a query-approved naval attack against 21 hulls through the whole turn planner', () => {
++    const state = naval(), initial = serializeGame(state), view = getObservation(state, state.turnOwnerId), detached = structuredClone(view);
++    expect(getMovementQuery(view, NAVAL_FIXTURE.coastalId, 830).preview).toMatchObject({ action: 'attack', canMoveNow: true });
++    expect(planNaval(view, 0).interrupts).toBe(true);
++    const commands = planTurn(view);
++    expect(commands).toContainEqual(expect.objectContaining({ type: 'attack', armyId: NAVAL_FIXTURE.coastalId }));
++    expect(view).toEqual(detached); expect(serializeGame(state)).toBe(initial);
++    for (const command of commands) {
++      issue(state, command);
++      expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++    }
++    expect(state.battle).toMatchObject({ domain: 'naval' });
++    expect(state.battle?.combat.defender).toHaveLength(20);
++    expect(stateHash(replayGame(initial, commands))).toBe(stateHash(state));
++  });
++
++  it('declares war on a contestable oversized stack before asking a fresh observation to authorize attack', () => {
++    const state = field(undefined, false), view = getObservation(state, state.turnOwnerId), target = state.armies['army.4']!.cell;
++    expect(getMovementQuery(view, 'army.2', target).preview?.canMoveNow).toBe(false);
++    const first = planTurn(view);
++    expect(first).toContainEqual(expect.objectContaining({ type: 'declareWar' }));
++    expect(first.some(command => command.type === 'attack')).toBe(false);
++    for (const command of first) issue(state, command);
++    const next = getObservation(state, state.turnOwnerId);
++    expect(getMovementQuery(next, 'army.2', target).preview?.canMoveNow).toBe(true);
++    const second = planTurn(next);
++    expect(second).toContainEqual(expect.objectContaining({ type: 'attack' }));
++    for (const command of second) issue(state, command);
++    expect(state.battle?.combat.defender).toHaveLength(20);
++  });
++
++  it('uses the real one-movement road quote rather than re-pricing a contingent attack as forest travel', () => {
++    let state = field();
++    const origin = state.armies['army.2']!.cell, target = state.armies['army.4']!.cell;
++    state.armies['army.2']!.movement = 1;
++    state.world.terrain[target] = 2;
++    // Authored completed road, with actual memory refreshed below. No cost waiver.
++    for (const [from, to] of [[origin, target], [target, origin]] as const) state.roads.edges[from] = 1 << roadDirection(from, to, state.world.width);
++    refreshAuthoredSight(state); state = deserializeGame(serializeGame(state));
++    const view = getObservation(state, state.turnOwnerId);
++    expect(getMovementQuery(view, 'army.2', target).preview).toMatchObject({ canMoveNow: true, action: 'attack', cost: 1 });
++    const commands = planTurn(view);
++    expect(commands).toContainEqual(expect.objectContaining({ type: 'attack', armyId: 'army.2' }));
++    for (const command of commands) issue(state, command);
++    expect(state.battle?.combat.defender).toHaveLength(20);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++  });
++
++  it('naval target selection skips a query-blocked old oversized stack rather than abandoning another legal target', () => {
++    let state = naval();
++    const enemy = state.armies['army.4']!, id = `army.${state.nextId++}`;
++    state.armies[id] = { ...enemy, id, cell: 877, formations: [{ ...createArmyFormation(id, 'unit.coastal_warship'), strength: 1, morale: 1 }] };
++    refreshAuthoredSight(state); state = deserializeGame(serializeGame(state));
++    const view = withRules(state, 16, () => getObservation(state, state.turnOwnerId));
++    expect(getMovementQuery(view, NAVAL_FIXTURE.coastalId, 830).preview?.canMoveNow).toBe(false);
++    expect(getMovementQuery(view, NAVAL_FIXTURE.coastalId, 877).preview?.canMoveNow).toBe(true);
++    const plan = planNaval(view, 0);
++    expect(plan.commands).toContainEqual({ type: 'attack', factionId: view.factionId, armyId: NAVAL_FIXTURE.coastalId, targetArmyId: id });
++    withRules(state, 16, () => { for (const command of plan.commands) issue(state, command); });
++    expect(state.battle?.defenderIds).toEqual([id]);
++  });
++
++  const theaters = [
++    { name: 'field', create: field, armyId: 'army.2' },
++    { name: 'naval', create: naval, armyId: NAVAL_FIXTURE.coastalId },
++  ];
++
++  it.each(theaters)('$name plans accept mixed whole-container contingents and leave reserves intact', ({ create, armyId }) => {
++    const state = create([12, 9, 8]), initial = serializeGame(state), view = getObservation(state, state.turnOwnerId);
++    const commands = planTurn(view), attack = commands.find(command => command.type === 'attack');
++    expect(attack).toMatchObject({ armyId });
++    if (attack?.type !== 'attack') throw new Error('Expected a real contingent attack.');
++    const expected = view.armies.find(army => army.id === attack.targetArmyId)!.battleDefense!;
++    expect(expected.reserveFormations).toBeGreaterThan(0);
++    for (const command of commands) issue(state, command);
++    expect(state.battle?.combat.defender).toHaveLength(expected.engagedFormations);
++    const reserveIds = view.armies.filter(army => army.cell === state.battle!.defenderCell && !state.battle!.defenderIds.includes(army.id)).map(army => army.id);
++    const originals = reserveIds.map(id => structuredClone(state.armies[id]));
++    expect(originals.flatMap(army => army!.formations)).toHaveLength(expected.reserveFormations);
++    const resolve: GameCommand = { type: 'autoResolveBattle', factionId: state.turnOwnerId };
++    issue(state, resolve);
++    expect(reserveIds.map(id => state.armies[id])).toEqual(originals);
++    expect(state.armies[armyId]?.cell).toBe(view.armies.find(army => army.id === armyId)!.cell);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++    expect(stateHash(replayGame(initial, [...commands, resolve]))).toBe(stateHash(state));
++  });
++
++  it.each(theaters)('$name cannot discount a strong strategic reserve to make an attack affordable', ({ create, armyId }) => {
++    let state = create();
++    const enemy = Object.values(state.armies).filter(army => army.factionId !== state.turnOwnerId).sort((a, b) => a.id < b.id ? -1 : 1).at(-1)!;
++    enemy.formations[0]!.strength = 20;
++    state.armies[armyId]!.formations[0]!.strength = 30;
++    state = deserializeGame(serializeGame(state));
++    const view = getObservation(state, state.turnOwnerId), target = view.armies.find(army => army.factionId !== state.turnOwnerId)!;
++    expect(target.battleDefense).toMatchObject({ engagedStrength: 20, reserveStrength: 20 });
++    expect(getMovementQuery(view, armyId, target.cell).preview?.canMoveNow).toBe(true);
++    expect(planTurn(view).some(command => command.type === 'attack')).toBe(false);
++  });
++
++  it.each(theaters)('$name keeps old no-preview observations and rule-16 guards conservative', ({ create, armyId }) => {
++    const state = create(), before = stateHash(state);
++    for (const view of [getObservation(state, state.turnOwnerId), withRules(state, 16, () => getObservation(state, state.turnOwnerId))]) {
++      for (const army of view.armies) delete army.battleDefense;
++      const enemy = view.armies.find(army => army.factionId !== state.turnOwnerId)!;
++      expect(getMovementQuery(view, armyId, enemy.cell).preview?.canMoveNow).toBe(false);
++      expect(planTurn(view).some(command => command.type === 'attack')).toBe(false);
++    }
++    expect(stateHash(state)).toBe(before);
++  });
++
++  it.each(theaters)('$name decisions cannot read hidden reinforcements or foreign treasury', ({ create, armyId }) => {
++    const state = create(), factionId = state.turnOwnerId, view = getObservation(state, factionId), commands = planTurn(view);
++    const visible = new Set(view.cells.filter(cell => cell.visible).map(cell => cell.cell));
++    const enemy = state.armies['army.4']!, naval = armyId === NAVAL_FIXTURE.coastalId;
++    const hidden = state.world.terrain.findIndex((terrain, cell) => !visible.has(cell)
++      && (naval ? terrain === 0 && state.world.waterDepth[cell] === 1 : terrain > 0 && terrain < 4)
++      && !Object.values(state.settlements).some(town => town.cell === cell));
++    expect(hidden).toBeGreaterThanOrEqual(0);
++    const id = `army.${state.nextId++}`;
++    state.armies[id] = { ...enemy, id, cell: hidden, movement: 1, formations: [createArmyFormation(id, enemy.formations[0]!.unitId)] };
++    state.factions[1]!.treasury = 123456;
++    refreshAuthoredSight(state);
++    const checked = deserializeGame(serializeGame(state)), changed = getObservation(checked, factionId);
++    expect(changed.armies.some(army => army.id === id)).toBe(false);
++    expect(planTurn(changed)).toEqual(commands);
++    expect(getMovementQuery(changed, armyId, enemy.cell)).toEqual(getMovementQuery(view, armyId, enemy.cell));
++  });
++
++  it.each(theaters)('$name honors a movement-query blocker even with a valid contingent preview', ({ create, armyId }) => {
++    const state = create(), view = getObservation(state, state.turnOwnerId), own = view.armies.find(army => army.id === armyId)!;
++    // Detached movement capabilities are supplied by simulation, not inferred from frontage.
++    own.movementBlocker = 'Cancel the active character mission before moving this army.';
++    const enemy = view.armies.find(army => army.factionId !== state.turnOwnerId)!;
++    expect(enemy.battleDefense).toBeDefined();
++    expect(getMovementQuery(view, armyId, enemy.cell).preview?.canMoveNow).toBe(false);
++    expect(planTurn(view).some(command => command.type === 'attack')).toBe(false);
++  });
++
++  it('uses the canonical siege assault quote for 21 garrison formations without capturing through reserves', () => {
++    const state = siege(), initial = serializeGame(state), factionId = state.turnOwnerId, commands: GameCommand[] = [];
++    const run = (command: GameCommand) => { issue(state, command); commands.push(command); expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state)); };
++    const first = planTurn(getObservation(state, factionId));
++    expect(first).toContainEqual({ type: 'besiege', factionId, armyId: 'army.2', settlementId: CONQUEST_FIXTURE.settlementId });
++    for (const command of first) run(command);
++    // One actual refresh makes assault movement available; no defense outcome is injected.
++    run({ type: 'endTurn', factionId });
++    const view = getObservation(state, factionId), quote = view.sieges[0]!;
++    expect(quote).toMatchObject({ canAssault: true, battleDefense: { engagedFormations: 20, reserveFormations: 1 } });
++    const historical = withRules(state, 16, () => getObservation(state, factionId));
++    expect(historical.sieges[0]).toMatchObject({ canAssault: false });
++    expect(planTurn(historical).some(command => command.type === 'assault')).toBe(false);
++    const attack = planTurn(view);
++    expect(attack).toEqual([{ type: 'assault', factionId, settlementId: quote.settlementId }]);
++    for (const command of attack) run(command);
++    expect(state.battle?.combat.defender).toHaveLength(20);
++    const reserve = Object.values(state.armies).find(army => army.cell === state.battle!.defenderCell && !state.battle!.defenderIds.includes(army.id))!;
++    const reserveBefore = structuredClone(reserve);
++    run({ type: 'autoResolveBattle', factionId });
++    expect(state.armies[reserve.id]).toEqual(reserveBefore);
++    expect(state.pendingCapture).toBeNull();
++    expect(state.settlements[quote.settlementId]!.factionId).not.toBe(factionId);
++    expect(stateHash(replayGame(initial, commands))).toBe(stateHash(state));
++  });
++
++  it('siege policy budgets against the complete observed garrison rather than the engaged preview', () => {
++    const state = siege(), factionId = state.turnOwnerId;
++    issue(state, { type: 'besiege', factionId, armyId: 'army.2', settlementId: CONQUEST_FIXTURE.settlementId });
++    issue(state, { type: 'endTurn', factionId });
++    const view = getObservation(state, factionId), quote = view.sieges[0]!, army = view.armies.find(army => army.id === 'army.2')!;
++    expect(quote.canAssault).toBe(true); expect(quote.defenses).toBeGreaterThan(0);
++    // A detached consumer contrast: both observations include the same permitted
++    // contingent. Only the full threat changes; no fake command is ever applied.
++    army.strength = quote.battleDefense!.engagedStrength * 3;
++    expect(army.strength).toBeLessThan(quote.defenderStrength * 3);
++    expect(planTurn(view).some(command => command.type === 'assault')).toBe(false);
++    quote.defenderStrength = quote.battleDefense!.engagedStrength;
++    expect(planTurn(view)).toContainEqual({ type: 'assault', factionId, settlementId: quote.settlementId });
++  });
++});
+diff --git 1/packages/ai/src/contact-reconnaissance.test.ts 2/packages/ai/src/contact-reconnaissance.test.ts
+new file mode 100644
+index 0000000..cf424f4
+--- /dev/null
++++ 2/packages/ai/src/contact-reconnaissance.test.ts
+@@ -0,0 +1,61 @@
++import { expect, test } from 'vitest';
++import { hexDistance, TERRAIN, WATER_DEPTH } from '@theandril/mapgen';
++import { createGame, getMovementQuery, getObservation, type GameCommand, type Observation } from '@theandril/sim';
++import { navalCampaign } from '../../test-fixtures/src/naval-fixture';
++import { createNavigation } from './navigation';
++import { coastalFoundingSite, planNaval } from './naval';
++import { planTurn } from './index';
++
++/** Detached observed geometry isolates role choices, not a funded game. The
++ * unchanged generated contact tests exercise the actual paid campaign chain. */
++function reconnaissanceView(naval: boolean, factionCount = 4): Observation {
++  const state = naval ? navalCampaign({ enemyFleet: false }) : createGame({ seed: 74, size: 'tiny', factionCount: 1 });
++  const base = getObservation(state, state.turnOwnerId), width = 384, height = 256, origin = 100 * width + 128;
++  const army = base.armies.find(army => army.factionId === base.factionId && (naval ? army.domain === 'naval' && !army.transportCapacity : army.unitId === 'unit.scout'))!;
++  return { ...base, width, height, factionCount, treasury: 0, knowledge: 0, settlements: [], productionOptions: [], routes: [], characters: [],
++    armies: [{ ...army, cell: origin, movement: 6, canEnterDeepWater: naval }],
++    cells: Array.from({ length: width * height }, (_, cell) => cell).filter(cell => hexDistance(origin, cell, width) <= 4)
++      .map(cell => ({ cell, visible: true, fertility: 50, biome: 1,
++        terrain: naval && cell !== origin - 4 ? TERRAIN.water : TERRAIN.plains,
++        waterDepth: naval && cell !== origin - 4 ? WATER_DEPTH.deep : WATER_DEPTH.land })) };
++}
++function movement(commands: GameCommand[]) {
++  return commands.find((command): command is Extract<GameCommand, { type: 'moveTo' }> => command.type === 'moveTo')!;
++}
++
++test.each([false, true])('sparse reconnaissance uses a public inward discovery bearing (naval: %s)', naval => {
++  const view = reconnaissanceView(naval), original = structuredClone(view), army = view.armies[0]!;
++  const commands = naval ? planNaval(view, 0).commands : planTurn(view);
++  const move = movement(commands), center = Math.floor(view.height / 2) * view.width + Math.floor(view.width / 2);
++  expect(move).toBeDefined();
++  const navigation = createNavigation(view), reachable = getMovementQuery(view, army.id).reachable;
++  const mostDiscovery = Math.max(...reachable.map(item => navigation.informationGain(item.cell, army.sight)));
++  const inwardDiscovery = Math.min(...reachable.filter(item => navigation.informationGain(item.cell, army.sight) === mostDiscovery).map(item => hexDistance(item.cell, center, view.width)));
++  expect(hexDistance(move.target, center, view.width)).toBe(inwardDiscovery);
++  expect(navigation.informationGain(move.target, army.sight)).toBeGreaterThan(0);
++  expect(getMovementQuery(view, army.id, move.target).preview).toMatchObject({ canMoveNow: true, action: 'move' });
++  expect(naval ? planNaval(structuredClone(view), 0).commands : planTurn(structuredClone(view))).toEqual(commands);
++  expect(view).toEqual(original);
++});
++
++test('an isolated caravan can plan a paid second maritime outlet without claiming uncertain seas are connected', () => {
++  const state = navalCampaign({ enemyFleet: false }), view = getObservation(state, state.turnOwnerId);
++  const width = 384, height = 256, origin = 100 * width + 128;
++  const founder = view.armies.find(army => army.canFound)!;
++  const home = view.settlements.find(town => town.factionId === view.factionId)!;
++  const outside = origin + 30;
++  Object.assign(view, { width, height, factionCount: 4, settlements: [{ ...home, cell: origin }],
++    armies: [{ ...founder, cell: origin, movement: 3 }], productionOptions: [], routes: [],
++    cells: Array.from({ length: width * height }, (_, cell) => cell)
++      .filter(cell => hexDistance(origin, cell, width) <= 36 && cell !== origin + width * 2)
++      .map(cell => ({ cell, fertility: 50, biome: 1, visible: true,
++        terrain: cell === origin + width || cell === outside ? TERRAIN.water : TERRAIN.plains,
++        waterDepth: cell === origin + width || cell === outside ? WATER_DEPTH.deep : WATER_DEPTH.land })) });
++  const before = structuredClone(view), army = view.armies[0]!;
++  const destination = coastalFoundingSite(view, army);
++  expect(destination).not.toBeNull();
++  expect(hexDistance(destination!, origin, width)).toBeGreaterThanOrEqual(12);
++  expect(getMovementQuery(view, army.id, destination!).preview).toMatchObject({ action: 'move', canQueue: true, canMoveNow: false });
++  expect(coastalFoundingSite(structuredClone(view), structuredClone(army))).toBe(destination);
++  expect(view).toEqual(before);
++});

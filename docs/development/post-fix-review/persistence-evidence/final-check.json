@@ -1,0 +1,29 @@
+{
+  "postimageFiles": 7,
+  "sourceMismatches": [],
+  "diffBytes": 60614,
+  "diffSha256": "28bc3d966a68231bb75750d92f0cc85bf074beecae23a687f350a5305b1d34a5",
+  "parseExit": 0,
+  "parsedFileSetMatches": true,
+  "reverseCheckExit": 0,
+  "oldFailedVerdictPreserved": true,
+  "heuristicScans": {
+    "possible_secret": [],
+    "shell_injection": [],
+    "eval_exec": [],
+    "unsafe_pickle": [],
+    "sql_interpolation": []
+  },
+  "independentTests": {
+    "passed": 52,
+    "total": 52,
+    "failed": 0,
+    "testFiles": 5
+  },
+  "independentProbes": {
+    "passed": 14,
+    "total": 14,
+    "databasesDeleted": 14,
+    "noRemainingDatabases": true
+  }
+}

@@ -1,0 +1,24 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ apps/web/src/next-action.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/next-action.test.ts [ apps/web/src/next-action.test.ts ]
+Error: Cannot find package '@theandril/sim' imported from /home/telephoneheater/Work/Theandril/tests/gameplay/household-fixture.ts
+ ❯ tests/gameplay/household-fixture.ts:1:1
+      1| import { applyCommand, createGame, deserializeGame, getObservation, ge…
+       | ^
+      2| import { rebaseAuthoredLand } from '../../packages/test-fixtures/src/a…
+      3|
+ ❯ apps/web/src/next-action.test.ts:4:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  01:47:52
+   Duration  492ms (transform 316ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)
+

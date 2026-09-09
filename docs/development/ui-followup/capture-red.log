@@ -1,0 +1,111 @@
+
+Running 1 test using 1 worker
+
+(node:420851) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [ui-followup-5193] › tests/gameplay/battle-defense.spec.ts:117:1 › R03 narrow public assaults complete occupation at 390px without intercepted controls (13.1s)
+
+
+  1) [ui-followup-5193] › tests/gameplay/battle-defense.spec.ts:117:1 › R03 narrow public assaults complete occupation at 390px without intercepted controls 
+
+    TimeoutError: locator.click: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Occupy settlement', exact: true })
+        - locator resolved to <button class="wide" aria-label="Occupy settlement">Occupy</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+      - retrying click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <canvas width="390" height="399" aria-hidden="true"></canvas> from <div tabindex="0" class="map-host" data-testid="map-container" aria-label="World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.">…</div> subtree intercepts pointer events
+      - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        4 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <canvas width="390" height="399" aria-hidden="true"></canvas> from <div tabindex="0" class="map-host" data-testid="map-container" aria-label="World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.">…</div> subtree intercepts pointer events
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+        - retrying click action
+          - waiting 500ms
+          - waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+        - retrying click action
+          - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+      - retrying click action
+        - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <canvas width="390" height="399" aria-hidden="true"></canvas> from <div tabindex="0" class="map-host" data-testid="map-container" aria-label="World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.">…</div> subtree intercepts pointer events
+      - retrying click action
+        - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+      - retrying click action
+        - waiting 500ms
+
+
+      159 |   await info.attach('narrow-capture-before', { body: JSON.stringify({ before, contestedSieges: contested.sieges, layout }, null, 2), contentType: 'application/json' });
+      160 |   // Ordinary pointer action is the acceptance boundary; no force or viewport escape.
+    > 161 |   await occupy.click({ timeout: 10000 });
+          |                ^
+      162 |   await expect(page.getByTestId('capture-panel')).toHaveCount(0);
+      163 |   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
+      164 |   const after = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), view: window.__THEANDRIL__!.getSummary()! }));
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/battle-defense.spec.ts:161:16
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/ui-followup/capture-red/battle-defense-R03-narrow--67f2b-ithout-intercepted-controls-ui-followup-5193/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/ui-followup/capture-red/battle-defense-R03-narrow--67f2b-ithout-intercepted-controls-ui-followup-5193/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/ui-followup/capture-red/battle-defense-R03-narrow--67f2b-ithout-intercepted-controls-ui-followup-5193/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/ui-followup/capture-red/battle-defense-R03-narrow--67f2b-ithout-intercepted-controls-ui-followup-5193/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [ui-followup-5193] › tests/gameplay/battle-defense.spec.ts:117:1 › R03 narrow public assaults complete occupation at 390px without intercepted controls 

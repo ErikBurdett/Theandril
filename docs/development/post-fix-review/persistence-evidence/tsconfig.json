@@ -1,0 +1,10 @@
+{
+  "extends": "/home/telephoneheater/Work/Theandril/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": ["/home/telephoneheater/Work/Theandril/node_modules/@types"],
+    "noEmit": true,
+    "incremental": false
+  },
+  "include": ["/home/telephoneheater/Work/Theandril/packages/persistence/**/*.ts"],
+  "exclude": ["**/node_modules", "**/dist"]
+}

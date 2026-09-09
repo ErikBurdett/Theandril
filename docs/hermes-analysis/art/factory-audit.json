@@ -1,0 +1,648 @@
+{
+  "schemaVersion": 1,
+  "basisCatalogSha256": "e5a9b72658ab21b83e2a2b1dd7bbf07e2f7c0155b5baf9c97de5f03326d79630",
+  "pathResolution": [
+    {
+      "supplied": "/projects/BlenderArtFactory",
+      "exists": false
+    },
+    {
+      "supplied": "/pixel-art-factory",
+      "exists": false
+    },
+    {
+      "verifiedAlternative": "/home/telephoneheater/Projects/BlenderArtFactory",
+      "exists": true
+    },
+    {
+      "verifiedAlternative": "/home/telephoneheater/Projects/pixel-art-factory",
+      "exists": true
+    }
+  ],
+  "scope": "Read-only inspection/help/doctors and existing source import validation. No build, generation, scene edit, review decision, publish, provider request or configuration edit. Game doctor creates and removes a transient cache probe.",
+  "profiles": [
+    {
+      "path": "/home/telephoneheater/Projects/BlenderArtFactory/profiles/modern-warfare.json",
+      "sha256": "49b87b66f94e3c3f0eb856905233a5533be3bf4d5fbb3717e1010e16f1bd35af",
+      "id": "modern-warfare",
+      "workflow": "polygon_3d",
+      "recipe": "modern_crate",
+      "render": {
+        "engine": "CYCLES",
+        "samples": 64,
+        "resolution": [
+          512,
+          512
+        ],
+        "previewResolution": [
+          1024,
+          1024
+        ],
+        "transparent": true,
+        "camera": {
+          "projection": "PERSP",
+          "azimuthDeg": 45,
+          "elevationDeg": 24,
+          "focalLengthMm": 65,
+          "orthoScale": 3.4
+        },
+        "viewTransform": "AgX",
+        "exposure": 0,
+        "filterSize": 1.5
+      },
+      "textures": {
+        "size": 256,
+        "filter": "linear",
+        "colorSpace": "sRGB",
+        "dataColorSpace": "Non-Color",
+        "targetTexelsPerMeter": 512,
+        "mipmaps": true,
+        "channels": [
+          "baseColor",
+          "roughness",
+          "metallic",
+          "normal"
+        ],
+        "paddingTexels": 8,
+        "recommendedProductionSize": 1024
+      },
+      "export": {
+        "formats": [
+          "blend",
+          "glb",
+          "png"
+        ],
+        "units": "meters",
+        "forward": "-Z",
+        "up": "+Y",
+        "origin": "ground-center",
+        "selectedOnly": true,
+        "includeCameras": false,
+        "includeLights": false,
+        "embedTextures": true,
+        "normalConvention": "tangent-positive-Y",
+        "preserveNamedParts": true
+      },
+      "sprites": {
+        "size": [
+          96,
+          96
+        ],
+        "facings": 8,
+        "previewScale": 6,
+        "alphaThreshold": 0.5
+      },
+      "palette": {
+        "mode": "material",
+        "file": "palettes/modern-warfare.json",
+        "dither": false
+      }
+    },
+    {
+      "path": "/home/telephoneheater/Projects/BlenderArtFactory/profiles/theandril-fantasy-realism.json",
+      "sha256": "3c8db4c0ca3ed688bad2b8b01a6b1e3428788c99d11b926f60cb92290f58a937",
+      "id": "theandril-fantasy-realism",
+      "workflow": "realistic_3d",
+      "recipe": "shrine",
+      "render": {
+        "engine": "CYCLES",
+        "samples": 128,
+        "resolution": [
+          512,
+          512
+        ],
+        "previewResolution": [
+          1024,
+          1024
+        ],
+        "transparent": true,
+        "camera": {
+          "projection": "PERSP",
+          "azimuthDeg": 40,
+          "elevationDeg": 20,
+          "focalLengthMm": 70,
+          "orthoScale": 4.4
+        },
+        "viewTransform": "AgX",
+        "exposure": 0,
+        "filterSize": 1.5,
+        "motionBlur": false,
+        "depthOfField": false,
+        "views": {
+          "first_person": {
+            "focalLengthMm": 28,
+            "cameraHeightMeters": 1.7
+          },
+          "third_person": {
+            "focalLengthMm": 50,
+            "cameraHeightMeters": 2.2
+          },
+          "cinematic": {
+            "focalLengthMm": 85,
+            "cameraHeightMeters": 1.5
+          }
+        },
+        "productionPreviewResolution": [
+          1920,
+          1080
+        ]
+      },
+      "textures": {
+        "size": 256,
+        "filter": "linear",
+        "colorSpace": "sRGB",
+        "dataColorSpace": "Non-Color",
+        "targetTexelsPerMeter": 1024,
+        "mipmaps": true,
+        "channels": [
+          "baseColor",
+          "roughness",
+          "metallic",
+          "normal",
+          "occlusion"
+        ],
+        "paddingTexels": 16,
+        "recommendedProductionSize": 2048
+      },
+      "export": {
+        "formats": [
+          "blend",
+          "glb",
+          "png"
+        ],
+        "units": "meters",
+        "forward": "-Z",
+        "up": "+Y",
+        "origin": "ground-center",
+        "selectedOnly": true,
+        "includeCameras": false,
+        "includeLights": false,
+        "embedTextures": true,
+        "normalConvention": "tangent-positive-Y",
+        "preserveNamedParts": true,
+        "lodRatios": [
+          1,
+          0.5,
+          0.2
+        ]
+      },
+      "sprites": {
+        "size": [
+          128,
+          128
+        ],
+        "facings": 8,
+        "previewScale": 4,
+        "alphaThreshold": 0.5
+      },
+      "palette": {
+        "mode": "material",
+        "file": "palettes/theandril-master.json",
+        "dither": false,
+        "scope": "art-direction-ramps"
+      }
+    },
+    {
+      "path": "/home/telephoneheater/Projects/BlenderArtFactory/profiles/theandril-pixel-2d.json",
+      "sha256": "5c58a8d240275ff76be048b2d2704b677d7bda57abe7ab7018cd69512f0f240f",
+      "id": "theandril-pixel-2d",
+      "workflow": "pixel_2d",
+      "recipe": "shrine",
+      "render": {
+        "engine": "CYCLES",
+        "samples": 32,
+        "resolution": [
+          384,
+          384
+        ],
+        "previewResolution": [
+          768,
+          768
+        ],
+        "transparent": true,
+        "camera": {
+          "projection": "ORTHO",
+          "azimuthDeg": 45,
+          "elevationDeg": 35.2643897,
+          "focalLengthMm": 50,
+          "orthoScale": 4.4
+        },
+        "viewTransform": "Standard",
+        "exposure": 0,
+        "filterSize": 0.01,
+        "motionBlur": false,
+        "depthOfField": false
+      },
+      "textures": {
+        "size": 64,
+        "filter": "nearest",
+        "colorSpace": "sRGB",
+        "dataColorSpace": "Non-Color",
+        "targetTexelsPerMeter": 32,
+        "mipmaps": false,
+        "channels": [
+          "baseColor"
+        ],
+        "paddingTexels": 2,
+        "recommendedProductionSize": 128
+      },
+      "export": {
+        "formats": [
+          "blend",
+          "png",
+          "glb"
+        ],
+        "units": "meters",
+        "forward": "-Z",
+        "up": "+Y",
+        "origin": "ground-center",
+        "selectedOnly": true,
+        "includeCameras": false,
+        "includeLights": false,
+        "embedTextures": true,
+        "runtimeFormat": "png",
+        "editableSpriteFormat": "aseprite-if-available",
+        "preserveNamedParts": true
+      },
+      "sprites": {
+        "size": [
+          96,
+          96
+        ],
+        "facings": 8,
+        "previewScale": 6,
+        "alphaThreshold": 0.5,
+        "anchor": [
+          48,
+          80
+        ],
+        "paddingPixels": 3,
+        "resample": "nearest",
+        "maxColors": 64,
+        "lightingDirection": "screen-upper-left",
+        "runtimeDefaultFacing": "se",
+        "roleOverrides": {
+          "infantry": {
+            "size": [
+              64,
+              64
+            ],
+            "anchor": [
+              32,
+              56
+            ]
+          },
+          "cavalry": {
+            "size": [
+              96,
+              96
+            ],
+            "anchor": [
+              48,
+              80
+            ]
+          },
+          "town": {
+            "size": [
+              96,
+              96
+            ],
+            "anchor": [
+              48,
+              80
+            ]
+          },
+          "city": {
+            "size": [
+              128,
+              128
+            ],
+            "anchor": [
+              64,
+              112
+            ]
+          },
+          "improvement": {
+            "size": [
+              64,
+              64
+            ],
+            "anchor": [
+              32,
+              48
+            ]
+          },
+          "badge": {
+            "size": [
+              32,
+              32
+            ],
+            "anchor": [
+              16,
+              16
+            ]
+          }
+        }
+      },
+      "palette": {
+        "mode": "restricted",
+        "file": "palettes/theandril-master.json",
+        "dither": false,
+        "scope": "final-sprite"
+      }
+    },
+    {
+      "path": "/home/telephoneheater/Projects/BlenderArtFactory/profiles/theandril-pixel-3d.json",
+      "sha256": "7af24c4a3c02b372d1aeab1a9eb44933e03805ebe1d0bc206d9692dd447a18e3",
+      "id": "theandril-pixel-3d",
+      "workflow": "pixel_3d",
+      "recipe": "shrine",
+      "render": {
+        "engine": "CYCLES",
+        "samples": 48,
+        "resolution": [
+          512,
+          512
+        ],
+        "previewResolution": [
+          1024,
+          1024
+        ],
+        "transparent": true,
+        "camera": {
+          "projection": "ORTHO",
+          "azimuthDeg": 45,
+          "elevationDeg": 35.2643897,
+          "focalLengthMm": 50,
+          "orthoScale": 4.4
+        },
+        "viewTransform": "Standard",
+        "exposure": 0,
+        "filterSize": 0.01,
+        "motionBlur": false,
+        "depthOfField": false
+      },
+      "textures": {
+        "size": 128,
+        "filter": "nearest",
+        "colorSpace": "sRGB",
+        "dataColorSpace": "Non-Color",
+        "targetTexelsPerMeter": 64,
+        "mipmaps": false,
+        "channels": [
+          "baseColor",
+          "roughness"
+        ],
+        "paddingTexels": 4,
+        "texelAlignedUVs": true,
+        "recommendedProductionSize": 256
+      },
+      "export": {
+        "formats": [
+          "blend",
+          "glb",
+          "png"
+        ],
+        "units": "meters",
+        "forward": "-Z",
+        "up": "+Y",
+        "origin": "ground-center",
+        "selectedOnly": true,
+        "includeCameras": false,
+        "includeLights": false,
+        "embedTextures": true,
+        "normalConvention": "tangent-positive-Y",
+        "preserveNamedParts": true,
+        "samplerMagFilter": 9728,
+        "samplerMinFilter": 9728
+      },
+      "sprites": {
+        "size": [
+          96,
+          96
+        ],
+        "facings": 8,
+        "previewScale": 6,
+        "alphaThreshold": 0.5,
+        "anchor": [
+          48,
+          80
+        ]
+      },
+      "palette": {
+        "mode": "restricted",
+        "file": "palettes/theandril-master.json",
+        "dither": false,
+        "scope": "albedo-textures"
+      }
+    }
+  ],
+  "paletteComparison": {
+    "gamePaletteId": "theandril-master-v1",
+    "gameColors": 64,
+    "blenderColors": 64,
+    "sameOrderedColors": true,
+    "gameSha256": "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce",
+    "blenderSha256": "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  },
+  "capabilities": {
+    "standaloneBlender": {
+      "implemented": [
+        "Custom profile/recipe selection; asset name alone does not change recipe subject",
+        "Profile-driven raw render resolution and native sprite size/facing count",
+        "Nearest center sampling, nearest RGB palette match, binary alpha threshold",
+        "Native PNG, editable .blend, optional reference GLB, hash-bound candidate/review/release boundaries",
+        "Technical native palette/alpha/border checks and GLB structure/budgets"
+      ],
+      "stockPixelStudy": {
+        "rawResolution": [
+          384,
+          384
+        ],
+        "nativeResolution": [
+          96,
+          96
+        ],
+        "staticFacings": 8,
+        "alphaThreshold": 0.5,
+        "source": "profiles/theandril-pixel-2d.json"
+      },
+      "notAutomatic": [
+        "Per-role size/anchor overrides, interior padding amount, fixed screen-space light across rotating-camera facings",
+        "Animation rigs/clips, artistic cluster finishing, actual Pixel Snapper/Aseprite stages, native game bindings",
+        "Desired production texture resolution/channels, sculpt/normal/AO bakes or LOD meshes just because profiles request them"
+      ]
+    },
+    "pixelFactory": {
+      "implemented": [
+        "pixelate: width 8\u20134096, proportional rounded height, optional 2\u2013256 derived colors; 0 keeps RGB",
+        "scale: integer factor 2\u201332",
+        "palette: GPL extraction; recolor: supplied GPL with none/ordered dither",
+        "source: PNG to Aseprite; export: Aseprite to PNG, factor default 1",
+        "Cursor, wallpaper and Omarchy theme packaging are unrelated to native game publication"
+      ],
+      "notImplemented": [
+        "Generative local pixel authorship, reference-conditioned local generation or motion synthesis",
+        "Game palette/alpha/pivot/clip validator, atlas/catalog/import adapter or review hash gate",
+        "Dedicated sprite tag/duration/sheet JSON options in paf source/export wrapper; native Aseprite supports more than wrapper exposes"
+      ],
+      "provider": "Optional PixelLab Pixflux-v2 prompt/size still request. No reference or seed flag. No usable key in doctor. The --size error text advertises 16\u2013400 but code only enforces two/three-digit dimensions; do not rely on it as a robust bound validator."
+    },
+    "nativeGame": {
+      "cliNativeSizes": [
+        [
+          32,
+          32
+        ],
+        [
+          64,
+          64
+        ],
+        [
+          96,
+          96
+        ],
+        [
+          128,
+          128
+        ]
+      ],
+      "additionalLibraryProfile": [
+        384,
+        216
+      ],
+      "cliRejectsNonSquare": true,
+      "asepriteFrameLimit": 256,
+      "asepriteTagLimit": 64,
+      "asepriteMaxSheet": [
+        4096,
+        4096
+      ],
+      "sourceFrameDurationMs": [
+        1,
+        60000
+      ],
+      "existingBlenderSourceImports": 19,
+      "allExistingImportsPassed": true,
+      "processingReceiptAssets": 13,
+      "all545RetainSnapperAndAsepriteEvidence": true,
+      "note": "Exports were not re-run here. Versions were executed by doctors; exact retained approvals and existing source imports were freshly validated."
+    },
+    "optionalGameProviders": [
+      {
+        "id": "pixellab",
+        "maximum": [
+          400,
+          400
+        ],
+        "minimumPerSide": 16,
+        "minimumArea": 1024,
+        "references": "One init image in library adapter; main CLI does not forward references",
+        "seed": "Safe integer in library adapter",
+        "animation": false,
+        "availableInDoctor": false
+      },
+      {
+        "id": "perfectpixel-studio",
+        "maximumRequestBound": [
+          1024,
+          1024
+        ],
+        "references": false,
+        "seed": false,
+        "animation": false,
+        "mode": "Upstream ppvalidate base-only. Requested native canvas/palette not enforced upstream; must normalize and validate.",
+        "availableInDoctor": false
+      },
+      {
+        "id": "comfyui",
+        "maximum": [
+          2048,
+          2048
+        ],
+        "references": false,
+        "seed": true,
+        "animation": false,
+        "mode": "Loopback only, explicit workflow/model/license plus prompt/seed/size bindings; no model install or download",
+        "availableInDoctor": false
+      },
+      {
+        "id": "codex-imagegen",
+        "mode": "518 current assets declare this historical provider. Retained source-file bridge does not make session image generation callable by Node CLI or Hermes.",
+        "testedInAudit": false
+      }
+    ],
+    "audio": "Neither factory implements a game music/Foley asset pipeline or playback subsystem. Audio production needs a separately scoped toolchain, rights and listening QA."
+  },
+  "probeStatus": {
+    "blender-help": {
+      "command": "python3 -B -m factory --help",
+      "cwd": "/home/telephoneheater/Projects/BlenderArtFactory",
+      "exitCode": 0,
+      "evidence": "evidence/blender-help.json"
+    },
+    "blender-doctor": {
+      "command": "python3 -B -m factory doctor",
+      "cwd": "/home/telephoneheater/Projects/BlenderArtFactory",
+      "exitCode": 0,
+      "evidence": "evidence/blender-doctor.json"
+    },
+    "blender-list": {
+      "command": "python3 -B -m factory list",
+      "cwd": "/home/telephoneheater/Projects/BlenderArtFactory",
+      "exitCode": 0,
+      "evidence": "evidence/blender-list.json"
+    },
+    "blender-mcp-status": {
+      "command": "python3 -B tools/blender_mcp.py status",
+      "cwd": "/home/telephoneheater/Projects/BlenderArtFactory",
+      "exitCode": 1,
+      "evidence": "evidence/blender-mcp-status.json"
+    },
+    "pixel-help": {
+      "command": "./paf --help; ./paf pixelate --help; ./paf recolor --help; ./paf provider --help",
+      "cwd": "/home/telephoneheater/Projects/pixel-art-factory",
+      "exitCode": 0,
+      "evidence": "evidence/pixel-help.json"
+    },
+    "pixel-doctor": {
+      "command": "./paf doctor",
+      "cwd": "/home/telephoneheater/Projects/pixel-art-factory",
+      "exitCode": 0,
+      "evidence": "evidence/pixel-doctor.json"
+    },
+    "game-doctor": {
+      "command": "node --import tsx scripts/art.ts doctor",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "exitCode": 0,
+      "evidence": "evidence/game-doctor.json"
+    }
+  },
+  "toolVersions": [
+    {
+      "id": "aseprite",
+      "status": "FOUND",
+      "version": "Aseprite 1.3.18.3-x64",
+      "path": "/home/telephoneheater/.local/share/Steam/steamapps/common/Aseprite/aseprite"
+    },
+    {
+      "id": "pixel-snapper",
+      "status": "FOUND",
+      "path": "/home/telephoneheater/Work/Theandril/tools/art/.local/bin/spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0"
+    },
+    {
+      "id": "node",
+      "status": "FOUND",
+      "path": "/home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node",
+      "version": "v26.7.0"
+    },
+    {
+      "id": "pnpm",
+      "status": "FOUND",
+      "path": "/home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/pnpm",
+      "version": "10.32.1"
+    }
+  ],
+  "credentials": "Only configured/not-configured booleans were inspected; no credential values printed or retained."
+}

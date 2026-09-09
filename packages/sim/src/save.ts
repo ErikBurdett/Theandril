@@ -1,4 +1,5 @@
 import { battleDevelopmentSchema, battleDevelopmentEffects } from './combat/development-snapshot';
+import { selectDefendingArmies } from './battle-frontage';
 import { isHull } from './combat/individual';
 import { createDevelopmentState, developmentStateSchema, validateDevelopment } from './development';
 import { resourceStateSchema, validateResources } from './resources';
@@ -24,7 +25,7 @@ import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 16;
+export const SAVE_VERSION = 17;
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
 export const PRE_SPECIALIST_CONTENT_HASH = 'b6e3bce2';
 export const PRE_BATTLE_CONTENT_HASH = '07a58d4f';
@@ -154,7 +155,8 @@ const stateSchema = stateV15Schema.extend({
   settlements: z.array(settlementSchema.extend({ population: z.number().int().positive().safe(), food: z.number().int().nonnegative().safe() }).strict()).max(350_000),
   factions: z.array(factionSchema.extend({ treasury: z.number().int().nonnegative().safe(), knowledge: z.number().int().nonnegative().safe() }).strict()).min(1).max(48),
 }).strict();
-const saveSchema = z.object({ version: z.literal(16), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(17), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV16Schema = saveSchema.extend({ version: z.literal(16) }).strict();
 const saveV15Schema = saveSchema.extend({ version: z.literal(15), state: stateV15Schema }).strict();
 const saveV14Schema = saveV15Schema.extend({ version: z.literal(14) }).strict();
 const saveV13Schema = saveSchema.extend({ version: z.literal(13), state: stateV13Schema }).strict();
@@ -313,7 +315,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
   const latest = canonicalPayload(state);
-  if (version === 16) return serializeEnvelope(SAVE_VERSION, CONTENT_HASH, latest);
+  if (version >= 16) return serializeEnvelope(version, CONTENT_HASH, latest);
   if (latest.resources.version || Object.keys(latest.resources.deposits).length || Object.values(latest.resources.stockpiles).some(stock => Object.values(stock).some(Boolean)) || Object.values(latest.development).some(records => Object.keys(records).length)) throw new Error('This campaign has resources or development unavailable in historical rules.');
   const { resources: _resources, development: _development, ...historical } = latest;
   const { visibilityVersion: _visibility, ...historicalLand } = historical.land;
@@ -447,7 +449,7 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v15 snapshot checksum does not match its contents');
     assertPreDevelopmentContent(prior.state);
     const state = stateSchema.parse({ ...prior.state, land: { ...prior.state.land, visibilityVersion: 0 }, resources: { version: 0, deposits: {}, stockpiles: Object.fromEntries(prior.state.factions.map(faction => [faction.id, {}])) }, development: createDevelopmentState() });
-    return { ...prior, version: 16, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
+    return { ...prior, version: 17, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
   };
   const migrateV14 = (prior: z.infer<typeof saveV14Schema>): z.infer<typeof saveSchema> => {
     assert(prior.contentHash === PRE_SPECIALIST_CONTENT_HASH, 'v14 content hash is not a recognized compatible pack');
@@ -608,6 +610,8 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   if (version === 13) return migrateV13(saveV13Schema.parse(raw));
   if (version === 14) return migrateV14(saveV14Schema.parse(raw));
   if (version === 15) return migrateV15(saveV15Schema.parse(raw));
+  // Version 17 changes command semantics, not canonical fields or content.
+  if (version === 16) return { ...saveV16Schema.parse(raw), version: 17 };
   if (version !== SAVE_VERSION) throw new Error(`Unsupported save version ${version}.`);
   return saveSchema.parse(raw);
 }
@@ -845,8 +849,9 @@ export function deserializeGame(text: string): GameState {
       assert(battle.aftermath.length === 0 && battle.formationAftermath.length === 0 && battle.characterAftermath.length === 0 && battle.transportAftermath.length === 0, 'pending battle cannot have strategic aftermath');
       const pair = [battle.attackerFactionId, battle.defenderFactionId].sort().join(':');
       assert(warKeys.has(pair), 'pending battle requires a declared war');
-      const stack = data.armies.filter(army => !transported.has(army.id) && army.cell === battle.defenderCell).map(army => army.id).sort();
-      assert(battle.militiaId ? stack.length === 0 : stack.length === defenderIds.length && stack.every((id, i) => id === defenderIds[i]), 'battle omitted a defending army');
+      const stack = data.armies.filter(army => !transported.has(army.id) && army.cell === battle.defenderCell);
+      const expected = (originalVersion >= 17 ? selectDefendingArmies(stack, battle.settlementId ? undefined : battle.defenderId) : stack).map(army => army.id).sort();
+      assert(battle.militiaId ? stack.length === 0 : stack.every(army => army.factionId === battle.defenderFactionId) && expected.length === defenderIds.length && expected.every((id, i) => id === defenderIds[i]), 'battle omitted a defending army');
       assert([...liveFormations.keys()].every(id => formationIds.has(id)), 'battle omitted a participant formation');
     } else {
       const aftermath = new Map(battle.aftermath.map(item => [item.armyId, item]));

@@ -1,0 +1,43 @@
+[
+  {
+    "name": "typecheck",
+    "command": "pnpm typecheck",
+    "output": "> theandril@0.1.0 typecheck /home/telephoneheater/Work/Theandril\n> tsc --noEmit",
+    "exit_code": 0,
+    "error": null,
+    "verification_evidence": {
+      "status": "passed",
+      "kind": "typecheck",
+      "scope": "full",
+      "canonical_command": "pnpm run typecheck"
+    }
+  },
+  {
+    "name": "harness-typecheck",
+    "command": "pnpm exec tsc --noEmit -p docs/development/review-fix-2/persistence-tsconfig.json",
+    "output": "",
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "name": "scoped-lint",
+    "command": "pnpm exec eslint --max-warnings=0 packages/persistence docs/development/review-fix-2/persistence-retained.ts docs/development/review-fix-2/persistence-browser.mjs docs/development/review-fix-2/persistence-vite.mjs docs/development/review-fix-2/persistence-retained-browser.mjs",
+    "output": "",
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "name": "diff",
+    "command": "git diff --check -- packages/persistence docs/development/review-fix-2",
+    "output": "",
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "name": "capture",
+    "command": "sha256sum docs/hermes-analysis/qa/captured-standard-long-748291.json.gz",
+    "output": "56a81b5fbc91c0bea89b8cc5f78ace519d7fa0d6109545f7444af5dcce159780  docs/hermes-analysis/qa/captured-standard-long-748291.json.gz",
+    "exit_code": 0,
+    "error": null
+  }
+]

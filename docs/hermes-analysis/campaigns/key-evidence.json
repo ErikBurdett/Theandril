@@ -1,0 +1,975 @@
+{
+  "summary": {
+    "primaryCampaignCount": 8,
+    "commands": 125150,
+    "rejections": 0,
+    "fullReplays": 8,
+    "completeVictories": 7,
+    "exactFinalLoads": 7,
+    "exactMidpointFinals": 6
+  },
+  "moraleCarryover": [
+    {
+      "sequence": 14863,
+      "turn": 95,
+      "battleId": "battle.1403",
+      "formationId": "formation.543",
+      "morale": 74,
+      "strength": 45,
+      "usedAbilities": [],
+      "result": {
+        "winner": "attacker",
+        "reason": "ordered withdrawal"
+      }
+    },
+    {
+      "sequence": 15075,
+      "turn": 96,
+      "battleId": "battle.1417",
+      "formationId": "formation.543",
+      "morale": 74,
+      "strength": 45,
+      "usedAbilities": [],
+      "result": {
+        "winner": "attacker",
+        "reason": "ordered withdrawal"
+      }
+    },
+    {
+      "sequence": 15151,
+      "turn": 96,
+      "battleId": "battle.1419",
+      "formationId": "formation.543",
+      "morale": 78,
+      "strength": 43,
+      "usedAbilities": [],
+      "result": {
+        "winner": "attacker",
+        "reason": "ordered withdrawal"
+      }
+    },
+    {
+      "sequence": 15328,
+      "turn": 97,
+      "battleId": "battle.1430",
+      "formationId": "formation.543",
+      "morale": 74,
+      "strength": 43,
+      "usedAbilities": [],
+      "result": {
+        "winner": "attacker",
+        "reason": "ordered withdrawal"
+      }
+    },
+    {
+      "sequence": 15422,
+      "turn": 97,
+      "battleId": "battle.1433",
+      "formationId": "formation.543",
+      "morale": 78,
+      "strength": 42,
+      "usedAbilities": [],
+      "result": {
+        "winner": "attacker",
+        "reason": "ordered withdrawal"
+      }
+    }
+  ],
+  "magicBattle": [
+    {
+      "sequence": 506,
+      "id": "battle.80",
+      "turn": 37,
+      "attackerId": "army.21",
+      "defenderId": "army.6",
+      "defenderIds": [
+        "army.6"
+      ],
+      "attackerFactionId": "faction.ashen_compact",
+      "defenderFactionId": "faction.cinder_march",
+      "attackerCell": 297,
+      "defenderCell": 345,
+      "settlementId": null,
+      "militiaId": null,
+      "fortification": 0,
+      "attackerDoctrineId": null,
+      "defenderDoctrineId": null,
+      "initialStrengths": [
+        {
+          "armyId": "army.21",
+          "strength": 60
+        },
+        {
+          "armyId": "army.6",
+          "strength": 20
+        }
+      ],
+      "aftermath": [
+        {
+          "armyId": "army.21",
+          "strength": 60,
+          "cell": 345,
+          "outcome": "advanced"
+        },
+        {
+          "armyId": "army.6",
+          "strength": 10,
+          "cell": 346,
+          "outcome": "retreated"
+        }
+      ],
+      "combat": {
+        "seed": 863632196,
+        "terrain": 1,
+        "attacker": [
+          {
+            "id": "formation.21",
+            "unitId": "unit.guard",
+            "strength": 60,
+            "maxStrength": 60,
+            "morale": 75,
+            "fatigue": 0,
+            "row": 0,
+            "column": 2,
+            "attack": 14,
+            "armor": 5,
+            "initiative": 6,
+            "range": 0,
+            "ward": 8,
+            "members": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59
+            ],
+            "cohesion": 96,
+            "position": {
+              "forward": 2,
+              "lateral": 0
+            }
+          }
+        ],
+        "defender": [
+          {
+            "id": "formation.6",
+            "unitId": "unit.scout",
+            "strength": 10,
+            "maxStrength": 20,
+            "morale": 16,
+            "fatigue": 16,
+            "row": 0,
+            "column": 2,
+            "attack": 7,
+            "armor": 2,
+            "initiative": 10,
+            "range": 2,
+            "ward": 0,
+            "members": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "cohesion": 100,
+            "position": {
+              "forward": 0,
+              "lateral": 0
+            }
+          }
+        ],
+        "rngState": 3870424153,
+        "round": 3,
+        "log": [
+          "Round 1: attacker advance, defender brace.",
+          "formation.6 struck formation.21 for 0 strength.",
+          "Round 2: attacker advance, defender brace.",
+          "formation.6 struck formation.21 for 0 strength.",
+          "Round 3: attacker advance, defender withdraw.",
+          "formation.6 lost 0 strength during pursuit.",
+          "attacker: ordered withdrawal."
+        ],
+        "result": {
+          "winner": "attacker",
+          "reason": "ordered withdrawal"
+        }
+      },
+      "rulesVersion": 10,
+      "formationBindings": [
+        {
+          "battleFormationId": "formation.21",
+          "formationId": "formation.21",
+          "armyId": "army.21"
+        },
+        {
+          "battleFormationId": "formation.6",
+          "formationId": "formation.6",
+          "armyId": "army.6"
+        }
+      ],
+      "domain": "land",
+      "transportAftermath": [],
+      "transportSnapshots": [],
+      "characterSnapshots": [
+        {
+          "characterId": "character.13",
+          "armyId": "army.21",
+          "factionId": "faction.ashen_compact",
+          "name": "Edrin Ashwell",
+          "definitionId": "character.waykeeper",
+          "skillId": null,
+          "learnedSkillIds": [],
+          "experience": 0,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 0,
+            "armor": 0
+          },
+          "rallyRestore": 0,
+          "aptitudes": {
+            "path.flame": 1,
+            "path.rune": 1
+          },
+          "spellIds": [
+            "spell.bound_ward",
+            "spell.cinder_thread"
+          ]
+        },
+        {
+          "characterId": "character.27",
+          "armyId": "army.21",
+          "factionId": "faction.ashen_compact",
+          "name": "Ressa Oathweft",
+          "definitionId": "character.surveyor",
+          "skillId": "skill.fieldcraft",
+          "learnedSkillIds": [],
+          "experience": 4,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 0,
+            "armor": 0
+          },
+          "rallyRestore": 0
+        }
+      ],
+      "characterAftermath": [
+        {
+          "characterId": "character.13",
+          "name": "Edrin Ashwell",
+          "outcome": "survived",
+          "experience": 3,
+          "woundedTurns": 0
+        },
+        {
+          "characterId": "character.27",
+          "name": "Ressa Oathweft",
+          "outcome": "survived",
+          "experience": 7,
+          "woundedTurns": 0
+        }
+      ],
+      "usedAbilities": [],
+      "formationStrengths": [
+        {
+          "formationId": "formation.21",
+          "strength": 60
+        },
+        {
+          "formationId": "formation.6",
+          "strength": 20
+        }
+      ],
+      "formationAftermath": [
+        {
+          "formationId": "formation.21",
+          "strength": 60
+        },
+        {
+          "formationId": "formation.6",
+          "strength": 10
+        }
+      ],
+      "abilityState": {
+        "sources": [
+          {
+            "sourceId": "character.13",
+            "sourceKind": "character",
+            "armyId": "army.21",
+            "abilityId": "spell.bound_ward",
+            "automatic": true,
+            "usesRemaining": 0
+          },
+          {
+            "sourceId": "character.13",
+            "sourceKind": "character",
+            "armyId": "army.21",
+            "abilityId": "spell.cinder_thread",
+            "automatic": true,
+            "usesRemaining": 1
+          },
+          {
+            "sourceId": "formation.21",
+            "sourceKind": "formation",
+            "armyId": "army.21",
+            "abilityId": "ability.set_shields",
+            "automatic": true,
+            "usesRemaining": 1
+          }
+        ],
+        "casters": [
+          {
+            "characterId": "character.13",
+            "strain": 10,
+            "lastActedRound": 3
+          }
+        ],
+        "identities": [
+          {
+            "armyId": "army.21",
+            "name": "Oath guard",
+            "factionId": "faction.ashen_compact",
+            "factionDefinitionId": "faction.ashen_compact"
+          },
+          {
+            "armyId": "army.6",
+            "name": "Wayfinder",
+            "factionId": "faction.cinder_march",
+            "factionDefinitionId": "faction.cinder_march"
+          }
+        ]
+      },
+      "developmentSnapshots": [
+        {
+          "formationId": "formation.21",
+          "trainingIds": [],
+          "traditionIds": []
+        },
+        {
+          "formationId": "formation.6",
+          "trainingIds": [],
+          "traditionIds": []
+        }
+      ]
+    }
+  ],
+  "magicCommands": [
+    {
+      "sequence": 72,
+      "turn": 9,
+      "command": {
+        "type": "recruitCharacter",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.9",
+        "definitionId": "character.waykeeper"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 9,
+            "factionId": "faction.ashen_compact",
+            "type": "character_recruited",
+            "message": "Edrin Ashwell was appointed Waykeeper for 40 coin.",
+            "cell": 298
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 82,
+      "turn": 10,
+      "command": {
+        "type": "researchArcane",
+        "factionId": "faction.ashen_compact",
+        "discoveryId": "arcane.ember_projection"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 10,
+            "factionId": "faction.ashen_compact",
+            "type": "arcane_researched",
+            "message": "Contained ember projection was researched for 36 knowledge. A personally qualified caster is still required."
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 177,
+      "turn": 19,
+      "command": {
+        "type": "assignCharacter",
+        "factionId": "faction.ashen_compact",
+        "characterId": "character.13",
+        "armyId": "army.21"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 19,
+            "factionId": "faction.ashen_compact",
+            "type": "character_assigned",
+            "message": "Edrin Ashwell joined Oath guard.",
+            "cell": 298
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 192,
+      "turn": 20,
+      "command": {
+        "type": "recruitCharacter",
+        "factionId": "faction.ashen_compact",
+        "settlementId": "settlement.9",
+        "definitionId": "character.surveyor"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 20,
+            "factionId": "faction.ashen_compact",
+            "type": "character_recruited",
+            "message": "Ressa Oathweft was appointed Road witness for 20 coin.",
+            "cell": 298
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 210,
+      "turn": 21,
+      "command": {
+        "type": "assignCharacter",
+        "factionId": "faction.ashen_compact",
+        "characterId": "character.27",
+        "armyId": "army.21"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 21,
+            "factionId": "faction.ashen_compact",
+            "type": "character_assigned",
+            "message": "Ressa Oathweft joined Oath guard.",
+            "cell": 298
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 353,
+      "turn": 30,
+      "command": {
+        "type": "researchArcane",
+        "factionId": "faction.ashen_compact",
+        "discoveryId": "arcane.rune_binding"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 30,
+            "factionId": "faction.ashen_compact",
+            "type": "arcane_researched",
+            "message": "Measured rune binding was researched for 48 knowledge. A personally qualified caster is still required."
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 506,
+      "turn": 37,
+      "command": {
+        "type": "autoResolveBattle",
+        "factionId": "faction.ashen_compact"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 37,
+            "factionId": "faction.ashen_compact",
+            "type": "battle_ability_used",
+            "cell": 345,
+            "message": "Edrin Ashwell used Bound ward on formation.21."
+          },
+          {
+            "turn": 37,
+            "factionId": "faction.ashen_compact",
+            "type": "battle_ability_used",
+            "cell": 345,
+            "message": "Edrin Ashwell used Cinder thread on formation.6."
+          },
+          {
+            "turn": 37,
+            "factionId": "faction.ashen_compact",
+            "type": "battle_ability_used",
+            "cell": 345,
+            "message": "Edrin Ashwell used Bound ward on formation.21."
+          },
+          {
+            "turn": 37,
+            "type": "army_retreated",
+            "factionId": "faction.cinder_march",
+            "cell": 346,
+            "message": "Wayfinder retreated to hex 346 with 10 strength."
+          },
+          {
+            "turn": 37,
+            "factionId": "faction.ashen_compact",
+            "type": "character_battle_experience",
+            "message": "Edrin Ashwell earned 3 battle experience.",
+            "cell": 345
+          },
+          {
+            "turn": 37,
+            "factionId": "faction.ashen_compact",
+            "type": "character_battle_experience",
+            "message": "Ressa Oathweft earned 3 battle experience.",
+            "cell": 345
+          },
+          {
+            "turn": 37,
+            "factionId": "faction.ashen_compact",
+            "type": "formation_experience",
+            "cell": 345,
+            "message": "Oath guard earned 3 battle experience across its surviving fighting formations."
+          },
+          {
+            "turn": 37,
+            "factionId": "faction.cinder_march",
+            "type": "formation_experience",
+            "cell": 346,
+            "message": "Wayfinder earned 1 battle experience across its surviving fighting formations."
+          },
+          {
+            "turn": 37,
+            "type": "battle_finished",
+            "factionId": "faction.ashen_compact",
+            "cell": 345,
+            "message": "Ashen Compact prevailed at hex 345: ordered withdrawal."
+          },
+          {
+            "turn": 37,
+            "type": "battle_finished",
+            "factionId": "faction.cinder_march",
+            "cell": 345,
+            "message": "Ashen Compact prevailed at hex 345: ordered withdrawal."
+          }
+        ]
+      }
+    }
+  ],
+  "resources": {
+    "B-tiny4-seed74-v2": {
+      "positiveStocks": {
+        "faction.ashen_compact": [
+          {
+            "resourceId": "resource.copper",
+            "name": "Red copper",
+            "amount": 0,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.copper_mine"
+          }
+        ],
+        "faction.reedbound_council": [],
+        "faction.cinder_march": [
+          {
+            "resourceId": "resource.copper",
+            "name": "Red copper",
+            "amount": 4,
+            "perTurn": 0,
+            "salePrice": 3,
+            "improvementId": "improvement.copper_mine"
+          },
+          {
+            "resourceId": "resource.timber",
+            "name": "Heartwood",
+            "amount": 10,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.timber_yard"
+          }
+        ],
+        "faction.glass_tide": []
+      },
+      "producingFactions": 2
+    },
+    "B-tiny4-seed99-v2": {
+      "positiveStocks": {
+        "faction.ashen_compact": [],
+        "faction.reedbound_council": [],
+        "faction.cinder_march": [
+          {
+            "resourceId": "resource.copper",
+            "name": "Red copper",
+            "amount": 8,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.copper_mine"
+          }
+        ],
+        "faction.glass_tide": [
+          {
+            "resourceId": "resource.iron",
+            "name": "Ironstone",
+            "amount": 7,
+            "perTurn": 2,
+            "salePrice": 4,
+            "improvementId": "improvement.iron_mine"
+          },
+          {
+            "resourceId": "resource.copper",
+            "name": "Red copper",
+            "amount": 8,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.copper_mine"
+          },
+          {
+            "resourceId": "resource.salt",
+            "name": "White salt",
+            "amount": 6,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.salt_house"
+          },
+          {
+            "resourceId": "resource.timber",
+            "name": "Heartwood",
+            "amount": 18,
+            "perTurn": 4,
+            "salePrice": 3,
+            "improvementId": "improvement.timber_yard"
+          }
+        ]
+      },
+      "producingFactions": 2
+    },
+    "C-tiny4-seed74": {
+      "positiveStocks": {
+        "faction.ashen_compact": [
+          {
+            "resourceId": "resource.grain",
+            "name": "Hearthgrain",
+            "amount": 9,
+            "perTurn": 3,
+            "salePrice": 2,
+            "improvementId": "improvement.grange"
+          },
+          {
+            "resourceId": "resource.salt",
+            "name": "White salt",
+            "amount": 2,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.salt_house"
+          }
+        ],
+        "faction.reedbound_council": [],
+        "faction.cinder_march": [
+          {
+            "resourceId": "resource.copper",
+            "name": "Red copper",
+            "amount": 16,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.copper_mine"
+          },
+          {
+            "resourceId": "resource.salt",
+            "name": "White salt",
+            "amount": 8,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.salt_house"
+          },
+          {
+            "resourceId": "resource.timber",
+            "name": "Heartwood",
+            "amount": 10,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.timber_yard"
+          }
+        ],
+        "faction.glass_tide": [
+          {
+            "resourceId": "resource.salt",
+            "name": "White salt",
+            "amount": 8,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.salt_house"
+          }
+        ]
+      },
+      "producingFactions": 3
+    },
+    "C-tiny4-seed99": {
+      "positiveStocks": {
+        "faction.ashen_compact": [],
+        "faction.reedbound_council": [
+          {
+            "resourceId": "resource.copper",
+            "name": "Red copper",
+            "amount": 0,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.copper_mine"
+          },
+          {
+            "resourceId": "resource.salt",
+            "name": "White salt",
+            "amount": 8,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.salt_house"
+          }
+        ],
+        "faction.cinder_march": [],
+        "faction.glass_tide": [
+          {
+            "resourceId": "resource.iron",
+            "name": "Ironstone",
+            "amount": 11,
+            "perTurn": 4,
+            "salePrice": 4,
+            "improvementId": "improvement.iron_mine"
+          },
+          {
+            "resourceId": "resource.copper",
+            "name": "Red copper",
+            "amount": 20,
+            "perTurn": 4,
+            "salePrice": 3,
+            "improvementId": "improvement.copper_mine"
+          },
+          {
+            "resourceId": "resource.salt",
+            "name": "White salt",
+            "amount": 12,
+            "perTurn": 0,
+            "salePrice": 3,
+            "improvementId": "improvement.salt_house"
+          },
+          {
+            "resourceId": "resource.horses",
+            "name": "Steppe horses",
+            "amount": 11,
+            "perTurn": 1,
+            "salePrice": 5,
+            "improvementId": "improvement.remount_yard"
+          }
+        ]
+      },
+      "producingFactions": 2
+    },
+    "D-tiny4-seed74-standard": {
+      "positiveStocks": {
+        "faction.ashen_compact": [
+          {
+            "resourceId": "resource.grain",
+            "name": "Hearthgrain",
+            "amount": 21,
+            "perTurn": 3,
+            "salePrice": 2,
+            "improvementId": "improvement.grange"
+          },
+          {
+            "resourceId": "resource.copper",
+            "name": "Red copper",
+            "amount": 0,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.copper_mine"
+          },
+          {
+            "resourceId": "resource.salt",
+            "name": "White salt",
+            "amount": 12,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.salt_house"
+          }
+        ],
+        "faction.reedbound_council": [],
+        "faction.cinder_march": [],
+        "faction.glass_tide": []
+      },
+      "producingFactions": 1
+    },
+    "D-tiny4-seed99-epic": {
+      "positiveStocks": {
+        "faction.ashen_compact": [],
+        "faction.reedbound_council": [],
+        "faction.cinder_march": [],
+        "faction.glass_tide": [
+          {
+            "resourceId": "resource.iron",
+            "name": "Ironstone",
+            "amount": 14,
+            "perTurn": 4,
+            "salePrice": 4,
+            "improvementId": "improvement.iron_mine"
+          },
+          {
+            "resourceId": "resource.copper",
+            "name": "Red copper",
+            "amount": 10,
+            "perTurn": 4,
+            "salePrice": 3,
+            "improvementId": "improvement.copper_mine"
+          },
+          {
+            "resourceId": "resource.salt",
+            "name": "White salt",
+            "amount": 22,
+            "perTurn": 4,
+            "salePrice": 3,
+            "improvementId": "improvement.salt_house"
+          },
+          {
+            "resourceId": "resource.timber",
+            "name": "Heartwood",
+            "amount": 12,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.timber_yard"
+          }
+        ]
+      },
+      "producingFactions": 1
+    },
+    "D-sparse4-seed748291": {
+      "positiveStocks": {
+        "faction.ashen_compact": [],
+        "faction.reedbound_council": [],
+        "faction.cinder_march": [],
+        "faction.glass_tide": []
+      },
+      "producingFactions": 0
+    },
+    "D-standard24-seed74-300": {
+      "positiveStocks": {
+        "faction.ashen_compact": [],
+        "faction.reedbound_council": [],
+        "faction.cinder_march": [],
+        "faction.glass_tide": [],
+        "faction.iron_covenant": [],
+        "faction.sepulchral_synod": [],
+        "faction.mire_courts": [
+          {
+            "resourceId": "resource.grain",
+            "name": "Hearthgrain",
+            "amount": 24,
+            "perTurn": 6,
+            "salePrice": 2,
+            "improvementId": "improvement.grange"
+          },
+          {
+            "resourceId": "resource.copper",
+            "name": "Red copper",
+            "amount": 2,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.copper_mine"
+          },
+          {
+            "resourceId": "resource.salt",
+            "name": "White salt",
+            "amount": 10,
+            "perTurn": 2,
+            "salePrice": 3,
+            "improvementId": "improvement.salt_house"
+          }
+        ],
+        "faction.saltwind_remnant": [],
+        "faction.wardhall_remnant": [],
+        "faction.rimehorn_clans": [],
+        "faction.sable_steppe": [],
+        "faction.morrow_spore": [],
+        "faction.cistern_assembly": [],
+        "faction.unsealed_companies": [],
+        "faction.lantern_hospices": [],
+        "faction.cairnwing_concord": [],
+        "faction.red_sluice": [],
+        "faction.velvet_meridian": [],
+        "faction.brine_choir": [],
+        "faction.emberwake_convocation": [],
+        "faction.underhush_exchange": [],
+        "faction.vesper_court": [],
+        "faction.manytrack_moot": [],
+        "faction.margin_observance": []
+      },
+      "producingFactions": 1
+    }
+  }
+}

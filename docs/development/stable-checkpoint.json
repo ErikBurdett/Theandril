@@ -1,0 +1,147 @@
+{
+  "scope": "Parent-verified stable backend/campaign checkpoint, not UI or release acceptance. Process exit statuses were read using process_manage. Timings were concurrent/instrumented, not isolated performance certification.",
+  "backend": {
+    "passed": true,
+    "tests": 1008,
+    "passedTests": 1008,
+    "failedTests": 0,
+    "pendingTests": 0,
+    "files": 94
+  },
+  "campaigns": [
+    {
+      "name": "R17-stable-C-tiny4-seed99",
+      "finalTurn": 217,
+      "victory": {
+        "path": "prosperity",
+        "factionId": "faction.glass_tide",
+        "projectId": "project.517",
+        "settlementId": "settlement.268",
+        "turn": 217
+      },
+      "commandCount": 6804,
+      "uniqueBattleCount": 120,
+      "captureDecisionCount": 33,
+      "refusalCount": 0,
+      "finalHash": "a55dd386",
+      "sourceChangesDuringRun": [],
+      "verification": {
+        "initialSaveExact": true,
+        "midpoint": {
+          "turn": 101,
+          "completedRounds": 100,
+          "commandSequence": 2465,
+          "hash": "e1a0735b",
+          "saveSha256": "dd28b254eaaa45e93b21644236ac86994523abe72363f830870777e84f65e48d",
+          "bytes": 305338
+        },
+        "mirroredCommands": 4339,
+        "errors": [],
+        "finalSaveExact": true,
+        "midpointFinalExact": true,
+        "replayedCommands": 6804,
+        "replayExact": true,
+        "replayHash": "a55dd386",
+        "immutableRefusals": 0,
+        "replayMs": 635.1255639999999
+      },
+      "process": "proc_1abec0ef14d9",
+      "exitCode": 0,
+      "sourceFilesVerified": 56,
+      "currentSourceChanges": [],
+      "retainedSourceChanges": [],
+      "acceptedCommandsCounted": 6804,
+      "compressedTraceSha256Verified": true,
+      "savedByteHashesVerified": true,
+      "latestObservedFirstContact": 9,
+      "observedContactFactions": 4,
+      "initialCheckpointDifferenceFields": [
+        "wars",
+        "factions"
+      ]
+    },
+    {
+      "name": "R17-stable-D-standard24-seed74",
+      "finalTurn": 225,
+      "victory": {
+        "path": "prosperity",
+        "factionId": "faction.mire_courts",
+        "projectId": "project.2782",
+        "settlementId": "settlement.136",
+        "turn": 225
+      },
+      "commandCount": 49998,
+      "uniqueBattleCount": 581,
+      "captureDecisionCount": 74,
+      "refusalCount": 0,
+      "finalHash": "a3fb84b6",
+      "sourceChangesDuringRun": [],
+      "verification": {
+        "initialSaveExact": true,
+        "midpoint": {
+          "turn": 101,
+          "completedRounds": 100,
+          "commandSequence": 16296,
+          "hash": "dfeda2fe",
+          "saveSha256": "4ca80b11f9f7557965999dbc6b0f7b2d96990460777b8fe620e634563fc52906",
+          "bytes": 2610376
+        },
+        "mirroredCommands": 33702,
+        "errors": [],
+        "finalSaveExact": true,
+        "midpointFinalExact": true,
+        "replayedCommands": 49998,
+        "replayExact": true,
+        "replayHash": "a3fb84b6",
+        "immutableRefusals": 0,
+        "replayMs": 5841.002278
+      },
+      "process": "proc_f360bd096bf9",
+      "exitCode": 0,
+      "sourceFilesVerified": 56,
+      "currentSourceChanges": [],
+      "retainedSourceChanges": [],
+      "acceptedCommandsCounted": 49998,
+      "compressedTraceSha256Verified": true,
+      "savedByteHashesVerified": true,
+      "latestObservedFirstContact": 72,
+      "observedContactFactions": 24,
+      "initialCheckpointDifferenceFields": [
+        "wars",
+        "factions"
+      ]
+    }
+  ],
+  "campaignTotals": {
+    "runs": 2,
+    "acceptedCommands": 56802,
+    "battles": 701,
+    "captures": 107
+  },
+  "legacy": {
+    "campaigns": 8,
+    "exactReplays": 8,
+    "commands": 125150,
+    "accepted": 125150,
+    "historicalFinalLoadFailures": 1,
+    "scope": "Explicit rule-16 recorded commands against the modified engine; no new AI invoked and no audit artifact overwritten. Does not certify current-rule campaign trajectories."
+  },
+  "currentReviewPostimages": [
+    {
+      "scope": "backend",
+      "files": 20,
+      "changedFiles": []
+    },
+    {
+      "scope": "ai",
+      "files": 4,
+      "changedFiles": []
+    },
+    {
+      "scope": "persistence",
+      "files": 6,
+      "changedFiles": []
+    }
+  ],
+  "evidenceCaveat": "The retained summary.checkpoints entries alias nested live state: first checkpoint differs from the contemporaneously written metrics.jsonl in the fields recorded per run. Use metrics.jsonl, not retrospective summary checkpoint arrays, for historical per-turn progression. Final outcome, save-byte hashes and full-command replay checks are unaffected. Dense contact test gates are seed/scenario-specific: this Standard24 seed74 run has last entity-observed first contact on turn72, not all by60."
+}

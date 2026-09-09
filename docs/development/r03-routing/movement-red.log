@@ -1,0 +1,46 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ × packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > quotes a reachable 21-company attack and executes the quoted moveTo with exact replay 51ms
+   → expected { target: 537, path: [], …(7) } to match object { action: 'attack', …(4) }
+(4 matching properties omitted from actual)
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > quotes a reachable 21-company attack and executes the quoted moveTo with exact replay
+AssertionError: expected { target: 537, path: [], …(7) } to match object { action: 'attack', …(4) }
+(4 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "action": "attack",
+-   "blocker": null,
+-   "canMoveNow": true,
++   "action": "blocked",
++   "blocker": "This field battle supports at most twenty defending formations.",
++   "canMoveNow": false,
+    "canQueue": false,
+-   "path": [
+-     537,
+-   ],
++   "path": [],
+  }
+
+ ❯ packages/sim/src/movement-frontage.test.ts:30:27
+     28|     expect(view.armies.find(army => army.id === 'army.4')?.battleDefen…
+     29|     const query = getMovementQuery(view, 'army.2', target);
+     30|     expect(query.preview).toMatchObject({ action: 'attack', canMoveNow…
+       |                           ^
+     31|     expect(query.reachable).toContainEqual({ cell: target, cost: query…
+     32|     expect(stateHash(state)).toBe(before);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  02:46:32
+   Duration  534ms (transform 314ms, setup 0ms, import 414ms, tests 52ms, environment 0ms)
+

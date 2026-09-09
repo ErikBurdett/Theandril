@@ -1,0 +1,740 @@
+{
+  "verifiedAt": "2026-09-09T06:27:52.782406+00:00",
+  "auditIntegrityPassed": true,
+  "releaseReady": false,
+  "scope": "This verifies the audit and preserves known game failures; it does not certify remediation or release.",
+  "checksPassed": 108,
+  "checksTotal": 108,
+  "errors": [],
+  "score": 37.1,
+  "roundedScore": 37,
+  "issueCounts": {
+    "P0": 3,
+    "P1": 20,
+    "P2": 2
+  },
+  "artRows": 27,
+  "primaryCampaigns": [
+    {
+      "name": "B-tiny4-seed74-v2",
+      "commands": 5960,
+      "rejections": 0,
+      "finalTurn": 252,
+      "winner": "faction.cinder_march",
+      "hash": "41f6fe76"
+    },
+    {
+      "name": "B-tiny4-seed99-v2",
+      "commands": 4823,
+      "rejections": 0,
+      "finalTurn": 222,
+      "winner": "faction.glass_tide",
+      "hash": "d15627df"
+    },
+    {
+      "name": "C-tiny4-seed74",
+      "commands": 7704,
+      "rejections": 0,
+      "finalTurn": 257,
+      "winner": "faction.cinder_march",
+      "hash": "cef149e6"
+    },
+    {
+      "name": "C-tiny4-seed99",
+      "commands": 6724,
+      "rejections": 0,
+      "finalTurn": 215,
+      "winner": "faction.glass_tide",
+      "hash": "495733ff"
+    },
+    {
+      "name": "D-tiny4-seed74-standard",
+      "commands": 7677,
+      "rejections": 0,
+      "finalTurn": 244,
+      "winner": "faction.ashen_compact",
+      "hash": "1c5b5201"
+    },
+    {
+      "name": "D-tiny4-seed99-epic",
+      "commands": 28685,
+      "rejections": 0,
+      "finalTurn": 808,
+      "winner": "faction.glass_tide",
+      "hash": "cb09f975"
+    },
+    {
+      "name": "D-sparse4-seed748291",
+      "commands": 11051,
+      "rejections": 0,
+      "finalTurn": 301,
+      "winner": "",
+      "hash": "3c565118"
+    },
+    {
+      "name": "D-standard24-seed74-300",
+      "commands": 52526,
+      "rejections": 0,
+      "finalTurn": 227,
+      "winner": "faction.mire_courts",
+      "hash": "1ea09c56"
+    }
+  ],
+  "commandCount": 125150,
+  "qaCommandExits": {
+    "0": 31,
+    "1": 12
+  },
+  "relativeLinksChecked": 298,
+  "codeRangesChecked": 179,
+  "gitStatus": [
+    "?? docs/hermes-analysis/",
+    "?? hermes-analysis"
+  ],
+  "artifacts": [
+    {
+      "path": "/home/telephoneheater/Work/Theandril/hermes-analysis",
+      "bytes": 177943,
+      "sha256": "9643f75f321c084522301bd26d0f746be5eb5baeff3b36981a3ca0f79265a526"
+    },
+    {
+      "path": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/README.md",
+      "bytes": 62273,
+      "sha256": "3d3f9b8be30208411d97d86702a14a3a41577b85d5eec76fe0ef85183b42f05b"
+    }
+  ],
+  "checks": [
+    {
+      "check": "exactly 25 ranked issues",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "unique issue IDs",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "priority and effort vocabulary",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "issue evidence and execution fields",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "valid issue dependency references",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "acyclic implementation dependencies",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "19-area scorecard",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "16 systems with eight dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "eight dependency roadmap phases",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "27 matching JSON/CSV art-backlog rows",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "same art JSON/CSV IDs",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "command trace B-tiny4-seed74-v2",
+      "passed": true,
+      "details": {
+        "rows": 5960,
+        "first": 1,
+        "last": 5960
+      }
+    },
+    {
+      "check": "retained command hash B-tiny4-seed74-v2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "zero rejected ordinary commands B-tiny4-seed74-v2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "command trace B-tiny4-seed99-v2",
+      "passed": true,
+      "details": {
+        "rows": 4823,
+        "first": 1,
+        "last": 4823
+      }
+    },
+    {
+      "check": "retained command hash B-tiny4-seed99-v2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "zero rejected ordinary commands B-tiny4-seed99-v2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "command trace C-tiny4-seed74",
+      "passed": true,
+      "details": {
+        "rows": 7704,
+        "first": 1,
+        "last": 7704
+      }
+    },
+    {
+      "check": "retained command hash C-tiny4-seed74",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "zero rejected ordinary commands C-tiny4-seed74",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "command trace C-tiny4-seed99",
+      "passed": true,
+      "details": {
+        "rows": 6724,
+        "first": 1,
+        "last": 6724
+      }
+    },
+    {
+      "check": "retained command hash C-tiny4-seed99",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "zero rejected ordinary commands C-tiny4-seed99",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "command trace D-tiny4-seed74-standard",
+      "passed": true,
+      "details": {
+        "rows": 7677,
+        "first": 1,
+        "last": 7677
+      }
+    },
+    {
+      "check": "retained command hash D-tiny4-seed74-standard",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "zero rejected ordinary commands D-tiny4-seed74-standard",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "command trace D-tiny4-seed99-epic",
+      "passed": true,
+      "details": {
+        "rows": 28685,
+        "first": 1,
+        "last": 28685
+      }
+    },
+    {
+      "check": "retained command hash D-tiny4-seed99-epic",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "zero rejected ordinary commands D-tiny4-seed99-epic",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "command trace D-sparse4-seed748291",
+      "passed": true,
+      "details": {
+        "rows": 11051,
+        "first": 1,
+        "last": 11051
+      }
+    },
+    {
+      "check": "retained command hash D-sparse4-seed748291",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "zero rejected ordinary commands D-sparse4-seed748291",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "command trace D-standard24-seed74-300",
+      "passed": true,
+      "details": {
+        "rows": 52526,
+        "first": 1,
+        "last": 52526
+      }
+    },
+    {
+      "check": "retained command hash D-standard24-seed74-300",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "zero rejected ordinary commands D-standard24-seed74-300",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "eight primary campaigns /125150 commands",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "eight independently retained exact full replays",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "seven successful midpoint continuations",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "seven loadable final saves, not eight",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "43 QA command records",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA per-command exits preserved",
+      "passed": true,
+      "details": {
+        "0": 31,
+        "1": 12
+      }
+    },
+    {
+      "check": "QA retained result/log art-validate",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log battle-perf-final",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log bench-art",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log benchmark-chronicles",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log benchmark-composed",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log benchmark-scale",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log benchmark-storage",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log build",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log capture-minimal-save-v2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log capture-minimal-save",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log capture-standard-long",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log capture-tiny-standard",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log chronicles-huge-short",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log chronicles-legendary-short",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log chronicles-tiny-epic",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log chronicles-tiny-short",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log chronicles-tiny-standard",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log clean-release",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log cleanup-verification",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log contact-diagnostic",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log contact-repro",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log content",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log environment",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log final-git-read",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log gameplay-collect",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log gameplay-full",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log inspect-save",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log large-archive-metadata",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log lifecycle-production",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log lifecycle-v2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log lifecycle",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log lint",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log map-probe",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log minimal-save-repro",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log modern-battle-v2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log modern-battle",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log perf-host-before",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log production-smoke-v2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log production-smoke",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log save-failure-recovery",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log standard-long-archive",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log typecheck",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "QA retained result/log unit-full",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "full unit test counts from raw JSON",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "184 unit test files from raw JSON",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "qa/gameplay-results.json raw gate counts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "qa/production-results.json raw gate counts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "sealed delegated artifact art-report.md",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "sealed delegated artifact inventory.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "sealed delegated artifact art-backlog.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "sealed delegated artifact art-backlog.csv",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "sealed delegated artifact factory-audit.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "sealed delegated artifact visual-observations.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "exact over-limit captured campaign",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "valid-snapshot / oversized-archive distinction retained",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "actual executable content counts",
+      "passed": true,
+      "details": {
+        "factions": 24,
+        "units": 13,
+        "buildings": 5,
+        "improvements": 18,
+        "resources": 8,
+        "technologies": 10,
+        "development": 25,
+        "battleSpells": 2,
+        "characterRoles": 4,
+        "characterSkills": 17
+      }
+    },
+    {
+      "check": "545 actual inventoried approvals",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "hermes-analysis includes all20 requested sections",
+      "passed": true,
+      "details": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "check": "hermes-analysis finalized with no placeholders",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "hermes-analysis same score and single next task",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "README.md includes all20 requested sections",
+      "passed": true,
+      "details": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "check": "README.md finalized with no placeholders",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "README.md same score and single next task",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "relative evidence files resolve",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "cited repository line ranges exist",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "all25 detailed issue anchors",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "unchanged tracked production/index/baseline",
+      "passed": true,
+      "details": {
+        "tracked": [],
+        "staged": [],
+        "head": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd"
+      }
+    }
+  ]
+}

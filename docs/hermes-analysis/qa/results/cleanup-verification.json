@@ -1,0 +1,12 @@
+{
+  "name": "cleanup-verification",
+  "command": "date -Is; ss -ltnp; git diff --exit-code; git status --short; git rev-parse HEAD; curl --fail --silent --output /dev/null --write-out \"parent5191 HTTP%{http_code}\\n\" http://127.0.0.1:5191/; curl --fail --silent --output /dev/null --write-out \"user5173 HTTP%{http_code}\\n\" http://127.0.0.1:5173/",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:44:22.121640+00:00",
+  "durationSeconds": 0.07619714736938477,
+  "exitCode": 0,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/cleanup-verification.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 17744,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

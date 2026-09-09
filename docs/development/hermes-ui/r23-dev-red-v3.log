@@ -1,0 +1,337 @@
+
+Running 1 test using 1 worker
+
+(node:315443) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"stage":"generated-small12","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✘  1 tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas (7.0s)
+
+
+  1) tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Timeout: 5000ms
+    - Expected substring  -   1
+    + Received string     + 142
+
+    - Campaign saved
+    + ![
+    +   {
+    +     "code": "invalid_union",
+    +     "errors": [
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             4
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 4"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             5
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 5"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             6
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 6"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             7
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 7"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             8
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 8"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             9
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 9"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             10
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 10"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             11
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 11"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             12
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 12"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             13
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 13"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             14
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 14"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             15
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 15"
+    +         }
+    +       ],
+    +       [
+    +         {
+    +           "code": "invalid_value",
+    +           "values": [
+    +             16
+    +           ],
+    +           "path": [],
+    +           "message": "Invalid input: expected 16"
+    +         }
+    +       ]
+    +     ],
+    +     "path": [
+    +       "header",
+    +       "initialSaveVersion"
+    +     ],
+    +     "message": "Invalid input"
+    +   }
+    + ]
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        - locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+        - unexpected value "◆Resolving… Your people await a hearth. Select the caravan and found your first settlement."
+        13 × locator resolved to <div role="alert" aria-live="polite" class="feedback error" data-testid="feedback">…</div>
+           - unexpected value "![
+      {
+        "code": "invalid_union",
+        "errors": [
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                4
+              ],
+              "path": [],
+              "message": "Invalid input: expected 4"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                5
+              ],
+              "path": [],
+              "message": "Invalid input: expected 5"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                6
+              ],
+              "path": [],
+              "message": "Invalid input: expected 6"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                7
+              ],
+              "path": [],
+              "message": "Invalid input: expected 7"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                8
+              ],
+              "path": [],
+              "message": "Invalid input: expected 8"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                9
+              ],
+              "path": [],
+              "message": "Invalid input: expected 9"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                10
+              ],
+              "path": [],
+              "message": "Invalid input: expected 10"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                11
+              ],
+              "path": [],
+              "message": "Invalid input: expected 11"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                12
+              ],
+              "path": [],
+              "message": "Invalid input: expected 12"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                13
+              ],
+              "path": [],
+              "message": "Invalid input: expected 13"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                14
+              ],
+              "path": [],
+              "message": "Invalid input: expected 14"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                15
+              ],
+              "path": [],
+              "message": "Invalid input: expected 15"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                16
+              ],
+              "path": [],
+              "message": "Invalid input: expected 16"
+            }
+          ]
+        ],
+        "path": [
+          "header",
+          "initialSaveVersion"
+        ],
+        "message": "Invalid input"
+      }
+    ]"
+
+
+      54 |     await capture('generated-small12'); await settings(page);
+      55 |     await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
+    > 56 |     await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
+         |                                                ^
+      57 |     const downloading = page.waitForEvent('download');
+      58 |     await page.getByRole('button', { name: 'Export campaign', exact: true }).click();
+      59 |     const download = await downloading, downloadedPath = await download.path();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:56:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r23-dev-red-v3/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/hermes-ui/r23-dev-red-v3/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r23-dev-red-v3/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/hermes-ui/r23-dev-red-v3/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas 

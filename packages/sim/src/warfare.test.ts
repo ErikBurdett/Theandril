@@ -4,7 +4,7 @@ import { checksum, UNITS } from '@theandril/content';
 import { isPassable, neighbors } from '@theandril/mapgen';
 import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
 import { rebaseAuthoredLand } from '../../test-fixtures/src/authored-land';
-import { applyCommand, createGame, deserializeGame, getObservation, replayGame, serializeGame, stateHash, validateEndTurn } from './index';
+import { applyCommand, applyCommandForVersion, createGame, deserializeGame, getObservation, replayGame, serializeGame, stateHash, validateEndTurn } from './index';
 import type { CampaignBattle, GameCommand, GameState } from './index';
 import { chooseBattleOrder } from './combat';
 import { rebuildIndexes } from './visibility';
@@ -88,7 +88,7 @@ describe('field battles in the campaign', () => {
     expect(state.battle).toBeNull();
   });
 
-  it('includes every defending army and rejects unsupported stacks atomically', () => {
+  it('includes complete in-budget defenses and preserves historical over-cap atomic rejection', () => {
     const state = borderBattleCampaign();
     const defender = state.armies['army.4'];
     if (!defender) throw new Error('Missing defender');
@@ -109,7 +109,12 @@ describe('field battles in the campaign', () => {
     }
     rebuildIndexes(crowded);
     checked(crowded, war);
-    invalid(crowded, attack);
+    const before = stateHash(crowded);
+    expect(applyCommandForVersion(crowded, attack, 16).ok).toBe(false);
+    expect(stateHash(crowded)).toBe(before);
+    checked(crowded, attack);
+    expect(crowded.battle?.combat.defender).toHaveLength(20);
+    expect(stateHash(deserializeGame(serializeGame(crowded)))).toBe(stateHash(crowded));
   });
 
   it('preserves exact manual/autoresolve parity and mid-battle save/replay', () => {

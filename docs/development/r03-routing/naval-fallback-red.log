@@ -1,0 +1,52 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved field attack against 21 formations using an unchanged detached observation 77ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved naval attack against 21 hulls through the whole turn planner 47ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > declares war on a contestable oversized stack before asking a fresh observation to authorize attack 12ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > uses the real one-movement road quote rather than re-pricing a contingent attack as forest travel 17ms
+ × packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > naval target selection skips a query-blocked old oversized stack rather than abandoning another legal target 24ms
+   → expected [] to deep equally contain { type: 'attack', …(3) }
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' plans accept mixed whole-container contingents and leave reserves intact 20ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' plans accept mixed whole-container contingents and leave reserves intact 27ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' cannot discount a strong strategic reserve to make an attack affordable 11ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' cannot discount a strong strategic reserve to make an attack affordable 20ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' keeps old no-preview observations and rule-16 guards conservative 12ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' keeps old no-preview observations and rule-16 guards conservative 25ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' honors a movement-query blocker even with a valid contingent preview 9ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' honors a movement-query blocker even with a valid contingent preview 16ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > uses the canonical siege assault quote for 21 garrison formations without capturing through reserves 49ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > siege policy budgets against the complete observed garrison rather than the engaged preview 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > naval target selection skips a query-blocked old oversized stack rather than abandoning another legal target
+AssertionError: expected [] to deep equally contain { type: 'attack', …(3) }
+
+- Expected:
+{
+  "armyId": "army.11",
+  "factionId": "faction.ashen_compact",
+  "targetArmyId": "army.33",
+  "type": "attack",
+}
+
++ Received:
+[]
+
+ ❯ packages/ai/src/battle-defense.test.ts:132:27
+    130|     expect(getMovementQuery(view, NAVAL_FIXTURE.coastalId, 877).previe…
+    131|     const plan = planNaval(view, 0);
+    132|     expect(plan.commands).toContainEqual({ type: 'attack', factionId: …
+       |                           ^
+    133|     withRules(state, 16, () => { for (const command of plan.commands) …
+    134|     expect(state.battle?.defenderIds).toEqual([id]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 14 passed (15)
+   Start at  03:00:32
+   Duration  1.12s (transform 505ms, setup 0ms, import 666ms, tests 379ms, environment 0ms)
+

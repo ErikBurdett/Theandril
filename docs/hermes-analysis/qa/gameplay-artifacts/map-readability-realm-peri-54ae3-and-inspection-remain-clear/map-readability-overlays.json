@@ -1,0 +1,683 @@
+{
+  "scope": "Authored local radius-three town and one visible envoy. Presentation-only interactions; not a frame-time benchmark.",
+  "hash": "264f5b6b",
+  "quiet": {
+    "art": {
+      "state": "ready",
+      "message": "Approved pixel atlases loaded.",
+      "atlasPages": 2,
+      "residentBytesEstimate": 17825792,
+      "downloadBytes": 4892485,
+      "loadMs": 295.29999999981374,
+      "warnings": [],
+      "hearthDistricts": [
+        {
+          "cell": 488,
+          "settlementId": "settlement.5",
+          "kind": "hearth",
+          "density": 3,
+          "links": [
+            439,
+            440,
+            487,
+            489,
+            535,
+            536
+          ],
+          "assetId": null,
+          "presentation": "procedural"
+        },
+        {
+          "cell": 439,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "housing"
+        },
+        {
+          "cell": 440,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "housing"
+        },
+        {
+          "cell": 487,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "housing"
+        },
+        {
+          "cell": 489,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "housing"
+        },
+        {
+          "cell": 535,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "housing"
+        },
+        {
+          "cell": 536,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "housing"
+        }
+      ],
+      "visibleAssetIds": [
+        "settlement.city.ashen_compact",
+        "unit.guard.ashen_compact",
+        "unit.guard.reedbound_council"
+      ],
+      "visibleEntityArt": [
+        {
+          "entityId": "settlement.5",
+          "factionId": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "role": "settlement.city",
+          "assetId": "settlement.city.ashen_compact",
+          "presentation": "faction",
+          "nativeWidth": 128,
+          "nativeHeight": 128,
+          "tint": 16777215,
+          "formationCount": null,
+          "representativeCount": 1,
+          "stackArmyCount": 0,
+          "stackFormationCount": 0,
+          "screenWidth": 50.753362315458865,
+          "screenHeight": 50.753362315458865
+        },
+        {
+          "entityId": "army.2",
+          "factionId": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "role": "unit.guard",
+          "assetId": "unit.guard.ashen_compact",
+          "presentation": "faction",
+          "nativeWidth": 64,
+          "nativeHeight": 64,
+          "tint": 16777215,
+          "formationCount": 1,
+          "representativeCount": 1,
+          "stackArmyCount": 1,
+          "stackFormationCount": 1,
+          "screenWidth": 54,
+          "screenHeight": 54
+        },
+        {
+          "entityId": "army.4",
+          "factionId": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "role": "unit.guard",
+          "assetId": "unit.guard.reedbound_council",
+          "presentation": "faction",
+          "nativeWidth": 64,
+          "nativeHeight": 64,
+          "tint": 16777215,
+          "formationCount": 1,
+          "representativeCount": 1,
+          "stackArmyCount": 1,
+          "stackFormationCount": 1,
+          "screenWidth": 54,
+          "screenHeight": 54
+        }
+      ],
+      "visibleAnimationFrames": [],
+      "tileFootprints": [
+        {
+          "cell": 389,
+          "contentId": "resource.salt",
+          "assetId": "resource.salt",
+          "role": "improvement",
+          "presentation": "approved",
+          "bounds": {
+            "x": -19.875283016852865,
+            "y": -19.436121593216775,
+            "width": 39.75056603370573,
+            "height": 26.500377355803817
+          },
+          "scale": 0.7361215932167727,
+          "anchor": {
+            "x": 0.7361215932167688,
+            "y": 7.800377355803817
+          },
+          "alpha": 1,
+          "boundsKind": "opaque-union",
+          "canvasBounds": {
+            "x": -22.81976938971996,
+            "y": -27.533459118601275,
+            "width": 47.111781965873455,
+            "height": 47.111781965873455
+          },
+          "horizontalExtent": 19.875283016852865,
+          "diagonalExtent": 22.950000000000006
+        },
+        {
+          "cell": 488,
+          "contentId": "settlement.city",
+          "assetId": "settlement.city.ashen_compact",
+          "role": "city",
+          "presentation": "approved",
+          "bounds": {
+            "x": -19.04674495996467,
+            "y": -23.463686408896834,
+            "width": 42.42663881057889,
+            "height": 43.21966009675794
+          },
+          "scale": 0.3965106430895224,
+          "anchor": {
+            "x": 2.364829766869537,
+            "y": 20.15248433095063
+          },
+          "alpha": 1,
+          "boundsKind": "opaque-union",
+          "canvasBounds": {
+            "x": -23.011851390859896,
+            "y": -24.256707695075878,
+            "width": 50.753362315458865,
+            "height": 50.753362315458865
+          },
+          "horizontalExtent": 23.379893850614224,
+          "diagonalExtent": 27.00000000000001
+        }
+      ],
+      "reducedMotion": false,
+      "visibleSprites": 3,
+      "terrainSpriteCells": 61,
+      "overlays": {
+        "selectionBounds": {
+          "width": 0,
+          "height": 0
+        },
+        "selectedAsset": {
+          "entityId": null,
+          "factionId": null,
+          "color": null,
+          "mode": "none",
+          "contours": 0,
+          "glints": 0,
+          "animated": false,
+          "contourAlpha": 0.5556712051558831,
+          "failed": false,
+          "cacheEntries": 2,
+          "textureBytes": 88192,
+          "bounds": {
+            "width": 0,
+            "height": 0
+          },
+          "sourceFrames": []
+        },
+        "selectedEntityTileOutline": false,
+        "territoryMode": "realm-perimeter",
+        "ambientGrid": false,
+        "unselectedRings": false,
+        "labels": [
+          {
+            "id": "settlement.5",
+            "cell": 488,
+            "name": "The Hearth of the Western Oathkeepers",
+            "settlement": true,
+            "own": true,
+            "hostile": false,
+            "stackArmyCount": 0,
+            "x": 720,
+            "y": 350,
+            "text": "◆ The Hearth of the Wes…",
+            "priority": 2,
+            "width": 141.52232360839844,
+            "height": 23
+          }
+        ],
+        "stackBadges": [],
+        "selectedCell": null,
+        "hoveredCell": null
+      },
+      "lod": "static-sprites",
+      "terrainPresentation": {
+        "nativeFootprint": [
+          56,
+          64
+        ],
+        "scaleX": 0.8969548824910257,
+        "scaleY": 0.90625,
+        "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+      }
+    },
+    "metrics": {
+      "generationMs": 0,
+      "commandMs": 0,
+      "aiMs": 0,
+      "transferBytes": 27977,
+      "totalTransferBytes": 27977,
+      "cellTransferBytes": 1550,
+      "landQueryCount": 0,
+      "landQueryBytes": 0,
+      "totalLandQueryBytes": 0,
+      "developmentQueryCount": 0,
+      "developmentQueryBytes": 0,
+      "totalDevelopmentQueryBytes": 0,
+      "renderer": "webgl",
+      "frameCount": 39,
+      "frameMs": 16.699999999999818,
+      "frameP95Ms": 66.60000000000002,
+      "renderCpuMs": 0.20000000018626451,
+      "visibleCells": 61,
+      "visibleChunks": 1,
+      "cachedChunks": 1,
+      "chunkRebuilds": 2,
+      "visibleEntities": 3,
+      "zoom": 1,
+      "highlightedCells": 0,
+      "routeCells": 0,
+      "previewCells": 0,
+      "atlasPages": 2,
+      "residentAtlasBytesEstimate": 17825792,
+      "artLoadMs": 295.29999999981374,
+      "artFirstRenderCpuMs": 49.299999999813735,
+      "visibleSprites": 3,
+      "terrainSpriteCells": 61,
+      "pooledSprites": 71,
+      "stackBadges": 0,
+      "pooledStackBadges": 0,
+      "territoryEdges": 42,
+      "improvementProps": 0,
+      "riverSegments": 0,
+      "roadSegments": 0,
+      "districtStreetSegments": 12,
+      "overview": false,
+      "overviewTextureBytes": 0,
+      "rangePerimeterEdges": 0,
+      "visibleLabels": 1,
+      "selectedCells": 0,
+      "hoveredCells": 0,
+      "maxCachedChunkWidth": 460,
+      "maxCachedChunkHeight": 406,
+      "cachedTextureBytesEstimate": 1048576
+    }
+  },
+  "range": {
+    "generationMs": 0,
+    "commandMs": 0,
+    "aiMs": 0,
+    "transferBytes": 27977,
+    "totalTransferBytes": 27977,
+    "cellTransferBytes": 1550,
+    "landQueryCount": 0,
+    "landQueryBytes": 0,
+    "totalLandQueryBytes": 0,
+    "developmentQueryCount": 0,
+    "developmentQueryBytes": 0,
+    "totalDevelopmentQueryBytes": 0,
+    "renderer": "webgl",
+    "frameCount": 75,
+    "frameMs": 16.700000000000045,
+    "frameP95Ms": 33.30000000000018,
+    "renderCpuMs": 0.2999999998137355,
+    "visibleCells": 61,
+    "visibleChunks": 1,
+    "cachedChunks": 1,
+    "chunkRebuilds": 2,
+    "visibleEntities": 3,
+    "zoom": 1,
+    "highlightedCells": 29,
+    "routeCells": 0,
+    "previewCells": 0,
+    "atlasPages": 2,
+    "residentAtlasBytesEstimate": 17825792,
+    "artLoadMs": 295.29999999981374,
+    "artFirstRenderCpuMs": 49.299999999813735,
+    "visibleSprites": 3,
+    "terrainSpriteCells": 61,
+    "pooledSprites": 71,
+    "stackBadges": 0,
+    "pooledStackBadges": 0,
+    "territoryEdges": 42,
+    "improvementProps": 0,
+    "riverSegments": 0,
+    "roadSegments": 0,
+    "districtStreetSegments": 12,
+    "overview": false,
+    "overviewTextureBytes": 0,
+    "rangePerimeterEdges": 50,
+    "visibleLabels": 1,
+    "selectedCells": 1,
+    "hoveredCells": 0,
+    "maxCachedChunkWidth": 460,
+    "maxCachedChunkHeight": 406,
+    "cachedTextureBytesEstimate": 1048576
+  },
+  "final": {
+    "art": {
+      "state": "ready",
+      "message": "Approved pixel atlases loaded.",
+      "atlasPages": 2,
+      "residentBytesEstimate": 17825792,
+      "downloadBytes": 4892485,
+      "loadMs": 295.29999999981374,
+      "warnings": [],
+      "hearthDistricts": [
+        {
+          "cell": 488,
+          "settlementId": "settlement.5",
+          "kind": "hearth",
+          "density": 3,
+          "links": [
+            439,
+            440,
+            487,
+            489,
+            535,
+            536
+          ],
+          "assetId": null,
+          "presentation": "ground"
+        },
+        {
+          "cell": 439,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "ground"
+        },
+        {
+          "cell": 440,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "ground"
+        },
+        {
+          "cell": 487,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "ground"
+        },
+        {
+          "cell": 489,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "ground"
+        },
+        {
+          "cell": 535,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "ground"
+        },
+        {
+          "cell": 536,
+          "settlementId": "settlement.5",
+          "kind": "housing",
+          "density": 3,
+          "links": [
+            488
+          ],
+          "assetId": null,
+          "presentation": "ground"
+        }
+      ],
+      "visibleAssetIds": [
+        "ui.badge.ashen_compact",
+        "ui.badge.reedbound_council",
+        "ui.banner.ashen_compact"
+      ],
+      "visibleEntityArt": [
+        {
+          "entityId": "settlement.5",
+          "factionId": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "role": "settlement.city",
+          "assetId": "ui.banner.ashen_compact",
+          "presentation": "strategic",
+          "nativeWidth": 64,
+          "nativeHeight": 64,
+          "tint": 16777215,
+          "formationCount": null,
+          "representativeCount": 1,
+          "stackArmyCount": 0,
+          "stackFormationCount": 0,
+          "screenWidth": 44,
+          "screenHeight": 44
+        },
+        {
+          "entityId": "army.2",
+          "factionId": "faction.ashen_compact",
+          "definitionId": "faction.ashen_compact",
+          "role": "unit.guard",
+          "assetId": "ui.badge.ashen_compact",
+          "presentation": "strategic",
+          "nativeWidth": 32,
+          "nativeHeight": 32,
+          "tint": 16777215,
+          "formationCount": 1,
+          "representativeCount": 1,
+          "stackArmyCount": 1,
+          "stackFormationCount": 1,
+          "screenWidth": 44,
+          "screenHeight": 44
+        },
+        {
+          "entityId": "army.4",
+          "factionId": "faction.reedbound_council",
+          "definitionId": "faction.reedbound_council",
+          "role": "unit.guard",
+          "assetId": "ui.badge.reedbound_council",
+          "presentation": "strategic",
+          "nativeWidth": 32,
+          "nativeHeight": 32,
+          "tint": 16777215,
+          "formationCount": 1,
+          "representativeCount": 1,
+          "stackArmyCount": 1,
+          "stackFormationCount": 1,
+          "screenWidth": 44,
+          "screenHeight": 44
+        }
+      ],
+      "visibleAnimationFrames": [],
+      "tileFootprints": [
+        {
+          "cell": 389,
+          "contentId": "resource.salt",
+          "assetId": "resource.salt",
+          "role": "improvement",
+          "presentation": "approved",
+          "bounds": {
+            "x": -19.875283016852865,
+            "y": -19.436121593216775,
+            "width": 39.75056603370573,
+            "height": 26.500377355803817
+          },
+          "scale": 0.7361215932167727,
+          "anchor": {
+            "x": 0.7361215932167688,
+            "y": 7.800377355803817
+          },
+          "alpha": 1,
+          "boundsKind": "opaque-union",
+          "canvasBounds": {
+            "x": -22.81976938971996,
+            "y": -27.533459118601275,
+            "width": 47.111781965873455,
+            "height": 47.111781965873455
+          },
+          "horizontalExtent": 19.875283016852865,
+          "diagonalExtent": 22.950000000000006
+        }
+      ],
+      "reducedMotion": false,
+      "visibleSprites": 3,
+      "terrainSpriteCells": 61,
+      "overlays": {
+        "selectionBounds": {
+          "width": 0,
+          "height": 0
+        },
+        "selectedAsset": {
+          "entityId": "settlement.5",
+          "factionId": "faction.ashen_compact",
+          "color": 13215339,
+          "mode": "silhouette",
+          "contours": 1,
+          "glints": 0,
+          "animated": false,
+          "contourAlpha": 0.5,
+          "failed": false,
+          "cacheEntries": 3,
+          "textureBytes": 106688,
+          "bounds": {
+            "width": 34.912109375,
+            "height": 73.8525390625
+          },
+          "sourceFrames": [
+            {
+              "x": 986,
+              "y": 890,
+              "width": 64,
+              "height": 64
+            }
+          ]
+        },
+        "selectedEntityTileOutline": false,
+        "territoryMode": "realm-perimeter",
+        "ambientGrid": false,
+        "unselectedRings": false,
+        "labels": [
+          {
+            "id": "settlement.5",
+            "cell": 488,
+            "name": "The Hearth of the Western Oathkeepers",
+            "settlement": true,
+            "own": true,
+            "hostile": false,
+            "stackArmyCount": 0,
+            "x": 117.8475288276519,
+            "y": 260.764,
+            "text": "◆ The Hearth of the Western O…",
+            "priority": 0,
+            "width": 171.84458923339844,
+            "height": 23
+          }
+        ],
+        "stackBadges": [],
+        "selectedCell": 491,
+        "hoveredCell": null
+      },
+      "lod": "strategic-glyphs",
+      "terrainPresentation": {
+        "nativeFootprint": [
+          56,
+          64
+        ],
+        "scaleX": 0.8969548824910257,
+        "scaleY": 0.90625,
+        "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+      }
+    },
+    "metrics": {
+      "generationMs": 0,
+      "commandMs": 0,
+      "aiMs": 0,
+      "transferBytes": 27977,
+      "totalTransferBytes": 393451,
+      "cellTransferBytes": 1550,
+      "landQueryCount": 2,
+      "landQueryBytes": 182737,
+      "totalLandQueryBytes": 365474,
+      "developmentQueryCount": 0,
+      "developmentQueryBytes": 0,
+      "totalDevelopmentQueryBytes": 0,
+      "renderer": "webgl",
+      "frameCount": 140,
+      "frameMs": 16.699999999999818,
+      "frameP95Ms": 16.800000000000182,
+      "renderCpuMs": 0.09999999962747097,
+      "visibleCells": 61,
+      "visibleChunks": 1,
+      "cachedChunks": 1,
+      "chunkRebuilds": 3,
+      "visibleEntities": 3,
+      "zoom": 0.40960000000000013,
+      "highlightedCells": 0,
+      "routeCells": 0,
+      "previewCells": 0,
+      "atlasPages": 2,
+      "residentAtlasBytesEstimate": 17825792,
+      "artLoadMs": 295.29999999981374,
+      "artFirstRenderCpuMs": 49.299999999813735,
+      "visibleSprites": 3,
+      "terrainSpriteCells": 61,
+      "pooledSprites": 71,
+      "stackBadges": 0,
+      "pooledStackBadges": 0,
+      "territoryEdges": 42,
+      "improvementProps": 0,
+      "riverSegments": 0,
+      "roadSegments": 0,
+      "districtStreetSegments": 0,
+      "overview": false,
+      "overviewTextureBytes": 0,
+      "rangePerimeterEdges": 0,
+      "visibleLabels": 1,
+      "selectedCells": 1,
+      "hoveredCells": 0,
+      "maxCachedChunkWidth": 460,
+      "maxCachedChunkHeight": 406,
+      "cachedTextureBytesEstimate": 1048576
+    },
+    "hash": "264f5b6b"
+  }
+}

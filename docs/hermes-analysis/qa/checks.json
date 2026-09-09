@@ -1,0 +1,2754 @@
+{
+  "schemaVersion": 1,
+  "finalizedAt": "2026-09-09T05:52:31.722040+00:00",
+  "baseline": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+  "releaseReady": false,
+  "trackedProductionDiff": false,
+  "environment": {
+    "os": "Linux 7.2.3-arch1-3",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+    "logicalCpus": 32,
+    "memoryReported": "31 GiB total, 18 GiB used, 12 GiB available at initial snapshot",
+    "node": "26.7.0",
+    "pnpm": "10.32.1",
+    "playwright": "1.63.0",
+    "vitest": "4.1.11",
+    "chromium": "152.0.7977.82",
+    "chromiumExecutable": "/usr/bin/chromium",
+    "graphics": {
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "vendor": "Google Inc. (Google)",
+      "maxTextureSize": 8192,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "devicePixelRatio": 1,
+      "hardwareConcurrency": 32
+    },
+    "vitestMaxWorkers": 4,
+    "browserWorkers": 1,
+    "concurrencyCaveat": "Initial headless/full browser runs overlapped parent and campaign agents. Final map and battle probes had no other QA test/soak running but user desktop applications including Civ7 remained active. Not exclusive-host or hardware GPU timing.",
+    "evidence": [
+      "logs/environment.log",
+      "logs/perf-host-before.log",
+      "logs/cleanup-verification.log"
+    ]
+  },
+  "totals": {
+    "commands": 43,
+    "commandExitCodes": {
+      "0": 31,
+      "1": 12
+    },
+    "classifications": {
+      "completed-command": 25,
+      "product-regression-or-reproduction": 8,
+      "successful-diagnostic-includes-known-defect": 6,
+      "superseded-audit-attempt": 4
+    },
+    "unit": {
+      "filesTotal": 184,
+      "filesPassed": 183,
+      "filesFailed": 1,
+      "testsTotal": 1604,
+      "testsPassed": 1603,
+      "testsFailed": 1,
+      "skipped": 0,
+      "todo": 0,
+      "jsonNestedSuiteCounters": {
+        "numTotalTestSuites": 335,
+        "numPassedTestSuites": 333,
+        "numFailedTestSuites": 2,
+        "numPendingTestSuites": 0
+      },
+      "note": "CLI and testResults file totals are183/184. JSON335 suites include nested describe suites; two failing nested suites are the SAME one failing test, not two regressions."
+    },
+    "gameplay": {
+      "startTime": "2026-09-09T05:07:21.958Z",
+      "duration": 917604.407,
+      "expected": 149,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "productionSmoke": {
+      "startTime": "2026-09-09T05:29:46.963Z",
+      "duration": 13291.64,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "distFilesCompared": 26,
+    "distTotalBytes": 8836874,
+    "mapCases": 3,
+    "mapSampledFrames": 2700
+  },
+  "commands": [
+    {
+      "name": "art-validate",
+      "command": "pnpm art:validate",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:13:15.231496+00:00",
+      "durationSeconds": 2.369685411453247,
+      "exitCode": 0,
+      "log": "logs/art-validate.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 307704,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/art-validate.json"
+    },
+    {
+      "name": "battle-perf-final",
+      "command": "pnpm exec playwright test --config docs/hermes-analysis/qa/perf.config.ts tests/gameplay/battle-performance.spec.ts --workers=1",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:34:20.047540+00:00",
+      "durationSeconds": 22.879942655563354,
+      "exitCode": 0,
+      "log": "logs/battle-perf-final.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 311340,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/battle-perf-final.json"
+    },
+    {
+      "name": "bench-art",
+      "command": "pnpm bench:art",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:42:47.977496+00:00",
+      "durationSeconds": 10.757907390594482,
+      "exitCode": 0,
+      "log": "logs/bench-art.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 761864,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/bench-art.json"
+    },
+    {
+      "name": "benchmark-chronicles",
+      "command": "pnpm bench:chronicles",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:16:38.449255+00:00",
+      "durationSeconds": 38.93389534950256,
+      "exitCode": 1,
+      "log": "logs/benchmark-chronicles.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 3767308,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "product-regression-or-reproduction",
+      "resultFile": "results/benchmark-chronicles.json"
+    },
+    {
+      "name": "benchmark-composed",
+      "command": "pnpm exec tsx scripts/benchmark-armies-fleets.ts --section=all",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:12:17.095253+00:00",
+      "durationSeconds": 41.53283405303955,
+      "exitCode": 0,
+      "log": "logs/benchmark-composed.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 701648,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/benchmark-composed.json"
+    },
+    {
+      "name": "benchmark-scale",
+      "command": "pnpm bench",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:09:47.173234+00:00",
+      "durationSeconds": 149.90388226509094,
+      "exitCode": 0,
+      "log": "logs/benchmark-scale.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 1283108,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/benchmark-scale.json"
+    },
+    {
+      "name": "benchmark-storage",
+      "command": "pnpm bench:storage",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:12:58.654238+00:00",
+      "durationSeconds": 219.7690351009369,
+      "exitCode": 0,
+      "log": "logs/benchmark-storage.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 3767308,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/benchmark-storage.json"
+    },
+    {
+      "name": "build",
+      "command": "pnpm exec turbo run build --force",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:08:48.774784+00:00",
+      "durationSeconds": 3.9940755367279053,
+      "exitCode": 0,
+      "log": "logs/build.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 1282860,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/build.json"
+    },
+    {
+      "name": "capture-minimal-save-v2",
+      "command": "node --import tsx docs/hermes-analysis/qa/capture-minimal-save.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:34:19.057279+00:00",
+      "durationSeconds": 0.9715917110443115,
+      "exitCode": 0,
+      "log": "logs/capture-minimal-save-v2.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 216528,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "successful-diagnostic-includes-known-defect",
+      "resultFile": "results/capture-minimal-save-v2.json"
+    },
+    {
+      "name": "capture-minimal-save",
+      "command": "node --import tsx docs/hermes-analysis/qa/capture-minimal-save.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:30:53.585784+00:00",
+      "durationSeconds": 0.8537368774414062,
+      "exitCode": 1,
+      "log": "logs/capture-minimal-save.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 207432,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "superseded-audit-attempt",
+      "interpretation": "Candidate checkpoint before the SECOND battle was already invalid after the first battle; earlier valid checkpoint retained by v2. Not a distinct product defect.",
+      "resultFile": "results/capture-minimal-save.json"
+    },
+    {
+      "name": "capture-standard-long",
+      "command": "pnpm exec tsx docs/hermes-analysis/qa/chronicle-capture.ts --seed=748291 --size=standard --pace=long --factions=24 --limit=650",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:35:56.270932+00:00",
+      "durationSeconds": 255.99540996551514,
+      "exitCode": 1,
+      "log": "logs/capture-standard-long.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 1363956,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "product-regression-or-reproduction",
+      "resultFile": "results/capture-standard-long.json"
+    },
+    {
+      "name": "capture-tiny-standard",
+      "command": "pnpm exec tsx docs/hermes-analysis/qa/chronicle-capture.ts --size=tiny --pace=standard --factions=4 --limit=500",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:22:47.204915+00:00",
+      "durationSeconds": 5.116702318191528,
+      "exitCode": 1,
+      "log": "logs/capture-tiny-standard.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 406596,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "product-regression-or-reproduction",
+      "resultFile": "results/capture-tiny-standard.json"
+    },
+    {
+      "name": "chronicles-huge-short",
+      "command": "pnpm exec tsx scripts/benchmark-chronicle.ts --size=huge --pace=short --factions=32 --limit=150",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:20:24.349453+00:00",
+      "durationSeconds": 15.681825637817383,
+      "exitCode": 0,
+      "log": "logs/chronicles-huge-short.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 670184,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/chronicles-huge-short.json"
+    },
+    {
+      "name": "chronicles-legendary-short",
+      "command": "pnpm exec tsx scripts/benchmark-chronicle.ts --size=legendary --pace=short --factions=40 --limit=150",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:20:40.057488+00:00",
+      "durationSeconds": 21.150798559188843,
+      "exitCode": 0,
+      "log": "logs/chronicles-legendary-short.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 897872,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/chronicles-legendary-short.json"
+    },
+    {
+      "name": "chronicles-tiny-epic",
+      "command": "pnpm exec tsx scripts/benchmark-chronicle.ts --size=tiny --pace=epic --factions=4 --limit=1400",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:21:07.015268+00:00",
+      "durationSeconds": 38.78826451301575,
+      "exitCode": 0,
+      "log": "logs/chronicles-tiny-epic.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 897872,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/chronicles-tiny-epic.json"
+    },
+    {
+      "name": "chronicles-tiny-short",
+      "command": "pnpm exec tsx scripts/benchmark-chronicle.ts --size=tiny --pace=short --factions=4 --limit=150",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:20:23.010409+00:00",
+      "durationSeconds": 1.31302809715271,
+      "exitCode": 0,
+      "log": "logs/chronicles-tiny-short.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 227368,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/chronicles-tiny-short.json"
+    },
+    {
+      "name": "chronicles-tiny-standard",
+      "command": "pnpm exec tsx scripts/benchmark-chronicle.ts --size=tiny --pace=standard --factions=4 --limit=500",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:21:01.227440+00:00",
+      "durationSeconds": 5.7654149532318115,
+      "exitCode": 1,
+      "log": "logs/chronicles-tiny-standard.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 401532,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "product-regression-or-reproduction",
+      "resultFile": "results/chronicles-tiny-standard.json"
+    },
+    {
+      "name": "clean-release",
+      "command": "python docs/hermes-analysis/qa/clean_release.py",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:09:18.959656+00:00",
+      "durationSeconds": 24.466784477233887,
+      "exitCode": 0,
+      "log": "logs/clean-release.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 1033672,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/clean-release.json"
+    },
+    {
+      "name": "cleanup-verification",
+      "command": "date -Is; ss -ltnp; git diff --exit-code; git status --short; git rev-parse HEAD; curl --fail --silent --output /dev/null --write-out \"parent5191 HTTP%{http_code}\\n\" http://127.0.0.1:5191/; curl --fail --silent --output /dev/null --write-out \"user5173 HTTP%{http_code}\\n\" http://127.0.0.1:5173/",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:44:22.121640+00:00",
+      "durationSeconds": 0.07619714736938477,
+      "exitCode": 0,
+      "log": "logs/cleanup-verification.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 17744,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/cleanup-verification.json"
+    },
+    {
+      "name": "contact-diagnostic",
+      "command": "pnpm exec tsx scripts/benchmark-contact.ts --seed=748291 --size=standard --factions=4 --pace=long --turns=150 --max-ms=120000",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:12:46.466618+00:00",
+      "durationSeconds": 16.776586532592773,
+      "exitCode": 0,
+      "log": "logs/contact-diagnostic.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 417536,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/contact-diagnostic.json"
+    },
+    {
+      "name": "contact-repro",
+      "command": "pnpm exec vitest run packages/ai/src/contact.test.ts --maxWorkers=1 -t \"standard / 4 seats\" --reporter=verbose",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:12:37.639755+00:00",
+      "durationSeconds": 8.80650806427002,
+      "exitCode": 1,
+      "log": "logs/contact-repro.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 417536,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "product-regression-or-reproduction",
+      "resultFile": "results/contact-repro.json"
+    },
+    {
+      "name": "content",
+      "command": "pnpm content:validate",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:06:56.343525+00:00",
+      "durationSeconds": 0.37078094482421875,
+      "exitCode": 0,
+      "log": "logs/content.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 109456,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/content.json"
+    },
+    {
+      "name": "environment",
+      "command": "date -Is; uname -a; lscpu; free -h; ss -ltnp; node --version; pnpm --version; /usr/bin/chromium --version; pnpm exec playwright --version; pnpm exec vitest --version; git status --short; git rev-parse HEAD; ps -eo pid,ppid,pcpu,pmem,comm,args --sort=-pcpu",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:06:43.952260+00:00",
+      "durationSeconds": 0.8078744411468506,
+      "exitCode": 0,
+      "log": "logs/environment.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 160556,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/environment.json"
+    },
+    {
+      "name": "final-git-read",
+      "command": "git status --short; git diff --name-only; git diff --stat; git rev-parse HEAD",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:40:35.990206+00:00",
+      "durationSeconds": 0.04418349266052246,
+      "exitCode": 0,
+      "log": "logs/final-git-read.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 17600,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/final-git-read.json"
+    },
+    {
+      "name": "gameplay-collect",
+      "command": "pnpm exec playwright test --config docs/hermes-analysis/qa/gameplay.config.ts --list",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:06:45.062040+00:00",
+      "durationSeconds": 2.282175302505493,
+      "exitCode": 0,
+      "log": "logs/gameplay-collect.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 437516,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/gameplay-collect.json"
+    },
+    {
+      "name": "gameplay-full",
+      "command": "pnpm exec playwright test --config docs/hermes-analysis/qa/gameplay.config.ts --workers=1",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:07:21.358263+00:00",
+      "durationSeconds": 918.2501595020294,
+      "exitCode": 0,
+      "log": "logs/gameplay-full.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 805972,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/gameplay-full.json"
+    },
+    {
+      "name": "inspect-save",
+      "command": "node --import tsx docs/hermes-analysis/qa/inspect-save.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:28:37.471630+00:00",
+      "durationSeconds": 0.20110535621643066,
+      "exitCode": 0,
+      "log": "logs/inspect-save.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 141412,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "successful-diagnostic-includes-known-defect",
+      "resultFile": "results/inspect-save.json"
+    },
+    {
+      "name": "large-archive-metadata",
+      "command": "node --import tsx docs/hermes-analysis/qa/verify-large-archive.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:44:20.863233+00:00",
+      "durationSeconds": 1.240262508392334,
+      "exitCode": 0,
+      "log": "logs/large-archive-metadata.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 798240,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "successful-diagnostic-includes-known-defect",
+      "resultFile": "results/large-archive-metadata.json"
+    },
+    {
+      "name": "lifecycle-production",
+      "command": "QA_LIFECYCLE_URL=http://127.0.0.1:4174/ QA_LIFECYCLE_OUTPUT=/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/lifecycle-production node --import tsx docs/hermes-analysis/qa/lifecycle.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:39:56.501666+00:00",
+      "durationSeconds": 5.800468444824219,
+      "exitCode": 0,
+      "log": "logs/lifecycle-production.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 242972,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "successful-diagnostic-includes-known-defect",
+      "resultFile": "results/lifecycle-production.json"
+    },
+    {
+      "name": "lifecycle-v2",
+      "command": "node --import tsx docs/hermes-analysis/qa/lifecycle.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:37:55.683218+00:00",
+      "durationSeconds": 6.966168642044067,
+      "exitCode": 0,
+      "log": "logs/lifecycle-v2.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 239632,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "successful-diagnostic-includes-known-defect",
+      "resultFile": "results/lifecycle-v2.json"
+    },
+    {
+      "name": "lifecycle",
+      "command": "node --import tsx docs/hermes-analysis/qa/lifecycle.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:35:49.374942+00:00",
+      "durationSeconds": 6.879324674606323,
+      "exitCode": 1,
+      "log": "logs/lifecycle.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 233104,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "superseded-audit-attempt",
+      "interpretation": "Audit locator excluded hidden Save button; corrected audit locator in v2.",
+      "resultFile": "results/lifecycle.json"
+    },
+    {
+      "name": "lint",
+      "command": "pnpm lint",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:06:51.393364+00:00",
+      "durationSeconds": 4.932846546173096,
+      "exitCode": 0,
+      "log": "logs/lint.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 690544,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/lint.json"
+    },
+    {
+      "name": "map-probe",
+      "command": "node --import tsx docs/hermes-analysis/qa/map-probe.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:30:54.543039+00:00",
+      "durationSeconds": 112.26467370986938,
+      "exitCode": 0,
+      "log": "logs/map-probe.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 800072,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/map-probe.json"
+    },
+    {
+      "name": "minimal-save-repro",
+      "command": "node --import tsx docs/hermes-analysis/qa/minimal-save-repro.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:35:49.115687+00:00",
+      "durationSeconds": 0.2412102222442627,
+      "exitCode": 1,
+      "log": "logs/minimal-save-repro.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 125148,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "product-regression-or-reproduction",
+      "resultFile": "results/minimal-save-repro.json"
+    },
+    {
+      "name": "modern-battle-v2",
+      "command": "node --expose-gc --import tsx docs/hermes-analysis/qa/modern-battle.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:17:13.919655+00:00",
+      "durationSeconds": 1.4344313144683838,
+      "exitCode": 0,
+      "log": "logs/modern-battle-v2.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 205184,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/modern-battle-v2.json"
+    },
+    {
+      "name": "modern-battle",
+      "command": "node --expose-gc --import tsx docs/hermes-analysis/qa/modern-battle.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:16:22.545396+00:00",
+      "durationSeconds": 0.3238871097564697,
+      "exitCode": 1,
+      "log": "logs/modern-battle.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 133932,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "superseded-audit-attempt",
+      "interpretation": "Audit probe traversed a nonexistent combat.formations field; attacker/defender traversal corrected in v2.",
+      "resultFile": "results/modern-battle.json"
+    },
+    {
+      "name": "perf-host-before",
+      "command": "date -Is; free -h; ss -ltnp; ps -eo pid,ppid,pcpu,pmem,comm,args --sort=-pcpu",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:30:54.458141+00:00",
+      "durationSeconds": 0.0623774528503418,
+      "exitCode": 0,
+      "log": "logs/perf-host-before.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 18188,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/perf-host-before.json"
+    },
+    {
+      "name": "production-smoke-v2",
+      "command": "pnpm exec playwright test --config docs/hermes-analysis/qa/production.config.ts --workers=1",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:29:46.497378+00:00",
+      "durationSeconds": 13.772690057754517,
+      "exitCode": 0,
+      "log": "logs/production-smoke-v2.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 335560,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/production-smoke-v2.json"
+    },
+    {
+      "name": "production-smoke",
+      "command": "pnpm exec playwright test --config docs/hermes-analysis/qa/production.config.ts --workers=1",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:23:59.787459+00:00",
+      "durationSeconds": 0.5275835990905762,
+      "exitCode": 1,
+      "log": "logs/production-smoke.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 194100,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "superseded-audit-attempt",
+      "interpretation": "Nested audit config merged two webServers; nonexistent inherited cwd caused spawn /bin/sh ENOENT. Fixed only audit config; v2 passes.",
+      "resultFile": "results/production-smoke.json"
+    },
+    {
+      "name": "save-failure-recovery",
+      "command": "node --import tsx docs/hermes-analysis/qa/save-failure-recovery.mjs",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:41:49.533405+00:00",
+      "durationSeconds": 0.45676231384277344,
+      "exitCode": 0,
+      "log": "logs/save-failure-recovery.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 187380,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "successful-diagnostic-includes-known-defect",
+      "resultFile": "results/save-failure-recovery.json"
+    },
+    {
+      "name": "standard-long-archive",
+      "command": "pnpm exec tsx scripts/benchmark-chronicle.ts --seed=748291 --size=standard --pace=long --factions=24 --limit=650",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:18:15.847172+00:00",
+      "durationSeconds": 292.356338262558,
+      "exitCode": 1,
+      "log": "logs/standard-long-archive.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 1178556,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "product-regression-or-reproduction",
+      "resultFile": "results/standard-long-archive.json"
+    },
+    {
+      "name": "typecheck",
+      "command": "pnpm typecheck",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:06:45.050866+00:00",
+      "durationSeconds": 6.325046539306641,
+      "exitCode": 0,
+      "log": "logs/typecheck.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 1040696,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "completed-command",
+      "resultFile": "results/typecheck.json"
+    },
+    {
+      "name": "unit-full",
+      "command": "pnpm exec vitest run --maxWorkers=4 --reporter=default --reporter=json --outputFile=docs/hermes-analysis/qa/unit-results.json",
+      "cwd": "/home/telephoneheater/Work/Theandril",
+      "startedAt": "2026-09-09T05:06:56.732506+00:00",
+      "durationSeconds": 112.0233986377716,
+      "exitCode": 1,
+      "log": "logs/unit-full.log",
+      "browserExecutable": "/usr/bin/chromium",
+      "maxChildrenRssKiB": 1282860,
+      "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged.",
+      "classification": "product-regression-or-reproduction",
+      "resultFile": "results/unit-full.json"
+    }
+  ],
+  "cleanRelease": {
+    "revision": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+    "node": "v26.7.0",
+    "scope": "Fresh full committed archive and fresh node_modules; offline package store reused, host Node26 not CI Node22. Temporary tree removed after execution. No unit/browser tests rerun inside clean archive.",
+    "checks": [
+      {
+        "name": "install",
+        "command": [
+          "pnpm",
+          "install",
+          "--offline",
+          "--frozen-lockfile"
+        ],
+        "exitCode": 0,
+        "durationSeconds": 0.902881383895874,
+        "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-install.log"
+      },
+      {
+        "name": "typecheck",
+        "command": [
+          "pnpm",
+          "typecheck"
+        ],
+        "exitCode": 0,
+        "durationSeconds": 8.03387999534607,
+        "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-typecheck.log"
+      },
+      {
+        "name": "lint",
+        "command": [
+          "pnpm",
+          "lint"
+        ],
+        "exitCode": 0,
+        "durationSeconds": 5.783792018890381,
+        "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-lint.log"
+      },
+      {
+        "name": "content",
+        "command": [
+          "pnpm",
+          "content:validate"
+        ],
+        "exitCode": 0,
+        "durationSeconds": 0.5280084609985352,
+        "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-content.log"
+      },
+      {
+        "name": "build",
+        "command": [
+          "pnpm",
+          "exec",
+          "turbo",
+          "run",
+          "build",
+          "--force"
+        ],
+        "exitCode": 0,
+        "durationSeconds": 4.18876051902771,
+        "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-build.log"
+      }
+    ]
+  },
+  "buildComparison": "build-comparison.json",
+  "findings": [
+    {
+      "id": "QA-SAVE-01",
+      "severity": "high",
+      "releaseBlocker": true,
+      "category": "persistence/canonical simulation",
+      "title": "Combat-trained morale writes back to strategic state and compounds on another deployment",
+      "manifestations": [
+        "A: valid checkpoint + attack + autoresolve -> strategic formation exceeds unit definition",
+        "B: subsequent same-turn battle records morale63 above allowed59; after turn recovery strategic morale normalizes but retained battle report still fails strict validation"
+      ],
+      "independentRootCauses": 1,
+      "evidence": [
+        "logs/minimal-save-repro.log",
+        "pre-first-battle.json.gz",
+        "first-battle-commands.json",
+        "save-replay-diagnostic.json",
+        "save-mismatches.json",
+        "captured-tiny-standard-20260905.json.gz",
+        "save-failure-recovery.json"
+      ],
+      "source": [
+        "packages/sim/src/warfare.ts:62",
+        "packages/sim/src/warfare.ts:215",
+        "packages/sim/src/save.ts:677",
+        "packages/sim/src/save.ts:828"
+      ]
+    },
+    {
+      "id": "QA-SAVE-02",
+      "severity": "high",
+      "releaseBlocker": true,
+      "category": "persistence/archive capacity",
+      "title": "Ordinary completed Standard24Long archive exceeds64MiB; independently valid state cannot export full campaign",
+      "evidence": [
+        "logs/standard-long-archive.log",
+        "logs/capture-standard-long.log",
+        "large-archive.json",
+        "captured-standard-long-748291.json.gz"
+      ],
+      "source": [
+        "packages/persistence/src/index.ts:14",
+        "packages/persistence/src/size.ts",
+        "packages/persistence/src/campaign-storage.ts:185",
+        "packages/persistence/src/campaign-storage.ts:193"
+      ]
+    },
+    {
+      "id": "QA-AI-01",
+      "severity": "high",
+      "releaseBlocker": true,
+      "category": "simulation/release gate",
+      "title": "Standard4-seat player contact exceeds committed100-round test bound",
+      "evidence": [
+        "unit-results.json",
+        "logs/contact-repro.log",
+        "contact-diagnostic.json"
+      ],
+      "source": [
+        "packages/ai/src/contact.test.ts:85"
+      ]
+    },
+    {
+      "id": "QA-UI-01",
+      "severity": "medium",
+      "releaseBlocker": false,
+      "category": "DOM lifecycle/console",
+      "title": "Repeated restore/import accumulates duplicate World map controls in development AND production",
+      "evidence": [
+        "lifecycle/observations.json",
+        "lifecycle-production/observations.json",
+        "lifecycle/after-battle.png"
+      ],
+      "source": [
+        "apps/web/src/main.tsx:713"
+      ]
+    }
+  ],
+  "performance": {
+    "headlessScale": "benchmark-scale.json",
+    "composedScale": "benchmark-composed.json",
+    "storage": "benchmark-storage.json",
+    "modernBattle": "modern-battle.json",
+    "browserMap": [
+      {
+        "size": "huge",
+        "source": {
+          "synthetic": true,
+          "note": "Synthetic generator4 armies and funded towns; terrain fully explored, live entity fog retained."
+        },
+        "counts": {
+          "cells": 196608,
+          "factions": 32,
+          "armies": 1500,
+          "formations": 1500,
+          "settlements": 32
+        },
+        "turn": 1,
+        "stateHash": "d0d93935",
+        "browser": "152.0.7977.82",
+        "graphics": {
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "maxTextureSize": 8192,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+          "devicePixelRatio": 1,
+          "hardwareConcurrency": 32
+        },
+        "fixturePreparationMs": 949.396584,
+        "navigationMs": 184.74397599999998,
+        "importToArtReadyMs": 2229.139155,
+        "saveBytes": 3849189,
+        "compressedFixtureBytes": 430158,
+        "saves": [
+          {
+            "request": {
+              "id": 3,
+              "type": "save",
+              "at": 28619.799999999814
+            },
+            "response": {
+              "id": 3,
+              "type": "message",
+              "at": 29051.799999999814,
+              "message": "Campaign saved."
+            },
+            "workerAcknowledgementMs": 432
+          },
+          {
+            "request": {
+              "id": 5,
+              "type": "save",
+              "at": 29202.200000000186
+            },
+            "response": {
+              "id": 5,
+              "type": "message",
+              "at": 29768.5,
+              "message": "Campaign saved."
+            },
+            "workerAcknowledgementMs": 566.2999999998137
+          },
+          {
+            "request": {
+              "id": 7,
+              "type": "save",
+              "at": 29952.5
+            },
+            "response": {
+              "id": 7,
+              "type": "message",
+              "at": 30500.400000000373,
+              "message": "Campaign saved."
+            },
+            "workerAcknowledgementMs": 547.9000000003725
+          }
+        ],
+        "exportDownloadMs": 1423.851875999997,
+        "loadMs": 1266.811161000005,
+        "exportHashVerified": true,
+        "errors": [],
+        "scope": "Source distinguishes synthetic giant fixtures from a genuinely grown Standard checkpoint. Snapshot-only save import records partial/from-save history, not the original full archive. 90 warmup plus180 sampled RAF intervals per stage, actual public UI pan/zoom/save/load/export. Browser WebGL draw entry points instrumented; not a driver/GPU timer. performance.memory is main-page JS heap, not worker/renderer/GPU or leak proof. Timings may overlap other agents; see host snapshots.",
+        "samples": [
+          {
+            "stage": "initial",
+            "frameMs": {
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "max": 16.800000000000182
+            },
+            "renderCpuMs": {
+              "p50": 0.20000000018626451,
+              "p95": 0.2999999998137355,
+              "max": 2.3999999994412065
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 1,
+              "p95": 1,
+              "max": 1
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 2573092,
+              "totalTransferBytes": 2573092,
+              "cellTransferBytes": 2359519,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 295,
+              "frameMs": 16.600000000000364,
+              "frameP95Ms": 16.799999999999272,
+              "renderCpuMs": 0.20000000018626451,
+              "visibleCells": 1536,
+              "visibleChunks": 6,
+              "cachedChunks": 6,
+              "chunkRebuilds": 12,
+              "visibleEntities": 48,
+              "zoom": 1,
+              "highlightedCells": 9,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 388.1000000005588,
+              "artFirstRenderCpuMs": 66.5,
+              "visibleSprites": 2,
+              "terrainSpriteCells": 1536,
+              "pooledSprites": 1603,
+              "stackBadges": 1,
+              "pooledStackBadges": 1,
+              "territoryEdges": 18,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": false,
+              "overviewTextureBytes": 0,
+              "rangePerimeterEdges": 28,
+              "visibleLabels": 1,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 716,
+              "cachedTextureBytesEstimate": 25165824
+            },
+            "hash": "d0d93935",
+            "heap": {
+              "usedJSHeapSize": 86903135,
+              "totalJSHeapSize": 105794219,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "near",
+            "frameMs": {
+              "p50": 16.69999999999891,
+              "p95": 16.700000000000728,
+              "max": 16.80000000000109
+            },
+            "renderCpuMs": {
+              "p50": 0.10000000055879354,
+              "p95": 0.20000000018626451,
+              "max": 0.39999999944120646
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 1,
+              "p95": 1,
+              "max": 1
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 2573092,
+              "totalTransferBytes": 2573092,
+              "cellTransferBytes": 2359519,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 590,
+              "frameMs": 16.700000000000728,
+              "frameP95Ms": 16.700000000000728,
+              "renderCpuMs": 0.09999999962747097,
+              "visibleCells": 1024,
+              "visibleChunks": 4,
+              "cachedChunks": 6,
+              "chunkRebuilds": 12,
+              "visibleEntities": 48,
+              "zoom": 1.25,
+              "highlightedCells": 9,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 388.1000000005588,
+              "artFirstRenderCpuMs": 66.5,
+              "visibleSprites": 2,
+              "terrainSpriteCells": 1024,
+              "pooledSprites": 1603,
+              "stackBadges": 1,
+              "pooledStackBadges": 1,
+              "territoryEdges": 18,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": false,
+              "overviewTextureBytes": 0,
+              "rangePerimeterEdges": 28,
+              "visibleLabels": 1,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 716,
+              "cachedTextureBytesEstimate": 25165824
+            },
+            "hash": "d0d93935",
+            "heap": {
+              "usedJSHeapSize": 66284722,
+              "totalJSHeapSize": 104434682,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "panned",
+            "frameMs": {
+              "p50": 16.69999999999891,
+              "p95": 16.700000000000728,
+              "max": 16.799999999999272
+            },
+            "renderCpuMs": {
+              "p50": 0.10000000055879354,
+              "p95": 0.20000000018626451,
+              "max": 0.30000000074505806
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 1,
+              "p95": 1,
+              "max": 1
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 2573092,
+              "totalTransferBytes": 2573092,
+              "cellTransferBytes": 2359519,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 998,
+              "frameMs": 16.600000000002183,
+              "frameP95Ms": 16.700000000000728,
+              "renderCpuMs": 0.10000000055879354,
+              "visibleCells": 1024,
+              "visibleChunks": 4,
+              "cachedChunks": 10,
+              "chunkRebuilds": 16,
+              "visibleEntities": 0,
+              "zoom": 1.25,
+              "highlightedCells": 9,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 388.1000000005588,
+              "artFirstRenderCpuMs": 66.5,
+              "visibleSprites": 0,
+              "terrainSpriteCells": 1024,
+              "pooledSprites": 2666,
+              "stackBadges": 0,
+              "pooledStackBadges": 1,
+              "territoryEdges": 0,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": false,
+              "overviewTextureBytes": 0,
+              "rangePerimeterEdges": 28,
+              "visibleLabels": 0,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 716,
+              "cachedTextureBytesEstimate": 41943040
+            },
+            "hash": "d0d93935",
+            "heap": {
+              "usedJSHeapSize": 60930487,
+              "totalJSHeapSize": 95782163,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "overview",
+            "frameMs": {
+              "p50": 16.69999999999709,
+              "p95": 16.700000000000728,
+              "max": 16.799999999999272
+            },
+            "renderCpuMs": {
+              "p50": 0.09999999962747097,
+              "p95": 0.20000000018626451,
+              "max": 0.20000000018626451
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 1,
+              "p95": 1,
+              "max": 1
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 2573092,
+              "totalTransferBytes": 2573092,
+              "cellTransferBytes": 2359519,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 1286,
+              "frameMs": 16.700000000000728,
+              "frameP95Ms": 16.700000000000728,
+              "renderCpuMs": 0.09999999962747097,
+              "visibleCells": 196608,
+              "visibleChunks": 0,
+              "cachedChunks": 10,
+              "chunkRebuilds": 16,
+              "visibleEntities": 0,
+              "zoom": 0.040229885057471264,
+              "highlightedCells": 9,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 388.1000000005588,
+              "artFirstRenderCpuMs": 66.5,
+              "visibleSprites": 1,
+              "terrainSpriteCells": 0,
+              "pooledSprites": 2666,
+              "stackBadges": 0,
+              "pooledStackBadges": 1,
+              "territoryEdges": 0,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": true,
+              "overviewTextureBytes": 3148800,
+              "rangePerimeterEdges": 28,
+              "visibleLabels": 0,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 716,
+              "cachedTextureBytesEstimate": 41943040
+            },
+            "hash": "d0d93935",
+            "heap": {
+              "usedJSHeapSize": 76810420,
+              "totalJSHeapSize": 107828740,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "restored",
+            "frameMs": {
+              "p50": 16.700000000000728,
+              "p95": 16.700000000000728,
+              "max": 16.80000000000291
+            },
+            "renderCpuMs": {
+              "p50": 0.10000000055879354,
+              "p95": 0.20000000018626451,
+              "max": 0.30000000074505806
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 1,
+              "p95": 1,
+              "max": 1
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 2573092,
+              "totalTransferBytes": 2573092,
+              "cellTransferBytes": 2359519,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 1565,
+              "frameMs": 16.599999999998545,
+              "frameP95Ms": 16.799999999999272,
+              "renderCpuMs": 0.09999999962747097,
+              "visibleCells": 1536,
+              "visibleChunks": 6,
+              "cachedChunks": 10,
+              "chunkRebuilds": 16,
+              "visibleEntities": 48,
+              "zoom": 1,
+              "highlightedCells": 9,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 388.1000000005588,
+              "artFirstRenderCpuMs": 66.5,
+              "visibleSprites": 2,
+              "terrainSpriteCells": 1536,
+              "pooledSprites": 2666,
+              "stackBadges": 1,
+              "pooledStackBadges": 1,
+              "territoryEdges": 18,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": false,
+              "overviewTextureBytes": 3148800,
+              "rangePerimeterEdges": 28,
+              "visibleLabels": 1,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 716,
+              "cachedTextureBytesEstimate": 41943040
+            },
+            "hash": "d0d93935",
+            "heap": {
+              "usedJSHeapSize": 83233380,
+              "totalJSHeapSize": 114238980,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          }
+        ],
+        "uniqueConsoleErrors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version. 1",
+          "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version. 2"
+        ]
+      },
+      {
+        "size": "legendary",
+        "source": {
+          "synthetic": true,
+          "note": "Synthetic generator4 armies and funded towns; terrain fully explored, live entity fog retained."
+        },
+        "counts": {
+          "cells": 307200,
+          "factions": 40,
+          "armies": 4000,
+          "formations": 4000,
+          "settlements": 40
+        },
+        "turn": 1,
+        "stateHash": "2057412e",
+        "browser": "152.0.7977.82",
+        "graphics": {
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "maxTextureSize": 8192,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+          "devicePixelRatio": 1,
+          "hardwareConcurrency": 32
+        },
+        "fixturePreparationMs": 1442.565509,
+        "navigationMs": 209.5679420000015,
+        "importToArtReadyMs": 2704.7870140000014,
+        "saveBytes": 6394072,
+        "compressedFixtureBytes": 665173,
+        "saves": [
+          {
+            "request": {
+              "id": 3,
+              "type": "save",
+              "at": 29193.199999999255
+            },
+            "response": {
+              "id": 3,
+              "type": "message",
+              "at": 30006.39999999944,
+              "message": "Campaign saved."
+            },
+            "workerAcknowledgementMs": 813.2000000001863
+          },
+          {
+            "request": {
+              "id": 5,
+              "type": "save",
+              "at": 30221
+            },
+            "response": {
+              "id": 5,
+              "type": "message",
+              "at": 31092.799999999814,
+              "message": "Campaign saved."
+            },
+            "workerAcknowledgementMs": 871.7999999998137
+          },
+          {
+            "request": {
+              "id": 7,
+              "type": "save",
+              "at": 31333
+            },
+            "response": {
+              "id": 7,
+              "type": "message",
+              "at": 32212.099999999627,
+              "message": "Campaign saved."
+            },
+            "workerAcknowledgementMs": 879.0999999996275
+          }
+        ],
+        "exportDownloadMs": 2108.4626040000003,
+        "loadMs": 2196.421803999998,
+        "exportHashVerified": true,
+        "errors": [],
+        "scope": "Source distinguishes synthetic giant fixtures from a genuinely grown Standard checkpoint. Snapshot-only save import records partial/from-save history, not the original full archive. 90 warmup plus180 sampled RAF intervals per stage, actual public UI pan/zoom/save/load/export. Browser WebGL draw entry points instrumented; not a driver/GPU timer. performance.memory is main-page JS heap, not worker/renderer/GPU or leak proof. Timings may overlap other agents; see host snapshots.",
+        "samples": [
+          {
+            "stage": "initial",
+            "frameMs": {
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "max": 16.800000000000182
+            },
+            "renderCpuMs": {
+              "p50": 0.20000000018626451,
+              "p95": 0.2999999998137355,
+              "max": 3.2000000001862645
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 3,
+              "p95": 3,
+              "max": 3
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 4119978,
+              "totalTransferBytes": 4119978,
+              "cellTransferBytes": 3686623,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 292,
+              "frameMs": 16.699999999999818,
+              "frameP95Ms": 16.700000000000728,
+              "renderCpuMs": 0.10000000055879354,
+              "visibleCells": 1536,
+              "visibleChunks": 6,
+              "cachedChunks": 6,
+              "chunkRebuilds": 12,
+              "visibleEntities": 101,
+              "zoom": 1,
+              "highlightedCells": 32,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 368.70000000018626,
+              "artFirstRenderCpuMs": 63.299999999813735,
+              "visibleSprites": 2,
+              "terrainSpriteCells": 1536,
+              "pooledSprites": 1591,
+              "stackBadges": 1,
+              "pooledStackBadges": 1,
+              "territoryEdges": 18,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": false,
+              "overviewTextureBytes": 0,
+              "rangePerimeterEdges": 46,
+              "visibleLabels": 1,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 715,
+              "cachedTextureBytesEstimate": 25165824
+            },
+            "hash": "2057412e",
+            "heap": {
+              "usedJSHeapSize": 93661649,
+              "totalJSHeapSize": 153710969,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "near",
+            "frameMs": {
+              "p50": 16.69999999999891,
+              "p95": 16.700000000000728,
+              "max": 16.80000000000109
+            },
+            "renderCpuMs": {
+              "p50": 0.10000000055879354,
+              "p95": 0.20000000018626451,
+              "max": 0.30000000074505806
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 3,
+              "p95": 3,
+              "max": 3
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 4119978,
+              "totalTransferBytes": 4119978,
+              "cellTransferBytes": 3686623,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 578,
+              "frameMs": 16.69999999999891,
+              "frameP95Ms": 16.799999999999272,
+              "renderCpuMs": 0.20000000018626451,
+              "visibleCells": 1024,
+              "visibleChunks": 4,
+              "cachedChunks": 6,
+              "chunkRebuilds": 12,
+              "visibleEntities": 101,
+              "zoom": 1.25,
+              "highlightedCells": 32,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 368.70000000018626,
+              "artFirstRenderCpuMs": 63.299999999813735,
+              "visibleSprites": 2,
+              "terrainSpriteCells": 1024,
+              "pooledSprites": 1591,
+              "stackBadges": 1,
+              "pooledStackBadges": 1,
+              "territoryEdges": 18,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": false,
+              "overviewTextureBytes": 0,
+              "rangePerimeterEdges": 46,
+              "visibleLabels": 1,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 715,
+              "cachedTextureBytesEstimate": 25165824
+            },
+            "hash": "2057412e",
+            "heap": {
+              "usedJSHeapSize": 100629504,
+              "totalJSHeapSize": 153974560,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "panned",
+            "frameMs": {
+              "p50": 16.700000000000728,
+              "p95": 16.700000000000728,
+              "max": 16.80000000000291
+            },
+            "renderCpuMs": {
+              "p50": 0.09999999962747097,
+              "p95": 0.20000000018626451,
+              "max": 0.30000000074505806
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 2,
+              "p95": 2,
+              "max": 2
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 4119978,
+              "totalTransferBytes": 4119978,
+              "cellTransferBytes": 3686623,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 994,
+              "frameMs": 16.599999999998545,
+              "frameP95Ms": 16.700000000000728,
+              "renderCpuMs": 0,
+              "visibleCells": 1024,
+              "visibleChunks": 4,
+              "cachedChunks": 11,
+              "chunkRebuilds": 17,
+              "visibleEntities": 0,
+              "zoom": 1.25,
+              "highlightedCells": 32,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 368.70000000018626,
+              "artFirstRenderCpuMs": 63.299999999813735,
+              "visibleSprites": 0,
+              "terrainSpriteCells": 1024,
+              "pooledSprites": 2934,
+              "stackBadges": 0,
+              "pooledStackBadges": 1,
+              "territoryEdges": 0,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": false,
+              "overviewTextureBytes": 0,
+              "rangePerimeterEdges": 46,
+              "visibleLabels": 0,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 715,
+              "cachedTextureBytesEstimate": 46137344
+            },
+            "hash": "2057412e",
+            "heap": {
+              "usedJSHeapSize": 79437728,
+              "totalJSHeapSize": 136008092,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "overview",
+            "frameMs": {
+              "p50": 16.700000000000728,
+              "p95": 16.799999999999272,
+              "max": 16.80000000000291
+            },
+            "renderCpuMs": {
+              "p50": 0.09999999962747097,
+              "p95": 0.20000000018626451,
+              "max": 0.20000000018626451
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 1,
+              "p95": 1,
+              "max": 1
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 4119978,
+              "totalTransferBytes": 4119978,
+              "cellTransferBytes": 3686623,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 1280,
+              "frameMs": 16.69999999999709,
+              "frameP95Ms": 16.799999999999272,
+              "renderCpuMs": 0.09999999962747097,
+              "visibleCells": 307200,
+              "visibleChunks": 0,
+              "cachedChunks": 11,
+              "chunkRebuilds": 17,
+              "visibleEntities": 0,
+              "zoom": 0.03218390804597701,
+              "highlightedCells": 32,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 368.70000000018626,
+              "artFirstRenderCpuMs": 63.299999999813735,
+              "visibleSprites": 1,
+              "terrainSpriteCells": 0,
+              "pooledSprites": 2934,
+              "stackBadges": 0,
+              "pooledStackBadges": 1,
+              "territoryEdges": 0,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": true,
+              "overviewTextureBytes": 4919040,
+              "rangePerimeterEdges": 46,
+              "visibleLabels": 0,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 715,
+              "cachedTextureBytesEstimate": 46137344
+            },
+            "hash": "2057412e",
+            "heap": {
+              "usedJSHeapSize": 76194693,
+              "totalJSHeapSize": 140928561,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "restored",
+            "frameMs": {
+              "p50": 16.700000000000728,
+              "p95": 16.799999999999272,
+              "max": 16.80000000000291
+            },
+            "renderCpuMs": {
+              "p50": 0.10000000055879354,
+              "p95": 0.20000000018626451,
+              "max": 0.2999999998137355
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 3,
+              "p95": 3,
+              "max": 3
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 4119978,
+              "totalTransferBytes": 4119978,
+              "cellTransferBytes": 3686623,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 1561,
+              "frameMs": 16.799999999999272,
+              "frameP95Ms": 16.799999999999272,
+              "renderCpuMs": 0,
+              "visibleCells": 1536,
+              "visibleChunks": 6,
+              "cachedChunks": 11,
+              "chunkRebuilds": 17,
+              "visibleEntities": 101,
+              "zoom": 1,
+              "highlightedCells": 32,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 368.70000000018626,
+              "artFirstRenderCpuMs": 63.299999999813735,
+              "visibleSprites": 2,
+              "terrainSpriteCells": 1536,
+              "pooledSprites": 2934,
+              "stackBadges": 1,
+              "pooledStackBadges": 1,
+              "territoryEdges": 18,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": false,
+              "overviewTextureBytes": 4919040,
+              "rangePerimeterEdges": 46,
+              "visibleLabels": 1,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 715,
+              "cachedTextureBytesEstimate": 46137344
+            },
+            "hash": "2057412e",
+            "heap": {
+              "usedJSHeapSize": 82765269,
+              "totalJSHeapSize": 140928561,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          }
+        ],
+        "uniqueConsoleErrors": [
+          "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version. 1",
+          "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version. 2"
+        ]
+      },
+      {
+        "size": "mature-standard",
+        "source": {
+          "path": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/campaigns/runs/D-standard24-seed74-300/turn-200.json.gz",
+          "compressedSha256": "369817ecd04e90dbdb98b9384c9c62ec837e68ec7363795887acc850452a3763",
+          "synthetic": false,
+          "note": "Read-only checkpoint from campaign agent ordinary AI run; this probe did not grow that campaign or alter exploration."
+        },
+        "counts": {
+          "cells": 98304,
+          "factions": 24,
+          "armies": 470,
+          "formations": 913,
+          "settlements": 250
+        },
+        "turn": 200,
+        "stateHash": "a0a1d110",
+        "browser": "152.0.7977.82",
+        "graphics": {
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "maxTextureSize": 8192,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+          "devicePixelRatio": 1,
+          "hardwareConcurrency": 32
+        },
+        "fixturePreparationMs": 681.7120839999989,
+        "navigationMs": 212.09873699999298,
+        "importToArtReadyMs": 1814.6839310000069,
+        "saveBytes": 4561828,
+        "compressedFixtureBytes": 657366,
+        "saves": [
+          {
+            "request": {
+              "id": 3,
+              "type": "save",
+              "at": 28796.599999999627
+            },
+            "response": {
+              "id": 3,
+              "type": "message",
+              "at": 29257.599999999627,
+              "message": "Campaign saved."
+            },
+            "workerAcknowledgementMs": 461
+          },
+          {
+            "request": {
+              "id": 5,
+              "type": "save",
+              "at": 29475.099999999627
+            },
+            "response": {
+              "id": 5,
+              "type": "message",
+              "at": 30011.299999999814,
+              "message": "Campaign saved."
+            },
+            "workerAcknowledgementMs": 536.2000000001863
+          },
+          {
+            "request": {
+              "id": 7,
+              "type": "save",
+              "at": 30227.099999999627
+            },
+            "response": {
+              "id": 7,
+              "type": "message",
+              "at": 30743.5,
+              "message": "Campaign saved."
+            },
+            "workerAcknowledgementMs": 516.4000000003725
+          }
+        ],
+        "exportDownloadMs": 1374.524854000003,
+        "loadMs": 1094.6414619999996,
+        "exportHashVerified": true,
+        "errors": [],
+        "scope": "Source distinguishes synthetic giant fixtures from a genuinely grown Standard checkpoint. Snapshot-only save import records partial/from-save history, not the original full archive. 90 warmup plus180 sampled RAF intervals per stage, actual public UI pan/zoom/save/load/export. Browser WebGL draw entry points instrumented; not a driver/GPU timer. performance.memory is main-page JS heap, not worker/renderer/GPU or leak proof. Timings may overlap other agents; see host snapshots.",
+        "samples": [
+          {
+            "stage": "initial",
+            "frameMs": {
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "max": 16.800000000000182
+            },
+            "renderCpuMs": {
+              "p50": 0.20000000018626451,
+              "p95": 0.30000000074505806,
+              "max": 2.400000000372529
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 3,
+              "p95": 3,
+              "max": 3
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 326641,
+              "totalTransferBytes": 326641,
+              "cellTransferBytes": 184943,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 290,
+              "frameMs": 16.600000000000364,
+              "frameP95Ms": 16.700000000000728,
+              "renderCpuMs": 0,
+              "visibleCells": 1040,
+              "visibleChunks": 9,
+              "cachedChunks": 9,
+              "chunkRebuilds": 18,
+              "visibleEntities": 2,
+              "zoom": 1,
+              "highlightedCells": 78,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 381.40000000037253,
+              "artFirstRenderCpuMs": 68.29999999981374,
+              "visibleSprites": 2,
+              "terrainSpriteCells": 1040,
+              "pooledSprites": 1089,
+              "stackBadges": 0,
+              "pooledStackBadges": 0,
+              "territoryEdges": 72,
+              "improvementProps": 0,
+              "riverSegments": 95,
+              "roadSegments": 14,
+              "districtStreetSegments": 12,
+              "overview": false,
+              "overviewTextureBytes": 0,
+              "rangePerimeterEdges": 74,
+              "visibleLabels": 2,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 713,
+              "cachedTextureBytesEstimate": 31522816
+            },
+            "hash": "a0a1d110",
+            "heap": {
+              "usedJSHeapSize": 56873502,
+              "totalJSHeapSize": 92209606,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "near",
+            "frameMs": {
+              "p50": 16.69999999999891,
+              "p95": 16.700000000000728,
+              "max": 16.80000000000109
+            },
+            "renderCpuMs": {
+              "p50": 0.20000000018626451,
+              "p95": 0.2999999998137355,
+              "max": 0.5
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 3,
+              "p95": 3,
+              "max": 3
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 326641,
+              "totalTransferBytes": 326641,
+              "cellTransferBytes": 184943,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 586,
+              "frameMs": 16.799999999999272,
+              "frameP95Ms": 16.700000000000728,
+              "renderCpuMs": 0.20000000018626451,
+              "visibleCells": 1040,
+              "visibleChunks": 9,
+              "cachedChunks": 9,
+              "chunkRebuilds": 18,
+              "visibleEntities": 2,
+              "zoom": 1.25,
+              "highlightedCells": 78,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 381.40000000037253,
+              "artFirstRenderCpuMs": 68.29999999981374,
+              "visibleSprites": 2,
+              "terrainSpriteCells": 1040,
+              "pooledSprites": 1089,
+              "stackBadges": 0,
+              "pooledStackBadges": 0,
+              "territoryEdges": 72,
+              "improvementProps": 0,
+              "riverSegments": 95,
+              "roadSegments": 14,
+              "districtStreetSegments": 12,
+              "overview": false,
+              "overviewTextureBytes": 0,
+              "rangePerimeterEdges": 74,
+              "visibleLabels": 2,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 713,
+              "cachedTextureBytesEstimate": 31522816
+            },
+            "hash": "a0a1d110",
+            "heap": {
+              "usedJSHeapSize": 58081610,
+              "totalJSHeapSize": 84228734,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "panned",
+            "frameMs": {
+              "p50": 16.69999999999891,
+              "p95": 16.799999999999272,
+              "max": 16.80000000000291
+            },
+            "renderCpuMs": {
+              "p50": 0.10000000055879354,
+              "p95": 0.20000000018626451,
+              "max": 0.30000000074505806
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 2,
+              "p95": 2,
+              "max": 2
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 326641,
+              "totalTransferBytes": 326641,
+              "cellTransferBytes": 184943,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 1008,
+              "frameMs": 16.599999999998545,
+              "frameP95Ms": 16.799999999999272,
+              "renderCpuMs": 0.30000000074505806,
+              "visibleCells": 867,
+              "visibleChunks": 6,
+              "cachedChunks": 13,
+              "chunkRebuilds": 22,
+              "visibleEntities": 0,
+              "zoom": 1.25,
+              "highlightedCells": 78,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 381.40000000037253,
+              "artFirstRenderCpuMs": 68.29999999981374,
+              "visibleSprites": 0,
+              "terrainSpriteCells": 867,
+              "pooledSprites": 1719,
+              "stackBadges": 0,
+              "pooledStackBadges": 0,
+              "territoryEdges": 103,
+              "improvementProps": 0,
+              "riverSegments": 83,
+              "roadSegments": 15,
+              "districtStreetSegments": 0,
+              "overview": false,
+              "overviewTextureBytes": 0,
+              "rangePerimeterEdges": 74,
+              "visibleLabels": 0,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 713,
+              "cachedTextureBytesEstimate": 48300032
+            },
+            "hash": "a0a1d110",
+            "heap": {
+              "usedJSHeapSize": 63256197,
+              "totalJSHeapSize": 96963729,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "overview",
+            "frameMs": {
+              "p50": 16.700000000000728,
+              "p95": 16.799999999999272,
+              "max": 16.80000000000291
+            },
+            "renderCpuMs": {
+              "p50": 0.09999999962747097,
+              "p95": 0.20000000018626451,
+              "max": 0.20000000018626451
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 1,
+              "p95": 1,
+              "max": 1
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 326641,
+              "totalTransferBytes": 326641,
+              "cellTransferBytes": 184943,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 1303,
+              "frameMs": 16.599999999998545,
+              "frameP95Ms": 16.799999999999272,
+              "renderCpuMs": 0.10000000055879354,
+              "visibleCells": 13828,
+              "visibleChunks": 0,
+              "cachedChunks": 13,
+              "chunkRebuilds": 22,
+              "visibleEntities": 0,
+              "zoom": 0.0603448275862069,
+              "highlightedCells": 78,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 381.40000000037253,
+              "artFirstRenderCpuMs": 68.29999999981374,
+              "visibleSprites": 1,
+              "terrainSpriteCells": 0,
+              "pooledSprites": 1719,
+              "stackBadges": 0,
+              "pooledStackBadges": 0,
+              "territoryEdges": 0,
+              "improvementProps": 0,
+              "riverSegments": 0,
+              "roadSegments": 0,
+              "districtStreetSegments": 0,
+              "overview": true,
+              "overviewTextureBytes": 1574912,
+              "rangePerimeterEdges": 74,
+              "visibleLabels": 0,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 713,
+              "cachedTextureBytesEstimate": 48300032
+            },
+            "hash": "a0a1d110",
+            "heap": {
+              "usedJSHeapSize": 74049932,
+              "totalJSHeapSize": 105354552,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          },
+          {
+            "stage": "restored",
+            "frameMs": {
+              "p50": 16.700000000000728,
+              "p95": 16.700000000000728,
+              "max": 16.799999999999272
+            },
+            "renderCpuMs": {
+              "p50": 0.10000000055879354,
+              "p95": 0.20000000018626451,
+              "max": 0.30000000074505806
+            },
+            "drawCallsPerRafInterval": {
+              "p50": 3,
+              "p95": 3,
+              "max": 3
+            },
+            "metrics": {
+              "generationMs": 0,
+              "commandMs": 0,
+              "aiMs": 0,
+              "transferBytes": 326641,
+              "totalTransferBytes": 326641,
+              "cellTransferBytes": 184943,
+              "landQueryCount": 0,
+              "landQueryBytes": 0,
+              "totalLandQueryBytes": 0,
+              "developmentQueryCount": 0,
+              "developmentQueryBytes": 0,
+              "totalDevelopmentQueryBytes": 0,
+              "renderer": "webgl",
+              "frameCount": 1583,
+              "frameMs": 16.69999999999709,
+              "frameP95Ms": 16.700000000000728,
+              "renderCpuMs": 0.09999999962747097,
+              "visibleCells": 1040,
+              "visibleChunks": 9,
+              "cachedChunks": 13,
+              "chunkRebuilds": 22,
+              "visibleEntities": 2,
+              "zoom": 1,
+              "highlightedCells": 78,
+              "routeCells": 0,
+              "previewCells": 0,
+              "atlasPages": 2,
+              "residentAtlasBytesEstimate": 17825792,
+              "artLoadMs": 381.40000000037253,
+              "artFirstRenderCpuMs": 68.29999999981374,
+              "visibleSprites": 2,
+              "terrainSpriteCells": 1040,
+              "pooledSprites": 1719,
+              "stackBadges": 0,
+              "pooledStackBadges": 0,
+              "territoryEdges": 72,
+              "improvementProps": 0,
+              "riverSegments": 95,
+              "roadSegments": 14,
+              "districtStreetSegments": 12,
+              "overview": false,
+              "overviewTextureBytes": 1574912,
+              "rangePerimeterEdges": 74,
+              "visibleLabels": 2,
+              "selectedCells": 1,
+              "hoveredCells": 0,
+              "maxCachedChunkWidth": 837,
+              "maxCachedChunkHeight": 713,
+              "cachedTextureBytesEstimate": 48300032
+            },
+            "hash": "a0a1d110",
+            "heap": {
+              "usedJSHeapSize": 56825000,
+              "totalJSHeapSize": 107588648,
+              "jsHeapSizeLimit": 4395630592
+            },
+            "rawSamples": 180,
+            "cpuSamples": 180,
+            "drawSamples": 180
+          }
+        ],
+        "uniqueConsoleErrors": [
+          "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version. 1",
+          "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version. 2"
+        ]
+      }
+    ],
+    "browserBattle": {
+      "gameplay-artifacts": {
+        "artifact": "gameplay-artifacts/battle-performance-authore-4d2f5-red-renderer-and-bounded-FX/battle-render.json",
+        "version": 1,
+        "measuredAt": "2026-09-09T05:09:56.845Z",
+        "workload": "Authored funded veteran20vs20:40real formations,2marshals,2Waykeepers,2engineers; no injected battle outcomes. Real Brace command;120warmed animation frames. Not a campaign-growth benchmark.",
+        "isolation": "One Playwright worker; host exclusivity must be confirmed by the coordinating run, not inferred by this test.",
+        "contentHash": "b79c78ed",
+        "originHash": "3a741d8a",
+        "commandHash": "77f3692a",
+        "serializedBytes": 33478,
+        "graphics": {
+          "backend": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "vendor": "Google Inc. (Google)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+        },
+        "errors": [],
+        "sample": {
+          "frames": 120,
+          "frameMs": {
+            "p50": 50,
+            "p95": 66.70000000000073,
+            "max": 66.79999999999927
+          },
+          "renderCpuMs": {
+            "p50": 0.7000000001862645,
+            "p95": 8.099999999627471
+          },
+          "activeFrames": 15,
+          "maxEffects": 12,
+          "maxActors": 46,
+          "maxPool": 12,
+          "maxSoldiers": 2240,
+          "maxSoldierPool": 2240,
+          "metrics": {
+            "generationMs": 0,
+            "commandMs": 4.400000000372529,
+            "aiMs": 0,
+            "transferBytes": 972930,
+            "totalTransferBytes": 1434901,
+            "cellTransferBytes": 39,
+            "landQueryCount": 0,
+            "landQueryBytes": 0,
+            "totalLandQueryBytes": 0,
+            "developmentQueryCount": 0,
+            "developmentQueryBytes": 0,
+            "totalDevelopmentQueryBytes": 0,
+            "renderer": "webgl",
+            "frameCount": 394,
+            "frameMs": 50,
+            "frameP95Ms": 66.70000000000073,
+            "renderCpuMs": 0.39999999944120646,
+            "visibleCells": 70,
+            "visibleChunks": 1,
+            "cachedChunks": 1,
+            "chunkRebuilds": 2,
+            "visibleEntities": 3,
+            "zoom": 1,
+            "highlightedCells": 0,
+            "routeCells": 0,
+            "previewCells": 0,
+            "atlasPages": 5,
+            "residentAtlasBytesEstimate": 55574528,
+            "artLoadMs": 302.59999999962747,
+            "artFirstRenderCpuMs": 49.5,
+            "visibleSprites": 7,
+            "terrainSpriteCells": 70,
+            "pooledSprites": 81,
+            "stackBadges": 0,
+            "pooledStackBadges": 0,
+            "territoryEdges": 18,
+            "improvementProps": 0,
+            "riverSegments": 0,
+            "roadSegments": 0,
+            "districtStreetSegments": 2,
+            "overview": false,
+            "overviewTextureBytes": 0,
+            "rangePerimeterEdges": 0,
+            "visibleLabels": 1,
+            "selectedCells": 1,
+            "hoveredCells": 0,
+            "maxCachedChunkWidth": 510,
+            "maxCachedChunkHeight": 406,
+            "cachedTextureBytesEstimate": 1048576
+          }
+        }
+      },
+      "perf-rerun-artifacts": {
+        "artifact": "perf-rerun-artifacts/battle-performance-authore-4d2f5-red-renderer-and-bounded-FX/battle-render.json",
+        "version": 1,
+        "measuredAt": "2026-09-09T05:34:42.481Z",
+        "workload": "Authored funded veteran20vs20:40real formations,2marshals,2Waykeepers,2engineers; no injected battle outcomes. Real Brace command;120warmed animation frames. Not a campaign-growth benchmark.",
+        "isolation": "One Playwright worker; host exclusivity must be confirmed by the coordinating run, not inferred by this test.",
+        "contentHash": "b79c78ed",
+        "originHash": "3a741d8a",
+        "commandHash": "77f3692a",
+        "serializedBytes": 33478,
+        "graphics": {
+          "backend": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "vendor": "Google Inc. (Google)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+        },
+        "errors": [],
+        "sample": {
+          "frames": 120,
+          "frameMs": {
+            "p50": 50,
+            "p95": 66.69999999999891,
+            "max": 66.70000000000073
+          },
+          "renderCpuMs": {
+            "p50": 0.7000000001862645,
+            "p95": 7.8999999994412065
+          },
+          "activeFrames": 15,
+          "maxEffects": 12,
+          "maxActors": 46,
+          "maxPool": 12,
+          "maxSoldiers": 2240,
+          "maxSoldierPool": 2240,
+          "metrics": {
+            "generationMs": 0,
+            "commandMs": 3.2000000001862645,
+            "aiMs": 0,
+            "transferBytes": 972930,
+            "totalTransferBytes": 1434901,
+            "cellTransferBytes": 39,
+            "landQueryCount": 0,
+            "landQueryBytes": 0,
+            "totalLandQueryBytes": 0,
+            "developmentQueryCount": 0,
+            "developmentQueryBytes": 0,
+            "totalDevelopmentQueryBytes": 0,
+            "renderer": "webgl",
+            "frameCount": 401,
+            "frameMs": 50,
+            "frameP95Ms": 66.70000000000073,
+            "renderCpuMs": 1.199999999254942,
+            "visibleCells": 70,
+            "visibleChunks": 1,
+            "cachedChunks": 1,
+            "chunkRebuilds": 2,
+            "visibleEntities": 3,
+            "zoom": 1,
+            "highlightedCells": 0,
+            "routeCells": 0,
+            "previewCells": 0,
+            "atlasPages": 5,
+            "residentAtlasBytesEstimate": 55574528,
+            "artLoadMs": 323.19999999925494,
+            "artFirstRenderCpuMs": 48.700000000186265,
+            "visibleSprites": 7,
+            "terrainSpriteCells": 70,
+            "pooledSprites": 81,
+            "stackBadges": 0,
+            "pooledStackBadges": 0,
+            "territoryEdges": 18,
+            "improvementProps": 0,
+            "riverSegments": 0,
+            "roadSegments": 0,
+            "districtStreetSegments": 2,
+            "overview": false,
+            "overviewTextureBytes": 0,
+            "rangePerimeterEdges": 0,
+            "visibleLabels": 1,
+            "selectedCells": 1,
+            "hoveredCells": 0,
+            "maxCachedChunkWidth": 510,
+            "maxCachedChunkHeight": 406,
+            "cachedTextureBytesEstimate": 1048576
+          }
+        }
+      }
+    },
+    "lifecycle": {
+      "lifecycle": {
+        "artifact": "lifecycle/observations.json",
+        "browser": "152.0.7977.82",
+        "pageErrors": [],
+        "states": [
+          {
+            "stage": "generated-small12",
+            "controls": 1,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "load-1",
+            "controls": 2,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "load-2",
+            "controls": 3,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "load-3",
+            "controls": 4,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "load-4",
+            "controls": 5,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "import-1",
+            "controls": 6,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "import-2",
+            "controls": 7,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "import-3",
+            "controls": 8,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "import-4",
+            "controls": 9,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "after-battle",
+            "controls": 9,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "full-document-reload",
+            "controls": 1,
+            "canvases": 1,
+            "debugHookPresent": null,
+            "listeners": {
+              "window": 3,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          }
+        ]
+      },
+      "lifecycle-production": {
+        "artifact": "lifecycle-production/observations.json",
+        "browser": "152.0.7977.82",
+        "pageErrors": [],
+        "states": [
+          {
+            "stage": "generated-small12",
+            "controls": 1,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "load-1",
+            "controls": 2,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "load-2",
+            "controls": 3,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "load-3",
+            "controls": 4,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "load-4",
+            "controls": 5,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "import-1",
+            "controls": 6,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "import-2",
+            "controls": 7,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "import-3",
+            "controls": 8,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "import-4",
+            "controls": 9,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "after-battle",
+            "controls": 9,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          },
+          {
+            "stage": "full-document-reload",
+            "controls": 1,
+            "canvases": 1,
+            "debugHookPresent": false,
+            "listeners": {
+              "window": 2,
+              "document": 5,
+              "document.querySelector(\"canvas\")": 12
+            }
+          }
+        ]
+      }
+    },
+    "largeArchive": {
+      "source": "captured-standard-long-748291.json.gz",
+      "compressedSha256": "56a81b5fbc91c0bea89b8cc5f78ace519d7fa0d6109545f7444af5dcce159780",
+      "compressedCaptureBytes": 9008518,
+      "snapshotBytes": 10912745,
+      "envelopeBytes": 93161744,
+      "limitBytes": 67108864,
+      "turn": 446,
+      "armies": 512,
+      "formations": 1357,
+      "settlements": 357,
+      "records": 114244,
+      "recordedBattles": 1496,
+      "snapshotError": null,
+      "sourceHash": "0f0b85f5",
+      "scope": "Metadata-only inspection of actual generated Standard24Long completed ordinary AI archive. Exact envelope byte count reconstructed with production envelope/checksum format; no payload values changed. Full replay of this over-limit archive was not run. Original unmodified benchmark and capture copy both fail serializeCampaign at the64MiB guard."
+    }
+  },
+  "missingCertification": [
+    "Real GPU desktop performance",
+    "Physical mobile/touch and actual device thermal/memory limits",
+    "Firefox and Safari/WebKit",
+    "Clean online dependency install on CI Node22; audited clean Node26 archive reused offline store",
+    "Deployment to live GitHub Pages/subpath infrastructure",
+    "Full successful default pnpm bench:chronicles matrix (exits1)",
+    "Portable save/export/replay of the over-limit completed Standard24Long archive",
+    "Full long/epic Huge/Legendary campaign completion",
+    "Long-duration detached-node/worker/GPU memory leak certification",
+    "Browser process crash/power loss, GPU context loss and worker messageerror recovery injection",
+    "Broad historical user-save migration corpus beyond checked-in fixtures"
+  ],
+  "cleanup": {
+    "ownedPortsStopped": [
+      4173,
+      4174
+    ],
+    "preservedPorts": [
+      5173,
+      5191
+    ],
+    "preservedHttpStatus": {
+      "5173": 200,
+      "5191": 200
+    },
+    "ownUnfinishedProcesses": 0,
+    "log": "logs/cleanup-verification.log"
+  },
+  "workflow": "reproduction-notes.md"
+}

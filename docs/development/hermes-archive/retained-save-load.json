@@ -1,0 +1,60 @@
+{
+  "source": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/captured-standard-long-748291.json.gz",
+  "sha256": "56a81b5fbc91c0bea89b8cc5f78ace519d7fa0d6109545f7444af5dcce159780",
+  "phase": "save-load",
+  "runtime": "v26.7.0",
+  "totalMs": 14711.275012,
+  "measurements": {
+    "saveMs": 1706.6542129999998,
+    "cold": {
+      "suffixRecords": 114244,
+      "encodedHistoryBytes": 81486907,
+      "newBlobs": 448,
+      "historyPayloadWrites": 1344,
+      "logicalBytes": 93161744,
+      "snapshotBytes": 10912745,
+      "recordBytes": 80185627,
+      "historyBlobCount": 447,
+      "historyStoredBytes": 80402644
+    },
+    "noopMs": 887.743716,
+    "noop": {
+      "suffixRecords": 0,
+      "encodedHistoryBytes": 0,
+      "newBlobs": 0,
+      "historyPayloadWrites": 0,
+      "logicalBytes": 93161744,
+      "snapshotBytes": 10912745,
+      "recordBytes": 80185627,
+      "historyBlobCount": 447,
+      "historyStoredBytes": 80402644
+    },
+    "loadMs": 2907.423402999999,
+    "storage": {
+      "generations": 3,
+      "blobs": 448,
+      "replicas": 1344,
+      "largestBlob": 1084263,
+      "historyPayloadBytesAllReplicas": 244460721,
+      "manifestBytes": 11777915
+    },
+    "quotaRecovery": true,
+    "corruptionRecovery": true
+  },
+  "records": 114244,
+  "battles": 1496,
+  "coverage": "complete",
+  "initialSaveVersion": 16,
+  "finalHashVersion": 16,
+  "hash16": "0f0b85f5",
+  "currentHash": "2142bf9e",
+  "memory": {
+    "rss": 2806927360,
+    "heapTotal": 2530627584,
+    "heapUsed": 2291093864,
+    "external": 24559043,
+    "arrayBuffers": 21905141
+  },
+  "maxRssKiB": 2741140,
+  "scope": "Real retained campaign. Fake IndexedDB is algorithm/transaction evidence, NOT browser disk latency. Phase times exclude input gzip parse; peak process RSS includes it and ownership/validation clones. Separate processes, no forced GC; not a browser or sustained-memory certificate."
+}

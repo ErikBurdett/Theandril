@@ -1,0 +1,140 @@
+
+Running 1 test using 1 worker
+
+(node:318683) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"stage":"generated-small12","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":false,"listeners":{"window":16,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-1","controls":2,"canvases":1,"mapNodes":1,"debugHookPresent":false,"listeners":{"window":16,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-2","controls":3,"canvases":1,"mapNodes":1,"debugHookPresent":false,"listeners":{"window":16,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-3","controls":4,"canvases":1,"mapNodes":1,"debugHookPresent":false,"listeners":{"window":16,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-4","controls":5,"canvases":1,"mapNodes":1,"debugHookPresent":false,"listeners":{"window":16,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-1-small","controls":6,"canvases":1,"mapNodes":1,"debugHookPresent":false,"listeners":{"window":16,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✘  1 tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas (9.8s)
+
+
+  1) tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas 
+
+    Error: load-1
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 2
+
+      40 |     records.push({ stage, ...dom, listeners }); await saveEvidence();
+      41 |     console.log(JSON.stringify({ stage, ...dom, listeners }));
+    > 42 |     expect.soft(dom.controls, stage).toBe(1); expect.soft(dom.canvases, stage).toBe(1);
+         |                                      ^
+      43 |     initialListeners ??= listeners;
+      44 |     expect.soft(listeners, `${stage} attached listener counts`).toEqual(initialListeners);
+      45 |   };
+        at capture (/home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:42:38)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:65:7
+
+    Error: load-2
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 3
+
+      40 |     records.push({ stage, ...dom, listeners }); await saveEvidence();
+      41 |     console.log(JSON.stringify({ stage, ...dom, listeners }));
+    > 42 |     expect.soft(dom.controls, stage).toBe(1); expect.soft(dom.canvases, stage).toBe(1);
+         |                                      ^
+      43 |     initialListeners ??= listeners;
+      44 |     expect.soft(listeners, `${stage} attached listener counts`).toEqual(initialListeners);
+      45 |   };
+        at capture (/home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:42:38)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:65:7
+
+    Error: load-3
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 4
+
+      40 |     records.push({ stage, ...dom, listeners }); await saveEvidence();
+      41 |     console.log(JSON.stringify({ stage, ...dom, listeners }));
+    > 42 |     expect.soft(dom.controls, stage).toBe(1); expect.soft(dom.canvases, stage).toBe(1);
+         |                                      ^
+      43 |     initialListeners ??= listeners;
+      44 |     expect.soft(listeners, `${stage} attached listener counts`).toEqual(initialListeners);
+      45 |   };
+        at capture (/home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:42:38)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:65:7
+
+    Error: load-4
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 5
+
+      40 |     records.push({ stage, ...dom, listeners }); await saveEvidence();
+      41 |     console.log(JSON.stringify({ stage, ...dom, listeners }));
+    > 42 |     expect.soft(dom.controls, stage).toBe(1); expect.soft(dom.canvases, stage).toBe(1);
+         |                                      ^
+      43 |     initialListeners ??= listeners;
+      44 |     expect.soft(listeners, `${stage} attached listener counts`).toEqual(initialListeners);
+      45 |   };
+        at capture (/home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:42:38)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:65:7
+
+    Error: import-1-small
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 6
+
+      40 |     records.push({ stage, ...dom, listeners }); await saveEvidence();
+      41 |     console.log(JSON.stringify({ stage, ...dom, listeners }));
+    > 42 |     expect.soft(dom.controls, stage).toBe(1); expect.soft(dom.canvases, stage).toBe(1);
+         |                                      ^
+      43 |     initialListeners ??= listeners;
+      44 |     expect.soft(listeners, `${stage} attached listener counts`).toEqual(initialListeners);
+      45 |   };
+        at capture (/home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:42:38)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:71:7
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Imported campaign"
+    Received string:    "!Cannot read save: Unsupported save version 17."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        14 × locator resolved to <div role="alert" aria-live="polite" class="feedback error" data-testid="feedback">…</div>
+           - unexpected value "!Cannot read save: Unsupported save version 17."
+
+
+      68 |     for (let index = 1; index <= 4; index++) {
+      69 |       await page.locator('input[type=file]').setInputFiles({ name: `replacement-${index}.theandril`, mimeType: 'application/gzip', buffer: index % 2 ? small : tiny });
+    > 70 |       await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+         |                                                  ^
+      71 |       await capture(`import-${index}-${index % 2 ? 'small' : 'tiny'}`);
+      72 |     }
+      73 |     await page.locator('input[type=file]').setInputFiles({ name: 'corrupt.theandril', mimeType: 'application/gzip', buffer: Buffer.from('not a save') });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:70:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r23-production-baseline-red/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/hermes-ui/r23-production-baseline-red/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r23-production-baseline-red/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/hermes-ui/r23-production-baseline-red/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas 

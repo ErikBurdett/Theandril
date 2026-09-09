@@ -1,0 +1,27 @@
+{
+  "scope": "Parent validation of retained Chromium evidence, source/artifact hash alignment and reported outcomes; not a new parent browser run or independent review verdict. Parent freshly executed the 753-test non-AI suite and 125150-command legacy replay separately.",
+  "probeCases": 3,
+  "probeSourceHashVerified": true,
+  "archiveHashVerified": true,
+  "originalRecords": 114244,
+  "originalBattles": 1496,
+  "originalSeal": "0f0b85f5",
+  "retainedEqualityVerified": true,
+  "archiveAppendOutcome": {
+    "ok": false,
+    "error": "This campaign has ended in victory.",
+    "events": []
+  },
+  "sampleSaveMs": {
+    "cold": 2217,
+    "noop": 1504.4,
+    "append": 1570.6
+  },
+  "limits": [
+    "Large append adds a real refused post-victory command, not successful extra gameplay.",
+    "Full retained-case replay was not rerun in this fix pass.",
+    "Single timing samples, not isolated percentiles or performance certification.",
+    "Full-prefix reads/hashes and all-store GC proof cost are not bounded by the 64-deletion limit.",
+    "No real quota/process-kill, cross-browser or mobile-memory certification."
+  ]
+}

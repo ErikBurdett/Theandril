@@ -1,0 +1,5 @@
+{
+  "extends": "../../../tsconfig.json",
+  "include": ["run-campaign.ts", "strategies.ts", "audit-save.ts", "replay.ts"],
+  "exclude": ["runs", "node_modules"]
+}

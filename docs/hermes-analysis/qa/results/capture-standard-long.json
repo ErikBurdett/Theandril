@@ -1,0 +1,12 @@
+{
+  "name": "capture-standard-long",
+  "command": "pnpm exec tsx docs/hermes-analysis/qa/chronicle-capture.ts --seed=748291 --size=standard --pace=long --factions=24 --limit=650",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:35:56.270932+00:00",
+  "durationSeconds": 255.99540996551514,
+  "exitCode": 1,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/capture-standard-long.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 1363956,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

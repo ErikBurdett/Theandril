@@ -17,6 +17,8 @@ description: Use for any Theandril implementation, refactor, architecture review
 10. Do not count placeholders or design prose as completion.
 11. Run relevant verification before marking work done.
 12. Update `docs/IMPLEMENTATION_STATUS.md` after meaningful slices.
+13. For audit-driven 1.0 work, use `docs/1.0-DEVELOPMENT.md` and `/unlazy`; reproduce ranked findings before fixing them and retain the audit as historical evidence.
+14. Translate the named 4X inspirations into original Theandril choices, counterplay and useful realm management, not copied content or extra unsupported release promises.
 
 When changing a cross-cutting boundary, write a short architecture decision in `docs/architecture/` before or alongside implementation.
 

@@ -1,5 +1,5 @@
 import 'fake-indexeddb/auto';
-import { afterEach, expect, test } from 'vitest';
+import { afterEach, expect, test, vi } from 'vitest';
 import { createGame, serializeGame, deserializeGame, stateHash, applyCommand } from '@theandril/sim';
 import { SaveStore, exportSave, importSave, serializeCampaign, deserializeCampaign } from './index';
 import { createArchive, applyRecordedCommand, replayArchive } from '@theandril/chronicle';
@@ -16,6 +16,7 @@ test('save budget counts UTF-8 bytes, including non-BMP and non-Latin names', ()
   expect(() => assertSaveSize('💠', 3)).toThrow(/limit/);
   expect(() => assertSaveSize('炭火', 5)).toThrow(/limit/);
   expect(() => assertSaveSize('炭火', 6)).not.toThrow();
+  expect(() => assertSaveSize('four', 3)).toThrow('3-byte limit');
 });
 test('save/load and compressed import reproduce a deterministic campaign', async () => {
   const state = createGame({ seed: 17, size: 'tiny' });
@@ -79,6 +80,73 @@ test('campaign envelope preserves full archive and AI-watch mode across save and
   applyRecordedCommand(restored.game, restored.archive, { type: 'endTurn', factionId: restored.game.turnOwnerId });
   applyRecordedCommand(game, archive, { type: 'endTurn', factionId: game.turnOwnerId });
   expect(restored.archive).toEqual(archive);
+});
+
+test('explicit v2 envelopes use a tagged portable codec without changing history or old gzip files', async () => {
+  const game = createGame({ seed: 27, size: 'tiny', factionCount: 2 });
+  const archive = createArchive(game, { mode: 'watch' });
+  applyRecordedCommand(game, archive, { type: 'endTurn', factionId: game.turnOwnerId });
+  const legacy = serializeCampaign(game, archive);
+  const extended = JSON.stringify({ ...JSON.parse(legacy), version: 2 });
+  expect(deserializeCampaign(extended).archive).toEqual(archive);
+  const portable = await exportSave(extended);
+  expect([...portable.slice(0, 4)]).toEqual([84, 65, 67, 50]); // TAC2
+  const loaded = deserializeCampaign(await importSave(portable));
+  expect(loaded.archive).toEqual(archive);
+  expect(stateHash(replayArchive(loaded.archive))).toBe(stateHash(game));
+  expect([...(await exportSave(legacy)).slice(0, 2)]).toEqual([31, 139]);
+});
+
+test('legacy v1 files with large valid records remain readable and re-exportable', async () => {
+  const game = createGame({ seed: 27, size: 'tiny', factionCount: 2 });
+  const archive = createArchive(game, { mode: 'watch' });
+  applyRecordedCommand(game, archive, { type: 'move', factionId: '炭'.repeat(1_500_000), armyId: 'missing', target: 0 });
+  // Explicit old-envelope construction exercises the pre-existing 64-MiB contract, not the new writer policy.
+  const payload = { snapshot: serializeGame(game), archive };
+  const text = JSON.stringify({ format: 'theandril-campaign', version: 1, checksum: checksum(JSON.stringify(payload)), ...payload });
+  expect(deserializeCampaign(text).archive).toEqual(archive);
+  const restored = deserializeCampaign(await importSave(gzipSync(strToU8(text))));
+  expect(restored.archive).toEqual(archive);
+  expect(deserializeCampaign(await importSave(await exportSave(text))).archive).toEqual(archive);
+});
+
+test('v2 section policy bounds aggregate history and record count before whole-envelope encoding', () => {
+  const game = createGame({ seed: 27, size: 'tiny', factionCount: 2 });
+  const archive = createArchive(game, { mode: 'watch' });
+  applyRecordedCommand(game, archive, { type: 'move', factionId: '炭'.repeat(700_000), armyId: 'missing', target: 0 });
+  // Deliberately aliased synthetic boundary input, not campaign/replay evidence: no 128-MiB fixture allocation.
+  const record = archive.records[0]!;
+  archive.records = Array.from({ length: 65 }, () => record);
+  expect(() => serializeCampaign(game, archive)).toThrow(/history.*byte limit/i);
+  archive.records = Array.from({ length: 1_000_001 }, () => record);
+  expect(() => serializeCampaign(game, archive)).toThrow(/archive sections/);
+});
+
+test('portable v2 retains CRC, length, format and compressed-input bounds', async () => {
+  const game = createGame({ seed: 27, size: 'tiny', factionCount: 2 });
+  const text = JSON.stringify({ ...JSON.parse(serializeCampaign(game, createArchive(game, { mode: 'watch' }))), version: 2 });
+  const bytes = await exportSave(text);
+  const corrupt = bytes.slice(); corrupt[corrupt.length - 8]! ^= 255;
+  await expect(importSave(corrupt)).rejects.toThrow();
+  const short = bytes.slice(); new DataView(short.buffer).setUint32(short.length - 4, 1, true);
+  await expect(importSave(short)).rejects.toThrow();
+  const bomb = bytes.slice(); new DataView(bomb.buffer).setUint32(bomb.length - 4, 192 * 1024 * 1024 + 1, true);
+  await expect(importSave(bomb)).rejects.toThrow(/byte limit/);
+  await expect(importSave(bytes.subarray(4))).rejects.toThrow(/tag.*version/);
+  const old = await exportSave(serializeGame(game));
+  await expect(importSave(new Uint8Array([84, 65, 67, 50, ...old]))).rejects.toThrow(/tag.*version/);
+  await expect(importSave(new Uint8Array(64 * 1024 * 1024 + 1))).rejects.toThrow(/Compressed.*64 MiB/);
+  await expect(importSave(bytes.slice(0, -1))).rejects.toThrow();
+  await expect(importSave(new Uint8Array([...bytes, ...old]))).rejects.toThrow();
+});
+
+test('invalid UTF-8 cancels the decoder instead of leaving unread decompression work', async () => {
+  const cancel = vi.spyOn(ReadableStreamDefaultReader.prototype, 'cancel');
+  try {
+    const gzip = gzipSync(new Uint8Array([255, ...strToU8(' '.repeat(100_000))]));
+    await expect(importSave(gzip)).rejects.toThrow();
+    expect(cancel).toHaveBeenCalled();
+  } finally { cancel.mockRestore(); }
 });
 
 test('legacy raw saves announce partial history; envelope corruption cannot replace a valid generation', async () => {

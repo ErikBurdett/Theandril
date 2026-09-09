@@ -1,0 +1,44 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > quotes a reachable 21-company attack and executes the quoted moveTo with exact replay 79ms
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > routes against whole mixed containers without splitting or moving the nine-company reserve 19ms
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > retains rule-16 query and command rejection with no state mutation 15ms
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > keeps no-preview observations conservative even when current execution supports contingents 7ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved field attack against 21 formations using an unchanged detached observation 74ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved naval attack against 21 hulls through the whole turn planner 44ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > declares war on a contestable oversized stack before asking a fresh observation to authorize attack 12ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' plans accept mixed whole-container contingents and leave reserves intact 20ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' plans accept mixed whole-container contingents and leave reserves intact 26ms
+ × packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' cannot discount a strong strategic reserve to make an attack affordable 10ms
+   → Invalid save: invalid formation definition, morale or strength
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' cannot discount a strong strategic reserve to make an attack affordable 20ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' keeps old no-preview observations and rule-16 guards conservative 10ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' keeps old no-preview observations and rule-16 guards conservative 23ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' honors a movement-query blocker even with a valid contingent preview 7ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' honors a movement-query blocker even with a valid contingent preview 16ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > uses the canonical siege assault quote for 21 garrison formations without capturing through reserves 46ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > siege policy budgets against the complete observed garrison rather than the engaged preview 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' cannot discount a strong strategic reserve to make an attack affordable
+Error: Invalid save: invalid formation definition, morale or strength
+ ❯ assert packages/sim/src/save.ts:398:25
+    396|
+    397| function assert(condition: unknown, message: string): asserts conditio…
+    398|   if (!condition) throw new Error('Invalid save: ' + message);
+       |                         ^
+    399| }
+    400|
+ ❯ deserializeGame packages/sim/src/save.ts:681:7
+ ❯ packages/ai/src/battle-defense.test.ts:135:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 16 passed (17)
+   Start at  02:56:12
+   Duration  837ms (transform 639ms, setup 0ms, import 838ms, tests 440ms, environment 0ms)
+

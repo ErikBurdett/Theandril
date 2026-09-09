@@ -1,0 +1,54 @@
+
+Running 1 test using 1 worker
+
+(node:312506) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"stage":"generated-small12","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✘  1 tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas (1.5m)
+
+
+  1) tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas 
+
+    Test timeout of 90000ms exceeded.
+
+    Error: page.waitForEvent: Test timeout of 90000ms exceeded.
+    =========================== logs ===========================
+    waiting for event "download"
+    ============================================================
+
+      55 |     await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
+      56 |     await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
+    > 57 |     const downloading = page.waitForEvent('download');
+         |                              ^
+      58 |     await page.getByRole('button', { name: 'Export save file', exact: true }).click();
+      59 |     const download = await downloading, downloadedPath = await download.path();
+      60 |     if (!downloadedPath) throw new Error('Missing exported Small campaign');
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:57:30
+
+    Error: cdpSession.detach: Target page, context or browser has been closed
+
+      110 |     expect.soft(consoleMessages.filter(message => /same key|Encountered two children/.test(message))).toEqual([]);
+      111 |     expect(errors).toEqual([]);
+    > 112 |   } finally { await saveEvidence(); await cdp.detach(); }
+          |                                               ^
+      113 | });
+      114 |
+      115 | for (const definitionId of ['faction.ashen_compact', 'faction.reedbound_council']) {
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:112:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r23-dev-red-v2/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/hermes-ui/r23-dev-red-v2/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r23-dev-red-v2/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/hermes-ui/r23-dev-red-v2/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas 

@@ -1,0 +1,759 @@
+{
+  "methodology": "Authored bounded states are explicitly injected in memory, normalized through real save validation, and then exercised with production commands. No generated campaign-completion or browser claim. No production source writes.",
+  "fieldStackLimit": {
+    "setup": "One original defending guard plus twenty injected legal singleton guards on the same non-town hex. The full state passed serialize/deserialize validation before commands.",
+    "blockedFormations": 21,
+    "rejected": {
+      "ok": false,
+      "error": "This field battle supports at most twenty defending formations.",
+      "events": []
+    },
+    "rejectedHashUnchanged": true,
+    "acceptedAt20": true,
+    "battleDefenders": 20
+  },
+  "paidStackReachability": {
+    "setup": "Fresh generated tiny/two-seat world. No state injection. Both caravans found through real commands; the second realm buys market, granary, workshop and twenty scouts from its original treasury and turn income. AI not invoked; other realm idle.",
+    "turn": 52,
+    "queuedPaidScouts": 20,
+    "stackFormations": 21,
+    "treasury": 56,
+    "town": {
+      "id": "settlement.6",
+      "factionId": "faction.reedbound_council",
+      "name": "Paid muster",
+      "cell": 1305,
+      "population": 5,
+      "food": 46,
+      "buildings": [
+        "building.market",
+        "building.granary",
+        "building.workshop"
+      ],
+      "queue": [],
+      "founderFactionId": "faction.reedbound_council",
+      "devastation": 0,
+      "occupationTurns": 0
+    },
+    "saveRoundTripEqual": true,
+    "commands": [
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "building.market"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "building.granary"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "building.workshop"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "queue",
+        "factionId": "faction.reedbound_council",
+        "settlementId": "settlement.6",
+        "itemId": "unit.scout"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      },
+      {
+        "type": "endTurn",
+        "factionId": "faction.ashen_compact"
+      }
+    ]
+  },
+  "garrisonStackLimit": {
+    "setup": "Existing authored conquest fixture plus twenty-one injected singleton guard formations on target town; save validated. War, siege and ten turns are real commands.",
+    "rounds": [
+      {
+        "turn": 2,
+        "defenses": 20,
+        "supplies": 2,
+        "defenderFormations": 21,
+        "defenderStrength": 1260,
+        "population": 2
+      },
+      {
+        "turn": 3,
+        "defenses": 10,
+        "supplies": 1,
+        "defenderFormations": 21,
+        "defenderStrength": 1260,
+        "population": 2
+      },
+      {
+        "turn": 4,
+        "defenses": 0,
+        "supplies": 0,
+        "defenderFormations": 21,
+        "defenderStrength": 1260,
+        "population": 2
+      },
+      {
+        "turn": 5,
+        "defenses": 0,
+        "supplies": 0,
+        "defenderFormations": 21,
+        "defenderStrength": 1260,
+        "population": 2
+      },
+      {
+        "turn": 6,
+        "defenses": 0,
+        "supplies": 0,
+        "defenderFormations": 21,
+        "defenderStrength": 1260,
+        "population": 2
+      },
+      {
+        "turn": 7,
+        "defenses": 0,
+        "supplies": 0,
+        "defenderFormations": 21,
+        "defenderStrength": 1260,
+        "population": 2
+      },
+      {
+        "turn": 8,
+        "defenses": 0,
+        "supplies": 0,
+        "defenderFormations": 21,
+        "defenderStrength": 1260,
+        "population": 2
+      },
+      {
+        "turn": 9,
+        "defenses": 0,
+        "supplies": 0,
+        "defenderFormations": 21,
+        "defenderStrength": 1260,
+        "population": 2
+      },
+      {
+        "turn": 10,
+        "defenses": 0,
+        "supplies": 0,
+        "defenderFormations": 21,
+        "defenderStrength": 1260,
+        "population": 2
+      },
+      {
+        "turn": 11,
+        "defenses": 0,
+        "supplies": 0,
+        "defenderFormations": 21,
+        "defenderStrength": 1260,
+        "population": 2
+      }
+    ],
+    "rejected": {
+      "ok": false,
+      "error": "An assault supports at most twenty defending formations.",
+      "events": []
+    },
+    "rejectedHashUnchanged": true,
+    "saveRoundTripEqual": true
+  },
+  "famineAndInsolvency": {
+    "setup": "Generated tiny world with paid public founding, then authored population 200, zero food/treasury and one heavy formation at low morale/high fatigue. Save validation passes. This is a rules stress probe, not evidence that an earned campaign reaches population 200.",
+    "initial": {
+      "population": 200,
+      "food": 0,
+      "foodYield": 11,
+      "consumption": 800,
+      "treasury": 0,
+      "army": {
+        "id": "army.2",
+        "factionId": "faction.ashen_compact",
+        "name": "Wayfinder",
+        "cell": 615,
+        "movement": 2,
+        "formations": [
+          {
+            "id": "formation.2",
+            "unitId": "unit.heavy_infantry",
+            "strength": 85,
+            "morale": 20,
+            "fatigue": 60
+          }
+        ]
+      }
+    },
+    "rounds": [
+      {
+        "turn": 2,
+        "population": 200,
+        "food": 0,
+        "treasury": 0,
+        "shortfall": true,
+        "army": {
+          "id": "army.2",
+          "factionId": "faction.ashen_compact",
+          "name": "Wayfinder",
+          "cell": 615,
+          "movement": 1,
+          "formations": [
+            {
+              "id": "formation.2",
+              "unitId": "unit.heavy_infantry",
+              "strength": 85,
+              "morale": 30,
+              "fatigue": 45
+            }
+          ]
+        }
+      },
+      {
+        "turn": 3,
+        "population": 200,
+        "food": 0,
+        "treasury": 0,
+        "shortfall": true,
+        "army": {
+          "id": "army.2",
+          "factionId": "faction.ashen_compact",
+          "name": "Wayfinder",
+          "cell": 615,
+          "movement": 1,
+          "formations": [
+            {
+              "id": "formation.2",
+              "unitId": "unit.heavy_infantry",
+              "strength": 85,
+              "morale": 40,
+              "fatigue": 30
+            }
+          ]
+        }
+      },
+      {
+        "turn": 4,
+        "population": 200,
+        "food": 0,
+        "treasury": 0,
+        "shortfall": true,
+        "army": {
+          "id": "army.2",
+          "factionId": "faction.ashen_compact",
+          "name": "Wayfinder",
+          "cell": 615,
+          "movement": 1,
+          "formations": [
+            {
+              "id": "formation.2",
+              "unitId": "unit.heavy_infantry",
+              "strength": 85,
+              "morale": 50,
+              "fatigue": 15
+            }
+          ]
+        }
+      },
+      {
+        "turn": 5,
+        "population": 200,
+        "food": 0,
+        "treasury": 0,
+        "shortfall": true,
+        "army": {
+          "id": "army.2",
+          "factionId": "faction.ashen_compact",
+          "name": "Wayfinder",
+          "cell": 615,
+          "movement": 1,
+          "formations": [
+            {
+              "id": "formation.2",
+              "unitId": "unit.heavy_infantry",
+              "strength": 85,
+              "morale": 60,
+              "fatigue": 0
+            }
+          ]
+        }
+      },
+      {
+        "turn": 6,
+        "population": 200,
+        "food": 0,
+        "treasury": 0,
+        "shortfall": true,
+        "army": {
+          "id": "army.2",
+          "factionId": "faction.ashen_compact",
+          "name": "Wayfinder",
+          "cell": 615,
+          "movement": 1,
+          "formations": [
+            {
+              "id": "formation.2",
+              "unitId": "unit.heavy_infantry",
+              "strength": 85,
+              "morale": 70,
+              "fatigue": 0
+            }
+          ]
+        }
+      },
+      {
+        "turn": 7,
+        "population": 200,
+        "food": 0,
+        "treasury": 0,
+        "shortfall": true,
+        "army": {
+          "id": "army.2",
+          "factionId": "faction.ashen_compact",
+          "name": "Wayfinder",
+          "cell": 615,
+          "movement": 1,
+          "formations": [
+            {
+              "id": "formation.2",
+              "unitId": "unit.heavy_infantry",
+              "strength": 85,
+              "morale": 80,
+              "fatigue": 0
+            }
+          ]
+        }
+      },
+      {
+        "turn": 8,
+        "population": 200,
+        "food": 0,
+        "treasury": 0,
+        "shortfall": true,
+        "army": {
+          "id": "army.2",
+          "factionId": "faction.ashen_compact",
+          "name": "Wayfinder",
+          "cell": 615,
+          "movement": 1,
+          "formations": [
+            {
+              "id": "formation.2",
+              "unitId": "unit.heavy_infantry",
+              "strength": 85,
+              "morale": 85,
+              "fatigue": 0
+            }
+          ]
+        }
+      },
+      {
+        "turn": 9,
+        "population": 200,
+        "food": 0,
+        "treasury": 0,
+        "shortfall": true,
+        "army": {
+          "id": "army.2",
+          "factionId": "faction.ashen_compact",
+          "name": "Wayfinder",
+          "cell": 615,
+          "movement": 1,
+          "formations": [
+            {
+              "id": "formation.2",
+              "unitId": "unit.heavy_infantry",
+              "strength": 85,
+              "morale": 85,
+              "fatigue": 0
+            }
+          ]
+        }
+      },
+      {
+        "turn": 10,
+        "population": 200,
+        "food": 0,
+        "treasury": 0,
+        "shortfall": true,
+        "army": {
+          "id": "army.2",
+          "factionId": "faction.ashen_compact",
+          "name": "Wayfinder",
+          "cell": 615,
+          "movement": 1,
+          "formations": [
+            {
+              "id": "formation.2",
+              "unitId": "unit.heavy_infantry",
+              "strength": 85,
+              "morale": 85,
+              "fatigue": 0
+            }
+          ]
+        }
+      },
+      {
+        "turn": 11,
+        "population": 200,
+        "food": 0,
+        "treasury": 0,
+        "shortfall": true,
+        "army": {
+          "id": "army.2",
+          "factionId": "faction.ashen_compact",
+          "name": "Wayfinder",
+          "cell": 615,
+          "movement": 1,
+          "formations": [
+            {
+              "id": "formation.2",
+              "unitId": "unit.heavy_infantry",
+              "strength": 85,
+              "morale": 85,
+              "fatigue": 0
+            }
+          ]
+        }
+      }
+    ],
+    "saveRoundTripEqual": true
+  },
+  "trustRespectValuation": {
+    "setup": "Observation-only comparison: identical lawful war and offer, only trust/respect changed in detached observations.",
+    "hostile": {
+      "band": "likely",
+      "reasons": [
+        "The offered payment supports recovery.",
+        "A longer binding peace gives time to rebuild."
+      ],
+      "objections": [
+        "The conflict is too recent for a white peace."
+      ]
+    },
+    "friendly": {
+      "band": "likely",
+      "reasons": [
+        "The offered payment supports recovery.",
+        "A longer binding peace gives time to rebuild."
+      ],
+      "objections": [
+        "The conflict is too recent for a white peace."
+      ]
+    },
+    "identical": true
+  }
+}

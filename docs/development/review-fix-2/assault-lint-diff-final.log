@@ -1,0 +1,3 @@
+$ pnpm exec eslint packages/sim/src/save.ts packages/sim/src/pending-assault-save.test.ts && git diff --check -- packages/sim/src/save.ts && python -c "from pathlib import Path; p=Path('packages/sim/src/pending-assault-save.test.ts'); s=p.read_text(); bad=[i for i,line in enumerate(s.splitlines(),1) if line.rstrip(' \t')!=line]; assert not bad,bad; assert s.endswith('\n') and not s.endswith('\n\n'); print('New regression whitespace check: clean')"
+New regression whitespace check: clean
+EXIT_CODE=0

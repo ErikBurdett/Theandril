@@ -1,0 +1,573 @@
+{
+  "baseline": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+  "development": {
+    "startTime": "2026-09-09T07:20:30.635Z",
+    "duration": 58107.436,
+    "expected": 16,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "production": {
+    "startTime": "2026-09-09T07:19:32.117Z",
+    "duration": 8705.376,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "observations": [
+    {
+      "test": "R03 public attack previews the canonical contingent and leaves its reserve on the map",
+      "name": "field-defense",
+      "path": "handoff-dev/observations/53f2837ea9087a296b10-f95d1e02b625f680594e-field-defense.json"
+    },
+    {
+      "test": "R03 siege preview fits 390px and desktop public assaults clear reserves before capture",
+      "name": "siege-defense",
+      "path": "handoff-dev/observations/53f2837ea9087a296b10-2ab24452cb09f36ec362-siege-defense.json"
+    },
+    {
+      "test": "R18 paid Waykeeper resolves shared art for faction.ashen_compact",
+      "name": "waykeeper-evidence",
+      "path": "handoff-dev/observations/863c20d5e8acd491b22f-45826d18452988c1fca8-waykeeper-evidence.json"
+    },
+    {
+      "test": "R18 paid Waykeeper resolves shared art for faction.reedbound_council",
+      "name": "waykeeper-evidence",
+      "path": "handoff-dev/observations/863c20d5e8acd491b22f-f1eec3b5ed3c31193cf0-waykeeper-evidence.json"
+    },
+    {
+      "test": "R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order",
+      "name": "household-growth",
+      "path": "handoff-dev/observations/a88d3ab5cb0964c042eb-67e1941a48903b458506-household-growth.json"
+    },
+    {
+      "test": "R07 2-town labor exception opens the exact hearth in one activation at 390px",
+      "name": "household-scale",
+      "path": "handoff-dev/observations/a88d3ab5cb0964c042eb-6b2c3c7d932435ecc6a8-household-scale.json"
+    },
+    {
+      "test": "R07 10-town labor exception opens the exact hearth in one activation at 390px",
+      "name": "household-scale",
+      "path": "handoff-dev/observations/a88d3ab5cb0964c042eb-f4d889ee4d1c6ef7afef-household-scale.json"
+    },
+    {
+      "test": "R07 40-town labor exception opens the exact hearth in one activation at 390px",
+      "name": "household-scale",
+      "path": "handoff-dev/observations/a88d3ab5cb0964c042eb-56595cc4ea28facbefaf-household-scale.json"
+    }
+  ],
+  "lifecycle": {
+    "r23-dev-red-v4": {
+      "browser": "152.0.7977.82",
+      "records": [
+        {
+          "stage": "generated-small12",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-1",
+          "controls": 2,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-2",
+          "controls": 3,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-3",
+          "controls": 4,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-4",
+          "controls": 5,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-1-small",
+          "controls": 6,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-2-tiny",
+          "controls": 7,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-3-small",
+          "controls": 8,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-4-tiny",
+          "controls": 9,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "failed-import",
+          "controls": 9,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "after-battle",
+          "controls": 9,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        }
+      ],
+      "duplicateKeyWarnings": 74,
+      "pageErrors": [],
+      "consoleMessages": [
+        "Full original console retained in lifecycle.json"
+      ]
+    },
+    "r23-production-baseline-red": {
+      "browser": "152.0.7977.82",
+      "records": [
+        {
+          "stage": "generated-small12",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-1",
+          "controls": 2,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-2",
+          "controls": 3,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-3",
+          "controls": 4,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-4",
+          "controls": 5,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-1-small",
+          "controls": 6,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        }
+      ],
+      "duplicateKeyWarnings": 0,
+      "pageErrors": [],
+      "consoleMessages": [
+        "Full original console retained in lifecycle.json"
+      ]
+    },
+    "handoff-dev": {
+      "browser": "152.0.7977.82",
+      "records": [
+        {
+          "stage": "generated-small12",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-1",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-2",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-3",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-4",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-1-small",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-2-tiny",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-3-small",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-4-tiny",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "failed-import",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "after-battle",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": true,
+          "listeners": {
+            "window": 17,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        }
+      ],
+      "duplicateKeyWarnings": 0,
+      "pageErrors": [],
+      "consoleMessages": []
+    },
+    "r23-production-handoff": {
+      "browser": "152.0.7977.82",
+      "records": [
+        {
+          "stage": "generated-small12",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-1",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-2",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-3",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "load-4",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-1-small",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-2-tiny",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-3-small",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "import-4-tiny",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "failed-import",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        },
+        {
+          "stage": "after-battle",
+          "controls": 1,
+          "canvases": 1,
+          "mapNodes": 1,
+          "debugHookPresent": false,
+          "listeners": {
+            "window": 16,
+            "document": 7,
+            "document.querySelector(\"canvas\")": 12
+          }
+        }
+      ],
+      "duplicateKeyWarnings": 0,
+      "pageErrors": [],
+      "consoleMessages": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "[.WebGL-0x240c0492cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+        "[.WebGL-0x240c0492cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+        "[.WebGL-0x240c0492cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+        "[.WebGL-0x240c0492cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+      ]
+    }
+  }
+}

@@ -1,0 +1,1303 @@
+# hermes-analysis
+
+## Theandril — detailed premium 1.0 readiness audit
+
+This structured Markdown document is the Canvas-equivalent living audit. [Executive/actionable README](docs/hermes-analysis/README.md) and the retained evidence form its traceable companion set.
+
+**Final audit disposition: NO — do not ship Theandril 1.0 today.**
+
+Baseline: `b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd`, `/home/telephoneheater/Work/Theandril`; evidence collected 2026-09-09. This is a completed audit, **not** completed remediation or release certification. Production source/assets and the project's root README were not edited; nothing was committed or pushed. Audit-owned documentation, harnesses, captures and generated test evidence are retained.
+
+## 1. Executive Summary
+
+Theandril is a real, integrated fantasy strategy game with deterministic campaign rules, legal AI opponents, paid economic development, persistent companies, ships, conquest and an actual victory. It is not merely disconnected menus. Its strongest assets are the simulation boundaries, the land-development loop, replayable consequences and a substantial original pixel-art library.
+
+It is nevertheless much closer to an **integrated development build than a premium release candidate**. Campaign safety is broken in ordinary legal play, one legal stack configuration defeats combat entirely, and the late campaign cannot sustain the strategic variety promised by the world and product brief.
+
+### Would I ship today? **NO. Five strongest reasons**
+
+1. **Player progress is not reliably saveable.** Accepted trained-unit battle outcomes can produce unloadable state/history. Independently, a valid Standard/24-realm Long campaign reaches victory with a 93,161,744-byte logical archive, beyond the 67,108,864-byte limit. Exact replays do not negate either defect. R01/R02; [QA persistence evidence](docs/hermes-analysis/qa/report.md#2-release-blocking-persistence-findings).
+2. **Legal military growth can make an enemy unattackable.** Twenty-one defending formations refuse field battle and assault; ordinary paid mustering reaches that count by turn 52. Supply depletion does not remove the real garrison. R03; [asserted probes](docs/hermes-analysis/verification/probe-results.json).
+3. **The endgame and opposition lose purpose.** Only Prosperity is terminal. In Epic seed99, research is saturated by turn 146, the last battle/capture is turn 297, and victory arrives at turn 808; one army makes 720 A→B→A returns. Sparse first contact also misses an unchanged release test. R04–R06; [campaign findings](docs/hermes-analysis/campaigns/findings.md).
+4. **The fantasy strategy promise exceeds current mechanics.** Twenty-four cultures share the decisive roster, research, caster aptitudes and victory rules; two battle spells are not a strategic magic pillar. Diplomacy, material uses, independent powers and authored discoveries lack the needed interactions. R08/R09/R12/R15/R25; [executable catalog](docs/hermes-analysis/systems/catalog.md).
+5. **The player-facing layer is not yet premium-complete.** Unused labor goes unnoticed, empire comparison and ongoing history require excess navigation, onboarding does not teach a complete loop, audio is absent, and specific art bindings/context need repair. Real-GPU and wider-browser certification are missing. R07/R16–R24; [UI](docs/hermes-analysis/ui/findings.md), [art](docs/hermes-analysis/art/art-report.md), [QA](docs/hermes-analysis/qa/report.md).
+
+These are five reasons, not five equal-sized tasks. The single next implementation task is specified in section 19.
+
+## 2. Current State
+
+`packages/sim` owns canonical rules; AI/UI issue commands and consume observations. React/Vite supplies the shell, PixiJS the map/battle presentation, and a worker runs simulation. Content, map generation, persistence, chronicles and art processing remain separate packages. Preserve these boundaries rather than rewrite the game.
+
+| State | Examples and evidence |
+|---|---|
+| Integrated, functioning foundations | Generated geography/fog, founding/claims/workers, paid queues and works, growth, recruitment, company identity/merge/split, transport, conquest aftermath, skills, actual spells, timed peace, Prosperity and replay. [Systems report](docs/hermes-analysis/systems/report.md#4-system-depth-and-actual-loop-connections) |
+| Functional but shallow | Culture rule asymmetry, materials/trade, research breadth, diplomacy, long-term AI, character identity, endgame. Larger counts alone will not fix them. |
+| Broken | Battle-boundary save validity, mature full-archive capacity, over-cap defender contestability, bounded sparse-contact gate and repeated-load DOM identity. |
+| Designed, not implemented | Strategic rituals/summons/artifice/sacred/occult pillars, independent powers/interactive legendary sites, branching events/quests and additional terminal victory paths. [Actual versus declared scope](docs/hermes-analysis/systems/catalog.md#summary) |
+| Present but not proof of completion | Reserved monster/map images without mechanics; historical review approvals without fresh all-frame playback; successful smoke tests without campaign-safe persistence. |
+
+Current art registry and runtime evidence override obsolete documentation describing twelve cultures or static-only battlefield output. The audit baseline is unchanged at final verification; only the two audit paths are untracked. The earlier setup session's dirty-tree observation is not evidence of changes made by this audit.
+
+## 3. Overall 1.0 Readiness Score
+
+**37/100**, an editorial player-facing quality index, **not** the percentage of code finished, predicted sales, or measured probability of a successful launch. Equal-weight mean before whole-point rounding: 37.1/100 (shown to one decimal) across 19 areas. The requested premium target is **90+/100 plus zero unresolved P0s and passed release gates**. Scores diagnose gaps; they cannot override a failed save invariant.
+
+The targets below are per-area quality floors, not a guarantee that merely reaching every floor yields 90. Scores are deliberately conservative about absent pillars and unverified scale. Final art/animation scores credit the actual validated library and genuine motion, correcting provisional assumptions about missing poses.
+
+## 4. Major Strengths
+
+- **Real connected investment:** charted/owned land → suitable paid work → assigned households → output/materials → development and expansion. Campaign A and the grain UI fixture exercise this rather than infer it from files.
+- **Persistent consequences:** actual casualties, retreat destinations, earned formation experience, occupation/sack/raze/liberation and hull/cargo relationships. The save defect does not erase these implemented rules.
+- **Deterministic, inspectable design:** eight primary ordinary-command campaigns, 125,150 accepted commands and eight exact full replays; retained hashes, command traces and minimal reproducers.
+- **AI actually participates:** it founds, researches, develops, organizes forces, transports, fights and wins. The problem is long-horizon purpose and consistency, not total absence of AI.
+- **Substantial original production art:** 545 approved assets, 1,427 frames, 662 clips, 432 qualified assets across 24 cultures; all 13 shared battlefield roles animate. No wholesale art restart is justified.
+- **Useful existing usability and engineering:** prices/blockers, search/sort/filter, next/previous controls, keyboard help, narrow text scaling, source provenance, validators and reproducible production outputs.
+
+## 5. Major Weaknesses
+
+The loop is strongest at **explore → invest → expand**, thinner at **encounter → adapt → specialize**, and weakest at **long-term payoff**. Early lack of contact is not universal: Campaign A is one route, while Standard24 shows all seats in contact by turn 72. The stronger pacing defect is the measured late-game saturation and inactive strategic trajectories.
+
+Current decisions are not all fake: food versus industry, navigation, paid cultivation, mutually exclusive institution/doctrine choices and combined-arms roles matter. But many later bonuses are additive, major systems share the same access rules, and material geography seldom denies a capability. Economically focused C policies grew stronger economies than B in these seeds, but neither policy won its controlled faction; this is **not proof of an optimal build, universal faction balance or a dominant strategy**.
+
+The world offers real physical constraints but few independent discoveries that redirect a campaign. Full history records facts more successfully than the current UI helps the player remember them. Increasing map size, prices or turn limits magnifies those gaps.
+
+### Where the core loop breaks, and which interactions to deepen
+
+| Link | Fresh or implementation evidence | Desired consequential interaction |
+|---|---|---|
+| Explore → decide | Campaign A finds land/resources but no encountered independent decision; generated geography/cultivation restrictions are real. | A discovered site or independent actor changes a capability, claim or obligation, not merely yields a collectible. |
+| Decide → invest | Costs, queues, workers and paid improvements work; three unused households go unnoticed. | Forecast and compare outputs/opportunity costs, then make the chosen policy observable in the empire overview. |
+| Invest → expand | Growth, escalating founding and civic upkeep, land claims and ships operate; observed towns exceed historical caps. | Distinct tall/wide economies constrained by meaningful sustainable costs, with recovery rather than silent invulnerability or punitive traps. |
+| Encounter → adapt | Pikes/missiles/cavalry, real losses and earned training exist; 21 defenders refuse combat. | Contestable force participation, purposeful deployments, finite supply and visible counters; preserve deterministic soldier facts. |
+| Adapt → specialize |25 development nodes and two exclusive institution/doctrine choices exist. | Research/material/faction commitments unlock different actions and risks, not mostly the same stat ladder. |
+| Conflict → consequence | Capture choices, persistent casualties, XP and history are real. | A player can inspect consequences, remember people/places, and save immediately after every accepted outcome. |
+| Consequence → payoff | One real Prosperity path; Epic's long quiet accumulation dominates its second half. | Competing public goals with counterplay, late pressure and a factual, satisfying ending that remains exportable. |
+
+A useful depth test for a proposed addition is: **Does it change another system's available decisions, impose an intelligible opportunity cost, and give an opponent a response?** A new resource, spell or faction that fails that test should not inflate the completion count. No global optimum is established from the limited strategy/seed sample.
+
+## 6. P0 Release Blockers
+
+| ID | Reproducible failure | Required correction | Effort / impact |
+|---|---|---|---|
+| R01 | Valid turn-236 checkpoint hash `602413fe` + accepted attack/autoresolve fails strict round trip. Same-turn repeated combat can also leave invalid retained reports. | One canonical strategic-morale model; temporary battle bonuses applied once; version-correct survivor/history reconciliation and battle-boundary regressions. Do not merely relax validation. | M / Transformative |
+| R02 | Standard/24/Long seed748291: victory 446; valid state 10,912,745 B, archive 93,161,744 B > limit 67,108,864 B. | Bounded playable saves plus a deliberate complete-history capacity/export policy; preserve atomic recovery and truthful history coverage. Demonstrate full restore/replay of retained failure. | L / Transformative |
+| R03 | Save-valid 21-formation defenders cannot be attacked or assaulted; paid natural muster reaches 21 by turn 52. | Bounded participants/reserves or another explicit stacking rule that keeps every valid force contestable without deleting troops. Same policy for UI and AI. | L / High |
+
+**Severity reconciliation:** the systems sub-audit called over-cap stacks P1. The final release taxonomy promotes it to **P0** because normal recruitment can create an immune garrison/project host and invalidate core warfare. This is a change in release judgment, not conflicting probe results. Morale's immediate-state and retained-history manifestations are **one root cause**, not two separately ranked bugs. Archive capacity is independent.
+
+The prior valid save slot survived an invalid write in the tested fake-indexeddb adapter probe. That is useful recovery protection, **not** a claim that new progress is safe or disk durability is certified. See [parent rerun logs](docs/hermes-analysis/verification/parent-checks.json) and [QA details](docs/hermes-analysis/qa/report.md#2-release-blocking-persistence-findings).
+
+## 7. P1 Requirements
+
+The ranked list contains 20 P1 entries, grouped here to avoid an unlimited feature list:
+
+- **Different viable campaign plans:** terminal objectives/counterplay, meaningful faction differences, a strategic magical loop, research that changes capabilities, consequential materials and discovery, bounded diplomatic obligations.
+- **Purposeful campaign opposition:** honest contact gates, persistent progress toward operations, safe economic planning, execution of the AI's existing enemy-project awareness and late escalation.
+- **Manageable player decisions:** attention/forecasting, cancellable/reorderable production, deliberate deployment, empire comparison/history, onboarding and a readable supported-scale experience.
+- **Complete core presentation and release practice:** original audio, current-role binding/identity repairs, targeted terrain/battle refinement, current-scope performance and recovery/migration tests.
+
+Written content targets remain unmet; reducing them is a **scope decision requiring explicit adoption**, not something this audit silently does. Conversely, a target such as “250 magical effects” does not justify 250 interchangeable damage spells. Prove interacting mechanics and a small contrast cohort before scaling content.
+
+**High-value small work:** Waykeeper fallback is S/high value with zero new images; unique sibling keys are S/medium; unused-labor attention and queue correction are M/high. These can run alongside deeper work but are not substitutes for R01–R03. No P0 is currently estimated XXL; R02/R03 have L architectural risk that should be reduced with bounded prototypes. R09 is an XXL pillar and must be delivered through integrated slices, not a large speculative rewrite.
+
+## 8. Top 25 Priorities
+
+Priority is the user's release taxonomy: **P0 cannot ship; P1 target-quality required; P2 high-value optional polish; P3 post-1.0**. Effort is relative: XS/S localized, M a bounded cross-layer slice, L substantial multi-system work, XL a pillar, XXL multiple integrated pillars. These are not staffing or calendar estimates. Dependencies describe implementation ordering, not permission to edit production during this audit.
+
+<a id="r01"></a>
+### 1. R01 — Accepted battle outcomes can produce unloadable saves
+
+**P0 · Effort M · Impact Transformative · Basis: Observed + code**
+
+- **Evidence / where / how:** A valid turn-236 save (602413fe), followed by accepted attack and autoResolveBattle, leaves morale 59 on a unit whose base is 55; deserializeGame throws. Independently, Standard24 seed74 turn101 and B74 final252 retain battle-report morale above validator bounds although full replay is exact.
+- **Player consequence:** An ordinary successful battle can make current progress impossible to save/restore. The tested storage adapter protects the previous valid slot, but that does not save subsequent progress.
+- **Desired experience and implementation:** Define canonical strategic morale versus battle-only bonuses; apply temporary training effects once; reconcile survivors without carrying those bonuses into future deployments; preserve and version historical battle facts. Add round-trip invariants at each accepted battle boundary, not only after End turn. Do not fix by deleting reports or weakening validation indiscriminately.
+- **Acceptance:** Both retained corrupt-save symptoms become version-correct loadable states; minimal two-command red regression passes; manual/automatic/retreat/assault/same-turn repeated battles round-trip through autosave and export/import with deterministic continuation.
+- **Dependencies:** Independent.
+- **Files / exact evidence:** `packages/sim/src/warfare.ts:55-65`; `packages/sim/src/warfare.ts:199-227`; `packages/sim/src/save.ts:674-679`; `packages/sim/src/save.ts:827-828`; `docs/hermes-analysis/verification/morale-roundtrip.log`; `docs/hermes-analysis/campaigns/save-failure-analysis.json`
+
+<a id="r02"></a>
+### 2. R02 — Normal large campaigns outgrow the full-archive save format
+
+**P0 · Effort L · Impact Transformative · Basis: Observed + code**
+
+- **Evidence / where / how:** Standard/24, Long, seed748291 reaches real victory turn446 with 114244 accepted orders and 1496 recorded battles. State snapshot is 10912745 bytes, but serializeCampaign fails with Save exceeds the 64 MiB limit.
+- **Player consequence:** A supported campaign can become impossible to save/export or finish its promised chronicle workflow even though the current state is modest.
+- **Desired experience and implementation:** Separate bounded transactional playable-state saves from append-only/chunked campaign history and optional battle presentation records. Use real quota accounting, atomic manifest/checkpoint updates, size warnings and recoverable export. Preserve coverage flags and truthful partial-history handling; do not silently drop history or merely raise the input limit.
+- **Acceptance:** The retained Standard24/Long archive exports, imports and restores exact state/history within a documented browser memory/quota budget; interruption and quota-exhaustion tests preserve the previous valid save.
+- **Dependencies:** R01
+- **Files / exact evidence:** `packages/persistence/src/index.ts:1-40`; `packages/persistence/src/size.ts:1-6`; `docs/hermes-analysis/qa/logs/capture-standard-long.log`
+
+<a id="r03"></a>
+### 3. R03 — Twenty-one co-located formations make a legal force unattackable
+
+**P0 · Effort L · Impact High · Basis: Observed + code**
+
+- **Evidence / where / how:** A fresh generated paid-muster scenario reaches 21 scout formations by turn52. Save-valid field probes reject 21 defenders and accept 20. A 21-guard garrison remains at 1260 strength after ten siege turns and cannot be assaulted even at zero defenses/supplies.
+- **Player consequence:** Ordinary recruiting can create invulnerable capitals or victory hosts. Army-container limits do not prevent co-located-stack immunity.
+- **Desired experience and implementation:** Implement bounded participants plus explicit reserves/reinforcement, or another deliberate legal stacking policy, with no troop deletion and a contestable route through every valid defending stack. Give the UI and AI the same participation preview.
+- **Acceptance:** Earned and authored 20/21/larger field, town and fleet cases remain attackable/assaultable and save-compatible; large resolution stays within the battle budget.
+- **Dependencies:** R01
+- **Files / exact evidence:** `packages/sim/src/warfare.ts:84-107`; `packages/sim/src/siege.ts:64-82`; `packages/sim/src/siege.ts:117-125`; `docs/hermes-analysis/verification/probe-results.json`
+
+<a id="r04"></a>
+### 4. R04 — Extended campaign length substitutes accumulation for late strategic development
+
+**P1 · Effort XL · Impact Transformative · Basis: Observed + design assessment**
+
+- **Evidence / where / how:** D Tiny4 Epic seed99 ends turn808; all practical trees complete by146, last battle/capture297, winning project starts748. From300 through808 one tracked army uses only two cells. The final knowledge stock is 172421 with no further practical nodes.
+- **Player consequence:** Hundreds of extra turns create time cost, not hundreds of turns of adaptation or payoff.
+- **Desired experience and implementation:** Define early/middle/endgame decision-density and pressure goals per pace; couple escalation to new strategic opportunities, rival threats and public projects. Recalibrate price/window scaling only after those loops exist. Keep Short clearly a skirmish profile rather than using it to conceal Standard/Epic gaps.
+- **Acceptance:** Multiple earned Standard/Long/Epic campaigns show continuing consequential choices after research saturation, measurable project contest attempts and finite non-busywork endings; publish quiet-turn and contact distributions.
+- **Dependencies:** R05, R06, R09, R11, R14, R15
+- **Files / exact evidence:** `docs/hermes-analysis/campaigns/findings.md:68-86`; `docs/hermes-analysis/campaigns/deep-analysis.json`; `packages/content/src/progression.ts:30-49`
+
+<a id="r05"></a>
+### 5. R05 — Only Prosperity ends campaigns; conquest and defeat lack their promised terminal models
+
+**P1 · Effort XL · Impact Transformative · Basis: Code + observed outcomes**
+
+- **Evidence / where / how:** Victory type and terminal setter only support prosperity. All seven completed primary simulations end through that path. Current Gate B asks for at least three tested paths while the master product brief names five; neither requirement is satisfied by one exchange project.
+- **Player consequence:** Different strategies still converge on financing the same project, and destroying every rival is not an independently implemented ending.
+- **Desired experience and implementation:** Implement the agreed release path set with distinct progress, warnings, counterplay and clear defeat/elimination. Do not silently lower the five-path product target to the three-path minimum gate; explicitly ratify any smaller non-filler scope before implementation.
+- **Acceptance:** Each retained release path is won and lost through ordinary generated campaigns, can be disrupted, communicates progress and survives save/replay; elimination never leaves a dead player pressing End turn indefinitely.
+- **Dependencies:** R01, R02, R03
+- **Files / exact evidence:** `packages/sim/src/progression.ts:17-29`; `packages/sim/src/progression.ts:112-156`; `packages/sim/src/simulation.ts:319-342`; `DEFINITION_OF_DONE.md:16-33`; `MASTER_PROMPT.md:1821-1837`
+
+<a id="r06"></a>
+### 6. R06 — Strategic AI lacks durable plans for contact, war and project counterplay
+
+**P1 · Effort XL · Impact Transformative · Basis: Observed + code**
+
+- **Evidence / where / how:** Unchanged Standard/4-seat contact test fails its 100-turn expectation; actual Ashen contact appears at137 in D sparse. Epic army.145 has 720 A-B-A returns and exact158↔159 movement late. AI does expand, research, transport, fight and win; legality is not the defect.
+- **Player consequence:** Large geography and late victory threats fail to produce consistently purposeful opposition.
+- **Desired experience and implementation:** Retain observation-only legal planners and existing enemy-project target awareness; add bounded saved objectives/theater commitments, route progress and loop detection so those intentions become executed operations. Introduce disclosed difficulty policy separately from pace. Keep the original contact threshold unless a justified design change is explicitly adopted.
+- **Acceptance:** Existing contact gate passes honestly; trajectory tests distinguish useful patrol from fruitless reversals; multiple factions assemble and execute attacks on exposed project hosts through land and sea without hidden information.
+- **Dependencies:** R01, R03, R05
+- **Files / exact evidence:** `packages/ai/src/index.ts:163-269`; `packages/ai/src/progression.ts:47-95`; `packages/ai/src/contact.test.ts:78-90`; `docs/hermes-analysis/qa/logs/contact-repro.log`; `docs/hermes-analysis/campaigns/deep-analysis.json`
+
+<a id="r07"></a>
+### 7. R07 — The attention system misses unused workers and economic danger
+
+**P1 · Effort M · Impact High · Basis: Observed + code**
+
+- **Evidence / where / how:** Campaign A turn9: population3 with 0/3 workers; turn26: First Ember3/5. Next-action navigation only considers movable armies and empty production queues.
+- **Player consequence:** New players silently underperform; experienced players must repeatedly inspect every settlement as the empire grows.
+- **Desired experience and implementation:** Add categorized attention entries for unassigned households, forecast deficits, interrupted work/routes and urgent threats, each with consequence and locate/action. Offer explicit assignment policies with manually locked tiles. Build the same summary into a sortable empire table.
+- **Acceptance:** A growing town with a full queue still reports new unused labor; two/ten/forty-town scenarios can resolve attention without reopening every modal; forecasts match simulation.
+- **Dependencies:** Independent.
+- **Files / exact evidence:** `apps/web/src/next-action.ts:13-27`; `apps/web/src/main.tsx:738-741`; `docs/hermes-analysis/ui/16-turn9-land-workers.png`; `docs/hermes-analysis/ui/findings.md`
+
+<a id="r08"></a>
+### 8. R08 — Twenty-four cultures share most decisive rules and access
+
+**P1 · Effort XL · Impact Transformative · Basis: Code + inventory**
+
+- **Evidence / where / how:** 24 culture definitions, 19 AI recruitment-weight vectors, but all 13 units, their prices/prerequisites, ten technologies, identical Flame1/Rune1 casters and victory rules are shared. Ecological affinities and cultivation differences are real.
+- **Player consequence:** Choosing another people changes optimization and presentation more than the strategy available, below the stated replayability bar.
+- **Desired experience and implementation:** Prove a small contrast cohort before expanding every culture: each needs an economic constraint, military/magical opportunity, progression identity and adversarial counter. Use data-driven capabilities and the existing lore rather than faction engine forks or renamed stat copies.
+- **Acceptance:** Blind comparison of two contrasting factions changes opening decisions, army/resource priorities and at least one late plan; AI understands each exception; no extra faction is counted complete on artwork alone.
+- **Dependencies:** R01, R03
+- **Files / exact evidence:** `packages/content/src/factions.ts:3-84`; `packages/content/src/ecology.ts:39-64`; `packages/content/src/index.ts:20-60`; `packages/sim/src/characters.ts:226-232`; `docs/hermes-analysis/systems/catalog.md`
+
+<a id="r09"></a>
+### 9. R09 — Magic is two universal battle spells, not a strategic pillar
+
+**P1 · Effort XXL · Impact Transformative · Basis: Observed + code**
+
+- **Evidence / where / how:** C99 paid for both discoveries and a real caster; battle.80 turn37 contains actual Cinder thread/Bound ward casts and strain10. Catalog/state contain no rituals, summons, items/recipes, sacred/occult progression or magical-site competition; Ashglass is not consumed by these spells.
+- **Player consequence:** The central fantasy promise cannot emerge from a damage/ward pair available to every culture.
+- **Desired experience and implementation:** First close one original map-level magical loop: site discovery → resource and qualified practitioner commitment → visible strategic effect → rival warning and counteraction → permanent consequence. Extend caster progression, school/faction access, artifice and sacred/occult distinctions only through integrated slices.
+- **Acceptance:** A generated campaign earns, casts and counters the first strategic working with real costs and AI participation; saves/replay preserve effects; battle feedback shows actual outcomes. Broader published magic scope remains required until explicitly revised, not satisfied by one demonstration.
+- **Dependencies:** R01, R08, R25
+- **Files / exact evidence:** `packages/content/src/magic.ts:5-38`; `packages/sim/src/magic.ts:17-60`; `packages/sim/src/types.ts:175-250`; `docs/hermes-analysis/campaigns/key-evidence.json`
+
+<a id="r10"></a>
+### 10. R10 — Production commitments cannot be cancelled or reprioritized
+
+**P1 · Effort M · Impact High · Basis: Code + UI**
+
+- **Evidence / where / how:** The queue accepts up to five FIFO orders and spends coin upfront; the canonical command union has queue but no production cancel/reorder. Campaign A queued buildings and troops but exposed no corrective queue action.
+- **Player consequence:** A mistaken order or sudden war cannot be answered by correcting production, an avoidable frustration in a strategy game.
+- **Desired experience and implementation:** Specify refund/sunk-industry rules, implement canonical cancellation and reordering, then expose direct controls and clear net costs. Preserve land-work and travel cancellation as distinct operations.
+- **Acceptance:** Reorder/cancel partial buildings, units and naval hulls through UI and replay; captured or invalidated queues cannot refund value twice or mint resources.
+- **Dependencies:** R01
+- **Files / exact evidence:** `packages/sim/src/types.ts:175-216`; `packages/sim/src/simulation.ts:245-260`; `packages/sim/src/simulation.ts:442-455`; `docs/hermes-analysis/ui/16-turn9-land-workers.txt`
+
+<a id="r11"></a>
+### 11. R11 — Starvation, arrears and siege isolation barely harm established forces
+
+**P1 · Effort L · Impact High · Basis: Controlled probe + code**
+
+- **Evidence / where / how:** Save-valid authored population200 town with food11 versus consumption800 stays population200 for ten turns. Unpaid heavy troops retain strength85, recover morale20→85 and fatigue60→0, and still move1. Siege supplies reduce militia morale, not the real garrison.
+- **Player consequence:** Economic warfare and overstretch lack reliable consequences; increasing upkeep alone does not create the intended risk.
+- **Desired experience and implementation:** Choose telegraphed, recoverable famine, arrears and local supply effects on real population/formations. Add a matching forecast and AI sustainability policy. Avoid an invisible punitive attrition layer.
+- **Acceptance:** Sustained deficits create bounded consequences, recovery works, isolation affects actual defenders, and neither player nor AI enters an unrecoverable bookkeeping softlock.
+- **Dependencies:** R01, R03, R07
+- **Files / exact evidence:** `packages/sim/src/simulation.ts:237-304`; `packages/sim/src/growth-economy.ts:9-19`; `packages/sim/src/siege.ts:117-125`; `docs/hermes-analysis/verification/probe-results.json`
+
+<a id="r12"></a>
+### 12. R12 — Diplomacy is a paid truce system rather than strategic obligations
+
+**P1 · Effort XL · Impact High · Basis: Observed + code/probe**
+
+- **Evidence / where / how:** UI provides war and peace with one-way coin plus5–30 turns. Grievances/war age affect acceptance; detached trust-100/respect0 versus trust100/respect100 yields identical assessment. No alliances, clients/tribute, negotiated access or resource clauses exist.
+- **Player consequence:** A diplomatic strategy cannot organize a different kind of power or punish a common aggressor beyond bilateral war/truce.
+- **Desired experience and implementation:** Add a bounded clause/obligation model starting with negotiated access, exchange and client/tribute relations, including breach, visibility and AI valuation. Only expose relationship meters that have real effects; scope internal politics to chosen faction/victory needs.
+- **Acceptance:** Offers, obligations, expiry/breach and AI responses are visible, saved, replayable and strategically exploitable with counterplay—not simply new buttons.
+- **Dependencies:** R01, R05
+- **Files / exact evidence:** `packages/sim/src/diplomacy.ts:9-40`; `packages/sim/src/diplomacy.ts:71-189`; `packages/ai/src/diplomacy.ts:11-41`; `docs/hermes-analysis/ui/37-peace-terms.png`; `docs/hermes-analysis/verification/probe-results.json`
+
+<a id="r13"></a>
+### 13. R13 — Tactical deployment follows creation IDs instead of player intent
+
+**P1 · Effort M · Impact High · Basis: Code + UI**
+
+- **Evidence / where / how:** Deployment sorts formation IDs lexicographically into five columns/four ranks. Army-wide Advance/Brace/Flank/Withdraw and real pike/mounted/missile rules exist, but no player formation arrangement uses those roles deliberately.
+- **Player consequence:** Composition decisions are partially undermined by arbitrary placement; the player cannot intentionally put a screen ahead of missiles.
+- **Desired experience and implementation:** Add compact formation-slot/role deployment policy and preview, sensible role-aware defaults and matching AI placement. Integrate with the reserve policy from R03; do not rewrite into RTS control.
+- **Acceptance:** The same composition can deliberately adopt distinct legal deployments whose consequences are readable and deterministic; reordering unrelated entity IDs cannot silently choose the player's tactical plan.
+- **Dependencies:** R01, R03
+- **Files / exact evidence:** `packages/sim/src/warfare.ts:55-71`; `packages/sim/src/combat/index.ts:134-175`; `packages/sim/src/combat/individual.ts:53-90`; `docs/hermes-analysis/ui/39-controlled-battle-deployment.png`
+
+<a id="r14"></a>
+### 14. R14 — Research lacks enough transformative late branches and comparison clarity
+
+**P1 · Effort XL · Impact High · Basis: Observed + code**
+
+- **Evidence / where / how:** C74/C99 finish ten practical technologies by75/84; Epic all factions by146, far before808 ending. Navigation and land works are genuine unlocks, but most of the25 development nodes are additive effects. Research UI is a long card catalog.
+- **Player consequence:** Knowledge loses strategic purpose and progression stops changing what players can do.
+- **Desired experience and implementation:** Add mutually informing unlock branches that change logistics, specialization, political or magical capabilities; retain genuine instant-purchase rules rather than pretending there is a research queue. Show downstream unlocks, alternative costs and turns-to-afford based on current yields.
+- **Acceptance:** Late research creates counters or new plans, not another mandatory+1; multiple earned campaigns choose different branches and can explain the opportunity cost in the UI.
+- **Dependencies:** R08, R25
+- **Files / exact evidence:** `packages/content/src/progression.ts:51-82`; `packages/content/src/development.ts:51-89`; `docs/hermes-analysis/campaigns/findings.md:45-49`; `docs/hermes-analysis/ui/04-research-turn1.png`; `docs/hermes-analysis/ui/35-narrow-research-130.png`
+
+<a id="r15"></a>
+### 15. R15 — The world lacks independent powers and consequential discovery/event content
+
+**P1 · Effort XL · Impact Transformative · Basis: Bounded code absence + Campaign A**
+
+- **Evidence / where / how:** No executable minor-power, landmark, quest or branching-event registries. Current ruins are razed towns. Campaign A's chosen route finds no interactive landmark/quest in30 turns; this is one sample, not an all-world claim.
+- **Player consequence:** Exploration finds terrain/resources and peer realms but few discoveries that create a story or redirect a strategy.
+- **Desired experience and implementation:** Implement one independent actor/site/event loop with persistent choices and AI valuation; then author state-triggered regional conflicts and a bounded endgame escalation. Establish mechanics and consequential outcomes before multiplying templates.
+- **Acceptance:** Discovery can alter ownership, obligation, capability or geography through player choice; consequences survive save/replay and appear in a fog-safe ongoing history.
+- **Dependencies:** R01, R08
+- **Files / exact evidence:** `packages/content/src/index.ts:1-15`; `packages/sim/src/types.ts:218-250`; `packages/sim/src/siege.ts:164-168`; `docs/hermes-analysis/systems/content.json`; `docs/hermes-analysis/ui/30-natural-turn30.json`
+
+<a id="r16"></a>
+### 16. R16 — Onboarding teaches navigation but not a complete first strategic loop
+
+**P1 · Effort M · Impact High · Basis: Observed UI**
+
+- **Evidence / where / how:** Opening prompt explains founding; Map guide teaches movement/windows/hotkeys. No staged teaching of household work, economy, magic prerequisites, battle interpretation and victory planning appeared.
+- **Player consequence:** The game presents mechanical depth without ensuring a new player understands what to do or why.
+- **Desired experience and implementation:** Build an optional, state-aware first-campaign sequence with small real actions, previews and an accessible glossary. Tolerate alternate action order, do not spend for the player, and allow permanent opt-out.
+- **Acceptance:** External first-time users can found/work/build/scout/research/fight and state their victory objective without consulting source or remembering invisible requirements.
+- **Dependencies:** R05, R07
+- **Files / exact evidence:** `docs/hermes-analysis/ui/01-first-turn.png`; `docs/hermes-analysis/ui/50-map-guide.txt`; `apps/web/src/main.tsx:692-703`
+
+<a id="r17"></a>
+### 17. R17 — No implemented audio layer supports the game
+
+**P1 · Effort L · Impact High · Basis: Bounded source/asset audit**
+
+- **Evidence / where / how:** Production scan found no browser audio integration and no tracked audio files; no music/effects/ambience controls appeared in live settings. This is not claimed as an audio listening test.
+- **Player consequence:** Battle, discovery, construction and victory lack a core layer of consequential feedback and atmosphere.
+- **Desired experience and implementation:** Create an original restrained sonic palette: music, biome/settlement ambience, UI, orders, combat, magic and milestone cues. Trigger from authoritative presentation facts; implement user-gesture activation, category volume/mute, saved settings and voice limits.
+- **Acceptance:** Licensed/provenanced sound families function across supported browsers, never affect simulation, respect mute/reduced-sensory preferences and scale without a voice explosion.
+- **Dependencies:** Independent.
+- **Files / exact evidence:** `docs/hermes-analysis/systems/audio-search.json`; `docs/hermes-analysis/ui/33-narrow-settings.txt`
+
+<a id="r18"></a>
+### 18. R18 — Waykeeper binding and four specialist art aliases obscure playable roles
+
+**P1 · Effort M · Impact High · Basis: Observed pixels + asset inventory**
+
+- **Evidence / where / how:** All 545 approvals and current live catalog IDs are present; all common 24-culture kits and existing works/deposits are covered. The UI rejects unregistered character.waykeeper before reaching its published shared fallback, yielding Generic. Four strategic specialists alias scout, spearman or cavalry art; their battle sets already exist.
+- **Player consequence:** Paid characters visibly fall back despite available artwork; a crossbow, javelin, halberd or lance role should not be mistaken for another recruit. This is not a missing common culture kit.
+- **Desired experience and implementation:** Repair shared Waykeeper fallback first with zero new images. Commission four deliberate shared strategic specialist pilots with exact current role bindings; scale to culture-qualified variants only after review. Preserve the existing culture kit and provenance.
+- **Acceptance:** A paid Waykeeper in multiple cultures resolves a truthful shared image without a failed-load pawn; four specialist roles are visually distinct in recruitment/cards/map at native use size; binding, fog and deferred page budgets pass.
+- **Dependencies:** Independent.
+- **Files / exact evidence:** `apps/web/src/faction-art.tsx:68-82`; `apps/web/src/faction-art.tsx:137-151`; `packages/art-pipeline/src/faction-art.ts:8-28`; `docs/hermes-analysis/ui/24-waykeeper-appointment.png`; `docs/hermes-analysis/art/art-report.md:154-162`; `docs/hermes-analysis/art/art-backlog.json`
+
+Effort split: S for the immediate zero-image binding repair; M for four shared specialist pilots.
+
+<a id="r19"></a>
+### 19. R19 — Battle silhouettes, biome cohesion and contextual presentation need focused refinement
+
+**P1 · Effort L · Impact High · Basis: Observed pixels + pipeline review**
+
+- **Evidence / where / how:** All 13 battle sets contain genuine east/west action animation: 832 frames and 130 clips. Native foot-role bodies are thin and materially simpler than strategic culture sprites; desert/alpine originals differ markedly in value and scale from variants. The controlled 120-soldier field is sparse. These are quality/context findings, not absent motion or missing live terrain IDs.
+- **Player consequence:** Thousands of simulated soldiers do not feel like a premium battle if identities, contact, casualties and terrain are hard to read.
+- **Desired experience and implementation:** Preserve existing weighted rigs and authentic clips. Refine guard/cavalry/transport silhouette/material pilots and five biome originals before scaling; review actual clip playback and world/battle context. Prototype native coast interfaces against current projection and restrained battlefield pieces without implying nonexistent cover mechanics. Full culture battle rigs are P3, not the repair.
+- **Acceptance:** Native fit/detail views distinguish roles, attacks, casts, casualties and retreats; timing/holds/loops are actually reviewed. Terrain originals/variants read as the same region. Revised pixels pass source/native/runtime and measured atlas/frame budgets.
+- **Dependencies:** R03, R13
+- **Files / exact evidence:** `docs/hermes-analysis/art/art-report.md:87-96`; `docs/hermes-analysis/art/art-report.md:129-147`; `docs/hermes-analysis/art/evidence/battle-roles-1x.png`; `docs/hermes-analysis/art/evidence/biomes-desert-grassland-alpine-4x.png`; `docs/hermes-analysis/ui/39-controlled-battle-deployment.png`
+
+<a id="r20"></a>
+### 20. R20 — Empire-scale comparison and ongoing history require too much modal navigation
+
+**P1 · Effort L · Impact High · Basis: Observed + code**
+
+- **Evidence / where / how:** From map, another town's orders take registry→entry→Show selected orders; available search/sort are not an economic dashboard. Turn26 journal shows eight recent events dominated by movements; realm-windows renders up to16 supplied events and promises full tome after victory.
+- **Player consequence:** Managing forty towns/armies requires remembering numbers and repeating navigation; meaningful consequences disappear behind routine events.
+- **Desired experience and implementation:** Add sortable economic/military/character summaries with direct scoped actions and persistent selection; provide paginated fog-safe player history with filters, grouped movement, pins and locate links. Do not send the full archive in every observation.
+- **Acceptance:** Two/ten/forty-town tasks have measured bounded click/scroll cost; old own decisions remain discoverable mid-campaign without exposing hidden enemy history.
+- **Dependencies:** R02, R07, R10
+- **Files / exact evidence:** `apps/web/src/realm-windows.tsx:6-25`; `docs/hermes-analysis/ui/15-turn9-map.txt`; `docs/hermes-analysis/ui/28-journal.png`
+
+<a id="r21"></a>
+### 21. R21 — Passing scale kernels do not certify the supported browser/game workload
+
+**P1 · Effort L · Impact High · Basis: QA and performance evidence with limits**
+
+- **Evidence / where / how:** Dedicated QA includes real large maps/armies/battles, but concurrent instrumented Node timings and software/headless browser results are not min-spec hardware certification. Normal full archives already exceed limits; browser compatibility and input/device coverage remain bounded.
+- **Player consequence:** A commercial scale promise must remain smooth, saveable and operable on a declared supported configuration, not merely complete a synthetic kernel.
+- **Desired experience and implementation:** Publish a supported map/seat/battle/device matrix, run isolated target-GPU p50/p95/p99 frame and memory tests, distinguish soldier counts from formation/hull durability, and test long active effects/fog/save/history workloads. Wire measured budgets into release gates.
+- **Acceptance:** Early/middle/late and massive-battle scenarios meet explicit frame/turn/memory/save budgets on min-spec and reference hardware, with reproducible scenarios and no hidden skipped maximum-mode coverage.
+- **Dependencies:** R01, R02, R03
+- **Files / exact evidence:** `docs/hermes-analysis/qa/logs/benchmark-scale.log`; `docs/hermes-analysis/qa/logs/battle-perf-final.log`; `docs/hermes-analysis/qa/logs/map-probe.log`; `docs/hermes-analysis/qa/logs/capture-standard-long.log`
+
+<a id="r22"></a>
+### 22. R22 — Release verification does not yet protect long-campaign invariants and all supported configurations
+
+**P1 · Effort L · Impact High · Basis: Fresh failures + release inspection**
+
+- **Evidence / where / how:** Unchanged contact gate fails; full chronicle benchmarks expose invalid saves; gameplay/production smoke passing does not cover every accepted campaign boundary. Initial production-smoke attempt was an audit-config launch error (spawn /bin/sh ENOENT), corrected on rerun—not a product defect.
+- **Player consequence:** A green subset can coexist with campaign-loss defects; players need a trustworthy release candidate and recovery path.
+- **Desired experience and implementation:** Make full named gates truthful: accepted-command save invariants, long multiseed campaigns, archive limits, supported migrations, production asset failure, quota recovery and browser/input matrices. Preserve failing fixtures and separate historical frozen-schema benchmarks from current evidence.
+- **Acceptance:** Zero unresolved P0s and no unexplained named-gate failures; declared migration/browser coverage actually executed; release artifacts reproducible from a clean checkout with licenses and recovery instructions.
+- **Dependencies:** R01, R02, R03, R06, R21
+- **Files / exact evidence:** `docs/hermes-analysis/qa/logs/contact-repro.log`; `docs/hermes-analysis/qa/logs/benchmark-chronicles.log`; `docs/hermes-analysis/qa/logs/production-smoke.log`; `docs/hermes-analysis/qa/logs/production-smoke-v2.log`; `DEFINITION_OF_DONE.md:16-35`
+
+<a id="r23"></a>
+### 23. R23 — Reload/import accumulates overlapping world-map controls
+
+**P2 · Effort S · Impact Medium · Basis: Independent runtime reproduction**
+
+- **Evidence / where / how:** Independent dev and production public-UI lifecycle runs: one faction-overview-control initially, five after four loads, nine after four imports, reset to one on document reload. Canvas remains one and sampled attached listeners stay constant. Duplicate sibling keys are reported in dev.
+- **Player consequence:** Stale overlapping UI accumulates through routine save use; it is a real lifecycle defect, not demonstrated runaway WebGL/listener leakage.
+- **Desired experience and implementation:** Use unique component-scoped sibling keys or deliberate keyed subtrees at main.tsx:713. Add repeated-load/import DOM-count and working-control assertions in dev and production; do not characterize this as a proven GPU/worker leak.
+- **Acceptance:** Exactly one live control and one canvas after repeated same-size/cross-size replacements, responsive controls and stable listeners; no full page reload required.
+- **Dependencies:** Independent.
+- **Files / exact evidence:** `apps/web/src/main.tsx:713-713`; `apps/web/src/faction-overview-control.tsx:14-25`; `docs/hermes-analysis/qa/logs/lifecycle-v2.log`; `docs/hermes-analysis/ui/45-map-after-refocus.png`
+
+<a id="r24"></a>
+### 24. R24 — Characters and major milestones lack a distinct narrative/payoff layer
+
+**P2 · Effort L · Impact High · Basis: Observed + code**
+
+- **Evidence / where / how:** Named roles have actual XP/missions/wounds/death, but no authored biography/relationship/office system. First appointed Waykeeper has numeric suffix2. Founding, arcane unlock, appointment and victory are mainly status lines; the battle report requires opening Journal.
+- **Player consequence:** The game records consequences more reliably than it makes the player care about particular people and turning points.
+- **Desired experience and implementation:** Add a bounded set of traits/relationships or office conflicts tied to actual campaign facts; disambiguate names without exposing serials. Tier feedback into routine/notable/major, with concise aftermath cards, event anchors and restrained audio/camera cues. Avoid repeated blocking celebrations.
+- **Acceptance:** Players can identify why a veteran or conquered capital matters and trace that story midgame; milestone feedback reflects real facts and is skippable without losing information.
+- **Dependencies:** R15, R17, R18, R20
+- **Files / exact evidence:** `packages/content/src/characters.ts:75-109`; `packages/sim/src/characters.ts:226-232`; `packages/sim/src/characters.ts:325-395`; `docs/hermes-analysis/ui/24-waykeeper-appointment.png`; `docs/hermes-analysis/ui/42-battle-aftermath.png`
+
+<a id="r25"></a>
+### 25. R25 — Materials have few competing uses and weak strategic denial value
+
+**P1 · Effort L · Impact High · Basis: Observed extraction + code**
+
+- **Evidence / where / how:** Eight real deposits feed14 advanced development nodes or fixed-price own-market sales. Cavalry does not require horses; heavy troops do not require iron; Ashglass does not pay for current spells. D sparse ends with zero material extraction for every faction.
+- **Player consequence:** Taking or trading a resource rarely changes an opponent's available strategy enough to justify a large resource catalog.
+- **Desired experience and implementation:** Before expanding from8 toward the written40+ target, connect a few resources to substitutable equipment/recruitment, infrastructure or ritual choices with competing sinks and catch-up paths. Add genuine exchange only with diplomatic obligations and AI valuation ready.
+- **Acceptance:** At least several distinct deposit types change plans and create contestable tradeoffs; denial has a counter-strategy, AI extracts when useful, and more resources are not counted as depth by themselves.
+- **Dependencies:** R01, R11
+- **Files / exact evidence:** `packages/content/src/resources.ts:4-36`; `packages/content/src/development.ts:33-48`; `packages/content/src/index.ts:20-56`; `packages/sim/src/resources.ts:69-103`; `docs/hermes-analysis/ui/48-grain-extraction.png`; `docs/hermes-analysis/campaigns/findings.md:88-92`
+
+Full evidence, rationale, proposed solution, acceptance, files and dependencies are retained in [top-25.json](docs/hermes-analysis/top-25.json) and the detailed `hermes-analysis` document. There are exactly 25 ranked issues: 3 P0, 20 P1, 2 P2. P3 ideas are deliberately outside the most-important current-release issue ranking and appear in sections 12/17.
+
+## 9. System Scorecard
+
+| Area | Current | 1.0 floor | Gap | Evidence-based reason |
+| --- | --- | --- | --- | --- |
+| Core Loop | 4.5/10 | 9/10 | 4.5 | Paid explore/invest/expand chain works, but late payoff converges on passive accumulation. |
+| Strategic Depth | 3.5/10 | 9/10 | 5.5 | Meaningful land and combined-arms rules, few transforming inter-system strategies. |
+| Faction Identity | 3.5/10 | 9/10 | 5.5 | Original cultures, ecology and names; common rosters, casters and victory rules. |
+| Economy | 4.5/10 | 8/10 | 3.5 | Real workers, costs and extraction; weak sustained-deficit and logistics consequences. |
+| Research | 4/10 | 9/10 | 5 | Ten practical unlocks and real development; trees finish far before Epic campaign ends. |
+| Magic | 2/10 | 9/10 | 7 | Two well-gated battle spells; no strategic supernatural economy, rituals or summons. |
+| Diplomacy | 2.5/10 | 8/10 | 5.5 | Working paid binding truces; no larger obligation or coalition system. |
+| Warfare | 4/10 | 9/10 | 5 | Persistent formations, conquest and ships; legal over-cap stacks cannot be attacked. |
+| AI | 4/10 | 8/10 | 4 | Legally uses many systems and wins; sparse-contact failure and long exact movement loops. |
+| UI/UX | 5/10 | 9/10 | 4 | Map-first controls, search, quotes and hotkeys; weak attention and empire-scale comparison. |
+| Art | 6.5/10 | 9/10 | 2.5 | Substantial validated culture/world library and preserved identity; Waykeeper binding, specialist aliases and biome/battle cohesion need targeted work. |
+| Animation | 5/10 | 8/10 | 3 | Thirteen genuine shared battle action sets and real source rigs; battlefield readability, playback review and wider strategic life remain incomplete. |
+| Audio | 0/10 | 8/10 | 8 | No implemented audio layer found by retained asset/source audit. |
+| Performance | 6/10 | 9/10 | 3 | Strong bounded simulation/battle kernels; workload/device coverage and archive scale remain gaps. |
+| Stability | 2/10 | 9/10 | 7 | Reproducible unloadable legal battle outcomes and oversized campaign archives override passing smoke tests. |
+| Content | 3.5/10 | 9/10 | 5.5 | Validated existing content, but missing major playable fantasy/political/event registries. |
+| Replayability | 3.5/10 | 9/10 | 5.5 | Geography/culture differences and emergent battles; common paths and long late-game convergence. |
+| Onboarding | 3/10 | 8/10 | 5 | Useful local guidance and blockers, no graduated first-campaign teaching loop. |
+| Game Feel | 3.5/10 | 9/10 | 5.5 | Cohesive interface, weak distinction between routine action and consequential milestones. |
+| **Overall** | **37/100** | **90+/100** | 52.9 to 90 | Editorial index; hard release gates override the average. |
+
+| System / current state | Complete | Depth | Usable | Importance | Breadth | AI | Polish | Ready |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| World / map — Mostly complete geography; missing interactive world content | 7 | 5 | 5 | 9 | 5 | 5 | 5 | 5 |
+| Factions — Functional but shallow asymmetry | 4 | 3 | 5 | 10 | 4 | 3 | 4 | 3.5 |
+| Settlements / cities — Integrated foundation | 7 | 5 | 4 | 9 | 4 | 5 | 4 | 5 |
+| Economy / supply — Functional; weak deficit consequences | 6 | 4 | 5 | 10 | 4 | 5 | 4 | 4.5 |
+| Resources / trade — Extraction integrated; strategic uses shallow | 5 | 4 | 4 | 8 | 3 | 3 | 4 | 4 |
+| Research / development — Functional but short and mostly additive | 5 | 4 | 4 | 9 | 3 | 5 | 4 | 4 |
+| Magic — Partial battle slice; strategic pillars missing | 2 | 2 | 4 | 10 | 1 | 3 | 2 | 2 |
+| Diplomacy / politics — Functional truces; broader politics missing | 3 | 2 | 5 | 9 | 2 | 4 | 3 | 2.5 |
+| Armies / warfare — Integrated, with over-cap rule defect | 5 | 5 | 4 | 10 | 4 | 4 | 4 | 4 |
+| Siege / occupation — Integrated outcomes; weak supply/political pressure | 5 | 4 | 4 | 8 | 3 | 4 | 4 | 4 |
+| Naval / transport — Mostly complete core transport/combat | 6 | 5 | 4 | 8 | 3 | 4 | 4 | 5 |
+| Tactical combat — Functional kernel; limited deployment/control/presentation | 6 | 4 | 4 | 9 | 3 | 5 | 3 | 4 |
+| Characters / agents — Functional skills/missions; shallow personal identity | 5 | 3 | 4 | 7 | 3 | 5 | 3 | 3.5 |
+| Strategic AI — Integrated legal policy; weak long-horizon purpose | 6 | 4 | 4 | 10 | 4 | 4 | 4 | 4 |
+| Victory / endgame — One real path; other promised endings missing | 2 | 2 | 3 | 10 | 1 | 5 | 2 | 2 |
+| Independent actors / narrative events — Designed, not implemented | 0 | 0 | 0 | 8 | 0 | 0 | 0 | 0 |
+
+The eight-dimension diagnostic covers completeness, depth, usability, strategic importance, content breadth, AI competence, polish and readiness for each of 16 major gameplay systems. It is separate from the equal-weight 19-area overall index; importance is not another completion weight. Full reasoning: [systems/report.md](docs/hermes-analysis/systems/report.md), [system-dimensions.json](docs/hermes-analysis/system-dimensions.json), and the detailed audit.
+
+The labels here are qualitative code assessments, not a numerical completion percentage. **Integrated foundation** means multiple genuine rule links exist; it is not an assertion that every 1.0 gate or browser flow has passed.
+
+### System assessment 1 — Exploration, land and settlement development — integrated foundation, strongest current economic layer
+
+The working chain is:
+
+`charted geography → connected owned claim → legal paid improvement → active construction turns → actual worker assignment → tile yield / deposit stock → research, development or coin → expansion and military funding`.
+
+Ownership, worker capacity and improvements are separate. The town center works automatically; owned outer tiles do not automatically produce. Improvement eligibility checks actual terrain/biome/features/deposit and research, not just an icon. Paid cultivation changes a sparse biome overlay, not physical mountain/water access, river crossings or historical battle terrain. Claiming, improvements and cultivation have visible canonical quotes; distance and completed works raise costs. Capital designation is independent of population tier and adds a small center yield (`packages/sim/src/territory.ts:286-344,351-380`; `packages/sim/src/resources.ts:69-81`).
+
+Growth now uses increasing food requirements/consumption, founding fees and civic upkeep rather than the old 20-population/six-worker/37-claim ceilings. This is a meaningful foundation for wide versus tall planning; it is not a completed stability, governor or taxation model (`packages/sim/src/growth-economy.ts:9-42`; `packages/sim/src/territory.ts:296-306`; `packages/sim/src/simulation.ts:262-275`). The severe counterweight limitation is discussed under SYS-007: deficit food never reduces existing population.
+
+Map scale is genuine data, not a content multiplier: Tiny 1,536 cells, Small 40,960, Standard 98,304, Huge 196,608 and Legendary 307,200; twelve biomes coexist with five physical terrain classes, three depth classes and seven natural features. Three modern layouts exist. These figures are generated from exported dimensions, not measured performance or a claim that every generated world has equal strategic quality (`packages/mapgen/src/index.ts:8-61`; `catalog.md`). Independent powers, legendary site interactions, discoverable narrative choices and magical geography remain absent from the executable catalog/state (SYS-006).
+
+### System assessment 2 — Economy and progression — genuine opportunity costs, shallow long-term variety
+
+Production spends coin upfront, consumes industry over a FIFO queue of at most five, and produces real buildings or singleton formation armies. There is no production cancel/reorder command. Research is an immediate knowledge purchase after prerequisites, not a research queue or workforce allocation. Both have coherent current consumers rather than mock progress bars (`packages/sim/src/simulation.ts:245-260,442-455`; `packages/sim/src/progression.ts:72-110`; `packages/sim/src/types.ts:175-216`).
+
+The ten technologies split into Craft, Stewardship, Navigation and Civic branches. They link to improved yields, special land works, frontier growth, new troops, harbors/ocean travel and victory preparation. Institutions and doctrines are not merely more technology nodes: one permanent institution spends coin for a food/coin orientation, and one permanent doctrine chooses armor versus strategic movement. Four institution-linked and four doctrine-linked traditions later spend faction influence, coin and sometimes materials (`packages/content/src/progression.ts:51-82`; `packages/content/src/development.ts:79-88`).
+
+The 25 development nodes add more depth than a catalog limited to the older two institutions/two doctrines suggests:
+
+- **Eight formation nodes:** battle XP follows surviving formation identity; Assault/Line/Missile specializations are exclusive, with an advanced shared veteran endpoint. Actual attack, armor, initiative, range and opening morale effects reach combat snapshots.
+- **Nine hearth nodes:** local civic points, population/building gates and exclusive advanced Provisions/Craft/Commerce specialization. Higher output can incur recurring upkeep; building-dependent bonuses become dormant if the building is lost, and development remains with a captured town.
+- **Eight realm traditions:** influence earned from functioning developed towns, tied to permanent institution/doctrine choices. This is separate from practical knowledge, personal XP and the arcane discovery list.
+
+Quotes enforce prerequisites, costs, scope, ownership and blockers before payment. Formation XP is only awarded to surviving actual battle participants; siege/occupation pause civic gains (`packages/content/src/development.ts:51-89`; `packages/sim/src/development.ts:64-121,152-211,224-233`; `packages/sim/src/warfare.ts:55-65`). All current effects remain additive economy/combat bonuses, not transformations of government or faction-specific law. The AI scores bounded candidates rather than possessing a long-horizon specialization plan (`packages/sim/src/development.ts:258-269`).
+
+Resource production is contingent on matching deposit, completed work and a genuinely worked tile; siege/occupation suspend extraction. Materials buy fourteen advanced development nodes, or sell at a fixed per-resource price through an active owned market. There are no rival trading partners or price dynamics in this sale, no material gate for cavalry/heavy troops, no supply-route network, and no luxury happiness or magical expenditure tied to the category names (`packages/sim/src/resources.ts:51-103`; `packages/content/src/development.ts:33-48`; `packages/content/src/index.ts:20-56`). Resource count expansion without additional competing uses would multiply similar stockpiles rather than strategic interdependence (SYS-010).
+
+### System assessment 3 — Armies, fleets and tactical combat — substantial integrated core, bounded player control
+
+Formation identity, strength, morale and fatigue survive merge/split/transfer. The slowest formation sets march speed, best scout sets sight, upkeep sums across formations, and reorganization takes the minimum already-spent movement. A detachment supports twelve formations; healthy marshal skill progression supports larger armies up to twenty, and leader loss preserves excess formations with a movement penalty instead of deleting them (`packages/sim/src/army-composition.ts:8-46,82-120`; `packages/sim/src/characters.ts:70-89`; `packages/content/src/characters.ts:61-64`).
+
+Transport is a real relationship between existing land armies and a fleet. Shore adjacency, movement and capacity are validated; every hull must be ocean-capable plus national Ocean navigation to cross deep water. Land/water domains stay distinct. A transport contributes eight formation spaces, and cargo losses are tied to hull loss rather than invisible teleporting passengers (`packages/content/src/index.ts:50-52`; `packages/sim/src/naval.ts:35-85,90-140`). This is more depth than simply enabling all land units to embark for free.
+
+Current battles use up to twenty formations per side, five columns/four ranks and twelve rounds. Land soldiers have persistent identities **within the battle** and actual target/casualty facts; the campaign persists formation strength rather than permanent cross-battle soldier biographies. A naval formation is one hull whose strength is durability. Automatic and manual tactical rounds use the same kernel, with separate genuine battle-ability handling in the campaign wrapper (`packages/sim/src/combat/index.ts:6-32,155-245`; `packages/sim/src/combat/individual.ts:12-32,53-90`; `packages/sim/src/warfare.ts:199-227,285-330`).
+
+Role differences are mechanically meaningful: arbalesters halve target armor in the individual attack calculation; pikes/halberdiers screen mounted charges and gain an anti-mounted bonus; unprotected flanks, cohesion, fatigue, support, terrain and firing frontage change attacks. Morale routes, pursuit and legal retreat cells produce persistent losses; no retreat route destroys the formation container and attached-character consequences follow (`packages/sim/src/combat/individual.ts:53-90`; `packages/sim/src/combat/index.ts:90-123,199-218`; `packages/sim/src/warfare.ts:228-246`; `packages/sim/src/characters.ts:377-395`).
+
+The limits matter: formation deployment follows lexicographic creation IDs, not player-selected front/rear roles; the four orders apply to the whole side. There is no general multi-army reinforcement pipeline or supply map. All units on a defending hex participate together, and above twenty the whole battle is refused—SYS-001, not merely a desired extra feature. A bounded, role-aware deployment/reserve system would add more agency than copying real-time Total War control or adding visual soldier count (SYS-009).
+
+### System assessment 4 — Siege, conquest and occupation — integrated outcomes, not a political simulation
+
+A besieging adjacent land army imposes zero food yield and halves other town yields; defense and supply values decline on real turns. Occupy, sack, raze and context-legal liberation are distinct persistent choices. Occupation preserves buildings with temporary penalties; sack transfers finite victim coin, loses population/buildings and food; raze produces a resettleable ruin; liberation returns a town to its original founder if that is a third faction. Land, capital, development, characters and victory projects reconcile with the ownership change (`packages/sim/src/siege.ts:39-53,117-192`; `packages/sim/src/territory.ts:447-466`; `packages/sim/src/simulation.ts:462-519`).
+
+There is no client/vassal outcome and no cultural loyalty or rebellion risk underneath the timers. At zero siege supplies only militia morale declines: real garrison formations do not suffer supply casualties, while general turn refresh repairs morale/fatigue. All sieges start from the same defense/supply baseline, not a developed fort/wall building chain (`packages/sim/src/siege.ts:20-31,51-51,117-125`; `packages/sim/src/simulation.ts:297-304`; `packages/content/src/index.ts:36-42`). These omissions restrict conquest counterplay and political variety (SYS-005/SYS-007).
+
+### System assessment 5 — Diplomacy and politics — a functional peace transaction, very narrow strategic scope
+
+The working loop is `observed contact → formal war → possible conquest grievances → proposed one-way coin payment + truce duration → AI/player acceptance → actual transfer and war removal → binding no-war period → peaceful expiry`. Coins are checked again at acceptance, so offers are not automatically escrowed. Acceptance releases incompatible sieges via the ordinary reconciliation path. AI reasons refer to observed military pressure, war duration, coin terms and grievances (`packages/sim/src/diplomacy.ts:71-189`; `packages/sim/src/simulation.ts:471-474,512-514`).
+
+This is not a general negotiation builder: there is no resource/settlement clause, alliance, access, guarantee, intelligence exchange or subject relationship. Claimed borders do not block military passage, so open borders are neither required nor negotiable. Trust and respect are saved but do not influence the present evaluator; the executed comparison returned identical assessments at opposite trust extremes (`packages/sim/src/diplomacy.ts:9-40,169-189`; `packages/sim/src/territory.ts:296-306`; `probe-results.json`). Rulers, succession, loyalty and internal cultural pressure are designed but have no canonical system yet (`packages/sim/src/types.ts:218-250`; `GAME_1_0_SCOPE.md:187-196`).
+
+### System assessment 6 — Characters and magic — real personal state, limited identity and effects
+
+The four roles are Hearth marshal, Road witness, March engineer and Waykeeper. Survey, refit and sabotage commit real coin and stationary turns; combat/movement/peace can interrupt applicable work. Refit restores existing formation strength but not destroyed formations, and survey reveals remembered geography rather than hidden armies. Missions award XP only for actual changes; wounds/death follow explicit consequences. Seventeen skill nodes include exclusivity/prerequisites and six current advanced branches (`packages/content/src/characters.ts:38-68`; `packages/content/src/development.ts:95-101`; `packages/sim/src/characters.ts:265-281,325-395`).
+
+The magical foundation correctly separates national discovery from personal ability. A functioning Witness archive and knowledge buy Contained ember projection or Measured rune binding; a healthy attached Waykeeper still needs Flame/Rune aptitude. Cinder thread damages an enemy formation; Bound ward absorbs later damage, not past casualties. Both have range, use limits and shared strain; Set shields is a separate mundane Oath-guard fatigue action, and Rally is a separate commander morale action. There are two usable spells, not a four-spell system counting their discoveries twice (`packages/content/src/magic.ts:5-27`; `packages/sim/src/magic.ts:17-60`; `README.md:70-70`).
+
+Every recruited caster starts with the same Flame 1/Rune 1 dictionary and no skill tree. There is no personal path growth, asymmetric spell access, ritual, summons, artifice, sacred/occult system or magical-site loop. Ashglass extraction does not close those missing links. This is an architecturally sensible slice of a much larger required system, not a completed Dominions-like combinatorial magic economy (SYS-004/SYS-011).
+
+### System assessment 7 — AI and long-campaign strategy — integrated functional planners, insufficient strategic differentiation
+
+There is genuine cross-system AI plumbing: observations feed legal command proposals; shared budget accounting reserves founder/project/naval funding; land planning sees real site quotes; characters, ships, merging, research and project host safety have explicit policies. The planner can target observed enemy project hosts and considers host threat/support rather than always choosing the first town (`packages/ai/src/index.ts:20-145,145-191`; `packages/ai/src/progression.ts:20-95`). These are foundations worth retaining.
+
+The current policy still has common structural rails: first missing common building, specifically Charter compact as institution, doctrine selected from current war/no-war, local military strength tests and per-pass candidate limits. It is a stateless proposal API rather than a saved theater/operation/long-horizon faction agenda. No difficulty setting exists in campaign creation; pace scales late payments/response windows, not AI skill. Existing status admits a Standard/four-seat contact failure, but this subagent has not independently measured it (`packages/ai/src/index.ts:128-145,194-235`; `packages/ai/src/progression.ts:118-164`; `packages/sim/src/simulation.ts:123-134`; `docs/IMPLEMENTATION_STATUS.md:15-19`). The sibling campaign audit must determine observed engagement and competence; legal one-turn proposals alone do not establish either.
+
+### System assessment 8 — Victory — one real interruptible path, not five implemented paths
+
+Prosperity requires Civic accounts, either institution, and at least three unoccupied towns each containing a market and archive. The chosen host must be free of siege. Payment is upfront; current Standard/Long/Epic commitments are 18,000/80,000/240,000 coin and the response windows are 20/40/60 active turns. Short is the explicitly small test/skirmish profile. Supporting occupied towns cease to qualify; a besieged supporting town still counts toward infrastructure if unoccupied, while siege of the host pauses the project. Capture/raze of the host cancels it without refund (`packages/content/src/progression.ts:30-49,78-82`; `packages/sim/src/progression.ts:46-68,90-156`).
+
+A successful project sets the only `Victory` variant and locks further commands. Conquering all rivals is not independently checked for Dominion. Hegemony, Legacy and Ascendancy are named design targets, not hidden implemented modes. Gate B requires at least three tested paths while the master product brief asks for five; neither is met by the current single path, and three tests would not silently satisfy the five-path specification (`packages/sim/src/progression.ts:17-18,142-156`; `packages/sim/src/simulation.ts:320-342`; `DEFINITION_OF_DONE.md:16-33`; `MASTER_PROMPT.md:1821-1837`).
+
+### System assessment 9 — Audio — no implementation found in the bounded scan
+
+`audio-search.json` records all 179 non-test production TypeScript/TSX files and exact patterns: browser audio APIs, common audio-library names, audio file extensions and audio/music/sfx/volume/mute terms. There were **zero source hits** and **zero tracked audio filenames** across the repository. This supports “no implemented audio found,” not a browser listening claim or proof about untracked/external media. The scan implementation is `inventory.ts:15-16,50-52,69-71`. Coordinate SYS-013 with the art audit instead of double-counting it.
+
+The source inspection above is reconciled with the fresh campaign/QA results in sections 10/14/15; statements scoped to that sub-audit are not additional independent runtime claims.
+
+## 10. Campaign Simulation Findings
+
+### A — natural UI play
+
+Ashen Compact, seed **20260909**, Small **256×160**, 12 realms, Continents, Standard pace. Ordinary UI play reached **turn 30** with two founded settlements, paid construction/recruitment/land improvement, two practical technologies, one Arcane discovery, Charter compact and a paid attached Waykeeper. Final: 153 coin, 50 knowledge, 836 explored cells. Save/load hash matched **`7997b20a`**.
+
+No natural foreign contact/battle occurred on this route. Initial four idle scout turns were a **pointer-harness error**, corrected at turn 5, so the route is not clean quantitative early-contact evidence. The two-settlement opening is not a complete natural campaign or a recruited new-player study.
+
+Separate UI-imported authored scenarios exercised war/peace assessment, a 120-soldier battle, Brace and autoresolve, 25/33 losses, real retreat and 3 earned XP spent with 8 coin on training. The grain fixture exercised paid extraction and a real sale: 3→2 grain and 71→73 coin. **Those events did not organically occur in Campaign A.** [UI timeline and screenshots](docs/hermes-analysis/ui/findings.md).
+
+### B/C/D — primary generated campaigns
+
+| Policy / seed | Map / seats / pace | Final turn | Winner | Battles / captures | Hash |
+| --- | --- | --- | --- | --- | --- |
+| B-tiny4-seed74-v2 | tiny / 4 / standard | 252 | faction.cinder_march | 153 / 26 | `41f6fe76` |
+| B-tiny4-seed99-v2 | tiny / 4 / standard | 222 | faction.glass_tide | 273 / 8 | `d15627df` |
+| C-tiny4-seed74 | tiny / 4 / standard | 257 | faction.cinder_march | 90 / 27 | `cef149e6` |
+| C-tiny4-seed99 | tiny / 4 / standard | 215 | faction.glass_tide | 99 / 34 | `495733ff` |
+| D-tiny4-seed74-standard | tiny / 4 / standard | 244 | faction.ashen_compact | 148 / 51 | `1c5b5201` |
+| D-tiny4-seed99-epic | tiny / 4 / epic | 808 | faction.glass_tide | 59 / 13 | `cb09f975` |
+| D-sparse4-seed748291 | standard / 4 / long | 301 | None at bound | 12 / 0 | `3c565118` |
+| D-standard24-seed74-300 | standard / 24 / standard | 227 | faction.mire_courts | 582 / 72 | `1ea09c56` |
+
+All primary campaigns use current rules/save schema 16, generator 7, roster 4, generated resources and ordinary starting conditions. B/C control Ashen using distinct observation-only policies; opponents are unchanged production AI. D uses unchanged AI at every seat. Policies honor real victory; the Standard24 run ends at 227 rather than disabling victory to reach its 300-round bound.
+
+- **125,150 commands, zero rejections, eight exact full replays, seven actual Prosperity victories.** These totals exclude two disclosed pilot attempts.
+- **Seven midpoint continuations and seven final saves pass.** Standard24 midpoint 101 and B74 final 252 fail loading. Exact replay can reproduce exact invalid bytes.
+- At turn 100, C74 has 8 towns/59 population/2,323 coin versus B74's 3/22/310; C99 has 7/49/1,012 versus B99's 3/21/660. Policies are exercised, not claimed optimal; neither B nor C wins its controlled seat.
+- C actually earns magic. C99 battle80, turn37 includes paid discovery, appointment/attachment, both genuine spell uses and caster strain10. This is not a grant-injected demonstration.
+- Count **substantive outcomes**, not only event volume: B99 has 273 unique battles but 263 ordered withdrawals and only 106 battles with strength loss. Standard24 has 582 battles, 559 withdrawals, 330 with loss.
+- Epic seed99 runs to 808, but the last battle/capture is 297; practical research is complete by 146; 172,421 knowledge remains at the end. One army has 720 A→B→A returns. Late duration is not proof of depth.
+- Sparse Standard/4/Long seed748291 reaches turn301 without victory, no captures and no Ashen battles. Ashen first contact137 misses the unchanged100-turn expectation; all factions end with zero material extraction.
+
+### E — explicit stress workloads
+
+Fresh QA covers generated Huge/Legendary growth, authored populated worlds, composed formations, a genuine turn-200 checkpoint and a real 2,240-soldier battlefield. Synthetic populations, deferred victory in scale benchmarks and snapshot-only browser imports are explicitly identified rather than counted as organic complete campaigns. See section15 and [QA report](docs/hermes-analysis/qa/report.md#4-campaign-e-performance-and-stress).
+
+## 11. Art Audit
+
+**Preserve the existing aesthetic:** serious inhabited dark-medieval fantasy, deliberate modern-retro pixel clusters, readable material/value groups, warm wood/aged metal/linen against cool iron and subdued terrain. Retain distinct equipment/architecture, not merely faction tints. Use fixed screen-upper-left lighting, restrained local highlights and darker local-color separation rather than universal black outlines. Preserve the unresolved Ashfall; art must not invent new powers or canonical consumers.
+
+- **545 approvals / 1,427 frames / 662 clips; 519 static and 26 multiframe assets.** 432 qualified assets across 24 cultures. All 18 improvements, five civic buildings and eight deposits already exist.
+- **All 13 shared battle sets genuinely animate:** two directions, five states, 64 frames/10 clips each; 832 frames/130 clips. Strategic stills, caster/effect one-shots and weighted unit rigs are different capabilities.
+- Fresh validators pass all approvals and 19 retained Blender source imports. Native/runtime pixels match; no missing live catalog IDs. Technical integrity is not a new all-assets aesthetic approval.
+- Representative inspection opened 15 sheets: 164 distinct subjects/236 frames plus contextual images. Parent independently checked overlapping guard/biome/battle sheets. **Not every frame, direction, loop or background was visually approved.**
+- **Waykeeper is a binding defect, not a missing image.** The UI rejects an unregistered qualified role before the existing shared fallback. Immediate correction needs zero new images.
+- Four strategic specialists reuse another role's artwork; four shared pilots are justified. The common culture kit is not missing. Battle foot silhouettes are thin/plainer than strategic units; desert/alpine originals visibly differ from muted variants. Refine pilots before multiplying assets.
+
+### Factory reality
+
+The supplied `/projects/BlenderArtFactory` and `/pixel-art-factory` paths do not exist. Their actual inspected checkouts are `/home/telephoneheater/Projects/BlenderArtFactory` and `/home/telephoneheater/Projects/pixel-art-factory`.
+
+Blender 5.2.1 LTS, Aseprite 1.3.18.3-x64 and real Pixel Snapper 1.0.0 are discoverable. **MCP connection was refused**, but background Blender is independent. Optional generator access is unconfigured/unverified; no provider call or new render was needed for this audit.
+
+The stock Blender 2D profile is an eight-static-facing shrine study, not arbitrary animated content. The game already has a stronger game-native rig/render/import extension. `paf pixelate` performs nearest resizing/palette processing, **not generative pixel authorship**; `paf source/export` does not replace the game's frame/tag/pivot/provenance gates. New arbitrary subjects need recipes/contracts; non-square illustrations need a CLI/export-route extension.
+
+Use: **consumer contract → deliberate Blender rig/reference or native pixel source → fixed camera/anchor render → exact palette/alpha and native cleanup → real Snapper/Aseprite processing → source/native validation → individual visual review → approved game import/binding → runtime playback/fog/performance review**. Existing motion should be reused; simple icons/masks favor direct pixel editing. Neither factory supplies game Foley/music production.
+
+### Inspected production capabilities and exact boundaries
+
+Four profiles are actually listed: `modern-warfare` (service-crate study), `theandril-pixel-2d`, `theandril-pixel-3d`, and `theandril-fantasy-realism` (shrine studies). Changing `--asset` alone changes identity/output naming, **not the recipe subject**. An arbitrary new sword, citizen or terrain tile needs an authored/adapted recipe or supported source workflow.
+
+The stock 2D profile renders **384×384 raw → 96×96 native, eight static facings**, with nearest reduction, 0.5 alpha threshold and the exact 64-color palette. It requests orthographic 45° azimuth / 35.2643897° elevation. The generic code consumes sprite size/facing count, raw render resolution, preview scale and alpha threshold. The role overrides document 64 infantry, 96 cavalry/town, 128 city, 64 improvement and 32 badge conventions—but **do not automatically apply those roles or anchors**. The stock rotating-camera study does not automate fixed screen-upper-left light and ground-anchor placement across facings. Motion-blur/depth-of-field profile flags are also not wired to all generic review cameras; the game-owned driver explicitly fixes its own camera behavior.
+
+Output includes editable `.blend`, PNG evidence/native facings and optional reference GLB. Runtime for the 2D profile is PNG, not GLB. Generic technical validation checks native sizes, actual facing set, legal colors, binary alpha, transparent outer border and retained file hashes; GLB workflows add geometry/material/embedded-resource/budget checks. It does not prove sufficient interior padding, attractive clusters, anatomy, loop quality or engine binding. Requested production texture channels, LODs and bakes are not generated merely because a profile mentions them.
+
+The actual standalone shrine contact sheet was opened: eight views of the same geometric stone/flame assembly. Its broad cubic forms differ from the organic/detail-rich strategic sprites. It is a study/reference, **not new canonical shrine gameplay, not an animation set and not a drop-in native import**. Exact inspected image is listed in `visual-observations.json` under the factory's immutable published archive.
+
+### pixel-art-factory / `paf`
+
+This is an **Aseprite-first processing/packaging wrapper**, not local generative pixel authorship.
+
+| Command/capability | Actual boundary |
+|---|---|
+| `pixelate` | Width 8–4096; proportional rounded height; nearest resize. Optional 2–256 derived colors; `--colors 0` retains RGB. It does not select Theandril's exact palette by saying `--colors 64`. |
+| `scale` | Integer enlargement factor 2–32. |
+| `palette` / `recolor` | Extract GPL palette; load a supplied GPL and convert indexed with `none` or `ordered` dither. No game-specific fixed palette is bundled/enforced by these commands. |
+| `source` | Opens a PNG and saves `.aseprite`. It does not invent layers, missing poses, timing or clean clusters. |
+| `export` | Saves Aseprite to PNG, factor default 1. Native Aseprite can do more, but this wrapper does not expose the game's deterministic tags/durations/sheet-JSON/pivot validation workflow. |
+| Cursor/background/theme | Useful unrelated packaging tools; not sprite atlas publication or game integration. |
+| `provider` | Optional Pixflux-v2 still-image prompt/size request. No reference, animation or seed flags in this wrapper; key absent. |
+
+`paf pixelate` cannot turn an unstructured image into finished authored pixel anatomy or a coherent animation. GPL recoloring also does not replace binary-alpha, anchor, frame and engine validation. The provider wrapper's error text advertises 16–400 dimensions, but its code only enforces a two/three-digit size string; it should not be relied on as the robust game-side validator. No network test was attempted.
+
+### Existing game-native Blender → pixel → Aseprite import is already real
+
+The game-owned `tools/art/blender-battle/` and `units/` extension uses actual BlenderArtFactory geometry/profile/PNG helpers, **not the stock shrine turntable as pretend animation**. It adds authored rigs or keyed objects, **256×256 raw rendering**, fixed whole-motion camera/anchor projection, independent directions, palette-reduced 64/96 native frames and immutable source manifests. Active source imports cover the 13 battle units plus five effects and Waykeeper; arbitrary unregistered new roles still need explicit contracts/adapters.
+
+The game's source processing invokes real Pixel Snapper and Aseprite. It deliberately enlarges normalized native clusters before Snapper rather than blindly re-snapping single-pixel art. Explicit frame lists, durations and `state.direction` tags are preserved. Aseprite source creation supports 1–256 supplied frames and at most 64 tags; frame durations are bounded at 1–60,000 ms. Native profiles include 32², 64², 96², 128² and a library-level 384×216 vignette profile. **The current main CLI selector accepts only square 32/64/96/128**, so portrait/vignette/menu recommendations need an export-routing change; a library constant is not an end-to-end feature.
+
+Exports are untrimmed RGB, retain tags/timing, use JSON-array metadata and a bounded 4096×4096 sheet. Wide 96px/64-frame documents use rows, not an oversized horizontal strip. After export the game validates dimensions, frames, pivots, palette/alpha, source/processing hashes and review-input freshness. Individual approval, explicit scene-page packing, integration and actual consumer review are separate gates. This is stronger and more game-specific than `paf source`/`export` alone.
+
+### Optional generators: implemented adapters versus present access
+
+| Lane | Implemented adapter capability | Current audit status |
+|---|---|---|
+| Game PixelLab | Pixflux-v2 stills; 16–400 per side, minimum area 1024; safe-integer seed; one init image in library adapter. No character/hex/animation API. Main CLI does not forward reference images. Above 200², no-background is not guaranteed alpha. | No usable key; no request. |
+| PerfectPixel | Upstream `ppvalidate` **base-only** mode; request bound 1024²; no seed/reference/animation support in this adapter. Upstream result still needs native palette/size normalization. | Headless executable/provider setup unavailable. Do not confuse GUI or upstream directional features with this adapter. |
+| ComfyUI | Loopback text-to-image, up to 2048²; explicit prompt/seed/size bindings, installed model/workflow and license notes. No reference/animation or guaranteed transparent workflow. | No configured working workflow/backend verified; no model download. |
+| Historical Codex source | Retained original source/prompt bridge; 518 current assets declare `codex-imagegen`. | A previous session's built-in generation tool is not callable through this Node CLI or inherited by Hermes merely because docs mention it. |
+
+No optional lane was used for this audit. Provider/tool licenses do not automatically establish rights to every generated result or supplied reference.
+
+## Supported unified production workflow
+
+Use a **shared contract and evidence chain**, not a new monolithic generator:
+
+1. **Brief the current consumer:** exact stable ID, current mechanics, role silhouette, material groups, one distinguishing detail, native canvas/pivot, frame/state/direction matrix, footprint and scene residency. Resolve conflicts against the actual registered production, not obsolete guide totals.
+2. **Author the source deliberately:** reuse/adapt the existing game Blender rig lane for real battle motion; use original architecture/volume recipes where helpful; use native Aseprite/hand pixel authorship for small icons, masks and edge kits. A legitimately available raster provider supplies a source candidate, not approval.
+3. **Controlled rendering:** one camera/scale/anchor over the full motion union; separately rendered asymmetrical directions; fixed screen-space light, alpha, no motion blur/DOF. Preserve `.blend`, recipe, dependencies, raw frames and precise transforms. Do not crop/recenter every pose independently.
+4. **Pixel finishing:** documented nearest reduction, exact palette and binary-alpha normalization, deliberate native cluster/outline work, then the actual game Snapper stage. `paf` is optional tooling for defined transforms, not a replacement for this authorship or the game's processing receipts. Retain edited sources so a future regeneration cannot erase manual work.
+5. **Aseprite assembly/export:** supplied true frames, explicit tags/durations, fixed pivots, bounded row sheets and JSON. Use the game adapter where it already exists; add the missing profile/role route before promising non-square portraits, menu art or new IDs.
+6. **Native validation and individual visual review:** check every revised frame, light/dark/game backgrounds, native and true integer views, weapon handedness, motion/holds/loops and source rights. Fresh bytes require fresh individual review; old approvals remain recoverable.
+7. **Approved-only game integration:** current live binding/fallback/DOM/Pixi resolution, explicit atlas scene partitions, opacity geometry refresh for changed props, actual paid gameplay and land/naval/cast/casualty scenarios. Verify pause/skip/reduced motion, fog, saved replay hashes and budgets. A factory publication is not a browser test.
+
+These are supported components with explicitly identified adaptation work. There is **no existing one-command BlenderArtFactory → paf → arbitrary Theandril asset auto-publisher**, and none was created or invoked.
+
+## 12. Missing Art Inventory
+
+[Full JSON](docs/hermes-analysis/art/art-backlog.json) and [CSV](docs/hermes-analysis/art/art-backlog.csv) retain existing IDs, gap kind, quantities, native resolutions, motion requirements, Blender/Pixel Factory applicability, cleanup/review, dependencies and acceptance. **27 rows: 11 P1, 11 P2, five P3.** “Missing dedicated identity,” “binding defect,” “quality revision” and “future consumer” are separate categories, not a single invented missing-asset total.
+
+### ART-01 — Qualified strategic specialist identities
+
+**P1 · dedicated-role-gap**
+
+- **Existing coverage:** 0 single-frame qualified sprites; current consumer: Current recruitment/cards/map select SHARED_UNIT_ART: two scout aliases, one spearman alias, one cavalry alias
+- **Existing IDs:** `battle.unit.skirmisher`, `battle.unit.arbalester`, `battle.unit.halberdier`, `battle.unit.lancer`
+- **Missing/new estimate:** minimumDistinctSharedPilot: 4; fullQualifiedRollout: 96; **revision estimate:** 0.
+- **Quantity assumptions:** Four playable specialist roles x 24 cultures = 96 dedicated qualified sprites if full parity is commissioned. A 4-sprite shared specialist pilot can correct immediate role ambiguity, but does not provide 96 culture identities. Current battle already has all four distinct role sets; no new mechanical unit is requested.
+- **Resolution / animation:** 64x64 (skirmisher/arbalester/halberdier), 96x96 (lancer); existing foot/mount pivots; Static se first; idle only after identity review
+- **Source/generation pipeline — Blender:** Reuse the existing four battle rigs only as source/reference; change camera/materials to strategic culture grammar, not raw battle-sheet copying
+- **Source/finishing pipeline — Pixel Factory:** Aseprite/native palette finish; paf pixelate cannot author the 96 identities
+- **Hand cleanup / review:** Required: weapons, handedness, silhouette, 24-culture source/native/runtime review
+- **Quality standard / required correction:** Skirmisher javelin vs arbalester crossbow; halberd blade vs pike; lancer lance vs riding sword identifiable at UI/map use size; preserve old approvals until replacements reviewed
+- **Mechanics / binding dependencies:** Extend qualified-role registry/bindings; retain generic fallbacks and exact content IDs
+
+### ART-02 — Shared battlefield silhouette/material refinement
+
+**P1 · quality-revision**
+
+- **Existing coverage:** 13 shared animated role sets; current consumer: All 13 battle.unit roles have actual movement, attacks, casualties and naval events
+- **Existing IDs:** `battle.unit.arbalester`, `battle.unit.cavalry`, `battle.unit.coastal_warship`, `battle.unit.colonist`, `battle.unit.guard`, `battle.unit.halberdier`, `battle.unit.heavy_infantry`, `battle.unit.lancer`, `battle.unit.ocean_warship`, `battle.unit.scout`, `battle.unit.skirmisher`, `battle.unit.spearman`, `battle.unit.transport`
+- **Missing/new estimate:** 0; **revision estimate:** pilot: 3; maximum: 13.
+- **Quantity assumptions:** Audit saw thinner rod-like limbs, edge-on shields and flatter heads/materials than strategic art. Start guard/cavalry/transport; do not declare all 832 frames defective. Shared silhouettes are intentional, not 312 missing culture sets.
+- **Resolution / animation:** 64x64 foot; 96x96 mounts/hulls; unchanged pivots; Preserve current two e/w facings x five states; 64 frames/set, 832 existing frames
+- **Source/generation pipeline — Blender:** Best fit: existing editable rigs, fixed whole-motion camera; refine construction and upper-left material values
+- **Source/finishing pipeline — Pixel Factory:** Controlled reduction followed by deliberate Aseprite cluster/outline finishing; exact native hashes
+- **Hand cleanup / review:** Required: inspect every revised clip at 1x/4x and live Fit/detail, not just frame 0
+- **Quality standard / required correction:** Keep motion articulation and casualty identity; role readability and world material cohesion must improve without raising native size by default
+- **Mechanics / binding dependencies:** None for art revisions; publication/import and memory regression gates required
+
+### ART-03 — Biome base/variant value cohesion
+
+**P1 · quality-revision**
+
+- **Existing coverage:** 36 engine-bound biome tiles; current consumer: 12 current biomes use original+variant1+variant2
+- **Existing IDs:** `terrain.alpine`, `terrain.alpine.variant_1`, `terrain.alpine.variant_2`, `terrain.ash_scrub`, `terrain.ash_scrub.variant_1`, `terrain.ash_scrub.variant_2`, `terrain.chalkland`, `terrain.chalkland.variant_1`, `terrain.chalkland.variant_2`, `terrain.desert`, `terrain.desert.variant_1`, `terrain.desert.variant_2`, `terrain.grassland`, `terrain.grassland.variant_1`, `terrain.grassland.variant_2`, `terrain.marsh`, `terrain.marsh.variant_1`, `terrain.marsh.variant_2`, `terrain.ocean`, `terrain.ocean.variant_1`, `terrain.ocean.variant_2`, `terrain.rainforest`, `terrain.rainforest.variant_1`, `terrain.rainforest.variant_2`, `terrain.steppe`, `terrain.steppe.variant_1`, `terrain.steppe.variant_2`, `terrain.taiga`, `terrain.taiga.variant_1`, `terrain.taiga.variant_2`, `terrain.temperate_forest`, `terrain.temperate_forest.variant_1`, `terrain.temperate_forest.variant_2`, `terrain.tundra`, `terrain.tundra.variant_1`, `terrain.tundra.variant_2`
+- **Missing/new estimate:** 0; **revision estimate:** initial: 5; reviewScope: 36.
+- **Quantity assumptions:** Initial 5 base tiles to triage: desert, grassland, alpine, taiga and ocean. The inspected desert is orange against muted sand variants; the alpine original has larger, high-contrast snow-covered peaks against lower rocky variants. Review all 36; revise only demonstrated mismatches. This is not a technical validation failure.
+- **Resolution / animation:** 64x64 pointy-hex native; existing runtime regular-hex fitting; Static
+- **Source/generation pipeline — Blender:** Optional terrain mass/reference render only; not required for a palette/value correction
+- **Source/finishing pipeline — Pixel Factory:** Native pixel re-authoring/versioned sources; fixed palette; no arbitrary global recolor of approved atlas
+- **Hand cleanup / review:** Required original-versus-variants, native mixed-repeat and real map/fog views
+- **Quality standard / required correction:** Large regions should read as continuous materials, not alternating unrelated stamps; no silent palette expansion
+- **Mechanics / binding dependencies:** No new biome rules; preserve deterministic seed/cell choice and physical geography
+
+### ART-04 — Shore, banks, road and biome interface kit
+
+**P1 · current-feature-native-gap**
+
+- **Existing coverage:** 0 bound modular overlay primitives; current consumer: Current rivers/roads/lakes/coastal water are procedural renderer features; five old terrain overlay assets are published but NOT live-bound
+- **Existing IDs:** `terrain.coast`, `terrain.river`, `terrain.road`, `terrain.transitions`, `terrain.hills`
+- **Missing/new estimate:** minimumPilot: 6; starter: 30; upperPlanning: 48; **revision estimate:** 0.
+- **Quantity assumptions:** Starter 30 = 6 coast edges + 6 coast corners + 6 biome edges + 6 river-bank pieces + 6 road/bank joining pieces. Exact adjacency reduction remains a design/QA task; not a claim all edge combinations fit 30. Begin with a 6-piece coast-edge pilot on the current regular-hex projection; reject or revise that pilot before scaling the kit.
+- **Resolution / animation:** 64x64 shared center/edge ordering; canvas must fit current radius 29 projection; Static initially
+- **Source/generation pipeline — Blender:** Optional bank/cliff source geometry; hand-authored 2D masks better for topology
+- **Source/finishing pipeline — Pixel Factory:** Aseprite/Python mask authoring; paf has no adjacency generator or edge validator
+- **Hand cleanup / review:** Required seam/three-way-junction/known-fog/river-continuity map tests
+- **Quality standard / required correction:** No cracks/double-dark seams; roads/rivers remain observation-derived. Keep current procedural rendering as a correct fallback
+- **Mechanics / binding dependencies:** New presentation adapter/mask compositor; no change to hex topology, movement, river/crossing rules
+
+### ART-05 — Art contracts and current coverage documentation
+
+**P1 · pipeline-documentation-gap**
+
+- **Existing coverage:** 1 synchronized contract set; current consumer: Production decisions currently rely on contradictory docs
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 0; **revision estimate:** documentsMinimum: 3.
+- **Quantity assumptions:** THEANDRIL_ART_BIBLE still says 12 cultures / 216 qualified assets, lacks new works/battle state. docs/art/README line 8 still calls CLI single-facing/idle despite sourceClips support. Installed compact guide also describes 12 current + 12 proposed. This audit changes none of them.
+- **Resolution / animation:** No image production; State current battle e/w multi-state and strategic se/static separately
+- **Source/generation pipeline — Blender:** Update only when authorized; factory stock remains a study
+- **Source/finishing pipeline — Pixel Factory:** No processing required
+- **Hand cleanup / review:** Editorial cross-check against runtime/native inventory
+- **Quality standard / required correction:** One current art contract links historical checkpoints instead of letting historical totals appear current
+- **Mechanics / binding dependencies:** None
+
+### ART-06 — Battle effects and Waykeeper cast polish
+
+**P2 · quality-and-state-extension**
+
+- **Existing coverage:** 6 shared sprite sets; current consumer: Current melee/projectile/rally/Cinder thread/Bound ward and Waykeeper cast consumers
+- **Existing IDs:** `character.waykeeper`, `effect.battle_melee`, `effect.battle_projectile`, `effect.battle_ember`, `effect.battle_ward`, `effect.battle_rally`
+- **Missing/new estimate:** 0; **revision estimate:** pilot: 2; maximum: 6.
+- **Quantity assumptions:** No missing effects for the currently implemented two spells. Refine representative caster/impact only if live review warrants it.
+- **Resolution / animation:** 64x64; effects pivot (32,32) and Waykeeper (32,56); Existing five effects + Waykeeper: 8 x 100 ms se one-shot each; optional idle must be an explicit new clip
+- **Source/generation pipeline — Blender:** Existing project effect/Waykeeper object-keyed recipes; do not mislabel Waykeeper as a full weighted unit rig
+- **Source/finishing pipeline — Pixel Factory:** Real Snapper and Aseprite exports already present; manual pixel read
+- **Hand cleanup / review:** Required effect silhouette, cast anticipation/recovery and light/dark readability
+- **Quality standard / required correction:** Effects legible without obscuring targets; no inferred additional magic schools
+- **Mechanics / binding dependencies:** New idle tag/consumer needed if adding separate idle; no new spells
+
+### ART-07 — Waykeeper appointment/roster binding and dedicated identity
+
+**P1 · confirmed-current-consumer-binding-gap**
+
+- **Existing coverage:** 1 binding repair and optional sprite expansion; current consumer: Fresh parent Campaign A: Small / 12 cultures / Continents / seed 20260909, Ashen turn 20. After paid Contained ember projection and first own Waykeeper appointment, Edrin Coalstead 2 displays pawn icons labelled Generic in both roster and character sheet.
+- **Existing IDs:** `character.waykeeper`
+- **Missing/new estimate:** immediateNewAssetsRequired: 0; recommendedIdlePortraitPilot: 1; optionalQualifiedCultureRollout: 24; **revision estimate:** 0.
+- **Quantity assumptions:** Immediate binding repair can reuse the existing 64x64 approved caster: zero new images are technically required. One explicit idle/portrait pilot would improve presentation. A subsequent 24-culture Waykeeper set is optional P2 expansion, not the reason the present Generic defect must wait.
+- **Resolution / animation:** 64x64 at (32,56); Immediate fix: display one approved still from the existing shared cast. An optional dedicated idle clip must be authored and bound explicitly; preserve the current battle cast.
+- **Source/generation pipeline — Blender:** Optional source rig adaptation by culture; not automatic tints
+- **Source/finishing pipeline — Pixel Factory:** Aseprite palette/cluster finish
+- **Hand cleanup / review:** Required: truthful role image in actual paid appointment and attached-agent views; optional culture expansion preserves all 24 culture motifs.
+- **Quality standard / required correction:** Paid appointment, roster row, selected character sheet and attached-agent views display a truthful approved role image without a Generic pawn. Verify Ashen and a second culture, missing-art fallback and deferred-page memory. Preserve the existing cast animation and canonical state.
+- **Mechanics / binding dependencies:** No new gameplay. loadFactionArtFrame rejects an unqualified role before attempting shared fallback; factionArtId does not register character.waykeeper. Repair the UI route and review a still from the existing approved shared caster before commissioning new art. Characters accompany armies/settlements; do not invent independent map-unit mechanics.
+
+### ART-08 — Published culture strategic kit completeness
+
+**P2 · complete-with-targeted-polish**
+
+- **Existing coverage:** 432 qualified assets; current consumer: All 24 x 18 common roles registered; role aliases handled in ART-01
+- **Existing IDs:** `character.engineer.ashen_compact`, `character.engineer.brine_choir`, `character.engineer.cairnwing_concord`, `character.engineer.cinder_march`, `character.engineer.cistern_assembly`, `character.engineer.emberwake_convocation`, `character.engineer.glass_tide`, `character.engineer.iron_covenant`, `character.engineer.lantern_hospices`, `character.engineer.manytrack_moot`, `character.engineer.margin_observance`, `character.engineer.mire_courts`, `character.engineer.morrow_spore`, `character.engineer.red_sluice`, `character.engineer.reedbound_council`, `character.engineer.rimehorn_clans`, `character.engineer.sable_steppe`, `character.engineer.saltwind_remnant`, `character.engineer.sepulchral_synod`, `character.engineer.underhush_exchange`, `character.engineer.unsealed_companies`, `character.engineer.velvet_meridian`, `character.engineer.vesper_court`, `character.engineer.wardhall_remnant`, `character.marshal.ashen_compact`, `character.marshal.brine_choir`, `character.marshal.cairnwing_concord`, `character.marshal.cinder_march`, `character.marshal.cistern_assembly`, `character.marshal.emberwake_convocation`, `character.marshal.glass_tide`, `character.marshal.iron_covenant`, `character.marshal.lantern_hospices`, `character.marshal.manytrack_moot`, `character.marshal.margin_observance`, `character.marshal.mire_courts`, `character.marshal.morrow_spore`, `character.marshal.red_sluice`, `character.marshal.reedbound_council`, `character.marshal.rimehorn_clans`, `character.marshal.sable_steppe`, `character.marshal.saltwind_remnant`, `character.marshal.sepulchral_synod`, `character.marshal.underhush_exchange`, `character.marshal.unsealed_companies`, `character.marshal.velvet_meridian`, `character.marshal.vesper_court`, `character.marshal.wardhall_remnant`, `character.surveyor.ashen_compact`, `character.surveyor.brine_choir`, `character.surveyor.cairnwing_concord`, `character.surveyor.cinder_march`, `character.surveyor.cistern_assembly`, `character.surveyor.emberwake_convocation`, `character.surveyor.glass_tide`, `character.surveyor.iron_covenant`, `character.surveyor.lantern_hospices`, `character.surveyor.manytrack_moot`, `character.surveyor.margin_observance`, `character.surveyor.mire_courts`, `character.surveyor.morrow_spore`, `character.surveyor.red_sluice`, `character.surveyor.reedbound_council`, `character.surveyor.rimehorn_clans`, `character.surveyor.sable_steppe`, `character.surveyor.saltwind_remnant`, `character.surveyor.sepulchral_synod`, `character.surveyor.underhush_exchange`, `character.surveyor.unsealed_companies`, `character.surveyor.velvet_meridian`, `character.surveyor.vesper_court`, `character.surveyor.wardhall_remnant`, `settlement.city.ashen_compact`, `settlement.city.brine_choir`, `settlement.city.cairnwing_concord`, `settlement.city.cinder_march`, `settlement.city.cistern_assembly`, `settlement.city.emberwake_convocation`, `settlement.city.glass_tide`, `settlement.city.iron_covenant`, `settlement.city.lantern_hospices`, `settlement.city.manytrack_moot`, `settlement.city.margin_observance`, `settlement.city.mire_courts`, `settlement.city.morrow_spore`, `settlement.city.red_sluice`, `settlement.city.reedbound_council`, `settlement.city.rimehorn_clans`, `settlement.city.sable_steppe`, `settlement.city.saltwind_remnant`, `settlement.city.sepulchral_synod`, `settlement.city.underhush_exchange`, `settlement.city.unsealed_companies`, `settlement.city.velvet_meridian`, `settlement.city.vesper_court`, `settlement.city.wardhall_remnant`, `settlement.town.ashen_compact`, `settlement.town.brine_choir`, `settlement.town.cairnwing_concord`, `settlement.town.cinder_march`, `settlement.town.cistern_assembly`, `settlement.town.emberwake_convocation`, `settlement.town.glass_tide`, `settlement.town.iron_covenant`, `settlement.town.lantern_hospices`, `settlement.town.manytrack_moot`, `settlement.town.margin_observance`, `settlement.town.mire_courts`, `settlement.town.morrow_spore`, `settlement.town.red_sluice`, `settlement.town.reedbound_council`, `settlement.town.rimehorn_clans`, `settlement.town.sable_steppe`, `settlement.town.saltwind_remnant`, `settlement.town.sepulchral_synod`, `settlement.town.underhush_exchange`, `settlement.town.unsealed_companies`, `settlement.town.velvet_meridian`, `settlement.town.vesper_court`, `settlement.town.wardhall_remnant`, `settlement.village.ashen_compact`, `settlement.village.brine_choir`, `settlement.village.cairnwing_concord`, `settlement.village.cinder_march`, `settlement.village.cistern_assembly`, `settlement.village.emberwake_convocation`, `settlement.village.glass_tide`, `settlement.village.iron_covenant`, `settlement.village.lantern_hospices`, `settlement.village.manytrack_moot`, `settlement.village.margin_observance`, `settlement.village.mire_courts`, `settlement.village.morrow_spore`, `settlement.village.red_sluice`, `settlement.village.reedbound_council`, `settlement.village.rimehorn_clans`, `settlement.village.sable_steppe`, `settlement.village.saltwind_remnant`, `settlement.village.sepulchral_synod`, `settlement.village.underhush_exchange`, `settlement.village.unsealed_companies`, `settlement.village.velvet_meridian`, `settlement.village.vesper_court`, `settlement.village.wardhall_remnant`, `ui.badge.ashen_compact`, `ui.badge.brine_choir`, `ui.badge.cairnwing_concord`, `ui.badge.cinder_march`, `ui.badge.cistern_assembly`, `ui.badge.emberwake_convocation`, `ui.badge.glass_tide`, `ui.badge.iron_covenant`, `ui.badge.lantern_hospices`, `ui.badge.manytrack_moot`, `ui.badge.margin_observance`, `ui.badge.mire_courts`, `ui.badge.morrow_spore`, `ui.badge.red_sluice`, `ui.badge.reedbound_council`, `ui.badge.rimehorn_clans`, `ui.badge.sable_steppe`, `ui.badge.saltwind_remnant`, `ui.badge.sepulchral_synod`, `ui.badge.underhush_exchange`, `ui.badge.unsealed_companies`, `ui.badge.velvet_meridian`, `ui.badge.vesper_court`, `ui.badge.wardhall_remnant`, `ui.banner.ashen_compact`, `ui.banner.brine_choir`, `ui.banner.cairnwing_concord`, `ui.banner.cinder_march`, `ui.banner.cistern_assembly`, `ui.banner.emberwake_convocation`, `ui.banner.glass_tide`, `ui.banner.iron_covenant`, `ui.banner.lantern_hospices`, `ui.banner.manytrack_moot`, `ui.banner.margin_observance`, `ui.banner.mire_courts`, `ui.banner.morrow_spore`, `ui.banner.red_sluice`, `ui.banner.reedbound_council`, `ui.banner.rimehorn_clans`, `ui.banner.sable_steppe`, `ui.banner.saltwind_remnant`, `ui.banner.sepulchral_synod`, `ui.banner.underhush_exchange`, `ui.banner.unsealed_companies`, `ui.banner.velvet_meridian`, `ui.banner.vesper_court`, `ui.banner.wardhall_remnant`, `ui.crest.ashen_compact`, `ui.crest.brine_choir`, `ui.crest.cairnwing_concord`, `ui.crest.cinder_march`, `ui.crest.cistern_assembly`, `ui.crest.emberwake_convocation`, `ui.crest.glass_tide`, `ui.crest.iron_covenant`, `ui.crest.lantern_hospices`, `ui.crest.manytrack_moot`, `ui.crest.margin_observance`, `ui.crest.mire_courts`, `ui.crest.morrow_spore`, `ui.crest.red_sluice`, `ui.crest.reedbound_council`, `ui.crest.rimehorn_clans`, `ui.crest.sable_steppe`, `ui.crest.saltwind_remnant`, `ui.crest.sepulchral_synod`, `ui.crest.underhush_exchange`, `ui.crest.unsealed_companies`, `ui.crest.velvet_meridian`, `ui.crest.vesper_court`, `ui.crest.wardhall_remnant`, `unit.cavalry.ashen_compact`, `unit.cavalry.brine_choir`, `unit.cavalry.cairnwing_concord`, `unit.cavalry.cinder_march`, `unit.cavalry.cistern_assembly`, `unit.cavalry.emberwake_convocation`, `unit.cavalry.glass_tide`, `unit.cavalry.iron_covenant`, `unit.cavalry.lantern_hospices`, `unit.cavalry.manytrack_moot`, `unit.cavalry.margin_observance`, `unit.cavalry.mire_courts`, `unit.cavalry.morrow_spore`, `unit.cavalry.red_sluice`, `unit.cavalry.reedbound_council`, `unit.cavalry.rimehorn_clans`, `unit.cavalry.sable_steppe`, `unit.cavalry.saltwind_remnant`, `unit.cavalry.sepulchral_synod`, `unit.cavalry.underhush_exchange`, `unit.cavalry.unsealed_companies`, `unit.cavalry.velvet_meridian`, `unit.cavalry.vesper_court`, `unit.cavalry.wardhall_remnant`, `unit.coastal_warship.ashen_compact`, `unit.coastal_warship.brine_choir`, `unit.coastal_warship.cairnwing_concord`, `unit.coastal_warship.cinder_march`, `unit.coastal_warship.cistern_assembly`, `unit.coastal_warship.emberwake_convocation`, `unit.coastal_warship.glass_tide`, `unit.coastal_warship.iron_covenant`, `unit.coastal_warship.lantern_hospices`, `unit.coastal_warship.manytrack_moot`, `unit.coastal_warship.margin_observance`, `unit.coastal_warship.mire_courts`, `unit.coastal_warship.morrow_spore`, `unit.coastal_warship.red_sluice`, `unit.coastal_warship.reedbound_council`, `unit.coastal_warship.rimehorn_clans`, `unit.coastal_warship.sable_steppe`, `unit.coastal_warship.saltwind_remnant`, `unit.coastal_warship.sepulchral_synod`, `unit.coastal_warship.underhush_exchange`, `unit.coastal_warship.unsealed_companies`, `unit.coastal_warship.velvet_meridian`, `unit.coastal_warship.vesper_court`, `unit.coastal_warship.wardhall_remnant`, `unit.colonist.ashen_compact`, `unit.colonist.brine_choir`, `unit.colonist.cairnwing_concord`, `unit.colonist.cinder_march`, `unit.colonist.cistern_assembly`, `unit.colonist.emberwake_convocation`, `unit.colonist.glass_tide`, `unit.colonist.iron_covenant`, `unit.colonist.lantern_hospices`, `unit.colonist.manytrack_moot`, `unit.colonist.margin_observance`, `unit.colonist.mire_courts`, `unit.colonist.morrow_spore`, `unit.colonist.red_sluice`, `unit.colonist.reedbound_council`, `unit.colonist.rimehorn_clans`, `unit.colonist.sable_steppe`, `unit.colonist.saltwind_remnant`, `unit.colonist.sepulchral_synod`, `unit.colonist.underhush_exchange`, `unit.colonist.unsealed_companies`, `unit.colonist.velvet_meridian`, `unit.colonist.vesper_court`, `unit.colonist.wardhall_remnant`, `unit.guard.ashen_compact`, `unit.guard.brine_choir`, `unit.guard.cairnwing_concord`, `unit.guard.cinder_march`, `unit.guard.cistern_assembly`, `unit.guard.emberwake_convocation`, `unit.guard.glass_tide`, `unit.guard.iron_covenant`, `unit.guard.lantern_hospices`, `unit.guard.manytrack_moot`, `unit.guard.margin_observance`, `unit.guard.mire_courts`, `unit.guard.morrow_spore`, `unit.guard.red_sluice`, `unit.guard.reedbound_council`, `unit.guard.rimehorn_clans`, `unit.guard.sable_steppe`, `unit.guard.saltwind_remnant`, `unit.guard.sepulchral_synod`, `unit.guard.underhush_exchange`, `unit.guard.unsealed_companies`, `unit.guard.velvet_meridian`, `unit.guard.vesper_court`, `unit.guard.wardhall_remnant`, `unit.heavy_infantry.ashen_compact`, `unit.heavy_infantry.brine_choir`, `unit.heavy_infantry.cairnwing_concord`, `unit.heavy_infantry.cinder_march`, `unit.heavy_infantry.cistern_assembly`, `unit.heavy_infantry.emberwake_convocation`, `unit.heavy_infantry.glass_tide`, `unit.heavy_infantry.iron_covenant`, `unit.heavy_infantry.lantern_hospices`, `unit.heavy_infantry.manytrack_moot`, `unit.heavy_infantry.margin_observance`, `unit.heavy_infantry.mire_courts`, `unit.heavy_infantry.morrow_spore`, `unit.heavy_infantry.red_sluice`, `unit.heavy_infantry.reedbound_council`, `unit.heavy_infantry.rimehorn_clans`, `unit.heavy_infantry.sable_steppe`, `unit.heavy_infantry.saltwind_remnant`, `unit.heavy_infantry.sepulchral_synod`, `unit.heavy_infantry.underhush_exchange`, `unit.heavy_infantry.unsealed_companies`, `unit.heavy_infantry.velvet_meridian`, `unit.heavy_infantry.vesper_court`, `unit.heavy_infantry.wardhall_remnant`, `unit.ocean_warship.ashen_compact`, `unit.ocean_warship.brine_choir`, `unit.ocean_warship.cairnwing_concord`, `unit.ocean_warship.cinder_march`, `unit.ocean_warship.cistern_assembly`, `unit.ocean_warship.emberwake_convocation`, `unit.ocean_warship.glass_tide`, `unit.ocean_warship.iron_covenant`, `unit.ocean_warship.lantern_hospices`, `unit.ocean_warship.manytrack_moot`, `unit.ocean_warship.margin_observance`, `unit.ocean_warship.mire_courts`, `unit.ocean_warship.morrow_spore`, `unit.ocean_warship.red_sluice`, `unit.ocean_warship.reedbound_council`, `unit.ocean_warship.rimehorn_clans`, `unit.ocean_warship.sable_steppe`, `unit.ocean_warship.saltwind_remnant`, `unit.ocean_warship.sepulchral_synod`, `unit.ocean_warship.underhush_exchange`, `unit.ocean_warship.unsealed_companies`, `unit.ocean_warship.velvet_meridian`, `unit.ocean_warship.vesper_court`, `unit.ocean_warship.wardhall_remnant`, `unit.scout.ashen_compact`, `unit.scout.brine_choir`, `unit.scout.cairnwing_concord`, `unit.scout.cinder_march`, `unit.scout.cistern_assembly`, `unit.scout.emberwake_convocation`, `unit.scout.glass_tide`, `unit.scout.iron_covenant`, `unit.scout.lantern_hospices`, `unit.scout.manytrack_moot`, `unit.scout.margin_observance`, `unit.scout.mire_courts`, `unit.scout.morrow_spore`, `unit.scout.red_sluice`, `unit.scout.reedbound_council`, `unit.scout.rimehorn_clans`, `unit.scout.sable_steppe`, `unit.scout.saltwind_remnant`, `unit.scout.sepulchral_synod`, `unit.scout.underhush_exchange`, `unit.scout.unsealed_companies`, `unit.scout.velvet_meridian`, `unit.scout.vesper_court`, `unit.scout.wardhall_remnant`, `unit.spearman.ashen_compact`, `unit.spearman.brine_choir`, `unit.spearman.cairnwing_concord`, `unit.spearman.cinder_march`, `unit.spearman.cistern_assembly`, `unit.spearman.emberwake_convocation`, `unit.spearman.glass_tide`, `unit.spearman.iron_covenant`, `unit.spearman.lantern_hospices`, `unit.spearman.manytrack_moot`, `unit.spearman.margin_observance`, `unit.spearman.mire_courts`, `unit.spearman.morrow_spore`, `unit.spearman.red_sluice`, `unit.spearman.reedbound_council`, `unit.spearman.rimehorn_clans`, `unit.spearman.sable_steppe`, `unit.spearman.saltwind_remnant`, `unit.spearman.sepulchral_synod`, `unit.spearman.underhush_exchange`, `unit.spearman.unsealed_companies`, `unit.spearman.velvet_meridian`, `unit.spearman.vesper_court`, `unit.spearman.wardhall_remnant`, `unit.transport.ashen_compact`, `unit.transport.brine_choir`, `unit.transport.cairnwing_concord`, `unit.transport.cinder_march`, `unit.transport.cistern_assembly`, `unit.transport.emberwake_convocation`, `unit.transport.glass_tide`, `unit.transport.iron_covenant`, `unit.transport.lantern_hospices`, `unit.transport.manytrack_moot`, `unit.transport.margin_observance`, `unit.transport.mire_courts`, `unit.transport.morrow_spore`, `unit.transport.red_sluice`, `unit.transport.reedbound_council`, `unit.transport.rimehorn_clans`, `unit.transport.sable_steppe`, `unit.transport.saltwind_remnant`, `unit.transport.sepulchral_synod`, `unit.transport.underhush_exchange`, `unit.transport.unsealed_companies`, `unit.transport.velvet_meridian`, `unit.transport.vesper_court`, `unit.transport.wardhall_remnant`
+- **Missing/new estimate:** 0; **revision estimate:** targeted: 0; reviewScope: 432.
+- **Quantity assumptions:** Do not treat 24 new kingdoms/seats as extra art cultures. Existing city/village/hull concepts are valuable.
+- **Resolution / animation:** Existing 32/64/96/128 square contracts; 431 static, one 4-frame scout idle; do not request unused walk/death for UI crests
+- **Source/generation pipeline — Blender:** Only target a concrete silhouette revision, not regenerating whole families
+- **Source/finishing pipeline — Pixel Factory:** Keep exact originals and editable exports
+- **Hand cleanup / review:** Review gaps only; this audit samples families, not all 432 assets
+- **Quality standard / required correction:** Retain upper-left muted materials, distinct silhouettes, original cultural marks and complete extremities
+- **Mechanics / binding dependencies:** None
+
+### ART-09 — Additional static biome variation
+
+**P2 · optional-readability-extension**
+
+- **Existing coverage:** 36 64px ground tiles; current consumer: Existing deterministic variant selection currently has exactly 3 slots
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 12; **revision estimate:** 0.
+- **Quantity assumptions:** One additional tile per 12 biomes reaches the reference heuristic of 4 per biome; optional, not a current binding failure.
+- **Resolution / animation:** 64x64 centered at (32,32); Static
+- **Source/generation pipeline — Blender:** Optional volume study; no terrain rule generation
+- **Source/finishing pipeline — Pixel Factory:** New controlled original/native art with same footprint and palette
+- **Hand cleanup / review:** Required randomized region review after ART-03
+- **Quality standard / required correction:** Variation quiets repetition rather than increasing noise
+- **Mechanics / binding dependencies:** Expand presentation variant slots/selectors, not simulation RNG
+
+### ART-10 — Town housing and construction diversity
+
+**P2 · current-feature-visual-reuse**
+
+- **Existing coverage:** 24 culture housing variants; current consumer: Housing currently reuses 24 village sprites; construction uses code-drawn scaffolds
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** housing: 48; construction: 4; **revision estimate:** 0.
+- **Quantity assumptions:** 2 additional residential variants per 24 cultures = 48; 4 shared scaffolding states is an optional presentation estimate, not new buildings.
+- **Resolution / animation:** 96x96 housing at (48,80); 64x64 construction at (32,48); Static stage frames; no timer-driven progress invented
+- **Source/generation pipeline — Blender:** Good fit for modular original architecture/reference camera
+- **Source/finishing pipeline — Pixel Factory:** Native deliberate roof/wall/negative-space finish
+- **Hand cleanup / review:** Required village/town/city hierarchy and occupied-tile containment
+- **Quality standard / required correction:** Occupied working towns vary without replacing actual approved civic/improvement sprites
+- **Mechanics / binding dependencies:** Respect observed population, existing district selector, work queues and private/fog state
+
+### ART-11 — Shared officers in battle
+
+**P2 · optional-animation-gap**
+
+- **Existing coverage:** 72 new shared animated officer sets (existing count is qualified stills); current consumer: Three existing culture officer types use static strategic sprites in battle; Waykeeper has a cast pilot separately
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 3; **revision estimate:** 0.
+- **Quantity assumptions:** 72 existing qualified stills remain; 3 new shared battle-role sets is a production proposal, not 72 missing rigs.
+- **Resolution / animation:** 64x64 at (32,56); Start idle/rally-or-working response only, 2 e/w facings; frame budget follows actual consumer
+- **Source/generation pipeline — Blender:** New marshal/surveyor/engineer rigs or deliberate source reuse with truthful provenance
+- **Source/finishing pipeline — Pixel Factory:** Supplied frames->Snapper->Aseprite tags; no automatic culture animation
+- **Hand cleanup / review:** Required equipment identity and genuine motion
+- **Quality standard / required correction:** No procedural bob mislabeled as new motion; preserved support positioning and canonical events
+- **Mechanics / binding dependencies:** Explicit officer response/casualty presentation hooks; no new combat abilities for surveyor/engineer
+
+### ART-12 — Small resource/status/action icons
+
+**P2 · native-lod-gap**
+
+- **Existing coverage:** 72 new simplified UI icons; current consumer: UI has 72 heraldic assets and uses existing sprites/text elsewhere; no dedicated resource/status/action atlas family
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** starter: 24; upperPlanning: 40; **revision estimate:** 0.
+- **Quantity assumptions:** Starter 24 = 8 resource shorthand + 8 status shapes + 8 action shapes. Existing 72 are crests/badges/banners, not 24 missing current IDs.
+- **Resolution / animation:** 16/24/32px based on actual slot; non-square icons require export routing review; Static
+- **Source/generation pipeline — Blender:** Not a Blender task except concept reference
+- **Source/finishing pipeline — Pixel Factory:** Best fit deliberate pixel authorship/Aseprite; add 16/24 profiles if used; paf source/export alone does not validate
+- **Hand cleanup / review:** Required grayscale, text association, state/hover/accessibility contrast
+- **Quality standard / required correction:** Never replace legible DOM text with rasterized text or color-only status
+- **Mechanics / binding dependencies:** Bind existing canonical statuses/actions; expand small-size profiles and DOM/Pixi asset routing as needed
+
+### ART-13 — Portrait/bust option for existing four character roles
+
+**P2 · optional-presentation-extension**
+
+- **Existing coverage:** 0 shared role busts; current consumer: Current four character archetypes use full-body figures; no dedicated portrait images
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 4; **revision estimate:** 0.
+- **Quantity assumptions:** Four shared role busts first; 96 culture-role portraits would be a separate optional commission, not an automatic 1.0 requirement.
+- **Resolution / animation:** 128x160 source; 64x80 thumbnail; current CLI square-profile selector needs extension; Static
+- **Source/generation pipeline — Blender:** Optional consistent proportion/lighting reference, not finished portrait pixels
+- **Source/finishing pipeline — Pixel Factory:** Aseprite supports custom dimensions but current game CLI does not yet route 128x160
+- **Hand cleanup / review:** Required face/native thumbnail/role identity review
+- **Quality standard / required correction:** Faces and travel equipment readable without new lore or traced proprietary designs
+- **Mechanics / binding dependencies:** Dedicated portrait slot and non-square profile/binding; no new named character rules
+
+### ART-14 — Battle ground and siege presentation
+
+**P2 · current-feature-native-gap**
+
+- **Existing coverage:** 0 background/fortification pieces; current consumer: Battle currently uses a quiet procedural fill/line texture and a simple siege-wall bar
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** starter: 8; upperPlanning: 14; **revision estimate:** 0.
+- **Quantity assumptions:** Starter 8 = 5 land surface patches + 1 naval water patch + 2 siege stage modules. Decorative, not new tactical objects.
+- **Resolution / animation:** 64x64 ground repeats; 128x128 decorative wall/gate modules; keep scene native scale; Static
+- **Source/generation pipeline — Blender:** Best fit restrained masonry/earth source geometry or hand pixel patches
+- **Source/finishing pipeline — Pixel Factory:** Native tile clusters and explicit seams; no faux-pixel filter
+- **Hand cleanup / review:** Required unobtrusive backdrop and honest simulation footprint
+- **Quality standard / required correction:** Clarify land/naval/siege identity while keeping soldiers and event targets dominant
+- **Mechanics / binding dependencies:** Ground/fortification graphics adapter; do not imply passable gates, obstacles or cover the rules do not simulate
+
+### ART-15 — Chronicle/menu/prosperity-victory visual polish
+
+**P2 · optional-presentation-extension**
+
+- **Existing coverage:** 3 illustrations; current consumer: Current menu/chronicles/prosperity result exist; 3 DOM material WebPs are not illustrations
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** starter: 5; upperPlanning: 8; **revision estimate:** 0.
+- **Quantity assumptions:** Starter 5 = 1 menu + 1 current victory + 3 generic chronicle chapter vignettes; narrow alternatives are additional exports, not extra narrative events.
+- **Resolution / animation:** 640x360 menu/victory; 384x216 chronicle plus 256x144 narrow variant; Static, load on demand
+- **Source/generation pipeline — Blender:** Optional original composition blockout
+- **Source/finishing pipeline — Pixel Factory:** Aseprite vignette-384 profile exists; CLI selector/non-square routing must be extended; paf only processes sources
+- **Hand cleanup / review:** Required responsive safe areas and historical truthfulness
+- **Quality standard / required correction:** Preserve political/hearthland focus and readable DOM text; no exposed Ashfall explanation
+- **Mechanics / binding dependencies:** Bind actual screens/events; no illustration for unimplemented victory paths yet
+
+### ART-16 — Native strategic idle rollout
+
+**P2 · optional-animation-gap**
+
+- **Existing coverage:** 4 qualified near-map idle clips; current consumer: Near world renderer ticks idle; generic guard/scout/colonist and one qualified Ashen scout animate
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** phaseOne: 23; upperBeforeNewRoles: 215; **revision estimate:** 0.
+- **Quantity assumptions:** Phase one: 23 other-culture scout idles; upper 215 = 24 cultures x 9 strategic unit roles minus existing 1 qualified scout, not all 431 static assets. Existing 4 includes 3 generic idle fallbacks.
+- **Resolution / animation:** Use existing 64/96 contracts and exact pivots; 4 frames at 250 ms for se idle; no unconsumed movement/action states
+- **Source/generation pipeline — Blender:** Possible source/rig motion but preserve established culture bodies
+- **Source/finishing pipeline — Pixel Factory:** Native frame registration, Snapper/Aseprite clip metadata, hand temporal finish
+- **Hand cleanup / review:** Required foot lock/equipment/loop and live stopped/reduced-motion review
+- **Quality standard / required correction:** Motion subtle and real; no universal floating bob, stable corpse/action logic irrelevant on map
+- **Mechanics / binding dependencies:** No new mechanics; far and fogged views stay static; exclude still DOM heraldry and portraits
+
+### ART-17 — Additional strategic facings and action families
+
+**P3 · future-consumer-only**
+
+- **Existing coverage:** 0 qualified direction/action sets; current consumer: Current world playback is se idle; no movement/action playback consumer
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** None; **revision estimate:** 0.
+- **Quantity assumptions:** Do not estimate 431 assets x all states. Select actual moving roles first; quantities depend on consumer and mirroring policy.
+- **Resolution / animation:** Existing 64/96 native; six strategic directions only if movement-facing design is accepted; Scope only after map action playback/LOD requirements exist
+- **Source/generation pipeline — Blender:** New shared rig/facing adapter feasible, not implemented by stock shrine
+- **Source/finishing pipeline — Pixel Factory:** Aseprite supports supplied clips but does not generate them
+- **Hand cleanup / review:** Required per-facing asymmetry, screen-space light and motion-union checks
+- **Quality standard / required correction:** No unused animation commission masquerades as a current P1 hole
+- **Mechanics / binding dependencies:** Presentation design+direction selection+animation budget, not new unit rules
+
+### ART-18 — Culture-qualified battle animation sets
+
+**P3 · optional-future-identity-expansion**
+
+- **Existing coverage:** 13 qualified animated culture-role sets; current consumer: Current battle deliberately consumes 13 shared roles plus existing culture banners
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 312; **revision estimate:** 0.
+- **Quantity assumptions:** 312 = 24 x 13 qualified sets; 13 shared sets remain fallbacks and are not subtracted as qualified culture originals. Future scope, not missing current binding.
+- **Resolution / animation:** Current 64/96 unless measured review justifies exception; 64 frames per set across 13 current roles x 24 cultures; 19,968 frames if fully commissioned
+- **Source/generation pipeline — Blender:** New culture rigs/materials/equipment, not palette swaps or 13 shared originals mislabeled 312
+- **Source/finishing pipeline — Pixel Factory:** Controlled render and substantial deliberate pixel/temporal finishing
+- **Hand cleanup / review:** Very large review load; gate a single culture / role first
+- **Quality standard / required correction:** Actual cultural silhouettes and native readability; preserve shared-mode fallback
+- **Mechanics / binding dependencies:** New optional qualified battle identity routing; explicit residency/paging budget
+
+### ART-19 — Reserved monsters, generic mage/commander and map sites
+
+**P3 · existing-art-without-consumer**
+
+- **Existing coverage:** 7 reserved static asset subjects; current consumer: Three monsters, unit.mage/unit.commander, map.resource/map.watchtower are not current live IDs
+- **Existing IDs:** `monster.quarry_ogre`, `monster.revenant`, `monster.slateback`, `unit.mage`, `unit.commander`, `map.resource`, `map.watchtower`
+- **Missing/new estimate:** 0; **revision estimate:** 0.
+- **Quantity assumptions:** 7 reserved subjects listed; generic map.resource does not replace the 8 current canonical deposits. Extra effects / terrain reserved IDs are separately inventoried.
+- **Resolution / animation:** Current 64/96/128 native; Only scope additional clips if actual mechanical content is introduced
+- **Source/generation pipeline — Blender:** Useful creature/architecture authoring lane after canonical brief
+- **Source/finishing pipeline — Pixel Factory:** Native editable sources already retained; no new generation now
+- **Hand cleanup / review:** Not 1.0 approval; inspect when bound
+- **Quality standard / required correction:** Do not invent monsters, sites or whole magic systems just to consume art
+- **Mechanics / binding dependencies:** Canonical definition, actual observations/UI, rules/save/replay and LOD hooks first
+
+### ART-20 — Future magic schools, rituals, weather and disasters
+
+**P3 · future-mechanics-only**
+
+- **Existing coverage:** 2 new visual effect families; current consumer: Only current Cinder thread/Bound ward are live spell consumers; existing generic magic art is reserved
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** None; **revision estimate:** 0.
+- **Quantity assumptions:** No invented missing 14-schools-by-20-spells quota. Quantity TBD from accepted mechanics.
+- **Resolution / animation:** 32/64/128px pooled pieces;256 px maximum localized baseline if actually required; States/timing defined by future canonical events
+- **Source/generation pipeline — Blender:** Good for geometry-based effect sources; not unlimited VFX authorship
+- **Source/finishing pipeline — Pixel Factory:** Aseprite / source pipeline handles supplied frames; no paf animation generator
+- **Hand cleanup / review:** Required lore/target legibility/alpha/perf review
+- **Quality standard / required correction:** Art must not reveal the Ashfall cause or grant flight/tunneling/blood-magic mechanics
+- **Mechanics / binding dependencies:** Canonical research/spells/rituals/weather/disaster rules first
+
+### AUD-01 — Audio runtime and provenance contract
+
+**P1 · missing-subsystem**
+
+- **Existing coverage:** 0 audio pipeline; current consumer: No audio files or playback API found; existing UI/world/battle events are prospective sources
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 1; **revision estimate:** 0.
+- **Quantity assumptions:** One new presentation subsystem. Current game is silent in code/inventory; not a failed listening test.
+- **Resolution / animation:** 48 kHz / 24-bit WAV masters recommended; browser-encoded OGG/MP3/AAC as tested; Event-driven presentation; pause/skip/speed/reduced motion policies explicit
+- **Source/generation pipeline — Blender:** Not supported audio authoring
+- **Source/finishing pipeline — Pixel Factory:** Not supported audio authoring
+- **Hand cleanup / review:** Listening/mix/license QA required; separate DAW / Foley pipeline
+- **Quality standard / required correction:** Audio never mutates simulation or reveals fog; battle crowds do not spawn one voice per soldier; keep all text cues
+- **Mechanics / binding dependencies:** User-gesture unlock; master/music/SFX/ambience buses, persistent mute/volume, bounded voices, load/error fallback, visibility policy
+
+### AUD-02 — UI feedback starter set
+
+**P1 · missing-audio-assets**
+
+- **Existing coverage:** 0 rendered one-shot files; current consumer: Current menu/selection/confirm/cancel/error/tab/window/save/load/end turn UI
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 10; **revision estimate:** 0.
+- **Quantity assumptions:** 10 distinct cues, one clean variation each initially. Proposed queue not existing filenames.
+- **Resolution / animation:** 48 kHz masters, compressed runtime; mono / short stereo per cue; Short one-shots, no constant hover noise
+- **Source/generation pipeline — Blender:** No
+- **Source/finishing pipeline — Pixel Factory:** No
+- **Hand cleanup / review:** Required tactile low-volume listening
+- **Quality standard / required correction:** Quiet wood/cloth/paper/metal; no loud game-show chimes; keyboard and touch behavior supported
+- **Mechanics / binding dependencies:** AUD-01 + actual UI bindings
+
+### AUD-03 — Campaign event Foley/notification starter set
+
+**P1 · missing-audio-assets**
+
+- **Existing coverage:** 0 rendered one-shot files; current consumer: Current movement, paid construction, completion, recruitment, research, survey/refit, war/peace/siege and economy events
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 24; **revision estimate:** 0.
+- **Quantity assumptions:** 12 families x 2 variations. Event taxonomy must be reviewed before final filenames.
+- **Resolution / animation:** 48 kHz masters; stream/cache tiny cues by event category; Two variations each for 12 cue families
+- **Source/generation pipeline — Blender:** No
+- **Source/finishing pipeline — Pixel Factory:** No
+- **Hand cleanup / review:** Required contextual listening and repeated-turn fatigue test
+- **Quality standard / required correction:** Tactile, grounded sound with non-auditory equivalents; no implied new mechanics
+- **Mechanics / binding dependencies:** AUD-01; observed/local-player event filter; avoid opponent private-turn audio leaks
+
+### AUD-04 — Battle role/effect Foley starter set
+
+**P1 · missing-audio-assets**
+
+- **Existing coverage:** 0 rendered one-shot files; current consumer: Current melee/projectile/horse/hull/hit/death/rally/ember/ward battle events
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 48; **revision estimate:** 0.
+- **Quantity assumptions:** 16 reusable families x 3 variants; not 13 roles x 64 frames and not per-soldier notifications. Voices optional, not required.
+- **Resolution / animation:** 48 kHz masters; mostly mono positional stems; restrained stereo magic; Three variants each for 16 material / action families
+- **Source/generation pipeline — Blender:** No audio output; rig markers may provide visual timing reference only
+- **Source/finishing pipeline — Pixel Factory:** No
+- **Hand cleanup / review:** Required transient/loop/tail/mix/clipping / headphones QA
+- **Quality standard / required correction:** Clear weapons/cloth/wood/water; combat weight without clipped transient pileups or state changes
+- **Mechanics / binding dependencies:** AUD-01; event timing mapped to presentation, cancellation on seek/pause and voice caps
+
+### AUD-05 — Biome/settlement ambience beds
+
+**P2 · missing-audio-assets**
+
+- **Existing coverage:** 0 loop masters/runtime beds; current consumer: Current world/coast/settlement context; no ambience player exists
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 6; **revision estimate:** 0.
+- **Quantity assumptions:** 6 starter beds: settled hearth, open field, woodland, wetland, high cold, coast/sea. Not 24 culture anthems.
+- **Resolution / animation:** 48 kHz stereo masters; phase/loop-safe compressed versions; Long quiet seamless loops/crossfades
+- **Source/generation pipeline — Blender:** No
+- **Source/finishing pipeline — Pixel Factory:** No
+- **Hand cleanup / review:** Required seam-free listening at low level
+- **Quality standard / required correction:** Inhabited, weathered world; avoid unrealized storm/weather cycle implication
+- **Mechanics / binding dependencies:** AUD-01; only current known local context, visible-screen or selection-based mix
+
+### AUD-06 — Original musical identity starter score
+
+**P1 · missing-audio-assets**
+
+- **Existing coverage:** 0 music compositions; current consumer: Current menu/campaign/battle/chronicles/prosperity surfaces; no music code
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** 5; **revision estimate:** 0.
+- **Quantity assumptions:** 5 compositions; durations/stems commissioned after audition, not fabricated elapsed minutes. No external generative account is configured by these art factories.
+- **Resolution / animation:** 48 kHz / 24-bit master+mixed runtime; optional stems separately scoped; Menu, quiet campaign, tension campaign, battle, aftermath/current victory
+- **Source/generation pipeline — Blender:** No
+- **Source/finishing pipeline — Pixel Factory:** No
+- **Hand cleanup / review:** Composer/listening/mastering and rights QA
+- **Quality standard / required correction:** Restrained modal/bowed/acoustic/wood / metal palette; world warmth and uncertainty, not constant cinematic triumph
+- **Mechanics / binding dependencies:** AUD-01; state-aware crossfades and muting; no full orchestra assumption
+
+### AUD-07 — Voice acting, faction chants and future magic audio
+
+**P3 · future-content-only**
+
+- **Existing coverage:** 0 voice/music/effect groups; current consumer: No dedicated voice or new-magic consumer
+- **Existing IDs:** None in the current catalog for this proposed family.
+- **Missing/new estimate:** None; **revision estimate:** 0.
+- **Quantity assumptions:** Not required just because 24 culture kits exist; no estimated dozens of voices without a script.
+- **Resolution / animation:** TBD by localization/voice scope; TBD
+- **Source/generation pipeline — Blender:** No
+- **Source/finishing pipeline — Pixel Factory:** No
+- **Hand cleanup / review:** Required casting/pronunciation/rights/localization and listening QA
+- **Quality standard / required correction:** Do not replace clear text, invent dialogue as history, or clone unlicensed performer voices
+- **Mechanics / binding dependencies:** Approved script, languages/casting and real mechanics first
+
+Core production order: binding/contracts first; four shared specialist identities and guard/cavalry/transport/biome/interface pilots next; scale only visually accepted families. Optional portraits, expanded housing, illustrations and all-culture motion must not delay a zero-image binding fix.
+
+**Audio:** bounded source/file searches found no production assets or playback system. No listening test is claimed. Proposed starter scope is **one runtime subsystem plus 93 principal outputs**: 10 UI cues, 24 campaign variations, 48 battle/effect variations, six ambience beds and five original compositions. These are planning assumptions with different costs, not delivered files or a mandatory first batch. First validate controls, fog-safe authoritative event routing, bounded voices, pause/skip/mute behavior and a small sound/music sample; then commission the accepted scope. Retain masters, source projects, rights, hashes and loop/export metadata. Voice acting is P3.
+
+## 13. UI/UX Findings
+
+| Player question | Current result | Concrete next-quality requirement |
+|---|---|---|
+| What needs attention? | Armies/orders and empty production are visible; town growth can leave unassigned households unnoticed. Turn9 shows0/3 workers. | Categorized labor/forecast/threat queue, locate/action, optional explicit assignment policies preserving manual locks. R07 |
+| What will this choice do? | Exact prices/blockers are often good; long improvement/research catalogs obscure comparisons. | Applicable-first works, before/after outputs, downstream unlocks, turns-to-afford. Keep instant research truthful. R14 |
+| How do I correct a plan? | Five-slot FIFO production, prepaid coin, no cancel/reorder command. | Canonical reorder/cancel with explicit sunk-cost/refund rules and exploit-safe replay. R10 |
+| Where is the object and its context? | Search/sort exist; another town's orders take registry→entry→Show selected orders. | Comparable economic/military tables with direct row actions and retained selection; measure2/10/40-town tasks. R20 |
+| What happened and why? | Battle status is brief; substantial report is in Journal. Turn26 journal has eight recent entries dominated by movement. | Concise aftermath and paginated, filtered fog-safe ongoing history, not a bigger full-state observation. R19/R20/R24 |
+| Can I use a small display? | Inspected390px views and130% research text do not horizontally overflow; density remains high. | Reduce repeated chrome and verify physical touch, focus, accessible targets and sustained large-empire workflows. R16/R21 |
+
+Campaign replacement is a real P2 lifecycle bug: independent dev/production loads/imports grow controls1→9; reload resets to one. Canvas and sampled attached listeners remain stable. `main.tsx:713` uses duplicate sibling keys. Do not label this a proven GPU/worker leak. The Waykeeper fallback at `faction-art.tsx:68–82,137–151` is a separate P1 consumer repair.
+
+All major shell/progression/registry/diplomacy/battle/help/save screens were covered through direct UI or named browser scenarios. Physical-phone testing, exhaustive keyboard/focus/screen-reader review and measured40-town human task throughput remain unverified. [Detailed observations](docs/hermes-analysis/ui/findings.md), [browser suites and limitations](docs/hermes-analysis/qa/report.md).
+
+## 14. AI Findings
+
+| AI layer | Demonstrated capability | Gap and evidence |
+|---|---|---|
+| Strategic/contact | Legal observation-based plans; all24 seats contact in the dense run. | Sparse player's contact137 misses100; no saved multi-turn operational agenda. R06 |
+| Economic | Paid founding/workers/buildings/research and real growth to269 towns in Standard24. | Common build/institution rails, weak supply penalties, inconsistent material extraction; no claim of general balance. R08/R11/R25 |
+| Diplomatic | Evaluates actual peace payments, duration, pressure and grievances. | Saved trust/respect extremes produce the same current assessment; no alliances/clients/coalition system. R12 |
+| Army/logistics | Merge/transport/war/siege/capture execute through the ordinary API. | Long exact movement loops; defending over-cap stacks block plans; many withdrawal encounters. R03/R06 |
+| Tactical | Actual combat/ability kernel, combined-arms rules, legal outcomes. | Side-wide orders and creation-ID deployment limit composition intent. Tiny and20-vs20 probes do not establish expert tactical play. R13 |
+| Victory/threat | AI evaluates host safety and can target observed enemy projects; actual winners exist. | Epic project goes uncontested while units loop. Improve execution of existing awareness, not invent a claim that awareness is absent. R04/R06 |
+| Personality/research |19 recruitment-weight vectors, ecological cultures; real unlocks. | Mostly shared capabilities and static policy structure; no separate difficulty setting. R08/R14 |
+
+The right response is bounded intent/progress/counterplay and regression scenarios, **not omniscient cheats, wall-clock timeout inflation or replacing the command architecture**. Neither automated B/C policy is a substitute for skilled human balance trials.
+
+## 15. Performance Findings
+
+| Fresh gate | Result | Exact evidence |
+| --- | --- | --- |
+| Typecheck / lint / content | Pass / pass / pass | [logs](docs/hermes-analysis/qa/report.md#1-exact-gate-results) |
+| Full Vitest | 1,603/1,604 tests; 183/184 files; one contact assertion fails | [raw JSON](docs/hermes-analysis/qa/unit-results.json) |
+| Forced build / clean comparison | Pass; 26 matching outputs, 8,836,874 bytes | [comparison](docs/hermes-analysis/qa/build-comparison.json) |
+| Chromium gameplay | 149/149 pass, zero skipped/flaky | [JSON](docs/hermes-analysis/qa/gameplay-results.json) |
+| Production Chromium smoke | 4/4 pass; initial audit launch error superseded | [JSON](docs/hermes-analysis/qa/production-results.json) |
+| Art validation / art benchmark | Both pass | [logs](docs/hermes-analysis/qa/report.md#1-exact-gate-results) |
+| Scale / composed / storage | Complete; workload limitations apply | [measurements](docs/hermes-analysis/qa/report.md#4-campaign-e-performance-and-stress) |
+| Unmodified default chronicles | **Fail** — strict save validation; independent large-archive repro also fails | [log](docs/hermes-analysis/qa/logs/benchmark-chronicles.log) |
+
+The full unit/property result is **1,603/1,604 tests, 183/184 files**; the single failing contact test is independently reproducible. **149/149 gameplay and4/4 production smoke pass.** Default chronicle certification fails. QA retained43 named commands:31 exit0/12 exit1, separated into product failures, successful diagnostics that detect defects, and superseded harness errors. A shell chain's last exit does not mean every command passed.
+
+### Measured scale, with workload boundaries
+
+| Workload | Fresh result | Qualification |
+|---|---|---|
+| Generated Huge,100 turns |530 armies/836 formations/230 towns; mean complete turn244.215ms; serialize99.616ms/load266.356ms | CPU benchmark includes AI, excludes browser/autosave; victory proposals deferred for scale |
+| Generated Legendary,100 turns |668 armies/1,010 formations/278 towns; complete turn305.531ms; serialize106.478ms/load442.550ms | Same qualification; not a Long/Epic finished archive |
+| Authored composed Legendary |4,000 armies/25,760 formations; idle end-turn p50/p95 **8.195/12.250 ms** | No AI planning/battles in these measured turns; not comparable with complete AI turn cost |
+| Browser genuine Standard turn200 |470 armies/913 formations/250 towns; import→art1,814.7ms, saves461.0–536.2ms, load1,094.6ms, export1,374.5ms | Snapshot-only imported checkpoint, not full original archive |
+| Browser artificial Legendary |4,000 army containers; import2,704.8ms, saves813.2–879.1ms, load2,196.4ms, export2,108.5ms | Globally populated; near views have only two visible sprites under fog/stack aggregation |
+| Actual20-vs20 battle |2,240 soldiers,46 actors,six officers; frame p50/p95 **50.0/66.7 ms** | **SwiftShader software rendering**, not physical GPU certification;120 warmed intervals |
+| Map views, three workloads |p50 **16.7 ms**; stage p95 **16.7–16.8 ms**;2,700 sampled intervals | One software-rendered host, not thousands of simultaneous visible army sprites |
+| Standard/Long storage prefix261 |47,177,713B logical envelope; incremental-save median575.319ms vs whole-envelope2,185.598ms; replay29,161.306ms | fake-indexeddb, not browser disk; does not solve archive446 failure |
+
+Host evidence identifies i9-13900K,32 logical CPUs,31GiB RAM, Node26.7.0, pnpm10.32.1 and Chromium152.0.7977.82. Initial workloads overlap; final map/battle probes have lower QA concurrency but other desktop applications remain active. These are not exclusive-host timings. RAF intervals, render CPU, heap samples, logical save bytes and decoded atlas estimates measure different things.
+
+The real completed archive at446 is the demonstrated capacity cliff. Map throughput is encouraging; thousands-soldier battle smoothness is **not certified**. Startup is measured as import-to-art-ready here, not cold network startup. The unchanged browser suites and build test other flows but do not fill that measurement gap.
+
+Clean offline-store build reproduced **26 output files /8,836,874 bytes with identical SHA-256**. It used Node26; CI declares Node22. Still needed: supported physical GPU/min-spec/mobile, Firefox/WebKit, clean online Node22 release build/deployed subpath smoke, long Huge/Legendary full archives, quota/failure recovery and sustained resource profiling. [Raw results](docs/hermes-analysis/qa/checks.json), [performance report](docs/hermes-analysis/qa/report.md#4-campaign-e-performance-and-stress).
+
+## 16. Content Gaps
+
+| Catalog | Actual | Declared target or counting caution | Evidence |
+| --- | --- | --- | --- |
+| Major culture/faction definitions | 24 | 24 | `packages/content/src/factions.ts:3-43` |
+| Independent ancestry/race definitions | 0 | Distinct from cultures; no separate numeric target assumed | `packages/content/src/index.ts:21-33`; `docs/lore/FACTION_BIBLE.md:9-28` |
+| Minor/independent power templates | 0 | 48 | `packages/sim/src/types.ts:218-250`; exported catalog |
+| Unit definitions | 13 | 100+ meaningful definitions/variants | `packages/content/src/index.ts:43-60` |
+| Town buildings / tile improvements | 5 / 18 | Separate registries, not merged | `packages/content/src/index.ts:36-42`; `packages/content/src/ecology.ts:71-83` |
+| Resource definitions | 8 | 40+ | `packages/content/src/resources.ts:10-36` |
+| Mundane technologies | 10 | 80+ | `packages/content/src/progression.ts:51-69` |
+| Institution choices | 2 | 70+ institutions/traditions: also see development, not double counting | `packages/content/src/progression.ts:70-73` |
+| Doctrine choices | 2 | 50+ doctrines: also see linked development | `packages/content/src/progression.ts:74-77` |
+| Development nodes | 25 | 8 formation + 9 hearth + 8 faction; not extra activated spells | `packages/content/src/development.ts:51-89` |
+| Character roles / missions / skills | 4 / 3 / 17 | 120+ combined abilities/traits target is not met | `packages/content/src/characters.ts:38-68`; `packages/content/src/development.ts:95-101` |
+| Commander / innate unit activated abilities | 1 / 1 | Rally / Set shields; counted separately from spells | `packages/content/src/characters.ts:71-74`; `packages/content/src/magic.ts:11-15` |
+| Arcane research disciplines / discovery purchases | 0 / 2 | 8-10 disciplines; a purchase is not a discipline | `packages/content/src/magic.ts:16-21` |
+| Personal magical paths / battle spells | 2 / 2 | 10-14 paths; 250+ cross-system magical effects | `packages/content/src/magic.ts:5-27` |
+| Rituals / summons / items or recipes / sacred / occult | 0 / 0 / 0 / 0 / 0 | Required distinct systems; 80+ items/recipes | Exported catalog; `packages/sim/src/types.ts:175-250` |
+| Legendary sites/wonders / event templates / quests | 0 / 0 / 0 | 24+ sites and 150+ event templates; no quest count invented | Exported catalog; `packages/sim/src/types.ts:218-250` |
+| Biomes / physical terrain / depth / natural features | 12 / 5 / 3 / 7 | Different layers, not alternate biome counts | `packages/mapgen/src/index.ts:32-61`; `packages/content/src/ecology.ts:25-33` |
+| Name pools / distinct unsuffixed combinations | 24 / 1536 | 150+ notable authored characters or robust faction-specific generation; names alone not biographies | `packages/content/src/characters.ts:75-109` |
+| Biography-bearing authored character definitions | 0 | Lore seeds not executable definitions | `docs/lore/FACTION_BIBLE.md:18-18`; `packages/sim/src/characters.ts:226-232` |
+| Terminal victory paths / projects | 1 / 1 | Gate B ≥3 tested; master product target 5 | `packages/sim/src/progression.ts:17-18,142-156` |
+
+Target source: `GAME_1_0_SCOPE.md:341-359`; `MASTER_PROMPT.md:1821-1837`; `DEFINITION_OF_DONE.md:16-33,147-155`. “Exported catalog” refers to `packages/content/src/index.ts:1-15,91-105`, the imported exports recorded in `content.json`, and the canonical state/command absence scope above.
+
+Full entries, costs, requirements and all24 culture differences are in [catalog.md](docs/hermes-analysis/systems/catalog.md) and [content.json](docs/hermes-analysis/systems/content.json). Important distinctions: culture is not a race registry; art variants are not unique mechanical units; naval strength is hull durability; Arcane discoveries are not extra spells; a character name combination is not an authored biography; a razed ruin is not an interactive legendary-site template.
+
+**Mechanics first:** alternate endings/defeat, strategic magic, obligation-based diplomacy, meaningful deficit/supply consequences, competing material uses, independent discovery/event consequences, faction access differences and role-aware deployment. More rows before these links exist will multiply shallow choices.
+
+**Content on existing foundations:** carefully differentiated unit/counter variants, branching development unlocked by real constraints, context-specific mission/event writing after its runtime exists, faction architecture/specialist identity, and exact current-role animation refinement. Pilot contrasting cultures before multiplying24 complete kits of new mechanics.
+
+Declared master scope includes100+ units/variants,40+ resources,80+ technologies,48 independent templates,24+ sites and150+ events; major magic targets are also far larger. These are existing promises, not quantities invented by this audit. They are not met today, and blind bulk generation is not the solution. A smaller coherent release scope must be explicitly ratified if chosen.
+
+## 17. Premium Polish Opportunities
+
+- **P2:** richer veteran/office stories tied to actual facts, restrained milestone/aftermath presentation, focused icons/portraits/housing/illustrations, additional strategic idles and optional battle ground pieces. Existing source rigs and culture designs should survive refinement.
+- **P2 but inexpensive:** repeated-load key/DOM repair should be bundled while its regression is fresh; shippable in theory does not mean worth postponing.
+- **P3:** all24×13 culture battle sets (312 sets/19,968 frames if commissioned), unconsumed strategic facings/actions, full voice/culture chants, cinematic campaigns and broad political-life simulation. New magic VFX quantities wait for accepted mechanics; art for future magic is not a current missing-binding claim.
+
+Reference lessons are design judgments, not fresh competitor playtests: combinatorial constraints and counterplay; understandable next opportunities; armies that visually express role/faction fantasy; a consistent pixel/audio/milestone language; specialization that unlocks different solutions. The authoritative-page evidence and non-copying recommendations are in [comparison.md](docs/hermes-analysis/references/comparison.md). No other title's DLC scale, art, terminology or RTS architecture is a mandatory template.
+
+### Premium comparison principles — not a cloning brief
+
+This is a **design comparison**, not a fresh playtest, content census or performance benchmark of the reference games. Official descriptions establish their advertised pillars; the quality lessons and Theandril recommendations are editorial judgments tied to this audit's own evidence. A smaller original game can meet a premium bar through coherence, differentiation and consequence; it does not need another studio's cumulative DLC count.
+
+#### Dominions: combinations, constraints, experimentation
+
+Illwinter describes a large variety of nations, units, spells and magical items, and different strengths depending on the chosen god and nation.[1]
+
+**Quality lesson / proposal:** depth comes from interacting constraints—who can learn/use a capability, what infrastructure or geography enables it, what scarce commitment it takes, and how an opponent can respond—not simply a long spell list. Experiments should create markedly different strategic plans and surprising but explainable consequences.
+
+**Theandril:** separate national discovery and saved personal aptitude is the right foundation. Real C99 turn37 casts demonstrate it works. But every Waykeeper has the same two aptitudes; two universal battle effects cannot support an independent strategic pillar. Close an original site/resource/practitioner/strategic-effect/counter loop before writing dozens of similar damage spells. Preserve Theandril's own distinction between practical knowledge, Arcane Theory, sacred and occult concepts; do not import Dominions terminology or its spell catalog. See `systems/report.md:140-146`, `campaigns/findings.md:45-49`, R08/R09/R25.
+
+#### Civilization: visible progression and understandable opportunities
+
+The official Civilization VI description links city expansion on the map, technology/culture unlocks, leaders with distinct agendas, and alternative ways to win.[5]
+
+**Quality lesson / proposal:** the map should explain investments, the interface should communicate their likely results, and a new player should perceive an attainable next goal. Strategic depth and clarity reinforce each other. 'One more turn' should mean an approaching payoff or emerging dilemma, not just an affordable threshold thousands of coin away.
+
+**Theandril:** real claims, households, paid improvements and expanding settlements provide a strong foothold. Exact blockers and queue prices are useful. Campaign A still left three households unused without an attention item; its journal pushed important decisions behind scout-step noise. A compact attention/forecast layer and better first-campaign teaching have more immediate value than replacing the whole UI. Civic accounts and one economic project are not enough alternative endings. See R04/R05/R07/R14/R16/R20.
+
+#### Total War: Warhammer: armies must express faction fantasy
+
+The publisher's description emphasizes different races, broad unit choices and large real-time battle spectacle.[4]
+
+**Quality lesson / proposal:** a player should recognize what a force is, what its roles do, why an army composition matters, and what happened when it won or broke. Campaign choices should have a visible battlefield identity. Spectacle is successful when it explains consequences, not when it merely adds particles or entity count.
+
+**Theandril:** pike/mounted/missile interactions, persistent casualties, commanders and transport losses are genuine. Yet formation order follows creation IDs, legal 21-formation stacks cannot be attacked, and a small observed battle occupies a sparse field. Fix contestability first, then deliberate deployment and refinement of the existing authentic native action clips and terrain context. A deterministic turn-based battle director with strong presentation fits the project; an RTS rewrite is not justified. See R03/R13/R18/R19.
+
+#### Songs of Conquest: a distinct aesthetic and a remembered ending
+
+Songs of Conquest's official presentation describes campaign-specific songs whose verses unlock across missions and culminate at the journey's end.[3]
+
+**Quality lesson / proposal:** premium pixel presentation is a complete, consistent language, including framing, animation, audio and milestone treatment—not just isolated attractive sprites. An ending should acknowledge the player's particular journey.
+
+**Theandril:** preserve the pixel world, dark ledger UI, original culture names and factual chronicles. Add original sound design and tiered feedback for discoveries, founding, major battles and victory. Its factual history is a promising identity, but in-progress player history must remain discoverable and the full archive must remain saveable. Do not copy songs, palettes, character designs or assets. See R02/R17/R20/R24 and the art audit.
+
+#### Age of Wonders and broader grand-strategy expectations
+
+The Age of Wonders 4 publisher describes choices opening new tactical possibilities and battles shaped by those decisions.[6]
+
+**Quality lesson / proposal:** specialization should change available tools and the problems a player can solve. More additive nodes alone are weaker than unlocks that connect army composition, map investment and opponent adaptation.
+
+Europa Universalis and Stellaris are used here only as **user-requested design lenses** for political obligations, durable strategic goals and late escalation; this audit did not freshly inspect those games or claim comparative counts. For Theandril, a bounded access/exchange/client obligation model and state-triggered regional developments would create real changing objectives. A comprehensive historical-government simulator or galaxy-scale crisis system is not automatically a 1.0 requirement. See R06/R08/R12/R14/R15.
+
+#### Bounded premium scope
+
+- **Required:** safe campaigns, contestable warfare, coherent competing strategies, genuinely differentiated released factions, meaningful fantasy magic, capable opponents, usable large empires, complete original presentation and reliable endings.
+- **High-value polish:** richer veteran stories, refined milestone framing, extensive cosmetic variants beyond minimum role readability.
+- **Post-1.0 proposals unless explicitly retained in the written scope:** unrestricted political life simulation, RTS battles, cinematic campaign movies, huge numbers of new races or redundant currencies. No such rewrite is supported by this audit.
+- The written Theandril content/path targets remain unmet. A smaller non-filler equivalent is a **scope proposal requiring explicit adoption**, not something an auditor can silently declare complete.
+
+#### Sources
+
+[1] https://www.illwinter.com/dom6
+[3] https://www.songsofconquest.com
+[4] https://store.steampowered.com/app/1142710/Total_War_WARHAMMER_III
+[5] https://store.steampowered.com/app/289070/Sid_Meiers_Civilization_VI
+[6] https://www.paradoxinteractive.com/games/age-of-wonders-4/about
+
+## 18. 1.0 Roadmap
+
+This is an implementation dependency sequence, not arbitrary calendar months. Every phase ends with a playable/verified slice. P1 scope is refined by design decisions, but no missing written requirement is silently declared complete.
+
+| Phase | Dependencies | Implementation work | Exit evidence |
+| --- | --- | --- | --- |
+| A — Critical Foundations | Current retained failing cases; no prior phase | R01 canonical battle-save safety, then R02 archive policy and R03 bounded contestable stacks. Reproduce red contact gate; local R23 key fix and R18 binding can run in parallel. Preserve old save slots and version boundaries. | Both independent save causes resolved, every legal stack contestable, retained reproducers green under unchanged meaningful validation. Archive restore/replay and fault protection measured. |
+| B — Core Strategic Depth | A safe state/warfare contracts | Choose and implement released victory/defeat set with counterplay; meaningful deficits/material tradeoffs; role-aware deployment; production correction and bounded diplomatic obligations. R09 starts as one paid/counterable strategic magical loop. | Ordinary player and AI commands demonstrate different winning plans and counters; no UI-only rule duplicates or resource dead ends. |
+| C — Content & Faction Identity | B interfaces; explicit written-scope decisions | Prove two contrasting cultures, distinct access/constraints, transformative practical/magical progression and one consequential independent discovery/event loop. Expand accepted content, not shallow templates. | Choosing another released culture changes opening, army/resource priorities and late plan; content has AI, UI, save/replay and original visual/audio consumers. |
+| D — AI & Campaign Quality | Co-develop with B/C, consolidate when their contracts stabilize | R06 saved objectives, route/progress/loop checks, economic sustainability and executed project-threat plans. Tune R04 pace against contact/decision/quiet-turn distributions, not price alone. | Original contact gate passes; multiple generated land/naval campaigns demonstrate useful late operations and contestable endings; no hidden-information cheats. |
+| E — UI / Player Experience | Prototype on existing quotes now; finalize with B/C semantics | R07 attention/forecasts; R10 corrective queues; R20 economic/military/history comparison; R16 optional state-aware teaching; battle preview/aftermath. | External new players complete a first loop;2/10/40-town tasks have measured bounded navigation; narrow/keyboard/focus and accessible information are exercised. |
+| F — Art / Animation / Audio | Binding/contracts now; new content IDs from B/C; budgets with A/H | R18 binding and four strategic specialists, R19 rig/biome/interface pilots, R17 audio runtime and original small audition set. Iterate native/context/playback review, then scale accepted families. | No failed current-role bindings; deliberate native art/animation and fog-safe sound actually work in game, with bounded residency/voices and preserved provenance. |
+| G — Balance / Long Campaign Testing | Integrated B–F slices, with continuous earlier regression | Multiseed/multifaction ordinary campaigns, human trials, material/tech/victory distributions, AI trajectories, recovery and complete archives at supported long-scale settings. | Every released victory can be won/lost/countered; no systematic unwinnable matchup or extended empty endgame; failures retained and fixed instead of thresholds hidden. |
+| H — Release Candidate | A/G gates, current presentation and support matrix | Freeze supported settings/version policy; full unchanged checks, real-GPU/min-spec/mobile/browser tests, Node22 clean online/deployed smoke, migrations/quota/crash recovery, licenses, release notes and final polish. | Zero P0s, completed adopted P1 scope, no unexplained gate failures, full advertised-scale save/replay and reproducible release evidence. Editorial score never substitutes for gates. |
+
+**Parallel lanes:** after the battle-state contract is fixed, archive engineering and over-cap warfare can proceed with separate ownership. Attention/queue UI work can prototype against existing quotes while canonical commands are implemented. Waykeeper binding, contract cleanup, art-direction pilots and audio infrastructure can run alongside gameplay work; new content visuals wait for accepted IDs/mechanics. AI accompanies each feature slice, then receives focused cross-system campaign review. Art bulk production waits for approved pilots, not the other way around.
+
+**Do not do:** engine/framework replacement without a measured need; reauthor545 assets; fabricate faction “depth” with recolors/stat inflation; hide red gates; raise save limits without bounded memory/quota policy; postpone all AI or usability until every content row exists.
+
+## 19. Recommended Next Development Task
+
+### R01 — Make every accepted battle transition save/load safe
+
+This is the **single highest-value next implementation task**. Fix canonical morale and temporary training-bonus reconciliation at battle entry/aftermath, preserving valid historical semantics, then prove round-trip safety through the player persistence flow.
+
+**Why first:** it is a small-enough, reproducible M-sized intervention into a P0 trust failure. It protects progress during ordinary warfare and makes subsequent reserves, tactical, magic, AI and balance work safer. Adding another faction, ritual or polished portrait cannot compensate for losing a campaign after a legal battle. Archive capacity is a separate subsequent task, not silently bundled into this one.
+
+**Start with the already-red reproducer:**
+
+```sh
+node --import tsx docs/hermes-analysis/qa/minimal-save-repro.mjs
+```
+
+It starts from a valid turn236 checkpoint, applies two accepted commands and currently exits1 with `Invalid save: invalid formation definition, morale or strength`. Parent reran it; [exact log](docs/hermes-analysis/verification/morale-roundtrip.log).
+
+**Implementation boundary:** `packages/sim/src/warfare.ts:55–65,199–227`, `packages/sim/src/save.ts:674–679,827–828`; related morale/development/character/replay tests. Determine canonical strategic versus effective tactical morale before editing. Preserve temporary skill/rally/development effects as appropriate, and explicitly migrate/version changed historical rules instead of quietly rewriting archived battle facts.
+
+**Acceptance for this one task:**
+
+1. Promote the retained valid-checkpoint/two-command case into a regression. The original failure becomes green with the validator still meaningful.
+2. Cover manual/autoresolve, retreat, assault, trained/rally/developed survivors and two engagements in the same turn. Validate pending/aftermath/end-turn and retained-report states, not only the final turn.
+3. Retained B74 final252 and Standard24 midpoint101 become version-correct loadable/continuable; preserve exact replay expectations or explicit documented version boundaries.
+4. Real browser save/autosave/export/import round-trips the result, restores identical supported-version state/events and protects the prior valid slot on rejected writes.
+5. Run relevant unit/property, gameplay/production and current-rules benchmarks; run the full gates and report unrelated R02/contact failures separately rather than claiming they are fixed.
+
+**Not implemented in this audit.** No production remediation was authorized or attempted.
+
+## 20. Appendix / Evidence
+
+| Evidence family | Entry point / exact handles | Scope |
+| --- | --- | --- |
+| Systems/content | [report](docs/hermes-analysis/systems/report.md), [catalog](docs/hermes-analysis/systems/catalog.md), [full exports](docs/hermes-analysis/systems/content.json), [probes](docs/hermes-analysis/systems/probe-results.json) | Code ranges, actual definitions, five asserted probe groups; no invented lore consumers |
+| Natural/manual UI | [findings](docs/hermes-analysis/ui/findings.md), [actions](docs/hermes-analysis/ui/actions.jsonl), [turn30 state](docs/hermes-analysis/ui/30-natural-turn30.json) | Numbered PNG/TXT/JSON evidence and exported saves; fixtures explicitly separate |
+| B/C/D campaigns | [reproduction](docs/hermes-analysis/campaigns/README.md), [outcomes](docs/hermes-analysis/campaigns/outcomes.csv), [verification](docs/hermes-analysis/campaigns/verification-manifest.json), [full traces](docs/hermes-analysis/campaigns/runs/README.md) | Eight primary current-schema scenarios; compressed exact commands/snapshots and retained failures |
+| QA and stress | [report](docs/hermes-analysis/qa/report.md), [43 command records](docs/hermes-analysis/qa/checks.json), [archive446](docs/hermes-analysis/qa/large-archive.json) | Unit/gameplay/production/clean builds, performance, save/DOM repros and environment |
+| Art and factories | [report](docs/hermes-analysis/art/art-report.md), [inventory](docs/hermes-analysis/art/inventory.json), [factory matrix](docs/hermes-analysis/art/factory-audit.json), [backlog JSON](docs/hermes-analysis/art/art-backlog.json), [CSV](docs/hermes-analysis/art/art-backlog.csv) | Native/runtime/source evidence, actual representative pixels, bounded audio scan; no fresh publication |
+| Parent checks | [repro exits](docs/hermes-analysis/verification/parent-checks.json), [command counts](docs/hermes-analysis/verification/parent-command-counts.json), [pixel cross-check](docs/hermes-analysis/verification/parent-visual-findings.md) | Independent defect/positive replay checks, trace counts and actual overlapping pixel review |
+| Scores/priorities | [scorecard](docs/hermes-analysis/scorecard.json), [system dimensions](docs/hermes-analysis/system-dimensions.json), [25 issues](docs/hermes-analysis/top-25.json), [roadmap](docs/hermes-analysis/roadmap.json) | Editorial diagnosis and proposed work, not implementation |
+| Final audit verification | [machine-readable verification](docs/hermes-analysis/verification/final-audit.json) | Counts, links, code-range targets, evidence hashes and unchanged production tracked state |
+| Comparison / skill | [retrieved-source comparison](docs/hermes-analysis/references/comparison.md), [procedural recommendation](docs/hermes-analysis/skill-recommendation.md) | Design lessons with sourced claims, not competitor playtests or an auto-running task |
+
+### Evidence and certification rules
+
+- **Observed:** real commands, browser interactions, measured state, actual image inspection and fresh test output. **Implementation:** inspected source/exports, not proof of enjoyment or balance. **Proposal:** suggested new mechanics/assets/quality targets. **Historical:** attributed prior captures/approvals. **Unverified:** explicit unexecuted coverage.
+- Parent reproduced the two-command save failure, retained-report diagnosis, stack/economy probe groups and one successful independent campaign replay. The other retained campaign traces and QA/art reports were aggregated and their artifact identities checked; subagent summaries alone are not treated as a release certificate.
+- Preserve all failed attempts. Superseded audit problems include the B pilot recruitment quote, early map pointer sequence, initial production webServer/cwd configuration, initial battle property lookup, lifecycle locator and already-invalid candidate checkpoint. None are reported as game defects; corrected runs retain different names.
+- No exhaustive faction-balance study, physical-mobile/real-GPU certification, all-assets/all-frames playback review, multiplayer validation, worker/browser/GPU crash injection, disk power-loss test or complete Long/Epic Huge/Legendary archive certification is claimed. “Many simultaneous battles” is bounded by the current sequential pending-battle model; many archived engagements and one large active battle do not prove multiple concurrent battle viewers.
+- Persistent memory/skill work is separate from game implementation: the reusable `deterministic-campaign-audit` workflow and corrected browser-QA guidance are recorded in the active default Hermes profile. See [skill recommendation](docs/hermes-analysis/skill-recommendation.md); no background recurring job was created.
+
+Owned audit servers on4173/4174/5191 were stopped; the pre-existing user server on5173 remains available with HTTP200. [Final cleanup evidence](docs/hermes-analysis/verification/cleanup.log). No recurring audit job or active simulation was left behind.
+
+**Audit complete; remediation outstanding; release decision remains NO.**

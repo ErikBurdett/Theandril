@@ -1,0 +1,34 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved field attack against 21 formations using an unchanged detached observation 70ms
+ × packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved naval attack against 21 hulls through the whole turn planner 27ms
+   → expected false to be true // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved naval attack against 21 hulls through the whole turn planner
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ packages/ai/src/battle-defense.test.ts:65:43
+     63|     const state = naval(), initial = serializeGame(state), view = getO…
+     64|     expect(getMovementQuery(view, NAVAL_FIXTURE.coastalId, 830).previe…
+     65|     expect(planNaval(view, 0).interrupts).toBe(true);
+       |                                           ^
+     66|     const commands = planTurn(view);
+     67|     expect(commands).toContainEqual(expect.objectContaining({ type: 'a…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  02:50:40
+   Duration  600ms (transform 331ms, setup 0ms, import 429ms, tests 98ms, environment 0ms)
+

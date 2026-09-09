@@ -1,0 +1,39 @@
+{
+  "delegation": "deleg_17d85703",
+  "accepted": false,
+  "reviewCount": 3,
+  "failedReviews": 3,
+  "logicErrors": 5,
+  "reviews": [
+    {
+      "scope": "backend",
+      "verdictFile": "docs/development/integrated-review/backend.verdict.json",
+      "verdictSha256": "bbe8a33f4051e0840f612c5c4bb3cd917173d3fb485fed3158f8c5c25d63460d",
+      "passed": false,
+      "logicErrorCount": 1,
+      "securityConcernCount": 0
+    },
+    {
+      "scope": "ai",
+      "verdictFile": "docs/development/integrated-review/ai.verdict.json",
+      "verdictSha256": "1853c135e48d9934d4f97a0126de6b0e7ad5e9086f65acb23773e75ed30585f7",
+      "passed": false,
+      "logicErrorCount": 2,
+      "securityConcernCount": 0
+    },
+    {
+      "scope": "persistence",
+      "verdictFile": "docs/development/integrated-review/persistence.verdict.json",
+      "verdictSha256": "ea3e700b00fbe7248011a149e5e571c868c0b8001e2b17773a24f496ea4bed7e",
+      "passed": false,
+      "logicErrorCount": 2,
+      "securityConcernCount": 0
+    }
+  ],
+  "parentDisposition": {
+    "backend": "Separate minimal assault-validator TDD fix assigned; prior capped-morale and current-origin findings independently closed.",
+    "persistence": "Separate targeted durability TDD fix assigned; preserve last readable local generation and prove recovery in fake/real IndexedDB. Downloaded portable backups are not claimed deleted by these defects.",
+    "ai": "No further AI code/test action authorized after a fresh blocked probe and unanswered parent clarification; paused pending explicit permission.",
+    "overall": "Pre-fix tests/campaigns remain historical checkpoints, not current acceptance. No commits/publishing."
+  }
+}

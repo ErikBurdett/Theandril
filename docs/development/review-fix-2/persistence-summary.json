@@ -1,0 +1,64 @@
+{
+  "tests": {
+    "worker": 6,
+    "chronicle": 232,
+    "persistence": 39
+  },
+  "totalTests": 277,
+  "files": 24,
+  "sourceBeforeSha256": "2830105cf35c76491788c9f807c62c7107b4cafeee31245cb9a057d78c3260d4",
+  "sourceAfterSha256": "b53728b8bbdf5ce433f965aaa748ac27bd9d21dd2032315d55b4471f7a10c09c",
+  "sourceLineDelta": 49,
+  "singleDiagnosticSamples": {
+    "node": {
+      "cold": {
+        "beforeMs": 1506.6414320000003,
+        "afterMs": 1527.186349,
+        "deltaMs": 20.544916999999714,
+        "deltaPercent": 1.363623524724611
+      },
+      "noop": {
+        "beforeMs": 838.6848230000005,
+        "afterMs": 1170.689308,
+        "deltaMs": 332.0044849999995,
+        "deltaPercent": 39.58632324028586
+      },
+      "append": {
+        "beforeMs": 833.934252,
+        "afterMs": 1166.216767,
+        "deltaMs": 332.2825149999999,
+        "deltaPercent": 39.845169352751306
+      }
+    },
+    "chromium": {
+      "cold": {
+        "beforeMs": 2205.300000000745,
+        "afterMs": 2217,
+        "deltaMs": 11.699999999254942,
+        "deltaPercent": 0.5305400625425616
+      },
+      "noop": {
+        "beforeMs": 923.1999999992549,
+        "afterMs": 1504.4000000022352,
+        "deltaMs": 581.2000000029802,
+        "deltaPercent": 62.95493934179477
+      },
+      "append": {
+        "beforeMs": 919.4000000022352,
+        "afterMs": 1570.6000000014901,
+        "deltaMs": 651.1999999992549,
+        "deltaPercent": 70.82880139195909
+      }
+    },
+    "nodePeakRss": {
+      "before": {
+        "KiB": 1897368,
+        "GiB": 1.8094711303710938
+      },
+      "after": {
+        "KiB": 2420944,
+        "GiB": 2.3087921142578125
+      }
+    }
+  }
+}

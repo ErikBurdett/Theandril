@@ -1,0 +1,88 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts (19 tests) 1135ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts (25 tests) 1558ms
+ ✓ packages/persistence/src/campaign-storage.test.ts (21 tests) 2180ms
+   ✓ rotating a long abandoned campaign limits cleanup per commit and safely drains deferred orphan chains  634ms
+ ✓ packages/sim/src/territory.test.ts (11 tests) 1047ms
+     ✓ keeps each authored improvement site and preview authoritative across all five definitions  888ms
+ ✓ packages/sim/src/explored-sort.test.ts (5 tests) 2692ms
+     ✓ preserves the prechange 'huge'/32 whole-save seal and monotonic restored bytes  1057ms
+     ✓ preserves the prechange 'legendary'/40 whole-save seal and monotonic restored bytes  1556ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts (32 tests) 1064ms
+ ✓ packages/sim/src/roster.test.ts (27 tests) 990ms
+ ✓ packages/persistence/src/campaign-storage-durability.test.ts (4 tests) 1011ms
+   ✓ PERSIST-02 a resealed refcount undercount cannot reclaim a remaining history, and bounded GC still drains it when abandoned  681ms
+ ✓ packages/chronicle/src/compatibility.test.ts (5 tests) 984ms
+     ✓ matches the independently recorded pre-travel short-campaign v4 benchmark seal  563ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts (17 tests) 854ms
+ ✓ packages/persistence/src/persistence.test.ts (12 tests) 665ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts (13 tests) 713ms
+ ✓ packages/sim/src/pacing.test.ts (41 tests) 592ms
+stderr | apps/web/src/worker-queries.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ✓ apps/web/src/worker-queries.test.ts (6 tests) 697ms
+ ✓ packages/sim/src/army-composition.test.ts (27 tests) 612ms
+     ✓ conserves formation identities and state across deterministic merge/split/replay sequences  348ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts (21 tests) 604ms
+ ✓ packages/sim/src/resources.test.ts (4 tests) 533ms
+   ✓ resource generation is deterministic, seed-sensitive and bound to suitable physical ecology  338ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts (10 tests) 557ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts (9 tests) 578ms
+ ✓ packages/sim/src/naval.test.ts (18 tests) 539ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts (16 tests) 525ms
+ ✓ packages/chronicle/src/journal.test.ts (13 tests) 518ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts (9 tests) 488ms
+ ✓ packages/sim/src/land-queries.test.ts (15 tests) 478ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts (11 tests) 460ms
+ ✓ packages/sim/src/characters.test.ts (25 tests) 479ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts (11 tests) 449ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts (8 tests) 417ms
+ ✓ packages/chronicle/src/specialist-roster.test.ts (6 tests) 402ms
+ ✓ packages/sim/src/diplomacy.test.ts (10 tests) 379ms
+ ✓ packages/sim/src/battle-abilities.test.ts (12 tests) 374ms
+ ✓ packages/sim/src/serialization-performance.test.ts (24 tests) 339ms
+ ✓ packages/sim/src/simulation.test.ts (10 tests) 324ms
+ ✓ packages/sim/src/siege.test.ts (21 tests) 311ms
+ ✓ packages/sim/src/movement.test.ts (22 tests) 292ms
+ ✓ packages/sim/src/progression.test.ts (22 tests) 303ms
+ ✓ packages/sim/src/battle-morale.test.ts (5 tests) 294ms
+ ✓ packages/sim/src/warfare.test.ts (24 tests) 292ms
+ ✓ packages/sim/src/save.test.ts (30 tests) 281ms
+ ✓ packages/chronicle/src/chronicle.test.ts (4 tests) 239ms
+ ✓ packages/sim/src/battle-frontage.test.ts (9 tests) 231ms
+ ✓ packages/sim/src/canonical-land.test.ts (8 tests) 233ms
+ ✓ packages/sim/src/individual-campaign.test.ts (6 tests) 217ms
+ ✓ packages/sim/src/uncapped-growth.test.ts (3 tests) 196ms
+ ✓ packages/sim/src/combat/combat.test.ts (15 tests) 193ms
+ ✓ packages/sim/src/territory-quote-performance.test.ts (4 tests) 186ms
+ ✓ packages/sim/src/army-combat.test.ts (10 tests) 175ms
+ ✓ packages/sim/src/naval-launch-quotes.test.ts (2 tests) 159ms
+ ✓ packages/persistence/src/current-origin.test.ts (2 tests) 171ms
+ ✓ packages/sim/src/development.test.ts (8 tests) 165ms
+ ✓ packages/sim/src/roads.test.ts (10 tests) 145ms
+ ✓ packages/sim/src/pending-assault-save.test.ts (3 tests) 138ms
+ ✓ packages/sim/src/envelope-hash.test.ts (3 tests) 132ms
+ ✓ packages/chronicle/src/character-replay.test.ts (2 tests) 145ms
+ ✓ packages/sim/src/territory-growth.test.ts (11 tests) 137ms
+ ✓ packages/sim/src/uncapped-capture.test.ts (2 tests) 85ms
+ ✓ packages/sim/src/movement-frontage.test.ts (4 tests) 112ms
+ ✓ packages/sim/src/road-edge-cases.test.ts (4 tests) 129ms
+ ✓ packages/sim/src/geography-save.test.ts (1 test) 49ms
+ ✓ packages/chronicle/src/naval-replay.test.ts (1 test) 74ms
+ ✓ packages/sim/src/faction-starts.test.ts (2 tests) 74ms
+ ✓ packages/sim/src/research-trees.test.ts (5 tests) 78ms
+ ✓ packages/sim/src/combat/individual.test.ts (6 tests) 23ms
+ ✓ packages/sim/src/legacy-growth-visibility.test.ts (1 test) 50ms
+ ✓ packages/sim/src/growth-economy.test.ts (3 tests) 30ms
+ ✓ packages/sim/src/territory-review.test.ts (1 test) 47ms
+ ✓ packages/sim/src/specialist-combat.test.ts (2 tests) 21ms
+
+ Test Files  67 passed (67)
+      Tests  753 passed (753)
+   Start at  05:35:18
+   Duration  10.83s (transform 1.69s, setup 0ms, import 7.91s, tests 30.64s, environment 3ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/review-fix-2/parent-post-fix-tests.json

@@ -1,0 +1,28 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ↓ packages/ai/src/contact-reconnaissance.test.ts > sparse reconnaissance uses a public inward discovery bearing (naval: false)
+ ↓ packages/ai/src/contact-reconnaissance.test.ts > sparse reconnaissance uses a public inward discovery bearing (naval: true)
+ × packages/ai/src/contact-reconnaissance.test.ts > an isolated caravan can plan a paid second maritime outlet without claiming uncertain seas are connected 56ms
+   → expected null not to be null
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ai/src/contact-reconnaissance.test.ts > an isolated caravan can plan a paid second maritime outlet without claiming uncertain seas are connected
+AssertionError: expected null not to be null
+ ❯ packages/ai/src/contact-reconnaissance.test.ts:56:27
+     54|   const before = structuredClone(view), army = view.armies[0]!;
+     55|   const destination = coastalFoundingSite(view, army);
+     56|   expect(destination).not.toBeNull();
+       |                           ^
+     57|   expect(hexDistance(destination!, origin, width)).toBeGreaterThanOrEq…
+     58|   expect(getMovementQuery(view, army.id, destination!).preview).toMatc…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 skipped (3)
+   Start at  02:12:41
+   Duration  641ms (transform 391ms, setup 0ms, import 503ms, tests 57ms, environment 0ms)
+

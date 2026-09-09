@@ -1,0 +1,144 @@
+COMMAND: pnpm bench:art
+START: 2026-09-09T05:42:47.977675+00:00
+
+> theandril@0.1.0 bench:art /home/telephoneheater/Work/Theandril
+> tsx scripts/benchmark-art.ts
+
+{
+  "workload": "Offline art compilation; warm code/data, filesystem reads excluded. Not renderer performance.",
+  "approvedAssets": 545,
+  "publishedFrames": 1427,
+  "validation": {
+    "medianMs": 256.105462,
+    "p95Ms": 273.00885800000015,
+    "minMs": 252.87214799999992,
+    "maxMs": 273.00885800000015,
+    "iterations": 7
+  },
+  "pages": [
+    {
+      "id": "foundation",
+      "width": 2048,
+      "height": 2048,
+      "pngBytes": 2628301,
+      "rgbaBytes": 16777216,
+      "pngHash": "e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de",
+      "build": {
+        "medianMs": 321.50825499999974,
+        "p95Ms": 332.5763999999999,
+        "minMs": 308.96080299999994,
+        "maxMs": 332.5763999999999,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 70.73883099999966,
+        "p95Ms": 78.61556999999993,
+        "minMs": 63.27083800000037,
+        "maxMs": 78.61556999999993,
+        "iterations": 7
+      }
+    },
+    {
+      "id": "map-works",
+      "width": 512,
+      "height": 512,
+      "pngBytes": 89796,
+      "rgbaBytes": 1048576,
+      "pngHash": "bbf53f6d34b2208ca9c645def54bdd0269b73eb910be816d46495b2d836f4cfc",
+      "build": {
+        "medianMs": 13.500900000000001,
+        "p95Ms": 16.026215999999295,
+        "minMs": 13.12884800000029,
+        "maxMs": 16.026215999999295,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 2.7228219999997236,
+        "p95Ms": 4.075878999999986,
+        "minMs": 2.688130999999885,
+        "maxMs": 4.075878999999986,
+        "iterations": 7
+      }
+    },
+    {
+      "id": "battle",
+      "width": 1024,
+      "height": 1024,
+      "pngBytes": 26100,
+      "rgbaBytes": 4194304,
+      "pngHash": "6e7cbcc86537efea76ba24e4cad54858b5e77bbbf46f2c87ceb7cd9e9addea7b",
+      "build": {
+        "medianMs": 20.367557999999917,
+        "p95Ms": 27.372943000000305,
+        "minMs": 19.144318999999996,
+        "maxMs": 27.372943000000305,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 8.48397599999953,
+        "p95Ms": 9.566761000000042,
+        "minMs": 7.4945940000006885,
+        "maxMs": 9.566761000000042,
+        "iterations": 7
+      }
+    },
+    {
+      "id": "battle-foot",
+      "width": 2048,
+      "height": 2048,
+      "pngBytes": 626544,
+      "rgbaBytes": 16777216,
+      "pngHash": "d00c52eddf8ecac66916852f0d65cb2b822f9c10e62ced171f71f586a6b52aae",
+      "build": {
+        "medianMs": 145.4161009999998,
+        "p95Ms": 156.42301399999997,
+        "minMs": 142.4921629999999,
+        "maxMs": 156.42301399999997,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 44.6272940000008,
+        "p95Ms": 53.147046000000046,
+        "minMs": 42.498514000000796,
+        "maxMs": 53.147046000000046,
+        "iterations": 7
+      }
+    },
+    {
+      "id": "battle-mounted",
+      "width": 2048,
+      "height": 2048,
+      "pngBytes": 779449,
+      "rgbaBytes": 16777216,
+      "pngHash": "15c8f088ce02e12d555d2b65e19cb36576acba370ac0627e26890669b74d0020",
+      "build": {
+        "medianMs": 152.70812099999966,
+        "p95Ms": 155.4338719999996,
+        "minMs": 151.44898899999862,
+        "maxMs": 155.4338719999996,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 42.33454199999869,
+        "p95Ms": 52.22753999999986,
+        "minMs": 40.02955800000018,
+        "maxMs": 52.22753999999986,
+        "iterations": 7
+      }
+    }
+  ],
+  "syntheticValidation": {
+    "description": "1,000 in-memory frame references repeating approved source pixels with distinct test IDs; not new production artwork or approval.",
+    "frames": 1000,
+    "processedPixelBytes": 16384000,
+    "status": "CANDIDATE",
+    "timing": {
+      "medianMs": 91.67517700000099,
+      "p95Ms": 92.6575069999999,
+      "minMs": 91.01510700000108,
+      "maxMs": 92.6575069999999,
+      "iterations": 5
+    }
+  },
+  "peakResidentMiB": 744.0078125
+}

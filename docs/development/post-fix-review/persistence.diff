@@ -1,0 +1,849 @@
+diff --git c/packages/persistence/src/campaign-storage.test.ts w/packages/persistence/src/campaign-storage.test.ts
+index b3e2ddc..6ebbbc0 100644
+--- c/packages/persistence/src/campaign-storage.test.ts
++++ w/packages/persistence/src/campaign-storage.test.ts
+@@ -7,7 +7,6 @@ import { createJournal, replayArchive, resumeJournal, type CampaignJournal } fro
+ import { checksum } from '@theandril/content';
+ import { SaveStore, serializeCampaign, deserializeCampaign, exportSave, importSave } from './index';
+ import { historyDigest, logicalCampaignBytes, MAX_CHUNK_BYTES, MAX_CHUNK_RECORDS, MAX_GARBAGE_BLOBS_PER_COMMIT } from './campaign-storage';
+-import { MAX_SAVE_BYTES } from './size';
+ import preExpansion from '../../chronicle/src/fixtures/v12-faction-history.json';
+ import preBattle from '../../chronicle/src/fixtures/v13-battle-history.json';
+ 
+@@ -237,12 +236,96 @@ test('rotating a long abandoned campaign limits cleanup per commit and safely dr
+   expect(await db.table('campaignBlobs').count()).toBe(4);
+ });
+ 
+-test('the actual64MiB UTF-8 history limit rejects an oversized suffix before touching recovery generations', async () => {
++test('v2 rejects oversized fragments; legacy reads survive but cannot migrate into an unreadable v2 generation', async () => {
++  const db = store(); const { game, journal } = campaign();
++  await db.saveCampaign(game, journal, 'auto');
++  journal.record(game, { type: 'move', factionId: '炭'.repeat(1_500_000), armyId: 'missing', target: 0 });
++  const record = JSON.stringify(journal.materialize().records[0]);
++  const row = (await generations(db))[0]!;
++  const manifest = JSON.parse((await db.table('campaignManifests').get(row.id)).payload);
++  const pieces: string[] = [];
++  for (let from = 0; from < record.length; from += 32_000) pieces.push(record.slice(from, from + 32_000));
++  let head: string | null = null, historyStoredBytes = 0;
++  for (const [part, json] of pieces.entries()) {
++    const payload = JSON.stringify({ version: 1, type: 'fragment', originDigest: row.originDigest, previousDigest: head,
++      from: 0, to: Number(part === pieces.length - 1), sequence: 1, part, parts: pieces.length, json });
++    const digest = await historyDigest(payload);
++    const metadata = { digest, type: 'fragment', previousDigest: head, refs: 1, byteLength: Buffer.byteLength(payload), from: 0, to: Number(part === pieces.length - 1) };
++    await db.table('campaignBlobs').put({ ...metadata, metadataChecksum: checksum(JSON.stringify(metadata)) });
++    head = digest; historyStoredBytes += Buffer.byteLength(payload);
++    await db.table('campaignPayloads').bulkPut([0, 1, 2].map(replica => ({ digest: head, replica, payload })));
++  }
++  manifest.headDigest = head; manifest.recordCount = 1; manifest.recordBytes = Buffer.byteLength(record);
++  manifest.historyStoredBytes = historyStoredBytes; manifest.historyBlobCount = pieces.length;
++  manifest.logicalBytes = logicalCampaignBytes(manifest.snapshot, manifest.header, manifest.originEscapedBytes, manifest.recordBytes, 1);
++  const payload = JSON.stringify(manifest), manifestDigest = await historyDigest(payload);
++  await db.table('campaignManifests').put({ generationId: row.id, payload });
++  const { id, metadataChecksum: _old, ...body } = await db.table('campaignGenerations').get(row.id);
++  const updated = { ...body, headDigest: head, manifestDigest };
++  await db.table('campaignGenerations').put({ id, ...updated, metadataChecksum: checksum(JSON.stringify(updated)) });
++  await expect(db.loadLatestCampaign('auto')).rejects.toThrow(/No valid save/);
++  // The same history is legal under the old v1 policy. Preserve read/export compatibility,
++  // but never commit a v2 head whose shared prefix would fail the v2 reader.
++  const { historyStoredBytes: _bytes, historyBlobCount: _blobs, ...legacy } = manifest;
++  const oldPayload = JSON.stringify({ ...legacy, version: 1 });
++  const legacyRow = { ...updated, manifestDigest: await historyDigest(oldPayload) };
++  await db.table('campaignManifests').put({ generationId: id, payload: oldPayload });
++  await db.table('campaignGenerations').put({ id, ...legacyRow, metadataChecksum: checksum(JSON.stringify(legacyRow)) });
++  const loaded = await db.loadLatestCampaign('auto');
++  expect(loaded.journal.materialize()).toEqual(journal.materialize());
++  expect(deserializeCampaign(await db.loadLatest('auto')).archive).toEqual(journal.materialize());
++  const before = await db.table('campaignGenerations').toArray();
++  end(loaded.game, loaded.journal);
++  await expect(db.saveCampaign(loaded.game, loaded.journal, 'auto')).rejects.toThrow(/legacy.*record.*4 MiB limit/i);
++  expect(await db.table('campaignGenerations').toArray()).toEqual(before);
++  expect((await db.loadLatestCampaign('auto')).journal.materialize()).toEqual(journal.materialize());
++});
++
++test('a v1 manifest stays readable and appends via v2 without rewriting its immutable prefix', async () => {
++  const db = store(); const { game, journal } = campaign(); end(game, journal);
++  await db.saveCampaign(game, journal, 'auto');
++  const row = (await generations(db))[0]!;
++  const { historyStoredBytes: _bytes, historyBlobCount: _blobs, ...legacy } = JSON.parse((await db.table('campaignManifests').get(row.id)).payload);
++  const payload = JSON.stringify({ ...legacy, version: 1 });
++  const manifestDigest = await historyDigest(payload);
++  await db.table('campaignManifests').put({ generationId: row.id, payload });
++  const { id, metadataChecksum: _seal, ...body } = await db.table('campaignGenerations').get(row.id);
++  const updated = { ...body, manifestDigest };
++  await db.table('campaignGenerations').put({ id, ...updated, metadataChecksum: checksum(JSON.stringify(updated)) });
++  const copies = await db.table('campaignPayloads').toArray();
++  const loaded = await db.loadLatestCampaign('auto');
++  expect(loaded.journal.materialize()).toEqual(journal.materialize());
++  end(loaded.game, loaded.journal); await db.saveCampaign(loaded.game, loaded.journal, 'auto');
++  expect(db.lastCampaignSaveStats?.suffixRecords).toBe(1);
++  for (const copy of copies) expect(await db.table('campaignPayloads').get([copy.digest, copy.replica])).toEqual(copy);
++  const latest = (await generations(db)).at(-1)!;
++  const manifest = JSON.parse((await db.table('campaignManifests').get(latest.id)).payload);
++  expect(manifest).toMatchObject({ version: 2, historyBlobCount: 2 });
++  expect(stateHash(replayArchive((await db.loadLatestCampaign('auto')).journal.materialize()))).toBe(stateHash(loaded.game));
++});
++
++test.each(['historyStoredBytes', 'historyBlobCount'] as const)('v2 %s is verified, not trusted when a manifest is resealed', async field => {
++  const db = store(); const { game, journal } = campaign();
++  end(game, journal); await db.saveCampaign(game, journal, 'auto');
++  end(game, journal); await db.saveCampaign(game, journal, 'auto');
++  const row = (await generations(db)).at(-1)!;
++  const manifest = JSON.parse((await db.table('campaignManifests').get(row.id)).payload);
++  manifest[field]--;
++  const payload = JSON.stringify(manifest), manifestDigest = await historyDigest(payload);
++  await db.table('campaignManifests').put({ generationId: row.id, payload });
++  const { id, metadataChecksum: _seal, ...body } = await db.table('campaignGenerations').get(row.id);
++  const updated = { ...body, manifestDigest };
++  await db.table('campaignGenerations').put({ id, ...updated, metadataChecksum: checksum(JSON.stringify(updated)) });
++  expect((await db.loadLatestCampaign('auto')).game.turn).toBe(game.turn - 1);
++  expect(await generations(db)).toHaveLength(2);
++});
++
++test('a single 4-MiB record limit rejects oversized suffixes without touching recovery generations', async () => {
+   const db = store(); const { game, journal } = campaign(); end(game, journal); await db.saveCampaign(game, journal, 'auto');
+   const rows = await db.table('campaignGenerations').toArray(); const copies = await db.table('campaignPayloads').toArray();
+-  const result = journal.record(game, { type: 'move', factionId: '炭'.repeat(Math.floor(MAX_SAVE_BYTES / 3) + 1), armyId: 'missing', target: 0 });
++  const result = journal.record(game, { type: 'move', factionId: '炭'.repeat(Math.floor(4 * 1024 * 1024 / 3) + 1), armyId: 'missing', target: 0 });
+   expect(result.ok).toBe(false);
+-  await expect(db.saveCampaign(game, journal, 'auto')).rejects.toThrow(/64 MiB limit/);
++  await expect(db.saveCampaign(game, journal, 'auto')).rejects.toThrow(/record.*4 MiB limit/i);
+   expect(await db.table('campaignGenerations').toArray()).toEqual(rows); expect(await db.table('campaignPayloads').toArray()).toEqual(copies);
+   expect((await db.loadLatestCampaign('auto')).journal.recordCount).toBe(1);
+ });
+diff --git c/packages/persistence/src/campaign-storage.ts w/packages/persistence/src/campaign-storage.ts
+index 69e1311..99a7b15 100644
+--- c/packages/persistence/src/campaign-storage.ts
++++ w/packages/persistence/src/campaign-storage.ts
+@@ -3,7 +3,7 @@ import { z } from 'zod';
+ import { checksum } from '@theandril/content';
+ import { deserializeGame, serializeGame, type GameState } from '@theandril/sim';
+ import { resumeJournal, type CampaignArchive, type CampaignJournal } from '@theandril/chronicle';
+-import { MAX_SAVE_BYTES } from './size';
++import { assertSaveSize, MAX_SAVE_BYTES, MAX_RECORD_BYTES, MAX_HISTORY_BYTES, MAX_CAMPAIGN_BYTES, MAX_HISTORY_BLOBS, MAX_STORED_HISTORY_BYTES } from './size';
+ 
+ export type SaveKind = 'manual' | 'auto';
+ export const MAX_CHUNK_BYTES = 256 * 1024;
+@@ -17,17 +17,21 @@ export const CAMPAIGN_STORES = {
+ const digestSchema = z.string().regex(/^[a-f0-9]{64}$/);
+ const count = z.number().int().min(0).max(1_000_000);
+ const bytes = z.number().int().min(0).max(MAX_SAVE_BYTES);
+-const version = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16)]);
++const version = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17)]);
+ const headerSchema = z.object({
+   version: z.literal(2), mode: z.enum(['player', 'watch']), coverage: z.enum(['complete', 'from-save']),
+   initialHash: z.string().regex(/^[a-f0-9]{8}$/), initialSaveVersion: version, initialTurn: count.min(1),
+   finalHash: z.string().regex(/^[a-f0-9]{8}$/).nullable(), finalHashVersion: version.nullable(),
+ }).strict();
+-const manifestSchema = z.object({
++const legacyManifestSchema = z.object({
+   version: z.literal(1), snapshot: z.string().max(MAX_SAVE_BYTES), header: headerSchema,
+   originDigest: digestSchema, headDigest: digestSchema.nullable(), recordCount: count,
+   recordBytes: bytes, originEscapedBytes: bytes, logicalBytes: bytes,
+ }).strict();
++const manifestSchema = z.discriminatedUnion('version', [legacyManifestSchema, legacyManifestSchema.extend({
++  version: z.literal(2), recordBytes: z.number().int().min(0).max(MAX_HISTORY_BYTES), logicalBytes: z.number().int().min(0).max(MAX_CAMPAIGN_BYTES),
++  historyBlobCount: count.max(MAX_HISTORY_BLOBS), historyStoredBytes: z.number().int().min(0).max(MAX_STORED_HISTORY_BYTES),
++}).strict()]);
+ const originSchema = z.object({ version: z.literal(1), type: z.literal('origin'), initialSave: z.string().max(MAX_SAVE_BYTES) }).strict();
+ const chunkSchema = z.object({
+   version: z.literal(1), type: z.literal('chunk'), originDigest: digestSchema, previousDigest: digestSchema.nullable(),
+@@ -55,8 +59,8 @@ interface PayloadRow { digest: string; replica: number; payload: string }
+ interface ManifestRow { generationId: number; payload: string }
+ export interface LegacySaveRow { id?: number; kind: SaveKind; turn: number; text: string }
+ interface PreparedBlob extends Omit<BlobRow, 'refs' | 'metadataChecksum'> { payload: string }
+-interface Cursor { generationId: number; from: number; headDigest: string | null; originDigest: string; recordBytes: number; originEscapedBytes: number }
+-export interface CampaignSaveStats { suffixRecords: number; encodedHistoryBytes: number; newBlobs: number; historyPayloadWrites: number; logicalBytes: number }
++interface Cursor { generationId: number; from: number; headDigest: string | null; originDigest: string; recordBytes: number; originEscapedBytes: number; historyBlobCount: number; historyStoredBytes: number; legacyOversizedRecord?: boolean }
++export interface CampaignSaveStats { suffixRecords: number; encodedHistoryBytes: number; newBlobs: number; historyPayloadWrites: number; logicalBytes: number; snapshotBytes: number; recordBytes: number; historyBlobCount: number; historyStoredBytes: number }
+ interface LegacyAdapters {
+   validate(text: string): GameState;
+   parse(text: string): { game: GameState; archive: CampaignArchive };
+@@ -111,7 +115,8 @@ async function encodeSuffix(originDigest: string, head: string | null, from: num
+   };
+   for (const record of records) {
+     const json = JSON.stringify(record); const size = byteLength(json); recordBytes += size;
+-    if (recordBytes > MAX_SAVE_BYTES) fail('Save exceeds the 64 MiB limit.');
++    if (size > MAX_RECORD_BYTES) fail('A history record exceeds the 4 MiB limit. Previous saves are unchanged.');
++    if (recordBytes > MAX_HISTORY_BYTES) fail('History exceeds the 128 MiB limit. Previous saves are unchanged.');
+     // The small constant reserves all bounded sequence/digest/header overhead, without re-encoding a growing pending array.
+     if (pending.length && (pending.length >= MAX_CHUNK_RECORDS || pendingBytes + size + pending.length + 512 > MAX_CHUNK_BYTES)) await flush();
+     if (size + 512 <= MAX_CHUNK_BYTES) { pending.push(json); pendingBytes += size; continue; }
+@@ -165,24 +170,15 @@ export class CampaignStorage {
+     z.enum(['manual', 'auto']).parse(kind);
+     return this.serial(async () => {
+       let cursor = this.cursors.get(journal)?.get(kind);
+-      let prefixProof: { digest: string; payload: string } | undefined;
+       // Rotation by another journal/window can invalidate a once-durable prefix. Fall back to a cold suffix before preparing state.
+       if (cursor) {
+         const row = await this.generations.get(cursor.generationId);
+         if (!row || row.originDigest !== cursor.originDigest || row.headDigest !== cursor.headDigest) cursor = undefined;
+-        else {
+-          checkedGeneration(row);
+-          const digest = cursor.headDigest ?? cursor.originDigest;
+-          const payload = await this.verifiedPayload(digest);
+-          if (cursor.headDigest) {
+-            const head = historySchema.parse(JSON.parse(payload));
+-            if (head.originDigest !== cursor.originDigest || head.to !== cursor.from) fail('Durable prefix head differs from the journal cursor.');
+-          } else originSchema.parse(JSON.parse(payload));
+-          prefixProof = { digest, payload };
+-        }
++        else checkedGeneration(row);
+       }
++      if (cursor?.legacyOversizedRecord) fail('A legacy history record exceeds the 4 MiB limit for new chunked saves. Export a v1 backup; previous saves are unchanged.');
+       const packet = journal.prepareCommit(game, cursor?.from ?? 0);
+-      const snapshot = serializeGame(game); const turn = game.turn; deserializeGame(snapshot);
++      const snapshot = serializeGame(game); const turn = game.turn; assertSaveSize(snapshot); deserializeGame(snapshot);
+       const { initialSave, ...header } = packet.header;
+       const originEscapedBytes = cursor?.originEscapedBytes ?? byteLength(JSON.stringify(initialSave));
+       const origin = cursor ? undefined : await prepared(JSON.stringify({ version: 1, type: 'origin', initialSave }), 'origin', null, 0, 0);
+@@ -190,9 +186,12 @@ export class CampaignStorage {
+       const suffix = await encodeSuffix(originDigest, cursor?.headDigest ?? null, packet.from, packet.records);
+       const recordBytes = (cursor?.recordBytes ?? 0) + suffix.recordBytes;
+       const logicalBytes = logicalCampaignBytes(snapshot, header, originEscapedBytes, recordBytes, packet.to);
+-      if (logicalBytes > MAX_SAVE_BYTES) fail('Save exceeds the 64 MiB limit.');
+-      const manifest = manifestSchema.parse({ version: 1, snapshot, header, originDigest, headDigest: suffix.head, recordCount: packet.to, recordBytes, originEscapedBytes, logicalBytes });
+-      const payload = JSON.stringify(manifest); const manifestDigest = await historyDigest(payload);
++      if (recordBytes > MAX_HISTORY_BYTES) fail('History exceeds the 128 MiB limit. Previous saves are unchanged.');
++      if (logicalBytes > MAX_CAMPAIGN_BYTES) fail('Campaign exceeds the 192 MiB limit. Previous saves are unchanged.');
++      const historyBlobCount = (cursor?.historyBlobCount ?? 0) + suffix.blobs.length;
++      const historyStoredBytes = (cursor?.historyStoredBytes ?? 0) + suffix.blobs.reduce((sum, blob) => sum + blob.byteLength, 0);
++      const manifest = manifestSchema.parse({ version: 2, snapshot, header, originDigest, headDigest: suffix.head, recordCount: packet.to, recordBytes, originEscapedBytes, logicalBytes, historyBlobCount, historyStoredBytes });
++      const payload = JSON.stringify(manifest); assertSaveSize(payload); const manifestDigest = await historyDigest(payload);
+       const additions = [...(origin ? [origin] : []), ...suffix.blobs];
+       const installed: PreparedBlob[] = [];
+       let newBlobs = 0; let generationId = 0;
+@@ -202,8 +201,7 @@ export class CampaignStorage {
+             const row = await this.generations.get(cursor.generationId);
+             if (!row || row.originDigest !== cursor.originDigest || row.headDigest !== cursor.headDigest) fail('The committed prefix was rotated concurrently. Retry this save.');
+             checkedGeneration(row);
+-            const copies = await this.payloads.bulkGet([0, 1, 2].map(replica => [prefixProof!.digest, replica]));
+-            if (!copies.some(copy => copy?.payload === prefixProof!.payload)) fail('The durable prefix head was corrupted during this commit.');
++            await this.verifyPrefix(cursor);
+           }
+           for (const addition of additions) if (await this.install(addition)) { newBlobs++; installed.push(addition); }
+           await this.retain(originDigest); if (suffix.head) await this.retain(suffix.head);
+@@ -214,11 +212,31 @@ export class CampaignStorage {
+           await this.collectGarbage();
+       });
+       const contexts = this.cursors.get(journal) ?? new Map<SaveKind, Cursor>();
+-      contexts.set(kind, { generationId, from: packet.to, headDigest: suffix.head, originDigest, recordBytes, originEscapedBytes }); this.cursors.set(journal, contexts);
+-      this.stats = { suffixRecords: packet.records.length, encodedHistoryBytes: additions.reduce((sum, item) => sum + item.byteLength, 0), newBlobs, historyPayloadWrites: newBlobs * HISTORY_REPLICAS, logicalBytes };
++      contexts.set(kind, { generationId, from: packet.to, headDigest: suffix.head, originDigest, recordBytes, originEscapedBytes, historyBlobCount, historyStoredBytes }); this.cursors.set(journal, contexts);
++      this.stats = { suffixRecords: packet.records.length, encodedHistoryBytes: additions.reduce((sum, item) => sum + item.byteLength, 0), newBlobs, historyPayloadWrites: newBlobs * HISTORY_REPLICAS, logicalBytes, snapshotBytes: byteLength(snapshot), recordBytes, historyBlobCount, historyStoredBytes };
+     });
+   }
+ 
++  /** The private cursor anchors already validated immutable bytes, not their continued availability.
++   * Check every dependency under the publication lock; a surviving head alone cannot justify rotation.
++   * Stream one blob at a time without materializing/revalidating the journal's historical records. */
++  private async verifyPrefix(cursor: Cursor): Promise<void> {
++    originSchema.parse(JSON.parse(await this.verifiedPayload(cursor.originDigest)));
++    let head = cursor.headDigest, to = cursor.from, encodedBytes = 0;
++    const visited = new Set<string>();
++    while (head) {
++      if (visited.has(head) || visited.size >= cursor.historyBlobCount) fail('Durable prefix exceeds its blob bound.');
++      visited.add(head);
++      const payload = await this.verifiedPayload(head), size = byteLength(payload);
++      encodedBytes += size;
++      if (size > MAX_CHUNK_BYTES || encodedBytes > cursor.historyStoredBytes) fail('Durable prefix exceeds its byte bound.');
++      const item = historySchema.parse(JSON.parse(payload));
++      if (item.originDigest !== cursor.originDigest || item.to !== to) fail('Durable prefix differs from the journal cursor.');
++      head = item.previousDigest; to = item.from;
++    }
++    if (to !== 0 || visited.size !== cursor.historyBlobCount || encodedBytes !== cursor.historyStoredBytes) fail('Durable prefix is incomplete.');
++  }
++
+   private async install(item: PreparedBlob): Promise<boolean> {
+     const existing = await this.blobs.get(item.digest);
+     if (existing) {
+@@ -245,6 +263,8 @@ export class CampaignStorage {
+     if (row.refs === 1) await this.garbage.put({ digest });
+   }
+   private async collectGarbage(): Promise<void> {
++    if (!await this.garbage.count()) return;
++    await this.reconcileReferences();
+     for (let removed = 0; removed < MAX_GARBAGE_BLOBS_PER_COMMIT; removed++) {
+       const job = await this.garbage.orderBy('digest').first(); if (!job) return;
+       const row = checkedBlob(await this.blobs.get(job.digest));
+@@ -253,6 +273,39 @@ export class CampaignStorage {
+       if (row.previousDigest) await this.release(row.previousDigest);
+     }
+   }
++  /** Refcounts are scheduling hints, not deletion authority. Before a destructive sweep,
++   * derive every incoming edge from digest-verified immutable payloads and manifests.
++   * Include orphan successors: their outgoing leases last until their bounded deletion.
++   * Keep only small metadata/counts in memory and refuse the transaction if proof is missing. */
++  private async reconcileReferences(): Promise<void> {
++    const rows = (await this.blobs.toArray()).map(checkedBlob);
++    const refs = new Map(rows.map(row => [row.digest, 0]));
++    const retain = (digest: string) => {
++      const count = refs.get(digest);
++      if (count === undefined) fail('History reference points to missing blob metadata.');
++      refs.set(digest, count + 1);
++    };
++    for (const row of rows) {
++      const payload = await this.verifiedPayload(row.digest);
++      const item = row.type === 'origin' ? originSchema.parse(JSON.parse(payload)) : historySchema.parse(JSON.parse(payload));
++      const previous = item.type === 'origin' ? null : item.previousDigest;
++      if (item.type !== row.type || previous !== row.previousDigest || byteLength(payload) !== row.byteLength ||
++          row.from !== (item.type === 'origin' ? 0 : item.from) || row.to !== (item.type === 'origin' ? 0 : item.to)) fail('Blob reference metadata differs from its payload.');
++      if (previous) retain(previous);
++    }
++    for (const raw of await this.generations.toArray()) {
++      const row = checkedGeneration(raw);
++      if (row.type === 'legacy') continue;
++      const manifest = await this.readManifest(row);
++      retain(manifest.originDigest); if (manifest.headDigest) retain(manifest.headDigest);
++    }
++    for (const row of rows) {
++      const actual = refs.get(row.digest)!;
++      if (actual !== row.refs) await this.blobs.put(sealBlob({ ...row, refs: actual }));
++      if (actual === 0) await this.garbage.put({ digest: row.digest });
++      else await this.garbage.delete(row.digest);
++    }
++  }
+   private async rotate(kind: SaveKind): Promise<void> {
+     const keys = await this.generations.where('kind').equals(kind).primaryKeys();
+     for (const key of keys.sort((a, b) => a - b).slice(0, Math.max(0, keys.length - 3))) {
+@@ -282,24 +335,29 @@ export class CampaignStorage {
+     return fail('All three payload replicas are missing or corrupt.');
+   }
+ 
+-  private async reconstruct(row: Generation): Promise<{ game: GameState; journal: CampaignJournal }> {
++  private async readManifest(row: Generation): Promise<z.infer<typeof manifestSchema>> {
+     if (!row.manifestDigest || !row.originDigest || row.legacyId !== null) fail('Incomplete chunked generation metadata.');
+     const stored = await this.manifests.get(row.id);
+     if (!stored || typeof stored.payload !== 'string' || stored.payload.length > MAX_SAVE_BYTES || byteLength(stored.payload) > MAX_SAVE_BYTES || await Dexie.waitFor(historyDigest(stored.payload)) !== row.manifestDigest) fail('Snapshot manifest is missing or corrupt.');
+     const manifest = manifestSchema.parse(JSON.parse(stored.payload));
+     if (manifest.originDigest !== row.originDigest || manifest.headDigest !== row.headDigest) fail('Manifest and generation references differ.');
++    return manifest;
++  }
++
++  private async reconstruct(row: Generation): Promise<{ game: GameState; journal: CampaignJournal }> {
++    const manifest = await this.readManifest(row);
+     const origin = originSchema.parse(JSON.parse(await this.verifiedPayload(manifest.originDigest)));
+     const history: z.infer<typeof historySchema>[] = []; const visited = new Set<string>(); let head = manifest.headDigest;
+     let encodedBytes = 0;
+     while (head) {
+-      if (visited.has(head) || visited.size >= 1_000_000) fail('History chain is cyclic or exceeds its bound.'); visited.add(head);
++      if (visited.has(head) || visited.size >= (manifest.version === 1 ? 1_000_000 : MAX_HISTORY_BLOBS)) fail('History chain is cyclic or exceeds its bound.'); visited.add(head);
+       const payload = await this.verifiedPayload(head); const size = byteLength(payload); encodedBytes += size;
+-      if (size > MAX_CHUNK_BYTES || encodedBytes > MAX_SAVE_BYTES * 3) fail('History chain exceeds its byte bound.');
++      if (size > MAX_CHUNK_BYTES || encodedBytes > (manifest.version === 1 ? MAX_SAVE_BYTES * 3 : MAX_STORED_HISTORY_BYTES)) fail('History chain exceeds its byte bound.');
+       const item = historySchema.parse(JSON.parse(payload));
+       if (item.originDigest !== manifest.originDigest) fail('History chunk belongs to a different origin.');
+       history.push(item); head = item.previousDigest;
+     }
+-    const records: unknown[] = []; let fragments: string[] = []; let expectedParts = 0; let recordBytes = 0;
++    const records: unknown[] = []; let fragments: string[] = []; let expectedParts = 0; let recordBytes = 0; let fragmentUnits = 0; let legacyOversizedRecord = false;
+     for (const item of history.reverse()) {
+       if (item.from !== records.length) fail('History sequence is discontinuous.');
+       if (item.type === 'chunk') {
+@@ -307,21 +365,31 @@ export class CampaignStorage {
+         for (const record of item.records) { recordBytes += byteLength(JSON.stringify(record)); records.push(record); }
+       } else {
+         if (item.sequence !== records.length + 1 || item.part !== fragments.length || (fragments.length && item.parts !== expectedParts)) fail('Record fragment sequence differs.');
++        // Bound assembly before join/JSON.parse. Count actual UTF-8 after rejoining split surrogate pairs.
++        fragmentUnits += item.json.length;
++        const recordLimit = manifest.version === 1 ? MAX_SAVE_BYTES : MAX_RECORD_BYTES;
++        if (fragmentUnits > recordLimit) fail('A fragmented record exceeds its byte limit.');
+         expectedParts = item.parts; fragments.push(item.json);
+         const complete = fragments.length === expectedParts;
+         if (item.to !== records.length + Number(complete)) fail('Record fragment endpoint differs.');
+-        if (complete) { const text = fragments.join(''); recordBytes += byteLength(text); records.push(JSON.parse(text)); fragments = []; expectedParts = 0; }
++        if (complete) {
++          const text = fragments.join(''); const size = byteLength(text);
++          if (size > recordLimit) fail('A fragmented record exceeds its byte limit.');
++          legacyOversizedRecord ||= size > MAX_RECORD_BYTES;
++          recordBytes += size; records.push(JSON.parse(text)); fragments = []; expectedParts = 0; fragmentUnits = 0;
++        }
+       }
+-      if (records.length > manifest.recordCount || recordBytes > MAX_SAVE_BYTES) fail('History exceeds its declared logical bound.');
++      if (records.length > manifest.recordCount || recordBytes > (manifest.version === 1 ? MAX_SAVE_BYTES : MAX_HISTORY_BYTES)) fail('History exceeds its declared logical bound.');
+     }
+     if (fragments.length || records.length !== manifest.recordCount || recordBytes !== manifest.recordBytes) fail('History does not reach the saved record count.');
+     const escaped = byteLength(JSON.stringify(origin.initialSave));
+     const logical = logicalCampaignBytes(manifest.snapshot, manifest.header, escaped, recordBytes, records.length);
+-    if (escaped !== manifest.originEscapedBytes || logical !== manifest.logicalBytes || logical > MAX_SAVE_BYTES) fail('Logical envelope byte count differs.');
++    if (escaped !== manifest.originEscapedBytes || logical !== manifest.logicalBytes || logical > (manifest.version === 1 ? MAX_SAVE_BYTES : MAX_CAMPAIGN_BYTES)) fail('Logical envelope byte count differs.');
++    if (manifest.version === 2 && (manifest.historyBlobCount !== history.length || manifest.historyStoredBytes !== encodedBytes)) fail('Encoded history count differs.');
+     const game = deserializeGame(manifest.snapshot);
+     if (game.turn !== row.turn) fail('Snapshot turn differs from its generation.');
+     const journal = resumeJournal(game, { ...manifest.header, initialSave: origin.initialSave, records });
+-    const contexts = new Map<SaveKind, Cursor>(); contexts.set(row.kind, { generationId: row.id, from: records.length, headDigest: row.headDigest, originDigest: row.originDigest, recordBytes, originEscapedBytes: escaped }); this.cursors.set(journal, contexts);
++    const contexts = new Map<SaveKind, Cursor>(); contexts.set(row.kind, { generationId: row.id, from: records.length, headDigest: manifest.headDigest, originDigest: manifest.originDigest, recordBytes, originEscapedBytes: escaped, historyBlobCount: history.length, historyStoredBytes: encodedBytes, legacyOversizedRecord }); this.cursors.set(journal, contexts);
+     return { game, journal };
+   }
+ 
+diff --git c/packages/persistence/src/index.ts w/packages/persistence/src/index.ts
+index 2c9e74e..6889404 100644
+--- c/packages/persistence/src/index.ts
++++ w/packages/persistence/src/index.ts
+@@ -1,46 +1,76 @@
+ import Dexie from 'dexie';
+-import { gzipSync, strFromU8, strToU8 } from 'fflate';
++import { Gzip, strToU8 } from 'fflate';
+ import { deserializeGame, serializeGame } from '@theandril/sim';
+ import type { GameState } from '@theandril/sim';
+ import { checksum } from '@theandril/content';
+ import { createArchive, parseArchive, type CampaignArchive, type CampaignJournal } from '@theandril/chronicle';
+-import { assertSaveSize, MAX_SAVE_BYTES } from './size';
+-import { CAMPAIGN_STORES, CampaignStorage, migrateLegacyGenerations, type SaveKind } from './campaign-storage';
++import { assertSaveSize, MAX_SAVE_BYTES, MAX_CAMPAIGN_BYTES, MAX_HISTORY_BYTES, MAX_RECORD_BYTES } from './size';
++import { CAMPAIGN_STORES, CampaignStorage, logicalCampaignBytes, migrateLegacyGenerations, type SaveKind } from './campaign-storage';
+ export type { CampaignSaveStats, SaveKind } from './campaign-storage';
+ 
+-const MAX_BYTES = MAX_SAVE_BYTES;
++const PORTABLE_V2 = new Uint8Array([84, 65, 67, 50]); // TAC2, then one gzip member.
++const utf8Bytes = (text: string) => new TextEncoder().encode(text).byteLength;
++
++/** Preflight sections before whole-envelope encoding or semantic archive cloning. */
++function campaignBytes(snapshot: string, raw: unknown, extended: boolean | 'auto'): number {
++  assertSaveSize(snapshot);
++  if (!raw || typeof raw !== 'object' || !('initialSave' in raw) || typeof raw.initialSave !== 'string'
++    || !('records' in raw) || !Array.isArray(raw.records) || raw.records.length > 1_000_000) throw new Error('Invalid campaign archive sections.');
++  const archive = raw as CampaignArchive;
++  const { initialSave, records, ...header } = archive;
++  // Origins keep their original bound, independently of aggregate history.
++  assertSaveSize(JSON.stringify({ version: 1, type: 'origin', initialSave }));
++  let recordBytes = 0; let largestRecord = 0;
++  for (const record of records) {
++    const json = JSON.stringify(record);
++    const size = utf8Bytes(json); largestRecord = Math.max(largestRecord, size); recordBytes += size;
++    if (recordBytes > (extended ? MAX_HISTORY_BYTES : MAX_SAVE_BYTES)) throw new Error('Campaign history exceeds its byte limit.');
++  }
++  const total = logicalCampaignBytes(snapshot, header, utf8Bytes(JSON.stringify(initialSave)), recordBytes, records.length);
++  if (total > (extended ? MAX_CAMPAIGN_BYTES : MAX_SAVE_BYTES)) throw new Error('Campaign exceeds its logical byte limit.');
++  if ((extended === true || total > MAX_SAVE_BYTES) && largestRecord > MAX_RECORD_BYTES) throw new Error('A history record exceeds the 4 MiB limit.');
++  return total;
++}
+ 
+ /** The archive is persisted atomically with its snapshot, outside canonical game rules. */
+ export function serializeCampaign(game: GameState, archive: CampaignArchive): string {
+   const payload = { snapshot: serializeGame(game), archive };
++  const logicalBytes = campaignBytes(payload.snapshot, archive, 'auto');
++  const version = logicalBytes > MAX_SAVE_BYTES ? 2 : 1;
+   const payloadText = JSON.stringify(payload);
+-  const text = JSON.stringify({ format: 'theandril-campaign', version: 1, checksum: checksum(payloadText), ...payload });
+-  assertSaveSize(text);
++  // Reuse the encoded body rather than JSON-stringifying the full history twice.
++  const text = `{"format":"theandril-campaign","version":${version},"checksum":"${checksum(payloadText)}",${payloadText.slice(1)}`;
++  assertSaveSize(text, version === 2 ? MAX_CAMPAIGN_BYTES : MAX_SAVE_BYTES);
+   return text;
+ }
+ 
+-export function deserializeCampaign(text: string): { game: GameState; archive: CampaignArchive } {
+-  assertSaveSize(text);
++/** Parse a trust boundary once; do not keep a second unvalidated copy of a large archive alive. */
++function readSave(text: string): { game: GameState; archive?: CampaignArchive; envelopeVersion: 1 | 2 | null } {
++  assertSaveSize(text, MAX_CAMPAIGN_BYTES);
+   let raw: unknown;
+   try { raw = JSON.parse(text); } catch { throw new Error('Save is not valid JSON.'); }
+   if (!raw || typeof raw !== 'object' || !('format' in raw)) {
++    assertSaveSize(text);
+     const game = deserializeGame(text);
+-    return { game, archive: createArchive(game, { mode: 'player', coverage: 'from-save' }) };
++    return { game, envelopeVersion: null };
+   }
+   const envelope = raw as Record<string, unknown>;
+-  if (envelope.format !== 'theandril-campaign' || envelope.version !== 1 || typeof envelope.snapshot !== 'string'
++  if (envelope.format !== 'theandril-campaign' || ![1, 2].includes(envelope.version as number) || typeof envelope.snapshot !== 'string'
+     || Object.keys(envelope).sort().join(',') !== 'archive,checksum,format,snapshot,version') throw new Error('Unsupported campaign envelope.');
++  assertSaveSize(text, envelope.version === 2 ? MAX_CAMPAIGN_BYTES : MAX_SAVE_BYTES);
++  campaignBytes(envelope.snapshot, envelope.archive, envelope.version === 2);
+   if (envelope.checksum !== checksum(JSON.stringify({ snapshot: envelope.snapshot, archive: envelope.archive }))) throw new Error('Campaign archive checksum mismatch.');
+   const game = deserializeGame(envelope.snapshot);
+-  return { game, archive: parseArchive(envelope.archive, game) };
++  return { game, archive: parseArchive(envelope.archive, game), envelopeVersion: envelope.version as 1 | 2 };
+ }
+ 
+-function validateSave(text: string): GameState {
+-  // Preserve compatibility of the raw canonical snapshot API used by tools/fixtures.
+-  const raw: unknown = JSON.parse(text);
+-  return raw && typeof raw === 'object' && 'format' in raw ? deserializeCampaign(text).game : deserializeGame(text);
++export function deserializeCampaign(text: string): { game: GameState; archive: CampaignArchive } {
++  const { game, archive } = readSave(text);
++  return { game, archive: archive ?? createArchive(game, { mode: 'player', coverage: 'from-save' }) };
+ }
+ 
++function validateSave(text: string): GameState { return readSave(text).game; }
++
+ /** Writes and rotation are one transaction; a failed save cannot evict a valid one. */
+ export class SaveStore extends Dexie {
+   private readonly campaignStorage: CampaignStorage;
+@@ -54,50 +84,65 @@ export class SaveStore extends Dexie {
+   async saveCampaign(game: GameState, journal: CampaignJournal, kind: SaveKind): Promise<void> { await this.campaignStorage.saveCampaign(game, journal, kind); }
+   async loadLatestCampaign(kind: SaveKind): Promise<{ game: GameState; journal: CampaignJournal }> { return this.campaignStorage.loadCampaign(kind); }
+   async save(text: string, kind: SaveKind): Promise<void> {
+-    assertSaveSize(text);
+     const game = validateSave(text);
+     await this.campaignStorage.saveLegacy(text, kind, game.turn);
+   }
+-  async loadLatest(kind: SaveKind): Promise<string> {
+-    return this.campaignStorage.loadText(kind);
+-  }
++  async loadLatest(kind: SaveKind): Promise<string> { return this.campaignStorage.loadText(kind); }
+ }
+ 
+ export async function exportSave(text: string): Promise<Uint8Array> {
+-  assertSaveSize(text);
+-  validateSave(text);
+-  return gzipSync(strToU8(text));
++  const extended = readSave(text).envelopeVersion === 2;
++  const chunks: Uint8Array[] = extended ? [PORTABLE_V2] : [];
++  let total = extended ? PORTABLE_V2.length : 0;
++  const compressor = new Gzip({ level: 6, mtime: 0 }, chunk => {
++    total += chunk.byteLength;
++    if (total > MAX_SAVE_BYTES) throw new Error('Compressed save exceeds the 64 MiB limit.');
++    chunks.push(chunk);
++  });
++  for (let from = 0; from < text.length;) {
++    let to = Math.min(from + 64 * 1024, text.length);
++    // Never split a surrogate pair across independent UTF-8 encoder calls.
++    if (to < text.length && text.charCodeAt(to - 1) >= 0xd800 && text.charCodeAt(to - 1) <= 0xdbff) to--;
++    compressor.push(strToU8(text.slice(from, to)), to === text.length); from = to;
++  }
++  const result = new Uint8Array(total); let offset = 0;
++  for (const chunk of chunks) { result.set(chunk, offset); offset += chunk.byteLength; }
++  return result;
+ }
+ 
+-/** Count actual streamed output; platform gzip decoding verifies CRC and trailer integrity. */
++/** Count streamed output; platform gzip decoding verifies CRC and trailer integrity. */
+ export async function importSave(bytes: Uint8Array): Promise<string> {
+-  if (bytes.byteLength < 18 || bytes.byteLength > MAX_BYTES || bytes[0] !== 31 || bytes[1] !== 139) throw new Error('Not a compressed .theandril save.');
+-  const expectedSize = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength).getUint32(bytes.byteLength - 4, true);
+-  if (expectedSize > MAX_BYTES) throw new Error('Expanded save exceeds the 64 MiB limit.');
+-  const reader = new Blob([new Uint8Array(bytes).buffer]).stream().pipeThrough(new DecompressionStream('gzip')).getReader();
+-  const chunks: Uint8Array[] = [];
++  if (bytes.byteLength > MAX_SAVE_BYTES) throw new Error('Compressed save exceeds the 64 MiB limit.');
++  const extended = PORTABLE_V2.every((byte, index) => bytes[index] === byte);
++  const compressed = extended ? bytes.subarray(PORTABLE_V2.length) : bytes;
++  const limit = extended ? MAX_CAMPAIGN_BYTES : MAX_SAVE_BYTES;
++  if (compressed.byteLength < 18 || compressed[0] !== 31 || compressed[1] !== 139) throw new Error('Not a compressed .theandril save.');
++  const expectedSize = new DataView(compressed.buffer, compressed.byteOffset, compressed.byteLength).getUint32(compressed.byteLength - 4, true);
++  if (expectedSize > limit) throw new Error('Expanded save exceeds its format byte limit.');
++  const reader = new Blob([new Uint8Array(compressed).buffer]).stream().pipeThrough(new DecompressionStream('gzip')).getReader();
++  const chunks: string[] = [];
++  const decoder = new TextDecoder('utf-8', { fatal: true });
+   let total = 0;
+   try {
+     while (true) {
+       const { done, value } = await reader.read();
+       if (done) break;
+       total += value.byteLength;
+-      if (total > MAX_BYTES || total > expectedSize) {
++      if (total > limit || total > expectedSize) {
+         await reader.cancel();
+-        throw new Error('Save decompression exceeds its declared size or the 64 MiB limit.');
++        throw new Error('Save decompression exceeds its declared size or format byte limit.');
+       }
+-      chunks.push(value);
++      chunks.push(decoder.decode(value, { stream: true }));
+     }
++  } catch (error) {
++    // Cancellation can itself reject after CRC/codec failure; preserve the original failure.
++    await reader.cancel().catch(() => undefined);
++    throw error;
+   } finally { reader.releaseLock(); }
+   if (total !== expectedSize) throw new Error('Save decompression length mismatch.');
+-  const expanded = new Uint8Array(total);
+-  let offset = 0;
+-  for (const chunk of chunks) { expanded.set(chunk, offset); offset += chunk.length; }
+-  const text = strFromU8(expanded);
+-  const raw: unknown = JSON.parse(text);
+-  if (raw && typeof raw === 'object' && 'format' in raw) {
+-    const { game, archive } = deserializeCampaign(text);
+-    return serializeCampaign(game, archive);
+-  }
+-  return serializeGame(deserializeGame(text));
++  chunks.push(decoder.decode());
++  const text = chunks.join('');
++  const { game, archive, envelopeVersion } = readSave(text);
++  if (extended !== (envelopeVersion === 2)) throw new Error('Portable tag and campaign envelope version differ.');
++  return archive ? serializeCampaign(game, archive) : serializeGame(game);
+ }
+diff --git c/packages/persistence/src/persistence.test.ts w/packages/persistence/src/persistence.test.ts
+index c45f437..9980b6d 100644
+--- c/packages/persistence/src/persistence.test.ts
++++ w/packages/persistence/src/persistence.test.ts
+@@ -1,5 +1,5 @@
+ import 'fake-indexeddb/auto';
+-import { afterEach, expect, test } from 'vitest';
++import { afterEach, expect, test, vi } from 'vitest';
+ import { createGame, serializeGame, deserializeGame, stateHash, applyCommand } from '@theandril/sim';
+ import { SaveStore, exportSave, importSave, serializeCampaign, deserializeCampaign } from './index';
+ import { createArchive, applyRecordedCommand, replayArchive } from '@theandril/chronicle';
+@@ -16,6 +16,7 @@ test('save budget counts UTF-8 bytes, including non-BMP and non-Latin names', ()
+   expect(() => assertSaveSize('💠', 3)).toThrow(/limit/);
+   expect(() => assertSaveSize('炭火', 5)).toThrow(/limit/);
+   expect(() => assertSaveSize('炭火', 6)).not.toThrow();
++  expect(() => assertSaveSize('four', 3)).toThrow('3-byte limit');
+ });
+ test('save/load and compressed import reproduce a deterministic campaign', async () => {
+   const state = createGame({ seed: 17, size: 'tiny' });
+@@ -81,6 +82,73 @@ test('campaign envelope preserves full archive and AI-watch mode across save and
+   expect(restored.archive).toEqual(archive);
+ });
+ 
++test('explicit v2 envelopes use a tagged portable codec without changing history or old gzip files', async () => {
++  const game = createGame({ seed: 27, size: 'tiny', factionCount: 2 });
++  const archive = createArchive(game, { mode: 'watch' });
++  applyRecordedCommand(game, archive, { type: 'endTurn', factionId: game.turnOwnerId });
++  const legacy = serializeCampaign(game, archive);
++  const extended = JSON.stringify({ ...JSON.parse(legacy), version: 2 });
++  expect(deserializeCampaign(extended).archive).toEqual(archive);
++  const portable = await exportSave(extended);
++  expect([...portable.slice(0, 4)]).toEqual([84, 65, 67, 50]); // TAC2
++  const loaded = deserializeCampaign(await importSave(portable));
++  expect(loaded.archive).toEqual(archive);
++  expect(stateHash(replayArchive(loaded.archive))).toBe(stateHash(game));
++  expect([...(await exportSave(legacy)).slice(0, 2)]).toEqual([31, 139]);
++});
++
++test('legacy v1 files with large valid records remain readable and re-exportable', async () => {
++  const game = createGame({ seed: 27, size: 'tiny', factionCount: 2 });
++  const archive = createArchive(game, { mode: 'watch' });
++  applyRecordedCommand(game, archive, { type: 'move', factionId: '炭'.repeat(1_500_000), armyId: 'missing', target: 0 });
++  // Explicit old-envelope construction exercises the pre-existing 64-MiB contract, not the new writer policy.
++  const payload = { snapshot: serializeGame(game), archive };
++  const text = JSON.stringify({ format: 'theandril-campaign', version: 1, checksum: checksum(JSON.stringify(payload)), ...payload });
++  expect(deserializeCampaign(text).archive).toEqual(archive);
++  const restored = deserializeCampaign(await importSave(gzipSync(strToU8(text))));
++  expect(restored.archive).toEqual(archive);
++  expect(deserializeCampaign(await importSave(await exportSave(text))).archive).toEqual(archive);
++});
++
++test('v2 section policy bounds aggregate history and record count before whole-envelope encoding', () => {
++  const game = createGame({ seed: 27, size: 'tiny', factionCount: 2 });
++  const archive = createArchive(game, { mode: 'watch' });
++  applyRecordedCommand(game, archive, { type: 'move', factionId: '炭'.repeat(700_000), armyId: 'missing', target: 0 });
++  // Deliberately aliased synthetic boundary input, not campaign/replay evidence: no 128-MiB fixture allocation.
++  const record = archive.records[0]!;
++  archive.records = Array.from({ length: 65 }, () => record);
++  expect(() => serializeCampaign(game, archive)).toThrow(/history.*byte limit/i);
++  archive.records = Array.from({ length: 1_000_001 }, () => record);
++  expect(() => serializeCampaign(game, archive)).toThrow(/archive sections/);
++});
++
++test('portable v2 retains CRC, length, format and compressed-input bounds', async () => {
++  const game = createGame({ seed: 27, size: 'tiny', factionCount: 2 });
++  const text = JSON.stringify({ ...JSON.parse(serializeCampaign(game, createArchive(game, { mode: 'watch' }))), version: 2 });
++  const bytes = await exportSave(text);
++  const corrupt = bytes.slice(); corrupt[corrupt.length - 8]! ^= 255;
++  await expect(importSave(corrupt)).rejects.toThrow();
++  const short = bytes.slice(); new DataView(short.buffer).setUint32(short.length - 4, 1, true);
++  await expect(importSave(short)).rejects.toThrow();
++  const bomb = bytes.slice(); new DataView(bomb.buffer).setUint32(bomb.length - 4, 192 * 1024 * 1024 + 1, true);
++  await expect(importSave(bomb)).rejects.toThrow(/byte limit/);
++  await expect(importSave(bytes.subarray(4))).rejects.toThrow(/tag.*version/);
++  const old = await exportSave(serializeGame(game));
++  await expect(importSave(new Uint8Array([84, 65, 67, 50, ...old]))).rejects.toThrow(/tag.*version/);
++  await expect(importSave(new Uint8Array(64 * 1024 * 1024 + 1))).rejects.toThrow(/Compressed.*64 MiB/);
++  await expect(importSave(bytes.slice(0, -1))).rejects.toThrow();
++  await expect(importSave(new Uint8Array([...bytes, ...old]))).rejects.toThrow();
++});
++
++test('invalid UTF-8 cancels the decoder instead of leaving unread decompression work', async () => {
++  const cancel = vi.spyOn(ReadableStreamDefaultReader.prototype, 'cancel');
++  try {
++    const gzip = gzipSync(new Uint8Array([255, ...strToU8(' '.repeat(100_000))]));
++    await expect(importSave(gzip)).rejects.toThrow();
++    expect(cancel).toHaveBeenCalled();
++  } finally { cancel.mockRestore(); }
++});
++
+ test('legacy raw saves announce partial history; envelope corruption cannot replace a valid generation', async () => {
+   const game = createGame({ seed: 31, size: 'tiny' });
+   applyCommand(game, { type: 'endTurn', factionId: game.turnOwnerId });
+diff --git c/packages/persistence/src/size.ts w/packages/persistence/src/size.ts
+index 0047572..a9bb749 100644
+--- c/packages/persistence/src/size.ts
++++ w/packages/persistence/src/size.ts
+@@ -1,6 +1,15 @@
++// Snapshot, legacy envelope and compressed-file bounds are deliberately unchanged.
+ export const MAX_SAVE_BYTES = 64 * 1024 * 1024;
++export const MAX_RECORD_BYTES = 4 * 1024 * 1024;
++export const MAX_HISTORY_BYTES = 128 * 1024 * 1024;
++export const MAX_CAMPAIGN_BYTES = 192 * 1024 * 1024;
++export const MAX_HISTORY_BLOBS = 16_384;
++export const MAX_STORED_HISTORY_BYTES = 192 * 1024 * 1024;
+ 
+-/** Enforce the same UTF-8 byte budget as the bounded gzip decoder. */
++/** UTF-8 is the shared unit for snapshots, envelopes and streamed gzip output. */
+ export function assertSaveSize(text: string, limit = MAX_SAVE_BYTES): void {
+-  if (text.length > limit || new TextEncoder().encode(text).byteLength > limit) throw new Error('Save exceeds the 64 MiB limit.');
++  if (text.length > limit || new TextEncoder().encode(text).byteLength > limit) {
++    const budget = limit % (1024 * 1024) === 0 ? `${limit / (1024 * 1024)} MiB` : `${limit}-byte`;
++    throw new Error(`Save exceeds the ${budget} limit.`);
++  }
+ }
+diff --git 1/packages/persistence/src/campaign-storage-durability.test.ts 2/packages/persistence/src/campaign-storage-durability.test.ts
+new file mode 100644
+index 0000000..012379b
+--- /dev/null
++++ 2/packages/persistence/src/campaign-storage-durability.test.ts
+@@ -0,0 +1,132 @@
++import 'fake-indexeddb/auto';
++import { afterEach, expect, test } from 'vitest';
++import { createGame, serializeGame, type GameState } from '@theandril/sim';
++import { createJournal, replayArchive, type CampaignJournal } from '@theandril/chronicle';
++import { checksum } from '@theandril/content';
++import { SaveStore } from './index';
++import { MAX_GARBAGE_BLOBS_PER_COMMIT } from './campaign-storage';
++
++const stores: SaveStore[] = [];
++function store(): SaveStore { const db = new SaveStore(`durability-test-${stores.length}`); stores.push(db); return db; }
++afterEach(async () => { for (const db of stores.splice(0)) await db.delete(); });
++function campaign(seed = 74) { const game = createGame({ seed, size: 'tiny', factionCount: 2, pace: 'short' }); return { game, journal: createJournal(game, { mode: 'watch' }) }; }
++function end(game: GameState, journal: CampaignJournal): void { expect(journal.record(game, { type: 'endTurn', factionId: game.turnOwnerId }).ok).toBe(true); }
++async function storedRows(db: SaveStore) {
++  return Promise.all(['campaignGenerations', 'campaignManifests', 'campaignBlobs', 'campaignPayloads', 'campaignGarbage', 'saves'].map(name => db.table(name).toArray()));
++}
++
++test.each([false, true])('PERSIST-01 refuses an unreadable shared dependency without rotating the last readable generation (append=%s)', async append => {
++  const db = store(), { game, journal } = campaign();
++  await db.saveCampaign(game, journal, 'auto'); // Turn 1 has no dependency on the lost turn-2 chunk.
++  const readable = { snapshot: serializeGame(game), archive: journal.materialize() };
++  for (let i = 0; i < 2; i++) { end(game, journal); await db.saveCampaign(game, journal, 'auto'); }
++  const rows = await db.table('campaignGenerations').orderBy('id').toArray();
++  expect(rows.map(row => row.turn)).toEqual([1, 2, 3]);
++  const lost = rows[1]!.headDigest;
++  const copies = await db.table('campaignPayloads').where('digest').equals(lost).toArray();
++  expect(copies).toHaveLength(3);
++  await db.table('campaignPayloads').where('digest').equals(lost).delete();
++  expect(await db.table('campaignPayloads').where('digest').equals(lost).count()).toBe(0);
++  expect(await db.table('campaignPayloads').where('digest').equals(rows[2]!.headDigest).count()).toBe(3);
++  expect((await db.loadLatestCampaign('auto')).game.turn).toBe(1);
++  if (append) end(game, journal); // Keep the ORIGINAL live journal and its durable turn-3 cursor.
++  const before = await storedRows(db), stats = db.lastCampaignSaveStats;
++  await expect(db.saveCampaign(game, journal, 'auto')).rejects.toThrow(/replicas/);
++  expect(await storedRows(db)).toEqual(before);
++  expect(db.lastCampaignSaveStats).toEqual(stats);
++  const recovered = await db.loadLatestCampaign('auto');
++  expect(serializeGame(recovered.game)).toBe(readable.snapshot);
++  expect(recovered.journal.materialize()).toEqual(readable.archive);
++  expect(serializeGame(replayArchive(recovered.journal.materialize()))).toBe(readable.snapshot);
++  // Restoring exactly the removed test bytes lets retry prove the failed save never advanced its cursor.
++  await db.table('campaignPayloads').bulkAdd(copies);
++  expect(await db.table('campaignPayloads').where('digest').equals(lost).toArray()).toEqual(copies);
++  await db.saveCampaign(game, journal, 'auto');
++  expect(db.lastCampaignSaveStats?.suffixRecords).toBe(Number(append));
++  const loaded = await db.loadLatestCampaign('auto');
++  expect(serializeGame(loaded.game)).toBe(serializeGame(game));
++  expect(loaded.journal.materialize()).toEqual(journal.materialize());
++  expect(serializeGame(replayArchive(loaded.journal.materialize()))).toBe(serializeGame(game));
++  expect(await db.table('campaignGenerations').count()).toBe(3);
++});
++
++test('PERSIST-02 a resealed refcount undercount cannot reclaim a remaining history, and bounded GC still drains it when abandoned', async () => {
++  const db = store(), { game, journal } = campaign();
++  const expected = new Map<number, { snapshot: string; archive: ReturnType<CampaignJournal['materialize']> }>();
++  for (let i = 0; i < 3; i++) {
++    end(game, journal); await db.saveCampaign(game, journal, 'auto');
++    expected.set(game.turn, { snapshot: serializeGame(game), archive: journal.materialize() });
++  }
++  const rows = await db.table('campaignGenerations').orderBy('id').toArray();
++  expect(rows.map(row => row.turn)).toEqual([2, 3, 4]);
++  const oldest = rows[0]!.headDigest, metadata = await db.table('campaignBlobs').get(oldest);
++  expect(metadata.refs).toBe(2); // One generation root and one immutable successor edge.
++  const { metadataChecksum: _seal, ...body } = metadata;
++  const undercount = { ...body, refs: 1 };
++  await db.table('campaignBlobs').put({ ...undercount, metadataChecksum: checksum(JSON.stringify(undercount)) });
++  expect((await db.table('campaignBlobs').get(oldest)).refs).toBe(1);
++  const copies = await db.table('campaignPayloads').toArray();
++  expect((await db.loadLatestCampaign('auto')).journal.materialize()).toEqual(journal.materialize());
++  await db.saveCampaign(game, journal, 'auto');
++  expect(await db.table('campaignPayloads').toArray()).toEqual(copies);
++  expect((await db.table('campaignBlobs').get(oldest)).refs).toBe(1); // Successor still owns it.
++  expect(db.lastCampaignSaveStats?.historyPayloadWrites).toBe(0);
++  const retained = await db.table('campaignGenerations').orderBy('id').toArray();
++  expect(retained.map(row => row.turn)).toEqual([3, 4, 4]);
++  const manifests = await db.table('campaignManifests').toArray();
++  for (const row of retained.reverse()) {
++    const loaded = await db.loadLatestCampaign('auto'), wanted = expected.get(row.turn)!;
++    expect(serializeGame(loaded.game)).toBe(wanted.snapshot);
++    expect(loaded.journal.materialize()).toEqual(wanted.archive);
++    expect(serializeGame(replayArchive(loaded.journal.materialize()))).toBe(wanted.snapshot);
++    await db.table('campaignManifests').put({ generationId: row.id, payload: 'test fallback to preceding intact history' });
++  }
++  await db.table('campaignManifests').bulkPut(manifests);
++  // Grow a real command chain beyond one reclamation budget, then retire its final root.
++  for (let i = 0; i < MAX_GARBAGE_BLOBS_PER_COMMIT; i++) { end(game, journal); await db.saveCampaign(game, journal, 'auto'); }
++  const abandoned = await db.table('campaignBlobs').toArray(), active = campaign(99);
++  for (let i = 0; i < 3; i++) {
++    end(active.game, active.journal);
++    const before = await db.table('campaignBlobs').count();
++    await db.saveCampaign(active.game, active.journal, 'auto');
++    expect(before + db.lastCampaignSaveStats!.newBlobs - await db.table('campaignBlobs').count()).toBeLessThanOrEqual(MAX_GARBAGE_BLOBS_PER_COMMIT);
++  }
++  expect(await db.table('campaignGarbage').count()).toBeGreaterThan(0);
++  await db.saveCampaign(active.game, active.journal, 'auto');
++  expect(await db.table('campaignGarbage').count()).toBe(0);
++  expect(await db.table('campaignBlobs').count()).toBe(4);
++  expect(await db.table('campaignPayloads').count()).toBe(12);
++  for (const blob of abandoned) {
++    expect(await db.table('campaignBlobs').get(blob.digest)).toBeUndefined();
++    expect(await db.table('campaignPayloads').where('digest').equals(blob.digest).count()).toBe(0);
++  }
++  const loaded = await db.loadLatestCampaign('auto');
++  expect(loaded.journal.materialize()).toEqual(active.journal.materialize());
++  expect(serializeGame(replayArchive(loaded.journal.materialize()))).toBe(serializeGame(active.game));
++});
++
++test('a resealed predecessor-metadata mismatch refuses GC atomically after suffix installation; retry keeps the durable cursor', async () => {
++  const db = store(), { game, journal } = campaign();
++  for (let i = 0; i < 3; i++) { end(game, journal); await db.saveCampaign(game, journal, 'auto'); }
++  const generations = await db.table('campaignGenerations').orderBy('id').toArray();
++  const { metadataChecksum: _old, ...oldest } = await db.table('campaignBlobs').get(generations[0]!.headDigest);
++  const undercount = { ...oldest, refs: 1 };
++  await db.table('campaignBlobs').put({ ...undercount, metadataChecksum: checksum(JSON.stringify(undercount)) });
++  const middle = await db.table('campaignBlobs').get(generations[1]!.headDigest);
++  const { metadataChecksum: _middle, ...body } = middle;
++  const changed = { ...body, previousDigest: null }; // Actual immutable payload still points to the oldest blob.
++  await db.table('campaignBlobs').put({ ...changed, metadataChecksum: checksum(JSON.stringify(changed)) });
++  const before = await storedRows(db), stats = db.lastCampaignSaveStats;
++  end(game, journal);
++  await expect(db.saveCampaign(game, journal, 'auto')).rejects.toThrow(/metadata differs from its payload/);
++  expect(await storedRows(db)).toEqual(before); expect(db.lastCampaignSaveStats).toEqual(stats);
++  const recovered = await db.loadLatestCampaign('auto');
++  expect(recovered.game.turn).toBe(4);
++  expect(serializeGame(replayArchive(recovered.journal.materialize()))).toBe(serializeGame(recovered.game));
++  await db.table('campaignBlobs').put(middle);
++  await db.saveCampaign(game, journal, 'auto');
++  expect(db.lastCampaignSaveStats?.suffixRecords).toBe(1);
++  const loaded = await db.loadLatestCampaign('auto');
++  expect(loaded.journal.materialize()).toEqual(journal.materialize());
++  expect(serializeGame(replayArchive(loaded.journal.materialize()))).toBe(serializeGame(game));
++});
+diff --git 1/packages/persistence/src/current-origin.test.ts 2/packages/persistence/src/current-origin.test.ts
+new file mode 100644
+index 0000000..77e92c0
+--- /dev/null
++++ 2/packages/persistence/src/current-origin.test.ts
+@@ -0,0 +1,25 @@
++import 'fake-indexeddb/auto';
++import { expect, test } from 'vitest';
++import { createGame, serializeGame, SAVE_VERSION } from '@theandril/sim';
++import { createJournal, replayArchive } from '@theandril/chronicle';
++import { SaveStore } from './index';
++
++test.each(['manual', 'auto'] as const)('persists a fresh current-version origin in a %s slot before and after its first command', async kind => {
++  const game = createGame({ seed: 74, size: 'tiny', factionCount: 2 });
++  const journal = createJournal(game, { mode: 'player' });
++  const db = new SaveStore(`current-origin-${kind}`);
++  try {
++    expect(JSON.parse(serializeGame(game)).version).toBe(SAVE_VERSION);
++    await db.saveCampaign(game, journal, kind);
++    const first = await db.loadLatestCampaign(kind);
++    expect(first.journal.materialize().initialSaveVersion).toBe(SAVE_VERSION);
++    expect(serializeGame(first.game)).toBe(serializeGame(game));
++    expect(journal.record(game, { type: 'endTurn', factionId: game.turnOwnerId }).ok).toBe(true);
++    await db.saveCampaign(game, journal, kind);
++    const second = await db.loadLatestCampaign(kind);
++    expect(second.journal.materialize().initialSaveVersion).toBe(SAVE_VERSION);
++    expect(second.journal.materialize().records).toHaveLength(1);
++    expect(serializeGame(second.game)).toBe(serializeGame(game));
++    expect(serializeGame(replayArchive(second.journal.materialize()))).toBe(serializeGame(game));
++  } finally { await db.delete(); }
++});

@@ -1,0 +1,31 @@
+{
+  "kind": "authorized-development-checkpoint",
+  "originalLocalCommit": "a936fc36d4281ef2274c0a70306e3370d847d964",
+  "originalLocalBackupBranch": "backup/campaign-safety-r17-a936fc3",
+  "checkpointParent": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+  "destinationBranch": "checkpoint/campaign-safety-r17",
+  "excludedLocalOnlyEvidence": {
+    "path": "docs/development/hermes-ui/r03-preview-ui-green-v2/battle-defense-R03-public--a258a-later-defeat-before-capture/trace.zip",
+    "bytes": 163636513,
+    "oid": "03307570a3f70f776e8234ac33fc4118c1418417",
+    "sha256": "65f4b66fd9b4a2d849048e1f3942ac9141b00e6906247eafa2cbad9af4629080"
+  },
+  "retention": "The oversized trace remains at the same repository-relative path in the original local checkout and in the original local backup commit. It is not present in the published checkpoint Git history.",
+  "scope": "All original source, tests and other evidence are unchanged. Only the oversized trace is omitted; .gitignore and this publication record are added/updated. Original master and working tree are untouched.",
+  "authorization": "User selected a replacement commit with the trace retained locally, original commit on a local backup branch, and publication to a new checkpoint branch without Pages deployment.",
+  "reviewSummary": "docs/development/post-fix-review/summary.json",
+  "releaseApproved": false,
+  "remainingLimitations": [
+    "AI queued-harbor and repeated-chart-scan findings unresolved",
+    "Full integration approval not granted",
+    "No additional local AI/contact or consent-blocked supplemental probes run for publication"
+  ],
+  "prepublicationScan": {
+    "filesScanned": 2140,
+    "streamsScannedIncludingArchiveMembers": 5007,
+    "bytesScannedIncludingExpandedArchives": 1475891544,
+    "secretHeuristicFindings": [],
+    "scanErrors": [],
+    "scope": "Heuristic credential scan of publishable new/modified commit blobs, including gzip/TAC2/zip contents. Not a correctness test or comprehensive security certification. Credential values are never printed or stored in this report."
+  }
+}

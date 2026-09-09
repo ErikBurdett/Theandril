@@ -1,0 +1,167 @@
+{
+  "head": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+  "slices": {
+    "backend": {
+      "scope": [
+        "packages/sim",
+        "packages/chronicle",
+        "scripts/benchmark-roads.ts"
+      ],
+      "files": [
+        "packages/chronicle/src/development-compatibility.test.ts",
+        "packages/chronicle/src/index.ts",
+        "packages/chronicle/src/specialist-roster.test.ts",
+        "packages/sim/src/army-combat.test.ts",
+        "packages/sim/src/army-composition.ts",
+        "packages/sim/src/battle-frontage.test.ts",
+        "packages/sim/src/battle-frontage.ts",
+        "packages/sim/src/battle-morale.test.ts",
+        "packages/sim/src/fixtures/v16-trained-battle-trace.json",
+        "packages/sim/src/fixtures/v16-trained-battle.json.gz",
+        "packages/sim/src/movement-frontage.test.ts",
+        "packages/sim/src/movement.ts",
+        "packages/sim/src/rules.ts",
+        "packages/sim/src/save.ts",
+        "packages/sim/src/siege.ts",
+        "packages/sim/src/simulation.ts",
+        "packages/sim/src/types.ts",
+        "packages/sim/src/warfare.test.ts",
+        "packages/sim/src/warfare.ts",
+        "scripts/benchmark-roads.ts"
+      ],
+      "diffBytes": 74691,
+      "sha256": {
+        "packages/chronicle/src/development-compatibility.test.ts": "34d06c988874fc71f66e98bb0e5ae498c89381cb6e1aa927bcb18922908b4d37",
+        "packages/chronicle/src/index.ts": "ab397337e9414798f32abc143db36f5af246ab79a76ec06c9997f2d059d30956",
+        "packages/chronicle/src/specialist-roster.test.ts": "c58b9d45565c729635cfe5768200402f3f54b378b890d7108acabee8f2d17ef2",
+        "packages/sim/src/army-combat.test.ts": "a41712df9ce94239f0364cac4eeaa4a03ff552d4e541f34e347ea1f2ec9e7364",
+        "packages/sim/src/army-composition.ts": "1515d8b50d3c9fca0c6a2928802dd5ce30f483cba8fba3825646565bdd695464",
+        "packages/sim/src/battle-frontage.test.ts": "b98c6bb7fef2f85012d299c77f1fe0538befb9511cdf323cd36089333285024b",
+        "packages/sim/src/battle-frontage.ts": "f8d619b7c0894ac063824f5b19d4ebd8c804f0b845328822aee3c88f31c908a0",
+        "packages/sim/src/battle-morale.test.ts": "862db4e29a4840e24b08e601393ce968fbcf24bd7d5e25c8359cb2ce3fa19c6f",
+        "packages/sim/src/fixtures/v16-trained-battle-trace.json": "a3774b540a14d872132497f8ee91b4c58ec5f70567630695c1a45fcd01521184",
+        "packages/sim/src/fixtures/v16-trained-battle.json.gz": "9820123d2753b5fe9d345a0e04dd21c2865d92b19c4850a9635944ba1c7677fb",
+        "packages/sim/src/movement-frontage.test.ts": "20190dcee0dcc8a764afb0637a12e24e21ff9eb4b8e9ecc4ec4de4cd1aa95b0d",
+        "packages/sim/src/movement.ts": "1921dc7560b362fae0d91b9f734799e163eef67302a43f613b4fcec894d0c60e",
+        "packages/sim/src/rules.ts": "92ba0e21dc3cd6a80bf32ac9a419e46bf58b0baf3b13c4fe92d9cbaff4054525",
+        "packages/sim/src/save.ts": "a4e80d17de3d88cf5eb7dc9784962c0f8c2024beba2a1c046b28dfe6d5b5060b",
+        "packages/sim/src/siege.ts": "14303efc027eb35141f7ef6e0840036819de5af5d38640f324ad58909a296fc0",
+        "packages/sim/src/simulation.ts": "b80a07b412ba6c0fa25b2802bfc2e661ec7211b92a65e2fc62c6893d512cdbfc",
+        "packages/sim/src/types.ts": "322c0e88719d581bede3ebe94532b3f4b33a5d67653da3cb32d9926eb2b0a2a9",
+        "packages/sim/src/warfare.test.ts": "11d34d697fad6455d84332318d4bf2c6e4bae26e5895ee0fc1c1efd35d914228",
+        "packages/sim/src/warfare.ts": "118f2247ce5b79861f4f4f719814c06ed83235f4a0764dbc49cda34d8bf4980a",
+        "scripts/benchmark-roads.ts": "acd1f3bf609c301c4804f9ee803c6c80e4f509ee2bcac80a356344003e46fc71"
+      },
+      "heuristicMatches": {
+        "possible_secret": [],
+        "shell_injection": [],
+        "eval_exec": [],
+        "unsafe_pickle": []
+      }
+    },
+    "ai": {
+      "scope": [
+        "packages/ai"
+      ],
+      "files": [
+        "packages/ai/src/battle-defense.test.ts",
+        "packages/ai/src/contact-reconnaissance.test.ts",
+        "packages/ai/src/index.ts",
+        "packages/ai/src/naval.ts"
+      ],
+      "diffBytes": 42891,
+      "sha256": {
+        "packages/ai/src/battle-defense.test.ts": "91f85181c9d44acca134e3c5003f0e9e45864dfdf857d7b315c41dfe258eae2a",
+        "packages/ai/src/contact-reconnaissance.test.ts": "82e1d4dfd4fdaa569411b5c82459abb0a0d0fc89f8043bf057bbc26ad832f8d6",
+        "packages/ai/src/index.ts": "f878d696b0a5e1e487bd76f82757d22198832a36c06cc53d5a8d47870d9253a7",
+        "packages/ai/src/naval.ts": "b2ac26e4a45a27e9354d318d1354ff36b9823453b65c77228c19be1bf228845c"
+      },
+      "heuristicMatches": {
+        "possible_secret": [],
+        "shell_injection": [],
+        "eval_exec": [],
+        "unsafe_pickle": []
+      }
+    },
+    "ui": {
+      "scope": [
+        "apps/web/src",
+        "tests/gameplay/battle-defense.spec.ts",
+        "tests/gameplay/hermes-ui-slices.spec.ts",
+        "tests/gameplay/household-attention.spec.ts",
+        "tests/gameplay/household-fixture.ts"
+      ],
+      "files": [
+        "apps/web/src/battle-defense.test.tsx",
+        "apps/web/src/battle-defense.tsx",
+        "apps/web/src/campaign-hud.css",
+        "apps/web/src/campaign-lifecycle.test.ts",
+        "apps/web/src/faction-art.test.tsx",
+        "apps/web/src/faction-art.tsx",
+        "apps/web/src/main.tsx",
+        "apps/web/src/map-actions.tsx",
+        "apps/web/src/next-action.test.ts",
+        "apps/web/src/next-action.ts",
+        "apps/web/src/siege.tsx",
+        "apps/web/src/warfare.tsx",
+        "tests/gameplay/battle-defense.spec.ts",
+        "tests/gameplay/hermes-ui-slices.spec.ts",
+        "tests/gameplay/household-attention.spec.ts",
+        "tests/gameplay/household-fixture.ts"
+      ],
+      "diffBytes": 74960,
+      "sha256": {
+        "apps/web/src/battle-defense.test.tsx": "338960eb47a0f5ae54c6080a2ae50a9908754c44414020b939bf80c67a9fafe3",
+        "apps/web/src/battle-defense.tsx": "b5ace5b903b35b2a32d2e79f0bc5507fe464ef441d70730a5f49e7db113dd777",
+        "apps/web/src/campaign-hud.css": "2687fd7536de826ef084ecb7e4f494ad23e17cc12f43237cbfd5e867a8865ab6",
+        "apps/web/src/campaign-lifecycle.test.ts": "2ad924e12ba12aaf5023aa6c1d49b4c82137c8b8b8db972c311a297220a4f532",
+        "apps/web/src/faction-art.test.tsx": "096bbea3cdde3e03e9ff69ea25ca89c1ff3cf3b0ebde226c229bfeaf79adc449",
+        "apps/web/src/faction-art.tsx": "9c242dc564ea5d463828840d1e3cd4c9c60fd6906561e777e6d15a68a5385cc9",
+        "apps/web/src/main.tsx": "2ebb351de1768fa3785ed5fafafb3b7e4e7c31e3fd343ac673c2ad14b802c8d8",
+        "apps/web/src/map-actions.tsx": "621f9e7222f9427cd98f86f0e30f4c429ddac8b80c830990756db0e389240967",
+        "apps/web/src/next-action.test.ts": "d1142c8462a969d1167aeaf5427bd90b1433594f7896518332c648cd8556f389",
+        "apps/web/src/next-action.ts": "07a2c63abb848cd951ea8634517722b69d7a106f652a7cf6a87bf338c8008c8d",
+        "apps/web/src/siege.tsx": "f866e49b79155c3297ce602cd099b1af759aaaefb39afa47c1beeda1a593eca8",
+        "apps/web/src/warfare.tsx": "b35c54a4168c487af236a0cfbbb6795547343c525ebe3c9f5c9d2df908391c5d",
+        "tests/gameplay/battle-defense.spec.ts": "22cc450cd773849bdf11169f08520e5332507a88ead3125d0fea622131ff93ac",
+        "tests/gameplay/hermes-ui-slices.spec.ts": "30bb619aa3e87a223d3aaeae150168314867f5d644e042f1b5d920b9dee97518",
+        "tests/gameplay/household-attention.spec.ts": "d2548d815323b4dae49a6d80b7ec6cdc9cdad79d5350e0f876e316769bc1d08d",
+        "tests/gameplay/household-fixture.ts": "601e772fa374b173fd771772e16719f78faf15b10f822217cc233b1d75220c82"
+      },
+      "heuristicMatches": {
+        "possible_secret": [],
+        "shell_injection": [],
+        "eval_exec": [],
+        "unsafe_pickle": []
+      }
+    },
+    "persistence": {
+      "scope": [
+        "packages/persistence"
+      ],
+      "files": [
+        "packages/persistence/src/campaign-storage.test.ts",
+        "packages/persistence/src/campaign-storage.ts",
+        "packages/persistence/src/current-origin.test.ts",
+        "packages/persistence/src/index.ts",
+        "packages/persistence/src/persistence.test.ts",
+        "packages/persistence/src/size.ts"
+      ],
+      "diffBytes": 43263,
+      "sha256": {
+        "packages/persistence/src/campaign-storage.test.ts": "5bdad10243f2d120f3adb20764da0d568e0953ce8ee14b92de0cad4076358808",
+        "packages/persistence/src/campaign-storage.ts": "2830105cf35c76491788c9f807c62c7107b4cafeee31245cb9a057d78c3260d4",
+        "packages/persistence/src/current-origin.test.ts": "b360cc722399f49250ce3f3bf8d3bcd46da46511ce3fcac5bdac918a46d8dc0b",
+        "packages/persistence/src/index.ts": "100a9d1667da46c248c335fff1432b2ac1b5926b532a5b4acb3eab01a4b369de",
+        "packages/persistence/src/persistence.test.ts": "22f24ebc87f9c37e42c155f3d6da2e00ee9b2d970997cf36f453740083a2fbbd",
+        "packages/persistence/src/size.ts": "408a9b3d3c79bf1a69d0533072fa5525c5bdc56755979b46971995a165d2b83b"
+      },
+      "heuristicMatches": {
+        "possible_secret": [],
+        "shell_injection": [],
+        "eval_exec": [],
+        "unsafe_pickle": []
+      }
+    }
+  }
+}

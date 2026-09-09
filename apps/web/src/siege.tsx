@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { neighbors } from '@theandril/mapgen';
 import type { ArmyView, GameCommand, Observation, Settlement } from '@theandril/sim';
+import { BattleDefensePreview } from './battle-defense';
 
 type IssueOrder = (command: GameCommand) => void;
 const factionName = (view: Observation, id: string): string => view.factions.find(faction => faction.id === id)?.name ?? id;
@@ -19,6 +20,7 @@ export function SiegeOrders({ army, view, busy, issue }: { army: ArmyView; view:
     {current ? <div className="siege-card" data-testid={`siege-${current.settlementId}`}>
       <strong>Besieging {view.settlements.find(town => town.id === current.settlementId)?.name ?? current.settlementId}</strong>
       <SiegeStrength siege={current}/>
+      <BattleDefensePreview defense={current.battleDefense}/>
       {current.assaultBlocker && <p className="field-help" role="status">{current.assaultBlocker}</p>}
       <button className="danger wide" disabled={busy || !current.canAssault} aria-label={`Assault ${view.settlements.find(town => town.id === current.settlementId)?.name ?? current.settlementId}`} onClick={() => issue({ type: 'assault', factionId: view.factionId, settlementId: current.settlementId })}>Assault settlement</button>
       <button className="wide" disabled={busy} aria-label={`Lift siege of ${view.settlements.find(town => town.id === current.settlementId)?.name ?? current.settlementId}`} onClick={() => issue({ type: 'liftSiege', factionId: view.factionId, settlementId: current.settlementId })}>Lift siege</button>

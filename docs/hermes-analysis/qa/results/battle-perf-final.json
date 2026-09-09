@@ -1,0 +1,12 @@
+{
+  "name": "battle-perf-final",
+  "command": "pnpm exec playwright test --config docs/hermes-analysis/qa/perf.config.ts tests/gameplay/battle-performance.spec.ts --workers=1",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:34:20.047540+00:00",
+  "durationSeconds": 22.879942655563354,
+  "exitCode": 0,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/battle-perf-final.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 311340,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

@@ -1,0 +1,30 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ apps/web/src/battle-defense.test.tsx (1 test | 1 failed) 39ms
+     × shows exact committed and reserve values beside attack controls without claiming all defenders will fight 38ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/battle-defense.test.tsx > canonical defending-contingent presentation > shows exact committed and reserve values beside attack controls without claiming all defenders will fight
+AssertionError: expected '<section class="attack-orders" aria-l…' to contain 'Committed defense: 7 formations · 113…'
+
+Expected: "Committed defense: 7 formations · 113 strength"
+Received: "<section class="attack-orders" aria-label="Nearby enemy forces"><h3 class="section-title">Field engagement</h3><p class="field-help">Your force: 60 strength · 75 morale · 0 fatigue.</p><div class="attack-target"><strong>Reedbound Watch</strong><small>Reedbound Council · hex 537</small><p>60 strength · 75 morale · 0 fatigue</p><p>Plains · 1 defending formations</p><p class="field-help">Declare war from the encountered factions list before attacking.</p></div><p class="field-help">The battle includes every defending land formation at that hex. Forests provide cover and hills favor defenders. Command each round or let your officers resolve the engagement.</p></section>"
+
+ ❯ apps/web/src/battle-defense.test.tsx:18:18
+     16|     const before = JSON.stringify(view);
+     17|     const html = renderToStaticMarkup(createElement(AttackOrders, { ar…
+     18|     expect(html).toContain('Committed defense: 7 formations · 113 stre…
+       |                  ^
+     19|     expect(html).toContain('Reserves: 3 formations · 29 strength');
+     20|     expect(html).toContain('Whole armies fight together. Reserves defe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  02:01:12
+   Duration  497ms (transform 289ms, setup 0ms, import 393ms, tests 39ms, environment 0ms)
+

@@ -1,0 +1,98 @@
+{
+  "label": "before",
+  "sha256": "56a81b5fbc91c0bea89b8cc5f78ace519d7fa0d6109545f7444af5dcce159780",
+  "records": 114244,
+  "battles": 1496,
+  "measurements": {
+    "cold": {
+      "ms": 1506.6414320000003,
+      "stats": {
+        "suffixRecords": 114244,
+        "encodedHistoryBytes": 81486907,
+        "newBlobs": 448,
+        "historyPayloadWrites": 1344,
+        "logicalBytes": 93161744,
+        "snapshotBytes": 10912745,
+        "recordBytes": 80185627,
+        "historyBlobCount": 447,
+        "historyStoredBytes": 80402644
+      },
+      "memory": {
+        "rss": 1474797568,
+        "heapTotal": 1270800384,
+        "heapUsed": 1083681280,
+        "external": 33161419,
+        "arrayBuffers": 30538970
+      },
+      "maxRssKiB": 1440232
+    },
+    "noop": {
+      "ms": 838.6848230000005,
+      "stats": {
+        "suffixRecords": 0,
+        "encodedHistoryBytes": 0,
+        "newBlobs": 0,
+        "historyPayloadWrites": 0,
+        "logicalBytes": 93161744,
+        "snapshotBytes": 10912745,
+        "recordBytes": 80185627,
+        "historyBlobCount": 447,
+        "historyStoredBytes": 80402644
+      },
+      "memory": {
+        "rss": 1715806208,
+        "heapTotal": 1437294592,
+        "heapUsed": 1194808624,
+        "external": 33653011,
+        "arrayBuffers": 31030490
+      },
+      "maxRssKiB": 1675772
+    },
+    "appendResult": {
+      "ok": false,
+      "error": "This campaign has ended in victory.",
+      "events": []
+    },
+    "append": {
+      "ms": 833.934252,
+      "stats": {
+        "suffixRecords": 1,
+        "encodedHistoryBytes": 487,
+        "newBlobs": 1,
+        "historyPayloadWrites": 3,
+        "logicalBytes": 93161999,
+        "snapshotBytes": 10912745,
+        "recordBytes": 80185881,
+        "historyBlobCount": 448,
+        "historyStoredBytes": 80403131
+      },
+      "memory": {
+        "rss": 1896505344,
+        "heapTotal": 1615704064,
+        "heapUsed": 1350649128,
+        "external": 69479284,
+        "arrayBuffers": 66856667
+      },
+      "maxRssKiB": 1852072
+    },
+    "loadMs": 2630.5121340000005,
+    "completeLoadEquality": true,
+    "storage": {
+      "generations": 3,
+      "blobs": 449,
+      "replicas": 1347
+    }
+  },
+  "databaseDeleted": true,
+  "runtime": "v26.7.0",
+  "sourceSha256": "2830105cf35c76491788c9f807c62c7107b4cafeee31245cb9a057d78c3260d4",
+  "memory": {
+    "rss": 1836294144,
+    "heapTotal": 1543114752,
+    "heapUsed": 1396494904,
+    "external": 55908905,
+    "arrayBuffers": 53260706
+  },
+  "maxRssKiB": 1897368,
+  "scope": "One sequential cold/noop/one-record append sample, real retained victory; no forced GC. Fake IndexedDB is not disk timing. Save times exclude capture/journal parse, complete-load equality is measured separately. Peak RSS includes all parsing/equality. Existing full historical replay evidence is not rerun or relabeled here."
+}

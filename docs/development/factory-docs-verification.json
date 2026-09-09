@@ -1,0 +1,95 @@
+{
+  "scope": "Parent authorized documentation-only final recheck: changed Markdown links/headings, skill YAML, changed-path scope and diff hygiene. Not CLI smoke, artwork generation, visual approval, engine acceptance or publication.",
+  "repositories": [
+    {
+      "root": "/home/telephoneheater/Projects/BlenderArtFactory",
+      "changedFiles": [
+        "README.md",
+        "docs/ART_DIRECTION.md",
+        "docs/QUALITY_GATES.md",
+        "docs/VALIDATION.md",
+        "docs/WORKFLOWS.md",
+        "skills/blender-art-direction/SKILL.md",
+        "skills/blender-art-direction/references/theandril-guide.md",
+        "skills/blender-art-factory/SKILL.md",
+        "skills/blender-game-export-qa/SKILL.md",
+        "skills/blender-pixel-2d/SKILL.md"
+      ],
+      "markdownCount": 10,
+      "localLinksChecked": 40,
+      "skills": [
+        {
+          "path": "skills/blender-art-direction/SKILL.md",
+          "name": "blender-art-direction",
+          "descriptionLength": 46
+        },
+        {
+          "path": "skills/blender-art-factory/SKILL.md",
+          "name": "blender-art-factory",
+          "descriptionLength": 55
+        },
+        {
+          "path": "skills/blender-game-export-qa/SKILL.md",
+          "name": "blender-game-export-qa",
+          "descriptionLength": 58
+        },
+        {
+          "path": "skills/blender-pixel-2d/SKILL.md",
+          "name": "blender-pixel-2d",
+          "descriptionLength": 56
+        }
+      ],
+      "errors": [],
+      "diffCheck": true,
+      "nonDocumentationChanges": [],
+      "markdownSha256": {
+        "README.md": "cf1bd8a0247e8fb266fce251be779eb22e85811c2ed7e8990aae5bbdbb24619c",
+        "docs/ART_DIRECTION.md": "36ee7f26459fea6e94fa0a25be61045d91201f1ab6ba19e2c45c9ff6d9923b18",
+        "docs/QUALITY_GATES.md": "b4a6db67343a10d0856bffa1f54c27656960f08d143dd597bfcc5d9b4edd8ff2",
+        "docs/VALIDATION.md": "f9d4ddc27d60c05b7e88a5940594faa1657fc210fcfdc6cda936e3aea38010f9",
+        "docs/WORKFLOWS.md": "b55632be7415da6b2f7ee21d450bb5d6ffd8f0c66c851d6a2e0c93ab77770fa7",
+        "skills/blender-art-direction/SKILL.md": "64b7d5c2350fa5d3e87fe8744e37b1d431a19d92b20efbf6af3ca9e747fdd0db",
+        "skills/blender-art-direction/references/theandril-guide.md": "4985bca8698f4e4a9201d3bfe1ebda29319ac6e3b38230cfe22d95ea920ee92b",
+        "skills/blender-art-factory/SKILL.md": "00aad87291e19d6822c99ae41029957e28410b31712de62cb87423fe512b9c34",
+        "skills/blender-game-export-qa/SKILL.md": "87c295045dc7da3afa2c479e242a746bf855753b305ce2807f53f31ffadb49e6",
+        "skills/blender-pixel-2d/SKILL.md": "ca7a65bce31330a89fdec258ce07b240243a54220bdab3b293cfd914de5a769b"
+      }
+    },
+    {
+      "root": "/home/telephoneheater/Projects/pixel-art-factory",
+      "changedFiles": [
+        "README.md",
+        "refs/README.md",
+        "refs/theandril-integration.md",
+        "skills/pixel-art-factory/SKILL.md"
+      ],
+      "markdownCount": 4,
+      "localLinksChecked": 6,
+      "skills": [
+        {
+          "path": "skills/pixel-art-factory/SKILL.md",
+          "name": "pixel-art-factory",
+          "descriptionLength": 54
+        }
+      ],
+      "errors": [],
+      "diffCheck": true,
+      "nonDocumentationChanges": [],
+      "markdownSha256": {
+        "README.md": "b3d432095e35cac8e5e5133cf5a1a5016911143a0e2d9c7022f0c9e6c34481d8",
+        "refs/README.md": "4a18a194d044d13fff1e54e2c5bec4bfc50cbc25db474e3aa014981b977fa625",
+        "refs/theandril-integration.md": "65bfdae1ecb6c45acbcbde04e20b80ec2d4fd3e1632fc208e2d269d374497ecd",
+        "skills/pixel-art-factory/SKILL.md": "6a8f5afe30ac220ecd8c16713374930af853f34165ad84427300853a95329b5f"
+      }
+    }
+  ],
+  "passed": true,
+  "additionalBlenderChecks": {
+    "command": "python3 -B tools/validate_skills.py && python3 -B -m unittest discover -s tests -p 'test_*.py'",
+    "exitCode": 0,
+    "portableSkillsValidated": 8,
+    "unitTestsPassed": 38,
+    "evidenceLog": "docs/development/factory-docs-parent-checks.log",
+    "limitations": "Synthetic unit fixtures; no fresh Blender render, native import, visual approval or installer preflight."
+  }
+}

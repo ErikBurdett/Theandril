@@ -1,0 +1,12 @@
+{
+  "name": "modern-battle",
+  "command": "node --expose-gc --import tsx docs/hermes-analysis/qa/modern-battle.mjs",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:16:22.545396+00:00",
+  "durationSeconds": 0.3238871097564697,
+  "exitCode": 1,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/modern-battle.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 133932,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

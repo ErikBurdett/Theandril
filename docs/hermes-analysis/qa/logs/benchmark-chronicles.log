@@ -1,0 +1,20 @@
+COMMAND: pnpm bench:chronicles
+START: 2026-09-09T05:16:38.449537+00:00
+
+> theandril@0.1.0 bench:chronicles /home/telephoneheater/Work/Theandril
+> tsx scripts/benchmark-chronicle.ts
+
+/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:396
+  if (!condition) throw new Error('Invalid save: ' + message);
+                        ^
+
+Error: Invalid save: battle formation differs from unit content
+    at assert (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:396:25)
+    at validateBattle (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:827:7)
+    at deserializeGame (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:924:44)
+    at deserializeCampaign (/home/telephoneheater/Work/Theandril/packages/persistence/src/index.ts:34:16)
+    at <anonymous> (/home/telephoneheater/Work/Theandril/scripts/benchmark-chronicle.ts:74:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v26.7.0
+ ELIFECYCLE  Command failed with exit code 1.

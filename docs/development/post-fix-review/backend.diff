@@ -1,0 +1,1753 @@
+diff --git c/packages/chronicle/src/development-compatibility.test.ts w/packages/chronicle/src/development-compatibility.test.ts
+index d2f384a..d03accd 100644
+--- c/packages/chronicle/src/development-compatibility.test.ts
++++ w/packages/chronicle/src/development-compatibility.test.ts
+@@ -1,7 +1,7 @@
+ import { gunzipSync } from 'node:zlib';
+ import { createHash } from 'node:crypto';
+ import { expect, test } from 'vitest';
+-import { deserializeGame, serializeGameForVersion, stateHashForVersion, serializeGame } from '@theandril/sim';
++import { deserializeGame, serializeGameForVersion, stateHashForVersion, serializeGame, SAVE_VERSION } from '@theandril/sim';
+ import { replayArchive, parseArchive, resumeJournal, type CampaignArchive } from './index';
+ import captured from './fixtures/v15-development-baseline.json';
+ const fixture = JSON.parse(gunzipSync(Buffer.from(captured.payload, 'base64')).toString('utf8')) as { version: number; contentHash: string; cases: Record<string, { save: string; hash: string; sha256: string; archive: CampaignArchive }> };
+@@ -14,7 +14,7 @@ test.each(Object.entries(fixture.cases))('genuine15 %s retains exact historical
+   expect(stateHashForVersion(game, 15)).toBe(entry.hash);
+   expect(serializeGameForVersion(replayArchive(parseArchive(entry.archive, game)), 15)).toBe(entry.save);
+ });
+-test('a captured capped hearth continues under16 while keeping15 history intact', () => {
++test('a captured capped hearth continues under current rules while keeping15 history intact', () => {
+   const entry = fixture.cases.populationLimitContinued!, game = deserializeGame(entry.save), archive = parseArchive(entry.archive, game);
+   const town = Object.values(game.settlements)[0]!;
+   expect(town.population).toBe(20);
+@@ -23,6 +23,6 @@ test('a captured capped hearth continues under16 while keeping15 history intact'
+   expect(town.population).toBe(21);
+   const continued = journal.materialize();
+   expect(continued.records.slice(0, archive.records.length)).toEqual(archive.records);
+-  expect(continued.records.at(-1)?.rulesVersion).toBe(16);
++  expect(continued.records.at(-1)?.rulesVersion).toBe(SAVE_VERSION);
+   expect(serializeGame(replayArchive(continued))).toBe(serializeGame(game));
+ });
+diff --git c/packages/chronicle/src/index.ts w/packages/chronicle/src/index.ts
+index 7bc97e8..e22666f 100644
+--- c/packages/chronicle/src/index.ts
++++ w/packages/chronicle/src/index.ts
+@@ -9,7 +9,7 @@ export type { JournalHeader, JournalCommit, JournalOptions } from './journal';
+ 
+ export type CampaignMode = 'player' | 'watch';
+ export type ArchiveCoverage = 'complete' | 'from-save';
+-export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
++export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17;
+ export type ArchivedBattleReport = BattleReport | z.infer<typeof legacyCampaignBattleSchema> | z.infer<typeof schema6CampaignBattleSchema> | z.infer<typeof schema7CampaignBattleSchema>;
+ export interface ArchiveRecord {
+   sequence: number;
+@@ -56,7 +56,7 @@ const legacyArchiveSchema = z.object({
+   initialSave: z.string().max(64 * 1024 * 1024), initialHash: hash, initialTurn: turn,
+   records: z.array(legacyRecordSchema).max(1_000_000), finalHash: hash.nullable(),
+ }).strict();
+-const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16)]);
++const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17)]);
+ // Reports are validated in their original format. Never add modern metadata to old evidence.
+ const recordSchema = z.discriminatedUnion('rulesVersion', [
+   legacyRecordSchema.extend({ checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(4) }).strict(),
+@@ -72,6 +72,7 @@ const recordSchema = z.discriminatedUnion('rulesVersion', [
+   legacyRecordSchema.extend({ battles: z.array(schema15CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(14) }).strict(),
+   legacyRecordSchema.extend({ battles: z.array(schema15CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(15) }).strict(),
+   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(16) }).strict(),
++  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(17) }).strict(),
+ ]);
+ const archiveSchema = legacyArchiveSchema.extend({ version: z.literal(2), initialSaveVersion: hashVersion, records: z.array(recordSchema).max(1_000_000), finalHashVersion: hashVersion.nullable() }).strict();
+ 
+diff --git c/packages/chronicle/src/specialist-roster.test.ts w/packages/chronicle/src/specialist-roster.test.ts
+index be49bf8..9eb6505 100644
+--- c/packages/chronicle/src/specialist-roster.test.ts
++++ w/packages/chronicle/src/specialist-roster.test.ts
+@@ -1,6 +1,6 @@
+ import { expect, test } from 'vitest';
+ import { checksum, UNITS } from '@theandril/content';
+-import { applyCommand, applyCommandForVersion, armyMovement, armyUpkeep, createGame, deserializeGame, getObservation, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion, type GameCommand } from '@theandril/sim';
++import { applyCommand, applyCommandForVersion, armyMovement, armyUpkeep, createGame, deserializeGame, getObservation, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion, SAVE_VERSION, type GameCommand } from '@theandril/sim';
+ import { applyRecordedCommand, createArchive, parseArchive, replayArchive, resumeJournal, type CampaignArchive } from './index';
+ import captured from './fixtures/v14-specialist-baseline.json';
+ 
+@@ -65,7 +65,7 @@ test('an independently captured rules14 archive retains its original content sea
+   expect(journal.record(game, { type: 'endTurn', factionId: game.turnOwnerId }).ok).toBe(true);
+   const continued = journal.materialize();
+   expect(continued.records.slice(0, archive.records.length)).toEqual(archive.records);
+-  expect(continued.records.at(-1)).toMatchObject({ rulesVersion: 16, checkpointVersion: 16 });
++  expect(continued.records.at(-1)).toMatchObject({ rulesVersion: SAVE_VERSION, checkpointVersion: SAVE_VERSION });
+   expect(serializeGame(replayArchive(continued))).toBe(serializeGame(game));
+ });
+ 
+diff --git c/packages/sim/src/army-combat.test.ts w/packages/sim/src/army-combat.test.ts
+index 5e6b3d6..46b7dcb 100644
+--- c/packages/sim/src/army-combat.test.ts
++++ w/packages/sim/src/army-combat.test.ts
+@@ -1,6 +1,6 @@
+ import { describe, expect, it } from 'vitest';
+ import { checksum } from '@theandril/content';
+-import { applyCommand, armyStrength, createArmyFormation, deserializeGame, getObservation, replayGame, serializeGame, stateHash, type Army, type CampaignBattle, type GameCommand, type GameState } from './index';
++import { applyCommand, applyCommandForVersion, armyStrength, createArmyFormation, deserializeGame, getObservation, replayGame, serializeGame, stateHash, type Army, type CampaignBattle, type GameCommand, type GameState } from './index';
+ import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
+ import { conquestCampaign, CONQUEST_FIXTURE } from '../../test-fixtures/src/conquest-fixture';
+ import { rebuildIndexes } from './visibility';
+@@ -81,7 +81,7 @@ describe('mixed campaign forces use the real formation battlefield', () => {
+     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+   });
+ 
+-  it('rejects a stacked target over twenty total formations without omitting any defenders', () => {
++  it('historical rules reject a stacked target over twenty total formations without omitting defenders', () => {
+     const state = borderBattleCampaign();
+     for (let i = 0; i < 11; i++) reinforce(state, 'army.4', 'unit.guard');
+     const defender = state.armies['army.4']!; const id = `army.${state.nextId++}`;
+@@ -89,7 +89,7 @@ describe('mixed campaign forces use the real formation battlefield', () => {
+     for (let i = 0; i < 8; i++) reinforce(state, id, 'unit.guard');
+     rebuildIndexes(state); issue(state, end); issue(state, war);
+     const before = stateHash(state);
+-    expect(applyCommand(state, attack)).toMatchObject({ ok: false, error: 'This field battle supports at most twenty defending formations.' });
++    expect(applyCommandForVersion(state, attack, 16)).toMatchObject({ ok: false, error: 'This field battle supports at most twenty defending formations.' });
+     expect(stateHash(state)).toBe(before);
+     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(before);
+   });
+diff --git c/packages/sim/src/army-composition.ts w/packages/sim/src/army-composition.ts
+index e7e0aa4..ddb7b41 100644
+--- c/packages/sim/src/army-composition.ts
++++ w/packages/sim/src/army-composition.ts
+@@ -1,4 +1,5 @@
+ import { DOCTRINES, UNITS } from '@theandril/content';
++import { defensePreview } from './battle-frontage';
+ import type { Army, ArmyFormation, ArmyView, CommandResult, DomainEvent, GameState } from './types';
+ import { indexes, updateSight } from './visibility';
+ import { armyCommandCapacity, armyCommandStatus, armyHasCharacterMission, characterCommandCapacity, characterCompositionObjection, charactersForArmy, observeArmyCharacters, transferArmyCharacters } from './characters';
+@@ -33,7 +34,8 @@ export function getArmyView(state: GameState, army: Army): ArmyView {
+     const transferLimit = common ? 0 : Math.max(0, armyCommandCapacity(state, target) - target.formations.length);
+     return { armyId: id, label: target.name, resultCapacity, canMerge: mergeBlocker === null, blocker: mergeBlocker, transferLimit, transferBlocker: common ?? (transferLimit ? null : 'The receiving army has no spare command capacity.') };
+   });
+-  return { ...army, ...observeArmyCharacters(state, army.id), ...getNavalArmyView(state, army), formationCapacity: command.capacity, overCommand: command.overCommand, commandBlocker: command.commandBlocker, capacityReason: command.capacityReason, splitFormationLimit: DETACHMENT_FORMATIONS, mergeOptions, mergeOptionsTruncated: peers.length > 24,
++  const battleDefense = rulesVersion(state) >= 17 && !state.transports[army.id] ? defensePreview([army, ...peers.map(id => state.armies[id]!)], army.id) : undefined;
++  return { ...army, ...(battleDefense ? { battleDefense } : {}), ...observeArmyCharacters(state, army.id), ...getNavalArmyView(state, army), formationCapacity: command.capacity, overCommand: command.overCommand, commandBlocker: command.commandBlocker, capacityReason: command.capacityReason, splitFormationLimit: DETACHMENT_FORMATIONS, mergeOptions, mergeOptionsTruncated: peers.length > 24,
+     movementBlocker: blocker, reorganizationBlocker: objection(state, army.factionId, army), formations: army.formations.map(item => ({ ...item })), unitId: armyUnitId(army), displayUnitId: armyUnitId(army),
+     strength: armyStrength(army), maxStrength: armyMaxStrength(army), morale: armyMorale(army), fatigue: armyFatigue(army),
+     maxMovement: effectiveArmyMovement(state, army), sight: armySight(army), upkeep: armyUpkeep(army), canFound: armyCanFound(army), canAttack: armyCanAttack(army) };
+diff --git c/packages/sim/src/movement.ts w/packages/sim/src/movement.ts
+index a6592f1..b07e274 100644
+--- c/packages/sim/src/movement.ts
++++ w/packages/sim/src/movement.ts
+@@ -1,5 +1,6 @@
+ import { z } from 'zod';
+ import { armyCanAttack, armySight } from './army-composition';
++import { selectDefendingArmies } from './battle-frontage';
+ import { hexDistance, neighbors } from '@theandril/mapgen';
+ import type { Army, CommandResult, DomainEvent, GameState, Observation } from './types';
+ import { cellsWithin, indexes, updateSight } from './visibility';
+@@ -22,6 +23,7 @@ interface Knowledge {
+   stepCost(from: number, to: number): number;
+   legacy: boolean;
+   battleLimit: number;
++  defendingFormations(armies: Army[]): number;
+   terrainBlocker(cell: number): string | null;
+   width: number; height: number; factionId: string; army: Army | undefined; wars: Set<string>;
+   terrain(cell: number): number | undefined; armies(cell: number): Army[]; townOwner(cell: number): string | undefined;
+@@ -30,20 +32,24 @@ interface Knowledge {
+ const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
+ const stepCost = (terrain: number): number => terrain === 2 || terrain === 3 ? 2 : 1;
+ const compareId = (a: { id: string }, b: { id: string }): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
++const formationCount = (armies: Army[]): number => armies.reduce((sum, army) => sum + army.formations.length, 0);
+ const blocked = (state: GameState): string | null => state.victory ? 'This campaign has ended in victory.' : state.battle ? 'Resolve the pending battle first.' : state.pendingCapture ? 'Resolve the settlement capture first.' : null;
+ 
+ /** Index one detached observation once, not once for every hovered hex. */
+-const observed = new WeakMap<Observation, { terrain: Map<number, number>; roads: Map<number, number>; depths: Map<number, number>; armies: Map<number, Army[]>; towns: Map<number, string> }>();
++const observed = new WeakMap<Observation, { terrain: Map<number, number>; roads: Map<number, number>; depths: Map<number, number>; armies: Map<number, Army[]>; towns: Map<number, string>; defenses: Map<string, number> }>();
+ function observedKnowledge(view: Observation, armyId: string): Knowledge {
+   let known = observed.get(view);
+   if (!known) {
+-    known = { terrain: new Map(view.cells.map(item => [item.cell, item.terrain])), roads: new Map(view.cells.filter(item => item.roadMask).map(item => [item.cell, item.roadMask!])), depths: new Map(view.cells.map(item => [item.cell, item.waterDepth])), armies: new Map(), towns: new Map(view.settlements.map(town => [town.cell, town.factionId])) };
++    known = { terrain: new Map(view.cells.map(item => [item.cell, item.terrain])), roads: new Map(view.cells.filter(item => item.roadMask).map(item => [item.cell, item.roadMask!])), depths: new Map(view.cells.map(item => [item.cell, item.waterDepth])), armies: new Map(), towns: new Map(view.settlements.map(town => [town.cell, town.factionId])), defenses: new Map(view.armies.flatMap(army => army.battleDefense ? [[army.id, army.battleDefense.engagedFormations] as const] : [])) };
+     for (const army of view.armies) { if (army.carrierId) continue; const occupants = known.armies.get(army.cell) ?? []; occupants.push(army); known.armies.set(army.cell, occupants); }
+     observed.set(view, known);
+   }
+   const index = known;
+   const army = view.armies.find(army => army.id === armyId && army.factionId === view.factionId);
+   return { legacy: false, battleLimit: 20, terrainBlocker: cell => travelTerrainBlocker(army?.domain ?? 'land', army?.canEnterDeepWater ?? false, index.terrain.get(cell) ?? 0, index.depths.get(cell) ?? 0), width: view.width, height: view.height, factionId: view.factionId, army, wars: new Set(view.wars),
++    // Click travel targets the first stable ID. Only the canonical preview permits
++    // a smaller contingent; historical/no-preview observations retain the full cap.
++    defendingFormations: armies => index.defenses.get([...armies].sort(compareId)[0]?.id ?? '') ?? formationCount(armies),
+     stepCost: (from, to) => hasRoadEdge(from, to, view.width, index.roads.get(from) ?? 0) ? 1 : stepCost(index.terrain.get(to) ?? 0),
+     terrain: cell => index.terrain.get(cell), armies: cell => index.armies.get(cell) ?? [], townOwner: cell => index.towns.get(cell), route: view.routes.find(route => route.armyId === armyId),
+     strategicBlocker: view.victory ? 'This campaign has ended in victory.' : view.battle ? 'Resolve the pending battle first.' : view.pendingCapture ? 'Resolve the settlement capture first.' : view.armies.find(army => army.id === armyId)?.movementBlocker ?? null,
+@@ -53,6 +59,7 @@ function observedKnowledge(view: Observation, armyId: string): Knowledge {
+ function canonicalKnowledge(state: GameState, factionId: string, armyId: string): Knowledge {
+   const index = indexes(state); const visible = index.visible.get(factionId); const army = state.armies[armyId];
+   return { legacy: rulesVersion(state) < 6, battleLimit: rulesVersion(state) < 8 ? 12 : 20, terrainBlocker: cell => army ? armyTerrainBlocker(state, army, cell) : 'Unknown army.', width: state.world.width, height: state.world.height, factionId, army: army?.factionId === factionId ? army : undefined,
++    defendingFormations: armies => formationCount(rulesVersion(state) >= 17 ? selectDefendingArmies(armies, [...armies].sort(compareId)[0]?.id) : armies),
+     wars: new Set(state.wars.filter(pair => pair.includes(factionId)).map(pair => pair[0] === factionId ? pair[1] : pair[0])),
+     terrain: cell => state.explored[factionId]?.has(cell) ? state.world.terrain[cell] : undefined,
+     stepCost: (from, to) => rulesVersion(state) >= 12 && hasRoadEdge(from, to, state.world.width, state.roads.known[factionId]?.[from] ?? 0) ? 1 : stepCost(state.world.terrain[to] ?? 0),
+@@ -122,7 +129,7 @@ function preview(knowledge: Knowledge, target: number, append = false, budget =
+   const enemy = enemies[0];
+   if (enemy && !knowledge.wars.has(enemy.factionId)) return deny('Declare war before attacking this faction.');
+   if (enemy && !armyCanAttack(army)) return deny('Hearth caravans cannot initiate attacks.');
+-  if (enemies.reduce((sum, army) => sum + army.formations.length, 0) > knowledge.battleLimit) return deny(knowledge.battleLimit === 20 ? 'This field battle supports at most twenty defending formations.' : knowledge.legacy ? 'This field battle supports at most twelve defending armies.' : 'This field battle supports at most twelve defending formations.');
++  if (knowledge.defendingFormations(enemies) > knowledge.battleLimit) return deny(knowledge.battleLimit === 20 ? 'This field battle supports at most twenty defending formations.' : knowledge.legacy ? 'This field battle supports at most twelve defending armies.' : 'This field battle supports at most twelve defending formations.');
+   if (append && enemy) return deny('Queued travel cannot include an automatic attack.');
+   const waypoints = plannedWaypoints(knowledge, target, append);
+   if (waypoints.length > MAX_WAYPOINTS) return deny('A travel order supports at most eight waypoints.');
+@@ -147,7 +154,7 @@ export function getMovementQuery(view: Observation, armyId: string, target?: num
+   if (army && armyCanAttack(army) && range) for (const [cell, cost] of range.costs) for (const next of neighbors(cell, knowledge.width, knowledge.height)) {
+     const enemies = knowledge.armies(next).filter(other => other.factionId !== knowledge.factionId);
+     const owner = knowledge.townOwner(next); const terrain = knowledge.terrain(next);
+-    if (terrain === undefined || knowledge.terrainBlocker(next) || owner && owner !== knowledge.factionId || !enemies.length || enemies.reduce((sum, enemy) => sum + enemy.formations.length, 0) > knowledge.battleLimit || enemies.some(other => !knowledge.wars.has(other.factionId))) continue;
++    if (terrain === undefined || knowledge.terrainBlocker(next) || owner && owner !== knowledge.factionId || !enemies.length || knowledge.defendingFormations(enemies) > knowledge.battleLimit || enemies.some(other => !knowledge.wars.has(other.factionId))) continue;
+     const attackCost = cost + knowledge.stepCost(cell, next);
+     if (attackCost <= army.movement && attackCost < (reachable.get(next) ?? Infinity)) reachable.set(next, attackCost);
+   }
+diff --git c/packages/sim/src/rules.ts w/packages/sim/src/rules.ts
+index 2253c6c..d747075 100644
+--- c/packages/sim/src/rules.ts
++++ w/packages/sim/src/rules.ts
+@@ -1,8 +1,8 @@
+ import type { GameState } from './types';
+ 
+-export type RulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
++export type RulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17;
+ const activeRules = new WeakMap<GameState, RulesVersion>();
+-export const rulesVersion = (state: GameState): RulesVersion => activeRules.get(state) ?? 16;
++export const rulesVersion = (state: GameState): RulesVersion => activeRules.get(state) ?? 17;
+ export const LEGACY_UNIT_IDS = new Set(['unit.colonist', 'unit.scout', 'unit.guard']);
+ /** Frozen IDs: checking today's catalog would permit resealed future content in old saves. */
+ export const PRE_SPECIALIST_UNIT_IDS = new Set(['unit.colonist', 'unit.scout', 'unit.guard', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'unit.transport', 'unit.coastal_warship', 'unit.ocean_warship']);
+diff --git c/packages/sim/src/save.ts w/packages/sim/src/save.ts
+index 36a145a..d26ba2c 100644
+--- c/packages/sim/src/save.ts
++++ w/packages/sim/src/save.ts
+@@ -1,4 +1,5 @@
+ import { battleDevelopmentSchema, battleDevelopmentEffects } from './combat/development-snapshot';
++import { selectDefendingArmies } from './battle-frontage';
+ import { isHull } from './combat/individual';
+ import { createDevelopmentState, developmentStateSchema, validateDevelopment } from './development';
+ import { resourceStateSchema, validateResources } from './resources';
+@@ -24,7 +25,7 @@ import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
+ import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
+ import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
+ 
+-export const SAVE_VERSION = 16;
++export const SAVE_VERSION = 17;
+ export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
+ export const PRE_SPECIALIST_CONTENT_HASH = 'b6e3bce2';
+ export const PRE_BATTLE_CONTENT_HASH = '07a58d4f';
+@@ -154,7 +155,8 @@ const stateSchema = stateV15Schema.extend({
+   settlements: z.array(settlementSchema.extend({ population: z.number().int().positive().safe(), food: z.number().int().nonnegative().safe() }).strict()).max(350_000),
+   factions: z.array(factionSchema.extend({ treasury: z.number().int().nonnegative().safe(), knowledge: z.number().int().nonnegative().safe() }).strict()).min(1).max(48),
+ }).strict();
+-const saveSchema = z.object({ version: z.literal(16), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
++const saveSchema = z.object({ version: z.literal(17), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
++const saveV16Schema = saveSchema.extend({ version: z.literal(16) }).strict();
+ const saveV15Schema = saveSchema.extend({ version: z.literal(15), state: stateV15Schema }).strict();
+ const saveV14Schema = saveV15Schema.extend({ version: z.literal(14) }).strict();
+ const saveV13Schema = saveSchema.extend({ version: z.literal(13), state: stateV13Schema }).strict();
+@@ -313,7 +315,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
+ /** Exact old envelope projection, never a silently rewritten archive seal. */
+ export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+   const latest = canonicalPayload(state);
+-  if (version === 16) return serializeEnvelope(SAVE_VERSION, CONTENT_HASH, latest);
++  if (version >= 16) return serializeEnvelope(version, CONTENT_HASH, latest);
+   if (latest.resources.version || Object.keys(latest.resources.deposits).length || Object.values(latest.resources.stockpiles).some(stock => Object.values(stock).some(Boolean)) || Object.values(latest.development).some(records => Object.keys(records).length)) throw new Error('This campaign has resources or development unavailable in historical rules.');
+   const { resources: _resources, development: _development, ...historical } = latest;
+   const { visibilityVersion: _visibility, ...historicalLand } = historical.land;
+@@ -447,7 +449,7 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
+     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v15 snapshot checksum does not match its contents');
+     assertPreDevelopmentContent(prior.state);
+     const state = stateSchema.parse({ ...prior.state, land: { ...prior.state.land, visibilityVersion: 0 }, resources: { version: 0, deposits: {}, stockpiles: Object.fromEntries(prior.state.factions.map(faction => [faction.id, {}])) }, development: createDevelopmentState() });
+-    return { ...prior, version: 16, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
++    return { ...prior, version: 17, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
+   };
+   const migrateV14 = (prior: z.infer<typeof saveV14Schema>): z.infer<typeof saveSchema> => {
+     assert(prior.contentHash === PRE_SPECIALIST_CONTENT_HASH, 'v14 content hash is not a recognized compatible pack');
+@@ -608,6 +610,8 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
+   if (version === 13) return migrateV13(saveV13Schema.parse(raw));
+   if (version === 14) return migrateV14(saveV14Schema.parse(raw));
+   if (version === 15) return migrateV15(saveV15Schema.parse(raw));
++  // Version 17 changes command semantics, not canonical fields or content.
++  if (version === 16) return { ...saveV16Schema.parse(raw), version: 17 };
+   if (version !== SAVE_VERSION) throw new Error(`Unsupported save version ${version}.`);
+   return saveSchema.parse(raw);
+ }
+@@ -845,8 +849,9 @@ export function deserializeGame(text: string): GameState {
+       assert(battle.aftermath.length === 0 && battle.formationAftermath.length === 0 && battle.characterAftermath.length === 0 && battle.transportAftermath.length === 0, 'pending battle cannot have strategic aftermath');
+       const pair = [battle.attackerFactionId, battle.defenderFactionId].sort().join(':');
+       assert(warKeys.has(pair), 'pending battle requires a declared war');
+-      const stack = data.armies.filter(army => !transported.has(army.id) && army.cell === battle.defenderCell).map(army => army.id).sort();
+-      assert(battle.militiaId ? stack.length === 0 : stack.length === defenderIds.length && stack.every((id, i) => id === defenderIds[i]), 'battle omitted a defending army');
++      const stack = data.armies.filter(army => !transported.has(army.id) && army.cell === battle.defenderCell);
++      const expected = (originalVersion >= 17 ? selectDefendingArmies(stack, battle.settlementId ? undefined : battle.defenderId) : stack).map(army => army.id).sort();
++      assert(battle.militiaId ? stack.length === 0 : stack.every(army => army.factionId === battle.defenderFactionId) && expected.length === defenderIds.length && expected.every((id, i) => id === defenderIds[i]), 'battle omitted a defending army');
+       assert([...liveFormations.keys()].every(id => formationIds.has(id)), 'battle omitted a participant formation');
+     } else {
+       const aftermath = new Map(battle.aftermath.map(item => [item.armyId, item]));
+diff --git c/packages/sim/src/siege.ts w/packages/sim/src/siege.ts
+index 29c52f5..4460222 100644
+--- c/packages/sim/src/siege.ts
++++ w/packages/sim/src/siege.ts
+@@ -1,4 +1,5 @@
+ import { z } from 'zod';
++import { defensePreview } from './battle-frontage';
+ import { armyCanAttack, armyStrength } from './army-composition';
+ import { rulesVersion } from './rules';
+ import { isPassable, neighbors } from '@theandril/mapgen';
+@@ -70,7 +71,7 @@ export function assaultObjection(state: GameState, factionId: string, settlement
+   if (!army || army.factionId !== factionId || !neighbors(army.cell, state.world.width, state.world.height).includes(town.cell)) return 'The besieging army is no longer in position.';
+   if (!atWar(state, factionId, town.factionId)) return 'An assault requires an active war.';
+   if (army.movement < roadMovementCost(state, army.cell, town.cell)) return 'The besieging army needs movement to assault; wait for the next turn.';
+-  if ([...(indexes(state).armies.get(town.cell) ?? [])].reduce((sum, id) => sum + (state.armies[id]?.formations.length ?? 0), 0) > (rulesVersion(state) < 8 ? 12 : 20)) return rulesVersion(state) >= 8 ? 'An assault supports at most twenty defending formations.' : rulesVersion(state) < 6 ? 'An assault supports at most twelve defending armies.' : 'An assault supports at most twelve defending formations.';
++  if (rulesVersion(state) < 17 && [...(indexes(state).armies.get(town.cell) ?? [])].reduce((sum, id) => sum + (state.armies[id]?.formations.length ?? 0), 0) > (rulesVersion(state) < 8 ? 12 : 20)) return rulesVersion(state) >= 8 ? 'An assault supports at most twenty defending formations.' : rulesVersion(state) < 6 ? 'An assault supports at most twelve defending armies.' : 'An assault supports at most twelve defending formations.';
+   return null;
+ }
+ 
+@@ -106,6 +107,10 @@ export function reconcileSieges(state: GameState, events: DomainEvent[]): void {
+         }
+       }
+       if (report.combat.result?.winner === 'attacker') {
++        if (rulesVersion(state) >= 17 && (indexes(state).armies.get(town.cell)?.size ?? 0) > 0) {
++          for (const factionId of [siege.factionId, town.factionId]) events.push({ turn: state.turn, factionId, type: 'siege_contested', cell: town.cell, message: `Reserve formations still defend ${town.name}. The siege continues until they are defeated.` });
++          continue;
++        }
+         state.pendingCapture = { settlementId: town.id, armyId: army.id, factionId: siege.factionId, previousOwnerId: town.factionId, options: [], ...(rulesVersion(state) >= 16 ? { rulesVersion: 16 as const } : {}) };
+         state.pendingCapture.options = captureOptions(state, state.pendingCapture);
+         events.push({ turn: state.turn, factionId: siege.factionId, type: 'capture_pending', cell: town.cell, message: `${town.name} has fallen. Choose its fate.` });
+@@ -197,7 +202,8 @@ export function observeSieges(state: GameState, factionId: string): SiegeObserva
+     const town = state.settlements[siege.settlementId];
+     const defenders = town ? [...(indexes(state).armies.get(town.cell) ?? [])].map(id => state.armies[id]) : [];
+     const assaultBlocker = assaultObjection(state, factionId, siege.settlementId);
+-    return { ...siege, canAssault: assaultBlocker === null, assaultBlocker, defenderStrength: defenders.length ? defenders.reduce((total, army) => total + (army ? armyStrength(army) : 0), 0) : siege.militiaStrength };
++    const battleDefense = rulesVersion(state) >= 17 ? defensePreview(defenders.filter(army => army !== undefined)) : undefined;
++    return { ...siege, ...(battleDefense ? { battleDefense } : {}), canAssault: assaultBlocker === null, assaultBlocker, defenderStrength: defenders.length ? defenders.reduce((total, army) => total + (army ? armyStrength(army) : 0), 0) : siege.militiaStrength };
+   });
+ }
+ 
+diff --git c/packages/sim/src/simulation.ts w/packages/sim/src/simulation.ts
+index dbd496c..34cf066 100644
+--- c/packages/sim/src/simulation.ts
++++ w/packages/sim/src/simulation.ts
+@@ -122,7 +122,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
+ 
+ export function createGame(options: NewGameOptions): GameState {
+   const checked = z.object({
+-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16)]).default(16),
++    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17)]).default(17),
+     seed: z.number().int().min(0).max(0xffff_ffff),
+     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
+     factionCount: z.number().int().min(1).max(48).default(4),
+diff --git c/packages/sim/src/types.ts w/packages/sim/src/types.ts
+index 5364920..714a3d0 100644
+--- c/packages/sim/src/types.ts
++++ w/packages/sim/src/types.ts
+@@ -32,8 +32,17 @@ export interface Army {
+   formations: ArmyFormation[];
+ }
+ 
++/** Observed whole-army frontage, not an estimate of who will win. */
++export interface BattleDefense {
++  engagedFormations: number;
++  engagedStrength: number;
++  reserveFormations: number;
++  reserveStrength: number;
++}
++
+ /** Detached, derived roster summary; none of these aggregate values are canonical. */
+ export interface ArmyView extends Army, NavalArmyView {
++  battleDefense?: BattleDefense;
+   formationCapacity: number;
+   overCommand: boolean;
+   commandBlocker: string | null;
+@@ -85,6 +94,7 @@ export interface Siege {
+ }
+ 
+ export interface SiegeObservation extends Siege {
++  battleDefense?: BattleDefense;
+   canAssault: boolean;
+   assaultBlocker: string | null;
+   defenderStrength: number;
+diff --git c/packages/sim/src/warfare.test.ts w/packages/sim/src/warfare.test.ts
+index 1f17816..b635b2b 100644
+--- c/packages/sim/src/warfare.test.ts
++++ w/packages/sim/src/warfare.test.ts
+@@ -4,7 +4,7 @@ import { checksum, UNITS } from '@theandril/content';
+ import { isPassable, neighbors } from '@theandril/mapgen';
+ import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
+ import { rebaseAuthoredLand } from '../../test-fixtures/src/authored-land';
+-import { applyCommand, createGame, deserializeGame, getObservation, replayGame, serializeGame, stateHash, validateEndTurn } from './index';
++import { applyCommand, applyCommandForVersion, createGame, deserializeGame, getObservation, replayGame, serializeGame, stateHash, validateEndTurn } from './index';
+ import type { CampaignBattle, GameCommand, GameState } from './index';
+ import { chooseBattleOrder } from './combat';
+ import { rebuildIndexes } from './visibility';
+@@ -88,7 +88,7 @@ describe('field battles in the campaign', () => {
+     expect(state.battle).toBeNull();
+   });
+ 
+-  it('includes every defending army and rejects unsupported stacks atomically', () => {
++  it('includes complete in-budget defenses and preserves historical over-cap atomic rejection', () => {
+     const state = borderBattleCampaign();
+     const defender = state.armies['army.4'];
+     if (!defender) throw new Error('Missing defender');
+@@ -109,7 +109,12 @@ describe('field battles in the campaign', () => {
+     }
+     rebuildIndexes(crowded);
+     checked(crowded, war);
+-    invalid(crowded, attack);
++    const before = stateHash(crowded);
++    expect(applyCommandForVersion(crowded, attack, 16).ok).toBe(false);
++    expect(stateHash(crowded)).toBe(before);
++    checked(crowded, attack);
++    expect(crowded.battle?.combat.defender).toHaveLength(20);
++    expect(stateHash(deserializeGame(serializeGame(crowded)))).toBe(stateHash(crowded));
+   });
+ 
+   it('preserves exact manual/autoresolve parity and mid-battle save/replay', () => {
+diff --git c/packages/sim/src/warfare.ts w/packages/sim/src/warfare.ts
+index 6aaaa89..ab893ec 100644
+--- c/packages/sim/src/warfare.ts
++++ w/packages/sim/src/warfare.ts
+@@ -1,4 +1,5 @@
+-import { snapshotBattleDevelopment } from './combat/development-snapshot';
++import { battleDevelopmentEffects, snapshotBattleDevelopment } from './combat/development-snapshot';
++import { selectDefendingArmies } from './battle-frontage';
+ import { UNITS } from '@theandril/content';
+ import { hexDistance, neighbors, SeededRandom } from '@theandril/mapgen';
+ import { autoResolveBattle, chooseBattleOrder, createBattle, resolveBattleRound, settleBattleTerminal } from './combat';
+@@ -99,9 +100,10 @@ export function startCampaignBattle(state: GameState, factionId: string, armyId:
+   const terrain = state.world.terrain[defender.cell] ?? 0;
+   const cost = roadMovementCost(state, attacker.cell, defender.cell);
+   if (attacker.movement < cost) return fail('Not enough movement remains to attack this terrain.');
+-  const defenders = [...(index.armies.get(defender.cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => army !== undefined).sort(compareId);
++  const stack = [...(index.armies.get(defender.cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => army !== undefined).sort(compareId);
++  const defenders = rulesVersion(state) >= 17 ? selectDefendingArmies(stack, defender.id) : stack;
+   if (defenders.reduce((sum, army) => sum + army.formations.length, 0) > (rulesVersion(state) < 8 ? 12 : 20)) return fail(rulesVersion(state) >= 8 ? 'This field battle supports at most twenty defending formations.' : rulesVersion(state) < 6 ? 'This field battle supports at most twelve defending armies.' : 'This field battle supports at most twelve defending formations.');
+-  if (!defenders.length || defenders.some(army => army.factionId !== defender.factionId)) return fail('The defending stack has invalid ownership.');
++  if (!defenders.length || stack.some(army => army.factionId !== defender.factionId)) return fail('The defending stack has invalid ownership.');
+   const serial = state.nextId;
+   const seed = new SeededRandom((state.world.seed ^ serial) >>> 0).nextUint32();
+   const combat = createBattle({ seed, terrain, attacker: deployment(state, [attacker]), defender: deployment(state, defenders) }, battleVersion(state));
+@@ -119,7 +121,8 @@ export function startCampaignBattle(state: GameState, factionId: string, armyId:
+   state.nextId++;
+   attacker.movement = 0;
+   for (const army of defenders) army.movement = 0;
+-  const message = `${attacker.name} engaged ${defenders.length === 1 ? defender.name : `${defenders.length} defending armies`} at hex ${defender.cell}.`;
++  const reserveFormations = stack.reduce((sum, army) => sum + army.formations.length, 0) - defenders.reduce((sum, army) => sum + army.formations.length, 0);
++  const message = `${attacker.name} engaged ${defenders.length === 1 ? defender.name : `${defenders.length} defending armies`} at hex ${defender.cell}.${reserveFormations ? ` ${reserveFormations} reserve formations still hold the hex and must be defeated separately.` : ''}`;
+   const interruptions: DomainEvent[] = [];
+   for (const army of [attacker, ...defenders]) interruptArmyMissions(state, army.id, 'The army entered battle.', interruptions);
+   return { ok: true, events: [
+@@ -133,8 +136,9 @@ export function startCampaignBattle(state: GameState, factionId: string, armyId:
+ export function startSettlementAssault(state: GameState, factionId: string, armyId: string, settlementId: string): CommandResult {
+   const attacker = state.armies[armyId]; const town = state.settlements[settlementId]; const siege = state.sieges[settlementId];
+   if (!attacker || !town || !siege) return fail('Missing assault participants.');
+-  const defenders = [...(indexes(state).armies.get(town.cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => army !== undefined).sort(compareId);
+-  if (defenders.reduce((sum, army) => sum + army.formations.length, 0) > (rulesVersion(state) < 8 ? 12 : 20) || defenders.some(army => army.factionId !== town.factionId)) return fail('Invalid defending garrison.');
++  const stack = [...(indexes(state).armies.get(town.cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => army !== undefined).sort(compareId);
++  const defenders = rulesVersion(state) >= 17 ? selectDefendingArmies(stack) : stack;
++  if (defenders.reduce((sum, army) => sum + army.formations.length, 0) > (rulesVersion(state) < 8 ? 12 : 20) || stack.some(army => army.factionId !== town.factionId)) return fail('Invalid defending garrison.');
+   const militiaId = defenders.length ? null : `militia.${town.id}`;
+   const fortification = Math.floor(siege.defenses / 10);
+   const guard = units.get('unit.guard');
+@@ -212,7 +216,15 @@ function finishCampaignBattle(state: GameState, battle: CampaignBattle, events:
+       const binding = battle.formationBindings.find(binding => binding.formationId === item.id && binding.armyId === id);
+       const result = all.find(unit => unit.id === binding?.battleFormationId);
+       if (!result) throw new Error('Battle omitted an army formation');
+-      item.strength = result.strength; item.morale = Math.max(1, result.morale); item.fatigue = result.fatigue;
++      item.strength = result.strength;
++      // Deployment training is temporary: carry losses, not its bonus, back to the campaign.
++      // Canonical morale still holds the entering value; cap the frozen bonus as deployment did.
++      const training = rulesVersion(state) >= 17
++        ? Math.min(100 - item.morale, battleDevelopmentEffects(battle.developmentSnapshots?.find(snapshot => snapshot.formationId === binding?.battleFormationId)).morale) : 0;
++      item.morale = rulesVersion(state) >= 17
++        ? Math.max(1, Math.min(units.get(item.unitId)!.morale, result.morale - training))
++        : Math.max(1, result.morale);
++      item.fatigue = result.fatigue;
+       if (item.strength === 0 && battle.rulesVersion >= 6) events.push({ turn: state.turn, factionId: army.factionId, type: 'formation_destroyed', cell: army.cell, message: `${army.name} lost its ${units.get(item.unitId)?.name ?? item.unitId} formation (${item.id}).` });
+     }
+     army.formations = army.formations.filter(item => item.strength > 0);
+diff --git c/scripts/benchmark-roads.ts w/scripts/benchmark-roads.ts
+index f79ad69..cef12de 100644
+--- c/scripts/benchmark-roads.ts
++++ w/scripts/benchmark-roads.ts
+@@ -62,9 +62,9 @@ function corridorCampaign(size: 'huge' | 'legendary', factionCount: number): Gam
+ 
+ function workload(size: 'huge' | 'legendary', factionCount: number) {
+   const base = corridorCampaign(size, factionCount), baseline = serializeGame(base), baselineHash = stateHash(base);
+-  // Rules15 adds optional specialist recruits; this retained roster3 road workload
+-  // recruits no specialists or casters, researches no magic and enters no battle.
+-  invariant(SAVE_VERSION === 16 && Object.values(base.arcaneResearch).every(discoveries => discoveries.length === 0) && Object.values(base.armies).every(army => army.formations.every(item => !['unit.skirmisher', 'unit.arbalester', 'unit.halberdier', 'unit.lancer'].includes(item.unitId))), 'review this retained road workload before another schema change');
++  // Rules17 changes only post-battle strategic morale. This retained roster3 road
++  // workload recruits no specialists/casters, researches no magic and has no battles.
++  invariant(SAVE_VERSION === 17 && Object.values(base.arcaneResearch).every(discoveries => discoveries.length === 0) && Object.values(base.armies).every(army => army.formations.every(item => !['unit.skirmisher', 'unit.arbalester', 'unit.halberdier', 'unit.lancer'].includes(item.unitId))), 'review this retained road workload before another schema change');
+   const planningMs: number[] = [], readMs: number[] = [];
+   let expectedRoads = '', expectedEvents = '', planned: GameState | null = null;
+   for (let sample = 0; sample < WARMUPS + SAMPLES; sample++) {
+diff --git 1/packages/sim/src/battle-frontage.test.ts 2/packages/sim/src/battle-frontage.test.ts
+new file mode 100644
+index 0000000..4f90d80
+--- /dev/null
++++ 2/packages/sim/src/battle-frontage.test.ts
+@@ -0,0 +1,173 @@
++import { describe, expect, it } from 'vitest';
++import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
++import { conquestCampaign, CONQUEST_FIXTURE } from '../../test-fixtures/src/conquest-fixture';
++import { navalCampaign, NAVAL_FIXTURE } from '../../test-fixtures/src/naval-fixture';
++import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
++import { applyCommand, createArmyFormation, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand } from './index';
++
++function field(count: number) {
++  let state = borderBattleCampaign();
++  const defender = state.armies['army.4']!;
++  defender.formations = [{ ...createArmyFormation(defender.id, 'unit.scout'), strength: 1, morale: 1 }];
++  for (let i = 1; i < count; i++) {
++    const id = `army.${state.nextId++}`;
++    state.armies[id] = { ...defender, id, formations: [{ ...createArmyFormation(id, 'unit.scout'), strength: 1, morale: 1 }] };
++  }
++  refreshAuthoredSight(state);
++  state = deserializeGame(serializeGame(state));
++  return state;
++}
++
++describe('bounded defending contingents', () => {
++  it('prioritizes a later-sorting target without splitting larger reserves or involving their officer', () => {
++    let state = borderBattleCampaign();
++    const enemy = state.armies['army.4']!, cell = enemy.cell, factionId = state.turnOwnerId;
++    const make = (id: string, count: number, from: number) => ({
++      ...enemy, id, formations: Array.from({ length: count }, (_, i) => ({
++        ...createArmyFormation(i ? `army.${from + i}` : id, 'unit.scout'), strength: 1, morale: 1,
++      })).sort((a, b) => a.id < b.id ? -1 : 1),
++    });
++    state.nextId = 10000;
++    state.armies[enemy.id] = make(enemy.id, 12, 4100);
++    state.armies['army.8000'] = make('army.8000', 4, 8100);
++    state.armies['army.9000'] = make('army.9000', 9, 9100);
++    const home = Object.values(state.settlements).find(town => town.factionId === enemy.factionId)!;
++    state.factions.find(faction => faction.id === enemy.factionId)!.treasury = 500;
++    state.armies[enemy.id]!.cell = home.cell;
++    refreshAuthoredSight(state);
++    expect(applyCommand(state, { type: 'recruitCharacter', factionId: enemy.factionId, settlementId: home.id, definitionId: 'character.marshal' }).ok).toBe(true);
++    const officer = Object.values(state.characters).find(character => character.factionId === enemy.factionId)!;
++    expect(applyCommand(state, { type: 'assignCharacter', factionId: enemy.factionId, characterId: officer.id, armyId: enemy.id }).ok).toBe(true);
++    state.armies[enemy.id]!.cell = cell;
++    refreshAuthoredSight(state);
++    state = deserializeGame(serializeGame(state));
++    expect(applyCommand(state, { type: 'declareWar', factionId, targetFactionId: enemy.factionId }).ok).toBe(true);
++    const reserveBefore = structuredClone(state.armies[enemy.id]), officerBefore = structuredClone(state.characters[officer.id]);
++    expect(applyCommand(state, { type: 'attack', factionId, armyId: 'army.2', targetArmyId: 'army.9000' }).ok).toBe(true);
++    expect(state.battle!.defenderIds).toEqual(['army.8000', 'army.9000']);
++    expect(state.battle!.combat.defender).toHaveLength(4 + 9);
++    expect(state.battle!.characterSnapshots.some(character => character.characterId === officer.id)).toBe(false);
++    state = deserializeGame(serializeGame(state));
++    expect(applyCommand(state, { type: 'autoResolveBattle', factionId }).ok).toBe(true);
++    expect(state.armies[enemy.id]).toEqual(reserveBefore);
++    expect(state.characters[officer.id]).toEqual(officerBefore);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++  });
++
++  it('rejects a self-consistent but wrong pending contingent after a save is resealed', () => {
++    const state = field(21), factionId = state.turnOwnerId;
++    const omitted = Object.values(state.armies).filter(army => army.factionId !== factionId && army.id !== 'army.4').sort((a, b) => a.id < b.id ? -1 : 1)[0]!;
++    delete state.armies[omitted.id]; refreshAuthoredSight(state);
++    expect(applyCommand(state, { type: 'declareWar', factionId, targetFactionId: omitted.factionId }).ok).toBe(true);
++    expect(applyCommand(state, { type: 'attack', factionId, armyId: 'army.2', targetArmyId: 'army.4' }).ok).toBe(true);
++    expect(() => deserializeGame(serializeGame(state))).not.toThrow();
++    // The battle itself came from the real engine. Restore a lower-ID defender so
++    // the recorded contingent now disagrees with canonical whole-stack selection.
++    state.armies[omitted.id] = omitted;
++    expect(() => deserializeGame(serializeGame(state))).toThrow('Invalid save: battle omitted a defending army');
++  });
++
++  it.each([20, 21, 200])('keeps %s defending companies attackable with an unchanged tactical budget', count => {
++    const state = field(count), factionId = state.turnOwnerId;
++    expect(applyCommand(state, { type: 'declareWar', factionId, targetFactionId: state.armies['army.4']!.factionId }).ok).toBe(true);
++    const initial = serializeGame(state), command = { type: 'attack' as const, factionId, armyId: 'army.2', targetArmyId: 'army.4' };
++    expect(applyCommand(state, command).ok).toBe(true);
++    expect(state.battle!.combat.defender).toHaveLength(Math.min(count, 20));
++    const saved = serializeGame(state);
++    expect(serializeGame(deserializeGame(saved))).toBe(saved);
++    const replay = deserializeGame(initial);
++    expect(applyCommand(replay, command).ok).toBe(true);
++    expect(stateHash(replay)).toBe(stateHash(state));
++  });
++
++  it('keeps fleet reserves separate from participating hulls and carried land troops', () => {
++    let state = navalCampaign();
++    const factionId = state.turnOwnerId, enemy = state.armies[NAVAL_FIXTURE.enemyFleetId]!;
++    enemy.cell = NAVAL_FIXTURE.shallowCell;
++    enemy.formations[0]!.strength = 1; enemy.formations[0]!.morale = 1;
++    for (let i = 1; i < 21; i++) {
++      const id = `army.${state.nextId++}`;
++      state.armies[id] = { ...enemy, id, formations: [{ ...createArmyFormation(id, 'unit.coastal_warship'), strength: 1, morale: 1 }] };
++    }
++    refreshAuthoredSight(state);
++    state = deserializeGame(serializeGame(state));
++    expect(applyCommand(state, { type: 'embarkArmy', factionId, armyId: NAVAL_FIXTURE.cargoId, fleetId: NAVAL_FIXTURE.fleetId }).ok).toBe(true);
++    expect(applyCommand(state, { type: 'declareWar', factionId, targetFactionId: enemy.factionId }).ok).toBe(true);
++    const before = structuredClone(state.armies);
++    expect(applyCommand(state, { type: 'attack', factionId, armyId: NAVAL_FIXTURE.fleetId, targetArmyId: enemy.id }).ok).toBe(true);
++    expect(state.battle!.domain).toBe('naval');
++    expect(state.battle!.combat.defender).toHaveLength(20);
++    const reserve = Object.values(state.armies).find(army => army.cell === enemy.cell && !state.battle!.defenderIds.includes(army.id))!;
++    expect(state.battle!.formationBindings.every(binding => binding.armyId !== NAVAL_FIXTURE.cargoId)).toBe(true);
++    state = deserializeGame(serializeGame(state));
++    expect(applyCommand(state, { type: 'autoResolveBattle', factionId }).ok).toBe(true);
++    expect(state.armies[reserve.id]).toEqual(before[reserve.id]);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++  });
++
++  it('exposes the same committed and reserve strength before a human or AI attacks', () => {
++    const state = field(21), before = stateHash(state);
++    const view = getObservation(state, state.turnOwnerId);
++    expect(view.armies.find(army => army.id === 'army.4')).toHaveProperty('battleDefense', {
++      engagedFormations: 20, engagedStrength: 20, reserveFormations: 1, reserveStrength: 1,
++    });
++    expect(stateHash(state)).toBe(before);
++  });
++
++  it('keeps a settlement contested until its remaining garrison is actually defeated', () => {
++    let state = conquestCampaign();
++    const town = state.settlements[CONQUEST_FIXTURE.settlementId]!, factionId = state.turnOwnerId;
++    const attackers = state.armies[CONQUEST_FIXTURE.playerArmyId]!;
++    attackers.formations = Array.from({ length: 12 }, (_, i) => createArmyFormation(i === 0 ? attackers.id : `army.${state.nextId++}`, 'unit.guard')).sort((a, b) => a.id < b.id ? -1 : 1);
++    for (let i = 0; i < 21; i++) {
++      const id = `army.${state.nextId++}`;
++      state.armies[id] = { id, name: `Reserve ${i}`, factionId: town.factionId, cell: town.cell, movement: 0, formations: [{ ...createArmyFormation(id, 'unit.scout'), strength: 1, morale: 1 }] };
++    }
++    refreshAuthoredSight(state);
++    state = deserializeGame(serializeGame(state));
++    const issue = (command: GameCommand) => expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true });
++    issue({ type: 'declareWar', factionId, targetFactionId: town.factionId });
++    issue({ type: 'besiege', factionId, armyId: attackers.id, settlementId: town.id });
++    for (let turn = 0; turn < 3; turn++) issue({ type: 'endTurn', factionId });
++    expect(getObservation(state, factionId).sieges[0]).toHaveProperty('battleDefense.reserveFormations', 1);
++    issue({ type: 'assault', factionId, settlementId: town.id });
++    expect(state.battle!.combat.defender).toHaveLength(20);
++    state = deserializeGame(serializeGame(state));
++    issue({ type: 'autoResolveBattle', factionId });
++    expect(state.battleReports.at(-1)!.combat.result!.winner).toBe('attacker');
++    expect(state.pendingCapture).toBeNull();
++    expect(Object.values(state.armies).filter(army => army.cell === town.cell)).toHaveLength(1);
++    state = deserializeGame(serializeGame(state));
++    issue({ type: 'endTurn', factionId });
++    issue({ type: 'assault', factionId, settlementId: town.id });
++    expect(state.battle!.combat.defender).toHaveLength(1);
++    issue({ type: 'autoResolveBattle', factionId });
++    expect(state.pendingCapture?.settlementId).toBe(town.id);
++    issue({ type: 'resolveCapture', factionId, settlementId: town.id, outcome: 'occupy' });
++    expect(state.settlements[town.id]!.factionId).toBe(factionId);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++  });
++
++  it('engages twenty of twenty-one formations without changing or advancing through reserves', () => {
++    let state = field(21);
++    const factionId = state.turnOwnerId;
++    const issue = (command: GameCommand) => expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true });
++    issue({ type: 'declareWar', factionId, targetFactionId: state.armies['army.4']!.factionId });
++    const before = structuredClone(state.armies);
++    issue({ type: 'attack', factionId, armyId: 'army.2', targetArmyId: 'army.4' });
++    expect(state.battle!.combat.defender).toHaveLength(20);
++    const reserve = Object.values(state.armies).filter(army => army.cell === state.battle!.defenderCell && !state.battle!.defenderIds.includes(army.id));
++    expect(reserve).toHaveLength(1);
++    const reserveId = reserve[0]!.id, origin = state.armies['army.2']!.cell;
++    expect(reserve[0]).toEqual(before[reserveId]);
++    const saved = serializeGame(state);
++    state = deserializeGame(saved);
++    expect(serializeGame(state)).toBe(saved);
++    issue({ type: 'autoResolveBattle', factionId });
++    expect(state.battleReports.at(-1)!.combat.result!.winner).toBe('attacker');
++    expect(state.armies[reserveId]).toEqual(before[reserveId]);
++    expect(state.armies['army.2']!.cell).toBe(origin);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++    expect(getObservation(state, factionId).armies.some(army => army.id === reserveId)).toBe(true);
++  });
++});
+diff --git 1/packages/sim/src/battle-frontage.ts 2/packages/sim/src/battle-frontage.ts
+new file mode 100644
+index 0000000..3e4ffcd
+--- /dev/null
++++ 2/packages/sim/src/battle-frontage.ts
+@@ -0,0 +1,28 @@
++import type { Army, BattleDefense } from './types';
++
++export const BATTLE_FORMATION_LIMIT = 20;
++const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
++
++/** Whole containers keep their officers/cargo intact. Nonparticipants remain on
++ * the strategic tile; a tactical victory cannot occupy ground they still hold. */
++export function selectDefendingArmies<T extends Pick<Army, 'id' | 'formations'>>(armies: readonly T[], targetId?: string): T[] {
++  const ordered = [...armies].sort((a, b) => Number(b.id === targetId) - Number(a.id === targetId) || byId(a, b));
++  const selected: T[] = [];
++  let remaining = BATTLE_FORMATION_LIMIT;
++  for (const army of ordered) {
++    if (army.formations.length > remaining) continue;
++    selected.push(army);
++    remaining -= army.formations.length;
++  }
++  return selected.sort(byId);
++}
++
++/** Omit the optional packet when every defender fits; never include cargo. */
++export function defensePreview(armies: readonly Army[], targetId?: string): BattleDefense | undefined {
++  const totalFormations = armies.reduce((sum, army) => sum + army.formations.length, 0);
++  if (totalFormations <= BATTLE_FORMATION_LIMIT) return undefined;
++  const engaged = selectDefendingArmies(armies, targetId);
++  const strength = (group: readonly Army[]) => group.reduce((sum, army) => sum + army.formations.reduce((sum, item) => sum + item.strength, 0), 0);
++  const engagedFormations = engaged.reduce((sum, army) => sum + army.formations.length, 0), engagedStrength = strength(engaged);
++  return { engagedFormations, engagedStrength, reserveFormations: totalFormations - engagedFormations, reserveStrength: strength(armies) - engagedStrength };
++}
+diff --git 1/packages/sim/src/battle-morale.test.ts 2/packages/sim/src/battle-morale.test.ts
+new file mode 100644
+index 0000000..35bedde
+--- /dev/null
++++ 2/packages/sim/src/battle-morale.test.ts
+@@ -0,0 +1,121 @@
++import { readFileSync } from 'node:fs';
++import { gunzipSync } from 'node:zlib';
++import { describe, expect, it } from 'vitest';
++import { characterBattleCampaign } from '../../test-fixtures/src/character-fixture';
++import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
++import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, serializeGame, stateHash, stateHashForVersion, type GameCommand, type GameState } from './index';
++import trace from './fixtures/v16-trained-battle-trace.json';
++import { battleDevelopmentEffects } from './combat/development-snapshot';
++
++const initialSave = () => gunzipSync(readFileSync(new URL('./fixtures/v16-trained-battle.json.gz', import.meta.url))).toString('utf8');
++
++describe('strategic morale after trained combat', () => {
++  it('round-trips after every accepted command from a captured ordinary battle', () => {
++    let game = deserializeGame(initialSave());
++    for (const entry of trace.records) {
++      expect(applyCommand(game, entry.command as GameCommand)).toMatchObject({ ok: true });
++      const hash = stateHash(game);
++      game = deserializeGame(serializeGame(game));
++      expect(stateHash(game)).toBe(hash);
++    }
++    expect(game.armies['army.8']!.formations[0]!.morale).toBe(55);
++  });
++
++  it('manual rounds and withdrawal save at the same boundary as autoresolve', () => {
++    let game = deserializeGame(initialSave());
++    const factionId = trace.records[0]!.command.factionId;
++    expect(applyCommand(game, trace.records[0]!.command)).toMatchObject({ ok: true });
++    const commands: GameCommand[] = [trace.records[0]!.command as GameCommand];
++    for (let round = 0; game.battle && round < 100; round++) {
++      const command: GameCommand = { type: 'battleOrder', factionId, order: round === 0 ? 'brace' : 'withdraw' };
++      commands.push(command);
++      expect(applyCommand(game, command)).toMatchObject({ ok: true });
++      const saved = serializeGame(game);
++      game = deserializeGame(saved);
++      expect(serializeGame(game)).toBe(saved);
++    }
++    expect(game.battle).toBeNull();
++    const replay = deserializeGame(initialSave());
++    for (const command of commands) expect(applyCommand(replay, command).ok).toBe(true);
++    expect(stateHash(replay)).toBe(stateHash(game));
++  });
++
++  it('does not compound training when the same company defends twice without an end turn', () => {
++    // Authored forces and prior experience; training, battles and withdrawals are ordinary paid commands.
++    let game = characterBattleCampaign();
++    const factionId = game.turnOwnerId, defender = game.armies['army.4']!;
++    defender.formations = [createArmyFormation(defender.id, 'unit.arbalester')];
++    const formationId = defender.formations[0]!.id;
++    game.development.formations[formationId] = { experience: 3, nodeIds: [] };
++    const reserveId = `army.${game.nextId++}`;
++    game.armies[reserveId] = { ...game.armies['army.2']!, id: reserveId, formations: [createArmyFormation(reserveId, 'unit.scout')] };
++    refreshAuthoredSight(game);
++    game = deserializeGame(serializeGame(game));
++    const issue = (state: GameState, command: GameCommand) => expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true });
++    issue(game, { type: 'develop', factionId: defender.factionId, scope: 'formation', entityId: formationId, nodeId: 'training.field_habits' });
++    issue(game, { type: 'declareWar', factionId, targetFactionId: defender.factionId });
++    const turn = game.turn;
++    for (const armyId of ['army.2', reserveId]) {
++      issue(game, { type: 'attack', factionId, armyId, targetArmyId: defender.id });
++      expect(game.battle!.combat.defender.find(item => item.id === formationId)!.morale).toBe(74);
++      issue(game, { type: 'battleOrder', factionId, order: 'withdraw' });
++      expect(game.armies[defender.id]!.formations[0]!.morale).toBe(70);
++      const saved = serializeGame(game);
++      game = deserializeGame(saved);
++      expect(serializeGame(game)).toBe(saved);
++    }
++    expect(game.turn).toBe(turn);
++    expect(game.battleReports).toHaveLength(2);
++  });
++
++  it('removes only the training morale actually granted at the tactical cap', () => {
++    // Authored veteran strength, experience and funding; development and combat use real commands.
++    let game = characterBattleCampaign();
++    const factionId = game.turnOwnerId, defender = game.armies['army.4']!;
++    defender.formations = [createArmyFormation(defender.id, 'unit.heavy_infantry')];
++    defender.movement = 2;
++    const formationId = defender.formations[0]!.id;
++    game.factions.find(faction => faction.id === defender.factionId)!.treasury = 1000;
++    game.development.formations[formationId] = { experience: 40, nodeIds: [] };
++    game.development.factions[defender.factionId] = { influence: 6, nodeIds: [] };
++    Object.assign(game.resources.stockpiles[defender.factionId]!, {
++      'resource.iron': 4, 'resource.timber': 3, 'resource.silver': 2, 'resource.salt': 2,
++    });
++    refreshAuthoredSight(game);
++    game = deserializeGame(serializeGame(game));
++    const issue = (command: GameCommand) => {
++      expect(applyCommand(game, command), JSON.stringify(command)).toMatchObject({ ok: true });
++      const saved = serializeGame(game);
++      game = deserializeGame(saved);
++      expect(serializeGame(game)).toBe(saved);
++    };
++    const trainingIds = ['training.field_habits', 'training.shield_partners', 'training.held_line', 'training.veteran_service'];
++    for (const nodeId of trainingIds) issue({ type: 'develop', factionId: defender.factionId, scope: 'formation', entityId: formationId, nodeId });
++    issue({ type: 'adoptDoctrine', factionId: defender.factionId, doctrineId: 'doctrine.shield_cohesion' });
++    issue({ type: 'develop', factionId: defender.factionId, scope: 'faction', entityId: defender.factionId, nodeId: 'tradition.watched_ranks' });
++    issue({ type: 'declareWar', factionId, targetFactionId: defender.factionId });
++    issue({ type: 'attack', factionId, armyId: 'army.2', targetArmyId: defender.id });
++    const snapshot = game.battle!.developmentSnapshots!.find(item => item.formationId === formationId)!;
++    expect(snapshot).toEqual({ formationId, trainingIds: [...trainingIds].sort(), traditionIds: ['tradition.watched_ranks'] });
++    expect(battleDevelopmentEffects(snapshot).morale).toBe(18);
++    expect(game.battle!.combat.defender.find(item => item.id === formationId)).toMatchObject({ morale: 100, strength: 85, fatigue: 0 });
++    // Pending combat preserves the entering strategic morale, including after save/load.
++    expect(game.armies[defender.id]!.formations[0]).toMatchObject({ morale: 85, strength: 85, fatigue: 0 });
++    const pendingHash = stateHash(game);
++    expect(applyCommand(game, { type: 'endTurn', factionId })).toMatchObject({ ok: false });
++    expect(stateHash(game)).toBe(pendingHash);
++    issue({ type: 'battleOrder', factionId, order: 'withdraw' });
++    expect(game.battle).toBeNull();
++    expect(game.battleReports.at(-1)!.combat.defender.find(item => item.id === formationId)).toMatchObject({ morale: 100, strength: 85, fatigue: 0 });
++    expect(game.armies[defender.id]!.formations[0]).toMatchObject({ morale: 85, strength: 85, fatigue: 0 });
++  });
++
++  it('retains independently captured rule-16 results rather than silently rewriting history', () => {
++    const game = deserializeGame(initialSave());
++    expect(stateHashForVersion(game, 16)).toBe(trace.initialHash);
++    for (const entry of trace.records) {
++      expect(applyCommandForVersion(game, entry.command, 16)).toEqual(entry.result);
++      expect(stateHashForVersion(game, 16)).toBe(entry.hash);
++    }
++  });
++});
+diff --git 1/packages/sim/src/fixtures/v16-trained-battle-trace.json 2/packages/sim/src/fixtures/v16-trained-battle-trace.json
+new file mode 100644
+index 0000000..f2bca63
+--- /dev/null
++++ 2/packages/sim/src/fixtures/v16-trained-battle-trace.json
+@@ -0,0 +1,85 @@
++{
++  "source": "docs/hermes-analysis/qa/pre-first-battle.json.gz",
++  "baseline": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
++  "sha256": "9820123d2753b5fe9d345a0e04dd21c2865d92b19c4850a9635944ba1c7677fb",
++  "bytes": 31908,
++  "initialHash": "602413fe",
++  "records": [
++    {
++      "command": {
++        "type": "attack",
++        "factionId": "faction.reedbound_council",
++        "armyId": "army.478",
++        "targetArmyId": "army.8"
++      },
++      "result": {
++        "ok": true,
++        "events": [
++          {
++            "turn": 236,
++            "factionId": "faction.reedbound_council",
++            "type": "battle_started",
++            "cell": 945,
++            "message": "Charter outriders engaged Wayfinder at hex 945."
++          },
++          {
++            "turn": 236,
++            "factionId": "faction.glass_tide",
++            "type": "battle_started",
++            "cell": 945,
++            "message": "Charter outriders engaged Wayfinder at hex 945."
++          }
++        ]
++      },
++      "hash": "289c01b6"
++    },
++    {
++      "command": {
++        "type": "autoResolveBattle",
++        "factionId": "faction.reedbound_council"
++      },
++      "result": {
++        "ok": true,
++        "events": [
++          {
++            "turn": 236,
++            "type": "army_retreated",
++            "factionId": "faction.glass_tide",
++            "cell": 897,
++            "message": "Wayfinder retreated to hex 897 with 3 strength."
++          },
++          {
++            "turn": 236,
++            "factionId": "faction.reedbound_council",
++            "type": "formation_experience",
++            "cell": 945,
++            "message": "Charter outriders earned 3 battle experience across its surviving fighting formations."
++          },
++          {
++            "turn": 236,
++            "factionId": "faction.glass_tide",
++            "type": "formation_experience",
++            "cell": 897,
++            "message": "Wayfinder earned 1 battle experience across its surviving fighting formations."
++          },
++          {
++            "turn": 236,
++            "type": "battle_finished",
++            "factionId": "faction.reedbound_council",
++            "cell": 945,
++            "message": "Reedbound Council prevailed at hex 945: ordered withdrawal."
++          },
++          {
++            "turn": 236,
++            "type": "battle_finished",
++            "factionId": "faction.glass_tide",
++            "cell": 945,
++            "message": "Reedbound Council prevailed at hex 945: ordered withdrawal."
++          }
++        ]
++      },
++      "hash": "58a2012d"
++    }
++  ],
++  "finalSaveError": "Invalid save: invalid formation definition, morale or strength"
++}
+diff --git 1/packages/sim/src/fixtures/v16-trained-battle.json.gz 2/packages/sim/src/fixtures/v16-trained-battle.json.gz
+new file mode 100644
+index 0000000000000000000000000000000000000000..623ca3697999a783dc2f42afe09e1ff65195f898
+GIT binary patch
+literal 31908
+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
+B7JvW%
+
+literal 0
+HcmV?d00001
+
+diff --git 1/packages/sim/src/movement-frontage.test.ts 2/packages/sim/src/movement-frontage.test.ts
+new file mode 100644
+index 0000000..112fdfd
+--- /dev/null
++++ 2/packages/sim/src/movement-frontage.test.ts
+@@ -0,0 +1,86 @@
++import { describe, expect, it } from 'vitest';
++import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
++import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
++import { applyCommand, createArmyFormation, deserializeGame, getMovementQuery, getObservation, replayGame, serializeGame, stateHash, type GameCommand, type GameState } from './index';
++import { withRules } from './rules';
++
++/** Authored 21-company border encounter; actual sight, commands and saves decide the outcome. */
++function field(sizes = Array.from({ length: 21 }, () => 1)): GameState {
++  const state = borderBattleCampaign(), defender = state.armies['army.4']!;
++  const ids = sizes.map((_, index) => index ? `army.${state.nextId++}` : defender.id);
++  for (const [index, size] of sizes.entries()) {
++    const id = ids[index]!;
++    state.armies[id] = { ...defender, id, formations: Array.from({ length: size }, (_, formation) => ({
++      ...createArmyFormation(formation ? `army.${state.nextId++}` : id, 'unit.scout'), strength: 1, morale: 1,
++    })).sort((a, b) => a.id < b.id ? -1 : 1) };
++  }
++  refreshAuthoredSight(state);
++  const checked = deserializeGame(serializeGame(state));
++  expect(applyCommand(checked, { type: 'declareWar', factionId: checked.turnOwnerId, targetFactionId: defender.factionId }).ok).toBe(true);
++  return checked;
++}
++
++function issue(state: GameState, command: GameCommand): void {
++  expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true });
++}
++
++describe('contingent-aware movement routing', () => {
++  it('quotes a reachable 21-company attack and executes the quoted moveTo with exact replay', () => {
++    const state = field(), factionId = state.turnOwnerId, target = state.armies['army.4']!.cell;
++    const initial = serializeGame(state), before = stateHash(state), view = getObservation(state, factionId);
++    expect(view.armies.find(army => army.id === 'army.4')?.battleDefense).toEqual({ engagedFormations: 20, engagedStrength: 20, reserveFormations: 1, reserveStrength: 1 });
++    const query = getMovementQuery(view, 'army.2', target);
++    expect(query.preview).toMatchObject({ action: 'attack', canMoveNow: true, canQueue: false, path: [target], blocker: null });
++    expect(query.reachable).toContainEqual({ cell: target, cost: query.preview!.cost });
++    expect(stateHash(state)).toBe(before);
++    expect(applyCommand(state, { type: 'queueMovement', factionId, armyId: 'army.2', target }).ok).toBe(false);
++    expect(stateHash(state)).toBe(before);
++    const move: GameCommand = { type: 'moveTo', factionId, armyId: 'army.2', target };
++    issue(state, move);
++    expect(state.battle?.combat.defender).toHaveLength(20);
++    expect(state.armies['army.2']!.cell).not.toBe(target);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++    expect(stateHash(replayGame(initial, [move]))).toBe(stateHash(state));
++    const direct = deserializeGame(initial), selected = [...view.armies.filter(army => army.cell === target)].sort((a, b) => a.id < b.id ? -1 : 1)[0]!;
++    issue(direct, { type: 'attack', factionId, armyId: 'army.2', targetArmyId: selected.id });
++    expect(stateHash(direct)).toBe(stateHash(state));
++  });
++
++  it('routes against whole mixed containers without splitting or moving the nine-company reserve', () => {
++    const state = field([12, 9, 8]), factionId = state.turnOwnerId, target = state.armies['army.4']!.cell;
++    const view = getObservation(state, factionId), original = structuredClone(state.armies);
++    expect(view.armies.find(army => army.id === 'army.4')?.battleDefense).toEqual({ engagedFormations: 20, engagedStrength: 20, reserveFormations: 9, reserveStrength: 9 });
++    expect(getMovementQuery(view, 'army.2', target).preview).toMatchObject({ action: 'attack', canMoveNow: true });
++    issue(state, { type: 'moveTo', factionId, armyId: 'army.2', target });
++    expect(state.battle?.defenderIds).toEqual(['army.4', 'army.8']);
++    expect(state.battle?.combat.defender).toHaveLength(20);
++    expect(state.armies['army.7']).toEqual(original['army.7']);
++    issue(state, { type: 'autoResolveBattle', factionId });
++    expect(state.armies['army.7']).toEqual(original['army.7']);
++    expect(state.armies['army.2']!.cell).toBe(original['army.2']!.cell);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++  });
++
++  it('retains rule-16 query and command rejection with no state mutation', () => {
++    const state = field(), factionId = state.turnOwnerId, target = state.armies['army.4']!.cell, before = stateHash(state);
++    withRules(state, 16, () => {
++      const view = getObservation(state, factionId), query = getMovementQuery(view, 'army.2', target);
++      expect(view.armies.every(army => army.battleDefense === undefined)).toBe(true);
++      expect(query.preview).toMatchObject({ action: 'blocked', canMoveNow: false, canQueue: false, blocker: 'This field battle supports at most twenty defending formations.' });
++      expect(query.reachable.some(cell => cell.cell === target)).toBe(false);
++      for (const command of [
++        { type: 'moveTo', factionId, armyId: 'army.2', target },
++        { type: 'attack', factionId, armyId: 'army.2', targetArmyId: 'army.4' },
++      ]) expect(applyCommand(state, command)).toMatchObject({ ok: false, error: 'This field battle supports at most twenty defending formations.' });
++    });
++    expect(stateHash(state)).toBe(before);
++  });
++
++  it('keeps no-preview observations conservative even when current execution supports contingents', () => {
++    const state = field(), view = getObservation(state, state.turnOwnerId), target = state.armies['army.4']!.cell;
++    for (const army of view.armies) delete army.battleDefense;
++    const query = getMovementQuery(view, 'army.2', target);
++    expect(query.preview).toMatchObject({ action: 'blocked', canMoveNow: false });
++    expect(query.reachable.some(cell => cell.cell === target)).toBe(false);
++  });
++});
+diff --git 1/packages/sim/src/pending-assault-save.test.ts 2/packages/sim/src/pending-assault-save.test.ts
+new file mode 100644
+index 0000000..0117214
+--- /dev/null
++++ 2/packages/sim/src/pending-assault-save.test.ts
+@@ -0,0 +1,89 @@
++import { describe, expect, it } from 'vitest';
++import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
++import { conquestCampaign, CONQUEST_FIXTURE } from '../../test-fixtures/src/conquest-fixture';
++import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, getObservation, serializeGame, serializeGameForVersion, type GameCommand } from './index';
++
++function readyAssault(version: 16 | 17 = 17) {
++  let state = conquestCampaign();
++  const town = state.settlements[CONQUEST_FIXTURE.settlementId]!;
++  state.nextId = 1000;
++  for (const [id, count] of [['army.100', 12], ['army.200', 4], ['army.300', 9]] as const) {
++    state.armies[id] = {
++      id, name: id, factionId: town.factionId, cell: town.cell, movement: 0,
++      formations: Array.from({ length: count }, (_, i) => createArmyFormation(i ? `army.${state.nextId++}` : id, 'unit.scout'))
++        .sort((a, b) => a.id < b.id ? -1 : 1),
++    };
++  }
++  refreshAuthoredSight(state);
++  state = deserializeGame(serializeGameForVersion(state, version));
++  const factionId = state.turnOwnerId;
++  const commands: GameCommand[] = [
++    { type: 'declareWar', factionId, targetFactionId: town.factionId },
++    { type: 'besiege', factionId, armyId: CONQUEST_FIXTURE.playerArmyId, settlementId: town.id },
++    { type: 'endTurn', factionId },
++  ];
++  for (const command of commands) {
++    expect(applyCommandForVersion(state, command, version), JSON.stringify(command)).toMatchObject({ ok: true });
++    state = deserializeGame(serializeGameForVersion(state, version));
++  }
++  return state;
++}
++
++describe('pending assault save validation', () => {
++  it('rejects an omitted lower-ID garrison even when a resealed defenderId prioritizes the wrong contingent', () => {
++    const ready = readyAssault(), factionId = ready.turnOwnerId;
++    const command = { type: 'assault' as const, factionId, settlementId: CONQUEST_FIXTURE.settlementId };
++    expect(getObservation(ready, factionId).sieges[0]).toHaveProperty('battleDefense.engagedFormations', 16);
++    const normal = deserializeGame(serializeGame(ready));
++    expect(applyCommand(normal, command)).toMatchObject({ ok: true });
++    expect(normal.battle).toMatchObject({ settlementId: CONQUEST_FIXTURE.settlementId, defenderIds: ['army.100', 'army.200'] });
++    expect(normal.battle!.combat.defender).toHaveLength(16);
++    expect(serializeGame(deserializeGame(serializeGame(normal)))).toBe(serializeGame(normal));
++    expect(() => deserializeGame(serializeGameForVersion(normal, 16))).toThrow('Invalid save: battle omitted a defending army');
++
++    // Obtain all battle snapshots from the real assault command, not forged rosters.
++    const state = deserializeGame(serializeGame(ready));
++    const omitted = state.armies['army.100']!;
++    delete state.armies[omitted.id];
++    refreshAuthoredSight(state);
++    expect(applyCommand(state, command)).toMatchObject({ ok: true });
++    expect(state.battle).toMatchObject({ defenderId: 'army.200', defenderIds: ['army.200', 'army.300'] });
++    expect(state.battle!.combat.defender).toHaveLength(13);
++    expect(() => deserializeGame(serializeGame(state))).not.toThrow();
++    state.armies[omitted.id] = omitted;
++    refreshAuthoredSight(state);
++    expect(() => deserializeGame(serializeGame(state))).toThrow('Invalid save: battle omitted a defending army');
++
++    // A field target is meaningful; an assault's representative must not select reserves.
++    state.battle!.defenderId = 'army.300';
++    expect(() => deserializeGame(serializeGame(state))).toThrow('Invalid save: battle omitted a defending army');
++  });
++
++  it('retains rule-16 pending assault round-trips but rejects resealed garrison omissions', () => {
++    const state = readyAssault(16), factionId = state.turnOwnerId;
++    const omitted = state.armies['army.100']!;
++    delete state.armies[omitted.id];
++    refreshAuthoredSight(state);
++    expect(applyCommandForVersion(state, { type: 'assault', factionId, settlementId: CONQUEST_FIXTURE.settlementId }, 16)).toMatchObject({ ok: true });
++    expect(state.battle).toMatchObject({ settlementId: CONQUEST_FIXTURE.settlementId, defenderId: 'army.200', defenderIds: ['army.200', 'army.300'], rulesVersion: 10 });
++    expect(state.battle!.combat.defender).toHaveLength(13);
++    const saved = serializeGameForVersion(state, 16);
++    expect(JSON.parse(saved).version).toBe(16);
++    expect(serializeGameForVersion(deserializeGame(saved), 16)).toBe(saved);
++
++    state.armies[omitted.id] = omitted;
++    refreshAuthoredSight(state);
++    expect(() => deserializeGame(serializeGameForVersion(state, 16))).toThrow('Invalid save: battle omitted a defending army');
++    state.battle!.defenderId = 'army.300';
++    expect(() => deserializeGame(serializeGameForVersion(state, 16))).toThrow('Invalid save: battle omitted a defending army');
++  });
++
++  it('retains the rule-16 twenty-formation assault limit without mutating a refused command', () => {
++    const state = readyAssault(16), factionId = state.turnOwnerId;
++    const before = serializeGameForVersion(state, 16);
++    expect(applyCommandForVersion(state, { type: 'assault', factionId, settlementId: CONQUEST_FIXTURE.settlementId }, 16)).toEqual({
++      ok: false, error: 'An assault supports at most twenty defending formations.', events: [],
++    });
++    expect(serializeGameForVersion(state, 16)).toBe(before);
++  });
++});

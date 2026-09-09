@@ -1,0 +1,327 @@
+{
+  "runs": {
+    "capture-red": {
+      "stats": {
+        "startTime": "2026-09-09T08:18:58.956Z",
+        "duration": 14202.588,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "collected": 1,
+      "statuses": {
+        "unexpected": 1
+      }
+    },
+    "capture-green": {
+      "stats": {
+        "startTime": "2026-09-09T08:21:00.581Z",
+        "duration": 3562.304,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "collected": 1,
+      "statuses": {
+        "expected": 1
+      }
+    },
+    "r23-pixel-repro": {
+      "stats": {
+        "startTime": "2026-09-09T08:22:00.332Z",
+        "duration": 8406.703000000001,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "collected": 1,
+      "statuses": {
+        "expected": 1
+      }
+    },
+    "pixels-verified": {
+      "stats": {
+        "startTime": "2026-09-09T08:27:22.212Z",
+        "duration": 10974.172,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "collected": 2,
+      "statuses": {
+        "expected": 2
+      }
+    },
+    "narrow-text-options": {
+      "stats": {
+        "startTime": "2026-09-09T08:28:53.930Z",
+        "duration": 6962.835,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "collected": 2,
+      "statuses": {
+        "expected": 1,
+        "unexpected": 1
+      }
+    },
+    "narrow-text-options-green": {
+      "stats": {
+        "startTime": "2026-09-09T08:31:05.928Z",
+        "duration": 6521.466,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "collected": 2,
+      "statuses": {
+        "expected": 2
+      }
+    },
+    "regression-final": {
+      "stats": {
+        "startTime": "2026-09-09T08:31:37.146Z",
+        "duration": 98154.85399999999,
+        "expected": 28,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "collected": 28,
+      "statuses": {
+        "expected": 28
+      }
+    },
+    "handoff-final": {
+      "stats": {
+        "startTime": "2026-09-09T08:34:32.559Z",
+        "duration": 98196.44900000001,
+        "expected": 28,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "collected": 28,
+      "statuses": {
+        "expected": 28
+      }
+    },
+    "capture-hit-evidence": {
+      "stats": {
+        "startTime": "2026-09-09T08:39:12.114Z",
+        "duration": 7214.534,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "collected": 2,
+      "statuses": {
+        "expected": 2
+      }
+    }
+  },
+  "pixelSamples": [
+    {
+      "test": "R03 narrow public assaults complete occupation at 390px without intercepted controls",
+      "name": "capture-completed-390-pixels",
+      "path": "docs/development/ui-followup/handoff-final/observations/04-capture-completed-390-pixels.json",
+      "sha256": "a181cc3750383c776ce15eb9c0a372b8195d9bbe09a546bc56569003a61809e7",
+      "measurement": {
+        "clip": {
+          "x": 135,
+          "y": 252,
+          "width": 120,
+          "height": 120
+        },
+        "colors": 1013,
+        "nonDominantFraction": 0.9516666666666667,
+        "dominantRgb": [
+          109,
+          87,
+          62
+        ]
+      }
+    },
+    {
+      "test": "R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text",
+      "name": "capture-completed-390-pixels",
+      "path": "docs/development/ui-followup/handoff-final/observations/08-capture-completed-390-pixels.json",
+      "sha256": "107daf06e9969f2d8fd190b2fe5d7b8d8183535b0b15518cd9e951c80beebae4",
+      "measurement": {
+        "clip": {
+          "x": 135,
+          "y": 218,
+          "width": 120,
+          "height": 120
+        },
+        "colors": 947,
+        "nonDominantFraction": 0.9511805555555556,
+        "dominantRgb": [
+          87,
+          75,
+          57
+        ]
+      }
+    },
+    {
+      "test": "R23 repeated public loads and cross-size imports retain one responsive map control and canvas",
+      "name": "lifecycle-desktop-pixels",
+      "path": "docs/development/ui-followup/handoff-final/observations/11-lifecycle-desktop-pixels.json",
+      "sha256": "617978d3156cfa0d3afd78b7688c704a498168edaee4a8e281ba3588b7c66e3a",
+      "measurement": {
+        "clip": {
+          "x": 660,
+          "y": 365,
+          "width": 120,
+          "height": 120
+        },
+        "colors": 1203,
+        "nonDominantFraction": 0.897361111111111,
+        "dominantRgb": [
+          109,
+          87,
+          62
+        ]
+      }
+    },
+    {
+      "test": "R23 repeated public loads and cross-size imports retain one responsive map control and canvas",
+      "name": "lifecycle-390-pixels",
+      "path": "docs/development/ui-followup/handoff-final/observations/13-lifecycle-390-pixels.json",
+      "sha256": "dda8663abe17841f3727d20ccc1045203f181b55eaf2e00bd20c33c10b9bc42c",
+      "measurement": {
+        "clip": {
+          "x": 135,
+          "y": 267,
+          "width": 120,
+          "height": 120
+        },
+        "colors": 995,
+        "nonDominantFraction": 0.8959027777777778,
+        "dominantRgb": [
+          109,
+          87,
+          62
+        ]
+      }
+    },
+    {
+      "test": "R03 narrow public assaults complete occupation at 390px without intercepted controls",
+      "name": "capture-completed-390-pixels",
+      "path": "docs/development/ui-followup/capture-hit-evidence/observations/02-capture-completed-390-pixels.json",
+      "sha256": "4d4ecbe6e35a24912100eec3c4c1d77e04f7f4395a75a1f3e6df9f3c19b9121c",
+      "measurement": {
+        "clip": {
+          "x": 135,
+          "y": 252,
+          "width": 120,
+          "height": 120
+        },
+        "colors": 1019,
+        "nonDominantFraction": 0.9516666666666667,
+        "dominantRgb": [
+          109,
+          87,
+          62
+        ]
+      }
+    },
+    {
+      "test": "R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text",
+      "name": "capture-completed-390-pixels",
+      "path": "docs/development/ui-followup/capture-hit-evidence/observations/06-capture-completed-390-pixels.json",
+      "sha256": "107daf06e9969f2d8fd190b2fe5d7b8d8183535b0b15518cd9e951c80beebae4",
+      "measurement": {
+        "clip": {
+          "x": 135,
+          "y": 218,
+          "width": 120,
+          "height": 120
+        },
+        "colors": 947,
+        "nonDominantFraction": 0.9511805555555556,
+        "dominantRgb": [
+          87,
+          75,
+          57
+        ]
+      }
+    }
+  ],
+  "sourceChangesSinceStart": [
+    "apps/web/src/campaign-hud.css",
+    "tests/gameplay/battle-defense.spec.ts",
+    "tests/gameplay/hermes-ui-slices.spec.ts"
+  ],
+  "newSourceFiles": [
+    "docs/development/ui-followup/playwright.config.ts",
+    "docs/development/ui-followup/prepare-map-input.ts",
+    "tests/gameplay/map-pixel-evidence.ts"
+  ],
+  "frozenPackagesUnchanged": true,
+  "historicalDesktopPixelSamples": [
+    {
+      "path": "docs/development/hermes-ui/handoff-dev/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/lifecycle-after-battle.png",
+      "sha256": "1dc6aa528c5f5e2b72f747b776ed3f77f9571e7d2ef167f474df61c517a5c066",
+      "clip": [
+        660,
+        360,
+        120,
+        120
+      ],
+      "colors": 1210
+    },
+    {
+      "path": "docs/development/hermes-ui/r23-dev-green/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/lifecycle-after-battle.png",
+      "sha256": "53fe1da691b27d760e6aa9ce75d0ffba94781b801f8fcfe2b3c30583b75a4475",
+      "clip": [
+        660,
+        360,
+        120,
+        120
+      ],
+      "colors": 628
+    },
+    {
+      "path": "docs/development/hermes-ui/r23-production-green/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/lifecycle-after-battle.png",
+      "sha256": "dbf36596d11a267a6d5f4f9c0e19697e797a96e020edc3605c8c85856467a86c",
+      "clip": [
+        660,
+        360,
+        120,
+        120
+      ],
+      "colors": 1009
+    },
+    {
+      "path": "docs/development/hermes-ui/r23-production-handoff/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/lifecycle-after-battle.png",
+      "sha256": "169dd19a801a69cf1914131af961657b920d762be9d9d346762df90fb5611791",
+      "clip": [
+        660,
+        360,
+        120,
+        120
+      ],
+      "colors": 1014
+    },
+    {
+      "path": "docs/development/hermes-ui/slices-dev-final/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/lifecycle-after-battle.png",
+      "sha256": "7ac2903a2588c5b3882050a220f3abcdc2c3e65fdd3efe189446e7b4c06cd2d0",
+      "clip": [
+        660,
+        360,
+        120,
+        120
+      ],
+      "colors": 1203
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "delegation": "deleg_17d85703",
+  "task": 3,
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "PERSIST-01",
+      "severity": "high",
+      "location": "packages/persistence/src/campaign-storage.ts:169-186,209-223,265-271",
+      "finding": "Append and no-op saves verify only the durable prefix head, not its dependencies. They can publish an unreadable generation and rotate away the last readable recovery generation.",
+      "reproduction": [
+        "Create a fresh seed-74 Tiny campaign with two factions and a journal. Save at turn 1, then record endTurn and save at turns 2 and 3.",
+        "Delete all three campaignPayloads replicas for the turn-2 generation's headDigest. Leave the turn-3 head intact.",
+        "loadLatestCampaign('auto') successfully recovers turn 1.",
+        "Save the original live turn-3 journal without another command. The operation succeeds and retained generation turns become [2,3,3].",
+        "loadLatestCampaign('auto') now fails with 'No valid save remains in this slot. Import a backup.' Appending another endTurn before saving likewise succeeds, retains [2,3,4], and destroys the remaining recovery path."
+      ],
+      "verification": "Reproduced with Node/fake-indexeddb and actual Chromium 152 IndexedDB in isolated databases.",
+      "required_change": "Prevent destructive rotation/publication when a required prefix dependency is unreadable, or atomically reconstruct and verify the missing history from the owning journal. Preserve the last readable generation.",
+      "attribution": "Pre-existing incremental-storage behavior, still present in the reviewed working-tree integration."
+    },
+    {
+      "id": "PERSIST-02",
+      "severity": "medium",
+      "location": "packages/persistence/src/campaign-storage.ts:82-87,246-271",
+      "finding": "Reference-count metadata is treated as authoritative for destructive garbage collection after checking only its recomputable checksum. Inconsistent but resealed metadata can delete intact history still needed by every remaining generation.",
+      "reproduction": [
+        "Save three successive endTurn records, producing generations at turns 2, 3 and 4.",
+        "Read the oldest generation's head blob. Its refs value is 2: the generation and its successor chunk both reference it.",
+        "Change refs to 1 and recompute metadataChecksum using checksum(JSON.stringify(the metadata body)). Do not change any payload or manifest.",
+        "Loading still succeeds at turn 4. A no-op save then succeeds, rotates the oldest generation and deletes all three replicas of its still-referenced head.",
+        "Loading subsequently fails with 'No valid save remains in this slot. Import a backup.'"
+      ],
+      "verification": "Reproduced in both fake-indexeddb and actual Chromium IndexedDB.",
+      "scope": "Requires inconsistent/resealed local IndexedDB metadata; no portable-file or remote exploit was demonstrated. This is a referential-integrity failure, not a claim that checksums provide authentication.",
+      "required_change": "Do not reclaim payloads solely from self-checksummed reference counts without a trustworthy reachability/integrity check.",
+      "attribution": "Pre-existing bookkeeping behavior retained by this patch."
+    }
+  ],
+  "suggestions": [
+    "Add regression tests for interior dependency loss and resealed reference-count inconsistency, including append/no-op saves and preservation of the last readable generation.",
+    "Keep actual browser quota exhaustion, process-kill durability, cross-browser behavior and mobile-memory certification explicitly unverified. Injected quota exceptions and authored retained reports do not establish those guarantees."
+  ],
+  "summary": "FAIL on reproduced historical-durability defects. All six postimage SHA256s matched the manifest before and after review; the diff is exactly 43263 bytes. All 81 focused tests across nine files passed with maxWorkers=2, including fresh rule-17 manual/autosave integration, historical compatibility and worker integration. Persistence lint and root typecheck passed; static scans found no listed dangerous patterns. Chromium verified surrogate-boundary roundtrip equality and concatenated-gzip rejection. Retained artifact hashes, gzip integrity and expanded byte counts matched the evidence; large full replay was not rerun. No source/docs edits were made; isolated browser test databases were deleted."
+}

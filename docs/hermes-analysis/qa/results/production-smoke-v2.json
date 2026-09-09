@@ -1,0 +1,12 @@
+{
+  "name": "production-smoke-v2",
+  "command": "pnpm exec playwright test --config docs/hermes-analysis/qa/production.config.ts --workers=1",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:29:46.497378+00:00",
+  "durationSeconds": 13.772690057754517,
+  "exitCode": 0,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/production-smoke-v2.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 335560,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

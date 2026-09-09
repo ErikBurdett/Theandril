@@ -1,0 +1,26 @@
+{
+  "delegation": "deleg_a5c1f468",
+  "task": 1,
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "suggestions": [
+    {
+      "topic": "Disclosed performance regression",
+      "detail": "Every append/no-op now reads, hashes and parses O(prefix bytes) under the publication transaction. When garbage is queued, GC verifies the entire stored blob inventory and retained manifests; only reclamation is capped at 64 blobs per commit. Zero history writes does not mean constant or negligible work. Reviewed Chromium samples were 2217.0/1504.4/1570.6 ms for cold/no-op/append, with no-op/append increases of 581.2/651.2 ms. Carry these qualifications into current storage guidance and profile large-store GC separately."
+    },
+    {
+      "topic": "Conservative availability tradeoff",
+      "detail": "An unverifiable unrelated branch can refuse an otherwise valid save once GC is queued. Independent probes confirmed atomic refusal for missing payloads/metadata, corrupt manifests and resealed metadata mismatches, followed by successful one-record retries after restoring test damage. This is the disclosed fail-closed tradeoff, not another history-deletion defect. Overcounts without queued garbage are not proactively scrubbed."
+    },
+    {
+      "topic": "Retain additional regression coverage",
+      "detail": "Consider promoting the temporary probes covering fragmented-prefix loss, origin replica loss, shared-fork orphan leases, rollback after physical GC has begun, and second-connection rotation between preflight and publication."
+    },
+    {
+      "topic": "Certification limits",
+      "detail": "Reviewed retained Chromium scripts/logs establish API/IndexedDB evidence, not authentication, quota exhaustion, process-kill durability, cross-browser or mobile/performance certification. Checksums remain integrity checks. The large append was a genuinely refused post-victory endTurn recorded as one immutable suffix. Complete archive equality and earlier replay evidence must not be described as a newly executed large replay; neither Chromium nor that large replay was rerun in this review."
+    }
+  ],
+  "summary": "Both original durability blockers are closed in the reviewed postimage. PERSIST-01 verifies the origin and every prefix dependency inside the publication transaction before rotation. PERSIST-02 derives incoming ownership from digest-verified payload links and manifests, including orphan-successor leases, before deletion. Rollback preserves all six stores, stats and retry cursors; bounded GC still drains. Legacy read/export compatibility and safe refusal of oversized legacy-to-v2 migration remain intact. No additional correctness/security regression was found beyond the disclosed latency and conservative-refusal tradeoffs. Independently passed 52/52 tests across five files, 14/14 additional probes, persistence typecheck/lint and whitespace checks. The full 60,614-byte patch parsed and reverse-checked; all seven postimage hashes matched before/after, and the earlier FAILED verdict remained unchanged. No repository files were modified. Temporary harnesses/results remain at /tmp/theandril-persistence-rereview-hxguo7sl; all 14 probe databases were deleted with readback verification. One temporary harness import-order error was corrected before the successful probe run. This is scoped persistence approval, not overall release or AI signoff."
+}

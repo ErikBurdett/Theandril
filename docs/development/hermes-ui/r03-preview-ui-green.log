@@ -1,0 +1,42 @@
+
+Running 2 tests using 1 worker
+
+(node:356281) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/battle-defense.spec.ts:42:1 › R03 public attack previews the canonical contingent and leaves its reserve on the map (2.7s)
+  ✘  2 tests/gameplay/battle-defense.spec.ts:63:1 › R03 public siege shows reserves at 390px and requires their later defeat before capture (2.6s)
+
+
+  1) tests/gameplay/battle-defense.spec.ts:63:1 › R03 public siege shows reserves at 390px and requires their later defeat before capture 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: undefined
+
+      73 |   const card = page.getByTestId(`siege-${C.settlementId}`);
+      74 |   const before = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), siege: window.__THEANDRIL__!.getSummary()!.sieges[0]! }));
+    > 75 |   expect(before.siege.battleDefense?.reserveFormations).toBe(1);
+         |                                                         ^
+      76 |   await assertQuote(card.getByTestId('battle-defense-preview'), before.siege.battleDefense!);
+      77 |   await card.screenshot({ path: info.outputPath('siege-defense-390.png') });
+      78 |   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/battle-defense.spec.ts:75:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r03-preview-ui-green/battle-defense-R03-public--a258a-later-defeat-before-capture/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/hermes-ui/r03-preview-ui-green/battle-defense-R03-public--a258a-later-defeat-before-capture/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r03-preview-ui-green/battle-defense-R03-public--a258a-later-defeat-before-capture/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/hermes-ui/r03-preview-ui-green/battle-defense-R03-public--a258a-later-defeat-before-capture/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/battle-defense.spec.ts:63:1 › R03 public siege shows reserves at 390px and requires their later defeat before capture 
+  1 passed (6.0s)

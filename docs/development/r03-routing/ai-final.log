@@ -1,0 +1,277 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 4 seats makes player contact through legal bounded plans with save replay 6724ms
+ ✓ packages/ai/src/pacing.test.ts > 'standard' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation 7537ms
+ ✓ packages/ai/src/pacing.test.ts > 'standard' seed 99 generator 5 reaches an earned long-form victory with legal orders and save continuation 5961ms
+ ✓ packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 24 seats makes player contact through legal bounded plans with save replay 10960ms
+ ✓ packages/ai/src/pacing.test.ts > 'standard' seed 99 generator 6 reaches an earned long-form victory with legal orders and save continuation 7947ms
+ ✓ packages/ai/src/contact.test.ts > generated large-map faction contact > huge / 32 seats makes player contact through legal bounded plans with save replay 18707ms
+ ✓ packages/ai/src/contact.test.ts > generated large-map faction contact > has explicit frontier work bounds and deterministic destinations from detached observed cells 409ms
+ ✓ packages/ai/src/recruitment.test.ts > original recruitment ordering stays exact, including unknown metadata fallback 2ms
+ ✓ packages/ai/src/recruitment.test.ts > every culture retains every common military role with its declared preference weights 11ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.ashen_compact prefers unit.guard from equally represented, equally legal common military roles 62ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.reedbound_council prefers unit.guard from equally represented, equally legal common military roles 26ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.cinder_march prefers unit.guard from equally represented, equally legal common military roles 25ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.glass_tide prefers unit.guard from equally represented, equally legal common military roles 18ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.iron_covenant prefers unit.guard from equally represented, equally legal common military roles 17ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.sepulchral_synod prefers unit.guard from equally represented, equally legal common military roles 18ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.mire_courts prefers unit.spearman from equally represented, equally legal common military roles 18ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.saltwind_remnant prefers unit.guard from equally represented, equally legal common military roles 17ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.wardhall_remnant prefers unit.spearman from equally represented, equally legal common military roles 16ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.rimehorn_clans prefers unit.guard from equally represented, equally legal common military roles 17ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.sable_steppe prefers unit.cavalry from equally represented, equally legal common military roles 17ms
+ ✓ packages/ai/src/recruitment.test.ts > faction.morrow_spore prefers unit.scout from equally represented, equally legal common military roles 16ms
+ ✓ packages/ai/src/recruitment.test.ts > a preferred cavalry recruit cannot bypass real treasury and town-production gates 31ms
+ ✓ packages/ai/src/recruitment.test.ts > AI recruits a missing unit.skirmisher through observed unlocks and the paid queue 16ms
+ ✓ packages/ai/src/recruitment.test.ts > AI recruits a missing unit.arbalester through observed unlocks and the paid queue 14ms
+ ✓ packages/ai/src/recruitment.test.ts > AI recruits a missing unit.halberdier through observed unlocks and the paid queue 16ms
+ ✓ packages/ai/src/recruitment.test.ts > AI recruits a missing unit.lancer through observed unlocks and the paid queue 15ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Mire Courts' recruits and combines legal armies with exact saved continuation 1237ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Saltwind Remnant' recruits and combines legal armies with exact saved continuation 1049ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Wardhall Remnant' recruits and combines legal armies with exact saved continuation 1096ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Rimehorn Clans' recruits and combines legal armies with exact saved continuation 963ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Sable Steppe' recruits and combines legal armies with exact saved continuation 1148ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Morrow Spore' recruits and combines legal armies with exact saved continuation 1252ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Cistern Assembly' recruits and combines legal armies with exact saved continuation 1055ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Unsealed Companies' recruits and combines legal armies with exact saved continuation 1151ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Lantern Hospices' recruits and combines legal armies with exact saved continuation 1118ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Cairnwing Concord' recruits and combines legal armies with exact saved continuation 1086ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Red Sluice Directorate' recruits and combines legal armies with exact saved continuation 1757ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Velvet Meridian' recruits and combines legal armies with exact saved continuation 1593ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Brine Choir' recruits and combines legal armies with exact saved continuation 1252ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Emberwake Convocation' recruits and combines legal armies with exact saved continuation 1033ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Underhush Exchange' recruits and combines legal armies with exact saved continuation 1120ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Vesper Court' recruits and combines legal armies with exact saved continuation 1263ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Manytrack Moot' recruits and combines legal armies with exact saved continuation 962ms
+ ✓ packages/ai/src/recruitment.test.ts > 'Margin Observance' recruits and combines legal armies with exact saved continuation 1134ms
+ ✓ packages/ai/src/progression.test.ts > project hosting favors observed safety over first ID, remains order-independent, and excludes ships and carried troops 48ms
+ ✓ packages/ai/src/progression.test.ts > project host comparisons are bounded and choose a real eligible site even when all are threatened 12ms
+ ✓ packages/ai/src/progression.test.ts > ranked project host starts through the ordinary command and survives save/load 15ms
+ ✓ packages/ai/src/progression.test.ts > prepared prosperity scenario is valid, deterministic and leaves progression choices to real commands 21ms
+ ✓ packages/ai/src/progression.test.ts > AI protects its project fund instead of endlessly spending on recruitment 13ms
+ ✓ packages/ai/src/progression.test.ts > AI uses the scaled project fund and keeps an operating purse during a long campaign 14ms
+ ✓ packages/ai/src/progression.test.ts > generated-start AI seed 74 reaches true Prosperity with ordinary commands and deterministic save continuation 1255ms
+ ✓ packages/ai/src/progression.test.ts > generated-start AI seed 2026 reaches true Prosperity with ordinary commands and deterministic save continuation 1280ms
+ ✓ packages/ai/src/progression.test.ts > generated-start AI seed 20260905 reaches true Prosperity with ordinary commands and deterministic save continuation 630ms
+ ✓ packages/ai/src/progression.test.ts > generated-start AI seed 17 reaches true Prosperity with ordinary commands and deterministic save continuation 717ms
+ ✓ packages/ai/src/progression.test.ts > generated-start AI seed 99 reaches true Prosperity with ordinary commands and deterministic save continuation 823ms
+ ✓ packages/ai/src/progression.test.ts > generated-start AI seed 31415 reaches true Prosperity with ordinary commands and deterministic save continuation 1415ms
+ ✓ packages/ai/src/progression.test.ts > generated-start AI seed 2718 reaches true Prosperity with ordinary commands and deterministic save continuation 830ms
+ ✓ packages/ai/src/progression.test.ts > generated-start AI seed 8128 reaches true Prosperity with ordinary commands and deterministic save continuation 842ms
+ ✓ packages/ai/src/progression.test.ts > generated-start AI seed 4096 reaches true Prosperity with ordinary commands and deterministic save continuation 1219ms
+ ✓ packages/ai/src/progression.test.ts > generated-start AI seed 65535 reaches true Prosperity with ordinary commands and deterministic save continuation 804ms
+ ✓ packages/ai/src/resource-economy.test.ts > AI funds and works its first observed 'Hearthgrain' deposit, then sells only actual surplus 909ms
+ ✓ packages/ai/src/resource-economy.test.ts > AI funds and works its first observed 'Ironstone' deposit, then sells only actual surplus 719ms
+ ✓ packages/ai/src/resource-economy.test.ts > AI funds and works its first observed 'Red copper' deposit, then sells only actual surplus 630ms
+ ✓ packages/ai/src/resource-economy.test.ts > AI funds and works its first observed 'White salt' deposit, then sells only actual surplus 641ms
+ ✓ packages/ai/src/pacing.test.ts > 'epic' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation 50761ms
+ ✓ packages/ai/src/resource-economy.test.ts > AI funds and works its first observed 'Heartwood' deposit, then sells only actual surplus 638ms
+ ✓ packages/ai/src/resource-economy.test.ts > AI funds and works its first observed 'Steppe horses' deposit, then sells only actual surplus 916ms
+ ✓ packages/ai/src/resource-economy.test.ts > AI funds and works its first observed 'Witness silver' deposit, then sells only actual surplus 880ms
+ ✓ packages/ai/src/resource-economy.test.ts > AI funds and works its first observed 'Ashglass' deposit, then sells only actual surplus 921ms
+ ✓ packages/ai/src/ai.test.ts > 'Ashen Compact' AI settles, builds, recruits and expands through the public command API 456ms
+ ✓ packages/ai/src/ai.test.ts > 'Reedbound Council' AI settles, builds, recruits and expands through the public command API 225ms
+ ✓ packages/ai/src/ai.test.ts > 'Cinder March' AI settles, builds, recruits and expands through the public command API 254ms
+ ✓ packages/ai/src/ai.test.ts > 'Glass Tide' AI settles, builds, recruits and expands through the public command API 224ms
+ ✓ packages/ai/src/ai.test.ts > 'Iron Covenant' AI settles, builds, recruits and expands through the public command API 209ms
+ ✓ packages/ai/src/ai.test.ts > 'Sepulchral Synod' AI settles, builds, recruits and expands through the public command API 215ms
+ ✓ packages/ai/src/ai.test.ts > 'Mire Courts' AI settles, builds, recruits and expands through the public command API 351ms
+ ✓ packages/ai/src/ai.test.ts > 'Saltwind Remnant' AI settles, builds, recruits and expands through the public command API 202ms
+ ✓ packages/ai/src/ai.test.ts > 'Wardhall Remnant' AI settles, builds, recruits and expands through the public command API 234ms
+ ✓ packages/ai/src/ai.test.ts > 'Rimehorn Clans' AI settles, builds, recruits and expands through the public command API 205ms
+ ✓ packages/ai/src/ai.test.ts > 'Sable Steppe' AI settles, builds, recruits and expands through the public command API 204ms
+ ✓ packages/ai/src/ai.test.ts > 'Morrow Spore' AI settles, builds, recruits and expands through the public command API 201ms
+ ✓ packages/ai/src/ai.test.ts > 'Cistern Assembly' AI settles, builds, recruits and expands through the public command API 201ms
+ ✓ packages/ai/src/ai.test.ts > 'Unsealed Companies' AI settles, builds, recruits and expands through the public command API 200ms
+ ✓ packages/ai/src/ai.test.ts > 'Lantern Hospices' AI settles, builds, recruits and expands through the public command API 212ms
+ ✓ packages/ai/src/ai.test.ts > 'Cairnwing Concord' AI settles, builds, recruits and expands through the public command API 205ms
+ ✓ packages/ai/src/ai.test.ts > 'Red Sluice Directorate' AI settles, builds, recruits and expands through the public command API 322ms
+ ✓ packages/ai/src/ai.test.ts > 'Velvet Meridian' AI settles, builds, recruits and expands through the public command API 214ms
+ ✓ packages/ai/src/ai.test.ts > 'Brine Choir' AI settles, builds, recruits and expands through the public command API 213ms
+ ✓ packages/ai/src/ai.test.ts > 'Emberwake Convocation' AI settles, builds, recruits and expands through the public command API 250ms
+ ✓ packages/ai/src/ai.test.ts > 'Underhush Exchange' AI settles, builds, recruits and expands through the public command API 328ms
+ ✓ packages/ai/src/ai.test.ts > 'Vesper Court' AI settles, builds, recruits and expands through the public command API 346ms
+ ✓ packages/ai/src/ai.test.ts > 'Manytrack Moot' AI settles, builds, recruits and expands through the public command API 353ms
+ ✓ packages/ai/src/ai.test.ts > 'Margin Observance' AI settles, builds, recruits and expands through the public command API 356ms
+ ✓ packages/ai/src/ai.test.ts > AI cannot depend on hidden world state and resumes deterministically after save 945ms
+ ✓ packages/ai/src/ai.test.ts > production budget rotates so later settlements receive orders and colonists are not overqueued 12ms
+ ✓ packages/ai/src/ai.test.ts > planner does not spend movement proposals on terrain the army cannot afford 4ms
+ ✓ packages/ai/src/ai.test.ts > founding names remain unique after losses leave gaps in the hearth sequence 4ms
+ ✓ packages/ai/src/ai.test.ts > a caravan with no remaining movement waits before founding 3ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Ashen Compact' assigns workers and completes productive land works with exact continuation 147ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Reedbound Council' assigns workers and completes productive land works with exact continuation 81ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Cinder March' assigns workers and completes productive land works with exact continuation 75ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Glass Tide' assigns workers and completes productive land works with exact continuation 72ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Iron Covenant' assigns workers and completes productive land works with exact continuation 71ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Sepulchral Synod' assigns workers and completes productive land works with exact continuation 71ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Mire Courts' assigns workers and completes productive land works with exact continuation 70ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Saltwind Remnant' assigns workers and completes productive land works with exact continuation 69ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Wardhall Remnant' assigns workers and completes productive land works with exact continuation 70ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Rimehorn Clans' assigns workers and completes productive land works with exact continuation 70ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Sable Steppe' assigns workers and completes productive land works with exact continuation 105ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Morrow Spore' assigns workers and completes productive land works with exact continuation 124ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Cistern Assembly' assigns workers and completes productive land works with exact continuation 77ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Unsealed Companies' assigns workers and completes productive land works with exact continuation 69ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Lantern Hospices' assigns workers and completes productive land works with exact continuation 70ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Cairnwing Concord' assigns workers and completes productive land works with exact continuation 85ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Red Sluice Directorate' assigns workers and completes productive land works with exact continuation 72ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Velvet Meridian' assigns workers and completes productive land works with exact continuation 71ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Brine Choir' assigns workers and completes productive land works with exact continuation 67ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Emberwake Convocation' assigns workers and completes productive land works with exact continuation 70ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Underhush Exchange' assigns workers and completes productive land works with exact continuation 68ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Vesper Court' assigns workers and completes productive land works with exact continuation 67ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Manytrack Moot' assigns workers and completes productive land works with exact continuation 84ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > 'Margin Observance' assigns workers and completes productive land works with exact continuation 102ms
+ ✓ packages/ai/src/land.test.ts > shared-rule AI land development > does not spend reserved coin or propose unaffordable work 3ms
+ ✓ packages/ai/src/overseas-generated.test.ts > generated 'tiny' / 'islands' / 20260905 earns an overseas colony using observed commands 501ms
+ ✓ packages/ai/src/overseas-generated.test.ts > generated 'small' / 'islands' / 20260905 earns an overseas colony using observed commands 920ms
+ ✓ packages/ai/src/overseas-generated.test.ts > generated 'tiny' / 'archipelago' / 74 earns an overseas colony using observed commands 234ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > derives only a bounded read selector from public turn metadata 3ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > matches the original modular planner order without mutating 0 input entries 1ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > matches the original modular planner order without mutating 1 input entries 0ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > matches the original modular planner order without mutating 8 input entries 0ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > matches the original modular planner order without mutating 9 input entries 0ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > matches the original modular planner order without mutating 16 input entries 0ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > matches the original modular planner order without mutating 17 input entries 0ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > retains identical complete proposals/reasons and all summaries across 0 towns and wrap-around turns 98ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > retains identical complete proposals/reasons and all summaries across 1 towns and wrap-around turns 98ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > retains identical complete proposals/reasons and all summaries across 8 towns and wrap-around turns 189ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > retains identical complete proposals/reasons and all summaries across 9 towns and wrap-around turns 147ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > retains identical complete proposals/reasons and all summaries across 16 towns and wrap-around turns 180ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > retains identical complete proposals/reasons and all summaries across 17 towns and wrap-around turns 250ms
+ ✓ packages/ai/src/observation-options.test.ts > shared AI land observation and planning window > keeps real commands/results and saved continuation identical to full-detail planning 294ms
+ ✓ packages/ai/src/composition.test.ts > AI recruits varied formations and assembles real mixed armies through legal public commands 714ms
+ ✓ packages/ai/src/composition.test.ts > founding proposals reserve space for other caravans within the same planning batch 10ms
+ ✓ packages/ai/src/composition.test.ts > AI concentrates 16 real formations under the eligible commander in response to a visible large rival 25ms
+ ✓ packages/ai/src/composition.test.ts > AI concentrates 20 real formations under the eligible commander in response to a visible large rival 17ms
+ ✓ packages/ai/src/naval.test.ts > unrelated global ID allocation cannot redirect the same observed ocean scout, and two scouts reserve distinct destinations 150ms
+ ✓ packages/ai/src/naval.test.ts > optional appointments and generic reserves cannot consume the first ocean scout quote (missing founder: false) 56ms
+ ✓ packages/ai/src/naval.test.ts > optional appointments and generic reserves cannot consume the first ocean scout quote (missing founder: true) 46ms
+ ✓ packages/ai/src/naval.test.ts > a funded open-sea harbor can buy ocean research from spare knowledge before any passenger charter 35ms
+ ✓ packages/ai/src/naval.test.ts > whole AI really loads, crosses deep ocean, lands and founds without reboarding or rejected commands; saved voyage matches 250ms
+ ✓ packages/ai/src/naval.test.ts > a maritime opening pays for navigation, one harbor and a real transport before embarking 139ms
+ ✓ packages/ai/src/naval.test.ts > a twenty-formation expedition gathers three paid transport formations instead of overloading one hull 129ms
+ ✓ packages/ai/src/naval.test.ts > paid advancement and ocean research share one observed knowledge budget 21ms
+ ✓ packages/ai/src/naval.test.ts > three co-located hull containers never reuse a consumed merge ID or scatter waiting passengers 27ms
+ ✓ packages/ai/src/naval.test.ts > fleets fight visible weaker fleets through normal naval combat, never target land armies 49ms
+ ✓ packages/ai/src/naval.test.ts > hidden fleet changes cannot affect plans, input is detached, and inland starts buy no speculative navy 52ms
+ ✓ packages/ai/src/naval.test.ts > shared navigation respects sea hull restrictions and cannot give carried troops independent movement 25ms
+ ✓ packages/ai/src/naval.test.ts > ocean reconnaissance is paid before foreign naval contact, then its temporary funding need ends 44ms
+ ✓ packages/ai/src/naval.test.ts > unknown remote hull connectivity neither supplies a local charter nor funds unlimited replacements 47ms
+ ✓ packages/ai/src/naval.test.ts > only proven enclosure diverts a founder toward a replacement port, not an unknown chart boundary 14ms
+ ✓ packages/ai/src/naval-funding.test.ts > long-term project savings preserve a researched first ocean scout’s real quote 78ms
+ ✓ packages/ai/src/naval-funding.test.ts > an isolated open-sea harbor preserves knowledge for its first researched ocean expedition 528ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.cistern_assembly pays for unit.spearman then unit.guard from equal legal forces, with real saved completion 133ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.unsealed_companies pays for unit.spearman then unit.cavalry from equal legal forces, with real saved completion 67ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.lantern_hospices pays for unit.guard then unit.guard from equal legal forces, with real saved completion 57ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.cairnwing_concord pays for unit.spearman then unit.scout from equal legal forces, with real saved completion 51ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.red_sluice pays for unit.spearman then unit.heavy_infantry from equal legal forces, with real saved completion 56ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.velvet_meridian pays for unit.scout then unit.guard from equal legal forces, with real saved completion 50ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.brine_choir pays for unit.guard then unit.spearman from equal legal forces, with real saved completion 50ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.emberwake_convocation pays for unit.guard then unit.heavy_infantry from equal legal forces, with real saved completion 34ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.underhush_exchange pays for unit.guard then unit.spearman from equal legal forces, with real saved completion 27ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.vesper_court pays for unit.heavy_infantry then unit.cavalry from equal legal forces, with real saved completion 30ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.manytrack_moot pays for unit.scout then unit.spearman from equal legal forces, with real saved completion 26ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > faction.margin_observance pays for unit.scout then unit.guard from equal legal forces, with real saved completion 29ms
+ ✓ packages/ai/src/faction-cohort24.test.ts > Vesper’s expensive preferences do not override the real treasury gate 12ms
+ ✓ packages/ai/src/navigation.test.ts > exploration scores the destination sight footprint, not its already-known immediate neighbors 254ms
+ ✓ packages/ai/src/navigation.test.ts > navigation is detached, repeatable, movement-cost-aware and bounded across a whole faction plan 10ms
+ ✓ packages/ai/src/navigation.test.ts > a public discovery bearing only breaks equal information gain, never replaces the frontier objective 187ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved field attack against 21 formations using an unchanged detached observation 134ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved naval attack against 21 hulls through the whole turn planner 81ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > declares war on a contestable oversized stack before asking a fresh observation to authorize attack 21ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > uses the real one-movement road quote rather than re-pricing a contingent attack as forest travel 32ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > naval target selection skips a query-blocked old oversized stack rather than abandoning another legal target 38ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' plans accept mixed whole-container contingents and leave reserves intact 37ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' plans accept mixed whole-container contingents and leave reserves intact 50ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' cannot discount a strong strategic reserve to make an attack affordable 19ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' cannot discount a strong strategic reserve to make an attack affordable 37ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' keeps old no-preview observations and rule-16 guards conservative 18ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' keeps old no-preview observations and rule-16 guards conservative 37ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' decisions cannot read hidden reinforcements or foreign treasury 23ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' decisions cannot read hidden reinforcements or foreign treasury 48ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' honors a movement-query blocker even with a valid contingent preview 16ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' honors a movement-query blocker even with a valid contingent preview 29ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > uses the canonical siege assault quote for 21 garrison formations without capturing through reserves 90ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > siege policy budgets against the complete observed garrison rather than the engaged preview 19ms
+ ✓ packages/ai/src/overseas.test.ts > partial-fog island start earns navigation, harbor, transport and settlers then founds across deep water 452ms
+ ✓ packages/ai/src/overseas.test.ts > a single coastal hearth may initiate navigation; a remote colonist does not suppress port recruitment 41ms
+ ✓ packages/ai/src/overseas.test.ts > an empty transport charts visible water toward unknown frontier without imaginary passengers 34ms
+ ✓ packages/ai/src/overseas.test.ts > an embarked founding expedition does not suppress a separately paid overland caravan 40ms
+ ✓ packages/ai/src/overseas.test.ts > observed freshwater lakes do not masquerade as ocean ports or justify ocean investment 8ms
+ ✓ packages/ai/src/overseas.test.ts > a paid ferry reserves unaffordable Ocean knowledge rather than repeatedly buying cheaper competing techniques 34ms
+ ✓ packages/ai/src/overseas.test.ts > an extra coastal reconnaissance hull needs a broad public theater or an actually observed navy 22ms
+ ✓ packages/ai/src/overseas.test.ts > an immediately legal landing is not lost to the bounded long-distance shoreline sample 49ms
+ ✓ packages/ai/src/enclosed-sea.test.ts > Mire Courts earn a same-landmass inland ferry colony, with a saved voyage and exact command replay 397ms
+ ✓ packages/ai/src/characters.test.ts > AI funds observed appointments, attaches specialists, completes refits and spends earned experience with exact saved continuation 273ms
+ ✓ packages/ai/src/characters.test.ts > zero discretionary budget never fabricates appointments or paid missions 9ms
+ ✓ packages/ai/src/characters.test.ts > AI follows acquired prerequisites and prefers battlecraft for a small army without guessing eligibility 13ms
+ ✓ packages/ai/src/characters.test.ts > full AI respects active mission carriers and never merges two commanded armies 18ms
+ ✓ packages/ai/src/characters.test.ts > full AI trains an experienced company before starting the same army’s paid refit 12ms
+ ✓ packages/ai/src/research-land.test.ts > AI studies observed wetland opportunities through real prerequisite commands without overspending 61ms
+ ✓ packages/ai/src/research-land.test.ts > AI may replace a worked reedwork with a genuinely better researched polder but never an equal or worse site 31ms
+ ✓ packages/ai/src/research-land.test.ts > missing detailed land quotes never cause invented research opportunities or worker-removal orders 12ms
+ ✓ packages/ai/src/research-land.test.ts > food demand cannot repeatedly demolish paid spring gardens and oreworks on the same real ore-and-spring hex 194ms
+ ✓ packages/ai/src/research-land.test.ts > deep water blocking an otherwise incomplete border is not invented survey-estates research demand 9ms
+ ✓ packages/ai/src/naval-assembly.test.ts > remote reserved hulls do not replace two paid local hulls for a twenty-formation expedition 380ms
+ ✓ packages/ai/src/magic.test.ts > observation-only AI pays for one useful Waykeeper, attaches it and purchases real national discoveries before shared-kernel combat 148ms
+ ✓ packages/ai/src/magic.test.ts > the AI never appoints unfunded casters or researches magic without an actual gifted officer 34ms
+ ✓ packages/ai/src/magic.test.ts > a declined tactical policy never causes the AI to substitute an unrecorded spell action 27ms
+ ✓ packages/ai/src/magic.test.ts > Waykeepers choose a qualifying local battle stack and its free companion slot, never a lone explorer 41ms
+ ✓ packages/ai/src/magic.test.ts > a remote qualifying army does not justify a paid Waykeeper for a local lone scout 31ms
+ ✓ packages/ai/src/magic.test.ts > Arcane research buys only discoveries usable by the actual personal paths of its living caster 53ms
+ ✓ packages/ai/src/navigation-performance.test.ts > matches genuine generated observations and changing destination reservations for seed74 42ms
+ ✓ packages/ai/src/navigation-performance.test.ts > matches genuine generated observations and changing destination reservations for seed99 16ms
+ ✓ packages/ai/src/navigation-performance.test.ts > matches genuine generated observations and changing destination reservations for seed748291 9ms
+ ✓ packages/ai/src/navigation-performance.test.ts > preserves land, coastal and ocean entry distinctions, occupied hexes and blocked or carried armies 38ms
+ ✓ packages/ai/src/navigation-performance.test.ts > retains edge/parity/frontier ordering from origin0 5ms
+ ✓ packages/ai/src/navigation-performance.test.ts > retains edge/parity/frontier ordering from origin23 5ms
+ ✓ packages/ai/src/navigation-performance.test.ts > retains edge/parity/frontier ordering from origin24 6ms
+ ✓ packages/ai/src/navigation-performance.test.ts > retains edge/parity/frontier ordering from origin47 5ms
+ ✓ packages/ai/src/navigation-performance.test.ts > retains edge/parity/frontier ordering from origin288 5ms
+ ✓ packages/ai/src/navigation-performance.test.ts > retains edge/parity/frontier ordering from origin289 5ms
+ ✓ packages/ai/src/navigation-performance.test.ts > retains edge/parity/frontier ordering from origin552 5ms
+ ✓ packages/ai/src/navigation-performance.test.ts > retains edge/parity/frontier ordering from origin575 4ms
+ ✓ packages/ai/src/navigation-performance.test.ts > keeps each1024-node army budget and the cumulative8192-node budget, even for repeated cached searches 21ms
+ ✓ packages/ai/src/navigation-performance.test.ts > reuses topology only after real expansion, without skipping counters or eager whole-world neighbor work 9ms
+ ✓ packages/ai/src/navigation-performance.test.ts > retains oracle decisions when probes fill the bounded entry cache and later armies enter new regions 38ms
+ ✓ packages/ai/src/uncapped-expansion.test.ts > an affordable realm with4 hearths recruits and pays for another caravan instead of obeying the old count target 47ms
+ ✓ packages/ai/src/uncapped-expansion.test.ts > an affordable realm with6 hearths recruits and pays for another caravan instead of obeying the old count target 19ms
+ ✓ packages/ai/src/uncapped-expansion.test.ts > an affordable realm with8 hearths recruits and pays for another caravan instead of obeying the old count target 23ms
+ ✓ packages/ai/src/uncapped-expansion.test.ts > an isolated realm saves below the expedition threshold and releases the purse for a real paid caravan 21ms
+ ✓ packages/ai/src/uncapped-expansion.test.ts > preferred settlement spacing changes with observed fertility and neighboring development 8ms
+ ✓ packages/ai/src/uncapped-expansion.test.ts > a partial page never removes existing workers outside its quoted window 6ms
+ ✓ packages/ai/src/uncapped-expansion.test.ts > rotating town review advances a sprawling hearth page on its next visit 35ms
+ ✓ packages/ai/src/large-basin.test.ts > actual generator7 inland-sea knowledge, not an authored voyage or omniscient planner > proves the 1074-cell salt sea enclosed using the whole known boundary beyond the old1024 cap 5ms
+ ✓ packages/ai/src/large-basin.test.ts > actual generator7 inland-sea knowledge, not an authored voyage or omniscient planner > does not treat an unseen shoreline as closed or an unproved remote ocean as connected 4ms
+ ✓ packages/ai/src/contact-reconnaissance.test.ts > sparse reconnaissance uses a public inward discovery bearing (naval: false) 42ms
+ ✓ packages/ai/src/contact-reconnaissance.test.ts > sparse reconnaissance uses a public inward discovery bearing (naval: true) 45ms
+ ✓ packages/ai/src/contact-reconnaissance.test.ts > an isolated caravan can plan a paid second maritime outlet without claiming uncertain seas are connected 39ms
+ ✓ packages/ai/src/conquest.test.ts > AI invests a visible enemy town and maintains its siege until a legal assault 56ms
+ ✓ packages/ai/src/conquest.test.ts > AI advances toward a nearby visible settlement before establishing its siege 15ms
+ ✓ packages/ai/src/conquest.test.ts > AI respects visible third-party blockades without reading their private siege details 11ms
+ ✓ packages/ai/src/conquest.test.ts > AI only chooses supplied capture options and weighs recovery against treasury pressure 8ms
+ ✓ packages/ai/src/conquest.test.ts > AI lifts a hopeless siege and keeps exhausted field guards from attacking 11ms
+ ✓ packages/ai/src/fiscal-workers.test.ts > idle developed towns fund the observed project instead of prioritizing unused industry 61ms
+ ✓ packages/ai/src/fiscal-workers.test.ts > fiscal worker orders use real claimed options and preserve exact save continuation without spending 48ms
+ ✓ packages/ai/src/diplomacy.test.ts > AI seeks an affordable peace after a prolonged war without issuing contradictory attacks 54ms
+ ✓ packages/ai/src/diplomacy.test.ts > AI responds using shared valuation and respects the resulting binding peace 16ms
+ ✓ packages/ai/src/diplomacy.test.ts > AI rejects unaffordable reparations and retains the explanation 8ms
+ ✓ packages/ai/src/diplomacy.test.ts > AI legally rejects a payment offer whose proposer spends the promised coin 10ms
+ ✓ packages/ai/src/diplomacy.test.ts > AI preserves first-contact fighting and offers limited tribute for later exhaustion 7ms
+ ✓ packages/ai/src/sea-knowledge.test.ts > an observed enclosed basin is proved without granting unseen geography 25ms
+ ✓ packages/ai/src/sea-knowledge.test.ts > bounded water search exhaustion is uncertainty, including repeated fleet queries 18ms
+ ✓ packages/ai/src/sea-knowledge.test.ts > a charted map-edge ocean is not enclosed and an enclosed deep basin is not shallow 7ms
+ ✓ packages/ai/src/sea-knowledge.test.ts > separation needs a completed component proof, not distant water or an unknown shoreline 4ms
+ ✓ packages/ai/src/sea-knowledge.test.ts > completed membership survives later budget exhaustion without exposing mutable cache objects 14ms
+ ✓ packages/ai/src/sea-knowledge.test.ts > open-edge and connecting-path proofs stop early, then merge without expanding a cell twice 5ms
+ ✓ packages/ai/src/roads.test.ts > one optional road proposal uses exact quotes and ownership, never spends a protected budget 32ms
+ ✓ packages/ai/src/roads.test.ts > a current-sight road quote is ordered before boarding or marching can remove its worker sight 30ms
+ ✓ packages/ai/src/pacing.test.ts > 'epic' seed 99 generator undefined reaches an earned long-form victory with legal orders and save continuation 33415ms
+
+ Test Files  30 passed (30)
+      Tests  268 passed (268)
+   Start at  03:02:14
+   Duration  106.28s (transform 1.05s, setup 0ms, import 5.24s, tests 200.04s, environment 2ms)
+

@@ -1,0 +1,2493 @@
+{
+  "scope": "Fresh Chromium context; no injected JavaScript, DOM changes, hooks for mutation, or instrumentation; actual UI calls, CDP listener observation only. Desktop no mobile emulation.",
+  "browser": "152.0.7977.82",
+  "errors": [],
+  "consoleMessages": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x32404349800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x32404349800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x32404349800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x32404349800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    }
+  ],
+  "records": [
+    {
+      "stage": "generated-small12",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 26979549,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    },
+    {
+      "stage": "load-1",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 31095779,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    },
+    {
+      "stage": "load-2",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 28233334,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    },
+    {
+      "stage": "load-3",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 30633706,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    },
+    {
+      "stage": "load-4",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 32924038,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    },
+    {
+      "stage": "import-1",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 25157439,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    },
+    {
+      "stage": "import-2",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 18289318,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    },
+    {
+      "stage": "import-3",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 21044942,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    },
+    {
+      "stage": "import-4",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 16886597,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    },
+    {
+      "stage": "after-battle",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        },
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 22536997,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    },
+    {
+      "stage": "full-document-reload",
+      "controls": [
+        {
+          "parent": "map-section",
+          "text": "World map · TerrainTerrainRealmsRealm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.Fit world map",
+          "html": "<details class=\"faction-overview-control\" data-testid=\"faction-overview-control\"><summary>World map · Terrain</summary><div class=\"overview-controls\"><div role=\"group\" aria-label=\"World map style\"><button type=\"button\" aria-pressed=\"true\">Terrain</button><button type=\"button\" aria-pressed=\"false\">Realms</button></div><p>Realm colors show known territory. Dim claims show remembered ownership; unexplored land stays hidden.</p><button type=\"button\">Fit world map</button></div></details>",
+          "rect": {
+            "x": 23,
+            "y": 120,
+            "width": 308,
+            "height": 635.3125,
+            "top": 120,
+            "right": 331,
+            "bottom": 755.3125,
+            "left": 23
+          }
+        }
+      ],
+      "debugHookPresent": false,
+      "canvases": 1,
+      "heap": 34567270,
+      "listeners": {
+        "window": [
+          {
+            "type": "pointerup",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "keydown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document": [
+          {
+            "type": "keydown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          },
+          {
+            "type": "pointermove",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "selectionchange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 9
+          },
+          {
+            "type": "visibilitychange",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 304
+          }
+        ],
+        "document.querySelector(\"canvas\")": [
+          {
+            "type": "pointerdown",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "pointerover",
+            "useCapture": true,
+            "passive": false,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "wheel",
+            "useCapture": true,
+            "passive": true,
+            "scriptId": "66",
+            "lineNumber": 13
+          },
+          {
+            "type": "webglcontextlost",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "webglcontextrestored",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "62",
+            "lineNumber": 0
+          },
+          {
+            "type": "pointerdown",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerleave",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "wheel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointermove",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointerup",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          },
+          {
+            "type": "pointercancel",
+            "useCapture": false,
+            "passive": false,
+            "scriptId": "4",
+            "lineNumber": 302
+          }
+        ]
+      }
+    }
+  ]
+}

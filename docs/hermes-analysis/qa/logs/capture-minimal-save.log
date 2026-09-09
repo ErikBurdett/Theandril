@@ -1,0 +1,12 @@
+COMMAND: node --import tsx docs/hermes-analysis/qa/capture-minimal-save.mjs
+START: 2026-09-09T05:30:53.586176+00:00
+/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:396
+  if (!condition) throw new Error('Invalid save: ' + message);
+                        ^
+
+Error: Invalid save: invalid formation definition, morale or strength
+    at assert (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:396:25)
+    at deserializeGame (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:677:7)
+    at file:///home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/capture-minimal-save.mjs:12:5
+
+Node.js v26.7.0

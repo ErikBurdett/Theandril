@@ -1,0 +1,51 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ × packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved field attack against 21 formations using an unchanged detached observation 44ms
+   → expected [ …(2) ] to deep equally contain ObjectContaining{…}
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved field attack against 21 formations using an unchanged detached observation
+AssertionError: expected [ …(2) ] to deep equally contain ObjectContaining{…}
+
+- Expected:
+ObjectContaining {
+  "armyId": "army.2",
+  "type": "attack",
+}
+
++ Received:
+[
+  {
+    "cells": [
+      439,
+    ],
+    "factionId": "faction.ashen_compact",
+    "settlementId": "settlement.5",
+    "type": "setWorkedTiles",
+  },
+  {
+    "armyId": "army.2",
+    "factionId": "faction.ashen_compact",
+    "target": 585,
+    "type": "moveTo",
+  },
+]
+
+ ❯ packages/ai/src/battle-defense.test.ts:32:22
+     30|     expect(getMovementQuery(view, 'army.2', target).preview).toMatchOb…
+     31|     const commands = planTurn(view);
+     32|     expect(commands).toContainEqual(expect.objectContaining({ type: 'a…
+       |                      ^
+     33|     expect(planTurn(structuredClone(view))).toEqual(commands);
+     34|     expect(view).toEqual(detached); expect(serializeGame(state)).toBe(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  02:49:11
+   Duration  577ms (transform 356ms, setup 0ms, import 461ms, tests 45ms, environment 0ms)
+

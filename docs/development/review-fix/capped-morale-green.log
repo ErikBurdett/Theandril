@@ -1,0 +1,15 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > round-trips after every accepted command from a captured ordinary battle 130ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > manual rounds and withdrawal save at the same boundary as autoresolve 62ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > does not compound training when the same company defends twice without an end turn 31ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > removes only the training morale actually granted at the tactical cap 43ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > retains independently captured rule-16 results rather than silently rewriting history 32ms
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  03:01:51
+   Duration  959ms (transform 440ms, setup 0ms, import 588ms, tests 299ms, environment 0ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/review-fix/capped-morale-green.json

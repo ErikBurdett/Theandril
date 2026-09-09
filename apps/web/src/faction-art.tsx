@@ -14,6 +14,8 @@ const frames = new Map<string, Promise<ApprovedFrame>>();
 const blobUrls = new Set<string>();
 let decodedBytes = 0;
 let disposed = false;
+// Intentional shared-only roles, not missing culture variants or failed loads.
+const SHARED_CHARACTER_ART: Readonly<Record<string, { label: string }>> = { 'character.waykeeper': { label: 'Waykeeper' } };
 
 /** One bounded approved catalog for the DOM, never the development/candidate catalog. */
 function catalog(): Promise<RuntimeCatalog> {
@@ -68,20 +70,21 @@ function atlasImage(atlas: RuntimeCatalog['atlases'][number]): Promise<AtlasImag
 export function loadFactionArtFrame(contentId: string, definitionId: string): Promise<ApprovedFrame> {
   const artworkRole = unitArtRole(contentId);
   const qualified = factionArtId(artworkRole, definitionId);
-  if (!qualified) return Promise.reject(new Error('No approved visual family is bound to this faction definition.'));
-  let promise = frames.get(qualified);
+  const requested = qualified ?? (SHARED_CHARACTER_ART[artworkRole] ? artworkRole : undefined);
+  if (!requested) return Promise.reject(new Error('No approved visual family is bound to this faction definition.'));
+  let promise = frames.get(requested);
   if (!promise) {
     promise = (async () => {
       const pack = await catalog();
       const find = (id: string) => pack.assets.find(asset => asset.id === id || asset.contentIds.includes(id));
-      const asset = find(qualified) ?? find(artworkRole);
-      if (!asset) throw new Error(`Approved artwork is not published for ${qualified}.`);
+      const asset = find(requested) ?? find(artworkRole);
+      if (!asset) throw new Error(`Approved artwork is not published for ${requested}.`);
       const atlas = pack.atlases.find(item => item.id === asset.atlasId);
       const frame = asset.frames.find(item => item.state === 'idle' && item.index === 0) ?? asset.frames[0];
       if (!atlas || !frame) throw new Error(`Approved atlas frame is missing for ${asset.id}.`);
-      return { asset, frame, image: await atlasImage(atlas), generic: asset.id !== qualified && !asset.contentIds.includes(qualified) };
+      return { asset, frame, image: await atlasImage(atlas), generic: asset.id !== requested && !asset.contentIds.includes(requested) };
     })();
-    frames.set(qualified, promise);
+    frames.set(requested, promise);
   }
   return promise;
 }
@@ -120,7 +123,7 @@ interface FactionArtProps {
 /** Approved native frame with a fixed slot. Compact thumbnails are exact half-size, never tinted. */
 export function FactionArt(props: FactionArtProps) {
   const { contentId, definitionId } = props;
-  const requested = factionArtId(unitArtRole(contentId), definitionId ?? '') ?? `${contentId}.unbound`;
+  const requested = factionArtId(unitArtRole(contentId), definitionId ?? '') ?? (SHARED_CHARACTER_ART[contentId] ? contentId : `${contentId}.unbound`);
   const [result, setResult] = useState<{ requested: string; value?: ApprovedFrame; error?: string }>();
   useEffect(() => {
     let active = true;
@@ -135,8 +138,8 @@ export function FactionArt(props: FactionArtProps) {
 
 /** Pure presentation boundary, also exercised without a running browser or art publication. */
 export function FactionArtDisplay({ contentId, definitionId, label, compact = false, decorative = false, value: art, error, loading = false }: FactionArtProps & { value?: ApprovedFrame; error?: string; loading?: boolean }) {
-  const artworkRole = unitArtRole(contentId), shared = SHARED_UNIT_ART[contentId];
-  const requested = factionArtId(artworkRole, definitionId ?? '') ?? `${contentId}.unbound`;
+  const artworkRole = unitArtRole(contentId), shared = SHARED_UNIT_ART[contentId] ?? SHARED_CHARACTER_ART[contentId];
+  const requested = factionArtId(artworkRole, definitionId ?? '') ?? (SHARED_CHARACTER_ART[contentId] ? contentId : `${contentId}.unbound`);
   const naval = UNITS.some(unit => unit.id === contentId && unit.movementDomain === 'naval');
   const native = contentId === 'ui.badge' ? 32 : naval || artworkRole === 'unit.cavalry' || contentId === 'settlement.village' || contentId === 'settlement.town' ? 96 : contentId === 'settlement.city' ? 128 : 64;
   const scale = compact ? 0.5 : 1;

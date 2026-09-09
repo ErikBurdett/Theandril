@@ -1,0 +1,12 @@
+{
+  "name": "standard-long-archive",
+  "command": "pnpm exec tsx scripts/benchmark-chronicle.ts --seed=748291 --size=standard --pace=long --factions=24 --limit=650",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:18:15.847172+00:00",
+  "durationSeconds": 292.356338262558,
+  "exitCode": 1,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/standard-long-archive.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 1178556,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

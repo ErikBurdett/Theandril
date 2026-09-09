@@ -1,0 +1,22 @@
+COMMAND: pnpm exec playwright test --config docs/hermes-analysis/qa/production.config.ts --workers=1
+START: 2026-09-09T05:29:46.497519+00:00
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+[WebServer] (node:250160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:250172) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 4 tests using 1 worker
+
+(node:250210) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks
+[2/4] tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base
+[3/4] tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks
+[4/4] tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks
+  4 passed (13.3s)

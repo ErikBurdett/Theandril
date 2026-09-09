@@ -1,0 +1,84 @@
+{
+  "error": "Error: Invalid save: battle formation differs from unit content",
+  "capturedTurn": 237,
+  "retainedReports": 20,
+  "mismatches": [
+    {
+      "battleId": "battle.559",
+      "battleTurn": 236,
+      "side": "defender",
+      "binding": {
+        "battleFormationId": "formation.8",
+        "formationId": "formation.8",
+        "armyId": "army.8"
+      },
+      "formation": {
+        "id": "formation.8",
+        "unitId": "unit.scout",
+        "strength": 3,
+        "maxStrength": 20,
+        "morale": 63,
+        "fatigue": 20,
+        "row": 0,
+        "column": 2,
+        "attack": 9,
+        "armor": 2,
+        "initiative": 10,
+        "range": 2,
+        "ward": 0,
+        "members": [
+          0,
+          1,
+          2
+        ],
+        "cohesion": 100,
+        "position": {
+          "forward": 0,
+          "lateral": 0
+        }
+      },
+      "expected": {
+        "attack": 9,
+        "armor": 2,
+        "initiative": 10,
+        "range": 2,
+        "moraleCap": 59,
+        "maxStrength": 20
+      },
+      "different": [
+        [
+          "moraleCap",
+          59
+        ]
+      ],
+      "snapshot": {
+        "formationId": "formation.8",
+        "trainingIds": [
+          "training.field_habits",
+          "training.pressure_drill"
+        ],
+        "traditionIds": []
+      },
+      "leaders": {
+        "attack": 0,
+        "armor": 0
+      },
+      "effects": {
+        "attack": 0,
+        "armor": 0,
+        "movement": 0
+      },
+      "training": {
+        "food": 0,
+        "industry": 0,
+        "coin": 0,
+        "knowledge": 0,
+        "attack": 2,
+        "armor": 0,
+        "initiative": 0,
+        "range": 0,
+        "morale": 4
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "path": "docs/hermes-analysis/campaigns/runs/B-tiny4-seed74-v2/final.json.gz",
+  "turn": 252,
+  "failure": "Error: Invalid save: battle formation differs from unit content",
+  "mismatches": [
+    {
+      "battleId": "battle.601",
+      "battleTurn": 229,
+      "formationId": "formation.111",
+      "unitId": "unit.guard",
+      "defending": true,
+      "expected": {
+        "attack": 17,
+        "armor": 6,
+        "initiative": 6,
+        "range": 0,
+        "moraleCeiling": 79,
+        "maxStrength": 60
+      },
+      "actual": {
+        "attack": 17,
+        "armor": 6,
+        "initiative": 6,
+        "range": 0,
+        "morale": 83,
+        "maxStrength": 60
+      },
+      "development": {
+        "formationId": "formation.111",
+        "trainingIds": [
+          "training.field_habits",
+          "training.pressure_drill"
+        ],
+        "traditionIds": [
+          "tradition.open_ledgers"
+        ]
+      },
+      "characterSnapshots": [
+        {
+          "characterId": "character.119",
+          "armyId": "army.111",
+          "factionId": "faction.reedbound_council",
+          "name": "Sori Lowwater 2",
+          "definitionId": "character.marshal",
+          "skillId": "skill.steadfast",
+          "experience": 20,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 1,
+            "armor": 1
+          },
+          "rallyRestore": 17,
+          "learnedSkillIds": []
+        }
+      ],
+      "usedAbilities": []
+    },
+    {
+      "battleId": "battle.601",
+      "battleTurn": 229,
+      "formationId": "formation.121",
+      "unitId": "unit.halberdier",
+      "defending": true,
+      "expected": {
+        "attack": 21,
+        "armor": 8,
+        "initiative": 4,
+        "range": 1,
+        "moraleCeiling": 84,
+        "maxStrength": 80
+      },
+      "actual": {
+        "attack": 21,
+        "armor": 8,
+        "initiative": 4,
+        "range": 1,
+        "morale": 88,
+        "maxStrength": 80
+      },
+      "development": {
+        "formationId": "formation.121",
+        "trainingIds": [
+          "training.field_habits"
+        ],
+        "traditionIds": [
+          "tradition.open_ledgers"
+        ]
+      },
+      "characterSnapshots": [
+        {
+          "characterId": "character.119",
+          "armyId": "army.111",
+          "factionId": "faction.reedbound_council",
+          "name": "Sori Lowwater 2",
+          "definitionId": "character.marshal",
+          "skillId": "skill.steadfast",
+          "experience": 20,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 1,
+            "armor": 1
+          },
+          "rallyRestore": 17,
+          "learnedSkillIds": []
+        }
+      ],
+      "usedAbilities": []
+    }
+  ]
+}

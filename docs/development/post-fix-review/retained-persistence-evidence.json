@@ -1,0 +1,73 @@
+{
+  "delegation": "deleg_a5c1f468",
+  "task": 1,
+  "filesRetained": 7,
+  "artifacts": [
+    {
+      "name": "before-hashes.json",
+      "source": "/tmp/theandril-persistence-rereview-hxguo7sl/before-hashes.json",
+      "retained": "/home/telephoneheater/Work/Theandril/docs/development/post-fix-review/persistence-evidence/before-hashes.json",
+      "bytes": 1032,
+      "sha256": "f1333e4f75ed54967a114f9da42462de4c483e5fb1bd6045261bfbb6bbb469bf"
+    },
+    {
+      "name": "vitest.config.mts",
+      "source": "/tmp/theandril-persistence-rereview-hxguo7sl/vitest.config.mts",
+      "retained": "/home/telephoneheater/Work/Theandril/docs/development/post-fix-review/persistence-evidence/vitest.config.mts",
+      "bytes": 417,
+      "sha256": "28146147cd8b56cb05c9e11f48074cd2e4e58c1f240c615adf64c0533b748b57"
+    },
+    {
+      "name": "tests.json",
+      "source": "/tmp/theandril-persistence-rereview-hxguo7sl/tests.json",
+      "retained": "/home/telephoneheater/Work/Theandril/docs/development/post-fix-review/persistence-evidence/tests.json",
+      "bytes": 18754,
+      "sha256": "170690b1ec6f15fcc0e5ef8a07d1ae46677370db1933b7c21b67102b2a73ef3d"
+    },
+    {
+      "name": "probes.mts",
+      "source": "/tmp/theandril-persistence-rereview-hxguo7sl/probes.mts",
+      "retained": "/home/telephoneheater/Work/Theandril/docs/development/post-fix-review/persistence-evidence/probes.mts",
+      "bytes": 12132,
+      "sha256": "84949435d5721014c76c418b7eb3c12f0e1b4e05bf2981c871aa3f982ce1c235"
+    },
+    {
+      "name": "probes.json",
+      "source": "/tmp/theandril-persistence-rereview-hxguo7sl/probes.json",
+      "retained": "/home/telephoneheater/Work/Theandril/docs/development/post-fix-review/persistence-evidence/probes.json",
+      "bytes": 3149,
+      "sha256": "39071caef8e68aca60bedd29041a3ba53e3dbe10dfd203a0c448102a421723fd"
+    },
+    {
+      "name": "tsconfig.json",
+      "source": "/tmp/theandril-persistence-rereview-hxguo7sl/tsconfig.json",
+      "retained": "/home/telephoneheater/Work/Theandril/docs/development/post-fix-review/persistence-evidence/tsconfig.json",
+      "bytes": 351,
+      "sha256": "ebbe2907a9ae3467c235c65b5ed5d242157111819ee90e6ddc778c4564fc5dc8"
+    },
+    {
+      "name": "final-check.json",
+      "source": "/tmp/theandril-persistence-rereview-hxguo7sl/final-check.json",
+      "retained": "/home/telephoneheater/Work/Theandril/docs/development/post-fix-review/persistence-evidence/final-check.json",
+      "bytes": 650,
+      "sha256": "d14b0af474036f32d41f048691322f90b75e901169fc721650b9a8f1c2696fe4"
+    }
+  ],
+  "independentTestsRecounted": {
+    "passed": 52,
+    "total": 52,
+    "files": 5
+  },
+  "independentProbesRecounted": {
+    "passed": 14,
+    "total": 14,
+    "uniqueNames": 14
+  },
+  "databaseCleanup": {
+    "reviewerReportVerifiedFromRetainedResults": true,
+    "deleted": 14,
+    "noRemainingDatabases": true,
+    "parentReranDatabaseChecks": false
+  },
+  "parentScope": "Copied and byte-verified only the seven named temporary review artifacts; recounted existing JSON results. No tests, probes, browser activity, current-source or all-artifact freshness sweep performed."
+}

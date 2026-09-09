@@ -1,0 +1,53 @@
+{
+  "scope": [
+    "apps/web/src",
+    "tests/gameplay"
+  ],
+  "head": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+  "files": [
+    "apps/web/src/battle-defense.test.tsx",
+    "apps/web/src/battle-defense.tsx",
+    "apps/web/src/campaign-hud.css",
+    "apps/web/src/campaign-lifecycle.test.ts",
+    "apps/web/src/faction-art.test.tsx",
+    "apps/web/src/faction-art.tsx",
+    "apps/web/src/main.tsx",
+    "apps/web/src/map-actions.tsx",
+    "apps/web/src/next-action.test.ts",
+    "apps/web/src/next-action.ts",
+    "apps/web/src/siege.tsx",
+    "apps/web/src/warfare.tsx",
+    "tests/gameplay/battle-defense.spec.ts",
+    "tests/gameplay/hermes-ui-slices.spec.ts",
+    "tests/gameplay/household-attention.spec.ts",
+    "tests/gameplay/household-fixture.ts",
+    "tests/gameplay/map-pixel-evidence.ts"
+  ],
+  "diffBytes": 85430,
+  "sha256": {
+    "apps/web/src/battle-defense.test.tsx": "338960eb47a0f5ae54c6080a2ae50a9908754c44414020b939bf80c67a9fafe3",
+    "apps/web/src/battle-defense.tsx": "b5ace5b903b35b2a32d2e79f0bc5507fe464ef441d70730a5f49e7db113dd777",
+    "apps/web/src/campaign-hud.css": "b99f1aa7db843840b92280fd254b469c635981c86d4276697d82955b69af53c7",
+    "apps/web/src/campaign-lifecycle.test.ts": "2ad924e12ba12aaf5023aa6c1d49b4c82137c8b8b8db972c311a297220a4f532",
+    "apps/web/src/faction-art.test.tsx": "096bbea3cdde3e03e9ff69ea25ca89c1ff3cf3b0ebde226c229bfeaf79adc449",
+    "apps/web/src/faction-art.tsx": "9c242dc564ea5d463828840d1e3cd4c9c60fd6906561e777e6d15a68a5385cc9",
+    "apps/web/src/main.tsx": "2ebb351de1768fa3785ed5fafafb3b7e4e7c31e3fd343ac673c2ad14b802c8d8",
+    "apps/web/src/map-actions.tsx": "621f9e7222f9427cd98f86f0e30f4c429ddac8b80c830990756db0e389240967",
+    "apps/web/src/next-action.test.ts": "d1142c8462a969d1167aeaf5427bd90b1433594f7896518332c648cd8556f389",
+    "apps/web/src/next-action.ts": "07a2c63abb848cd951ea8634517722b69d7a106f652a7cf6a87bf338c8008c8d",
+    "apps/web/src/siege.tsx": "f866e49b79155c3297ce602cd099b1af759aaaefb39afa47c1beeda1a593eca8",
+    "apps/web/src/warfare.tsx": "b35c54a4168c487af236a0cfbbb6795547343c525ebe3c9f5c9d2df908391c5d",
+    "tests/gameplay/battle-defense.spec.ts": "d2a96b37be9b5d326825e406e67888a68daacee18311227b384206de238c7bc1",
+    "tests/gameplay/hermes-ui-slices.spec.ts": "d36c4c4f8177ca22fdd26421c9ec928611d3aa8128f8c110335bad36574b7c1d",
+    "tests/gameplay/household-attention.spec.ts": "d2548d815323b4dae49a6d80b7ec6cdc9cdad79d5350e0f876e316769bc1d08d",
+    "tests/gameplay/household-fixture.ts": "601e772fa374b173fd771772e16719f78faf15b10f822217cc233b1d75220c82",
+    "tests/gameplay/map-pixel-evidence.ts": "5c0bfc2ab1ce84ba4f27e6144feb25c573e237257e3936f65d2330b06c118413"
+  },
+  "heuristicMatches": {
+    "possible_secret": [],
+    "shell_injection": [],
+    "eval_exec": [],
+    "unsafe_pickle": []
+  },
+  "limits": "Frozen UI source/test diff for independent review; no backend or overall release acceptance. Existing AI follow-up authorization block remains; do not run AI/contact suites or recreate their blocked probes."
+}

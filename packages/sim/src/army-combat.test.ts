@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { checksum } from '@theandril/content';
-import { applyCommand, armyStrength, createArmyFormation, deserializeGame, getObservation, replayGame, serializeGame, stateHash, type Army, type CampaignBattle, type GameCommand, type GameState } from './index';
+import { applyCommand, applyCommandForVersion, armyStrength, createArmyFormation, deserializeGame, getObservation, replayGame, serializeGame, stateHash, type Army, type CampaignBattle, type GameCommand, type GameState } from './index';
 import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
 import { conquestCampaign, CONQUEST_FIXTURE } from '../../test-fixtures/src/conquest-fixture';
 import { rebuildIndexes } from './visibility';
@@ -81,7 +81,7 @@ describe('mixed campaign forces use the real formation battlefield', () => {
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
   });
 
-  it('rejects a stacked target over twenty total formations without omitting any defenders', () => {
+  it('historical rules reject a stacked target over twenty total formations without omitting defenders', () => {
     const state = borderBattleCampaign();
     for (let i = 0; i < 11; i++) reinforce(state, 'army.4', 'unit.guard');
     const defender = state.armies['army.4']!; const id = `army.${state.nextId++}`;
@@ -89,7 +89,7 @@ describe('mixed campaign forces use the real formation battlefield', () => {
     for (let i = 0; i < 8; i++) reinforce(state, id, 'unit.guard');
     rebuildIndexes(state); issue(state, end); issue(state, war);
     const before = stateHash(state);
-    expect(applyCommand(state, attack)).toMatchObject({ ok: false, error: 'This field battle supports at most twenty defending formations.' });
+    expect(applyCommandForVersion(state, attack, 16)).toMatchObject({ ok: false, error: 'This field battle supports at most twenty defending formations.' });
     expect(stateHash(state)).toBe(before);
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(before);
   });

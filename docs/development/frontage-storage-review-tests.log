@@ -1,0 +1,15 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/sim/src/battle-frontage.test.ts (9 tests) 229ms
+ ✓ packages/persistence/src/persistence.test.ts (12 tests) 673ms
+ ✓ packages/persistence/src/current-origin.test.ts (2 tests) 176ms
+ ✓ packages/persistence/src/campaign-storage.test.ts (21 tests) 2003ms
+   ✓ rotating a long abandoned campaign limits cleanup per commit and safely drains deferred orphan chains  443ms
+
+ Test Files  4 passed (4)
+      Tests  44 passed (44)
+   Start at  02:38:43
+   Duration  2.47s (transform 570ms, setup 0ms, import 986ms, tests 3.08s, environment 0ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/frontage-storage-review-tests.json

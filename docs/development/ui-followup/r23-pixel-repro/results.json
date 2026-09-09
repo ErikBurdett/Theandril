@@ -1,0 +1,158 @@
+{
+  "config": {
+    "argv": [
+      "/home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node",
+      "/home/telephoneheater/Work/Theandril/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "docs/development/ui-followup/playwright.config.ts",
+      "hermes-ui-slices",
+      "--grep",
+      "R23"
+    ],
+    "configFile": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/playwright.config.ts",
+    "rootDir": "/home/telephoneheater/Work/Theandril/tests/gameplay",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/r23-pixel-repro",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ui-followup-5193",
+        "name": "ui-followup-5193",
+        "testDir": "/home/telephoneheater/Work/Theandril/tests/gameplay",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/r23-pixel-repro/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "hermes-ui-slices.spec.ts",
+      "file": "hermes-ui-slices.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "R23 repeated public loads and cross-size imports retain one responsive map control and canvas",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7850,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"stage\":\"generated-small12\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    },
+                    {
+                      "text": "{\"stage\":\"load-1\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    },
+                    {
+                      "text": "{\"stage\":\"load-2\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    },
+                    {
+                      "text": "{\"stage\":\"load-3\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    },
+                    {
+                      "text": "{\"stage\":\"load-4\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    },
+                    {
+                      "text": "{\"stage\":\"import-1-small\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    },
+                    {
+                      "text": "{\"stage\":\"import-2-tiny\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    },
+                    {
+                      "text": "{\"stage\":\"import-3-small\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    },
+                    {
+                      "text": "{\"stage\":\"import-4-tiny\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    },
+                    {
+                      "text": "{\"stage\":\"failed-import\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    },
+                    {
+                      "text": "{\"stage\":\"after-battle\",\"controls\":1,\"canvases\":1,\"mapNodes\":1,\"debugHookPresent\":true,\"listeners\":{\"window\":17,\"document\":7,\"document.querySelector(\\\"canvas\\\")\":12}}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-09T08:22:00.704Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "863c20d5e8acd491b22f-dd304ecd567264193b2f",
+          "file": "hermes-ui-slices.spec.ts",
+          "line": 22,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-09T08:22:00.332Z",
+    "duration": 8406.703000000001,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

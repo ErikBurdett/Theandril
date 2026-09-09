@@ -17,6 +17,8 @@ export type MapActionsProps = {
   onSelect: (id: string) => void;
   tabs: readonly MapActionTab[];
   initialTab?: string;
+  /** Attention shortcuts reveal the requested pane, not offscreen context chrome. */
+  revealContent?: boolean;
   summary?: ReactNode;
   onClose: (reason: 'close' | 'escape' | 'outside') => void;
   returnFocus?: HTMLElement | null;
@@ -138,7 +140,16 @@ export function MapActions(props: MapActionsProps) {
     else if (!opener.current?.isConnected) opener.current = null;
     heading.current?.focus({ preventScroll: true });
   }, [sessionKey, suspended]);
-  useEffect(() => { body.current?.scrollTo({ top: 0 }); }, [selectionKey, active?.id]);
+  // Only explicit attention reveals follow the final measured HUD allocation;
+  // ordinary map inspectors retain their scroll position when the HUD resizes.
+  const revealHeight = props.revealContent ? position.maxHeight : 0;
+  useEffect(() => {
+    const scroller = body.current, pane = scroller?.querySelector<HTMLElement>('[role="tabpanel"]');
+    if (!scroller) return;
+    const top = props.revealContent && active?.id === initialTab && pane
+      ? scroller.scrollTop + pane.getBoundingClientRect().top - scroller.getBoundingClientRect().top : 0;
+    scroller.scrollTo({ top });
+  }, [selectionKey, active?.id, initialTab, props.revealContent, revealHeight]);
 
   const dismiss = (reason: 'close' | 'escape' | 'outside') => {
     latest.current.onClose(reason);

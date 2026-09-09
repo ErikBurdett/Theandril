@@ -1,0 +1,35 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved field attack against 21 formations using an unchanged detached observation 72ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved naval attack against 21 hulls through the whole turn planner 42ms
+ × packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > declares war on a contestable oversized stack before asking a fresh observation to authorize attack 11ms
+   → expected true to be false // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > declares war on a contestable oversized stack before asking a fresh observation to authorize attack
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ packages/ai/src/battle-defense.test.ts:87:62
+     85|     const first = planTurn(view);
+     86|     expect(first).toContainEqual(expect.objectContaining({ type: 'decl…
+     87|     expect(first.some(command => command.type === 'attack')).toBe(fals…
+       |                                                              ^
+     88|     for (const command of first) issue(state, command);
+     89|     const next = getObservation(state, state.turnOwnerId);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  02:53:45
+   Duration  662ms (transform 357ms, setup 0ms, import 467ms, tests 126ms, environment 0ms)
+

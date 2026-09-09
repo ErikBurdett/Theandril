@@ -141,3 +141,34 @@ Modern individual combat retains wall armor and braced cohesion. Validate siege
 policy with real battles at different observed defense levels; an ordinary
 numerical advantage is not sufficient evidence for an early assault. Keep the
 historical command and combat fixtures exact when changing current AI choices.
+
+## Sparse first-contact operations
+
+Diagnose the actual basin and every observer before tuning exploration weights.
+An ocean-capable hull in an enclosed basin cannot create an exit; a land scout's
+brief visit to a distant coast does not guarantee a foreign observer arrives then.
+Retain the failed generated input and use ordinary observed plans for all seats.
+
+For the existing broadest realm scale, diversify an isolated realm's maritime
+access with at most one caravan operation and two funded harbors. Unknown basin
+connectivity permits an explicitly speculative second outlet, not a claim that
+hidden water connects or that a foreign realm is there. Retain only four observed
+site candidates and query their real routes without raising the local search cap.
+Use the canonical saved movement route for transit; do not overwrite it with local
+exploration or board its caravan on an unrelated ferry. Founding, harbor work,
+research and hull production still require their real quotes and payments.
+
+Scope an outlet's scout reserve to its observed basin. An existing inland hull
+must not make a second outlet's legal48-coin scout lose its purse to caravans or
+long-term project savings. End that reserve when a suitable local hull operates,
+is queued, or the actual production quote is blocked. Preserve the unchanged
+Standard4/100 and Standard24/Huge32/60 contact gates and the historical default
+navigation oracle. Passing these gates completes a contact slice, not R06's full
+war, theater or victory-project counterplay agenda.
+
+When integrating a new canonical defending-contingent preview, check that the
+shared movement query agrees with `battleDefense` before bypassing any blocker.
+Keep strategic reserves in threat estimates and preserve no-preview historical
+rejection. If direct attack accepts a contingent while the movement query still
+rejects every stack above20, report that simulation interface mismatch separately
+from a proven contact improvement; do not conceal it with truncated observations.

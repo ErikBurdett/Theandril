@@ -1,0 +1,717 @@
+{
+  "config": {
+    "argv": [
+      "/home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node",
+      "/home/telephoneheater/Work/Theandril/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "docs/development/ui-followup/playwright.config.ts",
+      "hermes-ui-slices",
+      "household-attention",
+      "battle-defense",
+      "next-action.spec.ts",
+      "map-actions.spec.ts",
+      "land-query.spec.ts",
+      "conquest.spec.ts",
+      "campaign-hud.spec.ts",
+      "battle-camera.spec.ts",
+      "--list"
+    ],
+    "configFile": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/playwright.config.ts",
+    "rootDir": "/home/telephoneheater/Work/Theandril/tests/gameplay",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "ui-followup-5193",
+        "name": "ui-followup-5193",
+        "testDir": "/home/telephoneheater/Work/Theandril/tests/gameplay",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/telephoneheater/Work/Theandril/docs/development/ui-followup/artifacts/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "battle-camera.spec.ts",
+      "file": "battle-camera.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "390px battle inspection enlarges real soldiers, pans within the field and preserves paused orders and picks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1ec70b2863fcdb41ed2d-3c5865205a4309feb969",
+          "file": "battle-camera.spec.ts",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "battle-defense.spec.ts",
+      "file": "battle-defense.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "R03 public attack previews the canonical contingent and leaves its reserve on the map",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "53f2837ea9087a296b10-5119c0461b6d6da1fbc9",
+          "file": "battle-defense.spec.ts",
+          "line": 59,
+          "column": 1
+        },
+        {
+          "title": "R03 siege preview fits 390px and desktop public assaults clear reserves before capture",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "53f2837ea9087a296b10-b2e69eac90454306f8e6",
+          "file": "battle-defense.spec.ts",
+          "line": 80,
+          "column": 1
+        },
+        {
+          "title": "R03 narrow public assaults complete occupation at 390px without intercepted controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "53f2837ea9087a296b10-a416eef6ae23198135b3",
+          "file": "battle-defense.spec.ts",
+          "line": 118,
+          "column": 39
+        },
+        {
+          "title": "R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "53f2837ea9087a296b10-8388fee94f4b3c79ac2c",
+          "file": "battle-defense.spec.ts",
+          "line": 118,
+          "column": 39
+        }
+      ]
+    },
+    {
+      "title": "campaign-hud.spec.ts",
+      "file": "campaign-hud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "the full-width map has top/bottom HUD, working floating windows and a compact unit menu",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5e28200434e45345d4f9-1eeb71be101fbe6a06d5",
+          "file": "campaign-hud.spec.ts",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "title": "town popup retains production and land actions while full orders and roster stay separate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5e28200434e45345d4f9-ecacb749e4e1087e242e",
+          "file": "campaign-hud.spec.ts",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "390px enlarged-text HUD and modal controls stay readable and close without clearing selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5e28200434e45345d4f9-fd7748b09a93d390b1d5",
+          "file": "campaign-hud.spec.ts",
+          "line": 91,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "conquest.spec.ts",
+      "file": "conquest.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "708c62840f0106d7d1c6-bb695d3325c046cd18b0",
+          "file": "conquest.spec.ts",
+          "line": 33,
+          "column": 1
+        },
+        {
+          "title": "confirm razing and resettle the visible ruins with a normally recruited caravan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "708c62840f0106d7d1c6-8a9465f835ba39da8fea",
+          "file": "conquest.spec.ts",
+          "line": 73,
+          "column": 1
+        },
+        {
+          "title": "defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "708c62840f0106d7d1c6-d57187eb376a69e58da3",
+          "file": "conquest.spec.ts",
+          "line": 136,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "hermes-ui-slices.spec.ts",
+      "file": "hermes-ui-slices.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "R23 repeated public loads and cross-size imports retain one responsive map control and canvas",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "863c20d5e8acd491b22f-dd304ecd567264193b2f",
+          "file": "hermes-ui-slices.spec.ts",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "title": "R18 paid Waykeeper resolves shared art for faction.ashen_compact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "863c20d5e8acd491b22f-3c0be3ad55542c81fc5c",
+          "file": "hermes-ui-slices.spec.ts",
+          "line": 125,
+          "column": 3
+        },
+        {
+          "title": "R18 paid Waykeeper resolves shared art for faction.reedbound_council",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "863c20d5e8acd491b22f-55ae7133bed0ad657b99",
+          "file": "hermes-ui-slices.spec.ts",
+          "line": 125,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "household-attention.spec.ts",
+      "file": "household-attention.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a88d3ab5cb0964c042eb-292982def09b6283fccb",
+          "file": "household-attention.spec.ts",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "title": "R07 2-town labor exception opens the exact hearth in one activation at 390px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a88d3ab5cb0964c042eb-ac3c7036453f4db65964",
+          "file": "household-attention.spec.ts",
+          "line": 53,
+          "column": 3
+        },
+        {
+          "title": "R07 10-town labor exception opens the exact hearth in one activation at 390px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a88d3ab5cb0964c042eb-035828c808194090b9a4",
+          "file": "household-attention.spec.ts",
+          "line": 53,
+          "column": 3
+        },
+        {
+          "title": "R07 40-town labor exception opens the exact hearth in one activation at 390px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a88d3ab5cb0964c042eb-c074517466eed6cb2c40",
+          "file": "household-attention.spec.ts",
+          "line": 53,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "land-query.spec.ts",
+      "file": "land-query.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "selected-town queries are reused for tile clicks and fast registry changes never retain another town’s options",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0e88577233e3848b361f-bd76927894e2e9c97726",
+          "file": "land-query.spec.ts",
+          "line": 71,
+          "column": 1
+        },
+        {
+          "title": "same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0e88577233e3848b361f-dd94415a525fb0536e06",
+          "file": "land-query.spec.ts",
+          "line": 99,
+          "column": 1
+        },
+        {
+          "title": "a mature thirty-two-town empire transfers summaries and opens only the searched town detail",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0e88577233e3848b361f-9a875a47a08d15f4195d",
+          "file": "land-query.spec.ts",
+          "line": 148,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "map-actions.spec.ts",
+      "file": "map-actions.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a real canvas caravan founds, builds and continues in the same full-orders controls without issuing inspection orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "09280ae976715520e6bb-b56262ceb490e476d3ef",
+          "file": "map-actions.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "09280ae976715520e6bb-71622f0b7411402b3c0d",
+          "file": "map-actions.spec.ts",
+          "line": 93,
+          "column": 1
+        },
+        {
+          "title": "map-only diplomacy uses the one real encountered-faction consumer and ordinary war command",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "09280ae976715520e6bb-1802ac9b2d31cdc641c3",
+          "file": "map-actions.spec.ts",
+          "line": 148,
+          "column": 1
+        },
+        {
+          "title": "390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "09280ae976715520e6bb-5f2229a8fc5e44c91ac7",
+          "file": "map-actions.spec.ts",
+          "line": 174,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "next-action.spec.ts",
+      "file": "next-action.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "655e7220bbb90e50e0e9-6068bf9e8d8455b8d4ef",
+          "file": "next-action.spec.ts",
+          "line": 49,
+          "column": 1
+        },
+        {
+          "title": "paused routes need attention while standing journeys, stationary missions and embarked troops are skipped",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "655e7220bbb90e50e0e9-2886c6e65859a123514c",
+          "file": "next-action.spec.ts",
+          "line": 89,
+          "column": 1
+        },
+        {
+          "title": "remapped shortcuts persist and previous/next touch controls remain usable at narrow width",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ui-followup-5193",
+              "projectName": "ui-followup-5193",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "655e7220bbb90e50e0e9-e1c96ebdd7aa15027eb1",
+          "file": "next-action.spec.ts",
+          "line": 130,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-09T08:31:13.023Z",
+    "duration": 127.434,
+    "expected": 0,
+    "skipped": 28,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

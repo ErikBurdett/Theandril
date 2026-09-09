@@ -7,7 +7,6 @@ import { createJournal, replayArchive, resumeJournal, type CampaignJournal } fro
 import { checksum } from '@theandril/content';
 import { SaveStore, serializeCampaign, deserializeCampaign, exportSave, importSave } from './index';
 import { historyDigest, logicalCampaignBytes, MAX_CHUNK_BYTES, MAX_CHUNK_RECORDS, MAX_GARBAGE_BLOBS_PER_COMMIT } from './campaign-storage';
-import { MAX_SAVE_BYTES } from './size';
 import preExpansion from '../../chronicle/src/fixtures/v12-faction-history.json';
 import preBattle from '../../chronicle/src/fixtures/v13-battle-history.json';
 
@@ -237,12 +236,96 @@ test('rotating a long abandoned campaign limits cleanup per commit and safely dr
   expect(await db.table('campaignBlobs').count()).toBe(4);
 });
 
-test('the actual64MiB UTF-8 history limit rejects an oversized suffix before touching recovery generations', async () => {
+test('v2 rejects oversized fragments; legacy reads survive but cannot migrate into an unreadable v2 generation', async () => {
+  const db = store(); const { game, journal } = campaign();
+  await db.saveCampaign(game, journal, 'auto');
+  journal.record(game, { type: 'move', factionId: '炭'.repeat(1_500_000), armyId: 'missing', target: 0 });
+  const record = JSON.stringify(journal.materialize().records[0]);
+  const row = (await generations(db))[0]!;
+  const manifest = JSON.parse((await db.table('campaignManifests').get(row.id)).payload);
+  const pieces: string[] = [];
+  for (let from = 0; from < record.length; from += 32_000) pieces.push(record.slice(from, from + 32_000));
+  let head: string | null = null, historyStoredBytes = 0;
+  for (const [part, json] of pieces.entries()) {
+    const payload = JSON.stringify({ version: 1, type: 'fragment', originDigest: row.originDigest, previousDigest: head,
+      from: 0, to: Number(part === pieces.length - 1), sequence: 1, part, parts: pieces.length, json });
+    const digest = await historyDigest(payload);
+    const metadata = { digest, type: 'fragment', previousDigest: head, refs: 1, byteLength: Buffer.byteLength(payload), from: 0, to: Number(part === pieces.length - 1) };
+    await db.table('campaignBlobs').put({ ...metadata, metadataChecksum: checksum(JSON.stringify(metadata)) });
+    head = digest; historyStoredBytes += Buffer.byteLength(payload);
+    await db.table('campaignPayloads').bulkPut([0, 1, 2].map(replica => ({ digest: head, replica, payload })));
+  }
+  manifest.headDigest = head; manifest.recordCount = 1; manifest.recordBytes = Buffer.byteLength(record);
+  manifest.historyStoredBytes = historyStoredBytes; manifest.historyBlobCount = pieces.length;
+  manifest.logicalBytes = logicalCampaignBytes(manifest.snapshot, manifest.header, manifest.originEscapedBytes, manifest.recordBytes, 1);
+  const payload = JSON.stringify(manifest), manifestDigest = await historyDigest(payload);
+  await db.table('campaignManifests').put({ generationId: row.id, payload });
+  const { id, metadataChecksum: _old, ...body } = await db.table('campaignGenerations').get(row.id);
+  const updated = { ...body, headDigest: head, manifestDigest };
+  await db.table('campaignGenerations').put({ id, ...updated, metadataChecksum: checksum(JSON.stringify(updated)) });
+  await expect(db.loadLatestCampaign('auto')).rejects.toThrow(/No valid save/);
+  // The same history is legal under the old v1 policy. Preserve read/export compatibility,
+  // but never commit a v2 head whose shared prefix would fail the v2 reader.
+  const { historyStoredBytes: _bytes, historyBlobCount: _blobs, ...legacy } = manifest;
+  const oldPayload = JSON.stringify({ ...legacy, version: 1 });
+  const legacyRow = { ...updated, manifestDigest: await historyDigest(oldPayload) };
+  await db.table('campaignManifests').put({ generationId: id, payload: oldPayload });
+  await db.table('campaignGenerations').put({ id, ...legacyRow, metadataChecksum: checksum(JSON.stringify(legacyRow)) });
+  const loaded = await db.loadLatestCampaign('auto');
+  expect(loaded.journal.materialize()).toEqual(journal.materialize());
+  expect(deserializeCampaign(await db.loadLatest('auto')).archive).toEqual(journal.materialize());
+  const before = await db.table('campaignGenerations').toArray();
+  end(loaded.game, loaded.journal);
+  await expect(db.saveCampaign(loaded.game, loaded.journal, 'auto')).rejects.toThrow(/legacy.*record.*4 MiB limit/i);
+  expect(await db.table('campaignGenerations').toArray()).toEqual(before);
+  expect((await db.loadLatestCampaign('auto')).journal.materialize()).toEqual(journal.materialize());
+});
+
+test('a v1 manifest stays readable and appends via v2 without rewriting its immutable prefix', async () => {
+  const db = store(); const { game, journal } = campaign(); end(game, journal);
+  await db.saveCampaign(game, journal, 'auto');
+  const row = (await generations(db))[0]!;
+  const { historyStoredBytes: _bytes, historyBlobCount: _blobs, ...legacy } = JSON.parse((await db.table('campaignManifests').get(row.id)).payload);
+  const payload = JSON.stringify({ ...legacy, version: 1 });
+  const manifestDigest = await historyDigest(payload);
+  await db.table('campaignManifests').put({ generationId: row.id, payload });
+  const { id, metadataChecksum: _seal, ...body } = await db.table('campaignGenerations').get(row.id);
+  const updated = { ...body, manifestDigest };
+  await db.table('campaignGenerations').put({ id, ...updated, metadataChecksum: checksum(JSON.stringify(updated)) });
+  const copies = await db.table('campaignPayloads').toArray();
+  const loaded = await db.loadLatestCampaign('auto');
+  expect(loaded.journal.materialize()).toEqual(journal.materialize());
+  end(loaded.game, loaded.journal); await db.saveCampaign(loaded.game, loaded.journal, 'auto');
+  expect(db.lastCampaignSaveStats?.suffixRecords).toBe(1);
+  for (const copy of copies) expect(await db.table('campaignPayloads').get([copy.digest, copy.replica])).toEqual(copy);
+  const latest = (await generations(db)).at(-1)!;
+  const manifest = JSON.parse((await db.table('campaignManifests').get(latest.id)).payload);
+  expect(manifest).toMatchObject({ version: 2, historyBlobCount: 2 });
+  expect(stateHash(replayArchive((await db.loadLatestCampaign('auto')).journal.materialize()))).toBe(stateHash(loaded.game));
+});
+
+test.each(['historyStoredBytes', 'historyBlobCount'] as const)('v2 %s is verified, not trusted when a manifest is resealed', async field => {
+  const db = store(); const { game, journal } = campaign();
+  end(game, journal); await db.saveCampaign(game, journal, 'auto');
+  end(game, journal); await db.saveCampaign(game, journal, 'auto');
+  const row = (await generations(db)).at(-1)!;
+  const manifest = JSON.parse((await db.table('campaignManifests').get(row.id)).payload);
+  manifest[field]--;
+  const payload = JSON.stringify(manifest), manifestDigest = await historyDigest(payload);
+  await db.table('campaignManifests').put({ generationId: row.id, payload });
+  const { id, metadataChecksum: _seal, ...body } = await db.table('campaignGenerations').get(row.id);
+  const updated = { ...body, manifestDigest };
+  await db.table('campaignGenerations').put({ id, ...updated, metadataChecksum: checksum(JSON.stringify(updated)) });
+  expect((await db.loadLatestCampaign('auto')).game.turn).toBe(game.turn - 1);
+  expect(await generations(db)).toHaveLength(2);
+});
+
+test('a single 4-MiB record limit rejects oversized suffixes without touching recovery generations', async () => {
   const db = store(); const { game, journal } = campaign(); end(game, journal); await db.saveCampaign(game, journal, 'auto');
   const rows = await db.table('campaignGenerations').toArray(); const copies = await db.table('campaignPayloads').toArray();
-  const result = journal.record(game, { type: 'move', factionId: '炭'.repeat(Math.floor(MAX_SAVE_BYTES / 3) + 1), armyId: 'missing', target: 0 });
+  const result = journal.record(game, { type: 'move', factionId: '炭'.repeat(Math.floor(4 * 1024 * 1024 / 3) + 1), armyId: 'missing', target: 0 });
   expect(result.ok).toBe(false);
-  await expect(db.saveCampaign(game, journal, 'auto')).rejects.toThrow(/64 MiB limit/);
+  await expect(db.saveCampaign(game, journal, 'auto')).rejects.toThrow(/record.*4 MiB limit/i);
   expect(await db.table('campaignGenerations').toArray()).toEqual(rows); expect(await db.table('campaignPayloads').toArray()).toEqual(copies);
   expect((await db.loadLatestCampaign('auto')).journal.recordCount).toBe(1);
 });

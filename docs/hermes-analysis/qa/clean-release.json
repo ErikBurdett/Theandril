@@ -1,0 +1,63 @@
+{
+  "revision": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+  "node": "v26.7.0",
+  "scope": "Fresh full committed archive and fresh node_modules; offline package store reused, host Node26 not CI Node22. Temporary tree removed after execution. No unit/browser tests rerun inside clean archive.",
+  "checks": [
+    {
+      "name": "install",
+      "command": [
+        "pnpm",
+        "install",
+        "--offline",
+        "--frozen-lockfile"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 0.902881383895874,
+      "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-install.log"
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "pnpm",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 8.03387999534607,
+      "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-typecheck.log"
+    },
+    {
+      "name": "lint",
+      "command": [
+        "pnpm",
+        "lint"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 5.783792018890381,
+      "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-lint.log"
+    },
+    {
+      "name": "content",
+      "command": [
+        "pnpm",
+        "content:validate"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 0.5280084609985352,
+      "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-content.log"
+    },
+    {
+      "name": "build",
+      "command": [
+        "pnpm",
+        "exec",
+        "turbo",
+        "run",
+        "build",
+        "--force"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 4.18876051902771,
+      "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-build.log"
+    }
+  ]
+}

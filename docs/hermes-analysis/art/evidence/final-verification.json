@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "catalogSha256": "e5a9b72658ab21b83e2a2b1dd7bbf07e2f7c0155b5baf9c97de5f03326d79630",
+  "approvedAssets": 545,
+  "frames": 1427,
+  "backlogRows": 27,
+  "priorityCounts": {
+    "P1": 11,
+    "P2": 11,
+    "P3": 5
+  },
+  "visualScope": {
+    "auditContactSheetsProduced": 17,
+    "auditContactSheetsActuallyOpened": 15,
+    "uniqueApprovedAssetSubjectsInOpenedSheets": 164,
+    "uniqueApprovedFramesInOpenedSheets": 236,
+    "additionalImagesActuallyOpened": 5,
+    "limits": "Representative current pixel inspection; no new visual approval, no full432-family/all1427-frame review, no animation playback or complete light/dark/game-background matrix, no fresh gameplay run by this subagent. Retained runtime screenshots remain historical; parent Waykeeper evidence is separately attributed."
+  },
+  "sourceImportPasses": 19,
+  "sourceValidationWarnings": 16,
+  "audioFilesFound": 0,
+  "starterAudioPrincipalOutputs": 93,
+  "pathResolution": [
+    {
+      "supplied": "/projects/BlenderArtFactory",
+      "exists": false
+    },
+    {
+      "supplied": "/pixel-art-factory",
+      "exists": false
+    },
+    {
+      "verifiedAlternative": "/home/telephoneheater/Projects/BlenderArtFactory",
+      "exists": true
+    },
+    {
+      "verifiedAlternative": "/home/telephoneheater/Projects/pixel-art-factory",
+      "exists": true
+    }
+  ],
+  "brokenReportLinks": [],
+  "trackedWorkingTreeDiffPathsAtVerification": [],
+  "deliverables": [
+    {
+      "path": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/art/art-report.md",
+      "bytes": 44981,
+      "sha256": "53c00c0b60f54c4070ada260db001279e1f9cd4d8e1d27affb4a0f34ecab2173"
+    },
+    {
+      "path": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/art/inventory.json",
+      "bytes": 4681508,
+      "sha256": "3b42b272875b08ea7c1791f76a061d898e8e43e60da205b43855f1619fd627c9"
+    },
+    {
+      "path": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/art/art-backlog.json",
+      "bytes": 63482,
+      "sha256": "7b643cbe8a7641e2dfc429260d6a76766bd0e4a7e2f421e58e0f391be1d94e11"
+    },
+    {
+      "path": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/art/art-backlog.csv",
+      "bytes": 45066,
+      "sha256": "e606ab2e9508c28011cf09ebf125319831ada5d273cd92f0202dbbb3d3a8e97a"
+    },
+    {
+      "path": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/art/factory-audit.json",
+      "bytes": 18367,
+      "sha256": "8e1026b5f5ff394e38d53006b527e1dac88cf61c83636f6926e167663c9fa112"
+    },
+    {
+      "path": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/art/evidence/visual-observations.json",
+      "bytes": 121867,
+      "sha256": "5193004b79c4b8e8e78730dd4d6f488bf94c23880dc8cdad31c6bddfaa0feb41"
+    }
+  ],
+  "scopeNote": "This verifies audit artifacts and the unchanged current catalog; it does not grant new visual approval, run animations, create audio, or constitute runtime/performance acceptance."
+}

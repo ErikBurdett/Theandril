@@ -1,0 +1,33 @@
+{
+  "scope": "Current local typecheck/lint/content/build only. No AI/contact tests, blocked probes, installs, publication or full-release acceptance.",
+  "stages": [
+    {
+      "stage": "typecheck",
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/development/ui-review-current/parent-typecheck.log"
+    },
+    {
+      "stage": "lint",
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/development/ui-review-current/parent-lint.log"
+    },
+    {
+      "stage": "content",
+      "command": "pnpm content:validate",
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/development/ui-review-current/parent-content.log"
+    },
+    {
+      "stage": "build",
+      "command": "pnpm build",
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/development/ui-review-current/parent-build.log"
+    }
+  ]
+}

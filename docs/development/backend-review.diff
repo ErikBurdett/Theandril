@@ -1,0 +1,652 @@
+diff --git c/packages/chronicle/src/development-compatibility.test.ts w/packages/chronicle/src/development-compatibility.test.ts
+index d2f384a..d03accd 100644
+--- c/packages/chronicle/src/development-compatibility.test.ts
++++ w/packages/chronicle/src/development-compatibility.test.ts
+@@ -1,7 +1,7 @@
+ import { gunzipSync } from 'node:zlib';
+ import { createHash } from 'node:crypto';
+ import { expect, test } from 'vitest';
+-import { deserializeGame, serializeGameForVersion, stateHashForVersion, serializeGame } from '@theandril/sim';
++import { deserializeGame, serializeGameForVersion, stateHashForVersion, serializeGame, SAVE_VERSION } from '@theandril/sim';
+ import { replayArchive, parseArchive, resumeJournal, type CampaignArchive } from './index';
+ import captured from './fixtures/v15-development-baseline.json';
+ const fixture = JSON.parse(gunzipSync(Buffer.from(captured.payload, 'base64')).toString('utf8')) as { version: number; contentHash: string; cases: Record<string, { save: string; hash: string; sha256: string; archive: CampaignArchive }> };
+@@ -14,7 +14,7 @@ test.each(Object.entries(fixture.cases))('genuine15 %s retains exact historical
+   expect(stateHashForVersion(game, 15)).toBe(entry.hash);
+   expect(serializeGameForVersion(replayArchive(parseArchive(entry.archive, game)), 15)).toBe(entry.save);
+ });
+-test('a captured capped hearth continues under16 while keeping15 history intact', () => {
++test('a captured capped hearth continues under current rules while keeping15 history intact', () => {
+   const entry = fixture.cases.populationLimitContinued!, game = deserializeGame(entry.save), archive = parseArchive(entry.archive, game);
+   const town = Object.values(game.settlements)[0]!;
+   expect(town.population).toBe(20);
+@@ -23,6 +23,6 @@ test('a captured capped hearth continues under16 while keeping15 history intact'
+   expect(town.population).toBe(21);
+   const continued = journal.materialize();
+   expect(continued.records.slice(0, archive.records.length)).toEqual(archive.records);
+-  expect(continued.records.at(-1)?.rulesVersion).toBe(16);
++  expect(continued.records.at(-1)?.rulesVersion).toBe(SAVE_VERSION);
+   expect(serializeGame(replayArchive(continued))).toBe(serializeGame(game));
+ });
+diff --git c/packages/chronicle/src/index.ts w/packages/chronicle/src/index.ts
+index 7bc97e8..e22666f 100644
+--- c/packages/chronicle/src/index.ts
++++ w/packages/chronicle/src/index.ts
+@@ -9,7 +9,7 @@ export type { JournalHeader, JournalCommit, JournalOptions } from './journal';
+ 
+ export type CampaignMode = 'player' | 'watch';
+ export type ArchiveCoverage = 'complete' | 'from-save';
+-export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
++export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17;
+ export type ArchivedBattleReport = BattleReport | z.infer<typeof legacyCampaignBattleSchema> | z.infer<typeof schema6CampaignBattleSchema> | z.infer<typeof schema7CampaignBattleSchema>;
+ export interface ArchiveRecord {
+   sequence: number;
+@@ -56,7 +56,7 @@ const legacyArchiveSchema = z.object({
+   initialSave: z.string().max(64 * 1024 * 1024), initialHash: hash, initialTurn: turn,
+   records: z.array(legacyRecordSchema).max(1_000_000), finalHash: hash.nullable(),
+ }).strict();
+-const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16)]);
++const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17)]);
+ // Reports are validated in their original format. Never add modern metadata to old evidence.
+ const recordSchema = z.discriminatedUnion('rulesVersion', [
+   legacyRecordSchema.extend({ checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(4) }).strict(),
+@@ -72,6 +72,7 @@ const recordSchema = z.discriminatedUnion('rulesVersion', [
+   legacyRecordSchema.extend({ battles: z.array(schema15CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(14) }).strict(),
+   legacyRecordSchema.extend({ battles: z.array(schema15CampaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(15) }).strict(),
+   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(16) }).strict(),
++  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(17) }).strict(),
+ ]);
+ const archiveSchema = legacyArchiveSchema.extend({ version: z.literal(2), initialSaveVersion: hashVersion, records: z.array(recordSchema).max(1_000_000), finalHashVersion: hashVersion.nullable() }).strict();
+ 
+diff --git c/packages/chronicle/src/specialist-roster.test.ts w/packages/chronicle/src/specialist-roster.test.ts
+index be49bf8..9eb6505 100644
+--- c/packages/chronicle/src/specialist-roster.test.ts
++++ w/packages/chronicle/src/specialist-roster.test.ts
+@@ -1,6 +1,6 @@
+ import { expect, test } from 'vitest';
+ import { checksum, UNITS } from '@theandril/content';
+-import { applyCommand, applyCommandForVersion, armyMovement, armyUpkeep, createGame, deserializeGame, getObservation, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion, type GameCommand } from '@theandril/sim';
++import { applyCommand, applyCommandForVersion, armyMovement, armyUpkeep, createGame, deserializeGame, getObservation, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion, SAVE_VERSION, type GameCommand } from '@theandril/sim';
+ import { applyRecordedCommand, createArchive, parseArchive, replayArchive, resumeJournal, type CampaignArchive } from './index';
+ import captured from './fixtures/v14-specialist-baseline.json';
+ 
+@@ -65,7 +65,7 @@ test('an independently captured rules14 archive retains its original content sea
+   expect(journal.record(game, { type: 'endTurn', factionId: game.turnOwnerId }).ok).toBe(true);
+   const continued = journal.materialize();
+   expect(continued.records.slice(0, archive.records.length)).toEqual(archive.records);
+-  expect(continued.records.at(-1)).toMatchObject({ rulesVersion: 16, checkpointVersion: 16 });
++  expect(continued.records.at(-1)).toMatchObject({ rulesVersion: SAVE_VERSION, checkpointVersion: SAVE_VERSION });
+   expect(serializeGame(replayArchive(continued))).toBe(serializeGame(game));
+ });
+ 
+diff --git c/packages/sim/src/army-combat.test.ts w/packages/sim/src/army-combat.test.ts
+index 5e6b3d6..46b7dcb 100644
+--- c/packages/sim/src/army-combat.test.ts
++++ w/packages/sim/src/army-combat.test.ts
+@@ -1,6 +1,6 @@
+ import { describe, expect, it } from 'vitest';
+ import { checksum } from '@theandril/content';
+-import { applyCommand, armyStrength, createArmyFormation, deserializeGame, getObservation, replayGame, serializeGame, stateHash, type Army, type CampaignBattle, type GameCommand, type GameState } from './index';
++import { applyCommand, applyCommandForVersion, armyStrength, createArmyFormation, deserializeGame, getObservation, replayGame, serializeGame, stateHash, type Army, type CampaignBattle, type GameCommand, type GameState } from './index';
+ import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
+ import { conquestCampaign, CONQUEST_FIXTURE } from '../../test-fixtures/src/conquest-fixture';
+ import { rebuildIndexes } from './visibility';
+@@ -81,7 +81,7 @@ describe('mixed campaign forces use the real formation battlefield', () => {
+     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+   });
+ 
+-  it('rejects a stacked target over twenty total formations without omitting any defenders', () => {
++  it('historical rules reject a stacked target over twenty total formations without omitting defenders', () => {
+     const state = borderBattleCampaign();
+     for (let i = 0; i < 11; i++) reinforce(state, 'army.4', 'unit.guard');
+     const defender = state.armies['army.4']!; const id = `army.${state.nextId++}`;
+@@ -89,7 +89,7 @@ describe('mixed campaign forces use the real formation battlefield', () => {
+     for (let i = 0; i < 8; i++) reinforce(state, id, 'unit.guard');
+     rebuildIndexes(state); issue(state, end); issue(state, war);
+     const before = stateHash(state);
+-    expect(applyCommand(state, attack)).toMatchObject({ ok: false, error: 'This field battle supports at most twenty defending formations.' });
++    expect(applyCommandForVersion(state, attack, 16)).toMatchObject({ ok: false, error: 'This field battle supports at most twenty defending formations.' });
+     expect(stateHash(state)).toBe(before);
+     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(before);
+   });
+diff --git c/packages/sim/src/army-composition.ts w/packages/sim/src/army-composition.ts
+index e7e0aa4..ddb7b41 100644
+--- c/packages/sim/src/army-composition.ts
++++ w/packages/sim/src/army-composition.ts
+@@ -1,4 +1,5 @@
+ import { DOCTRINES, UNITS } from '@theandril/content';
++import { defensePreview } from './battle-frontage';
+ import type { Army, ArmyFormation, ArmyView, CommandResult, DomainEvent, GameState } from './types';
+ import { indexes, updateSight } from './visibility';
+ import { armyCommandCapacity, armyCommandStatus, armyHasCharacterMission, characterCommandCapacity, characterCompositionObjection, charactersForArmy, observeArmyCharacters, transferArmyCharacters } from './characters';
+@@ -33,7 +34,8 @@ export function getArmyView(state: GameState, army: Army): ArmyView {
+     const transferLimit = common ? 0 : Math.max(0, armyCommandCapacity(state, target) - target.formations.length);
+     return { armyId: id, label: target.name, resultCapacity, canMerge: mergeBlocker === null, blocker: mergeBlocker, transferLimit, transferBlocker: common ?? (transferLimit ? null : 'The receiving army has no spare command capacity.') };
+   });
+-  return { ...army, ...observeArmyCharacters(state, army.id), ...getNavalArmyView(state, army), formationCapacity: command.capacity, overCommand: command.overCommand, commandBlocker: command.commandBlocker, capacityReason: command.capacityReason, splitFormationLimit: DETACHMENT_FORMATIONS, mergeOptions, mergeOptionsTruncated: peers.length > 24,
++  const battleDefense = rulesVersion(state) >= 17 && !state.transports[army.id] ? defensePreview([army, ...peers.map(id => state.armies[id]!)], army.id) : undefined;
++  return { ...army, ...(battleDefense ? { battleDefense } : {}), ...observeArmyCharacters(state, army.id), ...getNavalArmyView(state, army), formationCapacity: command.capacity, overCommand: command.overCommand, commandBlocker: command.commandBlocker, capacityReason: command.capacityReason, splitFormationLimit: DETACHMENT_FORMATIONS, mergeOptions, mergeOptionsTruncated: peers.length > 24,
+     movementBlocker: blocker, reorganizationBlocker: objection(state, army.factionId, army), formations: army.formations.map(item => ({ ...item })), unitId: armyUnitId(army), displayUnitId: armyUnitId(army),
+     strength: armyStrength(army), maxStrength: armyMaxStrength(army), morale: armyMorale(army), fatigue: armyFatigue(army),
+     maxMovement: effectiveArmyMovement(state, army), sight: armySight(army), upkeep: armyUpkeep(army), canFound: armyCanFound(army), canAttack: armyCanAttack(army) };
+diff --git c/packages/sim/src/rules.ts w/packages/sim/src/rules.ts
+index 2253c6c..d747075 100644
+--- c/packages/sim/src/rules.ts
++++ w/packages/sim/src/rules.ts
+@@ -1,8 +1,8 @@
+ import type { GameState } from './types';
+ 
+-export type RulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
++export type RulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17;
+ const activeRules = new WeakMap<GameState, RulesVersion>();
+-export const rulesVersion = (state: GameState): RulesVersion => activeRules.get(state) ?? 16;
++export const rulesVersion = (state: GameState): RulesVersion => activeRules.get(state) ?? 17;
+ export const LEGACY_UNIT_IDS = new Set(['unit.colonist', 'unit.scout', 'unit.guard']);
+ /** Frozen IDs: checking today's catalog would permit resealed future content in old saves. */
+ export const PRE_SPECIALIST_UNIT_IDS = new Set(['unit.colonist', 'unit.scout', 'unit.guard', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'unit.transport', 'unit.coastal_warship', 'unit.ocean_warship']);
+diff --git c/packages/sim/src/save.ts w/packages/sim/src/save.ts
+index 36a145a..f0d7610 100644
+--- c/packages/sim/src/save.ts
++++ w/packages/sim/src/save.ts
+@@ -1,4 +1,5 @@
+ import { battleDevelopmentSchema, battleDevelopmentEffects } from './combat/development-snapshot';
++import { selectDefendingArmies } from './battle-frontage';
+ import { isHull } from './combat/individual';
+ import { createDevelopmentState, developmentStateSchema, validateDevelopment } from './development';
+ import { resourceStateSchema, validateResources } from './resources';
+@@ -24,7 +25,7 @@ import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
+ import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
+ import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
+ 
+-export const SAVE_VERSION = 16;
++export const SAVE_VERSION = 17;
+ export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
+ export const PRE_SPECIALIST_CONTENT_HASH = 'b6e3bce2';
+ export const PRE_BATTLE_CONTENT_HASH = '07a58d4f';
+@@ -154,7 +155,8 @@ const stateSchema = stateV15Schema.extend({
+   settlements: z.array(settlementSchema.extend({ population: z.number().int().positive().safe(), food: z.number().int().nonnegative().safe() }).strict()).max(350_000),
+   factions: z.array(factionSchema.extend({ treasury: z.number().int().nonnegative().safe(), knowledge: z.number().int().nonnegative().safe() }).strict()).min(1).max(48),
+ }).strict();
+-const saveSchema = z.object({ version: z.literal(16), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
++const saveSchema = z.object({ version: z.literal(17), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
++const saveV16Schema = saveSchema.extend({ version: z.literal(16) }).strict();
+ const saveV15Schema = saveSchema.extend({ version: z.literal(15), state: stateV15Schema }).strict();
+ const saveV14Schema = saveV15Schema.extend({ version: z.literal(14) }).strict();
+ const saveV13Schema = saveSchema.extend({ version: z.literal(13), state: stateV13Schema }).strict();
+@@ -313,7 +315,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
+ /** Exact old envelope projection, never a silently rewritten archive seal. */
+ export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+   const latest = canonicalPayload(state);
+-  if (version === 16) return serializeEnvelope(SAVE_VERSION, CONTENT_HASH, latest);
++  if (version >= 16) return serializeEnvelope(version, CONTENT_HASH, latest);
+   if (latest.resources.version || Object.keys(latest.resources.deposits).length || Object.values(latest.resources.stockpiles).some(stock => Object.values(stock).some(Boolean)) || Object.values(latest.development).some(records => Object.keys(records).length)) throw new Error('This campaign has resources or development unavailable in historical rules.');
+   const { resources: _resources, development: _development, ...historical } = latest;
+   const { visibilityVersion: _visibility, ...historicalLand } = historical.land;
+@@ -447,7 +449,7 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
+     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v15 snapshot checksum does not match its contents');
+     assertPreDevelopmentContent(prior.state);
+     const state = stateSchema.parse({ ...prior.state, land: { ...prior.state.land, visibilityVersion: 0 }, resources: { version: 0, deposits: {}, stockpiles: Object.fromEntries(prior.state.factions.map(faction => [faction.id, {}])) }, development: createDevelopmentState() });
+-    return { ...prior, version: 16, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
++    return { ...prior, version: 17, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
+   };
+   const migrateV14 = (prior: z.infer<typeof saveV14Schema>): z.infer<typeof saveSchema> => {
+     assert(prior.contentHash === PRE_SPECIALIST_CONTENT_HASH, 'v14 content hash is not a recognized compatible pack');
+@@ -608,6 +610,8 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
+   if (version === 13) return migrateV13(saveV13Schema.parse(raw));
+   if (version === 14) return migrateV14(saveV14Schema.parse(raw));
+   if (version === 15) return migrateV15(saveV15Schema.parse(raw));
++  // Version 17 changes command semantics, not canonical fields or content.
++  if (version === 16) return { ...saveV16Schema.parse(raw), version: 17 };
+   if (version !== SAVE_VERSION) throw new Error(`Unsupported save version ${version}.`);
+   return saveSchema.parse(raw);
+ }
+@@ -845,8 +849,9 @@ export function deserializeGame(text: string): GameState {
+       assert(battle.aftermath.length === 0 && battle.formationAftermath.length === 0 && battle.characterAftermath.length === 0 && battle.transportAftermath.length === 0, 'pending battle cannot have strategic aftermath');
+       const pair = [battle.attackerFactionId, battle.defenderFactionId].sort().join(':');
+       assert(warKeys.has(pair), 'pending battle requires a declared war');
+-      const stack = data.armies.filter(army => !transported.has(army.id) && army.cell === battle.defenderCell).map(army => army.id).sort();
+-      assert(battle.militiaId ? stack.length === 0 : stack.length === defenderIds.length && stack.every((id, i) => id === defenderIds[i]), 'battle omitted a defending army');
++      const stack = data.armies.filter(army => !transported.has(army.id) && army.cell === battle.defenderCell);
++      const expected = (originalVersion >= 17 ? selectDefendingArmies(stack, battle.defenderId) : stack).map(army => army.id).sort();
++      assert(battle.militiaId ? stack.length === 0 : stack.every(army => army.factionId === battle.defenderFactionId) && expected.length === defenderIds.length && expected.every((id, i) => id === defenderIds[i]), 'battle omitted a defending army');
+       assert([...liveFormations.keys()].every(id => formationIds.has(id)), 'battle omitted a participant formation');
+     } else {
+       const aftermath = new Map(battle.aftermath.map(item => [item.armyId, item]));
+diff --git c/packages/sim/src/siege.ts w/packages/sim/src/siege.ts
+index 29c52f5..4460222 100644
+--- c/packages/sim/src/siege.ts
++++ w/packages/sim/src/siege.ts
+@@ -1,4 +1,5 @@
+ import { z } from 'zod';
++import { defensePreview } from './battle-frontage';
+ import { armyCanAttack, armyStrength } from './army-composition';
+ import { rulesVersion } from './rules';
+ import { isPassable, neighbors } from '@theandril/mapgen';
+@@ -70,7 +71,7 @@ export function assaultObjection(state: GameState, factionId: string, settlement
+   if (!army || army.factionId !== factionId || !neighbors(army.cell, state.world.width, state.world.height).includes(town.cell)) return 'The besieging army is no longer in position.';
+   if (!atWar(state, factionId, town.factionId)) return 'An assault requires an active war.';
+   if (army.movement < roadMovementCost(state, army.cell, town.cell)) return 'The besieging army needs movement to assault; wait for the next turn.';
+-  if ([...(indexes(state).armies.get(town.cell) ?? [])].reduce((sum, id) => sum + (state.armies[id]?.formations.length ?? 0), 0) > (rulesVersion(state) < 8 ? 12 : 20)) return rulesVersion(state) >= 8 ? 'An assault supports at most twenty defending formations.' : rulesVersion(state) < 6 ? 'An assault supports at most twelve defending armies.' : 'An assault supports at most twelve defending formations.';
++  if (rulesVersion(state) < 17 && [...(indexes(state).armies.get(town.cell) ?? [])].reduce((sum, id) => sum + (state.armies[id]?.formations.length ?? 0), 0) > (rulesVersion(state) < 8 ? 12 : 20)) return rulesVersion(state) >= 8 ? 'An assault supports at most twenty defending formations.' : rulesVersion(state) < 6 ? 'An assault supports at most twelve defending armies.' : 'An assault supports at most twelve defending formations.';
+   return null;
+ }
+ 
+@@ -106,6 +107,10 @@ export function reconcileSieges(state: GameState, events: DomainEvent[]): void {
+         }
+       }
+       if (report.combat.result?.winner === 'attacker') {
++        if (rulesVersion(state) >= 17 && (indexes(state).armies.get(town.cell)?.size ?? 0) > 0) {
++          for (const factionId of [siege.factionId, town.factionId]) events.push({ turn: state.turn, factionId, type: 'siege_contested', cell: town.cell, message: `Reserve formations still defend ${town.name}. The siege continues until they are defeated.` });
++          continue;
++        }
+         state.pendingCapture = { settlementId: town.id, armyId: army.id, factionId: siege.factionId, previousOwnerId: town.factionId, options: [], ...(rulesVersion(state) >= 16 ? { rulesVersion: 16 as const } : {}) };
+         state.pendingCapture.options = captureOptions(state, state.pendingCapture);
+         events.push({ turn: state.turn, factionId: siege.factionId, type: 'capture_pending', cell: town.cell, message: `${town.name} has fallen. Choose its fate.` });
+@@ -197,7 +202,8 @@ export function observeSieges(state: GameState, factionId: string): SiegeObserva
+     const town = state.settlements[siege.settlementId];
+     const defenders = town ? [...(indexes(state).armies.get(town.cell) ?? [])].map(id => state.armies[id]) : [];
+     const assaultBlocker = assaultObjection(state, factionId, siege.settlementId);
+-    return { ...siege, canAssault: assaultBlocker === null, assaultBlocker, defenderStrength: defenders.length ? defenders.reduce((total, army) => total + (army ? armyStrength(army) : 0), 0) : siege.militiaStrength };
++    const battleDefense = rulesVersion(state) >= 17 ? defensePreview(defenders.filter(army => army !== undefined)) : undefined;
++    return { ...siege, ...(battleDefense ? { battleDefense } : {}), canAssault: assaultBlocker === null, assaultBlocker, defenderStrength: defenders.length ? defenders.reduce((total, army) => total + (army ? armyStrength(army) : 0), 0) : siege.militiaStrength };
+   });
+ }
+ 
+diff --git c/packages/sim/src/simulation.ts w/packages/sim/src/simulation.ts
+index dbd496c..34cf066 100644
+--- c/packages/sim/src/simulation.ts
++++ w/packages/sim/src/simulation.ts
+@@ -122,7 +122,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
+ 
+ export function createGame(options: NewGameOptions): GameState {
+   const checked = z.object({
+-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16)]).default(16),
++    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17)]).default(17),
+     seed: z.number().int().min(0).max(0xffff_ffff),
+     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
+     factionCount: z.number().int().min(1).max(48).default(4),
+diff --git c/packages/sim/src/types.ts w/packages/sim/src/types.ts
+index 5364920..714a3d0 100644
+--- c/packages/sim/src/types.ts
++++ w/packages/sim/src/types.ts
+@@ -32,8 +32,17 @@ export interface Army {
+   formations: ArmyFormation[];
+ }
+ 
++/** Observed whole-army frontage, not an estimate of who will win. */
++export interface BattleDefense {
++  engagedFormations: number;
++  engagedStrength: number;
++  reserveFormations: number;
++  reserveStrength: number;
++}
++
+ /** Detached, derived roster summary; none of these aggregate values are canonical. */
+ export interface ArmyView extends Army, NavalArmyView {
++  battleDefense?: BattleDefense;
+   formationCapacity: number;
+   overCommand: boolean;
+   commandBlocker: string | null;
+@@ -85,6 +94,7 @@ export interface Siege {
+ }
+ 
+ export interface SiegeObservation extends Siege {
++  battleDefense?: BattleDefense;
+   canAssault: boolean;
+   assaultBlocker: string | null;
+   defenderStrength: number;
+diff --git c/packages/sim/src/warfare.test.ts w/packages/sim/src/warfare.test.ts
+index 1f17816..b635b2b 100644
+--- c/packages/sim/src/warfare.test.ts
++++ w/packages/sim/src/warfare.test.ts
+@@ -4,7 +4,7 @@ import { checksum, UNITS } from '@theandril/content';
+ import { isPassable, neighbors } from '@theandril/mapgen';
+ import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
+ import { rebaseAuthoredLand } from '../../test-fixtures/src/authored-land';
+-import { applyCommand, createGame, deserializeGame, getObservation, replayGame, serializeGame, stateHash, validateEndTurn } from './index';
++import { applyCommand, applyCommandForVersion, createGame, deserializeGame, getObservation, replayGame, serializeGame, stateHash, validateEndTurn } from './index';
+ import type { CampaignBattle, GameCommand, GameState } from './index';
+ import { chooseBattleOrder } from './combat';
+ import { rebuildIndexes } from './visibility';
+@@ -88,7 +88,7 @@ describe('field battles in the campaign', () => {
+     expect(state.battle).toBeNull();
+   });
+ 
+-  it('includes every defending army and rejects unsupported stacks atomically', () => {
++  it('includes complete in-budget defenses and preserves historical over-cap atomic rejection', () => {
+     const state = borderBattleCampaign();
+     const defender = state.armies['army.4'];
+     if (!defender) throw new Error('Missing defender');
+@@ -109,7 +109,12 @@ describe('field battles in the campaign', () => {
+     }
+     rebuildIndexes(crowded);
+     checked(crowded, war);
+-    invalid(crowded, attack);
++    const before = stateHash(crowded);
++    expect(applyCommandForVersion(crowded, attack, 16).ok).toBe(false);
++    expect(stateHash(crowded)).toBe(before);
++    checked(crowded, attack);
++    expect(crowded.battle?.combat.defender).toHaveLength(20);
++    expect(stateHash(deserializeGame(serializeGame(crowded)))).toBe(stateHash(crowded));
+   });
+ 
+   it('preserves exact manual/autoresolve parity and mid-battle save/replay', () => {
+diff --git c/packages/sim/src/warfare.ts w/packages/sim/src/warfare.ts
+index 6aaaa89..03148eb 100644
+--- c/packages/sim/src/warfare.ts
++++ w/packages/sim/src/warfare.ts
+@@ -1,4 +1,5 @@
+-import { snapshotBattleDevelopment } from './combat/development-snapshot';
++import { battleDevelopmentEffects, snapshotBattleDevelopment } from './combat/development-snapshot';
++import { selectDefendingArmies } from './battle-frontage';
+ import { UNITS } from '@theandril/content';
+ import { hexDistance, neighbors, SeededRandom } from '@theandril/mapgen';
+ import { autoResolveBattle, chooseBattleOrder, createBattle, resolveBattleRound, settleBattleTerminal } from './combat';
+@@ -99,9 +100,10 @@ export function startCampaignBattle(state: GameState, factionId: string, armyId:
+   const terrain = state.world.terrain[defender.cell] ?? 0;
+   const cost = roadMovementCost(state, attacker.cell, defender.cell);
+   if (attacker.movement < cost) return fail('Not enough movement remains to attack this terrain.');
+-  const defenders = [...(index.armies.get(defender.cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => army !== undefined).sort(compareId);
++  const stack = [...(index.armies.get(defender.cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => army !== undefined).sort(compareId);
++  const defenders = rulesVersion(state) >= 17 ? selectDefendingArmies(stack, defender.id) : stack;
+   if (defenders.reduce((sum, army) => sum + army.formations.length, 0) > (rulesVersion(state) < 8 ? 12 : 20)) return fail(rulesVersion(state) >= 8 ? 'This field battle supports at most twenty defending formations.' : rulesVersion(state) < 6 ? 'This field battle supports at most twelve defending armies.' : 'This field battle supports at most twelve defending formations.');
+-  if (!defenders.length || defenders.some(army => army.factionId !== defender.factionId)) return fail('The defending stack has invalid ownership.');
++  if (!defenders.length || stack.some(army => army.factionId !== defender.factionId)) return fail('The defending stack has invalid ownership.');
+   const serial = state.nextId;
+   const seed = new SeededRandom((state.world.seed ^ serial) >>> 0).nextUint32();
+   const combat = createBattle({ seed, terrain, attacker: deployment(state, [attacker]), defender: deployment(state, defenders) }, battleVersion(state));
+@@ -119,7 +121,8 @@ export function startCampaignBattle(state: GameState, factionId: string, armyId:
+   state.nextId++;
+   attacker.movement = 0;
+   for (const army of defenders) army.movement = 0;
+-  const message = `${attacker.name} engaged ${defenders.length === 1 ? defender.name : `${defenders.length} defending armies`} at hex ${defender.cell}.`;
++  const reserveFormations = stack.reduce((sum, army) => sum + army.formations.length, 0) - defenders.reduce((sum, army) => sum + army.formations.length, 0);
++  const message = `${attacker.name} engaged ${defenders.length === 1 ? defender.name : `${defenders.length} defending armies`} at hex ${defender.cell}.${reserveFormations ? ` ${reserveFormations} reserve formations still hold the hex and must be defeated separately.` : ''}`;
+   const interruptions: DomainEvent[] = [];
+   for (const army of [attacker, ...defenders]) interruptArmyMissions(state, army.id, 'The army entered battle.', interruptions);
+   return { ok: true, events: [
+@@ -133,8 +136,9 @@ export function startCampaignBattle(state: GameState, factionId: string, armyId:
+ export function startSettlementAssault(state: GameState, factionId: string, armyId: string, settlementId: string): CommandResult {
+   const attacker = state.armies[armyId]; const town = state.settlements[settlementId]; const siege = state.sieges[settlementId];
+   if (!attacker || !town || !siege) return fail('Missing assault participants.');
+-  const defenders = [...(indexes(state).armies.get(town.cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => army !== undefined).sort(compareId);
+-  if (defenders.reduce((sum, army) => sum + army.formations.length, 0) > (rulesVersion(state) < 8 ? 12 : 20) || defenders.some(army => army.factionId !== town.factionId)) return fail('Invalid defending garrison.');
++  const stack = [...(indexes(state).armies.get(town.cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => army !== undefined).sort(compareId);
++  const defenders = rulesVersion(state) >= 17 ? selectDefendingArmies(stack) : stack;
++  if (defenders.reduce((sum, army) => sum + army.formations.length, 0) > (rulesVersion(state) < 8 ? 12 : 20) || stack.some(army => army.factionId !== town.factionId)) return fail('Invalid defending garrison.');
+   const militiaId = defenders.length ? null : `militia.${town.id}`;
+   const fortification = Math.floor(siege.defenses / 10);
+   const guard = units.get('unit.guard');
+@@ -212,7 +216,15 @@ function finishCampaignBattle(state: GameState, battle: CampaignBattle, events:
+       const binding = battle.formationBindings.find(binding => binding.formationId === item.id && binding.armyId === id);
+       const result = all.find(unit => unit.id === binding?.battleFormationId);
+       if (!result) throw new Error('Battle omitted an army formation');
+-      item.strength = result.strength; item.morale = Math.max(1, result.morale); item.fatigue = result.fatigue;
++      item.strength = result.strength;
++      // Deployment training is temporary: carry losses, not its bonus, back to the campaign.
++      // Use the battle's frozen snapshot rather than a subsequently changed company branch.
++      const training = rulesVersion(state) >= 17
++        ? battleDevelopmentEffects(battle.developmentSnapshots?.find(snapshot => snapshot.formationId === binding?.battleFormationId)).morale : 0;
++      item.morale = rulesVersion(state) >= 17
++        ? Math.max(1, Math.min(units.get(item.unitId)!.morale, result.morale - training))
++        : Math.max(1, result.morale);
++      item.fatigue = result.fatigue;
+       if (item.strength === 0 && battle.rulesVersion >= 6) events.push({ turn: state.turn, factionId: army.factionId, type: 'formation_destroyed', cell: army.cell, message: `${army.name} lost its ${units.get(item.unitId)?.name ?? item.unitId} formation (${item.id}).` });
+     }
+     army.formations = army.formations.filter(item => item.strength > 0);
+diff --git c/scripts/benchmark-roads.ts w/scripts/benchmark-roads.ts
+index f79ad69..cef12de 100644
+--- c/scripts/benchmark-roads.ts
++++ w/scripts/benchmark-roads.ts
+@@ -62,9 +62,9 @@ function corridorCampaign(size: 'huge' | 'legendary', factionCount: number): Gam
+ 
+ function workload(size: 'huge' | 'legendary', factionCount: number) {
+   const base = corridorCampaign(size, factionCount), baseline = serializeGame(base), baselineHash = stateHash(base);
+-  // Rules15 adds optional specialist recruits; this retained roster3 road workload
+-  // recruits no specialists or casters, researches no magic and enters no battle.
+-  invariant(SAVE_VERSION === 16 && Object.values(base.arcaneResearch).every(discoveries => discoveries.length === 0) && Object.values(base.armies).every(army => army.formations.every(item => !['unit.skirmisher', 'unit.arbalester', 'unit.halberdier', 'unit.lancer'].includes(item.unitId))), 'review this retained road workload before another schema change');
++  // Rules17 changes only post-battle strategic morale. This retained roster3 road
++  // workload recruits no specialists/casters, researches no magic and has no battles.
++  invariant(SAVE_VERSION === 17 && Object.values(base.arcaneResearch).every(discoveries => discoveries.length === 0) && Object.values(base.armies).every(army => army.formations.every(item => !['unit.skirmisher', 'unit.arbalester', 'unit.halberdier', 'unit.lancer'].includes(item.unitId))), 'review this retained road workload before another schema change');
+   const planningMs: number[] = [], readMs: number[] = [];
+   let expectedRoads = '', expectedEvents = '', planned: GameState | null = null;
+   for (let sample = 0; sample < WARMUPS + SAMPLES; sample++) {
+--- /dev/null
++++ b/packages/sim/src/battle-frontage.ts
++import type { Army, BattleDefense } from './types';
++
++export const BATTLE_FORMATION_LIMIT = 20;
++const byId = (a: { id: string }, b: { id: string }) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
++
++/** Whole containers keep their officers/cargo intact. Nonparticipants remain on
++ * the strategic tile; a tactical victory cannot occupy ground they still hold. */
++export function selectDefendingArmies<T extends Pick<Army, 'id' | 'formations'>>(armies: readonly T[], targetId?: string): T[] {
++  const ordered = [...armies].sort((a, b) => Number(b.id === targetId) - Number(a.id === targetId) || byId(a, b));
++  const selected: T[] = [];
++  let remaining = BATTLE_FORMATION_LIMIT;
++  for (const army of ordered) {
++    if (army.formations.length > remaining) continue;
++    selected.push(army);
++    remaining -= army.formations.length;
++  }
++  return selected.sort(byId);
++}
++
++/** Omit the optional packet when every defender fits; never include cargo. */
++export function defensePreview(armies: readonly Army[], targetId?: string): BattleDefense | undefined {
++  const totalFormations = armies.reduce((sum, army) => sum + army.formations.length, 0);
++  if (totalFormations <= BATTLE_FORMATION_LIMIT) return undefined;
++  const engaged = selectDefendingArmies(armies, targetId);
++  const strength = (group: readonly Army[]) => group.reduce((sum, army) => sum + army.formations.reduce((sum, item) => sum + item.strength, 0), 0);
++  const engagedFormations = engaged.reduce((sum, army) => sum + army.formations.length, 0), engagedStrength = strength(engaged);
++  return { engagedFormations, engagedStrength, reserveFormations: totalFormations - engagedFormations, reserveStrength: strength(armies) - engagedStrength };
++}
+
+--- /dev/null
++++ b/packages/sim/src/battle-frontage.test.ts
++import { describe, expect, it } from 'vitest';
++import { borderBattleCampaign } from '../../test-fixtures/src/combat-fixture';
++import { conquestCampaign, CONQUEST_FIXTURE } from '../../test-fixtures/src/conquest-fixture';
++import { navalCampaign, NAVAL_FIXTURE } from '../../test-fixtures/src/naval-fixture';
++import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
++import { applyCommand, createArmyFormation, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand } from './index';
++
++function field(count: number) {
++  let state = borderBattleCampaign();
++  const defender = state.armies['army.4']!;
++  defender.formations = [{ ...createArmyFormation(defender.id, 'unit.scout'), strength: 1, morale: 1 }];
++  for (let i = 1; i < count; i++) {
++    const id = `army.${state.nextId++}`;
++    state.armies[id] = { ...defender, id, formations: [{ ...createArmyFormation(id, 'unit.scout'), strength: 1, morale: 1 }] };
++  }
++  refreshAuthoredSight(state);
++  state = deserializeGame(serializeGame(state));
++  return state;
++}
++
++describe('bounded defending contingents', () => {
++  it.each([20, 21, 200])('keeps %s defending companies attackable with an unchanged tactical budget', count => {
++    const state = field(count), factionId = state.turnOwnerId;
++    expect(applyCommand(state, { type: 'declareWar', factionId, targetFactionId: state.armies['army.4']!.factionId }).ok).toBe(true);
++    const initial = serializeGame(state), command = { type: 'attack' as const, factionId, armyId: 'army.2', targetArmyId: 'army.4' };
++    expect(applyCommand(state, command).ok).toBe(true);
++    expect(state.battle!.combat.defender).toHaveLength(Math.min(count, 20));
++    const saved = serializeGame(state);
++    expect(serializeGame(deserializeGame(saved))).toBe(saved);
++    const replay = deserializeGame(initial);
++    expect(applyCommand(replay, command).ok).toBe(true);
++    expect(stateHash(replay)).toBe(stateHash(state));
++  });
++
++  it('keeps fleet reserves separate from participating hulls and carried land troops', () => {
++    let state = navalCampaign();
++    const factionId = state.turnOwnerId, enemy = state.armies[NAVAL_FIXTURE.enemyFleetId]!;
++    enemy.cell = NAVAL_FIXTURE.shallowCell;
++    enemy.formations[0]!.strength = 1; enemy.formations[0]!.morale = 1;
++    for (let i = 1; i < 21; i++) {
++      const id = `army.${state.nextId++}`;
++      state.armies[id] = { ...enemy, id, formations: [{ ...createArmyFormation(id, 'unit.coastal_warship'), strength: 1, morale: 1 }] };
++    }
++    refreshAuthoredSight(state);
++    state = deserializeGame(serializeGame(state));
++    expect(applyCommand(state, { type: 'embarkArmy', factionId, armyId: NAVAL_FIXTURE.cargoId, fleetId: NAVAL_FIXTURE.fleetId }).ok).toBe(true);
++    expect(applyCommand(state, { type: 'declareWar', factionId, targetFactionId: enemy.factionId }).ok).toBe(true);
++    const before = structuredClone(state.armies);
++    expect(applyCommand(state, { type: 'attack', factionId, armyId: NAVAL_FIXTURE.fleetId, targetArmyId: enemy.id }).ok).toBe(true);
++    expect(state.battle!.domain).toBe('naval');
++    expect(state.battle!.combat.defender).toHaveLength(20);
++    const reserve = Object.values(state.armies).find(army => army.cell === enemy.cell && !state.battle!.defenderIds.includes(army.id))!;
++    expect(state.battle!.formationBindings.every(binding => binding.armyId !== NAVAL_FIXTURE.cargoId)).toBe(true);
++    state = deserializeGame(serializeGame(state));
++    expect(applyCommand(state, { type: 'autoResolveBattle', factionId }).ok).toBe(true);
++    expect(state.armies[reserve.id]).toEqual(before[reserve.id]);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++  });
++
++  it('exposes the same committed and reserve strength before a human or AI attacks', () => {
++    const state = field(21), before = stateHash(state);
++    const view = getObservation(state, state.turnOwnerId);
++    expect(view.armies.find(army => army.id === 'army.4')).toHaveProperty('battleDefense', {
++      engagedFormations: 20, engagedStrength: 20, reserveFormations: 1, reserveStrength: 1,
++    });
++    expect(stateHash(state)).toBe(before);
++  });
++
++  it('keeps a settlement contested until its remaining garrison is actually defeated', () => {
++    let state = conquestCampaign();
++    const town = state.settlements[CONQUEST_FIXTURE.settlementId]!, factionId = state.turnOwnerId;
++    const attackers = state.armies[CONQUEST_FIXTURE.playerArmyId]!;
++    attackers.formations = Array.from({ length: 12 }, (_, i) => createArmyFormation(i === 0 ? attackers.id : `army.${state.nextId++}`, 'unit.guard')).sort((a, b) => a.id < b.id ? -1 : 1);
++    for (let i = 0; i < 21; i++) {
++      const id = `army.${state.nextId++}`;
++      state.armies[id] = { id, name: `Reserve ${i}`, factionId: town.factionId, cell: town.cell, movement: 0, formations: [{ ...createArmyFormation(id, 'unit.scout'), strength: 1, morale: 1 }] };
++    }
++    refreshAuthoredSight(state);
++    state = deserializeGame(serializeGame(state));
++    const issue = (command: GameCommand) => expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true });
++    issue({ type: 'declareWar', factionId, targetFactionId: town.factionId });
++    issue({ type: 'besiege', factionId, armyId: attackers.id, settlementId: town.id });
++    for (let turn = 0; turn < 3; turn++) issue({ type: 'endTurn', factionId });
++    expect(getObservation(state, factionId).sieges[0]).toHaveProperty('battleDefense.reserveFormations', 1);
++    issue({ type: 'assault', factionId, settlementId: town.id });
++    expect(state.battle!.combat.defender).toHaveLength(20);
++    state = deserializeGame(serializeGame(state));
++    issue({ type: 'autoResolveBattle', factionId });
++    expect(state.battleReports.at(-1)!.combat.result!.winner).toBe('attacker');
++    expect(state.pendingCapture).toBeNull();
++    expect(Object.values(state.armies).filter(army => army.cell === town.cell)).toHaveLength(1);
++    state = deserializeGame(serializeGame(state));
++    issue({ type: 'endTurn', factionId });
++    issue({ type: 'assault', factionId, settlementId: town.id });
++    expect(state.battle!.combat.defender).toHaveLength(1);
++    issue({ type: 'autoResolveBattle', factionId });
++    expect(state.pendingCapture?.settlementId).toBe(town.id);
++    issue({ type: 'resolveCapture', factionId, settlementId: town.id, outcome: 'occupy' });
++    expect(state.settlements[town.id]!.factionId).toBe(factionId);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++  });
++
++  it('engages twenty of twenty-one formations without changing or advancing through reserves', () => {
++    let state = field(21);
++    const factionId = state.turnOwnerId;
++    const issue = (command: GameCommand) => expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true });
++    issue({ type: 'declareWar', factionId, targetFactionId: state.armies['army.4']!.factionId });
++    const before = structuredClone(state.armies);
++    issue({ type: 'attack', factionId, armyId: 'army.2', targetArmyId: 'army.4' });
++    expect(state.battle!.combat.defender).toHaveLength(20);
++    const reserve = Object.values(state.armies).filter(army => army.cell === state.battle!.defenderCell && !state.battle!.defenderIds.includes(army.id));
++    expect(reserve).toHaveLength(1);
++    const reserveId = reserve[0]!.id, origin = state.armies['army.2']!.cell;
++    expect(reserve[0]).toEqual(before[reserveId]);
++    const saved = serializeGame(state);
++    state = deserializeGame(saved);
++    expect(serializeGame(state)).toBe(saved);
++    issue({ type: 'autoResolveBattle', factionId });
++    expect(state.battleReports.at(-1)!.combat.result!.winner).toBe('attacker');
++    expect(state.armies[reserveId]).toEqual(before[reserveId]);
++    expect(state.armies['army.2']!.cell).toBe(origin);
++    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
++    expect(getObservation(state, factionId).armies.some(army => army.id === reserveId)).toBe(true);
++  });
++});
+
+--- /dev/null
++++ b/packages/sim/src/battle-morale.test.ts
++import { readFileSync } from 'node:fs';
++import { gunzipSync } from 'node:zlib';
++import { describe, expect, it } from 'vitest';
++import { characterBattleCampaign } from '../../test-fixtures/src/character-fixture';
++import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
++import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, serializeGame, stateHash, stateHashForVersion, type GameCommand, type GameState } from './index';
++import trace from './fixtures/v16-trained-battle-trace.json';
++
++const initialSave = () => gunzipSync(readFileSync(new URL('./fixtures/v16-trained-battle.json.gz', import.meta.url))).toString('utf8');
++
++describe('strategic morale after trained combat', () => {
++  it('round-trips after every accepted command from a captured ordinary battle', () => {
++    let game = deserializeGame(initialSave());
++    for (const entry of trace.records) {
++      expect(applyCommand(game, entry.command as GameCommand)).toMatchObject({ ok: true });
++      const hash = stateHash(game);
++      game = deserializeGame(serializeGame(game));
++      expect(stateHash(game)).toBe(hash);
++    }
++    expect(game.armies['army.8']!.formations[0]!.morale).toBe(55);
++  });
++
++  it('manual rounds and withdrawal save at the same boundary as autoresolve', () => {
++    let game = deserializeGame(initialSave());
++    const factionId = trace.records[0]!.command.factionId;
++    expect(applyCommand(game, trace.records[0]!.command)).toMatchObject({ ok: true });
++    const commands: GameCommand[] = [trace.records[0]!.command as GameCommand];
++    for (let round = 0; game.battle && round < 100; round++) {
++      const command: GameCommand = { type: 'battleOrder', factionId, order: round === 0 ? 'brace' : 'withdraw' };
++      commands.push(command);
++      expect(applyCommand(game, command)).toMatchObject({ ok: true });
++      const saved = serializeGame(game);
++      game = deserializeGame(saved);
++      expect(serializeGame(game)).toBe(saved);
++    }
++    expect(game.battle).toBeNull();
++    const replay = deserializeGame(initialSave());
++    for (const command of commands) expect(applyCommand(replay, command).ok).toBe(true);
++    expect(stateHash(replay)).toBe(stateHash(game));
++  });
++
++  it('does not compound training when the same company defends twice without an end turn', () => {
++    // Authored forces and prior experience; training, battles and withdrawals are ordinary paid commands.
++    let game = characterBattleCampaign();
++    const factionId = game.turnOwnerId, defender = game.armies['army.4']!;
++    defender.formations = [createArmyFormation(defender.id, 'unit.arbalester')];
++    const formationId = defender.formations[0]!.id;
++    game.development.formations[formationId] = { experience: 3, nodeIds: [] };
++    const reserveId = `army.${game.nextId++}`;
++    game.armies[reserveId] = { ...game.armies['army.2']!, id: reserveId, formations: [createArmyFormation(reserveId, 'unit.scout')] };
++    refreshAuthoredSight(game);
++    game = deserializeGame(serializeGame(game));
++    const issue = (state: GameState, command: GameCommand) => expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true });
++    issue(game, { type: 'develop', factionId: defender.factionId, scope: 'formation', entityId: formationId, nodeId: 'training.field_habits' });
++    issue(game, { type: 'declareWar', factionId, targetFactionId: defender.factionId });
++    const turn = game.turn;
++    for (const armyId of ['army.2', reserveId]) {
++      issue(game, { type: 'attack', factionId, armyId, targetArmyId: defender.id });
++      expect(game.battle!.combat.defender.find(item => item.id === formationId)!.morale).toBe(74);
++      issue(game, { type: 'battleOrder', factionId, order: 'withdraw' });
++      expect(game.armies[defender.id]!.formations[0]!.morale).toBe(70);
++      const saved = serializeGame(game);
++      game = deserializeGame(saved);
++      expect(serializeGame(game)).toBe(saved);
++    }
++    expect(game.turn).toBe(turn);
++    expect(game.battleReports).toHaveLength(2);
++  });
++
++  it('retains independently captured rule-16 results rather than silently rewriting history', () => {
++    const game = deserializeGame(initialSave());
++    expect(stateHashForVersion(game, 16)).toBe(trace.initialHash);
++    for (const entry of trace.records) {
++      expect(applyCommandForVersion(game, entry.command, 16)).toEqual(entry.result);
++      expect(stateHashForVersion(game, 16)).toBe(entry.hash);
++    }
++  });
++});

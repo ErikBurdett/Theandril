@@ -1,0 +1,26 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ × packages/ai/src/contact-reconnaissance.test.ts > observed land enclosing an uncharted interior proves no sea exit, not complete charting or water connectivity 22ms
+   → sea.boundedByLand is not a function
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ai/src/contact-reconnaissance.test.ts > observed land enclosing an uncharted interior proves no sea exit, not complete charting or water connectivity
+TypeError: sea.boundedByLand is not a function
+ ❯ packages/ai/src/contact-reconnaissance.test.ts:21:14
+     19|   expect(sea.fullyCharted(view.origin)).toBe(false);
+     20|   expect(sea.basinStatus(view.origin)).toBe('unknown');
+     21|   expect(sea.boundedByLand(view.origin)).toBe(true);
+       |              ^
+     22|   expect(sea.basinRelation(view.origin, view.origin + 4)).toBe('unknow…
+     23|   expect(sea.fullyCharted(view.origin)).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  01:58:48
+   Duration  515ms (transform 317ms, setup 0ms, import 416ms, tests 23ms, environment 0ms)
+

@@ -9,7 +9,7 @@ Use this repository-local skill to turn continued development into verified game
 
 ## Choose work from evidence
 
-Read `AGENTS.md`, the current implementation status, release scope/done gates and the relevant repository skills. Inspect actual code and Git history; preserve unrelated working-tree changes. Use the recorded next priority as a starting point, not proof it is still absent or correct.
+Read `AGENTS.md`, the current implementation status, release scope/done gates and the relevant repository skills. For audit-driven work, read `docs/1.0-DEVELOPMENT.md`: keep `hermes-analysis` as the historical baseline and record fixes in new implementation evidence. Inspect actual code and Git history; preserve unrelated working-tree changes. Use the recorded next priority as a starting point, not proof it is still absent or correct.
 
 Pick the highest-leverage unfinished player outcome whose dependencies exist. State a compact acceptance target and explicit file ownership, then implement. Documentation, extra plans, scaffolds and unused abstractions do not substitute for that outcome. If inspection reveals a concrete blocking defect, fix it within scope before building on it.
 

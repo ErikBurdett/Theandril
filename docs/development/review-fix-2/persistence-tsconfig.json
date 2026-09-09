@@ -1,0 +1,5 @@
+{
+  "extends": "../../../tsconfig.json",
+  "include": ["./persistence-*.ts"],
+  "exclude": ["node_modules", "./persistence-vite-cache"]
+}

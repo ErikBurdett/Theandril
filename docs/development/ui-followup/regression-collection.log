@@ -1,0 +1,30 @@
+Listing tests:
+  [ui-followup-5193] › battle-camera.spec.ts:8:1 › 390px battle inspection enlarges real soldiers, pans within the field and preserves paused orders and picks
+  [ui-followup-5193] › battle-defense.spec.ts:59:1 › R03 public attack previews the canonical contingent and leaves its reserve on the map
+  [ui-followup-5193] › battle-defense.spec.ts:80:1 › R03 siege preview fits 390px and desktop public assaults clear reserves before capture
+  [ui-followup-5193] › battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls
+  [ui-followup-5193] › battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text
+  [ui-followup-5193] › campaign-hud.spec.ts:23:1 › the full-width map has top/bottom HUD, working floating windows and a compact unit menu
+  [ui-followup-5193] › campaign-hud.spec.ts:67:1 › town popup retains production and land actions while full orders and roster stay separate
+  [ui-followup-5193] › campaign-hud.spec.ts:91:1 › 390px enlarged-text HUD and modal controls stay readable and close without clearing selection
+  [ui-followup-5193] › conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes
+  [ui-followup-5193] › conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan
+  [ui-followup-5193] › conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal
+  [ui-followup-5193] › hermes-ui-slices.spec.ts:23:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas
+  [ui-followup-5193] › hermes-ui-slices.spec.ts:125:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact
+  [ui-followup-5193] › hermes-ui-slices.spec.ts:125:3 › R18 paid Waykeeper resolves shared art for faction.reedbound_council
+  [ui-followup-5193] › household-attention.spec.ts:15:1 › R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order
+  [ui-followup-5193] › household-attention.spec.ts:53:3 › R07 2-town labor exception opens the exact hearth in one activation at 390px
+  [ui-followup-5193] › household-attention.spec.ts:53:3 › R07 10-town labor exception opens the exact hearth in one activation at 390px
+  [ui-followup-5193] › household-attention.spec.ts:53:3 › R07 40-town labor exception opens the exact hearth in one activation at 390px
+  [ui-followup-5193] › land-query.spec.ts:71:1 › selected-town queries are reused for tile clicks and fast registry changes never retain another town’s options
+  [ui-followup-5193] › land-query.spec.ts:99:1 › same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width
+  [ui-followup-5193] › land-query.spec.ts:148:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail
+  [ui-followup-5193] › map-actions.spec.ts:51:1 › a real canvas caravan founds, builds and continues in the same full-orders controls without issuing inspection orders
+  [ui-followup-5193] › map-actions.spec.ts:93:1 › a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders
+  [ui-followup-5193] › map-actions.spec.ts:148:1 › map-only diplomacy uses the one real encountered-faction consumer and ordinary war command
+  [ui-followup-5193] › map-actions.spec.ts:174:1 › 390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer
+  [ui-followup-5193] › next-action.spec.ts:49:1 › hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders
+  [ui-followup-5193] › next-action.spec.ts:89:1 › paused routes need attention while standing journeys, stationary missions and embarked troops are skipped
+  [ui-followup-5193] › next-action.spec.ts:130:1 › remapped shortcuts persist and previous/next touch controls remain usable at narrow width
+Total: 28 tests in 9 files

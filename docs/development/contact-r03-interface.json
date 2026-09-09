@@ -1,0 +1,23 @@
+{
+  "defense": {
+    "engagedFormations": 20,
+    "engagedStrength": 20,
+    "reserveFormations": 1,
+    "reserveStrength": 1
+  },
+  "movement": {
+    "target": 537,
+    "path": [],
+    "cost": 0,
+    "action": "blocked",
+    "canMoveNow": false,
+    "canQueue": false,
+    "blocker": "This field battle supports at most twenty defending formations.",
+    "limited": false,
+    "expandedNodes": 0
+  },
+  "aiAttacks": false,
+  "directAttackAccepted": true,
+  "tacticalDefenders": 20,
+  "requiredInterface": "getMovementQuery must honor the current canonical battleDefense contingent rather than deny all >20 stacks; AI can then consume that preview without bypassing the shared movement API."
+}

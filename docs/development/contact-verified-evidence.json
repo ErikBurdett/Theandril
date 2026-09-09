@@ -1,0 +1,968 @@
+{
+  "beforeAfter": {
+    "before": {
+      "label": "before",
+      "revision": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+      "seed": 748291,
+      "size": "standard",
+      "factionCount": 4,
+      "limit": 140,
+      "finalTurn": 137,
+      "firstContact": {
+        "faction.ashen_compact": 137,
+        "faction.reedbound_council": 130,
+        "faction.cinder_march": 57,
+        "faction.glass_tide": 56
+      },
+      "initialHash": "60f48aa4",
+      "finalHash": "0b85bacc",
+      "commands": 5275,
+      "maxCommands": 29,
+      "mirroredCommands": 4972,
+      "exactReplay": true,
+      "rejectedCommands": 0,
+      "elapsedMs": 11834.761749,
+      "plannerMs": {
+        "count": 544,
+        "mean": 7.3327689025735365,
+        "p95": 16.661278000001403,
+        "max": 37.548124999999345
+      },
+      "timingScope": "Real plans, concurrent workstation; campaign timing includes diagnostics and save mirror, excludes final replay. Not an isolated benchmark.",
+      "retainedEnvelopeVersion": 17,
+      "ashenPaidStages": [
+        {
+          "sequence": 1,
+          "turn": 1,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1",
+            "name": "Hearth 1"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 104,
+          "turn": 12,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.cinder_masonry"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -24
+        },
+        {
+          "sequence": 105,
+          "turn": 12,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.9",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 160,
+          "turn": 17,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.stewardship"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -36
+        },
+        {
+          "sequence": 191,
+          "turn": 19,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.13",
+            "name": "Hearth 2"
+          },
+          "coinDelta": -14,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 223,
+          "turn": 21,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.coastal_navigation"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -30
+        },
+        {
+          "sequence": 271,
+          "turn": 24,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.9",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 304,
+          "turn": 26,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.26",
+            "itemId": "building.harbor"
+          },
+          "coinDelta": -20,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 344,
+          "turn": 28,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.46",
+            "name": "Hearth 3"
+          },
+          "coinDelta": -32,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 378,
+          "turn": 30,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.ocean_navigation"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -80
+        },
+        {
+          "sequence": 401,
+          "turn": 31,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.26",
+            "itemId": "unit.ocean_warship"
+          },
+          "coinDelta": -48,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 475,
+          "turn": 34,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.9",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 497,
+          "turn": 35,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.surveyed_estates"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -60
+        },
+        {
+          "sequence": 498,
+          "turn": 35,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.26",
+            "itemId": "unit.transport"
+          },
+          "coinDelta": -24,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 640,
+          "turn": 40,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.waterworks"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -64
+        },
+        {
+          "sequence": 708,
+          "turn": 42,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.26",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 744,
+          "turn": 43,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.quarry_cranes"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -60
+        },
+        {
+          "sequence": 853,
+          "turn": 46,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.charter_forestry"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -72
+        },
+        {
+          "sequence": 859,
+          "turn": 46,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.109",
+            "name": "Hearth 4"
+          },
+          "coinDelta": -54,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 934,
+          "turn": 48,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.26",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 1051,
+          "turn": 51,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.129",
+            "name": "Hearth 5"
+          },
+          "coinDelta": -80,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 1083,
+          "turn": 52,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.deep_soundings"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -120
+        },
+        {
+          "sequence": 1226,
+          "turn": 55,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.9",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 1481,
+          "turn": 60,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.152",
+            "name": "Hearth 6"
+          },
+          "coinDelta": -110,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 1808,
+          "turn": 66,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.119",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 1935,
+          "turn": 68,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.77",
+            "name": "Hearth 7"
+          },
+          "coinDelta": -144,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 2475,
+          "turn": 77,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.civic_accounts"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -800
+        },
+        {
+          "sequence": 2746,
+          "turn": 81,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.26",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 2825,
+          "turn": 82,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.188",
+            "name": "Hearth 8"
+          },
+          "coinDelta": -182,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 3528,
+          "turn": 94,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.119",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 4384,
+          "turn": 110,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.223",
+            "name": "Hearth 9"
+          },
+          "coinDelta": -224,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 4982,
+          "turn": 124,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.119",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        }
+      ]
+    },
+    "after": {
+      "label": "after",
+      "revision": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+      "rulesVersion": 17,
+      "seed": 748291,
+      "size": "standard",
+      "factionCount": 4,
+      "limit": 100,
+      "finalTurn": 95,
+      "firstContact": {
+        "faction.ashen_compact": 95,
+        "faction.reedbound_council": 94,
+        "faction.cinder_march": 52,
+        "faction.glass_tide": 51
+      },
+      "initialHash": "60f48aa4",
+      "finalHash": "6d0863a2",
+      "commands": 3082,
+      "maxCommands": 23,
+      "mirroredCommands": 2790,
+      "exactReplay": true,
+      "rejectedCommands": 0,
+      "elapsedMs": 5318.855052999999,
+      "plannerMs": {
+        "count": 376,
+        "mean": 4.606140555851062,
+        "p95": 15.42211000000043,
+        "max": 22.145134999999755
+      },
+      "timingScope": "Real plans, concurrent workstation; campaign timing includes diagnostics and save mirror, excludes final replay. Not an isolated benchmark.",
+      "retainedEnvelopeVersion": 17,
+      "ashenPaidStages": [
+        {
+          "sequence": 1,
+          "turn": 1,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.1",
+            "name": "Hearth 1"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 104,
+          "turn": 12,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.cinder_masonry"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -24
+        },
+        {
+          "sequence": 105,
+          "turn": 12,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.9",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 125,
+          "turn": 14,
+          "command": {
+            "type": "queueMovement",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.13",
+            "target": 38916
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 158,
+          "turn": 17,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.stewardship"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -36
+        },
+        {
+          "sequence": 173,
+          "turn": 18,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.13",
+            "name": "Hearth 2"
+          },
+          "coinDelta": -14,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 221,
+          "turn": 21,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.coastal_navigation"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -30
+        },
+        {
+          "sequence": 246,
+          "turn": 23,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.24",
+            "itemId": "building.harbor"
+          },
+          "coinDelta": -20,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 247,
+          "turn": 23,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.9",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 278,
+          "turn": 25,
+          "command": {
+            "type": "queueMovement",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.43",
+            "target": 39710
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 369,
+          "turn": 30,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.ocean_navigation"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -80
+        },
+        {
+          "sequence": 431,
+          "turn": 33,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.24",
+            "itemId": "unit.ocean_warship"
+          },
+          "coinDelta": -48,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 505,
+          "turn": 36,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.waterworks"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -64
+        },
+        {
+          "sequence": 533,
+          "turn": 37,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.24",
+            "itemId": "unit.transport"
+          },
+          "coinDelta": -24,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 597,
+          "turn": 39,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.24",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 625,
+          "turn": 40,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.quarry_cranes"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -60
+        },
+        {
+          "sequence": 772,
+          "turn": 45,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.surveyed_estates"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -60
+        },
+        {
+          "sequence": 936,
+          "turn": 50,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.charter_forestry"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -72
+        },
+        {
+          "sequence": 1081,
+          "turn": 54,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.43",
+            "name": "Hearth 3"
+          },
+          "coinDelta": -32,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 1229,
+          "turn": 58,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.deep_soundings"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -120
+        },
+        {
+          "sequence": 1532,
+          "turn": 65,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.132",
+            "itemId": "building.harbor"
+          },
+          "coinDelta": -20,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 1623,
+          "turn": 67,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.95",
+            "name": "Hearth 4"
+          },
+          "coinDelta": -54,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 1773,
+          "turn": 70,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.132",
+            "itemId": "unit.ocean_warship"
+          },
+          "coinDelta": -48,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 2085,
+          "turn": 76,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.132",
+            "itemId": "unit.transport"
+          },
+          "coinDelta": -24,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 2090,
+          "turn": 76,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.24",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 2363,
+          "turn": 81,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.132",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 2467,
+          "turn": 83,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.200",
+            "name": "Hearth 5"
+          },
+          "coinDelta": -80,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 2563,
+          "turn": 85,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.9",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 2775,
+          "turn": 89,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.228",
+            "name": "Hearth 6"
+          },
+          "coinDelta": -110,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 2870,
+          "turn": 91,
+          "command": {
+            "type": "research",
+            "factionId": "faction.ashen_compact",
+            "technologyId": "technology.civic_accounts"
+          },
+          "coinDelta": 0,
+          "knowledgeDelta": -800
+        },
+        {
+          "sequence": 2928,
+          "turn": 92,
+          "command": {
+            "type": "queue",
+            "factionId": "faction.ashen_compact",
+            "settlementId": "settlement.132",
+            "itemId": "unit.colonist"
+          },
+          "coinDelta": -16,
+          "knowledgeDelta": 0
+        },
+        {
+          "sequence": 2984,
+          "turn": 93,
+          "command": {
+            "type": "found",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.218",
+            "name": "Hearth 7"
+          },
+          "coinDelta": -144,
+          "knowledgeDelta": 0
+        }
+      ]
+    }
+  },
+  "retainedArtifacts": [
+    {
+      "path": "contact-before-commands.jsonl.gz",
+      "bytes": 263154,
+      "sha256": "b11dfe4e6d7c7d3f538f47ebb90ff6c1cd582767de80d7dea4bbd59e6efceb53"
+    },
+    {
+      "path": "contact-before-contacts.json",
+      "bytes": 13097,
+      "sha256": "3b2548c759dad95dd0350894ec3835b1f82c7363496d833a2ae415aff396e239"
+    },
+    {
+      "path": "contact-before-final.json.gz",
+      "bytes": 140994,
+      "sha256": "86ce632e6665983415e48413b5ee24d8bdac9c2269c7ded96248e070bd2015ed"
+    },
+    {
+      "path": "contact-before-initial.json.gz",
+      "bytes": 35657,
+      "sha256": "308cb56d3b69da16698f0719abaf8a0fbee8420e10186da7d0da81cfe682421a"
+    },
+    {
+      "path": "contact-before-plans.jsonl.gz",
+      "bytes": 90739,
+      "sha256": "5b113f884760bbcfe0ad1aa51452f7e0fc89f4293bb7224e25bb3f3205ed4eeb"
+    },
+    {
+      "path": "contact-before-summary.json",
+      "bytes": 832,
+      "sha256": "f7cee7fa87919dc8351d802e9a0ddd438ee293f0fccc3560ef62118111b01270"
+    },
+    {
+      "path": "contact-before-turn100-view.json.gz",
+      "bytes": 90148,
+      "sha256": "287c9cc96301db0fddd84a959f07985ef048619d0fc2b11fd92855414ab2008c"
+    },
+    {
+      "path": "contact-before-turn40-view.json.gz",
+      "bytes": 31126,
+      "sha256": "4556ad1d731961778ca1c7f7ddf4c4f12f40a033c6339f0bf320b74d12d5a47e"
+    },
+    {
+      "path": "contact-before-turn60-view.json.gz",
+      "bytes": 51502,
+      "sha256": "6bbb851e6fab78dd057534f2802f62cf6c48e904c9c9be0113ef0b0233a6a359"
+    },
+    {
+      "path": "contact-before-turn80-view.json.gz",
+      "bytes": 72026,
+      "sha256": "57944b2816479aec9073bc9f68460305d53e1a3758d651e6f8be3e71b21f1f4c"
+    },
+    {
+      "path": "contact-after-commands.jsonl.gz",
+      "bytes": 154480,
+      "sha256": "61eafde6e5787f956fd1dead012d64fe7253c609c579f43bffd0120dea249bb2"
+    },
+    {
+      "path": "contact-after-contacts.json",
+      "bytes": 11728,
+      "sha256": "7533f84161e37fba73b8ad9ca8de27d86d4be68704e5f5d6c16ceef7d0064c7f"
+    },
+    {
+      "path": "contact-after-final.json.gz",
+      "bytes": 111423,
+      "sha256": "41bcd0e54ee6a44ebd261a9bf3834ceaac087610cc1ff2a6957ca3270a6de48a"
+    },
+    {
+      "path": "contact-after-initial.json.gz",
+      "bytes": 35657,
+      "sha256": "308cb56d3b69da16698f0719abaf8a0fbee8420e10186da7d0da81cfe682421a"
+    },
+    {
+      "path": "contact-after-midpoint.json.gz",
+      "bytes": 47340,
+      "sha256": "4668c685ae09d8e4334963f61a9414a8c794a9e04b9a376a576e8c8126cc871c"
+    },
+    {
+      "path": "contact-after-plans.jsonl.gz",
+      "bytes": 54256,
+      "sha256": "251576a52175617a10437aea834f0ba3cfc1f0a40e6a72a06aa2fe26a3eaa9fe"
+    },
+    {
+      "path": "contact-after-summary.json",
+      "bytes": 853,
+      "sha256": "2eb8bd38601cd10af132c738c899e26c6060118abcc597c2e4135db3c5116744"
+    },
+    {
+      "path": "contact-after-turn40-view.json.gz",
+      "bytes": 25580,
+      "sha256": "714fd197ddf8d3fbd2095b04297c332172ee31901adc5b45395cacb5c48980cd"
+    },
+    {
+      "path": "contact-after-turn60-view.json.gz",
+      "bytes": 37978,
+      "sha256": "82ddda37a5bbbd8186c263e51430f703fbdb46a9860f40f3995ace63d9ec36cc"
+    },
+    {
+      "path": "contact-after-turn80-view.json.gz",
+      "bytes": 51463,
+      "sha256": "6803fd4f642802af8746aaefa75f4fa82008dec0079aaa075b1c95e568d7540f"
+    }
+  ],
+  "finalAiChecks": [
+    "\u2713 packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 4 seats makes player contact through legal bounded plans with save replay 6140ms",
+    "\u2713 packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 24 seats makes player contact through legal bounded plans with save replay 8985ms",
+    "\u2713 packages/ai/src/contact.test.ts > generated large-map faction contact > huge / 32 seats makes player contact through legal bounded plans with save replay 14369ms",
+    "Test Files  29 passed (29)",
+    "Tests  251 passed (251)",
+    "Duration  92.18s (transform 900ms, setup 0ms, import 3.67s, tests 170.58s, environment 2ms)"
+  ],
+  "removedTrialRawCaptures": [
+    "contact-progress-initial.json.gz",
+    "contact-progress-commands.jsonl",
+    "contact-progress-plans.jsonl",
+    "contact-progress-turn40-view.json.gz",
+    "contact-progress-turn60-view.json.gz",
+    "contact-progress-turn80-view.json.gz",
+    "contact-progress-turn100-view.json.gz",
+    "contact-progress-final.json.gz",
+    "contact-progress-contacts.json",
+    "contact-boundary-initial.json.gz",
+    "contact-boundary-commands.jsonl",
+    "contact-boundary-plans.jsonl",
+    "contact-boundary-turn40-view.json.gz",
+    "contact-boundary-turn60-view.json.gz",
+    "contact-boundary-turn80-view.json.gz",
+    "contact-boundary-turn100-view.json.gz",
+    "contact-boundary-final.json.gz",
+    "contact-boundary-contacts.json",
+    "contact-role-initial.json.gz",
+    "contact-role-commands.jsonl",
+    "contact-role-plans.jsonl",
+    "contact-role-turn40-view.json.gz",
+    "contact-role-turn60-view.json.gz",
+    "contact-role-turn80-view.json.gz",
+    "contact-role-turn100-view.json.gz",
+    "contact-role-final.json.gz",
+    "contact-role-contacts.json",
+    "contact-outlet-initial.json.gz",
+    "contact-outlet-commands.jsonl",
+    "contact-outlet-plans.jsonl",
+    "contact-outlet-turn40-view.json.gz",
+    "contact-outlet-turn60-view.json.gz",
+    "contact-outlet-turn80-view.json.gz",
+    "contact-outlet-turn100-view.json.gz",
+    "contact-outlet-final.json.gz",
+    "contact-outlet-contacts.json"
+  ],
+  "scope": "Command/cost evidence and replay were generated from actual simulation execution; planner input is ordinary detached observation only."
+}

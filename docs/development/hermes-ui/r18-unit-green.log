@@ -1,0 +1,34 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ apps/web/src/faction-art.test.tsx (13 tests | 1 failed) 232ms
+     × resolves the shared Waykeeper cast for two cultures with one bounded page and a truthful shared label 137ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/faction-art.test.tsx > approved faction DOM artwork boundary > resolves the shared Waykeeper cast for two cultures with one bounded page and a truthful shared label
+ZodError: [
+  {
+    "code": "custom",
+    "message": "Overlapping atlas frame rectangles",
+    "path": []
+  }
+]
+ ❯ parseRuntimeCatalog packages/art-pipeline/src/runtime.ts:83:93
+     81| export type RuntimeCatalog = z.infer<typeof runtimeCatalogSchema>;
+     82| export type ArtLabCatalog = z.infer<typeof artLabCatalogSchema>;
+     83| export const parseRuntimeCatalog = (input: unknown): RuntimeCatalog =>…
+       |                                                                                             ^
+     84| export const parseArtLabCatalog = (input: unknown): ArtLabCatalog => a…
+     85|
+ ❯ apps/web/src/faction-art.tsx:40:12
+ ❯ apps/web/src/faction-art.tsx:78:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 12 passed (13)
+   Start at  01:32:12
+   Duration  335ms (transform 96ms, setup 0ms, import 39ms, tests 232ms, environment 0ms)
+

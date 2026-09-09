@@ -1,0 +1,58 @@
+COMMAND: pnpm exec tsx scripts/benchmark-chronicle.ts --size=tiny --pace=short --factions=4 --limit=150
+START: 2026-09-09T05:20:23.010599+00:00
+{
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "note": "Generated starts, every faction controlled by real AI, complete command/event/battle archives, true Prosperity victory. Short32/40faction scale runs are distinct from Standard/Epic4faction duration runs. Round time includes end-turn archive hashes but excludes disk saves, compression, rendering and final log generation. Complete replay and envelope restore verified.",
+  "measurements": [
+    {
+      "seed": 20260905,
+      "size": "tiny",
+      "pace": "short",
+      "factions": 4,
+      "victory": {
+        "path": "prosperity",
+        "factionId": "faction.reedbound_council",
+        "projectId": "project.73",
+        "settlementId": "settlement.10",
+        "turn": 42
+      },
+      "turns": 41,
+      "orders": 549,
+      "events": 1399,
+      "battleReportsArchived": 3,
+      "rejected": 0,
+      "totalMs": 422.951491,
+      "aiMs": 112.28507100000007,
+      "observationMs": 141.7041140000007,
+      "commandAndArchiveMs": 168.22256700000077,
+      "winnerSettlements": 4,
+      "livingCharacters": 10,
+      "retainedMemorials": 0,
+      "characterActivity": {
+        "character_recruited": 10,
+        "character_assigned": 9,
+        "character_mission_started": 18,
+        "character_mission_progress": 18,
+        "character_mission_completed": 18,
+        "character_promoted": 3,
+        "character_battle_experience": 2
+      },
+      "conquestNotifications": 0,
+      "averageRoundWithArchiveMs": 10.315890024390244,
+      "saveMs": 4.237642000000051,
+      "loadMs": 40.95537899999999,
+      "exportMs": 37.036383,
+      "importMs": 52.631483,
+      "compressedBytes": 44742,
+      "logMs": 17.238421000000017,
+      "replayMs": 149.99526100000003,
+      "saveBytes": 472149,
+      "technicalBytes": 671762,
+      "historyBytes": 40469,
+      "chapters": 44,
+      "hash": "88850624",
+      "heapMiB": 68
+    }
+  ]
+}

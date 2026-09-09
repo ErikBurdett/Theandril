@@ -1,0 +1,34 @@
+[
+  {
+    "name": "morale-roundtrip",
+    "command": "node --import tsx docs/hermes-analysis/qa/minimal-save-repro.mjs",
+    "exitCode": 1,
+    "seconds": 0.5068224909991841,
+    "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/verification/morale-roundtrip.log",
+    "interpretation": "expected failure confirming release-blocking save defect"
+  },
+  {
+    "name": "retained-report-save",
+    "command": "pnpm exec tsx docs/hermes-analysis/campaigns/audit-save.ts",
+    "exitCode": 0,
+    "seconds": 0.6906227769995894,
+    "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/verification/retained-report-save.log",
+    "interpretation": "diagnostic expects the known invalid saved report"
+  },
+  {
+    "name": "stack-economy-boundaries",
+    "command": "pnpm exec tsx docs/hermes-analysis/verification/probes.ts",
+    "exitCode": 0,
+    "seconds": 0.6945775519998278,
+    "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/verification/stack-economy-boundaries.log",
+    "interpretation": "assertion-backed check"
+  },
+  {
+    "name": "valid-campaign-replay",
+    "command": "pnpm exec tsx docs/hermes-analysis/campaigns/replay.ts docs/hermes-analysis/campaigns/runs/C-tiny4-seed99",
+    "exitCode": 0,
+    "seconds": 1.6852783809990797,
+    "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/verification/valid-campaign-replay.log",
+    "interpretation": "assertion-backed check"
+  }
+]

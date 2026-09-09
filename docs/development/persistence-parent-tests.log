@@ -1,0 +1,13 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/persistence/src/persistence.test.ts (12 tests) 715ms
+ ✓ packages/persistence/src/campaign-storage.test.ts (21 tests) 2113ms
+   ✓ rotating a long abandoned campaign limits cleanup per commit and safely drains deferred orphan chains  474ms
+
+ Test Files  2 passed (2)
+      Tests  33 passed (33)
+   Start at  02:26:36
+   Duration  2.71s (transform 731ms, setup 0ms, import 1.04s, tests 2.83s, environment 0ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/persistence-parent-tests.json

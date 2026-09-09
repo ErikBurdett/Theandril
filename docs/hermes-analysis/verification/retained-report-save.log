@@ -1,0 +1,335 @@
+{
+  "path": "docs/hermes-analysis/campaigns/runs/D-standard24-seed74/final.json.gz",
+  "turn": 101,
+  "failure": "Error: Invalid save: battle formation differs from unit content",
+  "mismatches": [
+    {
+      "battleId": "battle.1419",
+      "battleTurn": 96,
+      "formationId": "formation.543",
+      "unitId": "unit.arbalester",
+      "defending": true,
+      "expected": {
+        "attack": 22,
+        "armor": 5,
+        "initiative": 4,
+        "range": 3,
+        "moraleCeiling": 74,
+        "maxStrength": 45
+      },
+      "actual": {
+        "attack": 22,
+        "armor": 5,
+        "initiative": 4,
+        "range": 3,
+        "morale": 78,
+        "maxStrength": 45
+      },
+      "development": {
+        "formationId": "formation.543",
+        "trainingIds": [
+          "training.field_habits",
+          "training.pressure_drill"
+        ],
+        "traditionIds": []
+      },
+      "characterSnapshots": [
+        {
+          "characterId": "character.183",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Amiel Veilthread 3",
+          "definitionId": "character.surveyor",
+          "skillId": "skill.fieldcraft",
+          "experience": 4,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 0,
+            "armor": 0
+          },
+          "rallyRestore": 0,
+          "learnedSkillIds": []
+        },
+        {
+          "characterId": "character.325",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Lorian Hemscale 6",
+          "definitionId": "character.marshal",
+          "skillId": null,
+          "experience": 0,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 1,
+            "armor": 0
+          },
+          "rallyRestore": 12,
+          "learnedSkillIds": []
+        },
+        {
+          "characterId": "character.346",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Orel Plumbweft 6",
+          "definitionId": "character.engineer",
+          "skillId": null,
+          "experience": 0,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 0,
+            "armor": 0
+          },
+          "rallyRestore": 0,
+          "learnedSkillIds": []
+        }
+      ],
+      "usedAbilities": []
+    },
+    {
+      "battleId": "battle.1433",
+      "battleTurn": 97,
+      "formationId": "formation.543",
+      "unitId": "unit.arbalester",
+      "defending": true,
+      "expected": {
+        "attack": 22,
+        "armor": 5,
+        "initiative": 4,
+        "range": 3,
+        "moraleCeiling": 74,
+        "maxStrength": 45
+      },
+      "actual": {
+        "attack": 22,
+        "armor": 5,
+        "initiative": 4,
+        "range": 3,
+        "morale": 78,
+        "maxStrength": 45
+      },
+      "development": {
+        "formationId": "formation.543",
+        "trainingIds": [
+          "training.field_habits",
+          "training.pressure_drill"
+        ],
+        "traditionIds": []
+      },
+      "characterSnapshots": [
+        {
+          "characterId": "character.183",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Amiel Veilthread 3",
+          "definitionId": "character.surveyor",
+          "skillId": "skill.fieldcraft",
+          "experience": 7,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 0,
+            "armor": 0
+          },
+          "rallyRestore": 0,
+          "learnedSkillIds": []
+        },
+        {
+          "characterId": "character.325",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Lorian Hemscale 6",
+          "definitionId": "character.marshal",
+          "skillId": null,
+          "experience": 3,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 1,
+            "armor": 0
+          },
+          "rallyRestore": 12,
+          "learnedSkillIds": []
+        },
+        {
+          "characterId": "character.346",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Orel Plumbweft 6",
+          "definitionId": "character.engineer",
+          "skillId": null,
+          "experience": 3,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 0,
+            "armor": 0
+          },
+          "rallyRestore": 0,
+          "learnedSkillIds": []
+        }
+      ],
+      "usedAbilities": []
+    },
+    {
+      "battleId": "battle.1450",
+      "battleTurn": 98,
+      "formationId": "formation.543",
+      "unitId": "unit.arbalester",
+      "defending": true,
+      "expected": {
+        "attack": 22,
+        "armor": 5,
+        "initiative": 4,
+        "range": 3,
+        "moraleCeiling": 74,
+        "maxStrength": 45
+      },
+      "actual": {
+        "attack": 22,
+        "armor": 5,
+        "initiative": 4,
+        "range": 3,
+        "morale": 78,
+        "maxStrength": 45
+      },
+      "development": {
+        "formationId": "formation.543",
+        "trainingIds": [
+          "training.field_habits",
+          "training.pressure_drill"
+        ],
+        "traditionIds": []
+      },
+      "characterSnapshots": [
+        {
+          "characterId": "character.183",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Amiel Veilthread 3",
+          "definitionId": "character.surveyor",
+          "skillId": "skill.fieldcraft",
+          "experience": 10,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 0,
+            "armor": 0
+          },
+          "rallyRestore": 0,
+          "learnedSkillIds": []
+        },
+        {
+          "characterId": "character.325",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Lorian Hemscale 6",
+          "definitionId": "character.marshal",
+          "skillId": null,
+          "experience": 6,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 1,
+            "armor": 0
+          },
+          "rallyRestore": 12,
+          "learnedSkillIds": []
+        },
+        {
+          "characterId": "character.346",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Orel Plumbweft 6",
+          "definitionId": "character.engineer",
+          "skillId": null,
+          "experience": 6,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 0,
+            "armor": 0
+          },
+          "rallyRestore": 0,
+          "learnedSkillIds": []
+        }
+      ],
+      "usedAbilities": []
+    },
+    {
+      "battleId": "battle.1461",
+      "battleTurn": 99,
+      "formationId": "formation.543",
+      "unitId": "unit.arbalester",
+      "defending": true,
+      "expected": {
+        "attack": 22,
+        "armor": 5,
+        "initiative": 4,
+        "range": 3,
+        "moraleCeiling": 74,
+        "maxStrength": 45
+      },
+      "actual": {
+        "attack": 22,
+        "armor": 5,
+        "initiative": 4,
+        "range": 3,
+        "morale": 78,
+        "maxStrength": 45
+      },
+      "development": {
+        "formationId": "formation.543",
+        "trainingIds": [
+          "training.field_habits",
+          "training.pressure_drill"
+        ],
+        "traditionIds": []
+      },
+      "characterSnapshots": [
+        {
+          "characterId": "character.183",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Amiel Veilthread 3",
+          "definitionId": "character.surveyor",
+          "skillId": "skill.fieldcraft",
+          "experience": 13,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 0,
+            "armor": 0
+          },
+          "rallyRestore": 0,
+          "learnedSkillIds": []
+        },
+        {
+          "characterId": "character.325",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Lorian Hemscale 6",
+          "definitionId": "character.marshal",
+          "skillId": null,
+          "experience": 9,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 1,
+            "armor": 0
+          },
+          "rallyRestore": 12,
+          "learnedSkillIds": []
+        },
+        {
+          "characterId": "character.346",
+          "armyId": "army.174",
+          "factionId": "faction.velvet_meridian",
+          "name": "Orel Plumbweft 6",
+          "definitionId": "character.engineer",
+          "skillId": null,
+          "experience": 9,
+          "woundedTurns": 0,
+          "leadership": {
+            "attack": 0,
+            "armor": 0
+          },
+          "rallyRestore": 0,
+          "learnedSkillIds": []
+        }
+      ],
+      "usedAbilities": []
+    }
+  ]
+}

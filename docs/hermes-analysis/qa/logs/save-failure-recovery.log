@@ -1,0 +1,10 @@
+COMMAND: node --import tsx docs/hermes-analysis/qa/save-failure-recovery.mjs
+START: 2026-09-09T05:41:49.533563+00:00
+{
+  "scope": "Real CampaignJournal and SaveStore API; fake-indexeddb transaction engine, not browser disk latency.",
+  "beforeHash": "602413fe",
+  "afterHash": "58a2012d",
+  "saveError": "Error: Invalid save: invalid formation definition, morale or strength",
+  "restoredHash": "602413fe",
+  "lastValidRetained": true
+}

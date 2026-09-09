@@ -1,0 +1,39 @@
+RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/persistence/src/campaign-storage.test.ts (21 tests) 2042ms
+   ✓ rotating a long abandoned campaign limits cleanup per commit and safely drains deferred orphan chains  583ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts (25 tests) 1532ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts (19 tests) 1096ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts (32 tests) 993ms
+ ✓ packages/chronicle/src/compatibility.test.ts (5 tests) 919ms
+     ✓ matches the independently recorded pre-travel short-campaign v4 benchmark seal  530ms
+ ✓ packages/persistence/src/campaign-storage-durability.test.ts (3 tests) 873ms
+   ✓ PERSIST-02 a resealed refcount undercount cannot reclaim a remaining history, and bounded GC still drains it when abandoned  637ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts (17 tests) 770ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts (13 tests) 653ms
+stderr | apps/web/src/worker-queries.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ✓ apps/web/src/worker-queries.test.ts (6 tests) 652ms
+ ✓ packages/persistence/src/persistence.test.ts (12 tests) 632ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts (21 tests) 542ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts (9 tests) 553ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts (10 tests) 522ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts (16 tests) 505ms
+ ✓ packages/chronicle/src/journal.test.ts (13 tests) 491ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts (9 tests) 459ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts (11 tests) 417ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts (11 tests) 418ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts (8 tests) 385ms
+ ✓ packages/chronicle/src/specialist-roster.test.ts (6 tests) 362ms
+ ✓ packages/chronicle/src/chronicle.test.ts (4 tests) 229ms
+ ✓ packages/persistence/src/current-origin.test.ts (2 tests) 160ms
+ ✓ packages/chronicle/src/character-replay.test.ts (2 tests) 133ms
+ ✓ packages/chronicle/src/naval-replay.test.ts (1 test) 67ms
+
+ Test Files  24 passed (24)
+      Tests  276 passed (276)
+   Start at  04:02:09
+   Duration  19.43s (transform 597ms, setup 0ms, import 2.57s, tests 15.40s, environment 1ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/review-fix-2/persistence-integration.json

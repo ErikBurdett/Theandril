@@ -1,0 +1,33 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ × packages/ai/src/contact-reconnaissance.test.ts > an ocean reconnaissance hull charts offshore instead of duplicating a coastal shoreline sweep 50ms
+   → expected 20 to be 12 // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ai/src/contact-reconnaissance.test.ts > an ocean reconnaissance hull charts offshore instead of duplicating a coastal shoreline sweep
+AssertionError: expected 20 to be 12 // Object.is equality
+
+- Expected
++ Received
+
+- 12
++ 20
+
+ ❯ packages/ai/src/contact-reconnaissance.test.ts:30:57
+     28|   const mostDiscovery = Math.max(...reachable.map(item => navigation.i…
+     29|   const inwardDiscovery = Math.min(...reachable.filter(item => navigat…
+     30|   expect(hexDistance(move!.target, center, view.width)).toBe(inwardDis…
+       |                                                         ^
+     31|   expect(navigation.informationGain(move!.target, fleet.sight)).toBeGr…
+     32|   expect(getMovementQuery(view, fleet.id, move!.target).preview).toMat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  01:54:52
+   Duration  551ms (transform 326ms, setup 0ms, import 433ms, tests 51ms, environment 0ms)
+

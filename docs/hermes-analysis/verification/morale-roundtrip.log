@@ -1,0 +1,14 @@
+VALID_INPUT 602413fe turn 236 morale 55
+ACCEPTED {"type":"attack","factionId":"faction.reedbound_council","armyId":"army.478","targetArmyId":"army.8"} 289c01b6
+ACCEPTED {"type":"autoResolveBattle","factionId":"faction.reedbound_council"} 58a2012d
+POST_BATTLE_MORALE 59
+/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:396
+  if (!condition) throw new Error('Invalid save: ' + message);
+                        ^
+
+Error: Invalid save: invalid formation definition, morale or strength
+    at assert (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:396:25)
+    at deserializeGame (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:677:7)
+    at file:///home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/minimal-save-repro.mjs:12:18
+
+Node.js v26.7.0

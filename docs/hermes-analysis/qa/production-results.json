@@ -1,0 +1,259 @@
+{
+  "config": {
+    "argv": [
+      "/home/telephoneheater/.local/share/mise/installs/node/26.7.0/bin/node",
+      "/home/telephoneheater/Work/Theandril/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "docs/hermes-analysis/qa/production.config.ts",
+      "--workers=1"
+    ],
+    "configFile": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/production.config.ts",
+    "rootDir": "/home/telephoneheater/Work/Theandril/tests/production",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/production-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/telephoneheater/Work/Theandril/tests/production",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/production-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm exec -- vite preview --host 127.0.0.1 --port 4174 --strictPort",
+      "url": "http://127.0.0.1:4174",
+      "cwd": "/home/telephoneheater/Work/Theandril/apps/web",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "battlefield.spec.ts",
+      "file": "battlefield.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5476,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-09T05:29:47.751Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "67afeca687e95964caf9-ae2e79c18019b2e2c38f",
+          "file": "battlefield.spec.ts",
+          "line": 9,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "deployment-assets.spec.ts",
+      "file": "deployment-assets.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "built game loads verified map art, UI materials and its real worker inside the configured deployment base",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1482,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-09T05:29:53.389Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "deployment-assets",
+                      "contentType": "application/json",
+                      "path": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/production-artifacts/deployment-assets-built-ga-48619--configured-deployment-base/attachments/deployment-assets-adc16ffc1faab110c58e41ef898737806bfa76ec.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "38db8f889f605d115c22-264ae9e0f6c0386b7291",
+          "file": "deployment-assets.spec.ts",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "map-actions.spec.ts",
+      "file": "map-actions.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "built map actions preserve paid production, land work and resources through a real save/load without development hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3976,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-09T05:29:54.881Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "09280ae976715520e6bb-c6a236ec9cd8f45f83e4",
+          "file": "map-actions.spec.ts",
+          "line": 35,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "watch-fog.spec.ts",
+      "file": "watch-fog.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "production exposes the watch-only fog command without development hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1328,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-09T05:29:58.864Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ca671931c743570df246-e9ffe1b4593adcf6ca97",
+          "file": "watch-fog.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-09T05:29:46.963Z",
+    "duration": 13291.64,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,62 @@
+COMMAND: node --expose-gc --import tsx docs/hermes-analysis/qa/modern-battle.mjs
+START: 2026-09-09T05:17:13.919823+00:00
+{
+  "measuredAt": "2026-09-09T05:17:15.334Z",
+  "node": "v26.7.0",
+  "saveVersion": 16,
+  "battleRules": 10,
+  "formations": 40,
+  "enteringSoldiers": 2240,
+  "pendingSaveBytes": 63077,
+  "resultSaveBytes": 74815,
+  "pendingHash": "1286c03b",
+  "resultHash": "9cb986d3",
+  "withoutPresentation": {
+    "samples": 30,
+    "p50Ms": 2.527231000000029,
+    "p95Ms": 3.5245109999999613,
+    "maxMs": 4.417412000000013
+  },
+  "withPresentation": {
+    "samples": 30,
+    "p50Ms": 3.1317289999999502,
+    "p95Ms": 4.73489799999993,
+    "maxMs": 5.192676000000006
+  },
+  "manualRounds": {
+    "samples": 3,
+    "p50Ms": 0.9624449999998888,
+    "p95Ms": 1.285810999999967,
+    "maxMs": 1.285810999999967
+  },
+  "retained": [
+    {
+      "sample": 0,
+      "heapUsed": 26751704,
+      "rss": 189194240
+    },
+    {
+      "sample": 9,
+      "heapUsed": 26855088,
+      "rss": 194392064
+    },
+    {
+      "sample": 19,
+      "heapUsed": 27000328,
+      "rss": 201039872
+    },
+    {
+      "sample": 29,
+      "heapUsed": 27041792,
+      "rss": 203542528
+    }
+  ],
+  "presentation": {
+    "bytes": 686549,
+    "events": 255,
+    "rounds": 3
+  },
+  "manualAutoAftermathEqual": true,
+  "exactRepeatedSaveAndPresentation": true,
+  "scope": "Funded veteran20vs20 authored fixture with40mixed real formations and6officers, real war/attack/autoresolve commands on current battle10. Five warmups plus30 measured samples per traced/untraced mode, alternating order. Restoration, equality checks, packet stringify and forcedGC are outside command timing. Current battle packet and canonical aftermath exact; manual commands produce different campaign journal chronology but equal armies/reports. Four explicit postGC process samples on a fixed workload are not a long-campaign leak proof. Concurrent gameplay and other-agent CPU tasks may affect timings."
+}

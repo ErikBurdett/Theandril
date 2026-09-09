@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { applyCommand, createGame, getObservation, stateHash, type ArmyView, type Observation } from '@theandril/sim';
 import { conquestCampaign } from '../../../packages/test-fixtures/src/conquest-fixture';
+import { growingHouseholdCampaign } from '../../../tests/gameplay/household-fixture';
 import { actionCandidates, actionShortcut, loadShortcuts, nextAction, saveShortcuts, shortcutError, type ActionCandidate } from './next-action';
 
 const game = createGame({ seed: 20260905, size: 'tiny', factionCount: 2 });
@@ -11,6 +12,46 @@ const bindings = { army: 'n', settlement: 's', turn: 'e' };
 const keyEvent = { key: 'n', shiftKey: false, ctrlKey: false, altKey: false, metaKey: false, repeat: false, isComposing: false, defaultPrevented: false };
 
 describe('observed-only next-action navigation', () => {
+  it('reports newly unassigned households after real growth even while the town has a full production queue', () => {
+    const game = growingHouseholdCampaign(), factionId = game.turnOwnerId;
+    const before = getObservation(game, factionId, { landDetails: 'none' });
+    expect(before.land.settlements[0]!.workerCapacity).toBe(before.land.settlements[0]!.worked.length);
+    expect(applyCommand(game, { type: 'endTurn', factionId }).ok).toBe(true);
+    const view = getObservation(game, factionId, { landDetails: 'none' });
+    const town = view.settlements.find(town => town.factionId === factionId)!;
+    expect(town.queue.length).toBeGreaterThan(0);
+    expect(view.land.settlements[0]!.cells).toEqual([]);
+    expect(view.land.settlements[0]!.workerCapacity - view.land.settlements[0]!.worked.length).toBe(1);
+    const hash = stateHash(game), observation = JSON.stringify(view);
+    const attention = actionCandidates(view);
+    expect(attention.settlements).toEqual([]);
+    expect(attention.households).toEqual([{ id: town.id, name: town.name, cell: town.cell, unassignedHouseholds: 1,
+      reason: '1 unassigned household. Review land to assign worked tiles; unassigned households add no tile yields.' }]);
+    expect(JSON.stringify(view)).toBe(observation); expect(stateHash(game)).toBe(hash);
+  });
+
+  it('uses observed capacity rather than population, excludes missing/foreign/full summaries and orders labor by stable ID', () => {
+    const game = growingHouseholdCampaign(), view = getObservation(game, game.turnOwnerId, { landDetails: 'none' });
+    const town = view.settlements[0]!, land = view.land.settlements[0]!;
+    view.settlements = [
+      { ...town, id: 'town.3', population: 99 }, { ...town, id: 'town.1', population: 99 },
+      { ...town, id: 'town.2' }, { ...town, id: 'town.foreign', factionId: 'foreign' }, { ...town, id: 'town.missing' },
+    ];
+    view.land.settlements = [
+      { ...land, settlementId: 'town.3', workerCapacity: 3 }, { ...land, settlementId: 'town.1', workerCapacity: 2 },
+      { ...land, settlementId: 'town.2' }, { ...land, settlementId: 'town.foreign', workerCapacity: 99 },
+      { ...land, settlementId: 'town.unknown', workerCapacity: 99 },
+    ];
+    const before = JSON.stringify(view), households = actionCandidates(view).households;
+    expect(households.map(({ id, unassignedHouseholds }) => ({ id, unassignedHouseholds }))).toEqual([
+      { id: 'town.1', unassignedHouseholds: 1 }, { id: 'town.3', unassignedHouseholds: 2 },
+    ]);
+    expect(nextAction(households, 'town.3')?.id).toBe('town.1');
+    expect(nextAction(households, 'town.1', -1)?.id).toBe('town.3');
+    expect(households[1]!.reason).toContain('2 unassigned households.');
+    expect(JSON.stringify(view)).toBe(before);
+  });
+
   it('includes land/fleets and zero-movement paused routes but skips foreign, dead, embarked, busy and automatic forces', () => {
     const view = {
       ...initial,

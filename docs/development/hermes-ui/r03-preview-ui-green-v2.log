@@ -1,0 +1,109 @@
+
+Running 2 tests using 1 worker
+
+(node:359225) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/battle-defense.spec.ts:58:1 › R03 public attack previews the canonical contingent and leaves its reserve on the map (2.5s)
+  ✘  2 tests/gameplay/battle-defense.spec.ts:79:1 › R03 public siege shows reserves at 390px and requires their later defeat before capture (1.6m)
+
+
+  1) tests/gameplay/battle-defense.spec.ts:79:1 › R03 public siege shows reserves at 390px and requires their later defeat before capture 
+
+    Test timeout of 90000ms exceeded.
+
+    Error: locator.click: Test timeout of 90000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Occupy settlement', exact: true })
+        - locator resolved to <button class="wide" aria-label="Occupy settlement">Occupy</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+      - retrying click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <canvas width="390" height="399" aria-hidden="true"></canvas> from <div tabindex="0" class="map-host" data-testid="map-container" aria-label="World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.">…</div> subtree intercepts pointer events
+      - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        39 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+           - waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <canvas width="390" height="399" aria-hidden="true"></canvas> from <div tabindex="0" class="map-host" data-testid="map-container" aria-label="World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.">…</div> subtree intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+           - waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+           - waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <button aria-haspopup="dialog" aria-label="Characters & agents">…</button> from <nav class="hud-tools" aria-label="Map management">…</nav> subtree intercepts pointer events
+      - retrying click action
+        - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - <canvas width="390" height="399" aria-hidden="true"></canvas> from <div tabindex="0" class="map-host" data-testid="map-container" aria-label="World map. Select an army then click a highlighted hex to move or an enemy to attack. Hover to preview routes. Drag to pan; scroll to zoom all the way to world overview. Arrow keys pan; plus and minus zoom. Focus selection returns to local detail. Enter opens map actions for the selection. Escape closes map actions before clearing selection. The army panel has keyboard and touch route controls.">…</div> subtree intercepts pointer events
+      - retrying click action
+        - waiting 500ms
+      - element was detached from the DOM, retrying
+
+
+      105 |   await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
+      106 |   await expect(page.getByTestId('capture-panel')).toBeVisible();
+    > 107 |   await page.getByRole('button', { name: 'Occupy settlement', exact: true }).click();
+          |                                                                              ^
+      108 |   await expect(page.getByTestId('capture-panel')).toHaveCount(0);
+      109 |   expect(await page.evaluate(id => window.__THEANDRIL__!.getSummary()!.ownSettlements.some(town => town.id === id), C.settlementId)).toBe(true);
+      110 |   await info.attach('siege-defense', { body: JSON.stringify({ before, contestedSieges: contested.sieges, errors }, null, 2), contentType: 'application/json' });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/battle-defense.spec.ts:107:78
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r03-preview-ui-green-v2/battle-defense-R03-public--a258a-later-defeat-before-capture/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/hermes-ui/r03-preview-ui-green-v2/battle-defense-R03-public--a258a-later-defeat-before-capture/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r03-preview-ui-green-v2/battle-defense-R03-public--a258a-later-defeat-before-capture/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/hermes-ui/r03-preview-ui-green-v2/battle-defense-R03-public--a258a-later-defeat-before-capture/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/battle-defense.spec.ts:79:1 › R03 public siege shows reserves at 390px and requires their later defeat before capture 
+  1 passed (1.7m)

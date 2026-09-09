@@ -1,0 +1,34 @@
+
+Running 16 tests using 1 worker
+
+(node:370812) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/battle-defense.spec.ts:58:1 › R03 public attack previews the canonical contingent and leaves its reserve on the map (2.9s)
+  ✓   2 tests/gameplay/battle-defense.spec.ts:79:1 › R03 siege preview fits 390px and desktop public assaults clear reserves before capture (4.0s)
+{"stage":"generated-small12","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-1","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-2","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-3","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-4","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-1-small","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-2-tiny","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-3-small","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-4-tiny","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"failed-import","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"after-battle","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✓   3 tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas (8.0s)
+  ✓   4 tests/gameplay/hermes-ui-slices.spec.ts:116:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact (3.0s)
+  ✓   5 tests/gameplay/hermes-ui-slices.spec.ts:116:3 › R18 paid Waykeeper resolves shared art for faction.reedbound_council (3.2s)
+  ✓   6 tests/gameplay/household-attention.spec.ts:15:1 › R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order (2.4s)
+  ✓   7 tests/gameplay/household-attention.spec.ts:53:3 › R07 2-town labor exception opens the exact hearth in one activation at 390px (2.1s)
+  ✓   8 tests/gameplay/household-attention.spec.ts:53:3 › R07 10-town labor exception opens the exact hearth in one activation at 390px (2.1s)
+  ✓   9 tests/gameplay/household-attention.spec.ts:53:3 › R07 40-town labor exception opens the exact hearth in one activation at 390px (2.2s)
+  ✓  10 tests/gameplay/map-actions.spec.ts:51:1 › a real canvas caravan founds, builds and continues in the same full-orders controls without issuing inspection orders (2.3s)
+  ✓  11 tests/gameplay/map-actions.spec.ts:93:1 › a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders (3.6s)
+  ✓  12 tests/gameplay/map-actions.spec.ts:148:1 › map-only diplomacy uses the one real encountered-faction consumer and ordinary war command (1.4s)
+  ✓  13 tests/gameplay/map-actions.spec.ts:174:1 › 390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer (2.8s)
+  ✓  14 tests/gameplay/next-action.spec.ts:49:1 › hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders (8.3s)
+  ✓  15 tests/gameplay/next-action.spec.ts:89:1 › paused routes need attention while standing journeys, stationary missions and embarked troops are skipped (5.8s)
+  ✓  16 tests/gameplay/next-action.spec.ts:130:1 › remapped shortcuts persist and previous/next touch controls remain usable at narrow width (3.2s)
+
+  16 passed (58.1s)

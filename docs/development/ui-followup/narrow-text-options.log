@@ -1,0 +1,45 @@
+
+Running 2 tests using 1 worker
+
+(node:432712) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [ui-followup-5193] › tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls (2.8s)
+  ✘  2 [ui-followup-5193] › tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text (3.3s)
+
+
+  1) [ui-followup-5193] › tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+       at map-pixel-evidence.ts:12
+
+      10 |   if (!box) throw new Error('Map canvas has no screen bounds');
+      11 |   const clip = { x: Math.floor(box.x + box.width / 2 - 60), y: Math.floor(box.y + box.height / 2 - 60), width: 120, height: 120 };
+    > 12 |   expect(await canvas.evaluate((element, rect) => [0, 59, 119].every(x => [0, 59, 119].every(y => document.elementFromPoint(rect.x + x, rect.y + y) === element)), clip)).toBe(true);
+         |                                                                                                                                                                           ^
+      13 |   let png: Buffer | undefined;
+      14 |   let pixels: { colors: number; nonDominantFraction: number; dominantRgb: number[] } | undefined;
+      15 |   await expect.poll(async () => {
+        at expectLocalMapPixels (/home/telephoneheater/Work/Theandril/tests/gameplay/map-pixel-evidence.ts:12:171)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/battle-defense.spec.ts:188:3
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/ui-followup/narrow-text-options/battle-defense-R03-narrow--7c6b9-cepted-controls-at-130-text-ui-followup-5193/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/ui-followup/narrow-text-options/battle-defense-R03-narrow--7c6b9-cepted-controls-at-130-text-ui-followup-5193/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/ui-followup/narrow-text-options/battle-defense-R03-narrow--7c6b9-cepted-controls-at-130-text-ui-followup-5193/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/ui-followup/narrow-text-options/battle-defense-R03-narrow--7c6b9-cepted-controls-at-130-text-ui-followup-5193/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [ui-followup-5193] › tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text 
+  1 passed (7.0s)

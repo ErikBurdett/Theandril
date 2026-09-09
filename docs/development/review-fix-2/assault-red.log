@@ -1,0 +1,35 @@
+$ NO_COLOR=1 pnpm exec vitest run packages/sim/src/pending-assault-save.test.ts --reporter=verbose --reporter=json --outputFile=docs/development/review-fix-2/assault-red.json
+RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ × packages/sim/src/pending-assault-save.test.ts > pending assault save validation > rejects an omitted lower-ID garrison even when a resealed defenderId prioritizes the wrong contingent 79ms
+   → expected [Function] to throw an error
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/sim/src/pending-assault-save.test.ts > pending assault save validation > rejects an omitted lower-ID garrison even when a resealed defenderId prioritizes the wrong contingent
+AssertionError: expected [Function] to throw an error
+
+- Expected:
+null
+
++ Received:
+undefined
+
+ ❯ packages/sim/src/pending-assault-save.test.ts:58:57
+     56|     // A field target is meaningful; an assault's representative must …
+     57|     state.battle!.defenderId = 'army.300';
+     58|     expect(() => deserializeGame(serializeGame(state))).toThrow('Inval…
+       |                                                         ^
+     59|   });
+     60| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  03:54:45
+   Duration  544ms (transform 298ms, setup 0ms, import 394ms, tests 80ms, environment 0ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/review-fix-2/assault-red.json
+EXIT_CODE=1

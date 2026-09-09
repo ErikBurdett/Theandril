@@ -1,0 +1,31 @@
+{
+  "label": "after",
+  "revision": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+  "rulesVersion": 17,
+  "seed": 748291,
+  "size": "standard",
+  "factionCount": 4,
+  "limit": 100,
+  "finalTurn": 95,
+  "firstContact": {
+    "faction.ashen_compact": 95,
+    "faction.reedbound_council": 94,
+    "faction.cinder_march": 52,
+    "faction.glass_tide": 51
+  },
+  "initialHash": "60f48aa4",
+  "finalHash": "6d0863a2",
+  "commands": 3082,
+  "maxCommands": 23,
+  "mirroredCommands": 2790,
+  "exactReplay": true,
+  "rejectedCommands": 0,
+  "elapsedMs": 5318.855052999999,
+  "plannerMs": {
+    "count": 376,
+    "mean": 4.606140555851062,
+    "p95": 15.42211000000043,
+    "max": 22.145134999999755
+  },
+  "timingScope": "Real plans, concurrent workstation; campaign timing includes diagnostics and save mirror, excludes final replay. Not an isolated benchmark."
+}

@@ -1,0 +1,263 @@
+{
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "note": "Real generated, observation-only AI campaign prefixes. Each measured turn applies identical commands to two independent journals and compares results/events/hash outside storage timings. Incremental saves compared with legacy whole-envelope saves in fake-indexeddb: algorithm/serialization/emulated-transaction measurements, NOT browser disk latency. Whole-envelope timing includes explicit detached materialization. Initial commit is reported separately; append/no-op counters, exact reconstruction, legacy equality and complete replay are mandatory. Three immutable payload replicas preserve redundancy; no claim of threefold disk savings. No forced GC, peak or retained-memory proof. Archives remain in memory and the 64 MiB logical policy is unchanged.",
+  "measurements": [
+    {
+      "seed": 20260905,
+      "size": "tiny",
+      "pace": "epic",
+      "factions": 4,
+      "warmupTurns": 500,
+      "measuredTurns": 10,
+      "actualTurn": 511,
+      "archiveRecordsAtStart": 12245,
+      "finalRecords": 12456,
+      "initialEnvelopeBytes": 9955015,
+      "finalEnvelopeBytes": 10114028,
+      "recordedCommands": 211,
+      "initialCommitMs": 180.5853070000012,
+      "initialCommit": {
+        "suffixRecords": 12245,
+        "encodedHistoryBytes": 9248485,
+        "newBlobs": 50,
+        "historyPayloadWrites": 150,
+        "logicalBytes": 9955015
+      },
+      "incrementalSave": {
+        "samples": 10,
+        "meanMs": 59.8820034999997,
+        "medianMs": 54.126256999999896,
+        "maxMs": 82.61094500000036
+      },
+      "wholeEnvelopeSave": {
+        "samples": 10,
+        "meanMs": 359.3399628999996,
+        "medianMs": 341.26516300000003,
+        "maxMs": 463.4486969999998
+      },
+      "commits": [
+        {
+          "turn": 502,
+          "suffixRecords": 9,
+          "encodedHistoryBytes": 35745,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 9968680
+        },
+        {
+          "turn": 503,
+          "suffixRecords": 18,
+          "encodedHistoryBytes": 27618,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 9989877
+        },
+        {
+          "turn": 504,
+          "suffixRecords": 42,
+          "encodedHistoryBytes": 25389,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 10015872
+        },
+        {
+          "turn": 505,
+          "suffixRecords": 12,
+          "encodedHistoryBytes": 22111,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 10037805
+        },
+        {
+          "turn": 506,
+          "suffixRecords": 32,
+          "encodedHistoryBytes": 26397,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 10060974
+        },
+        {
+          "turn": 507,
+          "suffixRecords": 43,
+          "encodedHistoryBytes": 29308,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 10072242
+        },
+        {
+          "turn": 508,
+          "suffixRecords": 24,
+          "encodedHistoryBytes": 19297,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 10092219
+        },
+        {
+          "turn": 509,
+          "suffixRecords": 10,
+          "encodedHistoryBytes": 7708,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 10099498
+        },
+        {
+          "turn": 510,
+          "suffixRecords": 11,
+          "encodedHistoryBytes": 6835,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 10106411
+        },
+        {
+          "turn": 511,
+          "suffixRecords": 10,
+          "encodedHistoryBytes": 6191,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 10114028
+        }
+      ],
+      "noopMs": 47.24354800000219,
+      "noop": {
+        "suffixRecords": 0,
+        "encodedHistoryBytes": 0,
+        "newBlobs": 0,
+        "historyPayloadWrites": 0,
+        "logicalBytes": 10114028
+      },
+      "loadMs": 267.34567099999913,
+      "replayMs": 6300.231868000003,
+      "finalHash": "c4edcd53",
+      "rawHeapMiB": 599
+    },
+    {
+      "seed": 748291,
+      "size": "standard",
+      "pace": "long",
+      "factions": 24,
+      "warmupTurns": 250,
+      "measuredTurns": 10,
+      "actualTurn": 261,
+      "archiveRecordsAtStart": 56517,
+      "finalRecords": 59599,
+      "initialEnvelopeBytes": 44829453,
+      "finalEnvelopeBytes": 47177713,
+      "recordedCommands": 3082,
+      "initialCommitMs": 1015.6915429999935,
+      "initialCommit": {
+        "suffixRecords": 56517,
+        "encodedHistoryBytes": 39116216,
+        "newBlobs": 222,
+        "historyPayloadWrites": 666,
+        "logicalBytes": 44829453
+      },
+      "incrementalSave": {
+        "samples": 10,
+        "meanMs": 576.4923225999985,
+        "medianMs": 575.3190370000084,
+        "maxMs": 622.5765580000007
+      },
+      "wholeEnvelopeSave": {
+        "samples": 10,
+        "meanMs": 2178.5714685999965,
+        "medianMs": 2185.59798999998,
+        "maxMs": 2321.451812000014
+      },
+      "commits": [
+        {
+          "turn": 252,
+          "suffixRecords": 297,
+          "encodedHistoryBytes": 197447,
+          "newBlobs": 2,
+          "historyPayloadWrites": 6,
+          "logicalBytes": 45047082
+        },
+        {
+          "turn": 253,
+          "suffixRecords": 297,
+          "encodedHistoryBytes": 192469,
+          "newBlobs": 2,
+          "historyPayloadWrites": 6,
+          "logicalBytes": 45265196
+        },
+        {
+          "turn": 254,
+          "suffixRecords": 342,
+          "encodedHistoryBytes": 230548,
+          "newBlobs": 2,
+          "historyPayloadWrites": 6,
+          "logicalBytes": 45533951
+        },
+        {
+          "turn": 255,
+          "suffixRecords": 315,
+          "encodedHistoryBytes": 203949,
+          "newBlobs": 2,
+          "historyPayloadWrites": 6,
+          "logicalBytes": 45757474
+        },
+        {
+          "turn": 256,
+          "suffixRecords": 249,
+          "encodedHistoryBytes": 174498,
+          "newBlobs": 1,
+          "historyPayloadWrites": 3,
+          "logicalBytes": 45956970
+        },
+        {
+          "turn": 257,
+          "suffixRecords": 341,
+          "encodedHistoryBytes": 232891,
+          "newBlobs": 2,
+          "historyPayloadWrites": 6,
+          "logicalBytes": 46217010
+        },
+        {
+          "turn": 258,
+          "suffixRecords": 303,
+          "encodedHistoryBytes": 201099,
+          "newBlobs": 2,
+          "historyPayloadWrites": 6,
+          "logicalBytes": 46432144
+        },
+        {
+          "turn": 259,
+          "suffixRecords": 375,
+          "encodedHistoryBytes": 257798,
+          "newBlobs": 2,
+          "historyPayloadWrites": 6,
+          "logicalBytes": 46715591
+        },
+        {
+          "turn": 260,
+          "suffixRecords": 302,
+          "encodedHistoryBytes": 214747,
+          "newBlobs": 2,
+          "historyPayloadWrites": 6,
+          "logicalBytes": 46962761
+        },
+        {
+          "turn": 261,
+          "suffixRecords": 261,
+          "encodedHistoryBytes": 193842,
+          "newBlobs": 2,
+          "historyPayloadWrites": 6,
+          "logicalBytes": 47177713
+        }
+      ],
+      "noopMs": 539.283884000004,
+      "noop": {
+        "suffixRecords": 0,
+        "encodedHistoryBytes": 0,
+        "newBlobs": 0,
+        "historyPayloadWrites": 0,
+        "logicalBytes": 47177713
+      },
+      "loadMs": 1779.0589359999867,
+      "replayMs": 29161.305693000002,
+      "finalHash": "3b095e90",
+      "rawHeapMiB": 1293
+    }
+  ]
+}

@@ -1,0 +1,715 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/sim/src/explored-sort.test.ts > exact explored-cell copy and monotonic fast path > matches the independent original sort for empty, singleton, ordered, reversed and late-inversion sequences 52ms
+ ✓ packages/sim/src/explored-sort.test.ts > exact explored-cell copy and monotonic fast path > retains original malformed-value JSON/coercion/error behavior instead of repairing or converting values 81ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves the continents origin and rejects cross-layout history 116ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains twelveOrigin exact source bytes, command results and old-rule replay 176ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > genuine schema-8 evidence through territory rules > preserves the original journey save, every command and exact seal 187ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves the islands origin and rejects cross-layout history 54ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves the archipelago origin and rejects cross-layout history 47ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains activeImprovement exact source bytes, command results and old-rule replay 135ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > genuine schema-8 evidence through territory rules > preserves the original landing save, every command and exact seal 150ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'twelveOrigin' source bytes, all original commands and seals 121ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains partialImprovement exact source bytes, command results and old-rule replay 142ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'activeImprovement' source bytes, all original commands and seals 123ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > genuine schema-8 evidence through territory rules > preserves the original battle save, every command and exact seal 148ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'partialImprovement' source bytes, all original commands and seals 132ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains improved exact source bytes, command results and old-rule replay 144ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > genuine schema-8 evidence through territory rules > preserves the original aftermath save, every command and exact seal 84ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > genuine schema-8 evidence through territory rules > preserves the original growth save, every command and exact seal 84ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'improved' source bytes, all original commands and seals 134ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains activeCultivation exact source bytes, command results and old-rule replay 160ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > genuine schema-8 evidence through territory rules > preserves the original epic save, every command and exact seal 54ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > genuine schema-8 evidence through territory rules > continues an old naval journey into paid land work without rewriting the old prefix 74ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'activeCultivation' source bytes, all original commands and seals 164ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains cultivated exact source bytes, command results and old-rule replay 139ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > genuine schema-8 evidence through territory rules > rejects modern land orders under old rules without mutation and rejects forged new cultures in old envelopes 9ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.ashen_compact seat and its actual paid land orders 50ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.reedbound_council seat and its actual paid land orders 38ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.cinder_march seat and its actual paid land orders 51ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains developmentOrigin exact source bytes, command results and old-rule replay 41ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains queuedConstruction exact source bytes, command results and old-rule replay 78ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.glass_tide seat and its actual paid land orders 50ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.iron_covenant seat and its actual paid land orders 52ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'cultivated' source bytes, all original commands and seals 173ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains built exact source bytes, command results and old-rule replay 147ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.sepulchral_synod seat and its actual paid land orders 49ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.mire_courts seat and its actual paid land orders 47ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.saltwind_remnant seat and its actual paid land orders 47ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'developmentOrigin' source bytes, all original commands and seals 82ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'queuedConstruction' source bytes, all original commands and seals 96ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.wardhall_remnant seat and its actual paid land orders 49ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.rimehorn_clans seat and its actual paid land orders 52ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains researched exact source bytes, command results and old-rule replay 213ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'built' source bytes, all original commands and seals 148ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.sable_steppe seat and its actual paid land orders 48ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.morrow_spore seat and its actual paid land orders 47ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.cistern_assembly seat and its actual paid land orders 46ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.unsealed_companies seat and its actual paid land orders 46ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.lantern_hospices seat and its actual paid land orders 47ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.cairnwing_concord seat and its actual paid land orders 49ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains activeMission exact source bytes, command results and old-rule replay 218ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'researched' source bytes, all original commands and seals 209ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.red_sluice seat and its actual paid land orders 47ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.velvet_meridian seat and its actual paid land orders 47ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.brine_choir seat and its actual paid land orders 46ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains specialization exact source bytes, command results and old-rule replay 231ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'activeMission' source bytes, all original commands and seals 231ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.emberwake_convocation seat and its actual paid land orders 46ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.underhush_exchange seat and its actual paid land orders 45ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.vesper_court seat and its actual paid land orders 49ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.manytrack_moot seat and its actual paid land orders 46ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts > selected culture complete campaign provenance > reconstructs the generated faction.margin_observance seat and its actual paid land orders 46ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains skilledMission exact source bytes, command results and old-rule replay 243ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'specialization' source bytes, all original commands and seals 245ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > initializes disjoint claims and capitals without changing generated geography, and exposes only owned city details 63ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > reserves every existing settlement center before assigning migration rings 18ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > charges for connected modern claims while preserving historical stage restrictions and claims after population loss 25ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > retains completed exact source bytes, command results and old-rule replay 243ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'skilledMission' source bytes, all original commands and seals 257ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > rejects malformed, duplicate, foreign, hidden, over-budget and over-capacity orders atomically 24ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > pays the quoted improvement price once, completes through real turns, and scales later work by successful completions 19ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > pays signed feature/affinity tradeoffs only on worked cells and trims workers deterministically after losses 13ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > pauses paid work under blockade and occupation, and cancels without a refund 11ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > cultivates a saved biome without changing physical arrays or leaking a remote change through fog 17ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > cancels captured work and transfers improvements, while razing releases claims but preserves cultivation and historical memory 14ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > rejects corrupted claims, work, overrides and memories even with a recomputed snapshot checksum 24ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > continues activeImprovement through its real original suffix to improved 69ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > continues activeCultivation through its real original suffix to cultivated 58ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > continues queuedConstruction through its real original suffix to built 38ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > continues activeMission through its real original suffix to specialization 38ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > continues skilledMission through its real original suffix to completed 41ms
+ ✓ packages/sim/src/explored-sort.test.ts > exact explored-cell copy and monotonic fast path > copies its iterable once, even when the first descending pair triggers fallback 8ms
+ ✓ packages/sim/src/explored-sort.test.ts > exact explored-cell copy and monotonic fast path > preserves the prechange 'huge'/32 whole-save seal and monotonic restored bytes 2482ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > preserves 'completed' source bytes, all original commands and seals 262ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > preserves paid infrastructure, practical knowledge and mission-earned specialization 36ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > appends modern activeImprovement continuation without changing an old record or seal 127ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > appends modern continuation without rewriting the old prefix 146ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts > genuine schema11 geography and road migration > does not allow roads or modern worlds to masquerade as an old archive 21ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > appends modern activeCultivation continuation without changing an old record or seal 238ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > appends modern skilledMission continuation without changing an old record or seal 172ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > rejects checksum-valid new research, improvements and border state inside old schema10 9ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts > genuine schema10 campaigns preserved through city research > refuses modern actions under old rules without silently changing campaign state 16ms
+ ✓ packages/sim/src/territory.test.ts > territory, worked land and persistent cultivation > keeps each authored improvement site and preview authoritative across all five definitions 1053ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > separates physical generator identity from four, six, twelve and twenty-four culture catalogs 165ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.ashen_compact founds, works, improves, cultivates and restores through ordinary paid commands 84ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.reedbound_council founds, works, improves, cultivates and restores through ordinary paid commands 45ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.cinder_march founds, works, improves, cultivates and restores through ordinary paid commands 73ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.glass_tide founds, works, improves, cultivates and restores through ordinary paid commands 66ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > retains exact sixOrigin bytes, original archive and historical replay 116ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.iron_covenant founds, works, improves, cultivates and restores through ordinary paid commands 44ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.sepulchral_synod founds, works, improves, cultivates and restores through ordinary paid commands 39ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.mire_courts founds, works, improves, cultivates and restores through ordinary paid commands 45ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > retains exact activeImprovement bytes, original archive and historical replay 72ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > retains exact improved bytes, original archive and historical replay 66ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.saltwind_remnant founds, works, improves, cultivates and restores through ordinary paid commands 46ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.wardhall_remnant founds, works, improves, cultivates and restores through ordinary paid commands 64ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > retains exact activeCultivation bytes, original archive and historical replay 109ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.rimehorn_clans founds, works, improves, cultivates and restores through ordinary paid commands 65ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.sable_steppe founds, works, improves, cultivates and restores through ordinary paid commands 63ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > retains exact cultivated bytes, original archive and historical replay 116ms
+ ✓ packages/chronicle/src/compatibility.test.ts > preserved schema-4 archives and mixed-version continuation > matches the independently recorded pre-travel short-campaign v4 benchmark seal 1174ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.morrow_spore founds, works, improves, cultivates and restores through ordinary paid commands 69ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.cistern_assembly founds, works, improves, cultivates and restores through ordinary paid commands 64ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > retains exact eightOrigin bytes, original archive and historical replay 52ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > retains exact eightFounded bytes, original archive and historical replay 51ms
+ ✓ packages/chronicle/src/compatibility.test.ts > preserved schema-4 archives and mixed-version continuation > migrates actual v4 snapshot structure without rewriting its bytes, events or checkpoint seals 179ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > freezes selected-seat order and repeated definition IDs beyond the old six-culture roster 14ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > continues the saved activeImprovement through the original paid command suffix to improved 46ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > continues the saved activeCultivation through the original paid command suffix to cultivated 50ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.unsealed_companies founds, works, improves, cultivates and restores through ordinary paid commands 40ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.lantern_hospices founds, works, improves, cultivates and restores through ordinary paid commands 36ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.cairnwing_concord founds, works, improves, cultivates and restores through ordinary paid commands 43ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > genuine schema-9 six-culture campaign evidence > retains actual paid work, contiguous claims and completed cultivation without changing physical geography 103ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.red_sluice founds, works, improves, cultivates and restores through ordinary paid commands 37ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.velvet_meridian founds, works, improves, cultivates and restores through ordinary paid commands 36ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.brine_choir founds, works, improves, cultivates and restores through ordinary paid commands 37ms
+ ✓ packages/chronicle/src/compatibility.test.ts > preserved schema-4 archives and mixed-version continuation > keeps historical rejected future command names rejected while new records use new rules 90ms
+ ✓ packages/chronicle/src/compatibility.test.ts > preserved schema-4 archives and mixed-version continuation > preserves original victory seals and postgame records after importing an old completed campaign 152ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.emberwake_convocation founds, works, improves, cultivates and restores through ordinary paid commands 37ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.underhush_exchange founds, works, improves, cultivates and restores through ordinary paid commands 35ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.vesper_court founds, works, improves, cultivates and restores through ordinary paid commands 36ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > roster-versioned schema-10 archives > rejects checksum-valid new content or metadata masquerading as a genuine schema-9 save 26ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > roster-versioned schema-10 archives > finishes genuine schema-9 activeImprovement with modern records and an unchanged prefix 181ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.manytrack_moot founds, works, improves, cultivates and restores through ordinary paid commands 36ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > faction.margin_observance founds, works, improves, cultivates and restores through ordinary paid commands 40ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > rejects checksum-valid forged roster membership and missing or unknown canonical versions 36ms
+ ✓ packages/chronicle/src/compatibility.test.ts > preserved schema-4 archives and mixed-version continuation > rejects invented versions, lost format metadata and a downgrade after modern records 139ms
+ ✓ packages/sim/src/roster.test.ts > versioned faction rosters and paid new-culture campaigns > creates 24 unique cultures, keeps 48-seat repetitions explicit and names a paid Vesper officer 29ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > roster-versioned schema-10 archives > finishes genuine schema-9 activeCultivation with modern records and an unchanged prefix 210ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > roster-versioned schema-10 archives > keeps summary and owned-land queries out of a resumed historical journal 38ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > roster-versioned schema-10 archives > reconstructs a full expanded-roster origin independently of the physical generator version 19ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts > roster-versioned schema-10 archives > rejects an unrecorded roster change even when the actual seats and turn are unchanged 25ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > genuine generator6 history survives newer inland-sea geography > preserves 'continents-origin' exact source, generated origin and full replay 135ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > genuine generator6 history survives newer inland-sea geography > preserves 'continents-developed' exact source, generated origin and full replay 85ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > genuine generator6 history survives newer inland-sea geography > preserves 'islands-origin' exact source, generated origin and full replay 44ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts > immutable real schema-6 mixed-army archives > retains every original travel origin byte, result, report and checkpoint seal 211ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > genuine generator6 history survives newer inland-sea geography > preserves 'islands-developed' exact source, generated origin and full replay 67ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > genuine generator6 history survives newer inland-sea geography > preserves 'archipelago-origin' exact source, generated origin and full replay 40ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > inherits a marshal on full merge, preserves over-command troops after reassignment and permits repair without free movement 96ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > recruits a formation through normal production, merges it, and charges summed upkeep 34ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts > immutable real schema-6 mixed-army archives > retains every original battle origin byte, result, report and checkpoint seal 158ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > pauses shared queued travel on merge and never refunds movement on split or transfer 23ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > uses the slowest formation for range and exposes a detached authoritative mixed roster 17ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > consumes only one caravan when a mixed escort army founds a settlement 17ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > recomputes visible sight after transferring the only scouting formation away and moving it 26ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > rejects invalid composition order atomically: {"type":"mergeArmies","factionId":"faction.missing","sourceArmyId":"army.1","targetArmyId":"army.2"} 11ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > rejects invalid composition order atomically: {"type":"mergeArmies","factionId":"faction.ashen_compact","sourceArmyId":"army.1","targetArmyId":"army.unknown"} 8ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > genuine generator6 history survives newer inland-sea geography > preserves 'archipelago-developed' exact source, generated origin and full replay 65ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > genuine generator6 history survives newer inland-sea geography > continues 'continents-developed' without rewriting geography or the prior ledger 81ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts > immutable real schema-6 mixed-army archives > resumes a genuine merged-army schema-6 route and retains formation identity through its recorded split 82ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts > immutable real schema-6 mixed-army archives > continues the genuine mixed four-versus-three pending battle from its saved tactical state 88ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > genuine generator6 history survives newer inland-sea geography > continues 'islands-developed' without rewriting geography or the prior ledger 76ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > genuine generator6 history survives newer inland-sea geography > continues 'archipelago-developed' without rewriting geography or the prior ledger 89ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts > immutable real schema-6 mixed-army archives > continues the genuine mixed four-versus-three round battle from its saved tactical state 77ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts > immutable real schema-6 mixed-army archives > continues an imported schema-6 pending battle through modern orders without retroactive character effects 116ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > generator7 acceptance keeps generator identity explicit in the current envelope > restores and replays an actual continents campaign without regenerating its saved world 96ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > generator7 acceptance keeps generator identity explicit in the current envelope > restores and replays an actual islands campaign without regenerating its saved world 91ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts > immutable real schema-6 mixed-army archives > continues an imported schema-6 round battle through modern orders without retroactive character effects 105ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > generator7 acceptance keeps generator identity explicit in the current envelope > restores and replays an actual archipelago campaign without regenerating its saved world 89ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts > generator7 acceptance keeps generator identity explicit in the current envelope > rejects checksum-valid unsupported generator identities without accepting an open-ended version range 13ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts > immutable real schema-6 mixed-army archives > rejects an invented schema-6 formation aftermath instead of accepting a matching final snapshot alone 76ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts > immutable real schema-6 mixed-army archives > appends modern commands without rewriting six-format evidence and never downgrades afterward 186ms
+ ✓ packages/sim/src/explored-sort.test.ts > exact explored-cell copy and monotonic fast path > preserves the prechange 'legendary'/40 whole-save seal and monotonic restored bytes 3707ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts > immutable real schema-6 mixed-army archives > keeps future character command names malformed under historical schema-6 rules 143ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > scales modern late investment while freezing historical profiles and all response windows 2ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 4 Epic at a 60000-coin boundary 81ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 4 Epic at a 74999-coin boundary 20ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > rejects invalid composition order atomically: {"type":"mergeArmies","factionId":"faction.ashen_compact","sourceArmyId":"army.1","targetArmyId":"army.1"} 8ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > rejects invalid composition order atomically: {"type":"mergeArmies","factionId":"faction.ashen_compact","sourceArmyId":"army.1","targetArmyId":"army.2","formations":[]} 8ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > rejects invalid composition order atomically: {"type":"transferFormations","factionId":"faction.ashen_compact","sourceArmyId":"army.1","targetArmyId":"army.2","formationIds":[]} 8ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > rejects invalid composition order atomically: {"type":"transferFormations","factionId":"faction.ashen_compact","sourceArmyId":"army.1","targetArmyId":"army.2","formationIds":["formation.1","formation.1"]} 9ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > rejects invalid composition order atomically: {"type":"transferFormations","factionId":"faction.ashen_compact","sourceArmyId":"army.1","targetArmyId":"army.2","formationIds":["formation.2"]} 8ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > rejects invalid composition order atomically: {"type":"splitArmy","factionId":"faction.ashen_compact","armyId":"army.1","formationIds":["formation.1"]} 8ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > rejects invalid composition order atomically: {"type":"splitArmy","factionId":"faction.ashen_compact","armyId":"army.1","formationIds":["formation.1"],"name":"<script>"} 8ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > enforces ownership, co-location, battle and twelve-formation capacity 43ms
+ ✓ packages/sim/src/army-composition.test.ts > real army formation containers > conserves formation identities and state across deterministic merge/split/replay sequences 714ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 4 Epic at a 75000-coin boundary 23ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 4 Epic at a 239999-coin boundary 20ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 4 Epic at a 240000-coin boundary 17ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 5 Epic at a 60000-coin boundary 16ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 5 Epic at a 74999-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 5 Epic at a 75000-coin boundary 15ms
+ ✓ packages/sim/src/army-composition.test.ts > formation save invariants and preserved historical rules > rejects recomputed-checksum corruption: duplicate 13ms
+ ✓ packages/sim/src/army-composition.test.ts > formation save invariants and preserved historical rules > rejects recomputed-checksum corruption: unknown-unit 10ms
+ ✓ packages/sim/src/army-composition.test.ts > formation save invariants and preserved historical rules > rejects recomputed-checksum corruption: empty 11ms
+ ✓ packages/sim/src/army-composition.test.ts > formation save invariants and preserved historical rules > rejects recomputed-checksum corruption: over-capacity 12ms
+ ✓ packages/sim/src/army-composition.test.ts > formation save invariants and preserved historical rules > rejects recomputed-checksum corruption: order 12ms
+ ✓ packages/sim/src/army-composition.test.ts > formation save invariants and preserved historical rules > rejects recomputed-checksum corruption: counter 10ms
+ ✓ packages/sim/src/army-composition.test.ts > formation save invariants and preserved historical rules > rejects recomputed-checksum corruption: strength 10ms
+ ✓ packages/sim/src/army-composition.test.ts > formation save invariants and preserved historical rules > rejects recomputed-checksum corruption: aggregate 12ms
+ ✓ packages/sim/src/army-composition.test.ts > formation save invariants and preserved historical rules > replays the real pre-change schema-5 fixture with every original outcome and checkpoint 80ms
+ ✓ packages/sim/src/army-composition.test.ts > formation save invariants and preserved historical rules > does not reinterpret new commands/content as legacy rules or fabricate old seals for transferred formations 26ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 5 Epic at a 239999-coin boundary 14ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 5 Epic at a 240000-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 6 Epic at a 60000-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 6 Epic at a 74999-coin boundary 14ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 6 Epic at a 75000-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 6 Epic at a 239999-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 6 Epic at a 240000-coin boundary 14ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > retains every original mission byte, result, snapshot and independently captured hash 120ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 7 Epic at a 60000-coin boundary 14ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 7 Epic at a 74999-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 7 Epic at a 75000-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 7 Epic at a 239999-coin boundary 14ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 7 Epic at a 240000-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 8 Epic at a 60000-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 8 Epic at a 74999-coin boundary 15ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > records the same commands, results and checkpoints as the existing archive 77ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > detaches command, nested result, materialized and commit data from private history 14ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 8 Epic at a 75000-coin boundary 14ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 8 Epic at a 239999-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 8 Epic at a 240000-coin boundary 14ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 9 Epic at a 60000-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 9 Epic at a 74999-coin boundary 16ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 9 Epic at a 75000-coin boundary 15ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 9 Epic at a 239999-coin boundary 15ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > clones only the requested suffix and does not reparse the historical origin 28ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > rejects a different game object and invalid cursors before changing either game 18ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > leaves a failed preparation retryable and detects a changed latest checkpoint 21ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > rejects unrecorded turns and changed campaign identity 22ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > latches an interrupted recorder instead of committing a potentially partial command 26ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > retains every original battle byte, result, snapshot and independently captured hash 92ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > retains every original battleFinish byte, result, snapshot and independently captured hash 83ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > quotes and actually charges rules 9 Epic at a 240000-coin boundary 14ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > defaults to standard while preserving identical early economy and movement 36ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > uses short costs for both authoritative eligibility and actual spending 27ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > uses standard costs for both authoritative eligibility and actual spending 24ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts > genuine generator7 twelve-culture history before schema13/roster4 > preserves 'continents-origin' exact source, generated origin and full command replay 157ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > uses long costs for both authoritative eligibility and actual spending 22ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > uses epic costs for both authoritative eligibility and actual spending 13ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > completes short through the full response window with no fixed minimum-turn lock 19ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > completes standard through the full response window with no fixed minimum-turn lock 20ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > completes long through the full response window with no fixed minimum-turn lock 19ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > completes epic through the full response window with no fixed minimum-turn lock 21ms
+ ✓ packages/sim/src/pacing.test.ts > canonical campaign pace > rejects unknown or missing pace and project response windows from another pace 18ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > restores the genuine Rally-used round-one battle and replays its captured schema-7 aftermath exactly 54ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > rejects checksum-valid schema-7 army-unit references absent from the captured pack 2ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > rejects checksum-valid schema-7 building references absent from the captured pack 2ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > rejects checksum-valid schema-7 unit-queue references absent from the captured pack 2ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > rejects checksum-valid schema-7 building-queue references absent from the captured pack 1ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > rejects checksum-valid schema-7 technology references absent from the captured pack 1ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > rejects checksum-valid schema-7 character-skill references absent from the captured pack 1ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > rejects checksum-valid schema-7 battle-unit references absent from the captured pack 1ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > rejects checksum-valid schema-7 battle-skill references absent from the captured pack 1ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > rejects checksum-valid schema-7 report-unit references absent from the captured pack 1ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > rejects checksum-valid schema-7 report-skill references absent from the captured pack 1ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > continues the migrated mission through new journal suffixes without rewriting its old records 99ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > validates complete provenance at construction and does not alias imported unknown commands 24ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > continues the migrated battle through new journal suffixes without rewriting its old records 113ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts > genuine generator7 twelve-culture history before schema13/roster4 > preserves 'continents-developed' exact source, generated origin and full command replay 154ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > refuses new transport commands and training under old rules, then rejects projecting learned skills as old evidence 14ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > never flattens twenty-formations into a schema-7 seal 11ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > never flattens naval-formations into a schema-7 seal 10ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > never flattens transport-links into a schema-7 seal 11ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts > immutable real schema-7 officer archives through schema-8 > detects altered schema-7 tactical records and forbids a downgrade after a modern refusal 65ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > preserves genuine version-5 travel and battle evidence when resumed 290ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts > genuine generator7 twelve-culture history before schema13/roster4 > preserves 'islands-origin' exact source, generated origin and full command replay 79ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts > genuine generator7 twelve-culture history before schema13/roster4 > preserves 'islands-developed' exact source, generated origin and full command replay 128ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > preserves genuine version-6 travel and battle evidence when resumed 177ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > accepts an archive-1 schema-4 origin without rewriting its snapshot or seal 50ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > resumes a real current-format mission and appends only its deterministic completion 38ms
+ ✓ packages/chronicle/src/journal.test.ts > private incremental campaign journals > preserves a real victory seal even when its latest order is a refusal without a checkpoint 34ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts > genuine generator7 twelve-culture history before schema13/roster4 > preserves 'archipelago-origin' exact source, generated origin and full command replay 75ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts > genuine generator7 twelve-culture history before schema13/roster4 > preserves 'archipelago-developed' exact source, generated origin and full command replay 123ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > preserves the default full observation byte for byte and retains every summary when omitting details 51ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > details only requested own IDs in canonical order, ignoring duplicate, foreign and unknown probes 17ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > does not enumerate candidate cells for omitted towns or scan unrelated town records in a direct query 11ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > filters quotes using the same current visibility index, not explored memory 18ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts > genuine generator7 twelve-culture history before schema13/roster4 > continues 'continents-developed' without replacing old terrain, culture order or records 156ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > keeps full, scoped, direct and rejected reads detached from canonical saves and subsequent queries 39ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > does not disclose remote work through foreign-town queries or change a rejected command probe 16ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > handles generated starts with no towns without special cases or mutation 18ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > matches exact ID subsets for circular windows over 0 owned towns 18ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > matches exact ID subsets for circular windows over 1 owned towns 28ms
+ ✓ packages/sim/src/naval.test.ts > canonical shore, deep-ocean and transport travel > saves an interrupted deep-water route after merging a coastal hull and replans with current hull restrictions 109ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts > genuine generator7 twelve-culture history before schema13/roster4 > continues 'islands-developed' without replacing old terrain, culture order or records 146ms
+ ✓ packages/sim/src/resources.test.ts > resource generation is deterministic, seed-sensitive and bound to suitable physical ecology 617ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > matches exact ID subsets for circular windows over 8 owned towns 74ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > matches exact ID subsets for circular windows over 9 owned towns 78ms
+ ✓ packages/sim/src/naval.test.ts > canonical shore, deep-ocean and transport travel > uses the same domain and researched hull rules for previews and immediate movement 68ms
+ ✓ packages/sim/src/naval.test.ts > canonical shore, deep-ocean and transport travel > preserves mixed formations, an officer and spent movement through a saved queued ocean voyage 59ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts > genuine generator7 twelve-culture history before schema13/roster4 > continues 'archipelago-developed' without replacing old terrain, culture order or records 145ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > matches exact ID subsets for circular windows over 16 owned towns 83ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > matches exact ID subsets for circular windows over 17 owned towns 82ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > uses maintained frontiers without growing disks and preserves current fog filtering 11ms
+ ✓ packages/sim/src/land-queries.test.ts > scoped settlement land queries > rejects malformed windows even with no towns, before detail enumeration or canonical mutation 31ms
+ ✓ packages/sim/src/naval.test.ts > canonical shore, deep-ocean and transport travel > enforces whole-army space, ownership, movement, blocked landings and no mixed land/hull containers 44ms
+ ✓ packages/sim/src/naval.test.ts > canonical shore, deep-ocean and transport travel > pauses a sailing route on newly sighted hostiles and preserves passengers across save and cancellation 42ms
+ ✓ packages/sim/src/naval.test.ts > funded harbors and actual naval recruitment > checks coastal construction, technologies and harbor facilities before taking coin; launches real hulls on water 32ms
+ ✓ packages/sim/src/resources.test.ts > completed paid extraction needs a worker; save continuation and market contracts preserve actual stocks 75ms
+ ✓ packages/sim/src/resources.test.ts > deposits stay hidden until charted and observations cannot alter stockpiles 272ms
+ ✓ packages/sim/src/resources.test.ts > ordinary land cannot accept extraction without its deposit, and occupation suspends output 13ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains fieldOrigin exact old save bytes, results and replay checkpoints 88ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains fieldPending exact old save bytes, results and replay checkpoints 86ms
+ ✓ packages/sim/src/naval.test.ts > naval combat, hidden cargo and casualty evidence > uses the same manual/autoresolve kernel, destroys actual cargo/officers after sinking, and seals its report 69ms
+ ✓ packages/sim/src/naval.test.ts > naval combat, hidden cargo and casualty evidence > loses only unsupported formations, in stable order, as surviving hull capacity decreases 300ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts > genuine generator5 history survives newer geography > preserves 'continents-origin' exact source, generated origin and all replay seals 138ms
+ ✓ packages/sim/src/naval.test.ts > naval combat, hidden cargo and casualty evidence > rejects forged drowned formation evidence even with a recomputed save checksum 31ms
+ ✓ packages/sim/src/naval.test.ts > strict saved naval state > rejects duplicate without repairing it 14ms
+ ✓ packages/sim/src/naval.test.ts > strict saved naval state > rejects wrong owner without repairing it 14ms
+ ✓ packages/sim/src/naval.test.ts > strict saved naval state > rejects missing hull without repairing it 14ms
+ ✓ packages/sim/src/naval.test.ts > strict saved naval state > rejects cargo movement without repairing it 13ms
+ ✓ packages/sim/src/naval.test.ts > strict saved naval state > rejects cargo location without repairing it 14ms
+ ✓ packages/sim/src/naval.test.ts > strict saved naval state > rejects hull on land without repairing it 12ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains fieldRally exact old save bytes, results and replay checkpoints 67ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains fieldRoundOne exact old save bytes, results and replay checkpoints 65ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > rejects checksum-valid roster4 and new-culture forgeries in frozen schema10 43ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > rejects checksum-valid roster4 and new-culture forgeries in frozen schema11 21ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > rejects checksum-valid roster4 and new-culture forgeries in frozen schema12 17ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > does not project or execute roster4 with old rules, even when its currently selected seats use old cultures 32ms
+ ✓ packages/sim/src/naval.test.ts > strict saved naval state > rejects coastal hull in deep water without repairing it 14ms
+ ✓ packages/sim/src/naval.test.ts > strict saved naval state > rejects mixed domain without repairing it 13ms
+ ✓ packages/sim/src/naval.test.ts > strict saved naval state > rejects depth on land without repairing it 13ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts > genuine generator5 history survives newer geography > preserves 'continents-developed' exact source, generated origin and all replay seals 156ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains fieldCompleted exact old save bytes, results and replay checkpoints 71ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains siegeOrigin exact old save bytes, results and replay checkpoints 62ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > preserves origin raw bytes and every original command/result/checkpoint 91ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > preserves activeWork raw bytes and every original command/result/checkpoint 87ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts > genuine generator5 history survives newer geography > preserves 'islands-origin' exact source, generated origin and all replay seals 84ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts > genuine generator5 history survives newer geography > preserves 'islands-developed' exact source, generated origin and all replay seals 134ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains siegePending exact old save bytes, results and replay checkpoints 69ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains siegeRoundOne exact old save bytes, results and replay checkpoints 66ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > preserves partialWork raw bytes and every original command/result/checkpoint 62ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > preserves developed raw bytes and every original command/result/checkpoint 100ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > genuine15 generatedOrigin retains exact historical bytes and replay 72ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > genuine15 generatedPaidConstruction retains exact historical bytes and replay 35ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts > genuine generator5 history survives newer geography > preserves 'archipelago-origin' exact source, generated origin and all replay seals 77ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts > genuine generator5 history survives newer geography > preserves 'archipelago-developed' exact source, generated origin and all replay seals 136ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains siegeCompleted exact old save bytes, results and replay checkpoints 71ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains generatedOrigin exact old save bytes, results and replay checkpoints 141ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > regenerates the selected first culture and the old twelve-culture repeat at seats thirteen/fourteen 10ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > retains real paid work, named appointment, earned survey experience and acquired research 41ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts > genuine twelve-culture roster history before the next cohort > appends current continuation to active old work without rewriting its historical prefix 71ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts > genuine generator5 history survives newer geography > continues 'continents-developed' without rewriting the saved world or prior ledger 131ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > retains generatedDeveloped exact old save bytes, results and replay checkpoints 119ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > genuine15 generatedSpecialistQueue retains exact historical bytes and replay 84ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > genuine15 generatedSpecialistsCompleted retains exact historical bytes and replay 190ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts > genuine generator5 history survives newer geography > continues 'islands-developed' without rewriting the saved world or prior ledger 122ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > regenerates the actual old Vesper24 origin without inventing a modern historical checkpoint 11ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > appends modern commands to fieldRoundOne without changing the old battle outcome or history 62ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > appends modern commands to siegeRoundOne without changing the old battle outcome or history 63ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > refuses checksum-valid magic/battle9 injections into a frozen schema13 save 11ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts > genuine pre-ability field, assault and generated twenty-four-culture history > refuses modern research, auto policy and spell commands under old campaign rules without mutation 16ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > genuine15 populationLimitOrigin retains exact historical bytes and replay 50ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > genuine15 populationLimitContinued retains exact historical bytes and replay 77ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > exposes every legal attachment destination in a 100-army co-located stack 62ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > earns branching training through real refit experience and applies the learned improvement 30ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > keeps exclusive roots but combines command and battlefield branches, rejecting unearned, duplicate and corrupt nodes 34ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts > genuine generator5 history survives newer geography > continues 'archipelago-developed' without rewriting the saved world or prior ledger 125ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > genuine15 fieldOrigin retains exact historical bytes and replay 51ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > genuine15 fieldPending retains exact historical bytes and replay 64ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > appoints named paid characters, charges real upkeep, rejects unsafe/foreign/malformed appointments atomically 21ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > boards and disembarks officers only through a safe adjacent harbor, paying fleet movement without teleportation 23ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > retains every formation when a large-army marshal is wounded and restores command only after recovery 41ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > requires co-location and enforces one marshal/two companions without teleporting 17ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > genuine15 fieldRoundOne retains exact historical bytes and replay 52ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > genuine15 fieldCompleted retains exact historical bytes and replay 55ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > keeps attachments with a split source and moves them on a full merge, rejecting commander slot conflicts 12ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > relocates attached characters to a settlement when their last caravan founds it 11ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > surveys only terrain knowledge, locks actions for one waiting turn, and restores the normal completion-turn budget 18ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > refits actual per-formation casualties, caps healing and refuses a full-strength no-op 11ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > pauses saved travel, cancellation does not refund coin or refill spent movement 14ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > makes two-turn sabotage open defenses one turn early, with deterministic risk and specialization 35ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts > a captured capped hearth continues under current rules while keeping15 history intact 90ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts > schema-6 archives retain genuine schema-5 evidence > preserves the actual pre-migration travel snapshot, reports, events and seals byte-for-byte 198ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > interrupts sabotage immediately when the supporting siege is lifted 11ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > saves deterministic sabotage wounds, blocks actions during recovery, and gives siegecraft a real risk reduction 25ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > interrupts an attacked agent before freezing a saveable human-defender battle 15ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > freezes leadership and names, applies Rally once without changing RNG, and saves/replays actual aftermath 23ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > offers one permanent earned specialization and applies its real leadership bonus 16ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > never drains above-base morale when Rally restores another formation in the same army 10ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > reports the actual remaining wound duration when an already-wounded character retreats 9ms
+ ✓ packages/sim/src/battle-abilities.test.ts > national Arcane Theory and personal aptitude are distinct, paid, detached and required 102ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > keeps foreign roster/skills/private missions out of ordinary observations 8ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > records attached character death with real army destruction and keeps historical snapshots independently saveable 13ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > rejects checksum-valid mission timing, carrier movement and location tampering 23ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > caps living appointments and retains only the newest32 dead records after real conquest 19ms
+ ✓ packages/sim/src/characters.test.ts > named campaign characters > rejects checksum-valid character/timing/battle corruption and refuses old-rule character execution 39ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts > schema-6 archives retain genuine schema-5 evidence > preserves the actual pre-migration battle snapshot, reports, events and seals byte-for-byte 159ms
+ ✓ packages/sim/src/battle-abilities.test.ts > manual targeted casts pay strain, spend finite uses, cannot heal or act twice in the same round, and resume exactly 72ms
+ ✓ packages/sim/src/battle-abilities.test.ts > both sides automatically Rally and use enabled sources through the same manual/autoresolve kernel 20ms
+ ✓ packages/sim/src/battle-abilities.test.ts > per-source auto policy persists, manual use remains legal, and rejected policies are atomic 19ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts > schema-6 archives retain genuine schema-5 evidence > restores a genuine in-flight schema-5 route and replays its exact saved continuation 61ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts > schema-6 archives retain genuine schema-5 evidence > continues a genuine pending schema-5 battle through new archive records without changing historical combat 75ms
+ ✓ packages/sim/src/battle-abilities.test.ts > pending/report observation and journal copies cannot mutate nested caster or automatic state, and nonparticipants stay private 33ms
+ ✓ packages/sim/src/battle-abilities.test.ts > wounded casters have no enabled spell sources and a remaining ward protects real pursuit losses 48ms
+ ✓ packages/sim/src/battle-abilities.test.ts > a manual terminal cast settles 'formations destroyed' immediately with the shared pursuit RNG and no free round 60ms
+ ✓ packages/sim/src/battle-abilities.test.ts > a manual terminal cast settles 'morale rout' immediately with the shared pursuit RNG and no free round 56ms
+ ✓ packages/sim/src/battle-abilities.test.ts > trace facts exactly reconstruct changed stats, are bounded and detached, and throwing observers do not affect gameplay or archive 44ms
+ ✓ packages/sim/src/battle-abilities.test.ts > checksum-valid forged sources, free protection, unspent strain and frozen personal profiles are rejected 86ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts > schema-6 archives retain genuine schema-5 evidence > detects altered historical battle logs and never silently modernizes their report shape 73ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts > schema-6 archives retain genuine schema-5 evidence > supports numeric 4 → 5 → 6 rules transitions and preserves formerly unknown commands as refused 155ms
+ ✓ packages/sim/src/battle-abilities.test.ts > siege assaults emit actual fortified militia facts through the same battle9 kernel 24ms
+ ✓ packages/sim/src/battle-abilities.test.ts > twenty-by-twenty real formations remain bounded and loss-conserving with innate auto abilities 52ms
+ ✓ packages/chronicle/src/specialist-roster.test.ts > a generated campaign pays to unlock and recruit every specialist, then merges and replays exact saved continuation 409ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts > schema-6 archives retain genuine schema-5 evidence > forbids schema-5 rules after a current-format origin or even a rejected current-format order 85ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts > schema-6 archives retain genuine schema-5 evidence > records real composition commands with current-format identity instead of flattening their rosters into old seals 66ms
+ ✓ packages/chronicle/src/specialist-roster.test.ts > an independently captured rules14 archive retains its original content seal and immutable history 146ms
+ ✓ packages/sim/src/diplomacy.test.ts > negotiated peace > settles actual contracts between treasuries above the former billion-coin ceiling 55ms
+ ✓ packages/sim/src/diplomacy.test.ts > negotiated peace > transfers coin once on acceptance, ends war and enforces a saved binding truce 14ms
+ ✓ packages/sim/src/diplomacy.test.ts > negotiated peace > checks both budgets atomically after an offer and cannot silently clip a transfer 13ms
+ ✓ packages/sim/src/diplomacy.test.ts > negotiated peace > supports requested reparations and preserves total coin for arbitrary legal payments 411ms
+ ✓ packages/chronicle/src/specialist-roster.test.ts > 'unit.skirmisher' cannot enter a resealed old snapshot or execute under historical rules 62ms
+ ✓ packages/chronicle/src/specialist-roster.test.ts > 'unit.arbalester' cannot enter a resealed old snapshot or execute under historical rules 61ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > preserves every captured schema-4 byte, envelope key order, payload checksum and state seal 84ms
+ ✓ packages/sim/src/simulation.test.ts > canonical campaign commands > preflights end-turn requests before AI with exactly the resolution rules and no mutation 35ms
+ ✓ packages/sim/src/simulation.test.ts > canonical campaign commands > founds a settlement, consumes exactly its colonist, builds, grows and recruits 11ms
+ ✓ packages/sim/src/simulation.test.ts > canonical campaign commands > rejects forged ownership, unknown fields and invalid references atomically 27ms
+ ✓ packages/sim/src/simulation.test.ts > canonical campaign commands > enforces queue capacity, coin costs, and unique buildings 13ms
+ ✓ packages/sim/src/simulation.test.ts > canonical campaign commands > spends terrain movement and distinguishes explored terrain from current vision 20ms
+ ✓ packages/sim/src/diplomacy.test.ts > negotiated peace > rejects malformed, foreign, duplicate and same-turn replacement offers without mutation 18ms
+ ✓ packages/sim/src/diplomacy.test.ts > negotiated peace > expires unanswered offers without moving money and expires treaties without resuming war 12ms
+ ✓ packages/sim/src/diplomacy.test.ts > negotiated peace > replays proposal, midpoint offer save, acceptance and truce expiry exactly 24ms
+ ✓ packages/sim/src/diplomacy.test.ts > negotiated peace > keeps unrelated diplomacy private and returns detached participant records 22ms
+ ✓ packages/sim/src/diplomacy.test.ts > negotiated peace > gives qualitative full-package assessments without mutating state or exposing exact weights 15ms
+ ✓ packages/sim/src/diplomacy.test.ts > negotiated peace > rejects corrupt diplomatic references and lifetimes even with a recomputed checksum 38ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > preserves every captured schema-5 byte, envelope key order, payload checksum and state seal 34ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > preserves every captured schema-6 byte, envelope key order, payload checksum and state seal 32ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > preserves every captured schema-7 byte, envelope key order, payload checksum and state seal 29ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > preserves every captured schema-8 byte, envelope key order, payload checksum and state seal 28ms
+ ✓ packages/chronicle/src/specialist-roster.test.ts > 'unit.halberdier' cannot enter a resealed old snapshot or execute under historical rules 64ms
+ ✓ packages/chronicle/src/specialist-roster.test.ts > 'unit.lancer' cannot enter a resealed old snapshot or execute under historical rules 64ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > preserves every captured schema-9 byte, envelope key order, payload checksum and state seal 30ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > preserves every captured schema-10 byte, envelope key order, payload checksum and state seal 27ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > preserves every captured schema-11 byte, envelope key order, payload checksum and state seal 24ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > never stringifies an envelope containing its already serialized schema-4 payload 4ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > never stringifies an envelope containing its already serialized schema-5 payload 3ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > never stringifies an envelope containing its already serialized schema-6 payload 3ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > never stringifies an envelope containing its already serialized schema-7 payload 3ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > never stringifies an envelope containing its already serialized schema-8 payload 3ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > never stringifies an envelope containing its already serialized schema-9 payload 4ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > never stringifies an envelope containing its already serialized schema-10 payload 3ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > never stringifies an envelope containing its already serialized schema-11 payload 3ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > retains strict schema-4 rejection before producing any envelope 9ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > retains strict schema-5 rejection before producing any envelope 8ms
+ ✓ packages/sim/src/simulation.test.ts > canonical campaign commands > returns detached observations and event results 8ms
+ ✓ packages/sim/src/simulation.test.ts > canonical campaign commands > reports phase boundaries without allowing broken telemetry to interrupt rules 19ms
+ ✓ packages/sim/src/simulation.test.ts > canonical campaign commands > replays simultaneous recruitment with double digit entity IDs across save boundaries 114ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > retains strict schema-6 rejection before producing any envelope 7ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > retains strict schema-7 rejection before producing any envelope 6ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > retains strict schema-8 rejection before producing any envelope 8ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > retains strict schema-9 rejection before producing any envelope 7ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > retains strict schema-10 rejection before producing any envelope 6ms
+ ✓ packages/sim/src/serialization-performance.test.ts > single-pass exact save envelope serialization > retains strict schema-11 rejection before producing any envelope 8ms
+ ✓ packages/sim/src/simulation.test.ts > canonical campaign commands > keeps resources integral, event memory bounded and seeds reproducible through long turns 236ms
+ ✓ packages/sim/src/siege.test.ts > siege economy, combat and control > exposes visible third-party blockade presence without revealing its private siege record 87ms
+ ✓ packages/sim/src/siege.test.ts > siege economy, combat and control > blockades actual yields and wears down defenses and stores over three turns 20ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > requires explicit war, visible adjacency, ownership and movement before committing a battle 72ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > forbids hidden targets and founding caravans initiating attacks 39ms
+ ✓ packages/sim/src/simulation.test.ts > canonical campaign commands > rejects arbitrary malformed payloads without changing state 91ms
+ ✓ packages/sim/src/progression.test.ts > separate material, civic and military progression > spends knowledge exactly once and changes actual settlement yields 80ms
+ ✓ packages/sim/src/progression.test.ts > separate material, civic and military progression > adopts 'institution.charter_compact' exclusively, with exact coin cost and yields 21ms
+ ✓ packages/sim/src/siege.test.ts > siege economy, combat and control > rejects illegal siege, assault and capture requests atomically 32ms
+ ✓ packages/sim/src/siege.test.ts > siege economy, combat and control > lifting the siege restores settlement yields without awarding capture 13ms
+ ✓ packages/sim/src/siege.test.ts > siege economy, combat and control > assaults an empty settlement through real militia formations and saves tactical progress 54ms
+ ✓ packages/sim/src/siege.test.ts > siege economy, combat and control > routes a besieger when a relief army wins and removes the blockade 29ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > blocks strategic actions and prevents AI from resolving a human battle 28ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > allows the human defender to choose orders after an AI attack 17ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > includes complete in-budget defenses and preserves historical over-cap atomic rejection 39ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > preserves exact manual/autoresolve parity and mid-battle save/replay 64ms
+ ✓ packages/sim/src/progression.test.ts > separate material, civic and military progression > adopts 'institution.common_stewardship' exclusively, with exact coin cost and yields 18ms
+ ✓ packages/sim/src/progression.test.ts > separate material, civic and military progression > rejects malformed, unknown, unaffordable and wrong-layer choices atomically 36ms
+ ✓ packages/sim/src/progression.test.ts > separate material, civic and military progression > applies marching doctrine on movement refresh and recruitment without refilling spent movement 25ms
+ ✓ packages/sim/src/progression.test.ts > separate material, civic and military progression > snapshots real armor doctrine effects in field combat and preserves tactical replay 53ms
+ ✓ packages/sim/src/siege.test.ts > siege economy, combat and control > requires a siege to attack stationed garrisons and preserves every fortified formation 46ms
+ ✓ packages/sim/src/siege.test.ts > siege economy, combat and control > ends blockades when a validated peace agreement removes the war 29ms
+ ✓ packages/sim/src/siege.test.ts > settlement capture consequences > requires the capturer to choose a valid consequence before further strategy 27ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > applies ordered retreat, persistent fatigue/morale and exact wounded-army casualties 12ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > routes low-morale defenders and advances winners only into vacated legal cells 9ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > moves both sides away after mutual withdrawal 8ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > uses strategic defender terrain in the shared tactical damage rules 10ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > destroys trapped retreaters and records actual strategic survivors 9ms
+ ✓ packages/sim/src/warfare.test.ts > field battles in the campaign > keeps pending battles and reports out of unrelated faction observations 11ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > preserves canonical wars when generated faction IDs share prefixes 7ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects pending completed result even with a recomputed checksum 7ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects missing war even with a recomputed checksum 7ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects reverse war even with a recomputed checksum 9ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects unknown participant even with a recomputed checksum 7ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects extra combat power even with a recomputed checksum 7ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects false initial strength even with a recomputed checksum 7ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects wrong battle seed even with a recomputed checksum 7ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects wrong terrain even with a recomputed checksum 7ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects unspent movement even with a recomputed checksum 7ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects false defender list even with a recomputed checksum 7ms
+ ✓ packages/sim/src/warfare.test.ts > battle save invariants > rejects corrupt completed report aftermath but accepts references to removed armies 11ms
+ ✓ packages/sim/src/progression.test.ts > separate material, civic and military progression > does not retroactively apply a newly adopted doctrine to old battle reports 21ms
+ ✓ packages/sim/src/progression.test.ts > public map-bound Prosperity project > requires prepared infrastructure, technology, institution and upfront coin 30ms
+ ✓ packages/sim/src/progression.test.ts > public map-bound Prosperity project > declares only its public host and progress without sharing hidden armies or research 16ms
+ ✓ packages/sim/src/progression.test.ts > public map-bound Prosperity project > requires five actual turns, survives save/replay and makes victory terminal 58ms
+ ✓ packages/sim/src/siege.test.ts > settlement capture consequences > occupies intact settlements with recovery penalties and transfers vision 25ms
+ ✓ packages/sim/src/siege.test.ts > settlement capture consequences > sacks with exact bounded loot, population and building loss 23ms
+ ✓ packages/sim/src/siege.test.ts > settlement capture consequences > liberates only to a distinct original founder and keeps the attacker outside 24ms
+ ✓ packages/sim/src/siege.test.ts > settlement capture consequences > razes to a visible ruin and consumes it through normal caravan founding 27ms
+ ✓ packages/sim/src/siege.test.ts > siege save integrity > rejects unknown besieger despite a recomputed checksum 21ms
+ ✓ packages/sim/src/movement.test.ts > bounded observation movement and immediate travel > matches multi-hex movement costs and exploration to the exact adjacent command sequence 43ms
+ ✓ packages/sim/src/movement.test.ts > bounded observation movement and immediate travel > rejects unaffordable, malformed, impassable, unknown and enemy-owned orders atomically 15ms
+ ✓ packages/sim/src/movement.test.ts > bounded observation movement and immediate travel > uses weighted paths and stable tie breaking without consulting hidden occupants 12ms
+ ✓ packages/sim/src/movement.test.ts > bounded observation movement and immediate travel > approaches a visible hostile then starts the real field battle, without automatic war 20ms
+ ✓ packages/sim/src/movement.test.ts > bounded observation movement and immediate travel > cannot enter a hostile settlement through click travel or bypass its siege 9ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > spends current movement then resumes saved steps on later turns with replay parity 18ms
+ ✓ packages/sim/src/progression.test.ts > public map-bound Prosperity project > pauses immediately under siege and resumes after a real lift without losing earned progress 27ms
+ ✓ packages/sim/src/progression.test.ts > public map-bound Prosperity project > pauses when infrastructure is occupied and resumes as it recovers 19ms
+ ✓ packages/sim/src/progression.test.ts > public map-bound Prosperity project > cancels the host project through actual assault and occupy consequences 40ms
+ ✓ packages/sim/src/progression.test.ts > public map-bound Prosperity project > cancels the host project through actual assault and raze consequences 37ms
+ ✓ packages/sim/src/siege.test.ts > siege save integrity > rejects wrong siege owner despite a recomputed checksum 20ms
+ ✓ packages/sim/src/siege.test.ts > siege save integrity > rejects duplicated siege despite a recomputed checksum 20ms
+ ✓ packages/sim/src/siege.test.ts > siege save integrity > rejects future siege despite a recomputed checksum 20ms
+ ✓ packages/sim/src/siege.test.ts > siege save integrity > rejects forged capture options despite a recomputed checksum 20ms
+ ✓ packages/sim/src/siege.test.ts > siege save integrity > rejects capture from previous turn despite a recomputed checksum 18ms
+ ✓ packages/sim/src/siege.test.ts > siege save integrity > rejects wrong capturer despite a recomputed checksum 21ms
+ ✓ packages/sim/src/siege.test.ts > siege save integrity > rejects unspent capturer movement despite a recomputed checksum 19ms
+ ✓ packages/sim/src/progression.test.ts > strict progression save invariants > rejects unknown technology even with a recomputed snapshot checksum 17ms
+ ✓ packages/sim/src/progression.test.ts > strict progression save invariants > rejects duplicate technology even with a recomputed snapshot checksum 16ms
+ ✓ packages/sim/src/progression.test.ts > strict progression save invariants > rejects unknown doctrine even with a recomputed snapshot checksum 15ms
+ ✓ packages/sim/src/progression.test.ts > strict progression save invariants > rejects missing faction progression even with a recomputed snapshot checksum 16ms
+ ✓ packages/sim/src/progression.test.ts > strict progression save invariants > rejects fabricated progress even with a recomputed snapshot checksum 16ms
+ ✓ packages/sim/src/progression.test.ts > strict progression save invariants > rejects wrong project host even with a recomputed snapshot checksum 14ms
+ ✓ packages/sim/src/progression.test.ts > strict progression save invariants > rejects wrong pause reason even with a recomputed snapshot checksum 16ms
+ ✓ packages/sim/src/progression.test.ts > strict progression save invariants > rejects fabricated victory even with a recomputed snapshot checksum 15ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > appends waypoints, rejects duplicates, keeps route records private and supports cancellation 14ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > pauses immediately when new local hostiles become visible, even on the last movement point 11ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > revalidates occupation after another faction acts rather than marching through it 8ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > pauses for a newly imposed friendly-town blockade even when the enemy was already known 12ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > rejects an unsaveable hostile-memory overflow before accepting a queued order 96ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > pauses an attacked traveler and preserves a retreat-displaced route for explicit resumption 12ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > lets a successful manual step replace a route without changing legacy move notifications 4ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects unknown army even when the checksum is recomputed 7ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects nonadjacent step even when the checksum is recomputed 7ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects wrong waypoint even when the checksum is recomputed 7ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects invalid active origin even when the checksum is recomputed 6ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects missing pause reason even when the checksum is recomputed 6ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects unknown biome even when the checksum is recomputed 8ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects water biome on land even when the checksum is recomputed 7ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects wrong biome dimensions even when the checksum is recomputed 7ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects unknown generator even when the checksum is recomputed 6ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > round-trips after every accepted command from a captured ordinary battle 217ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > has a canonical exact round trip 50ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > migrates explicit v0 nextEntityId snapshots without changing campaign state 38ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > verifies v1 checksums and the known content pack before adding warfare defaults 28ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > manual rounds and withdrawal save at the same boundary as autoresolve 65ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > does not compound training when the same company defends twice without an end turn 34ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > removes only the training morale actually granted at the tactical cap 45ms
+ ✓ packages/sim/src/battle-morale.test.ts > strategic morale after trained combat > retains independently captured rule-16 results rather than silently rewriting history 34ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > migrates checked v2 state into settlement provenance and diplomacy defaults 19ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > continues a synthetic v2 field-battle shape with an initialized war memory 40ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > migrates the recognized v3 content pack and verifies its checksum before defaults 17ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > preserves a synthetic v3 siege-battle shape and its pending conquest decision 42ms
+ ✓ packages/chronicle/src/chronicle.test.ts > retains every command and event after the bounded campaign feed rotates 202ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects unknown version 2ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects mismatched content 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects wrong map dimensions 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects invalid terrain 5ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects negative treasury 4ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects unknown turn owner 5ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects unknown unit 4ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects unknown army owner 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects duplicate army ID 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects excess movement 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects out of bounds army 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects counter collision 5ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects out of bounds exploration 4ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects missing current vision 4ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects duplicated visibility owner 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects unknown building 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects duplicate building 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects invalid queue progress 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects invalid queued item 4ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects non-head queue progress 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects future event 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects syntactically valid numeric corruption through the snapshot checksum 3ms
+ ✓ packages/sim/src/save.test.ts > save validation and migration > rejects malformed JSON and unknown state fields, preserving the caller state 14ms
+ ✓ packages/sim/src/battle-frontage.test.ts > bounded defending contingents > prioritizes a later-sorting target without splitting larger reserves or involving their officer 82ms
+ ✓ packages/sim/src/battle-frontage.test.ts > bounded defending contingents > rejects a self-consistent but wrong pending contingent after a save is resealed 42ms
+ ✓ packages/chronicle/src/chronicle.test.ts > records refused orders without state changes, detaches caller data, and verifies exact replay 36ms
+ ✓ packages/chronicle/src/chronicle.test.ts > preserves completed tactical rounds, capture consequences and archive continuation 82ms
+ ✓ packages/chronicle/src/chronicle.test.ts > rejects discontinuity, mismatched campaign, and false complete-history claims 42ms
+ ✓ packages/sim/src/battle-frontage.test.ts > bounded defending contingents > keeps 20 defending companies attackable with an unchanged tactical budget 43ms
+ ✓ packages/sim/src/battle-frontage.test.ts > bounded defending contingents > keeps 21 defending companies attackable with an unchanged tactical budget 34ms
+ ✓ packages/sim/src/battle-frontage.test.ts > bounded defending contingents > keeps 200 defending companies attackable with an unchanged tactical budget 57ms
+ ✓ packages/sim/src/canonical-land.test.ts > strict deterministic canonical land projection > preserves seed 17 save bytes and seals captured before optimizing the helper 88ms
+ ✓ packages/sim/src/canonical-land.test.ts > strict deterministic canonical land projection > preserves seed 20260905 save bytes and seals captured before optimizing the helper 40ms
+ ✓ packages/sim/src/individual-campaign.test.ts > individual battles across the campaign boundary > observations and scene snapshots detach soldier positions, identities and development history 67ms
+ ✓ packages/sim/src/individual-campaign.test.ts > individual battles across the campaign boundary > rejects forged individual identities outside the actual entering company and incomplete modern state 48ms
+ ✓ packages/sim/src/battle-frontage.test.ts > bounded defending contingents > keeps fleet reserves separate from participating hulls and carried land troops 59ms
+ ✓ packages/sim/src/battle-frontage.test.ts > bounded defending contingents > exposes the same committed and reserve strength before a human or AI attacks 28ms
+ ✓ packages/sim/src/battle-frontage.test.ts > bounded defending contingents > keeps a settlement contested until its remaining garrison is actually defeated 71ms
+ ✓ packages/sim/src/battle-frontage.test.ts > bounded defending contingents > engages twenty of twenty-one formations without changing or advancing through reserves 24ms
+ ✓ packages/sim/src/individual-campaign.test.ts > individual battles across the campaign boundary > paid ward and damaging spells preserve exact individual losses and save both pending and completed combat 44ms
+ ✓ packages/sim/src/individual-campaign.test.ts > individual battles across the campaign boundary > manual AI choices and autoresolve preserve identical combat, aftermath and earned company progress 48ms
+ ✓ packages/sim/src/individual-campaign.test.ts > individual battles across the campaign boundary > real embarked troops stay out of the naval scene and receive no fighting-company experience 27ms
+ ✓ packages/sim/src/individual-campaign.test.ts > individual battles across the campaign boundary > completed development snapshots retain a legal earned branch rather than accepting prerequisite-free stats 19ms
+ ✓ packages/sim/src/canonical-land.test.ts > strict deterministic canonical land projection > matches the old complete serialized envelope for shuffled object insertion orders and real developed towns 228ms
+ ✓ packages/sim/src/combat/combat.test.ts > formation battle rules > applies casualties, morale loss and fatigue while preserving the input 6ms
+ ✓ packages/sim/src/combat/combat.test.ts > formation battle rules > gives elevated defenders real protection and woodland reduces ranged damage 1ms
+ ✓ packages/sim/src/combat/combat.test.ts > formation battle rules > trades flank damage and morale shock for fatigue and exposure 1ms
+ ✓ packages/sim/src/combat/combat.test.ts > formation battle rules > fatigued formations hit less effectively and act later 1ms
+ ✓ packages/sim/src/combat/combat.test.ts > formation battle rules > ranged rear formations can fire while melee reserves need to close distance 1ms
+ ✓ packages/sim/src/combat/combat.test.ts > formation battle rules > routes low-morale formations before annihilation and applies pursuit losses 1ms
+ ✓ packages/sim/src/combat/combat.test.ts > formation battle rules > uses initiative to decide which fragile line breaks first 0ms
+ ✓ packages/sim/src/combat/combat.test.ts > formation battle rules > resolves withdrawal immediately with surviving retreaters and pursuit 0ms
+ ✓ packages/sim/src/combat/combat.test.ts > formation battle rules > caps a protected stalemate at twelve rounds 1ms
+ ✓ packages/sim/src/combat/combat.test.ts > battle determinism, persistence and bounds > uses four ranks for twenty-versus-twenty battles while freezing historical twelve-formation limits 10ms
+ ✓ packages/sim/src/combat/combat.test.ts > battle determinism, persistence and bounds > autoresolve exactly matches manual rounds using the same AI orders 1ms
+ ✓ packages/sim/src/combat/combat.test.ts > battle determinism, persistence and bounds > is independent of input formation insertion order 2ms
+ ✓ packages/sim/src/combat/combat.test.ts > battle determinism, persistence and bounds > preserves exact continuation after JSON save/load midway through battle 1ms
+ ✓ packages/sim/src/combat/combat.test.ts > battle determinism, persistence and bounds > rejects malformed fields, conflicting slots/IDs, dead starts and illegal orders 2ms
+ ✓ packages/sim/src/combat/combat.test.ts > battle determinism, persistence and bounds > terminates deterministically with bounded casualties and integer stats across varied formations 241ms
+ ✓ packages/sim/src/canonical-land.test.ts > strict deterministic canonical land projection > preserves numeric cell order, lexical ID order, arrays and both paid-work shapes 4ms
+ ✓ packages/sim/src/canonical-land.test.ts > strict deterministic canonical land projection > never mutates original dictionaries or nested arrays while sorting the detached projection 3ms
+ ✓ packages/sim/src/canonical-land.test.ts > strict deterministic canonical land projection > retains null-prototype JSON records but rejects inherited required fields at every object level 9ms
+ ✓ packages/sim/src/canonical-land.test.ts > strict deterministic canonical land projection > rejects unknown canonical keys rather than projecting them away, even undefined fields and toJSON hooks 16ms
+ ✓ packages/sim/src/canonical-land.test.ts > strict deterministic canonical land projection > retains strict number/key/work validation rather than accepting lossy JSON normalization 10ms
+ ✓ packages/sim/src/development.test.ts > canonical development > earns local civic work, pays exact costs and upkeep, changes actual yields and resumes a saved branch 65ms
+ ✓ packages/sim/src/development.test.ts > canonical development > charges materials atomically, preserves company identity through transfers, and rejects incompatible branches 36ms
+ ✓ packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > removes a destroyed formation without deleting the surviving army or leaving its scouting vision behind 104ms
+ ✓ packages/sim/src/uncapped-growth.test.ts > uncapped hearth development > buys connected land beyond37, exposes every option through bounded pages, and reloads exact sight and road memory 258ms
+ ✓ packages/sim/src/territory-quote-performance.test.ts > call-local territory quote derivation > retains genuine pre-optimization observation bytes, including historical filters, fog and blocker ordering 77ms
+ ✓ packages/sim/src/territory-quote-performance.test.ts > call-local territory quote derivation > derives features once per detailed cell and resolves the owner only once, not once per option 22ms
+ ✓ packages/sim/src/territory-quote-performance.test.ts > call-local territory quote derivation > agrees with uncached command quotes for all 370 site options and every cultivation option 96ms
+ ✓ packages/sim/src/territory-quote-performance.test.ts > call-local territory quote derivation > drops all derived context after a read and detaches returned components across command/save continuation 64ms
+ ✓ packages/sim/src/uncapped-growth.test.ts > uncapped hearth development > supports more than six paid productive workers and grows from20 to21 through stored food, with rising upkeep 64ms
+ ✓ packages/sim/src/uncapped-growth.test.ts > uncapped hearth development > preserves historical reach and worker refusals while modern hidden probes never inspect remote ownership 8ms
+ ✓ packages/sim/src/development.test.ts > canonical development > earns realm influence from functioning civic infrastructure and extends an actual permanent policy 23ms
+ ✓ packages/sim/src/development.test.ts > canonical development > earns experience only for actual surviving combatants and retains exact saved-battle continuation 73ms
+ ✓ packages/sim/src/development.test.ts > canonical development > applies training to canonical tactical stats while historical battle rules ignore future training 34ms
+ ✓ packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > deploys all formations, saves mid-battle, and persists exact per-formation casualties and army movement 67ms
+ ✓ packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > retreats each mixed container once, preserving its roster identities and shared cell 29ms
+ ✓ packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > historical rules reject a stacked target over twenty total formations without omitting defenders 26ms
+ ✓ packages/sim/src/development.test.ts > canonical development > bounds default quotes while retaining arbitrary company access and observation-only AI choices 52ms
+ ✓ packages/sim/src/development.test.ts > canonical development > honors remaining recurring obligations while preserving canonically affordable development quotes 7ms
+ ✓ packages/sim/src/development.test.ts > canonical development > spends earned mission experience on advanced officer skills and gates them out of historical projections 30ms
+ ✓ packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > keeps mixed siege forces locked against reorganization and uses the same fortified militia engine 31ms
+ ✓ packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > rejects invalid pending composition after a checksum is recomputed: missing-binding 21ms
+ ✓ packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > rejects invalid pending composition after a checksum is recomputed: wrong-army 19ms
+ ✓ packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > rejects invalid pending composition after a checksum is recomputed: omitted-roster 20ms
+ ✓ packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > rejects invalid pending composition after a checksum is recomputed: entering-strength 19ms
+ ✓ packages/sim/src/army-combat.test.ts > mixed campaign forces use the real formation battlefield > rejects invalid pending composition after a checksum is recomputed: wrong-side 19ms
+ ✓ packages/sim/src/roads.test.ts > settlement road construction > builds an actual continuous hill connection over time and survives a saved continuation 47ms
+ ✓ packages/sim/src/roads.test.ts > settlement road construction > quotes and charges exactly the remaining work, records it, and replays the paid segment 17ms
+ ✓ packages/sim/src/roads.test.ts > settlement road construction > refuses malformed, unfunded and foreign project orders without mutation 8ms
+ ✓ packages/sim/src/roads.test.ts > settlement road construction > pauses during occupation and resumes without consuming paused work 5ms
+ ✓ packages/sim/src/roads.test.ts > settlement road construction > only shows remembered road edges outside sight, refreshing them when a scout returns 37ms
+ ✓ packages/sim/src/roads.test.ts > settlement road construction > pauses for a foreign army at the work front without spending coin or progress, then resumes 18ms
+ ✓ packages/sim/src/roads.test.ts > settlement road construction > uses the same completed edge benefit for preview, direct movement and queued travel 11ms
+ ✓ packages/sim/src/roads.test.ts > settlement road construction > keeps completed physical roads but cancels projects when an endpoint is razed 5ms
+ ✓ packages/sim/src/roads.test.ts > settlement road construction > rejects checksum-valid asymmetric roads, impossible remembered roads and invalid work 14ms
+ ✓ packages/sim/src/roads.test.ts > settlement road construction > does not let rebuilding indexes repair corrupted visible road memory 7ms
+ ✓ packages/sim/src/naval-launch-quotes.test.ts > naval quotes report the actual visible berth without exposing rival production or mutating state 53ms
+ ✓ packages/sim/src/naval-launch-quotes.test.ts > a funded hull launches at its quoted berth, or rechecks when another faction occupies it before completion 116ms
+ ✓ packages/chronicle/src/character-replay.test.ts > character commands survive complete archive replay > records a generated-start named surveyor and a real saved mission that extends geographic knowledge 104ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > quotes bounded conservative progress from population, actual infrastructure and acquired research 54ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > expands one connected tile with deterministic ties, without free workers, improvements or yields 31ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > modern colonies accumulate connected border growth from their first population while historical colonies wait for reach 7ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > pauses under occupation and siege, retaining paid work and progress until conditions change 6ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > resets captured civic progress without deleting developed land and releases territory on razing 5ms
+ ✓ packages/chronicle/src/character-replay.test.ts > character commands survive complete archive replay > records actual marshal leadership, Rally and per-character battle aftermath across a saved tactical round 74ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > excludes deep ocean and uncharted cells, preserves the historical37 limit and never exposes foreign town options 6ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > keeps hidden land memory historical when a rival boundary grows 11ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > resolves competing expansions in stable town order without double claims 9ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > leaves historical turns without civic accumulation and preserves modern save continuation 45ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > rejects malformed or impossible civic progress without silently repairing a current save 21ms
+ ✓ packages/sim/src/territory-growth.test.ts > automatic city boundary growth > gates advanced improvements by knowledge but preserves a captured completed improvement without captor research 11ms
+ ✓ packages/sim/src/road-edge-cases.test.ts > attack honors the previewed road cost when only one movement remains 110ms
+ ✓ packages/sim/src/road-edge-cases.test.ts > moveTo honors the previewed road cost when only one movement remains 42ms
+ ✓ packages/sim/src/road-edge-cases.test.ts > a project reusing a completed physical segment refuses duplicate payment and advances freely 37ms
+ ✓ packages/sim/src/road-edge-cases.test.ts > a siege assault applies the same road entry cost and records the real battle 42ms
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > quotes a reachable 21-company attack and executes the quoted moveTo with exact replay 78ms
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > routes against whole mixed containers without splitting or moving the nine-company reserve 26ms
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > retains rule-16 query and command rejection with no state mutation 13ms
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > keeps no-preview observations conservative even when current execution supports contingents 18ms
+ ✓ packages/sim/src/envelope-hash.test.ts > streamed current-envelope state hash > matches the original complete-envelope checksum for arbitrary UTF-16, including controls and lone surrogates 188ms
+ ✓ packages/sim/src/envelope-hash.test.ts > streamed current-envelope state hash > retains strict validation and never calls executable hooks on malformed land 47ms
+ ✓ packages/sim/src/envelope-hash.test.ts > streamed current-envelope state hash > traverses canonical payload and explored iterable once and leaves the source detached 25ms
+ ✓ packages/sim/src/research-trees.test.ts > research dependencies and immutable observation copies are authoritative, not UI-only locks 41ms
+ ✓ packages/sim/src/research-trees.test.ts > a researched polder still needs a suitable paid site, real turns and an assigned worker; save and replay agree 39ms
+ ✓ packages/sim/src/research-trees.test.ts > advanced constructions enforce terrain/features and keep signed yield penalties 21ms
+ ✓ packages/sim/src/research-trees.test.ts > historical command execution cannot acquire future techniques or construction 11ms
+ ✓ packages/sim/src/research-trees.test.ts > save validation rejects a researched child without its prerequisite 15ms
+ ✓ packages/sim/src/uncapped-capture.test.ts > a real100-person conquest preserves its pending sack decision and wallets above one billion 91ms
+ ✓ packages/sim/src/uncapped-capture.test.ts > a real100-person conquest preserves its pending raze decision and wallets above one billion 35ms
+ ✓ packages/sim/src/faction-starts.test.ts > culture-aware fair starting sites > uses all six cultures, permits a chosen player culture, and preserves every viable candidate 59ms
+ ✓ packages/sim/src/faction-starts.test.ts > culture-aware fair starting sites > is deterministic and freezes original catalogs and seat order with independent explicit roster versions 20ms
+ ✓ packages/chronicle/src/naval-replay.test.ts > naval campaign evidence > records a real officer, boarding, researched ocean route and landing across a saved voyage without rewriting history 89ms
+ ✓ packages/sim/src/geography-save.test.ts > checksum-valid geography corruption is rejected instead of regenerating or repairing a world 78ms
+ ✓ packages/sim/src/legacy-growth-visibility.test.ts > reserializing a v15 city preserves unexplored outer borders until the first successful modern action 56ms
+ ✓ packages/sim/src/growth-economy.test.ts > uncapped growth economy > increases establishment, food and recurring civic costs beyond the previous development limits 1ms
+ ✓ packages/sim/src/growth-economy.test.ts > uncapped growth economy > keeps historical food and free founding arithmetic exactly and only bounds machine integer overflow 0ms
+ ✓ packages/sim/src/growth-economy.test.ts > canonical ongoing coin forecast > reports actual income/upkeep and queued obligations without changing state 35ms
+ ✓ packages/sim/src/territory-review.test.ts > an out-of-range claim probe cannot reveal whether a fogged rival bought the target hex 80ms
+ ✓ packages/sim/src/combat/individual.test.ts > canonical individual battle rules > represents actual initial strength with stable identities, while frozen battle9 carries no future state 11ms
+ ✓ packages/sim/src/combat/individual.test.ts > canonical individual battle rules > lets advancing infantry eventually reach a stationary braced line and records canonical movement/cohesion 5ms
+ ✓ packages/sim/src/combat/individual.test.ts > canonical individual battle rules > event participants and killed identities exactly reconcile every volley and pursuit, including ward absorption 21ms
+ ✓ packages/sim/src/combat/individual.test.ts > canonical individual battle rules > pike screens reduce early mounted charge losses and support prevents the unprotected-flank bonus 3ms
+ ✓ packages/sim/src/combat/individual.test.ts > canonical individual battle rules > a missile line can fire before melee reaches contact, and naval strength remains one visible hull 2ms
+ ✓ packages/sim/src/combat/individual.test.ts > canonical individual battle rules > manual AI orders and autoresolve have the same canonical hash through JSON continuation and detached observers 4ms
+ ✓ packages/sim/src/specialist-combat.test.ts > arbalesters fire from rear ranks, halberdiers reach from the second rank, and lancers must close 9ms
+ ✓ packages/sim/src/specialist-combat.test.ts > a mixed specialist battle has identical automatic and manually advanced results across seeds and terrain 36ms
+
+ Test Files  61 passed (61)
+      Tests  705 passed (705)
+   Start at  03:02:26
+   Duration  15.39s (transform 2.05s, setup 0ms, import 10.75s, tests 45.04s, environment 5ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/review-fix/capped-morale-integration.json

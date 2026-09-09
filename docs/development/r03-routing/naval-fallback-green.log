@@ -1,0 +1,24 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved field attack against 21 formations using an unchanged detached observation 102ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > executes a query-approved naval attack against 21 hulls through the whole turn planner 44ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > declares war on a contestable oversized stack before asking a fresh observation to authorize attack 14ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > uses the real one-movement road quote rather than re-pricing a contingent attack as forest travel 21ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > naval target selection skips a query-blocked old oversized stack rather than abandoning another legal target 24ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' plans accept mixed whole-container contingents and leave reserves intact 21ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' plans accept mixed whole-container contingents and leave reserves intact 27ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' cannot discount a strong strategic reserve to make an attack affordable 11ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' cannot discount a strong strategic reserve to make an attack affordable 21ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' keeps old no-preview observations and rule-16 guards conservative 12ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' keeps old no-preview observations and rule-16 guards conservative 20ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'field' honors a movement-query blocker even with a valid contingent preview 8ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > 'naval' honors a movement-query blocker even with a valid contingent preview 17ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > uses the canonical siege assault quote for 21 garrison formations without capturing through reserves 49ms
+ ✓ packages/ai/src/battle-defense.test.ts > AI defending-contingent consumers > siege policy budgets against the complete observed garrison rather than the engaged preview 10ms
+
+ Test Files  1 passed (1)
+      Tests  15 passed (15)
+   Start at  03:01:07
+   Duration  1.15s (transform 505ms, setup 0ms, import 674ms, tests 402ms, environment 0ms)
+

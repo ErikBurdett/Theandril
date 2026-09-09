@@ -1,0 +1,2670 @@
+{
+  "summary": {
+    "resources": {
+      "version": 1,
+      "marketSettlementIds": [],
+      "stockpiles": [
+        {
+          "resourceId": "resource.grain",
+          "name": "Hearthgrain",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 2,
+          "improvementId": "improvement.grange"
+        },
+        {
+          "resourceId": "resource.iron",
+          "name": "Ironstone",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 4,
+          "improvementId": "improvement.iron_mine"
+        },
+        {
+          "resourceId": "resource.copper",
+          "name": "Red copper",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 3,
+          "improvementId": "improvement.copper_mine"
+        },
+        {
+          "resourceId": "resource.salt",
+          "name": "White salt",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 3,
+          "improvementId": "improvement.salt_house"
+        },
+        {
+          "resourceId": "resource.timber",
+          "name": "Heartwood",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 3,
+          "improvementId": "improvement.timber_yard"
+        },
+        {
+          "resourceId": "resource.horses",
+          "name": "Steppe horses",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 5,
+          "improvementId": "improvement.remount_yard"
+        },
+        {
+          "resourceId": "resource.silver",
+          "name": "Witness silver",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 7,
+          "improvementId": "improvement.silver_mine"
+        },
+        {
+          "resourceId": "resource.ashglass",
+          "name": "Ashglass",
+          "amount": 0,
+          "perTurn": 0,
+          "salePrice": 6,
+          "improvementId": "improvement.glass_refinery"
+        }
+      ]
+    },
+    "development": {
+      "faction": {
+        "scope": "faction",
+        "entityId": "faction.ashen_compact",
+        "name": "Ashen Compact",
+        "cell": null,
+        "progress": 0,
+        "currency": "influence",
+        "treasury": 60,
+        "upkeep": 0,
+        "effects": {
+          "food": 0,
+          "industry": 0,
+          "coin": 0,
+          "knowledge": 0,
+          "attack": 0,
+          "armor": 0,
+          "initiative": 0,
+          "range": 0,
+          "morale": 0
+        },
+        "choices": [
+          {
+            "upkeep": 2,
+            "requiresAll": [],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": "institution.common_stewardship",
+            "requiredDoctrine": null,
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.store_pledges",
+            "scope": "faction",
+            "name": "Store pledges",
+            "description": "Extend Common stewardship through reciprocal reserve obligations. Every hearth gains 2 food before local penalties.",
+            "branch": "Common stewardship",
+            "tier": 1,
+            "coinCost": 60,
+            "progressCost": 6,
+            "effects": {
+              "food": 2,
+              "industry": 0,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 0,
+              "armor": 0,
+              "initiative": 0,
+              "range": 0,
+              "morale": 0
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Resolve the pending battle or capture first.",
+            "active": false
+          },
+          {
+            "upkeep": 3,
+            "requiresAll": [
+              "tradition.store_pledges"
+            ],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": "institution.common_stewardship",
+            "requiredDoctrine": null,
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.harvest_councils",
+            "scope": "faction",
+            "name": "Harvest councils",
+            "description": "Local stewards coordinate planting and shared repairs. Every hearth gains 2 food and 1 industry.",
+            "branch": "Common stewardship",
+            "tier": 2,
+            "coinCost": 120,
+            "progressCost": 12,
+            "effects": {
+              "food": 2,
+              "industry": 1,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 0,
+              "armor": 0,
+              "initiative": 0,
+              "range": 0,
+              "morale": 0
+            },
+            "resourceCosts": {
+              "resource.grain": 4,
+              "resource.salt": 2
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Resolve the pending battle or capture first.",
+            "active": false
+          },
+          {
+            "upkeep": 2,
+            "requiresAll": [],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": "institution.charter_compact",
+            "requiredDoctrine": null,
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.open_ledgers",
+            "scope": "faction",
+            "name": "Open ledgers",
+            "description": "Extend the Charter compact with records that can travel between markets. Every hearth gains 2 coin and 1 knowledge.",
+            "branch": "Charter compact",
+            "tier": 1,
+            "coinCost": 60,
+            "progressCost": 6,
+            "effects": {
+              "food": 0,
+              "industry": 0,
+              "coin": 2,
+              "knowledge": 1,
+              "attack": 0,
+              "armor": 0,
+              "initiative": 0,
+              "range": 0,
+              "morale": 0
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Resolve the pending battle or capture first.",
+            "active": false
+          },
+          {
+            "upkeep": 3,
+            "requiresAll": [
+              "tradition.open_ledgers"
+            ],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": "institution.charter_compact",
+            "requiredDoctrine": null,
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.itinerant_courts",
+            "scope": "faction",
+            "name": "Itinerant courts",
+            "description": "Travelling witnesses settle obligations across the realm. Every hearth gains 2 coin and 1 industry.",
+            "branch": "Charter compact",
+            "tier": 2,
+            "coinCost": 120,
+            "progressCost": 12,
+            "effects": {
+              "food": 0,
+              "industry": 1,
+              "coin": 2,
+              "knowledge": 0,
+              "attack": 0,
+              "armor": 0,
+              "initiative": 0,
+              "range": 0,
+              "morale": 0
+            },
+            "resourceCosts": {
+              "resource.horses": 4,
+              "resource.silver": 3
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Resolve the pending battle or capture first.",
+            "active": false
+          },
+          {
+            "upkeep": 2,
+            "requiresAll": [],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": null,
+            "requiredDoctrine": "doctrine.shield_cohesion",
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.watched_ranks",
+            "scope": "faction",
+            "name": "Watched ranks",
+            "description": "Carry Shield cohesion into an established system of mutual watches. Every fighting formation gains 1 armor and 4 battle morale.",
+            "branch": "Shield cohesion",
+            "tier": 1,
+            "coinCost": 60,
+            "progressCost": 6,
+            "effects": {
+              "food": 0,
+              "industry": 0,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 0,
+              "armor": 1,
+              "initiative": 0,
+              "range": 0,
+              "morale": 4
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Resolve the pending battle or capture first.",
+            "active": false
+          },
+          {
+            "upkeep": 3,
+            "requiresAll": [
+              "tradition.watched_ranks"
+            ],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": null,
+            "requiredDoctrine": "doctrine.shield_cohesion",
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.standing_reserve",
+            "scope": "faction",
+            "name": "Standing reserve",
+            "description": "Keep trained replacements and reserve equipment ready for the line. Every fighting formation gains 1 armor and 1 attack; this does not heal existing losses.",
+            "branch": "Shield cohesion",
+            "tier": 2,
+            "coinCost": 120,
+            "progressCost": 12,
+            "effects": {
+              "food": 0,
+              "industry": 0,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 1,
+              "armor": 1,
+              "initiative": 0,
+              "range": 0,
+              "morale": 0
+            },
+            "resourceCosts": {
+              "resource.iron": 6,
+              "resource.grain": 6
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Resolve the pending battle or capture first.",
+            "active": false
+          },
+          {
+            "upkeep": 2,
+            "requiresAll": [],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": null,
+            "requiredDoctrine": "doctrine.march_columns",
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.dispatch_cells",
+            "scope": "faction",
+            "name": "Dispatch cells",
+            "description": "Extend March columns with compact groups trained to pass orders. Every fighting formation gains 2 initiative.",
+            "branch": "March columns",
+            "tier": 1,
+            "coinCost": 60,
+            "progressCost": 6,
+            "effects": {
+              "food": 0,
+              "industry": 0,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 0,
+              "armor": 0,
+              "initiative": 2,
+              "range": 0,
+              "morale": 0
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Resolve the pending battle or capture first.",
+            "active": false
+          },
+          {
+            "upkeep": 3,
+            "requiresAll": [
+              "tradition.dispatch_cells"
+            ],
+            "requiresAny": [],
+            "exclusiveGroup": null,
+            "requiredBuildings": [],
+            "requiredTechnologies": [],
+            "requiredInstitution": null,
+            "requiredDoctrine": "doctrine.march_columns",
+            "minimumPopulation": 0,
+            "minimumRange": 0,
+            "id": "tradition.disciplined_momentum",
+            "scope": "faction",
+            "name": "Disciplined momentum",
+            "description": "A moving column keeps enough order to strike together. Every fighting formation gains 2 attack and 4 battle morale.",
+            "branch": "March columns",
+            "tier": 2,
+            "coinCost": 120,
+            "progressCost": 12,
+            "effects": {
+              "food": 0,
+              "industry": 0,
+              "coin": 0,
+              "knowledge": 0,
+              "attack": 2,
+              "armor": 0,
+              "initiative": 0,
+              "range": 0,
+              "morale": 4
+            },
+            "resourceCosts": {
+              "resource.horses": 6,
+              "resource.copper": 2
+            },
+            "acquired": false,
+            "available": false,
+            "blocker": "Resolve the pending battle or capture first.",
+            "active": false
+          }
+        ]
+      },
+      "focus": null,
+      "candidates": []
+    },
+    "growth": {
+      "founding": {
+        "coinCost": 14,
+        "canAfford": true,
+        "blocker": null,
+        "additionalUpkeep": 1,
+        "effectText": "Each additional hearth costs more to establish. Population, territory and realm administration add recurring coin upkeep; growth has no settlement, population or territory ceiling."
+      },
+      "settlements": [
+        {
+          "settlementId": "settlement.5",
+          "foodRequired": 12,
+          "foodConsumption": 2,
+          "civicUpkeep": {
+            "population": 1,
+            "territory": 0,
+            "administration": 0,
+            "total": 1
+          }
+        }
+      ],
+      "civicUpkeep": 1,
+      "economy": {
+        "income": 7,
+        "upkeep": 3,
+        "net": 4,
+        "queuedUpkeep": 0
+      }
+    },
+    "battleScene": {
+      "soldiers": [
+        {
+          "id": "formation.2.soldier.0",
+          "formationId": "formation.2",
+          "slot": 0,
+          "x": -0.4375,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.1",
+          "formationId": "formation.2",
+          "slot": 1,
+          "x": -0.3125,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.2",
+          "formationId": "formation.2",
+          "slot": 2,
+          "x": -0.1875,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.3",
+          "formationId": "formation.2",
+          "slot": 3,
+          "x": -0.0625,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.4",
+          "formationId": "formation.2",
+          "slot": 4,
+          "x": 0.0625,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.5",
+          "formationId": "formation.2",
+          "slot": 5,
+          "x": 0.1875,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.6",
+          "formationId": "formation.2",
+          "slot": 6,
+          "x": 0.3125,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.7",
+          "formationId": "formation.2",
+          "slot": 7,
+          "x": 0.4375,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.8",
+          "formationId": "formation.2",
+          "slot": 8,
+          "x": -0.4375,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.9",
+          "formationId": "formation.2",
+          "slot": 9,
+          "x": -0.3125,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.10",
+          "formationId": "formation.2",
+          "slot": 10,
+          "x": -0.1875,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.11",
+          "formationId": "formation.2",
+          "slot": 11,
+          "x": -0.0625,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.12",
+          "formationId": "formation.2",
+          "slot": 12,
+          "x": 0.0625,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.13",
+          "formationId": "formation.2",
+          "slot": 13,
+          "x": 0.1875,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.14",
+          "formationId": "formation.2",
+          "slot": 14,
+          "x": 0.3125,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.15",
+          "formationId": "formation.2",
+          "slot": 15,
+          "x": 0.4375,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.16",
+          "formationId": "formation.2",
+          "slot": 16,
+          "x": -0.4375,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.17",
+          "formationId": "formation.2",
+          "slot": 17,
+          "x": -0.3125,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.18",
+          "formationId": "formation.2",
+          "slot": 18,
+          "x": -0.1875,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.19",
+          "formationId": "formation.2",
+          "slot": 19,
+          "x": -0.0625,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.20",
+          "formationId": "formation.2",
+          "slot": 20,
+          "x": 0.0625,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.21",
+          "formationId": "formation.2",
+          "slot": 21,
+          "x": 0.1875,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.22",
+          "formationId": "formation.2",
+          "slot": 22,
+          "x": 0.3125,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.23",
+          "formationId": "formation.2",
+          "slot": 23,
+          "x": 0.4375,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.24",
+          "formationId": "formation.2",
+          "slot": 24,
+          "x": -0.4375,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.25",
+          "formationId": "formation.2",
+          "slot": 25,
+          "x": -0.3125,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.26",
+          "formationId": "formation.2",
+          "slot": 26,
+          "x": -0.1875,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.27",
+          "formationId": "formation.2",
+          "slot": 27,
+          "x": -0.0625,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.28",
+          "formationId": "formation.2",
+          "slot": 28,
+          "x": 0.0625,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.29",
+          "formationId": "formation.2",
+          "slot": 29,
+          "x": 0.1875,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.30",
+          "formationId": "formation.2",
+          "slot": 30,
+          "x": 0.3125,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.31",
+          "formationId": "formation.2",
+          "slot": 31,
+          "x": 0.4375,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.32",
+          "formationId": "formation.2",
+          "slot": 32,
+          "x": -0.4375,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.33",
+          "formationId": "formation.2",
+          "slot": 33,
+          "x": -0.3125,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.34",
+          "formationId": "formation.2",
+          "slot": 34,
+          "x": -0.1875,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.35",
+          "formationId": "formation.2",
+          "slot": 35,
+          "x": -0.0625,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.36",
+          "formationId": "formation.2",
+          "slot": 36,
+          "x": 0.0625,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.37",
+          "formationId": "formation.2",
+          "slot": 37,
+          "x": 0.1875,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.38",
+          "formationId": "formation.2",
+          "slot": 38,
+          "x": 0.3125,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.39",
+          "formationId": "formation.2",
+          "slot": 39,
+          "x": 0.4375,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.40",
+          "formationId": "formation.2",
+          "slot": 40,
+          "x": -0.4375,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.41",
+          "formationId": "formation.2",
+          "slot": 41,
+          "x": -0.3125,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.42",
+          "formationId": "formation.2",
+          "slot": 42,
+          "x": -0.1875,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.43",
+          "formationId": "formation.2",
+          "slot": 43,
+          "x": -0.0625,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.44",
+          "formationId": "formation.2",
+          "slot": 44,
+          "x": 0.0625,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.45",
+          "formationId": "formation.2",
+          "slot": 45,
+          "x": 0.1875,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.46",
+          "formationId": "formation.2",
+          "slot": 46,
+          "x": 0.3125,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.47",
+          "formationId": "formation.2",
+          "slot": 47,
+          "x": 0.4375,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.48",
+          "formationId": "formation.2",
+          "slot": 48,
+          "x": -0.4375,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.49",
+          "formationId": "formation.2",
+          "slot": 49,
+          "x": -0.3125,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.50",
+          "formationId": "formation.2",
+          "slot": 50,
+          "x": -0.1875,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.51",
+          "formationId": "formation.2",
+          "slot": 51,
+          "x": -0.0625,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.52",
+          "formationId": "formation.2",
+          "slot": 52,
+          "x": 0.0625,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.53",
+          "formationId": "formation.2",
+          "slot": 53,
+          "x": 0.1875,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.54",
+          "formationId": "formation.2",
+          "slot": 54,
+          "x": 0.3125,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.55",
+          "formationId": "formation.2",
+          "slot": 55,
+          "x": 0.4375,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.56",
+          "formationId": "formation.2",
+          "slot": 56,
+          "x": -0.4375,
+          "y": 0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.57",
+          "formationId": "formation.2",
+          "slot": 57,
+          "x": -0.3125,
+          "y": 0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.58",
+          "formationId": "formation.2",
+          "slot": 58,
+          "x": -0.1875,
+          "y": 0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.2.soldier.59",
+          "formationId": "formation.2",
+          "slot": 59,
+          "x": -0.0625,
+          "y": 0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.0",
+          "formationId": "formation.4",
+          "slot": 0,
+          "x": -0.4375,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.1",
+          "formationId": "formation.4",
+          "slot": 1,
+          "x": -0.3125,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.2",
+          "formationId": "formation.4",
+          "slot": 2,
+          "x": -0.1875,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.3",
+          "formationId": "formation.4",
+          "slot": 3,
+          "x": -0.0625,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.4",
+          "formationId": "formation.4",
+          "slot": 4,
+          "x": 0.0625,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.5",
+          "formationId": "formation.4",
+          "slot": 5,
+          "x": 0.1875,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.6",
+          "formationId": "formation.4",
+          "slot": 6,
+          "x": 0.3125,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.7",
+          "formationId": "formation.4",
+          "slot": 7,
+          "x": 0.4375,
+          "y": -0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.8",
+          "formationId": "formation.4",
+          "slot": 8,
+          "x": -0.4375,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.9",
+          "formationId": "formation.4",
+          "slot": 9,
+          "x": -0.3125,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.10",
+          "formationId": "formation.4",
+          "slot": 10,
+          "x": -0.1875,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.11",
+          "formationId": "formation.4",
+          "slot": 11,
+          "x": -0.0625,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.12",
+          "formationId": "formation.4",
+          "slot": 12,
+          "x": 0.0625,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.13",
+          "formationId": "formation.4",
+          "slot": 13,
+          "x": 0.1875,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.14",
+          "formationId": "formation.4",
+          "slot": 14,
+          "x": 0.3125,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.15",
+          "formationId": "formation.4",
+          "slot": 15,
+          "x": 0.4375,
+          "y": -0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.16",
+          "formationId": "formation.4",
+          "slot": 16,
+          "x": -0.4375,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.17",
+          "formationId": "formation.4",
+          "slot": 17,
+          "x": -0.3125,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.18",
+          "formationId": "formation.4",
+          "slot": 18,
+          "x": -0.1875,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.19",
+          "formationId": "formation.4",
+          "slot": 19,
+          "x": -0.0625,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.20",
+          "formationId": "formation.4",
+          "slot": 20,
+          "x": 0.0625,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.21",
+          "formationId": "formation.4",
+          "slot": 21,
+          "x": 0.1875,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.22",
+          "formationId": "formation.4",
+          "slot": 22,
+          "x": 0.3125,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.23",
+          "formationId": "formation.4",
+          "slot": 23,
+          "x": 0.4375,
+          "y": -0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.24",
+          "formationId": "formation.4",
+          "slot": 24,
+          "x": -0.4375,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.25",
+          "formationId": "formation.4",
+          "slot": 25,
+          "x": -0.3125,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.26",
+          "formationId": "formation.4",
+          "slot": 26,
+          "x": -0.1875,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.27",
+          "formationId": "formation.4",
+          "slot": 27,
+          "x": -0.0625,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.28",
+          "formationId": "formation.4",
+          "slot": 28,
+          "x": 0.0625,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.29",
+          "formationId": "formation.4",
+          "slot": 29,
+          "x": 0.1875,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.30",
+          "formationId": "formation.4",
+          "slot": 30,
+          "x": 0.3125,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.31",
+          "formationId": "formation.4",
+          "slot": 31,
+          "x": 0.4375,
+          "y": -0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.32",
+          "formationId": "formation.4",
+          "slot": 32,
+          "x": -0.4375,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.33",
+          "formationId": "formation.4",
+          "slot": 33,
+          "x": -0.3125,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.34",
+          "formationId": "formation.4",
+          "slot": 34,
+          "x": -0.1875,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.35",
+          "formationId": "formation.4",
+          "slot": 35,
+          "x": -0.0625,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.36",
+          "formationId": "formation.4",
+          "slot": 36,
+          "x": 0.0625,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.37",
+          "formationId": "formation.4",
+          "slot": 37,
+          "x": 0.1875,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.38",
+          "formationId": "formation.4",
+          "slot": 38,
+          "x": 0.3125,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.39",
+          "formationId": "formation.4",
+          "slot": 39,
+          "x": 0.4375,
+          "y": 0.0625,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.40",
+          "formationId": "formation.4",
+          "slot": 40,
+          "x": -0.4375,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.41",
+          "formationId": "formation.4",
+          "slot": 41,
+          "x": -0.3125,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.42",
+          "formationId": "formation.4",
+          "slot": 42,
+          "x": -0.1875,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.43",
+          "formationId": "formation.4",
+          "slot": 43,
+          "x": -0.0625,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.44",
+          "formationId": "formation.4",
+          "slot": 44,
+          "x": 0.0625,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.45",
+          "formationId": "formation.4",
+          "slot": 45,
+          "x": 0.1875,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.46",
+          "formationId": "formation.4",
+          "slot": 46,
+          "x": 0.3125,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.47",
+          "formationId": "formation.4",
+          "slot": 47,
+          "x": 0.4375,
+          "y": 0.1875,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.48",
+          "formationId": "formation.4",
+          "slot": 48,
+          "x": -0.4375,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.49",
+          "formationId": "formation.4",
+          "slot": 49,
+          "x": -0.3125,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.50",
+          "formationId": "formation.4",
+          "slot": 50,
+          "x": -0.1875,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.51",
+          "formationId": "formation.4",
+          "slot": 51,
+          "x": -0.0625,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.52",
+          "formationId": "formation.4",
+          "slot": 52,
+          "x": 0.0625,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.53",
+          "formationId": "formation.4",
+          "slot": 53,
+          "x": 0.1875,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.54",
+          "formationId": "formation.4",
+          "slot": 54,
+          "x": 0.3125,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.55",
+          "formationId": "formation.4",
+          "slot": 55,
+          "x": 0.4375,
+          "y": 0.3125,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.56",
+          "formationId": "formation.4",
+          "slot": 56,
+          "x": -0.4375,
+          "y": 0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.57",
+          "formationId": "formation.4",
+          "slot": 57,
+          "x": -0.3125,
+          "y": 0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.58",
+          "formationId": "formation.4",
+          "slot": 58,
+          "x": -0.1875,
+          "y": 0.4375,
+          "alive": true
+        },
+        {
+          "id": "formation.4.soldier.59",
+          "formationId": "formation.4",
+          "slot": 59,
+          "x": -0.0625,
+          "y": 0.4375,
+          "alive": true
+        }
+      ],
+      "round": 1,
+      "terrain": 1,
+      "domain": "land",
+      "settlementId": null,
+      "fortification": 0,
+      "formations": [
+        {
+          "id": "formation.2",
+          "unitId": "unit.guard",
+          "strength": 60,
+          "maxStrength": 60,
+          "morale": 75,
+          "fatigue": 0,
+          "row": 0,
+          "column": 2,
+          "attack": 14,
+          "armor": 5,
+          "initiative": 6,
+          "range": 0,
+          "ward": 6,
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59
+          ],
+          "cohesion": 100,
+          "position": {
+            "forward": 0,
+            "lateral": 0
+          },
+          "armyId": "army.2",
+          "side": "attacker",
+          "armyName": "Ashen Vanguard",
+          "factionId": "faction.ashen_compact",
+          "factionDefinitionId": "faction.ashen_compact",
+          "unitName": "Oath guard"
+        },
+        {
+          "id": "formation.4",
+          "unitId": "unit.guard",
+          "strength": 60,
+          "maxStrength": 60,
+          "morale": 75,
+          "fatigue": 6,
+          "row": 0,
+          "column": 2,
+          "attack": 14,
+          "armor": 5,
+          "initiative": 6,
+          "range": 0,
+          "ward": 6,
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59
+          ],
+          "cohesion": 98,
+          "position": {
+            "forward": 1,
+            "lateral": 0
+          },
+          "armyId": "army.4",
+          "side": "defender",
+          "armyName": "Reedbound Watch",
+          "factionId": "faction.reedbound_council",
+          "factionDefinitionId": "faction.reedbound_council",
+          "unitName": "Oath guard"
+        }
+      ],
+      "characters": [],
+      "result": null
+    },
+    "battleAbilities": [
+      {
+        "sourceId": "formation.2",
+        "sourceKind": "formation",
+        "armyId": "army.2",
+        "abilityId": "ability.set_shields",
+        "automatic": true,
+        "usesRemaining": 0,
+        "name": "Set shields",
+        "description": "Once per battle, pay eight fatigue for six damage-absorbing protection. This is shield drill, not magic.",
+        "strainCost": 0,
+        "currentStrain": 0,
+        "canUse": false,
+        "blocker": "This ability has no uses remaining this battle.",
+        "targets": [
+          {
+            "targetId": "formation.2",
+            "label": "Oath guard (formation.2)",
+            "side": "attacker",
+            "canTarget": false,
+            "blocker": "This formation already has enough protection."
+          },
+          {
+            "targetId": "formation.4",
+            "label": "Oath guard (formation.4)",
+            "side": "defender",
+            "canTarget": false,
+            "blocker": "A formation can only set its own shields."
+          }
+        ]
+      }
+    ],
+    "arcaneResearch": {
+      "discoveries": [],
+      "choices": [
+        {
+          "id": "arcane.ember_projection",
+          "name": "Contained ember projection",
+          "description": "National Arcane Theory for Cinder thread. A personally Flame-gifted Waykeeper is still required; research alone cannot cast it.",
+          "knowledgeCost": 36,
+          "requiredBuildingId": "building.archive",
+          "spellIds": [
+            "spell.cinder_thread"
+          ],
+          "researched": false,
+          "canResearch": false,
+          "blocker": "Resolve the current battle or capture before researching.",
+          "casters": []
+        },
+        {
+          "id": "arcane.rune_binding",
+          "name": "Measured rune binding",
+          "description": "National Arcane Theory for Bound ward. A personally Rune-gifted Waykeeper is still required; wards absorb damage, not casualties already suffered.",
+          "knowledgeCost": 48,
+          "requiredBuildingId": "building.archive",
+          "spellIds": [
+            "spell.bound_ward"
+          ],
+          "researched": false,
+          "canResearch": false,
+          "blocker": "Resolve the current battle or capture before researching.",
+          "casters": []
+        }
+      ]
+    },
+    "roads": [],
+    "layout": "legacy",
+    "land": {
+      "settlements": [
+        {
+          "settlementId": "settlement.5",
+          "stage": "colony",
+          "isCapital": true,
+          "claimRadius": 2,
+          "claimCapacity": null,
+          "workerCapacity": 1,
+          "claimed": [
+            439,
+            440,
+            487,
+            488,
+            489,
+            535,
+            536
+          ],
+          "worked": [],
+          "work": null,
+          "workPaused": null,
+          "yields": {
+            "food": 1,
+            "industry": 0,
+            "coin": 2,
+            "knowledge": 1
+          },
+          "cells": [],
+          "capitalOption": {
+            "coinCost": 60,
+            "turns": 0,
+            "canStart": false,
+            "blocker": "Resolve the pending battle or capture before managing land.",
+            "effectText": "Move the capital here. Its center gains 1 coin and 1 knowledge per turn before settlement penalties."
+          },
+          "canCancelWork": false,
+          "cancelBlocker": "Resolve the pending battle or capture before managing land.",
+          "borderExpansion": {
+            "progress": 0,
+            "threshold": 40,
+            "rate": 0,
+            "nextCell": null,
+            "blocker": "Resolve the pending battle or capture before managing land."
+          }
+        }
+      ],
+      "cultivation": 0,
+      "capitalSettlementId": "settlement.5"
+    },
+    "turn": 1,
+    "factionId": "faction.ashen_compact",
+    "factionCount": 2,
+    "pace": "standard",
+    "factions": [
+      {
+        "id": "faction.ashen_compact",
+        "definitionId": "faction.ashen_compact",
+        "name": "Ashen Compact",
+        "color": 13215339
+      },
+      {
+        "id": "faction.reedbound_council",
+        "definitionId": "faction.reedbound_council",
+        "name": "Reedbound Council",
+        "color": 8566176
+      }
+    ],
+    "treasury": 60,
+    "knowledge": 0,
+    "armies": [
+      {
+        "id": "army.2",
+        "factionId": "faction.ashen_compact",
+        "name": "Ashen Vanguard",
+        "cell": 489,
+        "movement": 0,
+        "formations": [
+          {
+            "id": "formation.2",
+            "unitId": "unit.guard",
+            "strength": 60,
+            "morale": 75,
+            "fatigue": 0
+          }
+        ],
+        "commander": null,
+        "agents": [],
+        "domain": "land",
+        "carrierId": null,
+        "cargo": [],
+        "transportCapacity": 0,
+        "transportUsed": 0,
+        "canEnterDeepWater": false,
+        "embarkOptions": [],
+        "disembarkOptions": [],
+        "transportOptionsTruncated": false,
+        "formationCapacity": 12,
+        "overCommand": false,
+        "commandBlocker": null,
+        "capacityReason": "Unled detachment: twelve-formation command capacity.",
+        "splitFormationLimit": 12,
+        "mergeOptions": [],
+        "mergeOptionsTruncated": false,
+        "movementBlocker": null,
+        "reorganizationBlocker": "Resolve the pending battle or capture before reorganizing armies.",
+        "unitId": "unit.guard",
+        "displayUnitId": "unit.guard",
+        "strength": 60,
+        "maxStrength": 60,
+        "morale": 75,
+        "fatigue": 0,
+        "maxMovement": 3,
+        "sight": 2,
+        "upkeep": 2,
+        "canFound": false,
+        "canAttack": true
+      },
+      {
+        "id": "army.4",
+        "factionId": "faction.reedbound_council",
+        "name": "Reedbound Watch",
+        "cell": 537,
+        "movement": 0,
+        "formations": [
+          {
+            "id": "formation.4",
+            "unitId": "unit.guard",
+            "strength": 60,
+            "morale": 75,
+            "fatigue": 0
+          }
+        ],
+        "commander": null,
+        "agents": [],
+        "domain": "land",
+        "carrierId": null,
+        "cargo": [],
+        "transportCapacity": 0,
+        "transportUsed": 0,
+        "canEnterDeepWater": false,
+        "embarkOptions": [],
+        "disembarkOptions": [],
+        "transportOptionsTruncated": false,
+        "formationCapacity": 12,
+        "overCommand": false,
+        "commandBlocker": null,
+        "capacityReason": "Foreign command organization is private.",
+        "splitFormationLimit": 0,
+        "mergeOptions": [],
+        "mergeOptionsTruncated": false,
+        "movementBlocker": null,
+        "reorganizationBlocker": null,
+        "unitId": "unit.guard",
+        "displayUnitId": "unit.guard",
+        "strength": 60,
+        "maxStrength": 60,
+        "morale": 75,
+        "fatigue": 0,
+        "maxMovement": 3,
+        "sight": 2,
+        "upkeep": 2,
+        "canFound": false,
+        "canAttack": true
+      }
+    ],
+    "productionOptions": [
+      {
+        "settlementId": "settlement.5",
+        "itemId": "building.granary",
+        "kind": "building",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "building.workshop",
+        "kind": "building",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "building.market",
+        "kind": "building",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "building.archive",
+        "kind": "building",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "building.harbor",
+        "kind": "building",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.colonist",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.scout",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.guard",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.spearman",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.heavy_infantry",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.cavalry",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.transport",
+        "kind": "naval",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first.",
+        "launchCell": null
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.coastal_warship",
+        "kind": "naval",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first.",
+        "launchCell": null
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.ocean_warship",
+        "kind": "naval",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first.",
+        "launchCell": null
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.skirmisher",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.arbalester",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.halberdier",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "itemId": "unit.lancer",
+        "kind": "land",
+        "canQueue": false,
+        "blocker": "Resolve the pending battle or capture first."
+      }
+    ],
+    "characters": [],
+    "characterRecruitment": [
+      {
+        "settlementId": "settlement.5",
+        "definitionId": "character.marshal",
+        "name": "Hearth marshal",
+        "role": "marshal",
+        "coinCost": 32,
+        "upkeep": 2,
+        "canRecruit": false,
+        "blocker": "Resolve the current campaign decision first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "definitionId": "character.surveyor",
+        "name": "Road witness",
+        "role": "surveyor",
+        "coinCost": 20,
+        "upkeep": 1,
+        "canRecruit": false,
+        "blocker": "Resolve the current campaign decision first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "definitionId": "character.engineer",
+        "name": "March engineer",
+        "role": "engineer",
+        "coinCost": 28,
+        "upkeep": 2,
+        "canRecruit": false,
+        "blocker": "Resolve the current campaign decision first."
+      },
+      {
+        "settlementId": "settlement.5",
+        "definitionId": "character.waykeeper",
+        "name": "Waykeeper",
+        "role": "waykeeper",
+        "coinCost": 40,
+        "upkeep": 3,
+        "canRecruit": false,
+        "blocker": "Resolve the current campaign decision first."
+      }
+    ],
+    "commanderAbilities": [],
+    "routes": [],
+    "settlements": [
+      {
+        "id": "settlement.5",
+        "factionId": "faction.ashen_compact",
+        "name": "Ashen Hearth",
+        "cell": 488,
+        "population": 1,
+        "food": 0,
+        "buildings": [],
+        "queue": [],
+        "founderFactionId": "faction.ashen_compact",
+        "devastation": 0,
+        "occupationTurns": 0
+      }
+    ],
+    "events": [
+      {
+        "turn": 1,
+        "type": "campaign_started",
+        "message": "Your hearth caravan awaits a place to settle.",
+        "factionId": "faction.ashen_compact",
+        "cell": 488
+      },
+      {
+        "turn": 1,
+        "type": "settlement_founded",
+        "message": "Ashen Hearth was founded. The hearth caravan has settled.",
+        "factionId": "faction.ashen_compact",
+        "cell": 488
+      },
+      {
+        "turn": 1,
+        "type": "war_declared",
+        "factionId": "faction.ashen_compact",
+        "message": "Ashen Compact declared war on Reedbound Council."
+      },
+      {
+        "turn": 1,
+        "factionId": "faction.ashen_compact",
+        "type": "battle_started",
+        "cell": 537,
+        "message": "Ashen Vanguard engaged Reedbound Watch at hex 537."
+      },
+      {
+        "turn": 1,
+        "factionId": "faction.ashen_compact",
+        "type": "battle_ability_used",
+        "cell": 537,
+        "message": "Oath guard used Set shields on formation.2."
+      },
+      {
+        "turn": 1,
+        "factionId": "faction.ashen_compact",
+        "type": "battle_round",
+        "cell": 537,
+        "message": "Battle round 1 resolved."
+      }
+    ],
+    "width": 48,
+    "height": 32,
+    "seed": 20260905,
+    "wars": [
+      "faction.reedbound_council"
+    ],
+    "battle": {
+      "id": "battle.7",
+      "turn": 1,
+      "attackerId": "army.2",
+      "defenderId": "army.4",
+      "defenderIds": [
+        "army.4"
+      ],
+      "attackerFactionId": "faction.ashen_compact",
+      "defenderFactionId": "faction.reedbound_council",
+      "attackerCell": 489,
+      "defenderCell": 537,
+      "settlementId": null,
+      "militiaId": null,
+      "fortification": 0,
+      "attackerDoctrineId": null,
+      "defenderDoctrineId": null,
+      "initialStrengths": [
+        {
+          "armyId": "army.2",
+          "strength": 60
+        },
+        {
+          "armyId": "army.4",
+          "strength": 60
+        }
+      ],
+      "aftermath": [],
+      "combat": {
+        "seed": 688947903,
+        "terrain": 1,
+        "attacker": [
+          {
+            "id": "formation.2",
+            "unitId": "unit.guard",
+            "strength": 60,
+            "maxStrength": 60,
+            "morale": 75,
+            "fatigue": 0,
+            "row": 0,
+            "column": 2,
+            "attack": 14,
+            "armor": 5,
+            "initiative": 6,
+            "range": 0,
+            "ward": 6,
+            "members": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59
+            ],
+            "cohesion": 100,
+            "position": {
+              "forward": 0,
+              "lateral": 0
+            }
+          }
+        ],
+        "defender": [
+          {
+            "id": "formation.4",
+            "unitId": "unit.guard",
+            "strength": 60,
+            "maxStrength": 60,
+            "morale": 75,
+            "fatigue": 6,
+            "row": 0,
+            "column": 2,
+            "attack": 14,
+            "armor": 5,
+            "initiative": 6,
+            "range": 0,
+            "ward": 6,
+            "members": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59
+            ],
+            "cohesion": 98,
+            "position": {
+              "forward": 1,
+              "lateral": 0
+            }
+          }
+        ],
+        "rngState": 688947903,
+        "round": 1,
+        "log": [
+          "Round 1: attacker brace, defender advance."
+        ]
+      },
+      "rulesVersion": 10,
+      "formationBindings": [
+        {
+          "battleFormationId": "formation.2",
+          "formationId": "formation.2",
+          "armyId": "army.2"
+        },
+        {
+          "battleFormationId": "formation.4",
+          "formationId": "formation.4",
+          "armyId": "army.4"
+        }
+      ],
+      "domain": "land",
+      "transportAftermath": [],
+      "transportSnapshots": [],
+      "characterSnapshots": [],
+      "characterAftermath": [],
+      "usedAbilities": [],
+      "formationStrengths": [
+        {
+          "formationId": "formation.2",
+          "strength": 60
+        },
+        {
+          "formationId": "formation.4",
+          "strength": 60
+        }
+      ],
+      "formationAftermath": [],
+      "abilityState": {
+        "sources": [
+          {
+            "sourceId": "formation.2",
+            "sourceKind": "formation",
+            "armyId": "army.2",
+            "abilityId": "ability.set_shields",
+            "automatic": true,
+            "usesRemaining": 0
+          },
+          {
+            "sourceId": "formation.4",
+            "sourceKind": "formation",
+            "armyId": "army.4",
+            "abilityId": "ability.set_shields",
+            "automatic": true,
+            "usesRemaining": 0
+          }
+        ],
+        "casters": [],
+        "identities": [
+          {
+            "armyId": "army.2",
+            "name": "Ashen Vanguard",
+            "factionId": "faction.ashen_compact",
+            "factionDefinitionId": "faction.ashen_compact"
+          },
+          {
+            "armyId": "army.4",
+            "name": "Reedbound Watch",
+            "factionId": "faction.reedbound_council",
+            "factionDefinitionId": "faction.reedbound_council"
+          }
+        ]
+      },
+      "developmentSnapshots": [
+        {
+          "formationId": "formation.2",
+          "trainingIds": [],
+          "traditionIds": []
+        },
+        {
+          "formationId": "formation.4",
+          "trainingIds": [],
+          "traditionIds": []
+        }
+      ]
+    },
+    "battleReports": [],
+    "diplomacy": {
+      "offers": [],
+      "treaties": [],
+      "relations": [
+        {
+          "parties": [
+            "faction.ashen_compact",
+            "faction.reedbound_council"
+          ],
+          "trust": -15,
+          "respect": 0,
+          "grievances": 15,
+          "warStartedTurn": 1,
+          "lastOfferTurn": 0
+        }
+      ]
+    },
+    "sieges": [],
+    "visibleSiegeSettlementIds": [],
+    "progression": {
+      "technologies": [],
+      "institutionId": null,
+      "doctrineId": null,
+      "technologyChoices": [
+        {
+          "id": "technology.cinder_masonry",
+          "name": "Cinder masonry",
+          "description": "Reusable kiln forms strengthen hearthland workshops. Every settlement gains 2 industry before devastation, occupation and blockade penalties.",
+          "knowledgeCost": 24,
+          "requires": [],
+          "branch": "craft",
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "technology.civic_accounts",
+          "name": "Civic accounts",
+          "description": "Public ledgers reconnect the bargains once carried by the Witness Roads. Every settlement gains 1 coin and 1 knowledge before penalties; enables the Hearth Exchange.",
+          "knowledgeCost": 400,
+          "requires": [],
+          "branch": "civic",
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "technology.coastal_navigation",
+          "name": "Coastal navigation",
+          "description": "Soundings and shore charts reconnect coastal hearthlands. Enables Charter harbors, transports and Coastwatch galleys; vessels can travel coastal shallows. This practical knowledge does not confer magical aptitude.",
+          "knowledgeCost": 30,
+          "requires": [],
+          "branch": "navigation",
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "technology.ocean_navigation",
+          "name": "Ocean navigation",
+          "description": "Deep-water charts and long-voyage rigging open the ocean. Ocean-capable transports and Deepwake warships may cross deep water; coastal galleys remain restricted to shallows.",
+          "knowledgeCost": 80,
+          "requires": [
+            "technology.coastal_navigation"
+          ],
+          "branch": "navigation",
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "technology.stewardship",
+          "name": "Seasonal stewardship",
+          "description": "Record planting and water-sharing obligations. Unlocks Spring gardens on fresh-water land; opens the waterworks, forestry and surveyed-estates branches. Knowledge alone does not build or work a tile.",
+          "knowledgeCost": 36,
+          "requires": [],
+          "branch": "stewardship",
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "technology.waterworks",
+          "name": "Sluice waterworks",
+          "description": "Controlled sluices support worked wetland Polders. They can feed crowded settlements, but old growth and Ashfall glass make intensive planting less productive. Physical terrain and natural features remain intact.",
+          "knowledgeCost": 64,
+          "requires": [
+            "technology.stewardship"
+          ],
+          "branch": "stewardship",
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "technology.surveyed_estates",
+          "name": "Surveyed estates",
+          "description": "Witnessed boundary surveys add one civic progress per active settlement turn toward automatic border expansion. Claims still require connected, charted land within the settlement\u2019s reach; siege and occupation halt expansion.",
+          "knowledgeCost": 60,
+          "requires": [
+            "technology.stewardship"
+          ],
+          "branch": "civic",
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "technology.charter_forestry",
+          "name": "Charter forestry",
+          "description": "Bind cutting rights to the preservation of living records. Unlocks Grove archives on old-growth woodland: knowledge and modest industry instead of the woodlot\u2019s stronger extraction.",
+          "knowledgeCost": 72,
+          "requires": [
+            "technology.stewardship"
+          ],
+          "branch": "stewardship",
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "technology.quarry_cranes",
+          "name": "Counterweighted cranes",
+          "description": "Reusable lifting frames unlock Oreworks on mineral seams. Worked Oreworks favor industry at the cost of food and coin; wet ground complicates extraction.",
+          "knowledgeCost": 60,
+          "requires": [
+            "technology.cinder_masonry"
+          ],
+          "branch": "craft",
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "technology.deep_soundings",
+          "name": "Deep soundings",
+          "description": "Observations from the shore compare returning ships\u2019 ocean records. Unlocks Tide observatories on coastal shallows; knowledge replaces the food-focused role of a fishery. Does not extend worker reach into deep ocean.",
+          "knowledgeCost": 120,
+          "requires": [
+            "technology.ocean_navigation"
+          ],
+          "branch": "navigation",
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        }
+      ],
+      "institutionChoices": [
+        {
+          "id": "institution.charter_compact",
+          "name": "Charter compact",
+          "description": "Recognize shared market charters. Every settlement gains 2 coin before penalties; enables the Hearth Exchange. Permanently excludes Common stewardship.",
+          "coinCost": 30,
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "institution.common_stewardship",
+          "name": "Common stewardship",
+          "description": "Communal stores take priority over merchant privileges. Every settlement gains 3 food before penalties; enables the Hearth Exchange. Permanently excludes Charter compact.",
+          "coinCost": 30,
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        }
+      ],
+      "doctrineChoices": [
+        {
+          "id": "doctrine.shield_cohesion",
+          "name": "Shield cohesion",
+          "description": "Train formations to cover one another. Armies gain 2 armor in battle. Permanently excludes March columns.",
+          "coinCost": 24,
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        },
+        {
+          "id": "doctrine.march_columns",
+          "name": "March columns",
+          "description": "Organize disciplined marching relays. Armies regain 1 additional strategic movement each turn. Permanently excludes Shield cohesion.",
+          "coinCost": 24,
+          "available": false,
+          "blocker": "Resolve the pending battle first."
+        }
+      ],
+      "project": {
+        "id": "project.hearth_exchange",
+        "name": "Hearth Exchange",
+        "description": "Host a great exchange supported by three settlements with Charter markets and Witness archives. Sustain its full active period; blockades and conquest can interrupt the endeavor. Funding and duration depend on campaign pace.",
+        "coinCost": 18000,
+        "activeTurns": 20,
+        "eligibleSettlementIds": [],
+        "blockers": [
+          "Resolve the pending battle first.",
+          "Research Civic accounts.",
+          "Adopt an institution.",
+          "Maintain 3 unoccupied settlements, each with a Charter market and Witness archive.",
+          "Requires 18000 coin upfront; cancellation gives no refund.",
+          "A prepared host settlement must be free of siege and occupation."
+        ]
+      }
+    },
+    "projects": [],
+    "victory": null,
+    "pendingCapture": null,
+    "ruins": [],
+    "cells": [],
+    "campaign": {
+      "mode": "player",
+      "coverage": "from-save"
+    },
+    "watch": {
+      "enabled": false,
+      "running": false,
+      "fogEnabled": true
+    },
+    "ownArmies": [
+      {
+        "id": "army.2",
+        "factionId": "faction.ashen_compact",
+        "name": "Ashen Vanguard",
+        "cell": 489,
+        "movement": 0,
+        "formations": [
+          {
+            "id": "formation.2",
+            "unitId": "unit.guard",
+            "strength": 60,
+            "morale": 75,
+            "fatigue": 0
+          }
+        ],
+        "commander": null,
+        "agents": [],
+        "domain": "land",
+        "carrierId": null,
+        "cargo": [],
+        "transportCapacity": 0,
+        "transportUsed": 0,
+        "canEnterDeepWater": false,
+        "embarkOptions": [],
+        "disembarkOptions": [],
+        "transportOptionsTruncated": false,
+        "formationCapacity": 12,
+        "overCommand": false,
+        "commandBlocker": null,
+        "capacityReason": "Unled detachment: twelve-formation command capacity.",
+        "splitFormationLimit": 12,
+        "mergeOptions": [],
+        "mergeOptionsTruncated": false,
+        "movementBlocker": null,
+        "reorganizationBlocker": "Resolve the pending battle or capture before reorganizing armies.",
+        "unitId": "unit.guard",
+        "displayUnitId": "unit.guard",
+        "strength": 60,
+        "maxStrength": 60,
+        "morale": 75,
+        "fatigue": 0,
+        "maxMovement": 3,
+        "sight": 2,
+        "upkeep": 2,
+        "canFound": false,
+        "canAttack": true
+      }
+    ],
+    "ownSettlements": [
+      {
+        "id": "settlement.5",
+        "factionId": "faction.ashen_compact",
+        "name": "Ashen Hearth",
+        "cell": 488,
+        "population": 1,
+        "food": 0,
+        "buildings": [],
+        "queue": [],
+        "founderFactionId": "faction.ashen_compact",
+        "devastation": 0,
+        "occupationTurns": 0
+      }
+    ],
+    "exploredCells": 61
+  },
+  "hash": "784aecb4",
+  "selection": {
+    "armyId": "army.2",
+    "cell": 489
+  },
+  "perf": {
+    "generationMs": 350.29999999981374,
+    "commandMs": 2.7000000001862645,
+    "aiMs": 56,
+    "transferBytes": 70551,
+    "totalTransferBytes": 5017637,
+    "cellTransferBytes": 39,
+    "landQueryCount": 20,
+    "landQueryBytes": 163940,
+    "totalLandQueryBytes": 2923257,
+    "developmentQueryCount": 0,
+    "developmentQueryBytes": 0,
+    "totalDevelopmentQueryBytes": 0,
+    "renderer": "webgl",
+    "frameCount": 327,
+    "frameMs": 0,
+    "frameP95Ms": 0,
+    "renderCpuMs": 0.19999999925494194,
+    "visibleCells": 61,
+    "visibleChunks": 1,
+    "cachedChunks": 1,
+    "chunkRebuilds": 38,
+    "visibleEntities": 3,
+    "zoom": 1,
+    "highlightedCells": 0,
+    "routeCells": 0,
+    "previewCells": 0,
+    "atlasPages": 5,
+    "residentAtlasBytesEstimate": 55574528,
+    "artLoadMs": 87.70000000018626,
+    "artFirstRenderCpuMs": 94.20000000018626,
+    "visibleSprites": 3,
+    "terrainSpriteCells": 61,
+    "pooledSprites": 886,
+    "stackBadges": 0,
+    "pooledStackBadges": 1,
+    "territoryEdges": 18,
+    "improvementProps": 0,
+    "riverSegments": 0,
+    "roadSegments": 0,
+    "districtStreetSegments": 0,
+    "overview": false,
+    "overviewTextureBytes": 0,
+    "rangePerimeterEdges": 0,
+    "visibleLabels": 1,
+    "selectedCells": 1,
+    "hoveredCells": 0,
+    "maxCachedChunkWidth": 460,
+    "maxCachedChunkHeight": 406,
+    "cachedTextureBytesEstimate": 1048576
+  },
+  "errors": [],
+  "viewport": {
+    "w": 1440,
+    "h": 1000,
+    "scrollWidth": 1425
+  }
+}

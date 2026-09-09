@@ -1,0 +1,35 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > quotes a reachable 21-company attack and executes the quoted moveTo with exact replay 83ms
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > routes against whole mixed containers without splitting or moving the nine-company reserve 21ms
+ ✓ packages/sim/src/movement.test.ts > bounded observation movement and immediate travel > matches multi-hex movement costs and exploration to the exact adjacent command sequence 40ms
+ ✓ packages/sim/src/movement.test.ts > bounded observation movement and immediate travel > rejects unaffordable, malformed, impassable, unknown and enemy-owned orders atomically 14ms
+ ✓ packages/sim/src/movement.test.ts > bounded observation movement and immediate travel > uses weighted paths and stable tie breaking without consulting hidden occupants 12ms
+ ✓ packages/sim/src/movement.test.ts > bounded observation movement and immediate travel > approaches a visible hostile then starts the real field battle, without automatic war 18ms
+ ✓ packages/sim/src/movement.test.ts > bounded observation movement and immediate travel > cannot enter a hostile settlement through click travel or bypass its siege 8ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > spends current movement then resumes saved steps on later turns with replay parity 13ms
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > retains rule-16 query and command rejection with no state mutation 15ms
+ ✓ packages/sim/src/movement-frontage.test.ts > contingent-aware movement routing > keeps no-preview observations conservative even when current execution supports contingents 9ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > appends waypoints, rejects duplicates, keeps route records private and supports cancellation 11ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > pauses immediately when new local hostiles become visible, even on the last movement point 8ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > revalidates occupation after another faction acts rather than marching through it 7ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > pauses for a newly imposed friendly-town blockade even when the enemy was already known 14ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > rejects an unsaveable hostile-memory overflow before accepting a queued order 100ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > pauses an attacked traveler and preserves a retreat-displaced route for explicit resumption 11ms
+ ✓ packages/sim/src/movement.test.ts > persistent queued travel and interruptions > lets a successful manual step replace a route without changing legacy move notifications 4ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects unknown army even when the checksum is recomputed 6ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects nonadjacent step even when the checksum is recomputed 6ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects wrong waypoint even when the checksum is recomputed 6ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects invalid active origin even when the checksum is recomputed 5ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects missing pause reason even when the checksum is recomputed 5ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects unknown biome even when the checksum is recomputed 8ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects water biome on land even when the checksum is recomputed 6ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects wrong biome dimensions even when the checksum is recomputed 6ms
+ ✓ packages/sim/src/movement.test.ts > strict saved routes > rejects unknown generator even when the checksum is recomputed 10ms
+
+ Test Files  2 passed (2)
+      Tests  26 passed (26)
+   Start at  03:04:01
+   Duration  876ms (transform 601ms, setup 0ms, import 948ms, tests 451ms, environment 0ms)
+

@@ -1,0 +1,393 @@
+COMMAND: pnpm exec tsx scripts/benchmark-armies-fleets.ts --section=all
+START: 2026-09-09T05:12:17.095577+00:00
+{
+  "capturedAt": "2026-09-09T05:12:17.514Z",
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "os": "linux 7.2.3-arch1-3",
+  "saveVersion": 16,
+  "contentHash": "b79c78ed",
+  "smoke": false,
+  "kernel": [
+    {
+      "formationsPerSide": 12,
+      "deploymentRanks": 3,
+      "samples": 200,
+      "warmups": 7,
+      "createAndAutoResolve": {
+        "samples": 200,
+        "medianMs": 0.44832700000000614,
+        "p95Ms": 1.4740769999999657,
+        "maxMs": 2.1941979999999717,
+        "meanMs": 0.5887674299999982
+      },
+      "minRounds": 5,
+      "maxRounds": 6,
+      "outcomeSeal": "bd17446a",
+      "historical12Parity": true,
+      "manualParity": true,
+      "note": "Same repeated original three-unit roster and hills terrain at both sizes, preserving the existing kernel workload. These are supplied tactical stats, not recruited campaign forces. Timings include validated battle creation and exact kernel autoresolve; separate manual and historical comparisons are excluded."
+    },
+    {
+      "formationsPerSide": 20,
+      "deploymentRanks": 4,
+      "samples": 200,
+      "warmups": 7,
+      "createAndAutoResolve": {
+        "samples": 200,
+        "medianMs": 0.5414789999999812,
+        "p95Ms": 1.0172350000000279,
+        "maxMs": 1.2241010000000188,
+        "meanMs": 0.5788081800000014
+      },
+      "minRounds": 4,
+      "maxRounds": 5,
+      "outcomeSeal": "84bbd5c3",
+      "historical12Parity": null,
+      "manualParity": true,
+      "note": "Same repeated original three-unit roster and hills terrain at both sizes, preserving the existing kernel workload. These are supplied tactical stats, not recruited campaign forces. Timings include validated battle creation and exact kernel autoresolve; separate manual and historical comparisons are excluded."
+    }
+  ],
+  "loadedFleet": {
+    "synthetic": true,
+    "cells": 1536,
+    "factions": 2,
+    "hulls": 3,
+    "cargoArmies": 1,
+    "cargoFormations": 2,
+    "cargoFormationIds": [
+      "formation.10",
+      "formation.9"
+    ],
+    "cargoConserved": true,
+    "reads": {
+      "samples": 20,
+      "warmups": 7,
+      "fullObservation": {
+        "samples": 20,
+        "medianMs": 1.003875999999991,
+        "p95Ms": 1.3048649999999498,
+        "maxMs": 1.3048649999999498,
+        "meanMs": 0.9705631500000038
+      },
+      "freshObservationQuery": {
+        "samples": 20,
+        "medianMs": 0.1876640000000407,
+        "p95Ms": 0.24336399999992864,
+        "maxMs": 0.24336399999992864,
+        "meanMs": 0.19208694999999806
+      },
+      "cachedObservationQuery": {
+        "samples": 20,
+        "medianMs": 0.03479400000003352,
+        "p95Ms": 0.04927999999995336,
+        "maxMs": 0.04927999999995336,
+        "meanMs": 0.036233249999997955
+      },
+      "serialize": {
+        "samples": 20,
+        "medianMs": 0.469428999999991,
+        "p95Ms": 0.5372590000000628,
+        "maxMs": 0.5372590000000628,
+        "meanMs": 0.4701227499999902
+      },
+      "deserialize": {
+        "samples": 20,
+        "medianMs": 2.2149709999999914,
+        "p95Ms": 2.9311879999999064,
+        "maxMs": 2.9311879999999064,
+        "meanMs": 2.3250766
+      },
+      "observationBytes": 312710,
+      "saveBytes": 35705,
+      "expandedNodes": 27,
+      "reachableCells": 10,
+      "canonicalHash": "d68d06d4",
+      "note": "Read model construction and fresh/cached movement-query timing are separate. Every save/load is full strict canonical validation. JSON comparisons and state-hash checks are outside timings. World indexes are already built; fresh means a newly allocated observation, not cold world generation."
+    },
+    "queueMovementMs": 1.039767999999981,
+    "activeVoyageTurns": 2,
+    "fullEndTurn": {
+      "samples": 2,
+      "medianMs": 1.5494529999999713,
+      "p95Ms": 1.5494529999999713,
+      "maxMs": 1.5494529999999713,
+      "meanMs": 0.8802094999999781
+    },
+    "activeTravelPhase": {
+      "samples": 2,
+      "medianMs": 0.3209980000000314,
+      "p95Ms": 0.3209980000000314,
+      "maxMs": 0.3209980000000314,
+      "meanMs": 0.1880805000000123
+    },
+    "midpointSaveBytes": 36242,
+    "finalHash": "b6a034af",
+    "note": "Authored archipelago/funded harbor/hulls, not generated AI sailing. Marshal appointment comes from the validated fixture; Harbor boarding, Ocean navigation payment, cargo embarkation, queued voyage and unloading use real commands. The short active voyage is a functional timing sample, not a twenty-sample stable latency distribution. No combat, AI, archive or browser costs are included."
+  },
+  "scale": [
+    {
+      "size": "huge",
+      "synthetic": true,
+      "cells": 196608,
+      "factions": 32,
+      "armies": 1500,
+      "formations": 18908,
+      "marshalLedArmies": 1024,
+      "sixteenFormationArmies": 512,
+      "twentyFormationArmies": 512,
+      "paidAppointments": 1024,
+      "authoredVeterans": 512,
+      "authoredExperienceEach": 54,
+      "setupCommands": 3584,
+      "reads": {
+        "samples": 20,
+        "warmups": 7,
+        "fullObservation": {
+          "samples": 20,
+          "medianMs": 3.8729539999994813,
+          "p95Ms": 7.109628000000157,
+          "maxMs": 7.109628000000157,
+          "meanMs": 4.200446399999782
+        },
+        "freshObservationQuery": {
+          "samples": 20,
+          "medianMs": 0.0817880000004152,
+          "p95Ms": 0.13809399999991,
+          "maxMs": 0.13809399999991,
+          "meanMs": 0.08769849999998769
+        },
+        "cachedObservationQuery": {
+          "samples": 20,
+          "medianMs": 0.029888000000028114,
+          "p95Ms": 0.04965900000024703,
+          "maxMs": 0.04965900000024703,
+          "meanMs": 0.03235635000014554
+        },
+        "serialize": {
+          "samples": 20,
+          "medianMs": 64.35367300000053,
+          "p95Ms": 85.57314299999962,
+          "maxMs": 85.57314299999962,
+          "meanMs": 67.19864739999994
+        },
+        "deserialize": {
+          "samples": 20,
+          "medianMs": 208.1443159999999,
+          "p95Ms": 281.822540000001,
+          "maxMs": 281.822540000001,
+          "meanMs": 212.8716177500001
+        },
+        "observationBytes": 862587,
+        "saveBytes": 4434749,
+        "expandedNodes": 7,
+        "reachableCells": 6,
+        "canonicalHash": "9877a96d",
+        "note": "Read model construction and fresh/cached movement-query timing are separate. Every save/load is full strict canonical validation. JSON comparisons and state-hash checks are outside timings. World indexes are already built; fresh means a newly allocated observation, not cold world generation."
+      },
+      "idleTurnSamples": 20,
+      "unmeasuredWarmupTurns": 7,
+      "mirroredTurns": 27,
+      "fullEndTurn": {
+        "samples": 20,
+        "medianMs": 4.752103000000716,
+        "p95Ms": 5.885775000000649,
+        "maxMs": 5.885775000000649,
+        "meanMs": 4.917025500000273
+      },
+      "phases": {
+        "sieges": {
+          "samples": 20,
+          "medianMs": 0.006522000001496053,
+          "p95Ms": 0.009146000000328058,
+          "maxMs": 0.009146000000328058,
+          "meanMs": 0.006696300000294286
+        },
+        "settlements": {
+          "samples": 20,
+          "medianMs": 1.2734339999988151,
+          "p95Ms": 2.108661000000211,
+          "maxMs": 2.108661000000211,
+          "meanMs": 1.335174300000017
+        },
+        "upkeep": {
+          "samples": 20,
+          "medianMs": 1.8172140000006038,
+          "p95Ms": 2.605240999999296,
+          "maxMs": 2.605240999999296,
+          "meanMs": 1.843576799999846
+        },
+        "characters": {
+          "samples": 20,
+          "medianMs": 0.1426449999999022,
+          "p95Ms": 0.16315399999984947,
+          "maxMs": 0.16315399999984947,
+          "meanMs": 0.1422883999998703
+        },
+        "movement": {
+          "samples": 20,
+          "medianMs": 1.1356070000001637,
+          "p95Ms": 2.5202420000005077,
+          "maxMs": 2.5202420000005077,
+          "meanMs": 1.303352349999932
+        },
+        "travel": {
+          "samples": 20,
+          "medianMs": 0.0026409999991301447,
+          "p95Ms": 0.004376000000775093,
+          "maxMs": 0.004376000000775093,
+          "meanMs": 0.0026202499997452834
+        },
+        "diplomacy": {
+          "samples": 20,
+          "medianMs": 0.0036689999997179257,
+          "p95Ms": 0.00492599999961385,
+          "maxMs": 0.00492599999961385,
+          "meanMs": 0.003650949999791919
+        },
+        "progression": {
+          "samples": 20,
+          "medianMs": 0.005494000000908272,
+          "p95Ms": 0.006852999998955056,
+          "maxMs": 0.006852999998955056,
+          "meanMs": 0.005432099999870843
+        }
+      },
+      "finalHash": "61bd45aa",
+      "rosterSeal": "7cb6c398",
+      "note": "Synthetic mature 1500/4000 containers and one town per faction (10 containers in Tiny smoke). 32 real paid marshal appointments per faction; half receive explicitly authored veteran XP, spent through actual prerequisite commands. Added mixed formations are authored setup, not recruitment or earned military growth. Every initial/final state crosses strict save validation. Idle endTurns have real economy/upkeep/character/movement processing, no AI plans, missions, travel, battles, archive or browser. Seven initial turns excluded from latency distributions; independent mirror/hash checks are outside timings. No 100-turn campaign soak."
+    },
+    {
+      "size": "legendary",
+      "synthetic": true,
+      "cells": 307200,
+      "factions": 40,
+      "armies": 4000,
+      "formations": 25760,
+      "marshalLedArmies": 1280,
+      "sixteenFormationArmies": 640,
+      "twentyFormationArmies": 640,
+      "paidAppointments": 1280,
+      "authoredVeterans": 640,
+      "authoredExperienceEach": 54,
+      "setupCommands": 4480,
+      "reads": {
+        "samples": 20,
+        "warmups": 7,
+        "fullObservation": {
+          "samples": 20,
+          "medianMs": 8.378317999999126,
+          "p95Ms": 12.486321000003954,
+          "maxMs": 12.486321000003954,
+          "meanMs": 8.559349000000475
+        },
+        "freshObservationQuery": {
+          "samples": 20,
+          "medianMs": 0.1321989999996731,
+          "p95Ms": 0.30439900000055786,
+          "maxMs": 0.30439900000055786,
+          "meanMs": 0.1443623999997726
+        },
+        "cachedObservationQuery": {
+          "samples": 20,
+          "medianMs": 0.06897700000263285,
+          "p95Ms": 0.11348999999972875,
+          "maxMs": 0.11348999999972875,
+          "meanMs": 0.0757807000003595
+        },
+        "serialize": {
+          "samples": 20,
+          "medianMs": 98.91316000000006,
+          "p95Ms": 138.3397240000013,
+          "maxMs": 138.3397240000013,
+          "meanMs": 102.17043210000028
+        },
+        "deserialize": {
+          "samples": 20,
+          "medianMs": 351.10482699999557,
+          "p95Ms": 438.9218409999994,
+          "maxMs": 438.9218409999994,
+          "meanMs": 349.2333182000004
+        },
+        "observationBytes": 1348957,
+        "saveBytes": 6665554,
+        "expandedNodes": 19,
+        "reachableCells": 18,
+        "canonicalHash": "967294b5",
+        "note": "Read model construction and fresh/cached movement-query timing are separate. Every save/load is full strict canonical validation. JSON comparisons and state-hash checks are outside timings. World indexes are already built; fresh means a newly allocated observation, not cold world generation."
+      },
+      "idleTurnSamples": 20,
+      "unmeasuredWarmupTurns": 7,
+      "mirroredTurns": 27,
+      "fullEndTurn": {
+        "samples": 20,
+        "medianMs": 8.194574000001012,
+        "p95Ms": 12.249665000003006,
+        "maxMs": 12.249665000003006,
+        "meanMs": 8.552762600000642
+      },
+      "phases": {
+        "sieges": {
+          "samples": 20,
+          "medianMs": 0.006392999996023718,
+          "p95Ms": 0.009037000003445428,
+          "maxMs": 0.009037000003445428,
+          "meanMs": 0.006562899998607463
+        },
+        "settlements": {
+          "samples": 20,
+          "medianMs": 1.8271440000025905,
+          "p95Ms": 2.211474999996426,
+          "maxMs": 2.211474999996426,
+          "meanMs": 1.8841794500003743
+        },
+        "upkeep": {
+          "samples": 20,
+          "medianMs": 2.777562000002945,
+          "p95Ms": 4.816000999999233,
+          "maxMs": 4.816000999999233,
+          "meanMs": 3.0576392499999203
+        },
+        "characters": {
+          "samples": 20,
+          "medianMs": 0.19039599999814527,
+          "p95Ms": 1.7648060000065016,
+          "maxMs": 1.7648060000065016,
+          "meanMs": 0.27038174999979675
+        },
+        "movement": {
+          "samples": 20,
+          "medianMs": 2.6088810000001104,
+          "p95Ms": 4.830688999994891,
+          "maxMs": 4.830688999994891,
+          "meanMs": 3.004278699999122
+        },
+        "travel": {
+          "samples": 20,
+          "medianMs": 0.0036599999948521145,
+          "p95Ms": 0.007632000000739936,
+          "maxMs": 0.007632000000739936,
+          "meanMs": 0.003672750000623637
+        },
+        "diplomacy": {
+          "samples": 20,
+          "medianMs": 0.004617999999027234,
+          "p95Ms": 0.012160999998741318,
+          "maxMs": 0.012160999998741318,
+          "meanMs": 0.004915099999561789
+        },
+        "progression": {
+          "samples": 20,
+          "medianMs": 0.00608500000089407,
+          "p95Ms": 0.013090000000374857,
+          "maxMs": 0.013090000000374857,
+          "meanMs": 0.006404950000796816
+        }
+      },
+      "finalHash": "2f91c141",
+      "rosterSeal": "f65fad70",
+      "note": "Synthetic mature 1500/4000 containers and one town per faction (10 containers in Tiny smoke). 32 real paid marshal appointments per faction; half receive explicitly authored veteran XP, spent through actual prerequisite commands. Added mixed formations are authored setup, not recruitment or earned military growth. Every initial/final state crosses strict save validation. Idle endTurns have real economy/upkeep/character/movement processing, no AI plans, missions, travel, battles, archive or browser. Seven initial turns excluded from latency distributions; independent mirror/hash checks are outside timings. No 100-turn campaign soak."
+    }
+  ],
+  "scope": "Sequential offline canonical/kernel benchmark. Setup, validation comparisons and separately executed mirrors excluded from timers unless explicitly stated; no browser, archive, AI campaign, network, rendering or GPU timings."
+}

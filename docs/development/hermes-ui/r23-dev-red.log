@@ -1,0 +1,48 @@
+
+Running 1 test using 1 worker
+
+(node:311259) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas (6.8s)
+
+
+  1) tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Save campaign', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" getByRole('button', { name: 'Save campaign', exact: true }) with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Save campaign', exact: true })
+
+
+      28 |   let initialListeners: Record<string, number> | undefined;
+      29 |   const capture = async (stage: string) => {
+    > 30 |     await expect(page.getByRole('button', { name: 'Save campaign', exact: true })).toBeEnabled();
+         |                                                                                    ^
+      31 |     const dom = await page.evaluate(() => ({ controls: document.querySelectorAll('[data-testid=faction-overview-control]').length, canvases: document.querySelectorAll('canvas').length, mapNodes: document.querySelector('[data-testid=map-container]')!.querySelectorAll('*').length, debugHookPresent: Boolean(window.__THEANDRIL__) }));
+      32 |     const listeners: Record<string, number> = {};
+      33 |     for (const expression of ['window', 'document', 'document.querySelector("canvas")']) {
+        at capture (/home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:30:84)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/hermes-ui-slices.spec.ts:54:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r23-dev-red/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/hermes-ui/r23-dev-red/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r23-dev-red/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/hermes-ui/r23-dev-red/hermes-ui-slices-R23-repea-884df-sive-map-control-and-canvas/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas 

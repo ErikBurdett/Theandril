@@ -1,0 +1,12 @@
+{
+  "name": "gameplay-collect",
+  "command": "pnpm exec playwright test --config docs/hermes-analysis/qa/gameplay.config.ts --list",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:06:45.062040+00:00",
+  "durationSeconds": 2.282175302505493,
+  "exitCode": 0,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/gameplay-collect.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 437516,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

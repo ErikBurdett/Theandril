@@ -1,0 +1,7 @@
+COMMAND: python docs/hermes-analysis/qa/clean_release.py
+START: 2026-09-09T05:09:18.959843+00:00
+{"name": "install", "command": ["pnpm", "install", "--offline", "--frozen-lockfile"], "exitCode": 0, "durationSeconds": 0.902881383895874, "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-install.log"}
+{"name": "typecheck", "command": ["pnpm", "typecheck"], "exitCode": 0, "durationSeconds": 8.03387999534607, "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-typecheck.log"}
+{"name": "lint", "command": ["pnpm", "lint"], "exitCode": 0, "durationSeconds": 5.783792018890381, "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-lint.log"}
+{"name": "content", "command": ["pnpm", "content:validate"], "exitCode": 0, "durationSeconds": 0.5280084609985352, "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-content.log"}
+{"name": "build", "command": ["pnpm", "exec", "turbo", "run", "build", "--force"], "exitCode": 0, "durationSeconds": 4.18876051902771, "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/clean-build.log"}

@@ -1,0 +1,20 @@
+{
+  "source": "deleg_734f6599",
+  "reviewedCheckpoint": "Captured persistence-review.diff with the then-current rule17 dependency, before the capped-morale correction",
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "scope": "Current rule17 integration dependency, not introduced by the captured persistence edits",
+      "location": "packages/sim/src/warfare.ts:222-226",
+      "issue": "Battle completion subtracts the full nominal training morale bonus even when tactical deployment capped that bonus. The existing cap-boundary regression reproducibly returns strategic morale 82 instead of 85 after withdrawal and save/load.",
+      "evidence": "packages/sim/src/battle-morale.test.ts:110 failed both in the two-file rule17 run and independently with testNamePattern 'removes only the training morale'. The two-file run produced 13 passed and 1 failed.",
+      "impact": "This is incorrect canonical state in the integrated rule17 dependency, not archive corruption. Fix the effective-bonus subtraction in simulation rather than compensating in persistence."
+    }
+  ],
+  "suggestions": [
+    "Retain the documented memory caveat: independent retained-case replay peaked at 3,203,680 KiB RSS. Processing is bounded but expensive; this measurement is not evidence of corruption or an unbounded security vulnerability."
+  ],
+  "summary": "Reviewed the entire 592-line captured patch and security scan, with current sim/chronicle dependencies. No blocking defect was found in the captured persistence changes themselves. All 267 persistence/chronicle tests, persistence lint, typecheck and diff checks passed. Independent probes verified the exact 4-MiB UTF-8 record boundary, oversized-record rollback, malformed portable inputs, and complete save/load/export/import/replay of the 114,244-record, 1,496-battle retained campaign, including quota rollback and corrupt-generation recovery. Overall approval is fail-closed because the current rule17 dependency has the reproducible logic failure above. No repository files were edited; only /tmp/theandril-persistence-independent-review.mts was created.",
+  "parentDisposition": "Keep the historical failed verdict. Capped morale was subsequently corrected and the parent reran all five morale tests successfully. Current independent integration re-review is separate and pending; no persistence compensation was added."
+}

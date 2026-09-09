@@ -1,0 +1,35 @@
+RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ packages/persistence/src/campaign-storage-durability.test.ts (2 tests | 2 failed) 143ms
+   × PERSIST-01 refuses an unreadable shared dependency without rotating the last readable generation (append=false) 97ms
+   × PERSIST-01 refuses an unreadable shared dependency without rotating the last readable generation (append=true) 45ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/persistence/src/campaign-storage-durability.test.ts > PERSIST-01 refuses an unreadable shared dependency without rotating the last readable generation (append=false)
+ FAIL  packages/persistence/src/campaign-storage-durability.test.ts > PERSIST-01 refuses an unreadable shared dependency without rotating the last readable generation (append=true)
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ packages/persistence/src/campaign-storage-durability.test.ts:32:54
+     30|   if (append) end(game, journal); // Keep the ORIGINAL live journal an…
+     31|   const before = await storedRows(db), stats = db.lastCampaignSaveStat…
+     32|   await expect(db.saveCampaign(game, journal, 'auto')).rejects.toThrow…
+       |                                                      ^
+     33|   expect(await storedRows(db)).toEqual(before);
+     34|   expect(db.lastCampaignSaveStats).toEqual(stats);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  03:54:47
+   Duration  658ms (transform 331ms, setup 0ms, import 454ms, tests 143ms, environment 0ms)

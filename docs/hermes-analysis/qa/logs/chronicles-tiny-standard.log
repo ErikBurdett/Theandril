@@ -1,0 +1,17 @@
+COMMAND: pnpm exec tsx scripts/benchmark-chronicle.ts --size=tiny --pace=standard --factions=4 --limit=500
+START: 2026-09-09T05:21:01.227628+00:00
+/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:396
+  if (!condition) throw new Error('Invalid save: ' + message);
+                        ^
+
+Error: Invalid save: battle formation differs from unit content
+    at assert (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:396:25)
+    at validateBattle (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:827:7)
+    at deserializeGame (/home/telephoneheater/Work/Theandril/packages/sim/src/save.ts:924:44)
+    at deserializeCampaign (/home/telephoneheater/Work/Theandril/packages/persistence/src/index.ts:34:16)
+    at <anonymous> (/home/telephoneheater/Work/Theandril/scripts/benchmark-chronicle.ts:74:20)
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v26.7.0

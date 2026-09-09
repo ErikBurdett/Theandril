@@ -1,0 +1,30 @@
+{
+  "delegation": "deleg_17d85703",
+  "task": 2,
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "severity": "P2",
+      "location": "packages/ai/src/naval.ts:59-71, 291",
+      "issue": "The two-funded-harbor limit counts completed harbors but ignores harbor construction already paid for and queued. A more central coastal settlement can receive a third harbor commitment while the second is under construction.",
+      "repro": "Executed an authored, canonically validated fixture using createGame({seed:748291,size:'standard',factionCount:4}). With treasury 10000 and knowledge 500, research Coastal navigation and found owned coastal settlements at cells 24354, 28202 and 32050. Give the first settlement its authored completed harbor and legally queue building.harbor at the second. After serialize/deserialize, the observation contains only the observing faction. planNaval(view,1000) proposes building.harbor at settlement.14, the third settlement, for 20 coin. Applying the actual proposed commands succeeds, and the resulting save round-trips with three completed-or-queued harbors.",
+      "impact": "Violates the documented bounded second-outlet funding policy and spends another harbor's construction cost and future upkeep.",
+      "suggested_fix": "Count queued harbor construction as a funded commitment and retain the selected outlet while its harbor is under construction."
+    },
+    {
+      "severity": "P2",
+      "location": "packages/ai/src/naval.ts:176-188, 260-265",
+      "issue": "The new cargo-candidate exclusion invokes coastalFoundingSite for every eligible founder before any fleet limit applies. Each invocation rebuilds the entire observed-cell map before checking whether that founder is the single selected outlet caravan.",
+      "repro": "Executed a detached-observation work-count probe: 384x256 public dimensions, four faction seats, one known faction, one owned coastal town, a fixed 61-cell observed chart, and 1, 8 or 32 eligible founders at that town with zero movement. Instrumenting view.cells.map calls reached through coastalFoundingSite during planNaval(view,0) returned 2, 9 and 33 calls respectively, despite producing zero commands. The same observations with 24 faction seats returned zero such calls.",
+      "impact": "Introduces O(founders × observed cells) allocation/scanning in the unbounded cargo filter. MAX_NAVAL_FLEETS, route-query limits and the local founding-search cap do not bound this work, contrary to the required bounded reconnaissance hotpath.",
+      "suggested_fix": "Select the outlet caravan before constructing geography and share/cache its site assessment within the planning pass instead of recomputing it for every cargo candidate."
+    }
+  ],
+  "suggestions": [
+    "Add focused regressions for a queued second harbor followed by a newly available third coastal town, and for aggregate observed-cell work as founder count grows.",
+    "Add direct second-outlet reserve and saved-route lifecycle coverage, including reserve release when a local scout is queued or its production becomes blocked. The new reconnaissance tests primarily exercise detached geometry.",
+    "Keep the unchanged Standard-four-seat/100-turn and dense/60-turn contact gates separate from broader war and victory-project competence."
+  ],
+  "summary": "Verified the 42891-byte diff, all four current postimage SHA256s, reverse-apply consistency, unchanged contact gates and relevant observation/command dependencies. Both added test files passed 20 tests; three focused dependency files passed 11 tests, all with maxWorkers=2. Examined battle-defense cases preserve full reserve threat, canonical road quotes, post-declaration refresh and conservative no-preview behavior. No security issue was identified; the heuristic scan was not treated as proof. Two reproduced reconnaissance defects prevent approval. No files were created or modified. An optional follow-up probe was authorization-blocked and was not retried; campaign and benchmark suites were not run."
+}

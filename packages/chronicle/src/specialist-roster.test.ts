@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { checksum, UNITS } from '@theandril/content';
-import { applyCommand, applyCommandForVersion, armyMovement, armyUpkeep, createGame, deserializeGame, getObservation, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion, type GameCommand } from '@theandril/sim';
+import { applyCommand, applyCommandForVersion, armyMovement, armyUpkeep, createGame, deserializeGame, getObservation, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion, SAVE_VERSION, type GameCommand } from '@theandril/sim';
 import { applyRecordedCommand, createArchive, parseArchive, replayArchive, resumeJournal, type CampaignArchive } from './index';
 import captured from './fixtures/v14-specialist-baseline.json';
 
@@ -65,7 +65,7 @@ test('an independently captured rules14 archive retains its original content sea
   expect(journal.record(game, { type: 'endTurn', factionId: game.turnOwnerId }).ok).toBe(true);
   const continued = journal.materialize();
   expect(continued.records.slice(0, archive.records.length)).toEqual(archive.records);
-  expect(continued.records.at(-1)).toMatchObject({ rulesVersion: 16, checkpointVersion: 16 });
+  expect(continued.records.at(-1)).toMatchObject({ rulesVersion: SAVE_VERSION, checkpointVersion: SAVE_VERSION });
   expect(serializeGame(replayArchive(continued))).toBe(serializeGame(game));
 });
 

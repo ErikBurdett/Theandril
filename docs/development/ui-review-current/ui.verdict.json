@@ -1,0 +1,18 @@
+{
+  "delegation": "deleg_f16413a6",
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "category": "review_artifact_integrity",
+      "severity": "blocking",
+      "location": "docs/development/ui-review-current/ui.diff:371-388 and subsequent appended section boundaries",
+      "finding": "The supplied capture is not a valid unified diff. The final warfare.tsx hunk declares 11 old/12 new lines but contains 10/11 before the next header. Eight appended file headers are concatenated onto preceding closing-brace lines. This triggers the required fail-closed parseability gate, not a demonstrated gameplay defect.",
+      "reproduction": "From the repository root, git apply --numstat docs/development/ui-review-current/ui.diff exits 128: error: corrupt patch at docs/development/ui-review-current/ui.diff:384.",
+      "remediation": "Regenerate the capture without trimming hunk whitespace, preserve line separators between sections, validate its parsability, and repeat the postimage checks."
+    }
+  ],
+  "suggestions": [],
+  "summary": "Read all 17 file sections, including tracked and untracked tests; all 17 postimage hashes matched before and after review. Independently ran 40 scoped web tests across five files and root typechecking successfully. Found no additional UI-source security or logic blocker in shared Waykeeper artwork, epoch identities, canonical Labor/defense presentation, query ownership or capture stacking. Parsed retained evidence confirming 28 broad cases and two stronger pointer cases passed; inspected exact 130% capture-ready/completed and R23 desktop PNGs. The pixel helper checks actual PNG variation and sampled canvas hit targets, appropriately providing bounded nonblank-map coverage rather than universal renderer proof. No files were created or modified. No browser/server activity, AI/contact probes or release signoff was performed. Approval is withheld solely because the captured diff is corrupt.",
+  "parentDisposition": "Preserve this failed checkpoint. Reproduce capture parse failure, regenerate a separate byte-faithful artifact from Git, verify original/current postimages and reverse-check without modifying the worktree, then independently re-review. No UI production change is requested by this finding."
+}

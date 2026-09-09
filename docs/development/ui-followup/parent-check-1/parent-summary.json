@@ -1,0 +1,3044 @@
+{
+  "scope": "Parent UI regression rerun via live development server5193. No direct AI/contact suite or blocked review probe. Current UI source matches the captured independent review; not overall integration/release acceptance.",
+  "stats": {
+    "startTime": "2026-09-09T10:07:39.161Z",
+    "duration": 98825.54699999999,
+    "expected": 28,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "390px battle inspection enlarges real soldiers, pans within the field and preserves paused orders and picks",
+      "status": "expected",
+      "file": "battle-camera.spec.ts"
+    },
+    {
+      "title": "R03 public attack previews the canonical contingent and leaves its reserve on the map",
+      "status": "expected",
+      "file": "battle-defense.spec.ts"
+    },
+    {
+      "title": "R03 siege preview fits 390px and desktop public assaults clear reserves before capture",
+      "status": "expected",
+      "file": "battle-defense.spec.ts"
+    },
+    {
+      "title": "R03 narrow public assaults complete occupation at 390px without intercepted controls",
+      "status": "expected",
+      "file": "battle-defense.spec.ts"
+    },
+    {
+      "title": "R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text",
+      "status": "expected",
+      "file": "battle-defense.spec.ts"
+    },
+    {
+      "title": "the full-width map has top/bottom HUD, working floating windows and a compact unit menu",
+      "status": "expected",
+      "file": "campaign-hud.spec.ts"
+    },
+    {
+      "title": "town popup retains production and land actions while full orders and roster stay separate",
+      "status": "expected",
+      "file": "campaign-hud.spec.ts"
+    },
+    {
+      "title": "390px enlarged-text HUD and modal controls stay readable and close without clearing selection",
+      "status": "expected",
+      "file": "campaign-hud.spec.ts"
+    },
+    {
+      "title": "besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes",
+      "status": "expected",
+      "file": "conquest.spec.ts"
+    },
+    {
+      "title": "confirm razing and resettle the visible ruins with a normally recruited caravan",
+      "status": "expected",
+      "file": "conquest.spec.ts"
+    },
+    {
+      "title": "defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal",
+      "status": "expected",
+      "file": "conquest.spec.ts"
+    },
+    {
+      "title": "R23 repeated public loads and cross-size imports retain one responsive map control and canvas",
+      "status": "expected",
+      "file": "hermes-ui-slices.spec.ts"
+    },
+    {
+      "title": "R18 paid Waykeeper resolves shared art for faction.ashen_compact",
+      "status": "expected",
+      "file": "hermes-ui-slices.spec.ts"
+    },
+    {
+      "title": "R18 paid Waykeeper resolves shared art for faction.reedbound_council",
+      "status": "expected",
+      "file": "hermes-ui-slices.spec.ts"
+    },
+    {
+      "title": "R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order",
+      "status": "expected",
+      "file": "household-attention.spec.ts"
+    },
+    {
+      "title": "R07 2-town labor exception opens the exact hearth in one activation at 390px",
+      "status": "expected",
+      "file": "household-attention.spec.ts"
+    },
+    {
+      "title": "R07 10-town labor exception opens the exact hearth in one activation at 390px",
+      "status": "expected",
+      "file": "household-attention.spec.ts"
+    },
+    {
+      "title": "R07 40-town labor exception opens the exact hearth in one activation at 390px",
+      "status": "expected",
+      "file": "household-attention.spec.ts"
+    },
+    {
+      "title": "selected-town queries are reused for tile clicks and fast registry changes never retain another town\u2019s options",
+      "status": "expected",
+      "file": "land-query.spec.ts"
+    },
+    {
+      "title": "same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width",
+      "status": "expected",
+      "file": "land-query.spec.ts"
+    },
+    {
+      "title": "a mature thirty-two-town empire transfers summaries and opens only the searched town detail",
+      "status": "expected",
+      "file": "land-query.spec.ts"
+    },
+    {
+      "title": "a real canvas caravan founds, builds and continues in the same full-orders controls without issuing inspection orders",
+      "status": "expected",
+      "file": "map-actions.spec.ts"
+    },
+    {
+      "title": "a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders",
+      "status": "expected",
+      "file": "map-actions.spec.ts"
+    },
+    {
+      "title": "map-only diplomacy uses the one real encountered-faction consumer and ordinary war command",
+      "status": "expected",
+      "file": "map-actions.spec.ts"
+    },
+    {
+      "title": "390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer",
+      "status": "expected",
+      "file": "map-actions.spec.ts"
+    },
+    {
+      "title": "hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders",
+      "status": "expected",
+      "file": "next-action.spec.ts"
+    },
+    {
+      "title": "paused routes need attention while standing journeys, stationary missions and embarked troops are skipped",
+      "status": "expected",
+      "file": "next-action.spec.ts"
+    },
+    {
+      "title": "remapped shortcuts persist and previous/next touch controls remain usable at narrow width",
+      "status": "expected",
+      "file": "next-action.spec.ts"
+    }
+  ],
+  "sourceFilesVerified": 17,
+  "sourceChanges": [],
+  "retainedJsonAttachments": 17,
+  "observations": [
+    {
+      "test": "R03 public attack previews the canonical contingent and leaves its reserve on the map",
+      "name": "field-defense",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/01-field-defense.json",
+      "value": {
+        "before": {
+          "hash": "1eac66e5",
+          "army": {
+            "id": "army.2",
+            "factionId": "faction.ashen_compact",
+            "name": "Ashen Vanguard",
+            "cell": 489,
+            "movement": 3,
+            "formations": [
+              {
+                "id": "formation.2",
+                "unitId": "unit.guard",
+                "strength": 60,
+                "morale": 75,
+                "fatigue": 0
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Unled detachment: twelve-formation command capacity.",
+            "splitFormationLimit": 12,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.guard",
+            "displayUnitId": "unit.guard",
+            "strength": 60,
+            "maxStrength": 60,
+            "morale": 75,
+            "fatigue": 0,
+            "maxMovement": 3,
+            "sight": 2,
+            "upkeep": 2,
+            "canFound": false,
+            "canAttack": true
+          },
+          "target": {
+            "id": "army.4",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 0",
+            "cell": 537,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.4",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 0
+              }
+            ],
+            "battleDefense": {
+              "engagedFormations": 20,
+              "engagedStrength": 20,
+              "reserveFormations": 1,
+              "reserveStrength": 1
+            },
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 0,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          }
+        },
+        "afterArmies": [
+          {
+            "id": "army.10",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 4",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.10",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.11",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 5",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.11",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.12",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 6",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.12",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.13",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 7",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.13",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.14",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 8",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.14",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.15",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 9",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.15",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.16",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 10",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.16",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.17",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 11",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.17",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.18",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 12",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.18",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.19",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 13",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.19",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.2",
+            "factionId": "faction.ashen_compact",
+            "name": "Ashen Vanguard",
+            "cell": 489,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.2",
+                "unitId": "unit.guard",
+                "strength": 60,
+                "morale": 75,
+                "fatigue": 8
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Unled detachment: twelve-formation command capacity.",
+            "splitFormationLimit": 12,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.guard",
+            "displayUnitId": "unit.guard",
+            "strength": 60,
+            "maxStrength": 60,
+            "morale": 75,
+            "fatigue": 8,
+            "maxMovement": 3,
+            "sight": 2,
+            "upkeep": 2,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.20",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 14",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.20",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.21",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 15",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.21",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.22",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 16",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.22",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.23",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 17",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.23",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.24",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 18",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.24",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.25",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 19",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.25",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.26",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 20",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.26",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.4",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 0",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.4",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.7",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 1",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.7",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.8",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 2",
+            "cell": 538,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.8",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 10
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 10,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          },
+          {
+            "id": "army.9",
+            "factionId": "faction.reedbound_council",
+            "name": "Reserve defender 3",
+            "cell": 537,
+            "movement": 0,
+            "formations": [
+              {
+                "id": "formation.9",
+                "unitId": "unit.scout",
+                "strength": 1,
+                "morale": 1,
+                "fatigue": 0
+              }
+            ],
+            "commander": null,
+            "agents": [],
+            "domain": "land",
+            "carrierId": null,
+            "cargo": [],
+            "transportCapacity": 0,
+            "transportUsed": 0,
+            "canEnterDeepWater": false,
+            "embarkOptions": [],
+            "disembarkOptions": [],
+            "transportOptionsTruncated": false,
+            "formationCapacity": 12,
+            "overCommand": false,
+            "commandBlocker": null,
+            "capacityReason": "Foreign command organization is private.",
+            "splitFormationLimit": 0,
+            "mergeOptions": [],
+            "mergeOptionsTruncated": false,
+            "movementBlocker": null,
+            "reorganizationBlocker": null,
+            "unitId": "unit.scout",
+            "displayUnitId": "unit.scout",
+            "strength": 1,
+            "maxStrength": 20,
+            "morale": 1,
+            "fatigue": 0,
+            "maxMovement": 5,
+            "sight": 4,
+            "upkeep": 1,
+            "canFound": false,
+            "canAttack": true
+          }
+        ],
+        "errors": []
+      }
+    },
+    {
+      "test": "R03 siege preview fits 390px and desktop public assaults clear reserves before capture",
+      "name": "siege-defense",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/02-siege-defense.json",
+      "value": {
+        "before": {
+          "hash": "71d10b26",
+          "siege": {
+            "settlementId": "settlement.6",
+            "armyId": "army.2",
+            "factionId": "faction.ashen_compact",
+            "startedTurn": 1,
+            "defenses": 0,
+            "supplies": 0,
+            "militiaStrength": 30,
+            "militiaMorale": 65,
+            "militiaFatigue": 0,
+            "battleDefense": {
+              "engagedFormations": 20,
+              "engagedStrength": 20,
+              "reserveFormations": 1,
+              "reserveStrength": 1
+            },
+            "canAssault": true,
+            "assaultBlocker": null,
+            "defenderStrength": 21
+          }
+        },
+        "contestedSieges": [
+          {
+            "settlementId": "settlement.6",
+            "armyId": "army.2",
+            "factionId": "faction.ashen_compact",
+            "startedTurn": 1,
+            "defenses": 0,
+            "supplies": 0,
+            "militiaStrength": 30,
+            "militiaMorale": 65,
+            "militiaFatigue": 0,
+            "canAssault": false,
+            "assaultBlocker": "The besieging army needs movement to assault; wait for the next turn.",
+            "defenderStrength": 1
+          }
+        ],
+        "errors": []
+      }
+    },
+    {
+      "test": "R03 narrow public assaults complete occupation at 390px without intercepted controls",
+      "name": "narrow-capture-before",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/03-narrow-capture-before.json",
+      "value": {
+        "before": {
+          "settlementId": "settlement.6",
+          "armyId": "army.2",
+          "factionId": "faction.ashen_compact",
+          "startedTurn": 1,
+          "defenses": 0,
+          "supplies": 0,
+          "militiaStrength": 30,
+          "militiaMorale": 65,
+          "militiaFatigue": 0,
+          "battleDefense": {
+            "engagedFormations": 20,
+            "engagedStrength": 20,
+            "reserveFormations": 1,
+            "reserveStrength": 1
+          },
+          "canAssault": true,
+          "assaultBlocker": null,
+          "defenderStrength": 21
+        },
+        "contestedSieges": [
+          {
+            "settlementId": "settlement.6",
+            "armyId": "army.2",
+            "factionId": "faction.ashen_compact",
+            "startedTurn": 1,
+            "defenses": 0,
+            "supplies": 0,
+            "militiaStrength": 30,
+            "militiaMorale": 65,
+            "militiaFatigue": 0,
+            "canAssault": false,
+            "assaultBlocker": "The besieging army needs movement to assault; wait for the next turn.",
+            "defenderStrength": 1
+          }
+        ],
+        "layout": {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "button": {
+            "x": 42,
+            "y": 126.921875,
+            "width": 306,
+            "height": 36.5,
+            "top": 126.921875,
+            "right": 348,
+            "bottom": 163.421875,
+            "left": 42
+          },
+          "hit": "<button class=\"wide\" aria-label=\"Occupy settlement\">Occupy</button>",
+          "receivesPointer": true,
+          "layers": [
+            {
+              "selector": ".map-host",
+              "box": {
+                "x": 0,
+                "y": 104,
+                "width": 390,
+                "height": 398.859375,
+                "top": 104,
+                "right": 390,
+                "bottom": 502.859375,
+                "left": 0
+              },
+              "position": "absolute",
+              "zIndex": "auto",
+              "overflow": "visible"
+            },
+            {
+              "selector": ".hud-tools",
+              "box": {
+                "x": 9,
+                "y": 113,
+                "width": 372,
+                "height": 75.59375,
+                "top": 113,
+                "right": 381,
+                "bottom": 188.59375,
+                "left": 9
+              },
+              "position": "absolute",
+              "zIndex": "4",
+              "overflow": "auto"
+            },
+            {
+              "selector": ".capture-panel",
+              "box": {
+                "x": 10,
+                "y": 114,
+                "width": 370,
+                "height": 339.859375,
+                "top": 114,
+                "right": 380,
+                "bottom": 453.859375,
+                "left": 10
+              },
+              "position": "absolute",
+              "zIndex": "7",
+              "overflow": "auto"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "test": "R03 narrow public assaults complete occupation at 390px without intercepted controls",
+      "name": "capture-completed-390-pixels",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/04-capture-completed-390-pixels.json",
+      "value": {
+        "clip": {
+          "x": 135,
+          "y": 252,
+          "width": 120,
+          "height": 120
+        },
+        "colors": 1015,
+        "nonDominantFraction": 0.9516666666666667,
+        "dominantRgb": [
+          109,
+          87,
+          62
+        ]
+      }
+    },
+    {
+      "test": "R03 narrow public assaults complete occupation at 390px without intercepted controls",
+      "name": "narrow-capture-after",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/05-narrow-capture-after.json",
+      "value": {
+        "hash": "7048fc8a",
+        "pendingCapture": null,
+        "town": {
+          "id": "settlement.6",
+          "factionId": "faction.ashen_compact",
+          "name": "Reedwatch",
+          "cell": 538,
+          "population": 2,
+          "food": 0,
+          "buildings": [
+            "building.granary",
+            "building.workshop"
+          ],
+          "queue": [],
+          "founderFactionId": "faction.reedbound_council",
+          "devastation": 20,
+          "occupationTurns": 3
+        },
+        "errors": []
+      }
+    },
+    {
+      "test": "R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text",
+      "name": "narrow-capture-before",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/06-narrow-capture-before.json",
+      "value": {
+        "before": {
+          "settlementId": "settlement.6",
+          "armyId": "army.2",
+          "factionId": "faction.ashen_compact",
+          "startedTurn": 1,
+          "defenses": 0,
+          "supplies": 0,
+          "militiaStrength": 30,
+          "militiaMorale": 65,
+          "militiaFatigue": 0,
+          "battleDefense": {
+            "engagedFormations": 20,
+            "engagedStrength": 20,
+            "reserveFormations": 1,
+            "reserveStrength": 1
+          },
+          "canAssault": true,
+          "assaultBlocker": null,
+          "defenderStrength": 21
+        },
+        "contestedSieges": [
+          {
+            "settlementId": "settlement.6",
+            "armyId": "army.2",
+            "factionId": "faction.ashen_compact",
+            "startedTurn": 1,
+            "defenses": 0,
+            "supplies": 0,
+            "militiaStrength": 30,
+            "militiaMorale": 65,
+            "militiaFatigue": 0,
+            "canAssault": false,
+            "assaultBlocker": "The besieging army needs movement to assault; wait for the next turn.",
+            "defenderStrength": 1
+          }
+        ],
+        "layout": {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "button": {
+            "x": 42,
+            "y": 132.421875,
+            "width": 306,
+            "height": 41.4375,
+            "top": 132.421875,
+            "right": 348,
+            "bottom": 173.859375,
+            "left": 42
+          },
+          "hit": "<button class=\"wide\" aria-label=\"Occupy settlement\">Occupy</button>",
+          "receivesPointer": true,
+          "layers": [
+            {
+              "selector": ".map-host",
+              "box": {
+                "x": 0,
+                "y": 109.640625,
+                "width": 390,
+                "height": 319.0625,
+                "top": 109.640625,
+                "right": 390,
+                "bottom": 428.703125,
+                "left": 0
+              },
+              "position": "absolute",
+              "zIndex": "auto",
+              "overflow": "visible"
+            },
+            {
+              "selector": ".hud-tools",
+              "box": {
+                "x": 9,
+                "y": 118.640625,
+                "width": 372,
+                "height": 84.15625,
+                "top": 118.640625,
+                "right": 381,
+                "bottom": 202.796875,
+                "left": 9
+              },
+              "position": "absolute",
+              "zIndex": "4",
+              "overflow": "auto"
+            },
+            {
+              "selector": ".capture-panel",
+              "box": {
+                "x": 10,
+                "y": 119.640625,
+                "width": 370,
+                "height": 260.0625,
+                "top": 119.640625,
+                "right": 380,
+                "bottom": 379.703125,
+                "left": 10
+              },
+              "position": "absolute",
+              "zIndex": "7",
+              "overflow": "auto"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "test": "R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text",
+      "name": "capture-completed-390-pixels",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/07-capture-completed-390-pixels.json",
+      "value": {
+        "clip": {
+          "x": 135,
+          "y": 218,
+          "width": 120,
+          "height": 120
+        },
+        "colors": 945,
+        "nonDominantFraction": 0.9511805555555556,
+        "dominantRgb": [
+          87,
+          75,
+          57
+        ]
+      }
+    },
+    {
+      "test": "R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text",
+      "name": "narrow-capture-after",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/08-narrow-capture-after.json",
+      "value": {
+        "hash": "7048fc8a",
+        "pendingCapture": null,
+        "town": {
+          "id": "settlement.6",
+          "factionId": "faction.ashen_compact",
+          "name": "Reedwatch",
+          "cell": 538,
+          "population": 2,
+          "food": 0,
+          "buildings": [
+            "building.granary",
+            "building.workshop"
+          ],
+          "queue": [],
+          "founderFactionId": "faction.reedbound_council",
+          "devastation": 20,
+          "occupationTurns": 3
+        },
+        "errors": []
+      }
+    },
+    {
+      "test": "R23 repeated public loads and cross-size imports retain one responsive map control and canvas",
+      "name": "lifecycle-desktop-pixels",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/09-lifecycle-desktop-pixels.json",
+      "value": {
+        "clip": {
+          "x": 660,
+          "y": 365,
+          "width": 120,
+          "height": 120
+        },
+        "colors": 1202,
+        "nonDominantFraction": 0.897361111111111,
+        "dominantRgb": [
+          109,
+          87,
+          62
+        ]
+      }
+    },
+    {
+      "test": "R23 repeated public loads and cross-size imports retain one responsive map control and canvas",
+      "name": "lifecycle-390-pixels",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/10-lifecycle-390-pixels.json",
+      "value": {
+        "clip": {
+          "x": 135,
+          "y": 267,
+          "width": 120,
+          "height": 120
+        },
+        "colors": 998,
+        "nonDominantFraction": 0.8959027777777778,
+        "dominantRgb": [
+          109,
+          87,
+          62
+        ]
+      }
+    },
+    {
+      "test": "R18 paid Waykeeper resolves shared art for faction.ashen_compact",
+      "name": "waykeeper-evidence",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/11-waykeeper-evidence.json",
+      "value": {
+        "definitionId": "faction.ashen_compact",
+        "caster": {
+          "id": "character.10",
+          "factionId": "faction.ashen_compact",
+          "definitionId": "character.waykeeper",
+          "name": "Aven Ashwell",
+          "experience": 0,
+          "skillId": null,
+          "learnedSkillIds": [],
+          "woundedTurns": 0,
+          "dead": false,
+          "location": {
+            "kind": "settlement",
+            "settlementId": "settlement.5"
+          },
+          "mission": null,
+          "aptitudes": {
+            "path.flame": 1,
+            "path.rune": 1
+          },
+          "spellIds": [],
+          "role": "waykeeper",
+          "status": "ready",
+          "rank": 1,
+          "cell": 488,
+          "assignmentOptions": [
+            {
+              "armyId": "army.2",
+              "label": "Witness column",
+              "canAssign": true,
+              "blocker": null
+            },
+            {
+              "armyId": "army.9",
+              "label": "Reserve escort",
+              "canAssign": true,
+              "blocker": null
+            }
+          ],
+          "unassignmentOptions": [
+            {
+              "settlementId": "settlement.5",
+              "label": "Ashen Hearth",
+              "canUnassign": false,
+              "blocker": "This character is not attached to an army."
+            }
+          ],
+          "missions": [],
+          "promotions": []
+        },
+        "paidCoin": 40,
+        "atlas": {
+          "id": "battle",
+          "imageUrl": "/art/battle.png",
+          "jsonUrl": "/art/battle.json",
+          "width": 1024,
+          "height": 1024,
+          "sha256": "6e7cbcc86537efea76ba24e4cad54858b5e77bbbf46f2c87ceb7cd9e9addea7b"
+        },
+        "requests": [
+          "/art/foundation.png",
+          "/art/foundation.png",
+          "/art/map-works.png",
+          "/art/battle.png"
+        ],
+        "consoleMessages": [],
+        "errors": []
+      }
+    },
+    {
+      "test": "R18 paid Waykeeper resolves shared art for faction.reedbound_council",
+      "name": "waykeeper-evidence",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/12-waykeeper-evidence.json",
+      "value": {
+        "definitionId": "faction.reedbound_council",
+        "caster": {
+          "id": "character.10",
+          "factionId": "faction.ashen_compact",
+          "definitionId": "character.waykeeper",
+          "name": "Vessa Mirebank",
+          "experience": 0,
+          "skillId": null,
+          "learnedSkillIds": [],
+          "woundedTurns": 0,
+          "dead": false,
+          "location": {
+            "kind": "settlement",
+            "settlementId": "settlement.5"
+          },
+          "mission": null,
+          "aptitudes": {
+            "path.flame": 1,
+            "path.rune": 1
+          },
+          "spellIds": [],
+          "role": "waykeeper",
+          "status": "ready",
+          "rank": 1,
+          "cell": 488,
+          "assignmentOptions": [
+            {
+              "armyId": "army.2",
+              "label": "Witness column",
+              "canAssign": true,
+              "blocker": null
+            },
+            {
+              "armyId": "army.9",
+              "label": "Reserve escort",
+              "canAssign": true,
+              "blocker": null
+            }
+          ],
+          "unassignmentOptions": [
+            {
+              "settlementId": "settlement.5",
+              "label": "Ashen Hearth",
+              "canUnassign": false,
+              "blocker": "This character is not attached to an army."
+            }
+          ],
+          "missions": [],
+          "promotions": []
+        },
+        "paidCoin": 40,
+        "atlas": {
+          "id": "battle",
+          "imageUrl": "/art/battle.png",
+          "jsonUrl": "/art/battle.json",
+          "width": 1024,
+          "height": 1024,
+          "sha256": "6e7cbcc86537efea76ba24e4cad54858b5e77bbbf46f2c87ceb7cd9e9addea7b"
+        },
+        "requests": [
+          "/art/foundation.png",
+          "/art/foundation.png",
+          "/art/map-works.png",
+          "/art/battle.png"
+        ],
+        "consoleMessages": [],
+        "errors": []
+      }
+    },
+    {
+      "test": "R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order",
+      "name": "household-growth",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/13-household-growth.json",
+      "value": {
+        "before": {
+          "hash": "1fa7ba1e",
+          "land": {
+            "settlementId": "settlement.5",
+            "stage": "colony",
+            "isCapital": true,
+            "claimRadius": 2,
+            "claimCapacity": null,
+            "workerCapacity": 2,
+            "claimed": [
+              704,
+              705,
+              751,
+              752,
+              753,
+              800,
+              801
+            ],
+            "worked": [
+              704
+            ],
+            "work": null,
+            "workPaused": null,
+            "yields": {
+              "food": 5,
+              "industry": 1,
+              "coin": 2,
+              "knowledge": 2
+            },
+            "cells": [],
+            "capitalOption": {
+              "coinCost": 60,
+              "turns": 0,
+              "canStart": false,
+              "blocker": "This settlement is already the capital.",
+              "effectText": "Move the capital here. Its center gains 1 coin and 1 knowledge per turn before settlement penalties."
+            },
+            "canCancelWork": false,
+            "cancelBlocker": "This settlement has no land-work order.",
+            "borderExpansion": {
+              "progress": 1,
+              "threshold": 40,
+              "rate": 1,
+              "nextCell": 655,
+              "blocker": null
+            }
+          },
+          "treasury": 29,
+          "town": {
+            "id": "settlement.5",
+            "factionId": "faction.ashen_compact",
+            "name": "Growing hearth",
+            "cell": 752,
+            "population": 2,
+            "food": 11,
+            "buildings": [],
+            "queue": [
+              {
+                "itemId": "unit.guard",
+                "progress": 7
+              },
+              {
+                "itemId": "unit.guard",
+                "progress": 0
+              },
+              {
+                "itemId": "unit.guard",
+                "progress": 0
+              }
+            ],
+            "founderFactionId": "faction.ashen_compact",
+            "devastation": 0,
+            "occupationTurns": 0
+          },
+          "routes": []
+        },
+        "cell": 705,
+        "after": {
+          "worked": [
+            704,
+            705
+          ],
+          "treasury": 29,
+          "routes": []
+        }
+      }
+    },
+    {
+      "test": "R07 2-town labor exception opens the exact hearth in one activation at 390px",
+      "name": "household-scale",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/14-household-scale.json",
+      "value": {
+        "count": 2,
+        "target": "settlement.6",
+        "locateActivations": 1,
+        "beforeHash": "94973338",
+        "before": [
+          {
+            "settlementId": "settlement.5",
+            "workerCapacity": 1,
+            "worked": [
+              16922
+            ]
+          },
+          {
+            "settlementId": "settlement.6",
+            "workerCapacity": 2,
+            "worked": [
+              19621
+            ]
+          }
+        ],
+        "after": [
+          {
+            "settlementId": "settlement.5",
+            "workerCapacity": 1,
+            "worked": [
+              16922
+            ]
+          },
+          {
+            "settlementId": "settlement.6",
+            "workerCapacity": 2,
+            "worked": [
+              19621,
+              19622
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "test": "R07 10-town labor exception opens the exact hearth in one activation at 390px",
+      "name": "household-scale",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/15-household-scale.json",
+      "value": {
+        "count": 10,
+        "target": "settlement.30",
+        "locateActivations": 1,
+        "beforeHash": "f96750ae",
+        "before": [
+          {
+            "settlementId": "settlement.21",
+            "workerCapacity": 1,
+            "worked": [
+              17649
+            ]
+          },
+          {
+            "settlementId": "settlement.22",
+            "workerCapacity": 1,
+            "worked": [
+              19621
+            ]
+          },
+          {
+            "settlementId": "settlement.23",
+            "workerCapacity": 1,
+            "worked": [
+              9176
+            ]
+          },
+          {
+            "settlementId": "settlement.24",
+            "workerCapacity": 1,
+            "worked": [
+              11874
+            ]
+          },
+          {
+            "settlementId": "settlement.25",
+            "workerCapacity": 1,
+            "worked": [
+              32936
+            ]
+          },
+          {
+            "settlementId": "settlement.26",
+            "workerCapacity": 1,
+            "worked": [
+              9292
+            ]
+          },
+          {
+            "settlementId": "settlement.27",
+            "workerCapacity": 1,
+            "worked": [
+              16922
+            ]
+          },
+          {
+            "settlementId": "settlement.28",
+            "workerCapacity": 1,
+            "worked": [
+              4284
+            ]
+          },
+          {
+            "settlementId": "settlement.29",
+            "workerCapacity": 1,
+            "worked": [
+              8754
+            ]
+          },
+          {
+            "settlementId": "settlement.30",
+            "workerCapacity": 2,
+            "worked": [
+              34936
+            ]
+          }
+        ],
+        "after": [
+          {
+            "settlementId": "settlement.21",
+            "workerCapacity": 1,
+            "worked": [
+              17649
+            ]
+          },
+          {
+            "settlementId": "settlement.22",
+            "workerCapacity": 1,
+            "worked": [
+              19621
+            ]
+          },
+          {
+            "settlementId": "settlement.23",
+            "workerCapacity": 1,
+            "worked": [
+              9176
+            ]
+          },
+          {
+            "settlementId": "settlement.24",
+            "workerCapacity": 1,
+            "worked": [
+              11874
+            ]
+          },
+          {
+            "settlementId": "settlement.25",
+            "workerCapacity": 1,
+            "worked": [
+              32936
+            ]
+          },
+          {
+            "settlementId": "settlement.26",
+            "workerCapacity": 1,
+            "worked": [
+              9292
+            ]
+          },
+          {
+            "settlementId": "settlement.27",
+            "workerCapacity": 1,
+            "worked": [
+              16922
+            ]
+          },
+          {
+            "settlementId": "settlement.28",
+            "workerCapacity": 1,
+            "worked": [
+              4284
+            ]
+          },
+          {
+            "settlementId": "settlement.29",
+            "workerCapacity": 1,
+            "worked": [
+              8754
+            ]
+          },
+          {
+            "settlementId": "settlement.30",
+            "workerCapacity": 2,
+            "worked": [
+              34936,
+              34937
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "test": "R07 40-town labor exception opens the exact hearth in one activation at 390px",
+      "name": "household-scale",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/16-household-scale.json",
+      "value": {
+        "count": 40,
+        "target": "settlement.99",
+        "locateActivations": 1,
+        "beforeHash": "6141f70b",
+        "before": [
+          {
+            "settlementId": "settlement.100",
+            "workerCapacity": 1,
+            "worked": [
+              9176
+            ]
+          },
+          {
+            "settlementId": "settlement.101",
+            "workerCapacity": 1,
+            "worked": [
+              11874
+            ]
+          },
+          {
+            "settlementId": "settlement.102",
+            "workerCapacity": 1,
+            "worked": [
+              17649
+            ]
+          },
+          {
+            "settlementId": "settlement.103",
+            "workerCapacity": 1,
+            "worked": [
+              27184
+            ]
+          },
+          {
+            "settlementId": "settlement.104",
+            "workerCapacity": 1,
+            "worked": [
+              8754
+            ]
+          },
+          {
+            "settlementId": "settlement.105",
+            "workerCapacity": 1,
+            "worked": [
+              28897
+            ]
+          },
+          {
+            "settlementId": "settlement.106",
+            "workerCapacity": 1,
+            "worked": [
+              23994
+            ]
+          },
+          {
+            "settlementId": "settlement.107",
+            "workerCapacity": 1,
+            "worked": [
+              23371
+            ]
+          },
+          {
+            "settlementId": "settlement.108",
+            "workerCapacity": 1,
+            "worked": [
+              9292
+            ]
+          },
+          {
+            "settlementId": "settlement.109",
+            "workerCapacity": 1,
+            "worked": [
+              34936
+            ]
+          },
+          {
+            "settlementId": "settlement.110",
+            "workerCapacity": 1,
+            "worked": [
+              4231
+            ]
+          },
+          {
+            "settlementId": "settlement.111",
+            "workerCapacity": 1,
+            "worked": [
+              20011
+            ]
+          },
+          {
+            "settlementId": "settlement.112",
+            "workerCapacity": 1,
+            "worked": [
+              26015
+            ]
+          },
+          {
+            "settlementId": "settlement.113",
+            "workerCapacity": 1,
+            "worked": [
+              19126
+            ]
+          },
+          {
+            "settlementId": "settlement.114",
+            "workerCapacity": 1,
+            "worked": [
+              4284
+            ]
+          },
+          {
+            "settlementId": "settlement.115",
+            "workerCapacity": 1,
+            "worked": [
+              27601
+            ]
+          },
+          {
+            "settlementId": "settlement.116",
+            "workerCapacity": 1,
+            "worked": [
+              22366
+            ]
+          },
+          {
+            "settlementId": "settlement.117",
+            "workerCapacity": 1,
+            "worked": [
+              16322
+            ]
+          },
+          {
+            "settlementId": "settlement.118",
+            "workerCapacity": 1,
+            "worked": [
+              12211
+            ]
+          },
+          {
+            "settlementId": "settlement.119",
+            "workerCapacity": 1,
+            "worked": [
+              20948
+            ]
+          },
+          {
+            "settlementId": "settlement.120",
+            "workerCapacity": 1,
+            "worked": [
+              16209
+            ]
+          },
+          {
+            "settlementId": "settlement.81",
+            "workerCapacity": 1,
+            "worked": [
+              13631
+            ]
+          },
+          {
+            "settlementId": "settlement.82",
+            "workerCapacity": 1,
+            "worked": [
+              19621
+            ]
+          },
+          {
+            "settlementId": "settlement.83",
+            "workerCapacity": 1,
+            "worked": [
+              29251
+            ]
+          },
+          {
+            "settlementId": "settlement.84",
+            "workerCapacity": 1,
+            "worked": [
+              16514
+            ]
+          },
+          {
+            "settlementId": "settlement.85",
+            "workerCapacity": 1,
+            "worked": [
+              32936
+            ]
+          },
+          {
+            "settlementId": "settlement.86",
+            "workerCapacity": 1,
+            "worked": [
+              25580
+            ]
+          },
+          {
+            "settlementId": "settlement.87",
+            "workerCapacity": 1,
+            "worked": [
+              9889
+            ]
+          },
+          {
+            "settlementId": "settlement.88",
+            "workerCapacity": 1,
+            "worked": [
+              31071
+            ]
+          },
+          {
+            "settlementId": "settlement.89",
+            "workerCapacity": 1,
+            "worked": [
+              19262
+            ]
+          },
+          {
+            "settlementId": "settlement.90",
+            "workerCapacity": 1,
+            "worked": [
+              5526
+            ]
+          },
+          {
+            "settlementId": "settlement.91",
+            "workerCapacity": 1,
+            "worked": [
+              29377
+            ]
+          },
+          {
+            "settlementId": "settlement.92",
+            "workerCapacity": 1,
+            "worked": [
+              15150
+            ]
+          },
+          {
+            "settlementId": "settlement.93",
+            "workerCapacity": 1,
+            "worked": [
+              27010
+            ]
+          },
+          {
+            "settlementId": "settlement.94",
+            "workerCapacity": 1,
+            "worked": [
+              6770
+            ]
+          },
+          {
+            "settlementId": "settlement.95",
+            "workerCapacity": 1,
+            "worked": [
+              13683
+            ]
+          },
+          {
+            "settlementId": "settlement.96",
+            "workerCapacity": 1,
+            "worked": [
+              17558
+            ]
+          },
+          {
+            "settlementId": "settlement.97",
+            "workerCapacity": 1,
+            "worked": [
+              14754
+            ]
+          },
+          {
+            "settlementId": "settlement.98",
+            "workerCapacity": 1,
+            "worked": [
+              29037
+            ]
+          },
+          {
+            "settlementId": "settlement.99",
+            "workerCapacity": 2,
+            "worked": [
+              16922
+            ]
+          }
+        ],
+        "after": [
+          {
+            "settlementId": "settlement.100",
+            "workerCapacity": 1,
+            "worked": [
+              9176
+            ]
+          },
+          {
+            "settlementId": "settlement.101",
+            "workerCapacity": 1,
+            "worked": [
+              11874
+            ]
+          },
+          {
+            "settlementId": "settlement.102",
+            "workerCapacity": 1,
+            "worked": [
+              17649
+            ]
+          },
+          {
+            "settlementId": "settlement.103",
+            "workerCapacity": 1,
+            "worked": [
+              27184
+            ]
+          },
+          {
+            "settlementId": "settlement.104",
+            "workerCapacity": 1,
+            "worked": [
+              8754
+            ]
+          },
+          {
+            "settlementId": "settlement.105",
+            "workerCapacity": 1,
+            "worked": [
+              28897
+            ]
+          },
+          {
+            "settlementId": "settlement.106",
+            "workerCapacity": 1,
+            "worked": [
+              23994
+            ]
+          },
+          {
+            "settlementId": "settlement.107",
+            "workerCapacity": 1,
+            "worked": [
+              23371
+            ]
+          },
+          {
+            "settlementId": "settlement.108",
+            "workerCapacity": 1,
+            "worked": [
+              9292
+            ]
+          },
+          {
+            "settlementId": "settlement.109",
+            "workerCapacity": 1,
+            "worked": [
+              34936
+            ]
+          },
+          {
+            "settlementId": "settlement.110",
+            "workerCapacity": 1,
+            "worked": [
+              4231
+            ]
+          },
+          {
+            "settlementId": "settlement.111",
+            "workerCapacity": 1,
+            "worked": [
+              20011
+            ]
+          },
+          {
+            "settlementId": "settlement.112",
+            "workerCapacity": 1,
+            "worked": [
+              26015
+            ]
+          },
+          {
+            "settlementId": "settlement.113",
+            "workerCapacity": 1,
+            "worked": [
+              19126
+            ]
+          },
+          {
+            "settlementId": "settlement.114",
+            "workerCapacity": 1,
+            "worked": [
+              4284
+            ]
+          },
+          {
+            "settlementId": "settlement.115",
+            "workerCapacity": 1,
+            "worked": [
+              27601
+            ]
+          },
+          {
+            "settlementId": "settlement.116",
+            "workerCapacity": 1,
+            "worked": [
+              22366
+            ]
+          },
+          {
+            "settlementId": "settlement.117",
+            "workerCapacity": 1,
+            "worked": [
+              16322
+            ]
+          },
+          {
+            "settlementId": "settlement.118",
+            "workerCapacity": 1,
+            "worked": [
+              12211
+            ]
+          },
+          {
+            "settlementId": "settlement.119",
+            "workerCapacity": 1,
+            "worked": [
+              20948
+            ]
+          },
+          {
+            "settlementId": "settlement.120",
+            "workerCapacity": 1,
+            "worked": [
+              16209
+            ]
+          },
+          {
+            "settlementId": "settlement.81",
+            "workerCapacity": 1,
+            "worked": [
+              13631
+            ]
+          },
+          {
+            "settlementId": "settlement.82",
+            "workerCapacity": 1,
+            "worked": [
+              19621
+            ]
+          },
+          {
+            "settlementId": "settlement.83",
+            "workerCapacity": 1,
+            "worked": [
+              29251
+            ]
+          },
+          {
+            "settlementId": "settlement.84",
+            "workerCapacity": 1,
+            "worked": [
+              16514
+            ]
+          },
+          {
+            "settlementId": "settlement.85",
+            "workerCapacity": 1,
+            "worked": [
+              32936
+            ]
+          },
+          {
+            "settlementId": "settlement.86",
+            "workerCapacity": 1,
+            "worked": [
+              25580
+            ]
+          },
+          {
+            "settlementId": "settlement.87",
+            "workerCapacity": 1,
+            "worked": [
+              9889
+            ]
+          },
+          {
+            "settlementId": "settlement.88",
+            "workerCapacity": 1,
+            "worked": [
+              31071
+            ]
+          },
+          {
+            "settlementId": "settlement.89",
+            "workerCapacity": 1,
+            "worked": [
+              19262
+            ]
+          },
+          {
+            "settlementId": "settlement.90",
+            "workerCapacity": 1,
+            "worked": [
+              5526
+            ]
+          },
+          {
+            "settlementId": "settlement.91",
+            "workerCapacity": 1,
+            "worked": [
+              29377
+            ]
+          },
+          {
+            "settlementId": "settlement.92",
+            "workerCapacity": 1,
+            "worked": [
+              15150
+            ]
+          },
+          {
+            "settlementId": "settlement.93",
+            "workerCapacity": 1,
+            "worked": [
+              27010
+            ]
+          },
+          {
+            "settlementId": "settlement.94",
+            "workerCapacity": 1,
+            "worked": [
+              6770
+            ]
+          },
+          {
+            "settlementId": "settlement.95",
+            "workerCapacity": 1,
+            "worked": [
+              13683
+            ]
+          },
+          {
+            "settlementId": "settlement.96",
+            "workerCapacity": 1,
+            "worked": [
+              17558
+            ]
+          },
+          {
+            "settlementId": "settlement.97",
+            "workerCapacity": 1,
+            "worked": [
+              14754
+            ]
+          },
+          {
+            "settlementId": "settlement.98",
+            "workerCapacity": 1,
+            "worked": [
+              29037
+            ]
+          },
+          {
+            "settlementId": "settlement.99",
+            "workerCapacity": 2,
+            "worked": [
+              16922,
+              16923
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "test": "a mature thirty-two-town empire transfers summaries and opens only the searched town detail",
+      "name": "selected-town-transfer.json",
+      "path": "docs/development/ui-followup/parent-check-1/parent-observations/17-selected-town-transfer.json.json",
+      "value": {
+        "towns": 32,
+        "total": 109,
+        "pageLimit": 24,
+        "stateHash": "bef5b9d0",
+        "visitedCells": [
+          113125,
+          113126,
+          113636,
+          113637,
+          113638,
+          114149,
+          114150,
+          114151,
+          114661,
+          114662,
+          114663,
+          115174,
+          115175,
+          115176,
+          115686,
+          115687,
+          115688,
+          116199,
+          116200,
+          116201,
+          116711,
+          116712,
+          116713,
+          117224,
+          117225,
+          117226,
+          117736,
+          117737,
+          117738,
+          118249,
+          118250,
+          118251,
+          118761,
+          118762,
+          118763,
+          119274,
+          119275,
+          119276,
+          119786,
+          119787,
+          119788,
+          120299,
+          120300,
+          120301,
+          120811,
+          120812,
+          120813,
+          121324,
+          121325,
+          121326,
+          121836,
+          121837,
+          121838,
+          122349,
+          122350,
+          122351,
+          122861,
+          122862,
+          122863,
+          123374,
+          123375,
+          123376,
+          123886,
+          123887,
+          123888,
+          124399,
+          124400,
+          124401,
+          124911,
+          124912,
+          124913,
+          125424,
+          125425,
+          125426,
+          125936,
+          125937,
+          125938,
+          126449,
+          126450,
+          126451,
+          126961,
+          126962,
+          126963,
+          127474,
+          127475,
+          127476,
+          127986,
+          127987,
+          127988,
+          128499,
+          128500,
+          128501,
+          128502,
+          129011,
+          129012,
+          129013,
+          129014,
+          129523,
+          129524,
+          129525,
+          129526,
+          129527,
+          130035,
+          130036,
+          130037,
+          130038,
+          130548,
+          130549,
+          130550
+        ],
+        "before": {
+          "generationMs": 0,
+          "commandMs": 0,
+          "aiMs": 0,
+          "transferBytes": 1835894,
+          "totalTransferBytes": 1835894,
+          "cellTransferBytes": 72017,
+          "landQueryCount": 0,
+          "landQueryBytes": 0,
+          "totalLandQueryBytes": 0,
+          "developmentQueryCount": 0,
+          "developmentQueryBytes": 0,
+          "totalDevelopmentQueryBytes": 0,
+          "renderer": "webgl",
+          "frameCount": 25,
+          "frameMs": 16.699999999999818,
+          "frameP95Ms": 66.60000000000014,
+          "renderCpuMs": 0.20000000298023224,
+          "visibleCells": 104,
+          "visibleChunks": 4,
+          "cachedChunks": 4,
+          "chunkRebuilds": 8,
+          "visibleEntities": 48,
+          "zoom": 1,
+          "highlightedCells": 9,
+          "routeCells": 0,
+          "previewCells": 0,
+          "atlasPages": 2,
+          "residentAtlasBytesEstimate": 17825792,
+          "artLoadMs": 263.1000000014901,
+          "artFirstRenderCpuMs": 50,
+          "visibleSprites": 2,
+          "terrainSpriteCells": 104,
+          "pooledSprites": 114,
+          "stackBadges": 1,
+          "pooledStackBadges": 1,
+          "territoryEdges": 85,
+          "improvementProps": 0,
+          "riverSegments": 0,
+          "roadSegments": 0,
+          "districtStreetSegments": 12,
+          "overview": false,
+          "overviewTextureBytes": 0,
+          "rangePerimeterEdges": 28,
+          "visibleLabels": 1,
+          "selectedCells": 1,
+          "hoveredCells": 0,
+          "maxCachedChunkWidth": 486,
+          "maxCachedChunkHeight": 715,
+          "cachedTextureBytesEstimate": 3801088
+        },
+        "selected": {
+          "generationMs": 0,
+          "commandMs": 0,
+          "aiMs": 0,
+          "transferBytes": 1835894,
+          "totalTransferBytes": 1933596,
+          "cellTransferBytes": 72017,
+          "landQueryCount": 1,
+          "landQueryBytes": 97702,
+          "totalLandQueryBytes": 97702,
+          "developmentQueryCount": 0,
+          "developmentQueryBytes": 0,
+          "totalDevelopmentQueryBytes": 0,
+          "renderer": "webgl",
+          "frameCount": 62,
+          "frameMs": 16.699999999999818,
+          "frameP95Ms": 33.30000000000018,
+          "renderCpuMs": 0.09999999776482582,
+          "visibleCells": 65,
+          "visibleChunks": 3,
+          "cachedChunks": 7,
+          "chunkRebuilds": 11,
+          "visibleEntities": 47,
+          "zoom": 1,
+          "highlightedCells": 0,
+          "routeCells": 0,
+          "previewCells": 0,
+          "atlasPages": 2,
+          "residentAtlasBytesEstimate": 17825792,
+          "artLoadMs": 263.1000000014901,
+          "artFirstRenderCpuMs": 50,
+          "visibleSprites": 2,
+          "terrainSpriteCells": 65,
+          "pooledSprites": 189,
+          "stackBadges": 1,
+          "pooledStackBadges": 1,
+          "territoryEdges": 61,
+          "improvementProps": 0,
+          "riverSegments": 0,
+          "roadSegments": 0,
+          "districtStreetSegments": 12,
+          "overview": false,
+          "overviewTextureBytes": 0,
+          "rangePerimeterEdges": 0,
+          "visibleLabels": 1,
+          "selectedCells": 1,
+          "hoveredCells": 0,
+          "maxCachedChunkWidth": 486,
+          "maxCachedChunkHeight": 715,
+          "cachedTextureBytesEstimate": 6160384
+        },
+        "after": {
+          "generationMs": 0,
+          "commandMs": 0,
+          "aiMs": 0,
+          "transferBytes": 1835894,
+          "totalTransferBytes": 3284546,
+          "cellTransferBytes": 72017,
+          "landQueryCount": 9,
+          "landQueryBytes": 97702,
+          "totalLandQueryBytes": 1448652,
+          "developmentQueryCount": 0,
+          "developmentQueryBytes": 0,
+          "totalDevelopmentQueryBytes": 0,
+          "renderer": "webgl",
+          "frameCount": 232,
+          "frameMs": 16.699999999999818,
+          "frameP95Ms": 16.800000000000182,
+          "renderCpuMs": 0.09999999776482582,
+          "visibleCells": 65,
+          "visibleChunks": 3,
+          "cachedChunks": 10,
+          "chunkRebuilds": 14,
+          "visibleEntities": 47,
+          "zoom": 1,
+          "highlightedCells": 0,
+          "routeCells": 0,
+          "previewCells": 0,
+          "atlasPages": 2,
+          "residentAtlasBytesEstimate": 17825792,
+          "artLoadMs": 263.1000000014901,
+          "artFirstRenderCpuMs": 50,
+          "visibleSprites": 2,
+          "terrainSpriteCells": 65,
+          "pooledSprites": 250,
+          "stackBadges": 1,
+          "pooledStackBadges": 1,
+          "territoryEdges": 61,
+          "improvementProps": 0,
+          "riverSegments": 0,
+          "roadSegments": 0,
+          "districtStreetSegments": 12,
+          "overview": false,
+          "overviewTextureBytes": 0,
+          "rangePerimeterEdges": 0,
+          "visibleLabels": 1,
+          "selectedCells": 1,
+          "hoveredCells": 0,
+          "maxCachedChunkWidth": 536,
+          "maxCachedChunkHeight": 715,
+          "cachedTextureBytesEstimate": 10616832
+        },
+        "samples": [
+          {
+            "offset": 96,
+            "count": 13,
+            "bytes": 97702
+          },
+          {
+            "offset": 72,
+            "count": 24,
+            "bytes": 179363
+          },
+          {
+            "offset": 48,
+            "count": 24,
+            "bytes": 178875
+          },
+          {
+            "offset": 24,
+            "count": 24,
+            "bytes": 179053
+          },
+          {
+            "offset": 0,
+            "count": 24,
+            "bytes": 178666
+          },
+          {
+            "offset": 24,
+            "count": 24,
+            "bytes": 179053
+          },
+          {
+            "offset": 48,
+            "count": 24,
+            "bytes": 178875
+          },
+          {
+            "offset": 72,
+            "count": 24,
+            "bytes": 179363
+          },
+          {
+            "offset": 96,
+            "count": 13,
+            "bytes": 97702
+          }
+        ]
+      }
+    }
+  ]
+}

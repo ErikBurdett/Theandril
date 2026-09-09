@@ -1,0 +1,12 @@
+/home/telephoneheater/Work/Theandril/packages/persistence/src/campaign-storage.ts:67
+function fail(message: string): never { throw new Error('Campaign storage: ' + message); }
+                                              ^
+
+Error: Campaign storage: Save exceeds the 64 MiB limit.
+    at fail (/home/telephoneheater/Work/Theandril/packages/persistence/src/campaign-storage.ts:67:47)
+    at encodeSuffix (/home/telephoneheater/Work/Theandril/packages/persistence/src/campaign-storage.ts:114:39)
+    at async <anonymous> (/home/telephoneheater/Work/Theandril/packages/persistence/src/campaign-storage.ts:190:22)
+    at async SaveStore.saveCampaign (/home/telephoneheater/Work/Theandril/packages/persistence/src/index.ts:54:98)
+    at async <anonymous> (/home/telephoneheater/Work/Theandril/docs/development/hermes-archive/retained-case.ts:24:3)
+
+Node.js v26.7.0

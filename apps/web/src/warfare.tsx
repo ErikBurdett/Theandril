@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { UNITS } from '@theandril/content';
 import { neighbors } from '@theandril/mapgen';
 import type { ArmyView, BattleReport, BattleState, GameCommand, Observation } from '@theandril/sim';
+import { BattleDefensePreview } from './battle-defense';
 
 type IssueOrder = (command: GameCommand) => void;
 const terrainNames = ['Water', 'Plains', 'Forest', 'Hills', 'Mountains'];
@@ -21,11 +22,12 @@ export function AttackOrders({ army, view, busy, issue, terrain }: { army: ArmyV
       <small>{factionName(view, target.factionId)} · hex {target.cell}</small>
       <p>{target.strength} strength · {target.morale} morale · {target.fatigue} fatigue</p>
       <p>{terrainNames[terrain(target.cell) ?? -1] ?? 'Unknown terrain'} · {view.armies.filter(other => other.cell === target.cell && other.factionId === target.factionId).reduce((sum, other) => sum + other.formations.length, 0)} defending formations</p>
+      <BattleDefensePreview defense={target.battleDefense}/>
       {view.wars.includes(target.factionId)
         ? <button className="danger wide" disabled={busy || Boolean(view.battle)} data-testid={`attack-${target.id}`} aria-label={`Attack ${target.name} (${target.id})`} onClick={() => issue({ type: 'attack', factionId: view.factionId, armyId: army.id, targetArmyId: target.id })}>Attack {target.name}</button>
         : <p className="field-help">Declare war from the encountered factions list before attacking.</p>}
     </div>)}
-    {targets.length > 0 && <p className="field-help">The battle includes every defending {army.domain === 'naval' ? 'naval' : 'land'} formation at that hex. {army.domain === 'naval' ? 'Passengers do not fight as ship formations; destroyed transport capacity can drown them.' : 'Forests provide cover and hills favor defenders.'} Command each round or let your officers resolve the engagement.</p>}
+    {targets.length > 0 && <p className="field-help">{targets.some(target => target.battleDefense) ? 'Committed defenders and reserves are listed for each target.' : `The battle includes every defending ${army.domain === 'naval' ? 'naval' : 'land'} formation at that hex.`} {army.domain === 'naval' ? 'Passengers do not fight as ship formations; destroyed transport capacity can drown them.' : 'Forests provide cover and hills favor defenders.'} Command each round or let your officers resolve the engagement.</p>}
   </section>;
 }
 

@@ -1,0 +1,55 @@
+
+> @theandril/web@0.1.0 build /home/telephoneheater/Work/Theandril/apps/web
+> vite build --outDir /tmp/theandril-hermes-ui-production-green
+
+vite v7.3.6 building client environment for production...
+../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js (70:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js (330:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+transforming...
+../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js (70:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js (330:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 940 modules transformed.
+
+(!) outDir /tmp/theandril-hermes-ui-production-green is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+../../../../../../tmp/theandril-hermes-ui-production-green/index.html                               0.58 kB │ gzip:   0.36 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/simulation.worker-D6potGwW.js   673.97 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/index-DgCC7zpt.css              103.73 kB │ gzip:  20.45 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/Filter-36MvoHgK.js                0.90 kB │ gzip:   0.48 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/BufferResource-DK5tFtml.js       11.12 kB │ gzip:   2.85 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/webworkerAll-CLMXRcED.js         15.42 kB │ gzip:   4.87 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/CanvasRenderer-KbjLFd9Z.js       17.79 kB │ gzip:   5.96 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/browserAll-ClK1foul.js           43.09 kB │ gzip:  11.29 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/WebGPURenderer-BBNgTmmq.js       45.99 kB │ gzip:  13.21 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/RenderTargetSystem-Bv2s76ro.js   52.14 kB │ gzip:  14.38 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/WebGLRenderer-CA1bw8Fg.js        72.09 kB │ gzip:  19.63 kB
+../../../../../../tmp/theandril-hermes-ui-production-green/assets/index-CgeAhh80.js               997.34 kB │ gzip: 304.49 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.82s

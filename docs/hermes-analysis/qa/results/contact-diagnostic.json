@@ -1,0 +1,12 @@
+{
+  "name": "contact-diagnostic",
+  "command": "pnpm exec tsx scripts/benchmark-contact.ts --seed=748291 --size=standard --factions=4 --pace=long --turns=150 --max-ms=120000",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:12:46.466618+00:00",
+  "durationSeconds": 16.776586532592773,
+  "exitCode": 0,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/contact-diagnostic.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 417536,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}

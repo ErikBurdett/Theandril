@@ -1,0 +1,25 @@
+
+Running 7 tests using 1 worker
+
+(node:350086) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"stage":"generated-small12","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-1","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-2","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-3","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-4","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-1-small","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-2-tiny","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-3-small","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-4-tiny","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"failed-import","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"after-battle","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✓  1 tests/gameplay/hermes-ui-slices.spec.ts:22:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas (9.8s)
+  ✓  2 tests/gameplay/hermes-ui-slices.spec.ts:116:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact (3.0s)
+  ✓  3 tests/gameplay/hermes-ui-slices.spec.ts:116:3 › R18 paid Waykeeper resolves shared art for faction.reedbound_council (3.0s)
+  ✓  4 tests/gameplay/household-attention.spec.ts:15:1 › R07 growing queued hearth exposes exact labor attention and preserves manual assignments until a real order (2.3s)
+  ✓  5 tests/gameplay/household-attention.spec.ts:53:3 › R07 2-town labor exception opens the exact hearth in one activation at 390px (1.9s)
+  ✓  6 tests/gameplay/household-attention.spec.ts:53:3 › R07 10-town labor exception opens the exact hearth in one activation at 390px (2.1s)
+  ✓  7 tests/gameplay/household-attention.spec.ts:53:3 › R07 40-town labor exception opens the exact hearth in one activation at 390px (2.2s)
+
+  7 passed (25.1s)

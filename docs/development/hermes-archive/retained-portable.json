@@ -1,0 +1,32 @@
+{
+  "source": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/captured-standard-long-748291.json.gz",
+  "sha256": "56a81b5fbc91c0bea89b8cc5f78ace519d7fa0d6109545f7444af5dcce159780",
+  "phase": "portable",
+  "runtime": "v26.7.0",
+  "totalMs": 9290.447089,
+  "measurements": {
+    "serializeMs": 456.3456080000001,
+    "envelopeBytes": 93161744,
+    "exportMs": 3384.3686450000005,
+    "compressedBytes": 9087296,
+    "importAndValidateMs": 4785.605863,
+    "portableSha256": "e726e8575c9655b63266979d308d7b4c5b395653b6d06930a1c0ac14dd73b338",
+    "portablePath": "/home/telephoneheater/Work/Theandril/docs/development/hermes-archive/retained-standard-long-748291.theandril"
+  },
+  "records": 114244,
+  "battles": 1496,
+  "coverage": "complete",
+  "initialSaveVersion": 16,
+  "finalHashVersion": 16,
+  "hash16": "0f0b85f5",
+  "currentHash": "2142bf9e",
+  "memory": {
+    "rss": 1307303936,
+    "heapTotal": 1014640640,
+    "heapUsed": 891834936,
+    "external": 52250992,
+    "arrayBuffers": 49382005
+  },
+  "maxRssKiB": 1599868,
+  "scope": "Real retained campaign. Fake IndexedDB is algorithm/transaction evidence, NOT browser disk latency. Phase times exclude input gzip parse; peak process RSS includes it and ownership/validation clones. Separate processes, no forced GC; not a browser or sustained-memory certificate."
+}

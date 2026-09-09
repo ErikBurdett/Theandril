@@ -1,0 +1,69 @@
+{
+  "definitionId": "faction.ashen_compact",
+  "caster": {
+    "id": "character.10",
+    "factionId": "faction.ashen_compact",
+    "definitionId": "character.waykeeper",
+    "name": "Aven Ashwell",
+    "experience": 0,
+    "skillId": null,
+    "learnedSkillIds": [],
+    "woundedTurns": 0,
+    "dead": false,
+    "location": {
+      "kind": "settlement",
+      "settlementId": "settlement.5"
+    },
+    "mission": null,
+    "aptitudes": {
+      "path.flame": 1,
+      "path.rune": 1
+    },
+    "spellIds": [],
+    "role": "waykeeper",
+    "status": "ready",
+    "rank": 1,
+    "cell": 488,
+    "assignmentOptions": [
+      {
+        "armyId": "army.2",
+        "label": "Witness column",
+        "canAssign": true,
+        "blocker": null
+      },
+      {
+        "armyId": "army.9",
+        "label": "Reserve escort",
+        "canAssign": true,
+        "blocker": null
+      }
+    ],
+    "unassignmentOptions": [
+      {
+        "settlementId": "settlement.5",
+        "label": "Ashen Hearth",
+        "canUnassign": false,
+        "blocker": "This character is not attached to an army."
+      }
+    ],
+    "missions": [],
+    "promotions": []
+  },
+  "paidCoin": 40,
+  "atlas": {
+    "id": "battle",
+    "imageUrl": "/art/battle.png",
+    "jsonUrl": "/art/battle.json",
+    "width": 1024,
+    "height": 1024,
+    "sha256": "6e7cbcc86537efea76ba24e4cad54858b5e77bbbf46f2c87ceb7cd9e9addea7b"
+  },
+  "requests": [
+    "/art/foundation.png",
+    "/art/foundation.png",
+    "/art/map-works.png",
+    "/art/battle.png"
+  ],
+  "consoleMessages": [],
+  "errors": []
+}

@@ -21,9 +21,11 @@ member identity; a naval formation represents one hull with strength as durabili
 Passengers are not fighting participants. Forward/lateral position and cohesion
 are canonical too, and orders change them through the shared round kernel.
 
-Campaign and battle versions differ. Campaign 16 selects battle 10; preserve frozen
-battle versions 5–9, including the earlier three-rank/twelve-formation limit before
-battle 8. Do not regenerate old battles or insert individual state into them.
+Campaign and battle versions differ. Campaign 17 still selects battle 10; preserve
+explicit campaign-16 execution and frozen tactical versions 5–9, including the
+earlier three-rank/twelve-formation limit before battle 8. Do not regenerate old
+battles or insert individual state into them. Read `docs/architecture/0037-campaign-safety.md`
+for current morale and whole-army frontage boundaries.
 
 `combat/individual.ts` emits actual source, target and killed soldier identities.
 Spell and pursuit losses must reconcile the same members, including a destroyed
@@ -53,6 +55,21 @@ positions and development snapshot arrays in both scene and observation selector
 - ranged pressure;
 - flank/exposure;
 - retreat route.
+
+## Campaign boundary invariants
+
+Remove the training bonus actually granted at deployment from persistent survivor
+morale, accounting for the tactical cap and using the battle snapshot rather than
+a later company build. Subtracting the uncapped nominal bonus invents morale loss
+when a trained company entered at the tactical maximum. Test immediate aftermath and repeated
+same-turn fights: an end-turn refresh can hide an unloadable intermediate state.
+Retain old-rule hashes separately from current safe continuation.
+
+Do not equate a tactical participant limit with strategic stack immunity. Current
+whole-army contingents leave reserves untouched on the map; do not award their
+experience, change their officers/cargo, advance through them or offer a settlement
+capture until they are defeated. UI and AI consume the canonical frontage preview.
+Test 20/21/larger field, garrison and naval cases, including a saved pending battle.
 
 ## Strategic consequences
 

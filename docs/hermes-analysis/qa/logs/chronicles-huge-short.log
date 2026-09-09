@@ -1,0 +1,57 @@
+COMMAND: pnpm exec tsx scripts/benchmark-chronicle.ts --size=huge --pace=short --factions=32 --limit=150
+START: 2026-09-09T05:20:24.349728+00:00
+{
+  "runtime": "v26.7.0",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "note": "Generated starts, every faction controlled by real AI, complete command/event/battle archives, true Prosperity victory. Short32/40faction scale runs are distinct from Standard/Epic4faction duration runs. Round time includes end-turn archive hashes but excludes disk saves, compression, rendering and final log generation. Complete replay and envelope restore verified.",
+  "measurements": [
+    {
+      "seed": 20260905,
+      "size": "huge",
+      "pace": "short",
+      "factions": 32,
+      "victory": {
+        "path": "prosperity",
+        "factionId": "faction.cistern_assembly",
+        "projectId": "project.632",
+        "settlementId": "settlement.304",
+        "turn": 42
+      },
+      "turns": 41,
+      "orders": 5008,
+      "events": 13873,
+      "battleReportsArchived": 1,
+      "rejected": 0,
+      "totalMs": 5652.56159,
+      "aiMs": 1316.1017379999898,
+      "observationMs": 1461.748184000001,
+      "commandAndArchiveMs": 2869.743021999987,
+      "winnerSettlements": 3,
+      "livingCharacters": 85,
+      "retainedMemorials": 0,
+      "characterActivity": {
+        "character_recruited": 85,
+        "character_assigned": 81,
+        "character_mission_started": 128,
+        "character_mission_progress": 128,
+        "character_mission_completed": 125,
+        "character_promoted": 22
+      },
+      "conquestNotifications": 0,
+      "averageRoundWithArchiveMs": 137.86735585365855,
+      "saveMs": 82.43370199999936,
+      "loadMs": 1086.1448279999995,
+      "exportMs": 1124.718381999999,
+      "importMs": 1262.3683700000001,
+      "compressedBytes": 530214,
+      "logMs": 443.12131899999986,
+      "replayMs": 3726.992791999999,
+      "saveBytes": 8202565,
+      "technicalBytes": 18188007,
+      "historyBytes": 314571,
+      "chapters": 44,
+      "hash": "c61cec40",
+      "heapMiB": 279
+    }
+  ]
+}

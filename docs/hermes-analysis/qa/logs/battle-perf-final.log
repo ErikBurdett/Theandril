@@ -1,0 +1,14 @@
+COMMAND: pnpm exec playwright test --config docs/hermes-analysis/qa/perf.config.ts tests/gameplay/battle-performance.spec.ts --workers=1
+START: 2026-09-09T05:34:20.047687+00:00
+
+Running 1 test using 1 worker
+
+(node:256781) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX
+tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX
+BATTLE_RENDER {"originHash":"3a741d8a","commandHash":"77f3692a","frameMs":{"p50":50,"p95":66.69999999999891,"max":66.70000000000073},"maxActors":46,"maxEffects":12,"atlasBytes":55574528}
+
+  1 passed (22.4s)

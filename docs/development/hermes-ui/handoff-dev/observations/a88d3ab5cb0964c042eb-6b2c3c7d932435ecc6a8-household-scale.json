@@ -1,0 +1,39 @@
+{
+  "count": 2,
+  "target": "settlement.6",
+  "locateActivations": 1,
+  "beforeHash": "94973338",
+  "before": [
+    {
+      "settlementId": "settlement.5",
+      "workerCapacity": 1,
+      "worked": [
+        16922
+      ]
+    },
+    {
+      "settlementId": "settlement.6",
+      "workerCapacity": 2,
+      "worked": [
+        19621
+      ]
+    }
+  ],
+  "after": [
+    {
+      "settlementId": "settlement.5",
+      "workerCapacity": 1,
+      "worked": [
+        16922
+      ]
+    },
+    {
+      "settlementId": "settlement.6",
+      "workerCapacity": 2,
+      "worked": [
+        19621,
+        19622
+      ]
+    }
+  ]
+}

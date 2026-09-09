@@ -1,0 +1,49 @@
+
+Running 1 test using 1 worker
+
+(node:337893) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/household-attention.spec.ts:53:3 › R07 2-town labor exception opens the exact hearth in one activation at 390px (6.8s)
+
+
+  1) tests/gameplay/household-attention.spec.ts:53:3 › R07 2-town labor exception opens the exact hearth in one activation at 390px 
+
+    Error: expect(locator).toBeInViewport() failed
+
+    Locator:  getByTestId('map-actions').getByRole('heading', { name: 'Land & stewardship', exact: true })
+    Expected: in viewport
+    Received: viewport ratio 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeInViewport" getByTestId('map-actions').getByRole('heading', { name: 'Land & stewardship', exact: true }) with timeout 5000ms
+      - waiting for getByTestId('map-actions').getByRole('heading', { name: 'Land & stewardship', exact: true })
+        13 × locator resolved to <h3>Land & stewardship</h3>
+           - unexpected value "viewport ratio 0"
+
+
+      68 |     expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(before.hash);
+      69 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    > 70 |     await expect(popup.getByRole('heading', { name: 'Land & stewardship', exact: true })).toBeInViewport();
+         |                                                                                           ^
+      71 |     await popup.screenshot({ path: info.outputPath('household-review-390.png') });
+      72 |     await popup.getByRole('button', { name: 'Select tiles', exact: true }).click();
+      73 |     await popup.locator('.land-tile-list button').filter({ hasText: /Owned/ }).first().click();
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/household-attention.spec.ts:70:91
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r07-narrow-red/household-attention-R07-2--a96f3--in-one-activation-at-390px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/hermes-ui/r07-narrow-red/household-attention-R07-2--a96f3--in-one-activation-at-390px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/hermes-ui/r07-narrow-red/household-attention-R07-2--a96f3--in-one-activation-at-390px/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/hermes-ui/r07-narrow-red/household-attention-R07-2--a96f3--in-one-activation-at-390px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/household-attention.spec.ts:53:3 › R07 2-town labor exception opens the exact hearth in one activation at 390px 

@@ -1,0 +1,77 @@
+{
+  "scope": "Parent UI/development and actual built-bundle checks; not overall release acceptance. Direct AI/contact suites and blocked probes were NOT executed.",
+  "ui": {
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "sourceFilesVerified": 17,
+    "evidence": "docs/development/ui-followup/parent-check-1/parent-summary.json"
+  },
+  "production": {
+    "exitCode": 0,
+    "stats": {
+      "startTime": "2026-09-09T10:12:54.154Z",
+      "duration": 11996.71,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks",
+        "status": "expected"
+      },
+      {
+        "title": "built game loads verified map art, UI materials and its real worker inside the configured deployment base",
+        "status": "expected"
+      },
+      {
+        "title": "built map actions preserve paid production, land work and resources through a real save/load without development hooks",
+        "status": "expected"
+      },
+      {
+        "title": "production exposes the watch-only fog command without development hooks",
+        "status": "expected"
+      }
+    ],
+    "evidence": "docs/development/ui-review-current/parent-production.json"
+  },
+  "staticStages": [
+    {
+      "stage": "typecheck",
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/development/ui-review-current/parent-typecheck.log"
+    },
+    {
+      "stage": "lint",
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/development/ui-review-current/parent-lint.log"
+    },
+    {
+      "stage": "content",
+      "command": "pnpm content:validate",
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/development/ui-review-current/parent-content.log"
+    },
+    {
+      "stage": "build",
+      "command": "pnpm build",
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/development/ui-review-current/parent-build.log"
+    }
+  ],
+  "uiSourceChanges": [],
+  "buildWarnings": [
+    "Existing Zod annotation warnings",
+    "Main/worker chunks exceed the bundler size warning threshold; no warning limit changed"
+  ],
+  "reviewStatus": "Independent UI-only review dispatched separately; pending result. Backend/persistence and authorization-blocked AI issues are not waived."
+}

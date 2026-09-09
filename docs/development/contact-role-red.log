@@ -1,0 +1,34 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/ai/src/contact-reconnaissance.test.ts > sparse reconnaissance uses a public inward discovery bearing (naval: false) 36ms
+ × packages/ai/src/contact-reconnaissance.test.ts > sparse reconnaissance uses a public inward discovery bearing (naval: true) 44ms
+   → expected 78 to be 74 // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ai/src/contact-reconnaissance.test.ts > sparse reconnaissance uses a public inward discovery bearing (naval: true)
+AssertionError: expected 78 to be 74 // Object.is equality
+
+- Expected
++ Received
+
+- 74
++ 78
+
+ ❯ packages/ai/src/contact-reconnaissance.test.ts:34:56
+     32|   const mostDiscovery = Math.max(...reachable.map(item => navigation.i…
+     33|   const inwardDiscovery = Math.min(...reachable.filter(item => navigat…
+     34|   expect(hexDistance(move.target, center, view.width)).toBe(inwardDisc…
+       |                                                        ^
+     35|   expect(navigation.informationGain(move.target, army.sight)).toBeGrea…
+     36|   expect(getMovementQuery(view, army.id, move.target).preview).toMatch…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  02:06:18
+   Duration  745ms (transform 427ms, setup 0ms, import 557ms, tests 81ms, environment 0ms)
+

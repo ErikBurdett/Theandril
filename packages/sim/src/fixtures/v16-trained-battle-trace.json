@@ -1,0 +1,85 @@
+{
+  "source": "docs/hermes-analysis/qa/pre-first-battle.json.gz",
+  "baseline": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+  "sha256": "9820123d2753b5fe9d345a0e04dd21c2865d92b19c4850a9635944ba1c7677fb",
+  "bytes": 31908,
+  "initialHash": "602413fe",
+  "records": [
+    {
+      "command": {
+        "type": "attack",
+        "factionId": "faction.reedbound_council",
+        "armyId": "army.478",
+        "targetArmyId": "army.8"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 236,
+            "factionId": "faction.reedbound_council",
+            "type": "battle_started",
+            "cell": 945,
+            "message": "Charter outriders engaged Wayfinder at hex 945."
+          },
+          {
+            "turn": 236,
+            "factionId": "faction.glass_tide",
+            "type": "battle_started",
+            "cell": 945,
+            "message": "Charter outriders engaged Wayfinder at hex 945."
+          }
+        ]
+      },
+      "hash": "289c01b6"
+    },
+    {
+      "command": {
+        "type": "autoResolveBattle",
+        "factionId": "faction.reedbound_council"
+      },
+      "result": {
+        "ok": true,
+        "events": [
+          {
+            "turn": 236,
+            "type": "army_retreated",
+            "factionId": "faction.glass_tide",
+            "cell": 897,
+            "message": "Wayfinder retreated to hex 897 with 3 strength."
+          },
+          {
+            "turn": 236,
+            "factionId": "faction.reedbound_council",
+            "type": "formation_experience",
+            "cell": 945,
+            "message": "Charter outriders earned 3 battle experience across its surviving fighting formations."
+          },
+          {
+            "turn": 236,
+            "factionId": "faction.glass_tide",
+            "type": "formation_experience",
+            "cell": 897,
+            "message": "Wayfinder earned 1 battle experience across its surviving fighting formations."
+          },
+          {
+            "turn": 236,
+            "type": "battle_finished",
+            "factionId": "faction.reedbound_council",
+            "cell": 945,
+            "message": "Reedbound Council prevailed at hex 945: ordered withdrawal."
+          },
+          {
+            "turn": 236,
+            "type": "battle_finished",
+            "factionId": "faction.glass_tide",
+            "cell": 945,
+            "message": "Reedbound Council prevailed at hex 945: ordered withdrawal."
+          }
+        ]
+      },
+      "hash": "58a2012d"
+    }
+  ],
+  "finalSaveError": "Invalid save: invalid formation definition, morale or strength"
+}

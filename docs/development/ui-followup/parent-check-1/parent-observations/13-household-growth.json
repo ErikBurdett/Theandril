@@ -1,0 +1,87 @@
+{
+  "before": {
+    "hash": "1fa7ba1e",
+    "land": {
+      "settlementId": "settlement.5",
+      "stage": "colony",
+      "isCapital": true,
+      "claimRadius": 2,
+      "claimCapacity": null,
+      "workerCapacity": 2,
+      "claimed": [
+        704,
+        705,
+        751,
+        752,
+        753,
+        800,
+        801
+      ],
+      "worked": [
+        704
+      ],
+      "work": null,
+      "workPaused": null,
+      "yields": {
+        "food": 5,
+        "industry": 1,
+        "coin": 2,
+        "knowledge": 2
+      },
+      "cells": [],
+      "capitalOption": {
+        "coinCost": 60,
+        "turns": 0,
+        "canStart": false,
+        "blocker": "This settlement is already the capital.",
+        "effectText": "Move the capital here. Its center gains 1 coin and 1 knowledge per turn before settlement penalties."
+      },
+      "canCancelWork": false,
+      "cancelBlocker": "This settlement has no land-work order.",
+      "borderExpansion": {
+        "progress": 1,
+        "threshold": 40,
+        "rate": 1,
+        "nextCell": 655,
+        "blocker": null
+      }
+    },
+    "treasury": 29,
+    "town": {
+      "id": "settlement.5",
+      "factionId": "faction.ashen_compact",
+      "name": "Growing hearth",
+      "cell": 752,
+      "population": 2,
+      "food": 11,
+      "buildings": [],
+      "queue": [
+        {
+          "itemId": "unit.guard",
+          "progress": 7
+        },
+        {
+          "itemId": "unit.guard",
+          "progress": 0
+        },
+        {
+          "itemId": "unit.guard",
+          "progress": 0
+        }
+      ],
+      "founderFactionId": "faction.ashen_compact",
+      "devastation": 0,
+      "occupationTurns": 0
+    },
+    "routes": []
+  },
+  "cell": 705,
+  "after": {
+    "worked": [
+      704,
+      705
+    ],
+    "treasury": 29,
+    "routes": []
+  }
+}

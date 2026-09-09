@@ -1,0 +1,12 @@
+{
+  "name": "capture-tiny-standard",
+  "command": "pnpm exec tsx docs/hermes-analysis/qa/chronicle-capture.ts --size=tiny --pace=standard --factions=4 --limit=500",
+  "cwd": "/home/telephoneheater/Work/Theandril",
+  "startedAt": "2026-09-09T05:22:47.204915+00:00",
+  "durationSeconds": 5.116702318191528,
+  "exitCode": 1,
+  "log": "/home/telephoneheater/Work/Theandril/docs/hermes-analysis/qa/logs/capture-tiny-standard.log",
+  "browserExecutable": "/usr/bin/chromium",
+  "maxChildrenRssKiB": 406596,
+  "note": "Concurrent parent/campaign tasks may affect timings. NODE_OPTIONS redirects legacy docs/performance writes into the owned QA directory; assertions/runtime unchanged."
+}
