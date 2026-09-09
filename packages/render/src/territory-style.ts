@@ -42,6 +42,9 @@ export function dirtyTerritoryChunks(cell: number, width: number, height: number
 export const IMPROVEMENT_GLYPHS: Readonly<Record<string, string>> = {
   'improvement.terraced_fields': 'fields', 'improvement.managed_woodlot': 'woodlot',
   'improvement.quarry': 'quarry', 'improvement.reedworks': 'reeds', 'improvement.shore_fishery': 'fishery',
+  'improvement.grange': 'fields', 'improvement.iron_mine': 'quarry', 'improvement.copper_mine': 'quarry',
+  'improvement.silver_mine': 'quarry', 'improvement.timber_yard': 'woodlot',
+  'improvement.salt_house': 'polder', 'improvement.glass_refinery': 'oreworks',
   ...PROCEDURAL_IMPROVEMENT_GLYPHS,
 };
 export function settlementArtRole(population: number): string {

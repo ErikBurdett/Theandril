@@ -23,7 +23,7 @@ async function war(page: Page) {
 async function ready(page: Page) {
   await expect(page.getByTestId('battle-panel')).toBeVisible();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getBattleDiagnostics()?.active)).toBe(true);
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.atlasPages)).toBe(2);
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.atlasPages)).toBe(5);
 }
 async function settings(page: Page) {
   const menu = page.getByTestId('campaign-menu');
@@ -58,7 +58,8 @@ async function captureLiveCast(page: Page, info: TestInfo, effectId: string, cas
       const caster = scene.actors.find(item => item.id === casterId);
       if (effect) {
         effects.add(effect.frameId);
-        const target = scene.actors.find(item => item.id === effect.targetId)!.bounds!;
+        const member = scene.soldiers.find(item => item.id === effect.targetId);
+        const target = member ? { x: member.x - 32 * member.scale, y: member.y - 56 * member.scale, width: 64 * member.scale, height: 64 * member.scale } : scene.actors.find(item => item.id === effect.targetId)!.bounds!;
         const field = document.querySelector('[data-testid=map-container]')!.getBoundingClientRect();
         if (field.top + target.y < 0 || field.top + target.y + target.height > innerHeight) throw new Error('The actual cast target is offscreen before any test scrolling.');
         if (document.activeElement?.matches('[data-testid=map-container],canvas')) throw new Error('Revealing the cast stole keyboard focus.');
@@ -91,7 +92,7 @@ async function captureLiveCast(page: Page, info: TestInfo, effectId: string, cas
 test('battlefield pauses for orders, presents actual strikes and restores a saved round and map without replay mutations', async ({ page }, info) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await load(page, borderBattleCampaign());
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.atlasPages)).toBe(1);
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.atlasPages)).toBe(2);
   await war(page); await page.getByRole('button', { name: 'Attack Reedbound Watch (army.4)', exact: true }).click(); await ready(page);
   const initial = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), scene: window.__THEANDRIL__!.getBattleDiagnostics(), battle: window.__THEANDRIL__!.getSummary()!.battle! }));
   expect(initial.scene?.formations).toHaveLength(initial.battle.combat.attacker.length + initial.battle.combat.defender.length);
@@ -224,8 +225,10 @@ test('naval battlefield renders the actual hull formations and excludes embarked
   await war(page); await page.getByRole('button', { name: `Attack ${N.enemyFleetName} (${N.enemyFleetId})`, exact: true }).click(); await ready(page);
   const scene = await page.evaluate(() => window.__THEANDRIL__!.getBattleDiagnostics());
   expect(scene?.domain).toBe('naval'); expect(scene?.formations).toHaveLength(4);
-  expect(scene?.actors.filter(actor => actor.assetId?.startsWith('unit.transport.'))).toHaveLength(3);
-  expect(scene?.actors.some(actor => actor.assetId?.startsWith('unit.colonist.'))).toBe(false);
+  expect(scene?.soldiers.filter(actor => actor.assetId === 'battle.unit.transport')).toHaveLength(3);
+  expect(scene?.soldiers.some(actor => actor.assetId === 'battle.unit.colonist')).toBe(false);
+  expect(scene?.soldiers).toHaveLength(4);
+  expect(scene?.soldiers.every(actor => actor.hull && actor.frameId?.startsWith(actor.assetId))).toBe(true);
   await expectSeparatedFigures(page);
   await page.getByTestId('map-container').screenshot({ path: info.outputPath('naval-battlefield.png') });
   const navalHash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
@@ -247,7 +250,9 @@ test('naval battlefield renders the actual hull formations and excludes embarked
   await page.getByRole('button', { name: 'Return to campaign', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Watch battle', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Watch battle', exact: true }).click();
-  await expect(page.getByTestId('battle-replay')).toBeVisible();
+  // This authored modern hull fight takes eight actual rounds, including the
+  // watch scheduler between packets, rather than the old immediate hull result.
+  await expect(page.getByTestId('battle-replay')).toBeVisible({ timeout: 15000 });
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.battle)).toBeNull();
   const finished = await page.evaluate(() => ({ hash: window.__THEANDRIL__!.getStateHash(), scene: window.__THEANDRIL__!.getBattleDiagnostics() }));
   await info.attach('naval-battle-presentation.json', { body: JSON.stringify(finished, null, 2), contentType: 'application/json' });

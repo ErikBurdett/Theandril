@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "resource.timber",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "resource.timber"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A natural HEARTWOOD deposit: three mature thick gnarled dark-brown trunks bearing a compact connected canopy of deep sage and moss-green square-cluster leaves, exposed twisting roots. One tall and two shorter trees, visibly old valuable timber, joined compact ground. No buildings.",
+  "frames": [
+    {
+      "id": "resource.timber/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/resource.timber/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "498d0841ef2df308620bad6f8dbafb4a5e7ed8d68fa727fbeca1dd97a6cc2b5f",
+    "sourceRefs": [
+      "assets/art/source/resource-works/resource.timber-v1.png",
+      "assets/art/source/resource-works/resource.timber-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:33:15.861191Z",
+  "referenceHashes": [
+    "6c85cbf1b5f3d73a8c3dd9adc680a32cc4baf1d71576dd4beac7e356bb9391f4",
+    "64bd8b1ac38a361176c56670d0eabebd79fb458d8ae5df9f112a0a47823eb726"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "f194c4fca52866704205d966fe049574d6dbebb272832a5253c53908c466a0c2",
+      "inputHash": "6c85cbf1b5f3d73a8c3dd9adc680a32cc4baf1d71576dd4beac7e356bb9391f4",
+      "outputHash": "a644ab90360ca7e393f00a28d3554a213c1d35424b8f61b849548bf09d40429c"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

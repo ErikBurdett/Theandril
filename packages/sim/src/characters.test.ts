@@ -10,6 +10,8 @@ import type { Character, GameCommand, GameState } from './index';
 import { cellsWithin, rebuildIndexes } from './visibility';
 import { armyCommandCapacity, characterCell, characterLeadership, rebuildCharacterIndexes } from './characters';
 import { relocateArmy } from './warfare';
+import { createDevelopmentState } from './development';
+import { createResources } from './resources';
 
 const player = 'faction.ashen_compact';
 const rival = 'faction.reedbound_council';
@@ -389,9 +391,14 @@ describe('named campaign characters', () => {
     corrupt(data => { data.characters[0]!.location = { kind: 'army', armyId: 'army.missing' }; });
     corrupt(data => { data.characters[0]!.dead = true; });
     corrupt(data => { data.characters[0]!.skillId = 'skill.siegecraft'; });
-    state.world.generatorVersion = 2; // This authored fixture isolates the character boundary; real legacy origins are separately captured.
-    state.rosterVersion = 1;
-    expect(() => serializeGameForVersion(state, 6)).toThrow(/characters/); expect(() => applyCommandForVersion(state, { type: 'endTurn', factionId: player }, 6)).toThrow(/characters/);
+    // Explicitly isolate the character boundary from newer map/resource rules;
+    // the original modern campaign continues into the battle checks below.
+    const historical = deserializeGame(serializeGame(state));
+    historical.world.generatorVersion = 2;
+    historical.rosterVersion = 1;
+    historical.resources = createResources(historical.world, historical.factions.map(faction => faction.id), 0);
+    historical.development = createDevelopmentState();
+    expect(() => serializeGameForVersion(historical, 6)).toThrow(/characters/); expect(() => applyCommandForVersion(historical, { type: 'endTurn', factionId: player }, 6)).toThrow(/characters/);
     issue(state, { type: 'declareWar', factionId: player, targetFactionId: rival }); issue(state, { type: 'attack', factionId: player, armyId: 'army.2', targetArmyId: 'army.4' });
     corrupt(data => { data.battle!.characterSnapshots[0]!.leadership.attack++; });
     corrupt(data => { data.battle!.characterSnapshots = []; });

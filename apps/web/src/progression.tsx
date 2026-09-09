@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import type { GameCommand, Observation } from '@theandril/sim';
 import { ArcaneResearch } from './magic';
+import { QueriedDevelopmentPanel } from './development-panel';
+import { ResourcePanel } from './resource-panel';
+import type { DevelopmentQuery } from './use-development-query';
 import './progression.css';
 
-type ProgressionTab = 'technology' | 'arcane' | 'institutions' | 'doctrine' | 'prosperity';
+type ProgressionTab = 'technology' | 'arcane' | 'institutions' | 'doctrine' | 'prosperity' | 'development' | 'resources';
 const tabs: { id: ProgressionTab; label: string }[] = [
   { id: 'technology', label: 'Technology' }, { id: 'arcane', label: 'Arcane Theory' }, { id: 'institutions', label: 'Institutions' },
-  { id: 'doctrine', label: 'Military doctrine' }, { id: 'prosperity', label: 'Prosperity' },
+  { id: 'doctrine', label: 'Military doctrine' }, { id: 'development', label: 'Development' }, { id: 'resources', label: 'Resources' }, { id: 'prosperity', label: 'Prosperity' },
 ];
 type TechnologyChoice = Observation['progression']['technologyChoices'][number];
 const branchNames: Record<string, string> = { craft: 'Craft & construction', stewardship: 'Land stewardship', navigation: 'Navigation', civic: 'Civic knowledge' };
@@ -69,7 +72,7 @@ export function PublicProjects({ view, locate }: { view: Observation; locate: (c
   </article>)}<p className="field-help">Project locations and progress are public. The surrounding land remains hidden until explored. Besiege the host to halt progress; conquer it to cancel the project.</p></section>;
 }
 
-export function CampaignProgression({ view, busy, issue, locate, close }: { view: Observation; busy: boolean; issue: (command: GameCommand) => void; locate: (cell: number) => void; close: () => void }) {
+export function CampaignProgression({ view, busy, issue, locate, close, developmentQuery, stateHash = '', queryEpoch = 0, queryEnabled = true }: { view: Observation; busy: boolean; issue: (command: GameCommand) => void; locate: (cell: number) => void; close: () => void; developmentQuery?: DevelopmentQuery; stateHash?: string; queryEpoch?: number; queryEnabled?: boolean }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [tab, setTab] = useState<ProgressionTab>('technology');
   const [host, setHost] = useState('');
@@ -95,7 +98,7 @@ export function CampaignProgression({ view, busy, issue, locate, close }: { view
       if (event.key === 'End') { event.preventDefault(); selectTab('prosperity'); }
     }}>{tabs.map(item => <button role="tab" id={`progression-${item.id}-tab`} aria-controls="progression-panel" aria-selected={tab === item.id} tabIndex={tab === item.id ? 0 : -1} key={item.id} onClick={() => setTab(item.id)}>{item.label}</button>)}</div>
     <section className="progression-panel" role="tabpanel" id="progression-panel" aria-labelledby={`progression-${tab}-tab`}>
-      {tab === 'arcane' ? view.arcaneResearch?.choices.length ? <ArcaneResearch view={view} blocked={blocked} issue={issue}/> : <p>Arcane Theory is unavailable under this campaign’s historical rules.</p> : tab !== 'prosperity' ? <>
+      {tab === 'resources' ? <ResourcePanel view={view} busy={blocked} issue={issue}/> : tab === 'development' ? <QueriedDevelopmentPanel view={view} busy={blocked} issue={issue} query={developmentQuery} hash={stateHash} epoch={queryEpoch} enabled={queryEnabled}/> : tab === 'arcane' ? view.arcaneResearch?.choices.length ? <ArcaneResearch view={view} blocked={blocked} issue={issue}/> : <p>Arcane Theory is unavailable under this campaign’s historical rules.</p> : tab !== 'prosperity' ? <>
         <p className="progression-explanation">{tab === 'technology' ? 'Spend accumulated knowledge on permanent practical discoveries. Their effects add to the realm’s existing capabilities.' : tab === 'institutions' ? 'Choose how your society is organized. Adopt one institution with coin; this choice permanently excludes the other institution.' : 'Choose how your armies fight and march. Adopt one doctrine with coin; this choice permanently excludes the other doctrine.'}</p>
         {tab === 'technology' ? <ResearchTree view={view} blocked={blocked} issue={issue}/> : <div className="progression-choices">{choices.map(choice => <article className="progression-choice" key={choice.id} data-testid={`progression-${choice.id}`} tabIndex={-1} aria-label={`${choice.name} policy`} data-state={(tab === 'institutions' ? progression.institutionId === choice.id : progression.doctrineId === choice.id) ? 'adopted' : (tab === 'institutions' ? progression.institutionId : progression.doctrineId) ? 'excluded' : choice.available ? 'available' : 'locked'}>
           <h3>{choice.name}</h3><span className="research-node-status">{(tab === 'institutions' ? progression.institutionId === choice.id : progression.doctrineId === choice.id) ? '◆ Adopted' : (tab === 'institutions' ? progression.institutionId : progression.doctrineId) ? '⊘ Excluded' : choice.available ? '◇ Available' : '⊘ Locked'}</span><p>{choice.description}</p><span className="progression-cost">{choice.coinCost} coin</span>

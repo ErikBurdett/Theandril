@@ -1,7 +1,7 @@
 import { neighbors } from '@theandril/mapgen';
 import { armySight } from './army-composition';
 import type { GameState } from './types';
-import { observeLandCell } from './territory';
+import { observeLandCell, refreshLandKnowledge } from './territory';
 import { rulesVersion } from './rules';
 import { rememberRoadCell } from './roads';
 
@@ -55,6 +55,7 @@ export function rebuildIndexes(state: GameState): SpatialIndex {
   for (const settlement of Object.values(state.settlements)) {
     index.settlements.set(settlement.cell, settlement.id);
     changeSight(state, index, settlement.factionId, settlement.cell, 3, 1);
+    if (claimSightEnabled(state)) for (const cell of state.land.settlements[settlement.id]?.claimed ?? []) changeSight(state, index, settlement.factionId, cell, 1, 1);
   }
   cache.set(state, index);
   return index;
@@ -68,4 +69,21 @@ export function updateSight(state: GameState, factionId: string, cell: number, r
   changeSight(state, indexes(state), factionId, cell, radius, delta);
   if (delta > 0 && rulesVersion(state) >= 9) for (const seen of cellsWithin(state, cell, radius)) observeLandCell(state, factionId, seen, true);
   if (delta > 0 && rulesVersion(state) >= 12) for (const seen of cellsWithin(state, cell, radius)) rememberRoadCell(state, factionId, seen);
+}
+
+/** Migrated saves retain their original sight until a successful modern action. */
+export function claimSightEnabled(state: GameState): boolean {
+  return rulesVersion(state) >= 16 && state.land.visibilityVersion === 1;
+}
+
+/** Command-bound transition only. Loading and querying must never call this. */
+export function upgradeLandVisibility(state: GameState): void {
+  if (rulesVersion(state) < 16 || state.land.visibilityVersion === 1) return;
+  state.land.visibilityVersion = 1;
+  const index = rebuildIndexes(state);
+  for (const faction of state.factions) {
+    const visible = index.visible.get(faction.id)!;
+    refreshLandKnowledge(state, faction.id, visible);
+    for (const cell of visible.keys()) rememberRoadCell(state, faction.id, cell);
+  }
 }

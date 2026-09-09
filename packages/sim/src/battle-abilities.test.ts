@@ -32,7 +32,7 @@ function prepare() {
 function begin(game: GameState) {
   issue(game, { type: 'declareWar', factionId: owner, targetFactionId: enemy });
   issue(game, { type: 'attack', factionId: owner, armyId: 'army.2', targetArmyId: 'army.4' });
-  expect(game.battle?.rulesVersion).toBe(9);
+  expect(game.battle?.rulesVersion).toBe(10);
 }
 const use = (game: GameState, sourceId: string, abilityId: string, targetId?: string): GameCommand => ({ type: 'useBattleAbility', factionId: owner, battleId: game.battle!.id, sourceId, abilityId, ...(targetId ? { targetId } : {}) });
 

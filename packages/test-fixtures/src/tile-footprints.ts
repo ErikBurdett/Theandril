@@ -16,6 +16,7 @@ export function tileFootprintCampaign({ rememberForeignSite = false } = {}) {
   const game = createGame({ generatorVersion: 4, seed: 17, size: 'tiny', factionCount: 2, pace: 'epic' });
   const owner = game.turnOwnerId, foreign = game.factions[1]!.id, width = game.world.width;
   const center = 14 * width + 16, hiddenCell = 27 * width + 34;
+  game.resources.deposits = {}; // This fixture replaces the entire physical geography with resource-free authored land/water.
   game.world.terrain.fill(1); game.world.biome.fill(1); game.world.waterDepth.fill(0); game.world.fertility.fill(80);
   game.armies['army.1']!.cell = center;
   game.armies['army.2']!.cell = center - 4;
@@ -47,7 +48,9 @@ export function tileFootprintCampaign({ rememberForeignSite = false } = {}) {
     if (!game.land.settlements[capital.id]!.claimed.includes(cell)) order(game, { type: 'claimCell', factionId: owner, settlementId: capital.id, cell });
   }
   const paidWorks: { cell: number; improvementId: string; coinCost: number; completedTurn: number }[] = [];
-  IMPROVEMENTS.forEach((definition, i) => {
+  // Deposit extraction has its own paid resource fixture; these ten authored
+  // terrain/feature sites cover the general works only.
+  IMPROVEMENTS.filter(definition => !definition.requiredResourceId).forEach((definition, i) => {
     const before = game.factions[0]!.treasury;
     order(game, { type: 'improveTile', factionId: owner, settlementId: capital.id, cell: siteCells[i]!, improvementId: definition.id });
     const coinCost = before - game.factions[0]!.treasury;

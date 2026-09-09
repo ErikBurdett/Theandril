@@ -1,0 +1,896 @@
+{
+  "workload": "Synthetic fully explored Huge, 32 factions, 1,500 global armies, 32 towns; fog still limits currently visible entities. Static qualified faction poses at near zoom; co-located armies aggregate to heraldic badges at far zoom. No turn advancement or claims about late-game strategic load. Cache backing is separately estimated with power-of-two dimensions; returned texture-pool resources and other GPU allocations are not included.",
+  "homeCell": 50497,
+  "canvas": {
+    "x": 0,
+    "y": 110,
+    "width": 1440,
+    "height": 696
+  },
+  "mapAtlases": [
+    {
+      "id": "foundation",
+      "imageUrl": "/art/foundation.png",
+      "jsonUrl": "/art/foundation.json",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de"
+    }
+  ],
+  "expectedResidency": 16777216,
+  "cells": 196608,
+  "stateHash": "b14aa18a",
+  "samples": [
+    {
+      "stage": "fully-explored-static",
+      "metrics": {
+        "generationMs": 0,
+        "commandMs": 0,
+        "aiMs": 0,
+        "transferBytes": 1974826,
+        "totalTransferBytes": 1974826,
+        "cellTransferBytes": 1769695,
+        "landQueryCount": 0,
+        "landQueryBytes": 0,
+        "totalLandQueryBytes": 0,
+        "renderer": "webgl",
+        "frameCount": 137,
+        "frameMs": 16.599999999999454,
+        "frameP95Ms": 33.30000000000018,
+        "renderCpuMs": 0.10000002384185791,
+        "visibleCells": 1536,
+        "visibleChunks": 6,
+        "cachedChunks": 6,
+        "chunkRebuilds": 12,
+        "visibleEntities": 48,
+        "zoom": 1,
+        "highlightedCells": 9,
+        "routeCells": 0,
+        "previewCells": 0,
+        "atlasPages": 1,
+        "residentAtlasBytesEstimate": 16777216,
+        "artLoadMs": 364.10000002384186,
+        "artFirstRenderCpuMs": 63.89999997615814,
+        "visibleSprites": 2,
+        "terrainSpriteCells": 1536,
+        "pooledSprites": 1538,
+        "stackBadges": 1,
+        "pooledStackBadges": 1,
+        "territoryEdges": 18,
+        "improvementProps": 0,
+        "riverSegments": 0,
+        "roadSegments": 0,
+        "overview": false,
+        "overviewTextureBytes": 0,
+        "rangePerimeterEdges": 28,
+        "visibleLabels": 1,
+        "selectedCells": 1,
+        "hoveredCells": 0,
+        "maxCachedChunkWidth": 837,
+        "maxCachedChunkHeight": 711,
+        "cachedTextureBytesEstimate": 25165824
+      },
+      "art": {
+        "state": "ready",
+        "message": "Approved pixel atlases loaded.",
+        "atlasPages": 1,
+        "residentBytesEstimate": 16777216,
+        "downloadBytes": 4358650,
+        "loadMs": 364.10000002384186,
+        "warnings": [],
+        "visibleAssetIds": [
+          "settlement.village.ashen_compact",
+          "unit.guard.ashen_compact"
+        ],
+        "visibleEntityArt": [
+          {
+            "entityId": "settlement.65",
+            "factionId": "faction.ashen_compact",
+            "definitionId": "faction.ashen_compact",
+            "role": "settlement.village",
+            "assetId": "settlement.village.ashen_compact",
+            "presentation": "faction",
+            "nativeWidth": 96,
+            "nativeHeight": 96,
+            "tint": 16777215,
+            "formationCount": null,
+            "representativeCount": 1,
+            "stackArmyCount": 0,
+            "stackFormationCount": 0
+          },
+          {
+            "entityId": "army.1025",
+            "factionId": "faction.ashen_compact",
+            "definitionId": "faction.ashen_compact",
+            "role": "unit.guard",
+            "assetId": "unit.guard.ashen_compact",
+            "presentation": "faction",
+            "nativeWidth": 64,
+            "nativeHeight": 64,
+            "tint": 16777215,
+            "formationCount": 1,
+            "representativeCount": 1,
+            "stackArmyCount": 47,
+            "stackFormationCount": 47
+          }
+        ],
+        "visibleAnimationFrames": [],
+        "tileFootprints": [
+          {
+            "cell": 50497,
+            "contentId": "settlement.village",
+            "assetId": "settlement.village.ashen_compact",
+            "role": "village",
+            "presentation": "approved",
+            "bounds": {
+              "x": -19.17380243978747,
+              "y": -16.39714593306691,
+              "width": 36.97868884338938,
+              "height": 35.12975440121991
+            },
+            "scale": 0.4622336105423672,
+            "anchor": {
+              "x": -0.22222440755041362,
+              "y": 19.194842078695366
+            },
+            "alpha": 1,
+            "boundsKind": "opaque-union",
+            "canvasBounds": {
+              "x": -22.40943771358404,
+              "y": -17.78384676469401,
+              "width": 44.37442661206725,
+              "height": 44.37442661206725
+            },
+            "horizontalExtent": 19.17380243978747,
+            "diagonalExtent": 22.139999999999993
+          }
+        ],
+        "reducedMotion": false,
+        "visibleSprites": 2,
+        "terrainSpriteCells": 1536,
+        "overlays": {
+          "selectionBounds": {
+            "width": 0,
+            "height": 0
+          },
+          "selectedAsset": {
+            "entityId": "army.1025",
+            "factionId": "faction.ashen_compact",
+            "color": 13215339,
+            "mode": "silhouette",
+            "contours": 1,
+            "glints": 3,
+            "animated": true,
+            "contourAlpha": 0.45564242043783043,
+            "failed": false,
+            "cacheEntries": 1,
+            "textureBytes": 18496,
+            "bounds": {
+              "width": 38.56905994711451,
+              "height": 44.40625
+            },
+            "sourceFrames": [
+              {
+                "x": 1544,
+                "y": 1336,
+                "width": 64,
+                "height": 64
+              }
+            ]
+          },
+          "selectedEntityTileOutline": false,
+          "territoryMode": "realm-perimeter",
+          "ambientGrid": false,
+          "unselectedRings": false,
+          "labels": [
+            {
+              "id": "army.1025",
+              "cell": 50497,
+              "name": "Oath guard",
+              "settlement": false,
+              "own": true,
+              "hostile": false,
+              "stackArmyCount": 47,
+              "domain": "land",
+              "x": 736,
+              "y": 386,
+              "text": "◆ Oath guard · 47 armies",
+              "priority": 0,
+              "width": 133.16099548339844,
+              "height": 23
+            }
+          ],
+          "stackBadges": [
+            {
+              "cell": 50497,
+              "factionId": "faction.ashen_compact",
+              "entityId": "army.1025",
+              "domain": "land",
+              "armies": 47,
+              "text": "×47"
+            }
+          ],
+          "selectedCell": 50497,
+          "hoveredCell": null
+        },
+        "lod": "static-sprites",
+        "terrainPresentation": {
+          "nativeFootprint": [
+            56,
+            64
+          ],
+          "scaleX": 0.8969548824910257,
+          "scaleY": 0.90625,
+          "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+        }
+      }
+    },
+    {
+      "stage": "near-static-faction-poses",
+      "metrics": {
+        "generationMs": 0,
+        "commandMs": 0,
+        "aiMs": 0,
+        "transferBytes": 1974826,
+        "totalTransferBytes": 1974826,
+        "cellTransferBytes": 1769695,
+        "landQueryCount": 0,
+        "landQueryBytes": 0,
+        "totalLandQueryBytes": 0,
+        "renderer": "webgl",
+        "frameCount": 284,
+        "frameMs": 16.700000000000728,
+        "frameP95Ms": 16.800000000000182,
+        "renderCpuMs": 0.19999992847442627,
+        "visibleCells": 1024,
+        "visibleChunks": 4,
+        "cachedChunks": 6,
+        "chunkRebuilds": 12,
+        "visibleEntities": 48,
+        "zoom": 1.25,
+        "highlightedCells": 9,
+        "routeCells": 0,
+        "previewCells": 0,
+        "atlasPages": 1,
+        "residentAtlasBytesEstimate": 16777216,
+        "artLoadMs": 364.10000002384186,
+        "artFirstRenderCpuMs": 63.89999997615814,
+        "visibleSprites": 2,
+        "terrainSpriteCells": 1024,
+        "pooledSprites": 1538,
+        "stackBadges": 1,
+        "pooledStackBadges": 1,
+        "territoryEdges": 18,
+        "improvementProps": 0,
+        "riverSegments": 0,
+        "roadSegments": 0,
+        "overview": false,
+        "overviewTextureBytes": 0,
+        "rangePerimeterEdges": 28,
+        "visibleLabels": 1,
+        "selectedCells": 1,
+        "hoveredCells": 0,
+        "maxCachedChunkWidth": 837,
+        "maxCachedChunkHeight": 711,
+        "cachedTextureBytesEstimate": 25165824
+      },
+      "art": {
+        "state": "ready",
+        "message": "Approved pixel atlases loaded.",
+        "atlasPages": 1,
+        "residentBytesEstimate": 16777216,
+        "downloadBytes": 4358650,
+        "loadMs": 364.10000002384186,
+        "warnings": [],
+        "visibleAssetIds": [
+          "settlement.village.ashen_compact",
+          "unit.guard.ashen_compact"
+        ],
+        "visibleEntityArt": [
+          {
+            "entityId": "settlement.65",
+            "factionId": "faction.ashen_compact",
+            "definitionId": "faction.ashen_compact",
+            "role": "settlement.village",
+            "assetId": "settlement.village.ashen_compact",
+            "presentation": "faction",
+            "nativeWidth": 96,
+            "nativeHeight": 96,
+            "tint": 16777215,
+            "formationCount": null,
+            "representativeCount": 1,
+            "stackArmyCount": 0,
+            "stackFormationCount": 0
+          },
+          {
+            "entityId": "army.1025",
+            "factionId": "faction.ashen_compact",
+            "definitionId": "faction.ashen_compact",
+            "role": "unit.guard",
+            "assetId": "unit.guard.ashen_compact",
+            "presentation": "faction",
+            "nativeWidth": 64,
+            "nativeHeight": 64,
+            "tint": 16777215,
+            "formationCount": 1,
+            "representativeCount": 1,
+            "stackArmyCount": 47,
+            "stackFormationCount": 47
+          }
+        ],
+        "visibleAnimationFrames": [],
+        "tileFootprints": [
+          {
+            "cell": 50497,
+            "contentId": "settlement.village",
+            "assetId": "settlement.village.ashen_compact",
+            "role": "village",
+            "presentation": "approved",
+            "bounds": {
+              "x": -19.17380243978747,
+              "y": -16.39714593306691,
+              "width": 36.97868884338938,
+              "height": 35.12975440121991
+            },
+            "scale": 0.4622336105423672,
+            "anchor": {
+              "x": -0.22222440755041362,
+              "y": 19.194842078695366
+            },
+            "alpha": 1,
+            "boundsKind": "opaque-union",
+            "canvasBounds": {
+              "x": -22.40943771358404,
+              "y": -17.78384676469401,
+              "width": 44.37442661206725,
+              "height": 44.37442661206725
+            },
+            "horizontalExtent": 19.17380243978747,
+            "diagonalExtent": 22.139999999999993
+          }
+        ],
+        "reducedMotion": false,
+        "visibleSprites": 2,
+        "terrainSpriteCells": 1024,
+        "overlays": {
+          "selectionBounds": {
+            "width": 0,
+            "height": 0
+          },
+          "selectedAsset": {
+            "entityId": "army.1025",
+            "factionId": "faction.ashen_compact",
+            "color": 13215339,
+            "mode": "silhouette",
+            "contours": 1,
+            "glints": 3,
+            "animated": true,
+            "contourAlpha": 0.44050380641479014,
+            "failed": false,
+            "cacheEntries": 1,
+            "textureBytes": 18496,
+            "bounds": {
+              "width": 38.56905994711451,
+              "height": 44.40625
+            },
+            "sourceFrames": [
+              {
+                "x": 1544,
+                "y": 1336,
+                "width": 64,
+                "height": 64
+              }
+            ]
+          },
+          "selectedEntityTileOutline": false,
+          "territoryMode": "realm-perimeter",
+          "ambientGrid": false,
+          "unselectedRings": false,
+          "labels": [
+            {
+              "id": "army.1025",
+              "cell": 50497,
+              "name": "Oath guard",
+              "settlement": false,
+              "own": true,
+              "hostile": false,
+              "stackArmyCount": 47,
+              "domain": "land",
+              "x": 740,
+              "y": 395.5,
+              "text": "◆ Oath guard · 47 armies",
+              "priority": 0,
+              "width": 133.16099548339844,
+              "height": 23
+            }
+          ],
+          "stackBadges": [
+            {
+              "cell": 50497,
+              "factionId": "faction.ashen_compact",
+              "entityId": "army.1025",
+              "domain": "land",
+              "armies": 47,
+              "text": "×47"
+            }
+          ],
+          "selectedCell": 50497,
+          "hoveredCell": null
+        },
+        "lod": "near-sprites",
+        "terrainPresentation": {
+          "nativeFootprint": [
+            56,
+            64
+          ],
+          "scaleX": 0.8969548824910257,
+          "scaleY": 0.90625,
+          "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+        }
+      }
+    },
+    {
+      "stage": "six-camera-drags",
+      "metrics": {
+        "generationMs": 0,
+        "commandMs": 0,
+        "aiMs": 0,
+        "transferBytes": 1974826,
+        "totalTransferBytes": 1974826,
+        "cellTransferBytes": 1769695,
+        "landQueryCount": 0,
+        "landQueryBytes": 0,
+        "totalLandQueryBytes": 0,
+        "renderer": "webgl",
+        "frameCount": 662,
+        "frameMs": 16.700000000000728,
+        "frameP95Ms": 16.799999999999272,
+        "renderCpuMs": 0.19999992847442627,
+        "visibleCells": 1024,
+        "visibleChunks": 4,
+        "cachedChunks": 10,
+        "chunkRebuilds": 16,
+        "visibleEntities": 0,
+        "zoom": 1.25,
+        "highlightedCells": 9,
+        "routeCells": 0,
+        "previewCells": 0,
+        "atlasPages": 1,
+        "residentAtlasBytesEstimate": 16777216,
+        "artLoadMs": 364.10000002384186,
+        "artFirstRenderCpuMs": 63.89999997615814,
+        "visibleSprites": 0,
+        "terrainSpriteCells": 1024,
+        "pooledSprites": 2562,
+        "stackBadges": 0,
+        "pooledStackBadges": 1,
+        "territoryEdges": 0,
+        "improvementProps": 0,
+        "riverSegments": 0,
+        "roadSegments": 0,
+        "overview": false,
+        "overviewTextureBytes": 0,
+        "rangePerimeterEdges": 28,
+        "visibleLabels": 0,
+        "selectedCells": 1,
+        "hoveredCells": 0,
+        "maxCachedChunkWidth": 837,
+        "maxCachedChunkHeight": 711,
+        "cachedTextureBytesEstimate": 41943040
+      },
+      "art": {
+        "state": "ready",
+        "message": "Approved pixel atlases loaded.",
+        "atlasPages": 1,
+        "residentBytesEstimate": 16777216,
+        "downloadBytes": 4358650,
+        "loadMs": 364.10000002384186,
+        "warnings": [],
+        "visibleAssetIds": [],
+        "visibleEntityArt": [],
+        "visibleAnimationFrames": [],
+        "tileFootprints": [],
+        "reducedMotion": false,
+        "visibleSprites": 0,
+        "terrainSpriteCells": 1024,
+        "overlays": {
+          "selectionBounds": {
+            "width": 0,
+            "height": 0
+          },
+          "selectedAsset": {
+            "entityId": null,
+            "factionId": null,
+            "color": null,
+            "mode": "none",
+            "contours": 0,
+            "glints": 0,
+            "animated": false,
+            "contourAlpha": 0.38926155931593304,
+            "failed": false,
+            "cacheEntries": 1,
+            "textureBytes": 18496,
+            "bounds": {
+              "width": 0,
+              "height": 0
+            },
+            "sourceFrames": []
+          },
+          "selectedEntityTileOutline": false,
+          "territoryMode": "realm-perimeter",
+          "ambientGrid": false,
+          "unselectedRings": false,
+          "labels": [],
+          "stackBadges": [],
+          "selectedCell": 50497,
+          "hoveredCell": null
+        },
+        "lod": "near-sprites",
+        "terrainPresentation": {
+          "nativeFootprint": [
+            56,
+            64
+          ],
+          "scaleX": 0.8969548824910257,
+          "scaleY": 0.90625,
+          "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+        }
+      }
+    },
+    {
+      "stage": "far-strategic",
+      "metrics": {
+        "generationMs": 0,
+        "commandMs": 0,
+        "aiMs": 0,
+        "transferBytes": 1974826,
+        "totalTransferBytes": 1974826,
+        "cellTransferBytes": 1769695,
+        "landQueryCount": 0,
+        "landQueryBytes": 0,
+        "totalLandQueryBytes": 0,
+        "renderer": "webgl",
+        "frameCount": 811,
+        "frameMs": 16.600000000000364,
+        "frameP95Ms": 16.700000000000728,
+        "renderCpuMs": 0.10000002384185791,
+        "visibleCells": 3840,
+        "visibleChunks": 15,
+        "cachedChunks": 15,
+        "chunkRebuilds": 33,
+        "visibleEntities": 48,
+        "zoom": 0.5120000000000001,
+        "highlightedCells": 9,
+        "routeCells": 0,
+        "previewCells": 0,
+        "atlasPages": 1,
+        "residentAtlasBytesEstimate": 16777216,
+        "artLoadMs": 364.10000002384186,
+        "artFirstRenderCpuMs": 63.89999997615814,
+        "visibleSprites": 2,
+        "terrainSpriteCells": 3840,
+        "pooledSprites": 3842,
+        "stackBadges": 0,
+        "pooledStackBadges": 1,
+        "territoryEdges": 18,
+        "improvementProps": 0,
+        "riverSegments": 0,
+        "roadSegments": 0,
+        "overview": false,
+        "overviewTextureBytes": 0,
+        "rangePerimeterEdges": 28,
+        "visibleLabels": 0,
+        "selectedCells": 1,
+        "hoveredCells": 0,
+        "maxCachedChunkWidth": 837,
+        "maxCachedChunkHeight": 711,
+        "cachedTextureBytesEstimate": 62914560
+      },
+      "art": {
+        "state": "ready",
+        "message": "Approved pixel atlases loaded.",
+        "atlasPages": 1,
+        "residentBytesEstimate": 16777216,
+        "downloadBytes": 4358650,
+        "loadMs": 364.10000002384186,
+        "warnings": [],
+        "visibleAssetIds": [
+          "ui.badge.ashen_compact",
+          "ui.banner.ashen_compact"
+        ],
+        "visibleEntityArt": [
+          {
+            "entityId": "army.1025",
+            "factionId": "faction.ashen_compact",
+            "definitionId": "faction.ashen_compact",
+            "role": "unit.guard",
+            "assetId": "ui.badge.ashen_compact",
+            "presentation": "strategic",
+            "nativeWidth": 32,
+            "nativeHeight": 32,
+            "tint": 16777215,
+            "formationCount": 1,
+            "representativeCount": 1,
+            "stackArmyCount": 47,
+            "stackFormationCount": 47
+          },
+          {
+            "entityId": "settlement.65",
+            "factionId": "faction.ashen_compact",
+            "definitionId": "faction.ashen_compact",
+            "role": "settlement.village",
+            "assetId": "ui.banner.ashen_compact",
+            "presentation": "strategic",
+            "nativeWidth": 64,
+            "nativeHeight": 64,
+            "tint": 16777215,
+            "formationCount": null,
+            "representativeCount": 1,
+            "stackArmyCount": 0,
+            "stackFormationCount": 0
+          }
+        ],
+        "visibleAnimationFrames": [],
+        "tileFootprints": [
+          {
+            "cell": 50497,
+            "contentId": "settlement.village",
+            "assetId": "ui.banner.ashen_compact",
+            "role": "village",
+            "presentation": "approved",
+            "bounds": {
+              "x": -13,
+              "y": -13,
+              "width": 26,
+              "height": 26
+            },
+            "scale": 0.40625,
+            "anchor": {
+              "x": 0,
+              "y": 9.75
+            },
+            "alpha": 1
+          }
+        ],
+        "reducedMotion": false,
+        "visibleSprites": 2,
+        "terrainSpriteCells": 3840,
+        "overlays": {
+          "selectionBounds": {
+            "width": 0,
+            "height": 0
+          },
+          "selectedAsset": {
+            "entityId": "army.1025",
+            "factionId": "faction.ashen_compact",
+            "color": 13215339,
+            "mode": "silhouette",
+            "contours": 1,
+            "glints": 0,
+            "animated": false,
+            "contourAlpha": 0.5,
+            "failed": false,
+            "cacheEntries": 2,
+            "textureBytes": 23680,
+            "bounds": {
+              "width": 28.3203125,
+              "height": 28.3203125
+            },
+            "sourceFrames": [
+              {
+                "x": 74,
+                "y": 890,
+                "width": 32,
+                "height": 32
+              }
+            ]
+          },
+          "selectedEntityTileOutline": false,
+          "territoryMode": "realm-perimeter",
+          "ambientGrid": false,
+          "unselectedRings": false,
+          "labels": [],
+          "stackBadges": [],
+          "selectedCell": 50497,
+          "hoveredCell": null
+        },
+        "lod": "strategic-glyphs",
+        "terrainPresentation": {
+          "nativeFootprint": [
+            56,
+            64
+          ],
+          "scaleX": 0.8969548824910257,
+          "scaleY": 0.90625,
+          "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+        }
+      }
+    },
+    {
+      "stage": "far-strategic-home-aggregates",
+      "metrics": {
+        "generationMs": 0,
+        "commandMs": 0,
+        "aiMs": 0,
+        "transferBytes": 1974826,
+        "totalTransferBytes": 1974826,
+        "cellTransferBytes": 1769695,
+        "landQueryCount": 0,
+        "landQueryBytes": 0,
+        "totalLandQueryBytes": 0,
+        "renderer": "webgl",
+        "frameCount": 943,
+        "frameMs": 16.700000000000728,
+        "frameP95Ms": 16.700000000000728,
+        "renderCpuMs": 0.19999992847442627,
+        "visibleCells": 3072,
+        "visibleChunks": 12,
+        "cachedChunks": 18,
+        "chunkRebuilds": 36,
+        "visibleEntities": 48,
+        "zoom": 0.5120000000000001,
+        "highlightedCells": 9,
+        "routeCells": 0,
+        "previewCells": 0,
+        "atlasPages": 1,
+        "residentAtlasBytesEstimate": 16777216,
+        "artLoadMs": 364.10000002384186,
+        "artFirstRenderCpuMs": 63.89999997615814,
+        "visibleSprites": 2,
+        "terrainSpriteCells": 3072,
+        "pooledSprites": 4610,
+        "stackBadges": 0,
+        "pooledStackBadges": 1,
+        "territoryEdges": 18,
+        "improvementProps": 0,
+        "riverSegments": 0,
+        "roadSegments": 0,
+        "overview": false,
+        "overviewTextureBytes": 0,
+        "rangePerimeterEdges": 28,
+        "visibleLabels": 1,
+        "selectedCells": 1,
+        "hoveredCells": 0,
+        "maxCachedChunkWidth": 837,
+        "maxCachedChunkHeight": 711,
+        "cachedTextureBytesEstimate": 75497472
+      },
+      "art": {
+        "state": "ready",
+        "message": "Approved pixel atlases loaded.",
+        "atlasPages": 1,
+        "residentBytesEstimate": 16777216,
+        "downloadBytes": 4358650,
+        "loadMs": 364.10000002384186,
+        "warnings": [],
+        "visibleAssetIds": [
+          "ui.badge.ashen_compact",
+          "ui.banner.ashen_compact"
+        ],
+        "visibleEntityArt": [
+          {
+            "entityId": "army.1025",
+            "factionId": "faction.ashen_compact",
+            "definitionId": "faction.ashen_compact",
+            "role": "unit.guard",
+            "assetId": "ui.badge.ashen_compact",
+            "presentation": "strategic",
+            "nativeWidth": 32,
+            "nativeHeight": 32,
+            "tint": 16777215,
+            "formationCount": 1,
+            "representativeCount": 1,
+            "stackArmyCount": 47,
+            "stackFormationCount": 47
+          },
+          {
+            "entityId": "settlement.65",
+            "factionId": "faction.ashen_compact",
+            "definitionId": "faction.ashen_compact",
+            "role": "settlement.village",
+            "assetId": "ui.banner.ashen_compact",
+            "presentation": "strategic",
+            "nativeWidth": 64,
+            "nativeHeight": 64,
+            "tint": 16777215,
+            "formationCount": null,
+            "representativeCount": 1,
+            "stackArmyCount": 0,
+            "stackFormationCount": 0
+          }
+        ],
+        "visibleAnimationFrames": [],
+        "tileFootprints": [
+          {
+            "cell": 50497,
+            "contentId": "settlement.village",
+            "assetId": "ui.banner.ashen_compact",
+            "role": "village",
+            "presentation": "approved",
+            "bounds": {
+              "x": -13,
+              "y": -13,
+              "width": 26,
+              "height": 26
+            },
+            "scale": 0.40625,
+            "anchor": {
+              "x": 0,
+              "y": 9.75
+            },
+            "alpha": 1
+          }
+        ],
+        "reducedMotion": false,
+        "visibleSprites": 2,
+        "terrainSpriteCells": 3072,
+        "overlays": {
+          "selectionBounds": {
+            "width": 0,
+            "height": 0
+          },
+          "selectedAsset": {
+            "entityId": "army.1025",
+            "factionId": "faction.ashen_compact",
+            "color": 13215339,
+            "mode": "silhouette",
+            "contours": 1,
+            "glints": 0,
+            "animated": false,
+            "contourAlpha": 0.5,
+            "failed": false,
+            "cacheEntries": 2,
+            "textureBytes": 23680,
+            "bounds": {
+              "width": 28.3203125,
+              "height": 28.3203125
+            },
+            "sourceFrames": [
+              {
+                "x": 74,
+                "y": 890,
+                "width": 32,
+                "height": 32
+              }
+            ]
+          },
+          "selectedEntityTileOutline": false,
+          "territoryMode": "realm-perimeter",
+          "ambientGrid": false,
+          "unselectedRings": false,
+          "labels": [
+            {
+              "id": "army.1025",
+              "cell": 50497,
+              "name": "Oath guard",
+              "settlement": false,
+              "own": true,
+              "hostile": false,
+              "stackArmyCount": 47,
+              "domain": "land",
+              "x": 728.192,
+              "y": 367.456,
+              "text": "◆ Oath guard · 47 armies",
+              "priority": 0,
+              "width": 133.16099548339844,
+              "height": 23
+            }
+          ],
+          "stackBadges": [],
+          "selectedCell": 50497,
+          "hoveredCell": null
+        },
+        "lod": "strategic-glyphs",
+        "terrainPresentation": {
+          "nativeFootprint": [
+            56,
+            64
+          ],
+          "scaleX": 0.8969548824910257,
+          "scaleY": 0.90625,
+          "note": "Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect."
+        }
+      }
+    }
+  ]
+}

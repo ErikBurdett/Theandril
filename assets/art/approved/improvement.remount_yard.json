@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.remount_yard",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.remount_yard"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A working STEPPE REMOUNT YARD: a low dark timber stable with a warm straw roof, a short fenced paddock containing one chestnut horse and a rectangular watering trough. Stable, fence, horse and trough joined in one compact readable ground footprint.",
+  "frames": [
+    {
+      "id": "improvement.remount_yard/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/improvement.remount_yard/35b5e526db79910202070d1821e4fe091c3d8418076d1d5a36286df23e533f7d/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "2acb38c3a827cccfe4d044a6ecc1e581d8cd33b3be2d66c27c80bb840153184f",
+    "sourceRefs": [
+      "assets/art/source/resource-works/improvement.remount_yard-v1.png",
+      "assets/art/source/resource-works/improvement.remount_yard-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:40:01.916235Z",
+  "referenceHashes": [
+    "01662ddf6d51075e683984f3e2f8549923af6f5f35f22e4cdc128b4ae67bc728",
+    "118fe0bd5cacacf79d4f3074179352d1a6bb7a38cf6a104c52ae2f904099341a"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "7d0a1c03727f32f60906c64667f4378169a2702d315bce11f903367b935805d6",
+      "inputHash": "01662ddf6d51075e683984f3e2f8549923af6f5f35f22e4cdc128b4ae67bc728",
+      "outputHash": "6cdb596fb6ef36a46d82743ee5eb0c7c65358e5a72177535bf4d468c43e63045"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "6cdb596fb6ef36a46d82743ee5eb0c7c65358e5a72177535bf4d468c43e63045",
+      "outputHash": "eda5f79eb7a5453dd021106004fc4ee8d9d7c8caa1b5fcfbf8790289b957a88a"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "eda5f79eb7a5453dd021106004fc4ee8d9d7c8caa1b5fcfbf8790289b957a88a",
+      "outputHash": "e191866167d990cafd968df2abe7db5eb6045bb369ec8824eb14177d90efeb43"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "6f22ec370e5eaedfce6367d6790e920a353fa78743e1dced9bd9fd2e10be4d4d",
+      "outputHash": "12fe7b84e1b69c36a8c49c3660ca959c5ac967e16db153ee7c612abd33134b24"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "83bcccd4d4434e2b9095eaff62e2f120d4b95d670203199b8bd87c83c03776ed",
+      "outputHash": "d3bf75038e06417471d7f402d721b088ae4f70f6b2f028bd5a8af9f06debd0e2"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "68cd45551a9d4380d4a2446a697a13719e91da6b8999f5beb2ccf7c8253d4571",
+      "outputHash": "3ae3ae3a7de62bb82fbf0011b3ea50e13283dcb291b376aa499133ffe3810447"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/improvement.remount_yard.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex visual review",
+    "reviewedAt": "2026-09-08T23:44:08.697Z",
+    "notes": "Inspected exact native1x and nearest4x contact sheets. The improvement.remount_yard silhouette, joined ground footprint and mineral/material color match its resource role; no clipping or alpha fringe. Deposits and working structures are distinct. Map scaling and fog are verified separately in gameplay.\nReviewed candidate 35b5e526db79910202070d1821e4fe091c3d8418076d1d5a36286df23e533f7d; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b64a0daf6f337730a0e135d196adc6ed49e3e9411a5d72247d6196dbbe5770d0.png"
+    ],
+    "inputHash": "ac866a39a6213f05cbd9cbb379827ab0a2e1578e74db5898d3c34f470dc63387"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

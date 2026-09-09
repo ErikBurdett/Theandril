@@ -1,14 +1,17 @@
 import { Container, Graphics, Sprite, Text, Texture } from 'pixi.js';
-import { factionArtId } from '@theandril/art-pipeline/runtime';
+import { factionArtId, unitArtRole } from '@theandril/art-pipeline/runtime';
 import type { BattlePresentation, BattleSceneSnapshot } from '@theandril/sim';
 import type { RuntimeArt } from './art';
 import { battleEffectState } from './animation';
-import { battleActorBounds, battleAnnotationY, battleEffect, battleLayout, battleSeekRequested, BATTLE_EVENT_MS, BATTLE_FX_LIMIT, BATTLE_FX_MS, presentedEventCount, presentationDuration, presentationSnapshot, type BattleRect } from './battle-layout';
+import { BattleSoldierLayer } from './battle-soldiers';
+import { battleCameraPoint, battleCameraTransform } from './battle-camera';
+import { battleActorBounds, battleAnnotationY, battleEffect, battleLayout, battleSceneHeight, battleSeekRequested, BATTLE_EVENT_MS, BATTLE_FX_LIMIT, BATTLE_FX_MS, presentedEventCount, presentationDuration, presentationSnapshot, type BattleRect } from './battle-layout';
 
 export interface BattlePlaybackProgress { revision: number; eventCount: number; eventTotal: number; completed: boolean }
 export interface BattleSceneView {
   battleId: string; snapshot: BattleSceneSnapshot; packet?: BattlePresentation; revision: number;
   paused: boolean; speed: number; selectedId?: string; seekEnd?: number;
+  camera?: { zoom: number; focusId?: string; pan: { x: number; y: number } };
   onProgress?: (progress: BattlePlaybackProgress) => void;
   onSelect?: (id: string) => void;
 }
@@ -18,6 +21,7 @@ type Actor = { root: Container; sprite: Sprite; fallback: Graphics; bar: Graphic
 export class BattleScene {
   readonly container = new Container({ eventMode: 'none', visible: false });
   private ground = new Graphics();
+  private soldiers = new BattleSoldierLayer();
   private actorsLayer = new Container();
   private effectsLayer = new Container();
   private actors: Actor[] = [];
@@ -37,17 +41,22 @@ export class BattleScene {
   private activeEffects: { assetId: string; frameId: string; sourceId: string | null; targetId: string }[] = [];
   private missing = new Set<string>();
   private actorScale = 1;
+  private idleElapsed = 0;
+  private camera = { zoom: 1, x: 0, y: 0 };
+  private worldHeight = 0;
 
-  constructor() { this.container.addChild(this.ground, this.actorsLayer, this.effectsLayer); }
+  constructor() { this.container.addChild(this.ground, this.soldiers.shadows, this.soldiers.container, this.soldiers.fallback, this.actorsLayer, this.effectsLayer); }
   get active() { return Boolean(this.view); }
-  refreshArt(): void { this.dirty = true; }
+  refreshArt(): void { this.missing.clear(); this.dirty = true; }
 
   set(view: BattleSceneView | undefined): void {
     const changed = view?.battleId !== this.view?.battleId || view?.revision !== this.view?.revision;
     if (changed) { this.elapsed = 0; this.previousTime = 0; this.eventCount = -1; this.completed = false; this.missing.clear(); }
+    if (view?.battleId !== this.view?.battleId) this.idleElapsed = 0;
+    this.soldiers.setPacket(view?.packet);
     if (battleSeekRequested(this.view, view) && view?.packet) this.elapsed = presentationDuration(view.packet);
     this.view = view; this.container.visible = Boolean(view); this.dirty = true;
-    if (!view) { this.current = undefined; this.points.clear(); this.activeEffects = []; for (const actor of this.actors) actor.root.visible = false; for (const effect of this.effects) effect.visible = false; }
+    if (!view) { this.current = undefined; this.points.clear(); this.soldiers.clear(); this.activeEffects = []; for (const actor of this.actors) actor.root.visible = false; for (const effect of this.effects) effect.visible = false; }
   }
 
   resize(width: number, height: number): void {
@@ -56,8 +65,13 @@ export class BattleScene {
 
   pick(x: number, y: number): void {
     if (!this.view) return;
+    ({ x, y } = battleCameraPoint({ x, y }, this.camera));
+    const soldier = this.soldiers.pick(x, y);
+    if (soldier) { this.view.onSelect?.(soldier); return; }
     let nearest: { id: string; distance: number } | undefined;
+    const selectable = new Set([...(this.current?.formations ?? []), ...(this.current?.characters ?? [])].map(entity => entity.id));
     for (const [id, point] of this.points) {
+      if (!selectable.has(id)) continue;
       const distance = Math.hypot(x - point.x, y - point.y + 14);
       if (distance < 42 && (!nearest || distance < nearest.distance)) nearest = { id, distance };
     }
@@ -70,19 +84,28 @@ export class BattleScene {
     if (this.art !== art || this.reduced !== reduced) { this.art = art; this.reduced = reduced; this.dirty = true; }
     const duration = view.packet ? presentationDuration(view.packet) : 0;
     if (reduced) this.elapsed = duration;
-    else if (!view.paused && !hidden && this.previousTime) this.elapsed = Math.min(duration, this.elapsed + Math.min(100, time - this.previousTime) * view.speed);
+    else if (!view.paused && !hidden && this.previousTime) {
+      const delta = Math.min(100, time - this.previousTime) * view.speed;
+      this.elapsed = Math.min(duration, this.elapsed + delta); this.idleElapsed += delta;
+    }
     this.previousTime = hidden ? 0 : time;
     const count = view.packet ? presentedEventCount(this.elapsed, view.packet.events.length) : 0;
     const completed = this.elapsed >= duration;
     const progressChanged = count !== this.eventCount || completed !== this.completed;
     if (count !== this.eventCount || completed !== this.completed || this.dirty) {
       this.eventCount = count; this.completed = completed;
-      this.current = view.packet ? completed ? view.packet.after : presentationSnapshot(view.packet, count) : view.snapshot;
+      this.current = view.packet ? completed && !view.packet.before.soldiers ? view.packet.after : presentationSnapshot(view.packet, count) : view.snapshot;
       this.draw(this.current);
       if (progressChanged) view.onProgress?.({ revision: view.revision, eventCount: count, eventTotal: view.packet?.events.length ?? 0, completed });
       this.dirty = false;
     }
+    this.soldiers.tick(this.elapsed, this.idleElapsed, reduced);
     this.drawEffects();
+    const request = view.camera;
+    const focus = request?.focusId ? this.points.get(request.focusId) : undefined;
+    this.camera = battleCameraTransform(this.width, this.height, this.worldHeight, request?.zoom ?? 1,
+      focus ?? { x: this.width / 2, y: this.worldHeight / 2 }, request?.pan ?? { x: 0, y: 0 });
+    this.container.scale.set(this.camera.zoom); this.container.position.set(this.camera.x, this.camera.y);
     const actions = view.packet?.events ?? [];
     const active = new Map<string, { event: typeof actions[number]; age: number }>();
     const impacts = new Map<string, { sourceId: string; age: number }>();
@@ -98,7 +121,7 @@ export class BattleScene {
       const origin = this.points.get(actor.id)!;
       actor.root.position.set(Math.round(origin.x), Math.round(origin.y));
       const action = active.get(actor.id), event = action?.event, age = action?.age ?? 0;
-      if (!reduced && event?.type === 'attack') {
+      if (!this.current?.soldiers && !reduced && event?.type === 'attack') {
         const target = this.points.get(event.targetIds[0] ?? '');
         if (target) {
           const length = Math.hypot(target.x - origin.x, target.y - origin.y) || 1;
@@ -108,14 +131,14 @@ export class BattleScene {
         }
       }
       const hit = impacts.get(actor.id), source = hit && this.points.get(hit.sourceId);
-      if (hit && source) {
+      if (!this.current?.soldiers && hit && source) {
         const length = Math.hypot(origin.x - source.x, origin.y - source.y) || 1;
         const recoil = 3 * Math.sin((hit.age - 400) / 300 * Math.PI) * this.actorScale;
         actor.root.position.set(Math.round(actor.root.x + (origin.x - source.x) / length * recoil), Math.round(actor.root.y + (origin.y - source.y) / length * recoil));
       }
       if (actor.assetId) {
         const castOnly = actor.assetId === 'character.waykeeper';
-        const frame = art?.frame(actor.assetId, castOnly ? age : this.elapsed, !reduced && (castOnly ? Boolean(event?.type === 'ability') : !view.paused && !hidden), 'se', castOnly ? 'cast' : 'idle');
+        const frame = art?.frame(actor.assetId, castOnly ? age : this.idleElapsed, !reduced && (castOnly ? Boolean(event?.type === 'ability') : true), 'se', castOnly ? 'cast' : 'idle');
         if (frame) { actor.sprite.texture = frame.texture; actor.frameId = frame.frameId; }
       }
     }
@@ -127,14 +150,18 @@ export class BattleScene {
       eventCount: this.eventCount, eventTotal: this.view?.packet?.events.length ?? 0, completed: this.completed,
       reducedMotion: this.reduced, elapsedMs: this.elapsed, paused: this.view?.paused ?? true,
       formations: this.current?.formations.map(({ id, strength, morale, ward, side }) => ({ id, strength, morale, ward, side })) ?? [],
-      width: this.width, height: this.height, actorScale: this.actorScale,
+      width: this.width, height: this.height, actorScale: this.actorScale, selectedId: this.view?.selectedId ?? null,
+      camera: { ...this.camera, worldHeight: this.worldHeight },
       actors: this.actors.filter(actor => actor.root.visible).map(actor => ({ id: actor.id, assetId: actor.assetId, frameId: actor.frameId, x: actor.root.x, y: actor.root.y, bounds: actor.bounds })),
-      effects: [...this.activeEffects], pooledActors: this.actors.length, pooledEffects: this.effects.length, missingArt: [...this.missing] };
+      ...this.soldiers.diagnostics(), effects: [...this.activeEffects], pooledActors: this.actors.length, pooledEffects: this.effects.length, missingArt: [...new Set([...this.missing, ...this.soldiers.missing])] };
   }
 
   private draw(scene: BattleSceneSnapshot): void {
-    const { width: w, height: h } = this, layout = battleLayout(scene, w, h);
-    this.points = layout.points; this.actorScale = layout.scale;
+    const w = this.width, h = this.view?.camera && this.view.camera.zoom > 1 ? battleSceneHeight(scene, w) : this.height;
+    this.worldHeight = h;
+    const layout = battleLayout(scene, w, h);
+    this.soldiers.sync(scene, w, h, this.art);
+    this.points = new Map([...layout.points, ...this.soldiers.points]); this.actorScale = layout.scale;
     const color = scene.domain === 'naval' ? 0x223e48 : [0x294550, 0x434c3b, 0x354638, 0x514c3e, 0x4a4c48][scene.terrain] ?? 0x434c3b;
     this.ground.clear().rect(0, 0, w, h).fill(color);
     // Quiet schematic ground texture: context only, not fabricated tactical obstacles.
@@ -151,25 +178,28 @@ export class BattleScene {
       const point = this.points.get(entity.id)!;
       const formation = 'unitId' in entity ? entity : undefined;
       const role = formation?.unitId ?? ('definitionId' in entity ? entity.definitionId : '');
-      const assetId = factionArtId(role, entity.factionDefinitionId) ?? (role === 'character.waykeeper' ? role : undefined);
+      const artworkRole = unitArtRole(role);
+      const memberFormation = Boolean(scene.soldiers && formation);
+      const assetId = factionArtId(memberFormation ? 'ui.banner' : artworkRole, entity.factionDefinitionId) ?? (role === 'character.waykeeper' ? role : undefined);
       const frame = assetId ? this.art?.frame(assetId, 0, false, 'se', role === 'character.waykeeper' ? 'cast' : 'idle') : undefined;
       if (assetId && !frame) this.missing.add(assetId);
       const actor = this.actor(index++);
-      actor.bounds = battleActorBounds(role, point, layout.scale);
+      actor.bounds = battleActorBounds(artworkRole, point, layout.scale);
       actor.id = entity.id; actor.assetId = frame?.asset.id ?? null; actor.frameId = frame?.frameId ?? null;
       actor.root.visible = true; actor.root.position.set(Math.round(point.x), Math.round(point.y));
       actor.root.alpha = formation && (formation.strength <= 0 || formation.morale <= 0) ? .35 : 1;
       actor.sprite.visible = Boolean(frame); actor.fallback.visible = !frame;
       if (frame) {
         actor.sprite.texture = frame.texture; actor.sprite.anchor.set(frame.asset.pivot[0] / frame.asset.nativeResolution.width, frame.asset.pivot[1] / frame.asset.nativeResolution.height);
-        actor.sprite.scale.set(layout.scale); actor.sprite.tint = 0xffffff;
+        actor.sprite.scale.set(memberFormation ? .5 : layout.scale); actor.sprite.tint = 0xffffff;
+        actor.sprite.position.set(memberFormation ? -layout.formationSpan.x / 2 - 5 : 0, memberFormation ? -layout.formationSpan.y / 2 : 0);
       } else {
         actor.fallback.clear();
         if (scene.domain === 'naval' && formation) actor.fallback.poly([-18, -12, 18, -12, 12, -4, -12, -4]).fill(0xc3b790).moveTo(0, -12).lineTo(0, -33).stroke({ width: 2, color: 0xc3b790 });
         else actor.fallback.circle(0, -24, 5).fill(0xc3b790).poly([-9, -4, 0, -20, 9, -4]).fill(0xc3b790);
       }
       const selected = entity.id === this.view?.selectedId;
-      const barY = battleAnnotationY(role, layout.scale);
+      const barY = memberFormation ? layout.formationSpan.y / 2 + 4 : battleAnnotationY(role, layout.scale);
       actor.bar.clear().roundRect(-20, barY, 40, 5, 2).fill(0x172326);
       if (formation) actor.bar.roundRect(-20, barY, 40 * Math.max(0, Math.min(1, formation.strength / formation.maxStrength)), 5, 2).fill(entity.side === 'attacker' ? 0xaec3a0 : 0xd5b18b);
       if (selected) actor.bar.ellipse(0, -5, 24, 8).stroke({ color: 0xf0d498, alpha: .8, width: 1.5 });
@@ -197,19 +227,22 @@ export class BattleScene {
       if (age < 0) break;
       if (age >= BATTLE_FX_MS) continue;
       const assetId = battleEffect(event); if (!assetId) continue;
-      for (const targetId of event.targetIds) {
+      const targetIds = this.current?.soldiers && event.targetSoldierIds?.length ? event.targetSoldierIds : event.targetIds;
+      for (const [targetIndex, targetId] of targetIds.entries()) {
         if (index >= BATTLE_FX_LIMIT) break;
         const target = this.points.get(targetId); if (!target) continue;
         const frame = this.art?.frame(assetId, age, true, 'se', battleEffectState(assetId));
         if (!frame) { this.missing.add(assetId); continue; }
         let sprite = this.effects[index];
         if (!sprite) { sprite = new Sprite(Texture.EMPTY); sprite.roundPixels = true; this.effects.push(sprite); this.effectsLayer.addChild(sprite); }
-        index++; sprite.visible = true; sprite.texture = frame.texture; sprite.anchor.set(frame.asset.pivot[0] / frame.asset.nativeResolution.width, frame.asset.pivot[1] / frame.asset.nativeResolution.height); sprite.scale.set(this.actorScale);
-        const source = event.sourceId ? this.points.get(event.sourceId) : undefined;
+        const effectScale = this.soldiers.scale(targetId) ?? this.actorScale;
+        index++; sprite.visible = true; sprite.texture = frame.texture; sprite.anchor.set(frame.asset.pivot[0] / frame.asset.nativeResolution.width, frame.asset.pivot[1] / frame.asset.nativeResolution.height); sprite.scale.set(effectScale);
+        const sourceId = event.sourceSoldierIds?.length ? event.sourceSoldierIds[targetIndex % event.sourceSoldierIds.length]! : event.sourceId;
+        const source = sourceId ? this.points.get(sourceId) : undefined;
         const progress = Math.min(1, age / 400);
         const travelling = event.attackKind === 'projectile' && source;
-        sprite.position.set(Math.round(travelling ? source.x + (target.x - source.x) * progress : target.x), Math.round((travelling ? source.y + (target.y - source.y) * progress : target.y) - 18));
-        this.activeEffects.push({ assetId, frameId: frame.frameId, sourceId: event.sourceId, targetId });
+        sprite.position.set(Math.round(travelling ? source.x + (target.x - source.x) * progress : target.x), Math.round((travelling ? source.y + (target.y - source.y) * progress : target.y) - 18 * effectScale));
+        this.activeEffects.push({ assetId, frameId: frame.frameId, sourceId, targetId });
       }
     }
     for (; index < this.effects.length; index++) this.effects[index]!.visible = false;

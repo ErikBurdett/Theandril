@@ -1,12 +1,73 @@
 # Theandril art implementation status
 
-Updated: 2026-09-07. A real end-to-end **foundation** runs from original generation through native processing, individual visual review, deterministic atlas publication and live gameplay. This is not full visual-production or game 1.0 signoff.
+Updated: 2026-09-08. A real end-to-end **foundation** runs from original generation through native processing, individual visual review, deterministic atlas publication and live gameplay. This is not full visual-production or game 1.0 signoff.
 
 ## Published result
 
-506 individually reviewed assets / 569 frames / a2048² foundation and lazy1024² battle page. Twenty-four authored faction definitions each have18 distinct troop/naval/character/building/heraldry roles:432 qualified faction assets, including72 naval hulls. Six new battlefield clips join483 preceding current map/UI/fallback bindings and17 future-only assets; their scoped native and live gameplay review is complete. Twenty-four new terrain originals give all twelve biomes three stable designs including their original base. Generic guard/scout/caravan clips retain four idle poses; the Ashen scout also has four registered idle frames. The other431 faction assets remain static southeast poses, including all naval hulls. Three future effects retain their four-frame one-shot clips. [Exact coverage](ASSET_CATALOG.md), [faction coverage](FACTION_ASSET_CATALOG.md), [visual bible](THEANDRIL_ART_BIBLE.md).
+545 individually reviewed assets / 1,427 frames / five atlas pages. The world uses a 2048² foundation and 512² map-works page. Battle effects use a deferred 1024² page; eight foot roles and five mounted/hull roles use two additional deferred 2048² pages. The new battle family supplies 832 actual rendered frames / 130 directional clips across 13 shared original role rigs. Sixteen new original deposits/extraction works cover the eight canonical resources. The preceding ten improvement/civic originals and six battlefield clips remain published. Twenty-four cultures retain 432 qualified faction assets, including 72 static naval hulls; those strategic culture assets are not newly animated. Generic guard/scout/caravan idle clips, the Ashen scout pilot and 24 biome variants remain intact. [Exact coverage](ASSET_CATALOG.md), [faction coverage](FACTION_ASSET_CATALOG.md), [visual bible](THEANDRIL_ART_BIBLE.md).
 
-The foundation PNG remains2,628,301 bytes, SHA-256 `e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de`; both published pages total2,654,401 bytes. Reversed-input reconstruction is byte-identical. The map atlas still decodes to16,777,216 bytes (16MiB); first battle adds4MiB. Native DOM icons can separately decode another page. This is not total presentation memory. Earlier static pack sources, approvals, briefs, editable exports and exact reviews remain retained.
+The foundation PNG remains 2,628,301 bytes, SHA-256 `e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de`; all five published PNGs total 4,150,190 bytes. Reversed-input reconstruction remains byte-identical, including every native frame. The two map pages decode to 17,825,792 bytes (17 MiB); first battle adds 36 MiB (53 MiB total atlas residency). Native DOM icons can separately decode another page. This is not total presentation memory. Earlier static pack sources, approvals, briefs, editable exports and exact reviews remain retained.
+
+## Individual battle rigs and resource works — current slice
+
+The [shared battle production and review](reviews/BATTLE_UNIT_ANIMATION.md)
+retains original editable Blender rigs, all five Actions, actual raw/native
+renders, Pixel Snapper and Aseprite exports, exact processing receipts and
+individual visual approvals. Guard, cavalry and transport received independent
+art-direction review before the full batch. All ten land roles and three hull
+roles have two independently rendered facings and idle/walk/attack/hit/death
+or equivalent sail/fire/sink clips. Per-member render pools follow canonical
+movement, source/target IDs and exact deaths; no animation applies damage.
+The coordinated runtime browser review passes 7/7, including all land/hull roles,
+exact casualties, actual effects and an isolated 2,240-soldier workload. A separate
+390px tactical-camera and battlefield follow-up passes 5/5. Fit/2×/3×/4×, Focus
+selected and bounded pan enlarge actual sprite pixels while preserving paused
+frames, pointer selection and the canonical state hash. Exact accepted images
+and JSON are retained in the [runtime manifest](reviews/battle-units/runtime/manifest.json).
+The isolated Fit sample runs on actual SwiftShader at frame p50 50 ms / p95
+66.7 ms; this is not 60 FPS or physical-GPU approval. The camera follow-up is
+functional evidence, not a replacement performance sample.
+
+All 18 canonical improvements, five civic buildings and eight deposits have
+registered exact opaque-pixel unions contained in the inset hex. The new
+resource source/processing workflow uses sixteen independent raster originals,
+with real native/Aseprite processing and exact approvals. Live runtime bindings
+include both every deposit and every paired extraction building. Generic
+fallbacks remain available for all completed works if approved artwork cannot
+load. Source/native art approval is separate from resource economy and browser
+integration evidence in the [overall status](../IMPLEMENTATION_STATUS.md).
+
+## Growing hearths, tile assets and readable zoom — slice 26
+
+All ten tile improvements now have approved original sprites. Five new civic
+assets represent the actual Root cellar, Cinder workshop, Charter market,
+Witness archive and Charter harbor. Exact sources, prompts, approvals, editable
+Aseprite files, native/4× review and deterministic publication are retained in
+[the production record](reviews/HEARTH_IMPROVEMENTS.md). The foundation atlas is
+byte-identical; all ten new originals fit the additional 1 MiB map-works page.
+
+Fifteen improvement/civic assets now fit their all-frame opaque silhouettes at
+85% of the inset hex, typically 36–40 world pixels wide. The current town fits
+remain unchanged. Army scaling is uniform and bounded in screen pixels; far
+heraldry has independent screen-sized backing, separated garrisons and explicit
+entity hit tests. Shared specialist silhouettes retain the actual approved
+source IDs and do not count as four new dedicated asset families.
+
+Observed population creates culture housing blocks inside known claims;
+completed buildings add civic districts, active work adds scaffolds, and worker
+assignments/finished improvements change the ground. Sparse approach lanes are
+cosmetic and tracked separately from canonical roads. Districts remain cached
+with their tiles. Hidden queues and unseen current enemy upgrades never enter
+the layout. [Actual paid construction, final near/far/narrow images, rejected
+first visual pass and selection evidence](reviews/slice26/README.md) have been
+inspected. Housing reuses culture villages, not ten unique residential models.
+
+The [offline compiler](reviews/hearth-art-compiler.json) validates all516
+approvals and preserves exact reverse-order packing. Native geometry/core/CLI
+checks pass33/33; focused final development/marker browser scenarios pass7/7.
+Whole integration verification and renderer performance are recorded in the
+[game status](../IMPLEMENTATION_STATUS.md). Continuous fractional camera zoom,
+broad directional animation and biome transitions remain future work.
 
 ## Layered fantasy HUD and visible town scale — slice 25
 

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.iron_mine",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.iron_mine"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A working IRONSTONE MINE: a strongly readable small timber pithead lifting hoist and sloped braced mine entrance over a rusty dark ore seam. Small square rust-brown ore cart in front and low ore sorting wall, compact unified ground footprint. No modern machinery.",
+  "frames": [
+    {
+      "id": "improvement.iron_mine/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/improvement.iron_mine/d675f3d43fdb2c1fe6ab466012763a236c1f9faccc3d919ca7800388da8823f0/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bbf758c96279385a91cc5415dc6e55c359a7f260f8807d87389438c7145dbbc1",
+    "sourceRefs": [
+      "assets/art/source/resource-works/improvement.iron_mine-v1.png",
+      "assets/art/source/resource-works/improvement.iron_mine-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:34:41.180691Z",
+  "referenceHashes": [
+    "0ea39d4b1ed1b6243ae992444ee56844578a120faaf4e08313164370225a3325",
+    "b9fc3e8f838ba394fbc926e5dd61f876df7c3d7b6212b81a34bb5e7f2175de2f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "37f11734fadd2eb8c9388aaf8c8bcb5d7c32b0fa9c16e4af1d571a5211624664",
+      "inputHash": "0ea39d4b1ed1b6243ae992444ee56844578a120faaf4e08313164370225a3325",
+      "outputHash": "e0d62ad6a8414c0914939cdd8b1d7e625f10bd5dfda62e3f42bd7155b3a1ae75"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "e0d62ad6a8414c0914939cdd8b1d7e625f10bd5dfda62e3f42bd7155b3a1ae75",
+      "outputHash": "f57ced07b4afa0d824f5bc64227cde0f8ac302bbfc876b13fa1f5298ee1418b6"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f57ced07b4afa0d824f5bc64227cde0f8ac302bbfc876b13fa1f5298ee1418b6",
+      "outputHash": "754d21be944c316e585f168f1b74e23e451c30fbcd39a10a6c1cc8792b1b031e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "f4647f88592e93ec864d4c0b615ac6747f70289c2abc5c91ecdb41ef410ac28e",
+      "outputHash": "575136a36209033965c8f0da722a39da76173b1ff21c35be1023f43c7f0290f9"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "a757120e22e3bb57b14e203578dd1c8d06560b652b2f17c92c163a021f3a6664",
+      "outputHash": "bdb8c96686009f671e128d187767fde74843482a3e64eaabac63ba311d784681"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "c3a1425ea1170b6f0f25e70ca7775d35f387b7f73255f6b201df2848f41f291b",
+      "outputHash": "0c7b174b8ef3f202d76412ff7fe1e9d8186cffbfec83fc201b5fa9800b247de7"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/improvement.iron_mine.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex visual review",
+    "reviewedAt": "2026-09-08T23:44:08.429Z",
+    "notes": "Inspected exact native1x and nearest4x contact sheets. The improvement.iron_mine silhouette, joined ground footprint and mineral/material color match its resource role; no clipping or alpha fringe. Deposits and working structures are distinct. Map scaling and fog are verified separately in gameplay.\nReviewed candidate d675f3d43fdb2c1fe6ab466012763a236c1f9faccc3d919ca7800388da8823f0; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b64a0daf6f337730a0e135d196adc6ed49e3e9411a5d72247d6196dbbe5770d0.png"
+    ],
+    "inputHash": "e57c738dff16503d9661703344e274bf7149ed5ad56b23d4aa3194350cc1e0b3"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

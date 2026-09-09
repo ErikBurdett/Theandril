@@ -1,14 +1,17 @@
 import { ImageSource, Spritesheet, Texture } from 'pixi.js';
+import { RESOURCES } from '../../content/src/resources';
 import { FACTION_ART_IDS, parseRuntimeCatalog, type RuntimeAsset, type RuntimeCatalog } from '@theandril/art-pipeline/runtime';
 import { validateAtlasData } from './art-validation';
 import { validatePngDimensions } from './image-validation';
 import { TERRAIN_ART_IDS } from './terrain-variants';
 import { BATTLE_EFFECT_IDS, selectClipFrame } from './animation';
 import { registeredSettlementFit } from './settlement-geometry';
+import { registeredImprovementFit } from './improvement-geometry';
 import type { TileArtworkFit } from './tile-footprint';
 
 export { BIOME_ART_IDS } from './terrain-variants';
-export const LIVE_ART_IDS = new Set<string>([...TERRAIN_ART_IDS, 'improvement.terraced_fields', 'improvement.managed_woodlot', 'improvement.quarry', 'improvement.reedworks', 'improvement.shore_fishery', 'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', 'character.waykeeper', ...FACTION_ART_IDS, ...Object.values(BATTLE_EFFECT_IDS)]);
+export const BATTLE_UNIT_ART_IDS = ['colonist', 'scout', 'guard', 'spearman', 'heavy_infantry', 'skirmisher', 'arbalester', 'halberdier', 'cavalry', 'lancer', 'transport', 'coastal_warship', 'ocean_warship'].map(role => `battle.unit.${role}`);
+export const LIVE_ART_IDS = new Set<string>([...TERRAIN_ART_IDS, ...RESOURCES.flatMap(resource => [resource.id, resource.improvementId]), ...['granary', 'workshop', 'market', 'archive', 'harbor'].map(id => 'building.' + id), 'improvement.terraced_fields', 'improvement.managed_woodlot', 'improvement.quarry', 'improvement.reedworks', 'improvement.shore_fishery', 'improvement.spring_garden', 'improvement.polder', 'improvement.grove_archive', 'improvement.oreworks', 'improvement.tide_observatory', 'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', 'character.waykeeper', ...FACTION_ART_IDS, ...Object.values(BATTLE_EFFECT_IDS), ...BATTLE_UNIT_ART_IDS]);
 export interface ArtStatus {
   state: 'loading' | 'ready' | 'fallback'; message: string; atlasPages: number;
   residentBytesEstimate: number; downloadBytes: number; loadMs: number; warnings: string[];
@@ -36,6 +39,7 @@ export class RuntimeArt {
   private destroyed = false;
   private battleLoad?: Promise<void>;
   private readonly settlementFits = new Map<string, TileArtworkFit>();
+  private readonly improvementFits = new Map<string, TileArtworkFit>();
   private constructor(readonly catalog: RuntimeCatalog, readonly status: ArtStatus, private readonly resolveUrl: (url: string) => string) {
     this.assets = catalog.assets.filter(asset => asset.contentIds.some(id => LIVE_ART_IDS.has(id)) || LIVE_ART_IDS.has(asset.id));
     for (const asset of this.assets) {
@@ -57,19 +61,19 @@ export class RuntimeArt {
       const needed = new Set(art.assets.map(asset => asset.atlasId));
       const budget = (window.innerWidth < 750 ? 64 : 128) * 1024 * 1024;
       if (catalog.atlases.filter(page => needed.has(page.id)).reduce((sum, page) => sum + page.width * page.height * 4, 0) > budget) throw new Error('Approved atlases exceed this display profile’s residency budget. Procedural artwork is retained.');
-      for (const atlas of catalog.atlases.filter(page => needed.has(page.id) && page.id !== 'battle')) await art.loadPage(atlas);
+      for (const atlas of catalog.atlases.filter(page => needed.has(page.id) && !page.id.startsWith('battle'))) await art.loadPage(atlas);
       const missing = [...LIVE_ART_IDS].filter(id => !art.byContent.has(id));
       if (missing.length) status.warnings.push(`Artwork unavailable; terrain variants use their original biome tile, other roles use generic or procedural fallback: ${missing.join(', ')}.`);
       status.loadMs = performance.now() - started;
       return art;
     } catch (error) { art.destroy(); throw error; }
   }
-  /** One shared deferred page; ordinary world play never downloads battle pixels. */
+  /** Shared deferred pages; ordinary world play never downloads battle pixels. */
   ensureBattle(): Promise<void> {
     return this.battleLoad ??= (async () => {
-      const atlas = this.catalog.atlases.find(page => page.id === 'battle');
-      if (!atlas || this.destroyed) return;
-      try { await this.loadPage(atlas); }
+      const atlases = this.catalog.atlases.filter(page => page.id.startsWith('battle'));
+      if (this.destroyed) return;
+      try { for (const atlas of atlases) await this.loadPage(atlas); }
       catch (cause) { this.status.warnings.push(`Battle artwork unavailable; recorded actions and role markers remain available: ${String(cause)}`); }
     })();
   }
@@ -112,5 +116,11 @@ export class RuntimeArt {
     if (fit) this.settlementFits.set(asset.id, fit);
     return fit;
   }
-  destroy(): void { if (this.destroyed) return; this.destroyed = true; for (const sheet of this.sheets.values()) sheet.destroy(true); this.sheets.clear(); this.settlementFits.clear(); }
+  improvementFit(asset: RuntimeAsset): TileArtworkFit | undefined {
+    const cached = this.improvementFits.get(asset.id); if (cached) return cached;
+    const fit = registeredImprovementFit(asset, this.catalog.atlases.find(atlas => atlas.id === asset.atlasId)?.sha256 ?? '');
+    if (fit) this.improvementFits.set(asset.id, fit);
+    return fit;
+  }
+  destroy(): void { if (this.destroyed) return; this.destroyed = true; for (const sheet of this.sheets.values()) sheet.destroy(true); this.sheets.clear(); this.settlementFits.clear(); this.improvementFits.clear(); }
 }

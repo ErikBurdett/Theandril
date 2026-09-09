@@ -16,16 +16,17 @@ test('AI invests a visible enemy town and maintains its siege until a legal assa
   let assaulted = false;
   for (let turn = 0; turn < 5 && !assaulted; turn++) {
     expect(applyCommand(state, { type: 'endTurn', factionId: state.turnOwnerId }).ok).toBe(true);
-    const plan = planTurn(getObservation(state, state.turnOwnerId));
+    const observed = getObservation(state, state.turnOwnerId);
+    const plan = planTurn(observed);
     for (const command of plan) {
       expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true });
-      if (command.type === 'assault') { assaulted = true; break; }
+      if (command.type === 'assault') { expect(observed.sieges[0]!.defenses).toBe(0); assaulted = true; break; }
     }
   }
   expect(assaulted).toBe(true);
   expect(state.battle?.settlementId).toBe(CONQUEST_FIXTURE.settlementId);
   for (const command of planTurn(getObservation(state, state.turnOwnerId))) expect(applyCommand(state, command).ok).toBe(true);
-  expect(state.pendingCapture?.settlementId).toBe(CONQUEST_FIXTURE.settlementId);
+  expect(state.pendingCapture?.settlementId, JSON.stringify(state.battleReports.at(-1))).toBe(CONQUEST_FIXTURE.settlementId);
   const capture = planTurn(getObservation(state, state.turnOwnerId));
   expect(capture[0]).toMatchObject({ type: 'resolveCapture', outcome: 'occupy' });
   expect(applyCommand(state, capture[0]).ok).toBe(true);

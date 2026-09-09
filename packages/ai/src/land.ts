@@ -1,4 +1,4 @@
-import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, PROSPERITY_PROJECT, type LandYield } from '@theandril/content';
+import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, PROSPERITY_PROJECT, resourceById, type LandYield } from '@theandril/content';
 import type { GameCommand, Observation } from '@theandril/sim';
 import { landPlanningTowns } from './observation-options';
 
@@ -10,6 +10,11 @@ export function planLand(view: Observation, budget: number, plannedProduction: R
   const towns = new Map(view.settlements.map(town => [town.id, town]));
   const candidates = landPlanningTowns(view.land.settlements, view.turn);
   const ecology = FACTION_ECOLOGIES[view.factions.find(faction => faction.id === view.factionId)?.definitionId ?? ''];
+  const stocks = new Map(view.resources?.stockpiles.map(stock => [stock.resourceId, stock]));
+  const materialDemand = (resourceId: string | undefined): number => {
+    const stock = resourceId ? stocks.get(resourceId) : undefined;
+    return stock ? Math.floor(Math.max(0, 6 - stock.amount) * 4 / (1 + stock.perTurn)) : 0;
+  };
   const prepared = view.settlements.filter(town => town.factionId === view.factionId
     && PROSPERITY_PROJECT.requiredBuildings.every(id => town.buildings.includes(id)));
   const fundingProject = prepared.length >= PROSPERITY_PROJECT.settlementCount && view.treasury < view.progression.project.coinCost
@@ -28,9 +33,11 @@ export function planLand(view: Observation, budget: number, plannedProduction: R
     const workerValue = (yields: LandYield): number => fiscalWorkers
       ? yields.food * (needsFood ? 5 : 2) + yields.industry + yields.coin * 4 + yields.knowledge * 2
       : value(yields, needsFood);
-    const workers = land.cells.filter(cell => cell.claimed && cell.canWork)
-      .sort((a, b) => workerValue(b.yields.total) - workerValue(a.yields.total) || a.cell - b.cell)
-      .slice(0, land.workerCapacity).map(cell => cell.cell).sort((a, b) => a - b);
+    const pageCells = new Set(land.cells.map(cell => cell.cell));
+    const retained = land.cellWindow ? land.worked.filter(cell => !pageCells.has(cell)) : [];
+    const workers = [...retained, ...land.cells.filter(cell => cell.claimed && cell.canWork)
+      .sort((a, b) => workerValue(b.yields.total) + materialDemand(b.resourceId) - workerValue(a.yields.total) - materialDemand(a.resourceId) || a.cell - b.cell)
+      .slice(0, Math.max(0, land.workerCapacity - retained.length)).map(cell => cell.cell)].sort((a, b) => a - b);
     if (workers.join(',') !== land.worked.join(',')) commands.push({ type: 'setWorkedTiles', factionId: view.factionId, settlementId: town.id, cells: workers });
     if (coinSpent || land.work) continue;
     const worked = land.cells.filter(cell => workers.includes(cell.cell));
@@ -44,14 +51,19 @@ export function planLand(view: Observation, budget: number, plannedProduction: R
     const improvement = worked.flatMap(cell => cell.improvementOptions.filter(option => option.canStart && option.coinCost <= budget).flatMap(option => {
       const definition = IMPROVEMENTS.find(item => item.id === option.improvementId);
       if (!definition) return [];
+      const resource = cell.resourceId ? resourceById.get(cell.resourceId) : undefined;
+      // Retain the realm's last productive source. Surplus duplicate extraction
+      // sites may still be replaced through the existing strict utility test.
+      if (resource && cell.improvementId === resource.improvementId && definition.id !== resource.improvementId && (stocks.get(resource.id)?.perTurn ?? 0) <= resource.extraction) return [];
       const projected = { food: 0, industry: 0, coin: 0, knowledge: 0 };
       for (const key of ['food', 'industry', 'coin', 'knowledge'] as const) projected[key] = Math.max(0,
         cell.yields.biome[key] + cell.yields.features[key] + cell.yields.affinity[key] + definition.yields[key]
         + definition.featureModifiers.reduce((sum, modifier) => sum + ((cell.features & modifier.feature) === modifier.feature ? modifier.yields[key] : 0), 0));
-      const benefit = value(projected, needsFood) - value(cell.yields.total, needsFood);
+      const material = definition.requiredResourceId ? materialDemand(definition.requiredResourceId) : 0;
+      const benefit = value(projected, needsFood) - value(cell.yields.total, needsFood) + material;
       // Food demand fluctuates as towns grow. A replacement must improve both
       // demand regimes, otherwise gardens and oreworks can demolish each other.
-      const stableGain = Math.min(value(projected, true) - value(cell.yields.total, true), value(projected, false) - value(cell.yields.total, false));
+      const stableGain = Math.min(value(projected, true) - value(cell.yields.total, true), value(projected, false) - value(cell.yields.total, false)) + material;
       return (cell.improvementId ? stableGain >= 4 : benefit >= 1) ? [{ cell, option, benefit }] : [];
     })).sort((a, b) => b.benefit - a.benefit || a.option.coinCost - b.option.coinCost || a.cell.cell - b.cell.cell);
     const cultivate = cultivation[0];
@@ -64,9 +76,9 @@ export function planLand(view: Observation, budget: number, plannedProduction: R
       coinSpent = chosen.option.coinCost; reasons.push(`${town.name} improves worked land with ${chosen.option.name} for ${coinSpent} coin.`);
     } else {
       const claim = land.cells.filter(cell => cell.claim.canStart && cell.claim.coinCost <= budget)
-        .sort((a, b) => value(b.yields.total, needsFood) - value(a.yields.total, needsFood) || a.cell - b.cell)[0];
+        .sort((a, b) => value(b.yields.total, needsFood) + materialDemand(b.resourceId) - value(a.yields.total, needsFood) - materialDemand(a.resourceId) || a.cell - b.cell)[0];
       const weakest = worked.length ? Math.min(...worked.map(cell => value(cell.yields.total, needsFood))) : 0;
-      if (claim && (workers.length < land.workerCapacity || value(claim.yields.total, needsFood) > weakest)) {
+      if (claim && (workers.length < land.workerCapacity || value(claim.yields.total, needsFood) + materialDemand(claim.resourceId) > weakest)) {
         commands.push({ type: 'claimCell', factionId: view.factionId, settlementId: town.id, cell: claim.cell });
         coinSpent = claim.claim.coinCost; reasons.push(`${town.name} expands into a productive adjacent hex for ${coinSpent} coin.`);
       }

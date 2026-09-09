@@ -9,6 +9,7 @@ import { navalCampaign, NAVAL_FIXTURE } from '../../packages/test-fixtures/src/n
 function sizeCampaign() {
   const state = createGame({ generatorVersion: 4, seed: 74, size: 'tiny', factionCount: 2, pace: 'short' });
   state.world.terrain.fill(1); state.world.biome.fill(1); state.world.waterDepth.fill(0); state.world.fertility.fill(60);
+  state.resources.deposits = {}; // This gallery replaces the entire generated terrain/resource layer.
   const largeId = `army.${state.nextId++}`;
   for (const [id, count, cell, name] of [['army.1', 1, 500, 'Lone witness'], ['army.2', 3, 503, 'Road company'], [largeId, 12, 506, 'Hearth host']] as const) {
     state.armies[id] = { id, factionId: state.turnOwnerId, name, cell, movement: 3,

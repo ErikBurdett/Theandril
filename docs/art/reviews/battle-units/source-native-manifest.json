@@ -1,0 +1,494 @@
+{
+  "schemaVersion": 1,
+  "scope": "Existing exact-input native visual approvals and independently inspected contact sheets for 13 original shared role rigs. Hash inventory does not grant approval. Runtime browser review is recorded separately in BATTLE_UNIT_ANIMATION.md. Culture-specific map art is preserved and is not claimed as newly animated.",
+  "roles": [
+    {
+      "id": "battle.unit.arbalester",
+      "version": 1,
+      "approvedManifestPath": "assets/art/approved/battle.unit.arbalester.json",
+      "approvedManifestSha256": "673524533af66dbaa400619c9b376d0b6aa1a5f1c6f51e783bed627922c7af06",
+      "approvedInputHash": "10467433892299ceceb67d6c48fb234721b752a414a0f392bff19057a8236cd5",
+      "candidateInputHash": "e431a27a3bc04f12868ab0a9f59e5aa04982f5a10fba965ab6dde98794197894",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.arbalester/v1/manifest.json",
+      "sourceManifestSha256": "d887aac865fe7f5e922c812a4c1197ea2fe4bfb1c5eece0a88b34720af2cc146",
+      "blendPath": "assets/art/source/blender-units/battle.unit.arbalester/v1/source.blend",
+      "blendSha256": "ae9cc3f24531d48fa1fec93846f577ea1d551c4ef6da815934db63e37e4905e1",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "battle-foot",
+      "nativeReviewPath": "docs/art/reviews/battle-units/arbalester-v1/evidence.json",
+      "nativeReviewSha256": "34b1d3299fbf549ede883fcaa4c7c1afae228104c71671373157b3612e9e5ad8",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:04:51.195Z",
+        "notes": "Inspected all64processed native frames and 4x west attack. Visible crossbow stock and steel prod, winding drum, bolt case and mantle distinguish the ranged armored role. Separate draw/reload hand and weapon support hand, alternating steps and grounded fall are genuine bone poses. Small mechanism detail is deliberately subordinate to the silhouette. Native accepted, runtime review pending.\nReviewed candidate e431a27a3bc04f12868ab0a9f59e5aa04982f5a10fba965ab6dde98794197894; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/c8ff98eb63f9dc95b4ebe69c3718bdbf89780bffb2ae0298e2452269a96677a8.png"
+        ],
+        "inputHash": "10467433892299ceceb67d6c48fb234721b752a414a0f392bff19057a8236cd5"
+      }
+    },
+    {
+      "id": "battle.unit.colonist",
+      "version": 2,
+      "approvedManifestPath": "assets/art/approved/battle.unit.colonist.json",
+      "approvedManifestSha256": "657315c2e9987981e13573908d920afc9b7920b337495b3295e6fce0b63aa9cd",
+      "approvedInputHash": "ccebf22e84dcdf17c93350d4317fbb8381171e8807e58e6c1867163c77973fe7",
+      "candidateInputHash": "8b1c136bf98950c915723352ff581b064e04d7db56c6abf2f46fcb66846cc9dc",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.colonist/v2/manifest.json",
+      "sourceManifestSha256": "11810fddbb10ac23e87e6156d40f817f6f09a6bdb19a83e252a7d9aaf9cc672f",
+      "blendPath": "assets/art/source/blender-units/battle.unit.colonist/v2/source.blend",
+      "blendSha256": "7418e2e1ab14fea38bbf6dcb233f0264594583a5c8457286617b5ae473f32136",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "battle-foot",
+      "nativeReviewPath": "docs/art/reviews/battle-units/colonist-v2/evidence.json",
+      "nativeReviewSha256": "415d13fe05a48e3a1c3cc7c951abf6e15378b0611399496fd0f1801db72628bc",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:04:50.027Z",
+        "notes": "Inspected all64processed native frames and 4x west staff action. Large strapped pack, rolled blanket, provisions and plain cloth read as a traveling colonist. Staff defense, footwork and grounded fall stay registered; the long staff remains above ground through collapse. Shared adult rig with original travel kit. Native accepted, battlefield review remains.\nReviewed candidate 8b1c136bf98950c915723352ff581b064e04d7db56c6abf2f46fcb66846cc9dc; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/f0f664414665016fb34f8a187b4ba93d3581974be0dbffe30d1e69cc94557058.png"
+        ],
+        "inputHash": "ccebf22e84dcdf17c93350d4317fbb8381171e8807e58e6c1867163c77973fe7"
+      }
+    },
+    {
+      "id": "battle.unit.guard",
+      "version": 4,
+      "approvedManifestPath": "assets/art/approved/battle.unit.guard.json",
+      "approvedManifestSha256": "b105342aedbb4d8bd42c722b488af285b75bf4ddbc29dc4971026c884ef52366",
+      "approvedInputHash": "f8d66cfffa46c0e9a8e651c50990f4897005455d2646a1812a33a4670dae67b7",
+      "candidateInputHash": "4a388b0ff55e24c42886a6d22c84c31b35448aeda7b645c97b037a51eabe5d39",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.guard/v4/manifest.json",
+      "sourceManifestSha256": "0383e09ce49f05e6d01eb06c71b21dfe55936dfcedad7a90825cae66bed0eead",
+      "blendPath": "assets/art/source/blender-units/battle.unit.guard/v4/source.blend",
+      "blendSha256": "ff4ab8fd9f57c4f043de29ab97a0a8197fc3116d36afc090c539f44c267203ba",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "battle-foot",
+      "nativeReviewPath": "docs/art/reviews/battle-units/guard-v4/evidence.json",
+      "nativeReviewSha256": "d7513de348b25d0fb7a7633ae24cb3d5dec061158d183e0f28dd68a7f219e945",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-08T23:40:51.992Z",
+        "notes": "Inspected actual processed 1x clips and nearest 4x walk against retained Blender v4 views, with parent independent attack/death review. Layered steel, leather, shield and blade read at43px body height; knees, arms and weapon articulate, backward death grounds body and equipment. Two actual facing renders preserve handedness. Attack begins and ends in same resting pose intentionally. All64frames pass binary alpha, palette, fixed pivot and full union padding. Shared guard role direction accepted; runtime crowd readability remains a separate required review.\nReviewed candidate 4a388b0ff55e24c42886a6d22c84c31b35448aeda7b645c97b037a51eabe5d39; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/17b551b00b039bc19eee173e03dd4421c5e5d2f6f160b7aad3de9e12cac05a90.png"
+        ],
+        "inputHash": "f8d66cfffa46c0e9a8e651c50990f4897005455d2646a1812a33a4670dae67b7"
+      }
+    },
+    {
+      "id": "battle.unit.halberdier",
+      "version": 2,
+      "approvedManifestPath": "assets/art/approved/battle.unit.halberdier.json",
+      "approvedManifestSha256": "cf7c4535d828ab7175446e4f99c37e7487f0f0b714ec7fc74b59eb2fcd3b0fc7",
+      "approvedInputHash": "1c7286ad27c1cedc35ec8bfe0050189af0a5c2d97fd188526f6925703ad6e0ba",
+      "candidateInputHash": "a55f2eb3652f6e8bba83be2e19e6ba4e1f9b2e02234e9734b937fc9b65b9b0e8",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.halberdier/v2/manifest.json",
+      "sourceManifestSha256": "f407e34a06ce428c8f775d51c38aa46abc8dab15682a0962f6b83fd2783e4755",
+      "blendPath": "assets/art/source/blender-units/battle.unit.halberdier/v2/source.blend",
+      "blendSha256": "cbc70dbea8b9555f978f875583dff55a37e392ee25cccb477e7f43c9cef7a942",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "battle-foot",
+      "nativeReviewPath": "docs/art/reviews/battle-units/halberdier-v2/evidence.json",
+      "nativeReviewSha256": "ca11a5a5870038f3ed81ba8216f1eca126314a93eb534590ad45be3b5f65f455",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:03:56.790Z",
+        "notes": "Reviewed all64processed native poses and 4x west attack. Hooked broad blade and additional shoulder/bevor steel separate this heavy polearm kit from the pike. Both facings show an actual braced thrust; equipment settles with the collapsed figure inside the original canvas. Small blade detail needs actual crowd-scale review; native accepted, no runtime approval implied.\nReviewed candidate a55f2eb3652f6e8bba83be2e19e6ba4e1f9b2e02234e9734b937fc9b65b9b0e8; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/bc4bd1b6e1363a333660fa0f6b79f14a8d7e83085901670e68a736120f190e83.png"
+        ],
+        "inputHash": "1c7286ad27c1cedc35ec8bfe0050189af0a5c2d97fd188526f6925703ad6e0ba"
+      }
+    },
+    {
+      "id": "battle.unit.heavy_infantry",
+      "version": 1,
+      "approvedManifestPath": "assets/art/approved/battle.unit.heavy_infantry.json",
+      "approvedManifestSha256": "991cc60946b44f746cab9812924b7989f86655e85ed64bc158d9dc6b1a187f7f",
+      "approvedInputHash": "124386c3871edea81603a3739f5af1044b432c89c9d1a568a816dde7feec38fa",
+      "candidateInputHash": "e301cdb6741f470d93e64912f5c524394f9c8a5e31141b116a65e7ad3b87f096",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.heavy_infantry/v1/manifest.json",
+      "sourceManifestSha256": "2df6fda00eab8568416493de7f3c307df832ec697f4b6c7bbf56b31c5f130e3e",
+      "blendPath": "assets/art/source/blender-units/battle.unit.heavy_infantry/v1/source.blend",
+      "blendSha256": "8978a919804e4c42bd5484eb171d27a239c508d2d60b1202dfd35b49e6360cd2",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "battle-foot",
+      "nativeReviewPath": "docs/art/reviews/battle-units/heavy_infantry-v1/evidence.json",
+      "nativeReviewSha256": "2470fb498f2392fb70fc901816cf599559c630043c3ee43c2661e4916088af62",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:03:57.352Z",
+        "notes": "Reviewed all64processed native poses and 4x west hammer swing. Large ribbed tower shield, closed visor, heavier pauldrons and compact hammer give distinct mass. Readable raised wind-up, strike, recovery and grounded fall; same rest pose at attack endpoints is intentional. Native accepted; final battle integration review remains.\nReviewed candidate e301cdb6741f470d93e64912f5c524394f9c8a5e31141b116a65e7ad3b87f096; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/6001c8f9c2b9c74c93880b639cb1dfbf68658f0e9dea53f8f6bc36f5dcf6e753.png"
+        ],
+        "inputHash": "124386c3871edea81603a3739f5af1044b432c89c9d1a568a816dde7feec38fa"
+      }
+    },
+    {
+      "id": "battle.unit.scout",
+      "version": 1,
+      "approvedManifestPath": "assets/art/approved/battle.unit.scout.json",
+      "approvedManifestSha256": "39c67c4958fda3505c10bf8139d5341852270ff9a175679f0ed8ad493cd7f8eb",
+      "approvedInputHash": "c7b2c8114416254bb3ca0e948f0445885bcc6734274952ba9608b092ccf2b516",
+      "candidateInputHash": "19454781d58b8f1d7b34b38ae3d3cb1c3f7b6b71bf1f8c6758dad8b94486734b",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.scout/v1/manifest.json",
+      "sourceManifestSha256": "9407c54ae3955f06de5906e427b994c05aed23f59db0a9fe4cf4dafb79ccd09d",
+      "blendPath": "assets/art/source/blender-units/battle.unit.scout/v1/source.blend",
+      "blendSha256": "f1c918fb602cf870e09035a5c1ba8fcb0261d9c02d488e3ed2b75ded7c1678c1",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "battle-foot",
+      "nativeReviewPath": "docs/art/reviews/battle-units/scout-v1/evidence.json",
+      "nativeReviewSha256": "191ae691fdeb832e9ea3adf3300a0cc4f2c47bfe40ff9b1adf5449d2f1dbb51b",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:03:55.692Z",
+        "notes": "Reviewed all64processed native frames and 4x west bow draw on dark, sand and olive. Hood, light tunic, quiver and curved bow distinguish the scout; separate draw hand, alternating feet and grounded collapse retain identity. East bow is narrower by real perspective. Rest/recovery repeats are intentional. Native approval only; dense battlefield legibility remains runtime review.\nReviewed candidate 19454781d58b8f1d7b34b38ae3d3cb1c3f7b6b71bf1f8c6758dad8b94486734b; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/22941a37c7dfe3b08c3f0d2c0207b6fc208c32b0b7e555a9f9f863ccb8701630.png"
+        ],
+        "inputHash": "c7b2c8114416254bb3ca0e948f0445885bcc6734274952ba9608b092ccf2b516"
+      }
+    },
+    {
+      "id": "battle.unit.skirmisher",
+      "version": 2,
+      "approvedManifestPath": "assets/art/approved/battle.unit.skirmisher.json",
+      "approvedManifestSha256": "d151d980bb6d0db4bb7c1d6ae4b58ead8e5c0b24c44de0c9c73e0721702e4f73",
+      "approvedInputHash": "c0041b3fcb47d3962962ed997f9e6fc4b948ff8a299d83d0cb59078baf4a3b64",
+      "candidateInputHash": "ba498ff09df2b3070a217ceba535a3cc989950eadb227c7dad1f8373101bcc53",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.skirmisher/v2/manifest.json",
+      "sourceManifestSha256": "2cbc23bdd7f255d295828831eeaa9517bb4a8a8974c02c1e02fb76b936841190",
+      "blendPath": "assets/art/source/blender-units/battle.unit.skirmisher/v2/source.blend",
+      "blendSha256": "839f7947d42c4550078d88dd46d57129d394e0dc19c14aed9941c614661eed09",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "battle-foot",
+      "nativeReviewPath": "docs/art/reviews/battle-units/skirmisher-v2/evidence.json",
+      "nativeReviewSha256": "24dc9040935ea7028a54d455712b9d76c734b14c6ef3bdc30b89a4bfb2d05881",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:04:50.609Z",
+        "notes": "Inspected all64processed native frames and 4x west throw. Reed buckler, spare javelins and light cloth distinguish this missile role. Drawn-back arm releases the held javelin for two explicit frames then readies another; actual event supplies projectile flight. Native padding and both grounded falls pass. Runtime effects/participant coupling remain separate acceptance.\nReviewed candidate ba498ff09df2b3070a217ceba535a3cc989950eadb227c7dad1f8373101bcc53; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/828a912fc9cd0421bc384ac16b229f5d13efd64fe3611baa1a633c4caff3f951.png"
+        ],
+        "inputHash": "c0041b3fcb47d3962962ed997f9e6fc4b948ff8a299d83d0cb59078baf4a3b64"
+      }
+    },
+    {
+      "id": "battle.unit.spearman",
+      "version": 3,
+      "approvedManifestPath": "assets/art/approved/battle.unit.spearman.json",
+      "approvedManifestSha256": "8b2c375cbfb2efa01004c3591e0930c33462dc2604e829907fb2d9ad0d7574f3",
+      "approvedInputHash": "088bfb1d835c6cec964e0681a879a0dccc7d836d441caf0f2807989ed1d93542",
+      "candidateInputHash": "96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.spearman/v3/manifest.json",
+      "sourceManifestSha256": "f170dc1e4a4c6b29b6a4fa9569e227892de02882d7ec8d60df9671eeb3224839",
+      "blendPath": "assets/art/source/blender-units/battle.unit.spearman/v3/source.blend",
+      "blendSha256": "e0364e071b6f6f30f32603904f936fcd0a2e5539737052a1e441ccc1f3a65fd7",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 64,
+        "height": 64
+      },
+      "pivot": [
+        32,
+        56
+      ],
+      "atlasId": "battle-foot",
+      "nativeReviewPath": "docs/art/reviews/battle-units/spearman-v3/evidence.json",
+      "nativeReviewSha256": "886fd3d673e3d34cd19cb85686c14cad890afb1ffb8a120840c875b92c4164f9",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:03:56.250Z",
+        "notes": "Reviewed all64processed native poses and 4x west attack. Long wooden pike, steel leaf point, two-handed anticipation and forward thrust are legible. Death raises the long shaft while falling before laying it within the fixed canvas; allframes preserve pivot and clear padding. Shared adult rig, original pike kit; runtime density review remains.\nReviewed candidate 96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/b770c937aed901938dfaa098e3b7d6d5ee6be8dd4eb440e4bd8889331bd3d485.png"
+        ],
+        "inputHash": "088bfb1d835c6cec964e0681a879a0dccc7d836d441caf0f2807989ed1d93542"
+      }
+    },
+    {
+      "id": "battle.unit.cavalry",
+      "version": 1,
+      "approvedManifestPath": "assets/art/approved/battle.unit.cavalry.json",
+      "approvedManifestSha256": "4c22aa82ee256247ff47aa3988d5b00bf7269025ba014c96840fa9057604b478",
+      "approvedInputHash": "6d6f4198af566ceacd5998297d14b3fc8d58522fff744a79feeae40510719d39",
+      "candidateInputHash": "70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.cavalry/v1/manifest.json",
+      "sourceManifestSha256": "9a6c65e522af7298c9487d1fb0f30be74cca1aaa86ab79a65a2121b7e1cdf451",
+      "blendPath": "assets/art/source/blender-units/battle.unit.cavalry/v1/source.blend",
+      "blendSha256": "b92fb7cac3541c7352f4bab2123a69b52ee03b6842c917ff69c74d29cff757c3",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "battle-mounted",
+      "nativeReviewPath": "docs/art/reviews/battle-units/cavalry-v1/evidence.json",
+      "nativeReviewSha256": "c63099cde2fb798edefb69e43766e4eb5cc9f2cddae198deab7e63a3795013f4",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:04:51.803Z",
+        "notes": "Inspected all64processed native frames and 4x west saber action, with independent parent review of east action. Real articulated horse legs, mane/tail, tack and seated rider retain identity. Saber wind-up/strike and horse/rider collapse read clearly; far-facing fallen rider is partly occluded by the horse as expected from actual geometry. Native accepted, crowd/runtime review pending.\nReviewed candidate 70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/153e5a447a04729ba5576ab415b258a1c710fd9ed48261940358182bf8929e1e.png"
+        ],
+        "inputHash": "6d6f4198af566ceacd5998297d14b3fc8d58522fff744a79feeae40510719d39"
+      }
+    },
+    {
+      "id": "battle.unit.coastal_warship",
+      "version": 3,
+      "approvedManifestPath": "assets/art/approved/battle.unit.coastal_warship.json",
+      "approvedManifestSha256": "70a3d9a4a77d22ddaa6d558eef779ccea9dcd3e2d2f4f238d8f2c4f0d319518a",
+      "approvedInputHash": "2afb7af94c2198daba099761eba45939d7464aa7cce48228879a43de597523a3",
+      "candidateInputHash": "232b103183471f8bb4e8200365b350f08f1ae9c8cda5b4d869f75e7bbee72ea5",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.coastal_warship/v3/manifest.json",
+      "sourceManifestSha256": "6c8af7015722d831fb1b0c5fe85ddabb438aed1edbe4781c64c421b6ca6d269f",
+      "blendPath": "assets/art/source/blender-units/battle.unit.coastal_warship/v3/source.blend",
+      "blendSha256": "df3feb9229e8de9fc9641638e24e76ef192d413b3bc6caa666854108b485b0b3",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "battle-mounted",
+      "nativeReviewPath": "docs/art/reviews/battle-units/coastal_warship-v3/evidence.json",
+      "nativeReviewSha256": "4d746f2825a7fb99097d1326d21c7f989224ffbc4cc599d199c7ecc6adbb358c",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:06:19.049Z",
+        "notes": "Reviewed all64processed native frames and 4x west sail cycle. Slender long galley, reinforced ram and twelve rowing oars distinguish the coastal hull. Staggered actual oar strokes and two flexing sail panels read clearly; all tips fit fixed96canvas after retained rejected calibration revisions. Submergence keeps a final floating sail fragment. Native accepted, runtime review pending.\nReviewed candidate 232b103183471f8bb4e8200365b350f08f1ae9c8cda5b4d869f75e7bbee72ea5; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/8b07bd7159b3477ec7ccaafe4cd1f64c00f67152b7509a1cadb135d6c4028fc4.png"
+        ],
+        "inputHash": "2afb7af94c2198daba099761eba45939d7464aa7cce48228879a43de597523a3"
+      }
+    },
+    {
+      "id": "battle.unit.lancer",
+      "version": 1,
+      "approvedManifestPath": "assets/art/approved/battle.unit.lancer.json",
+      "approvedManifestSha256": "fc37e33a279dbb997c3ddbc9dcbdc8e652cdd6bb5b327ac77d3b5d8fcbc0bc23",
+      "approvedInputHash": "b80b74df956d264581fd0717b859ff3a2ac8649b333b9fd20ef39fd2117ef2c2",
+      "candidateInputHash": "67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.lancer/v1/manifest.json",
+      "sourceManifestSha256": "db5c641bbad2867b86c8a8cc7d48428a397f49d4bf26a24ac34d1e9afac85d7d",
+      "blendPath": "assets/art/source/blender-units/battle.unit.lancer/v1/source.blend",
+      "blendSha256": "d17832ada436522b10f3e694001fb518719305fb6acdf6b7a68a01a922087f23",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "battle-mounted",
+      "nativeReviewPath": "docs/art/reviews/battle-units/lancer-v1/evidence.json",
+      "nativeReviewSha256": "42925556d6d775e4c793b71bc52dd2d933e13e800c2d789381e2852ee421a959",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:06:17.828Z",
+        "notes": "Reviewed all64processed native poses and 4x west lance action. Long lance/pennon, horse armor overlaps and chamfron distinguish the heavy rider from cavalry. Actual horse gait, seated rider wind-up/lowered strike and joint collapse retain fixed ground registration. Lance clears everyframe; native accepted with runtime density and action review pending.\nReviewed candidate 67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/5962ec78ae7b6ccfbff84c1394274090c9536bc378ebf41a8cddc77f5c3b6188.png"
+        ],
+        "inputHash": "b80b74df956d264581fd0717b859ff3a2ac8649b333b9fd20ef39fd2117ef2c2"
+      }
+    },
+    {
+      "id": "battle.unit.ocean_warship",
+      "version": 2,
+      "approvedManifestPath": "assets/art/approved/battle.unit.ocean_warship.json",
+      "approvedManifestSha256": "2b2e87d0932268a4b16415e75076bdbccde0ac8793759fc1aa8ceaa380868eac",
+      "approvedInputHash": "d20235049fde0bf1640839ebbec537e325bace38027ce1bbf89e4427a0721b0d",
+      "candidateInputHash": "0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.ocean_warship/v2/manifest.json",
+      "sourceManifestSha256": "a485315d2fa55ec41ab5e04b114f10c6277883f94532b1e8bfd4a64d578f9d83",
+      "blendPath": "assets/art/source/blender-units/battle.unit.ocean_warship/v2/source.blend",
+      "blendSha256": "6f5620edbc648f178826e0007d3782e63806568dd9a8c2aa90a5b2479dba6124",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "battle-mounted",
+      "nativeReviewPath": "docs/art/reviews/battle-units/ocean_warship-v2/evidence.json",
+      "nativeReviewSha256": "ad219d3dccdbb3e79ad65961606f763ecc788cf9b4dc9f9fa89f8d6057de6663",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:06:19.662Z",
+        "notes": "Reviewed all64processed native frames and 4x west fire cycle. Broad armored hull, raised stern deck and command cloth distinguish the heavier warship; planking and sail match the other original hulls. Actual small deck launcher flex and recoil accompany sail motion; visible projectile effects must come from real battle facts. Native accepted; final firing-effect readability requires gameplay review.\nReviewed candidate 0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/15e7f1445a04cfdfbbd6393dc7b53c8dad0bb920844a44eba0929df8fe6c9d41.png"
+        ],
+        "inputHash": "d20235049fde0bf1640839ebbec537e325bace38027ce1bbf89e4427a0721b0d"
+      }
+    },
+    {
+      "id": "battle.unit.transport",
+      "version": 2,
+      "approvedManifestPath": "assets/art/approved/battle.unit.transport.json",
+      "approvedManifestSha256": "389f1dcdceaf02938d149ecf8da0267c60412ae88e502aad09a078a3eff2bc0e",
+      "approvedInputHash": "a7e4e37b66a1ccd10e6a15dc384d26d8f5a4b74c223a9fbfb4bb96e5733bcf2b",
+      "candidateInputHash": "ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851",
+      "sourceManifestPath": "assets/art/source/blender-units/battle.unit.transport/v2/manifest.json",
+      "sourceManifestSha256": "6bc9d234a4a6016ec510abcf51e0e301b0a7ed7f64864e27b86dff7228617180",
+      "blendPath": "assets/art/source/blender-units/battle.unit.transport/v2/source.blend",
+      "blendSha256": "cb98c20c24667acaa27ad5f217e9e61884cf293a3df8ec16496e0c025c8d43fe",
+      "nativeFrameCount": 64,
+      "processedFrameCount": 64,
+      "nativeResolution": {
+        "width": 96,
+        "height": 96
+      },
+      "pivot": [
+        48,
+        80
+      ],
+      "atlasId": "battle-mounted",
+      "nativeReviewPath": "docs/art/reviews/battle-units/transport-v2/evidence.json",
+      "nativeReviewSha256": "86ef587a4852d34865eed6161b73afa017ed1fb0db1e6914828a875edb4d5717",
+      "review": {
+        "reviewer": "Codex-art-review",
+        "reviewedAt": "2026-09-09T00:06:18.456Z",
+        "notes": "Reviewed all64processed native frames and 4x west sail cycle, with parent independent east sailing and west sink review. Covered cargo cabin/crates, planked hull and stitched sail remain legible. Oars sweep independently, sail panels flex, deck weapon moves subtly; sinking removes hull below actual alpha waterline until remaining canvas/spar. Native accepted, actual hull/event playback remains runtime review.\nReviewed candidate ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851; byte-identical frames and evidence retained in the approved source directory.",
+        "evidencePaths": [
+          "assets/art/reviews/7dc3974724587cd3d6edb8823faa2a93443ac779162dcd5e0a5fcfcc155babec.png"
+        ],
+        "inputHash": "a7e4e37b66a1ccd10e6a15dc384d26d8f5a4b74c223a9fbfb4bb96e5733bcf2b"
+      }
+    }
+  ],
+  "rolesCount": 13,
+  "newFrames": 832,
+  "catalogPath": "assets/art/runtime/catalog.json",
+  "catalogSha256": "e5a9b72658ab21b83e2a2b1dd7bbf07e2f7c0155b5baf9c97de5f03326d79630",
+  "atlases": [
+    {
+      "id": "foundation",
+      "imageUrl": "/art/foundation.png",
+      "jsonUrl": "/art/foundation.json",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de"
+    },
+    {
+      "id": "map-works",
+      "imageUrl": "/art/map-works.png",
+      "jsonUrl": "/art/map-works.json",
+      "width": 512,
+      "height": 512,
+      "sha256": "bbf53f6d34b2208ca9c645def54bdd0269b73eb910be816d46495b2d836f4cfc"
+    },
+    {
+      "id": "battle",
+      "imageUrl": "/art/battle.png",
+      "jsonUrl": "/art/battle.json",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "6e7cbcc86537efea76ba24e4cad54858b5e77bbbf46f2c87ceb7cd9e9addea7b"
+    },
+    {
+      "id": "battle-foot",
+      "imageUrl": "/art/battle-foot.png",
+      "jsonUrl": "/art/battle-foot.json",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "d00c52eddf8ecac66916852f0d65cb2b822f9c10e62ced171f71f586a6b52aae"
+    },
+    {
+      "id": "battle-mounted",
+      "imageUrl": "/art/battle-mounted.png",
+      "jsonUrl": "/art/battle-mounted.json",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "15c8f088ce02e12d555d2b65e19cb36576acba370ac0627e26890669b74d0020"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.copper_mine",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.copper_mine"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A working RED COPPER MINE: a stepped open verdigris-green quarry face with short timber gantry and heavy square copper ore bins, a small lean-to sorting shelter with dark slate roof. Readable turquoise mineral mound and muted orange metal bands on joined compact stone ground.",
+  "frames": [
+    {
+      "id": "improvement.copper_mine/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/improvement.copper_mine/1f56ceeab42a668207b3c175e1b448eabd1ad7eb903506f9e31f5390e63a9e2f/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "ca081ed02293ebd2934ffd62efb9539d9f13bdb19bae89ed594a55ea176d41bb",
+    "sourceRefs": [
+      "assets/art/source/resource-works/improvement.copper_mine-v1.png",
+      "assets/art/source/resource-works/improvement.copper_mine-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:37:57.588100Z",
+  "referenceHashes": [
+    "2135bc75765339af313b84cece3d77a58dff1a129212ce06c7630dfa3b4c0eae",
+    "d2230a307bca32bb842a4eebd5330d00d8d61189ffe841d99a403dd40130dd94"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "d59c7c3714d834d30ff6b6efbe5e214dda7e74b075d4ca37a38d1c52c1f93660",
+      "inputHash": "2135bc75765339af313b84cece3d77a58dff1a129212ce06c7630dfa3b4c0eae",
+      "outputHash": "464856f8137ed62d7dffb94da9848092b5fa193c0b2f273d1b88e1a6094c7044"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "464856f8137ed62d7dffb94da9848092b5fa193c0b2f273d1b88e1a6094c7044",
+      "outputHash": "32a9e2dbf5673a8a50ad1016c79e3a6280397fbd3ceadb74a309641cfb89c831"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "32a9e2dbf5673a8a50ad1016c79e3a6280397fbd3ceadb74a309641cfb89c831",
+      "outputHash": "5e18426298202f062e4522cc996961604f4a0ada9d6f425910beced6afd4ffcd"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "51cf72fb4db429a56756192ed250969427895dd93566400a6ca8cca13fa39394",
+      "outputHash": "46f7d61afcab44fad0c58c106d4852e5fa8919f26c6602f8dbb9d544ca37cf2c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "177e8c722ca4adce0814b0efb688350eb313eda700abcd481ae29fa65ba0ce64",
+      "outputHash": "d8f3d06b9c2b09c6278f3da79e1c89ef413302b769e126cf1f11985bf319a49e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "c7643a8d241c190b117b92c570de32a511b2485581e510f7fb0f39ba29d90c1c",
+      "outputHash": "809f8f76fe75ecb963d783cc56a874c4307952f02b864eb92160f721780ce0cb"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/improvement.copper_mine.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex visual review",
+    "reviewedAt": "2026-09-08T23:44:07.544Z",
+    "notes": "Inspected exact native1x and nearest4x contact sheets. The improvement.copper_mine silhouette, joined ground footprint and mineral/material color match its resource role; no clipping or alpha fringe. Deposits and working structures are distinct. Map scaling and fog are verified separately in gameplay.\nReviewed candidate 1f56ceeab42a668207b3c175e1b448eabd1ad7eb903506f9e31f5390e63a9e2f; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b64a0daf6f337730a0e135d196adc6ed49e3e9411a5d72247d6196dbbe5770d0.png"
+    ],
+    "inputHash": "11eee7bec1a1217104864a1c6e6fcf96297fdd02ab669ac5d811dc959e8ca6fe"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

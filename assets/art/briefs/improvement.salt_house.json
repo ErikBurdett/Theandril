@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.salt_house",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.salt_house"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A working WHITE SALT HOUSE: a squat pale lime-plastered shed with weathered timber roof beside two small rectangular brine pans and a broad ivory salt mound, a short wooden rake laid flat, joined compact shoreline masonry footprint, no detached objects.",
+  "frames": [
+    {
+      "id": "improvement.salt_house/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/improvement.salt_house/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5b8bfe56e2f1e01eaaa9dc38a07776cfe5c8d3c463964d7befe4a29dd05c3dc4",
+    "sourceRefs": [
+      "assets/art/source/resource-works/improvement.salt_house-v1.png",
+      "assets/art/source/resource-works/improvement.salt_house-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:37:10.122281Z",
+  "referenceHashes": [
+    "2e79f8c2c2bcbe2e4de8336fd4f606ee8df71a8ec088d4b6e434ea74fb4553ef",
+    "529f8ff18d144ef672f2d37e761115b877e597bc6d939ce4560ebd69ad49be0b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "e26da0bef6fe27043d17f2756415e6a34bf075bc20f635600fc6a03ffcc9e13a",
+      "inputHash": "2e79f8c2c2bcbe2e4de8336fd4f606ee8df71a8ec088d4b6e434ea74fb4553ef",
+      "outputHash": "819ec2545441b14db7126d0b93a1ea60306843cc65015233151c2c2d00f8038c"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

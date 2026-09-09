@@ -34,11 +34,11 @@ test('dependency-free biome and feature numbers cover actual geography and all n
   }
 });
 
-test('original five paid improvements retain exact costs; every site exposes real signed tradeoffs', () => {
+test('original five paid improvements retain exact costs; general works expose real signed tradeoffs', () => {
   expect(IMPROVEMENTS.slice(0, 5).map(item => [item.id, item.coinCost, item.turns])).toEqual([
     ['improvement.terraced_fields', 18, 2], ['improvement.managed_woodlot', 24, 3], ['improvement.quarry', 28, 3], ['improvement.reedworks', 22, 2], ['improvement.shore_fishery', 24, 2],
   ]);
-  for (const improvement of IMPROVEMENTS) {
+  for (const improvement of IMPROVEMENTS.filter(item => !item.requiredResourceId)) {
     expect(improvement.featureModifiers.some(item => Object.values(item.yields).some(value => value > 0))).toBe(true);
     expect(improvement.featureModifiers.some(item => Object.values(item.yields).some(value => value < 0))).toBe(true);
   }

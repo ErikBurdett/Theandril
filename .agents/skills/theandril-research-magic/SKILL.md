@@ -35,6 +35,27 @@ Maintain distinct systems for:
 
 Share infrastructure under the hood where useful, but preserve meaningful player-facing differences.
 
+Rules 16 adds distinct paid development trees in `packages/content/src/development.ts`
+and `packages/sim/src/development.ts`: fighting-company battle experience, local
+hearth civic points, and faction influence. They do not spend practical knowledge,
+arcane knowledge, or an officer's personal experience. Build new branches through
+the shared prerequisite/quote validator and the `develop` command; connect every
+effect to actual economy, upkeep, combat or mission behavior. Test rejected costs
+without mutation and paid benefits across save/reload.
+
+Company experience is awarded only after real battle casualties, retreats and
+transport losses are reconciled. It follows surviving formation identities through
+transfers and splits; troops lost at sea or removed formations gain no progress.
+Development's morale effect is an opening battle bonus, not healing or a higher
+rally restoration ceiling. Hearth progress pauses under siege/occupation, and
+building-dependent benefits become dormant when the building is lost.
+
+Append advanced officer skills with `introducedInRules` and use the version-aware
+definition/skill projections. Preserve legacy entry bytes and frozen content
+projections: adding a new branch must not alter a rules-15 replay or unlock future
+promotions in an older save. Battle and campaign rules versions differ; battle 10
+corresponds to campaign 16 for advanced skill effects.
+
 ## Dominions-inspired structural principles
 
 Use high-level structural inspiration only:
@@ -143,4 +164,3 @@ Invalidate incrementally when:
 - caster changes;
 - site control changes;
 - relevant resources change.
-

@@ -29,7 +29,7 @@ describe('genuine pre-ability field, assault and generated twenty-four-culture h
   });
 
   it('regenerates the actual old Vesper24 origin without inventing a modern historical checkpoint', () => {
-    const game = createGame({ seed: 74, size: 'tiny', factionCount: 24, factionDefinitionId: 'faction.vesper_court', generatorVersion: 7, rosterVersion: 4, pace: 'short' });
+    const game = createGame({ seed: 74, size: 'tiny', factionCount: 24, factionDefinitionId: 'faction.vesper_court', generatorVersion: 7, rosterVersion: 4, pace: 'short', rulesVersion: 13 });
     expect(serializeGameForVersion(game, 13)).toBe(data.cases.generatedOrigin!.save);
     expect(new Set(game.factions.map(faction => faction.definitionId)).size).toBe(24);
   });

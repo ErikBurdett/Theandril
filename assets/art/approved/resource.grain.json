@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "resource.grain",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "resource.grain"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A natural wild HEARTHGRAIN deposit: a compact dense stand of tawny wheat-like seed heads with sage stalks, three clearly separated golden seed clusters and a few pale stones at their roots, growing straight from a tiny oval earthen patch. Not farm rows, no buildings or containers.",
+  "frames": [
+    {
+      "id": "resource.grain/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/resource.grain/df0277ce1fec695062bd96641fd88cad7223c6796aeb266d6ffcca1d760658c3/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "db49dd5c39eb2a9f8eff61e24574e13687f8add2ad4b9a9f0cb1a6058be61342",
+    "sourceRefs": [
+      "assets/art/source/resource-works/resource.grain-v1.png",
+      "assets/art/source/resource-works/resource.grain-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:29:26.252079Z",
+  "referenceHashes": [
+    "157fb9b034ebfcdffeb510ad4f8dfbee6caede15364bfa88541ee51744058bf7",
+    "f4e205841a15b0f94135439eb7fb226c7e83d8ceb86758d5403ee2244d15a6de"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "10e708429e1c30a540d13a9f77c01bbb8cafc3c6e32374de52e1a5e5fdad8d03",
+      "inputHash": "157fb9b034ebfcdffeb510ad4f8dfbee6caede15364bfa88541ee51744058bf7",
+      "outputHash": "9e2934a621f4c8f37b744ab941df368fe3bb1a8db230fce847a829cccce77ff7"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "9e2934a621f4c8f37b744ab941df368fe3bb1a8db230fce847a829cccce77ff7",
+      "outputHash": "9401fffddc47d6dabd7b0da1d262c360152cca1d7c010602082d48e9b9b1af8e"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9401fffddc47d6dabd7b0da1d262c360152cca1d7c010602082d48e9b9b1af8e",
+      "outputHash": "5e6e285d423aac267e24c08d072848503766e5c462b4cf80c6e275f425f74804"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "f6fb03201e271531d830c01c700523c3e800c107b46476a7cede391f4dd4a126",
+      "outputHash": "844698bbba7156bced6ba272da6d19cd16b61c73e9a968ebf519968b42c069c8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "e73988759719f176e209d672f56f3f4fef677aed745e11d3d4a3176f7e8efaeb",
+      "outputHash": "df328b80015876fba57e74e0bce73af1ce983b8ef99e9f7d91f788ba91e69e07"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "2c54d6207bfc7121b75e4384a2cc5457dc2a58449bd2c4e9033da3938fff3ef1",
+      "outputHash": "c6c70f5c4d2d1c80caee050ec81d384e632cb71242c9578a3d2285ecd09579e7"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/resource.grain.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex visual review",
+    "reviewedAt": "2026-09-08T23:44:10.366Z",
+    "notes": "Inspected exact native1x and nearest4x contact sheets. The resource.grain silhouette, joined ground footprint and mineral/material color match its resource role; no clipping or alpha fringe. Deposits and working structures are distinct. Map scaling and fog are verified separately in gameplay.\nReviewed candidate df0277ce1fec695062bd96641fd88cad7223c6796aeb266d6ffcca1d760658c3; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b64a0daf6f337730a0e135d196adc6ed49e3e9411a5d72247d6196dbbe5770d0.png"
+    ],
+    "inputHash": "60926e6e4b30567ab3ee7082cd41641613a385ccb7b4849dfff459d52ced0889"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

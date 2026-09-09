@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { FACTIONS, FACTION_RECRUITMENT_WEIGHTS, LAND_MILITARY_UNIT_IDS } from '@theandril/content';
+import { BASE_LAND_MILITARY_UNIT_IDS, FACTIONS, FACTION_RECRUITMENT_WEIGHTS, LAND_MILITARY_UNIT_IDS } from '@theandril/content';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, getObservation, serializeGame, stateHash, type GameState } from '@theandril/sim';
 import { planTurn } from './index';
 import { recruitmentRoster } from './recruitment';
@@ -22,7 +22,10 @@ function equalRecruitmentCampaign(definitionId: string, coin = 1000): GameState 
   const army = Object.values(game.armies).find(army => army.factionId === owner.id)!;
   for (const other of Object.values(game.armies)) if (other.id !== army.id) delete game.armies[other.id];
   army.cell = towns[0]!.cell; army.movement = 0;
-  army.formations = [...LAND_MILITARY_UNIT_IDS, 'unit.colonist'].map(unitId => createArmyFormation(`army.${game.nextId++}`, unitId));
+  army.formations = [...BASE_LAND_MILITARY_UNIT_IDS, 'unit.colonist'].map(unitId => createArmyFormation(`army.${game.nextId++}`, unitId));
+  const specialistId = `army.${game.nextId++}`;
+  game.armies[specialistId] = { ...army, id: specialistId, name: 'Specialist reserve', formations: LAND_MILITARY_UNIT_IDS.filter(id => !(BASE_LAND_MILITARY_UNIT_IDS as readonly string[]).includes(id)).map(unitId => createArmyFormation(`army.${game.nextId++}`, unitId)) };
+  game.progression[owner.id]!.technologies = ['technology.cinder_masonry', 'technology.stewardship', 'technology.quarry_cranes', 'technology.surveyed_estates'].sort();
   owner.treasury = coin;
   refreshAuthoredSight(game);
   return deserializeGame(serializeGame(game));
@@ -30,13 +33,13 @@ function equalRecruitmentCampaign(definitionId: string, coin = 1000): GameState 
 
 test('original recruitment ordering stays exact, including unknown metadata fallback', () => {
   const original = ['unit.guard', 'unit.spearman', 'unit.scout', 'unit.heavy_infantry', 'unit.cavalry', 'unit.guard'];
-  for (const id of [...FACTIONS.slice(0, 6).map(faction => faction.id), undefined, 'faction.unknown']) expect(recruitmentRoster(id)).toEqual(original);
+  for (const id of [...FACTIONS.slice(0, 6).map(faction => faction.id), undefined, 'faction.unknown']) expect(recruitmentRoster(id).filter(unitId => (BASE_LAND_MILITARY_UNIT_IDS as readonly string[]).includes(unitId))).toEqual(original);
 });
 
 test('every culture retains every common military role with its declared preference weights', () => {
   for (const faction of FACTIONS) {
     const roster = recruitmentRoster(faction.id);
-    expect(roster.slice(0, 5)).toEqual(LAND_MILITARY_UNIT_IDS);
+    expect(roster.slice(0, LAND_MILITARY_UNIT_IDS.length)).toEqual(LAND_MILITARY_UNIT_IDS);
     for (const id of LAND_MILITARY_UNIT_IDS) expect(roster.filter(value => value === id)).toHaveLength(FACTION_RECRUITMENT_WEIGHTS[faction.id]![id]);
   }
 });
@@ -74,7 +77,8 @@ test('a preferred cavalry recruit cannot bypass real treasury and town-productio
   expect(cavalry.canQueue).toBe(false); expect(cavalry.blocker).toBeTruthy();
   expect(view.productionOptions.find(option => option.settlementId === town.id && option.itemId === 'unit.spearman')!.canQueue).toBe(true);
   const plan = planTurn(view);
-  expect(plan.find(command => command.type === 'queue' && command.settlementId === town.id)).toMatchObject({ itemId: 'unit.spearman' });
+  expect(view.growth!.founding.coinCost).toBeGreaterThan(view.treasury);
+  expect(plan.find(command => command.type === 'queue' && command.settlementId === town.id)).toBeUndefined(); // Save the existing caravan's actual founding fee before optional recruitment.
   for (const command of plan) expect(applyCommand(poor, command).ok, JSON.stringify(command)).toBe(true);
 
   const full = equalRecruitmentCampaign('faction.sable_steppe');
@@ -87,6 +91,29 @@ test('a preferred cavalry recruit cannot bypass real treasury and town-productio
   const empty = equalRecruitmentCampaign('faction.sable_steppe', 0), emptyView = getObservation(empty, empty.turnOwnerId), emptyHash = stateHash(empty);
   expect(planTurn(emptyView).some(command => command.type === 'queue')).toBe(false);
   expect(stateHash(empty)).toBe(emptyHash);
+});
+
+test.each(['unit.skirmisher', 'unit.arbalester', 'unit.halberdier', 'unit.lancer'])('AI recruits a missing %s through observed unlocks and the paid queue', unitId => {
+  const game = equalRecruitmentCampaign('faction.ashen_compact');
+  const specialistArmy = Object.values(game.armies).find(army => army.formations.some(item => item.unitId === unitId))!;
+  specialistArmy.formations = specialistArmy.formations.filter(item => item.unitId !== unitId);
+  const mirror = deserializeGame(serializeGame(game));
+  const view = getObservation(game, game.turnOwnerId), plan = planTurn(view);
+  const recruitment = plan.find(command => command.type === 'queue' && command.itemId === unitId);
+  expect(recruitment).toBeDefined();
+  expect(planTurn(getObservation(mirror, mirror.turnOwnerId))).toEqual(plan);
+  for (const command of plan) {
+    const result = applyCommand(game, command);
+    expect(result.ok, JSON.stringify(command) + ': ' + result.error).toBe(true);
+    expect(applyCommand(mirror, command)).toEqual(result);
+  }
+  for (let turn = 0; !Object.values(game.armies).some(army => army.factionId === game.turnOwnerId && army.formations.some(item => item.unitId === unitId)) && turn < 20; turn++) {
+    const command = { type: 'endTurn' as const, factionId: game.turnOwnerId };
+    const result = applyCommand(game, command); expect(result.ok).toBe(true);
+    expect(applyCommand(mirror, command)).toEqual(result);
+  }
+  expect(Object.values(game.armies).filter(army => army.factionId === game.turnOwnerId).flatMap(army => army.formations).filter(item => item.unitId === unitId)).toHaveLength(1);
+  expect(stateHash(mirror)).toBe(stateHash(game));
 });
 
 test.each(FACTIONS.slice(6))('$name recruits and combines legal armies with exact saved continuation', faction => {

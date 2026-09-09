@@ -1,6 +1,6 @@
 # Native resolution and asset families
 
-These are production starting points chosen for Theandril's dense strategic hex map, small tactical formations, readable illustrated UI, and 196k–307k-cell worlds. They are not measured shipping assets yet. Confirm the baseline in a representative scene before mass production.
+These production starting points cover Theandril's dense strategic hex map, small tactical formations, readable illustrated UI, and 196k–307k-cell worlds. Many families are now published; consult the current catalog and art status for exact sizes and coverage. Confirm changes in a representative scene before mass production.
 
 ## One pixel has one scale within a scene
 
@@ -41,7 +41,7 @@ Proposed integer presentation grid: a pointy-top hex with polygon boundary coord
 
 This intentionally approximates a regular hex on an integer lattice. The **current** procedural renderer uses radius 29, width `sqrt(3) × 29`, row step 43.5. Do not silently mix the two grids. A later conversion must change projection, picking, camera focus, chunk bounds, route/range overlays and tests together, leaving canonical odd-row cell indices/neighbors unchanged. Until that conversion, treat the new tile geometry as a specification, not a drop-in runtime atlas.
 
-Ground anchors for props/units/towns map to the cell center; they need not equal the ground tile's texture center. Art may overhang adjacent cells visually, but sprites never define movement, terrain, collision, or selection ownership. Pick the canonical hex/observed entity and show a clear selectable base/banner even when art overlaps.
+Ground anchors for props/units/towns need not equal the ground tile's texture center. Current detailed town/improvement artwork fits its opaque frame union within its own inset hex; transparent canvas corners may extend beyond it. Neighborhood sprawl uses separate occupied claimed tiles rather than enlarging the central sprite across neighbors. Unit groups and screen-sized far markers retain deliberate overhang. Sprites never define movement, terrain, collision, or selection ownership: pick the canonical hex/observed entity and preserve a clear base/banner.
 
 Index overlay edges in canonical neighbor order `e, se, sw, w, nw, ne`. Number the polygon vertices above 0–5: those edges are respectively `(1,2), (2,3), (3,4), (4,5), (5,0), (0,1)`. Author six edge treatments and their joining corner caps against this template; test two-edge and three-biome junctions. Derive coast masks from known physical water, vegetation transitions from known biome IDs. Resolve shared corners in a fixed layer/order so neighboring tiles do not double-darken the seam or leave gaps.
 

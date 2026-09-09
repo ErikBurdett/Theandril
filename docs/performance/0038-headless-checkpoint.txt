@@ -1,0 +1,66 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ packages/ai/src/contact.test.ts (4 tests | 2 failed) 43138ms
+     × standard / 4 seats makes player contact through legal bounded plans with save replay 17061ms
+     × huge / 32 seats makes player contact through legal bounded plans with save replay 15355ms
+ ❯ tests/headless/chronicle-victory.test.ts (2 tests | 1 failed) 86790ms
+   × generated-start epic AI victory produces complete factual logs identical after archive save/resume 82545ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/headless/chronicle-victory.test.ts > generated-start epic AI victory produces complete factual logs identical after archive save/resume
+Error: Test timed out in 60000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/headless/chronicle-victory.test.ts:11:37
+      9| // post500 order and replays the complete technical history twice. Giv…
+     10| // archive integration test its own wall-time budget; keep all turn/co…
+     11| test.each(['short', 'epic'] as const)('generated-start %s AI victory p…
+       |                                     ^
+     12|   const game = createGame({ seed: 20260905, size: 'tiny', factionCount…
+     13|   const archive = createArchive(game, { mode: 'watch' });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > standard / 4 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.ashen_compact","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":38529,"harbor":false},{"cell":55778,"harbor":false},{"cell":38917,"harbor":true},{"cell":35844,"harbor":false},{"cell":37381,"harbor":false},{"cell":36994,"harbor":false}],"fleets":[{"id":"army.121","cell":63102,"cargo":[],"ocean":true},{"id":"army.152","cell":46202,"cargo":[],"ocean":true},{"id":"army.79","cell":56932,"cargo":[],"ocean":false}],"reasons":["Charter transport: chart unknown water while no passengers await a rendezvous.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.reedbound_council","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":71362,"harbor":false},{"cell":72900,"harbor":false},{"cell":70971,"harbor":false},{"cell":71743,"harbor":true},{"cell":69822,"harbor":false},{"cell":69442,"harbor":false},{"cell":68678,"harbor":false}],"fleets":[{"id":"army.104","cell":56731,"cargo":[{"armyId":"army.133","name":"Hearth caravan","formations":1}],"ocean":true},{"id":"army.147","cell":62411,"cargo":[],"ocean":true},{"id":"army.80","cell":80859,"cargo":[],"ocean":false}],"reasons":["Charter transport: sail the known water route toward a viable landing.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.cinder_march","firstContact":65,"foreignBorders":[{"cell":14136,"factionId":"faction.glass_tide","visible":true},{"cell":14137,"factionId":"faction.glass_tide","visible":true},{"cell":14519,"factionId":"faction.glass_tide","visible":true},{"cell":14520,"factionId":"faction.glass_tide","visible":true},{"cell":14521,"factionId":"faction.glass_tide","visible":true},{"cell":14904,"factionId":"faction.glass_tide","visible":true},{"cell":14905,"factionId":"faction.glass_tide","visible":true}],"witnessedBattleTurns":[69],"wars":["faction.glass_tide"],"towns":[{"cell":12159,"harbor":true},{"cell":13314,"harbor":false},{"cell":13293,"harbor":false},{"cell":19120,"harbor":false},{"cell":15619,"harbor":false},{"cell":9449,"harbor":false},{"cell":12923,"harbor":false},{"cell":27875,"harbor":false},{"cell":13303,"harbor":false},{"cell":8708,"harbor":false},{"cell":14079,"harbor":false}],"fleets":[{"id":"army.101","cell":43627,"cargo":[],"ocean":true},{"id":"army.46","cell":13324,"cargo":[],"ocean":false},{"id":"army.57","cell":27109,"cargo":[],"ocean":true}],"reasons":[]},{"factionId":"faction.glass_tide","firstContact":65,"foreignBorders":[{"cell":11390,"factionId":"faction.cinder_march","visible":false},{"cell":11391,"factionId":"faction.cinder_march","visible":false},{"cell":11392,"factionId":"faction.cinder_march","visible":false},{"cell":11774,"factionId":"faction.cinder_march","visible":false},{"cell":11775,"factionId":"faction.cinder_march","visible":false},{"cell":11776,"factionId":"faction.cinder_march","visible":false},{"cell":11777,"factionId":"faction.cinder_march","visible":false},{"cell":12154,"factionId":"faction.cinder_march","visible":false},{"cell":12155,"factionId":"faction.cinder_march","visible":false},{"cell":12156,"factionId":"faction.cinder_march","visible":false},{"cell":12157,"factionId":"faction.cinder_march","visible":false},{"cell":12158,"factionId":"faction.cinder_march","visible":false},{"cell":12159,"factionId":"faction.cinder_march","visible":false},{"cell":12160,"factionId":"faction.cinder_march","visible":false},{"cell":12161,"factionId":"faction.cinder_march","visible":false},{"cell":12534,"factionId":"faction.cinder_march","visible":false},{"cell":12535,"factionId":"faction.cinder_march","visible":false},{"cell":12536,"factionId":"faction.cinder_march","visible":false},{"cell":12538,"factionId":"faction.cinder_march","visible":false},{"cell":12539,"factionId":"faction.cinder_march","visible":false},{"cell":12540,"factionId":"faction.cinder_march","visible":false},{"cell":12541,"factionId":"faction.cinder_march","visible":false},{"cell":12542,"factionId":"faction.cinder_march","visible":false},{"cell":12543,"factionId":"faction.cinder_march","visible":false},{"cell":12544,"factionId":"faction.cinder_march","visible":false},{"cell":12545,"factionId":"faction.cinder_march","visible":false},{"cell":12546,"factionId":"faction.cinder_march","visible":false},{"cell":12547,"factionId":"faction.cinder_march","visible":false},{"cell":12917,"factionId":"faction.cinder_march","visible":false},{"cell":12918,"factionId":"faction.cinder_march","visible":false},{"cell":12919,"factionId":"faction.cinder_march","visible":false},{"cell":12920,"factionId":"faction.cinder_march","visible":false},{"cell":12921,"factionId":"faction.cinder_march","visible":false},{"cell":12922,"factionId":"faction.cinder_march","visible":false},{"cell":12923,"factionId":"faction.cinder_march","visible":false},{"cell":12924,"factionId":"faction.cinder_march","visible":false},{"cell":12925,"factionId":"faction.cinder_march","visible":false},{"cell":12926,"factionId":"faction.cinder_march","visible":false},{"cell":12928,"factionId":"faction.cinder_march","visible":false},{"cell":12929,"factionId":"faction.cinder_march","visible":false},{"cell":12930,"factionId":"faction.cinder_march","visible":false},{"cell":13301,"factionId":"faction.cinder_march","visible":true},{"cell":13302,"factionId":"faction.cinder_march","visible":true},{"cell":13303,"factionId":"faction.cinder_march","visible":true},{"cell":13304,"factionId":"faction.cinder_march","visible":false},{"cell":13307,"factionId":"faction.cinder_march","visible":false},{"cell":13308,"factionId":"faction.cinder_march","visible":false},{"cell":13310,"factionId":"faction.cinder_march","visible":false},{"cell":13311,"factionId":"faction.cinder_march","visible":false},{"cell":13312,"factionId":"faction.cinder_march","visible":false},{"cell":13313,"factionId":"faction.cinder_march","visible":false},{"cell":13314,"factionId":"faction.cinder_march","visible":false},{"cell":13315,"factionId":"faction.cinder_march","visible":false},{"cell":13686,"factionId":"faction.cinder_march","visible":true},{"cell":13687,"factionId":"faction.cinder_march","visible":true},{"cell":13696,"factionId":"faction.cinder_march","visible":false},{"cell":13697,"factionId":"faction.cinder_march","visible":false},{"cell":13698,"factionId":"faction.cinder_march","visible":false},{"cell":14080,"factionId":"faction.cinder_march","visible":false},{"cell":14850,"factionId":"faction.cinder_march","visible":false},{"cell":14851,"factionId":"faction.cinder_march","visible":false},{"cell":15234,"factionId":"faction.cinder_march","visible":false},{"cell":15235,"factionId":"faction.cinder_march","visible":false},{"cell":15618,"factionId":"faction.cinder_march","visible":false},{"cell":15619,"factionId":"faction.cinder_march","visible":false},{"cell":15620,"factionId":"faction.cinder_march","visible":false},{"cell":18736,"factionId":"faction.cinder_march","visible":false},{"cell":18737,"factionId":"faction.cinder_march","visible":false},{"cell":19119,"factionId":"faction.cinder_march","visible":false},{"cell":19120,"factionId":"faction.cinder_march","visible":false},{"cell":19121,"factionId":"faction.cinder_march","visible":false},{"cell":19504,"factionId":"faction.cinder_march","visible":false},{"cell":19505,"factionId":"faction.cinder_march","visible":false}],"witnessedBattleTurns":[69],"wars":["faction.cinder_march"],"towns":[{"cell":7245,"harbor":false},{"cell":6474,"harbor":false},{"cell":9928,"harbor":false},{"cell":14520,"harbor":false},{"cell":8779,"harbor":true},{"cell":7623,"harbor":false}],"fleets":[{"id":"army.173","cell":14837,"cargo":[],"ocean":true},{"id":"army.81","cell":7632,"cargo":[],"ocean":false},{"id":"army.94","cell":1473,"cargo":[{"armyId":"army.216","name":"Hearth caravan","formations":1}],"ocean":true}],"reasons":["Deepwake warship: patrol and chart permitted coastal water.","Charter transport: chart water while seeking a safe landing."]}]: expected null not to be null
+ ❯ packages/ai/src/contact.test.ts:85:94
+     83|   ] as const)('%s / %i seats makes player contact through legal bounde…
+     84|     const result = contactCampaign(size, count, limit);
+     85|     expect(result.firstContact.get(result.playerId), JSON.stringify(re…
+       |                                                                                              ^
+     86|     expect(result.firstContact.get(result.playerId)!).toBeLessThanOrEq…
+     87|     expect(result.types.has('moveTo')).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  packages/ai/src/contact.test.ts > generated large-map faction contact > huge / 32 seats makes player contact through legal bounded plans with save replay
+AssertionError: [{"factionId":"faction.margin_observance","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":18743,"harbor":true},{"cell":15157,"harbor":false},{"cell":16696,"harbor":false},{"cell":14641,"harbor":false},{"cell":25910,"harbor":false}],"fleets":[{"id":"army.1244","cell":35646,"cargo":[],"ocean":true},{"id":"army.514","cell":19257,"cargo":[],"ocean":false},{"id":"army.617","cell":15160,"cargo":[],"ocean":true}],"reasons":["Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore.","Deepwake warship: patrol and chart permitted coastal water."]},{"factionId":"faction.iron_covenant.29","firstContact":null,"foreignBorders":[],"witnessedBattleTurns":[],"wars":[],"towns":[{"cell":12133,"harbor":false},{"cell":11104,"harbor":true}],"fleets":[{"id":"army.454","cell":11096,"cargo":[],"ocean":false},{"id":"army.532","cell":10597,"cargo":[],"ocean":true},{"id":"army.820","cell":39239,"cargo":[],"ocean":true}],"reasons":["Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore.","Deepwake warship: patrol and chart permitted coastal water."]}]: expected 30 to be 32 // Object.is equality
+
+- Expected
++ Received
+
+- 32
++ 30
+
+ ❯ packages/ai/src/contact.test.ts:89:163
+     87|     expect(result.types.has('moveTo')).toBe(true);
+     88|     expect(result.types.has('mergeArmies')).toBe(true);
+     89|     expect([...result.firstContact.values()].filter(turn => turn !== n…
+       |                                                                                                                                                                   ^
+     90|   });
+     91|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed | 161 passed (163)
+      Tests  3 failed | 1494 passed (1497)
+   Start at  17:26:11
+   Duration  93.02s (transform 24.93s, setup 0ms, import 87.72s, tests 564.07s, environment 22ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

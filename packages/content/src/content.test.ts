@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
 test('the starter pack has unique valid IDs, localization and bounded numeric parameters', () => {
-  expect(validateContent()).toMatchObject({ buildings: 5, units: 9, factions: 24, technologies: 10, institutions: 2, doctrines: 2, projects: 1, improvements: 10, naturalFeatures: 7 });
+  expect(validateContent()).toMatchObject({ buildings: 5, units: 13, factions: 24, technologies: 10, institutions: 2, doctrines: 2, projects: 1, improvements: 18, resources: 8, developmentNodes: 25, naturalFeatures: 7 });
 });
 test('content rejects malformed costs', () => {
   expect(unitSchema.safeParse({ id: 'unit.invalid', cost: -1 }).success).toBe(false);

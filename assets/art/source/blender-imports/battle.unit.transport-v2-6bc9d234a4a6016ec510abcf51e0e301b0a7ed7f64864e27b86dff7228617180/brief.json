@@ -1,0 +1,858 @@
+{
+  "schemaVersion": 1,
+  "id": "battle.unit.transport",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "battle.unit.transport"
+  ],
+  "prompt": "Original Theandril shared transport battle role, authored as editable weighted Blender meshes and bone Actions. Two independently rendered facings and five complete authored clips. Fixed 96x96 camera canvas, ground pivot (48,80), palette and full-motion union. Culture identity remains in existing banners and map art. Exact source manifest: assets/art/source/blender-units/battle.unit.transport/v2/manifest.json. No mirrored sprites, synthetic casualty poses or whole-sprite bobbing claimed as articulated animation.",
+  "frames": [
+    {
+      "id": "battle.unit.transport/idle/e/0",
+      "direction": "e",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/idle-e-000.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/e/1",
+      "direction": "e",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/idle-e-001.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/e/2",
+      "direction": "e",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/idle-e-002.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/e/3",
+      "direction": "e",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/idle-e-003.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/0",
+      "direction": "e",
+      "state": "sail",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-e-000.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/1",
+      "direction": "e",
+      "state": "sail",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-e-001.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/2",
+      "direction": "e",
+      "state": "sail",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-e-002.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/3",
+      "direction": "e",
+      "state": "sail",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-e-003.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/4",
+      "direction": "e",
+      "state": "sail",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-e-004.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/5",
+      "direction": "e",
+      "state": "sail",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-e-005.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/6",
+      "direction": "e",
+      "state": "sail",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-e-006.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/7",
+      "direction": "e",
+      "state": "sail",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-e-007.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/0",
+      "direction": "e",
+      "state": "fire",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-e-000.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/1",
+      "direction": "e",
+      "state": "fire",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-e-001.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/2",
+      "direction": "e",
+      "state": "fire",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-e-002.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/3",
+      "direction": "e",
+      "state": "fire",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-e-003.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/4",
+      "direction": "e",
+      "state": "fire",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-e-004.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/5",
+      "direction": "e",
+      "state": "fire",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-e-005.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/6",
+      "direction": "e",
+      "state": "fire",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-e-006.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/7",
+      "direction": "e",
+      "state": "fire",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-e-007.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/e/0",
+      "direction": "e",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/hit-e-000.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/e/1",
+      "direction": "e",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/hit-e-001.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/e/2",
+      "direction": "e",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/hit-e-002.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/e/3",
+      "direction": "e",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/hit-e-003.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/0",
+      "direction": "e",
+      "state": "sink",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-e-000.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/1",
+      "direction": "e",
+      "state": "sink",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-e-001.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/2",
+      "direction": "e",
+      "state": "sink",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-e-002.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/3",
+      "direction": "e",
+      "state": "sink",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-e-003.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/4",
+      "direction": "e",
+      "state": "sink",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-e-004.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/5",
+      "direction": "e",
+      "state": "sink",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-e-005.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/6",
+      "direction": "e",
+      "state": "sink",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-e-006.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/7",
+      "direction": "e",
+      "state": "sink",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-e-007.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/w/0",
+      "direction": "w",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/idle-w-000.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/w/1",
+      "direction": "w",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/idle-w-001.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/w/2",
+      "direction": "w",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/idle-w-002.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/w/3",
+      "direction": "w",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/idle-w-003.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/0",
+      "direction": "w",
+      "state": "sail",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-w-000.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/1",
+      "direction": "w",
+      "state": "sail",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-w-001.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/2",
+      "direction": "w",
+      "state": "sail",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-w-002.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/3",
+      "direction": "w",
+      "state": "sail",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-w-003.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/4",
+      "direction": "w",
+      "state": "sail",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-w-004.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/5",
+      "direction": "w",
+      "state": "sail",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-w-005.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/6",
+      "direction": "w",
+      "state": "sail",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-w-006.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/7",
+      "direction": "w",
+      "state": "sail",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sail-w-007.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/0",
+      "direction": "w",
+      "state": "fire",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-w-000.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/1",
+      "direction": "w",
+      "state": "fire",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-w-001.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/2",
+      "direction": "w",
+      "state": "fire",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-w-002.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/3",
+      "direction": "w",
+      "state": "fire",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-w-003.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/4",
+      "direction": "w",
+      "state": "fire",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-w-004.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/5",
+      "direction": "w",
+      "state": "fire",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-w-005.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/6",
+      "direction": "w",
+      "state": "fire",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-w-006.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/7",
+      "direction": "w",
+      "state": "fire",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/fire-w-007.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/w/0",
+      "direction": "w",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/hit-w-000.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/w/1",
+      "direction": "w",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/hit-w-001.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/w/2",
+      "direction": "w",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/hit-w-002.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/w/3",
+      "direction": "w",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/hit-w-003.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/0",
+      "direction": "w",
+      "state": "sink",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-w-000.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/1",
+      "direction": "w",
+      "state": "sink",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-w-001.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/2",
+      "direction": "w",
+      "state": "sink",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-w-002.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/3",
+      "direction": "w",
+      "state": "sink",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-w-003.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/4",
+      "direction": "w",
+      "state": "sink",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-w-004.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/5",
+      "direction": "w",
+      "state": "sink",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-w-005.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/6",
+      "direction": "w",
+      "state": "sink",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-w-006.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/7",
+      "direction": "w",
+      "state": "sink",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.transport/v2/native/sink-w-007.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "sail": {
+        "frames": 8,
+        "fps": 10,
+        "loop": true
+      },
+      "fire": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      },
+      "hit": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      },
+      "sink": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "af5a9a34fc8232050169cb0eacee3f368926431f51b978a7beeb587a8fff80f0",
+    "sourceRefs": [
+      "assets/art/source/blender-units/battle.unit.transport/v2/manifest.json",
+      "assets/art/source/blender-units/battle.unit.transport/v2/source.blend",
+      "assets/art/source/blender-units/battle.unit.transport/v2/profile.json",
+      "assets/art/source/blender-units/battle.unit.transport/v2/recipe.py",
+      "assets/art/source/blender-units/battle.unit.transport/v2/driver.py",
+      "assets/art/source/blender-units/battle.unit.transport/v2/render-settings.json"
+    ],
+    "licenseNotes": [
+      "Original project-authored geometry, rig, materials and actions; retained factory dependencies and every raw/native render are bound by the source manifest inventory. Shared mechanical-role artwork does not claim new culture-specific originals. Native and runtime visual acceptance remain separate."
+    ]
+  },
+  "createdAt": "2026-09-08T23:50:44.797Z",
+  "referenceHashes": [
+    "6bc9d234a4a6016ec510abcf51e0e301b0a7ed7f64864e27b86dff7228617180",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "articulated-battle-96",
+      "settingsHash": "92f85208a98f552074867b4ff9629ac4f85bb535f9ee953cce6899b6d1a337b2",
+      "inputHash": "6bc9d234a4a6016ec510abcf51e0e301b0a7ed7f64864e27b86dff7228617180",
+      "outputHash": "b5e01dc91865f6aa312520c6508bd6e5c999b9f6e4b5510eb8736a9ce1cb91bd"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 96,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

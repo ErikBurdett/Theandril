@@ -10,11 +10,12 @@ class Recorder implements GlyphPainter {
 }
 
 describe('original, static improvement identifiers', () => {
-  it('binds exactly the five newly authored improvements without inventing approved assets', () => {
+  it('binds the six procedural fallback programs without inventing approved assets', () => {
     expect(PROCEDURAL_IMPROVEMENT_GLYPHS).toEqual({
       'improvement.spring_garden': 'spring-garden', 'improvement.polder': 'polder',
       'improvement.grove_archive': 'grove-archive', 'improvement.oreworks': 'oreworks',
       'improvement.tide_observatory': 'tide-observatory',
+      'improvement.remount_yard': 'remount-yard',
     });
     expect(Object.isFrozen(PROCEDURAL_IMPROVEMENT_GLYPHS)).toBe(true);
   });
@@ -37,8 +38,8 @@ describe('original, static improvement identifiers', () => {
       }
       silhouettes.push([...pixels].sort().join(';'));
     }
-    // Different occupancy even without either material color, not five palette swaps.
-    expect(new Set(silhouettes).size).toBe(5);
+    // Each procedural program has distinct geometry without either material color.
+    expect(new Set(silhouettes).size).toBe(Object.keys(PROCEDURAL_IMPROVEMENT_GLYPHS).length);
   });
 
   it('preserves the observed fog alpha, translating geometry without retaining painter state', () => {

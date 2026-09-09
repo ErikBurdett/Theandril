@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.salt_house",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.salt_house"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A working WHITE SALT HOUSE: a squat pale lime-plastered shed with weathered timber roof beside two small rectangular brine pans and a broad ivory salt mound, a short wooden rake laid flat, joined compact shoreline masonry footprint, no detached objects.",
+  "frames": [
+    {
+      "id": "improvement.salt_house/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/improvement.salt_house/8723fe0ad56e4e92d5a005815428b6bf3ce4bf1318121fe3afb72880ec3d1098/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "5b8bfe56e2f1e01eaaa9dc38a07776cfe5c8d3c463964d7befe4a29dd05c3dc4",
+    "sourceRefs": [
+      "assets/art/source/resource-works/improvement.salt_house-v1.png",
+      "assets/art/source/resource-works/improvement.salt_house-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:37:10.122281Z",
+  "referenceHashes": [
+    "2e79f8c2c2bcbe2e4de8336fd4f606ee8df71a8ec088d4b6e434ea74fb4553ef",
+    "529f8ff18d144ef672f2d37e761115b877e597bc6d939ce4560ebd69ad49be0b"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "e26da0bef6fe27043d17f2756415e6a34bf075bc20f635600fc6a03ffcc9e13a",
+      "inputHash": "2e79f8c2c2bcbe2e4de8336fd4f606ee8df71a8ec088d4b6e434ea74fb4553ef",
+      "outputHash": "819ec2545441b14db7126d0b93a1ea60306843cc65015233151c2c2d00f8038c"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "819ec2545441b14db7126d0b93a1ea60306843cc65015233151c2c2d00f8038c",
+      "outputHash": "b2292d2fa5d6f33c564ce1ee0d9849ba4adf3f73db5005fbf873d716b1210764"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b2292d2fa5d6f33c564ce1ee0d9849ba4adf3f73db5005fbf873d716b1210764",
+      "outputHash": "2996088c7bb52ab43a33abfc42950fd147522e1903253f3d47a034c7a218738b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "1b2cd031730cbbd09e1d85240f4471706e3912348606040ec54372724450068a",
+      "outputHash": "a2778b7c5fcca8511473813bf46108e0811077e855c97001ef6382fc96eeca6f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "7996ab98d1a35d7d4b41a35f7c2a3b8dda9a4d68532c86d8cae8eb32f60a300c",
+      "outputHash": "96c038dad52ce605fa259cc9a414d853243c531f5566fad6472ff6914c8a795c"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "391212b93e5e91b04774e00bf1c0018d1cd7bfabb4f82e62a4499087c31079b2",
+      "outputHash": "86be061d174c241d6d18196709bd81708b81a8033134aee465b07fc6002bdc16"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/improvement.salt_house.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex visual review",
+    "reviewedAt": "2026-09-08T23:44:08.976Z",
+    "notes": "Inspected exact native1x and nearest4x contact sheets. The improvement.salt_house silhouette, joined ground footprint and mineral/material color match its resource role; no clipping or alpha fringe. Deposits and working structures are distinct. Map scaling and fog are verified separately in gameplay.\nReviewed candidate 8723fe0ad56e4e92d5a005815428b6bf3ce4bf1318121fe3afb72880ec3d1098; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b64a0daf6f337730a0e135d196adc6ed49e3e9411a5d72247d6196dbbe5770d0.png"
+    ],
+    "inputHash": "6cb4e73173a21a5c8acc0e77ac466d7d589ab1b9c6d6bdf91c5e652297dd40a8"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

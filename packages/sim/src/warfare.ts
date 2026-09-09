@@ -1,3 +1,4 @@
+import { snapshotBattleDevelopment } from './combat/development-snapshot';
 import { UNITS } from '@theandril/content';
 import { hexDistance, neighbors, SeededRandom } from '@theandril/mapgen';
 import { autoResolveBattle, chooseBattleOrder, createBattle, resolveBattleRound, settleBattleTerminal } from './combat';
@@ -14,6 +15,7 @@ import { rulesVersion } from './rules';
 import { roadMovementCost } from './roads';
 import { armyCharacterLeadership, automaticallyRally, finishBattleCharacters, interruptArmyMissions, snapshotArmyCharacters } from './characters';
 import { armyDomain, armyTerrainBlocker, carriedArmyBlocker, moveFleetCargo, reconcileFleetCargo, snapshotFleetCargo } from './naval';
+import { awardFormationBattleExperience, formationBattleEffects } from './development';
 
 export const MAX_BATTLE_REPORTS = 20;
 const units = new Map(UNITS.map(unit => [unit.id, unit]));
@@ -54,11 +56,12 @@ function formation(state: GameState, army: Army, item: ArmyFormation, index: num
   const unit = units.get(item.unitId);
   if (!unit) throw new Error('Missing unit definition');
   const leadership = rulesVersion(state) >= 7 ? armyCharacterLeadership(state, army.id) : { attack: 0, armor: 0 };
+  const training = unit.canFound ? { attack: 0, armor: 0, initiative: 0, range: 0, morale: 0 } : formationBattleEffects(state, army.factionId, item.id);
   return {
     id: rulesVersion(state) < 6 ? army.id : item.id, unitId: item.unitId, strength: item.strength, maxStrength: unit.strength,
-    morale: item.morale, fatigue: item.fatigue, row: Math.floor(index / 5), column: count === 1 ? 2 : index % 5,
-    attack: unit.attack + doctrineEffects(state.progression[army.factionId]?.doctrineId ?? null).attack + leadership.attack,
-    armor: unit.armor + doctrineEffects(state.progression[army.factionId]?.doctrineId ?? null).armor + leadership.armor, initiative: unit.initiative, range: unit.range,
+    morale: Math.min(100, item.morale + training.morale), fatigue: item.fatigue, row: Math.floor(index / 5), column: count === 1 ? 2 : index % 5,
+    attack: unit.attack + doctrineEffects(state.progression[army.factionId]?.doctrineId ?? null).attack + leadership.attack + training.attack,
+    armor: unit.armor + doctrineEffects(state.progression[army.factionId]?.doctrineId ?? null).armor + leadership.armor + training.armor, initiative: unit.initiative + training.initiative, range: unit.range + training.range,
   };
 }
 function deployment(state: GameState, armies: Army[]): BattleFormation[] {
@@ -66,7 +69,7 @@ function deployment(state: GameState, armies: Army[]): BattleFormation[] {
     .sort((a, b) => compareId(rulesVersion(state) < 6 ? a.army : a.item, rulesVersion(state) < 6 ? b.army : b.item));
   return roster.map(({ army, item }, i) => formation(state, army, item, i, roster.length));
 }
-const battleVersion = (state: GameState): CampaignBattle['rulesVersion'] => rulesVersion(state) < 6 ? 5 : rulesVersion(state) < 7 ? 6 : rulesVersion(state) < 8 ? 7 : rulesVersion(state) < 14 ? 8 : 9;
+const battleVersion = (state: GameState): CampaignBattle['rulesVersion'] => rulesVersion(state) < 6 ? 5 : rulesVersion(state) < 7 ? 6 : rulesVersion(state) < 8 ? 7 : rulesVersion(state) < 14 ? 8 : rulesVersion(state) < 16 ? 9 : 10;
 function compositionSnapshot(state: GameState, armies: Army[], militiaId: string | null, combat: CampaignBattle['combat']) {
   const formationBindings: CampaignBattle['formationBindings'] = armies.flatMap(army => army.formations.map(item => ({ battleFormationId: rulesVersion(state) < 6 ? army.id : item.id, formationId: item.id, armyId: army.id })));
   if (militiaId) formationBindings.push({ battleFormationId: militiaId, formationId: militiaId, armyId: null });
@@ -111,7 +114,8 @@ export function startCampaignBattle(state: GameState, factionId: string, armyId:
     initialStrengths: [attacker, ...defenders].sort(compareId).map(army => ({ armyId: army.id, strength: armyStrength(army) })), aftermath: [], combat,
     ...compositionSnapshot(state, [attacker, ...defenders], null, combat),
   };
-  if (state.battle.rulesVersion === 9) state.battle.abilityState = createBattleAbilityState(state, state.battle);
+  if (state.battle.rulesVersion >= 9) state.battle.abilityState = createBattleAbilityState(state, state.battle);
+  if (state.battle.rulesVersion >= 10) state.battle.developmentSnapshots = snapshotBattleDevelopment(state, state.battle);
   state.nextId++;
   attacker.movement = 0;
   for (const army of defenders) army.movement = 0;
@@ -152,7 +156,8 @@ export function startSettlementAssault(state: GameState, factionId: string, army
     initialStrengths: [...[attacker, ...defenders].map(army => ({ armyId: army.id, strength: armyStrength(army) })), ...(militiaId ? [{ armyId: militiaId, strength: siege.militiaStrength }] : [])].sort((a, b) => a.armyId < b.armyId ? -1 : 1), aftermath: [], combat,
     ...compositionSnapshot(state, [attacker, ...defenders], militiaId, combat),
   };
-  if (state.battle.rulesVersion === 9) state.battle.abilityState = createBattleAbilityState(state, state.battle);
+  if (state.battle.rulesVersion >= 9) state.battle.abilityState = createBattleAbilityState(state, state.battle);
+  if (state.battle.rulesVersion >= 10) state.battle.developmentSnapshots = snapshotBattleDevelopment(state, state.battle);
   state.nextId++; attacker.movement = 0;
   for (const defender of defenders) defender.movement = 0;
   const interruptions: DomainEvent[] = [];
@@ -261,6 +266,7 @@ function finishCampaignBattle(state: GameState, battle: CampaignBattle, events: 
   }));
   finishBattleCharacters(state, battle, events);
   if (battle.rulesVersion >= 8) for (const id of participants) battle.transportAftermath.push(...reconcileFleetCargo(state, id, events));
+  awardFormationBattleExperience(state, battle, events);
   const winner = result.winner === 'draw' ? 'Neither side' : state.factions.find(faction => faction.id === (result.winner === 'attacker' ? battle.attackerFactionId : battle.defenderFactionId))?.name ?? result.winner;
   const message = `${winner} prevailed at hex ${battle.defenderCell}: ${result.reason}.`;
   for (const factionId of [battle.attackerFactionId, battle.defenderFactionId]) events.push({ turn: state.turn, type: 'battle_finished', factionId, cell: battle.defenderCell, message });
@@ -271,7 +277,7 @@ function finishCampaignBattle(state: GameState, battle: CampaignBattle, events: 
 
 export function settleCampaignAbility(state: GameState, events: DomainEvent[], observe?: BattleFactObserver): void {
   const battle = state.battle;
-  if (!battle || battle.rulesVersion !== 9) return;
+  if (!battle || battle.rulesVersion < 9) return;
   battle.combat = settleBattleTerminal(battle.combat, observe);
   if (battle.combat.result) finishCampaignBattle(state, battle, events);
 }
@@ -286,12 +292,12 @@ export function resolveCampaignBattle(state: GameState, factionId: string, order
   const events: DomainEvent[] = [];
   if (battle.rulesVersion >= 7 && battle.rulesVersion < 9 && order !== undefined) automaticallyRally(state, battle, [side === 'attacker' ? battle.defenderFactionId : battle.attackerFactionId], events);
   let combat = battle.combat;
-  if (battle.rulesVersion === 9) {
+  if (battle.rulesVersion >= 9) {
     do {
       combat = resolveBattleRound(battle.combat, {
         attacker: side === 'attacker' && order !== undefined ? order : chooseBattleOrder(battle.combat, 'attacker'),
         defender: side === 'defender' && order !== undefined ? order : chooseBattleOrder(battle.combat, 'defender'),
-      }, 9, { observe, beforeRound: current => { battle.combat = current; automaticBattleAbilities(state, battle, events, observe); } });
+      }, battle.rulesVersion, { observe, beforeRound: current => { battle.combat = current; automaticBattleAbilities(state, battle, events, observe); } });
       battle.combat = combat;
     } while (order === undefined && !combat.result);
   } else if (order === undefined && battle.rulesVersion >= 7 && battle.characterSnapshots.length) {
@@ -314,10 +320,10 @@ export function cloneCampaignBattle(battle: CampaignBattle, viewerFactionId?: st
   const cargo = battle.transportSnapshots.filter(item => !viewerFactionId || item.factionId === viewerFactionId);
   const cargoIds = new Set(cargo.map(item => item.armyId));
   return {
-    ...battle, transportSnapshots: cargo.map(item => ({ ...item, formationIds: [...item.formationIds] })), transportAftermath: battle.transportAftermath.filter(item => !viewerFactionId || cargoIds.has(item.armyId)).map(item => ({ ...item, lostFormationIds: [...item.lostFormationIds] })), characterSnapshots: battle.characterSnapshots.map(item => ({ ...item, ...(item.aptitudes ? { aptitudes: { ...item.aptitudes } } : {}), ...(item.spellIds ? { spellIds: [...item.spellIds] } : {}), learnedSkillIds: [...item.learnedSkillIds], leadership: { ...item.leadership } })), characterAftermath: battle.characterAftermath.map(item => ({ ...item })), usedAbilities: battle.usedAbilities.map(item => ({ ...item })), formationBindings: battle.formationBindings.map(item => ({ ...item })), formationStrengths: battle.formationStrengths.map(item => ({ ...item })), formationAftermath: battle.formationAftermath.map(item => ({ ...item })), defenderIds: [...battle.defenderIds], initialStrengths: battle.initialStrengths.map(army => ({ ...army })), aftermath: battle.aftermath.map(army => ({ ...army })),
+    ...battle, ...(battle.developmentSnapshots ? { developmentSnapshots: battle.developmentSnapshots.map(item => ({ ...item, trainingIds: [...item.trainingIds], traditionIds: [...item.traditionIds] })) } : {}), transportSnapshots: cargo.map(item => ({ ...item, formationIds: [...item.formationIds] })), transportAftermath: battle.transportAftermath.filter(item => !viewerFactionId || cargoIds.has(item.armyId)).map(item => ({ ...item, lostFormationIds: [...item.lostFormationIds] })), characterSnapshots: battle.characterSnapshots.map(item => ({ ...item, ...(item.aptitudes ? { aptitudes: { ...item.aptitudes } } : {}), ...(item.spellIds ? { spellIds: [...item.spellIds] } : {}), learnedSkillIds: [...item.learnedSkillIds], leadership: { ...item.leadership } })), characterAftermath: battle.characterAftermath.map(item => ({ ...item })), usedAbilities: battle.usedAbilities.map(item => ({ ...item })), formationBindings: battle.formationBindings.map(item => ({ ...item })), formationStrengths: battle.formationStrengths.map(item => ({ ...item })), formationAftermath: battle.formationAftermath.map(item => ({ ...item })), defenderIds: [...battle.defenderIds], initialStrengths: battle.initialStrengths.map(army => ({ ...army })), aftermath: battle.aftermath.map(army => ({ ...army })),
     ...(battle.abilityState ? { abilityState: { sources: battle.abilityState.sources.map(item => ({ ...item })), casters: battle.abilityState.casters.map(item => ({ ...item })), identities: battle.abilityState.identities.map(item => ({ ...item })) } } : {}),
     combat: {
-      ...battle.combat, attacker: battle.combat.attacker.map(unit => ({ ...unit })), defender: battle.combat.defender.map(unit => ({ ...unit })),
+      ...battle.combat, attacker: battle.combat.attacker.map(unit => ({ ...unit, ...(unit.members ? { members: [...unit.members] } : {}), ...(unit.position ? { position: { ...unit.position } } : {}) })), defender: battle.combat.defender.map(unit => ({ ...unit, ...(unit.members ? { members: [...unit.members] } : {}), ...(unit.position ? { position: { ...unit.position } } : {}) })),
       log: [...battle.combat.log], ...(battle.combat.result ? { result: { ...battle.combat.result } } : {}),
     },
   };

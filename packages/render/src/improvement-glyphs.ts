@@ -5,6 +5,7 @@ export const PROCEDURAL_IMPROVEMENT_GLYPHS = Object.freeze({
   'improvement.grove_archive': 'grove-archive',
   'improvement.oreworks': 'oreworks',
   'improvement.tide_observatory': 'tide-observatory',
+  'improvement.remount_yard': 'remount-yard',
 } as const);
 
 type Rectangle = readonly [x: number, y: number, width: number, height: number];
@@ -16,6 +17,11 @@ export interface GlyphPainter {
 
 /** Local integer geometry stays inside the existing 22×22 dark identifier backing. */
 const programs: Readonly<Record<string, Glyph>> = {
+  'remount-yard': {
+    // Horse profile inside a simple rail, used only when approved art is absent.
+    ink: [[-7, -1, 11, 4], [2, -6, 3, 6], [3, -7, 6, 3], [-6, 3, 2, 5], [1, 3, 2, 5], [-9, -2, 2, 5], [-9, 8, 18, 2]],
+    accent: [[-7, -3, 8, 2], [3, -8, 2, 2]],
+  },
   'spring-garden': {
     // Spring basin beside a growing stem; not another generic row-of-fields mark.
     ink: [[-9, 2, 8, 2], [-8, 4, 6, 2], [-6, -4, 2, 6], [-8, -6, 6, 2],

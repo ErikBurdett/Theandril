@@ -12,7 +12,7 @@ export type { ArcaneResearchState, ArcaneResearchObservation, ArcaneResearchOpti
 export type { CampaignPace, RosterVersion } from '@theandril/content';
 export { createGame, applyCommand, applyCommandForVersion, getObservation, settlementYields, validateEndTurn, commandSchema, commandSchemaForVersion } from './simulation';
 export type { ObservationOptions } from './simulation';
-export { stateHash, stateHashForVersion, serializeGame, serializeGameForVersion, deserializeGame, replayGame, SAVE_VERSION, eventSchema, campaignBattleSchema, schema7CampaignBattleSchema, schema6CampaignBattleSchema, legacyCampaignBattleSchema, battleReportForVersion } from './save';
+export { stateHash, stateHashForVersion, serializeGame, serializeGameForVersion, deserializeGame, replayGame, SAVE_VERSION, eventSchema, campaignBattleSchema, schema15CampaignBattleSchema, schema7CampaignBattleSchema, schema6CampaignBattleSchema, legacyCampaignBattleSchema, battleReportForVersion } from './save';
 export * from './territory';
 export { getSpectatorObservation } from './spectator';
 export type { MapObservation } from './spectator';
@@ -32,3 +32,7 @@ export { effectiveArmyMovement } from './army-composition';
 export { armyCommandCapacity, armyCommandStatus } from './characters';
 export type { NavalArmyView, ProductionOption, TransportAftermath, TransportSnapshot } from './naval';
 export { armyDomain, fleetTransportCapacity, fleetCanEnterDeepWater, embarkObjection, disembarkObjection } from './naval';
+
+export * from './resources';
+export * from './development';
+export * from './growth-economy';

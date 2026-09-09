@@ -3,7 +3,7 @@ import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_NAMES, CHARACTER_S
 
 const factions = new Set(FACTIONS.map(item => item.id));
 test('character content has real distinct roles, effects and localized names and descriptions', () => {
-  expect(validateContent()).toMatchObject({ characterRoles: 4, characterMissions: 3, characterSkills: 11, commanderAbilities: 1 });
+  expect(validateContent()).toMatchObject({ characterRoles: 4, characterMissions: 3, characterSkills: 17, commanderAbilities: 1 });
   expect(CHARACTER_DEFINITIONS.map(item => item.role)).toEqual(['marshal', 'surveyor', 'engineer', 'waykeeper']);
   expect(CHARACTER_MISSIONS.map(item => item.kind)).toEqual(['survey', 'refit', 'sabotage']);
   expect(CHARACTER_MISSIONS.find(item => item.kind === 'sabotage')?.failureChance).toBeGreaterThan(0);

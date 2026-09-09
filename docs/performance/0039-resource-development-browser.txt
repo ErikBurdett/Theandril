@@ -1,0 +1,16 @@
+[WebServer] (node:380430) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:380442) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:380488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/development-trees.spec.ts:65:1 › earned civic and faction branches pay authoritative costs, refresh one selected query and persist at 390px (4.2s)
+  ✓  2 tests/gameplay/development-trees.spec.ts:98:1 › survivors spend experience earned in a saved real battle and preserve training after reload (5.2s)
+  ✓  3 tests/gameplay/development-trees.spec.ts:118:1 › 100 armies use a bounded directory and one arbitrary selected tree; branch keyboard inspection makes no orders (2.2s)
+  ✓  4 tests/gameplay/resources-overview.spec.ts:39:1 › a generated grain deposit becomes paid worked grange art, produces stocks and sells through a saved narrow market (10.6s)
+  ✓  5 tests/gameplay/resources-overview.spec.ts:91:1 › political overview and realm filters change only the map presentation, with an accessible narrow legend (2.9s)
+
+  5 passed (26.4s)

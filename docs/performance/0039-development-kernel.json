@@ -1,0 +1,43 @@
+{
+  "contentHash": "b79c78ed",
+  "rulesVersion": 16,
+  "battleVersion": 10,
+  "scope": "Headless CPU only. Resource timing excludes physical world generation; battle is a synthetic 20-versus-20 content-stat deployment without campaign officers, abilities or rendering. Seven warm runs, equality verified outside timing.",
+  "resources": [
+    {
+      "size": "tiny",
+      "cells": 1536,
+      "deposits": 38,
+      "types": 8,
+      "generationMedianMs": 0.2179010000000119,
+      "hash": "21fc0562"
+    },
+    {
+      "size": "standard",
+      "cells": 98304,
+      "deposits": 1170,
+      "types": 8,
+      "generationMedianMs": 3.343609000000015,
+      "hash": "63868d75"
+    },
+    {
+      "size": "huge",
+      "cells": 196608,
+      "deposits": 2259,
+      "types": 8,
+      "generationMedianMs": 6.889645999999971,
+      "hash": "7fd7142d"
+    }
+  ],
+  "battle": {
+    "formations": 40,
+    "enteringSoldiers": 2200,
+    "rounds": 5,
+    "resolveMedianMs": 3.113935999999967,
+    "result": {
+      "winner": "attacker",
+      "reason": "morale rout"
+    },
+    "hash": "5cbc9506"
+  }
+}

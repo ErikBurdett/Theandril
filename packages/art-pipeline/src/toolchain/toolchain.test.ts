@@ -1,12 +1,15 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { mkdtemp, mkdir, rm, symlink, writeFile } from 'node:fs/promises';
-import { join, resolve } from 'node:path';
+import { mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
+import { dirname, join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { findAseprite, asepriteVersion, createAsepriteSource, exportAseprite } from './aseprite';
 import { findPixelSnapper, runPixelSnapper } from './pixelsnapper';
 import { doctor } from './doctor';
 import { prepareOutput, redact, runTool, sha256, stableSettings, writeArtFile } from './process';
-import { encodePng } from '../png';
+import { decodePng, encodePng } from '../png';
+import { parseAssetManifest } from '../schema';
+import { sourceClips } from '../source-clip';
+import type { AsepriteMetadata } from './aseprite';
 
 const temporary: string[] = [];
 async function directory(): Promise<string> { const path = await mkdtemp(join(tmpdir(), 'theandril-tool-test-')); temporary.push(path); return path; }
@@ -70,5 +73,28 @@ describe('native export preflight', () => {
     await expect(runPixelSnapper({ inputPath: source, outputPath: join(dir, 'out.png'), pixelSize: 3 })).rejects.toThrow('Pixel size');
     await expect(runPixelSnapper({ inputPath: source, outputPath: join(dir, 'out.png'), palette: ['#bad;command'] })).rejects.toThrow('Palette');
     await expect(runPixelSnapper({ inputPath: source, outputPath: join(dir, 'out.png'), colorCount: 257 })).rejects.toThrow('Color count');
+  });
+});
+
+
+describe('retained64-frame96px Aseprite row export', () => {
+  it('keeps every original pixel, facing, clip and duration within the4096 sheet bound', async () => {
+    const manifest = parseAssetManifest(JSON.parse(await readFile('assets/art/approved/battle.unit.cavalry.json', 'utf8')));
+    const directory = dirname(manifest.frames[0]!.sourcePath), editable = await readFile(join(directory, 'editable.aseprite'));
+    expect(editable.readUInt16LE(6)).toBe(64); expect(editable.readUInt16LE(8)).toBe(96); expect(editable.readUInt16LE(10)).toBe(96);
+    const metadata = JSON.parse(await readFile(join(directory, 'aseprite/sprite.json'), 'utf8')) as AsepriteMetadata;
+    const sheet = decodePng(await readFile(join(directory, 'aseprite/sprite.png')));
+    expect({ width: sheet.width, height: sheet.height }).toEqual({ width: 4032, height: 192 });
+    expect(metadata.frames).toHaveLength(64);
+    expect(metadata.meta.frameTags).toEqual(sourceClips(manifest).map(clip => ({ name: clip.name, from: clip.from, to: clip.to, direction: 'forward', color: '#000000ff' })));
+    for (const [index, frame] of metadata.frames.entries()) {
+      expect(frame.frame).toEqual({ x: index % 42 * 96, y: Math.floor(index / 42) * 96, w: 96, h: 96 });
+      expect(frame.sourceSize).toEqual({ w: 96, h: 96 }); expect(frame.duration).toBe(manifest.frames[index]!.durationMs);
+      const original = decodePng(await readFile(manifest.frames[index]!.sourcePath));
+      for (let y = 0; y < 96; y++) {
+        const offset = ((frame.frame.y + y) * sheet.width + frame.frame.x) * 4;
+        expect(sheet.data.subarray(offset, offset + 96 * 4)).toEqual(original.data.subarray(y * 96 * 4, (y + 1) * 96 * 4));
+      }
+    }
   });
 });

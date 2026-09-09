@@ -1,3 +1,4 @@
+import { sceneSoldiers, reconcileIndividualLosses } from './combat/individual';
 import { z } from 'zod';
 import { BATTLE_SPELLS, COMMANDER_ABILITIES, FACTIONS, MAGIC_PATHS, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, UNITS } from '@theandril/content';
 import type { CampaignBattle, DomainEvent, GameState } from './types';
@@ -52,7 +53,7 @@ export function createBattleAbilityState(state: GameState, battle: CampaignBattl
 }
 function controlObjection(state: GameState, factionId: string, battleId: string): string | null {
   const battle = state.battle;
-  if (!battle || battle.id !== battleId || battle.rulesVersion !== 9 || !battle.abilityState) return 'Choose the current ability-enabled battle.';
+  if (!battle || battle.id !== battleId || battle.rulesVersion < 9 || !battle.abilityState) return 'Choose the current ability-enabled battle.';
   const controller = [battle.attackerFactionId, battle.defenderFactionId].includes(state.turnOwnerId) ? state.turnOwnerId : battle.attackerFactionId;
   return controller === factionId ? null : 'Only the controlling battle participant may issue tactical orders.';
 }
@@ -89,6 +90,7 @@ function targetObjection(battle: CampaignBattle, source: Source, targetId: strin
 }
 function execute(battle: CampaignBattle, source: Source, targetId: string | undefined, actionRound: number, events: DomainEvent[], turn: number, observe?: BattleFactObserver): void {
   const targets = source.abilityId === 'ability.rally' ? sourceFormations(battle, source).filter(active) : formations(battle).filter(item => item.id === targetId);
+  const killedSoldierIds: string[] = [];
   const before = observe ? targets.map(item => ({ ...item })) : [];
   const spell = BATTLE_SPELLS.find(item => item.id === source.abilityId);
   let restored = 0;
@@ -101,6 +103,7 @@ function execute(battle: CampaignBattle, source: Source, targetId: string | unde
     else if (spell) {
       const damage = Math.min(target.strength, Math.max(1, spell.power - Math.floor(target.armor / 3))), absorbed = Math.min(target.ward ?? 0, damage);
       target.ward = (target.ward ?? 0) - absorbed; target.strength -= damage - absorbed;
+      killedSoldierIds.push(...reconcileIndividualLosses(target));
       if (damage > absorbed) target.morale = Math.max(0, target.morale - 4 - Math.floor((damage - absorbed) * 70 / target.maxStrength));
     }
   }
@@ -111,7 +114,7 @@ function execute(battle: CampaignBattle, source: Source, targetId: string | unde
   const abilityName = spell?.name ?? (source.abilityId === 'ability.rally' ? 'Rally' : 'Set shields');
   events.push({ turn, factionId: sourceFaction(battle, source), type: source.abilityId === 'ability.rally' ? 'commander_rallied' : 'battle_ability_used', cell: battle.defenderCell,
     message: source.abilityId === 'ability.rally' ? `${actor} rallied the army, restoring ${restored} formation morale in total.` : `${actor} used ${abilityName}${targetId ? ` on ${targetId}` : ''}.` });
-  observe?.({ round: battle.combat.round, type: 'ability', sourceId: source.sourceId, sourceKind: source.sourceKind, targetIds: targets.map(item => item.id), abilityId: source.abilityId, attackKind: spell?.kind === 'damage' ? 'fire' : spell ? 'ward' : source.abilityId === 'ability.rally' ? 'rally' : 'brace', changes: targets.map((item, i) => battleStatChange(before[i]!, item)), winner: null, reason: null });
+  observe?.({ ...(battle.rulesVersion >= 10 ? { killedSoldierIds } : {}), round: battle.combat.round, type: 'ability', sourceId: source.sourceId, sourceKind: source.sourceKind, targetIds: targets.map(item => item.id), abilityId: source.abilityId, attackKind: spell?.kind === 'damage' ? 'fire' : spell ? 'ward' : source.abilityId === 'ability.rally' ? 'rally' : 'brace', changes: targets.map((item, i) => battleStatChange(before[i]!, item)), winner: null, reason: null });
   if (spell?.kind === 'damage') for (const target of targets) if (!active(target)) {
     const changes = [];
     for (const ally of battle.combat[sideOf(battle, target.id)]) if (active(ally)) { const morale = ally.morale; ally.morale = Math.max(0, ally.morale - 8); if (observe) changes.push({ formationId: ally.id, strengthDelta: 0, moraleDelta: ally.morale - morale, fatigueDelta: 0, wardDelta: 0 }); }
@@ -151,7 +154,7 @@ export function battleAbilityCommand(state: GameState, command: { factionId: str
   return null;
 }
 export function observeBattleAbilities(state: GameState, factionId: string): BattleAbilityOption[] {
-  const battle = state.battle; if (!battle?.abilityState || battle.rulesVersion !== 9) return [];
+  const battle = state.battle; if (!battle?.abilityState || battle.rulesVersion < 9) return [];
   return battle.abilityState.sources.filter(source => sourceFaction(battle, source) === factionId).map(source => {
     const spell = BATTLE_SPELLS.find(item => item.id === source.abilityId);
     const targets = source.abilityId === 'ability.rally' ? [] : formations(battle).map(target => { const blocker = targetObjection(battle, source, target.id); return { targetId: target.id, label: `${units.get(target.unitId)?.name ?? target.unitId} (${target.id})`, side: sideOf(battle, target.id), canTarget: blocker === null, blocker }; });
@@ -166,8 +169,8 @@ export function getBattleScene(state: GameState, battle: CampaignBattle): Battle
     const saved = battle.abilityState?.identities.find(item => item.armyId === armyId);
     return { armyName: saved?.name ?? (armyId ? state.armies[armyId]?.name ?? armyId : 'Settlement militia'), factionId, factionDefinitionId: saved?.factionDefinitionId ?? state.factions.find(item => item.id === factionId)!.definitionId };
   };
-  return { round: battle.combat.round, terrain: battle.combat.terrain, domain: battle.domain, settlementId: battle.settlementId, fortification: battle.fortification,
-    formations: formations(battle).map(item => { const armyId = battle.formationBindings.find(binding => binding.battleFormationId === item.id)?.armyId ?? null, side = sideOf(battle, item.id); return { ...item, armyId, side, ...identity(armyId, side), unitName: units.get(item.unitId)?.name ?? item.unitId, ward: item.ward ?? 0 }; }),
+  return { ...(battle.rulesVersion >= 10 ? { soldiers: sceneSoldiers(formations(battle)) } : {}), round: battle.combat.round, terrain: battle.combat.terrain, domain: battle.domain, settlementId: battle.settlementId, fortification: battle.fortification,
+    formations: formations(battle).map(item => { const armyId = battle.formationBindings.find(binding => binding.battleFormationId === item.id)?.armyId ?? null, side = sideOf(battle, item.id); return { ...item, ...(item.members ? { members: [...item.members] } : {}), ...(item.position ? { position: { ...item.position } } : {}), armyId, side, ...identity(armyId, side), unitName: units.get(item.unitId)?.name ?? item.unitId, ward: item.ward ?? 0 }; }),
     characters: battle.characterSnapshots.map(item => { const side = item.armyId === battle.attackerId ? 'attacker' as const : 'defender' as const; const bindings = new Set(battle.formationBindings.filter(binding => binding.armyId === item.armyId).map(binding => binding.battleFormationId)); return { id: item.characterId, name: item.name, definitionId: item.definitionId, factionId: item.factionId, factionDefinitionId: identity(item.armyId, side).factionDefinitionId, armyId: item.armyId, side, anchorFormationId: formations(battle).find(formation => bindings.has(formation.id) && active(formation))?.id ?? null, strain: battle.abilityState?.casters.find(caster => caster.characterId === item.characterId)?.strain ?? 0, maxStrain: item.definitionId === 'character.waykeeper' ? MAX_CASTER_STRAIN : 0 }; }),
     result: battle.combat.result ? { ...battle.combat.result } : null };
 }

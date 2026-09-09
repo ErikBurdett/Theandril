@@ -16,7 +16,7 @@ function readabilityCampaign() {
   town.name = 'The Hearth of the Western Oathkeepers'; town.population = 8;
   state.factions[0]!.treasury = 20_000;
   const cells = cellsWithin(state, town.cell, 3);
-  for (const cell of cells) { state.world.terrain[cell] = 1; state.world.biome[cell] = 1; state.world.fertility[cell] = 80; state.world.waterDepth[cell] = 0; }
+  for (const cell of cells) { state.world.terrain[cell] = 1; state.world.biome[cell] = 1; state.world.fertility[cell] = 80; state.world.waterDepth[cell] = 0; delete state.resources.deposits[cell]; }
   // Keep the other culture's existing remote town unseen; its nearby envoy is truly visible.
   enemy.cell = Object.values(state.settlements).find(item => item.factionId === enemy.factionId)!.cell;
   refreshAuthoredSight(state);

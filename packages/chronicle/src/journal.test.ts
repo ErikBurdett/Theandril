@@ -123,7 +123,7 @@ describe('private incremental campaign journals', () => {
   });
 
   it('accepts an archive-1 schema-4 origin without rewriting its snapshot or seal', () => {
-    const game = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
+    const game = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1, rulesVersion: 4 });
     const initialSave = serializeGameForVersion(game, 4), initialHash = checksum(initialSave);
     const journal = resumeJournal(game, { version: 1, mode: 'player', coverage: 'complete', initialSave, initialHash, initialTurn: 1, records: [], finalHash: null });
     expect(journal.prepareCommit(game, 0).header).toMatchObject({ initialSave, initialHash, initialSaveVersion: 4 });

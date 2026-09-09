@@ -1,0 +1,500 @@
+[WebServer] (node:176880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:176893) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 139 tests using 1 worker
+
+(node:176961) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    1 tests/gameplay/army-size-performance.spec.ts:36:1 › synthetic Huge 1500 twelve-formation armies keep representative stacks bounded through near, far, full fit and restored focus (16.8s)
+(node:177408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    2 tests/gameplay/army-size.spec.ts:26:1 › actual one, three and twelve-formation armies use capped representative groups and update after a saved split (5.0s)
+  ✓    3 tests/gameplay/army-size.spec.ts:101:1 › fleet representatives count real hull formations without drawing embarked passengers twice (4.6s)
+  ✓    4 tests/gameplay/army.spec.ts:52:1 › mixed armies merge, split and transfer stable formations without refreshing movement; an escorted caravan founds without consuming its scouts (7.7s)
+  ✓    5 tests/gameplay/army.spec.ts:93:1 › mixed formation battles deploy each real role and preserve exact losses through a saved tactical round (6.6s)
+  ✓    6 tests/gameplay/army.spec.ts:123:1 › twelve-formation limits and proper-subset splitting stay explicit in the narrow keyboard roster (3.3s)
+Fully explored Huge art measurements: {"workload":"Synthetic fully explored Huge, 32 factions, 1,500 global armies, 32 towns; fog still limits currently visible entities. Static qualified faction poses at near zoom; co-located armies aggregate to heraldic badges at far zoom. No turn advancement or claims about late-game strategic load. Cache backing is separately estimated with power-of-two dimensions; returned texture-pool resources and other GPU allocations are not included.","homeCell":50497,"canvas":{"x":0,"y":110,"width":1440,"height":696},"mapAtlases":[{"id":"foundation","imageUrl":"/art/foundation.png","jsonUrl":"/art/foundation.json","width":2048,"height":2048,"sha256":"e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de"},{"id":"map-works","imageUrl":"/art/map-works.png","jsonUrl":"/art/map-works.json","width":512,"height":512,"sha256":"aa527029fe1b8a7ac05cbafb48f85f08ea3db12c3df00cbfaa696def170a89c5"}],"expectedResidency":17825792,"cells":196608,"stateHash":"98c948c0","samples":[{"stage":"fully-explored-static","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":1975374,"totalTransferBytes":1975374,"cellTransferBytes":1769695,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"renderer":"webgl","frameCount":134,"frameMs":16.699999999999818,"frameP95Ms":16.799999999999727,"renderCpuMs":0.20000004768371582,"visibleCells":1536,"visibleChunks":6,"cachedChunks":6,"chunkRebuilds":12,"visibleEntities":48,"zoom":1,"highlightedCells":9,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":368.7000000476837,"artFirstRenderCpuMs":63.60000002384186,"visibleSprites":2,"terrainSpriteCells":1536,"pooledSprites":1538,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":711,"cachedTextureBytesEstimate":25165824}},{"stage":"near-static-faction-poses","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":1975374,"totalTransferBytes":1975374,"cellTransferBytes":1769695,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"renderer":"webgl","frameCount":264,"frameMs":16.699999999999818,"frameP95Ms":16.700000000000728,"renderCpuMs":3.299999952316284,"visibleCells":1024,"visibleChunks":4,"cachedChunks":6,"chunkRebuilds":12,"visibleEntities":48,"zoom":1.25,"highlightedCells":9,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":368.7000000476837,"artFirstRenderCpuMs":63.60000002384186,"visibleSprites":2,"terrainSpriteCells":1024,"pooledSprites":1538,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":711,"cachedTextureBytesEstimate":25165824}},{"stage":"six-camera-drags","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":1975374,"totalTransferBytes":1975374,"cellTransferBytes":1769695,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"renderer":"webgl","frameCount":505,"frameMs":16.600000000000364,"frameP95Ms":16.799999999999272,"renderCpuMs":0.10000002384185791,"visibleCells":1024,"visibleChunks":4,"cachedChunks":10,"chunkRebuilds":16,"visibleEntities":0,"zoom":1.25,"highlightedCells":9,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":368.7000000476837,"artFirstRenderCpuMs":63.60000002384186,"visibleSprites":0,"terrainSpriteCells":1024,"pooledSprites":2562,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":711,"cachedTextureBytesEstimate":41943040}},{"stage":"far-strategic","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":1975374,"totalTransferBytes":1975374,"cellTransferBytes":1769695,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"renderer":"webgl","frameCount":651,"frameMs":16.600000000000364,"frameP95Ms":16.799999999999272,"renderCpuMs":0.10000002384185791,"visibleCells":3840,"visibleChunks":15,"cachedChunks":15,"chunkRebuilds":33,"visibleEntities":48,"zoom":0.5120000000000001,"highlightedCells":9,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":368.7000000476837,"artFirstRenderCpuMs":63.60000002384186,"visibleSprites":2,"terrainSpriteCells":3840,"pooledSprites":3842,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":0,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":711,"cachedTextureBytesEstimate":62914560}},{"stage":"far-strategic-home-aggregates","metrics":{"generationMs":0,"commandMs":0,"aiMs":0,"transferBytes":1975374,"totalTransferBytes":1975374,"cellTransferBytes":1769695,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"renderer":"webgl","frameCount":779,"frameMs":16.700000000000728,"frameP95Ms":16.799999999999272,"renderCpuMs":0.10000002384185791,"visibleCells":3072,"visibleChunks":12,"cachedChunks":18,"chunkRebuilds":36,"visibleEntities":48,"zoom":0.5120000000000001,"highlightedCells":9,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":368.7000000476837,"artFirstRenderCpuMs":63.60000002384186,"visibleSprites":2,"terrainSpriteCells":3072,"pooledSprites":4610,"stackBadges":0,"pooledStackBadges":1,"territoryEdges":18,"improvementProps":0,"riverSegments":0,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":0,"rangePerimeterEdges":28,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":837,"maxCachedChunkHeight":711,"cachedTextureBytesEstimate":75497472}}]}
+  ✓    7 tests/gameplay/art-performance.spec.ts:8:1 › fully explored Huge art rendering stays viewport-bounded across static faction poses, pan and strategic LOD (16.6s)
+  ✓    8 tests/gameplay/art.spec.ts:17:1 › approved native assets power the map while Art Lab inspects real animations, rectangles, palette and tile repetition without changing the campaign (5.4s)
+  ✓    9 tests/gameplay/art.spec.ts:109:1 › actual guards, towns and far-zoom markers use observed entities rather than future-ready catalog content (2.3s)
+  ✓   10 tests/gameplay/art.spec.ts:136:1 › a failed approved-art load is reported and retains playable procedural fallbacks (1.6s)
+  ✓   11 tests/gameplay/art.spec.ts:152:1 › Art Lab refuses stale, mismatched and oversized atlas images before reporting pixel measurements (2.8s)
+BATTLE_RENDER {"originHash":"54566695","commandHash":"3f92e513","frameMs":{"p50":16.700000000000728,"p95":33.399999999999636,"max":50},"maxActors":46,"maxEffects":5,"atlasBytes":22020096}
+  ✓   12 tests/gameplay/battle-performance.spec.ts:9:1 › authored twenty-versus-twenty battlefield measures real round playback with one shared renderer and bounded FX (10.7s)
+  ✓   13 tests/gameplay/battlefield.spec.ts:91:1 › battlefield pauses for orders, presents actual strikes and restores a saved round and map without replay mutations (5.0s)
+  ✓   14 tests/gameplay/battlefield.spec.ts:132:1 › paid personal Waykeeper and separate research enable actual ward and ember target controls at narrow width (8.7s)
+  ✓   15 tests/gameplay/battlefield.spec.ts:196:1 › fortified assault opens the shared battlefield and reduced motion keeps decisions explicit (2.6s)
+  ✓   16 tests/gameplay/battlefield.spec.ts:217:1 › naval battlefield renders the actual hull formations and excludes embarked cargo (10.6s)
+  ✓   17 tests/gameplay/biome-variation.spec.ts:55:1 › all twelve biomes use three approved originals with stable cell choices across camera, turns and saved restoration (7.0s)
+  ✓   18 tests/gameplay/biome-variation.spec.ts:111:1 › a missing chosen variant uses its unchanged approved base and reports the exact missing identity (2.5s)
+  ✓   19 tests/gameplay/biome-variation.spec.ts:132:1 › generated watched terrain retains variants, fog privacy and exact river joins through spectator reveal and restore (1.5s)
+  ✓   20 tests/gameplay/campaign-hud.spec.ts:23:1 › the full-width map has top/bottom HUD, working floating windows and a compact unit menu (2.8s)
+  ✓   21 tests/gameplay/campaign-hud.spec.ts:67:1 › town popup retains production and land actions while full orders and roster stay separate (2.2s)
+  ✓   22 tests/gameplay/campaign-hud.spec.ts:91:1 › 390px enlarged-text HUD and modal controls stay readable and close without clearing selection (1.7s)
+  ✓   23 tests/gameplay/campaign-menu.spec.ts:109:1 › top campaign disclosure works by keyboard and preserves real save, load, autosave and import controls (2.7s)
+  ✓   24 tests/gameplay/campaign-menu.spec.ts:160:1 › narrow touch settings scroll within their top-bar overlay and return to the unchanged campaign (3.0s)
+  ✓   25 tests/gameplay/campaign-menu.spec.ts:239:1 › new campaign generation can be cancelled without losing the existing worker or campaign (1.8s)
+  ✓   26 tests/gameplay/campaign-seed.spec.ts:33:1 › default campaigns choose different random worlds, and saved random worlds retain their seed (2.8s)
+  ✓   27 tests/gameplay/campaign-seed.spec.ts:64:3 › explicit seed 0 recreates the exact same campaign after New campaign (1.6s)
+  ✓   28 tests/gameplay/campaign-seed.spec.ts:64:3 › explicit seed 4294967295 recreates the exact same campaign after New campaign (1.6s)
+  ✓   29 tests/gameplay/campaign-seed.spec.ts:75:1 › an invalid custom seed leaves the existing campaign intact (1.4s)
+  ✓   30 tests/gameplay/campaign.spec.ts:20:1 › settle, grow, build, recruit, explore and resume the same campaign (5.6s)
+  ✓   31 tests/gameplay/campaign.spec.ts:58:1 › compressed export/import and corrupt-save handling use the real controls (1.6s)
+Huge starting-map measurements: {"generationMs":765.5,"commandMs":0,"aiMs":0,"transferBytes":10373,"totalTransferBytes":10373,"cellTransferBytes":711,"landQueryCount":0,"landQueryBytes":0,"totalLandQueryBytes":0,"renderer":"webgl","frameCount":68,"frameMs":16.700000000000273,"frameP95Ms":16.800000000000182,"renderCpuMs":0.20000004768371582,"visibleCells":61,"visibleChunks":1,"cachedChunks":1,"chunkRebuilds":4,"visibleEntities":2,"zoom":0.9999999999999996,"highlightedCells":36,"routeCells":0,"previewCells":0,"atlasPages":2,"residentAtlasBytesEstimate":17825792,"artLoadMs":258.7999999523163,"artFirstRenderCpuMs":45.09999990463257,"visibleSprites":1,"terrainSpriteCells":61,"pooledSprites":62,"stackBadges":1,"pooledStackBadges":1,"territoryEdges":0,"improvementProps":0,"riverSegments":8,"roadSegments":0,"districtStreetSegments":0,"overview":false,"overviewTextureBytes":3148800,"rangePerimeterEdges":48,"visibleLabels":1,"selectedCells":1,"hoveredCells":0,"maxCachedChunkWidth":460,"maxCachedChunkHeight":406,"cachedTextureBytesEstimate":1048576}
+  ✓   32 tests/gameplay/campaign.spec.ts:79:1 › Huge map pans and zooms with bounded visible geometry; layout remains usable (2.8s)
+  ✓   33 tests/gameplay/characters-tree.spec.ts:25:1 › a veteran traces cross-branch prerequisites, spends experience once and retains focus and real command effects (3.8s)
+  ✓   34 tests/gameplay/characters-tree.spec.ts:76:1 › a narrow engineering tree explains branch exclusion and its purchased workshop improves a real refit (2.0s)
+  ✓   35 tests/gameplay/characters.spec.ts:71:1 › locating an officer from full orders closes both native windows and returns focus to the unchanged army on the map (1.7s)
+  ✓   36 tests/gameplay/characters.spec.ts:91:1 › named appointments attach to a real army, cancel without refund, and preserve a terrain-only survey across save and recovery (7.2s)
+  ✓   37 tests/gameplay/characters.spec.ts:120:1 › field refits restore actual formation losses and earned specialization improves the next mission (6.3s)
+  ✓   38 tests/gameplay/characters.spec.ts:145:1 › a named marshal rallies real formations once, saves its used ability, and appears in the exact battle aftermath (5.9s)
+  ✓   39 tests/gameplay/characters.spec.ts:175:1 › a narrow paginated roster finds and assigns a specialist in a hundred-army realm without bypassing companion limits (1.6s)
+  ✓   40 tests/gameplay/characters.spec.ts:215:1 › siege sabotage changes real defenses, and a failed mission preserves wounds through save and recovery (11.5s)
+  ✓   41 tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory (15.0s)
+  ✓   42 tests/gameplay/chronicles.spec.ts:88:1 › a human researches, adopts distinct policies, starts a public project and reads an honestly partial imported history (2.8s)
+  ✓   43 tests/gameplay/city-growth.spec.ts:36:1 › city borders expand through a saved turn while researched tile construction remains paid and worker-controlled (5.7s)
+  ✓   44 tests/gameplay/city-growth.spec.ts:94:1 › all five research-gated sites display their approved pixel assets and stable idle chunks (2.7s)
+  ✘   45 tests/gameplay/combat.spec.ts:23:1 › field battle permits tactical orders and resumes to the identical result from a saved round (45.3s)
+(node:183987) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   46 tests/gameplay/combat.spec.ts:56:1 › withdrawal applies strategic retreat and pursuit through the player order (2.4s)
+  ✓   47 tests/gameplay/combat.spec.ts:71:1 › an AI attack pauses for the human defender to choose an order (1.7s)
+  ✓   48 tests/gameplay/conquest.spec.ts:33:1 › besiege and assault a town, save the capture decision, and apply distinct occupation or sack outcomes (4.7s)
+  ✓   49 tests/gameplay/conquest.spec.ts:73:1 › confirm razing and resettle the visible ruins with a normally recruited caravan (6.6s)
+  ✓   50 tests/gameplay/conquest.spec.ts:136:1 › defending a settlement pauses the AI assault and resolves the AI capture after human withdrawal (1.6s)
+  ✓   51 tests/gameplay/contact.spec.ts:5:1 › world-size recommendations expose generated seats honestly and a chosen faction count survives manual save and reload (2.2s)
+  ✓   52 tests/gameplay/contact.spec.ts:34:1 › the recorded Standard Long seed with recommended density makes real faction contact through responsive AI watch (27.0s)
+  ✓   53 tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (3.4s)
+  ✓   54 tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (1.3s)
+  ✓   55 tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (1.3s)
+  ✓   56 tests/gameplay/faction-art.spec.ts:107:50 › culture-cohort-1: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (13.0s)
+  ✓   57 tests/gameplay/faction-art.spec.ts:107:50 › culture-cohort-2: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (14.2s)
+  ✓   58 tests/gameplay/faction-art.spec.ts:107:50 › culture-cohort-3: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (15.0s)
+  ✓   59 tests/gameplay/faction-art.spec.ts:107:50 › culture-cohort-4: six of all 24 observed cultures retain distinct untinted roles and strategic heraldry without changing canonical input or fog (13.4s)
+  ✓   60 tests/gameplay/faction-art.spec.ts:223:1 › a missing approved culture variant uses its generic role and explicit warning, never a different culture (2.9s)
+  ✘   61 tests/gameplay/faction-roster.spec.ts:51:36 › Mire Courts is a real chosen culture through founding, paid construction and portable saves (45.5s)
+(node:187403) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   62 tests/gameplay/faction-roster.spec.ts:51:36 › Saltwind Remnant is a real chosen culture through founding, paid construction and portable saves (5.8s)
+  ✓   63 tests/gameplay/faction-roster.spec.ts:51:36 › Wardhall Remnant is a real chosen culture through founding, paid construction and portable saves (5.6s)
+  ✓   64 tests/gameplay/faction-roster.spec.ts:51:36 › Rimehorn Clans is a real chosen culture through founding, paid construction and portable saves (5.5s)
+  ✓   65 tests/gameplay/faction-roster.spec.ts:51:36 › Sable Steppe is a real chosen culture through founding, paid construction and portable saves (5.4s)
+  ✓   66 tests/gameplay/faction-roster.spec.ts:51:36 › Morrow Spore is a real chosen culture through founding, paid construction and portable saves (5.3s)
+  ✓   67 tests/gameplay/faction-roster.spec.ts:51:36 › Cistern Assembly is a real chosen culture through founding, paid construction and portable saves (5.6s)
+  ✓   68 tests/gameplay/faction-roster.spec.ts:51:36 › Unsealed Companies is a real chosen culture through founding, paid construction and portable saves (5.4s)
+  ✓   69 tests/gameplay/faction-roster.spec.ts:51:36 › Lantern Hospices is a real chosen culture through founding, paid construction and portable saves (6.0s)
+  ✓   70 tests/gameplay/faction-roster.spec.ts:51:36 › Cairnwing Concord is a real chosen culture through founding, paid construction and portable saves (5.5s)
+  ✓   71 tests/gameplay/faction-roster.spec.ts:51:36 › Red Sluice Directorate is a real chosen culture through founding, paid construction and portable saves (5.5s)
+  ✓   72 tests/gameplay/faction-roster.spec.ts:51:36 › Velvet Meridian is a real chosen culture through founding, paid construction and portable saves (5.6s)
+  ✓   73 tests/gameplay/faction-roster.spec.ts:51:36 › Brine Choir is a real chosen culture through founding, paid construction and portable saves (5.5s)
+  ✓   74 tests/gameplay/faction-roster.spec.ts:51:36 › Emberwake Convocation is a real chosen culture through founding, paid construction and portable saves (5.5s)
+  ✓   75 tests/gameplay/faction-roster.spec.ts:51:36 › Underhush Exchange is a real chosen culture through founding, paid construction and portable saves (5.3s)
+  ✓   76 tests/gameplay/faction-roster.spec.ts:51:36 › Vesper Court is a real chosen culture through founding, paid construction and portable saves (5.4s)
+  ✓   77 tests/gameplay/faction-roster.spec.ts:51:36 › Manytrack Moot is a real chosen culture through founding, paid construction and portable saves (5.8s)
+  ✓   78 tests/gameplay/faction-roster.spec.ts:51:36 › Margin Observance is a real chosen culture through founding, paid construction and portable saves (6.6s)
+  ✓   79 tests/gameplay/faction-roster.spec.ts:116:1 › twenty-four unique authored choices include accessible Vesper in a real twenty-four-seat campaign without disclosing unseen realms (1.6s)
+  ✓   80 tests/gameplay/faction-roster.spec.ts:146:1 › all twenty-four profiles and actual drawbacks remain readable by touch and keyboard at narrow width (4.0s)
+  ✓   81 tests/gameplay/faction-selection.spec.ts:4:1 › a selected new culture owns the actual player seat and persists through save/load (2.7s)
+  ✓   82 tests/gameplay/faction-ui.spec.ts:32:1 › 24 public culture crests are reference art, while campaign heraldry follows only observed faction definitions (3.6s)
+  ✘   83 tests/gameplay/faction-ui.spec.ts:82:1 › renamed realms retain their authored family, real appointments gain role artwork, and hidden foreign characters stay private (4.3s)
+(node:190756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   84 tests/gameplay/faction-ui.spec.ts:158:1 › missing approved faction art is visibly generic without broken images or blocked campaign controls (2.1s)
+  ✓   85 tests/gameplay/generals.spec.ts:62:1 › a real marshal assignment and prerequisite skill branches expand command from twelve through sixteen to twenty (6.2s)
+  ✘   86 tests/gameplay/generals.spec.ts:106:1 › a wounded general retains every formation and permits narrow-screen command-capacity repair (45.2s)
+(node:192287) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   87 tests/gameplay/generals.spec.ts:132:1 › twenty general-led formations enter a saved four-rank battle and resolve through the same kernel (6.4s)
+  ✘   88 tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog (6.7s)
+(node:192803) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   89 tests/gameplay/hearth-development.spec.ts:92:1 › paid hearth and tile construction change actual district art through cancellation, restoration and completion (8.4s)
+  ✓   90 tests/gameplay/hearth-development.spec.ts:161:1 › a mature paid hearth sprawls inside its 37 claims at normal, near, far and narrow camera scales (2.7s)
+  ✓   91 tests/gameplay/hearth-development.spec.ts:198:1 › remembered foreign land never exposes unseen construction or newly completed district art (1.3s)
+  ✓   92 tests/gameplay/land-query.spec.ts:67:1 › selected-town queries are reused for tile clicks and fast registry changes never retain another town’s options (4.8s)
+  ✓   93 tests/gameplay/land-query.spec.ts:95:1 › same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width (6.2s)
+  ✓   94 tests/gameplay/land-query.spec.ts:144:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail (4.4s)
+  ✓   95 tests/gameplay/land.spec.ts:38:1 › territory clicks, paid work, cultivation and saved continuation remain playable at narrow width (8.5s)
+  ✓   96 tests/gameplay/land.spec.ts:116:1 › capital designation is paid and independent of colony, settlement and city size (2.8s)
+  ✓   97 tests/gameplay/map-actions.spec.ts:51:1 › a real canvas caravan founds, builds and continues in the same full-orders controls without issuing inspection orders (2.3s)
+  ✓   98 tests/gameplay/map-actions.spec.ts:93:1 › a hundred co-located armies retain all choices, local keyboard tabs and native-modal focus across paid saved orders (3.4s)
+  ✓   99 tests/gameplay/map-actions.spec.ts:148:1 › map-only diplomacy uses the one real encountered-faction consumer and ordinary war command (1.4s)
+  ✘  100 tests/gameplay/map-actions.spec.ts:174:1 › 390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer (1.4s)
+(node:194483) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  101 tests/gameplay/map-readability.spec.ts:39:1 › realm perimeters and contextual names stay quiet while real selection, hover, range and land inspection remain clear (3.4s)
+  ✓  102 tests/gameplay/movement.spec.ts:69:1 › canvas selects and cycles friendly units, previews bounded multi-step movement, and distinguishes dragging from orders (5.4s)
+  ✓  103 tests/gameplay/movement.spec.ts:102:1 › map targeting refuses implicit war and impassable land, then executes a multi-step field attack without issuing locked orders (6.2s)
+  ✓  104 tests/gameplay/movement.spec.ts:129:1 › queued waypoints consume current movement, survive save/load, continue after the round, and cancel through the real controls (7.7s)
+  ✓  105 tests/gameplay/movement.spec.ts:169:1 › map settlement targeting requires siege instead of bypassing defenses and inspection names the visible biome (4.1s)
+  ✓  106 tests/gameplay/movement.spec.ts:193:1 › a saved route interrupted by a real foreign move retains its reason and safely replans on resume (4.6s)
+  ✓  107 tests/gameplay/movement.spec.ts:216:1 › narrow touch map moves on taps and keyboard route controls remain usable without hover (2.2s)
+  ✓  108 tests/gameplay/naval-art.spec.ts:22:1 › all twenty-four cultures show three distinct approved naval hulls, stable strategic badges and canonical fog without duplicate passengers (19.6s)
+  ✓  109 tests/gameplay/naval-art.spec.ts:148:1 › an absent approved naval variant falls back to a ship marker, never another culture or a land unit (2.3s)
+  ✓  110 tests/gameplay/naval.spec.ts:51:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker (11.9s)
+  ✓  111 tests/gameplay/naval.spec.ts:107:1 › harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet (7.0s)
+  ✓  112 tests/gameplay/naval.spec.ts:143:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships (7.4s)
+  ✘  113 tests/gameplay/next-action.spec.ts:48:1 › hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders (7.4s)
+(node:198216) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  114 tests/gameplay/next-action.spec.ts:88:1 › paused routes need attention while standing journeys, stationary missions and embarked troops are skipped (6.4s)
+  ✓  115 tests/gameplay/next-action.spec.ts:129:1 › remapped shortcuts persist and previous/next touch controls remain usable at narrow width (2.9s)
+  ✓  116 tests/gameplay/progression-tree.spec.ts:24:1 › research dependencies support keyboard inspection, exact purchases and permanent policy choices across a save (3.1s)
+  ✓  117 tests/gameplay/progression-tree.spec.ts:76:1 › narrow research keeps every real branch and its linked purchase reachable without horizontal scrolling (1.8s)
+  ✓  118 tests/gameplay/realm-navigation.spec.ts:27:1 › unified registry finds the hundredth army and fortieth town without rendering the whole empire or changing orders (12.4s)
+  ✓  119 tests/gameplay/realm-navigation.spec.ts:89:1 › narrow town categories expose real production, blockers and character-to-army navigation with save restoration (2.8s)
+  ✓  120 tests/gameplay/selected-asset.spec.ts:29:1 › only the selected artwork has a quiet faction contour and slow glints, with steady reduced motion and preserved map actions (3.8s)
+  ✓  121 tests/gameplay/selected-asset.spec.ts:77:1 › unavailable selected artwork uses small honest glyph brackets without restoring a whole-tile outline (1.3s)
+  ✘  122 tests/gameplay/selected-asset.spec.ts:87:1 › the approved Ashen scout plays all four genuine idle frames with matching bounded selection masks and native Lab playback (6.1s)
+(node:199982) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  123 tests/gameplay/specialist-roster.spec.ts:20:1 › research and paid specialist recruits survive save/load with honest shared silhouettes at desktop and narrow sizes (8.6s)
+  ✓  124 tests/gameplay/storage.spec.ts:50:1 › incremental browser saves share journal chunks and recover an older manifest with exact exported replay (4.1s)
+  ✓  125 tests/gameplay/strategic-picking.spec.ts:42:1 › clicking a displaced garrison badge and foreign banner inspects the rendered entity without moving the selected army (2.3s)
+  ✓  126 tests/gameplay/strategic-picking.spec.ts:72:1 › shift-clicking the displaced badge deliberately follows a route to its actual hearth cell (1.8s)
+  ✓  127 tests/gameplay/terrain-art.spec.ts:44:1 › all twelve approved biome tiles remain distinct beneath compact hills relief and actual troop sprites (2.9s)
+  ✓  128 tests/gameplay/terrain-art.spec.ts:75:1 › missing approved terrain art keeps explicit physical hill and mountain fallbacks without pretending tiles loaded (2.4s)
+  ✓  129 tests/gameplay/terrain-art.spec.ts:110:39 › all five completed land works retain approved prop artwork and borders (1.5s)
+  ✓  130 tests/gameplay/terrain-art.spec.ts:110:39 › all five completed land works retain distinct explicit fallback glyphs and borders (1.2s)
+  ✓  131 tests/gameplay/tile-footprints.spec.ts:44:1 › all ten paid improvements retain containment while camp, town, capital fill their hex with untinted opaque bodies (7.5s)
+  ✓  132 tests/gameplay/tile-footprints.spec.ts:126:1 › a previously scouted empty foreign field does not reveal its later improvement while zooming and inspecting fog (2.0s)
+  ✓  133 tests/gameplay/world-geography.spec.ts:45:1 › AI-watch fog is a reversible UI/console presentation and saves retain only genuine faction sight (4.2s)
+  ✓  134 tests/gameplay/world-geography.spec.ts:86:73 › continents geography renders actual lakes and joined rivers and can be inspected from the whole-world overview (2.7s)
+  ✓  135 tests/gameplay/world-geography.spec.ts:86:73 › islands geography renders actual lakes and joined rivers and can be inspected from the whole-world overview (2.1s)
+  ✓  136 tests/gameplay/world-geography.spec.ts:86:73 › archipelago geography renders actual lakes and joined rivers and can be inspected from the whole-world overview (2.8s)
+  ✓  137 tests/gameplay/world-geography.spec.ts:131:1 › Huge revealed world overview is one bounded texture and restoring fog removes unknown geography on a narrow viewport (2.9s)
+  ✓  138 tests/gameplay/world-geography.spec.ts:196:1 › player campaigns reject both public fog commands and expose no reveal button (1.4s)
+  ✓  139 tests/gameplay/world-geography.spec.ts:214:1 › a paid road segment has joined map geometry, preserves progress in a save and is suppressed only at far zoom (4.8s)
+
+
+  1) tests/gameplay/army-size-performance.spec.ts:36:1 › synthetic Huge 1500 twelve-formation armies keep representative stacks bounded through near, far, full fit and restored focus 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "strategic-glyphs"
+    Received: undefined
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      110 |
+      111 |   await page.getByRole('button', { name: 'Zoom out', exact: true }).click({ clickCount: 4, delay: 60 });
+    > 112 |   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.lod)).toBe('strategic-glyphs');
+          |                                                                                                ^
+      113 |   const far = await sample('same-neighborhood-strategic-aggregation');
+      114 |   expect(far.metrics.overview).toBe(false);
+      115 |   expect(far.metrics.visibleEntities).toBeGreaterThanOrEqual(1500);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/army-size-performance.spec.ts:112:96
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice26-full/army-size-performance-synt-ffc3a-full-fit-and-restored-focus/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice26-full/army-size-performance-synt-ffc3a-full-fit-and-restored-focus/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice26-full/army-size-performance-synt-ffc3a-full-fit-and-restored-focus/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice26-full/army-size-performance-synt-ffc3a-full-fit-and-restored-focus/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/combat.spec.ts:23:1 › field battle permits tactical orders and resumes to the identical result from a saved round 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Auto-resolve battle', exact: true })
+        - locator resolved to <button>Auto-resolve battle</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+      - element was detached from the DOM, retrying
+
+
+      42 |   await expect(page.getByTestId('battle-round')).toContainText('1');
+      43 |   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(during);
+    > 44 |   await page.getByRole('button', { name: 'Auto-resolve battle', exact: true }).click();
+         |                                                                                ^
+      45 |   await openCampaignJournal(page);
+      46 |   await expect(page.getByTestId('battle-report')).toBeVisible();
+      47 |   expect(await page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(completed);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/combat.spec.ts:44:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice26-full/combat-field-battle-permit-e192b-l-result-from-a-saved-round/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice26-full/combat-field-battle-permit-e192b-l-result-from-a-saved-round/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice26-full/combat-field-battle-permit-e192b-l-result-from-a-saved-round/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice26-full/combat-field-battle-permit-e192b-l-result-from-a-saved-round/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/gameplay/faction-roster.spec.ts:51:36 › Mire Courts is a real chosen culture through founding, paid construction and portable saves 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: 'Realm registry', exact: true }).getByRole('tab', { name: /^Settlements/ })
+        - locator resolved to <button role="tab" tabindex="0" aria-selected="true" id="realm-tab-settlements" aria-controls="realm-registry-panel">…</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+      - element was detached from the DOM, retrying
+        - waiting for "http://127.0.0.1:4173/" navigation to finish...
+        - navigated to "http://127.0.0.1:4173/"
+
+
+       at ui-navigation.ts:32
+
+      30 | export async function openRegistry(page: Page, kind: RegistryKind) {
+      31 |   const window = await openManagement(page, 'Realm registry', kind === 'armies' ? 'Armies & fleets' : 'Settlements');
+    > 32 |   await window.getByRole('tab', { name: kind === 'armies' ? /^Armies/ : /^Settlements/ }).click();
+         |                                                                                           ^
+      33 |   return window;
+      34 | }
+      35 | /** Search literal names; regex callers traverse real pages, never a debug selector. */
+        at openRegistry (/home/telephoneheater/Work/Theandril/tests/gameplay/ui-navigation.ts:32:91)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/faction-roster.spec.ts:108:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice26-full/faction-roster-Mire-Courts-e2dd8-truction-and-portable-saves/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice26-full/faction-roster-Mire-Courts-e2dd8-truction-and-portable-saves/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice26-full/faction-roster-Mire-Courts-e2dd8-truction-and-portable-saves/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice26-full/faction-roster-Mire-Courts-e2dd8-truction-and-portable-saves/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/gameplay/faction-ui.spec.ts:82:1 › renamed realms retain their authored family, real appointments gain role artwork, and hidden foreign characters stay private 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: locator('.inspector').locator('[data-art-id="unit.scout.ashen_compact"]')
+    Expected: "ready"
+    Error: strict mode violation: locator('.inspector').locator('[data-art-id="unit.scout.ashen_compact"]') resolved to 3 elements:
+        1) <span aria-hidden="true" data-art-state="ready" data-art-content-id="unit.scout" class="faction-art faction-art--ready" data-art-id="unit.scout.ashen_compact" data-art-definition="faction.ashen_compact" title="Wayfinder · approved faction artwork" data-art-rendered-id="unit.scout.ashen_compact"></span> aka getByTitle('Wayfinder · approved faction')
+        2) <span aria-hidden="true" data-art-state="shared" data-art-content-id="unit.skirmisher" data-art-id="unit.scout.ashen_compact" class="faction-art faction-art--shared" data-art-definition="faction.ashen_compact" data-art-rendered-id="unit.scout.ashen_compact" title="Reed skirmishers · shared wayfinder silhouette"></span> aka getByTitle('Reed skirmishers · shared')
+        3) <span aria-hidden="true" data-art-state="shared" data-art-content-id="unit.arbalester" data-art-id="unit.scout.ashen_compact" class="faction-art faction-art--shared" data-art-definition="faction.ashen_compact" data-art-rendered-id="unit.scout.ashen_compact" title="Witness arbalesters · shared wayfinder silhouette"></span> aka getByTitle('Witness arbalesters · shared')
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.inspector').locator('[data-art-id="unit.scout.ashen_compact"]') with timeout 5000ms
+      - waiting for locator('.inspector').locator('[data-art-id="unit.scout.ashen_compact"]')
+
+
+       9 | const art = (scope: Page | Locator, id: string) => scope.locator(`[data-art-id="${id}"]`);
+      10 | async function approved(icon: Locator): Promise<void> {
+    > 11 |   await expect(icon).toHaveAttribute('data-art-state', 'ready');
+         |                      ^
+      12 |   await expect(icon).toHaveCSS('background-repeat', 'no-repeat');
+      13 |   expect(await icon.evaluate(element => getComputedStyle(element).backgroundImage)).toMatch(/^url\("?blob:/);
+      14 | }
+        at approved (/home/telephoneheater/Work/Theandril/tests/gameplay/faction-ui.spec.ts:11:22)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/faction-ui.spec.ts:120:101
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice26-full/faction-ui-renamed-realms--73cc1-ign-characters-stay-private/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice26-full/faction-ui-renamed-realms--73cc1-ign-characters-stay-private/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice26-full/faction-ui-renamed-realms--73cc1-ign-characters-stay-private/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice26-full/faction-ui-renamed-realms--73cc1-ign-characters-stay-private/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/gameplay/generals.spec.ts:106:1 › a wounded general retains every formation and permits narrow-screen command-capacity repair 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('army-composition').locator('summary')
+        - waiting for navigation to finish...
+        - navigated to "http://127.0.0.1:4173/"
+
+
+      45 |   await openSelectedOrders(page);
+      46 |   const panel = page.getByTestId('army-composition');
+    > 47 |   if (!await panel.evaluate(element => (element as HTMLDetailsElement).open)) await panel.locator('summary').click();
+         |                                                                                                              ^
+      48 |   return panel;
+      49 | }
+      50 | async function saveReload(page: Page) {
+        at composition (/home/telephoneheater/Work/Theandril/tests/gameplay/generals.spec.ts:47:110)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/generals.spec.ts:111:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice26-full/generals-a-wounded-general-21af3-een-command-capacity-repair/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice26-full/generals-a-wounded-general-21af3-een-command-capacity-repair/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice26-full/generals-a-wounded-general-21af3-een-command-capacity-repair/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice26-full/generals-a-wounded-general-21af3-een-command-capacity-repair/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog 
+
+    Error: page.evaluate: Execution context was destroyed, most likely because of a navigation
+
+      4 | import { generateWorld, riverSize } from '@theandril/mapgen';
+      5 |
+    > 6 | const counters = (page: Page) => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters());
+        |                                       ^
+      7 |
+      8 | test('Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog', async ({ page }, testInfo) => {
+      9 |   // Independent read-only geography identifies an actual river to click. It is
+        at counters (/home/telephoneheater/Work/Theandril/tests/gameplay/geography-performance.spec.ts:6:39)
+        at sample (/home/telephoneheater/Work/Theandril/tests/gameplay/geography-performance.spec.ts:40:26)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/geography-performance.spec.ts:94:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice26-full/geography-performance-Huge-a6da1-n-overview-and-restored-fog/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice26-full/geography-performance-Huge-a6da1-n-overview-and-restored-fog/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice26-full/geography-performance-Huge-a6da1-n-overview-and-restored-fog/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice26-full/geography-performance-Huge-a6da1-n-overview-and-restored-fog/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests/gameplay/map-actions.spec.ts:174:1 › 390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 5
+    Received:    0
+
+      41 |     return { icon: label?.startsWith('Zoom ') || label === 'Map guide', label, width: rect.width, height: rect.height, clientWidth: button.clientWidth, scrollWidth: button.scrollWidth };
+      42 |   }));
+    > 43 |   expect(controls.length).toBeGreaterThanOrEqual(5);
+         |                           ^
+      44 |   for (const control of controls) {
+      45 |     expect(control.scrollWidth, control.label ?? 'map control').toBeLessThanOrEqual(control.clientWidth);
+      46 |     if (control.icon) { expect(control.width).toBeGreaterThanOrEqual(44); expect(control.height).toBeGreaterThanOrEqual(44); }
+        at mapControlsFit (/home/telephoneheater/Work/Theandril/tests/gameplay/map-actions.spec.ts:43:27)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/map-actions.spec.ts:181:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice26-full/map-actions-390px-map-only-c2ecb-emain-above-the-real-footer/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice26-full/map-actions-390px-map-only-c2ecb-emain-above-the-real-footer/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice26-full/map-actions-390px-map-only-c2ecb-emain-above-the-real-footer/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice26-full/map-actions-390px-map-only-c2ecb-emain-above-the-real-footer/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) tests/gameplay/next-action.spec.ts:48:1 › hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('feedback')
+    Expected substring: "Imported campaign"
+    Received string:    "◆A world of broken oaths awaits a new beginning."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('feedback') with timeout 5000ms
+      - waiting for getByTestId('feedback')
+        5 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+          - unexpected value "◆Resolving… A world of broken oaths awaits a new beginning."
+        9 × locator resolved to <div role="status" class="feedback " aria-live="polite" data-testid="feedback">…</div>
+          - unexpected value "◆A world of broken oaths awaits a new beginning."
+
+
+      14 |   await page.goto('/');
+      15 |   await page.locator('input[type=file]').setInputFiles({ name: 'next-orders.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
+    > 16 |   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
+         |                                              ^
+      17 | }
+      18 | async function selectedArmy(page: Page, id: string) { await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSelection().armyId)).toBe(id); }
+      19 | async function selectedTown(page: Page, id: string) {
+        at importCampaign (/home/telephoneheater/Work/Theandril/tests/gameplay/next-action.spec.ts:16:46)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/next-action.spec.ts:50:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice26-full/next-action-hundred-army-f-7ec1f-ship-without-issuing-orders/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice26-full/next-action-hundred-army-f-7ec1f-ship-without-issuing-orders/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice26-full/next-action-hundred-army-f-7ec1f-ship-without-issuing-orders/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice26-full/next-action-hundred-army-f-7ec1f-ship-without-issuing-orders/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) tests/gameplay/selected-asset.spec.ts:87:1 › the approved Ashen scout plays all four genuine idle frames with matching bounded selection masks and native Lab playback 
+
+    Error: page.evaluate: Execution context was destroyed, most likely because of a navigation
+
+      134 |     let captured = false;
+      135 |     for (let attempt = 0; attempt < 8 && !captured; attempt++) {
+    > 136 |       await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!.visibleAnimationFrames[0]?.frameId), { intervals: [16] }).toBe(frame.id);
+          |                                    ^
+      137 |       const started = Date.now();
+      138 |       const pixels = await page.getByTestId('map-container').screenshot();
+      139 |       const after = await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!);
+        at expect.poll.intervals (/home/telephoneheater/Work/Theandril/tests/gameplay/selected-asset.spec.ts:136:36)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/selected-asset.spec.ts:136:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice26-full/selected-asset-the-approve-7d8cd-sks-and-native-Lab-playback/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice26-full/selected-asset-the-approve-7d8cd-sks-and-native-Lab-playback/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice26-full/selected-asset-the-approve-7d8cd-sks-and-native-Lab-playback/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice26-full/selected-asset-the-approve-7d8cd-sks-and-native-Lab-playback/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9 failed
+    tests/gameplay/army-size-performance.spec.ts:36:1 › synthetic Huge 1500 twelve-formation armies keep representative stacks bounded through near, far, full fit and restored focus 
+    tests/gameplay/combat.spec.ts:23:1 › field battle permits tactical orders and resumes to the identical result from a saved round 
+    tests/gameplay/faction-roster.spec.ts:51:36 › Mire Courts is a real chosen culture through founding, paid construction and portable saves 
+    tests/gameplay/faction-ui.spec.ts:82:1 › renamed realms retain their authored family, real appointments gain role artwork, and hidden foreign characters stay private 
+    tests/gameplay/generals.spec.ts:106:1 › a wounded general retains every formation and permits narrow-screen command-capacity repair 
+    tests/gameplay/geography-performance.spec.ts:8:1 › Huge generated archipelago spectator geography stays bounded through reveal, river inspection, pan, overview and restored fog 
+    tests/gameplay/map-actions.spec.ts:174:1 › 390px map-only land actions inherit 130% text, reveal current paid quotes and remain above the real footer 
+    tests/gameplay/next-action.spec.ts:48:1 › hundred-army forty-town navigation wraps, clears filters and respects typing and modal ownership without issuing orders 
+    tests/gameplay/selected-asset.spec.ts:87:1 › the approved Ashen scout plays all four genuine idle frames with matching bounded selection masks and native Lab playback 
+  130 passed (14.0m)

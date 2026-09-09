@@ -21,6 +21,7 @@ export function navalArtGallery(): GameState {
   const state = createGame({ seed: 20260905, size: 'small', factionCount: 24, pace: 'short', generatorVersion: 4 });
   if (state.world.width !== NAVAL_ART_GALLERY_WIDTH || FACTIONS.length !== 24) throw new Error('Review the twenty-four-culture naval gallery layout after a roster/map change.');
   const world = state.world;
+  state.resources.deposits = {}; // This fixture replaces the entire physical geography with resource-free authored land/water.
   world.terrain.fill(1); world.biome.fill(1); world.fertility.fill(60);
   function water(cell: number): void { world.terrain[cell] = 0; world.biome[cell] = 0; world.fertility[cell] = 0; }
   for (const cohort of NAVAL_ART_COHORTS) for (let row = 10; row <= 20; row += 2) {

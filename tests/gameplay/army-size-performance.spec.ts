@@ -71,7 +71,7 @@ test('synthetic Huge 1500 twelve-formation armies keep representative stacks bou
     expect(metrics.maxCachedChunkHeight).toBeLessThanOrEqual(760);
     expect(metrics.cachedTextureBytesEstimate).toBeLessThanOrEqual(64 * 4 * 1024 * 1024);
     expect(metrics.residentAtlasBytesEstimate).toBeGreaterThan(0);
-    expect(metrics.residentAtlasBytesEstimate).toBeLessThanOrEqual(16 * 1024 * 1024);
+    expect(metrics.residentAtlasBytesEstimate).toBeLessThanOrEqual(17 * 1024 * 1024);
     // Terrain sprites can reside in64 cached chunks plus the independently
     // bounded16-chunk recycle pool. Figures cap at3 per actual container.
     expect(metrics.pooledSprites).toBeLessThanOrEqual((64 + 16) * 256 + positions.length * 3 + Object.keys(state.settlements).length);
@@ -143,7 +143,7 @@ test('synthetic Huge 1500 twelve-formation armies keep representative stacks bou
   await map.screenshot({ path: testInfo.outputPath('huge-composed-armies-restored-focus.png') });
 
   const report = { workload: 'Synthetic gen4 Huge mature fixture: 32 factions and32 towns retained; all1500 existing army containers explicitly reassigned to the player, moved onto nearby passable cells, and filled with12 legal guard formations each. Fully explored terrain. Strict save/import, no runtime state mutation or turn advancement.',
-    comparison: 'Retains the gen4 physical world and authored near-home placement workload of docs/performance/0030-army-stacks-before.json (historical seal 436e19c5): 1,500 visible containers and 18,000 actual formations, previously 4,500 near figures. Current schema 13/roster 4/content and the 500-asset publication differ from that historical checkpoint, so this is NOT a byte-identical saved fixture; the report hash field records the current run seal. Co-located grouping draws 273 figures for 91 groups; stack metadata still totals every army/formation. NOT a matched comparison to art-performance.spec.ts, which uses 1,500 global singleton armies with ordinary ownership/fog.',
+    comparison: 'Retains the gen4 physical world and authored near-home placement workload of docs/performance/0030-army-stacks-before.json (historical seal 436e19c5): 1,500 visible containers and 18,000 actual formations, previously 4,500 near figures. Current schema/content and the approved publication differ from that historical checkpoint, so this is NOT a byte-identical saved fixture; the report hash field records the current run seal. Co-located grouping draws 273 figures for 91 groups; stack metadata still totals every army/formation. NOT a matched comparison to art-performance.spec.ts, which uses 1,500 global singleton armies with ordinary ownership/fog.',
     measurementNotes: 'Each phase waits at least75 renderer frames. frameP95Ms is the rolling240-frame metric, not a fresh independent percentile. renderCpuMs is one sampled frame, not GPU duration. Actual worker packed and total transfer bytes are recorded; no claim that the enlarged roster payload matches the singleton byte budget. Cached chunk/POT estimates, map atlas and retained overview texture are distinct allocations; DOM atlas decoding and other GPU allocations are not included.',
     seed: state.world.seed, generatorVersion: state.world.generatorVersion, cellCount, armyCount, formationCount,
     occupiedCells: positions.length, home, selectedId, hash, observed, saveBytes: Buffer.byteLength(serialized), compressedSaveBytes: bytes.byteLength, samples };

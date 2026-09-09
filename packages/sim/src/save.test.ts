@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { applyCommandForVersion, battleReportForVersion, createGame, deserializeGame, serializeGame, stateHash } from './index';
 import type { Army, CampaignBattle, DomainEvent, FactionState, Settlement, Siege, CaptureDecision, Ruin, DiplomacyState, FactionProgression, VictoryProject, Victory, CampaignPace, MovementRoute, GameState } from './index';
+import { createResources } from './resources';
 import { deriveBiomes } from '@theandril/mapgen';
 import { checksum } from '@theandril/content';
 import { legacyCampaignBattleSchema, PRE_COMBAT_CONTENT_HASH, PRE_PROGRESSION_CONTENT_HASH } from './save';
@@ -12,6 +13,7 @@ const applyLegacy = (state: GameState, command: unknown) => applyCommandForVersi
 interface SaveFixture {
   version: number; gameVersion: string; contentHash: string; stateChecksum: string;
   state: {
+    resources: GameState['resources']; development: GameState['development'];
     rosterVersion: GameState['rosterVersion'];
     pace: CampaignPace;
     turn: number; nextId: number; nextEntityId?: number; turnOwnerId: string;
@@ -56,7 +58,7 @@ function previousV2State(save: SaveFixture) {
 
 function previousV3State(save: SaveFixture) {
   if (save.state.arcaneResearch.some(item => item.discoveries.length)) throw new Error('Synthetic historical projection cannot discard arcane discoveries.');
-  const { progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, roads: _roads, arcaneResearch: _arcaneResearch, ...state } = save.state;
+  const { progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, roads: _roads, arcaneResearch: _arcaneResearch, resources: _resources, development: _development, ...state } = save.state;
   const { biome: _biome, generatorVersion: _generatorVersion, waterDepth: _waterDepth, layout: _layout, hydrology: _hydrology, ...world } = state.world;
   const previousBattle = (battle: CampaignBattle) => {
     const { attackerDoctrineId: _attackerDoctrine, defenderDoctrineId: _defenderDoctrine, ...previous } = legacyCampaignBattleSchema.parse(battleReportForVersion(battle, 5));
@@ -67,12 +69,14 @@ function previousV3State(save: SaveFixture) {
 
 function legacyGeography(state: GameState): void {
   state.rosterVersion = 1;
+  state.resources = createResources(state.world, state.factions.map(item => item.id), 0);
+  state.land.visibilityVersion = 0;
   state.world.generatorVersion = 1;
   state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, 1);
 }
 
 function fixture(): SaveFixture {
-  const state = createGame({ seed: 42, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
+  const state = createGame({ rulesVersion: 5, seed: 42, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
   const army = Object.values(state.armies).find(item => item.formations[0]?.unitId === 'unit.colonist');
   if (!army) throw new Error('Missing colonist');
   applyLegacy(state, { type: 'found', factionId: army.factionId, armyId: army.id, name: 'Cinderwatch' });

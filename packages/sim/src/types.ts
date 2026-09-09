@@ -1,3 +1,6 @@
+import type { ResourceState, ResourceObservation, ResourceCommand } from './resources';
+import type { DevelopmentState, DevelopmentObservation, DevelopmentCommand } from './development';
+import type { GrowthObservation } from './growth-economy';
 import type { GeneratorVersion, MapSize, MapLayout, World } from '@theandril/mapgen';
 import type { RoadState, RoadObservation } from './roads';
 import type { CampaignPace, RosterVersion } from '@theandril/content';
@@ -100,6 +103,8 @@ export interface CaptureOption {
   recipientFactionId: string | null;
 }
 export interface CaptureDecision {
+  /** Missing on preserved older decisions, whose quoted consequences stay frozen. */
+  rulesVersion?: 16;
   settlementId: string;
   armyId: string;
   factionId: string;
@@ -133,7 +138,8 @@ export interface DomainEvent {
 }
 
 export interface CampaignBattle {
-  rulesVersion: 5 | 6 | 7 | 8 | 9;
+  rulesVersion: 5 | 6 | 7 | 8 | 9 | 10;
+  developmentSnapshots?: import('./combat/development-snapshot').BattleDevelopmentSnapshot[];
   abilityState?: BattleAbilityState;
   domain: 'land' | 'naval';
   transportAftermath: TransportAftermath[];
@@ -167,6 +173,8 @@ export interface CampaignBattle {
 export type BattleReport = CampaignBattle;
 
 export type GameCommand =
+  | ResourceCommand
+  | DevelopmentCommand
   | { type: 'researchArcane'; factionId: string; discoveryId: string }
   | { type: 'setBattleAbilityAuto'; factionId: string; battleId: string; sourceId: string; abilityId: string; automatic: boolean }
   | { type: 'useBattleAbility'; factionId: string; battleId: string; sourceId: string; abilityId: string; targetId?: string }
@@ -209,6 +217,8 @@ export type GameCommand =
 
 /** Canonical state stays in the simulation owner. Clients receive Observation. */
 export interface GameState {
+  resources: ResourceState;
+  development: DevelopmentState;
   arcaneResearch: ArcaneResearchState;
   roads: RoadState;
   rosterVersion: RosterVersion;
@@ -240,6 +250,9 @@ export interface GameState {
 }
 
 export interface Observation {
+  resources?: ResourceObservation;
+  development?: DevelopmentObservation;
+  growth?: GrowthObservation;
   battleScene: BattleSceneSnapshot | null;
   battleAbilities: BattleAbilityOption[];
   arcaneResearch: ArcaneResearchObservation;
@@ -262,7 +275,7 @@ export interface Observation {
   armies: ArmyView[];
   routes: MovementRoute[];
   events: DomainEvent[];
-  cells: { cell: number; terrain: number; biome: number; waterDepth: number; fertility: number; visible: boolean; hydrology?: number; roadMask?: number; featureMask?: number; settlementId?: string | null; factionId?: string | null; improvementId?: string | null }[];
+  cells: { cell: number; terrain: number; biome: number; waterDepth: number; fertility: number; visible: boolean; hydrology?: number; roadMask?: number; featureMask?: number; settlementId?: string | null; factionId?: string | null; improvementId?: string | null; resourceId?: string }[];
   width: number;
   height: number;
   seed: number;
@@ -281,6 +294,8 @@ export interface Observation {
 }
 
 export interface NewGameOptions {
+  /** Explicit historical origin generation; the campaign UI always uses the latest rules. */
+  rulesVersion?: import('./rules').RulesVersion;
   layout?: Exclude<MapLayout, 'legacy'>;
   rosterVersion?: RosterVersion;
   seed: number;

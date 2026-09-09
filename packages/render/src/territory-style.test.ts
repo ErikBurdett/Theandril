@@ -50,14 +50,12 @@ describe('observed cached territory presentation', () => {
       }
     }
   });
-  it('binds all ten real improvements to known sprite fallbacks or an actual procedural program', () => {
+  it('binds every real improvement to a known generic fallback or an actual procedural program', () => {
     const approvedFallbacks = { 'improvement.terraced_fields': 'fields', 'improvement.managed_woodlot': 'woodlot',
       'improvement.quarry': 'quarry', 'improvement.reedworks': 'reeds', 'improvement.shore_fishery': 'fishery' };
-    expect(IMPROVEMENTS).toHaveLength(10);
     expect(Object.keys(IMPROVEMENT_GLYPHS).sort()).toEqual(IMPROVEMENTS.map(item => item.id).sort());
-    expect(new Set(Object.values(IMPROVEMENT_GLYPHS)).size).toBe(10);
     for (const [id, glyph] of Object.entries(approvedFallbacks)) expect(IMPROVEMENT_GLYPHS[id]).toBe(glyph);
-    for (const improvement of IMPROVEMENTS.filter(item => !Object.hasOwn(approvedFallbacks, item.id))) {
+    for (const improvement of IMPROVEMENTS.filter(item => !Object.values(approvedFallbacks).includes(IMPROVEMENT_GLYPHS[item.id]!))) {
       let rectangles = 0;
       const painter: GlyphPainter = { rect() { rectangles++; return this; }, fill() { return this; } };
       expect(drawImprovementGlyph(painter, IMPROVEMENT_GLYPHS[improvement.id]!, 0, 0, .4)).toBe(true);

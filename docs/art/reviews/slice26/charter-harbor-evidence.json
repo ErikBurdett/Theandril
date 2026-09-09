@@ -1,0 +1,345 @@
+{
+  "scope": "Authored coast/population/resources; actual found, paid navigation research, paid harbor queue and completed construction turns. Served approved atlas silhouette verified; no navigation rules changed by display.",
+  "hash": "775f8474",
+  "paidKnowledge": 30,
+  "paidCoin": 20,
+  "constructionTurns": 6,
+  "district": {
+    "cell": 640,
+    "settlementId": "settlement.3",
+    "kind": "harbor",
+    "density": 3,
+    "buildingId": "building.harbor",
+    "links": [
+      688
+    ],
+    "assetId": "building.harbor",
+    "presentation": "approved"
+  },
+  "fit": {
+    "scale": 0.7227375642491951,
+    "x": 0.3613687821245989,
+    "y": 15.042674096627696,
+    "inset": 2,
+    "boundsKind": "opaque-union",
+    "horizontalExtent": 19.875283016852865,
+    "diagonalExtent": 22.95,
+    "bounds": {
+      "x": -19.875283016852865,
+      "y": -13.14409090909091,
+      "width": 39.75056603370573,
+      "height": 27.464027441469412
+    },
+    "canvasBounds": {
+      "x": -22.766233273849643,
+      "y": -19.648728987333666,
+      "width": 46.25520411194849,
+      "height": 46.25520411194849
+    }
+  },
+  "shore": [
+    {
+      "cell": 641,
+      "biome": 0,
+      "terrain": 0,
+      "waterDepth": 1,
+      "waterPresentation": "shallows",
+      "assetId": "terrain.ocean.variant_2",
+      "approved": true,
+      "baseId": "terrain.ocean",
+      "requestedAssetId": "terrain.ocean.variant_2",
+      "variantIndex": 2,
+      "renderedVariantIndex": 2,
+      "fallback": false,
+      "relief": "none",
+      "visible": true,
+      "settlementId": null,
+      "factionId": null,
+      "improvementId": null,
+      "district": null,
+      "improvementPresentation": null,
+      "territoryEdges": [],
+      "renderedTerritoryEdges": [],
+      "hydrology": 0,
+      "lake": false,
+      "roadMask": 0,
+      "connections": {
+        "rivers": [],
+        "roads": []
+      },
+      "riverCurves": [],
+      "lakeShoreAngles": []
+    },
+    {
+      "cell": 689,
+      "biome": 0,
+      "terrain": 0,
+      "waterDepth": 1,
+      "waterPresentation": "shallows",
+      "assetId": "terrain.ocean",
+      "approved": true,
+      "baseId": "terrain.ocean",
+      "requestedAssetId": "terrain.ocean",
+      "variantIndex": 0,
+      "renderedVariantIndex": 0,
+      "fallback": false,
+      "relief": "none",
+      "visible": true,
+      "settlementId": "settlement.3",
+      "factionId": "faction.ashen_compact",
+      "improvementId": null,
+      "district": null,
+      "improvementPresentation": null,
+      "territoryEdges": [
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 0
+        },
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 1.0471975511965976
+        },
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 5.235987755982989
+        }
+      ],
+      "renderedTerritoryEdges": [
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 0
+        },
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 1.0471975511965976
+        },
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 5.235987755982989
+        }
+      ],
+      "hydrology": 0,
+      "lake": false,
+      "roadMask": 0,
+      "connections": {
+        "rivers": [],
+        "roads": []
+      },
+      "riverCurves": [],
+      "lakeShoreAngles": []
+    },
+    {
+      "cell": 688,
+      "biome": 1,
+      "terrain": 1,
+      "waterDepth": 0,
+      "waterPresentation": "land",
+      "assetId": "terrain.grassland.variant_2",
+      "approved": true,
+      "baseId": "terrain.grassland",
+      "requestedAssetId": "terrain.grassland.variant_2",
+      "variantIndex": 2,
+      "renderedVariantIndex": 2,
+      "fallback": false,
+      "relief": "none",
+      "visible": true,
+      "settlementId": "settlement.3",
+      "factionId": "faction.ashen_compact",
+      "improvementId": null,
+      "district": {
+        "cell": 688,
+        "settlementId": "settlement.3",
+        "kind": "hearth",
+        "density": 3,
+        "links": [
+          640,
+          639,
+          687,
+          735,
+          736
+        ]
+      },
+      "improvementPresentation": null,
+      "territoryEdges": [],
+      "renderedTerritoryEdges": [],
+      "hydrology": 0,
+      "lake": false,
+      "roadMask": 0,
+      "connections": {
+        "rivers": [],
+        "roads": []
+      },
+      "riverCurves": [],
+      "lakeShoreAngles": []
+    },
+    {
+      "cell": 639,
+      "biome": 1,
+      "terrain": 1,
+      "waterDepth": 0,
+      "waterPresentation": "land",
+      "assetId": "terrain.grassland.variant_2",
+      "approved": true,
+      "baseId": "terrain.grassland",
+      "requestedAssetId": "terrain.grassland.variant_2",
+      "variantIndex": 2,
+      "renderedVariantIndex": 2,
+      "fallback": false,
+      "relief": "none",
+      "visible": true,
+      "settlementId": "settlement.3",
+      "factionId": "faction.ashen_compact",
+      "improvementId": null,
+      "district": {
+        "cell": 639,
+        "settlementId": "settlement.3",
+        "kind": "housing",
+        "density": 3,
+        "links": [
+          688
+        ]
+      },
+      "improvementPresentation": null,
+      "territoryEdges": [
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 3.141592653589793
+        },
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 4.1887902047863905
+        },
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 5.235987755982989
+        }
+      ],
+      "renderedTerritoryEdges": [
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 3.141592653589793
+        },
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 4.1887902047863905
+        },
+        {
+          "kind": "realm",
+          "factionId": "faction.ashen_compact",
+          "angle": 5.235987755982989
+        }
+      ],
+      "hydrology": 0,
+      "lake": false,
+      "roadMask": 0,
+      "connections": {
+        "rivers": [],
+        "roads": []
+      },
+      "riverCurves": [],
+      "lakeShoreAngles": []
+    },
+    {
+      "cell": 592,
+      "biome": 1,
+      "terrain": 1,
+      "waterDepth": 0,
+      "waterPresentation": "land",
+      "assetId": "terrain.grassland.variant_1",
+      "approved": true,
+      "baseId": "terrain.grassland",
+      "requestedAssetId": "terrain.grassland.variant_1",
+      "variantIndex": 1,
+      "renderedVariantIndex": 1,
+      "fallback": false,
+      "relief": "none",
+      "visible": true,
+      "settlementId": null,
+      "factionId": null,
+      "improvementId": null,
+      "district": null,
+      "improvementPresentation": null,
+      "territoryEdges": [],
+      "renderedTerritoryEdges": [],
+      "hydrology": 0,
+      "lake": false,
+      "roadMask": 0,
+      "connections": {
+        "rivers": [],
+        "roads": []
+      },
+      "riverCurves": [],
+      "lakeShoreAngles": []
+    },
+    {
+      "cell": 593,
+      "biome": 0,
+      "terrain": 0,
+      "waterDepth": 1,
+      "waterPresentation": "shallows",
+      "assetId": "terrain.ocean.variant_2",
+      "approved": true,
+      "baseId": "terrain.ocean",
+      "requestedAssetId": "terrain.ocean.variant_2",
+      "variantIndex": 2,
+      "renderedVariantIndex": 2,
+      "fallback": false,
+      "relief": "none",
+      "visible": true,
+      "settlementId": null,
+      "factionId": null,
+      "improvementId": null,
+      "district": null,
+      "improvementPresentation": null,
+      "territoryEdges": [],
+      "renderedTerritoryEdges": [],
+      "hydrology": 0,
+      "lake": false,
+      "roadMask": 0,
+      "connections": {
+        "rivers": [],
+        "roads": []
+      },
+      "riverCurves": [],
+      "lakeShoreAngles": []
+    }
+  ],
+  "navigation": [
+    {
+      "settlementId": "settlement.3",
+      "itemId": "unit.transport",
+      "kind": "naval",
+      "canQueue": true,
+      "blocker": null,
+      "launchCell": 689
+    },
+    {
+      "settlementId": "settlement.3",
+      "itemId": "unit.coastal_warship",
+      "kind": "naval",
+      "canQueue": true,
+      "blocker": null,
+      "launchCell": 689
+    },
+    {
+      "settlementId": "settlement.3",
+      "itemId": "unit.ocean_warship",
+      "kind": "naval",
+      "canQueue": false,
+      "blocker": "Research Ocean navigation first.",
+      "launchCell": null
+    }
+  ],
+  "nearZoom": 2.2
+}

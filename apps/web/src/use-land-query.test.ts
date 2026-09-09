@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { LandQuerySession, type LandQueryKey, type LandQueryResult, type LandQueryState } from './use-land-query';
+import { LandQuerySession, reuseLandQueryWindow, type LandQueryKey, type LandQueryResult, type LandQueryState } from './use-land-query';
 
 function deferred() {
   let resolve!: (value: LandQueryResult) => void;
@@ -11,6 +11,39 @@ const key: LandQueryKey = { settlementId: 'town.1', hash: 'hash.1', epoch: 1 };
 const response = (value = key): LandQueryResult => ({ settlementId: value.settlementId, hash: value.hash, town: null });
 
 describe('one selected-town detail session', () => {
+  it('reuses one ready anchored page for its loaded cells without changing the request key', () => {
+    const original = { ...key, window: { offset: 0, limit: 64, cell: 123 } };
+    const existing = { key: original, status: 'ready' as const, town: { cells: [{ cell: 122 }, { cell: 123 }, { cell: 124 }] } };
+    for (const cell of [122, 124, 123]) expect(reuseLandQueryWindow({ ...original, window: { ...original.window, cell } }, existing)).toBe(original);
+    const outside = { ...original, window: { ...original.window, cell: 999 } };
+    expect(reuseLandQueryWindow(outside, existing)).toBe(outside);
+  });
+
+  it('never reuses old prices across commands, campaigns, towns, explicit page changes or pending replies', () => {
+    const original = { ...key, window: { offset: 0, limit: 64, cell: 123 } };
+    const existing = { key: original, status: 'ready' as const, town: { cells: [{ cell: 123 }] } };
+    const requests = [
+      { ...original, hash: 'paid-order-hash' }, { ...original, epoch: 2 }, { ...original, settlementId: 'town.2' },
+      { ...original, window: { offset: 64, limit: 64, cell: 123 } }, { ...original, window: { offset: 0, limit: 32, cell: 123 } },
+      { ...original, window: { offset: 0, limit: 64 } },
+    ];
+    for (const requested of requests) expect(reuseLandQueryWindow(requested, existing)).toBe(requested);
+    for (const status of ['idle', 'loading', 'error'] as const) {
+      const requested = { ...original };
+      expect(reuseLandQueryWindow(requested, { ...existing, status })).toBe(requested);
+    }
+  });
+
+  it('forwards page and selected-cell requests and ignores an older page of the same hearth', async () => {
+    const session = new LandQuerySession(), old = deferred(), next = deferred();
+    const firstKey = { ...key, window: { offset: 0, limit: 64 } }, nextKey = { ...key, window: { offset: 64, limit: 64, cell: 123 } };
+    const received: unknown[] = [];
+    const first = session.load(firstKey, (_town, window) => { received.push(window); return old.promise; }, () => undefined);
+    const second = session.load(nextKey, (_town, window) => { received.push(window); return next.promise; }, () => undefined);
+    next.resolve(response()); await second; old.resolve(response()); await first;
+    expect(received).toEqual([firstKey.window, nextKey.window]);
+    expect(session.state.key).toEqual(nextKey);
+  });
   it('ignores a late reply after switching towns, even when requests finish backwards', async () => {
     const session = new LandQuerySession(), old = deferred(), next = deferred(), states: LandQueryState[] = [];
     const first = session.load(key, () => old.promise, state => states.push(state));

@@ -21,7 +21,13 @@ describe('pure spectator map projection', () => {
       expect(Object.keys(army).sort()).toEqual(['carrierId', 'cell', 'domain', 'factionId', 'formationCount', 'id', 'name', 'unitId']);
       expect(army.formationCount).toBe(game.armies[army.id]!.formations.length);
     }
-    for (const town of map.settlements) expect(Object.keys(town).sort()).toEqual(['cell', 'factionId', 'id', 'name', 'population']);
+    for (const town of map.settlements) {
+      // Completed visible infrastructure drives the map districts. Private
+      // production orders, food and tile-work queues remain absent.
+      expect(Object.keys(town).sort()).toEqual(['buildings', 'cell', 'factionId', 'id', 'name', 'population']);
+      expect(town.buildings).toEqual([...game.settlements[town.id]!.buildings].sort());
+      town.buildings!.push('building.archive');
+    }
     map.cells[0]!.biome = 10; map.factions[0]!.name = 'Detached'; map.armies[0]!.name = 'Detached'; map.settlements[0]!.name = 'Detached';
     expect(serializeGame(game)).toBe(before); expect(stateHash(game)).toBe(hash);
     expect(getObservation(game, game.turnOwnerId)).toEqual(normal);

@@ -18,7 +18,7 @@ const markup = (game: ReturnType<typeof characterCampaign>) => renderToStaticMar
 }));
 
 describe('real character skill trees', () => {
-  it('covers exactly eleven earned skills through three compatible roles and no invented Waykeeper nodes', () => {
+  it('covers exactly seventeen earned skills through three compatible roles and no invented Waykeeper nodes', () => {
     const shown = new Set<string>();
     for (const definition of CHARACTER_DEFINITIONS) {
       const { game } = appointed(definition.id), before = stateHash(game), html = markup(game);
@@ -32,7 +32,7 @@ describe('real character skill trees', () => {
       expect(stateHash(game)).toBe(before);
     }
     expect([...shown].sort()).toEqual(CHARACTER_SKILLS.map(skill => skill.id).sort());
-    expect(shown.size).toBe(11);
+    expect(shown.size).toBe(17);
   });
   it('distinguishes actual prerequisite locks, permanent exclusions and learned nodes', () => {
     const { game, character } = appointed();

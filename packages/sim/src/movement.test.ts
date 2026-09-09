@@ -15,6 +15,7 @@ const reject = (state: GameState, command: unknown): void => { const hash = stat
 function field(war = false): GameState {
   const state = createGame({ seed: 88, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4 });
   state.world.terrain.fill(1); state.world.waterDepth.fill(0); state.world.fertility.fill(75); state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, state.world.generatorVersion);
+  state.resources.deposits = {}; // This fixture replaces the complete physical map with resource-free land.
   delete state.armies['army.1']; delete state.armies['army.3'];
   const guard = UNITS.find(unit => unit.id === 'unit.guard')!;
   for (const [id, cell] of [[armyId, 100], ['army.4', 1500]] as const) Object.assign(state.armies[id]!, { formations: [createArmyFormation(id, guard.id)], name: guard.name, movement: guard.movement, cell });

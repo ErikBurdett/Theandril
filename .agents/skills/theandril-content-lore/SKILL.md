@@ -81,3 +81,10 @@ All content:
 - cross-reference validation;
 - asset provenance.
 
+## Expanding the formation roster
+
+Append stable unit IDs without rewriting existing definitions or their ordering. A new paid recruit changes the content seal even when the canonical state shape is unchanged: retain an independently captured old save/archive, version the content/rules boundary, reject new IDs in resealed historical armies, queues and battle reports, and preserve historical command results and hash projections. Use `introducedInRules` and the rules-aware production catalog for new land formations; research/building blockers belong in simulation quotes.
+
+Keep basic culture-preference fixtures scoped to `BASE_LAND_MILITARY_UNIT_IDS` when they test the original five-role balance. Separately exercise every new role through paid player recruitment, AI proposals, completed production, composition, upkeep, save continuation and replay. Do not grant research to turn a missing unlock into a passing recruitment test; label authored equal-force setups and also retain a generated, earned development scenario.
+
+New gameplay roles may deliberately share a reviewed silhouette through `SHARED_UNIT_ART` / `unitArtRole` in the art-pipeline runtime module. Keep that presentation mapping separate from asset provenance and faction-qualified content bindings. Map, tactical scene and DOM cards must use the same source role, correct native dimensions and honest shared-art diagnostics or labels. Shared silhouettes are a documented visual limitation, not newly authored specialist artwork; never reuse land troop art for ships.

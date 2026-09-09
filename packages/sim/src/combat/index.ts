@@ -1,3 +1,4 @@
+import { initializeIndividuals, reconcileIndividualLosses, advanceIndividualLines, individualAttack, isHull } from './individual';
 import { z } from 'zod';
 import { SeededRandom } from '@theandril/mapgen';
 import type { BattleFact, BattleFactObserver, BattleStatChange } from './presentation';
@@ -17,7 +18,14 @@ const formationSchema = z.object({
   attack: bounded(100), armor: bounded(100), initiative: bounded(100), range: bounded(4),
 }).strict().refine(unit => unit.strength <= unit.maxStrength, 'Strength exceeds formation capacity.');
 const abilityFormationSchema = formationSchema.safeExtend({ ward: bounded(16).optional() });
-export type BattleFormation = z.infer<typeof abilityFormationSchema>;
+const individualFormationSchema = abilityFormationSchema.safeExtend({
+  members: z.array(bounded(9999)).max(10000).optional(), cohesion: bounded(100).optional(),
+  position: z.object({ forward: bounded(4), lateral: z.number().int().min(-1).max(1) }).strict().optional(),
+}).superRefine((unit, context) => {
+  if (unit.members && (unit.members.length !== unit.strength || unit.members.some((slot, index) => slot >= unit.maxStrength || index > 0 && slot <= unit.members![index - 1]!))) context.addIssue({ code: 'custom', message: 'Individual identities disagree with surviving formation strength.' });
+  if (unit.position && (unit.cohesion === undefined || !isHull(unit.unitId) && !unit.members) || unit.members && !unit.position) context.addIssue({ code: 'custom', message: 'Incomplete individual battle state.' });
+});
+export type BattleFormation = z.infer<typeof individualFormationSchema>;
 const formations = z.array(formationSchema).min(1).max(20);
 const inputSchema = z.object({ seed: bounded(0xffffffff), terrain: bounded(4), attacker: formations, defender: formations }).strict();
 const legacyInputSchema = inputSchema.extend({ attacker: formations.max(12), defender: formations.max(12) }).superRefine((input, context) => {
@@ -45,7 +53,8 @@ export const schema13BattleStateSchema = inputSchema.extend({
     context.addIssue({ code: 'custom', message: 'A battle at its round limit requires a result.' });
   }
 });
-export const battleStateSchema = schema13BattleStateSchema.safeExtend({ attacker: z.array(abilityFormationSchema).min(1).max(20), defender: z.array(abilityFormationSchema).min(1).max(20) });
+export const schema15BattleStateSchema = schema13BattleStateSchema.safeExtend({ attacker: z.array(abilityFormationSchema).min(1).max(20), defender: z.array(abilityFormationSchema).min(1).max(20) });
+export const battleStateSchema = schema15BattleStateSchema.safeExtend({ attacker: z.array(individualFormationSchema).min(1).max(20), defender: z.array(individualFormationSchema).min(1).max(20) });
 export type BattleState = z.infer<typeof battleStateSchema>;
 export const legacyBattleStateSchema = schema13BattleStateSchema.superRefine((state, context) => {
   if (state.attacker.length > 12 || state.defender.length > 12 || [...state.attacker, ...state.defender].some(formation => formation.row > 2)) context.addIssue({ code: 'custom', message: 'Historical battles support at most twelve formations and three ranks per side.' });
@@ -67,6 +76,7 @@ export function createBattle(input: BattleInput, version = 8): BattleState {
   }
   const state = battleStateSchema.parse({ ...checked, rngState: checked.seed, round: 0, log: [] });
   if (version >= 9) for (const formation of [...state.attacker, ...state.defender]) formation.ward = 0;
+  if (version >= 10) for (const formation of [...state.attacker, ...state.defender]) initializeIndividuals(formation);
   state.attacker.sort(byId); state.defender.sort(byId);
   return state;
 }
@@ -75,7 +85,7 @@ export function createBattle(input: BattleInput, version = 8): BattleState {
 export interface BattleRoundHooks { observe?: BattleFactObserver; beforeRound?: (state: BattleState) => void }
 const fact = (round: number, type: BattleFact['type'], values: Partial<BattleFact> = {}): BattleFact => ({ round, type, sourceId: null, sourceKind: null, targetIds: [], abilityId: null, attackKind: null, changes: [], winner: null, reason: null, ...values });
 export function battleStatChange(before: BattleFormation, after: BattleFormation): BattleStatChange {
-  return { formationId: after.id, strengthDelta: after.strength - before.strength, moraleDelta: after.morale - before.morale, fatigueDelta: after.fatigue - before.fatigue, wardDelta: (after.ward ?? 0) - (before.ward ?? 0) };
+  return { ...(after.cohesion !== undefined ? { cohesionDelta: after.cohesion - (before.cohesion ?? after.cohesion) } : {}), formationId: after.id, strengthDelta: after.strength - before.strength, moraleDelta: after.morale - before.morale, fatigueDelta: after.fatigue - before.fatigue, wardDelta: (after.ward ?? 0) - (before.ward ?? 0) };
 }
 function finish(state: BattleState, winner: Side | 'draw', reason: string, rng: SeededRandom, rout = false, observe?: BattleFactObserver): void {
   state.result = { winner, reason };
@@ -92,9 +102,10 @@ function finish(state: BattleState, winner: Side | 'draw', reason: string, rng: 
       const absorbed = Math.min(unit.ward ?? 0, incoming), lost = incoming - absorbed;
       if (unit.ward !== undefined) unit.ward -= absorbed;
       unit.strength -= lost;
+      const killedSoldierIds = reconcileIndividualLosses(unit);
       unit.fatigue = Math.min(100, unit.fatigue + 10);
       append(state, `${unit.id} lost ${lost} strength during pursuit.`);
-      if (observe && before) observe(fact(state.round, 'pursuit', { targetIds: [unit.id], changes: [battleStatChange(before, unit)] }));
+      if (observe && before) observe(fact(state.round, 'pursuit', { ...(unit.position ? { killedSoldierIds } : {}), targetIds: [unit.id], changes: [battleStatChange(before, unit)] }));
     }
   }
   state.rngState = rng.state;
@@ -129,7 +140,7 @@ function targetFor(state: BattleState, side: Side, actor: BattleFormation, order
   let best = -Infinity;
   for (const target of targets) {
     // Ranks stay as deployment data; advancing progressively closes the engagement gap.
-    const approach = order === 'advance' ? Math.min(2, state.round - 1) : order === 'flank' ? 1 : 0;
+    const approach = actor.position ? actor.position.forward + (target.position?.forward ?? 0) - 3 : order === 'advance' ? Math.min(2, state.round - 1) : order === 'flank' ? 1 : 0;
     const separation = Math.max(1, actor.row - front + target.row - enemyFront + 1 + Math.floor(Math.abs(actor.column - target.column) / 2) - approach);
     if (separation > actor.range + 1) continue;
     const edge = target.column === 0 || target.column === 4;
@@ -143,7 +154,7 @@ function targetFor(state: BattleState, side: Side, actor: BattleFormation, order
 
 /** Validates and clones input, then resolves one shared tactical/autoresolve round. */
 export function resolveBattleRound(input: BattleState, orders: { attacker: BattleOrder; defender: BattleOrder }, version = 8, hooks: BattleRoundHooks = {}): BattleState {
-  const state: BattleState = (version < 8 ? legacyBattleStateSchema : version < 9 ? schema13BattleStateSchema : battleStateSchema).parse(input);
+  const state: BattleState = (version < 8 ? legacyBattleStateSchema : version < 9 ? schema13BattleStateSchema : version < 10 ? schema15BattleStateSchema : battleStateSchema).parse(input);
   const checked = z.object({ attacker: orderSchema, defender: orderSchema }).strict().parse(orders);
   state.attacker.sort(byId); state.defender.sort(byId);
   if (state.result) return state;
@@ -159,6 +170,7 @@ export function resolveBattleRound(input: BattleState, orders: { attacker: Battl
     finish(state, winner, winner === 'draw' ? 'mutual withdrawal' : 'ordered withdrawal', rng, false, observe);
     return state;
   }
+  if (version >= 10) advanceIndividualLines(state, checked, observe);
   const sequence = (['attacker', 'defender'] as const).flatMap(side => state[side].map(unit => ({ side, unit })))
     .sort((a, b) => (b.unit.initiative - Math.floor(b.unit.fatigue / 10)) - (a.unit.initiative - Math.floor(a.unit.fatigue / 10)) || byId(a.unit, b.unit));
   for (const { side, unit } of sequence) {
@@ -176,17 +188,18 @@ export function resolveBattleRound(input: BattleState, orders: { attacker: Battl
     const rangedPenalty = unit.range > 0 && state.terrain === 2 ? 4 : 0;
     const attack = unit.attack + (order === 'flank' ? 5 : order === 'brace' ? -3 : 0) - Math.floor(unit.fatigue / 8) - rangedPenalty;
     const armor = target.armor + terrainGuard + (opponentOrder === 'brace' ? 6 : opponentOrder === 'flank' ? -3 : 0);
-    const rolledPower = Math.max(3, attack - armor + rng.nextInt(5));
+    const rolledPower = version < 10 ? Math.max(3, attack - armor + rng.nextInt(5)) : 0;
     const before = observe ? { ...target } : undefined, actorBefore = observe ? { ...unit } : undefined;
-    const rawDamage = Math.min(target.strength, Math.max(1, Math.floor(unit.strength * rolledPower / 120)));
+    const individual = version >= 10 ? individualAttack(state, unit, target, order, opponentOrder, state[side], state[other(side)], rng) : null;
+    const rawDamage = individual ? 0 : Math.min(target.strength, Math.max(1, Math.floor(unit.strength * rolledPower / 120)));
     const absorbed = version >= 9 ? Math.min(target.ward ?? 0, rawDamage) : 0;
-    if (version >= 9) target.ward = (target.ward ?? 0) - absorbed;
-    const damage = rawDamage - absorbed;
-    target.strength -= damage;
+    if (!individual && version >= 9) target.ward = (target.ward ?? 0) - absorbed;
+    const damage = individual?.damage ?? rawDamage - absorbed;
+    if (!individual) target.strength -= damage;
     if (damage || version < 9) target.morale = Math.max(0, target.morale - 4 - Math.floor(damage * 70 / target.maxStrength) - (order === 'flank' ? 6 : 0));
     unit.fatigue = Math.min(100, unit.fatigue + (order === 'flank' ? 14 : order === 'brace' ? 3 : 8));
     append(state, `${unit.id} struck ${target.id} for ${damage} strength.`);
-    if (observe && before && actorBefore) observe(fact(state.round, 'attack', { sourceId: unit.id, sourceKind: 'formation', targetIds: [target.id], attackKind: unit.unitId === 'unit.spearman' ? 'reach' : unit.range > 0 ? 'projectile' : 'melee', changes: [battleStatChange(before, target), battleStatChange(actorBefore, unit)] }));
+    if (observe && before && actorBefore) observe(fact(state.round, 'attack', { ...(individual ? { sourceSoldierIds: individual.sourceSoldierIds, targetSoldierIds: individual.targetSoldierIds, killedSoldierIds: individual.killedSoldierIds, reason: individual.detail } : {}), sourceId: unit.id, sourceKind: 'formation', targetIds: [target.id], attackKind: unit.unitId === 'unit.spearman' || unit.unitId === 'unit.halberdier' ? 'reach' : unit.range > 0 ? 'projectile' : 'melee', changes: [battleStatChange(before, target), battleStatChange(actorBefore, unit)] }));
     if (!active(target)) {
       append(state, `${target.id} ${target.strength === 0 ? 'was destroyed' : 'routed'}.`);
       const changes: BattleStatChange[] = [];
@@ -223,7 +236,7 @@ export function chooseBattleOrder(state: BattleState, side: Side): BattleOrder {
 }
 
 export function autoResolveBattle(input: BattleState, version = 8): BattleState {
-  let state: BattleState = (version < 8 ? legacyBattleStateSchema : version < 9 ? schema13BattleStateSchema : battleStateSchema).parse(input);
+  let state: BattleState = (version < 8 ? legacyBattleStateSchema : version < 9 ? schema13BattleStateSchema : version < 10 ? schema15BattleStateSchema : battleStateSchema).parse(input);
   state.attacker.sort(byId); state.defender.sort(byId);
   while (!state.result) {
     state = resolveBattleRound(state, { attacker: chooseBattleOrder(state, 'attacker'), defender: chooseBattleOrder(state, 'defender') }, version);

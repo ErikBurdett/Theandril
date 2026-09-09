@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { CHARACTER_DEFINITIONS, FACTIONS, UNITS } from '../../content/src/index';
 import {
-  FACTION_ART_FAMILIES, FACTION_ART_IDS, FACTION_ART_ROLES, factionArtId, isFactionNavalArtRole,
+  FACTION_ART_FAMILIES, FACTION_ART_IDS, FACTION_ART_ROLES, factionArtId, isFactionNavalArtRole, SHARED_UNIT_ART, unitArtRole,
   cacheKey, cropImage, decodePng, measureFrame, parseAssetManifest, parseRuntimeCatalog, safeAssetPath, sha256, validateAsset,
   type AssetManifest, type RgbaImage, type RuntimeCatalog,
 } from './index';
@@ -14,7 +14,7 @@ const root = fileURLToPath(new URL('../../../', import.meta.url));
 // Slice23 introduces one explicit shared Waykeeper cast pilot, not24 newly
 // approved culture variants. Keep every pre-existing qualified role mandatory.
 const sharedCharacterPilots = ['character.waykeeper'];
-const expectedRoles = [...UNITS.map(unit => unit.id), ...CHARACTER_DEFINITIONS.filter(character => !sharedCharacterPilots.includes(character.id)).map(character => character.id),
+const expectedRoles = [...new Set(UNITS.map(unit => unitArtRole(unit.id))), ...CHARACTER_DEFINITIONS.filter(character => !sharedCharacterPilots.includes(character.id)).map(character => character.id),
   'settlement.village', 'settlement.town', 'settlement.city', 'ui.crest', 'ui.badge', 'ui.banner'];
 const bytes = new Map<string, Promise<Buffer>>();
 const animatedScoutId = 'unit.scout.ashen_compact';
@@ -132,6 +132,16 @@ describe('published faction art release coverage — real retained files, no fix
     for (const faction of FACTIONS) expect(factionArtId('character.waykeeper', faction.id)).toBeUndefined();
   });
 
+  it('maps specialists to retained approved silhouettes without inventing dedicated bindings or artwork', () => {
+    expect(Object.keys(SHARED_UNIT_ART).sort()).toEqual(UNITS.filter(unit => unit.introducedInRules === 15).map(unit => unit.id).sort());
+    for (const [unitId, shared] of Object.entries(SHARED_UNIT_ART)) for (const faction of FACTIONS) {
+      expect(factionArtId(unitId, faction.id)).toBeUndefined();
+      expect(catalog.assets.some(asset => asset.contentIds.includes(`${unitId}.${faction.id.slice(8)}`))).toBe(false);
+      const actual = factionArtId(shared.role, faction.id)!;
+      expect(catalog.assets.filter(asset => asset.contentIds.includes(actual))).toHaveLength(1);
+    }
+  });
+
   it('publishes all72 qualified naval roles without generic or infantry substitutions', () => {
     const navalRoles = UNITS.filter(unit => unit.movementDomain === 'naval').map(unit => unit.id).sort();
     expect(navalRoles).toEqual(['unit.coastal_warship', 'unit.ocean_warship', 'unit.transport']);
@@ -144,8 +154,8 @@ describe('published faction art release coverage — real retained files, no fix
     }
   });
 
-  it('publishes the two new biome stamps and five actual improvement props without generic substitute bindings', async () => {
-    const ids = ['terrain.ash_scrub', 'terrain.chalkland', 'improvement.terraced_fields', 'improvement.managed_woodlot', 'improvement.quarry', 'improvement.reedworks', 'improvement.shore_fishery'];
+  it('publishes the two new biome stamps and all ten actual improvement props without generic substitute bindings', async () => {
+    const ids = ['terrain.ash_scrub', 'terrain.chalkland', 'improvement.terraced_fields', 'improvement.managed_woodlot', 'improvement.quarry', 'improvement.reedworks', 'improvement.shore_fishery', 'improvement.spring_garden', 'improvement.polder', 'improvement.grove_archive', 'improvement.oreworks', 'improvement.tide_observatory'];
     for (const id of ids) {
       const bindings = catalog.assets.filter(asset => asset.contentIds.includes(id));
       expect(bindings, `${id} needs one exact approved consumer binding`).toHaveLength(1);
@@ -158,7 +168,8 @@ describe('published faction art release coverage — real retained files, no fix
       const frame = decodePng(await retained(manifest.frames[0]!.sourcePath));
       const report = validateAsset(manifest, [{ id: manifest.frames[0]!.id, image: frame }], catalog.palette);
       expect(report.passed, id).toBe(true); expect(report.inputHash).toBe(asset.review.inputHash);
-      expect(manifest.provenance.sourceRefs.some(path => path.startsWith(`assets/art/source/slice12/${id}-v`) && path.endsWith('.png'))).toBe(true);
+      const batch = ['spring_garden', 'polder', 'grove_archive', 'oreworks', 'tide_observatory'].some(name => id === `improvement.${name}`) ? 'hearth-improvements' : 'slice12';
+      expect(manifest.provenance.sourceRefs.some(path => path.startsWith(`assets/art/source/${batch}/${id}-v`) && path.endsWith('.png'))).toBe(true);
       expect(sha256(cropImage(atlasImages.get(asset.atlasId)!, asset.frames[0]!.frame).data)).toBe(sha256(frame.data));
     }
   });

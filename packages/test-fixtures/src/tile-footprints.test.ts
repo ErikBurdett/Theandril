@@ -7,9 +7,10 @@ describe('authored tile-footprint visual scenario', () => {
   it('contains ten genuinely paid completed sites, three stages and a genuinely unseen foreign city', () => {
     const { game, siteCells, towns, hidden, paidWorks } = tileFootprintCampaign();
     const view = getObservation(game, game.turnOwnerId);
-    expect(paidWorks.map(work => work.improvementId)).toEqual(IMPROVEMENTS.map(item => item.id));
+    const generalWorks = IMPROVEMENTS.filter(item => !item.requiredResourceId);
+    expect(paidWorks.map(work => work.improvementId)).toEqual(generalWorks.map(item => item.id));
     for (const [i, cell] of siteCells.entries()) {
-      expect(view.cells.find(item => item.cell === cell)).toMatchObject({ visible: true, improvementId: IMPROVEMENTS[i]!.id });
+      expect(view.cells.find(item => item.cell === cell)).toMatchObject({ visible: true, improvementId: generalWorks[i]!.id });
       expect(paidWorks[i]!.coinCost).toBeGreaterThan(0);
     }
     expect(towns.map(town => game.settlements[town.id]!.population)).toEqual([8, 4, 1]);

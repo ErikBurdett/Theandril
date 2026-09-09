@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.glass_refinery",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.glass_refinery"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A working ASHGLASS REFINERY: a squat dark stone annealing kiln with tiny amber furnace mouth, braced timber shed with plum-slate roof, and a low rack holding three smoky-violet glass slabs. Weathered practical medieval workshop, subdued ember accents and no smoke or haze, compact joined footing.",
+  "frames": [
+    {
+      "id": "improvement.glass_refinery/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/improvement.glass_refinery/94760ae52cd595b049604bcaab809d8aa29d0efe585e947726cf10e1fb2bee03/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "0a95796c125a4e4642ae040ec99c5f541766201930b9c0642e896814f446a501",
+    "sourceRefs": [
+      "assets/art/source/resource-works/improvement.glass_refinery-v1.png",
+      "assets/art/source/resource-works/improvement.glass_refinery-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:39:19.833514Z",
+  "referenceHashes": [
+    "fe6150b6b1364cfeb6abea66b81404ee73aff87afd488505e00f75ed708d6020",
+    "cd417f05c9eb5252a018ab7e2f3012e975dcf0937af819f80b4434df4e46d9d8"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "c10fa315064e1be61d85f2c973ae65c4a2ff3557cc72b1597cf196a656c40cb0",
+      "inputHash": "fe6150b6b1364cfeb6abea66b81404ee73aff87afd488505e00f75ed708d6020",
+      "outputHash": "e7f6c94a5c3e8af25f9896a77c28d9d7541cd174049a37f89b8412c5c75fc4fb"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "e7f6c94a5c3e8af25f9896a77c28d9d7541cd174049a37f89b8412c5c75fc4fb",
+      "outputHash": "4fbdbfa908af237f52758c987e0148e2eac30059cc24437bd83d3795df72f962"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4fbdbfa908af237f52758c987e0148e2eac30059cc24437bd83d3795df72f962",
+      "outputHash": "3f224a0c64e32e7cde44539053ca1e8e739a4b8e141cca3a3a22fe0a46a0537f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "d5795b732c77482724bc24df02e0180d47592177403f4b3e9bb4168bee4eb0c6",
+      "outputHash": "03aebc3d2c6d01adbefbe0531f50a380495d8dc2d1231a70215ef7ef001bf185"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "c0a516f4c6c44eb39b7389e4f479ae3efafcd6b3be23f62a33ec91e980534de4",
+      "outputHash": "e3ad2b09ae1b6c14a175d162c6ff9ecd8b48b694de80633b38f13a9506404bf4"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "34712d957cd35517c9ca16422309b6214113bd33b76444c11afdcac4d07af8e4",
+      "outputHash": "fdf76a8458874105222ddef875b441921da7d817c893f32d444898deed8ea496"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/improvement.glass_refinery.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex visual review",
+    "reviewedAt": "2026-09-08T23:44:07.832Z",
+    "notes": "Inspected exact native1x and nearest4x contact sheets. The improvement.glass_refinery silhouette, joined ground footprint and mineral/material color match its resource role; no clipping or alpha fringe. Deposits and working structures are distinct. Map scaling and fog are verified separately in gameplay.\nReviewed candidate 94760ae52cd595b049604bcaab809d8aa29d0efe585e947726cf10e1fb2bee03; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b64a0daf6f337730a0e135d196adc6ed49e3e9411a5d72247d6196dbbe5770d0.png"
+    ],
+    "inputHash": "d36b535044d557d694866ddac077d2f34f58dfbe33441b6e3e67b31707954ecc"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

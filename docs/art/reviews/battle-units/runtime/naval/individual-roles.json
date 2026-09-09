@@ -1,0 +1,6082 @@
+{
+  "scope": "Authored funded role cohorts, terrain and 20-integrity damaged naval hulls; actual declare-war, attack and Advance commands. No injected battle, strike participants, targets, combat damage or casualties. Exact packets computed independently by the same canonical engine and compared to browser playback.",
+  "initial": {
+    "active": true,
+    "battleId": "battle.19",
+    "revision": 0,
+    "round": 0,
+    "domain": "naval",
+    "fortification": 0,
+    "eventCount": 0,
+    "eventTotal": 0,
+    "completed": true,
+    "reducedMotion": false,
+    "elapsedMs": 0,
+    "paused": false,
+    "formations": [
+      {
+        "id": "formation.13",
+        "strength": 20,
+        "morale": 65,
+        "ward": 0,
+        "side": "attacker"
+      },
+      {
+        "id": "formation.14",
+        "strength": 20,
+        "morale": 75,
+        "ward": 0,
+        "side": "attacker"
+      },
+      {
+        "id": "formation.15",
+        "strength": 20,
+        "morale": 85,
+        "ward": 0,
+        "side": "attacker"
+      },
+      {
+        "id": "formation.16",
+        "strength": 20,
+        "morale": 65,
+        "ward": 0,
+        "side": "defender"
+      },
+      {
+        "id": "formation.17",
+        "strength": 20,
+        "morale": 75,
+        "ward": 0,
+        "side": "defender"
+      },
+      {
+        "id": "formation.18",
+        "strength": 20,
+        "morale": 85,
+        "ward": 0,
+        "side": "defender"
+      }
+    ],
+    "width": 1440,
+    "height": 986,
+    "actorScale": 1,
+    "actors": [
+      {
+        "id": "formation.13",
+        "assetId": "ui.banner.ashen_compact",
+        "frameId": "ui.banner.ashen_compact/idle/se/0",
+        "x": 638,
+        "y": 204,
+        "bounds": {
+          "x": 580,
+          "y": 113.5,
+          "width": 116,
+          "height": 147
+        }
+      },
+      {
+        "id": "formation.14",
+        "assetId": "ui.banner.ashen_compact",
+        "frameId": "ui.banner.ashen_compact/idle/se/0",
+        "x": 638,
+        "y": 359,
+        "bounds": {
+          "x": 580,
+          "y": 268.5,
+          "width": 116,
+          "height": 147
+        }
+      },
+      {
+        "id": "formation.15",
+        "assetId": "ui.banner.ashen_compact",
+        "frameId": "ui.banner.ashen_compact/idle/se/0",
+        "x": 638,
+        "y": 514,
+        "bounds": {
+          "x": 580,
+          "y": 423.5,
+          "width": 116,
+          "height": 147
+        }
+      },
+      {
+        "id": "formation.16",
+        "assetId": "ui.banner.reedbound_council",
+        "frameId": "ui.banner.reedbound_council/idle/se/0",
+        "x": 802,
+        "y": 204,
+        "bounds": {
+          "x": 744,
+          "y": 113.5,
+          "width": 116,
+          "height": 147
+        }
+      },
+      {
+        "id": "formation.17",
+        "assetId": "ui.banner.reedbound_council",
+        "frameId": "ui.banner.reedbound_council/idle/se/0",
+        "x": 802,
+        "y": 359,
+        "bounds": {
+          "x": 744,
+          "y": 268.5,
+          "width": 116,
+          "height": 147
+        }
+      },
+      {
+        "id": "formation.18",
+        "assetId": "ui.banner.reedbound_council",
+        "frameId": "ui.banner.reedbound_council/idle/se/0",
+        "x": 802,
+        "y": 514,
+        "bounds": {
+          "x": 744,
+          "y": 423.5,
+          "width": 116,
+          "height": 147
+        }
+      }
+    ],
+    "pooledSoldiers": 6,
+    "soldiers": [
+      {
+        "id": "formation.13.soldier.0",
+        "formationId": "formation.13",
+        "assetId": "battle.unit.transport",
+        "frameId": "battle.unit.transport/idle/e/2",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "e",
+        "scale": 1,
+        "x": 638,
+        "y": 203.5
+      },
+      {
+        "id": "formation.14.soldier.0",
+        "formationId": "formation.14",
+        "assetId": "battle.unit.coastal_warship",
+        "frameId": "battle.unit.coastal_warship/idle/e/1",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "e",
+        "scale": 1,
+        "x": 638,
+        "y": 358.5
+      },
+      {
+        "id": "formation.15.soldier.0",
+        "formationId": "formation.15",
+        "assetId": "battle.unit.ocean_warship",
+        "frameId": "battle.unit.ocean_warship/idle/e/0",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "e",
+        "scale": 1,
+        "x": 638,
+        "y": 513.5
+      },
+      {
+        "id": "formation.16.soldier.0",
+        "formationId": "formation.16",
+        "assetId": "battle.unit.transport",
+        "frameId": "battle.unit.transport/idle/w/0",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "w",
+        "scale": 1,
+        "x": 802,
+        "y": 203.5
+      },
+      {
+        "id": "formation.17.soldier.0",
+        "formationId": "formation.17",
+        "assetId": "battle.unit.coastal_warship",
+        "frameId": "battle.unit.coastal_warship/idle/w/3",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "w",
+        "scale": 1,
+        "x": 802,
+        "y": 358.5
+      },
+      {
+        "id": "formation.18.soldier.0",
+        "formationId": "formation.18",
+        "assetId": "battle.unit.ocean_warship",
+        "frameId": "battle.unit.ocean_warship/idle/w/3",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "w",
+        "scale": 1,
+        "x": 802,
+        "y": 513.5
+      }
+    ],
+    "effects": [],
+    "pooledActors": 6,
+    "pooledEffects": 0,
+    "missingArt": []
+  },
+  "narrow": {
+    "active": true,
+    "battleId": "battle.19",
+    "revision": 0,
+    "round": 0,
+    "domain": "naval",
+    "fortification": 0,
+    "eventCount": 0,
+    "eventTotal": 0,
+    "completed": true,
+    "reducedMotion": false,
+    "elapsedMs": 0,
+    "paused": false,
+    "formations": [
+      {
+        "id": "formation.13",
+        "strength": 20,
+        "morale": 65,
+        "ward": 0,
+        "side": "attacker"
+      },
+      {
+        "id": "formation.14",
+        "strength": 20,
+        "morale": 75,
+        "ward": 0,
+        "side": "attacker"
+      },
+      {
+        "id": "formation.15",
+        "strength": 20,
+        "morale": 85,
+        "ward": 0,
+        "side": "attacker"
+      },
+      {
+        "id": "formation.16",
+        "strength": 20,
+        "morale": 65,
+        "ward": 0,
+        "side": "defender"
+      },
+      {
+        "id": "formation.17",
+        "strength": 20,
+        "morale": 75,
+        "ward": 0,
+        "side": "defender"
+      },
+      {
+        "id": "formation.18",
+        "strength": 20,
+        "morale": 85,
+        "ward": 0,
+        "side": "defender"
+      }
+    ],
+    "width": 390,
+    "height": 338,
+    "actorScale": 0.5,
+    "actors": [
+      {
+        "id": "formation.13",
+        "assetId": "ui.banner.ashen_compact",
+        "frameId": "ui.banner.ashen_compact/idle/se/0",
+        "x": 63,
+        "y": 222,
+        "bounds": {
+          "x": 34,
+          "y": 177,
+          "width": 58,
+          "height": 89
+        }
+      },
+      {
+        "id": "formation.14",
+        "assetId": "ui.banner.ashen_compact",
+        "frameId": "ui.banner.ashen_compact/idle/se/0",
+        "x": 129,
+        "y": 222,
+        "bounds": {
+          "x": 100,
+          "y": 177,
+          "width": 58,
+          "height": 89
+        }
+      },
+      {
+        "id": "formation.15",
+        "assetId": "ui.banner.ashen_compact",
+        "frameId": "ui.banner.ashen_compact/idle/se/0",
+        "x": 195,
+        "y": 222,
+        "bounds": {
+          "x": 166,
+          "y": 177,
+          "width": 58,
+          "height": 89
+        }
+      },
+      {
+        "id": "formation.16",
+        "assetId": "ui.banner.reedbound_council",
+        "frameId": "ui.banner.reedbound_council/idle/se/0",
+        "x": 63,
+        "y": 85,
+        "bounds": {
+          "x": 34,
+          "y": 40,
+          "width": 58,
+          "height": 89
+        }
+      },
+      {
+        "id": "formation.17",
+        "assetId": "ui.banner.reedbound_council",
+        "frameId": "ui.banner.reedbound_council/idle/se/0",
+        "x": 129,
+        "y": 85,
+        "bounds": {
+          "x": 100,
+          "y": 40,
+          "width": 58,
+          "height": 89
+        }
+      },
+      {
+        "id": "formation.18",
+        "assetId": "ui.banner.reedbound_council",
+        "frameId": "ui.banner.reedbound_council/idle/se/0",
+        "x": 195,
+        "y": 85,
+        "bounds": {
+          "x": 166,
+          "y": 40,
+          "width": 58,
+          "height": 89
+        }
+      }
+    ],
+    "pooledSoldiers": 6,
+    "soldiers": [
+      {
+        "id": "formation.13.soldier.0",
+        "formationId": "formation.13",
+        "assetId": "battle.unit.transport",
+        "frameId": "battle.unit.transport/idle/e/1",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "e",
+        "scale": 0.5,
+        "x": 63,
+        "y": 222
+      },
+      {
+        "id": "formation.14.soldier.0",
+        "formationId": "formation.14",
+        "assetId": "battle.unit.coastal_warship",
+        "frameId": "battle.unit.coastal_warship/idle/e/0",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "e",
+        "scale": 0.5,
+        "x": 129,
+        "y": 222
+      },
+      {
+        "id": "formation.15.soldier.0",
+        "formationId": "formation.15",
+        "assetId": "battle.unit.ocean_warship",
+        "frameId": "battle.unit.ocean_warship/idle/e/3",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "e",
+        "scale": 0.5,
+        "x": 195,
+        "y": 222
+      },
+      {
+        "id": "formation.16.soldier.0",
+        "formationId": "formation.16",
+        "assetId": "battle.unit.transport",
+        "frameId": "battle.unit.transport/idle/w/3",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "w",
+        "scale": 0.5,
+        "x": 63,
+        "y": 85
+      },
+      {
+        "id": "formation.17.soldier.0",
+        "formationId": "formation.17",
+        "assetId": "battle.unit.coastal_warship",
+        "frameId": "battle.unit.coastal_warship/idle/w/2",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "w",
+        "scale": 0.5,
+        "x": 129,
+        "y": 85
+      },
+      {
+        "id": "formation.18.soldier.0",
+        "formationId": "formation.18",
+        "assetId": "battle.unit.ocean_warship",
+        "frameId": "battle.unit.ocean_warship/idle/w/2",
+        "alive": true,
+        "hull": true,
+        "state": "idle",
+        "direction": "w",
+        "scale": 0.5,
+        "x": 195,
+        "y": 85
+      }
+    ],
+    "effects": [],
+    "pooledActors": 6,
+    "pooledEffects": 0,
+    "missingArt": []
+  },
+  "deploymentHash": "9e3f6c74",
+  "rounds": [
+    {
+      "packet": {
+        "battleId": "battle.19",
+        "before": {
+          "soldiers": [
+            {
+              "id": "formation.13.soldier.0",
+              "formationId": "formation.13",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.14.soldier.0",
+              "formationId": "formation.14",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.15.soldier.0",
+              "formationId": "formation.15",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.16.soldier.0",
+              "formationId": "formation.16",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.17.soldier.0",
+              "formationId": "formation.17",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.18.soldier.0",
+              "formationId": "formation.18",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            }
+          ],
+          "round": 0,
+          "terrain": 0,
+          "domain": "naval",
+          "settlementId": null,
+          "fortification": 0,
+          "formations": [
+            {
+              "id": "formation.13",
+              "unitId": "unit.transport",
+              "strength": 20,
+              "maxStrength": 70,
+              "morale": 65,
+              "fatigue": 0,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.14",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 0,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.15",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 0,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Deepwake warship"
+            },
+            {
+              "id": "formation.16",
+              "unitId": "unit.transport",
+              "strength": 20,
+              "maxStrength": 70,
+              "morale": 65,
+              "fatigue": 0,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.17",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 0,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.18",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 0,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Deepwake warship"
+            }
+          ],
+          "characters": [],
+          "result": null
+        },
+        "after": {
+          "soldiers": [
+            {
+              "id": "formation.13.soldier.0",
+              "formationId": "formation.13",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.14.soldier.0",
+              "formationId": "formation.14",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.15.soldier.0",
+              "formationId": "formation.15",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.16.soldier.0",
+              "formationId": "formation.16",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.17.soldier.0",
+              "formationId": "formation.17",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.18.soldier.0",
+              "formationId": "formation.18",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            }
+          ],
+          "round": 1,
+          "terrain": 0,
+          "domain": "naval",
+          "settlementId": null,
+          "fortification": 0,
+          "formations": [
+            {
+              "id": "formation.13",
+              "unitId": "unit.transport",
+              "strength": 15,
+              "maxStrength": 70,
+              "morale": 52,
+              "fatigue": 0,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.14",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 8,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.15",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 8,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Deepwake warship"
+            },
+            {
+              "id": "formation.16",
+              "unitId": "unit.transport",
+              "strength": 17,
+              "maxStrength": 70,
+              "morale": 54,
+              "fatigue": 0,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.17",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 3,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.18",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 3,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Deepwake warship"
+            }
+          ],
+          "characters": [],
+          "result": null
+        },
+        "events": [
+          {
+            "round": 1,
+            "type": "round",
+            "sourceId": null,
+            "sourceKind": null,
+            "targetIds": [],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [],
+            "winner": null,
+            "reason": "attacker advance; defender brace",
+            "sequence": 0
+          },
+          {
+            "round": 1,
+            "type": "move",
+            "sourceId": "formation.13",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.13",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.13",
+              "before": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 1,
+                "lateral": 0
+              }
+            },
+            "sequence": 1
+          },
+          {
+            "round": 1,
+            "type": "move",
+            "sourceId": "formation.14",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.14"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.14",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.14",
+              "before": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 1,
+                "lateral": 0
+              }
+            },
+            "sequence": 2
+          },
+          {
+            "round": 1,
+            "type": "move",
+            "sourceId": "formation.15",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.15"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.15",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.15",
+              "before": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 1,
+                "lateral": 0
+              }
+            },
+            "sequence": 3
+          },
+          {
+            "round": 1,
+            "type": "attack",
+            "sourceId": "formation.14",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": -1,
+                "moraleDelta": -5,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.14",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.14.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 4
+          },
+          {
+            "round": 1,
+            "type": "attack",
+            "sourceId": "formation.17",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": -2,
+                "moraleDelta": -6,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.17",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 3,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.17.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 5
+          },
+          {
+            "round": 1,
+            "type": "attack",
+            "sourceId": "formation.15",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": -2,
+                "moraleDelta": -6,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.15",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.15.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 6
+          },
+          {
+            "round": 1,
+            "type": "attack",
+            "sourceId": "formation.18",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": -3,
+                "moraleDelta": -7,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.18",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 3,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.18.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 7
+          },
+          {
+            "round": 1,
+            "type": "rest",
+            "sourceId": "formation.13",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "sequence": 8
+          },
+          {
+            "round": 1,
+            "type": "rest",
+            "sourceId": "formation.16",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "sequence": 9
+          }
+        ]
+      },
+      "hash": "a864fdac"
+    },
+    {
+      "packet": {
+        "battleId": "battle.19",
+        "before": {
+          "soldiers": [
+            {
+              "id": "formation.13.soldier.0",
+              "formationId": "formation.13",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.14.soldier.0",
+              "formationId": "formation.14",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.15.soldier.0",
+              "formationId": "formation.15",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.16.soldier.0",
+              "formationId": "formation.16",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.17.soldier.0",
+              "formationId": "formation.17",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.18.soldier.0",
+              "formationId": "formation.18",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            }
+          ],
+          "round": 1,
+          "terrain": 0,
+          "domain": "naval",
+          "settlementId": null,
+          "fortification": 0,
+          "formations": [
+            {
+              "id": "formation.13",
+              "unitId": "unit.transport",
+              "strength": 15,
+              "maxStrength": 70,
+              "morale": 52,
+              "fatigue": 0,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.14",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 8,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.15",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 8,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Deepwake warship"
+            },
+            {
+              "id": "formation.16",
+              "unitId": "unit.transport",
+              "strength": 17,
+              "maxStrength": 70,
+              "morale": 54,
+              "fatigue": 0,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.17",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 3,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.18",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 3,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Deepwake warship"
+            }
+          ],
+          "characters": [],
+          "result": null
+        },
+        "after": {
+          "soldiers": [
+            {
+              "id": "formation.13.soldier.0",
+              "formationId": "formation.13",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.14.soldier.0",
+              "formationId": "formation.14",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.15.soldier.0",
+              "formationId": "formation.15",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.16.soldier.0",
+              "formationId": "formation.16",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.17.soldier.0",
+              "formationId": "formation.17",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.18.soldier.0",
+              "formationId": "formation.18",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            }
+          ],
+          "round": 2,
+          "terrain": 0,
+          "domain": "naval",
+          "settlementId": null,
+          "fortification": 0,
+          "formations": [
+            {
+              "id": "formation.13",
+              "unitId": "unit.transport",
+              "strength": 10,
+              "maxStrength": 70,
+              "morale": 39,
+              "fatigue": 0,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 96,
+              "position": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.14",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 16,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 96,
+              "position": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.15",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 16,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 96,
+              "position": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Deepwake warship"
+            },
+            {
+              "id": "formation.16",
+              "unitId": "unit.transport",
+              "strength": 14,
+              "maxStrength": 70,
+              "morale": 43,
+              "fatigue": 0,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.17",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 6,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.18",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 6,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Deepwake warship"
+            }
+          ],
+          "characters": [],
+          "result": null
+        },
+        "events": [
+          {
+            "round": 2,
+            "type": "round",
+            "sourceId": null,
+            "sourceKind": null,
+            "targetIds": [],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [],
+            "winner": null,
+            "reason": "attacker advance; defender brace",
+            "sequence": 0
+          },
+          {
+            "round": 2,
+            "type": "move",
+            "sourceId": "formation.13",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.13",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.13",
+              "before": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 2,
+                "lateral": 0
+              }
+            },
+            "sequence": 1
+          },
+          {
+            "round": 2,
+            "type": "move",
+            "sourceId": "formation.14",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.14"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.14",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.14",
+              "before": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 2,
+                "lateral": 0
+              }
+            },
+            "sequence": 2
+          },
+          {
+            "round": 2,
+            "type": "move",
+            "sourceId": "formation.15",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.15"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.15",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.15",
+              "before": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 2,
+                "lateral": 0
+              }
+            },
+            "sequence": 3
+          },
+          {
+            "round": 2,
+            "type": "attack",
+            "sourceId": "formation.14",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": -1,
+                "moraleDelta": -5,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.14",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.14.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 4
+          },
+          {
+            "round": 2,
+            "type": "attack",
+            "sourceId": "formation.17",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": -2,
+                "moraleDelta": -6,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.17",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 3,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.17.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 5
+          },
+          {
+            "round": 2,
+            "type": "attack",
+            "sourceId": "formation.15",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": -2,
+                "moraleDelta": -6,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.15",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.15.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 6
+          },
+          {
+            "round": 2,
+            "type": "attack",
+            "sourceId": "formation.18",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": -3,
+                "moraleDelta": -7,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.18",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 3,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.18.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 7
+          },
+          {
+            "round": 2,
+            "type": "rest",
+            "sourceId": "formation.13",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "sequence": 8
+          },
+          {
+            "round": 2,
+            "type": "rest",
+            "sourceId": "formation.16",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "sequence": 9
+          }
+        ]
+      },
+      "hash": "e2bca5f1"
+    },
+    {
+      "packet": {
+        "battleId": "battle.19",
+        "before": {
+          "soldiers": [
+            {
+              "id": "formation.13.soldier.0",
+              "formationId": "formation.13",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.14.soldier.0",
+              "formationId": "formation.14",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.15.soldier.0",
+              "formationId": "formation.15",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.16.soldier.0",
+              "formationId": "formation.16",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.17.soldier.0",
+              "formationId": "formation.17",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.18.soldier.0",
+              "formationId": "formation.18",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            }
+          ],
+          "round": 2,
+          "terrain": 0,
+          "domain": "naval",
+          "settlementId": null,
+          "fortification": 0,
+          "formations": [
+            {
+              "id": "formation.13",
+              "unitId": "unit.transport",
+              "strength": 10,
+              "maxStrength": 70,
+              "morale": 39,
+              "fatigue": 0,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 96,
+              "position": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.14",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 16,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 96,
+              "position": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.15",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 16,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 96,
+              "position": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Deepwake warship"
+            },
+            {
+              "id": "formation.16",
+              "unitId": "unit.transport",
+              "strength": 14,
+              "maxStrength": 70,
+              "morale": 43,
+              "fatigue": 0,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.17",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 6,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.18",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 6,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 100,
+              "position": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Deepwake warship"
+            }
+          ],
+          "characters": [],
+          "result": null
+        },
+        "after": {
+          "soldiers": [
+            {
+              "id": "formation.13.soldier.0",
+              "formationId": "formation.13",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.14.soldier.0",
+              "formationId": "formation.14",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.15.soldier.0",
+              "formationId": "formation.15",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.16.soldier.0",
+              "formationId": "formation.16",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.17.soldier.0",
+              "formationId": "formation.17",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.18.soldier.0",
+              "formationId": "formation.18",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            }
+          ],
+          "round": 3,
+          "terrain": 0,
+          "domain": "naval",
+          "settlementId": null,
+          "fortification": 0,
+          "formations": [
+            {
+              "id": "formation.13",
+              "unitId": "unit.transport",
+              "strength": 4,
+              "maxStrength": 70,
+              "morale": 21,
+              "fatigue": 8,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 94,
+              "position": {
+                "forward": 3,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.14",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 24,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 94,
+              "position": {
+                "forward": 3,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.15",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 24,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 94,
+              "position": {
+                "forward": 3,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Deepwake warship"
+            },
+            {
+              "id": "formation.16",
+              "unitId": "unit.transport",
+              "strength": 8,
+              "maxStrength": 70,
+              "morale": 25,
+              "fatigue": 8,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.17",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 14,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.18",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 14,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Deepwake warship"
+            }
+          ],
+          "characters": [],
+          "result": null
+        },
+        "events": [
+          {
+            "round": 3,
+            "type": "round",
+            "sourceId": null,
+            "sourceKind": null,
+            "targetIds": [],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [],
+            "winner": null,
+            "reason": "attacker advance; defender advance",
+            "sequence": 0
+          },
+          {
+            "round": 3,
+            "type": "move",
+            "sourceId": "formation.13",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.13",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.13",
+              "before": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 3,
+                "lateral": 0
+              }
+            },
+            "sequence": 1
+          },
+          {
+            "round": 3,
+            "type": "move",
+            "sourceId": "formation.14",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.14"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.14",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.14",
+              "before": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 3,
+                "lateral": 0
+              }
+            },
+            "sequence": 2
+          },
+          {
+            "round": 3,
+            "type": "move",
+            "sourceId": "formation.15",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.15"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.15",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.15",
+              "before": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 3,
+                "lateral": 0
+              }
+            },
+            "sequence": 3
+          },
+          {
+            "round": 3,
+            "type": "move",
+            "sourceId": "formation.16",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.16",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.16",
+              "before": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 1,
+                "lateral": 0
+              }
+            },
+            "sequence": 4
+          },
+          {
+            "round": 3,
+            "type": "move",
+            "sourceId": "formation.17",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.17"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.17",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.17",
+              "before": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 1,
+                "lateral": 0
+              }
+            },
+            "sequence": 5
+          },
+          {
+            "round": 3,
+            "type": "move",
+            "sourceId": "formation.18",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.18"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.18",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.18",
+              "before": {
+                "forward": 0,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 1,
+                "lateral": 0
+              }
+            },
+            "sequence": 6
+          },
+          {
+            "round": 3,
+            "type": "attack",
+            "sourceId": "formation.17",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": -2,
+                "moraleDelta": -6,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.17",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.17.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 7
+          },
+          {
+            "round": 3,
+            "type": "attack",
+            "sourceId": "formation.14",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": -2,
+                "moraleDelta": -6,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.14",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.14.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 8
+          },
+          {
+            "round": 3,
+            "type": "attack",
+            "sourceId": "formation.18",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": -3,
+                "moraleDelta": -7,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.18",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.18.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 9
+          },
+          {
+            "round": 3,
+            "type": "attack",
+            "sourceId": "formation.15",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": -3,
+                "moraleDelta": -7,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.15",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.15.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 10
+          },
+          {
+            "round": 3,
+            "type": "attack",
+            "sourceId": "formation.13",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": "melee",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": -1,
+                "moraleDelta": -5,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 11
+          },
+          {
+            "round": 3,
+            "type": "attack",
+            "sourceId": "formation.16",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": "melee",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": -1,
+                "moraleDelta": -5,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 12
+          }
+        ]
+      },
+      "hash": "5b280717"
+    },
+    {
+      "packet": {
+        "battleId": "battle.19",
+        "before": {
+          "soldiers": [
+            {
+              "id": "formation.13.soldier.0",
+              "formationId": "formation.13",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.14.soldier.0",
+              "formationId": "formation.14",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.15.soldier.0",
+              "formationId": "formation.15",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.16.soldier.0",
+              "formationId": "formation.16",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.17.soldier.0",
+              "formationId": "formation.17",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.18.soldier.0",
+              "formationId": "formation.18",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            }
+          ],
+          "round": 3,
+          "terrain": 0,
+          "domain": "naval",
+          "settlementId": null,
+          "fortification": 0,
+          "formations": [
+            {
+              "id": "formation.13",
+              "unitId": "unit.transport",
+              "strength": 4,
+              "maxStrength": 70,
+              "morale": 21,
+              "fatigue": 8,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 94,
+              "position": {
+                "forward": 3,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.14",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 24,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 94,
+              "position": {
+                "forward": 3,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.15",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 24,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 94,
+              "position": {
+                "forward": 3,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Deepwake warship"
+            },
+            {
+              "id": "formation.16",
+              "unitId": "unit.transport",
+              "strength": 8,
+              "maxStrength": 70,
+              "morale": 25,
+              "fatigue": 8,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.17",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 14,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.18",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 14,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 98,
+              "position": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Deepwake warship"
+            }
+          ],
+          "characters": [],
+          "result": null
+        },
+        "after": {
+          "soldiers": [
+            {
+              "id": "formation.14.soldier.0",
+              "formationId": "formation.14",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.15.soldier.0",
+              "formationId": "formation.15",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.16.soldier.0",
+              "formationId": "formation.16",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.17.soldier.0",
+              "formationId": "formation.17",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            },
+            {
+              "id": "formation.18.soldier.0",
+              "formationId": "formation.18",
+              "slot": 0,
+              "x": 0,
+              "y": 0,
+              "alive": true
+            }
+          ],
+          "round": 4,
+          "terrain": 0,
+          "domain": "naval",
+          "settlementId": null,
+          "fortification": 0,
+          "formations": [
+            {
+              "id": "formation.13",
+              "unitId": "unit.transport",
+              "strength": 0,
+              "maxStrength": 70,
+              "morale": 9,
+              "fatigue": 8,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 92,
+              "position": {
+                "forward": 4,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.14",
+              "unitId": "unit.coastal_warship",
+              "strength": 19,
+              "maxStrength": 90,
+              "morale": 63,
+              "fatigue": 32,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 92,
+              "position": {
+                "forward": 4,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.15",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 77,
+              "fatigue": 32,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 92,
+              "position": {
+                "forward": 4,
+                "lateral": 0
+              },
+              "armyId": "army.2",
+              "side": "attacker",
+              "armyName": "Lantern ferry",
+              "factionId": "faction.ashen_compact",
+              "factionDefinitionId": "faction.ashen_compact",
+              "unitName": "Deepwake warship"
+            },
+            {
+              "id": "formation.16",
+              "unitId": "unit.transport",
+              "strength": 3,
+              "maxStrength": 70,
+              "morale": 12,
+              "fatigue": 16,
+              "row": 0,
+              "column": 0,
+              "attack": 6,
+              "armor": 3,
+              "initiative": 5,
+              "range": 0,
+              "ward": 0,
+              "cohesion": 96,
+              "position": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Charter transport"
+            },
+            {
+              "id": "formation.17",
+              "unitId": "unit.coastal_warship",
+              "strength": 20,
+              "maxStrength": 90,
+              "morale": 75,
+              "fatigue": 22,
+              "row": 0,
+              "column": 1,
+              "attack": 18,
+              "armor": 6,
+              "initiative": 10,
+              "range": 2,
+              "ward": 0,
+              "cohesion": 96,
+              "position": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Coastwatch galley"
+            },
+            {
+              "id": "formation.18",
+              "unitId": "unit.ocean_warship",
+              "strength": 20,
+              "maxStrength": 120,
+              "morale": 85,
+              "fatigue": 22,
+              "row": 0,
+              "column": 2,
+              "attack": 24,
+              "armor": 9,
+              "initiative": 7,
+              "range": 3,
+              "ward": 0,
+              "cohesion": 96,
+              "position": {
+                "forward": 2,
+                "lateral": 0
+              },
+              "armyId": "army.4",
+              "side": "defender",
+              "armyName": "Reedbound tideguard",
+              "factionId": "faction.reedbound_council",
+              "factionDefinitionId": "faction.reedbound_council",
+              "unitName": "Deepwake warship"
+            }
+          ],
+          "characters": [],
+          "result": null
+        },
+        "events": [
+          {
+            "round": 4,
+            "type": "round",
+            "sourceId": null,
+            "sourceKind": null,
+            "targetIds": [],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [],
+            "winner": null,
+            "reason": "attacker advance; defender advance",
+            "sequence": 0
+          },
+          {
+            "round": 4,
+            "type": "move",
+            "sourceId": "formation.13",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.13",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.13",
+              "before": {
+                "forward": 3,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 4,
+                "lateral": 0
+              }
+            },
+            "sequence": 1
+          },
+          {
+            "round": 4,
+            "type": "move",
+            "sourceId": "formation.14",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.14"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.14",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.14",
+              "before": {
+                "forward": 3,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 4,
+                "lateral": 0
+              }
+            },
+            "sequence": 2
+          },
+          {
+            "round": 4,
+            "type": "move",
+            "sourceId": "formation.15",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.15"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.15",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.15",
+              "before": {
+                "forward": 3,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 4,
+                "lateral": 0
+              }
+            },
+            "sequence": 3
+          },
+          {
+            "round": 4,
+            "type": "move",
+            "sourceId": "formation.16",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.16",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.16",
+              "before": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 2,
+                "lateral": 0
+              }
+            },
+            "sequence": 4
+          },
+          {
+            "round": 4,
+            "type": "move",
+            "sourceId": "formation.17",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.17"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.17",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.17",
+              "before": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 2,
+                "lateral": 0
+              }
+            },
+            "sequence": 5
+          },
+          {
+            "round": 4,
+            "type": "move",
+            "sourceId": "formation.18",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.18"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.18",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 0,
+                "wardDelta": 0,
+                "cohesionDelta": -2
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "movement": {
+              "formationId": "formation.18",
+              "before": {
+                "forward": 1,
+                "lateral": 0
+              },
+              "after": {
+                "forward": 2,
+                "lateral": 0
+              }
+            },
+            "sequence": 6
+          },
+          {
+            "round": 4,
+            "type": "attack",
+            "sourceId": "formation.17",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": -2,
+                "moraleDelta": -6,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.17",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.17.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 7
+          },
+          {
+            "round": 4,
+            "type": "attack",
+            "sourceId": "formation.14",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": -2,
+                "moraleDelta": -6,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.14",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.14.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 8
+          },
+          {
+            "round": 4,
+            "type": "attack",
+            "sourceId": "formation.18",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.13",
+                "strengthDelta": -2,
+                "moraleDelta": -6,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.18",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.18.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "killedSoldierIds": [
+              "formation.13.soldier.0"
+            ],
+            "sequence": 9
+          },
+          {
+            "round": 4,
+            "type": "destroyed",
+            "sourceId": "formation.18",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.13"
+            ],
+            "abilityId": null,
+            "attackKind": null,
+            "changes": [
+              {
+                "formationId": "formation.14",
+                "strengthDelta": 0,
+                "moraleDelta": -8,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "formationId": "formation.15",
+                "strengthDelta": 0,
+                "moraleDelta": -8,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": null,
+            "sequence": 10
+          },
+          {
+            "round": 4,
+            "type": "attack",
+            "sourceId": "formation.15",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.16"
+            ],
+            "abilityId": null,
+            "attackKind": "projectile",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": -3,
+                "moraleDelta": -7,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.15",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.15.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 11
+          },
+          {
+            "round": 4,
+            "type": "attack",
+            "sourceId": "formation.16",
+            "sourceKind": "formation",
+            "targetIds": [
+              "formation.14"
+            ],
+            "abilityId": null,
+            "attackKind": "melee",
+            "changes": [
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.14",
+                "strengthDelta": -1,
+                "moraleDelta": -4,
+                "fatigueDelta": 0,
+                "wardDelta": 0
+              },
+              {
+                "cohesionDelta": 0,
+                "formationId": "formation.16",
+                "strengthDelta": 0,
+                "moraleDelta": 0,
+                "fatigueDelta": 8,
+                "wardDelta": 0
+              }
+            ],
+            "winner": null,
+            "reason": "hull fire",
+            "sourceSoldierIds": [
+              "formation.16.soldier.0"
+            ],
+            "targetSoldierIds": [
+              "formation.14.soldier.0"
+            ],
+            "killedSoldierIds": [],
+            "sequence": 12
+          }
+        ]
+      },
+      "hash": "c069d0ef"
+    }
+  ],
+  "samples": [
+    {
+      "round": 1,
+      "states": [
+        "sail",
+        "idle",
+        "fire",
+        "hit"
+      ],
+      "frames": [
+        "battle.unit.transport/sail/e/1",
+        "battle.unit.coastal_warship/idle/e/1",
+        "battle.unit.ocean_warship/idle/e/0",
+        "battle.unit.transport/idle/w/0",
+        "battle.unit.coastal_warship/idle/w/3",
+        "battle.unit.ocean_warship/idle/w/3",
+        "battle.unit.transport/sail/e/2",
+        "battle.unit.transport/sail/e/3",
+        "battle.unit.coastal_warship/sail/e/0",
+        "battle.unit.ocean_warship/idle/e/1",
+        "battle.unit.coastal_warship/idle/w/0",
+        "battle.unit.transport/sail/e/4",
+        "battle.unit.coastal_warship/sail/e/1",
+        "battle.unit.transport/idle/w/1",
+        "battle.unit.transport/sail/e/5",
+        "battle.unit.coastal_warship/sail/e/2",
+        "battle.unit.ocean_warship/idle/w/0",
+        "battle.unit.transport/sail/e/6",
+        "battle.unit.coastal_warship/sail/e/3",
+        "battle.unit.ocean_warship/sail/e/0",
+        "battle.unit.transport/sail/e/7",
+        "battle.unit.coastal_warship/sail/e/4",
+        "battle.unit.ocean_warship/sail/e/1",
+        "battle.unit.coastal_warship/idle/w/1",
+        "battle.unit.transport/idle/e/0",
+        "battle.unit.coastal_warship/fire/e/0",
+        "battle.unit.ocean_warship/sail/e/3",
+        "battle.unit.transport/idle/w/2",
+        "battle.unit.ocean_warship/idle/w/1",
+        "battle.unit.ocean_warship/sail/e/4",
+        "battle.unit.coastal_warship/fire/e/1",
+        "battle.unit.ocean_warship/sail/e/5",
+        "battle.unit.transport/idle/e/1",
+        "battle.unit.ocean_warship/sail/e/6",
+        "battle.unit.transport/idle/w/3",
+        "battle.unit.coastal_warship/fire/w/0",
+        "battle.unit.coastal_warship/fire/e/2",
+        "battle.unit.ocean_warship/sail/e/7",
+        "battle.unit.ocean_warship/idle/w/2",
+        "battle.unit.coastal_warship/fire/e/3",
+        "battle.unit.ocean_warship/fire/e/0",
+        "battle.unit.coastal_warship/fire/w/1",
+        "battle.unit.transport/idle/e/2",
+        "battle.unit.coastal_warship/fire/e/4",
+        "battle.unit.ocean_warship/fire/e/1",
+        "battle.unit.transport/hit/w/0",
+        "battle.unit.coastal_warship/fire/w/2",
+        "battle.unit.coastal_warship/fire/e/5",
+        "battle.unit.ocean_warship/fire/e/2",
+        "battle.unit.transport/hit/w/1",
+        "battle.unit.coastal_warship/fire/w/3",
+        "battle.unit.ocean_warship/fire/w/0",
+        "battle.unit.transport/hit/e/0",
+        "battle.unit.coastal_warship/fire/w/4",
+        "battle.unit.ocean_warship/fire/w/1",
+        "battle.unit.coastal_warship/fire/e/6",
+        "battle.unit.ocean_warship/fire/e/3",
+        "battle.unit.transport/hit/w/2",
+        "battle.unit.transport/hit/e/1",
+        "battle.unit.coastal_warship/fire/w/5",
+        "battle.unit.ocean_warship/fire/w/2",
+        "battle.unit.coastal_warship/fire/e/7",
+        "battle.unit.ocean_warship/fire/e/4",
+        "battle.unit.transport/hit/e/2",
+        "battle.unit.coastal_warship/idle/e/3",
+        "battle.unit.ocean_warship/fire/e/5",
+        "battle.unit.coastal_warship/fire/w/6",
+        "battle.unit.ocean_warship/fire/w/3",
+        "battle.unit.ocean_warship/fire/e/6",
+        "battle.unit.coastal_warship/fire/w/7",
+        "battle.unit.ocean_warship/fire/w/4",
+        "battle.unit.coastal_warship/idle/e/0",
+        "battle.unit.ocean_warship/fire/e/7",
+        "battle.unit.transport/hit/w/3",
+        "battle.unit.coastal_warship/idle/w/2",
+        "battle.unit.ocean_warship/fire/w/5",
+        "battle.unit.ocean_warship/fire/w/6",
+        "battle.unit.transport/hit/e/3",
+        "battle.unit.ocean_warship/fire/w/7",
+        "battle.unit.coastal_warship/idle/e/2",
+        "battle.unit.transport/idle/e/3",
+        "battle.unit.ocean_warship/idle/e/2"
+      ],
+      "deaths": [],
+      "effects": [
+        "effect.battle_projectile/attack/se/0",
+        "effect.battle_projectile/attack/se/1",
+        "effect.battle_projectile/attack/se/2",
+        "effect.battle_projectile/attack/se/3",
+        "effect.battle_projectile/attack/se/4",
+        "effect.battle_projectile/attack/se/5",
+        "effect.battle_projectile/attack/se/6",
+        "effect.battle_projectile/attack/se/7"
+      ],
+      "activeFrames": 28,
+      "captured": false,
+      "scene": {
+        "active": true,
+        "battleId": "battle.19",
+        "revision": 1,
+        "round": 1,
+        "domain": "naval",
+        "fortification": 0,
+        "eventCount": 10,
+        "eventTotal": 10,
+        "completed": true,
+        "reducedMotion": false,
+        "elapsedMs": 2150,
+        "paused": false,
+        "formations": [
+          {
+            "id": "formation.13",
+            "strength": 15,
+            "morale": 52,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.14",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.15",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.16",
+            "strength": 17,
+            "morale": 54,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.17",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.18",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "defender"
+          }
+        ],
+        "width": 1440,
+        "height": 986,
+        "actorScale": 1,
+        "actors": [
+          {
+            "id": "formation.13",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 645,
+            "y": 204,
+            "bounds": {
+              "x": 586.86,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.14",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 645,
+            "y": 359,
+            "bounds": {
+              "x": 586.86,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.15",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 645,
+            "y": 514,
+            "bounds": {
+              "x": 586.86,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.16",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 204,
+            "bounds": {
+              "x": 744,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.17",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 359,
+            "bounds": {
+              "x": 744,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.18",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 514,
+            "bounds": {
+              "x": 744,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          }
+        ],
+        "pooledSoldiers": 6,
+        "soldiers": [
+          {
+            "id": "formation.13.soldier.0",
+            "formationId": "formation.13",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/e/0",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 644.86,
+            "y": 203.5
+          },
+          {
+            "id": "formation.14.soldier.0",
+            "formationId": "formation.14",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/e/3",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 644.86,
+            "y": 358.5
+          },
+          {
+            "id": "formation.15.soldier.0",
+            "formationId": "formation.15",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/e/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 644.86,
+            "y": 513.5
+          },
+          {
+            "id": "formation.16.soldier.0",
+            "formationId": "formation.16",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/w/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 203.5
+          },
+          {
+            "id": "formation.17.soldier.0",
+            "formationId": "formation.17",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/w/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 358.5
+          },
+          {
+            "id": "formation.18.soldier.0",
+            "formationId": "formation.18",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/w/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 513.5
+          }
+        ],
+        "effects": [],
+        "pooledActors": 6,
+        "pooledEffects": 4,
+        "missingArt": []
+      },
+      "finished": {
+        "active": true,
+        "battleId": "battle.19",
+        "revision": 1,
+        "round": 1,
+        "domain": "naval",
+        "fortification": 0,
+        "eventCount": 10,
+        "eventTotal": 10,
+        "completed": true,
+        "reducedMotion": false,
+        "elapsedMs": 2150,
+        "paused": false,
+        "formations": [
+          {
+            "id": "formation.13",
+            "strength": 15,
+            "morale": 52,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.14",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.15",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.16",
+            "strength": 17,
+            "morale": 54,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.17",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.18",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "defender"
+          }
+        ],
+        "width": 1440,
+        "height": 986,
+        "actorScale": 1,
+        "actors": [
+          {
+            "id": "formation.13",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 645,
+            "y": 204,
+            "bounds": {
+              "x": 586.86,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.14",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 645,
+            "y": 359,
+            "bounds": {
+              "x": 586.86,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.15",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 645,
+            "y": 514,
+            "bounds": {
+              "x": 586.86,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.16",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 204,
+            "bounds": {
+              "x": 744,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.17",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 359,
+            "bounds": {
+              "x": 744,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.18",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 514,
+            "bounds": {
+              "x": 744,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          }
+        ],
+        "pooledSoldiers": 6,
+        "soldiers": [
+          {
+            "id": "formation.13.soldier.0",
+            "formationId": "formation.13",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/e/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 644.86,
+            "y": 203.5
+          },
+          {
+            "id": "formation.14.soldier.0",
+            "formationId": "formation.14",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/e/0",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 644.86,
+            "y": 358.5
+          },
+          {
+            "id": "formation.15.soldier.0",
+            "formationId": "formation.15",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/e/3",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 644.86,
+            "y": 513.5
+          },
+          {
+            "id": "formation.16.soldier.0",
+            "formationId": "formation.16",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/w/3",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 203.5
+          },
+          {
+            "id": "formation.17.soldier.0",
+            "formationId": "formation.17",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/w/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 358.5
+          },
+          {
+            "id": "formation.18.soldier.0",
+            "formationId": "formation.18",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/w/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 513.5
+          }
+        ],
+        "effects": [],
+        "pooledActors": 6,
+        "pooledEffects": 4,
+        "missingArt": []
+      }
+    },
+    {
+      "round": 2,
+      "states": [
+        "sail",
+        "idle",
+        "fire",
+        "hit"
+      ],
+      "frames": [
+        "battle.unit.transport/sail/e/2",
+        "battle.unit.coastal_warship/idle/e/0",
+        "battle.unit.ocean_warship/idle/e/3",
+        "battle.unit.transport/idle/w/3",
+        "battle.unit.coastal_warship/idle/w/2",
+        "battle.unit.ocean_warship/idle/w/2",
+        "battle.unit.transport/sail/e/3",
+        "battle.unit.coastal_warship/sail/e/0",
+        "battle.unit.ocean_warship/idle/e/0",
+        "battle.unit.coastal_warship/idle/w/3",
+        "battle.unit.transport/sail/e/5",
+        "battle.unit.coastal_warship/sail/e/2",
+        "battle.unit.transport/idle/w/0",
+        "battle.unit.ocean_warship/idle/w/3",
+        "battle.unit.transport/sail/e/7",
+        "battle.unit.coastal_warship/sail/e/4",
+        "battle.unit.ocean_warship/sail/e/1",
+        "battle.unit.coastal_warship/idle/w/0",
+        "battle.unit.transport/idle/e/3",
+        "battle.unit.coastal_warship/sail/e/5",
+        "battle.unit.ocean_warship/sail/e/2",
+        "battle.unit.transport/idle/w/1",
+        "battle.unit.coastal_warship/fire/e/0",
+        "battle.unit.ocean_warship/sail/e/3",
+        "battle.unit.ocean_warship/idle/w/0",
+        "battle.unit.ocean_warship/sail/e/4",
+        "battle.unit.coastal_warship/fire/e/1",
+        "battle.unit.ocean_warship/sail/e/5",
+        "battle.unit.coastal_warship/idle/w/1",
+        "battle.unit.transport/idle/e/0",
+        "battle.unit.coastal_warship/fire/e/2",
+        "battle.unit.ocean_warship/sail/e/7",
+        "battle.unit.transport/idle/w/2",
+        "battle.unit.coastal_warship/fire/w/0",
+        "battle.unit.ocean_warship/idle/w/1",
+        "battle.unit.ocean_warship/idle/e/2",
+        "battle.unit.coastal_warship/fire/w/1",
+        "battle.unit.coastal_warship/fire/e/3",
+        "battle.unit.ocean_warship/fire/e/0",
+        "battle.unit.transport/idle/e/1",
+        "battle.unit.coastal_warship/fire/w/2",
+        "battle.unit.coastal_warship/fire/e/4",
+        "battle.unit.ocean_warship/fire/e/1",
+        "battle.unit.transport/hit/w/0",
+        "battle.unit.coastal_warship/fire/w/3",
+        "battle.unit.ocean_warship/fire/w/0",
+        "battle.unit.coastal_warship/fire/e/5",
+        "battle.unit.ocean_warship/fire/e/2",
+        "battle.unit.transport/hit/w/1",
+        "battle.unit.transport/hit/e/0",
+        "battle.unit.coastal_warship/fire/w/4",
+        "battle.unit.ocean_warship/fire/w/1",
+        "battle.unit.coastal_warship/fire/e/6",
+        "battle.unit.ocean_warship/fire/e/3",
+        "battle.unit.transport/hit/w/2",
+        "battle.unit.transport/hit/e/1",
+        "battle.unit.coastal_warship/fire/w/5",
+        "battle.unit.ocean_warship/fire/w/2",
+        "battle.unit.coastal_warship/fire/e/7",
+        "battle.unit.ocean_warship/fire/e/4",
+        "battle.unit.transport/hit/e/2",
+        "battle.unit.coastal_warship/fire/w/6",
+        "battle.unit.ocean_warship/fire/w/3",
+        "battle.unit.coastal_warship/idle/e/2",
+        "battle.unit.ocean_warship/fire/e/5",
+        "battle.unit.coastal_warship/fire/w/7",
+        "battle.unit.ocean_warship/fire/w/4",
+        "battle.unit.coastal_warship/idle/e/3",
+        "battle.unit.ocean_warship/fire/e/6",
+        "battle.unit.ocean_warship/fire/w/5",
+        "battle.unit.ocean_warship/fire/e/7",
+        "battle.unit.transport/hit/w/3",
+        "battle.unit.ocean_warship/fire/w/6",
+        "battle.unit.transport/hit/e/3",
+        "battle.unit.ocean_warship/fire/w/7",
+        "battle.unit.coastal_warship/idle/e/1",
+        "battle.unit.transport/idle/e/2",
+        "battle.unit.ocean_warship/idle/e/1"
+      ],
+      "deaths": [],
+      "effects": [
+        "effect.battle_projectile/attack/se/0",
+        "effect.battle_projectile/attack/se/1",
+        "effect.battle_projectile/attack/se/2",
+        "effect.battle_projectile/attack/se/3",
+        "effect.battle_projectile/attack/se/4",
+        "effect.battle_projectile/attack/se/5",
+        "effect.battle_projectile/attack/se/6",
+        "effect.battle_projectile/attack/se/7"
+      ],
+      "activeFrames": 29,
+      "captured": false,
+      "scene": {
+        "active": true,
+        "battleId": "battle.19",
+        "revision": 2,
+        "round": 2,
+        "domain": "naval",
+        "fortification": 0,
+        "eventCount": 10,
+        "eventTotal": 10,
+        "completed": true,
+        "reducedMotion": false,
+        "elapsedMs": 2150,
+        "paused": false,
+        "formations": [
+          {
+            "id": "formation.13",
+            "strength": 10,
+            "morale": 39,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.14",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.15",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.16",
+            "strength": 14,
+            "morale": 43,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.17",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.18",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "defender"
+          }
+        ],
+        "width": 1440,
+        "height": 986,
+        "actorScale": 1,
+        "actors": [
+          {
+            "id": "formation.13",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 652,
+            "y": 204,
+            "bounds": {
+              "x": 593.72,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.14",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 652,
+            "y": 359,
+            "bounds": {
+              "x": 593.72,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.15",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 652,
+            "y": 514,
+            "bounds": {
+              "x": 593.72,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.16",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 204,
+            "bounds": {
+              "x": 744,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.17",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 359,
+            "bounds": {
+              "x": 744,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.18",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 514,
+            "bounds": {
+              "x": 744,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          }
+        ],
+        "pooledSoldiers": 6,
+        "soldiers": [
+          {
+            "id": "formation.13.soldier.0",
+            "formationId": "formation.13",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/e/3",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 651.72,
+            "y": 203.5
+          },
+          {
+            "id": "formation.14.soldier.0",
+            "formationId": "formation.14",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/e/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 651.72,
+            "y": 358.5
+          },
+          {
+            "id": "formation.15.soldier.0",
+            "formationId": "formation.15",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/e/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 651.72,
+            "y": 513.5
+          },
+          {
+            "id": "formation.16.soldier.0",
+            "formationId": "formation.16",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/w/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 203.5
+          },
+          {
+            "id": "formation.17.soldier.0",
+            "formationId": "formation.17",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/w/0",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 358.5
+          },
+          {
+            "id": "formation.18.soldier.0",
+            "formationId": "formation.18",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/w/3",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 513.5
+          }
+        ],
+        "effects": [],
+        "pooledActors": 6,
+        "pooledEffects": 4,
+        "missingArt": []
+      },
+      "finished": {
+        "active": true,
+        "battleId": "battle.19",
+        "revision": 2,
+        "round": 2,
+        "domain": "naval",
+        "fortification": 0,
+        "eventCount": 10,
+        "eventTotal": 10,
+        "completed": true,
+        "reducedMotion": false,
+        "elapsedMs": 2150,
+        "paused": false,
+        "formations": [
+          {
+            "id": "formation.13",
+            "strength": 10,
+            "morale": 39,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.14",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.15",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.16",
+            "strength": 14,
+            "morale": 43,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.17",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.18",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "defender"
+          }
+        ],
+        "width": 1440,
+        "height": 986,
+        "actorScale": 1,
+        "actors": [
+          {
+            "id": "formation.13",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 652,
+            "y": 204,
+            "bounds": {
+              "x": 593.72,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.14",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 652,
+            "y": 359,
+            "bounds": {
+              "x": 593.72,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.15",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 652,
+            "y": 514,
+            "bounds": {
+              "x": 593.72,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.16",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 204,
+            "bounds": {
+              "x": 744,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.17",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 359,
+            "bounds": {
+              "x": 744,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.18",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 802,
+            "y": 514,
+            "bounds": {
+              "x": 744,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          }
+        ],
+        "pooledSoldiers": 6,
+        "soldiers": [
+          {
+            "id": "formation.13.soldier.0",
+            "formationId": "formation.13",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/e/0",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 651.72,
+            "y": 203.5
+          },
+          {
+            "id": "formation.14.soldier.0",
+            "formationId": "formation.14",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/e/3",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 651.72,
+            "y": 358.5
+          },
+          {
+            "id": "formation.15.soldier.0",
+            "formationId": "formation.15",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/e/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 651.72,
+            "y": 513.5
+          },
+          {
+            "id": "formation.16.soldier.0",
+            "formationId": "formation.16",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/w/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 203.5
+          },
+          {
+            "id": "formation.17.soldier.0",
+            "formationId": "formation.17",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/w/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 358.5
+          },
+          {
+            "id": "formation.18.soldier.0",
+            "formationId": "formation.18",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/w/0",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 802,
+            "y": 513.5
+          }
+        ],
+        "effects": [],
+        "pooledActors": 6,
+        "pooledEffects": 4,
+        "missingArt": []
+      }
+    },
+    {
+      "round": 3,
+      "states": [
+        "sail",
+        "idle",
+        "fire",
+        "hit"
+      ],
+      "frames": [
+        "battle.unit.transport/sail/e/2",
+        "battle.unit.coastal_warship/idle/e/3",
+        "battle.unit.ocean_warship/idle/e/3",
+        "battle.unit.transport/idle/w/2",
+        "battle.unit.coastal_warship/idle/w/1",
+        "battle.unit.ocean_warship/idle/w/1",
+        "battle.unit.transport/sail/e/3",
+        "battle.unit.coastal_warship/sail/e/0",
+        "battle.unit.transport/idle/w/3",
+        "battle.unit.coastal_warship/idle/w/2",
+        "battle.unit.transport/sail/e/4",
+        "battle.unit.coastal_warship/sail/e/1",
+        "battle.unit.ocean_warship/idle/w/2",
+        "battle.unit.transport/sail/e/5",
+        "battle.unit.coastal_warship/sail/e/2",
+        "battle.unit.transport/sail/e/6",
+        "battle.unit.coastal_warship/sail/e/3",
+        "battle.unit.ocean_warship/sail/e/0",
+        "battle.unit.transport/sail/e/7",
+        "battle.unit.coastal_warship/sail/e/4",
+        "battle.unit.ocean_warship/sail/e/1",
+        "battle.unit.coastal_warship/idle/w/3",
+        "battle.unit.transport/idle/w/0",
+        "battle.unit.transport/idle/e/2",
+        "battle.unit.coastal_warship/sail/e/5",
+        "battle.unit.ocean_warship/sail/e/2",
+        "battle.unit.ocean_warship/idle/w/3",
+        "battle.unit.coastal_warship/sail/e/6",
+        "battle.unit.ocean_warship/sail/e/3",
+        "battle.unit.transport/sail/w/0",
+        "battle.unit.coastal_warship/sail/e/7",
+        "battle.unit.ocean_warship/sail/e/4",
+        "battle.unit.transport/sail/w/1",
+        "battle.unit.coastal_warship/idle/e/2",
+        "battle.unit.ocean_warship/sail/e/5",
+        "battle.unit.transport/sail/w/2",
+        "battle.unit.coastal_warship/idle/w/0",
+        "battle.unit.transport/idle/e/3",
+        "battle.unit.ocean_warship/sail/e/6",
+        "battle.unit.transport/sail/w/3",
+        "battle.unit.coastal_warship/sail/w/0",
+        "battle.unit.ocean_warship/idle/w/0",
+        "battle.unit.ocean_warship/sail/e/7",
+        "battle.unit.transport/sail/w/4",
+        "battle.unit.coastal_warship/sail/w/1",
+        "battle.unit.ocean_warship/idle/e/2",
+        "battle.unit.transport/sail/w/5",
+        "battle.unit.coastal_warship/sail/w/2",
+        "battle.unit.transport/sail/w/6",
+        "battle.unit.coastal_warship/sail/w/3",
+        "battle.unit.ocean_warship/sail/w/0",
+        "battle.unit.transport/idle/e/0",
+        "battle.unit.transport/sail/w/7",
+        "battle.unit.coastal_warship/sail/w/4",
+        "battle.unit.ocean_warship/sail/w/1",
+        "battle.unit.coastal_warship/sail/w/5",
+        "battle.unit.ocean_warship/sail/w/2",
+        "battle.unit.coastal_warship/fire/w/0",
+        "battle.unit.ocean_warship/sail/w/3",
+        "battle.unit.coastal_warship/idle/e/0",
+        "battle.unit.ocean_warship/sail/w/4",
+        "battle.unit.transport/idle/e/1",
+        "battle.unit.coastal_warship/fire/w/1",
+        "battle.unit.ocean_warship/sail/w/5",
+        "battle.unit.coastal_warship/fire/e/0",
+        "battle.unit.ocean_warship/sail/w/6",
+        "battle.unit.coastal_warship/fire/e/1",
+        "battle.unit.ocean_warship/idle/e/0",
+        "battle.unit.coastal_warship/fire/w/2",
+        "battle.unit.coastal_warship/fire/w/3",
+        "battle.unit.ocean_warship/fire/w/0",
+        "battle.unit.coastal_warship/fire/e/2",
+        "battle.unit.transport/hit/e/0",
+        "battle.unit.ocean_warship/idle/e/1",
+        "battle.unit.coastal_warship/fire/w/4",
+        "battle.unit.ocean_warship/fire/w/1",
+        "battle.unit.coastal_warship/fire/e/3",
+        "battle.unit.ocean_warship/fire/e/0",
+        "battle.unit.transport/hit/e/1",
+        "battle.unit.transport/idle/w/1",
+        "battle.unit.coastal_warship/fire/w/5",
+        "battle.unit.ocean_warship/fire/w/2",
+        "battle.unit.coastal_warship/fire/e/4",
+        "battle.unit.ocean_warship/fire/e/1",
+        "battle.unit.transport/hit/w/0",
+        "battle.unit.transport/hit/e/2",
+        "battle.unit.coastal_warship/fire/e/5",
+        "battle.unit.ocean_warship/fire/e/2",
+        "battle.unit.transport/hit/w/1",
+        "battle.unit.coastal_warship/fire/w/6",
+        "battle.unit.ocean_warship/fire/w/3",
+        "battle.unit.coastal_warship/fire/w/7",
+        "battle.unit.ocean_warship/fire/w/4",
+        "battle.unit.coastal_warship/fire/e/6",
+        "battle.unit.ocean_warship/fire/e/3",
+        "battle.unit.transport/hit/w/2",
+        "battle.unit.ocean_warship/fire/w/5",
+        "battle.unit.coastal_warship/fire/e/7",
+        "battle.unit.ocean_warship/fire/e/4",
+        "battle.unit.ocean_warship/fire/w/6",
+        "battle.unit.ocean_warship/fire/e/5",
+        "battle.unit.transport/hit/e/3",
+        "battle.unit.ocean_warship/fire/w/7",
+        "battle.unit.coastal_warship/idle/e/1",
+        "battle.unit.ocean_warship/fire/e/6",
+        "battle.unit.transport/fire/e/5",
+        "battle.unit.ocean_warship/fire/e/7",
+        "battle.unit.transport/hit/w/3",
+        "battle.unit.transport/fire/w/6",
+        "battle.unit.transport/fire/w/7"
+      ],
+      "deaths": [],
+      "effects": [
+        "effect.battle_projectile/attack/se/0",
+        "effect.battle_projectile/attack/se/1",
+        "effect.battle_projectile/attack/se/2",
+        "effect.battle_projectile/attack/se/3",
+        "effect.battle_projectile/attack/se/4",
+        "effect.battle_projectile/attack/se/5",
+        "effect.battle_projectile/attack/se/6",
+        "effect.battle_melee/attack/se/0",
+        "effect.battle_projectile/attack/se/7",
+        "effect.battle_melee/attack/se/1",
+        "effect.battle_melee/attack/se/2",
+        "effect.battle_melee/attack/se/3",
+        "effect.battle_melee/attack/se/4",
+        "effect.battle_melee/attack/se/5",
+        "effect.battle_melee/attack/se/6",
+        "effect.battle_melee/attack/se/7"
+      ],
+      "activeFrames": 37,
+      "captured": false,
+      "scene": {
+        "active": true,
+        "battleId": "battle.19",
+        "revision": 3,
+        "round": 3,
+        "domain": "naval",
+        "fortification": 0,
+        "eventCount": 13,
+        "eventTotal": 13,
+        "completed": true,
+        "reducedMotion": false,
+        "elapsedMs": 2600,
+        "paused": false,
+        "formations": [
+          {
+            "id": "formation.13",
+            "strength": 4,
+            "morale": 21,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.14",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.15",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.16",
+            "strength": 8,
+            "morale": 25,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.17",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.18",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "defender"
+          }
+        ],
+        "width": 1440,
+        "height": 986,
+        "actorScale": 1,
+        "actors": [
+          {
+            "id": "formation.13",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 659,
+            "y": 204,
+            "bounds": {
+              "x": 600.58,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.14",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 659,
+            "y": 359,
+            "bounds": {
+              "x": 600.58,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.15",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 659,
+            "y": 514,
+            "bounds": {
+              "x": 600.58,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.16",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 795,
+            "y": 204,
+            "bounds": {
+              "x": 737.14,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.17",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 795,
+            "y": 359,
+            "bounds": {
+              "x": 737.14,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.18",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 795,
+            "y": 514,
+            "bounds": {
+              "x": 737.14,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          }
+        ],
+        "pooledSoldiers": 6,
+        "soldiers": [
+          {
+            "id": "formation.13.soldier.0",
+            "formationId": "formation.13",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/e/0",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 658.58,
+            "y": 203.5
+          },
+          {
+            "id": "formation.14.soldier.0",
+            "formationId": "formation.14",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/e/3",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 658.58,
+            "y": 358.5
+          },
+          {
+            "id": "formation.15.soldier.0",
+            "formationId": "formation.15",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/e/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 658.58,
+            "y": 513.5
+          },
+          {
+            "id": "formation.16.soldier.0",
+            "formationId": "formation.16",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/w/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 795.14,
+            "y": 203.5
+          },
+          {
+            "id": "formation.17.soldier.0",
+            "formationId": "formation.17",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/w/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 795.14,
+            "y": 358.5
+          },
+          {
+            "id": "formation.18.soldier.0",
+            "formationId": "formation.18",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/w/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 795.14,
+            "y": 513.5
+          }
+        ],
+        "effects": [],
+        "pooledActors": 6,
+        "pooledEffects": 6,
+        "missingArt": []
+      },
+      "finished": {
+        "active": true,
+        "battleId": "battle.19",
+        "revision": 3,
+        "round": 3,
+        "domain": "naval",
+        "fortification": 0,
+        "eventCount": 13,
+        "eventTotal": 13,
+        "completed": true,
+        "reducedMotion": false,
+        "elapsedMs": 2600,
+        "paused": false,
+        "formations": [
+          {
+            "id": "formation.13",
+            "strength": 4,
+            "morale": 21,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.14",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.15",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.16",
+            "strength": 8,
+            "morale": 25,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.17",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.18",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "defender"
+          }
+        ],
+        "width": 1440,
+        "height": 986,
+        "actorScale": 1,
+        "actors": [
+          {
+            "id": "formation.13",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 659,
+            "y": 204,
+            "bounds": {
+              "x": 600.58,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.14",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 659,
+            "y": 359,
+            "bounds": {
+              "x": 600.58,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.15",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 659,
+            "y": 514,
+            "bounds": {
+              "x": 600.58,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.16",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 795,
+            "y": 204,
+            "bounds": {
+              "x": 737.14,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.17",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 795,
+            "y": 359,
+            "bounds": {
+              "x": 737.14,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.18",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 795,
+            "y": 514,
+            "bounds": {
+              "x": 737.14,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          }
+        ],
+        "pooledSoldiers": 6,
+        "soldiers": [
+          {
+            "id": "formation.13.soldier.0",
+            "formationId": "formation.13",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/e/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 658.58,
+            "y": 203.5
+          },
+          {
+            "id": "formation.14.soldier.0",
+            "formationId": "formation.14",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/e/0",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 658.58,
+            "y": 358.5
+          },
+          {
+            "id": "formation.15.soldier.0",
+            "formationId": "formation.15",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/e/3",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 658.58,
+            "y": 513.5
+          },
+          {
+            "id": "formation.16.soldier.0",
+            "formationId": "formation.16",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/w/3",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 795.14,
+            "y": 203.5
+          },
+          {
+            "id": "formation.17.soldier.0",
+            "formationId": "formation.17",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/w/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 795.14,
+            "y": 358.5
+          },
+          {
+            "id": "formation.18.soldier.0",
+            "formationId": "formation.18",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/w/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 795.14,
+            "y": 513.5
+          }
+        ],
+        "effects": [],
+        "pooledActors": 6,
+        "pooledEffects": 6,
+        "missingArt": []
+      }
+    },
+    {
+      "round": 4,
+      "states": [
+        "sail",
+        "idle",
+        "fire",
+        "hit",
+        "sink"
+      ],
+      "frames": [
+        "battle.unit.transport/sail/e/1",
+        "battle.unit.coastal_warship/idle/e/1",
+        "battle.unit.ocean_warship/idle/e/0",
+        "battle.unit.transport/idle/w/3",
+        "battle.unit.coastal_warship/idle/w/3",
+        "battle.unit.ocean_warship/idle/w/2",
+        "battle.unit.transport/sail/e/2",
+        "battle.unit.transport/idle/w/0",
+        "battle.unit.transport/sail/e/3",
+        "battle.unit.coastal_warship/sail/e/0",
+        "battle.unit.ocean_warship/idle/w/3",
+        "battle.unit.transport/sail/e/4",
+        "battle.unit.coastal_warship/sail/e/1",
+        "battle.unit.ocean_warship/idle/e/1",
+        "battle.unit.transport/sail/e/5",
+        "battle.unit.coastal_warship/sail/e/2",
+        "battle.unit.coastal_warship/idle/w/0",
+        "battle.unit.transport/sail/e/6",
+        "battle.unit.coastal_warship/sail/e/3",
+        "battle.unit.ocean_warship/sail/e/0",
+        "battle.unit.transport/idle/w/1",
+        "battle.unit.transport/sail/e/7",
+        "battle.unit.coastal_warship/sail/e/4",
+        "battle.unit.ocean_warship/sail/e/1",
+        "battle.unit.ocean_warship/idle/w/0",
+        "battle.unit.transport/idle/e/3",
+        "battle.unit.coastal_warship/sail/e/5",
+        "battle.unit.ocean_warship/sail/e/2",
+        "battle.unit.coastal_warship/sail/e/7",
+        "battle.unit.ocean_warship/sail/e/4",
+        "battle.unit.transport/sail/w/1",
+        "battle.unit.coastal_warship/idle/w/1",
+        "battle.unit.transport/idle/e/0",
+        "battle.unit.coastal_warship/idle/e/3",
+        "battle.unit.ocean_warship/sail/e/5",
+        "battle.unit.transport/sail/w/2",
+        "battle.unit.ocean_warship/idle/w/1",
+        "battle.unit.ocean_warship/sail/e/6",
+        "battle.unit.transport/sail/w/3",
+        "battle.unit.coastal_warship/sail/w/0",
+        "battle.unit.coastal_warship/idle/e/0",
+        "battle.unit.ocean_warship/idle/e/3",
+        "battle.unit.transport/sail/w/5",
+        "battle.unit.coastal_warship/sail/w/2",
+        "battle.unit.transport/idle/e/1",
+        "battle.unit.transport/sail/w/6",
+        "battle.unit.coastal_warship/sail/w/3",
+        "battle.unit.ocean_warship/sail/w/0",
+        "battle.unit.transport/sail/w/7",
+        "battle.unit.coastal_warship/sail/w/4",
+        "battle.unit.ocean_warship/sail/w/1",
+        "battle.unit.coastal_warship/sail/w/5",
+        "battle.unit.ocean_warship/sail/w/2",
+        "battle.unit.coastal_warship/fire/w/0",
+        "battle.unit.ocean_warship/sail/w/3",
+        "battle.unit.transport/idle/e/2",
+        "battle.unit.ocean_warship/sail/w/4",
+        "battle.unit.coastal_warship/fire/w/1",
+        "battle.unit.ocean_warship/sail/w/5",
+        "battle.unit.coastal_warship/fire/e/0",
+        "battle.unit.ocean_warship/sail/w/6",
+        "battle.unit.coastal_warship/fire/w/2",
+        "battle.unit.ocean_warship/sail/w/7",
+        "battle.unit.coastal_warship/fire/e/1",
+        "battle.unit.ocean_warship/idle/e/2",
+        "battle.unit.coastal_warship/fire/w/3",
+        "battle.unit.ocean_warship/fire/w/0",
+        "battle.unit.coastal_warship/fire/e/2",
+        "battle.unit.transport/hit/e/0",
+        "battle.unit.transport/idle/w/2",
+        "battle.unit.coastal_warship/fire/w/4",
+        "battle.unit.ocean_warship/fire/w/1",
+        "battle.unit.coastal_warship/fire/e/3",
+        "battle.unit.transport/hit/e/1",
+        "battle.unit.coastal_warship/fire/w/5",
+        "battle.unit.ocean_warship/fire/w/2",
+        "battle.unit.coastal_warship/fire/e/4",
+        "battle.unit.transport/hit/w/0",
+        "battle.unit.transport/hit/e/2",
+        "battle.unit.ocean_warship/fire/e/0",
+        "battle.unit.coastal_warship/fire/w/6",
+        "battle.unit.ocean_warship/fire/w/3",
+        "battle.unit.coastal_warship/fire/e/5",
+        "battle.unit.transport/hit/w/1",
+        "battle.unit.transport/sink/e/0",
+        "battle.unit.ocean_warship/fire/e/1",
+        "battle.unit.coastal_warship/fire/w/7",
+        "battle.unit.ocean_warship/fire/w/4",
+        "battle.unit.transport/sink/e/1",
+        "battle.unit.coastal_warship/fire/e/6",
+        "battle.unit.ocean_warship/fire/e/2",
+        "battle.unit.transport/hit/w/2",
+        "battle.unit.ocean_warship/fire/w/5",
+        "battle.unit.coastal_warship/fire/e/7",
+        "battle.unit.transport/hit/w/3",
+        "battle.unit.transport/sink/e/2",
+        "battle.unit.ocean_warship/fire/e/3",
+        "battle.unit.ocean_warship/fire/w/6",
+        "battle.unit.coastal_warship/idle/e/2",
+        "battle.unit.transport/fire/w/2",
+        "battle.unit.transport/sink/e/3",
+        "battle.unit.ocean_warship/fire/e/4",
+        "battle.unit.ocean_warship/fire/w/7"
+      ],
+      "deaths": [
+        "formation.13.soldier.0"
+      ],
+      "effects": [
+        "effect.battle_projectile/attack/se/0",
+        "effect.battle_projectile/attack/se/1",
+        "effect.battle_projectile/attack/se/2",
+        "effect.battle_projectile/attack/se/3",
+        "effect.battle_projectile/attack/se/4",
+        "effect.battle_projectile/attack/se/5",
+        "effect.battle_projectile/attack/se/6",
+        "effect.battle_projectile/attack/se/7",
+        "effect.battle_melee/attack/se/0",
+        "effect.battle_melee/attack/se/1",
+        "effect.battle_melee/attack/se/2"
+      ],
+      "activeFrames": 25,
+      "captured": true,
+      "scene": {
+        "active": true,
+        "battleId": "battle.19",
+        "revision": 4,
+        "round": 4,
+        "domain": "naval",
+        "fortification": 0,
+        "eventCount": 12,
+        "eventTotal": 13,
+        "completed": false,
+        "reducedMotion": false,
+        "elapsedMs": 2099.7999999999993,
+        "paused": false,
+        "formations": [
+          {
+            "id": "formation.13",
+            "strength": 0,
+            "morale": 9,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.14",
+            "strength": 20,
+            "morale": 67,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.15",
+            "strength": 20,
+            "morale": 77,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.16",
+            "strength": 3,
+            "morale": 12,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.17",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.18",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "defender"
+          }
+        ],
+        "width": 1440,
+        "height": 986,
+        "actorScale": 1,
+        "actors": [
+          {
+            "id": "formation.13",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 665,
+            "y": 204,
+            "bounds": {
+              "x": 607.44,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.14",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 665,
+            "y": 359,
+            "bounds": {
+              "x": 607.44,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.15",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 665,
+            "y": 514,
+            "bounds": {
+              "x": 607.44,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.16",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 788,
+            "y": 204,
+            "bounds": {
+              "x": 730.28,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.17",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 788,
+            "y": 359,
+            "bounds": {
+              "x": 730.28,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.18",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 788,
+            "y": 514,
+            "bounds": {
+              "x": 730.28,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          }
+        ],
+        "pooledSoldiers": 6,
+        "soldiers": [
+          {
+            "id": "formation.13.soldier.0",
+            "formationId": "formation.13",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/sink/e/3",
+            "alive": false,
+            "hull": true,
+            "state": "sink",
+            "direction": "e",
+            "scale": 1,
+            "x": 665.44,
+            "y": 203.5
+          },
+          {
+            "id": "formation.14.soldier.0",
+            "formationId": "formation.14",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/e/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 665.44,
+            "y": 358.5
+          },
+          {
+            "id": "formation.15.soldier.0",
+            "formationId": "formation.15",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/fire/e/4",
+            "alive": true,
+            "hull": true,
+            "state": "fire",
+            "direction": "e",
+            "scale": 1,
+            "x": 665.44,
+            "y": 513.5
+          },
+          {
+            "id": "formation.16.soldier.0",
+            "formationId": "formation.16",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/hit/w/0",
+            "alive": true,
+            "hull": true,
+            "state": "hit",
+            "direction": "w",
+            "scale": 1,
+            "x": 788.28,
+            "y": 203.5
+          },
+          {
+            "id": "formation.17.soldier.0",
+            "formationId": "formation.17",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/w/0",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 788.28,
+            "y": 358.5
+          },
+          {
+            "id": "formation.18.soldier.0",
+            "formationId": "formation.18",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/fire/w/7",
+            "alive": true,
+            "hull": true,
+            "state": "fire",
+            "direction": "w",
+            "scale": 1,
+            "x": 788.28,
+            "y": 513.5
+          }
+        ],
+        "effects": [
+          {
+            "assetId": "effect.battle_projectile",
+            "frameId": "effect.battle_projectile/attack/se/7",
+            "sourceId": "formation.18.soldier.0",
+            "targetId": "formation.13.soldier.0"
+          },
+          {
+            "assetId": "effect.battle_projectile",
+            "frameId": "effect.battle_projectile/attack/se/4",
+            "sourceId": "formation.15.soldier.0",
+            "targetId": "formation.16.soldier.0"
+          },
+          {
+            "assetId": "effect.battle_melee",
+            "frameId": "effect.battle_melee/attack/se/2",
+            "sourceId": "formation.16.soldier.0",
+            "targetId": "formation.14.soldier.0"
+          }
+        ],
+        "pooledActors": 6,
+        "pooledEffects": 6,
+        "missingArt": []
+      },
+      "finished": {
+        "active": true,
+        "battleId": "battle.19",
+        "revision": 4,
+        "round": 4,
+        "domain": "naval",
+        "fortification": 0,
+        "eventCount": 13,
+        "eventTotal": 13,
+        "completed": true,
+        "reducedMotion": false,
+        "elapsedMs": 2600,
+        "paused": true,
+        "formations": [
+          {
+            "id": "formation.13",
+            "strength": 0,
+            "morale": 9,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.14",
+            "strength": 19,
+            "morale": 63,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.15",
+            "strength": 20,
+            "morale": 77,
+            "ward": 0,
+            "side": "attacker"
+          },
+          {
+            "id": "formation.16",
+            "strength": 3,
+            "morale": 12,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.17",
+            "strength": 20,
+            "morale": 75,
+            "ward": 0,
+            "side": "defender"
+          },
+          {
+            "id": "formation.18",
+            "strength": 20,
+            "morale": 85,
+            "ward": 0,
+            "side": "defender"
+          }
+        ],
+        "width": 1440,
+        "height": 986,
+        "actorScale": 1,
+        "actors": [
+          {
+            "id": "formation.13",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 665,
+            "y": 204,
+            "bounds": {
+              "x": 607.44,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.14",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 665,
+            "y": 359,
+            "bounds": {
+              "x": 607.44,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.15",
+            "assetId": "ui.banner.ashen_compact",
+            "frameId": "ui.banner.ashen_compact/idle/se/0",
+            "x": 665,
+            "y": 514,
+            "bounds": {
+              "x": 607.44,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.16",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 788,
+            "y": 204,
+            "bounds": {
+              "x": 730.28,
+              "y": 113.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.17",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 788,
+            "y": 359,
+            "bounds": {
+              "x": 730.28,
+              "y": 268.5,
+              "width": 116,
+              "height": 147
+            }
+          },
+          {
+            "id": "formation.18",
+            "assetId": "ui.banner.reedbound_council",
+            "frameId": "ui.banner.reedbound_council/idle/se/0",
+            "x": 788,
+            "y": 514,
+            "bounds": {
+              "x": 730.28,
+              "y": 423.5,
+              "width": 116,
+              "height": 147
+            }
+          }
+        ],
+        "pooledSoldiers": 6,
+        "soldiers": [
+          {
+            "id": "formation.13.soldier.0",
+            "formationId": "formation.13",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/sink/e/7",
+            "alive": false,
+            "hull": true,
+            "state": "sink",
+            "direction": "e",
+            "scale": 1,
+            "x": 665.44,
+            "y": 203.5
+          },
+          {
+            "id": "formation.14.soldier.0",
+            "formationId": "formation.14",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/e/2",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 665.44,
+            "y": 358.5
+          },
+          {
+            "id": "formation.15.soldier.0",
+            "formationId": "formation.15",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/e/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "e",
+            "scale": 1,
+            "x": 665.44,
+            "y": 513.5
+          },
+          {
+            "id": "formation.16.soldier.0",
+            "formationId": "formation.16",
+            "assetId": "battle.unit.transport",
+            "frameId": "battle.unit.transport/idle/w/1",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 788.28,
+            "y": 203.5
+          },
+          {
+            "id": "formation.17.soldier.0",
+            "formationId": "formation.17",
+            "assetId": "battle.unit.coastal_warship",
+            "frameId": "battle.unit.coastal_warship/idle/w/0",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 788.28,
+            "y": 358.5
+          },
+          {
+            "id": "formation.18.soldier.0",
+            "formationId": "formation.18",
+            "assetId": "battle.unit.ocean_warship",
+            "frameId": "battle.unit.ocean_warship/idle/w/0",
+            "alive": true,
+            "hull": true,
+            "state": "idle",
+            "direction": "w",
+            "scale": 1,
+            "x": 788.28,
+            "y": 513.5
+          }
+        ],
+        "effects": [],
+        "pooledActors": 6,
+        "pooledEffects": 6,
+        "missingArt": []
+      }
+    }
+  ],
+  "errors": []
+}

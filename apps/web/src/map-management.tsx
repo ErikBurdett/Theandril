@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react';
-import { BUILDINGS, UNITS } from '@theandril/content';
+import { BUILDINGS, UNITS, RESOURCES, IMPROVEMENTS } from '@theandril/content';
 import { BIOME_NAMES, WATER_DEPTH_NAMES, isLake, neighbors, riverSize } from '@theandril/mapgen';
 import type { GameCommand, Observation } from '@theandril/sim';
 import type { WorldRenderer } from '@theandril/render';
 import { ArmyComposition } from './army';
 import { ArmyCharacters, CharacterAppointments } from './characters';
-import { FactionArt } from './faction-art';
+import { FactionArt, MapArt } from './faction-art';
 import { SettlementLand } from './land';
 import { MovementOrders, type MapMovement, type MapSelection } from './movement';
 import { NavalTransport, SettlementProduction } from './naval';
@@ -32,6 +32,7 @@ export function managementPanes({ view, selection, movement, busy, name, setName
   const realmName = realm?.name ?? view.factionId;
   const factionId = view.factionId;
   const cell = selection.cell === undefined ? undefined : renderer?.inspect(selection.cell);
+  const resource = RESOURCES.find(item => item.id === cell?.resourceId);
   const occupants = spectator && selection.cell !== undefined ? renderer?.inspectEntities(selection.cell) ?? [] : [];
   const chooseArmy = (armyId: string) => {
     const next = view.armies.find(item => item.id === armyId && item.factionId === factionId);
@@ -42,7 +43,8 @@ export function managementPanes({ view, selection, movement, busy, name, setName
   const founding = army?.canFound && <form className="found-form" onSubmit={event => { event.preventDefault(); issue({ type: 'found', factionId, armyId: army.id, name }); }}>
     <label>Settlement name<input value={name} maxLength={40} required onChange={event => setName(event.target.value)}/></label>
     <p className="field-help">One caravan formation becomes a settlement here. Any escorts remain, spend their remaining movement, and pause their travel order.</p>
-    <button className="primary wide" type="submit" disabled={busy}>Found settlement</button>
+    {view.growth && <p className="field-help">Founding supplies: {view.growth.founding.coinCost} coin · realm upkeep rises by {view.growth.founding.additionalUpkeep} coin / turn. {view.growth.founding.blocker}</p>}
+    <button className="primary wide" type="submit" disabled={busy || view.growth?.founding.canAfford === false}>Found settlement</button>
   </form>;
   const routes = army && <MovementOrders movement={movement} view={view} issue={issue} locate={target => select({ ...selection, cell: target }, true)}/>;
   const composition = army && <ArmyComposition key={army.id} army={army} view={view} busy={busy} issue={issue} inspectArmy={target => select({ armyId: target.id, cell: target.cell })}/>;
@@ -69,6 +71,7 @@ export function managementPanes({ view, selection, movement, busy, name, setName
   const location = <>
     <RuinInspection view={view} cell={selection.cell}/>
     {selection.cell !== undefined && <div className="hex-inspector"><span className="eyebrow">Selected hex {selection.cell}</span><p>{cell ? `${isLake(cell.hydrology ?? 0) ? 'Freshwater lake' : cell.waterDepth ? WATER_DEPTH_NAMES[cell.waterDepth] : BIOME_NAMES[cell.biome] ?? 'Unknown biome'} · ${terrainNames[cell.terrain]} · fertility ${cell.fertility} · ${spectator ? 'spectator view' : cell.visible ? 'in sight' : 'last explored'}` : 'Beyond known maps. Send a wayfinder or fleet to chart this region.'}</p>
+      {resource && <div className="resource-works"><MapArt contentId={resource.id} label={resource.name} compact/><p><strong>{resource.name}</strong> · {resource.description}<br/>Work with {IMPROVEMENTS.find(item => item.id === resource.improvementId)?.name} to gather {resource.extraction} / turn.</p></div>}
       {cell && riverSize(cell.hydrology ?? 0) > 0 && <p>River · {['', 'headwater', 'tributary', 'main river'][riverSize(cell.hydrology ?? 0)]}</p>}
       {Boolean(cell?.roadMask) && <p>Completed road connections · {Array.from({ length: 6 }, (_, bit) => Boolean((cell?.roadMask ?? 0) & (1 << bit))).filter(Boolean).length} known directions</p>}
       {occupants.length > 0 && <section aria-label="Spectator map occupants"><h3>Map occupants</h3><ul>{occupants.slice(0, 12).map(entity => <li key={entity.id}>{entity.name} · {entity.kind}{entity.faction && ` · ${entity.faction}`}</li>)}</ul>{occupants.length > 12 && <p>{occupants.length - 12} more map occupants share this hex.</p>}<p>Map identities only. Private rosters, officer missions and orders are not revealed.</p></section>}

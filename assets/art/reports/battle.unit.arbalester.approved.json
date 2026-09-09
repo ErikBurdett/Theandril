@@ -1,0 +1,1118 @@
+{
+  "schemaVersion": 1,
+  "assetId": "battle.unit.arbalester",
+  "inputHash": "10467433892299ceceb67d6c48fb234721b752a414a0f392bff19057a8236cd5",
+  "specificationHash": "8dfad12353530fc2015b202cc8f73515d36e6fda95143104757845b2769bb26a",
+  "score": 96,
+  "passed": true,
+  "errors": [],
+  "warnings": [
+    "attack/e: repeated frame images require intentional-hold review",
+    "attack/w: repeated frame images require intentional-hold review"
+  ],
+  "manualChecks": [
+    "Originality, licensing and provenance review",
+    "Silhouette and role readability at native and zoomed scale",
+    "Anatomy, equipment continuity, lighting and material consistency",
+    "idle/e: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "idle/w: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "walk/e: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "walk/w: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "attack/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "attack/w: review temporal flicker, direction, equipment, visual identity and end pose",
+    "hit/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "hit/w: review temporal flicker, direction, equipment, visual identity and end pose",
+    "death/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "death/w: review temporal flicker, direction, equipment, visual identity and end pose"
+  ],
+  "metrics": [
+    {
+      "id": "battle.unit.arbalester/idle/e/0",
+      "hash": "4bd8db401ffff0988a06f0ec9bc6491f1741363da4bb18933a9471f926440f14",
+      "colors": 35,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 386,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/idle/e/1",
+      "hash": "004c8549e7a0602e53feed24d9a0feb03ee569b917a2c5932ade91cdb9302927",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 388,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/idle/e/2",
+      "hash": "3efc116ad9ddac1684ab68ca14a1f54587a1571dcdf684b05f8cfd7cb9e8a8ef",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 384,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/idle/e/3",
+      "hash": "e8d2566bbdfb9d841007371e8bf101157ad401101d352ef3ac474c99743152a0",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 382,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/e/0",
+      "hash": "92e8ccd27c1d055a83a770eb0edf05e0c6eb2f584c8b3148c8bf84736d2a0710",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 385,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 17,
+        "w": 18,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/e/1",
+      "hash": "c031beab43ba88320f8a02cbbe60e4906656d1a7183cba7f4957e808fcabe1cf",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 361,
+      "padding": 4,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/e/2",
+      "hash": "e35ca31ee65ef36a6ba4ded51faef91e72cd5fdf42201d44f298f07cd3a750e2",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 356,
+      "padding": 4,
+      "bounds": {
+        "x": 25,
+        "y": 15,
+        "w": 17,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/e/3",
+      "hash": "4e917d30b39b11c7c675421be11632fd580f67d5920cb98c0f2c1854d9604766",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 347,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/e/4",
+      "hash": "1e922930a0fd0dd7ff4e4cf0d2ad2fd6528a0661a02136e9ef1aced7c1b483da",
+      "colors": 35,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 362,
+      "padding": 8,
+      "bounds": {
+        "x": 25,
+        "y": 17,
+        "w": 18,
+        "h": 39
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/e/5",
+      "hash": "2750a81ce1ea9190c0c4975e3c1d9bd50e3422e790806b121f30015a5db19f47",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 400,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/e/6",
+      "hash": "bd911509d80e64a979ef01d8da4083a3631e6d011a7e6998da8cd2067864da42",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 416,
+      "padding": 5,
+      "bounds": {
+        "x": 24,
+        "y": 15,
+        "w": 18,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/e/7",
+      "hash": "49d05a874cd33883c738e2e75db5362c45a155da1343772fb3f62e2fc0eb6984",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 406,
+      "padding": 7,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/e/0",
+      "hash": "21a45b9e28d2639a68336df5a217927d5115c42cf791a8b1076c571025977f0f",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 379,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/e/1",
+      "hash": "e5e2cbc2872fa39778611915cd48bf57559ca4dc3d536128ac817cb8f8c89a63",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 383,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/e/2",
+      "hash": "1a488395011f492e17bbd547cc94e84549933d917412fec3ffd32493ebb70656",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 390,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 19,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/e/3",
+      "hash": "6eb37879ff368271bb285b7908923b3d917cd9bfa4acd63b6dcafe1e6e2179b7",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 368,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 19,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/e/4",
+      "hash": "118630b143ecbcc9d8c559f5a457da05b32ab0007085546e7305fc886c191d6b",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 401,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 19,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/e/5",
+      "hash": "6eb3107d4ca1610dbdb6c79c8e6e6fe1efde5c974cd25a14ec78a3807e3d0c88",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 391,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/e/6",
+      "hash": "77c064941ff20479d70893a79e3a46406053dcec6b5a4ba3b343b4ae72ba348b",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 383,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/e/7",
+      "hash": "21a45b9e28d2639a68336df5a217927d5115c42cf791a8b1076c571025977f0f",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 379,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/hit/e/0",
+      "hash": "87c00e2313fc2b86418cf9e6ac2ec631d01812c19372a8464f1dcbd11e06803e",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 384,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/hit/e/1",
+      "hash": "b7a34eec2b2be687f940d38aa77973ab735f1a3a481db337e7d70d27a01bf0b1",
+      "colors": 35,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 399,
+      "padding": 6,
+      "bounds": {
+        "x": 23,
+        "y": 15,
+        "w": 17,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/hit/e/2",
+      "hash": "ff044a70bb0d236ed34e2764bc0d32efe5ac6c51e075758b71b10fc13002f576",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 397,
+      "padding": 6,
+      "bounds": {
+        "x": 24,
+        "y": 15,
+        "w": 17,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/hit/e/3",
+      "hash": "76e10b94bb439d3568cd3c92d935ac1b9d2ce4ffa7e577d7c00506dc8742aa5b",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 389,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/e/0",
+      "hash": "87c00e2313fc2b86418cf9e6ac2ec631d01812c19372a8464f1dcbd11e06803e",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 384,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/e/1",
+      "hash": "041087f26455ccf5749e353069e76633b3625d37b0da64a40963376dd9993cc5",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 391,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 17,
+        "w": 17,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/e/2",
+      "hash": "9bf0bee03ff9147dedd50ca52ffdb464b4d419300c90ddbdff5e88701c6911af",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 387,
+      "padding": 7,
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "w": 20,
+        "h": 38
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/e/3",
+      "hash": "26ce9fc8c17a64768c08ac8be3776937b0591a518f96936096a758664aa4b504",
+      "colors": 36,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 393,
+      "padding": 7,
+      "bounds": {
+        "x": 17,
+        "y": 21,
+        "w": 22,
+        "h": 36
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/e/4",
+      "hash": "ddae86f7c8c8894d099d28cd409da5e962e24310cfd9156ce0f1a3e88bf9c756",
+      "colors": 36,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 400,
+      "padding": 7,
+      "bounds": {
+        "x": 15,
+        "y": 24,
+        "w": 23,
+        "h": 33
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/e/5",
+      "hash": "b1258052cadac88729eca32cee7b5b003a7856357d1ae88061caeb8b1502ea47",
+      "colors": 35,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 402,
+      "padding": 7,
+      "bounds": {
+        "x": 12,
+        "y": 28,
+        "w": 26,
+        "h": 29
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/e/6",
+      "hash": "ca12365525a9ba12167df4f8bc780a68a38c943b5eed758e6c9f3661caf0a587",
+      "colors": 35,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 399,
+      "padding": 4,
+      "bounds": {
+        "x": 9,
+        "y": 32,
+        "w": 29,
+        "h": 28
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/e/7",
+      "hash": "7f7155d6515f1c739c39c3191ada4071c8e81a7ad8d5a4d96da9e43ff6e6d0e6",
+      "colors": 36,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 361,
+      "padding": 4,
+      "bounds": {
+        "x": 7,
+        "y": 35,
+        "w": 32,
+        "h": 25
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/idle/w/0",
+      "hash": "4c99d8b62c9bfcb3accf2ff8b0003dd34cc5a77d5a5469a53152c2ffffd24ac2",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 424,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/idle/w/1",
+      "hash": "ace0d1d3c6558221e954ef35c5b86ce9be2052ef5276583667e2f4488b8eb0d4",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 426,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/idle/w/2",
+      "hash": "5f25385cb1bf6365d8efb80e82fdd6f3262cc2dda71c8647eeb683bb7c67cd7f",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 425,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/idle/w/3",
+      "hash": "32bc6cd94c276b099102d32eccccb60beb93633401f65520fa639fc7c35aed7c",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 425,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/w/0",
+      "hash": "eb54be7cbf4f474318a6808fd7393657a0612bb76363278c29e9e2b58137cb3c",
+      "colors": 37,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 414,
+      "padding": 8,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 40
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/w/1",
+      "hash": "24b1601feb068452f087a3a5ec2036eb29e5324515e71578d8eb8e016dc83ed7",
+      "colors": 36,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 448,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/w/2",
+      "hash": "1e209bed87bb38a3d53f9a26c681e5a936b832b712c9936335684df9a48f3c1e",
+      "colors": 35,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 462,
+      "padding": 5,
+      "bounds": {
+        "x": 13,
+        "y": 15,
+        "w": 29,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/w/3",
+      "hash": "545b53645ec379d86cccfbaa10f91e78acd66679d9bb6869165ecd9a786b8edb",
+      "colors": 36,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 442,
+      "padding": 7,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/w/4",
+      "hash": "4679ec3449b6fba0bce8b6856ba1b53232f825b38c6c13b80831564ee826e325",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 432,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/w/5",
+      "hash": "c30b9b6674bf321ae2e4d5845fb404707f3a80c8bbc21f900f4173cca01d4ec4",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 403,
+      "padding": 4,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 27,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/w/6",
+      "hash": "13de5f1d6d3ec24be6b04fef0b3cd962ddd6733bb47a1dbafbed68277ede917c",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 405,
+      "padding": 4,
+      "bounds": {
+        "x": 13,
+        "y": 15,
+        "w": 27,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/walk/w/7",
+      "hash": "26167f34fd2cebb73444e8bea361417c8b45dee3af2d6d6c2fdae6e2659b7703",
+      "colors": 36,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 391,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 27,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/w/0",
+      "hash": "45b6e7cf2a1718298872f749937915227bfb1c2f0eef981dac16223c62d83e32",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 406,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/w/1",
+      "hash": "a97d43315fa994036b3b7a53a632f22c8028198704b1e69cc0e27b98188f949f",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 408,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/w/2",
+      "hash": "3f51fedb440df7b51db4c6855a4375df3d4daa738e8c05955a5c8c2bce057df9",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 399,
+      "padding": 5,
+      "bounds": {
+        "x": 11,
+        "y": 16,
+        "w": 27,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/w/3",
+      "hash": "8a6eb39d56fb93c71c8f7661355b843317f1ba7c7c14b2b664482c8e9d6b7301",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 389,
+      "padding": 5,
+      "bounds": {
+        "x": 11,
+        "y": 16,
+        "w": 26,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/w/4",
+      "hash": "a0271325700d2c9e97f6dabe541520d7bdddf911fa9341fe47e8914e93e59b90",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 398,
+      "padding": 5,
+      "bounds": {
+        "x": 11,
+        "y": 16,
+        "w": 27,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/w/5",
+      "hash": "d3b6830f304f50dfdad40f68046f428fabf6b8029e7206da583d58a8db18d598",
+      "colors": 35,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 408,
+      "padding": 5,
+      "bounds": {
+        "x": 12,
+        "y": 16,
+        "w": 26,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/w/6",
+      "hash": "788fb8109d08e3fe3fb0759e9ed51dac5f91f2eb9e8b1c423019653df98a9522",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 403,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/attack/w/7",
+      "hash": "45b6e7cf2a1718298872f749937915227bfb1c2f0eef981dac16223c62d83e32",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 406,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/hit/w/0",
+      "hash": "1a6f73abe408afa8312d0f959b7098155f21b2d2fdbbec487953845e2100c4e4",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 423,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/hit/w/1",
+      "hash": "8d5d3d4f5573b3a0c88b20ac0a46a4dc942e4508d2662b1c4366fd8620aaf721",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 444,
+      "padding": 6,
+      "bounds": {
+        "x": 15,
+        "y": 14,
+        "w": 28,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/hit/w/2",
+      "hash": "9f0c62bdc886fdec3f0234f1987a60efd103c7a6663fd1961347a0e82bf88230",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 437,
+      "padding": 6,
+      "bounds": {
+        "x": 14,
+        "y": 15,
+        "w": 28,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/hit/w/3",
+      "hash": "8386d9e04d98f58034332905af77c5be06a1f7ad322da691f46d528cffa8146d",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 430,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/w/0",
+      "hash": "1a6f73abe408afa8312d0f959b7098155f21b2d2fdbbec487953845e2100c4e4",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 423,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/w/1",
+      "hash": "bd10c62597354c4c86f26d6798d5a4cbc412132bba87c7a9302fb649fc18de92",
+      "colors": 36,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 442,
+      "padding": 6,
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "w": 25,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/w/2",
+      "hash": "0e46eddd51409bd4fb5307ff96d1d673fa1786cf625ba74818850dd07ea245ae",
+      "colors": 36,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 440,
+      "padding": 7,
+      "bounds": {
+        "x": 20,
+        "y": 18,
+        "w": 24,
+        "h": 39
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/w/3",
+      "hash": "ab0b1b247249618ba51486a0d1a1de02d9352f79ebb36a398f00d919a1e4b7f4",
+      "colors": 39,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 426,
+      "padding": 7,
+      "bounds": {
+        "x": 23,
+        "y": 21,
+        "w": 23,
+        "h": 36
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/w/4",
+      "hash": "98cb5018de44138a8ea62e2fe0de7dc6a33ca3d25b87cdc4112be5d276325d72",
+      "colors": 37,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 419,
+      "padding": 7,
+      "bounds": {
+        "x": 24,
+        "y": 24,
+        "w": 24,
+        "h": 33
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/w/5",
+      "hash": "aadd0d2e519381880f80ff15815d5596939916d7ef63428a8174989ac62f6a64",
+      "colors": 39,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 403,
+      "padding": 7,
+      "bounds": {
+        "x": 25,
+        "y": 28,
+        "w": 25,
+        "h": 29
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/w/6",
+      "hash": "4b0bc91d5892bb517eeec129ca36b9fc995207726a78010fadd3bab961abebc3",
+      "colors": 35,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 398,
+      "padding": 4,
+      "bounds": {
+        "x": 25,
+        "y": 32,
+        "w": 28,
+        "h": 28
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.arbalester/death/w/7",
+      "hash": "238c775860776b24cdd2268e334e214ae96cbe0d078b9c02093583adc9a89a46",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 370,
+      "padding": 4,
+      "bounds": {
+        "x": 24,
+        "y": 34,
+        "w": 31,
+        "h": 26
+      },
+      "logicalGridErrors": 0
+    }
+  ]
+}

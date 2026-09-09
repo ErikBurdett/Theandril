@@ -23,7 +23,7 @@ function authoredTowns(count: number): GameState {
 }
 
 function withoutDetails(view: Observation): Observation {
-  return { ...view, land: { ...view.land, settlements: view.land.settlements.map(town => ({ ...town, cells: [] })) } };
+  return { ...view, land: { ...view.land, settlements: view.land.settlements.map(({ cellWindow: _cellWindow, ...town }) => ({ ...town, cells: [] })) } };
 }
 
 describe('shared AI land observation and planning window', () => {

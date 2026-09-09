@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { FACTIONS } from '../../content/src/index';
-import { FACTION_ART_FAMILIES, FACTION_ART_IDS, FACTION_ART_ROLES, factionArtId } from '@theandril/art-pipeline/runtime';
+import { FACTION_ART_FAMILIES, FACTION_ART_IDS, FACTION_ART_ROLES, factionArtId, SHARED_UNIT_ART } from '@theandril/art-pipeline/runtime';
 import { createGame, getObservation, serializeGame, stateHash } from '@theandril/sim';
 import { selectEntityArt } from './faction-style';
 
@@ -31,6 +31,14 @@ describe('authored faction artwork selection', () => {
     expect(selectEntityArt('settlement.city', 'faction.reedbound_council', true, () => true).contentId).toBe('ui.banner.reedbound_council');
     expect(selectEntityArt('unit.guard', 'faction.ashen_compact', true, id => id === 'unit.guard').contentId).toBeNull();
     expect(selectEntityArt('map.ruin', undefined, true, () => true)).toMatchObject({ contentId: null, warning: null });
+  });
+  it('reports specialists as shared silhouettes and keeps the same culture and far badge', () => {
+    for (const [role, shared] of Object.entries(SHARED_UNIT_ART)) for (const family of FACTION_ART_FAMILIES) {
+      const definitionId = `faction.${family}`, assetId = `${shared.role}.${family}`;
+      expect(selectEntityArt(role, definitionId, false, id => id === assetId)).toEqual({ requestedId: assetId, contentId: assetId, presentation: 'shared', warning: null });
+      expect(selectEntityArt(role, definitionId, true, id => id === `ui.badge.${family}`)).toMatchObject({ contentId: `ui.badge.${family}`, presentation: 'strategic' });
+      expect(selectEntityArt(role, definitionId, false, id => id === `${shared.role}.unknown`)).toMatchObject({ contentId: null, presentation: 'procedural' });
+    }
   });
   it('selects exact approved naval hulls near and badges far, without substituting an infantry role', () => {
     for (const family of FACTION_ART_FAMILIES) for (const role of ['unit.transport', 'unit.coastal_warship', 'unit.ocean_warship']) {

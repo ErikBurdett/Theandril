@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
+import { RESOURCES } from '@theandril/content';
 import { applyCommand, createGame, getObservation, stateHash } from '@theandril/sim';
 import { cellTransferBuffers, cellTransferBytes, packCells, unpackCells, type ObservedCell, type PackedCells } from './cell-transfer';
 
@@ -7,6 +8,18 @@ const cell = (overrides: Partial<ObservedCell> = {}): ObservedCell => ({ cell: 0
 const rich = () => packCells([cell({ cell: 9, terrain: 3, biome: 11, waterDepth: 0, fertility: 255, visible: true, featureMask: 127, settlementId: 'settlement.9', factionId: 'faction.ashen_compact', improvementId: 'improvement.quarry' }), cell({ cell: 2, settlementId: null })]);
 
 describe('packed observed-cell transport', () => {
+  it('carries only observed resource deposits in one v3 byte per row with absent and undefined preserved', () => {
+    const input = [cell(), cell({ resourceId: undefined }), ...RESOURCES.map((resource, index) => cell({ cell: index + 2, resourceId: resource.id, visible: index % 2 === 0, hydrology: 1, roadMask: 2 }))];
+    const packet = packCells(input);
+    expect(packet.version).toBe(3); expect(packet.scalars.length).toBe(input.length * 8);
+    expect(cellTransferBuffers(packet).reduce((sum, buffer) => sum + buffer.byteLength, 0)).toBe(input.length * 12);
+    expect(packet.metadata.length).toBe(0); expect(packet.dictionary).toEqual([]);
+    expect(unpackCells(structuredClone(packet, { transfer: cellTransferBuffers(packet) }))).toStrictEqual(input);
+    expect(() => packCells([cell({ resourceId: 'resource.unknown' })])).toThrow('resource reference');
+    const malformed = packCells([cell({ resourceId: RESOURCES[0]!.id })]); malformed.scalars[7] = 254;
+    expect(() => unpackCells(malformed)).toThrow('resource code');
+  });
+
   it('preserves v1 packets and roundtrips optional v2 hydrology/roads with absent, undefined and zero distinct', () => {
     expect(packCells([cell()]).version).toBe(1);
     const input = [cell(), cell({ cell: 1, hydrology: 0 }), cell({ cell: 2, hydrology: undefined, roadMask: undefined }), cell({ cell: 3, hydrology: 33, roadMask: 63 }), cell({ cell: 4, roadMask: 0 })];

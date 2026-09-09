@@ -27,7 +27,7 @@ describe('canonical preflight for playable naval UI scenarios', () => {
     let state = navalCampaign();
     for (const formation of state.armies[N.fleetId]!.formations) { formation.strength = 4; formation.morale = 30; }
     const enemy = state.armies[N.enemyFleetId]!; enemy.cell = N.shallowCell;
-    enemy.formations = Array.from({ length: 6 }, () => createArmyFormation(`army.${state.nextId++}`, 'unit.coastal_warship')).sort((a, b) => a.id < b.id ? -1 : 1);
+    enemy.formations = Array.from({ length: 6 }, () => createArmyFormation(`army.${state.nextId++}`, 'unit.ocean_warship')).sort((a, b) => a.id < b.id ? -1 : 1);
     refreshAuthoredSight(state);
     state = deserializeGame(serializeGame(state));
     const factionId = state.turnOwnerId;

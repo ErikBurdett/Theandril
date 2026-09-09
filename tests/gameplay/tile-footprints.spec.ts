@@ -3,7 +3,7 @@ import { IMPROVEMENTS } from '@theandril/content';
 import { serializeGame } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
 import { tileFootprintCampaign } from '../../packages/test-fixtures/src/tile-footprints';
-import { tileBoundsContained, tileFootprintContained } from '../../packages/render/src/tile-footprint';
+import { tileFootprintContained } from '../../packages/render/src/tile-footprint';
 import { selectFromRegistry } from './ui-navigation';
 
 async function mapZoom(page: Page) {
@@ -19,8 +19,8 @@ async function load(page: Page, rememberForeignSite = false) {
   await page.goto('/');
   await page.getByLabel('Import save file').setInputFiles({ name: 'tile-footprints.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(fixture.game))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.atlasPages)).toBe(1);
-  await expect(page.getByTestId('art-runtime-status')).toContainText('partial pixel pack');
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.atlasPages)).toBe(2);
+  await expect(page.getByTestId('art-runtime-status')).toContainText('pixel pack');
   return fixture;
 }
 
@@ -52,8 +52,10 @@ test('all ten paid improvements retain containment while camp, town, capital fil
   const initial = await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!);
   for (const [i, cell] of fixture.siteCells.entries()) {
     const footprint = initial.tileFootprints.find(item => item.cell === cell && item.role === 'improvement');
-    expect(footprint).toMatchObject({ contentId: IMPROVEMENTS[i]!.id, presentation: i < 5 ? 'approved' : 'procedural', alpha: 1 });
-    expect(tileBoundsContained(footprint!.bounds)).toBe(true);
+    expect(footprint).toMatchObject({ contentId: IMPROVEMENTS[i]!.id, presentation: 'approved', alpha: 1 });
+    expect(footprint!.boundsKind).toBe('opaque-union');
+    expect(tileFootprintContained(footprint!)).toBe(true);
+    expect(footprint!.bounds.width).toBeGreaterThan(25);
   }
   for (const [i, town] of fixture.towns.entries()) {
     const footprint = initial.tileFootprints.find(item => item.cell === town.cell && item.role !== 'improvement')!;
@@ -92,9 +94,14 @@ test('all ten paid improvements retain containment while camp, town, capital fil
   expect(await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().overview)).toBe(false);
   await dragToCell(page, fixture.towns[0]!.cell + 2);
   const far = await page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()!);
-  expect(far.tileFootprints.filter(item => item.role !== 'improvement')).toHaveLength(3);
+  // Far heraldry is deliberately sized in screen pixels, not fitted into a shrinking hex.
+  expect(far.tileFootprints.filter(item => item.role !== 'improvement')).toHaveLength(0);
+  for (const town of fixture.towns) {
+    const marker = far.visibleEntityArt.find(item => item.entityId === town.id)!;
+    expect(Math.max(marker.screenWidth!, marker.screenHeight!)).toBeCloseTo(44);
+  }
   for (const town of fixture.towns) expect(far.visibleEntityArt.find(item => item.entityId === town.id)).toMatchObject({ presentation: 'strategic', assetId: 'ui.banner.ashen_compact' });
-  for (const footprint of far.tileFootprints) expect(tileBoundsContained(footprint.bounds)).toBe(true);
+  for (const footprint of far.tileFootprints) expect(tileFootprintContained(footprint)).toBe(true);
   await page.getByTestId('map-container').screenshot({ path: info.outputPath('three-town-far-markers.png') });
   const rebuilds = await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().chunkRebuilds);
   await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));

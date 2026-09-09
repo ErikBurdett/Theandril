@@ -1,3 +1,4 @@
+import type { RulesVersion } from '../../sim/src/rules';
 import { BUILDINGS } from '@theandril/content';
 import { hexDistance, isPassable, neighbors } from '@theandril/mapgen';
 import { applyCommandForVersion, createGame, deserializeGame, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
@@ -26,8 +27,8 @@ function expansionRoute(state: GameState, origin: number): number[] {
 }
 
 /** Prepared infrastructure, not a fabricated victory: every later choice/project uses normal rules. */
-export function prosperityCampaign(): GameState {
-  const state = createGame({ seed: PROSPERITY_FIXTURE.seed, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
+export function prosperityCampaign(version: RulesVersion = 16): GameState {
+  const state = createGame({ rulesVersion: version, seed: PROSPERITY_FIXTURE.seed, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
   const issue = (command: GameCommand): void => {
     // Freeze authored setup before roads; subsequent gameplay uses current rules.
     const result = applyCommandForVersion(state, command, 11);

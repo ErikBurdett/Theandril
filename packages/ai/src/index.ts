@@ -1,15 +1,16 @@
 import { BUILDINGS, UNITS } from '@theandril/content';
 import { hexDistance, neighbors } from '@theandril/mapgen';
-import { MAX_ARMY_FORMATIONS, type GameCommand, type Observation } from '@theandril/sim';
+import { MAX_ARMY_FORMATIONS, foundingCoinCost, planDevelopment, type GameCommand, type Observation } from '@theandril/sim';
 import { planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
 import { planConquestDecision } from './conquest';
 import { planProgression } from './progression';
 import { createNavigation } from './navigation';
 import { planCharacters } from './characters';
-import { coastalFoundingSite, planNaval } from './naval';
+import { coastalFoundingSite, coastalReconnaissanceUseful, planNaval } from './naval';
 import { planLand } from './land';
 import { recruitmentRoster } from './recruitment';
 import { planRoadAcceleration } from './roads';
+import { settlementSpacing, settlementSiteValue } from './expansion';
 
 export { chooseCaptureOption } from './conquest';
 export { aiObservationOptions, landPlanningTowns, LAND_PLANNING_TOWN_LIMIT } from './observation-options';
@@ -30,11 +31,36 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   if (diplomatic) return diplomatic;
   const siegeDecision = planConquestDecision(view);
   if (siegeDecision) return siegeDecision;
-  const advancement = planProgression(view);
+  const oceanScout = units.get('unit.ocean_warship')!;
+  const oceanScoutReserve = coastalReconnaissanceUseful(view)
+    && !view.armies.some(army => army.factionId === view.factionId && army.domain === 'naval' && army.canEnterDeepWater && army.formations.some(formation => units.get(formation.unitId)?.naval?.transportCapacity === 0))
+    && !view.settlements.some(town => town.factionId === view.factionId && town.queue.some(order => order.itemId === oceanScout.id))
+    && view.settlements.some(town => town.factionId === view.factionId && !town.queue.length && view.productionOptions.some(option => option.settlementId === town.id && option.itemId === oceanScout.id && option.canQueue)) ? oceanScout.coinCost : 0;
+  const pendingFounder = view.armies.some(army => army.factionId === view.factionId && army.formations.some(formation => units.get(formation.unitId)?.canFound)) || view.settlements.some(town => town.factionId === view.factionId && town.queue.some(order => order.itemId === 'unit.colonist'));
+  const expansionAffordable = Boolean(view.growth && view.treasury >= view.growth.founding.coinCost + UNITS[0]!.coinCost + view.growth.founding.additionalUpkeep * 6 + 24);
+  const foundingReserve = view.growth && (pendingFounder || expansionAffordable) ? Math.min(Math.max(0, view.treasury - oceanScoutReserve), view.growth.founding.coinCost) : 0;
+  // Save toward the next useful expedition before optional purchases, even
+  // below its full funding threshold. Otherwise cheap upgrades repeatedly spend
+  // the coins needed to reach that threshold and an inland realm never departs.
+  const basicBuildingPurse = Math.max(0, ...view.settlements.filter(town => town.factionId === view.factionId && !town.queue.length).map(town => BUILDINGS.find(building => !building.coastalOnly && !town.buildings.includes(building.id)
+    && view.productionOptions.some(option => option.settlementId === town.id && option.itemId === building.id && option.canQueue))?.coinCost ?? 0));
+  const expeditionSavings = view.growth && view.factionCount > 1 && view.factions.length === 1 && !pendingFounder && !expansionAffordable && view.settlements.some(town => town.factionId === view.factionId)
+    ? Math.max(0, view.treasury - oceanScoutReserve - basicBuildingPurse) : 0;
+  const advancement = planProgression(view, foundingReserve + expeditionSavings + oceanScoutReserve);
   if (advancement.commands.some(command => command.type === 'startVictoryProject')) return advancement;
+  const factionId = view.factionId;
   const plans: GameCommand[] = [...advancement.commands];
   const reasons: string[] = [...advancement.reasons];
-  const factionId = view.factionId;
+  if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
+  const market = view.resources?.marketSettlementIds[0];
+  const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;
+  if (market && surplus) {
+    const amount = Math.min(1_000_000, surplus.amount - 6, Math.floor((Number.MAX_SAFE_INTEGER - view.treasury) / surplus.salePrice));
+    if (amount > 0) {
+      plans.push({ type: 'sellResource', factionId: view.factionId, settlementId: market, resourceId: surplus.resourceId, amount });
+      reasons.push(`Sell ${amount} ${surplus.name} at the quoted ${surplus.salePrice} coin each, retaining six for development. Proceeds enter the next planning purse.`);
+    }
+  }
   const cells = new Map(view.cells.map(cell => [cell.cell, cell]));
   const ownSettlements = view.settlements.filter(town => town.factionId === factionId);
   const allOwnArmies = view.armies.filter(army => army.factionId === factionId);
@@ -63,6 +89,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const militaryCount = formations.filter(formation => !units.get(formation.unitId)?.canFound).length;
   const areaPerFaction = view.width * view.height / Math.max(1, view.factionCount);
   const settlementTarget = areaPerFaction > 12_000 ? 8 : areaPerFaction > 3000 ? 6 : 4;
+  const expand = view.growth ? expansionAffordable : ownSettlements.length < settlementTarget;
   const formationTarget = ownSettlements.length * 3 + 1;
   const roster = recruitmentRoster(view.factions.find(faction => faction.id === factionId)?.definitionId);
   const rosterCounts = new Map(UNITS.map(unit => [unit.id, formations.filter(formation => formation.unitId === unit.id).length + ownSettlements.reduce((sum, town) => sum + town.queue.filter(order => order.itemId === unit.id).length, 0)]));
@@ -70,20 +97,30 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     const offset = items.length ? ((view.turn - 1) * stride) % items.length : 0;
     return [...items.slice(offset), ...items.slice(0, offset)];
   };
-  let budget = Math.max(0, view.treasury - advancement.coinSpent - advancement.reserve);
+  let budget = Math.max(0, view.treasury - advancement.coinSpent - advancement.reserve - foundingReserve - expeditionSavings);
   // Protect the next expansion caravan and one basic building before optional appointments.
   const production = new Map(view.productionOptions.map(option => [option.settlementId + ':' + option.itemId, option.canQueue]));
   const canQueue = (settlementId: string, itemId: string): boolean => production.get(settlementId + ':' + itemId) === true;
-  const economyReserve = (ownSettlements.length < settlementTarget && !plannedColonist ? UNITS[0]!.coinCost : 0)
+  const economyReserve = (expand && !plannedColonist ? UNITS[0]!.coinCost : 0)
     + Math.max(0, ...ownSettlements.filter(town => !town.queue.length).map(town => BUILDINGS.find(item => !item.coastalOnly && !town.buildings.includes(item.id) && canQueue(town.id, item.id))?.coinCost ?? 0));
-  const specialists = planCharacters(view, Math.max(0, budget - economyReserve));
+  // A researched ocean scout is a real expansion need. Preserve its current legal
+  // quote before optional officers spend the same coins; do not reserve for a
+  // blocked harbor, queued hull or an already operating deep-water escort.
+  const recurringBudget = view.growth ? Math.max(0, view.growth.economy.net - view.growth.economy.queuedUpkeep - 2) : Infinity;
+  // Preserve a small positive cash flow for existing caravans and civic growth.
+  // Recruit quotes stay canonical; this only ranks optional new obligations.
+  const characterView = view.growth ? { ...view, characterRecruitment: view.characterRecruitment.filter(option => option.upkeep <= recurringBudget) } : view;
+  const specialists = planCharacters(characterView, Math.max(0, budget - economyReserve - oceanScoutReserve));
   plans.push(...specialists.commands); reasons.push(...specialists.reasons);
   budget -= specialists.coinSpent;
+  let plannedUpkeep = specialists.commands.reduce((sum, command) => sum + (command.type === 'recruitCharacter' ? view.characterRecruitment.find(option => option.definitionId === command.definitionId)?.upkeep ?? 0 : 0), 0);
   const knowledgeSpent = advancement.commands.reduce((sum, command) => sum + (command.type === 'research' ? view.progression.technologyChoices.find(choice => choice.id === command.technologyId)?.knowledgeCost ?? 0 : command.type === 'researchArcane' ? view.arcaneResearch.choices.find(choice => choice.id === command.discoveryId)?.knowledgeCost ?? 0 : 0), 0);
-  // Keep one caravan's funding, but do not require every inland building before a port
-  // can launch its first ship. That circular reservation stranded mature island realms.
-  const naval = planNaval(view, Math.max(0, budget - Math.min(economyReserve, 16)), { heldArmyIds: specialists.heldArmyIds, knowledgeBudget: Math.max(0, view.knowledge - knowledgeSpent) });
+  // Normally retain a caravan's funding; honor a legally quoted first ocean
+  // scout before generic economic reserves can repeatedly consume its coins.
+  // This never spends the progression reserve already removed from budget.
+  const naval = planNaval(view, Math.max(0, budget - Math.min(economyReserve, 16), Math.min(budget, oceanScoutReserve)), { heldArmyIds: specialists.heldArmyIds, knowledgeBudget: Math.max(0, view.knowledge - knowledgeSpent) });
   plans.push(...naval.commands); reasons.push(...naval.reasons); budget -= naval.coinSpent;
+  plannedUpkeep += naval.commands.reduce((sum, command) => sum + (command.type === 'queue' ? units.get(command.itemId)?.upkeep ?? 0 : 0), 0);
   if (naval.interrupts) return { commands: plans, reasons };
   if (naval.commands.some(command => command.type === 'queue' && command.itemId === 'unit.colonist')) plannedColonist = true;
   let plannedMilitary = ownSettlements.reduce((count, town) => count + town.queue.filter(order => units.has(order.itemId) && units.get(order.itemId)?.movementDomain !== 'naval' && order.itemId !== 'unit.colonist').length, 0);
@@ -93,15 +130,23 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     if (town.queue.length || naval.queuedSettlementIds.has(town.id)) continue;
     const building = BUILDINGS.find(item => !item.coastalOnly && !town.buildings.includes(item.id) && item.coinCost <= budget && canQueue(town.id, item.id));
     const desired = [...new Set(roster)].sort((a, b) => (rosterCounts.get(a) ?? 0) / roster.filter(id => id === a).length - (rosterCounts.get(b) ?? 0) / roster.filter(id => id === b).length || roster.indexOf(a) - roster.indexOf(b));
-    const recruit = desired.map(id => units.get(id)).find(unit => unit && unit.coinCost <= budget && canQueue(town.id, unit.id));
-    const item = building ?? (ownSettlements.length < settlementTarget && !plannedColonist && canQueue(town.id, UNITS[0]!.id) ? UNITS[0] : militaryCount + plannedMilitary < formationTarget ? recruit : undefined);
+    const recruit = desired.map(id => units.get(id)).find(unit => unit && unit.coinCost <= budget && unit.upkeep + plannedUpkeep <= recurringBudget && canQueue(town.id, unit.id));
+    // A newly unlocked role may enter an existing army even when the current
+    // force-count target is met. Its real cost/upkeep still uses the shared purse.
+    const missingRole = Boolean(view.growth && recruit && (rosterCounts.get(recruit.id) ?? 0) === 0);
+    const item = building ?? (expand && !plannedColonist && canQueue(town.id, UNITS[0]!.id) ? UNITS[0] : militaryCount + plannedMilitary < formationTarget || missingRole ? recruit : undefined);
     if (item && budget >= item.coinCost) {
       plans.push({ type: 'queue', factionId, settlementId: town.id, itemId: item.id });
       budget -= item.coinCost;
+      if (units.has(item.id)) plannedUpkeep += units.get(item.id)!.upkeep;
       if (item.id === 'unit.colonist') plannedColonist = true;
       if (units.has(item.id) && item.id !== 'unit.colonist') { plannedMilitary++; rosterCounts.set(item.id, (rosterCounts.get(item.id) ?? 0) + 1); }
     }
   }
+  const development = planDevelopment(view, Math.max(0, view.treasury - budget + 24), Math.max(0, recurringBudget - plannedUpkeep));
+  // Training quotes were observed before this batch's missions/embarkation.
+  // Execute paid development first so those later transitions cannot stale them.
+  plans.unshift(...development.commands); budget -= development.coinSpent;
   const road = planRoadAcceleration(view, Math.max(0, budget - 24));
   // Its quote depends on current worker sight. Execute before any officer/boarding/march
   // proposal can remove that sight; the total budget already accounts for every order.
@@ -114,6 +159,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const settlementNames = new Set(ownSettlements.map(town => town.name));
   const foundingCells = view.settlements.map(town => town.cell);
   let hearthNumber = ownSettlements.length;
+  let foundingCount = ownSettlements.length, foundingBudget = budget + foundingReserve;
   const reorganized = new Set<string>();
   const ownTownCells = new Set(ownSettlements.map(town => town.cell));
   // A charted foreign border is a discovery clue, not permission to attack or a
@@ -149,11 +195,12 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     if (plans.length >= 128) break;
     if (besiegers.has(army.id) || reorganized.has(army.id) || naval.heldArmyIds.has(army.id)) continue; // Composition/assignment/transport changes need fresh facts.
     const portSite = coastalFoundingSite(view, army);
-    if (army.canFound && (portSite === null || portSite === army.cell) && army.movement > 0 && !cells.get(army.cell)?.settlementId && foundingCells.every(cell => hexDistance(cell, army.cell, view.width) >= 4)) {
+    if (army.canFound && (portSite === null || portSite === army.cell) && army.movement > 0 && !cells.get(army.cell)?.settlementId && foundingCells.every(cell => hexDistance(cell, army.cell, view.width) >= settlementSpacing(view, army.cell)) && (!view.growth || foundingBudget >= foundingCoinCost(foundingCount))) {
       let name: string;
       do { name = `Hearth ${++hearthNumber}`; } while (settlementNames.has(name));
       settlementNames.add(name);
       foundingCells.push(army.cell);
+      if (view.growth) foundingBudget -= foundingCoinCost(foundingCount++);
       plans.push({ type: 'found', factionId, armyId: army.id, name });
       continue;
     }
@@ -211,7 +258,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       const approach = invading ? Math.max(...nearbyObjectives.map(town => (projectHosts.has(town.id) ? 1000 : 0) - hexDistance(cell, town.cell, view.width) * 500))
         : military && approachCells.length ? -Math.min(...approachCells.map(enemy => hexDistance(cell, enemy, view.width))) * 100 : 0;
       const danger = nearbyThreat.reduce((sum, enemy) => sum + Math.max(0, 5 - hexDistance(cell, enemy.cell, view.width)) * 1200, 0);
-      return (portSite !== null ? -hexDistance(cell, portSite, view.width) * 500 : army.canFound ? distance * 100
+      return (portSite !== null ? -hexDistance(cell, portSite, view.width) * 500 : army.canFound ? view.growth ? settlementSiteValue(view, cell) : distance * 100
         : nearbyContacts.length ? -Math.min(...nearbyContacts.map(clue => hexDistance(cell, clue.cell, view.width))) * 500 : approach) - danger;
     };
     const strategic = army.canFound || nearbyContacts.length > 0 || military && approachCells.length > 0 || enemies.some(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10);

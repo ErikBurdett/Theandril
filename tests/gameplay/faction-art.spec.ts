@@ -27,6 +27,7 @@ function factionGallery(): GameState {
     if (!result.ok) throw new Error(result.error);
   }
   state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60); state.world.waterDepth.fill(0);
+  state.resources.deposits = {}; // This gallery replaces the entire generated terrain/resource layer.
   state.armies = {};
   function addArmy(factionId: string, unitId: string, location: number, name: string) {
     const id = `army.${state.nextId++}`;

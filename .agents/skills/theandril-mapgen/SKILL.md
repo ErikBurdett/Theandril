@@ -61,3 +61,23 @@ Same:
 
 must generate the same canonical world.
 
+New-campaign defaults are a separate boundary: leave the seed field blank and
+sample browser entropy once when the user starts the campaign. Reset that field
+when opening New campaign; keep explicit uint32 seeds reproducible, including
+zero. Restoring a save must preserve its seed. Do not fix repeated new worlds by
+adding randomness inside `createGame`, generator stages or simulation commands.
+Verify two default launches, explicit-seed equality and save/load through the
+real setup controls.
+
+Resource deposits are currently a separately versioned canonical layer in
+`packages/sim/src/resources.ts`, not a change to physical generator 7. Generate
+them from the explicit seed and actual terrain/biome suitability; do not consume
+the combat RNG or rewrite terrain to make a deposit fit. Retain deposit IDs in
+saves and expose only charted cells. Cultivation cannot transmute a deposit.
+Old worlds use resource version 0 and stay empty through migration. Tests that
+author geography must explicitly reconcile deposits on the changed cells;
+never relax physical validation to accommodate a fixture.
+
+The political overview consumes permitted observed ownership and last-seen
+land memory. Filters must neither discover cultures nor transfer hidden terrain.
+Check exact hash, exploration, and worker traffic across filter/zoom changes.

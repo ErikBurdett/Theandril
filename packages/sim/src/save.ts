@@ -1,26 +1,32 @@
+import { battleDevelopmentSchema, battleDevelopmentEffects } from './combat/development-snapshot';
+import { isHull } from './combat/individual';
+import { createDevelopmentState, developmentStateSchema, validateDevelopment } from './development';
+import { resourceStateSchema, validateResources } from './resources';
 import { z } from 'zod';
-import { BUILDINGS, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
+import { BUILDINGS, IMPROVEMENTS, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
 import { BIOME, deriveBiomes, deriveWaterDepth, isLake, isPassable, isValidBiome, neighbors, SeededRandom, validateHydrology } from '@theandril/mapgen';
 import { emptyRoadState, roadStateSchema, validateRoads } from './roads';
 import { applyCommand, initializeLegacyLand, MAX_EVENTS } from './simulation';
-import { emptyLandState, landStateSchema, landStateV10Schema, validateLand, validateLandKnowledge } from './territory';
-import { cellsWithin, rebuildIndexes } from './visibility';
+import { emptyLandState, landStateSchema, landStateV15Schema, landStateV10Schema, validateLand, validateLandKnowledge } from './territory';
+import { cellsWithin, rebuildIndexes, claimSightEnabled } from './visibility';
 import type { Army, CampaignBattle, GameCommand, GameState } from './types';
-import { battleStateSchema, legacyBattleStateSchema, schema13BattleStateSchema } from './combat';
+import { battleStateSchema, schema15BattleStateSchema, legacyBattleStateSchema, schema13BattleStateSchema } from './combat';
 import { arcaneResearchSchema, validateArcaneResearch } from './magic';
 import { battleAbilityStateSchema, validateBattleAbilities } from './battle-abilities';
 import { MAX_BATTLE_REPORTS } from './warfare';
 import { createDiplomacy, diplomacyStateSchema, validateDiplomacy } from './diplomacy';
-import { captureDecisionSchema, ruinSchema, siegeSchema, validateSieges } from './siege';
+import { captureDecisionSchema, captureDecisionV15Schema, ruinSchema, siegeSchema, validateSieges } from './siege';
 import { createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
 
 import { armyMovement, effectiveArmyMovement, armySight } from './army-composition';
 import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
-import { LEGACY_UNIT_IDS, type RulesVersion } from './rules';
+import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 14;
+export const SAVE_VERSION = 16;
+export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
+export const PRE_SPECIALIST_CONTENT_HASH = 'b6e3bce2';
 export const PRE_BATTLE_CONTENT_HASH = '07a58d4f';
 export const PRE_EXPANDED_ROSTER_CONTENT_HASH = '3c54fb02';
 export const PRE_GEOGRAPHY_CONTENT_HASH = '3c54fb02';
@@ -105,10 +111,11 @@ export const schema13CampaignBattleSchema = schema7CampaignBattleSchema.extend({
   characterSnapshots: z.array(schema13CharacterBattleSnapshotSchema).max(63), characterAftermath: z.array(characterAftermathSchema).max(63),
   usedAbilities: z.array(z.object({ characterId: id, abilityId: id }).strict()).max(21),
 }).strict();
-export const campaignBattleSchema = schema13CampaignBattleSchema.extend({
+export const schema15CampaignBattleSchema = schema13CampaignBattleSchema.extend({
   rulesVersion: z.union([z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9)]),
-  combat: battleStateSchema, characterSnapshots: z.array(characterBattleSnapshotSchema).max(63), abilityState: battleAbilityStateSchema.optional(),
+  combat: schema15BattleStateSchema, characterSnapshots: z.array(characterBattleSnapshotSchema).max(63), abilityState: battleAbilityStateSchema.optional(),
 }).strict();
+export const campaignBattleSchema = schema15CampaignBattleSchema.extend({ rulesVersion: z.union([z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10)]), combat: battleStateSchema, developmentSnapshots: z.array(battleDevelopmentSchema).max(40).optional() }).strict();
 const stateV1Schema = z.object(stateV1Shape).strict();
 const stateV2Shape = {
   ...stateV1Shape, armies: z.array(armyV5Schema).max(60_000),
@@ -119,7 +126,7 @@ const stateV2Schema = z.object(stateV2Shape).strict();
 const stateV3Shape = {
   ...stateV2Shape, settlements: z.array(settlementSchema).max(30_000),
   battle: campaignBattleV3Schema.nullable(), battleReports: z.array(campaignBattleV3Schema).max(MAX_BATTLE_REPORTS),
-  sieges: z.array(siegeSchema).max(30_000), pendingCapture: captureDecisionSchema.nullable(), ruins: z.array(ruinSchema).max(30_000), diplomacy: diplomacyStateSchema,
+  sieges: z.array(siegeSchema).max(30_000), pendingCapture: captureDecisionV15Schema.nullable(), ruins: z.array(ruinSchema).max(30_000), diplomacy: diplomacyStateSchema,
 };
 const stateV3Schema = z.object(stateV3Shape).strict();
 const stateV4Schema = stateV3Schema.extend({
@@ -135,12 +142,21 @@ const stateV8Schema = stateV7Schema.extend({ world: worldV8Schema, armies: z.arr
 const stateV9Schema = stateV8Schema.extend({ world: worldSchema, land: landStateV10Schema }).strict();
 // This schema must never inherit a later roster enum through an expanded alias.
 const stateV10Schema = stateV9Schema.extend({ rosterVersion: legacyRosterVersionSchema }).strict();
-const stateV11Schema = stateV10Schema.extend({ land: landStateSchema }).strict();
+const stateV11Schema = stateV10Schema.extend({ land: landStateV15Schema }).strict();
 const modernWorldSchema = worldSchema.extend({ generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6), z.literal(7)]), layout: z.enum(['legacy', 'continents', 'islands', 'archipelago']), hydrology: z.array(z.number().int().min(0).max(63)).max(350_000) }).strict();
 const stateV12Schema = stateV11Schema.extend({ world: modernWorldSchema, roads: roadStateSchema }).strict();
 const stateV13Schema = stateV12Schema.extend({ rosterVersion: rosterVersionSchema }).strict();
-const stateSchema = stateV13Schema.extend({ characters: z.array(characterSchema).max(4608), battle: campaignBattleSchema.nullable(), battleReports: z.array(campaignBattleSchema).max(MAX_BATTLE_REPORTS), arcaneResearch: arcaneResearchSchema }).strict();
-const saveSchema = z.object({ version: z.literal(14), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const stateV15Schema = stateV13Schema.extend({ characters: z.array(characterSchema).max(4608), battle: schema15CampaignBattleSchema.nullable(), battleReports: z.array(schema15CampaignBattleSchema).max(MAX_BATTLE_REPORTS), arcaneResearch: arcaneResearchSchema }).strict();
+const stateSchema = stateV15Schema.extend({
+  pendingCapture: captureDecisionSchema.nullable(),
+  resources: resourceStateSchema, development: developmentStateSchema, land: landStateSchema,
+  battle: campaignBattleSchema.nullable(), battleReports: z.array(campaignBattleSchema).max(MAX_BATTLE_REPORTS),
+  settlements: z.array(settlementSchema.extend({ population: z.number().int().positive().safe(), food: z.number().int().nonnegative().safe() }).strict()).max(350_000),
+  factions: z.array(factionSchema.extend({ treasury: z.number().int().nonnegative().safe(), knowledge: z.number().int().nonnegative().safe() }).strict()).min(1).max(48),
+}).strict();
+const saveSchema = z.object({ version: z.literal(16), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV15Schema = saveSchema.extend({ version: z.literal(15), state: stateV15Schema }).strict();
+const saveV14Schema = saveV15Schema.extend({ version: z.literal(14) }).strict();
 const saveV13Schema = saveSchema.extend({ version: z.literal(13), state: stateV13Schema }).strict();
 const saveV12Schema = saveSchema.extend({ version: z.literal(12), state: stateV12Schema }).strict();
 const saveV11Schema = saveSchema.extend({ version: z.literal(11), state: stateV11Schema }).strict();
@@ -215,6 +231,13 @@ function canonicalRoads(state: GameState) {
 }
 
 function canonicalPayload(state: GameState) {
+  const sorted = <T>(record: Record<string, T>): Record<string, T> => Object.fromEntries(Object.entries(record).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0));
+  const development = developmentStateSchema.parse(state.development);
+  development.formations = sorted(development.formations);
+  development.hearths = sorted(development.hearths);
+  development.factions = sorted(development.factions);
+  const resources = resourceStateSchema.parse(state.resources);
+  resources.stockpiles = sorted(Object.fromEntries(Object.entries(resources.stockpiles).map(([owner, stock]) => [owner, sorted(stock)])));
   const payload = {
       turn: state.turn, nextId: state.nextId, turnOwnerId: state.turnOwnerId,
       world: { seed: state.world.seed, width: state.world.width, height: state.world.height, terrain: [...state.world.terrain], fertility: [...state.world.fertility], starts: [...state.world.starts], biome: [...state.world.biome], generatorVersion: state.world.generatorVersion, waterDepth: [...state.world.waterDepth], layout: state.world.layout, hydrology: [...state.world.hydrology] },
@@ -239,13 +262,15 @@ function canonicalPayload(state: GameState) {
       rosterVersion: state.rosterVersion,
       roads: canonicalRoads(state),
       arcaneResearch: arcaneResearchSchema.parse(Object.entries(state.arcaneResearch).sort(([a], [b]) => a < b ? -1 : 1).map(([factionId, discoveries]) => ({ factionId, discoveries: [...discoveries] }))),
+      resources, development,
   };
   return payload;
 }
 
 /** Old reports retain their original battlefield IDs and factual logs. */
 export function battleReportForVersion(battle: CampaignBattle, version: RulesVersion) {
-  if (version >= 14) return campaignBattleSchema.parse(battle);
+  if (version >= 16) return campaignBattleSchema.parse(battle);
+  if (version >= 14) return schema15CampaignBattleSchema.parse(battle);
   if (battle.rulesVersion >= 9 || battle.abilityState || battle.characterSnapshots.some(item => item.aptitudes || item.spellIds)) throw new Error('This battle cannot be represented by pre-ability rules.');
   if (version >= 8) return schema13CampaignBattleSchema.parse(battle);
   if (battle.rulesVersion >= 8 || battle.domain !== 'land' || battle.transportAftermath.length || battle.transportSnapshots.length || battle.characterSnapshots.some(item => item.learnedSkillIds.length)) throw new Error('This battle cannot be represented by pre-naval rules.');
@@ -287,8 +312,16 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
-  const canonical = canonicalPayload(state);
-  if (version === 14) return serializeEnvelope(SAVE_VERSION, CONTENT_HASH, canonical);
+  const latest = canonicalPayload(state);
+  if (version === 16) return serializeEnvelope(SAVE_VERSION, CONTENT_HASH, latest);
+  if (latest.resources.version || Object.keys(latest.resources.deposits).length || Object.values(latest.resources.stockpiles).some(stock => Object.values(stock).some(Boolean)) || Object.values(latest.development).some(records => Object.keys(records).length)) throw new Error('This campaign has resources or development unavailable in historical rules.');
+  const { resources: _resources, development: _development, ...historical } = latest;
+  const { visibilityVersion: _visibility, ...historicalLand } = historical.land;
+  const canonical = stateV15Schema.parse({ ...historical, land: historicalLand });
+  assertPreDevelopmentContent(canonical);
+  if (version === 15) return serializeEnvelope(15, PRE_DEVELOPMENT_CONTENT_HASH, canonical);
+  assertPreSpecialistContent(canonical);
+  if (version === 14) return serializeEnvelope(14, PRE_SPECIALIST_CONTENT_HASH, canonical);
   if (canonical.arcaneResearch.some(item => item.discoveries.length) || canonical.characters.some(item => item.aptitudes || !v9Characters.has(item.definitionId))) throw new Error('This campaign has magic unavailable in the frozen pre-ability pack.');
   const { arcaneResearch: _arcane, ...beforeAbilities } = canonical;
   const modernPayload = { ...beforeAbilities, battle: beforeAbilities.battle ? schema13CampaignBattleSchema.parse(beforeAbilities.battle) : null, battleReports: beforeAbilities.battleReports.map(battle => schema13CampaignBattleSchema.parse(battle)) };
@@ -368,7 +401,7 @@ function assertLegacyRoster(state: { rosterVersion: number; factions: readonly {
 }
 
 /** IDs, not the current pack's length: later additions cannot masquerade as old content. */
-const v9Units = new Set(['unit.colonist', 'unit.scout', 'unit.guard', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'unit.transport', 'unit.coastal_warship', 'unit.ocean_warship']);
+const v9Units = PRE_SPECIALIST_UNIT_IDS;
 const v9Buildings = new Set(['building.granary', 'building.workshop', 'building.market', 'building.archive', 'building.harbor']);
 const v9Technologies = new Set(['technology.cinder_masonry', 'technology.civic_accounts', 'technology.coastal_navigation', 'technology.ocean_navigation']);
 const v9Institutions = new Set(['institution.charter_compact', 'institution.common_stewardship']);
@@ -393,14 +426,41 @@ function assertV9Content(state: Pick<z.infer<typeof stateV9Schema>, 'world' | 'f
     && Object.values(state.land.known).every(cells => Object.values(cells).every(cell => cell.improvementId === null || v9Improvements.has(cell.improvementId))), `v${version} references content absent from its frozen pack or roster`);
 }
 
+function assertPreSpecialistContent(state: Pick<z.infer<typeof stateSchema>, 'armies' | 'settlements' | 'battle' | 'battleReports'>): void {
+  const battles = [...(state.battle ? [state.battle] : []), ...state.battleReports];
+  assert(state.armies.every(army => army.formations.every(item => PRE_SPECIALIST_UNIT_IDS.has(item.unitId)))
+    && state.settlements.every(town => town.queue.every(item => v9Buildings.has(item.itemId) || PRE_SPECIALIST_UNIT_IDS.has(item.itemId)))
+    && battles.every(battle => [...battle.combat.attacker, ...battle.combat.defender].every(item => PRE_SPECIALIST_UNIT_IDS.has(item.unitId))), 'formation content unavailable in the frozen pre-specialist pack');
+}
+
+function assertPreDevelopmentContent(state: z.infer<typeof stateV15Schema>): void {
+  const skills = new Set(CHARACTER_SKILLS.filter(skill => !skill.introducedInRules).map(skill => skill.id));
+  assert(state.characters.every(character => character.learnedSkillIds.every(id => skills.has(id))) && [...(state.battle ? [state.battle] : []), ...state.battleReports].every(battle => battle.rulesVersion <= 9 && battle.characterSnapshots.every(character => character.learnedSkillIds.every(id => skills.has(id)))), 'development content unavailable in the frozen pre-development pack');
+  const works = new Set(IMPROVEMENTS.filter(item => (item.introducedInRules ?? 9) <= 15).map(item => item.id));
+  assert(Object.values(state.land.settlements).every(land => Object.values(land.improvements).every(id => works.has(id)) && (!land.work || land.work.kind !== 'improve' || works.has(land.work.improvementId))) && Object.values(state.land.known).every(cells => Object.values(cells).every(cell => !cell.improvementId || works.has(cell.improvementId))), 'resource works unavailable in the frozen pre-development pack');
+}
+
 function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const version = z.object({ version: z.number().int() }).parse(raw).version;
+  const migrateV15 = (prior: z.infer<typeof saveV15Schema>): z.infer<typeof saveSchema> => {
+    assert(prior.contentHash === PRE_DEVELOPMENT_CONTENT_HASH, 'v15 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v15 snapshot checksum does not match its contents');
+    assertPreDevelopmentContent(prior.state);
+    const state = stateSchema.parse({ ...prior.state, land: { ...prior.state.land, visibilityVersion: 0 }, resources: { version: 0, deposits: {}, stockpiles: Object.fromEntries(prior.state.factions.map(faction => [faction.id, {}])) }, development: createDevelopmentState() });
+    return { ...prior, version: 16, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
+  };
+  const migrateV14 = (prior: z.infer<typeof saveV14Schema>): z.infer<typeof saveSchema> => {
+    assert(prior.contentHash === PRE_SPECIALIST_CONTENT_HASH, 'v14 content hash is not a recognized compatible pack');
+    assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v14 snapshot checksum does not match its contents');
+    assertPreSpecialistContent(prior.state);
+    return migrateV15({ ...prior, version: 15, contentHash: PRE_DEVELOPMENT_CONTENT_HASH });
+  };
   const migrateV13 = (prior: z.infer<typeof saveV13Schema>): z.infer<typeof saveSchema> => {
     assert(prior.contentHash === PRE_BATTLE_CONTENT_HASH, 'v13 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v13 snapshot checksum does not match its contents');
     assert([...prior.state.characters, ...[...(prior.state.battle ? [prior.state.battle] : []), ...prior.state.battleReports].flatMap(battle => battle.characterSnapshots)].every(character => v9Characters.has(character.definitionId)), 'v13 references a character absent from its frozen pack');
-    const state = stateSchema.parse({ ...prior.state, arcaneResearch: prior.state.factions.map(faction => ({ factionId: faction.id, discoveries: [] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1) });
-    return { ...prior, version: 14, contentHash: CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state };
+    const state = stateV15Schema.parse({ ...prior.state, arcaneResearch: prior.state.factions.map(faction => ({ factionId: faction.id, discoveries: [] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1) });
+    return migrateV14({ ...prior, version: 14, contentHash: PRE_SPECIALIST_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
   const migrateV12 = (prior: z.infer<typeof saveV12Schema>): z.infer<typeof saveSchema> => {
     assert(prior.contentHash === PRE_EXPANDED_ROSTER_CONTENT_HASH, 'v12 content hash is not a recognized compatible pack');
@@ -435,7 +495,8 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
     assert(prior.contentHash === PRE_TERRITORY_CONTENT_HASH, 'v8 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v8 snapshot checksum does not match its contents');
     assert(prior.state.factions.every(faction => FACTIONS.slice(0, 4).some(definition => definition.id === faction.definitionId)), 'v8 references a faction absent from its frozen pack');
-    const state = stateV9Schema.parse({ ...prior.state, land: emptyLandState(prior.state.factions.map(faction => faction.id)) });
+    const { visibilityVersion: _visibility, ...land } = emptyLandState(prior.state.factions.map(faction => faction.id), 8);
+    const state = stateV9Schema.parse({ ...prior.state, land });
     return migrateV9({ version: 9, gameVersion: '0.1.0', contentHash: PRE_ROSTER_CONTENT_HASH, stateChecksum: checksum(JSON.stringify(state)), state });
   };
   const migrateV7 = (prior: z.infer<typeof saveV7Schema>): z.infer<typeof saveSchema> => {
@@ -545,6 +606,8 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   if (version === 11) return migrateV11(saveV11Schema.parse(raw));
   if (version === 12) return migrateV12(saveV12Schema.parse(raw));
   if (version === 13) return migrateV13(saveV13Schema.parse(raw));
+  if (version === 14) return migrateV14(saveV14Schema.parse(raw));
+  if (version === 15) return migrateV15(saveV15Schema.parse(raw));
   if (version !== SAVE_VERSION) throw new Error(`Unsupported save version ${version}.`);
   return saveSchema.parse(raw);
 }
@@ -685,10 +748,12 @@ export function deserializeGame(text: string): GameState {
     const serial = Number(battle.id.slice('battle.'.length));
     const expectedSeed = new SeededRandom((data.world.seed ^ serial) >>> 0).nextUint32();
     assert(battle.combat.seed === expectedSeed, 'battle random stream has the wrong seed');
-    const terminalCast = battle.rulesVersion === 9 && battle.abilityState?.sources.some(source => source.abilityId === 'spell.cinder_thread' && source.usesRemaining < 2)
+    const terminalCast = battle.rulesVersion >= 9 && battle.abilityState?.sources.some(source => source.abilityId === 'spell.cinder_thread' && source.usesRemaining < 2)
       && (battle.combat.result?.reason === 'formations destroyed' || battle.combat.result?.reason === 'morale rout');
     assert(pending ? !battle.combat.result : battle.combat.result && (battle.combat.round > 0 || terminalCast), 'pending battle/report completion state disagrees');
     const formations = [...battle.combat.attacker, ...battle.combat.defender];
+    if (battle.rulesVersion >= 10) assert(battle.developmentSnapshots?.length === formations.length && formations.every(item => item.position && item.cohesion !== undefined && (isHull(item.unitId) ? item.members === undefined : item.members?.length === item.strength)), 'modern battle omitted individual or development state');
+    else { schema15BattleStateSchema.parse(battle.combat); assert(!battle.developmentSnapshots, 'historical battle contains future development'); }
     const bindings = new Map(battle.formationBindings.map(binding => [binding.battleFormationId, binding]));
     const formationIds = new Set(battle.formationBindings.map(binding => binding.formationId));
     assert(bindings.size === formations.length && battle.formationBindings.length === formations.length && formationIds.size === formations.length && formations.every(item => bindings.has(item.id)), 'battle bindings must cover every distinct formation');
@@ -706,9 +771,9 @@ export function deserializeGame(text: string): GameState {
       const definition = CHARACTER_DEFINITIONS.find(item => item.id === snapshot.definitionId);
       const skill = CHARACTER_SKILLS.find(item => item.id === snapshot.skillId);
       assert(definition && (snapshot.skillId === null || skill && definition.skillIds.includes(skill.id) && skill.roles.includes(definition.role)) && name.safeParse(snapshot.name).success, 'invalid battle character definition, skill or name');
-      validateCharacterTraining(snapshot);
-      const leadership = characterLeadership({ ...snapshot, dead: false }, battle.rulesVersion);
-      const rallyRestore = definition.role === 'marshal' && !snapshot.woundedTurns ? (COMMANDER_ABILITIES.find(item => item.id === 'ability.rally')?.moraleRestore ?? 0) + characterSkillEffects(snapshot, battle.rulesVersion).rallyBonus : 0;
+      validateCharacterTraining(snapshot, battle.rulesVersion >= 10 ? 16 : battle.rulesVersion >= 9 ? 14 : battle.rulesVersion);
+      const leadership = characterLeadership({ ...snapshot, dead: false }, battle.rulesVersion >= 10 ? 16 : battle.rulesVersion);
+      const rallyRestore = definition.role === 'marshal' && !snapshot.woundedTurns ? (COMMANDER_ABILITIES.find(item => item.id === 'ability.rally')?.moraleRestore ?? 0) + characterSkillEffects(snapshot, battle.rulesVersion >= 10 ? 16 : battle.rulesVersion).rallyBonus : 0;
       assert(leadership.attack === snapshot.leadership.attack && leadership.armor === snapshot.leadership.armor && snapshot.rallyRestore === rallyRestore, 'battle character effects differ from frozen content');
       const leader = leaders.get(snapshot.armyId) ?? { attack: 0, armor: 0, marshals: 0, companions: 0 };
       leader.attack += leadership.attack; leader.armor += leadership.armor; leader.marshals += Number(definition.role === 'marshal'); leader.companions += Number(definition.role !== 'marshal'); leaders.set(snapshot.armyId, leader);
@@ -752,10 +817,18 @@ export function deserializeGame(text: string): GameState {
       assert(unit && (unit.movementDomain === 'naval' ? 'naval' : 'land') === battle.domain, 'battle formation differs from its combat domain');
       const effects = doctrineEffects(defending ? battle.defenderDoctrineId : battle.attackerDoctrineId);
       const leadership = leaders.get(binding.armyId ?? '') ?? { attack: 0, armor: 0 };
+      const snapshot = battle.developmentSnapshots?.find(item => item.formationId === binding.formationId);
+      const training = battleDevelopmentEffects(snapshot, unit.id, progression[defending ? battle.defenderFactionId : battle.attackerFactionId]);
+      if (battle.rulesVersion >= 10) {
+        assert(snapshot && battle.developmentSnapshots!.filter(item => item.formationId === binding.formationId).length === 1, 'missing or duplicate formation development snapshot');
+        if (militia || unit.canFound) assert(!snapshot.trainingIds.length && !snapshot.traditionIds.length, 'nonmilitary participant cannot have company development');
+        if (pending && !militia && !unit.canFound) assert(snapshot.trainingIds.join('|') === (data.development.formations[binding.formationId]?.nodeIds ?? []).join('|') && snapshot.traditionIds.join('|') === (data.development.factions[defending ? battle.defenderFactionId : battle.attackerFactionId]?.nodeIds ?? []).join('|'), 'pending battle development differs from participants');
+      }
       assert(unit && (militia ? formation.unitId === 'unit.guard' && formation.maxStrength >= 20 && formation.maxStrength <= 60 && formation.maxStrength % 10 === 0 : formation.maxStrength === unit.strength)
-        && formation.attack === unit.attack + effects.attack + leadership.attack && formation.armor === unit.armor + effects.armor + leadership.armor + (defending ? battle.fortification : 0) && formation.initiative === unit.initiative && formation.range === unit.range && formation.morale <= unit.morale, 'battle formation differs from unit content');
+        && formation.attack === unit.attack + effects.attack + leadership.attack + training.attack && formation.armor === unit.armor + effects.armor + leadership.armor + training.armor + (defending ? battle.fortification : 0) && formation.initiative === unit.initiative + training.initiative && formation.range === unit.range + training.range && formation.morale <= Math.min(100, unit.morale + training.morale), 'battle formation differs from unit content');
       const enteringStrength = entering.get(binding.formationId);
       assert(enteringStrength !== undefined && enteringStrength <= unit.strength && enteringStrength >= formation.strength, 'invalid entering battle strength');
+      if (formation.members) assert(formation.members.every(slot => slot < enteringStrength), 'surviving soldier identity exceeds entering company size');
       aggregate.set(strategicId, (aggregate.get(strategicId) ?? 0) + enteringStrength);
       if (pending) {
         if (militia) {
@@ -850,6 +923,7 @@ export function deserializeGame(text: string): GameState {
   if (data.battle) validateBattle(data.battle, true);
   for (const report of data.battleReports) validateBattle(report, false);
   const state: GameState = {
+    resources: data.resources, development: data.development,
     arcaneResearch: Object.fromEntries(data.arcaneResearch.map(item => [item.factionId, item.discoveries])),
     roads: data.roads,
     rosterVersion: data.rosterVersion,
@@ -903,11 +977,21 @@ export function deserializeGame(text: string): GameState {
     assert(!cellsWithin(state, settlement.cell, 2).some(value => checkedSettlements.has(value)), 'settlements are too close together');
     checkedSettlements.add(settlement.cell);
   }
-  if (originalVersion < 9) initializeLegacyLand(state);
-  validateLand(state);
+  if (originalVersion < 9) withRules(state, originalVersion as RulesVersion, () => initializeLegacyLand(state));
+  if (claimSightEnabled(state)) for (const settlement of data.settlements) {
+    for (const claimed of state.land.settlements[settlement.id]?.claimed ?? []) {
+      for (const cell of cellsWithin(state, claimed, 1)) {
+        assert(explored[settlement.factionId]?.has(cell), 'claimed land vision missing from exploration');
+        requiredSight.get(settlement.factionId)!.add(cell);
+      }
+    }
+  }
+  validateResources(state);
+  validateDevelopment(state);
+  withRules(state, originalVersion < 16 ? 15 : 16, () => validateLand(state));
   validateRoads(state, requiredSight);
   for (const faction of state.factions) validateLandKnowledge(state, faction.id, requiredSight.get(faction.id)!);
-  rebuildIndexes(state);
+  withRules(state, originalVersion < 16 ? 15 : 16, () => rebuildIndexes(state));
   return state;
 }
 

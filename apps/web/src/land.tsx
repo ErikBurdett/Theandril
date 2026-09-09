@@ -41,7 +41,12 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
   const [showTiles, setShowTiles] = useState(false);
   const [showImprovements, setShowImprovements] = useState(false);
   const [showCultivation, setShowCultivation] = useState(false);
-  const details = useLandQuery({ settlementId, hash: stateHash, epoch: queryEpoch, query, enabled: queryEnabled });
+  const [page, setPage] = useState<{ settlementId: string; offset: number; selectedCell: number | undefined }>({ settlementId, offset: 0, selectedCell: undefined });
+  // Full material/cultivation quotes stay below the player transfer budget.
+  // The canonical query can still serve up to 64 cells to other consumers.
+  const window = { offset: page.settlementId === settlementId ? page.offset : 0, limit: 24,
+    ...(selectedCell !== undefined && (page.settlementId !== settlementId || selectedCell !== page.selectedCell) ? { cell: selectedCell } : {}) };
+  const details = useLandQuery({ settlementId, hash: stateHash, epoch: queryEpoch, window, query, enabled: queryEnabled });
   const summary = view.land.settlements.find(item => item.settlementId === settlementId);
   // Static detail props are only for headless component consumers. The live app
   // always supplies a worker query; its normal observation contains no tile quotes.
@@ -58,7 +63,13 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
     <SettlementRoad view={view} settlementId={settlementId} busy={busy || !queryEnabled} issue={issue} selectCell={selectCell}/>
     <p className="land-stage" data-testid="settlement-stage">{town.stage}{town.isCapital ? ' · Capital' : ''}</p>
     <p className="field-help">Colony: 1–2 people · Settlement: 3–7 · City: 8+. Capital is a separate designation.</p>
-    <p data-testid="land-counts">{town.claimed.length} / {town.claimCapacity} claimed tiles · {town.worked.length} / {town.workerCapacity} assigned workers · reach {town.claimRadius}</p>
+    <p data-testid="land-counts">{town.claimed.length}{town.claimCapacity === null ? '' : ` / ${town.claimCapacity}`} claimed tiles · {town.worked.length} / {town.workerCapacity} assigned workers · reach {town.claimRadius}</p>
+    {town.claimCapacity === null && <p className="field-help">Connected territory and population can keep growing. Each person can work one additional tile. Larger hearths need more food, investment and civic upkeep.</p>}
+    {view.growth?.settlements.find(item => item.settlementId === settlementId) && (() => {
+      const growth = view.growth!.settlements.find(item => item.settlementId === settlementId)!;
+      return <p className="field-help" data-testid="hearth-growth-economy">Next person: {settlement.food} / {growth.foodRequired} food · consumption {growth.foodConsumption} food per turn · civic upkeep {growth.civicUpkeep.total} coin ({growth.civicUpkeep.population} population, {growth.civicUpkeep.territory} territory, {growth.civicUpkeep.administration} administration).</p>;
+    })()}
+    {view.growth && <p className="field-help">Realm coin per turn: {view.growth.economy.income} income − {view.growth.economy.upkeep} upkeep = {view.growth.economy.net}. Queued formations add {view.growth.economy.queuedUpkeep} upkeep when completed.</p>}
     <section className="border-growth" aria-label="Border growth" data-testid="border-growth">
       <p><strong>Border growth:</strong> {town.borderExpansion.progress} / {town.borderExpansion.threshold} civic progress · +{town.borderExpansion.rate} per active turn</p>
       <progress aria-label="Civic progress toward next border" value={town.borderExpansion.progress} max={town.borderExpansion.threshold}/>
@@ -77,6 +88,11 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
   const tilePicker = <>
     <p className="field-help">Select a tile on the map to inspect this settlement’s land. Army movement is off while a settlement is selected.</p>
     <button type="button" disabled={!ready} aria-expanded={showTiles} onClick={() => setShowTiles(!showTiles)}>Select tiles</button>
+    {ready && showTiles && query && town.cellWindow && town.cellWindow.total > town.cellWindow.limit && <nav aria-label="Territory tile pages">
+      <button type="button" disabled={locked || town.cellWindow.offset === 0} onClick={() => setPage({ settlementId, selectedCell, offset: Math.max(0, town.cellWindow!.offset - town.cellWindow!.limit) })}>Previous tiles</button>
+      <span>Tiles {town.cellWindow.offset + 1}–{Math.min(town.cellWindow.total, town.cellWindow.offset + town.cellWindow.limit)} of {town.cellWindow.total}</span>
+      <button type="button" disabled={locked || town.cellWindow.offset + town.cellWindow.limit >= town.cellWindow.total} onClick={() => setPage({ settlementId, selectedCell, offset: town.cellWindow!.offset + town.cellWindow!.limit })}>Next tiles</button>
+    </nav>}
     {ready && showTiles && <div className="land-tile-list" aria-label="Known territory tiles">{town.cells.map(tile => <button type="button" key={tile.cell} aria-pressed={tile.cell === selectedCell} onClick={() => selectCell(tile.cell)} aria-label={`Inspect land hex ${tile.cell}`}><strong>Hex {tile.cell}</strong><small>{BIOME_NAMES[tile.biome]} · {tile.claimed ? tile.worked ? 'Worked' : 'Owned' : tile.factionId ? 'Foreign' : 'Unclaimed'}</small></button>)}</div>}
   </>;
   const tileFacts = cell && <>
@@ -84,7 +100,7 @@ export function SettlementLand({ view, settlementId, selectedCell, busy, selectC
       {cell.features !== 0 && <ul className="land-features">{NATURAL_FEATURES.filter(feature => (cell.features & feature.feature) !== 0).map(feature => <li key={feature.id}><strong>{feature.name}</strong> · {yieldText(feature.yields)}<small>{feature.description}</small></li>)}</ul>}
       <table className="land-yields"><caption>Yield breakdown per worked turn</caption><thead><tr><th scope="col">Source</th><th scope="col">Contribution</th></tr></thead><tbody>{([['Biome', cell.yields.biome], ['Features', cell.yields.features], ['Faction affinity', cell.yields.affinity], ['Improvement', cell.yields.improvement], ['Feature interactions', cell.yields.featureModifiers], ['Final tile yield', cell.yields.total]] as const).map(([label, value]) => <tr key={label}><th scope="row">{label}</th><td>{yieldText(value)}</td></tr>)}</tbody></table>
   </>;
-  const tileActions = !ready ? null : !cell ? <p role="status" className="field-help">{selectedCell === undefined ? 'Select a known tile to review its exact options.' : `Hex ${selectedCell} is outside this settlement’s known land options. Use Select tiles to choose a permitted location.`}</p> : <section className="land-cell" data-testid="land-cell" aria-label={`Land hex ${cell.cell}`}>
+  const tileActions = !ready ? null : !cell ? <p role="status" className="field-help">{selectedCell === undefined ? 'Select a known tile to review its exact options.' : `Hex ${selectedCell} has no details on the current page. Use Select tiles to choose a listed tile.`}</p> : <section className="land-cell" data-testid="land-cell" aria-label={`Land hex ${cell.cell}`}>
       <h4>Hex {cell.cell} · {BIOME_NAMES[cell.biome]}</h4>
       <p>{cell.cell === settlement.cell ? 'Settlement center · automatically worked' : cell.claimed ? cell.worked ? 'Owned · worker assigned' : 'Owned · not worked' : cell.factionId ? `Claimed by ${view.factions.find(item => item.id === cell.factionId)?.name ?? 'another realm'}` : 'Unclaimed land'}</p>
       {compact ? <p className="land-tile-total"><strong>Per worked turn:</strong> {yieldText(cell.yields.total)}</p> : tileFacts}

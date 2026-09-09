@@ -6,9 +6,9 @@ import { getLandIndex } from './territory';
 /** Map presentation only. No rosters, orders, officers, economy or event history. */
 export interface MapObservation extends Pick<Observation, 'factionId' | 'width' | 'height' | 'cells' | 'factions' | 'wars'> {
   armies: (Pick<ArmyView, 'id' | 'name' | 'factionId' | 'cell' | 'unitId' | 'domain' | 'carrierId'> & { formationCount?: number })[];
-  settlements: Pick<Settlement, 'id' | 'name' | 'factionId' | 'cell' | 'population'>[];
+  settlements: (Pick<Settlement, 'id' | 'name' | 'factionId' | 'cell' | 'population'> & Partial<Pick<Settlement, 'buildings' | 'queue'>>)[];
   ruins: Pick<Observation['ruins'][number], 'id' | 'name' | 'cell'>[];
-  land: Pick<Observation['land'], 'capitalSettlementId'>;
+  land: Pick<Observation['land'], 'capitalSettlementId'> & { settlements?: Pick<Observation['land']['settlements'][number], 'settlementId' | 'worked' | 'work'>[] };
 }
 
 const byId = (a: { id: string }, b: { id: string }): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
@@ -28,7 +28,7 @@ export function getSpectatorObservation(state: GameState, factionId: string): Ma
       id: army.id, name: army.name, factionId: army.factionId, cell: army.cell,
       unitId: armyUnitId(army), domain: armyDomain(army), carrierId: null, formationCount: army.formations.length,
     })),
-    settlements: Object.values(state.settlements).sort(byId).map(({ id, name, factionId, cell, population }) => ({ id, name, factionId, cell, population })),
+    settlements: Object.values(state.settlements).sort(byId).map(({ id, name, factionId, cell, population, buildings }) => ({ id, name, factionId, cell, population, buildings: [...buildings].sort() })),
     ruins: Object.values(state.ruins).sort(byId).map(({ id, name, cell }) => ({ id, name, cell })),
     land: { capitalSettlementId: state.land.capitals[factionId] ?? null },
     cells: Array.from({ length: state.world.terrain.length }, (_, cell) => {
@@ -38,6 +38,7 @@ export function getSpectatorObservation(state: GameState, factionId: string): Ma
         cell, terrain: state.world.terrain[cell] ?? 0, biome: state.land.biomes[cell] ?? state.world.biome[cell] ?? 0,
         waterDepth: state.world.waterDepth[cell] ?? 0, fertility: state.world.fertility[cell] ?? 0, visible: true,
         hydrology: state.world.hydrology[cell] ?? 0, roadMask: state.roads.edges[cell] ?? 0,
+        ...(state.resources.deposits[cell] ? { resourceId: state.resources.deposits[cell] } : {}),
         ...(town ? { settlementId: town.id, factionId: town.factionId } : {}), ...(improvementId ? { improvementId } : {}),
       };
     }),

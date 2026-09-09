@@ -1,4 +1,8 @@
 import { z } from 'zod';
+import { RESOURCES, validateResourceContent } from './resources';
+import { DEVELOPMENT_NODES, validateDevelopmentContent } from './development';
+export * from './resources';
+export * from './development';
 import { TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES, validateProgressionContent } from './progression';
 import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, validateCharacterContent } from './characters';
 import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, validateEcologyContent } from './ecology';
@@ -22,6 +26,7 @@ export const unitSchema = z.object({
   movementDomain: z.enum(['land', 'naval']).optional(),
   naval: z.object({ transportCapacity: z.number().int().min(0).max(24), oceanCapable: z.boolean() }).strict().optional(),
   requiredTechnologies: prerequisites.optional(), requiredBuildings: prerequisites.optional(),
+  introducedInRules: z.literal(15).optional(),
 }).strict().superRefine((unit, context) => {
   if ((unit.movementDomain === 'naval') !== (unit.naval !== undefined)) context.addIssue({ code: z.ZodIssueCode.custom, message: 'Naval movement and capabilities must be defined together' });
   if (unit.naval && unit.canFound) context.addIssue({ code: z.ZodIssueCode.custom, message: 'Ships carry founders; they cannot found settlements themselves' });
@@ -45,17 +50,25 @@ export const UNITS: readonly UnitDefinition[] = [
   { id: 'unit.transport', name: 'Charter transport', description: 'Carries up to eight land formations per surviving transport formation. Lightly armed; escorts protect its passengers. Ocean navigation unlocks deep-water passage.', cost: 36, coinCost: 24, upkeep: 2, movement: 5, sight: 3, canFound: false, strength: 70, attack: 6, armor: 3, initiative: 5, range: 0, morale: 65, movementDomain: 'naval', naval: { transportCapacity: 8, oceanCapable: true }, requiredTechnologies: ['technology.coastal_navigation'], requiredBuildings: ['building.harbor'] },
   { id: 'unit.coastal_warship', name: 'Coastwatch galley', description: 'Fast coastal escorts with ranged crews. Shallow-draft galleys cannot enter deep ocean, even after Ocean navigation; they carry no land formations.', cost: 44, coinCost: 30, upkeep: 3, movement: 6, sight: 4, canFound: false, strength: 90, attack: 18, armor: 6, initiative: 10, range: 2, morale: 75, movementDomain: 'naval', naval: { transportCapacity: 0, oceanCapable: false }, requiredTechnologies: ['technology.coastal_navigation'], requiredBuildings: ['building.harbor'] },
   { id: 'unit.ocean_warship', name: 'Deepwake warship', description: 'Heavy ocean-going escorts with armored hulls and longer-ranged crews. Expensive to maintain and slower than galleys; they carry no land formations.', cost: 64, coinCost: 48, upkeep: 4, movement: 5, sight: 4, canFound: false, strength: 120, attack: 24, armor: 9, initiative: 7, range: 3, morale: 85, movementDomain: 'naval', naval: { transportCapacity: 0, oceanCapable: true }, requiredTechnologies: ['technology.coastal_navigation', 'technology.ocean_navigation'], requiredBuildings: ['building.harbor'] },
+  { id: 'unit.skirmisher', name: 'Reed skirmishers', description: 'Light missile companies move quickly and strike early from the second rank. Fragile in a prolonged melee; they trade a wayfinder’s scouting reach for stronger fighting.', cost: 26, coinCost: 14, upkeep: 2, movement: 4, sight: 3, canFound: false, strength: 40, attack: 13, armor: 1, initiative: 14, range: 1, morale: 60, requiredTechnologies: ['technology.stewardship'], requiredBuildings: ['building.granary'], introducedInRules: 15 },
+  { id: 'unit.arbalester', name: 'Witness arbalesters', description: 'Workshop-trained bow crews deliver powerful volleys from the rear rank. Slow to take the initiative and vulnerable when their protecting line collapses.', cost: 38, coinCost: 22, upkeep: 3, movement: 3, sight: 2, canFound: false, strength: 45, attack: 20, armor: 3, initiative: 4, range: 3, morale: 70, requiredTechnologies: ['technology.cinder_masonry'], requiredBuildings: ['building.workshop'], introducedInRules: 15 },
+  { id: 'unit.halberdier', name: 'Kiln halberdiers', description: 'Armored polearm companies combine strong blows with second-rank reach. Their heavy equipment slows a column, and they cost more to maintain than ash pikes.', cost: 48, coinCost: 28, upkeep: 4, movement: 2, sight: 2, canFound: false, strength: 80, attack: 20, armor: 7, initiative: 4, range: 1, morale: 80, requiredTechnologies: ['technology.quarry_cranes'], requiredBuildings: ['building.workshop'], introducedInRules: 15 },
+  { id: 'unit.lancer', name: 'Road lancers', description: 'Charter-backed armored riders deliver heavy melee blows with high initiative. Slower and costlier than outriders, they provide a durable mounted assault company.', cost: 54, coinCost: 32, upkeep: 4, movement: 4, sight: 3, canFound: false, strength: 65, attack: 24, armor: 6, initiative: 11, range: 0, morale: 80, requiredTechnologies: ['technology.surveyed_estates'], requiredBuildings: ['building.market'], introducedInRules: 15 },
 ];
+/** Rules-aware catalogs keep future paid recruits out of historical commands and observations. */
+export function unitsForRules(version: number): readonly UnitDefinition[] {
+  return UNITS.filter(unit => (unit.introducedInRules ?? 4) <= version);
+}
 /** Stable content checksum. Gameplay saves reject packs with changed parameters. */
 export function checksum(text: string): string {
   let hash = 2166136261;
   for (let i = 0; i < text.length; i++) hash = Math.imul(hash ^ text.charCodeAt(i), 16777619);
   return (hash >>> 0).toString(16).padStart(8, '0');
 }
-export const CONTENT_HASH = checksum(JSON.stringify({ BUILDINGS, UNITS, FACTIONS, TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES }));
+export const CONTENT_HASH = checksum(JSON.stringify({ BUILDINGS, UNITS, FACTIONS, TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, RESOURCES, DEVELOPMENT_NODES }));
 export const LOCALIZATION: Readonly<Record<string, string>> = Object.fromEntries([
   ...INNATE_BATTLE_ABILITIES.flatMap(item => [[item.id + '.name', item.name], [item.id + '.description', item.description]]),
-  ...[...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...MAGIC_PATHS, ...Object.entries(CAMPAIGN_PACES).map(([key, profile]) => ({ ...profile, id: 'pace.' + key }))].flatMap(item => [[item.id + '.name', item.name], ...('description' in item ? [[item.id + '.description', item.description]] : [])]),
+  ...[...RESOURCES, ...DEVELOPMENT_NODES, ...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...MAGIC_PATHS, ...Object.entries(CAMPAIGN_PACES).map(([key, profile]) => ({ ...profile, id: 'pace.' + key }))].flatMap(item => [[item.id + '.name', item.name], ...('description' in item ? [[item.id + '.description', item.description]] : [])]),
   ...Object.entries(FACTION_PROFILES).flatMap(([id, profile]) => [[id + '.description', profile.description], [id + '.recruitmentRationale', profile.recruitmentRationale]]),
 ]);
 
@@ -75,10 +88,12 @@ export function validateProductionContent(buildings = BUILDINGS, units = UNITS, 
     if (unit.naval && !unit.requiredBuildings?.some(buildingId => buildingById.get(buildingId)?.coastalOnly)) throw new Error('Naval recruitment requires coastal infrastructure: ' + unit.id);
   }
 }
-export function validateContent(): { buildings: number; units: number; factions: number; technologies: number; institutions: number; doctrines: number; projects: number; characterRoles: number; characterMissions: number; characterSkills: number; commanderAbilities: number; improvements: number; naturalFeatures: number; arcaneDiscoveries: number; battleSpells: number; magicPaths: number; innateBattleAbilities: number; hash: string } {
-  const definitions = [...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...MAGIC_PATHS, ...INNATE_BATTLE_ABILITIES];
+export function validateContent(): { resources: number; developmentNodes: number; buildings: number; units: number; factions: number; technologies: number; institutions: number; doctrines: number; projects: number; characterRoles: number; characterMissions: number; characterSkills: number; commanderAbilities: number; improvements: number; naturalFeatures: number; arcaneDiscoveries: number; battleSpells: number; magicPaths: number; innateBattleAbilities: number; hash: string } {
+  const definitions = [...RESOURCES, ...DEVELOPMENT_NODES, ...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...MAGIC_PATHS, ...INNATE_BATTLE_ABILITIES];
   if (new Set(definitions.map(item => item.id)).size !== definitions.length) throw new Error('Duplicate content ID');
   validateProductionContent();
+  validateResourceContent();
+  validateDevelopmentContent({ buildings: new Set(BUILDINGS.map(item => item.id)), technologies: new Set(TECHNOLOGIES.map(item => item.id)), institutions: new Set(INSTITUTIONS.map(item => item.id)), doctrines: new Set(DOCTRINES.map(item => item.id)), resources: new Set(RESOURCES.map(item => item.id)) });
   FACTIONS.forEach(item => factionSchema.parse(item));
   validateFactionContent(UNITS);
   validateProgressionContent(new Set(BUILDINGS.map(item => item.id)));
@@ -87,5 +102,5 @@ export function validateContent(): { buildings: number; units: number; factions:
   for (const ability of INNATE_BATTLE_ABILITIES) if (!UNITS.some(unit => unit.id === ability.unitId)) throw new Error('Unknown innate-ability unit: ' + ability.unitId);
   validateEcologyContent(new Set(FACTIONS.map(item => item.id)));
   for (const item of definitions) if (!LOCALIZATION[item.id + '.name']) throw new Error('Missing localization: ' + item.id);
-  return { buildings: BUILDINGS.length, units: UNITS.length, factions: FACTIONS.length, technologies: TECHNOLOGIES.length, institutions: INSTITUTIONS.length, doctrines: DOCTRINES.length, projects: 1, characterRoles: CHARACTER_DEFINITIONS.length, characterMissions: CHARACTER_MISSIONS.length, characterSkills: CHARACTER_SKILLS.length, commanderAbilities: COMMANDER_ABILITIES.length, improvements: IMPROVEMENTS.length, naturalFeatures: NATURAL_FEATURES.length, arcaneDiscoveries: ARCANE_DISCOVERIES.length, battleSpells: BATTLE_SPELLS.length, magicPaths: MAGIC_PATHS.length, innateBattleAbilities: INNATE_BATTLE_ABILITIES.length, hash: CONTENT_HASH };
+  return { resources: RESOURCES.length, developmentNodes: DEVELOPMENT_NODES.length, buildings: BUILDINGS.length, units: UNITS.length, factions: FACTIONS.length, technologies: TECHNOLOGIES.length, institutions: INSTITUTIONS.length, doctrines: DOCTRINES.length, projects: 1, characterRoles: CHARACTER_DEFINITIONS.length, characterMissions: CHARACTER_MISSIONS.length, characterSkills: CHARACTER_SKILLS.length, commanderAbilities: COMMANDER_ABILITIES.length, improvements: IMPROVEMENTS.length, naturalFeatures: NATURAL_FEATURES.length, arcaneDiscoveries: ARCANE_DISCOVERIES.length, battleSpells: BATTLE_SPELLS.length, magicPaths: MAGIC_PATHS.length, innateBattleAbilities: INNATE_BATTLE_ABILITIES.length, hash: CONTENT_HASH };
 }

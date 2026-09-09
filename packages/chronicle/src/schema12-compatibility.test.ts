@@ -42,7 +42,7 @@ describe('genuine schema11 geography and road migration', () => {
     const old = deserializeGame(entry.parse(data.twelveOrigin).save), before = serializeGame(old);
     expect(applyCommandForVersion(old, { type: 'accelerateRoad', factionId: old.turnOwnerId, settlementId: 'settlement.1' }, 11).ok).toBe(false);
     expect(serializeGame(old)).toBe(before);
-    const game = createGame({ seed: 74, size: 'tiny', factionCount: 4, layout: 'islands', rosterVersion: 3 });
+    const game = createGame({ seed: 74, size: 'tiny', factionCount: 4, layout: 'islands', rosterVersion: 3, rulesVersion: 12 });
     expect(() => serializeGameForVersion(game, 11)).toThrow(/geography or roads/);
   });
 });

@@ -1,0 +1,110 @@
+[WebServer] (node:343168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:343180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:343252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/development-trees.spec.ts:65:1 › earned civic and faction branches pay authoritative costs, refresh one selected query and persist at 390px (3.4s)
+  ✓  2 tests/gameplay/development-trees.spec.ts:98:1 › survivors spend experience earned in a saved real battle and preserve training after reload (3.4s)
+  ✓  3 tests/gameplay/development-trees.spec.ts:118:1 › 100 armies use a bounded directory and one arbitrary selected tree; branch keyboard inspection makes no orders (1.5s)
+  ✘  4 tests/gameplay/resources-overview.spec.ts:39:1 › a generated grain deposit becomes paid worked grange art, produces stocks and sells through a saved narrow market (6.9s)
+(node:344100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 tests/gameplay/resources-overview.spec.ts:91:1 › political overview and realm filters change only the map presentation, with an accessible narrow legend (45.6s)
+
+
+  1) tests/gameplay/resources-overview.spec.ts:39:1 › a generated grain deposit becomes paid worked grange art, produces stocks and sells through a saved narrow market 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "approved"
+    Received: undefined
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      41 |   expect(fixture.marketCost).toBeGreaterThan(0);
+      42 |   await load(page, fixture.state); await selectFromRegistry(page, 'settlements', fixture.townName);
+    > 43 |   await expect.poll(() => page.evaluate(cell => window.__THEANDRIL__!.getArtDiagnostics()!.tileFootprints.find(item => item.cell === cell && item.contentId === 'resource.grain')?.presentation, fixture.deposit)).toBe('approved');
+         |                                                                                                                                                                                                                    ^
+      44 |   expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell)?.resourceId, fixture.deposit)).toBe('resource.grain');
+      45 |   expect((await grainStock(page)).amount).toBe(0);
+      46 |   await page.getByTestId('map-container').screenshot({ path: info.outputPath('generated-grain-deposit.png') });
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/resources-overview.spec.ts:43:212
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice27-resource-development/resources-overview-a-gener-a1858-rough-a-saved-narrow-market/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice27-resource-development/resources-overview-a-gener-a1858-rough-a-saved-narrow-market/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice27-resource-development/resources-overview-a-gener-a1858-rough-a-saved-narrow-market/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice27-resource-development/resources-overview-a-gener-a1858-rough-a-saved-narrow-market/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/resources-overview.spec.ts:91:1 › political overview and realm filters change only the map presentation, with an accessible narrow legend 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('faction-overview-control').getByRole('button', { name: 'Realms', exact: true })
+        - locator resolved to <button type="button" aria-pressed="false">Realms</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - element is outside of the viewport
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - element is outside of the viewport
+        - retrying click action
+          - waiting 100ms
+        83 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - element is outside of the viewport
+         - retrying click action
+           - waiting 500ms
+
+
+       99 |   const control = page.getByTestId('faction-overview-control');
+      100 |   await control.locator(':scope > summary').click();
+    > 101 |   await control.getByRole('button', { name: 'Realms', exact: true }).click();
+          |                                                                      ^
+      102 |   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getWorldOverview()?.mode)).toBe('political');
+      103 |   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.lod)).toBe('world-overview');
+      104 |   await expect(control.getByRole('checkbox')).toHaveCount(2);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/resources-overview.spec.ts:101:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice27-resource-development/resources-overview-politic-fb8b8-an-accessible-narrow-legend/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice27-resource-development/resources-overview-politic-fb8b8-an-accessible-narrow-legend/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice27-resource-development/resources-overview-politic-fb8b8-an-accessible-narrow-legend/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice27-resource-development/resources-overview-politic-fb8b8-an-accessible-narrow-legend/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/gameplay/resources-overview.spec.ts:39:1 › a generated grain deposit becomes paid worked grange art, produces stocks and sells through a saved narrow market 
+    tests/gameplay/resources-overview.spec.ts:91:1 › political overview and realm filters change only the map presentation, with an accessible narrow legend 
+  3 passed (1.1m)

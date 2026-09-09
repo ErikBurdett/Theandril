@@ -1,11 +1,11 @@
 import { expect, test } from 'vitest';
-import { FACTIONS, LAND_MILITARY_UNIT_IDS, UNITS } from '@theandril/content';
+import { FACTIONS, BASE_LAND_MILITARY_UNIT_IDS as LAND_MILITARY_UNIT_IDS, UNITS } from '@theandril/content';
 import { applyCommand, createArmyFormation, deserializeGame, getObservation, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
 import { prosperityCampaign } from '../../test-fixtures/src/victory-fixture';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { planTurn } from './index';
 
-/** Authored equal infrastructure/forces isolate preferences, not earned development.
+/** Authored equal basic forces isolate the frozen five-role culture preferences before research unlocks.
  * Every proposed order, payment and subsequent troop completion uses real rules. */
 function equalForces(definitionId: string, coins = 1000): GameState {
   const game = prosperityCampaign(), owner = game.factions.find(faction => faction.id === game.turnOwnerId)!;
@@ -71,7 +71,10 @@ test('Vesper’s expensive preferences do not override the real treasury gate', 
   const firstTown = view.settlements.find(town => town.factionId === view.factionId)!;
   for (const itemId of ['unit.heavy_infantry', 'unit.cavalry']) expect(view.productionOptions.find(option => option.settlementId === firstTown.id && option.itemId === itemId)?.canQueue).toBe(false);
   const plan = planTurn(view);
-  expect(plan.find(command => command.type === 'queue' && command.settlementId === firstTown.id)).toMatchObject({ itemId: 'unit.spearman' });
+  // The actual caravan already needs more than this12-coin treasury to found.
+  // Modern planning retains its fee before optional paid recruitment.
+  expect(view.growth!.founding.coinCost).toBeGreaterThan(view.treasury);
+  expect(plan.some(command => command.type === 'queue')).toBe(false);
   expect(serializeGame(game)).toBe(before);
   for (const command of plan) expect(applyCommand(game, command).ok, JSON.stringify(command)).toBe(true);
   expect(game.factions.find(faction => faction.id === game.turnOwnerId)!.treasury).toBeGreaterThanOrEqual(0);

@@ -1,0 +1,93 @@
+
+Running 5 tests using 1 worker
+
+(node:380685) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/gameplay/development-trees.spec.ts:65:1 › earned civic and faction branches pay authoritative costs, refresh one selected query and persist at 390px (7.6s)
+(node:381519) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/gameplay/development-trees.spec.ts:98:1 › survivors spend experience earned in a saved real battle and preserve training after reload (5.1s)
+  ✓  3 tests/gameplay/development-trees.spec.ts:118:1 › 100 armies use a bounded directory and one arbitrary selected tree; branch keyboard inspection makes no orders (2.2s)
+  ✘  4 tests/gameplay/resources-overview.spec.ts:39:1 › a generated grain deposit becomes paid worked grange art, produces stocks and sells through a saved narrow market (9.4s)
+
+
+  1) tests/gameplay/development-trees.spec.ts:65:1 › earned civic and faction branches pay authoritative costs, refresh one selected query and persist at 390px 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  getByTestId('development-query')
+    Expected: "d744e7b2"
+    Received: "06e453ed"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" getByTestId('development-query') with timeout 5000ms
+      - waiting for getByTestId('development-query')
+        - locator resolved to <div data-query-hash="" data-scope="hearth" data-query-state="loading" data-entity-id="settlement.3" data-testid="development-query">…</div>
+        - unexpected value ""
+        13 × locator resolved to <div data-scope="hearth" data-query-state="ready" data-query-hash="06e453ed" data-entity-id="settlement.3" data-testid="development-query">…</div>
+           - unexpected value "06e453ed"
+
+
+      47 |   await expect(page.getByTestId('development-query')).toHaveAttribute('data-entity-id', entityId);
+      48 |   await expect(page.getByTestId('development-query')).toHaveAttribute('data-query-state', 'ready');
+    > 49 |   await expect(page.getByTestId('development-query')).toHaveAttribute('data-query-hash', await page.evaluate(() => window.__THEANDRIL__!.getStateHash()));
+         |                                                       ^
+      50 | }
+      51 | async function saveReload(page: Page) {
+      52 |   await dialog(page).getByRole('button', { name: 'Close realm progression', exact: true }).click();
+        at ready (/home/telephoneheater/Work/Theandril/tests/gameplay/development-trees.spec.ts:49:55)
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/development-trees.spec.ts:82:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice27-resource-final/development-trees-earned-c-470d2--query-and-persist-at-390px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice27-resource-final/development-trees-earned-c-470d2--query-and-persist-at-390px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice27-resource-final/development-trees-earned-c-470d2--query-and-persist-at-390px/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice27-resource-final/development-trees-earned-c-470d2--query-and-persist-at-390px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/resources-overview.spec.ts:39:1 › a generated grain deposit becomes paid worked grange art, produces stocks and sells through a saved narrow market 
+
+    Test was interrupted.
+
+    Error: locator.click: Test ended.
+    Call log:
+      - waiting for getByRole('button', { name: 'Load campaign', exact: true })
+
+
+      80 |   await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
+      81 |   const savedHash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
+    > 82 |   await page.reload(); await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+         |                                                                                               ^
+      83 |   await expect(page.getByTestId('feedback')).toContainText('Campaign restored');
+      84 |   expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(savedHash);
+      85 |   expect((await grainStock(page)).amount).toBe(stock - 2);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/resources-overview.spec.ts:82:95
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/slice27-resource-final/resources-overview-a-gener-a1858-rough-a-saved-narrow-market/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/slice27-resource-final/resources-overview-a-gener-a1858-rough-a-saved-narrow-market/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/slice27-resource-final/resources-overview-a-gener-a1858-rough-a-saved-narrow-market/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/slice27-resource-final/resources-overview-a-gener-a1858-rough-a-saved-narrow-market/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/development-trees.spec.ts:65:1 › earned civic and faction branches pay authoritative costs, refresh one selected query and persist at 390px 
+  1 interrupted
+    tests/gameplay/resources-overview.spec.ts:39:1 › a generated grain deposit becomes paid worked grange art, produces stocks and sells through a saved narrow market 
+  1 did not run
+  2 passed (26.4s)

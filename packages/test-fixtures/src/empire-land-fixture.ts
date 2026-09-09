@@ -22,17 +22,25 @@ export function empireLandCampaign(size: 'huge' | 'legendary', fullyExplored = f
     army.cell = target;
   }
   for (const town of towns) { town.factionId = owner; town.population = 8; town.food = 1_000; }
+  // This authored UI fixture consolidates32/40 hearths under one seat. Give
+  // each one a finite land-development purse: modern paid borders must not
+  // exhaust the old single-realm100,000 balance midway through the fixture.
+  const faction = game.factions.find(faction => faction.id === owner)!;
+  faction.treasury = towns.length * 10_000;
   rebaseAuthoredLand(game);
   for (const town of towns) {
     // Purchase the connected radius ring by ring using newly quoted legal options.
     for (let count = 0; count < 30; count++) {
       const detail = getSettlementLandObservation(game, owner, town.id);
       const target = detail?.cells.find(cell => cell.claim.canStart);
-      if (!target) break;
+      if (!target) throw new Error(`Empire fixture could not quote paid claim ${count + 1}/30 for ${town.id} with ${faction.treasury} coin.`);
+      const before = faction.treasury;
       const result = applyCommand(game, { type: 'claimCell', factionId: owner, settlementId: town.id, cell: target.cell });
       if (!result.ok) throw new Error(result.error);
+      if (faction.treasury !== before - target.claim.coinCost) throw new Error('Empire fixture claim did not charge its exact observed quote.');
     }
     const detail = getSettlementLandObservation(game, owner, town.id);
+    if (detail?.claimed.length !== 37) throw new Error(`Empire fixture ${town.id} must have all37 genuinely acquired claims.`);
     const workers = detail?.cells.filter(cell => cell.canWork).slice(0, 6).map(cell => cell.cell) ?? [];
     const result = applyCommand(game, { type: 'setWorkedTiles', factionId: owner, settlementId: town.id, cells: workers });
     if (!result.ok) throw new Error(result.error);

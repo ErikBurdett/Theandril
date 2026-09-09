@@ -9,7 +9,7 @@ afterEach(() => vi.restoreAllMocks());
 function ownIds(state: GameState): string[] {
   return Object.values(state.settlements).filter(town => town.factionId === state.turnOwnerId).map(town => town.id).sort();
 }
-const summary = (town: SettlementLandObservation): SettlementLandObservation => ({ ...town, cells: [] });
+const summary = ({ cellWindow: _cellWindow, ...town }: SettlementLandObservation): SettlementLandObservation => ({ ...town, cells: [] });
 
 /** Authored town registries on unchanged generated geography; strict load checks
  * center spacing, territory, references and visibility before selector tests. */
@@ -69,10 +69,10 @@ describe('scoped settlement land queries', () => {
     getLandObservation(state, owner, visible, 'none');
     expect(enumerate).not.toHaveBeenCalled();
     getLandObservation(state, owner, visible, [id]);
-    expect(enumerate).toHaveBeenCalledTimes(1);
+    expect(enumerate).not.toHaveBeenCalled();
     enumerate.mockClear();
     getLandObservation(state, owner, visible);
-    expect(enumerate).toHaveBeenCalledTimes(3);
+    expect(enumerate).not.toHaveBeenCalled();
     enumerate.mockClear();
     // Both indexes are warm. A direct selector must use the requested record,
     // not enumerate every town and discard the unwanted results afterwards.
@@ -80,7 +80,7 @@ describe('scoped settlement land queries', () => {
     state.settlements = new Proxy(original, { ownKeys: () => { throw new Error('Unrelated settlement scan'); } });
     try {
       expect(getSettlementLandObservation(state, owner, id)?.settlementId).toBe(id);
-      expect(enumerate).toHaveBeenCalledTimes(1);
+      expect(enumerate).not.toHaveBeenCalled();
       enumerate.mockClear();
       expect(getSettlementLandObservation(state, owner, 'settlement.missing')).toBeNull();
       expect(enumerate).not.toHaveBeenCalled();
@@ -191,13 +191,13 @@ describe('scoped settlement land queries', () => {
     }
   });
 
-  it('enumerates only selected-window quote disks and preserves current fog filtering', () => {
+  it('uses maintained frontiers without growing disks and preserves current fog filtering', () => {
     const state = windowCampaign(17), owner = state.turnOwnerId, ids = ownIds(state), visible = visibility.indexes(state).visible.get(owner)!;
     const options = Object.freeze({ offset: 16, limit: 8 });
     const expectedIds = [ids[16]!, ...ids.slice(0, 7)];
     const enumerate = vi.spyOn(visibility, 'cellsWithin');
     getLandObservation(state, owner, visible, options);
-    expect(enumerate).toHaveBeenCalledTimes(8);
+    expect(enumerate).not.toHaveBeenCalled();
     enumerate.mockClear();
     getLandObservation(state, owner, visible, { offset: 0, limit: 0 });
     expect(enumerate).not.toHaveBeenCalled();

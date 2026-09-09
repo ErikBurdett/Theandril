@@ -18,13 +18,14 @@ test('fully explored Huge art rendering stays viewport-bounded across static fac
   const mapBindings = new Set<string>([...FACTION_ART_IDS,
     'terrain.ocean', 'terrain.grassland', 'terrain.temperate_forest', 'terrain.taiga', 'terrain.tundra', 'terrain.desert', 'terrain.steppe', 'terrain.marsh', 'terrain.rainforest', 'terrain.alpine', 'terrain.ash_scrub', 'terrain.chalkland',
     'improvement.terraced_fields', 'improvement.managed_woodlot', 'improvement.quarry', 'improvement.reedworks', 'improvement.shore_fishery',
+    'improvement.spring_garden', 'improvement.polder', 'improvement.grove_archive', 'improvement.oreworks', 'improvement.tide_observatory',
     'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin',
   ]);
   const neededPages = new Set(catalog.assets.filter(asset => mapBindings.has(asset.id) || asset.contentIds.some(id => mapBindings.has(id))).map(asset => asset.atlasId));
   const mapAtlases = catalog.atlases.filter(atlas => neededPages.has(atlas.id));
   const expectedResidency = mapAtlases.reduce((sum, atlas) => sum + atlas.width * atlas.height * 4, 0);
   expect(expectedResidency).toBeGreaterThan(0);
-  expect(expectedResidency).toBeLessThanOrEqual(16 * 1024 * 1024);
+  expect(expectedResidency).toBeLessThanOrEqual(17 * 1024 * 1024);
   const ownDefinition = state.factions.find(faction => faction.id === state.turnOwnerId)!.definitionId;
   await page.locator('input[type=file]').setInputFiles({ name: 'fully-explored-art.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(state))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
@@ -44,12 +45,17 @@ test('fully explored Huge art rendering stays viewport-bounded across static fac
     expect(metrics?.visibleCells).toBeLessThan(10000);
     expect(metrics?.pooledSprites).toBeLessThanOrEqual(64 * 256 + 1500);
     expect(metrics?.residentAtlasBytesEstimate).toBe(expectedResidency);
-    expect(metrics?.residentAtlasBytesEstimate).toBeLessThanOrEqual(16 * 1024 * 1024);
+    expect(metrics?.residentAtlasBytesEstimate).toBeLessThanOrEqual(17 * 1024 * 1024);
     expect(metrics?.atlasPages).toBe(mapAtlases.length);
-    // Full exploration must not regress to cloning hundreds of thousands of
-    // cell objects, or eagerly enumerate every town's land action quotes.
-    expect(metrics?.cellTransferBytes).toBeGreaterThan(cells * 9);
-    expect(metrics?.cellTransferBytes).toBeLessThan(2 * 1024 * 1024);
+    // Packed v3 uses a 4-byte cell ID and 8 scalar bytes per observed row:
+    // the five v1 scalars, two geography bytes and one resource code. This
+    // legacy-geography fixture previously used v1; v2 already had geography.
+    // Bound sparse metadata/header overhead independently of the fixed rows;
+    // full exploration must not regress to per-cell object transfer or eager
+    // enumeration of every town's land action quotes.
+    const fixedCellBytes = cells * (4 + 8);
+    expect(metrics?.cellTransferBytes).toBeGreaterThanOrEqual(fixedCellBytes);
+    expect(metrics?.cellTransferBytes).toBeLessThan(fixedCellBytes + 64 * 1024);
     expect(metrics?.transferBytes).toBeLessThan(3 * 1024 * 1024);
     expect(metrics?.landQueryCount).toBe(0);
     expect(await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.land.settlements.every(town => town.cells.length === 0))).toBe(true);

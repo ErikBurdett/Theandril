@@ -84,3 +84,49 @@ describe('bounded battlefield presentation, never a second combat engine', () =>
     expect(BATTLE_FX_LIMIT).toBe(12);
   });
 });
+
+describe('authoritative individual battle presentation', () => {
+  function individualPacket(): BattlePresentation {
+    const before = scene(); before.formations = [before.formations[0]!, before.formations[20]!];
+    for (const formation of before.formations) { formation.column = 2; formation.position = { forward: 0, lateral: 0 }; formation.members = [0, 1, 2]; formation.strength = 3; formation.cohesion = 100; }
+    before.soldiers = before.formations.flatMap(formation => [0, 1, 2].map(slot => ({ id: `${formation.id}.soldier.${slot}`, formationId: formation.id, slot, x: (slot - 1) / 3, y: 0, alive: true })));
+    const after = structuredClone(before), target = after.formations[1]!;
+    after.formations[0]!.position = { forward: 2, lateral: 1 }; after.formations[0]!.cohesion = 92;
+    target.members = [0, 2]; target.strength = 2; after.soldiers = after.soldiers!.filter(soldier => soldier.id !== `${target.id}.soldier.1`); after.round = 1;
+    const base = { round: 1, sourceId: before.formations[0]!.id, sourceKind: 'formation' as const, targetIds: [target.id], abilityId: null, attackKind: null, changes: [], winner: null, reason: null };
+    return { battleId: 'battle.individual', before, after, events: [
+      { ...base, sequence: 0, type: 'move', changes: [{ formationId: before.formations[0]!.id, strengthDelta: 0, moraleDelta: 0, fatigueDelta: 0, wardDelta: 0, cohesionDelta: -8 }], movement: { formationId: before.formations[0]!.id, before: { forward: 0, lateral: 0 }, after: { forward: 2, lateral: 1 } } },
+      { ...base, sequence: 1, type: 'attack', attackKind: 'projectile', sourceSoldierIds: [`${before.formations[0]!.id}.soldier.0`], targetSoldierIds: [`${target.id}.soldier.1`], killedSoldierIds: [`${target.id}.soldier.1`], changes: [{ formationId: target.id, strengthDelta: -1, moraleDelta: 0, fatigueDelta: 0, wardDelta: 0 }] },
+      { ...base, sequence: 2, type: 'round' },
+    ] };
+  }
+  it('reconstructs exact moved anchors and casualty identities without changing packets or inventing deaths', () => {
+    const trace = individualPacket(), original = structuredClone(trace);
+    const start = presentationSnapshot(trace, 0), moved = presentationSnapshot(trace, 1), hit = presentationSnapshot(trace, 2), last = presentationSnapshot(trace, 3);
+    expect(start.formations[0]!.position).toEqual({ forward: 0, lateral: 0 });
+    expect(moved.formations[0]!.position).toEqual({ forward: 2, lateral: 1 });
+    expect(start.formations[0]!.cohesion).toBe(100); expect(moved.formations[0]!.cohesion).toBe(92);
+    expect(hit.formations[1]!.cohesion).toBe(100);
+    expect(moved.soldiers!.every(soldier => soldier.alive)).toBe(true);
+    expect(hit.soldiers!.filter(soldier => !soldier.alive).map(soldier => soldier.id)).toEqual(trace.events[1]!.killedSoldierIds);
+    expect(hit.formations[1]!.members).toEqual([0, 2]); expect(hit.formations[1]!.strength).toBe(2);
+    expect(last.soldiers!.filter(soldier => soldier.alive)).toEqual(trace.after.soldiers);
+    expect(last.soldiers!.filter(soldier => !soldier.alive)).toHaveLength(1);
+    expect(trace).toEqual(original);
+  });
+  it('moves only recorded formation positions and preserves survivor slots across desktop and narrow layouts', () => {
+    const trace = individualPacket(), moved = presentationSnapshot(trace, 1), hit = presentationSnapshot(trace, 2);
+    for (const width of [1100, 390]) {
+      const height = battleSceneHeight(trace.before, width), initial = battleLayout(trace.before, width, height), moving = battleLayout(moved, width, height), casualty = battleLayout(hit, width, height);
+      const attacker = trace.before.formations[0]!, defender = trace.before.formations[1]!;
+      expect(initial.points.get(defender.id)).toEqual(moving.points.get(defender.id));
+      const before = initial.points.get(attacker.id)!, after = moving.points.get(attacker.id)!;
+      if (initial.portrait) { expect(after.y).toBeLessThan(before.y); expect(after.x).toBeGreaterThan(before.x); }
+      else { expect(after.x).toBeGreaterThan(before.x); expect(after.y).toBeGreaterThan(before.y); }
+      expect(moving.soldierPoints.size).toBe(6);
+      for (const soldier of hit.soldiers!) expect(casualty.soldierPoints.get(soldier.id)).toEqual(moving.soldierPoints.get(soldier.id));
+      for (const point of moving.soldierPoints.values()) { expect(point.x).toBeGreaterThan(0); expect(point.x).toBeLessThan(width); expect(point.y).toBeGreaterThan(0); expect(point.y).toBeLessThan(height); }
+      for (const scale of moving.soldierScales.values()) { expect(scale).toBeGreaterThan(0); expect(scale).toBeLessThanOrEqual(.65); }
+    }
+  });
+});

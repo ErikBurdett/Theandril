@@ -14,8 +14,9 @@ const end: GameCommand = { type: 'endTurn', factionId };
 const merge: GameCommand = { type: 'mergeArmies', factionId, sourceArmyId: 'army.1', targetArmyId: 'army.2' };
 const issue = (state: GameState, command: GameCommand): void => { expect(applyCommand(state, command), JSON.stringify(command)).toMatchObject({ ok: true }); };
 const reject = (state: GameState, command: unknown): void => { const hash = stateHash(state); expect(applyCommand(state, command).ok).toBe(false); expect(stateHash(state)).toBe(hash); };
-function field(): GameState {
-  const state = createGame({ seed: 88, size: 'tiny', factionCount: 1, pace: 'short', generatorVersion: 2 });
+function field(rulesVersion: 15 | 16 = 16): GameState {
+  const state = createGame({ rulesVersion, seed: 88, size: 'tiny', factionCount: 1, pace: 'short', generatorVersion: 2 });
+  state.resources.deposits = {}; // The entire physical map is authored below.
   state.world.terrain.fill(1); state.world.biome = deriveBiomes(state.world.seed, state.world.width, state.world.height, state.world.terrain, state.world.generatorVersion);
   state.world.waterDepth = deriveWaterDepth(state.world.width, state.world.height, state.world.terrain);
   for (const army of Object.values(state.armies)) army.cell = 100;
@@ -70,7 +71,8 @@ describe('real army formation containers', () => {
     expect(army.formations.map(item => item.id)).toContain(guardId);
     expect(armyStrength(army)).toBe(80); expect(armyMovement(army)).toBe(3); expect(armySight(army)).toBe(4); expect(armyUpkeep(army)).toBe(3);
     const treasury = state.factions[0]!.treasury; const income = settlementYields(state, town).coin;
-    issue(state, end); expect(state.factions[0]!.treasury).toBe(treasury + income - 3);
+    const civicUpkeep = getObservation(state, factionId).growth!.civicUpkeep;
+    issue(state, end); expect(state.factions[0]!.treasury).toBe(treasury + income - 3 - civicUpkeep);
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
   });
 
@@ -195,7 +197,7 @@ describe('formation save invariants and preserved historical rules', () => {
   });
 
   it('does not reinterpret new commands/content as legacy rules or fabricate old seals for transferred formations', () => {
-    const state = createGame({ seed: 2, size: 'tiny', factionCount: 1, generatorVersion: 1, rosterVersion: 1 });
+    const state = createGame({ rulesVersion: 15, seed: 2, size: 'tiny', factionCount: 1, generatorVersion: 1, rosterVersion: 1 });
     const before = stateHash(state);
     expect(applyCommandForVersion(state, merge, 5).ok).toBe(false); expect(stateHash(state)).toBe(before);
     issue(state, { type: 'found', factionId, armyId: 'army.1', name: 'Legacy Hearth' });
@@ -204,7 +206,7 @@ describe('formation save invariants and preserved historical rules', () => {
     const old = stateHash(state); expect(applyCommandForVersion(state, command, 5).ok).toBe(false); expect(stateHash(state)).toBe(old);
     issue(state, command);
     expect(() => serializeGameForVersion(state, 5)).toThrow(/legacy content/);
-    const mixed = field(); mixed.rosterVersion = 1; issue(mixed, merge);
+    const mixed = field(15); mixed.rosterVersion = 1; issue(mixed, merge);
     expect(() => serializeGameForVersion(mixed, 5)).toThrow(/legacy singleton/);
     issue(mixed, { type: 'splitArmy', factionId, armyId: 'army.2', formationIds: ['formation.1'] });
     expect(() => serializeGameForVersion(mixed, 5)).toThrow(/legacy singleton/);

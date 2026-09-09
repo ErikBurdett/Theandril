@@ -1,0 +1,94 @@
+{
+  "workload": "Offline art compilation; warm code/data, filesystem reads excluded. Not renderer performance.",
+  "approvedAssets": 516,
+  "publishedFrames": 579,
+  "validation": {
+    "medianMs": 163.80474600000002,
+    "p95Ms": 168.14540599999987,
+    "minMs": 161.51212499999997,
+    "maxMs": 168.14540599999987,
+    "iterations": 7
+  },
+  "pages": [
+    {
+      "id": "foundation",
+      "width": 2048,
+      "height": 2048,
+      "pngBytes": 2628301,
+      "rgbaBytes": 16777216,
+      "pngHash": "e32c73be1b8789f8c554eea7c6b7204d40fae20e3347be36ccbd76de8a9740de",
+      "build": {
+        "medianMs": 314.60981500000025,
+        "p95Ms": 332.753111,
+        "minMs": 308.7882460000001,
+        "maxMs": 332.753111,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 70.5052229999992,
+        "p95Ms": 84.79784800000016,
+        "minMs": 61.48239399999966,
+        "maxMs": 84.79784800000016,
+        "iterations": 7
+      }
+    },
+    {
+      "id": "map-works",
+      "width": 512,
+      "height": 512,
+      "pngBytes": 36079,
+      "rgbaBytes": 1048576,
+      "pngHash": "aa527029fe1b8a7ac05cbafb48f85f08ea3db12c3df00cbfaa696def170a89c5",
+      "build": {
+        "medianMs": 6.53842799999984,
+        "p95Ms": 7.362353999999868,
+        "minMs": 6.099474999999984,
+        "maxMs": 7.362353999999868,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 2.2022449999994933,
+        "p95Ms": 4.197110999999495,
+        "minMs": 2.0990920000003825,
+        "maxMs": 4.197110999999495,
+        "iterations": 7
+      }
+    },
+    {
+      "id": "battle",
+      "width": 1024,
+      "height": 1024,
+      "pngBytes": 26100,
+      "rgbaBytes": 4194304,
+      "pngHash": "6e7cbcc86537efea76ba24e4cad54858b5e77bbbf46f2c87ceb7cd9e9addea7b",
+      "build": {
+        "medianMs": 18.626844999999776,
+        "p95Ms": 29.200926999999865,
+        "minMs": 18.1451619999998,
+        "maxMs": 29.200926999999865,
+        "iterations": 7
+      },
+      "decode": {
+        "medianMs": 7.585088000000724,
+        "p95Ms": 9.324950000000172,
+        "minMs": 7.2804290000003675,
+        "maxMs": 9.324950000000172,
+        "iterations": 7
+      }
+    }
+  ],
+  "syntheticValidation": {
+    "description": "1,000 in-memory frame references repeating approved source pixels with distinct test IDs; not new production artwork or approval.",
+    "frames": 1000,
+    "processedPixelBytes": 16384000,
+    "status": "CANDIDATE",
+    "timing": {
+      "medianMs": 95.31696399999964,
+      "p95Ms": 96.19587800000045,
+      "minMs": 94.49388999999974,
+      "maxMs": 96.19587800000045,
+      "iterations": 5
+    }
+  },
+  "peakResidentMiB": 692.4375
+}

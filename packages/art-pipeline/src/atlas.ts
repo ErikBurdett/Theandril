@@ -9,12 +9,12 @@ export interface PixiAtlas {
   animations: Record<string, string[]>;
   meta: { image: string; size: { w: number; h: number }; scale: '1'; app: 'Theandril offline art factory'; version: '1' };
 }
-export interface AtlasOptions { id: string; pageSize: 1024 | 2048; imageUrl: string; jsonUrl: string; palette: Palette; extrusion?: number; padding?: number }
+export interface AtlasOptions { id: string; pageSize: 512 | 1024 | 2048; imageUrl: string; jsonUrl: string; palette: Palette; extrusion?: number; padding?: number }
 export interface AtlasBuild { png: Uint8Array; json: PixiAtlas; catalog: RuntimeCatalog }
 
 /** Stable ID-order shelf packing; no rotation/trimming. Two extruded pixels plus two clear pixels separate frames. */
 export function buildAtlas(input: readonly { manifest: AssetManifest; frames: readonly FrameImage[] }[], options: AtlasOptions): AtlasBuild {
-  if (![1024, 2048].includes(options.pageSize)) throw new Error('Atlas pages must be 1024 or 2048 pixels');
+  if (![512, 1024, 2048].includes(options.pageSize)) throw new Error('Atlas pages must be 512, 1024 or 2048 pixels');
   const extrusion = options.extrusion ?? 2, padding = options.padding ?? 2;
   if (!Number.isInteger(extrusion) || extrusion < 2 || extrusion > 8 || !Number.isInteger(padding) || padding < 2 || padding > 16) throw new Error('Atlas requires 2–8 pixel extrusion and 2–16 pixel transparent gutters');
   if (!input.length || input.length > 4096) throw new Error('Atlas requires 1–4096 approved assets');

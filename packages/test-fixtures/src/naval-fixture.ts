@@ -24,6 +24,7 @@ function command(state: GameState, input: GameCommand): void {
 export function navalCampaign({ enemyFleet = true }: { enemyFleet?: boolean } = {}): GameState {
   let state = createGame({ seed: 20260905, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4 });
   const world = state.world;
+  state.resources.deposits = {}; // This fixture replaces the entire physical geography with resource-free authored land/water.
   world.terrain.fill(0); world.biome.fill(0); world.fertility.fill(0);
   for (let y = 8; y <= 24; y++) for (let x = 5; x <= 12; x++) {
     const cell = y * world.width + x; world.terrain[cell] = 1; world.biome[cell] = 1; world.fertility[cell] = 65;

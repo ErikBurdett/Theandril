@@ -53,6 +53,7 @@ describe('siege economy, combat and control', () => {
     const cell = neighbors(town.cell, state.world.width, state.world.height).find(cell => isPassable(state.world.terrain[cell]!) && !Object.values(state.armies).some(army => army.cell === cell) && !Object.values(state.settlements).some(town => town.cell === cell));
     if (cell === undefined) throw new Error('Missing third-party deployment position');
     state.factions.push({ id: definition.id, definitionId: definition.id, name: definition.name, color: definition.color, treasury: 60, knowledge: 0 });
+    state.resources.stockpiles[definition.id] = {};
     state.progression[definition.id] = { technologies: [], institutionId: null, doctrineId: null };
     state.explored[definition.id] = new Set();
     state.arcaneResearch[definition.id] = [];
@@ -228,7 +229,7 @@ describe('settlement capture consequences', () => {
   it('sacks with exact bounded loot, population and building loss', () => {
     const state = fallen(undefined, campaign => {
       const capturer = campaign.factions.find(faction => faction.id === player);
-      if (capturer) capturer.treasury = 1_000_000_000 - 5;
+      if (capturer) capturer.treasury = Number.MAX_SAFE_INTEGER - 5;
     });
     const town = requireTown(state);
     const option = state.pendingCapture?.options.find(option => option.outcome === 'sack');
@@ -237,7 +238,7 @@ describe('settlement capture consequences', () => {
     expect(option.coinGain).toBe(5);
     const population = town.population; const buildings = town.buildings.length; const treasury = victim.treasury;
     capture(state, 'sack');
-    expect(state.factions.find(faction => faction.id === player)?.treasury).toBe(1_000_000_000);
+    expect(state.factions.find(faction => faction.id === player)?.treasury).toBe(Number.MAX_SAFE_INTEGER);
     expect(victim.treasury).toBe(treasury - 5);
     expect(town.population).toBe(population - option.populationLoss);
     expect(town.buildings).toHaveLength(buildings - option.buildingsLost);
@@ -251,6 +252,7 @@ describe('settlement capture consequences', () => {
     const definition = FACTIONS[2];
     const start = state.world.terrain.findIndex((terrain, cell) => isPassable(terrain) && !state.world.starts.includes(cell));
     state.factions.push({ id: definition.id, definitionId: definition.id, name: definition.name, color: definition.color, treasury: 60, knowledge: 0 });
+    state.resources.stockpiles[definition.id] = {};
     state.progression[definition.id] = { technologies: [], institutionId: null, doctrineId: null };
     state.world.starts.push(start); state.explored[definition.id] = new Set();
     state.arcaneResearch[definition.id] = [];

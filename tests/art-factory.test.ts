@@ -156,8 +156,19 @@ describe('published artwork and retained clean-checkout inputs', () => {
     for (const { manifest, frames } of inputs) {
       const directory = dirname(manifest.frames[0]!.sourcePath);
       const editable = await artifact(`${directory}/editable.aseprite`), sheetBytes = await artifact(`${directory}/aseprite/sprite.png`), metadataBytes = await artifact(`${directory}/aseprite/sprite.json`);
-      const tools = manifest.processing.filter((step) => step.tool === 'aseprite');
-      expect(manifest.processing.some((step) => step.tool === 'spritefusion-pixel-snapper')).toBe(true);
+      let steps = manifest.processing;
+      const batch = steps.find(step => step.tool === 'theandril-processing-batch');
+      if (batch) {
+        const receipts = await Promise.all(manifest.provenance.sourceRefs.filter(path => path.endsWith('.json')).map(async path => ({ path, bytes: await artifact(path) })));
+        const receipt = receipts.find(item => sha256(item.bytes) === batch.outputHash);
+        expect(receipt, `${manifest.id}: retained exact processing receipt`).toBeDefined();
+        const parsed = JSON.parse(receipt!.bytes.toString()) as { schemaVersion: number; assetId: string; steps: AssetManifest['processing'] };
+        expect(parsed.schemaVersion).toBe(1); expect(parsed.assetId).toBe(manifest.id);
+        expect(parsed.steps.length).toBeGreaterThan(32);
+        steps = parsed.steps;
+      }
+      const tools = steps.filter((step) => step.tool === 'aseprite');
+      expect(steps.some((step) => step.tool === 'spritefusion-pixel-snapper')).toBe(true);
       expect(tools).toHaveLength(2);
       expect(tools[0]!.outputHash).toBe(cacheKey([sha256(editable)]));
       expect(tools[1]!.inputHash).toBe(sha256(editable));
@@ -182,9 +193,9 @@ describe('published artwork and retained clean-checkout inputs', () => {
     expect(lab.assets.flatMap((asset) => asset.runtime ? [asset.runtime.id] : []).sort()).toEqual(catalog.assets.map((asset) => asset.id).sort());
     for (const asset of lab.assets) if (!['APPROVED', 'ATLASED', 'INTEGRATED'].includes(asset.status)) expect(asset.runtime).toBeNull();
     for (const page of catalog.atlases) {
-      expect(page.width).toBe(page.height); expect([1024, 2048]).toContain(page.width);
+      expect(page.width).toBe(page.height); expect([512, 1024, 2048]).toContain(page.width);
       const selected = inputs.filter((item) => catalog.assets.find((asset) => asset.id === item.manifest.id)!.atlasId === page.id);
-      const size = page.width === 1024 ? 1024 : 2048;
+      const size = page.width === 512 ? 512 : page.width === 1024 ? 1024 : 2048;
       const rebuilt = buildAtlas([...selected].reverse(), { id: page.id, pageSize: size, imageUrl: page.imageUrl, jsonUrl: page.jsonUrl, palette: catalog.palette });
       const imageName = page.imageUrl.split('/').at(-1)!, jsonName = page.jsonUrl.split('/').at(-1)!;
       const png = await artifact(`assets/art/runtime/${imageName}`), raw = JSON.parse((await artifact(`assets/art/runtime/${jsonName}`)).toString());

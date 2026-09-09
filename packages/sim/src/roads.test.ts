@@ -14,6 +14,7 @@ const end = (game: GameState) => issue(game, { type: 'endTurn', factionId: game.
 function observedRoadCampaign(scoutCell = 688): GameState {
   const game = createGame({ seed: 74, size: 'tiny', factionCount: 2, generatorVersion: 4 });
   const { world } = game;
+  game.resources.deposits = {}; // Entire physical corridor is authored.
   world.terrain.fill(3); world.fertility.fill(50);
   world.biome = deriveBiomes(world.seed, world.width, world.height, world.terrain, 4);
   world.waterDepth = deriveWaterDepth(world.width, world.height, world.terrain);

@@ -1,3 +1,4 @@
+import { RESOURCES } from '../packages/content/src/resources';
 import { readFile, writeFile, mkdir, readdir, stat } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -6,8 +7,8 @@ import { parseAssetManifest, paletteSchema, decodePng, encodePng, normalizePalet
 import { asepriteVersion, findPixelSnapper, runTool, runPixelSnapper, createAsepriteSource, exportAseprite, type AsepriteProfile, type ToolProcessResult } from '../packages/art-pipeline/src/toolchain';
 import { PixelLabGenerator, PerfectPixelGenerator, ComfyUIGenerator, type ArtGenerator } from '../packages/art-pipeline/src/generators';
 import { FACTION_ART_FAMILIES, FACTION_ART_IDS } from '../packages/art-pipeline/src/faction-art';
-import { singleSourceClip } from '../packages/art-pipeline/src/source-clip';
-import { BLENDER_BATTLE_IDS } from '../packages/art-pipeline/src/blender-source';
+import { sourceClips } from '../packages/art-pipeline/src/source-clip';
+import { BLENDER_BATTLE_IDS, BATTLE_UNIT_IDS } from '../packages/art-pipeline/src/blender-source';
 import { buildSceneAtlases } from '../packages/art-pipeline/src/scene-atlases';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -63,7 +64,7 @@ function nativeFrame(image: FrameImage['image'], asset: AssetManifest): FrameIma
 }
 const processing = (tool: ToolProcessResult, profile: string): AssetManifest['processing'][number] => ({ tool: tool.tool, version: tool.version, profile, settingsHash: tool.settingsHash, inputHash: tool.inputHash, outputHash: cacheKey(tool.files.map(file => file.sha256)) });
 async function generate(brief: AssetManifest) {
-  const sourceClip = singleSourceClip(brief);
+  const clips = sourceClips(brief);
   const started = performance.now(), provider = option('provider') ?? 'source';
   const aseprite = await asepriteVersion({ repoRoot: root }), snapper = await findPixelSnapper({ repoRoot: root });
   if (!snapper) throw new Error('Pixel Snapper is required: run tools/art/install-pixel-snapper.sh or set PIXEL_SNAPPER_BIN.');
@@ -118,20 +119,32 @@ async function generate(brief: AssetManifest) {
     const nativePath = `${folder}/native-${index}.png`, bytes = encodePng(image); await save(nativePath, bytes, true); nativePaths.push(nativePath);
     steps.push({ tool: 'theandril-native-normalize', version: '1', profile: 'nearest-alpha128', inputHash: result.files[0]!.sha256, outputHash: sha256(bytes), settingsHash: cacheKey({ native: brief.nativeResolution, palette, mask: brief.constraints.terrain }) });
   }
-  const source = await createAsepriteSource({ frames: nativePaths.map((path, index) => ({ path: resolve(root, path), durationMs: brief.frames[index]!.durationMs })), tags: [sourceClip], outputPath: await safeAssetPath(root, `${folder}/editable.aseprite`), profile: profile(brief) });
+  const source = await createAsepriteSource({ frames: nativePaths.map((path, index) => ({ path: resolve(root, path), durationMs: brief.frames[index]!.durationMs })), tags: clips, outputPath: await safeAssetPath(root, `${folder}/editable.aseprite`), profile: profile(brief) });
   steps.push(processing(source, profile(brief)));
   const exported = await exportAseprite({ sourcePath: source.files[0]!.path, outputDirectory: await safeAssetPath(root, `${folder}/aseprite`), profile: profile(brief), stem: 'sprite' }); steps.push(processing(exported, profile(brief)));
   const sheet = decodePng(await readFile(exported.files[0]!.path));
   if (exported.metadata.frames.length !== brief.frames.length) throw new Error('Aseprite frame count differs from the brief');
   const tags = exported.metadata.meta.frameTags;
-  if (tags?.length !== 1 || tags[0]!.name !== sourceClip.name || tags[0]!.from !== sourceClip.from || tags[0]!.to !== sourceClip.to) throw new Error('Aseprite changed the authored animation tag or frame range.');
+  if (tags?.length !== clips.length || clips.some((clip, index) => tags[index]!.name !== clip.name || tags[index]!.from !== clip.from || tags[index]!.to !== clip.to)) throw new Error('Aseprite changed the authored animation tag or frame range.');
   const finalFrames: AssetManifest['frames'] = [];
   for (const [index, frame] of exported.metadata.frames.entries()) {
     const path = `${folder}/frame-${index}.png`;
     if (frame.duration !== brief.frames[index]!.durationMs) throw new Error('Aseprite changed animation timing');
     await save(path, encodePng(cropImage(sheet, frame.frame)), true); finalFrames.push({ ...brief.frames[index]!, sourcePath: path });
   }
-  const manifest = parseAssetManifest({ ...brief, provenance, status: 'CANDIDATE', frames: finalFrames, processing: steps, validation: null, review: null });
+  // Preserve the complete per-frame tool evidence without making production
+  // catalog entries grow by hundreds of processing records per animated unit.
+  let retainedSteps = steps;
+  if (steps.length > 32) {
+    const receiptPath = `${folder}/processing-steps.json`;
+    const receipt = Buffer.from(JSON.stringify({ schemaVersion: 1, assetId: brief.id, steps }, null, 2) + '\n');
+    await save(receiptPath, receipt, true);
+    provenance = { ...provenance, sourceRefs: [...provenance.sourceRefs, receiptPath] };
+    retainedSteps = [...brief.processing, { tool: 'theandril-processing-batch', version: '1', profile: 'explicit-authored-frames',
+      settingsHash: cacheKey({ clips, native: brief.nativeResolution, stepCount: steps.length }),
+      inputHash: cacheKey(sourceHashes), outputHash: sha256(receipt) }];
+  }
+  const manifest = parseAssetManifest({ ...brief, provenance, status: 'CANDIDATE', frames: finalFrames, processing: retainedSteps, validation: null, review: null });
   const report = validateAsset(manifest, await frames(manifest), palette);
   await save(`assets/art/reports/${brief.id}.json`, report);
   await save(`assets/art/candidates/${brief.id}.json`, manifest);
@@ -160,7 +173,7 @@ async function atlas(integrate: boolean) {
     await save('apps/web/public/art/catalog.json', result.catalog);
     const runtimeById = new Map(result.catalog.assets.map(asset => [asset.id, asset]));
     const allBriefs = await Promise.all((await entries('assets/art/briefs')).map(file => json('assets/art/briefs/' + file).then(parseAssetManifest)));
-    const live = new Set([...FACTION_ART_IDS, ...BLENDER_BATTLE_IDS, 'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', ...['ocean', 'grassland', 'temperate_forest', 'taiga', 'tundra', 'desert', 'steppe', 'marsh', 'rainforest', 'alpine', 'ash_scrub', 'chalkland'].flatMap(id => [`terrain.${id}`, `terrain.${id}.variant_1`, `terrain.${id}.variant_2`]), ...['terraced_fields', 'managed_woodlot', 'quarry', 'reedworks', 'shore_fishery'].map(id => 'improvement.' + id)]);
+    const live = new Set([...RESOURCES.flatMap(item => [item.id, item.improvementId]), ...FACTION_ART_IDS, ...['granary', 'workshop', 'market', 'archive', 'harbor'].map(id => 'building.' + id), ...BLENDER_BATTLE_IDS, ...BATTLE_UNIT_IDS, 'unit.guard', 'unit.scout', 'unit.colonist', 'unit.spearman', 'unit.heavy_infantry', 'unit.cavalry', 'settlement.village', 'settlement.town', 'settlement.city', 'map.ruin', ...['ocean', 'grassland', 'temperate_forest', 'taiga', 'tundra', 'desert', 'steppe', 'marsh', 'rainforest', 'alpine', 'ash_scrub', 'chalkland'].flatMap(id => [`terrain.${id}`, `terrain.${id}.variant_1`, `terrain.${id}.variant_2`]), ...['terraced_fields', 'managed_woodlot', 'quarry', 'reedworks', 'shore_fishery', 'spring_garden', 'polder', 'grove_archive', 'oreworks', 'tide_observatory'].map(id => 'improvement.' + id)]);
     const lab: ArtLabCatalog = { schemaVersion: 1, palette, atlases: result.catalog.atlases, assets: allBriefs.map(asset => {
       const runtime = runtimeById.get(asset.id) ?? null;
       return { id: asset.id, type: asset.type, status: runtime?.status ?? asset.status, contentIds: asset.contentIds, nativeResolution: asset.nativeResolution, pivot: asset.frames[0]!.pivot, previewUrl: null, runtime, validation: runtime?.validation ?? null, provenance: runtime?.provenance ?? asset.provenance, review: runtime?.review ?? null, reasons: [live.has(asset.id) ? 'Bound to an existing observation-derived gameplay renderer or faction UI.' : 'Foundation artwork for future content. No canonical gameplay consumer exists yet.', ...(!runtime ? ['Not approved or not published. Candidate files are never served in production.'] : [])] };
@@ -210,7 +223,7 @@ try {
       }
       const sourceRefs: string[] = [];
       for (const [index, ref] of item.manifest.provenance.sourceRefs.entries()) {
-        if (ref.startsWith('assets/art/cache/')) { const source = `${stableFolder}/provider-source-${index}.png`; await save(source, await readFile(await safeAssetPath(root, ref)), true); sourceRefs.push(source); }
+        if (ref.startsWith('assets/art/cache/')) { const source = `${stableFolder}/provider-source-${index}.${ref.endsWith('.json') ? 'json' : 'png'}`; await save(source, await readFile(await safeAssetPath(root, ref)), true); sourceRefs.push(source); }
         else sourceRefs.push(ref);
       }
       const stable = parseAssetManifest({ ...item.manifest, frames: stableFrames, provenance: { ...item.manifest.provenance, sourceRefs } }), retainedFrames = await frames(stable), report = validateAsset(stable, retainedFrames, palette);

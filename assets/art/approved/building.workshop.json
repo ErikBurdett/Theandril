@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "building.workshop",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "building.workshop"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original complete Theandril strategy-map civic district prop. Genuinely transparent PNG background, entire silhouette inside comfortable 15% margins, not a sheet, no other asset. Grounded weathered medieval dark fantasy, crisp coarse square pixel-art clusters at logical 64×64 detail, broad connected material planes and clear silhouette, restrained selective dark outline. Three-quarter southeast isometric view, upper-left diffuse highlights, old pale stone, peat-dark timber, soot recesses, muted sage moss, rust and dull brass accents. Compact complete cluster fits a 56×44 logical-pixel footprint, no surrounding full ground tile or hex border. No text, labels, letters, banners with writing, people, landscape, checkerboard, modern technology, glossy gradients, soft shadows, haze, detached pieces, montage or game UI. CINDER WORKSHOP: compact squat stone-and-timber smith workshop, steep patched dark slate roof on one side and prominent heavy square masonry chimney on the other. Open furnace doorway with a small contained ember-orange interior, one broad anvil form outside and a tidy attached timber workbench. Blackened stone around the forge, practical iron braces. Strong industrial silhouette, no smoke plume.",
+  "frames": [
+    {
+      "id": "building.workshop/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/building.workshop/56d444ee3ea03d82d198ec5391bcac414c3d88b18cb19ee7015a6dd233861deb/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "729e65f2fff6fd3879e531b629c40994b5fdfd7fb33a2d935ca85f137538da5d",
+    "sourceRefs": [
+      "assets/art/source/hearth-civic/building.workshop-v1.png",
+      "assets/art/source/hearth-civic/building.workshop-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T21:40:50.918Z",
+  "referenceHashes": [
+    "b4aba1ca946fb096f50c2ae53d2fd75a7c613ac626defa180dd8e131788d1537",
+    "06998caf84eb0783cbb14e2fac56aaf4938c2ee114d83af2f81df165ebb161c6"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-hearth-civic-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "1aaf4907af3e6819bc43fe883e3816625585b79be1182fb4a509c47e72067157",
+      "inputHash": "b4aba1ca946fb096f50c2ae53d2fd75a7c613ac626defa180dd8e131788d1537",
+      "outputHash": "d20be272af9a9f98b59f816d27608939bfb8404c2edeef4213be407988bf48c7"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "d20be272af9a9f98b59f816d27608939bfb8404c2edeef4213be407988bf48c7",
+      "outputHash": "c3fcca445ff7ec331d9b3df0d94b1990da2a8e3b7fce20c2141b58e76d76dff4"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c3fcca445ff7ec331d9b3df0d94b1990da2a8e3b7fce20c2141b58e76d76dff4",
+      "outputHash": "307b28eb84106dd8106839f4fa691a676eb90060d4514522495c94e990ad90f9"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "e194fea3e7841689c7d3d0ee594807e4b437ef9a7236660ac08141d1889be65a",
+      "outputHash": "544b2d6f2e659c69659c070a90338e938b4a68ef1c70d830135f0b18081f5efd"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "a50f15d6959de123e8b72d52d6a38e990e9c1bc3055b94d29813764b2ea8679c",
+      "outputHash": "6a25910d9cb666a3cf23d44fd8617d1b56506c92b256f9942eea7362e35f7bda"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "7ff78a2f3595536ea94b80f32df44c6dbf996b98288e67e6bb510c8bff299be9",
+      "outputHash": "9052a77fc828d92319021f25eecaccab2d2b5d30e2cc70b8d35f4a9329cd608d"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/building.workshop.approved.json"
+  },
+  "review": {
+    "reviewer": "codex-hearth-art",
+    "reviewedAt": "2026-09-08T21:42:30.415Z",
+    "notes": "Complete original and exact native/4x candidate inspected. Tall pale square chimney, low slate-roofed workshop and restrained orange furnace distinguish industry. Timber workbench and anvil remain grounded beside forge; no cropped roof or chimney. Native approval; runtime district review follows publication.\nReviewed candidate 56d444ee3ea03d82d198ec5391bcac414c3d88b18cb19ee7015a6dd233861deb; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/1b0ecbb785c493af1a406526d4834ccc7dd8472d40bb54fff662b7d920187b93.png"
+    ],
+    "inputHash": "56a59e02d287a34de35f14da7628b84a752396cfa71f45d6e44c952ecce1c389"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

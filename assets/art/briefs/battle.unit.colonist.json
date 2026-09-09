@@ -1,0 +1,858 @@
+{
+  "schemaVersion": 1,
+  "id": "battle.unit.colonist",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "battle.unit.colonist"
+  ],
+  "prompt": "Original Theandril shared colonist battle role, authored as editable weighted Blender meshes and bone Actions. Two independently rendered facings and five complete authored clips. Fixed 64x64 camera canvas, ground pivot (32,56), palette and full-motion union. Culture identity remains in existing banners and map art. Exact source manifest: assets/art/source/blender-units/battle.unit.colonist/v2/manifest.json. No mirrored sprites, synthetic casualty poses or whole-sprite bobbing claimed as articulated animation.",
+  "frames": [
+    {
+      "id": "battle.unit.colonist/idle/e/0",
+      "direction": "e",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/idle-e-000.png"
+    },
+    {
+      "id": "battle.unit.colonist/idle/e/1",
+      "direction": "e",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/idle-e-001.png"
+    },
+    {
+      "id": "battle.unit.colonist/idle/e/2",
+      "direction": "e",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/idle-e-002.png"
+    },
+    {
+      "id": "battle.unit.colonist/idle/e/3",
+      "direction": "e",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/idle-e-003.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/e/0",
+      "direction": "e",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-e-000.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/e/1",
+      "direction": "e",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-e-001.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/e/2",
+      "direction": "e",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-e-002.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/e/3",
+      "direction": "e",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-e-003.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/e/4",
+      "direction": "e",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-e-004.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/e/5",
+      "direction": "e",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-e-005.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/e/6",
+      "direction": "e",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-e-006.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/e/7",
+      "direction": "e",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-e-007.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/e/0",
+      "direction": "e",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-e-000.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/e/1",
+      "direction": "e",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-e-001.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/e/2",
+      "direction": "e",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-e-002.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/e/3",
+      "direction": "e",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-e-003.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/e/4",
+      "direction": "e",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-e-004.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/e/5",
+      "direction": "e",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-e-005.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/e/6",
+      "direction": "e",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-e-006.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/e/7",
+      "direction": "e",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-e-007.png"
+    },
+    {
+      "id": "battle.unit.colonist/hit/e/0",
+      "direction": "e",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/hit-e-000.png"
+    },
+    {
+      "id": "battle.unit.colonist/hit/e/1",
+      "direction": "e",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/hit-e-001.png"
+    },
+    {
+      "id": "battle.unit.colonist/hit/e/2",
+      "direction": "e",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/hit-e-002.png"
+    },
+    {
+      "id": "battle.unit.colonist/hit/e/3",
+      "direction": "e",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/hit-e-003.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/e/0",
+      "direction": "e",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-e-000.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/e/1",
+      "direction": "e",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-e-001.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/e/2",
+      "direction": "e",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-e-002.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/e/3",
+      "direction": "e",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-e-003.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/e/4",
+      "direction": "e",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-e-004.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/e/5",
+      "direction": "e",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-e-005.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/e/6",
+      "direction": "e",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-e-006.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/e/7",
+      "direction": "e",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-e-007.png"
+    },
+    {
+      "id": "battle.unit.colonist/idle/w/0",
+      "direction": "w",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/idle-w-000.png"
+    },
+    {
+      "id": "battle.unit.colonist/idle/w/1",
+      "direction": "w",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/idle-w-001.png"
+    },
+    {
+      "id": "battle.unit.colonist/idle/w/2",
+      "direction": "w",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/idle-w-002.png"
+    },
+    {
+      "id": "battle.unit.colonist/idle/w/3",
+      "direction": "w",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/idle-w-003.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/w/0",
+      "direction": "w",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-w-000.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/w/1",
+      "direction": "w",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-w-001.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/w/2",
+      "direction": "w",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-w-002.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/w/3",
+      "direction": "w",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-w-003.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/w/4",
+      "direction": "w",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-w-004.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/w/5",
+      "direction": "w",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-w-005.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/w/6",
+      "direction": "w",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-w-006.png"
+    },
+    {
+      "id": "battle.unit.colonist/walk/w/7",
+      "direction": "w",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/walk-w-007.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/w/0",
+      "direction": "w",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-w-000.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/w/1",
+      "direction": "w",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-w-001.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/w/2",
+      "direction": "w",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-w-002.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/w/3",
+      "direction": "w",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-w-003.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/w/4",
+      "direction": "w",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-w-004.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/w/5",
+      "direction": "w",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-w-005.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/w/6",
+      "direction": "w",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-w-006.png"
+    },
+    {
+      "id": "battle.unit.colonist/attack/w/7",
+      "direction": "w",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/attack-w-007.png"
+    },
+    {
+      "id": "battle.unit.colonist/hit/w/0",
+      "direction": "w",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/hit-w-000.png"
+    },
+    {
+      "id": "battle.unit.colonist/hit/w/1",
+      "direction": "w",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/hit-w-001.png"
+    },
+    {
+      "id": "battle.unit.colonist/hit/w/2",
+      "direction": "w",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/hit-w-002.png"
+    },
+    {
+      "id": "battle.unit.colonist/hit/w/3",
+      "direction": "w",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/hit-w-003.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/w/0",
+      "direction": "w",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-w-000.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/w/1",
+      "direction": "w",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-w-001.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/w/2",
+      "direction": "w",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-w-002.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/w/3",
+      "direction": "w",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-w-003.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/w/4",
+      "direction": "w",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-w-004.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/w/5",
+      "direction": "w",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-w-005.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/w/6",
+      "direction": "w",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-w-006.png"
+    },
+    {
+      "id": "battle.unit.colonist/death/w/7",
+      "direction": "w",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.colonist/v2/native/death-w-007.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "frames": 8,
+        "fps": 10,
+        "loop": true
+      },
+      "attack": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      },
+      "hit": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      },
+      "death": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "12dd76b4b0572f3127a288cdaae18bf226af4e9d21064a904c5d4ace882d682a",
+    "sourceRefs": [
+      "assets/art/source/blender-units/battle.unit.colonist/v2/manifest.json",
+      "assets/art/source/blender-units/battle.unit.colonist/v2/source.blend",
+      "assets/art/source/blender-units/battle.unit.colonist/v2/profile.json",
+      "assets/art/source/blender-units/battle.unit.colonist/v2/recipe.py",
+      "assets/art/source/blender-units/battle.unit.colonist/v2/driver.py",
+      "assets/art/source/blender-units/battle.unit.colonist/v2/render-settings.json"
+    ],
+    "licenseNotes": [
+      "Original project-authored geometry, rig, materials and actions; retained factory dependencies and every raw/native render are bound by the source manifest inventory. Shared mechanical-role artwork does not claim new culture-specific originals. Native and runtime visual acceptance remain separate."
+    ]
+  },
+  "createdAt": "2026-09-08T23:49:26.245Z",
+  "referenceHashes": [
+    "11810fddbb10ac23e87e6156d40f817f6f09a6bdb19a83e252a7d9aaf9cc672f",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "articulated-battle-64",
+      "settingsHash": "3f16ada488611ddcbc6a08a7d644f913f5b3f2bac85bdd936dc98fe360047791",
+      "inputHash": "11810fddbb10ac23e87e6156d40f817f6f09a6bdb19a83e252a7d9aaf9cc672f",
+      "outputHash": "df529e8e09ee3139b17f57c516239dd61790937cbc71862ad1485b0a2d28074f"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 64,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

@@ -63,7 +63,7 @@ describe('exact explored-cell copy and monotonic fast path', () => {
     { size: 'huge', factionCount: 32, bytes: 1738028, hash: 'b77a8bc9', sha256: '37117c541c24a8c0c212028285a3161b239380273ad8a0926d29096af91ec66c' },
     { size: 'legendary', factionCount: 40, bytes: 2702600, hash: 'c5c8549f', sha256: '8e6d46d7952b966359dda54d6d40bb9a8f4cded5df9d8e547296cfd9d99ba491' },
   ] as const)('preserves the prechange $size/$factionCount whole-save seal and monotonic restored bytes', fixture => {
-    const game = createGame({ seed: 20260905, size: fixture.size, factionCount: fixture.factionCount, generatorVersion: 4, rosterVersion: 3 });
+    const game = createGame({ rulesVersion: 11, seed: 20260905, size: fixture.size, factionCount: fixture.factionCount, generatorVersion: 4, rosterVersion: 3 });
     const before = game.factions.map(faction => [...game.explored[faction.id]!]);
     const saved = serializeGameForVersion(game, 11);
     expect(Buffer.byteLength(saved)).toBe(fixture.bytes); expect(checksum(saved)).toBe(fixture.hash);

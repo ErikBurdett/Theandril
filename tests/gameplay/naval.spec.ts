@@ -145,7 +145,7 @@ test('a saved naval battle resolves exact transport casualties without deploying
   const fleet = state.armies[N.fleetId]!, enemy = state.armies[N.enemyFleetId]!;
   for (const formation of fleet.formations) { formation.strength = 4; formation.morale = 30; }
   enemy.cell = N.shallowCell;
-  enemy.formations = Array.from({ length: 6 }, () => createArmyFormation(`army.${state.nextId++}`, 'unit.coastal_warship')).sort((a, b) => a.id < b.id ? -1 : 1);
+  enemy.formations = Array.from({ length: 6 }, () => createArmyFormation(`army.${state.nextId++}`, 'unit.ocean_warship')).sort((a, b) => a.id < b.id ? -1 : 1);
   refreshAuthoredSight(state);
   state = deserializeGame(serializeGame(state));
   const expected = deserializeGame(serializeGame(state));

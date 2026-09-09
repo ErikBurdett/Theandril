@@ -1,6 +1,7 @@
 import { BUILDINGS, UNITS } from '@theandril/content';
 import { hexDistance, isLake, isPassable, neighbors, TERRAIN } from '@theandril/mapgen';
 import { getMovementQuery, type ArmyView, type GameCommand, type Observation } from '@theandril/sim';
+import { settlementSpacing } from './expansion';
 import { protectedFactions, type AiPlan } from './diplomacy';
 import { createNavigation } from './navigation';
 import { createSeaKnowledge, type BasinRelation, type BasinStatus } from './sea-knowledge';
@@ -83,16 +84,21 @@ export function hasNavalOpportunity(view: Observation): boolean {
 export function navalResearchChoice(view: Observation) {
   if (view.progression.technologies.includes('technology.ocean_navigation') || !hasNavalOpportunity(view)) return undefined;
   const cells = new Map(view.cells.map(cell => [cell.cell, cell]));
-  return researchChoice(view, cells, createSeaKnowledge(view, cells));
+  // An isolated modern realm's open-sea harbor is a concrete first-contact goal.
+  // Reserve its quoted research before cheaper land techniques spend the same
+  // knowledge; the naval planner still validates and pays the actual order.
+  const firstContact = Boolean(view.growth && view.factionCount > 1 && view.factions.length === 1);
+  return researchChoice(view, cells, createSeaKnowledge(view, cells), firstContact);
 }
-function researchChoice(view: Observation, cells: ObservedCells, sea: SeaKnowledge) {
+function researchChoice(view: Observation, cells: ObservedCells, sea: SeaKnowledge, harborReconnaissance = false) {
   if (view.progression.technologies.includes('technology.ocean_navigation')) return undefined;
   const potential = view.armies.filter(army => army.factionId === view.factionId && army.domain === 'naval').map(army => army.cell)
     .concat(view.settlements.filter(town => town.factionId === view.factionId).flatMap(town => coastalWaters(view, town.cell, cells)));
   const id = !view.progression.technologies.includes('technology.coastal_navigation') ? 'technology.coastal_navigation'
     : (view.armies.some(army => army.factionId === view.factionId && army.domain === 'naval'
       && army.formations.some(formation => units.get(formation.unitId)?.naval?.oceanCapable))
-      || view.settlements.some(town => town.factionId === view.factionId && town.queue.some(order => order.itemId === 'unit.transport')))
+      || view.settlements.some(town => town.factionId === view.factionId && (town.queue.some(order => order.itemId === 'unit.transport')
+        || harborReconnaissance && coastalReconnaissanceUseful(view) && town.buildings.includes('building.harbor'))))
       && potential.some(cell => isSea(cells.get(cell)) && !sea.shallowEnclosed(cell)) ? 'technology.ocean_navigation' : null;
   return view.progression.technologyChoices.find(choice => choice.id === id && !view.progression.technologies.includes(choice.id)
     && choice.requires.every(id => view.progression.technologies.includes(id)));
@@ -152,7 +158,7 @@ export function coastalFoundingSite(view: Observation, army: ArmyView): number |
   const unavailable = new Set<number>();
   for (const town of view.settlements) {
     const seen = new Set([town.cell]); let edge = [town.cell];
-    for (let radius = 0; radius < 3; radius++) {
+    for (let radius = 0; radius < (view.growth ? 2 : 3); radius++) {
       const next: number[] = [];
       for (const cell of edge) for (const adjacent of neighbors(cell, view.width, view.height)) if (!seen.has(adjacent)) { seen.add(adjacent); next.push(adjacent); }
       edge = next;
@@ -162,7 +168,7 @@ export function coastalFoundingSite(view: Observation, army: ArmyView): number |
   const queue = [army.cell], visited = new Set(queue);
   for (let cursor = 0; cursor < queue.length && cursor < MAX_PORT_SEARCH_NODES; cursor++) {
     const cell = queue[cursor]!, adjacent = neighbors(cell, view.width, view.height);
-    if (!unavailable.has(cell) && portRank[portStatus(view, cell, cells, sea)] > currentRank) return cell;
+    if (!unavailable.has(cell) && !cells.get(cell)?.settlementId && (!view.growth || view.settlements.every(town => hexDistance(cell, town.cell, view.width) >= settlementSpacing(view, cell))) && portRank[portStatus(view, cell, cells, sea)] > currentRank) return cell;
     for (const next of adjacent) if (!visited.has(next) && !occupied.has(next) && isPassable(cells.get(next)?.terrain ?? 0)) { visited.add(next); queue.push(next); }
   }
   return null;
@@ -205,7 +211,9 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
     reasons.push(`Fund ${itemId} at ${townId} for a bounded coastal expedition (${cost} coin).`); return true;
   };
   const knowledge = options.knowledgeBudget ?? view.knowledge;
-  const nextResearch = researchChoice(view, cells, seaKnowledge);
+  // A ready broad-theater harbor can use spare knowledge for its first ocean
+  // scout. An actual charter keeps the existing strategic research reservation.
+  const nextResearch = researchChoice(view, cells, seaKnowledge, true);
   const research = nextResearch?.available && nextResearch.knowledgeCost <= knowledge ? nextResearch : undefined;
   if (research) { commands.push({ type: 'research', factionId, technologyId: research.id }); reasons.push(`Research ${research.name} for the observed coastal expedition; hull restrictions still apply.`); }
   const prospective = preferredPort(view, cells, seaKnowledge);
@@ -227,7 +235,11 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
     // compact inland ferry still takes precedence over an unnecessary warship.
     const unscouted = ocean && !operatingFleets.some(fleet => fleet.formations.some(formation => (units.get(formation.unitId)?.naval?.transportCapacity ?? 0) === 0))
       && !queuedCount('unit.coastal_warship') && !queuedCount('unit.ocean_warship');
-    if (unscouted && coastalReconnaissanceUseful(view) && !(required > 1 && charteredHulls(operatingFleets, harbor.cell, required, view.width) < required)) queue(harbor.id, view.progression.technologies.includes('technology.ocean_navigation') ? 'unit.ocean_warship' : 'unit.coastal_warship');
+    const needsOceanScout = ocean && view.progression.technologies.includes('technology.ocean_navigation')
+      && !operatingFleets.some(fleet => fleet.canEnterDeepWater && fleet.formations.some(formation => (units.get(formation.unitId)?.naval?.transportCapacity ?? 0) === 0)) && !queuedCount('unit.ocean_warship');
+    // Coastal galleys cannot chart the ocean after that research is unlocked.
+    // Reserve its scout before another passenger caravan perpetually occupies the harbor.
+    if ((unscouted || needsOceanScout) && coastalReconnaissanceUseful(view) && !(required > 1 && charteredHulls(operatingFleets, harbor.cell, required, view.width) < required)) queue(harbor.id, view.progression.technologies.includes('technology.ocean_navigation') ? 'unit.ocean_warship' : 'unit.coastal_warship');
     else if (charteredHulls(operatingFleets, harbor.cell, required, view.width) + queuedCount('unit.transport') < required
       && transports + queuedCount('unit.transport') < MAX_NAVAL_FLEETS) queue(harbor.id, 'unit.transport');
     else if (operatingFleets.some(fleet => fleet.transportCapacity && !fleet.cargo.length)
@@ -277,7 +289,10 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
   const explore = (fleet: ArmyView) => navigation.destination(fleet, fleet.sight, claimed, undefined,
     fleet.transportCapacity ? undefined : cell => -hexDistance(cell, chartCenter, view.width),
     (cell, gain) => gain * (nearCoastalFrontier(cell) ? 250 : 100)
-      + (gain > 0 && fleet.canEnterDeepWater ? (hexDistance(fleet.cell, chartCenter, view.width) - hexDistance(cell, chartCenter, view.width)) * 200 : 0));
+      + (gain > 0 && fleet.canEnterDeepWater ? (hexDistance(fleet.cell, chartCenter, view.width) - hexDistance(cell, chartCenter, view.width)) * 200 : 0),
+    // Independent reconnaissance uses observed local identity. Preserve the
+    // established expedition tie order for fleets that can carry passengers.
+    fleet.transportCapacity ? fleet.id : `${fleet.factionId}:${fleet.formations.map(formation => formation.unitId).sort().join('|')}:${fleet.cell}`);
   let routeQueries = 0;
   const toward = (army: ArmyView, target: number): number | undefined => {
     if (routeQueries >= MAX_NAVAL_ROUTE_QUERIES || target === army.cell) return undefined;
@@ -347,7 +362,7 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
       // unknown boundaries or exhausted search budgets never authorize this fallback.
       const enclosed = colonizing && seaKnowledge.enclosed(fleet.cell);
       const viableLanding = (cell: number) => isPassable(cells.get(cell)?.terrain ?? 0) && !occupied.has(cell)
-        && (colonizing ? nearest(cell, view.settlements) >= 4 : nearest(cell, towns) >= 4)
+        && (colonizing ? !cells.get(cell)?.settlementId && nearest(cell, view.settlements) >= settlementSpacing(view, cell) : nearest(cell, towns) >= 4)
         // Do not unload at the first free beach on the departure landmass. A cell outside
         // the bounded observed component is an expedition candidate, not proof of an island.
         && (!colonizing || !homeLand.has(cell) || enclosed)

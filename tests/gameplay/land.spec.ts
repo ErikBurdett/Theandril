@@ -11,6 +11,7 @@ function landCampaign(): GameState {
   // all subsequent work are created by the actual command rules, not UI mocks.
   for (const cell of cellsWithin(state, state.armies['army.1']!.cell, 3)) {
     state.world.terrain[cell] = 1; state.world.biome[cell] = 1; state.world.waterDepth[cell] = 0; state.world.fertility[cell] = 80;
+    delete state.resources.deposits[cell]; // Authored soil replaces this cell's generated ecology.
   }
   for (const [index, armyId] of ['army.1', 'army.3'].entries()) expect(applyCommand(state, { type: 'found', factionId: state.factions[index]!.id, armyId, name: index ? 'Distant reeds' : 'Soil witness' }).ok).toBe(true);
   state.settlements['settlement.5']!.population = 3; state.factions[0]!.treasury = 1000;

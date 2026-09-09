@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.timber_yard",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.timber_yard"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A working HEARTWOOD TIMBER YARD: a weathered timber saw shelter with open front, two long squared dark brown logs and a stacked cut lumber pile held by vertical posts. A large old stump and hand saw rack, all within one joined compact earthen footprint. No modern machinery.",
+  "frames": [
+    {
+      "id": "improvement.timber_yard/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/improvement.timber_yard/a74acf6924a9913bf8b5198b44f83347b66bd23419d8eec2f4e37a33a3881b1c/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "be252edbf33a9f123174a16f0a658564f9e318a323c56a7d6c022127386c4fa6",
+    "sourceRefs": [
+      "assets/art/source/resource-works/improvement.timber_yard-v1.png",
+      "assets/art/source/resource-works/improvement.timber_yard-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:36:42.457802Z",
+  "referenceHashes": [
+    "a7a97d81af76680068b33c4fa55443d52452f9673e0f6d23d6a8dbfc71e84e66",
+    "afeb48839136c27e4a612afec00dc8278e0594c9fa4cb66418bb6290a7f9b991"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "8e60b03e8af5938f91b21c9ff8ed775ecdef6ff29a52f54fc805555310117cb5",
+      "inputHash": "a7a97d81af76680068b33c4fa55443d52452f9673e0f6d23d6a8dbfc71e84e66",
+      "outputHash": "edfd4727d9043831dfd8372bfb2b3cbb15d509162a23dc1b613aeae9bc54bfa1"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "edfd4727d9043831dfd8372bfb2b3cbb15d509162a23dc1b613aeae9bc54bfa1",
+      "outputHash": "7ddaf0ad42f052597c52628a241ebf30a8a40faff96b9fa79c0fe6f1fddc5c7f"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7ddaf0ad42f052597c52628a241ebf30a8a40faff96b9fa79c0fe6f1fddc5c7f",
+      "outputHash": "1ed44e15885f41aa11e520c67a3081a4e9c327a1ea85ac36333ee902d4554b39"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "cc45d96ea831d5f9a10112223d21370c6376bb34cb580527b401ed55be0bc44a",
+      "outputHash": "b9faa26b38be7d74221990bf79e616b3d2540a0227215b5aacc117fe52071b69"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "42afcd57e2b6771e519ebc6d25a6e42645e72dd33a295d80f74834eb70bb1381",
+      "outputHash": "294c96d2897e4cbd53309a8cbdb38c3122ea2f13d8c6d335be2f11f80853f0a8"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "d2fd49350b76a502f8553f373c0dae7214aa756c686dfdaf655c58f9c460fa2c",
+      "outputHash": "f79e10195fc4c6a4dfda311ab176dc01710bed156f2058c6e1511739c830424f"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/improvement.timber_yard.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex visual review",
+    "reviewedAt": "2026-09-08T23:44:09.535Z",
+    "notes": "Inspected exact native1x and nearest4x contact sheets. The improvement.timber_yard silhouette, joined ground footprint and mineral/material color match its resource role; no clipping or alpha fringe. Deposits and working structures are distinct. Map scaling and fog are verified separately in gameplay.\nReviewed candidate a74acf6924a9913bf8b5198b44f83347b66bd23419d8eec2f4e37a33a3881b1c; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b64a0daf6f337730a0e135d196adc6ed49e3e9411a5d72247d6196dbbe5770d0.png"
+    ],
+    "inputHash": "dcd4c513791eee3e040cc46894f31a35bfc0b43e6192e0894083bc5ff9a420d2"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

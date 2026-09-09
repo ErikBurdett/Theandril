@@ -1,0 +1,16 @@
+
+Running 9 tests using 1 worker
+
+(node:511006) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/development-trees.spec.ts:71:1 › earned civic and faction branches pay authoritative costs, refresh one selected query and persist at 390px (3.6s)
+  ✓  2 tests/gameplay/development-trees.spec.ts:104:1 › survivors spend experience earned in a saved real battle and preserve training after reload (3.8s)
+  ✓  3 tests/gameplay/development-trees.spec.ts:126:1 › 100 armies use a bounded directory and one arbitrary selected tree; branch keyboard inspection makes no orders (1.6s)
+  ✓  4 tests/gameplay/land-query.spec.ts:70:1 › selected-town queries are reused for tile clicks and fast registry changes never retain another town’s options (4.9s)
+  ✓  5 tests/gameplay/land-query.spec.ts:98:1 › same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width (5.9s)
+  ✓  6 tests/gameplay/land-query.spec.ts:147:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail (7.6s)
+  ✓  7 tests/gameplay/resources-overview.spec.ts:40:1 › a generated grain deposit becomes paid worked grange art, produces stocks and sells through a saved narrow market (6.4s)
+  ✓  8 tests/gameplay/resources-overview.spec.ts:92:1 › political overview and realm filters change only the map presentation, with an accessible narrow legend (1.9s)
+  ✓  9 tests/gameplay/resources-overview.spec.ts:129:1 › political mode and a selected realm filter persist while an actual battle temporarily hides the map controls (3.2s)
+
+  9 passed (39.5s)

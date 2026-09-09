@@ -13,6 +13,7 @@ function order(state: GameState, command: GameCommand): void {
 function frontier(options: { enemy?: number; war?: boolean; stack?: boolean } = {}): GameState {
   let state = createGame({ generatorVersion: 4, seed: 20260905, size: 'tiny', pace: 'short', factionCount: 2 });
   state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60); state.world.waterDepth.fill(0);
+  state.resources.deposits = {}; // This gallery replaces the entire generated terrain/resource layer.
   state.world.terrain[ORIGIN - 1] = 0; state.world.biome[ORIGIN - 1] = 0; state.world.waterDepth[ORIGIN - 1] = 1;
   // A visible climate sample preserves separate, passable physical terrain.
   [3, 4, 5, 6, 7, 8].forEach((biome, index) => { state.world.biome[ORIGIN - 48 + index] = biome; if (biome === 3 || biome === 8) state.world.terrain[ORIGIN - 48 + index] = 2; });

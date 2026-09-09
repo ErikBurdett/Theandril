@@ -10,7 +10,7 @@ function issue(state: GameState, command: GameCommand) { const result = applyCom
 function scene() {
   const state = createGame({ seed: 20260906, size: 'tiny', factionCount: 1, pace: 'epic', generatorVersion: 4 });
   for (const cell of cellsWithin(state, state.armies['army.1']!.cell, 3)) {
-    state.world.terrain[cell] = 1; state.world.biome[cell] = 7; state.world.waterDepth[cell] = 0; state.world.fertility[cell] = 80;
+    state.world.terrain[cell] = 1; state.world.biome[cell] = 7; state.world.waterDepth[cell] = 0; delete state.resources.deposits[cell]; state.world.fertility[cell] = 80;
   }
   issue(state, { type: 'found', factionId: state.turnOwnerId, armyId: 'army.1', name: 'Waterwork trial' });
   state.factions[0]!.knowledge = 500; state.factions[0]!.treasury = 500;
@@ -62,7 +62,7 @@ test('missing detailed land quotes never cause invented research opportunities o
   const town = Object.values(state.settlements)[0]!, target = getObservation(state, factionId).land.settlements[0]!.cells.find(cell => cell.canWork)!.cell;
   issue(state, { type: 'setWorkedTiles', factionId, settlementId: town.id, cells: [target] });
   const view = getObservation(state, factionId, { landDetails: 'none' });
-  expect(planProgression(view).commands.some(command => command.type === 'research')).toBe(false);
+  expect(planProgression(view).commands.filter(command => command.type === 'research')).toEqual([{ type: 'research', factionId, technologyId: 'technology.stewardship' }]); // The complete summary still exposes a real growing frontier.
   expect(planLand(view, 200).commands).toEqual([]);
 });
 
@@ -114,11 +114,12 @@ test('deep water blocking an otherwise incomplete border is not invented survey-
   const town = Object.values(state.settlements)[0]!, claimed = state.land.settlements[town.id]!.claimed;
   town.population = 3;
   for (const cell of cellsWithin(state, town.cell, 2).filter(cell => !claimed.includes(cell))) {
-    state.world.terrain[cell] = 0; state.world.biome[cell] = 0; state.world.waterDepth[cell] = 2; state.world.fertility[cell] = 0;
+    state.world.terrain[cell] = 0; state.world.biome[cell] = 0; state.world.waterDepth[cell] = 2; delete state.resources.deposits[cell]; state.world.fertility[cell] = 0;
   }
   const index = rebuildIndexes(state); refreshLandKnowledge(state, factionId, index.visible.get(factionId)!);
   const resumed = deserializeGame(serializeGame(state)), view = getObservation(resumed, factionId), land = view.land.settlements[0]!;
-  expect(land.claimed.length).toBeLessThan(land.claimCapacity);
+  expect(land.claimCapacity).toBeNull();
+  expect(land.claimed).toHaveLength(7);
   expect(land.borderExpansion).toMatchObject({ nextCell: null, rate: 0 });
   // Isolate this available branch from unrelated legal wetland research choices.
   view.progression.technologyChoices = view.progression.technologyChoices.filter(choice => choice.id === 'technology.surveyed_estates');

@@ -1,0 +1,1118 @@
+{
+  "schemaVersion": 1,
+  "assetId": "battle.unit.scout",
+  "inputHash": "c7b2c8114416254bb3ca0e948f0445885bcc6734274952ba9608b092ccf2b516",
+  "specificationHash": "ca35d6bf5e2f03c924333cc866c7cff3d48e9f0611ac23d44e5ce8bf1f7f124f",
+  "score": 96,
+  "passed": true,
+  "errors": [],
+  "warnings": [
+    "attack/e: repeated frame images require intentional-hold review",
+    "attack/w: repeated frame images require intentional-hold review"
+  ],
+  "manualChecks": [
+    "Originality, licensing and provenance review",
+    "Silhouette and role readability at native and zoomed scale",
+    "Anatomy, equipment continuity, lighting and material consistency",
+    "idle/e: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "idle/w: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "walk/e: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "walk/w: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "attack/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "attack/w: review temporal flicker, direction, equipment, visual identity and end pose",
+    "hit/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "hit/w: review temporal flicker, direction, equipment, visual identity and end pose",
+    "death/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "death/w: review temporal flicker, direction, equipment, visual identity and end pose"
+  ],
+  "metrics": [
+    {
+      "id": "battle.unit.scout/idle/e/0",
+      "hash": "b0822bfc507ff7a02f442e39f1ed90559e9e3a8a1b4260d1de0523a5b75aed49",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 342,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 15,
+        "w": 15,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/idle/e/1",
+      "hash": "30400966fc82ce6495d149c27190377ba1818712755af13bf72d0d92ccbaab93",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 339,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 15,
+        "w": 14,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/idle/e/2",
+      "hash": "bcfbcc5ae9102ccf8290c0a2ce397e9d2e70a9181c3b4f85da8a992126b72eab",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 339,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 15,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/idle/e/3",
+      "hash": "2da48f54549349f07674e93c4408a53e277e8ec0662bfdfd5cf30a5c36dd1ff7",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 338,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 15,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/e/0",
+      "hash": "64fe07acf4fa2e87a9565b444eba5789d47689220ce6b0d9e02e9ec0a77494f0",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 336,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 15,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/e/1",
+      "hash": "0abcf0c49231c24556f0a01036fc8d10bf6082f72ef8920c353fead3565e5992",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 314,
+      "padding": 4,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 14,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/e/2",
+      "hash": "5574931ddd709212fba2b413dd672860e50f500b687b9cc73403c631423fbccf",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 319,
+      "padding": 4,
+      "bounds": {
+        "x": 26,
+        "y": 15,
+        "w": 14,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/e/3",
+      "hash": "084e1ebf36b0bfdb59e9754ebc71bc7691cc4b15bf617baf681c18ce378cada6",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 306,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 14,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/e/4",
+      "hash": "7874703bd14dd1a10279581643c6b206cbab01e1eb30e093a0f4a19fcb5585e0",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 317,
+      "padding": 8,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 15,
+        "h": 40
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/e/5",
+      "hash": "d6e355bffe553497950063596b4fdd5d4010fab623e92d85b0495ec4e8157166",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 353,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 17,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/e/6",
+      "hash": "cc5bef3c724c94d36e6b27a81f1887c516e8a14cee7624ddcb1239f008ef3c17",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 369,
+      "padding": 5,
+      "bounds": {
+        "x": 24,
+        "y": 15,
+        "w": 18,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/e/7",
+      "hash": "1245bbb88a78a6ab8b3cf96ea959f17bf970014d5f7409dbb0ca0c49451f36dd",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 357,
+      "padding": 7,
+      "bounds": {
+        "x": 25,
+        "y": 16,
+        "w": 17,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/e/0",
+      "hash": "87fe27f9b572994913f0eeedf667140105c42963f7d5a2542422a8c9d689f01c",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 341,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 16,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/e/1",
+      "hash": "09d11ee1cecd3577afb6444fd04ab78b8ab4a63f3d8eb2134f1370f59413f4b6",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 343,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 16,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/e/2",
+      "hash": "22467e0c97b386048848f989586f545288b39669b1889e11235969a095e18e65",
+      "colors": 24,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 344,
+      "padding": 6,
+      "bounds": {
+        "x": 27,
+        "y": 16,
+        "w": 15,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/e/3",
+      "hash": "2ebb5ff17f42a0be447870b0b01c7b084ec5859ba448d426c135e3425cdc14e6",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 333,
+      "padding": 6,
+      "bounds": {
+        "x": 27,
+        "y": 16,
+        "w": 13,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/e/4",
+      "hash": "6e7d8dc028b08eb4869c32fec036cf34c73693fce9bcca22142b8b9ef0ba5134",
+      "colors": 24,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 352,
+      "padding": 6,
+      "bounds": {
+        "x": 27,
+        "y": 16,
+        "w": 15,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/e/5",
+      "hash": "dd6fd32d5d768395c0c38c53bd3bfae5bb2eec336a76126ac08bd7d034ca69e2",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 350,
+      "padding": 6,
+      "bounds": {
+        "x": 27,
+        "y": 16,
+        "w": 15,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/e/6",
+      "hash": "9373c83433314520dbfd65fd65d0b3bffe42ec60529cac4320ae884973cd9f7e",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 344,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 16,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/e/7",
+      "hash": "87fe27f9b572994913f0eeedf667140105c42963f7d5a2542422a8c9d689f01c",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 341,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 16,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/hit/e/0",
+      "hash": "a0703bad8d4cc173197e5a38f95db4b15085bdd0b64c4b45bc6f1b434629e6ff",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 340,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 15,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/hit/e/1",
+      "hash": "23759c1230052edc964646ad2254d765a1152746357116e3c3fe5cabb4faea1f",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 363,
+      "padding": 6,
+      "bounds": {
+        "x": 24,
+        "y": 14,
+        "w": 14,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/hit/e/2",
+      "hash": "57480c1b3fcb32c64f18848c189e5b84faa925849293824cc4a1c7d14bd36850",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 355,
+      "padding": 6,
+      "bounds": {
+        "x": 24,
+        "y": 15,
+        "w": 15,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/hit/e/3",
+      "hash": "7eba794c58d3b6bc80c93be39634dcea64b9f7c5147fbc3648747b4f5511914a",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 340,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 15,
+        "w": 15,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/e/0",
+      "hash": "a0703bad8d4cc173197e5a38f95db4b15085bdd0b64c4b45bc6f1b434629e6ff",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 340,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 16,
+        "w": 15,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/e/1",
+      "hash": "d3f94c01c68793a8dcab997be531b53f7b4e06b73e367f753f82c610503ad290",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 358,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 17,
+        "w": 16,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/e/2",
+      "hash": "4ccd638cf9f22c5e4424443732e81ba89b4bdb41c85adcaed1b950061324cb61",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 361,
+      "padding": 7,
+      "bounds": {
+        "x": 20,
+        "y": 18,
+        "w": 17,
+        "h": 39
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/e/3",
+      "hash": "b199f2b3fa412a3e3ed6db045dca8a4328bef3f1e66a2e9bf74a230864596c4c",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 371,
+      "padding": 7,
+      "bounds": {
+        "x": 17,
+        "y": 21,
+        "w": 21,
+        "h": 36
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/e/4",
+      "hash": "85c78fceb1a147768b1dc3483f92f5cc1bc3a3b9e39e8d544c19aef476b3e62b",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 363,
+      "padding": 7,
+      "bounds": {
+        "x": 15,
+        "y": 24,
+        "w": 22,
+        "h": 33
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/e/5",
+      "hash": "9c7d50b3deecb17c8abdeefd3e9861d4d21fa7057dd646a765ca03d178f07f9f",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 367,
+      "padding": 8,
+      "bounds": {
+        "x": 12,
+        "y": 28,
+        "w": 25,
+        "h": 28
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/e/6",
+      "hash": "4b9552e0c79aac4f5de6b9d9f6ba5fbeb87a32a134bf00b22bcdc3172345cd56",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 363,
+      "padding": 6,
+      "bounds": {
+        "x": 10,
+        "y": 32,
+        "w": 27,
+        "h": 26
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/e/7",
+      "hash": "9f9b0f0d5a8d280adcff17c2d1c22ecc50361b3586f34af52aba2bb3d7c7dc51",
+      "colors": 23,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 324,
+      "padding": 6,
+      "bounds": {
+        "x": 9,
+        "y": 35,
+        "w": 29,
+        "h": 23
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/idle/w/0",
+      "hash": "9cf408205c43c195a39dd85fe994930b67b28946c345fa712c845138712aa37d",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 399,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "w": 22,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/idle/w/1",
+      "hash": "2870b97b2d8432e169eeb4ed9f5efa6a44d037f4343a2a55c03b998edb11c568",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 409,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 22,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/idle/w/2",
+      "hash": "2c24e91cfafb70d7cdb374b766f99f8ddd8471dcda60905fbf6fcbdcfa11ca09",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 397,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 22,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/idle/w/3",
+      "hash": "65086899adae59433d41dab91ff6880d2d0bd70f877bcf445cfdb7807cb12415",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 410,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 21,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/w/0",
+      "hash": "e962bcc1f37a3217e6ef647c43b1e20326ff270842474f4a65d9f53d321095e6",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 377,
+      "padding": 8,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "w": 21,
+        "h": 40
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/w/1",
+      "hash": "f2c4594fce7a2ec67d17e4076cbde2c04458b5bb6ccead23327f383053ea8a5d",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 418,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 22,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/w/2",
+      "hash": "73139b81d51f6f17be3098fc84587f047b2d392a9e47ff52d1dff4f808b487b2",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 431,
+      "padding": 5,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 22,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/w/3",
+      "hash": "9fce43b59924562e4ef8c5dfb895b71ec0f191212e0451da224378f72b971d17",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 418,
+      "padding": 7,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 22,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/w/4",
+      "hash": "fd30401b06b57c212600972966f8ee877ab2bf57c2cf087f386e6740ad9831c4",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 394,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "w": 21,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/w/5",
+      "hash": "c42dc8b4b92a7a81d3bc0b4b618a3c9408af20c99a60c167b8e8e2ca405a6ef8",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 376,
+      "padding": 4,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 21,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/w/6",
+      "hash": "4732f77dd9c425731e983cbfb76ec18b7f0ace82505a5260e9f4322b47cb8965",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 373,
+      "padding": 4,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 20,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/walk/w/7",
+      "hash": "39068057fcc45695f797d861973bb0fe746fcb652c902a27a91b82964ab81682",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 366,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 21,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/w/0",
+      "hash": "df82ad910227f2f2e3f1bad58806a4b36e65942a144a01a313721c279560ff5b",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 392,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 20,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/w/1",
+      "hash": "d5edead0f03819a5f916f18024ea394180d9395c42156b76d3f1d8fae15aa6d8",
+      "colors": 24,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 403,
+      "padding": 6,
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "w": 21,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/w/2",
+      "hash": "de011a832640bc2af541327781639f4e2a2fcf43c3bf474183b69730e4c4debe",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 392,
+      "padding": 5,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 22,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/w/3",
+      "hash": "912430ac076dd562951372c4c143bcbc32585c0755d6004de5cdbe5f3d679652",
+      "colors": 24,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 390,
+      "padding": 5,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 23,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/w/4",
+      "hash": "e85de5c0a86b82e0f4749fe1e376c5aa2cb16a93d90a0ee1d9da98846b910ff2",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 392,
+      "padding": 5,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 22,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/w/5",
+      "hash": "d241a4dfdb62aa0e2c45a4863b3dd41cfec990e40b8b2e3b3ddf3574d8070d41",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 406,
+      "padding": 5,
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "w": 21,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/w/6",
+      "hash": "70215adb7df82faf5d6a052060db9ad0379dfac882e224c03f7d306b4972551b",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 406,
+      "padding": 6,
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "w": 21,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/attack/w/7",
+      "hash": "df82ad910227f2f2e3f1bad58806a4b36e65942a144a01a313721c279560ff5b",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 392,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 20,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/hit/w/0",
+      "hash": "757a3846be96b0a85d1bc8c0fa77e6562551352f9f47febe901bb05e1afa91c1",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 397,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 22,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/hit/w/1",
+      "hash": "a1885b8b8ea417ecb7a6b02cf023c37e330f814f25f4d10aae7ef1a3b29d441c",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 423,
+      "padding": 6,
+      "bounds": {
+        "x": 21,
+        "y": 14,
+        "w": 22,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/hit/w/2",
+      "hash": "33c7202ec0e77cfaf99b1b875a975b1f3d7756fa524e2659f2a7e5f4aa9ed305",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 416,
+      "padding": 6,
+      "bounds": {
+        "x": 20,
+        "y": 14,
+        "w": 22,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/hit/w/3",
+      "hash": "e00b2dcdc6a2aebe84952a7aad021af28021e33f2cb0253c19a053771ab37f61",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 410,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 22,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/w/0",
+      "hash": "757a3846be96b0a85d1bc8c0fa77e6562551352f9f47febe901bb05e1afa91c1",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 397,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 22,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/w/1",
+      "hash": "69b1616cda9d6323db151099826777ba227697715afde0e770113e7acdb6677d",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 412,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 20,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/w/2",
+      "hash": "4a657057beec26dbf393dcc108b9430d2d9793c9fd35a1e2fe9cc9cf2f82c5b6",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 413,
+      "padding": 7,
+      "bounds": {
+        "x": 24,
+        "y": 18,
+        "w": 21,
+        "h": 39
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/w/3",
+      "hash": "ea8c5894e627a9cde0e856ef824e09d670ebd6035c952fac008a220b17666169",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 403,
+      "padding": 7,
+      "bounds": {
+        "x": 25,
+        "y": 21,
+        "w": 23,
+        "h": 36
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/w/4",
+      "hash": "bd5d2001c3b09d1a15d08ed5b2d5f40749edf53aefe8bf0711b0044c3045d906",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 394,
+      "padding": 7,
+      "bounds": {
+        "x": 25,
+        "y": 24,
+        "w": 25,
+        "h": 33
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/w/5",
+      "hash": "2597b9a6e73cb5d0f22963042f3a1ecf96df6d7b68495df580bb3719a7c57541",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 388,
+      "padding": 8,
+      "bounds": {
+        "x": 26,
+        "y": 28,
+        "w": 26,
+        "h": 28
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/w/6",
+      "hash": "8f4fc6768dc34c1039445de2200cd10ef9051426f15ed8828568974bd06e0835",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 394,
+      "padding": 6,
+      "bounds": {
+        "x": 26,
+        "y": 32,
+        "w": 27,
+        "h": 26
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.scout/death/w/7",
+      "hash": "7015f5c44465f9179eeba4fdfa4461905267348274236d691f0bf592acd9ad8b",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 350,
+      "padding": 6,
+      "bounds": {
+        "x": 25,
+        "y": 35,
+        "w": 29,
+        "h": 23
+      },
+      "logicalGridErrors": 0
+    }
+  ]
+}

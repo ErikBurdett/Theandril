@@ -1,0 +1,1566 @@
+{
+  "schemaVersion": 1,
+  "assetId": "battle.unit.skirmisher",
+  "steps": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "articulated-battle-64",
+      "settingsHash": "522b63dbcbc74e0a808f398a733844497f9c2f1f3ec630b176fb9db29986bd2b",
+      "inputHash": "2cbc23bdd7f255d295828831eeaa9517bb4a8a8974c02c1e02fb76b936841190",
+      "outputHash": "8522b7c8b01038de93ec437251b20eb3b42f1ecca7192fa8b8450827ca8a249d"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "9e2974e4c810670c1542225993f646bb40bceb28b6a7101f9a010f04c7c234ea",
+      "outputHash": "c40b90356c69a5242854b9d82815f5d7457326a306ec2a766fd46974eddad2ee",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c40b90356c69a5242854b9d82815f5d7457326a306ec2a766fd46974eddad2ee",
+      "outputHash": "b3c72ea1e939974b1b8d9228417842e56b7a4be8c7b22771f4e0d81153572ce8"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "516c1650f7771b949bc3096de53451cdf452dfc5700819d9669261c73edd4f7a",
+      "outputHash": "b6621da1630dd32569d8825fe3a229feeabbd75a2efe7416dd7e6ee92e24a6f7",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "de209468abe2fa2e88a8c56e39e9ef678bffca95dce883668bedfbfa39efeffc",
+      "outputHash": "d5a8706453fd7327abd3b4e31482a2f9fe9f52e6ceaa04805e6f9247a3dd3a8e",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d5a8706453fd7327abd3b4e31482a2f9fe9f52e6ceaa04805e6f9247a3dd3a8e",
+      "outputHash": "9b71c90fd118d8a9725792584e55d87b97cdf64ba1b1931b1af0f20623a7574c"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "d1d66741d2933b030cf6f7b431dddeb01e8a487154b63aa4eb3f236da462aa6c",
+      "outputHash": "a73e22c185466ed6ab10486ce77c95910a935f2c6ebe23ebda0ae96a604e685b",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "2787ec83f8f5ea4a49e43929e96e3e04798507d1bf00c5a32bde473584507c34",
+      "outputHash": "0b48e08fd7c8c2a761715b0f06da3233a430fbada0473270e30fcb54c2be3d58",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0b48e08fd7c8c2a761715b0f06da3233a430fbada0473270e30fcb54c2be3d58",
+      "outputHash": "5b5d3ff3084fa1d31613787377ed8187b0ae9b418359aec21bfad18a5a5efd9c"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "52304d6e81cdac3cf101382dac3d3f44099de6ca858657689bbf76cbf98fe80e",
+      "outputHash": "0b3574445e687757d1744e76274f078c477a90cc5fd126c1f7220480707e0f8a",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "588fc00d5cb3b55d3a279db5bd284135581b41174da0fc466f6ac061c3d8b438",
+      "outputHash": "a74e5afadb9d0c5136aafe905a13d81529ad13b756644673ff09459cfebe4bae",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a74e5afadb9d0c5136aafe905a13d81529ad13b756644673ff09459cfebe4bae",
+      "outputHash": "2db8203e228499d80140959b8a9a88a0db4779bfa20d6a447f2c07268b04a9be"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "8d00747dbf12ba7b2d80435f1a3fbb428b3505bda5c1529a404af3a7bdb6ac8a",
+      "outputHash": "85a733eef824374e971aa9f0b85eb54d9fd21a3295a53604675e5202dd078a4e",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "39579ac22c22963c4835b05f855e56e5fa999b89768e473735300af1066b4d13",
+      "outputHash": "7b2c8c27e51382ad4e486bfce7da4ea6916e10740acaee0a88295ab3f3979361",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7b2c8c27e51382ad4e486bfce7da4ea6916e10740acaee0a88295ab3f3979361",
+      "outputHash": "84dc3b18c5442b017ff2a883f5227a7011b9d76dbc9c6d0c407b0a0f1a14e0c1"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "0cac99287eae05cf64e859eda557d8f2f49d4687f67f2005a8e3d51bbef73a95",
+      "outputHash": "b8161f454363768d3459a2afaa02487f3c2478aff11027c26cda1eb284626c40",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "0df7faa0057b0d37c75c80ef633d6a12f6ada25b29a248b72bba8d668c1f75ce",
+      "outputHash": "3e274143d96de6d0fde316bb7ff42faa2401ad39d1f151109ede7a4c874797b0",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3e274143d96de6d0fde316bb7ff42faa2401ad39d1f151109ede7a4c874797b0",
+      "outputHash": "6bee6bca8d78c917373de35f689b2df34b64364e5168b4da2d8be9854c0a6178"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "ee8671f21dff8d927782cd5578f6e091dda69a4906b9a435a1f00b914c6b8ec9",
+      "outputHash": "247557200147e57d47f2925c84e5152c15e66f9c681b0750398e95f29ef4d2c0",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "50e82985dba643329d63a77cceadb3939f7a4bc4fd0a81031e5084a1452627e6",
+      "outputHash": "afdcf9edc15109e2fbd7e5ca548aece4694738ee48fad5579ecb5b0e0ed1fcab",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "afdcf9edc15109e2fbd7e5ca548aece4694738ee48fad5579ecb5b0e0ed1fcab",
+      "outputHash": "a39a1f3434f6cdaa1ca5176d5a22fec8caa4d11138c2ddfc1417e04c8c5e11cb"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "22a1ea9ab2686cca23667c713c8fd17f527878ca7c358744ea492a4b826c673c",
+      "outputHash": "f833c5fe556f8eef24fddeebc00c37b71168c9d442a2e902cb8200db66caca60",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "5ae6516333fd1a5cf222038d90a3976ef9f6768f08251562d9c7a0dcc737f6fe",
+      "outputHash": "731a8c0e004fea3392c2d9cbb817d8028719411615b732fca29e4a843fcc3e7d",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "731a8c0e004fea3392c2d9cbb817d8028719411615b732fca29e4a843fcc3e7d",
+      "outputHash": "c3289539e21d0314bfd12bd0043d1b219cbaef07320fa26cd9ae9aac492b0183"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "66b6b9785379aad38899940141bb5eb610117afe02e4c9f26704bec314318bdd",
+      "outputHash": "7eb80dc1a8e2ac7788f03fede0f13da55f70eecdec631b4bc52695ceea9e5c19",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "6e183383ed5a28734dd81b8a9cb64d796877e1d46c53d5cf17ab926dfa8ad8a1",
+      "outputHash": "a6859567e01829ca89dace3edbe652a570928666e6cefd4ddd610560f9f988f6",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a6859567e01829ca89dace3edbe652a570928666e6cefd4ddd610560f9f988f6",
+      "outputHash": "1a00d6ff5d6c5e82ebe58495d4ed9b5abc191d9148fc4d4ff32bd0dc4920c31e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "47eeda3957c0e58ec67831ac51ab1992e27da56aaa6113b6088f372d61138346",
+      "outputHash": "e5abd06abbb073f2e4cd0ee45be6efdfd3fea6e1f13560a9a100039d2c0db230",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "7ddea4f9ba8be1cf97f6319c7ace10c9b92191f7cb98db0ac907d3a872995aa1",
+      "outputHash": "a9aa323c62a6779941f441c8c8242556e6404262f315751f25a7c07891c25808",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a9aa323c62a6779941f441c8c8242556e6404262f315751f25a7c07891c25808",
+      "outputHash": "c878431cdbaf8cccc199f38e9936c447702632ef27d57d24a9986ca614fcc8de"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "8382cb20aa1ff9db75c301f920de11575bb00ce1c127c252c67e59071d4449d8",
+      "outputHash": "e947b80452d69a5130b3cf92e7a872f63b0b83d978953eaedbae0ad0d0341d66",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "42fe1a0a1e939865940f2cf4cfec62c985c7a68c9d08db4cdf1784e6f3365a80",
+      "outputHash": "65b0224d0835393856d6cde2fa7e2ff467c3eff81d2affe28c40ef479760d95d",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "65b0224d0835393856d6cde2fa7e2ff467c3eff81d2affe28c40ef479760d95d",
+      "outputHash": "d4a90c5d9648ab68fc4c7064c7f26a5099c33b82baf7014561d34074fbaf5afc"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "0bcb3b5b585c02ac17cd4179150944b9bf1ea28d5c6a0ede60ad686964b4e7b0",
+      "outputHash": "54d13a96a4a8d1506b8294ac714e32317a8d800882068784c9e499b84cd3456b",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "b385b630bc9683ca821d541eb0df70f97c9da256e76bb0b1084c038c7e568716",
+      "outputHash": "1ad284cf5cd1a6e6683e92841e51999bb281a40c4a19e190b900ab06e4472e20",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "1ad284cf5cd1a6e6683e92841e51999bb281a40c4a19e190b900ab06e4472e20",
+      "outputHash": "e5b89a49cafc9f180d284933e9aed22525ba11dbcb5ced2b610a8582c7dd4df5"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "8042d8576b16b8d0a611ad6db64b2e3ec2f12c0fb84a7be65c94da7f67fcbeea",
+      "outputHash": "1b6d1a86db00c088e9a12d4322ca93c602be4f8d3a8961451daf1e88bdb31be2",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "61b494e03b68c48c638dca3165b2fb216166a238ce518e091a47a09137041438",
+      "outputHash": "b5ed259c598648cc86935734fa02e4b8cfe9607434205ca5de46387bef704fac",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b5ed259c598648cc86935734fa02e4b8cfe9607434205ca5de46387bef704fac",
+      "outputHash": "da050c958ce423dc2eb14c0d5af29321d2fc8886631250d41f965967722edef7"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "fcb33da69fa6a604b67c21f0d87d27ae23abdfcbb81401fa58f2edbb43bcba2b",
+      "outputHash": "2c472e0c62aa7dcf3d910409ed76904d2c9d2b7217bc7f932d5bac65cd874294",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "868875939daaf5aaf82bfd463d456bfbae1eb760d1c50a18fe5e2755a3b093af",
+      "outputHash": "4ee655c2347d2652444da580222956d503006e931be7c24afcdf56844ee2f46b",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "4ee655c2347d2652444da580222956d503006e931be7c24afcdf56844ee2f46b",
+      "outputHash": "9be84056a8951cf69ab0cdb459f6582abcc0ee2c955c70f35065a233b596b548"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "d364570adbabb8f9b315cbf62aa932ba6d3d4d7e375587e47712a5fda6f238eb",
+      "outputHash": "3375c9030126b4133530ea086fd842b6a06b0c6085f19656577d249ebe18ebcd",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "b4a98475059ee6ce4fc415fd8cd5c4bed0d669ad68cac6a9fa205f787880ed93",
+      "outputHash": "c702acf5a20a73258fab1324cada039f48d9766e2904199d7eaa75a8ca5444db",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c702acf5a20a73258fab1324cada039f48d9766e2904199d7eaa75a8ca5444db",
+      "outputHash": "39d744d09ff3634fafc18c2ba0efde0a162d7767f3215b657b9498f08f4bf687"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "0563e4caaf0c75405d0afae3e22dbca6fe17ca8df97c23c74387ca075f5bc4ae",
+      "outputHash": "aca8034eba0bb8dfe2be8c722ef76f645ea0e52f22e6098a3f8ebe09bcc49ce7",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "8448ff3a83403cca057674cca5f4e455723c9814e989dbef3bda074bc46c8661",
+      "outputHash": "7b9001ebf6571daf08b1ec1ed11f2796e4ee292f3970aa761dc5b8e722ac4f06",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7b9001ebf6571daf08b1ec1ed11f2796e4ee292f3970aa761dc5b8e722ac4f06",
+      "outputHash": "094e649d17493d83d57f3750d3e97e7e05f9b2a9138e594a453737057e3abe0e"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "4521093d541d49cf3431ce1465df786b212273c6e6268edc84d555ad51958eb9",
+      "outputHash": "f56f37ea895e4f953ad2a2f4e861fd3a353b255ff96ca561af32724a9aadc95b",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "5ea74a6a2007c0eaa2ea4ee5730922c25eaa13806569134343644b2f38065cea",
+      "outputHash": "cf6318e7c02daaf18c5f59359454e01ad52e8773f751025085115f838d55673f",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "cf6318e7c02daaf18c5f59359454e01ad52e8773f751025085115f838d55673f",
+      "outputHash": "f2c625d8ff0a90f07401a94707fab79f72c7dd7963a1666c8001e0eeb7b1da2f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "6f8e880a6f8e06f5c3705397bb999a544e1b4e0ae05e34918dc7d9a868938f7e",
+      "outputHash": "e8463e7f1666052420033a845fcc51fdf753c0c28b69d98ac42c0ecb914820f1",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "a5e888be064fee0049ff846b822f0f5df05a570f23e3cda837ef022a632a570a",
+      "outputHash": "04884c621c4431ac8e535d93347e7ffe2f350e7c3513b6d6ec9f6a4edd0b526d",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "04884c621c4431ac8e535d93347e7ffe2f350e7c3513b6d6ec9f6a4edd0b526d",
+      "outputHash": "24250ae1feb9ea85cf05767ff0ee308a4abbd4fdab65cd983e98239253b85a21"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "7e21633271cb9dabbc02d003952451020305b639888e421a69031f222ba6a687",
+      "outputHash": "031122ddbe27c1d3eac2a2267c5b89d052ef35ba9dea159883379953420e3076",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "3d4f5dd08f1e660c0ed4efe2bce848c1c3bf425f34c2ee00907d556af7dadfad",
+      "outputHash": "f9e21f61725ab6ee90a504d88644fce4e7470bbc43f98e331a841a54d7a61e26",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f9e21f61725ab6ee90a504d88644fce4e7470bbc43f98e331a841a54d7a61e26",
+      "outputHash": "ea1adb4becf7ecac9493c9c2e4ef3297b9d88bdf2f38cda2c74dbadb52e5e862"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "84070f562f7368d9089f87602bef73cc1cadc051738592ba597e700f2e91e69b",
+      "outputHash": "073b96cd3381329bbcf2f49335a5dbb34daff3b0c5b54c61121b824f4b46cc07",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "61b494e03b68c48c638dca3165b2fb216166a238ce518e091a47a09137041438",
+      "outputHash": "b5ed259c598648cc86935734fa02e4b8cfe9607434205ca5de46387bef704fac",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b5ed259c598648cc86935734fa02e4b8cfe9607434205ca5de46387bef704fac",
+      "outputHash": "da050c958ce423dc2eb14c0d5af29321d2fc8886631250d41f965967722edef7"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "fcb33da69fa6a604b67c21f0d87d27ae23abdfcbb81401fa58f2edbb43bcba2b",
+      "outputHash": "2c472e0c62aa7dcf3d910409ed76904d2c9d2b7217bc7f932d5bac65cd874294",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "037fd06e65b557fdb7a4e9cac16c8a98ee59167678460962c398665a83bd2e12",
+      "outputHash": "b380505092074854ac71a7e001905cd2c7f1ad73fa052b965c2e79624637e0ab",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b380505092074854ac71a7e001905cd2c7f1ad73fa052b965c2e79624637e0ab",
+      "outputHash": "de59f94ed5585d10f033d0c71639ceb57246c97b8084690c6a171828da0a053c"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "5db641b75a12e9c22fe3f63402383cd2b4619a6cb6f5770e572d46ef2d8ffb99",
+      "outputHash": "38a7eca5d9b77fa68bd629b3684eaba50f500295f0d7f1c9a3e3f0226aa7c2be",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "253cfe77c3ea82d444c595076f6e9217a8ef03be5a994f7edba11e4e987fc488",
+      "outputHash": "e54519440fe874ffc705ab0fee2a49d490cee3a498138aaeaf651082f84cc9a5",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e54519440fe874ffc705ab0fee2a49d490cee3a498138aaeaf651082f84cc9a5",
+      "outputHash": "a35bf72819a4019fb55aa9d99bbebb3adb5652c1b723b48b74a5c14b5eeff3ec"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "f33768652a3ba4a9bde5b8f99e300879f65b44b9262157c72c460fc9535ea439",
+      "outputHash": "3ee45b65f4368465a75c51c16ff1bf88951f8e01f318a66144f6cc8438d43149",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "3050f0d4735f78d3fdf0dbfa0a5a1a4b0c65d0ade1992870a808e776714e826b",
+      "outputHash": "03c5c8d4af28a5cdf03fd6afa1dcb55eda0ef5824715dcf0dc35249207fbed41",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "03c5c8d4af28a5cdf03fd6afa1dcb55eda0ef5824715dcf0dc35249207fbed41",
+      "outputHash": "37a067626dafede96c30ec7e81ae7c42583de125045242260f9e78882befcf47"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "b4c80335f437ab32c928e24a2d8faefe72354201616fe30645d87072c7d08d2f",
+      "outputHash": "1df87839719c92f1a7fab5197b8251af74299b55c6df6e2a5288b4bd99f7235c",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "7d38e9b2a2580fb86b1c1659f64bf8e54cd0a74f62bb62b8abfbf8e8ebfedf5d",
+      "outputHash": "bacf7f2b28b05a4bd5815bbc1bb00ecf1d605a4040c76619fb546545f318677c",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "bacf7f2b28b05a4bd5815bbc1bb00ecf1d605a4040c76619fb546545f318677c",
+      "outputHash": "6de7e0208629ec3eb061f7c23eb3c5189e4c61712dea4d7497af53cfe779337f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "c63d0f7c5d3582846772ea207174ce9f09cee624571983df9c1ec69bc3472079",
+      "outputHash": "ee00bd1cfb82a953ee78b1581f63af8f9417f008af0af2c171cb5c9e13619d70",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "037fd06e65b557fdb7a4e9cac16c8a98ee59167678460962c398665a83bd2e12",
+      "outputHash": "b380505092074854ac71a7e001905cd2c7f1ad73fa052b965c2e79624637e0ab",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b380505092074854ac71a7e001905cd2c7f1ad73fa052b965c2e79624637e0ab",
+      "outputHash": "de59f94ed5585d10f033d0c71639ceb57246c97b8084690c6a171828da0a053c"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "5db641b75a12e9c22fe3f63402383cd2b4619a6cb6f5770e572d46ef2d8ffb99",
+      "outputHash": "38a7eca5d9b77fa68bd629b3684eaba50f500295f0d7f1c9a3e3f0226aa7c2be",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "09a014a805dfbfa117701a01adf22c75994d35f16085aa570102fb0dd2e74bc2",
+      "outputHash": "9052d5076617e6a6ae796df42804a8ce284b08abd4e5ca048310e9aa7dee739a",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9052d5076617e6a6ae796df42804a8ce284b08abd4e5ca048310e9aa7dee739a",
+      "outputHash": "9c6b90839cfc5e2b484f85cfb1eb8567ac05b7cc369690e99f338044ead9e6fb"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "30ffc3e6a93c62020a5fe265797c859565e5346380e0c4c7a8f802b96d2fb5f0",
+      "outputHash": "4de60f4d07c299fd8adf9c7acae9b12a4954be4e4a5f16247e163f1c5275ecc9",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "df6f57bac32587328647f0677f13144b3f04a6c8417819952c62a2ac96cce976",
+      "outputHash": "0d4352631fc3f759a2e9eeb433e4abf9845380a4418d153c2796d9732a2c010b",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0d4352631fc3f759a2e9eeb433e4abf9845380a4418d153c2796d9732a2c010b",
+      "outputHash": "eb032e7aae31143fc6661dffa053bdf55dd227b4ff967f9a1940f69549974ada"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "97678959bf09628117076f109529764165a66c08cb876568f3c95c1b091b61a6",
+      "outputHash": "f5b2068f542ac7725cf103d53ada954f0a2dd9e76d0206d115cf3c892ae35aac",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "09ca1da223b4074794c2a5144af5b54fb152a12622f8368c6ea5200142478b4f",
+      "outputHash": "b19132b4ab7693d00e4b5b73213fd0dea585fa4d93a2969ae327f6565c422c8a",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b19132b4ab7693d00e4b5b73213fd0dea585fa4d93a2969ae327f6565c422c8a",
+      "outputHash": "a926655f9c04d6ccb4a7368261908afe42f7e5a2f52c234ca3bb555e656bfd2b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "f933e30f4c779b5a3b7768435be51d045d0c53024fc17ce91e0207b9ca3ac977",
+      "outputHash": "57fd0fce886e8b37413d2751741d78686a08b319d343a7fc36538420e2700bd5",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "009677cdcc29ab15237433c13f500e30d5cf311d25a2e299847980a3a421adb7",
+      "outputHash": "e3fbe77a966b589035276a3958d5f8b3a36f05c2bb554602ef02a1716b2abb40",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e3fbe77a966b589035276a3958d5f8b3a36f05c2bb554602ef02a1716b2abb40",
+      "outputHash": "11d554e54e96e33f61341006f5c64cf68ac1b66cd2ba010ac1d67f9ffd00fea1"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "17f8a852223e847d512a1e0f8bb9082b2f79c450a541917505ed1df8dc9c0ebd",
+      "outputHash": "d19eef4209341e68653f43d384dd8a931f708e65355ea82a0b7037e5ea097a14",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "0fea8174826054a532388a60705fb3465d34c640a7d69161a889abfda962d796",
+      "outputHash": "72d699211449b24416042c9ef5e0250d0c75a071591fdb03069a598f09a74139",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "72d699211449b24416042c9ef5e0250d0c75a071591fdb03069a598f09a74139",
+      "outputHash": "08cf36255dc0ffa7139dc43d73d0c007c7638b34d5217d3341c1a3b94ce7f428"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "7100f9e57972f6b8cec5830e0b9c7777444460ad2dd4ead9aa1b2fa0405bc141",
+      "outputHash": "d48a3563cbf67601f5a846e4c3a9cc36198c650b02280366ded015698706bd1e",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "72de168d4bd206099cfc672a8079b9316b54fdbe6aebc255791641cf599d9c92",
+      "outputHash": "0c61ac0974c722e73c209032b539700ad4bce7e0d8b1c0f9edea0a6ab7627e87",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0c61ac0974c722e73c209032b539700ad4bce7e0d8b1c0f9edea0a6ab7627e87",
+      "outputHash": "e3beab45e0ef9d0bff1696b41eeaff56058f2891c829f09de1f0aa2a02a5899a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "0f663c8fc4277c501630684fe2587b55cd38cff132232499a1de7fc6556d06dc",
+      "outputHash": "8577e1d6acd8e9cf310553956533f1be75fa4bd05ff4dce6394a673f0e836fb3",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "fcab800264ea737cda87ae6aebe7aa29a865bf7d7a35b91d9a1d56d69ac95631",
+      "outputHash": "d1b29da5f3e8f8a125520e0e3de79927aa0492e8a0066120fdb2f3ab78cdf2f0",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "d1b29da5f3e8f8a125520e0e3de79927aa0492e8a0066120fdb2f3ab78cdf2f0",
+      "outputHash": "5887ee6a24c54042fb9201a8d04d24c1f6a967ec83246d40c181284c049f85b4"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "c15a536357f209af3f0a64709a1fe3f947246d7f66aaa9558baccdd9f7fe53b3",
+      "outputHash": "3d352de2b7e5ecd4e9be72c7e598e409d9fa8eae4b27c9b1404376ff7ecbb48d",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "f3dc620d2fc325ad370a1df1c42b44611bda9ebf39d6e96b9047db8ab3f93a8a",
+      "outputHash": "68e9e9a24174e39fefe34110f78a18c7a4a68156d32c14b0c30cff70fdd7569f",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "68e9e9a24174e39fefe34110f78a18c7a4a68156d32c14b0c30cff70fdd7569f",
+      "outputHash": "bf1feeb6fb90b5dea5a128304cd3d880a3918426e8b8f0fa53afa603417c7bb3"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "36c9b63edbe45ab2eaf809f0b3f4f193d548b926082306aba32668d76ec66178",
+      "outputHash": "129df55b531c4eceb82d2420f577838369dec2b51b1f15bf1f3b8c52bca5bcb5",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "bad9c3f7f60f40a5125560f0ebafc1f2f893dd821573e05a71fe47e0ebaf4b45",
+      "outputHash": "15876183294280532a4b399a3ea1b6b4273bd84524386c62030b78c9c3626192",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "15876183294280532a4b399a3ea1b6b4273bd84524386c62030b78c9c3626192",
+      "outputHash": "215c8603fb00545faa2fb5effd304ede8bd58ea1921df326eb07550459da02c8"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "d29f968c64d9cb7591f689579f014537dfdfebfc7435fc15400f79c8a7c6cf09",
+      "outputHash": "517b357fd1cad6cbf01baed38187f02dbfad04b4a7eca54fd350d8f8bd96bf4e",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "43e5aa679136f6613cadfaffe3bd1462839d1f4ae24901ad8805452cf733e35b",
+      "outputHash": "9ff7ab93b9833af7484ecaca9dd74dc087aefcd809d0148d07237569788afcf4",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9ff7ab93b9833af7484ecaca9dd74dc087aefcd809d0148d07237569788afcf4",
+      "outputHash": "65bf4199d712b48b59286d48a5f2829b7ab448ac993715504ee9bf38eb2a2954"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "0913c9a8cf3fc40e4273b38308e7e973861e6533ff50f8358d0ba6f115c4d8fb",
+      "outputHash": "34ceee06ca4f139dad4685ef6f59c74e063c3d2a9bfc9127206beb4d857b6671",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "fc1e5e3e0693c8f4834be32e113cafef9b00764528eba4fc3e0e968ec8ed6d1a",
+      "outputHash": "53327bb01447e50348205c35f8b67a64c58c8dd5b324515cf7a305ff700ae13a",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "53327bb01447e50348205c35f8b67a64c58c8dd5b324515cf7a305ff700ae13a",
+      "outputHash": "29a54090c202b88f5b4e1cf191dc7705ec8cb081b59a566c99cc9a6f926038bd"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "da1cded8b4d478558ea819062c497c2c48cae9786711aeaf66ab11d3a36dd2d5",
+      "outputHash": "ff957279c2fc83573e3311270a3ee3a87d2c74f21a86dbc913b70bbcdbc713dc",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "da8cd14c98299c96678a5c3fa9cb30e7f26b9b0790667acba910717c751bf484",
+      "outputHash": "ba9e7754896a162d37d5d60e94038b5636d7bd972e7caf8c67d145315a6baffe",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "ba9e7754896a162d37d5d60e94038b5636d7bd972e7caf8c67d145315a6baffe",
+      "outputHash": "ebbb8e8239d487d193f98a0983b492eb6407c4dd6fc20489495a6e571f61b05d"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "ad604b2edfb32e8d46a6cf7c160a78f1388eba71dab2c6037688e74ab7619ae5",
+      "outputHash": "1a72cce25fa7bb9b4cf808da4b50bbb684489d50be8b2c1f2a68b2b5eb030250",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "fc28a4dc320442e3d3768067580444d3131161ddf9e0e47fe7d6f575f7c060fe",
+      "outputHash": "9daf83a5f03a77958cb2ddf35438b8392ca486af9b027649e9c4179d73fabf87",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9daf83a5f03a77958cb2ddf35438b8392ca486af9b027649e9c4179d73fabf87",
+      "outputHash": "01fdf94ee87ce4ea651028c071d184addc028988b19d3af3ef3e95c7f82ceced"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "85faafa8728d974df94350fea5d3e5230f4672a8be7f0a28f3840cc5c08d9859",
+      "outputHash": "a9d6a8a07eea620e9f507576c02f6587fb9a5bd59e9da13b7b12538310b7d57e",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "4f241877af0a3b6ab88cd791325438ce58d32f56b3386a3afea8faab4f987ace",
+      "outputHash": "70d7d40576f17b6970d231ff636954cab5548b8b7b54916a51801f26bd8a9509",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "70d7d40576f17b6970d231ff636954cab5548b8b7b54916a51801f26bd8a9509",
+      "outputHash": "96105a1b389bbb4e0ca12beca23aa4d6f8f89a8c5fbb96ee689b5b53fd2a3b88"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "020a94908c165689d8ff4f0e16703ed7081f8c9c6c96d1d2d2da74d829f31304",
+      "outputHash": "62c53bb92d2cf35709c4e67dba85f47966ee19482bb9b4a9c46a821f437fc68a",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "6b65d77348ce39af35e04a2cb1814f56b380af4825f7ecbfb04cef443daac636",
+      "outputHash": "a0fe1ee8e21a953d66090e8a5c78f5e57434094873d4d992521ee4a25b61503a",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a0fe1ee8e21a953d66090e8a5c78f5e57434094873d4d992521ee4a25b61503a",
+      "outputHash": "ec22ed972299acb6bbbf00f4f20ad3f205b3716e0bf9a2e15a4a3ad9d647712f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "3edaec77692a5178f455139edead54420ce3078ce3e1dd9b54176274f1f4e61d",
+      "outputHash": "1443f6d18f26f1c54640031f01e37d81c142e5fa4cdb0fbb643694f65edfaaae",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "bf5ff0bbcf5433f8604760f03df41ee5af25d6266a265e565432fdd074b1f91f",
+      "outputHash": "c66bbedc3a616fd5317db5cc852bf5fe9d7a6f4e6d3be196841a29d28dc7b125",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c66bbedc3a616fd5317db5cc852bf5fe9d7a6f4e6d3be196841a29d28dc7b125",
+      "outputHash": "f0d22da41b1b634e46ef78822b8de453b2d006983de11a91e25d65fe94c91b4f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "3cb75a58032169e31d3e16f5c430af05b83291e9013ef5b742db8f24d8b17e9e",
+      "outputHash": "2d343530c7b9e9ec7a0a61f51fec4061c170d38d387fd62993dce1570bf83e28",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "c351641ee41ce815a828919e1983b81d75adef85439d90cb427e025e4052bd24",
+      "outputHash": "a4d84b7b73c1c059de2b0c805f1b9818b4f5595907a7e48577ac3cb6dfa1c300",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a4d84b7b73c1c059de2b0c805f1b9818b4f5595907a7e48577ac3cb6dfa1c300",
+      "outputHash": "7158a3bb674b3630af8ae4f520bf0bbac809d9b9c6c47b5401f57e0c5e3bde3a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "e6b820ea29ab06e9f824f6824a95906782935c7cd70d52eb99a54601e2b87e0c",
+      "outputHash": "983b5c87a4edc3bc8877b1e7af971c82468c4d2ab90efc9313df19f3b3981a89",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "b2ded2e6c0da4657a490527d4f3b60cbfe35d9c27ad4084f51ff3dd968ea7e78",
+      "outputHash": "b8d21991566238a72cab23143761244bd4a058a3cc20372ee5d1f490c6b14535",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b8d21991566238a72cab23143761244bd4a058a3cc20372ee5d1f490c6b14535",
+      "outputHash": "a5566d74636e2ad65abc022c10aa258c7953ff09ed2c6331691ca33f4650ab58"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "617fdb7184eace83f06b4f4b88f92637e32ae4d82a4fd357c57b9ed4c034caa3",
+      "outputHash": "09798ec12aee68dee2eed0565d3584f72c1a8773c4d72569bc36141b8ecbdb20",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "02b63018d1a4a0d8968efe2f76403b9a6fb7eb69039b04a91ae46371745d2496",
+      "outputHash": "f5e280134b64d07f6f2bb0a7b611f8bbcb5f64d0a37d8f8938dff3c8b436caa3",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f5e280134b64d07f6f2bb0a7b611f8bbcb5f64d0a37d8f8938dff3c8b436caa3",
+      "outputHash": "d235bb8d41e991f538315bc9ea41abe1aa3a6e443f7a354767593e2486dbe625"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "c554238c7c943179e43aea5946c01db1ded96bb0e20caf2c3640e4d2c98db418",
+      "outputHash": "f8d1162b3f2a3ceeba37f091f9b213dd5843927919542cfd0896affdd116f236",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "ca246940e7d07aee9b79d6fd8c5968cdac12a4b9e189ce6ba8c688ee5c84a196",
+      "outputHash": "9b970e289cd668421e80e80adce82fb3b0fc9d841c62391d013c0bd0668a5915",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9b970e289cd668421e80e80adce82fb3b0fc9d841c62391d013c0bd0668a5915",
+      "outputHash": "696b2374a11c9f40a57855e020e40f2017741a6246ed30c277fbc899110beffa"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "03ba9b74f1a1f9d756915dc558a59750d66bf8d21a63ad8c7860c29a285088bc",
+      "outputHash": "faa2a5812671cb4a4510047b2de09030e419e63e8db0d247c8551306acf9d3ff",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "f4efe4e3ad090c46e7410fb55284be4d48cbc6fea8e340e622c65f1b67284167",
+      "outputHash": "836b211c8f320dfea29e2a83cfa57e57cb9e917e4443273d0e60d8c51fec964e",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "836b211c8f320dfea29e2a83cfa57e57cb9e917e4443273d0e60d8c51fec964e",
+      "outputHash": "a2bbffd24d05b1a4d02a91043891c464655c23f495b4825e726bb8ec9c7fa545"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "535a9489f183151a1fb5e134fe8ea1ffe23d9bbcff7274cd78dcf1b725c2e959",
+      "outputHash": "cff7e4ed3adf9187ef2434651e7c59d6c76d6fc4dd07495e699ca47bf50c7192",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "70490b2b7c7597eaa58a6bf8dd61a64046618c2fab9e3d97d59d268e1a9be9ae",
+      "outputHash": "c1cfc9d6cafed133bc6fefffca59134f82186fc6c5ec9b66555ce8a6fba416a5",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c1cfc9d6cafed133bc6fefffca59134f82186fc6c5ec9b66555ce8a6fba416a5",
+      "outputHash": "5f6579b8ae79953b0e6ffd9fbec99ee06efede24d77d876cfc69bddad9306bcf"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "fb6b42e75129fe98d65dc27fd37357c2658215dd4e9a81151e6bdee5a6e3f6ea",
+      "outputHash": "29d1efe39a6b75d911a1d62a255fba831e268e03043189ab10ac08df62e1d0ee",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "af945b8742297b43518a4db90cf28038f1bfe1bf51b839d70071f7b69fe0139d",
+      "outputHash": "815f0a9fae899b0680495593062c3d983cb345065f1f544e3e6e529cda1e8286",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "815f0a9fae899b0680495593062c3d983cb345065f1f544e3e6e529cda1e8286",
+      "outputHash": "31020af01ecb012756c90879081aac6fe45c120529095eff7f540524ce1ebe81"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "44d34eb2e884705737dbad101d4403634ddfbaf0fc2868788de291a1a1e22903",
+      "outputHash": "e35f6adef10f79cc76db336a5eaa7b71f6e3bb55dbe64fa0cc63e1024f1d2f38",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "668f5d4a2566027e464528dcd725b42bc13f8b7eab395c63f7b8fd14df9276c3",
+      "outputHash": "63d778e1a7e5c07ded6eea1536a6860e6179871b66e4b85e70b02378d205ea99",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "63d778e1a7e5c07ded6eea1536a6860e6179871b66e4b85e70b02378d205ea99",
+      "outputHash": "c27393bd1c62289687e7ab7aa437c6b9b86ee6331dc4ebcb87ac306b0dc5f03a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "795183c74f71be5e45d7e2bc0ce94be2dfe5a4e0e2f7ecd03ef636308d1d566b",
+      "outputHash": "503d98d2827594d73ce5ee1311009ca95ced180bbee1b5c7ae10b9064b2f11e8",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "32e1f92e22158f323819d36e80f2a26cb883200fe52d757c543965164bcb4ff4",
+      "outputHash": "e5b050d534233bdddcaa79b76f6c2e3ab16c602ba9eebb50158714106de0f5d1",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "e5b050d534233bdddcaa79b76f6c2e3ab16c602ba9eebb50158714106de0f5d1",
+      "outputHash": "d62dd6df0daf151c23d1eff3ced444b4cb273c7a0836fe0f049559a945af7053"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "19cbded22f0d93b826313cdb20ebc2b37a9c55187481552df0cca426e57ad82d",
+      "outputHash": "a19c6ca014a6a472aaa56988eb45ce313887ce0507d6004ff640ee041f9469db",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "bc90b20586a8475845bfc9c0b67b3dc7d3507fcd2dab16acc13f154b83cdaed3",
+      "outputHash": "3daf6c181560b5a34ea0bcbce32f6dd1a55d456c5b05fd0a65c68d8c96e7b14b",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "3daf6c181560b5a34ea0bcbce32f6dd1a55d456c5b05fd0a65c68d8c96e7b14b",
+      "outputHash": "1d034ab866754d50ca1bddc296c446344916195e48ade465db12892c0828c68f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "db353f31fa970b66882b0b2ea3702e5fb9eb1bdea10f57d8caf2fcd2f77151d3",
+      "outputHash": "46148dcb063a8a9218a9740f9300b0a014b37426fa6ec0ec8af36e5e77ad104a",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "ca246940e7d07aee9b79d6fd8c5968cdac12a4b9e189ce6ba8c688ee5c84a196",
+      "outputHash": "9b970e289cd668421e80e80adce82fb3b0fc9d841c62391d013c0bd0668a5915",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "9b970e289cd668421e80e80adce82fb3b0fc9d841c62391d013c0bd0668a5915",
+      "outputHash": "696b2374a11c9f40a57855e020e40f2017741a6246ed30c277fbc899110beffa"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "03ba9b74f1a1f9d756915dc558a59750d66bf8d21a63ad8c7860c29a285088bc",
+      "outputHash": "faa2a5812671cb4a4510047b2de09030e419e63e8db0d247c8551306acf9d3ff",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "3b678dc5ff6e51436bfa0186c8da6ab32942df781a97bbde351617a2b918bc5b",
+      "outputHash": "8b260731cb09538591c0caa99b430b015ab15d970ed87b80d9466bec7ed7a902",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "8b260731cb09538591c0caa99b430b015ab15d970ed87b80d9466bec7ed7a902",
+      "outputHash": "d7700af7cdb3457919c15d02f3da75004566f424e8127849465e92736bc9d538"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "f941c17511614a04557522e7acb604771eb09854403713b8a3b225797e787a97",
+      "outputHash": "4a71fef8e11b145c15f15b22c46bd98afad2849b9435d27569d1a71f59249a15",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "46e149c284bdab4c65df31aed4d5381fbb27ab21b7ef594136e35b0524b6de94",
+      "outputHash": "c3f8a73300f81c3768fb619f1810e7fc8d5d833bddb553aa93a48efca6698d7f",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c3f8a73300f81c3768fb619f1810e7fc8d5d833bddb553aa93a48efca6698d7f",
+      "outputHash": "078f1a5897a4786a845ebab5d8d3d55035d0ee24acc5e161542afb4667a58512"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "08d05041eb5ef8d0b2a362c5b96f9a5115e640329b8b9afb266c865448873587",
+      "outputHash": "81b2f8aa6e88c682fc034b1ed87b0ea0b00486a8a4683dacdd7521ec77833a07",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "e8762992c882d20a2fcae8d664571bb1bd68bca604398ba17f056ef2bba5e8ca",
+      "outputHash": "82ecf35c045187eb682245124161f374b5ccbb9e60ef8f111097d302d9b4009b",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "82ecf35c045187eb682245124161f374b5ccbb9e60ef8f111097d302d9b4009b",
+      "outputHash": "4990e80df729c5f0da186c5dd8c51f9a74e3f84dab3de81873818bfdb0274849"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "2a78c8eb421e5fc9d5b4680249d4b8faac8f22f282e8fe617ba147a4a43b5f35",
+      "outputHash": "b1a21f25bc196e601cf6d562e3dbe8541c1f457f309bd3b42a228e19ab97aaff",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "89a3cf2c991fa8a4d570ad2351cfd86689ab1426d1b67fd20f97d9662933805e",
+      "outputHash": "b947cd36f855ab9cfff45d5976a5a6beab8f35b155b5b3be387ca449dccaf4ca",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "b947cd36f855ab9cfff45d5976a5a6beab8f35b155b5b3be387ca449dccaf4ca",
+      "outputHash": "df5375e59f8f17f96ff6d22b6961315016d88121909d630fd0c68c045eb7ae36"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "a893d411b487098f945eaf3b6d97c0dc49b023eede17334b148b9a32bd4b1680",
+      "outputHash": "a4195a1d64b46e19707b8830f5fd8d5579fe2fbce0b47ab58fd6c3f2e923552a",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "3b678dc5ff6e51436bfa0186c8da6ab32942df781a97bbde351617a2b918bc5b",
+      "outputHash": "8b260731cb09538591c0caa99b430b015ab15d970ed87b80d9466bec7ed7a902",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "8b260731cb09538591c0caa99b430b015ab15d970ed87b80d9466bec7ed7a902",
+      "outputHash": "d7700af7cdb3457919c15d02f3da75004566f424e8127849465e92736bc9d538"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "f941c17511614a04557522e7acb604771eb09854403713b8a3b225797e787a97",
+      "outputHash": "4a71fef8e11b145c15f15b22c46bd98afad2849b9435d27569d1a71f59249a15",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "f39db92373514ca8d1d6574dcf3c942d88bfa895acd9f021a50d4e45b9c9c6d7",
+      "outputHash": "35de9d5e8222922cd772b76dd2b8974f071f2a1cd0d0865c4b73bb0d4e889133",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "35de9d5e8222922cd772b76dd2b8974f071f2a1cd0d0865c4b73bb0d4e889133",
+      "outputHash": "5c04e66ffc43a388ac138242a6fa9f2c9d19aabea1ed200dbfa6cc806528be34"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "0f54f5460a5086d1deffa52cf0a0239cedba742b680e9e15f96a6623447bf210",
+      "outputHash": "25f7361893ae2c54ea50edf9960227dfd85d7f277c81c497f8b4f667d0c9f6d3",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "a8cfc3d1b4b356788ba8c2ff0423a87e852f3c2dadfed0498b3058d67569ee90",
+      "outputHash": "735341c5e48b686fb8682f2435e44c4b595486b08808c0a1c6b7cf816a03abee",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "735341c5e48b686fb8682f2435e44c4b595486b08808c0a1c6b7cf816a03abee",
+      "outputHash": "c40d17e619da5b8d114d3ca28d316c5fdc6a36afe85cf78f4a01a93985b1cd84"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "24e3e7d75184f08f19de286f6a553ba812bf11d319c78374d562281bc5ae93d8",
+      "outputHash": "2a76c8951e75ff38a58478da225052ab19b46070c66954b7f615b4b1ef6debcc",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "3bbc008fc2abb6c824ef8f2ecd7e1221c4bbda1ed30f3c1e81914deeab36bd08",
+      "outputHash": "0e2cf6edf212e9838099ee2d0d68867bc88e29a6f6fc8c83b1b6241f569f766b",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "0e2cf6edf212e9838099ee2d0d68867bc88e29a6f6fc8c83b1b6241f569f766b",
+      "outputHash": "a11fe4d8a370e987bd460c1c1c0095108a4578ebafa489106fe19c3f16a9cc7b"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "37fb0133ec4ba42d6949e4d0a86536f547b1b5455300dca3705347b31347e4be",
+      "outputHash": "ee26eb258d8c3871953c232e8e6f6dc2f02ca18f1e2694eef04798b97fc7bc71",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "2b2ce04220694239e43c64f63d7f161ecce6062afdb8c5f2b79a39cfa4a2a690",
+      "outputHash": "7c0eee348e57c80535135ce9a0d65fbc8c7df1492bb0e2db4d25405191ab45d9",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "7c0eee348e57c80535135ce9a0d65fbc8c7df1492bb0e2db4d25405191ab45d9",
+      "outputHash": "15cc2e573e2458cb33817bb96c0306fa5a454b6620c7b0d48ec38b8c83040dbf"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "a970d36ce9a5fb4d5bcba386f1ae102a7cefc5681f739f34c145ccf64425e13b",
+      "outputHash": "62ef291149df308c00801d73c0ffc14d630767504ecf008398b30792269cbca8",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "ebcdce03b4653184d8f76948358a8e738cb650da63c7dffda1fdbb40b6595d10",
+      "outputHash": "f499ec642f6a6c306a48b1f12c7d7e91a5f7414fce9257dc25f2fbf008928c97",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "f499ec642f6a6c306a48b1f12c7d7e91a5f7414fce9257dc25f2fbf008928c97",
+      "outputHash": "7a215d1257edff7b393717f8616b103ba0e503399bd8b9ab563edb6234927c1a"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "0afda70859e5832fed95b136d8c5422d7c45581c16b03b55e1bc6308c9df3306",
+      "outputHash": "9f1c5606ab800c99d9b964cd421996dc7a3d95a4c9f2a85b22ec1a7bef7df849",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "55df6b70b9d8b8cc380881f45d34af835ed821ec42bf948f28e545c084d65574",
+      "outputHash": "6d350bf9909582695c7e0f4987d724026b375642fcacf7872899b0e7cb42e26a",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "6d350bf9909582695c7e0f4987d724026b375642fcacf7872899b0e7cb42e26a",
+      "outputHash": "7bbc05a9402c7cd48315659226a27b5efaa56b1e4c28579b2e5054e3c391e7ee"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "851fcfbe026679a0efa12f2851e057d5d2577b8506d7992b82db1a484f4af068",
+      "outputHash": "d48d813b272e96eded31a0ba0e0a040f87ddb30ed316795c24599d715da829a1",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "inputHash": "c1a3dc8da323ff5016aee2472d2c3f713ac1eb3a0b9d667da59d3bb9c22416b4",
+      "outputHash": "c7a7d56106172dc4da3f5ce0cafee0150493ea1ca0c0fa5194b35efe8c337f5a",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "c7a7d56106172dc4da3f5ce0cafee0150493ea1ca0c0fa5194b35efe8c337f5a",
+      "outputHash": "48019e0500ffd32e0e4dd6a724fe7a63239135ed2fa96c6d0b1dc52c7908a3a2"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "inputHash": "c08e4359223867e40bdc111a87e14e6d77539eb67b0f0d2f3df10400df54b23e",
+      "outputHash": "1ffec8a40e037bedd084e4d1e00e6313d67776fe7014445fd7cd9ac0424e1312",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "272db32221bc57dbd05e59882767c606983cae0435b981295540e76cdf4b4078",
+      "inputHash": "a2b061ae727bffc2b68922d7f8d4408d89887fae1e3c2926118a1d091f59d829",
+      "outputHash": "2262c310b589c5f9d753e52474eac0bbfc00c013b4b54f09d2a0ef8a1a41997e"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "5968cd565161fe8085746c0d3a3daad46de994d507d4c5e5705e004260af136a",
+      "outputHash": "2e2dca5824e1738916a148c0315b36cdf128bb638ffbe3f6529254f169c688b0"
+    }
+  ]
+}

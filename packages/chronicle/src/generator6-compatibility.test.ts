@@ -24,7 +24,7 @@ describe('genuine generator6 history survives newer inland-sea geography', () =>
     expect(serializeGameForVersion(replayArchive(archive), 12)).toBe(fixture.save);
     expect(serializeGame(deserializeGame(serializeGame(game)))).toBe(serializeGame(game));
     if (game.world.layout === 'legacy') throw new Error('A genuine generator6 origin must retain its modern layout.');
-    const origin = createGame({ seed: 74, size: 'tiny', factionCount: 4, generatorVersion: 6, rosterVersion: 3, layout: game.world.layout, pace: 'epic' });
+    const origin = createGame({ seed: 74, size: 'tiny', factionCount: 4, generatorVersion: 6, rosterVersion: 3, layout: game.world.layout, pace: 'epic', rulesVersion: 12 });
     expect(serializeGameForVersion(origin, 12)).toBe(archive.initialSave);
   });
 
@@ -48,7 +48,7 @@ describe('genuine generator6 history survives newer inland-sea geography', () =>
   });
 });
 
-describe('generator7 acceptance keeps generator identity explicit in schema12', () => {
+describe('generator7 acceptance keeps generator identity explicit in the current envelope', () => {
   it.each(['continents', 'islands', 'archipelago'] as const)('restores and replays an actual %s campaign without regenerating its saved world', layout => {
     const options = { seed: 74, size: 'tiny', factionCount: 4, generatorVersion: 7, rosterVersion: 3, layout, pace: 'short' } as const;
     const game = createGame(options), journal = createJournal(game, { mode: 'watch', coverage: 'complete' });
@@ -67,7 +67,7 @@ describe('generator7 acceptance keeps generator identity explicit in schema12', 
   });
 
   it('rejects checksum-valid unsupported generator identities without accepting an open-ended version range', () => {
-    const game = createGame({ seed: 74, size: 'tiny', factionCount: 4, generatorVersion: 7, rosterVersion: 3 });
+    const game = createGame({ seed: 74, size: 'tiny', factionCount: 4, generatorVersion: 7, rosterVersion: 3, rulesVersion: 12 });
     const save = serializeGame(game);
     for (const version of [0, 8, 1.5, '7', null]) {
       const changed = JSON.parse(save) as { state: { world: { generatorVersion: unknown } }; stateChecksum: string };

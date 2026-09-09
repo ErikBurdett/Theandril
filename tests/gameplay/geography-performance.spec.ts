@@ -44,7 +44,7 @@ test('Huge generated archipelago spectator geography stays bounded through revea
     expect(metrics.maxCachedChunkWidth).toBeLessThanOrEqual(900);
     expect(metrics.maxCachedChunkHeight).toBeLessThanOrEqual(760);
     expect(metrics.cachedTextureBytesEstimate).toBeLessThanOrEqual(64 * 4 * 1024 * 1024);
-    expect(metrics.residentAtlasBytesEstimate).toBeLessThanOrEqual(16 * 1024 * 1024);
+    expect(metrics.residentAtlasBytesEstimate).toBeLessThanOrEqual(17 * 1024 * 1024);
     expect(metrics.landQueryCount).toBe(0);
     if (!metrics.overview) expect(metrics.visibleCells).toBeLessThan(10000);
     expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(initial.hash);

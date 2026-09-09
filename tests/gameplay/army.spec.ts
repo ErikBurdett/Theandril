@@ -9,6 +9,7 @@ function formation(state: GameState, unitId: string) { return createArmyFormatio
 function rosterCampaign(kind: 'reorganize' | 'battle' | 'capacity' = 'reorganize'): GameState {
   const state = createGame({ generatorVersion: 4, seed: 20260905, size: 'tiny', pace: 'short', factionCount: 2 });
   state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60); state.world.waterDepth.fill(0);
+  state.resources.deposits = {}; // This gallery replaces the entire generated terrain/resource layer.
   const first = state.armies['army.1']!; const second = state.armies['army.2']!;
   const guard = formation(state, 'unit.guard'); guard.strength = 40; guard.morale = 65; guard.fatigue = 7;
   Object.assign(first, { cell: ORIGIN, name: 'Roadguard column', movement: 3, formations: [guard, formation(state, 'unit.scout'), formation(state, 'unit.colonist')] });

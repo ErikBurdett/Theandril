@@ -2,7 +2,7 @@ import 'fake-indexeddb/auto';
 import { gunzipSync } from 'node:zlib';
 import Dexie from 'dexie';
 import { afterEach, expect, test, vi } from 'vitest';
-import { createGame, deserializeGame, serializeGame, stateHash, type GameState } from '@theandril/sim';
+import { createGame, deserializeGame, serializeGame, stateHash, SAVE_VERSION, type GameState } from '@theandril/sim';
 import { createJournal, replayArchive, resumeJournal, type CampaignJournal } from '@theandril/chronicle';
 import { checksum } from '@theandril/content';
 import { SaveStore, serializeCampaign, deserializeCampaign, exportSave, importSave } from './index';
@@ -19,7 +19,7 @@ function campaign(seed = 74): { game: GameState; journal: CampaignJournal } { co
 function end(game: GameState, journal: CampaignJournal): void { expect(journal.record(game, { type: 'endTurn', factionId: game.turnOwnerId }).ok).toBe(true); }
 const generations = async (db: SaveStore, kind = 'auto') => db.table('campaignGenerations').where('kind').equals(kind).sortBy('id') as Promise<{ id: number; kind: string; type: string; originDigest: string; headDigest: string | null; manifestDigest: string }[]>;
 
-test('incremental storage retains a genuine schema12 origin and immutable prefix while appending schema14', async () => {
+test('incremental storage retains a genuine schema12 origin and immutable prefix while appending current rules', async () => {
   const fixture = (JSON.parse(gunzipSync(Buffer.from(preExpansion.payload, 'base64')).toString('utf8')) as { activeWork: { save: string; archive: unknown } }).activeWork;
   const game = deserializeGame(fixture.save), journal = resumeJournal(game, fixture.archive), before = journal.materialize(), db = store();
   await db.saveCampaign(game, journal, 'manual');
@@ -29,7 +29,7 @@ test('incremental storage retains a genuine schema12 origin and immutable prefix
   const loaded = await db.loadLatestCampaign('manual'), archive = loaded.journal.materialize();
   expect(archive.initialSaveVersion).toBe(12); expect(archive.initialSave).toBe(before.initialSave);
   expect(archive.records.slice(0, before.records.length)).toEqual(before.records);
-  expect(archive.records.at(-1)).toMatchObject({ rulesVersion: 14, checkpointVersion: 14 });
+  expect(archive.records.at(-1)).toMatchObject({ rulesVersion: SAVE_VERSION, checkpointVersion: SAVE_VERSION });
   expect(serializeGame(loaded.game)).toBe(serializeGame(game));
   expect(serializeGame(replayArchive(archive))).toBe(serializeGame(game));
   const exported = deserializeCampaign(await importSave(await exportSave(serializeCampaign(loaded.game, archive))));
@@ -55,7 +55,7 @@ test.each([
   const loaded = await db.loadLatestCampaign('manual'), archive = loaded.journal.materialize();
   expect(archive.initialSaveVersion).toBe(13); expect(archive.initialSave).toBe(before.initialSave);
   expect(archive.records.slice(0, before.records.length)).toEqual(before.records);
-  expect(archive.records.at(-1)).toMatchObject({ rulesVersion: 14, checkpointVersion: null });
+  expect(archive.records.at(-1)).toMatchObject({ rulesVersion: SAVE_VERSION, checkpointVersion: null });
   expect(serializeGame(loaded.game)).toBe(serializeGame(game));
   const imported = deserializeCampaign(await importSave(await exportSave(serializeCampaign(loaded.game, archive))));
   expect(imported.archive).toEqual(archive);

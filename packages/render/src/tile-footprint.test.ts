@@ -33,7 +33,7 @@ describe('canonical-tile artwork footprints', () => {
       expect(tileBoundsContained({ x: b.x * zoom / zoom, y: b.y * zoom / zoom, width: b.width * zoom / zoom, height: b.height * zoom / zoom })).toBe(true);
     }
   });
-  it('covers every published town/ruin/prop frame and all ten current improvement presentations', () => {
+  it('covers every published town/ruin/prop frame and every canonical improvement presentation', () => {
     const root = resolve(import.meta.dirname, '../../..');
     const catalog = JSON.parse(readFileSync(resolve(root, 'assets/art/runtime/catalog.json'), 'utf8')) as RuntimeCatalog;
     const assets = catalog.assets.filter(asset => /^(settlement\.|improvement\.|map\.ruin)/.test(asset.id));
@@ -48,7 +48,7 @@ describe('canonical-tile artwork footprints', () => {
         expect(tileBoundsContained({ x: fit.x + (bounds.x - asset.pivot[0]!) * fit.scale, y: fit.y + (bounds.y - asset.pivot[1]!) * fit.scale, width: bounds.w * fit.scale, height: bounds.h * fit.scale })).toBe(true);
       }
     }
-    expect(IMPROVEMENTS).toHaveLength(10);
+    expect(assets.filter(asset => asset.id.startsWith('improvement.')).map(asset => asset.id).sort()).toEqual(IMPROVEMENTS.map(item => item.id).sort());
     for (const improvement of IMPROVEMENTS) {
       expect(IMPROVEMENT_GLYPHS[improvement.id]).toBeDefined();
       expect(tileArtworkRole(improvement.id)).toBe('improvement');

@@ -163,7 +163,7 @@ describe('field battles in the campaign', () => {
     checked(state, { type: 'attack', factionId: rival, armyId: 'army.4', targetArmyId: 'army.2' });
     checked(state, { type: 'battleOrder', factionId: player, order: 'advance' });
     // Modern guard drill can absorb the first blow; routing still follows real damage.
-    if (state.battle) checked(state, { type: 'battleOrder', factionId: player, order: 'advance' });
+    for (let round = 0; state.battle && round < 8; round++) checked(state, { type: 'battleOrder', factionId: player, order: 'advance' });
     expect(state.battle).toBeNull();
     expect(state.battleReports[0]?.combat.result?.reason).toBe('morale rout');
     expect(state.armies['army.4']?.cell).toBe(destination);

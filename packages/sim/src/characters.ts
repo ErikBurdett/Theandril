@@ -60,7 +60,7 @@ const ownedSkills = (character: { skillId: string | null; learnedSkillIds?: read
 export function characterSkillEffects(character: { skillId: string | null; learnedSkillIds?: readonly string[] }, version = 8) {
   const effect = { attack: 0, armor: 0, rallyBonus: 0, surveyRadiusBonus: 0, refitBonus: 0, sabotageRiskReduction: 0, commandCapacityBonus: 0 };
   for (const id of ownedSkills(character, version)) {
-    const skill = skills.get(id); if (!skill) continue;
+    const skill = skills.get(id); if (!skill || (skill.introducedInRules ?? 7) > version) continue;
     effect.attack += skill.leadership.attack; effect.armor += skill.leadership.armor;
     effect.rallyBonus += skill.rallyBonus; effect.surveyRadiusBonus += skill.surveyRadiusBonus;
     effect.refitBonus += skill.refitBonus; effect.sabotageRiskReduction += skill.sabotageRiskReduction; effect.commandCapacityBonus += skill.commandCapacityBonus;
@@ -183,6 +183,7 @@ function promotionObjection(state: GameState, factionId: string, character: Char
   const objection = readyObjection(state, factionId, character); if (objection || !character) return objection;
   const skill = skills.get(skillId);
   if (!skill || !skill.roles.includes(role(character)) || !definitions.get(character.definitionId)?.skillIds.includes(skillId)) return 'That skill is not available to this character.';
+  if ((skill.introducedInRules ?? 7) > rulesVersion(state)) return 'That skill is not available under these historical rules.';
   if (rulesVersion(state) < 8 || skill.exclusiveGroup) {
     if (!skill.exclusiveGroup) return 'That skill is not available under these historical rules.';
     if (character.skillId) return 'This character has already chosen a permanent specialization.';
@@ -452,7 +453,7 @@ export function getCharacterObservation(state: GameState, factionId: string): { 
       assignmentOptions: coLocated.map(army => { const blocker = assignmentObjection(state, factionId, character, army.id); return { armyId: army.id, label: army.name, canAssign: blocker === null, blocker }; }),
       unassignmentOptions: receivingTowns.map(town => { const blocker = unassignmentObjection(state, factionId, character, town.id); return { settlementId: town.id, label: town.name, canUnassign: blocker === null, blocker }; }),
       missions: missionOptions,
-      promotions: definition.skillIds.map(skillId => { const skill = skills.get(skillId)!; const blocker = promotionObjection(state, factionId, character, skillId); return { skillId, name: skill.name, description: skill.description, experienceCost: skill.experienceCost, canPromote: blocker === null, blocker, acquired: ownedSkills(character).includes(skillId), requiresAll: [...skill.requiresAll], requiresAny: [...skill.requiresAny], branch: skill.branch, tier: skill.tier, exclusiveGroup: skill.exclusiveGroup }; }),
+      promotions: definition.skillIds.filter(skillId => (skills.get(skillId)?.introducedInRules ?? 7) <= rulesVersion(state)).map(skillId => { const skill = skills.get(skillId)!; const blocker = promotionObjection(state, factionId, character, skillId); return { skillId, name: skill.name, description: skill.description, experienceCost: skill.experienceCost, canPromote: blocker === null, blocker, acquired: ownedSkills(character).includes(skillId), requiresAll: [...skill.requiresAll], requiresAny: [...skill.requiresAny], branch: skill.branch, tier: skill.tier, exclusiveGroup: skill.exclusiveGroup }; }),
     };
   });
   const characterRecruitment = Object.values(state.settlements).filter(town => town.factionId === factionId).sort(byId).flatMap(town => CHARACTER_DEFINITIONS.filter(definition => rulesVersion(state) >= 14 || definition.role !== 'waykeeper').map(definition => { const blocker = recruitmentObjection(state, factionId, town.id, definition.id); return { settlementId: town.id, definitionId: definition.id, name: definition.name, role: definition.role, coinCost: definition.coinCost, upkeep: definition.upkeep, canRecruit: blocker === null, blocker }; }));
@@ -461,7 +462,7 @@ export function getCharacterObservation(state: GameState, factionId: string): { 
 export const characterUpkeep = (state: GameState, factionId: string): number => charactersForFaction(state, factionId).reduce((sum, item) => sum + (item.dead ? 0 : definitions.get(item.definitionId)?.upkeep ?? 0), 0);
 
 /** Shared by living characters and immutable battle snapshots, including pruned officers. */
-export function validateCharacterTraining(character: { definitionId: string; skillId: string | null; learnedSkillIds: string[] }): void {
+export function validateCharacterTraining(character: { definitionId: string; skillId: string | null; learnedSkillIds: string[] }, version = 16): void {
   const require = (condition: unknown, message: string): void => { if (!condition) throw new Error('Invalid save: ' + message); };
   const definition = definitions.get(character.definitionId);
   require(definition, 'invalid character training definition');
@@ -470,7 +471,7 @@ export function validateCharacterTraining(character: { definitionId: string; ski
   const owned = new Set(ownedSkills(character));
   for (const learnedId of character.learnedSkillIds) {
     const learned = skills.get(learnedId);
-    require(learned && !learned.exclusiveGroup && definition?.skillIds.includes(learnedId) && learned.roles.includes(definition.role), 'invalid learned character skill');
+    require(learned && (learned.introducedInRules ?? 8) <= version && !learned.exclusiveGroup && definition?.skillIds.includes(learnedId) && learned.roles.includes(definition.role), 'invalid learned character skill');
     require(learned && learned.requiresAll.every(required => owned.has(required)) && (!learned.requiresAny.length || learned.requiresAny.some(required => owned.has(required))), 'learned character skill lacks prerequisite');
   }
 }
@@ -482,7 +483,7 @@ export function validateCharacters(state: GameState): void {
   for (const [id, character] of Object.entries(state.characters)) {
     require(id === character.id && /^character\.[1-9][0-9]*$/.test(id) && serial(id) < state.nextId, 'invalid character identity');
     const definition = definitions.get(character.definitionId); require(definition && state.factions.some(item => item.id === character.factionId), 'invalid character definition or owner');
-    validateCharacterTraining(character);
+    validateCharacterTraining(character, rulesVersion(state));
     require(character.name.trim() === character.name && [...character.name].every(char => char.charCodeAt(0) >= 32 && char !== '<' && char !== '>'), 'invalid character name');
     const count = character.dead ? dead : living; count.set(character.factionId, (count.get(character.factionId) ?? 0) + 1);
     if (character.dead) { require(character.location === null && character.mission === null && character.woundedTurns === 0, 'dead character cannot remain assigned or active'); continue; }

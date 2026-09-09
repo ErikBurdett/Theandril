@@ -32,8 +32,8 @@ const pages = [];
 for (const page of catalog.atlases) {
   const png = await read(`assets/art/runtime/${page.imageUrl.split('/').at(-1)!}`);
   const selected = inputs.filter((item) => catalog.assets.find((asset) => asset.id === item.manifest.id)!.atlasId === page.id);
-  if (page.width !== page.height || ![1024, 2048].includes(page.width)) throw new Error('Benchmark supports current square compiler pages only');
-  const options = { id: page.id, pageSize: page.width === 1024 ? 1024 as const : 2048 as const, imageUrl: page.imageUrl, jsonUrl: page.jsonUrl, palette: catalog.palette };
+  if (page.width !== page.height || ![512, 1024, 2048].includes(page.width)) throw new Error('Benchmark supports current square compiler pages only');
+  const options = { id: page.id, pageSize: page.width === 512 ? 512 as const : page.width === 1024 ? 1024 as const : 2048 as const, imageUrl: page.imageUrl, jsonUrl: page.jsonUrl, palette: catalog.palette };
   const build = measure(() => buildAtlas(selected, options));
   const reversed = buildAtlas([...selected].reverse(), options);
   if (sha256(build.result.png) !== page.sha256 || sha256(reversed.png) !== page.sha256 || cacheKey(build.result.catalog) !== cacheKey(reversed.catalog)) throw new Error('Published atlas/reversed input mismatch');

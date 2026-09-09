@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "building.harbor",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "building.harbor"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original complete Theandril strategy-map civic district prop. Genuinely transparent PNG background, entire silhouette inside comfortable 15% margins, not a sheet, no other asset. Grounded weathered medieval dark fantasy, crisp coarse square pixel-art clusters at logical 64×64 detail, broad connected material planes and clear silhouette, restrained selective dark outline. Three-quarter southeast isometric view, upper-left diffuse highlights, old pale stone, peat-dark timber, soot recesses, muted sage moss, rust and dull brass accents. Compact complete cluster fits a 56×44 logical-pixel footprint, no surrounding full ground tile or hex border. No text, labels, letters, banners with writing, people, landscape, checkerboard, modern technology, glossy gradients, soft shadows, haze, detached pieces, montage or game UI. CHARTER HARBOR: low broad salt-weathered timber warehouse with a patched dark slate roof, joined to a short L-shaped pier on heavy pilings. One tall clearly braced wooden loading crane rises beside the warehouse with a hanging netted cargo barrel; two grounded freight crates by a large open warehouse door. Tiny integral muted blue water strip around pilings, no boats, no fishing gear, no full shore landscape.",
+  "frames": [
+    {
+      "id": "building.harbor/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/building.harbor/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "37ef592d4fbe98962a492012e92ff9dd03111e65fbb47b8544a412ff5fd273d6",
+    "sourceRefs": [
+      "assets/art/source/hearth-civic/building.harbor-v1.png",
+      "assets/art/source/hearth-civic/building.harbor-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T21:40:50.926Z",
+  "referenceHashes": [
+    "acc630da3d921fb9bdfa7e9329da41780a8b3bed79443f54f2e214e3ce8223b2",
+    "a4fc9b774b3331aa48b4bfcb05d4f6a0ed14b6494185e8c1d3da5314fb1a4a3a"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-hearth-civic-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "f219859af909a3e5d30d8536234cfc742b7f86de8d514bb39b29ef127dfa62f6",
+      "inputHash": "acc630da3d921fb9bdfa7e9329da41780a8b3bed79443f54f2e214e3ce8223b2",
+      "outputHash": "7f74a7accde8ce6d8b4685d9797547d72dafaf145bad48544d89a2e25a741e4a"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

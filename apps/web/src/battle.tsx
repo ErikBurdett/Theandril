@@ -6,6 +6,7 @@ import type { BattleTransfer } from './battle-transfer';
 import { FormationTable } from './warfare';
 import { CommanderBattleControls } from './characters';
 import { battleRevealOffset, mayAdvanceBattleWatch } from './battle-playback';
+import { battleCameraPoint, battleCameraTransform } from '../../../packages/render/src/battle-camera';
 import './battle.css';
 
 const terrainNames = ['Water', 'Plains', 'Forest', 'Hills', 'Mountains'];
@@ -52,27 +53,34 @@ export function BattlefieldPanel({ view, transfer, busy, error, replay, suspende
   const [speed, setSpeed] = useState(1);
   const [stance, setStance] = useState<BattleOrder>('advance');
   const [selectedId, setSelectedId] = useState<string>();
+  const [camera, setCamera] = useState({ zoom: 1, focusId: undefined as string | undefined, pan: { x: 0, y: 0 } });
   const [seekEnd, setSeekEnd] = useState(0);
   const [progress, setProgress] = useState<BattlePlaybackProgress>();
   const issueRef = useRef(issue); issueRef.current = issue;
   const [targets, setTargets] = useState<Record<string, string>>({});
   const onProgress = useCallback((next: BattlePlaybackProgress) => setProgress(previous => previous?.revision === next.revision && previous.eventCount === next.eventCount && previous.completed === next.completed ? previous : next), []);
-  const onSelect = useCallback((id: string) => setSelectedId(id), []);
+  const onSelect = useCallback((id: string) => {
+    setSelectedId(id);
+    setCamera(previous => previous.zoom > 1 ? { ...previous, focusId: id, pan: { x: 0, y: 0 } } : previous);
+  }, []);
   useLayoutEffect(() => {
     const window = windowRef.current, section = window?.closest<HTMLElement>('.map-section');
     if (!window || !section) return;
     const measure = () => {
       section.style.setProperty('--battlefield-top', `${window.getBoundingClientRect().top - section.getBoundingClientRect().top}px`);
       if (snapshot) {
-        section.style.setProperty('--battlefield-height', `${battleSceneHeight(snapshot, window.clientWidth)}px`);
+        const height = camera.zoom > 1 ? Math.round(Math.max(360, Math.min(640, globalThis.innerHeight * .65))) : battleSceneHeight(snapshot, window.clientWidth);
+        section.style.setProperty('--battlefield-height', `${height}px`);
         window.dataset.portrait = String(battleIsPortrait(snapshot, window.clientWidth));
+        window.dataset.inspecting = String(camera.zoom > 1);
       }
     };
     measure(); const observer = new ResizeObserver(measure);
     observer.observe(window.parentElement!); observer.observe(window);
-    return () => { observer.disconnect(); section.style.removeProperty('--battlefield-top'); };
-  }, [battleId, snapshot]);
-  useEffect(() => { setWatching(false); setPaused(false); setSeekEnd(0); setSelectedId(undefined); setProgress(undefined); setTargets({}); heading.current?.focus(); }, [battleId]);
+    globalThis.addEventListener('resize', measure);
+    return () => { observer.disconnect(); globalThis.removeEventListener('resize', measure); section.style.removeProperty('--battlefield-top'); };
+  }, [battleId, snapshot, camera.zoom]);
+  useEffect(() => { setWatching(false); setPaused(false); setSeekEnd(0); setSelectedId(undefined); setCamera({ zoom: 1, focusId: undefined, pan: { x: 0, y: 0 } }); setProgress(undefined); setTargets({}); heading.current?.focus(); }, [battleId]);
   useEffect(() => { setPaused(false); setSeekEnd(0); setProgress(undefined); }, [revision]);
   useEffect(() => { if (suspended) { setWatching(false); setPaused(true); } }, [suspended]);
   useEffect(() => {
@@ -82,8 +90,8 @@ export function BattlefieldPanel({ view, transfer, busy, error, replay, suspende
   useEffect(() => { if (error) { setWatching(false); setPaused(true); } }, [error]);
   useEffect(() => {
     if (!battleId || !snapshot) { setScene(undefined); return; }
-    setScene({ battleId, snapshot, packet, revision, paused: paused || suspended, speed, selectedId, seekEnd, onProgress, onSelect });
-  }, [battleId, snapshot, packet, revision, paused, suspended, speed, selectedId, seekEnd, onProgress, onSelect, setScene]);
+    setScene({ battleId, snapshot, packet, revision, paused: paused || suspended, speed, selectedId, camera, seekEnd, onProgress, onSelect });
+  }, [battleId, snapshot, packet, revision, paused, suspended, speed, selectedId, camera, seekEnd, onProgress, onSelect, setScene]);
   useEffect(() => () => setScene(undefined), [setScene]);
   const playing = Boolean(packet && (!progress || progress.revision !== revision || !progress.completed));
   useEffect(() => {
@@ -96,10 +104,26 @@ export function BattlefieldPanel({ view, transfer, busy, error, replay, suspende
   const chosen = snapshot.formations.find(item => item.id === selectedId);
   const character = snapshot.characters.find(item => item.id === selectedId);
   const abilities = view.battleAbilities ?? [];
+  const panCamera = (x: number, y: number) => {
+    const field = windowRef.current; if (!field) return;
+    const worldHeight = battleSceneHeight(snapshot, field.clientWidth), layout = battleLayout(snapshot, field.clientWidth, worldHeight);
+    setCamera(previous => {
+      const focus = previous.focusId && layout.points.get(previous.focusId) || { x: field.clientWidth / 2, y: worldHeight / 2 };
+      const transform = battleCameraTransform(field.clientWidth, field.clientHeight, worldHeight, previous.zoom, focus, { x: previous.pan.x + x, y: previous.pan.y + y });
+      const center = battleCameraPoint({ x: field.clientWidth / 2, y: field.clientHeight / 2 }, transform);
+      return { ...previous, pan: { x: (center.x - focus.x) * previous.zoom / field.clientWidth, y: (center.y - focus.y) * previous.zoom / field.clientHeight } };
+    });
+  };
   const revealField = (targetId?: string) => {
     const field = windowRef.current; if (!field) return;
     const layout = battleLayout(snapshot, field.clientWidth, field.clientHeight);
     const entity = snapshot.formations.find(item => item.id === targetId || item.armyId === targetId) ?? snapshot.characters.find(item => item.id === targetId);
+    if (camera.zoom > 1) {
+      if (entity) setCamera(previous => ({ ...previous, focusId: entity.id, pan: { x: 0, y: 0 } }));
+      const top = battleRevealOffset(field.getBoundingClientRect().top, field.clientHeight, window.innerHeight);
+      if (Math.abs(top) > 1) window.scrollBy({ top, behavior: 'instant' });
+      return;
+    }
     const point = entity && layout.points.get(entity.id);
     const target = entity && point ? battleActorBounds('unitId' in entity ? entity.unitId : entity.definitionId, point, layout.scale) : { y: 0, height: field.clientHeight };
     const top = battleRevealOffset(field.getBoundingClientRect().top + target.y, target.height, window.innerHeight);
@@ -116,9 +140,14 @@ export function BattlefieldPanel({ view, transfer, busy, error, replay, suspende
       <button disabled={!playing} onClick={() => setSeekEnd(value => value + 1)}>Skip animations</button>
       {battle ? <button disabled={busy} onClick={() => { setWatching(false); closeReview(); issue({ type: 'autoResolveBattle', factionId: view.factionId }); }}>Auto-resolve battle</button> : <button className="primary" onClick={closeReview}>Return to campaign</button>}
     </div>
+    <div className="battlefield-inspection"><label>Inspect formation or officer<select value={selectedId ?? ''} onChange={event => event.target.value ? onSelect(event.target.value) : setSelectedId(undefined)}><option value="">Select a battlefield figure</option>{snapshot.formations.map(item => <option key={item.id} value={item.id}>{item.side === 'attacker' ? 'Attacker' : 'Defender'} · {item.unitName} · {item.id}</option>)}{snapshot.characters.map(item => <option key={item.id} value={item.id}>{item.name} · {item.side}</option>)}</select></label>{chosen && <p><strong>{chosen.unitName}</strong> · {chosen.armyName} · {chosen.strength}/{chosen.maxStrength} strength · {chosen.morale} morale · {chosen.fatigue} fatigue · {chosen.ward} ward · rank {chosen.row + 1}, file {chosen.column + 1}</p>}{character && <p><strong>{character.name}</strong> · {character.strain}/{character.maxStrain} strain · {character.side}</p>}</div>
+    <div className="battlefield-camera" aria-label="Battlefield view controls">
+      <label>Battle view<select value={camera.zoom} onChange={event => setCamera({ zoom: Number(event.target.value), focusId: selectedId, pan: { x: 0, y: 0 } })}><option value="1">Fit field</option><option value="2">2× detail</option><option value="3">3× detail</option><option value="4">4× detail</option></select></label>
+      <button disabled={!selectedId} onClick={() => setCamera({ zoom: Math.max(3, camera.zoom), focusId: selectedId, pan: { x: 0, y: 0 } })}>Focus selected</button>
+      <div className="battlefield-pan" role="group" aria-label="Pan battlefield">{([['left', '←', -.25, 0], ['up', '↑', 0, -.25], ['down', '↓', 0, .25], ['right', '→', .25, 0]] as const).map(([name, icon, x, y]) => <button key={name} aria-label={`Pan battlefield ${name}`} disabled={camera.zoom === 1} onClick={() => panCamera(x, y)}>{icon}</button>)}</div>
+    </div>
     <div className="battlefield-window" ref={windowRef} aria-hidden="true"><span>DEFENDERS</span><span data-testid="battle-attacker-label">ATTACKERS</span></div>
-    <div className="battlefield-footnote"><span>One sprite per actual formation; number = remaining strength. Deployment is schematic, not free movement.</span><span role="status">{watching ? 'Watching · ordinary rounds advance automatically.' : battle ? 'Paused for your orders.' : 'Playback does not change the campaign.'}{playing ? ` Action ${progress?.eventCount ?? 0} / ${packet?.events.length ?? 0}.` : ''}</span></div>
-    <div className="battlefield-inspection"><label>Inspect formation or officer<select value={selectedId ?? ''} onChange={event => setSelectedId(event.target.value || undefined)}><option value="">Select a battlefield figure</option>{snapshot.formations.map(item => <option key={item.id} value={item.id}>{item.side === 'attacker' ? 'Attacker' : 'Defender'} · {item.unitName} · {item.id}</option>)}{snapshot.characters.map(item => <option key={item.id} value={item.id}>{item.name} · {item.side}</option>)}</select></label>{chosen && <p><strong>{chosen.unitName}</strong> · {chosen.armyName} · {chosen.strength}/{chosen.maxStrength} strength · {chosen.morale} morale · {chosen.fatigue} fatigue · {chosen.ward} ward · rank {chosen.row + 1}, file {chosen.column + 1}</p>}{character && <p><strong>{character.name}</strong> · {character.strain}/{character.maxStrain} strain · {character.side}</p>}</div>
+    <div className="battlefield-footnote"><span>{snapshot.soldiers ? snapshot.domain === 'naval' ? 'One ship per hull; number = hull integrity.' : 'One figure per soldier; number = living company strength.' : 'One figure per formation; number = remaining strength.'} Use Battle view and Focus selected to inspect details. Orders move the actual tactical lines.</span><span role="status">{watching ? 'Watching · ordinary rounds advance automatically.' : battle ? 'Paused for your orders.' : 'Playback does not change the campaign.'}{playing ? ` Action ${progress?.eventCount ?? 0} / ${packet?.events.length ?? 0}.` : ''}</span></div>
     {battle && <><div className="battlefield-orders" aria-label="Tactical orders">{orders.map(order => <button key={order.id} disabled={busy || watching} className={order.id === 'withdraw' ? 'danger' : ''} aria-label={order.name} title={order.description} onClick={() => manual(order.id)}><strong>{order.name}</strong><small>{order.description}</small></button>)}</div>
       <CommanderBattleControls view={view} busy={busy} issue={issue} controls={!abilities.length}/>{abilities.length > 0 && <details className="battlefield-abilities" open><summary>Abilities · automatic by default</summary><p>Each source follows its own policy. Manual triggers use the same costs, strain, targets and remaining uses as automatic use.</p><div className="battlefield-ability-list">{abilities.map(ability => {
         const key = `${ability.sourceId}:${ability.abilityId}`;

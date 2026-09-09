@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.spring_garden",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.spring_garden"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Serious grounded weathered medieval dark-fantasy, crisp intentional PIXEL ART built with coarse square clusters at a 64×64 logical-pixel density: broad connected material planes, readable silhouettes, selective dark outline, no antialiasing, no painterly texture or photographic rendering. Three-quarter southeast isometric view with consistent upper-left diffuse light. Restrained palette: soot #202328, peat #343B33, wet slate #536368, ash #929184, old linen #C1B597, weathered timber browns, dull brass #A38B55, sage vegetation and muted blue water. Entire object centered, fully visible, with a generous 15% genuine transparent margin on EVERY side, including tops and ground. Compact joined ground footprint will fit into 56×44 logical pixels inside a 64×64 transparent runtime canvas. No text, letters, labels, logos, people, UI, hex tile borders, surrounding landscape, floating detached fragments, cast shadow outside footprint, gradients, bloom or haze. A SPRING GARDEN: a practical old pale limestone springhead at the rear left pours a short ribbon of muted blue water into a low square irrigation cistern; three joined raised beds of broad sage-green vegetable rows spread to its right and foreground, dark fertile earth separated by worn stone paths. Two tiny low timber water gates integrate garden and spring. The rounded springhead is the clear visual focus. Low, broad connected silhouette.",
+  "frames": [
+    {
+      "id": "improvement.spring_garden/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/improvement.spring_garden/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7d953b5608a26220f49875718e300d2baaec12b3562db147fbfa9bb0bcedd165",
+    "sourceRefs": [
+      "assets/art/source/hearth-improvements/improvement.spring_garden-v1.png",
+      "assets/art/source/hearth-improvements/improvement.spring_garden-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T21:23:42.798Z",
+  "referenceHashes": [
+    "b30e94bb09093f1644379d5294b933930b7b6a522d91c305b272ecdcd7684fdc",
+    "8bc675c475cc542fd2dc82b4fcc240dbb6f5c11a196020c725db5fd46f947639"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-hearth-improvement-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "b11a7e0348acd7177f24f2f02454a7863c6f922d93b586673a47583fe97a9070",
+      "inputHash": "b30e94bb09093f1644379d5294b933930b7b6a522d91c305b272ecdcd7684fdc",
+      "outputHash": "c87e0a9e9e1eb22a5d28c91321937666223ffbaa243d49b6b389e3df010e62ab"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

@@ -12,6 +12,7 @@ function cityScene() {
   const origin = state.armies['army.1']!.cell;
   for (const cell of cellsWithin(state, origin, 3)) {
     state.world.terrain[cell] = 1; state.world.biome[cell] = 7; state.world.waterDepth[cell] = 0; state.world.fertility[cell] = 80;
+    delete state.resources.deposits[cell];
   }
   issue(state, { type: 'found', factionId: state.turnOwnerId, armyId: 'army.1', name: 'Boundary Hearth' });
   const town = Object.values(state.settlements)[0]!;
@@ -91,10 +92,10 @@ test('city borders expand through a saved turn while researched tile constructio
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
-test('all five research-gated sites have visible distinct procedural identifiers and stable idle chunks', async ({ page }, testInfo) => {
+test('all five research-gated sites display their approved pixel assets and stable idle chunks', async ({ page }, testInfo) => {
   const state = createGame({ generatorVersion: 4, seed: 17, size: 'tiny', factionCount: 1, pace: 'short' }), factionId = state.turnOwnerId, origin = state.armies['army.1']!.cell;
   const cells = cellsWithin(state, origin, 3).filter(cell => cell !== origin);
-  for (const cell of [origin, ...cells]) { state.world.terrain[cell] = 2; state.world.biome[cell] = 2; state.world.waterDepth[cell] = 0; state.world.fertility[cell] = 80; }
+  for (const cell of [origin, ...cells]) { state.world.terrain[cell] = 2; state.world.biome[cell] = 2; state.world.waterDepth[cell] = 0; state.world.fertility[cell] = 80; delete state.resources.deposits[cell]; }
   const spring = cells.find(cell => naturalFeatures(state.world, cell) & 1)!;
   expect(spring).toBeDefined();
   const grove = cells.find(cell => cell !== spring && (naturalFeatures(state.world, cell) & 4))!;
@@ -111,7 +112,7 @@ test('all five research-gated sites have visible distinct procedural identifiers
   state.factions[0]!.treasury = 20_000; state.factions[0]!.knowledge = 20_000;
   for (const technology of TECHNOLOGIES) issue(state, { type: 'research', factionId, technologyId: technology.id });
   for (const cell of [...cells].sort((a, b) => hexDistance(origin, a, state.world.width) - hexDistance(origin, b, state.world.width) || a - b)) if (!state.land.settlements[town.id]!.claimed.includes(cell)) issue(state, { type: 'claimCell', factionId, settlementId: town.id, cell });
-  for (const [index, definition] of IMPROVEMENTS.slice(5).entries()) {
+  for (const [index, definition] of IMPROVEMENTS.slice(5, 10).entries()) {
     issue(state, { type: 'improveTile', factionId, settlementId: town.id, cell: sites[index]!, improvementId: definition.id });
     for (let turn = 0; turn < definition.turns; turn++) issue(state, { type: 'endTurn', factionId });
   }
@@ -119,10 +120,10 @@ test('all five research-gated sites have visible distinct procedural identifiers
   await importCity(page, checked);
   await closeManagement(page);
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().improvementProps)).toBe(5);
-  await expect(page.getByTestId('art-runtime-status')).toContainText('partial pixel pack');
-  await expect(page.getByTestId('art-runtime-status')).toHaveAttribute('title', /land improvements lack approved artwork/);
-  for (const [index, definition] of IMPROVEMENTS.slice(5).entries()) {
-    expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell), sites[index]!)).toMatchObject({ improvementId: definition.id, improvementPresentation: 'procedural' });
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.state)).toBe('ready');
+  await expect(page.getByTestId('art-runtime-status')).not.toHaveAttribute('title', /land improvements lack approved artwork/);
+  for (const [index, definition] of IMPROVEMENTS.slice(5, 10).entries()) {
+    expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell), sites[index]!)).toMatchObject({ improvementId: definition.id, improvementPresentation: 'approved' });
     await page.getByTestId('map-container').scrollIntoViewIfNeeded();
     const point = await page.evaluate(cell => window.__THEANDRIL__!.getCellScreenPoint(cell), sites[index]!); expect(point?.inViewport).toBe(true);
     await page.screenshot({ path: testInfo.outputPath(`${definition.id}-native.png`), clip: { x: Math.floor(point!.x - 30), y: Math.floor(point!.y - 30), width: 60, height: 60 } });
@@ -131,4 +132,12 @@ test('all five research-gated sites have visible distinct procedural identifiers
   const rebuilds = await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().chunkRebuilds);
   await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
   expect(await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().chunkRebuilds)).toBe(rebuilds);
+  const hash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
+  for (let step = 0; step < 4; step++) await page.getByRole('button', { name: 'Zoom in', exact: true }).click();
+  await page.getByTestId('map-container').screenshot({ path: testInfo.outputPath('five-researched-sites-near.png') });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole('button', { name: 'Focus selection', exact: true }).click();
+  await page.getByTestId('map-container').screenshot({ path: testInfo.outputPath('five-researched-sites-narrow.png') });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(hash);
 });

@@ -5,8 +5,9 @@ import { hexDistance, neighbors, TERRAIN, WATER_DEPTH } from '@theandril/mapgen'
 import { applyCommand, createArmyFormation, createGame, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
 import { navalCampaign, NAVAL_FIXTURE } from '../../test-fixtures/src/naval-fixture';
 import { planTurn } from './index';
+import { planCharacters } from './characters';
 import { createNavigation } from './navigation';
-import { coastalFoundingSite, hasNavalOpportunity, needsNavalInvestment, planNaval } from './naval';
+import { coastalFoundingSite, hasNavalOpportunity, needsNavalInvestment, navalResearchChoice, planNaval } from './naval';
 import { createSeaKnowledge } from './sea-knowledge';
 
 function issue(state: GameState, command: GameCommand): ReturnType<typeof applyCommand> {
@@ -15,6 +16,91 @@ function issue(state: GameState, command: GameCommand): ReturnType<typeof applyC
   return result;
 }
 function round(state: GameState): void { issue(state, { type: 'endTurn', factionId: state.turnOwnerId }); }
+
+test('unrelated global ID allocation cannot redirect the same observed ocean scout, and two scouts reserve distinct destinations', () => {
+  let state = navalCampaign({ enemyFleet: false });
+  // Authored ocean-scout deployment isolates navigation from recruitment pacing.
+  // Real fog, paid research, movement quotes and every sailing command remain authoritative.
+  for (const army of Object.values(state.armies)) if (army.id !== NAVAL_FIXTURE.coastalId) delete state.armies[army.id];
+  const fleet = state.armies[NAVAL_FIXTURE.coastalId]!;
+  fleet.cell = NAVAL_FIXTURE.deepCell; fleet.movement = 5;
+  fleet.formations = [createArmyFormation(fleet.id, 'unit.ocean_warship')];
+  state.explored[state.turnOwnerId] = new Set();
+  refreshAuthoredSight(state);
+  // Research before validation grants the actual hull's legal deep-water capability.
+  issue(state, { type: 'research', factionId: state.turnOwnerId, technologyId: 'technology.ocean_navigation' });
+  state = deserializeGame(serializeGame(state));
+  const view = getObservation(state, state.turnOwnerId), before = serializeGame(state);
+  const move = planNaval(view, 0).commands.find((command): command is Extract<GameCommand, { type: 'moveTo' }> => command.type === 'moveTo' && command.armyId === fleet.id);
+  expect(move).toBeDefined();
+  for (const serial of [100, 999, 10000]) {
+    const renamed = deserializeGame(before), old = renamed.armies[fleet.id]!;
+    delete renamed.armies[fleet.id]; old.id = `army.${serial}`; renamed.armies[old.id] = old; renamed.nextId = serial + 1;
+    const checked = deserializeGame(serializeGame(renamed));
+    const other = planNaval(getObservation(checked, checked.turnOwnerId), 0).commands.find(command => command.type === 'moveTo' && command.armyId === old.id);
+    expect(other).toMatchObject({ target: move!.target });
+    expect(applyCommand(checked, other!).ok).toBe(true);
+  }
+  expect(serializeGame(state)).toBe(before);
+  const twinId = `army.${state.nextId++}`;
+  state.armies[twinId] = { ...state.armies[fleet.id]!, id: twinId, cell: NAVAL_FIXTURE.deepCell + 1, formations: [createArmyFormation(twinId, 'unit.ocean_warship')] };
+  refreshAuthoredSight(state);
+  state = deserializeGame(serializeGame(state));
+  const moves = planNaval(getObservation(state, state.turnOwnerId), 0).commands.filter((command): command is Extract<GameCommand, { type: 'moveTo' }> => command.type === 'moveTo');
+  expect(moves).toHaveLength(2); expect(new Set(moves.map(command => command.target)).size).toBe(2);
+  for (const command of moves) issue(state, command);
+});
+
+test.each([false, true])('optional appointments and generic reserves cannot consume the first ocean scout quote (missing founder: %s)', missingFounder => {
+  let state = navalCampaign();
+  const factionId = state.turnOwnerId;
+  state.armies[NAVAL_FIXTURE.enemyFleetId]!.cell = NAVAL_FIXTURE.shallowCell;
+  // Deliberately leave normal economic building and (optionally) caravan needs.
+  // Their generic reserve must not underfund the same legally quoted ship.
+  state.settlements[NAVAL_FIXTURE.homeId]!.buildings = ['building.harbor', 'building.workshop'];
+  if (missingFounder) state.armies[NAVAL_FIXTURE.cargoId]!.formations = state.armies[NAVAL_FIXTURE.cargoId]!.formations.map(formation => formation.unitId === 'unit.colonist' ? { ...createArmyFormation(NAVAL_FIXTURE.cargoId, 'unit.guard'), id: formation.id } : formation);
+  const guardId = `army.${state.nextId++}`;
+  state.armies[guardId] = { id: guardId, factionId, name: 'Harbor watch', cell: NAVAL_FIXTURE.homeCell, movement: 3, formations: [createArmyFormation(guardId, 'unit.guard')] };
+  issue(state, { type: 'research', factionId, technologyId: 'technology.ocean_navigation' });
+  issue(state, { type: 'adoptInstitution', factionId, institutionId: 'institution.charter_compact' });
+  issue(state, { type: 'assignCharacter', factionId, characterId: NAVAL_FIXTURE.marshalId, armyId: guardId });
+  state.factions[0]!.treasury = 48; state.factions[0]!.knowledge = 0;
+  refreshAuthoredSight(state);
+  state = deserializeGame(serializeGame(state));
+  const view = getObservation(state, factionId);
+  expect(planCharacters(view, 48).commands.some(command => command.type === 'recruitCharacter')).toBe(true);
+  const quote = view.productionOptions.find(option => option.itemId === 'unit.ocean_warship' && option.settlementId === NAVAL_FIXTURE.homeId);
+  expect(quote?.canQueue).toBe(true);
+  const plan = planTurn(view), mirror = deserializeGame(serializeGame(state));
+  expect(plan).toContainEqual({ type: 'queue', factionId, settlementId: NAVAL_FIXTURE.homeId, itemId: 'unit.ocean_warship' });
+  expect(plan.some(command => command.type === 'recruitCharacter')).toBe(false);
+  for (const command of plan) { issue(state, command); issue(mirror, command); }
+  expect(state.factions[0]!.treasury).toBe(0);
+  for (let turn = 0; turn < 20 && state.settlements[NAVAL_FIXTURE.homeId]!.queue.length; turn++) { round(state); round(mirror); }
+  expect(getObservation(state, factionId).armies.some(army => army.factionId === factionId && army.unitId === 'unit.ocean_warship')).toBe(true);
+  expect(stateHash(mirror)).toBe(stateHash(state));
+});
+
+test('a funded open-sea harbor can buy ocean research from spare knowledge before any passenger charter', () => {
+  let state = navalCampaign();
+  const factionId = state.turnOwnerId;
+  delete state.armies[NAVAL_FIXTURE.fleetId]; delete state.armies[NAVAL_FIXTURE.coastalId];
+  state.armies[NAVAL_FIXTURE.enemyFleetId]!.cell = NAVAL_FIXTURE.shallowCell;
+  refreshAuthoredSight(state);
+  state = deserializeGame(serializeGame(state));
+  const view = getObservation(state, factionId);
+  // A possible scout does not reserve the grand strategy's knowledge purse.
+  expect(navalResearchChoice(view)).toBeUndefined();
+  expect(planNaval(view, 100, { knowledgeBudget: 79 }).commands.some(command => command.type === 'research')).toBe(false);
+  const plan = planNaval(view, 100, { knowledgeBudget: 80 });
+  expect(plan.commands).toContainEqual({ type: 'research', factionId, technologyId: 'technology.ocean_navigation' });
+  expect(plan.commands.some(command => command.type === 'queue' && command.itemId === 'unit.ocean_warship')).toBe(false); // Wait for refreshed prerequisite quotes.
+  const before = state.factions[0]!.knowledge;
+  for (const command of plan.commands) issue(state, command);
+  expect(state.factions[0]!.knowledge).toBe(before - 80);
+  expect(state.progression[factionId]!.technologies).toContain('technology.ocean_navigation');
+  expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+});
 
 test('whole AI really loads, crosses deep ocean, lands and founds without reboarding or rejected commands; saved voyage matches', () => {
   const state = navalCampaign({ enemyFleet: false });

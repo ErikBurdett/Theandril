@@ -14,7 +14,7 @@ const captured = JSON.parse(gunzipSync(Buffer.from(
 const versions: RulesVersion[] = [4, 5, 6, 7, 8, 9, 10, 11];
 
 function campaign(escaped: boolean): GameState {
-  const game = createGame({ seed: 20260905, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
+  const game = createGame({ rulesVersion: 4, seed: 20260905, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
   const name = escaped ? 'Rune "Gate" \\ Àsh \u2028 \u2029 🜂 \ud800' : 'First Hearth';
   const result = applyCommandForVersion(game, { type: 'found', factionId: game.turnOwnerId, armyId: 'army.1', name }, 4);
   if (!result.ok) throw new Error(result.error);

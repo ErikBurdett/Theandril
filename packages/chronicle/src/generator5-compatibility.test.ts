@@ -23,7 +23,7 @@ describe('genuine generator5 history survives newer geography', () => {
     expect(serializeGameForVersion(replayArchive(archive), 12)).toBe(fixture.save);
     expect(serializeGame(deserializeGame(serializeGame(game)))).toBe(serializeGame(game));
     if (game.world.layout === 'legacy') throw new Error('A genuine generator5 origin must retain its modern layout.');
-    const origin = createGame({ seed: 74, size: 'tiny', factionCount: 4, generatorVersion: 5, rosterVersion: 3, layout: game.world.layout, pace: 'epic' });
+    const origin = createGame({ seed: 74, size: 'tiny', factionCount: 4, generatorVersion: 5, rosterVersion: 3, layout: game.world.layout, pace: 'epic', rulesVersion: 12 });
     expect(serializeGameForVersion(origin, 12)).toBe(archive.initialSave);
   });
 

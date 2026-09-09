@@ -1,4 +1,4 @@
-import { BATTLE_SPELLS, IMPROVEMENTS, PROSPERITY_PROJECT } from '@theandril/content';
+import { BATTLE_SPELLS, IMPROVEMENTS, PROSPERITY_PROJECT, UNITS } from '@theandril/content';
 import { hexDistance, neighbors } from '@theandril/mapgen';
 import type { GameCommand, Observation } from '@theandril/sim';
 import type { AiPlan } from './diplomacy';
@@ -24,7 +24,7 @@ function landResearch(view: Observation) {
   const scores = new Map<string, number>();
   for (const improvement of IMPROVEMENTS) {
     if (!improvement.requiredTechnologies) continue;
-    const matches = sites.filter(cell => improvement.sites.some(site => site.terrainIds.includes(cell.terrain)
+    const matches = sites.filter(cell => (!improvement.requiredResourceId || cell.resourceId === improvement.requiredResourceId) && improvement.sites.some(site => site.terrainIds.includes(cell.terrain)
       && (!site.biomeIds || site.biomeIds.includes(cell.biome))
       // canWork excludes deep ocean; these authored maritime sites require shallows.
       && (!site.requiredFeatures || (cell.features & site.requiredFeatures) === site.requiredFeatures)
@@ -84,14 +84,14 @@ export function assessProjectHosts(view: Observation): ProjectHostAssessment[] {
 }
 
 /** Observed eligibility is authoritative; costs are budgeted before settlement orders. */
-export function planProgression(view: Observation): ProgressionPlan {
+export function planProgression(view: Observation, protectedCoin = 0): ProgressionPlan {
   const commands: GameCommand[] = [];
   const reasons: string[] = [];
   const ownTowns = view.settlements.filter(town => town.factionId === view.factionId);
   const progression = view.progression;
   const project = progression.project;
   const host = project.blockers.length === 0 && project.eligibleSettlementIds.length ? assessProjectHosts(view)[0] : undefined;
-  if (host && project.blockers.length === 0) {
+  if (host && project.blockers.length === 0 && project.coinCost <= view.treasury) {
     return { commands: [{ type: 'startVictoryProject', factionId: view.factionId, settlementId: host.settlementId }], reasons: [`Begin ${project.name} at ${host.settlementId}: infrastructure, progression and ${project.coinCost} coin are ready. Prefer observed safety: ${host.uncoveredPressure} uncovered nearby enemy strength, friendly support ${host.friendlySupport}, known hostile distance ${host.nearestThreat}, friendly depth ${host.friendlyDepth}.`], coinSpent: project.coinCost, reserve: 0 };
   }
   const maritimeGoal = navalResearchChoice(view);
@@ -115,7 +115,8 @@ export function planProgression(view: Observation): ProgressionPlan {
     }));
     if (discovery) { commands.push({ type: 'researchArcane', factionId: view.factionId, discoveryId: discovery.id }); reasons.push(`Research ${discovery.name} for the realm’s appointed Waykeeper; personal aptitude and battlefield strain remain required.`); }
   }
-  let budget = view.treasury;
+  const initialBudget = Math.max(0, view.treasury - protectedCoin);
+  let budget = initialBudget;
   if (!progression.institutionId && ownTowns.length > 0) {
     const institution = progression.institutionChoices.find(choice => choice.id === 'institution.charter_compact' && choice.available);
     if (institution && budget >= institution.coinCost + 16) {
@@ -140,7 +141,14 @@ export function planProgression(view: Observation): ProgressionPlan {
     && fieldArmies.some(army => army.cell === view.settlements.find(town => town.id === choice.settlementId)?.cell && (choice.role !== 'waykeeper' || isWaykeeperBattleArmy(army))
       && (choice.role === 'marshal' ? !army.commander : army.agents.length < 2)));
   const navalInvestment = needsNavalInvestment(view) && view.productionOptions.some(option => (option.kind === 'naval' || option.itemId === 'building.harbor' || option.itemId === 'unit.colonist') && option.canQueue);
-  const operatingPurse = Math.min(navalInvestment ? 64 : needsSpecialists ? 48 : 24, Math.floor(budget / 4));
+  // Modern research can unlock a role after the standing-force target is met.
+  // Retain one actual legal missing-role quote in the bounded operating purse;
+  // otherwise the old24-coin purse permanently starves32-coin lancers.
+  const represented = new Set(view.armies.filter(army => army.factionId === view.factionId).flatMap(army => army.formations.map(formation => formation.unitId)));
+  for (const town of ownTowns) for (const order of town.queue) represented.add(order.itemId);
+  const missingRoleCost = view.growth ? Math.max(0, ...UNITS.filter(unit => !unit.canFound && unit.movementDomain !== 'naval' && !represented.has(unit.id)
+    && view.productionOptions.some(option => option.itemId === unit.id && option.canQueue)).map(unit => unit.coinCost)) : 0;
+  const operatingPurse = Math.min(Math.max(navalInvestment ? 64 : needsSpecialists ? 48 : 24, missingRoleCost), Math.floor(budget / 4));
   const reserve = developed && !projectUnderway
     ? Math.min(project.coinCost, budget >= Math.floor(project.coinCost * 9 / 10) ? project.coinCost : Math.max(0, budget - operatingPurse)) : 0;
   if (!progression.doctrineId && ownTowns.length >= 2) {
@@ -153,5 +161,5 @@ export function planProgression(view: Observation): ProgressionPlan {
     }
   }
   if (developed && !projectUnderway && budget < project.coinCost) reasons.push(`Reserve coin for ${project.name}: ${budget}/${project.coinCost}; retain a bounded operating purse until the final funding gap.`);
-  return { commands, reasons, coinSpent: view.treasury - budget, reserve };
+  return { commands, reasons, coinSpent: initialBudget - budget, reserve };
 }

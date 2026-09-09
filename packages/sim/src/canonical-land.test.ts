@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
 import { checksum } from '@theandril/content';
-import { applyCommand, createGame, deserializeGame, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion } from './index';
+import { applyCommandForVersion, createGame, deserializeGame, serializeGame, serializeGameForVersion, stateHash, stateHashForVersion } from './index';
 import { landStateSchema, type LandState } from './territory';
+import type { RulesVersion } from './rules';
 import type { GameState } from './types';
 
 /** Retained pre-optimization algorithm, only as an independent byte-order oracle. */
@@ -24,14 +25,14 @@ function reverseProperties(value: unknown): unknown {
   if (!value || typeof value !== 'object') return value;
   return Object.fromEntries(Object.entries(value).reverse().map(([key, child]) => [key, reverseProperties(child)]));
 }
-function founded(seed = 17, turns = 0): GameState {
-  const game = createGame({ seed, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
+function founded(seed = 17, turns = 0, version: RulesVersion = 16): GameState {
+  const game = createGame({ seed, rulesVersion: version, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
   for (const faction of game.factions) {
     const army = Object.values(game.armies).find(army => army.factionId === faction.id && army.formations.some(item => item.unitId === 'unit.colonist'))!;
-    const result = applyCommand(game, { type: 'found', factionId: faction.id, armyId: army.id, name: faction.name });
+    const result = applyCommandForVersion(game, { type: 'found', factionId: faction.id, armyId: army.id, name: faction.name }, version);
     expect(result.ok, result.error).toBe(true);
   }
-  for (let turn = 0; turn < turns; turn++) expect(applyCommand(game, { type: 'endTurn', factionId: game.turnOwnerId }).ok).toBe(true);
+  for (let turn = 0; turn < turns; turn++) expect(applyCommandForVersion(game, { type: 'endTurn', factionId: game.turnOwnerId }, version).ok).toBe(true);
   return game;
 }
 
@@ -40,9 +41,9 @@ describe('strict deterministic canonical land projection', () => {
     [17, '49492132', 16084, 'eef991e0', 21387],
     [20260905, '83ff6d7a', 16253, '940bcf02', 21431],
   ] as const)('preserves seed %i save bytes and seals captured before optimizing the helper', (seed, originHash, originBytes, developedHash, developedBytes) => {
-    const origin = createGame({ seed, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
+    const origin = createGame({ seed, rulesVersion: 11, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
     expect(stateHashForVersion(origin, 11)).toBe(originHash); expect(serializeGameForVersion(origin, 11)).toHaveLength(originBytes);
-    const developed = founded(seed, 12);
+    const developed = founded(seed, 12, 11);
     expect(stateHashForVersion(developed, 11)).toBe(developedHash); expect(serializeGameForVersion(developed, 11)).toHaveLength(developedBytes);
     assertOriginalBytes(origin); assertOriginalBytes(developed);
     expect(stateHashForVersion(deserializeGame(serializeGame(developed)), 11)).toBe(developedHash);
@@ -60,6 +61,7 @@ describe('strict deterministic canonical land projection', () => {
     // Projection-level, schema-valid inputs exercise every shape. Global ownership
     // is deliberately not claimed here; full save import checks it independently.
     game.land = {
+      visibilityVersion: 1,
       known: { 'faction.z': { 10: { improvementId: 'improvement.quarry', factionId: 'faction.z', settlementId: 'settlement.10', biome: 2 }, 2: { improvementId: null, factionId: null, settlementId: null, biome: 1 } }, 'faction.a': {} },
       cultivation: { 'faction.z': 5, 'faction.a': 0 }, capitals: { 'faction.z': 'settlement.2', 'faction.a': null }, biomes: { 10: 2, 2: 1 },
       settlements: {
@@ -69,7 +71,7 @@ describe('strict deterministic canonical land projection', () => {
     };
     assertOriginalBytes(game);
     const parsed = JSON.parse(serializeGame(game)) as { state: { land: LandState } };
-    expect(Object.keys(parsed.state.land)).toEqual(['settlements', 'biomes', 'capitals', 'cultivation', 'known']);
+    expect(Object.keys(parsed.state.land)).toEqual(['settlements', 'biomes', 'capitals', 'cultivation', 'known', 'visibilityVersion']);
     expect(Object.keys(parsed.state.land.settlements)).toEqual(['settlement.10', 'settlement.2']);
     expect(Object.keys(parsed.state.land.biomes)).toEqual(['2', '10']);
     expect(Object.keys(parsed.state.land.known['faction.z']![10]!)).toEqual(['biome', 'settlementId', 'factionId', 'improvementId']);
@@ -113,7 +115,7 @@ describe('strict deterministic canonical land projection', () => {
       game => { game.land.cultivation[game.turnOwnerId] = NaN; },
       game => { game.land.biomes['01'] = 1; },
       game => { game.land.capitals[game.turnOwnerId] = Infinity as unknown as string; },
-      game => { Object.values(game.land.settlements)[0]!.borderGrowth = 160; },
+      game => { Object.values(game.land.settlements)[0]!.borderGrowth = Number.MAX_SAFE_INTEGER + 1; },
       game => { Object.values(game.land.settlements)[0]!.worked = [undefined as unknown as number]; },
       game => { Object.values(game.land.settlements)[0]!.work = { kind: 'improve', cell: 1, coinCost: 10, turns: 1, remainingTurns: 0, startedTurn: 1, improvementId: 'improvement.quarry' }; },
     ];

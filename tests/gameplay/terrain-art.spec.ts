@@ -11,6 +11,7 @@ const SAMPLES = [-98, -97, -96, -95, -94, -50, -49, -48, -47, -46, -2, -1].map(o
 function climateGallery(): GameState {
   const state = createGame({ generatorVersion: 4, seed: 20260905, size: 'tiny', factionCount: 2 });
   state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60); state.world.waterDepth.fill(0);
+  state.resources.deposits = {}; // This gallery replaces the entire generated terrain/resource layer.
   delete state.armies['army.1']; delete state.armies['army.3']; delete state.armies['army.4'];
   state.armies['army.2']!.cell = ORIGIN;
   state.armies['army.2']!.name = 'Climate survey';
@@ -91,7 +92,7 @@ function improvedLandGallery() {
   const biomes = [1, 2, 11, 7, 0], terrain = [1, 2, 3, 1, 0];
   // Authored terrain isolates all five legal sites. Each improvement below is
   // paid for and completed through public commands, never painted into a save.
-  cells.forEach((cell, index) => { state.world.terrain[cell] = terrain[index]!; state.world.biome[cell] = biomes[index]!; state.world.waterDepth[cell] = index === 4 ? 1 : 0; });
+  cells.forEach((cell, index) => { state.world.terrain[cell] = terrain[index]!; state.world.biome[cell] = biomes[index]!; state.world.waterDepth[cell] = index === 4 ? 1 : 0; delete state.resources.deposits[cell]; });
   state.armies['army.2']!.cell = origin;
   refreshAuthoredSight(state);
   expect(applyCommand(state, { type: 'found', factionId: state.turnOwnerId, armyId: 'army.1', name: 'Five works' }).ok).toBe(true);

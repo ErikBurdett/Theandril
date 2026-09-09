@@ -1,0 +1,879 @@
+{
+  "schemaVersion": 1,
+  "id": "battle.unit.spearman",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 3,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "battle.unit.spearman"
+  ],
+  "prompt": "Original Theandril shared spearman battle role, authored as editable weighted Blender meshes and bone Actions. Two independently rendered facings and five complete authored clips. Fixed 64x64 camera canvas, ground pivot (32,56), palette and full-motion union. Culture identity remains in existing banners and map art. Exact source manifest: assets/art/source/blender-units/battle.unit.spearman/v3/manifest.json. No mirrored sprites, synthetic casualty poses or whole-sprite bobbing claimed as articulated animation.",
+  "frames": [
+    {
+      "id": "battle.unit.spearman/idle/e/0",
+      "direction": "e",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-0.png"
+    },
+    {
+      "id": "battle.unit.spearman/idle/e/1",
+      "direction": "e",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-1.png"
+    },
+    {
+      "id": "battle.unit.spearman/idle/e/2",
+      "direction": "e",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-2.png"
+    },
+    {
+      "id": "battle.unit.spearman/idle/e/3",
+      "direction": "e",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-3.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/e/0",
+      "direction": "e",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-4.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/e/1",
+      "direction": "e",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-5.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/e/2",
+      "direction": "e",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-6.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/e/3",
+      "direction": "e",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-7.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/e/4",
+      "direction": "e",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-8.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/e/5",
+      "direction": "e",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-9.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/e/6",
+      "direction": "e",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-10.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/e/7",
+      "direction": "e",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-11.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/e/0",
+      "direction": "e",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-12.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/e/1",
+      "direction": "e",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-13.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/e/2",
+      "direction": "e",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-14.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/e/3",
+      "direction": "e",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-15.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/e/4",
+      "direction": "e",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-16.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/e/5",
+      "direction": "e",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-17.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/e/6",
+      "direction": "e",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-18.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/e/7",
+      "direction": "e",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-19.png"
+    },
+    {
+      "id": "battle.unit.spearman/hit/e/0",
+      "direction": "e",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-20.png"
+    },
+    {
+      "id": "battle.unit.spearman/hit/e/1",
+      "direction": "e",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-21.png"
+    },
+    {
+      "id": "battle.unit.spearman/hit/e/2",
+      "direction": "e",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-22.png"
+    },
+    {
+      "id": "battle.unit.spearman/hit/e/3",
+      "direction": "e",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-23.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/e/0",
+      "direction": "e",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-24.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/e/1",
+      "direction": "e",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-25.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/e/2",
+      "direction": "e",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-26.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/e/3",
+      "direction": "e",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-27.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/e/4",
+      "direction": "e",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-28.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/e/5",
+      "direction": "e",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-29.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/e/6",
+      "direction": "e",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-30.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/e/7",
+      "direction": "e",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-31.png"
+    },
+    {
+      "id": "battle.unit.spearman/idle/w/0",
+      "direction": "w",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-32.png"
+    },
+    {
+      "id": "battle.unit.spearman/idle/w/1",
+      "direction": "w",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-33.png"
+    },
+    {
+      "id": "battle.unit.spearman/idle/w/2",
+      "direction": "w",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-34.png"
+    },
+    {
+      "id": "battle.unit.spearman/idle/w/3",
+      "direction": "w",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-35.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/w/0",
+      "direction": "w",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-36.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/w/1",
+      "direction": "w",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-37.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/w/2",
+      "direction": "w",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-38.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/w/3",
+      "direction": "w",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-39.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/w/4",
+      "direction": "w",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-40.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/w/5",
+      "direction": "w",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-41.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/w/6",
+      "direction": "w",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-42.png"
+    },
+    {
+      "id": "battle.unit.spearman/walk/w/7",
+      "direction": "w",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-43.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/w/0",
+      "direction": "w",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-44.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/w/1",
+      "direction": "w",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-45.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/w/2",
+      "direction": "w",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-46.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/w/3",
+      "direction": "w",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-47.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/w/4",
+      "direction": "w",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-48.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/w/5",
+      "direction": "w",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-49.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/w/6",
+      "direction": "w",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-50.png"
+    },
+    {
+      "id": "battle.unit.spearman/attack/w/7",
+      "direction": "w",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-51.png"
+    },
+    {
+      "id": "battle.unit.spearman/hit/w/0",
+      "direction": "w",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-52.png"
+    },
+    {
+      "id": "battle.unit.spearman/hit/w/1",
+      "direction": "w",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-53.png"
+    },
+    {
+      "id": "battle.unit.spearman/hit/w/2",
+      "direction": "w",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-54.png"
+    },
+    {
+      "id": "battle.unit.spearman/hit/w/3",
+      "direction": "w",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-55.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/w/0",
+      "direction": "w",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-56.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/w/1",
+      "direction": "w",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-57.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/w/2",
+      "direction": "w",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-58.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/w/3",
+      "direction": "w",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-59.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/w/4",
+      "direction": "w",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-60.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/w/5",
+      "direction": "w",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-61.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/w/6",
+      "direction": "w",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-62.png"
+    },
+    {
+      "id": "battle.unit.spearman/death/w/7",
+      "direction": "w",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/frame-63.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "frames": 8,
+        "fps": 10,
+        "loop": true
+      },
+      "attack": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      },
+      "hit": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      },
+      "death": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "8e844dcfe6007d6c642cb2ef39cc32d468074ef204d0eb3188e8aef9b29c4104",
+    "sourceRefs": [
+      "assets/art/source/blender-units/battle.unit.spearman/v3/manifest.json",
+      "assets/art/source/blender-units/battle.unit.spearman/v3/source.blend",
+      "assets/art/source/blender-units/battle.unit.spearman/v3/profile.json",
+      "assets/art/source/blender-units/battle.unit.spearman/v3/recipe.py",
+      "assets/art/source/blender-units/battle.unit.spearman/v3/driver.py",
+      "assets/art/source/blender-units/battle.unit.spearman/v3/render-settings.json",
+      "assets/art/approved/battle.unit.spearman/96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8/provider-source-6.json"
+    ],
+    "licenseNotes": [
+      "Original project-authored geometry, rig, materials and actions; retained factory dependencies and every raw/native render are bound by the source manifest inventory. Shared mechanical-role artwork does not claim new culture-specific originals. Native and runtime visual acceptance remain separate."
+    ]
+  },
+  "createdAt": "2026-09-08T23:45:00.512Z",
+  "referenceHashes": [
+    "f170dc1e4a4c6b29b6a4fa9569e227892de02882d7ec8d60df9671eeb3224839",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "articulated-battle-64",
+      "settingsHash": "8cc4f49b67333bc033c8a0b6261d4a06922c4d5a2601884e5f3de2fce817a31f",
+      "inputHash": "f170dc1e4a4c6b29b6a4fa9569e227892de02882d7ec8d60df9671eeb3224839",
+      "outputHash": "a5882ee3f25b47a2707ef3eb0cc530ad3e98f6b0c3e44734ed0564eb70a3ac05"
+    },
+    {
+      "tool": "theandril-processing-batch",
+      "version": "1",
+      "profile": "explicit-authored-frames",
+      "settingsHash": "eba65a2e29c2ecc5d88f3aec81702029028f41422d7a8e1918bad4768af4bc51",
+      "inputHash": "a5882ee3f25b47a2707ef3eb0cc530ad3e98f6b0c3e44734ed0564eb70a3ac05",
+      "outputHash": "6fe648f933b30022f0a02e26b64bad5be4fcebb2d7162f39ceaa75d772ad573a"
+    }
+  ],
+  "validation": {
+    "score": 96,
+    "passed": true,
+    "reportPath": "assets/art/reports/battle.unit.spearman.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex-art-review",
+    "reviewedAt": "2026-09-09T00:03:56.250Z",
+    "notes": "Reviewed all64processed native poses and 4x west attack. Long wooden pike, steel leaf point, two-handed anticipation and forward thrust are legible. Death raises the long shaft while falling before laying it within the fixed canvas; allframes preserve pivot and clear padding. Shared adult rig, original pike kit; runtime density review remains.\nReviewed candidate 96075f9668006709f41a57b8422db25af3d6db3a64249fda947d762234449ca8; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/b770c937aed901938dfaa098e3b7d6d5ee6be8dd4eb440e4bd8889331bd3d485.png"
+    ],
+    "inputHash": "088bfb1d835c6cec964e0681a879a0dccc7d836d441caf0f2807989ed1d93542"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 64,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

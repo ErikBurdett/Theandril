@@ -10,10 +10,15 @@ import { drawImprovementGlyph } from './improvement-glyphs';
 import { finishChunkBorders, measureChunkCache, type ChunkCacheSize } from './chunk-cache';
 import { layoutMapLabels, type MapLabel, type MapLabelCandidate } from './map-overlays';
 import { geographicConnections, lakeShoreAngles, riverHalfCurve } from './geography-style';
-import { worldOverviewPixels } from './world-overview';
+import { worldOverviewPixels, type WorldOverviewMode } from './world-overview';
+export type { WorldOverviewMode } from './world-overview';
 import { cameraPresentation, detailScaleFloor, nextCameraScale, worldFitScale } from './camera-scale';
 import { armyRepresentatives, groupVisibleMarkers, observedFormationCount, orderVisibleMarkers } from './army-size';
 import { isLake } from '@theandril/mapgen';
+import { changedHearthCells, hearthAppearance, type HearthDistrict } from './hearth-appearance';
+import { drawHearthGround, drawHearthBuilding } from './hearth-drawing';
+import { armySpriteScale, strategicSpriteScale } from './entity-scale';
+import { hitStrategicMarker, type MarkerHitTarget } from './marker-hit';
 import { SelectedAssetVisual, type SelectedAssetTarget, type SelectedFallback } from './selected-asset';
 import { fitTileArtwork, IMPROVEMENT_GLYPH_BOUNDS, TILE_RADIUS, tileArtworkRole, type TileFootprint } from './tile-footprint';
 import { BattleScene, type BattleSceneView } from './battle-scene';
@@ -33,10 +38,10 @@ const TERRAIN_COLORS = [0x25404b, 0x747658, 0x3f5a49, 0x877963, 0x777a76];
 const BIOME_COLORS = [0x25404b, 0x747658, 0x3f5a49, 0x496668, 0x8d9993, 0xa28b62, 0x8b8760, 0x526e66, 0x345d45, 0x92958e, 0x786b60, 0xb8b8a0];
 type Cell = Observation['cells'][number];
 type SeededMapObservation = MapObservation & Pick<Observation, 'seed'>;
-export interface MapPointerInput { shiftKey: boolean; pointerType: string; anchor?: { x: number; y: number } }
+export interface MapPointerInput { shiftKey: boolean; pointerType: string; anchor?: { x: number; y: number }; entityId?: string }
 export interface RouteVisual { origin: number; path: number[]; waypoints?: number[]; paused?: boolean; attack?: boolean }
 type Marker = { id: string; cell: number; name: string; factionId: string; settlement: boolean; ruin?: boolean; unitId?: string; population?: number; domain?: 'land' | 'naval'; formationCount?: number };
-type ChunkView = { root: Container; count: number; version: number; far: boolean; used: number; sprites: Sprite[]; animatedProps: { cell: number; contentId: string; alpha: number }[]; footprints: TileFootprint[]; artCells: number; borderEdges: number; improvementProps: number; riverSegments: number; roadSegments: number; missingProps: boolean; cache: ChunkCacheSize };
+type ChunkView = { root: Container; count: number; version: number; far: boolean; used: number; sprites: Sprite[]; animatedProps: { cell: number; contentId: string; alpha: number }[]; footprints: TileFootprint[]; artCells: number; borderEdges: number; improvementProps: number; riverSegments: number; roadSegments: number; districtStreetSegments: number; missingProps: boolean; cache: ChunkCacheSize };
 
 export interface RenderMetrics {
   renderer: 'webgl'; frameCount: number; frameMs: number; frameP95Ms: number;
@@ -47,7 +52,7 @@ export interface RenderMetrics {
   visibleSprites: number; terrainSpriteCells: number; pooledSprites: number;
   stackBadges: number; pooledStackBadges: number;
   territoryEdges: number; improvementProps: number;
-  riverSegments: number; roadSegments: number;
+  riverSegments: number; roadSegments: number; districtStreetSegments: number;
   overview: boolean; overviewTextureBytes: number;
   rangePerimeterEdges: number; visibleLabels: number; selectedCells: number; hoveredCells: number;
   maxCachedChunkWidth: number; maxCachedChunkHeight: number; cachedTextureBytesEstimate: number;
@@ -65,7 +70,13 @@ export class WorldRenderer {
   private overviewTexture: Texture | undefined;
   private overviewActive = false;
   private overviewDirty = true;
+  private overviewMode: WorldOverviewMode = 'terrain';
+  private overviewFactionIds: readonly string[] | undefined;
   private figures = new Container();
+  private figureGround = new Graphics();
+  private markerHitTargets: MarkerHitTarget[] = [];
+  private hearthDistricts = new Map<number, HearthDistrict>();
+  private claimedCells = new Map<string, Set<number>>();
   private animatedProps = new Container();
   private animatedPropPool: Sprite[] = [];
   private assetSelection = new SelectedAssetVisual();
@@ -109,11 +120,11 @@ export class WorldRenderer {
   private terrainPool: Sprite[] = [];
   private visibleAnimations: { sprite: Sprite; contentId: string; phase: number; frameId: string }[] = [];
   private visibleAssetIds = new Set<string>();
-  private visibleEntityArt: { entityId: string; factionId: string; definitionId: string | null; role: string; assetId: string | null; presentation: string; nativeWidth: number | null; nativeHeight: number | null; tint: number | null; formationCount: number | null; representativeCount: number; stackArmyCount: number; stackFormationCount: number }[] = [];
+  private visibleEntityArt: { entityId: string; factionId: string; definitionId: string | null; role: string; assetId: string | null; presentation: string; nativeWidth: number | null; nativeHeight: number | null; tint: number | null; formationCount: number | null; representativeCount: number; stackArmyCount: number; stackFormationCount: number; screenWidth?: number; screenHeight?: number }[] = [];
   private visibleArtWarnings: string[] = [];
   private visibleTileFootprints: TileFootprint[] = [];
   private reducedMotion = false;
-  private metrics: RenderMetrics = { renderer: 'webgl', frameCount: 0, frameMs: 0, frameP95Ms: 0, renderCpuMs: 0, visibleCells: 0, visibleChunks: 0, cachedChunks: 0, chunkRebuilds: 0, visibleEntities: 0, zoom: 1, highlightedCells: 0, routeCells: 0, previewCells: 0, atlasPages: 0, residentAtlasBytesEstimate: 0, artLoadMs: 0, artFirstRenderCpuMs: -1, visibleSprites: 0, terrainSpriteCells: 0, pooledSprites: 0, stackBadges: 0, pooledStackBadges: 0, territoryEdges: 0, improvementProps: 0, riverSegments: 0, roadSegments: 0, overview: false, overviewTextureBytes: 0, rangePerimeterEdges: 0, visibleLabels: 0, selectedCells: 0, hoveredCells: 0, maxCachedChunkWidth: 0, maxCachedChunkHeight: 0, cachedTextureBytesEstimate: 0 };
+  private metrics: RenderMetrics = { renderer: 'webgl', frameCount: 0, frameMs: 0, frameP95Ms: 0, renderCpuMs: 0, visibleCells: 0, visibleChunks: 0, cachedChunks: 0, chunkRebuilds: 0, visibleEntities: 0, zoom: 1, highlightedCells: 0, routeCells: 0, previewCells: 0, atlasPages: 0, residentAtlasBytesEstimate: 0, artLoadMs: 0, artFirstRenderCpuMs: -1, visibleSprites: 0, terrainSpriteCells: 0, pooledSprites: 0, stackBadges: 0, pooledStackBadges: 0, territoryEdges: 0, improvementProps: 0, riverSegments: 0, roadSegments: 0, districtStreetSegments: 0, overview: false, overviewTextureBytes: 0, rangePerimeterEdges: 0, visibleLabels: 0, selectedCells: 0, hoveredCells: 0, maxCachedChunkWidth: 0, maxCachedChunkHeight: 0, cachedTextureBytesEstimate: 0 };
 
   constructor(private readonly onArtStatus?: (status: ArtStatus) => void, private readonly resolveArtUrl?: (url: string) => string) {}
 
@@ -123,7 +134,7 @@ export class WorldRenderer {
     if (this.disposed) { this.app.destroy({ removeView: true, releaseGlobalResources: true }, { children: true }); return; }
     host.appendChild(this.app.canvas);
     this.app.canvas.setAttribute('aria-hidden', 'true');
-    this.world.addChild(this.terrain, this.animatedProps, this.movementRange, this.figures, this.plannedRoute, this.routePreview, this.markers, this.assetSelection.container, this.labels, this.selection);
+    this.world.addChild(this.terrain, this.animatedProps, this.movementRange, this.figureGround, this.figures, this.plannedRoute, this.routePreview, this.markers, this.assetSelection.container, this.labels, this.selection);
     this.app.stage.addChild(this.world, this.battlefield.container);
     this.battlefield.resize(this.app.screen.width, this.app.screen.height);
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -174,8 +185,9 @@ export class WorldRenderer {
         const rect = canvas.getBoundingClientRect();
         if (this.battlefield.active) this.battlefield.pick(event.clientX - rect.left, event.clientY - rect.top);
         else {
-          const cell = this.pick(event.clientX - rect.left, event.clientY - rect.top);
-          if (cell !== undefined) onSelect(cell, { shiftKey: event.shiftKey, pointerType: event.pointerType, anchor: { x: event.clientX, y: event.clientY } });
+          const px = event.clientX - rect.left, py = event.clientY - rect.top;
+          const marker = this.pickMarker(px, py), cell = marker?.cell ?? this.pick(px, py);
+          if (cell !== undefined) onSelect(cell, { shiftKey: event.shiftKey, pointerType: event.pointerType, anchor: { x: event.clientX, y: event.clientY }, ...(marker ? { entityId: marker.entityId } : {}) });
         }
       }
       if (this.pointer?.id === event.pointerId) this.pointer = undefined;
@@ -215,6 +227,7 @@ export class WorldRenderer {
 
   update(observation: SeededMapObservation, reset: boolean, replaceMap = false): void {
     if (reset) this.setBattle(undefined);
+    this.markerHitTargets = [];
     this.observation = observation;
     this.overviewDirty = true;
     if (reset || replaceMap) {
@@ -222,10 +235,10 @@ export class WorldRenderer {
       // Drop any revealed raster immediately, before a restored fog frame.
       this.overviewSprite?.removeFromParent(); this.overviewSprite?.destroy(); this.overviewSprite = undefined;
       this.overviewTexture?.destroy(true); this.overviewTexture = undefined; this.metrics.overviewTextureBytes = 0;
-      if (reset) this.overviewActive = false;
+      if (reset) { this.overviewActive = false; this.overviewMode = 'terrain'; this.overviewFactionIds = undefined; }
       this.resetHover();
       if (reset) this.selectedEntityId = undefined;
-      this.cellData.clear(); this.chunkVersions.clear();
+      this.cellData.clear(); this.chunkVersions.clear(); this.claimedCells.clear(); this.hearthDistricts.clear();
       this.setMovementRange([]); this.setRoute(); this.setPreview();
       for (const view of this.chunks.values()) this.destroyChunk(view);
       this.chunks.clear(); this.viewportKey = '';
@@ -233,10 +246,27 @@ export class WorldRenderer {
     for (const cell of observation.cells) {
       const previous = this.cellData.get(cell.cell);
       this.cellData.set(cell.cell, cell);
+      if (previous?.settlementId !== cell.settlementId) {
+        if (previous?.settlementId) {
+          const priorClaims = this.claimedCells.get(previous.settlementId);
+          priorClaims?.delete(cell.cell);
+          if (priorClaims?.size === 0) this.claimedCells.delete(previous.settlementId);
+        }
+        if (cell.settlementId) {
+          let claims = this.claimedCells.get(cell.settlementId);
+          if (!claims) { claims = new Set(); this.claimedCells.set(cell.settlementId, claims); }
+          claims.add(cell.cell);
+        }
+      }
       const ownerChanged = (previous?.settlementId ?? null) !== (cell.settlementId ?? null) || (previous?.factionId ?? null) !== (cell.factionId ?? null);
       const edgeChanged = !previous || previous.hydrology !== cell.hydrology || previous.roadMask !== cell.roadMask || previous.visible !== cell.visible;
       for (const key of ownerChanged || edgeChanged ? dirtyTerritoryChunks(cell.cell, observation.width, observation.height, CHUNK) : [this.chunkKey(cell.cell)]) this.chunkVersions.set(key, (this.chunkVersions.get(key) ?? 0) + 1);
     }
+    const districts = hearthAppearance(observation, this.claimedCells, cell => this.cellData.get(cell));
+    for (const cell of changedHearthCells(this.hearthDistricts, districts)) {
+      const key = this.chunkKey(cell); this.chunkVersions.set(key, (this.chunkVersions.get(key) ?? 0) + 1);
+    }
+    this.hearthDistricts = districts;
     this.markerChunks.clear();
     this.settlementCells = new Set([...observation.settlements.map(settlement => settlement.cell), ...observation.ruins.map(ruin => ruin.cell)]);
     this.factionColors = new Map(observation.factions.map(faction => [faction.id, faction.color]));
@@ -265,7 +295,8 @@ export class WorldRenderer {
     const selectedArt = selectTerrainArt(this.observation!.seed, cell, observed.biome, this.art);
     const approved = Boolean(selectedArt.frame);
     return { cell, biome: observed.biome, terrain: observed.terrain, waterDepth: observed.waterDepth, waterPresentation: waterPresentation(observed.terrain, observed.waterDepth), assetId: selectedArt.frame?.asset.id ?? null, approved, baseId: selectedArt.baseId, requestedAssetId: selectedArt.requestedAssetId, variantIndex: selectedArt.variantIndex, renderedVariantIndex: selectedArt.renderedVariantIndex, fallback: selectedArt.fallback, relief: terrainRelief(observed.terrain, observed.biome, approved), visible: observed.visible,
-      settlementId: observed.settlementId ?? null, factionId: observed.factionId ?? null, improvementId: observed.improvementId ?? null,
+      settlementId: observed.settlementId ?? null, factionId: observed.factionId ?? null, improvementId: observed.improvementId ?? null, resourceId: observed.resourceId ?? null,
+      district: this.hearthDistricts.get(cell) ?? null,
       improvementPresentation: observed.improvementId ? this.art?.frame(observed.improvementId) ? 'approved' : 'procedural' : null,
       territoryEdges: this.observation ? territoryEdges(observed, this.observation.width, this.observation.height, id => this.cellData.get(id)) : [],
       renderedTerritoryEdges: this.observation ? territoryEdges(observed, this.observation.width, this.observation.height, id => this.cellData.get(id), 'realm') : [],
@@ -299,7 +330,7 @@ export class WorldRenderer {
   setRoute(route?: RouteVisual): void { this.drawRoute(this.plannedRoute, route, false); this.metrics.routeCells = route?.path.length ?? 0; }
   setPreview(route?: RouteVisual): void { this.drawRoute(this.routePreview, route, true); this.metrics.previewCells = route?.path.length ?? 0; }
   getExploredCount(): number { return this.cellData.size; }
-  getArtDiagnostics() { const bounds = this.selection.getLocalBounds(); return { ...this.artStatus, warnings: [...this.artStatus.warnings, ...this.visibleArtWarnings], visibleAssetIds: [...this.visibleAssetIds].sort(), visibleEntityArt: this.visibleEntityArt.map(item => ({ ...item })), visibleAnimationFrames: this.visibleAnimations.map(({ contentId, frameId }) => ({ contentId, frameId })), tileFootprints: this.visibleTileFootprints.map(item => ({ ...item, bounds: { ...item.bounds }, anchor: { ...item.anchor }, ...(item.canvasBounds ? { canvasBounds: { ...item.canvasBounds } } : {}) })), reducedMotion: this.reducedMotion, visibleSprites: this.metrics.visibleSprites, terrainSpriteCells: this.metrics.terrainSpriteCells, overlays: { selectionBounds: { width: bounds.maxX - bounds.minX, height: bounds.maxY - bounds.minY }, selectedAsset: this.assetSelection.diagnostics(), selectedEntityTileOutline: false, territoryMode: 'realm-perimeter', ambientGrid: false, unselectedRings: false, labels: this.visibleLabels.map(label => ({ ...label })), stackBadges: this.visibleStackBadges.map(badge => ({ ...badge })), selectedCell: this.selected ?? null, hoveredCell: this.hovered ?? null }, lod: cameraPresentation(this.world.scale.x, this.overviewActive), terrainPresentation: { nativeFootprint: [56, 64], scaleX: HEX_WIDTH / 56, scaleY: RADIUS / 32, note: 'Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect.' } }; }
+  getArtDiagnostics() { const bounds = this.selection.getLocalBounds(); return { ...this.artStatus, warnings: [...this.artStatus.warnings, ...this.visibleArtWarnings], hearthDistricts: this.overviewActive ? [] : [...this.hearthDistricts.values()].filter(district => this.projectCell(district.cell)?.inViewport).map(district => { const assetId = this.world.scale.x >= .65 && district.kind !== 'construction' && district.kind !== 'cultivation' && district.buildingId ? this.art?.frame(district.buildingId)?.asset.id ?? null : null; return { ...district, assetId, presentation: this.world.scale.x < .65 ? 'ground' : assetId ? 'approved' : district.kind === 'housing' ? 'housing' : 'procedural' }; }), visibleAssetIds: [...this.visibleAssetIds].sort(), visibleEntityArt: this.visibleEntityArt.map(item => ({ ...item })), visibleAnimationFrames: this.visibleAnimations.map(({ contentId, frameId }) => ({ contentId, frameId })), tileFootprints: this.visibleTileFootprints.map(item => ({ ...item, bounds: { ...item.bounds }, anchor: { ...item.anchor }, ...(item.canvasBounds ? { canvasBounds: { ...item.canvasBounds } } : {}) })), reducedMotion: this.reducedMotion, visibleSprites: this.metrics.visibleSprites, terrainSpriteCells: this.metrics.terrainSpriteCells, overlays: { selectionBounds: { width: bounds.maxX - bounds.minX, height: bounds.maxY - bounds.minY }, selectedAsset: this.assetSelection.diagnostics(), selectedEntityTileOutline: false, territoryMode: 'realm-perimeter', ambientGrid: false, unselectedRings: false, labels: this.visibleLabels.map(label => ({ ...label })), stackBadges: this.visibleStackBadges.map(badge => ({ ...badge })), selectedCell: this.selected ?? null, hoveredCell: this.hovered ?? null }, lod: cameraPresentation(this.world.scale.x, this.overviewActive), terrainPresentation: { nativeFootprint: [56, 64], scaleX: HEX_WIDTH / 56, scaleY: RADIUS / 32, note: 'Approved native tiles fitted to the unchanged regular hex grid; fractional display scaling is not pixel-perfect.' } }; }
   getMetrics(): RenderMetrics {
     const sorted = [...this.samples].sort((a, b) => a - b);
     let pooledSprites = this.figurePool.length + this.terrainPool.length + this.animatedPropPool.length, maxCachedChunkWidth = 0, maxCachedChunkHeight = 0, cachedTextureBytesEstimate = 0;
@@ -344,6 +375,13 @@ export class WorldRenderer {
       worldWidth: (this.observation.width + .5) * HEX_WIDTH, worldHeight: this.observation.height * ROW_HEIGHT });
   }
   /** Fit the permitted world using one cartographic texture, never all chunks. */
+  setWorldOverview(mode: WorldOverviewMode, factionIds?: readonly string[]): void {
+    const selected = factionIds === undefined ? undefined : [...new Set(factionIds)].sort();
+    if (mode === this.overviewMode && JSON.stringify(selected) === JSON.stringify(this.overviewFactionIds)) return;
+    this.overviewMode = mode; this.overviewFactionIds = selected;
+    this.overviewDirty = true; this.cameraDirty = true;
+  }
+  getWorldOverview(): { mode: WorldOverviewMode; factionIds: readonly string[] | undefined } { return { mode: this.overviewMode, factionIds: this.overviewFactionIds ? [...this.overviewFactionIds] : undefined }; }
   fitWorld(): void {
     if (!this.initialized || !this.observation) return;
     this.resetHover(); this.overviewActive = true;
@@ -396,8 +434,14 @@ export class WorldRenderer {
     const width = this.observation!.width;
     return `${Math.floor(cell % width / CHUNK)},${Math.floor(Math.floor(cell / width) / CHUNK)}`;
   }
+  private pickMarker(px: number, py: number): MarkerHitTarget | undefined {
+    if (this.overviewActive || this.world.scale.x >= .65) return undefined;
+    return hitStrategicMarker(this.markerHitTargets, (px - this.world.x) / this.world.scale.x, (py - this.world.y) / this.world.scale.x);
+  }
   private pick(px: number, py: number): number | undefined {
     if (!this.observation) return undefined;
+    const marker = this.pickMarker(px, py);
+    if (marker) return marker.cell;
     const x = (px - this.world.x) / this.world.scale.x, y = (py - this.world.y) / this.world.scale.x;
     const row = Math.round(y / ROW_HEIGHT), column = Math.round(x / HEX_WIDTH - (row & 1) * 0.5);
     let closest: number | undefined, distance = RADIUS * RADIUS;
@@ -432,8 +476,8 @@ export class WorldRenderer {
     view.root.removeFromParent(); view.root.destroy({ children: true });
   }
   private makeChunk(cx: number, cy: number, key: string, far: boolean): ChunkView {
-    const root = new Container(), tiles = new Container(), graphics = new Graphics(), rivers = new Graphics(), roads = new Graphics(), props = new Container(), borders = new Graphics(); root.addChild(tiles, graphics); this.terrain.addChild(root);
-    const sprites: Sprite[] = [], animatedProps: ChunkView['animatedProps'] = [], footprints: TileFootprint[] = []; let artCells = 0, count = 0, borderEdges = 0, improvementProps = 0, riverSegments = 0, roadSegments = 0, missingProps = false;
+    const root = new Container(), tiles = new Container(), graphics = new Graphics(), rivers = new Graphics(), roads = new Graphics(), props = new Container(), buildings = new Graphics(), borders = new Graphics(); root.addChild(tiles, graphics); this.terrain.addChild(root);
+    const sprites: Sprite[] = [], animatedProps: ChunkView['animatedProps'] = [], footprints: TileFootprint[] = []; let artCells = 0, count = 0, borderEdges = 0, improvementProps = 0, riverSegments = 0, roadSegments = 0, districtStreetSegments = 0, missingProps = false;
     const width = this.observation!.width, height = this.observation!.height;
     for (let row = cy * CHUNK; row < Math.min(height, (cy + 1) * CHUNK); row++) for (let col = cx * CHUNK; col < Math.min(width, (cx + 1) * CHUNK); col++) {
       const cell = this.cellData.get(row * width + col);
@@ -490,6 +534,45 @@ export class WorldRenderer {
       } else {
         graphics.moveTo(x - 8, y + 7).lineTo(x - 6, y + 2).moveTo(x + 7, y - 2).lineTo(x + 9, y - 7).stroke({ color: 0xc4b883, width: 1, alpha: alpha * 0.4 });
       }
+      // A quiet surface value separates figures from the terrain's fine pixels.
+      if (water === 'land' && artFrame) this.hex(graphics, x, y).fill({ color: 0x303a33, alpha: alpha * .24 });
+      const district = this.hearthDistricts.get(cell.cell);
+      if (district) {
+        drawHearthGround(graphics, district, x, y);
+        if (!far) {
+          for (const adjacent of district.links) {
+            const [nx, ny] = this.center(adjacent);
+            roads.moveTo(x, y).lineTo((x + nx) / 2, (y + ny) / 2).stroke({ color: 0x403f35, width: 3, alpha: .6 });
+            roads.moveTo(x, y).lineTo((x + nx) / 2, (y + ny) / 2).stroke({ color: 0xb2a58a, width: 1.2, alpha: .55 });
+            districtStreetSegments++;
+          }
+          const civic = district.buildingId?.startsWith('building.') && district.kind !== 'construction' ? this.art?.frame(district.buildingId) : undefined;
+          if (civic) {
+            const fit = this.art!.improvementFit(civic.asset) ?? fitTileArtwork(civic.asset.nativeResolution, civic.asset.pivot, 'improvement');
+            const sprite = this.terrainPool.pop() ?? new Sprite(); sprite.texture = civic.texture;
+            sprite.anchor.set(civic.asset.pivot[0] / civic.asset.nativeResolution.width, civic.asset.pivot[1] / civic.asset.nativeResolution.height);
+            sprite.scale.set(fit.scale); sprite.position.set(x + fit.x, y + fit.y); sprite.alpha = 1;
+            sprite.tint = 0xffffff; sprite.roundPixels = true; sprite.visible = true; props.addChild(sprite); sprites.push(sprite);
+          } else drawHearthBuilding(buildings, district, x, y);
+          if (district.kind === 'housing') {
+            const role = selectEntityArt('settlement.village', this.factionDefinitions.get(cell.factionId ?? ''), false, id => this.art?.byContent.has(id) ?? false);
+            const frame = role.contentId ? this.art?.frame(role.contentId) : undefined;
+            if (frame) {
+              const fit = this.art!.settlementFit(frame.asset) ?? fitTileArtwork(frame.asset.nativeResolution, frame.asset.pivot, 'village');
+              const sprite = this.terrainPool.pop() ?? new Sprite(); sprite.texture = frame.texture;
+              sprite.anchor.set(frame.asset.pivot[0] / frame.asset.nativeResolution.width, frame.asset.pivot[1] / frame.asset.nativeResolution.height);
+              sprite.scale.set(fit.scale * .8); sprite.position.set(x + fit.x * .8, y + fit.y * .8);
+              sprite.alpha = 1; sprite.tint = 0xffffff; sprite.roundPixels = true; sprite.visible = true;
+              props.addChild(sprite); sprites.push(sprite);
+            }
+          }
+        }
+      }
+      // Improvements occupy worked ground, rather than hovering as isolated icons.
+      if (cell.improvementId && water === 'land') {
+        this.hex(graphics, x, y, RADIUS - 2).fill({ color: 0x746d50, alpha: alpha * .55 });
+        for (const dy of [-14, 14]) graphics.moveTo(x - 13, y + dy + 3).lineTo(x + 13, y + dy - 3).stroke({ color: 0xb2a078, width: 2, alpha: alpha * .65 });
+      }
       const connections = geographicConnections(cell, width, height, id => this.cellData.get(id));
       for (const connection of connections.rivers) {
         const curve = riverHalfCurve(cell.cell, connection.neighbor, id => this.center(id));
@@ -505,11 +588,25 @@ export class WorldRenderer {
         roads.moveTo(x, y).lineTo(mx, my).stroke({ color: 0xcfb88e, width: 2.6, alpha: connection.alpha, cap: 'round' });
         roadSegments++;
       }
+      if (cell.resourceId && !cell.improvementId) {
+        const deposit = this.art?.frame(cell.resourceId);
+        if (deposit) {
+          const fit = this.art!.improvementFit(deposit.asset) ?? fitTileArtwork(deposit.asset.nativeResolution, deposit.asset.pivot, 'improvement');
+          // A quiet earthen footing keeps the resource readable against detailed
+          // terrain. The approved prop is cached with its explored tile.
+          graphics.ellipse(x, y + 5, 18, 8).fill({ color: 0x202b25, alpha: alpha * .72 });
+          const sprite = this.terrainPool.pop() ?? new Sprite(); sprite.texture = deposit.texture;
+          sprite.anchor.set(deposit.asset.pivot[0] / deposit.asset.nativeResolution.width, deposit.asset.pivot[1] / deposit.asset.nativeResolution.height);
+          sprite.scale.set(fit.scale); sprite.position.set(x + fit.x, y + fit.y); sprite.alpha = alpha; sprite.tint = 0xffffff; sprite.roundPixels = true; sprite.visible = true;
+          props.addChild(sprite); sprites.push(sprite);
+          footprints.push({ cell: cell.cell, contentId: cell.resourceId, assetId: deposit.asset.id, role: 'improvement', presentation: 'approved', bounds: fit.bounds, scale: fit.scale, anchor: { x: fit.x, y: fit.y }, alpha, ...(fit.boundsKind ? { boundsKind: fit.boundsKind, canvasBounds: fit.canvasBounds, horizontalExtent: fit.horizontalExtent, diagonalExtent: fit.diagonalExtent } : {}) });
+        }
+      }
       if (cell.improvementId) {
         improvementProps++;
         const prop = this.art?.frame(cell.improvementId), glyph = IMPROVEMENT_GLYPHS[cell.improvementId];
-        const fit = prop ? fitTileArtwork(prop.asset.nativeResolution, prop.asset.pivot, 'improvement') : undefined;
-        if (fit || glyph) footprints.push({ cell: cell.cell, contentId: cell.improvementId, assetId: prop?.asset.id ?? null, role: 'improvement', presentation: prop ? 'approved' : 'procedural', bounds: fit?.bounds ?? { ...IMPROVEMENT_GLYPH_BOUNDS }, scale: fit?.scale ?? 1, anchor: { x: fit?.x ?? 0, y: fit?.y ?? 0 }, alpha });
+        const fit = prop ? this.art!.improvementFit(prop.asset) ?? fitTileArtwork(prop.asset.nativeResolution, prop.asset.pivot, 'improvement') : undefined;
+        if (fit || glyph) footprints.push({ cell: cell.cell, contentId: cell.improvementId, assetId: prop?.asset.id ?? null, role: 'improvement', presentation: prop ? 'approved' : 'procedural', bounds: fit?.bounds ?? { ...IMPROVEMENT_GLYPH_BOUNDS }, scale: fit?.scale ?? 1, anchor: { x: fit?.x ?? 0, y: fit?.y ?? 0 }, alpha, ...(fit?.boundsKind ? { boundsKind: fit.boundsKind, canvasBounds: fit.canvasBounds, horizontalExtent: fit.horizontalExtent, diagonalExtent: fit.diagonalExtent } : {}) });
         if (prop && prop.asset.clips.some(clip => clip.state === 'idle' && clip.frames.length > 1)) {
           // Only actual multi-frame approvals leave the static terrain cache.
           // The visible overlay animates them without rebuilding a chunk.
@@ -538,15 +635,16 @@ export class WorldRenderer {
     }
     // Empty Graphics include the world origin in bounds: never attach them.
     finishChunkBorders(root, rivers, riverSegments);
-    finishChunkBorders(root, roads, roadSegments);
+    finishChunkBorders(root, roads, roadSegments + districtStreetSegments);
     root.addChild(props);
+    if (buildings.context.instructions.length) root.addChild(buildings); else buildings.destroy();
     finishChunkBorders(root, borders, borderEdges);
     // Empty neighbor chunks are deliberately uncached; remove their empty leaf too.
     if (!graphics.context.instructions.length) { graphics.removeFromParent(); graphics.destroy(); }
     const cache = measureChunkCache(root, count);
     if (count) root.cacheAsTexture({ resolution: 1, antialias: false, scaleMode: 'nearest' });
     this.metrics.chunkRebuilds++;
-    return { root, count, version: this.chunkVersions.get(key) ?? 0, far, used: this.metrics.frameCount, sprites, animatedProps, footprints, artCells, borderEdges, improvementProps, riverSegments, roadSegments, missingProps, cache };
+    return { root, count, version: this.chunkVersions.get(key) ?? 0, far, used: this.metrics.frameCount, sprites, animatedProps, footprints, artCells, borderEdges, improvementProps, riverSegments, roadSegments, districtStreetSegments, missingProps, cache };
   }
   private redrawSelection(): void {
     this.selection.clear();
@@ -574,7 +672,7 @@ export class WorldRenderer {
   private refreshViewport(): void {
     if (!this.observation) return;
     this.metrics.overview = this.overviewActive;
-    for (const layer of [this.terrain, this.animatedProps, this.figures, this.markers, this.labels, this.assetSelection.container, this.movementRange, this.plannedRoute, this.routePreview]) layer.visible = !this.overviewActive;
+    for (const layer of [this.terrain, this.animatedProps, this.figureGround, this.figures, this.markers, this.labels, this.assetSelection.container, this.movementRange, this.plannedRoute, this.routePreview]) layer.visible = !this.overviewActive;
     if (this.overviewSprite) this.overviewSprite.visible = this.overviewActive;
     if (this.overviewActive) { this.refreshOverview(); return; }
     const zoom = this.world.scale.x, width = this.observation.width, height = this.observation.height;
@@ -584,7 +682,7 @@ export class WorldRenderer {
     const maxY = Math.min(Math.ceil(height / CHUNK) - 1, Math.floor(((this.app.screen.height - this.world.y) / zoom / ROW_HEIGHT + 2) / CHUNK));
     const viewportKey = `${minX},${maxX},${minY},${maxY},${zoom < 0.65}`;
     const changed = viewportKey !== this.viewportKey; this.viewportKey = viewportKey;
-    const visible = new Set<string>(); let cells = 0, artCells = 0, borderEdges = 0, improvementProps = 0, riverSegments = 0, roadSegments = 0, missingProps = false;
+    const visible = new Set<string>(); let cells = 0, artCells = 0, borderEdges = 0, improvementProps = 0, riverSegments = 0, roadSegments = 0, districtStreetSegments = 0, missingProps = false;
     for (let cy = minY; cy <= maxY; cy++) for (let cx = minX; cx <= maxX; cx++) {
       const key = `${cx},${cy}`;
       if (!this.chunkVersions.has(key)) continue;
@@ -594,7 +692,7 @@ export class WorldRenderer {
       if (!view) { view = this.makeChunk(cx, cy, key, zoom < .65); this.chunks.set(key, view); }
       view.root.visible = true; view.used = this.metrics.frameCount; cells += view.count; artCells += view.artCells;
       borderEdges += view.borderEdges; improvementProps += view.improvementProps; missingProps ||= view.missingProps;
-      riverSegments += view.riverSegments; roadSegments += view.roadSegments;
+      riverSegments += view.riverSegments; roadSegments += view.roadSegments; districtStreetSegments += view.districtStreetSegments;
     }
     for (const [key, view] of this.chunks) if (!visible.has(key)) view.root.visible = false;
     // The retained offscreen cache is bounded, independent of campaign world size.
@@ -603,10 +701,12 @@ export class WorldRenderer {
       for (const [key, view] of old) { if (this.chunks.size <= 64) break; this.destroyChunk(view); this.chunks.delete(key); }
     }
     this.metrics.visibleCells = cells; this.metrics.visibleChunks = visible.size; this.metrics.terrainSpriteCells = artCells;
-    this.metrics.riverSegments = riverSegments; this.metrics.roadSegments = roadSegments;
+    this.metrics.riverSegments = riverSegments; this.metrics.roadSegments = roadSegments; this.metrics.districtStreetSegments = districtStreetSegments;
     this.metrics.territoryEdges = borderEdges; this.metrics.improvementProps = improvementProps;
     if (changed || this.markerDirty || this.art) {
       this.markers.clear(); this.labelPool.forEach(label => { label.visible = false; });
+      this.figureGround.clear();
+      this.markerHitTargets = [];
       this.figurePool.forEach(sprite => { sprite.visible = false; }); this.visibleAnimations = []; this.visibleAssetIds.clear(); this.visibleEntityArt = [];
       this.visibleTileFootprints = [];
       for (const key of visible) for (const footprint of this.chunks.get(key)?.footprints ?? []) {
@@ -633,7 +733,8 @@ export class WorldRenderer {
         const sx = x * zoom + this.world.x, sy = y * zoom + this.world.y;
         entities += group.members.length;
         const hostile = this.enemyFactions.has(entity.factionId);
-        const labelOffset = !entity.settlement && !entity.ruin && this.settlementCells.has(entity.cell) ? 16 : 0;
+        const entityOffset = !entity.settlement && !entity.ruin && this.settlementCells.has(entity.cell) ? (zoom < .65 ? 26 / zoom : 16) : 0;
+        const labelOffset = entityOffset;
         // Preserve selected stack-member names even when its far badge is aggregated.
         if (sx >= 0 && sy >= 0 && sx < this.app.screen.width && sy < this.app.screen.height) for (const member of group.members) labelCandidates.push({ id: member.id, cell: member.cell, name: member.name, settlement: member.settlement, ruin: member.ruin, own, hostile,
           stackArmyCount: group.armyCount, domain: member.domain, x: sx + labelOffset * zoom, y: sy + (labelOffset + 22) * zoom });
@@ -659,21 +760,38 @@ export class WorldRenderer {
         const representatives = armyRepresentatives(formationCount ?? 1, far);
         this.visibleEntityArt.push({ entityId: entity.id, factionId: entity.factionId, definitionId: definitionId ?? null, role: contentId, assetId: artFrame?.asset.id ?? null, presentation: naval && !artFrame ? `procedural-${navalMarker(contentId)}` : selectedArt.presentation, nativeWidth: artFrame?.asset.nativeResolution.width ?? null, nativeHeight: artFrame?.asset.nativeResolution.height ?? null, tint: artFrame ? 0xffffff : null, formationCount, representativeCount: artFrame ? representatives.length : 1, stackArmyCount: group.armyCount, stackFormationCount: group.formationCount });
         if (artFrame) {
+          const baseOffset = entityOffset;
+          const bx = x + baseOffset, by = y + baseOffset;
+          if (far) {
+            const r = 17 / zoom;
+            if (entity.settlement) this.figureGround.roundRect(bx - r, by - r, r * 2, r * 2, 3 / zoom).fill({ color: 0x182323, alpha: .94 }).stroke({ color: 0xb9ab8b, width: 1.2 / zoom });
+            else this.figureGround.poly([bx - r, by - r, bx + r, by - r, bx + r, by + r * .5, bx, by + r, bx - r, by + r * .5]).fill({ color: 0x182323, alpha: .94 }).stroke({ color, width: 1.4 / zoom });
+          } else if (!entity.settlement && !entity.ruin) {
+            const r = Math.max(13, Math.min(22, 18 / zoom));
+            this.figureGround.ellipse(bx, by + 1, r, r * .48).fill({ color: 0x172324, alpha: .86 }).stroke({ color: own ? 0xc1b597 : color, width: 1.2 / zoom, alpha: .9 });
+          }
           const tileRole = tileArtworkRole(contentId);
-          const fit = tileRole ? (!far && entity.settlement ? this.art?.settlementFit(artFrame.asset) : undefined) ?? fitTileArtwork(artFrame.asset.nativeResolution, artFrame.asset.pivot, tileRole) : undefined;
+          const fit = tileRole && !far ? (entity.settlement ? this.art?.settlementFit(artFrame.asset) : undefined) ?? fitTileArtwork(artFrame.asset.nativeResolution, artFrame.asset.pivot, tileRole) : undefined;
           if (fit?.boundsKind === 'canvas') warnings.add(`Settlement silhouette geometry unavailable or changed for ${artFrame.asset.id}; safe padded-canvas sizing is retained.`);
           if (fit) this.visibleTileFootprints.push({ cell: entity.cell, contentId, assetId: artFrame.asset.id, role: tileRole!, presentation: 'approved', bounds: fit.bounds, scale: fit.scale, anchor: { x: fit.x, y: fit.y }, alpha: 1,
             ...(fit.boundsKind ? { boundsKind: fit.boundsKind, canvasBounds: fit.canvasBounds, horizontalExtent: fit.horizontalExtent, diagonalExtent: fit.diagonalExtent } : {}) });
-          const offset = !entity.settlement && !entity.ruin && this.settlementCells.has(entity.cell) ? 16 : 0;
+          const offset = entityOffset;
           for (const [index, point] of representatives.entries()) {
             const sprite = this.figurePool[figures] ?? new Sprite();
             if (!this.figurePool[figures]) { this.figures.addChild(sprite); this.figurePool.push(sprite); }
             sprite.texture = artFrame.texture; sprite.anchor.set(artFrame.asset.pivot[0] / artFrame.asset.nativeResolution.width, artFrame.asset.pivot[1] / artFrame.asset.nativeResolution.height);
-            sprite.position.set(x + offset + point.x + (fit?.x ?? 0), y + offset + point.y + (fit?.y ?? 0));
-            // Tile objects remain within their own inset hex. Army figures and
-            // their separate far badges deliberately retain the prior scale.
+            sprite.position.set(x + offset + point.x + (fit?.x ?? 0), y + offset + point.y + (fit?.y ?? 0) + (far ? 8 / zoom : 0));
+            // Separate uniform figure scale from the terrain's hex fitting.
             if (fit) sprite.scale.set(fit.scale);
-            else if (far) sprite.scale.set(.5 / zoom); else sprite.scale.set(HEX_WIDTH / 56, RADIUS / 32);
+            else if (far) sprite.scale.set(strategicSpriteScale(artFrame.asset.nativeResolution.width, artFrame.asset.nativeResolution.height, zoom));
+            else sprite.scale.set(armySpriteScale(artFrame.asset.nativeResolution.height, zoom, this.settlementCells.has(entity.cell)));
+            const metric = this.visibleEntityArt.at(-1)!; metric.screenWidth = sprite.width * zoom; metric.screenHeight = sprite.height * zoom;
+            if (far && !entity.ruin && this.cellData.get(entity.cell)?.visible) {
+              const r = 17 / zoom;
+              const left = Math.min(bx - r, sprite.x - sprite.anchor.x * sprite.width), top = Math.min(by - r, sprite.y - sprite.anchor.y * sprite.height);
+              const right = Math.max(bx + r, sprite.x + (1 - sprite.anchor.x) * sprite.width), bottom = Math.max(by + r, sprite.y + (1 - sprite.anchor.y) * sprite.height);
+              this.markerHitTargets.push({ cell: entity.cell, entityId: entity.id, x: left, y: top, width: right - left, height: bottom - top });
+            }
             sprite.tint = 0xffffff; sprite.alpha = 1; sprite.visible = true; sprite.roundPixels = true;
             if (selected) selectionTargets.push({ entityId: entity.id, factionId: entity.factionId, color, sprite });
             this.visibleAssetIds.add(artFrame.asset.id); figures++;
@@ -738,7 +856,7 @@ export class WorldRenderer {
         const [x, y] = this.center(prop.cell), sx = x * zoom + this.world.x, sy = y * zoom + this.world.y;
         if (sx < -40 || sy < -40 || sx > this.app.screen.width + 40 || sy > this.app.screen.height + 40) continue;
         const frame = this.art?.frame(prop.contentId); if (!frame) continue;
-        const fit = fitTileArtwork(frame.asset.nativeResolution, frame.asset.pivot, 'improvement');
+        const fit = this.art!.improvementFit(frame.asset) ?? fitTileArtwork(frame.asset.nativeResolution, frame.asset.pivot, 'improvement');
         let sprite = this.animatedPropPool[dynamicProps++];
         if (!sprite) { sprite = new Sprite(); this.animatedPropPool.push(sprite); this.animatedProps.addChild(sprite); }
         sprite.texture = frame.texture; sprite.anchor.set(frame.asset.pivot[0] / frame.asset.nativeResolution.width, frame.asset.pivot[1] / frame.asset.nativeResolution.height);
@@ -768,7 +886,7 @@ export class WorldRenderer {
     if (!this.observation) return;
     this.assetSelection.clear();
     if (this.overviewDirty || !this.overviewSprite) {
-      const raster = worldOverviewPixels(this.observation.width, this.observation.height, this.cellData.values());
+      const raster = worldOverviewPixels(this.observation.width, this.observation.height, this.cellData.values(), { mode: this.overviewMode, factions: this.observation.factions, ...(this.overviewFactionIds ? { factionIds: this.overviewFactionIds } : {}) });
       const canvas = document.createElement('canvas'); canvas.width = raster.width; canvas.height = raster.height;
       const context = canvas.getContext('2d');
       if (!context) throw new Error('The world overview requires a canvas context.');
@@ -782,7 +900,7 @@ export class WorldRenderer {
     this.visibleAnimations = []; this.visibleLabels = []; this.visibleEntityArt = []; this.visibleTileFootprints = []; this.visibleStackBadges = []; this.visibleAssetIds.clear();
     this.metrics.visibleCells = this.cellData.size; this.metrics.visibleChunks = 0;
     this.metrics.visibleEntities = 0; this.metrics.visibleLabels = 0; this.metrics.visibleSprites = 1; this.metrics.stackBadges = 0;
-    this.metrics.terrainSpriteCells = 0; this.metrics.riverSegments = 0; this.metrics.roadSegments = 0; this.metrics.territoryEdges = 0; this.metrics.improvementProps = 0;
+    this.metrics.terrainSpriteCells = 0; this.metrics.riverSegments = 0; this.metrics.roadSegments = 0; this.metrics.districtStreetSegments = 0; this.metrics.territoryEdges = 0; this.metrics.improvementProps = 0;
   }
   private tick = (time: number): void => {
     if (this.disposed) return;

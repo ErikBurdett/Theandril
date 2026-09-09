@@ -37,7 +37,7 @@ describe('genuine twelve-culture roster history before the next cohort', () => {
 
   it('does not project or execute roster4 with old rules, even when its currently selected seats use old cultures', () => {
     for (const factionDefinitionId of ['faction.ashen_compact', 'faction.vesper_court']) {
-      const game = createGame({ seed: 74, size: 'tiny', factionCount: 1, factionDefinitionId }), before = serializeGame(game);
+      const game = createGame({ seed: 74, size: 'tiny', factionCount: 1, factionDefinitionId, rulesVersion: 15 }), before = serializeGame(game);
       for (const version of [10, 11, 12] as const) {
         expect(() => serializeGameForVersion(game, version)).toThrow('frozen pre-expansion pack');
         expect(() => applyCommandForVersion(game, { type: 'endTurn', factionId: game.turnOwnerId }, version)).toThrow('frozen roster');
@@ -61,7 +61,7 @@ describe('genuine twelve-culture roster history before the next cohort', () => {
   });
 
   it('regenerates the selected first culture and the old twelve-culture repeat at seats thirteen/fourteen', () => {
-    const origin = createGame(data.options), fixture = deserializeGame(data.origin.save);
+    const origin = createGame({ ...data.options, rulesVersion: 12 }), fixture = deserializeGame(data.origin.save);
     expect(serializeGameForVersion(origin, 12)).toBe(data.origin.save);
     expect(origin.factions.map(faction => faction.id)).toEqual(fixture.factions.map(faction => faction.id));
     expect(origin.factions[0]!.definitionId).toBe('faction.reedbound_council');

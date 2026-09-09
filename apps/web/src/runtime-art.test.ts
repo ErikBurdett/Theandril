@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
 import type { RuntimeCatalog } from '@theandril/art-pipeline/runtime';
 import { RuntimeArt } from '../../../packages/render/src/art';
+import { RESOURCES } from '../../../packages/content/src/resources';
 import { publicAssetUrl } from './asset-url';
 
 // Exercise real published catalog/atlas validation and PNG hashes; image decode
@@ -64,18 +65,22 @@ describe('approved renderer artwork deployment boundary', () => {
     const fetch = serve(base);
     const art = await RuntimeArt.load(undefined, publicAssetUrl);
     try {
-      const world = catalog.atlases.filter(atlas => atlas.id !== 'battle');
-      const battle = catalog.atlases.find(atlas => atlas.id === 'battle')!;
-      expect(battle).toBeDefined();
+      const world = catalog.atlases.filter(atlas => !atlas.id.startsWith('battle'));
+      const battle = catalog.atlases.filter(atlas => atlas.id.startsWith('battle'));
+      expect(battle.map(atlas => atlas.id)).toEqual(['battle', 'battle-foot', 'battle-mounted']);
       expect(fetch.mock.calls.map(([url]) => url)).toEqual([publicAssetUrl('/art/catalog.json'), ...world.flatMap(atlas => [publicAssetUrl(atlas.jsonUrl), publicAssetUrl(atlas.imageUrl)])]);
       expect(art.status.atlasPages).toBe(world.length);
       expect(art.status.residentBytesEstimate).toBe(world.reduce((bytes, atlas) => bytes + atlas.width * atlas.height * 4, 0));
       expect(art.catalog).toEqual(catalog);
+      for (const id of RESOURCES.flatMap(resource => [resource.id, resource.improvementId])) {
+        expect(art.byContent.get(id)?.id, `live deposit/extraction binding: ${id}`).toBe(id);
+        expect(art.byContent.get(id)?.atlasId).toBe('map-works');
+      }
       expect(JSON.stringify(catalog)).toBe(JSON.stringify(JSON.parse(catalogJson)));
       const deferred = art.ensureBattle();
       expect(art.ensureBattle()).toBe(deferred);
       await deferred;
-      expect(fetch.mock.calls.map(([url]) => url).slice(-2)).toEqual([publicAssetUrl(battle.jsonUrl), publicAssetUrl(battle.imageUrl)]);
+      expect(fetch.mock.calls.map(([url]) => url).slice(1 + world.length * 2)).toEqual(battle.flatMap(atlas => [publicAssetUrl(atlas.jsonUrl), publicAssetUrl(atlas.imageUrl)]));
       expect(art.status.atlasPages).toBe(catalog.atlases.length);
       expect(art.status.residentBytesEstimate).toBe(catalog.atlases.reduce((bytes, atlas) => bytes + atlas.width * atlas.height * 4, 0));
       expect(decode).toHaveBeenCalledTimes(catalog.atlases.length);

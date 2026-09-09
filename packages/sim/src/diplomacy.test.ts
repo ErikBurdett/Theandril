@@ -23,6 +23,17 @@ function respond(state: GameState, accept = true): void {
 function endTurn(state: GameState): void { expect(applyCommand(state, { type: 'endTurn', factionId: state.turnOwnerId }).ok).toBe(true); }
 
 describe('negotiated peace', () => {
+  it('settles actual contracts between treasuries above the former billion-coin ceiling', () => {
+    const state = wartime();
+    state.factions[0]!.treasury = 2_000_000_000;
+    state.factions[1]!.treasury = 3_000_000_000;
+    propose(state, 123);
+    const saved = serializeGame(state), restored = deserializeGame(saved);
+    respond(state); respond(restored);
+    expect(state.factions.map(faction => faction.treasury)).toEqual([1_999_999_877, 3_000_000_123]);
+    expect(state.wars).toEqual([]);
+    expect(serializeGame(restored)).toBe(serializeGame(state));
+  });
   it('transfers coin once on acceptance, ends war and enforces a saved binding truce', () => {
     const state = wartime();
     const [a, b] = state.factions;
@@ -53,7 +64,7 @@ describe('negotiated peace', () => {
     expect(recipientView.diplomacy.offers[0]!.acceptanceBlocker).toMatch(/fund/);
     expect(evaluatePeaceOffer(recipientView, recipientView.diplomacy.offers[0]!).band).toBe('unlikely');
     state.factions[0]!.treasury = 50;
-    state.factions[1]!.treasury = 1_000_000_000;
+    state.factions[1]!.treasury = Number.MAX_SAFE_INTEGER;
     const capped = stateHash(state);
     expect(applyCommand(state, { type: 'respondPeace', factionId: offer.recipientId, offerId: offer.id, accept: true }).error).toMatch(/limit/);
     expect(stateHash(state)).toBe(capped);

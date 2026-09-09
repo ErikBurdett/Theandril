@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "building.market",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "building.market"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original complete Theandril strategy-map civic district prop. Genuinely transparent PNG background, entire silhouette inside comfortable 15% margins, not a sheet, no other asset. Grounded weathered medieval dark fantasy, crisp coarse square pixel-art clusters at logical 64×64 detail, broad connected material planes and clear silhouette, restrained selective dark outline. Three-quarter southeast isometric view, upper-left diffuse highlights, old pale stone, peat-dark timber, soot recesses, muted sage moss, rust and dull brass accents. Compact complete cluster fits a 56×44 logical-pixel footprint, no surrounding full ground tile or hex border. No text, labels, letters, banners with writing, people, landscape, checkerboard, modern technology, glossy gradients, soft shadows, haze, detached pieces, montage or game UI. CHARTER MARKET: three connected timber market stalls forming a compact triangular market yard; peaked weathered ochre and faded red canvas awnings, sheltered barrels and broad grouped baskets of produce beneath. A central tall simple timber weighing balance identifies trade, no coins scattered around. Joined pale cobble apron inside object silhouette, no surrounding road, no people.",
+  "frames": [
+    {
+      "id": "building.market/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/building.market/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "c36e809d9c23d8908e570a7f22193dd39918aeb733324c3f4c1bd038ca29b245",
+    "sourceRefs": [
+      "assets/art/source/hearth-civic/building.market-v1.png",
+      "assets/art/source/hearth-civic/building.market-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T21:40:50.921Z",
+  "referenceHashes": [
+    "11f37c540db4605c81025a16740881680d30a67ada190e348e9c9718ac1d7f53",
+    "973d09166fb1d3d29158da296655c46de3f38ba631743cc97b8e031fd2db7d72"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-hearth-civic-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "f07e1ef2ec97f8e5632e932c72b521c7e22f16d96f8120854fe1f4db5963dcc9",
+      "inputHash": "11f37c540db4605c81025a16740881680d30a67ada190e348e9c9718ac1d7f53",
+      "outputHash": "bef47ee0e366da997f2e30ae649fbded6d8d7947d6e3813dec9ee9913576a62b"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

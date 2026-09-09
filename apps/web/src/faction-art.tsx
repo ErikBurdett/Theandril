@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react';
 import { FACTIONS, UNITS } from '@theandril/content';
-import { factionArtId, parseRuntimeCatalog, type RuntimeAsset, type RuntimeCatalog } from '@theandril/art-pipeline/runtime';
+import { factionArtId, parseRuntimeCatalog, SHARED_UNIT_ART, unitArtRole, type RuntimeAsset, type RuntimeCatalog } from '@theandril/art-pipeline/runtime';
 import { loadArtImageBytes } from './art-image';
 import { publicAssetUrl } from './asset-url';
 import './faction-art.css';
@@ -66,14 +66,15 @@ function atlasImage(atlas: RuntimeCatalog['atlases'][number]): Promise<AtlasImag
 }
 
 export function loadFactionArtFrame(contentId: string, definitionId: string): Promise<ApprovedFrame> {
-  const qualified = factionArtId(contentId, definitionId);
+  const artworkRole = unitArtRole(contentId);
+  const qualified = factionArtId(artworkRole, definitionId);
   if (!qualified) return Promise.reject(new Error('No approved visual family is bound to this faction definition.'));
   let promise = frames.get(qualified);
   if (!promise) {
     promise = (async () => {
       const pack = await catalog();
       const find = (id: string) => pack.assets.find(asset => asset.id === id || asset.contentIds.includes(id));
-      const asset = find(qualified) ?? find(contentId);
+      const asset = find(qualified) ?? find(artworkRole);
       if (!asset) throw new Error(`Approved artwork is not published for ${qualified}.`);
       const atlas = pack.atlases.find(item => item.id === asset.atlasId);
       const frame = asset.frames.find(item => item.state === 'idle' && item.index === 0) ?? asset.frames[0];
@@ -83,6 +84,30 @@ export function loadFactionArtFrame(contentId: string, definitionId: string): Pr
     frames.set(qualified, promise);
   }
   return promise;
+}
+
+/** A shared map prop has no faction variant. The same approved atlas cache
+ * supplies its deposit and working-building preview. */
+export function MapArt({ contentId, label, compact = false }: { contentId: string; label: string; compact?: boolean }) {
+  const [loaded, setLoaded] = useState<{ id: string; frame: ApprovedFrame }>();
+  useEffect(() => {
+    let active = true;
+    const key = 'map:' + contentId;
+    let promise = frames.get(key);
+    if (!promise) {
+      promise = (async () => {
+        const pack = await catalog(), asset = pack.assets.find(asset => asset.id === contentId);
+        const frame = asset?.frames[0], atlas = pack.atlases.find(atlas => atlas.id === asset?.atlasId);
+        if (!asset || !frame || !atlas) throw new Error('Approved map artwork unavailable.');
+        return { asset, frame, image: await atlasImage(atlas), generic: false };
+      })(); frames.set(key, promise);
+    }
+    void promise.then(frame => { if (active) setLoaded({ id: contentId, frame }); }, () => undefined);
+    return () => { active = false; };
+  }, [contentId]);
+  const art = loaded?.id === contentId ? loaded.frame : undefined, scale = compact ? .5 : 1;
+  const style: CSSProperties = { width: 64 * scale, height: 64 * scale, ...(art ? { backgroundImage: `url("${art.image.url}")`, backgroundSize: `${art.image.width * scale}px ${art.image.height * scale}px`, backgroundPosition: `${-art.frame.frame.x * scale}px ${-art.frame.frame.y * scale}px` } : {}) };
+  return <span role="img" aria-label={label} className="map-art" style={style} data-art-content-id={contentId} data-art-state={art ? 'ready' : 'loading'}>{!art && '◇'}</span>;
 }
 
 // These shared DOM pages live with the application, not with individual icons. HMR releases old pages.
@@ -95,7 +120,7 @@ interface FactionArtProps {
 /** Approved native frame with a fixed slot. Compact thumbnails are exact half-size, never tinted. */
 export function FactionArt(props: FactionArtProps) {
   const { contentId, definitionId } = props;
-  const requested = factionArtId(contentId, definitionId ?? '') ?? `${contentId}.unbound`;
+  const requested = factionArtId(unitArtRole(contentId), definitionId ?? '') ?? `${contentId}.unbound`;
   const [result, setResult] = useState<{ requested: string; value?: ApprovedFrame; error?: string }>();
   useEffect(() => {
     let active = true;
@@ -110,19 +135,20 @@ export function FactionArt(props: FactionArtProps) {
 
 /** Pure presentation boundary, also exercised without a running browser or art publication. */
 export function FactionArtDisplay({ contentId, definitionId, label, compact = false, decorative = false, value: art, error, loading = false }: FactionArtProps & { value?: ApprovedFrame; error?: string; loading?: boolean }) {
-  const requested = factionArtId(contentId, definitionId ?? '') ?? `${contentId}.unbound`;
+  const artworkRole = unitArtRole(contentId), shared = SHARED_UNIT_ART[contentId];
+  const requested = factionArtId(artworkRole, definitionId ?? '') ?? `${contentId}.unbound`;
   const naval = UNITS.some(unit => unit.id === contentId && unit.movementDomain === 'naval');
-  const native = contentId === 'ui.badge' ? 32 : naval || contentId === 'unit.cavalry' || contentId === 'settlement.village' || contentId === 'settlement.town' ? 96 : contentId === 'settlement.city' ? 128 : 64;
+  const native = contentId === 'ui.badge' ? 32 : naval || artworkRole === 'unit.cavalry' || contentId === 'settlement.village' || contentId === 'settlement.town' ? 96 : contentId === 'settlement.city' ? 128 : 64;
   const scale = compact ? 0.5 : 1;
   const validSize = !art || art.asset.nativeResolution.width === native && art.asset.nativeResolution.height === native;
   const ready = Boolean(art && validSize);
-  const state = loading ? 'loading' : ready ? art?.generic ? 'generic' : 'ready' : 'fallback';
-  const message = state === 'ready' ? `${label} · approved faction artwork` : state === 'loading' ? `${label} · loading approved artwork` : `${label} · ${naval && !ready ? 'procedural ship marker, approved naval artwork unavailable' : 'generic presentation'}. ${error ?? (!validSize ? 'Approved frame dimensions differ from this native slot.' : 'Faction-specific artwork is not published; using the available role fallback.')}`;
+  const state = loading ? 'loading' : ready ? art?.generic ? 'generic' : shared ? 'shared' : 'ready' : 'fallback';
+  const message = state === 'shared' ? `${label} · shared ${shared!.label} silhouette` : state === 'ready' ? `${label} · approved faction artwork` : state === 'loading' ? `${label} · loading approved artwork` : `${label} · ${naval && !ready ? 'procedural ship marker, approved naval artwork unavailable' : 'generic presentation'}. ${error ?? (!validSize ? 'Approved frame dimensions differ from this native slot.' : 'Faction-specific artwork is not published; using the available role fallback.')}`;
   const style: CSSProperties = { width: native * scale, height: native * scale,
     ...(ready && art ? { backgroundImage: `url("${art.image.url}")`, backgroundSize: `${art.image.width * scale}px ${art.image.height * scale}px`, backgroundPosition: `${-art.frame.frame.x * scale}px ${-art.frame.frame.y * scale}px` } : {}) };
-  return <span className={`faction-art faction-art--${state}`} style={style} role={decorative ? undefined : 'img'} aria-label={decorative ? undefined : message} aria-hidden={decorative || undefined} title={message} data-art-id={requested} data-art-rendered-id={ready ? art?.asset.id : undefined} data-art-definition={definitionId} data-art-state={state}>
+  return <span className={`faction-art faction-art--${state}`} style={style} role={decorative ? undefined : 'img'} aria-label={decorative ? undefined : message} aria-hidden={decorative || undefined} title={message} data-art-content-id={contentId} data-art-id={requested} data-art-rendered-id={ready ? art?.asset.id : undefined} data-art-definition={definitionId} data-art-state={state}>
     {!ready && (naval ? <svg className="faction-art-ship" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 43h44l-9 10H21ZM32 9v33M29 13 15 36h14M36 17l13 19H36M8 57l8-2 9 2 8-2 9 2 10-2 6 2" fill="none" stroke="currentColor" strokeWidth="2"/></svg> : <span className="faction-art-symbol" aria-hidden="true">{contentId.startsWith('character.') ? '♟' : contentId.startsWith('unit.') ? '△' : '◇'}</span>)}
-    {state !== 'ready' && <span className="faction-art-note" aria-hidden="true">{state === 'loading' ? 'Loading' : naval && !ready ? 'Ship marker' : 'Generic'}</span>}
+    {state !== 'ready' && state !== 'shared' && <span className="faction-art-note" aria-hidden="true">{state === 'loading' ? 'Loading' : naval && !ready ? 'Ship marker' : 'Generic'}</span>}
   </span>;
 }
 

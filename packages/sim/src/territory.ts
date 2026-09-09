@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, TECHNOLOGIES, type LandYield } from '@theandril/content';
 import { BIOME_NAMES, hexDistance, naturalFeatures, neighbors } from '@theandril/mapgen';
 import type { DomainEvent, GameState, Settlement } from './types';
-import { cellsWithin, indexes } from './visibility';
+import { cellsWithin, claimSightEnabled, indexes, updateSight } from './visibility';
 import { rulesVersion } from './rules';
 
 const identifier = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
@@ -12,20 +12,28 @@ const positive = z.number().int().min(1).max(1_000_000);
 const yieldKeys = ['food', 'industry', 'coin', 'knowledge'] as const;
 const emptyYield = (): LandYield => ({ food: 0, industry: 0, coin: 0, knowledge: 0 });
 const workShape = { cell: cellSchema, coinCost: positive, turns: positive.max(100), remainingTurns: positive.max(100), startedTurn: positive };
-export const landWorkSchema = z.discriminatedUnion('kind', [
+export const landWorkV15Schema = z.discriminatedUnion('kind', [
   z.object({ ...workShape, kind: z.literal('improve'), improvementId: identifier }).strict(),
   z.object({ ...workShape, kind: z.literal('terraform'), biome: z.number().int().min(1).max(11) }).strict(),
 ]);
+const modernWorkShape = { ...workShape, coinCost: z.number().int().min(1).max(Number.MAX_SAFE_INTEGER) };
+export const landWorkSchema = z.discriminatedUnion('kind', [
+  z.object({ ...modernWorkShape, kind: z.literal('improve'), improvementId: identifier }).strict(),
+  z.object({ ...modernWorkShape, kind: z.literal('terraform'), biome: z.number().int().min(1).max(11) }).strict(),
+]);
 export type LandWork = z.infer<typeof landWorkSchema>;
-export const settlementLandV10Schema = z.object({ claimed: z.array(cellSchema).min(1).max(37), worked: z.array(cellSchema).max(6), improvements: z.record(cellKey, identifier), work: landWorkSchema.nullable() }).strict();
-export const settlementLandSchema = settlementLandV10Schema.extend({ borderGrowth: z.number().int().min(0).max(159) }).strict();
+export const settlementLandV10Schema = z.object({ claimed: z.array(cellSchema).min(1).max(37), worked: z.array(cellSchema).max(6), improvements: z.record(cellKey, identifier), work: landWorkV15Schema.nullable() }).strict();
+export const settlementLandV15Schema = settlementLandV10Schema.extend({ borderGrowth: z.number().int().min(0).max(159) }).strict();
+/** Array limits bound a finite 350,000-cell world, not hearth development. */
+export const settlementLandSchema = settlementLandV15Schema.extend({ claimed: z.array(cellSchema).min(1).max(350_000), worked: z.array(cellSchema).max(350_000), work: landWorkSchema.nullable(), borderGrowth: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER) }).strict();
 export type SettlementLand = z.infer<typeof settlementLandSchema>;
 export const knownLandSchema = z.object({ biome: z.number().int().min(0).max(11), settlementId: identifier.nullable(), factionId: identifier.nullable(), improvementId: identifier.nullable() }).strict();
 export type KnownLand = z.infer<typeof knownLandSchema>;
-export const landStateSchema = z.object({ settlements: z.record(identifier, settlementLandSchema), biomes: z.record(cellKey, z.number().int().min(1).max(11)), capitals: z.record(identifier, identifier.nullable()), cultivation: z.record(identifier, z.number().int().min(0).max(1_000_000_000_000)), known: z.record(identifier, z.record(cellKey, knownLandSchema)) }).strict();
-export const landStateV10Schema = landStateSchema.extend({ settlements: z.record(identifier, settlementLandV10Schema) }).strict();
+export const landStateSchema = z.object({ settlements: z.record(identifier, settlementLandSchema), biomes: z.record(cellKey, z.number().int().min(1).max(11)), capitals: z.record(identifier, identifier.nullable()), cultivation: z.record(identifier, z.number().int().min(0).max(1_000_000_000_000)), known: z.record(identifier, z.record(cellKey, knownLandSchema)), visibilityVersion: z.union([z.literal(0), z.literal(1)]) }).strict();
+export const landStateV15Schema = landStateSchema.omit({ visibilityVersion: true }).extend({ settlements: z.record(identifier, settlementLandV15Schema) }).strict();
+export const landStateV10Schema = landStateSchema.omit({ visibilityVersion: true }).extend({ settlements: z.record(identifier, settlementLandV10Schema) }).strict();
 export type LandState = z.infer<typeof landStateSchema>;
-export const landCommandSchemas = [
+export const landCommandV15Schemas = [
   z.object({ type: z.literal('claimCell'), factionId: identifier, settlementId: identifier, cell: cellSchema }).strict(),
   z.object({ type: z.literal('setWorkedTiles'), factionId: identifier, settlementId: identifier, cells: z.array(cellSchema).max(6) }).strict(),
   z.object({ type: z.literal('improveTile'), factionId: identifier, settlementId: identifier, cell: cellSchema, improvementId: identifier }).strict(),
@@ -33,38 +41,91 @@ export const landCommandSchemas = [
   z.object({ type: z.literal('cancelLandWork'), factionId: identifier, settlementId: identifier }).strict(),
   z.object({ type: z.literal('setCapital'), factionId: identifier, settlementId: identifier }).strict(),
 ] as const;
+export const landCommandSchemas = [landCommandV15Schemas[0], z.object({ type: z.literal('setWorkedTiles'), factionId: identifier, settlementId: identifier, cells: z.array(cellSchema).max(350_000) }).strict(), landCommandV15Schemas[2], landCommandV15Schemas[3], landCommandV15Schemas[4], landCommandV15Schemas[5]] as const;
 const landCommandSchema = z.discriminatedUnion('type', landCommandSchemas);
+const landCommandV15Schema = z.discriminatedUnion('type', landCommandV15Schemas);
 export type LandCommand = z.infer<typeof landCommandSchema>;
 export type SettlementStage = 'colony' | 'settlement' | 'city';
 export interface LandYieldBreakdown { biome: LandYield; features: LandYield; affinity: LandYield; improvement: LandYield; featureModifiers: LandYield; total: LandYield }
 export interface LandOption { coinCost: number; turns: number; canStart: boolean; blocker: string | null; effectText: string }
 export interface LandCellObservation extends KnownLand {
-  cell: number; terrain: number; features: number; claimed: boolean; worked: boolean; canWork: boolean; workBlocker: string | null;
+  cell: number; resourceId?: string; terrain: number; features: number; claimed: boolean; worked: boolean; canWork: boolean; workBlocker: string | null;
   yields: LandYieldBreakdown; claim: LandOption;
   improvementOptions: (LandOption & { improvementId: string; name: string })[];
   terraformOptions: (LandOption & { biome: number; name: string })[];
 }
 export interface SettlementLandObservation {
-  settlementId: string; stage: SettlementStage; isCapital: boolean; claimRadius: number; claimCapacity: number; workerCapacity: number;
+  settlementId: string; stage: SettlementStage; isCapital: boolean; claimRadius: number; claimCapacity: number | null; workerCapacity: number;
   claimed: number[]; worked: number[]; work: LandWork | null; workPaused: string | null; yields: LandYield; cells: LandCellObservation[];
   capitalOption: LandOption; canCancelWork: boolean; cancelBlocker: string | null;
   borderExpansion: BorderExpansionObservation;
+  cellWindow?: { offset: number; limit: number; total: number };
 }
 export interface BorderExpansionObservation { progress: number; threshold: number; rate: number; nextCell: number | null; blocker: string | null }
 export interface LandObservation { settlements: SettlementLandObservation[]; cultivation: number; capitalSettlementId: string | null }
 /** Detail selection changes only cell quotes; every owned summary is retained. */
 export interface LandDetailWindow { readonly offset: number; readonly limit: number }
+export interface LandCellWindow { readonly offset: number; readonly limit?: number; readonly cell?: number }
 export type LandDetails = 'all' | 'none' | readonly string[] | LandDetailWindow;
 export const emptyLandObservation = (): LandObservation => ({ settlements: [], cultivation: 0, capitalSettlementId: null });
-export function emptyLandState(factionIds: readonly string[]): LandState {
-  return { settlements: {}, biomes: {}, capitals: Object.fromEntries(factionIds.map(id => [id, null])), cultivation: Object.fromEntries(factionIds.map(id => [id, 0])), known: Object.fromEntries(factionIds.map(id => [id, {}])) };
+export function emptyLandState(factionIds: readonly string[], version = 16): LandState {
+  return { settlements: {}, biomes: {}, capitals: Object.fromEntries(factionIds.map(id => [id, null])), cultivation: Object.fromEntries(factionIds.map(id => [id, 0])), known: Object.fromEntries(factionIds.map(id => [id, {}])), visibilityVersion: version >= 16 ? 1 : 0 };
 }
 export function settlementStage(town: Settlement): SettlementStage { return town.population <= 2 ? 'colony' : town.population <= 7 ? 'settlement' : 'city'; }
 export function settlementClaimRadius(town: Settlement): number { return town.population <= 2 ? 1 : town.population <= 7 ? 2 : 3; }
-export function settlementWorkerCapacity(town: Settlement): number { return Math.min(town.population, 6); }
+export function settlementWorkerCapacity(town: Settlement, version = 16): number { return version >= 16 ? town.population : Math.min(town.population, 6); }
 const ordered = (values: readonly number[]): number[] => [...values].sort((a, b) => a - b);
+function lowerBound(values: readonly number[], value: number): number {
+  let low = 0, high = values.length;
+  while (low < high) { const middle = low + Math.floor((high - low) / 2); if (values[middle]! < value) low = middle + 1; else high = middle; }
+  return low;
+}
+function mergeOrdered(first: readonly number[], second: readonly number[]): number[] {
+  const result: number[] = []; let a = 0, b = 0;
+  while (a < first.length && b < second.length) result.push(first[a]! < second[b]! ? first[a++]! : second[b++]!);
+  for (; a < first.length; a++) result.push(first[a]!);
+  for (; b < second.length; b++) result.push(second[b]!);
+  return result;
+}
 const sameKnown = (a: KnownLand, b: KnownLand): boolean => a.biome === b.biome && a.settlementId === b.settlementId && a.factionId === b.factionId && a.improvementId === b.improvementId;
 const landCache = new WeakMap<LandState, Map<number, string>>();
+interface ClaimFrontier { claimed: number[]; boundary: Set<number>; radius: number; candidates?: number[]; growthOrder?: number[] }
+const frontierCache = new WeakMap<LandState, Map<string, ClaimFrontier>>();
+/** Detached indexes are rebuilt on load, then maintained only at claim edges. */
+function claimFrontier(state: GameState, town: Settlement): ClaimFrontier {
+  let registry = frontierCache.get(state.land);
+  if (!registry) { registry = new Map(); frontierCache.set(state.land, registry); }
+  const land = state.land.settlements[town.id]!, previous = registry.get(town.id);
+  if (previous?.claimed === land.claimed) return previous;
+  const index = getLandIndex(state), boundary = new Set<number>();
+  let radius = 0;
+  for (const cell of land.claimed) {
+    radius = Math.max(radius, hexDistance(town.cell, cell, state.world.width));
+    for (const neighbor of neighbors(cell, state.world.width, state.world.height)) if (!index.has(neighbor)) boundary.add(neighbor);
+  }
+  const result = { claimed: land.claimed, boundary, radius };
+  registry.set(town.id, result);
+  return result;
+}
+function acquireClaim(state: GameState, town: Settlement, cell: number): void {
+  const land = state.land.settlements[town.id]!, frontier = rulesVersion(state) >= 16 ? claimFrontier(state, town) : undefined;
+  const insertion = lowerBound(land.claimed, cell);
+  land.claimed = [...land.claimed.slice(0, insertion), cell, ...land.claimed.slice(insertion)];
+  const index = getLandIndex(state); index.set(cell, town.id);
+  if (!frontier) return;
+  frontier.claimed = land.claimed; frontier.boundary.delete(cell);
+  frontier.radius = Math.max(frontier.radius, hexDistance(town.cell, cell, state.world.width));
+  for (const adjacent of neighbors(cell, state.world.width, state.world.height)) {
+    const owner = index.get(adjacent);
+    if (!owner) frontier.boundary.add(adjacent);
+    else if (owner !== town.id) {
+      const other = frontierCache.get(state.land)?.get(owner);
+      if (other?.boundary.delete(cell)) { delete other.candidates; delete other.growthOrder; }
+    }
+  }
+  delete frontier.candidates; delete frontier.growthOrder;
+  if (claimSightEnabled(state)) updateSight(state, town.factionId, cell, 1, 1);
+}
 /** Built once per land registry; claim/capture hooks maintain it incrementally. */
 export function getLandIndex(state: GameState): Map<number, string> {
   let index = landCache.get(state.land);
@@ -105,6 +166,7 @@ export function initializeSettlementLand(state: GameState, town: Settlement, emi
   if (previous && previous !== town.id) {
     const old = state.land.settlements[previous];
     if (old) {
+      if (claimSightEnabled(state) && state.settlements[previous]) updateSight(state, state.settlements[previous]!.factionId, town.cell, 1, -1);
       old.claimed = old.claimed.filter(cell => cell !== town.cell); old.worked = old.worked.filter(cell => cell !== town.cell); delete old.improvements[town.cell];
       if (old.work?.cell === town.cell) { old.work = null; emitted.push(notice(state, town, 'land_work_cancelled', `${town.name}'s founding displaced a local land-work order; no coin was refunded.`)); }
     }
@@ -113,6 +175,11 @@ export function initializeSettlementLand(state: GameState, town: Settlement, emi
   const claimed = [town.cell];
   for (const cell of ordered(neighbors(town.cell, state.world.width, state.world.height))) if (!index.has(cell)) { claimed.push(cell); index.set(cell, town.id); }
   state.land.settlements[town.id] = { claimed: ordered(claimed), worked: [], improvements: {}, work: null, borderGrowth: 0 };
+  if (rulesVersion(state) >= 16) {
+    // Founding may displace a previous edge or fill several neighbors at once.
+    frontierCache.delete(state.land);
+    if (claimSightEnabled(state)) for (const cell of claimed) updateSight(state, town.factionId, cell, 1, 1);
+  }
   if (!state.land.capitals[town.factionId]) state.land.capitals[town.factionId] = town.id;
 }
 function faction(state: GameState, factionId: string) { return state.factions.find(item => item.id === factionId); }
@@ -128,8 +195,7 @@ function paused(state: GameState, town: Settlement): string | null {
   return state.sieges[town.id] ? 'The settlement is under siege.' : town.occupationTurns ? 'The settlement is occupied.' : null;
 }
 const borderGrowthThreshold = (land: SettlementLand): number => 12 + 4 * land.claimed.length;
-/** Town sight covers its entire current claim radius. No remote ownership or
- * terrain search is needed: the disk contains at most37 hexes. */
+/** Modern claims inspect their maintained boundary, never a growing radius disk. */
 export function borderExpansionObservation(state: GameState, town: Settlement): BorderExpansionObservation {
   const land = state.land.settlements[town.id]!;
   const threshold = borderGrowthThreshold(land);
@@ -137,12 +203,16 @@ export function borderExpansionObservation(state: GameState, town: Settlement): 
   if (rulesVersion(state) < 11) return { ...base, blocker: 'Automatic border growth is unavailable under these historical rules.' };
   const blocked = townBlocker(state, town, town.factionId);
   if (blocked) return { ...base, blocker: blocked };
-  if (land.claimed.length >= 37) return { ...base, blocker: 'This settlement has reached its 37-hex claim limit.' };
+  if (rulesVersion(state) < 16 && land.claimed.length >= 37) return { ...base, blocker: 'This settlement has reached its 37-hex claim limit.' };
   const index = getLandIndex(state), visible = indexes(state).visible.get(town.factionId), radius = settlementClaimRadius(town);
   // Enumerate only the existing boundary (at most37*6 edges), not a separate
   // detailed quote disk for every summary-only town publication.
   const frontier = new Set<number>();
-  for (const claimed of land.claimed) for (const cell of neighbors(claimed, state.world.width, state.world.height)) {
+  if (rulesVersion(state) >= 16) {
+    const cached = claimFrontier(state, town);
+    if (!cached.growthOrder) cached.growthOrder = [...cached.boundary].sort((a, b) => hexDistance(town.cell, a, state.world.width) - hexDistance(town.cell, b, state.world.width) || a - b);
+    for (const cell of cached.growthOrder) if (visible?.has(cell) && state.explored[town.factionId]?.has(cell) && state.world.waterDepth[cell] !== 2 && !index.has(cell)) { frontier.add(cell); break; }
+  } else for (const claimed of land.claimed) for (const cell of neighbors(claimed, state.world.width, state.world.height)) {
     if (visible?.has(cell) && state.explored[town.factionId]?.has(cell) && hexDistance(town.cell, cell, state.world.width) <= radius
       && state.world.waterDepth[cell] !== 2 && !index.has(cell)) frontier.add(cell);
   }
@@ -152,18 +222,17 @@ export function borderExpansionObservation(state: GameState, town: Settlement): 
   if (nextCell === undefined) return { ...base, blocker: 'No charted, connected and unclaimed non-deep-water hex is available within the current settlement reach.' };
   const discoveries = state.progression[town.factionId]?.technologies ?? [];
   const research = TECHNOLOGIES.reduce((sum, item) => sum + ((item.introducedInRules ?? 4) <= rulesVersion(state) && discoveries.includes(item.id) ? item.borderGrowthBonus ?? 0 : 0), 0);
-  const rate = 1 + Math.floor(Math.min(town.population, 12) / 4) + Number(town.buildings.includes('building.market')) + Number(town.buildings.includes('building.archive')) + research;
+  const rate = 1 + Math.floor((rulesVersion(state) >= 16 ? town.population : Math.min(town.population, 12)) / 4) + Number(town.buildings.includes('building.market')) + Number(town.buildings.includes('building.archive')) + research;
   return { progress: land.borderGrowth, threshold, rate, nextCell, blocker: null };
 }
 function advanceBorderGrowth(state: GameState, town: Settlement, emitted: DomainEvent[]): void {
   const growth = borderExpansionObservation(state, town);
   if (growth.blocker || growth.nextCell === null) return;
   const land = state.land.settlements[town.id]!;
-  land.borderGrowth += growth.rate;
+  land.borderGrowth = Math.min(Number.MAX_SAFE_INTEGER, land.borderGrowth + growth.rate);
   if (land.borderGrowth < growth.threshold) return;
   land.borderGrowth -= growth.threshold;
-  land.claimed = ordered([...land.claimed, growth.nextCell]);
-  getLandIndex(state).set(growth.nextCell, town.id);
+  acquireClaim(state, town, growth.nextCell);
   // Only viewers of this particular claim learn the new owner. A saved memory
   // elsewhere must remain historical, including a surveyor's remote knowledge.
   for (const [factionId, visible] of indexes(state).visible) if (visible.has(growth.nextCell)) observeLandCell(state, factionId, growth.nextCell, true);
@@ -208,6 +277,7 @@ function cellReadContext(state: GameState, town: Settlement, cell: number, conte
 function siteMatches(state: GameState, cell: number, improvementId: string, biome?: number, context?: CellReadContext): boolean {
   const definition = context ? context.town.owner.byId.get(improvementId) : IMPROVEMENTS.find(item => item.id === improvementId);
   if (!definition || (definition.introducedInRules ?? 9) > (context?.town.owner.version ?? rulesVersion(state))) return false;
+  if (definition.requiredResourceId && state.resources?.deposits[cell] !== definition.requiredResourceId) return false;
   const features = context?.features ?? naturalFeatures(state.world, cell), siteBiome = biome ?? context?.biome ?? effectiveBiome(state, cell);
   return definition.sites.some(site => site.terrainIds.includes(context?.terrain ?? state.world.terrain[cell] ?? 0)
     && (!site.biomeIds || site.biomeIds.includes(siteBiome)) && (!site.waterDepthIds || site.waterDepthIds.includes(context?.depth ?? state.world.waterDepth[cell] ?? 0))
@@ -219,18 +289,18 @@ function quoteCost(state: GameState, town: Settlement, cell: number, base: numbe
   // Biome IDs are labels, not an ordered climate scale. Off-affinity ground
   // incurs a fixed adaptation surcharge, with no accidental ID arithmetic.
   const climateMismatch = preferred ? 0 : targetBiome === undefined ? 4 : 12;
-  return Math.min(1_000_000, Math.max(1, base + (context?.costFactor ?? distance * 4 + (state.land.cultivation[town.factionId] ?? 0) * 3) + climateMismatch));
+  return Math.min(rulesVersion(state) >= 16 ? Number.MAX_SAFE_INTEGER : 1_000_000, Math.max(1, base + (context?.costFactor ?? distance * 4 + (state.land.cultivation[town.factionId] ?? 0) * 3) + climateMismatch));
 }
 function option(coinCost: number, turns: number, blocker: string | null, effectText: string): LandOption { return { coinCost, turns, canStart: !blocker, blocker, effectText }; }
 function funding(state: GameState, town: Settlement, price: number, context?: TownReadContext): string | null { return (context?.owner.treasury ?? faction(state, town.factionId)?.treasury ?? 0) < price ? `Requires ${price} coin upfront.` : null; }
 function claimOption(state: GameState, town: Settlement, cell: number, context?: CellReadContext): LandOption {
-  const land = state.land.settlements[town.id]!, price = quoteCost(state, town, cell, 12, undefined, context);
+  const land = state.land.settlements[town.id]!, price = quoteCost(state, town, cell, 12 + (rulesVersion(state) >= 16 ? land.claimed.length * 2 : 0), undefined, context);
   const blocker = (context ? context.town.blocker : townBlocker(state, town, town.factionId)) ?? (context ? context.blocker : cellBlocker(state, town, cell))
     // Legal claim reach never exceeds the owning town's sight. Refuse distant
     // probes before inspecting current ownership, which may have changed in fog.
-    ?? ((context?.distance ?? hexDistance(town.cell, cell, state.world.width)) > (context?.town.radius ?? settlementClaimRadius(town)) ? 'This hex lies beyond the settlement’s current reach.' : null)
+    ?? (rulesVersion(state) >= 16 ? !indexes(state).visible.get(town.factionId)?.has(cell) ? 'The target is outside currently observed territory.' : null : (context?.distance ?? hexDistance(town.cell, cell, state.world.width)) > (context?.town.radius ?? settlementClaimRadius(town)) ? 'This hex lies beyond the settlement’s current reach.' : null)
     ?? ((context ? context.claimOwner !== undefined : getLandIndex(state).has(cell)) ? 'This hex is already claimed.' : null)
-    ?? (land.claimed.length >= 37 ? 'This settlement has reached its 37-hex claim limit.' : null)
+    ?? (rulesVersion(state) < 16 && land.claimed.length >= 37 ? 'This settlement has reached its 37-hex claim limit.' : null)
     ?? (!neighbors(cell, state.world.width, state.world.height).some(next => getLandIndex(state).get(next) === town.id) ? 'Claims must connect to existing territory.' : null)
     ?? funding(state, town, price, context?.town);
   return option(price, 0, blocker, 'Claim this hex for this settlement. Borders do not prevent military passage.');
@@ -293,17 +363,25 @@ function cellYields(state: GameState, town: Settlement, cell: number, context?: 
 export function settlementLandYield(state: GameState, town: Settlement): LandYield {
   return townLandYield(state, town);
 }
+const yieldCache = new WeakMap<SettlementLand, { worked: number[]; factionId: string; value: LandYield }>();
 function townLandYield(state: GameState, town: Settlement, context?: TownReadContext): LandYield {
-  const total = emptyYield(), land = state.land.settlements[town.id];
-  if (!land) return total;
-  for (const cell of [town.cell, ...land.worked]) addYield(total, cellYields(state, town, cell, context ? cellReadContext(state, town, cell, context) : undefined).total);
+  const land = state.land.settlements[town.id];
+  if (!land) return emptyYield();
+  const cached = rulesVersion(state) >= 16 ? yieldCache.get(land) : undefined;
+  let total: LandYield;
+  if (cached?.worked === land.worked && cached.factionId === town.factionId) total = { ...cached.value };
+  else {
+    total = emptyYield();
+    for (const cell of [town.cell, ...land.worked]) addYield(total, cellYields(state, town, cell, context ? cellReadContext(state, town, cell, context) : undefined).total);
+    if (rulesVersion(state) >= 16) yieldCache.set(land, { worked: land.worked, factionId: town.factionId, value: { ...total } });
+  }
   if (state.land.capitals[town.factionId] === town.id) { total.coin++; total.knowledge++; }
   return total;
 }
 
 /** All validation and quoting precede coin, territory, work or worker mutation. */
 export function applyLandCommand(state: GameState, input: unknown, emitted: DomainEvent[] = []): string | null {
-  const parsed = landCommandSchema.safeParse(input);
+  const parsed = (rulesVersion(state) >= 16 ? landCommandSchema : landCommandV15Schema).safeParse(input);
   if (!parsed.success) return 'Malformed land command.';
   const command = parsed.data, town = state.settlements[command.settlementId], blocker = townBlocker(state, town, command.factionId);
   if (blocker || !town) return blocker ?? 'Unknown settlement.';
@@ -312,7 +390,7 @@ export function applyLandCommand(state: GameState, input: unknown, emitted: Doma
   if ('cell' in command && command.cell >= state.world.terrain.length) return 'The target is outside the world.';
   if (command.type === 'setWorkedTiles') {
     if (new Set(command.cells).size !== command.cells.length) return 'Select each worked tile only once.';
-    if (command.cells.length > settlementWorkerCapacity(town)) return `This settlement can work at most ${settlementWorkerCapacity(town)} additional tiles.`;
+    if (command.cells.length > settlementWorkerCapacity(town, rulesVersion(state))) return `This settlement can work at most ${settlementWorkerCapacity(town, rulesVersion(state))} additional tiles.`;
     for (const cell of command.cells) { const obstruction = workedBlocker(state, town, cell); if (obstruction) return obstruction; }
     land.worked = ordered(command.cells);
     emitted.push(notice(state, town, 'worked_tiles_changed', `${town.name} assigned workers to ${land.worked.length} claimed hexes; its center remains worked.`));
@@ -334,7 +412,7 @@ export function applyLandCommand(state: GameState, input: unknown, emitted: Doma
   if (quote.blocker) return quote.blocker;
   owner.treasury -= quote.coinCost;
   if (command.type === 'claimCell') {
-    land.claimed = ordered([...land.claimed, command.cell]); getLandIndex(state).set(command.cell, town.id);
+    acquireClaim(state, town, command.cell);
     emitted.push(notice(state, town, 'territory_claimed', `${town.name} claimed hex ${command.cell} for ${quote.coinCost} coin.`, command.cell));
   } else {
     const common = { cell: command.cell, coinCost: quote.coinCost, turns: quote.turns, remainingTurns: quote.turns, startedTurn: state.turn };
@@ -348,7 +426,8 @@ export function applyLandCommand(state: GameState, input: unknown, emitted: Doma
 /** Called once per town per resolved turn; never traverses the global tile map. */
 export function resolveLandTurn(state: GameState, town: Settlement, emitted: DomainEvent[] = []): void {
   const land = state.land.settlements[town.id]; if (!land) return;
-  land.worked = ordered(land.worked.filter(cell => cell !== town.cell && getLandIndex(state).get(cell) === town.id)).slice(0, settlementWorkerCapacity(town));
+  if (rulesVersion(state) < 16) land.worked = ordered(land.worked.filter(cell => cell !== town.cell && getLandIndex(state).get(cell) === town.id)).slice(0, settlementWorkerCapacity(town, rulesVersion(state)));
+  else if (land.worked.length > town.population) land.worked = land.worked.slice(0, town.population);
   if (rulesVersion(state) >= 11) advanceBorderGrowth(state, town, emitted);
   const work = land.work; if (!work || paused(state, town)) return;
   work.remainingTurns--;
@@ -360,19 +439,25 @@ export function resolveLandTurn(state: GameState, town: Settlement, emitted: Dom
     name = `cultivation of ${BIOME_NAMES[work.biome]}`;
   }
   state.land.cultivation[town.factionId] = (state.land.cultivation[town.factionId] ?? 0) + 1;
+  yieldCache.delete(land);
   land.work = null;
   emitted.push(notice(state, town, 'land_work_completed', `${town.name} completed ${name} at hex ${work.cell}.`, work.cell));
 }
 
 export function handleLandCapture(state: GameState, settlementId: string, previousOwnerId: string, emitted: DomainEvent[] = []): void {
   const land = state.land.settlements[settlementId], town = state.settlements[settlementId], index = getLandIndex(state);
+  if (claimSightEnabled(state) && land) {
+    for (const cell of land.claimed) updateSight(state, previousOwnerId, cell, 1, -1);
+    if (town) for (const cell of land.claimed) updateSight(state, town.factionId, cell, 1, 1);
+    frontierCache.delete(state.land);
+  }
   if (land) land.borderGrowth = 0;
   if (land?.work) {
     const work = land.work;
     emitted.push({ turn: state.turn, factionId: previousOwnerId, type: 'land_work_cancelled', cell: work.cell, message: `The capture of ${settlementId} cancelled land work at hex ${work.cell}; no coin was refunded.` }); land.work = null;
   }
   if (!town && land) { for (const cell of land.claimed) index.delete(cell); delete state.land.settlements[settlementId]; }
-  else if (town && land) land.worked = ordered(land.worked).slice(0, settlementWorkerCapacity(town));
+  else if (town && land) land.worked = ordered(land.worked).slice(0, settlementWorkerCapacity(town, rulesVersion(state)));
   for (const ownerId of new Set([previousOwnerId, ...(town ? [town.factionId] : [])])) {
     const capital = state.land.capitals[ownerId];
     if (!capital || state.settlements[capital]?.factionId !== ownerId) {
@@ -383,21 +468,33 @@ export function handleLandCapture(state: GameState, settlementId: string, previo
   }
 }
 
-function settlementLandObservation(state: GameState, factionId: string, town: Settlement, visible: { has(cell: number): boolean }, includeCells: boolean, owner: LandReadContext): SettlementLandObservation {
+function settlementLandObservation(state: GameState, factionId: string, town: Settlement, visible: { has(cell: number): boolean }, includeCells: boolean, owner: LandReadContext, window?: LandCellWindow, visit = state.turn - 1): SettlementLandObservation {
     const land = state.land.settlements[town.id]!;
     const context: TownReadContext = { owner, blocker: townBlocker(state, town, factionId), radius: settlementClaimRadius(town) };
     // Omitted detail never walks candidate tiles or constructs rule quotes.
-    const candidates = includeCells ? ordered([...new Set([...land.claimed, ...cellsWithin(state, town.cell, settlementClaimRadius(town))])]) : [];
+    let candidates: number[] = [], cellWindow: SettlementLandObservation['cellWindow'];
+    if (includeCells && rulesVersion(state) >= 16) {
+      const frontier = claimFrontier(state, town);
+      frontier.candidates ??= mergeOrdered(land.claimed, ordered([...frontier.boundary]));
+      const all = frontier.candidates;
+      if (window && (!Number.isSafeInteger(window.offset) || window.offset < 0 || (window.limit !== undefined && (!Number.isSafeInteger(window.limit) || window.limit < 1)) || (window.cell !== undefined && (!Number.isSafeInteger(window.cell) || window.cell < 0 || window.cell >= state.world.terrain.length)))) throw new Error('Land cell window must use nonnegative safe integer positions and a positive limit.');
+      const limit = Math.min(64, window?.limit ?? 64);
+      const search = window?.cell === undefined ? -1 : lowerBound(all, window.cell);
+      const selected = search >= 0 && all[search] === window?.cell ? search : -1;
+      const offset = selected >= 0 ? Math.floor(selected / limit) * limit : Math.min(Math.max(0, all.length - 1), window?.offset ?? (visit % Math.max(1, Math.ceil(all.length / limit))) * limit);
+      cellWindow = { offset, limit, total: all.length };
+      candidates = all.slice(offset, offset + limit);
+    } else if (includeCells) candidates = ordered([...new Set([...land.claimed, ...cellsWithin(state, town.cell, settlementClaimRadius(town))])]);
     const cells: LandCellObservation[] = candidates.filter(cell => visible.has(cell)).map(cell => {
       const derived = cellReadContext(state, town, cell, context), actual = actualLandCell(state, cell), claimed = actual.settlementId === town.id, workBlocker = workedBlocker(state, town, cell, derived);
-      return { ...actual, cell, terrain: derived.terrain, features: derived.features, claimed, worked: land.worked.includes(cell) || cell === town.cell, canWork: !workBlocker, workBlocker,
+      return { ...actual, ...(rulesVersion(state) >= 16 && state.resources?.deposits[cell] ? { resourceId: state.resources.deposits[cell] } : {}), cell, terrain: derived.terrain, features: derived.features, claimed, worked: land.worked[lowerBound(land.worked, cell)] === cell || cell === town.cell, canWork: !workBlocker, workBlocker,
         yields: cellYields(state, town, cell, derived), claim: claimOption(state, town, cell, derived),
         improvementOptions: owner.improvements.map(item => ({ improvementId: item.id, name: item.name, ...improvementOption(state, town, cell, item.id, derived) })),
         terraformOptions: (owner.ecology?.terraformBiomeIds ?? []).map(biome => ({ biome, name: BIOME_NAMES[biome] ?? String(biome), ...terraformOption(state, town, cell, biome, derived) })),
       };
     });
     const obstruction = context.blocker ?? (!land.work ? 'This settlement has no land-work order.' : null);
-    return { settlementId: town.id, stage: settlementStage(town), isCapital: state.land.capitals[factionId] === town.id, claimRadius: settlementClaimRadius(town), claimCapacity: 1 + 3 * settlementClaimRadius(town) * (settlementClaimRadius(town) + 1), workerCapacity: settlementWorkerCapacity(town), claimed: [...land.claimed], worked: [...land.worked], work: land.work ? { ...land.work } : null, workPaused: paused(state, town), yields: townLandYield(state, town, context), cells, capitalOption: capitalOption(state, town, context), canCancelWork: !obstruction, cancelBlocker: obstruction, borderExpansion: borderExpansionObservation(state, town) };
+    return { settlementId: town.id, stage: settlementStage(town), isCapital: state.land.capitals[factionId] === town.id, claimRadius: rulesVersion(state) >= 16 ? claimFrontier(state, town).radius + 1 : settlementClaimRadius(town), claimCapacity: rulesVersion(state) >= 16 ? null : 1 + 3 * settlementClaimRadius(town) * (settlementClaimRadius(town) + 1), workerCapacity: settlementWorkerCapacity(town, rulesVersion(state)), claimed: [...land.claimed], worked: [...land.worked], work: land.work ? { ...land.work } : null, workPaused: paused(state, town), yields: townLandYield(state, town, context), cells, ...(cellWindow ? { cellWindow } : {}), capitalOption: capitalOption(state, town, context), canCancelWork: !obstruction, cancelBlocker: obstruction, borderExpansion: borderExpansionObservation(state, town) };
 }
 
 export function getLandObservation(state: GameState, factionId: string, visible: { has(cell: number): boolean }, details: LandDetails = 'all'): LandObservation {
@@ -420,24 +517,31 @@ export function getLandObservation(state: GameState, factionId: string, visible:
     }
   }
   const context = landReadContext(state, factionOwner);
-  const settlements = towns.map(town => settlementLandObservation(state, factionId, town, visible, details === 'all' || requested?.has(town.id) === true, context));
+  const settlements = towns.map((town, index) => {
+    // Count this town's visits in the rotating town window. A turn-only page
+    // key aliases when a large realm's revisit period is divisible by page count.
+    const window = typeof details === 'object' && !Array.isArray(details) ? details as LandDetailWindow : undefined;
+    const visit = window && window.limit < towns.length ? Math.floor(window.offset / towns.length) + Number(window.offset % towns.length > index) : state.turn - 1;
+    return settlementLandObservation(state, factionId, town, visible, details === 'all' || requested?.has(town.id) === true, context, undefined, visit);
+  });
   return { settlements, cultivation: state.land.cultivation[factionId] ?? 0, capitalSettlementId: state.land.capitals[factionId] ?? null };
 }
 
 /** Direct owned-town lookup; unrelated towns' candidate tiles are never visited. */
-export function getSettlementLandObservation(state: GameState, factionId: string, settlementId: string): SettlementLandObservation | null {
+export function getSettlementLandObservation(state: GameState, factionId: string, settlementId: string, window?: LandCellWindow): SettlementLandObservation | null {
   const town = state.settlements[settlementId];
   if (!town || town.factionId !== factionId) return null;
   const owner = faction(state, factionId); if (!owner) return null;
   const visible = indexes(state).visible.get(factionId) ?? new Map<number, number>();
-  return settlementLandObservation(state, factionId, town, visible, true, landReadContext(state, owner));
+  return settlementLandObservation(state, factionId, town, visible, true, landReadContext(state, owner), window ?? { offset: 0 });
 }
 
 const requireLand = (condition: unknown, message: string): void => { if (!condition) throw new Error(`Invalid land: ${message}`); };
 const canonicalCells = (cells: number[]): boolean => cells.every((cell, index) => index === 0 || cell > cells[index - 1]!);
 /** Strict current-state references; remembered foreign ownership may be historical. */
 export function validateLand(state: GameState): void {
-  landStateSchema.parse(state.land);
+  if (rulesVersion(state) >= 16) landStateSchema.parse(state.land);
+  else { const { visibilityVersion: _visibilityVersion, ...historical } = state.land; landStateV15Schema.parse(historical); }
   const owners = new Set(state.factions.map(item => item.id)), towns = Object.keys(state.settlements).sort(), landIds = Object.keys(state.land.settlements).sort();
   requireLand(JSON.stringify(towns) === JSON.stringify(landIds), 'every living settlement needs exactly one land registry');
   for (const registry of [state.land.capitals, state.land.cultivation, state.land.known]) requireLand(Object.keys(registry).length === owners.size && Object.keys(registry).every(id => owners.has(id)), 'faction registry differs from campaign owners');
@@ -446,15 +550,15 @@ export function validateLand(state: GameState): void {
   const claims = new Map<number, string>();
   for (const [id, land] of Object.entries(state.land.settlements)) {
     const town = state.settlements[id]!;
-    requireLand(land.borderGrowth < borderGrowthThreshold(land), 'border progress must remain below its current expansion threshold');
+    requireLand(rulesVersion(state) >= 16 || land.borderGrowth < borderGrowthThreshold(land), 'border progress must remain below its current expansion threshold');
     requireLand(canonicalCells(land.claimed) && land.claimed.includes(town.cell), 'claims must be ordered, unique and contain the center');
     for (const cell of land.claimed) {
-      requireLand(validCell(cell) && hexDistance(town.cell, cell, state.world.width) <= 3 && !claims.has(cell), 'invalid, duplicate or distant claim'); claims.set(cell, id);
+      requireLand(validCell(cell) && (rulesVersion(state) >= 16 || hexDistance(town.cell, cell, state.world.width) <= 3) && !claims.has(cell), 'invalid, duplicate or distant claim'); claims.set(cell, id);
     }
     const connected = new Set([town.cell]), frontier = [town.cell], claimed = new Set(land.claimed);
     for (let cursor = 0; cursor < frontier.length; cursor++) for (const cell of neighbors(frontier[cursor]!, state.world.width, state.world.height)) if (claimed.has(cell) && !connected.has(cell)) { connected.add(cell); frontier.push(cell); }
     requireLand(connected.size === land.claimed.length, 'claimed territory is disconnected');
-    requireLand(canonicalCells(land.worked) && land.worked.length <= settlementWorkerCapacity(town) && land.worked.every(cell => cell !== town.cell && claimed.has(cell) && state.world.waterDepth[cell] !== 2), 'invalid or excess worked tiles');
+    requireLand(canonicalCells(land.worked) && land.worked.length <= settlementWorkerCapacity(town, rulesVersion(state)) && land.worked.every(cell => cell !== town.cell && claimed.has(cell) && state.world.waterDepth[cell] !== 2), 'invalid or excess worked tiles');
     for (const [key, improvementId] of Object.entries(land.improvements)) {
       const cell = Number(key);
       requireLand(cell !== town.cell && claimed.has(cell) && siteMatches(state, cell, improvementId), 'invalid improvement site or definition');

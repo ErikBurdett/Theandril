@@ -2,7 +2,7 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type
 import { createRoot } from 'react-dom/client';
 import { CAMPAIGN_PACES, FACTIONS } from '@theandril/content';
 import { RECOMMENDED_FACTION_COUNTS, type MapLayout, type MapSize } from '@theandril/mapgen';
-import type { CampaignPace, GameCommand, MovementQuery, Observation, PeaceAssessment, PeaceTerms } from '@theandril/sim';
+import type { CampaignPace, DevelopmentFocus, GameCommand, MapObservation, MovementQuery, Observation, PeaceAssessment, PeaceTerms } from '@theandril/sim';
 import { WorldRenderer, type ArtStatus, type MapPointerInput, type BattleSceneView } from '@theandril/render';
 import { MovementMapHint, useMapMovement, type MapMovement, type MovementReview } from './movement';
 import type { CampaignInfo, Request, Response, WorkerMetrics } from './protocol';
@@ -17,12 +17,15 @@ import { MapActions, type MapActionTab } from './map-actions';
 import { getMapActionChoices } from './map-action-context';
 import { managementPanes } from './map-management';
 import { CampaignWindow, HudIcon } from './campaign-window';
+import { resolveCampaignSeed } from './campaign-seed';
 import { CharacterRegistry } from './characters';
 import { FactionEncounters } from './diplomacy';
 import { FactionArt, PublicCultures } from './faction-art';
 import { publicAssetUrl } from './asset-url';
 import { FactionSelection } from './land';
 import type { LandQuery, LandQueryResult } from './use-land-query';
+import { sameDevelopmentFocus, type DevelopmentQuery, type DevelopmentQueryResult } from './use-development-query';
+import { FactionOverviewControl } from './faction-overview-control';
 import { unpackCells } from './cell-transfer';
 import { WatchFogRequests, type WatchFogApi } from './watch-fog';
 import { actionCandidates, actionShortcut, loadShortcuts, nextAction, saveShortcuts, shortcutError, SHORTCUT_STORAGE_KEY, type ActionKind, type Direction, type ShortcutBindings } from './next-action';
@@ -88,6 +91,9 @@ function App() {
   // a delayed query error must not become a campaign-command error.
   const landRequestWorkers = useRef(new Map<number, Worker>());
   const [landEpoch, setLandEpoch] = useState(0);
+  const developmentQuery = useRef<{ id: number; focus: DevelopmentFocus; hash: string; worker: Worker; resolve: (value: DevelopmentQueryResult) => void; reject: (error: Error) => void } | undefined>(undefined);
+  const developmentRequestWorkers = useRef(new Map<number, Worker>());
+  const [mapFactions, setMapFactions] = useState<MapObservation['factions']>([]);
   const campaignFault = useRef(false);
   const [recoveryRequired, setRecoveryRequired] = useState(false);
   const movementQueries = useRef(new Map<number, { resolve: (value: MovementQuery) => void; reject: (error: Error) => void }>());
@@ -112,7 +118,7 @@ function App() {
   const [mapMenus, setMapMenus] = useState(true);
   const mapMenusRef = useRef(true); mapMenusRef.current = mapMenus;
   const mapDragStart = useRef<{ x: number; y: number } | undefined>(undefined);
-  const [seed, setSeed] = useState('748291');
+  const [seed, setSeed] = useState('');
   const [size, setSize] = useState<MapSize>('small');
   const [factionCount, setFactionCount] = useState(String(RECOMMENDED_FACTION_COUNTS.small));
   const [factionDefinitionId, setFactionDefinitionId] = useState('faction.ashen_compact');
@@ -164,12 +170,13 @@ function App() {
   const chronicleQuery = useRef<number | undefined>(undefined);
   const openedVictory = useRef('');
   const pauseWatch = () => { watchRunningRef.current = false; setWatchRunning(false); };
-  const invalidateLandQuery = (message: string, reset = false) => {
+  const invalidateDetailQueries = (message: string, reset = false) => {
     landQuery.current?.reject(new Error(message)); landQuery.current = undefined;
+    developmentQuery.current?.reject(new Error(message)); developmentQuery.current = undefined;
     if (reset) setLandEpoch(value => value + 1);
   };
-  const forgetWorkerLandRequests = (instance: Worker | undefined) => {
-    for (const [id, source] of landRequestWorkers.current) if (source === instance) landRequestWorkers.current.delete(id);
+  const forgetWorkerDetailRequests = (instance: Worker | undefined) => {
+    for (const requests of [landRequestWorkers.current, developmentRequestWorkers.current]) for (const [id, source] of requests) if (source === instance) requests.delete(id);
   };
   const openCharacters = (characterId?: string, armyId?: string) => { pauseWatch(); setCharacterContext({ characterId, armyId }); };
   const openChronicles = () => {
@@ -212,6 +219,16 @@ function App() {
     // Keep the same cell picking and fog boundary, then focus for local actions.
     if (renderer.current?.getMetrics().overview) { closeMapActions(); select({ cell }); return; }
     if (campaignRef.current.mode === 'watch' && !fogRequests.current.enabled) { select({ cell }); openPickedActions(cell, input); return; }
+    // Screen-sized strategic badges can overhang neighboring hexes. A direct
+    // badge click inspects that entity; explicit route append still uses the
+    // normal command path, targeting the badge's actual canonical cell.
+    if (input.entityId && view && !input.shiftKey && !movementRef.current?.append) {
+      const army = view.armies.find(item => item.id === input.entityId && item.cell === cell && !item.carrierId && item.factionId === view.factionId);
+      const town = view.settlements.find(item => item.id === input.entityId && item.cell === cell && item.factionId === view.factionId);
+      select(army ? { armyId: army.id, cell } : town ? { settlementId: town.id, cell } : { cell });
+      if (mapMenusRef.current) openMapActions(cell, input.anchor, army?.id ?? town?.id ?? `tile.${cell}`);
+      return;
+    }
     // Own claim summaries are authoritative player knowledge. Do not infer an
     // owner from unseen map art or intercept an army's move/attack/waypoint click.
     if (!current.armyId && view) {
@@ -243,6 +260,7 @@ function App() {
         fogRequests.current.accept(response.fogEnabled, response.mapRevision);
         renderer.current?.update({ ...(response.map ?? response.observation), seed: response.observation.seed, cells }, false, response.mapReset);
         metrics.current = response.metrics; setFogEnabled(response.fogEnabled);
+        setMapFactions((response.map ?? response.observation).factions);
         fogRequests.current.finish(response.id, { enabled: response.fogEnabled, hash: response.hash });
         setError(false); setFeedback(response.message);
       } catch (cause) {
@@ -258,6 +276,17 @@ function App() {
       setFogPending(fogRequests.current.size > 0);
       return;
     }
+    const development = developmentQuery.current;
+    if (response.type === 'developmentQuery') metrics.current = response.metrics;
+    if (developmentRequestWorkers.current.has(response.id) && (response.type === 'developmentQuery' || response.type === 'error')) {
+      developmentRequestWorkers.current.delete(response.id);
+      if (development?.id !== response.id) return;
+      developmentQuery.current = undefined;
+      if (response.type === 'developmentQuery' && response.hash === development.hash && response.hash === hash.current && sameDevelopmentFocus(response.focus, development.focus) && development.worker === worker.current) development.resolve(response);
+      else development.reject(new Error(response.type === 'error' ? response.message : 'The campaign changed. Review development again for current costs.'));
+      return;
+    }
+    if (response.type === 'developmentQuery') return;
     const land = landQuery.current;
     if (response.type === 'landQuery') metrics.current = response.metrics;
     if (landRequestWorkers.current.has(response.id) && (response.type === 'landQuery' || response.type === 'error')) {
@@ -297,7 +326,7 @@ function App() {
     if (response.type === 'error') {
       if (pendingFound.current?.requestId === response.id) pendingFound.current = undefined;
       pauseWatch();
-      if (previousWorker.current) { forgetWorkerLandRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; }
+      if (previousWorker.current) { forgetWorkerDetailRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; }
       setError(true); setFeedback(response.message); return;
     }
     setError(false);
@@ -307,14 +336,14 @@ function App() {
       try { cells = unpackCells(response.cells); }
       catch (cause) {
         campaignFault.current = true; setRecoveryRequired(true); pauseWatch();
-        invalidateLandQuery('Map transfer could not be read. Restore a saved campaign to review land.', true);
+        invalidateDetailQueries('Map transfer could not be read. Restore a saved campaign to review land.', true);
         setError(true); setFeedback(`The map update could not be read: ${String(cause)}. Gameplay is paused; load, import or begin a campaign to recover.`);
         return;
       }
       if (campaignFault.current && !response.reset) return;
       campaignFault.current = false; setRecoveryRequired(false);
-      if (response.reset || response.hash !== hash.current) invalidateLandQuery('The campaign changed. Review current land details.', response.reset);
-      forgetWorkerLandRequests(previousWorker.current); previousWorker.current?.terminate(); previousWorker.current = undefined;
+      if (response.reset || response.hash !== hash.current) invalidateDetailQueries('The campaign changed. Review current land details.', response.reset);
+      forgetWorkerDetailRequests(previousWorker.current); previousWorker.current?.terminate(); previousWorker.current = undefined;
       hash.current = response.hash; metrics.current = response.metrics;
       campaignRef.current = response.campaign; setCampaign(response.campaign);
       if (response.reset) {
@@ -334,6 +363,7 @@ function App() {
     renderer.current ??= new WorldRenderer(setArtStatus, publicAssetUrl);
       if (!fogRequests.current.accept(response.fogEnabled, response.mapRevision)) return;
       setFogEnabled(response.fogEnabled);
+      setMapFactions((response.map ?? response.observation).factions);
       renderer.current.update({ ...(response.map ?? response.observation), seed: response.observation.seed, cells }, response.reset, response.mapReset);
       // React receives only the empire read model; explored cells stay in the renderer.
       const view = { ...response.observation, cells: [] };
@@ -379,12 +409,12 @@ function App() {
   };
   const startWorker = () => {
     const instance = new Worker(new URL('./simulation.worker.ts', import.meta.url), { type: 'module' });
-    instance.onmessage = event => { if (worker.current === instance) receive(event); else landRequestWorkers.current.delete(event.data.id); };
+    instance.onmessage = event => { if (worker.current === instance) receive(event); else { landRequestWorkers.current.delete(event.data.id); developmentRequestWorkers.current.delete(event.data.id); } };
     instance.onerror = event => {
       fogRequests.current.reset('The campaign worker stopped. Restore a campaign before changing fog.'); setFogPending(false);
       pendingFound.current = undefined;
-      invalidateLandQuery('The campaign worker stopped. Restore a saved campaign to review land.', true);
-      forgetWorkerLandRequests(instance);
+      invalidateDetailQueries('The campaign worker stopped. Restore a saved campaign to review land.', true);
+      forgetWorkerDetailRequests(instance);
       instance.terminate(); pauseWatch();
       for (const query of movementQueries.current.values()) query.reject(new Error('The campaign worker stopped. Restore a saved campaign to review routes.'));
       movementQueries.current.clear();
@@ -441,15 +471,25 @@ function App() {
     try { instance.postMessage({ id, type: 'movementQuery', armyId, target, append }); }
     catch (error) { movementQueries.current.delete(id); reject(error instanceof Error ? error : new Error(String(error))); }
   });
-  const reviewLand: LandQuery = useCallback(settlementId => new Promise((resolve, reject) => {
+  const reviewLand: LandQuery = useCallback((settlementId, window) => new Promise((resolve, reject) => {
     const instance = worker.current;
     if (!instance || !observationRef.current || campaignFault.current) { reject(new Error('Load a campaign before reviewing land details.')); return; }
     landQuery.current?.reject(new Error('Another settlement was selected.'));
     const id = ++sequence.current;
     landQuery.current = { id, settlementId, hash: hash.current, worker: instance, resolve, reject };
     landRequestWorkers.current.set(id, instance);
-    try { instance.postMessage({ id, type: 'landQuery', settlementId }); }
+    try { instance.postMessage({ id, type: 'landQuery', settlementId, ...(window ? { window } : {}) }); }
     catch (cause) { landRequestWorkers.current.delete(id); landQuery.current = undefined; reject(cause instanceof Error ? cause : new Error(String(cause))); }
+  }), []);
+  const reviewDevelopment: DevelopmentQuery = useCallback(focus => new Promise((resolve, reject) => {
+    const instance = worker.current;
+    if (!instance || !observationRef.current || campaignFault.current) { reject(new Error('Load a campaign before reviewing development.')); return; }
+    developmentQuery.current?.reject(new Error('Another development subject was selected.'));
+    const id = ++sequence.current;
+    developmentQuery.current = { id, focus, hash: hash.current, worker: instance, resolve, reject };
+    developmentRequestWorkers.current.set(id, instance);
+    try { instance.postMessage({ id, type: 'developmentQuery', focus }); }
+    catch (cause) { developmentRequestWorkers.current.delete(id); developmentQuery.current = undefined; reject(cause instanceof Error ? cause : new Error(String(cause))); }
   }), []);
   const reviewPeace = (targetFactionId: string, terms: PeaceTerms): Promise<PeaceAssessment> => new Promise((resolve, reject) => {
     const instance = worker.current;
@@ -462,11 +502,12 @@ function App() {
   const endTurn = () => { if (observationRef.current && !observationRef.current.victory && campaignRef.current.mode !== 'watch' && !observationRef.current.battle && !observationRef.current.pendingCapture && !busy) command({ type: 'endTurn', factionId: observationRef.current.factionId }); };
   const begin = (event: FormEvent) => {
     event.preventDefault();
-    const value = Number(seed);
-    if (!Number.isSafeInteger(value) || value < 0 || value > 4294967295) { setError(true); setFeedback('Use a whole-number world seed between 0 and 4294967295.'); return; }
     const count = Number(factionCount);
     if (!Number.isInteger(count) || count < 2 || count > 48) { setError(true); setFeedback('Choose between 2 and 48 factions for this campaign.'); return; }
-    invalidateLandQuery('Review land again after returning to this campaign.', true);
+    let value: number;
+    try { value = resolveCampaignSeed(seed, observationRef.current?.seed); }
+    catch (cause) { setError(true); setFeedback(cause instanceof Error ? cause.message : 'Could not choose a world seed. Try again.'); return; }
+    invalidateDetailQueries('Review land again after returning to this campaign.', true);
     const priorFog = { enabled: fogRequests.current.enabled, revision: fogRequests.current.revision };
     fogRequests.current.reset('A new campaign is starting. Retry its spectator controls.');
     // The prior worker/map may be restored by Cancel generation. Keep its
@@ -479,9 +520,9 @@ function App() {
     if (worker.current) { previousWorker.current = worker.current; worker.current = undefined; }
     setGenerating(true); send({ type: 'new', seed: value, size, mode: newMode, pace, factionCount: count, factionDefinitionId, layout });
   };
-  const cancel = () => { forgetWorkerLandRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; invalidateLandQuery('World generation was cancelled. Review current land details.', true); setBusy(false); setGenerating(false); setFeedback('World generation cancelled.'); };
+  const cancel = () => { forgetWorkerDetailRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; invalidateDetailQueries('World generation was cancelled. Review current land details.', true); setBusy(false); setGenerating(false); setFeedback('World generation cancelled.'); };
 
-  useEffect(() => () => { landQuery.current?.reject(new Error('The campaign view closed.')); landQuery.current = undefined; landRequestWorkers.current.clear(); worker.current?.terminate(); previousWorker.current?.terminate(); renderer.current?.destroy(); }, []);
+  useEffect(() => () => { landQuery.current?.reject(new Error('The campaign view closed.')); landQuery.current = undefined; landRequestWorkers.current.clear(); developmentQuery.current?.reject(new Error('The campaign view closed.')); developmentQuery.current = undefined; developmentRequestWorkers.current.clear(); worker.current?.terminate(); previousWorker.current?.terminate(); renderer.current?.destroy(); }, []);
   const hasCampaign = Boolean(observation);
   const victoryKey = observation?.victory ? `${observation.seed}:${hash.current}` : '';
   useEffect(() => {
@@ -525,6 +566,7 @@ function App() {
       getCellScreenPoint: cell => renderer.current?.projectCell(cell),
       getMovement: () => { const movement = movementRef.current; return movement ? { reachable: movement.reachable, preview: movement.getHover() ?? movement.candidate, route: movement.route } : undefined; },
       getArtDiagnostics: () => renderer.current?.getArtDiagnostics(),
+      getWorldOverview: () => renderer.current?.getWorldOverview(),
       getBattleDiagnostics: () => renderer.current?.getBattleDiagnostics(),
       getTerrainArt: cell => renderer.current?.getTerrainArt(cell),
       getStateHash: () => hash.current,
@@ -636,14 +678,15 @@ function App() {
       <span className="archive-note">{campaign.coverage === 'complete' ? 'Recording the full campaign' : 'Partial archive · earlier history unavailable'}</span>
       {observation.victory && <button onClick={openChronicles}>Campaign chronicles</button>}
     </nav>}
-    <details ref={campaignOptions} className="campaign-options" data-testid="campaign-menu"><summary>Campaign & settings</summary><div className="options-content">{observation && <><button disabled={busy} onClick={() => send({ type: 'save' })}>Save campaign</button><button disabled={busy} onClick={() => send({ type: 'export' })}>Export campaign</button>{persistence}<button disabled={busy} onClick={() => { pauseWatch(); setShowSetup(true); }}>New campaign</button></>}<label className="map-menu-setting"><input type="checkbox" checked={mapMenus} onChange={event => { setMapMenus(event.target.checked); closeMapActions(); }}/>Map click menus</label><p className="field-help">Click an army, town, or tile for local actions. Turn this off to use full orders from the command tray; Open map actions remains available.</p><label>Text scale<select value={textScale} onChange={event => setTextScale(event.target.value)}><option value="1">100%</option><option value="1.15">115%</option><option value="1.3">130%</option></select></label><label>End turn shortcut<input value={turnKey} maxLength={1} onChange={event => changeShortcut('turn', event.target.value)}/></label><label>Next army shortcut<input value={armyKey} maxLength={1} onChange={event => changeShortcut('army', event.target.value)}/></label><label>Next settlement shortcut<input value={settlementKey} maxLength={1} onChange={event => changeShortcut('settlement', event.target.value)}/></label>{bindingError && <p role="alert">{bindingError}</p>}</div></details>
+    <details ref={campaignOptions} className="campaign-options" data-testid="campaign-menu"><summary>Campaign & settings</summary><div className="options-content">{observation && <><button disabled={busy} onClick={() => send({ type: 'save' })}>Save campaign</button><button disabled={busy} onClick={() => send({ type: 'export' })}>Export campaign</button>{persistence}<button disabled={busy} onClick={() => { pauseWatch(); setSeed(''); setShowSetup(true); }}>New campaign</button></>}<label className="map-menu-setting"><input type="checkbox" checked={mapMenus} onChange={event => { setMapMenus(event.target.checked); closeMapActions(); }}/>Map click menus</label><p className="field-help">Click an army, town, or tile for local actions. Turn this off to use full orders from the command tray; Open map actions remains available.</p><label>Text scale<select value={textScale} onChange={event => setTextScale(event.target.value)}><option value="1">100%</option><option value="1.15">115%</option><option value="1.3">130%</option></select></label><label>End turn shortcut<input value={turnKey} maxLength={1} onChange={event => changeShortcut('turn', event.target.value)}/></label><label>Next army shortcut<input value={armyKey} maxLength={1} onChange={event => changeShortcut('army', event.target.value)}/></label><label>Next settlement shortcut<input value={settlementKey} maxLength={1} onChange={event => changeShortcut('settlement', event.target.value)}/></label>{bindingError && <p role="alert">{bindingError}</p>}</div></details>
     </div>
     {!observation || showSetup ? <main className="landing">
       <div className="opening"><span className="eyebrow">Keep the hearth. Keep the oath.</span><h2>From the ashes,<br/>a new dominion.</h2><p>The old roads end in wilderness. Lead your chosen people beyond their last milestones: chart the forests, raise a settlement, and give your people a future.</p><div className="opening-rule"/><p className="subtle">Found a hearth. Work its land.<br/>Send wayfinders into the unknown.</p></div>
       <section className="setup panel"><span className="eyebrow">A chronicle begins</span><h2>Establish your campaign</h2><div className="faction-card"><FactionArt contentId="ui.crest" definitionId={factionDefinitionId} label="Selected culture crest" decorative/><div><h3>{FACTIONS.find(faction => faction.id === factionDefinitionId)?.name}</h3><p>Your chosen player seat</p></div></div>
         <form onSubmit={begin}>
           <FactionSelection value={factionDefinitionId} onChange={setFactionDefinitionId}/>
-          <label>World seed<input name="seed" inputMode="numeric" value={seed} onChange={event => setSeed(event.target.value)} required/></label>
+          <label>World seed<input name="seed" inputMode="numeric" value={seed} placeholder="Random for each new campaign" aria-describedby="world-seed-help" onChange={event => setSeed(event.target.value)}/></label>
+          <p id="world-seed-help" className="field-help">Leave blank for a fresh random world. Enter a seed to revisit a world; its seed is shown above the map.</p>
           <label>World size<select value={size} onChange={event => changeWorldSize(event.target.value as MapSize)}><option value="tiny">Tiny · 1,536 hexes · quick campaign</option><option value="small">Small · 40,960 hexes</option><option value="standard">Standard · 98,304 hexes</option><option value="huge">Huge · 196,608 hexes</option><option value="legendary">Legendary · 307,200 hexes</option></select></label>
           <label>Faction count<input type="number" min={2} max={48} step={1} required value={factionCount} aria-describedby="faction-density-help" onChange={event => setFactionCount(event.target.value)}/></label>
           <label>World layout<select value={layout} onChange={event => setLayout(event.target.value as Exclude<MapLayout, 'legacy'>)}><option value="continents">Continents · broad landmasses</option><option value="islands">Islands · separated shores</option><option value="archipelago">Archipelago · scattered islands</option></select></label>
@@ -667,7 +710,7 @@ function App() {
         <button aria-haspopup="dialog" aria-label="Realm affairs" onClick={() => openWindow('affairs')}><HudIcon symbol="diplomacy"/><span>Diplomacy{observation.diplomacy.offers.length > 0 && <b className="hud-alert"> {observation.diplomacy.offers.length}</b>}</span></button>
         <button aria-haspopup="dialog" onClick={() => openWindow('journal')}><HudIcon symbol="journal"/><span>Campaign journal</span></button>
         <button onClick={worldOverview}><HudIcon symbol="world"/><span>World overview</span></button>
-      </nav><div className="map-controls"><button aria-label="Zoom in" onClick={() => renderer.current?.zoom(1.25)}>+</button><button aria-label="Zoom out" onClick={() => renderer.current?.zoom(0.8)}>−</button><button onClick={showMap}>Focus selection</button><button disabled={battleActive || selection.cell === undefined} onClick={() => { if (selection.cell !== undefined) openMapActions(selection.cell); }}>Open map actions</button><button aria-label="Map guide" title="Map guide" aria-haspopup="dialog" onClick={() => openWindow('guide')}>?</button></div><div className="map-legend"><span>⌂ Settlement</span><span title="One figure: 1 formation; two: 2–5; three: 6+. A stack shows the selected army, otherwise its largest army. Exact composition is in the army inspector.">△ Army size: 1 / 2–5 / 6+</span><span title="Co-located armies share one representative group; fleets group separately and embarked troops are not drawn. Click a hex repeatedly to cycle your forces.">×N armies on hex</span><span>◆ Your realm</span><span>Dim terrain: explored</span>{artStatus && <span data-testid="art-runtime-status" title={[artStatus.message, ...artStatus.warnings].join(" ")}>Art: {artStatus.state === 'loading' ? 'loading' : artStatus.state === 'fallback' ? 'procedural fallback' : artStatus.warnings.length ? 'partial pixel pack' : 'approved pixel pack'}</span>}</div><BattlefieldPanel key={registryEpoch} view={observation} transfer={battleTransfer} busy={controlLocked} error={error} replay={battleReview} suspended={showSetup || progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen || Boolean(managementWindow) || generating} issue={command} setScene={setBattleScene} keepReview={() => setBattleReview(true)} closeReview={() => setBattleReview(false)}/><CapturePanel view={observation} busy={controlLocked} issue={command}/></section>
+      </nav><div className="map-controls"><button aria-label="Zoom in" onClick={() => renderer.current?.zoom(1.25)}>+</button><button aria-label="Zoom out" onClick={() => renderer.current?.zoom(0.8)}>−</button><button onClick={showMap}>Focus selection</button><button disabled={battleActive || selection.cell === undefined} onClick={() => { if (selection.cell !== undefined) openMapActions(selection.cell); }}>Open map actions</button><button aria-label="Map guide" title="Map guide" aria-haspopup="dialog" onClick={() => openWindow('guide')}>?</button></div><FactionOverviewControl key={registryEpoch} hidden={battleActive} factions={mapFactions} onChange={(mode, ids) => renderer.current?.setWorldOverview(mode, ids)} onFit={() => renderer.current?.fitWorld()}/><div className="map-legend"><span>⌂ Settlement</span><span title="One figure: 1 formation; two: 2–5; three: 6+. A stack shows the selected army, otherwise its largest army. Exact composition is in the army inspector.">△ Army size: 1 / 2–5 / 6+</span><span title="Co-located armies share one representative group; fleets group separately and embarked troops are not drawn. Click a hex repeatedly to cycle your forces.">×N armies on hex</span><span>◆ Your realm</span><span>Dim terrain: explored</span>{artStatus && <span data-testid="art-runtime-status" title={[artStatus.message, ...artStatus.warnings].join(" ")}>Art: {artStatus.state === 'loading' ? 'loading' : artStatus.state === 'fallback' ? 'procedural fallback' : artStatus.warnings.length ? 'partial pixel pack' : 'approved pixel pack'}</span>}</div><BattlefieldPanel key={registryEpoch} view={observation} transfer={battleTransfer} busy={controlLocked} error={error} replay={battleReview} suspended={showSetup || progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen || Boolean(managementWindow) || generating} issue={command} setScene={setBattleScene} keepReview={() => setBattleReview(true)} closeReview={() => setBattleReview(false)}/><CapturePanel view={observation} busy={controlLocked} issue={command}/></section>
     </main>}
     {observation && popupActive && mapPopup && popupChoice && <MapActions
       sessionKey={`${registryEpoch}:${mapPopup.serial}`} anchor={mapPopup.anchor} presentation={army ? 'compact' : 'default'} manageLabel="Open full orders"
@@ -700,7 +743,7 @@ function App() {
       {observation && <div className="hud-end-turn">{(observation.battle || observation.pendingCapture) && <p id="battle-blocker" className="battle-blocker">{observation.pendingCapture ? 'Resolve the settlement capture before ending the turn.' : 'Resolve the pending battle before ending the turn.'}</p>}<div className="turn"><small>AGE OF FRACTURE</small><strong data-testid="turn-counter">Turn {observation.turn}</strong></div><button className="primary end-turn" aria-label="End turn" aria-describedby={observation.battle || observation.pendingCapture ? 'battle-blocker' : undefined} disabled={ordersBusy || showSetup} onClick={endTurn}>End turn <kbd>{turnKey.toUpperCase()}</kbd></button></div>}
       <div className={'feedback ' + (error ? 'error' : '')} data-testid="feedback" role={error ? 'alert' : 'status'} aria-live="polite"><span className="status-mark" aria-hidden="true">{error ? '!' : '◆'}</span>{busy && !generating ? 'Resolving… ' : ''}{feedback}</div>
     </footer>
-    {observation && progressionOpen && <CampaignProgression view={observation} busy={controlLocked} issue={command} locate={cell => select({ cell }, true)} close={() => setProgressionOpen(false)}/>}
+    {observation && progressionOpen && <CampaignProgression view={observation} developmentQuery={reviewDevelopment} stateHash={hash.current} queryEpoch={landEpoch} queryEnabled={!showSetup && !generating && !recoveryRequired} busy={controlLocked} issue={command} locate={cell => select({ cell }, true)} close={() => setProgressionOpen(false)}/>}
     {observation && characterContext && <CharacterRegistry view={observation} busy={controlLocked} working={busy} initialCharacterId={characterContext.characterId} initialArmyId={characterContext.armyId} feedback={feedback} error={error} issue={command} close={() => setCharacterContext(undefined)} locate={character => { mapFocusAfterWindow.current = true; closeMapActions(); setCharacterContext(undefined); setManagementWindow(undefined); const location = character.location; if (character.cell !== null) { setSearch(''); setForceFilter('all'); if (location) setRegistry(location.kind === 'army' ? 'armies' : 'settlements'); select({ cell: character.cell, ...(location?.kind === 'army' ? { armyId: location.armyId } : location?.kind === 'settlement' ? { settlementId: location.settlementId } : {}) }, true); } }}/>}
     {import.meta.env.DEV && <div className="art-dev-launch"><button onClick={() => { pauseWatch(); setArtLabOpen(true); }}>Art Lab</button><small>Development asset inspector</small></div>}
     {DevelopmentArtLab && artLabOpen && <Suspense fallback={<p role="status">Opening the development art inspector…</p>}><DevelopmentArtLab close={() => setArtLabOpen(false)}/></Suspense>}
@@ -713,6 +756,7 @@ declare global {
     __THEANDRIL__?: {
       getCellScreenPoint(cell: number): ReturnType<WorldRenderer['projectCell']>;
       getArtDiagnostics(): ReturnType<WorldRenderer['getArtDiagnostics']> | undefined;
+      getWorldOverview(): ReturnType<WorldRenderer['getWorldOverview']> | undefined;
       getBattleDiagnostics(): ReturnType<WorldRenderer['getBattleDiagnostics']> | undefined;
       getTerrainArt(cell: number): ReturnType<WorldRenderer['getTerrainArt']>;
       getMovement(): { reachable: MovementQuery['reachable']; preview?: MovementQuery['preview']; route?: Observation['routes'][number] } | undefined;

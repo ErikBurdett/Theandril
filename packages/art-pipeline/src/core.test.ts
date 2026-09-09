@@ -30,6 +30,18 @@ function approved(item = fixture()): typeof item {
 const options = { id: 'foundation', pageSize: 1024 as const, imageUrl: '/art/foundation.png', jsonUrl: '/art/foundation.json', palette };
 
 describe('lazy battlefield atlas partition', () => {
+  it('adds researched works on a 1 MiB page without changing registered foundation pixels or frames', () => {
+    const world = approved(fixture('unit.world')), work = approved(fixture('improvement.polder'));
+    const original = buildAtlas([world], options), combined = buildSceneAtlases([work, world], options);
+    expect(combined.pages[0]).toEqual(original);
+    expect(combined.catalog.atlases.map(page => page.id)).toEqual(['foundation', 'map-works']);
+    expect(combined.catalog.atlases[1]).toMatchObject({ width: 512, height: 512, imageUrl: '/art/map-works.png' });
+    expect(combined.catalog.assets.find(asset => asset.id === work.manifest.id)?.atlasId).toBe('map-works');
+    expect(buildSceneAtlases([world, work], options)).toEqual(combined);
+    expect(() => buildSceneAtlases([world, fixture('improvement.polder')], options)).toThrow(/approval/);
+    work.frames[0]!.image.data.fill(0);
+    expect(() => buildSceneAtlases([world, work], options)).toThrow(/changed/);
+  });
   it('keeps the world page byte-identical while adding a separately bounded combat page', () => {
     const world = approved(fixture('unit.world')), effect = approved(fixture('effect.battle_melee'));
     const original = buildAtlas([world], options), combined = buildSceneAtlases([effect, world], options);
@@ -45,6 +57,26 @@ describe('lazy battlefield atlas partition', () => {
     expect(() => buildSceneAtlases([world, fixture('effect.battle_ward')], options)).toThrow(/approval/);
     const changed = approved(fixture('character.waykeeper')); changed.frames[0]!.image.data.fill(0);
     expect(() => buildSceneAtlases([world, changed], options)).toThrow(/changed/);
+  });
+  it('keeps exact native foot and mounted frames on independent deferred pages without shifting foundation', () => {
+    const native = (id: string, size: number) => {
+      const item = fixture(id);
+      item.manifest.nativeResolution = { width: size, height: size };
+      item.manifest.frames.forEach(frame => { frame.pivot = [size / 2, size - 8]; });
+      item.frames.forEach((frame, index) => { frame.image = image(size, size, 2, index % 2 === 1); });
+      return approved(item);
+    };
+    const world = approved(fixture('unit.world')), foot = native('battle.unit.guard', 64), horse = native('battle.unit.cavalry', 96);
+    const combined = buildSceneAtlases([horse, world, foot], options);
+    expect(combined.pages[0]).toEqual(buildAtlas([world], options));
+    expect(combined.catalog.atlases.map(page => page.id)).toEqual(['foundation', 'battle-foot', 'battle-mounted']);
+    for (const [item, pageId] of [[foot, 'battle-foot'], [horse, 'battle-mounted']] as const) {
+      const page = combined.pages.find(page => page.catalog.atlases[0]!.id === pageId)!;
+      expect(page.catalog.atlases[0]).toMatchObject({ width: 2048, height: 2048 });
+      const decoded = decodePng(page.png);
+      for (const frame of item.frames) expect(cropImage(decoded, page.json.frames[frame.id]!.frame)).toEqual(frame.image);
+      expect(page.catalog.assets[0]!.pivot).toEqual(item.manifest.frames[0]!.pivot);
+    }
   });
 });
 function chunk(type: string, payload: Uint8Array): Buffer {

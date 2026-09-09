@@ -2,16 +2,16 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BLENDER_BATTLE_IDS, importBlenderBattleSource } from '../packages/art-pipeline/src/blender-source';
+import { BLENDER_BATTLE_IDS, BATTLE_UNIT_IDS, importBlenderBattleSource, importBlenderUnitSource } from '../packages/art-pipeline/src/blender-source';
 import { safeAssetPath, sha256 } from '../packages/art-pipeline/src/provenance';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2), id = args[0], version = Number(args[1] ?? 1);
 const replaceFlags = args.filter(arg => arg.startsWith('--replace-brief-sha='));
 const previousHash = replaceFlags[0]?.split('=')[1];
-if (!id || !BLENDER_BATTLE_IDS.some(value => value === id) || args.slice(2).some(arg => arg !== '--prepare' && arg !== '--activate' && !/^--replace-brief-sha=[a-f0-9]{64}$/.test(arg))
+if (!id || ![...BLENDER_BATTLE_IDS, ...BATTLE_UNIT_IDS].some(value => value === id) || args.slice(2).some(arg => arg !== '--prepare' && arg !== '--activate' && !/^--replace-brief-sha=[a-f0-9]{64}$/.test(arg))
   || args.includes('--activate') && !args.includes('--prepare') || replaceFlags.length > 1 || previousHash && !args.includes('--activate')) throw new Error('Usage: tsx scripts/art-blender-battle.ts <asset-id> <version> [--prepare [--activate [--replace-brief-sha=<exact-old-brief-sha256>]]]');
-const result = await importBlenderBattleSource(root, id, version);
+const result = await (BATTLE_UNIT_IDS.includes(id) ? importBlenderUnitSource : importBlenderBattleSource)(root, id, version);
 const briefPath = `assets/art/source/blender-imports/${id}-v${version}-${result.inputHash}/brief.json`;
 const bytes = Buffer.from(JSON.stringify(result.brief, null, 2) + '\n');
 const paths = [briefPath, ...(args.includes('--activate') ? [`assets/art/briefs/${id}.json`] : [])];

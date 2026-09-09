@@ -1,4 +1,4 @@
-import { BUILDINGS, TECHNOLOGIES, UNITS } from '@theandril/content';
+import { BUILDINGS, TECHNOLOGIES, UNITS, unitsForRules } from '@theandril/content';
 import { isPassable, neighbors, TERRAIN, WATER_DEPTH } from '@theandril/mapgen';
 import type { Army, CommandResult, DomainEvent, GameState, Settlement } from './types';
 import { armySight } from './army-composition';
@@ -144,6 +144,7 @@ export function getNavalArmyView(state: GameState, army: Army): NavalArmyView {
 }
 export function productionRequirementBlocker(state: GameState, town: Settlement, itemId: string): string | null {
   const definition = buildings.get(itemId) ?? units.get(itemId); if (!definition) return 'Unknown construction or recruitment item.';
+  if ((units.get(itemId)?.introducedInRules ?? 4) > rulesVersion(state)) return 'Unknown construction or recruitment item.';
   if (rulesVersion(state) < 8) return itemId === 'building.harbor' || units.get(itemId)?.movementDomain === 'naval' ? 'Unknown construction or recruitment item.' : null;
   const technologies = state.progression[town.factionId]?.technologies ?? [];
   const missing = definition.requiredTechnologies?.find(id => !technologies.includes(id));
@@ -165,7 +166,7 @@ export function navalLaunchCell(state: GameState, town: Settlement, unitId: stri
 }
 export function observeProductionOptions(state: GameState, factionId: string): ProductionOption[] {
   const treasury = state.factions.find(item => item.id === factionId)?.treasury ?? 0;
-  return Object.values(state.settlements).filter(town => town.factionId === factionId).sort(order).flatMap(town => [...BUILDINGS, ...UNITS].map(item => {
+  return Object.values(state.settlements).filter(town => town.factionId === factionId).sort(order).flatMap(town => [...BUILDINGS, ...unitsForRules(rulesVersion(state))].map(item => {
     const building = buildings.get(item.id);
     const blocker = decisionBlocker(state) ?? productionRequirementBlocker(state, town, item.id)
       ?? (town.queue.length >= 5 ? 'The production queue is full (five items).' : null)

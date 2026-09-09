@@ -55,7 +55,8 @@ describe('immutable real schema-6 mixed-army archives', () => {
     const archive = createArchive(game, { mode: 'player', coverage: 'from-save' });
     for (const record of captured.battle.archive.records.slice(after)) {
       const command = record.command as Parameters<typeof applyRecordedCommand>[2];
-      expect(applyRecordedCommand(game, archive, command)).toMatchObject({ ok: record.ok, events: record.events });
+      const actual = applyRecordedCommand(game, archive, command);
+      expect({ ...actual, events: actual.events.filter(event => event.type !== 'formation_experience') }).toMatchObject({ ok: record.ok, events: record.events });
       expect(stateHash(deserializeGame(serializeGame(game)))).toBe(stateHash(game));
     }
     const report = game.battleReports.at(-1)!;
@@ -63,6 +64,9 @@ describe('immutable real schema-6 mixed-army archives', () => {
     expect(battleReportForVersion(report, 6)).toEqual(captured.battle.archive.records.find(record => record.battles.length)!.battles[0]);
     expect(archive.records.every(record => record.rulesVersion === SAVE_VERSION)).toBe(true);
     expect(serializeGame(replayArchive(parseArchive(archive, game)))).toBe(serializeGame(game));
+    const earned = Object.entries(game.development.formations);
+    expect(earned.length).toBeGreaterThan(0);
+    expect(earned.every(([id, development]) => development.experience > 0 && Object.values(game.armies).some(army => army.formations.some(formation => formation.id === id)))).toBe(true);
     const historical = deserializeGame(captured.battle.finalSave);
     expect(game.armies).toEqual(historical.armies);
     // A modern end turn uses developed land yields; it is not an old economic seal.

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "building.workshop",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "building.workshop"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original complete Theandril strategy-map civic district prop. Genuinely transparent PNG background, entire silhouette inside comfortable 15% margins, not a sheet, no other asset. Grounded weathered medieval dark fantasy, crisp coarse square pixel-art clusters at logical 64×64 detail, broad connected material planes and clear silhouette, restrained selective dark outline. Three-quarter southeast isometric view, upper-left diffuse highlights, old pale stone, peat-dark timber, soot recesses, muted sage moss, rust and dull brass accents. Compact complete cluster fits a 56×44 logical-pixel footprint, no surrounding full ground tile or hex border. No text, labels, letters, banners with writing, people, landscape, checkerboard, modern technology, glossy gradients, soft shadows, haze, detached pieces, montage or game UI. CINDER WORKSHOP: compact squat stone-and-timber smith workshop, steep patched dark slate roof on one side and prominent heavy square masonry chimney on the other. Open furnace doorway with a small contained ember-orange interior, one broad anvil form outside and a tidy attached timber workbench. Blackened stone around the forge, practical iron braces. Strong industrial silhouette, no smoke plume.",
+  "frames": [
+    {
+      "id": "building.workshop/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/building.workshop/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "729e65f2fff6fd3879e531b629c40994b5fdfd7fb33a2d935ca85f137538da5d",
+    "sourceRefs": [
+      "assets/art/source/hearth-civic/building.workshop-v1.png",
+      "assets/art/source/hearth-civic/building.workshop-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T21:40:50.918Z",
+  "referenceHashes": [
+    "b4aba1ca946fb096f50c2ae53d2fd75a7c613ac626defa180dd8e131788d1537",
+    "06998caf84eb0783cbb14e2fac56aaf4938c2ee114d83af2f81df165ebb161c6"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-hearth-civic-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "1aaf4907af3e6819bc43fe883e3816625585b79be1182fb4a509c47e72067157",
+      "inputHash": "b4aba1ca946fb096f50c2ae53d2fd75a7c613ac626defa180dd8e131788d1537",
+      "outputHash": "d20be272af9a9f98b59f816d27608939bfb8404c2edeef4213be407988bf48c7"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

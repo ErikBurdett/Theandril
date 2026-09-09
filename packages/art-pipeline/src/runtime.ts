@@ -1,5 +1,6 @@
 import { z } from 'zod';
 export * from './faction-art';
+export * from './presentation-role';
 
 export const assetIdSchema = z.string().min(1).max(120).regex(/^[a-z][a-z0-9]*(?:[._/-][a-z0-9]+)*$/);
 export const hashSchema = z.string().regex(/^[a-f0-9]{64}$/);

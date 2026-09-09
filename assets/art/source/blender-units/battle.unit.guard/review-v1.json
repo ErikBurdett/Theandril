@@ -1,0 +1,27 @@
+{
+  "reviewed": "2026-09-08",
+  "decision": "revise calibration; no production approval",
+  "reviewer": "Codex hearth art agent",
+  "scope": "Inspected actual raw256px render and all four native/nearest4x east idle frames on dark, linen and olive backgrounds. Source-only pilot, no runtime acceptance.",
+  "findings": [
+    "Adult anatomy, weighted limbs, repaired shield and sword are visible.",
+    "The60-degree profile overlaps the legs and shield into a narrow silhouette.",
+    "Steel values are too dark for the existing rich pixel-art family.",
+    "Idle poses0and2 repeat; refine independently articulated head/hand phase."
+  ],
+  "next": "Broaden camera-relative facing to45degrees, increase physical iron material values, articulate head and hand with a second phase; render complete pilot before accepting.",
+  "evidence": [
+    {
+      "path": "v1/raw/idle-e-000.png",
+      "sha256": "731e43505b0fe2ddf6c90508ed2f8ad8a03bda4ff35435abd603d2e1aeb7513f"
+    },
+    {
+      "path": "v1/review-idle-e-1x.png",
+      "sha256": "ae6448b021e8a904758b7008755aa7972f0be1142fa65470b3d370d3283fc512"
+    },
+    {
+      "path": "v1/review-idle-e-4x.png",
+      "sha256": "8361b2c344809f819c5630f6151cd17d919cd040e04f96f233d585e3150de1ef"
+    }
+  ]
+}

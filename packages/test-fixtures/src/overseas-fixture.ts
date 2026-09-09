@@ -8,6 +8,7 @@ import { rebaseAuthoredLand } from './authored-land';
 export function overseasCampaign(): GameState {
   const state = createGame({ seed: 20260906, size: 'tiny', factionCount: 1, pace: 'epic', generatorVersion: 4 });
   const world = state.world;
+  state.resources.deposits = {}; // This fixture replaces the entire physical geography with resource-free authored land/water.
   world.terrain.fill(0); world.biome.fill(0); world.fertility.fill(0);
   for (const [left, right, top, bottom] of [[6, 12, 12, 18], [25, 35, 8, 24]]) {
     for (let y = top!; y <= bottom!; y++) for (let x = left!; x <= right!; x++) {

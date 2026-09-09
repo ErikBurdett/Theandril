@@ -34,7 +34,7 @@ test.each(FACTIONS)('$name AI settles, builds, recruits and expands through the 
   for (const faction of state.factions) {
     const towns = Object.values(state.settlements).filter(town => town.factionId === faction.id);
     expect(towns.length).toBeGreaterThan(1);
-    expect(towns.some(town => town.buildings.length === 4)).toBe(true);
+    expect(towns.some(town => BUILDINGS.filter(building => !building.coastalOnly).every(building => town.buildings.includes(building.id)))).toBe(true);
     expect(faction.treasury).toBeGreaterThanOrEqual(0);
   }
 });
@@ -74,6 +74,8 @@ test('founding names remain unique after losses leave gaps in the hearth sequenc
   const state = createGame({ seed: 74, size: 'tiny', factionCount: 1, pace: 'short' });
   const view = getObservation(state, state.turnOwnerId);
   view.settlements = ['Hearth 3', 'Hearth 4'].map((name, index) => ({ id: `settlement.${90 + index}`, factionId: view.factionId, founderFactionId: view.factionId, name, cell: index ? 47 : 0, population: 1, food: 0, buildings: [], queue: [], devastation: 0, occupationTurns: 0 }));
+  view.treasury = 1000; // Fund the actual two-existing-hearth establishment quote in this naming-only observation.
+  view.growth!.founding = { ...view.growth!.founding, coinCost: 40, canAfford: true, blocker: null };
   const founding = planTurn(view).find(command => command.type === 'found');
   expect(founding).toMatchObject({ type: 'found', name: 'Hearth 5' });
 });

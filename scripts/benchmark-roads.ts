@@ -62,9 +62,9 @@ function corridorCampaign(size: 'huge' | 'legendary', factionCount: number): Gam
 
 function workload(size: 'huge' | 'legendary', factionCount: number) {
   const base = corridorCampaign(size, factionCount), baseline = serializeGame(base), baselineHash = stateHash(base);
-  // Battle14 only adds empty arcane state here: this authored roster3 road workload
-  // recruits no casters, researches no magic and enters no battle.
-  invariant(SAVE_VERSION === 14 && Object.values(base.arcaneResearch).every(discoveries => discoveries.length === 0), 'review this retained no-magic road workload before another schema change');
+  // Rules15 adds optional specialist recruits; this retained roster3 road workload
+  // recruits no specialists or casters, researches no magic and enters no battle.
+  invariant(SAVE_VERSION === 16 && Object.values(base.arcaneResearch).every(discoveries => discoveries.length === 0) && Object.values(base.armies).every(army => army.formations.every(item => !['unit.skirmisher', 'unit.arbalester', 'unit.halberdier', 'unit.lancer'].includes(item.unitId))), 'review this retained road workload before another schema change');
   const planningMs: number[] = [], readMs: number[] = [];
   let expectedRoads = '', expectedEvents = '', planned: GameState | null = null;
   for (let sample = 0; sample < WARMUPS + SAMPLES; sample++) {

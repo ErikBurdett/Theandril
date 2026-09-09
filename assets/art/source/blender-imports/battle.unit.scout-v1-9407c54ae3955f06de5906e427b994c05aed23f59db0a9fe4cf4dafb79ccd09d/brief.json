@@ -1,0 +1,858 @@
+{
+  "schemaVersion": 1,
+  "id": "battle.unit.scout",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "battle.unit.scout"
+  ],
+  "prompt": "Original Theandril shared scout battle role, authored as editable weighted Blender meshes and bone Actions. Two independently rendered facings and five complete authored clips. Fixed 64x64 camera canvas, ground pivot (32,56), palette and full-motion union. Culture identity remains in existing banners and map art. Exact source manifest: assets/art/source/blender-units/battle.unit.scout/v1/manifest.json. No mirrored sprites, synthetic casualty poses or whole-sprite bobbing claimed as articulated animation.",
+  "frames": [
+    {
+      "id": "battle.unit.scout/idle/e/0",
+      "direction": "e",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/idle-e-000.png"
+    },
+    {
+      "id": "battle.unit.scout/idle/e/1",
+      "direction": "e",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/idle-e-001.png"
+    },
+    {
+      "id": "battle.unit.scout/idle/e/2",
+      "direction": "e",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/idle-e-002.png"
+    },
+    {
+      "id": "battle.unit.scout/idle/e/3",
+      "direction": "e",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/idle-e-003.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/e/0",
+      "direction": "e",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-e-000.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/e/1",
+      "direction": "e",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-e-001.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/e/2",
+      "direction": "e",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-e-002.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/e/3",
+      "direction": "e",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-e-003.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/e/4",
+      "direction": "e",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-e-004.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/e/5",
+      "direction": "e",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-e-005.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/e/6",
+      "direction": "e",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-e-006.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/e/7",
+      "direction": "e",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-e-007.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/e/0",
+      "direction": "e",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-e-000.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/e/1",
+      "direction": "e",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-e-001.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/e/2",
+      "direction": "e",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-e-002.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/e/3",
+      "direction": "e",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-e-003.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/e/4",
+      "direction": "e",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-e-004.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/e/5",
+      "direction": "e",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-e-005.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/e/6",
+      "direction": "e",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-e-006.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/e/7",
+      "direction": "e",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-e-007.png"
+    },
+    {
+      "id": "battle.unit.scout/hit/e/0",
+      "direction": "e",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/hit-e-000.png"
+    },
+    {
+      "id": "battle.unit.scout/hit/e/1",
+      "direction": "e",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/hit-e-001.png"
+    },
+    {
+      "id": "battle.unit.scout/hit/e/2",
+      "direction": "e",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/hit-e-002.png"
+    },
+    {
+      "id": "battle.unit.scout/hit/e/3",
+      "direction": "e",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/hit-e-003.png"
+    },
+    {
+      "id": "battle.unit.scout/death/e/0",
+      "direction": "e",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-e-000.png"
+    },
+    {
+      "id": "battle.unit.scout/death/e/1",
+      "direction": "e",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-e-001.png"
+    },
+    {
+      "id": "battle.unit.scout/death/e/2",
+      "direction": "e",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-e-002.png"
+    },
+    {
+      "id": "battle.unit.scout/death/e/3",
+      "direction": "e",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-e-003.png"
+    },
+    {
+      "id": "battle.unit.scout/death/e/4",
+      "direction": "e",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-e-004.png"
+    },
+    {
+      "id": "battle.unit.scout/death/e/5",
+      "direction": "e",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-e-005.png"
+    },
+    {
+      "id": "battle.unit.scout/death/e/6",
+      "direction": "e",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-e-006.png"
+    },
+    {
+      "id": "battle.unit.scout/death/e/7",
+      "direction": "e",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-e-007.png"
+    },
+    {
+      "id": "battle.unit.scout/idle/w/0",
+      "direction": "w",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/idle-w-000.png"
+    },
+    {
+      "id": "battle.unit.scout/idle/w/1",
+      "direction": "w",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/idle-w-001.png"
+    },
+    {
+      "id": "battle.unit.scout/idle/w/2",
+      "direction": "w",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/idle-w-002.png"
+    },
+    {
+      "id": "battle.unit.scout/idle/w/3",
+      "direction": "w",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/idle-w-003.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/w/0",
+      "direction": "w",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-w-000.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/w/1",
+      "direction": "w",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-w-001.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/w/2",
+      "direction": "w",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-w-002.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/w/3",
+      "direction": "w",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-w-003.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/w/4",
+      "direction": "w",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-w-004.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/w/5",
+      "direction": "w",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-w-005.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/w/6",
+      "direction": "w",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-w-006.png"
+    },
+    {
+      "id": "battle.unit.scout/walk/w/7",
+      "direction": "w",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/walk-w-007.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/w/0",
+      "direction": "w",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-w-000.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/w/1",
+      "direction": "w",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-w-001.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/w/2",
+      "direction": "w",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-w-002.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/w/3",
+      "direction": "w",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-w-003.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/w/4",
+      "direction": "w",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-w-004.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/w/5",
+      "direction": "w",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-w-005.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/w/6",
+      "direction": "w",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-w-006.png"
+    },
+    {
+      "id": "battle.unit.scout/attack/w/7",
+      "direction": "w",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/attack-w-007.png"
+    },
+    {
+      "id": "battle.unit.scout/hit/w/0",
+      "direction": "w",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/hit-w-000.png"
+    },
+    {
+      "id": "battle.unit.scout/hit/w/1",
+      "direction": "w",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/hit-w-001.png"
+    },
+    {
+      "id": "battle.unit.scout/hit/w/2",
+      "direction": "w",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/hit-w-002.png"
+    },
+    {
+      "id": "battle.unit.scout/hit/w/3",
+      "direction": "w",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/hit-w-003.png"
+    },
+    {
+      "id": "battle.unit.scout/death/w/0",
+      "direction": "w",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-w-000.png"
+    },
+    {
+      "id": "battle.unit.scout/death/w/1",
+      "direction": "w",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-w-001.png"
+    },
+    {
+      "id": "battle.unit.scout/death/w/2",
+      "direction": "w",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-w-002.png"
+    },
+    {
+      "id": "battle.unit.scout/death/w/3",
+      "direction": "w",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-w-003.png"
+    },
+    {
+      "id": "battle.unit.scout/death/w/4",
+      "direction": "w",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-w-004.png"
+    },
+    {
+      "id": "battle.unit.scout/death/w/5",
+      "direction": "w",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-w-005.png"
+    },
+    {
+      "id": "battle.unit.scout/death/w/6",
+      "direction": "w",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-w-006.png"
+    },
+    {
+      "id": "battle.unit.scout/death/w/7",
+      "direction": "w",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.scout/v1/native/death-w-007.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "frames": 8,
+        "fps": 10,
+        "loop": true
+      },
+      "attack": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      },
+      "hit": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      },
+      "death": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "7d4e119b62fed24ceb0e3391f3dca64cc003de41ad532fcf64a0e27f8d1648c9",
+    "sourceRefs": [
+      "assets/art/source/blender-units/battle.unit.scout/v1/manifest.json",
+      "assets/art/source/blender-units/battle.unit.scout/v1/source.blend",
+      "assets/art/source/blender-units/battle.unit.scout/v1/profile.json",
+      "assets/art/source/blender-units/battle.unit.scout/v1/recipe.py",
+      "assets/art/source/blender-units/battle.unit.scout/v1/driver.py",
+      "assets/art/source/blender-units/battle.unit.scout/v1/render-settings.json"
+    ],
+    "licenseNotes": [
+      "Original project-authored geometry, rig, materials and actions; retained factory dependencies and every raw/native render are bound by the source manifest inventory. Shared mechanical-role artwork does not claim new culture-specific originals. Native and runtime visual acceptance remain separate."
+    ]
+  },
+  "createdAt": "2026-09-08T23:38:53.388Z",
+  "referenceHashes": [
+    "9407c54ae3955f06de5906e427b994c05aed23f59db0a9fe4cf4dafb79ccd09d",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "articulated-battle-64",
+      "settingsHash": "92a254def51575cc943ce811af017db01fb4576899e87825c9961f5383b82ebd",
+      "inputHash": "9407c54ae3955f06de5906e427b994c05aed23f59db0a9fe4cf4dafb79ccd09d",
+      "outputHash": "c30b12e0870cdc164b377c5c654a77ef429c4b78901fdc1c72930314997c9481"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 64,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

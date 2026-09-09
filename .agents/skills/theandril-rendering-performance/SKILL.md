@@ -33,6 +33,21 @@ At far zoom, aggregate:
 - resource icons;
 - minor visual detail.
 
+Keep figure scale separate from the nonuniform terrain-to-hex transform. Use
+uniform, bounded screen sizing for units and far heraldry; fit town/improvement
+opaque silhouettes to their inset hex at detailed zoom. Source-canvas padding
+must not determine the visible size. Near tile footprints and far screen-space
+markers have different containment contracts; report them honestly in diagnostics.
+Separate co-located town/army markers at far zoom and hide all marker ground
+layers when switching to the world-overview raster.
+
+Hearth layouts rebuild only on observation changes, using the claim index and
+linear walks over actual claims. Claims are uncapped in modern rules; avoid
+repeated array shifts, global claim scans per town, or hard housing limits.
+Cache static district artwork with terrain; invalidate
+affected chunks when buildings, work, ownership or visibility change. Never
+recompute districts or scan all claimed cells on every camera frame.
+
 ## Main-thread rules
 
 Never:
@@ -52,3 +67,16 @@ For a render change:
 
 Production baseline is WebGL. WebGPU is optional/feature-flagged until tested against supported browsers.
 
+## Political overview and individual battles
+
+Political overview colors only supplied, permitted cell ownership. Remembered
+territory remains dimmed by fog; filtering a faction never reveals unseen cells.
+Update its raster on observation or filter changes, not camera frames, and retain
+one bounded world raster. Normal and reveal-all permissions require separate tests.
+
+Individual battle anchors use recorded forward/lateral positions. Place living
+soldiers by their canonical stable original slots; casualties leave holes and
+never recenter survivors. Reconstruct movement, cohesion deltas and exact killed
+IDs from facts, retain killed actors for one-shot death playback, and interpolate
+presentation without advancing simulation. Scale initial slot grids at narrow
+widths while retaining every member identity; ships remain one hull per formation.

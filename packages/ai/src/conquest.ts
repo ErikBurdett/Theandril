@@ -29,7 +29,11 @@ export function planConquestDecision(view: Observation): AiPlan | null {
     if (army.morale < 25 || army.fatigue > 85 || army.strength * 2 < siege.defenderStrength) {
       return { commands: [{ type: 'liftSiege', factionId: view.factionId, settlementId: siege.settlementId }], reasons: ['Lift the siege to preserve an exhausted or badly outmatched army.'] };
     }
-    if (siege.canAssault && army.morale >= 35 && army.fatigue <= 65 && (siege.defenses <= 10 || army.strength >= siege.defenderStrength * 2)) {
+    // Modern individual ranks retain a defender's wall armor and braced cohesion.
+    // An ordinary numerical advantage is worth preserving until the walls fall;
+    // an overwhelming force can still take a legal early assault.
+    const assaultReady = view.growth ? siege.defenses === 0 || army.strength >= siege.defenderStrength * 3 : siege.defenses <= 10 || army.strength >= siege.defenderStrength * 2;
+    if (siege.canAssault && army.morale >= 35 && army.fatigue <= 65 && assaultReady) {
       return { commands: [{ type: 'assault', factionId: view.factionId, settlementId: siege.settlementId }], reasons: [`Assault ${siege.settlementId}: defenses ${siege.defenses}, observed defender strength ${siege.defenderStrength}, army strength ${army.strength}.`] };
     }
   }

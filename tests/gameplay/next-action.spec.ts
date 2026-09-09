@@ -30,6 +30,7 @@ function order(state: GameState, command: GameCommand) {
 function routeCampaign(paused: boolean): GameState {
   let state = createGame({ generatorVersion: 4, seed: 20260905, size: 'tiny', pace: 'short', factionCount: 2 });
   state.world.terrain.fill(1); state.world.biome.fill(1); state.world.fertility.fill(60); state.world.waterDepth.fill(0);
+  state.resources.deposits = {}; // This gallery replaces the entire generated terrain/resource layer.
   delete state.armies['army.1']; delete state.armies['army.3'];
   state.armies['army.2']!.cell = 500; state.armies['army.2']!.name = 'Interrupted wayfinders';
   state.armies['army.4']!.cell = 554;

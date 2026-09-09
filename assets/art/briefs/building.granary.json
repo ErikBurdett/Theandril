@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "building.granary",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "building.granary"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original complete Theandril strategy-map civic district prop. Genuinely transparent PNG background, entire silhouette inside comfortable 15% margins, not a sheet, no other asset. Grounded weathered medieval dark fantasy, crisp coarse square pixel-art clusters at logical 64×64 detail, broad connected material planes and clear silhouette, restrained selective dark outline. Three-quarter southeast isometric view, upper-left diffuse highlights, old pale stone, peat-dark timber, soot recesses, muted sage moss, rust and dull brass accents. Compact complete cluster fits a 56×44 logical-pixel footprint, no surrounding full ground tile or hex border. No text, labels, letters, banners with writing, people, landscape, checkerboard, modern technology, glossy gradients, soft shadows, haze, detached pieces, montage or game UI. ROOT CELLAR: low earthen storage mound with a clear small rounded pale stone doorway and heavy closed timber double door, stone steps descending into it; two broad grouped piles of tied grain sacks and three timber food barrels sheltered by a short attached lean-to. Turf roof with restrained grass, a practical low ventilating stone flue. Connected broad granary-yard silhouette, no tower.",
+  "frames": [
+    {
+      "id": "building.granary/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/building.granary/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7989a14f8c16d968a9a19b8e14b1e943858f1ba454263f53e38782814c58c9c8",
+    "sourceRefs": [
+      "assets/art/source/hearth-civic/building.granary-v1.png",
+      "assets/art/source/hearth-civic/building.granary-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T21:40:50.916Z",
+  "referenceHashes": [
+    "d2b52afb5f05d6fe60ceafce919b181f96f74c38642d5c7b36182f21e09af1a4",
+    "030bfea699e06cfb82ff838dbf598e4608f3b617e9e5cb3896c9d17fd3042029"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-hearth-civic-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "d7a74d525373161d178cede5f9d5ab4bb10337e39eb477f5be77d1fe904cc920",
+      "inputHash": "d2b52afb5f05d6fe60ceafce919b181f96f74c38642d5c7b36182f21e09af1a4",
+      "outputHash": "cd9ad44fceb2546759fc9798fb1d84223f8608b9e4904fbbe069713b66070d7e"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

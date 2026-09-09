@@ -3,6 +3,7 @@ import { checksum, IMPROVEMENTS } from '@theandril/content';
 import { hexDistance, naturalFeatures, neighbors } from '@theandril/mapgen';
 import { applyCommand, createGame, deserializeGame, getObservation, serializeGame, stateHash } from './index';
 import type { GameCommand, GameState } from './types';
+import { withRules } from './rules';
 import { cellsWithin, indexes, updateSight } from './visibility';
 import { applyLandCommand, emptyLandState, getLandIndex, getLandObservation, handleLandCapture, initializeSettlementLand, landCellYields, observeLandCell, refreshLandKnowledge, resolveLandTurn, settlementLandYield, validateLand, validateLandKnowledge, type LandCommand, type LandState } from './territory';
 
@@ -15,7 +16,7 @@ function scenario(biome = 1, terrain = 1): GameState {
   // Authored local sites isolate economics; ordinary founding establishes all
   // territory, visibility and capital state. This is not a generated balance run.
   for (const cell of cellsWithin(state, state.armies['army.1']!.cell, 3)) {
-    state.world.terrain[cell] = terrain; state.world.biome[cell] = biome; state.world.fertility[cell] = 80; state.world.waterDepth[cell] = 0;
+    state.world.terrain[cell] = terrain; state.world.biome[cell] = biome; state.world.fertility[cell] = 80; state.world.waterDepth[cell] = 0; delete state.resources.deposits[cell];
   }
   issue(state, { type: 'found', factionId: player, armyId: 'army.1', name: 'Land witness' });
   issue(state, { type: 'found', factionId: rival, armyId: 'army.3', name: 'Reed witness' });
@@ -30,8 +31,8 @@ function improve(state: GameState, cell: number, improvementId = 'improvement.te
 describe('territory, worked land and persistent cultivation', () => {
   it('initializes disjoint claims and capitals without changing generated geography, and exposes only owned city details', () => {
     const state = scenario(), before = stateHash(state), own = view(state);
-    expect(own).toMatchObject({ stage: 'colony', isCapital: true, claimRadius: 1, claimCapacity: 7, workerCapacity: 1, worked: [], work: null });
-    expect(own.claimed).toHaveLength(7); expect(own.cells).toHaveLength(7);
+    expect(own).toMatchObject({ stage: 'colony', isCapital: true, claimRadius: 2, claimCapacity: null, workerCapacity: 1, worked: [], work: null });
+    expect(own.claimed).toHaveLength(7); expect(own.cells).toHaveLength(19);
     expect(new Set(Object.values(state.land.settlements).flatMap(land => land.claimed)).size).toBe(Object.values(state.land.settlements).reduce((sum, land) => sum + land.claimed.length, 0));
     expect(getLandObservation(state, player, indexes(state).visible.get(player)!).settlements.map(town => town.settlementId)).toEqual([townId]);
     own.claimed.length = 0; expect(state.land.settlements[townId]!.claimed).toHaveLength(7);
@@ -49,16 +50,16 @@ describe('territory, worked land and persistent cultivation', () => {
     expect(state.land.settlements[first.id]!.claimed).not.toContain(second.cell); validateLand(state);
   });
 
-  it('unlocks paid contiguous claims with population stages, retaining legal claims after population loss', () => {
+  it('charges for connected modern claims while preserving historical stage restrictions and claims after population loss', () => {
     const state = scenario(), town = state.settlements[townId]!;
     const target = cellsWithin(state, town.cell, 2).find(cell => hexDistance(town.cell, cell, state.world.width) === 2)!;
     const command: LandCommand = { type: 'claimCell', factionId: player, settlementId: townId, cell: target };
-    const before = stateHash(state); expect(applyLandCommand(state, command)).toMatch(/reach/); expect(stateHash(state)).toBe(before);
+    const before = stateHash(state); expect(withRules(state, 15, () => applyLandCommand(state, command))).toMatch(/reach/); expect(stateHash(state)).toBe(before);
     town.population = 3;
-    const quote = view(state).cells.find(cell => cell.cell === target)!.claim; expect(quote).toMatchObject({ canStart: true, coinCost: 20 });
+    const quote = view(state).cells.find(cell => cell.cell === target)!.claim; expect(quote).toMatchObject({ canStart: true, coinCost: 34 });
     const coin = state.factions[0]!.treasury; issue(state, command); expect(state.factions[0]!.treasury).toBe(coin - quote.coinCost);
     expect(getLandIndex(state).get(target)).toBe(townId);
-    town.population = 8; expect(view(state)).toMatchObject({ stage: 'city', claimRadius: 3, claimCapacity: 37, workerCapacity: 6 });
+    town.population = 8; expect(view(state)).toMatchObject({ stage: 'city', claimRadius: 3, claimCapacity: null, workerCapacity: 8 });
     town.population = 1; resolveLandTurn(state, town); expect(view(state).claimed).toContain(target); restore(state);
   });
 

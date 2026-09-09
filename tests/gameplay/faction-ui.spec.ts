@@ -117,7 +117,7 @@ test('renamed realms retain their authored family, real appointments gain role a
     await expect.poll(() => page.evaluate(id => window.__THEANDRIL__?.getSummary()?.characters.some(character => character.definitionId === id), definition)).toBe(true);
   }
   await openProduction(page, 'land');
-  for (const unit of ['colonist', 'scout', 'guard', 'spearman', 'heavy_infantry', 'cavalry']) await approved(art(page.locator('.inspector'), `unit.${unit}.ashen_compact`));
+  for (const unit of ['colonist', 'scout', 'guard', 'spearman', 'heavy_infantry', 'cavalry']) await approved(art(page.getByTestId(`production-card-unit.${unit}`), `unit.${unit}.ashen_compact`));
   await page.setViewportSize({ width: 390, height: 844 });
   const recruitment = page.getByTestId('production-land').locator('.production-cards');
   expect(await recruitment.evaluate(element => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length)).toBe(1);

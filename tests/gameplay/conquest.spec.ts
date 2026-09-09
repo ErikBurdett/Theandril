@@ -140,15 +140,23 @@ test('defending a settlement pauses the AI assault and resolves the AI capture a
   await page.goto('/');
   await page.locator('input[type=file]').setInputFiles({ name: 'defend-reedwatch.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serializeGame(fixture))) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
-  await closeManagement(page);
-  await page.getByRole('button', { name: 'End turn', exact: true }).click();
-  await expect(page.getByTestId('turn-counter')).toHaveText('Turn 2');
+  // Modern ranks retain braced cohesion behind walls. The ordinary-strength
+  // besieger waits for three real siege ticks, then interrupts the fourth click
+  // for the human's defense before the campaign round advances.
+  for (let turn = 2; turn <= 4; turn++) {
+    await closeManagement(page);
+    await page.getByRole('button', { name: 'End turn', exact: true }).click();
+    await expect(page.getByTestId('turn-counter')).toHaveText(`Turn ${turn}`);
+    await expect(page.getByTestId('battle-panel')).toHaveCount(0);
+  }
   await closeManagement(page);
   await page.getByRole('button', { name: 'End turn', exact: true }).click();
   await expect(page.getByTestId('battle-panel')).toBeVisible();
   const battle = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.battle);
+  await expect(page.getByTestId('turn-counter')).toHaveText('Turn 4');
   expect(battle?.settlementId).toBe(CONQUEST_FIXTURE.settlementId);
   expect(battle?.defenderFactionId).toBe(fixture.turnOwnerId);
+  expect(battle?.fortification).toBe(0);
   await page.getByRole('button', { name: 'Withdraw', exact: true }).click();
   await expect(page.getByTestId('battle-panel')).toHaveCount(0);
   await expect(page.getByTestId('capture-panel')).toHaveCount(0);

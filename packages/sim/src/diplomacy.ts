@@ -2,6 +2,7 @@ import { z } from 'zod';
 import type { CommandResult, DomainEvent, GameState, Observation } from './types';
 import { getObservation } from './simulation';
 import { atWar, warPair } from './warfare';
+import { rulesVersion } from './rules';
 
 const id = z.string().min(1).max(100);
 const turn = z.number().int().min(1).max(1_000_030);
@@ -50,7 +51,8 @@ function paymentObjection(state: GameState, offer: PeaceOffer): string | null {
   if (!proposer || !recipient) return 'The peace offer references an unknown faction.';
   const { offerCoin, requestCoin } = offer.terms;
   if (proposer.treasury < offerCoin || recipient.treasury < requestCoin) return 'A party can no longer fund these terms. Reject the offer or replenish the treasury.';
-  if (proposer.treasury - offerCoin + requestCoin > MAX_COIN || recipient.treasury - requestCoin + offerCoin > MAX_COIN) return 'The payment would exceed a treasury limit.';
+  const coinLimit = rulesVersion(state) >= 16 ? Number.MAX_SAFE_INTEGER : MAX_COIN;
+  if (proposer.treasury - offerCoin + requestCoin > coinLimit || recipient.treasury - requestCoin + offerCoin > coinLimit) return 'The payment would exceed a treasury limit.';
   return null;
 }
 

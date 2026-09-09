@@ -46,6 +46,19 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
 
 describe('approved faction DOM artwork boundary', () => {
+  it('labels specialist silhouette sharing, retains the real asset ID, and sizes mounted recruits from the source role', async () => {
+    const { FactionArtDisplay } = await import('./faction-art');
+    for (const [role, artworkRole, size] of [['unit.skirmisher', 'unit.scout', 64], ['unit.arbalester', 'unit.scout', 64], ['unit.halberdier', 'unit.spearman', 64], ['unit.lancer', 'unit.cavalry', 96]] as const) {
+      const definition = asset(`${artworkRole}.ashen_compact`, 0);
+      definition.nativeResolution = { width: size, height: size };
+      const value = { asset: definition, frame: definition.frames[0]!, image: { url: 'blob:verified-test-atlas', width: 256, height: 96 }, generic: false };
+      const markup = renderToStaticMarkup(createElement(FactionArtDisplay, { contentId: role, definitionId: 'faction.ashen_compact', label: 'Specialist', value }));
+      expect(markup).toContain(`width:${size}px;height:${size}px`);
+      expect(markup).toContain('data-art-state="shared"'); expect(markup).toContain(`data-art-content-id="${role}"`);
+      expect(markup).toContain(`data-art-rendered-id="${artworkRole}.ashen_compact"`);
+      expect(markup).toContain('silhouette'); expect(markup).not.toContain('approved faction artwork');
+    }
+  });
   it.each(['/', '/Theandril/'])('loads verified faction artwork at %s without rewriting its approved catalog', async base => {
     vi.stubEnv('BASE_URL', base);
     const bytes = png(), catalog = await pack(bytes), original = JSON.stringify(catalog);

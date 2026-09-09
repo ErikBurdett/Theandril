@@ -23,8 +23,12 @@ const captureOptionSchema = z.object({
   coinGain: bounded(1_000_000_000), populationLoss: bounded(20), buildingsLost: bounded(1000),
   devastation: bounded(100), occupationTurns: bounded(5), recipientFactionId: id.nullable(),
 }).strict();
-export const captureDecisionSchema = z.object({
+export const captureDecisionV15Schema = z.object({
   settlementId: id, armyId: id, factionId: id, previousOwnerId: id, options: z.array(captureOptionSchema).min(3).max(4),
+}).strict();
+export const captureDecisionSchema = captureDecisionV15Schema.extend({
+  options: z.array(captureOptionSchema.extend({ coinGain: z.number().int().nonnegative().safe(), populationLoss: z.number().int().nonnegative().safe() }).strict()).min(3).max(4),
+  rulesVersion: z.literal(16).optional(),
 }).strict();
 export const ruinSchema = z.object({
   id, name: z.string().min(1).max(40), cell: bounded(349_999), founderFactionId: id, razedByFactionId: id, turn: bounded(1_000_000).min(1),
@@ -102,7 +106,7 @@ export function reconcileSieges(state: GameState, events: DomainEvent[]): void {
         }
       }
       if (report.combat.result?.winner === 'attacker') {
-        state.pendingCapture = { settlementId: town.id, armyId: army.id, factionId: siege.factionId, previousOwnerId: town.factionId, options: [] };
+        state.pendingCapture = { settlementId: town.id, armyId: army.id, factionId: siege.factionId, previousOwnerId: town.factionId, options: [], ...(rulesVersion(state) >= 16 ? { rulesVersion: 16 as const } : {}) };
         state.pendingCapture.options = captureOptions(state, state.pendingCapture);
         events.push({ turn: state.turn, factionId: siege.factionId, type: 'capture_pending', cell: town.cell, message: `${town.name} has fallen. Choose its fate.` });
       }
@@ -126,7 +130,9 @@ export function captureOptions(state: GameState, decision: Omit<CaptureDecision,
   if (!town) return [];
   const victim = state.factions.find(faction => faction.id === decision.previousOwnerId);
   const capturer = state.factions.find(faction => faction.id === decision.factionId);
-  const loot = Math.min(victim?.treasury ?? 0, 20 + town.population * 10, 1_000_000_000 - (capturer?.treasury ?? 0));
+  // Preserve old pending quotes even when their choice is resumed today.
+  const coinLimit = decision.rulesVersion === 16 ? Number.MAX_SAFE_INTEGER : 1_000_000_000;
+  const loot = Math.max(0, Math.min(victim?.treasury ?? 0, 20 + town.population * 10, coinLimit - (capturer?.treasury ?? 0)));
   const populationLoss = Math.min(town.population - 1, Math.ceil(town.population / 3));
   const buildingsLost = Math.ceil(town.buildings.length / 2);
   const options: CaptureOption[] = [
@@ -178,7 +184,7 @@ export function resolveSettlementCapture(state: GameState, factionId: string, se
     if (town.factionId === factionId) relocateArmy(state, army, town.cell);
   }
   victim.treasury -= option.coinGain;
-  capturer.treasury = Math.min(1_000_000_000, capturer.treasury + option.coinGain);
+  capturer.treasury = Math.min(decision.rulesVersion === 16 ? Number.MAX_SAFE_INTEGER : 1_000_000_000, capturer.treasury + option.coinGain);
   recordConquest(state, factionId, decision.previousOwnerId, outcome);
   delete state.sieges[settlementId];
   state.pendingCapture = null;
@@ -222,6 +228,7 @@ export function validateSieges(state: GameState): void {
     require(!state.battle && town && army && siege && siege.armyId === army.id && army.factionId === decision.factionId && town.factionId === decision.previousOwnerId, 'invalid pending capture references');
     require(JSON.stringify(decision.options) === JSON.stringify(captureOptions(state, decision)), 'capture choices differ from canonical consequences');
     const report = state.battleReports.at(-1);
+    require(!report || report.rulesVersion < 10 || decision.rulesVersion === 16, 'modern capture omitted its quoted rules');
     require(report?.settlementId === decision.settlementId && report.turn === state.turn && report.attackerId === decision.armyId && report.combat.result?.winner === 'attacker' && report.attackerFactionId === decision.factionId && report.defenderFactionId === decision.previousOwnerId, 'capture requires a victorious assault');
     if (town && army && report) {
       require(report.defenderCell === town.cell && report.attackerCell === army.cell && army.movement === 0 && !Object.values(state.armies).some(other => other.cell === town.cell), 'captured town must be cleared and capturer must remain in assault position');

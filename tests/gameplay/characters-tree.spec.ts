@@ -23,10 +23,12 @@ async function preparedOfficer(page: Page, definitionId: string, experience: num
 }
 
 test('a veteran traces cross-branch prerequisites, spends experience once and retains focus and real command effects', async ({ page }, testInfo) => {
-  const { dialog, character, tree } = await preparedOfficer(page, 'character.marshal', 72);
+  const { dialog, character, tree } = await preparedOfficer(page, 'character.marshal', 96);
   const initialHash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
   const roadmap = tree.getByRole('navigation', { name: 'Skill roadmap', exact: true });
-  await expect(roadmap.getByRole('button')).toHaveCount(6);
+  await expect(roadmap.getByRole('button')).toHaveCount(8);
+  await expect(roadmap.getByRole('button', { name: 'Inspect skill Witnessed assault', exact: true })).toBeVisible();
+  await expect(roadmap.getByRole('button', { name: 'Inspect skill Last standard', exact: true })).toBeVisible();
   await roadmap.scrollIntoViewIfNeeded();
   await dialog.screenshot({ path: testInfo.outputPath('commander-whole-skill-roadmap.png') });
   await tree.getByRole('button', { name: 'Inspect skill Field orders', exact: true }).focus();
@@ -50,7 +52,7 @@ test('a veteran traces cross-branch prerequisites, spends experience once and re
   await tree.getByRole('button', { name: 'Inspect skill Unbroken line', exact: true }).click();
   await expect(tree.getByTestId('skill-skill.unbroken_line')).toHaveAttribute('data-state', 'locked');
   await expect(tree.getByTestId('skill-skill.unbroken_line')).toContainText('Keeper of the line · excluded');
-  for (const name of ['Muster rolls', 'Field orders', 'Measured advance']) {
+  for (const name of ['Muster rolls', 'Field orders', 'Measured advance', 'Witnessed assault']) {
     await tree.getByRole('button', { name: `Inspect skill ${name}`, exact: true }).click();
     await tree.getByRole('button', { name: `Promote ${name}`, exact: true }).click();
     await expect(tree.getByRole('button', { name: `Promote ${name}`, exact: true })).toBeDisabled();
@@ -59,7 +61,7 @@ test('a veteran traces cross-branch prerequisites, spends experience once and re
   await tree.getByRole('button', { name: 'Inspect skill Field orders', exact: true }).click();
   await expect(field).toHaveAttribute('data-state', 'learned');
   const actual = await page.evaluate(id => ({ character: window.__THEANDRIL__!.getSummary()!.characters.find(character => character.id === id), army: window.__THEANDRIL__!.getSummary()!.ownArmies.find(army => army.id === 'army.2') }), character.id);
-  expect(actual.character).toMatchObject({ experience: 0, skillId: 'skill.decisive', learnedSkillIds: ['skill.field_orders', 'skill.measured_advance', 'skill.muster_rolls'] });
+  expect(actual.character).toMatchObject({ experience: 0, skillId: 'skill.decisive', learnedSkillIds: ['skill.field_orders', 'skill.measured_advance', 'skill.muster_rolls', 'skill.witnessed_assault'] });
   expect(actual.army).toMatchObject({ formationCapacity: 20, commander: { id: character.id } });
   await dialog.screenshot({ path: testInfo.outputPath('commander-prerequisite-tree.png') });
   await page.keyboard.press('Escape');

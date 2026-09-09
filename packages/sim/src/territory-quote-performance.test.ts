@@ -2,16 +2,21 @@ import { createHash } from 'node:crypto';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { IMPROVEMENTS, TECHNOLOGIES } from '@theandril/content';
 import * as mapgen from '@theandril/mapgen';
-import { applyCommand, createGame, deserializeGame, getLandObservation, getSettlementLandObservation, serializeGame, stateHash, stateHashForVersion, type GameState } from './index';
+import { applyCommandForVersion, createGame, deserializeGame, getLandObservation as readLand, getSettlementLandObservation as readTown, serializeGame, stateHash, stateHashForVersion, type GameState } from './index';
 import { applyLandCommand, type LandCommand, type LandObservation } from './territory';
 import { indexes } from './visibility';
-import { withRules } from './rules';
+import { rulesVersion, withRules } from './rules';
 
 afterEach(() => vi.restoreAllMocks());
+// This independent performance/seal oracle deliberately executes its captured
+// rules11. Modern64-cell page behavior is covered by uncapped-growth tests.
+const applyCommand = (state: GameState, input: unknown) => applyCommandForVersion(state, input, 11);
+const getLandObservation = (...args: Parameters<typeof readLand>) => withRules(args[0], rulesVersion(args[0]) < 16 ? rulesVersion(args[0]) : 11, () => readLand(...args));
+const getSettlementLandObservation = (...args: Parameters<typeof readTown>) => withRules(args[0], 11, () => readTown(...args));
 
 /** Authored population/funding/research; all founding and 30 additional claims use real commands. */
 function quoteCampaign(): GameState {
-  let game = createGame({ seed: 103, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
+  let game = createGame({ rulesVersion: 11, seed: 103, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
   for (const faction of game.factions) {
     const caravan = Object.values(game.armies).find(army => army.factionId === faction.id && army.formations.some(item => item.unitId === 'unit.colonist'))!;
     expect(applyCommand(game, { type: 'found', factionId: faction.id, armyId: caravan.id, name: 'Quote ' + faction.id }).ok).toBe(true);

@@ -69,10 +69,9 @@ describe('versioned faction rosters and paid new-culture campaigns', () => {
     }
     const view = getObservation(game, factionId);
     expect(new Set(view.productionOptions.filter(option => option.settlementId === townId && option.itemId.startsWith('unit.')).map(option => option.itemId))).toEqual(new Set(UNITS.map(unit => unit.id)));
-    expect(() => serializeGameForVersion(game, 9)).toThrow('frozen pre-expansion pack');
-    // Removing unrelated modern growth must not make a roster4 save historical.
-    const rosterProbe = deserializeGame(serializeGame(game));
-    for (const land of Object.values(rosterProbe.land.settlements)) land.borderGrowth = 0;
+    expect(() => serializeGameForVersion(game, 9)).toThrow(/resources or development/);
+    // A genuine pre16 origin still cannot project its newer culture roster as9.
+    const rosterProbe = createGame({ seed: 20260905, size: 'tiny', factionCount: 12, factionDefinitionId, generatorVersion: 4, rulesVersion: 15 });
     expect(() => serializeGameForVersion(rosterProbe, 9)).toThrow(/frozen.*(pack|roster)/);
     const hash = stateHash(game);
     expect(() => applyCommandForVersion(game, { type: 'endTurn', factionId }, 9)).toThrow('frozen roster');

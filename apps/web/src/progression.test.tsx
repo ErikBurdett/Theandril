@@ -41,11 +41,11 @@ describe('authoritative research tree presentation', () => {
     expect(html).toContain('data-testid="progression-technology.ocean_navigation" data-state="available"');
     expect(tree(game, true)).toMatch(/<button class="primary wide" disabled=""[^>]*aria-label="Research Ocean navigation"/);
   });
-  it('keeps four established systems plus actual Arcane Theory separate and exposes only real research branches', () => {
+  it('keeps seven actual advancement and resource systems separate and exposes only real research branches', () => {
     const game = campaign(), view = getObservation(game, game.turnOwnerId);
     const html = renderToStaticMarkup(createElement(CampaignProgression, { view, busy: false, issue: () => undefined, locate: () => undefined, close: () => undefined }));
-    expect(html.match(/role="tab" /g)).toHaveLength(5);
-    for (const label of ['Technology', 'Arcane Theory', 'Institutions', 'Military doctrine', 'Prosperity']) expect(html).toContain(`>${label}</button>`);
+    expect(html.match(/role="tab" /g)).toHaveLength(7);
+    for (const label of ['Technology', 'Arcane Theory', 'Institutions', 'Military doctrine', 'Development', 'Resources', 'Prosperity']) expect(html).toContain(`>${label}</button>`);
     expect(html).toContain('aria-label="Research branches"');
   });
   it('does not populate a historical or restricted observation from the current larger content catalog', () => {

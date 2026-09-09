@@ -31,7 +31,7 @@ describe('genuine generator7 twelve-culture history before schema13/roster4', ()
     expect(serializeGameForVersion(game, 12)).toBe(fixture.save);
     expect(serializeGameForVersion(replayArchive(archive), 12)).toBe(fixture.save);
     expect(serializeGame(deserializeGame(serializeGame(game)))).toBe(serializeGame(game));
-    const origin = createGame(fixture.options);
+    const origin = createGame({ ...fixture.options, rulesVersion: 12 });
     expect(serializeGameForVersion(origin, 12)).toBe(archive.initialSave);
     if (fixture.name.endsWith('-developed')) {
       expect(game.turn).toBe(13);

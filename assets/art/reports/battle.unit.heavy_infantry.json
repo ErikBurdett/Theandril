@@ -1,0 +1,1118 @@
+{
+  "schemaVersion": 1,
+  "assetId": "battle.unit.heavy_infantry",
+  "inputHash": "e301cdb6741f470d93e64912f5c524394f9c8a5e31141b116a65e7ad3b87f096",
+  "specificationHash": "44a7817e2aac9b3223a45f1ccb49265a3944cd495f3affd4f4ac8d7ac9031819",
+  "score": 96,
+  "passed": true,
+  "errors": [],
+  "warnings": [
+    "attack/e: repeated frame images require intentional-hold review",
+    "attack/w: repeated frame images require intentional-hold review"
+  ],
+  "manualChecks": [
+    "Originality, licensing and provenance review",
+    "Silhouette and role readability at native and zoomed scale",
+    "Anatomy, equipment continuity, lighting and material consistency",
+    "idle/e: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "idle/w: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "walk/e: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "walk/w: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "attack/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "attack/w: review temporal flicker, direction, equipment, visual identity and end pose",
+    "hit/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "hit/w: review temporal flicker, direction, equipment, visual identity and end pose",
+    "death/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "death/w: review temporal flicker, direction, equipment, visual identity and end pose"
+  ],
+  "metrics": [
+    {
+      "id": "battle.unit.heavy_infantry/idle/e/0",
+      "hash": "f66a4ba7340eb76baf994d6891418dd18456e5460d415790a859234b9d730f46",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 441,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 20,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/idle/e/1",
+      "hash": "80a524b12053510ab8fa769a498f60c53ffc8d98c57dd6facfa9858e985ebf81",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 443,
+      "padding": 6,
+      "bounds": {
+        "x": 21,
+        "y": 16,
+        "w": 21,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/idle/e/2",
+      "hash": "f91e50c417a83b91f32f5a9673962f2e86abbc3cd64cd548e135477180621d56",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 444,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 20,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/idle/e/3",
+      "hash": "e88dcafcd2e4d929f36ab8272b5df93d14b3b928bb89cb786ba411e2f00ec38a",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 441,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 21,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/e/0",
+      "hash": "a51c4839b8f4ffdd90e4ddbca804e606c6786a56630a39034a0b411e2bd271fe",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 455,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 17,
+        "w": 20,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/e/1",
+      "hash": "7cc25bfcaf4736c9d2e21c3608af6ba04381d476874d95bb3d78626638484ea4",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 432,
+      "padding": 4,
+      "bounds": {
+        "x": 21,
+        "y": 16,
+        "w": 20,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/e/2",
+      "hash": "efb690649f92d62245044fc51f0708f81bf4252fba07b0e3c22196ebeeec08f8",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 434,
+      "padding": 4,
+      "bounds": {
+        "x": 21,
+        "y": 15,
+        "w": 20,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/e/3",
+      "hash": "a634acbdc978cec536f5a4863286105603564d4c55953365b7fd9d1be41188a4",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 423,
+      "padding": 6,
+      "bounds": {
+        "x": 21,
+        "y": 16,
+        "w": 20,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/e/4",
+      "hash": "489cd96b086bb0aa780aceb298f75a85f154a21557906db25fd1e17bda2ea95a",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 435,
+      "padding": 8,
+      "bounds": {
+        "x": 22,
+        "y": 17,
+        "w": 20,
+        "h": 39
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/e/5",
+      "hash": "627778027841f74e0761036cf577989872ca868e82682cc33612730cfbd15f91",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 444,
+      "padding": 6,
+      "bounds": {
+        "x": 23,
+        "y": 16,
+        "w": 21,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/e/6",
+      "hash": "ed542f94885072de86e4202c31853aa29b48715a29589f0f4aefa434f4567706",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 475,
+      "padding": 5,
+      "bounds": {
+        "x": 23,
+        "y": 15,
+        "w": 21,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/e/7",
+      "hash": "31825630370b3f76f2e0799e4fc49267194c2f3770f39fc12f99da2afa15e09d",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 465,
+      "padding": 7,
+      "bounds": {
+        "x": 23,
+        "y": 16,
+        "w": 21,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/e/0",
+      "hash": "b389b832dedfcd1d9240dfd5ca3bb6bc7492b3d88288c74a479fef9b5b7cd3b5",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 435,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 19,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/e/1",
+      "hash": "e2bbb00ad5898cb7ff803e734aed1e53123f0f0c33d47afdf5cfdcd48c687531",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 442,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 10,
+        "w": 21,
+        "h": 48
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/e/2",
+      "hash": "5bf1809ce7b381677480ebf837b0c83512a37353693afa76eadb0feca3a62a98",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 449,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 7,
+        "w": 19,
+        "h": 51
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/e/3",
+      "hash": "71f821561d6a0befb0a0a3833cfba1504a27edac2de8b3e0aaf7fc749ef39e87",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 465,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/e/4",
+      "hash": "bb3316910eb1b1b5d1237830092f0ed56d4be3c3eb2f37fe44bd7967249d93a0",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 465,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 23,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/e/5",
+      "hash": "762ef8439d08acceb5216c80f20557096e0e2bed265ddce79504a4b51727782c",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 453,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 20,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/e/6",
+      "hash": "c125893a56234d063bb17697aa663f2ec47499976c0ab51f72d851578e7ff848",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 430,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 23,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/e/7",
+      "hash": "b389b832dedfcd1d9240dfd5ca3bb6bc7492b3d88288c74a479fef9b5b7cd3b5",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 435,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 19,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/hit/e/0",
+      "hash": "06610f1b25bbcf36751c3184830b6382d590cbd9b4975f1b7c72c0e8fd24c311",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 442,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 20,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/hit/e/1",
+      "hash": "cbbdb63f79f86797f1d6f77556b7e9b5f59b0bc192aeb2e2486a00429c5fa2cc",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 487,
+      "padding": 6,
+      "bounds": {
+        "x": 20,
+        "y": 15,
+        "w": 20,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/hit/e/2",
+      "hash": "5c0b1b2e6cba6a97fd4b0d35373b47c3bde574bdb951f2322d30a3373405d0af",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 468,
+      "padding": 6,
+      "bounds": {
+        "x": 21,
+        "y": 15,
+        "w": 20,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/hit/e/3",
+      "hash": "d4244188e93bd58affa0a5bccb3a259343e4581c74ef76b740c5934787a00ce5",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 444,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 20,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/e/0",
+      "hash": "06610f1b25bbcf36751c3184830b6382d590cbd9b4975f1b7c72c0e8fd24c311",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 442,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 16,
+        "w": 20,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/e/1",
+      "hash": "b575dcf730d100711924888a4d9a177f3d49ac2e9d294cab95904201e2243c5c",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 505,
+      "padding": 6,
+      "bounds": {
+        "x": 20,
+        "y": 17,
+        "w": 19,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/e/2",
+      "hash": "8caaeb5875045197f74c295d2fba5f9d0dd8a5f93dfeb4a95cece98f76b1a0ab",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 525,
+      "padding": 7,
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "w": 21,
+        "h": 38
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/e/3",
+      "hash": "957bb6b1944addb2722716ed6d40be7f420d429e1f46961036581e1cc24316d7",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 537,
+      "padding": 7,
+      "bounds": {
+        "x": 16,
+        "y": 21,
+        "w": 23,
+        "h": 36
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/e/4",
+      "hash": "a01ecd77dfb36c93221c5e6ca9e904a70397db10ed444b94fd987850e500afcf",
+      "colors": 36,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 542,
+      "padding": 6,
+      "bounds": {
+        "x": 13,
+        "y": 24,
+        "w": 25,
+        "h": 34
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/e/5",
+      "hash": "47ed14a0fecbdecb0858afd9d1e5c4fd4778954602cd313219253e7b76b304c3",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 530,
+      "padding": 6,
+      "bounds": {
+        "x": 11,
+        "y": 28,
+        "w": 27,
+        "h": 30
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/e/6",
+      "hash": "14a676c985a6c28bfa462e3fc9a4d1cb383acc01c69b21a09c64d44bed494839",
+      "colors": 37,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 508,
+      "padding": 4,
+      "bounds": {
+        "x": 9,
+        "y": 32,
+        "w": 29,
+        "h": 28
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/e/7",
+      "hash": "c4a02d4f276d82243ad50450df9e17bd88d833a73cbe8adb93b59d1e74e14456",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 442,
+      "padding": 4,
+      "bounds": {
+        "x": 8,
+        "y": 35,
+        "w": 31,
+        "h": 25
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/idle/w/0",
+      "hash": "9ff6c219d8555e0dd8d51828e8feaaa729a16bbd2644a0d71c645d60fa6318ce",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 523,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/idle/w/1",
+      "hash": "28b63ac32e007f11b06daf4ebc36041c291b043f03daf95b0c482c75f9df1ba2",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 528,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/idle/w/2",
+      "hash": "0eada6064bc4aa1624f91415298b65ef13ee78701b71c4d375b23e303ba166a6",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 525,
+      "padding": 6,
+      "bounds": {
+        "x": 15,
+        "y": 16,
+        "w": 26,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/idle/w/3",
+      "hash": "db6f7be298c173898abcd7fe0d0a89cec1cce3801560beebf0a9e99774afb541",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 527,
+      "padding": 6,
+      "bounds": {
+        "x": 15,
+        "y": 16,
+        "w": 26,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/w/0",
+      "hash": "276e5cc9531c11d3b86653184e0e0c86fea555ec032ba1e16cd4624ed82af036",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 509,
+      "padding": 8,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 25,
+        "h": 40
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/w/1",
+      "hash": "a7893b9884dd872b76829b626aa90f3097981a156917aec8b5c04025fe093291",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 557,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 24,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/w/2",
+      "hash": "1fa3043b2a06c26071167bcc8ff76aac0032cf3442d4072a8089a878a1d5276d",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 555,
+      "padding": 5,
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "w": 24,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/w/3",
+      "hash": "bb3ce05bbccd326f8f4f6a16f331c58d9f5d32a487b55ede73a995d9321b1446",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 542,
+      "padding": 7,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 24,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/w/4",
+      "hash": "5072c79cdf726bd344d30ddf88066a68b52547c1b996d22ddaec07cca8c89d56",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 523,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/w/5",
+      "hash": "6d8671e256cd509bc5c15a1eb4fd5809690591d3cd339a7edc31f11bb88cda2d",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 504,
+      "padding": 4,
+      "bounds": {
+        "x": 14,
+        "y": 16,
+        "w": 26,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/w/6",
+      "hash": "ebb10d4960297fe3957e8ebfc54709bff2a1bf47deba345114b0474b947efad4",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 494,
+      "padding": 4,
+      "bounds": {
+        "x": 14,
+        "y": 15,
+        "w": 26,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/walk/w/7",
+      "hash": "54c34f0a5f6145b4b422b0daf822770a8987f76e83c1ae19683d74fed3c5c3c2",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 492,
+      "padding": 6,
+      "bounds": {
+        "x": 14,
+        "y": 16,
+        "w": 26,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/w/0",
+      "hash": "6589189f9668636f95ce8bbffbbe3ae4a21a43a7aa1268e740d3bbebb3f3ba3d",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 527,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/w/1",
+      "hash": "4a1b0ae6a38da456102295708b8ea2d528a3d6aecfffc87097341d65bc998a6d",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 548,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 28,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/w/2",
+      "hash": "401a2e9b1206a7f846572901ef3d259f234d0b8c427624a59fc9872c15aee80c",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 560,
+      "padding": 5,
+      "bounds": {
+        "x": 16,
+        "y": 12,
+        "w": 30,
+        "h": 47
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/w/3",
+      "hash": "f94a4d1f0da36a46243990545aefe9f08e9d5a3fcb3c752a47f501a6200f7877",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 495,
+      "padding": 5,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 21,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/w/4",
+      "hash": "03888a74d3762d29fcbdf3ffa0f0e1bb118aa2dcbc19f01e3b23c0a892003495",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 515,
+      "padding": 5,
+      "bounds": {
+        "x": 12,
+        "y": 16,
+        "w": 25,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/w/5",
+      "hash": "f5da25f7648620c85bb0c07fec65ec86706ea7c18f4b686152eb41f9942c96b9",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 524,
+      "padding": 5,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 22,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/w/6",
+      "hash": "52e8fbadd58d20f91b023be7aa9f90f0bde3d6136efe619d45c7eb67270244b2",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 515,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 24,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/attack/w/7",
+      "hash": "6589189f9668636f95ce8bbffbbe3ae4a21a43a7aa1268e740d3bbebb3f3ba3d",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 527,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/hit/w/0",
+      "hash": "9e60f64d43f697661ede887e92e665594f6cf30d0cc91b677388c87f7097c4f7",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 523,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/hit/w/1",
+      "hash": "69112facd0e73736669973c552e1fd6d65eb7113f31faf9330790bc300117d95",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 545,
+      "padding": 6,
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "w": 25,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/hit/w/2",
+      "hash": "dd9d8f614913ed06b862aec6b77c6d291d7cf1889847053f9d96a8c3be63b9fd",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 537,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 15,
+        "w": 25,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/hit/w/3",
+      "hash": "5726b8d532989851644250144bac743062c802c855926a495183b6063760c5af",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 527,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/w/0",
+      "hash": "9e60f64d43f697661ede887e92e665594f6cf30d0cc91b677388c87f7097c4f7",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 523,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/w/1",
+      "hash": "92a1fd3c06baa3f0f6cf07e7592153af87cd619cb29c7c1fa008d540b910df60",
+      "colors": 35,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 548,
+      "padding": 6,
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "w": 25,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/w/2",
+      "hash": "008433e77d7624b46b6784dae41e3232e4c5c262ae37774b90d05ff1fdef88f0",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 527,
+      "padding": 7,
+      "bounds": {
+        "x": 19,
+        "y": 18,
+        "w": 28,
+        "h": 39
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/w/3",
+      "hash": "d56c86209d3ccd73cb8752abf5cf5967c762ee17c490d023f93214d60072396c",
+      "colors": 35,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 507,
+      "padding": 7,
+      "bounds": {
+        "x": 20,
+        "y": 21,
+        "w": 32,
+        "h": 36
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/w/4",
+      "hash": "5913fb006d7d33717d6be50e244cd873a2459ebff260e15c6642f7de9cba4f1b",
+      "colors": 33,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 499,
+      "padding": 7,
+      "bounds": {
+        "x": 20,
+        "y": 24,
+        "w": 36,
+        "h": 33
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/w/5",
+      "hash": "feb35f4d634c164bc6926dcfca3aba2a3ec00e7c8afbd529be22b3197a27e642",
+      "colors": 34,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 493,
+      "padding": 6,
+      "bounds": {
+        "x": 21,
+        "y": 28,
+        "w": 37,
+        "h": 29
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/w/6",
+      "hash": "ca388dbb29c03ab6c796593c859d981aa95722c43bfa092ae4da20d726e43b59",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 495,
+      "padding": 4,
+      "bounds": {
+        "x": 22,
+        "y": 32,
+        "w": 37,
+        "h": 28
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.heavy_infantry/death/w/7",
+      "hash": "3c24ad5c2f191a5d1d75b8d26b3c0b53c66209f449b4dcbc133df443ebd10895",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 463,
+      "padding": 4,
+      "bounds": {
+        "x": 24,
+        "y": 35,
+        "w": 36,
+        "h": 25
+      },
+      "logicalGridErrors": 0
+    }
+  ]
+}

@@ -1,0 +1,879 @@
+{
+  "schemaVersion": 1,
+  "id": "battle.unit.cavalry",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "battle.unit.cavalry"
+  ],
+  "prompt": "Original Theandril shared cavalry battle role, authored as editable weighted Blender meshes and bone Actions. Two independently rendered facings and five complete authored clips. Fixed 96x96 camera canvas, ground pivot (48,80), palette and full-motion union. Culture identity remains in existing banners and map art. Exact source manifest: assets/art/source/blender-units/battle.unit.cavalry/v1/manifest.json. No mirrored sprites, synthetic casualty poses or whole-sprite bobbing claimed as articulated animation.",
+  "frames": [
+    {
+      "id": "battle.unit.cavalry/idle/e/0",
+      "direction": "e",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-0.png"
+    },
+    {
+      "id": "battle.unit.cavalry/idle/e/1",
+      "direction": "e",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-1.png"
+    },
+    {
+      "id": "battle.unit.cavalry/idle/e/2",
+      "direction": "e",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-2.png"
+    },
+    {
+      "id": "battle.unit.cavalry/idle/e/3",
+      "direction": "e",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-3.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/e/0",
+      "direction": "e",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-4.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/e/1",
+      "direction": "e",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-5.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/e/2",
+      "direction": "e",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-6.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/e/3",
+      "direction": "e",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-7.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/e/4",
+      "direction": "e",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-8.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/e/5",
+      "direction": "e",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-9.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/e/6",
+      "direction": "e",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-10.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/e/7",
+      "direction": "e",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-11.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/e/0",
+      "direction": "e",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-12.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/e/1",
+      "direction": "e",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-13.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/e/2",
+      "direction": "e",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-14.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/e/3",
+      "direction": "e",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-15.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/e/4",
+      "direction": "e",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-16.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/e/5",
+      "direction": "e",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-17.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/e/6",
+      "direction": "e",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-18.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/e/7",
+      "direction": "e",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-19.png"
+    },
+    {
+      "id": "battle.unit.cavalry/hit/e/0",
+      "direction": "e",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-20.png"
+    },
+    {
+      "id": "battle.unit.cavalry/hit/e/1",
+      "direction": "e",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-21.png"
+    },
+    {
+      "id": "battle.unit.cavalry/hit/e/2",
+      "direction": "e",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-22.png"
+    },
+    {
+      "id": "battle.unit.cavalry/hit/e/3",
+      "direction": "e",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-23.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/e/0",
+      "direction": "e",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-24.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/e/1",
+      "direction": "e",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-25.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/e/2",
+      "direction": "e",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-26.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/e/3",
+      "direction": "e",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-27.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/e/4",
+      "direction": "e",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-28.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/e/5",
+      "direction": "e",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-29.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/e/6",
+      "direction": "e",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-30.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/e/7",
+      "direction": "e",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-31.png"
+    },
+    {
+      "id": "battle.unit.cavalry/idle/w/0",
+      "direction": "w",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-32.png"
+    },
+    {
+      "id": "battle.unit.cavalry/idle/w/1",
+      "direction": "w",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-33.png"
+    },
+    {
+      "id": "battle.unit.cavalry/idle/w/2",
+      "direction": "w",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-34.png"
+    },
+    {
+      "id": "battle.unit.cavalry/idle/w/3",
+      "direction": "w",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-35.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/w/0",
+      "direction": "w",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-36.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/w/1",
+      "direction": "w",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-37.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/w/2",
+      "direction": "w",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-38.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/w/3",
+      "direction": "w",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-39.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/w/4",
+      "direction": "w",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-40.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/w/5",
+      "direction": "w",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-41.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/w/6",
+      "direction": "w",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-42.png"
+    },
+    {
+      "id": "battle.unit.cavalry/walk/w/7",
+      "direction": "w",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-43.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/w/0",
+      "direction": "w",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-44.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/w/1",
+      "direction": "w",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-45.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/w/2",
+      "direction": "w",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-46.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/w/3",
+      "direction": "w",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-47.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/w/4",
+      "direction": "w",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-48.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/w/5",
+      "direction": "w",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-49.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/w/6",
+      "direction": "w",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-50.png"
+    },
+    {
+      "id": "battle.unit.cavalry/attack/w/7",
+      "direction": "w",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-51.png"
+    },
+    {
+      "id": "battle.unit.cavalry/hit/w/0",
+      "direction": "w",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-52.png"
+    },
+    {
+      "id": "battle.unit.cavalry/hit/w/1",
+      "direction": "w",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-53.png"
+    },
+    {
+      "id": "battle.unit.cavalry/hit/w/2",
+      "direction": "w",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-54.png"
+    },
+    {
+      "id": "battle.unit.cavalry/hit/w/3",
+      "direction": "w",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-55.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/w/0",
+      "direction": "w",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-56.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/w/1",
+      "direction": "w",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-57.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/w/2",
+      "direction": "w",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-58.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/w/3",
+      "direction": "w",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-59.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/w/4",
+      "direction": "w",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-60.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/w/5",
+      "direction": "w",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-61.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/w/6",
+      "direction": "w",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-62.png"
+    },
+    {
+      "id": "battle.unit.cavalry/death/w/7",
+      "direction": "w",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/frame-63.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "frames": 8,
+        "fps": 10,
+        "loop": true
+      },
+      "attack": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      },
+      "hit": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      },
+      "death": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "3bed47e5376111b04fe0aa8096737e38050c77dec524299f9c37b9937c2aa83b",
+    "sourceRefs": [
+      "assets/art/source/blender-units/battle.unit.cavalry/v1/manifest.json",
+      "assets/art/source/blender-units/battle.unit.cavalry/v1/source.blend",
+      "assets/art/source/blender-units/battle.unit.cavalry/v1/profile.json",
+      "assets/art/source/blender-units/battle.unit.cavalry/v1/recipe.py",
+      "assets/art/source/blender-units/battle.unit.cavalry/v1/driver.py",
+      "assets/art/source/blender-units/battle.unit.cavalry/v1/render-settings.json",
+      "assets/art/approved/battle.unit.cavalry/70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2/provider-source-6.json"
+    ],
+    "licenseNotes": [
+      "Original project-authored geometry, rig, materials and actions; retained factory dependencies and every raw/native render are bound by the source manifest inventory. Shared mechanical-role artwork does not claim new culture-specific originals. Native and runtime visual acceptance remain separate."
+    ]
+  },
+  "createdAt": "2026-09-08T23:45:02.102Z",
+  "referenceHashes": [
+    "9a6c65e522af7298c9487d1fb0f30be74cca1aaa86ab79a65a2121b7e1cdf451",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "articulated-battle-96",
+      "settingsHash": "47ba46a50ad3b679d895311451c37d2c8382e601def43c5f2af4df87cbc1ddda",
+      "inputHash": "9a6c65e522af7298c9487d1fb0f30be74cca1aaa86ab79a65a2121b7e1cdf451",
+      "outputHash": "96982127a5f594c0d36d492bc43d38e909a54c583747eaebad04a38ed747d4c9"
+    },
+    {
+      "tool": "theandril-processing-batch",
+      "version": "1",
+      "profile": "explicit-authored-frames",
+      "settingsHash": "9d6627d04e4a0523eaa3c41660520a0adabf6546438bfbb0535c07709c62638d",
+      "inputHash": "96982127a5f594c0d36d492bc43d38e909a54c583747eaebad04a38ed747d4c9",
+      "outputHash": "2eccc433e6c23a29883cae74d8602d50e96cd981ec55c912a2772934874466b6"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/battle.unit.cavalry.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex-art-review",
+    "reviewedAt": "2026-09-09T00:04:51.803Z",
+    "notes": "Inspected all64processed native frames and 4x west saber action, with independent parent review of east action. Real articulated horse legs, mane/tail, tack and seated rider retain identity. Saber wind-up/strike and horse/rider collapse read clearly; far-facing fallen rider is partly occluded by the horse as expected from actual geometry. Native accepted, crowd/runtime review pending.\nReviewed candidate 70714585672a4a25fc1d31710f8f7adda425005be272e085ec9a959b851cc7c2; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/153e5a447a04729ba5576ab415b258a1c710fd9ed48261940358182bf8929e1e.png"
+    ],
+    "inputHash": "6d6f4198af566ceacd5998297d14b3fc8d58522fff744a79feeae40510719d39"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 96,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

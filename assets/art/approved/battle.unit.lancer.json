@@ -1,0 +1,879 @@
+{
+  "schemaVersion": 1,
+  "id": "battle.unit.lancer",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "battle.unit.lancer"
+  ],
+  "prompt": "Original Theandril shared lancer battle role, authored as editable weighted Blender meshes and bone Actions. Two independently rendered facings and five complete authored clips. Fixed 96x96 camera canvas, ground pivot (48,80), palette and full-motion union. Culture identity remains in existing banners and map art. Exact source manifest: assets/art/source/blender-units/battle.unit.lancer/v1/manifest.json. No mirrored sprites, synthetic casualty poses or whole-sprite bobbing claimed as articulated animation.",
+  "frames": [
+    {
+      "id": "battle.unit.lancer/idle/e/0",
+      "direction": "e",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-0.png"
+    },
+    {
+      "id": "battle.unit.lancer/idle/e/1",
+      "direction": "e",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-1.png"
+    },
+    {
+      "id": "battle.unit.lancer/idle/e/2",
+      "direction": "e",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-2.png"
+    },
+    {
+      "id": "battle.unit.lancer/idle/e/3",
+      "direction": "e",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-3.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/e/0",
+      "direction": "e",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-4.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/e/1",
+      "direction": "e",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-5.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/e/2",
+      "direction": "e",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-6.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/e/3",
+      "direction": "e",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-7.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/e/4",
+      "direction": "e",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-8.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/e/5",
+      "direction": "e",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-9.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/e/6",
+      "direction": "e",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-10.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/e/7",
+      "direction": "e",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-11.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/e/0",
+      "direction": "e",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-12.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/e/1",
+      "direction": "e",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-13.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/e/2",
+      "direction": "e",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-14.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/e/3",
+      "direction": "e",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-15.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/e/4",
+      "direction": "e",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-16.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/e/5",
+      "direction": "e",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-17.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/e/6",
+      "direction": "e",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-18.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/e/7",
+      "direction": "e",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-19.png"
+    },
+    {
+      "id": "battle.unit.lancer/hit/e/0",
+      "direction": "e",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-20.png"
+    },
+    {
+      "id": "battle.unit.lancer/hit/e/1",
+      "direction": "e",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-21.png"
+    },
+    {
+      "id": "battle.unit.lancer/hit/e/2",
+      "direction": "e",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-22.png"
+    },
+    {
+      "id": "battle.unit.lancer/hit/e/3",
+      "direction": "e",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-23.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/e/0",
+      "direction": "e",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-24.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/e/1",
+      "direction": "e",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-25.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/e/2",
+      "direction": "e",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-26.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/e/3",
+      "direction": "e",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-27.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/e/4",
+      "direction": "e",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-28.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/e/5",
+      "direction": "e",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-29.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/e/6",
+      "direction": "e",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-30.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/e/7",
+      "direction": "e",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-31.png"
+    },
+    {
+      "id": "battle.unit.lancer/idle/w/0",
+      "direction": "w",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-32.png"
+    },
+    {
+      "id": "battle.unit.lancer/idle/w/1",
+      "direction": "w",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-33.png"
+    },
+    {
+      "id": "battle.unit.lancer/idle/w/2",
+      "direction": "w",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-34.png"
+    },
+    {
+      "id": "battle.unit.lancer/idle/w/3",
+      "direction": "w",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-35.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/w/0",
+      "direction": "w",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-36.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/w/1",
+      "direction": "w",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-37.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/w/2",
+      "direction": "w",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-38.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/w/3",
+      "direction": "w",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-39.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/w/4",
+      "direction": "w",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-40.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/w/5",
+      "direction": "w",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-41.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/w/6",
+      "direction": "w",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-42.png"
+    },
+    {
+      "id": "battle.unit.lancer/walk/w/7",
+      "direction": "w",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-43.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/w/0",
+      "direction": "w",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-44.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/w/1",
+      "direction": "w",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-45.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/w/2",
+      "direction": "w",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-46.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/w/3",
+      "direction": "w",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-47.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/w/4",
+      "direction": "w",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-48.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/w/5",
+      "direction": "w",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-49.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/w/6",
+      "direction": "w",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-50.png"
+    },
+    {
+      "id": "battle.unit.lancer/attack/w/7",
+      "direction": "w",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-51.png"
+    },
+    {
+      "id": "battle.unit.lancer/hit/w/0",
+      "direction": "w",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-52.png"
+    },
+    {
+      "id": "battle.unit.lancer/hit/w/1",
+      "direction": "w",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-53.png"
+    },
+    {
+      "id": "battle.unit.lancer/hit/w/2",
+      "direction": "w",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-54.png"
+    },
+    {
+      "id": "battle.unit.lancer/hit/w/3",
+      "direction": "w",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-55.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/w/0",
+      "direction": "w",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-56.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/w/1",
+      "direction": "w",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-57.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/w/2",
+      "direction": "w",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-58.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/w/3",
+      "direction": "w",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-59.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/w/4",
+      "direction": "w",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-60.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/w/5",
+      "direction": "w",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-61.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/w/6",
+      "direction": "w",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-62.png"
+    },
+    {
+      "id": "battle.unit.lancer/death/w/7",
+      "direction": "w",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/frame-63.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "frames": 8,
+        "fps": 10,
+        "loop": true
+      },
+      "attack": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      },
+      "hit": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      },
+      "death": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "2f3f9db2198ff40da59b32fdab3312fe78f92a967aef80d2b24f3cd3feb6e8df",
+    "sourceRefs": [
+      "assets/art/source/blender-units/battle.unit.lancer/v1/manifest.json",
+      "assets/art/source/blender-units/battle.unit.lancer/v1/source.blend",
+      "assets/art/source/blender-units/battle.unit.lancer/v1/profile.json",
+      "assets/art/source/blender-units/battle.unit.lancer/v1/recipe.py",
+      "assets/art/source/blender-units/battle.unit.lancer/v1/driver.py",
+      "assets/art/source/blender-units/battle.unit.lancer/v1/render-settings.json",
+      "assets/art/approved/battle.unit.lancer/67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2/provider-source-6.json"
+    ],
+    "licenseNotes": [
+      "Original project-authored geometry, rig, materials and actions; retained factory dependencies and every raw/native render are bound by the source manifest inventory. Shared mechanical-role artwork does not claim new culture-specific originals. Native and runtime visual acceptance remain separate."
+    ]
+  },
+  "createdAt": "2026-09-08T23:49:00.904Z",
+  "referenceHashes": [
+    "db5c641bbad2867b86c8a8cc7d48428a397f49d4bf26a24ac34d1e9afac85d7d",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "articulated-battle-96",
+      "settingsHash": "4879a39a7db8b11571771f89fcdda85709b8f2d7225f3f2c9ab0a728726b866c",
+      "inputHash": "db5c641bbad2867b86c8a8cc7d48428a397f49d4bf26a24ac34d1e9afac85d7d",
+      "outputHash": "36b76bc63bdbd43b9bcc51ca16680b46199827a8ee272047e7d4005e42eeddce"
+    },
+    {
+      "tool": "theandril-processing-batch",
+      "version": "1",
+      "profile": "explicit-authored-frames",
+      "settingsHash": "9d6627d04e4a0523eaa3c41660520a0adabf6546438bfbb0535c07709c62638d",
+      "inputHash": "36b76bc63bdbd43b9bcc51ca16680b46199827a8ee272047e7d4005e42eeddce",
+      "outputHash": "8a755fe7d84fab937b4df524e03f3c2133ddb5277786541c6080520beb8dcedf"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/battle.unit.lancer.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex-art-review",
+    "reviewedAt": "2026-09-09T00:06:17.828Z",
+    "notes": "Reviewed all64processed native poses and 4x west lance action. Long lance/pennon, horse armor overlaps and chamfron distinguish the heavy rider from cavalry. Actual horse gait, seated rider wind-up/lowered strike and joint collapse retain fixed ground registration. Lance clears everyframe; native accepted with runtime density and action review pending.\nReviewed candidate 67fbb8411d35bb89e967ad393095ec683165b898e498f6363c147a13a87bcae2; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/5962ec78ae7b6ccfbff84c1394274090c9536bc378ebf41a8cddc77f5c3b6188.png"
+    ],
+    "inputHash": "b80b74df956d264581fd0717b859ff3a2ac8649b333b9fd20ef39fd2117ef2c2"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 96,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

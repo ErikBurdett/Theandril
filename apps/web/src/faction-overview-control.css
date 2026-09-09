@@ -1,0 +1,16 @@
+/* Reserve only pointer targets, while sizing the opened menu against the real
+ * map height. A viewport-only limit clips the menu above short map canvases. */
+.faction-overview-control { position: absolute; z-index: 6; top: 10px; bottom: 82px; left: 23px; width: min(22rem, calc(100% - 46px)); pointer-events: none; color: var(--hearth-text, #ded5bd); font-size: calc(12px * var(--text-scale, 1)); }
+.faction-overview-control > summary { position: absolute; bottom: 0; left: 0; min-height: 44px; width: max-content; max-width: 100%; pointer-events: auto; cursor: pointer; padding: 12px; border: 1px solid var(--hearth-edge, #766b4c); border-radius: 4px; background: var(--hearth-leather, #1c2828); }
+.overview-controls { position: absolute; bottom: 52px; left: 0; width: 100%; max-height: calc(100% - 52px); overflow: auto; overscroll-behavior: contain; pointer-events: auto; padding: .8rem; background: var(--hearth-leather, #172323); border: 1px solid var(--hearth-edge, #8b7851); border-radius: 6px; box-shadow: 0 8px 24px #0009; }
+.overview-controls > [role="group"], .overview-filter-actions { display: flex; gap: .4rem; }
+.overview-controls button { min-height: 44px; padding: .5rem .65rem; }
+.overview-controls button[aria-pressed="true"] { color: #fff0c4; border-color: #ddbd73; background: #465044; }
+.overview-controls p { line-height: 1.45; margin: .65rem 0; }
+.overview-controls fieldset { display: grid; gap: .4rem; padding: .5rem; margin: .6rem 0; max-height: min(17rem, 40vh); overflow-y: auto; }
+.overview-controls label { display: flex; align-items: center; gap: .6rem; min-height: 44px; font-size: 1em; }
+.overview-controls input { width: 1rem; height: 1rem; margin: 0; }
+.overview-faction-swatch { width: .75rem; height: .75rem; flex: 0 0 .75rem; border: 1px solid #c6c4b980; }
+@media (max-width: 650px) {
+  .faction-overview-control { left: 13px; bottom: 72px; width: min(22rem, calc(100% - 26px)); }
+}

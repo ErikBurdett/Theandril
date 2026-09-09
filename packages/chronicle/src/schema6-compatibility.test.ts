@@ -52,11 +52,15 @@ describe('schema-6 archives retain genuine schema-5 evidence', () => {
     expect(firstTactical).toBeGreaterThan(0);
     for (const record of captured.battle.archive.records.slice(firstTactical)) {
       recordWithVersion(game, archive, record.command, SAVE_VERSION);
-      expect(archive.records.at(-1)).toMatchObject({ ok: record.ok, events: record.events, rulesVersion: SAVE_VERSION });
+      const actual = archive.records.at(-1)!;
+      expect({ ...actual, events: actual.events.filter(event => event.type !== 'formation_experience') }).toMatchObject({ ok: record.ok, events: record.events, rulesVersion: SAVE_VERSION });
     }
     expect(battleReportForVersion(game.battleReports.at(-1)!, 5)).toEqual(captured.battle.archive.records.flatMap(record => record.battles)[0]);
     // The historical combat is frozen, but the following modern end turn earns
     // schema-9 land/center yields. Only historical execution retains old resources.
+    const earned = Object.entries(game.development.formations);
+    expect(earned.length).toBeGreaterThan(0);
+    expect(earned.every(([id, development]) => development.experience > 0 && Object.values(game.armies).some(army => army.formations.some(formation => formation.id === id)))).toBe(true);
     const historical = deserializeGame(captured.battle.finalSave);
     expect(game.armies).toEqual(historical.armies);
     expect(game.factions.reduce((sum, faction) => sum + faction.knowledge, 0)).toBeGreaterThan(historical.factions.reduce((sum, faction) => sum + faction.knowledge, 0));
@@ -74,7 +78,7 @@ describe('schema-6 archives retain genuine schema-5 evidence', () => {
   });
 
   it('supports numeric 4 → 5 → 6 rules transitions and preserves formerly unknown commands as refused', () => {
-    const game = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1 });
+    const game = createGame({ seed: 74, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 1, rosterVersion: 1, rulesVersion: 4 });
     const initialSave = serializeGameForVersion(game, 4);
     const archive: CampaignArchive = { version: 2, mode: 'watch', coverage: 'complete', initialSave, initialHash: checksum(initialSave), initialSaveVersion: 4, initialTurn: 1, records: [], finalHash: null, finalHashVersion: null };
     recordWithVersion(game, archive, end, 4);

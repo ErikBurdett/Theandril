@@ -1,0 +1,126 @@
+{
+  "reviewed": "2026-09-08",
+  "reviewer": "Codex independent gameplay and visual review agent",
+  "scope": "Actual Chromium runtime screenshots; authored fixture terrain, resources and populations; paid canonical claims, buildings and land work. No image edits or raster approval decisions.",
+  "browser_checks": [
+    {
+      "suite": "hearth-development.spec.ts",
+      "passed": 3,
+      "total": 3,
+      "durationSeconds": 13.9
+    },
+    {
+      "suite": "strategic-picking.spec.ts plus army-size.spec.ts",
+      "passed": 4,
+      "total": 4,
+      "durationSeconds": 14.5
+    },
+    {
+      "suite": "hearth-harbor.spec.ts",
+      "passed": 1,
+      "total": 1,
+      "durationSeconds": 3.5,
+      "sourceRun": "test-results/slice26-final-chromium",
+      "scope": "Coastal building.harbor runtime integration at desktop and 390 px; both cameras at 2.2x near zoom."
+    },
+    {
+      "suite": "hearth-harbor.spec.ts",
+      "passed": 1,
+      "total": 1,
+      "durationSeconds": 4.4,
+      "sourceRun": "test-results/slice26-final-evidence",
+      "scope": "Same coastal fixture rerun with explicit durable JSON export; no image-generation or application changes.",
+      "evidence": "charter-harbor-evidence.json"
+    }
+  ],
+  "images": [
+    {
+      "file": "mature-hearth-far.png",
+      "source": "test-results/hearth-development/hearth-development-a-matur-b1f5c-ar-and-narrow-camera-scales/mature-hearth-far.png",
+      "sha256": "2bcf575897ff10ba256d9d293b83b1e12f782aba8f0cdbd5b09b0d5dfc1d6033",
+      "bytes": 288829,
+      "review": "accepted for this scoped runtime presentation slice"
+    },
+    {
+      "file": "mature-hearth-narrow.png",
+      "source": "test-results/hearth-development/hearth-development-a-matur-b1f5c-ar-and-narrow-camera-scales/mature-hearth-narrow.png",
+      "sha256": "5fd696fcbdf8ac305ce60d47a75f94c3d0c3eadca80c62cb9d34d2fc543a473d",
+      "bytes": 140495,
+      "review": "accepted for this scoped runtime presentation slice"
+    },
+    {
+      "file": "mature-hearth-near.png",
+      "source": "test-results/hearth-development/hearth-development-a-matur-b1f5c-ar-and-narrow-camera-scales/mature-hearth-near.png",
+      "sha256": "fc4ec333943bf1cca0d64c2e081689c7c7ac591eed39bb0d4150426e88bd2d45",
+      "bytes": 354298,
+      "review": "accepted for this scoped runtime presentation slice"
+    },
+    {
+      "file": "mature-hearth-normal.png",
+      "source": "test-results/hearth-development/hearth-development-a-matur-b1f5c-ar-and-narrow-camera-scales/mature-hearth-normal.png",
+      "sha256": "d8f9b9aef8ce978bf7ed7ae10ffd57ad41188bb8306896456efafe51635adf54",
+      "bytes": 446524,
+      "review": "accepted for this scoped runtime presentation slice"
+    },
+    {
+      "file": "completed-cellar-and-fields.png",
+      "source": "test-results/hearth-development/hearth-development-paid-he-e375a--restoration-and-completion/completed-cellar-and-fields.png",
+      "sha256": "d850984ae1cb5fd46bf7bc8a722b06966c79bfa47130ae8299ec9e0ffd804d92",
+      "bytes": 426822,
+      "review": "accepted for this scoped runtime presentation slice"
+    },
+    {
+      "file": "paid-hearth-and-tile-construction.png",
+      "source": "test-results/hearth-development/hearth-development-paid-he-e375a--restoration-and-completion/paid-hearth-and-tile-construction.png",
+      "sha256": "4db17f43b41c64c63176db77f4de5ce8deeec9e2470ebc1f5eaf85595731bd04",
+      "bytes": 425459,
+      "review": "accepted for this scoped runtime presentation slice"
+    },
+    {
+      "file": "strategic-badges-inspected-without-orders.png",
+      "source": "test-results/strategic-picking/strategic-picking-clicking-ac174-ut-moving-the-selected-army/strategic-badges-inspected-without-orders.png",
+      "sha256": "451a6d694ecbc5dc68d3967ed9a1fdb8f85f600c5ddce41cf97c1472ba5b6c02",
+      "bytes": 260241,
+      "review": "accepted for this scoped runtime presentation slice"
+    },
+    {
+      "file": "rejected-first-mature-hearth-normal.png",
+      "source": "test-results/hearth-development-first-review/mature-hearth-normal.png",
+      "sha256": "acfb52c9f3e732cafbc97022acc42cff7552eb4817cf27a94d6d09e1e2c2ff4a",
+      "bytes": 436404,
+      "review": "rejected: flat civic icons, grey pads and dense straight streets"
+    },
+    {
+      "file": "rejected-first-mature-hearth-near.png",
+      "source": "test-results/hearth-development-first-review/mature-hearth-near.png",
+      "sha256": "cd1ed7639930818a2172651c9ce483498225dfc1af728db60dc9336225b90a4d",
+      "bytes": 347170,
+      "review": "rejected: flat civic icons, grey pads and dense straight streets"
+    },
+    {
+      "file": "charter-harbor-near.png",
+      "source": "test-results/slice26-final-chromium/hearth-harbor-a-paid-Chart-7dbeb-ithout-changing-naval-rules/charter-harbor-near.png",
+      "sha256": "f269599d2b314573a831fbaf2e333c9d92a0672ce40f7231fa9b8727d37b3852",
+      "bytes": 299093,
+      "review": "Accepted by Codex hearth art agent: exact approved timber harbor and crane on land beside visible shallow water; whole harbor unobstructed at 2.2x near camera.",
+      "scope": "Actual Chromium; authored coast/population/resources with canonical founding, paid research, paid harbor queue and real construction turns. Exact served opaque silhouette, unchanged terrain/naval production permissions/state hash asserted."
+    },
+    {
+      "file": "charter-harbor-near-390.png",
+      "source": "test-results/slice26-final-chromium/hearth-harbor-a-paid-Chart-7dbeb-ithout-changing-naval-rules/charter-harbor-near-390.png",
+      "sha256": "11e402c72029d90ea5efbdd86b547ae390b7c95aac70bdedd91f01465d8a4557",
+      "bytes": 106270,
+      "review": "Accepted by Codex hearth art agent: exact approved timber harbor and crane on land beside visible shallow water; whole harbor unobstructed at 2.2x near camera.",
+      "scope": "Actual Chromium; authored coast/population/resources with canonical founding, paid research, paid harbor queue and real construction turns. Exact served opaque silhouette, unchanged terrain/naval production permissions/state hash asserted."
+    }
+  ],
+  "evidence": [
+    {
+      "file": "charter-harbor-evidence.json",
+      "source": "test-results/slice26-final-evidence/hearth-harbor-a-paid-Chart-7dbeb-ithout-changing-naval-rules/charter-harbor-evidence.json",
+      "sha256": "f3dc11ad017c1ef22e53fb580906e952d00e36060e424b3c9df1e7ac9e7e4964",
+      "bytes": 8702,
+      "scope": "Exact unedited JSON from the passing final-evidence Chromium rerun of the same coastal fixture. Records 30 knowledge, 20 coin, six construction turns, approved harbor at cell 640, opaque width 39.75056603370573 world pixels, visible neighboring shallows, naval production permissions, 2.2 near zoom and preserved campaign hash 775f8474. Screenshot references retain their independently reviewed earlier-run sources; the repeated final screenshots were also inspected and show the same accepted composition."
+    }
+  ]
+}

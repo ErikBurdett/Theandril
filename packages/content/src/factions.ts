@@ -50,11 +50,13 @@ export function factionRoster(version: RosterVersion): (typeof FACTIONS)[number]
   });
 }
 
-export const LAND_MILITARY_UNIT_IDS = ['unit.guard', 'unit.spearman', 'unit.scout', 'unit.heavy_infantry', 'unit.cavalry'] as const;
+export const BASE_LAND_MILITARY_UNIT_IDS = ['unit.guard', 'unit.spearman', 'unit.scout', 'unit.heavy_infantry', 'unit.cavalry'] as const;
+export const LAND_MILITARY_UNIT_IDS = [...BASE_LAND_MILITARY_UNIT_IDS, 'unit.skirmisher', 'unit.arbalester', 'unit.halberdier', 'unit.lancer'] as const;
 export type LandMilitaryUnitId = (typeof LAND_MILITARY_UNIT_IDS)[number];
 export type RecruitmentWeights = Readonly<Record<LandMilitaryUnitId, number>>;
 const weights = (guard: number, spear: number, scout: number, heavy: number, cavalry: number): RecruitmentWeights => ({
   'unit.guard': guard, 'unit.spearman': spear, 'unit.scout': scout, 'unit.heavy_infantry': heavy, 'unit.cavalry': cavalry,
+  'unit.skirmisher': scout, 'unit.arbalester': 1, 'unit.halberdier': Math.min(spear, heavy), 'unit.lancer': cavalry,
 });
 /** Preferences only: every culture pays the same costs and may recruit the same units. */
 export const FACTION_RECRUITMENT_WEIGHTS: Readonly<Record<string, RecruitmentWeights>> = {

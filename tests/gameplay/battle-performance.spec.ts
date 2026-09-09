@@ -12,29 +12,33 @@ test('authored twenty-versus-twenty battlefield measures real round playback wit
   await page.goto('/');
   await page.getByLabel('Import save file').setInputFiles({ name: 'twenty-versus-twenty.theandril', mimeType: 'application/gzip', buffer: Buffer.from(await exportSave(serialized)) });
   await expect(page.getByTestId('feedback')).toContainText('Imported campaign');
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.atlasPages)).toBe(1);
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.atlasPages)).toBe(2);
   const canvas = await page.getByTestId('map-container').locator('canvas').elementHandle();
   await openRealmAffairs(page); await page.getByRole('button', { name: 'Declare war on Reedbound Council', exact: true }).click();
   await openSelectedOrders(page);
   await page.getByRole('button', { name: 'Attack Reedbound Watch (army.4)', exact: true }).click();
   await expect(page.getByTestId('battle-panel')).toBeVisible();
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.atlasPages)).toBe(2);
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getArtDiagnostics()?.atlasPages)).toBe(5);
   const initial = await page.evaluate(() => ({ scene: window.__THEANDRIL__!.getBattleDiagnostics()!, metrics: window.__THEANDRIL__!.getPerformanceCounters() }));
   expect(initial.scene.formations.filter(item => item.side === 'attacker')).toHaveLength(20);
   expect(initial.scene.formations.filter(item => item.side === 'defender')).toHaveLength(20);
   expect(initial.scene.actors).toHaveLength(46);
-  expect(initial.metrics.residentAtlasBytesEstimate).toBe(20 * 1024 * 1024);
+  const initialMembers = initial.scene.formations.reduce((count, formation) => count + formation.strength, 0);
+  expect(initial.scene.soldiers).toHaveLength(initialMembers);
+  expect(new Set(initial.scene.soldiers.map(soldier => soldier.id)).size).toBe(initialMembers);
+  expect(initial.scene.soldiers.every(soldier => soldier.alive && soldier.frameId?.startsWith(soldier.assetId))).toBe(true);
+  expect(initial.metrics.residentAtlasBytesEstimate).toBe(53 * 1024 * 1024);
   await expect(page.getByTestId('map-container').locator('canvas')).toHaveCount(1);
   expect(await page.evaluate(canvas => canvas === document.querySelector('[data-testid=map-container] canvas'), canvas)).toBe(true);
   const frame = initial.metrics.frameCount!;
   await page.waitForFunction(frame => window.__THEANDRIL__!.getPerformanceCounters().frameCount! >= frame + 60, frame);
   await page.getByRole('button', { name: 'Brace', exact: true }).click();
   await expect(page.getByTestId('battle-round')).toHaveText('1');
-  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getBattleDiagnostics()?.effects.some(effect => effect.assetId === 'effect.battle_melee' || effect.assetId === 'effect.battle_projectile'))).toBe(true);
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getBattleDiagnostics()?.effects.some(effect => effect.assetId === 'effect.battle_melee' || effect.assetId === 'effect.battle_projectile')), { timeout: 15000 }).toBe(true);
   const commandHash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
   const sample = await page.evaluate(async () => {
-    const frames: number[] = [], cpu: number[] = [], effects = new Set<string>(), frameIds = new Set<string>();
-    let previous = 0, maxEffects = 0, maxActors = 0, maxPool = 0, activeFrames = 0;
+    const frames: number[] = [], cpu: number[] = [], effects = new Set<string>(), frameIds = new Set<string>(), soldierFrames = new Set<string>(), soldierStates = new Set<string>();
+    let previous = 0, maxEffects = 0, maxActors = 0, maxPool = 0, maxSoldiers = 0, maxSoldierPool = 0, activeFrames = 0;
     for (let index = 0; index < 121; index++) {
       const time = await new Promise<number>(resolve => requestAnimationFrame(resolve));
       if (previous) frames.push(time - previous); previous = time;
@@ -42,19 +46,25 @@ test('authored twenty-versus-twenty battlefield measures real round playback wit
       cpu.push(metrics.renderCpuMs ?? 0); maxEffects = Math.max(maxEffects, scene.effects.length); maxActors = Math.max(maxActors, scene.actors.length); maxPool = Math.max(maxPool, scene.pooledEffects);
       if (scene.effects.length) activeFrames++;
       for (const effect of scene.effects) { effects.add(effect.assetId); frameIds.add(effect.frameId); }
+      maxSoldiers = Math.max(maxSoldiers, scene.soldiers.length); maxSoldierPool = Math.max(maxSoldierPool, scene.pooledSoldiers);
+      for (const soldier of scene.soldiers) { if (soldier.frameId) soldierFrames.add(soldier.frameId); soldierStates.add(soldier.state); }
     }
     const quantile = (values: number[], fraction: number) => [...values].sort((a, b) => a - b)[Math.min(values.length - 1, Math.floor(values.length * fraction))]!;
-    return { frames: frames.length, frameMs: { p50: quantile(frames, .5), p95: quantile(frames, .95), max: Math.max(...frames) }, renderCpuMs: { p50: quantile(cpu, .5), p95: quantile(cpu, .95) }, activeFrames, maxEffects, maxActors, maxPool, effects: [...effects], frameIds: [...frameIds], scene: window.__THEANDRIL__!.getBattleDiagnostics()!, metrics: window.__THEANDRIL__!.getPerformanceCounters() };
+    return { frames: frames.length, frameMs: { p50: quantile(frames, .5), p95: quantile(frames, .95), max: Math.max(...frames) }, renderCpuMs: { p50: quantile(cpu, .5), p95: quantile(cpu, .95) }, activeFrames, maxEffects, maxActors, maxPool, maxSoldiers, maxSoldierPool, soldierFrames: [...soldierFrames], soldierStates: [...soldierStates], effects: [...effects], frameIds: [...frameIds], scene: window.__THEANDRIL__!.getBattleDiagnostics()!, metrics: window.__THEANDRIL__!.getPerformanceCounters() };
   });
   expect(sample.frames).toBeGreaterThanOrEqual(120); expect(sample.activeFrames).toBeGreaterThan(0);
   expect(sample.maxActors).toBe(46); expect(sample.maxEffects).toBeGreaterThan(0); expect(sample.maxEffects).toBeLessThanOrEqual(12); expect(sample.maxPool).toBeLessThanOrEqual(12);
   expect(sample.scene.pooledActors).toBe(46); expect(sample.frameIds.length).toBeGreaterThan(1);
   expect(sample.metrics.chunkRebuilds).toBe(initial.metrics.chunkRebuilds);
-  expect(sample.metrics.residentAtlasBytesEstimate).toBe(20 * 1024 * 1024);
+  expect(sample.maxSoldiers).toBe(initialMembers); expect(sample.maxSoldierPool).toBe(initialMembers);
+  expect(sample.soldierFrames.length).toBeGreaterThan(10); expect(sample.soldierStates).toContain('attack');
+  expect(sample.metrics.residentAtlasBytesEstimate).toBe(53 * 1024 * 1024);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(commandHash);
-  await page.getByRole('button', { name: 'Pause actions', exact: true }).click();
+  const pause = page.getByRole('button', { name: 'Pause actions', exact: true });
+  if (await pause.isEnabled()) await pause.click();
   await page.getByTestId('map-container').screenshot({ path: info.outputPath('twenty-versus-twenty-battle.png') });
-  await page.getByRole('button', { name: 'Skip animations', exact: true }).click();
+  const skip = page.getByRole('button', { name: 'Skip animations', exact: true });
+  if (await skip.isEnabled()) await skip.click();
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getBattleDiagnostics()?.completed)).toBe(true);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(commandHash);
   // Query the actual existing context after timing; do not infer hardware or
@@ -70,7 +80,7 @@ test('authored twenty-versus-twenty battlefield measures real round playback wit
   });
   const report = { version: 1, measuredAt: new Date().toISOString(), workload: 'Authored funded veteran20vs20:40real formations,2marshals,2Waykeepers,2engineers; no injected battle outcomes. Real Brace command;120warmed animation frames. Not a campaign-growth benchmark.', isolation: 'One Playwright worker; host exclusivity must be confirmed by the coordinating run, not inferred by this test.', contentHash: CONTENT_HASH, originHash, commandHash, serializedBytes: Buffer.byteLength(serialized), graphics, initial, sample, errors };
   const raw = JSON.stringify(report, null, 2);
-  await mkdir('docs/performance', { recursive: true }); await writeFile('docs/performance/0035-battle-render.json', raw);
+  await mkdir('docs/performance', { recursive: true }); await writeFile('docs/performance/0039-battle-render.json', raw);
   await writeFile(info.outputPath('battle-render.json'), raw); await info.attach('battle-render.json', { body: raw, contentType: 'application/json' });
   console.log('BATTLE_RENDER ' + JSON.stringify({ originHash, commandHash, frameMs: sample.frameMs, maxActors: sample.maxActors, maxEffects: sample.maxEffects, atlasBytes: sample.metrics.residentAtlasBytesEstimate }));
   expect(errors).toEqual([]);

@@ -94,7 +94,7 @@ export function createNavigation(view: Observation) {
     get expandedNodes() { return expandedNodes; },
     informationGain,
     destination(army: ObservedArmy, sight: number, claimed: Set<number>, strategicScore?: (cell: number) => number, explorationTieBreak?: (cell: number) => number,
-      explorationUtility?: (cell: number, gain: number) => number): number | undefined {
+      explorationUtility?: (cell: number, gain: number) => number, tieIdentity = army.id): number | undefined {
       if (army.carrierId || army.movementBlocker) return undefined;
       const allowed = entryMask(army);
       const range = getMovementQuery(travelView, army.id).reachable.filter(item => (entryAt(item.cell) & allowed) && !claimed.has(item.cell));
@@ -102,8 +102,9 @@ export function createNavigation(view: Observation) {
         const gain = informationGain(item.cell, sight);
         return { ...item, gain, strategic: strategicScore?.(item.cell) ?? 0, exploration: explorationUtility?.(item.cell, gain) ?? gain * 100 };
       });
-      // Stable per-army tie breaking spreads scouts without changing their objective each turn.
-      let salt = 0; for (let i = 0; i < army.id.length; i++) salt = Math.imul(salt, 31) + army.id.charCodeAt(i) | 0;
+      // Callers may use observed local identity when global ID allocation should
+      // not redirect exploration. Shared claimed destinations still spread fleets.
+      let salt = 0; for (let i = 0; i < tieIdentity.length; i++) salt = Math.imul(salt, 31) + tieIdentity.charCodeAt(i) | 0;
       const tie = (cell: number): number => (Math.imul(cell + 1, 1103515245) ^ salt) >>> 0;
       candidates.sort((a, b) => (b.strategic + b.exploration) - (a.strategic + a.exploration)
         || (explorationTieBreak?.(b.cell) ?? 0) - (explorationTieBreak?.(a.cell) ?? 0)

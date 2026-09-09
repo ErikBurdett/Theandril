@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "id": "building.granary",
+  "type": "map-object",
+  "status": "APPROVED",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "building.granary"
+  ],
+  "prompt": "Use case: stylized-concept. Create ONE original complete Theandril strategy-map civic district prop. Genuinely transparent PNG background, entire silhouette inside comfortable 15% margins, not a sheet, no other asset. Grounded weathered medieval dark fantasy, crisp coarse square pixel-art clusters at logical 64×64 detail, broad connected material planes and clear silhouette, restrained selective dark outline. Three-quarter southeast isometric view, upper-left diffuse highlights, old pale stone, peat-dark timber, soot recesses, muted sage moss, rust and dull brass accents. Compact complete cluster fits a 56×44 logical-pixel footprint, no surrounding full ground tile or hex border. No text, labels, letters, banners with writing, people, landscape, checkerboard, modern technology, glossy gradients, soft shadows, haze, detached pieces, montage or game UI. ROOT CELLAR: low earthen storage mound with a clear small rounded pale stone doorway and heavy closed timber double door, stone steps descending into it; two broad grouped piles of tied grain sacks and three timber food barrels sheltered by a short attached lean-to. Turf roof with restrained grass, a practical low ventilating stone flue. Connected broad granary-yard silhouette, no tower.",
+  "frames": [
+    {
+      "id": "building.granary/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/approved/building.granary/4827128503b04628cc8e9911dbe867752c965aacaec41167432f58696f2a1fc6/frame-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "7989a14f8c16d968a9a19b8e14b1e943858f1ba454263f53e38782814c58c9c8",
+    "sourceRefs": [
+      "assets/art/source/hearth-civic/building.granary-v1.png",
+      "assets/art/source/hearth-civic/building.granary-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T21:40:50.916Z",
+  "referenceHashes": [
+    "d2b52afb5f05d6fe60ceafce919b181f96f74c38642d5c7b36182f21e09af1a4",
+    "030bfea699e06cfb82ff838dbf598e4608f3b617e9e5cb3896c9d17fd3042029"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-hearth-civic-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "d7a74d525373161d178cede5f9d5ab4bb10337e39eb477f5be77d1fe904cc920",
+      "inputHash": "d2b52afb5f05d6fe60ceafce919b181f96f74c38642d5c7b36182f21e09af1a4",
+      "outputHash": "cd9ad44fceb2546759fc9798fb1d84223f8608b9e4904fbbe069713b66070d7e"
+    },
+    {
+      "tool": "theandril-grid-enlarge",
+      "version": "1",
+      "profile": "nearest-4x",
+      "settingsHash": "923ad9e54011c5b01ca2f9aa71e27257ed5e176c71a398f8838be07c1b58c9dc",
+      "inputHash": "cd9ad44fceb2546759fc9798fb1d84223f8608b9e4904fbbe069713b66070d7e",
+      "outputHash": "a017414f2f78da854ad9e3059e02076a822a6b632b3f01c68b513c7fb0fd722b"
+    },
+    {
+      "tool": "spritefusion-pixel-snapper",
+      "version": "spritefusion-pixel-snapper 1.0.0",
+      "profile": "fixed-palette-pixel4",
+      "settingsHash": "f1bbe64771c9612a7a1d9af1e75176c7b283577b04b45b3861184a0d79d3ff76",
+      "inputHash": "a017414f2f78da854ad9e3059e02076a822a6b632b3f01c68b513c7fb0fd722b",
+      "outputHash": "b6536a8f64f23137ada733b231f955f60a577d1cbf15d823a4a8ba57803c969f"
+    },
+    {
+      "tool": "theandril-native-normalize",
+      "version": "1",
+      "profile": "nearest-alpha128",
+      "settingsHash": "5fe3aeb340ad0f40a33aecd8e411385c85a37e82596d3ea2e0dfb56646a00d2f",
+      "inputHash": "d5dcedeb2a3f5fbd51615a4e4e472358e49146e6d1b53bdface39072cb4e50a8",
+      "outputHash": "d5876bcb08b143cd04c7c1400f7d1bce43b3def86e96f3ec1dda80e5cbce9950"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "1f8e7d4996d6e96bc6a8980090cabade2738d9174ab5f6b46cc5eb2c7a8b8144",
+      "inputHash": "00651ce9641cd17f571aa2770268d1683fdc19d85ee019b08479aaa4a9f3896d",
+      "outputHash": "e4c31d1bc9a88221c12c215420958c2ada7a9f907b3fef81fd91a50641489519"
+    },
+    {
+      "tool": "aseprite",
+      "version": "Aseprite 1.3.18.3-x64",
+      "profile": "aseprite-unit-64",
+      "settingsHash": "0446919e012517df12b483913ac1629827ab6fb67d51fdc580cf7aef5dc25e26",
+      "inputHash": "797402ea4bebbd23039b143abb1d6a41a8d3d1f04bef90ee8b538e38fbc1b127",
+      "outputHash": "7034005d440220dcac395c72be5e78fc9eeb05579890b836eb56a84b611035fd"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/building.granary.approved.json"
+  },
+  "review": {
+    "reviewer": "codex-hearth-art",
+    "reviewedAt": "2026-09-08T21:42:29.464Z",
+    "notes": "Complete original and exact native/4x candidate inspected. Low turf cellar, pale stone entry and sheltered grain sacks/barrels form a practical food-storage silhouette. Connected footprint, clean alpha and readable dark doorway. Fine sack bindings simplify at native size. Native approval; runtime district review follows publication.\nReviewed candidate 4827128503b04628cc8e9911dbe867752c965aacaec41167432f58696f2a1fc6; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/1b0ecbb785c493af1a406526d4834ccc7dd8472d40bb54fff662b7d920187b93.png"
+    ],
+    "inputHash": "8dc7618f55622be128f1013f6fa975e301f1d57c6f2d26a1bca73a254c1a7dba"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

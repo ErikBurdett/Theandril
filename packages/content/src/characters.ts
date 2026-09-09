@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ADVANCED_CHARACTER_SKILLS } from './development';
 
 const id = z.string().regex(/^[a-z]+\.[a-z_]+$/);
 const text = z.string().min(1).max(320);
@@ -26,6 +27,7 @@ export const characterSkillSchema = z.object({
   requiresAll: z.array(id).max(8), requiresAny: z.array(id).max(8),
   branch: z.enum(['specialization', 'command', 'battlecraft', 'survey', 'engineering']), tier: z.number().int().min(1).max(4),
   exclusiveGroup: z.enum(['marshal_specialization', 'field_specialization']).nullable(), commandCapacityBonus: bounded(4),
+  introducedInRules: z.literal(16).optional(),
 }).strict();
 export type CharacterSkillDefinition = z.infer<typeof characterSkillSchema>;
 export const commanderAbilitySchema = z.object({
@@ -33,12 +35,16 @@ export const commanderAbilitySchema = z.object({
 }).strict();
 export type CommanderAbilityDefinition = z.infer<typeof commanderAbilitySchema>;
 
-export const CHARACTER_DEFINITIONS: readonly CharacterDefinition[] = [
+export const LEGACY_CHARACTER_DEFINITIONS: readonly CharacterDefinition[] = [
   { id: 'character.marshal', role: 'marshal', name: 'Hearth marshal', description: 'An appointed field commander. Leads the attached army, rallies shaken formations once per battle, and earns experience from its outcomes.', coinCost: 32, upkeep: 2, leadership: { attack: 1, armor: 0 }, missionIds: [], skillIds: ['skill.steadfast', 'skill.decisive', 'skill.muster_rolls', 'skill.field_orders', 'skill.measured_advance', 'skill.unbroken_line'] },
   { id: 'character.surveyor', role: 'surveyor', name: 'Road witness', description: 'A travelling surveyor who charts terrain from an escorted camp. Surveys preserve geographic knowledge, not the positions of unseen foreign troops.', coinCost: 20, upkeep: 1, leadership: { attack: 0, armor: 0 }, missionIds: ['mission.survey'], skillIds: ['skill.fieldcraft', 'skill.horizon_studies'] },
   { id: 'character.engineer', role: 'engineer', name: 'March engineer', description: 'A field specialist who must travel with an army. Refits replenish real formation losses; siege sabotage trades coin and exposure for damage to defenses.', coinCost: 28, upkeep: 2, leadership: { attack: 0, armor: 0 }, missionIds: ['mission.refit', 'mission.sabotage'], skillIds: ['skill.fieldcraft', 'skill.siegecraft', 'skill.column_workshops', 'skill.sapper_watch'] },
   { id: 'character.waykeeper', role: 'waykeeper', name: 'Waykeeper', description: 'A paid travelling practitioner with personal Flame and Rune aptitude. Researched Cinder thread and Bound ward consume limited battle strain. Occupies a companion slot, not an army command.', coinCost: 40, upkeep: 3, leadership: { attack: 0, armor: 0 }, missionIds: [], skillIds: [] },
 ];
+export const CHARACTER_DEFINITIONS: readonly CharacterDefinition[] = LEGACY_CHARACTER_DEFINITIONS.map(definition => ({ ...definition,
+  skillIds: [...definition.skillIds, ...ADVANCED_CHARACTER_SKILLS.filter(skill => skill.roles.includes(definition.role)).map(skill => skill.id)],
+}));
+export const characterDefinitionsForRules = (version: number): readonly CharacterDefinition[] => version >= 16 ? CHARACTER_DEFINITIONS : LEGACY_CHARACTER_DEFINITIONS;
 export const CHARACTER_MISSIONS: readonly CharacterMissionDefinition[] = [
   { id: 'mission.survey', kind: 'survey', name: 'Survey the frontier', description: 'Hold the escort in place for two turns to chart terrain within six hexes. Unseen armies remain hidden. Moving or fighting interrupts the work without a refund.', duration: 2, coinCost: 4, experience: 4, radius: 6, strengthRestore: 0, defenseDamage: 0, woundTurns: 0, failureChance: 0 },
   { id: 'mission.refit', kind: 'refit', name: 'Refit the column', description: 'Hold the column for two turns to restore up to five missing strength per formation. Refit cannot exceed a formation’s normal capacity or recreate a destroyed formation.', duration: 2, coinCost: 12, experience: 4, radius: 0, strengthRestore: 5, defenseDamage: 0, woundTurns: 0, failureChance: 0 },
@@ -59,7 +65,9 @@ export const CHARACTER_SKILLS: readonly CharacterSkillDefinition[] = [
   { id: 'skill.horizon_studies', name: 'Horizon studies', description: 'A practiced Road witness extends Patient fieldcraft by another hex, charting terrain within eight hexes. Hidden armies are still not revealed.', roles: ['surveyor'], experienceCost: 18, leadership: { attack: 0, armor: 0 }, rallyBonus: 0, surveyRadiusBonus: 1, refitBonus: 0, sabotageRiskReduction: 0, requiresAll: ['skill.fieldcraft'], requiresAny: [], branch: 'survey', tier: 2, exclusiveGroup: null, commandCapacityBonus: 0 },
   { id: 'skill.column_workshops', name: 'Column workshops', description: 'Build on Patient fieldcraft: organized repair parties restore three additional missing strength per formation, for ten in a completed refit. Lost formations cannot be recreated.', roles: ['engineer'], experienceCost: 18, leadership: { attack: 0, armor: 0 }, rallyBonus: 0, surveyRadiusBonus: 0, refitBonus: 3, sabotageRiskReduction: 0, requiresAll: ['skill.fieldcraft'], requiresAny: [], branch: 'engineering', tier: 2, exclusiveGroup: null, commandCapacityBonus: 0 },
   { id: 'skill.sapper_watch', name: 'Sapper watch', description: 'Build on Siege craft: guarded working parties remove the remaining ten percentage points of sabotage-failure risk. Enemy relief or displacement can still interrupt the operation.', roles: ['engineer'], experienceCost: 18, leadership: { attack: 0, armor: 0 }, rallyBonus: 0, surveyRadiusBonus: 0, refitBonus: 0, sabotageRiskReduction: 10, requiresAll: ['skill.siegecraft'], requiresAny: [], branch: 'engineering', tier: 2, exclusiveGroup: null, commandCapacityBonus: 0 },
+  ...ADVANCED_CHARACTER_SKILLS,
 ];
+export const characterSkillsForRules = (version: number): readonly CharacterSkillDefinition[] => CHARACTER_SKILLS.filter(skill => (skill.introducedInRules ?? (skill.exclusiveGroup ? 7 : 8)) <= version);
 export const COMMANDER_ABILITIES: readonly CommanderAbilityDefinition[] = [
   { id: 'ability.rally', name: 'Rally the line', description: 'Once per battle, restore up to twelve morale to the marshal’s surviving formations, capped by their normal morale. Rally does not heal casualties or change the battle’s random stream.', moraleRestore: 12, threshold: 45 },
 ];

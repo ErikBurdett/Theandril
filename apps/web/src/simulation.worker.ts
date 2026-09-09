@@ -1,4 +1,4 @@
-import { createGame, getMovementQuery, getObservation, getSettlementLandObservation, getSpectatorObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
+import { createGame, getDevelopmentEntity, getMovementQuery, getObservation, getSettlementLandObservation, getSpectatorObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
 import { aiObservationOptions, planTurn } from '@theandril/ai';
 import { createJournal, resumeJournal, generateChronicles, type CampaignJournal, type ChronicleDocuments } from '@theandril/chronicle';
 import { SaveStore, deserializeCampaign, exportSave, importSave, serializeCampaign } from '@theandril/persistence';
@@ -19,13 +19,13 @@ let mapRevision = 0;
 const battlePresentations = new BattlePresentationMailbox();
 const saves = new SaveStore();
 let knownCells = new Map<number, Observation['cells'][number]>();
-const metrics: WorkerMetrics = { generationMs: 0, commandMs: 0, aiMs: 0, transferBytes: 0, totalTransferBytes: 0, cellTransferBytes: 0, landQueryCount: 0, landQueryBytes: 0, totalLandQueryBytes: 0 };
+const metrics: WorkerMetrics = { generationMs: 0, commandMs: 0, aiMs: 0, transferBytes: 0, totalTransferBytes: 0, cellTransferBytes: 0, landQueryCount: 0, landQueryBytes: 0, totalLandQueryBytes: 0, developmentQueryCount: 0, developmentQueryBytes: 0, totalDevelopmentQueryBytes: 0 };
 const textEncoder = new TextEncoder();
 
 function send(message: Response, transfer: Transferable[] = []): void { self.postMessage(message, { transfer }); }
 function publish(id: number, message: string, reset = false, replaceMap = false): void {
   if (!state || !journal) throw new Error('Begin or load a campaign first.');
-  const observation = queryObservation ??= getObservation(state, state.turnOwnerId, { landDetails: 'none' });
+  const observation = queryObservation ??= getObservation(state, state.turnOwnerId, { landDetails: 'none', developmentCandidates: false });
   if (reset) { fogEnabled = true; battlePresentations.reset(); }
   const battlePresentation = battlePresentations.take(observation);
   const mapReset = reset || replaceMap;
@@ -33,7 +33,7 @@ function publish(id: number, message: string, reset = false, replaceMap = false)
   const spectator = !fogEnabled && journal.mode === 'watch' ? getSpectatorObservation(state, state.turnOwnerId) : undefined;
   const cells = (spectator?.cells ?? observation.cells).filter(cell => {
     const old = knownCells.get(cell.cell);
-    return !old || old.terrain !== cell.terrain || old.biome !== cell.biome || old.waterDepth !== cell.waterDepth || old.fertility !== cell.fertility || old.visible !== cell.visible || old.featureMask !== cell.featureMask || old.settlementId !== cell.settlementId || old.factionId !== cell.factionId || old.improvementId !== cell.improvementId || old.hydrology !== cell.hydrology || old.roadMask !== cell.roadMask;
+    return !old || old.terrain !== cell.terrain || old.biome !== cell.biome || old.waterDepth !== cell.waterDepth || old.fertility !== cell.fertility || old.visible !== cell.visible || old.featureMask !== cell.featureMask || old.settlementId !== cell.settlementId || old.factionId !== cell.factionId || old.improvementId !== cell.improvementId || old.hydrology !== cell.hydrology || old.roadMask !== cell.roadMask || old.resourceId !== cell.resourceId;
   });
   for (const cell of cells) knownCells.set(cell.cell, cell);
   const { cells: observedCells, ...summary } = observation;
@@ -104,7 +104,7 @@ async function handle(request: Request): Promise<void> {
       metrics.commandMs = 0;
       metrics.aiMs = 0;
       metrics.totalTransferBytes = 0;
-      metrics.cellTransferBytes = 0; metrics.landQueryCount = 0; metrics.landQueryBytes = 0; metrics.totalLandQueryBytes = 0;
+      metrics.cellTransferBytes = 0; metrics.landQueryCount = 0; metrics.landQueryBytes = 0; metrics.totalLandQueryBytes = 0; metrics.developmentQueryCount = 0; metrics.developmentQueryBytes = 0; metrics.totalDevelopmentQueryBytes = 0;
       publish(request.id, request.mode === 'watch' ? 'AI watch is paused. Resume to observe every faction act, or step one round.' : 'Your people await a hearth. Select the caravan and found your first settlement.', true);
       return;
     }
@@ -136,7 +136,7 @@ async function handle(request: Request): Promise<void> {
       // and must not enter the journal or advance a turn. Use a fresh hash only
       // when a command invalidated the last published observation.
       const currentHash = queryObservation ? queryHash : stateHash(state);
-      const town = getSettlementLandObservation(state, state.turnOwnerId, request.settlementId);
+      const town = getSettlementLandObservation(state, state.turnOwnerId, request.settlementId, request.window);
       metrics.landQueryBytes = textEncoder.encode(JSON.stringify({ settlementId: request.settlementId, town, hash: currentHash })).byteLength;
       metrics.landQueryCount++;
       metrics.totalLandQueryBytes += metrics.landQueryBytes;
@@ -144,9 +144,21 @@ async function handle(request: Request): Promise<void> {
       send({ id: request.id, type: 'landQuery', settlementId: request.settlementId, town, hash: currentHash, metrics: { ...metrics } });
       return;
     }
+    if (request.type === 'developmentQuery') {
+      // Selected subject only, checked against the player seat. Read queries do
+      // not enter the journal, spend resources, or expand the published roster.
+      const currentHash = queryObservation ? queryHash : stateHash(state);
+      const entity = getDevelopmentEntity(state, state.turnOwnerId, request.focus);
+      metrics.developmentQueryBytes = textEncoder.encode(JSON.stringify({ focus: request.focus, entity, hash: currentHash })).byteLength;
+      metrics.developmentQueryCount = (metrics.developmentQueryCount ?? 0) + 1;
+      metrics.totalDevelopmentQueryBytes = (metrics.totalDevelopmentQueryBytes ?? 0) + metrics.developmentQueryBytes;
+      metrics.totalTransferBytes += metrics.developmentQueryBytes;
+      send({ id: request.id, type: 'developmentQuery', focus: request.focus, entity, hash: currentHash, metrics: { ...metrics } });
+      return;
+    }
     if (request.type === 'movementQuery') {
       const currentHash = queryObservation ? queryHash : stateHash(state);
-      const view = queryObservation ??= getObservation(state, state.turnOwnerId, { landDetails: 'none' });
+      const view = queryObservation ??= getObservation(state, state.turnOwnerId, { landDetails: 'none', developmentCandidates: false });
       queryHash = currentHash;
       send({ id: request.id, type: 'movementQuery', query: getMovementQuery(view, request.armyId, request.target, { append: request.append }), hash: currentHash });
       return;

@@ -14,7 +14,7 @@ function scene(population = 8): GameState {
   // Authored physical clearing/population isolates expansion. All claims and
   // canonical visibility are then initialized by actual founding commands.
   const origin = state.armies['army.1']!.cell;
-  for (const cell of cellsWithin(state, origin, 3)) { state.world.terrain[cell] = 1; state.world.waterDepth[cell] = 0; state.world.biome[cell] = 1; state.world.fertility[cell] = 80; }
+  for (const cell of cellsWithin(state, origin, 3)) { state.world.terrain[cell] = 1; state.world.waterDepth[cell] = 0; delete state.resources.deposits[cell]; state.world.biome[cell] = 1; state.world.fertility[cell] = 80; }
   issue(state, { type: 'found', factionId: state.turnOwnerId, armyId: 'army.1', name: 'Growing witness' });
   state.settlements['settlement.5']!.population = population;
   return deserializeGame(serializeGame(state));
@@ -34,7 +34,8 @@ describe('automatic city boundary growth', () => {
     issue(state, { type: 'research', factionId: state.turnOwnerId, technologyId: 'technology.surveyed_estates' });
     expect(growth(state).rate).toBe(6);
     town(state).population = 20;
-    expect(growth(state).rate).toBe(7);
+    expect(growth(state).rate).toBe(9);
+    expect(withRules(state, 15, () => growth(state).rate)).toBe(7);
     const saved = serializeGame(state), summary = getSettlementLandObservation(state, state.turnOwnerId, town(state).id)!;
     summary.borderExpansion.progress = 39;
     expect(serializeGame(state)).toBe(saved);
@@ -58,11 +59,12 @@ describe('automatic city boundary growth', () => {
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
   });
 
-  it('does not accumulate when a colony has filled its reach; growth remains unlocked by real population advancement', () => {
+  it('modern colonies accumulate connected border growth from their first population while historical colonies wait for reach', () => {
     const state = scene(1);
-    expect(growth(state)).toMatchObject({ rate: 0, nextCell: null });
+    expect(withRules(state, 15, () => growth(state))).toMatchObject({ rate: 0, nextCell: null });
+    expect(growth(state).rate).toBe(1);
     for (let i = 0; i < 4; i++) resolveLandTurn(state, town(state));
-    expect(land(state).borderGrowth).toBe(0);
+    expect(land(state).borderGrowth).toBe(4);
     for (let i = 0; town(state).population < 3 && i < 30; i++) end(state);
     expect(town(state).population).toBeGreaterThanOrEqual(3);
     expect(growth(state).nextCell).not.toBeNull(); expect(land(state).borderGrowth).toBeGreaterThan(0);
@@ -95,10 +97,10 @@ describe('automatic city boundary growth', () => {
     expect(state.land.settlements[id]).toBeUndefined(); expect(claims.some(cell => getLandIndex(state).has(cell))).toBe(false);
   });
 
-  it('excludes deep ocean and uncharted cells, stops at37 and never exposes foreign town options', () => {
+  it('excludes deep ocean and uncharted cells, preserves the historical37 limit and never exposes foreign town options', () => {
     const state = scene(), origin = town(state).cell;
     const candidates = cellsWithin(state, origin, 3).filter(cell => !land(state).claimed.includes(cell));
-    for (const cell of candidates) state.world.waterDepth[cell] = 2;
+    for (const cell of candidates) { state.world.waterDepth[cell] = 2; delete state.resources.deposits[cell]; }
     expect(growth(state)).toMatchObject({ rate: 0, nextCell: null });
     const target = candidates.find(cell => hexDistance(origin, cell, state.world.width) === 2)!;
     state.world.waterDepth[target] = 0; state.explored[state.turnOwnerId]!.delete(target);
@@ -106,7 +108,7 @@ describe('automatic city boundary growth', () => {
     expect(growth(state).nextCell).toBe(target);
     expect(getSettlementLandObservation(state, state.factions[1]!.id, town(state).id)).toBeNull();
     land(state).claimed = cellsWithin(state, origin, 3).sort((a, b) => a - b);
-    expect(land(state).claimed).toHaveLength(37); expect(growth(state)).toMatchObject({ threshold: 160, rate: 0, nextCell: null });
+    expect(land(state).claimed).toHaveLength(37); expect(withRules(state, 15, () => growth(state))).toMatchObject({ threshold: 160, rate: 0, nextCell: null });
   });
 
   it('keeps hidden land memory historical when a rival boundary grows', () => {
@@ -148,10 +150,13 @@ describe('automatic city boundary growth', () => {
 
   it('rejects malformed or impossible civic progress without silently repairing a current save', () => {
     const state = scene();
-    for (const value of [-1, 1.5, 40, 160]) {
+    for (const value of [-1, 1.5, Number.MAX_SAFE_INTEGER + 1]) {
       land(state).borderGrowth = value;
       expect(() => deserializeGame(serializeGame(state))).toThrow();
     }
+    land(state).borderGrowth = 160;
+    expect(() => deserializeGame(serializeGame(state))).not.toThrow();
+    expect(() => withRules(state, 15, () => validateLand(state))).toThrow(/border/);
     land(state).borderGrowth = 0;
     const raw = JSON.parse(serializeGame(state)) as { stateChecksum: string; state: { land: { settlements: Record<string, { borderGrowth?: number }> } } };
     delete raw.state.land.settlements[town(state).id]!.borderGrowth;

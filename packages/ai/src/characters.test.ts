@@ -3,6 +3,7 @@ import { applyCommand, deserializeGame, getObservation, serializeGame, stateHash
 import { CHARACTER_FIXTURE, characterCampaign } from '../../test-fixtures/src/character-fixture';
 import { planCharacters } from './characters';
 import { planTurn } from './index';
+import { characterLeadership } from '../../sim/src/characters';
 
 function issue(state: GameState, command: GameCommand): void {
   const result = applyCommand(state, command);
@@ -59,14 +60,16 @@ test('AI follows acquired prerequisites and prefers battlecraft for a small army
   const marshal = Object.values(state.characters)[0]!;
   issue(state, { type: 'assignCharacter', factionId: state.turnOwnerId, characterId: marshal.id, armyId: CHARACTER_FIXTURE.armyId });
   marshal.experience = 100;
-  for (const expected of ['skill.decisive', 'skill.measured_advance', 'skill.muster_rolls', 'skill.field_orders']) {
+  for (const expected of ['skill.decisive', 'skill.measured_advance', 'skill.witnessed_assault', 'skill.muster_rolls', 'skill.field_orders']) {
     const view = getObservation(state, state.turnOwnerId);
     const plan = planCharacters(view, 0);
     const command = plan.commands.find(item => item.type === 'promoteCharacter');
     expect(command).toMatchObject({ skillId: expected });
     issue(state, command!);
   }
-  expect(marshal.learnedSkillIds).toEqual(['skill.field_orders', 'skill.measured_advance', 'skill.muster_rolls']);
+  expect(marshal.learnedSkillIds).toEqual(['skill.field_orders', 'skill.measured_advance', 'skill.muster_rolls', 'skill.witnessed_assault']);
+  expect(marshal.experience).toBe(4);
+  expect(characterLeadership(marshal, 16).attack).toBe(5);
   expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
 });
 
@@ -88,4 +91,25 @@ test('full AI respects active mission carriers and never merges two commanded ar
   for (const command of plans) issue(state, command);
   expect(state.characters[engineer.id]!.mission?.definitionId).toBe('mission.refit');
   expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+});
+
+test('full AI trains an experienced company before starting the same army’s paid refit', () => {
+  const state = characterCampaign();
+  const factionId = state.turnOwnerId, army = state.armies[CHARACTER_FIXTURE.armyId]!;
+  issue(state, { type: 'recruitCharacter', factionId, settlementId: CHARACTER_FIXTURE.homeId, definitionId: 'character.engineer' });
+  const engineer = Object.values(state.characters).find(character => character.definitionId === 'character.engineer')!;
+  issue(state, { type: 'assignCharacter', factionId, characterId: engineer.id, armyId: army.id });
+  // Explicit experienced/damaged-company setup; battle-earned balances are
+  // independently covered by sim/development.test.ts and the browser battle.
+  const formationId = getObservation(state, factionId).development!.candidates.find(entity => entity.scope === 'formation' && entity.armyId === army.id)!.entityId;
+  state.development.formations[formationId] = { experience: 3, nodeIds: [] };
+  const mirror = deserializeGame(serializeGame(state));
+  const plan = planTurn(getObservation(state, factionId));
+  const training = plan.findIndex(command => command.type === 'develop' && command.entityId === formationId);
+  const refit = plan.findIndex(command => command.type === 'startCharacterMission' && command.characterId === engineer.id && command.missionId === 'mission.refit');
+  expect(training).toBeGreaterThanOrEqual(0); expect(refit).toBeGreaterThan(training);
+  for (const command of plan) { issue(state, command); issue(mirror, command); }
+  expect(state.development.formations[formationId]).toEqual({ experience: 0, nodeIds: ['training.field_habits'] });
+  expect(state.characters[engineer.id]!.mission?.definitionId).toBe('mission.refit');
+  expect(stateHash(mirror)).toBe(stateHash(state));
 });

@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "id": "battle.unit.transport",
+  "role": "transport",
+  "workflow": "pixel_2d",
+  "palette": {
+    "id": "theandril-master-v1",
+    "version": 1,
+    "colors": [
+      "#151519",
+      "#28272d",
+      "#45414b",
+      "#67606a",
+      "#544938",
+      "#88765a",
+      "#b7a07a",
+      "#e1cf9f",
+      "#49312b",
+      "#785046",
+      "#a67358",
+      "#d4a478",
+      "#2e2521",
+      "#553e2c",
+      "#806042",
+      "#aa8050",
+      "#252b26",
+      "#434733",
+      "#696b45",
+      "#929063",
+      "#222c34",
+      "#3c4d58",
+      "#657680",
+      "#a1afb1",
+      "#333438",
+      "#515352",
+      "#7b7b70",
+      "#aca592",
+      "#182d27",
+      "#2c4931",
+      "#4d6540",
+      "#7c8850",
+      "#382e27",
+      "#63513b",
+      "#8e7550",
+      "#b9a174",
+      "#142733",
+      "#234353",
+      "#396574",
+      "#659093",
+      "#394952",
+      "#637985",
+      "#9fb5b9",
+      "#d2ddcf",
+      "#642f26",
+      "#a14c27",
+      "#d67e35",
+      "#f2bc60",
+      "#25372b",
+      "#466347",
+      "#829b69",
+      "#c0cca0",
+      "#584527",
+      "#977544",
+      "#ccb36b",
+      "#efe2b0",
+      "#322d50",
+      "#56527c",
+      "#8c84aa",
+      "#beb7d0",
+      "#221f31",
+      "#3e334e",
+      "#685375",
+      "#96738e"
+    ],
+    "ramps": {
+      "neutral": [
+        "#151519",
+        "#28272d",
+        "#45414b",
+        "#67606a"
+      ],
+      "bone": [
+        "#544938",
+        "#88765a",
+        "#b7a07a",
+        "#e1cf9f"
+      ],
+      "flesh": [
+        "#49312b",
+        "#785046",
+        "#a67358",
+        "#d4a478"
+      ],
+      "leather": [
+        "#2e2521",
+        "#553e2c",
+        "#806042",
+        "#aa8050"
+      ],
+      "wood": [
+        "#252b26",
+        "#434733",
+        "#696b45",
+        "#929063"
+      ],
+      "metal": [
+        "#222c34",
+        "#3c4d58",
+        "#657680",
+        "#a1afb1"
+      ],
+      "stone": [
+        "#333438",
+        "#515352",
+        "#7b7b70",
+        "#aca592"
+      ],
+      "vegetation": [
+        "#182d27",
+        "#2c4931",
+        "#4d6540",
+        "#7c8850"
+      ],
+      "earth": [
+        "#382e27",
+        "#63513b",
+        "#8e7550",
+        "#b9a174"
+      ],
+      "water": [
+        "#142733",
+        "#234353",
+        "#396574",
+        "#659093"
+      ],
+      "snow": [
+        "#394952",
+        "#637985",
+        "#9fb5b9",
+        "#d2ddcf"
+      ],
+      "fire": [
+        "#642f26",
+        "#a14c27",
+        "#d67e35",
+        "#f2bc60"
+      ],
+      "necrotic": [
+        "#25372b",
+        "#466347",
+        "#829b69",
+        "#c0cca0"
+      ],
+      "sacred": [
+        "#584527",
+        "#977544",
+        "#ccb36b",
+        "#efe2b0"
+      ],
+      "arcane": [
+        "#322d50",
+        "#56527c",
+        "#8c84aa",
+        "#beb7d0"
+      ],
+      "void": [
+        "#221f31",
+        "#3e334e",
+        "#685375",
+        "#96738e"
+      ]
+    }
+  },
+  "textures": {
+    "size": 8,
+    "filter": "nearest"
+  },
+  "sprites": {
+    "size": [
+      96,
+      96
+    ],
+    "anchor": [
+      48,
+      80
+    ]
+  },
+  "camera": {
+    "position": [
+      0,
+      -6,
+      3.5
+    ],
+    "orthoScale": 3.9
+  },
+  "directions": [
+    "e",
+    "w"
+  ],
+  "clips": {
+    "idle": {
+      "frames": 4,
+      "durationMs": 200,
+      "loop": true
+    },
+    "sail": {
+      "frames": 8,
+      "durationMs": 100,
+      "loop": true
+    },
+    "fire": {
+      "frames": 8,
+      "durationMs": 100,
+      "loop": false
+    },
+    "hit": {
+      "frames": 4,
+      "durationMs": 100,
+      "loop": false
+    },
+    "sink": {
+      "frames": 8,
+      "durationMs": 100,
+      "loop": false
+    }
+  },
+  "provenance": "Original Theandril articulated Blender geometry and authored bone Actions; no downloaded meshes, generated bitmap inputs or mirrored culture images."
+}

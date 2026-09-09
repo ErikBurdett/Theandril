@@ -1,0 +1,858 @@
+{
+  "schemaVersion": 1,
+  "id": "battle.unit.halberdier",
+  "type": "unit",
+  "status": "BRIEF_READY",
+  "version": 2,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "battle.unit.halberdier"
+  ],
+  "prompt": "Original Theandril shared halberdier battle role, authored as editable weighted Blender meshes and bone Actions. Two independently rendered facings and five complete authored clips. Fixed 64x64 camera canvas, ground pivot (32,56), palette and full-motion union. Culture identity remains in existing banners and map art. Exact source manifest: assets/art/source/blender-units/battle.unit.halberdier/v2/manifest.json. No mirrored sprites, synthetic casualty poses or whole-sprite bobbing claimed as articulated animation.",
+  "frames": [
+    {
+      "id": "battle.unit.halberdier/idle/e/0",
+      "direction": "e",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/idle-e-000.png"
+    },
+    {
+      "id": "battle.unit.halberdier/idle/e/1",
+      "direction": "e",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/idle-e-001.png"
+    },
+    {
+      "id": "battle.unit.halberdier/idle/e/2",
+      "direction": "e",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/idle-e-002.png"
+    },
+    {
+      "id": "battle.unit.halberdier/idle/e/3",
+      "direction": "e",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/idle-e-003.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/e/0",
+      "direction": "e",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-e-000.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/e/1",
+      "direction": "e",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-e-001.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/e/2",
+      "direction": "e",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-e-002.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/e/3",
+      "direction": "e",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-e-003.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/e/4",
+      "direction": "e",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-e-004.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/e/5",
+      "direction": "e",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-e-005.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/e/6",
+      "direction": "e",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-e-006.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/e/7",
+      "direction": "e",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-e-007.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/e/0",
+      "direction": "e",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-e-000.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/e/1",
+      "direction": "e",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-e-001.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/e/2",
+      "direction": "e",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-e-002.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/e/3",
+      "direction": "e",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-e-003.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/e/4",
+      "direction": "e",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-e-004.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/e/5",
+      "direction": "e",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-e-005.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/e/6",
+      "direction": "e",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-e-006.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/e/7",
+      "direction": "e",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-e-007.png"
+    },
+    {
+      "id": "battle.unit.halberdier/hit/e/0",
+      "direction": "e",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/hit-e-000.png"
+    },
+    {
+      "id": "battle.unit.halberdier/hit/e/1",
+      "direction": "e",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/hit-e-001.png"
+    },
+    {
+      "id": "battle.unit.halberdier/hit/e/2",
+      "direction": "e",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/hit-e-002.png"
+    },
+    {
+      "id": "battle.unit.halberdier/hit/e/3",
+      "direction": "e",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/hit-e-003.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/e/0",
+      "direction": "e",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-e-000.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/e/1",
+      "direction": "e",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-e-001.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/e/2",
+      "direction": "e",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-e-002.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/e/3",
+      "direction": "e",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-e-003.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/e/4",
+      "direction": "e",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-e-004.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/e/5",
+      "direction": "e",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-e-005.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/e/6",
+      "direction": "e",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-e-006.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/e/7",
+      "direction": "e",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-e-007.png"
+    },
+    {
+      "id": "battle.unit.halberdier/idle/w/0",
+      "direction": "w",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/idle-w-000.png"
+    },
+    {
+      "id": "battle.unit.halberdier/idle/w/1",
+      "direction": "w",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/idle-w-001.png"
+    },
+    {
+      "id": "battle.unit.halberdier/idle/w/2",
+      "direction": "w",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/idle-w-002.png"
+    },
+    {
+      "id": "battle.unit.halberdier/idle/w/3",
+      "direction": "w",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/idle-w-003.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/w/0",
+      "direction": "w",
+      "state": "walk",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-w-000.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/w/1",
+      "direction": "w",
+      "state": "walk",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-w-001.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/w/2",
+      "direction": "w",
+      "state": "walk",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-w-002.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/w/3",
+      "direction": "w",
+      "state": "walk",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-w-003.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/w/4",
+      "direction": "w",
+      "state": "walk",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-w-004.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/w/5",
+      "direction": "w",
+      "state": "walk",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-w-005.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/w/6",
+      "direction": "w",
+      "state": "walk",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-w-006.png"
+    },
+    {
+      "id": "battle.unit.halberdier/walk/w/7",
+      "direction": "w",
+      "state": "walk",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/walk-w-007.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/w/0",
+      "direction": "w",
+      "state": "attack",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-w-000.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/w/1",
+      "direction": "w",
+      "state": "attack",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-w-001.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/w/2",
+      "direction": "w",
+      "state": "attack",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-w-002.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/w/3",
+      "direction": "w",
+      "state": "attack",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-w-003.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/w/4",
+      "direction": "w",
+      "state": "attack",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-w-004.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/w/5",
+      "direction": "w",
+      "state": "attack",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-w-005.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/w/6",
+      "direction": "w",
+      "state": "attack",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-w-006.png"
+    },
+    {
+      "id": "battle.unit.halberdier/attack/w/7",
+      "direction": "w",
+      "state": "attack",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/attack-w-007.png"
+    },
+    {
+      "id": "battle.unit.halberdier/hit/w/0",
+      "direction": "w",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/hit-w-000.png"
+    },
+    {
+      "id": "battle.unit.halberdier/hit/w/1",
+      "direction": "w",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/hit-w-001.png"
+    },
+    {
+      "id": "battle.unit.halberdier/hit/w/2",
+      "direction": "w",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/hit-w-002.png"
+    },
+    {
+      "id": "battle.unit.halberdier/hit/w/3",
+      "direction": "w",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/hit-w-003.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/w/0",
+      "direction": "w",
+      "state": "death",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-w-000.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/w/1",
+      "direction": "w",
+      "state": "death",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-w-001.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/w/2",
+      "direction": "w",
+      "state": "death",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-w-002.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/w/3",
+      "direction": "w",
+      "state": "death",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-w-003.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/w/4",
+      "direction": "w",
+      "state": "death",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-w-004.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/w/5",
+      "direction": "w",
+      "state": "death",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-w-005.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/w/6",
+      "direction": "w",
+      "state": "death",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-w-006.png"
+    },
+    {
+      "id": "battle.unit.halberdier/death/w/7",
+      "direction": "w",
+      "state": "death",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        32,
+        56
+      ],
+      "sourcePath": "assets/art/source/blender-units/battle.unit.halberdier/v2/native/death-w-007.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "walk": {
+        "frames": 8,
+        "fps": 10,
+        "loop": true
+      },
+      "attack": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      },
+      "hit": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      },
+      "death": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "41217e9a87cf7fcf9b138574e1df8c3f28876cdb90a8e773349c29d8b3bf924a",
+    "sourceRefs": [
+      "assets/art/source/blender-units/battle.unit.halberdier/v2/manifest.json",
+      "assets/art/source/blender-units/battle.unit.halberdier/v2/source.blend",
+      "assets/art/source/blender-units/battle.unit.halberdier/v2/profile.json",
+      "assets/art/source/blender-units/battle.unit.halberdier/v2/recipe.py",
+      "assets/art/source/blender-units/battle.unit.halberdier/v2/driver.py",
+      "assets/art/source/blender-units/battle.unit.halberdier/v2/render-settings.json"
+    ],
+    "licenseNotes": [
+      "Original project-authored geometry, rig, materials and actions; retained factory dependencies and every raw/native render are bound by the source manifest inventory. Shared mechanical-role artwork does not claim new culture-specific originals. Native and runtime visual acceptance remain separate."
+    ]
+  },
+  "createdAt": "2026-09-08T23:45:01.608Z",
+  "referenceHashes": [
+    "f407e34a06ce428c8f775d51c38aa46abc8dab15682a0962f6b83fd2783e4755",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "articulated-battle-64",
+      "settingsHash": "dd5766855986d39dd257d9db1a87f259d8d970a1d17aae3e2cae26adde5c505e",
+      "inputHash": "f407e34a06ce428c8f775d51c38aa46abc8dab15682a0962f6b83fd2783e4755",
+      "outputHash": "e694ba562d0849aa4bec2ca9014fe61cb0cffca95fea0fc332c1fcf1b6526063"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 64,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

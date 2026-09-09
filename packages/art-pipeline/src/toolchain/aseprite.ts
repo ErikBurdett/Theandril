@@ -50,13 +50,18 @@ export async function exportAseprite(options: { sourcePath: string; outputDirect
   if (options.tag !== undefined && !/^[a-zA-Z0-9_.-]{1,100}$/.test(options.tag)) throw new Error('Invalid animation tag.');
   const input = await readArtFile(options.sourcePath), outputDirectory = resolve(options.outputDirectory);
   const isPng = input[0] === 137 && input[1] === 80;
+  let columns = 0;
   if (isPng) {
     const size = pngDimensions(input);
     if (size.width !== settings.width || size.height !== settings.height) throw new Error('PNG source does not match the native Aseprite profile.');
   } else {
     if (input.length < 128 || input.readUInt16LE(4) !== 0xa5e0 || input.readUInt32LE(0) !== input.length) throw new Error('Source must be a valid PNG or bounded Aseprite document.');
     const frames = input.readUInt16LE(6), width = input.readUInt16LE(8), height = input.readUInt16LE(10);
-    if (!frames || frames > 256 || width !== settings.width || height !== settings.height || width * frames > 4096 || width * height * frames > 16_777_216) throw new Error('Aseprite source dimensions/frame count exceed the fixed native export profile.');
+    if (!frames || frames > 256 || width !== settings.width || height !== settings.height || width * height * frames > 16_777_216) throw new Error('Aseprite source dimensions/frame count exceed the fixed native export profile.');
+    if (width * frames > 4096) {
+      columns = Math.floor(4096 / width);
+      if (!columns || Math.ceil(frames / columns) * height > 4096) throw new Error('Aseprite authored frame matrix exceeds the bounded export sheet.');
+    }
   }
   await mkdir(outputDirectory, { recursive: true });
   const sheet = await prepareOutput(options.sourcePath, join(outputDirectory, stem + '.png'));
@@ -68,14 +73,18 @@ export async function exportAseprite(options: { sourcePath: string; outputDirect
   if (isPng) args.push('--oneframe'); // Numbered source files must never be guessed as a sequence.
   args.push(sheet.input);
   if (options.palettePath) args.push('--palette', resolve(options.palettePath));
-  args.push('--color-mode', settings.colorMode, '--sheet-type', settings.sheetType, '--border-padding', String(settings.borderPadding), '--shape-padding', String(settings.shapePadding), '--filename-format', stem + '/{tag}/{frame}', '--format', settings.format, '--data', json.output, '--sheet', sheet.output);
+  args.push('--color-mode', settings.colorMode, '--sheet-type', columns ? 'rows' : settings.sheetType);
+  if (columns) args.push('--sheet-columns', String(columns));
+  args.push('--border-padding', String(settings.borderPadding), '--shape-padding', String(settings.shapePadding), '--filename-format', stem + '/{tag}/{frame}', '--format', settings.format, '--data', json.output, '--sheet', sheet.output);
   await runTool(tool.binary, args, { env: options.env, timeoutMs: 60_000 });
   const metadata = JSON.parse((await readArtFile(json.output)).toString()) as AsepriteMetadata;
   if (!Array.isArray(metadata.frames) || !metadata.frames.length || metadata.frames.length > 1024 || !metadata.meta
     || metadata.frames.some(frame => !frame.sourceSize || frame.sourceSize.w !== settings.width || frame.sourceSize.h !== settings.height || !Number.isInteger(frame.duration) || frame.duration < 1)) throw new Error('Aseprite output does not match the native-size/frame-duration profile; output remains an unapproved candidate.');
   if (options.tag && !metadata.meta.frameTags?.some(tag => tag.name === options.tag)) throw new Error('Requested Aseprite tag was not exported.');
+  const outputSize = pngDimensions(await readArtFile(sheet.output));
+  if (outputSize.width > 4096 || outputSize.height > 4096) throw new Error('Aseprite exported a sheet outside the bounded dimensions.');
   return { tool: 'aseprite', version: tool.version, profile: options.profile,
-    settingsHash: sha256(stableSettings({ ...settings, tag: options.tag ?? null, paletteHash })), inputHash: sha256(input),
+    settingsHash: sha256(stableSettings({ ...settings, ...(columns ? { sheetType: 'rows', columns } : {}), tag: options.tag ?? null, paletteHash })), inputHash: sha256(input),
     files: await Promise.all([sheet.output, json.output].map(async path => ({ path, sha256: sha256(await readArtFile(path)) }))), metadata };
 }
 

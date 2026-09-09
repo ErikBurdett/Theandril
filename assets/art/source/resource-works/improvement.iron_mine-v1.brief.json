@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.iron_mine",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.iron_mine"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A working IRONSTONE MINE: a strongly readable small timber pithead lifting hoist and sloped braced mine entrance over a rusty dark ore seam. Small square rust-brown ore cart in front and low ore sorting wall, compact unified ground footprint. No modern machinery.",
+  "frames": [
+    {
+      "id": "improvement.iron_mine/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/improvement.iron_mine/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "bbf758c96279385a91cc5415dc6e55c359a7f260f8807d87389438c7145dbbc1",
+    "sourceRefs": [
+      "assets/art/source/resource-works/improvement.iron_mine-v1.png",
+      "assets/art/source/resource-works/improvement.iron_mine-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:34:41.180691Z",
+  "referenceHashes": [
+    "0ea39d4b1ed1b6243ae992444ee56844578a120faaf4e08313164370225a3325",
+    "b9fc3e8f838ba394fbc926e5dd61f876df7c3d7b6212b81a34bb5e7f2175de2f"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "37f11734fadd2eb8c9388aaf8c8bcb5d7c32b0fa9c16e4af1d571a5211624664",
+      "inputHash": "0ea39d4b1ed1b6243ae992444ee56844578a120faaf4e08313164370225a3325",
+      "outputHash": "e0d62ad6a8414c0914939cdd8b1d7e625f10bd5dfda62e3f42bd7155b3a1ae75"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

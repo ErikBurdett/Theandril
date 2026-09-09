@@ -1,0 +1,1118 @@
+{
+  "schemaVersion": 1,
+  "assetId": "battle.unit.skirmisher",
+  "inputHash": "c0041b3fcb47d3962962ed997f9e6fc4b948ff8a299d83d0cb59078baf4a3b64",
+  "specificationHash": "21eaf0d7d0020a729bec95f94d0efdf2881a2b460554d2a8b6cc3cb96446c7fd",
+  "score": 96,
+  "passed": true,
+  "errors": [],
+  "warnings": [
+    "attack/e: repeated frame images require intentional-hold review",
+    "attack/w: repeated frame images require intentional-hold review"
+  ],
+  "manualChecks": [
+    "Originality, licensing and provenance review",
+    "Silhouette and role readability at native and zoomed scale",
+    "Anatomy, equipment continuity, lighting and material consistency",
+    "idle/e: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "idle/w: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "walk/e: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "walk/w: review temporal flicker, direction, equipment, visual identity and loop seam",
+    "attack/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "attack/w: review temporal flicker, direction, equipment, visual identity and end pose",
+    "hit/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "hit/w: review temporal flicker, direction, equipment, visual identity and end pose",
+    "death/e: review temporal flicker, direction, equipment, visual identity and end pose",
+    "death/w: review temporal flicker, direction, equipment, visual identity and end pose"
+  ],
+  "metrics": [
+    {
+      "id": "battle.unit.skirmisher/idle/e/0",
+      "hash": "fd4c2e6b7205f44fe57577ae228ce85387094b57dc4f59e74a70a4c3df8c5bf8",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 375,
+      "padding": 6,
+      "bounds": {
+        "x": 23,
+        "y": 13,
+        "w": 18,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/idle/e/1",
+      "hash": "c6ea2a9de977503f8a09a69e7210549fab80e60eb0a5e85e7da7ee6f0550e520",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 368,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 13,
+        "w": 18,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/idle/e/2",
+      "hash": "a90eacb49f4bb312f0ab2dd65aa98d694b97050a7117a7a0d19077c101cee12d",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 383,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 13,
+        "w": 19,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/idle/e/3",
+      "hash": "76b47a6dcb318afc1f3a5eb789eeefcf5c4b6c20d90b817d7d96850349948c6d",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 369,
+      "padding": 6,
+      "bounds": {
+        "x": 23,
+        "y": 14,
+        "w": 18,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/e/0",
+      "hash": "6b7ab342a00c64c0da0df9fb627472709d5f885a3f13a17e584a731581fc9ef0",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 371,
+      "padding": 6,
+      "bounds": {
+        "x": 23,
+        "y": 14,
+        "w": 18,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/e/1",
+      "hash": "23657a65d69a30722b6ec7b0a89ac73dc645c8243391328952e76bf677022897",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 358,
+      "padding": 4,
+      "bounds": {
+        "x": 22,
+        "y": 13,
+        "w": 18,
+        "h": 47
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/e/2",
+      "hash": "a8725c8e2175e9164aecfecda9d4a50f26ec5da0f33dc098b9e2dd4e1c7a2560",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 351,
+      "padding": 4,
+      "bounds": {
+        "x": 22,
+        "y": 12,
+        "w": 18,
+        "h": 48
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/e/3",
+      "hash": "a68f0cf78da4d52fa57b91c6d957628b9db9a5ef61b66d029d0541eaaf524c4d",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 346,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 13,
+        "w": 18,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/e/4",
+      "hash": "ff7abe9b724d03b870c06582ecbbbbc9947a46d376a9a62c892ad6ebf9387fbe",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 353,
+      "padding": 8,
+      "bounds": {
+        "x": 23,
+        "y": 14,
+        "w": 18,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/e/5",
+      "hash": "1821acbcafbe72351c54dda97adec916ee8177024b76c64ef829f6ea739caf1e",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 382,
+      "padding": 6,
+      "bounds": {
+        "x": 23,
+        "y": 13,
+        "w": 19,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/e/6",
+      "hash": "afd1ed5dfd0b85bfbb81a27ad27a77a4562aa8299c1825bfc6a2cc01cc3e3ddb",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 398,
+      "padding": 5,
+      "bounds": {
+        "x": 24,
+        "y": 13,
+        "w": 18,
+        "h": 46
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/e/7",
+      "hash": "377f8f78e0fa5eacfd1a8bf5b81ce09b981fa4219df0af21b2a0c7bf023ccb17",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 387,
+      "padding": 7,
+      "bounds": {
+        "x": 23,
+        "y": 13,
+        "w": 19,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/e/0",
+      "hash": "b40c73884ad278e223700a1637fd752986e3eb9f16628cfdf5c462f34f7ed1ad",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 371,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 13,
+        "w": 20,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/e/1",
+      "hash": "b47bea0f2aef09cf3c193e8cfe30092babc38e689c5b966badbe63f2c7aa6e6e",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 377,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 6,
+        "w": 20,
+        "h": 52
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/e/2",
+      "hash": "0d72302d284164d678e658e244c72e0d0361e926b6c7faae1a35b25498be1594",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 380,
+      "padding": 3,
+      "bounds": {
+        "x": 22,
+        "y": 3,
+        "w": 19,
+        "h": 55
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/e/3",
+      "hash": "b5c044e330eef75f2696e44167f05955ac245caa1eb32abf0e73c452506b88f5",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 381,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 14,
+        "w": 27,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/e/4",
+      "hash": "587f3dc8f00e686528e8dcbaf6b44d0c20c8143f3e1964810b9799b220c7594f",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 357,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 14,
+        "w": 19,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/e/5",
+      "hash": "670956d326f6e904b6a127aabbdddee70979791930294ce896e1969198a6d6c2",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 357,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 14,
+        "w": 19,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/e/6",
+      "hash": "100dd4086a994108368ddecf96c1786fdc8c6e6ee0e3c1e7267ade17342410a4",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 365,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 14,
+        "w": 21,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/e/7",
+      "hash": "b40c73884ad278e223700a1637fd752986e3eb9f16628cfdf5c462f34f7ed1ad",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 371,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 13,
+        "w": 20,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/hit/e/0",
+      "hash": "f0ec4c9f68db2c673b8726af06d04793c861e9426f8f00fd0dc80e332570480d",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 377,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 13,
+        "w": 19,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/hit/e/1",
+      "hash": "16194f70f7d18bd0d9940a1d0a524671e7ee5d673623386bbaaebd5f67e39c8e",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 403,
+      "padding": 6,
+      "bounds": {
+        "x": 20,
+        "y": 12,
+        "w": 18,
+        "h": 46
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/hit/e/2",
+      "hash": "494f4d6b873f97f077e239d7405ce357e1ab4cf46e08842fd32a7aa3f8f975b0",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 388,
+      "padding": 6,
+      "bounds": {
+        "x": 21,
+        "y": 13,
+        "w": 18,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/hit/e/3",
+      "hash": "03ace6ba69d8facc96ea942d99db1cb69e36b57a088ae15eabab8e3f57bc9edd",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 375,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 13,
+        "w": 18,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/e/0",
+      "hash": "f0ec4c9f68db2c673b8726af06d04793c861e9426f8f00fd0dc80e332570480d",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 377,
+      "padding": 6,
+      "bounds": {
+        "x": 22,
+        "y": 13,
+        "w": 19,
+        "h": 45
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/e/1",
+      "hash": "a13e321c3f340c5b1fbd3e83c06c632c674c44c02248733aa4041b2c89cb338b",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 398,
+      "padding": 6,
+      "bounds": {
+        "x": 20,
+        "y": 15,
+        "w": 18,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/e/2",
+      "hash": "5206a1d7fd57529b386d455a3bcf524fc842332b4550e549e22536c4d3aabdde",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 405,
+      "padding": 7,
+      "bounds": {
+        "x": 19,
+        "y": 18,
+        "w": 18,
+        "h": 39
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/e/3",
+      "hash": "114915e1ec67badf6f4a802c64240546cc94158d17af40199c3808bee7db42da",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 408,
+      "padding": 7,
+      "bounds": {
+        "x": 17,
+        "y": 21,
+        "w": 21,
+        "h": 36
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/e/4",
+      "hash": "e95ae9933f00e687899811f8f34080a68a4338c7f93e7a9483d23d9991862b6f",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 397,
+      "padding": 7,
+      "bounds": {
+        "x": 15,
+        "y": 25,
+        "w": 22,
+        "h": 32
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/e/5",
+      "hash": "382c0fa39b27ba9abf323deaf1baaa8e0ad8e403a479f573dab146886fdf679d",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 393,
+      "padding": 8,
+      "bounds": {
+        "x": 13,
+        "y": 28,
+        "w": 24,
+        "h": 28
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/e/6",
+      "hash": "86b26166657283e6eaa4255491f489f18317e5489234a84646cb34ac64924fe2",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 369,
+      "padding": 6,
+      "bounds": {
+        "x": 11,
+        "y": 32,
+        "w": 26,
+        "h": 26
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/e/7",
+      "hash": "c8b6534995f8ddade78092469e2002fb4037157f802d3c0997e4fc7211389417",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 326,
+      "padding": 6,
+      "bounds": {
+        "x": 9,
+        "y": 34,
+        "w": 29,
+        "h": 24
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/idle/w/0",
+      "hash": "e4c9a51f9819bc8f7248450d7d814d16d8bef03090d0651f494f03f2a29d533b",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 429,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 24,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/idle/w/1",
+      "hash": "6785b22cbfc81e619e4cc7824c0591eabc7ed5cf085b7177298955b6ff43592f",
+      "colors": 26,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 431,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 24,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/idle/w/2",
+      "hash": "d1a054818b5b4e1a1716f39aaf926e2b37b39be13bd409fbe751e3588c738e2e",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 432,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/idle/w/3",
+      "hash": "68881c6581873fc0fbe8781f5f69e389594a2a6ac88b2955e0ff7adf1548dcad",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 435,
+      "padding": 6,
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "w": 24,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/w/0",
+      "hash": "8a59b9421b559893e007ecccab733a78f599ea612a6308ea8c2fe62957b5aa95",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 411,
+      "padding": 8,
+      "bounds": {
+        "x": 17,
+        "y": 17,
+        "w": 23,
+        "h": 39
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/w/1",
+      "hash": "182b13995e66d6ef97e1e3a552e832aca97fce8b335a6465a059ba74282c12d9",
+      "colors": 31,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 453,
+      "padding": 6,
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "w": 23,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/w/2",
+      "hash": "8bd4a4c2068d1cecd42e2d0a56cdeae77252bf2a8cbba881076abed85a49786c",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 449,
+      "padding": 5,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "w": 22,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/w/3",
+      "hash": "167e92d6289fe371fd50658646331d9083626893996749b6f28e4d906683dffa",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 453,
+      "padding": 7,
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "w": 23,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/w/4",
+      "hash": "ed7e8429ca28c6642a3abf17fecd1297bd9c5bbc10eb27f64b1229fab0c89684",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 428,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 17,
+        "w": 23,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/w/5",
+      "hash": "2bffc46778a0f6a6ab48473c842626b3d38fecc5737214772a3a0d334941d2c0",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 401,
+      "padding": 4,
+      "bounds": {
+        "x": 15,
+        "y": 16,
+        "w": 25,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/w/6",
+      "hash": "a5ff17442a019ccf06fca49e2dc9ac9139580fc22a10fea21c6a15f17ffd9c48",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 393,
+      "padding": 4,
+      "bounds": {
+        "x": 15,
+        "y": 16,
+        "w": 24,
+        "h": 44
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/walk/w/7",
+      "hash": "7bceffeb516c217931059b6ea20a7ccdc2e7b2f06cd9bc59d615728d089b7653",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 392,
+      "padding": 6,
+      "bounds": {
+        "x": 15,
+        "y": 16,
+        "w": 25,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/w/0",
+      "hash": "b72572ab191cb3f8cb3544d89797ccb9c80bb538495e19728a16efa1bf429a62",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 428,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 24,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/w/1",
+      "hash": "9a72ce16285613ad8dd8d08aa87f5c5c0b1f78dc3d16df1b8da78e75e04cc02c",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 447,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 12,
+        "w": 25,
+        "h": 46
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/w/2",
+      "hash": "8c2787f6e5a7704df879aee576e25af107e8dc6464a059389525ece431444023",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 442,
+      "padding": 5,
+      "bounds": {
+        "x": 17,
+        "y": 7,
+        "w": 28,
+        "h": 52
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/w/3",
+      "hash": "c698e558c375b9e41bdbd325d8a66eda537948ad0af2d1cda24470f2b2a74294",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 400,
+      "padding": 5,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 20,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/w/4",
+      "hash": "a40e345f61b5d5c54294c9850227bc6ba163d4d99ed6753ceef62a67c15ae368",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 419,
+      "padding": 5,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 21,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/w/5",
+      "hash": "b426cd0a8be0a86d7e0bba7b27bfd632591b1368c536977698d6fac6256db739",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 413,
+      "padding": 5,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 21,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/w/6",
+      "hash": "53730da92e7bf5007563872f54a0de0480f38edb716fc0de71be7c197bbd3e11",
+      "colors": 27,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 421,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 23,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/attack/w/7",
+      "hash": "b72572ab191cb3f8cb3544d89797ccb9c80bb538495e19728a16efa1bf429a62",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 428,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 24,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/hit/w/0",
+      "hash": "279526fa28ebd69ddb9ffb79f987492f7ea8510f0f057d7aaa1e1701c1687b8f",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 430,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 24,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/hit/w/1",
+      "hash": "fe2d18b7b1a4b07778d1afc0471ddc8f650934db7834029f2390b55fbc88537a",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 442,
+      "padding": 6,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "w": 24,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/hit/w/2",
+      "hash": "eab74f0877de543cb25f8230d0545fdb4c9897f99b27654894af9a6de1410d44",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 441,
+      "padding": 6,
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "w": 24,
+        "h": 43
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/hit/w/3",
+      "hash": "a08f58cf06e72a75f9a63da84a22de9b6481ecb49109018f5bb37b9cbf978e9b",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 436,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 24,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/w/0",
+      "hash": "279526fa28ebd69ddb9ffb79f987492f7ea8510f0f057d7aaa1e1701c1687b8f",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 430,
+      "padding": 6,
+      "bounds": {
+        "x": 17,
+        "y": 16,
+        "w": 24,
+        "h": 42
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/w/1",
+      "hash": "05a5dce412b6cd5e7d6a8382bca7843c0e8cdd29eba43fc43c8f6f8e34f05389",
+      "colors": 32,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 441,
+      "padding": 6,
+      "bounds": {
+        "x": 20,
+        "y": 17,
+        "w": 22,
+        "h": 41
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/w/2",
+      "hash": "a3138a745b0b832482542ef9d44d456cca81e4b26ca2c85a1fed2e90a9f7db3f",
+      "colors": 30,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 455,
+      "padding": 7,
+      "bounds": {
+        "x": 23,
+        "y": 19,
+        "w": 23,
+        "h": 38
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/w/3",
+      "hash": "8f10ae6d521872921cfd582ba4bfb353cfbcf850fc06d702886d45d6d2847879",
+      "colors": 29,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 442,
+      "padding": 7,
+      "bounds": {
+        "x": 25,
+        "y": 21,
+        "w": 26,
+        "h": 36
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/w/4",
+      "hash": "61236afcddced4fff208b601a4d48bad4488fc7cc38d48d1b98c4c3e3262aeac",
+      "colors": 28,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 412,
+      "padding": 7,
+      "bounds": {
+        "x": 25,
+        "y": 24,
+        "w": 31,
+        "h": 33
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/w/5",
+      "hash": "39ac4aa142e5bb364ea764df7293c5aa7543a68a573f6bd47dccfc8e46226afd",
+      "colors": 25,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 410,
+      "padding": 5,
+      "bounds": {
+        "x": 26,
+        "y": 28,
+        "w": 33,
+        "h": 28
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/w/6",
+      "hash": "347ccf37f7e8c4821f292f201d518fde95d648d05ee9420cc932c4be564a44fe",
+      "colors": 24,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 392,
+      "padding": 4,
+      "bounds": {
+        "x": 26,
+        "y": 32,
+        "w": 34,
+        "h": 26
+      },
+      "logicalGridErrors": 0
+    },
+    {
+      "id": "battle.unit.skirmisher/death/w/7",
+      "hash": "c5cf39d4fdcc82902eb9c80de717b21345ff572584be333ae95e482366e03c70",
+      "colors": 24,
+      "offPalettePixels": 0,
+      "partialAlphaPixels": 0,
+      "hiddenColorPixels": 0,
+      "opaquePixels": 337,
+      "padding": 3,
+      "bounds": {
+        "x": 25,
+        "y": 37,
+        "w": 36,
+        "h": 21
+      },
+      "logicalGridErrors": 0
+    }
+  ]
+}

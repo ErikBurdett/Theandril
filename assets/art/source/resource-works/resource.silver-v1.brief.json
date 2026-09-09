@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "resource.silver",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "resource.silver"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Grounded weathered medieval dark-fantasy, intentional PIXEL ART built with coarse square clusters at 64×64 logical-pixel density: broad connected material planes, readable silhouette, selective dark outline. Three-quarter southeast isometric view, consistent upper-left diffuse light. Restrained colors: soot #202328, peat #343B33, slate #536368, ash #929184, old linen #C1B597, weathered timber browns, brass #A38B55, sage plants. Entire object centered fully visible, 15% transparent margins on EVERY side. Joined ground footprint fits56×44 logical pixels within64×64 canvas. No text, labels, people, UI, hex borders, surrounding landscape, floating fragments, outside cast shadows, gradients, bloom, haze or photorealism. A natural WITNESS SILVER deposit: a low jagged blue-grey slate outcrop with broad luminous pale-silver metallic seams and several angular ivory-grey mineral facets, distinct darker crevices, a couple broken chunks at the base. No crystals floating, no buildings.",
+  "frames": [
+    {
+      "id": "resource.silver/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/resource.silver/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "105d7f8d3d63205502634f849ca2a611d28395fca20a5a5398ffb13de889498a",
+    "sourceRefs": [
+      "assets/art/source/resource-works/resource.silver-v1.png",
+      "assets/art/source/resource-works/resource.silver-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T23:32:26.130311Z",
+  "referenceHashes": [
+    "0c4e2a44608abbb1752f850244ae4b68fcec13d32756fec180bacc668bbd8fd6",
+    "228b0acda13c25c2b289fd67a3ef1a960d05f939700b34cc5bd855eb69649067"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-resource-works-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "bc53a621df719a05b0854a30825d918ec84add86f7213f1ba1c1749fa6f8b5cc",
+      "inputHash": "0c4e2a44608abbb1752f850244ae4b68fcec13d32756fec180bacc668bbd8fd6",
+      "outputHash": "ebdcd18b9ceb6b9fb2ea71849b027bbec602c20730a188710f80e3738902d9a5"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}

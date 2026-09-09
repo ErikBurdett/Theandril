@@ -1,0 +1,879 @@
+{
+  "schemaVersion": 1,
+  "id": "battle.unit.ocean_warship",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "battle.unit.ocean_warship"
+  ],
+  "prompt": "Original Theandril shared ocean_warship battle role, authored as editable weighted Blender meshes and bone Actions. Two independently rendered facings and five complete authored clips. Fixed 96x96 camera canvas, ground pivot (48,80), palette and full-motion union. Culture identity remains in existing banners and map art. Exact source manifest: assets/art/source/blender-units/battle.unit.ocean_warship/v2/manifest.json. No mirrored sprites, synthetic casualty poses or whole-sprite bobbing claimed as articulated animation.",
+  "frames": [
+    {
+      "id": "battle.unit.ocean_warship/idle/e/0",
+      "direction": "e",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-0.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/idle/e/1",
+      "direction": "e",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-1.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/idle/e/2",
+      "direction": "e",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-2.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/idle/e/3",
+      "direction": "e",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-3.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/e/0",
+      "direction": "e",
+      "state": "sail",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-4.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/e/1",
+      "direction": "e",
+      "state": "sail",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-5.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/e/2",
+      "direction": "e",
+      "state": "sail",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-6.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/e/3",
+      "direction": "e",
+      "state": "sail",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-7.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/e/4",
+      "direction": "e",
+      "state": "sail",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-8.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/e/5",
+      "direction": "e",
+      "state": "sail",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-9.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/e/6",
+      "direction": "e",
+      "state": "sail",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-10.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/e/7",
+      "direction": "e",
+      "state": "sail",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-11.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/e/0",
+      "direction": "e",
+      "state": "fire",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-12.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/e/1",
+      "direction": "e",
+      "state": "fire",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-13.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/e/2",
+      "direction": "e",
+      "state": "fire",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-14.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/e/3",
+      "direction": "e",
+      "state": "fire",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-15.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/e/4",
+      "direction": "e",
+      "state": "fire",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-16.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/e/5",
+      "direction": "e",
+      "state": "fire",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-17.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/e/6",
+      "direction": "e",
+      "state": "fire",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-18.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/e/7",
+      "direction": "e",
+      "state": "fire",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-19.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/hit/e/0",
+      "direction": "e",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-20.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/hit/e/1",
+      "direction": "e",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-21.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/hit/e/2",
+      "direction": "e",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-22.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/hit/e/3",
+      "direction": "e",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-23.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/e/0",
+      "direction": "e",
+      "state": "sink",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-24.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/e/1",
+      "direction": "e",
+      "state": "sink",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-25.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/e/2",
+      "direction": "e",
+      "state": "sink",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-26.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/e/3",
+      "direction": "e",
+      "state": "sink",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-27.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/e/4",
+      "direction": "e",
+      "state": "sink",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-28.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/e/5",
+      "direction": "e",
+      "state": "sink",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-29.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/e/6",
+      "direction": "e",
+      "state": "sink",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-30.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/e/7",
+      "direction": "e",
+      "state": "sink",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-31.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/idle/w/0",
+      "direction": "w",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-32.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/idle/w/1",
+      "direction": "w",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-33.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/idle/w/2",
+      "direction": "w",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-34.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/idle/w/3",
+      "direction": "w",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-35.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/w/0",
+      "direction": "w",
+      "state": "sail",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-36.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/w/1",
+      "direction": "w",
+      "state": "sail",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-37.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/w/2",
+      "direction": "w",
+      "state": "sail",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-38.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/w/3",
+      "direction": "w",
+      "state": "sail",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-39.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/w/4",
+      "direction": "w",
+      "state": "sail",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-40.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/w/5",
+      "direction": "w",
+      "state": "sail",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-41.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/w/6",
+      "direction": "w",
+      "state": "sail",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-42.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sail/w/7",
+      "direction": "w",
+      "state": "sail",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-43.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/w/0",
+      "direction": "w",
+      "state": "fire",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-44.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/w/1",
+      "direction": "w",
+      "state": "fire",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-45.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/w/2",
+      "direction": "w",
+      "state": "fire",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-46.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/w/3",
+      "direction": "w",
+      "state": "fire",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-47.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/w/4",
+      "direction": "w",
+      "state": "fire",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-48.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/w/5",
+      "direction": "w",
+      "state": "fire",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-49.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/w/6",
+      "direction": "w",
+      "state": "fire",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-50.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/fire/w/7",
+      "direction": "w",
+      "state": "fire",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-51.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/hit/w/0",
+      "direction": "w",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-52.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/hit/w/1",
+      "direction": "w",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-53.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/hit/w/2",
+      "direction": "w",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-54.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/hit/w/3",
+      "direction": "w",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-55.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/w/0",
+      "direction": "w",
+      "state": "sink",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-56.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/w/1",
+      "direction": "w",
+      "state": "sink",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-57.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/w/2",
+      "direction": "w",
+      "state": "sink",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-58.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/w/3",
+      "direction": "w",
+      "state": "sink",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-59.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/w/4",
+      "direction": "w",
+      "state": "sink",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-60.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/w/5",
+      "direction": "w",
+      "state": "sink",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-61.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/w/6",
+      "direction": "w",
+      "state": "sink",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-62.png"
+    },
+    {
+      "id": "battle.unit.ocean_warship/sink/w/7",
+      "direction": "w",
+      "state": "sink",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/frame-63.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "sail": {
+        "frames": 8,
+        "fps": 10,
+        "loop": true
+      },
+      "fire": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      },
+      "hit": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      },
+      "sink": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "d5501d3dd1253a89fc6bc1261e33bd262c4d5e41399ece65176daf9bf04e35f1",
+    "sourceRefs": [
+      "assets/art/source/blender-units/battle.unit.ocean_warship/v2/manifest.json",
+      "assets/art/source/blender-units/battle.unit.ocean_warship/v2/source.blend",
+      "assets/art/source/blender-units/battle.unit.ocean_warship/v2/profile.json",
+      "assets/art/source/blender-units/battle.unit.ocean_warship/v2/recipe.py",
+      "assets/art/source/blender-units/battle.unit.ocean_warship/v2/driver.py",
+      "assets/art/source/blender-units/battle.unit.ocean_warship/v2/render-settings.json",
+      "assets/art/approved/battle.unit.ocean_warship/0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a/provider-source-6.json"
+    ],
+    "licenseNotes": [
+      "Original project-authored geometry, rig, materials and actions; retained factory dependencies and every raw/native render are bound by the source manifest inventory. Shared mechanical-role artwork does not claim new culture-specific originals. Native and runtime visual acceptance remain separate."
+    ]
+  },
+  "createdAt": "2026-09-08T23:50:47.447Z",
+  "referenceHashes": [
+    "a485315d2fa55ec41ab5e04b114f10c6277883f94532b1e8bfd4a64d578f9d83",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "articulated-battle-96",
+      "settingsHash": "5ea06cb30a706bdcc66789a39d6243d5d68f3adec4e4f3eb567556648ab4acc0",
+      "inputHash": "a485315d2fa55ec41ab5e04b114f10c6277883f94532b1e8bfd4a64d578f9d83",
+      "outputHash": "0e511d4945aa9724487a49c6789e67009a1036ae901e44bc73524dde6d0f43b6"
+    },
+    {
+      "tool": "theandril-processing-batch",
+      "version": "1",
+      "profile": "explicit-authored-frames",
+      "settingsHash": "bc08ba1dadc14d3fe7f4fe8b3b46249032492fb1219721ebbd0eb8587016e0e3",
+      "inputHash": "0e511d4945aa9724487a49c6789e67009a1036ae901e44bc73524dde6d0f43b6",
+      "outputHash": "7d7e296c08d892d3dea17500e07fabba4ac1fae0b0d6e58fb11ae172859b5f8b"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/battle.unit.ocean_warship.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex-art-review",
+    "reviewedAt": "2026-09-09T00:06:19.662Z",
+    "notes": "Reviewed all64processed native frames and 4x west fire cycle. Broad armored hull, raised stern deck and command cloth distinguish the heavier warship; planking and sail match the other original hulls. Actual small deck launcher flex and recoil accompany sail motion; visible projectile effects must come from real battle facts. Native accepted; final firing-effect readability requires gameplay review.\nReviewed candidate 0f56d31cde6a5956c807c67c0e6f8d9f9cec9f965d607efce5e42cd712eb320a; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/15e7f1445a04cfdfbbd6393dc7b53c8dad0bb920844a44eba0929df8fe6c9d41.png"
+    ],
+    "inputHash": "d20235049fde0bf1640839ebbec537e325bace38027ce1bbf89e4427a0721b0d"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 96,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

@@ -63,7 +63,7 @@ describe('authoritative settlement land controls', () => {
   it('does not expose another settlement or fabricate options for an unobserved selected tile', () => {
     const game = campaign(), view = getObservation(game, game.turnOwnerId), town = view.land.settlements[0]!;
     const html = renderToStaticMarkup(createElement(SettlementLand, { view, settlementId: town.settlementId, selectedCell: 999999, busy: false, selectCell: () => undefined, issue: () => undefined }));
-    expect(html).toContain('outside this settlement’s known land options'); expect(html).not.toContain('Build Terraced');
+    expect(html).toContain('Hex 999999 has no details on the current page. Use Select tiles to choose a listed tile.'); expect(html).not.toContain('Build Terraced');
     expect(renderToStaticMarkup(createElement(SettlementLand, { view, settlementId: 'foreign.missing', busy: false, selectCell: () => undefined, issue: () => undefined }))).toBe('');
   });
   it('keeps summary totals during lazy loading without showing stale quotes or an outside-territory refusal', () => {
@@ -71,7 +71,7 @@ describe('authoritative settlement land controls', () => {
     const html = renderToStaticMarkup(createElement(SettlementLand, { view, settlementId: town.settlementId, selectedCell: town.cells[0]!.cell, busy: false, selectCell: () => undefined, issue: () => undefined, stateHash: 'current', query: async () => ({ settlementId: town.settlementId, town, hash: 'current' }) }));
     expect(html).toContain('colony · Capital'); expect(html).toContain('assigned workers');
     expect(html).toContain('Loading current land details'); expect(html).toContain('data-query-state="loading"');
-    expect(html).not.toContain('outside this settlement'); expect(html).not.toContain('Yield breakdown per worked turn');
+    expect(html).not.toContain('has no details on the current page'); expect(html).not.toContain('Yield breakdown per worked turn');
     expect(html).not.toContain('Build Terraced'); expect(html).toContain('<button type="button" disabled="" aria-expanded="false">Select tiles');
   });
   it('puts compact tile actions before the closed town overview while keeping exact buttons, prices and refusals', () => {

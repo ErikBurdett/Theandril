@@ -1,6 +1,7 @@
 import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
-import { deserializeGame, getObservation, serializeGame } from '@theandril/sim';
+import { writeFile } from 'node:fs/promises';
+import { deserializeGame, getObservation, getSettlementLandObservation, serializeGame, stateHash } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
 import { cellsWithin } from '../../packages/sim/src/visibility';
 import { prosperityCampaign } from '../../packages/test-fixtures/src/victory-fixture';
@@ -16,6 +17,7 @@ function campaign() {
     for (const cell of cellsWithin(state, town.cell, 3)) {
       state.world.terrain[cell] = 1; state.world.biome[cell] = 1;
       state.world.waterDepth[cell] = 0; state.world.fertility[cell] = 80;
+      delete state.resources.deposits[cell]; // Preserve generated deposits outside authored soil.
     }
   }
   state.factions.find(faction => faction.id === state.turnOwnerId)!.treasury = 2000;
@@ -30,10 +32,12 @@ async function importCampaign(page: Page, text: string) {
 }
 async function ready(page: Page, settlementId: string) {
   await openSelectedOrders(page);
-  const panel = page.getByTestId('land-panel');
-  await expect(panel).toHaveAttribute('data-settlement-id', settlementId);
-  await expect(panel).toHaveAttribute('data-query-state', 'ready');
-  await expect(panel).toHaveAttribute('data-query-hash', await page.evaluate(() => window.__THEANDRIL__!.getStateHash()));
+  await expect.poll(() => page.evaluate(() => {
+    const panel = document.querySelector<HTMLElement>('[data-testid="land-panel"]');
+    const currentHash = window.__THEANDRIL__!.getStateHash(), queryHash = panel?.dataset.queryHash;
+    return { settlementId: panel?.dataset.settlementId, status: panel?.dataset.queryState,
+      currentHash, queryHash, matchesCurrent: Boolean(currentHash) && queryHash === currentHash };
+  })).toMatchObject({ settlementId, status: 'ready', matchesCurrent: true });
 }
 async function selectTown(page: Page, town: { id: string; name: string }) {
   await openRegistry(page, 'settlements');
@@ -144,6 +148,10 @@ test('same-turn land orders refresh quotes, cancellation spends honestly and sav
 test('a mature thirty-two-town empire transfers summaries and opens only the searched town detail', async ({ page }, testInfo) => {
   const state = empireLandCampaign('huge'), towns = Object.values(state.settlements).filter(town => town.factionId === state.turnOwnerId);
   const target = towns.at(-1)!;
+  const anchored = getSettlementLandObservation(state, state.turnOwnerId, target.id, { offset: 0, limit: 24, cell: target.cell })!;
+  const total = anchored.cellWindow!.total;
+  const pages = Array.from({ length: Math.ceil(total / 24) }, (_, index) => getSettlementLandObservation(state, state.turnOwnerId, target.id, { offset: index * 24, limit: 24 })!);
+  expect(anchored.cellWindow!.offset).toBeGreaterThan(0); // Selection must locate a later page, not silently default to page one.
   await importCampaign(page, serializeGame(state));
   const initial = await page.evaluate(() => ({ summary: window.__THEANDRIL__!.getSummary()!.land, metrics: window.__THEANDRIL__!.getPerformanceCounters() }));
   expect(initial.summary.settlements).toHaveLength(32);
@@ -155,6 +163,55 @@ test('a mature thirty-two-town empire transfers summaries and opens only the sea
   expect(metrics.landQueryCount).toBe(1); expect(metrics.landQueryBytes).toBeGreaterThan(0);
   expect(metrics.landQueryBytes).toBeLessThan(200_000);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.land.settlements.every(town => town.cells.length === 0))).toBe(true);
-  await page.getByTestId('land-panel').screenshot({ path: testInfo.outputPath('mature-empire-selected-town.png') });
-  await testInfo.attach('selected-town-transfer.json', { body: JSON.stringify({ towns: towns.length, before: initial.metrics, after: metrics }, null, 2), contentType: 'application/json' });
+  await expect(page.getByTestId('land-cell')).toContainText(`Hex ${target.cell}`);
+  await page.getByRole('button', { name: 'Select tiles', exact: true }).click();
+  const navigation = page.getByRole('navigation', { name: 'Territory tile pages', exact: true });
+  const tileButtons = page.getByRole('region', { name: 'Settlement territory' }).getByRole('button', { name: /Inspect land hex/ });
+  let queryCount = 1;
+  const samples: { offset: number; count: number; bytes: number }[] = [];
+  const checkPage = async (detail: typeof anchored) => {
+    await ready(page, target.id);
+    const range = detail.cellWindow!;
+    await expect(navigation).toContainText(`Tiles ${range.offset + 1}–${Math.min(total, range.offset + range.limit)} of ${total}`);
+    await expect(tileButtons).toHaveCount(detail.cells.length);
+    expect(await tileButtons.evaluateAll(buttons => buttons.map(button => Number(button.getAttribute('aria-label')!.replace('Inspect land hex ', ''))))).toEqual(detail.cells.map(cell => cell.cell));
+    const actual = await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters());
+    expect(actual.landQueryCount).toBe(queryCount);
+    expect(actual.landQueryBytes).toBeGreaterThan(0);
+    expect(actual.landQueryBytes).toBeLessThan(200_000);
+    samples.push({ offset: range.offset, count: detail.cells.length, bytes: actual.landQueryBytes });
+  };
+  await checkPage(anchored);
+  for (let index = anchored.cellWindow!.offset / 24; index > 0; index--) {
+    await navigation.getByRole('button', { name: 'Previous tiles', exact: true }).click();
+    queryCount++;
+    await checkPage(pages[index - 1]!);
+  }
+  await expect(navigation.getByRole('button', { name: 'Previous tiles', exact: true })).toBeDisabled();
+  // Capture the real dialog viewport; the full land element is taller than its
+  // scrolling container, so an element screenshot clips content outside it.
+  await navigation.evaluate(element => element.scrollIntoView({ block: 'start' }));
+  await page.getByRole('dialog', { name: 'Selected orders', exact: true }).screenshot({ path: testInfo.outputPath('mature-empire-24-tile-page.png') });
+  const visited: number[] = [];
+  for (let index = 0; index < pages.length; index++) {
+    const detail = pages[index]!;
+    if (index) {
+      await navigation.getByRole('button', { name: 'Next tiles', exact: true }).click();
+      queryCount++;
+      await checkPage(detail);
+    }
+    for (const tile of [detail.cells[0]!, detail.cells.at(-1)!]) await selectTile(page, tile.cell);
+    expect(await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().landQueryCount)).toBe(queryCount);
+    visited.push(...detail.cells.map(cell => cell.cell));
+  }
+  expect(visited).toHaveLength(total);
+  expect(new Set(visited).size).toBe(total);
+  await expect(navigation.getByRole('button', { name: 'Next tiles', exact: true })).toBeDisabled();
+  expect(await page.evaluate(() => window.__THEANDRIL__!.getStateHash())).toBe(stateHash(state));
+  await navigation.evaluate(element => element.scrollIntoView({ block: 'start' }));
+  await page.getByRole('dialog', { name: 'Selected orders', exact: true }).screenshot({ path: testInfo.outputPath('mature-empire-final-tile-page.png') });
+  const after = await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters());
+  const reportPath = testInfo.outputPath('selected-town-transfer.json');
+  await writeFile(reportPath, JSON.stringify({ towns: towns.length, total, pageLimit: 24, stateHash: stateHash(state), visitedCells: visited, before: initial.metrics, selected: metrics, after, samples }, null, 2));
+  await testInfo.attach('selected-town-transfer.json', { path: reportPath, contentType: 'application/json' });
 });

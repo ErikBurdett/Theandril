@@ -1,0 +1,879 @@
+{
+  "schemaVersion": 1,
+  "id": "battle.unit.transport",
+  "type": "unit",
+  "status": "APPROVED",
+  "version": 2,
+  "nativeResolution": {
+    "width": 96,
+    "height": 96
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "battle.unit.transport"
+  ],
+  "prompt": "Original Theandril shared transport battle role, authored as editable weighted Blender meshes and bone Actions. Two independently rendered facings and five complete authored clips. Fixed 96x96 camera canvas, ground pivot (48,80), palette and full-motion union. Culture identity remains in existing banners and map art. Exact source manifest: assets/art/source/blender-units/battle.unit.transport/v2/manifest.json. No mirrored sprites, synthetic casualty poses or whole-sprite bobbing claimed as articulated animation.",
+  "frames": [
+    {
+      "id": "battle.unit.transport/idle/e/0",
+      "direction": "e",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-0.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/e/1",
+      "direction": "e",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-1.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/e/2",
+      "direction": "e",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-2.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/e/3",
+      "direction": "e",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-3.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/0",
+      "direction": "e",
+      "state": "sail",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-4.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/1",
+      "direction": "e",
+      "state": "sail",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-5.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/2",
+      "direction": "e",
+      "state": "sail",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-6.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/3",
+      "direction": "e",
+      "state": "sail",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-7.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/4",
+      "direction": "e",
+      "state": "sail",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-8.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/5",
+      "direction": "e",
+      "state": "sail",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-9.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/6",
+      "direction": "e",
+      "state": "sail",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-10.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/e/7",
+      "direction": "e",
+      "state": "sail",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-11.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/0",
+      "direction": "e",
+      "state": "fire",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-12.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/1",
+      "direction": "e",
+      "state": "fire",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-13.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/2",
+      "direction": "e",
+      "state": "fire",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-14.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/3",
+      "direction": "e",
+      "state": "fire",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-15.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/4",
+      "direction": "e",
+      "state": "fire",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-16.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/5",
+      "direction": "e",
+      "state": "fire",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-17.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/6",
+      "direction": "e",
+      "state": "fire",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-18.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/e/7",
+      "direction": "e",
+      "state": "fire",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-19.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/e/0",
+      "direction": "e",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-20.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/e/1",
+      "direction": "e",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-21.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/e/2",
+      "direction": "e",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-22.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/e/3",
+      "direction": "e",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-23.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/0",
+      "direction": "e",
+      "state": "sink",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-24.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/1",
+      "direction": "e",
+      "state": "sink",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-25.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/2",
+      "direction": "e",
+      "state": "sink",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-26.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/3",
+      "direction": "e",
+      "state": "sink",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-27.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/4",
+      "direction": "e",
+      "state": "sink",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-28.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/5",
+      "direction": "e",
+      "state": "sink",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-29.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/6",
+      "direction": "e",
+      "state": "sink",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-30.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/e/7",
+      "direction": "e",
+      "state": "sink",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-31.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/w/0",
+      "direction": "w",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-32.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/w/1",
+      "direction": "w",
+      "state": "idle",
+      "index": 1,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-33.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/w/2",
+      "direction": "w",
+      "state": "idle",
+      "index": 2,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-34.png"
+    },
+    {
+      "id": "battle.unit.transport/idle/w/3",
+      "direction": "w",
+      "state": "idle",
+      "index": 3,
+      "durationMs": 200,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-35.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/0",
+      "direction": "w",
+      "state": "sail",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-36.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/1",
+      "direction": "w",
+      "state": "sail",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-37.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/2",
+      "direction": "w",
+      "state": "sail",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-38.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/3",
+      "direction": "w",
+      "state": "sail",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-39.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/4",
+      "direction": "w",
+      "state": "sail",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-40.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/5",
+      "direction": "w",
+      "state": "sail",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-41.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/6",
+      "direction": "w",
+      "state": "sail",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-42.png"
+    },
+    {
+      "id": "battle.unit.transport/sail/w/7",
+      "direction": "w",
+      "state": "sail",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-43.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/0",
+      "direction": "w",
+      "state": "fire",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-44.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/1",
+      "direction": "w",
+      "state": "fire",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-45.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/2",
+      "direction": "w",
+      "state": "fire",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-46.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/3",
+      "direction": "w",
+      "state": "fire",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-47.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/4",
+      "direction": "w",
+      "state": "fire",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-48.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/5",
+      "direction": "w",
+      "state": "fire",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-49.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/6",
+      "direction": "w",
+      "state": "fire",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-50.png"
+    },
+    {
+      "id": "battle.unit.transport/fire/w/7",
+      "direction": "w",
+      "state": "fire",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-51.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/w/0",
+      "direction": "w",
+      "state": "hit",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-52.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/w/1",
+      "direction": "w",
+      "state": "hit",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-53.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/w/2",
+      "direction": "w",
+      "state": "hit",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-54.png"
+    },
+    {
+      "id": "battle.unit.transport/hit/w/3",
+      "direction": "w",
+      "state": "hit",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-55.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/0",
+      "direction": "w",
+      "state": "sink",
+      "index": 0,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-56.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/1",
+      "direction": "w",
+      "state": "sink",
+      "index": 1,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-57.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/2",
+      "direction": "w",
+      "state": "sink",
+      "index": 2,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-58.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/3",
+      "direction": "w",
+      "state": "sink",
+      "index": 3,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-59.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/4",
+      "direction": "w",
+      "state": "sink",
+      "index": 4,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-60.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/5",
+      "direction": "w",
+      "state": "sink",
+      "index": 5,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-61.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/6",
+      "direction": "w",
+      "state": "sink",
+      "index": 6,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-62.png"
+    },
+    {
+      "id": "battle.unit.transport/sink/w/7",
+      "direction": "w",
+      "state": "sink",
+      "index": 7,
+      "durationMs": 100,
+      "pivot": [
+        48,
+        80
+      ],
+      "sourcePath": "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/frame-63.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 4,
+        "fps": 5,
+        "loop": true
+      },
+      "sail": {
+        "frames": 8,
+        "fps": 10,
+        "loop": true
+      },
+      "fire": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      },
+      "hit": {
+        "frames": 4,
+        "fps": 10,
+        "loop": false
+      },
+      "sink": {
+        "frames": 8,
+        "fps": 10,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "blender-art-factory",
+    "model": "5.2.1 LTS",
+    "promptHash": "af5a9a34fc8232050169cb0eacee3f368926431f51b978a7beeb587a8fff80f0",
+    "sourceRefs": [
+      "assets/art/source/blender-units/battle.unit.transport/v2/manifest.json",
+      "assets/art/source/blender-units/battle.unit.transport/v2/source.blend",
+      "assets/art/source/blender-units/battle.unit.transport/v2/profile.json",
+      "assets/art/source/blender-units/battle.unit.transport/v2/recipe.py",
+      "assets/art/source/blender-units/battle.unit.transport/v2/driver.py",
+      "assets/art/source/blender-units/battle.unit.transport/v2/render-settings.json",
+      "assets/art/approved/battle.unit.transport/ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851/provider-source-6.json"
+    ],
+    "licenseNotes": [
+      "Original project-authored geometry, rig, materials and actions; retained factory dependencies and every raw/native render are bound by the source manifest inventory. Shared mechanical-role artwork does not claim new culture-specific originals. Native and runtime visual acceptance remain separate."
+    ]
+  },
+  "createdAt": "2026-09-08T23:50:44.797Z",
+  "referenceHashes": [
+    "6bc9d234a4a6016ec510abcf51e0e301b0a7ed7f64864e27b86dff7228617180",
+    "4cf875103214ce5088eac3c324b42adf6684affc391120e232797b5151051fce"
+  ],
+  "processing": [
+    {
+      "tool": "blender-art-factory",
+      "version": "5.2.1 LTS",
+      "profile": "articulated-battle-96",
+      "settingsHash": "92f85208a98f552074867b4ff9629ac4f85bb535f9ee953cce6899b6d1a337b2",
+      "inputHash": "6bc9d234a4a6016ec510abcf51e0e301b0a7ed7f64864e27b86dff7228617180",
+      "outputHash": "b5e01dc91865f6aa312520c6508bd6e5c999b9f6e4b5510eb8736a9ce1cb91bd"
+    },
+    {
+      "tool": "theandril-processing-batch",
+      "version": "1",
+      "profile": "explicit-authored-frames",
+      "settingsHash": "bc08ba1dadc14d3fe7f4fe8b3b46249032492fb1219721ebbd0eb8587016e0e3",
+      "inputHash": "b5e01dc91865f6aa312520c6508bd6e5c999b9f6e4b5510eb8736a9ce1cb91bd",
+      "outputHash": "43eb5657466c829b39531ceea063c969e4b4632ea7eb4c5a9b2095a07fec9221"
+    }
+  ],
+  "validation": {
+    "score": 100,
+    "passed": true,
+    "reportPath": "assets/art/reports/battle.unit.transport.approved.json"
+  },
+  "review": {
+    "reviewer": "Codex-art-review",
+    "reviewedAt": "2026-09-09T00:06:18.456Z",
+    "notes": "Reviewed all64processed native frames and 4x west sail cycle, with parent independent east sailing and west sink review. Covered cargo cabin/crates, planked hull and stitched sail remain legible. Oars sweep independently, sail panels flex, deck weapon moves subtly; sinking removes hull below actual alpha waterline until remaining canvas/spar. Native accepted, actual hull/event playback remains runtime review.\nReviewed candidate ead89505df83977fe70041f22f5d02013f2c6288a720a62a403abedc51a4f851; byte-identical frames and evidence retained in the approved source directory.",
+    "evidencePaths": [
+      "assets/art/reviews/7dc3974724587cd3d6edb8823faa2a93443ac779162dcd5e0a5fcfcc155babec.png"
+    ],
+    "inputHash": "a7e4e37b66a1ccd10e6a15dc384d26d8f5a4b74c223a9fbfb4bb96e5733bcf2b"
+  },
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 96,
+    "requireMotion": true,
+    "terrain": "none"
+  }
+}

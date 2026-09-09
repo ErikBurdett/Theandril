@@ -5,6 +5,7 @@ import { cacheKey, safeAssetPath, sha256 } from './provenance';
 import { hashSchema, paletteSchema } from './runtime';
 import { parseAssetManifest, sourcePathSchema } from './schema';
 import { validateAsset } from './validation';
+export { BATTLE_UNIT_IDS, BATTLE_UNIT_ROLES, importBlenderUnitSource } from './blender-unit-source';
 
 export const BATTLE_EFFECT_IDS = ['effect.battle_melee', 'effect.battle_projectile', 'effect.battle_ember', 'effect.battle_ward', 'effect.battle_rally'] as const;
 export const BLENDER_BATTLE_IDS = [...BATTLE_EFFECT_IDS, 'character.waykeeper'] as const;

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "improvement.tide_observatory",
+  "type": "map-object",
+  "status": "BRIEF_READY",
+  "version": 1,
+  "nativeResolution": {
+    "width": 64,
+    "height": 64
+  },
+  "paletteId": "theandril-master-v1",
+  "contentIds": [
+    "improvement.tide_observatory"
+  ],
+  "prompt": "Use case: stylized-concept. Produce exactly ONE original Theandril strategy-map prop, not a sheet or icons. Genuine transparent PNG background, no checkerboard. Serious grounded weathered medieval dark-fantasy, crisp intentional PIXEL ART built with coarse square clusters at a 64×64 logical-pixel density: broad connected material planes, readable silhouettes, selective dark outline, no antialiasing, no painterly texture or photographic rendering. Three-quarter southeast isometric view with consistent upper-left diffuse light. Restrained palette: soot #202328, peat #343B33, wet slate #536368, ash #929184, old linen #C1B597, weathered timber browns, dull brass #A38B55, sage vegetation and muted blue water. Entire object centered, fully visible, with a generous 15% genuine transparent margin on EVERY side, including tops and ground. Compact joined ground footprint will fit into 56×44 logical pixels inside a 64×64 transparent runtime canvas. No text, letters, labels, logos, people, UI, hex tile borders, surrounding landscape, floating detached fragments, cast shadow outside footprint, gradients, bloom or haze. A TIDE OBSERVATORY: a small round pale weathered masonry observing turret on low broad timber pilings and a joined short angular pier. Atop the open turret is a very clear tarnished-brass open-ring sighting instrument, not a dome; a long vertical tide gauge descends from the pier into a tiny integral patch of muted blue-grey shallow water. One rolled vellum chart on a low open desk. Marine research station, low tower, salt-scoured stone and dark rigging. No fishing nets, no fish, no lighthouse beam, no modern telescope.",
+  "frames": [
+    {
+      "id": "improvement.tide_observatory/idle/se/0",
+      "direction": "se",
+      "state": "idle",
+      "index": 0,
+      "durationMs": 250,
+      "pivot": [
+        32,
+        48
+      ],
+      "sourcePath": "assets/art/source/native/improvement.tide_observatory/v1/idle-se-0.png"
+    }
+  ],
+  "animation": {
+    "states": {
+      "idle": {
+        "frames": 1,
+        "fps": 4,
+        "loop": false
+      }
+    }
+  },
+  "provenance": {
+    "provider": "codex-imagegen",
+    "model": "not-exposed-by-tool",
+    "promptHash": "9b282332779e0fe77958ffb18e47cb1668fb3fd644579ff03a757ef9451f0e21",
+    "sourceRefs": [
+      "assets/art/source/hearth-improvements/improvement.tide_observatory-v1.png",
+      "assets/art/source/hearth-improvements/improvement.tide_observatory-v1.json"
+    ],
+    "licenseNotes": [
+      "Original built-in image generation commissioned for Theandril; no third-party artwork used. Service terms apply; model and seed are not exposed by the tool and no independent rights guarantee is inferred."
+    ]
+  },
+  "createdAt": "2026-09-08T21:23:42.807Z",
+  "referenceHashes": [
+    "e00c1036681bc2b43ef551293a645025cb6907a2a3caf9528e2e2596eb77ea48",
+    "004285c3b6565cedcbabb0743af036c027acd6e46ded52c4c299ca5da9ace3b9"
+  ],
+  "processing": [
+    {
+      "tool": "theandril-hearth-improvement-extraction",
+      "version": "1",
+      "profile": "registered-map-prop-64",
+      "settingsHash": "a7b23035c1aa0ccd8049490245669fac91639ab5f734539c5f4d9d65f3671ba7",
+      "inputHash": "e00c1036681bc2b43ef551293a645025cb6907a2a3caf9528e2e2596eb77ea48",
+      "outputHash": "1ff3b2b035e7ce4010631d0ce11fcc7bde6017a64d961ae31fddec8cb04602da"
+    }
+  ],
+  "validation": null,
+  "review": null,
+  "constraints": {
+    "transparentPadding": 2,
+    "maxColors": 64,
+    "binaryAlpha": true,
+    "logicalPixelSize": 1,
+    "maxPivotDrift": 0,
+    "maxBoundingBoxDrift": 0,
+    "requireMotion": false,
+    "terrain": "none"
+  }
+}
