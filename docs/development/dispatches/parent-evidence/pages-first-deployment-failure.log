@@ -1,0 +1,55 @@
+build	Check journal, asset URL and integrity boundaries	﻿2026-09-10T01:37:04.1515930Z ##[group]Run pnpm exec vitest run apps/web/src/updates tests/tooling apps/web/src/asset-url.test.ts apps/web/src/runtime-art.test.ts packages/render/src/art-validation.test.ts
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:04.1517234Z ^[[36;1mpnpm exec vitest run apps/web/src/updates tests/tooling apps/web/src/asset-url.test.ts apps/web/src/runtime-art.test.ts packages/render/src/art-validation.test.ts^[[0m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:04.1554508Z shell: /usr/bin/bash -e {0}
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:04.1554771Z env:
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:04.1554969Z   GITHUB_PAGES: true
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:04.1555255Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:04.1555575Z ##[endgroup]
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:04.7227886Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:04.7230579Z ^[[1m^[[30m^[[46m RUN ^[[49m^[[39m^[[22m ^[[36mv4.1.11 ^[[39m^[[90m/home/runner/work/Theandril/Theandril^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:04.7231947Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:05.0606287Z  ^[[32m✓^[[39m packages/render/src/art-validation.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 13^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:05.2753299Z  ^[[32m✓^[[39m apps/web/src/updates/validation.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 159^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:05.3023404Z  ^[[32m✓^[[39m apps/web/src/updates/content.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 8^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:05.5032806Z  ^[[32m✓^[[39m apps/web/src/updates/media.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 13^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:05.6723985Z  ^[[32m✓^[[39m apps/web/src/updates/journal.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 33^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:05.7422845Z  ^[[32m✓^[[39m apps/web/src/asset-url.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 9^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:05.8723341Z  ^[[31m❯^[[39m apps/web/src/updates/navigation.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m | ^[[22m^[[31m1 failed^[[39m^[[2m)^[[22m^[[32m 11^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:05.8752850Z ^[[31m     ^[[31m×^[[31m declares a reviewed base-safe icon instead of requesting a missing root favicon^[[39m^[[32m 6^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:05.8754802Z      ^[[32m✓^[[39m round-trips a permanent dispatch on both root and GitHub Pages bases^[[32m 2^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:06.6569587Z  ^[[32m✓^[[39m apps/web/src/runtime-art.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 842^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:06.6572122Z      ^[[33m^[[2m✓^[[22m^[[39m loads the unchanged published map and deferred battle atlas under / ^[[33m 402^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:07.0537986Z  ^[[32m✓^[[39m tests/tooling/updates-build.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:07.3093398Z  ^[[32m✓^[[39m tests/tooling/lint-boundaries.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 1008^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:07.3133238Z      ^[[33m^[[2m✓^[[22m^[[39m does not reinterpret the byte-preserved reviewer snapshot as live source ^[[33m 882^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4465745Z  ^[[32m✓^[[39m tests/tooling/pages-journal.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 3523^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4467973Z    ^[[33m^[[2m✓^[[22m^[[39m the actual Pages suite collects journal journeys alongside game and navigation smoke ^[[33m 3518^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4534325Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4535284Z ^[[31m⎯⎯⎯⎯⎯⎯⎯^[[39m^[[1m^[[41m Failed Tests 1 ^[[49m^[[22m^[[31m⎯⎯⎯⎯⎯⎯⎯^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4535743Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4540209Z ^[[41m^[[1m FAIL ^[[22m^[[49m apps/web/src/updates/navigation.test.ts^[[2m > ^[[22mrefresh-safe public links^[[2m > ^[[22mdeclares a reviewed base-safe icon instead of requesting a missing root favicon
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4546338Z ^[[31m^[[1mError^[[22m: ENOENT: no such file or directory, open 'apps/web/updates/index.html'^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4547996Z ^[[36m ^[[2m❯^[[22m apps/web/src/updates/navigation.test.ts:^[[2m7:12^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4567640Z     ^[[90m  5|^[[39m ^[[34mdescribe^[[39m(^[[32m'refresh-safe public links'^[[39m^[[33m,^[[39m () ^[[33m=>^[[39m {
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4569328Z     ^[[90m  6|^[[39m   it('declares a reviewed base-safe icon instead of requesting a missi…
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4570837Z     ^[[90m  7|^[[39m     expect(readFileSync('apps/web/updates/index.html', 'utf8')).toCont…
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4572703Z     ^[[90m   |^[[39m            ^[[31m^^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4573587Z     ^[[90m  8|^[[39m   })^[[33m;^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4574895Z     ^[[90m  9|^[[39m   it('round-trips a permanent dispatch on both root and GitHub Pages b…
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4575603Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4576180Z ^[[31m^[[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4576677Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4576717Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4579908Z ^[[2m Test Files ^[[22m ^[[1m^[[31m1 failed^[[39m^[[22m^[[2m | ^[[22m^[[1m^[[32m10 passed^[[39m^[[22m^[[90m (11)^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4582035Z ^[[2m      Tests ^[[22m ^[[1m^[[31m1 failed^[[39m^[[22m^[[2m | ^[[22m^[[1m^[[32m35 passed^[[39m^[[22m^[[90m (36)^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4596962Z ^[[2m   Start at ^[[22m 01:37:04
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4598455Z ^[[2m   Duration ^[[22m 4.70s^[[2m (transform 614ms, setup 0ms, import 1.85s, tests 5.62s, environment 2ms)^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4599280Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4605706Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4629687Z ##[error]Error: ENOENT: no such file or directory, open 'apps/web/updates/index.html'
+build	Check journal, asset URL and integrity boundaries	 ❯ apps/web/src/updates/navigation.test.ts:7:12
+build	Check journal, asset URL and integrity boundaries	
+build	Check journal, asset URL and integrity boundaries	⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+build	Check journal, asset URL and integrity boundaries	Serialized Error: { errno: -2, code: 'ENOENT', syscall: 'open', path: 'apps/web/updates/index.html' }
+build	Check journal, asset URL and integrity boundaries	
+build	Check journal, asset URL and integrity boundaries	2026-09-10T01:37:09.4901450Z ##[error]Process completed with exit code 1.
