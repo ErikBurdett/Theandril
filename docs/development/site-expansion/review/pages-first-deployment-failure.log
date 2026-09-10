@@ -1,0 +1,327 @@
+build	Check journal, asset URL and integrity boundaries	﻿2026-09-10T04:24:44.5788190Z ##[group]Run pnpm exec vitest run apps/web/src/updates tests/tooling apps/web/src/asset-url.test.ts apps/web/src/runtime-art.test.ts packages/render/src/art-validation.test.ts
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:44.5789452Z ^[[36;1mpnpm exec vitest run apps/web/src/updates tests/tooling apps/web/src/asset-url.test.ts apps/web/src/runtime-art.test.ts packages/render/src/art-validation.test.ts^[[0m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:44.5845221Z shell: /usr/bin/bash -e {0}
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:44.5845549Z env:
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:44.5845772Z   GITHUB_PAGES: true
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:44.5846071Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:44.5846412Z ##[endgroup]
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:45.1280224Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:45.1282139Z ^[[1m^[[30m^[[46m RUN ^[[49m^[[39m^[[22m ^[[36mv4.1.11 ^[[39m^[[90m/home/runner/work/Theandril/Theandril^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:45.1282800Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:45.4895845Z  ^[[32m✓^[[39m packages/render/src/art-validation.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 11^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:45.7108021Z  ^[[32m✓^[[39m apps/web/src/updates/validation.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 210^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:45.9066297Z  ^[[32m✓^[[39m apps/web/src/updates/content.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:46.0875581Z  ^[[32m✓^[[39m apps/web/src/updates/site.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 7^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:46.5251827Z  ^[[32m✓^[[39m apps/web/src/updates/journal.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 37^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:46.6933777Z  ^[[32m✓^[[39m apps/web/src/updates/media.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 10^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:46.8797185Z  ^[[32m✓^[[39m apps/web/src/runtime-art.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 838^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:46.8799176Z      ^[[33m^[[2m✓^[[22m^[[39m loads the unchanged published map and deferred battle atlas under / ^[[33m 349^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:46.8893035Z  ^[[32m✓^[[39m apps/web/src/asset-url.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 8^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:47.2577313Z  ^[[32m✓^[[39m tests/tooling/updates-build.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:47.3342647Z  ^[[32m✓^[[39m apps/web/src/updates/cross-links.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:47.5066723Z  ^[[32m✓^[[39m apps/web/src/updates/SiteShell.test.tsx ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 17^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:47.5144857Z  ^[[32m✓^[[39m apps/web/src/updates/navigation.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:47.6743615Z  ^[[32m✓^[[39m apps/web/src/updates/compendium/coverage.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:47.8195634Z  ^[[32m✓^[[39m apps/web/src/updates/compendium-layout.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:48.9874282Z  ^[[32m✓^[[39m tests/tooling/lint-boundaries.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 843^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:48.9876147Z      ^[[33m^[[2m✓^[[22m^[[39m does not reinterpret the byte-preserved reviewer snapshot as live source ^[[33m 738^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:49.2234322Z  ^[[32m✓^[[39m apps/web/src/updates/compendium-routes.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:49.4215526Z  ^[[32m✓^[[39m apps/web/src/updates/home-style.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:49.6853497Z  ^[[32m✓^[[39m apps/web/src/updates/lore.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 52^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:50.1945463Z  ^[[32m✓^[[39m apps/web/src/updates/compendium/data.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 47^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:51.5877238Z  ^[[32m✓^[[39m tests/tooling/pages-journal.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 3883^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:51.5879445Z    ^[[33m^[[2m✓^[[22m^[[39m the actual Pages suite collects journal journeys alongside game and navigation smoke ^[[33m 3879^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:54.3910586Z ^[[90mstdout^[[2m | apps/web/src/updates/changelog.test.ts
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:54.3912065Z ^[[22m^[[39mwrote /home/runner/work/Theandril/Theandril/apps/web/src/updates/changelog/feed.json
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:24:54.3912810Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5163657Z  ^[[31m❯^[[39m apps/web/src/updates/changelog.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m | ^[[22m^[[31m1 failed^[[39m^[[2m)^[[22m^[[33m 15116^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5169946Z ^[[31m     ^[[31m×^[[31m is deterministic and the committed feed is an exact record from its newest commit back to the root^[[39m^[[33m 15111^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5171845Z      ^[[32m✓^[[39m reveals enough entries for a permalinked older commit before scrolling to it^[[32m 1^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5191498Z      ^[[32m✓^[[39m keeps the default fold for the first page, missing or unknown commits^[[32m 0^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5193045Z      ^[[32m✓^[[39m renders headings, paragraphs, lists, bold text and links^[[32m 1^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5194484Z      ^[[32m✓^[[39m escapes raw HTML and refuses non-http links^[[32m 0^[[2mms^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5223457Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5224013Z ^[[31m⎯⎯⎯⎯⎯⎯⎯^[[39m^[[1m^[[41m Failed Tests 1 ^[[49m^[[22m^[[31m⎯⎯⎯⎯⎯⎯⎯^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5224323Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5227903Z ^[[41m^[[1m FAIL ^[[22m^[[49m apps/web/src/updates/changelog.test.ts^[[2m > ^[[22mmaster changelog feed^[[2m > ^[[22mis deterministic and the committed feed is an exact record from its newest commit back to the root
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5234261Z ^[[31m^[[1mAssertionError^[[22m: expected [ { …(11) }, { …(11) }, …(9) ] to deeply equal [ { …(11) }, { …(11) }, …(9) ]^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5234966Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5235182Z ^[[32m- Expected^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5235592Z ^[[31m+ Received^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5235807Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5236038Z ^[[33m@@ -12,11 +12,11 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5236889Z ^[[2m      "insertions": 71,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5237479Z ^[[2m      "notes": "## Shared site shell^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5237815Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5239606Z ^[[2m  This checkpoint establishes the multi-page public-site structure that lets the home, dispatches, lore library and compendium use one navigation and footer shell. It keeps each page a static Vite entry so direct refreshes work on plain Pages hosting.",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5240790Z ^[[2m      "sha": "4790331e3da682bb8f627546dcd39a22654a1bf7",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5241231Z ^[[32m-     "shortSha": "4790331",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5241598Z ^[[31m+     "shortSha": "4790331e",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5242173Z ^[[2m      "subject": "fix: include reviewed journal HTML entrypoint in deployment",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5242620Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5242859Z ^[[2m    {^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5243119Z ^[[2m      "areas": [^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5243666Z ^[[2m        ".github/workflows",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5244023Z ^[[33m@@ -35,11 +35,11 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5244183Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5245694Z ^[[2m  This change introduced the public developer journal: three illustrated, source-linked dispatches covering campaign safety, archive durability, and the twenty-four-culture baseline. It included searchable archive controls, stable dispatch query links, a scope ledger, source library and contributor guidance.^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5246765Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5247767Z ^[[2m  The journal reused retained Hearth & Card materials and four provenance-recorded game screenshots. It introduced no game rules or new game artwork; it is a development-demo publication, not 1.0 acceptance.",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5248779Z ^[[2m      "sha": "9243b09d9d2c49d365e094188d0e1e801c37ff51",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5249210Z ^[[32m-     "shortSha": "9243b09",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5249585Z ^[[31m+     "shortSha": "9243b09d",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5250208Z ^[[2m      "subject": "feat: publish Theandril Dispatches and campaign safety development demo",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5250684Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5251115Z ^[[2m    {^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5251374Z ^[[2m      "areas": [^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5251706Z ^[[2m        "\"docs/development",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5252042Z ^[[33m@@ -59,11 +59,11 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5252435Z ^[[2m      "date": "2026-09-09T13:21:20-05:00",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5252815Z ^[[2m      "deletions": 173,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5253119Z ^[[2m      "files": 2142,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5253784Z ^[[2m      "insertions": 1780525,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5254247Z ^[[2m      "sha": "8b3b8c148b7e8ee3689001210033fee7a1b8a6ef",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5254665Z ^[[32m-     "shortSha": "8b3b8c1",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5255028Z ^[[31m+     "shortSha": "8b3b8c14",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5255588Z ^[[2m      "subject": "chore: checkpoint campaign safety fixes and review evidence",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5256027Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5256262Z ^[[2m    {^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5256520Z ^[[2m      "areas": [^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5256836Z ^[[2m        ".agents/skills",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5257167Z ^[[33m@@ -73,15 +73,15 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5257624Z ^[[2m        "docs/IMPLEMENTATION_STATUS.md",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5258189Z ^[[2m      ],^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5258654Z ^[[2m      "author": "ErikBurdett",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5259161Z ^[[2m      "body": "",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5259618Z ^[[2m      "date": "2026-09-08T23:53:33-05:00",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5260099Z ^[[32m-     "deletions": 745,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5260450Z ^[[31m+     "deletions": 6145,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5260765Z ^[[2m      "files": 5954,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5261111Z ^[[32m-     "insertions": 1480829,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5261473Z ^[[31m+     "insertions": 1486229,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5261927Z ^[[2m      "sha": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5262360Z ^[[32m-     "shortSha": "b0a4cd8",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5262947Z ^[[31m+     "shortSha": "b0a4cd86",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5265963Z ^[[2m      "subject": "Update README and various SKILL documents for Theandril, enhancing campaign instructions, refining battle mechanics, and expanding lore. Key changes include clearer campaign setup guidelines, detailed exploration and recruitment processes, and improved asset management protocols. Added new sections on resource deposits, hearth development, and sprite animation standards to ensure consistency and clarity across gameplay elements.",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5267956Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5268319Z ^[[2m    {^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5268705Z ^[[2m      "areas": [^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5269845Z ^[[2m        "\"test-results-slice18-fixes/land-query-selected-town-q-3d4c7-tain-another-town\\342\\200\\231s-options",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5270887Z ^[[33m@@ -91,15 +91,15 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5271205Z ^[[2m        "apps/web",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5271484Z ^[[2m      ],^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5271812Z ^[[2m      "author": "ErikBurdett",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5274259Z ^[[2m      "body": "Checkpoint integrated geography, armies, naval travel, tactical battles, faction art, and map-first campaign management. Add base-safe verified assets and automatic Pages deployment with production gameplay smoke checks. Preserve source art and release-gap evidence; stop tracking disposable browser output.",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5275767Z ^[[2m      "date": "2026-09-08T01:24:36-05:00",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5276156Z ^[[32m-     "deletions": 9916,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5276501Z ^[[31m+     "deletions": 25389,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5276823Z ^[[2m      "files": 4252,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5277157Z ^[[32m-     "insertions": 335807,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5277501Z ^[[31m+     "insertions": 351280,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5277951Z ^[[2m      "sha": "a57b4633d400ca57d13e73df82d28d2a25a94b5a",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5278380Z ^[[32m-     "shortSha": "a57b463",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5278739Z ^[[31m+     "shortSha": "a57b4633",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5279355Z ^[[2m      "subject": "feat: publish the 24-faction development campaign on GitHub Pages",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5279995Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5280225Z ^[[2m    {^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5280479Z ^[[2m      "areas": [^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5281222Z ^[[2m        "\"test-results-slice18-fixes/land-query-selected-town-q-3d4c7-tain-another-town\\342\\200\\231s-options",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5281848Z ^[[33m@@ -109,15 +109,15 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5282203Z ^[[2m        "docs/PERFORMANCE.md",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5282516Z ^[[2m      ],^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5282822Z ^[[2m      "author": "ErikBurdett",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5283135Z ^[[2m      "body": "",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5283697Z ^[[2m      "date": "2026-09-06T19:50:45-05:00",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5284085Z ^[[32m-     "deletions": 3495,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5284427Z ^[[31m+     "deletions": 12022,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5284740Z ^[[2m      "files": 1889,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5285083Z ^[[32m-     "insertions": 121526,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5285428Z ^[[31m+     "insertions": 130053,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5286118Z ^[[2m      "sha": "b17900d143e330cbc0014ce6fc288896b1e6ea57",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5286775Z ^[[32m-     "shortSha": "b17900d",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5287173Z ^[[31m+     "shortSha": "b17900d1",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5288892Z ^[[2m      "subject": "Update art assets and configurations for new character units in Theandril, including 'mire_courts', 'morrow_spore', and 'rimehorn_clans'. Adjusted frame dimensions and added new validation and review details for improved asset management. Updated SHA256 checksums in catalog files for integrity verification.",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5290093Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5290332Z ^[[2m    {^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5290588Z ^[[2m      "areas": [^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5290915Z ^[[2m        ".agents/skills",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5291247Z ^[[33m@@ -127,15 +127,15 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5291550Z ^[[2m        "README.md",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5291980Z ^[[2m      ],^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5292287Z ^[[2m      "author": "ErikBurdett",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5292625Z ^[[2m      "body": "",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5292997Z ^[[2m      "date": "2026-09-06T03:24:54-05:00",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5293589Z ^[[32m-     "deletions": 1381,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5293942Z ^[[31m+     "deletions": 6272,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5294251Z ^[[2m      "files": 676,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5294579Z ^[[32m-     "insertions": 70902,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5294922Z ^[[31m+     "insertions": 75793,^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5295376Z ^[[2m      "sha": "404bc9da3fd3cc926590ac790afd74e8b1982322",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5295805Z ^[[32m-     "shortSha": "404bc9d",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5296171Z ^[[31m+     "shortSha": "404bc9da",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5297986Z ^[[2m      "subject": "Enhance game mechanics and assets for Theandril 1.0, including on-demand land details, new faction ecology, and improved army management features. Added 37 new assets, refined navigation and cultivation systems, and integrated extensive testing. Updated art assets and configurations for better performance and visual fidelity.",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5299251Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5299497Z ^[[2m    {^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5299752Z ^[[2m      "areas": [^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5300068Z ^[[2m        ".agents/skills",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5300404Z ^[[33m@@ -149,11 +149,11 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5300780Z ^[[2m      "date": "2026-09-05T22:17:15-05:00",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5301141Z ^[[2m      "deletions": 210,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5301442Z ^[[2m      "files": 48,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5301761Z ^[[2m      "insertions": 1507,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5302199Z ^[[2m      "sha": "d7e5051792bf65b891871f2beefadc8c02c53567",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5302610Z ^[[32m-     "shortSha": "d7e5051",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5302964Z ^[[31m+     "shortSha": "d7e50517",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5303839Z ^[[2m      "subject": "Update lore for The Book of Broken Roads with additional details from Obsidian vault",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5304361Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5304743Z ^[[2m    {^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5304996Z ^[[2m      "areas": [^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5305298Z ^[[2m        "\"docs/lore",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5305627Z ^[[33m@@ -165,11 +165,11 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5306023Z ^[[2m      "date": "2026-09-05T22:12:47-05:00",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5306399Z ^[[2m      "deletions": 0,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5306707Z ^[[2m      "files": 12,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5307033Z ^[[2m      "insertions": 378,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5307482Z ^[[2m      "sha": "588d79a428c4d7650f95c850ce1f0f450331b81a",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5307899Z ^[[32m-     "shortSha": "588d79a",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5308272Z ^[[31m+     "shortSha": "588d79a4",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5308801Z ^[[2m      "subject": "Add The Book of Broken Roads lore from Obsidian vault",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5309200Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5309545Z ^[[2m    {^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5309876Z ^[[2m      "areas": [^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5310200Z ^[[2m        ".agents/skills",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5310538Z ^[[33m@@ -183,11 +183,11 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5310993Z ^[[2m      "date": "2026-09-05T21:50:35-05:00",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5311492Z ^[[2m      "deletions": 0,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5311789Z ^[[2m      "files": 1503,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5312127Z ^[[2m      "insertions": 111585,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5312581Z ^[[2m      "sha": "cb068f8198c97d91ead7d0600b34090ea64569b6",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5313001Z ^[[32m-     "shortSha": "cb068f8",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5313573Z ^[[31m+     "shortSha": "cb068f81",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5314150Z ^[[2m      "subject": "init commit",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5314597Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5314953Z ^[[2m    {^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5315222Z ^[[2m      "areas": [^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5315586Z ^[[2m        "THEANDRIL_ASTRA_HANDOFF/.agents",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5316109Z ^[[33m@@ -201,9 +201,9 @@^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5316883Z ^[[2m      "date": "2026-09-05T01:23:09-05:00",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5317272Z ^[[2m      "deletions": 0,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5317712Z ^[[2m      "files": 26,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5318227Z ^[[2m      "insertions": 7089,^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5318982Z ^[[2m      "sha": "59c6dbe78b0afc2daf6fb32ac84058b6971b96dc",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5319698Z ^[[32m-     "shortSha": "59c6dbe",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5320313Z ^[[31m+     "shortSha": "59c6dbe7",^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5320954Z ^[[2m      "subject": "Initial Theandril",^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5321458Z ^[[2m    },^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5321808Z ^[[2m  ]^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5322010Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5322618Z ^[[36m ^[[2m❯^[[22m apps/web/src/updates/changelog.test.ts:^[[2m16:37^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5323855Z     ^[[90m 14|^[[39m     const newest = generated.findIndex(entry => entry.sha === feed[0]!…
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5324962Z     ^[[90m 15|^[[39m     expect(newest, 'committed feed head is not in first-parent history…
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5326257Z     ^[[90m 16|^[[39m     ^[[34mexpect^[[39m(generated^[[33m.^[[39m^[[34mslice^[[39m(newest))^[[33m.^[[39m^[[34mtoEqual^[[39m(feed)^[[33m;^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5327261Z     ^[[90m   |^[[39m                                     ^[[31m^^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5328723Z     ^[[90m 17|^[[39m     ^[[34mexpect^[[39m(feed^[[33m.^[[39m^[[34mat^[[39m(^[[33m-^[[39m^[[34m1^[[39m)^[[33m!^[[39m^[[33m.^[[39msubject)^[[33m.^[[39m^[[34mtoBe^[[39m(^[[32m'Initial Theandril'^[[39m)^[[33m;^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5329877Z     ^[[90m 18|^[[39m   })^[[33m;^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5330142Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5330527Z ^[[31m^[[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯^[[22m^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5330843Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5330868Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5331587Z ^[[2m Test Files ^[[22m ^[[1m^[[31m1 failed^[[39m^[[22m^[[2m | ^[[22m^[[1m^[[32m20 passed^[[39m^[[22m^[[90m (21)^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5332787Z ^[[2m      Tests ^[[22m ^[[1m^[[31m1 failed^[[39m^[[22m^[[2m | ^[[22m^[[1m^[[32m58 passed^[[39m^[[22m^[[90m (59)^[[39m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5334146Z ^[[2m   Start at ^[[22m 04:24:45
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5335156Z ^[[2m   Duration ^[[22m 24.36s^[[2m (transform 928ms, setup 0ms, import 11.28s, tests 21.12s, environment 2ms)^[[22m
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5336054Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5336067Z 
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5393267Z ##[error]AssertionError: expected [ { …(11) }, { …(11) }, …(9) ] to deeply equal [ { …(11) }, { …(11) }, …(9) ]
+build	Check journal, asset URL and integrity boundaries	
+build	Check journal, asset URL and integrity boundaries	- Expected
+build	Check journal, asset URL and integrity boundaries	+ Received
+build	Check journal, asset URL and integrity boundaries	
+build	Check journal, asset URL and integrity boundaries	@@ -12,11 +12,11 @@
+build	Check journal, asset URL and integrity boundaries	      "insertions": 71,
+build	Check journal, asset URL and integrity boundaries	      "notes": "## Shared site shell
+build	Check journal, asset URL and integrity boundaries	
+build	Check journal, asset URL and integrity boundaries	  This checkpoint establishes the multi-page public-site structure that lets the home, dispatches, lore library and compendium use one navigation and footer shell. It keeps each page a static Vite entry so direct refreshes work on plain Pages hosting.",
+build	Check journal, asset URL and integrity boundaries	      "sha": "4790331e3da682bb8f627546dcd39a22654a1bf7",
+build	Check journal, asset URL and integrity boundaries	-     "shortSha": "4790331",
+build	Check journal, asset URL and integrity boundaries	+     "shortSha": "4790331e",
+build	Check journal, asset URL and integrity boundaries	      "subject": "fix: include reviewed journal HTML entrypoint in deployment",
+build	Check journal, asset URL and integrity boundaries	    },
+build	Check journal, asset URL and integrity boundaries	    {
+build	Check journal, asset URL and integrity boundaries	      "areas": [
+build	Check journal, asset URL and integrity boundaries	        ".github/workflows",
+build	Check journal, asset URL and integrity boundaries	@@ -35,11 +35,11 @@
+build	Check journal, asset URL and integrity boundaries	
+build	Check journal, asset URL and integrity boundaries	  This change introduced the public developer journal: three illustrated, source-linked dispatches covering campaign safety, archive durability, and the twenty-four-culture baseline. It included searchable archive controls, stable dispatch query links, a scope ledger, source library and contributor guidance.
+build	Check journal, asset URL and integrity boundaries	
+build	Check journal, asset URL and integrity boundaries	  The journal reused retained Hearth & Card materials and four provenance-recorded game screenshots. It introduced no game rules or new game artwork; it is a development-demo publication, not 1.0 acceptance.",
+build	Check journal, asset URL and integrity boundaries	      "sha": "9243b09d9d2c49d365e094188d0e1e801c37ff51",
+build	Check journal, asset URL and integrity boundaries	-     "shortSha": "9243b09",
+build	Check journal, asset URL and integrity boundaries	+     "shortSha": "9243b09d",
+build	Check journal, asset URL and integrity boundaries	      "subject": "feat: publish Theandril Dispatches and campaign safety development demo",
+build	Check journal, asset URL and integrity boundaries	    },
+build	Check journal, asset URL and integrity boundaries	    {
+build	Check journal, asset URL and integrity boundaries	      "areas": [
+build	Check journal, asset URL and integrity boundaries	        "\"docs/development",
+build	Check journal, asset URL and integrity boundaries	@@ -59,11 +59,11 @@
+build	Check journal, asset URL and integrity boundaries	      "date": "2026-09-09T13:21:20-05:00",
+build	Check journal, asset URL and integrity boundaries	      "deletions": 173,
+build	Check journal, asset URL and integrity boundaries	      "files": 2142,
+build	Check journal, asset URL and integrity boundaries	      "insertions": 1780525,
+build	Check journal, asset URL and integrity boundaries	      "sha": "8b3b8c148b7e8ee3689001210033fee7a1b8a6ef",
+build	Check journal, asset URL and integrity boundaries	-     "shortSha": "8b3b8c1",
+build	Check journal, asset URL and integrity boundaries	+     "shortSha": "8b3b8c14",
+build	Check journal, asset URL and integrity boundaries	      "subject": "chore: checkpoint campaign safety fixes and review evidence",
+build	Check journal, asset URL and integrity boundaries	    },
+build	Check journal, asset URL and integrity boundaries	    {
+build	Check journal, asset URL and integrity boundaries	      "areas": [
+build	Check journal, asset URL and integrity boundaries	        ".agents/skills",
+build	Check journal, asset URL and integrity boundaries	@@ -73,15 +73,15 @@
+build	Check journal, asset URL and integrity boundaries	        "docs/IMPLEMENTATION_STATUS.md",
+build	Check journal, asset URL and integrity boundaries	      ],
+build	Check journal, asset URL and integrity boundaries	      "author": "ErikBurdett",
+build	Check journal, asset URL and integrity boundaries	      "body": "",
+build	Check journal, asset URL and integrity boundaries	      "date": "2026-09-08T23:53:33-05:00",
+build	Check journal, asset URL and integrity boundaries	-     "deletions": 745,
+build	Check journal, asset URL and integrity boundaries	+     "deletions": 6145,
+build	Check journal, asset URL and integrity boundaries	      "files": 5954,
+build	Check journal, asset URL and integrity boundaries	-     "insertions": 1480829,
+build	Check journal, asset URL and integrity boundaries	+     "insertions": 1486229,
+build	Check journal, asset URL and integrity boundaries	      "sha": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+build	Check journal, asset URL and integrity boundaries	-     "shortSha": "b0a4cd8",
+build	Check journal, asset URL and integrity boundaries	+     "shortSha": "b0a4cd86",
+build	Check journal, asset URL and integrity boundaries	      "subject": "Update README and various SKILL documents for Theandril, enhancing campaign instructions, refining battle mechanics, and expanding lore. Key changes include clearer campaign setup guidelines, detailed exploration and recruitment processes, and improved asset management protocols. Added new sections on resource deposits, hearth development, and sprite animation standards to ensure consistency and clarity across gameplay elements.",
+build	Check journal, asset URL and integrity boundaries	    },
+build	Check journal, asset URL and integrity boundaries	    {
+build	Check journal, asset URL and integrity boundaries	      "areas": [
+build	Check journal, asset URL and integrity boundaries	        "\"test-results-slice18-fixes/land-query-selected-town-q-3d4c7-tain-another-town\\342\\200\\231s-options",
+build	Check journal, asset URL and integrity boundaries	@@ -91,15 +91,15 @@
+build	Check journal, asset URL and integrity boundaries	        "apps/web",
+build	Check journal, asset URL and integrity boundaries	      ],
+build	Check journal, asset URL and integrity boundaries	      "author": "ErikBurdett",
+build	Check journal, asset URL and integrity boundaries	      "body": "Checkpoint integrated geography, armies, naval travel, tactical battles, faction art, and map-first campaign management. Add base-safe verified assets and automatic Pages deployment with production gameplay smoke checks. Preserve source art and release-gap evidence; stop tracking disposable browser output.",
+build	Check journal, asset URL and integrity boundaries	      "date": "2026-09-08T01:24:36-05:00",
+build	Check journal, asset URL and integrity boundaries	-     "deletions": 9916,
+build	Check journal, asset URL and integrity boundaries	+     "deletions": 25389,
+build	Check journal, asset URL and integrity boundaries	      "files": 4252,
+build	Check journal, asset URL and integrity boundaries	-     "insertions": 335807,
+build	Check journal, asset URL and integrity boundaries	+     "insertions": 351280,
+build	Check journal, asset URL and integrity boundaries	      "sha": "a57b4633d400ca57d13e73df82d28d2a25a94b5a",
+build	Check journal, asset URL and integrity boundaries	-     "shortSha": "a57b463",
+build	Check journal, asset URL and integrity boundaries	+     "shortSha": "a57b4633",
+build	Check journal, asset URL and integrity boundaries	      "subject": "feat: publish the 24-faction development campaign on GitHub Pages",
+build	Check journal, asset URL and integrity boundaries	    },
+build	Check journal, asset URL and integrity boundaries	    {
+build	Check journal, asset URL and integrity boundaries	      "areas": [
+build	Check journal, asset URL and integrity boundaries	        "\"test-results-slice18-fixes/land-query-selected-town-q-3d4c7-tain-another-town\\342\\200\\231s-options",
+build	Check journal, asset URL and integrity boundaries	@@ -109,15 +109,15 @@
+build	Check journal, asset URL and integrity boundaries	        "docs/PERFORMANCE.md",
+build	Check journal, asset URL and integrity boundaries	      ],
+build	Check journal, asset URL and integrity boundaries	      "author": "ErikBurdett",
+build	Check journal, asset URL and integrity boundaries	      "body": "",
+build	Check journal, asset URL and integrity boundaries	      "date": "2026-09-06T19:50:45-05:00",
+build	Check journal, asset URL and integrity boundaries	-     "deletions": 3495,
+build	Check journal, asset URL and integrity boundaries	+     "deletions": 12022,
+build	Check journal, asset URL and integrity boundaries	      "files": 1889,
+build	Check journal, asset URL and integrity boundaries	-     "insertions": 121526
+build	Check journal, asset URL and integrity boundaries	2026-09-10T04:25:09.5562506Z ##[error]Process completed with exit code 1.

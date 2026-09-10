@@ -1,5 +1,23 @@
 [
   {
+    "sha": "8f30d2dbb12f8c2e3d59c3b74de3eaef9cc5ac4f",
+    "shortSha": "8f30d2d",
+    "author": "ErikBurdett",
+    "date": "2026-09-09T23:22:44-05:00",
+    "subject": "feat: public site with home, master change ledger, lore library and compendium",
+    "body": "Turn /updates/ into Theandril's main website inside the shared Hearth & Card\nshell: a home page with a build-time ledger of every master commit (subject,\nbody, numstat, authored notes, permalinks), the developer dispatches moved to\n/updates/dispatches/, a lore library rendered from docs/lore markdown (Book of\nBroken Roads, Foundations, Faction Bible, Cohort notes) and a world compendium\nprojecting every culture, unit, building, improvement, resource, creature and\nterrain from @theandril/content with sprites from the published atlases.\n\nGenerated content (lore/library.json, compendium/data.json, changelog/feed.json)\nis produced by scripts/build-*.ts and guarded by regeneration tests; Pages\nregenerates the change feed from full history before building.\n\nIndependent review: docs/development/site-expansion/review/ (original\nfail-closed verdict retained; two bounded fixes; delta approved).",
+    "files": 201,
+    "insertions": 23913,
+    "deletions": 53,
+    "areas": [
+      ".github/workflows",
+      "AGENTS.md",
+      "apps/web",
+      "docs/development",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "4790331e3da682bb8f627546dcd39a22654a1bf7",
     "shortSha": "4790331",
     "author": "ErikBurdett",
@@ -60,8 +78,8 @@
     "subject": "Update README and various SKILL documents for Theandril, enhancing campaign instructions, refining battle mechanics, and expanding lore. Key changes include clearer campaign setup guidelines, detailed exploration and recruitment processes, and improved asset management protocols. Added new sections on resource deposits, hearth development, and sprite animation standards to ensure consistency and clarity across gameplay elements.",
     "body": "",
     "files": 5954,
-    "insertions": 1480829,
-    "deletions": 745,
+    "insertions": 1486229,
+    "deletions": 6145,
     "areas": [
       ".agents/skills",
       "README.md",
@@ -78,8 +96,8 @@
     "subject": "feat: publish the 24-faction development campaign on GitHub Pages",
     "body": "Checkpoint integrated geography, armies, naval travel, tactical battles, faction art, and map-first campaign management. Add base-safe verified assets and automatic Pages deployment with production gameplay smoke checks. Preserve source art and release-gap evidence; stop tracking disposable browser output.",
     "files": 4252,
-    "insertions": 335807,
-    "deletions": 9916,
+    "insertions": 351280,
+    "deletions": 25389,
     "areas": [
       "\"test-results-slice18-fixes/land-query-selected-town-q-3d4c7-tain-another-town\\342\\200\\231s-options",
       ".github/workflows",
@@ -96,8 +114,8 @@
     "subject": "Update art assets and configurations for new character units in Theandril, including 'mire_courts', 'morrow_spore', and 'rimehorn_clans'. Adjusted frame dimensions and added new validation and review details for improved asset management. Updated SHA256 checksums in catalog files for integrity verification.",
     "body": "",
     "files": 1889,
-    "insertions": 121526,
-    "deletions": 3495,
+    "insertions": 130053,
+    "deletions": 12022,
     "areas": [
       "\"test-results-slice18-fixes/land-query-selected-town-q-3d4c7-tain-another-town\\342\\200\\231s-options",
       "apps/web",
@@ -114,8 +132,8 @@
     "subject": "Enhance game mechanics and assets for Theandril 1.0, including on-demand land details, new faction ecology, and improved army management features. Added 37 new assets, refined navigation and cultivation systems, and integrated extensive testing. Updated art assets and configurations for better performance and visual fidelity.",
     "body": "",
     "files": 676,
-    "insertions": 70902,
-    "deletions": 1381,
+    "insertions": 75793,
+    "deletions": 6272,
     "areas": [
       ".agents/skills",
       "CHANGELOG.md",

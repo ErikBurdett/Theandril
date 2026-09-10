@@ -3,7 +3,7 @@
 import { describe, expect, it } from 'vitest';
 import feed from './changelog/feed.json';
 import { initialVisibleCommits, renderMarkdown } from './changelog';
-import { buildFeed } from '../../../../scripts/build-changelog';
+import { buildFeed, gitNumstatArguments } from '../../../../scripts/build-changelog';
 
 describe('master changelog feed', () => {
   it('is deterministic and the committed feed is an exact record from its newest commit back to the root', () => {
@@ -15,6 +15,12 @@ describe('master changelog feed', () => {
     expect(newest, 'committed feed head is not in first-parent history').toBeGreaterThanOrEqual(0);
     expect(generated.slice(newest)).toEqual(feed);
     expect(feed.at(-1)!.subject).toBe('Initial Theandril');
+  });
+  it('does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift', () => {
+    // A fresh CI clone abbreviates to 8+ characters and may apply different autocrlf/attribute settings;
+    // the feed must be identical from any checkout of the same history.
+    for (const entry of buildFeed()) expect(entry.shortSha).toBe(entry.sha.slice(0, 7));
+    expect(gitNumstatArguments('abc')).toEqual(['-c', 'core.autocrlf=false', '-c', 'core.safecrlf=false', '-c', 'diff.algorithm=myers', 'show', '--format=', '--numstat', '--no-renames', '--ignore-cr-at-eol', 'abc']);
   });
 });
 

@@ -1,0 +1,34 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+stdout | apps/web/src/updates/changelog.test.ts
+wrote /home/telephoneheater/Work/Theandril-release/apps/web/src/updates/changelog/feed.json
+
+ ❯ apps/web/src/updates/changelog.test.ts (6 tests | 1 failed) 14428ms
+     ✓ is deterministic and the committed feed is an exact record from its newest commit back to the root  9627ms
+     × does not depend on the clone: short SHAs are a fixed 7 characters and stats ignore line-ending conversion 4798ms
+     ✓ reveals enough entries for a permalinked older commit before scrolling to it 0ms
+     ✓ keeps the default fold for the first page, missing or unknown commits 0ms
+     ✓ renders headings, paragraphs, lists, bold text and links 1ms
+     ✓ escapes raw HTML and refuses non-http links 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/changelog.test.ts > master changelog feed > does not depend on the clone: short SHAs are a fixed 7 characters and stats ignore line-ending conversion
+TypeError: gitNumstatArguments is not a function
+ ❯ apps/web/src/updates/changelog.test.ts:23:12
+     21|     // the feed must be identical from any checkout of the same histor…
+     22|     for (const entry of buildFeed()) expect(entry.shortSha).toBe(entry…
+     23|     expect(gitNumstatArguments('abc')).toEqual(['-c', 'core.autocrlf=f…
+       |            ^
+     24|   });
+     25| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  23:26:01
+   Duration  19.35s (transform 30ms, setup 0ms, import 4.86s, tests 14.43s, environment 0ms)
+
