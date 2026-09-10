@@ -1,0 +1,23 @@
+RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/lore.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/lore.test.ts [ apps/web/src/updates/lore.test.ts ]
+Error: Cannot find module '../../../../scripts/build-lore.ts' imported from /home/telephoneheater/Work/Theandril-release/apps/web/src/updates/lore.test.ts
+ ❯ apps/web/src/updates/lore.test.ts:4:1
+      2| import { readFile } from 'node:fs/promises';
+      3| import { describe, expect, it } from 'vitest';
+      4| import { buildLoreLibrary } from '../../../../scripts/build-lore.ts';
+       | ^
+      5| import library from './lore/library.json';
+      6|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  22:43:26
+   Duration  98ms (transform 23ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)

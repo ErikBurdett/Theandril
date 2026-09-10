@@ -1,0 +1,34 @@
+import { mkdir } from 'node:fs/promises';
+import { expect, test } from '@playwright/test';
+
+const base = 'updates/compendium/';
+test('compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+  await page.goto(base);
+  await expect(page.getByRole('heading', { name: 'Theandril World Compendium' })).toBeVisible();
+  await expect(page.locator('[data-culture-card]')).toHaveCount(24);
+  await page.getByRole('searchbox', { name: 'Search the compendium' }).fill('Vesper');
+  await expect(page.locator('[data-culture-card]')).toHaveCount(1);
+  await page.goto(`${base}?culture=vesper_court`);
+  await expect(page.getByRole('heading', { name: 'Vesper Court' })).toBeVisible();
+  await expect(page.locator('[data-unit-card]')).toHaveCount(13);
+  expect(await page.locator('[data-sprite]').evaluateAll(items => items.every(item => item.getBoundingClientRect().width > 0 && getComputedStyle(item).backgroundImage !== 'none'))).toBe(true);
+  expect(await page.evaluate(async () => (await fetch(document.querySelector<HTMLElement>('[data-sprite]')!.dataset.atlas!)).status)).toBe(200);
+  await page.reload();
+  await expect(page.getByRole('heading', { name: 'Vesper Court' })).toBeVisible();
+  await page.goto(`${base}?unit=guard`);
+  await expect(page.getByRole('heading', { name: 'Oath guard' })).toBeVisible();
+  await expect(page.getByText('24 industry', { exact: true })).toBeVisible();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(() => { document.documentElement.style.fontSize = '130%'; });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  await mkdir('docs/development/site-expansion/compendium/screens', { recursive: true });
+  await page.screenshot({ path: 'docs/development/site-expansion/compendium/screens/compendium-390-130.png', fullPage: true });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.evaluate(() => { document.documentElement.style.fontSize = '100%'; });
+  await page.goto(base);
+  await page.screenshot({ path: 'docs/development/site-expansion/compendium/screens/compendium-1440.png', fullPage: true });
+  expect(errors).toEqual([]);
+});

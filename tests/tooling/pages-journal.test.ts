@@ -13,6 +13,9 @@ test('verification workflows retain immutable evidence revisions beyond a shallo
 test('the actual Pages suite collects journal journeys alongside game and navigation smoke', () => {
   const listing = execFileSync('pnpm', ['exec', 'playwright', 'test', '--config', 'playwright.pages.config.ts', '--list'], { encoding: 'utf8' });
   expect(listing).toContain('updates.spec.ts');
+  expect(listing).toContain('home.spec.ts');
+  expect(listing).toContain('lore.spec.ts');
+  expect(listing).toContain('compendium.spec.ts');
   expect(listing).toContain('developer-navigation.spec.ts');
   expect(listing).toContain('deployment-assets.spec.ts');
 });

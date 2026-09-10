@@ -1,0 +1,54 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/compendium-layout.test.ts (2 tests | 2 failed) 4ms
+     × sizes unit-card sprites with layout width rather than a transform that leaves a 128px box behind 3ms
+     × lets unit and catalog cards shrink below their preferred column width on narrow screens 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/compendium-layout.test.ts > compendium layout > sizes unit-card sprites with layout width rather than a transform that leaves a 128px box behind
+AssertionError: expected '.unit-card .sprite{max-width:128px;ma…' not to match /transform:/
+
+- Expected:
+/transform:/
+
++ Received:
+".unit-card .sprite{max-width:128px;max-height:128px;transform:scale(.72);transform-origin:top left;margin-right:-36px;margin-bottom:-36px}"
+
+ ❯ apps/web/src/updates/compendium-layout.test.ts:8:22
+      6|   it('sizes unit-card sprites with layout width rather than a transfor…
+      7|     const rule = css.match(/\.unit-card \.sprite\{[^}]*\}/)?.[0] ?? '';
+      8|     expect(rule).not.toMatch(/transform:/);
+       |                      ^
+      9|     expect(rule).toMatch(/width:\s*\d+px/);
+     10|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  apps/web/src/updates/compendium-layout.test.ts > compendium layout > lets unit and catalog cards shrink below their preferred column width on narrow screens
+AssertionError: expected '.compendium-hero{padding:3rem 0 2rem;…' to match /\.unit-grid\{[^}]*minmax\(min\(290px,…/
+
+- Expected:
+/\.unit-grid\{[^}]*minmax\(min\(290px, ?100%\), ?1fr\)/
+
++ Received:
+".compendium-hero{padding:3rem 0 2rem;border-bottom:3px double #8f7147}.compendium-hero h1{font-size:clamp(2.7rem,6vw,5rem);line-height:.98;margin:.5rem 0 1rem}.compendium-hero>p{max-width:52rem;font:1rem/1.75 var(--body)}.culture-hero-art{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin:1.2rem 0}.sprite{display:inline-block;flex:none;background-repeat:no-repeat;image-rendering:pixelated;vertical-align:middle}.sprite-missing{width:64px;height:64px;border:1px dashed #8f7147;line-height:64px;text-align:center;color:#775128}.culture-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}.culture-card,.unit-card,.catalog-card,.variant-grid article{border:1px solid #a78c62;background:#f5e9cb;padding:1rem;box-shadow:2px 3px 0 #b2946540}.culture-card>div{display:flex;align-items:center;gap:.7rem;min-height:74px}.culture-card h3,.unit-card h3,.catalog-card h3{font-size:1.35rem;margin:.7rem 0 .35rem}.culture-card p,.unit-card p,.catalog-card p,.variant-grid p{font:.83rem/1.65 var(--body)}.motto{font-style:italic;color:#5c4225}.catalog-section{border-top:3px double #8f7147;margin-top:3rem;padding-top:2rem}.catalog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}.catalog-card .sprite{max-width:100%;transform-origin:left top}.unit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1rem}.unit-card{display:flex;gap:1rem;align-items:flex-start;min-width:0}.unit-card .sprite{max-width:128px;max-height:128px;transform:scale(.72);transform-origin:top left;margin-right:-36px;margin-bottom:-36px}.stats,.stat-line,.weights,.affinities{display:grid;gap:.5rem}.stats{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));border-block:1px solid #a78c62;padding:1rem 0}.stats div,.stat-line div,.weights div,.affinities div{display:flex;justify-content:space-between;gap:.6rem;border-bottom:1px solid #b99e7670;padding:.35rem 0}.stats dt,.stat-line dt,.weights dt,.affinities dt{font:.72rem/1.4 var(--body);text-transform:uppercase;letter-spacing:.06em;color:#665139}.stats dd,.stat-line dd,.weights dd,.affinities dd{margin:0;font:700 .8rem/1.4 var(--body)}.stat-line{grid-template-columns:repeat(3,1fr);margin-top:.7rem}.variant-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:1rem}.variant-grid article{overflow:hidden}.variant-grid .sprite{transform:scale(.75);transform-origin:top left;margin-right:-32px;margin-bottom:-32px}.weights{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));max-width:650px}.affinities{max-width:700px}.archive-tools{margin-top:1.5rem}.catalog-section .section-heading{margin-bottom:1rem}@media(max-width:600px){.compendium-hero{padding-top:2rem}.culture-grid,.catalog-grid,.unit-grid{grid-template-columns:1fr}.unit-card{align-items:center}.unit-card .sprite{transform:scale(.58);margin-right:-54px;margin-bottom:-54px}.stat-line{grid-template-columns:1fr 1fr}.sprite{max-width:calc(100vw - 72px)}.culture-card>div{overflow:hidden}.catalog-section{margin-top:2rem}}
+"
+
+ ❯ apps/web/src/updates/compendium-layout.test.ts:12:17
+     10|   });
+     11|   it('lets unit and catalog cards shrink below their preferred column …
+     12|     expect(css).toMatch(/\.unit-grid\{[^}]*minmax\(min\(290px, ?100%\)…
+       |                 ^
+     13|     expect(css).toMatch(/\.catalog-grid\{[^}]*minmax\(min\(180px, ?100…
+     14|     expect(css).toMatch(/\.culture-grid\{[^}]*minmax\(min\(220px, ?100…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  23:07:49
+   Duration  103ms (transform 20ms, setup 0ms, import 26ms, tests 4ms, environment 0ms)
+

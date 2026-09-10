@@ -1,5 +1,6 @@
 import { dispatches, repository, sourceRevision } from './content';
 import type { Dispatch } from './types';
+import { pageUrl } from './site';
 
 /** All local URLs are relative to Vite's supplied deployment base. */
 export function localUrl(base: string, path: string): string {
@@ -7,7 +8,7 @@ export function localUrl(base: string, path: string): string {
 }
 
 export function dispatchUrl(base: string, id: string): string {
-  return localUrl(base, `updates/?${new URLSearchParams({ dispatch: id })}`);
+  return `${pageUrl(base, 'dispatches')}?${new URLSearchParams({ dispatch: id })}`;
 }
 
 export function resolveDispatch(search: string): Dispatch | undefined {

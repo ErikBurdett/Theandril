@@ -1,0 +1,25 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/SiteShell.test.tsx (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/SiteShell.test.tsx [ apps/web/src/updates/SiteShell.test.tsx ]
+Error: Cannot find module './SiteShell' imported from /home/telephoneheater/Work/Theandril-release/apps/web/src/updates/SiteShell.test.tsx
+ ❯ apps/web/src/updates/SiteShell.test.tsx:4:1
+      2| import { describe, expect, it } from 'vitest';
+      3| import { renderToStaticMarkup } from 'react-dom/server';
+      4| import { SiteShell } from './SiteShell';
+       | ^
+      5|
+      6| describe('shared site shell', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  22:39:43
+   Duration  116ms (transform 18ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)
+

@@ -10,7 +10,7 @@ for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 13
     page.on('worker', worker => workers.push(worker.url()));
     await page.setViewportSize({ width: dimensions.width, height: dimensions.height });
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('updates/');
+    await page.goto('updates/dispatches/');
     await page.evaluate(scale => { document.documentElement.style.fontSize = `${scale}%`; }, dimensions.scale);
     await page.getByRole('heading', { name: 'Theandril Dispatches', exact: true }).waitFor();
     // Exercise real lazy loading by scrolling to each visible image before the full-page capture.
@@ -48,7 +48,7 @@ for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 13
 }
 
 test('reading surfaces retain contrast without putting texture over the text', async ({ page }, testInfo) => {
-  await page.goto('updates/');
+  await page.goto('updates/dispatches/');
   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
   const measurements = await page.evaluate(() => {
     const rgb = (value: string) => value.match(/[\d.]+/g)!.map(Number);
@@ -79,7 +79,7 @@ test('reading surfaces retain contrast without putting texture over the text', a
 });
 
 test('unknown dispatch links fail honestly and keyboard skip navigation works', async ({ page }) => {
-  await page.goto('updates/?dispatch=not-published');
+  await page.goto('updates/dispatches/?dispatch=not-published');
   await expect(page.getByRole('heading', { name: 'That page is not in the journal' })).toBeVisible();
   await page.getByRole('link', { name: 'Browse published dispatches' }).click();
   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
@@ -90,7 +90,7 @@ test('unknown dispatch links fail honestly and keyboard skip navigation works', 
 });
 
 test('archive search combines topic filters, survives refresh and recovers from no results', async ({ page }) => {
-  await page.goto('updates/#archive');
+  await page.goto('updates/dispatches/#archive');
   await page.getByRole('searchbox', { name: 'Search dispatches' }).fill('Vesper');
   await page.getByRole('button', { name: 'World & culture', exact: true }).click();
   await expect(page.getByRole('status')).toHaveText('1 dispatch');
@@ -105,7 +105,7 @@ test('archive search combines topic filters, survives refresh and recovers from 
 });
 
 test('scope ledger links real gates and a contributor can reach authoring guidance', async ({ page }) => {
-  await page.goto('updates/');
+  await page.goto('updates/dispatches/');
   await expect(page.getByRole('heading', { name: 'Road to 1.0', exact: true })).toBeVisible();
   const ledger = page.getByRole('region', { name: 'Road to 1.0' });
   await expect(ledger.getByText('Accepted scope', { exact: true })).toBeVisible();
@@ -120,7 +120,7 @@ test('scope ledger links real gates and a contributor can reach authoring guidan
 });
 
 test('a keyboard reader can enlarge a real image and return to the same control', async ({ page }) => {
-  await page.goto('updates/?dispatch=twenty-four-cultures');
+  await page.goto('updates/dispatches/?dispatch=twenty-four-cultures');
   const trigger = page.getByRole('button', { name: 'Enlarge cultures image', exact: true });
   await expect(trigger).toBeVisible();
   await trigger.focus();
@@ -136,14 +136,19 @@ test('a keyboard reader can enlarge a real image and return to the same control'
 
 // Resolves under either the normal root server or the Pages-base journal harness.
 test('public journal opens a permanent, refresh-safe campaign dispatch', async ({ page }) => {
-  await page.goto('updates/');
+  await page.goto('updates/dispatches/');
   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
-  await expect(page).toHaveURL(/updates\/\?dispatch=r17-campaign-safety$/);
+  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=r17-campaign-safety$/);
   await expect(page.getByRole('heading', { level: 1, name: 'A campaign worth keeping' })).toBeVisible();
   await page.reload();
   await expect(page.getByRole('heading', { level: 1, name: 'A campaign worth keeping' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Post-fix review reconciliation' })).toHaveAttribute('href', /github.com\/ErikBurdett\/Theandril\/blob\/[a-f0-9]+\/docs\/development\/post-fix-review\/summary.json$/);
   await page.getByRole('link', { name: 'All dispatches', exact: true }).click();
+  await expect(page).toHaveURL(/updates\/dispatches\/#archive$/);
   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
+  // Searching must keep the reader on the dispatches page, not send them to the site home.
+  await page.getByRole('searchbox', { name: 'Search dispatches' }).fill('archive');
+  await expect(page).toHaveURL(/updates\/dispatches\/\?q=archive#archive$/);
+  await expect(page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Dispatches' })).toHaveAttribute('aria-current', 'page');
 });

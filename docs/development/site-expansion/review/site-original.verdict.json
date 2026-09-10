@@ -1,0 +1,19 @@
+{
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    "Home.tsx:17-18,25 — ?commit= permalinks to entries beyond the first 8 cannot scroll because the target is not rendered yet.",
+    "changelog.test.ts:8-12 — subset assertion lets feed.json go stale when a new first-parent commit lands; exact in-memory comparison required."
+  ],
+  "suggestions": [
+    "Expand `visible` to include a matched commit before scrolling; keep no-op for unknown values.",
+    "Replace the subset loop with expect(generated).toEqual(feed) after determinism check."
+  ],
+  "delegation": "deleg_d415189a",
+  "verifiedHashes": {
+    "site-source.diff": "162a25f2decef42dd334752e7d6908923efdefe2859aa3281dc4272a48247ef3",
+    "site.diff": "4f33bd963378d209bea52fc7e9f7a205d415f5bc4ce1109928598c7b9df3487b",
+    "postimages.sha256": "f9b65102770d3ae60790d973edcb7cb2f53b88888de0c12dcc95b7ed78a1c6eb"
+  },
+  "summary": "FAIL-CLOSED on two bounded logic errors. renderMarkdown escapes text/attributes and accepts only http(s) links (no XSS). 18 files/40 tests, ESLint, typecheck passed. Lore/compendium/changelog regeneration reproduced committed bytes; 498 sprite frames match the catalog; unit costs and faction weights match @theandril/content; factionAnchors covers 24 factions; no game-package imports in site entrypoints."
+}

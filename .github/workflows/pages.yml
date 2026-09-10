@@ -64,6 +64,9 @@ jobs:
       - name: Check journal, asset URL and integrity boundaries
         run: pnpm exec vitest run apps/web/src/updates tests/tooling apps/web/src/asset-url.test.ts apps/web/src/runtime-art.test.ts packages/render/src/art-validation.test.ts
 
+      - name: Regenerate the master change feed from full history
+        run: pnpm changelog:build
+
       - name: Build the actual Pages subpath
         env:
           # base_path is /Theandril for this project, or empty on a custom domain.

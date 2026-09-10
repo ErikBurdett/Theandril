@@ -1,39 +1,15 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useState } from 'react';
 import { dispatches, repository } from './content';
 import { dispatchUrl, evidenceUrl, filterDispatches, localUrl, resolveDispatch } from './journal';
+import { Illustration } from './Illustration';
 import { scopeLedger, library } from './library';
 import provenance from './media.json';
+import { SiteShell } from './SiteShell';
+import { pageUrl } from './site';
 import type { Dispatch } from './types';
 
 const base = import.meta.env.BASE_URL;
-const home = localUrl(base, 'updates/');
-const materials = {
-  '--wood': `url("${localUrl(base, 'ui/hearth-card/wood.webp')}")`,
-  '--parchment': `url("${localUrl(base, 'ui/hearth-card/parchment.webp')}")`,
-} as CSSProperties;
-
-function Illustration({ id, eager = false }: { id: string; eager?: boolean }) {
-  const dialog = useRef<HTMLDialogElement>(null);
-  const image = provenance.assets.find(asset => asset.id === id);
-  if (!image) return null;
-  return <figure className={`illustration illustration-${id}`}>
-    <button className="image-mat" type="button" aria-label={`Enlarge ${id} image`} aria-haspopup="dialog" onClick={() => dialog.current?.showModal()}><img src={localUrl(base, image.path)} alt={image.alt} width={image.width} height={image.height} loading={eager ? 'eager' : 'lazy'} /><span className="enlarge-hint" aria-hidden="true">Inspect image ↗</span></button>
-    <figcaption>{image.caption} <a href={evidenceUrl(image.sourcePath, image.sourceRevision)}>Original image ↗</a></figcaption>
-    <dialog ref={dialog} className="image-dialog" aria-label="Image detail" onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
-      <div className="dialog-toolbar"><span>From the development record</span><button type="button" autoFocus onClick={() => dialog.current?.close()}>Close image</button></div>
-      <img src={localUrl(base, image.path)} alt={image.alt} width={image.width} height={image.height} loading="lazy" />
-      <p>{image.caption}</p><a href={evidenceUrl(image.sourcePath, image.sourceRevision)}>View the complete source screenshot ↗</a>
-    </dialog>
-  </figure>;
-}
-
-function Header() {
-  return <header className="site-header">
-    <a className="wordmark" href={home} aria-label="Theandril Dispatches home"><span className="monogram" aria-hidden="true">T</span><span><small>The age of fracture</small><strong>Theandril</strong></span></a>
-    <nav aria-label="Main navigation"><a href={`${home}#archive`}>Dispatches</a><a href={`${home}#scope`}>Road to 1.0</a><a href={`${home}#library`}>Library</a><a href={`${home}#contribute`}>Contribute</a><a className="play-link" href={base}>Play development build <span aria-hidden="true">↗</span></a></nav>
-  </header>;
-}
-
+const home = pageUrl(base, 'dispatches');
 function DispatchRow({ story }: { story: Dispatch }) {
   const image = provenance.assets.find(asset => asset.id === story.image)!;
   return <article className="dispatch-row">
@@ -109,5 +85,5 @@ export function Journal() {
   useEffect(() => {
     document.title = story ? `${story.title} · Theandril Dispatches` : 'Theandril Dispatches · Developer journal';
   }, [story]);
-  return <div className="journal-site" style={materials}><a className="skip-link" href="#main">Skip to content</a><Header /><main id="main" tabIndex={-1} className="bound-journal"><div className="paper-content">{missing ? <section className="missing-dispatch"><p className="eyebrow">Unlisted dispatch</p><h1>That page is not in the journal</h1><p>This link may be incomplete or point to work that has not been published. No draft has been substituted.</p><a className="plaque" href={home}>Browse published dispatches →</a></section> : story ? <Reader story={story} /> : <Explore />}</div></main><footer className="site-footer"><p><strong>Theandril</strong> · A world in the making.<br /><span>Single-player development build. Not Theandril 1.0.</span></p><div><a href={`${repository}/blob/master/docs/IMPLEMENTATION_STATUS.md`}>Current implementation status ↗</a><a href={localUrl(base, 'updates/provenance.json')}>Image provenance ↗</a><a href={repository}>Source repository ↗</a></div></footer></div>;
+  return <SiteShell page="dispatches" base={base}>{missing ? <section className="missing-dispatch"><p className="eyebrow">Unlisted dispatch</p><h1>That page is not in the journal</h1><p>This link may be incomplete or point to work that has not been published. No draft has been substituted.</p><a className="plaque" href={pageUrl(base, 'dispatches')}>Browse published dispatches →</a></section> : story ? <Reader story={story} /> : <Explore />}</SiteShell>;
 }

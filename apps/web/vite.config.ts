@@ -28,10 +28,13 @@ export default defineConfig({
   // Pages supplies /Theandril/; an ordinary local build/dev server stays at /.
   base: process.env.VITE_BASE_PATH || '/',
   plugins: [omitDevelopmentArt()],
-  // The public journal must not boot the game renderer or simulation worker.
+  // The public site must not boot the game renderer or simulation worker.
   build: { rollupOptions: { input: {
     game: resolve(import.meta.dirname, 'index.html'),
     updates: resolve(import.meta.dirname, 'updates/index.html'),
+    dispatches: resolve(import.meta.dirname, 'updates/dispatches/index.html'),
+    lore: resolve(import.meta.dirname, 'updates/lore/index.html'),
+    compendium: resolve(import.meta.dirname, 'updates/compendium/index.html'),
   } } },
   // These dependencies are reached through the simulation worker only after a
   // campaign starts. Discovering them then invalidates the browser dependency

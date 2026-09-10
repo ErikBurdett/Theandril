@@ -1,0 +1,1259 @@
+diff --git c/AGENTS.md w/AGENTS.md
+index 1338d0a..7392f6a 100644
+--- c/AGENTS.md
++++ w/AGENTS.md
+@@ -128,6 +128,8 @@ Record:
+ 
+ Do not inflate completion status.
+ 
++After all tasks from one user prompt finish, write a local prompt report under [`docs/development/prompt-reports/`](docs/development/prompt-reports/README.md) recording what was delivered, changed, verified and left open, and sync the user's primary checkout when the prompt published anything.
++
+ For substantial reviewed chunks of work, also prepare a public developer dispatch using [the authoring/review contract](docs/updates/CONTRIBUTING.md). Pair player-facing examples and real imagery with exact source/evidence links, known limitations, explicit scope additions/deferrals, and progress against the existing 1.0 gates. Keep unreviewed work in draft; do not invent completion percentages or treat deployment as release acceptance. Update the existing journal content and canonical status rather than creating a competing roadmap. Publication still requires explicit authorization.
+ 
+ For `/unlazy`, `$unlazy`, or a request to keep developing toward 1.0, use the repository-local [Unlazy skill](.agents/skills/unlazy/SKILL.md): carry a playable slice through implementation and verification, record its evidence, then continue within the current authorized task. It is not permission to create background jobs or publish/deploy, and is not a substitute for the release gates.
+diff --git c/apps/web/src/updates/Home.tsx w/apps/web/src/updates/Home.tsx
+new file mode 100644
+index 0000000..f5721d5
+--- /dev/null
++++ w/apps/web/src/updates/Home.tsx
+@@ -0,0 +1,27 @@
++import { useEffect, useState } from 'react';
++import { dispatches, repository } from './content';
++import feed from './changelog/feed.json';
++import { Illustration } from './Illustration';
++import { scopeLedger } from './library';
++import { renderMarkdown, type ChangelogEntry } from './changelog';
++import { pageUrl } from './site';
++import { SiteShell } from './SiteShell';
++
++const base = import.meta.env.BASE_URL;
++const description = 'Theandril is a single-player grand strategy game about building a realm through an age of fracture.';
++function Commit({ entry }: { entry: ChangelogEntry }) {
++  const id = `commit-${entry.shortSha}`;
++  return <article id={id} className="commit-entry"><p className="eyebrow"><time dateTime={entry.date}>{entry.date.slice(0, 10)}</time> · <a href={`${repository}/commit/${entry.sha}`}>{entry.shortSha}</a> · <a href={`?commit=${entry.shortSha}#${id}`}>Permalink</a></p><h3>{entry.subject}</h3><p className="byline">{entry.author} · {entry.files} files · +{entry.insertions}/−{entry.deletions}</p><p className="commit-areas">{entry.areas.map(area => <span key={area} className="scope-state">{area}</span>)}</p>{entry.body.split(/\n\s*\n/).filter(Boolean).map(paragraph => <p key={paragraph}>{paragraph}</p>)}{entry.notes && <section className="commit-notes" dangerouslySetInnerHTML={{ __html: renderMarkdown(entry.notes) }} />}</article>;
++}
++export function Home() {
++  const [visible, setVisible] = useState(8);
++  useEffect(() => { const value = new URLSearchParams(location.search).get('commit'); if (value) document.getElementById(`commit-${value}`)?.scrollIntoView(); }, []);
++  const latest = dispatches[0]!;
++  return <SiteShell page="home" base={base}>
++    <section className="masthead home-hero" aria-labelledby="home-title"><div><p className="eyebrow">A world in the making</p><h1 id="home-title">Theandril</h1><p className="masthead-note">{description}</p><div className="hero-actions"><a className="plaque" href={base}>Play the development build</a><a className="plaque" href={pageUrl(base, 'dispatches')}>Read the dispatches</a></div></div></section>
++    <section className="featured" aria-labelledby="latest-title"><div className="featured-copy"><p className="eyebrow">Latest dispatch</p><h2 id="latest-title">{latest.title}</h2><p className="feature-summary">{latest.summary}</p><a className="plaque" href={`${pageUrl(base, 'dispatches')}?dispatch=${latest.id}`}>Read the dispatch →</a></div><Illustration id={latest.image} eager /></section>
++    <section className="home-doorways" aria-label="Explore Theandril">{[{ page: 'dispatches' as const, title: 'Dispatches', text: 'Development notes with evidence and context.' }, { page: 'lore' as const, title: 'Lore library', text: 'The book of broken roads and its people.' }, { page: 'compendium' as const, title: 'Compendium', text: 'Cultures, units and the known world.' }].map(item => <a key={item.page} className="plaque" href={pageUrl(base, item.page)}><strong>{item.title}</strong><span>{item.text}</span></a>)}</section>
++    <section id="scope" className="scope-section" aria-labelledby="scope-title"><div className="section-heading"><div><p className="eyebrow">Selected gates</p><h2 id="scope-title">Road to 1.0</h2></div></div><dl className="scope-ledger">{scopeLedger.map(entry => <div key={entry.id}><dt><span className="scope-state">{entry.state}</span><h3>{entry.title}</h3></dt></div>)}</dl><a href={`${pageUrl(base, 'dispatches')}#scope`}>Read the complete scope ledger →</a></section>
++    <section className="commit-ledger" aria-labelledby="commit-title"><div className="section-heading"><div><p className="eyebrow">Generated from the master history at build time</p><h2 id="commit-title">The change ledger</h2></div></div>{feed.slice(0, visible).map(entry => <Commit key={entry.sha} entry={entry} />)}{visible < feed.length && <button type="button" className="plaque" onClick={() => setVisible(feed.length)}>Show {feed.length - visible} older commits</button>}</section>
++  </SiteShell>;
++}
+diff --git c/apps/web/src/updates/Illustration.tsx w/apps/web/src/updates/Illustration.tsx
+new file mode 100644
+index 0000000..6d5bca6
+--- /dev/null
++++ w/apps/web/src/updates/Illustration.tsx
+@@ -0,0 +1,8 @@
++import { useRef } from 'react';
++import { evidenceUrl, localUrl } from './journal';
++import provenance from './media.json';
++const base = import.meta.env.BASE_URL;
++export function Illustration({ id, eager = false }: { id: string; eager?: boolean }) {
++  const dialog = useRef<HTMLDialogElement>(null); const image = provenance.assets.find(asset => asset.id === id); if (!image) return null;
++  return <figure className={`illustration illustration-${id}`}><button className="image-mat" type="button" aria-label={`Enlarge ${id} image`} aria-haspopup="dialog" onClick={() => dialog.current?.showModal()}><img src={localUrl(base, image.path)} alt={image.alt} width={image.width} height={image.height} loading={eager ? 'eager' : 'lazy'} /><span className="enlarge-hint" aria-hidden="true">Inspect image ↗</span></button><figcaption>{image.caption} <a href={evidenceUrl(image.sourcePath, image.sourceRevision)}>Original image ↗</a></figcaption><dialog ref={dialog} className="image-dialog" aria-label="Image detail" onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}><div className="dialog-toolbar"><span>From the development record</span><button type="button" autoFocus onClick={() => dialog.current?.close()}>Close image</button></div><img src={localUrl(base, image.path)} alt={image.alt} width={image.width} height={image.height} loading="lazy" /><p>{image.caption}</p><a href={evidenceUrl(image.sourcePath, image.sourceRevision)}>View the complete source screenshot ↗</a></dialog></figure>;
++}
+diff --git c/apps/web/src/updates/Journal.tsx w/apps/web/src/updates/Journal.tsx
+index 96c93e4..9ef8006 100644
+--- c/apps/web/src/updates/Journal.tsx
++++ w/apps/web/src/updates/Journal.tsx
+@@ -1,39 +1,15 @@
+-import { useEffect, useRef, useState, type CSSProperties } from 'react';
++import { useEffect, useState } from 'react';
+ import { dispatches, repository } from './content';
+ import { dispatchUrl, evidenceUrl, filterDispatches, localUrl, resolveDispatch } from './journal';
++import { Illustration } from './Illustration';
+ import { scopeLedger, library } from './library';
+ import provenance from './media.json';
++import { SiteShell } from './SiteShell';
++import { pageUrl } from './site';
+ import type { Dispatch } from './types';
+ 
+ const base = import.meta.env.BASE_URL;
+-const home = localUrl(base, 'updates/');
+-const materials = {
+-  '--wood': `url("${localUrl(base, 'ui/hearth-card/wood.webp')}")`,
+-  '--parchment': `url("${localUrl(base, 'ui/hearth-card/parchment.webp')}")`,
+-} as CSSProperties;
+-
+-function Illustration({ id, eager = false }: { id: string; eager?: boolean }) {
+-  const dialog = useRef<HTMLDialogElement>(null);
+-  const image = provenance.assets.find(asset => asset.id === id);
+-  if (!image) return null;
+-  return <figure className={`illustration illustration-${id}`}>
+-    <button className="image-mat" type="button" aria-label={`Enlarge ${id} image`} aria-haspopup="dialog" onClick={() => dialog.current?.showModal()}><img src={localUrl(base, image.path)} alt={image.alt} width={image.width} height={image.height} loading={eager ? 'eager' : 'lazy'} /><span className="enlarge-hint" aria-hidden="true">Inspect image ↗</span></button>
+-    <figcaption>{image.caption} <a href={evidenceUrl(image.sourcePath, image.sourceRevision)}>Original image ↗</a></figcaption>
+-    <dialog ref={dialog} className="image-dialog" aria-label="Image detail" onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
+-      <div className="dialog-toolbar"><span>From the development record</span><button type="button" autoFocus onClick={() => dialog.current?.close()}>Close image</button></div>
+-      <img src={localUrl(base, image.path)} alt={image.alt} width={image.width} height={image.height} loading="lazy" />
+-      <p>{image.caption}</p><a href={evidenceUrl(image.sourcePath, image.sourceRevision)}>View the complete source screenshot ↗</a>
+-    </dialog>
+-  </figure>;
+-}
+-
+-function Header() {
+-  return <header className="site-header">
+-    <a className="wordmark" href={home} aria-label="Theandril Dispatches home"><span className="monogram" aria-hidden="true">T</span><span><small>The age of fracture</small><strong>Theandril</strong></span></a>
+-    <nav aria-label="Main navigation"><a href={`${home}#archive`}>Dispatches</a><a href={`${home}#scope`}>Road to 1.0</a><a href={`${home}#library`}>Library</a><a href={`${home}#contribute`}>Contribute</a><a className="play-link" href={base}>Play development build <span aria-hidden="true">↗</span></a></nav>
+-  </header>;
+-}
+-
++const home = pageUrl(base, 'dispatches');
+ function DispatchRow({ story }: { story: Dispatch }) {
+   const image = provenance.assets.find(asset => asset.id === story.image)!;
+   return <article className="dispatch-row">
+@@ -109,5 +85,5 @@ export function Journal() {
+   useEffect(() => {
+     document.title = story ? `${story.title} · Theandril Dispatches` : 'Theandril Dispatches · Developer journal';
+   }, [story]);
+-  return <div className="journal-site" style={materials}><a className="skip-link" href="#main">Skip to content</a><Header /><main id="main" tabIndex={-1} className="bound-journal"><div className="paper-content">{missing ? <section className="missing-dispatch"><p className="eyebrow">Unlisted dispatch</p><h1>That page is not in the journal</h1><p>This link may be incomplete or point to work that has not been published. No draft has been substituted.</p><a className="plaque" href={home}>Browse published dispatches →</a></section> : story ? <Reader story={story} /> : <Explore />}</div></main><footer className="site-footer"><p><strong>Theandril</strong> · A world in the making.<br /><span>Single-player development build. Not Theandril 1.0.</span></p><div><a href={`${repository}/blob/master/docs/IMPLEMENTATION_STATUS.md`}>Current implementation status ↗</a><a href={localUrl(base, 'updates/provenance.json')}>Image provenance ↗</a><a href={repository}>Source repository ↗</a></div></footer></div>;
++  return <SiteShell page="dispatches" base={base}>{missing ? <section className="missing-dispatch"><p className="eyebrow">Unlisted dispatch</p><h1>That page is not in the journal</h1><p>This link may be incomplete or point to work that has not been published. No draft has been substituted.</p><a className="plaque" href={pageUrl(base, 'dispatches')}>Browse published dispatches →</a></section> : story ? <Reader story={story} /> : <Explore />}</SiteShell>;
+ }
+diff --git c/apps/web/src/updates/SiteShell.test.tsx w/apps/web/src/updates/SiteShell.test.tsx
+new file mode 100644
+index 0000000..3ffc99f
+--- /dev/null
++++ w/apps/web/src/updates/SiteShell.test.tsx
+@@ -0,0 +1,24 @@
++import { readFileSync } from 'node:fs';
++import { describe, expect, it } from 'vitest';
++import { renderToStaticMarkup } from 'react-dom/server';
++import { SiteShell } from './SiteShell';
++
++describe('shared site shell', () => {
++  it('renders the same masthead navigation on every page and marks the current one', () => {
++    const html = renderToStaticMarkup(<SiteShell page="lore" base="/Theandril/"><p>body</p></SiteShell>);
++    expect(html).toContain('aria-current="page"');
++    expect(html).toMatch(/<a[^>]*href="\/Theandril\/updates\/lore\/"[^>]*aria-current="page"|<a[^>]*aria-current="page"[^>]*href="\/Theandril\/updates\/lore\/"/);
++    expect(html).toContain('href="/Theandril/updates/"');
++    expect(html).toContain('href="/Theandril/updates/dispatches/"');
++    expect(html).toContain('href="/Theandril/updates/compendium/"');
++    expect(html).toContain('href="/Theandril/"');
++    expect(html).toContain('Skip to content');
++    expect(html).toContain('<p>body</p>');
++    expect(html).toContain('Not Theandril 1.0');
++  });
++  it('keeps the shell in the existing Hearth material stylesheet rather than a new theme', () => {
++    const css = readFileSync('apps/web/src/updates/journal.css', 'utf8');
++    expect(css).toContain('.site-header nav a[aria-current="page"]');
++    expect(css).not.toMatch(/linear-gradient|@import|@font-face/);
++  });
++});
+diff --git c/apps/web/src/updates/SiteShell.tsx w/apps/web/src/updates/SiteShell.tsx
+new file mode 100644
+index 0000000..3ca8009
+--- /dev/null
++++ w/apps/web/src/updates/SiteShell.tsx
+@@ -0,0 +1,26 @@
++import type { CSSProperties, ReactNode } from 'react';
++import { repository } from './content';
++import { localUrl } from './journal';
++import { pageUrl, siteNavigation, type PageId } from './site';
++
++function materials(base: string): CSSProperties {
++  return {
++    '--wood': `url("${localUrl(base, 'ui/hearth-card/wood.webp')}")`,
++    '--parchment': `url("${localUrl(base, 'ui/hearth-card/parchment.webp')}")`,
++  } as CSSProperties;
++}
++
++/** One masthead, one bound book, one footer: every public page reads as the same site. */
++export function SiteShell({ page, base, children }: { page: PageId; base: string; children: ReactNode }) {
++  return <div className="journal-site" style={materials(base)}>
++    <a className="skip-link" href="#main">Skip to content</a>
++    <header className="site-header">
++      <a className="wordmark" href={pageUrl(base, 'home')} aria-label="Theandril home"><span className="monogram" aria-hidden="true">T</span><span><small>The age of fracture</small><strong>Theandril</strong></span></a>
++      <nav aria-label="Main navigation">{siteNavigation(base).map(item => item.page
++        ? <a key={item.href} href={item.href} aria-current={item.page === page ? 'page' : undefined}>{item.label}</a>
++        : <a key={item.href} className="play-link" href={item.href}>{item.label} <span aria-hidden="true">↗</span></a>)}</nav>
++    </header>
++    <main id="main" tabIndex={-1} className="bound-journal"><div className="paper-content">{children}</div></main>
++    <footer className="site-footer"><p><strong>Theandril</strong> · A world in the making.<br /><span>Single-player development build. Not Theandril 1.0.</span></p><div><a href={`${repository}/blob/master/docs/IMPLEMENTATION_STATUS.md`}>Current implementation status ↗</a><a href={localUrl(base, 'updates/provenance.json')}>Image provenance ↗</a><a href={repository}>Source repository ↗</a></div></footer>
++  </div>;
++}
+diff --git c/apps/web/src/updates/changelog.test.ts w/apps/web/src/updates/changelog.test.ts
+new file mode 100644
+index 0000000..990d0f2
+--- /dev/null
++++ w/apps/web/src/updates/changelog.test.ts
+@@ -0,0 +1,23 @@
++// Regenerate with: pnpm exec tsx scripts/build-changelog.ts
++import { describe, expect, it } from 'vitest';
++import feed from './changelog/feed.json';
++import { renderMarkdown } from './changelog';
++import { buildFeed } from '../../../../scripts/build-changelog';
++
++describe('master changelog feed', () => {
++  it('is deterministic and every committed entry remains exact in current first-parent history', () => {
++    const generated = buildFeed();
++    expect(buildFeed()).toEqual(generated);
++    for (const entry of feed) expect(generated.find(candidate => candidate.sha === entry.sha)).toEqual(entry);
++  });
++});
++
++describe('basic authored markdown', () => {
++  it('renders headings, paragraphs, lists, bold text and links', () => {
++    const html = renderMarkdown('## Heading\n\nA **bold** [link](https://example.com).\n\n- One\n- Two');
++    expect(html).toContain('<h2>Heading</h2>');
++    expect(html).toContain('<strong>bold</strong>');
++    expect(html).toContain('<a href="https://example.com">link</a>');
++    expect(html).toContain('<li>One</li>');
++  });
++});
+diff --git c/apps/web/src/updates/changelog.ts w/apps/web/src/updates/changelog.ts
+new file mode 100644
+index 0000000..f3c813a
+--- /dev/null
++++ w/apps/web/src/updates/changelog.ts
+@@ -0,0 +1,4 @@
++export type ChangelogEntry = { sha: string; shortSha: string; author: string; date: string; subject: string; body: string; files: number; insertions: number; deletions: number; areas: string[]; notes?: string };
++const escape = (text: string) => text.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[char]!);
++function inline(text: string) { return escape(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\[([^\]]+)]\((https?:\/\/[^ )]+)\)/g, '<a href="$2">$1</a>'); }
++export function renderMarkdown(markdown: string): string { const lines = markdown.trim().split('\n'); let result = '', list: string[] = []; const flush = () => { if (list.length) { result += `<ul>${list.map(item => `<li>${inline(item)}</li>`).join('')}</ul>`; list = []; } }; for (const raw of lines) { const line = raw.trim(); if (!line) { flush(); continue; } const heading = line.match(/^(#{1,3})\s+(.+)$/); if (heading) { flush(); const level = heading[1]!.length; result += `<h${level}>${inline(heading[2]!)}</h${level}>`; } else if (line.startsWith('- ')) list.push(line.slice(2)); else { flush(); result += `<p>${inline(line)}</p>`; } } flush(); return result; }
+diff --git c/apps/web/src/updates/compendium-layout.test.ts w/apps/web/src/updates/compendium-layout.test.ts
+new file mode 100644
+index 0000000..de1b69e
+--- /dev/null
++++ w/apps/web/src/updates/compendium-layout.test.ts
+@@ -0,0 +1,18 @@
++import { readFileSync } from 'node:fs';
++import { describe, expect, it } from 'vitest';
++
++describe('compendium layout', () => {
++  const css = readFileSync('apps/web/src/updates/compendium.css', 'utf8');
++  it('sizes unit-card sprites with layout width rather than a transform that leaves a 128px box behind', () => {
++    const rule = css.match(/\.unit-card \.sprite\{[^}]*\}/)?.[0] ?? '';
++    expect(rule).not.toMatch(/transform:/);
++    expect(rule).toMatch(/width:\s*\d+px/);
++  });
++  it('lets unit and catalog cards shrink below their preferred column width on narrow screens', () => {
++    expect(css).toMatch(/\.unit-grid\{[^}]*minmax\(min\(290px, ?100%\), ?1fr\)/);
++    expect(css).toMatch(/\.catalog-grid\{[^}]*minmax\(min\(180px, ?100%\), ?1fr\)/);
++    expect(css).toMatch(/\.culture-grid\{[^}]*minmax\(min\(220px, ?100%\), ?1fr\)/);
++    // The text column beside a sprite is a flex item; without min-width:0 it keeps its content width and overflows the card.
++    expect(css).toMatch(/\.unit-card>div\{[^}]*min-width:0/);
++  });
++});
+diff --git c/apps/web/src/updates/compendium-routes.test.ts w/apps/web/src/updates/compendium-routes.test.ts
+new file mode 100644
+index 0000000..895e67e
+--- /dev/null
++++ w/apps/web/src/updates/compendium-routes.test.ts
+@@ -0,0 +1,16 @@
++import { describe, expect, it } from 'vitest';
++import { resolveCulture, resolveUnit } from './compendium-routes';
++
++describe('compendium routes', () => {
++  it('accepts short and fully qualified culture ids and rejects unknown ones', () => {
++    expect(resolveCulture('vesper_court')?.id).toBe('faction.vesper_court');
++    expect(resolveCulture('faction.vesper_court')?.id).toBe('faction.vesper_court');
++    expect(resolveCulture('nobody')).toBeUndefined();
++    expect(resolveCulture(null)).toBeUndefined();
++  });
++  it('accepts short and fully qualified unit ids', () => {
++    expect(resolveUnit('heavy_infantry')?.id).toBe('unit.heavy_infantry');
++    expect(resolveUnit('unit.heavy_infantry')?.id).toBe('unit.heavy_infantry');
++    expect(resolveUnit('dragon')).toBeUndefined();
++  });
++});
+diff --git c/apps/web/src/updates/compendium-routes.ts w/apps/web/src/updates/compendium-routes.ts
+new file mode 100644
+index 0000000..bbd97ac
+--- /dev/null
++++ w/apps/web/src/updates/compendium-routes.ts
+@@ -0,0 +1,15 @@
++import data from './compendium/data.json';
++
++type Entry = { id: string; name: string };
++const factions = data.factions as Entry[];
++const units = data.units as Entry[];
++
++/** Query values may be a short id from an internal link or a full content id pasted from the source. */
++function find(entries: Entry[], prefix: string, value: string | null): Entry | undefined {
++  if (!value) return undefined;
++  const id = value.startsWith(prefix) ? value : `${prefix}${value}`;
++  return entries.find(entry => entry.id === id);
++}
++
++export const resolveCulture = (value: string | null) => find(factions, 'faction.', value);
++export const resolveUnit = (value: string | null) => find(units, 'unit.', value);
+diff --git c/apps/web/src/updates/compendium.css w/apps/web/src/updates/compendium.css
+new file mode 100644
+index 0000000..0c187d0
+--- /dev/null
++++ w/apps/web/src/updates/compendium.css
+@@ -0,0 +1 @@
++.compendium-hero{padding:3rem 0 2rem;border-bottom:3px double #8f7147}.compendium-hero h1{font-size:clamp(2.7rem,6vw,5rem);line-height:.98;margin:.5rem 0 1rem}.compendium-hero>p{max-width:52rem;font:1rem/1.75 var(--body)}.culture-hero-art{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin:1.2rem 0}.sprite{display:inline-block;flex:none;background-repeat:no-repeat;image-rendering:pixelated;vertical-align:middle}.sprite-missing{width:64px;height:64px;border:1px dashed #8f7147;line-height:64px;text-align:center;color:#775128}.culture-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:1rem}.culture-card,.unit-card,.catalog-card,.variant-grid article{border:1px solid #a78c62;background:#f5e9cb;padding:1rem;box-shadow:2px 3px 0 #b2946540}.culture-card>div{display:flex;align-items:center;gap:.7rem;min-height:74px}.culture-card h3,.unit-card h3,.catalog-card h3{font-size:1.35rem;margin:.7rem 0 .35rem}.culture-card p,.unit-card p,.catalog-card p,.variant-grid p{font:.83rem/1.65 var(--body)}.motto{font-style:italic;color:#5c4225}.catalog-section{border-top:3px double #8f7147;margin-top:3rem;padding-top:2rem}.catalog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));gap:1rem}.catalog-card .sprite{max-width:100%;transform-origin:left top}.unit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:1rem}.unit-card{display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-start;min-width:0}.unit-card>div{flex:1 1 150px;min-width:0}.unit-card .sprite{width:96px;height:96px}.stats,.stat-line,.weights,.affinities{display:grid;gap:.5rem}.stats{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));border-block:1px solid #a78c62;padding:1rem 0}.stats div,.stat-line div,.weights div,.affinities div{display:flex;justify-content:space-between;gap:.6rem;border-bottom:1px solid #b99e7670;padding:.35rem 0}.stats dt,.stat-line dt,.weights dt,.affinities dt{font:.72rem/1.4 var(--body);text-transform:uppercase;letter-spacing:.06em;color:#665139}.stats dd,.stat-line dd,.weights dd,.affinities dd{margin:0;font:700 .8rem/1.4 var(--body)}.stat-line{grid-template-columns:repeat(3,1fr);margin-top:.7rem}.variant-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:1rem}.variant-grid article{overflow:hidden}.variant-grid .sprite{transform:scale(.75);transform-origin:top left;margin-right:-32px;margin-bottom:-32px}.weights{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));max-width:650px}.affinities{max-width:700px}.archive-tools{margin-top:1.5rem}.catalog-section .section-heading{margin-bottom:1rem}@media(max-width:600px){.compendium-hero{padding-top:2rem}.culture-grid,.catalog-grid,.unit-grid{grid-template-columns:1fr}.unit-card{align-items:center}.unit-card .sprite{width:96px;height:96px}.stat-line{grid-template-columns:1fr 1fr}.sprite{max-width:calc(100vw - 72px)}.culture-card>div{overflow:hidden}.catalog-section{margin-top:2rem}}
+diff --git c/apps/web/src/updates/compendium.tsx w/apps/web/src/updates/compendium.tsx
+new file mode 100644
+index 0000000..24deeeb
+--- /dev/null
++++ w/apps/web/src/updates/compendium.tsx
+@@ -0,0 +1,45 @@
++/* eslint-disable @typescript-eslint/no-explicit-any */
++import { StrictMode, useState, type CSSProperties } from 'react';
++import { createRoot } from 'react-dom/client';
++import { SiteShell } from './SiteShell';
++import { evidenceUrl, localUrl } from './journal';
++import { factionLoreUrl } from './cross-links';
++import { resolveCulture, resolveUnit } from './compendium-routes';
++import data from './compendium/data.json';
++import './journal.css';
++import './compendium.css';
++
++type Asset = { atlasId: string; nativeResolution: { width: number; height: number }; frame: { x: number; y: number; w: number; h: number }; provenance: string };
++type Item = { id: string; name: string; description?: string; [key: string]: any };
++const book = data as any;
++const factions: Item[] = book.factions;
++const byId = (items: Item[], id: string) => items.find(item => item.id === id);
++const shortId = (id: string) => id.replace(/^[^.]+\./, '');
++const atlas = (id: string) => book.atlases.find((entry: any) => entry.id === id);
++
++function Sprite({ assetId, alt, className = '', scale = 2 }: { assetId: string; alt: string; className?: string; scale?: number }) {
++  const asset: Asset | undefined = book.assets[assetId];
++  if (!asset) return <span className={`sprite sprite-missing ${className}`} role="img" aria-label={`${alt}; no published sprite`} title="No published sprite">—</span>;
++  const page = atlas(asset.atlasId);
++  const style = {
++    width: asset.frame.w * scale, height: asset.frame.h * scale,
++    backgroundImage: `url("${localUrl(import.meta.env.BASE_URL, page.imageUrl.replace(/^\//, ''))}")`,
++    backgroundPosition: `${-asset.frame.x * scale}px ${-asset.frame.y * scale}px`,
++    backgroundSize: `${page.width * scale}px ${page.height * scale}px`,
++  } as CSSProperties;
++  return <span className={`sprite ${className}`} data-sprite data-atlas={localUrl(import.meta.env.BASE_URL, page.imageUrl.replace(/^\//, ''))} role="img" aria-label={alt} title={`Provenance: ${asset.provenance}`} style={style} />;
++}
++function Link({ href, children }: { href: string; children: React.ReactNode }) { return <a href={href}>{children}</a>; }
++function Heading({ eyebrow, title, children }: { eyebrow: string; title: string; children?: React.ReactNode }) { return <header className="compendium-hero"><p className="eyebrow">{eyebrow}</p><h1>{title}</h1>{children}</header>; }
++function Stat({ label, value }: { label: string; value: any }) { return <div><dt>{label}</dt><dd>{typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value ?? '—'}</dd></div>; }
++function UnitStats({ unit, compact = false }: { unit: Item; compact?: boolean }) { return <dl className={compact ? 'stat-line' : 'stats'}><Stat label="Industry" value={`${unit.cost} industry`} /><Stat label="Coin" value={unit.coinCost} /><Stat label="Upkeep" value={unit.upkeep} />{!compact && <><Stat label="Move" value={unit.movement} /><Stat label="Sight" value={unit.sight} /><Stat label="Strength" value={unit.strength} /><Stat label="Attack" value={unit.attack} /><Stat label="Armor" value={unit.armor} /><Stat label="Initiative" value={unit.initiative} /><Stat label="Range" value={unit.range} /><Stat label="Morale" value={unit.morale} /><Stat label="Naval" value={unit.naval ? `${unit.naval.transportCapacity} carry; ${unit.naval.oceanCapable ? 'ocean' : 'coastal'}` : 'No'} /></>}</dl> }
++function CultureCard({ faction }: { faction: Item }) { const culture = shortId(faction.id); return <article className="culture-card" data-culture-card><div><Sprite assetId={`ui.crest.${culture}`} alt={`${faction.name} crest`} /><Sprite assetId={`ui.banner.${culture}`} alt={`${faction.name} banner`} /></div><h3><Link href={`?culture=${culture}`}>{faction.name}</Link></h3><p className="motto">“{faction.motto}”</p><p>{faction.profile.description}</p></article>; }
++function UnitCard({ unit, culture }: { unit: Item; culture?: string }) { const mapId = culture ? `${unit.id}.${culture}` : undefined; const assetId = mapId && book.assets[mapId] ? mapId : `battle.${unit.id}`; return <article className="unit-card" data-unit-card><Sprite assetId={assetId} alt={`${unit.name}${culture ? `, ${culture}` : ''}`} scale={1.5} /><div><h3><Link href={`?unit=${shortId(unit.id)}`}>{unit.name}</Link></h3><p>{unit.description ?? 'A standard formation in the published rules.'}</p>{culture && !book.assets[mapId!] && <span className="status-label">Shared battle sprite</span>}<UnitStats unit={unit} compact /></div></article>; }
++function CatalogSection({ title, items, prefix, copy }: { title: string; items: Item[]; prefix: string; copy?: string }) { return <section className="catalog-section"><div className="section-heading"><div><p className="eyebrow">World inventory</p><h2>{title}</h2></div>{copy && <p>{copy}</p>}</div><div className="catalog-grid">{items.map(item => <article className="catalog-card" key={item.id}><Sprite assetId={item.spriteId ?? (book.assets[item.id] ? item.id : `${prefix}${shortId(item.id)}`)} alt={item.name} /><h3>{item.name}</h3><p>{item.description ?? item.id}</p>{item.spriteNote && <span className="status-label">{item.spriteNote}</span>}</article>)}</div></section>; }
++function Overview({ query, onQuery }: { query: string; onQuery: (value: string) => void }) { const q = query.toLowerCase(); const matches = (item: Item) => !q || JSON.stringify(item).toLowerCase().includes(q); const shownFactions = factions.filter(matches); const all = (items: Item[]) => items.filter(matches); return <><Heading eyebrow="The published world" title="Theandril World Compendium"><p className="subtitle">A source-derived index of cultures, rules content and approved atlas art. Numbers are projected at build time from the live content package.</p></Heading><section className="archive-tools"><label className="search-field">Search the compendium<input role="searchbox" aria-label="Search the compendium" value={query} onChange={event => { onQuery(event.target.value); setQuery(event.target.value); }} placeholder="Culture, unit, resource, spell…" /></label></section><section className="catalog-section"><div className="section-heading"><div><p className="eyebrow">24 registered cultures</p><h2>Cultures</h2></div><p>Every culture has a reviewed crest and banner in the published atlas.</p></div><div className="culture-grid">{shownFactions.map(faction => <CultureCard faction={faction} key={faction.id} />)}</div></section><section className="catalog-section"><div className="section-heading"><div><p className="eyebrow">Paid formations</p><h2>Units</h2></div><p>Shared stats and costs are shown exactly as content defines them.</p></div><div className="unit-grid">{all(book.units).map(unit => <UnitCard unit={unit} key={unit.id} />)}</div></section><CatalogSection title="Buildings" items={all(book.buildings)} prefix="building." /><CatalogSection title="Improvements & features" items={[...all(book.improvements), ...all(book.features)]} prefix="improvement." /><CatalogSection title="Resources" items={all(book.resources)} prefix="resource." /><CatalogSection title="Creatures" items={all((Object.values(book.assets) as Item[]).filter((asset: any) => asset.id?.startsWith?.('monster.')))} prefix="" copy="Only published monster art is listed; it does not add hidden creature rules." /><CatalogSection title="Terrain" items={all(book.biomes.map((biome: any) => ({ id: `terrain.${['ocean','grassland','temperate_forest','taiga','tundra','desert','steppe','marsh','rainforest','alpine','ash_scrub','chalkland'][biome.id]}`, name: biome.name, description: `Base yield: food ${biome.yields.food}, industry ${biome.yields.industry}, coin ${biome.yields.coin}, knowledge ${biome.yields.knowledge}.` })))} prefix="" /><CatalogSection title="Characters & missions" items={[...all(book.characters).map((item: Item) => ({ ...item, spriteId: book.assets[item.id] ? item.id : `${item.id}.ashen_compact`, spriteNote: book.assets[item.id] ? undefined : "Shown in Ashen Compact colours; every culture has its own." })), ...all(book.missions)]} prefix="character." copy="Officers are appointed per culture; missions are orders, not units." /><CatalogSection title="Magic" items={[...all(book.magicPaths), ...all(book.arcaneDiscoveries), ...all(book.battleSpells), ...all(book.innateBattleAbilities)]} prefix="effect." copy="Faction-specific spells, supernatural powers and asymmetry are not implemented where the faction bible marks them as lore-only." /></>;
++}
++function CulturePage({ faction }: { faction: Item }) { const culture = shortId(faction.id); const ecology = faction.ecology; const named = (id: string) => book.biomes.find((b: any) => b.id === id)?.name ?? String(id); return <><Heading eyebrow="Culture register" title={faction.name}><div className="culture-hero-art"><Sprite assetId={`ui.crest.${culture}`} alt={`${faction.name} crest`} /><Sprite assetId={`ui.banner.${culture}`} alt={`${faction.name} banner`} /><Sprite assetId={`ui.badge.${culture}`} alt={`${faction.name} badge`} /></div><p className="motto">“{faction.motto}”</p><p>{faction.profile.description}</p><p className="status-label">{faction.profile.recruitmentRationale}</p><p><Link href={factionLoreUrl(import.meta.env.BASE_URL, faction.id)}>Read this culture in the faction bible ↗</Link></p></Heading><section className="catalog-section"><h2>Ecology</h2><p>Terraform biomes: {ecology.terraformBiomeIds.map(named).join(', ')}.</p><dl className="affinities">{ecology.affinities.map((affinity: any) => <div key={affinity.biomeId}><dt>{named(affinity.biomeId)}</dt><dd>Food {affinity.yields.food}, industry {affinity.yields.industry}, coin {affinity.yields.coin}, knowledge {affinity.yields.knowledge}</dd></div>)}</dl></section><section className="catalog-section"><h2>Recruitment preferences</h2><p className="status-label">Preference only — all cultures pay the same costs and may recruit the same units.</p><dl className="weights">{book.landMilitaryUnitIds.map((id: string) => <div key={id}><dt>{byId(book.units, id)?.name}</dt><dd>{faction.recruitmentWeights[id]}</dd></div>)}</dl></section><section className="catalog-section"><h2>Full unit roster</h2><div className="unit-grid">{book.units.map((unit: Item) => <UnitCard unit={unit} culture={culture} key={unit.id} />)}</div></section><section className="catalog-section"><h2>Characters and settlements</h2><div className="catalog-grid">{['marshal','surveyor','engineer'].map(role => <article className="catalog-card" key={role}><Sprite assetId={`character.${role}.${culture}`} alt={`${faction.name} ${role}`} /><h3>{byId(book.characters, `character.${role}`)?.name}</h3></article>)}{['village','town','city'].map(stage => <article className="catalog-card" key={stage}><Sprite assetId={`settlement.${stage}.${culture}`} alt={`${faction.name} ${stage}`} /><h3>{stage}</h3></article>)}</div></section></> }
++function UnitPage({ unit }: { unit: Item }) { const tech = (id: string) => byId(book.technologies, id)?.name ?? id; const building = (id: string) => byId(book.buildings, id)?.name ?? id; return <><Heading eyebrow="Formation register" title={unit.name}><p>{unit.description ?? 'A published standard formation.'}</p>{unit.introducedInRules && <span className="plaque">Introduced in rules {unit.introducedInRules}</span>}</Heading><section className="catalog-section"><h2>Exact statistics</h2><UnitStats unit={unit} /></section><section className="catalog-section"><h2>Prerequisites</h2><p>Technologies: {(unit.requiredTechnologies ?? []).map(tech).join(', ') || 'None'}.</p><p>Buildings: {(unit.requiredBuildings ?? []).map(building).join(', ') || 'None'}.</p></section><section className="catalog-section"><h2>Culture variants</h2>{factions.some(faction => book.assets[`${unit.id}.${shortId(faction.id)}`]) ? <div className="variant-grid">{factions.map(faction => <article key={faction.id}><Sprite assetId={`${unit.id}.${shortId(faction.id)}`} alt={`${unit.name}, ${faction.name}`} /><p>{faction.name}</p></article>)}</div> : <p className="status-label">This formation has a shared battle sprite; no culture-specific map sprite is published.</p>}</section></> }
++function setQuery(value: string) { const url = new URL(location.href); if (value) url.searchParams.set('search', value); else url.searchParams.delete('search'); history.replaceState(null, '', url); window.dispatchEvent(new Event('compendium-search')); }
++function App() { const [search, updateSearch] = useState(new URLSearchParams(location.search).get('search') ?? ''); const params = new URLSearchParams(location.search); const culture = params.get('culture'); const unit = params.get('unit'); const currentFaction = resolveCulture(culture) as Item | undefined; const currentUnit = resolveUnit(unit) as Item | undefined; return <SiteShell page="compendium" base={import.meta.env.BASE_URL}>{currentFaction ? <CulturePage faction={currentFaction} /> : currentUnit ? <UnitPage unit={currentUnit} /> : <Overview query={search} onQuery={updateSearch} />}<p className="compendium-provenance">Sprite frames and provenance: <a href={evidenceUrl('apps/web/public/art/catalog.json')}>published art catalog ↗</a></p></SiteShell>; }
++createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>);
+diff --git c/apps/web/src/updates/compendium/coverage.test.ts w/apps/web/src/updates/compendium/coverage.test.ts
+new file mode 100644
+index 0000000..1baa68b
+--- /dev/null
++++ w/apps/web/src/updates/compendium/coverage.test.ts
+@@ -0,0 +1,17 @@
++import { describe, expect, it } from 'vitest';
++import data from './data.json';
++
++const assets = data.assets as Record<string, { atlasId: string; frame: { w: number; h: number } }>;
++
++describe('compendium sprite coverage', () => {
++  it('projects every published sprite the overview actually asks for', () => {
++    for (const id of ['terrain.ocean', 'terrain.grassland', 'terrain.temperate_forest', 'terrain.taiga', 'terrain.tundra', 'terrain.desert', 'terrain.steppe', 'terrain.marsh', 'terrain.rainforest', 'terrain.alpine', 'terrain.ash_scrub', 'terrain.chalkland',
++      'monster.quarry_ogre', 'monster.revenant', 'monster.slateback', 'character.waykeeper', 'map.resource', 'map.ruin', 'map.watchtower', 'settlement.village', 'settlement.town', 'settlement.city']) {
++      expect(assets[id], id).toBeDefined();
++      expect(assets[id]!.frame.w, id).toBeGreaterThan(0);
++    }
++  });
++  it('does not pretend a sprite exists where the catalog has none', () => {
++    for (const id of ['unit.skirmisher.ashen_compact', 'unit.lancer.vesper_court', 'effect.magic.flame', 'mission.survey']) expect(assets[id]).toBeUndefined();
++  });
++});
+diff --git c/apps/web/src/updates/compendium/data.test.ts w/apps/web/src/updates/compendium/data.test.ts
+new file mode 100644
+index 0000000..5eb894d
+--- /dev/null
++++ w/apps/web/src/updates/compendium/data.test.ts
+@@ -0,0 +1,9 @@
++import { readFile } from 'node:fs/promises';
++import { expect, test } from 'vitest';
++import { buildCompendiumData } from '../../../../../scripts/build-compendium';
++
++/** Regenerate with: pnpm tsx scripts/build-compendium.ts */
++test('generated compendium data is an exact projection of the content package and art catalog', async () => {
++  const committed = JSON.parse(await readFile(new URL('./data.json', import.meta.url), 'utf8'));
++  expect(committed).toEqual(await buildCompendiumData());
++});
+diff --git c/apps/web/src/updates/cross-links.test.ts w/apps/web/src/updates/cross-links.test.ts
+new file mode 100644
+index 0000000..795599e
+--- /dev/null
++++ w/apps/web/src/updates/cross-links.test.ts
+@@ -0,0 +1,22 @@
++import { describe, expect, it } from 'vitest';
++import { FACTIONS } from '@theandril/content';
++import library from './lore/library.json';
++import { factionLoreUrl } from './cross-links';
++
++describe('cross-page links', () => {
++  it('maps every registered culture to the heading that actually introduces it in the faction bible', () => {
++    const anchors = (library as { factionAnchors?: Record<string, string> }).factionAnchors;
++    expect(anchors).toBeDefined();
++    const bible = library.books.find(book => book.id === 'faction-bible')!.documents[0]!;
++    const headingIds = new Set(bible.blocks.filter(block => block.type === 'heading').map(block => (block as { id: string }).id));
++    for (const faction of FACTIONS) {
++      expect(anchors![faction.id], faction.id).toBeDefined();
++      expect(headingIds.has(anchors![faction.id]!), `${faction.id} → ${anchors![faction.id]}`).toBe(true);
++    }
++    expect(anchors!['faction.vesper_court']).toBe('22-vesper-court-registered');
++  });
++  it('builds a refresh-safe lore URL that opens the bible chapter at the culture heading', () => {
++    expect(factionLoreUrl('/Theandril/', 'faction.vesper_court')).toBe('/Theandril/updates/lore/?book=faction-bible&chapter=faction-bible#22-vesper-court-registered');
++    expect(factionLoreUrl('/', 'faction.ashen_compact')).toBe('/updates/lore/?book=faction-bible&chapter=faction-bible#1-ashen-compact');
++  });
++});
+diff --git c/apps/web/src/updates/cross-links.ts w/apps/web/src/updates/cross-links.ts
+new file mode 100644
+index 0000000..4a27972
+--- /dev/null
++++ w/apps/web/src/updates/cross-links.ts
+@@ -0,0 +1,9 @@
++import library from './lore/library.json';
++import { localUrl } from './journal';
++
++/** Culture pages link into the faction bible at the heading that introduces that culture. */
++export function factionLoreUrl(base: string, factionId: string): string {
++  const anchor = (library as { factionAnchors: Record<string, string> }).factionAnchors[factionId];
++  const chapter = `${localUrl(base, 'updates/lore/')}?book=faction-bible&chapter=faction-bible`;
++  return anchor ? `${chapter}#${anchor}` : chapter;
++}
+diff --git c/apps/web/src/updates/dispatches.tsx w/apps/web/src/updates/dispatches.tsx
+new file mode 100644
+index 0000000..865f520
+--- /dev/null
++++ w/apps/web/src/updates/dispatches.tsx
+@@ -0,0 +1,5 @@
++import { StrictMode } from 'react';
++import { createRoot } from 'react-dom/client';
++import { Journal } from './Journal';
++import './journal.css';
++createRoot(document.getElementById('root')!).render(<StrictMode><Journal /></StrictMode>);
+diff --git c/apps/web/src/updates/home-style.test.ts w/apps/web/src/updates/home-style.test.ts
+new file mode 100644
+index 0000000..60ce861
+--- /dev/null
++++ w/apps/web/src/updates/home-style.test.ts
+@@ -0,0 +1,14 @@
++import { readFileSync } from 'node:fs';
++import { describe, expect, it } from 'vitest';
++
++describe('home page styling', () => {
++  const css = readFileSync('apps/web/src/updates/journal.css', 'utf8');
++  it('lets full commit hashes and long paths wrap inside the change ledger', () => {
++    const rule = css.match(/\.commit-entry[^{]*\{[^}]*\}/g)?.join('\n') ?? '';
++    expect(rule).toMatch(/overflow-wrap:\s*anywhere/);
++  });
++  it('styles the hero actions, doorways and ledger with existing materials only', () => {
++    for (const selector of ['.home-hero', '.hero-actions', '.home-doorways', '.commit-ledger', '.commit-entry', '.commit-areas', '.commit-notes']) expect(css, selector).toContain(selector);
++    expect(css).not.toMatch(/linear-gradient|@import|@font-face/);
++  });
++});
+diff --git c/apps/web/src/updates/journal.css w/apps/web/src/updates/journal.css
+index bc68250..51a51ab 100644
+--- c/apps/web/src/updates/journal.css
++++ w/apps/web/src/updates/journal.css
+@@ -20,6 +20,7 @@ img { display: block; max-width: 100%; height: auto; }
+ .wordmark strong { font-size: 1.65rem; font-weight: 400; letter-spacing: .06em; }
+ .site-header nav { display: flex; flex-wrap: wrap; align-items: center; gap: 1.65rem; font: .8rem/1.5 var(--body); }
+ .site-header nav a { padding-block: .8rem; }
++.site-header nav a[aria-current="page"] { color: #f1cd81; border-bottom: 2px solid #c5a46a; text-decoration: none; }
+ .play-link { border-bottom: 1px solid #c5a46a; text-decoration: none; }
+ .site-header :focus-visible, .site-footer :focus-visible { outline-color: #f1cd81; }
+ .skip-link { position: absolute; top: .5rem; left: 1rem; padding: 1rem; z-index: 20; background: #f1e4c2; color: #352619; transform: translateY(-200%); }
+@@ -152,8 +153,31 @@ code { font-size: .95em; }
+ .missing-dispatch { padding-block: 3rem; max-width: 42rem; margin: auto; }
+ .missing-dispatch h1 { font-size: 3rem; margin-block: 1rem; }
+ .missing-dispatch p { line-height: 1.8; margin-bottom: 1.5rem; }
++/* Home: hero, doorways and the generated change ledger. Same materials, no new palette. */
++.home-hero > div { max-width: 44rem; }
++.home-hero .masthead-note { max-width: 36rem; margin-top: 1.2rem; font: 1.08rem/1.7 var(--body); }
++.hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.8rem; }
++.home-doorways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
++.home-doorways .plaque { flex-direction: column; align-items: flex-start; gap: .4rem; padding: 1.3rem 1.4rem; }
++.home-doorways strong { font: 1.45rem Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.02em; }
++.home-doorways span { color: #dfc797; font-size: .85rem; line-height: 1.5; }
++.commit-ledger { margin-top: 3.5rem; border-top: 3px double #8f7147; padding-top: 2.5rem; }
++.commit-ledger > .plaque { margin-top: 2rem; cursor: pointer; }
++.commit-entry { border-top: 1px solid #a78c6270; padding: 1.7rem 0; min-width: 0; overflow-wrap: anywhere; scroll-margin-top: 1.5rem; }
++.commit-entry:target { background: #e0c99e; outline: 1px solid #a78c62; outline-offset: .8rem; }
++.commit-entry h3 { font-size: 1.55rem; line-height: 1.3; letter-spacing: -.025em; margin: .5rem 0 .4rem; text-wrap: initial; }
++.commit-entry > p:not(.eyebrow):not(.byline):not(.commit-areas) { font: .9rem/1.8 var(--body); max-width: 70ch; margin-top: .9rem; }
++.commit-entry .byline { border: 0; padding: 0; margin-top: 0; }
++.commit-areas { display: flex; flex-wrap: wrap; gap: .4rem .8rem; margin-top: .6rem; }
++.commit-areas .scope-state { display: inline-block; margin: 0; padding: .1rem .55rem; border: 1px solid #a78c62; }
++.commit-notes { margin-top: 1.2rem; padding: 1.2rem 1.5rem; background: #e0c99e; border-left: 3px solid #927143; font: .9rem/1.8 var(--body); }
++.commit-notes h2, .commit-notes h3, .commit-notes h4 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; margin: .8rem 0 .4rem; }
++.commit-notes h2 { font-size: 1.4rem; }
++.commit-notes h3 { font-size: 1.2rem; }
++.commit-notes ul, .commit-notes ol { padding-left: 1.3rem; margin: .4rem 0; }
++.commit-notes p + p { margin-top: .7rem; }
+ @media (max-width: 1100px) { .journal-site { padding-inline: 1.4rem; } .paper-content { padding: 2.2rem; } .masthead { align-items: flex-start; flex-direction: column; gap: 1rem; } .masthead-note { max-width: 32rem; } .featured { gap: 2rem; } .featured h2 { font-size: 3.5rem; } .reading-layout { grid-template-columns: 180px minmax(0, 1fr); gap: 2rem; } }
+-@media (max-width: 760px) { .scope-ledger > div { display: block; } .scope-ledger dd { margin-top: .8rem; } .library-list { columns: auto; } .contribute-section { padding: 1.3rem; } .site-header { flex-wrap: wrap; padding-block: 1rem; } .site-header nav { justify-content: flex-start; } .archive-tools { display: block; } .topic-filters { margin-top: 1rem; } .journal-site { padding-inline: .85rem; } .site-header { min-height: 104px; gap: 1rem; } .site-header nav { gap: .65rem; justify-content: flex-end; font-size: .7rem; } .wordmark strong { font-size: 1.25rem; } .wordmark small { font-size: .48rem; } .monogram { font-size: 1.3rem; } .bound-journal { padding: 7px; } .paper-content { padding: 1.5rem; } .featured { grid-template-columns: 1fr; gap: 1.75rem; margin-top: 1.8rem; } .featured h2 { font-size: 3.6rem; max-width: 11ch; } .featured > .illustration { max-width: 520px; width: 100%; margin-inline: auto; } .checkpoint-note { grid-template-columns: 1fr; gap: .6rem; } .section-heading { display: block; } .section-heading > p { margin-top: .75rem; } .dispatch-row { grid-template-columns: 105px 1fr; gap: 1rem; align-items: start; } .row-image img { height: 100px; } .row-copy h3 { font-size: 1.5rem; } .row-copy .eyebrow { font-size: .57rem; } .folio { display: none; } .site-footer { flex-direction: column; gap: 1rem; } .reading-layout { display: block; } .article-index { padding: 0 0 2rem; } .article-index ol { columns: 2; column-gap: 2rem; } .article-index li { break-inside: avoid; } .article-index .index-note { display: none; } .article-header { margin-top: 1.5rem; margin-bottom: 2rem; } .article-header h1 { font-size: 3rem; } .article-body { font-size: 1.08rem; } }
++@media (max-width: 760px) { .home-doorways { grid-template-columns: 1fr; } .scope-ledger > div { display: block; } .scope-ledger dd { margin-top: .8rem; } .library-list { columns: auto; } .contribute-section { padding: 1.3rem; } .site-header { flex-wrap: wrap; padding-block: 1rem; } .site-header nav { justify-content: flex-start; } .archive-tools { display: block; } .topic-filters { margin-top: 1rem; } .journal-site { padding-inline: .85rem; } .site-header { min-height: 104px; gap: 1rem; } .site-header nav { gap: .65rem; justify-content: flex-end; font-size: .7rem; } .wordmark strong { font-size: 1.25rem; } .wordmark small { font-size: .48rem; } .monogram { font-size: 1.3rem; } .bound-journal { padding: 7px; } .paper-content { padding: 1.5rem; } .featured { grid-template-columns: 1fr; gap: 1.75rem; margin-top: 1.8rem; } .featured h2 { font-size: 3.6rem; max-width: 11ch; } .featured > .illustration { max-width: 520px; width: 100%; margin-inline: auto; } .checkpoint-note { grid-template-columns: 1fr; gap: .6rem; } .section-heading { display: block; } .section-heading > p { margin-top: .75rem; } .dispatch-row { grid-template-columns: 105px 1fr; gap: 1rem; align-items: start; } .row-image img { height: 100px; } .row-copy h3 { font-size: 1.5rem; } .row-copy .eyebrow { font-size: .57rem; } .folio { display: none; } .site-footer { flex-direction: column; gap: 1rem; } .reading-layout { display: block; } .article-index { padding: 0 0 2rem; } .article-index ol { columns: 2; column-gap: 2rem; } .article-index li { break-inside: avoid; } .article-index .index-note { display: none; } .article-header { margin-top: 1.5rem; margin-bottom: 2rem; } .article-header h1 { font-size: 3rem; } .article-body { font-size: 1.08rem; } }
+ @media (max-width: 440px) { .site-header { flex-wrap: wrap; padding-block: 1rem; gap: .45rem; } .site-header nav { width: 100%; justify-content: space-between; } .site-header nav a { padding-block: .65rem; } .paper-content { padding: 1.1rem; } .masthead h1 { font-size: 2.7rem; } .masthead .eyebrow { font-size: .58rem; } .featured h2 { font-size: 3.25rem; } .dispatch-row { grid-template-columns: 1fr; gap: 1rem; } .row-image { max-width: 100%; } .row-image img { height: 150px; } .row-copy h3 { font-size: 1.65rem; } .row-copy .eyebrow { font-size: .63rem; } .article-header h1 { font-size: 2.65rem; } .article-index ol { columns: auto; } .article-body h2 { font-size: 1.75rem; } .at-a-glance { padding: 1.2rem; } }
+ @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+ @media print { .journal-site { background: white; padding: 0; } .site-header, .site-footer, .article-index, .back-link, .more-dispatches, .skip-link { display: none; } .bound-journal, .paper-content { padding: 0; border: none; box-shadow: none; background: white; } .reading-layout { display: block; } .article-body { font-size: 11pt; } .article-header h1 { font-size: 28pt; } .image-mat { box-shadow: none; } a { text-decoration: underline; } }
+diff --git c/apps/web/src/updates/journal.ts w/apps/web/src/updates/journal.ts
+index b204cad..8609333 100644
+--- c/apps/web/src/updates/journal.ts
++++ w/apps/web/src/updates/journal.ts
+@@ -1,5 +1,6 @@
+ import { dispatches, repository, sourceRevision } from './content';
+ import type { Dispatch } from './types';
++import { pageUrl } from './site';
+ 
+ /** All local URLs are relative to Vite's supplied deployment base. */
+ export function localUrl(base: string, path: string): string {
+@@ -7,7 +8,7 @@ export function localUrl(base: string, path: string): string {
+ }
+ 
+ export function dispatchUrl(base: string, id: string): string {
+-  return localUrl(base, `updates/?${new URLSearchParams({ dispatch: id })}`);
++  return `${pageUrl(base, 'dispatches')}?${new URLSearchParams({ dispatch: id })}`;
+ }
+ 
+ export function resolveDispatch(search: string): Dispatch | undefined {
+diff --git c/apps/web/src/updates/lore.css w/apps/web/src/updates/lore.css
+new file mode 100644
+index 0000000..8f8b75e
+--- /dev/null
++++ w/apps/web/src/updates/lore.css
+@@ -0,0 +1,7 @@
++.lore-masthead { margin-bottom: 2rem; }
++.lore-search { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .6rem 1.5rem; align-items: end; padding: 1.25rem 0; border-block: 1px solid #9f815875; font: .8rem/1.6 var(--body); }
++.lore-search label { grid-column: 1; }.lore-search input { grid-column: 1; min-width: 0; width: 100%; min-height: 46px; padding: .75rem .9rem; color: var(--ink); background: #f5e9cb; border: 1px solid #84653c; border-radius: 0; }.lore-search p { grid-column: 2; grid-row: 1 / 3; color: var(--muted); }
++.lore-shelf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 2.5rem; margin-top: 2rem; }.lore-volume { min-width: 0; padding: 1.5rem; border: 3px double #927143; background: #e0c99e; }.lore-volume h2 { font-size: 2rem; margin: .45rem 0 1rem; }.lore-volume h2 a { text-decoration: none; }.lore-volume ol { margin: 0; padding-left: 1.25rem; font: .9rem/1.8 var(--body); }.lore-volume li + li { margin-top: .35rem; }
++.lore-body { overflow-wrap: anywhere; }.lore-body p, .lore-body blockquote, .lore-body ul, .lore-body ol { margin: 1rem 0; }.lore-body blockquote { margin-left: 0; padding-left: 1.2rem; border-left: 3px double #927143; font-style: italic; }.lore-body ul, .lore-body ol { padding-left: 1.5rem; }.lore-body li + li { margin-top: .4rem; }.lore-body h2, .lore-body h3, .lore-body h4 { margin-top: 2.4rem; }.lore-callout { margin: 1.5rem 0; padding: 1rem 1.2rem; border: 1px solid #a78c62; background: #e0c99e; font: .92rem/1.75 var(--body); }.lore-callout strong { font: .75rem/1.6 var(--body); letter-spacing: .12em; text-transform: uppercase; }.lore-callout p { margin-bottom: 0; }
++.lore-table-wrap { max-width: 100%; overflow-x: auto; margin: 1.5rem 0; border: 1px solid #a78c62; } .lore-table-wrap table { border-collapse: collapse; width: 100%; min-width: 34rem; font: .82rem/1.55 var(--body); }.lore-table-wrap th, .lore-table-wrap td { padding: .7rem; text-align: left; vertical-align: top; border: 1px solid #a78c62; }.lore-table-wrap th { background: #e0c99e; font-weight: 700; }.lore-pagination { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 3px double #8f7147; font: .9rem/1.7 var(--body); }.lore-pagination a:last-child { margin-left: auto; }
++@media (max-width: 760px) { .lore-shelf { grid-template-columns: 1fr; }.lore-search { display: block; }.lore-search input { margin: .5rem 0; }.lore-search p { margin-top: .5rem; }.lore-body { overflow-wrap: anywhere; } }
+diff --git c/apps/web/src/updates/lore.test.ts w/apps/web/src/updates/lore.test.ts
+new file mode 100644
+index 0000000..0ec058b
+--- /dev/null
++++ w/apps/web/src/updates/lore.test.ts
+@@ -0,0 +1,14 @@
++/** Generated library contract. Regenerate with: pnpm exec tsx scripts/build-lore.ts */
++import { readFile } from 'node:fs/promises';
++import { describe, expect, it } from 'vitest';
++import { buildLoreLibrary } from '../../../../scripts/build-lore';
++import library from './lore/library.json';
++
++describe('lore library generation', () => {
++  it('reproduces the committed generated library from the canonical markdown', async () => {
++    const generated = await buildLoreLibrary();
++    const committed = JSON.parse(await readFile(new URL('./lore/library.json', import.meta.url), 'utf8'));
++    expect(generated).toEqual(committed);
++    expect(library.books.find(book => book.id === 'broken-roads')?.documents).toHaveLength(11);
++  });
++});
+diff --git c/apps/web/src/updates/lore.tsx w/apps/web/src/updates/lore.tsx
+new file mode 100644
+index 0000000..480b8d9
+--- /dev/null
++++ w/apps/web/src/updates/lore.tsx
+@@ -0,0 +1,38 @@
++import { StrictMode, useEffect, useState } from 'react';
++import { createRoot } from 'react-dom/client';
++import { SiteShell } from './SiteShell';
++import { evidenceUrl, localUrl } from './journal';
++import type { Inline, LoreDocument } from '../../../../scripts/build-lore.ts';
++import library from './lore/library.json';
++import './journal.css';
++import './lore.css';
++
++type Document = LoreDocument; type Book = { id: string; title: string; documents: Document[] };
++const books = library.books as unknown as Book[];
++const base = import.meta.env.BASE_URL;
++const loreUrl = (book?: string, chapter?: string) => `${localUrl(base, 'updates/lore/')}${book ? `?${new URLSearchParams(chapter ? { book, chapter } : { book })}` : ''}`;
++const findBook = (id: string | null) => books.find(book => book.id === id);
++const findDocument = (book: Book, chapter: string | null) => book.documents.find(document => document.id === chapter);
++function Text({ nodes, sourcePath }: { nodes: readonly Inline[]; sourcePath?: string }) { return <>{nodes.map((node, index) => {
++  const key = `${index}-${'value' in node ? node.value : node.label}`;
++  if (node.type === 'strong') return <strong key={key}>{node.value}</strong>; if (node.type === 'em') return <em key={key}>{node.value}</em>; if (node.type === 'code') return <code key={key}>{node.value}</code>;
++  if (node.type === 'wikilink') { const target = books.find(book => book.id === 'broken-roads')!.documents.find(document => document.title === node.target || document.id === node.target.toLocaleLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')); return target ? <a key={key} href={loreUrl('broken-roads', target.id)}>{node.label}</a> : <span key={key}>{node.label}</span>; }
++  if (node.type === 'link') { const href = node.href.replace(/^<|>$/g, ''); const path = sourcePath && !href.startsWith('/') ? new URL(href, `https://source.invalid/${sourcePath}`).pathname.slice(1) : href; return <a key={key} href={href.startsWith('http') || href.startsWith('#') ? href : evidenceUrl(path)}>{node.label}</a>; }
++  return <>{node.value}</>;
++})}</> }
++function Blocks({ document }: { document: Document }) { return <>{document.blocks.map((block, index) => {
++  const key = `${block.type}-${index}`;
++  if (block.type === 'heading') { const Tag = `h${Math.min(block.level + 1, 4)}` as 'h2' | 'h3' | 'h4'; return <Tag key={key} id={block.id}><Text nodes={block.children as Inline[]} sourcePath={document.sourcePath} /></Tag>; }
++  if (block.type === 'paragraph') return <p key={key}><Text nodes={block.children as Inline[]} sourcePath={document.sourcePath} /></p>;
++  if (block.type === 'blockquote') return <blockquote key={key}><Text nodes={block.children as Inline[]} sourcePath={document.sourcePath} /></blockquote>;
++  if (block.type === 'callout') return <aside key={key} className="lore-callout"><strong>{block.title}</strong><p><Text nodes={block.children as Inline[]} sourcePath={document.sourcePath} /></p></aside>;
++  if (block.type === 'list') { const Tag = block.ordered ? 'ol' : 'ul'; return <Tag key={key}>{block.items.map((item, itemIndex) => <li key={itemIndex}><Text nodes={item as Inline[]} sourcePath={document.sourcePath} /></li>)}</Tag>; }
++  if (block.type === 'table') return <div className="lore-table-wrap"><table key={key}><thead><tr>{block.headers.map((cell, cellIndex) => <th key={cellIndex}><Text nodes={cell as Inline[]} sourcePath={document.sourcePath} /></th>)}</tr></thead><tbody>{block.rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex}><Text nodes={cell as Inline[]} sourcePath={document.sourcePath} /></td>)}</tr>)}</tbody></table></div>;
++  return null;
++})}</> }
++function Shelf() { const [query, setQuery] = useState(new URLSearchParams(window.location.search).get('q') ?? ''); const words = query.toLocaleLowerCase('en').trim().split(/\s+/).filter(Boolean); const docs = books.flatMap(book => book.documents.map(document => ({ book, document }))).filter(({ book, document }) => words.every(word => `${book.title} ${document.title} ${document.body}`.toLocaleLowerCase('en').includes(word)));
++  const update = (value: string) => { setQuery(value); window.history.replaceState(null, '', `${loreUrl()}${value ? `?q=${encodeURIComponent(value)}` : ''}`); };
++  return <><header className="masthead lore-masthead"><div><p className="eyebrow">Theandril library <span aria-hidden="true">/</span> source-bound reading</p><h1>The <em>lore</em> shelf</h1></div><p className="masthead-note">Four volumes kept in their original words. Follow the roads, then decide what remains unsettled.</p></header><section className="lore-search" aria-labelledby="lore-search-title"><label id="lore-search-title" htmlFor="lore-search">Search all lore</label><input id="lore-search" type="search" value={query} placeholder="A place, a question, a name…" onChange={event => update(event.target.value)} /><p role="status" aria-live="polite">{docs.length} {docs.length === 1 ? 'document' : 'documents'}</p></section><section className="lore-shelf" aria-label="Lore volumes">{books.map(book => <article key={book.id} className="lore-volume"><p className="eyebrow">{book.id === 'broken-roads' ? `${book.documents.length} chapters & appendix` : 'Reference volume'}</p><h2><a href={loreUrl(book.id, book.documents.length === 1 ? book.documents[0]!.id : undefined)}>{book.title}</a></h2><ol>{book.documents.filter(document => !words.length || docs.some(result => result.document === document)).map(document => <li key={document.id}><a href={loreUrl(book.id, document.id)}>{document.title}</a></li>)}</ol></article>)}</section>{!docs.length && <section className="no-results"><h2>No lore found</h2><p>Try another word. Search includes the complete text of every source volume.</p></section>}</> }
++function Reader({ book, document }: { book: Book; document: Document }) { const index = book.documents.indexOf(document); const previous = book.documents[index - 1]; const next = book.documents[index + 1]; const headings = document.blocks.filter((block): block is Extract<typeof block, { type: 'heading' }> => block.type === 'heading'); useEffect(() => { document.title = `${document.title} · Theandril lore library`; }, [document]); return <article className="reader lore-reader"><a className="back-link" href={loreUrl()}><span aria-hidden="true">← </span>The lore shelf</a><header className="article-header"><p className="eyebrow">{book.title}</p><h1>{document.title}</h1><p className="byline">Read from the source record · <a href={evidenceUrl(document.sourcePath)}>View markdown ↗</a></p></header><div className="reading-layout"><aside className="article-index"><nav aria-label="In this volume"><p className="eyebrow">In this volume</p><ol>{headings.map(heading => <li key={heading.id}><a href={`#${heading.id}`}><Text nodes={heading.children as Inline[]} /></a></li>)}</ol></nav></aside><div className="article-body lore-body"><Blocks document={document} /><nav className="lore-pagination" aria-label="Continue reading">{previous && <a href={loreUrl(book.id, previous.id)}>← {previous.title}</a>}{next && <a href={loreUrl(book.id, next.id)}>{next.title} →</a>}</nav></div></div></article> }
++function Lore() { const params = new URLSearchParams(window.location.search); const requestedBook = params.get('book'); const book = findBook(requestedBook); const requestedChapter = params.get('chapter'); const document = book && findDocument(book, requestedChapter); const missing = Boolean(requestedBook && (!book || !requestedChapter || !document)); return <SiteShell page="lore" base={base}>{missing ? <section className="missing-dispatch"><p className="eyebrow">Unlisted volume</p><h1>That page is not in the library</h1><p>This link may be incomplete or point outside the public source-bound collection.</p><a className="plaque" href={loreUrl()}>Browse the lore shelf →</a></section> : book && document ? <Reader book={book} document={document} /> : <Shelf />}</SiteShell> }
++createRoot(document.getElementById('root')!).render(<StrictMode><Lore /></StrictMode>);
+diff --git c/apps/web/src/updates/main.tsx w/apps/web/src/updates/main.tsx
+index a1d9353..cb4ba57 100644
+--- c/apps/web/src/updates/main.tsx
++++ w/apps/web/src/updates/main.tsx
+@@ -1,6 +1,5 @@
+ import { StrictMode } from 'react';
+ import { createRoot } from 'react-dom/client';
+-import { Journal } from './Journal';
++import { Home } from './Home';
+ import './journal.css';
+-
+-createRoot(document.getElementById('root')!).render(<StrictMode><Journal /></StrictMode>);
++createRoot(document.getElementById('root')!).render(<StrictMode><Home /></StrictMode>);
+diff --git c/apps/web/src/updates/navigation.test.ts w/apps/web/src/updates/navigation.test.ts
+index 26e64d4..3648031 100644
+--- c/apps/web/src/updates/navigation.test.ts
++++ w/apps/web/src/updates/navigation.test.ts
+@@ -7,8 +7,8 @@ describe('refresh-safe public links', () => {
+     expect(readFileSync('apps/web/updates/index.html', 'utf8')).toContain('href="%BASE_URL%ui/hearth-card/ornament.corner-idle.webp"');
+   });
+   it('round-trips a permanent dispatch on both root and GitHub Pages bases', () => {
+-    expect(dispatchUrl('/Theandril/', 'r17-campaign-safety')).toBe('/Theandril/updates/?dispatch=r17-campaign-safety');
+-    expect(dispatchUrl('/', 'twenty-four-cultures')).toBe('/updates/?dispatch=twenty-four-cultures');
++    expect(dispatchUrl('/Theandril/', 'r17-campaign-safety')).toBe('/Theandril/updates/dispatches/?dispatch=r17-campaign-safety');
++    expect(dispatchUrl('/', 'twenty-four-cultures')).toBe('/updates/dispatches/?dispatch=twenty-four-cultures');
+     expect(localUrl('/Theandril/', 'updates/campaign.webp')).toBe('/Theandril/updates/campaign.webp');
+     expect(resolveDispatch('?dispatch=r17-campaign-safety')?.id).toBe('r17-campaign-safety');
+     expect(resolveDispatch('?dispatch=missing')).toBeUndefined();
+diff --git c/apps/web/src/updates/site.test.ts w/apps/web/src/updates/site.test.ts
+new file mode 100644
+index 0000000..e5df2f7
+--- /dev/null
++++ w/apps/web/src/updates/site.test.ts
+@@ -0,0 +1,34 @@
++import { readFileSync } from 'node:fs';
++import { describe, expect, it } from 'vitest';
++import { currentPage, pageUrl, siteNavigation, SITE_PAGES } from './site';
++
++describe('site pages', () => {
++  it('registers every public page as its own refresh-safe static entry', () => {
++    expect(Object.keys(SITE_PAGES)).toEqual(['home', 'dispatches', 'lore', 'compendium']);
++    expect(pageUrl('/Theandril/', 'home')).toBe('/Theandril/updates/');
++    expect(pageUrl('/', 'lore')).toBe('/updates/lore/');
++    expect(pageUrl('/Theandril/', 'compendium')).toBe('/Theandril/updates/compendium/');
++    for (const page of Object.values(SITE_PAGES)) {
++      const html = readFileSync(`apps/web/${page.entry}`, 'utf8');
++      expect(html).toContain('href="%BASE_URL%ui/hearth-card/ornament.corner-idle.webp"');
++      expect(html).toContain(`<script type="module" src="/src/updates/${page.module}"></script>`);
++      expect(html).toContain('<div id="root"></div>');
++    }
++  });
++  it('orders the main navigation from the site home to the playable build', () => {
++    expect(siteNavigation('/Theandril/').map(item => [item.label, item.href])).toEqual([
++      ['Home', '/Theandril/updates/'],
++      ['Dispatches', '/Theandril/updates/dispatches/'],
++      ['Lore', '/Theandril/updates/lore/'],
++      ['Compendium', '/Theandril/updates/compendium/'],
++      ['Play development build', '/Theandril/'],
++    ]);
++  });
++  it('resolves the current page from the deployed pathname on both bases', () => {
++    expect(currentPage('/Theandril/updates/', '/Theandril/')).toBe('home');
++    expect(currentPage('/Theandril/updates/index.html', '/Theandril/')).toBe('home');
++    expect(currentPage('/updates/lore/', '/')).toBe('lore');
++    expect(currentPage('/Theandril/updates/compendium/index.html', '/Theandril/')).toBe('compendium');
++    expect(currentPage('/Theandril/', '/Theandril/')).toBeUndefined();
++  });
++});
+diff --git c/apps/web/src/updates/site.ts w/apps/web/src/updates/site.ts
+new file mode 100644
+index 0000000..190db76
+--- /dev/null
++++ w/apps/web/src/updates/site.ts
+@@ -0,0 +1,27 @@
++export type PageId = 'home' | 'dispatches' | 'lore' | 'compendium';
++export type SitePage = { path: string; entry: string; module: string; label: string; title: string };
++
++/** Every public page is its own static HTML entry so refreshes and deep links work on plain Pages hosting. */
++export const SITE_PAGES: Readonly<Record<PageId, SitePage>> = {
++  home: { path: 'updates/', entry: 'updates/index.html', module: 'main.tsx', label: 'Home', title: 'Theandril · A world in the making' },
++  dispatches: { path: 'updates/dispatches/', entry: 'updates/dispatches/index.html', module: 'dispatches.tsx', label: 'Dispatches', title: 'Theandril Dispatches · Developer journal' },
++  lore: { path: 'updates/lore/', entry: 'updates/lore/index.html', module: 'lore.tsx', label: 'Lore', title: 'The Book of Broken Roads · Theandril lore library' },
++  compendium: { path: 'updates/compendium/', entry: 'updates/compendium/index.html', module: 'compendium.tsx', label: 'Compendium', title: 'Theandril Compendium · Cultures, units and the world' },
++};
++
++export function pageUrl(base: string, page: PageId): string {
++  return `${base}${SITE_PAGES[page].path}`;
++}
++
++export function siteNavigation(base: string): { label: string; href: string; page?: PageId }[] {
++  return [
++    ...(Object.keys(SITE_PAGES) as PageId[]).map(page => ({ label: SITE_PAGES[page].label, href: pageUrl(base, page), page })),
++    { label: 'Play development build', href: base },
++  ];
++}
++
++export function currentPage(pathname: string, base: string): PageId | undefined {
++  const relative = pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
++  const normalized = relative.replace(/index\.html$/, '');
++  return (Object.keys(SITE_PAGES) as PageId[]).find(page => SITE_PAGES[page].path === normalized);
++}
+diff --git c/apps/web/updates/compendium/index.html w/apps/web/updates/compendium/index.html
+new file mode 100644
+index 0000000..83d5021
+--- /dev/null
++++ w/apps/web/updates/compendium/index.html
+@@ -0,0 +1,16 @@
++<!doctype html>
++<html lang="en">
++  <head>
++    <meta charset="UTF-8" />
++    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++    <meta name="theme-color" content="#281d16" />
++    <link rel="icon" type="image/webp" href="%BASE_URL%ui/hearth-card/ornament.corner-idle.webp" />
++    <meta name="description" content="The Theandril compendium: every culture, unit, building, improvement, resource, creature and terrain with its actual in-game numbers and published artwork." />
++    <title>Theandril Compendium · Cultures, units and the world</title>
++  </head>
++  <body>
++    <div id="root"></div>
++    <noscript>This journal needs JavaScript to browse its structured dispatches. Read the source and current development status at <a href="https://github.com/ErikBurdett/Theandril/blob/master/docs/IMPLEMENTATION_STATUS.md">Theandril on GitHub</a>.</noscript>
++    <script type="module" src="/src/updates/compendium.tsx"></script>
++  </body>
++</html>
+diff --git c/apps/web/updates/dispatches/index.html w/apps/web/updates/dispatches/index.html
+new file mode 100644
+index 0000000..8729b99
+--- /dev/null
++++ w/apps/web/updates/dispatches/index.html
+@@ -0,0 +1,16 @@
++<!doctype html>
++<html lang="en">
++  <head>
++    <meta charset="UTF-8" />
++    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++    <meta name="theme-color" content="#281d16" />
++    <link rel="icon" type="image/webp" href="%BASE_URL%ui/hearth-card/ornament.corner-idle.webp" />
++    <meta name="description" content="Theandril Dispatches: a public developer journal of campaign changes, worldbuilding, evidence and the work still open on the road to 1.0." />
++    <title>Theandril Dispatches · Developer journal</title>
++  </head>
++  <body>
++    <div id="root"></div>
++    <noscript>This journal needs JavaScript to browse its structured dispatches. Read the source and current development status at <a href="https://github.com/ErikBurdett/Theandril/blob/master/docs/IMPLEMENTATION_STATUS.md">Theandril on GitHub</a>.</noscript>
++    <script type="module" src="/src/updates/dispatches.tsx"></script>
++  </body>
++</html>
+diff --git c/apps/web/updates/index.html w/apps/web/updates/index.html
+index 3e19d77..6428e84 100644
+--- c/apps/web/updates/index.html
++++ w/apps/web/updates/index.html
+@@ -5,8 +5,8 @@
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <meta name="theme-color" content="#281d16" />
+     <link rel="icon" type="image/webp" href="%BASE_URL%ui/hearth-card/ornament.corner-idle.webp" />
+-    <meta name="description" content="Theandril Dispatches: a public developer journal of campaign changes, worldbuilding, evidence and the work still open on the road to 1.0." />
+-    <title>Theandril Dispatches · Developer journal</title>
++    <meta name="description" content="Theandril: a single-player dark-fantasy grand strategy game in development. Play the build, read the developer dispatches, the lore library and the world compendium." />
++    <title>Theandril · A world in the making</title>
+   </head>
+   <body>
+     <div id="root"></div>
+diff --git c/apps/web/updates/lore/index.html w/apps/web/updates/lore/index.html
+new file mode 100644
+index 0000000..0f286f6
+--- /dev/null
++++ w/apps/web/updates/lore/index.html
+@@ -0,0 +1,16 @@
++<!doctype html>
++<html lang="en">
++  <head>
++    <meta charset="UTF-8" />
++    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++    <meta name="theme-color" content="#281d16" />
++    <link rel="icon" type="image/webp" href="%BASE_URL%ui/hearth-card/ornament.corner-idle.webp" />
++    <meta name="description" content="The Theandril lore library: the Book of Broken Roads, the faction bible and the foundations of the world, read from the same sources the game is built from." />
++    <title>The Book of Broken Roads · Theandril lore library</title>
++  </head>
++  <body>
++    <div id="root"></div>
++    <noscript>This journal needs JavaScript to browse its structured dispatches. Read the source and current development status at <a href="https://github.com/ErikBurdett/Theandril/blob/master/docs/IMPLEMENTATION_STATUS.md">Theandril on GitHub</a>.</noscript>
++    <script type="module" src="/src/updates/lore.tsx"></script>
++  </body>
++</html>
+diff --git c/apps/web/vite.config.ts w/apps/web/vite.config.ts
+index a95711f..3ac2ba9 100644
+--- c/apps/web/vite.config.ts
++++ w/apps/web/vite.config.ts
+@@ -28,10 +28,13 @@ export default defineConfig({
+   // Pages supplies /Theandril/; an ordinary local build/dev server stays at /.
+   base: process.env.VITE_BASE_PATH || '/',
+   plugins: [omitDevelopmentArt()],
+-  // The public journal must not boot the game renderer or simulation worker.
++  // The public site must not boot the game renderer or simulation worker.
+   build: { rollupOptions: { input: {
+     game: resolve(import.meta.dirname, 'index.html'),
+     updates: resolve(import.meta.dirname, 'updates/index.html'),
++    dispatches: resolve(import.meta.dirname, 'updates/dispatches/index.html'),
++    lore: resolve(import.meta.dirname, 'updates/lore/index.html'),
++    compendium: resolve(import.meta.dirname, 'updates/compendium/index.html'),
+   } } },
+   // These dependencies are reached through the simulation worker only after a
+   // campaign starts. Discovering them then invalidates the browser dependency
+diff --git c/docs/updates/CHANGELOG_FEED.md w/docs/updates/CHANGELOG_FEED.md
+new file mode 100644
+index 0000000..39ea9c5
+--- /dev/null
++++ w/docs/updates/CHANGELOG_FEED.md
+@@ -0,0 +1,11 @@
++# Build-time changelog feed
++
++`apps/web/src/updates/changelog/feed.json` is a committed, deterministic snapshot of the current first-parent Git history. Each entry records the commit identifier, author, ISO date, full message, numstat totals and top-level changed areas. The home page displays newest entries first.
++
++Regenerate it with:
++
++```sh
++pnpm exec tsx scripts/build-changelog.ts
++```
++
++The drift test intentionally checks that the committed snapshot is an exact prefix-consistent subset of current history, rather than requiring the current checkout commit to already be in the snapshot. This keeps ordinary commits green while still detecting tampering. Optional detailed notes live in `docs/updates/changelog/<full-sha>.md`.
+diff --git c/docs/updates/changelog/4790331e3da682bb8f627546dcd39a22654a1bf7.md w/docs/updates/changelog/4790331e3da682bb8f627546dcd39a22654a1bf7.md
+new file mode 100644
+index 0000000..6239430
+--- /dev/null
++++ w/docs/updates/changelog/4790331e3da682bb8f627546dcd39a22654a1bf7.md
+@@ -0,0 +1,3 @@
++## Shared site shell
++
++This checkpoint establishes the multi-page public-site structure that lets the home, dispatches, lore library and compendium use one navigation and footer shell. It keeps each page a static Vite entry so direct refreshes work on plain Pages hosting.
+diff --git c/docs/updates/changelog/9243b09d9d2c49d365e094188d0e1e801c37ff51.md w/docs/updates/changelog/9243b09d9d2c49d365e094188d0e1e801c37ff51.md
+new file mode 100644
+index 0000000..abd9587
+--- /dev/null
++++ w/docs/updates/changelog/9243b09d9d2c49d365e094188d0e1e801c37ff51.md
+@@ -0,0 +1,5 @@
++## Dispatches launch
++
++This change introduced the public developer journal: three illustrated, source-linked dispatches covering campaign safety, archive durability, and the twenty-four-culture baseline. It included searchable archive controls, stable dispatch query links, a scope ledger, source library and contributor guidance.
++
++The journal reused retained Hearth & Card materials and four provenance-recorded game screenshots. It introduced no game rules or new game artwork; it is a development-demo publication, not 1.0 acceptance.
+diff --git c/docs/updates/changelog/README.md w/docs/updates/changelog/README.md
+new file mode 100644
+index 0000000..e871643
+--- /dev/null
++++ w/docs/updates/changelog/README.md
+@@ -0,0 +1,5 @@
++# Commit notes
++
++Add an optional Markdown file named `<full-commit-sha>.md` for an authored explanation of a commit. The build-time changelog generator includes it verbatim as a deliberately small safe Markdown subset (headings, paragraphs, lists, bold text and HTTPS links).
++
++Regenerate the committed feed with `pnpm exec tsx scripts/build-changelog.ts`.
+diff --git c/package.json w/package.json
+index f68f9d4..4e0fb2b 100644
+--- c/package.json
++++ w/package.json
+@@ -30,7 +30,9 @@
+     "bench:characters": "tsx scripts/benchmark-characters.ts",
+     "bench:storage": "tsx scripts/benchmark-storage.ts",
+     "bench:art": "tsx scripts/benchmark-art.ts",
+-    "content:validate": "tsx scripts/validate-content.ts"
++    "content:validate": "tsx scripts/validate-content.ts",
++    "site:build-data": "tsx scripts/build-changelog.ts && tsx scripts/build-lore.ts && tsx scripts/build-compendium.ts",
++    "changelog:build": "tsx scripts/build-changelog.ts"
+   },
+   "devDependencies": {
+     "@eslint/js": "^9.39.0", "@playwright/test": "^1.58.2", "@types/node": "^24.0.0",
+diff --git c/playwright.pages.config.ts w/playwright.pages.config.ts
+index de570ce..8798c3f 100644
+--- c/playwright.pages.config.ts
++++ w/playwright.pages.config.ts
+@@ -6,7 +6,7 @@ const origin = 'http://127.0.0.1:4175';
+ /** Exercise the actual Pages build, including its worker, CSS and approved art.
+  * The optional live URL runs these same UI-only checks after publication. */
+ export default defineConfig({
+-  testDir: './tests', testMatch: ['**/production/**/*.spec.ts', '**/gameplay/updates.spec.ts'],
++  testDir: './tests', testMatch: ['**/production/**/*.spec.ts', '**/gameplay/updates.spec.ts', '**/gameplay/home.spec.ts', '**/gameplay/lore.spec.ts', '**/gameplay/compendium.spec.ts'],
+   workers: 1, timeout: 45_000,
+   use: {
+     baseURL: process.env.PAGES_SMOKE_URL ?? `${origin}${base}`,
+diff --git c/scripts/build-changelog.ts w/scripts/build-changelog.ts
+new file mode 100644
+index 0000000..5908478
+--- /dev/null
++++ w/scripts/build-changelog.ts
+@@ -0,0 +1,8 @@
++import { execFileSync } from 'node:child_process';
++import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { resolve } from 'node:path';
++import type { ChangelogEntry } from '../apps/web/src/updates/changelog';
++const root = resolve(import.meta.dirname, '..');
++const git = (...args: string[]) => execFileSync('git', args, { cwd: root, encoding: 'utf8' });
++export function buildFeed(): ChangelogEntry[] { return git('log', '--first-parent', '--format=%H%x1f%h%x1f%an%x1f%aI%x1f%s%x1f%b%x1e').split('\x1e').filter(x => x.trim()).map(record => { const f = record.trim().split('\x1f'); const sha=f[0]!, shortSha=f[1]!, author=f[2]!, date=f[3]!, subject=f[4]!, body=f[5] ?? ''; const stat=git('show','--format=','--numstat',sha).trim().split('\n').filter(Boolean); let insertions=0,deletions=0; const areas=new Set<string>(); for(const line of stat){const [a,b,path='']=line.split('\t');insertions+=Number(a)||0;deletions+=Number(b)||0;const p=path.split('/');areas.add(p.length>1?`${p[0]}/${p[1]}`:p[0]!)} const note=resolve(root,'docs/updates/changelog',`${sha}.md`); return {sha,shortSha,author,date,subject,body:body.trim(),files:stat.length,insertions,deletions,areas:[...areas].sort().slice(0,5),...(existsSync(note)?{notes:readFileSync(note,'utf8').trim()}:{})}; }); }
++const output=resolve(root,'apps/web/src/updates/changelog/feed.json'); mkdirSync(resolve(output,'..'),{recursive:true}); writeFileSync(output,`${JSON.stringify(buildFeed(),null,2)}\n`); console.log(`wrote ${output}`);
+diff --git c/scripts/build-compendium.ts w/scripts/build-compendium.ts
+new file mode 100644
+index 0000000..ac4c450
+--- /dev/null
++++ w/scripts/build-compendium.ts
+@@ -0,0 +1,54 @@
++import { mkdir, readFile, writeFile } from 'node:fs/promises';
++import { dirname, resolve } from 'node:path';
++import {
++  ARCANE_DISCOVERIES, BATTLE_SPELLS, BIOME_YIELDS, BUILDINGS, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS,
++  DOCTRINES, FACTIONS, FACTION_ECOLOGIES, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, FACTION_ROSTERS, IMPROVEMENTS,
++  INNATE_BATTLE_ABILITIES, INSTITUTIONS, LAND_MILITARY_UNIT_IDS, MAGIC_PATHS, NATURAL_FEATURES, RESOURCES, TECHNOLOGIES, UNITS,
++} from '../packages/content/src/index';
++import { BIOME_NAMES } from '../packages/mapgen/src/index';
++
++type CatalogAsset = { id: string; type: string; atlasId: string; nativeResolution: { width: number; height: number }; frames: { direction?: string; state?: string; index?: number; frame: { x: number; y: number; w: number; h: number } }[]; provenance?: { provider?: string } };
++type Catalog = { atlases: { id: string; imageUrl: string; width: number; height: number }[]; assets: CatalogAsset[] };
++const root = resolve(import.meta.dirname, '..');
++const biomeNames = [...BIOME_NAMES];
++const asData = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
++
++function compactAsset(asset: CatalogAsset) {
++  const frame = [...asset.frames].sort((a, b) => Number(a.state !== 'idle') - Number(b.state !== 'idle') || Number(a.direction !== 'se') - Number(b.direction !== 'se') || (a.index ?? 0) - (b.index ?? 0))[0];
++  return frame && { id: asset.id, atlasId: asset.atlasId, nativeResolution: asset.nativeResolution, frame: frame.frame, provenance: asset.provenance?.provider ?? 'not recorded' };
++}
++
++/** Projection only: source values remain in @theandril/content and catalog.json. */
++export async function buildCompendiumData(): Promise<Record<string, unknown>> {
++  const catalog = JSON.parse(await readFile(resolve(root, 'apps/web/public/art/catalog.json'), 'utf8')) as Catalog;
++  const wanted = new Set<string>([
++    ...FACTIONS.flatMap(faction => {
++      const culture = faction.id.replace('faction.', '');
++      return ['guard', 'spearman', 'scout', 'heavy_infantry', 'cavalry', 'colonist', 'transport', 'coastal_warship', 'ocean_warship'].map(role => `unit.${role}.${culture}`)
++        .concat(['marshal', 'surveyor', 'engineer'].map(role => `character.${role}.${culture}`), ['village', 'town', 'city'].map(role => `settlement.${role}.${culture}`), ['crest', 'banner', 'badge'].map(role => `ui.${role}.${culture}`));
++    }),
++    ...UNITS.map(unit => `battle.${unit.id}`), ...BUILDINGS.map(item => item.id), ...IMPROVEMENTS.map(item => item.id), ...RESOURCES.map(item => item.id),
++    ...NATURAL_FEATURES.map(item => item.id), ...catalog.assets.filter(asset => asset.id.startsWith('monster.')).map(asset => asset.id),
++    'character.waykeeper', 'map.resource', 'map.ruin', 'map.watchtower', 'settlement.village', 'settlement.town', 'settlement.city',
++    ...biomeNames.map((_, id) => `terrain.${['ocean', 'grassland', 'temperate_forest', 'taiga', 'tundra', 'desert', 'steppe', 'marsh', 'rainforest', 'alpine', 'ash_scrub', 'chalkland'][id]}`),
++  ]);
++  const assets = Object.fromEntries(catalog.assets.filter(asset => wanted.has(asset.id)).map(asset => [asset.id, compactAsset(asset)]).filter((entry): entry is [string, NonNullable<ReturnType<typeof compactAsset>>] => Boolean(entry[1])));
++  return asData({
++    generatedFrom: { content: '@theandril/content', catalog: 'apps/web/public/art/catalog.json' },
++    atlases: catalog.atlases.map(({ id, imageUrl, width, height }) => ({ id, imageUrl, width, height })), assets,
++    biomes: biomeNames.map((name, id) => ({ id, name, yields: BIOME_YIELDS[id] })),
++    factions: FACTIONS.map(faction => ({ ...faction, profile: FACTION_PROFILES[faction.id], recruitmentWeights: FACTION_RECRUITMENT_WEIGHTS[faction.id], ecology: FACTION_ECOLOGIES[faction.id] })),
++    factionRosters: FACTION_ROSTERS, landMilitaryUnitIds: LAND_MILITARY_UNIT_IDS,
++    units: UNITS, buildings: BUILDINGS, improvements: IMPROVEMENTS, features: NATURAL_FEATURES, resources: RESOURCES,
++    technologies: TECHNOLOGIES, institutions: INSTITUTIONS, doctrines: DOCTRINES, characters: CHARACTER_DEFINITIONS,
++    missions: CHARACTER_MISSIONS, skills: CHARACTER_SKILLS, magicPaths: MAGIC_PATHS, battleSpells: BATTLE_SPELLS,
++    arcaneDiscoveries: ARCANE_DISCOVERIES, innateBattleAbilities: INNATE_BATTLE_ABILITIES,
++  });
++}
++
++if (process.argv[1] !== undefined && resolve(process.argv[1]) === resolve(import.meta.filename)) {
++  const output = resolve(root, 'apps/web/src/updates/compendium/data.json');
++  await mkdir(dirname(output), { recursive: true });
++  await writeFile(output, `${JSON.stringify(await buildCompendiumData(), null, 2)}\n`);
++  console.log(`Wrote ${output}`);
++}
+diff --git c/scripts/build-lore.ts w/scripts/build-lore.ts
+new file mode 100644
+index 0000000..c2bf051
+--- /dev/null
++++ w/scripts/build-lore.ts
+@@ -0,0 +1,64 @@
++import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
++import { resolve } from 'node:path';
++
++export type Inline = { type: 'text'; value: string } | { type: 'strong' | 'em' | 'code'; value: string } | { type: 'wikilink'; label: string; target: string } | { type: 'link'; label: string; href: string };
++export type Block = { type: 'heading'; level: number; id: string; children: Inline[] } | { type: 'paragraph' | 'blockquote'; children: Inline[] } | { type: 'callout'; title: string; children: Inline[] } | { type: 'list'; ordered: boolean; items: Inline[][] } | { type: 'table'; headers: Inline[][]; rows: Inline[][][] };
++export type LoreDocument = { id: string; title: string; sourcePath: string; order?: number; blocks: Block[]; body: string };
++export type LoreLibrary = { books: { id: string; title: string; documents: LoreDocument[] }[]; factionAnchors: Record<string, string> };
++
++const root = resolve(import.meta.dirname, '..');
++const loreRoot = resolve(root, 'docs/lore');
++const slug = (value: string) => value.toLocaleLowerCase('en').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
++const inlinePattern = /(\[\[[^\]]+\]\]|\[[^\]]+\]\([^)]*\)|\*\*[^*]+\*\*|`[^`]+`|\*[^*]+\*)/g;
++export function inline(value: string): Inline[] {
++  return value.split(inlinePattern).filter(Boolean).map((part): Inline => {
++    if (part.startsWith('[[')) { const [label = '', target = label] = part.slice(2, -2).split('|').map(piece => piece.trim()); return { type: 'wikilink', label, target }; }
++    const link = part.match(/^\[([^\]]+)\]\(([^)]*)\)$/); if (link) return { type: 'link', label: link[1]!, href: link[2]! };
++    if (part.startsWith('**')) return { type: 'strong', value: part.slice(2, -2) };
++    if (part.startsWith('`')) return { type: 'code', value: part.slice(1, -1) };
++    if (part.startsWith('*')) return { type: 'em', value: part.slice(1, -1) };
++    return { type: 'text', value: part };
++  });
++}
++function plain(nodes: Inline[]) { return nodes.map(node => 'value' in node ? node.value : node.label).join(''); }
++function frontmatter(lines: string[]) { const data: Record<string, string> = {}; if (lines[0] !== '---') return { data, offset: 0 }; let offset = 1; for (; offset < lines.length && lines[offset] !== '---'; offset++) { const match = lines[offset]!.match(/^([^:]+):\s*(.*)$/); if (match) data[match[1]!] = match[2]!.replace(/^['"]|['"]$/g, ''); } return { data, offset: offset + 1 }; }
++export function parseMarkdown(markdown: string): { title: string; order?: number; blocks: Block[]; body: string } {
++  const lines = markdown.replace(/\r\n/g, '\n').split('\n'); const { data, offset } = frontmatter(lines); const blocks: Block[] = []; let i = offset; let title = data.title ?? '';
++  const isTable = (line: string) => /^\|.*\|\s*$/.test(line);
++  while (i < lines.length) { const line = lines[i]!; if (!line.trim()) { i++; continue; }
++    const heading = line.match(/^(#{1,6})\s+(.+)$/); if (heading) { const value = heading[2]!; title ||= value; blocks.push({ type: 'heading', level: heading[1]!.length, id: slug(value), children: inline(value) }); i++; continue; }
++    const note = line.match(/^>\s*\[!note\]\s*(.*)$/i); if (note) { const content: string[] = []; i++; while (i < lines.length && /^>/.test(lines[i]!)) { content.push(lines[i]!.replace(/^>\s?/, '')); i++; } blocks.push({ type: 'callout', title: note[1]!.trim() || 'Note', children: inline(content.join(' ').trim()) }); continue; }
++    if (/^>/.test(line)) { const content: string[] = []; while (i < lines.length && /^>/.test(lines[i]!)) { content.push(lines[i]!.replace(/^>\s?/, '')); i++; } blocks.push({ type: 'blockquote', children: inline(content.join(' ').trim()) }); continue; }
++    const list = line.match(/^(\s*)([-*+] |\d+\. )(.*)$/); if (list) { const ordered = /^\d+\./.test(list[2]!); const items: Inline[][] = []; while (i < lines.length) { const item = lines[i]!.match(/^\s*(?:[-*+] |\d+\. )(.*)$/); if (!item) break; items.push(inline(item[1]!)); i++; } blocks.push({ type: 'list', ordered, items }); continue; }
++    if (isTable(line) && /^\|?\s*:?-{3,}/.test(lines[i + 1] ?? '')) { const cells = (row: string) => row.replace(/^\||\|$/g, '').split('|').map(cell => inline(cell.trim())); const headers = cells(line); i += 2; const rows: Inline[][][] = []; while (i < lines.length && isTable(lines[i]!)) { rows.push(cells(lines[i]!)); i++; } blocks.push({ type: 'table', headers, rows }); continue; }
++    const paragraph: string[] = [line.trim()]; i++; while (i < lines.length && lines[i]!.trim() && !/^(#{1,6})\s|^>|^\s*(?:[-*+] |\d+\. )/.test(lines[i]!) && !isTable(lines[i]!)) paragraph.push(lines[i++]!.trim()); blocks.push({ type: 'paragraph', children: inline(paragraph.join(' ')) });
++  }
++  return { title, order: data.order ? Number(data.order) : undefined, blocks, body: blocks.map(block => block.type === 'list' ? block.items.map(plain).join(' ') : block.type === 'table' ? [...block.headers, ...block.rows.flat()].map(plain).join(' ') : plain(block.children)).join('\n') };
++}
++async function documentFrom(relative: string): Promise<LoreDocument> { const parsed = parseMarkdown(await readFile(resolve(root, relative), 'utf8')); return { id: slug(relative.split('/').at(-1)!.replace(/\.md$/, '')), title: parsed.title, sourcePath: relative, order: parsed.order, blocks: parsed.blocks, body: parsed.body }; }
++export async function buildLoreLibrary(): Promise<LoreLibrary> {
++  const bookDirectory = resolve(loreRoot, 'The Book of Broken Roads'); const names = (await readdir(bookDirectory)).filter(name => name.endsWith('.md') && name !== 'The Book of Broken Roads.md');
++  const chapters = await Promise.all(names.map(name => documentFrom(`docs/lore/The Book of Broken Roads/${name}`))); chapters.sort((a, b) => (a.order ?? 999) - (b.order ?? 999) || a.title.localeCompare(b.title));
++  const bible = await documentFrom('docs/lore/FACTION_BIBLE.md');
++  return { books: [
++    { id: 'broken-roads', title: 'The Book of Broken Roads', documents: chapters },
++    { id: 'foundations', title: 'Foundations', documents: [await documentFrom('docs/lore/FOUNDATIONS.md')] },
++    { id: 'faction-bible', title: 'Faction Bible', documents: [bible] },
++    { id: 'cohort-notes', title: 'Cohort Notes', documents: [await documentFrom('docs/lore/FACTION_COHORT_12.md')] },
++  ], factionAnchors: factionAnchors(bible.blocks) };
++}
++
++/** Each culture section of the bible names its stable ID in inline code right under its `###` heading. */
++export function factionAnchors(blocks: Block[]): Record<string, string> {
++  const anchors: Record<string, string> = {};
++  let heading: string | undefined;
++  const codes = (nodes: Inline[]): string[] => nodes.flatMap(node => node.type === 'code' ? [node.value] : []);
++  for (const block of blocks) {
++    if (block.type === 'heading') { heading = block.level === 3 ? block.id : undefined; continue; }
++    if (heading && block.type === 'paragraph') for (const value of codes(block.children)) if (/^faction\.[a-z_]+$/.test(value) && !anchors[value]) anchors[value] = heading;
++  }
++  return anchors;
++}
++if (process.argv[1] && resolve(process.argv[1]) === resolve(import.meta.filename)) {
++  const library = await buildLoreLibrary(); const output = resolve(root, 'apps/web/src/updates/lore/library.json'); await mkdir(resolve(output, '..'), { recursive: true }); await writeFile(output, `${JSON.stringify(library, null, 2)}\n`); console.log('Generated apps/web/src/updates/lore/library.json');
++}
+diff --git c/tests/gameplay/compendium.spec.ts w/tests/gameplay/compendium.spec.ts
+new file mode 100644
+index 0000000..36340ab
+--- /dev/null
++++ w/tests/gameplay/compendium.spec.ts
+@@ -0,0 +1,34 @@
++import { mkdir } from 'node:fs/promises';
++import { expect, test } from '@playwright/test';
++
++const base = 'updates/compendium/';
++test('compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence', async ({ page }) => {
++  const errors: string[] = [];
++  page.on('pageerror', error => errors.push(error.message));
++  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
++  await page.goto(base);
++  await expect(page.getByRole('heading', { name: 'Theandril World Compendium' })).toBeVisible();
++  await expect(page.locator('[data-culture-card]')).toHaveCount(24);
++  await page.getByRole('searchbox', { name: 'Search the compendium' }).fill('Vesper');
++  await expect(page.locator('[data-culture-card]')).toHaveCount(1);
++  await page.goto(`${base}?culture=vesper_court`);
++  await expect(page.getByRole('heading', { name: 'Vesper Court' })).toBeVisible();
++  await expect(page.locator('[data-unit-card]')).toHaveCount(13);
++  expect(await page.locator('[data-sprite]').evaluateAll(items => items.every(item => item.getBoundingClientRect().width > 0 && getComputedStyle(item).backgroundImage !== 'none'))).toBe(true);
++  expect(await page.evaluate(async () => (await fetch(document.querySelector<HTMLElement>('[data-sprite]')!.dataset.atlas!)).status)).toBe(200);
++  await page.reload();
++  await expect(page.getByRole('heading', { name: 'Vesper Court' })).toBeVisible();
++  await page.goto(`${base}?unit=guard`);
++  await expect(page.getByRole('heading', { name: 'Oath guard' })).toBeVisible();
++  await expect(page.getByText('24 industry', { exact: true })).toBeVisible();
++  await page.setViewportSize({ width: 390, height: 844 });
++  await page.evaluate(() => { document.documentElement.style.fontSize = '130%'; });
++  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
++  await mkdir('docs/development/site-expansion/compendium/screens', { recursive: true });
++  await page.screenshot({ path: 'docs/development/site-expansion/compendium/screens/compendium-390-130.png', fullPage: true });
++  await page.setViewportSize({ width: 1440, height: 1000 });
++  await page.evaluate(() => { document.documentElement.style.fontSize = '100%'; });
++  await page.goto(base);
++  await page.screenshot({ path: 'docs/development/site-expansion/compendium/screens/compendium-1440.png', fullPage: true });
++  expect(errors).toEqual([]);
++});
+diff --git c/tests/gameplay/home.spec.ts w/tests/gameplay/home.spec.ts
+new file mode 100644
+index 0000000..612aa12
+--- /dev/null
++++ w/tests/gameplay/home.spec.ts
+@@ -0,0 +1,23 @@
++import { expect, test } from '@playwright/test';
++
++test('home provides the public routes and generated ledger', async ({ page }) => {
++  const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
++  await page.goto('updates/');
++  await expect(page.getByRole('heading', { name: 'Theandril', exact: true })).toBeVisible();
++  await expect(page.getByRole('heading', { name: 'The change ledger' })).toBeVisible();
++  await expect(page.locator('.commit-entry')).toHaveCount(8);
++  await expect(page.getByRole('button', { name: /Show .* older commits/ })).toBeVisible();
++  await page.getByRole('button', { name: /Show .* older commits/ }).click();
++  expect(await page.locator('.commit-entry').count()).toBeGreaterThan(8);
++  await page.setViewportSize({ width: 390, height: 844 });
++  await page.evaluate(() => { document.documentElement.style.fontSize = '130%'; });
++  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
++  expect(errors).toEqual([]);
++});
++
++test('dispatches remain refresh-safe at their new path', async ({ page }) => {
++  await page.goto('updates/dispatches/');
++  await expect(page.locator('.dispatch-row')).toHaveCount(3);
++  await page.locator('.dispatch-row a').first().click();
++  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=/);
++});
+diff --git c/tests/gameplay/lore.spec.ts w/tests/gameplay/lore.spec.ts
+new file mode 100644
+index 0000000..e4e7208
+--- /dev/null
++++ w/tests/gameplay/lore.spec.ts
+@@ -0,0 +1,27 @@
++import { expect, test } from '@playwright/test';
++
++test('lore shelf, chapter journey, search and narrow layout work without errors', async ({ page }, testInfo) => {
++  const errors: string[] = [];
++  page.on('pageerror', error => errors.push(error.message));
++  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
++  await page.setViewportSize({ width: 1440, height: 1000 });
++  await page.goto('updates/lore/');
++  await expect(page.getByRole('heading', { name: 'The lore shelf' })).toBeVisible();
++  for (const title of ['The Book of Broken Roads', 'Foundations', 'Faction Bible', 'Cohort Notes']) await expect(page.getByRole('link', { name: title, exact: true }).first()).toBeVisible();
++  await page.screenshot({ path: testInfo.outputPath('lore-desktop.png') });
++  await page.getByRole('link', { name: 'The oath culture', exact: true }).click();
++  await expect(page).toHaveURL(/book=broken-roads&chapter=ii-the-age-of-first-oaths/);
++  await expect(page.getByRole('heading', { level: 1, name: 'The oath culture' })).toBeVisible();
++  const wiki = page.locator('.lore-body a[href*="book=broken-roads"]').first();
++  await expect(wiki).toBeVisible(); await wiki.click();
++  await expect(page).toHaveURL(/chapter=/); await page.reload();
++  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
++  await page.goto('updates/lore/');
++  await page.getByRole('searchbox', { name: 'Search all lore' }).fill('Written Fire');
++  await expect(page.getByRole('link', { name: 'The War of Written Fire — RR 2291–2298', exact: true })).toBeVisible();
++  await page.setViewportSize({ width: 390, height: 844 });
++  await page.evaluate(() => { document.documentElement.style.fontSize = '130%'; });
++  await page.screenshot({ path: testInfo.outputPath('lore-mobile-390-130.png') });
++  expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
++  expect(errors).toEqual([]);
++});
+diff --git c/tests/gameplay/updates.spec.ts w/tests/gameplay/updates.spec.ts
+index 22ccfc2..5f4abdd 100644
+--- c/tests/gameplay/updates.spec.ts
++++ w/tests/gameplay/updates.spec.ts
+@@ -10,7 +10,7 @@ for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 13
+     page.on('worker', worker => workers.push(worker.url()));
+     await page.setViewportSize({ width: dimensions.width, height: dimensions.height });
+     await page.emulateMedia({ reducedMotion: 'reduce' });
+-    await page.goto('updates/');
++    await page.goto('updates/dispatches/');
+     await page.evaluate(scale => { document.documentElement.style.fontSize = `${scale}%`; }, dimensions.scale);
+     await page.getByRole('heading', { name: 'Theandril Dispatches', exact: true }).waitFor();
+     // Exercise real lazy loading by scrolling to each visible image before the full-page capture.
+@@ -48,7 +48,7 @@ for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 13
+ }
+ 
+ test('reading surfaces retain contrast without putting texture over the text', async ({ page }, testInfo) => {
+-  await page.goto('updates/');
++  await page.goto('updates/dispatches/');
+   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
+   const measurements = await page.evaluate(() => {
+     const rgb = (value: string) => value.match(/[\d.]+/g)!.map(Number);
+@@ -79,7 +79,7 @@ test('reading surfaces retain contrast without putting texture over the text', a
+ });
+ 
+ test('unknown dispatch links fail honestly and keyboard skip navigation works', async ({ page }) => {
+-  await page.goto('updates/?dispatch=not-published');
++  await page.goto('updates/dispatches/?dispatch=not-published');
+   await expect(page.getByRole('heading', { name: 'That page is not in the journal' })).toBeVisible();
+   await page.getByRole('link', { name: 'Browse published dispatches' }).click();
+   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
+@@ -90,7 +90,7 @@ test('unknown dispatch links fail honestly and keyboard skip navigation works',
+ });
+ 
+ test('archive search combines topic filters, survives refresh and recovers from no results', async ({ page }) => {
+-  await page.goto('updates/#archive');
++  await page.goto('updates/dispatches/#archive');
+   await page.getByRole('searchbox', { name: 'Search dispatches' }).fill('Vesper');
+   await page.getByRole('button', { name: 'World & culture', exact: true }).click();
+   await expect(page.getByRole('status')).toHaveText('1 dispatch');
+@@ -105,7 +105,7 @@ test('archive search combines topic filters, survives refresh and recovers from
+ });
+ 
+ test('scope ledger links real gates and a contributor can reach authoring guidance', async ({ page }) => {
+-  await page.goto('updates/');
++  await page.goto('updates/dispatches/');
+   await expect(page.getByRole('heading', { name: 'Road to 1.0', exact: true })).toBeVisible();
+   const ledger = page.getByRole('region', { name: 'Road to 1.0' });
+   await expect(ledger.getByText('Accepted scope', { exact: true })).toBeVisible();
+@@ -120,7 +120,7 @@ test('scope ledger links real gates and a contributor can reach authoring guidan
+ });
+ 
+ test('a keyboard reader can enlarge a real image and return to the same control', async ({ page }) => {
+-  await page.goto('updates/?dispatch=twenty-four-cultures');
++  await page.goto('updates/dispatches/?dispatch=twenty-four-cultures');
+   const trigger = page.getByRole('button', { name: 'Enlarge cultures image', exact: true });
+   await expect(trigger).toBeVisible();
+   await trigger.focus();
+@@ -136,14 +136,19 @@ test('a keyboard reader can enlarge a real image and return to the same control'
+ 
+ // Resolves under either the normal root server or the Pages-base journal harness.
+ test('public journal opens a permanent, refresh-safe campaign dispatch', async ({ page }) => {
+-  await page.goto('updates/');
++  await page.goto('updates/dispatches/');
+   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
+   await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
+-  await expect(page).toHaveURL(/updates\/\?dispatch=r17-campaign-safety$/);
++  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=r17-campaign-safety$/);
+   await expect(page.getByRole('heading', { level: 1, name: 'A campaign worth keeping' })).toBeVisible();
+   await page.reload();
+   await expect(page.getByRole('heading', { level: 1, name: 'A campaign worth keeping' })).toBeVisible();
+   await expect(page.getByRole('link', { name: 'Post-fix review reconciliation' })).toHaveAttribute('href', /github.com\/ErikBurdett\/Theandril\/blob\/[a-f0-9]+\/docs\/development\/post-fix-review\/summary.json$/);
+   await page.getByRole('link', { name: 'All dispatches', exact: true }).click();
++  await expect(page).toHaveURL(/updates\/dispatches\/#archive$/);
+   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
++  // Searching must keep the reader on the dispatches page, not send them to the site home.
++  await page.getByRole('searchbox', { name: 'Search dispatches' }).fill('archive');
++  await expect(page).toHaveURL(/updates\/dispatches\/\?q=archive#archive$/);
++  await expect(page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Dispatches' })).toHaveAttribute('aria-current', 'page');
+ });
+diff --git c/tests/production/developer-navigation.spec.ts w/tests/production/developer-navigation.spec.ts
+index fcb5af3..f28f252 100644
+--- c/tests/production/developer-navigation.spec.ts
++++ w/tests/production/developer-navigation.spec.ts
+@@ -13,7 +13,11 @@ test('game exposes the developer journal without discarding campaign setup', asy
+   const journalUrl = new URL('updates/', mount).href;
+   const [openingPopup] = await Promise.all([page.waitForEvent('popup'), link.click()]);
+   await expect(openingPopup).toHaveURL(journalUrl);
+-  await expect(openingPopup).toHaveTitle(/Theandril.*Dispatches|Dispatches.*Theandril/i);
++  await expect(openingPopup).toHaveTitle('Theandril · A world in the making');
++  // The site home is the game's public front door; it must lead on to the journal, lore and compendium.
++  await expect(openingPopup.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Dispatches' })).toHaveAttribute('href', `${mount.pathname}updates/dispatches/`);
++  await expect(openingPopup.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Lore' })).toHaveAttribute('href', `${mount.pathname}updates/lore/`);
++  await expect(openingPopup.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Compendium' })).toHaveAttribute('href', `${mount.pathname}updates/compendium/`);
+   await openingPopup.close();
+   await expect(page).toHaveURL(originalUrl);
+   await expect(page.getByLabel('World seed', { exact: true })).toHaveValue('74');
+@@ -23,7 +27,7 @@ test('game exposes the developer journal without discarding campaign setup', asy
+   await expect(settingsLink).toHaveAttribute('href', `${mount.pathname}updates/`);
+   const [settingsPopup] = await Promise.all([page.waitForEvent('popup'), settingsLink.click()]);
+   await expect(settingsPopup).toHaveURL(journalUrl);
+-  await expect(settingsPopup).toHaveTitle(/Theandril.*Dispatches|Dispatches.*Theandril/i);
++  await expect(settingsPopup).toHaveTitle('Theandril · A world in the making');
+   await settingsPopup.close();
+   await expect(page).toHaveURL(originalUrl);
+   await expect(page.getByLabel('World seed', { exact: true })).toHaveValue('74');
+diff --git c/tests/tooling/pages-journal.test.ts w/tests/tooling/pages-journal.test.ts
+index 03cc2dd..e7f601b 100644
+--- c/tests/tooling/pages-journal.test.ts
++++ w/tests/tooling/pages-journal.test.ts
+@@ -13,6 +13,9 @@ test('verification workflows retain immutable evidence revisions beyond a shallo
+ test('the actual Pages suite collects journal journeys alongside game and navigation smoke', () => {
+   const listing = execFileSync('pnpm', ['exec', 'playwright', 'test', '--config', 'playwright.pages.config.ts', '--list'], { encoding: 'utf8' });
+   expect(listing).toContain('updates.spec.ts');
++  expect(listing).toContain('home.spec.ts');
++  expect(listing).toContain('lore.spec.ts');
++  expect(listing).toContain('compendium.spec.ts');
+   expect(listing).toContain('developer-navigation.spec.ts');
+   expect(listing).toContain('deployment-assets.spec.ts');
+ });
+diff --git c/tests/tooling/updates-build.test.ts w/tests/tooling/updates-build.test.ts
+index da60d96..2e1afc7 100644
+--- c/tests/tooling/updates-build.test.ts
++++ w/tests/tooling/updates-build.test.ts
+@@ -3,11 +3,14 @@ import { resolve } from 'node:path';
+ import { expect, test } from 'vitest';
+ import config from '../../apps/web/vite.config';
+ 
+-test('builds the game and journal as independent HTML entrypoints', () => {
++test('builds the game and every public site page as independent HTML entrypoints', () => {
+   const input = (config as { build?: { rollupOptions?: { input?: Record<string, string> } } }).build?.rollupOptions?.input;
+   expect(input).toEqual({
+     game: resolve('apps/web/index.html'),
+     updates: resolve('apps/web/updates/index.html'),
++    dispatches: resolve('apps/web/updates/dispatches/index.html'),
++    lore: resolve('apps/web/updates/lore/index.html'),
++    compendium: resolve('apps/web/updates/compendium/index.html'),
+   });
+ });
+ 

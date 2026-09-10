@@ -1,0 +1,25 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/site.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/site.test.ts [ apps/web/src/updates/site.test.ts ]
+Error: Cannot find module './site' imported from /home/telephoneheater/Work/Theandril-release/apps/web/src/updates/site.test.ts
+ ❯ apps/web/src/updates/site.test.ts:3:1
+      1| import { readFileSync } from 'node:fs';
+      2| import { describe, expect, it } from 'vitest';
+      3| import { currentPage, pageUrl, siteNavigation, SITE_PAGES } from './si…
+       | ^
+      4|
+      5| describe('site pages', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  22:38:01
+   Duration  90ms (transform 15ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)
+

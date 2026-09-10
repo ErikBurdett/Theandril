@@ -1,0 +1,6 @@
+{
+  "passed": true, "security_concerns": [], "logic_errors": [],
+  "delegation": "deleg_42f85002",
+  "fixesDiffSha256": "4ed0f4a04a7f84d9e6e9a3b52eec56baec97d2b2656f029fca406729cd8d3e4a",
+  "summary": "Six-file delta closes both original logic errors; 47 non-delta reviewed files unchanged. initialVisibleCommits retains the fold for first-page/missing/unknown and reveals folded targets before scroll. Feed test requires the committed feed to equal the generated suffix from its head to root; CI drift check runs before regeneration, regeneration runs before build with full history. 8/8 scoped tests, ESLint, typecheck passed."
+}

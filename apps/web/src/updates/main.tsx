@@ -1,6 +1,5 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Journal } from './Journal';
+import { Home } from './Home';
 import './journal.css';
-
-createRoot(document.getElementById('root')!).render(<StrictMode><Journal /></StrictMode>);
+createRoot(document.getElementById('root')!).render(<StrictMode><Home /></StrictMode>);

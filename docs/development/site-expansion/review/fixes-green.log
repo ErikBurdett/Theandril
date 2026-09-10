@@ -1,0 +1,15 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ✓ tests/tooling/updates-build.test.ts (3 tests) 3ms
+stdout | apps/web/src/updates/changelog.test.ts
+wrote /home/telephoneheater/Work/Theandril-release/apps/web/src/updates/changelog/feed.json
+
+ ✓ apps/web/src/updates/changelog.test.ts (5 tests) 9083ms
+     ✓ is deterministic and the committed feed is an exact record from its newest commit back to the root  9081ms
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  23:18:39
+   Duration  13.78s (transform 51ms, setup 0ms, import 4.69s, tests 9.09s, environment 0ms)
+

@@ -7,8 +7,8 @@ describe('refresh-safe public links', () => {
     expect(readFileSync('apps/web/updates/index.html', 'utf8')).toContain('href="%BASE_URL%ui/hearth-card/ornament.corner-idle.webp"');
   });
   it('round-trips a permanent dispatch on both root and GitHub Pages bases', () => {
-    expect(dispatchUrl('/Theandril/', 'r17-campaign-safety')).toBe('/Theandril/updates/?dispatch=r17-campaign-safety');
-    expect(dispatchUrl('/', 'twenty-four-cultures')).toBe('/updates/?dispatch=twenty-four-cultures');
+    expect(dispatchUrl('/Theandril/', 'r17-campaign-safety')).toBe('/Theandril/updates/dispatches/?dispatch=r17-campaign-safety');
+    expect(dispatchUrl('/', 'twenty-four-cultures')).toBe('/updates/dispatches/?dispatch=twenty-four-cultures');
     expect(localUrl('/Theandril/', 'updates/campaign.webp')).toBe('/Theandril/updates/campaign.webp');
     expect(resolveDispatch('?dispatch=r17-campaign-safety')?.id).toBe('r17-campaign-safety');
     expect(resolveDispatch('?dispatch=missing')).toBeUndefined();

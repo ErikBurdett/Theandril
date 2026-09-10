@@ -1,0 +1,3 @@
+import { defineConfig } from '@playwright/test';
+const base = '/Theandril/'; const origin = 'http://127.0.0.1:5197';
+export default defineConfig({ testDir: '../../../../tests', testMatch: '**/gameplay/lore.spec.ts', workers: 1, timeout: 45_000, use: { baseURL: `${origin}${base}`, viewport: { width: 1440, height: 1000 }, launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE } }, webServer: { command: 'npm exec -- vite preview --host 127.0.0.1 --port 5197 --strictPort', cwd: '../../../../apps/web', env: { VITE_BASE_PATH: base }, url: `${origin}${base}`, reuseExistingServer: false } });

@@ -1,0 +1,196 @@
+[
+  {
+    "sha": "4790331e3da682bb8f627546dcd39a22654a1bf7",
+    "shortSha": "4790331",
+    "author": "ErikBurdett",
+    "date": "2026-09-09T20:38:35-05:00",
+    "subject": "fix: include reviewed journal HTML entrypoint in deployment",
+    "body": "",
+    "files": 2,
+    "insertions": 71,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/development"
+    ],
+    "notes": "## Shared site shell\n\nThis checkpoint establishes the multi-page public-site structure that lets the home, dispatches, lore library and compendium use one navigation and footer shell. It keeps each page a static Vite entry so direct refreshes work on plain Pages hosting."
+  },
+  {
+    "sha": "9243b09d9d2c49d365e094188d0e1e801c37ff51",
+    "shortSha": "9243b09",
+    "author": "ErikBurdett",
+    "date": "2026-09-09T20:34:30-05:00",
+    "subject": "feat: publish Theandril Dispatches and campaign safety development demo",
+    "body": "",
+    "files": 323,
+    "insertions": 14979,
+    "deletions": 6,
+    "areas": [
+      ".github/workflows",
+      "AGENTS.md",
+      "README.md",
+      "apps/web",
+      "docs/DEPLOYMENT.md"
+    ],
+    "notes": "## Dispatches launch\n\nThis change introduced the public developer journal: three illustrated, source-linked dispatches covering campaign safety, archive durability, and the twenty-four-culture baseline. It included searchable archive controls, stable dispatch query links, a scope ledger, source library and contributor guidance.\n\nThe journal reused retained Hearth & Card materials and four provenance-recorded game screenshots. It introduced no game rules or new game artwork; it is a development-demo publication, not 1.0 acceptance."
+  },
+  {
+    "sha": "8b3b8c148b7e8ee3689001210033fee7a1b8a6ef",
+    "shortSha": "8b3b8c1",
+    "author": "ErikBurdett",
+    "date": "2026-09-09T13:21:20-05:00",
+    "subject": "chore: checkpoint campaign safety fixes and review evidence",
+    "body": "Preserve reviewed simulation, persistence, UI and audit artifacts from\na936fc36d4281ef2274c0a70306e3370d847d964.\n\nKeep the oversized Playwright trace and original commit locally;\nrecord its digest and exclude it from this publishable history.\nBackend/storage/UI scoped reviews pass; AI findings and full\nintegration remain open. This is not a release approval.",
+    "files": 2142,
+    "insertions": 1780525,
+    "deletions": 173,
+    "areas": [
+      "\"docs/development",
+      "\"docs/hermes-analysis",
+      ".agents/skills",
+      ".gitignore",
+      "README.md"
+    ]
+  },
+  {
+    "sha": "b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd",
+    "shortSha": "b0a4cd8",
+    "author": "ErikBurdett",
+    "date": "2026-09-08T23:53:33-05:00",
+    "subject": "Update README and various SKILL documents for Theandril, enhancing campaign instructions, refining battle mechanics, and expanding lore. Key changes include clearer campaign setup guidelines, detailed exploration and recruitment processes, and improved asset management protocols. Added new sections on resource deposits, hearth development, and sprite animation standards to ensure consistency and clarity across gameplay elements.",
+    "body": "",
+    "files": 5954,
+    "insertions": 1480829,
+    "deletions": 745,
+    "areas": [
+      ".agents/skills",
+      "README.md",
+      "apps/web",
+      "assets/art",
+      "docs/IMPLEMENTATION_STATUS.md"
+    ]
+  },
+  {
+    "sha": "a57b4633d400ca57d13e73df82d28d2a25a94b5a",
+    "shortSha": "a57b463",
+    "author": "ErikBurdett",
+    "date": "2026-09-08T01:24:36-05:00",
+    "subject": "feat: publish the 24-faction development campaign on GitHub Pages",
+    "body": "Checkpoint integrated geography, armies, naval travel, tactical battles, faction art, and map-first campaign management. Add base-safe verified assets and automatic Pages deployment with production gameplay smoke checks. Preserve source art and release-gap evidence; stop tracking disposable browser output.",
+    "files": 4252,
+    "insertions": 335807,
+    "deletions": 9916,
+    "areas": [
+      "\"test-results-slice18-fixes/land-query-selected-town-q-3d4c7-tain-another-town\\342\\200\\231s-options",
+      ".github/workflows",
+      ".gitignore",
+      "README.md",
+      "apps/web"
+    ]
+  },
+  {
+    "sha": "b17900d143e330cbc0014ce6fc288896b1e6ea57",
+    "shortSha": "b17900d",
+    "author": "ErikBurdett",
+    "date": "2026-09-06T19:50:45-05:00",
+    "subject": "Update art assets and configurations for new character units in Theandril, including 'mire_courts', 'morrow_spore', and 'rimehorn_clans'. Adjusted frame dimensions and added new validation and review details for improved asset management. Updated SHA256 checksums in catalog files for integrity verification.",
+    "body": "",
+    "files": 1889,
+    "insertions": 121526,
+    "deletions": 3495,
+    "areas": [
+      "\"test-results-slice18-fixes/land-query-selected-town-q-3d4c7-tain-another-town\\342\\200\\231s-options",
+      "apps/web",
+      "assets/art",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/PERFORMANCE.md"
+    ]
+  },
+  {
+    "sha": "404bc9da3fd3cc926590ac790afd74e8b1982322",
+    "shortSha": "404bc9d",
+    "author": "ErikBurdett",
+    "date": "2026-09-06T03:24:54-05:00",
+    "subject": "Enhance game mechanics and assets for Theandril 1.0, including on-demand land details, new faction ecology, and improved army management features. Added 37 new assets, refined navigation and cultivation systems, and integrated extensive testing. Updated art assets and configurations for better performance and visual fidelity.",
+    "body": "",
+    "files": 676,
+    "insertions": 70902,
+    "deletions": 1381,
+    "areas": [
+      ".agents/skills",
+      "CHANGELOG.md",
+      "DEFINITION_OF_DONE.md",
+      "GAME_1_0_SCOPE.md",
+      "README.md"
+    ]
+  },
+  {
+    "sha": "d7e5051792bf65b891871f2beefadc8c02c53567",
+    "shortSha": "d7e5051",
+    "author": "ErikBurdett",
+    "date": "2026-09-05T22:17:15-05:00",
+    "subject": "Update lore for The Book of Broken Roads with additional details from Obsidian vault",
+    "body": "",
+    "files": 48,
+    "insertions": 1507,
+    "deletions": 210,
+    "areas": [
+      ".agents/skills",
+      "AGENTS.md",
+      "apps/web",
+      "docs/architecture",
+      "packages/ai"
+    ]
+  },
+  {
+    "sha": "588d79a428c4d7650f95c850ce1f0f450331b81a",
+    "shortSha": "588d79a",
+    "author": "ErikBurdett",
+    "date": "2026-09-05T22:12:47-05:00",
+    "subject": "Add The Book of Broken Roads lore from Obsidian vault",
+    "body": "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01UJxWPXCuNJUGuhVpSWanEU",
+    "files": 12,
+    "insertions": 378,
+    "deletions": 0,
+    "areas": [
+      "\"docs/lore",
+      "docs/lore"
+    ]
+  },
+  {
+    "sha": "cb068f8198c97d91ead7d0600b34090ea64569b6",
+    "shortSha": "cb068f8",
+    "author": "ErikBurdett",
+    "date": "2026-09-05T21:50:35-05:00",
+    "subject": "init commit",
+    "body": "",
+    "files": 1503,
+    "insertions": 111585,
+    "deletions": 0,
+    "areas": [
+      ".agents/skills",
+      ".github/workflows",
+      ".gitignore",
+      "AGENTS.md",
+      "ARCHITECTURE.md"
+    ]
+  },
+  {
+    "sha": "59c6dbe78b0afc2daf6fb32ac84058b6971b96dc",
+    "shortSha": "59c6dbe",
+    "author": "ErikBurdett",
+    "date": "2026-09-05T01:23:09-05:00",
+    "subject": "Initial Theandril",
+    "body": "",
+    "files": 26,
+    "insertions": 7089,
+    "deletions": 0,
+    "areas": [
+      "THEANDRIL_ASTRA_HANDOFF/.agents",
+      "THEANDRIL_ASTRA_HANDOFF/AGENTS.md",
+      "THEANDRIL_ASTRA_HANDOFF/ARCHITECTURE.md",
+      "THEANDRIL_ASTRA_HANDOFF/BOOTSTRAP_PROMPT.md",
+      "THEANDRIL_ASTRA_HANDOFF/DEFINITION_OF_DONE.md"
+    ]
+  }
+]

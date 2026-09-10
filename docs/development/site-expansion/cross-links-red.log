@@ -1,0 +1,25 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/cross-links.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/cross-links.test.ts [ apps/web/src/updates/cross-links.test.ts ]
+Error: Cannot find module './cross-links' imported from /home/telephoneheater/Work/Theandril-release/apps/web/src/updates/cross-links.test.ts
+ ❯ apps/web/src/updates/cross-links.test.ts:4:1
+      2| import { FACTIONS } from '@theandril/content';
+      3| import library from './lore/library.json';
+      4| import { factionLoreUrl } from './cross-links';
+       | ^
+      5|
+      6| describe('cross-page links', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  23:03:14
+   Duration  193ms (transform 80ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)
+

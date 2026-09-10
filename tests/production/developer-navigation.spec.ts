@@ -13,7 +13,11 @@ test('game exposes the developer journal without discarding campaign setup', asy
   const journalUrl = new URL('updates/', mount).href;
   const [openingPopup] = await Promise.all([page.waitForEvent('popup'), link.click()]);
   await expect(openingPopup).toHaveURL(journalUrl);
-  await expect(openingPopup).toHaveTitle(/Theandril.*Dispatches|Dispatches.*Theandril/i);
+  await expect(openingPopup).toHaveTitle('Theandril · A world in the making');
+  // The site home is the game's public front door; it must lead on to the journal, lore and compendium.
+  await expect(openingPopup.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Dispatches' })).toHaveAttribute('href', `${mount.pathname}updates/dispatches/`);
+  await expect(openingPopup.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Lore' })).toHaveAttribute('href', `${mount.pathname}updates/lore/`);
+  await expect(openingPopup.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Compendium' })).toHaveAttribute('href', `${mount.pathname}updates/compendium/`);
   await openingPopup.close();
   await expect(page).toHaveURL(originalUrl);
   await expect(page.getByLabel('World seed', { exact: true })).toHaveValue('74');
@@ -23,7 +27,7 @@ test('game exposes the developer journal without discarding campaign setup', asy
   await expect(settingsLink).toHaveAttribute('href', `${mount.pathname}updates/`);
   const [settingsPopup] = await Promise.all([page.waitForEvent('popup'), settingsLink.click()]);
   await expect(settingsPopup).toHaveURL(journalUrl);
-  await expect(settingsPopup).toHaveTitle(/Theandril.*Dispatches|Dispatches.*Theandril/i);
+  await expect(settingsPopup).toHaveTitle('Theandril · A world in the making');
   await settingsPopup.close();
   await expect(page).toHaveURL(originalUrl);
   await expect(page.getByLabel('World seed', { exact: true })).toHaveValue('74');

@@ -1,0 +1,77 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ tests/tooling/updates-build.test.ts (3 tests | 1 failed) 4ms
+   ✓ builds the game and every public site page as independent HTML entrypoints 1ms
+   ✓ Pages checks the journal contract before uploading the public artifact 1ms
+   × Pages regenerates the master change feed from full history right before building 1ms
+stdout | apps/web/src/updates/changelog.test.ts
+wrote /home/telephoneheater/Work/Theandril-release/apps/web/src/updates/changelog/feed.json
+
+ ❯ apps/web/src/updates/changelog.test.ts (5 tests | 3 failed) 9095ms
+     ✓ is deterministic and the committed feed is an exact record from its newest commit back to the root  9091ms
+     × reveals enough entries for a permalinked older commit before scrolling to it 1ms
+     × keeps the default fold for the first page, missing or unknown commits 0ms
+     ✓ renders headings, paragraphs, lists, bold text and links 0ms
+     × escapes raw HTML and refuses non-http links 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/tooling/updates-build.test.ts > Pages regenerates the master change feed from full history right before building
+AssertionError: expected -1 to be greater than 0
+ ❯ tests/tooling/updates-build.test.ts:28:22
+     26|   expect(workflow).toContain('fetch-depth: 0');
+     27|   const regenerate = workflow.indexOf('run: pnpm changelog:build');
+     28|   expect(regenerate).toBeGreaterThan(0);
+       |                      ^
+     29|   expect(regenerate).toBeLessThan(workflow.indexOf('run: pnpm build'));
+     30| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  apps/web/src/updates/changelog.test.ts > commit permalinks > reveals enough entries for a permalinked older commit before scrolling to it
+TypeError: initialVisibleCommits is not a function
+ ❯ apps/web/src/updates/changelog.test.ts:24:12
+     22|   const entries = Array.from({ length: 11 }, (_, index) => ({ shortSha…
+     23|   it('reveals enough entries for a permalinked older commit before scr…
+     24|     expect(initialVisibleCommits('?commit=sha8', entries, 8)).toBe(9);
+       |            ^
+     25|     expect(initialVisibleCommits('?commit=sha10', entries, 8)).toBe(11…
+     26|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  apps/web/src/updates/changelog.test.ts > commit permalinks > keeps the default fold for the first page, missing or unknown commits
+TypeError: initialVisibleCommits is not a function
+ ❯ apps/web/src/updates/changelog.test.ts:28:12
+     26|   });
+     27|   it('keeps the default fold for the first page, missing or unknown co…
+     28|     expect(initialVisibleCommits('', entries, 8)).toBe(8);
+       |            ^
+     29|     expect(initialVisibleCommits('?commit=sha2', entries, 8)).toBe(8);
+     30|     expect(initialVisibleCommits('?commit=nope', entries, 8)).toBe(8);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  apps/web/src/updates/changelog.test.ts > basic authored markdown > escapes raw HTML and refuses non-http links
+AssertionError: expected '<p>&lt;img src=x onerror=alert(1)&gt;…' not to contain 'javascript:'
+
+Expected: "javascript:"
+Received: "<p>&lt;img src=x onerror=alert(1)&gt; [x](javascript:alert(1))</p>"
+
+ ❯ apps/web/src/updates/changelog.test.ts:45:22
+     43|     const html = renderMarkdown('<img src=x onerror=alert(1)> [x](java…
+     44|     expect(html).not.toContain('<img');
+     45|     expect(html).not.toContain('javascript:');
+       |                      ^
+     46|   });
+     47| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  4 failed | 4 passed (8)
+   Start at  23:17:37
+   Duration  13.77s (transform 50ms, setup 0ms, import 4.68s, tests 9.10s, environment 0ms)
+
