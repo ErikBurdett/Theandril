@@ -1,0 +1,36 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/content.test.ts (2 tests | 1 failed) 5ms
+     × gives the playable cultural baseline its own sourced story, not a fictional release 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/content.test.ts > public dispatch contract > gives the playable cultural baseline its own sourced story, not a fictional release
+AssertionError: expected undefined to match object { topic: 'World & culture', …(1) }
+
+- Expected:
+{
+  "status": "Playable baseline",
+  "topic": "World & culture",
+}
+
++ Received:
+undefined
+
+ ❯ apps/web/src/updates/content.test.ts:15:19
+     13|   it('gives the playable cultural baseline its own sourced story, not …
+     14|     const story = dispatches.find(item => item.id === 'twenty-four-cul…
+     15|     expect(story).toMatchObject({ topic: 'World & culture', status: 'P…
+       |                   ^
+     16|     expect(story?.sections.map(section => section.paragraphs.join(' ')…
+     17|     expect(story?.evidence.some(link => link.path === 'docs/lore/FACTI…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  19:03:23
+   Duration  108ms (transform 31ms, setup 0ms, import 37ms, tests 5ms, environment 0ms)
+

@@ -4,6 +4,12 @@ A browser-native dark-fantasy 4X, under active development. This checkout now co
 
 For ongoing work, use the [audit-driven 1.0 development workflow](docs/1.0-DEVELOPMENT.md) and repository `/unlazy` skill. The original [premium-readiness audit](docs/hermes-analysis/README.md) is a historical baseline; newer fixes require separate regression and integration evidence. The current local campaign/save version is 17, so exported saves require a build that supports version 17; an older hosted build cannot import them until it is updated.
 
+## Developer journal
+
+Read [**Theandril Dispatches**](https://erikburdett.github.io/Theandril/updates/): illustrated gameplay updates, developer notes, source-linked verification, known limitations, scope decisions, and the road to 1.0. The game links to it from the opening screen and **Campaign & settings**, in a separate tab so a campaign is not discarded.
+
+For substantial work, use the [dispatch authoring and review guide](docs/updates/CONTRIBUTING.md) and [work-packet template](docs/updates/TEMPLATE.md). The journal is version-controlled with the application and deploys alongside it; it is not a separate CMS or a substitute for release gates.
+
 ## Run locally
 
 Play the [hosted development demo](https://erikburdett.github.io/Theandril/). Updates pushed to `master` automatically build, smoke-test and publish through GitHub Actions. This is the current single-player/AI-watch development game, not a 1.0 release or an online multiplayer server. See [deployment and recovery](docs/DEPLOYMENT.md).

@@ -1,0 +1,33 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/content.test.ts (4 tests | 1 failed) 5ms
+     × accepts only explicitly published, revision-pinned entries in newest-work-first order 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/content.test.ts > public dispatch contract > accepts only explicitly published, revision-pinned entries in newest-work-first order
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ apps/web/src/updates/content.test.ts:6:100
+      4| describe('public dispatch contract', () => {
+      5|   it('accepts only explicitly published, revision-pinned entries in ne…
+      6|     expect(dispatches.every(story => 'publication' in story && story.p…
+       |                                                                                                    ^
+      7|     expect(dispatches.map(story => story.id)).toEqual(['r17-campaign-s…
+      8|     expect(dispatches.every(story => 'sourceRevision' in story && /^[0…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  19:26:56
+   Duration  100ms (transform 24ms, setup 0ms, import 30ms, tests 5ms, environment 0ms)
+

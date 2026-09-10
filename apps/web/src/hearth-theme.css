@@ -19,6 +19,10 @@
   color-scheme: dark;
 }
 
+.application .developer-updates-link { color: var(--hearth-brass); }
+.application .developer-updates-link:hover { color: var(--hearth-text); }
+.application .developer-updates-link:focus-visible { outline: 2px solid var(--hearth-brass); outline-offset: 4px; }
+
 .application :is(h1, h2, h3, h4, .section-title, .campaign-brand) {
   font-family: Georgia, 'Times New Roman', serif;
   color: #efdbad;

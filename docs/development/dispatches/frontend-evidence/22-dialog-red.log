@@ -1,0 +1,44 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/gameplay/updates.spec.ts:33:1 › a keyboard reader can enlarge a real image and return to the same control
+  1) tests/gameplay/updates.spec.ts:33:1 › a keyboard reader can enlarge a real image and return to the same control 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Enlarge cultures image', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('button', { name: 'Enlarge cultures image', exact: true }) with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Enlarge cultures image', exact: true })
+
+
+      34 |   await page.goto('updates/?dispatch=twenty-four-cultures');
+      35 |   const trigger = page.getByRole('button', { name: 'Enlarge cultures image', exact: true });
+    > 36 |   await expect(trigger).toBeVisible();
+         |                         ^
+      37 |   await trigger.focus();
+      38 |   await page.keyboard.press('Enter');
+      39 |   const dialog = page.getByRole('dialog', { name: 'Image detail' });
+        at /home/telephoneheater/Work/Theandril-release/tests/gameplay/updates.spec.ts:36:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-a-keyboard-reader--b60dd--return-to-the-same-control/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/dispatches/frontend-evidence/browser/updates-a-keyboard-reader--b60dd--return-to-the-same-control/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-a-keyboard-reader--b60dd--return-to-the-same-control/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/dispatches/frontend-evidence/browser/updates-a-keyboard-reader--b60dd--return-to-the-same-control/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/gameplay/updates.spec.ts:33:1 › a keyboard reader can enlarge a real image and return to the same control 

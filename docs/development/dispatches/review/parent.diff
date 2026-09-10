@@ -1,0 +1,155 @@
+diff --git c/.github/workflows/pages.yml w/.github/workflows/pages.yml
+index 85949f5..eba320f 100644
+--- c/.github/workflows/pages.yml
++++ w/.github/workflows/pages.yml
+@@ -59,8 +59,8 @@ jobs:
+       - name: Validate game content
+         run: pnpm content:validate
+ 
+-      - name: Check asset URL and integrity boundaries
+-        run: pnpm exec vitest run apps/web/src/asset-url.test.ts apps/web/src/runtime-art.test.ts packages/render/src/art-validation.test.ts
++      - name: Check journal, asset URL and integrity boundaries
++        run: pnpm exec vitest run apps/web/src/updates tests/tooling apps/web/src/asset-url.test.ts apps/web/src/runtime-art.test.ts packages/render/src/art-validation.test.ts
+ 
+       - name: Build the actual Pages subpath
+         env:
+diff --git c/apps/web/src/hearth-theme.css w/apps/web/src/hearth-theme.css
+index 9700266..7e6baff 100644
+--- c/apps/web/src/hearth-theme.css
++++ w/apps/web/src/hearth-theme.css
+@@ -19,6 +19,18 @@
+   color-scheme: dark;
+ }
+ 
++.application .developer-updates-link {
++  display: inline-flex;
++  align-items: center;
++  gap: 0.65rem;
++  min-height: 44px;
++  padding: 0.35rem 0;
++  color: var(--hearth-brass);
++  text-underline-offset: 0.25em;
++}
++.application .developer-updates-link:hover { color: var(--hearth-text); }
++.application .developer-updates-link:focus-visible { outline: 2px solid var(--hearth-brass); outline-offset: 4px; }
++
+ .application :is(h1, h2, h3, h4, .section-title, .campaign-brand) {
+   font-family: Georgia, 'Times New Roman', serif;
+   color: #efdbad;
+diff --git c/apps/web/src/main.tsx w/apps/web/src/main.tsx
+index 72317c7..1202be4 100644
+--- c/apps/web/src/main.tsx
++++ w/apps/web/src/main.tsx
+@@ -681,10 +681,10 @@ function App() {
+       <span className="archive-note">{campaign.coverage === 'complete' ? 'Recording the full campaign' : 'Partial archive · earlier history unavailable'}</span>
+       {observation.victory && <button onClick={openChronicles}>Campaign chronicles</button>}
+     </nav>}
+-    <details ref={campaignOptions} className="campaign-options" data-testid="campaign-menu"><summary>Campaign & settings</summary><div className="options-content">{observation && <><button disabled={busy} onClick={() => send({ type: 'save' })}>Save campaign</button><button disabled={busy} onClick={() => send({ type: 'export' })}>Export campaign</button>{persistence}<button disabled={busy} onClick={() => { pauseWatch(); setSeed(''); setShowSetup(true); }}>New campaign</button></>}<label className="map-menu-setting"><input type="checkbox" checked={mapMenus} onChange={event => { setMapMenus(event.target.checked); closeMapActions(); }}/>Map click menus</label><p className="field-help">Click an army, town, or tile for local actions. Turn this off to use full orders from the command tray; Open map actions remains available.</p><label>Text scale<select value={textScale} onChange={event => setTextScale(event.target.value)}><option value="1">100%</option><option value="1.15">115%</option><option value="1.3">130%</option></select></label><label>End turn shortcut<input value={turnKey} maxLength={1} onChange={event => changeShortcut('turn', event.target.value)}/></label><label>Next army shortcut<input value={armyKey} maxLength={1} onChange={event => changeShortcut('army', event.target.value)}/></label><label>Next settlement shortcut<input value={settlementKey} maxLength={1} onChange={event => changeShortcut('settlement', event.target.value)}/></label>{bindingError && <p role="alert">{bindingError}</p>}</div></details>
++    <details ref={campaignOptions} className="campaign-options" data-testid="campaign-menu"><summary>Campaign & settings</summary><div className="options-content"><a className="developer-updates-link" href={publicAssetUrl('/updates/')} target="_blank" rel="noopener noreferrer" aria-label="Developer updates (opens in a new tab)">Developer updates <span aria-hidden="true">↗</span></a>{observation && <><button disabled={busy} onClick={() => send({ type: 'save' })}>Save campaign</button><button disabled={busy} onClick={() => send({ type: 'export' })}>Export campaign</button>{persistence}<button disabled={busy} onClick={() => { pauseWatch(); setSeed(''); setShowSetup(true); }}>New campaign</button></>}<label className="map-menu-setting"><input type="checkbox" checked={mapMenus} onChange={event => { setMapMenus(event.target.checked); closeMapActions(); }}/>Map click menus</label><p className="field-help">Click an army, town, or tile for local actions. Turn this off to use full orders from the command tray; Open map actions remains available.</p><label>Text scale<select value={textScale} onChange={event => setTextScale(event.target.value)}><option value="1">100%</option><option value="1.15">115%</option><option value="1.3">130%</option></select></label><label>End turn shortcut<input value={turnKey} maxLength={1} onChange={event => changeShortcut('turn', event.target.value)}/></label><label>Next army shortcut<input value={armyKey} maxLength={1} onChange={event => changeShortcut('army', event.target.value)}/></label><label>Next settlement shortcut<input value={settlementKey} maxLength={1} onChange={event => changeShortcut('settlement', event.target.value)}/></label>{bindingError && <p role="alert">{bindingError}</p>}</div></details>
+     </div>
+     {!observation || showSetup ? <main className="landing">
+-      <div className="opening"><span className="eyebrow">Keep the hearth. Keep the oath.</span><h2>From the ashes,<br/>a new dominion.</h2><p>The old roads end in wilderness. Lead your chosen people beyond their last milestones: chart the forests, raise a settlement, and give your people a future.</p><div className="opening-rule"/><p className="subtle">Found a hearth. Work its land.<br/>Send wayfinders into the unknown.</p></div>
++      <div className="opening"><span className="eyebrow">Keep the hearth. Keep the oath.</span><h2>From the ashes,<br/>a new dominion.</h2><p>The old roads end in wilderness. Lead your chosen people beyond their last milestones: chart the forests, raise a settlement, and give your people a future.</p><div className="opening-rule"/><p className="subtle">Found a hearth. Work its land.<br/>Send wayfinders into the unknown.</p><p><a className="developer-updates-link" href={publicAssetUrl('/updates/')} target="_blank" rel="noopener noreferrer" aria-label="Developer updates (opens in a new tab)">Developer updates <span aria-hidden="true">↗</span></a></p></div>
+       <section className="setup panel"><span className="eyebrow">A chronicle begins</span><h2>Establish your campaign</h2><div className="faction-card"><FactionArt contentId="ui.crest" definitionId={factionDefinitionId} label="Selected culture crest" decorative/><div><h3>{FACTIONS.find(faction => faction.id === factionDefinitionId)?.name}</h3><p>Your chosen player seat</p></div></div>
+         <form onSubmit={begin}>
+           <FactionSelection value={factionDefinitionId} onChange={setFactionDefinitionId}/>
+diff --git c/apps/web/vite.config.ts w/apps/web/vite.config.ts
+index 56ed835..a95711f 100644
+--- c/apps/web/vite.config.ts
++++ w/apps/web/vite.config.ts
+@@ -28,6 +28,11 @@ export default defineConfig({
+   // Pages supplies /Theandril/; an ordinary local build/dev server stays at /.
+   base: process.env.VITE_BASE_PATH || '/',
+   plugins: [omitDevelopmentArt()],
++  // The public journal must not boot the game renderer or simulation worker.
++  build: { rollupOptions: { input: {
++    game: resolve(import.meta.dirname, 'index.html'),
++    updates: resolve(import.meta.dirname, 'updates/index.html'),
++  } } },
+   // These dependencies are reached through the simulation worker only after a
+   // campaign starts. Discovering them then invalidates the browser dependency
+   // hash and reloads the page, losing an unsaved campaign on a cold dev server.
+diff --git c/eslint.config.js w/eslint.config.js
+index 01e2b7e..d24b645 100644
+--- c/eslint.config.js
++++ w/eslint.config.js
+@@ -2,7 +2,8 @@ import js from '@eslint/js';
+ import tseslint from 'typescript-eslint';
+ import globals from 'globals';
+ export default tseslint.config(
+-  { ignores: ['**/dist/**', '**/node_modules/**', 'playwright-report/**', 'test-results/**', '.agents/**', 'THEANDRIL_ASTRA_HANDOFF/**'] },
++  // Frozen reviewer evidence is retained byte-for-byte, not maintained runtime/tooling source.
++  { ignores: ['**/dist/**', '**/node_modules/**', 'playwright-report/**', 'test-results/**', '.agents/**', 'THEANDRIL_ASTRA_HANDOFF/**', 'docs/development/post-fix-review/persistence-evidence/**'] },
+   js.configs.recommended, ...tseslint.configs.recommended,
+   { languageOptions: { globals: { ...globals.browser, ...globals.node } }, rules: {
+     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }]
+diff --git c/tests/production/developer-navigation.spec.ts w/tests/production/developer-navigation.spec.ts
+new file mode 100644
+index 0000000..5656b97
+--- /dev/null
++++ w/tests/production/developer-navigation.spec.ts
+@@ -0,0 +1,15 @@
++import { expect, test } from '@playwright/test';
++
++test('game exposes the developer journal without discarding campaign setup', async ({ page, baseURL }) => {
++  const mount = new URL('./', baseURL);
++  await page.goto('./');
++  await expect(page.getByRole('heading', { name: 'Establish your campaign', exact: true })).toBeVisible();
++  await page.getByLabel('World seed', { exact: true }).fill('74');
++  const link = page.locator('.opening').getByRole('link', { name: 'Developer updates' });
++  await expect(link).toHaveAttribute('href', `${mount.pathname}updates/`);
++  await expect(link).toHaveAttribute('target', '_blank');
++  await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
++  await page.getByTestId('campaign-menu').locator('summary').click();
++  await expect(page.getByTestId('campaign-menu').getByRole('link', { name: 'Developer updates' })).toHaveAttribute('href', `${mount.pathname}updates/`);
++  await expect(page.getByLabel('World seed', { exact: true })).toHaveValue('74');
++});
+diff --git c/tests/tooling/lint-boundaries.test.ts w/tests/tooling/lint-boundaries.test.ts
+new file mode 100644
+index 0000000..e7f950d
+--- /dev/null
++++ w/tests/tooling/lint-boundaries.test.ts
+@@ -0,0 +1,18 @@
++import { ESLint } from 'eslint';
++import { describe, expect, it } from 'vitest';
++
++describe('lint boundaries for frozen review evidence', () => {
++  const eslint = new ESLint();
++
++  it('does not reinterpret the byte-preserved reviewer snapshot as live source', async () => {
++    expect(await eslint.isPathIgnored('docs/development/post-fix-review/persistence-evidence/probes.mts')).toBe(true);
++  });
++
++  it('still enforces explicit typing in production source and maintained tests', async () => {
++    for (const filePath of ['packages/persistence/src/campaign-storage.ts', 'apps/web/src/main.tsx', 'tests/tooling/lint-boundaries.test.ts']) {
++      expect(await eslint.isPathIgnored(filePath)).toBe(false);
++      const results = await eslint.lintText('export const invalid: any = 1;\n', { filePath });
++      expect(results.flatMap(result => result.messages).some(message => message.ruleId === '@typescript-eslint/no-explicit-any')).toBe(true);
++    }
++  });
++});
+diff --git c/tests/tooling/updates-build.test.ts w/tests/tooling/updates-build.test.ts
+new file mode 100644
+index 0000000..da60d96
+--- /dev/null
++++ w/tests/tooling/updates-build.test.ts
+@@ -0,0 +1,19 @@
++import { readFileSync } from 'node:fs';
++import { resolve } from 'node:path';
++import { expect, test } from 'vitest';
++import config from '../../apps/web/vite.config';
++
++test('builds the game and journal as independent HTML entrypoints', () => {
++  const input = (config as { build?: { rollupOptions?: { input?: Record<string, string> } } }).build?.rollupOptions?.input;
++  expect(input).toEqual({
++    game: resolve('apps/web/index.html'),
++    updates: resolve('apps/web/updates/index.html'),
++  });
++});
++
++test('Pages checks the journal contract before uploading the public artifact', () => {
++  const workflow = readFileSync('.github/workflows/pages.yml', 'utf8');
++  const testPaths = workflow.match(/run: pnpm exec vitest run ([^\n]+)/)?.[1]?.split(/\s+/);
++  expect(testPaths).toContain('apps/web/src/updates');
++  expect(workflow.indexOf('apps/web/src/updates')).toBeLessThan(workflow.indexOf('actions/upload-pages-artifact@'));
++});

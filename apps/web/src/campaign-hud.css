@@ -1,4 +1,5 @@
 /* Spatial layout only. Hearth material/color rules live in hearth-theme.css. */
+.application .developer-updates-link { display: inline-flex; align-items: center; gap: 0.65rem; min-height: 44px; padding: 0.35rem 0; text-underline-offset: 0.25em; }
 .application.campaign-session { height: 100dvh; min-height: 600px; display: flex; flex-direction: column; }
 .campaign-topbar { position: relative; z-index: 20; flex: none; }
 .application .masthead { min-height: 70px; padding: 10px 22px; gap: 24px; }

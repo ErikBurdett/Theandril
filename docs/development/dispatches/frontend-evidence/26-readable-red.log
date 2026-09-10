@@ -1,0 +1,105 @@
+
+Running 4 tests using 1 worker
+
+[1/4] tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text
+  1) tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text ─────────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 14
+    Received:    10.88
+
+      16 |     await page.screenshot({ path: testInfo.outputPath('explore-full.png'), fullPage: true });
+      17 |     await expect(page.locator('figure > figcaption').first()).toHaveCSS('font-size', /./);
+    > 18 |     expect(await page.locator('figure > figcaption').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(14);
+         |                                                                                                                                   ^
+      19 |     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+      20 |     await page.getByRole('searchbox', { name: 'Search dispatches' }).fill('no-such-dispatch');
+      21 |     await page.getByRole('heading', { name: 'No dispatches found' }).scrollIntoViewIfNeeded();
+        at /home/telephoneheater/Work/Theandril-release/tests/gameplay/updates.spec.ts:18:131
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-1440px-and-100-text/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-1440px-and-100-text/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-1440px-and-100-text/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-1440px-and-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[2/4] tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text
+  2) tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text ─────────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 14
+    Received:    10.88
+
+      16 |     await page.screenshot({ path: testInfo.outputPath('explore-full.png'), fullPage: true });
+      17 |     await expect(page.locator('figure > figcaption').first()).toHaveCSS('font-size', /./);
+    > 18 |     expect(await page.locator('figure > figcaption').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(14);
+         |                                                                                                                                   ^
+      19 |     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+      20 |     await page.getByRole('searchbox', { name: 'Search dispatches' }).fill('no-such-dispatch');
+      21 |     await page.getByRole('heading', { name: 'No dispatches found' }).scrollIntoViewIfNeeded();
+        at /home/telephoneheater/Work/Theandril-release/tests/gameplay/updates.spec.ts:18:131
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-1366px-and-100-text/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-1366px-and-100-text/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-1366px-and-100-text/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-1366px-and-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[3/4] tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text
+  3) tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text ──────────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 14
+    Received:    10.88
+
+      16 |     await page.screenshot({ path: testInfo.outputPath('explore-full.png'), fullPage: true });
+      17 |     await expect(page.locator('figure > figcaption').first()).toHaveCSS('font-size', /./);
+    > 18 |     expect(await page.locator('figure > figcaption').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(14);
+         |                                                                                                                                   ^
+      19 |     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+      20 |     await page.getByRole('searchbox', { name: 'Search dispatches' }).fill('no-such-dispatch');
+      21 |     await page.getByRole('heading', { name: 'No dispatches found' }).scrollIntoViewIfNeeded();
+        at /home/telephoneheater/Work/Theandril-release/tests/gameplay/updates.spec.ts:18:131
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-390px-and-100-text/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-390px-and-100-text/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-390px-and-100-text/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/dispatches/frontend-evidence/browser/updates-readable-journal-at-390px-and-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[4/4] tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text
+  3 failed
+    tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text ──────────────────
+    tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text ──────────────────
+    tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text ───────────────────
+  1 passed (5.5s)

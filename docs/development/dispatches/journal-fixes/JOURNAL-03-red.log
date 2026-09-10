@@ -1,0 +1,35 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/journal.test.ts (3 tests | 1 failed) 17ms
+     × finds Keeping the whole record by text that appears only in its takeaways 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/journal.test.ts > journal discovery > finds Keeping the whole record by text that appears only in its takeaways
+AssertionError: expected [] to deeply equal [ 'Keeping the whole record' ]
+
+- Expected
++ Received
+
+- [
+-   "Keeping the whole record",
+- ]
++ []
+
+ ❯ apps/web/src/updates/journal.test.ts:25:96
+     23|   });
+     24|   it('finds Keeping the whole record by text that appears only in its …
+     25|     expect(filterDispatches(dispatches, 'complete-or-error', 'All').ma…
+       |                                                                                                ^
+     26|   });
+     27|   it('combines normalized full-text search with a topic without changi…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  20:23:07
+   Duration  174ms (transform 69ms, setup 0ms, import 90ms, tests 17ms, environment 0ms)
+

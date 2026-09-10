@@ -1,0 +1,44 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/gameplay/updates.spec.ts:4:1 › public journal opens a permanent, refresh-safe campaign dispatch
+  1) tests/gameplay/updates.spec.ts:4:1 › public journal opens a permanent, refresh-safe campaign dispatch 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Developer journal', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Developer journal', exact: true }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Developer journal', exact: true })
+
+
+      4 | test('public journal opens a permanent, refresh-safe campaign dispatch', async ({ page }) => {
+      5 |   await page.goto('updates/');
+    > 6 |   await expect(page.getByRole('heading', { name: 'Developer journal', exact: true })).toBeVisible();
+        |                                                                                       ^
+      7 |   await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
+      8 |   await expect(page).toHaveURL(/updates\/\?dispatch=r17-campaign-safety$/);
+      9 |   await expect(page.getByRole('heading', { level: 1, name: 'A campaign worth keeping' })).toBeVisible();
+        at /home/telephoneheater/Work/Theandril-release/tests/gameplay/updates.spec.ts:6:87
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-public-journal-ope-43af0-resh-safe-campaign-dispatch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/dispatches/frontend-evidence/browser/updates-public-journal-ope-43af0-resh-safe-campaign-dispatch/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-public-journal-ope-43af0-resh-safe-campaign-dispatch/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/dispatches/frontend-evidence/browser/updates-public-journal-ope-43af0-resh-safe-campaign-dispatch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/gameplay/updates.spec.ts:4:1 › public journal opens a permanent, refresh-safe campaign dispatch 

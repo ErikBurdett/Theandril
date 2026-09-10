@@ -1,0 +1,48 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/navigation.test.ts (2 tests | 1 failed) 6ms
+     × declares a reviewed base-safe icon instead of requesting a missing root favicon 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/navigation.test.ts > refresh-safe public links > declares a reviewed base-safe icon instead of requesting a missing root favicon
+AssertionError: expected '<!doctype html>\n<html lang="en">\n  …' to contain 'href="%BASE_URL%ui/hearth-card/orname…'
+
+- Expected
++ Received
+
+- href="%BASE_URL%ui/hearth-card/ornament.corner-idle.webp"
++ <!doctype html>
++ <html lang="en">
++   <head>
++     <meta charset="UTF-8" />
++     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++     <meta name="theme-color" content="#281d16" />
++     <meta name="description" content="Theandril Dispatches: a public developer journal of campaign changes, worldbuilding, evidence and the work still open on the road to 1.0." />
++     <title>Theandril Dispatches · Developer journal</title>
++   </head>
++   <body>
++     <div id="root"></div>
++     <noscript>This journal needs JavaScript to browse its structured dispatches. Read the source and current development status at <a href="https://github.com/ErikBurdett/Theandril/blob/master/docs/IMPLEMENTATION_STATUS.md">Theandril on GitHub</a>.</noscript>
++     <script type="module" src="/src/updates/main.tsx"></script>
++   </body>
++ </html>
++
+
+ ❯ apps/web/src/updates/navigation.test.ts:7:65
+      5| describe('refresh-safe public links', () => {
+      6|   it('declares a reviewed base-safe icon instead of requesting a missi…
+      7|     expect(readFileSync('apps/web/updates/index.html', 'utf8')).toCont…
+       |                                                                 ^
+      8|   });
+      9|   it('round-trips a permanent dispatch on both root and GitHub Pages b…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  19:50:20
+   Duration  115ms (transform 31ms, setup 0ms, import 38ms, tests 6ms, environment 0ms)
+

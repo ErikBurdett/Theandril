@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {"id":"JOURNAL-01","severity":"medium","location":"apps/web/src/updates/Journal.tsx:84","detail":"Featured checkpoint hardcodes 8b3b8c1 instead of following featured.sourceRevision for later content."},
+    {"id":"JOURNAL-02","severity":"medium","location":"apps/web/src/updates/validation.test.ts:32-35","detail":"Evidence Map keyed only by path discards distinct revision/path references and can omit missing Git objects from validation."},
+    {"id":"JOURNAL-03","severity":"medium","location":"apps/web/src/updates/journal.ts:26-27","detail":"Full-story search omits takeaways; complete-or-error fails to find Keeping the whole record."}
+  ],
+  "suggestions": [{"detail":"Preventive hardening: hash source blobs at sourceRevision during image preparation. Current four derivatives independently matched pinned crops exactly."}],
+  "summary":"Independent review failed three bounded correctness/reusability defects. Diff parsed/reverse-checked; 26 source and 24 PNG hashes matched. Four source crops and three shared materials verified. Twelve journal tests, typecheck and scoped lint passed; no security problem, fabricated imagery or inflated release approval found. Browser evidence reviewed, not rerun.",
+  "delegation":"deleg_798782f7",
+  "transcript":"/home/telephoneheater/.hermes/cache/delegation/live/deleg_798782f7/task-0.log",
+  "status":"Original failed verdict retained; fixes and independent delta review required."
+}

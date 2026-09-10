@@ -1,0 +1,40 @@
+RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ✓ apps/web/src/hearth-theme.test.ts (6 tests) 10ms
+ ❯ tests/tooling/pages-journal.test.ts (2 tests | 1 failed) 1279ms
+   ✓ verification workflows retain immutable evidence revisions beyond a shallow checkout 1ms
+   × the actual Pages suite collects journal journeys alongside game and navigation smoke 1277ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/tooling/pages-journal.test.ts > the actual Pages suite collects journal journeys alongside game and navigation smoke
+AssertionError: expected 'Listing tests:\n  battlefield.spec.ts…' to contain 'updates.spec.ts'
+
+- Expected
++ Received
+
+- updates.spec.ts
++ Listing tests:
++   battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks
++   deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base
++   developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup
++   map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks
++   watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks
++ Total: 5 tests in 5 files
++
+
+ ❯ tests/tooling/pages-journal.test.ts:15:19
+     13| test('the actual Pages suite collects journal journeys alongside game …
+     14|   const listing = execFileSync('pnpm', ['exec', 'playwright', 'test', …
+     15|   expect(listing).toContain('updates.spec.ts');
+       |                   ^
+     16|   expect(listing).toContain('developer-navigation.spec.ts');
+     17|   expect(listing).toContain('deployment-assets.spec.ts');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 7 passed (8)
+   Start at  20:05:54
+   Duration  1.38s (transform 40ms, setup 0ms, import 55ms, tests 1.29s, environment 0ms)

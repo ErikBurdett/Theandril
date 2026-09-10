@@ -25,6 +25,10 @@ These checks use ordinary player UI, isolated browser storage and real downloade
 
 An unset `VITE_BASE_PATH` retains `/` for localhost/root hosting. Turbo includes the variable in the build environment and cache key so a cached root build cannot be published accidentally. Vite prefixes generated scripts, styles, worker chunks and CSS public materials. Runtime catalog/atlas requests resolve at the fetch boundary: approved catalog URLs and SHA-256 identities remain unchanged, including the lazy battlefield atlas.
 
+## Developer journal
+
+The game links to the [developer journal](https://erikburdett.github.io/Theandril/updates/) at `updates/`. It is a separate HTML entrypoint in the same Vite build and Pages artifact: readers do not need to start a campaign or load the simulation to review updates. Internal links and image URLs use the configured Pages base; both the journal and the game must pass the production smoke before the artifact is uploaded. See [the dispatch authoring/review contract](updates/CONTRIBUTING.md).
+
 ## Update, inspect or recover
 
 Commit and push ordinary changes to `master`; no separate publishing branch or manual asset upload is needed. Monitor the Pages workflow in the repository's Actions tab. Refresh the game after deployment to use the new bundle. An already-open game keeps its current JavaScript until reload; export important campaigns before updating. Save compatibility remains governed by the versioned loaders, not deployment.

@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "scope": "Read-only design-reference research; not gameplay or release certification",
+  "referenceCommit": "57d42fe",
+  "targetCommit": "8b3b8c1",
+  "localMarkdownLinksChecked": 20,
+  "missingLinks": [],
+  "screenshots": [
+    {
+      "path": "reference-evidence/hearth-binder-desktop.png",
+      "dimensions": [
+        1366,
+        768
+      ],
+      "bytes": 432816,
+      "sha256": "3b5adde03511e801d643024d5572f2453cffe8c77c274b9efad764eed00ff911"
+    },
+    {
+      "path": "reference-evidence/hearth-reading-spread-desktop.png",
+      "dimensions": [
+        1366,
+        768
+      ],
+      "bytes": 611573,
+      "sha256": "215d1d7e3475a24c210b7e7a8557372b836f30bc4a12485ec2660d3f5c73bede"
+    },
+    {
+      "path": "reference-evidence/hearth-set-histories-desktop.png",
+      "dimensions": [
+        1366,
+        768
+      ],
+      "bytes": 478824,
+      "sha256": "6dc48a4921e42ecc9c63966717bdcbf6aa47caff31bd446a4363683519ba053a"
+    },
+    {
+      "path": "reference-evidence/hearth-tavern-desktop.png",
+      "dimensions": [
+        1366,
+        768
+      ],
+      "bytes": 320599,
+      "sha256": "4d69a0e042de1349764c044830f5cb652ac204b3db55d657d609b0999d7c5d29"
+    },
+    {
+      "path": "reference-evidence/nms-release-log-rows.png",
+      "dimensions": [
+        1366,
+        900
+      ],
+      "bytes": 381074,
+      "sha256": "d960229284ed5084d9508a572c1df5606de3ba375e9e12ff95c5447300ead1d7"
+    },
+    {
+      "path": "reference-evidence/nms-release-log-top.png",
+      "dimensions": [
+        1366,
+        900
+      ],
+      "bytes": 1027238,
+      "sha256": "9b98e5028c2974240e35f89f8dd9e10e63a885a7fadf1de6c080bf1a2bb8d977"
+    },
+    {
+      "path": "reference-evidence/nms-worlds-ii-feature.png",
+      "dimensions": [
+        1366,
+        900
+      ],
+      "bytes": 1202702,
+      "sha256": "6fea1ced5df0c06843effa11e2625d2664ecd35482e2381e253e85bde8dbfc6a"
+    },
+    {
+      "path": "reference-evidence/nms-worlds-ii-hero.png",
+      "dimensions": [
+        1366,
+        900
+      ],
+      "bytes": 945186,
+      "sha256": "118f6ff45e5848d071ff9cc2564dad728c43c54088f4f26fc678301d4896e75c"
+    }
+  ],
+  "screenshotCount": 8,
+  "materials": [
+    {
+      "path": "apps/web/public/ui/hearth-card/ornament.corner-idle.webp",
+      "bytes": 2072,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "4bcccf32b83b6d5ac93f13b9430bfc1d2a9bbcfb7614e22a5d47765a1a103ac3",
+      "matchesRetainedHash": true,
+      "byteIdenticalToReference": true
+    },
+    {
+      "path": "apps/web/public/ui/hearth-card/parchment.webp",
+      "bytes": 30180,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "f43d231a4815ed557517898a09ef2c6489b9834ea0c3a7789bf391fa98923baa",
+      "matchesRetainedHash": true,
+      "byteIdenticalToReference": true
+    },
+    {
+      "path": "apps/web/public/ui/hearth-card/wood.webp",
+      "bytes": 36532,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "e23cae5a422a038a32b6990f4443db84c81e55c883451b5d30e56e7b039342bc",
+      "matchesRetainedHash": true,
+      "byteIdenticalToReference": true
+    }
+  ],
+  "materialBytes": 68784,
+  "issues": [
+    "Root-only serving failed project-prefixed assets; prefix-aware read-only serving succeeded.",
+    "Some scrolled browser screenshots timed out; successful retained frames are inspected evidence.",
+    "One attempted lower-page NMS capture returned about:blank; it was removed and no comparison observation is claimed.",
+    "Text-extractor archive top entry lagged the live browser."
+  ],
+  "boundaries": [
+    "No source application edits, generation, installs, commits or publishing.",
+    "No AI/contact or previously consent-blocked probes.",
+    "Public NMS captures are research-only, not Theandril runtime art.",
+    "Owned gameplay imagery was inspected from retained evidence, not rerun."
+  ]
+}

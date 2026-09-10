@@ -1,0 +1,31 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 1 test using 1 worker
+
+  ✘  1 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (0ms)
+
+
+  1) tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup 
+
+    Error: browserType.launch: Executable doesn't exist at /home/telephoneheater/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     pnpm exec playwright install                           ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/developer-navigation-game--296c5-t-discarding-campaign-setup/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/developer-navigation-game--296c5-t-discarding-campaign-setup/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/developer-navigation-game--296c5-t-discarding-campaign-setup/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup 

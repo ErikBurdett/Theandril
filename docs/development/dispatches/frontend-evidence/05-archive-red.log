@@ -1,0 +1,33 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/content.test.ts (3 tests | 1 failed) 4ms
+     × discloses the cost and historical boundary of archive evidence 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/content.test.ts > public dispatch contract > discloses the cost and historical boundary of archive evidence
+AssertionError: expected undefined to be 'Bounded verification' // Object.is equality
+
+- Expected:
+"Bounded verification"
+
++ Received:
+undefined
+
+ ❯ apps/web/src/updates/content.test.ts:21:27
+     19|   it('discloses the cost and historical boundary of archive evidence',…
+     20|     const story = dispatches.find(item => item.id === 'keeping-the-rec…
+     21|     expect(story?.status).toBe('Bounded verification');
+       |                           ^
+     22|     const text = story?.sections.map(section => section.paragraphs.joi…
+     23|     expect(text).toContain('114,244');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  19:04:55
+   Duration  98ms (transform 23ms, setup 0ms, import 29ms, tests 4ms, environment 0ms)
+

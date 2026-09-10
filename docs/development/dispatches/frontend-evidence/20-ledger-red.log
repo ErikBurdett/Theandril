@@ -1,0 +1,44 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/gameplay/updates.spec.ts:18:1 › scope ledger links real gates and a contributor can reach authoring guidance
+  1) tests/gameplay/updates.spec.ts:18:1 › scope ledger links real gates and a contributor can reach authoring guidance 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Road to 1.0', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Road to 1.0', exact: true }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Road to 1.0', exact: true })
+
+
+      18 | test('scope ledger links real gates and a contributor can reach authoring guidance', async ({ page }) => {
+      19 |   await page.goto('updates/');
+    > 20 |   await expect(page.getByRole('heading', { name: 'Road to 1.0', exact: true })).toBeVisible();
+         |                                                                                 ^
+      21 |   const ledger = page.getByRole('region', { name: 'Road to 1.0' });
+      22 |   await expect(ledger.getByText('Accepted scope', { exact: true })).toBeVisible();
+      23 |   await expect(ledger.getByText('Current / partial', { exact: true }).first()).toBeVisible();
+        at /home/telephoneheater/Work/Theandril-release/tests/gameplay/updates.spec.ts:20:81
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-scope-ledger-links-69d3f-an-reach-authoring-guidance/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/dispatches/frontend-evidence/browser/updates-scope-ledger-links-69d3f-an-reach-authoring-guidance/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-scope-ledger-links-69d3f-an-reach-authoring-guidance/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/dispatches/frontend-evidence/browser/updates-scope-ledger-links-69d3f-an-reach-authoring-guidance/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/gameplay/updates.spec.ts:18:1 › scope ledger links real gates and a contributor can reach authoring guidance 

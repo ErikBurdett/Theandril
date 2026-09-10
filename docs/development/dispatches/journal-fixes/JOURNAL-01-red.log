@@ -1,0 +1,30 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/journal.test.ts (2 tests | 1 failed) 16ms
+     × renders the featured story checkpoint from its own revision as stories change 15ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/journal.test.ts > journal discovery > renders the featured story checkpoint from its own revision as stories change
+AssertionError: expected 'Source checkpoint 8b3b8c1 · Not a 1.0…' to be 'Source checkpoint 1234567 · Not a 1.0…' // Object.is equality
+
+Expected: "Source checkpoint 1234567 · Not a 1.0 release."
+Received: "Source checkpoint 8b3b8c1 · Not a 1.0 release."
+
+ ❯ apps/web/src/updates/journal.test.ts:17:26
+     15|         const markup = renderToStaticMarkup(createElement(Journal));
+     16|         const footnote = markup.match(/<p class="feature-footnote">(.*…
+     17|         expect(footnote).toBe(`Source checkpoint ${sourceRevision.slic…
+       |                          ^
+     18|       }
+     19|     } finally {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  20:20:20
+   Duration  162ms (transform 55ms, setup 0ms, import 77ms, tests 16ms, environment 0ms)
+

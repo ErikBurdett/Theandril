@@ -1,0 +1,55 @@
+vite v7.3.6 building client environment for production...
+transforming...
+../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js (70:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js (330:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js (330:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js (70:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 949 modules transformed.
+
+(!) outDir /home/telephoneheater/Work/Theandril-release/docs/development/dispatches/frontend-build/dist/Theandril is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+../../docs/development/dispatches/frontend-build/dist/Theandril/index.html                               0.68 kB │ gzip:   0.39 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/updates/index.html                       1.03 kB │ gzip:   0.56 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/simulation.worker-DD2PB6gP.js   679.18 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/updates-DCvyNMnn.css             15.06 kB │ gzip:   4.09 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/game-DyzBXmNj.css               104.14 kB │ gzip:  20.55 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/Filter-ClIrfCdy.js                0.90 kB │ gzip:   0.47 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/BufferResource-B8qS8mhL.js       11.12 kB │ gzip:   2.85 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/webworkerAll-GEelgAuP.js         15.44 kB │ gzip:   4.88 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/CanvasRenderer-CJ8zgsM2.js       17.82 kB │ gzip:   5.98 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/updates-DOhVlcvO.js              39.47 kB │ gzip:  13.49 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/browserAll-B8fh9c96.js           43.11 kB │ gzip:  11.30 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/WebGPURenderer-DX8a2Yo2.js       46.02 kB │ gzip:  13.23 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/RenderTargetSystem-Dy63rP74.js   52.14 kB │ gzip:  14.38 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/WebGLRenderer-B35JADsv.js        72.12 kB │ gzip:  19.64 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/client-RzuSRENx.js              193.09 kB │ gzip:  60.57 kB
+../../docs/development/dispatches/frontend-build/dist/Theandril/assets/game-D13lSlJq.js                803.13 kB │ gzip: 243.32 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.82s

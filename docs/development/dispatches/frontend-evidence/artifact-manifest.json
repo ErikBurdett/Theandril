@@ -1,0 +1,421 @@
+{
+  "scope": "Only owned journal sources and retained frontend QA; not a full repository/artifact freshness sweep.",
+  "sourceFiles": [
+    {
+      "path": "apps/web/public/updates/archipelago.webp",
+      "bytes": 12258,
+      "sha256": "ed0740f183b38ef558eb1de46d3d76a4d37c4fcabd3aee472cd9cc753fdb4fe0"
+    },
+    {
+      "path": "apps/web/public/updates/battle.webp",
+      "bytes": 2814,
+      "sha256": "64948988fd68a3cf6b2434e54175a0258cd712688fdde5c5531c301b24225bb0"
+    },
+    {
+      "path": "apps/web/public/updates/campaign.webp",
+      "bytes": 56498,
+      "sha256": "a394a69537468026961dba0d29a1326daccbf7adccc541ba103df258a1f69393"
+    },
+    {
+      "path": "apps/web/public/updates/cultures.webp",
+      "bytes": 76334,
+      "sha256": "a43e6210168acb2e3a5abf8b8ba14fecd1a9542f2eeabbb31eab92b61edbdd1f"
+    },
+    {
+      "path": "apps/web/public/updates/provenance.json",
+      "bytes": 6478,
+      "sha256": "0e46a96a3cc32caef97afb7cc0a1b77337e66a771615359330ac717b36d88b0f"
+    },
+    {
+      "path": "apps/web/src/updates/Journal.tsx",
+      "bytes": 14195,
+      "sha256": "6617d0779084f65daa481947f13d9f5f724fe1389b6fecf66fa4948beb661f80"
+    },
+    {
+      "path": "apps/web/src/updates/content.test.ts",
+      "bytes": 2049,
+      "sha256": "c7c63c3fe43168b98e1625a1b56da3fe39fc8741830576bba8acfe940f1069d2"
+    },
+    {
+      "path": "apps/web/src/updates/content.ts",
+      "bytes": 17959,
+      "sha256": "922c9a992cc406422c570feb8c30be2fc623529a246e5bfdffb8297faa5f3681"
+    },
+    {
+      "path": "apps/web/src/updates/env.d.ts",
+      "bytes": 38,
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "apps/web/src/updates/journal.css",
+      "bytes": 17298,
+      "sha256": "13c4aec27b14f5d86f9e641c6dc396554cdf4dbff3f02436c72ec7d0bba656ee"
+    },
+    {
+      "path": "apps/web/src/updates/journal.test.ts",
+      "bytes": 779,
+      "sha256": "a551eabd0d5620040d965b089007e37d82859a67c9545824adc86aeb3bccdf98"
+    },
+    {
+      "path": "apps/web/src/updates/journal.ts",
+      "bytes": 1342,
+      "sha256": "aade08e50902d4d1475efa7dd32108cf2fe60aa8c05c573c5ddae825f653723d"
+    },
+    {
+      "path": "apps/web/src/updates/library.ts",
+      "bytes": 4484,
+      "sha256": "d3968c3254e179b70ec0d0938b6f284eacac21def222e03811aa0b753f77d2f6"
+    },
+    {
+      "path": "apps/web/src/updates/main.tsx",
+      "bytes": 236,
+      "sha256": "4b7c9053624c4a9e9a6798c12593368c5456286fb80f9fbe0af567d17b53281e"
+    },
+    {
+      "path": "apps/web/src/updates/media.json",
+      "bytes": 6478,
+      "sha256": "0e46a96a3cc32caef97afb7cc0a1b77337e66a771615359330ac717b36d88b0f"
+    },
+    {
+      "path": "apps/web/src/updates/media.test.ts",
+      "bytes": 1732,
+      "sha256": "d311e19d7fbb412ed5e42d1cefe8d0dcc0b4db0ad54f822823daacc2efbb9c56"
+    },
+    {
+      "path": "apps/web/src/updates/navigation.test.ts",
+      "bytes": 1140,
+      "sha256": "a38d35e2a26f859b8a2ccffcfa15397897ffc4fbb9350fa53f09b93c745ad3f6"
+    },
+    {
+      "path": "apps/web/src/updates/types.ts",
+      "bytes": 970,
+      "sha256": "f622f54a40ba645281e69e7eed7daa69e88108aee2b50d2d69ff50db2c0e7d6d"
+    },
+    {
+      "path": "apps/web/src/updates/validation.test.ts",
+      "bytes": 3392,
+      "sha256": "1d0f761c1f1226a4b745dc39d1340096b77e9f1f1eca323c32b2107558c44b0f"
+    },
+    {
+      "path": "apps/web/updates/index.html",
+      "bytes": 926,
+      "sha256": "2d4e24d15136ec576a912ad436ddf8c9415096679dac0cdc793f8c7cadae3e78"
+    },
+    {
+      "path": "docs/development/dispatches/frontend-collect.py",
+      "bytes": 3747,
+      "sha256": "37740011f301d0a102160810c902176592b635046e2ce07f80dfb68113231ea1"
+    },
+    {
+      "path": "docs/development/dispatches/frontend-playwright.config.ts",
+      "bytes": 844,
+      "sha256": "4d38b4b448e37016032059c14397d516d2007695fc3734c351d7979266312b77"
+    },
+    {
+      "path": "docs/development/dispatches/frontend-production.config.ts",
+      "bytes": 645,
+      "sha256": "23da7e7802ea60e90cc4d73f40e6b0720f8bfce14ffe41a391dbb563fc710f30"
+    },
+    {
+      "path": "docs/updates/STRUCTURE.md",
+      "bytes": 5789,
+      "sha256": "31f73af3957dca85c0142d32358c23ecba867d801d99797f53af82c72f3ccad9"
+    },
+    {
+      "path": "docs/updates/prepare-images.py",
+      "bytes": 4455,
+      "sha256": "9e90061d0895dfa4a0d9469880d200c4b707dc9fa9eb8ecaa173dd05d6e7cdca"
+    },
+    {
+      "path": "tests/gameplay/updates.spec.ts",
+      "bytes": 10863,
+      "sha256": "be429737bf94cebe350b3cfc9227d238991760815dc1aa7cd73467c50b262d24"
+    }
+  ],
+  "sourceFileCount": 26,
+  "productionScreenshots": [
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1366px-and-100-text/battle-illustration.png",
+      "bytes": 39848,
+      "sha256": "cc9552fd6b44b45f1a9f860c1f91129d13c531c4c654748c40081ec5363de44a",
+      "width": 541,
+      "height": 453
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1366px-and-100-text/explore-full.png",
+      "bytes": 2128542,
+      "sha256": "c90b162f656d57879c1f785b68ae83b7e97df2a90993c4aea16bb5c9927db4f0",
+      "width": 1366,
+      "height": 4928
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1366px-and-100-text/explore-top.png",
+      "bytes": 472709,
+      "sha256": "962e1723300dd2e345497920dffa0614c29daf161bafe2b1f75116d5ef438c4f",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1366px-and-100-text/no-results.png",
+      "bytes": 271559,
+      "sha256": "0abd5c0c072115026142aa8ddd31901acd098d43f10294e6b987f0af401588af",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1366px-and-100-text/reader-chapter.png",
+      "bytes": 364816,
+      "sha256": "14e480354d87e05cb043215e3787f4361bcc86f9dcb8759bc62c12f585231bf5",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1366px-and-100-text/reader-top.png",
+      "bytes": 276573,
+      "sha256": "5c28afa49a013840e3957ac79ce764a10137d1c2d39e8f4330480d7d05ff1395",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1440px-and-100-text/battle-illustration.png",
+      "bytes": 40207,
+      "sha256": "3a7b29ff36c505b7a8506b957a84975181f3cc75f88feb0576b5d91c3a92f238",
+      "width": 541,
+      "height": 453
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1440px-and-100-text/explore-full.png",
+      "bytes": 2182179,
+      "sha256": "8bb53e1b92db0aad498e8a0c0270af88a3a1a00299cedc366c3898d5fd300ff4",
+      "width": 1440,
+      "height": 4932
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1440px-and-100-text/explore-top.png",
+      "bytes": 576370,
+      "sha256": "d2d6ac9addf94060a4ee00af54d4f4088a66396147e127bfee1318b7d933215a",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1440px-and-100-text/no-results.png",
+      "bytes": 386096,
+      "sha256": "fc2765432c9bae8de68b64525110c313673df076d7d7fa6aa9dc1673a5685dcd",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1440px-and-100-text/reader-chapter.png",
+      "bytes": 499424,
+      "sha256": "9a1d16677fbc99bc87b571d8c1df14016400b76451c5010d2c20ddfb753eb185",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1440px-and-100-text/reader-top.png",
+      "bytes": 403425,
+      "sha256": "b800d332f03970e0147ebd770621c7f9905960f6db9914c6cf424035f39d51a0",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-100-text/battle-illustration.png",
+      "bytes": 34112,
+      "sha256": "dae5ec375b9ebad03abcd4b91f8c00495d36f8910181f790506576e801b3587f",
+      "width": 310,
+      "height": 336
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-100-text/explore-full.png",
+      "bytes": 1733592,
+      "sha256": "ce961deee7d771fa4e4093d8fc7ff9a861d133b9f9f7f517dd573e1286ff2084",
+      "width": 390,
+      "height": 8982
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-100-text/explore-top.png",
+      "bytes": 165252,
+      "sha256": "8e4e5bbb9cd29215b7f9c7072246bb0cc6a6ec5bf76c96d07abff8c121252bf7",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-100-text/no-results.png",
+      "bytes": 144753,
+      "sha256": "f2bbd1ae6bea30d12f704f5909ff6fdafa308a145e23f8896e3627a8d5df3e02",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-100-text/reader-chapter.png",
+      "bytes": 188544,
+      "sha256": "4195a15d1525b9ab540688930a217f97dd12d4ebc7bc388421aa246d9e27c5e0",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-100-text/reader-top.png",
+      "bytes": 161902,
+      "sha256": "74f257d59bfa239db8e9049259603bce347476d6171d04522481e9ca840acd49",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-130-text/battle-illustration.png",
+      "bytes": 48015,
+      "sha256": "bc4a9bf68d1d57d40682dc1389542ec9d5d021da588816230137e67be069452d",
+      "width": 292,
+      "height": 425
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-130-text/explore-full.png",
+      "bytes": 2629100,
+      "sha256": "8a43d4cd9535153f320ec6317eb8b3f60c725fa88764ef16a2ec44972cd4f3ae",
+      "width": 390,
+      "height": 13821
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-130-text/explore-top.png",
+      "bytes": 148525,
+      "sha256": "cff06481498a5e0b512c12333db328b029bf0d0edd27074440c24652b2707455",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-130-text/no-results.png",
+      "bytes": 140259,
+      "sha256": "07c1b863c79175930b224ba7d2ef2ffeb9f1fcfd4659fe9346828a54035123c2",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-130-text/reader-chapter.png",
+      "bytes": 181972,
+      "sha256": "1b40c6a0b500209fada740376ecacb1443c8b1a854c71cb5c34d2543c408ff6e",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-130-text/reader-top.png",
+      "bytes": 159761,
+      "sha256": "05a174ee464189686eaee03c12f6a724ca10d75c7fea341ce58daa3c215e8652",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "productionScreenshotCount": 24,
+  "productionLayouts": [
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1366px-and-100-text/layout-evidence.json",
+      "dimensions": {
+        "width": 1366,
+        "height": 768,
+        "scale": 100
+      },
+      "imageFacts": [
+        {
+          "src": "http://127.0.0.1:5196/Theandril/updates/campaign.webp",
+          "width": 520,
+          "complete": true
+        },
+        {
+          "src": "http://127.0.0.1:5196/Theandril/updates/battle.webp",
+          "width": 270,
+          "complete": true
+        }
+      ],
+      "errors": [],
+      "workers": []
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-1440px-and-100-text/layout-evidence.json",
+      "dimensions": {
+        "width": 1440,
+        "height": 1000,
+        "scale": 100
+      },
+      "imageFacts": [
+        {
+          "src": "http://127.0.0.1:5196/Theandril/updates/campaign.webp",
+          "width": 520,
+          "complete": true
+        },
+        {
+          "src": "http://127.0.0.1:5196/Theandril/updates/battle.webp",
+          "width": 270,
+          "complete": true
+        }
+      ],
+      "errors": [],
+      "workers": []
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-100-text/layout-evidence.json",
+      "dimensions": {
+        "width": 390,
+        "height": 844,
+        "scale": 100
+      },
+      "imageFacts": [
+        {
+          "src": "http://127.0.0.1:5196/Theandril/updates/campaign.webp",
+          "width": 520,
+          "complete": true
+        },
+        {
+          "src": "http://127.0.0.1:5196/Theandril/updates/battle.webp",
+          "width": 270,
+          "complete": true
+        }
+      ],
+      "errors": [],
+      "workers": []
+    },
+    {
+      "path": "docs/development/dispatches/frontend-evidence/production-browser/updates-readable-journal-at-390px-and-130-text/layout-evidence.json",
+      "dimensions": {
+        "width": 390,
+        "height": 844,
+        "scale": 130
+      },
+      "imageFacts": [
+        {
+          "src": "http://127.0.0.1:5196/Theandril/updates/campaign.webp",
+          "width": 520,
+          "complete": true
+        },
+        {
+          "src": "http://127.0.0.1:5196/Theandril/updates/battle.webp",
+          "width": 270,
+          "complete": true
+        }
+      ],
+      "errors": [],
+      "workers": []
+    }
+  ],
+  "minimumConservativeTextContrast": 4.647553270643061,
+  "journalImageBytes": 147904,
+  "publications": [
+    "r17-campaign-safety",
+    "keeping-the-record",
+    "twenty-four-cultures"
+  ],
+  "tests": {
+    "vitest": {
+      "passed": 12,
+      "files": 5,
+      "log": "final-vitest.log"
+    },
+    "productionBrowser": {
+      "passed": 10,
+      "log": "34-production-browser.log"
+    },
+    "rootBrowser": {
+      "passed": 10,
+      "sameScenariosAsProduction": true,
+      "log": "35-root-browser.log"
+    }
+  },
+  "note": "Execution results are retained logs, not a fresh run by this collector. Build files under frontend-build/dist are ignored and not source deliverables."
+}

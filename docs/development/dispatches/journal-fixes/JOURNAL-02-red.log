@@ -1,0 +1,26 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ apps/web/src/updates/validation.test.ts (5 tests | 1 failed) 82ms
+   × rejects a missing object at one of two revisions sharing an evidence path 34ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/src/updates/validation.test.ts > rejects a missing object at one of two revisions sharing an evidence path
+AssertionError: expected [Function] to throw an error
+ ❯ apps/web/src/updates/validation.test.ts:57:54
+     55|   expect(() => execFileSync('git', ['cat-file', '-e', `${missingRevisi…
+     56|   expect(() => execFileSync('git', ['cat-file', '-e', `${presentRevisi…
+     57|   expect(() => validateEvidence([missing, present])).toThrow();
+       |                                                      ^
+     58| });
+     59|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  20:21:54
+   Duration  185ms (transform 34ms, setup 0ms, import 41ms, tests 82ms, environment 0ms)
+

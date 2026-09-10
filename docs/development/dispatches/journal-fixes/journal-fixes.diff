@@ -1,0 +1,110 @@
+--- a/apps/web/src/updates/Journal.tsx
++++ b/apps/web/src/updates/Journal.tsx
+@@ -81,7 +81,7 @@
+   return <>
+     <section className="masthead" aria-labelledby="journal-title"><div><p className="eyebrow">Developer journal <span aria-hidden="true">/</span> A world in the making</p><h1 id="journal-title">Theandril <em>Dispatches</em></h1></div><p className="masthead-note">The work. The world. The record.<br /><span>Substantial changes, their evidence, and the distance still to go.</span></p></section>
+     <section className="featured" aria-labelledby="featured-title">
+-      <div className="featured-copy"><p className="eyebrow"><span className="small-rule" aria-hidden="true" /> Featured dispatch · {featured.edition}</p><span className="status-label">{featured.status}</span><h2 id="featured-title">{featured.title}</h2><p className="subtitle">{featured.subtitle}</p><p className="feature-summary">{featured.summary}</p><a className="plaque" aria-label="Read the featured dispatch" href={dispatchUrl(base, featured.id)}>Read the dispatch <span aria-hidden="true">→</span></a><p className="feature-footnote">Source checkpoint 8b3b8c1 · Not a 1.0 release.</p></div>
++      <div className="featured-copy"><p className="eyebrow"><span className="small-rule" aria-hidden="true" /> Featured dispatch · {featured.edition}</p><span className="status-label">{featured.status}</span><h2 id="featured-title">{featured.title}</h2><p className="subtitle">{featured.subtitle}</p><p className="feature-summary">{featured.summary}</p><a className="plaque" aria-label="Read the featured dispatch" href={dispatchUrl(base, featured.id)}>Read the dispatch <span aria-hidden="true">→</span></a><p className="feature-footnote">Source checkpoint {featured.sourceRevision.slice(0, 7)} · Not a 1.0 release.</p></div>
+       <Illustration id={featured.image} eager />
+     </section>
+     <aside className="checkpoint-note" aria-label="Checkpoint scope"><strong>A checkpoint, not a finish line.</strong><p>Backend, storage and UI have scoped approvals. AI review gaps and full integration remain open. Test sets overlap; we do not add them into a release score.</p></aside>
+--- a/apps/web/src/updates/journal.test.ts
++++ b/apps/web/src/updates/journal.test.ts
+@@ -1,8 +1,29 @@
+-import { describe, expect, it } from 'vitest';
++import { createElement } from 'react';
++import { renderToStaticMarkup } from 'react-dom/server';
++import { describe, expect, it, vi } from 'vitest';
++import { Journal } from './Journal';
+ import { dispatches } from './content';
+ import { filterDispatches } from './journal';
+ 
+ describe('journal discovery', () => {
++  it('renders the featured story checkpoint from its own revision as stories change', () => {
++    const original = dispatches[0]!;
++    vi.stubGlobal('window', { location: { search: '' } });
++    try {
++      for (const sourceRevision of ['1234567' + 'a'.repeat(33), 'abcdef0' + 'b'.repeat(33)]) {
++        dispatches[0] = { ...original, sourceRevision };
++        const markup = renderToStaticMarkup(createElement(Journal));
++        const footnote = markup.match(/<p class="feature-footnote">(.*?)<\/p>/)?.[1];
++        expect(footnote).toBe(`Source checkpoint ${sourceRevision.slice(0, 7)} · Not a 1.0 release.`);
++      }
++    } finally {
++      dispatches[0] = original;
++      vi.unstubAllGlobals();
++    }
++  });
++  it('finds Keeping the whole record by text that appears only in its takeaways', () => {
++    expect(filterDispatches(dispatches, 'complete-or-error', 'All').map(story => story.title)).toEqual(['Keeping the whole record']);
++  });
+   it('combines normalized full-text search with a topic without changing editorial order', () => {
+     expect(filterDispatches(dispatches, '  VESPER  ', 'World & culture').map(story => story.id)).toEqual(['twenty-four-cultures']);
+     expect(filterDispatches(dispatches, 'Vesper', 'Engineering')).toEqual([]);
+--- a/apps/web/src/updates/journal.ts
++++ b/apps/web/src/updates/journal.ts
+@@ -23,7 +23,7 @@
+   const words = query.trim().toLocaleLowerCase('en').split(/\s+/).filter(Boolean);
+   return entries.filter(entry => {
+     if (topic !== 'All' && entry.topic !== topic) return false;
+-    const text = [entry.title, entry.subtitle, entry.summary, entry.checkpoint, entry.topic, ...entry.tags,
++    const text = [entry.title, entry.subtitle, entry.summary, entry.checkpoint, entry.topic, ...entry.tags, ...entry.takeaways,
+       ...entry.sections.flatMap(section => [section.title, ...section.paragraphs, ...(section.bullets ?? [])])].join(' ').toLocaleLowerCase('en');
+     return words.every(word => text.includes(word));
+   });
+--- a/apps/web/src/updates/validation.test.ts
++++ b/apps/web/src/updates/validation.test.ts
+@@ -5,6 +5,7 @@
+ import { library, scopeLedger } from './library';
+ import media from './media.json';
+ import { evidenceUrl } from './journal';
++import type { Dispatch } from './types';
+ 
+ it('validates stable slugs and every image cross-reference in the public catalog', () => {
+   const ids = dispatches.map(story => story.id);
+@@ -28,16 +29,37 @@
+   }
+ });
+ 
+-it('links evidence that really exists at the pinned Git revision, not just on disk', () => {
+-  const sources = new Map<string, string>();
+-  for (const story of dispatches) for (const link of story.evidence) sources.set(link.path, story.sourceRevision);
+-  for (const link of [...library, ...scopeLedger]) sources.set(link.path, sourceRevision);
+-  for (const image of media.assets) sources.set(image.sourcePath, image.sourceRevision);
+-  for (const [path, revision] of sources) {
++function validateEvidence(stories: readonly Dispatch[]) {
++  const references = [
++    ...stories.flatMap(story => story.evidence.map(link => ({ path: link.path, revision: story.sourceRevision }))),
++    ...[...library, ...scopeLedger].map(link => ({ path: link.path, revision: sourceRevision })),
++    ...media.assets.map(image => ({ path: image.sourcePath, revision: image.sourceRevision })),
++  ];
++  const sources = new Map(references.map(reference => [`${reference.revision}:${reference.path}`, reference]));
++  for (const [object, { path, revision }] of sources) {
++    expect(revision).toMatch(/^[a-f0-9]{40}$/);
+     expect(path).not.toMatch(/(^\/|\.\.|\\|^https?:|[?#])/);
+-    expect(() => execFileSync('git', ['cat-file', '-e', `${revision}:${path}`], { stdio: 'pipe' }), path).not.toThrow();
++    expect(() => execFileSync('git', ['cat-file', '-e', object], { stdio: 'pipe' }), object).not.toThrow();
+     expect(evidenceUrl(path, revision)).toBe(`https://github.com/ErikBurdett/Theandril/blob/${revision}/${path}`);
+   }
++}
++
++it('links evidence that really exists at the pinned Git revision, not just on disk', () => {
++  validateEvidence(dispatches);
++});
++
++it('rejects a missing object at one of two revisions sharing an evidence path', () => {
++  const path = 'docs/development/post-fix-review/summary.json';
++  const missingRevision = 'b0a4cd86cdb30cd9e2d3a1f0c8a78da38f7987cd';
++  const presentRevision = '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef';
++  const evidence = [{ path, label: 'Shared source', note: 'Regression fixture' }];
++  const missing = { ...dispatches[0]!, sourceRevision: missingRevision, evidence };
++  const present = { ...dispatches[0]!, sourceRevision: presentRevision, evidence };
++  expect(() => execFileSync('git', ['cat-file', '-e', `${missingRevision}:${path}`], { stdio: 'pipe' })).toThrow();
++  expect(() => execFileSync('git', ['cat-file', '-e', `${presentRevision}:${path}`], { stdio: 'pipe' })).not.toThrow();
++  expect(() => validateEvidence([missing, present])).toThrow(`${missingRevision}:${path}`);
++  expect(() => validateEvidence([present, missing])).toThrow(`${missingRevision}:${path}`);
++  expect(() => validateEvidence([present, present])).not.toThrow();
+ });
+ 
+ it('keeps frontend image metadata and the downloadable provenance byte-identical', () => {

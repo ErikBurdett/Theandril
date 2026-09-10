@@ -26,6 +26,8 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          # Journal sources link immutable older checkpoints, checked by Vitest.
+          fetch-depth: 0
 
       - name: Read the configured Pages URL
         id: pages
@@ -59,8 +61,8 @@ jobs:
       - name: Validate game content
         run: pnpm content:validate
 
-      - name: Check asset URL and integrity boundaries
-        run: pnpm exec vitest run apps/web/src/asset-url.test.ts apps/web/src/runtime-art.test.ts packages/render/src/art-validation.test.ts
+      - name: Check journal, asset URL and integrity boundaries
+        run: pnpm exec vitest run apps/web/src/updates tests/tooling apps/web/src/asset-url.test.ts apps/web/src/runtime-art.test.ts packages/render/src/art-validation.test.ts
 
       - name: Build the actual Pages subpath
         env:

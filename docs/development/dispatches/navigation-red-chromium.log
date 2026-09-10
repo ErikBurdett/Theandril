@@ -1,0 +1,46 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 1 test using 1 worker
+
+  ✘  1 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (5.5s)
+
+
+  1) tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: locator('.opening').getByRole('link', { name: 'Developer updates' })
+    Expected: "/Theandril/updates/"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.opening').getByRole('link', { name: 'Developer updates' }) with timeout 5000ms
+      - waiting for locator('.opening').getByRole('link', { name: 'Developer updates' })
+
+
+       7 |   await page.getByLabel('World seed', { exact: true }).fill('74');
+       8 |   const link = page.locator('.opening').getByRole('link', { name: 'Developer updates' });
+    >  9 |   await expect(link).toHaveAttribute('href', `${mount.pathname}updates/`);
+         |                      ^
+      10 |   await expect(link).toHaveAttribute('target', '_blank');
+      11 |   await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      12 |   await page.getByTestId('campaign-menu').locator('summary').click();
+        at /home/telephoneheater/Work/Theandril-release/tests/production/developer-navigation.spec.ts:9:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/developer-navigation-game--296c5-t-discarding-campaign-setup/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/developer-navigation-game--296c5-t-discarding-campaign-setup/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/developer-navigation-game--296c5-t-discarding-campaign-setup/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/developer-navigation-game--296c5-t-discarding-campaign-setup/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup 

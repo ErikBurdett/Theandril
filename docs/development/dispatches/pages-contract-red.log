@@ -1,0 +1,27 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril-release
+
+ ❯ tests/tooling/updates-build.test.ts (2 tests | 1 failed) 3ms
+   ✓ builds the game and journal as independent HTML entrypoints 1ms
+   × Pages checks the journal contract before uploading the public artifact 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/tooling/updates-build.test.ts > Pages checks the journal contract before uploading the public artifact
+AssertionError: expected [ …(3) ] to include 'apps/web/src/updates'
+ ❯ tests/tooling/updates-build.test.ts:17:21
+     15|   const workflow = readFileSync('.github/workflows/pages.yml', 'utf8');
+     16|   const testPaths = workflow.match(/run: pnpm exec vitest run ([^\n]+)…
+     17|   expect(testPaths).toContain('apps/web/src/updates');
+       |                     ^
+     18|   expect(workflow.indexOf('apps/web/src/updates')).toBeLessThan(workfl…
+     19| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  19:15:11
+   Duration  144ms (transform 22ms, setup 0ms, import 75ms, tests 3ms, environment 0ms)
+

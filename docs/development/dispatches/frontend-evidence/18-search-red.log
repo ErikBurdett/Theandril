@@ -1,0 +1,39 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/gameplay/updates.spec.ts:3:1 › archive search combines topic filters, survives refresh and recovers from no results
+  1) tests/gameplay/updates.spec.ts:3:1 › archive search combines topic filters, survives refresh and recovers from no results 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('searchbox', { name: 'Search dispatches' })
+
+
+      3 | test('archive search combines topic filters, survives refresh and recovers from no results', async ({ page }) => {
+      4 |   await page.goto('updates/#archive');
+    > 5 |   await page.getByRole('searchbox', { name: 'Search dispatches' }).fill('Vesper');
+        |                                                                    ^
+      6 |   await page.getByRole('button', { name: 'World & culture', exact: true }).click();
+      7 |   await expect(page.getByRole('status')).toHaveText('1 dispatch');
+      8 |   await expect(page.locator('.dispatch-row')).toHaveCount(1);
+        at /home/telephoneheater/Work/Theandril-release/tests/gameplay/updates.spec.ts:5:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-archive-search-com-0af07-nd-recovers-from-no-results/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: docs/development/dispatches/frontend-evidence/browser/updates-archive-search-com-0af07-nd-recovers-from-no-results/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    docs/development/dispatches/frontend-evidence/browser/updates-archive-search-com-0af07-nd-recovers-from-no-results/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace docs/development/dispatches/frontend-evidence/browser/updates-archive-search-com-0af07-nd-recovers-from-no-results/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/gameplay/updates.spec.ts:3:1 › archive search combines topic filters, survives refresh and recovers from no results 
