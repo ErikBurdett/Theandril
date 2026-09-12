@@ -1,0 +1,15 @@
+
+Running 8 tests using 1 worker
+
+(node:3109044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (1.2s)
+  ✓  2 tests/gameplay/roadmap.spec.ts:24:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (835ms)
+  ✓  3 tests/gameplay/roadmap.spec.ts:45:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (930ms)
+  ✓  4 tests/gameplay/roadmap.spec.ts:62:1 › same-document Back and Forward restore filters and linked-item evidence (2.6s)
+  ✓  5 tests/gameplay/roadmap.spec.ts:93:3 › roadmap keyboard and layout at 1440px / 100% text (1.1s)
+  ✓  6 tests/gameplay/roadmap.spec.ts:93:3 › roadmap keyboard and layout at 390px / 130% text (1.0s)
+  ✓  7 tests/gameplay/roadmap.spec.ts:120:1 › unknown item links recover honestly and dispatches link to the full roadmap (1.1s)
+  ✓  8 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (2.0s)
+
+  8 passed (11.2s)
