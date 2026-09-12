@@ -9,6 +9,7 @@ test('builds the game and every public site page as independent HTML entrypoints
     game: resolve('apps/web/index.html'),
     updates: resolve('apps/web/updates/index.html'),
     dispatches: resolve('apps/web/updates/dispatches/index.html'),
+    roadmap: resolve('apps/web/updates/roadmap/index.html'),
     lore: resolve('apps/web/updates/lore/index.html'),
     compendium: resolve('apps/web/updates/compendium/index.html'),
   });

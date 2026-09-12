@@ -33,6 +33,7 @@ export default defineConfig({
     game: resolve(import.meta.dirname, 'index.html'),
     updates: resolve(import.meta.dirname, 'updates/index.html'),
     dispatches: resolve(import.meta.dirname, 'updates/dispatches/index.html'),
+    roadmap: resolve(import.meta.dirname, 'updates/roadmap/index.html'),
     lore: resolve(import.meta.dirname, 'updates/lore/index.html'),
     compendium: resolve(import.meta.dirname, 'updates/compendium/index.html'),
   } } },

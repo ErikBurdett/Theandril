@@ -157,7 +157,9 @@ code { font-size: .95em; }
 .home-hero > div { max-width: 44rem; }
 .home-hero .masthead-note { max-width: 36rem; margin-top: 1.2rem; font: 1.08rem/1.7 var(--body); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.8rem; }
-.home-doorways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
+.home-doorways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
+.home-roadmap-counts { display: flex; flex-wrap: wrap; gap: .8rem 1.6rem; list-style: none; padding: 0; font: 1rem/1.8 var(--body); }
+.home-roadmap-counts a { display: inline-block; padding-block: .6rem; }
 .home-doorways .plaque { flex-direction: column; align-items: flex-start; gap: .4rem; padding: 1.3rem 1.4rem; }
 .home-doorways strong { font: 1.45rem Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.02em; }
 .home-doorways span { color: #dfc797; font-size: .85rem; line-height: 1.5; }

@@ -6,7 +6,7 @@ const origin = 'http://127.0.0.1:4175';
 /** Exercise the actual Pages build, including its worker, CSS and approved art.
  * The optional live URL runs these same UI-only checks after publication. */
 export default defineConfig({
-  testDir: './tests', testMatch: ['**/production/**/*.spec.ts', '**/gameplay/updates.spec.ts', '**/gameplay/home.spec.ts', '**/gameplay/lore.spec.ts', '**/gameplay/compendium.spec.ts'],
+  testDir: './tests', testMatch: ['**/production/**/*.spec.ts', '**/gameplay/updates.spec.ts', '**/gameplay/home.spec.ts', '**/gameplay/roadmap.spec.ts', '**/gameplay/lore.spec.ts', '**/gameplay/compendium.spec.ts'],
   workers: 1, timeout: 45_000,
   use: {
     baseURL: process.env.PAGES_SMOKE_URL ?? `${origin}${base}`,

@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { dispatches, repository } from './content';
 import feed from './changelog/feed.json';
 import { Illustration } from './Illustration';
-import { scopeLedger } from './library';
+import { roadmapItems } from './library';
+import { roadmapCounts, roadmapStatusLabels, roadmapStatusSymbols, roadmapUrl } from './roadmap';
+import type { RoadmapStatus } from './types';
 import { initialVisibleCommits, renderMarkdown, type ChangelogEntry } from './changelog';
 import { pageUrl } from './site';
 import { SiteShell } from './SiteShell';
@@ -17,11 +19,12 @@ export function Home() {
   const [visible, setVisible] = useState(() => initialVisibleCommits(location.search, feed, 8));
   useEffect(() => { const value = new URLSearchParams(location.search).get('commit'); if (value) document.getElementById(`commit-${value}`)?.scrollIntoView(); }, []);
   const latest = dispatches[0]!;
+  const roadmap = roadmapCounts(roadmapItems);
   return <SiteShell page="home" base={base}>
     <section className="masthead home-hero" aria-labelledby="home-title"><div><p className="eyebrow">A world in the making</p><h1 id="home-title">Theandril</h1><p className="masthead-note">{description}</p><div className="hero-actions"><a className="plaque" href={base}>Play the development build</a><a className="plaque" href={pageUrl(base, 'dispatches')}>Read the dispatches</a></div></div></section>
     <section className="featured" aria-labelledby="latest-title"><div className="featured-copy"><p className="eyebrow">Latest dispatch</p><h2 id="latest-title">{latest.title}</h2><p className="feature-summary">{latest.summary}</p><a className="plaque" href={`${pageUrl(base, 'dispatches')}?dispatch=${latest.id}`}>Read the dispatch →</a></div><Illustration id={latest.image} eager /></section>
-    <section className="home-doorways" aria-label="Explore Theandril">{[{ page: 'dispatches' as const, title: 'Dispatches', text: 'Development notes with evidence and context.' }, { page: 'lore' as const, title: 'Lore library', text: 'The book of broken roads and its people.' }, { page: 'compendium' as const, title: 'Compendium', text: 'Cultures, units and the known world.' }].map(item => <a key={item.page} className="plaque" href={pageUrl(base, item.page)}><strong>{item.title}</strong><span>{item.text}</span></a>)}</section>
-    <section id="scope" className="scope-section" aria-labelledby="scope-title"><div className="section-heading"><div><p className="eyebrow">Selected gates</p><h2 id="scope-title">Road to 1.0</h2></div></div><dl className="scope-ledger">{scopeLedger.map(entry => <div key={entry.id}><dt><span className="scope-state">{entry.state}</span><h3>{entry.title}</h3></dt></div>)}</dl><a href={`${pageUrl(base, 'dispatches')}#scope`}>Read the complete scope ledger →</a></section>
+    <section className="home-doorways" aria-label="Explore Theandril">{[{ page: 'dispatches' as const, title: 'Dispatches', text: 'Development notes with evidence and context.' }, { page: 'roadmap' as const, title: 'Roadmap', text: 'Completed, in progress and pending work.' }, { page: 'lore' as const, title: 'Lore library', text: 'The book of broken roads and its people.' }, { page: 'compendium' as const, title: 'Compendium', text: 'Cultures, units and the known world.' }].map(item => <a key={item.page} className="plaque" href={pageUrl(base, item.page)}><strong>{item.title}</strong><span>{item.text}</span></a>)}</section>
+    <section id="scope" className="scope-section" aria-labelledby="scope-title"><div className="section-heading"><div><p className="eyebrow">The current roadmap</p><h2 id="scope-title">Road to 1.0</h2></div></div><p className="scope-intro">The playable foundations are checked off. Partial systems, missing features and every release gate have explicit remaining acceptance. No overall 1.0 gate is signed off.</p><ul className="home-roadmap-counts">{(Object.keys(roadmap) as RoadmapStatus[]).map(status => <li key={status}><a href={roadmapUrl(base, '', status)}><span aria-hidden="true">{roadmapStatusSymbols[status]} </span><strong>{roadmap[status]}</strong> {roadmapStatusLabels[status].toLowerCase()}</a></li>)}</ul><p className="feature-footnote">Counts describe roadmap checkpoints, not a percentage of the game.</p><a className="back-link" href={pageUrl(base, 'roadmap')}>Explore the full roadmap →</a></section>
     <section className="commit-ledger" aria-labelledby="commit-title"><div className="section-heading"><div><p className="eyebrow">Generated from the master history at build time</p><h2 id="commit-title">The change ledger</h2></div></div>{feed.slice(0, visible).map(entry => <Commit key={entry.sha} entry={entry} />)}{visible < feed.length && <button type="button" className="plaque" onClick={() => setVisible(feed.length)}>Show {feed.length - visible} older commits</button>}</section>
   </SiteShell>;
 }

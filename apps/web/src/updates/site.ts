@@ -1,10 +1,11 @@
-export type PageId = 'home' | 'dispatches' | 'lore' | 'compendium';
+export type PageId = 'home' | 'dispatches' | 'roadmap' | 'lore' | 'compendium';
 export type SitePage = { path: string; entry: string; module: string; label: string; title: string };
 
 /** Every public page is its own static HTML entry so refreshes and deep links work on plain Pages hosting. */
 export const SITE_PAGES: Readonly<Record<PageId, SitePage>> = {
   home: { path: 'updates/', entry: 'updates/index.html', module: 'main.tsx', label: 'Home', title: 'Theandril · A world in the making' },
   dispatches: { path: 'updates/dispatches/', entry: 'updates/dispatches/index.html', module: 'dispatches.tsx', label: 'Dispatches', title: 'Theandril Dispatches · Developer journal' },
+  roadmap: { path: 'updates/roadmap/', entry: 'updates/roadmap/index.html', module: 'roadmap-main.tsx', label: 'Roadmap', title: 'Theandril Roadmap · Completed, in progress and pending' },
   lore: { path: 'updates/lore/', entry: 'updates/lore/index.html', module: 'lore.tsx', label: 'Lore', title: 'The Book of Broken Roads · Theandril lore library' },
   compendium: { path: 'updates/compendium/', entry: 'updates/compendium/index.html', module: 'compendium.tsx', label: 'Compendium', title: 'Theandril Compendium · Cultures, units and the world' },
 };

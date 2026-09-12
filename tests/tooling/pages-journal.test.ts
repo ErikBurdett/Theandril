@@ -14,6 +14,7 @@ test('the actual Pages suite collects journal journeys alongside game and naviga
   const listing = execFileSync('pnpm', ['exec', 'playwright', 'test', '--config', 'playwright.pages.config.ts', '--list'], { encoding: 'utf8' });
   expect(listing).toContain('updates.spec.ts');
   expect(listing).toContain('home.spec.ts');
+  expect(listing).toContain('roadmap.spec.ts');
   expect(listing).toContain('lore.spec.ts');
   expect(listing).toContain('compendium.spec.ts');
   expect(listing).toContain('developer-navigation.spec.ts');

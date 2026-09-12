@@ -8,6 +8,8 @@ For ongoing work, use the [audit-driven 1.0 development workflow](docs/1.0-DEVEL
 
 Read [**Theandril Dispatches**](https://erikburdett.github.io/Theandril/updates/): illustrated gameplay updates, developer notes, source-linked verification, known limitations, scope decisions, and the road to 1.0. The game links to it from the opening screen and **Campaign & settings**, in a separate tab so a campaign is not discarded.
 
+The [**Roadmap**](https://erikburdett.github.io/Theandril/updates/roadmap/) shows checked **Completed** checkpoints, **In progress** systems and **Pending** features in an ordered, searchable record. Each item links source evidence and remaining acceptance; all fifteen 1.0 gates stay visible. Status filters and item links survive refresh. Completion describes the named checkpoint, never an implied percentage or whole-game signoff.
+
 For substantial work, use the [dispatch authoring and review guide](docs/updates/CONTRIBUTING.md) and [work-packet template](docs/updates/TEMPLATE.md). The journal is version-controlled with the application and deploys alongside it; it is not a separate CMS or a substitute for release gates.
 
 ## Run locally

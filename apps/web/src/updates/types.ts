@@ -27,3 +27,25 @@ export type Dispatch = {
   evidence: Evidence[];
 };
 export type ScopeEntry = { id: string; title: string; state: 'Accepted scope' | 'Current / partial' | 'Open gate' | 'Proposal / deferred' | 'Not this update'; description: string; path: string };
+
+export type RoadmapStatus = 'completed' | 'in-progress' | 'pending';
+export type ReleaseGateId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'F2' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N';
+export type RoadmapStage = { id: string; title: string; description: string };
+export type RoadmapItem = {
+  id: string;
+  stage: string;
+  title: string;
+  status: RoadmapStatus;
+  summary: string;
+  delivered: string[];
+  remaining: string[];
+  gates: ReleaseGateId[];
+  evidence: Evidence[];
+};
+export type ReleaseGate = {
+  id: ReleaseGateId;
+  title: string;
+  // No overall release gate has been accepted at the current source snapshot.
+  status: Exclude<RoadmapStatus, 'completed'>;
+  remaining: string;
+};

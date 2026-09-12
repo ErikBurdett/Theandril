@@ -21,6 +21,6 @@ export function SiteShell({ page, base, children }: { page: PageId; base: string
         : <a key={item.href} className="play-link" href={item.href}>{item.label} <span aria-hidden="true">↗</span></a>)}</nav>
     </header>
     <main id="main" tabIndex={-1} className="bound-journal"><div className="paper-content">{children}</div></main>
-    <footer className="site-footer"><p><strong>Theandril</strong> · A world in the making.<br /><span>Single-player development build. Not Theandril 1.0.</span></p><div><a href={`${repository}/blob/master/docs/IMPLEMENTATION_STATUS.md`}>Current implementation status ↗</a><a href={localUrl(base, 'updates/provenance.json')}>Image provenance ↗</a><a href={repository}>Source repository ↗</a></div></footer>
+    <footer className="site-footer"><p><strong>Theandril</strong> · A world in the making.<br /><span>Single-player development build. Not Theandril 1.0.</span></p><div><a href={`${repository}/blob/master/docs/IMPLEMENTATION_STATUS.md`}>Current implementation status ↗</a><a href={localUrl(base, 'updates/provenance.json')}>Image provenance ↗</a><a href="https://erikburdett.github.io/theandril-hearth-and-card/updates/roadmap/">Hearth & Card roadmap ↗</a><a href={repository}>Source repository ↗</a></div></footer>
   </div>;
 }

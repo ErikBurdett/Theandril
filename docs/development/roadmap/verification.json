@@ -1,0 +1,116 @@
+{
+  "date": "2026-09-12",
+  "scope": "Theandril public roadmap; local reviewed source postimage, not a 1.0 release signoff",
+  "gameplaySourceSnapshot": "fcae402da6c290b93a9a6933510c74538477ad04",
+  "gameplayRules": 17,
+  "gameplayChanged": false,
+  "contentHash": "b79c78ed",
+  "checks": [
+    {
+      "command": "pnpm typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm exec vitest run apps/web/src/updates tests/tooling/updates-build.test.ts tests/tooling/pages-journal.test.ts",
+      "result": "passed",
+      "tests": 48,
+      "files": 18
+    },
+    {
+      "command": "pnpm content:validate",
+      "result": "passed",
+      "owner": "integrating parent",
+      "hash": "b79c78ed"
+    },
+    {
+      "command": "pnpm test",
+      "result": "failed",
+      "owner": "integrating parent",
+      "passedTests": 1715,
+      "totalTests": 1716,
+      "passedFiles": 212,
+      "totalFiles": 213,
+      "limitation": "Existing Epic chronicle-victory 60-second timeout; 69.21 seconds measured. No skipped tests, relaxed budget or simulation changes.",
+      "evidence": "full-headless.log"
+    },
+    {
+      "command": "VITE_BASE_PATH=/Theandril/ pnpm build",
+      "result": "passed",
+      "warnings": [
+        "Existing upstream Zod annotations",
+        "Existing game main-chunk size"
+      ]
+    },
+    {
+      "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium ./node_modules/.bin/playwright test --config playwright.pages.config.ts --output=test-results/theandril-roadmap-reviewed",
+      "result": "passed",
+      "tests": 27,
+      "seconds": 43.4,
+      "scope": "All public-site and actual-game production journeys in the Pages suite"
+    },
+    {
+      "command": "VITE_BASE_PATH=/ pnpm build",
+      "result": "passed"
+    },
+    {
+      "command": "VITE_BASE_PATH=/ PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium ./node_modules/.bin/playwright test --config playwright.pages.config.ts tests/gameplay/roadmap.spec.ts --output=test-results/theandril-roadmap-root",
+      "result": "passed",
+      "tests": 7,
+      "seconds": 5.1,
+      "scope": "Same seven roadmap journeys on the root deployment base"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm art:validate",
+      "result": "passed",
+      "owner": "integrating parent",
+      "validatedAssets": 545,
+      "failedAssets": 0,
+      "evidence": "art-validation.log",
+      "scope": "Existing approved/candidate source integrity only; no new art approvals or publications."
+    }
+  ],
+  "browser": "Chromium 152.0.7977.82 Arch Linux",
+  "historyCorrection": {
+    "reproducedBeforeFix": true,
+    "failure": "Back after a stage fragment and Pending filter restores the URL but leaves All items aria-pressed=false",
+    "finalRegression": "Same-document Back/Forward restores both status/query filters and removed then restored linked-item disclosure/focus"
+  },
+  "independentReview": {
+    "status": "approved",
+    "reviewer": "separate development-sites reviewer",
+    "scope": "Code, factual claims, all fifteen gate states, screenshots and history correction; report retained by integrating parent",
+    "evidence": "independent-review.md"
+  },
+  "overlap": "Scoped journal tests overlap the broad headless invocation; root and Pages journeys reuse the same browser cases. Do not add these into a combined test total.",
+  "screens": "screens.json",
+  "sourceSha256": {
+    "apps/web/src/updates/Roadmap.tsx": "624a7d7281c569607cd222447de498b4aa0b5e867da9f31a7f86cafdbe7f64a3",
+    "apps/web/src/updates/roadmap.ts": "86b1cadd405dd8619a5aaa2409ec4780aca0f5f8611338f6f48e1f5fceb8643a",
+    "apps/web/src/updates/roadmap.css": "f071c4e9d43e6aa27b442cff73eae876f73cfb42317579a060e7820fb3d21813",
+    "apps/web/src/updates/roadmap-main.tsx": "51c823a7ce9e520f61496e66be40a6e154b6a598f48af449ddc6186cf732954b",
+    "apps/web/src/updates/roadmap.test.ts": "99b46c625f86ab7167867673aeda9b651f265756e29c46adbffe66efab2ce1fe",
+    "apps/web/src/updates/library.ts": "793f457789915f8f2bc5514558efac6a987dd0a54c2f46af7c9bf9b4eb82e6cf",
+    "apps/web/src/updates/types.ts": "1f9e51670d80445fb2fed98e6ac7e55efc6dd3efc8d100ac1e127194f6d0334b",
+    "apps/web/src/updates/Home.tsx": "46dd4e4acd18e439b22b140cb093e49c2f01a6ce998c5c249bf1beb7fc8ff2d3",
+    "apps/web/src/updates/Journal.tsx": "8402c41f987208e8b2f004124ebfb43d27d85797024307ab4747ede43298da1c",
+    "apps/web/src/updates/SiteShell.tsx": "72c241c30e80ef686258ca5bf567170611dadaa1ee25928c0660c321d9ccdb90",
+    "apps/web/src/updates/site.ts": "682812dc49b78c74b9133244385d0a0a2a11c7613d5746506e624b9e83c5e7b4",
+    "apps/web/src/updates/site.test.ts": "5152ff4b0cfa9077df0be4f1e957f9b1dee0623b6cc9509ff6d4c683ce7f7c7d",
+    "apps/web/src/updates/journal.css": "ff55e7bc6d6dd2ac62a6af2f464efb16c0e868e311a2b18f457f7ba897df9860",
+    "apps/web/updates/roadmap/index.html": "5393e60832beaa93370c70e54084638063dded88f388154c3a064183294aab0a",
+    "apps/web/vite.config.ts": "6ae669fb1aabda7c91bf6175ccc1c475f95dc3f9310770ed83744a54388a165e",
+    "playwright.pages.config.ts": "6c5f0f8167218adb0cf500db94332129c1c40fc6e9026a8f0e7f06d38acd60fa",
+    "tests/gameplay/roadmap.spec.ts": "60b33b080576f58f043201e71eae29a341a46e42b25b599706091fef65bf5d4c",
+    "tests/tooling/pages-journal.test.ts": "83d6b7e3d453d1be2df2b26baf2e16b9f5f25b142d33949bd93acf352ef122e4",
+    "tests/tooling/updates-build.test.ts": "a3e12a45fd59ee8b2538f5df54701d579466d34b47057b0702d510555941ee0e"
+  },
+  "publication": "Commit, GitHub CI and live readback owned by integrating parent"
+}
