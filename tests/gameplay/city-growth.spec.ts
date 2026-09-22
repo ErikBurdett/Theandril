@@ -36,13 +36,19 @@ async function endTurn(page: Page) {
 
 test('city borders expand through a saved turn while researched tile construction remains paid and worker-controlled', async ({ page }, testInfo) => {
   const state = cityScene(), factionId = state.turnOwnerId, town = Object.values(state.settlements)[0]!;
-  // Generate the pre-expansion checkpoint with actual turns, not a granted civic meter.
-  for (let turn = 0; turn < 13; turn++) issue(state, { type: 'endTurn', factionId });
-  const view = getObservation(state, factionId).land.settlements[0]!;
-  expect(view.borderExpansion.progress).toBe(39); expect(view.claimed).toHaveLength(7);
+  // Generate the pre-expansion checkpoint with actual turns, not a granted civic meter. Rules-21
+  // boundaries grow in a handful of turns, so stop on the last turn before the next hex is claimed.
+  const boundary = () => getObservation(state, factionId).land.settlements[0]!;
+  let view = boundary();
+  for (let turn = 0; turn < 40 && view.borderExpansion.progress + view.borderExpansion.rate < view.borderExpansion.threshold; turn++) {
+    issue(state, { type: 'endTurn', factionId }); view = boundary();
+  }
+  const claims = view.claimed.length;
+  expect(view.borderExpansion.progress).toBeGreaterThan(0);
+  expect(view.borderExpansion.progress + view.borderExpansion.rate).toBeGreaterThanOrEqual(view.borderExpansion.threshold);
   const target = view.cells.find(cell => cell.canWork)!.cell, next = view.borderExpansion.nextCell!;
   await importCity(page, state);
-  await expect(page.getByTestId('border-growth')).toContainText('39 / 40');
+  await expect(page.getByTestId('border-growth')).toContainText(`${view.borderExpansion.progress} / ${view.borderExpansion.threshold}`);
   await closeManagement(page);
   await page.getByRole('button', { name: 'Realm progression', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Realm progression' });
@@ -68,8 +74,8 @@ test('city borders expand through a saved turn while researched tile constructio
   await selectFromRegistry(page, 'settlements', /Boundary Hearth/); await openSelectedOrders(page);
   await endTurn(page);
   const expanded = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.land.settlements[0]!);
-  expect(expanded.claimed).toContain(next); expect(expanded.claimed).toHaveLength(8); expect(expanded.worked).toEqual([]);
-  expect(expanded.borderExpansion.threshold).toBe(44);
+  expect(expanded.claimed).toContain(next); expect(expanded.claimed).toHaveLength(claims + 1); expect(expanded.worked).toEqual([]);
+  expect(expanded.borderExpansion.threshold).toBe(4 + Math.ceil((claims + 1) / 2));
   expect(await page.evaluate(cell => window.__THEANDRIL__!.getTerrainArt(cell)?.settlementId, next)).toBe(town.id);
   await openSelectedOrders(page);
   await expect(page.getByTestId('land-work')).toContainText('1 / 4 turns');

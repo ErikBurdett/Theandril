@@ -159,10 +159,10 @@ test('paid hearth and tile construction change actual district art through cance
   expect((await terrain(page, cultivate))?.district?.kind).not.toBe('cultivation');
 });
 
-test('a mature paid hearth sprawls inside its 37 claims at normal, near, far and narrow camera scales', async ({ page }, info) => {
+test('a mature paid hearth sprawls inside its 39 claims at normal, near, far and narrow camera scales', async ({ page }, info) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   const fixture = hearthScene(true), hash = stateHash(fixture.state), land = getObservation(fixture.state, fixture.state.turnOwnerId).land.settlements[0]!;
-  expect(land.claimed).toHaveLength(37);
+  expect(land.claimed).toHaveLength(39);
   await load(page, fixture.state);
   await selectFromRegistry(page, 'settlements', 'Sprawling Oathhearth');
   await mapView(page);
