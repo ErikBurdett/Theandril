@@ -1,11 +1,12 @@
 import { hexDistance } from '@theandril/mapgen';
 import type { Observation } from '@theandril/sim';
+import { observedCells } from './observation-index';
 
 const geography = new WeakMap<Observation, { cells: ReadonlyMap<number, Observation['cells'][number]>; towns: Observation['settlements']; claims: ReadonlyMap<string, number> }>();
 function facts(view: Observation) {
   let result = geography.get(view);
   if (!result) {
-    result = { cells: new Map(view.cells.map(cell => [cell.cell, cell])), towns: view.settlements.filter(town => town.factionId === view.factionId), claims: new Map(view.land.settlements.map(land => [land.settlementId, land.claimed.length])) };
+    result = { cells: observedCells(view), towns: view.settlements.filter(town => town.factionId === view.factionId), claims: new Map(view.land.settlements.map(land => [land.settlementId, land.claimed.length])) };
     geography.set(view, result);
   }
   return result;

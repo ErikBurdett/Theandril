@@ -111,6 +111,9 @@ test('top campaign disclosure works by keyboard and preserves real save, load, a
   await topbarMenu(page, false);
   await summary(page).focus(); await page.keyboard.press('Enter');
   await expect(menu(page)).toHaveAttribute('open', '');
+  // The menu opens with the public developer-updates link, then the settings.
+  await page.keyboard.press('Tab');
+  await expect(menu(page).getByRole('link', { name: /Developer updates/ })).toBeFocused();
   await page.keyboard.press('Tab');
   const mapMenus = menu(page).getByRole('checkbox', { name: 'Map click menus', exact: true });
   await expect(mapMenus).toHaveCount(1);
@@ -124,6 +127,8 @@ test('top campaign disclosure works by keyboard and preserves real save, load, a
   await begin(page);
   await topbarMenu(page, true);
   await summary(page).focus(); await page.keyboard.press('Enter');
+  await page.keyboard.press('Tab');
+  await expect(menu(page).getByRole('link', { name: /Developer updates/ })).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(menu(page).getByRole('button', { name: 'Save campaign', exact: true })).toBeFocused();
   await page.keyboard.press('Enter');

@@ -1,5 +1,6 @@
 import { battleDevelopmentSchema, battleDevelopmentEffects } from './combat/development-snapshot';
 import { sortedExploredCells } from './canonical-cells';
+import { sealBattleReport, sealedProjection } from './battle-record';
 import { selectDefendingArmies } from './battle-frontage';
 import { isHull } from './combat/individual';
 import { createDevelopmentState, developmentStateSchema, validateDevelopment } from './development';
@@ -179,6 +180,38 @@ const legacyStateSchema = stateV1Schema.omit({ nextId: true }).extend({ nextEnti
 const legacySchema = z.object({ version: z.literal(0), gameVersion: z.literal('0.0.0'), contentHash: z.string(), state: legacyStateSchema }).strict();
 
 const compareId = (a: { id: string }, b: { id: string }): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+const KNOWN_LAND_KEYS = ['biome', 'settlementId', 'factionId', 'improvementId'] as const;
+const CANONICAL_ID = /^[a-z][a-z0-9_.-]*$/, CANONICAL_CELL_KEY = /^(0|[1-9][0-9]{0,5})$/;
+const plainRecord = (value: unknown): value is Record<string, unknown> => {
+  if (!value || typeof value !== 'object') return false;
+  const prototype: unknown = Object.getPrototypeOf(value);
+  return (prototype === Object.prototype || prototype === null) && Object.getOwnPropertySymbols(value).length === 0;
+};
+const canonicalId = (value: unknown): boolean => typeof value === 'string' && value.length >= 1 && value.length <= 100 && CANONICAL_ID.test(value);
+/** Remembered land is over half of a mature campaign's canonical bytes and is
+ * rebuilt every end of turn. When every record already has the exact schema
+ * key order and valid values, the original records serialize to the same bytes
+ * as their parsed copies, so they are referenced instead of re-parsed. Any
+ * deviation returns undefined and the caller takes the original full parse,
+ * which reports exactly the errors it always has. */
+function exactKnownLand(known: unknown): Record<string, Record<string, unknown>> | undefined {
+  if (!plainRecord(known)) return undefined;
+  const owners = Object.keys(known);
+  for (const owner of owners) {
+    const cells = known[owner];
+    if (!canonicalId(owner) || !plainRecord(cells)) return undefined;
+    for (const key in cells) {
+      const record = cells[key];
+      if (!CANONICAL_CELL_KEY.test(key) || !plainRecord(record)) return undefined;
+      const keys = Object.keys(record);
+      if (keys.length !== 4 || keys[0] !== KNOWN_LAND_KEYS[0] || keys[1] !== KNOWN_LAND_KEYS[1] || keys[2] !== KNOWN_LAND_KEYS[2] || keys[3] !== KNOWN_LAND_KEYS[3]) return undefined;
+      const { biome, settlementId, factionId, improvementId } = record;
+      if (typeof biome !== 'number' || !Number.isInteger(biome) || biome < 0 || biome > 11
+        || (settlementId !== null && !canonicalId(settlementId)) || (factionId !== null && !canonicalId(factionId)) || (improvementId !== null && !canonicalId(improvementId))) return undefined;
+    }
+  }
+  return Object.fromEntries(owners.sort((a, b) => a < b ? -1 : a > b ? 1 : 0).map(owner => [owner, known[owner] as Record<string, unknown>]));
+}
 function canonicalLand(state: GameState) {
   // The old JSON round trip removed prototypes before validation. Do not let
   // Zod's ordinary property reads start accepting inherited canonical fields.
@@ -193,6 +226,21 @@ function canonicalLand(state: GameState) {
     plain(town); plain(town.improvements);
     if (town.work !== null) plain(town.work);
   }
+  const sorted = <T>(record: Record<string, T>): Record<string, T> => Object.fromEntries(Object.entries(record).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0));
+  const finish = (land: z.infer<typeof landStateSchema>) => {
+    // Only ID dictionaries need sorting. Validated cell keys are canonical array
+    // indexes (0..999999), so JavaScript already enumerates them numerically.
+    land.settlements = sorted(land.settlements);
+    land.capitals = sorted(land.capitals);
+    land.cultivation = sorted(land.cultivation);
+    return land;
+  };
+  const known = exactKnownLand(source.known);
+  if (known) {
+    // The remaining registries are small; they keep the full strict parse.
+    const rest = landStateSchema.safeParse({ ...source, known: {} });
+    if (rest.success) { rest.data.known = known as typeof rest.data.known; return finish(rest.data); }
+  }
   for (const cells of Object.values(source.known)) {
     plain(cells);
     for (const known of Object.values(cells)) plain(known);
@@ -200,13 +248,7 @@ function canonicalLand(state: GameState) {
   // Parse the *whole* original object: unknown keys and invalid values must be
   // rejected, not silently omitted by a hand-written projection. This also
   // detaches all nested data and emits fixed fields in the exact schema order.
-  const land = landStateSchema.parse(source);
-  const sorted = <T>(record: Record<string, T>): Record<string, T> => Object.fromEntries(Object.entries(record).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0));
-  // Only ID dictionaries need sorting. Validated cell keys are canonical array
-  // indexes (0..999999), so JavaScript already enumerates them numerically.
-  land.settlements = sorted(land.settlements);
-  land.capitals = sorted(land.capitals);
-  land.cultivation = sorted(land.cultivation);
+  const land = finish(landStateSchema.parse(source));
   land.known = sorted(land.known);
   return land;
 }
@@ -222,6 +264,7 @@ function canonicalRoads(state: GameState) {
   return roads;
 }
 
+const canonicalReports = new WeakMap<CampaignBattle, z.infer<typeof campaignBattleSchema>>();
 function canonicalPayload(state: GameState) {
   const sorted = <T>(record: Record<string, T>): Record<string, T> => Object.fromEntries(Object.entries(record).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0));
   const development = developmentStateSchema.parse(state.development);
@@ -240,7 +283,7 @@ function canonicalPayload(state: GameState) {
       events: state.events.map(event => ({ turn: event.turn, type: event.type, message: event.message, factionId: event.factionId, ...(event.cell === undefined ? {} : { cell: event.cell }) })),
       wars: state.wars.map(pair => [...pair]),
       battle: state.battle ? campaignBattleSchema.parse(state.battle) : null,
-      battleReports: state.battleReports.map(battle => campaignBattleSchema.parse(battle)),
+      battleReports: state.battleReports.map(battle => sealedProjection(canonicalReports, battle, report => campaignBattleSchema.parse(report))),
       sieges: Object.values(state.sieges).sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0).map(siege => siegeSchema.parse(siege)),
       pendingCapture: state.pendingCapture ? captureDecisionSchema.parse(state.pendingCapture) : null,
       ruins: Object.values(state.ruins).sort(compareId).map(ruin => ruinSchema.parse(ruin)), diplomacy: diplomacyStateSchema.parse(state.diplomacy),
@@ -987,6 +1030,7 @@ export function deserializeGame(text: string): GameState {
   validateRoads(state, requiredSight);
   for (const faction of state.factions) validateLandKnowledge(state, faction.id, requiredSight.get(faction.id)!);
   withRules(state, originalVersion < 16 ? 15 : 16, () => rebuildIndexes(state));
+  for (const report of state.battleReports) sealBattleReport(report);
   return state;
 }
 

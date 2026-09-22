@@ -17,6 +17,7 @@ import { roadMovementCost } from './roads';
 import { armyCharacterLeadership, automaticallyRally, finishBattleCharacters, interruptArmyMissions, snapshotArmyCharacters } from './characters';
 import { armyDomain, armyTerrainBlocker, carriedArmyBlocker, moveFleetCargo, reconcileFleetCargo, snapshotFleetCargo } from './naval';
 import { awardFormationBattleExperience, formationBattleEffects } from './development';
+import { sealBattleReport } from './battle-record';
 
 export const MAX_BATTLE_REPORTS = 20;
 const units = new Map(UNITS.map(unit => [unit.id, unit]));
@@ -283,6 +284,7 @@ function finishCampaignBattle(state: GameState, battle: CampaignBattle, events: 
   const message = `${winner} prevailed at hex ${battle.defenderCell}: ${result.reason}.`;
   for (const factionId of [battle.attackerFactionId, battle.defenderFactionId]) events.push({ turn: state.turn, type: 'battle_finished', factionId, cell: battle.defenderCell, message });
   state.battleReports.push(battle);
+  sealBattleReport(battle);
   if (state.battleReports.length > MAX_BATTLE_REPORTS) state.battleReports.splice(0, state.battleReports.length - MAX_BATTLE_REPORTS);
   state.battle = null;
 }

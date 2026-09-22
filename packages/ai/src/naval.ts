@@ -1,10 +1,11 @@
 import { BUILDINGS, UNITS } from '@theandril/content';
 import { hexDistance, isLake, isPassable, neighbors, TERRAIN } from '@theandril/mapgen';
-import { getMovementPreview, type ArmyView, type GameCommand, type Observation } from '@theandril/sim';
+import { createRoutePreviewer, getMovementPreview, type ArmyView, type GameCommand, type Observation } from '@theandril/sim';
 import { settlementSpacing } from './expansion';
 import { protectedFactions, type AiPlan } from './diplomacy';
 import { createNavigation } from './navigation';
 import { createSeaKnowledge, type BasinRelation, type BasinStatus } from './sea-knowledge';
+import { observedCells } from './observation-index';
 
 export const MAX_NAVAL_FLEETS = 8;
 export const MAX_NAVAL_ROUTE_QUERIES = 8;
@@ -92,7 +93,7 @@ export function oceanScoutReserve(view: Observation): number {
   // real, legal quote ahead of caravan/project savings as for the first hull.
   const diversify = view.growth && sparseContactNeeded(view) && view.factions.length === 1
     && towns.filter(town => town.buildings.includes('building.harbor')).length >= 2;
-  const cells = diversify ? new Map(view.cells.map(cell => [cell.cell, cell])) : undefined;
+  const cells = diversify ? observedCells(view) : undefined;
   const sea = cells ? createSeaKnowledge(view, cells) : undefined;
   const secondOutlet = cells && sea ? preferredPort(view, cells, sea) : undefined;
   const water = secondOutlet && cells ? portWaters(view, secondOutlet, cells) : [];
@@ -117,7 +118,7 @@ export function hasNavalOpportunity(view: Observation): boolean {
  * unaffordable goal reserves knowledge; it does not authorize a research order. */
 export function navalResearchChoice(view: Observation) {
   if (view.progression.technologies.includes('technology.ocean_navigation') || !hasNavalOpportunity(view)) return undefined;
-  const cells = new Map(view.cells.map(cell => [cell.cell, cell]));
+  const cells = observedCells(view);
   // An isolated modern realm's open-sea harbor is a concrete first-contact goal.
   // Reserve its quoted research before cheaper land techniques spend the same
   // knowledge; the naval planner still validates and pays the actual order.
@@ -142,7 +143,7 @@ function researchChoice(view: Observation, cells: ObservedCells, sea: SeaKnowled
 export function needsNavalInvestment(view: Observation): boolean {
   if (!hasNavalOpportunity(view)) return false;
   const towns = view.settlements.filter(town => town.factionId === view.factionId);
-  const cells = new Map(view.cells.map(cell => [cell.cell, cell]));
+  const cells = observedCells(view);
   const sea = createSeaKnowledge(view, cells), prospective = preferredPort(view, cells, sea);
   if (!prospective) return false;
   const harbor = prospective.buildings.includes('building.harbor') ? prospective : undefined;
@@ -200,7 +201,7 @@ function createCoastalFoundingAssessment(view: Observation, sharedCells?: Observ
       if (underway || army.id !== selected) return null;
     }
     if (sites.has(army.id)) return sites.get(army.id)!;
-    cells ??= new Map(view.cells.map(cell => [cell.cell, cell]));
+    cells ??= observedCells(view);
     sea ??= createSeaKnowledge(view, cells);
     const site = findCoastalFoundingSite(view, army, towns, cells, sea, diversify);
     sites.set(army.id, site);
@@ -267,7 +268,7 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
   let budget = Math.max(0, coinBudget), interrupts = false;
   const result = (): NavalPlan => ({ commands, reasons, heldArmyIds, queuedSettlementIds, coinSpent: Math.max(0, coinBudget) - budget, interrupts });
   if (view.victory || view.battle || view.pendingCapture || !hasNavalOpportunity(view)) return result();
-  const factionId = view.factionId, cells = new Map(view.cells.map(cell => [cell.cell, cell]));
+  const factionId = view.factionId, cells = observedCells(view);
   const own = view.armies.filter(army => army.factionId === factionId).sort(byId);
   const fleets = own.filter(army => army.domain === 'naval' && isSea(cells.get(army.cell)));
   const foreign = view.armies.filter(army => army.factionId !== factionId && !army.carrierId);
@@ -400,10 +401,13 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
     // established expedition tie order for fleets that can carry passengers.
     fleet.transportCapacity ? fleet.id : `${fleet.factionId}:${fleet.formations.map(formation => formation.unitId).sort().join('|')}:${fleet.cell}`);
   let routeQueries = 0;
+  // Most bounded queries target water or shore outside the army's known area;
+  // the previewer answers those from the first complete search instead of repeating it.
+  const routePreview = createRoutePreviewer(view);
   const toward = (army: ArmyView, target: number): number | undefined => {
     if (routeQueries >= MAX_NAVAL_ROUTE_QUERIES || target === army.cell) return undefined;
     routeQueries++;
-    const preview = getMovementPreview(view, army.id, target);
+    const preview = routePreview(army.id, target);
     if (!preview?.canQueue || preview.action !== 'move') return undefined;
     let spent = 0, destination: number | undefined;
     for (const cell of preview.path) {

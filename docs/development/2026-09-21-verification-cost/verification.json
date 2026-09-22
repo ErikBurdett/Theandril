@@ -1,0 +1,47 @@
+{
+  "baseRevision": "4ce95aedab25536e24a0b34b3803a6cd3c9a5ad5",
+  "candidateManifest": "source-manifest.json",
+  "scope": "Local working-source verification. No commit, hosted run or deployment. All15whole gates remain open.",
+  "checks": [
+    {
+      "log": "typecheck-final.log",
+      "result": "pass",
+      "sha256": "9b806551a727ff9f9eec8de2739b3a5dd7929f84cd9cf0523039dc41ae6375ce"
+    },
+    {
+      "log": "lint-final.log",
+      "result": "pass",
+      "sha256": "a410ca93a80b3f6d79866340973de241518b1e6d0587b2570ec254efd8dbe477"
+    },
+    {
+      "log": "content-final.log",
+      "result": "pass",
+      "sha256": "8393d57c539d963a938ac86e4b6b73e837b53b1c881fa98b649184913b44ccde"
+    },
+    {
+      "log": "art-final.log",
+      "result": "pass",
+      "sha256": "1c05a6b8969552eaf7558cf8c794650c22896ab2062826ad4db52f3f8f4e05fa"
+    },
+    {
+      "log": "build.log",
+      "result": "pass",
+      "sha256": "c9deac977beb08f071a6bded43bbe3ef77472d12632055b34a44962a31ed5a46"
+    },
+    {
+      "log": "full-headless-c.log",
+      "result": "fail:1937/1938, Epic60.606s/60s",
+      "sha256": "e100e931c5922ae957174ff52b43f64ac6522c08726abef5b3e8922fd3baa97f"
+    },
+    {
+      "log": "browser-gameplay.log",
+      "result": "pass:25/25,2.4m",
+      "sha256": "d20b252dda3a39d24505ef59b94846e70c2879bc821ad55582929bf395c8caf6"
+    },
+    {
+      "log": "browser-pages.log",
+      "result": "pass:27/27,28.0s",
+      "sha256": "a84ec7a4ada20dfe036d3eca3a68be8c13bc00c77c5afba80ed04605ae6d8c1c"
+    }
+  ]
+}

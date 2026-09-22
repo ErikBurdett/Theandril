@@ -17,6 +17,7 @@ import { armyCanFound, effectiveArmyMovement, armySight, armyUpkeep, createArmyF
 import { armyTerrainBlocker, carriedArmyBlocker, disembarkArmy, embarkArmy, moveFleetCargo, navalLaunchCell, observeProductionOptions, productionRequirementBlocker } from './naval';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './rules';
 import { factionStarts } from './faction-starts';
+import { sortedExploredCells } from './canonical-cells';
 import { applyLandCommand, emptyLandState, getLandObservation, handleLandCapture, initializeSettlementLand, landCommandSchemas, landCommandV15Schemas, observeLandCell, refreshLandKnowledge, resolveLandTurn, settlementLandYield, type LandDetails } from './territory';
 import { advanceCharacters, armyHasCharacterMission, assignCharacter, cancelCharacterMission, characterUpkeep, getCharacterObservation, observeCommanderAbilities, promoteCharacter, recruitCharacter, reconcileCharacterMissions, removeArmyCharacters, startCharacterMission, unassignCharacter, useCommanderAbility } from './characters';
 import { emptyArcaneResearch, observeArcaneResearch, researchArcane } from './magic';
@@ -571,7 +572,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     routes: Object.values(state.routes).filter(route => state.armies[route.armyId]?.factionId === factionId).sort((a, b) => a.armyId < b.armyId ? -1 : 1).map(route => ({ ...route, path: [...route.path], waypoints: [...route.waypoints], knownHostileIds: [...route.knownHostileIds] })),
     settlements: settlements.map(settlement => ({ ...settlement, buildings: [...settlement.buildings].sort(), food: settlement.factionId === factionId ? settlement.food : 0, queue: settlement.factionId === factionId ? settlement.queue.map(item => ({ ...item })) : [] })),
     events: state.events.filter(event => event.factionId === factionId).map(event => ({ ...event })),
-    cells: [...(state.explored[factionId] ?? [])].sort((a, b) => a - b).map(cell => {
+    cells: sortedExploredCells(state.explored[factionId] ?? []).map(cell => {
       const known = knownLand?.[cell], resourceId = modern ? state.resources.deposits[cell] : undefined;
       // Build one detached object without spreading several temporary objects per
       // explored cell. Preserve optional-field presence and publication key order.

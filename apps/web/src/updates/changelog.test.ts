@@ -6,8 +6,11 @@ import { initialVisibleCommits, renderMarkdown } from './changelog';
 import { buildFeed, gitNumstatArguments } from '../../../../scripts/build-changelog';
 
 describe('master changelog feed', () => {
+  // Each build runs git show over every first-parent commit; build twice (for the
+  // determinism check) and share the result rather than building a third time.
+  let generated: ReturnType<typeof buildFeed>;
   it('is deterministic and the committed feed is an exact record from its newest commit back to the root', () => {
-    const generated = buildFeed();
+    generated = buildFeed();
     expect(buildFeed()).toEqual(generated);
     // A commit cannot contain its own hash, so the committed feed may lag by the commits made after it
     // was generated; everything it does record must match Git exactly (rewritten notes/history fail here).
@@ -19,7 +22,7 @@ describe('master changelog feed', () => {
   it('does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift', () => {
     // A fresh CI clone abbreviates to 8+ characters and may apply different autocrlf/attribute settings;
     // the feed must be identical from any checkout of the same history.
-    for (const entry of buildFeed()) expect(entry.shortSha).toBe(entry.sha.slice(0, 7));
+    for (const entry of generated ?? buildFeed()) expect(entry.shortSha).toBe(entry.sha.slice(0, 7));
     expect(gitNumstatArguments('abc')).toEqual(['-c', 'core.autocrlf=false', '-c', 'core.safecrlf=false', '-c', 'diff.algorithm=myers', 'show', '--format=', '--numstat', '--no-renames', '--ignore-cr-at-eol', 'abc']);
   });
 });

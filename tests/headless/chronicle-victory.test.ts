@@ -1,13 +1,13 @@
 import { expect, test } from 'vitest';
 import { deepStrictEqual } from 'node:assert';
-import { createGame, getObservation, stateHash, type GameCommand } from '../../packages/sim/src/index';
+import { createGame, deserializeGame, getObservation, stateHash, type GameCommand } from '../../packages/sim/src/index';
 import { aiObservationOptions, planTurn } from '../../packages/ai/src/index';
 import { applyRecordedCommand, createArchive, generateChronicles, replayArchive } from '../../packages/chronicle/src/index';
 import { deserializeCampaign, serializeCampaign } from '../../packages/persistence/src/index';
 
-// The schema9 863-turn Epic case takes about40s in isolation: it mirrors every
-// post500 order and replays the complete technical history twice. Give this
-// archive integration test its own wall-time budget; keep all turn/count gates.
+// The Epic case plays about 900 turns: it mirrors every post-500 order and
+// replays the complete history once. Give this archive integration test its own
+// wall-time budget; keep all turn/count gates.
 test.each(['short', 'epic'] as const)('generated-start %s AI victory produces complete factual logs identical after archive save/resume', pace => {
   const game = createGame({ seed: 20260905, size: 'tiny', factionCount: 4, pace });
   const archive = createArchive(game, { mode: 'watch' });
@@ -68,5 +68,12 @@ test.each(['short', 'epic'] as const)('generated-start %s AI victory produces co
   expect(documents.technicalPages[0]?.text).toContain('settlement_founded');
   expect(documents.technicalPages.at(-1)?.turn).toBe(game.turn);
   expect(technical.finalHash).toBe(stateHash(game));
-  expect(stateHash(replayArchive({ ...archive, initialSave: JSON.stringify(technical.initialSnapshot), initialHash: technical.initialHash, records: technical.records }))).toBe(stateHash(game));
+  // The technical download must carry the complete replay input. Its key-sorted
+  // snapshot must load to the archived starting seal, and its records must equal
+  // the restored archive that was already replayed to the final seal above.
+  // Replay parses each command and compares results order-insensitively, so this
+  // proves the download replays identically without a second full replay.
+  expect(technical.initialHash).toBe(archive.initialHash);
+  expect(stateHash(deserializeGame(JSON.stringify(technical.initialSnapshot)))).toBe(archive.initialHash);
+  deepStrictEqual(technical.records, restored.archive.records);
 }, 60_000);

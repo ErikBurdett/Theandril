@@ -11,6 +11,7 @@ import { planLand } from './land';
 import { recruitmentRoster } from './recruitment';
 import { planRoadAcceleration } from './roads';
 import { settlementSpacing, settlementSiteValue } from './expansion';
+import { observedCells } from './observation-index';
 
 export { chooseCaptureOption } from './conquest';
 export { aiObservationOptions, landPlanningTowns, LAND_PLANNING_TOWN_LIMIT } from './observation-options';
@@ -57,7 +58,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       reasons.push(`Sell ${amount} ${surplus.name} at the quoted ${surplus.salePrice} coin each, retaining six for development. Proceeds enter the next planning purse.`);
     }
   }
-  const cells = new Map(view.cells.map(cell => [cell.cell, cell]));
+  const cells = observedCells(view);
   const ownSettlements = view.settlements.filter(town => town.factionId === factionId);
   const allOwnArmies = view.armies.filter(army => army.factionId === factionId);
   const ownArmies = allOwnArmies.filter(army => army.domain !== 'naval' && !army.carrierId);

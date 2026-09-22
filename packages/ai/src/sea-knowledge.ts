@@ -1,5 +1,6 @@
 import { neighbors, TERRAIN } from '@theandril/mapgen';
 import type { Observation } from '@theandril/sim';
+import { observedCells } from './observation-index';
 
 export const MAX_WATER_KNOWLEDGE_NODES = 8192;
 export type BasinStatus = 'open' | 'enclosed' | 'unknown';
@@ -7,7 +8,7 @@ export type BasinRelation = 'connected' | 'separate' | 'unknown';
 
 /** A proof about observed geography, not the hidden canonical water components. */
 export function createSeaKnowledge(view: Pick<Observation, 'cells' | 'width' | 'height'>,
-  cells: ReadonlyMap<number, Observation['cells'][number]> = new Map(view.cells.map(cell => [cell.cell, cell]))) {
+  cells: ReadonlyMap<number, Observation['cells'][number]> = observedCells(view)) {
   interface Component { parent: Component | null; queue: number[]; cursor: number; unknownBoundary: boolean; edge: boolean; shallow: boolean }
   // Adaptive to charted input, never world area. Every node is expanded at most
   // once across all requests; partial connected paths remain useful at the cap.

@@ -1,0 +1,26 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ packages/sim/src/visibility-publication-equivalence.test.ts (34 tests | 1 failed) 175ms
+   × one sight gain traverses its radius-three disk once while updating all three memory layers 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/sim/src/visibility-publication-equivalence.test.ts > one sight gain traverses its radius-three disk once while updating all three memory layers
+AssertionError: expected undefined to be defined
+ ❯ packages/sim/src/visibility-publication-equivalence.test.ts:25:40
+     23|   expect(visits.mock.calls.length).toBeLessThanOrEqual(19);
+     24|   expect(game.explored[owner]!.has(748)).toBe(true);
+     25|   expect(game.land.known[owner]![748]).toBeDefined();
+       |                                        ^
+     26|   expect(game.roads.known[owner]![748]).toBeDefined();
+     27| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 67 passed (68)
+   Start at  21:24:25
+   Duration  969ms (transform 1.06s, setup 0ms, import 1.69s, tests 1.05s, environment 0ms)
+

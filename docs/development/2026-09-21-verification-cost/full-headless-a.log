@@ -1,0 +1,140 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ apps/web/src/updates/changelog.test.ts (6 tests | 2 failed) 15ms
+     × is deterministic and the committed feed is an exact record from its newest commit back to the root 7ms
+     × does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift 4ms
+ ❯ tests/tooling/pages-journal.test.ts (2 tests | 1 failed) 2060ms
+   × the actual Pages suite collects journal journeys alongside game and navigation smoke 2054ms
+ ❯ apps/web/src/updates/validation.test.ts (5 tests | 2 failed) 43ms
+   × links evidence that really exists at the pinned Git revision, not just on disk 11ms
+   × rejects a missing object at one of two revisions sharing an evidence path 13ms
+ ❯ apps/web/src/updates/roadmap.test.ts (5 tests | 1 failed) 32ms
+     × resolves every evidence file at the declared immutable source snapshot 17ms
+ ❯ tests/headless/chronicle-victory.test.ts (2 tests | 1 failed) 64736ms
+   × generated-start epic AI victory produces complete factual logs identical after archive save/resume 61844ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/headless/chronicle-victory.test.ts > generated-start epic AI victory produces complete factual logs identical after archive save/resume
+Error: Test timed out in 60000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/headless/chronicle-victory.test.ts:11:37
+      9| // post500 order and replays the complete technical history twice. Giv…
+     10| // archive integration test its own wall-time budget; keep all turn/co…
+     11| test.each(['short', 'epic'] as const)('generated-start %s AI victory p…
+       |                                     ^
+     12|   const game = createGame({ seed: 20260905, size: 'tiny', factionCount…
+     13|   const archive = createArchive(game, { mode: 'watch' });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/tooling/pages-journal.test.ts > the actual Pages suite collects journal journeys alongside game and navigation smoke
+Error: spawnSync pnpm EPERM
+ ❯ tests/tooling/pages-journal.test.ts:14:19
+     12|
+     13| test('the actual Pages suite collects journal journeys alongside game …
+     14|   const listing = execFileSync('pnpm', ['exec', 'playwright', 'test', …
+       |                   ^
+     15|   expect(listing).toContain('updates.spec.ts');
+     16|   expect(listing).toContain('home.spec.ts');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  apps/web/src/updates/changelog.test.ts > master changelog feed > is deterministic and the committed feed is an exact record from its newest commit back to the root
+Error: spawnSync git EPERM
+ ❯ git scripts/build-changelog.ts:7:36
+      5|
+      6| const root = resolve(import.meta.dirname, '..');
+      7| const git = (...args: string[]) => execFileSync('git', args, { cwd: ro…
+       |                                    ^
+      8|
+      9| /** Numstat must not vary with the clone: autocrlf/attributes, rename …
+ ❯ buildFeed scripts/build-changelog.ts:16:10
+ ❯ apps/web/src/updates/changelog.test.ts:10:23
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  apps/web/src/updates/changelog.test.ts > master changelog feed > does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift
+Error: spawnSync git EPERM
+ ❯ git scripts/build-changelog.ts:7:36
+      5|
+      6| const root = resolve(import.meta.dirname, '..');
+      7| const git = (...args: string[]) => execFileSync('git', args, { cwd: ro…
+       |                                    ^
+      8|
+      9| /** Numstat must not vary with the clone: autocrlf/attributes, rename …
+ ❯ buildFeed scripts/build-changelog.ts:16:10
+ ❯ apps/web/src/updates/changelog.test.ts:22:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  apps/web/src/updates/roadmap.test.ts > the source-backed roadmap contract > resolves every evidence file at the declared immutable source snapshot
+AssertionError: docs/IMPLEMENTATION_STATUS.md: expected [Function] to not throw an error but 'Error: spawnSync git EPERM' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"Error: spawnSync git EPERM"
+
+ ❯ apps/web/src/updates/roadmap.test.ts:52:129
+     50|     for (const path of paths) {
+     51|       expect(path).not.toMatch(/(^\/|\.\.|\\|^https?:|[?#])/);
+     52|       expect(() => execFileSync('git', ['cat-file', '-e', `${roadmapSn…
+       |                                                                                                                                 ^
+     53|     }
+     54|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  apps/web/src/updates/validation.test.ts > links evidence that really exists at the pinned Git revision, not just on disk
+AssertionError: 1e41ec24965e46e8035c57b4f54632a690b8b712:docs/updates/campaign-foundation-work-packet.md: expected [Function] to not throw an error but 'Error: spawnSync git EPERM' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"Error: spawnSync git EPERM"
+
+ ❯ validateEvidence apps/web/src/updates/validation.test.ts:42:98
+     40|     expect(revision).toMatch(/^[a-f0-9]{40}$/);
+     41|     expect(path).not.toMatch(/(^\/|\.\.|\\|^https?:|[?#])/);
+     42|     expect(() => execFileSync('git', ['cat-file', '-e', object], { std…
+       |                                                                                                  ^
+     43|     expect(evidenceUrl(path, revision)).toBe(`https://github.com/ErikB…
+     44|   }
+ ❯ apps/web/src/updates/validation.test.ts:48:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  apps/web/src/updates/validation.test.ts > rejects a missing object at one of two revisions sharing an evidence path
+AssertionError: expected [Function] to not throw an error but 'Error: spawnSync git EPERM' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"Error: spawnSync git EPERM"
+
+ ❯ apps/web/src/updates/validation.test.ts:59:110
+     57|   const present = { ...dispatches[0]!, sourceRevision: presentRevision…
+     58|   expect(() => execFileSync('git', ['cat-file', '-e', `${missingRevisi…
+     59|   expect(() => execFileSync('git', ['cat-file', '-e', `${presentRevisi…
+       |                                                                                                              ^
+     60|   expect(() => validateEvidence([missing, present])).toThrow(`${missin…
+     61|   expect(() => validateEvidence([present, missing])).toThrow(`${missin…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  5 failed | 218 passed (223)
+      Tests  7 failed | 1910 passed (1917)
+   Start at  21:27:04
+   Duration  85.01s (transform 21.05s, setup 0ms, import 85.80s, tests 587.81s, environment 23ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

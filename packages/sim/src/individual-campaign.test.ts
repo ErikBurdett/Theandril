@@ -115,7 +115,9 @@ describe('individual battles across the campaign boundary', () => {
 
   it('completed development snapshots retain a legal earned branch rather than accepting prerequisite-free stats', () => {
     const state = characterBattleCampaign(); begin(state); issue(state, { type: 'autoResolveBattle', factionId: own });
-    const forged = restored(state), report = forged.battleReports.at(-1)!, snapshot = report.developmentSnapshots![0]!;
+    // Recorded reports are sealed (frozen) history; forge a detached copy in its place.
+    const forged = restored(state), report = structuredClone(forged.battleReports.at(-1)!), snapshot = report.developmentSnapshots![0]!;
+    forged.battleReports[forged.battleReports.length - 1] = report;
     snapshot.trainingIds = ['training.breakthrough'];
     expect(() => battleDevelopmentEffects(snapshot)).toThrow('prerequisites');
     const effects = DEVELOPMENT_NODES.find(node => node.id === 'training.breakthrough')!.effects, formation = [...report.combat.attacker, ...report.combat.defender].find(item => item.id === snapshot.formationId)!;

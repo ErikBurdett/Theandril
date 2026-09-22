@@ -1,0 +1,36 @@
+[WebServer] (node:2408751) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2408806) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 25 tests using 1 worker
+
+(node:2410568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/battle-defense.spec.ts:59:1 › R03 public attack previews the canonical contingent and leaves its reserve on the map (2.6s)
+  ✓   2 tests/gameplay/battle-defense.spec.ts:80:1 › R03 siege preview fits 390px and desktop public assaults clear reserves before capture (3.5s)
+  ✓   3 tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls (2.9s)
+  ✓   4 tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text (3.8s)
+  ✓   5 tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory (16.1s)
+  ✓   6 tests/gameplay/chronicles.spec.ts:88:1 › a human researches, adopts distinct policies, starts a public project and reads an honestly partial imported history (3.1s)
+  ✓   7 tests/gameplay/contact.spec.ts:5:1 › world-size recommendations expose generated seats honestly and a chosen faction count survives manual save and reload (2.3s)
+  ✓   8 tests/gameplay/contact.spec.ts:34:1 › the recorded Standard Long seed with recommended density makes real faction contact through responsive AI watch (19.6s)
+  ✓   9 tests/gameplay/diplomacy.spec.ts:13:1 › review a funded peace package, receive AI acceptance, and restore the binding treaty (3.7s)
+  ✓  10 tests/gameplay/diplomacy.spec.ts:53:1 › a human can accept an incoming proposal and receive its actual payment (1.4s)
+  ✓  11 tests/gameplay/diplomacy.spec.ts:68:1 › an unfundable incoming offer explains its blocker and remains rejectable (1.4s)
+  ✓  12 tests/gameplay/land-query.spec.ts:71:1 › selected-town queries are reused for tile clicks and fast registry changes never retain another town’s options (4.9s)
+  ✓  13 tests/gameplay/land-query.spec.ts:99:1 › same-turn land orders refresh quotes, cancellation spends honestly and saved pending work restores at narrow width (5.6s)
+  ✓  14 tests/gameplay/land-query.spec.ts:148:1 › a mature thirty-two-town empire transfers summaries and opens only the searched town detail (7.3s)
+  ✓  15 tests/gameplay/land.spec.ts:39:1 › territory clicks, paid work, cultivation and saved continuation remain playable at narrow width (8.6s)
+  ✓  16 tests/gameplay/land.spec.ts:117:1 › capital designation is paid and independent of colony, settlement and city size (2.8s)
+  ✓  17 tests/gameplay/movement.spec.ts:70:1 › canvas selects and cycles friendly units, previews bounded multi-step movement, and distinguishes dragging from orders (4.2s)
+  ✓  18 tests/gameplay/movement.spec.ts:103:1 › map targeting refuses implicit war and impassable land, then executes a multi-step field attack without issuing locked orders (5.1s)
+  ✓  19 tests/gameplay/movement.spec.ts:130:1 › queued waypoints consume current movement, survive save/load, continue after the round, and cancel through the real controls (6.7s)
+  ✓  20 tests/gameplay/movement.spec.ts:170:1 › map settlement targeting requires siege instead of bypassing defenses and inspection names the visible biome (3.8s)
+  ✓  21 tests/gameplay/movement.spec.ts:194:1 › a saved route interrupted by a real foreign move retains its reason and safely replans on resume (4.0s)
+  ✓  22 tests/gameplay/movement.spec.ts:217:1 › narrow touch map moves on taps and keyboard route controls remain usable without hover (2.5s)
+  ✓  23 tests/gameplay/naval.spec.ts:51:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker (10.6s)
+  ✓  24 tests/gameplay/naval.spec.ts:107:1 › harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet (6.2s)
+  ✓  25 tests/gameplay/naval.spec.ts:143:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships (7.3s)
+
+  25 passed (2.4m)

@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-09-22T03:05:36.862985+00:00",
+  "scope": "Only ACT-18 progress/status and DH-015 progress/history changed; deployed facts and all unrelated records preserved. Direct local build under tracker run.lock; no polling, weekly writer, inventory or external publication.",
+  "records": [
+    {
+      "id": "ACT-18",
+      "status": "doing"
+    },
+    {
+      "id": "DH-015",
+      "status": "open"
+    }
+  ],
+  "note": "Local development on fix/campaign-verification-cost at base 4ce95ae implements reviewed movement indexing, sight-disk reuse and exact AI destination selection. The unchanged full suite passes 1,937/1,938 tests across 223/224 files in 82.48 s; Epic archive remains the sole failure at 60.606 s against 60. No timeout, worker cap, activity threshold, rule/save17 or content b79c78ed change. Typecheck, lint, content/art validation and production build pass. This candidate is local and uncommitted, with no new hosted run or deployment. DH-015 and M0 remain open; two full local passes and a complete hosted green run are still required. Evidence: /home/telephoneheater/Work/Theandril/docs/development/2026-09-21-verification-cost/README.md",
+  "files": [
+    {
+      "path": "/home/telephoneheater/Projects/DHARMA/dharma-tracker/data/actions.json",
+      "beforeSha256": "6df22599d89bcfe3eac9e4bff1cc3a178dd12379de839f28d488556e6bb5a2ed",
+      "afterSha256": "f73d851e01ff7d63cdfd720725962eafdd72234c24f18306d02d29d1116790c0"
+    },
+    {
+      "path": "/home/telephoneheater/Projects/DHARMA/dharma-tracker/data/issues.json",
+      "beforeSha256": "746fd4d0154c3b5b1673560eed15255930df385d30471af245b598148a90f712",
+      "afterSha256": "7f21393ff1f48018d35ebf53d2d92915deed31081505e5c7b1ada2fe0c563d2d"
+    }
+  ],
+  "renderedPages": [
+    {
+      "path": "/home/telephoneheater/Projects/DHARMA/dharma-tracker/site/projects/Theandril/index.html",
+      "containsLocalTiming": true,
+      "sha256": "b879e83f886a951bf4e7b55fd4a75f6e6f657175e93e250fb370ccf76aaf58d4"
+    },
+    {
+      "path": "/home/telephoneheater/Projects/DHARMA/dharma-tracker/site/next/index.html",
+      "containsLocalTiming": true,
+      "sha256": "3763df9cba9ce8a1194fe9214e4781b244db5b26f32cd39d9916447c3584985a"
+    },
+    {
+      "path": "/home/telephoneheater/Projects/DHARMA/dharma-tracker/site/issues/index.html",
+      "containsLocalTiming": true,
+      "sha256": "af238926b64914a6171b8ae31a04c151aaf8b6a21a42d3e40fa6c3b0772604f2"
+    }
+  ]
+}

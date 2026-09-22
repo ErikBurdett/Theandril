@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useState } from 'react';
+import { Fragment, StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { SiteShell } from './SiteShell';
 import { evidenceUrl, localUrl } from './journal';
@@ -18,7 +18,7 @@ function Text({ nodes, sourcePath }: { nodes: readonly Inline[]; sourcePath?: st
   if (node.type === 'strong') return <strong key={key}>{node.value}</strong>; if (node.type === 'em') return <em key={key}>{node.value}</em>; if (node.type === 'code') return <code key={key}>{node.value}</code>;
   if (node.type === 'wikilink') { const target = books.find(book => book.id === 'broken-roads')!.documents.find(document => document.title === node.target || document.id === node.target.toLocaleLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')); return target ? <a key={key} href={loreUrl('broken-roads', target.id)}>{node.label}</a> : <span key={key}>{node.label}</span>; }
   if (node.type === 'link') { const href = node.href.replace(/^<|>$/g, ''); const path = sourcePath && !href.startsWith('/') ? new URL(href, `https://source.invalid/${sourcePath}`).pathname.slice(1) : href; return <a key={key} href={href.startsWith('http') || href.startsWith('#') ? href : evidenceUrl(path)}>{node.label}</a>; }
-  return <>{node.value}</>;
+  return <Fragment key={key}>{node.value}</Fragment>;
 })}</> }
 function Blocks({ document }: { document: Document }) { return <>{document.blocks.map((block, index) => {
   const key = `${block.type}-${index}`;

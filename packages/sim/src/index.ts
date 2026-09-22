@@ -21,7 +21,7 @@ export type { RoadState, RoadObservation } from './roads';
 export type { FactionProgression, ProgressionObservation, VictoryProject, Victory } from './progression';
 export { getProgressionObservation } from './progression';
 export type { MovementRoute, MovementPreview, MovementQuery } from './movement';
-export { getMovementQuery, getMovementPreview, MAX_PATH_NODES, MAX_ROUTE_CELLS, MAX_WAYPOINTS } from './movement';
+export { createRoutePreviewer, getMovementQuery, getMovementPreview, MAX_PATH_NODES, MAX_ROUTE_CELLS, MAX_WAYPOINTS } from './movement';
 export type { DiplomacyState, DiplomacyObservation, PeaceTerms, PeaceOffer, PeaceTreaty, DiplomaticRelation, PeaceAssessment } from './diplomacy';
 export { previewPeace, evaluatePeaceOffer } from './diplomacy';
 export type { RulesVersion } from './rules';

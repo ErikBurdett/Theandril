@@ -25,6 +25,7 @@ interface Knowledge {
   battleLimit: number;
   defendingFormations(armies: Army[]): number;
   terrainBlocker(cell: number): string | null;
+  canTraverse(cell: number): boolean;
   width: number; height: number; factionId: string; army: Army | undefined; wars: Set<string>;
   terrain(cell: number): number | undefined; armies(cell: number): Army[]; townOwner(cell: number): string | undefined;
   route: MovementRoute | undefined; strategicBlocker: string | null; besieging: boolean;
@@ -36,41 +37,62 @@ const formationCount = (armies: Army[]): number => armies.reduce((sum, army) => 
 const blocked = (state: GameState): string | null => state.victory ? 'This campaign has ended in victory.' : state.battle ? 'Resolve the pending battle first.' : state.pendingCapture ? 'Resolve the settlement capture first.' : null;
 
 /** Index one detached observation once, not once for every hovered hex. */
-const observed = new WeakMap<Observation, { terrain: Map<number, number>; roads: Map<number, number>; depths: Map<number, number>; armies: Map<number, Army[]>; towns: Map<number, string>; defenses: Map<string, number> }>();
+const observed = new WeakMap<Observation, { cells: Map<number, { terrain: number; depth: number }>; roads: Map<number, number>; armies: Map<number, Army[]>; towns: Map<number, string>; defenses: Map<string, number> }>();
 function observedKnowledge(view: Observation, armyId: string): Knowledge {
   let known = observed.get(view);
   if (!known) {
-    known = { terrain: new Map(view.cells.map(item => [item.cell, item.terrain])), roads: new Map(view.cells.filter(item => item.roadMask).map(item => [item.cell, item.roadMask!])), depths: new Map(view.cells.map(item => [item.cell, item.waterDepth])), armies: new Map(), towns: new Map(view.settlements.map(town => [town.cell, town.factionId])), defenses: new Map(view.armies.flatMap(army => army.battleDefense ? [[army.id, army.battleDefense.engagedFormations] as const] : [])) };
+    known = { cells: new Map(), roads: new Map(), armies: new Map(), towns: new Map(view.settlements.map(town => [town.cell, town.factionId])), defenses: new Map(view.armies.flatMap(army => army.battleDefense ? [[army.id, army.battleDefense.engagedFormations] as const] : [])) };
+    // Copy geography values: the cached index must not retain mutable view cells.
+    for (const item of view.cells) {
+      known.cells.set(item.cell, { terrain: item.terrain, depth: item.waterDepth });
+      if (item.roadMask) known.roads.set(item.cell, item.roadMask);
+    }
     for (const army of view.armies) { if (army.carrierId) continue; const occupants = known.armies.get(army.cell) ?? []; occupants.push(army); known.armies.set(army.cell, occupants); }
     observed.set(view, known);
   }
   const index = known;
   const army = view.armies.find(army => army.id === armyId && army.factionId === view.factionId);
-  return { legacy: false, battleLimit: 20, terrainBlocker: cell => travelTerrainBlocker(army?.domain ?? 'land', army?.canEnterDeepWater ?? false, index.terrain.get(cell) ?? 0, index.depths.get(cell) ?? 0), width: view.width, height: view.height, factionId: view.factionId, army, wars: new Set(view.wars),
+  const domain = army?.domain ?? 'land', ocean = army?.canEnterDeepWater ?? false;
+  return { legacy: false, battleLimit: 20, terrainBlocker: cell => { const item = index.cells.get(cell); return travelTerrainBlocker(domain, ocean, item?.terrain ?? 0, item?.depth ?? 0); },
+    canTraverse: cell => { const item = index.cells.get(cell); return item?.terrain !== undefined && !travelTerrainBlocker(domain, ocean, item.terrain, item.depth ?? 0); }, width: view.width, height: view.height, factionId: view.factionId, army, wars: new Set(view.wars),
     // Click travel targets the first stable ID. Only the canonical preview permits
     // a smaller contingent; historical/no-preview observations retain the full cap.
     defendingFormations: armies => index.defenses.get([...armies].sort(compareId)[0]?.id ?? '') ?? formationCount(armies),
-    stepCost: (from, to) => hasRoadEdge(from, to, view.width, index.roads.get(from) ?? 0) ? 1 : stepCost(index.terrain.get(to) ?? 0),
-    terrain: cell => index.terrain.get(cell), armies: cell => index.armies.get(cell) ?? [], townOwner: cell => index.towns.get(cell), route: view.routes.find(route => route.armyId === armyId),
+    stepCost: (from, to) => {
+      const cost = stepCost(index.cells.get(to)?.terrain ?? 0);
+      if (cost === 1) return cost;
+      const mask = index.roads.get(from) ?? 0;
+      return mask && hasRoadEdge(from, to, view.width, mask) ? 1 : cost;
+    },
+    terrain: cell => index.cells.get(cell)?.terrain, armies: cell => index.armies.get(cell) ?? [], townOwner: cell => index.towns.get(cell), route: view.routes.find(route => route.armyId === armyId),
     strategicBlocker: view.victory ? 'This campaign has ended in victory.' : view.battle ? 'Resolve the pending battle first.' : view.pendingCapture ? 'Resolve the settlement capture first.' : view.armies.find(army => army.id === armyId)?.movementBlocker ?? null,
     besieging: view.sieges.some(siege => siege.armyId === armyId),
   };
 }
 function canonicalKnowledge(state: GameState, factionId: string, armyId: string): Knowledge {
   const index = indexes(state); const visible = index.visible.get(factionId); const army = state.armies[armyId];
-  return { legacy: rulesVersion(state) < 6, battleLimit: rulesVersion(state) < 8 ? 12 : 20, terrainBlocker: cell => army ? armyTerrainBlocker(state, army, cell) : 'Unknown army.', width: state.world.width, height: state.world.height, factionId, army: army?.factionId === factionId ? army : undefined,
+  // Search runs before command mutation. These capabilities stay fixed for this
+  // query, so do not rescan every fleet formation for each candidate edge.
+  const version = rulesVersion(state), domain = army ? armyDomain(army) : 'land', ocean = army ? fleetCanEnterDeepWater(state, army) : false;
+  const terrainBlocker = (cell: number) => !army ? 'Unknown army.' : version < 8 ? armyTerrainBlocker(state, army, cell) : travelTerrainBlocker(domain, ocean, state.world.terrain[cell] ?? 0, state.world.waterDepth[cell] ?? 0);
+  return { legacy: version < 6, battleLimit: version < 8 ? 12 : 20, terrainBlocker,
+    canTraverse: cell => Boolean(state.explored[factionId]?.has(cell) && state.world.terrain[cell] !== undefined && !terrainBlocker(cell)), width: state.world.width, height: state.world.height, factionId, army: army?.factionId === factionId ? army : undefined,
     defendingFormations: armies => formationCount(rulesVersion(state) >= 17 ? selectDefendingArmies(armies, [...armies].sort(compareId)[0]?.id) : armies),
     wars: new Set(state.wars.filter(pair => pair.includes(factionId)).map(pair => pair[0] === factionId ? pair[1] : pair[0])),
     terrain: cell => state.explored[factionId]?.has(cell) ? state.world.terrain[cell] : undefined,
-    stepCost: (from, to) => rulesVersion(state) >= 12 && hasRoadEdge(from, to, state.world.width, state.roads.known[factionId]?.[from] ?? 0) ? 1 : stepCost(state.world.terrain[to] ?? 0),
+    stepCost: (from, to) => {
+      const cost = stepCost(state.world.terrain[to] ?? 0);
+      if (cost === 1 || version < 12) return cost;
+      const mask = state.roads.known[factionId]?.[from] ?? 0;
+      return mask && hasRoadEdge(from, to, state.world.width, mask) ? 1 : cost;
+    },
     armies: cell => visible?.has(cell) ? [...(index.armies.get(cell) ?? [])].map(id => state.armies[id]).filter((army): army is Army => Boolean(army)) : [],
     townOwner: cell => visible?.has(cell) ? state.settlements[index.settlements.get(cell) ?? '']?.factionId : undefined,
     route: state.routes[armyId], strategicBlocker: blocked(state) ?? carriedArmyBlocker(state, armyId) ?? (armyHasCharacterMission(state, armyId) ? 'Cancel the active character mission before moving this army.' : null), besieging: Object.values(state.sieges).some(siege => siege.armyId === armyId),
   };
 }
 function mayEnter(knowledge: Knowledge, cell: number, attackTarget?: number): boolean {
-  const terrain = knowledge.terrain(cell);
-  if (terrain === undefined || knowledge.terrainBlocker(cell)) return false;
+  if (!knowledge.canTraverse(cell)) return false;
   const owner = knowledge.townOwner(cell);
   if (owner && owner !== knowledge.factionId) return false;
   return !knowledge.armies(cell).some(army => army.factionId !== knowledge.factionId) || cell === attackTarget;
@@ -122,7 +144,9 @@ function plannedWaypoints(knowledge: Knowledge, target: number, append: boolean)
   while (waypoints[0] === knowledge.army?.cell) waypoints.shift();
   return waypoints;
 }
-function preview(knowledge: Knowledge, target: number, append = false, budget = { remaining: MAX_PATH_NODES }): MovementPreview {
+/** A failed, unlimited search from the army's cell has visited every cell it can reach. */
+interface RouteProof { component?: ReadonlyMap<number, number> }
+function preview(knowledge: Knowledge, target: number, append = false, budget = { remaining: MAX_PATH_NODES }, proof?: RouteProof): MovementPreview {
   const initialBudget = budget.remaining;
   const base: MovementPreview = { target, path: [], cost: 0, action: 'blocked', canMoveNow: false, canQueue: false, blocker: null, limited: false, expandedNodes: 0 };
   const deny = (blocker: string): MovementPreview => ({ ...base, blocker, expandedNodes: initialBudget - budget.remaining });
@@ -147,6 +171,7 @@ function preview(knowledge: Knowledge, target: number, append = false, budget = 
   const path: number[] = []; let cost = 0; let origin = army.cell;
   for (const waypoint of waypoints) {
     const result = search(knowledge, origin, waypoint, budget, Infinity, enemy ? target : undefined);
+    if (!result.reached && proof && !result.limited && !enemy && origin === army.cell) proof.component = result.costs;
     if (!result.reached) return { ...deny(result.limited ? 'The bounded route search reached its limit. Choose a closer waypoint.' : 'No safe route is known through explored terrain.'), limited: result.limited };
     path.push(...result.path); cost += result.cost; origin = waypoint;
     if (path.length > MAX_ROUTE_CELLS) return { ...deny('The route exceeds 256 hexes. Choose a closer destination.'), limited: true };
@@ -166,6 +191,28 @@ export function getMovementPreview(view: Observation, armyId: string, target: nu
   const knowledge = observedKnowledge(view, armyId), budget = { remaining: MAX_PATH_NODES };
   queryRange(knowledge, budget);
   return preview(knowledge, target, options?.append, budget);
+}
+
+/** Many route previews over one fixed observation, as a planner issues them.
+ * Each result equals getMovementPreview(view, armyId, target), except null. An
+ * army's knowledge and range budget are built once. After a failed search proves
+ * the army's complete reachable area, a later target outside it that holds no
+ * foreign army or town returns null: its preview could only be a blocked result,
+ * so the search is not repeated. Attack and siege targets are always previewed.
+ * The view must not change while the previewer is in use. */
+export function createRoutePreviewer(view: Observation): (armyId: string, target: number) => MovementPreview | null {
+  const armies = new Map<string, { knowledge: Knowledge; remaining: number; proof: RouteProof }>();
+  return (armyId, target) => {
+    let entry = armies.get(armyId);
+    if (!entry) {
+      const knowledge = observedKnowledge(view, armyId), budget = { remaining: MAX_PATH_NODES };
+      queryRange(knowledge, budget);
+      armies.set(armyId, entry = { knowledge, remaining: budget.remaining, proof: {} });
+    }
+    const { knowledge, proof } = entry;
+    if (proof.component && !proof.component.has(target) && !knowledge.townOwner(target) && !knowledge.armies(target).some(army => army.factionId !== knowledge.factionId)) return null;
+    return preview(knowledge, target, false, { remaining: entry.remaining }, proof.component ? undefined : proof);
+  };
 }
 
 /** Pure, bounded routing over permitted observations; no unseen world lookup is possible. */

@@ -1,0 +1,13 @@
+Full Chromium gameplay suite (pnpm test:gameplay), local. PLAYWRIGHT_CHROMIUM_EXECUTABLE = cached chromium_headless_shell-1234 (Playwright's pinned build 1243 is not installed on this machine).
+
+Run 1 on the final engine candidate: 180 passed, 2 failed, 14.8 minutes (real 14m48.368s).
+Failures in run 1:
+  1) tests/gameplay/campaign-menu.spec.ts:109:1 › top campaign disclosure works by keyboard and preserves real save, load, autosave and import controls
+  2) tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors
+
+Both failures reproduce identically on the pre-change baseline worktree with the same browser; campaign-menu also fails with system Chromium 152. They are pre-existing and not caused by this work:
+- lore.spec.ts: a React duplicate-key warning. Text returned an unkeyed fragment for plain-text nodes. Fixed in apps/web/src/updates/lore.tsx.
+- campaign-menu.spec.ts: a stale keyboard order. Commit 9243b09 made the Developer updates link the menu's first control. The test now asserts the real order.
+
+After the fixes: campaign-menu + lore 4/4 passed; public-site journeys (compendium, home, lore, updates, campaign-menu) 18/18 passed; Pages production smoke at /Theandril/ (playwright.pages.config.ts) 27/27 passed.
+Side effect: the gameplay run rewrote three committed docs/performance JSON files. They were restored to their committed contents.

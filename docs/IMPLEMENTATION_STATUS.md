@@ -1,5 +1,41 @@
 # Theandril implementation status
 
+## Campaign cost and test restructuring — local continuation, 2026-09-22
+
+This continues **ACT-18 / DH-015 / M0** on the same local branch, following the user's request to continue toward 1.0 and to simplify the code, improve efficiency and trim test cost. Rules/save stay **17** and content stays **`b79c78ed`**. No gameplay, schema, timeout or worker change was made.
+
+**Engine changes** are all exact. [Evidence](development/2026-09-22-campaign-cost/README.md).
+- **Route previewer:** 94% of the naval AI's route previews were repeated searches to unreachable water. A sim `createRoutePreviewer` now answers those from the first search that proves the army's reachable area.
+- **State hash:** it references remembered-land records that are already canonical instead of re-parsing them (54% of save bytes).
+- **Battle reports:** finished reports are sealed (deep-frozen) and their validated copy is reused.
+- **AI planners:** they share one observed-cell index.
+- **Observations:** they use the typed explored-cell sort.
+
+**Equivalence:** nine generated campaigns (125,026 AI commands, including all three Epic runs and the Standard/24 and Huge/32 contact maps) have **identical** command/result streams, per-turn hashes, final seals and save bytes compared with the pre-change candidate. In sequential idle runs, the archive Epic workload went from 23.7 s to 17.4 s and pacing Epic seed 74 from 31.2 s to 25.2 s. The Huge/32 contact workload went from 8.5 s to 8.0 s.
+
+**Tests:**
+- The Epic archive test's second full replay is replaced by an identity proof of the technical export.
+- Pacing campaigns are split into parallel files.
+- Contact probes skip unused land quotes.
+- The changelog reuses one git feed build.
+- Vitest now has `unit`, `campaigns` and `repository` projects. `pnpm test` still runs everything; `pnpm test:unit` is a fast loop (1,691 tests in 13.9 s locally).
+- 28 new regressions cover the previewer, the land fast path and sealed reports.
+
+**Results:** typecheck, lint, content validation and production build pass. The full Chromium gameplay suite passes 180/182. Its two failures also occur on the pre-change baseline: a lore React key bug, now fixed, and a stale menu keyboard-order test, now updated. Afterwards the affected journeys pass 4/4, the public-site journeys 18/18 and the Pages smoke 27/27. Two consecutive full runs pass **1,966/1,966** in 46.6 s and 47.3 s (baseline 80.6 s). Epic archive took **42.2 s and 43.3 s**, and the untouched original Epic test file also passes, at **48.5 s**, against 60 s.
+
+**Still open.** No hosted CI run or commit exists. The last hosted run measured the long tests 2.4–3.3× slower than local runs, so hosted per-test budgets are still at risk. **ACT-18, DH-015, M0 and all fifteen gates remain open.** The [design audit](development/2026-09-22-campaign-cost/design-audit.md) records simplification, efficiency and gameplay-depth proposals for M1 and M3 planning. Next:
+- Decide how hosted CI schedules the long campaign project.
+- Obtain an authorized hosted run.
+- Continue with M1: client contracts and contestable unification.
+
+## Campaign verification cost — local continuation, 2026-09-21
+
+The user's “okay go ahead” continues **ACT-18 / DH-015 / M0** on local branch `fix/campaign-verification-cost`, based on deployed `4ce95ae`. Three independently reviewed optimizations now reduce movement-query indexing, reuse the sight update's local disk, and select an AI destination without sorting the full candidate list when its comparison is pure and finite. Paths, blockers, callback behavior, fog memories, search budgets and saved results retain their captured contracts. **79 new regressions** cover those boundaries. Rules/save stay **17**, content stays **`b79c78ed`**; no gameplay, schema, dependency or art change. [Methods, measurements, rejected experiments and source manifest](development/2026-09-21-verification-cost/README.md).
+
+Final typecheck, lint, content/art validation and production build pass. The unchanged full headless suite is **1,937/1,938 tests across 223/224 files**, with Epic archive the sole failure at **60.606 seconds against 60**; the run takes 82.48 seconds overall. All **25/25 affected Chromium gameplay journeys** and **27/27 rebuilt production Pages checks** pass, including real saved movement, naval transport, territory, contact and chronicles. These are scoped local browser results, not full gameplay, cross-browser, hosted CI or release acceptance. [Full log](development/2026-09-21-verification-cost/full-headless-c.log), [gameplay](development/2026-09-21-verification-cost/browser-gameplay.log), [production Pages](development/2026-09-21-verification-cost/browser-pages.log).
+
+**M0, DH-015 and all fifteen whole gates remain open.** No timeout, worker cap, campaign activity requirement, workflow or historical seal was relaxed. DHARMA now marks **ACT-18 doing** and retains **DH-015 open**, with the actual local evidence. This checkpoint remains local and uncommitted; the public deployment remains `4ce95ae`, with no new hosted result. The [new developer packet](updates/campaign-verification-work-packet.md) is draft and the published journal's historical claims remain intact. Next: remove sufficient remaining Epic verification cost to obtain two consecutive unchanged full local passes and complete authorized hosted verification, then implement **M1 client contracts and contestable unification** under the [existing roadmap](1.0-DEVELOPMENT.md#active-development-roadmap). [Prompt report](development/prompt-reports/2026-09-21-verification-cost.md).
+
 ## Authorized development release — 2026-09-21
 
 The user's DHARMA tracker request now explicitly authorizes committing, reconciling branches and deploying the completed work. Implementation checkpoint **`1e41ec24965e46e8035c57b4f54632a690b8b712`** contains the reviewed September 21 naval fixes, deterministic campaign optimizations, regression fixtures and retained evidence. The fourth developer dispatch and existing roadmap now describe that checkpoint, while the three historical dispatches keep their original source pins. This is a development release; **M0, DH-015 and all fifteen whole 1.0 gates remain open**. Rules/save remain **17**, content remains **`b79c78ed`**. No new client-state, unification, magic, multiplayer or runtime-art feature is claimed.

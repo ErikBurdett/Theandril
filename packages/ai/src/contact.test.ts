@@ -5,6 +5,9 @@ import type { GameCommand, GameState, Observation } from '@theandril/sim';
 import { planTurn, planTurnWithReasons } from './index';
 import { createNavigation, MAX_FRONTIER_NODES } from './navigation';
 
+/** Contact probes read only visible armies and towns; skip per-town land and development quotes. */
+const contactProbe = { landDetails: 'none', developmentCandidates: false } as const;
+
 /** One real watch plan per faction per turn. No changed proposals or canonical input to AI. */
 function contactCampaign(size: MapSize, factionCount: number, limit: number) {
   const game = createGame({ seed: 748291, size, factionCount, pace: 'long' });
@@ -53,10 +56,10 @@ function contactCampaign(size: MapSize, factionCount: number, limit: number) {
         expect(stateHash(game)).toBe(before);
       }
       for (const command of proposals) { if (game.victory) break; issue(command); resolveDecisions(); }
-      observe(getObservation(game, faction.id));
+      observe(getObservation(game, faction.id, contactProbe));
     }
     if (!game.victory) issue({ type: 'endTurn', factionId: game.turnOwnerId });
-    for (const faction of game.factions) observe(getObservation(game, faction.id));
+    for (const faction of game.factions) observe(getObservation(game, faction.id, contactProbe));
     if (game.turn === 26) mirror = deserializeGame(serializeGame(game));
     // Preserve at least60 real rounds and exercise the all-seat assertion below.
     // Player contact can precede the last faction's next legal scouting order.

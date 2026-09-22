@@ -1,5 +1,6 @@
 import { hexDistance, isPassable, neighbors, TERRAIN, WATER_DEPTH } from '@theandril/mapgen';
 import { getMovementQuery, type Observation } from '@theandril/sim';
+import { observedCells } from './observation-index';
 
 type ObservedArmy = Observation['armies'][number];
 export const MAX_FRONTIER_NODES = 8192;
@@ -8,7 +9,7 @@ const costOf = (terrain: number): number => terrain === 2 || terrain === 3 ? 2 :
 
 /** Shared per-plan knowledge and work budget. Never reads a canonical world or hidden occupants. */
 export function createNavigation(view: Observation) {
-  const cells = new Map(view.cells.map(cell => [cell.cell, cell]));
+  const cells = observedCells(view);
   const occupied = new Set([...view.armies, ...view.settlements].filter(entity => entity.factionId !== view.factionId).map(entity => entity.cell));
   // A batch can reveal previously remembered enemies between proposals. Prove each immediate
   // journey through currently visible ground, so those revelations cannot invalidate its cost.
@@ -106,10 +107,17 @@ export function createNavigation(view: Observation) {
       // not redirect exploration. Shared claimed destinations still spread fleets.
       let salt = 0; for (let i = 0; i < tieIdentity.length; i++) salt = Math.imul(salt, 31) + tieIdentity.charCodeAt(i) | 0;
       const tie = (cell: number): number => (Math.imul(cell + 1, 1103515245) ^ salt) >>> 0;
-      candidates.sort((a, b) => (b.strategic + b.exploration) - (a.strategic + a.exploration)
+      const compare = (a: typeof candidates[number], b: typeof candidates[number]) => (b.strategic + b.exploration) - (a.strategic + a.exploration)
         || (explorationTieBreak?.(b.cell) ?? 0) - (explorationTieBreak?.(a.cell) ?? 0)
-        || b.cost - a.cost || tie(a.cell) - tie(b.cell) || a.cell - b.cell);
-      const best = candidates[0];
+        || b.cost - a.cost || tie(a.cell) - tie(b.cell) || a.cell - b.cell;
+      let best = candidates[0];
+      // Only the winning cell is consumed. With finite cached scores and no
+      // comparator callback, this is the exact minimum of the original order.
+      // Keep native sort for callbacks/nonfinite scores: their comparison order
+      // may be observable or may not define a transitive numeric ordering.
+      if ((explorationTieBreak === undefined || explorationTieBreak === null) && candidates.every(item => Number.isFinite(item.strategic) && Number.isFinite(item.exploration) && Number.isFinite(item.strategic + item.exploration))) {
+        for (let index = 1; index < candidates.length; index++) if (compare(candidates[index]!, best!) < 0) best = candidates[index];
+      } else best = candidates.sort(compare)[0];
       if (!best) return undefined;
       if (strategicScore || best.gain > 0) return best.cell;
       const step = frontierStep(army, claimed);

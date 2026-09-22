@@ -1,0 +1,25 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ packages/sim/src/visibility-publication-equivalence.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/sim/src/visibility-publication-equivalence.test.ts [ packages/sim/src/visibility-publication-equivalence.test.ts ]
+Error: Cannot find module '../../../..//docs/development/2026-09-21-verification-cost/visibility/corpus' imported from /home/telephoneheater/Work/Theandril/packages/sim/src/visibility-publication-equivalence.test.ts
+ ❯ packages/sim/src/visibility-publication-equivalence.test.ts:4:1
+      2| import { afterEach, expect, test, vi } from 'vitest';
+      3| import * as mapgen from '@theandril/mapgen';
+      4| import { capture, digest, lifecycle, makeGame } from '../../../..//doc…
+       | ^
+      5| import { indexes, updateSight } from './visibility';
+      6| import type { RulesVersion } from './rules';
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  34 passed (34)
+   Start at  21:23:16
+   Duration  948ms (transform 888ms, setup 0ms, import 1.28s, tests 844ms, environment 0ms)
+

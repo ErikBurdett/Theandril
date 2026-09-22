@@ -1,0 +1,1198 @@
+{
+  "profileSha256": "2c183a47c8c9dc4237f1e4a5bfff3e2f5955bcd23486869643e9b386c60699ce",
+  "scope": "Unchanged isolated Epic case, selected sibling unselected rather than disabled. 51.29s test; inclusive samples overlap. No full-suite gate claim.",
+  "inclusive": [
+    {
+      "file": "",
+      "function": "(root)",
+      "line": 0,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 51.909448
+    },
+    {
+      "file": "node:internal/process/task_queues",
+      "function": "processTicksAndRejections",
+      "line": 71,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 47.09218
+    },
+    {
+      "file": "",
+      "function": "runMicrotasks",
+      "line": 0,
+      "selfSeconds": 0.002117,
+      "inclusiveSeconds": 47.089273
+    },
+    {
+      "file": "node_modules/.pnpm/vitest@4.1.11_@types+node@24.13.3_vite@7.3.6_@types+node@24.13.3_tsx@4.23.13_/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js",
+      "function": "$",
+      "line": 140,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.950437
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "",
+      "line": 2027,
+      "selfSeconds": 0.00526,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "",
+      "line": 288,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "",
+      "line": 1902,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "",
+      "line": 2323,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "runWithCancel",
+      "line": 2322,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "",
+      "line": 2272,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "runWithTimeout",
+      "line": 2267,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "",
+      "line": 2956,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "run",
+      "line": 1148,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "limiterFn",
+      "line": 1147,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/vitest@4.1.11_@types+node@24.13.3_vite@7.3.6_@types+node@24.13.3_tsx@4.23.13_/node_modules/vitest/dist/chunks/test.DNmyFkvJ.js",
+      "function": "trace",
+      "line": 4396,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js",
+      "function": "",
+      "line": 2941,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 46.908195
+    },
+    {
+      "file": "tests/headless/chronicle-victory.test.ts",
+      "function": "",
+      "line": 13,
+      "selfSeconds": 0.181336,
+      "inclusiveSeconds": 46.901872
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "stateHashForVersion",
+      "line": 451,
+      "selfSeconds": 0.024477,
+      "inclusiveSeconds": 15.688601
+    },
+    {
+      "file": "packages/chronicle/src/index.ts",
+      "function": "replayArchive",
+      "line": 156,
+      "selfSeconds": 2.680253,
+      "inclusiveSeconds": 14.94227
+    },
+    {
+      "file": "packages/ai/src/index.ts",
+      "function": "planTurn",
+      "line": 38,
+      "selfSeconds": 0.079534,
+      "inclusiveSeconds": 13.668407
+    },
+    {
+      "file": "packages/ai/src/index.ts",
+      "function": "planTurnWithReasons",
+      "line": 41,
+      "selfSeconds": 0.551352,
+      "inclusiveSeconds": 13.583593
+    },
+    {
+      "file": "tests/headless/chronicle-victory.test.ts",
+      "function": "issue",
+      "line": 18,
+      "selfSeconds": 0.02065,
+      "inclusiveSeconds": 10.960945
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "canonicalPayload",
+      "line": 308,
+      "selfSeconds": 0.513209,
+      "inclusiveSeconds": 10.959332
+    },
+    {
+      "file": "packages/chronicle/src/index.ts",
+      "function": "applyRecordedCommand",
+      "line": 95,
+      "selfSeconds": 0.047232,
+      "inclusiveSeconds": 10.898479
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 1090,
+      "selfSeconds": 0.842685,
+      "inclusiveSeconds": 9.868145
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/classic/schemas.js",
+      "function": "_parse",
+      "line": 133,
+      "selfSeconds": 0.005414,
+      "inclusiveSeconds": 9.683474
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/parse.js",
+      "function": "fn",
+      "line": 9,
+      "selfSeconds": 0.006541,
+      "inclusiveSeconds": 9.67806
+    },
+    {
+      "file": "",
+      "function": "",
+      "line": 3,
+      "selfSeconds": 0.686235,
+      "inclusiveSeconds": 9.621376
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "planNaval",
+      "line": 215,
+      "selfSeconds": 0.37253,
+      "inclusiveSeconds": 9.468473
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "stateHash",
+      "line": 455,
+      "selfSeconds": 0.001058,
+      "inclusiveSeconds": 7.469054
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.run",
+      "line": 97,
+      "selfSeconds": 3.041693,
+      "inclusiveSeconds": 7.240689
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "applyCommand",
+      "line": 370,
+      "selfSeconds": 0.285553,
+      "inclusiveSeconds": 6.802026
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "getObservation",
+      "line": 566,
+      "selfSeconds": 0.626727,
+      "inclusiveSeconds": 5.532986
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 1594,
+      "selfSeconds": 1.269572,
+      "inclusiveSeconds": 5.371977
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "toward",
+      "line": 334,
+      "selfSeconds": 0.003375,
+      "inclusiveSeconds": 5.04201
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "getMovementPreview",
+      "line": 238,
+      "selfSeconds": 0.040202,
+      "inclusiveSeconds": 5.030179
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "preview",
+      "line": 197,
+      "selfSeconds": 0.624296,
+      "inclusiveSeconds": 4.882554
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "canonicalLand",
+      "line": 262,
+      "selfSeconds": 0.154296,
+      "inclusiveSeconds": 4.75534
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "hashEnvelope",
+      "line": 374,
+      "selfSeconds": 1.17693,
+      "inclusiveSeconds": 4.714321
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "search",
+      "line": 146,
+      "selfSeconds": 2.169503,
+      "inclusiveSeconds": 4.543485
+    },
+    {
+      "file": "",
+      "function": "(garbage collector)",
+      "line": 0,
+      "selfSeconds": 4.38588,
+      "inclusiveSeconds": 4.38588
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "moveTo",
+      "line": 347,
+      "selfSeconds": 0.28851,
+      "inclusiveSeconds": 4.342697
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "applyCommandForVersion",
+      "line": 122,
+      "selfSeconds": 0.012689,
+      "inclusiveSeconds": 3.753229
+    },
+    {
+      "file": "packages/ai/src/navigation.ts",
+      "function": "destination",
+      "line": 100,
+      "selfSeconds": 0.904403,
+      "inclusiveSeconds": 3.691169
+    },
+    {
+      "file": "packages/sim/src/rules.ts",
+      "function": "withRules",
+      "line": 9,
+      "selfSeconds": 0.010888,
+      "inclusiveSeconds": 3.679631
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 773,
+      "selfSeconds": 0.465787,
+      "inclusiveSeconds": 3.673203
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "",
+      "line": 134,
+      "selfSeconds": 0.009522,
+      "inclusiveSeconds": 3.660859
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "envelopeParts",
+      "line": 365,
+      "selfSeconds": 3.513355,
+      "inclusiveSeconds": 3.540978
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "",
+      "line": 328,
+      "selfSeconds": 0.004171,
+      "inclusiveSeconds": 3.175062
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "explore",
+      "line": 322,
+      "selfSeconds": 0.035903,
+      "inclusiveSeconds": 2.635724
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "getLandObservation",
+      "line": 535,
+      "selfSeconds": 0.027462,
+      "inclusiveSeconds": 2.635187
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "",
+      "line": 553,
+      "selfSeconds": 0.010293,
+      "inclusiveSeconds": 2.579181
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "runChecks",
+      "line": 34,
+      "selfSeconds": 1.552152,
+      "inclusiveSeconds": 2.578572
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "settlementLandObservation",
+      "line": 492,
+      "selfSeconds": 0.153289,
+      "inclusiveSeconds": 2.562941
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "takeStep",
+      "line": 297,
+      "selfSeconds": 0.291354,
+      "inclusiveSeconds": 2.523281
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "",
+      "line": 508,
+      "selfSeconds": 0.521257,
+      "inclusiveSeconds": 2.32477
+    },
+    {
+      "file": "packages/sim/src/visibility.ts",
+      "function": "updateSight",
+      "line": 70,
+      "selfSeconds": 0.708144,
+      "inclusiveSeconds": 2.265592
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 2000,
+      "selfSeconds": 0.110968,
+      "inclusiveSeconds": 1.809815
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 1964,
+      "selfSeconds": 0.042669,
+      "inclusiveSeconds": 1.456061
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "mayEnter",
+      "line": 105,
+      "selfSeconds": 0.710926,
+      "inclusiveSeconds": 1.396323
+    },
+    {
+      "file": "packages/sim/src/visibility.ts",
+      "function": "cellsWithin",
+      "line": 18,
+      "selfSeconds": 0.923353,
+      "inclusiveSeconds": 1.288315
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "resolveTurn",
+      "line": 258,
+      "selfSeconds": 0.235818,
+      "inclusiveSeconds": 1.285841
+    },
+    {
+      "file": "packages/ai/src/navigation.ts",
+      "function": "frontierStep",
+      "line": 61,
+      "selfSeconds": 0.895309,
+      "inclusiveSeconds": 1.202865
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "",
+      "line": 522,
+      "selfSeconds": 0.135939,
+      "inclusiveSeconds": 1.106758
+    },
+    {
+      "file": "packages/ai/src/progression.ts",
+      "function": "planProgression",
+      "line": 75,
+      "selfSeconds": 0.065526,
+      "inclusiveSeconds": 1.101044
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "improvementOption",
+      "line": 330,
+      "selfSeconds": 0.629095,
+      "inclusiveSeconds": 0.981065
+    },
+    {
+      "file": "packages/chronicle/src/index.ts",
+      "function": "generateChronicles",
+      "line": 182,
+      "selfSeconds": 0.036376,
+      "inclusiveSeconds": 0.945787
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "localHostiles",
+      "line": 260,
+      "selfSeconds": 0.545855,
+      "inclusiveSeconds": 0.923786
+    },
+    {
+      "file": "packages/mapgen/src/index.ts",
+      "function": "writeNeighbors",
+      "line": 132,
+      "selfSeconds": 0.920124,
+      "inclusiveSeconds": 0.920124
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "needsNavalInvestment",
+      "line": 111,
+      "selfSeconds": 0.149422,
+      "inclusiveSeconds": 0.858384
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "getMovementQuery",
+      "line": 243,
+      "selfSeconds": 0.223588,
+      "inclusiveSeconds": 0.842253
+    },
+    {
+      "file": "packages/chronicle/src/json-equivalence.ts",
+      "function": "stableJson",
+      "line": 4,
+      "selfSeconds": 0.335532,
+      "inclusiveSeconds": 0.813414
+    },
+    {
+      "file": "packages/chronicle/src/json-equivalence.ts",
+      "function": "stablePrettyJson",
+      "line": 7,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 0.813414
+    },
+    {
+      "file": "packages/sim/src/visibility.ts",
+      "function": "changeSight",
+      "line": 35,
+      "selfSeconds": 0.398511,
+      "inclusiveSeconds": 0.786487
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "",
+      "line": 324,
+      "selfSeconds": 0.011297,
+      "inclusiveSeconds": 0.759959
+    },
+    {
+      "file": "packages/sim/src/canonical-cells.ts",
+      "function": "sortedExploredCells",
+      "line": 2,
+      "selfSeconds": 0.748662,
+      "inclusiveSeconds": 0.748662
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/checks.js",
+      "function": "inst._zod.check",
+      "line": 440,
+      "selfSeconds": 0.364465,
+      "inclusiveSeconds": 0.701677
+    },
+    {
+      "file": "packages/ai/src/navigation.ts",
+      "function": "",
+      "line": 104,
+      "selfSeconds": 0.148458,
+      "inclusiveSeconds": 0.679806
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "relationToPort",
+      "line": 55,
+      "selfSeconds": 0.011039,
+      "inclusiveSeconds": 0.664429
+    },
+    {
+      "file": "packages/ai/src/sea-knowledge.ts",
+      "function": "relation",
+      "line": 56,
+      "selfSeconds": 0.26425,
+      "inclusiveSeconds": 0.65339
+    },
+    {
+      "file": "packages/ai/src/sea-knowledge.ts",
+      "function": "inspect",
+      "line": 21,
+      "selfSeconds": 0.545419,
+      "inclusiveSeconds": 0.639347
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "canonicalRoads",
+      "line": 292,
+      "selfSeconds": 0.027593,
+      "inclusiveSeconds": 0.630241
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "",
+      "line": 600,
+      "selfSeconds": 0.053079,
+      "inclusiveSeconds": 0.587942
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "terrainBlocker",
+      "line": 64,
+      "selfSeconds": 0.272382,
+      "inclusiveSeconds": 0.581043
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "portStatus",
+      "line": 47,
+      "selfSeconds": 0.061162,
+      "inclusiveSeconds": 0.568229
+    },
+    {
+      "file": "packages/mapgen/src/index.ts",
+      "function": "neighbors",
+      "line": 118,
+      "selfSeconds": 0.023738,
+      "inclusiveSeconds": 0.54482
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "queryRange",
+      "line": 234,
+      "selfSeconds": 0.083599,
+      "inclusiveSeconds": 0.544147
+    },
+    {
+      "file": "packages/sim/src/army-composition.ts",
+      "function": "getArmyView",
+      "line": 48,
+      "selfSeconds": 0.242759,
+      "inclusiveSeconds": 0.527606
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "observedKnowledge",
+      "line": 47,
+      "selfSeconds": 0.492619,
+      "inclusiveSeconds": 0.519719
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 1309,
+      "selfSeconds": 0.030789,
+      "inclusiveSeconds": 0.48787
+    },
+    {
+      "file": "packages/chronicle/src/json-equivalence.ts",
+      "function": "",
+      "line": 5,
+      "selfSeconds": 0.477882,
+      "inclusiveSeconds": 0.477882
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "",
+      "line": 51,
+      "selfSeconds": 0.0032,
+      "inclusiveSeconds": 0.47254
+    },
+    {
+      "file": "packages/ai/src/sea-knowledge.ts",
+      "function": "basinStatus",
+      "line": 82,
+      "selfSeconds": 0.210804,
+      "inclusiveSeconds": 0.46934
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "settlementYields",
+      "line": 217,
+      "selfSeconds": 0.113039,
+      "inclusiveSeconds": 0.450062
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "cellYields",
+      "line": 358,
+      "selfSeconds": 0.238259,
+      "inclusiveSeconds": 0.436774
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "preferredPort",
+      "line": 67,
+      "selfSeconds": 0.01725,
+      "inclusiveSeconds": 0.433047
+    },
+    {
+      "file": "packages/mapgen/src/index.ts",
+      "function": "neighborsInto",
+      "line": 124,
+      "selfSeconds": 0.053863,
+      "inclusiveSeconds": 0.432729
+    },
+    {
+      "file": "packages/persistence/src/index.ts",
+      "function": "readSave",
+      "line": 51,
+      "selfSeconds": 0.096515,
+      "inclusiveSeconds": 0.418746
+    },
+    {
+      "file": "packages/persistence/src/index.ts",
+      "function": "deserializeCampaign",
+      "line": 72,
+      "selfSeconds": 0.0,
+      "inclusiveSeconds": 0.418746
+    },
+    {
+      "file": "",
+      "function": "(idle)",
+      "line": 0,
+      "selfSeconds": 0.415574,
+      "inclusiveSeconds": 0.415574
+    }
+  ],
+  "self": [
+    {
+      "file": "",
+      "function": "(garbage collector)",
+      "line": 0,
+      "selfSeconds": 4.38588,
+      "inclusiveSeconds": 4.38588
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "envelopeParts",
+      "line": 365,
+      "selfSeconds": 3.513355,
+      "inclusiveSeconds": 3.540978
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.run",
+      "line": 97,
+      "selfSeconds": 3.041693,
+      "inclusiveSeconds": 7.240689
+    },
+    {
+      "file": "packages/chronicle/src/index.ts",
+      "function": "replayArchive",
+      "line": 156,
+      "selfSeconds": 2.680253,
+      "inclusiveSeconds": 14.94227
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "search",
+      "line": 146,
+      "selfSeconds": 2.169503,
+      "inclusiveSeconds": 4.543485
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "runChecks",
+      "line": 34,
+      "selfSeconds": 1.552152,
+      "inclusiveSeconds": 2.578572
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 1594,
+      "selfSeconds": 1.269572,
+      "inclusiveSeconds": 5.371977
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "hashEnvelope",
+      "line": 374,
+      "selfSeconds": 1.17693,
+      "inclusiveSeconds": 4.714321
+    },
+    {
+      "file": "packages/sim/src/visibility.ts",
+      "function": "cellsWithin",
+      "line": 18,
+      "selfSeconds": 0.923353,
+      "inclusiveSeconds": 1.288315
+    },
+    {
+      "file": "packages/mapgen/src/index.ts",
+      "function": "writeNeighbors",
+      "line": 132,
+      "selfSeconds": 0.920124,
+      "inclusiveSeconds": 0.920124
+    },
+    {
+      "file": "packages/ai/src/navigation.ts",
+      "function": "destination",
+      "line": 100,
+      "selfSeconds": 0.904403,
+      "inclusiveSeconds": 3.691169
+    },
+    {
+      "file": "packages/ai/src/navigation.ts",
+      "function": "frontierStep",
+      "line": 61,
+      "selfSeconds": 0.895309,
+      "inclusiveSeconds": 1.202865
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 1090,
+      "selfSeconds": 0.842685,
+      "inclusiveSeconds": 9.868145
+    },
+    {
+      "file": "packages/sim/src/canonical-cells.ts",
+      "function": "sortedExploredCells",
+      "line": 2,
+      "selfSeconds": 0.748662,
+      "inclusiveSeconds": 0.748662
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "mayEnter",
+      "line": 105,
+      "selfSeconds": 0.710926,
+      "inclusiveSeconds": 1.396323
+    },
+    {
+      "file": "packages/sim/src/visibility.ts",
+      "function": "updateSight",
+      "line": 70,
+      "selfSeconds": 0.708144,
+      "inclusiveSeconds": 2.265592
+    },
+    {
+      "file": "",
+      "function": "",
+      "line": 3,
+      "selfSeconds": 0.686235,
+      "inclusiveSeconds": 9.621376
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "improvementOption",
+      "line": 330,
+      "selfSeconds": 0.629095,
+      "inclusiveSeconds": 0.981065
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "getObservation",
+      "line": 566,
+      "selfSeconds": 0.626727,
+      "inclusiveSeconds": 5.532986
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "preview",
+      "line": 197,
+      "selfSeconds": 0.624296,
+      "inclusiveSeconds": 4.882554
+    },
+    {
+      "file": "packages/ai/src/index.ts",
+      "function": "planTurnWithReasons",
+      "line": 41,
+      "selfSeconds": 0.551352,
+      "inclusiveSeconds": 13.583593
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "localHostiles",
+      "line": 260,
+      "selfSeconds": 0.545855,
+      "inclusiveSeconds": 0.923786
+    },
+    {
+      "file": "packages/ai/src/sea-knowledge.ts",
+      "function": "inspect",
+      "line": 21,
+      "selfSeconds": 0.545419,
+      "inclusiveSeconds": 0.639347
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "",
+      "line": 508,
+      "selfSeconds": 0.521257,
+      "inclusiveSeconds": 2.32477
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "canonicalPayload",
+      "line": 308,
+      "selfSeconds": 0.513209,
+      "inclusiveSeconds": 10.959332
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "observedKnowledge",
+      "line": 47,
+      "selfSeconds": 0.492619,
+      "inclusiveSeconds": 0.519719
+    },
+    {
+      "file": "packages/chronicle/src/json-equivalence.ts",
+      "function": "",
+      "line": 5,
+      "selfSeconds": 0.477882,
+      "inclusiveSeconds": 0.477882
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 773,
+      "selfSeconds": 0.465787,
+      "inclusiveSeconds": 3.673203
+    },
+    {
+      "file": "",
+      "function": "(idle)",
+      "line": 0,
+      "selfSeconds": 0.415574,
+      "inclusiveSeconds": 0.415574
+    },
+    {
+      "file": "packages/sim/src/visibility.ts",
+      "function": "changeSight",
+      "line": 35,
+      "selfSeconds": 0.398511,
+      "inclusiveSeconds": 0.786487
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "planNaval",
+      "line": 215,
+      "selfSeconds": 0.37253,
+      "inclusiveSeconds": 9.468473
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/checks.js",
+      "function": "inst._zod.check",
+      "line": 440,
+      "selfSeconds": 0.364465,
+      "inclusiveSeconds": 0.701677
+    },
+    {
+      "file": "packages/chronicle/src/json-equivalence.ts",
+      "function": "stableJson",
+      "line": 4,
+      "selfSeconds": 0.335532,
+      "inclusiveSeconds": 0.813414
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "stepCost",
+      "line": 73,
+      "selfSeconds": 0.332189,
+      "inclusiveSeconds": 0.36408
+    },
+    {
+      "file": "packages/ai/src/navigation.ts",
+      "function": "createNavigation",
+      "line": 10,
+      "selfSeconds": 0.324273,
+      "inclusiveSeconds": 0.343362
+    },
+    {
+      "file": "",
+      "function": "RegExp: ^[a-z][a-z0-9_.-]*$",
+      "line": 0,
+      "selfSeconds": 0.292827,
+      "inclusiveSeconds": 0.292827
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "takeStep",
+      "line": 297,
+      "selfSeconds": 0.291354,
+      "inclusiveSeconds": 2.523281
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "moveTo",
+      "line": 347,
+      "selfSeconds": 0.28851,
+      "inclusiveSeconds": 4.342697
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "applyCommand",
+      "line": 370,
+      "selfSeconds": 0.285553,
+      "inclusiveSeconds": 6.802026
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "terrainBlocker",
+      "line": 64,
+      "selfSeconds": 0.272382,
+      "inclusiveSeconds": 0.581043
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "",
+      "line": 626,
+      "selfSeconds": 0.269283,
+      "inclusiveSeconds": 0.269283
+    },
+    {
+      "file": "packages/ai/src/sea-knowledge.ts",
+      "function": "relation",
+      "line": 56,
+      "selfSeconds": 0.26425,
+      "inclusiveSeconds": 0.65339
+    },
+    {
+      "file": "packages/mapgen/src/index.ts",
+      "function": "hexDistance",
+      "line": 172,
+      "selfSeconds": 0.242886,
+      "inclusiveSeconds": 0.242886
+    },
+    {
+      "file": "packages/sim/src/army-composition.ts",
+      "function": "getArmyView",
+      "line": 48,
+      "selfSeconds": 0.242759,
+      "inclusiveSeconds": 0.527606
+    },
+    {
+      "file": "packages/sim/src/naval.ts",
+      "function": "travelTerrainBlocker",
+      "line": 67,
+      "selfSeconds": 0.241919,
+      "inclusiveSeconds": 0.293765
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "cellYields",
+      "line": 358,
+      "selfSeconds": 0.238259,
+      "inclusiveSeconds": 0.436774
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "resolveTurn",
+      "line": 258,
+      "selfSeconds": 0.235818,
+      "inclusiveSeconds": 1.285841
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "getMovementQuery",
+      "line": 243,
+      "selfSeconds": 0.223588,
+      "inclusiveSeconds": 0.842253
+    },
+    {
+      "file": "packages/ai/src/sea-knowledge.ts",
+      "function": "basinStatus",
+      "line": 82,
+      "selfSeconds": 0.210804,
+      "inclusiveSeconds": 0.46934
+    },
+    {
+      "file": "node:internal/worker/js_transferable",
+      "function": "structuredClone",
+      "line": 112,
+      "selfSeconds": 0.206077,
+      "inclusiveSeconds": 0.236137
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 150,
+      "selfSeconds": 0.182591,
+      "inclusiveSeconds": 0.182591
+    },
+    {
+      "file": "tests/headless/chronicle-victory.test.ts",
+      "function": "",
+      "line": 13,
+      "selfSeconds": 0.181336,
+      "inclusiveSeconds": 46.901872
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "siteMatches",
+      "line": 306,
+      "selfSeconds": 0.161321,
+      "inclusiveSeconds": 0.218641
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "observeLandCell",
+      "line": 167,
+      "selfSeconds": 0.155179,
+      "inclusiveSeconds": 0.300171
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "handleCatchall",
+      "line": 863,
+      "selfSeconds": 0.155029,
+      "inclusiveSeconds": 0.155029
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "canonicalLand",
+      "line": 262,
+      "selfSeconds": 0.154296,
+      "inclusiveSeconds": 4.75534
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "addYield",
+      "line": 352,
+      "selfSeconds": 0.153411,
+      "inclusiveSeconds": 0.153411
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "settlementLandObservation",
+      "line": 492,
+      "selfSeconds": 0.153289,
+      "inclusiveSeconds": 2.562941
+    },
+    {
+      "file": "packages/ai/src/land.ts",
+      "function": "planLand",
+      "line": 7,
+      "selfSeconds": 0.153048,
+      "inclusiveSeconds": 0.384539
+    },
+    {
+      "file": "packages/ai/src/navigation.ts",
+      "function": "entryAt",
+      "line": 20,
+      "selfSeconds": 0.152199,
+      "inclusiveSeconds": 0.166075
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "needsNavalInvestment",
+      "line": 111,
+      "selfSeconds": 0.149422,
+      "inclusiveSeconds": 0.858384
+    },
+    {
+      "file": "packages/ai/src/navigation.ts",
+      "function": "",
+      "line": 104,
+      "selfSeconds": 0.148458,
+      "inclusiveSeconds": 0.679806
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "",
+      "line": 283,
+      "selfSeconds": 0.139748,
+      "inclusiveSeconds": 0.1954
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "",
+      "line": 150,
+      "selfSeconds": 0.136074,
+      "inclusiveSeconds": 0.357304
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "",
+      "line": 522,
+      "selfSeconds": 0.135939,
+      "inclusiveSeconds": 1.106758
+    },
+    {
+      "file": "packages/ai/src/expansion.ts",
+      "function": "facts",
+      "line": 6,
+      "selfSeconds": 0.131241,
+      "inclusiveSeconds": 0.142935
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "sorted",
+      "line": 309,
+      "selfSeconds": 0.123625,
+      "inclusiveSeconds": 0.132096
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/schemas.js",
+      "function": "inst._zod.parse",
+      "line": 579,
+      "selfSeconds": 0.119682,
+      "inclusiveSeconds": 0.119682
+    },
+    {
+      "file": "packages/sim/src/development.ts",
+      "function": "quote",
+      "line": 87,
+      "selfSeconds": 0.118487,
+      "inclusiveSeconds": 0.134419
+    },
+    {
+      "file": "node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/checks.js",
+      "function": "inst._zod.check",
+      "line": 122,
+      "selfSeconds": 0.11617,
+      "inclusiveSeconds": 0.11617
+    }
+  ]
+}

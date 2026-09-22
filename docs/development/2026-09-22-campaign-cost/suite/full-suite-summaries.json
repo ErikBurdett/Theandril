@@ -1,0 +1,654 @@
+[
+ {
+  "label": "Baseline before this work: pre-change candidate (4ce95ae + three 2026-09-21 files), one full run",
+  "wallSeconds": 80.564,
+  "tests": 1938,
+  "passed": 1938,
+  "failed": 0,
+  "files": 224,
+  "summedTestSeconds": 578.4,
+  "slowestTests": [
+   {
+    "file": "tests/headless/chronicle-victory.test.ts",
+    "title": "generated-start epic AI victory produces complete factual logs identical after archive save/resume",
+    "seconds": 57.712,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'epic' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 31.09,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'epic' seed 99 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 21.847,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'standard' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 16.808,
+    "status": "passed"
+   },
+   {
+    "file": "apps/web/src/updates/changelog.test.ts",
+    "title": "is deterministic and the committed feed is an exact record from its newest commit back to the root",
+    "seconds": 16.499,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "standard / 4 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 14.256,
+    "status": "passed"
+   },
+   {
+    "file": "tests/art-factory.test.ts",
+    "title": "retains reviewed frames, evidence and original sources with fresh exact reports",
+    "seconds": 13.952,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "huge / 32 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 10.93,
+    "status": "passed"
+   },
+   {
+    "file": "packages/art-pipeline/src/faction-coverage.test.ts",
+    "title": "preserves all reviewed pixels and tool provenance: one real four-pose scout and431 static faction assets",
+    "seconds": 9.827,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "standard / 24 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 9.548,
+    "status": "passed"
+   },
+   {
+    "file": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+    "title": "legendary empire funds every paid border and preserves all40 idle hearths",
+    "seconds": 7.351,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'standard' seed 99 generator 5 reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 5.302,
+    "status": "passed"
+   },
+   {
+    "file": "apps/web/src/updates/changelog.test.ts",
+    "title": "does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift",
+    "seconds": 4.916,
+    "status": "passed"
+   },
+   {
+    "file": "packages/art-pipeline/src/toolchain/toolchain.test.ts",
+    "title": "keeps every original pixel, facing, clip and duration within the4096 sheet bound",
+    "seconds": 4.751,
+    "status": "passed"
+   },
+   {
+    "file": "packages/mapgen/src/inland-seas-v7.test.ts",
+    "title": "all twelve played generator6 measured worlds retain their genuine pre7 seals",
+    "seconds": 4.369,
+    "status": "passed"
+   }
+  ],
+  "slowestFiles": [
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "seconds": 79.2
+   },
+   {
+    "file": "tests/headless/chronicle-victory.test.ts",
+    "seconds": 60.4
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "seconds": 35.2
+   },
+   {
+    "file": "packages/ai/src/recruitment.test.ts",
+    "seconds": 28.2
+   },
+   {
+    "file": "tests/art-factory.test.ts",
+    "seconds": 22.3
+   },
+   {
+    "file": "apps/web/src/updates/changelog.test.ts",
+    "seconds": 21.4
+   },
+   {
+    "file": "packages/ai/src/progression.test.ts",
+    "seconds": 20.6
+   },
+   {
+    "file": "packages/mapgen/src/inland-seas-v7.test.ts",
+    "seconds": 16.8
+   },
+   {
+    "file": "packages/ai/src/resource-economy.test.ts",
+    "seconds": 16.5
+   },
+   {
+    "file": "packages/ai/src/ai.test.ts",
+    "seconds": 16.4
+   },
+   {
+    "file": "packages/mapgen/src/geography-v6.test.ts",
+    "seconds": 15.1
+   },
+   {
+    "file": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+    "seconds": 11.3
+   },
+   {
+    "file": "packages/art-pipeline/src/faction-coverage.test.ts",
+    "seconds": 10.1
+   },
+   {
+    "file": "packages/mapgen/src/geography-v5.test.ts",
+    "seconds": 8.3
+   },
+   {
+    "file": "packages/persistence/src/campaign-storage.test.ts",
+    "seconds": 7.9
+   }
+  ]
+ },
+ {
+  "label": "Final candidate, full run A (Epic archive test with one replay plus technical-export identity proof)",
+  "wallSeconds": 46.556,
+  "tests": 1966,
+  "passed": 1966,
+  "failed": 0,
+  "files": 228,
+  "summedTestSeconds": 549.6,
+  "slowestTests": [
+   {
+    "file": "packages/ai/src/pacing-epic-74.test.ts",
+    "title": "'epic' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 42.484,
+    "status": "passed"
+   },
+   {
+    "file": "tests/headless/chronicle-victory.test.ts",
+    "title": "generated-start epic AI victory produces complete factual logs identical after archive save/resume",
+    "seconds": 42.179,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-99.test.ts",
+    "title": "'epic' seed 99 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 36.98,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'standard' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 16.023,
+    "status": "passed"
+   },
+   {
+    "file": "tests/art-factory.test.ts",
+    "title": "retains reviewed frames, evidence and original sources with fresh exact reports",
+    "seconds": 14.318,
+    "status": "passed"
+   },
+   {
+    "file": "apps/web/src/updates/changelog.test.ts",
+    "title": "is deterministic and the committed feed is an exact record from its newest commit back to the root",
+    "seconds": 13.484,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "standard / 4 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 12.183,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "standard / 24 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 10.331,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "huge / 32 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 10.228,
+    "status": "passed"
+   },
+   {
+    "file": "packages/art-pipeline/src/faction-coverage.test.ts",
+    "title": "preserves all reviewed pixels and tool provenance: one real four-pose scout and431 static faction assets",
+    "seconds": 7.078,
+    "status": "passed"
+   },
+   {
+    "file": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+    "title": "legendary empire funds every paid border and preserves all40 idle hearths",
+    "seconds": 6.663,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'standard' seed 99 generator 5 reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 6.223,
+    "status": "passed"
+   },
+   {
+    "file": "packages/art-pipeline/src/toolchain/toolchain.test.ts",
+    "title": "keeps every original pixel, facing, clip and duration within the4096 sheet bound",
+    "seconds": 4.836,
+    "status": "passed"
+   },
+   {
+    "file": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+    "title": "huge empire funds every paid border and preserves all32 idle hearths",
+    "seconds": 4.458,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'standard' seed 99 generator 6 reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 4.445,
+    "status": "passed"
+   }
+  ],
+  "slowestFiles": [
+   {
+    "file": "tests/headless/chronicle-victory.test.ts",
+    "seconds": 44.7
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-74.test.ts",
+    "seconds": 42.5
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-99.test.ts",
+    "seconds": 37.0
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "seconds": 33.2
+   },
+   {
+    "file": "packages/ai/src/recruitment.test.ts",
+    "seconds": 27.8
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "seconds": 26.7
+   },
+   {
+    "file": "tests/art-factory.test.ts",
+    "seconds": 22.1
+   },
+   {
+    "file": "packages/ai/src/progression.test.ts",
+    "seconds": 20.3
+   },
+   {
+    "file": "packages/ai/src/resource-economy.test.ts",
+    "seconds": 14.0
+   },
+   {
+    "file": "packages/mapgen/src/geography-v6.test.ts",
+    "seconds": 13.5
+   },
+   {
+    "file": "apps/web/src/updates/changelog.test.ts",
+    "seconds": 13.5
+   },
+   {
+    "file": "packages/mapgen/src/inland-seas-v7.test.ts",
+    "seconds": 13.4
+   },
+   {
+    "file": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+    "seconds": 11.1
+   },
+   {
+    "file": "packages/ai/src/ai.test.ts",
+    "seconds": 10.5
+   },
+   {
+    "file": "packages/mapgen/src/geography-v5.test.ts",
+    "seconds": 8.4
+   }
+  ]
+ },
+ {
+  "label": "Final candidate, full run B (consecutive)",
+  "wallSeconds": 47.252,
+  "tests": 1966,
+  "passed": 1966,
+  "failed": 0,
+  "files": 228,
+  "summedTestSeconds": 575.9,
+  "slowestTests": [
+   {
+    "file": "tests/headless/chronicle-victory.test.ts",
+    "title": "generated-start epic AI victory produces complete factual logs identical after archive save/resume",
+    "seconds": 43.253,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-74.test.ts",
+    "title": "'epic' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 42.56,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-99.test.ts",
+    "title": "'epic' seed 99 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 36.023,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'standard' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 16.517,
+    "status": "passed"
+   },
+   {
+    "file": "tests/art-factory.test.ts",
+    "title": "retains reviewed frames, evidence and original sources with fresh exact reports",
+    "seconds": 14.454,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "standard / 4 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 12.847,
+    "status": "passed"
+   },
+   {
+    "file": "apps/web/src/updates/changelog.test.ts",
+    "title": "is deterministic and the committed feed is an exact record from its newest commit back to the root",
+    "seconds": 12.797,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "standard / 24 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 10.767,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "huge / 32 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 9.861,
+    "status": "passed"
+   },
+   {
+    "file": "packages/art-pipeline/src/faction-coverage.test.ts",
+    "title": "preserves all reviewed pixels and tool provenance: one real four-pose scout and431 static faction assets",
+    "seconds": 6.564,
+    "status": "passed"
+   },
+   {
+    "file": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+    "title": "legendary empire funds every paid border and preserves all40 idle hearths",
+    "seconds": 6.235,
+    "status": "passed"
+   },
+   {
+    "file": "packages/sim/src/explored-sort.test.ts",
+    "title": "preserves the prechange 'legendary'/40 whole-save seal and monotonic restored bytes",
+    "seconds": 5.898,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'standard' seed 99 generator 5 reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 5.76,
+    "status": "passed"
+   },
+   {
+    "file": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+    "title": "huge empire funds every paid border and preserves all32 idle hearths",
+    "seconds": 4.965,
+    "status": "passed"
+   },
+   {
+    "file": "packages/mapgen/src/inland-seas-v7.test.ts",
+    "title": "all twelve played generator6 measured worlds retain their genuine pre7 seals",
+    "seconds": 4.506,
+    "status": "passed"
+   }
+  ],
+  "slowestFiles": [
+   {
+    "file": "tests/headless/chronicle-victory.test.ts",
+    "seconds": 45.5
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-74.test.ts",
+    "seconds": 42.6
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-99.test.ts",
+    "seconds": 36.0
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "seconds": 33.9
+   },
+   {
+    "file": "packages/ai/src/recruitment.test.ts",
+    "seconds": 28.6
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "seconds": 26.7
+   },
+   {
+    "file": "tests/art-factory.test.ts",
+    "seconds": 22.5
+   },
+   {
+    "file": "packages/ai/src/progression.test.ts",
+    "seconds": 20.6
+   },
+   {
+    "file": "packages/mapgen/src/geography-v6.test.ts",
+    "seconds": 17.8
+   },
+   {
+    "file": "packages/mapgen/src/inland-seas-v7.test.ts",
+    "seconds": 16.3
+   },
+   {
+    "file": "packages/ai/src/resource-economy.test.ts",
+    "seconds": 15.9
+   },
+   {
+    "file": "packages/ai/src/ai.test.ts",
+    "seconds": 15.0
+   },
+   {
+    "file": "apps/web/src/updates/changelog.test.ts",
+    "seconds": 12.8
+   },
+   {
+    "file": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+    "seconds": 11.2
+   },
+   {
+    "file": "packages/mapgen/src/geography-v5.test.ts",
+    "seconds": 9.4
+   }
+  ]
+ },
+ {
+  "label": "Final candidate with the original, unmodified Epic archive test file (two full replays)",
+  "wallSeconds": 52.941,
+  "tests": 1966,
+  "passed": 1966,
+  "failed": 0,
+  "files": 228,
+  "summedTestSeconds": 585.0,
+  "slowestTests": [
+   {
+    "file": "tests/headless/chronicle-victory.test.ts",
+    "title": "generated-start epic AI victory produces complete factual logs identical after archive save/resume",
+    "seconds": 48.549,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-74.test.ts",
+    "title": "'epic' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 43.884,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-99.test.ts",
+    "title": "'epic' seed 99 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 37.252,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'standard' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 16.949,
+    "status": "passed"
+   },
+   {
+    "file": "tests/art-factory.test.ts",
+    "title": "retains reviewed frames, evidence and original sources with fresh exact reports",
+    "seconds": 14.42,
+    "status": "passed"
+   },
+   {
+    "file": "apps/web/src/updates/changelog.test.ts",
+    "title": "is deterministic and the committed feed is an exact record from its newest commit back to the root",
+    "seconds": 12.656,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "standard / 4 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 12.314,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "huge / 32 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 11.068,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "title": "standard / 24 seats makes player contact through legal bounded plans with save replay",
+    "seconds": 10.801,
+    "status": "passed"
+   },
+   {
+    "file": "packages/art-pipeline/src/faction-coverage.test.ts",
+    "title": "preserves all reviewed pixels and tool provenance: one real four-pose scout and431 static faction assets",
+    "seconds": 6.628,
+    "status": "passed"
+   },
+   {
+    "file": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+    "title": "legendary empire funds every paid border and preserves all40 idle hearths",
+    "seconds": 6.337,
+    "status": "passed"
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "title": "'standard' seed 99 generator 5 reaches an earned long-form victory with legal orders and save continuation",
+    "seconds": 5.998,
+    "status": "passed"
+   },
+   {
+    "file": "packages/mapgen/src/inland-seas-v7.test.ts",
+    "title": "all twelve played generator6 measured worlds retain their genuine pre7 seals",
+    "seconds": 4.945,
+    "status": "passed"
+   },
+   {
+    "file": "packages/art-pipeline/src/toolchain/toolchain.test.ts",
+    "title": "keeps every original pixel, facing, clip and duration within the4096 sheet bound",
+    "seconds": 4.806,
+    "status": "passed"
+   },
+   {
+    "file": "packages/mapgen/src/density.test.ts",
+    "title": "provides bounded increasing defaults without changing explicit generation",
+    "seconds": 4.552,
+    "status": "passed"
+   }
+  ],
+  "slowestFiles": [
+   {
+    "file": "tests/headless/chronicle-victory.test.ts",
+    "seconds": 51.0
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-74.test.ts",
+    "seconds": 43.9
+   },
+   {
+    "file": "packages/ai/src/pacing-epic-99.test.ts",
+    "seconds": 37.3
+   },
+   {
+    "file": "packages/ai/src/contact.test.ts",
+    "seconds": 34.7
+   },
+   {
+    "file": "packages/ai/src/recruitment.test.ts",
+    "seconds": 29.2
+   },
+   {
+    "file": "packages/ai/src/pacing.test.ts",
+    "seconds": 27.4
+   },
+   {
+    "file": "tests/art-factory.test.ts",
+    "seconds": 22.1
+   },
+   {
+    "file": "packages/ai/src/progression.test.ts",
+    "seconds": 21.4
+   },
+   {
+    "file": "packages/mapgen/src/inland-seas-v7.test.ts",
+    "seconds": 17.6
+   },
+   {
+    "file": "packages/mapgen/src/geography-v6.test.ts",
+    "seconds": 15.1
+   },
+   {
+    "file": "packages/ai/src/ai.test.ts",
+    "seconds": 14.9
+   },
+   {
+    "file": "packages/ai/src/resource-economy.test.ts",
+    "seconds": 14.8
+   },
+   {
+    "file": "apps/web/src/updates/changelog.test.ts",
+    "seconds": 12.7
+   },
+   {
+    "file": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+    "seconds": 10.1
+   },
+   {
+    "file": "packages/mapgen/src/geography-v5.test.ts",
+    "seconds": 9.8
+   }
+  ]
+ }
+]
