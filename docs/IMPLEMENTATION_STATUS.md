@@ -1,5 +1,18 @@
 # Theandril implementation status
 
+## Unification victory — rules/save 19, 2026-09-22
+
+**The second victory path.** A realm that holds more than half of the world's hearths (at least 6) opens a public Unification bid at its capital when a round ends. Holding the majority and that capital through the pace's response window (20, 40 or 60 turns) wins. Rivals see the bid on the public ledger, and the AI already targets rival victory hosts. Losing the capital or the majority ends the bid.
+
+- The Victory tab (renamed from Prosperity) shows hearths held versus needed and what still blocks a bid.
+- The chronicle epilogue and the victory banner name the path.
+
+**Save compatibility.** Rules 18 content is frozen as `98b97bba`. A genuine rules-18 save and its 2,990-order archive written by deployed `4483219` load under rules 19. They re-seal to identical v18 bytes, replay to the same hash and continue 20 rounds. Historical rules never open bids and older envelopes refuse them.
+
+**Balance.** AI campaigns still conclude through Prosperity within the pace targets; AIs rarely reach a world majority.
+
+**Verification.** 1,796 tests in about 26 s, including `unification.test.ts`; 23/23 affected browser journeys. This delivers M1's unification path; client states remain pending.
+
 ## Civilization-scale campaigns, new map types and build-only CI — 2026-09-22
 
 The owner redirected the game toward a manageable, Civilization-like scale. They also asked for a simpler test suite, CI that only checks the build, and a deployed working build.

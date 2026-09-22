@@ -91,6 +91,16 @@ export const PROSPERITY_PROJECT: ProsperityProjectDefinition = {
 };
 
 /** Validate arbitrary candidate packs as well as the shipped one, including dependency cycles. */
+export const unificationVictorySchema = z.object({ id, name, description, minimumSettlements: z.number().int().min(1).max(1000) }).strict();
+export type UnificationVictoryDefinition = z.infer<typeof unificationVictorySchema>;
+/** Rules 19: a second, contestable victory path. It needs no purchase; its public
+ * holding window is the pace's project response window. */
+export const UNIFICATION_VICTORY: UnificationVictoryDefinition = {
+  id: 'victory.unification', name: 'Unification',
+  description: 'Hold more than half of all hearths in the world, and your own capital, through the pace’s public response window. Losing the majority or the capital ends the bid; rivals can retake hearths or strike the capital.',
+  minimumSettlements: 6,
+};
+
 export function validateProgressionContent(
   buildingIds: ReadonlySet<string>, technologies = TECHNOLOGIES, institutions = INSTITUTIONS,
   doctrines = DOCTRINES, project = PROSPERITY_PROJECT,
@@ -99,6 +109,7 @@ export function validateProgressionContent(
   institutions.forEach(item => institutionSchema.parse(item));
   doctrines.forEach(item => doctrineSchema.parse(item));
   prosperityProjectSchema.parse(project);
+  unificationVictorySchema.parse(UNIFICATION_VICTORY);
   for (const pace of campaignPaceSchema.options) campaignPaceProfileSchema.parse(CAMPAIGN_PACES[pace]);
   const definitions = [...technologies, ...institutions, ...doctrines, project];
   if (new Set(definitions.map(item => item.id)).size !== definitions.length) throw new Error('Duplicate progression ID');

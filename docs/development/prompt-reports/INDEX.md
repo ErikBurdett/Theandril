@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-22 | [Unification victory](2026-09-22-unification.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Civilization-scale campaigns, map types, simpler tests and build-only CI](2026-09-22-civ-scale-and-build-ci.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Campaign cost, test restructuring and design audit](2026-09-22-campaign-cost.md) | Local implementation; two full local passes; hosted verification open; nothing published |
 | 2026-09-21 | [Campaign verification cost continuation](2026-09-21-verification-cost.md) | Local reviewed implementation; Epic timing remains open; nothing published |

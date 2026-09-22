@@ -3,7 +3,7 @@ import { createDevelopmentState, developmentCommandSchema, chooseDevelopment, ge
 import { settlementGrowthFood, settlementFoodConsumption, foundingCoinCost, settlementCivicUpkeep, getGrowthObservation } from './growth-economy';
 import { z } from 'zod';
 import { accelerateRoad, accelerateRoadSchema, advanceRoads, emptyRoadState, observeRoads, reconcileRoads, roadMovementCost } from './roads';
-import { BUILDINGS, FACTIONS, FACTION_ROSTERS, ROSTER_VERSION, UNITS, campaignPaceSchema, factionRoster, rosterVersionSchema } from '@theandril/content';
+import { BUILDINGS, FACTIONS, FACTION_ROSTERS, ROSTER_VERSION, UNIFICATION_VICTORY, UNITS, campaignPaceSchema, factionRoster, rosterVersionSchema } from '@theandril/content';
 import { GENERATOR_VERSION, MAP_TYPES, generateWorld, isPassable, neighbors, type WorldLayout } from '@theandril/mapgen';
 import type { Army, CommandResult, DomainEvent, GameState, NewGameOptions, Observation, PhaseObserver, Settlement } from './types';
 import { cellsWithin, indexes, rebuildIndexes, updateSight, upgradeLandVisibility } from './visibility';
@@ -104,6 +104,7 @@ export function applyCommandForVersion(state: GameState, input: unknown, version
   if (version < 14 && (Object.values(state.arcaneResearch).some(items => items.length) || Object.values(state.characters).some(item => item.aptitudes || item.definitionId === 'character.waykeeper') || (state.battle?.rulesVersion ?? 0) >= 9 || state.battleReports.some(item => item.rulesVersion >= 9))) throw new Error('Historical rules cannot execute arcane research or modern battle abilities.');
   if (version < 13 && (state.rosterVersion > 3 || state.factions.some(faction => !(FACTION_ROSTERS[3] as readonly string[]).includes(faction.definitionId)))) throw new Error('Historical rules cannot execute cultures absent from their frozen roster.');
   if (version < 18 && state.world.generatorVersion > 7) throw new Error('Historical rules cannot execute generator-8 geography.');
+  if (version < 19 && (state.victory?.path === 'unification' || state.projects.some(project => project.projectId === UNIFICATION_VICTORY.id))) throw new Error('Historical rules cannot execute unification bids.');
   if (version < 12 && (state.world.generatorVersion > 4 || Object.keys(state.roads.edges).length || Object.keys(state.roads.projects).length)) throw new Error('Historical rules cannot execute modern geography or roads.');
   const historicalRoster: readonly string[] = FACTION_ROSTERS[version < 9 || state.world.generatorVersion < 4 ? 1 : 2];
   if (version < 10 && state.factions.some(faction => !historicalRoster.includes(faction.definitionId))) throw new Error('Historical rules cannot execute cultures absent from their frozen roster.');
@@ -124,7 +125,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18)]).default(18),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19)]).default(19),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(48).default(4),

@@ -40,9 +40,34 @@ export function prosperityCampaign(version: RulesVersion = 16): GameState {
     if (!army) throw new Error('Prosperity fixture needs its founding caravans.');
     issue({ type: 'found', factionId: faction.id, armyId: army.id, name: faction.id === state.turnOwnerId ? PROSPERITY_FIXTURE.hostName : 'Reedbound Hold' });
   }
+  foundHearths(state, ['Kiln Ward', 'Commons Reach'], issue, advance);
+  for (const town of Object.values(state.settlements)) if (town.factionId === state.turnOwnerId) town.buildings = BUILDINGS.filter(building => !building.coastalOnly).map(building => building.id);
+  const player = state.factions.find(faction => faction.id === state.turnOwnerId)!;
+  player.treasury = 300; player.knowledge = 64;
+  // Only readiness is authored. Technology, institutions, doctrines, projects and victory stay untouched.
+  return deserializeGame(serializeGame(state));
+}
+
+/** Rules 19: six of seven hearths belong to the player; no bid exists until a round ends. */
+export function unificationCampaign(): GameState {
+  const state = createGame({ rulesVersion: 19, seed: PROSPERITY_FIXTURE.seed, size: 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4, rosterVersion: 3 });
+  const issue = (command: GameCommand): void => {
+    const result = applyCommandForVersion(state, command, 11);
+    if (!result.ok) throw new Error('Unification fixture command failed: ' + result.error);
+  };
+  const advance = (): void => issue({ type: 'endTurn', factionId: state.turnOwnerId });
+  for (const faction of state.factions) {
+    const army = Object.values(state.armies).find(army => army.factionId === faction.id && army.formations.some(item => item.unitId === 'unit.colonist'))!;
+    issue({ type: 'found', factionId: faction.id, armyId: army.id, name: faction.id === state.turnOwnerId ? PROSPERITY_FIXTURE.hostName : 'Reedbound Hold' });
+  }
+  foundHearths(state, ['Kiln Ward', 'Commons Reach', 'Ash Ford', 'Lantern Rise', 'Weir Hollow'], issue, advance);
+  return deserializeGame(serializeGame(state));
+}
+
+function foundHearths(state: GameState, names: string[], issue: (command: GameCommand) => void, advance: () => void): void {
   const host = state.settlements[PROSPERITY_FIXTURE.hostId];
-  if (!host) throw new Error('Prosperity fixture is missing its host.');
-  for (const name of ['Kiln Ward', 'Commons Reach']) {
+  if (!host) throw new Error('Victory fixture is missing its host.');
+  for (const name of names) {
     issue({ type: 'queue', factionId: state.turnOwnerId, settlementId: host.id, itemId: 'unit.colonist' });
     let caravan = Object.values(state.armies).find(army => army.factionId === state.turnOwnerId && army.formations.some(item => item.unitId === 'unit.colonist'));
     for (let wait = 0; !caravan && wait < 8; wait++) {
@@ -57,9 +82,4 @@ export function prosperityCampaign(version: RulesVersion = 16): GameState {
     if (caravan.movement < 1) advance();
     issue({ type: 'found', factionId: state.turnOwnerId, armyId: caravan.id, name });
   }
-  for (const town of Object.values(state.settlements)) if (town.factionId === state.turnOwnerId) town.buildings = BUILDINGS.filter(building => !building.coastalOnly).map(building => building.id);
-  const player = state.factions.find(faction => faction.id === state.turnOwnerId)!;
-  player.treasury = 300; player.knowledge = 64;
-  // Only readiness is authored. Technology, institutions, doctrines, projects and victory stay untouched.
-  return deserializeGame(serializeGame(state));
 }

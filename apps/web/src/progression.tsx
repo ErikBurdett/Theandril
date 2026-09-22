@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { GameCommand, Observation } from '@theandril/sim';
+import { UNIFICATION_VICTORY } from '@theandril/content';
 import { ArcaneResearch } from './magic';
 import { QueriedDevelopmentPanel } from './development-panel';
 import { ResourcePanel } from './resource-panel';
@@ -9,7 +10,7 @@ import './progression.css';
 type ProgressionTab = 'technology' | 'arcane' | 'institutions' | 'doctrine' | 'prosperity' | 'development' | 'resources';
 const tabs: { id: ProgressionTab; label: string }[] = [
   { id: 'technology', label: 'Technology' }, { id: 'arcane', label: 'Arcane Theory' }, { id: 'institutions', label: 'Institutions' },
-  { id: 'doctrine', label: 'Military doctrine' }, { id: 'development', label: 'Development' }, { id: 'resources', label: 'Resources' }, { id: 'prosperity', label: 'Prosperity' },
+  { id: 'doctrine', label: 'Military doctrine' }, { id: 'development', label: 'Development' }, { id: 'resources', label: 'Resources' }, { id: 'prosperity', label: 'Victory' },
 ];
 type TechnologyChoice = Observation['progression']['technologyChoices'][number];
 const branchNames: Record<string, string> = { craft: 'Craft & construction', stewardship: 'Land stewardship', navigation: 'Navigation', civic: 'Civic knowledge' };
@@ -62,14 +63,21 @@ export function ResearchTree({ view, blocked, issue }: { view: Observation; bloc
   </section>;
 }
 
+function UnificationStatus({ unification }: { unification: NonNullable<Observation['progression']['unification']> }) {
+  return <section className="project-introduction" data-testid="unification-status" aria-label={unification.name}><span className="eyebrow">A second path to victory</span><h3>{unification.name}</h3><p>{unification.description}</p>
+    <p>You hold {unification.held} of {unification.total} hearths. More than half, and at least {unification.minimum}, opens a public bid at your capital; hold it for {unification.requiredTurns} turns.</p>
+    {unification.blockers.length > 0 ? <ul>{unification.blockers.map(blocker => <li key={blocker}>{blocker}</li>)}</ul> : <p>Your realm qualifies. A public bid opens at your capital when the round ends.</p>}
+  </section>;
+}
+
 export function PublicProjects({ view, locate }: { view: Observation; locate: (cell: number) => void }) {
   if (!view.projects.length) return null;
-  return <section className="public-projects" data-testid="public-projects" aria-label="Public victory projects"><h3>The race for prosperity</h3>{view.projects.map(project => <article key={project.id} className="public-project" data-testid={`project-${project.factionId}`}>
-    <strong>{view.factions.find(faction => faction.id === project.factionId)?.name ?? project.factionId}</strong><span>{project.settlementName} · hex {project.cell}</span>
-    <label>{project.status} · {project.progress}/{project.requiredTurns} active turns<progress max={project.requiredTurns} value={project.progress}/></label>
+  return <section className="public-projects" data-testid="public-projects" aria-label="Public victory projects"><h3>The race for victory</h3>{view.projects.map(project => <article key={project.id} className="public-project" data-testid={project.projectId === UNIFICATION_VICTORY.id ? `unification-${project.factionId}` : `project-${project.factionId}`}>
+    <strong>{view.factions.find(faction => faction.id === project.factionId)?.name ?? project.factionId} · {project.projectId === UNIFICATION_VICTORY.id ? UNIFICATION_VICTORY.name : 'Prosperity'}</strong><span>{project.settlementName} · hex {project.cell}</span>
+    <label>{project.status} · {project.progress}/{project.requiredTurns} {project.projectId === UNIFICATION_VICTORY.id ? 'turns held' : 'active turns'}<progress max={project.requiredTurns} value={project.progress}/></label>
     {project.statusReason && <p>{project.statusReason}</p>}
     <button aria-label={`Locate project ${project.settlementName}`} onClick={() => locate(project.cell)}>Locate project</button>
-  </article>)}<p className="field-help">Project locations and progress are public. The surrounding land remains hidden until explored. Besiege the host to halt progress; conquer it to cancel the project.</p></section>;
+  </article>)}<p className="field-help">Victory bids are public; the surrounding land stays hidden until explored. Besiege a Prosperity host to halt it and conquer it to cancel it. A Unification bid ends if its capital falls or its realm loses the majority of hearths.</p></section>;
 }
 
 export function CampaignProgression({ view, busy, issue, locate, close, developmentQuery, stateHash = '', queryEpoch = 0, queryEnabled = true }: { view: Observation; busy: boolean; issue: (command: GameCommand) => void; locate: (cell: number) => void; close: () => void; developmentQuery?: DevelopmentQuery; stateHash?: string; queryEpoch?: number; queryEnabled?: boolean }) {
@@ -113,6 +121,7 @@ export function CampaignProgression({ view, busy, issue, locate, close, developm
           <label>Project settlement<select value={selectedHost} disabled={blocked || !project.eligibleSettlementIds.length} onChange={event => setHost(event.target.value)}>{!project.eligibleSettlementIds.length && <option value="">No eligible settlement</option>}{project.eligibleSettlementIds.map(id => <option value={id} key={id}>{view.settlements.find(town => town.id === id)?.name ?? id}</option>)}</select></label>
           <button className="primary" disabled={blocked || project.blockers.length > 0 || !selectedHost} type="submit">Start {project.name}</button>
         </form>
+        {progression.unification && <UnificationStatus unification={progression.unification}/>}
         <PublicProjects view={view} locate={cell => { close(); locate(cell); }}/>
       </>}
     </section>

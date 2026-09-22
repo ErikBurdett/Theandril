@@ -127,7 +127,7 @@ export function planProgression(view: Observation, protectedCoin = 0): Progressi
   }
   const infrastructure = ownTowns.filter(town => PROSPERITY_PROJECT.requiredBuildings.every(id => town.buildings.includes(id)));
   const developed = infrastructure.length >= PROSPERITY_PROJECT.settlementCount;
-  const projectUnderway = view.projects.some(item => item.factionId === view.factionId && (item.status === 'active' || item.status === 'paused'));
+  const projectUnderway = view.projects.some(item => item.factionId === view.factionId && item.projectId === PROSPERITY_PROJECT.id && (item.status === 'active' || item.status === 'paused'));
   // A bounded operating purse keeps expansion/defense alive during a long savings campaign.
   // Near the actual observed target, close the remaining gap before optional spending resumes.
   // A paid marshal costs 32: an always-24 purse would permanently exclude this new

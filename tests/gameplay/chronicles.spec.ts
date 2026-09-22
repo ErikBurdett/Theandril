@@ -100,7 +100,8 @@ test('a human researches, adopts distinct policies, starts a public project and 
   await progression.getByRole('tab', { name: 'Military doctrine', exact: true }).click();
   await progression.getByRole('button', { name: 'Adopt March columns', exact: true }).click();
   await expect(progression.getByRole('button', { name: 'Adopt Shield cohesion', exact: true })).toBeDisabled();
-  await progression.getByRole('tab', { name: 'Prosperity', exact: true }).click();
+  await progression.getByRole('tab', { name: 'Victory', exact: true }).click();
+  await expect(progression.getByTestId('unification-status')).toContainText('Hold at least 6 hearths (you hold 3).');
   await progression.getByLabel('Project settlement').selectOption('settlement.5');
   await progression.getByRole('button', { name: 'Start Hearth Exchange', exact: true }).click();
   await expect(progression.getByTestId('public-projects')).toContainText('active · 0/5');

@@ -18,7 +18,7 @@ export function planLand(view: Observation, budget: number, plannedProduction: R
   const prepared = view.settlements.filter(town => town.factionId === view.factionId
     && PROSPERITY_PROJECT.requiredBuildings.every(id => town.buildings.includes(id)));
   const fundingProject = prepared.length >= PROSPERITY_PROJECT.settlementCount && view.treasury < view.progression.project.coinCost
-    && !view.projects.some(project => project.factionId === view.factionId && (project.status === 'active' || project.status === 'paused'));
+    && !view.projects.some(project => project.factionId === view.factionId && project.projectId === PROSPERITY_PROJECT.id && (project.status === 'active' || project.status === 'paused'));
   let coinSpent = 0;
   for (const land of candidates) {
     const town = towns.get(land.settlementId);

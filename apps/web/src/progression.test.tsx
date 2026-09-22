@@ -45,7 +45,7 @@ describe('authoritative research tree presentation', () => {
     const game = campaign(), view = getObservation(game, game.turnOwnerId);
     const html = renderToStaticMarkup(createElement(CampaignProgression, { view, busy: false, issue: () => undefined, locate: () => undefined, close: () => undefined }));
     expect(html.match(/role="tab" /g)).toHaveLength(7);
-    for (const label of ['Technology', 'Arcane Theory', 'Institutions', 'Military doctrine', 'Development', 'Resources', 'Prosperity']) expect(html).toContain(`>${label}</button>`);
+    for (const label of ['Technology', 'Arcane Theory', 'Institutions', 'Military doctrine', 'Development', 'Resources', 'Victory']) expect(html).toContain(`>${label}</button>`);
     expect(html).toContain('aria-label="Research branches"');
   });
   it('does not populate a historical or restricted observation from the current larger content catalog', () => {

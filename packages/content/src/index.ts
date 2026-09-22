@@ -3,7 +3,7 @@ import { RESOURCES, validateResourceContent } from './resources';
 import { DEVELOPMENT_NODES, validateDevelopmentContent } from './development';
 export * from './resources';
 export * from './development';
-import { TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES, validateProgressionContent } from './progression';
+import { TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, UNIFICATION_VICTORY, CAMPAIGN_PACES, validateProgressionContent } from './progression';
 import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, validateCharacterContent } from './characters';
 import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, validateEcologyContent } from './ecology';
 import { FACTIONS, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, factionSchema, validateFactionContent } from './factions';
@@ -65,12 +65,12 @@ export function checksum(text: string): string {
   for (let i = 0; i < text.length; i++) hash = Math.imul(hash ^ text.charCodeAt(i), 16777619);
   return (hash >>> 0).toString(16).padStart(8, '0');
 }
-/** The whole-pack seal; historical packs substitute their frozen pace table. */
-export const contentPackHash = (paces: typeof CAMPAIGN_PACES = CAMPAIGN_PACES): string => checksum(JSON.stringify({ BUILDINGS, UNITS, FACTIONS, TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES: paces, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, RESOURCES, DEVELOPMENT_NODES }));
+/** The whole-pack seal. Historical packs substitute their frozen pace table and omit later additions. */
+export const contentPackHash = (paces: typeof CAMPAIGN_PACES = CAMPAIGN_PACES, unification = true): string => checksum(JSON.stringify({ BUILDINGS, UNITS, FACTIONS, TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES: paces, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, RESOURCES, DEVELOPMENT_NODES, ...(unification ? { UNIFICATION_VICTORY } : {}) }));
 export const CONTENT_HASH = contentPackHash();
 export const LOCALIZATION: Readonly<Record<string, string>> = Object.fromEntries([
   ...INNATE_BATTLE_ABILITIES.flatMap(item => [[item.id + '.name', item.name], [item.id + '.description', item.description]]),
-  ...[...RESOURCES, ...DEVELOPMENT_NODES, ...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...MAGIC_PATHS, ...Object.entries(CAMPAIGN_PACES).map(([key, profile]) => ({ ...profile, id: 'pace.' + key }))].flatMap(item => [[item.id + '.name', item.name], ...('description' in item ? [[item.id + '.description', item.description]] : [])]),
+  ...[...RESOURCES, ...DEVELOPMENT_NODES, ...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, UNIFICATION_VICTORY, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...MAGIC_PATHS, ...Object.entries(CAMPAIGN_PACES).map(([key, profile]) => ({ ...profile, id: 'pace.' + key }))].flatMap(item => [[item.id + '.name', item.name], ...('description' in item ? [[item.id + '.description', item.description]] : [])]),
   ...Object.entries(FACTION_PROFILES).flatMap(([id, profile]) => [[id + '.description', profile.description], [id + '.recruitmentRationale', profile.recruitmentRationale]]),
 ]);
 
@@ -91,7 +91,7 @@ export function validateProductionContent(buildings = BUILDINGS, units = UNITS, 
   }
 }
 export function validateContent(): { resources: number; developmentNodes: number; buildings: number; units: number; factions: number; technologies: number; institutions: number; doctrines: number; projects: number; characterRoles: number; characterMissions: number; characterSkills: number; commanderAbilities: number; improvements: number; naturalFeatures: number; arcaneDiscoveries: number; battleSpells: number; magicPaths: number; innateBattleAbilities: number; hash: string } {
-  const definitions = [...RESOURCES, ...DEVELOPMENT_NODES, ...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...MAGIC_PATHS, ...INNATE_BATTLE_ABILITIES];
+  const definitions = [...RESOURCES, ...DEVELOPMENT_NODES, ...BUILDINGS, ...UNITS, ...FACTIONS, ...TECHNOLOGIES, ...INSTITUTIONS, ...DOCTRINES, PROSPERITY_PROJECT, UNIFICATION_VICTORY, ...CHARACTER_DEFINITIONS, ...CHARACTER_MISSIONS, ...CHARACTER_SKILLS, ...COMMANDER_ABILITIES, ...IMPROVEMENTS, ...NATURAL_FEATURES, ...ARCANE_DISCOVERIES, ...BATTLE_SPELLS, ...MAGIC_PATHS, ...INNATE_BATTLE_ABILITIES];
   if (new Set(definitions.map(item => item.id)).size !== definitions.length) throw new Error('Duplicate content ID');
   validateProductionContent();
   validateResourceContent();

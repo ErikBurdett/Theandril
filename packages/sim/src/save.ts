@@ -6,7 +6,7 @@ import { isHull } from './combat/individual';
 import { createDevelopmentState, developmentStateSchema, validateDevelopment } from './development';
 import { resourceStateSchema, validateResources } from './resources';
 import { z } from 'zod';
-import { BUILDINGS, IMPROVEMENTS, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
+import { BUILDINGS, IMPROVEMENTS, UNIFICATION_VICTORY, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
 import { BIOME, MAP_TYPES, deriveBiomes, deriveWaterDepth, isLake, isPassable, isValidBiome, neighbors, SeededRandom, supportedLayouts, validateHydrology, type MapLayout } from '@theandril/mapgen';
 import { emptyRoadState, roadStateSchema, validateRoads } from './roads';
 import { applyCommand, initializeLegacyLand, MAX_EVENTS } from './simulation';
@@ -19,7 +19,7 @@ import { battleAbilityStateSchema, validateBattleAbilities } from './battle-abil
 import { MAX_BATTLE_REPORTS } from './warfare';
 import { createDiplomacy, diplomacyStateSchema, validateDiplomacy } from './diplomacy';
 import { captureDecisionSchema, captureDecisionV15Schema, ruinSchema, siegeSchema, validateSieges } from './siege';
-import { createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema } from './progression';
+import { createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema, victoryV19Schema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
 
 import { armyMovement, effectiveArmyMovement, armySight } from './army-composition';
@@ -27,7 +27,9 @@ import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 18;
+export const SAVE_VERSION = 19;
+/** Rules 18 content, before rules 19 added the Unification victory. */
+export const PRE_UNIFICATION_CONTENT_HASH = '98b97bba';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -161,8 +163,11 @@ const stateV17Schema = stateV15Schema.extend({
 }).strict();
 /** Rules 18 accepts generator-8 worlds; older envelopes keep their exact schema. */
 const worldV18Schema = modernWorldSchema.extend({ generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8)]), layout: z.enum(['legacy', ...MAP_TYPES.map(type => type.id)] as [MapLayout, ...MapLayout[]]) }).strict();
-const stateSchema = stateV17Schema.extend({ world: worldV18Schema }).strict();
-const saveSchema = z.object({ version: z.literal(18), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const stateV18Schema = stateV17Schema.extend({ world: worldV18Schema }).strict();
+/** Rules 19 records Unification bids beside Prosperity projects on the public ledger. */
+const stateSchema = stateV18Schema.extend({ projects: z.array(victoryProjectSchema).max(96), victory: victoryV19Schema.nullable() }).strict();
+const saveSchema = z.object({ version: z.literal(19), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV18Schema = saveSchema.extend({ version: z.literal(18), state: stateV18Schema }).strict();
 const saveV17Schema = saveSchema.extend({ version: z.union([z.literal(16), z.literal(17)]), state: stateV17Schema }).strict();
 const saveV15Schema = saveSchema.extend({ version: z.literal(15), state: stateV15Schema }).strict();
 const saveV14Schema = saveV15Schema.extend({ version: z.literal(14) }).strict();
@@ -294,7 +299,7 @@ function canonicalPayload(state: GameState) {
       ruins: Object.values(state.ruins).sort(compareId).map(ruin => ruinSchema.parse(ruin)), diplomacy: diplomacyStateSchema.parse(state.diplomacy),
       pace: state.pace,
       progression: Object.entries(state.progression).sort(([a], [b]) => a < b ? -1 : 1).map(([factionId, progress]) => ({ factionId, ...factionProgressionSchema.parse(progress) })),
-      projects: state.projects.map(project => victoryProjectSchema.parse(project)), victory: state.victory ? victorySchema.parse(state.victory) : null,
+      projects: state.projects.map(project => victoryProjectSchema.parse(project)), victory: state.victory ? victoryV19Schema.parse(state.victory) : null,
       routes: Object.values(state.routes).sort((a, b) => a.armyId < b.armyId ? -1 : 1).map(route => movementRouteSchema.parse(route)),
       characters: Object.values(state.characters).sort(compareId).map(character => characterSchema.parse(character)),
       transports: Object.entries(state.transports).sort(([a], [b]) => a < b ? -1 : 1).map(([armyId, fleetId]) => ({ armyId, fleetId })),
@@ -352,6 +357,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 19) assertNoUnification(state);
   const latest = canonicalPayload(state);
   if (version >= 16) return serializeEnvelope(version, envelopeContentHash(state, version), latest);
   if (latest.resources.version || Object.keys(latest.resources.deposits).length || Object.values(latest.resources.stockpiles).some(stock => Object.values(stock).some(Boolean)) || Object.values(latest.development).some(records => Object.keys(records).length)) throw new Error('This campaign has resources or development unavailable in historical rules.');
@@ -423,9 +429,14 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
 export function serializeGame(state: GameState): string {
   return serializeGameForVersion(state, SAVE_VERSION);
 }
-/** Rules 16–17 envelopes seal the frozen pre-pacing pack and cannot carry newer geography. */
+function assertNoUnification(state: GameState): void {
+  if (state.victory?.path === 'unification' || state.projects.some(project => project.projectId === UNIFICATION_VICTORY.id)) throw new Error('This campaign has a unification bid unavailable in historical rules.');
+}
+/** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
-  if (version >= 18) return CONTENT_HASH;
+  if (version >= 19) return CONTENT_HASH;
+  assertNoUnification(state);
+  if (version >= 18) return PRE_UNIFICATION_CONTENT_HASH;
   if (state.world.generatorVersion > 7) throw new Error('This campaign has geography unavailable in historical rules.');
   return PRE_PACING_CONTENT_HASH;
 }
@@ -656,6 +667,11 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   if (version === 15) return migrateV15(saveV15Schema.parse(raw));
   // Versions 16 and 17 share canonical fields and content; rules 18 changes
   // pacing content only, so their states continue unchanged under the new pack.
+  if (version === 18) {
+    const prior = saveV18Schema.parse(raw);
+    assert(prior.contentHash === PRE_UNIFICATION_CONTENT_HASH, 'v18 content hash is not a recognized compatible pack');
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   if (version === 16 || version === 17) {
     const prior = saveV17Schema.parse(raw);
     assert(prior.contentHash === PRE_PACING_CONTENT_HASH, `v${version} content hash is not a recognized compatible pack`);
