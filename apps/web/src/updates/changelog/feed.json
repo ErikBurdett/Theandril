@@ -1,5 +1,228 @@
 [
   {
+    "sha": "7f5ac01a02c13d5cfaae3b016a97157b56bc0f3b",
+    "shortSha": "7f5ac01",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T13:50:21-05:00",
+    "subject": "feat: city-states, wider realms and 42-realm maps (rules/save 21)",
+    "body": "Twenty-four chartered city-states now settle the land between realms. Each\nborrows one culture's art and unit roster while keeping its own name, banner\ncolour, motto and lore; it holds a single hearth, opens no war and pursues no\nvictory, but builds, defends, holds territory and makes peace through the\nordinary commands. Their lore is a new book in the site's library.\n\nRealms also run wider: founding costs less as a realm grows, civic borders\ngrow in a handful of turns instead of dozens, and administration and territory\nupkeep are gentler. Seats past the authored roster take their own epithet and\ncolour, and the renderer washes their borrowed art in that colour, so a\ncrowded map never shows two identical banners. Campaigns seat up to 42 realms\nplus their city-states, and Unification now needs two thirds of the world's\nhearths.\n\nAlso fixes a growth panel that quoted rules-16 founding and upkeep prices\nwhile the turn charged rules-21 prices, and an AI that could reserve more coin\nfor its victory project than it actually had free, cancelling the caravan and\nhull it had already protected.\n\nMeasured: the standard map with 12 realms and 8 city-states ends on turn 199\n(Standard), 303 (Long) and 447 (Epic); 42 realms and 12 city-states claim 88%\nof its land by turn 193. A genuine rules-20 save and its 1,192-order archive\nfrom c7089f1 load, re-seal to identical bytes, replay exactly and continue.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 53,
+    "insertions": 2659,
+    "deletions": 96,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "docs/lore"
+    ],
+    "notes": "## City-states and wider realms\n\nTwenty-four city-states now hold the land between the great realms. Each is one settlement that never joined anything: it borrows a neighbouring culture's art, crafts and troops, and keeps only its own name, banner colour, motto and the particular bargain it refuses to sign. A city-state founds nothing further, opens no war and pursues no victory, but it builds, defends its hearth, holds territory and answers envoys like any other power. Their register and histories are published in the lore library.\n\nRealms also run wider. Planting a hearth costs less as a realm grows, civic borders fill in a handful of turns instead of dozens, and administration and territory upkeep are gentler, so a campaign ends with far more of the map settled. A world can now seat up to forty-two realms alongside its city-states; seats past the authored cultures take their own epithet and banner colour, and their borrowed artwork is washed in it, so no two banners on a crowded map look alike.\n\nSaved campaigns from the previous rules load unchanged, keep their exact bytes and replay from their archives."
+  },
+  {
+    "sha": "c7089f130882ab54c1a26ea77d7a62497a8b17a8",
+    "shortSha": "c7089f1",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T02:58:39-05:00",
+    "subject": "feat: sieges eat stored food (rules/save 20)",
+    "body": "Siege supplies now count the whole turns a blockaded town's actual food store\nlasts (its food yield is cut off while it keeps eating); an empty store starves\nthe militia's morale each turn. Well-fed towns hold out longer, so attackers\nchoose between an early assault and starving the garrison. The siege panel\nshows food stores in turns. Historical rules keep the fixed three-turn count.\n\nGenuine rules-19 saves and archives load, re-seal identically, replay and\ncontinue. Pacing stays within target (Standard/12: 207/267/316 turns).\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 11,
+    "insertions": 96,
+    "deletions": 22,
+    "areas": [
+      "apps/web",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "packages/chronicle",
+      "packages/persistence"
+    ]
+  },
+  {
+    "sha": "a7bf367f704f49bd4610401cade96d1f9376ad53",
+    "shortSha": "a7bf367",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T02:49:40-05:00",
+    "subject": "feat: Unification victory (rules/save 19)",
+    "body": "A realm holding more than half of the world's hearths (at least six) opens a\npublic Unification bid at its capital; holding the majority and that capital\nthrough the pace's response window wins. Losing either ends the bid. The\nVictory tab shows progress and blockers; chronicle and banner name the path.\n\nRules 18 content (98b97bba) is frozen: genuine rules-18 saves and archives load,\nre-seal identically, replay and continue. Historical rules never open bids.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 21,
+    "insertions": 279,
+    "deletions": 52,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "packages/ai"
+    ]
+  },
+  {
+    "sha": "4483219a6624bfe6ab9f6b6a029ca10a43273797",
+    "shortSha": "4483219",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T02:20:13-05:00",
+    "subject": "feat: generator 8 Civilization-style maps, 12-realm defaults and build-only CI",
+    "body": "- Generator 8: slightly smaller maps (Standard 224x140 for 12 realms, Tiny\n  48x32 through 352x220) and seven map types: Continents, Pangaea, Fractal,\n  Islands, Archipelago, Earth-like (latitude climate) and Inland Sea.\n  Generators 1-7 remain byte-identical (historical seal tests).\n- Rules 18 accepts generator-8 worlds; older rules default to generator 7 and\n  refuse generator-8 geography. The new-campaign form offers Map type,\n  defaults to Standard/12 and states each pace's target length.\n- AI: at peace, newly unlocked roles wait until expansion is funded, so no\n  culture starves its next caravan.\n- Tests: mapgen suite 30 s -> 6 s; seed-specific scenarios pin generator 7;\n  full local suite 1,793 tests in ~27 s.\n- CI: Verify typechecks and builds; Pages typechecks, builds and deploys.\n  Unit, campaign and browser testing stays local.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 46,
+    "insertions": 1046,
+    "deletions": 487,
+    "areas": [
+      ".github/workflows",
+      "DEFINITION_OF_DONE.md",
+      "GAME_1_0_SCOPE.md",
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md"
+    ]
+  },
+  {
+    "sha": "7fd8e6cdc119bc12c55f9eb06211e2c34618e6f2",
+    "shortSha": "7fd8e6c",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T01:28:03-05:00",
+    "subject": "feat: rules 18 Civilization-scale pacing, simpler tests and parallel CI",
+    "body": "- Rules/save 18: Long and Epic Prosperity prices fall so campaigns conclude\n  around 300 (Long) and 350-400 (Epic) turns; Standard stays about 200.\n  Response windows and civic prices are unchanged. Rules 16-17 saves load\n  under the frozen b79c78ed pack and continue; v17 envelopes re-seal to\n  identical bytes; rules-17 archives replay unchanged.\n- Tests: remove pinned refactor-equivalence captures; one pacing campaign per\n  pace with rules-18 windows; compact per-era pricing cases; fewer sampled\n  seeds/cultures; drop large-world historical seal regeneration.\n- CI: Verify campaign runs checks, AI campaigns and three browser shards in\n  parallel; benchmarks are local tools, not verification.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 27,
+    "insertions": 162,
+    "deletions": 383,
+    "areas": [
+      ".github/workflows",
+      "packages/ai",
+      "packages/chronicle",
+      "packages/content",
+      "packages/persistence"
+    ]
+  },
+  {
+    "sha": "c20f147de6c325ac743b0ff378f3086bd9ffaf9d",
+    "shortSha": "c20f147",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T01:16:58-05:00",
+    "subject": "perf: exact campaign cost reductions and faster test suite (ACT-18)",
+    "body": "- Route previewer answers repeat naval searches to unreachable water from the\n  first search that proved the army's reachable area.\n- State hash references canonical remembered land; finished battle reports are\n  sealed (deep-frozen) and their validated copy is reused.\n- AI planners share one observed-cell index; observations use the typed\n  explored-cell sort.\n- Nine generated campaigns (125,026 AI commands) are identical to the\n  pre-change candidate in orders, per-turn hashes and save bytes.\n- Tests: Epic archive's redundant second replay becomes an identity proof;\n  pacing campaigns split into parallel files; vitest unit/campaigns/repository\n  projects; 28 new regressions. Full suite 80.6 s -> 47 s.\n- Fix pre-existing browser failures: lore Text fragment keys and the campaign\n  menu's keyboard order after the Developer updates link.\n\nIncludes the 2026-09-21 movement, visibility and navigation work and evidence.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 153,
+    "insertions": 101161,
+    "deletions": 114,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "docs/updates"
+    ]
+  },
+  {
+    "sha": "4ce95aedab25536e24a0b34b3803a6cd3c9a5ad5",
+    "shortSha": "4ce95ae",
+    "author": "ErikBurdett",
+    "date": "2026-09-21T20:55:34-05:00",
+    "subject": "docs: record verified deployment and DHARMA handoff",
+    "body": "Pages deployed 274d0e2 and the live production suite passed 27/27. Record exact hosted timing failures without closing DH-015, update ACT-17/ACT-18 evidence, and preserve branch/worktree recovery. Primary checkout remains synchronized on master; no gameplay or journal source changes in this follow-up.",
+    "files": 17,
+    "insertions": 840,
+    "deletions": 6,
+    "areas": [
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "docs/updates"
+    ]
+  },
+  {
+    "sha": "274d0e28c1ab9de4fc7fc43fde9f0579fc48fee4",
+    "shortSha": "274d0e2",
+    "author": "ErikBurdett",
+    "date": "2026-09-21T20:19:19-05:00",
+    "subject": "docs: publish reviewed campaign foundation development checkpoint",
+    "body": "Publish the authorized fourth dispatch and current roadmap with immutable implementation evidence. Retain exact production-browser proof and independent review. Reconcile redundant branches and preserve unreviewed legacy worktree data. DH-015 remains open: unchanged full suite 1858/1859, Epic 66.513s against 60s.",
+    "files": 48,
+    "insertions": 1450,
+    "deletions": 44,
+    "areas": [
+      "apps/web",
+      "docs/DEPLOYMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "docs/updates"
+    ]
+  },
+  {
+    "sha": "1e41ec24965e46e8035c57b4f54632a690b8b712",
+    "shortSha": "1e41ec2",
+    "author": "ErikBurdett",
+    "date": "2026-09-21T19:52:06-05:00",
+    "subject": "perf: commit reviewed campaign foundation work (ACT-17)",
+    "body": "Include paid naval planning fixes, exact-output movement/observation/save/chronicle optimizations, regression fixtures and reviewed evidence. Preserve the known DH-015 Epic timing failure and all existing test budgets; M0 and release gates remain open.",
+    "files": 248,
+    "insertions": 43796,
+    "deletions": 89,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "docs/updates"
+    ]
+  },
+  {
+    "sha": "f07024fe23ad3386874656d48fbbc33a5380d979",
+    "shortSha": "f07024f",
+    "author": "ErikBurdett",
+    "date": "2026-09-12T18:12:42-05:00",
+    "subject": "docs: record both roadmap deployments and live verification",
+    "body": "",
+    "files": 4,
+    "insertions": 633,
+    "deletions": 0,
+    "areas": [
+      "docs/development"
+    ]
+  },
+  {
+    "sha": "11b6c47635d400362f86b29255cdb2bc290356fe",
+    "shortSha": "11b6c47",
+    "author": "ErikBurdett",
+    "date": "2026-09-12T17:28:01-05:00",
+    "subject": "feat: add an evidence-linked development roadmap",
+    "body": "",
+    "files": 35,
+    "insertions": 1522,
+    "deletions": 11,
+    "areas": [
+      "README.md",
+      "apps/web",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "docs/updates"
+    ]
+  },
+  {
+    "sha": "fcae402da6c290b93a9a6933510c74538477ad04",
+    "shortSha": "fcae402",
+    "author": "ErikBurdett",
+    "date": "2026-09-09T23:42:03-05:00",
+    "subject": "docs: prompt report and live verification for the public site launch",
+    "body": "",
+    "files": 5,
+    "insertions": 890,
+    "deletions": 0,
+    "areas": [
+      "docs/development"
+    ]
+  },
+  {
+    "sha": "0643cc87bf84e26cb15bf1e36a44aca0d7720510",
+    "shortSha": "0643cc8",
+    "author": "ErikBurdett",
+    "date": "2026-09-09T23:34:27-05:00",
+    "subject": "fix: make the master change feed identical from any clone",
+    "body": "CI regenerated the feed with 8-character %h abbreviations and myers line\nattribution while the committed feed came from a checkout with a global\ndiff.algorithm=histogram. Pin 7-character short SHAs, the myers algorithm,\nno renames and no CRLF conversion so the drift test holds in every clone.",
+    "files": 6,
+    "insertions": 439,
+    "deletions": 11,
+    "areas": [
+      "apps/web",
+      "docs/development",
+      "scripts/build-changelog.ts"
+    ]
+  },
+  {
     "sha": "8f30d2dbb12f8c2e3d59c3b74de3eaef9cc5ac4f",
     "shortSha": "8f30d2d",
     "author": "ErikBurdett",
