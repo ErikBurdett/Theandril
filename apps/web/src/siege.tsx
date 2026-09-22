@@ -7,7 +7,7 @@ type IssueOrder = (command: GameCommand) => void;
 const factionName = (view: Observation, id: string): string => view.factions.find(faction => faction.id === id)?.name ?? id;
 
 function SiegeStrength({ siege }: { siege: Observation['sieges'][number] }) {
-  return <dl className="siege-strength"><div><dt>Defenses</dt><dd>{siege.defenses}</dd></div><div><dt>Supplies</dt><dd>{siege.supplies}</dd></div><div><dt>Defending strength</dt><dd>{siege.defenderStrength}</dd></div></dl>;
+  return <dl className="siege-strength"><div><dt>Defenses</dt><dd>{siege.defenses}</dd></div><div><dt>Food stores</dt><dd>{siege.supplies} {siege.supplies === 1 ? "turn" : "turns"}</dd></div><div><dt>Defending strength</dt><dd>{siege.defenderStrength}</dd></div></dl>;
 }
 
 export function SiegeOrders({ army, view, busy, issue }: { army: ArmyView; view: Observation; busy: boolean; issue: IssueOrder }) {

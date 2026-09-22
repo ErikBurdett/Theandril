@@ -18,7 +18,7 @@ import { arcaneResearchSchema, validateArcaneResearch } from './magic';
 import { battleAbilityStateSchema, validateBattleAbilities } from './battle-abilities';
 import { MAX_BATTLE_REPORTS } from './warfare';
 import { createDiplomacy, diplomacyStateSchema, validateDiplomacy } from './diplomacy';
-import { captureDecisionSchema, captureDecisionV15Schema, ruinSchema, siegeSchema, validateSieges } from './siege';
+import { captureDecisionSchema, captureDecisionV15Schema, ruinSchema, siegeSchema, siegeV20Schema, validateSieges } from './siege';
 import { createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema, victoryV19Schema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
 
@@ -27,7 +27,7 @@ import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 19;
+export const SAVE_VERSION = 20;
 /** Rules 18 content, before rules 19 added the Unification victory. */
 export const PRE_UNIFICATION_CONTENT_HASH = '98b97bba';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
@@ -165,8 +165,11 @@ const stateV17Schema = stateV15Schema.extend({
 const worldV18Schema = modernWorldSchema.extend({ generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8)]), layout: z.enum(['legacy', ...MAP_TYPES.map(type => type.id)] as [MapLayout, ...MapLayout[]]) }).strict();
 const stateV18Schema = stateV17Schema.extend({ world: worldV18Schema }).strict();
 /** Rules 19 records Unification bids beside Prosperity projects on the public ledger. */
-const stateSchema = stateV18Schema.extend({ projects: z.array(victoryProjectSchema).max(96), victory: victoryV19Schema.nullable() }).strict();
-const saveSchema = z.object({ version: z.literal(19), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const stateV19Schema = stateV18Schema.extend({ projects: z.array(victoryProjectSchema).max(96), victory: victoryV19Schema.nullable() }).strict();
+/** Rules 20 measures siege supplies in turns of stored food. */
+const stateSchema = stateV19Schema.extend({ sieges: z.array(siegeV20Schema).max(30_000) }).strict();
+const saveSchema = z.object({ version: z.literal(20), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV19Schema = saveSchema.extend({ version: z.literal(19), state: stateV19Schema }).strict();
 const saveV18Schema = saveSchema.extend({ version: z.literal(18), state: stateV18Schema }).strict();
 const saveV17Schema = saveSchema.extend({ version: z.union([z.literal(16), z.literal(17)]), state: stateV17Schema }).strict();
 const saveV15Schema = saveSchema.extend({ version: z.literal(15), state: stateV15Schema }).strict();
@@ -294,7 +297,7 @@ function canonicalPayload(state: GameState) {
       wars: state.wars.map(pair => [...pair]),
       battle: state.battle ? campaignBattleSchema.parse(state.battle) : null,
       battleReports: state.battleReports.map(battle => sealedProjection(canonicalReports, battle, report => campaignBattleSchema.parse(report))),
-      sieges: Object.values(state.sieges).sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0).map(siege => siegeSchema.parse(siege)),
+      sieges: Object.values(state.sieges).sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0).map(siege => siegeV20Schema.parse(siege)),
       pendingCapture: state.pendingCapture ? captureDecisionSchema.parse(state.pendingCapture) : null,
       ruins: Object.values(state.ruins).sort(compareId).map(ruin => ruinSchema.parse(ruin)), diplomacy: diplomacyStateSchema.parse(state.diplomacy),
       pace: state.pace,
@@ -357,6 +360,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 20) assertHistoricalSieges(state);
   if (version < 19) assertNoUnification(state);
   const latest = canonicalPayload(state);
   if (version >= 16) return serializeEnvelope(version, envelopeContentHash(state, version), latest);
@@ -429,11 +433,15 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
 export function serializeGame(state: GameState): string {
   return serializeGameForVersion(state, SAVE_VERSION);
 }
+function assertHistoricalSieges(state: GameState): void {
+  if (Object.values(state.sieges).some(siege => siege.supplies > 3)) throw new Error('This campaign has siege stores unavailable in historical rules.');
+}
 function assertNoUnification(state: GameState): void {
   if (state.victory?.path === 'unification' || state.projects.some(project => project.projectId === UNIFICATION_VICTORY.id)) throw new Error('This campaign has a unification bid unavailable in historical rules.');
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 20) assertHistoricalSieges(state);
   if (version >= 19) return CONTENT_HASH;
   assertNoUnification(state);
   if (version >= 18) return PRE_UNIFICATION_CONTENT_HASH;
@@ -667,6 +675,8 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   if (version === 15) return migrateV15(saveV15Schema.parse(raw));
   // Versions 16 and 17 share canonical fields and content; rules 18 changes
   // pacing content only, so their states continue unchanged under the new pack.
+  // Rules 20 changes siege semantics only; content and a v19 state are unchanged.
+  if (version === 19) return { ...saveV19Schema.parse(raw), version: SAVE_VERSION };
   if (version === 18) {
     const prior = saveV18Schema.parse(raw);
     assert(prior.contentHash === PRE_UNIFICATION_CONTENT_HASH, 'v18 content hash is not a recognized compatible pack');

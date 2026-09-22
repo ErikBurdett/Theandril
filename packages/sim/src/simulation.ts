@@ -125,7 +125,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19)]).default(19),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20)]).default(20),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(48).default(4),

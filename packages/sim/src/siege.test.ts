@@ -4,7 +4,9 @@ import { checksum, FACTIONS, UNITS } from '@theandril/content';
 import { isPassable, neighbors } from '@theandril/mapgen';
 import { conquestCampaign, CONQUEST_FIXTURE } from '../../test-fixtures/src/conquest-fixture';
 import { rebaseAuthoredLand, refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
-import { applyCommand, deserializeGame, getObservation, replayGame, serializeGame, settlementYields, stateHash, validateEndTurn } from './index';
+import { applyCommand, applyCommandForVersion, deserializeGame, getObservation, replayGame, serializeGame, serializeGameForVersion, settlementYields, stateHash, validateEndTurn } from './index';
+import { settlementFoodConsumption } from './growth-economy';
+import { SIEGE_SUPPLY_CAP } from './siege';
 import type { CaptureDecision, CaptureOutcome, GameCommand, GameState, Ruin, Siege } from './index';
 import { rebuildIndexes } from './visibility';
 
@@ -76,18 +78,36 @@ describe('siege economy, combat and control', () => {
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
   });
 
-  it('blockades actual yields and wears down defenses and stores over three turns', () => {
+  it('blockades actual yields; defenses fall in three turns while the town eats its stored food', () => {
     const state = conquestCampaign();
-    const yields = settlementYields(state, requireTown(state));
+    const yields = settlementYields(state, requireTown(state)), need = settlementFoodConsumption(requireTown(state).population);
     blockaded(state);
     expect(settlementYields(state, requireTown(state))).toEqual({ food: 0, industry: Math.floor(yields.industry / 2), coin: Math.floor(yields.coin / 2), knowledge: Math.floor(yields.knowledge / 2) });
-    expect(state.sieges[townId]).toMatchObject({ defenses: 30, supplies: 3 });
+    expect(state.sieges[townId]).toMatchObject({ defenses: 30, supplies: Math.min(SIEGE_SUPPLY_CAP, Math.floor(requireTown(state).food / need)) });
     expect(getObservation(state, player).sieges[0]?.canAssault).toBe(false);
-    for (let turn = 0; turn < 3; turn++) command(state, end);
-    expect(state.sieges[townId]).toMatchObject({ defenses: 0, supplies: 0, militiaMorale: 65 });
+    let starving = 0;
+    for (let turn = 0; turn < 3; turn++) {
+      const stores = Math.min(SIEGE_SUPPLY_CAP, Math.floor(requireTown(state).food / need));
+      command(state, end);
+      expect(state.sieges[townId]!.supplies).toBe(stores);
+      if (stores === 0) starving++;
+    }
+    expect(state.sieges[townId]).toMatchObject({ defenses: 0, militiaMorale: 75 - 10 * starving });
     expect(getObservation(state, player).sieges[0]?.canAssault).toBe(true);
     expect(getObservation(state, rival).sieges[0]?.canAssault).toBe(false);
     expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
+  });
+
+  it('an empty store starves the militia from the first turn; historical rules keep the three-turn count', () => {
+    const state = conquestCampaign(); requireTown(state).food = 0;
+    blockaded(state);
+    expect(state.sieges[townId]!.supplies).toBe(0);
+    command(state, end); command(state, end);
+    expect(state.sieges[townId]!.militiaMorale).toBe(55);
+    const historical = conquestCampaign();
+    applyCommandForVersion(historical, war, 19); applyCommandForVersion(historical, besiege, 19);
+    expect(historical.sieges[townId]!.supplies).toBe(3);
+    expect(serializeGameForVersion(historical, 19)).toContain('"supplies":3');
   });
 
   it('rejects illegal siege, assault and capture requests atomically', () => {

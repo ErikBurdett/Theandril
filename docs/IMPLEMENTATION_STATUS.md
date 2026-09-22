@@ -1,5 +1,15 @@
 # Theandril implementation status
 
+## Sieges eat stored food — rules/save 20, 2026-09-22
+
+**The change.** A blockaded town's food yield is cut off while its people keep eating, so siege supplies now count the whole turns its actual food store lasts. Only when the store is empty does the militia lose morale each turn. Well-fed, developed towns hold out longer. Attackers choose between an early assault on a high-morale garrison and starving it out. The siege panel shows "Food stores: N turns". Defenses still fall over three turns. Historical rules keep the fixed three-turn count, and older envelopes refuse stores above 3.
+
+**Save compatibility.** Content is unchanged (`3127e431`). A genuine rules-19 save and archive from `a7bf367` load, re-seal identically, replay and continue.
+
+**Balance.** Pacing still holds on Standard/12: 207, 267 and 316 turns for Standard, Long and Epic. Tiny Epic runs 363–416 turns.
+
+**Verification.** 1,797 tests pass.
+
 ## Unification victory — rules/save 19, 2026-09-22
 
 **The second victory path.** A realm that holds more than half of the world's hearths (at least 6) opens a public Unification bid at its capital when a round ends. Holding the majority and that capital through the pace's response window (20, 40 or 60 turns) wins. Rivals see the bid on the public ledger, and the AI already targets rival victory hosts. Losing the capital or the majority ends the bid.

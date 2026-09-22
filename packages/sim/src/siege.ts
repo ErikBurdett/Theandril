@@ -10,6 +10,7 @@ import { recordConquest } from './diplomacy';
 import { captureSettlementCharacters } from './characters';
 import { armyDomain, carriedArmyBlocker } from './naval';
 import { roadMovementCost } from './roads';
+import { settlementFoodConsumption } from './growth-economy';
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 const bounded = (maximum: number) => z.number().int().min(0).max(maximum);
@@ -18,6 +19,13 @@ export const siegeSchema = z.object({
   defenses: bounded(30), supplies: bounded(3), militiaStrength: bounded(60).min(1),
   militiaMorale: bounded(75).min(1), militiaFatigue: bounded(100),
 }).strict();
+/** Rules 20: supplies count whole turns of the town's actual stored food. */
+export const SIEGE_SUPPLY_CAP = 99;
+export const siegeV20Schema = siegeSchema.extend({ supplies: bounded(SIEGE_SUPPLY_CAP) }).strict();
+function storedSupplies(town: { food: number; population: number }): number {
+  const need = settlementFoodConsumption(town.population);
+  return need > 0 ? Math.min(SIEGE_SUPPLY_CAP, Math.floor(town.food / need)) : SIEGE_SUPPLY_CAP;
+}
 export const captureOutcomeSchema = z.enum(['occupy', 'sack', 'raze', 'liberate']);
 const captureOptionSchema = z.object({
   outcome: captureOutcomeSchema, label: z.string().min(1).max(40), description: z.string().min(1).max(400),
@@ -49,9 +57,10 @@ export function besiegeSettlement(state: GameState, factionId: string, armyId: s
   if (army.movement < 1) return fail('The army needs movement to establish a siege.');
   if (state.sieges[settlementId]) return fail('This settlement is already under siege.');
   if (Object.values(state.sieges).some(siege => siege.armyId === armyId)) return fail('An army can maintain only one siege.');
-  state.sieges[settlementId] = { settlementId, armyId, factionId, startedTurn: state.turn, defenses: 30, supplies: 3, militiaStrength: Math.min(60, 10 + town.population * 10), militiaMorale: 75, militiaFatigue: 0 };
+  state.sieges[settlementId] = { settlementId, armyId, factionId, startedTurn: state.turn, defenses: 30, supplies: rulesVersion(state) >= 20 ? storedSupplies(town) : 3, militiaStrength: Math.min(60, 10 + town.population * 10), militiaMorale: 75, militiaFatigue: 0 };
   army.movement = 0;
-  return { ok: true, events: [factionId, town.factionId].map(owner => ({ turn: state.turn, type: 'siege_started', factionId: owner, cell: town.cell, message: `${town.name} is blockaded. Its food yield is cut off and other yields are halved.` })) };
+  const stores = rulesVersion(state) >= 20 ? ` Its stored food lasts ${state.sieges[settlementId]!.supplies} turns; then its militia starves.` : '';
+  return { ok: true, events: [factionId, town.factionId].map(owner => ({ turn: state.turn, type: 'siege_started', factionId: owner, cell: town.cell, message: `${town.name} is blockaded. Its food yield is cut off and other yields are halved.${stores}` })) };
 }
 
 export function liftSettlementSiege(state: GameState, factionId: string, settlementId: string): CommandResult {
@@ -123,9 +132,11 @@ export function advanceSieges(state: GameState, events: DomainEvent[]): void {
   reconcileSieges(state, events);
   for (const siege of orderedSieges(state)) {
     siege.defenses = Math.max(0, siege.defenses - 10);
-    siege.supplies = Math.max(0, siege.supplies - 1);
-    if (siege.supplies === 0) siege.militiaMorale = Math.max(1, siege.militiaMorale - 10);
     const town = state.settlements[siege.settlementId];
+    // Rules 20: a blockaded town eats its store (its food yield is cut off);
+    // supplies report the whole turns left. Earlier rules count down from 3.
+    siege.supplies = rulesVersion(state) >= 20 && town ? storedSupplies(town) : Math.max(0, siege.supplies - 1);
+    if (siege.supplies === 0) siege.militiaMorale = Math.max(1, siege.militiaMorale - 10);
     if (town) for (const factionId of [siege.factionId, town.factionId]) events.push({ turn: state.turn, type: 'siege_progress', factionId, cell: town.cell, message: `${town.name}: defenses ${siege.defenses}, supplies ${siege.supplies}.` });
   }
 }
