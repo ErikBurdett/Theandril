@@ -1,9 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
 import { conquestCampaign, CONQUEST_FIXTURE } from '../../test-fixtures/src/conquest-fixture';
-import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, getObservation, serializeGame, serializeGameForVersion, type GameCommand } from './index';
+import { applyCommand, applyCommandForVersion, createArmyFormation, deserializeGame, getObservation, SAVE_VERSION, serializeGame, serializeGameForVersion, type GameCommand } from './index';
+import type { RulesVersion } from './rules';
 
-function readyAssault(version: 16 | 17 = 17) {
+/** The garrison, siege and turn are built under the rules being checked, so the
+ * regression that closed this finding runs against today's food-store sieges as
+ * well as the rules-16 and rules-17 campaigns it was first written for. */
+function readyAssault(version: RulesVersion = SAVE_VERSION) {
   let state = conquestCampaign();
   const town = state.settlements[CONQUEST_FIXTURE.settlementId]!;
   state.nextId = 1000;
@@ -30,8 +34,10 @@ function readyAssault(version: 16 | 17 = 17) {
 }
 
 describe('pending assault save validation', () => {
-  it('rejects an omitted lower-ID garrison even when a resealed defenderId prioritizes the wrong contingent', () => {
-    const ready = readyAssault(), factionId = ready.turnOwnerId;
+  // The finding was closed under rules 17; rules 18-22 changed pacing, sieges and
+  // seats, so the same scenario is proved again under the rules that ship today.
+  it.each([17, SAVE_VERSION] as const)('rejects an omitted lower-ID garrison under rules %i even when a resealed defenderId prioritizes the wrong contingent', version => {
+    const ready = readyAssault(version), factionId = ready.turnOwnerId;
     const command = { type: 'assault' as const, factionId, settlementId: CONQUEST_FIXTURE.settlementId };
     expect(getObservation(ready, factionId).sieges[0]).toHaveProperty('battleDefense.engagedFormations', 16);
     const normal = deserializeGame(serializeGame(ready));

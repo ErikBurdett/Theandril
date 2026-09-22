@@ -81,3 +81,52 @@ test('an unfundable incoming offer explains its blocker and remains rejectable',
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.diplomacy.offers.length)).toBe(0);
   expect(await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.wars.length)).toBe(1);
 });
+
+test('a realm offers patronage, sees the oath it made and can release it', async ({ page }, testInfo) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await importCampaign(page, borderBattleCampaign());
+  const client = await page.evaluate(() => {
+    const view = window.__THEANDRIL__!.getSummary()!;
+    return view.factions.find(faction => faction.id !== view.factionId)!;
+  });
+  await openRealmAffairs(page);
+  await page.getByRole('button', { name: `Offer patronage to ${client.name}`, exact: true }).click();
+  await page.getByLabel('Subsidy now', { exact: true }).fill('40');
+  await page.getByLabel('Tribute each turn', { exact: true }).fill('6');
+  await page.getByLabel('Term in turns', { exact: true }).fill('20');
+  // Every part of the bargain is stated before it is sent.
+  await expect(page.getByTestId('patronage-builder')).toContainText('You pay 40 coin on acceptance');
+  await expect(page.getByTestId('patronage-builder')).toContainText('6 coin each turn for 20 turns');
+  await expect(page.getByTestId('patronage-builder')).toContainText('unification bid');
+  await page.screenshot({ path: testInfo.outputPath('patronage-offer.png'), fullPage: true });
+  await page.getByRole('button', { name: 'Send offer', exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.diplomacy.clientOffers.length)).toBe(1);
+  expect(errors).toEqual([]);
+});
+
+test('an accepted oath is visible to both realms, refuses war and survives a save', async ({ page }) => {
+  const state = borderBattleCampaign();
+  const [patron, client] = state.factions;
+  const terms = { giftCoin: 40, tributeCoin: 6, termTurns: 20 };
+  expect(applyCommand(state, { type: 'proposeClient', factionId: patron!.id, targetFactionId: client!.id, terms }).ok).toBe(true);
+  const offerId = state.diplomacy.clientOffers[0]!.id;
+  expect(applyCommand(state, { type: 'respondClient', factionId: client!.id, offerId, accept: true }).ok).toBe(true);
+  await importCampaign(page, state);
+  await openRealmAffairs(page);
+  await expect(page.getByTestId(`patronage-${client!.id}`)).toContainText('Your client until turn');
+  await expect(page.getByTestId('patronage')).toContainText(client!.name);
+  await expect(page.getByRole('button', { name: `Declare war on ${client!.name}`, exact: true })).toBeDisabled();
+  await closeManagement(page);
+  await page.getByText('Campaign & settings', { exact: true }).click();
+  await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
+  await expect(page.getByTestId('feedback')).toContainText('Campaign saved');
+  const hash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
+  await page.reload();
+  await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getStateHash())).toBe(hash);
+  await openRealmAffairs(page);
+  await page.getByRole('button', { name: `Release ${client!.name}`, exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getSummary()?.diplomacy.clients.length)).toBe(0);
+  await expect(page.getByRole('button', { name: `Declare war on ${client!.name}`, exact: true })).toBeEnabled();
+});

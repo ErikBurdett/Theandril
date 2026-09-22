@@ -1,5 +1,17 @@
 # Theandril implementation status
 
+## Campaign-safety scenarios re-run against the rules that ship — 2026-09-22
+
+**Why.** The campaign-safety findings were corrected and independently reviewed under rules 17. Rules 18-22 then changed campaign pacing, added the Unification victory, made sieges consume stored food, seated city-states and added client obligations, so M0 could not close until those scenarios were proved again under the rules that actually ship.
+
+**What the audit found.** Eight of the nine findings were already exercised at current rules: training morale (four of five tests; the fifth is a captured rule-16 evidence test and stays frozen), whole-army frontage, movement and quote parity, both storage durability defects, fresh current-version origins, and the two naval AI findings all run with ordinary commands on unpinned campaigns. One did not: the pending-assault regression built its garrison, siege and turn at rules 17 only, so the food-store siege model introduced at rules 20 never touched it.
+
+**What changed.** That regression now builds its scenario under the rules being checked and proves the same invariant at rules 17 and at the shipping rules. The remaining rule-16 cases stay pinned on purpose: they are captured evidence that old envelopes still refuse what they refused.
+
+**Result.** The retained set — ten files, 66 checks — passes against the shipping rules. No finding re-opened. The roadmap item now asks that each scenario keep running against the rules that ship rather than the rules it was first closed under.
+
+**Verification.** 1,806 tests pass.
+
 ## Client states and negotiated unification — rules/save 22, 2026-09-22
 
 **Patronage.** A realm may take another realm as its client: a subsidy paid on acceptance, tribute every turn for an agreed term, and no war between patron and client while the oath holds. The client keeps its own hearths, armies and orders. Every term is disclosed before consent; an offer that can no longer be funded says so rather than failing on acceptance. A patron may release a client; a client may renounce lawfully once the term ends, or as a breach that ends the binding peace between them and is remembered as a grievance. A client that cannot pay for three turns running falls out of its obligation. Patronage may not chain, cycle, duplicate or cross an active war.
