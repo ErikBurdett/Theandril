@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CAMPAIGN_PACES, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, technologiesForRules, technologyBranch, type ResearchBranch } from '@theandril/content';
+import { CAMPAIGN_PACES, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, SCHEMA17_CAMPAIGN_PACES, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, technologiesForRules, technologyBranch, type ResearchBranch } from '@theandril/content';
 import { isPassable } from '@theandril/mapgen';
 import type { CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
@@ -26,7 +26,7 @@ export interface ProgressionObservation extends FactionProgression {
 export const createFactionProgression = (): FactionProgression => ({ technologies: [], institutionId: null, doctrineId: null });
 const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
 const ongoing = (project: VictoryProject): boolean => project.status === 'active' || project.status === 'paused';
-const campaignProfile = (state: GameState) => (rulesVersion(state) < 8 ? LEGACY_CAMPAIGN_PACES : rulesVersion(state) === 8 ? SCHEMA8_CAMPAIGN_PACES : CAMPAIGN_PACES)[state.pace];
+const campaignProfile = (state: GameState) => (rulesVersion(state) < 8 ? LEGACY_CAMPAIGN_PACES : rulesVersion(state) === 8 ? SCHEMA8_CAMPAIGN_PACES : rulesVersion(state) < 18 ? SCHEMA17_CAMPAIGN_PACES : CAMPAIGN_PACES)[state.pace];
 
 export function doctrineEffects(doctrineId: string | null) {
   return DOCTRINES.find(item => item.id === doctrineId)?.effects ?? { attack: 0, armor: 0, movement: 0 };

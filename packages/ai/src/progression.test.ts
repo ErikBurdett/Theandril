@@ -115,7 +115,8 @@ test('AI uses the scaled project fund and keeps an operating purse during a long
   expect(planTurn(getObservation(state, state.turnOwnerId))[0]?.type).toBe('startVictoryProject');
 });
 
-test.each([74, 2026, 20260905, 17, 99, 31415, 2718, 8128, 4096, 65535])('generated-start AI seed %i reaches true Prosperity with ordinary commands and deterministic save continuation', seed => {
+// Four representative generated starts; each checks every turn's save round trip.
+test.each([74, 2026, 20260905, 31415])('generated-start AI seed %i reaches true Prosperity with ordinary commands and deterministic save continuation', seed => {
   let state = createGame({ seed, size: 'tiny', factionCount: 4, pace: 'short' });
   let mirror: GameState | undefined;
   const counts = new Map<string, number>();

@@ -39,13 +39,21 @@ export const SCHEMA8_CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceP
   ...LEGACY_CAMPAIGN_PACES,
   epic: { ...LEGACY_CAMPAIGN_PACES.epic, projectCoinCost: 75_000 },
 };
-/** Developed hinterlands increase recurring income. Keep the late commitment
- * proportionate without delaying early work, raising AI strength or locking turns. */
-export const CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+/** Frozen rules 9–17 prices. Developed hinterlands increase recurring income, so
+ * the late commitment rose without delaying early work or raising AI strength. */
+export const SCHEMA17_CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
   ...SCHEMA8_CAMPAIGN_PACES,
   standard: { ...SCHEMA8_CAMPAIGN_PACES.standard, projectCoinCost: 18_000 },
   long: { ...SCHEMA8_CAMPAIGN_PACES.long, projectCoinCost: 80_000 },
   epic: { ...SCHEMA8_CAMPAIGN_PACES.epic, projectCoinCost: 240_000 },
+};
+/** Rules 18: Civilization-scale campaigns. The longest pace concludes around
+ * 350–400 turns. Only prices change; public project windows keep their length. */
+export const CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+  short: SCHEMA17_CAMPAIGN_PACES.short,
+  standard: { ...SCHEMA17_CAMPAIGN_PACES.standard, description: 'A full campaign aiming for about two hundred turns, with a twenty-turn window to oppose public projects. Actual length depends on play.' },
+  long: { ...SCHEMA17_CAMPAIGN_PACES.long, projectCoinCost: 30_000, description: 'An extended campaign aiming for about three hundred turns, with a forty-turn window to oppose public projects. Actual length depends on play.' },
+  epic: { ...SCHEMA17_CAMPAIGN_PACES.epic, projectCoinCost: 42_000, description: 'The longest campaign, aiming for about three hundred and fifty to four hundred turns, with a sixty-turn window to oppose public projects. Actual length depends on play.' },
 };
 
 export const TECHNOLOGIES: readonly TechnologyDefinition[] = [

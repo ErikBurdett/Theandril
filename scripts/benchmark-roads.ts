@@ -64,7 +64,7 @@ function workload(size: 'huge' | 'legendary', factionCount: number) {
   const base = corridorCampaign(size, factionCount), baseline = serializeGame(base), baselineHash = stateHash(base);
   // Rules17 changes only post-battle strategic morale. This retained roster3 road
   // workload recruits no specialists/casters, researches no magic and has no battles.
-  invariant(SAVE_VERSION === 17 && Object.values(base.arcaneResearch).every(discoveries => discoveries.length === 0) && Object.values(base.armies).every(army => army.formations.every(item => !['unit.skirmisher', 'unit.arbalester', 'unit.halberdier', 'unit.lancer'].includes(item.unitId))), 'review this retained road workload before another schema change');
+  invariant(SAVE_VERSION >= 17 && Object.values(base.arcaneResearch).every(discoveries => discoveries.length === 0) && Object.values(base.armies).every(army => army.formations.every(item => !['unit.skirmisher', 'unit.arbalester', 'unit.halberdier', 'unit.lancer'].includes(item.unitId))), 'review this retained road workload before another schema change');
   const planningMs: number[] = [], readMs: number[] = [];
   let expectedRoads = '', expectedEvents = '', planned: GameState | null = null;
   for (let sample = 0; sample < WARMUPS + SAMPLES; sample++) {

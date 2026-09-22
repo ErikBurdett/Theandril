@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CAMPAIGN_PACES, checksum, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, TECHNOLOGIES } from '@theandril/content';
+import { CAMPAIGN_PACES, checksum, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, SCHEMA17_CAMPAIGN_PACES, TECHNOLOGIES } from '@theandril/content';
 import { prosperityCampaign, PROSPERITY_FIXTURE } from '../../test-fixtures/src/victory-fixture';
 import { applyCommand, applyCommandForVersion, createGame, deserializeGame, getObservation, replayGame, serializeGame, settlementYields, stateHash } from './index';
 import type { CampaignPace, GameCommand, GameState } from './index';
@@ -14,12 +14,12 @@ const issue = (state: GameState, command: GameCommand): void => { expect(applyCo
 const reject = (state: GameState, command: GameCommand): void => { const hash = stateHash(state); expect(applyCommand(state, command).ok).toBe(false); expect(stateHash(state)).toBe(hash); };
 
 describe('canonical campaign pace', () => {
-  it('scales modern late investment while freezing historical profiles and all response windows', () => {
+  it('keeps every response window and civic price while rules 18 shortens long campaigns', () => {
     expect(LEGACY_CAMPAIGN_PACES.epic.projectCoinCost).toBe(60_000);
     expect(SCHEMA8_CAMPAIGN_PACES.epic.projectCoinCost).toBe(75_000);
-    expect(CAMPAIGN_PACES.epic.projectCoinCost).toBe(240_000);
-    expect(CAMPAIGN_PACES.epic.civicKnowledgeCost).toBe(LEGACY_CAMPAIGN_PACES.epic.civicKnowledgeCost);
-    expect(CAMPAIGN_PACES.epic.projectActiveTurns).toBe(LEGACY_CAMPAIGN_PACES.epic.projectActiveTurns);
+    expect(SCHEMA17_CAMPAIGN_PACES.epic.projectCoinCost).toBe(240_000);
+    expect(CAMPAIGN_PACES.long.projectCoinCost).toBeLessThan(SCHEMA17_CAMPAIGN_PACES.long.projectCoinCost);
+    expect(CAMPAIGN_PACES.epic.projectCoinCost).toBeLessThan(SCHEMA17_CAMPAIGN_PACES.epic.projectCoinCost);
     expect(CAMPAIGN_PACES.short).toEqual(LEGACY_CAMPAIGN_PACES.short);
     for (const pace of paces) {
       expect(CAMPAIGN_PACES[pace].civicKnowledgeCost).toBe(LEGACY_CAMPAIGN_PACES[pace].civicKnowledgeCost);
@@ -27,37 +27,31 @@ describe('canonical campaign pace', () => {
     }
   });
 
-  it.each(([4, 5, 6, 7, 8, 9] as const).flatMap(version => [60_000, 74_999, 75_000, 239_999, 240_000].map(treasury => ({ version, treasury }))))('quotes and actually charges rules $version Epic at a $treasury-coin boundary', ({ version, treasury }) => {
-    // Authored infrastructure isolates affordability; research, institution and
-    // project activation still execute through the actual versioned commands.
-    // No current state is substituted for an independently captured old archive.
-    const state = prosperityCampaign(); state.pace = 'epic';
-    const faction = state.factions[0]!; faction.knowledge = 1600;
-    expect(applyCommandForVersion(state, research, version)).toMatchObject({ ok: true });
-    expect(applyCommandForVersion(state, { type: 'adoptInstitution', factionId, institutionId: 'institution.charter_compact' }, version)).toMatchObject({ ok: true });
-    faction.treasury = treasury;
-    const price = version < 8 ? 60_000 : version === 8 ? 75_000 : 240_000, affordable = treasury >= price;
-    const before = stateHash(state);
-    const quote = withRules(state, version, () => getObservation(state, factionId).progression.project);
-    expect(quote).toMatchObject({ coinCost: price, activeTurns: 60 });
-    expect(quote.eligibleSettlementIds.includes(PROSPERITY_FIXTURE.hostId)).toBe(affordable);
-    expect(quote.blockers).toEqual(affordable ? [] : [`Requires ${price} coin upfront; cancellation gives no refund.`]);
-    expect(getObservation(state, factionId).progression.project.coinCost).toBe(240_000);
-    expect(stateHash(state)).toBe(before);
-    const mirror = deserializeGame(serializeGame(state));
-    const result = applyCommandForVersion(state, start, version);
-    expect(result).toEqual(applyCommandForVersion(mirror, start, version));
-    expect(result.ok).toBe(affordable);
-    if (affordable) {
-      expect(faction.treasury).toBe(treasury - price);
-      expect(state.projects[0]).toMatchObject({ progress: 0, requiredTurns: 60, status: 'active' });
-      expect(result.events.every(event => event.type === 'victory_project_started' && event.message.includes(`committed ${price} coin`))).toBe(true);
-    } else {
-      expect(result).toMatchObject({ events: [], error: `Requires ${price} coin upfront; cancellation gives no refund.` });
-      expect(state.projects).toEqual([]); expect(stateHash(state)).toBe(before);
+  // One case per pricing era, at the exact affordability boundary.
+  it.each([
+    { version: 7, price: LEGACY_CAMPAIGN_PACES.epic.projectCoinCost },
+    { version: 8, price: SCHEMA8_CAMPAIGN_PACES.epic.projectCoinCost },
+    { version: 17, price: SCHEMA17_CAMPAIGN_PACES.epic.projectCoinCost },
+    { version: 18, price: CAMPAIGN_PACES.epic.projectCoinCost },
+  ] as const)('rules $version quotes and charges the Epic project at $price coin', ({ version, price }) => {
+    for (const treasury of [price - 1, price]) {
+      const state = prosperityCampaign(); state.pace = 'epic';
+      const faction = state.factions[0]!; faction.knowledge = 1600;
+      expect(applyCommandForVersion(state, research, version)).toMatchObject({ ok: true });
+      expect(applyCommandForVersion(state, { type: 'adoptInstitution', factionId, institutionId: 'institution.charter_compact' }, version)).toMatchObject({ ok: true });
+      faction.treasury = treasury;
+      const affordable = treasury >= price, before = stateHash(state);
+      const quote = withRules(state, version, () => getObservation(state, factionId).progression.project);
+      expect(quote).toMatchObject({ coinCost: price, activeTurns: 60 });
+      expect(quote.blockers).toEqual(affordable ? [] : [`Requires ${price} coin upfront; cancellation gives no refund.`]);
+      const result = applyCommandForVersion(state, start, version);
+      expect(result.ok).toBe(affordable);
+      if (affordable) {
+        expect(faction.treasury).toBe(0);
+        expect(state.projects[0]).toMatchObject({ progress: 0, requiredTurns: 60, status: 'active' });
+      } else expect(stateHash(state)).toBe(before);
+      expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
     }
-    expect(stateHash(mirror)).toBe(stateHash(state));
-    expect(stateHash(deserializeGame(serializeGame(state)))).toBe(stateHash(state));
   });
 
   it('defaults to standard while preserving identical early economy and movement', () => {

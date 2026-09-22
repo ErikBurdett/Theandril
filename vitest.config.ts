@@ -5,7 +5,7 @@ import { configDefaults, defineConfig } from 'vitest/config';
 // generated AI campaigns and repository-integrity checks separately.
 const campaigns = [
   'tests/headless/chronicle-victory.test.ts', 'tests/headless/conquest-soak.test.ts',
-  'packages/ai/src/pacing.test.ts', 'packages/ai/src/pacing-epic-*.test.ts', 'packages/ai/src/contact.test.ts',
+  'packages/ai/src/pacing.test.ts', 'packages/ai/src/pacing-epic.test.ts', 'packages/ai/src/contact.test.ts',
   'packages/ai/src/recruitment.test.ts', 'packages/ai/src/progression.test.ts', 'packages/ai/src/resource-economy.test.ts',
   'packages/ai/src/overseas-generated.test.ts', 'packages/test-fixtures/src/empire-land-fixture.test.ts',
 ];

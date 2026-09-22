@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
+import { BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, SCHEMA17_CAMPAIGN_PACES, contentPackHash, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
 test('the starter pack has unique valid IDs, localization and bounded numeric parameters', () => {
   expect(validateContent()).toMatchObject({ buildings: 5, units: 13, factions: 24, technologies: 10, institutions: 2, doctrines: 2, projects: 1, improvements: 18, resources: 8, developmentNodes: 25, naturalFeatures: 7 });
 });
@@ -111,4 +111,10 @@ test('production rejects missing references, duplicate prerequisites and impossi
   expect(unitSchema.safeParse({ ...UNITS[0], movementDomain: 'naval' }).success).toBe(false);
   expect(unitSchema.safeParse({ ...transport, canFound: true }).success).toBe(false);
   for (const capacity of [-1, 0.5, 25, NaN]) expect(unitSchema.safeParse({ ...transport, naval: { ...transport.naval, transportCapacity: capacity } }).success).toBe(false);
+});
+
+test('the rules 16–17 pack keeps its exact seal so older saves still load', () => {
+  expect(contentPackHash(SCHEMA17_CAMPAIGN_PACES)).toBe('b79c78ed');
+  expect(CONTENT_HASH).toBe(contentPackHash());
+  expect(CONTENT_HASH).not.toBe('b79c78ed');
 });

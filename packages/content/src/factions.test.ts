@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-  BASE_LAND_MILITARY_UNIT_IDS, BIOME_YIELDS, BUILDINGS, CAMPAIGN_PACES, CHARACTER_MISSIONS, CHARACTER_NAMES,
+  BASE_LAND_MILITARY_UNIT_IDS, BIOME_YIELDS, BUILDINGS, SCHEMA17_CAMPAIGN_PACES, CHARACTER_MISSIONS, CHARACTER_NAMES,
   COMMANDER_ABILITIES, DOCTRINES, FACTIONS, FACTION_ECOLOGIES, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, FACTION_ROSTERS,
   INSTITUTIONS, LOCALIZATION, NATURAL_FEATURES, PROSPERITY_PROJECT, ROSTER_VERSION, TECHNOLOGIES, UNITS,
   characterName, characterDefinitionsForRules, characterSkillsForRules, checksum, factionRoster, improvementsForRules, technologiesForRules, unitsForRules, validateFactionContent,
@@ -10,7 +10,7 @@ describe('twenty-four cultures and frozen historical content', () => {
   it('preserves the genuine schema12 whole-pack seal, including all twelve original names and profiles', () => {
     const firstTwelve = <T>(record: Readonly<Record<string, T>>) => Object.fromEntries(Object.entries(record).slice(0, 12));
     expect(checksum(JSON.stringify({
-      BUILDINGS, UNITS: unitsForRules(12), FACTIONS: FACTIONS.slice(0, 12), TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES,
+      BUILDINGS, UNITS: unitsForRules(12), FACTIONS: FACTIONS.slice(0, 12), TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES: SCHEMA17_CAMPAIGN_PACES,
       CHARACTER_DEFINITIONS: characterDefinitionsForRules(12).slice(0, 3), CHARACTER_MISSIONS, CHARACTER_SKILLS: characterSkillsForRules(12), COMMANDER_ABILITIES, CHARACTER_NAMES: firstTwelve(CHARACTER_NAMES),
       BIOME_YIELDS, FACTION_ECOLOGIES: firstTwelve(FACTION_ECOLOGIES), IMPROVEMENTS: improvementsForRules(12), NATURAL_FEATURES,
       FACTION_ROSTERS: { 1: FACTION_ROSTERS[1], 2: FACTION_ROSTERS[2], 3: FACTION_ROSTERS[3] },
@@ -21,7 +21,7 @@ describe('twenty-four cultures and frozen historical content', () => {
     const oldNames = Object.fromEntries(Object.entries(CHARACTER_NAMES).slice(0, 6));
     const oldEcologies = Object.fromEntries(Object.entries(FACTION_ECOLOGIES).slice(0, 6));
     expect(checksum(JSON.stringify({
-      BUILDINGS, UNITS: unitsForRules(9), FACTIONS: FACTIONS.slice(0, 6), TECHNOLOGIES: technologiesForRules(9), INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES,
+      BUILDINGS, UNITS: unitsForRules(9), FACTIONS: FACTIONS.slice(0, 6), TECHNOLOGIES: technologiesForRules(9), INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES: SCHEMA17_CAMPAIGN_PACES,
       CHARACTER_DEFINITIONS: characterDefinitionsForRules(12).slice(0, 3), CHARACTER_MISSIONS, CHARACTER_SKILLS: characterSkillsForRules(12), COMMANDER_ABILITIES, CHARACTER_NAMES: oldNames,
       BIOME_YIELDS, FACTION_ECOLOGIES: oldEcologies, IMPROVEMENTS: improvementsForRules(9), NATURAL_FEATURES,
     }))).toBe('9418e598');

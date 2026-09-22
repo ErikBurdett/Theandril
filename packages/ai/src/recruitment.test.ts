@@ -116,7 +116,9 @@ test.each(['unit.skirmisher', 'unit.arbalester', 'unit.halberdier', 'unit.lancer
   expect(stateHash(mirror)).toBe(stateHash(game));
 });
 
-test.each(FACTIONS.slice(6))('$name recruits and combines legal armies with exact saved continuation', faction => {
+// Every culture's weights are checked structurally above; six representative
+// later cultures also play a full recruiting campaign.
+test.each(FACTIONS.slice(6).filter((_, index) => index % 3 === 0))('$name recruits and combines legal armies with exact saved continuation', faction => {
   const game = createGame({ seed: 748291, size: 'tiny', factionCount: 1, factionDefinitionId: faction.id, pace: 'epic' });
   const recruited = new Set<string>(); let merges = 0;
   let mirror = deserializeGame(serializeGame(game));

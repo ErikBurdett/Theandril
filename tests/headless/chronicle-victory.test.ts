@@ -5,9 +5,8 @@ import { aiObservationOptions, planTurn } from '../../packages/ai/src/index';
 import { applyRecordedCommand, createArchive, generateChronicles, replayArchive } from '../../packages/chronicle/src/index';
 import { deserializeCampaign, serializeCampaign } from '../../packages/persistence/src/index';
 
-// The Epic case plays about 900 turns: it mirrors every post-500 order and
-// replays the complete history once. Give this archive integration test its own
-// wall-time budget; keep all turn/count gates.
+// The Epic case plays a full rules-18 campaign (about 350–400 turns): it mirrors
+// every order after turn 200 and replays the complete history once.
 test.each(['short', 'epic'] as const)('generated-start %s AI victory produces complete factual logs identical after archive save/resume', pace => {
   const game = createGame({ seed: 20260905, size: 'tiny', factionCount: 4, pace });
   const archive = createArchive(game, { mode: 'watch' });
@@ -20,7 +19,7 @@ test.each(['short', 'epic'] as const)('generated-start %s AI victory produces co
     // a general matcher wrapper for every mirrored command in a thousand-turn run.
     if (resumed) deepStrictEqual(applyRecordedCommand(resumed.game, resumed.archive, command), result);
   };
-  while (!game.victory && game.turn <= (pace === 'short' ? 150 : 1400)) {
+  while (!game.victory && game.turn <= (pace === 'short' ? 150 : 450)) {
     for (const faction of game.factions) {
       for (const command of planTurn(getObservation(game, faction.id, aiObservationOptions(game.turn)))) {
         issue(command);
@@ -39,15 +38,13 @@ test.each(['short', 'epic'] as const)('generated-start %s AI victory produces co
       }
     }
     issue({ type: 'endTurn', factionId: game.turnOwnerId });
-    if (game.turn === (pace === 'short' ? 10 : 500)) resumed = deserializeCampaign(serializeCampaign(game, archive));
+    if (game.turn === (pace === 'short' ? 10 : 200)) resumed = deserializeCampaign(serializeCampaign(game, archive));
   }
   expect(errors).toEqual([]);
   expect(game.victory?.path).toBe('prosperity');
   if (pace === 'epic') {
-    // Modern AI/army economics may change the finish; original schema-4 turn1006 is historical,
-    // not an invariant of current rules. Keep a genuinely long archived campaign as the gate.
-    expect(game.turn).toBeGreaterThanOrEqual(800);
-    expect(game.turn).toBeLessThanOrEqual(1400);
+    expect(game.turn).toBeGreaterThanOrEqual(300);
+    expect(game.turn).toBeLessThanOrEqual(450);
     expect(game.battleReports).toHaveLength(20);
     expect(archive.records.flatMap(record => record.battles).length).toBeGreaterThan(20);
   }
