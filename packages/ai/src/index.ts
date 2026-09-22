@@ -1,7 +1,7 @@
 import { BUILDINGS, UNITS } from '@theandril/content';
 import { hexDistance, neighbors } from '@theandril/mapgen';
 import { MAX_ARMY_FORMATIONS, foundingCoinCost, getMovementQuery, planDevelopment, type GameCommand, type Observation } from '@theandril/sim';
-import { planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
+import { answerPatronage, proposePatronage, planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
 import { planConquestDecision } from './conquest';
 import { planProgression } from './progression';
 import { createNavigation } from './navigation';
@@ -31,6 +31,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   if (capture) return capture;
   const diplomatic = planDiplomacy(view);
   if (diplomatic) return diplomatic;
+  const answered = answerPatronage(view);
+  if (answered) return answered;
+
   const siegeDecision = planConquestDecision(view);
   if (siegeDecision) return siegeDecision;
   const oceanScoutReserve = reserveOceanScout(view);
@@ -60,8 +63,10 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const advancement = planProgression(view, foundingReserve + expeditionSavings + oceanScoutReserve, !minor);
   if (advancement.commands.some(command => command.type === 'startVictoryProject')) return advancement;
   const factionId = view.factionId;
-  const plans: GameCommand[] = [...advancement.commands];
-  const reasons: string[] = [...advancement.reasons];
+  // Patronage is one bounded diplomatic order beside the turn's ordinary work.
+  const patronage = proposePatronage(view);
+  const plans: GameCommand[] = [...advancement.commands, ...(patronage?.commands ?? [])];
+  const reasons: string[] = [...advancement.reasons, ...(patronage?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;

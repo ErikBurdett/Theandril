@@ -9,6 +9,7 @@ import type { Army, CommandResult, DomainEvent, GameState, NewGameOptions, Obser
 import { cellsWithin, indexes, rebuildIndexes, updateSight, upgradeLandVisibility } from './visibility';
 import { cloneCampaignBattle, declareCampaignWar, resolveCampaignBattle, settleCampaignAbility, startCampaignBattle } from './warfare';
 import { advanceDiplomacy, createDiplomacy, getDiplomacyObservation, peaceCommandSchemas, proposePeace, respondPeace } from './diplomacy';
+import { advanceClients, clientCommandSchemas, proposeClient, releaseClient, renounceClient, respondClient } from './clients';
 import { advanceSieges, assaultSettlement, besiegeSettlement, captureOutcomeSchema, liftSettlementSiege, observeSieges, reconcileSieges, resolveSettlementCapture } from './siege';
 import { advanceProgression, chooseProgression, createFactionProgression, doctrineEffects, getProgressionObservation, progressionYields, reconcileProjects, startVictoryProject } from './progression';
 import { advanceMovement, cancelMovement, moveTo, pauseMovement, queueMovement, reconcileMovement, resumeMovement } from './movement';
@@ -88,8 +89,10 @@ const version15CommandSchema = z.discriminatedUnion('type', [...version13Command
   z.object({ type: z.literal('setBattleAbilityAuto'), factionId: identifier, battleId: identifier, sourceId: identifier, abilityId: identifier, automatic: z.boolean() }).strict(),
   z.object({ type: z.literal('useBattleAbility'), factionId: identifier, battleId: identifier, sourceId: identifier, abilityId: identifier, targetId: identifier.optional() }).strict(),
 ]);
-export const commandSchema = z.discriminatedUnion('type', [resourceCommandSchema, developmentCommandSchema, ...landCommandSchemas, ...version15CommandSchema.options.filter(schema => !landCommandV15Schemas.some(land => land.shape.type.value === schema.shape.type.value))]);
-export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : commandSchema;
+const version21CommandSchema = z.discriminatedUnion('type', [resourceCommandSchema, developmentCommandSchema, ...landCommandSchemas, ...version15CommandSchema.options.filter(schema => !landCommandV15Schemas.some(land => land.shape.type.value === schema.shape.type.value))]);
+/** Rules 22 adds the patronage commands; historical rules never accept them. */
+export const commandSchema = z.discriminatedUnion('type', [...version21CommandSchema.options, ...clientCommandSchemas]);
+export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
 export function initializeLegacyLand(state: GameState): void {
@@ -127,7 +130,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21)]).default(21),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22)]).default(22),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -337,6 +340,7 @@ function resolveTurn(state: GameState, emitted: DomainEvent[], observe: PhaseObs
   observe('travel', 'end');
   observe('diplomacy', 'start');
   emitted.push(...advanceDiplomacy(state));
+  emitted.push(...advanceClients(state));
   observe('diplomacy', 'end');
   observe('progression', 'start');
   advanceProgression(state, emitted);
@@ -496,6 +500,12 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     if (!result.ok) return result;
     emitted.push(...result.events);
     if (command.type === 'resolveCapture' && previousOwner && rulesVersion(state) >= 9) handleLandCapture(state, command.settlementId, previousOwner, emitted);
+  } else if (command.type === 'proposeClient' || command.type === 'respondClient' || command.type === 'releaseClient' || command.type === 'renounceClient') {
+    const result = command.type === 'proposeClient' ? proposeClient(state, faction.id, command.targetFactionId, command.terms)
+      : command.type === 'respondClient' ? respondClient(state, faction.id, command.offerId, command.accept)
+      : command.type === 'releaseClient' ? releaseClient(state, faction.id, command.clientId) : renounceClient(state, faction.id);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
   } else if (command.type === 'proposePeace' || command.type === 'respondPeace') {
     const result = command.type === 'proposePeace' ? proposePeace(state, faction.id, command.targetFactionId, command.terms) : respondPeace(state, faction.id, command.offerId, command.accept);
     if (!result.ok) return result;

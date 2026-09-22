@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-22 | [Client states, and a roadmap the tracker can show](2026-09-22-client-states.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [City-states, wider realms and forty-two-realm maps](2026-09-22-city-states-and-wider-realms.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Sieges eat stored food](2026-09-22-siege-stores.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Unification victory](2026-09-22-unification.md) | Pushed to `master`; Pages deploys the build |

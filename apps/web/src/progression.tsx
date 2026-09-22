@@ -65,7 +65,7 @@ export function ResearchTree({ view, blocked, issue }: { view: Observation; bloc
 
 function UnificationStatus({ unification }: { unification: NonNullable<Observation['progression']['unification']> }) {
   return <section className="project-introduction" data-testid="unification-status" aria-label={unification.name}><span className="eyebrow">A second path to victory</span><h3>{unification.name}</h3><p>{unification.description}</p>
-    <p>You hold {unification.held} of {unification.total} hearths. More than two thirds, and at least {unification.minimum}, opens a public bid at your capital; hold it for {unification.requiredTurns} turns.</p>
+    <p>You hold {unification.held} of {unification.total} hearths{unification.pledged > 0 ? ` (${unification.own} your own and ${unification.pledged} pledged by your clients)` : ''}. More than two thirds, and at least {unification.minimum}, opens a public bid at your capital; hold it for {unification.requiredTurns} turns.</p>
     {unification.blockers.length > 0 ? <ul>{unification.blockers.map(blocker => <li key={blocker}>{blocker}</li>)}</ul> : <p>Your realm qualifies. A public bid opens at your capital when the round ends.</p>}
   </section>;
 }

@@ -3,6 +3,7 @@ import type { CommandResult, DomainEvent, GameState, Observation } from './types
 import { getObservation } from './simulation';
 import { atWar, warPair } from './warfare';
 import { rulesVersion } from './rules';
+import { clientAcceptanceBlocker, clientBondSchema, clientOfferSchema, validateClients, type ObservedClientOffer } from './clients';
 
 const id = z.string().min(1).max(100);
 const turn = z.number().int().min(1).max(1_000_030);
@@ -27,16 +28,21 @@ const relationSchema = z.object({
   respect: z.number().int().min(0).max(100), grievances: z.number().int().min(0).max(100),
   warStartedTurn: turn.nullable(), lastOfferTurn: z.number().int().min(0).max(1_000_000),
 }).strict();
-export const diplomacyStateSchema = z.object({
+/** Rules 3–21 saved wars, offers and treaties only. */
+export const historicalDiplomacySchema = z.object({
   offers: z.array(offerSchema).max(1128), treaties: z.array(treatySchema).max(1128),
   relations: z.array(relationSchema).max(1128),
+}).strict();
+/** Rules 22 adds patronage: standing obligations between realms. */
+export const diplomacyStateSchema = historicalDiplomacySchema.extend({
+  clients: z.array(clientBondSchema).max(1128), clientOffers: z.array(clientOfferSchema).max(1128),
 }).strict();
 export type PeaceOffer = z.infer<typeof offerSchema>;
 export type PeaceTreaty = z.infer<typeof treatySchema>;
 export type DiplomaticRelation = z.infer<typeof relationSchema>;
 export type DiplomacyState = z.infer<typeof diplomacyStateSchema>;
 export type ObservedPeaceOffer = PeaceOffer & { acceptanceBlocker: string | null };
-export type DiplomacyObservation = Omit<DiplomacyState, 'offers'> & { offers: ObservedPeaceOffer[] };
+export type DiplomacyObservation = Omit<DiplomacyState, 'offers' | 'clientOffers'> & { offers: ObservedPeaceOffer[]; clientOffers: ObservedClientOffer[] };
 export interface PeaceAssessment { band: 'likely' | 'uncertain' | 'unlikely'; reasons: string[]; objections: string[] }
 const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
 const same = (pair: [string, string], a: string, b: string): boolean => pair.includes(a) && pair.includes(b);
@@ -56,7 +62,7 @@ function paymentObjection(state: GameState, offer: PeaceOffer): string | null {
   return null;
 }
 
-export function createDiplomacy(): DiplomacyState { return { offers: [], treaties: [], relations: [] }; }
+export function createDiplomacy(): DiplomacyState { return { offers: [], treaties: [], relations: [], clients: [], clientOffers: [] }; }
 
 function relation(state: GameState, a: string, b: string): DiplomaticRelation {
   let result = state.diplomacy.relations.find(item => same(item.parties, a, b));
@@ -69,6 +75,8 @@ function relation(state: GameState, a: string, b: string): DiplomaticRelation {
 }
 
 export function declareWarObjection(state: GameState, a: string, b: string): string | null {
+  const bond = state.diplomacy.clients.find(item => (item.patronId === a && item.clientId === b) || (item.patronId === b && item.clientId === a));
+  if (bond) return 'Patron and client do not make war on each other. End the obligation first.';
   const treaty = state.diplomacy.treaties.find(item => same(item.parties, a, b) && item.expiresTurn > state.turn);
   return treaty ? `A binding peace protects this faction until turn ${treaty.expiresTurn}.` : null;
 }
@@ -159,6 +167,10 @@ export function advanceDiplomacy(state: GameState): DomainEvent[] {
 
 export function getDiplomacyObservation(state: GameState, factionId: string): DiplomacyObservation {
   return {
+    // Patronage is a public oath; its offers are private until answered.
+    clients: state.diplomacy.clients.map(bond => ({ ...bond, terms: { ...bond.terms } })),
+    clientOffers: state.diplomacy.clientOffers.filter(offer => offer.patronId === factionId || offer.clientId === factionId)
+      .map(offer => ({ ...offer, terms: { ...offer.terms }, acceptanceBlocker: clientAcceptanceBlocker(state, offer) })),
     offers: state.diplomacy.offers.filter(offer => offer.proposerId === factionId || offer.recipientId === factionId).map(offer => ({ ...offer, terms: { ...offer.terms }, acceptanceBlocker: paymentObjection(state, offer) })),
     treaties: state.diplomacy.treaties.filter(treaty => treaty.parties.includes(factionId)).map(treaty => ({ ...treaty, parties: [...treaty.parties], terms: { ...treaty.terms } })),
     relations: state.diplomacy.relations.filter(memory => memory.parties.includes(factionId)).map(memory => ({ ...memory, parties: [...memory.parties] })),
@@ -202,6 +214,7 @@ export function previewPeace(state: GameState, proposerId: string, targetId: str
 /** Cross-reference validation is separate from shape validation so saves cannot invent treaties. */
 export function validateDiplomacy(state: GameState): void {
   diplomacyStateSchema.parse(state.diplomacy);
+  validateClients(state);
   const assert = (condition: unknown, message: string): void => { if (!condition) throw new Error('Invalid save: diplomacy ' + message); };
   const factions = new Set(state.factions.map(faction => faction.id));
   const ordered = (values: { id: string }[]): boolean => values.every((value, index) => !index || byId(values[index - 1]!, value) < 0);

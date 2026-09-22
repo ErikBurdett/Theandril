@@ -6,6 +6,7 @@ import type { RoadState, RoadObservation } from './roads';
 import type { CampaignPace, RosterVersion } from '@theandril/content';
 import type { BattleOrder, BattleState } from './combat';
 import type { DiplomacyObservation, DiplomacyState, PeaceTerms } from './diplomacy';
+import type { ClientTerms } from './clients';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -218,6 +219,10 @@ export type GameCommand =
   | { type: 'assault'; factionId: string; settlementId: string }
   | { type: 'resolveCapture'; factionId: string; settlementId: string; outcome: CaptureOutcome }
   | { type: 'proposePeace'; factionId: string; targetFactionId: string; terms: PeaceTerms }
+  | { type: 'proposeClient'; factionId: string; targetFactionId: string; terms: ClientTerms }
+  | { type: 'respondClient'; factionId: string; offerId: string; accept: boolean }
+  | { type: 'releaseClient'; factionId: string; clientId: string }
+  | { type: 'renounceClient'; factionId: string }
   | { type: 'respondPeace'; factionId: string; offerId: string; accept: boolean }
   | { type: 'research'; factionId: string; technologyId: string }
   | { type: 'adoptInstitution'; factionId: string; institutionId: string }
@@ -311,6 +316,8 @@ export interface NewGameOptions {
   seed: number;
   size: MapSize;
   factionCount?: number;
+  /** Rules 21: independent single-hearth powers seated beside the realms. */
+  cityStateCount?: number;
   factionDefinitionId?: string;
   pace?: CampaignPace;
   generatorVersion?: GeneratorVersion;

@@ -56,13 +56,19 @@ export const SCHEMA20_CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPace
   epic: { ...SCHEMA17_CAMPAIGN_PACES.epic, projectCoinCost: 42_000, description: 'The longest campaign, aiming for about three hundred and fifty to four hundred turns, with a sixty-turn window to oppose public projects. Actual length depends on play.' },
 };
 
-/** Rules 21 widens realms and adds city-states. Wider realms fund projects sooner
- * but also spend more coin planting and administering hearths, so the two longest
- * prices are set from measured rules-21 campaigns, not from the older curve. */
-export const CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+/** Frozen rules-21 prices, before patronage moved coin between realms. */
+export const SCHEMA21_CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
   ...SCHEMA20_CAMPAIGN_PACES,
   long: { ...SCHEMA20_CAMPAIGN_PACES.long, projectCoinCost: 40_000 },
   epic: { ...SCHEMA20_CAMPAIGN_PACES.epic, projectCoinCost: 44_000, description: 'The longest campaign, aiming for about four hundred turns — a little longer on a crowded map — with a sixty-turn window to oppose public projects. Actual length depends on play.' },
+};
+/** Rules 22: patronage moves coin between realms and keeps patrons and clients out
+ * of each other's wars, which lengthened the longest campaigns. The Epic price is
+ * set from measured rules-22 campaigns, not from the older curve. */
+export const CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+  ...SCHEMA21_CAMPAIGN_PACES,
+  long: { ...SCHEMA21_CAMPAIGN_PACES.long, projectCoinCost: 32_000 },
+  epic: { ...SCHEMA21_CAMPAIGN_PACES.epic, projectCoinCost: 36_000, description: 'The longest campaign, aiming for about four hundred turns — a little shorter on a crowded map — with a sixty-turn window to oppose public projects. Actual length depends on play.' },
 };
 
 export const TECHNOLOGIES: readonly TechnologyDefinition[] = [

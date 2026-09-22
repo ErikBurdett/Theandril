@@ -143,7 +143,7 @@ describe('negotiated peace', () => {
     const [a, b, observer] = state.factions;
     state.wars.push([a!.id, b!.id]); recordWar(state, a!.id, b!.id);
     propose(state, 10);
-    expect(getDiplomacyObservation(state, observer!.id)).toEqual({ offers: [], treaties: [], relations: [] });
+    expect(getDiplomacyObservation(state, observer!.id)).toEqual({ offers: [], treaties: [], relations: [], clients: [], clientOffers: [] });
     const own = getDiplomacyObservation(state, a!.id);
     own.offers[0]!.terms.offerCoin = 999;
     own.relations[0]!.parties[0] = 'faction.forged';

@@ -1,5 +1,19 @@
 # Theandril implementation status
 
+## Client states and negotiated unification — rules/save 22, 2026-09-22
+
+**Patronage.** A realm may take another realm as its client: a subsidy paid on acceptance, tribute every turn for an agreed term, and no war between patron and client while the oath holds. The client keeps its own hearths, armies and orders. Every term is disclosed before consent; an offer that can no longer be funded says so rather than failing on acceptance. A patron may release a client; a client may renounce lawfully once the term ends, or as a breach that ends the binding peace between them and is remembered as a grievance. A client that cannot pay for three turns running falls out of its obligation. Patronage may not chain, cycle, duplicate or cross an active war.
+
+**Negotiated unification.** A client's hearths stand behind its patron's bid, so the second victory path is reachable through diplomacy as well as conquest. The Victory tab separates hearths held from hearths pledged.
+
+**AI.** Realms court weaker neighbours — city-states first — at most once every ten turns, weigh an offer against their own hearths, income and wars, and never plan a war on their own patron or client. Answering an offer ends the planning pass so the rest of the turn is planned from the new facts.
+
+**Save compatibility.** A genuine rules-21 save and its 2,037-order archive from deployed `cce82cf` load, re-seal to identical v21 bytes, replay exactly, re-seal into a v22 envelope and continue. The rules-21 content pack is frozen as `f70d99d5`; historical envelopes refuse patronage.
+
+**Balance.** Patronage keeps patrons and clients out of each other's wars, which lengthened the longest campaigns, so Long is now 32,000 and Epic 36,000. Standard/12 + 8 city-states ends on turn 205, 283 and 342 for Standard, Long and Epic; tiny Epic runs 302–412.
+
+**Verification.** 1,805 tests pass; browser journeys pass.
+
 ## City-states, wider realms and forty-two-realm maps — rules/save 21, 2026-09-22
 
 **City-states.** Twenty-four chartered single-hearth powers now settle the land between realms, each borrowing one culture's art and roster while keeping its own name, banner colour, motto and lore (`docs/lore/CITY_STATES.md`, a new book in the site's lore library). They found nothing beyond their one hearth, open no wars and pursue no victory, but they build, defend, hold territory and answer peace offers through the ordinary commands. A campaign seats up to twenty-four of them.

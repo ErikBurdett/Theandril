@@ -18,7 +18,8 @@ import { battleStateSchema, schema15BattleStateSchema, legacyBattleStateSchema, 
 import { arcaneResearchSchema, validateArcaneResearch } from './magic';
 import { battleAbilityStateSchema, validateBattleAbilities } from './battle-abilities';
 import { MAX_BATTLE_REPORTS } from './warfare';
-import { createDiplomacy, diplomacyStateSchema, validateDiplomacy } from './diplomacy';
+import { createDiplomacy, diplomacyStateSchema, historicalDiplomacySchema, validateDiplomacy } from './diplomacy';
+import { clientBondSchema, clientOfferSchema } from './clients';
 import { captureDecisionSchema, captureDecisionV15Schema, ruinSchema, siegeSchema, siegeV20Schema, validateSieges } from './siege';
 import { createFactionProgression, doctrineEffects, factionProgressionSchema, validateProgression, victoryProjectSchema, victorySchema, victoryV19Schema } from './progression';
 import { movementRouteSchema, validateMovement } from './movement';
@@ -28,11 +29,13 @@ import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 21;
+export const SAVE_VERSION = 22;
 /** Rules 18 content, before rules 19 added the Unification victory. */
 export const PRE_UNIFICATION_CONTENT_HASH = '98b97bba';
 /** Rules 19–20 content, before rules 21 added the city-state roster. */
 export const PRE_CITY_STATE_CONTENT_HASH = '3127e431';
+/** Rules 21 content, before rules 22 repriced the longest campaign for patronage. */
+export const PRE_PATRONAGE_CONTENT_HASH = 'f70d99d5';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -136,7 +139,7 @@ const stateV2Schema = z.object(stateV2Shape).strict();
 const stateV3Shape = {
   ...stateV2Shape, settlements: z.array(settlementSchema).max(30_000),
   battle: campaignBattleV3Schema.nullable(), battleReports: z.array(campaignBattleV3Schema).max(MAX_BATTLE_REPORTS),
-  sieges: z.array(siegeSchema).max(30_000), pendingCapture: captureDecisionV15Schema.nullable(), ruins: z.array(ruinSchema).max(30_000), diplomacy: diplomacyStateSchema,
+  sieges: z.array(siegeSchema).max(30_000), pendingCapture: captureDecisionV15Schema.nullable(), ruins: z.array(ruinSchema).max(30_000), diplomacy: historicalDiplomacySchema,
 };
 const stateV3Schema = z.object(stateV3Shape).strict();
 const stateV4Schema = stateV3Schema.extend({
@@ -173,14 +176,21 @@ const stateV19Schema = stateV18Schema.extend({ projects: z.array(victoryProjectS
 const stateV20Schema = stateV19Schema.extend({ sieges: z.array(siegeV20Schema).max(30_000) }).strict();
 /** Rules 21 seats up to 42 realms plus independent city-states. */
 export const MAX_FACTIONS = 64;
-const stateSchema = stateV20Schema.extend({
+const stateV21Schema = stateV20Schema.extend({
   world: worldV18Schema.extend({ starts: z.array(cell).min(1).max(MAX_FACTIONS) }).strict(),
   factions: z.array(factionSchema.extend({ treasury: z.number().int().nonnegative().safe(), knowledge: z.number().int().nonnegative().safe() }).strict()).min(1).max(MAX_FACTIONS),
   explored: z.array(z.object({ factionId: id, cells: z.array(cell).max(350_000) }).strict()).min(1).max(MAX_FACTIONS),
   progression: z.array(z.object({ factionId: id, ...factionProgressionSchema.shape }).strict()).min(1).max(MAX_FACTIONS),
   projects: z.array(victoryProjectSchema).max(MAX_FACTIONS * 2), victory: victoryV19Schema.nullable(),
 }).strict();
-const saveSchema = z.object({ version: z.literal(21), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+/** Rules 22 records patronage: standing obligations between realms. */
+const stateSchema = stateV21Schema.extend({ diplomacy: diplomacyStateSchema }).strict();
+/** Older envelopes carry no patronage; their states gain empty registers on load.
+ * The original bytes are verified first, then the upgraded state is re-sealed. */
+const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacySchema> }>(state: T) =>
+  ({ ...state, diplomacy: { ...state.diplomacy, clients: [] as z.infer<typeof clientBondSchema>[], clientOffers: [] as z.infer<typeof clientOfferSchema>[] } });
+const saveSchema = z.object({ version: z.literal(22), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV21Schema = saveSchema.extend({ version: z.literal(21), state: stateV21Schema }).strict();
 const saveV20Schema = saveSchema.extend({ version: z.literal(20), state: stateV20Schema }).strict();
 const saveV19Schema = saveSchema.extend({ version: z.literal(19), state: stateV19Schema }).strict();
 const saveV18Schema = saveSchema.extend({ version: z.literal(18), state: stateV18Schema }).strict();
@@ -204,6 +214,12 @@ const saveV1Schema = saveSchema.extend({ version: z.literal(1), state: stateV1Sc
 // unknown fields before migration; no user state is silently dropped.
 const legacyStateSchema = stateV1Schema.omit({ nextId: true }).extend({ nextEntityId: integer.positive() }).strict();
 const legacySchema = z.object({ version: z.literal(0), gameVersion: z.literal('0.0.0'), contentHash: z.string(), state: legacyStateSchema }).strict();
+
+function upgradePatronage(prior: z.infer<typeof saveV21Schema> | z.infer<typeof saveV20Schema> | z.infer<typeof saveV19Schema> | z.infer<typeof saveV18Schema> | z.infer<typeof saveV17Schema>, label: string): z.infer<typeof saveSchema> {
+  assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), `${label} snapshot checksum does not match its contents`);
+  const state = withPatronage(prior.state);
+  return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
+}
 
 const compareId = (a: { id: string }, b: { id: string }): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 const KNOWN_LAND_KEYS = ['biome', 'settlementId', 'factionId', 'improvementId'] as const;
@@ -373,13 +389,15 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 22) assertNoPatronage(state);
   if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
   if (version < 19) assertNoUnification(state);
   const latest = canonicalPayload(state);
-  if (version >= 16) return serializeEnvelope(version, envelopeContentHash(state, version), latest);
+  const beforePatronage = payloadForVersion(state, version, latest);
+  if (version >= 16) return serializeEnvelope(version, envelopeContentHash(state, version), beforePatronage);
   if (latest.resources.version || Object.keys(latest.resources.deposits).length || Object.values(latest.resources.stockpiles).some(stock => Object.values(stock).some(Boolean)) || Object.values(latest.development).some(records => Object.keys(records).length)) throw new Error('This campaign has resources or development unavailable in historical rules.');
-  const { resources: _resources, development: _development, ...historical } = latest;
+  const { resources: _resources, development: _development, ...historical } = beforePatronage;
   const { visibilityVersion: _visibility, ...historicalLand } = historical.land;
   const canonical = stateV15Schema.parse({ ...historical, land: historicalLand });
   assertPreDevelopmentContent(canonical);
@@ -447,6 +465,9 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
 export function serializeGame(state: GameState): string {
   return serializeGameForVersion(state, SAVE_VERSION);
 }
+function assertNoPatronage(state: GameState): void {
+  if (state.diplomacy.clients.length || state.diplomacy.clientOffers.length) throw new Error('This campaign has patronage unavailable in historical rules.');
+}
 function assertHistoricalSeats(state: GameState): void {
   if (state.factions.length > 48) throw new Error('This campaign seats more realms than historical rules allow.');
   if (state.factions.some(faction => isCityState(faction.id))) throw new Error('This campaign has city-states unavailable in historical rules.');
@@ -459,17 +480,26 @@ function assertNoUnification(state: GameState): void {
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 22) assertNoPatronage(state);
   if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
-  if (version >= 21) return CONTENT_HASH;
+  if (version >= 22) return CONTENT_HASH;
+  if (version >= 21) return PRE_PATRONAGE_CONTENT_HASH;
   if (version >= 19) return PRE_CITY_STATE_CONTENT_HASH;
   assertNoUnification(state);
   if (version >= 18) return PRE_UNIFICATION_CONTENT_HASH;
   if (state.world.generatorVersion > 7) throw new Error('This campaign has geography unavailable in historical rules.');
   return PRE_PACING_CONTENT_HASH;
 }
+/** An older envelope never carries newer registers, so its hash never sees them. */
+function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
+  if (version >= 22) return latest;
+  const { clients: _clients, clientOffers: _clientOffers, ...diplomacy } = latest.diplomacy;
+  return { ...latest, diplomacy: historicalDiplomacySchema.parse(diplomacy) };
+}
+
 export function stateHashForVersion(state: GameState, version: RulesVersion): string {
-  if (version >= 16) return hashEnvelope(version, envelopeContentHash(state, version), canonicalPayload(state));
+  if (version >= 16) return hashEnvelope(version, envelopeContentHash(state, version), payloadForVersion(state, version));
   return checksum(serializeGameForVersion(state, version));
 }
 
@@ -531,7 +561,7 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
     assert(prior.contentHash === PRE_DEVELOPMENT_CONTENT_HASH, 'v15 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v15 snapshot checksum does not match its contents');
     assertPreDevelopmentContent(prior.state);
-    const state = stateSchema.parse({ ...prior.state, land: { ...prior.state.land, visibilityVersion: 0 }, resources: { version: 0, deposits: {}, stockpiles: Object.fromEntries(prior.state.factions.map(faction => [faction.id, {}])) }, development: createDevelopmentState() });
+    const state = stateSchema.parse({ ...withPatronage(prior.state), land: { ...prior.state.land, visibilityVersion: 0 }, resources: { version: 0, deposits: {}, stockpiles: Object.fromEntries(prior.state.factions.map(faction => [faction.id, {}])) }, development: createDevelopmentState() });
     return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
   };
   const migrateV14 = (prior: z.infer<typeof saveV14Schema>): z.infer<typeof saveSchema> => {
@@ -647,7 +677,8 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   const migrateV2 = (prior: z.infer<typeof saveV2Schema>): z.infer<typeof saveSchema> => {
     assert(prior.contentHash === PRE_PROGRESSION_CONTENT_HASH, 'v2 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v2 snapshot checksum does not match its contents');
-    const diplomacy = createDiplomacy();
+    // A v2 state predates patronage; its registers are added once it reaches rules 22.
+    const { clients: _clients, clientOffers: _clientOffers, ...diplomacy } = createDiplomacy();
     diplomacy.relations = prior.state.wars.map(parties => ({ parties, trust: 0, respect: 0, grievances: 0, warStartedTurn: prior.state.turn, lastOfferTurn: 0 }));
     const migrateBattle = (battle: z.infer<typeof campaignBattleV2Schema>) => ({ ...battle, settlementId: null, militiaId: null, fortification: 0 });
     const state = stateV3Schema.parse({
@@ -697,20 +728,25 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
+  if (version === 21) {
+    const prior = saveV21Schema.parse(raw);
+    assert(prior.contentHash === PRE_PATRONAGE_CONTENT_HASH, 'v21 content hash is not a recognized compatible pack');
+    return upgradePatronage(prior, 'v21');
+  }
   if (version === 20 || version === 19) {
     const prior = version === 20 ? saveV20Schema.parse(raw) : saveV19Schema.parse(raw);
     assert(prior.contentHash === PRE_CITY_STATE_CONTENT_HASH, `v${version} content hash is not a recognized compatible pack`);
-    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+    return upgradePatronage(prior, `v${version}`);
   }
   if (version === 18) {
     const prior = saveV18Schema.parse(raw);
     assert(prior.contentHash === PRE_UNIFICATION_CONTENT_HASH, 'v18 content hash is not a recognized compatible pack');
-    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+    return upgradePatronage(prior, 'v18');
   }
   if (version === 16 || version === 17) {
     const prior = saveV17Schema.parse(raw);
     assert(prior.contentHash === PRE_PACING_CONTENT_HASH, `v${version} content hash is not a recognized compatible pack`);
-    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+    return upgradePatronage(prior, `v${version}`);
   }
   if (version !== SAVE_VERSION) throw new Error(`Unsupported save version ${version}.`);
   return saveSchema.parse(raw);

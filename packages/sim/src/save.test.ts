@@ -64,7 +64,9 @@ function previousV3State(save: SaveFixture) {
     const { attackerDoctrineId: _attackerDoctrine, defenderDoctrineId: _defenderDoctrine, ...previous } = legacyCampaignBattleSchema.parse(battleReportForVersion(battle, 5));
     return previous;
   };
-  return { ...state, world, armies: state.armies.map(({ formations, ...army }) => { const item = formations[0]!; return { id: army.id, factionId: army.factionId, name: army.name, unitId: item.unitId, cell: army.cell, movement: army.movement, strength: item.strength, morale: item.morale, fatigue: item.fatigue }; }), battle: state.battle ? previousBattle(state.battle) : null, battleReports: state.battleReports.map(previousBattle) };
+  // Patronage exists only from rules 22; a v3 projection carries wars, offers and treaties alone.
+  const { clients: _clients, clientOffers: _clientOffers, ...diplomacy } = state.diplomacy;
+  return { ...state, diplomacy, world, armies: state.armies.map(({ formations, ...army }) => { const item = formations[0]!; return { id: army.id, factionId: army.factionId, name: army.name, unitId: item.unitId, cell: army.cell, movement: army.movement, strength: item.strength, morale: item.morale, fatigue: item.fatigue }; }), battle: state.battle ? previousBattle(state.battle) : null, battleReports: state.battleReports.map(previousBattle) };
 }
 
 function legacyGeography(state: GameState): void {

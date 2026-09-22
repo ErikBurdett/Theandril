@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CAMPAIGN_PACES, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, SCHEMA20_UNIFICATION_VICTORY, UNIFICATION_VICTORY, technologiesForRules, technologyBranch, type ResearchBranch } from '@theandril/content';
+import { CAMPAIGN_PACES, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, SCHEMA21_CAMPAIGN_PACES, DOCTRINES, INSTITUTIONS, PROSPERITY_PROJECT, SCHEMA20_UNIFICATION_VICTORY, UNIFICATION_VICTORY, technologiesForRules, technologyBranch, type ResearchBranch } from '@theandril/content';
 import { isPassable } from '@theandril/mapgen';
 import type { CommandResult, DomainEvent, GameState } from './types';
 import { rulesVersion } from './rules';
@@ -26,7 +26,7 @@ export interface ProgressionObservation extends FactionProgression {
   doctrineChoices: (Choice & { coinCost: number })[];
   project: { id: string; name: string; description: string; coinCost: number; activeTurns: number; eligibleSettlementIds: string[]; blockers: string[] };
   /** Rules 19 and later; absent under historical rules. */
-  unification?: { id: string; name: string; description: string; requiredTurns: number; held: number; total: number; minimum: number; blockers: string[] };
+  unification?: { id: string; name: string; description: string; requiredTurns: number; held: number; own: number; pledged: number; total: number; minimum: number; blockers: string[] };
 }
 export const createFactionProgression = (): FactionProgression => ({ technologies: [], institutionId: null, doctrineId: null });
 const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
@@ -37,7 +37,7 @@ const HOST_FELL = 'The host capital fell; the unification bid ended.';
 const MAJORITY_LOST = 'The realm no longer holds two thirds of the world’s hearths; the unification bid ended.';
 const MAJORITY_LOST_V20 = 'The realm no longer holds a majority of hearths; the unification bid ended.';
 const majorityLost = (state: GameState) => rulesVersion(state) < 21 ? MAJORITY_LOST_V20 : MAJORITY_LOST;
-const campaignProfile = (state: GameState) => (rulesVersion(state) < 8 ? LEGACY_CAMPAIGN_PACES : rulesVersion(state) === 8 ? SCHEMA8_CAMPAIGN_PACES : rulesVersion(state) < 18 ? SCHEMA17_CAMPAIGN_PACES : rulesVersion(state) < 21 ? SCHEMA20_CAMPAIGN_PACES : CAMPAIGN_PACES)[state.pace];
+const campaignProfile = (state: GameState) => (rulesVersion(state) < 8 ? LEGACY_CAMPAIGN_PACES : rulesVersion(state) === 8 ? SCHEMA8_CAMPAIGN_PACES : rulesVersion(state) < 18 ? SCHEMA17_CAMPAIGN_PACES : rulesVersion(state) < 21 ? SCHEMA20_CAMPAIGN_PACES : rulesVersion(state) < 22 ? SCHEMA21_CAMPAIGN_PACES : CAMPAIGN_PACES)[state.pace];
 
 export function doctrineEffects(doctrineId: string | null) {
   return DOCTRINES.find(item => item.id === doctrineId)?.effects ?? { attack: 0, armor: 0, movement: 0 };
@@ -78,14 +78,21 @@ function projectPauseReason(state: GameState, project: VictoryProject, towns: Ma
   return requirements(state, project.factionId, towns)[0] ?? null;
 }
 /** Rules 19. Sparse: one pass over settlements, never the map. */
-function hearthCounts(state: GameState): { total: number; counts: Map<string, number> } {
-  const counts = new Map<string, number>();
+/** Rules 22: a client's hearths stand behind its patron's bid. Political support
+ * counts like conquest, so unification can be negotiated as well as taken. */
+function hearthCounts(state: GameState): { total: number; counts: Map<string, number>; pledged: Map<string, number> } {
+  const counts = new Map<string, number>(), pledged = new Map<string, number>();
   for (const town of Object.values(state.settlements)) counts.set(town.factionId, (counts.get(town.factionId) ?? 0) + 1);
-  return { total: Object.keys(state.settlements).length, counts };
+  if (rulesVersion(state) >= 22) {
+    for (const bond of state.diplomacy.clients) pledged.set(bond.patronId, (pledged.get(bond.patronId) ?? 0) + (counts.get(bond.clientId) ?? 0));
+  }
+  return { total: Object.keys(state.settlements).length, counts, pledged };
 }
+const supported = (standing: { counts: Map<string, number>; pledged: Map<string, number> }, factionId: string): number =>
+  (standing.counts.get(factionId) ?? 0) + (standing.pledged.get(factionId) ?? 0);
 const unificationProfile = (state: GameState) => rulesVersion(state) < 21 ? SCHEMA20_UNIFICATION_VICTORY : UNIFICATION_VICTORY;
 function unificationBlockers(state: GameState, factionId: string, standing = hearthCounts(state)): string[] {
-  const held = standing.counts.get(factionId) ?? 0, blockers: string[] = [], modern = rulesVersion(state) >= 21;
+  const held = supported(standing, factionId), blockers: string[] = [], modern = rulesVersion(state) >= 21;
   const profile = unificationProfile(state);
   if (held < profile.minimumSettlements) blockers.push(`Hold at least ${profile.minimumSettlements} hearths (you hold ${held}).`);
   // Rules 19–20 asked for a simple majority; wider rules-21 realms ask for two thirds.
@@ -130,7 +137,8 @@ function unificationObservation(state: GameState, factionId: string) {
   const standing = hearthCounts(state);
   const profile = unificationProfile(state);
   return { id: profile.id, name: profile.name, description: profile.description, requiredTurns: campaignProfile(state).projectActiveTurns,
-    held: standing.counts.get(factionId) ?? 0, total: standing.total, minimum: profile.minimumSettlements, blockers: unificationBlockers(state, factionId, standing) };
+    held: supported(standing, factionId), own: standing.counts.get(factionId) ?? 0, pledged: standing.pledged.get(factionId) ?? 0,
+    total: standing.total, minimum: profile.minimumSettlements, blockers: unificationBlockers(state, factionId, standing) };
 }
 export function chooseProgression(state: GameState, factionId: string, kind: 'research' | 'adoptInstitution' | 'adoptDoctrine', choiceId: string): CommandResult {
   const view = getProgressionObservation(state, factionId);
@@ -175,7 +183,7 @@ export function reconcileProjects(state: GameState, events: DomainEvent[]): void
     project.status = status; project.statusReason = reason;
   }
 }
-function endLostUnification(state: GameState, project: VictoryProject, standing: { total: number; counts: Map<string, number> }, events: DomainEvent[]): void {
+function endLostUnification(state: GameState, project: VictoryProject, standing: ReturnType<typeof hearthCounts>, events: DomainEvent[]): void {
   const hostHeld = state.settlements[project.settlementId]?.factionId === project.factionId;
   const reason = !hostHeld ? HOST_FELL : unificationBlockers(state, project.factionId, standing).length ? majorityLost(state) : null;
   if (!reason) return;
