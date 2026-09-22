@@ -12,7 +12,7 @@
 
 **Fixed.** The growth panel quoted founding and upkeep at rules-16 prices while the turn charged rules-21 prices. The AI could also reserve more coin for its victory project than it actually had free, cancelling the caravan and hull it had already protected.
 
-**Verification.** 1,798 tests pass; browser journeys pass.
+**Verification.** 1,798 tests and 182 browser journeys pass.
 
 ## Sieges eat stored food — rules/save 20, 2026-09-22
 

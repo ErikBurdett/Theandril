@@ -39,7 +39,7 @@ A crowded map is painted by the time it ends: 42 realms and their city-states cl
 
 - Typecheck, lint, `content:validate` and build pass.
 - `pnpm test`: 1,798/1,798 across unit, campaign and repository projects.
-- `pnpm test:gameplay`: browser journeys pass.
+- `pnpm test:gameplay`: 182/182 browser journeys pass; the city-growth and mature-hearth journeys were updated to follow rules-21 boundary growth.
 - A genuine rules-20 save and its 1,192-order archive from deployed `c7089f1` load, re-seal to identical v20 bytes, replay exactly, re-seal into a v21 envelope and continue ten rounds of AI play.
 
 ## Not done
