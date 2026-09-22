@@ -11,8 +11,13 @@ export async function expectLocalMapPixels(page: Page, info: TestInfo, name: str
   // nearby patch rather than accidentally testing DOM artwork as map content.
   const clip = await canvas.evaluate(element => {
     const box = element.getBoundingClientRect();
-    for (const dy of [0, -10, 10, -20, 20, -30, 30, -40, 40]) {
-      const rect = { x: Math.floor(box.x + box.width / 2 - 60), y: Math.floor(box.y + box.height / 2 - 60 + dy), width: 120, height: 120 };
+    // Prefer the centre, then scan the visible canvas: narrow layouts with
+    // wider system fonts leave the clear map area away from the centre.
+    const candidates: { x: number; y: number }[] = [];
+    for (const dy of [0, -10, 10, -20, 20, -30, 30, -40, 40]) candidates.push({ x: Math.floor(box.x + box.width / 2 - 60), y: Math.floor(box.y + box.height / 2 - 60 + dy) });
+    for (let y = Math.ceil(box.y); y + 120 <= Math.min(box.bottom, innerHeight); y += 10) for (let x = Math.ceil(box.x); x + 120 <= Math.min(box.right, innerWidth); x += 10) candidates.push({ x, y });
+    for (const { x: left, y: top } of candidates) {
+      const rect = { x: left, y: top, width: 120, height: 120 };
       if ([0, 20, 40, 60, 80, 100, 119].every(x => [0, 20, 40, 60, 80, 100, 119].every(y => document.elementFromPoint(rect.x + x, rect.y + y) === element))) return rect;
     }
     return null;

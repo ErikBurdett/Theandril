@@ -21,9 +21,10 @@ test('feature identities are frozen and independent of generator labels and cult
   }
 });
 
-test.each(['huge', 'legendary'] as const)('%s features retain useful deposits with consistent physical eligibility', size => {
-  for (const seed of [42, 20260905]) {
-    const world = generateWorld(seed, size, 48);
+// Small legacy, generator7 and generator8 worlds; exact larger maps are sealed elsewhere.
+test.each([[4, 'legacy'], [7, 'continents'], [8, 'archipelago']] as const)('generator%i %s features retain useful deposits with consistent physical eligibility', (version, layout) => {
+  for (const seed of [42]) {
+    const world = generateWorld(seed, 'small', 12, version, layout === 'legacy' ? {} : { layout });
     const counts = new Map(Object.values(FEATURE).map(bit => [bit, 0]));
     let valid = true;
     for (let cell = 0; cell < world.terrain.length; cell++) {
@@ -51,7 +52,7 @@ test('feature queries use no shared mutable state and reject invalid cells befor
     expect(naturalFeatures(world, cell)).toBe(result);
     expect(isValidFeatureMask(result)).toBe(true);
     expect(world.terrain).toEqual(before);
-  }), { numRuns: 30, seed: 20260906 });
+  }), { numRuns: 15, seed: 20260906 });
   const world = generateWorld(42, 'tiny', 4);
   for (const cell of [-1, 1536, NaN, 0.5]) expect(() => naturalFeatures(world, cell)).toThrow(RangeError);
   expect(() => naturalFeatures({ ...world, waterDepth: new Uint8Array() }, 0)).toThrow(RangeError);

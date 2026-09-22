@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { CONTENT_HASH, PROSPERITY_PROJECT } from '@theandril/content';
-import { MAP_DIMENSIONS, type MapSize } from '@theandril/mapgen';
+import { mapSizeOf, type MapSize } from '@theandril/mapgen';
 import { sameJson, stablePrettyJson } from './json-equivalence';
 import { schema13CampaignBattleSchema, type BattlePresentationObserver } from '@theandril/sim';
 import { applyCommand, applyCommandForVersion, battleReportForVersion, commandSchemaForVersion, createGame, deserializeGame, eventSchema, campaignBattleSchema, schema15CampaignBattleSchema, legacyCampaignBattleSchema, schema6CampaignBattleSchema, schema7CampaignBattleSchema, serializeGame, stateHash, stateHashForVersion, SAVE_VERSION, type BattleReport, type CommandResult, type DomainEvent, type GameCommand, type GameState, type PhaseObserver } from '@theandril/sim';
@@ -93,7 +93,7 @@ function migrateArchive(raw: unknown): CampaignArchive {
 }
 
 function mapSize(game: GameState): MapSize {
-  const match = (Object.keys(MAP_DIMENSIONS) as MapSize[]).find(size => MAP_DIMENSIONS[size].width === game.world.width && MAP_DIMENSIONS[size].height === game.world.height);
+  const match = mapSizeOf(game.world.width, game.world.height, game.world.generatorVersion);
   if (!match) throw new Error('Archive world dimensions are unsupported.');
   return match;
 }

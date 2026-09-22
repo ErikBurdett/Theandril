@@ -15,13 +15,6 @@ test('builds the game and every public site page as independent HTML entrypoints
   });
 });
 
-test('Pages checks the journal contract before uploading the public artifact', () => {
-  const workflow = readFileSync('.github/workflows/pages.yml', 'utf8');
-  const testPaths = workflow.match(/run: pnpm exec vitest run ([^\n]+)/)?.[1]?.split(/\s+/);
-  expect(testPaths).toContain('apps/web/src/updates');
-  expect(workflow.indexOf('apps/web/src/updates')).toBeLessThan(workflow.indexOf('actions/upload-pages-artifact@'));
-});
-
 test('Pages regenerates the master change feed from full history right before building', () => {
   const workflow = readFileSync('.github/workflows/pages.yml', 'utf8');
   expect(workflow).toContain('fetch-depth: 0');

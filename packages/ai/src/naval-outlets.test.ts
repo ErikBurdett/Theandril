@@ -12,7 +12,7 @@ function issue(state: GameState, command: GameCommand): void {
 }
 
 test('a paid second harbor remains the outlet commitment when a third coastal town becomes available', () => {
-  let state = createGame({ seed: 748291, size: 'standard', factionCount: 4 });
+  let state = createGame({ seed: 748291, size: 'standard', factionCount: 4, generatorVersion: 7 });
   const factionId = state.turnOwnerId;
   state.factions[0]!.treasury = 10000; state.factions[0]!.knowledge = 500;
   issue(state, { type: 'research', factionId, technologyId: 'technology.coastal_navigation' });

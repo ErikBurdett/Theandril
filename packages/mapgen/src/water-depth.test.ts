@@ -1,12 +1,6 @@
 import { expect, test } from 'vitest';
 import fc from 'fast-check';
-import { deriveWaterDepth, generateWorld, hexDistance, isPassable, isValidWaterDepth, MAP_DIMENSIONS, neighbors, TERRAIN, WATER_DEPTH, type MapSize } from './index';
-
-function fingerprint(values: Iterable<number>): string {
-  let hash = 0x811c9dc5;
-  for (const value of values) hash = Math.imul(hash ^ value, 0x01000193) >>> 0;
-  return hash.toString(16);
-}
+import { deriveWaterDepth, generateWorld, hexDistance, isPassable, isValidWaterDepth, neighbors, TERRAIN, WATER_DEPTH } from './index';
 
 test('coastal shelf stops exactly two odd-row water hexes from land without edge wrapping', () => {
   const width = 9; const height = 7;
@@ -46,28 +40,11 @@ test('arbitrary terrain agrees with independent nearest-land distances and never
   }), { numRuns: 100, seed: 20260905 });
 });
 
-test.each(Object.keys(MAP_DIMENSIONS) as MapSize[])('generator3 preserves old physical fields and generator2 climate on %s', size => {
-  const modern = generateWorld(20260905, size, 48, 3);
-  expect(modern.generatorVersion).toBe(3);
-  for (const version of [1, 2] as const) {
-    const old = generateWorld(20260905, size, 48, version);
-    expect(fingerprint(modern.terrain)).toBe(fingerprint(old.terrain));
-    expect(fingerprint(modern.fertility)).toBe(fingerprint(old.fertility));
-    expect(modern.starts).toEqual(old.starts);
-    expect(fingerprint(modern.waterDepth)).toBe(fingerprint(old.waterDepth));
-    if (version === 2) expect(fingerprint(modern.biome)).toBe(fingerprint(old.biome));
-  }
-});
-
-test.each([
-  ['tiny', '46301137'], ['huge', 'cbbea0e5'], ['legendary', 'c922fb2b'],
-] as const)('freezes generator3 seed20260905 %s water-depth fingerprint', (size, expected) => {
-  expect(fingerprint(generateWorld(20260905, size, 8, 3).waterDepth)).toBe(expected);
-});
-
-test.each(['huge', 'legendary'] as const)('%s has real shallow/deep regions, consistent shores and unchanged safe starts', size => {
+// Exact generator1–4 depth output is sealed in historical-seals.test.ts; cross-version
+// physical identity is asserted in biomes.test.ts.
+test('generated worlds have real shallow/deep regions, consistent shores and unchanged safe starts', () => {
   for (const seed of [42, 20260905]) {
-    const world = generateWorld(seed, size, 48, 4);
+    const world = generateWorld(seed, 'small', 48, 4);
     const counts = new Uint32Array(3);
     let consistent = true;
     for (let cell = 0; cell < world.terrain.length; cell++) {

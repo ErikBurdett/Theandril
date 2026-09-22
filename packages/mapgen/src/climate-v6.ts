@@ -12,6 +12,11 @@ export interface V6ClimateFields {
   freshwaterDistance: Uint8Array;
   prevailingWind: 'eastward' | 'westward';
 }
+/** Generator8 layout climate. Omitted/false keeps generators6–7 byte-identical. */
+export interface ModernClimateOptions {
+  /** Earth-like zonal climate: colder poles, a wet equator and a dry subtropical belt. */
+  latitudeBands?: boolean;
+}
 
 const clamp = (value: number, max = 100) => Math.max(0, Math.min(max, value));
 function mix(value: number): number {
@@ -19,25 +24,26 @@ function mix(value: number): number {
   value = Math.imul(value ^ (value >>> 15), 0x735a2d97);
   return (value ^ (value >>> 15)) >>> 0;
 }
+function sample(gx: number, gy: number, seed: number): number { return (mix(seed ^ Math.imul(gx, 0x632be5ab) ^ Math.imul(gy, 0x85157af5)) >>> 16) - 32768; }
+function smooth(n: number): number { return Math.floor(n * n * (768 - 2 * n) / 65536); }
+function lerp(a: number, b: number, weight: number): number { return a + Math.floor((b - a) * weight / 256); }
 function geology(x: number, y: number, scale: number, seed: number): number {
-  const sample = (gx: number, gy: number) => (mix(seed ^ Math.imul(gx, 0x632be5ab) ^ Math.imul(gy, 0x85157af5)) >>> 16) - 32768;
-  const smooth = (n: number) => Math.floor(n * n * (768 - 2 * n) / 65536);
   const gx = Math.floor(x / scale), gy = Math.floor(y / scale);
   const tx = smooth(Math.floor(x % scale * 256 / scale)), ty = smooth(Math.floor(y % scale * 256 / scale));
-  const lerp = (a: number, b: number, weight: number) => a + Math.floor((b - a) * weight / 256);
-  return lerp(lerp(sample(gx, gy), sample(gx + 1, gy), tx), lerp(sample(gx, gy + 1), sample(gx + 1, gy + 1), tx), ty);
+  return lerp(lerp(sample(gx, gy, seed), sample(gx + 1, gy, seed), tx), lerp(sample(gx, gy + 1, seed), sample(gx + 1, gy + 1, seed), tx), ty);
 }
 
 /** Detached O(cells) climate. Relief is a transient generator field, never a new
  * canonical world array. The seeded prevailing wind follows rows; it is a readable
  * rain-shadow approximation, not a weather simulator. Drainage stays unchanged. */
-export function deriveV6Climate(world: ClimateWorld, elevation: Uint16Array): V6ClimateFields {
+export function deriveV6Climate(world: ClimateWorld, elevation: Uint16Array, options: ModernClimateOptions = {}): V6ClimateFields {
   const { seed, width, height, terrain, hydrology } = world, count = width * height;
   if (!(elevation instanceof Uint16Array) || !(hydrology instanceof Uint8Array) || elevation.length !== count
     || hydrology.length !== count || elevation.some(value => value > 4095) || hydrology.some(value => value > 63)) {
     throw new RangeError('Modern climate requires matching bounded relief and hydrology.');
   }
   const { temperature, moisture } = deriveClimate(seed, width, height, terrain);
+  if (options.latitudeBands) applyLatitudeBands(width, height, temperature, moisture);
   const rainShadow = new Uint8Array(count), freshwaterDistance = new Uint8Array(count).fill(3);
   const queue = new Int32Array(count);
   let head = 0, tail = 0;
@@ -88,11 +94,26 @@ export function deriveV6Climate(world: ClimateWorld, elevation: Uint16Array): V6
   return { temperature, moisture, rainShadow, freshwaterDistance, prevailingWind: eastward ? 'eastward' : 'westward' };
 }
 
+/** Integer zonal bands on the base latitude climate (latitude 0 = equator, 100 = pole):
+ * tundra beyond ~65, taiga from ~50, a subtropical dry belt near 30 and a wet
+ * equator. Uses the same row latitude as deriveClimate; O(cells), no RNG. */
+function applyLatitudeBands(width: number, height: number, temperature: Uint8Array, moisture: Uint8Array): void {
+  for (let y = 0; y < height; y++) {
+    const latitude = height === 1 ? 0 : Math.floor(Math.abs(2 * y - (height - 1)) * 100 / (height - 1));
+    const cooling = Math.floor(Math.max(0, latitude - 40) / 2) - Math.floor(Math.max(0, 16 - latitude) / 2);
+    const wetting = Math.max(0, 16 - latitude) - Math.max(0, 14 - Math.abs(latitude - 30)) + Math.max(0, 8 - Math.floor(Math.abs(latitude - 57) / 2));
+    for (let cell = y * width; cell < (y + 1) * width; cell++) {
+      temperature[cell] = clamp(temperature[cell]! - cooling);
+      moisture[cell] = clamp(moisture[cell]! + wetting);
+    }
+  }
+}
+
 /** Climate identity only: no terrain, fertility, depth, drainage, feature or start
  * edits. Existing woodland/mountain artwork contracts remain explicit constraints. */
-export function deriveV6Biomes(world: ClimateWorld, elevation: Uint16Array): Uint8Array {
+export function deriveV6Biomes(world: ClimateWorld, elevation: Uint16Array, options: ModernClimateOptions = {}): Uint8Array {
   const { width, height, terrain, seed } = world;
-  const climate = deriveV6Climate(world, elevation), result = new Uint8Array(terrain.length);
+  const climate = deriveV6Climate(world, elevation, options), result = new Uint8Array(terrain.length);
   const geologyScale = Math.max(4, Math.floor(width / 9));
   for (let cell = 0; cell < terrain.length; cell++) {
     const physical = terrain[cell]!, temperature = climate.temperature[cell]!, moisture = climate.moisture[cell]!;

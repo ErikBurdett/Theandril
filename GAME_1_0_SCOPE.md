@@ -10,11 +10,11 @@ This is a release scope, not a brainstorm. A system counts only when it is playa
 - 48+ minor/independent powers or equivalent varied generated actors.
 - Single-player campaigns.
 - Online 2–8 human campaigns with AI seats.
-- Multiple map sizes through Legendary stress scale.
+- Multiple map sizes (Tiny through Huge) and varied map types: continents, pangaea, fractal, islands, archipelago, Earth-like and inland sea.
 - Multiple victory paths.
 - Campaign epoch progression and world crises.
 - Save/load/autosave/export/import/replay.
-- Campaigns intended to last hundreds of turns, potentially around 1,000 at higher difficulties; short test/skirmish pacing must not become the default 1.0 experience.
+- Civilization-scale campaigns: about 12 realms on the default Standard map, concluding around 200 (Standard pace), 300 (Long) and 350–400 (Epic) turns; short test/skirmish pacing must not become the default 1.0 experience.
 - After victory in an AI campaign, a complete technical record and a factual historical tome, both preserved across saves and viewable/downloadable from the UI.
 
 ## Exploration

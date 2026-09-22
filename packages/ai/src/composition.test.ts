@@ -7,7 +7,7 @@ import { characterCampaign } from '../../test-fixtures/src/character-fixture';
 import { planTurn } from './index';
 
 test('AI recruits varied formations and assembles real mixed armies through legal public commands', () => {
-  const state = createGame({ seed: 748291, size: 'tiny', factionCount: 1, pace: 'epic' });
+  const state = createGame({ seed: 748291, size: 'tiny', factionCount: 1, pace: 'epic', generatorVersion: 7 });
   const recruited = new Set<string>(); let merges = 0; let largestArmy = 1;
   let mirror: typeof state | undefined;
   const issue = (command: GameCommand) => {

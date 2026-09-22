@@ -4,7 +4,7 @@ import { settlementGrowthFood, settlementFoodConsumption, foundingCoinCost, sett
 import { z } from 'zod';
 import { accelerateRoad, accelerateRoadSchema, advanceRoads, emptyRoadState, observeRoads, reconcileRoads, roadMovementCost } from './roads';
 import { BUILDINGS, FACTIONS, FACTION_ROSTERS, ROSTER_VERSION, UNITS, campaignPaceSchema, factionRoster, rosterVersionSchema } from '@theandril/content';
-import { GENERATOR_VERSION, generateWorld, isPassable, neighbors } from '@theandril/mapgen';
+import { GENERATOR_VERSION, MAP_TYPES, generateWorld, isPassable, neighbors, type WorldLayout } from '@theandril/mapgen';
 import type { Army, CommandResult, DomainEvent, GameState, NewGameOptions, Observation, PhaseObserver, Settlement } from './types';
 import { cellsWithin, indexes, rebuildIndexes, updateSight, upgradeLandVisibility } from './visibility';
 import { cloneCampaignBattle, declareCampaignWar, resolveCampaignBattle, settleCampaignAbility, startCampaignBattle } from './warfare';
@@ -103,6 +103,7 @@ export function applyCommandForVersion(state: GameState, input: unknown, version
   if (version < 15 && (Object.values(state.armies).some(army => army.formations.some(item => !PRE_SPECIALIST_UNIT_IDS.has(item.unitId))) || Object.values(state.settlements).some(town => town.queue.some(item => item.itemId.startsWith('unit.') && !PRE_SPECIALIST_UNIT_IDS.has(item.itemId))) || [...(state.battle ? [state.battle] : []), ...state.battleReports].some(battle => [...battle.combat.attacker, ...battle.combat.defender].some(item => !PRE_SPECIALIST_UNIT_IDS.has(item.unitId))))) throw new Error('Historical rules cannot execute formations absent from their frozen pack.');
   if (version < 14 && (Object.values(state.arcaneResearch).some(items => items.length) || Object.values(state.characters).some(item => item.aptitudes || item.definitionId === 'character.waykeeper') || (state.battle?.rulesVersion ?? 0) >= 9 || state.battleReports.some(item => item.rulesVersion >= 9))) throw new Error('Historical rules cannot execute arcane research or modern battle abilities.');
   if (version < 13 && (state.rosterVersion > 3 || state.factions.some(faction => !(FACTION_ROSTERS[3] as readonly string[]).includes(faction.definitionId)))) throw new Error('Historical rules cannot execute cultures absent from their frozen roster.');
+  if (version < 18 && state.world.generatorVersion > 7) throw new Error('Historical rules cannot execute generator-8 geography.');
   if (version < 12 && (state.world.generatorVersion > 4 || Object.keys(state.roads.edges).length || Object.keys(state.roads.projects).length)) throw new Error('Historical rules cannot execute modern geography or roads.');
   const historicalRoster: readonly string[] = FACTION_ROSTERS[version < 9 || state.world.generatorVersion < 4 ? 1 : 2];
   if (version < 10 && state.factions.some(faction => !historicalRoster.includes(faction.definitionId))) throw new Error('Historical rules cannot execute cultures absent from their frozen roster.');
@@ -129,10 +130,13 @@ export function createGame(options: NewGameOptions): GameState {
     factionCount: z.number().int().min(1).max(48).default(4),
     factionDefinitionId: z.string().refine(id => FACTIONS.some(faction => faction.id === id), 'Unknown faction culture').optional(),
     pace: campaignPaceSchema.default('standard'),
-    generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6), z.literal(7)]).default(GENERATOR_VERSION),
-    layout: z.enum(['continents', 'islands', 'archipelago']).optional(),
+    generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8)]).optional(),
+    layout: z.enum(MAP_TYPES.map(type => type.id) as [WorldLayout, ...WorldLayout[]]).optional(),
     rosterVersion: rosterVersionSchema.default(ROSTER_VERSION),
   }).strict().parse(options);
+  // Historical rules default to the last generator they can represent.
+  const generatorVersion = checked.generatorVersion ?? (checked.rulesVersion < 18 ? 7 : GENERATOR_VERSION);
+  if (checked.rulesVersion < 18 && generatorVersion > 7) throw new Error('Generator 8 worlds require rules 18.');
   // Physical generation never implicitly changes the roster used by a saved origin.
   const catalog = factionRoster(checked.rosterVersion);
   if (checked.factionDefinitionId) {
@@ -147,7 +151,7 @@ export function createGame(options: NewGameOptions): GameState {
   });
   const owner = selected[0];
   if (!owner) throw new Error('A campaign requires a player faction');
-  const world = generateWorld(checked.seed, checked.size, checked.factionCount, checked.generatorVersion, checked.layout ? { layout: checked.layout } : {});
+  const world = generateWorld(checked.seed, checked.size, checked.factionCount, generatorVersion, checked.layout ? { layout: checked.layout } : {});
   world.starts = factionStarts(world, selected.map(faction => faction.definitionId));
   const state: GameState = {
     resources: createResources(world, selected.map(faction => faction.id), checked.rulesVersion >= 16 ? 1 : 0),

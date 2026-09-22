@@ -67,11 +67,16 @@ async function captureLiveCast(page: Page, info: TestInfo, effectId: string, cas
       }
       if (caster?.frameId) poses.add(caster.frameId);
       const frame = Number(effect?.frameId.split('/').at(-1));
-      if (frame >= 3 && frame <= 4) return { hash, visibleFrames, effects: [...effects], poses: [...poses] };
+      if (frame >= 3 && frame <= 4) {
+        // Pause in the same frame the middle of the cast is observed; a separate
+        // test round trip lets slower machines animate past the checked frames.
+        [...document.querySelectorAll<HTMLButtonElement>('button')].find(button => button.getAttribute('aria-label') === 'Pause actions' || button.textContent?.trim() === 'Pause actions')!.click();
+        return { hash, visibleFrames, effects: [...effects], poses: [...poses] };
+      }
     }
     throw new Error('The live spell did not reach its visible middle frames.');
   }, { effectId, casterId });
-  await pause.click();
+  await expect(pause).toHaveCount(0);
   const held = await page.evaluate(() => window.__THEANDRIL__!.getBattleDiagnostics()!);
   const effect = held.effects.find(item => item.assetId === effectId && item.sourceId === casterId)!;
   expect(held.paused).toBe(true); expect(effect).toBeTruthy();

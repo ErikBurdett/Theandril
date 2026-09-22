@@ -84,3 +84,17 @@ test('rejects malformed transient fields rather than silently classifying partia
   elevation[100] = 700; world.hydrology[100] = 64; expect(() => deriveV6Climate(world, elevation)).toThrow(RangeError);
   world.hydrology[100] = 0; expect(() => deriveV6Climate({ ...world, seed: NaN }, elevation)).toThrow(RangeError);
 });
+
+test('Earth-like latitude bands are opt-in: colder poles, wetter equator, default fields unchanged', () => {
+  const { world, elevation } = climateFixture(), plain = deriveV6Climate(world, elevation), banded = deriveV6Climate(world, elevation, { latitudeBands: true });
+  expect(deriveV6Climate(world, elevation, {})).toEqual(plain);
+  // Rows 3/13/20 of 40 sit at latitude 84, 33 and 2 (0 = equator, 100 = pole).
+  const pole = 3 * world.width + 30, equator = 20 * world.width + 30, subtropic = 13 * world.width + 30;
+  expect(banded.temperature[pole]).toBeLessThan(plain.temperature[pole]! - 5);
+  expect(banded.temperature[equator]).toBeGreaterThanOrEqual(plain.temperature[equator]!);
+  expect(banded.moisture[equator]).toBeGreaterThan(plain.moisture[equator]!);
+  expect(banded.moisture[subtropic]).toBeLessThan(plain.moisture[subtropic]!);
+  const biomes = deriveV6Biomes(world, elevation, { latitudeBands: true });
+  expect(biomes[pole]).toBe(BIOME.tundra);
+  expect(deriveV6Biomes(world, elevation)).not.toEqual(biomes);
+});

@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-22 | [Civilization-scale campaigns, map types, simpler tests and build-only CI](2026-09-22-civ-scale-and-build-ci.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Campaign cost, test restructuring and design audit](2026-09-22-campaign-cost.md) | Local implementation; two full local passes; hosted verification open; nothing published |
 | 2026-09-21 | [Campaign verification cost continuation](2026-09-21-verification-cost.md) | Local reviewed implementation; Epic timing remains open; nothing published |
 | 2026-09-21 | [Deployment and branch reconciliation from DHARMA](2026-09-21-release-reconciliation.md) | `274d0e2` deployed and live-verified; tracker updated; redundant refs pruned |

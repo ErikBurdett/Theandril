@@ -18,7 +18,7 @@ async function begin(page: Page, mode: 'watch' | 'player', layout: Exclude<MapLa
   await page.getByRole('textbox', { name: 'World seed', exact: true }).fill('74');
   await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption(size);
   await page.getByRole('spinbutton', { name: 'Faction count', exact: true }).fill('4');
-  await page.getByRole('combobox', { name: 'World layout', exact: true }).selectOption(layout);
+  await page.getByRole('combobox', { name: 'Map type', exact: true }).selectOption(layout);
   await page.getByRole('combobox', { name: 'Campaign pace', exact: true }).selectOption('short');
   await page.getByRole('combobox', { name: 'Campaign mode', exact: true }).selectOption(mode);
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
@@ -144,7 +144,8 @@ test('Huge revealed world overview is one bounded texture and restoring fog remo
   const minusFit = await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().zoom!);
   expect(minusFit).toBeLessThan(.05);
   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.exploredCells)).toBe(initial.cells);
-  for (const cell of [0, 511, 196096, 196607]) expect(await page.evaluate(cell => window.__THEANDRIL__!.getCellScreenPoint(cell)?.inViewport, cell)).toBe(true);
+  const { width, height } = await page.evaluate(() => window.__THEANDRIL__!.getSummary()!);
+  for (const cell of [0, width - 1, (height - 1) * width, width * height - 1]) expect(await page.evaluate(cell => window.__THEANDRIL__!.getCellScreenPoint(cell)?.inViewport, cell)).toBe(true);
   await page.getByRole('button', { name: 'World overview', exact: true }).click();
   expect(await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().zoom)).toBeCloseTo(minusFit, 8);
   await page.getByRole('button', { name: 'Focus selection', exact: true }).click();
@@ -160,7 +161,7 @@ test('Huge revealed world overview is one bounded texture and restoring fog remo
   const metrics = await page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters());
   expect(metrics.visibleChunks).toBe(0); expect(metrics.cachedChunks).toBeLessThanOrEqual(64);
   expect(metrics.visibleSprites).toBe(1); expect(metrics.overviewTextureBytes).toBeLessThan(4 * 1024 * 1024);
-  expect(metrics.visibleCells).toBe(196608);
+  expect(metrics.visibleCells).toBe(width * height);
   await page.getByTestId('map-container').screenshot({ path: testInfo.outputPath('huge-archipelago-overview-narrow.png') });
   await page.evaluate(() => window.theandril!.setWatchFog(true));
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSummary()!.exploredCells)).toBe(initial.cells);

@@ -6,7 +6,7 @@ test('world-size recommendations expose generated seats honestly and a chosen fa
   await page.goto('/');
   const size = page.getByRole('combobox', { name: 'World size', exact: true });
   const count = page.getByRole('spinbutton', { name: 'Faction count', exact: true });
-  await expect(size).toHaveValue('small'); await expect(count).toHaveValue('12');
+  await expect(size).toHaveValue('standard'); await expect(count).toHaveValue(String(RECOMMENDED_FACTION_COUNTS.standard));
   for (const [value, recommended] of Object.entries(RECOMMENDED_FACTION_COUNTS)) {
     await size.selectOption(value);
     await expect(count).toHaveValue(String(recommended));
@@ -36,7 +36,7 @@ test('the recorded Standard Long seed with recommended density makes real factio
   await page.goto('/');
   await page.getByRole('textbox', { name: 'World seed', exact: true }).fill('748291');
   await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('standard');
-  await expect(page.getByRole('spinbutton', { name: 'Faction count', exact: true })).toHaveValue('24');
+  await expect(page.getByRole('spinbutton', { name: 'Faction count', exact: true })).toHaveValue(String(RECOMMENDED_FACTION_COUNTS.standard));
   await page.getByRole('combobox', { name: 'Campaign pace', exact: true }).selectOption('long');
   await page.getByRole('combobox', { name: 'Campaign mode', exact: true }).selectOption('watch');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
@@ -68,13 +68,13 @@ test('the recorded Standard Long seed with recommended density makes real factio
   await page.getByRole('button', { name: 'Pause AI watch', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Step one round', exact: true })).toBeEnabled();
   const view = await page.evaluate(() => window.__THEANDRIL__?.getSummary());
-  expect(view?.factionCount).toBe(24); expect(view?.turn).toBeLessThanOrEqual(50);
+  expect(view?.factionCount).toBe(RECOMMENDED_FACTION_COUNTS.standard); expect(view?.turn).toBeLessThanOrEqual(50);
   // A neutral passing army can leave sight during the round already in flight
   // when Pause is clicked. Assert the actual witnessed entity, not persistent
   // diplomatic memory that this observation contract does not promise.
   expect(contactWitness).toBeDefined();
   expect(contactWitness?.turn).toBeLessThanOrEqual(50);
-  expect(contactWitness?.configuredFactions).toBe(24);
+  expect(contactWitness?.configuredFactions).toBe(RECOMMENDED_FACTION_COUNTS.standard);
   expect(contactWitness?.fogEnabled).toBe(true);
   expect(contactWitness?.foreignEntity.factionId).not.toBe(contactWitness?.factionId);
   expect(contactWitness?.foreignFaction.id).toBe(contactWitness?.foreignEntity.factionId);

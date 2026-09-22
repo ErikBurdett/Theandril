@@ -14,7 +14,7 @@ const summary = ({ cellWindow: _cellWindow, ...town }: SettlementLandObservation
 /** Authored town registries on unchanged generated geography; strict load checks
  * center spacing, territory, references and visibility before selector tests. */
 function windowCampaign(count: number): GameState {
-  const state = createGame({ seed: 41, size: 'tiny', factionCount: 2 });
+  const state = createGame({ seed: 41, size: 'tiny', factionCount: 2, generatorVersion: 7 });
   const centers: number[] = [];
   for (let cell = 0; cell < state.world.terrain.length && centers.length < count + 1; cell++) {
     if (!isPassable(state.world.terrain[cell]!) || centers.some(center => hexDistance(center, cell, state.world.width) < 3)) continue;
@@ -160,7 +160,7 @@ describe('scoped settlement land queries', () => {
   });
 
   it('handles generated starts with no towns without special cases or mutation', () => {
-    const state = createGame({ seed: 41, size: 'tiny', factionCount: 2 }), hash = stateHash(state);
+    const state = createGame({ seed: 41, size: 'tiny', factionCount: 2, generatorVersion: 7 }), hash = stateHash(state);
     const expected = getObservation(state, state.turnOwnerId);
     for (const landDetails of ['all', 'none', ['settlement.missing']] as const) {
       expect(getObservation(state, state.turnOwnerId, { landDetails })).toEqual(expected);

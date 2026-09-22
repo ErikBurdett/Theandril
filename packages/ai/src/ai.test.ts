@@ -71,7 +71,7 @@ test('planner does not spend movement proposals on terrain the army cannot affor
 });
 
 test('founding names remain unique after losses leave gaps in the hearth sequence', () => {
-  const state = createGame({ seed: 74, size: 'tiny', factionCount: 1, pace: 'short' });
+  const state = createGame({ seed: 74, size: 'tiny', factionCount: 1, pace: 'short', generatorVersion: 7 });
   const view = getObservation(state, state.turnOwnerId);
   view.settlements = ['Hearth 3', 'Hearth 4'].map((name, index) => ({ id: `settlement.${90 + index}`, factionId: view.factionId, founderFactionId: view.factionId, name, cell: index ? 47 : 0, population: 1, food: 0, buildings: [], queue: [], devastation: 0, occupationTurns: 0 }));
   view.treasury = 1000; // Fund the actual two-existing-hearth establishment quote in this naming-only observation.

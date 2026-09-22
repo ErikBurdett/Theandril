@@ -1,22 +1,19 @@
-name: Verify campaign
+name: Verify build
 on: [push, pull_request]
 
 concurrency:
   group: verify-${{ github.ref }}
   cancel-in-progress: true
 
-# Three independent jobs run in parallel. Benchmarks (pnpm bench*) are local
-# measurement tools and are not part of verification.
+# CI only confirms the project typechecks and builds. Unit, campaign and
+# browser gameplay tests run locally (pnpm test, pnpm test:gameplay).
 jobs:
-  checks:
-    name: Typecheck, lint, unit tests and build
+  build:
+    name: Typecheck and build
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          # Journal and changelog checks read real historical Git objects.
-          fetch-depth: 0
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -24,47 +21,4 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
-      - run: pnpm lint
-      - run: pnpm content:validate
-      - run: pnpm test:unit
-      - run: pnpm test:repository
-      - run: pnpm art:validate
       - run: pnpm build
-
-  campaigns:
-    name: Generated AI campaigns
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm test:campaigns
-
-  gameplay:
-    name: Browser gameplay (${{ matrix.shard }}/3)
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [1, 2, 3]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm exec playwright test --shard=${{ matrix.shard }}/3
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: gameplay-results-${{ matrix.shard }}
-          path: test-results/

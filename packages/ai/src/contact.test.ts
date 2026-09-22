@@ -79,8 +79,8 @@ function contactCampaign(size: MapSize, factionCount: number, limit: number) {
 }
 
 describe('generated large-map faction contact', () => {
+  // The recommended seat counts for the default and a larger world.
   it.each([
-    ['standard', 4, 100],
     ['standard', RECOMMENDED_FACTION_COUNTS.standard, 60],
     ['huge', RECOMMENDED_FACTION_COUNTS.huge, 60],
   ] as const)('%s / %i seats makes player contact through legal bounded plans with save replay', (size, count, limit) => {

@@ -25,7 +25,7 @@ function knownComponent(view: Observation, origin: number, water: boolean): Set<
 test('Mire Courts earn a same-landmass inland ferry colony, with a saved voyage and exact command replay', () => {
   // Genuine generated resources and fog, not a funded/naval fixture. This is an
   // enclosed-sea crossing on the home landmass, explicitly not overseas proof.
-  const state = createGame({ seed: 74, size: 'tiny', factionCount: 1, factionDefinitionId: 'faction.mire_courts' });
+  const state = createGame({ seed: 74, size: 'tiny', factionCount: 1, factionDefinitionId: 'faction.mire_courts', generatorVersion: 7 });
   const initialSave = serializeGame(state), factionId = state.turnOwnerId;
   const prices = new Map([...BUILDINGS, ...UNITS].map(item => [item.id, item.coinCost]));
   const records: { command: GameCommand; result: ReturnType<typeof applyCommand> }[] = [];

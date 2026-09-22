@@ -129,8 +129,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     const desired = [...new Set(roster)].sort((a, b) => (rosterCounts.get(a) ?? 0) / roster.filter(id => id === a).length - (rosterCounts.get(b) ?? 0) / roster.filter(id => id === b).length || roster.indexOf(a) - roster.indexOf(b));
     const recruit = desired.map(id => units.get(id)).find(unit => unit && unit.coinCost <= budget && unit.upkeep + plannedUpkeep <= recurringBudget && canQueue(town.id, unit.id));
     // A newly unlocked role may enter an existing army even when the current
-    // force-count target is met. Its real cost/upkeep still uses the shared purse.
-    const missingRole = Boolean(view.growth && recruit && (rosterCounts.get(recruit.id) ?? 0) === 0);
+    // force-count target is met. At peace it waits until expansion is funded:
+    // otherwise each new role's upkeep can starve the next caravan indefinitely.
+    const missingRole = Boolean(view.growth && recruit && (rosterCounts.get(recruit.id) ?? 0) === 0 && (view.wars.length > 0 || expansionAffordable));
     const item = building ?? (expand && !plannedColonist && canQueue(town.id, UNITS[0]!.id) ? UNITS[0] : militaryCount + plannedMilitary < formationTarget || missingRole ? recruit : undefined);
     if (item && budget >= item.coinCost) {
       plans.push({ type: 'queue', factionId, settlementId: town.id, itemId: item.id });

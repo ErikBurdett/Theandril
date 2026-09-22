@@ -1,15 +1,41 @@
 /** Increment whenever the same seed/settings can produce different geography. */
-import { generateV5, generateV6, generateV7 } from './geography-v5';
-export { describeGeography, inspectV6Climate, inspectV7Climate } from './geography-v5';
-export { deriveV6Climate, deriveV6Biomes, type V6ClimateFields } from './climate-v6';
+import { generateV5, generateV6, generateV7, generateV8 } from './geography-v5';
+export { describeGeography, inspectV6Climate, inspectV7Climate, inspectV8Climate } from './geography-v5';
+export { deriveV6Climate, deriveV6Biomes, type V6ClimateFields, type ModernClimateOptions } from './climate-v6';
 export { geographicDiversity } from './geography-metrics';
 export { FLOW_DIRECTION, HYDROLOGY_MASK, LAKE_BIT, directionNeighbor, hydrologyDownstream, isLake, riverDirection, riverSize, validateHydrology } from './hydrology';
 import { isLake, riverSize } from './hydrology';
-export const GENERATOR_VERSION = 7;
-export type GeneratorVersion = 1 | 2 | 3 | 4 | 5 | 6 | 7;
-export type MapLayout = 'legacy' | 'continents' | 'islands' | 'archipelago';
-export interface WorldGenerationOptions { layout?: Exclude<MapLayout, 'legacy'> }
+/** Default for new campaigns. Generator8 is complete but opt-in until saves accept it. */
+export const GENERATOR_VERSION = 8;
+export type GeneratorVersion = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type MapLayout = 'legacy' | 'continents' | 'islands' | 'archipelago' | 'pangaea' | 'fractal' | 'earthlike' | 'inland-sea';
+/** A selectable (non-legacy) map type. */
+export type WorldLayout = Exclude<MapLayout, 'legacy'>;
+export interface WorldGenerationOptions { layout?: WorldLayout }
 
+/** Layouts accepted by generators5–7; their geography is frozen for saved worlds. */
+const HISTORICAL_LAYOUTS: readonly WorldLayout[] = ['continents', 'islands', 'archipelago'];
+
+export interface MapTypeInfo { id: WorldLayout; name: string; description: string }
+/** New-campaign map types, in presentation order. All require generator8 except
+ * Continents/Islands/Archipelago, which older generators also accept. */
+export const MAP_TYPES: readonly MapTypeInfo[] = [
+  { id: 'continents', name: 'Continents', description: 'Two or three large continents separated by open ocean, with offshore islands.' },
+  { id: 'pangaea', name: 'Pangaea', description: 'One vast supercontinent shared by nearly every realm, with bays, inland waters and a few offshore isles.' },
+  { id: 'fractal', name: 'Fractal', description: 'Unpredictable, irregular landmasses of every size: ragged coasts, long peninsulas, lakes and scattered isles.' },
+  { id: 'islands', name: 'Islands', description: 'Several medium islands and their satellites; seafaring decides who meets whom.' },
+  { id: 'archipelago', name: 'Archipelago', description: 'Chains of many small islands across open sea; a naval world from the first turn.' },
+  { id: 'earthlike', name: 'Earth-like', description: 'Continents of unequal size in an Earth-like arrangement, cold toward the poles and warm, dry or jungled toward the equator.' },
+  { id: 'inland-sea', name: 'Inland Sea', description: 'A ring of land whose coasts face a great central sea.' },
+];
+const V8_LAYOUTS: readonly WorldLayout[] = MAP_TYPES.map(type => type.id);
+
+/** Layouts a generator version accepts; generators1–4 accept none (their layout is legacy). */
+export function supportedLayouts(generatorVersion: GeneratorVersion): readonly WorldLayout[] {
+  return generatorVersion >= 8 ? V8_LAYOUTS : generatorVersion >= 5 ? HISTORICAL_LAYOUTS : [];
+}
+
+/** Historical (generators1–7) dimensions. Frozen: saved worlds regenerate from them. */
 export const MAP_DIMENSIONS = {
   tiny: { width: 48, height: 32 },
   small: { width: 256, height: 160 },
@@ -20,9 +46,37 @@ export const MAP_DIMENSIONS = {
 
 export type MapSize = keyof typeof MAP_DIMENSIONS;
 
+/** Generator8 dimensions: somewhat smaller, Civilization-scale maps for ~12 realms. */
+export const MAP_DIMENSIONS_V8: Readonly<Record<MapSize, { readonly width: number; readonly height: number }>> = {
+  tiny: { width: 48, height: 32 },
+  small: { width: 176, height: 110 },
+  standard: { width: 224, height: 140 },
+  huge: { width: 288, height: 180 },
+  legendary: { width: 352, height: 220 },
+};
+
+function isGeneratorVersion(version: unknown): version is GeneratorVersion {
+  return version === 1 || version === 2 || version === 3 || version === 4 || version === 5 || version === 6 || version === 7 || version === 8;
+}
+
+/** Dimensions of a map size under a generator version. */
+export function mapDimensions(size: MapSize, generatorVersion: GeneratorVersion): { width: number; height: number } {
+  if (!Object.hasOwn(MAP_DIMENSIONS, size)) throw new RangeError('Unknown map size.');
+  if (!isGeneratorVersion(generatorVersion)) throw new RangeError('Unknown generator version.');
+  const { width, height } = (generatorVersion >= 8 ? MAP_DIMENSIONS_V8 : MAP_DIMENSIONS)[size];
+  return { width, height };
+}
+
+/** Inverse of mapDimensions: recovers a saved world's size, or undefined for foreign dimensions. */
+export function mapSizeOf(width: number, height: number, generatorVersion: GeneratorVersion): MapSize | undefined {
+  if (!isGeneratorVersion(generatorVersion)) return undefined;
+  const table = generatorVersion >= 8 ? MAP_DIMENSIONS_V8 : MAP_DIMENSIONS;
+  return (Object.keys(table) as MapSize[]).find(size => table[size].width === width && table[size].height === height);
+}
+
 /** New-campaign UI defaults only. Explicit counts and existing seeded worlds remain unchanged. */
 export const RECOMMENDED_FACTION_COUNTS: Readonly<Record<MapSize, number>> = {
-  tiny: 4, small: 12, standard: 24, huge: 32, legendary: 40,
+  tiny: 4, small: 8, standard: 12, huge: 16, legendary: 20,
 };
 export function recommendedFactionCount(size: MapSize): number {
   if (!Object.hasOwn(RECOMMENDED_FACTION_COUNTS, size)) throw new RangeError('Unknown map size.');
@@ -247,6 +301,7 @@ export function deriveClimate(seed: number, width: number, height: number, terra
 export function deriveBiomes(seed: number, width: number, height: number, terrain: Uint8Array, generatorVersion: GeneratorVersion = 5): Uint8Array {
   if (generatorVersion === 6) throw new RangeError('Generator6 biomes require relief and hydrology; use deriveV6Biomes.');
   if (generatorVersion === 7) throw new RangeError('Generator7 biomes require relief and hydrology; use deriveV6Biomes.');
+  if (generatorVersion === 8) throw new RangeError('Generator8 biomes require relief and hydrology; use deriveV6Biomes.');
   if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3 && generatorVersion !== 4 && generatorVersion !== 5) throw new RangeError('Unknown generator version.');
   validateClimateInput(seed, width, height, terrain);
   const result = new Uint8Array(terrain.length);
@@ -404,21 +459,25 @@ function placeStarts(world: World, count: number): void {
   }
 }
 
-/** Versioned, worker-safe geography. V5/6 use independent relief/drainage;
+/** Versioned, worker-safe geography. V5–8 use independent relief/drainage;
  * the original two-envelope generator below remains frozen for versions1–4. */
 export function generateWorld(seed: number, size: MapSize, factionCount: number, generatorVersion: GeneratorVersion = GENERATOR_VERSION, options: WorldGenerationOptions = {}): World {
   if (!Number.isSafeInteger(seed)) throw new RangeError('Seed must be a safe integer.');
   if (!Object.hasOwn(MAP_DIMENSIONS, size)) throw new RangeError('Unknown map size.');
-  if (generatorVersion !== 1 && generatorVersion !== 2 && generatorVersion !== 3 && generatorVersion !== 4 && generatorVersion !== 5 && generatorVersion !== 6 && generatorVersion !== 7) throw new RangeError('Unknown generator version.');
+  if (!isGeneratorVersion(generatorVersion)) throw new RangeError('Unknown generator version.');
   if (!Number.isInteger(factionCount) || factionCount < 1 || factionCount > 48) {
     throw new RangeError('Faction count must be an integer between 1 and 48.');
   }
   if (!options || typeof options !== 'object' || Array.isArray(options) || Object.keys(options).some(key => key !== 'layout') ||
-    (options.layout !== undefined && !['continents', 'islands', 'archipelago'].includes(options.layout))) throw new RangeError('Unknown world layout.');
+    (options.layout !== undefined && !V8_LAYOUTS.includes(options.layout))) throw new RangeError('Unknown world layout.');
   if (generatorVersion <= 4 && options.layout !== undefined) throw new RangeError('Historical generators do not accept layout settings.');
+  if (options.layout !== undefined && !supportedLayouts(generatorVersion).includes(options.layout)) {
+    throw new RangeError(`World layout ${options.layout} requires generator 8.`);
+  }
   if (generatorVersion === 5) return generateV5(seed, size, factionCount, options.layout ?? 'continents');
   if (generatorVersion === 6) return generateV6(seed, size, factionCount, options.layout ?? 'continents');
   if (generatorVersion === 7) return generateV7(seed, size, factionCount, options.layout ?? 'continents');
+  if (generatorVersion === 8) return generateV8(seed, size, factionCount, options.layout ?? 'continents');
   const { width, height } = MAP_DIMENSIONS[size];
   const world: World = {
     seed: seed >>> 0, width, height, generatorVersion, layout: 'legacy', hydrology: new Uint8Array(width * height),

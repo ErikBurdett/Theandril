@@ -28,7 +28,7 @@ An automated/headless campaign and a human-playable campaign can:
 
 All intended victory paths are human-playable.
 
-Normal campaigns support strategically engaging play over hundreds of turns, with higher-difficulty campaigns potentially approaching 1,000. Verify representative long campaigns and counterplay; a long funding wait alone does not establish engagement or completed difficulty design. Short regression fixtures are explicitly labeled and are not pacing evidence.
+Normal campaigns support strategically engaging play at Civilization scale: about 12 realms on a Standard map, concluding around 200 (Standard), 300 (Long) and 350–400 (Epic) turns. Verify representative long campaigns and counterplay; a long funding wait alone does not establish engagement or completed difficulty design. Short regression fixtures are explicitly labeled and are not pacing evidence.
 
 Victorious AI campaigns expose both a complete technical log and a factual history tome in the UI. Full records survive save/resume and include the generated start through victory; imported older campaigns disclose any missing earlier history. Verify replay from the technical record, not merely a matching final snapshot.
 

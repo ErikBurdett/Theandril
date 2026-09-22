@@ -7,7 +7,7 @@ import { createDevelopmentState, developmentStateSchema, validateDevelopment } f
 import { resourceStateSchema, validateResources } from './resources';
 import { z } from 'zod';
 import { BUILDINGS, IMPROVEMENTS, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
-import { BIOME, deriveBiomes, deriveWaterDepth, isLake, isPassable, isValidBiome, neighbors, SeededRandom, validateHydrology } from '@theandril/mapgen';
+import { BIOME, MAP_TYPES, deriveBiomes, deriveWaterDepth, isLake, isPassable, isValidBiome, neighbors, SeededRandom, supportedLayouts, validateHydrology, type MapLayout } from '@theandril/mapgen';
 import { emptyRoadState, roadStateSchema, validateRoads } from './roads';
 import { applyCommand, initializeLegacyLand, MAX_EVENTS } from './simulation';
 import { emptyLandState, landStateSchema, landStateV15Schema, landStateV10Schema, validateLand, validateLandKnowledge } from './territory';
@@ -160,7 +160,8 @@ const stateV17Schema = stateV15Schema.extend({
   factions: z.array(factionSchema.extend({ treasury: z.number().int().nonnegative().safe(), knowledge: z.number().int().nonnegative().safe() }).strict()).min(1).max(48),
 }).strict();
 /** Rules 18 accepts generator-8 worlds; older envelopes keep their exact schema. */
-const stateSchema = stateV17Schema;
+const worldV18Schema = modernWorldSchema.extend({ generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8)]), layout: z.enum(['legacy', ...MAP_TYPES.map(type => type.id)] as [MapLayout, ...MapLayout[]]) }).strict();
+const stateSchema = stateV17Schema.extend({ world: worldV18Schema }).strict();
 const saveSchema = z.object({ version: z.literal(18), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
 const saveV17Schema = saveSchema.extend({ version: z.union([z.literal(16), z.literal(17)]), state: stateV17Schema }).strict();
 const saveV15Schema = saveSchema.extend({ version: z.literal(15), state: stateV15Schema }).strict();
@@ -679,7 +680,7 @@ export function deserializeGame(text: string): GameState {
   assert(data.world.waterDepth.every((depth, cell) => data.world.terrain[cell] === 0 ? depth === 1 || depth === 2 : depth === 0), 'water depth disagrees with physical terrain');
   assert(data.world.hydrology.length === totalCells, 'hydrology dimensions disagree');
   assert(data.world.hydrology.every((value, cell) => !isLake(value) || data.world.waterDepth[cell] === 1), 'freshwater lakes must use shallow water depth');
-  assert(data.world.generatorVersion < 5 ? data.world.layout === 'legacy' && data.world.hydrology.every(value => value === 0) : data.world.layout !== 'legacy', 'geography does not match generator version');
+  assert(data.world.generatorVersion < 5 ? data.world.layout === 'legacy' && data.world.hydrology.every(value => value === 0) : supportedLayouts(data.world.generatorVersion).some(layout => layout === data.world.layout), 'geography does not match generator version');
   validateHydrology({ width: data.world.width, height: data.world.height, terrain: Uint8Array.from(data.world.terrain), hydrology: Uint8Array.from(data.world.hydrology) });
   assert(data.world.biome.every((biome, cell) => {
     const terrain = data.world.terrain[cell];

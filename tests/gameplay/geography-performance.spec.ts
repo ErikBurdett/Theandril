@@ -22,7 +22,7 @@ test('Huge generated archipelago spectator geography stays bounded through revea
   await page.getByRole('textbox', { name: 'World seed', exact: true }).fill('74');
   await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('huge');
   await page.getByRole('spinbutton', { name: 'Faction count', exact: true }).fill('32');
-  await page.getByRole('combobox', { name: 'World layout', exact: true }).selectOption('archipelago');
+  await page.getByRole('combobox', { name: 'Map type', exact: true }).selectOption('archipelago');
   await page.getByRole('combobox', { name: 'Campaign pace', exact: true }).selectOption('short');
   await page.getByRole('combobox', { name: 'Campaign mode', exact: true }).selectOption('watch');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();

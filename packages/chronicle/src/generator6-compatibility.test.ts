@@ -69,7 +69,7 @@ describe('generator7 acceptance keeps generator identity explicit in the current
   it('rejects checksum-valid unsupported generator identities without accepting an open-ended version range', () => {
     const game = createGame({ seed: 74, size: 'tiny', factionCount: 4, generatorVersion: 7, rosterVersion: 3, rulesVersion: 12 });
     const save = serializeGame(game);
-    for (const version of [0, 8, 1.5, '7', null]) {
+    for (const version of [0, 9, 1.5, '7', null]) {
       const changed = JSON.parse(save) as { state: { world: { generatorVersion: unknown } }; stateChecksum: string };
       changed.state.world.generatorVersion = version;
       changed.stateChecksum = checksum(JSON.stringify(changed.state));

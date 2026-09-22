@@ -1,5 +1,20 @@
 # Theandril implementation status
 
+## Civilization-scale campaigns, new map types and build-only CI — 2026-09-22
+
+The owner redirected the game toward a manageable, Civilization-like scale. They also asked for a simpler test suite, CI that only checks the build, and a deployed working build.
+
+- **Rules/save 18 pacing.** Only the Long and Epic Prosperity prices changed; response windows and civic prices are unchanged. On generator 8 Standard maps with 12 AI realms:
+  - Standard concludes at turns 211–230.
+  - Long concludes at turns 259–295; all seven map types fall between 259 and 322.
+  - Epic concludes at turns 329–389.
+
+  **Save compatibility:** rules 16–17 saves load under the frozen `b79c78ed` pack and continue. Their envelopes re-seal to identical bytes, and a 22,914-order rules-17 archive replays unchanged. Rules 17 and earlier cannot execute generator-8 worlds.
+- **Generator 8.** Maps are somewhat smaller: Standard is 224×140 with 12 recommended realms, and sizes run from Tiny 48×32 to 352×220. There are seven map types: Continents, Pangaea, Fractal, Islands, Archipelago, Earth-like (with latitude climate bands) and Inland Sea. Starts are shared out across landmasses. Generators 1–7 stay byte-identical, pinned by `historical-seals.test.ts`. The new-campaign form offers a Map type choice and defaults to Standard with 12 realms.
+- **AI fix.** At peace, recruiting each newly unlocked unit role no longer starves expansion. Previously some cultures never funded a second caravan on certain maps.
+- **Tests.** The full local suite has 1,793 tests and takes about 27 seconds (it was 81 seconds). Pinned refactor captures and duplicated historical regeneration were removed. There is now one campaign per pace, sampled seeds and cultures, and a mapgen suite that runs in 6 seconds. Seed-specific scenarios pin the generator-7 geography they were designed for.
+- **CI.** Verify only typechecks and builds. Pages typechecks, regenerates the change feed, builds and deploys. Unit, campaign and browser tests run locally (`pnpm test`, `pnpm test:gameplay`).
+
 ## Campaign cost and test restructuring — local continuation, 2026-09-22
 
 This continues **ACT-18 / DH-015 / M0** on the same local branch, following the user's request to continue toward 1.0 and to simplify the code, improve efficiency and trim test cost. Rules/save stay **17** and content stays **`b79c78ed`**. No gameplay, schema, timeout or worker change was made.
