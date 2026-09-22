@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, SCHEMA17_CAMPAIGN_PACES, contentPackHash, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
+import { BUILDINGS, CAMPAIGN_PACES, CONTENT_HASH, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, SCHEMA20_UNIFICATION_VICTORY, contentPackHash, DOCTRINES, INSTITUTIONS, LOCALIZATION, PROSPERITY_PROJECT, TECHNOLOGIES, UNITS, buildingSchema, campaignPaceProfileSchema, campaignPaceSchema, checksum, doctrineSchema, technologySchema, validateContent, validateProductionContent, validateProgressionContent, unitSchema } from './index';
 test('the starter pack has unique valid IDs, localization and bounded numeric parameters', () => {
   expect(validateContent()).toMatchObject({ buildings: 5, units: 13, factions: 24, technologies: 10, institutions: 2, doctrines: 2, projects: 1, improvements: 18, resources: 8, developmentNodes: 25, naturalFeatures: 7 });
 });
@@ -113,9 +113,10 @@ test('production rejects missing references, duplicate prerequisites and impossi
   for (const capacity of [-1, 0.5, 25, NaN]) expect(unitSchema.safeParse({ ...transport, naval: { ...transport.naval, transportCapacity: capacity } }).success).toBe(false);
 });
 
-test('the rules 16–17 and 18 packs keep their exact seals so older saves still load', () => {
-  expect(contentPackHash(SCHEMA17_CAMPAIGN_PACES, false)).toBe('b79c78ed');
-  expect(contentPackHash(CAMPAIGN_PACES, false)).toBe('98b97bba');
+test('the rules 17, 18 and 19–20 packs keep their exact seals so older saves still load', () => {
+  expect(contentPackHash(SCHEMA17_CAMPAIGN_PACES, null, false)).toBe('b79c78ed');
+  expect(contentPackHash(SCHEMA20_CAMPAIGN_PACES, null, false)).toBe('98b97bba');
+  expect(contentPackHash(SCHEMA20_CAMPAIGN_PACES, SCHEMA20_UNIFICATION_VICTORY, false)).toBe('3127e431');
   expect(CONTENT_HASH).toBe(contentPackHash());
-  expect(new Set([CONTENT_HASH, 'b79c78ed', '98b97bba']).size).toBe(3);
+  expect(new Set([CONTENT_HASH, 'b79c78ed', '98b97bba', '3127e431']).size).toBe(4);
 });

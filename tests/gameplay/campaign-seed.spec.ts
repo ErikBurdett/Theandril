@@ -8,6 +8,7 @@ const snapshot = (page: Page) => page.evaluate(() => {
 });
 
 async function begin(page: Page) {
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(seedInput(page)).toHaveCount(0);
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
@@ -77,6 +78,7 @@ test('an invalid custom seed leaves the existing campaign intact', async ({ page
   const first = await begin(page);
   await newCampaign(page);
   await seedInput(page).fill('4294967296');
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('feedback')).toContainText('Use a whole-number world seed between 0 and 4294967295');
   await expect(seedInput(page)).toHaveValue('4294967296');

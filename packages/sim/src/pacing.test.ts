@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CAMPAIGN_PACES, checksum, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, SCHEMA17_CAMPAIGN_PACES, TECHNOLOGIES } from '@theandril/content';
+import { CAMPAIGN_PACES, checksum, LEGACY_CAMPAIGN_PACES, SCHEMA8_CAMPAIGN_PACES, SCHEMA17_CAMPAIGN_PACES, SCHEMA20_CAMPAIGN_PACES, TECHNOLOGIES } from '@theandril/content';
 import { prosperityCampaign, PROSPERITY_FIXTURE } from '../../test-fixtures/src/victory-fixture';
 import { applyCommand, applyCommandForVersion, createGame, deserializeGame, getObservation, replayGame, serializeGame, settlementYields, stateHash } from './index';
 import type { CampaignPace, GameCommand, GameState } from './index';
@@ -32,7 +32,8 @@ describe('canonical campaign pace', () => {
     { version: 7, price: LEGACY_CAMPAIGN_PACES.epic.projectCoinCost },
     { version: 8, price: SCHEMA8_CAMPAIGN_PACES.epic.projectCoinCost },
     { version: 17, price: SCHEMA17_CAMPAIGN_PACES.epic.projectCoinCost },
-    { version: 18, price: CAMPAIGN_PACES.epic.projectCoinCost },
+    { version: 18, price: SCHEMA20_CAMPAIGN_PACES.epic.projectCoinCost },
+    { version: 21, price: CAMPAIGN_PACES.epic.projectCoinCost },
   ] as const)('rules $version quotes and charges the Epic project at $price coin', ({ version, price }) => {
     for (const treasury of [price - 1, price]) {
       const state = prosperityCampaign(); state.pace = 'epic';

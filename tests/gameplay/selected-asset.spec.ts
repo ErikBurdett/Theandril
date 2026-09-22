@@ -89,6 +89,7 @@ test('the approved Ashen scout plays all four genuine idle frames with matching 
   await page.goto('/');
   await page.getByRole('textbox', { name: 'World seed', exact: true }).fill('20260905');
   await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('tiny');
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.state)).toBe('ready');

@@ -26,7 +26,7 @@ const growth = (state: GameState) => borderExpansionObservation(state, town(stat
 describe('automatic city boundary growth', () => {
   it('quotes bounded conservative progress from population, actual infrastructure and acquired research', () => {
     const state = scene();
-    expect(growth(state)).toMatchObject({ progress: 0, threshold: 40, rate: 3, blocker: null });
+    expect(growth(state)).toMatchObject({ progress: 0, threshold: 8, rate: 3, blocker: null });
     town(state).buildings.push('building.market', 'building.archive');
     expect(growth(state).rate).toBe(5);
     state.factions[0]!.knowledge = 1000;
@@ -37,7 +37,7 @@ describe('automatic city boundary growth', () => {
     expect(growth(state).rate).toBe(9);
     expect(withRules(state, 15, () => growth(state).rate)).toBe(7);
     const saved = serializeGame(state), summary = getSettlementLandObservation(state, state.turnOwnerId, town(state).id)!;
-    summary.borderExpansion.progress = 39;
+    summary.borderExpansion.progress = 7;
     expect(serializeGame(state)).toBe(saved);
     expect(withRules(state, 10, () => growth(state))).toMatchObject({ rate: 0, nextCell: null });
   });
@@ -51,7 +51,7 @@ describe('automatic city boundary growth', () => {
     const result = end(state);
     expect(result.events.filter(event => event.type === 'territory_expanded')).toHaveLength(1);
     expect(land(state).claimed).toEqual([...before.claimed, candidates[0]!].sort((a, b) => a - b));
-    expect(land(state).borderGrowth).toBe(1); expect(growth(state).threshold).toBe(44);
+    expect(land(state).borderGrowth).toBe(1); expect(growth(state).threshold).toBe(8);
     expect(land(state).worked).toEqual(before.worked); expect(land(state).improvements).toEqual(before.improvements);
     expect(settlementLandYield(state, town(state))).toEqual(yields); expect(state.world).toEqual(geography);
     expect(state.factions[0]!.treasury).toBeGreaterThan(priorCoin);
@@ -81,8 +81,9 @@ describe('automatic city boundary growth', () => {
     state.sieges[town(state).id] = { settlementId: town(state).id, armyId: 'army.4', factionId: state.factions[1]!.id, startedTurn: 1, defenses: 30, supplies: 3, militiaStrength: 30, militiaMorale: 60, militiaFatigue: 0 };
     const events: DomainEvent[] = []; resolveLandTurn(state, town(state), events);
     expect(growth(state).blocker).toMatch(/siege/); expect(land(state).borderGrowth).toBe(10); expect(land(state).work).toEqual(work); expect(events).toEqual([]);
+    // Rules 21 borders grow in a handful of turns, so the retained progress spends itself the moment the siege lifts.
     delete state.sieges[town(state).id]; resolveLandTurn(state, town(state));
-    expect(land(state).borderGrowth).toBe(13); expect(land(state).work?.remainingTurns).toBe(1);
+    expect(land(state).borderGrowth).toBe(5); expect(land(state).work?.remainingTurns).toBe(1);
   });
 
   it('resets captured civic progress without deleting developed land and releases territory on razing', () => {

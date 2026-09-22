@@ -15,6 +15,7 @@ async function approved(icon: Locator): Promise<void> {
 async function begin(page: Page): Promise<void> {
   await page.getByRole('textbox', { name: 'World seed', exact: true }).fill('20260905');
   await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('tiny');
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
 }

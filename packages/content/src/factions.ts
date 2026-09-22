@@ -128,3 +128,32 @@ export function validateFactionContent(units: readonly { id: string; canFound: b
       || Object.values(values).some(weight => !Number.isSafeInteger(weight) || weight < 1 || weight > 8)) throw new Error('Invalid faction recruitment weights');
   }
 }
+
+/** Realms beyond the authored cultures reuse their art under their own name and
+ * colour. Epithets and a golden-angle hue rotation keep every seat distinct. */
+export const VARIANT_EPITHETS: readonly string[] = [
+  'Free', 'Northern', 'Southern', 'Eastern', 'Western', 'Outer', 'Inner', 'High', 'Low', 'Elder',
+  'Riven', 'Ashbound', 'Saltbound', 'Stonebound', 'Lantern', 'Vigil', 'Remnant', 'Wayward', 'Seconded', 'Sundered',
+];
+export function variantFactionName(name: string, variant: number): string {
+  return `${VARIANT_EPITHETS[(variant - 1) % VARIANT_EPITHETS.length]} ${name}`.slice(0, 40);
+}
+export function variantFactionColor(base: number, variant: number): number {
+  const red = (base >> 16) & 255, green = (base >> 8) & 255, blue = base & 255;
+  const max = Math.max(red, green, blue), min = Math.min(red, green, blue), light = (max + min) / 510;
+  const chroma = max - min, saturation = chroma === 0 ? 0 : chroma / (255 - Math.abs(max + min - 255));
+  let hue = 0;
+  if (chroma !== 0) {
+    hue = max === red ? ((green - blue) / chroma + 6) % 6 : max === green ? (blue - red) / chroma + 2 : (red - green) / chroma + 4;
+    hue *= 60;
+  }
+  // The golden angle spreads repeated cultures around the wheel without collisions.
+  const rotated = (hue + variant * 137.508) % 360;
+  const spread = Math.min(.85, Math.max(.35, saturation + .1));
+  const value = Math.min(.8, Math.max(.45, light));
+  const c = (1 - Math.abs(2 * value - 1)) * spread, x = c * (1 - Math.abs((rotated / 60) % 2 - 1)), m = value - c / 2;
+  const sector = Math.floor(rotated / 60) % 6;
+  const [r, g, b] = sector === 0 ? [c, x, 0] : sector === 1 ? [x, c, 0] : sector === 2 ? [0, c, x] : sector === 3 ? [0, x, c] : sector === 4 ? [x, 0, c] : [c, 0, x];
+  const channel = (value: number) => Math.max(0, Math.min(255, Math.round((value + m) * 255)));
+  return (channel(r) << 16) | (channel(g) << 8) | channel(b);
+}

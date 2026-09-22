@@ -94,7 +94,10 @@ test('layouts are validated against the generator version', () => {
   expect(() => generateWorld(1, 'tiny', 4, 8, { layout: 'legacy' as WorldLayout })).toThrow('Unknown world layout');
   expect(() => generateWorld(1, 'tiny', 4, 8, { layout: 'ringworld' as WorldLayout })).toThrow('Unknown world layout');
   expect(() => generateWorld(1, 'tiny', 4, 9 as GeneratorVersion)).toThrow('Unknown generator version');
-  expect(() => generateWorld(1, 'tiny', 49, 8)).toThrow(RangeError);
+  // Generator 8 seats a crowded 42-realm map plus its city-states; historical generators stop at 48.
+  expect(() => generateWorld(1, 'tiny', 65, 8)).toThrow(RangeError);
+  expect(() => generateWorld(1, 'tiny', 49, 7)).toThrow(RangeError);
+  expect(generateWorld(7, 'standard', 56, 8).starts).toHaveLength(56);
   const fallback = generateWorld(1, 'tiny', 4, 8);
   expect(fallback.layout).toBe('continents'); expect(fallback.generatorVersion).toBe(8);
 });

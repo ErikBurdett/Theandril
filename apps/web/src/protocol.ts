@@ -7,7 +7,7 @@ import type { BattleTransfer } from './battle-transfer';
 export interface CampaignInfo { mode: CampaignMode; coverage: 'complete' | 'from-save' }
 
 export type Request =
-  | { id: number; type: 'new'; seed: number; size: MapSize; mode: CampaignMode; pace: CampaignPace; factionCount?: number; factionDefinitionId?: string; layout?: Exclude<MapLayout, 'legacy'> }
+  | { id: number; type: 'new'; seed: number; size: MapSize; mode: CampaignMode; pace: CampaignPace; factionCount?: number; cityStateCount?: number; factionDefinitionId?: string; layout?: Exclude<MapLayout, 'legacy'> }
   | { id: number; type: 'command'; command: GameCommand }
   | { id: number; type: 'previewPeace'; targetFactionId: string; terms: PeaceTerms }
   | { id: number; type: 'movementQuery'; armyId: string; target?: number; append?: boolean }

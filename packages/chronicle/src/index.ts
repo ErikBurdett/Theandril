@@ -3,6 +3,7 @@ import { CONTENT_HASH, PROSPERITY_PROJECT } from '@theandril/content';
 import { mapSizeOf, type MapSize } from '@theandril/mapgen';
 import { sameJson, stablePrettyJson } from './json-equivalence';
 import { schema13CampaignBattleSchema, type BattlePresentationObserver } from '@theandril/sim';
+import { isCityState } from '@theandril/sim';
 import { applyCommand, applyCommandForVersion, battleReportForVersion, commandSchemaForVersion, createGame, deserializeGame, eventSchema, campaignBattleSchema, schema15CampaignBattleSchema, legacyCampaignBattleSchema, schema6CampaignBattleSchema, schema7CampaignBattleSchema, serializeGame, stateHash, stateHashForVersion, SAVE_VERSION, type BattleReport, type CommandResult, type DomainEvent, type GameCommand, type GameState, type PhaseObserver } from '@theandril/sim';
 
 export { CampaignJournal, createJournal, resumeJournal } from './journal';
@@ -10,7 +11,7 @@ export type { JournalHeader, JournalCommit, JournalOptions } from './journal';
 
 export type CampaignMode = 'player' | 'watch';
 export type ArchiveCoverage = 'complete' | 'from-save';
-export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+export type ArchiveRulesVersion = 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21;
 export type ArchivedBattleReport = BattleReport | z.infer<typeof legacyCampaignBattleSchema> | z.infer<typeof schema6CampaignBattleSchema> | z.infer<typeof schema7CampaignBattleSchema>;
 export interface ArchiveRecord {
   sequence: number;
@@ -57,7 +58,7 @@ const legacyArchiveSchema = z.object({
   initialSave: z.string().max(64 * 1024 * 1024), initialHash: hash, initialTurn: turn,
   records: z.array(legacyRecordSchema).max(1_000_000), finalHash: hash.nullable(),
 }).strict();
-const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20)]);
+const hashVersion = z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21)]);
 // Reports are validated in their original format. Never add modern metadata to old evidence.
 const recordSchema = z.discriminatedUnion('rulesVersion', [
   legacyRecordSchema.extend({ checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(4) }).strict(),
@@ -77,6 +78,7 @@ const recordSchema = z.discriminatedUnion('rulesVersion', [
   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(18) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(19) }).strict(),
   legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(20) }).strict(),
+  legacyRecordSchema.extend({ battles: z.array(campaignBattleSchema).max(1), checkpointVersion: hashVersion.nullable(), rulesVersion: z.literal(21) }).strict(),
 ]);
 const archiveSchema = legacyArchiveSchema.extend({ version: z.literal(2), initialSaveVersion: hashVersion, records: z.array(recordSchema).max(1_000_000), finalHashVersion: hashVersion.nullable() }).strict();
 
@@ -129,7 +131,8 @@ export function parseArchive(raw: unknown, current: GameState): CampaignArchive 
   if (initial.world.seed !== current.world.seed || initial.world.width !== current.world.width || initial.world.height !== current.world.height
     || initial.turnOwnerId !== current.turnOwnerId || initial.pace !== current.pace || initial.world.generatorVersion !== current.world.generatorVersion || initial.world.layout !== current.world.layout || initial.rosterVersion !== current.rosterVersion || initial.factions.map(f => f.id).join('|') !== current.factions.map(f => f.id).join('|')) throw new Error('Archive belongs to a different campaign.');
   if (archive.coverage === 'complete') {
-    const generated = createGame({ rulesVersion: archive.initialSaveVersion, seed: initial.world.seed, size: mapSize(initial), factionCount: initial.factions.length, pace: initial.pace, generatorVersion: initial.world.generatorVersion, rosterVersion: initial.rosterVersion, ...(initial.world.layout !== 'legacy' ? { layout: initial.world.layout } : {}), ...(archive.initialSaveVersion >= 9 ? { factionDefinitionId: initial.factions[0]!.definitionId } : {}) });
+    const cityStateCount = initial.factions.filter(faction => isCityState(faction.id)).length;
+    const generated = createGame({ rulesVersion: archive.initialSaveVersion, seed: initial.world.seed, size: mapSize(initial), factionCount: initial.factions.length - cityStateCount, ...(cityStateCount ? { cityStateCount } : {}), pace: initial.pace, generatorVersion: initial.world.generatorVersion, rosterVersion: initial.rosterVersion, ...(initial.world.layout !== 'legacy' ? { layout: initial.world.layout } : {}), ...(archive.initialSaveVersion >= 9 ? { factionDefinitionId: initial.factions[0]!.definitionId } : {}) });
     if (stateHashForVersion(generated, archive.initialSaveVersion) !== archive.initialHash) throw new Error('Complete history must begin at the generated campaign start.');
   }
   let expectedTurn = initial.turn;

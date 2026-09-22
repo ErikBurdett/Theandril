@@ -60,7 +60,7 @@ export function unificationCampaign(): GameState {
     const army = Object.values(state.armies).find(army => army.factionId === faction.id && army.formations.some(item => item.unitId === 'unit.colonist'))!;
     issue({ type: 'found', factionId: faction.id, armyId: army.id, name: faction.id === state.turnOwnerId ? PROSPERITY_FIXTURE.hostName : 'Reedbound Hold' });
   }
-  foundHearths(state, ['Kiln Ward', 'Commons Reach', 'Ash Ford', 'Lantern Rise', 'Weir Hollow'], issue, advance);
+  foundHearths(state, ['Kiln Ward', 'Commons Reach', 'Ash Ford', 'Lantern Rise', 'Weir Hollow', 'Saltmere', 'Cinder Gate'], issue, advance);
   return deserializeGame(serializeGame(state));
 }
 

@@ -47,13 +47,22 @@ export const SCHEMA17_CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPace
   long: { ...SCHEMA8_CAMPAIGN_PACES.long, projectCoinCost: 80_000 },
   epic: { ...SCHEMA8_CAMPAIGN_PACES.epic, projectCoinCost: 240_000 },
 };
-/** Rules 18: Civilization-scale campaigns. The longest pace concludes around
+/** Rules 18–20: Civilization-scale campaigns. The longest pace concludes around
  * 350–400 turns. Only prices change; public project windows keep their length. */
-export const CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+export const SCHEMA20_CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
   short: SCHEMA17_CAMPAIGN_PACES.short,
   standard: { ...SCHEMA17_CAMPAIGN_PACES.standard, description: 'A full campaign aiming for about two hundred turns, with a twenty-turn window to oppose public projects. Actual length depends on play.' },
   long: { ...SCHEMA17_CAMPAIGN_PACES.long, projectCoinCost: 30_000, description: 'An extended campaign aiming for about three hundred turns, with a forty-turn window to oppose public projects. Actual length depends on play.' },
   epic: { ...SCHEMA17_CAMPAIGN_PACES.epic, projectCoinCost: 42_000, description: 'The longest campaign, aiming for about three hundred and fifty to four hundred turns, with a sixty-turn window to oppose public projects. Actual length depends on play.' },
+};
+
+/** Rules 21 widens realms and adds city-states. Wider realms fund projects sooner
+ * but also spend more coin planting and administering hearths, so the two longest
+ * prices are set from measured rules-21 campaigns, not from the older curve. */
+export const CAMPAIGN_PACES: Readonly<Record<CampaignPace, CampaignPaceProfile>> = {
+  ...SCHEMA20_CAMPAIGN_PACES,
+  long: { ...SCHEMA20_CAMPAIGN_PACES.long, projectCoinCost: 40_000 },
+  epic: { ...SCHEMA20_CAMPAIGN_PACES.epic, projectCoinCost: 44_000, description: 'The longest campaign, aiming for about four hundred turns — a little longer on a crowded map — with a sixty-turn window to oppose public projects. Actual length depends on play.' },
 };
 
 export const TECHNOLOGIES: readonly TechnologyDefinition[] = [
@@ -93,12 +102,18 @@ export const PROSPERITY_PROJECT: ProsperityProjectDefinition = {
 /** Validate arbitrary candidate packs as well as the shipped one, including dependency cycles. */
 export const unificationVictorySchema = z.object({ id, name, description, minimumSettlements: z.number().int().min(1).max(1000) }).strict();
 export type UnificationVictoryDefinition = z.infer<typeof unificationVictorySchema>;
-/** Rules 19: a second, contestable victory path. It needs no purchase; its public
- * holding window is the pace's project response window. */
-export const UNIFICATION_VICTORY: UnificationVictoryDefinition = {
+/** Rules 19–20: the second victory path as first published, on a simple majority. */
+export const SCHEMA20_UNIFICATION_VICTORY: UnificationVictoryDefinition = {
   id: 'victory.unification', name: 'Unification',
   description: 'Hold more than half of all hearths in the world, and your own capital, through the pace’s public response window. Losing the majority or the capital ends the bid; rivals can retake hearths or strike the capital.',
   minimumSettlements: 6,
+};
+/** Rules 21: wider realms make a simple majority too easy, so Unification asks for
+ * a two-thirds hold. It needs no purchase; its window is the pace's project window. */
+export const UNIFICATION_VICTORY: UnificationVictoryDefinition = {
+  id: 'victory.unification', name: 'Unification',
+  description: 'Hold more than two thirds of all hearths in the world, and your own capital, through the pace’s public response window. Losing that hold or the capital ends the bid; rivals can retake hearths or strike the capital.',
+  minimumSettlements: 8,
 };
 
 export function validateProgressionContent(

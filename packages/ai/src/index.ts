@@ -11,6 +11,7 @@ import { planLand } from './land';
 import { recruitmentRoster } from './recruitment';
 import { planRoadAcceleration } from './roads';
 import { settlementSpacing, settlementSiteValue } from './expansion';
+import { isCityState } from '@theandril/sim';
 import { observedCells } from './observation-index';
 
 export { chooseCaptureOption } from './conquest';
@@ -35,7 +36,16 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const oceanScoutReserve = reserveOceanScout(view);
   const pendingFounder = view.armies.some(army => army.factionId === view.factionId && army.formations.some(formation => units.get(formation.unitId)?.canFound)) || view.settlements.some(town => town.factionId === view.factionId && town.queue.some(order => order.itemId === 'unit.colonist'));
   const expansionAffordable = Boolean(view.growth && view.treasury >= view.growth.founding.coinCost + UNITS[0]!.coinCost + view.growth.founding.additionalUpkeep * 6 + 24);
-  const foundingReserve = view.growth && (pendingFounder || expansionAffordable) ? Math.min(Math.max(0, view.treasury - oceanScoutReserve), view.growth.founding.coinCost) : 0;
+  // Protect the whole next hearth — caravan and founding fee — from victory
+  // savings, so a saving realm keeps settling instead of freezing at its
+  // current borders for the rest of the campaign. Within the final tenth of the
+  // project's price the bid comes first: the caravan waits a turn or two rather
+  // than leaving the realm permanently one hearth short of its own victory.
+  const finalProjectGap = view.progression.project.coinCost > 0 && view.treasury >= Math.floor(view.progression.project.coinCost * 9 / 10)
+    && !view.projects.some(project => project.factionId === view.factionId && project.status === 'active');
+  const caravanCost = pendingFounder ? 0 : UNITS[0]!.coinCost;
+  const foundingReserve = !finalProjectGap && view.growth && (pendingFounder || expansionAffordable) ? Math.min(Math.max(0, view.treasury - oceanScoutReserve), view.growth.founding.coinCost + caravanCost) : 0;
+  let caravanPurse = Math.max(0, Math.min(caravanCost, foundingReserve - (view.growth?.founding.coinCost ?? 0)));
   // Save toward the next useful expedition before optional purchases, even
   // below its full funding threshold. Otherwise cheap upgrades repeatedly spend
   // the coins needed to reach that threshold and an inland realm never departs.
@@ -43,7 +53,11 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     && view.productionOptions.some(option => option.settlementId === town.id && option.itemId === building.id && option.canQueue))?.coinCost ?? 0));
   const expeditionSavings = view.growth && view.factionCount > 1 && view.factions.length === 1 && !pendingFounder && !expansionAffordable && view.settlements.some(town => town.factionId === view.factionId)
     ? Math.max(0, view.treasury - oceanScoutReserve - basicBuildingPurse) : 0;
-  const advancement = planProgression(view, foundingReserve + expeditionSavings + oceanScoutReserve);
+  // City-states are independent single-city powers: they keep one hearth, never
+  // open a war and never pursue a public victory. They still build, defend and
+  // answer peace offers through the ordinary commands.
+  const minor = isCityState(view.factionId);
+  const advancement = planProgression(view, foundingReserve + expeditionSavings + oceanScoutReserve, !minor);
   if (advancement.commands.some(command => command.type === 'startVictoryProject')) return advancement;
   const factionId = view.factionId;
   const plans: GameCommand[] = [...advancement.commands];
@@ -86,7 +100,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const militaryCount = formations.filter(formation => !units.get(formation.unitId)?.canFound).length;
   const areaPerFaction = view.width * view.height / Math.max(1, view.factionCount);
   const settlementTarget = areaPerFaction > 12_000 ? 8 : areaPerFaction > 3000 ? 6 : 4;
-  const expand = view.growth ? expansionAffordable : ownSettlements.length < settlementTarget;
+  const expand = minor ? false : view.growth ? expansionAffordable : ownSettlements.length < settlementTarget;
   const formationTarget = ownSettlements.length * 3 + 1;
   const roster = recruitmentRoster(view.factions.find(faction => faction.id === factionId)?.definitionId);
   const rosterCounts = new Map(UNITS.map(unit => [unit.id, formations.filter(formation => formation.unitId === unit.id).length + ownSettlements.reduce((sum, town) => sum + town.queue.filter(order => order.itemId === unit.id).length, 0)]));
@@ -133,9 +147,11 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     // otherwise each new role's upkeep can starve the next caravan indefinitely.
     const missingRole = Boolean(view.growth && recruit && (rosterCounts.get(recruit.id) ?? 0) === 0 && (view.wars.length > 0 || expansionAffordable));
     const item = building ?? (expand && !plannedColonist && canQueue(town.id, UNITS[0]!.id) ? UNITS[0] : militaryCount + plannedMilitary < formationTarget || missingRole ? recruit : undefined);
-    if (item && budget >= item.coinCost) {
+    const caravan = item?.id === UNITS[0]!.id ? Math.min(caravanPurse, item.coinCost) : 0;
+    if (item && budget + caravan >= item.coinCost) {
       plans.push({ type: 'queue', factionId, settlementId: town.id, itemId: item.id });
-      budget -= item.coinCost;
+      caravanPurse -= caravan;
+      budget -= item.coinCost - caravan;
       if (units.has(item.id)) plannedUpkeep += units.get(item.id)!.upkeep;
       if (item.id === 'unit.colonist') plannedColonist = true;
       if (units.has(item.id) && item.id !== 'unit.colonist') { plannedMilitary++; rosterCounts.set(item.id, (rosterCounts.get(item.id) ?? 0) + 1); }
@@ -241,7 +257,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
         const cost = terrain === 2 || terrain === 3 ? 2 : 1;
         return cost <= army.movement && (other.battleDefense?.engagedFormations ?? defenders.reduce((sum, defender) => sum + defender.formations.length, 0)) <= MAX_ARMY_FORMATIONS;
       });
-      if (target && plans.length <= 126) {
+      if (target && plans.length <= 126 && (!minor || wars.has(target.factionId))) {
         if (!wars.has(target.factionId)) {
           plans.push({ type: 'declareWar', factionId, targetFactionId: target.factionId });
           wars.add(target.factionId);
@@ -255,7 +271,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       }
       const town = adjacent.map(cell => townByCell.get(cell)).find(town => town && !protectedIds.has(town.factionId) && !besiegedTowns.has(town.id) &&
         (strengthByCell.get(town.cell) ?? 0) <= army.strength);
-      if (town && plans.length <= 126) {
+      if (town && plans.length <= 126 && (!minor || wars.has(town.factionId))) {
         if (!wars.has(town.factionId)) {
           plans.push({ type: 'declareWar', factionId, targetFactionId: town.factionId });
           wars.add(town.factionId);

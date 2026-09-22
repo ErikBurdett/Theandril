@@ -1,5 +1,19 @@
 # Theandril implementation status
 
+## City-states, wider realms and forty-two-realm maps — rules/save 21, 2026-09-22
+
+**City-states.** Twenty-four chartered single-hearth powers now settle the land between realms, each borrowing one culture's art and roster while keeping its own name, banner colour, motto and lore (`docs/lore/CITY_STATES.md`, a new book in the site's lore library). They found nothing beyond their one hearth, open no wars and pursue no victory, but they build, defend, hold territory and answer peace offers through the ordinary commands. A campaign seats up to twenty-four of them.
+
+**Wider realms.** Founding costs less as a realm grows, civic borders grow in a handful of turns instead of dozens, and administration and territory upkeep are gentler, so realms plant and keep many more hearths. Seats past the authored roster take their own epithet and colour, and the renderer washes their borrowed art in that colour, so a crowded map never shows two identical banners. Campaigns seat up to forty-two realms plus their city-states.
+
+**Save compatibility.** A genuine rules-20 save and its 1,192-order archive from deployed `c7089f1` load, re-seal to identical v20 bytes, replay exactly, re-seal into a v21 envelope and continue. Rules 19–20 content is frozen as `3127e431`; historical envelopes refuse city-states.
+
+**Balance.** Standard/12 + 8 city-states now ends on turn 199 (Standard), 303 (Long) and 447 (Epic); tiny Epic runs 398. The map is painted by the end: 42 realms and 12 city-states claim 88% of the standard map's land by turn 193, and the Epic twelve-realm campaign reaches 89%. Unification now needs two thirds of the world's hearths and at least eight.
+
+**Fixed.** The growth panel quoted founding and upkeep at rules-16 prices while the turn charged rules-21 prices. The AI could also reserve more coin for its victory project than it actually had free, cancelling the caravan and hull it had already protected.
+
+**Verification.** 1,798 tests pass; browser journeys pass.
+
 ## Sieges eat stored food — rules/save 20, 2026-09-22
 
 **The change.** A blockaded town's food yield is cut off while its people keep eating, so siege supplies now count the whole turns its actual food store lasts. Only when the store is empty does the militia lose morale each turn. Well-fed, developed towns hold out longer. Attackers choose between an early assault on a high-morale garrison and starving it out. The siege panel shows "Food stores: N turns". Defenses still fall over three turns. Historical rules keep the fixed three-turn count, and older envelopes refuse stores above 3.

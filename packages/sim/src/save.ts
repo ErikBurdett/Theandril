@@ -1,5 +1,6 @@
 import { battleDevelopmentSchema, battleDevelopmentEffects } from './combat/development-snapshot';
 import { sortedExploredCells } from './canonical-cells';
+import { isCityState, legalFactionColors } from './seats';
 import { sealBattleReport, sealedProjection } from './battle-record';
 import { selectDefendingArmies } from './battle-frontage';
 import { isHull } from './combat/individual';
@@ -27,9 +28,11 @@ import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 20;
+export const SAVE_VERSION = 21;
 /** Rules 18 content, before rules 19 added the Unification victory. */
 export const PRE_UNIFICATION_CONTENT_HASH = '98b97bba';
+/** Rules 19–20 content, before rules 21 added the city-state roster. */
+export const PRE_CITY_STATE_CONTENT_HASH = '3127e431';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -167,8 +170,18 @@ const stateV18Schema = stateV17Schema.extend({ world: worldV18Schema }).strict()
 /** Rules 19 records Unification bids beside Prosperity projects on the public ledger. */
 const stateV19Schema = stateV18Schema.extend({ projects: z.array(victoryProjectSchema).max(96), victory: victoryV19Schema.nullable() }).strict();
 /** Rules 20 measures siege supplies in turns of stored food. */
-const stateSchema = stateV19Schema.extend({ sieges: z.array(siegeV20Schema).max(30_000) }).strict();
-const saveSchema = z.object({ version: z.literal(20), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const stateV20Schema = stateV19Schema.extend({ sieges: z.array(siegeV20Schema).max(30_000) }).strict();
+/** Rules 21 seats up to 42 realms plus independent city-states. */
+export const MAX_FACTIONS = 64;
+const stateSchema = stateV20Schema.extend({
+  world: worldV18Schema.extend({ starts: z.array(cell).min(1).max(MAX_FACTIONS) }).strict(),
+  factions: z.array(factionSchema.extend({ treasury: z.number().int().nonnegative().safe(), knowledge: z.number().int().nonnegative().safe() }).strict()).min(1).max(MAX_FACTIONS),
+  explored: z.array(z.object({ factionId: id, cells: z.array(cell).max(350_000) }).strict()).min(1).max(MAX_FACTIONS),
+  progression: z.array(z.object({ factionId: id, ...factionProgressionSchema.shape }).strict()).min(1).max(MAX_FACTIONS),
+  projects: z.array(victoryProjectSchema).max(MAX_FACTIONS * 2), victory: victoryV19Schema.nullable(),
+}).strict();
+const saveSchema = z.object({ version: z.literal(21), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV20Schema = saveSchema.extend({ version: z.literal(20), state: stateV20Schema }).strict();
 const saveV19Schema = saveSchema.extend({ version: z.literal(19), state: stateV19Schema }).strict();
 const saveV18Schema = saveSchema.extend({ version: z.literal(18), state: stateV18Schema }).strict();
 const saveV17Schema = saveSchema.extend({ version: z.union([z.literal(16), z.literal(17)]), state: stateV17Schema }).strict();
@@ -360,6 +373,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
   if (version < 19) assertNoUnification(state);
   const latest = canonicalPayload(state);
@@ -433,6 +447,10 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
 export function serializeGame(state: GameState): string {
   return serializeGameForVersion(state, SAVE_VERSION);
 }
+function assertHistoricalSeats(state: GameState): void {
+  if (state.factions.length > 48) throw new Error('This campaign seats more realms than historical rules allow.');
+  if (state.factions.some(faction => isCityState(faction.id))) throw new Error('This campaign has city-states unavailable in historical rules.');
+}
 function assertHistoricalSieges(state: GameState): void {
   if (Object.values(state.sieges).some(siege => siege.supplies > 3)) throw new Error('This campaign has siege stores unavailable in historical rules.');
 }
@@ -441,8 +459,10 @@ function assertNoUnification(state: GameState): void {
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
-  if (version >= 19) return CONTENT_HASH;
+  if (version >= 21) return CONTENT_HASH;
+  if (version >= 19) return PRE_CITY_STATE_CONTENT_HASH;
   assertNoUnification(state);
   if (version >= 18) return PRE_UNIFICATION_CONTENT_HASH;
   if (state.world.generatorVersion > 7) throw new Error('This campaign has geography unavailable in historical rules.');
@@ -675,8 +695,13 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   if (version === 15) return migrateV15(saveV15Schema.parse(raw));
   // Versions 16 and 17 share canonical fields and content; rules 18 changes
   // pacing content only, so their states continue unchanged under the new pack.
-  // Rules 20 changes siege semantics only; content and a v19 state are unchanged.
-  if (version === 19) return { ...saveV19Schema.parse(raw), version: SAVE_VERSION };
+  // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
+  // under the newer pack, which only adds the city-state roster.
+  if (version === 20 || version === 19) {
+    const prior = version === 20 ? saveV20Schema.parse(raw) : saveV19Schema.parse(raw);
+    assert(prior.contentHash === PRE_CITY_STATE_CONTENT_HASH, `v${version} content hash is not a recognized compatible pack`);
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   if (version === 18) {
     const prior = saveV18Schema.parse(raw);
     assert(prior.contentHash === PRE_UNIFICATION_CONTENT_HASH, 'v18 content hash is not a recognized compatible pack');
@@ -730,7 +755,9 @@ export function deserializeGame(text: string): GameState {
     const definition = definitions.get(faction.definitionId);
     assert(definition, 'unknown faction definition');
     assert(rosterIds.includes(faction.definitionId), 'faction definition is absent from the saved roster');
-    assert(faction.color === definition.color, 'faction color differs from content');
+    // A seat flies its culture's colour, its own rules-21 variant colour, or — for a city-state — its chartered colour.
+    assert(legalFactionColors(faction).includes(faction.color), 'faction color differs from its seat');
+    assert(!isCityState(faction.id) || originalVersion >= 21, 'city-states need a rules-21 envelope');
   }
   const unitById = new Map(UNITS.map(unit => [unit.id, unit]));
   const progression = Object.fromEntries(data.progression.map(({ factionId, ...progress }) => [factionId, progress]));

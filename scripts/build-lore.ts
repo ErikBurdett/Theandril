@@ -45,6 +45,7 @@ export async function buildLoreLibrary(): Promise<LoreLibrary> {
     { id: 'foundations', title: 'Foundations', documents: [await documentFrom('docs/lore/FOUNDATIONS.md')] },
     { id: 'faction-bible', title: 'Faction Bible', documents: [bible] },
     { id: 'cohort-notes', title: 'Cohort Notes', documents: [await documentFrom('docs/lore/FACTION_COHORT_12.md')] },
+    { id: 'city-states', title: 'City-States', documents: [await documentFrom('docs/lore/CITY_STATES.md')] },
   ], factionAnchors: factionAnchors(bible.blocks) };
 }
 

@@ -49,6 +49,7 @@ test('R23 repeated public loads and cross-size imports retain one responsive map
     await page.getByRole('textbox', { name: 'World seed', exact: true }).fill('20260909');
     await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('small');
     await page.getByRole('spinbutton', { name: 'Faction count', exact: true }).fill('12');
+    await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
     await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
     await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
     const canvas = await page.locator('canvas').elementHandle();

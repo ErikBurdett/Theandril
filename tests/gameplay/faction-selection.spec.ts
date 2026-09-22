@@ -9,6 +9,7 @@ test('a selected new culture owns the actual player seat and persists through sa
   await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('tiny');
   await page.getByRole('spinbutton', { name: 'Faction count', exact: true }).fill('6');
   await page.getByRole('combobox', { name: 'Campaign pace', exact: true }).selectOption('short');
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: /Begin campaign/ }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
   expect(await page.evaluate(() => { const view = window.__THEANDRIL__!.getSummary()!; return view.factions.find(item => item.id === view.factionId)?.definitionId; })).toBe('faction.iron_covenant');

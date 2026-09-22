@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { isCityState } from '@theandril/sim';
 import type { GameCommand, Observation, PeaceAssessment, PeaceTerms } from '@theandril/sim';
 import { FactionArt } from './faction-art';
 
@@ -72,6 +73,7 @@ export function FactionEncounters({ view, busy, stateHash, issue, review }: { vi
       const atWar = view.wars.includes(faction.id);
       return <div className="faction-encounter" key={faction.id}>
         <div className="faction-art-heading"><FactionArt contentId="ui.badge" definitionId={faction.definitionId} label={`${faction.name} badge`}/><strong>{faction.name}</strong></div>
+        {isCityState(faction.id) && <small className="field-help" data-testid={`city-state-${faction.id}`}>City-state — one independent hearth. It keeps to its own walls and never opens a war.</small>}
         {atWar ? <><span className="war-state">⚔ At war</span><button disabled={blocked} aria-label={`Negotiate peace with ${faction.name}`} onClick={() => setNegotiating(faction.id)}>Negotiate peace</button></>
           : <><span className="peace-state">{treaty ? `Truce until turn ${treaty.expiresTurn}` : 'At peace'}</span><button disabled={blocked || Boolean(treaty)} aria-label={`Declare war on ${faction.name}`} onClick={() => issue({ type: 'declareWar', factionId: view.factionId, targetFactionId: faction.id })}>Declare war</button></>}
       </div>;

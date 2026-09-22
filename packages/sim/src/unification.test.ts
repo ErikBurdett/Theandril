@@ -10,8 +10,8 @@ const window = CAMPAIGN_PACES.short.projectActiveTurns;
 describe('Unification victory (rules 19)', () => {
   it('opens a public bid at the capital and wins after holding the majority through the window', () => {
     const state = unificationCampaign(), player = state.turnOwnerId, rival = state.factions[1]!.id;
-    expect(getObservation(state, player).progression.unification).toMatchObject({ held: 6, total: 7, minimum: 6, blockers: [] });
-    expect(getObservation(state, rival).progression.unification!.blockers).toEqual(expect.arrayContaining([expect.stringContaining('more than half')]));
+    expect(getObservation(state, player).progression.unification).toMatchObject({ held: 8, total: 9, minimum: 8, blockers: [] });
+    expect(getObservation(state, rival).progression.unification!.blockers).toEqual(expect.arrayContaining([expect.stringContaining('more than two thirds')]));
     endTurn(state);
     expect(bid(state)).toMatchObject({ factionId: player, settlementId: state.land.capitals[player], status: 'active', progress: 0, requiredTurns: window });
     // The bid and its location are public to rivals.
@@ -30,7 +30,7 @@ describe('Unification victory (rules 19)', () => {
     endTurn(lost);
     for (const town of Object.values(lost.settlements).filter(town => town.factionId === lost.turnOwnerId && town.id !== lost.land.capitals[lost.turnOwnerId]).slice(0, 3)) town.factionId = rival;
     endTurn(lost);
-    expect(bid(lost)).toMatchObject({ status: 'cancelled', statusReason: 'The realm no longer holds a majority of hearths; the unification bid ended.' });
+    expect(bid(lost)).toMatchObject({ status: 'cancelled', statusReason: 'The realm no longer holds two thirds of the world’s hearths; the unification bid ended.' });
     expect(lost.victory).toBeNull();
 
     const fallen = unificationCampaign();

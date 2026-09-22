@@ -97,7 +97,7 @@ async function handle(request: Request): Promise<void> {
     if (request.type === 'new') {
       send({ id: request.id, type: 'progress', message: 'Raising continents and finding a place for the first hearth…' });
       const started = performance.now();
-      const generated = createGame({ seed: request.seed, size: request.size, factionCount: request.factionCount ?? 4, pace: request.pace, ...(request.factionDefinitionId ? { factionDefinitionId: request.factionDefinitionId } : {}), ...(request.layout ? { layout: request.layout } : {}) });
+      const generated = createGame({ seed: request.seed, size: request.size, factionCount: request.factionCount ?? 4, ...(request.cityStateCount ? { cityStateCount: request.cityStateCount } : {}), pace: request.pace, ...(request.factionDefinitionId ? { factionDefinitionId: request.factionDefinitionId } : {}), ...(request.layout ? { layout: request.layout } : {}) });
       const record = createJournal(generated, { mode: request.mode });
       state = generated; journal = record; chronicles = undefined; recordingFailed = false; queryObservation = undefined;
       metrics.generationMs = performance.now() - started;

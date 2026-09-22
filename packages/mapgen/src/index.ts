@@ -78,6 +78,10 @@ export function mapSizeOf(width: number, height: number, generatorVersion: Gener
 export const RECOMMENDED_FACTION_COUNTS: Readonly<Record<MapSize, number>> = {
   tiny: 4, small: 8, standard: 12, huge: 16, legendary: 20,
 };
+/** New-campaign defaults for independent city-states, which fill the land between realms. */
+export const RECOMMENDED_CITY_STATES: Readonly<Record<MapSize, number>> = {
+  tiny: 2, small: 5, standard: 8, huge: 11, legendary: 14,
+};
 export function recommendedFactionCount(size: MapSize): number {
   if (!Object.hasOwn(RECOMMENDED_FACTION_COUNTS, size)) throw new RangeError('Unknown map size.');
   return RECOMMENDED_FACTION_COUNTS[size];
@@ -465,8 +469,8 @@ export function generateWorld(seed: number, size: MapSize, factionCount: number,
   if (!Number.isSafeInteger(seed)) throw new RangeError('Seed must be a safe integer.');
   if (!Object.hasOwn(MAP_DIMENSIONS, size)) throw new RangeError('Unknown map size.');
   if (!isGeneratorVersion(generatorVersion)) throw new RangeError('Unknown generator version.');
-  if (!Number.isInteger(factionCount) || factionCount < 1 || factionCount > 48) {
-    throw new RangeError('Faction count must be an integer between 1 and 48.');
+  if (!Number.isInteger(factionCount) || factionCount < 1 || factionCount > (generatorVersion >= 8 ? 64 : 48)) {
+    throw new RangeError('Faction count must be an integer within the generator\'s seat limit.');
   }
   if (!options || typeof options !== 'object' || Array.isArray(options) || Object.keys(options).some(key => key !== 'layout') ||
     (options.layout !== undefined && !V8_LAYOUTS.includes(options.layout))) throw new RangeError('Unknown world layout.');

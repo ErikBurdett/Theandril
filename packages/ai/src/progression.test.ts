@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { applyCommand, createGame, deserializeGame, getObservation, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
-import { CAMPAIGN_PACES, PROSPERITY_PROJECT } from '@theandril/content';
+import { CAMPAIGN_PACES, PROSPERITY_PROJECT, UNITS } from '@theandril/content';
 import { prosperityCampaign, PROSPERITY_FIXTURE } from '../../test-fixtures/src/victory-fixture';
 import { planTurn, planTurnWithReasons } from './index';
 import { assessProjectHosts, MAX_PROJECT_HOSTS, planProgression } from './progression';
@@ -83,6 +83,8 @@ test('AI protects its project fund instead of endlessly spending on recruitment'
   issue(state, { type: 'adoptInstitution', factionId: state.turnOwnerId, institutionId: 'institution.common_stewardship' });
   state.factions[0]!.treasury = PROSPERITY_PROJECT.coinCost - 1;
   const plan = planTurnWithReasons(getObservation(state, state.turnOwnerId));
+  // Inside the project's final funding gap even the protected caravan waits, so nothing is
+  // recruited, no doctrine is bought and no premature bid opens.
   expect(plan.commands.some(command => command.type === 'queue' || command.type === 'adoptDoctrine' || command.type === 'startVictoryProject')).toBe(false);
   expect(plan.reasons.join(' ')).toContain('Reserve coin');
   for (const command of plan.commands) issue(state, command);
@@ -105,7 +107,10 @@ test('AI uses the scaled project fund and keeps an operating purse during a long
   expect(development.commands.some(command => command.type === 'queue' && command.itemId === 'unit.colonist')).toBe(true);
   const before = state.factions[0]!.treasury;
   for (const command of development.commands) issue(state, command);
-  expect(before - state.factions[0]!.treasury).toBeLessThanOrEqual(24);
+  // Rules 21 protects the next caravan as well, so a saving realm keeps settling; the bounded
+  // operating purse still covers everything else it buys that turn.
+  const caravan = UNITS.find(unit => unit.id === 'unit.colonist')!.coinCost;
+  expect(before - state.factions[0]!.treasury).toBeLessThanOrEqual(24 + caravan);
   expect(development.reasons.join(' ')).toContain('/' + CAMPAIGN_PACES.epic.projectCoinCost);
   state.factions[0]!.treasury = CAMPAIGN_PACES.epic.projectCoinCost - 1;
   const nearFinish = planTurn(getObservation(state, state.turnOwnerId));

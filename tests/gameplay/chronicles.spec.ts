@@ -13,6 +13,7 @@ test('AI watch plays a whole generated campaign, survives a save, and binds both
   await page.getByLabel('World size').selectOption('tiny');
   await page.getByLabel('Campaign pace').selectOption('short');
   await page.getByLabel('Campaign mode').selectOption('watch');
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('watch-controls')).toContainText('AI watch paused');
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeDisabled();
@@ -38,7 +39,7 @@ test('AI watch plays a whole generated campaign, survives a save, and binds both
   await expect(page.getByTestId('victory-result')).toContainText('achieved Prosperity');
   const finalHash = await page.evaluate(() => window.__THEANDRIL__?.getStateHash());
   const victory = await page.evaluate(() => window.__THEANDRIL__?.getSummary()?.victory);
-  expect(victory?.turn).toBe(54); // Current rules-18 AI on generator 8; genuine historical archive seals remain separately tested.
+  expect(victory?.turn).toBe(55); // Current rules-21 AI on generator 8; genuine historical archive seals remain separately tested.
   await dialog.getByLabel('History chapter', { exact: true }).selectOption('1');
   await expect(page.getByTestId('history-chapter')).toContainText('was founded');
   await page.screenshot({ path: testInfo.outputPath('history-tome.png'), fullPage: true });
@@ -101,7 +102,7 @@ test('a human researches, adopts distinct policies, starts a public project and 
   await progression.getByRole('button', { name: 'Adopt March columns', exact: true }).click();
   await expect(progression.getByRole('button', { name: 'Adopt Shield cohesion', exact: true })).toBeDisabled();
   await progression.getByRole('tab', { name: 'Victory', exact: true }).click();
-  await expect(progression.getByTestId('unification-status')).toContainText('Hold at least 6 hearths (you hold 3).');
+  await expect(progression.getByTestId('unification-status')).toContainText('Hold at least 8 hearths (you hold 3).');
   await progression.getByLabel('Project settlement').selectOption('settlement.5');
   await progression.getByRole('button', { name: 'Start Hearth Exchange', exact: true }).click();
   await expect(progression.getByTestId('public-projects')).toContainText('active · 0/5');

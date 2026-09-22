@@ -24,7 +24,9 @@ export function settlementSpacing(view: Observation, cell: number): number {
   }
   const claims = nearest ? context.claims.get(nearest.id) ?? 7 : 7;
   const fertility = context.cells.get(cell)?.fertility ?? 50;
-  return Math.max(3, 2 + Math.ceil(Math.sqrt(Math.max(claims / 3, nearest?.population ?? 1))) + Number(fertility < 40) - Number(fertility >= 75));
+  // Settle a hex further apart than the legal minimum: civic borders fill the
+  // gaps, so a realm paints connected territory instead of a tight cluster.
+  return Math.max(4, 3 + Math.ceil(Math.sqrt(Math.max(claims / 3, nearest?.population ?? 1))) + Number(fertility < 40) - Number(fertility >= 75));
 }
 export function settlementSiteValue(view: Observation, cell: number): number {
   const desired = settlementSpacing(view, cell);

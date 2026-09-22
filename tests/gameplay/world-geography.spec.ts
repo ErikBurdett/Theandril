@@ -21,6 +21,7 @@ async function begin(page: Page, mode: 'watch' | 'player', layout: Exclude<MapLa
   await page.getByRole('combobox', { name: 'Map type', exact: true }).selectOption(layout);
   await page.getByRole('combobox', { name: 'Campaign pace', exact: true }).selectOption('short');
   await page.getByRole('combobox', { name: 'Campaign mode', exact: true }).selectOption(mode);
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getPerformanceCounters().frameCount ?? 0)).toBeGreaterThan(2);

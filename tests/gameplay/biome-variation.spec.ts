@@ -135,6 +135,7 @@ test('generated watched terrain retains variants, fog privacy and exact river jo
   await page.getByRole('textbox', { name: 'World seed', exact: true }).fill('74');
   await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('tiny');
   await page.getByRole('combobox', { name: 'Campaign mode', exact: true }).selectOption('watch');
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__?.getArtDiagnostics()?.state)).toBe('ready');

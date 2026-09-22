@@ -18,6 +18,7 @@ test('world-size recommendations expose generated seats honestly and a chosen fa
   await count.fill('1'); expect(await count.evaluate(element => (element as HTMLInputElement).validity.rangeUnderflow)).toBe(true);
   await count.fill('49'); expect(await count.evaluate(element => (element as HTMLInputElement).validity.rangeOverflow)).toBe(true);
   await size.selectOption('tiny'); await count.fill('6');
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
   await expect(page.getByTestId('campaign-faction-count')).toHaveText('6 realms');
@@ -39,6 +40,7 @@ test('the recorded Standard Long seed with recommended density makes real factio
   await expect(page.getByRole('spinbutton', { name: 'Faction count', exact: true })).toHaveValue(String(RECOMMENDED_FACTION_COUNTS.standard));
   await page.getByRole('combobox', { name: 'Campaign pace', exact: true }).selectOption('long');
   await page.getByRole('combobox', { name: 'Campaign mode', exact: true }).selectOption('watch');
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
   await page.getByRole('button', { name: 'Resume AI watch', exact: true }).click();

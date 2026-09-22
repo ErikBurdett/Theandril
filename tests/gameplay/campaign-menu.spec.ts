@@ -10,6 +10,7 @@ async function begin(page: Page) {
   await page.getByRole('textbox', { name: 'World seed', exact: true }).fill('20260905');
   await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('tiny');
   await page.getByRole('combobox', { name: 'Campaign pace', exact: true }).selectOption('short');
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
@@ -259,6 +260,7 @@ test('new campaign generation can be cancelled without losing the existing worke
   });
   try {
     await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('legendary');
+    await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
     await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
     await requested;
     if (await menu(page).getAttribute('open') === null) await summary(page).click();

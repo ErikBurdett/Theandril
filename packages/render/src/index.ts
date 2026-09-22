@@ -59,6 +59,13 @@ export interface RenderMetrics {
 }
 
 /** Only explored cells enter this view. Viewport work is bounded by visible chunks. */
+/** A light wash of the seat's colour: it recolours borrowed art without hiding
+ * its pixels, since a multiply tint only darkens. */
+export function borrowedArtTint(color: number): number {
+  const mix = (channel: number) => Math.round(255 - (255 - channel) * .45);
+  return (mix((color >> 16) & 255) << 16) | (mix((color >> 8) & 255) << 8) | mix(color & 255);
+}
+
 export class WorldRenderer {
   private app = new Application();
   private world = new Container({ eventMode: 'none' });
@@ -93,6 +100,10 @@ export class WorldRenderer {
   private settlementCells = new Set<number>();
   private factionColors = new Map<string, number>();
   private factionDefinitions = new Map<string, string>();
+  /** Seats that reuse another culture's art — repeated cultures and city-states —
+   * wear their own colour so a crowded map never shows two identical banners.
+   * Authored cultures keep their approved pixels untouched. */
+  private factionTints = new Map<string, number>();
   private enemyFactions = new Set<string>();
   private labelPool: Text[] = [];
   private stackBadgePool: Text[] = [];
@@ -271,6 +282,8 @@ export class WorldRenderer {
     this.settlementCells = new Set([...observation.settlements.map(settlement => settlement.cell), ...observation.ruins.map(ruin => ruin.cell)]);
     this.factionColors = new Map(observation.factions.map(faction => [faction.id, faction.color]));
     this.factionDefinitions = new Map(observation.factions.map(faction => [faction.id, faction.definitionId]));
+    this.factionTints = new Map(observation.factions.filter(faction => faction.id !== faction.definitionId)
+      .map(faction => [faction.id, borrowedArtTint(faction.color)]));
     this.enemyFactions = new Set(observation.wars);
     for (const entity of [...observation.settlements.map(item => ({ ...item, settlement: true })), ...observation.armies.filter(mapArmyVisible).map(item => ({ ...item, formationCount: observedFormationCount(item), settlement: false })), ...observation.ruins.map(item => ({ id: item.id, cell: item.cell, name: item.name, factionId: '', settlement: false, ruin: true }))]) {
       const key = this.chunkKey(entity.cell);
@@ -758,7 +771,7 @@ export class WorldRenderer {
         if (this.art && selectedArt.warning) warnings.add(selectedArt.warning);
         const formationCount = entity.settlement || entity.ruin ? null : entity.formationCount ?? 1;
         const representatives = armyRepresentatives(formationCount ?? 1, far);
-        this.visibleEntityArt.push({ entityId: entity.id, factionId: entity.factionId, definitionId: definitionId ?? null, role: contentId, assetId: artFrame?.asset.id ?? null, presentation: naval && !artFrame ? `procedural-${navalMarker(contentId)}` : selectedArt.presentation, nativeWidth: artFrame?.asset.nativeResolution.width ?? null, nativeHeight: artFrame?.asset.nativeResolution.height ?? null, tint: artFrame ? 0xffffff : null, formationCount, representativeCount: artFrame ? representatives.length : 1, stackArmyCount: group.armyCount, stackFormationCount: group.formationCount });
+        this.visibleEntityArt.push({ entityId: entity.id, factionId: entity.factionId, definitionId: definitionId ?? null, role: contentId, assetId: artFrame?.asset.id ?? null, presentation: naval && !artFrame ? `procedural-${navalMarker(contentId)}` : selectedArt.presentation, nativeWidth: artFrame?.asset.nativeResolution.width ?? null, nativeHeight: artFrame?.asset.nativeResolution.height ?? null, tint: artFrame ? this.factionTints.get(entity.factionId) ?? 0xffffff : null, formationCount, representativeCount: artFrame ? representatives.length : 1, stackArmyCount: group.armyCount, stackFormationCount: group.formationCount });
         if (artFrame) {
           const baseOffset = entityOffset;
           const bx = x + baseOffset, by = y + baseOffset;
@@ -792,7 +805,7 @@ export class WorldRenderer {
               const right = Math.max(bx + r, sprite.x + (1 - sprite.anchor.x) * sprite.width), bottom = Math.max(by + r, sprite.y + (1 - sprite.anchor.y) * sprite.height);
               this.markerHitTargets.push({ cell: entity.cell, entityId: entity.id, x: left, y: top, width: right - left, height: bottom - top });
             }
-            sprite.tint = 0xffffff; sprite.alpha = 1; sprite.visible = true; sprite.roundPixels = true;
+            sprite.tint = this.factionTints.get(entity.factionId) ?? 0xffffff; sprite.alpha = 1; sprite.visible = true; sprite.roundPixels = true;
             if (selected) selectionTargets.push({ entityId: entity.id, factionId: entity.factionId, color, sprite });
             this.visibleAssetIds.add(artFrame.asset.id); figures++;
             if (!this.reducedMotion && zoom >= 1.2 && artFrame.asset.clips.some(clip => clip.state === 'idle' && clip.frames.length > 1)) this.visibleAnimations.push({ sprite, contentId: selectedArt.contentId!, phase: Number(entity.id.split('.').at(-1) ?? 0) * 37 + index * 113, frameId: artFrame.frameId });

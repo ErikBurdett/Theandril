@@ -3,8 +3,8 @@ import { createDevelopmentState, developmentCommandSchema, chooseDevelopment, ge
 import { settlementGrowthFood, settlementFoodConsumption, foundingCoinCost, settlementCivicUpkeep, getGrowthObservation } from './growth-economy';
 import { z } from 'zod';
 import { accelerateRoad, accelerateRoadSchema, advanceRoads, emptyRoadState, observeRoads, reconcileRoads, roadMovementCost } from './roads';
-import { BUILDINGS, FACTIONS, FACTION_ROSTERS, ROSTER_VERSION, UNIFICATION_VICTORY, UNITS, campaignPaceSchema, factionRoster, rosterVersionSchema } from '@theandril/content';
-import { GENERATOR_VERSION, MAP_TYPES, generateWorld, isPassable, neighbors, type WorldLayout } from '@theandril/mapgen';
+import { BUILDINGS, CITY_STATES, FACTIONS, FACTION_ROSTERS, ROSTER_VERSION, UNIFICATION_VICTORY, UNITS, variantFactionColor, variantFactionName, campaignPaceSchema, factionRoster, rosterVersionSchema } from '@theandril/content';
+import { GENERATOR_VERSION, MAP_TYPES, SeededRandom, generateWorld, isPassable, neighbors, type WorldLayout } from '@theandril/mapgen';
 import type { Army, CommandResult, DomainEvent, GameState, NewGameOptions, Observation, PhaseObserver, Settlement } from './types';
 import { cellsWithin, indexes, rebuildIndexes, updateSight, upgradeLandVisibility } from './visibility';
 import { cloneCampaignBattle, declareCampaignWar, resolveCampaignBattle, settleCampaignAbility, startCampaignBattle } from './warfare';
@@ -17,6 +17,8 @@ import { armyCanFound, effectiveArmyMovement, armySight, armyUpkeep, createArmyF
 import { armyTerrainBlocker, carriedArmyBlocker, disembarkArmy, embarkArmy, moveFleetCargo, navalLaunchCell, observeProductionOptions, productionRequirementBlocker } from './naval';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './rules';
 import { factionStarts } from './faction-starts';
+import { MAX_FACTIONS } from './save';
+import { isCityState } from './seats';
 import { sortedExploredCells } from './canonical-cells';
 import { applyLandCommand, emptyLandState, getLandObservation, handleLandCapture, initializeSettlementLand, landCommandSchemas, landCommandV15Schemas, observeLandCell, refreshLandKnowledge, resolveLandTurn, settlementLandYield, type LandDetails } from './territory';
 import { advanceCharacters, armyHasCharacterMission, assignCharacter, cancelCharacterMission, characterUpkeep, getCharacterObservation, observeCommanderAbilities, promoteCharacter, recruitCharacter, reconcileCharacterMissions, removeArmyCharacters, startCharacterMission, unassignCharacter, useCommanderAbility } from './characters';
@@ -125,19 +127,23 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20)]).default(20),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21)]).default(21),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
-    factionCount: z.number().int().min(1).max(48).default(4),
+    factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
     factionDefinitionId: z.string().refine(id => FACTIONS.some(faction => faction.id === id), 'Unknown faction culture').optional(),
     pace: campaignPaceSchema.default('standard'),
     generatorVersion: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8)]).optional(),
     layout: z.enum(MAP_TYPES.map(type => type.id) as [WorldLayout, ...WorldLayout[]]).optional(),
     rosterVersion: rosterVersionSchema.default(ROSTER_VERSION),
+    cityStateCount: z.number().int().min(0).max(CITY_STATES.length).default(0),
   }).strict().parse(options);
   // Historical rules default to the last generator they can represent.
   const generatorVersion = checked.generatorVersion ?? (checked.rulesVersion < 18 ? 7 : GENERATOR_VERSION);
   if (checked.rulesVersion < 18 && generatorVersion > 7) throw new Error('Generator 8 worlds require rules 18.');
+  if (checked.rulesVersion < 21 && checked.factionCount > 48) throw new Error('Historical rules seat at most 48 realms.');
+  if (checked.rulesVersion < 21 && checked.cityStateCount > 0) throw new Error('City-states require rules 21.');
+  if (checked.factionCount + checked.cityStateCount > MAX_FACTIONS) throw new Error(`A campaign seats at most ${MAX_FACTIONS} realms and city-states.`);
   // Physical generation never implicitly changes the roster used by a saved origin.
   const catalog = factionRoster(checked.rosterVersion);
   if (checked.factionDefinitionId) {
@@ -145,14 +151,29 @@ export function createGame(options: NewGameOptions): GameState {
     if (chosen < 0) throw new Error('That culture is unavailable to this historical roster.');
     catalog.unshift(...catalog.splice(chosen, 1));
   }
-  const selected = Array.from({ length: checked.factionCount }, (_, index) => {
+  // Rules 21: realms beyond the authored cultures reuse their art under their own
+  // name and colour, so a crowded map never shows two identical banners.
+  const namedSeats = checked.rulesVersion >= 21;
+  const selected: { id: string; definitionId: string; name: string; color: number }[] = Array.from({ length: checked.factionCount }, (_, index) => {
     const base = catalog[index % catalog.length];
     if (!base) throw new Error('No faction definitions are available');
-    return { ...base, definitionId: base.id, id: index < catalog.length ? base.id : `${base.id}.${index + 1}`, name: index < catalog.length ? base.name : `${base.name} ${index + 1}` };
+    const variant = Math.floor(index / catalog.length);
+    if (variant === 0) return { ...base, definitionId: base.id, id: base.id, name: base.name, color: base.color };
+    return { ...base, definitionId: base.id, id: `${base.id}.${index + 1}`,
+      name: namedSeats ? variantFactionName(base.name, variant) : `${base.name} ${index + 1}`,
+      color: namedSeats ? variantFactionColor(base.color, index + 1) : base.color };
   });
+  // City-states are independent single-city powers. They borrow a culture's art
+  // and roster; their seat carries their own name, colour and lore.
+  const pool = [...CITY_STATES];
+  const picker = new SeededRandom(checked.seed ^ 0x43495459);
+  const cityStates = Array.from({ length: checked.cityStateCount }, () => pool.splice(picker.nextInt(pool.length), 1)[0]!)
+    .sort((a, b) => a.id < b.id ? -1 : 1)
+    .map(item => ({ definitionId: item.cultureId, id: item.id, name: item.name, color: item.color }));
+  selected.push(...cityStates);
   const owner = selected[0];
   if (!owner) throw new Error('A campaign requires a player faction');
-  const world = generateWorld(checked.seed, checked.size, checked.factionCount, generatorVersion, checked.layout ? { layout: checked.layout } : {});
+  const world = generateWorld(checked.seed, checked.size, selected.length, generatorVersion, checked.layout ? { layout: checked.layout } : {});
   world.starts = factionStarts(world, selected.map(faction => faction.definitionId));
   const state: GameState = {
     resources: createResources(world, selected.map(faction => faction.id), checked.rulesVersion >= 16 ? 1 : 0),
@@ -171,7 +192,8 @@ export function createGame(options: NewGameOptions): GameState {
     const cell = world.starts[i];
     if (cell === undefined) throw new Error('World is missing a faction start');
     state.explored[faction.id] = new Set();
-    for (const unitId of ['unit.colonist', 'unit.scout']) {
+    // A city-state opens its gates with a guard instead of a scout: it settles where it stands.
+    for (const unitId of isCityState(faction.id) ? ['unit.colonist', 'unit.guard'] : ['unit.colonist', 'unit.scout']) {
       const definition = units.get(unitId);
       if (!definition) throw new Error('Missing starting unit');
       const id = `army.${state.nextId++}`;

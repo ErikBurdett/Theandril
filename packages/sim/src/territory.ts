@@ -194,11 +194,12 @@ function townBlocker(state: GameState, town: Settlement | undefined, factionId: 
 function paused(state: GameState, town: Settlement): string | null {
   return state.sieges[town.id] ? 'The settlement is under siege.' : town.occupationTurns ? 'The settlement is occupied.' : null;
 }
-const borderGrowthThreshold = (land: SettlementLand): number => 12 + 4 * land.claimed.length;
+/** Rules 21 widens realms: each further hex of civic boundary costs less progress. */
+const borderGrowthThreshold = (land: SettlementLand, version: number): number => version >= 21 ? 4 + Math.ceil(land.claimed.length / 2) : 12 + 4 * land.claimed.length;
 /** Modern claims inspect their maintained boundary, never a growing radius disk. */
 export function borderExpansionObservation(state: GameState, town: Settlement): BorderExpansionObservation {
   const land = state.land.settlements[town.id]!;
-  const threshold = borderGrowthThreshold(land);
+  const threshold = borderGrowthThreshold(land, rulesVersion(state));
   const base = { progress: land.borderGrowth, threshold, rate: 0, nextCell: null };
   if (rulesVersion(state) < 11) return { ...base, blocker: 'Automatic border growth is unavailable under these historical rules.' };
   const blocked = townBlocker(state, town, town.factionId);
@@ -564,7 +565,7 @@ export function validateLand(state: GameState): void {
   const claims = new Map<number, string>();
   for (const [id, land] of Object.entries(state.land.settlements)) {
     const town = state.settlements[id]!;
-    requireLand(rulesVersion(state) >= 16 || land.borderGrowth < borderGrowthThreshold(land), 'border progress must remain below its current expansion threshold');
+    requireLand(rulesVersion(state) >= 16 || land.borderGrowth < borderGrowthThreshold(land, rulesVersion(state)), 'border progress must remain below its current expansion threshold');
     requireLand(canonicalCells(land.claimed) && land.claimed.includes(town.cell), 'claims must be ordered, unique and contain the center');
     for (const cell of land.claimed) {
       requireLand(validCell(cell) && (rulesVersion(state) >= 16 || hexDistance(town.cell, cell, state.world.width) <= 3) && !claims.has(cell), 'invalid, duplicate or distant claim'); claims.set(cell, id);

@@ -32,6 +32,7 @@ async function setup(page: Page, definitionId: string, count = 2) {
   await page.getByRole('combobox', { name: 'Campaign pace', exact: true }).selectOption('short');
 }
 async function begin(page: Page, definitionId: string) {
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
   await expect(page.getByRole('button', { name: 'End turn', exact: true })).toBeEnabled();
@@ -174,6 +175,7 @@ test('all twenty-four profiles and actual drawbacks remain readable by touch and
     await page.getByTestId('faction-identity').locator('summary').tap();
     await reachable(page.getByRole('list', { name: 'AI land recruitment preferences' }));
     await page.screenshot({ path: testInfo.outputPath('faction-recruitment-tendencies-narrow.png') });
+    await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
     await reachable(page.getByRole('button', { name: 'Begin campaign', exact: true }));
   } finally { await context.close(); }
 });

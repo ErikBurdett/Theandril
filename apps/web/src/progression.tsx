@@ -65,7 +65,7 @@ export function ResearchTree({ view, blocked, issue }: { view: Observation; bloc
 
 function UnificationStatus({ unification }: { unification: NonNullable<Observation['progression']['unification']> }) {
   return <section className="project-introduction" data-testid="unification-status" aria-label={unification.name}><span className="eyebrow">A second path to victory</span><h3>{unification.name}</h3><p>{unification.description}</p>
-    <p>You hold {unification.held} of {unification.total} hearths. More than half, and at least {unification.minimum}, opens a public bid at your capital; hold it for {unification.requiredTurns} turns.</p>
+    <p>You hold {unification.held} of {unification.total} hearths. More than two thirds, and at least {unification.minimum}, opens a public bid at your capital; hold it for {unification.requiredTurns} turns.</p>
     {unification.blockers.length > 0 ? <ul>{unification.blockers.map(blocker => <li key={blocker}>{blocker}</li>)}</ul> : <p>Your realm qualifies. A public bid opens at your capital when the round ends.</p>}
   </section>;
 }
@@ -77,7 +77,7 @@ export function PublicProjects({ view, locate }: { view: Observation; locate: (c
     <label>{project.status} · {project.progress}/{project.requiredTurns} {project.projectId === UNIFICATION_VICTORY.id ? 'turns held' : 'active turns'}<progress max={project.requiredTurns} value={project.progress}/></label>
     {project.statusReason && <p>{project.statusReason}</p>}
     <button aria-label={`Locate project ${project.settlementName}`} onClick={() => locate(project.cell)}>Locate project</button>
-  </article>)}<p className="field-help">Victory bids are public; the surrounding land stays hidden until explored. Besiege a Prosperity host to halt it and conquer it to cancel it. A Unification bid ends if its capital falls or its realm loses the majority of hearths.</p></section>;
+  </article>)}<p className="field-help">Victory bids are public; the surrounding land stays hidden until explored. Besiege a Prosperity host to halt it and conquer it to cancel it. A Unification bid ends if its capital falls or its realm drops below two thirds of the world's hearths.</p></section>;
 }
 
 export function CampaignProgression({ view, busy, issue, locate, close, developmentQuery, stateHash = '', queryEpoch = 0, queryEnabled = true }: { view: Observation; busy: boolean; issue: (command: GameCommand) => void; locate: (cell: number) => void; close: () => void; developmentQuery?: DevelopmentQuery; stateHash?: string; queryEpoch?: number; queryEnabled?: boolean }) {

@@ -84,13 +84,13 @@ export function assessProjectHosts(view: Observation): ProjectHostAssessment[] {
 }
 
 /** Observed eligibility is authoritative; costs are budgeted before settlement orders. */
-export function planProgression(view: Observation, protectedCoin = 0): ProgressionPlan {
+export function planProgression(view: Observation, protectedCoin = 0, pursueVictory = true): ProgressionPlan {
   const commands: GameCommand[] = [];
   const reasons: string[] = [];
   const ownTowns = view.settlements.filter(town => town.factionId === view.factionId);
   const progression = view.progression;
   const project = progression.project;
-  const host = project.blockers.length === 0 && project.eligibleSettlementIds.length ? assessProjectHosts(view)[0] : undefined;
+  const host = pursueVictory && project.blockers.length === 0 && project.eligibleSettlementIds.length ? assessProjectHosts(view)[0] : undefined;
   if (host && project.blockers.length === 0 && project.coinCost <= view.treasury) {
     return { commands: [{ type: 'startVictoryProject', factionId: view.factionId, settlementId: host.settlementId }], reasons: [`Begin ${project.name} at ${host.settlementId}: infrastructure, progression and ${project.coinCost} coin are ready. Prefer observed safety: ${host.uncoveredPressure} uncovered nearby enemy strength, friendly support ${host.friendlySupport}, known hostile distance ${host.nearestThreat}, friendly depth ${host.friendlyDepth}.`], coinSpent: project.coinCost, reserve: 0 };
   }
@@ -126,7 +126,7 @@ export function planProgression(view: Observation, protectedCoin = 0): Progressi
     }
   }
   const infrastructure = ownTowns.filter(town => PROSPERITY_PROJECT.requiredBuildings.every(id => town.buildings.includes(id)));
-  const developed = infrastructure.length >= PROSPERITY_PROJECT.settlementCount;
+  const developed = pursueVictory && infrastructure.length >= PROSPERITY_PROJECT.settlementCount;
   const projectUnderway = view.projects.some(item => item.factionId === view.factionId && item.projectId === PROSPERITY_PROJECT.id && (item.status === 'active' || item.status === 'paused'));
   // A bounded operating purse keeps expansion/defense alive during a long savings campaign.
   // Near the actual observed target, close the remaining gap before optional spending resumes.
@@ -149,8 +149,11 @@ export function planProgression(view: Observation, protectedCoin = 0): Progressi
   const missingRoleCost = view.growth ? Math.max(0, ...UNITS.filter(unit => !unit.canFound && unit.movementDomain !== 'naval' && !represented.has(unit.id)
     && view.productionOptions.some(option => option.itemId === unit.id && option.canQueue)).map(unit => unit.coinCost)) : 0;
   const operatingPurse = Math.min(Math.max(navalInvestment ? 64 : needsSpecialists ? 48 : 24, missingRoleCost), Math.floor(budget / 4));
+  // Never reserve coin the realm does not actually have free. The next caravan and a legally quoted
+  // hull are already protected outside this budget; hoarding the project's full price on top of them
+  // would silently cancel both and freeze a saving realm at its current borders.
   const reserve = developed && !projectUnderway
-    ? Math.min(project.coinCost, budget >= Math.floor(project.coinCost * 9 / 10) ? project.coinCost : Math.max(0, budget - operatingPurse)) : 0;
+    ? Math.min(project.coinCost, budget, budget >= Math.floor(project.coinCost * 9 / 10) ? project.coinCost : Math.max(0, budget - operatingPurse)) : 0;
   if (!progression.doctrineId && ownTowns.length >= 2) {
     const preference = view.wars.length ? 'doctrine.shield_cohesion' : 'doctrine.march_columns';
     const doctrine = progression.doctrineChoices.find(choice => choice.id === preference && choice.available);

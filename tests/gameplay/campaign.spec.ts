@@ -6,6 +6,7 @@ async function begin(page: Page, size = 'tiny'): Promise<void> {
   await page.goto('/');
   await page.getByLabel('World seed').fill('20260905');
   await page.getByLabel('World size').selectOption(size);
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toContainText('1');
   await expect(page.locator('canvas')).toBeVisible();

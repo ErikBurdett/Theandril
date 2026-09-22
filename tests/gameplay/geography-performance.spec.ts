@@ -25,6 +25,7 @@ test('Huge generated archipelago spectator geography stays bounded through revea
   await page.getByRole('combobox', { name: 'Map type', exact: true }).selectOption('archipelago');
   await page.getByRole('combobox', { name: 'Campaign pace', exact: true }).selectOption('short');
   await page.getByRole('combobox', { name: 'Campaign mode', exact: true }).selectOption('watch');
+  await page.getByRole('spinbutton', { name: 'City-states', exact: true }).fill('0');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
   await expect(page.getByTestId('watch-controls')).toContainText('AI watch paused');
