@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-21 | [Deployment and branch reconciliation from DHARMA](2026-09-21-release-reconciliation.md) | `274d0e2` deployed and live-verified; tracker updated; redundant refs pruned |
 | 2026-09-21 | [Epic baseline continuation](2026-09-21-epic-baseline-continuation.md) | Local implementation and reviewed draft; nothing published |
 | 2026-09-21 | [Campaign performance continuation](2026-09-21-campaign-performance-continuation.md) | Local implementation and reviewed draft; nothing published |
 | 2026-09-21 | [Full roadmap and first campaign-foundation work](2026-09-21-roadmap-and-campaign-foundation.md) | Local implementation and reviewed draft; nothing published |

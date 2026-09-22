@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-21",
+  "deployment_sha": "274d0e28c1ab9de4fc7fc43fde9f0579fc48fee4",
+  "pages_run_id": "35675919748",
+  "pages_conclusion": "success",
+  "verify_run_id": "35675919711",
+  "verify_conclusion": "failure",
+  "verify_summary": "1,855/1,859 tests passed across 218/221 files in 354.21 seconds. Four timing failures: Epic archive 149.966 s against 60 s; Standard/24 contact 20.938 s against 20 s; Huge/32 contact 33.253 s against 20 s; Epic seed-74 pacing 96.892 s against 60 s. Art validation, build, gameplay and benchmark steps in Verify campaign were skipped. These are timeout failures, not evidence that contact or victory assertions failed.",
+  "live_smoke_passed": true,
+  "live_smoke_checked_at": "2026-09-22T01:44:58.180310+00:00",
+  "live_smoke_summary": "All 27/27 production Pages Chromium scenarios passed against the actual public site in 40.7 seconds. Independent live identity readback confirms commit 274d0e2, the fourth dispatch, immutable implementation links and roadmap gate boundary; home/dispatch/roadmap return HTTP 200 with no page errors. Scoped production coverage, not full gameplay or cross-browser acceptance.",
+  "live_smoke_evidence": "/home/telephoneheater/Work/Theandril/docs/development/2026-09-21-release-reconciliation/browser-live.log"
+}

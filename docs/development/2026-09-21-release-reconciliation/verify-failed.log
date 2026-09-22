@@ -1,0 +1,583 @@
+gameplay	Run pnpm test	﻿2026-09-22T01:30:32.2591545Z ##[group]Run pnpm test
+gameplay	Run pnpm test	2026-09-22T01:30:32.2592003Z ^[[36;1mpnpm test^[[0m
+gameplay	Run pnpm test	2026-09-22T01:30:32.2631146Z shell: /usr/bin/bash -e {0}
+gameplay	Run pnpm test	2026-09-22T01:30:32.2631398Z env:
+gameplay	Run pnpm test	2026-09-22T01:30:32.2631653Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+gameplay	Run pnpm test	2026-09-22T01:30:32.2631967Z ##[endgroup]
+gameplay	Run pnpm test	2026-09-22T01:30:32.5384446Z 
+gameplay	Run pnpm test	2026-09-22T01:30:32.5385043Z > theandril@0.1.0 test /home/runner/work/Theandril/Theandril
+gameplay	Run pnpm test	2026-09-22T01:30:32.5385437Z > vitest run
+gameplay	Run pnpm test	2026-09-22T01:30:32.5385566Z 
+gameplay	Run pnpm test	2026-09-22T01:30:32.8267517Z 
+gameplay	Run pnpm test	2026-09-22T01:30:32.8269788Z ^[[1m^[[30m^[[46m RUN ^[[49m^[[39m^[[22m ^[[36mv4.1.11 ^[[39m^[[90m/home/runner/work/Theandril/Theandril^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:32.8270454Z 
+gameplay	Run pnpm test	2026-09-22T01:30:35.6745046Z  ^[[32m✓^[[39m packages/sim/src/characters.test.ts ^[[2m(^[[22m^[[2m25 tests^[[22m^[[2m)^[[22m^[[33m 1674^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:36.2681957Z  ^[[32m✓^[[39m packages/ai/src/naval.test.ts ^[[2m(^[[22m^[[2m15 tests^[[22m^[[2m)^[[22m^[[33m 2092^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:36.2684192Z    ^[[33m^[[2m✓^[[22m^[[39m unrelated global ID allocation cannot redirect the same observed ocean scout, and two scouts reserve distinct destinations ^[[33m 314^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:36.2705392Z    ^[[33m^[[2m✓^[[22m^[[39m whole AI really loads, crosses deep ocean, lands and founds without reboarding or rejected commands; saved voyage matches ^[[33m 559^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:38.2868942Z  ^[[32m✓^[[39m packages/art-pipeline/src/core.test.ts ^[[2m(^[[22m^[[2m24 tests^[[22m^[[2m)^[[22m^[[33m 1957^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:38.2884810Z      ^[[33m^[[2m✓^[[22m^[[39m keeps exact native foot and mounted frames on independent deferred pages without shifting foundation ^[[33m 901^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:38.2887402Z      ^[[33m^[[2m✓^[[22m^[[39m builds native and4x review sheets from unapproved assets with exact nearest pixels ^[[33m 348^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:40.2954420Z  ^[[32m✓^[[39m packages/art-pipeline/src/biome-source.test.ts ^[[2m(^[[22m^[[2m36 tests^[[22m^[[2m)^[[22m^[[33m 1621^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:40.2971236Z      ^[[33m^[[2m✓^[[22m^[[39m preserves the actual 56×64 pointy-hex mask, binary alpha, palette and detached source pixels ^[[33m 513^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:41.7643432Z  ^[[32m✓^[[39m packages/sim/src/siege.test.ts ^[[2m(^[[22m^[[2m21 tests^[[22m^[[2m)^[[22m^[[33m 950^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:42.6676173Z  ^[[32m✓^[[39m packages/persistence/src/campaign-storage.test.ts ^[[2m(^[[22m^[[2m21 tests^[[22m^[[2m)^[[22m^[[33m 8563^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:42.6677714Z    ^[[33m^[[2m✓^[[22m^[[39m incremental storage retains a genuine schema12 origin and immutable prefix while appending current rules ^[[33m 1192^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:42.6678983Z    ^[[33m^[[2m✓^[[22m^[[39m incremental storage preserves the genuine schema13 fieldRally battle through modern commands and portable replay ^[[33m 424^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:42.6680253Z    ^[[33m^[[2m✓^[[22m^[[39m incremental storage preserves the genuine schema13 fieldRoundOne battle through modern commands and portable replay ^[[33m 401^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:42.6681631Z    ^[[33m^[[2m✓^[[22m^[[39m incremental storage preserves the genuine schema13 siegeRoundOne battle through modern commands and portable replay ^[[33m 350^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:42.6682835Z    ^[[33m^[[2m✓^[[22m^[[39m incremental commit preserves replay, counts exact envelope bytes, and writes no history for a no-op save ^[[33m 490^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:42.6683984Z    ^[[33m^[[2m✓^[[22m^[[39m three generations rotate metadata atomically, share immutable prefixes and collect unused origins/branches ^[[33m 395^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:42.6685098Z    ^[[33m^[[2m✓^[[22m^[[39m branching an older recovered journal and alternating kinds preserves both immutable histories ^[[33m 316^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:42.6686495Z    ^[[33m^[[2m✓^[[22m^[[39m rotating a long abandoned campaign limits cleanup per commit and safely drains deferred orphan chains ^[[33m 2856^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:42.6688346Z    ^[[33m^[[2m✓^[[22m^[[39m v2 rejects oversized fragments; legacy reads survive but cannot migrate into an unreadable v2 generation ^[[33m 620^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:43.4887376Z  ^[[32m✓^[[39m packages/sim/src/battle-abilities.test.ts ^[[2m(^[[22m^[[2m12 tests^[[22m^[[2m)^[[22m^[[33m 1259^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:43.6902869Z  ^[[32m✓^[[39m packages/art-pipeline/src/faction-coverage.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[33m 6984^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:43.6925423Z      ^[[33m^[[2m✓^[[22m^[[39m preserves all reviewed pixels and tool provenance: one real four-pose scout and431 static faction assets ^[[33m 5977^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:44.7531836Z  ^[[32m✓^[[39m packages/sim/src/development.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[33m 712^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:46.1441806Z  ^[[32m✓^[[39m packages/sim/src/naval.test.ts ^[[2m(^[[22m^[[2m18 tests^[[22m^[[2m)^[[22m^[[33m 1904^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:46.1459265Z      ^[[33m^[[2m✓^[[22m^[[39m loses only unsupported formations, in stable order, as surviving hull capacity decreases ^[[33m 616^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:46.7838187Z  ^[[32m✓^[[39m packages/ai/src/battle-defense.test.ts ^[[2m(^[[22m^[[2m17 tests^[[22m^[[2m)^[[22m^[[33m 1478^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:48.3856026Z  ^[[32m✓^[[39m packages/sim/src/save.test.ts ^[[2m(^[[22m^[[2m30 tests^[[22m^[[2m)^[[22m^[[33m 1112^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:50.6147382Z  ^[[32m✓^[[39m packages/sim/src/territory.test.ts ^[[2m(^[[22m^[[2m11 tests^[[22m^[[2m)^[[22m^[[33m 3974^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:50.6151526Z      ^[[33m^[[2m✓^[[22m^[[39m keeps each authored improvement site and preview authoritative across all five definitions ^[[33m 3342^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:51.0813830Z  ^[[32m✓^[[39m packages/sim/src/army-composition.test.ts ^[[2m(^[[22m^[[2m27 tests^[[22m^[[2m)^[[22m^[[33m 2177^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:51.0865881Z      ^[[33m^[[2m✓^[[22m^[[39m conserves formation identities and state across deterministic merge/split/replay sequences ^[[33m 1214^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:52.2148845Z  ^[[32m✓^[[39m packages/sim/src/warfare.test.ts ^[[2m(^[[22m^[[2m24 tests^[[22m^[[2m)^[[22m^[[33m 1055^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:52.6508796Z  ^[[32m✓^[[39m packages/sim/src/progression.test.ts ^[[2m(^[[22m^[[2m22 tests^[[22m^[[2m)^[[22m^[[33m 1039^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:53.5767630Z  ^[[32m✓^[[39m apps/web/src/faction-art.test.tsx ^[[2m(^[[22m^[[2m13 tests^[[22m^[[2m)^[[22m^[[33m 673^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:55.6698836Z  ^[[32m✓^[[39m packages/sim/src/land-queries.test.ts ^[[2m(^[[22m^[[2m15 tests^[[22m^[[2m)^[[22m^[[33m 1639^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:57.2326549Z  ^[[32m✓^[[39m packages/sim/src/serialization-performance.test.ts ^[[2m(^[[22m^[[2m24 tests^[[22m^[[2m)^[[22m^[[33m 1132^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:58.1687588Z  ^[[32m✓^[[39m packages/sim/src/territory-growth.test.ts ^[[2m(^[[22m^[[2m11 tests^[[22m^[[2m)^[[22m^[[33m 524^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:30:59.5618852Z  ^[[32m✓^[[39m packages/sim/src/movement.test.ts ^[[2m(^[[22m^[[2m22 tests^[[22m^[[2m)^[[22m^[[33m 914^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:00.7076156Z  ^[[32m✓^[[39m packages/art-pipeline/src/faction-extraction.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[33m 8119^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:00.7138663Z      ^[[33m^[[2m✓^[[22m^[[39m partitions odd provider dimensions without losing pixels and creates deterministic padded native PNGs ^[[33m 5158^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:00.7141109Z      ^[[33m^[[2m✓^[[22m^[[39m proposes explicit component crops that retain detached details, rejecting overlap and omitted pixels ^[[33m 653^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:00.7149396Z      ^[[33m^[[2m✓^[[22m^[[39m requires a source-hash-bound crop review, not an automatically generated contact sheet ^[[33m 1000^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:00.7151599Z      ^[[33m^[[2m✓^[[22m^[[39m rejects false declared component metadata even when its supplied source/component seal is unchanged ^[[33m 841^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:02.2425229Z  ^[[32m✓^[[39m packages/art-pipeline/src/animation-source.test.ts ^[[2m(^[[22m^[[2m15 tests^[[22m^[[2m)^[[22m^[[33m 2366^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:02.2438334Z      ^[[33m^[[2m✓^[[22m^[[39m preserves four original localized poses, inputs and detached output frames ^[[33m 419^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:02.2448745Z      ^[[33m^[[2m✓^[[22m^[[39m applies one rational nearest scale to every frame, not per-frame bounding-box fitting ^[[33m 377^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:02.2468988Z      ^[[33m^[[2m✓^[[22m^[[39m has a read-only default, writes a separate v5 brief, and exact repeats preserve bytes/mtimes ^[[33m 615^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:02.2535020Z      ^[[33m^[[2m✓^[[22m^[[39m preflights the last output collision before creating any earlier frame or record ^[[33m 343^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:04.3558962Z  ^[[32m✓^[[39m packages/chronicle/src/schema10-compatibility.test.ts ^[[2m(^[[22m^[[2m17 tests^[[22m^[[2m)^[[22m^[[33m 3115^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:04.3588667Z      ^[[33m^[[2m✓^[[22m^[[39m finishes genuine schema-9 activeCultivation with modern records and an unchanged prefix ^[[33m 383^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:04.9859551Z ^[[90mstderr^[[2m | apps/web/src/worker-queries.test.ts
+gameplay	Run pnpm test	2026-09-22T01:31:04.9870459Z  ^[[32m✓^[[39m apps/web/src/worker-queries.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[33m 2188^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:04.9904295Z      ^[[33m^[[2m✓^[[22m^[[39m rejects fog requests in player campaigns, including forged nonboolean input ^[[33m 573^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:04.9908958Z      ^[[33m^[[2m✓^[[22m^[[39m replaces revealed map cells on restore without contaminating ordinary queries or recording a command ^[[33m 364^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:04.9910942Z      ^[[33m^[[2m✓^[[22m^[[39m keeps actual AI orders and saved continuation identical when fog changes between queued rounds ^[[33m 436^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:04.9978579Z ^[[22m^[[39mAnother connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+gameplay	Run pnpm test	2026-09-22T01:31:05.0057324Z 
+gameplay	Run pnpm test	2026-09-22T01:31:06.1103700Z  ^[[32m✓^[[39m packages/ai/src/navigation-performance.test.ts ^[[2m(^[[22m^[[2m15 tests^[[22m^[[2m)^[[22m^[[33m 652^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:07.1570555Z  ^[[32m✓^[[39m packages/art-pipeline/src/faction-expansion.test.ts ^[[2m(^[[22m^[[2m13 tests^[[22m^[[2m)^[[22m^[[33m 638^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:07.8453259Z  ^[[32m✓^[[39m apps/web/src/cell-transfer.test.ts ^[[2m(^[[22m^[[2m56 tests^[[22m^[[2m)^[[22m^[[32m 192^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:08.4038916Z  ^[[32m✓^[[39m apps/web/src/map-actions.test.tsx ^[[2m(^[[22m^[[2m14 tests^[[22m^[[2m)^[[22m^[[32m 215^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:09.4534159Z  ^[[32m✓^[[39m packages/sim/src/combat/combat.test.ts ^[[2m(^[[22m^[[2m15 tests^[[22m^[[2m)^[[22m^[[33m 753^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:09.4570757Z      ^[[33m^[[2m✓^[[22m^[[39m terminates deterministically with bounded casualties and integer stats across varied formations ^[[33m 630^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:10.4619065Z  ^[[32m✓^[[39m packages/sim/src/roads.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[33m 516^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:11.5726015Z  ^[[32m✓^[[39m tests/art-factory.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[33m 28538^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:11.5734138Z      ^[[33m^[[2m✓^[[22m^[[39m validates a candidate without creating an approval or replacing an existing approval report ^[[33m 873^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:11.5745236Z      ^[[33m^[[2m✓^[[22m^[[39m rejects an incorrect visual-review hash before creating any approval ^[[33m 1293^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:11.5747520Z      ^[[33m^[[2m✓^[[22m^[[39m creates review sheets but explicitly refuses source-comparison approval ^[[33m 1309^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:11.5749477Z      ^[[33m^[[2m✓^[[22m^[[39m rebuilds a retained approval atlas without any cache or external art tools ^[[33m 1736^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:11.5751487Z      ^[[33m^[[2m✓^[[22m^[[39m retains reviewed frames, evidence and original sources with fresh exact reports ^[[33m 14295^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:11.5753446Z      ^[[33m^[[2m✓^[[22m^[[39m preserves real editable/source exports, timings and their processing hashes ^[[33m 2920^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:11.5769202Z      ^[[33m^[[2m✓^[[22m^[[39m rebuilds the published PNG/catalog and cross-checks browser copies and every frame pixel ^[[33m 3390^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:11.5799445Z      ^[[33m^[[2m✓^[[22m^[[39m keeps the complete published source/evidence closure outside Git ignore rules ^[[33m 1297^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:12.2489179Z  ^[[32m✓^[[39m packages/ai/src/overseas.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[33m 1365^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:12.2492403Z    ^[[33m^[[2m✓^[[22m^[[39m partial-fog island start earns navigation, harbor, transport and settlers then founds across deep water ^[[33m 908^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:12.3658603Z  ^[[32m✓^[[39m packages/render/src/battle-layout.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[33m 540^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:12.3688281Z      ^[[33m^[[2m✓^[[22m^[[39m matches the published native contracts and separates complete sprites, annotations and motion envelopes ^[[33m 499^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:14.1877294Z  ^[[32m✓^[[39m packages/sim/src/simulation.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[33m 1388^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:14.1879369Z      ^[[33m^[[2m✓^[[22m^[[39m keeps resources integral, event memory bounded and seeds reproducible through long turns ^[[33m 487^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:15.2868846Z ^[[90mstdout^[[2m | packages/ai/src/naval-outlets.test.ts^[[2m > ^[[22m^[[2mnaval geography work stays bounded as waiting founder count grows (4 faction seats)
+gameplay	Run pnpm test	2026-09-22T01:31:15.2872490Z ^[[22m^[[39m{"probe":"aggregate-observed-cell-reads","factionCount":4,"radius":4,"counts":[{"founders":1,"cells":61,"reads":154},{"founders":8,"cells":61,"reads":154},{"founders":32,"cells":61,"reads":154},{"founders":128,"cells":61,"reads":154}]}
+gameplay	Run pnpm test	2026-09-22T01:31:15.2875908Z {"probe":"aggregate-observed-cell-reads","factionCount":4,"radius":8,"counts":[{"founders":1,"cells":217,"reads":544},{"founders":8,"cells":217,"reads":544},{"founders":32,"cells":217,"reads":544},{"founders":128,"cells":217,"reads":544}]}
+gameplay	Run pnpm test	2026-09-22T01:31:15.2877742Z 
+gameplay	Run pnpm test	2026-09-22T01:31:15.5589716Z ^[[90mstdout^[[2m | packages/ai/src/naval-outlets.test.ts^[[2m > ^[[22m^[[2mnaval geography work stays bounded as waiting founder count grows (24 faction seats)
+gameplay	Run pnpm test	2026-09-22T01:31:15.5595972Z ^[[22m^[[39m{"probe":"aggregate-observed-cell-reads","factionCount":24,"radius":4,"counts":[{"founders":1,"cells":61,"reads":93},{"founders":8,"cells":61,"reads":93},{"founders":32,"cells":61,"reads":93},{"founders":128,"cells":61,"reads":93}]}
+gameplay	Run pnpm test	2026-09-22T01:31:15.5599630Z {"probe":"aggregate-observed-cell-reads","factionCount":24,"radius":8,"counts":[{"founders":1,"cells":217,"reads":327},{"founders":8,"cells":217,"reads":327},{"founders":32,"cells":217,"reads":327},{"founders":128,"cells":217,"reads":327}]}
+gameplay	Run pnpm test	2026-09-22T01:31:15.5601314Z 
+gameplay	Run pnpm test	2026-09-22T01:31:16.8792620Z  ^[[32m✓^[[39m packages/mapgen/src/geography-v5.test.ts ^[[2m(^[[22m^[[2m20 tests^[[22m^[[2m)^[[22m^[[33m 12234^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:16.8796669Z    ^[[33m^[[2m✓^[[22m^[[39m continents preserves deterministic hydrology and viable distributed starts across seeds ^[[33m 941^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:16.8799198Z    ^[[33m^[[2m✓^[[22m^[[39m islands preserves deterministic hydrology and viable distributed starts across seeds ^[[33m 749^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:16.8824424Z    ^[[33m^[[2m✓^[[22m^[[39m archipelago preserves deterministic hydrology and viable distributed starts across seeds ^[[33m 562^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:16.8826524Z    ^[[33m^[[2m✓^[[22m^[[39m small offers genuinely different layouts, rivers, mountain lakes and independent starts ^[[33m 493^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:16.8828858Z    ^[[33m^[[2m✓^[[22m^[[39m huge offers genuinely different layouts, rivers, mountain lakes and independent starts ^[[33m 2517^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:16.8830879Z    ^[[33m^[[2m✓^[[22m^[[39m legendary offers genuinely different layouts, rivers, mountain lakes and independent starts ^[[33m 4039^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:16.8833329Z    ^[[33m^[[2m✓^[[22m^[[39m Tiny archipelagos remain physically separated at four seats and at the full48-seat density ^[[33m 2595^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:16.9886300Z  ^[[32m✓^[[39m packages/chronicle/src/schema8-compatibility.test.ts ^[[2m(^[[22m^[[2m21 tests^[[22m^[[2m)^[[22m^[[33m 2345^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:17.0038754Z      ^[[33m^[[2m✓^[[22m^[[39m retains every original mission byte, result, snapshot and independently captured hash ^[[33m 421^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:17.0046065Z      ^[[33m^[[2m✓^[[22m^[[39m retains every original battle byte, result, snapshot and independently captured hash ^[[33m 315^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:17.0098354Z      ^[[33m^[[2m✓^[[22m^[[39m continues the migrated mission through new journal suffixes without rewriting its old records ^[[33m 334^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:17.0100541Z      ^[[33m^[[2m✓^[[22m^[[39m continues the migrated battle through new journal suffixes without rewriting its old records ^[[33m 392^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:18.3058986Z  ^[[32m✓^[[39m packages/render/src/tile-footprint.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[33m 981^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:18.3060970Z      ^[[33m^[[2m✓^[[22m^[[39m verifies all 75 exact registered silhouettes against retained PNGs and actual published atlas pixels ^[[33m 906^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:19.0458967Z  ^[[32m✓^[[39m packages/ai/src/naval-outlets.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 6331^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:19.0481593Z    ^[[33m^[[2m✓^[[22m^[[39m a paid second harbor remains the outlet commitment when a third coastal town becomes available ^[[33m 2168^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:19.0514704Z    ^[[33m^[[2m✓^[[22m^[[39m naval geography work stays bounded as waiting founder count grows (4 faction seats) ^[[33m 404^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:19.0516819Z    ^[[33m^[[2m✓^[[22m^[[39m second-outlet ocean scout keeps its own paid reserve, releases it while queued and when its quote is blocked ^[[33m 1075^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:19.0519184Z    ^[[33m^[[2m✓^[[22m^[[39m an outlet caravan keeps its saved land route through a nearby ferry and reaches paid founding ^[[33m 2409^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:19.4428797Z  ^[[32m✓^[[39m packages/sim/src/battle-frontage.test.ts ^[[2m(^[[22m^[[2m9 tests^[[22m^[[2m)^[[22m^[[33m 747^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:19.6521415Z  ^[[32m✓^[[39m packages/chronicle/src/journal.test.ts ^[[2m(^[[22m^[[2m13 tests^[[22m^[[2m)^[[22m^[[33m 2142^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:19.6528117Z      ^[[33m^[[2m✓^[[22m^[[39m preserves genuine version-5 travel and battle evidence when resumed ^[[33m 515^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:19.6531726Z      ^[[33m^[[2m✓^[[22m^[[39m preserves genuine version-6 travel and battle evidence when resumed ^[[33m 461^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:20.0445994Z  ^[[32m✓^[[39m apps/web/src/land.test.tsx ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[33m 428^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:20.1341288Z  ^[[32m✓^[[39m packages/art-pipeline/src/animation-coverage.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[32m 65^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:20.9348951Z  ^[[32m✓^[[39m apps/web/src/next-action.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[32m 287^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:21.9654382Z  ^[[32m✓^[[39m packages/sim/src/diplomacy.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[33m 1362^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:21.9688492Z      ^[[33m^[[2m✓^[[22m^[[39m supports requested reparations and preserves total coin for arbitrary legal payments ^[[33m 886^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:23.2031640Z  ^[[32m✓^[[39m packages/ai/src/magic.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[33m 754^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:23.2034099Z    ^[[33m^[[2m✓^[[22m^[[39m observation-only AI pays for one useful Waykeeper, attaches it and purchases real national discoveries before shared-kernel combat ^[[33m 324^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:26.2159354Z  ^[[32m✓^[[39m packages/chronicle/src/schema11-compatibility.test.ts ^[[2m(^[[22m^[[2m25 tests^[[22m^[[2m)^[[22m^[[33m 6210^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:26.2218747Z      ^[[33m^[[2m✓^[[22m^[[39m retains twelveOrigin exact source bytes, command results and old-rule replay ^[[33m 401^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:26.2221123Z      ^[[33m^[[2m✓^[[22m^[[39m retains researched exact source bytes, command results and old-rule replay ^[[33m 310^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:26.2235301Z      ^[[33m^[[2m✓^[[22m^[[39m retains activeMission exact source bytes, command results and old-rule replay ^[[33m 336^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:26.2237833Z      ^[[33m^[[2m✓^[[22m^[[39m retains specialization exact source bytes, command results and old-rule replay ^[[33m 484^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:26.2239731Z      ^[[33m^[[2m✓^[[22m^[[39m retains skilledMission exact source bytes, command results and old-rule replay ^[[33m 391^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:26.2241566Z      ^[[33m^[[2m✓^[[22m^[[39m retains completed exact source bytes, command results and old-rule replay ^[[33m 319^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:26.2243388Z      ^[[33m^[[2m✓^[[22m^[[39m appends modern activeImprovement continuation without changing an old record or seal ^[[33m 367^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:26.2245297Z      ^[[33m^[[2m✓^[[22m^[[39m appends modern activeCultivation continuation without changing an old record or seal ^[[33m 377^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:26.2247466Z      ^[[33m^[[2m✓^[[22m^[[39m appends modern skilledMission continuation without changing an old record or seal ^[[33m 417^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:30.6408922Z  ^[[32m✓^[[39m packages/chronicle/src/compatibility.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 3873^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:30.6428518Z      ^[[33m^[[2m✓^[[22m^[[39m matches the independently recorded pre-travel short-campaign v4 benchmark seal ^[[33m 2199^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:30.6458684Z      ^[[33m^[[2m✓^[[22m^[[39m migrates actual v4 snapshot structure without rewriting its bytes, events or checkpoint seals ^[[33m 559^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:30.6488674Z      ^[[33m^[[2m✓^[[22m^[[39m keeps historical rejected future command names rejected while new records use new rules ^[[33m 385^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:30.6548775Z      ^[[33m^[[2m✓^[[22m^[[39m preserves original victory seals and postgame records after importing an old completed campaign ^[[33m 491^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:34.1004622Z  ^[[32m✓^[[39m packages/persistence/src/persistence.test.ts ^[[2m(^[[22m^[[2m12 tests^[[22m^[[2m)^[[22m^[[33m 2883^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:34.1008753Z    ^[[33m^[[2m✓^[[22m^[[39m campaign envelope preserves full archive and AI-watch mode across save and compressed roundtrip ^[[33m 342^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:34.1010995Z    ^[[33m^[[2m✓^[[22m^[[39m legacy v1 files with large valid records remain readable and re-exportable ^[[33m 941^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:34.1049059Z    ^[[33m^[[2m✓^[[22m^[[39m v2 section policy bounds aggregate history and record count before whole-envelope encoding ^[[33m 450^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:35.6383460Z  ^[[32m✓^[[39m packages/ai/src/research-land.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 1000^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:35.6386029Z    ^[[33m^[[2m✓^[[22m^[[39m food demand cannot repeatedly demolish paid spring gardens and oreworks on the same real ore-and-spring hex ^[[33m 711^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:42.5991976Z  ^[[32m✓^[[39m packages/mapgen/src/index.test.ts ^[[2m(^[[22m^[[2m17 tests^[[22m^[[2m)^[[22m^[[33m 6715^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:42.6048706Z      ^[[33m^[[2m✓^[[22m^[[39m keeps every edge reciprocal, bounded, unique and exactly one hex long ^[[33m 3329^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:42.6094906Z      ^[[33m^[[2m✓^[[22m^[[39m generates huge at its declared scale reproducibly ^[[33m 332^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:42.6168129Z      ^[[33m^[[2m✓^[[22m^[[39m generates legendary at its declared scale reproducibly ^[[33m 561^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:42.6228303Z      ^[[33m^[[2m✓^[[22m^[[39m gives every faction fertile, connected expansion space across arbitrary seeds ^[[33m 1875^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:43.9034276Z  ^[[32m✓^[[39m packages/sim/src/territory-quote-performance.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 771^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5162893Z  ^[[32m✓^[[39m packages/ai/src/progression.test.ts ^[[2m(^[[22m^[[2m16 tests^[[22m^[[2m)^[[22m^[[33m 26143^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5176889Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start AI seed 74 reaches true Prosperity with ordinary commands and deterministic save continuation ^[[33m 3443^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5179704Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start AI seed 2026 reaches true Prosperity with ordinary commands and deterministic save continuation ^[[33m 3623^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5182613Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start AI seed 20260905 reaches true Prosperity with ordinary commands and deterministic save continuation ^[[33m 1791^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5184746Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start AI seed 17 reaches true Prosperity with ordinary commands and deterministic save continuation ^[[33m 2082^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5186808Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start AI seed 99 reaches true Prosperity with ordinary commands and deterministic save continuation ^[[33m 2316^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5188773Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start AI seed 31415 reaches true Prosperity with ordinary commands and deterministic save continuation ^[[33m 3291^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5190040Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start AI seed 2718 reaches true Prosperity with ordinary commands and deterministic save continuation ^[[33m 2323^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5191257Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start AI seed 8128 reaches true Prosperity with ordinary commands and deterministic save continuation ^[[33m 1978^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5192488Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start AI seed 4096 reaches true Prosperity with ordinary commands and deterministic save continuation ^[[33m 2870^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:47.5193689Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start AI seed 65535 reaches true Prosperity with ordinary commands and deterministic save continuation ^[[33m 1990^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:48.5447186Z  ^[[32m✓^[[39m packages/sim/src/army-combat.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[33m 589^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:48.8472393Z  ^[[32m✓^[[39m packages/persistence/src/campaign-storage-durability.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 4347^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:48.8476752Z    ^[[33m^[[2m✓^[[22m^[[39m PERSIST-01 refuses an unreadable shared dependency without rotating the last readable generation (append=false) ^[[33m 633^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:48.8479861Z    ^[[33m^[[2m✓^[[22m^[[39m PERSIST-01 refuses an unreadable shared dependency without rotating the last readable generation (append=true) ^[[33m 386^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:48.8482532Z    ^[[33m^[[2m✓^[[22m^[[39m PERSIST-02 a resealed refcount undercount cannot reclaim a remaining history, and bounded GC still drains it when abandoned ^[[33m 3047^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:48.9735355Z  ^[[32m✓^[[39m packages/content/src/factions.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[32m 72^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:50.0217383Z  ^[[32m✓^[[39m packages/sim/src/individual-campaign.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[33m 721^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:51.1685148Z  ^[[32m✓^[[39m packages/chronicle/src/schema6-compatibility.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[33m 1732^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:51.1734761Z      ^[[33m^[[2m✓^[[22m^[[39m preserves the actual pre-migration travel snapshot, reports, events and seals byte-for-byte ^[[33m 382^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:51.1757947Z      ^[[33m^[[2m✓^[[22m^[[39m supports numeric 4 → 5 → 6 rules transitions and preserves formerly unknown commands as refused ^[[33m 325^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:51.2570292Z  ^[[32m✓^[[39m packages/sim/src/canonical-land.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[33m 712^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:51.2579785Z      ^[[33m^[[2m✓^[[22m^[[39m matches the old complete serialized envelope for shuffled object insertion orders and real developed towns ^[[33m 339^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:53.7798187Z  ^[[32m✓^[[39m packages/sim/src/pacing.test.ts ^[[2m(^[[22m^[[2m41 tests^[[22m^[[2m)^[[22m^[[33m 2156^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:53.8302011Z  ^[[32m✓^[[39m packages/chronicle/src/schema7-compatibility.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[33m 2084^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:53.8310635Z      ^[[33m^[[2m✓^[[22m^[[39m retains every original travel origin byte, result, report and checkpoint seal ^[[33m 386^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:53.8313139Z      ^[[33m^[[2m✓^[[22m^[[39m appends modern commands without rewriting six-format evidence and never downgrades afterward ^[[33m 385^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:56.2218078Z  ^[[32m✓^[[39m packages/chronicle/src/schema13-compatibility.test.ts ^[[2m(^[[22m^[[2m11 tests^[[22m^[[2m)^[[22m^[[33m 1863^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:56.2298795Z      ^[[33m^[[2m✓^[[22m^[[39m preserves developed raw bytes and every original command/result/checkpoint ^[[33m 346^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:59.7031114Z  ^[[32m✓^[[39m packages/sim/src/roster.test.ts ^[[2m(^[[22m^[[2m27 tests^[[22m^[[2m)^[[22m^[[33m 3019^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:31:59.7068908Z      ^[[33m^[[2m✓^[[22m^[[39m separates physical generator identity from four, six, twelve and twenty-four culture catalogs ^[[33m 375^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:00.1439558Z  ^[[32m✓^[[39m packages/content/src/content.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[32m 82^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:02.0641005Z  ^[[32m✓^[[39m packages/sim/src/movement-search-equivalence.test.ts ^[[2m(^[[22m^[[2m23 tests^[[22m^[[2m)^[[22m^[[33m 1210^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:02.4838778Z  ^[[32m✓^[[39m packages/art-pipeline/src/toolchain/toolchain.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[33m 8376^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:02.4878515Z      ^[[33m^[[2m✓^[[22m^[[39m keeps every original pixel, facing, clip and duration within the4096 sheet bound ^[[33m 8232^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:02.9299298Z  ^[[32m✓^[[39m packages/sim/src/combat/individual.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 81^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:03.5381361Z  ^[[32m✓^[[39m packages/ai/src/characters.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 1082^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:03.5383946Z    ^[[33m^[[2m✓^[[22m^[[39m AI funds observed appointments, attaches specialists, completes refits and spends earned experience with exact saved continuation ^[[33m 852^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:06.7158828Z  ^[[32m✓^[[39m packages/art-pipeline/src/blender-unit-source.test.ts ^[[2m(^[[22m^[[2m11 tests^[[22m^[[2m)^[[22m^[[33m 2840^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:06.7160312Z      ^[[33m^[[2m✓^[[22m^[[39m rejects a modified retained render-settings.json by its original inventory hash ^[[33m 309^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:06.7161583Z      ^[[33m^[[2m✓^[[22m^[[39m validates actual cavalry motion and rejects translated still rigs ^[[33m 370^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:06.7162779Z      ^[[33m^[[2m✓^[[22m^[[39m validates actual lancer motion and rejects translated still rigs ^[[33m 362^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:06.7163952Z      ^[[33m^[[2m✓^[[22m^[[39m validates actual transport motion and rejects translated still rigs ^[[33m 414^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:06.7165074Z      ^[[33m^[[2m✓^[[22m^[[39m validates actual coastal_warship motion and rejects translated still rigs ^[[33m 321^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1230249Z  ^[[32m✓^[[39m packages/ai/src/recruitment.test.ts ^[[2m(^[[22m^[[2m37 tests^[[22m^[[2m)^[[22m^[[33m 45416^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1232308Z    ^[[33m^[[2m✓^[[22m^[[39m 'Mire Courts' recruits and combines legal armies with exact saved continuation ^[[33m 3291^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1234627Z    ^[[33m^[[2m✓^[[22m^[[39m 'Saltwind Remnant' recruits and combines legal armies with exact saved continuation ^[[33m 2273^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1248596Z    ^[[33m^[[2m✓^[[22m^[[39m 'Wardhall Remnant' recruits and combines legal armies with exact saved continuation ^[[33m 2572^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1250281Z    ^[[33m^[[2m✓^[[22m^[[39m 'Rimehorn Clans' recruits and combines legal armies with exact saved continuation ^[[33m 2393^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1251857Z    ^[[33m^[[2m✓^[[22m^[[39m 'Sable Steppe' recruits and combines legal armies with exact saved continuation ^[[33m 2689^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1253990Z    ^[[33m^[[2m✓^[[22m^[[39m 'Morrow Spore' recruits and combines legal armies with exact saved continuation ^[[33m 2422^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1255845Z    ^[[33m^[[2m✓^[[22m^[[39m 'Cistern Assembly' recruits and combines legal armies with exact saved continuation ^[[33m 2283^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1258134Z    ^[[33m^[[2m✓^[[22m^[[39m 'Unsealed Companies' recruits and combines legal armies with exact saved continuation ^[[33m 2409^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1259794Z    ^[[33m^[[2m✓^[[22m^[[39m 'Lantern Hospices' recruits and combines legal armies with exact saved continuation ^[[33m 2419^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1261483Z    ^[[33m^[[2m✓^[[22m^[[39m 'Cairnwing Concord' recruits and combines legal armies with exact saved continuation ^[[33m 2272^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1263234Z    ^[[33m^[[2m✓^[[22m^[[39m 'Red Sluice Directorate' recruits and combines legal armies with exact saved continuation ^[[33m 2464^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1264942Z    ^[[33m^[[2m✓^[[22m^[[39m 'Velvet Meridian' recruits and combines legal armies with exact saved continuation ^[[33m 2405^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1266564Z    ^[[33m^[[2m✓^[[22m^[[39m 'Brine Choir' recruits and combines legal armies with exact saved continuation ^[[33m 2124^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1268600Z    ^[[33m^[[2m✓^[[22m^[[39m 'Emberwake Convocation' recruits and combines legal armies with exact saved continuation ^[[33m 2395^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1270316Z    ^[[33m^[[2m✓^[[22m^[[39m 'Underhush Exchange' recruits and combines legal armies with exact saved continuation ^[[33m 2244^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1272017Z    ^[[33m^[[2m✓^[[22m^[[39m 'Vesper Court' recruits and combines legal armies with exact saved continuation ^[[33m 2772^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1273771Z    ^[[33m^[[2m✓^[[22m^[[39m 'Manytrack Moot' recruits and combines legal armies with exact saved continuation ^[[33m 2273^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:09.1275650Z    ^[[33m^[[2m✓^[[22m^[[39m 'Margin Observance' recruits and combines legal armies with exact saved continuation ^[[33m 2615^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:10.4848846Z  ^[[32m✓^[[39m packages/sim/src/battle-morale.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 957^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:10.4852194Z      ^[[33m^[[2m✓^[[22m^[[39m round-trips after every accepted command from a captured ordinary battle ^[[33m 426^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:11.2879029Z  ^[[32m✓^[[39m packages/sim/src/research-trees.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 351^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:12.9049355Z  ^[[32m✓^[[39m packages/sim/src/observation-publication-equivalence.test.ts ^[[2m(^[[22m^[[2m18 tests^[[22m^[[2m)^[[22m^[[33m 872^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:15.1663400Z  ^[[32m✓^[[39m packages/art-pipeline/src/naval-source.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 1840^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:15.1665599Z      ^[[33m^[[2m✓^[[22m^[[39m prepares exact96px static briefs for all24 families without approval or touching historical inputs ^[[33m 1745^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:15.4187698Z  ^[[32m✓^[[39m packages/render/src/hearth-appearance.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 21^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:16.6048823Z  ^[[32m✓^[[39m packages/sim/src/uncapped-growth.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[33m 695^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:16.6108885Z      ^[[33m^[[2m✓^[[22m^[[39m buys connected land beyond37, exposes every option through bounded pages, and reloads exact sight and road memory ^[[33m 440^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:17.6571993Z  ^[[32m✓^[[39m packages/ai/src/uncapped-expansion.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[33m 573^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:20.2598780Z  ^[[32m✓^[[39m packages/sim/src/resources.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 2089^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:20.2688954Z    ^[[33m^[[2m✓^[[22m^[[39m resource generation is deterministic, seed-sensitive and bound to suitable physical ecology ^[[33m 1404^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:20.2691366Z    ^[[33m^[[2m✓^[[22m^[[39m deposits stay hidden until charted and observations cannot alter stockpiles ^[[33m 533^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:20.6569151Z  ^[[32m✓^[[39m packages/art-pipeline/src/generators/generators.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[32m 115^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:21.9169073Z  ^[[32m✓^[[39m packages/ai/src/naval-assembly.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[33m 793^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:21.9218826Z    ^[[33m^[[2m✓^[[22m^[[39m remote reserved hulls do not replace two paid local hulls for a twenty-formation expedition ^[[33m 791^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:24.4792989Z  ^[[32m✓^[[39m packages/ai/src/composition.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 2064^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:24.4794814Z    ^[[33m^[[2m✓^[[22m^[[39m AI recruits varied formations and assembles real mixed armies through legal public commands ^[[33m 1887^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:26.0722675Z  ^[[32m✓^[[39m packages/ai/src/enclosed-sea.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[33m 1196^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:26.0724979Z    ^[[33m^[[2m✓^[[22m^[[39m Mire Courts earn a same-landmass inland ferry colony, with a saved voyage and exact command replay ^[[33m 1194^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:27.8121981Z  ^[[32m✓^[[39m packages/ai/src/faction-cohort24.test.ts ^[[2m(^[[22m^[[2m13 tests^[[22m^[[2m)^[[22m^[[33m 1328^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:28.2031405Z  ^[[32m✓^[[39m packages/mapgen/src/geography-v6.test.ts ^[[2m(^[[22m^[[2m15 tests^[[22m^[[2m)^[[22m^[[33m 21220^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:28.2033994Z    ^[[33m^[[2m✓^[[22m^[[39m all twelve retained played-generator5 benchmark worlds remain byte-exact after generator6 wiring ^[[33m 4236^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:28.2058950Z    ^[[33m^[[2m✓^[[22m^[[39m generator6 continents retains bounded hydrology, genuine starting regions and dense48-seat viability across seeds ^[[33m 1889^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:28.2111953Z    ^[[33m^[[2m✓^[[22m^[[39m generator6 islands retains bounded hydrology, genuine starting regions and dense48-seat viability across seeds ^[[33m 1633^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:28.2120047Z    ^[[33m^[[2m✓^[[22m^[[39m generator6 archipelago retains bounded hydrology, genuine starting regions and dense48-seat viability across seeds ^[[33m 1456^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:28.2122211Z    ^[[33m^[[2m✓^[[22m^[[39m generator6 small has useful connected trunks, enclosed waters, passes, distinct biomes and unclipped coasts ^[[33m 748^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:28.2124354Z    ^[[33m^[[2m✓^[[22m^[[39m generator6 huge has useful connected trunks, enclosed waters, passes, distinct biomes and unclipped coasts ^[[33m 2902^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:28.2126411Z    ^[[33m^[[2m✓^[[22m^[[39m generator6 legendary has useful connected trunks, enclosed waters, passes, distinct biomes and unclipped coasts ^[[33m 4333^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:28.2128965Z    ^[[33m^[[2m✓^[[22m^[[39m three independent Small seeds show additional meaningful offshore bodies and real inland water in every layout ^[[33m 2533^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:28.2131388Z    ^[[33m^[[2m✓^[[22m^[[39m generated climate stages reproduce biomes exactly and respect actual freshwater, elevation and physical artwork constraints ^[[33m 1083^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:30.1534007Z  ^[[32m✓^[[39m packages/chronicle/src/specialist-roster.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[33m 1520^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:30.1536206Z    ^[[33m^[[2m✓^[[22m^[[39m a generated campaign pays to unlock and recruit every specialist, then merges and replays exact saved continuation ^[[33m 801^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:30.9166243Z  ^[[32m✓^[[39m packages/ai/src/sea-knowledge.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 283^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:31.9288222Z  ^[[32m✓^[[39m packages/mapgen/src/biomes.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[33m 3886^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:31.9291428Z    ^[[33m^[[2m✓^[[22m^[[39m preserves all physical geography, fertility and starts on standard across versions ^[[33m 341^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:31.9364496Z    ^[[33m^[[2m✓^[[22m^[[39m preserves all physical geography, fertility and starts on huge across versions ^[[33m 578^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:31.9366812Z    ^[[33m^[[2m✓^[[22m^[[39m preserves all physical geography, fertility and starts on legendary across versions ^[[33m 1080^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:31.9369119Z    ^[[33m^[[2m✓^[[22m^[[39m climate and classification are deterministic bounded detached stages across arbitrary seeds ^[[33m 327^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:31.9371252Z    ^[[33m^[[2m✓^[[22m^[[39m huge climate has coherent diverse distributions and preserves every starting food guarantee ^[[33m 595^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:31.9373148Z    ^[[33m^[[2m✓^[[22m^[[39m legendary climate has coherent diverse distributions and preserves every starting food guarantee ^[[33m 722^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:32.5649008Z  ^[[32m✓^[[39m packages/render/src/battle-soldiers.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 25^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:32.7909934Z  ^[[32m✓^[[39m apps/web/src/use-land-query.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[32m 15^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:33.8704206Z  ^[[32m✓^[[39m packages/chronicle/src/character-replay.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 635^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:33.8708596Z      ^[[33m^[[2m✓^[[22m^[[39m records a generated-start named surveyor and a real saved mission that extends geographic knowledge ^[[33m 386^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:35.4752101Z  ^[[32m✓^[[39m apps/web/src/runtime-art.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 891^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:35.4788662Z      ^[[33m^[[2m✓^[[22m^[[39m loads the unchanged published map and deferred battle atlas under / ^[[33m 391^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:38.7198949Z  ^[[32m✓^[[39m packages/ai/src/observation-options.test.ts ^[[2m(^[[22m^[[2m14 tests^[[22m^[[2m)^[[22m^[[33m 2813^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:38.7200802Z      ^[[33m^[[2m✓^[[22m^[[39m retains identical complete proposals/reasons and all summaries across 8 towns and wrap-around turns ^[[33m 507^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:38.7203157Z      ^[[33m^[[2m✓^[[22m^[[39m retains identical complete proposals/reasons and all summaries across 9 towns and wrap-around turns ^[[33m 376^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:38.7205117Z      ^[[33m^[[2m✓^[[22m^[[39m retains identical complete proposals/reasons and all summaries across 16 towns and wrap-around turns ^[[33m 368^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:38.7207290Z      ^[[33m^[[2m✓^[[22m^[[39m retains identical complete proposals/reasons and all summaries across 17 towns and wrap-around turns ^[[33m 515^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:38.7209163Z      ^[[33m^[[2m✓^[[22m^[[39m keeps real commands/results and saved continuation identical to full-detail planning ^[[33m 625^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:39.5596816Z  ^[[32m✓^[[39m packages/ai/src/conquest.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 381^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:40.4903224Z  ^[[32m✓^[[39m packages/chronicle/src/json-equivalence.test.ts ^[[2m(^[[22m^[[2m26 tests^[[22m^[[2m)^[[22m^[[33m 445^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:41.3284503Z  ^[[32m✓^[[39m packages/sim/src/movement-frontage.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 477^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:44.5389285Z  ^[[32m✓^[[39m packages/chronicle/src/generator6-compatibility.test.ts ^[[2m(^[[22m^[[2m13 tests^[[22m^[[2m)^[[22m^[[33m 2721^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:44.5423794Z      ^[[33m^[[2m✓^[[22m^[[39m preserves 'continents-origin' exact source, generated origin and full replay ^[[33m 356^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:44.5435150Z      ^[[33m^[[2m✓^[[22m^[[39m preserves 'continents-developed' exact source, generated origin and full replay ^[[33m 311^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:54.8784056Z  ^[[32m✓^[[39m packages/mapgen/src/inland-seas-v7.test.ts ^[[2m(^[[22m^[[2m9 tests^[[22m^[[2m)^[[22m^[[33m 23739^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:54.8802677Z    ^[[33m^[[2m✓^[[22m^[[39m all twelve played generator6 measured worlds retain their genuine pre7 seals ^[[33m 6599^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:54.8804865Z    ^[[33m^[[2m✓^[[22m^[[39m generator7 continents has larger useful inland waters without exceeding host/map budgets ^[[33m 1579^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:54.8808071Z    ^[[33m^[[2m✓^[[22m^[[39m generator7 islands has larger useful inland waters without exceeding host/map budgets ^[[33m 1340^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:54.8810286Z    ^[[33m^[[2m✓^[[22m^[[39m generator7 archipelago has larger useful inland waters without exceeding host/map budgets ^[[33m 1503^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:54.8812905Z    ^[[33m^[[2m✓^[[22m^[[39m generator7 continents is deterministic and preserves starts and valid drainage across full-range seeds ^[[33m 4080^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:54.8815198Z    ^[[33m^[[2m✓^[[22m^[[39m generator7 islands is deterministic and preserves starts and valid drainage across full-range seeds ^[[33m 4142^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:54.8817772Z    ^[[33m^[[2m✓^[[22m^[[39m generator7 archipelago is deterministic and preserves starts and valid drainage across full-range seeds ^[[33m 3877^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:54.8820126Z    ^[[33m^[[2m✓^[[22m^[[39m basin excavation keeps three untouched land hexes to the original sea and refuses unusable mountain shores ^[[33m 366^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7540477Z  ^[[32m✓^[[39m packages/ai/src/ai.test.ts ^[[2m(^[[22m^[[2m29 tests^[[22m^[[2m)^[[22m^[[33m 13773^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7542546Z    ^[[33m^[[2m✓^[[22m^[[39m 'Ashen Compact' AI settles, builds, recruits and expands through the public command API ^[[33m 1153^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7544861Z    ^[[33m^[[2m✓^[[22m^[[39m 'Reedbound Council' AI settles, builds, recruits and expands through the public command API ^[[33m 525^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7547174Z    ^[[33m^[[2m✓^[[22m^[[39m 'Cinder March' AI settles, builds, recruits and expands through the public command API ^[[33m 572^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7549154Z    ^[[33m^[[2m✓^[[22m^[[39m 'Glass Tide' AI settles, builds, recruits and expands through the public command API ^[[33m 494^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7551105Z    ^[[33m^[[2m✓^[[22m^[[39m 'Iron Covenant' AI settles, builds, recruits and expands through the public command API ^[[33m 447^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7553122Z    ^[[33m^[[2m✓^[[22m^[[39m 'Sepulchral Synod' AI settles, builds, recruits and expands through the public command API ^[[33m 395^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7555089Z    ^[[33m^[[2m✓^[[22m^[[39m 'Mire Courts' AI settles, builds, recruits and expands through the public command API ^[[33m 703^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7557230Z    ^[[33m^[[2m✓^[[22m^[[39m 'Saltwind Remnant' AI settles, builds, recruits and expands through the public command API ^[[33m 525^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7618358Z    ^[[33m^[[2m✓^[[22m^[[39m 'Wardhall Remnant' AI settles, builds, recruits and expands through the public command API ^[[33m 429^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7665269Z    ^[[33m^[[2m✓^[[22m^[[39m 'Rimehorn Clans' AI settles, builds, recruits and expands through the public command API ^[[33m 466^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7668299Z    ^[[33m^[[2m✓^[[22m^[[39m 'Sable Steppe' AI settles, builds, recruits and expands through the public command API ^[[33m 449^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7670360Z    ^[[33m^[[2m✓^[[22m^[[39m 'Morrow Spore' AI settles, builds, recruits and expands through the public command API ^[[33m 418^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7672361Z    ^[[33m^[[2m✓^[[22m^[[39m 'Cistern Assembly' AI settles, builds, recruits and expands through the public command API ^[[33m 423^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7674413Z    ^[[33m^[[2m✓^[[22m^[[39m 'Unsealed Companies' AI settles, builds, recruits and expands through the public command API ^[[33m 396^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7676432Z    ^[[33m^[[2m✓^[[22m^[[39m 'Lantern Hospices' AI settles, builds, recruits and expands through the public command API ^[[33m 396^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7678698Z    ^[[33m^[[2m✓^[[22m^[[39m 'Cairnwing Concord' AI settles, builds, recruits and expands through the public command API ^[[33m 454^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7680774Z    ^[[33m^[[2m✓^[[22m^[[39m 'Red Sluice Directorate' AI settles, builds, recruits and expands through the public command API ^[[33m 684^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7683183Z    ^[[33m^[[2m✓^[[22m^[[39m 'Velvet Meridian' AI settles, builds, recruits and expands through the public command API ^[[33m 444^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7685136Z    ^[[33m^[[2m✓^[[22m^[[39m 'Brine Choir' AI settles, builds, recruits and expands through the public command API ^[[33m 452^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7687608Z    ^[[33m^[[2m✓^[[22m^[[39m 'Emberwake Convocation' AI settles, builds, recruits and expands through the public command API ^[[33m 506^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7689714Z    ^[[33m^[[2m✓^[[22m^[[39m 'Underhush Exchange' AI settles, builds, recruits and expands through the public command API ^[[33m 436^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7691707Z    ^[[33m^[[2m✓^[[22m^[[39m 'Vesper Court' AI settles, builds, recruits and expands through the public command API ^[[33m 486^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7693688Z    ^[[33m^[[2m✓^[[22m^[[39m 'Manytrack Moot' AI settles, builds, recruits and expands through the public command API ^[[33m 434^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7695548Z    ^[[33m^[[2m✓^[[22m^[[39m 'Margin Observance' AI settles, builds, recruits and expands through the public command API ^[[33m 385^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.7697537Z    ^[[33m^[[2m✓^[[22m^[[39m AI cannot depend on hidden world state and resumes deterministically after save ^[[33m 1593^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:58.9909155Z  ^[[32m✓^[[39m packages/render/src/geography-style.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[32m 30^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:59.1620394Z  ^[[32m✓^[[39m packages/mapgen/src/water-depth.test.ts ^[[2m(^[[22m^[[2m14 tests^[[22m^[[2m)^[[22m^[[33m 3998^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:59.1623929Z    ^[[33m^[[2m✓^[[22m^[[39m generator3 preserves old physical fields and generator2 climate on huge ^[[33m 379^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:59.1625884Z    ^[[33m^[[2m✓^[[22m^[[39m generator3 preserves old physical fields and generator2 climate on legendary ^[[33m 613^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:59.1628070Z    ^[[33m^[[2m✓^[[22m^[[39m huge has real shallow/deep regions, consistent shores and unchanged safe starts ^[[33m 880^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:59.1630043Z    ^[[33m^[[2m✓^[[22m^[[39m legendary has real shallow/deep regions, consistent shores and unchanged safe starts ^[[33m 1153^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:59.3720126Z  ^[[32m✓^[[39m packages/render/src/map-overlays.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[32m 15^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:32:59.8763585Z  ^[[32m✓^[[39m packages/sim/src/road-edge-cases.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 423^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:00.2489274Z  ^[[32m✓^[[39m packages/content/src/ecology.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 38^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:00.5059090Z  ^[[32m✓^[[39m apps/web/src/hearth-theme.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 37^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:00.9439629Z  ^[[32m✓^[[39m packages/render/src/faction-style.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[33m 1048^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:00.9478775Z      ^[[33m^[[2m✓^[[22m^[[39m adds culture only to already-observed faction metadata without changing saves or revealing unknown seats ^[[33m 1004^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:01.1920640Z  ^[[32m✓^[[39m packages/art-pipeline/src/naval-review.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[33m 345^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:01.1922700Z      ^[[33m^[[2m✓^[[22m^[[39m binds repeatable native/enlarged sheets to exact candidate hashes without changing manifests ^[[33m 311^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:01.7918383Z  ^[[32m✓^[[39m packages/ai/src/diplomacy.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 312^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:02.3355062Z  ^[[32m✓^[[39m packages/mapgen/src/climate-v6.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 347^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:03.1090360Z  ^[[32m✓^[[39m packages/art-pipeline/src/blender-source.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[33m 404^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:04.1516486Z  ^[[32m✓^[[39m packages/sim/src/pending-assault-save.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[33m 581^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:04.1519527Z      ^[[33m^[[2m✓^[[22m^[[39m rejects an omitted lower-ID garrison even when a resealed defenderId prioritizes the wrong contingent ^[[33m 386^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:05.4512889Z  ^[[32m✓^[[39m packages/chronicle/src/schema9-compatibility.test.ts ^[[2m(^[[22m^[[2m32 tests^[[22m^[[2m)^[[22m^[[33m 3769^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:05.4521622Z      ^[[33m^[[2m✓^[[22m^[[39m preserves the original journey save, every command and exact seal ^[[33m 360^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:05.9827742Z  ^[[32m✓^[[39m apps/web/src/map-action-context.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 25^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:06.4189139Z  ^[[32m✓^[[39m packages/chronicle/src/battle14-compatibility.test.ts ^[[2m(^[[22m^[[2m16 tests^[[22m^[[2m)^[[22m^[[33m 1840^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:06.7610854Z  ^[[32m✓^[[39m packages/art-pipeline/src/faction-bindings.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 58^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:07.1712082Z  ^[[32m✓^[[39m apps/web/src/updates/roadmap.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 101^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:07.4449215Z  ^[[32m✓^[[39m packages/chronicle/src/chronicle.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 985^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:07.4450822Z    ^[[33m^[[2m✓^[[22m^[[39m retains every command and event after the bounded campaign feed rotates ^[[33m 560^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:08.6684921Z  ^[[32m✓^[[39m packages/render/src/improvement-geometry.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 765^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:08.6698891Z      ^[[33m^[[2m✓^[[22m^[[39m measures exact approved/published frame unions and contains every visible pixel at a readable size ^[[33m 762^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:08.8519989Z  ^[[32m✓^[[39m packages/sim/src/movement-preview.test.ts ^[[2m(^[[22m^[[2m27 tests^[[22m^[[2m)^[[22m^[[33m 1048^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:12.3156508Z  ^[[31m❯^[[39m packages/ai/src/contact.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m | ^[[22m^[[31m2 failed^[[39m^[[2m)^[[22m^[[33m 68920^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:12.3222169Z      ^[[33m^[[2m✓^[[22m^[[39m standard / 4 seats makes player contact through legal bounded plans with save replay ^[[33m 13542^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:12.3318892Z ^[[31m     ^[[31m×^[[31m standard / 24 seats makes player contact through legal bounded plans with save replay^[[39m^[[33m 20938^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:12.3348462Z ^[[31m     ^[[31m×^[[31m huge / 32 seats makes player contact through legal bounded plans with save replay^[[39m^[[33m 33253^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:12.3368966Z      ^[[33m^[[2m✓^[[22m^[[39m has explicit frontier work bounds and deterministic destinations from detached observed cells ^[[33m 1184^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:12.6708788Z  ^[[32m✓^[[39m packages/render/src/territory-style.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 20^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:14.8458860Z  ^[[32m✓^[[39m packages/ai/src/naval-funding.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 1764^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:14.8488473Z    ^[[33m^[[2m✓^[[22m^[[39m an isolated open-sea harbor preserves knowledge for its first researched ocean expedition ^[[33m 1504^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:17.4084050Z  ^[[32m✓^[[39m packages/chronicle/src/generator7-compatibility.test.ts ^[[2m(^[[22m^[[2m9 tests^[[22m^[[2m)^[[22m^[[33m 2041^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:17.4108739Z      ^[[33m^[[2m✓^[[22m^[[39m preserves 'continents-origin' exact source, generated origin and full command replay ^[[33m 302^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:17.4138568Z      ^[[33m^[[2m✓^[[22m^[[39m continues 'continents-developed' without replacing old terrain, culture order or records ^[[33m 311^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:17.9364751Z  ^[[32m✓^[[39m apps/web/src/updates/validation.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 321^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:18.9028932Z  ^[[32m✓^[[39m packages/ai/src/contact-reconnaissance.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[33m 459^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:19.4653159Z  ^[[32m✓^[[39m packages/sim/src/explored-sort.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 10150^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:19.4655314Z      ^[[33m^[[2m✓^[[22m^[[39m preserves the prechange 'huge'/32 whole-save seal and monotonic restored bytes ^[[33m 4332^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:19.4657170Z      ^[[33m^[[2m✓^[[22m^[[39m preserves the prechange 'legendary'/40 whole-save seal and monotonic restored bytes ^[[33m 5435^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:20.5990506Z  ^[[32m✓^[[39m apps/web/src/character-skills.test.tsx ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[33m 570^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:20.5993750Z      ^[[33m^[[2m✓^[[22m^[[39m covers exactly seventeen earned skills through three compatible roles and no invented Waykeeper nodes ^[[33m 382^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:42.1589075Z  ^[[32m✓^[[39m packages/ai/src/resource-economy.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[33m 21023^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:42.1619189Z    ^[[33m^[[2m✓^[[22m^[[39m AI funds and works its first observed 'Hearthgrain' deposit, then sells only actual surplus ^[[33m 2664^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:42.1648794Z    ^[[33m^[[2m✓^[[22m^[[39m AI funds and works its first observed 'Ironstone' deposit, then sells only actual surplus ^[[33m 2646^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:42.1650701Z    ^[[33m^[[2m✓^[[22m^[[39m AI funds and works its first observed 'Red copper' deposit, then sells only actual surplus ^[[33m 2377^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:42.1679055Z    ^[[33m^[[2m✓^[[22m^[[39m AI funds and works its first observed 'White salt' deposit, then sells only actual surplus ^[[33m 2237^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:42.1680988Z    ^[[33m^[[2m✓^[[22m^[[39m AI funds and works its first observed 'Heartwood' deposit, then sells only actual surplus ^[[33m 1700^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:42.1708305Z    ^[[33m^[[2m✓^[[22m^[[39m AI funds and works its first observed 'Steppe horses' deposit, then sells only actual surplus ^[[33m 3146^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:42.1759681Z    ^[[33m^[[2m✓^[[22m^[[39m AI funds and works its first observed 'Witness silver' deposit, then sells only actual surplus ^[[33m 3153^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:42.1818625Z    ^[[33m^[[2m✓^[[22m^[[39m AI funds and works its first observed 'Ashglass' deposit, then sells only actual surplus ^[[33m 3094^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:43.0833208Z  ^[[32m✓^[[39m apps/web/src/progression.test.tsx ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 271^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:43.4465638Z  ^[[32m✓^[[39m packages/content/src/characters.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 84^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:44.0009152Z  ^[[32m✓^[[39m packages/render/src/improvement-glyphs.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 33^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:44.2548428Z  ^[[32m✓^[[39m packages/render/src/army-size.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 23^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:44.5864927Z  ^[[32m✓^[[39m packages/art-pipeline/src/faction-source.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 32^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:44.9593115Z  ^[[32m✓^[[39m packages/content/src/development.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 28^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:45.5893552Z  ^[[32m✓^[[39m packages/ai/src/large-basin.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 427^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:46.4877916Z  ^[[32m✓^[[39m packages/test-fixtures/src/combat-fixture.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 370^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:47.4605772Z  ^[[32m✓^[[39m apps/web/src/realm-navigation.test.tsx ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 320^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:48.3419067Z  ^[[32m✓^[[39m apps/web/src/development-panel.test.tsx ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[33m 330^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:50.8456651Z  ^[[32m✓^[[39m packages/art-pipeline/src/toolchain/overlays.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 2161^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:50.8468766Z      ^[[33m^[[2m✓^[[22m^[[39m has stable exact-palette hard-alpha pixels, genuine effect motion and matching straight edges ^[[33m 2021^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:55.4379178Z  ^[[32m✓^[[39m packages/chronicle/src/schema12-compatibility.test.ts ^[[2m(^[[22m^[[2m19 tests^[[22m^[[2m)^[[22m^[[33m 4133^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:55.4458745Z      ^[[33m^[[2m✓^[[22m^[[39m preserves the continents origin and rejects cross-layout history ^[[33m 308^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:55.4553774Z      ^[[33m^[[2m✓^[[22m^[[39m preserves 'researched' source bytes, all original commands and seals ^[[33m 310^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:55.4569003Z      ^[[33m^[[2m✓^[[22m^[[39m preserves 'skilledMission' source bytes, all original commands and seals ^[[33m 329^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:55.4571133Z      ^[[33m^[[2m✓^[[22m^[[39m preserves 'completed' source bytes, all original commands and seals ^[[33m 347^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:56.2908582Z  ^[[32m✓^[[39m packages/ai/src/fiscal-workers.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 370^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:56.8973615Z  ^[[32m✓^[[39m packages/sim/src/legacy-growth-visibility.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 199^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:59.3485056Z  ^[[32m✓^[[39m packages/mapgen/src/legacy-geography.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 2224^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:59.3487423Z    ^[[33m^[[2m✓^[[22m^[[39m preserves captured generators1–4 on 'huge' exactly ^[[33m 821^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:59.3489194Z    ^[[33m^[[2m✓^[[22m^[[39m preserves captured generators1–4 on 'legendary' exactly ^[[33m 1154^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:33:59.6483164Z  ^[[32m✓^[[39m packages/render/src/terrain-variants.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 89^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:00.6694285Z  ^[[32m✓^[[39m packages/sim/src/naval-launch-quotes.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 533^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:00.6695882Z    ^[[33m^[[2m✓^[[22m^[[39m a funded hull launches at its quoted berth, or rechecks when another faction occupies it before completion ^[[33m 371^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:06.9760500Z  ^[[32m✓^[[39m packages/mapgen/src/features.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 6063^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:06.9762768Z    ^[[33m^[[2m✓^[[22m^[[39m huge features retain useful deposits with consistent physical eligibility ^[[33m 2447^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:06.9764848Z    ^[[33m^[[2m✓^[[22m^[[39m legendary features retain useful deposits with consistent physical eligibility ^[[33m 3033^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:06.9767410Z    ^[[33m^[[2m✓^[[22m^[[39m feature queries use no shared mutable state and reject invalid cells before looking up terrain ^[[33m 490^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:07.5969149Z  ^[[32m✓^[[39m packages/sim/src/canonical-cells.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 220^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:08.4543567Z  ^[[32m✓^[[39m packages/test-fixtures/src/conquest-fixture.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 357^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:10.3970995Z  ^[[32m✓^[[39m packages/ai/src/navigation.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[33m 1442^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:10.4019001Z    ^[[33m^[[2m✓^[[22m^[[39m exploration scores the destination sight footprint, not its already-known immediate neighbors ^[[33m 822^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:10.4024328Z    ^[[33m^[[2m✓^[[22m^[[39m a public discovery bearing only breaks equal information gain, never replaces the frontier objective ^[[33m 594^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:11.2850041Z  ^[[32m✓^[[39m packages/sim/src/uncapped-capture.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 388^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:11.4972542Z  ^[[32m✓^[[39m apps/web/src/use-development-query.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 10^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:12.2409908Z  ^[[32m✓^[[39m apps/web/src/naval-scenario.test.tsx ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 293^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:13.2278991Z  ^[[32m✓^[[39m packages/sim/src/envelope-hash.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[33m 592^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:13.2338862Z      ^[[33m^[[2m✓^[[22m^[[39m matches the original complete-envelope checksum for arbitrary UTF-16, including controls and lone surrogates ^[[33m 337^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:14.8160753Z  ^[[32m✓^[[39m packages/art-pipeline/src/battle-publication.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[33m 1197^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:14.8163158Z    ^[[33m^[[2m✓^[[22m^[[39m published effect.battle_melee retains real Blender, processing, review and exact runtime frame evidence ^[[33m 318^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:16.2248452Z  ^[[32m✓^[[39m apps/web/src/battle-ui.test.tsx ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 221^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:37.4964614Z  ^[[32m✓^[[39m apps/web/src/updates/changelog.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[33m 21007^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:37.4972625Z      ^[[33m^[[2m✓^[[22m^[[39m is deterministic and the committed feed is an exact record from its newest commit back to the root ^[[33m 14326^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:37.4975168Z      ^[[33m^[[2m✓^[[22m^[[39m does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift ^[[33m 6674^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:37.7158923Z  ^[[32m✓^[[39m packages/render/src/art-validation.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 10^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:39.8965181Z  ^[[32m✓^[[39m packages/chronicle/src/generator5-compatibility.test.ts ^[[2m(^[[22m^[[2m9 tests^[[22m^[[2m)^[[22m^[[33m 1753^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:39.8966636Z      ^[[33m^[[2m✓^[[22m^[[39m preserves 'continents-origin' exact source, generated origin and all replay seals ^[[33m 336^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:40.6088336Z  ^[[32m✓^[[39m apps/web/src/battle-defense.test.tsx ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 176^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:40.7828964Z  ^[[32m✓^[[39m apps/web/src/updates/content.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 7^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:41.5029971Z  ^[[32m✓^[[39m packages/ai/src/roads.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 239^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:41.9353930Z  ^[[32m✓^[[39m packages/render/src/world-overview.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 238^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:42.4788986Z  ^[[32m✓^[[39m packages/sim/src/growth-economy.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 97^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:43.0692102Z  ^[[32m✓^[[39m packages/render/src/selection-effect.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[33m 416^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:43.0694318Z      ^[[33m^[[2m✓^[[22m^[[39m uses a slow bounded opacity-only cycle, with entirely static reduced-motion/far output ^[[33m 402^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:44.6803201Z  ^[[32m✓^[[39m packages/test-fixtures/src/naval-art-fixture.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 1166^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:44.6872848Z      ^[[33m^[[2m✓^[[22m^[[39m exposes every real hull/culture through sight, retains one genuinely unseen ship and real embarked cargo ^[[33m 502^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:44.6889599Z      ^[[33m^[[2m✓^[[22m^[[39m keeps exact saves and deterministic real turn continuation independent of gallery reads ^[[33m 660^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:45.4697898Z  ^[[32m✓^[[39m packages/test-fixtures/src/resource-fixture.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 304^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:46.2538266Z  ^[[32m✓^[[39m packages/chronicle/src/naval-replay.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 287^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:49.7125592Z  ^[[32m✓^[[39m tests/headless/conquest-soak.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[33m 3055^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:49.7129014Z    ^[[33m^[[2m✓^[[22m^[[39m runs 100 AI-led frontier turns through conquest and peace with projects deferred and exact midpoint continuation ^[[33m 3053^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:51.9374920Z  ^[[32m✓^[[39m packages/ai/src/naval-publication-equivalence.test.ts ^[[2m(^[[22m^[[2m37 tests^[[22m^[[2m)^[[22m^[[33m 1665^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:52.4978035Z  ^[[32m✓^[[39m apps/web/src/spectator.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 137^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:58.7289094Z  ^[[32m✓^[[39m packages/ai/src/land.test.ts ^[[2m(^[[22m^[[2m25 tests^[[22m^[[2m)^[[22m^[[33m 5810^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:58.7318413Z      ^[[33m^[[2m✓^[[22m^[[39m 'Ashen Compact' assigns workers and completes productive land works with exact continuation ^[[33m 482^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:58.7348630Z      ^[[33m^[[2m✓^[[22m^[[39m 'Reedbound Council' assigns workers and completes productive land works with exact continuation ^[[33m 380^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:34:59.3709037Z  ^[[32m✓^[[39m packages/sim/src/territory-review.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 175^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:00.8822179Z  ^[[32m✓^[[39m tests/headless/travel-archive.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[33m 944^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:00.8827234Z    ^[[33m^[[2m✓^[[22m^[[39m generated seed 17 preserves real queued travel and all route events through archive save/replay ^[[33m 356^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:01.5136755Z  ^[[32m✓^[[39m apps/web/src/battle-transfer.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 170^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:01.8718665Z  ^[[32m✓^[[39m packages/content/src/research-trees.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 35^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:02.0865550Z  ^[[32m✓^[[39m packages/render/src/battle-camera.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 10^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:02.5278809Z  ^[[32m✓^[[39m apps/web/src/updates/journal.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 45^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:03.1278335Z  ^[[32m✓^[[39m packages/render/src/chunk-cache.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 10^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:03.3248914Z  ^[[32m✓^[[39m packages/render/src/animation.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 8^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:03.5299231Z  ^[[32m✓^[[39m packages/render/src/image-validation.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 11^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:03.9833825Z  ^[[32m✓^[[39m packages/sim/src/specialist-combat.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 86^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:06.9058317Z  ^[[32m✓^[[39m packages/art-pipeline/src/family-review.test.ts ^[[2m(^[[22m^[[2m11 tests^[[22m^[[2m)^[[22m^[[33m 2589^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:06.9063913Z      ^[[33m^[[2m✓^[[22m^[[39m preserves source bytes, aspect and stable exact review pixels ^[[33m 2561^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:07.1328819Z  ^[[32m✓^[[39m apps/web/src/updates/site.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 8^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:09.3709184Z  ^[[32m✓^[[39m packages/chronicle/src/development-compatibility.test.ts ^[[2m(^[[22m^[[2m11 tests^[[22m^[[2m)^[[22m^[[33m 1789^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:09.3711634Z    ^[[33m^[[2m✓^[[22m^[[39m genuine15 generatedSpecialistQueue retains exact historical bytes and replay ^[[33m 333^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:09.3713540Z    ^[[33m^[[2m✓^[[22m^[[39m genuine15 generatedSpecialistsCompleted retains exact historical bytes and replay ^[[33m 351^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:10.2044672Z  ^[[32m✓^[[39m packages/sim/src/faction-starts.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 324^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:10.3769368Z  ^[[32m✓^[[39m packages/render/src/camera-scale.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 13^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:10.7528231Z  ^[[32m✓^[[39m packages/content/src/magic.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 44^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:11.4806791Z  ^[[32m✓^[[39m packages/test-fixtures/src/tile-footprints.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 239^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:12.1134383Z  ^[[32m✓^[[39m packages/sim/src/geography-save.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 186^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:12.3230053Z  ^[[32m✓^[[39m apps/web/src/watch-fog.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 9^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:12.5396219Z  ^[[32m✓^[[39m apps/web/src/updates/media.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 15^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:13.5389167Z  ^[[32m✓^[[39m apps/web/src/campaign-lifecycle.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 76^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:13.8136252Z  ^[[32m✓^[[39m packages/art-pipeline/src/source-clip.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:13.9841940Z  ^[[32m✓^[[39m packages/mapgen/src/geography-metrics.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:14.1907978Z  ^[[32m✓^[[39m apps/web/src/campaign-seed.test.ts ^[[2m(^[[22m^[[2m14 tests^[[22m^[[2m)^[[22m^[[32m 15^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:14.5538957Z  ^[[32m✓^[[39m tests/tooling/updates-build.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:14.7542173Z  ^[[32m✓^[[39m apps/web/src/asset-url.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 8^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:15.6054703Z  ^[[32m✓^[[39m packages/mapgen/src/neighbors-into.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 666^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:15.6069689Z      ^[[33m^[[2m✓^[[22m^[[39m preserves the complete clockwise topology across narrow maps, parity and every edge ^[[33m 662^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:20.7920910Z  ^[[32m✓^[[39m packages/ai/src/overseas-generated.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[33m 4665^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:20.7922782Z    ^[[33m^[[2m✓^[[22m^[[39m generated 'tiny' / 'islands' / 20260905 earns an overseas colony using observed commands ^[[33m 1497^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:20.7924639Z    ^[[33m^[[2m✓^[[22m^[[39m generated 'small' / 'islands' / 20260905 earns an overseas colony using observed commands ^[[33m 2601^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:20.7926416Z    ^[[33m^[[2m✓^[[22m^[[39m generated 'tiny' / 'archipelago' / 74 earns an overseas colony using observed commands ^[[33m 565^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:21.9788879Z  ^[[32m✓^[[39m packages/persistence/src/current-origin.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 612^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:21.9791146Z    ^[[33m^[[2m✓^[[22m^[[39m persists a fresh current-version origin in a manual slot before and after its first command ^[[33m 408^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:22.3499272Z  ^[[32m✓^[[39m apps/web/src/updates/cross-links.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:22.5849857Z  ^[[32m✓^[[39m apps/web/src/updates/SiteShell.test.tsx ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 19^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:27.4346367Z  ^[[32m✓^[[39m tests/tooling/pages-journal.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 4695^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:27.4349642Z    ^[[33m^[[2m✓^[[22m^[[39m the actual Pages suite collects journal journeys alongside game and navigation smoke ^[[33m 4691^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:40.5642019Z  ^[[32m✓^[[39m packages/test-fixtures/src/empire-land-fixture.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 12694^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:40.5732093Z    ^[[33m^[[2m✓^[[22m^[[39m huge empire funds every paid border and preserves all32 idle hearths ^[[33m 4600^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:40.5750619Z    ^[[33m^[[2m✓^[[22m^[[39m legendary empire funds every paid border and preserves all40 idle hearths ^[[33m 8092^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:40.7429307Z  ^[[32m✓^[[39m apps/web/src/updates/navigation.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:40.9761963Z  ^[[32m✓^[[39m apps/web/src/updates/compendium/coverage.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:41.1918979Z  ^[[32m✓^[[39m apps/web/src/battle-playback.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:41.3928468Z  ^[[32m✓^[[39m apps/web/src/updates/compendium-layout.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:41.5586449Z  ^[[32m✓^[[39m packages/render/src/naval-style.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:41.8107915Z  ^[[31m❯^[[39m tests/headless/chronicle-victory.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m | ^[[22m^[[31m1 failed^[[39m^[[2m)^[[22m^[[33m 152553^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:41.8110471Z    ^[[33m^[[2m✓^[[22m^[[39m generated-start short AI victory produces complete factual logs identical after archive save/resume ^[[33m 2584^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:41.8113034Z ^[[31m   ^[[31m×^[[31m generated-start epic AI victory produces complete factual logs identical after archive save/resume^[[39m^[[33m 149966^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:43.0568980Z  ^[[32m✓^[[39m tests/tooling/lint-boundaries.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[33m 1068^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:43.0571148Z      ^[[33m^[[2m✓^[[22m^[[39m does not reinterpret the byte-preserved reviewer snapshot as live source ^[[33m 937^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:43.2479102Z  ^[[32m✓^[[39m packages/render/src/terrain-style.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:43.5616395Z  ^[[32m✓^[[39m apps/web/src/campaign-window.test.tsx ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 16^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:44.6927201Z  ^[[32m✓^[[39m packages/test-fixtures/src/fixtures.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[33m 2368^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:44.6955510Z    ^[[33m^[[2m✓^[[22m^[[39m mature stress fixture has real armies and stable save/resolution at Huge scale ^[[33m 2365^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:44.8709141Z  ^[[32m✓^[[39m apps/web/src/updates/compendium-routes.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:45.0480053Z  ^[[32m✓^[[39m apps/web/src/updates/home-style.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:45.3126177Z  ^[[32m✓^[[39m apps/web/src/updates/lore.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 39^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:45.5077684Z  ^[[32m✓^[[39m packages/render/src/marker-hit.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:45.8664342Z  ^[[32m✓^[[39m apps/web/src/vite-base.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 197^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:46.2728888Z  ^[[32m✓^[[39m apps/web/src/updates/compendium/data.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 42^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:48.3041649Z  ^[[32m✓^[[39m packages/mapgen/src/density.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[33m 4541^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:35:48.3048532Z      ^[[33m^[[2m✓^[[22m^[[39m provides bounded increasing defaults without changing explicit generation ^[[33m 4539^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0649096Z  ^[[31m❯^[[39m packages/ai/src/pacing.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m | ^[[22m^[[31m1 failed^[[39m^[[2m)^[[22m^[[33m 187659^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0669138Z    ^[[33m^[[2m✓^[[22m^[[39m 'standard' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation ^[[33m 16364^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0671869Z    ^[[33m^[[2m✓^[[22m^[[39m 'standard' seed 99 generator 5 reaches an earned long-form victory with legal orders and save continuation ^[[33m 13162^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0674227Z    ^[[33m^[[2m✓^[[22m^[[39m 'standard' seed 99 generator 6 reaches an earned long-form victory with legal orders and save continuation ^[[33m 13121^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0676730Z ^[[31m   ^[[31m×^[[31m 'epic' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation^[[39m^[[33m 96892^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0679397Z    ^[[33m^[[2m✓^[[22m^[[39m 'epic' seed 99 generator undefined reaches an earned long-form victory with legal orders and save continuation ^[[33m 48115^[[2mms^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0740785Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0741563Z ^[[31m⎯⎯⎯⎯⎯⎯⎯^[[39m^[[1m^[[41m Failed Tests 4 ^[[49m^[[22m^[[31m⎯⎯⎯⎯⎯⎯⎯^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0741866Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0746147Z ^[[41m^[[1m FAIL ^[[22m^[[49m tests/headless/chronicle-victory.test.ts^[[2m > ^[[22mgenerated-start epic AI victory produces complete factual logs identical after archive save/resume
+gameplay	Run pnpm test	2026-09-22T01:36:27.0751451Z ^[[31m^[[1mError^[[22m: Test timed out in 60000ms.
+gameplay	Run pnpm test	2026-09-22T01:36:27.0752503Z If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0753527Z ^[[36m ^[[2m❯^[[22m tests/headless/chronicle-victory.test.ts:^[[2m11:37^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0793680Z     ^[[90m  9|^[[39m // post500 order and replays the complete technical history twice. Giv…
+gameplay	Run pnpm test	2026-09-22T01:36:27.0794575Z     ^[[90m 10|^[[39m // archive integration test its own wall-time budget; keep all turn/co…
+gameplay	Run pnpm test	2026-09-22T01:36:27.0796101Z     ^[[90m 11|^[[39m test.each(['short', 'epic'] as const)('generated-start %s AI victory p…
+gameplay	Run pnpm test	2026-09-22T01:36:27.0797510Z     ^[[90m   |^[[39m                                     ^[[31m^^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0798732Z     ^[[90m 12|^[[39m   const game = createGame({ seed: 20260905, size: 'tiny', factionCount…
+gameplay	Run pnpm test	2026-09-22T01:36:27.0800955Z     ^[[90m 13|^[[39m   ^[[35mconst^[[39m archive ^[[33m=^[[39m ^[[34mcreateArchive^[[39m(game^[[33m,^[[39m { mode^[[33m:^[[39m ^[[32m'watch'^[[39m })^[[33m;^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0801811Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0802134Z ^[[31m^[[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0802396Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0803565Z ^[[41m^[[1m FAIL ^[[22m^[[49m packages/ai/src/contact.test.ts^[[2m > ^[[22mgenerated large-map faction contact^[[2m > ^[[22mstandard / 24 seats makes player contact through legal bounded plans with save replay
+gameplay	Run pnpm test	2026-09-22T01:36:27.0805159Z ^[[41m^[[1m FAIL ^[[22m^[[49m packages/ai/src/contact.test.ts^[[2m > ^[[22mgenerated large-map faction contact^[[2m > ^[[22mhuge / 32 seats makes player contact through legal bounded plans with save replay
+gameplay	Run pnpm test	2026-09-22T01:36:27.0806031Z ^[[31m^[[1mError^[[22m: Test timed out in 20000ms.
+gameplay	Run pnpm test	2026-09-22T01:36:27.0806813Z If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0807912Z ^[[36m ^[[2m❯^[[22m packages/ai/src/contact.test.ts:^[[2m83:13^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0838648Z     ^[[90m 81|^[[39m     [^[[32m'standard'^[[39m^[[33m,^[[39m ^[[33mRECOMMENDED_FACTION_COUNTS^[[39m^[[33m.^[[39mstandard^[[33m,^[[39m ^[[34m60^[[39m]^[[33m,^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0844808Z     ^[[90m 82|^[[39m     [^[[32m'huge'^[[39m^[[33m,^[[39m ^[[33mRECOMMENDED_FACTION_COUNTS^[[39m^[[33m.^[[39mhuge^[[33m,^[[39m ^[[34m60^[[39m]^[[33m,^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0846652Z     ^[[90m 83|^[[39m   ] as const)('%s / %i seats makes player contact through legal bounde…
+gameplay	Run pnpm test	2026-09-22T01:36:27.0847993Z     ^[[90m   |^[[39m             ^[[31m^^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0849526Z     ^[[90m 84|^[[39m     ^[[35mconst^[[39m result ^[[33m=^[[39m ^[[34mcontactCampaign^[[39m(size^[[33m,^[[39m count^[[33m,^[[39m limit)^[[33m;^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0850982Z     ^[[90m 85|^[[39m     expect(result.firstContact.get(result.playerId), JSON.stringify(re…
+gameplay	Run pnpm test	2026-09-22T01:36:27.0851577Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0852034Z ^[[31m^[[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0852424Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0853871Z ^[[41m^[[1m FAIL ^[[22m^[[49m packages/ai/src/pacing.test.ts^[[2m > ^[[22m'epic' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation
+gameplay	Run pnpm test	2026-09-22T01:36:27.0855383Z ^[[31m^[[1mError^[[22m: Test timed out in 60000ms.
+gameplay	Run pnpm test	2026-09-22T01:36:27.0856838Z If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0858482Z ^[[36m ^[[2m❯^[[22m packages/ai/src/pacing.test.ts:^[[2m21:20^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0859003Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0860394Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0860547Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0883989Z ^[[31m^[[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯^[[22m^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0885166Z ^[[2m Test Files ^[[22m ^[[1m^[[31m3 failed^[[39m^[[22m^[[2m | ^[[22m^[[1m^[[32m218 passed^[[39m^[[22m^[[90m (221)^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0927252Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0928230Z ^[[2m      Tests ^[[22m ^[[1m^[[31m4 failed^[[39m^[[22m^[[2m | ^[[22m^[[1m^[[32m1855 passed^[[39m^[[22m^[[90m (1859)^[[39m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0957666Z ^[[2m   Start at ^[[22m 01:30:32
+gameplay	Run pnpm test	2026-09-22T01:36:27.0980873Z ^[[2m   Duration ^[[22m 354.21s^[[2m (transform 7.25s, setup 0ms, import 54.31s, tests 890.31s, environment 36ms)^[[22m
+gameplay	Run pnpm test	2026-09-22T01:36:27.0997357Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.0997531Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.1021869Z ##[error]Error: Test timed out in 60000ms.
+gameplay	Run pnpm test	If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+gameplay	Run pnpm test	 ❯ tests/headless/chronicle-victory.test.ts:11:37
+gameplay	Run pnpm test	
+gameplay	Run pnpm test	
+gameplay	Run pnpm test	2026-09-22T01:36:27.1031138Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.1033583Z ##[error]Error: Test timed out in 20000ms.
+gameplay	Run pnpm test	If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+gameplay	Run pnpm test	 ❯ packages/ai/src/contact.test.ts:83:13
+gameplay	Run pnpm test	
+gameplay	Run pnpm test	
+gameplay	Run pnpm test	2026-09-22T01:36:27.1035430Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.1038281Z ##[error]Error: Test timed out in 20000ms.
+gameplay	Run pnpm test	If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+gameplay	Run pnpm test	 ❯ packages/ai/src/contact.test.ts:83:13
+gameplay	Run pnpm test	
+gameplay	Run pnpm test	
+gameplay	Run pnpm test	2026-09-22T01:36:27.1040141Z 
+gameplay	Run pnpm test	2026-09-22T01:36:27.1042878Z ##[error]Error: Test timed out in 60000ms.
+gameplay	Run pnpm test	If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+gameplay	Run pnpm test	 ❯ packages/ai/src/pacing.test.ts:21:20
+gameplay	Run pnpm test	
+gameplay	Run pnpm test	
+gameplay	Run pnpm test	2026-09-22T01:36:27.1769989Z  ELIFECYCLE  Test failed. See above for more details.
+gameplay	Run pnpm test	2026-09-22T01:36:27.1975375Z ##[error]Process completed with exit code 1.

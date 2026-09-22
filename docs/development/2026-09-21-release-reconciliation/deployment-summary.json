@@ -1,0 +1,57 @@
+{
+  "revision": "274d0e28c1ab9de4fc7fc43fde9f0579fc48fee4",
+  "pages": {
+    "run": "35675919748",
+    "result": "success"
+  },
+  "verify": {
+    "run": "35675919711",
+    "result": "failure",
+    "tests": {
+      "passed": 1855,
+      "total": 1859
+    },
+    "files": {
+      "passed": 218,
+      "total": 221
+    },
+    "durationSeconds": 354.21,
+    "failures": [
+      {
+        "case": "Epic archive victory",
+        "reportedSeconds": 149.966,
+        "limitSeconds": 60
+      },
+      {
+        "case": "Standard / 24 contact",
+        "reportedSeconds": 20.938,
+        "limitSeconds": 20
+      },
+      {
+        "case": "Huge / 32 contact",
+        "reportedSeconds": 33.253,
+        "limitSeconds": 20
+      },
+      {
+        "case": "Epic seed 74 pacing",
+        "reportedSeconds": 96.892,
+        "limitSeconds": 60
+      }
+    ],
+    "skipped": [
+      "art validation",
+      "production build",
+      "browser installation",
+      "gameplay",
+      "bench",
+      "bench:chronicles",
+      "bench:art"
+    ]
+  },
+  "liveSmoke": {
+    "passed": 27,
+    "total": 27,
+    "durationSeconds": 40.7
+  },
+  "acceptance": "Development deployment only. DH-015, M0 and all fifteen whole release gates remain open."
+}

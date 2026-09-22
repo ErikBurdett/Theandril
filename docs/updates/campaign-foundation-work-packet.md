@@ -3,7 +3,7 @@
 ## Identity
 
 - Stable entry slug: `campaign-foundation-and-development-order`.
-- Publication state: **reviewed and authorized for the development catalogue**; push and live readback pending. The public dispatch pins implementation checkpoint `1e41ec24965e46e8035c57b4f54632a690b8b712`.
+- Publication state: **published and live-verified** in development release `274d0e28c1ab9de4fc7fc43fde9f0579fc48fee4`. The public dispatch pins implementation checkpoint `1e41ec24965e46e8035c57b4f54632a690b8b712`.
 - Started: 2026-09-21.
 - Base revision: `f07024fe23ad3386874656d48fbbc33a5380d979`. The [roadmap-start checkpoint](../development/2026-09-21-roadmap-start/source-manifest.json), [historical continuation](../development/2026-09-21-campaign-continuation/source-manifest.json) and [Epic baseline pass](../development/2026-09-21-epic-baseline/runner/source-manifest.json) retain their separate working-source manifests. Their reviewed final implementation is now committed in `1e41ec24965e46e8035c57b4f54632a690b8b712`.
 - Current campaign/save rules: **17**; content hash **`b79c78ed`**. No schema or content change.
@@ -127,7 +127,7 @@ Independent [naval](../development/2026-09-21-roadmap-start/review/naval.md), [m
 
 The historical continuation has independent [explored-cell](../development/2026-09-21-campaign-continuation/review/canonical-cells.md), [observation](../development/2026-09-21-campaign-continuation/review/observations.md), [formatting](../development/2026-09-21-campaign-continuation/review/pretty-json.md) and [movement-preview](../development/2026-09-21-campaign-continuation/review/movement-preview.md) reviews. The [cache review](../development/2026-09-21-campaign-continuation/review/hash-prototype-notes.md) explains why that prototype remains outside production. Its [final factual/visual review](../development/2026-09-21-campaign-continuation/review/final.md) approves only that earlier checkpoint's claims, source/log hashes and imagery; it does not review the current pass, clear the Epic timeout or authorize publication.
 
-The prior [final factual/visual review](../development/2026-09-21-roadmap-start/review/final.md) approves only that earlier checkpoint's claims and imagery. Publication remains unauthorized.
+The prior [final factual/visual review](../development/2026-09-21-roadmap-start/review/final.md) approves only that earlier checkpoint's claims and imagery. Publication was still unauthorized at that earlier review.
 
 ## Road to 1.0
 
@@ -137,4 +137,6 @@ The foundation work advances Gates A and C, with save/replay compatibility check
 
 The subsequent September 21 request to reconcile and deploy Theandril explicitly authorizes publication. Earlier no-publication statements in this packet describe its original local-development scope. The public entry uses the same slug, the committed implementation checkpoint and the exact two reviewed screenshots; it preserves all fifteen open gates and the failed Epic acceptance result. Its historical checkpoint measurements are not relabelled as fresh release results.
 
-Fresh release-candidate verification passes typecheck, lint, content/art validation, build and **27/27 production Pages checks**. The unchanged headless suite remains **1,858/1,859**, with Epic at **66.513 seconds against 60**. [Release evidence](../development/2026-09-21-release-reconciliation/README.md) and [independent publication review](../development/2026-09-21-release-reconciliation/journal-review.md) separate this publication work from gameplay and whole-release acceptance. Push and live deployment readback remain pending at this preparation checkpoint.
+Fresh release-candidate verification passes typecheck, lint, content/art validation, build and **27/27 production Pages checks**. The unchanged headless suite remains **1,858/1,859**, with Epic at **66.513 seconds against 60**. [Release evidence](../development/2026-09-21-release-reconciliation/README.md) and [independent publication review](../development/2026-09-21-release-reconciliation/journal-review.md) separate this publication work from gameplay and whole-release acceptance.
+
+Release `274d0e2` was fast-forwarded to master and deployed successfully by [Pages run 35675919748](https://github.com/ErikBurdett/Theandril/actions/runs/35675919748). The public site passes **27/27** production checks in 40.7 seconds; its ledger exposes that exact commit. [Live identity](../development/2026-09-21-release-reconciliation/live-identity.json), [browser log](../development/2026-09-21-release-reconciliation/browser-live.log). The separate [hosted campaign run](https://github.com/ErikBurdett/Theandril/actions/runs/35675919711) fails four timing cases at **1,855/1,859**, leaving its later checks skipped and DH-015/M0/all fifteen release gates open. Publication adds no accepted gameplay scope and defers none of the existing requirements.
