@@ -1,0 +1,394 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ✓ packages/mapgen/src/inland-seas-v7.test.ts (9 tests) 10436ms
+   ✓ all twelve played generator6 measured worlds retain their genuine pre7 seals  3075ms
+   ✓ generator7 continents has larger useful inland waters without exceeding host/map budgets  727ms
+   ✓ generator7 islands has larger useful inland waters without exceeding host/map budgets  705ms
+   ✓ generator7 archipelago has larger useful inland waters without exceeding host/map budgets  797ms
+   ✓ generator7 continents is deterministic and preserves starts and valid drainage across full-range seeds  1491ms
+   ✓ generator7 islands is deterministic and preserves starts and valid drainage across full-range seeds  1345ms
+   ✓ generator7 archipelago is deterministic and preserves starts and valid drainage across full-range seeds  1961ms
+ ✓ packages/ai/src/progression.test.ts (16 tests) 11542ms
+   ✓ generated-start AI seed 74 reaches true Prosperity with ordinary commands and deterministic save continuation  1382ms
+   ✓ generated-start AI seed 2026 reaches true Prosperity with ordinary commands and deterministic save continuation  1589ms
+   ✓ generated-start AI seed 20260905 reaches true Prosperity with ordinary commands and deterministic save continuation  705ms
+   ✓ generated-start AI seed 17 reaches true Prosperity with ordinary commands and deterministic save continuation  914ms
+   ✓ generated-start AI seed 99 reaches true Prosperity with ordinary commands and deterministic save continuation  928ms
+   ✓ generated-start AI seed 31415 reaches true Prosperity with ordinary commands and deterministic save continuation  1327ms
+   ✓ generated-start AI seed 2718 reaches true Prosperity with ordinary commands and deterministic save continuation  1155ms
+   ✓ generated-start AI seed 8128 reaches true Prosperity with ordinary commands and deterministic save continuation  1121ms
+   ✓ generated-start AI seed 4096 reaches true Prosperity with ordinary commands and deterministic save continuation  1221ms
+   ✓ generated-start AI seed 65535 reaches true Prosperity with ordinary commands and deterministic save continuation  1044ms
+ ✓ apps/web/src/updates/changelog.test.ts (6 tests) 13550ms
+     ✓ is deterministic and the committed feed is an exact record from its newest commit back to the root  9018ms
+     ✓ does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift  4529ms
+ ✓ tests/art-factory.test.ts (8 tests) 14762ms
+     ✓ validates a candidate without creating an approval or replacing an existing approval report  350ms
+     ✓ rejects an incorrect visual-review hash before creating any approval  522ms
+     ✓ creates review sheets but explicitly refuses source-comparison approval  487ms
+     ✓ rebuilds a retained approval atlas without any cache or external art tools  835ms
+     ✓ retains reviewed frames, evidence and original sources with fresh exact reports  8192ms
+     ✓ preserves real editable/source exports, timings and their processing hashes  869ms
+     ✓ rebuilds the published PNG/catalog and cross-checks browser copies and every frame pixel  1541ms
+     ✓ keeps the complete published source/evidence closure outside Git ignore rules  1469ms
+ ✓ packages/ai/src/ai.test.ts (29 tests) 6787ms
+   ✓ 'Ashen Compact' AI settles, builds, recruits and expands through the public command API  492ms
+   ✓ 'Cinder March' AI settles, builds, recruits and expands through the public command API  321ms
+   ✓ 'Mire Courts' AI settles, builds, recruits and expands through the public command API  337ms
+   ✓ 'Red Sluice Directorate' AI settles, builds, recruits and expands through the public command API  364ms
+   ✓ AI cannot depend on hidden world state and resumes deterministically after save  686ms
+ ✓ packages/test-fixtures/src/empire-land-fixture.test.ts (2 tests) 5203ms
+   ✓ huge empire funds every paid border and preserves all32 idle hearths  1819ms
+   ✓ legendary empire funds every paid border and preserves all40 idle hearths  3383ms
+ ✓ packages/art-pipeline/src/faction-coverage.test.ts (8 tests) 2815ms
+     ✓ preserves all reviewed pixels and tool provenance: one real four-pose scout and431 static faction assets  2369ms
+ ✓ packages/ai/src/resource-economy.test.ts (8 tests) 9361ms
+   ✓ AI funds and works its first observed 'Hearthgrain' deposit, then sells only actual surplus  884ms
+   ✓ AI funds and works its first observed 'Ironstone' deposit, then sells only actual surplus  1034ms
+   ✓ AI funds and works its first observed 'Red copper' deposit, then sells only actual surplus  1134ms
+   ✓ AI funds and works its first observed 'White salt' deposit, then sells only actual surplus  1087ms
+   ✓ AI funds and works its first observed 'Heartwood' deposit, then sells only actual surplus  758ms
+   ✓ AI funds and works its first observed 'Steppe horses' deposit, then sells only actual surplus  1350ms
+   ✓ AI funds and works its first observed 'Witness silver' deposit, then sells only actual surplus  1460ms
+   ✓ AI funds and works its first observed 'Ashglass' deposit, then sells only actual surplus  1651ms
+ ✓ packages/mapgen/src/geography-v6.test.ts (15 tests) 8016ms
+   ✓ all twelve retained played-generator5 benchmark worlds remain byte-exact after generator6 wiring  1410ms
+   ✓ generator6 continents retains bounded hydrology, genuine starting regions and dense48-seat viability across seeds  835ms
+   ✓ generator6 islands retains bounded hydrology, genuine starting regions and dense48-seat viability across seeds  725ms
+   ✓ generator6 archipelago retains bounded hydrology, genuine starting regions and dense48-seat viability across seeds  836ms
+   ✓ generator6 small has useful connected trunks, enclosed waters, passes, distinct biomes and unclipped coasts  322ms
+   ✓ generator6 huge has useful connected trunks, enclosed waters, passes, distinct biomes and unclipped coasts  930ms
+   ✓ generator6 legendary has useful connected trunks, enclosed waters, passes, distinct biomes and unclipped coasts  1599ms
+   ✓ three independent Small seeds show additional meaningful offshore bodies and real inland water in every layout  833ms
+   ✓ generated climate stages reproduce biomes exactly and respect actual freshwater, elevation and physical artwork constraints  379ms
+ ✓ packages/ai/src/recruitment.test.ts (37 tests) 22443ms
+   ✓ 'Mire Courts' recruits and combines legal armies with exact saved continuation  1415ms
+   ✓ 'Saltwind Remnant' recruits and combines legal armies with exact saved continuation  1236ms
+   ✓ 'Wardhall Remnant' recruits and combines legal armies with exact saved continuation  1024ms
+   ✓ 'Rimehorn Clans' recruits and combines legal armies with exact saved continuation  1097ms
+   ✓ 'Sable Steppe' recruits and combines legal armies with exact saved continuation  1330ms
+   ✓ 'Morrow Spore' recruits and combines legal armies with exact saved continuation  1277ms
+   ✓ 'Cistern Assembly' recruits and combines legal armies with exact saved continuation  958ms
+   ✓ 'Unsealed Companies' recruits and combines legal armies with exact saved continuation  1123ms
+   ✓ 'Lantern Hospices' recruits and combines legal armies with exact saved continuation  1421ms
+   ✓ 'Cairnwing Concord' recruits and combines legal armies with exact saved continuation  1411ms
+   ✓ 'Red Sluice Directorate' recruits and combines legal armies with exact saved continuation  1251ms
+   ✓ 'Velvet Meridian' recruits and combines legal armies with exact saved continuation  1151ms
+   ✓ 'Brine Choir' recruits and combines legal armies with exact saved continuation  1328ms
+   ✓ 'Emberwake Convocation' recruits and combines legal armies with exact saved continuation  1093ms
+   ✓ 'Underhush Exchange' recruits and combines legal armies with exact saved continuation  1306ms
+   ✓ 'Vesper Court' recruits and combines legal armies with exact saved continuation  1290ms
+   ✓ 'Manytrack Moot' recruits and combines legal armies with exact saved continuation  967ms
+   ✓ 'Margin Observance' recruits and combines legal armies with exact saved continuation  1046ms
+ ✓ packages/art-pipeline/src/faction-extraction.test.ts (10 tests) 2662ms
+     ✓ partitions odd provider dimensions without losing pixels and creates deterministic padded native PNGs  1694ms
+     ✓ requires a source-hash-bound crop review, not an automatically generated contact sheet  331ms
+     ✓ rejects false declared component metadata even when its supplied source/component seal is unchanged  352ms
+ ✓ packages/ai/src/overseas-generated.test.ts (3 tests) 1887ms
+   ✓ generated 'tiny' / 'islands' / 20260905 earns an overseas colony using observed commands  611ms
+   ✓ generated 'small' / 'islands' / 20260905 earns an overseas colony using observed commands  1061ms
+ ✓ packages/persistence/src/campaign-storage.test.ts (21 tests) 3129ms
+   ✓ incremental storage retains a genuine schema12 origin and immutable prefix while appending current rules  332ms
+   ✓ rotating a long abandoned campaign limits cleanup per commit and safely drains deferred orphan chains  1019ms
+ ✓ packages/mapgen/src/geography-v5.test.ts (20 tests) 4967ms
+   ✓ continents preserves deterministic hydrology and viable distributed starts across seeds  379ms
+   ✓ huge offers genuinely different layouts, rivers, mountain lakes and independent starts  1218ms
+   ✓ legendary offers genuinely different layouts, rivers, mountain lakes and independent starts  1425ms
+   ✓ Tiny archipelagos remain physically separated at four seats and at the full48-seat density  1177ms
+stdout | packages/ai/src/naval-outlets.test.ts > naval geography work stays bounded as waiting founder count grows (4 faction seats)
+{"probe":"aggregate-observed-cell-reads","factionCount":4,"radius":4,"counts":[{"founders":1,"cells":61,"reads":154},{"founders":8,"cells":61,"reads":154},{"founders":32,"cells":61,"reads":154},{"founders":128,"cells":61,"reads":154}]}
+{"probe":"aggregate-observed-cell-reads","factionCount":4,"radius":8,"counts":[{"founders":1,"cells":217,"reads":544},{"founders":8,"cells":217,"reads":544},{"founders":32,"cells":217,"reads":544},{"founders":128,"cells":217,"reads":544}]}
+
+stdout | packages/ai/src/naval-outlets.test.ts > naval geography work stays bounded as waiting founder count grows (24 faction seats)
+{"probe":"aggregate-observed-cell-reads","factionCount":24,"radius":4,"counts":[{"founders":1,"cells":61,"reads":93},{"founders":8,"cells":61,"reads":93},{"founders":32,"cells":61,"reads":93},{"founders":128,"cells":61,"reads":93}]}
+{"probe":"aggregate-observed-cell-reads","factionCount":24,"radius":8,"counts":[{"founders":1,"cells":217,"reads":327},{"founders":8,"cells":217,"reads":327},{"founders":32,"cells":217,"reads":327},{"founders":128,"cells":217,"reads":327}]}
+
+ ✓ packages/chronicle/src/compatibility.test.ts (5 tests) 1319ms
+     ✓ matches the independently recorded pre-travel short-campaign v4 benchmark seal  777ms
+ ✓ packages/sim/src/explored-sort.test.ts (5 tests) 5865ms
+     ✓ preserves the prechange 'huge'/32 whole-save seal and monotonic restored bytes  1728ms
+     ✓ preserves the prechange 'legendary'/40 whole-save seal and monotonic restored bytes  4019ms
+ ✓ packages/chronicle/src/schema12-compatibility.test.ts (19 tests) 1999ms
+ ✓ packages/ai/src/naval-outlets.test.ts (5 tests) 3206ms
+   ✓ a paid second harbor remains the outlet commitment when a third coastal town becomes available  813ms
+   ✓ second-outlet ocean scout keeps its own paid reserve, releases it while queued and when its quote is blocked  659ms
+   ✓ an outlet caravan keeps its saved land route through a nearby ferry and reaches paid founding  1357ms
+ ✓ packages/art-pipeline/src/toolchain/toolchain.test.ts (8 tests) 3031ms
+     ✓ keeps every original pixel, facing, clip and duration within the4096 sheet bound  2958ms
+ ✓ packages/persistence/src/campaign-storage-durability.test.ts (4 tests) 1711ms
+   ✓ PERSIST-02 a resealed refcount undercount cannot reclaim a remaining history, and bounded GC still drains it when abandoned  1253ms
+ ✓ packages/ai/src/land.test.ts (25 tests) 2234ms
+ ✓ packages/chronicle/src/schema11-compatibility.test.ts (25 tests) 2659ms
+ ✓ tests/headless/conquest-soak.test.ts (1 test) 1339ms
+   ✓ runs 100 AI-led frontier turns through conquest and peace with projects deferred and exact midpoint continuation  1338ms
+ ✓ packages/mapgen/src/index.test.ts (17 tests) 2215ms
+     ✓ keeps every edge reciprocal, bounded, unique and exactly one hex long  955ms
+     ✓ gives every faction fertile, connected expansion space across arbitrary seeds  619ms
+ ✓ packages/sim/src/roster.test.ts (27 tests) 1749ms
+ ✓ packages/mapgen/src/features.test.ts (4 tests) 2211ms
+   ✓ huge features retain useful deposits with consistent physical eligibility  876ms
+   ✓ legendary features retain useful deposits with consistent physical eligibility  1117ms
+ ✓ packages/chronicle/src/schema10-compatibility.test.ts (17 tests) 1498ms
+ ✓ packages/chronicle/src/schema9-compatibility.test.ts (32 tests) 1618ms
+ ✓ packages/persistence/src/persistence.test.ts (12 tests) 1390ms
+   ✓ legacy v1 files with large valid records remain readable and re-exportable  504ms
+ ✓ packages/sim/src/territory.test.ts (11 tests) 1546ms
+     ✓ keeps each authored improvement site and preview authoritative across all five definitions  1351ms
+ ✓ packages/mapgen/src/density.test.ts (1 test) 2542ms
+     ✓ provides bounded increasing defaults without changing explicit generation  2541ms
+ ✓ packages/mapgen/src/biomes.test.ts (10 tests) 1796ms
+   ✓ preserves all physical geography, fertility and starts on huge across versions  350ms
+   ✓ preserves all physical geography, fertility and starts on legendary across versions  436ms
+   ✓ legendary climate has coherent diverse distributions and preserves every starting food guarantee  395ms
+ ✓ packages/art-pipeline/src/blender-unit-source.test.ts (11 tests) 607ms
+ ✓ packages/ai/src/contact.test.ts (4 tests) 33462ms
+     ✓ standard / 4 seats makes player contact through legal bounded plans with save replay  7093ms
+     ✓ standard / 24 seats makes player contact through legal bounded plans with save replay  9544ms
+     ✓ huge / 32 seats makes player contact through legal bounded plans with save replay  16145ms
+     ✓ has explicit frontier work bounds and deterministic destinations from detached observed cells  678ms
+ ✓ packages/sim/src/army-composition.test.ts (27 tests) 1087ms
+     ✓ conserves formation identities and state across deterministic merge/split/replay sequences  559ms
+ ✓ packages/ai/src/observation-options.test.ts (14 tests) 1211ms
+ ✓ packages/ai/src/composition.test.ts (4 tests) 1054ms
+   ✓ AI recruits varied formations and assembles real mixed armies through legal public commands  994ms
+ ✓ tests/tooling/pages-journal.test.ts (2 tests) 668ms
+   ✓ the actual Pages suite collects journal journeys alongside game and navigation smoke  665ms
+stderr | apps/web/src/worker-queries.test.ts
+Another connection wants to delete database 'theandril-campaigns'. Closing db now to resume the delete request.
+
+ ✓ apps/web/src/worker-queries.test.ts (6 tests) 946ms
+ ✓ packages/mapgen/src/water-depth.test.ts (14 tests) 1939ms
+   ✓ huge has real shallow/deep regions, consistent shores and unchanged safe starts  396ms
+   ✓ legendary has real shallow/deep regions, consistent shores and unchanged safe starts  648ms
+ ✓ packages/chronicle/src/generator6-compatibility.test.ts (13 tests) 1161ms
+ ✓ packages/art-pipeline/src/animation-source.test.ts (15 tests) 1101ms
+ ✓ packages/chronicle/src/generator7-compatibility.test.ts (9 tests) 810ms
+ ✓ packages/art-pipeline/src/core.test.ts (24 tests) 772ms
+     ✓ keeps exact native foot and mounted frames on independent deferred pages without shifting foundation  342ms
+ ✓ packages/sim/src/pacing.test.ts (41 tests) 1100ms
+ ✓ packages/art-pipeline/src/family-review.test.ts (11 tests) 1525ms
+     ✓ preserves source bytes, aspect and stable exact review pixels  1508ms
+ ✓ packages/chronicle/src/journal.test.ts (13 tests) 861ms
+ ✓ packages/chronicle/src/schema8-compatibility.test.ts (21 tests) 1178ms
+ ✓ packages/chronicle/src/schema7-compatibility.test.ts (10 tests) 1147ms
+ ✓ packages/chronicle/src/schema13-compatibility.test.ts (11 tests) 724ms
+ ✓ packages/art-pipeline/src/toolchain/overlays.test.ts (2 tests) 1323ms
+     ✓ has stable exact-palette hard-alpha pixels, genuine effect motion and matching straight edges  1256ms
+ ✓ packages/chronicle/src/development-compatibility.test.ts (11 tests) 703ms
+ ✓ packages/ai/src/naval.test.ts (15 tests) 1186ms
+ ✓ packages/chronicle/src/generator5-compatibility.test.ts (9 tests) 1042ms
+ ✓ packages/mapgen/src/legacy-geography.test.ts (4 tests) 877ms
+   ✓ preserves captured generators1–4 on 'huge' exactly  318ms
+   ✓ preserves captured generators1–4 on 'legendary' exactly  462ms
+ ✓ packages/ai/src/naval-publication-equivalence.test.ts (37 tests) 972ms
+ ✓ packages/sim/src/land-queries.test.ts (15 tests) 637ms
+ ✓ packages/art-pipeline/src/naval-source.test.ts (2 tests) 556ms
+     ✓ prepares exact96px static briefs for all24 families without approval or touching historical inputs  526ms
+ ✓ packages/chronicle/src/battle14-compatibility.test.ts (16 tests) 1025ms
+ ✓ packages/sim/src/naval.test.ts (18 tests) 675ms
+ ✓ packages/test-fixtures/src/fixtures.test.ts (1 test) 781ms
+   ✓ mature stress fixture has real armies and stable save/resolution at Huge scale  780ms
+ ✓ packages/sim/src/resources.test.ts (4 tests) 710ms
+   ✓ resource generation is deterministic, seed-sensitive and bound to suitable physical ecology  492ms
+ ✓ tests/tooling/lint-boundaries.test.ts (2 tests) 375ms
+     ✓ does not reinterpret the byte-preserved reviewer snapshot as live source  323ms
+ ✓ packages/sim/src/characters.test.ts (25 tests) 786ms
+ ✓ packages/ai/src/overseas.test.ts (8 tests) 683ms
+   ✓ partial-fog island start earns navigation, harbor, transport and settlers then founds across deep water  439ms
+ ✓ packages/sim/src/battle-abilities.test.ts (12 tests) 470ms
+ ✓ packages/ai/src/battle-defense.test.ts (17 tests) 582ms
+ ✓ packages/chronicle/src/specialist-roster.test.ts (6 tests) 542ms
+   ✓ a generated campaign pays to unlock and recruit every specialist, then merges and replays exact saved continuation  308ms
+ ✓ packages/ai/src/navigation.test.ts (3 tests) 584ms
+   ✓ exploration scores the destination sight footprint, not its already-known immediate neighbors  367ms
+ ✓ packages/sim/src/diplomacy.test.ts (10 tests) 606ms
+     ✓ supports requested reparations and preserves total coin for arbitrary legal payments  443ms
+ ✓ packages/chronicle/src/schema6-compatibility.test.ts (8 tests) 895ms
+ ✓ packages/ai/src/enclosed-sea.test.ts (1 test) 419ms
+   ✓ Mire Courts earn a same-landmass inland ferry colony, with a saved voyage and exact command replay  419ms
+ ✓ packages/ai/src/faction-cohort24.test.ts (13 tests) 593ms
+ ✓ packages/sim/src/warfare.test.ts (24 tests) 525ms
+ ✓ packages/ai/src/characters.test.ts (5 tests) 519ms
+   ✓ AI funds observed appointments, attaches specialists, completes refits and spends earned experience with exact saved continuation  414ms
+ ✓ packages/art-pipeline/src/biome-source.test.ts (36 tests) 553ms
+ ✓ packages/sim/src/progression.test.ts (22 tests) 446ms
+ ✓ packages/sim/src/simulation.test.ts (10 tests) 443ms
+ ✓ packages/ai/src/naval-funding.test.ts (2 tests) 632ms
+   ✓ an isolated open-sea harbor preserves knowledge for its first researched ocean expedition  554ms
+ ✓ packages/sim/src/siege.test.ts (21 tests) 555ms
+ ✓ packages/test-fixtures/src/naval-art-fixture.test.ts (2 tests) 550ms
+ ✓ packages/sim/src/movement.test.ts (22 tests) 376ms
+ ✓ packages/sim/src/serialization-performance.test.ts (24 tests) 650ms
+ ✓ packages/sim/src/individual-campaign.test.ts (6 tests) 305ms
+ ✓ packages/sim/src/save.test.ts (30 tests) 383ms
+ ✓ packages/chronicle/src/chronicle.test.ts (4 tests) 376ms
+ ✓ packages/art-pipeline/src/battle-publication.test.ts (6 tests) 366ms
+ ✓ packages/sim/src/combat/combat.test.ts (15 tests) 247ms
+ ✓ packages/sim/src/battle-morale.test.ts (5 tests) 450ms
+ ✓ packages/render/src/tile-footprint.test.ts (7 tests) 413ms
+     ✓ verifies all 75 exact registered silhouettes against retained PNGs and actual published atlas pixels  386ms
+ ✓ packages/render/src/improvement-geometry.test.ts (2 tests) 390ms
+     ✓ measures exact approved/published frame unions and contains every visible pixel at a readable size  388ms
+ ✓ packages/sim/src/battle-frontage.test.ts (9 tests) 420ms
+ ✓ tests/headless/travel-archive.test.ts (5 tests) 309ms
+ ✓ apps/web/src/runtime-art.test.ts (5 tests) 393ms
+ ✓ packages/sim/src/movement-preview.test.ts (27 tests) 357ms
+ ✓ packages/render/src/faction-style.test.ts (8 tests) 448ms
+     ✓ adds culture only to already-observed faction metadata without changing saves or revealing unknown seats  433ms
+ ✓ packages/ai/src/navigation-performance.test.ts (15 tests) 280ms
+ ✓ packages/sim/src/canonical-land.test.ts (8 tests) 268ms
+ ✓ apps/web/src/faction-art.test.tsx (13 tests) 369ms
+ ✓ packages/sim/src/movement-search-equivalence.test.ts (23 tests) 495ms
+ ✓ packages/sim/src/observation-publication-equivalence.test.ts (18 tests) 324ms
+ ✓ packages/sim/src/development.test.ts (8 tests) 216ms
+ ✓ packages/persistence/src/current-origin.test.ts (2 tests) 215ms
+ ✓ packages/ai/src/research-land.test.ts (5 tests) 465ms
+   ✓ food demand cannot repeatedly demolish paid spring gardens and oreworks on the same real ore-and-spring hex  351ms
+ ✓ packages/sim/src/territory-quote-performance.test.ts (4 tests) 230ms
+ ✓ packages/ai/src/magic.test.ts (6 tests) 234ms
+ ✓ packages/sim/src/roads.test.ts (10 tests) 188ms
+ ✓ packages/sim/src/pending-assault-save.test.ts (3 tests) 193ms
+ ✓ packages/sim/src/movement-frontage.test.ts (4 tests) 210ms
+ ✓ apps/web/src/character-skills.test.tsx (3 tests) 165ms
+ ✓ packages/art-pipeline/src/faction-expansion.test.ts (13 tests) 207ms
+ ✓ apps/web/src/land.test.tsx (10 tests) 234ms
+ ✓ packages/sim/src/envelope-hash.test.ts (3 tests) 161ms
+ ✓ packages/ai/src/uncapped-expansion.test.ts (7 tests) 244ms
+ ✓ packages/sim/src/army-combat.test.ts (10 tests) 322ms
+ ✓ packages/ai/src/naval-assembly.test.ts (1 test) 292ms
+ ✓ packages/chronicle/src/character-replay.test.ts (2 tests) 211ms
+ ✓ packages/render/src/battle-layout.test.ts (8 tests) 279ms
+ ✓ packages/sim/src/road-edge-cases.test.ts (4 tests) 184ms
+ ✓ packages/ai/src/large-basin.test.ts (2 tests) 163ms
+ ✓ packages/sim/src/territory-growth.test.ts (11 tests) 174ms
+ ✓ packages/sim/src/uncapped-growth.test.ts (3 tests) 277ms
+ ✓ packages/sim/src/naval-launch-quotes.test.ts (2 tests) 291ms
+ ✓ packages/test-fixtures/src/conquest-fixture.test.ts (2 tests) 135ms
+ ✓ packages/test-fixtures/src/combat-fixture.test.ts (2 tests) 133ms
+ ✓ packages/chronicle/src/json-equivalence.test.ts (26 tests) 138ms
+ ✓ packages/mapgen/src/neighbors-into.test.ts (2 tests) 301ms
+ ✓ packages/ai/src/fiscal-workers.test.ts (2 tests) 97ms
+ ✓ packages/ai/src/contact-reconnaissance.test.ts (3 tests) 144ms
+ ✓ packages/art-pipeline/src/naval-review.test.ts (3 tests) 164ms
+ ✓ packages/test-fixtures/src/resource-fixture.test.ts (2 tests) 107ms
+ ✓ packages/ai/src/conquest.test.ts (5 tests) 124ms
+ ✓ apps/web/src/updates/validation.test.ts (5 tests) 100ms
+ ✓ packages/render/src/selection-effect.test.ts (3 tests) 161ms
+ ✓ packages/ai/src/diplomacy.test.ts (5 tests) 158ms
+ ✓ apps/web/src/realm-navigation.test.tsx (4 tests) 139ms
+ ✓ apps/web/src/naval-scenario.test.tsx (2 tests) 174ms
+ ✓ packages/sim/src/faction-starts.test.ts (2 tests) 107ms
+ ✓ packages/art-pipeline/src/blender-source.test.ts (7 tests) 91ms
+ ✓ apps/web/src/map-actions.test.tsx (14 tests) 117ms
+ ✓ packages/sim/src/uncapped-capture.test.ts (2 tests) 150ms
+ ✓ packages/ai/src/sea-knowledge.test.ts (6 tests) 132ms
+ ✓ packages/sim/src/research-trees.test.ts (5 tests) 151ms
+ ✓ packages/test-fixtures/src/tile-footprints.test.ts (2 tests) 115ms
+ ✓ apps/web/src/vite-base.test.ts (4 tests) 111ms
+ ✓ apps/web/src/progression.test.tsx (5 tests) 79ms
+ ✓ apps/web/src/development-panel.test.tsx (3 tests) 96ms
+ ✓ packages/mapgen/src/climate-v6.test.ts (5 tests) 101ms
+ ✓ packages/ai/src/roads.test.ts (2 tests) 75ms
+ ✓ packages/chronicle/src/naval-replay.test.ts (1 test) 87ms
+ ✓ packages/render/src/world-overview.test.ts (3 tests) 74ms
+ ✓ packages/sim/src/geography-save.test.ts (1 test) 65ms
+ ✓ packages/sim/src/territory-review.test.ts (1 test) 89ms
+ ✓ apps/web/src/next-action.test.ts (10 tests) 127ms
+ ✓ apps/web/src/cell-transfer.test.ts (56 tests) 113ms
+ ✓ apps/web/src/battle-defense.test.tsx (2 tests) 70ms
+ ✓ packages/sim/src/legacy-growth-visibility.test.ts (1 test) 68ms
+ ✓ packages/sim/src/canonical-cells.test.ts (4 tests) 74ms
+ ✓ packages/content/src/characters.test.ts (4 tests) 47ms
+ ✓ apps/web/src/updates/roadmap.test.ts (5 tests) 42ms
+ ✓ apps/web/src/spectator.test.ts (1 test) 70ms
+ ✓ apps/web/src/battle-transfer.test.ts (2 tests) 55ms
+ ✓ packages/sim/src/growth-economy.test.ts (3 tests) 57ms
+ ✓ packages/content/src/content.test.ts (10 tests) 37ms
+ ✓ packages/art-pipeline/src/generators/generators.test.ts (7 tests) 36ms
+ ✓ packages/sim/src/combat/individual.test.ts (6 tests) 43ms
+ ✓ apps/web/src/battle-ui.test.tsx (3 tests) 89ms
+ ✓ packages/sim/src/specialist-combat.test.ts (2 tests) 56ms
+ ✓ packages/art-pipeline/src/animation-coverage.test.ts (8 tests) 28ms
+ ✓ packages/render/src/terrain-variants.test.ts (4 tests) 42ms
+ ✓ packages/art-pipeline/src/faction-bindings.test.ts (5 tests) 43ms
+ ✓ packages/content/src/factions.test.ts (7 tests) 30ms
+ ✓ apps/web/src/campaign-lifecycle.test.ts (1 test) 48ms
+ ✓ apps/web/src/updates/lore.test.ts (1 test) 12ms
+ ✓ packages/content/src/magic.test.ts (2 tests) 26ms
+ ✓ apps/web/src/updates/journal.test.ts (3 tests) 15ms
+ ✓ packages/content/src/ecology.test.ts (4 tests) 13ms
+ ✓ packages/render/src/geography-style.test.ts (7 tests) 15ms
+ ✓ apps/web/src/hearth-theme.test.ts (6 tests) 12ms
+ ✓ packages/content/src/development.test.ts (3 tests) 13ms
+ ✓ apps/web/src/updates/compendium/data.test.ts (1 test) 18ms
+ ✓ packages/content/src/research-trees.test.ts (2 tests) 14ms
+ ✓ apps/web/src/updates/SiteShell.test.tsx (2 tests) 11ms
+ ✓ packages/art-pipeline/src/faction-source.test.ts (4 tests) 10ms
+ ✓ packages/render/src/improvement-glyphs.test.ts (5 tests) 16ms
+ ✓ packages/render/src/army-size.test.ts (6 tests) 9ms
+ ✓ apps/web/src/map-action-context.test.ts (6 tests) 17ms
+ ✓ packages/render/src/territory-style.test.ts (6 tests) 8ms
+ ✓ apps/web/src/campaign-seed.test.ts (14 tests) 8ms
+ ✓ packages/render/src/camera-scale.test.ts (4 tests) 8ms
+ ✓ packages/render/src/map-overlays.test.ts (8 tests) 10ms
+ ✓ apps/web/src/campaign-window.test.tsx (2 tests) 10ms
+ ✓ packages/render/src/battle-soldiers.test.ts (2 tests) 9ms
+ ✓ apps/web/src/watch-fog.test.ts (3 tests) 3ms
+ ✓ apps/web/src/updates/media.test.ts (1 test) 7ms
+ ✓ packages/render/src/hearth-appearance.test.ts (6 tests) 7ms
+ ✓ packages/render/src/battle-camera.test.ts (4 tests) 7ms
+ ✓ apps/web/src/use-land-query.test.ts (10 tests) 6ms
+ ✓ packages/mapgen/src/geography-metrics.test.ts (3 tests) 5ms
+ ✓ packages/render/src/image-validation.test.ts (5 tests) 3ms
+ ✓ apps/web/src/use-development-query.test.ts (6 tests) 3ms
+ ✓ packages/render/src/chunk-cache.test.ts (3 tests) 7ms
+ ✓ packages/render/src/naval-style.test.ts (3 tests) 2ms
+ ✓ apps/web/src/asset-url.test.ts (5 tests) 5ms
+ ✓ packages/render/src/art-validation.test.ts (5 tests) 3ms
+ ✓ apps/web/src/updates/site.test.ts (3 tests) 4ms
+ ✓ packages/render/src/animation.test.ts (4 tests) 5ms
+ ✓ packages/render/src/terrain-style.test.ts (3 tests) 2ms
+ ✓ packages/art-pipeline/src/source-clip.test.ts (3 tests) 4ms
+ ✓ apps/web/src/updates/home-style.test.ts (2 tests) 4ms
+ ✓ apps/web/src/updates/navigation.test.ts (2 tests) 4ms
+ ✓ apps/web/src/updates/compendium-layout.test.ts (2 tests) 2ms
+ ✓ apps/web/src/updates/cross-links.test.ts (2 tests) 2ms
+ ✓ tests/tooling/updates-build.test.ts (3 tests) 4ms
+ ✓ apps/web/src/updates/compendium-routes.test.ts (2 tests) 2ms
+ ✓ apps/web/src/updates/compendium/coverage.test.ts (2 tests) 2ms
+ ✓ apps/web/src/updates/content.test.ts (4 tests) 3ms
+ ✓ apps/web/src/battle-playback.test.ts (2 tests) 3ms
+ ✓ packages/render/src/marker-hit.test.ts (1 test) 2ms
+ ❯ tests/headless/chronicle-victory.test.ts (2 tests | 1 failed) 65632ms
+   ✓ generated-start short AI victory produces complete factual logs identical after archive save/resume  1157ms
+   × generated-start epic AI victory produces complete factual logs identical after archive save/resume 64474ms
+ ✓ packages/ai/src/pacing.test.ts (5 tests) 86256ms
+   ✓ 'standard' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation  7079ms
+   ✓ 'standard' seed 99 generator 5 reaches an earned long-form victory with legal orders and save continuation  6495ms
+   ✓ 'standard' seed 99 generator 6 reaches an earned long-form victory with legal orders and save continuation  6848ms
+   ✓ 'epic' seed 74 generator undefined reaches an earned long-form victory with legal orders and save continuation  41241ms
+   ✓ 'epic' seed 99 generator undefined reaches an earned long-form victory with legal orders and save continuation  24590ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/headless/chronicle-victory.test.ts > generated-start epic AI victory produces complete factual logs identical after archive save/resume
+Error: Test timed out in 60000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/headless/chronicle-victory.test.ts:11:37
+      9| // post500 order and replays the complete technical history twice. Giv…
+     10| // archive integration test its own wall-time budget; keep all turn/co…
+     11| test.each(['short', 'epic'] as const)('generated-start %s AI victory p…
+       |                                     ^
+     12|   const game = createGame({ seed: 20260905, size: 'tiny', factionCount…
+     13|   const archive = createArchive(game, { mode: 'watch' });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 220 passed (221)
+      Tests  1 failed | 1857 passed (1858)
+   Start at  14:20:13
+   Duration  86.91s (transform 4.32s, setup 0ms, import 26.51s, tests 400.00s, environment 15ms)
+
+JSON report written to /home/telephoneheater/Work/Theandril/docs/development/2026-09-21-epic-baseline/runner/eight-a.vitest.json

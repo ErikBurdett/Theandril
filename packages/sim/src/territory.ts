@@ -271,7 +271,7 @@ function cellReadContext(state: GameState, town: Settlement, cell: number, conte
     context.owner.geography.set(cell, geography);
   }
   const distance = hexDistance(town.cell, cell, state.world.width);
-  return { ...geography, town: context, distance, costFactor: distance * 4 + context.owner.cultivation * 3, preferred: context.owner.preferredBiomes.has(geography.biome),
+  return { biome: geography.biome, features: geography.features, terrain: geography.terrain, depth: geography.depth, town: context, distance, costFactor: distance * 4 + context.owner.cultivation * 3, preferred: context.owner.preferredBiomes.has(geography.biome),
     claimOwner: context.owner.index.get(cell), blocker: cellBlocker(state, town, cell) };
 }
 function siteMatches(state: GameState, cell: number, improvementId: string, biome?: number, context?: CellReadContext): boolean {
@@ -487,11 +487,25 @@ function settlementLandObservation(state: GameState, factionId: string, town: Se
     } else if (includeCells) candidates = ordered([...new Set([...land.claimed, ...cellsWithin(state, town.cell, settlementClaimRadius(town))])]);
     const cells: LandCellObservation[] = candidates.filter(cell => visible.has(cell)).map(cell => {
       const derived = cellReadContext(state, town, cell, context), actual = actualLandCell(state, cell), claimed = actual.settlementId === town.id, workBlocker = workedBlocker(state, town, cell, derived);
-      return { ...actual, ...(rulesVersion(state) >= 16 && state.resources?.deposits[cell] ? { resourceId: state.resources.deposits[cell] } : {}), cell, terrain: derived.terrain, features: derived.features, claimed, worked: land.worked[lowerBound(land.worked, cell)] === cell || cell === town.cell, canWork: !workBlocker, workBlocker,
-        yields: cellYields(state, town, cell, derived), claim: claimOption(state, town, cell, derived),
-        improvementOptions: owner.improvements.map(item => ({ improvementId: item.id, name: item.name, ...improvementOption(state, town, cell, item.id, derived) })),
-        terraformOptions: (owner.ecology?.terraformBiomeIds ?? []).map(biome => ({ biome, name: BIOME_NAMES[biome] ?? String(biome), ...terraformOption(state, town, cell, biome, derived) })),
-      };
+      // Every required field is filled before publication. Explicit construction
+      // preserves the old key order without dynamic spreads for every tile/quote.
+      const observed = { biome: actual.biome, settlementId: actual.settlementId, factionId: actual.factionId, improvementId: actual.improvementId } as LandCellObservation;
+      const resourceId = owner.version >= 16 ? state.resources?.deposits[cell] : undefined;
+      if (resourceId) observed.resourceId = resourceId;
+      observed.cell = cell; observed.terrain = derived.terrain; observed.features = derived.features;
+      observed.claimed = claimed;
+      observed.worked = land.worked[lowerBound(land.worked, cell)] === cell || cell === town.cell;
+      observed.canWork = !workBlocker; observed.workBlocker = workBlocker;
+      observed.yields = cellYields(state, town, cell, derived); observed.claim = claimOption(state, town, cell, derived);
+      observed.improvementOptions = owner.improvements.map(item => {
+        const quote = improvementOption(state, town, cell, item.id, derived);
+        return { improvementId: item.id, name: item.name, coinCost: quote.coinCost, turns: quote.turns, canStart: quote.canStart, blocker: quote.blocker, effectText: quote.effectText };
+      });
+      observed.terraformOptions = (owner.ecology?.terraformBiomeIds ?? []).map(biome => {
+        const quote = terraformOption(state, town, cell, biome, derived);
+        return { biome, name: BIOME_NAMES[biome] ?? String(biome), coinCost: quote.coinCost, turns: quote.turns, canStart: quote.canStart, blocker: quote.blocker, effectText: quote.effectText };
+      });
+      return observed;
     });
     const obstruction = context.blocker ?? (!land.work ? 'This settlement has no land-work order.' : null);
     return { settlementId: town.id, stage: settlementStage(town), isCapital: state.land.capitals[factionId] === town.id, claimRadius: rulesVersion(state) >= 16 ? claimFrontier(state, town).radius + 1 : settlementClaimRadius(town), claimCapacity: rulesVersion(state) >= 16 ? null : 1 + 3 * settlementClaimRadius(town) * (settlementClaimRadius(town) + 1), workerCapacity: settlementWorkerCapacity(town, rulesVersion(state)), claimed: [...land.claimed], worked: [...land.worked], work: land.work ? { ...land.work } : null, workPaused: paused(state, town), yields: townLandYield(state, town, context), cells, ...(cellWindow ? { cellWindow } : {}), capitalOption: capitalOption(state, town, context), canCancelWork: !obstruction, cancelBlocker: obstruction, borderExpansion: borderExpansionObservation(state, town) };

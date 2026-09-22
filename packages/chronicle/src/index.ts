@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { CONTENT_HASH, PROSPERITY_PROJECT } from '@theandril/content';
 import { MAP_DIMENSIONS, type MapSize } from '@theandril/mapgen';
+import { sameJson, stablePrettyJson } from './json-equivalence';
 import { schema13CampaignBattleSchema, type BattlePresentationObserver } from '@theandril/sim';
 import { applyCommand, applyCommandForVersion, battleReportForVersion, commandSchemaForVersion, createGame, deserializeGame, eventSchema, campaignBattleSchema, schema15CampaignBattleSchema, legacyCampaignBattleSchema, schema6CampaignBattleSchema, schema7CampaignBattleSchema, serializeGame, stateHash, stateHashForVersion, SAVE_VERSION, type BattleReport, type CommandResult, type DomainEvent, type GameCommand, type GameState, type PhaseObserver } from '@theandril/sim';
 
@@ -96,11 +97,6 @@ function mapSize(game: GameState): MapSize {
   return match;
 }
 
-function stableJson(value: unknown): string {
-  return JSON.stringify(value, (_key: string, entry: unknown) => entry && typeof entry === 'object' && !Array.isArray(entry)
-    ? Object.fromEntries(Object.entries(entry).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)) : entry);
-}
-
 /** Archive work is observational; it never participates in canonical state hashes. */
 export function createArchive(game: GameState, options: { mode: CampaignMode; coverage?: ArchiveCoverage }): CampaignArchive {
   return { version: 2, mode: options.mode, coverage: options.coverage ?? 'complete', initialSave: serializeGame(game),
@@ -168,10 +164,10 @@ export function replayArchive(archive: CampaignArchive): GameState {
   for (const record of archive.records) {
     if (game.turn !== record.turn) throw new Error(`Replay turn mismatch at order ${record.sequence}.`);
     const result = applyCommandForVersion(game, record.command, record.rulesVersion);
-    if (result.ok !== record.ok || (result.error ?? null) !== record.error || stableJson(result.events) !== stableJson(record.events) || game.turn !== record.afterTurn) throw new Error(`Replay result mismatch at order ${record.sequence}.`);
+    if (result.ok !== record.ok || (result.error ?? null) !== record.error || !sameJson(result.events, record.events) || game.turn !== record.afterTurn) throw new Error(`Replay result mismatch at order ${record.sequence}.`);
     const finishedBattle = result.events.some(event => event.type === 'battle_finished') ? game.battleReports.at(-1) : undefined;
     const battles = finishedBattle ? [battleReportForVersion(finishedBattle, record.rulesVersion)] : [];
-    if (stableJson(battles) !== stableJson(record.battles)) throw new Error(`Replay battle mismatch at order ${record.sequence}.`);
+    if (!sameJson(battles, record.battles)) throw new Error(`Replay battle mismatch at order ${record.sequence}.`);
     if (record.checkpoint && record.checkpointVersion && stateHashForVersion(game, record.checkpointVersion) !== record.checkpoint) throw new Error(`Replay checkpoint mismatch at order ${record.sequence}.`);
   }
   if (archive.finalHash && archive.finalHashVersion && stateHashForVersion(game, archive.finalHashVersion) !== archive.finalHash) throw new Error('Replay victory seal mismatch.');
@@ -246,12 +242,14 @@ export function generateChronicles(game: GameState, archive: CampaignArchive): C
     victory: game.victory, finalHash: archive.finalHash, finalHashVersion: archive.finalHashVersion,
     replay: 'Deserialize initialSnapshot with the recorded rules/content version. Apply records.command in sequence, including rejected orders; compare results, events and end-turn checkpoints. Checksums detect accidental corruption, not malicious forgery.',
   };
-  const technical = JSON.stringify(JSON.parse(stableJson(technicalRecord)) as unknown, null, 2);
+  // The sorting replacer can format directly: avoid parsing/cloning a complete
+  // compact history only to encode the same records a second time for display.
+  const technical = stablePrettyJson(technicalRecord);
   const technicalPages = [...byTurn].sort(([a], [b]) => a - b).map(([number, entry]) => ({ turn: number, text: [
     `World ${initial.world.seed} · ${initial.pace} pace · ${archive.mode} mode`,
     `Orders issued on turn ${number}. End-turn orders also record the transition into the following turn.`,
     `Initial seal ${archive.initialHash} · Final seal ${archive.finalHash}`,
-    ...entry.records.map(record => `Order ${record.sequence} · turn ${record.turn} → ${record.afterTurn} · ${record.ok ? 'ACCEPTED' : 'REFUSED'}\n${JSON.stringify(JSON.parse(stableJson(record)) as unknown, null, 2)}`),
+    ...entry.records.map(record => `Order ${record.sequence} · turn ${record.turn} → ${record.afterTurn} · ${record.ok ? 'ACCEPTED' : 'REFUSED'}\n${stablePrettyJson(record)}`),
     ...(entry.records.length ? [] : ['No orders were issued on this turn. Its events were produced by the preceding end-turn order.', ...entry.events.map(event => event.message)]),
   ].join('\n\n') }));
   if (!technicalPages.length) technicalPages.push({ turn: archive.initialTurn, text: `${coverage}\n\nNo orders have been recorded since this completed campaign was imported. The full JSON contains the imported initial snapshot and final result.` });

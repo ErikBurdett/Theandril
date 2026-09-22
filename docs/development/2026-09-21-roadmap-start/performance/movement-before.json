@@ -1,0 +1,227 @@
+{
+  "runtime": "v22.23.2",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "note": "Synthetic detached128x128 charts. Ten warmups and40 measured reads per case; setup, equality checks and hashing excluded. Exact entire-query SHA256 includes reachable cells/costs, path, blockers, actions and expanded-node budget. No elapsed campaign, rendering or archive workload.",
+  "measurements": [
+    {
+      "name": "open-range",
+      "sha256": "9d31086ed9cdcbe8e408ecce8c59c00790c9c6867ae1ca1f15f50df804076e8d",
+      "expandedNodes": 91,
+      "reachable": 90,
+      "path": null,
+      "limited": false,
+      "medianMs": 0.19237199999997756,
+      "p95Ms": 0.2297399999999925
+    },
+    {
+      "name": "equal-cost-ties",
+      "sha256": "79312a83689f13110f8b7e28398cd1f768e4ddcf039937c197182253177bd17c",
+      "expandedNodes": 110,
+      "reachable": 90,
+      "path": 18,
+      "limited": false,
+      "medianMs": 0.2120649999999955,
+      "p95Ms": 0.24089200000003075
+    },
+    {
+      "name": "already-there",
+      "sha256": "cc4b9f759f196401aa300aa45270fed09a255d9b901e0ecafa4ce4c7ddf0bfd4",
+      "expandedNodes": 91,
+      "reachable": 90,
+      "path": 0,
+      "limited": false,
+      "medianMs": 0.14133899999995947,
+      "p95Ms": 0.19074000000000524
+    },
+    {
+      "name": "unknown-destination",
+      "sha256": "b65e2e94c7ad39d275339e3f8b57ccc487b84992fe3e4f591244fb5b5b7f4ab9",
+      "expandedNodes": 91,
+      "reachable": 90,
+      "path": 0,
+      "limited": false,
+      "medianMs": 0.1370839999999589,
+      "p95Ms": 0.15566499999999905
+    },
+    {
+      "name": "weighted-route",
+      "sha256": "f91689801183ae696b99739eaedf2541ca0d7ab51ada0b117f9db61c4dd77d17",
+      "expandedNodes": 199,
+      "reachable": 41,
+      "path": 23,
+      "limited": false,
+      "medianMs": 0.20000800000002528,
+      "p95Ms": 0.292823999999996
+    },
+    {
+      "name": "roads-over-weighted-terrain",
+      "sha256": "0dcf99046e9f0013adbe91f4a006bd6f58f552d7a7d730c0d983bb9ed1adc6f1",
+      "expandedNodes": 74,
+      "reachable": 52,
+      "path": 20,
+      "limited": false,
+      "medianMs": 0.0811949999999797,
+      "p95Ms": 0.1200059999999894
+    },
+    {
+      "name": "exhausted-army",
+      "sha256": "660e1d04175065cb6eb70c310acce5349dd44e7dad67b1a69f1df65537ead4e5",
+      "expandedNodes": 20,
+      "reachable": 0,
+      "path": 18,
+      "limited": false,
+      "medianMs": 0.01636999999999489,
+      "p95Ms": 0.016939999999976862
+    },
+    {
+      "name": "finite-range-frontier",
+      "sha256": "049483e533757458899c59d15f16c3c1c594a28790307822980f77880047eadb",
+      "expandedNodes": 38,
+      "reachable": 18,
+      "path": 18,
+      "limited": false,
+      "medianMs": 0.04321200000003955,
+      "p95Ms": 0.04656199999999444
+    },
+    {
+      "name": "route-node-budget",
+      "sha256": "f461bb2f4936c7f30bf0cb9641851fbea3a402c6f094bfb68ff2991502b07f8b",
+      "expandedNodes": 4096,
+      "reachable": 90,
+      "path": 0,
+      "limited": true,
+      "medianMs": 3.1552130000000034,
+      "p95Ms": 3.6853300000000218
+    },
+    {
+      "name": "range-shares-preview-node-budget",
+      "sha256": "df0d97ecbcddaa30ab954980cb2339b73938260d7bf0912284306f40e9e5ef37",
+      "expandedNodes": 4096,
+      "reachable": 4299,
+      "path": 0,
+      "limited": true,
+      "medianMs": 5.3799209999999675,
+      "p95Ms": 5.603618999999981
+    },
+    {
+      "name": "unseen-route-gap",
+      "sha256": "234bc431099680a68f897df6abff5a4f87b690c36c760afe2191b69a3b81b550",
+      "expandedNodes": 85,
+      "reachable": 84,
+      "path": 0,
+      "limited": false,
+      "medianMs": 0.08826299999998355,
+      "p95Ms": 0.12791300000003503
+    },
+    {
+      "name": "peaceful-army-blocker",
+      "sha256": "a75c11f6d2556e2db8aecf312cfb0e6457ba9eb4ba6d7a7a3516d9779db996ae",
+      "expandedNodes": 89,
+      "reachable": 88,
+      "path": 0,
+      "limited": false,
+      "medianMs": 0.17415200000004916,
+      "p95Ms": 0.20584599999995135
+    },
+    {
+      "name": "attack-destination",
+      "sha256": "157bb4ad83007710fc7e778986ce2b43b5daf1246ae5fff2261f874e05914d27",
+      "expandedNodes": 93,
+      "reachable": 89,
+      "path": 3,
+      "limited": false,
+      "medianMs": 0.14216299999998228,
+      "p95Ms": 0.1527969999999641
+    },
+    {
+      "name": "route-around-enemy",
+      "sha256": "0c12712edf0adcc2e1c35b3aa6f4150b3c8921abebe37f8c94e67d56106c0c8a",
+      "expandedNodes": 113,
+      "reachable": 89,
+      "path": 9,
+      "limited": false,
+      "medianMs": 0.12953400000003512,
+      "p95Ms": 0.23260100000004513
+    },
+    {
+      "name": "cannot-append-attack",
+      "sha256": "c9b4f0c9d8a960f4bba41b62f5b7931a91eaad805bab54abaf98bc172cb3481d",
+      "expandedNodes": 89,
+      "reachable": 89,
+      "path": 0,
+      "limited": false,
+      "medianMs": 0.10330399999998008,
+      "p95Ms": 0.11832600000002458
+    },
+    {
+      "name": "settlement-blocker",
+      "sha256": "391f216fe259509f04c37c95daa9530b575bc958e28f51ce939b130fd1342a0f",
+      "expandedNodes": 89,
+      "reachable": 88,
+      "path": 0,
+      "limited": false,
+      "medianMs": 0.17339900000001762,
+      "p95Ms": 0.23201700000004166
+    },
+    {
+      "name": "route-around-settlement",
+      "sha256": "a0bd38233a9872afdcffc8e1e290b36d39427a882f498105e3d61382d93a9819",
+      "expandedNodes": 113,
+      "reachable": 88,
+      "path": 9,
+      "limited": false,
+      "medianMs": 0.12380900000005113,
+      "p95Ms": 0.16082400000004782
+    },
+    {
+      "name": "append-waypoint",
+      "sha256": "ae81db3ab90d95b217e4bd267dd2a01d66054ef9b5c7567631ed17115181a005",
+      "expandedNodes": 102,
+      "reachable": 90,
+      "path": 7,
+      "limited": false,
+      "medianMs": 0.11356499999999414,
+      "p95Ms": 0.11900200000002314
+    },
+    {
+      "name": "append-paused-route",
+      "sha256": "ddfae7cb0f9f0e5aecdc1067ba7800ecc58b0a873fd7bf5f80568d7f60b2f21d",
+      "expandedNodes": 98,
+      "reachable": 90,
+      "path": 5,
+      "limited": false,
+      "medianMs": 0.10965999999996257,
+      "p95Ms": 0.11682499999994889
+    },
+    {
+      "name": "coastal-fleet-range",
+      "sha256": "651bcf7b0d2dfb21b2b1b8ce0b0b0d512702e67ad6afb5781ff31a7ca09ddd8f",
+      "expandedNodes": 89,
+      "reachable": 84,
+      "path": 3,
+      "limited": false,
+      "medianMs": 0.19511999999997443,
+      "p95Ms": 0.23552700000004734
+    },
+    {
+      "name": "coastal-fleet-deep-blocker",
+      "sha256": "021658bc366f0a44fd9df0b42f1e7f7dd23eee62689a2cc0ec829838bd11e30b",
+      "expandedNodes": 85,
+      "reachable": 84,
+      "path": 0,
+      "limited": false,
+      "medianMs": 0.12224800000001323,
+      "p95Ms": 0.16175599999996848
+    },
+    {
+      "name": "ocean-fleet-route",
+      "sha256": "79312a83689f13110f8b7e28398cd1f768e4ddcf039937c197182253177bd17c",
+      "expandedNodes": 110,
+      "reachable": 90,
+      "path": 18,
+      "limited": false,
+      "medianMs": 0.23223699999994096,
+      "p95Ms": 0.2907040000000052
+    }
+  ]
+}

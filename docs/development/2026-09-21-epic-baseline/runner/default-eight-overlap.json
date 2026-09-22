@@ -1,0 +1,323 @@
+{
+  "scope": "Derived from Vitest JSON file start/end intervals. Epic is last sequential assertion in its file; its start is inferred as file end minus Epic duration, not independently timestamped. Overlap counts are file lifecycle intervals, not runnable CPU concurrency or CPU attribution.",
+  "rows": [
+    {
+      "label": "default-b",
+      "sha256": "93a44ed3440c735ab7763e4e566b4bd94e463f483f5424dc6635f7cb5f8b5eb4",
+      "totalFiles": 221,
+      "epicStartSecondsInferred": 4.292,
+      "epicEndSeconds": 69.07123071289062,
+      "epicDurationSeconds": 64.779230671,
+      "otherFileIntervalCounts": [
+        {
+          "otherFiles": 1,
+          "seconds": 26.7817578125
+        },
+        {
+          "otherFiles": 2,
+          "seconds": 8.818134521484374
+        },
+        {
+          "otherFiles": 3,
+          "seconds": 6.796264404296875
+        },
+        {
+          "otherFiles": 4,
+          "seconds": 2.7150361328125
+        },
+        {
+          "otherFiles": 5,
+          "seconds": 1.548649169921875
+        },
+        {
+          "otherFiles": 6,
+          "seconds": 1.7616591796875
+        },
+        {
+          "otherFiles": 7,
+          "seconds": 0.5797429199218751
+        },
+        {
+          "otherFiles": 8,
+          "seconds": 0.28228027343750006
+        },
+        {
+          "otherFiles": 9,
+          "seconds": 0.20012426757812504
+        },
+        {
+          "otherFiles": 10,
+          "seconds": 0.20634399414062496
+        },
+        {
+          "otherFiles": 11,
+          "seconds": 0.09580297851562501
+        },
+        {
+          "otherFiles": 12,
+          "seconds": 0.151773193359375
+        },
+        {
+          "otherFiles": 13,
+          "seconds": 0.22305102539062502
+        },
+        {
+          "otherFiles": 14,
+          "seconds": 0.17606713867187504
+        },
+        {
+          "otherFiles": 15,
+          "seconds": 0.19323559570312498
+        },
+        {
+          "otherFiles": 16,
+          "seconds": 0.33822119140625
+        },
+        {
+          "otherFiles": 17,
+          "seconds": 0.46907153320312495
+        },
+        {
+          "otherFiles": 18,
+          "seconds": 0.41935839843749995
+        },
+        {
+          "otherFiles": 19,
+          "seconds": 0.43086181640625015
+        },
+        {
+          "otherFiles": 20,
+          "seconds": 0.752646484375
+        },
+        {
+          "otherFiles": 21,
+          "seconds": 0.74631298828125
+        },
+        {
+          "otherFiles": 22,
+          "seconds": 0.9668171386718751
+        },
+        {
+          "otherFiles": 23,
+          "seconds": 0.6639904785156252
+        },
+        {
+          "otherFiles": 24,
+          "seconds": 1.5657810058593749
+        },
+        {
+          "otherFiles": 25,
+          "seconds": 1.8669091796874997
+        },
+        {
+          "otherFiles": 26,
+          "seconds": 1.6806052246093748
+        },
+        {
+          "otherFiles": 27,
+          "seconds": 1.7684697265624998
+        },
+        {
+          "otherFiles": 28,
+          "seconds": 1.0973056640625
+        },
+        {
+          "otherFiles": 29,
+          "seconds": 0.697371826171875
+        },
+        {
+          "otherFiles": 30,
+          "seconds": 0.78558544921875
+        }
+      ],
+      "timeWeightedOtherFileIntervals": 7.1303571906950225,
+      "overlappingFiles": [
+        {
+          "name": "packages/ai/src/pacing.test.ts",
+          "startSeconds": 1.356,
+          "endSeconds": 87.84923828125,
+          "overlapSeconds": 64.77923071289062
+        },
+        {
+          "name": "packages/ai/src/contact.test.ts",
+          "startSeconds": 1.361,
+          "endSeconds": 42.28947290039063,
+          "overlapSeconds": 37.997472900390626
+        },
+        {
+          "name": "packages/ai/src/recruitment.test.ts",
+          "startSeconds": 1.376,
+          "endSeconds": 33.47133837890625,
+          "overlapSeconds": 29.17933837890625
+        },
+        {
+          "name": "tests/art-factory.test.ts",
+          "startSeconds": 0.694,
+          "endSeconds": 26.675073974609376,
+          "overlapSeconds": 22.383073974609374
+        },
+        {
+          "name": "packages/ai/src/progression.test.ts",
+          "startSeconds": 1.347,
+          "endSeconds": 23.960037841796876,
+          "overlapSeconds": 19.668037841796874
+        },
+        {
+          "name": "apps/web/src/updates/changelog.test.ts",
+          "startSeconds": 0.417,
+          "endSeconds": 22.411388671875,
+          "overlapSeconds": 18.119388671875
+        },
+        {
+          "name": "packages/ai/src/ai.test.ts",
+          "startSeconds": 1.347,
+          "endSeconds": 20.6497294921875,
+          "overlapSeconds": 16.3577294921875
+        },
+        {
+          "name": "packages/mapgen/src/inland-seas-v7.test.ts",
+          "startSeconds": 0.484,
+          "endSeconds": 19.864897705078125,
+          "overlapSeconds": 15.572897705078125
+        },
+        {
+          "name": "packages/ai/src/resource-economy.test.ts",
+          "startSeconds": 1.354,
+          "endSeconds": 18.465095458984376,
+          "overlapSeconds": 14.173095458984376
+        },
+        {
+          "name": "packages/mapgen/src/geography-v6.test.ts",
+          "startSeconds": 0.483,
+          "endSeconds": 16.8440537109375,
+          "overlapSeconds": 12.5520537109375
+        },
+        {
+          "name": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+          "startSeconds": 1.076,
+          "endSeconds": 14.236493408203126,
+          "overlapSeconds": 9.944493408203124
+        },
+        {
+          "name": "packages/art-pipeline/src/faction-coverage.test.ts",
+          "startSeconds": 1.287,
+          "endSeconds": 11.75750146484375,
+          "overlapSeconds": 7.46550146484375
+        }
+      ]
+    },
+    {
+      "label": "eight-a",
+      "sha256": "6c7529dd23b9134be9c98abf325bd03c3885127a1fe5b1ffdc8bc356a1fde718",
+      "totalFiles": 221,
+      "epicStartSecondsInferred": 1.901,
+      "epicEndSeconds": 66.37505078125,
+      "epicDurationSeconds": 64.474050848,
+      "otherFileIntervalCounts": [
+        {
+          "otherFiles": 1,
+          "seconds": 18.617568359375
+        },
+        {
+          "otherFiles": 2,
+          "seconds": 1.2822075195312497
+        },
+        {
+          "otherFiles": 3,
+          "seconds": 1.8743718261718738
+        },
+        {
+          "otherFiles": 4,
+          "seconds": 1.799658203124999
+        },
+        {
+          "otherFiles": 5,
+          "seconds": 4.432986572265626
+        },
+        {
+          "otherFiles": 6,
+          "seconds": 8.198951171875002
+        },
+        {
+          "otherFiles": 7,
+          "seconds": 28.26830712890625
+        }
+      ],
+      "timeWeightedOtherFileIntervals": 4.703295628178784,
+      "overlappingFiles": [
+        {
+          "name": "packages/ai/src/pacing.test.ts",
+          "startSeconds": 0.662,
+          "endSeconds": 86.91713452148437,
+          "overlapSeconds": 64.47405078125
+        },
+        {
+          "name": "packages/ai/src/contact.test.ts",
+          "startSeconds": 0.662,
+          "endSeconds": 34.123455078125,
+          "overlapSeconds": 32.222455078125
+        },
+        {
+          "name": "packages/ai/src/recruitment.test.ts",
+          "startSeconds": 0.671,
+          "endSeconds": 23.11403125,
+          "overlapSeconds": 21.21303125
+        },
+        {
+          "name": "tests/art-factory.test.ts",
+          "startSeconds": 0.447,
+          "endSeconds": 15.20713623046875,
+          "overlapSeconds": 13.30613623046875
+        },
+        {
+          "name": "apps/web/src/updates/changelog.test.ts",
+          "startSeconds": 0.22,
+          "endSeconds": 13.769369873046875,
+          "overlapSeconds": 11.868369873046875
+        },
+        {
+          "name": "packages/ai/src/progression.test.ts",
+          "startSeconds": 0.666,
+          "endSeconds": 12.206330078125,
+          "overlapSeconds": 10.305330078125
+        },
+        {
+          "name": "packages/ai/src/resource-economy.test.ts",
+          "startSeconds": 12.478,
+          "endSeconds": 21.83878759765625,
+          "overlapSeconds": 9.36078759765625
+        },
+        {
+          "name": "packages/mapgen/src/inland-seas-v7.test.ts",
+          "startSeconds": 0.261,
+          "endSeconds": 10.6958583984375,
+          "overlapSeconds": 8.7948583984375
+        },
+        {
+          "name": "packages/mapgen/src/geography-v6.test.ts",
+          "startSeconds": 13.909,
+          "endSeconds": 21.924570556640624,
+          "overlapSeconds": 8.015570556640625
+        },
+        {
+          "name": "packages/ai/src/ai.test.ts",
+          "startSeconds": 10.968,
+          "endSeconds": 17.75368896484375,
+          "overlapSeconds": 6.78568896484375
+        },
+        {
+          "name": "packages/sim/src/explored-sort.test.ts",
+          "startSeconds": 21.034,
+          "endSeconds": 26.897986572265626,
+          "overlapSeconds": 5.863986572265625
+        },
+        {
+          "name": "packages/test-fixtures/src/empire-land-fixture.test.ts",
+          "startSeconds": 15.452,
+          "endSeconds": 20.65366064453125,
+          "overlapSeconds": 5.20166064453125
+        }
+      ]
+    }
+  ]
+}

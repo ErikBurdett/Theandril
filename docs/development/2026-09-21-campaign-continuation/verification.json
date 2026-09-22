@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-21",
+  "runtime": "Node22.23.2",
+  "browser": "/usr/bin/chromium",
+  "sourceManifest": "source-manifest.json",
+  "sourceManifestSha256": "61b2546fe968d3a8e92844e82444147ed70ae3c9616c0705fd70d4e5f4f372c5",
+  "publication": false,
+  "countsAreNotAdditive": true,
+  "checks": [
+    {
+      "scope": "typecheck",
+      "log": "typecheck-final.log",
+      "result": "pass",
+      "sha256": "9b806551a727ff9f9eec8de2739b3a5dd7929f84cd9cf0523039dc41ae6375ce"
+    },
+    {
+      "scope": "lint",
+      "log": "lint-final.log",
+      "result": "pass",
+      "sha256": "a410ca93a80b3f6d79866340973de241518b1e6d0587b2570ec254efd8dbe477"
+    },
+    {
+      "scope": "content validation",
+      "log": "content.log",
+      "result": "pass",
+      "sha256": "8393d57c539d963a938ac86e4b6b73e837b53b1c881fa98b649184913b44ccde"
+    },
+    {
+      "scope": "existing art validation",
+      "log": "art.log",
+      "result": "pass",
+      "sha256": "1c05a6b8969552eaf7558cf8c794650c22896ab2062826ad4db52f3f8f4e05fa"
+    },
+    {
+      "scope": "production Pages build",
+      "log": "build.log",
+      "result": "pass",
+      "sha256": "86ab55285b90a540e3270113a2e00d866e4eb70560db3f7309cb7621f1a671df"
+    },
+    {
+      "scope": "unchanged full headless",
+      "log": "full-headless-final.log",
+      "result": "1818/1819;218/219files;90.01s;sole failure Epic64.312s/60s",
+      "sha256": "2f45c44f5cc87f430585f14eface525d00e42a9be9b55af888c30da26fd32dfe"
+    },
+    {
+      "scope": "affected Chromium gameplay",
+      "log": "browser-gameplay.log",
+      "result": "25/25;2.5m",
+      "sha256": "5d3460367fedaa633fbeff115b37dd1c088fe03ed48e7fa3804a506aaa044724"
+    },
+    {
+      "scope": "complete production Pages Chromium",
+      "log": "browser-pages.log",
+      "result": "27/27;33.2s",
+      "sha256": "26c8c29b497559a1cdbb7cf25230e5a6b8037e95928a9e89eca193381b67ad0d"
+    }
+  ]
+}

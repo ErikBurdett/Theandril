@@ -1,0 +1,21 @@
+Validated and measured canonical checkpoint 1.
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '{"commands":[{"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.49","target":904},{"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.36","target":567}],"reasons":["Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore."],"heldArmyIds":["army.49","army.36"],"queuedSettlementIds":[],"coinSpent":0,"interrupts":false}'
+- '{"commands":[{"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.49","target":904},{"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.36","target":667}],"reasons":["Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore."],"heldArmyIds":["army.49","army.36"],"queuedSettlementIds":[],"coinSpent":0,"interrupts":false}'
+
+    at <anonymous> (/home/telephoneheater/Work/Theandril/docs/development/2026-09-21-epic-baseline/ai/benchmark.ts:27:12) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '{"commands":[{"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.49","target":904},{"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.36","target":567}],"reasons":["Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore."],"heldArmyIds":["army.49","army.36"],"queuedSettlementIds":[],"coinSpent":0,"interrupts":false}',
+  expected: '{"commands":[{"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.49","target":904},{"type":"moveTo","factionId":"faction.reedbound_council","armyId":"army.36","target":667}],"reasons":["Hearth caravan: gather at the observed embarkation shore.","Charter transport: meet the waiting land expedition at its shore."],"heldArmyIds":["army.49","army.36"],"queuedSettlementIds":[],"coinSpent":0,"interrupts":false}',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.23.2

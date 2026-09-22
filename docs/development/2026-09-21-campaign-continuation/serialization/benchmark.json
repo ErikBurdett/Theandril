@@ -1,0 +1,91 @@
+{
+  "node": "v22.23.2",
+  "date": "2026-09-21",
+  "fixture": "Synthetic cell sets; exact-output checks excluded from paired timing; five warmups and thirty alternating samples",
+  "results": [
+    {
+      "count": 32,
+      "order": "shuffled",
+      "beforeMedianMs": 0.001586000000003196,
+      "afterMedianMs": 0.001563000000004422,
+      "resultSha256": "23b22df6bf551a4e788327db3b3d3d96e1eca49078d2c6bd0049da2d390eca8b"
+    },
+    {
+      "count": 32,
+      "order": "sorted",
+      "beforeMedianMs": 0.0009199999999935926,
+      "afterMedianMs": 0.0009149999999920055,
+      "resultSha256": "23b22df6bf551a4e788327db3b3d3d96e1eca49078d2c6bd0049da2d390eca8b"
+    },
+    {
+      "count": 256,
+      "order": "shuffled",
+      "beforeMedianMs": 0.013638999999997736,
+      "afterMedianMs": 0.012606000000005224,
+      "resultSha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1"
+    },
+    {
+      "count": 256,
+      "order": "sorted",
+      "beforeMedianMs": 0.007049000000009187,
+      "afterMedianMs": 0.0070290000000028385,
+      "resultSha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1"
+    },
+    {
+      "count": 1536,
+      "order": "shuffled",
+      "beforeMedianMs": 0.14430499999998858,
+      "afterMedianMs": 0.06846499999998912,
+      "resultSha256": "c07ac33968f83b79a107c13ddffbadf8b1ac5febabac78db75e87f78537934ef"
+    },
+    {
+      "count": 1536,
+      "order": "sorted",
+      "beforeMedianMs": 0.004297999999991475,
+      "afterMedianMs": 0.004540999999989026,
+      "resultSha256": "c07ac33968f83b79a107c13ddffbadf8b1ac5febabac78db75e87f78537934ef"
+    },
+    {
+      "count": 10000,
+      "order": "shuffled",
+      "beforeMedianMs": 1.1376689999999883,
+      "afterMedianMs": 0.5324279999999959,
+      "resultSha256": "a74675bfed3834ac1c3140b2d7fb7d93d90a76608cc08515a5019a1cb2075ff4"
+    },
+    {
+      "count": 10000,
+      "order": "sorted",
+      "beforeMedianMs": 0.023283000000020593,
+      "afterMedianMs": 0.025211000000012973,
+      "resultSha256": "a74675bfed3834ac1c3140b2d7fb7d93d90a76608cc08515a5019a1cb2075ff4"
+    },
+    {
+      "count": 100000,
+      "order": "shuffled",
+      "beforeMedianMs": 14.910663,
+      "afterMedianMs": 7.199270000000013,
+      "resultSha256": "ef440f29f9463eac65fda8b2e1214628852802516a2b06ae1a1b020743b78a20"
+    },
+    {
+      "count": 100000,
+      "order": "sorted",
+      "beforeMedianMs": 0.40891099999998914,
+      "afterMedianMs": 0.4146769999999833,
+      "resultSha256": "ef440f29f9463eac65fda8b2e1214628852802516a2b06ae1a1b020743b78a20"
+    },
+    {
+      "count": 307200,
+      "order": "shuffled",
+      "beforeMedianMs": 48.90120000000002,
+      "afterMedianMs": 22.92828499999996,
+      "resultSha256": "4cb4cef4ea9db6646235ae3f68cd090f19e2a2cb74e469a5cd4889e3042a9ceb"
+    },
+    {
+      "count": 307200,
+      "order": "sorted",
+      "beforeMedianMs": 1.2769309999998768,
+      "afterMedianMs": 1.3482500000000073,
+      "resultSha256": "4cb4cef4ea9db6646235ae3f68cd090f19e2a2cb74e469a5cd4889e3042a9ceb"
+    }
+  ]
+}

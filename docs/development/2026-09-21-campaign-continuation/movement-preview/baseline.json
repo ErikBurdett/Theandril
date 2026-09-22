@@ -1,0 +1,471 @@
+{
+  "sourceSha256": "6e4635e4900d890ca3bb2f2c86fa48b3f5fe1bdd147dd96148a970fadd6862d5",
+  "note": "Complete target previews from the original public full query, before the preview-only API; includes the range-depleted shared node budget.",
+  "entries": [
+    {
+      "name": "range-0-shared-budget",
+      "preview": {
+        "target": 2079,
+        "path": [
+          2065,
+          2066,
+          2067,
+          2068,
+          2069,
+          2070,
+          2071,
+          2072,
+          2073,
+          2074,
+          2075,
+          2076,
+          2077,
+          2078,
+          2079
+        ],
+        "cost": 15,
+        "action": "move",
+        "canMoveNow": false,
+        "canQueue": true,
+        "blocker": "Queue this route to continue travel over later turns.",
+        "limited": false,
+        "expandedNodes": 16
+      }
+    },
+    {
+      "name": "range-2-shared-budget",
+      "preview": {
+        "target": 2079,
+        "path": [
+          2065,
+          2066,
+          2067,
+          2068,
+          2069,
+          2070,
+          2071,
+          2072,
+          2073,
+          2074,
+          2075,
+          2076,
+          2077,
+          2078,
+          2079
+        ],
+        "cost": 15,
+        "action": "move",
+        "canMoveNow": false,
+        "canQueue": true,
+        "blocker": "Queue this route to continue travel over later turns.",
+        "limited": false,
+        "expandedNodes": 16
+      }
+    },
+    {
+      "name": "range-5-shared-budget",
+      "preview": {
+        "target": 2079,
+        "path": [
+          2065,
+          2066,
+          2067,
+          2068,
+          2069,
+          2070,
+          2071,
+          2072,
+          2073,
+          2074,
+          2075,
+          2076,
+          2077,
+          2078,
+          2079
+        ],
+        "cost": 15,
+        "action": "move",
+        "canMoveNow": false,
+        "canQueue": true,
+        "blocker": "Queue this route to continue travel over later turns.",
+        "limited": false,
+        "expandedNodes": 16
+      }
+    },
+    {
+      "name": "range-9-shared-budget",
+      "preview": {
+        "target": 2079,
+        "path": [
+          2065,
+          2066,
+          2067,
+          2068,
+          2069,
+          2070,
+          2071,
+          2072,
+          2073,
+          2074,
+          2075,
+          2076,
+          2077,
+          2078,
+          2079
+        ],
+        "cost": 15,
+        "action": "move",
+        "canMoveNow": false,
+        "canQueue": true,
+        "blocker": "Queue this route to continue travel over later turns.",
+        "limited": false,
+        "expandedNodes": 16
+      }
+    },
+    {
+      "name": "range-200-shared-budget",
+      "preview": {
+        "target": 2079,
+        "path": [],
+        "cost": 0,
+        "action": "blocked",
+        "canMoveNow": false,
+        "canQueue": false,
+        "blocker": "The bounded route search reached its limit. Choose a closer waypoint.",
+        "limited": true,
+        "expandedNodes": 0
+      }
+    },
+    {
+      "name": "already-at-target",
+      "preview": {
+        "target": 2064,
+        "path": [],
+        "cost": 0,
+        "action": "blocked",
+        "canMoveNow": false,
+        "canQueue": false,
+        "blocker": "This army is already at the destination.",
+        "limited": false,
+        "expandedNodes": 0
+      }
+    },
+    {
+      "name": "invalid-target",
+      "preview": {
+        "target": 4096,
+        "path": [],
+        "cost": 0,
+        "action": "blocked",
+        "canMoveNow": false,
+        "canQueue": false,
+        "blocker": "Choose a known destination within the explored world.",
+        "limited": false,
+        "expandedNodes": 0
+      }
+    },
+    {
+      "name": "weighted-route",
+      "preview": {
+        "target": 2079,
+        "path": [
+          2000,
+          2001,
+          2002,
+          2003,
+          2004,
+          2005,
+          2006,
+          2007,
+          2008,
+          2009,
+          2010,
+          2075,
+          2076,
+          2077,
+          2078,
+          2079
+        ],
+        "cost": 23,
+        "action": "move",
+        "canMoveNow": false,
+        "canQueue": true,
+        "blocker": "Queue this route to continue travel over later turns.",
+        "limited": false,
+        "expandedNodes": 128
+      }
+    },
+    {
+      "name": "road-route",
+      "preview": {
+        "target": 2079,
+        "path": [
+          2065,
+          2066,
+          2067,
+          2068,
+          2069,
+          2070,
+          2071,
+          2072,
+          2073,
+          2074,
+          2075,
+          2076,
+          2077,
+          2078,
+          2079
+        ],
+        "cost": 15,
+        "action": "move",
+        "canMoveNow": false,
+        "canQueue": true,
+        "blocker": "Queue this route to continue travel over later turns.",
+        "limited": false,
+        "expandedNodes": 16
+      }
+    },
+    {
+      "name": "known-target-beyond-fog-gap",
+      "preview": {
+        "target": 2079,
+        "path": [],
+        "cost": 0,
+        "action": "blocked",
+        "canMoveNow": false,
+        "canQueue": false,
+        "blocker": "No safe route is known through explored terrain.",
+        "limited": false,
+        "expandedNodes": 1792
+      }
+    },
+    {
+      "name": "peaceful-occupant",
+      "preview": {
+        "target": 2067,
+        "path": [],
+        "cost": 0,
+        "action": "blocked",
+        "canMoveNow": false,
+        "canQueue": false,
+        "blocker": "Declare war before attacking this faction.",
+        "limited": false,
+        "expandedNodes": 0
+      }
+    },
+    {
+      "name": "hostile-attack",
+      "preview": {
+        "target": 2067,
+        "path": [
+          2065,
+          2066,
+          2067
+        ],
+        "cost": 3,
+        "action": "attack",
+        "canMoveNow": true,
+        "canQueue": false,
+        "blocker": null,
+        "limited": false,
+        "expandedNodes": 4
+      }
+    },
+    {
+      "name": "hostile-append-rejected",
+      "preview": {
+        "target": 2067,
+        "path": [],
+        "cost": 0,
+        "action": "blocked",
+        "canMoveNow": false,
+        "canQueue": false,
+        "blocker": "Queued travel cannot include an automatic attack.",
+        "limited": false,
+        "expandedNodes": 0
+      }
+    },
+    {
+      "name": "route-around-hostile",
+      "preview": {
+        "target": 2079,
+        "path": [
+          2065,
+          2066,
+          2002,
+          2003,
+          2004,
+          2005,
+          2006,
+          2007,
+          2008,
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2079
+        ],
+        "cost": 16,
+        "action": "move",
+        "canMoveNow": false,
+        "canQueue": true,
+        "blocker": "Queue this route to continue travel over later turns.",
+        "limited": false,
+        "expandedNodes": 45
+      }
+    },
+    {
+      "name": "mission-blocker",
+      "preview": {
+        "target": 2079,
+        "path": [],
+        "cost": 0,
+        "action": "blocked",
+        "canMoveNow": false,
+        "canQueue": false,
+        "blocker": "Cancel the active character mission.",
+        "limited": false,
+        "expandedNodes": 0
+      }
+    },
+    {
+      "name": "foreign-army",
+      "preview": {
+        "target": 2079,
+        "path": [],
+        "cost": 0,
+        "action": "blocked",
+        "canMoveNow": false,
+        "canQueue": false,
+        "blocker": "You do not control that army.",
+        "limited": false,
+        "expandedNodes": 0
+      }
+    },
+    {
+      "name": "foreign-settlement",
+      "preview": {
+        "target": 2067,
+        "path": [],
+        "cost": 0,
+        "action": "besiege",
+        "canMoveNow": false,
+        "canQueue": false,
+        "blocker": "This settlement belongs to another faction. Declare war before a siege.",
+        "limited": false,
+        "expandedNodes": 0
+      }
+    },
+    {
+      "name": "append-waypoint",
+      "preview": {
+        "target": 2072,
+        "path": [
+          2065,
+          2066,
+          2067,
+          2068,
+          2069,
+          2070,
+          2071,
+          2072
+        ],
+        "cost": 8,
+        "action": "move",
+        "canMoveNow": false,
+        "canQueue": true,
+        "blocker": "Queue this route to continue travel over later turns.",
+        "limited": false,
+        "expandedNodes": 10
+      }
+    },
+    {
+      "name": "append-paused-waypoint",
+      "preview": {
+        "target": 2072,
+        "path": [
+          2065,
+          2066,
+          2067,
+          2068,
+          2069,
+          2070,
+          2071,
+          2072
+        ],
+        "cost": 8,
+        "action": "move",
+        "canMoveNow": false,
+        "canQueue": true,
+        "blocker": "Queue this route to continue travel over later turns.",
+        "limited": false,
+        "expandedNodes": 10
+      }
+    },
+    {
+      "name": "coastal-shallow-preview",
+      "preview": {
+        "target": 2068,
+        "path": [
+          2065,
+          2066,
+          2067,
+          2068
+        ],
+        "cost": 4,
+        "action": "move",
+        "canMoveNow": true,
+        "canQueue": true,
+        "blocker": null,
+        "limited": false,
+        "expandedNodes": 5
+      }
+    },
+    {
+      "name": "coastal-deep-blocker",
+      "preview": {
+        "target": 2079,
+        "path": [],
+        "cost": 0,
+        "action": "blocked",
+        "canMoveNow": false,
+        "canQueue": false,
+        "blocker": "Deep ocean requires Ocean navigation and an ocean-capable hull in every fleet formation.",
+        "limited": false,
+        "expandedNodes": 0
+      }
+    },
+    {
+      "name": "ocean-route",
+      "preview": {
+        "target": 2079,
+        "path": [
+          2065,
+          2066,
+          2067,
+          2068,
+          2069,
+          2070,
+          2071,
+          2072,
+          2073,
+          2074,
+          2075,
+          2076,
+          2077,
+          2078,
+          2079
+        ],
+        "cost": 15,
+        "action": "move",
+        "canMoveNow": false,
+        "canQueue": true,
+        "blocker": "Queue this route to continue travel over later turns.",
+        "limited": false,
+        "expandedNodes": 16
+      }
+    }
+  ]
+}

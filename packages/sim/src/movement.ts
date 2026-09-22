@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { armyCanAttack, armySight } from './army-composition';
 import { selectDefendingArmies } from './battle-frontage';
-import { hexDistance, neighbors } from '@theandril/mapgen';
+import { hexDistance, neighbors, neighborsInto } from '@theandril/mapgen';
 import type { Army, CommandResult, DomainEvent, GameState, Observation } from './types';
 import { cellsWithin, indexes, updateSight } from './visibility';
 import { startCampaignBattle } from './warfare';
@@ -83,7 +83,11 @@ class Heap {
   pop(): SearchNode | undefined { const data = this.entries; const head = data[0]; const tail = data.pop(); if (!data.length || !tail) return head; let index = 0; while (index * 2 + 1 < data.length) { let child = index * 2 + 1; if (child + 1 < data.length && this.before(data[child + 1]!, data[child]!)) child++; if (!this.before(data[child]!, tail)) break; data[index] = data[child]!; index = child; } data[index] = tail; return head; }
 }
 function search(knowledge: Knowledge, origin: number, target: number | undefined, budget: { remaining: number }, maxCost = Infinity, attackTarget?: number) {
-  const open = new Heap(); const costs = new Map([[origin, 0]]); const parents = new Map<number, number>();
+  const open = new Heap(); const costs = new Map([[origin, 0]]);
+  // Range-only searches never reconstruct a path. They still visit and charge
+  // every original node, but need no predecessor tree or per-node neighbor array.
+  const parents = target === undefined ? undefined : new Map<number, number>();
+  const adjacentCells: number[] = [];
   open.push({ cell: origin, cost: 0, priority: target === undefined ? 0 : hexDistance(origin, target, knowledge.width) });
   let reached = false; let limited = false;
   while (true) {
@@ -92,18 +96,24 @@ function search(knowledge: Knowledge, origin: number, target: number | undefined
     if (budget.remaining <= 0) { limited = true; break; }
     budget.remaining--;
     if (node.cell === target) { reached = true; break; }
-    for (const adjacent of neighbors(node.cell, knowledge.width, knowledge.height)) {
+    // Terrain and road edges cost at least one. A spent range or an already
+    // cheaper arrival cannot improve, regardless of terrain or occupants.
+    // Keep charging/popping the same nodes so query limits and tie order agree.
+    if (node.cost >= maxCost) continue;
+    for (const adjacent of neighborsInto(node.cell, knowledge.width, knowledge.height, adjacentCells)) {
+      const priorCost = costs.get(adjacent) ?? Infinity;
+      if (node.cost + 1 >= priorCost) continue;
       if (!mayEnter(knowledge, adjacent, attackTarget)) continue;
       const cost = node.cost + knowledge.stepCost(node.cell, adjacent);
-      if (cost > maxCost || cost >= (costs.get(adjacent) ?? Infinity)) continue;
-      costs.set(adjacent, cost); parents.set(adjacent, node.cell);
+      if (cost > maxCost || cost >= priorCost) continue;
+      costs.set(adjacent, cost); parents?.set(adjacent, node.cell);
       open.push({ cell: adjacent, cost, priority: cost + (target === undefined ? 0 : hexDistance(adjacent, target, knowledge.width)) });
     }
   }
   const path: number[] = [];
   if (reached && target !== undefined) {
     let cursor = target;
-    while (cursor !== origin) { path.unshift(cursor); const parent = parents.get(cursor); if (parent === undefined) throw new Error('Broken path predecessor'); cursor = parent; if (path.length > MAX_ROUTE_CELLS) return { path: [], cost: 0, costs, limited: true, reached: false }; }
+    while (cursor !== origin) { path.unshift(cursor); const parent = parents?.get(cursor); if (parent === undefined) throw new Error('Broken path predecessor'); cursor = parent; if (path.length > MAX_ROUTE_CELLS) return { path: [], cost: 0, costs, limited: true, reached: false }; }
   }
   return { path, cost: target === undefined ? 0 : costs.get(target) ?? 0, costs, limited, reached };
 }
@@ -145,11 +155,24 @@ function preview(knowledge: Knowledge, target: number, append = false, budget = 
   const canMoveNow = cost <= army.movement && !(append && knowledge.route?.status === 'paused');
   return { ...base, path, cost, action: enemy ? 'attack' : 'move', canMoveNow, canQueue: !enemy, blocker: canMoveNow ? null : enemy ? 'Not enough movement remains to reach and attack this enemy this turn.' : 'Queue this route to continue travel over later turns.', expandedNodes: initialBudget - budget.remaining };
 }
+function queryRange(knowledge: Knowledge, budget: { remaining: number }) {
+  const army = knowledge.army;
+  return army && !knowledge.strategicBlocker && !knowledge.besieging ? search(knowledge, army.cell, undefined, budget, army.movement) : null;
+}
+
+/** The full query's exact target preview without publishing its reachable overlay.
+ * Range search still consumes the same shared node budget before route planning. */
+export function getMovementPreview(view: Observation, armyId: string, target: number, options?: { append?: boolean }): MovementPreview {
+  const knowledge = observedKnowledge(view, armyId), budget = { remaining: MAX_PATH_NODES };
+  queryRange(knowledge, budget);
+  return preview(knowledge, target, options?.append, budget);
+}
+
 /** Pure, bounded routing over permitted observations; no unseen world lookup is possible. */
 export function getMovementQuery(view: Observation, armyId: string, target?: number, options?: { append?: boolean }): MovementQuery {
   const knowledge = observedKnowledge(view, armyId); const army = knowledge.army;
   const budget = { remaining: MAX_PATH_NODES };
-  const range = army && !knowledge.strategicBlocker && !knowledge.besieging ? search(knowledge, army.cell, undefined, budget, army.movement) : null;
+  const range = queryRange(knowledge, budget);
   const reachable = new Map(range?.costs ?? []);
   if (army && armyCanAttack(army) && range) for (const [cell, cost] of range.costs) for (const next of neighbors(cell, knowledge.width, knowledge.height)) {
     const enemies = knowledge.armies(next).filter(other => other.factionId !== knowledge.factionId);

@@ -1,0 +1,553 @@
+{
+  "node": "v22.23.2",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "baselineSourceSha256": "797310db2da52d41d4c9f7996f2462da8dd2f3b0f3f7eff7c1ffcfc57eec3220",
+  "candidateSourceSha256": "b28ba2e6ed0dc170b41cd82a0756e8b3f8282633027fe7013cb99a06cd5d3aab",
+  "scope": "Genuine retained Epic seed99 checkpoints, migrated v16 to current rules using the unchanged loader; all faction observations, full treasury public naval calls. Both modules share unchanged dependencies. Two warmups/eight alternating samples, correctness and instrumentation outside timing. No change to runtime sources. These repeated detached-observation timings are not full-campaign timings.",
+  "totalsOfCaseMedians": {
+    "baseline": 36.61622100000008,
+    "candidate": 34.9061229999993
+  },
+  "results": [
+    {
+      "key": "turn-1/faction.ashen_compact",
+      "observedCells": 61,
+      "fleets": 0,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.006707000000005792,
+        "p95Ms": 0.009354999999999336
+      },
+      "candidate": {
+        "medianMs": 0.006169999999997344,
+        "p95Ms": 0.008722000000005892
+      },
+      "outputSha256": "4d553bab64869d372c5bd1b8ef83edfd9b5ef0e69efebc30734aaad4a79737f1"
+    },
+    {
+      "key": "turn-1/faction.reedbound_council",
+      "observedCells": 61,
+      "fleets": 0,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.004345999999998185,
+        "p95Ms": 0.004830999999995811
+      },
+      "candidate": {
+        "medianMs": 0.0041900000000225646,
+        "p95Ms": 0.004507999999987078
+      },
+      "outputSha256": "4d553bab64869d372c5bd1b8ef83edfd9b5ef0e69efebc30734aaad4a79737f1"
+    },
+    {
+      "key": "turn-1/faction.cinder_march",
+      "observedCells": 50,
+      "fleets": 0,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.0038470000000074833,
+        "p95Ms": 0.004086000000000922
+      },
+      "candidate": {
+        "medianMs": 0.003925999999978558,
+        "p95Ms": 0.008752000000015414
+      },
+      "outputSha256": "4d553bab64869d372c5bd1b8ef83edfd9b5ef0e69efebc30734aaad4a79737f1"
+    },
+    {
+      "key": "turn-1/faction.glass_tide",
+      "observedCells": 43,
+      "fleets": 0,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.003380000000021255,
+        "p95Ms": 0.004511000000007925
+      },
+      "candidate": {
+        "medianMs": 0.003545000000002574,
+        "p95Ms": 0.004680000000007567
+      },
+      "outputSha256": "4d553bab64869d372c5bd1b8ef83edfd9b5ef0e69efebc30734aaad4a79737f1"
+    },
+    {
+      "key": "turn-30/faction.ashen_compact",
+      "observedCells": 492,
+      "fleets": 1,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.40494200000000546,
+        "p95Ms": 0.43766399999998384
+      },
+      "candidate": {
+        "medianMs": 0.15053999999997814,
+        "p95Ms": 0.31225800000004256
+      },
+      "outputSha256": "8bd57bd6bea98f58ee3f9c650280d7c184758606a5bb43a77682dca0cff6abdc"
+    },
+    {
+      "key": "turn-30/faction.reedbound_council",
+      "observedCells": 670,
+      "fleets": 1,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.6849789999999985,
+        "p95Ms": 1.0334659999999758
+      },
+      "candidate": {
+        "medianMs": 0.4213829999999916,
+        "p95Ms": 0.6241590000000201
+      },
+      "outputSha256": "d87ad109b50de14aedca340c7befd58fc2d2d411be15d4f93f7a4e5877424d0a"
+    },
+    {
+      "key": "turn-30/faction.cinder_march",
+      "observedCells": 433,
+      "fleets": 0,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.1633019999999874,
+        "p95Ms": 0.18518700000004173
+      },
+      "candidate": {
+        "medianMs": 0.028655999999955384,
+        "p95Ms": 0.03148699999997007
+      },
+      "outputSha256": "4d553bab64869d372c5bd1b8ef83edfd9b5ef0e69efebc30734aaad4a79737f1"
+    },
+    {
+      "key": "turn-30/faction.glass_tide",
+      "observedCells": 518,
+      "fleets": 1,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.21793400000001384,
+        "p95Ms": 0.8517070000000331
+      },
+      "candidate": {
+        "medianMs": 0.06898599999999533,
+        "p95Ms": 0.08446400000002541
+      },
+      "outputSha256": "462eaf85b7002df75764523bf086efa68c1812d2b2d81269ad930dca9ceccb4f"
+    },
+    {
+      "key": "turn-60/faction.ashen_compact",
+      "observedCells": 778,
+      "fleets": 2,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.625534000000016,
+        "p95Ms": 0.6538279999999759
+      },
+      "candidate": {
+        "medianMs": 0.5178139999999871,
+        "p95Ms": 1.1315060000000017
+      },
+      "outputSha256": "20130bfe77eadebe468de01bb7db9ee455bad7539b4e32a323b3ba0d8698b234"
+    },
+    {
+      "key": "turn-60/faction.reedbound_council",
+      "observedCells": 836,
+      "fleets": 3,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.8448429999999689,
+        "p95Ms": 1.6616470000000163
+      },
+      "candidate": {
+        "medianMs": 0.7026950000000056,
+        "p95Ms": 0.7896560000000363
+      },
+      "outputSha256": "148887e2b6d0d7589ebd2de89028699025a81d9731c103aab1ce04832f9ae2b9"
+    },
+    {
+      "key": "turn-60/faction.cinder_march",
+      "observedCells": 1071,
+      "fleets": 3,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.8596039999999903,
+        "p95Ms": 1.7807369999999878
+      },
+      "candidate": {
+        "medianMs": 0.7370209999999702,
+        "p95Ms": 0.7681969999999865
+      },
+      "outputSha256": "2e2dcc4c4f1f7f0777d38fda0cdf38163be344b3a552eb4af04a8aae9a829ab7"
+    },
+    {
+      "key": "turn-60/faction.glass_tide",
+      "observedCells": 985,
+      "fleets": 2,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.7136569999999551,
+        "p95Ms": 0.7689640000000395
+      },
+      "candidate": {
+        "medianMs": 0.6333879999999681,
+        "p95Ms": 1.6271830000000023
+      },
+      "outputSha256": "9015ef368b838e82ecf39a44753d1c1467cb397ed1255c947a9184177b5442ec"
+    },
+    {
+      "key": "turn-100/faction.ashen_compact",
+      "observedCells": 1338,
+      "fleets": 2,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.5996359999999754,
+        "p95Ms": 1.3487049999999954
+      },
+      "candidate": {
+        "medianMs": 0.5382470000000126,
+        "p95Ms": 2.7653499999999553
+      },
+      "outputSha256": "c8197b3c6773b917e0e660198f568663f2db8407cb1761dad043543e64b490e0"
+    },
+    {
+      "key": "turn-100/faction.reedbound_council",
+      "observedCells": 1456,
+      "fleets": 2,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.840453000000025,
+        "p95Ms": 1.4984929999999963
+      },
+      "candidate": {
+        "medianMs": 0.7346639999999525,
+        "p95Ms": 1.046921999999995
+      },
+      "outputSha256": "80bfe10b005363bb5f2b3e121229378661fae9f3f9faffa16b8209873c987602"
+    },
+    {
+      "key": "turn-100/faction.cinder_march",
+      "observedCells": 1463,
+      "fleets": 4,
+      "passengers": 2,
+      "baseline": {
+        "medianMs": 1.6095670000000837,
+        "p95Ms": 2.0934270000000197
+      },
+      "candidate": {
+        "medianMs": 1.5653310000000147,
+        "p95Ms": 2.3038080000000036
+      },
+      "outputSha256": "03982e46249d60d76ad7d6a582d9576bde8999bc59f48d0a7bc21113f87ef12b"
+    },
+    {
+      "key": "turn-100/faction.glass_tide",
+      "observedCells": 1498,
+      "fleets": 2,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.8165169999999762,
+        "p95Ms": 1.33538800000008
+      },
+      "candidate": {
+        "medianMs": 0.6842619999999897,
+        "p95Ms": 1.2738849999999502
+      },
+      "outputSha256": "04872756555a3c86c2c145d57a8e7bf39be9fb658ecc8278bc04bc26e62f3636"
+    },
+    {
+      "key": "turn-200/faction.ashen_compact",
+      "observedCells": 1513,
+      "fleets": 2,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 1.0109539999999697,
+        "p95Ms": 1.080759999999941
+      },
+      "candidate": {
+        "medianMs": 0.9605740000000651,
+        "p95Ms": 1.5872839999999542
+      },
+      "outputSha256": "45312b8c2072071815068d58400acd10c7796c7813ab78eadb6b835a2faccbb7"
+    },
+    {
+      "key": "turn-200/faction.reedbound_council",
+      "observedCells": 1534,
+      "fleets": 2,
+      "passengers": 1,
+      "baseline": {
+        "medianMs": 3.0509700000000066,
+        "p95Ms": 3.6470409999999447
+      },
+      "candidate": {
+        "medianMs": 3.424127999999996,
+        "p95Ms": 3.5777140000000145
+      },
+      "outputSha256": "471fd60824f0e0343420f12307bb16b704a957237520dfdd61b97fb3e2794fb3"
+    },
+    {
+      "key": "turn-200/faction.cinder_march",
+      "observedCells": 1503,
+      "fleets": 4,
+      "passengers": 2,
+      "baseline": {
+        "medianMs": 1.5600389999999607,
+        "p95Ms": 2.3488239999999223
+      },
+      "candidate": {
+        "medianMs": 1.517133000000058,
+        "p95Ms": 2.217373000000066
+      },
+      "outputSha256": "bb22c4c4aa7d2f68de0c0e1c0bd242ad9ccd8ce66db74aa24570cfbc9383c5e4"
+    },
+    {
+      "key": "turn-200/faction.glass_tide",
+      "observedCells": 1534,
+      "fleets": 2,
+      "passengers": 1,
+      "baseline": {
+        "medianMs": 1.48079000000007,
+        "p95Ms": 2.2705760000000055
+      },
+      "candidate": {
+        "medianMs": 1.328198000000043,
+        "p95Ms": 2.089022
+      },
+      "outputSha256": "471fd60824f0e0343420f12307bb16b704a957237520dfdd61b97fb3e2794fb3"
+    },
+    {
+      "key": "turn-300/faction.ashen_compact",
+      "observedCells": 1513,
+      "fleets": 2,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 1.0403569999999718,
+        "p95Ms": 1.0764890000000378
+      },
+      "candidate": {
+        "medianMs": 0.9756739999999127,
+        "p95Ms": 1.7467110000000048
+      },
+      "outputSha256": "d4a0018b404c8fb0e748667933ddd36058dc63b383e97afc52293658faed72d5"
+    },
+    {
+      "key": "turn-300/faction.reedbound_council",
+      "observedCells": 1534,
+      "fleets": 2,
+      "passengers": 1,
+      "baseline": {
+        "medianMs": 3.0331800000000158,
+        "p95Ms": 3.5415930000000344
+      },
+      "candidate": {
+        "medianMs": 3.2809330000000045,
+        "p95Ms": 3.402005000000031
+      },
+      "outputSha256": "471fd60824f0e0343420f12307bb16b704a957237520dfdd61b97fb3e2794fb3"
+    },
+    {
+      "key": "turn-300/faction.cinder_march",
+      "observedCells": 1503,
+      "fleets": 4,
+      "passengers": 2,
+      "baseline": {
+        "medianMs": 1.589460000000031,
+        "p95Ms": 2.2015010000000075
+      },
+      "candidate": {
+        "medianMs": 1.541700999999989,
+        "p95Ms": 1.9504680000000008
+      },
+      "outputSha256": "b3d42c3d1e387338ea0a53a007254b4131c920528d400026b2f2e4d03d308ccc"
+    },
+    {
+      "key": "turn-300/faction.glass_tide",
+      "observedCells": 1534,
+      "fleets": 2,
+      "passengers": 1,
+      "baseline": {
+        "medianMs": 1.4076319999999214,
+        "p95Ms": 1.7741350000001148
+      },
+      "candidate": {
+        "medianMs": 1.2880789999999251,
+        "p95Ms": 1.3001530000001367
+      },
+      "outputSha256": "471fd60824f0e0343420f12307bb16b704a957237520dfdd61b97fb3e2794fb3"
+    },
+    {
+      "key": "turn-500/faction.ashen_compact",
+      "observedCells": 1513,
+      "fleets": 2,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 1.0358430000001135,
+        "p95Ms": 1.557025000000067
+      },
+      "candidate": {
+        "medianMs": 0.9330019999999877,
+        "p95Ms": 0.9763159999999971
+      },
+      "outputSha256": "d4a0018b404c8fb0e748667933ddd36058dc63b383e97afc52293658faed72d5"
+    },
+    {
+      "key": "turn-500/faction.reedbound_council",
+      "observedCells": 1534,
+      "fleets": 2,
+      "passengers": 1,
+      "baseline": {
+        "medianMs": 3.0800239999998666,
+        "p95Ms": 3.6472650000000613
+      },
+      "candidate": {
+        "medianMs": 3.0112679999999727,
+        "p95Ms": 3.8013139999998202
+      },
+      "outputSha256": "471fd60824f0e0343420f12307bb16b704a957237520dfdd61b97fb3e2794fb3"
+    },
+    {
+      "key": "turn-500/faction.cinder_march",
+      "observedCells": 1503,
+      "fleets": 4,
+      "passengers": 2,
+      "baseline": {
+        "medianMs": 1.5063390000000254,
+        "p95Ms": 2.0534999999999854
+      },
+      "candidate": {
+        "medianMs": 1.539551000000074,
+        "p95Ms": 2.077343999999812
+      },
+      "outputSha256": "b3d42c3d1e387338ea0a53a007254b4131c920528d400026b2f2e4d03d308ccc"
+    },
+    {
+      "key": "turn-500/faction.glass_tide",
+      "observedCells": 1536,
+      "fleets": 2,
+      "passengers": 1,
+      "baseline": {
+        "medianMs": 1.3097160000002077,
+        "p95Ms": 1.9863640000000942
+      },
+      "candidate": {
+        "medianMs": 1.3396839999998065,
+        "p95Ms": 2.065462000000025
+      },
+      "outputSha256": "471fd60824f0e0343420f12307bb16b704a957237520dfdd61b97fb3e2794fb3"
+    },
+    {
+      "key": "turn-800/faction.ashen_compact",
+      "observedCells": 1513,
+      "fleets": 2,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 1.3848900000000413,
+        "p95Ms": 3.9796919999998863
+      },
+      "candidate": {
+        "medianMs": 1.0867240000000038,
+        "p95Ms": 2.2004219999998895
+      },
+      "outputSha256": "d4a0018b404c8fb0e748667933ddd36058dc63b383e97afc52293658faed72d5"
+    },
+    {
+      "key": "turn-800/faction.reedbound_council",
+      "observedCells": 1534,
+      "fleets": 2,
+      "passengers": 1,
+      "baseline": {
+        "medianMs": 2.9768420000000333,
+        "p95Ms": 3.4609089999999014
+      },
+      "candidate": {
+        "medianMs": 3.0841169999998783,
+        "p95Ms": 3.324252000000115
+      },
+      "outputSha256": "471fd60824f0e0343420f12307bb16b704a957237520dfdd61b97fb3e2794fb3"
+    },
+    {
+      "key": "turn-800/faction.cinder_march",
+      "observedCells": 1503,
+      "fleets": 4,
+      "passengers": 2,
+      "baseline": {
+        "medianMs": 1.4898909999999432,
+        "p95Ms": 1.9476519999998345
+      },
+      "candidate": {
+        "medianMs": 1.5126819999998133,
+        "p95Ms": 2.0642680000000837
+      },
+      "outputSha256": "b3d42c3d1e387338ea0a53a007254b4131c920528d400026b2f2e4d03d308ccc"
+    },
+    {
+      "key": "turn-800/faction.glass_tide",
+      "observedCells": 1536,
+      "fleets": 2,
+      "passengers": 1,
+      "baseline": {
+        "medianMs": 1.2581719999998313,
+        "p95Ms": 1.7511530000001585
+      },
+      "candidate": {
+        "medianMs": 1.2799330000000282,
+        "p95Ms": 1.884548999999879
+      },
+      "outputSha256": "471fd60824f0e0343420f12307bb16b704a957237520dfdd61b97fb3e2794fb3"
+    },
+    {
+      "key": "turn-808/faction.ashen_compact",
+      "observedCells": 1513,
+      "fleets": 2,
+      "passengers": 0,
+      "baseline": {
+        "medianMs": 0.00046999999995023245,
+        "p95Ms": 0.0005269999999200081
+      },
+      "candidate": {
+        "medianMs": 0.0004750000000512955,
+        "p95Ms": 0.0005060000000867149
+      },
+      "outputSha256": "4d553bab64869d372c5bd1b8ef83edfd9b5ef0e69efebc30734aaad4a79737f1"
+    },
+    {
+      "key": "turn-808/faction.reedbound_council",
+      "observedCells": 1534,
+      "fleets": 2,
+      "passengers": 1,
+      "baseline": {
+        "medianMs": 0.00045999999997548,
+        "p95Ms": 0.0005049999999755528
+      },
+      "candidate": {
+        "medianMs": 0.0004890000000159489,
+        "p95Ms": 0.0005260000000362197
+      },
+      "outputSha256": "4d553bab64869d372c5bd1b8ef83edfd9b5ef0e69efebc30734aaad4a79737f1"
+    },
+    {
+      "key": "turn-808/faction.cinder_march",
+      "observedCells": 1503,
+      "fleets": 4,
+      "passengers": 2,
+      "baseline": {
+        "medianMs": 0.00046900000006644404,
+        "p95Ms": 0.0005049999999755528
+      },
+      "candidate": {
+        "medianMs": 0.0004669999998441199,
+        "p95Ms": 0.0005109999999604042
+      },
+      "outputSha256": "4d553bab64869d372c5bd1b8ef83edfd9b5ef0e69efebc30734aaad4a79737f1"
+    },
+    {
+      "key": "turn-808/faction.glass_tide",
+      "observedCells": 1536,
+      "fleets": 2,
+      "passengers": 1,
+      "baseline": {
+        "medianMs": 0.0004750000000512955,
+        "p95Ms": 0.0005209999999351567
+      },
+      "candidate": {
+        "medianMs": 0.0004930000000058499,
+        "p95Ms": 0.0005340000000160217
+      },
+      "outputSha256": "4d553bab64869d372c5bd1b8ef83edfd9b5ef0e69efebc30734aaad4a79737f1"
+    }
+  ]
+}

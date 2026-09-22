@@ -1,0 +1,73 @@
+{
+  "runtime": "v22.23.2",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "cases": [
+    {
+      "name": "retained-v15",
+      "reports": 1,
+      "parsesPerSample": 1000,
+      "inputSha256": "c61b3ec96b6b43acde7bf19b29255e0068d6aefa47f3accf4c8342adc9ee6e91",
+      "bytes": 4186,
+      "before": {
+        "medianMs": 22.462557999999945,
+        "samplesMs": [
+          26.101370999999972,
+          23.689157999999964,
+          21.28165899999999,
+          21.52000499999997,
+          22.58162299999998,
+          21.484493999999927,
+          22.462557999999945,
+          22.380552999999964
+        ]
+      },
+      "after": {
+        "medianMs": 12.78783599999997,
+        "samplesMs": [
+          12.78783599999997,
+          12.368303999999966,
+          12.350183000000015,
+          14.319555000000037,
+          12.140420000000006,
+          13.955265000000054,
+          11.835230999999908,
+          13.067630000000008
+        ]
+      }
+    },
+    {
+      "name": "ordinary-v17-border-battle",
+      "reports": 1,
+      "parsesPerSample": 1000,
+      "inputSha256": "15123e86b807d8ea00fbd446ca02019b082a81e7b3c70f16fa9ac5dabeee928e",
+      "bytes": 3734,
+      "before": {
+        "medianMs": 24.126866999999947,
+        "samplesMs": [
+          27.938139999999976,
+          26.76788399999998,
+          25.242001000000073,
+          23.636187000000064,
+          23.88438599999995,
+          22.576315000000022,
+          24.126866999999947,
+          23.425062000000025
+        ]
+      },
+      "after": {
+        "medianMs": 15.26124500000003,
+        "samplesMs": [
+          15.976200999999946,
+          15.644219000000021,
+          15.109051000000022,
+          15.26124500000003,
+          15.002010000000041,
+          15.877763999999956,
+          14.820514000000003,
+          15.040121999999997
+        ]
+      }
+    }
+  ],
+  "note": "Experimental validation/projection only. Every candidate hit rechecks all own keys, values, prototypes and data descriptors recursively against a private parsed projection. Public returned projections are not proposed for caching. Two warmups/eight alternating paired samples. Corpus contains real retained v15 reports and a new completed v17 battle produced by ordinary commands from the disclosed existing authored border fixture. No campaign throughput claim."
+}

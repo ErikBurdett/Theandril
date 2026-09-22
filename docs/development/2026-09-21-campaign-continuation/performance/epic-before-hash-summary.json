@@ -1,0 +1,135 @@
+{
+  "profile": "epic-before-hash.cpuprofile",
+  "scope": "Unchanged generated-start Epic integration case selected in isolation; sibling short case unselected, still enabled in full suite",
+  "testSeconds": 50.45,
+  "fullSuiteEpicTestSeconds": 65.905,
+  "fullSuitePassed": false,
+  "warning": "Inclusive function samples overlap; do not sum them as independent phases. Sampling is approximate and includes profiling overhead.",
+  "inclusiveFunctions": [
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "stateHashForVersion",
+      "sampledSeconds": 15.23852
+    },
+    {
+      "file": "packages/chronicle/src/index.ts",
+      "function": "replayArchive",
+      "sampledSeconds": 15.034859
+    },
+    {
+      "file": "packages/ai/src/index.ts",
+      "function": "planTurn",
+      "sampledSeconds": 13.496511
+    },
+    {
+      "file": "packages/ai/src/index.ts",
+      "function": "planTurnWithReasons",
+      "sampledSeconds": 13.410839
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "canonicalPayload",
+      "sampledSeconds": 10.516511
+    },
+    {
+      "file": "packages/chronicle/src/index.ts",
+      "function": "applyRecordedCommand",
+      "sampledSeconds": 10.373277
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "planNaval",
+      "sampledSeconds": 9.3916
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "stateHash",
+      "sampledSeconds": 7.049024
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "applyCommand",
+      "sampledSeconds": 6.792149
+    },
+    {
+      "file": "packages/sim/src/territory.ts",
+      "function": "",
+      "sampledSeconds": 5.910905
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "getMovementQuery",
+      "sampledSeconds": 5.857939
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "getObservation",
+      "sampledSeconds": 5.268596
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "toward",
+      "sampledSeconds": 5.217986
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "",
+      "sampledSeconds": 4.854885
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "hashEnvelope",
+      "sampledSeconds": 4.699708
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "preview",
+      "sampledSeconds": 4.699376
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "canonicalLand",
+      "sampledSeconds": 4.603645
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "",
+      "sampledSeconds": 4.579134
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "search",
+      "sampledSeconds": 4.409116
+    },
+    {
+      "file": "packages/sim/src/movement.ts",
+      "function": "moveTo",
+      "sampledSeconds": 4.210011
+    },
+    {
+      "file": "packages/sim/src/simulation.ts",
+      "function": "applyCommandForVersion",
+      "sampledSeconds": 3.871676
+    },
+    {
+      "file": "packages/sim/src/rules.ts",
+      "function": "withRules",
+      "sampledSeconds": 3.784972
+    },
+    {
+      "file": "packages/sim/src/save.ts",
+      "function": "envelopeParts",
+      "sampledSeconds": 3.597527
+    },
+    {
+      "file": "packages/ai/src/naval.ts",
+      "function": "",
+      "sampledSeconds": 3.377368
+    },
+    {
+      "file": "packages/ai/src/navigation.ts",
+      "function": "destination",
+      "sampledSeconds": 3.247589
+    }
+  ]
+}

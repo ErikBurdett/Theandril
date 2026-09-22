@@ -1,0 +1,87 @@
+{
+  "date": "2026-09-21",
+  "environment": {
+    "node": "22.23.2",
+    "browser": "/usr/bin/chromium"
+  },
+  "source": "source-manifest.json",
+  "checks": [
+    {
+      "id": "typecheck",
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "typecheck.log",
+      "logSha256": "9b806551a727ff9f9eec8de2739b3a5dd7929f84cd9cf0523039dc41ae6375ce"
+    },
+    {
+      "id": "lint",
+      "command": "pnpm lint",
+      "exitCode": 0,
+      "log": "lint.log",
+      "logSha256": "a410ca93a80b3f6d79866340973de241518b1e6d0587b2570ec254efd8dbe477"
+    },
+    {
+      "id": "content",
+      "command": "pnpm content:validate",
+      "exitCode": 0,
+      "log": "content.log",
+      "logSha256": "8393d57c539d963a938ac86e4b6b73e837b53b1c881fa98b649184913b44ccde"
+    },
+    {
+      "id": "art",
+      "command": "pnpm art:validate",
+      "exitCode": 0,
+      "log": "art.log",
+      "logSha256": "1c05a6b8969552eaf7558cf8c794650c22896ab2062826ad4db52f3f8f4e05fa"
+    },
+    {
+      "id": "production-build",
+      "command": "VITE_BASE_PATH=/Theandril/ pnpm build",
+      "exitCode": 0,
+      "log": "build.log",
+      "logSha256": "0424a6309909f1db59ba956911d42f563d3d27c286a874dfa71dd200a478d8d8"
+    },
+    {
+      "id": "full-headless",
+      "command": "pnpm test",
+      "exitCode": 1,
+      "log": "full-headless.log",
+      "logSha256": "dd7354c0f31d6940d0e4ef52b464cc7ce3629b1eebcfdeda2166a68179ccb436"
+    },
+    {
+      "id": "affected-gameplay",
+      "command": "playwright test: contact, movement, naval, chronicles, battle-defense, hermes-ui-slices",
+      "exitCode": 0,
+      "log": "browser-gameplay.log",
+      "logSha256": "1420b564b24675ac6dc024897a3ccf189902031e062e9e4d182154f75b41e1b9"
+    },
+    {
+      "id": "complete-pages",
+      "command": "playwright test --config playwright.pages.config.ts",
+      "exitCode": 0,
+      "log": "browser-pages.log",
+      "logSha256": "901cfbf3a38124d955dd0a20488183e179fb2c79a672c8de869ba9f5b281fd91"
+    }
+  ],
+  "headless": {
+    "passed": 1768,
+    "total": 1769,
+    "passedFiles": 215,
+    "totalFiles": 216,
+    "durationSeconds": 98.44,
+    "failure": "Epic archive integration timeout: 66.351 seconds against unchanged 60-second limit"
+  },
+  "affectedGameplay": {
+    "passed": 20,
+    "total": 20
+  },
+  "completePages": {
+    "passed": 27,
+    "total": 27,
+    "durationSeconds": 28.4
+  },
+  "milestone": "M0 remains in progress",
+  "wholeReleaseGatesClosed": 0,
+  "publication": "none",
+  "note": "Targeted tests overlap headless totals; earlier failed and sandbox-interrupted attempts are separate evidence."
+}

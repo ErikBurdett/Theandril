@@ -1,0 +1,41 @@
+class Heap {
+  private cells: number[] = [];
+  private costs: number[] = [];
+  private priorities: number[] = [];
+  cell = 0;
+  cost = 0;
+  private before(priority: number, cost: number, cell: number, index: number): boolean {
+    return priority < this.priorities[index]! || priority === this.priorities[index]!
+      && (cost < this.costs[index]! || cost === this.costs[index]! && cell < this.cells[index]!);
+  }
+  push(cell: number, cost: number, priority: number): void {
+    const { cells, costs, priorities } = this;
+    let index = cells.length;
+    cells.push(cell); costs.push(cost); priorities.push(priority);
+    while (index > 0) {
+      const parent = Math.floor((index - 1) / 2);
+      if (!this.before(priority, cost, cell, parent)) break;
+      cells[index] = cells[parent]!; costs[index] = costs[parent]!; priorities[index] = priorities[parent]!;
+      index = parent;
+    }
+    cells[index] = cell; costs[index] = cost; priorities[index] = priority;
+  }
+  pop(): boolean {
+    const { cells, costs, priorities } = this;
+    if (!cells.length) return false;
+    this.cell = cells[0]!; this.cost = costs[0]!;
+    const tailCell = cells.pop()!, tailCost = costs.pop()!, tailPriority = priorities.pop()!;
+    if (!cells.length) return true;
+    let index = 0;
+    while (index * 2 + 1 < cells.length) {
+      let child = index * 2 + 1;
+      if (child + 1 < cells.length && this.before(priorities[child + 1]!, costs[child + 1]!, cells[child + 1]!, child)) child++;
+      if (!(priorities[child]! < tailPriority || priorities[child] === tailPriority
+        && (costs[child]! < tailCost || costs[child] === tailCost && cells[child]! < tailCell))) break;
+      cells[index] = cells[child]!; costs[index] = costs[child]!; priorities[index] = priorities[child]!;
+      index = child;
+    }
+    cells[index] = tailCell; costs[index] = tailCost; priorities[index] = tailPriority;
+    return true;
+  }
+}

@@ -1,0 +1,17 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ apps/web/src/updates/changelog.test.ts (6 tests | 2 failed) 15ms
+     × is deterministic and the committed feed is an exact record from its newest commit back to the root 7ms
+     × does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift 3ms
+ ❯ tests/tooling/pages-journal.test.ts (2 tests | 1 failed) 5400ms
+   × the actual Pages suite collects journal journeys alongside game and navigation smoke 5396ms
+ ❯ apps/web/src/updates/validation.test.ts (5 tests | 2 failed) 33ms
+   × links evidence that really exists at the pinned Git revision, not just on disk 16ms
+   × rejects a missing object at one of two revisions sharing an evidence path 7ms
+ ❯ apps/web/src/updates/roadmap.test.ts (5 tests | 1 failed) 35ms
+     × resolves every evidence file at the declared immutable source snapshot 15ms

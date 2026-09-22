@@ -1,0 +1,87 @@
+
+> theandril@0.1.0 build /home/telephoneheater/Work/Theandril
+> turbo run build
+
+• turbo 2.10.12
+
+   • Packages in scope: @theandril/ai, @theandril/art-pipeline, @theandril/chronicle, @theandril/content, @theandril/mapgen, @theandril/persistence, @theandril/render, @theandril/sim, @theandril/test-fixtures, @theandril/web
+   • Running build in 10 packages
+   • Remote caching disabled
+
+@theandril/web:build: cache miss, executing f1908c015fc7a0af
+@theandril/web:build: 
+@theandril/web:build: > @theandril/web@0.1.0 build /home/telephoneheater/Work/Theandril/apps/web
+@theandril/web:build: > vite build
+@theandril/web:build: 
+@theandril/web:build: vite v7.3.6 building client environment for production...
+@theandril/web:build: transforming...
+@theandril/web:build: ../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js (330:0): A comment
+@theandril/web:build: 
+@theandril/web:build: "// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+@theandril/web:build: 
+@theandril/web:build: in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+@theandril/web:build: ../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js (70:0): A comment
+@theandril/web:build: 
+@theandril/web:build: "/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+@theandril/web:build:  * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+@theandril/web:build:  * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+@theandril/web:build: 
+@theandril/web:build: in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+@theandril/web:build: ../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js (70:0): A comment
+@theandril/web:build: 
+@theandril/web:build: "/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+@theandril/web:build:  * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+@theandril/web:build:  * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+@theandril/web:build: 
+@theandril/web:build: in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+@theandril/web:build: ../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js (330:0): A comment
+@theandril/web:build: 
+@theandril/web:build: "// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+@theandril/web:build: 
+@theandril/web:build: in "../../node_modules/.pnpm/zod@4.5.4/node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+@theandril/web:build: ✓ 972 modules transformed.
+@theandril/web:build: rendering chunks...
+@theandril/web:build: computing gzip size...
+@theandril/web:build: dist/index.html                               0.68 kB │ gzip:   0.40 kB
+@theandril/web:build: dist/updates/dispatches/index.html            1.40 kB │ gzip:   0.66 kB
+@theandril/web:build: dist/updates/lore/index.html                  1.41 kB │ gzip:   0.66 kB
+@theandril/web:build: dist/updates/compendium/index.html            1.43 kB │ gzip:   0.68 kB
+@theandril/web:build: dist/updates/index.html                       1.51 kB │ gzip:   0.69 kB
+@theandril/web:build: dist/updates/roadmap/index.html               1.71 kB │ gzip:   0.75 kB
+@theandril/web:build: dist/assets/simulation.worker-Q9UVP329.js   680.52 kB
+@theandril/web:build: dist/assets/lore-PgTRLiSY.css                 2.25 kB │ gzip:   0.84 kB
+@theandril/web:build: dist/assets/compendium-KqbxFz3N.css           3.00 kB │ gzip:   1.07 kB
+@theandril/web:build: dist/assets/roadmap-2Ulqx9aT.css              4.16 kB │ gzip:   1.29 kB
+@theandril/web:build: dist/assets/journal-BNAn9EDw.css             17.19 kB │ gzip:   4.51 kB
+@theandril/web:build: dist/assets/game-DLfYbTcK.css               104.18 kB │ gzip:  20.56 kB
+@theandril/web:build: dist/assets/Filter-7MNuOowk.js                0.90 kB │ gzip:   0.48 kB
+@theandril/web:build: dist/assets/roadmap-lsODY1mp.js               1.24 kB │ gzip:   0.69 kB
+@theandril/web:build: dist/assets/Illustration-DVumlceN.js          4.75 kB │ gzip:   2.04 kB
+@theandril/web:build: dist/assets/lore-CEFhhLSc.js                  6.59 kB │ gzip:   2.37 kB
+@theandril/web:build: dist/assets/roadmap-0etuGJFO.js               9.60 kB │ gzip:   3.22 kB
+@theandril/web:build: dist/assets/BufferResource-CuwnjT-v.js       11.12 kB │ gzip:   2.85 kB
+@theandril/web:build: dist/assets/dispatches-BlQiavej.js           12.47 kB │ gzip:   3.97 kB
+@theandril/web:build: dist/assets/updates-CTGDyaU0.js              12.83 kB │ gzip:   5.38 kB
+@theandril/web:build: dist/assets/webworkerAll-YSNu1seG.js         15.44 kB │ gzip:   4.88 kB
+@theandril/web:build: dist/assets/CanvasRenderer-CXJlknOU.js       17.82 kB │ gzip:   5.98 kB
+@theandril/web:build: dist/assets/journal-DLA5F9dD.js              20.09 kB │ gzip:   7.96 kB
+@theandril/web:build: dist/assets/library-D0HBFTqW.js              28.26 kB │ gzip:   9.85 kB
+@theandril/web:build: dist/assets/browserAll-pwz6JvC9.js           43.11 kB │ gzip:  11.30 kB
+@theandril/web:build: dist/assets/WebGPURenderer-_1-2UEln.js       46.02 kB │ gzip:  13.23 kB
+@theandril/web:build: dist/assets/RenderTargetSystem-C63f4aSp.js   52.14 kB │ gzip:  14.38 kB
+@theandril/web:build: dist/assets/WebGLRenderer-Dno1BN0r.js        72.12 kB │ gzip:  19.64 kB
+@theandril/web:build: dist/assets/compendium-KOWxj2nV.js          165.47 kB │ gzip:  21.32 kB
+@theandril/web:build: dist/assets/client-RzuSRENx.js              193.09 kB │ gzip:  60.57 kB
+@theandril/web:build: dist/assets/library-DWEOhkmk.js             284.19 kB │ gzip:  73.73 kB
+@theandril/web:build: dist/assets/game-BpGqOK31.js                803.13 kB │ gzip: 243.32 kB
+@theandril/web:build: 
+@theandril/web:build: (!) Some chunks are larger than 500 kB after minification. Consider:
+@theandril/web:build: - Using dynamic import() to code-split the application
+@theandril/web:build: - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+@theandril/web:build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+@theandril/web:build: ✓ built in 3.53s
+
+ Tasks:    1 successful, 1 total
+Cached:    0 cached, 1 total
+  Time:    3.887s 
+

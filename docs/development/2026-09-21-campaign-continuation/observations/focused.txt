@@ -1,0 +1,34 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ packages/sim/src/observation-publication-equivalence.test.ts (18 tests | 1 failed) 233ms
+     × refreshes paid construction, completion and remembered improvements without a publication cache 14ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/sim/src/observation-publication-equivalence.test.ts > observation publication keeps the captured full output > refreshes paid construction, completion and remembered improvements without a publication cache
+AssertionError: after paid construction: first differing byte 168804; actual factionId":"faction.ashen_compact","type":"land_work_started","message":"Grain witness paid 36 coin for Hearthgrain grange at hex 302; 3 active turns ; expected type":"land_work_started","message":"Grain witness paid 36 coin for Hearthgrain grange at hex 302; 3 active turns of work are required.","factionId":": expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ exact packages/sim/src/observation-publication-equivalence.test.ts:17:171
+     15|   let offset = 0;
+     16|   if (actual !== expected) while (offset < Math.min(actual.length, exp…
+     17|   expect(actual === expected, `${label}: first differing byte ${offset…
+       |                                                                                                                                                                           ^
+     18| };
+     19| const read = (state: GameState, variant: CapturedVariant) => withRules…
+ ❯ packages/sim/src/observation-publication-equivalence.test.ts:58:44
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 32 passed (33)
+   Start at  12:47:11
+   Duration  1.55s (transform 345ms, setup 0ms, import 670ms, tests 745ms, environment 0ms)
+

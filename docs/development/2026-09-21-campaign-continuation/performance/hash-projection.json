@@ -1,0 +1,743 @@
+{
+  "runtime": "v22.23.2",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "results": [
+    {
+      "name": "retained-real-epic-turn808",
+      "changes": "none",
+      "currentVersion": 17,
+      "turn": 808,
+      "reports": 20,
+      "towns": 32,
+      "knownLandCells": 2268,
+      "baselineBytes": 549902,
+      "originalHash": "cac6d284",
+      "originalSha256": "121549746677f594c66d2ff55c4333f1b3373b4d923df919e9cafa543bbdacb1",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 342.11078799999973,
+        "samplesMs": [
+          342.11078799999973,
+          347.5447250000002,
+          349.8735340000003,
+          368.26078000000007,
+          334.6900169999999,
+          339.04628200000025,
+          341.16831699999966,
+          335.98655600000075
+        ]
+      },
+      "after": {
+        "medianMs": 256.155119,
+        "samplesMs": [
+          252.02713600000016,
+          252.18561099999988,
+          256.155119,
+          387.6363160000001,
+          474.8472549999997,
+          237.50366200000008,
+          264.33840599999985,
+          230.03787100000045
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 10521,
+        "hits": 10521,
+        "parses": 0,
+        "bypasses": 0,
+        "encodedBytes": 0
+      }
+    },
+    {
+      "name": "retained-real-epic-turn808",
+      "changes": "treasury",
+      "currentVersion": 17,
+      "turn": 808,
+      "reports": 20,
+      "towns": 32,
+      "knownLandCells": 2268,
+      "baselineBytes": 549902,
+      "originalHash": "cac6d284",
+      "originalSha256": "121549746677f594c66d2ff55c4333f1b3373b4d923df919e9cafa543bbdacb1",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 334.1559560000005,
+        "samplesMs": [
+          375.6842890000007,
+          337.1734639999995,
+          334.1559560000005,
+          345.7310099999995,
+          322.9906310000006,
+          315.43905300000006,
+          323.2808920000007,
+          319.2589489999991
+        ]
+      },
+      "after": {
+        "medianMs": 224.86422200000015,
+        "samplesMs": [
+          230.26773500000036,
+          233.9974540000003,
+          236.08660699999928,
+          224.49665399999867,
+          219.29809599999862,
+          224.86422200000015,
+          223.41586500000085,
+          219.38407600000028
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 10521,
+        "hits": 10521,
+        "parses": 0,
+        "bypasses": 0,
+        "encodedBytes": 0
+      }
+    },
+    {
+      "name": "retained-real-epic-turn808",
+      "changes": "late-land-every-read",
+      "currentVersion": 17,
+      "turn": 808,
+      "reports": 20,
+      "towns": 32,
+      "knownLandCells": 2268,
+      "baselineBytes": 549902,
+      "originalHash": "cac6d284",
+      "originalSha256": "121549746677f594c66d2ff55c4333f1b3373b4d923df919e9cafa543bbdacb1",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 329.061694,
+        "samplesMs": [
+          348.09660200000144,
+          329.061694,
+          322.2972520000003,
+          351.47422899999947,
+          335.1606690000008,
+          323.12122100000124,
+          305.0839100000012,
+          308.00469499999963
+        ]
+      },
+      "after": {
+        "medianMs": 477.9423230000011,
+        "samplesMs": [
+          477.9423230000011,
+          479.5456409999988,
+          467.3471249999984,
+          484.3165079999999,
+          484.3611349999992,
+          438.3911939999998,
+          443.7287019999967,
+          440.45861100000184
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 10521,
+        "hits": 10021,
+        "parses": 500,
+        "bypasses": 0,
+        "encodedBytes": 129281083
+      }
+    },
+    {
+      "name": "retained-real-epic-turn808",
+      "changes": "late-land-one-in-five",
+      "currentVersion": 17,
+      "turn": 808,
+      "reports": 20,
+      "towns": 32,
+      "knownLandCells": 2268,
+      "baselineBytes": 549902,
+      "originalHash": "cac6d284",
+      "originalSha256": "121549746677f594c66d2ff55c4333f1b3373b4d923df919e9cafa543bbdacb1",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 306.29807099999744,
+        "samplesMs": [
+          306.29807099999744,
+          301.6789570000001,
+          309.9829329999993,
+          311.95130300000164,
+          306.80237000000125,
+          303.9102009999988,
+          300.19880600000033,
+          305.0651969999999
+        ]
+      },
+      "after": {
+        "medianMs": 261.31892300000254,
+        "samplesMs": [
+          261.0325869999979,
+          281.71415200000047,
+          261.31892300000254,
+          271.36789500000305,
+          260.823725000002,
+          258.1257519999999,
+          257.91971000000194,
+          266.56425800000216
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 10521,
+        "hits": 10421,
+        "parses": 100,
+        "bypasses": 0,
+        "encodedBytes": 25856217
+      }
+    },
+    {
+      "name": "seventeen-authored-towns",
+      "changes": "none",
+      "currentVersion": 17,
+      "turn": 1,
+      "reports": 0,
+      "towns": 17,
+      "knownLandCells": 119,
+      "baselineBytes": 39614,
+      "originalHash": "4dc22928",
+      "originalSha256": "099599c4de4dc4165c93c5e48f62d961c33d81465f1f715ebaedd543a92c7953",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 21.14572599999883,
+        "samplesMs": [
+          22.084617000000435,
+          20.967526000000362,
+          21.143034000000625,
+          20.938697999998112,
+          21.14572599999883,
+          21.081701999999495,
+          22.24112099999911,
+          21.676695000001928
+        ]
+      },
+      "after": {
+        "medianMs": 18.19524900000033,
+        "samplesMs": [
+          18.19524900000033,
+          17.638237999999546,
+          18.44807000000219,
+          17.432074000000284,
+          17.522024000001693,
+          27.45842000000266,
+          22.596733000002132,
+          17.74547000000166
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 501,
+        "hits": 501,
+        "parses": 0,
+        "bypasses": 0,
+        "encodedBytes": 0
+      }
+    },
+    {
+      "name": "seventeen-authored-towns",
+      "changes": "treasury",
+      "currentVersion": 17,
+      "turn": 1,
+      "reports": 0,
+      "towns": 17,
+      "knownLandCells": 119,
+      "baselineBytes": 39614,
+      "originalHash": "4dc22928",
+      "originalSha256": "099599c4de4dc4165c93c5e48f62d961c33d81465f1f715ebaedd543a92c7953",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 21.055755000001227,
+        "samplesMs": [
+          20.910945999999967,
+          20.714835000002495,
+          21.38348500000211,
+          21.081610000001092,
+          21.031204999999318,
+          20.949670000001788,
+          22.079204000001482,
+          21.055755000001227
+        ]
+      },
+      "after": {
+        "medianMs": 17.873047999997652,
+        "samplesMs": [
+          17.347247999998217,
+          17.331043999998656,
+          17.495780000001105,
+          20.46524800000043,
+          17.50618399999803,
+          17.873047999997652,
+          17.91266000000178,
+          18.066713000000163
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 501,
+        "hits": 501,
+        "parses": 0,
+        "bypasses": 0,
+        "encodedBytes": 0
+      }
+    },
+    {
+      "name": "seventeen-authored-towns",
+      "changes": "late-land-every-read",
+      "currentVersion": 17,
+      "turn": 1,
+      "reports": 0,
+      "towns": 17,
+      "knownLandCells": 119,
+      "baselineBytes": 39614,
+      "originalHash": "4dc22928",
+      "originalSha256": "099599c4de4dc4165c93c5e48f62d961c33d81465f1f715ebaedd543a92c7953",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 21.32850700000199,
+        "samplesMs": [
+          21.19290700000056,
+          20.76084400000036,
+          21.551980000000185,
+          21.415594000001875,
+          21.289938999998412,
+          21.10566800000015,
+          21.727638000000297,
+          21.32850700000199
+        ]
+      },
+      "after": {
+        "medianMs": 30.89311699999962,
+        "samplesMs": [
+          30.89311699999962,
+          30.622290999999677,
+          30.572235999999975,
+          31.222921000000497,
+          31.105692000001,
+          30.70387799999662,
+          30.642789000001358,
+          31.80838500000027
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 501,
+        "hits": 1,
+        "parses": 500,
+        "bypasses": 0,
+        "encodedBytes": 7354084
+      }
+    },
+    {
+      "name": "seventeen-authored-towns",
+      "changes": "late-land-one-in-five",
+      "currentVersion": 17,
+      "turn": 1,
+      "reports": 0,
+      "towns": 17,
+      "knownLandCells": 119,
+      "baselineBytes": 39614,
+      "originalHash": "4dc22928",
+      "originalSha256": "099599c4de4dc4165c93c5e48f62d961c33d81465f1f715ebaedd543a92c7953",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 21.357811000001675,
+        "samplesMs": [
+          21.34201899999971,
+          21.12082999999984,
+          21.05523499999981,
+          20.971451000001252,
+          21.686155999999755,
+          21.357811000001675,
+          22.26643300000069,
+          22.710041999998793
+        ]
+      },
+      "after": {
+        "medianMs": 20.819483999999647,
+        "samplesMs": [
+          20.783375999999407,
+          20.819483999999647,
+          20.268669999997655,
+          20.550432,
+          20.557323000000906,
+          21.329415000000154,
+          21.5335070000001,
+          21.038480999999592
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 501,
+        "hits": 401,
+        "parses": 100,
+        "bypasses": 0,
+        "encodedBytes": 1470816
+      }
+    },
+    {
+      "name": "genuine-v17-pending-diplomacy",
+      "changes": "none",
+      "currentVersion": 17,
+      "turn": 2,
+      "reports": 0,
+      "towns": 3,
+      "knownLandCells": 35,
+      "baselineBytes": 29396,
+      "originalHash": "9d49a22c",
+      "originalSha256": "210b47baaa9cd7ea42decf481f42e0a12ba469c66cb787fd696b4b96e5d702e8",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 17.28583499999877,
+        "samplesMs": [
+          17.836699999999837,
+          17.515840000000026,
+          17.111821999998938,
+          17.28583499999877,
+          17.080242,
+          17.020684000002802,
+          17.307214999997086,
+          17.131851000001916
+        ]
+      },
+      "after": {
+        "medianMs": 14.982061999999132,
+        "samplesMs": [
+          15.158849999999802,
+          15.44612000000052,
+          14.982061999999132,
+          15.232689000000391,
+          14.78835799999797,
+          14.77529499999946,
+          14.973221000000194,
+          14.802525999999489
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 501,
+        "hits": 501,
+        "parses": 0,
+        "bypasses": 0,
+        "encodedBytes": 0
+      }
+    },
+    {
+      "name": "genuine-v17-pending-diplomacy",
+      "changes": "treasury",
+      "currentVersion": 17,
+      "turn": 2,
+      "reports": 0,
+      "towns": 3,
+      "knownLandCells": 35,
+      "baselineBytes": 29396,
+      "originalHash": "9d49a22c",
+      "originalSha256": "210b47baaa9cd7ea42decf481f42e0a12ba469c66cb787fd696b4b96e5d702e8",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 17.500002000000677,
+        "samplesMs": [
+          17.145197000001644,
+          17.353511000001163,
+          17.466388000000734,
+          17.500002000000677,
+          18.341951999998855,
+          18.175208999997267,
+          17.523024000001897,
+          17.23006499999974
+        ]
+      },
+      "after": {
+        "medianMs": 15.215863000001264,
+        "samplesMs": [
+          14.917421999998624,
+          14.79000200000155,
+          14.990842999999586,
+          15.215863000001264,
+          15.348993999999948,
+          15.497274000001198,
+          15.780612000002293,
+          15.027314999999362
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 501,
+        "hits": 501,
+        "parses": 0,
+        "bypasses": 0,
+        "encodedBytes": 0
+      }
+    },
+    {
+      "name": "genuine-v17-pending-diplomacy",
+      "changes": "late-land-every-read",
+      "currentVersion": 17,
+      "turn": 2,
+      "reports": 0,
+      "towns": 3,
+      "knownLandCells": 35,
+      "baselineBytes": 29396,
+      "originalHash": "9d49a22c",
+      "originalSha256": "210b47baaa9cd7ea42decf481f42e0a12ba469c66cb787fd696b4b96e5d702e8",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 17.109151000000566,
+        "samplesMs": [
+          17.38205999999991,
+          17.03230000000258,
+          17.50173899999936,
+          17.10204099999828,
+          17.085713000000396,
+          17.109151000000566,
+          17.355883000000176,
+          16.814307999997254
+        ]
+      },
+      "after": {
+        "medianMs": 20.237348000002385,
+        "samplesMs": [
+          20.139727999998286,
+          20.657662999998138,
+          19.922482000001764,
+          20.119080000000395,
+          20.237348000002385,
+          21.69039299999713,
+          20.437015999999858,
+          19.872240000000602
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 501,
+        "hits": 1,
+        "parses": 500,
+        "bypasses": 0,
+        "encodedBytes": 2216084
+      }
+    },
+    {
+      "name": "genuine-v17-pending-diplomacy",
+      "changes": "late-land-one-in-five",
+      "currentVersion": 17,
+      "turn": 2,
+      "reports": 0,
+      "towns": 3,
+      "knownLandCells": 35,
+      "baselineBytes": 29396,
+      "originalHash": "9d49a22c",
+      "originalSha256": "210b47baaa9cd7ea42decf481f42e0a12ba469c66cb787fd696b4b96e5d702e8",
+      "hashesPerSample": 50,
+      "before": {
+        "medianMs": 17.106610999999248,
+        "samplesMs": [
+          16.853394999998272,
+          16.90008300000045,
+          17.2874410000004,
+          17.720987000000605,
+          17.278800000000047,
+          17.106610999999248,
+          17.019232999999076,
+          16.930789000001823
+        ]
+      },
+      "after": {
+        "medianMs": 16.171822000000247,
+        "samplesMs": [
+          16.161143999997876,
+          16.019336000001204,
+          16.01529500000106,
+          16.171822000000247,
+          16.78389000000243,
+          16.21892300000036,
+          16.04813699999795,
+          16.445535999999265
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 501,
+        "hits": 401,
+        "parses": 100,
+        "bypasses": 0,
+        "encodedBytes": 443216
+      }
+    },
+    {
+      "name": "retained-real-standard24-turn301",
+      "changes": "none",
+      "currentVersion": 17,
+      "turn": 227,
+      "reports": 20,
+      "towns": 269,
+      "knownLandCells": 16887,
+      "baselineBytes": 5128634,
+      "originalHash": "893ac79f",
+      "originalSha256": "ac1845a92dba249cd48466f4a2fde1098819a3bc3645ffcad78ecdec653b1308",
+      "hashesPerSample": 10,
+      "before": {
+        "medianMs": 610.579611000001,
+        "samplesMs": [
+          610.579611000001,
+          639.2130869999964,
+          615.9368200000026,
+          609.8533900000039,
+          607.810513999997,
+          601.4770990000034,
+          629.6306229999973,
+          601.8585710000043
+        ]
+      },
+      "after": {
+        "medianMs": 471.98441500000627,
+        "samplesMs": [
+          462.94148399999904,
+          504.2922910000052,
+          529.2791090000028,
+          471.98441500000627,
+          469.2504289999997,
+          467.5124250000008,
+          472.27629400000296,
+          467.48093099999824
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 2121,
+        "hits": 2121,
+        "parses": 0,
+        "bypasses": 0,
+        "encodedBytes": 0
+      }
+    },
+    {
+      "name": "retained-real-standard24-turn301",
+      "changes": "treasury",
+      "currentVersion": 17,
+      "turn": 227,
+      "reports": 20,
+      "towns": 269,
+      "knownLandCells": 16887,
+      "baselineBytes": 5128634,
+      "originalHash": "893ac79f",
+      "originalSha256": "ac1845a92dba249cd48466f4a2fde1098819a3bc3645ffcad78ecdec653b1308",
+      "hashesPerSample": 10,
+      "before": {
+        "medianMs": 606.8323520000049,
+        "samplesMs": [
+          606.8323520000049,
+          638.0138700000025,
+          598.3754839999965,
+          611.7571919999973,
+          604.683348999999,
+          619.2838480000064,
+          595.6829760000037,
+          590.5027169999958
+        ]
+      },
+      "after": {
+        "medianMs": 483.48906700000225,
+        "samplesMs": [
+          473.1348230000003,
+          484.62501599999814,
+          473.98468099999445,
+          486.80269699999917,
+          464.6480969999975,
+          488.0504440000004,
+          483.48906700000225,
+          453.4193309999973
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 2121,
+        "hits": 2121,
+        "parses": 0,
+        "bypasses": 0,
+        "encodedBytes": 0
+      }
+    },
+    {
+      "name": "retained-real-standard24-turn301",
+      "changes": "late-land-every-read",
+      "currentVersion": 17,
+      "turn": 227,
+      "reports": 20,
+      "towns": 269,
+      "knownLandCells": 16887,
+      "baselineBytes": 5128634,
+      "originalHash": "893ac79f",
+      "originalSha256": "ac1845a92dba249cd48466f4a2fde1098819a3bc3645ffcad78ecdec653b1308",
+      "hashesPerSample": 10,
+      "before": {
+        "medianMs": 614.3641459999999,
+        "samplesMs": [
+          606.143673999999,
+          614.3641459999999,
+          625.961890999999,
+          598.8573719999986,
+          606.3476599999995,
+          618.9258069999923,
+          622.8067529999971,
+          599.4084119999898
+        ]
+      },
+      "after": {
+        "medianMs": 859.6385779999982,
+        "samplesMs": [
+          869.2837399999989,
+          885.1240079999989,
+          848.6873730000007,
+          824.1487889999989,
+          836.6505380000017,
+          863.579945999998,
+          859.6385779999982,
+          839.5452899999946
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 2121,
+        "hits": 2021,
+        "parses": 100,
+        "bypasses": 0,
+        "encodedBytes": 194327018
+      }
+    },
+    {
+      "name": "retained-real-standard24-turn301",
+      "changes": "late-land-one-in-five",
+      "currentVersion": 17,
+      "turn": 227,
+      "reports": 20,
+      "towns": 269,
+      "knownLandCells": 16887,
+      "baselineBytes": 5128634,
+      "originalHash": "893ac79f",
+      "originalSha256": "ac1845a92dba249cd48466f4a2fde1098819a3bc3645ffcad78ecdec653b1308",
+      "hashesPerSample": 10,
+      "before": {
+        "medianMs": 604.4692279999872,
+        "samplesMs": [
+          589.8511080000026,
+          604.4692279999872,
+          603.4599810000072,
+          607.1309080000065,
+          606.2721230000025,
+          600.7236589999957,
+          603.4042340000015,
+          621.814222999994
+        ]
+      },
+      "after": {
+        "medianMs": 553.8917829999991,
+        "samplesMs": [
+          536.5287960000132,
+          555.707620000001,
+          536.5145459999912,
+          554.984832999995,
+          525.9064150000049,
+          561.5843020000029,
+          549.9543229999981,
+          553.8917829999991
+        ]
+      },
+      "cacheStatistics": {
+        "reads": 2121,
+        "hits": 2101,
+        "parses": 20,
+        "bypasses": 0,
+        "encodedBytes": 38865402
+      }
+    }
+  ],
+  "note": "Experimental whole current state hash. Retained real v16 Epic and Standard24 saves migrate through the unchanged loader to current v17; other fixtures are disclosed authored setups. Two warmups/eight alternating sample pairs,50 whole hashes each (10 for Standard24); capture/loading and independent byte/hash checks excluded. Changes include treasury and late land-memory fields on every read or one in five reads. Land mutations are synthetic cache-miss workloads, not simulated gameplay. Runtime production save.ts remains untouched; temporary candidate module rewrites retained source only. Counters include warmup/correctness calls and encodedBytes is cumulative, not live memory. This is a microbenchmark, not full-suite acceptance."
+}

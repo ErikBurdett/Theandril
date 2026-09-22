@@ -1,0 +1,41 @@
+{
+  "runtime": "v22.23.2",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "sourceRecords": 4,
+  "repeatedBatches": 4096,
+  "recordsPerSample": 16384,
+  "technicalBytes": 50630280,
+  "inputSha256": "c83a4586f4f6b2fdacd4b427be8e66940995b05023d29399049c63f9086dc520",
+  "outputSha256": "7b06b9914aabba3d1631e8f4c024f79215d606aceffc4dab949725af2d6dd6ee",
+  "before": {
+    "samples": 8,
+    "medianMs": 783.8675540000004,
+    "p95Ms": 1030.3670669999992,
+    "valuesMs": [
+      1030.3670669999992,
+      1009.2796699999999,
+      756.9445419999993,
+      757.182354999999,
+      780.8813140000002,
+      783.8675540000004,
+      764.4129160000011,
+      785.0812440000009
+    ]
+  },
+  "after": {
+    "samples": 8,
+    "medianMs": 576.3479430000007,
+    "p95Ms": 707.2010689999997,
+    "valuesMs": [
+      707.2010689999997,
+      637.3349120000003,
+      573.9860759999992,
+      563.7610499999992,
+      573.9032349999998,
+      556.3036620000003,
+      579.8895650000013,
+      576.3479430000007
+    ]
+  },
+  "note": "Serialization-only paired benchmark. The four retained v15 fieldCompleted records are repeated 4096 times, including their real battle/event data. This is a synthetic large history, not a simulated campaign. Each sample formats the whole archive and every record, matching the two technical rendering paths. Two warmups and eight alternating samples. Frozen inputs and exact byte comparison are checked outside timing. No rules, replay, hashing, validation, UI construction, or I/O is timed."
+}

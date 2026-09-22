@@ -1,0 +1,49 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+stdout | packages/ai/src/naval-outlets.test.ts > naval geography work stays bounded as waiting founder count grows (4 faction seats)
+{"probe":"aggregate-observed-cell-reads","factionCount":4,"radius":4,"counts":[{"founders":1,"cells":61,"reads":398},{"founders":8,"cells":61,"reads":825},{"founders":32,"cells":61,"reads":2289}]}
+
+ ❯ packages/ai/src/naval-outlets.test.ts (3 tests | 2 failed) 579ms
+   × a paid second harbor remains the outlet commitment when a third coastal town becomes available 425ms
+   × naval geography work stays bounded as waiting founder count grows (4 faction seats) 58ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/ai/src/naval-outlets.test.ts > a paid second harbor remains the outlet commitment when a third coastal town becomes available
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ packages/ai/src/naval-outlets.test.ts:40:107
+     38|   expect(view.productionOptions.find(option => option.settlementId ===…
+     39|   const plan = planNaval(view, 1000);
+     40|   expect(plan.commands.some(command => command.type === 'queue' && com…
+       |                                                                                                           ^
+     41|   expect(needsNavalInvestment(view)).toBe(false);
+     42|   expect(planNaval(getObservation(mirror, factionId), 1000).commands).…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  packages/ai/src/naval-outlets.test.ts > naval geography work stays bounded as waiting founder count grows (4 faction seats)
+AssertionError: expected 825 to be less than or equal to 459
+ ❯ packages/ai/src/naval-outlets.test.ts:78:62
+     76|     });
+     77|     console.info(JSON.stringify({ probe: 'aggregate-observed-cell-read…
+     78|     for (const count of counts.slice(1)) expect(count.reads).toBeLessT…
+       |                                                              ^
+     79|   }
+     80| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  02:26:33
+   Duration  1.14s (transform 387ms, setup 0ms, import 492ms, tests 579ms, environment 0ms)
+

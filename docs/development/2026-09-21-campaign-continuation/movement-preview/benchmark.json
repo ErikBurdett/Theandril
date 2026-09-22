@@ -1,0 +1,317 @@
+{
+  "node": "v22.23.2",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "sourceSha256": "055e490457a30c376511f513d34f1f9e8a7bbf6e832aa7345ef796c9a8e0ab77",
+  "originalSourceSha256": "6e4635e4900d890ca3bb2f2c86fa48b3f5fe1bdd147dd96148a970fadd6862d5",
+  "scope": "Synthetic detached64x64 charts. Full-query target preview vs new exact target-only publication; both execute the identical range search and share its remaining4096node budget with route preview. Five warmups, forty alternating samples; setup/equality/hashes outside timing. No campaign, renderer or fog/activity reduction.",
+  "results": [
+    {
+      "name": "range-0-shared-budget",
+      "full": {
+        "medianMs": 0.05559900000000084,
+        "p95Ms": 0.09350600000001918
+      },
+      "targetOnly": {
+        "medianMs": 0.05410100000000284,
+        "p95Ms": 0.10802699999999277
+      },
+      "previewSha256": "7a765365e94f8134ed06329a50f595495c95d8de1ff6bde1dd81d007ca01442b",
+      "previewExpandedNodes": 16,
+      "fullExpandedNodes": 17
+    },
+    {
+      "name": "range-2-shared-budget",
+      "full": {
+        "medianMs": 0.0721240000000023,
+        "p95Ms": 0.11520799999999554
+      },
+      "targetOnly": {
+        "medianMs": 0.04037600000000907,
+        "p95Ms": 0.06386100000000283
+      },
+      "previewSha256": "7a765365e94f8134ed06329a50f595495c95d8de1ff6bde1dd81d007ca01442b",
+      "previewExpandedNodes": 16,
+      "fullExpandedNodes": 35
+    },
+    {
+      "name": "range-5-shared-budget",
+      "full": {
+        "medianMs": 0.13968799999997827,
+        "p95Ms": 0.2427929999999492
+      },
+      "targetOnly": {
+        "medianMs": 0.05718699999999899,
+        "p95Ms": 0.06211600000000317
+      },
+      "previewSha256": "7a765365e94f8134ed06329a50f595495c95d8de1ff6bde1dd81d007ca01442b",
+      "previewExpandedNodes": 16,
+      "fullExpandedNodes": 107
+    },
+    {
+      "name": "range-9-shared-budget",
+      "full": {
+        "medianMs": 0.29801200000002837,
+        "p95Ms": 0.3224519999999984
+      },
+      "targetOnly": {
+        "medianMs": 0.07102799999995568,
+        "p95Ms": 0.15853799999996454
+      },
+      "previewSha256": "7a765365e94f8134ed06329a50f595495c95d8de1ff6bde1dd81d007ca01442b",
+      "previewExpandedNodes": 16,
+      "fullExpandedNodes": 287
+    },
+    {
+      "name": "range-200-shared-budget",
+      "full": {
+        "medianMs": 2.915806000000032,
+        "p95Ms": 5.024249999999995
+      },
+      "targetOnly": {
+        "medianMs": 1.0570310000000518,
+        "p95Ms": 1.6161270000000059
+      },
+      "previewSha256": "bd8477941d5ac124f2fbf18294d7c8626fc663b2954448ad2c458650238ce2f9",
+      "previewExpandedNodes": 0,
+      "fullExpandedNodes": 4096
+    },
+    {
+      "name": "already-at-target",
+      "full": {
+        "medianMs": 0.05100299999998015,
+        "p95Ms": 0.05343499999997903
+      },
+      "targetOnly": {
+        "medianMs": 0.01700999999997066,
+        "p95Ms": 0.018077000000005228
+      },
+      "previewSha256": "bc8c191cabaa62b6cec3dbdb011ae15b50c4589ec41dbca2098e45d94eec4dff",
+      "previewExpandedNodes": 0,
+      "fullExpandedNodes": 91
+    },
+    {
+      "name": "invalid-target",
+      "full": {
+        "medianMs": 0.05015399999996362,
+        "p95Ms": 0.06333399999999756
+      },
+      "targetOnly": {
+        "medianMs": 0.01629800000000614,
+        "p95Ms": 0.017459000000030755
+      },
+      "previewSha256": "834003300b42289a2acbc42819ee9bdfd3ab35dafc85ee39859624238e247a70",
+      "previewExpandedNodes": 0,
+      "fullExpandedNodes": 91
+    },
+    {
+      "name": "weighted-route",
+      "full": {
+        "medianMs": 0.062004000000001724,
+        "p95Ms": 0.06590200000005098
+      },
+      "targetOnly": {
+        "medianMs": 0.047283999999990556,
+        "p95Ms": 0.05128999999999451
+      },
+      "previewSha256": "6ceabc0f583a74a93a89d7c8c1a6969f3d67b346a0bd8ea6a42f6c7fd0aca3d3",
+      "previewExpandedNodes": 128,
+      "fullExpandedNodes": 166
+    },
+    {
+      "name": "road-route",
+      "full": {
+        "medianMs": 0.033328999999980624,
+        "p95Ms": 0.03808699999990495
+      },
+      "targetOnly": {
+        "medianMs": 0.017046999999934087,
+        "p95Ms": 0.028863000000001193
+      },
+      "previewSha256": "7a765365e94f8134ed06329a50f595495c95d8de1ff6bde1dd81d007ca01442b",
+      "previewExpandedNodes": 16,
+      "fullExpandedNodes": 64
+    },
+    {
+      "name": "known-target-beyond-fog-gap",
+      "full": {
+        "medianMs": 0.5588340000000471,
+        "p95Ms": 0.5827639999999974
+      },
+      "targetOnly": {
+        "medianMs": 0.520601000000056,
+        "p95Ms": 0.7397050000000718
+      },
+      "previewSha256": "f1df5bd153737d24683e2b37b87c6cdad2998323ea76beb3061a0796bb8dc8e6",
+      "previewExpandedNodes": 1792,
+      "fullExpandedNodes": 1883
+    },
+    {
+      "name": "peaceful-occupant",
+      "full": {
+        "medianMs": 0.11545999999998457,
+        "p95Ms": 0.1494119999999839
+      },
+      "targetOnly": {
+        "medianMs": 0.043309000000022024,
+        "p95Ms": 0.04789000000005217
+      },
+      "previewSha256": "e7c8b922a26112a17af79386ebdf84f9be896cade1c3902991d42ef1b49d138f",
+      "previewExpandedNodes": 0,
+      "fullExpandedNodes": 89
+    },
+    {
+      "name": "hostile-attack",
+      "full": {
+        "medianMs": 0.09000700000001416,
+        "p95Ms": 0.10372799999993276
+      },
+      "targetOnly": {
+        "medianMs": 0.017271000000050662,
+        "p95Ms": 0.019124999999917236
+      },
+      "previewSha256": "239c8d5200dbcb3ec72e514f288c8e28da37a960d97572fa9b7dbe6be3ea12c6",
+      "previewExpandedNodes": 4,
+      "fullExpandedNodes": 93
+    },
+    {
+      "name": "hostile-append-rejected",
+      "full": {
+        "medianMs": 0.08843999999999141,
+        "p95Ms": 0.10200399999996534
+      },
+      "targetOnly": {
+        "medianMs": 0.015305000000012114,
+        "p95Ms": 0.016196000000036292
+      },
+      "previewSha256": "45a51637a3c8778a17d71d0ea3773b4f860a9798ab72d88332d6ac1ac40ae793",
+      "previewExpandedNodes": 0,
+      "fullExpandedNodes": 89
+    },
+    {
+      "name": "route-around-hostile",
+      "full": {
+        "medianMs": 0.06135900000003858,
+        "p95Ms": 0.10601299999996172
+      },
+      "targetOnly": {
+        "medianMs": 0.02923200000009274,
+        "p95Ms": 0.04190799999992123
+      },
+      "previewSha256": "2f1dcfcffba3165737bdc4e3d2d8980ab8a3850f04a7cb195ef56efd84e11d72",
+      "previewExpandedNodes": 45,
+      "fullExpandedNodes": 134
+    },
+    {
+      "name": "mission-blocker",
+      "full": {
+        "medianMs": 0.0021679999999832944,
+        "p95Ms": 0.0022940000000062355
+      },
+      "targetOnly": {
+        "medianMs": 0.0019260000000258515,
+        "p95Ms": 0.002656000000001768
+      },
+      "previewSha256": "18a6aaf05e9899e8cda26b920cb4b93d29463d1af8a79036b0f7f978ee733f8d",
+      "previewExpandedNodes": 0,
+      "fullExpandedNodes": 0
+    },
+    {
+      "name": "foreign-army",
+      "full": {
+        "medianMs": 0.0020419999999603533,
+        "p95Ms": 0.002262999999970816
+      },
+      "targetOnly": {
+        "medianMs": 0.0019039999999677093,
+        "p95Ms": 0.0019959999999628053
+      },
+      "previewSha256": "6363e90ed3ce0e83fba836ef27c1157460d110c923404d4bc3babc705fdbe39f",
+      "previewExpandedNodes": 0,
+      "fullExpandedNodes": 0
+    },
+    {
+      "name": "foreign-settlement",
+      "full": {
+        "medianMs": 0.11510099999998147,
+        "p95Ms": 0.14373900000009598
+      },
+      "targetOnly": {
+        "medianMs": 0.043112000000064654,
+        "p95Ms": 0.04900099999997565
+      },
+      "previewSha256": "7e2192f1c881b6cc001eda689573a2c7c75f80a5aea351883b173e159daf9156",
+      "previewExpandedNodes": 0,
+      "fullExpandedNodes": 89
+    },
+    {
+      "name": "append-waypoint",
+      "full": {
+        "medianMs": 0.054268999999976586,
+        "p95Ms": 0.14094199999999546
+      },
+      "targetOnly": {
+        "medianMs": 0.019961000000080276,
+        "p95Ms": 0.021315999999956148
+      },
+      "previewSha256": "006593b2f8a2e48c0a9a481a409b0804fa23107fe31e5b7e5b3b5543510c7514",
+      "previewExpandedNodes": 10,
+      "fullExpandedNodes": 101
+    },
+    {
+      "name": "append-paused-waypoint",
+      "full": {
+        "medianMs": 0.05293000000006032,
+        "p95Ms": 0.059479000000010274
+      },
+      "targetOnly": {
+        "medianMs": 0.019750000000044565,
+        "p95Ms": 0.02711300000009942
+      },
+      "previewSha256": "006593b2f8a2e48c0a9a481a409b0804fa23107fe31e5b7e5b3b5543510c7514",
+      "previewExpandedNodes": 10,
+      "fullExpandedNodes": 101
+    },
+    {
+      "name": "coastal-shallow-preview",
+      "full": {
+        "medianMs": 0.12183300000003783,
+        "p95Ms": 0.1559790000000021
+      },
+      "targetOnly": {
+        "medianMs": 0.04628900000000158,
+        "p95Ms": 0.05550300000004427
+      },
+      "previewSha256": "b8fdf90c0348549907933fc020c8e4903571de6487d48942d9c9709cb6d0a241",
+      "previewExpandedNodes": 5,
+      "fullExpandedNodes": 96
+    },
+    {
+      "name": "coastal-deep-blocker",
+      "full": {
+        "medianMs": 0.08752100000003793,
+        "p95Ms": 0.09077899999999772
+      },
+      "targetOnly": {
+        "medianMs": 0.01470999999992273,
+        "p95Ms": 0.03252899999995407
+      },
+      "previewSha256": "9a62d4974c80096b0ef7f9e3ace58e1f26e4afb03a3c32c61e9e04555e9729ba",
+      "previewExpandedNodes": 0,
+      "fullExpandedNodes": 91
+    },
+    {
+      "name": "ocean-route",
+      "full": {
+        "medianMs": 0.09440400000005411,
+        "p95Ms": 0.1151119999999537
+      },
+      "targetOnly": {
+        "medianMs": 0.061544000000026244,
+        "p95Ms": 0.08289500000000771
+      },
+      "previewSha256": "7a765365e94f8134ed06329a50f595495c95d8de1ff6bde1dd81d007ca01442b",
+      "previewExpandedNodes": 16,
+      "fullExpandedNodes": 107
+    }
+  ]
+}

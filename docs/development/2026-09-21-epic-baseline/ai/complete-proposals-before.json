@@ -1,0 +1,997 @@
+{
+  "sourceSha256": "797310db2da52d41d4c9f7996f2462da8dd2f3b0f3f7eff7c1ffcfc57eec3220",
+  "originals": [
+    {
+      "key": "turn-1/faction.ashen_compact",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-1.json.gz",
+      "saveSha256": "9f1b094eb47eba42831f201e4b9ab6a68530fa66d1323d500b1bb0d9fcdf7f11",
+      "observationSha256": "76af1682104f70bb8e96d6c2a68476bdc4e3c9029501b35c7be241f4b2ae2ad9",
+      "budget": 60,
+      "output": {
+        "commands": [],
+        "reasons": [],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-1/faction.reedbound_council",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-1.json.gz",
+      "saveSha256": "9f1b094eb47eba42831f201e4b9ab6a68530fa66d1323d500b1bb0d9fcdf7f11",
+      "observationSha256": "d60020e34b2c347a9848eea059eb4f19f6213764d7599377ae70fa82b4a41cbd",
+      "budget": 60,
+      "output": {
+        "commands": [],
+        "reasons": [],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-1/faction.cinder_march",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-1.json.gz",
+      "saveSha256": "9f1b094eb47eba42831f201e4b9ab6a68530fa66d1323d500b1bb0d9fcdf7f11",
+      "observationSha256": "0416bf70ca0a555bf29289ace1ffde8d3e71eca70c92d69c5ae9cdba7d2208c6",
+      "budget": 60,
+      "output": {
+        "commands": [],
+        "reasons": [],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-1/faction.glass_tide",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-1.json.gz",
+      "saveSha256": "9f1b094eb47eba42831f201e4b9ab6a68530fa66d1323d500b1bb0d9fcdf7f11",
+      "observationSha256": "cdeb9f7191db79c77f041dbbbeabaa9c3b1eaba68fc00c29307eea8ce0fa4f2c",
+      "budget": 60,
+      "output": {
+        "commands": [],
+        "reasons": [],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-30/faction.ashen_compact",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-30.json.gz",
+      "saveSha256": "de09b8ed1afb1245f87236dd59377e037cc42909cb65166d99b7f40b300d2935",
+      "observationSha256": "06450d7bca25ca627225925ff5e9e421eb9f666e398f81ed18018f3855ca6418",
+      "budget": 34,
+      "output": {
+        "commands": [
+          {
+            "type": "embarkArmy",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.53",
+            "fleetId": "army.46"
+          }
+        ],
+        "reasons": [
+          "Charter transport boards Hearth caravan using 1/8 real transport slots."
+        ],
+        "heldArmyIds": [
+          "army.53",
+          "army.46"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-30/faction.reedbound_council",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-30.json.gz",
+      "saveSha256": "de09b8ed1afb1245f87236dd59377e037cc42909cb65166d99b7f40b300d2935",
+      "observationSha256": "8297dc9257680ddc19c34724f11ed5395a715a2481aa22a8f9753def6fa2dd8d",
+      "budget": 91,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.49",
+            "target": 904
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.36",
+            "target": 667
+          }
+        ],
+        "reasons": [
+          "Hearth caravan: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore."
+        ],
+        "heldArmyIds": [
+          "army.49",
+          "army.36"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-30/faction.cinder_march",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-30.json.gz",
+      "saveSha256": "de09b8ed1afb1245f87236dd59377e037cc42909cb65166d99b7f40b300d2935",
+      "observationSha256": "781643005b270f42d114ece3592f20f08a6b6475440c027af676263eeee34558",
+      "budget": 9,
+      "output": {
+        "commands": [],
+        "reasons": [],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-30/faction.glass_tide",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-30.json.gz",
+      "saveSha256": "de09b8ed1afb1245f87236dd59377e037cc42909cb65166d99b7f40b300d2935",
+      "observationSha256": "7c8cb4c24d3f7b3a23020f91b2f3e19f1aecb136b1b7d74bec199d758651bcc0",
+      "budget": 96,
+      "output": {
+        "commands": [
+          {
+            "type": "embarkArmy",
+            "factionId": "faction.glass_tide",
+            "armyId": "army.52",
+            "fleetId": "army.43"
+          }
+        ],
+        "reasons": [
+          "Charter transport boards Hearth caravan using 1/8 real transport slots."
+        ],
+        "heldArmyIds": [
+          "army.52",
+          "army.43"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-60/faction.ashen_compact",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-60.json.gz",
+      "saveSha256": "b1bc1de9949b4afff89541707d4d769e8399468e3d7f7dae21180bcfd1563b1d",
+      "observationSha256": "2a8b7ffc16b97974f3a5811629915fcefb9902cb1abe69a88a0fa0d1aa5a050e",
+      "budget": 73,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.138",
+            "target": 1064
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.145",
+            "target": 205
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.46",
+            "target": 79
+          }
+        ],
+        "reasons": [
+          "Deepwake warship: patrol and chart permitted coastal water.",
+          "Hearth caravan: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore."
+        ],
+        "heldArmyIds": [
+          "army.138",
+          "army.145",
+          "army.46"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-60/faction.reedbound_council",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-60.json.gz",
+      "saveSha256": "b1bc1de9949b4afff89541707d4d769e8399468e3d7f7dae21180bcfd1563b1d",
+      "observationSha256": "8bcb598a380b23a86a519f9f1f0cf51a483b5066d897ebd47bb00f6dc5afc33b",
+      "budget": 387,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.59",
+            "target": 713
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.143",
+            "target": 715
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.118",
+            "target": 520
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.36",
+            "target": 568
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.127",
+            "target": 1340
+          }
+        ],
+        "reasons": [
+          "Cinder plate cohort: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore.",
+          "Ash pike company: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore.",
+          "Deepwake warship: patrol and chart permitted coastal water."
+        ],
+        "heldArmyIds": [
+          "army.59",
+          "army.143",
+          "army.118",
+          "army.36",
+          "army.127"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-60/faction.cinder_march",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-60.json.gz",
+      "saveSha256": "b1bc1de9949b4afff89541707d4d769e8399468e3d7f7dae21180bcfd1563b1d",
+      "observationSha256": "df952d13e1bdf5cb8466183741996c54bbca42a9c3a856c2beaa8ad1ab4bf867",
+      "budget": 34,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.140",
+            "target": 236
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.96",
+            "target": 1162
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.155",
+            "target": 123
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.102",
+            "target": 88
+          }
+        ],
+        "reasons": [
+          "Deepwake warship: patrol and chart permitted coastal water.",
+          "Coastwatch galley: patrol and chart permitted coastal water.",
+          "Hearth caravan: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore."
+        ],
+        "heldArmyIds": [
+          "army.140",
+          "army.96",
+          "army.155",
+          "army.102"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-60/faction.glass_tide",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-60.json.gz",
+      "saveSha256": "b1bc1de9949b4afff89541707d4d769e8399468e3d7f7dae21180bcfd1563b1d",
+      "observationSha256": "7e6faf445aeb3e816656e5a5578457123a2f66f8508d314dd8fbc3422f900475",
+      "budget": 262,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.glass_tide",
+            "armyId": "army.154",
+            "target": 1275
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.glass_tide",
+            "armyId": "army.43",
+            "target": 1353
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.glass_tide",
+            "armyId": "army.95",
+            "target": 176
+          }
+        ],
+        "reasons": [
+          "Hearth caravan: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore.",
+          "Deepwake warship: patrol and chart permitted coastal water."
+        ],
+        "heldArmyIds": [
+          "army.154",
+          "army.43",
+          "army.95"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-100/faction.ashen_compact",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-100.json.gz",
+      "saveSha256": "14977e720ed8956ab5683161c100c30e3012c1cef6934fa17c20411406008e3a",
+      "observationSha256": "1cbb956f44e9669e718f6b9dd9e60b9fa4d09daa4d730a6b3a96c76dbfe4ef08",
+      "budget": 176,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.138",
+            "target": 1454
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.145",
+            "target": 159
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.46",
+            "target": 157
+          }
+        ],
+        "reasons": [
+          "Deepwake warship: patrol and chart permitted coastal water.",
+          "Hearth caravan: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore."
+        ],
+        "heldArmyIds": [
+          "army.138",
+          "army.145",
+          "army.46"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-100/faction.reedbound_council",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-100.json.gz",
+      "saveSha256": "14977e720ed8956ab5683161c100c30e3012c1cef6934fa17c20411406008e3a",
+      "observationSha256": "aefab0f086d6cd792a4ad75b1788a9817e7883833ec0d040fa109cb323de62c8",
+      "budget": 1250,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.127",
+            "target": 1116
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.252",
+            "target": 663
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.reedbound_council",
+            "armyId": "army.143",
+            "target": 563
+          }
+        ],
+        "reasons": [
+          "Deepwake warship: patrol and chart permitted coastal water.",
+          "Hearth caravan: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore."
+        ],
+        "heldArmyIds": [
+          "army.127",
+          "army.252",
+          "army.143"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-100/faction.cinder_march",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-100.json.gz",
+      "saveSha256": "14977e720ed8956ab5683161c100c30e3012c1cef6934fa17c20411406008e3a",
+      "observationSha256": "f7a55a706e8b25eaf85da0f2bcf2a74a0e561014f475d27796f82ed873a8615d",
+      "budget": 264,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.102",
+            "target": 568
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.140",
+            "target": 1346
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.216",
+            "target": 275
+          }
+        ],
+        "reasons": [
+          "Charter transport: sail the known water route toward a viable landing.",
+          "Deepwake warship: patrol and chart permitted coastal water.",
+          "Charter transport: sail the known water route toward a viable landing."
+        ],
+        "heldArmyIds": [
+          "army.102",
+          "army.140",
+          "army.216"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-100/faction.glass_tide",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-100.json.gz",
+      "saveSha256": "14977e720ed8956ab5683161c100c30e3012c1cef6934fa17c20411406008e3a",
+      "observationSha256": "409d649c74351c872e7566d84cf09df4837350c707d831e53453470245675bf5",
+      "budget": 2376,
+      "output": {
+        "commands": [
+          {
+            "type": "queue",
+            "factionId": "faction.glass_tide",
+            "settlementId": "settlement.12",
+            "itemId": "unit.colonist"
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.glass_tide",
+            "armyId": "army.43",
+            "target": 775
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.glass_tide",
+            "armyId": "army.95",
+            "target": 143
+          }
+        ],
+        "reasons": [
+          "Fund unit.colonist at settlement.12 for a bounded coastal expedition (16 coin).",
+          "Charter transport: return to a harbor for the next expedition.",
+          "Deepwake warship: patrol and chart permitted coastal water."
+        ],
+        "heldArmyIds": [
+          "army.43",
+          "army.95"
+        ],
+        "queuedSettlementIds": [
+          "settlement.12"
+        ],
+        "coinSpent": 16,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-200/faction.ashen_compact",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-200.json.gz",
+      "saveSha256": "25425344df2f24b6a5eb065033f0b35348ef99cb87ab91ccc67c7e4f0c0e6095",
+      "observationSha256": "ad65d49d01946fb13d0338e476ecf9201687d6b422f06086a6e677524631c5b2",
+      "budget": 6213,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.145",
+            "target": 159
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.46",
+            "target": 157
+          }
+        ],
+        "reasons": [
+          "Hearth caravan: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore."
+        ],
+        "heldArmyIds": [
+          "army.145",
+          "army.46"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-200/faction.reedbound_council",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-200.json.gz",
+      "saveSha256": "25425344df2f24b6a5eb065033f0b35348ef99cb87ab91ccc67c7e4f0c0e6095",
+      "observationSha256": "e5655521ac3f984ddf704a94e7895aa6e4e38f189fc9bb45ecb9b0f486e29c7c",
+      "budget": 14139,
+      "output": {
+        "commands": [],
+        "reasons": [
+          "Charter transport holds its passengers while no currently charted expedition step is available."
+        ],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-200/faction.cinder_march",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-200.json.gz",
+      "saveSha256": "25425344df2f24b6a5eb065033f0b35348ef99cb87ab91ccc67c7e4f0c0e6095",
+      "observationSha256": "cc854e398ef21eb201fca2e4f5652e99cddf0bd6ae932fdd31158e8c48c4452a",
+      "budget": 4399,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.102",
+            "target": 619
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.216",
+            "target": 667
+          }
+        ],
+        "reasons": [
+          "Charter transport: sail the known water route toward a viable landing.",
+          "Charter transport: sail the known water route toward a viable landing."
+        ],
+        "heldArmyIds": [
+          "army.102",
+          "army.216"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-200/faction.glass_tide",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-200.json.gz",
+      "saveSha256": "25425344df2f24b6a5eb065033f0b35348ef99cb87ab91ccc67c7e4f0c0e6095",
+      "observationSha256": "38fced7e4d106946734e69471364275b3ff42555b572e55aea2d2a8108de40d1",
+      "budget": 21612,
+      "output": {
+        "commands": [],
+        "reasons": [
+          "Charter transport holds its passengers while no currently charted expedition step is available."
+        ],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-300/faction.ashen_compact",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-300.json.gz",
+      "saveSha256": "b9f108eedbdbe22bc2e2014b5835ef67be3aa7e81406ca94ecde0d3294009b08",
+      "observationSha256": "6603343193183b67d5788ea1019dc308f87296f7d2863fad5c5934acdc95e204",
+      "budget": 15475,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.145",
+            "target": 158
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.46",
+            "target": 160
+          }
+        ],
+        "reasons": [
+          "Hearth caravan: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore."
+        ],
+        "heldArmyIds": [
+          "army.145",
+          "army.46"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-300/faction.reedbound_council",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-300.json.gz",
+      "saveSha256": "b9f108eedbdbe22bc2e2014b5835ef67be3aa7e81406ca94ecde0d3294009b08",
+      "observationSha256": "200977f3091636bf6fc943abbb1b737247b13bb7607f50738abe9c068183a8d5",
+      "budget": 35540,
+      "output": {
+        "commands": [],
+        "reasons": [
+          "Charter transport holds its passengers while no currently charted expedition step is available."
+        ],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-300/faction.cinder_march",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-300.json.gz",
+      "saveSha256": "b9f108eedbdbe22bc2e2014b5835ef67be3aa7e81406ca94ecde0d3294009b08",
+      "observationSha256": "be163962d7bca60444ecef3bc556003056d592e837e2806060e26d74a404b110",
+      "budget": 10592,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.102",
+            "target": 812
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.216",
+            "target": 764
+          }
+        ],
+        "reasons": [
+          "Charter transport: sail the known water route toward a viable landing.",
+          "Charter transport: sail the known water route toward a viable landing."
+        ],
+        "heldArmyIds": [
+          "army.102",
+          "army.216"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-300/faction.glass_tide",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-300.json.gz",
+      "saveSha256": "b9f108eedbdbe22bc2e2014b5835ef67be3aa7e81406ca94ecde0d3294009b08",
+      "observationSha256": "b7f6cbab024af58137e5f317b2dae9f1cc54b682434d48639c02b1eef05e1864",
+      "budget": 50876,
+      "output": {
+        "commands": [],
+        "reasons": [
+          "Charter transport holds its passengers while no currently charted expedition step is available."
+        ],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-500/faction.ashen_compact",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-500.json.gz",
+      "saveSha256": "e59a28c24d145a865e239583c238eb98f5e7d6c61f7102810155b86fdca961e3",
+      "observationSha256": "78af7f9734f7db77ac8977eda4740c2873df34c60028e6afc5d471282e2889e0",
+      "budget": 40855,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.145",
+            "target": 158
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.46",
+            "target": 160
+          }
+        ],
+        "reasons": [
+          "Hearth caravan: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore."
+        ],
+        "heldArmyIds": [
+          "army.145",
+          "army.46"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-500/faction.reedbound_council",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-500.json.gz",
+      "saveSha256": "e59a28c24d145a865e239583c238eb98f5e7d6c61f7102810155b86fdca961e3",
+      "observationSha256": "8d90dbc736215c19bd65ff89a5db9526e4640d6fd1cfe8c371d6a35d52d0f854",
+      "budget": 87567,
+      "output": {
+        "commands": [],
+        "reasons": [
+          "Charter transport holds its passengers while no currently charted expedition step is available."
+        ],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-500/faction.cinder_march",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-500.json.gz",
+      "saveSha256": "e59a28c24d145a865e239583c238eb98f5e7d6c61f7102810155b86fdca961e3",
+      "observationSha256": "465fd878c8e9ffd34d7e96a9d7e26ff27007cc1f8aed1d60b9609141185fb133",
+      "budget": 27153,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.102",
+            "target": 812
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.216",
+            "target": 764
+          }
+        ],
+        "reasons": [
+          "Charter transport: sail the known water route toward a viable landing.",
+          "Charter transport: sail the known water route toward a viable landing."
+        ],
+        "heldArmyIds": [
+          "army.102",
+          "army.216"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-500/faction.glass_tide",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-500.json.gz",
+      "saveSha256": "e59a28c24d145a865e239583c238eb98f5e7d6c61f7102810155b86fdca961e3",
+      "observationSha256": "a9a691c960eda1428b62bacd4eb86f54216fb08c0fc4f3248a9c1c05d0410a84",
+      "budget": 127995,
+      "output": {
+        "commands": [],
+        "reasons": [
+          "Charter transport holds its passengers while no currently charted expedition step is available."
+        ],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-800/faction.ashen_compact",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-800.json.gz",
+      "saveSha256": "35242a8c0a61e872651e024afc8c5fa27a5763ad60337ffdb84683c7ef6f4bd7",
+      "observationSha256": "0bbdb13e5137249a4a686339f6e346cb0b26a2b38d186d5701e48ebdbaa7dea9",
+      "budget": 84746,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.145",
+            "target": 158
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.ashen_compact",
+            "armyId": "army.46",
+            "target": 160
+          }
+        ],
+        "reasons": [
+          "Hearth caravan: gather at the observed embarkation shore.",
+          "Charter transport: meet the waiting land expedition at its shore."
+        ],
+        "heldArmyIds": [
+          "army.145",
+          "army.46"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-800/faction.reedbound_council",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-800.json.gz",
+      "saveSha256": "35242a8c0a61e872651e024afc8c5fa27a5763ad60337ffdb84683c7ef6f4bd7",
+      "observationSha256": "b6fef841d53174b2d679e096e41a6b4a280338b5a6cf69e133a23b409a7f130e",
+      "budget": 179182,
+      "output": {
+        "commands": [],
+        "reasons": [
+          "Charter transport holds its passengers while no currently charted expedition step is available."
+        ],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-800/faction.cinder_march",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-800.json.gz",
+      "saveSha256": "35242a8c0a61e872651e024afc8c5fa27a5763ad60337ffdb84683c7ef6f4bd7",
+      "observationSha256": "104e228b4b8507c9e2ee1e9696f01bc3849901f41ef9cb57cbeca8a23129214a",
+      "budget": 55709,
+      "output": {
+        "commands": [
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.102",
+            "target": 812
+          },
+          {
+            "type": "moveTo",
+            "factionId": "faction.cinder_march",
+            "armyId": "army.216",
+            "target": 764
+          }
+        ],
+        "reasons": [
+          "Charter transport: sail the known water route toward a viable landing.",
+          "Charter transport: sail the known water route toward a viable landing."
+        ],
+        "heldArmyIds": [
+          "army.102",
+          "army.216"
+        ],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-800/faction.glass_tide",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-800.json.gz",
+      "saveSha256": "35242a8c0a61e872651e024afc8c5fa27a5763ad60337ffdb84683c7ef6f4bd7",
+      "observationSha256": "1b861d24e65f96b90dd65f18e50509efb6fa2e5c8b5a6a48a9ab3236eda26919",
+      "budget": 16658,
+      "output": {
+        "commands": [],
+        "reasons": [
+          "Charter transport holds its passengers while no currently charted expedition step is available."
+        ],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-808/faction.ashen_compact",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-808.json.gz",
+      "saveSha256": "ca97d1df966b10874912a282b8df916b0229e8d29992fa503bc4a38b23a026f1",
+      "observationSha256": "3fc5d66e424ae03a00059e65cba402bdfbb389e446703fff9a875f3091d08184",
+      "budget": 85994,
+      "output": {
+        "commands": [],
+        "reasons": [],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-808/faction.reedbound_council",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-808.json.gz",
+      "saveSha256": "ca97d1df966b10874912a282b8df916b0229e8d29992fa503bc4a38b23a026f1",
+      "observationSha256": "37d0d1716aad2da5f460fce94d3e8e687a2612705b897f8900be55a6cb5600d5",
+      "budget": 181777,
+      "output": {
+        "commands": [],
+        "reasons": [],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-808/faction.cinder_march",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-808.json.gz",
+      "saveSha256": "ca97d1df966b10874912a282b8df916b0229e8d29992fa503bc4a38b23a026f1",
+      "observationSha256": "9b5ab720917a610fd20024fe9a78c4d0b9790071587ad9e0287da2c561b1f672",
+      "budget": 56493,
+      "output": {
+        "commands": [],
+        "reasons": [],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    },
+    {
+      "key": "turn-808/faction.glass_tide",
+      "save": "docs/hermes-analysis/campaigns/runs/D-tiny4-seed99-epic/turn-808.json.gz",
+      "saveSha256": "ca97d1df966b10874912a282b8df916b0229e8d29992fa503bc4a38b23a026f1",
+      "observationSha256": "2717977a20679df19bd632d0334223f69c13604c0ca185ee6d7d5173a2bbfdb7",
+      "budget": 18728,
+      "output": {
+        "commands": [],
+        "reasons": [],
+        "heldArmyIds": [],
+        "queuedSettlementIds": [],
+        "coinSpent": 0,
+        "interrupts": false
+      }
+    }
+  ]
+}

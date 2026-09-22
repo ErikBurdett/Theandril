@@ -1,0 +1,18 @@
+{
+  "runtime": "v22.23.2",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "pairs": 8,
+  "comparisonsPerSample": 400,
+  "corpusSha256": "22b92d213644ce1001e9a4d1895b237dd1006ff107d266b9597d56fcf32113e1",
+  "before": {
+    "samples": 20,
+    "medianMs": 4.126843000000008,
+    "p95Ms": 5.111559999999997
+  },
+  "after": {
+    "samples": 20,
+    "medianMs": 0.6919419999999974,
+    "p95Ms": 0.7680029999999931
+  },
+  "note": "Paired original canonical-string comparison vs structural JSON comparison over retained v15 battle/event records with reversed object key insertion. Four warmups, twenty samples, alternating execution order; corpus construction and correctness checks outside timing. No campaign execution, hashing, archive parsing, rendering or I/O in samples. Technical-renderer bytes independently equal the original."
+}

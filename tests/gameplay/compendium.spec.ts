@@ -1,8 +1,7 @@
-import { mkdir } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 
 const base = 'updates/compendium/';
-test('compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence', async ({ page }) => {
+test('compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence', async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
@@ -24,11 +23,10 @@ test('compendium journeys retain real culture, unit, atlas, search, refresh and 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.evaluate(() => { document.documentElement.style.fontSize = '130%'; });
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
-  await mkdir('docs/development/site-expansion/compendium/screens', { recursive: true });
-  await page.screenshot({ path: 'docs/development/site-expansion/compendium/screens/compendium-390-130.png', fullPage: true });
+  await page.screenshot({ path: testInfo.outputPath('compendium-390-130.png'), fullPage: true });
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.evaluate(() => { document.documentElement.style.fontSize = '100%'; });
   await page.goto(base);
-  await page.screenshot({ path: 'docs/development/site-expansion/compendium/screens/compendium-1440.png', fullPage: true });
+  await page.screenshot({ path: testInfo.outputPath('compendium-1440.png'), fullPage: true });
   expect(errors).toEqual([]);
 });

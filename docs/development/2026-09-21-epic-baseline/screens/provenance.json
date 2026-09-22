@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-21",
+  "browser": "/usr/bin/chromium",
+  "node": "22.23.2",
+  "run": "../browser-gameplay.log",
+  "images": [
+    {
+      "source": "test-results/epic-baseline-gameplay/chronicles-AI-watch-plays--285b3-plete-chronicles-at-victory/technical-ledger.png",
+      "retained": "docs/development/2026-09-21-epic-baseline/screens/technical-ledger.png",
+      "sha256": "bf6c0c3924d3aa25ab8f2c186e0aed97a852489355eb62f805067beeda3cb799",
+      "width": 1440,
+      "height": 1000,
+      "context": "Generated Short AI-watch campaign, seed 20260905, after saved continuation and victory; tests/gameplay/chronicles.spec.ts.",
+      "transform": "None; exact PNG bytes copied from Playwright output."
+    },
+    {
+      "source": "test-results/epic-baseline-gameplay/naval-an-embarked-expediti-7ea64--duplicate-passenger-marker/transport-landing-narrow.png",
+      "retained": "docs/development/2026-09-21-epic-baseline/screens/transport-landing-390.png",
+      "sha256": "7dea9b20985e5f917910eb632281b2b796d11c7526c9d3f929e19c88f644f516",
+      "width": 390,
+      "height": 844,
+      "context": "Authored naval campaign after paid Ocean navigation and saved queued deep-ocean travel, 390 x 844 viewport; tests/gameplay/naval.spec.ts. Human UI orders, not an organic AI voyage.",
+      "transform": "None; exact PNG bytes copied from Playwright output."
+    }
+  ]
+}

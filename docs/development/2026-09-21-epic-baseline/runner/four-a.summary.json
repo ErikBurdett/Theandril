@@ -1,0 +1,59 @@
+{
+  "label": "four-a",
+  "started": "2026-09-21T19:25:14.694Z",
+  "finished": "2026-09-21T19:26:55.708Z",
+  "node": "v22.23.2",
+  "executable": "/home/telephoneheater/.local/share/mise/installs/node/22.23.2/bin/node",
+  "workers": "4",
+  "expectedDefaultWorkerLimit": 31,
+  "availableParallelism": 32,
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "totalHostMemoryBytes": 33316790272,
+  "command": [
+    "/home/telephoneheater/.local/share/mise/installs/node/22.23.2/bin/node",
+    "/home/telephoneheater/Work/Theandril/node_modules/vitest/vitest.mjs",
+    "run",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile.json=/home/telephoneheater/Work/Theandril/docs/development/2026-09-21-epic-baseline/runner/four-a.vitest.json",
+    "--maxWorkers=4"
+  ],
+  "sourceManifestSha256": "24e2d95ba095d7366a90283c9c924bd42352cb6c945d37a13e8b802f6f0687f4",
+  "sourceStable": true,
+  "terminationSignal": null,
+  "exitCode": 1,
+  "signal": null,
+  "error": null,
+  "details": {
+    "success": false,
+    "numTotalTests": 1858,
+    "numPassedTests": 1857,
+    "numFailedTests": 1,
+    "numPendingTests": 0,
+    "numTotalTestSuites": 403,
+    "numPassedTestSuites": 402,
+    "numFailedTestSuites": 1,
+    "testFiles": 221,
+    "epic": {
+      "fullName": "generated-start epic AI victory produces complete factual logs identical after archive save/resume",
+      "status": "failed",
+      "durationMs": 63069.165524000004,
+      "failureMessages": [
+        "Error: STACK_TRACE_ERROR\n    at task (file:///home/telephoneheater/Work/Theandril/node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js:1784:27)\n    at Object.<anonymous> (file:///home/telephoneheater/Work/Theandril/node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js:1817:16)\n    at Object.<anonymous> (file:///home/telephoneheater/Work/Theandril/node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js:1563:28)\n    at Object.chain (file:///home/telephoneheater/Work/Theandril/node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js:599:14)\n    at file:///home/telephoneheater/Work/Theandril/node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js:2027:7\n    at Array.forEach (<anonymous>)\n    at file:///home/telephoneheater/Work/Theandril/node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js:2021:10\n    at /home/telephoneheater/Work/Theandril/tests/headless/chronicle-victory.test.ts:11:37\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///home/telephoneheater/Work/Theandril/node_modules/.pnpm/vitest@4.1.11_@types+node@24.13.3_vite@7.3.6_@types+node@24.13.3_tsx@4.23.13_/node_modules/vitest/dist/module-evaluator.js:206:4)"
+      ]
+    }
+  },
+  "timing": {
+    "elapsed_seconds": 100.941,
+    "user_seconds": 520.876,
+    "system_seconds": 24.228
+  },
+  "cachePolicy": "Unmodified default Vitest cache behavior; no cache reset, custom sequencer or ordering change. Use a reversed-order confirmation pair to assess order/cache effects.",
+  "measurementLimits": "Bash builtin time records whole-command elapsed, user and system seconds. No RSS, concurrent process-tree memory or retained-memory measurement is collected. CPU accounting is distinct from wall time.",
+  "manifestScope": "Tracked and untracked runtime/test/script source, JSON/YAML inputs and named root configs; not a complete inventory of art assets or imported documentation evidence.",
+  "artifacts": {
+    "four-a.vitest.json": "cf1bb548538273625157a0ca8061abb910f454aad8c19149fff11eea19667259",
+    "four-a.log": "dc906992f2680c24e71b328a29ddab00cc51d3854a616f4c7bb56ca3f4de74b0",
+    "four-a.time.txt": "57b117fa97af9281938a0f02f8ea402244885cc8c1e508169d2d2e9e30c2ae3b"
+  }
+}

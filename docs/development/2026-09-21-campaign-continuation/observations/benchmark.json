@@ -1,0 +1,200 @@
+{
+  "node": "v22.23.2",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900K",
+  "sourceHashes": {
+    "simulation": "f964747ffba1541286bf19bc0db1583f385aed970961edf302e441bb88e0e39c",
+    "territory": "bf4a16db0272d36060aabb367b5aad845e2b5d2688a246ea779749556365982a"
+  },
+  "baselineHashes": {
+    "simulation": "b80a07b412ba6c0fa25b2802bfc2e661ec7211b92a65e2fc62c6893d512cdbfc",
+    "territory": "25f77075def0615c5c485704a0be850bf45fafb0b581ec9a9ac37af85a0e8a97"
+  },
+  "scope": "Paired retained original/current complete observations; 4 warmups, 20 alternating samples. Setup, serialization, equivalence/hash checks outside timing. No omitted detail, changed AI or new cache. Standard full chart is synthetic knowledge over generated geography; not giant mature campaign or renderer evidence.",
+  "results": [
+    {
+      "name": "generated-resource-full",
+      "fixture": "paid-grange-completed",
+      "options": {},
+      "cells": 122,
+      "ownedTowns": 1,
+      "outputBytes": 186871,
+      "outputSha256": "beaf8af6373a44bdcbb1d657d60a4919ab319fc037105b0976a3ecab4b1d16f0",
+      "before": {
+        "medianMs": 0.40441199999997934,
+        "p95Ms": 0.7892229999999927
+      },
+      "after": {
+        "medianMs": 0.26009100000004537,
+        "p95Ms": 0.6577760000000126
+      }
+    },
+    {
+      "name": "foreign-memory-full",
+      "fixture": "remembered-foreign-hearth",
+      "options": {},
+      "cells": 122,
+      "ownedTowns": 1,
+      "outputBytes": 185744,
+      "outputSha256": "899c3d216d1a734ac587ea2385eb18aed35cba7ad3301c625b02c4539825b07c",
+      "before": {
+        "medianMs": 0.2863909999999805,
+        "p95Ms": 0.3898950000000241
+      },
+      "after": {
+        "medianMs": 0.2056540000000382,
+        "p95Ms": 0.3659669999999551
+      }
+    },
+    {
+      "name": "naval-cargo-full",
+      "fixture": "embarked-passengers",
+      "options": {},
+      "cells": 1536,
+      "ownedTowns": 1,
+      "outputBytes": 312097,
+      "outputSha256": "e1c971c3a169a0c3b5b202c2679cd1e08d1a7dfd84f455c589ecbb18dfa7bfa5",
+      "before": {
+        "medianMs": 0.7318409999999744,
+        "p95Ms": 1.1202220000000125
+      },
+      "after": {
+        "medianMs": 0.32492500000000746,
+        "p95Ms": 0.7714770000000044
+      }
+    },
+    {
+      "name": "17-towns-full",
+      "fixture": "seventeen-authored-towns",
+      "options": {},
+      "cells": 525,
+      "ownedTowns": 17,
+      "outputBytes": 2479636,
+      "outputSha256": "759299b7e7607957d3f3d903a6c2313d9edbb44697b3ecc41ac9309b59299331",
+      "before": {
+        "medianMs": 2.031338000000005,
+        "p95Ms": 2.830241000000001
+      },
+      "after": {
+        "medianMs": 1.0537319999999681,
+        "p95Ms": 1.6558109999999715
+      }
+    },
+    {
+      "name": "17-towns-eight-details",
+      "fixture": "seventeen-authored-towns",
+      "options": {
+        "landDetails": {
+          "offset": 7,
+          "limit": 8
+        }
+      },
+      "cells": 525,
+      "ownedTowns": 17,
+      "outputBytes": 1211470,
+      "outputSha256": "b1a3d1e5073d132ec804e689c770860f1f8ffccbecdb364a9143032accb2e7e7",
+      "before": {
+        "medianMs": 1.0302239999999756,
+        "p95Ms": 1.8873649999999316
+      },
+      "after": {
+        "medianMs": 0.5984080000000631,
+        "p95Ms": 1.687720000000013
+      }
+    },
+    {
+      "name": "17-towns-summary",
+      "fixture": "seventeen-authored-towns",
+      "options": {
+        "landDetails": "none"
+      },
+      "cells": 525,
+      "ownedTowns": 17,
+      "outputBytes": 155581,
+      "outputSha256": "46470a97e331548e38c3577d57d4b5a7ba0dc1a34278eb9dd696e2f0966f2358",
+      "before": {
+        "medianMs": 0.327609999999936,
+        "p95Ms": 0.36276199999997516
+      },
+      "after": {
+        "medianMs": 0.19071699999994962,
+        "p95Ms": 0.5117900000000191
+      }
+    },
+    {
+      "name": "17-towns-land-only",
+      "fixture": "seventeen-authored-towns",
+      "options": {},
+      "landOnly": true,
+      "cells": 525,
+      "ownedTowns": 17,
+      "outputBytes": 2334899,
+      "outputSha256": "e9827c759fa35719003f193254e5e2f054832a554ae9f75de2b91dfd943f3ce7",
+      "before": {
+        "medianMs": 1.4925779999999804,
+        "p95Ms": 2.544632999999976
+      },
+      "after": {
+        "medianMs": 0.7966719999999441,
+        "p95Ms": 1.6737580000000207
+      }
+    },
+    {
+      "name": "standard-full-chart",
+      "fixture": "synthetic-standard",
+      "options": {},
+      "cells": 98304,
+      "ownedTowns": 0,
+      "outputBytes": 8161003,
+      "outputSha256": "752ed24f48bf8687a9fa5e1ea5512d6e1a244e7c2985c0b6eb8d13ff5a125e31",
+      "before": {
+        "medianMs": 39.471193000000085,
+        "p95Ms": 49.43917599999986
+      },
+      "after": {
+        "medianMs": 10.425478999999996,
+        "p95Ms": 13.917598999999882
+      }
+    }
+  ],
+  "failures": [
+    {
+      "details": null,
+      "message": "Land detail window offset and limit must be nonnegative safe integers."
+    },
+    {
+      "details": {
+        "offset": -1,
+        "limit": 1
+      },
+      "message": "Land detail window offset and limit must be nonnegative safe integers."
+    },
+    {
+      "details": {
+        "offset": 0,
+        "limit": -1
+      },
+      "message": "Land detail window offset and limit must be nonnegative safe integers."
+    },
+    {
+      "details": {
+        "offset": 0.5,
+        "limit": 1
+      },
+      "message": "Land detail window offset and limit must be nonnegative safe integers."
+    },
+    {
+      "details": {
+        "offset": null,
+        "limit": 1
+      },
+      "message": "Land detail window offset and limit must be nonnegative safe integers."
+    },
+    {
+      "details": {
+        "offset": 0,
+        "limit": null
+      },
+      "message": "Land detail window offset and limit must be nonnegative safe integers."
+    }
+  ]
+}

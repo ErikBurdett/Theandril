@@ -536,6 +536,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
   const faction = state.factions.find(item => item.id === factionId);
   if (!faction) throw new Error('Unknown observation faction');
   const visible = indexes(state).visible.get(factionId) ?? new Map<number, number>();
+  const modern = rulesVersion(state) >= 16, world = state.world, knownLand = state.land.known[factionId], knownRoads = state.roads.known[factionId];
   const compareId = (a: { id: string }, b: { id: string }): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
   const armies = Object.values(state.armies).filter(army => army.factionId === factionId || !state.transports[army.id] && visible.has(army.cell)).sort(compareId);
   const settlements = Object.values(state.settlements).filter(settlement => settlement.factionId === factionId || visible.has(settlement.cell)).sort(compareId);
@@ -571,8 +572,22 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     settlements: settlements.map(settlement => ({ ...settlement, buildings: [...settlement.buildings].sort(), food: settlement.factionId === factionId ? settlement.food : 0, queue: settlement.factionId === factionId ? settlement.queue.map(item => ({ ...item })) : [] })),
     events: state.events.filter(event => event.factionId === factionId).map(event => ({ ...event })),
     cells: [...(state.explored[factionId] ?? [])].sort((a, b) => a - b).map(cell => {
-      const known = state.land.known[factionId]?.[cell];
-      return { cell, ...(rulesVersion(state) >= 16 && state.resources.deposits[cell] ? { resourceId: state.resources.deposits[cell] } : {}), terrain: state.world.terrain[cell] ?? 0, biome: known?.biome ?? state.world.biome[cell] ?? 0, waterDepth: state.world.waterDepth[cell] ?? 0, fertility: state.world.fertility[cell] ?? 0, visible: visible.has(cell), ...(state.world.hydrology[cell] ? { hydrology: state.world.hydrology[cell] } : {}), ...(state.roads.known[factionId]?.[cell] ? { roadMask: state.roads.known[factionId]![cell] } : {}), ...(known?.settlementId ? { settlementId: known.settlementId, factionId: known.factionId } : {}), ...(known?.improvementId ? { improvementId: known.improvementId } : {}) };
+      const known = knownLand?.[cell], resourceId = modern ? state.resources.deposits[cell] : undefined;
+      // Build one detached object without spreading several temporary objects per
+      // explored cell. Preserve optional-field presence and publication key order.
+      const observed = { cell } as Observation['cells'][number];
+      if (resourceId) observed.resourceId = resourceId;
+      observed.terrain = world.terrain[cell] ?? 0;
+      observed.biome = known?.biome ?? world.biome[cell] ?? 0;
+      observed.waterDepth = world.waterDepth[cell] ?? 0;
+      observed.fertility = world.fertility[cell] ?? 0;
+      observed.visible = visible.has(cell);
+      const hydrology = world.hydrology[cell], roadMask = knownRoads?.[cell];
+      if (hydrology) observed.hydrology = hydrology;
+      if (roadMask) observed.roadMask = roadMask;
+      if (known?.settlementId) { observed.settlementId = known.settlementId; observed.factionId = known.factionId; }
+      if (known?.improvementId) observed.improvementId = known.improvementId;
+      return observed;
     }),
     width: state.world.width, height: state.world.height, seed: state.world.seed,
     wars, battle: state.battle && involved(state.battle) ? cloneCampaignBattle(state.battle, factionId) : null,

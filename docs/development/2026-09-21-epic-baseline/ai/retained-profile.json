@@ -1,0 +1,789 @@
+{
+  "profile": "docs/development/2026-09-21-campaign-continuation/performance/epic-before-hash.cpuprofile",
+  "sha256": "2d2b22440ac036acc16720cc09098e522fff7c5a7e299107cabb2c00dc2bdb07",
+  "scope": "Sampled CPU attribution from a retained historical Epic run; inclusive rows overlap. This profile predates target-only previews. No current-runtime measurement implied.",
+  "ai": [
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/index.ts:38:18 planTurn",
+      "selfMs": 82.49999999999999,
+      "inclusiveMs": 13496.511000000319,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/index.ts:41:29 planTurnWithReasons",
+      "selfMs": 629.1849999999995,
+      "inclusiveMs": 13410.839000000304,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:215:19 planNaval",
+      "selfMs": 485.60300000000007,
+      "inclusiveMs": 9391.600000000019,
+      "selfBelowNavalMs": 485.60300000000007
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:319:18 toward",
+      "selfMs": 131.82300000000004,
+      "inclusiveMs": 5217.985999999989,
+      "selfBelowNavalMs": 131.82300000000004
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:100:16 destination",
+      "selfMs": 868.5609999999998,
+      "inclusiveMs": 3247.588999999998,
+      "selfBelowNavalMs": 566.6619999999998
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:307:19 explore",
+      "selfMs": 6.423,
+      "inclusiveMs": 2040.3930000000207,
+      "selfBelowNavalMs": 6.423
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:61:24 frontierStep",
+      "selfMs": 884.8539999999981,
+      "inclusiveMs": 1142.0349999999994,
+      "selfBelowNavalMs": 712.2199999999984
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/progression.ts:75:25 planProgression",
+      "selfMs": 53.031,
+      "inclusiveMs": 1021.0339999999973,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:111:30 needsNavalInvestment",
+      "selfMs": 141.878,
+      "inclusiveMs": 800.6539999999982,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:55:24 relationToPort",
+      "selfMs": 5.772,
+      "inclusiveMs": 657.1179999999994,
+      "selfBelowNavalMs": 3.1929999999999996
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/sea-knowledge.ts:56:20 relation",
+      "selfMs": 269.80400000000003,
+      "inclusiveMs": 651.3459999999993,
+      "selfBelowNavalMs": 146.00599999999994
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/sea-knowledge.ts:21:19 inspect",
+      "selfMs": 525.7200000000001,
+      "inclusiveMs": 625.1119999999993,
+      "selfBelowNavalMs": 225.40899999999996
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:47:20 portStatus",
+      "selfMs": 43.138,
+      "inclusiveMs": 508.69100000000014,
+      "selfBelowNavalMs": 10.65
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:51:30 (anonymous)",
+      "selfMs": 3.177,
+      "inclusiveMs": 438.94800000000015,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/sea-knowledge.ts:82:16 basinStatus",
+      "selfMs": 189.281,
+      "inclusiveMs": 435.7710000000002,
+      "selfBelowNavalMs": 46.10500000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:104:36 (anonymous)",
+      "selfMs": 126.61800000000005,
+      "inclusiveMs": 413.1719999999997,
+      "selfBelowNavalMs": 77.27700000000003
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:67:23 preferredPort",
+      "selfMs": 22.467999999999996,
+      "inclusiveMs": 387.6600000000002,
+      "selfBelowNavalMs": 9.572999999999999
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:10:26 createNavigation",
+      "selfMs": 346.5019999999997,
+      "inclusiveMs": 367.26899999999955,
+      "selfBelowNavalMs": 153.89199999999997
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:391:42 (anonymous)",
+      "selfMs": 47.38399999999999,
+      "inclusiveMs": 348.51900000000006,
+      "selfBelowNavalMs": 47.38399999999999
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:138:29 coastalFoundingSite",
+      "selfMs": 5.495000000000001,
+      "inclusiveMs": 336.64299999999963,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:74:84 (anonymous)",
+      "selfMs": 9.405000000000001,
+      "inclusiveMs": 334.8520000000001,
+      "selfBelowNavalMs": 2.12
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:150:10 (anonymous)",
+      "selfMs": 123.50400000000005,
+      "inclusiveMs": 329.0229999999996,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:119:19 sameSea",
+      "selfMs": 1.058,
+      "inclusiveMs": 328.56799999999987,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:258:41 (anonymous)",
+      "selfMs": 1.064,
+      "inclusiveMs": 327.499,
+      "selfBelowNavalMs": 1.064
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/land.ts:7:18 planLand",
+      "selfMs": 132.71300000000008,
+      "inclusiveMs": 327.01699999999977,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:390:29 viableLanding",
+      "selfMs": 58.65700000000001,
+      "inclusiveMs": 301.135,
+      "selfBelowNavalMs": 58.65700000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:393:47 (anonymous)",
+      "selfMs": 40.51400000000001,
+      "inclusiveMs": 270.366,
+      "selfBelowNavalMs": 40.51400000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:235:19 nearest",
+      "selfMs": 30.413999999999998,
+      "inclusiveMs": 255.77,
+      "selfBelowNavalMs": 30.413999999999998
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:392:28 landingScore",
+      "selfMs": 15.091999999999997,
+      "inclusiveMs": 229.85200000000006,
+      "selfBelowNavalMs": 15.091999999999997
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:124:32 (anonymous)",
+      "selfMs": 0.44,
+      "inclusiveMs": 225.35600000000025,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:235:86 (anonymous)",
+      "selfMs": 113.11900000000004,
+      "inclusiveMs": 225.35600000000002,
+      "selfBelowNavalMs": 113.11900000000004
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/expansion.ts:14:27 settlementSpacing",
+      "selfMs": 68.849,
+      "inclusiveMs": 202.07600000000005,
+      "selfBelowNavalMs": 52.83899999999999
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:165:33 findCoastalFoundingSite",
+      "selfMs": 0,
+      "inclusiveMs": 189.58900000000008,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:187:45 (anonymous)",
+      "selfMs": 5.289999999999999,
+      "inclusiveMs": 189.58900000000008,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:279:39 (anonymous)",
+      "selfMs": 116.04900000000002,
+      "inclusiveMs": 168.12400000000002,
+      "selfBelowNavalMs": 114.99500000000002
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/index.ts:277:19 score",
+      "selfMs": 60.004999999999995,
+      "inclusiveMs": 140.46900000000002,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:93:29 hasNavalOpportunity",
+      "selfMs": 78.36000000000001,
+      "inclusiveMs": 139.06100000000004,
+      "selfBelowNavalMs": 32.919
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:36:22 topologyAt",
+      "selfMs": 76.33099999999999,
+      "inclusiveMs": 133.319,
+      "selfBelowNavalMs": 56.22599999999998
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:20:19 entryAt",
+      "selfMs": 116.19300000000008,
+      "inclusiveMs": 129.96900000000008,
+      "selfBelowNavalMs": 95.47200000000004
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/expansion.ts:6:15 facts",
+      "selfMs": 117.37900000000005,
+      "inclusiveMs": 127.93300000000006,
+      "selfBelowNavalMs": 111.03900000000007
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/progression.ts:19:22 landResearch",
+      "selfMs": 56.295,
+      "inclusiveMs": 115.63400000000007,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:120:39 (anonymous)",
+      "selfMs": 6.336,
+      "inclusiveMs": 112.107,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:41:15 isSea",
+      "selfMs": 47.448,
+      "inclusiveMs": 87.96600000000005,
+      "selfBelowNavalMs": 30.551999999999992
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:313:5 (anonymous)",
+      "selfMs": 64.71,
+      "inclusiveMs": 85.85000000000001,
+      "selfBelowNavalMs": 64.71
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:45:27 informationGain",
+      "selfMs": 61.30999999999998,
+      "inclusiveMs": 61.30999999999998,
+      "selfBelowNavalMs": 26.432000000000002
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:97:26 (anonymous)",
+      "selfMs": 16.105,
+      "inclusiveMs": 59.48499999999999,
+      "selfBelowNavalMs": 7.416
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/land.ts:28:101 (anonymous)",
+      "selfMs": 59.009999999999984,
+      "inclusiveMs": 59.239999999999995,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:289:52 (anonymous)",
+      "selfMs": 37.99000000000001,
+      "inclusiveMs": 52.78899999999999,
+      "selfBelowNavalMs": 36.93700000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/land.ts:37:40 (anonymous)",
+      "selfMs": 37.07999999999999,
+      "inclusiveMs": 44.364000000000004,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/characters.ts:7:24 planCharacters",
+      "selfMs": 32.578999999999986,
+      "inclusiveMs": 42.90099999999999,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/expansion.ts:29:29 settlementSiteValue",
+      "selfMs": 18.161,
+      "inclusiveMs": 37.34799999999999,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/index.ts:131:47 (anonymous)",
+      "selfMs": 36.992,
+      "inclusiveMs": 36.992,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/progression.ts:25:34 (anonymous)",
+      "selfMs": 13.732999999999999,
+      "inclusiveMs": 36.888999999999996,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:111:23 (anonymous)",
+      "selfMs": 20.091,
+      "inclusiveMs": 33.81399999999999,
+      "selfBelowNavalMs": 11.495000000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:99:29 navalResearchChoice",
+      "selfMs": 5.351,
+      "inclusiveMs": 31.187999999999995,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:279:208 (anonymous)",
+      "selfMs": 1.263,
+      "inclusiveMs": 29.97899999999999,
+      "selfBelowNavalMs": 1.263
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/index.ts:278:59 (anonymous)",
+      "selfMs": 23.243,
+      "inclusiveMs": 25.362999999999996,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/land.ts:26:46 (anonymous)",
+      "selfMs": 23.327,
+      "inclusiveMs": 23.327,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/progression.ts:25:158 (anonymous)",
+      "selfMs": 23.155999999999995,
+      "inclusiveMs": 23.155999999999995,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/progression.ts:21:31 (anonymous)",
+      "selfMs": 6.178,
+      "inclusiveMs": 22.019999999999996,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:291:31 nearCoastalFrontier",
+      "selfMs": 21.14,
+      "inclusiveMs": 21.14,
+      "selfBelowNavalMs": 21.14
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/index.ts:168:44 (anonymous)",
+      "selfMs": 20.529000000000003,
+      "inclusiveMs": 20.529000000000003,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:43:20 portWaters",
+      "selfMs": 13.911999999999999,
+      "inclusiveMs": 20.265,
+      "selfBelowNavalMs": 4.2090000000000005
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/land.ts:31:38 (anonymous)",
+      "selfMs": 19.175000000000004,
+      "inclusiveMs": 19.175000000000004,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:42:23 coastalWaters",
+      "selfMs": 9.586,
+      "inclusiveMs": 18.06,
+      "selfBelowNavalMs": 5.344
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/diplomacy.ts:8:23 planDiplomacy",
+      "selfMs": 9.533000000000001,
+      "inclusiveMs": 17.683000000000003,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/index.ts:71:40 (anonymous)",
+      "selfMs": 16.989,
+      "inclusiveMs": 16.989,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/index.ts:101:64 (anonymous)",
+      "selfMs": 12.406000000000002,
+      "inclusiveMs": 16.896,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:73:30 (anonymous)",
+      "selfMs": 9.864,
+      "inclusiveMs": 16.253,
+      "selfBelowNavalMs": 3.167
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/recruitment.ts:4:27 recruitmentRoster",
+      "selfMs": 7.406,
+      "inclusiveMs": 15.902000000000001,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/progression.ts:21:59 (anonymous)",
+      "selfMs": 15.842000000000004,
+      "inclusiveMs": 15.842000000000004,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/roads.ts:2:30 planRoadAcceleration",
+      "selfMs": 11.68,
+      "inclusiveMs": 14.851999999999999,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:312:40 (anonymous)",
+      "selfMs": 13.723,
+      "inclusiveMs": 13.723,
+      "selfBelowNavalMs": 13.723
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/land.ts:63:39 (anonymous)",
+      "selfMs": 13.700999999999997,
+      "inclusiveMs": 13.700999999999997,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:229:35 (anonymous)",
+      "selfMs": 3.168,
+      "inclusiveMs": 12.722999999999999,
+      "selfBelowNavalMs": 3.168
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:390:370 (anonymous)",
+      "selfMs": 8.996999999999998,
+      "inclusiveMs": 12.266999999999998,
+      "selfBelowNavalMs": 8.996999999999998
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:158:38 (anonymous)",
+      "selfMs": 11.703000000000001,
+      "inclusiveMs": 11.703000000000001,
+      "selfBelowNavalMs": 0
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/sea-knowledge.ts:6:28 createSeaKnowledge",
+      "selfMs": 11.614,
+      "inclusiveMs": 11.614,
+      "selfBelowNavalMs": 2.124
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:103:102 (anonymous)",
+      "selfMs": 5.367999999999999,
+      "inclusiveMs": 11.475,
+      "selfBelowNavalMs": 1.145
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/land.ts:32:40 (anonymous)",
+      "selfMs": 11.217,
+      "inclusiveMs": 11.217,
+      "selfBelowNavalMs": 0
+    }
+  ],
+  "navalDescendantsBySelf": [
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/movement.ts:145:16 search",
+      "selfMs": 2115.4450000000147,
+      "inclusiveMs": 4409.11599999998,
+      "selfBelowNavalMs": 1961.870000000016
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:61:24 frontierStep",
+      "selfMs": 884.8539999999981,
+      "inclusiveMs": 1142.0349999999994,
+      "selfBelowNavalMs": 712.2199999999984
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:100:16 destination",
+      "selfMs": 868.5609999999998,
+      "inclusiveMs": 3247.588999999998,
+      "selfBelowNavalMs": 566.6619999999998
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/movement.ts:104:18 mayEnter",
+      "selfMs": 693.716,
+      "inclusiveMs": 1358.473000000005,
+      "selfBelowNavalMs": 556.1929999999996
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/movement.ts:195:17 preview",
+      "selfMs": 564.9729999999996,
+      "inclusiveMs": 4699.375999999982,
+      "selfBelowNavalMs": 506.7409999999997
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:215:19 planNaval",
+      "selfMs": 485.60300000000007,
+      "inclusiveMs": 9391.600000000019,
+      "selfBelowNavalMs": 485.60300000000007
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/movement.ts:72:15 stepCost",
+      "selfMs": 355.96699999999987,
+      "inclusiveMs": 362.3019999999999,
+      "selfBelowNavalMs": 345.37799999999993
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/movement.ts:232:26 getMovementQuery",
+      "selfMs": 487.2030000000001,
+      "inclusiveMs": 5857.938999999975,
+      "selfBelowNavalMs": 340.76400000000024
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/mapgen/src/index.ts:123:24 writeNeighbors",
+      "selfMs": 723.4439999999993,
+      "inclusiveMs": 723.4439999999993,
+      "selfBelowNavalMs": 339.981
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/movement.ts:46:27 observedKnowledge",
+      "selfMs": 445.67999999999967,
+      "inclusiveMs": 471.3829999999997,
+      "selfBelowNavalMs": 323.438
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/movement.ts:63:21 terrainBlocker",
+      "selfMs": 301.9899999999996,
+      "inclusiveMs": 615.7069999999991,
+      "selfBelowNavalMs": 276.32899999999984
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/mapgen/src/index.ts:163:21 hexDistance",
+      "selfMs": 242.327,
+      "inclusiveMs": 242.327,
+      "selfBelowNavalMs": 228.57200000000003
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/sea-knowledge.ts:21:19 inspect",
+      "selfMs": 525.7200000000001,
+      "inclusiveMs": 625.1119999999993,
+      "selfBelowNavalMs": 225.40899999999996
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/naval.ts:67:30 travelTerrainBlocker",
+      "selfMs": 232.25599999999997,
+      "inclusiveMs": 295.7269999999998,
+      "selfBelowNavalMs": 215.31399999999994
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/mapgen/src/index.ts:117:19 neighbors",
+      "selfMs": 194.54100000000003,
+      "inclusiveMs": 917.9849999999993,
+      "selfBelowNavalMs": 177.53800000000004
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:10:26 createNavigation",
+      "selfMs": 346.5019999999997,
+      "inclusiveMs": 367.26899999999955,
+      "selfBelowNavalMs": 153.89199999999997
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/sea-knowledge.ts:56:20 relation",
+      "selfMs": 269.80400000000003,
+      "inclusiveMs": 651.3459999999993,
+      "selfBelowNavalMs": 146.00599999999994
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:319:18 toward",
+      "selfMs": 131.82300000000004,
+      "inclusiveMs": 5217.985999999989,
+      "selfBelowNavalMs": 131.82300000000004
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:279:39 (anonymous)",
+      "selfMs": 116.04900000000002,
+      "inclusiveMs": 168.12400000000002,
+      "selfBelowNavalMs": 114.99500000000002
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:235:86 (anonymous)",
+      "selfMs": 113.11900000000004,
+      "inclusiveMs": 225.35600000000002,
+      "selfBelowNavalMs": 113.11900000000004
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/expansion.ts:6:15 facts",
+      "selfMs": 117.37900000000005,
+      "inclusiveMs": 127.93300000000006,
+      "selfBelowNavalMs": 111.03900000000007
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:20:19 entryAt",
+      "selfMs": 116.19300000000008,
+      "inclusiveMs": 129.96900000000008,
+      "selfBelowNavalMs": 95.47200000000004
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/movement.ts:73:14 terrain",
+      "selfMs": 96.177,
+      "inclusiveMs": 96.177,
+      "selfBelowNavalMs": 88.79100000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:104:36 (anonymous)",
+      "selfMs": 126.61800000000005,
+      "inclusiveMs": 413.1719999999997,
+      "selfBelowNavalMs": 77.27700000000003
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:313:5 (anonymous)",
+      "selfMs": 64.71,
+      "inclusiveMs": 85.85000000000001,
+      "selfBelowNavalMs": 64.71
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/movement.ts:74:13 armies",
+      "selfMs": 65.47900000000001,
+      "inclusiveMs": 65.47900000000001,
+      "selfBelowNavalMs": 60.176000000000016
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:390:29 viableLanding",
+      "selfMs": 58.65700000000001,
+      "inclusiveMs": 301.135,
+      "selfBelowNavalMs": 58.65700000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:36:22 topologyAt",
+      "selfMs": 76.33099999999999,
+      "inclusiveMs": 133.319,
+      "selfBelowNavalMs": 56.22599999999998
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/expansion.ts:14:27 settlementSpacing",
+      "selfMs": 68.849,
+      "inclusiveMs": 202.07600000000005,
+      "selfBelowNavalMs": 52.83899999999999
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/mapgen/src/index.ts:20:36 (anonymous)",
+      "selfMs": 76.57300000000001,
+      "inclusiveMs": 76.57300000000001,
+      "selfBelowNavalMs": 50.983000000000004
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:391:42 (anonymous)",
+      "selfMs": 47.38399999999999,
+      "inclusiveMs": 348.51900000000006,
+      "selfBelowNavalMs": 47.38399999999999
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/movement.ts:75:16 townOwner",
+      "selfMs": 49.480000000000004,
+      "inclusiveMs": 49.480000000000004,
+      "selfBelowNavalMs": 47.355999999999995
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/sea-knowledge.ts:82:16 basinStatus",
+      "selfMs": 189.281,
+      "inclusiveMs": 435.7710000000002,
+      "selfBelowNavalMs": 46.10500000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/mapgen/src/index.ts:35:40 (anonymous)",
+      "selfMs": 49.80900000000001,
+      "inclusiveMs": 49.80900000000001,
+      "selfBelowNavalMs": 42.39
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:393:47 (anonymous)",
+      "selfMs": 40.51400000000001,
+      "inclusiveMs": 270.366,
+      "selfBelowNavalMs": 40.51400000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:289:52 (anonymous)",
+      "selfMs": 37.99000000000001,
+      "inclusiveMs": 52.78899999999999,
+      "selfBelowNavalMs": 36.93700000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/mapgen/src/index.ts:22:40 (anonymous)",
+      "selfMs": 37.08,
+      "inclusiveMs": 37.08,
+      "selfBelowNavalMs": 36.010999999999996
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/mapgen/src/index.ts:33:38 (anonymous)",
+      "selfMs": 65.487,
+      "inclusiveMs": 65.487,
+      "selfBelowNavalMs": 35.835
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:93:29 hasNavalOpportunity",
+      "selfMs": 78.36000000000001,
+      "inclusiveMs": 139.06100000000004,
+      "selfBelowNavalMs": 32.919
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/sim/src/naval.ts:10:49 (anonymous)",
+      "selfMs": 35.945,
+      "inclusiveMs": 35.945,
+      "selfBelowNavalMs": 31.72
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:41:15 isSea",
+      "selfMs": 47.448,
+      "inclusiveMs": 87.96600000000005,
+      "selfBelowNavalMs": 30.551999999999992
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:235:19 nearest",
+      "selfMs": 30.413999999999998,
+      "inclusiveMs": 255.77,
+      "selfBelowNavalMs": 30.413999999999998
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:45:27 informationGain",
+      "selfMs": 61.30999999999998,
+      "inclusiveMs": 61.30999999999998,
+      "selfBelowNavalMs": 26.432000000000002
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:291:31 nearCoastalFrontier",
+      "selfMs": 21.14,
+      "inclusiveMs": 21.14,
+      "selfBelowNavalMs": 21.14
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/mapgen/src/index.ts:12:35 (anonymous)",
+      "selfMs": 28.638,
+      "inclusiveMs": 30.758,
+      "selfBelowNavalMs": 15.912
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:392:28 landingScore",
+      "selfMs": 15.091999999999997,
+      "inclusiveMs": 229.85200000000006,
+      "selfBelowNavalMs": 15.091999999999997
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:312:40 (anonymous)",
+      "selfMs": 13.723,
+      "inclusiveMs": 13.723,
+      "selfBelowNavalMs": 13.723
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/navigation.ts:111:23 (anonymous)",
+      "selfMs": 20.091,
+      "inclusiveMs": 33.81399999999999,
+      "selfBelowNavalMs": 11.495000000000001
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:47:20 portStatus",
+      "selfMs": 43.138,
+      "inclusiveMs": 508.69100000000014,
+      "selfBelowNavalMs": 10.65
+    },
+    {
+      "location": "file:///home/telephoneheater/Work/Theandril/packages/ai/src/naval.ts:67:23 preferredPort",
+      "selfMs": 22.467999999999996,
+      "inclusiveMs": 387.6600000000002,
+      "selfBelowNavalMs": 9.572999999999999
+    }
+  ]
+}

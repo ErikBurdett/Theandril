@@ -106,6 +106,19 @@ export function neighbors(cell: number, width: number, height: number): number[]
   return result;
 }
 
+/** Same ordered topology as neighbors(), replacing caller-owned scratch storage.
+ * The returned array is the supplied buffer; callers must not retain it as a
+ * prior cell's neighbor list while reusing the buffer for another cell. */
+export function neighborsInto(cell: number, width: number, height: number, result: number[]): number[] {
+  if (!Number.isInteger(width) || width < 1 || !Number.isInteger(height) || height < 1 ||
+      !Number.isInteger(cell) || cell < 0 || cell >= width * height) {
+    result.length = 0;
+    return result;
+  }
+  writeNeighbors(cell, width, height, result);
+  return result;
+}
+
 /** Internal scratch-buffer variant avoids allocating one array per visited tile. */
 function writeNeighbors(cell: number, width: number, height: number, result: number[]): void {
   result.length = 0;

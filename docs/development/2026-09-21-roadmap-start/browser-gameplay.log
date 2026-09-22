@@ -1,0 +1,42 @@
+[WebServer] (node:4067027) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:4067559) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 1 worker
+
+(node:4067604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/gameplay/battle-defense.spec.ts:59:1 › R03 public attack previews the canonical contingent and leaves its reserve on the map (2.7s)
+  ✓   2 tests/gameplay/battle-defense.spec.ts:80:1 › R03 siege preview fits 390px and desktop public assaults clear reserves before capture (3.5s)
+  ✓   3 tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls (3.0s)
+  ✓   4 tests/gameplay/battle-defense.spec.ts:118:39 › R03 narrow public assaults complete occupation at 390px without intercepted controls at 130% text (3.8s)
+  ✓   5 tests/gameplay/chronicles.spec.ts:8:1 › AI watch plays a whole generated campaign, survives a save, and binds both complete chronicles at victory (16.8s)
+  ✓   6 tests/gameplay/chronicles.spec.ts:88:1 › a human researches, adopts distinct policies, starts a public project and reads an honestly partial imported history (3.0s)
+  ✓   7 tests/gameplay/contact.spec.ts:5:1 › world-size recommendations expose generated seats honestly and a chosen faction count survives manual save and reload (2.4s)
+  ✓   8 tests/gameplay/contact.spec.ts:34:1 › the recorded Standard Long seed with recommended density makes real faction contact through responsive AI watch (19.7s)
+{"stage":"generated-small12","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-1","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-2","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-3","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"load-4","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-1-small","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-2-tiny","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-3-small","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"import-4-tiny","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"failed-import","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+{"stage":"after-battle","controls":1,"canvases":1,"mapNodes":1,"debugHookPresent":true,"listeners":{"window":17,"document":7,"document.querySelector(\"canvas\")":12}}
+  ✓   9 tests/gameplay/hermes-ui-slices.spec.ts:23:1 › R23 repeated public loads and cross-size imports retain one responsive map control and canvas (8.1s)
+  ✓  10 tests/gameplay/hermes-ui-slices.spec.ts:125:3 › R18 paid Waykeeper resolves shared art for faction.ashen_compact (2.8s)
+  ✓  11 tests/gameplay/hermes-ui-slices.spec.ts:125:3 › R18 paid Waykeeper resolves shared art for faction.reedbound_council (2.9s)
+  ✓  12 tests/gameplay/movement.spec.ts:70:1 › canvas selects and cycles friendly units, previews bounded multi-step movement, and distinguishes dragging from orders (4.4s)
+  ✓  13 tests/gameplay/movement.spec.ts:103:1 › map targeting refuses implicit war and impassable land, then executes a multi-step field attack without issuing locked orders (5.4s)
+  ✓  14 tests/gameplay/movement.spec.ts:130:1 › queued waypoints consume current movement, survive save/load, continue after the round, and cancel through the real controls (7.2s)
+  ✓  15 tests/gameplay/movement.spec.ts:170:1 › map settlement targeting requires siege instead of bypassing defenses and inspection names the visible biome (4.2s)
+  ✓  16 tests/gameplay/movement.spec.ts:194:1 › a saved route interrupted by a real foreign move retains its reason and safely replans on resume (4.4s)
+  ✓  17 tests/gameplay/movement.spec.ts:217:1 › narrow touch map moves on taps and keyboard route controls remain usable without hover (2.3s)
+  ✓  18 tests/gameplay/naval.spec.ts:51:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker (11.3s)
+  ✓  19 tests/gameplay/naval.spec.ts:107:1 › harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet (6.9s)
+  ✓  20 tests/gameplay/naval.spec.ts:143:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships (7.6s)
+
+  20 passed (2.1m)

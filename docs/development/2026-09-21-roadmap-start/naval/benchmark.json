@@ -1,0 +1,250 @@
+{
+  "scope": "Synthetic detached observations only: 384×256 public dimensions; 61/469/3169 charted cells; 1/8/32/128 idle founders; no fleets, orders or hidden-state access. Not a canonical campaign or renderer benchmark.",
+  "timing": "Whole planNaval; fresh detached observation per sample; 2 warmups and 7 measured alternating paired runs; cloning/setup excluded; median milliseconds.",
+  "baselineRevision": "f07024fe23ad3386874656d48fbbc33a5380d979",
+  "baselineSha256": "b2ac26e4a45a27e9354d318d1354ff36b9823453b65c77228c19be1bf228845c",
+  "currentSha256": "897dffd55c5edf0ee67400a6728a4931f90e181bf98b87e87e6839d0057b2d07",
+  "node": "v22.23.2",
+  "rows": [
+    {
+      "factionCount": 4,
+      "radius": 4,
+      "founders": 1,
+      "observedCells": 61,
+      "beforeReads": 398,
+      "afterReads": 337,
+      "beforeMedianMs": 0.16286300000001575,
+      "afterMedianMs": 0.1358380000000352
+    },
+    {
+      "factionCount": 4,
+      "radius": 4,
+      "founders": 8,
+      "observedCells": 61,
+      "beforeReads": 825,
+      "afterReads": 337,
+      "beforeMedianMs": 0.14672600000000102,
+      "afterMedianMs": 0.07916899999997895
+    },
+    {
+      "factionCount": 4,
+      "radius": 4,
+      "founders": 32,
+      "observedCells": 61,
+      "beforeReads": 2289,
+      "afterReads": 337,
+      "beforeMedianMs": 0.33478900000000067,
+      "afterMedianMs": 0.08408400000001848
+    },
+    {
+      "factionCount": 4,
+      "radius": 4,
+      "founders": 128,
+      "observedCells": 61,
+      "beforeReads": 8145,
+      "afterReads": 337,
+      "beforeMedianMs": 1.2662189999999782,
+      "afterMedianMs": 0.13289100000002918
+    },
+    {
+      "factionCount": 4,
+      "radius": 12,
+      "founders": 1,
+      "observedCells": 469,
+      "beforeReads": 3050,
+      "afterReads": 2581,
+      "beforeMedianMs": 0.3268229999999903,
+      "afterMedianMs": 0.2658040000000028
+    },
+    {
+      "factionCount": 4,
+      "radius": 12,
+      "founders": 8,
+      "observedCells": 469,
+      "beforeReads": 6333,
+      "afterReads": 2581,
+      "beforeMedianMs": 0.7037119999999959,
+      "afterMedianMs": 0.2720050000000356
+    },
+    {
+      "factionCount": 4,
+      "radius": 12,
+      "founders": 32,
+      "observedCells": 469,
+      "beforeReads": 17589,
+      "afterReads": 2581,
+      "beforeMedianMs": 3.308285000000012,
+      "afterMedianMs": 0.4499279999999999
+    },
+    {
+      "factionCount": 4,
+      "radius": 12,
+      "founders": 128,
+      "observedCells": 469,
+      "beforeReads": 62613,
+      "afterReads": 2581,
+      "beforeMedianMs": 7.626756,
+      "afterMedianMs": 0.3081470000000195
+    },
+    {
+      "factionCount": 4,
+      "radius": 32,
+      "founders": 1,
+      "observedCells": 3169,
+      "beforeReads": 23769,
+      "afterReads": 20600,
+      "beforeMedianMs": 2.35325499999999,
+      "afterMedianMs": 1.868110999999999
+    },
+    {
+      "factionCount": 4,
+      "radius": 32,
+      "founders": 8,
+      "observedCells": 3169,
+      "beforeReads": 45952,
+      "afterReads": 20600,
+      "beforeMedianMs": 6.155653000000029,
+      "afterMedianMs": 1.9323359999999639
+    },
+    {
+      "factionCount": 4,
+      "radius": 32,
+      "founders": 32,
+      "observedCells": 3169,
+      "beforeReads": 122008,
+      "afterReads": 20600,
+      "beforeMedianMs": 15.550434999999993,
+      "afterMedianMs": 1.562815999999998
+    },
+    {
+      "factionCount": 4,
+      "radius": 32,
+      "founders": 128,
+      "observedCells": 3169,
+      "beforeReads": 426232,
+      "afterReads": 20600,
+      "beforeMedianMs": 59.25719700000013,
+      "afterMedianMs": 1.3528660000001764
+    },
+    {
+      "factionCount": 24,
+      "radius": 4,
+      "founders": 1,
+      "observedCells": 61,
+      "beforeReads": 276,
+      "afterReads": 276,
+      "beforeMedianMs": 0.03546299999993607,
+      "afterMedianMs": 0.04374899999993431
+    },
+    {
+      "factionCount": 24,
+      "radius": 4,
+      "founders": 8,
+      "observedCells": 61,
+      "beforeReads": 276,
+      "afterReads": 276,
+      "beforeMedianMs": 0.039766000000099666,
+      "afterMedianMs": 0.040292000000135886
+    },
+    {
+      "factionCount": 24,
+      "radius": 4,
+      "founders": 32,
+      "observedCells": 61,
+      "beforeReads": 276,
+      "afterReads": 276,
+      "beforeMedianMs": 0.04434799999989991,
+      "afterMedianMs": 0.04338499999994383
+    },
+    {
+      "factionCount": 24,
+      "radius": 4,
+      "founders": 128,
+      "observedCells": 61,
+      "beforeReads": 276,
+      "afterReads": 276,
+      "beforeMedianMs": 0.05826900000010937,
+      "afterMedianMs": 0.06028499999979431
+    },
+    {
+      "factionCount": 24,
+      "radius": 12,
+      "founders": 1,
+      "observedCells": 469,
+      "beforeReads": 2112,
+      "afterReads": 2112,
+      "beforeMedianMs": 0.16884300000015173,
+      "afterMedianMs": 0.17228000000000065
+    },
+    {
+      "factionCount": 24,
+      "radius": 12,
+      "founders": 8,
+      "observedCells": 469,
+      "beforeReads": 2112,
+      "afterReads": 2112,
+      "beforeMedianMs": 0.1737430000000586,
+      "afterMedianMs": 0.18093900000008034
+    },
+    {
+      "factionCount": 24,
+      "radius": 12,
+      "founders": 32,
+      "observedCells": 469,
+      "beforeReads": 2112,
+      "afterReads": 2112,
+      "beforeMedianMs": 0.1842110000000048,
+      "afterMedianMs": 0.1825619999999617
+    },
+    {
+      "factionCount": 24,
+      "radius": 12,
+      "founders": 128,
+      "observedCells": 469,
+      "beforeReads": 2112,
+      "afterReads": 2112,
+      "beforeMedianMs": 0.19806599999992613,
+      "afterMedianMs": 0.19557899999995243
+    },
+    {
+      "factionCount": 24,
+      "radius": 32,
+      "founders": 1,
+      "observedCells": 3169,
+      "beforeReads": 14262,
+      "afterReads": 14262,
+      "beforeMedianMs": 1.2681870000001254,
+      "afterMedianMs": 1.014643999999862
+    },
+    {
+      "factionCount": 24,
+      "radius": 32,
+      "founders": 8,
+      "observedCells": 3169,
+      "beforeReads": 14262,
+      "afterReads": 14262,
+      "beforeMedianMs": 1.0141060000000834,
+      "afterMedianMs": 2.030971000000136
+    },
+    {
+      "factionCount": 24,
+      "radius": 32,
+      "founders": 32,
+      "observedCells": 3169,
+      "beforeReads": 14262,
+      "afterReads": 14262,
+      "beforeMedianMs": 1.0410059999999248,
+      "afterMedianMs": 1.0109850000001188
+    },
+    {
+      "factionCount": 24,
+      "radius": 32,
+      "founders": 128,
+      "observedCells": 3169,
+      "beforeReads": 14262,
+      "afterReads": 14262,
+      "beforeMedianMs": 1.0566579999999703,
+      "afterMedianMs": 1.063722000000098
+    }
+  ]
+}

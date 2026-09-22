@@ -1,0 +1,185 @@
+{
+  "capturedAt": "2026-09-21T17:51:07.617Z",
+  "runtime": "v22.23.2",
+  "producerHead": "f07024fe23ad3386874656d48fbbc33a5380d979",
+  "producerDirty": true,
+  "producerSha256": "95ffe4adc9472d7475d789d001584dcb82116c9cf67634178d935237a40aa9af",
+  "sourceSha256": {
+    "packages/sim/src/save.ts": "8fa091b1af59bb7f766d5b1095fe9fd082ada190b11da28f4fffb2a7ba471257",
+    "packages/sim/src/simulation.ts": "f964747ffba1541286bf19bc0db1583f385aed970961edf302e441bb88e0e39c",
+    "packages/sim/src/diplomacy.ts": "efb1f332259d54022c3d806eb035bce5ef64363cea42b0516ef162d25dbab627",
+    "packages/sim/src/rules.ts": "92ba0e21dc3cd6a80bf32ac9a419e46bf58b0baf3b13c4fe92d9cbaff4054525",
+    "packages/sim/src/canonical-cells.ts": "4c3175175ee06d4a2742bc75ae6e0d1d793520da93798377fefe17341d804be9",
+    "packages/chronicle/src/index.ts": "6e91755bdf3d248d6f64c52d2592c36182c5f4ce8d3fc951c61d867b8c1e1e3a",
+    "packages/chronicle/src/json-equivalence.ts": "af649f8a62779172d0bef6fd8bbda08193f545904180d849d91bac3ddaf0a602",
+    "packages/test-fixtures/src/authored-land.ts": "49175452b06dc68ad97281f15f5596ea5a5db6384282a4635adbc753bbb73a34"
+  },
+  "options": {
+    "seed": 20260905,
+    "size": "tiny",
+    "factionCount": 3,
+    "pace": "short",
+    "rulesVersion": 17
+  },
+  "rulesVersion": 17,
+  "contentHash": "b79c78ed",
+  "coverage": "from-save",
+  "authoredMoves": [
+    {
+      "armyId": "army.4",
+      "factionId": "faction.reedbound_council",
+      "from": 317,
+      "to": 723
+    },
+    {
+      "armyId": "army.6",
+      "factionId": "faction.cinder_march",
+      "from": 1101,
+      "to": 771
+    }
+  ],
+  "setup": "Generated v17 tiny world with three factions. Only two opposing scout cells were authored into visible local contact; existing authored-sight helper refreshed knowledge before the initial snapshot. Terrain, resources, founders, treasuries, diplomacy and wars were not authored. All founding and diplomacy outcomes use recorded ordinary commands. This is an authored from-save scenario, not generated-start travel or pacing evidence.",
+  "initialHash": "ff9222e9",
+  "pending": {
+    "turn": 2,
+    "hash": "9d49a22c",
+    "settlements": [
+      {
+        "id": "settlement.7",
+        "factionId": "faction.ashen_compact",
+        "cell": 722,
+        "name": "Ashen witness"
+      },
+      {
+        "id": "settlement.8",
+        "factionId": "faction.reedbound_council",
+        "cell": 317,
+        "name": "Reed witness"
+      },
+      {
+        "id": "settlement.9",
+        "factionId": "faction.cinder_march",
+        "cell": 1101,
+        "name": "Third witness"
+      }
+    ],
+    "treasuries": [
+      {
+        "factionId": "faction.ashen_compact",
+        "coin": 58
+      },
+      {
+        "factionId": "faction.reedbound_council",
+        "coin": 72
+      },
+      {
+        "factionId": "faction.cinder_march",
+        "coin": 65
+      }
+    ],
+    "diplomacy": {
+      "offers": [
+        {
+          "id": "offer.12",
+          "proposerId": "faction.cinder_march",
+          "recipientId": "faction.ashen_compact",
+          "createdTurn": 1,
+          "expiresTurn": 4,
+          "terms": {
+            "offerCoin": 0,
+            "requestCoin": 11,
+            "truceTurns": 5
+          }
+        }
+      ],
+      "treaties": [
+        {
+          "id": "treaty.11",
+          "parties": [
+            "faction.ashen_compact",
+            "faction.reedbound_council"
+          ],
+          "proposerId": "faction.ashen_compact",
+          "startedTurn": 1,
+          "expiresTurn": 11,
+          "terms": {
+            "offerCoin": 7,
+            "requestCoin": 0,
+            "truceTurns": 10
+          }
+        }
+      ],
+      "relations": [
+        {
+          "parties": [
+            "faction.ashen_compact",
+            "faction.cinder_march"
+          ],
+          "trust": -15,
+          "respect": 0,
+          "grievances": 15,
+          "warStartedTurn": 1,
+          "lastOfferTurn": 1
+        },
+        {
+          "parties": [
+            "faction.ashen_compact",
+            "faction.reedbound_council"
+          ],
+          "trust": -10,
+          "respect": 5,
+          "grievances": 10,
+          "warStartedTurn": null,
+          "lastOfferTurn": 1
+        }
+      ]
+    },
+    "wars": [
+      [
+        "faction.ashen_compact",
+        "faction.cinder_march"
+      ]
+    ]
+  },
+  "continuation": {
+    "turn": 11,
+    "hash": "c63f8cd7",
+    "records": 9,
+    "offers": 0,
+    "treaties": 0,
+    "wars": [
+      [
+        "faction.ashen_compact",
+        "faction.cinder_march"
+      ]
+    ]
+  },
+  "pendingRecords": 9,
+  "files": {
+    "initial-save.json": {
+      "bytes": 22154,
+      "sha256": "b758c621d531d59b29c2286578cce923f33a535e2c3e4b3d3ed0491739fe04f3"
+    },
+    "pending-save.json": {
+      "bytes": 29396,
+      "sha256": "210b47baaa9cd7ea42decf481f42e0a12ba469c66cb787fd696b4b96e5d702e8"
+    },
+    "archive.json": {
+      "bytes": 27779,
+      "sha256": "b9c7724460671bc52aba884b0dbfddb579835a423994fd871e471a20ea781861"
+    },
+    "continuation.json": {
+      "bytes": 41164,
+      "sha256": "aa7a7d0c742a692822e7536d8d76434bf905b6f84bbdd689c2dd23544d463d58"
+    }
+  },
+  "verified": [
+    "All recorded commands accepted under rules 17",
+    "Paid acceptance moved exactly seven coin once",
+    "Three settlements, active treaty and pending offer at turn 2",
+    "Pending save exact deserialize/serialize bytes",
+    "Pending archive exact replay/save bytes and recorded turn checkpoint",
+    "Old-rule continuation offer expiry at turn 4 and treaty expiry at turn 11",
+    "Continued complete archive exact replay/save bytes"
+  ]
+}

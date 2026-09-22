@@ -1,0 +1,25 @@
+
+> theandril@0.1.0 art:validate /home/telephoneheater/Work/Theandril
+> tsx scripts/art.ts validate
+
+node:net:1919
+      const error = new UVExceptionWithHostPort(rval, 'listen', address, port);
+                    ^
+
+Error: listen EPERM: operation not permitted /tmp/tsx-1000/15.pipe
+    at Server.setupListenHandle [as _listen2] (node:net:1919:21)
+    at listenInCluster (node:net:1998:12)
+    at Server.listen (node:net:2120:5)
+    at file:///home/telephoneheater/Work/Theandril/node_modules/.pnpm/tsx@4.23.13/node_modules/tsx/dist/cli.mjs:53:31472
+    at new Promise (<anonymous>)
+    at createIpcServer (file:///home/telephoneheater/Work/Theandril/node_modules/.pnpm/tsx@4.23.13/node_modules/tsx/dist/cli.mjs:53:31450)
+    at async file:///home/telephoneheater/Work/Theandril/node_modules/.pnpm/tsx@4.23.13/node_modules/tsx/dist/cli.mjs:55:542 {
+  code: 'EPERM',
+  errno: -1,
+  syscall: 'listen',
+  address: '/tmp/tsx-1000/15.pipe',
+  port: -1
+}
+
+Node.js v22.23.2
+ ELIFECYCLE  Command failed with exit code 1.
