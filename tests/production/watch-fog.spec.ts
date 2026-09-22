@@ -7,7 +7,7 @@ test('production exposes the watch-only fog command without development hooks', 
   expect(await page.evaluate(() => typeof window.theandril?.toggleFogOfWar)).toBe('function');
   expect(await page.evaluate(() => window.theandril!.toggleFogOfWar().then(() => 'unexpected', error => String(error)))).toContain('only in an active AI-watch');
   await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('tiny');
-  await page.getByRole('combobox', { name: 'World layout', exact: true }).selectOption('archipelago');
+  await page.getByRole('combobox', { name: 'Map type', exact: true }).selectOption('archipelago');
   await page.getByRole('combobox', { name: 'Campaign mode', exact: true }).selectOption('watch');
   await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
   await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
