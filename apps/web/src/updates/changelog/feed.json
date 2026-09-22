@@ -1,5 +1,56 @@
 [
   {
+    "sha": "85accf71d1e9b02fdbc426d9d54f581620ed71f5",
+    "shortSha": "85accf7",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T17:40:27-05:00",
+    "subject": "feat: arcane seams and site-gated Arcane Theory (rules/save 23)",
+    "body": "The Ashfall left arcane seams under Ashfall-glass ground. Where a seam lies is\nderived from the world's seed like any other natural feature, so a save records\nonly which realms have paid to survey them: a standard map hides fourteen seams\namong a hundred and sixty-two visible glass hexes, a tiny map three among\ntwenty-three.\n\nAny company may spend its movement and 24 coin to survey the ground it stands\non, revealing seams within two hexes to that realm alone. An empty survey says\nso and still costs. A surveyed seam inside a realm's borders draws two ashglass\na turn beside the hearth's ordinary yield and falls with that hearth.\n\nArcane Theory now needs such a seam, so magic begins with geography a realm\nmust find, take and keep. Until now ashglass - the one arcane-tagged resource -\nhad no magical consumer at all, and research was gated only by an archive and\naccumulated knowledge.\n\nA realm holding no seam surveys its own hinterland from surplus at most once\nevery six turns, prefers a surveyed seam when its borders grow, and never\nmarches a surveying company away in the same turn. The selected company offers\na survey with its price and its refusal reason; the Arcane Theory tab lists the\nseams the realm has surveyed and whether each is held.\n\nMeasured: a standard twelve-realm campaign with eight city-states ends on turn\n231, six realms surveyed and held a seam, and one completed Arcane Theory\nthrough it. A genuine rules-22 save and its 1,993-order archive from 6644f80\nload, re-seal to identical bytes, replay exactly and continue.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 31,
+    "insertions": 586,
+    "deletions": 38,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "packages/ai"
+    ],
+    "notes": "## What the Ashfall left behind\n\nMagic now begins with ground. The Ashfall left arcane seams buried under the vitrified glass it scattered, and where those seams lie is a property of the world itself — the same for every realm that plays it, and hidden from all of them until someone goes looking.\n\nAny company can stop and survey the ground it stands on for twenty-four coin. The survey spends that company's movement and reveals any seam within two hexes, to your realm alone; a survey that finds nothing says so and still costs. Ashfall glass is visible to everyone, so you can see where it is worth looking without being told where the seams are.\n\nA seam inside your borders draws ashglass every turn, and falls to whoever takes the hearth that holds it. And a held seam is now what allows a realm to study Arcane Theory at all: research alone no longer reaches magic. You have to find the ground, take it, and keep it.\n\nRival realms do the same. A realm holding no seam will survey its own hinterland from time to time, and will reach for a seam it has found when its borders grow."
+  },
+  {
+    "sha": "6644f8041e4bbe449a12820332b8d8b6e9fccec2",
+    "shortSha": "6644f80",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T15:51:46-05:00",
+    "subject": "test: prove the campaign-safety scenarios under the rules that ship",
+    "body": "The campaign-safety findings were corrected and reviewed under rules 17, and\nrules 18-22 have since changed pacing, sieges, seats and diplomacy. An audit of\nall nine findings shows eight already run at current rules with ordinary\ncommands; the pending-assault regression did not, because it built its\ngarrison, siege and turn at rules 17 only, so the food-store siege model never\ntouched it. It now builds its scenario under the rules being checked and proves\nthe same invariant at rules 17 and at the shipping rules. The remaining rule-16\ncases stay pinned on purpose: they are captured evidence that old envelopes\nstill refuse what they refused.\n\nThe retained set - ten files, 66 checks - passes and no finding re-opened. The\nroadmap item now asks that each scenario keep running against the rules that\nship rather than the rules it was first closed under.\n\nPatronage also gains its browser coverage: offering an oath discloses the whole\nbargain before it is sent, and an accepted oath is visible to both realms,\nrefuses war, survives a save and can be released.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 5,
+    "insertions": 75,
+    "deletions": 8,
+    "areas": [
+      "apps/web",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "packages/sim",
+      "tests/gameplay"
+    ]
+  },
+  {
+    "sha": "9fd25912d75cca38f400d4002d9e59143e53b1aa",
+    "shortSha": "9fd2591",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T15:14:01-05:00",
+    "subject": "docs: publish a journal note for client states",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 100,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "4699d6095a96b02b60647865f455b719ce735dca",
     "shortSha": "4699d60",
     "author": "ErikBurdett",
