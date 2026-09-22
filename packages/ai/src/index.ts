@@ -2,6 +2,7 @@ import { BUILDINGS, UNITS } from '@theandril/content';
 import { hexDistance, neighbors } from '@theandril/mapgen';
 import { MAX_ARMY_FORMATIONS, foundingCoinCost, getMovementQuery, planDevelopment, type GameCommand, type Observation } from '@theandril/sim';
 import { answerPatronage, proposePatronage, planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
+import { planArcaneSurvey } from './arcane';
 import { planConquestDecision } from './conquest';
 import { planProgression } from './progression';
 import { createNavigation } from './navigation';
@@ -65,8 +66,14 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const factionId = view.factionId;
   // Patronage is one bounded diplomatic order beside the turn's ordinary work.
   const patronage = proposePatronage(view);
-  const plans: GameCommand[] = [...advancement.commands, ...(patronage?.commands ?? [])];
-  const reasons: string[] = [...advancement.reasons, ...(patronage?.reasons ?? [])];
+  // An occasional paid survey of ground the realm already holds; both are bounded
+  // orders that travel with the turn rather than replacing its ordinary work.
+  const survey = planArcaneSurvey(view);
+  // A surveying company spends its movement on the ground it stands on, so nothing
+  // later in this pass may march it away.
+  const surveying = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
+  const plans: GameCommand[] = [...advancement.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? [])];
+  const reasons: string[] = [...advancement.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;
@@ -134,7 +141,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   // Normally retain a caravan's funding; honor a legally quoted first ocean
   // scout before generic economic reserves can repeatedly consume its coins.
   // This never spends the progression reserve already removed from budget.
-  const naval = planNaval(view, Math.max(0, budget - Math.min(economyReserve, 16), Math.min(budget, oceanScoutReserve)), { heldArmyIds: specialists.heldArmyIds, knowledgeBudget: Math.max(0, view.knowledge - knowledgeSpent) });
+  const naval = planNaval(view, Math.max(0, budget - Math.min(economyReserve, 16), Math.min(budget, oceanScoutReserve)), { heldArmyIds: new Set([...specialists.heldArmyIds, ...surveying]), knowledgeBudget: Math.max(0, view.knowledge - knowledgeSpent) });
   plans.push(...naval.commands); reasons.push(...naval.reasons); budget -= naval.coinSpent;
   plannedUpkeep += naval.commands.reduce((sum, command) => sum + (command.type === 'queue' ? units.get(command.itemId)?.upkeep ?? 0 : 0), 0);
   if (naval.interrupts) return { commands: plans, reasons };
@@ -192,7 +199,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const desiredConcentration = (army: typeof ownArmies[number]): number => army.commander
     ? Math.min(army.formationCapacity, Math.max(12, ...enemies.filter(enemy => hexDistance(army.cell, enemy.cell, view.width) <= 18).map(enemy => enemy.formations.length + 2)))
     : Math.min(6, army.formationCapacity);
-  for (const army of ownArmies) if (!army.canFound && army.id !== explorerId && !besiegers.has(army.id) && !naval.heldArmyIds.has(army.id) && !army.reorganizationBlocker) {
+  for (const army of ownArmies) if (!army.canFound && army.id !== explorerId && !besiegers.has(army.id) && !naval.heldArmyIds.has(army.id) && !surveying.has(army.id) && !army.reorganizationBlocker) {
     const group = groups.get(army.cell) ?? []; group.push(army); groups.set(army.cell, group);
   }
   for (const group of groups.values()) {
@@ -212,7 +219,7 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   }
   for (const army of rotate(ownArmies, 32).slice(0, 128)) {
     if (plans.length >= 128) break;
-    if (besiegers.has(army.id) || reorganized.has(army.id) || naval.heldArmyIds.has(army.id)) continue; // Composition/assignment/transport changes need fresh facts.
+    if (besiegers.has(army.id) || reorganized.has(army.id) || naval.heldArmyIds.has(army.id) || surveying.has(army.id)) continue; // Composition/assignment/transport changes need fresh facts.
     const portSite = coastalFoundingSite(view, army);
     if (army.canFound && portSite !== null && portSite !== army.cell && view.growth && sparseContactNeeded(view) && view.factions.length === 1) {
       const route = view.routes.find(route => route.armyId === army.id);

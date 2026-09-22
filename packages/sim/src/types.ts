@@ -7,6 +7,7 @@ import type { CampaignPace, RosterVersion } from '@theandril/content';
 import type { BattleOrder, BattleState } from './combat';
 import type { DiplomacyObservation, DiplomacyState, PeaceTerms } from './diplomacy';
 import type { ClientTerms } from './clients';
+import type { ArcaneSurveyState, ObservedArcaneSite } from './arcane-sites';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
 import type { Character, CharacterBattleSnapshot, CharacterAftermath, CharacterView, CharacterSummary, CharacterRecruitmentOption, CommanderAbilityOption } from './characters';
@@ -223,6 +224,7 @@ export type GameCommand =
   | { type: 'respondClient'; factionId: string; offerId: string; accept: boolean }
   | { type: 'releaseClient'; factionId: string; clientId: string }
   | { type: 'renounceClient'; factionId: string }
+  | { type: 'searchArcane'; factionId: string; armyId: string }
   | { type: 'respondPeace'; factionId: string; offerId: string; accept: boolean }
   | { type: 'research'; factionId: string; technologyId: string }
   | { type: 'adoptInstitution'; factionId: string; institutionId: string }
@@ -235,6 +237,8 @@ export interface GameState {
   resources: ResourceState;
   development: DevelopmentState;
   arcaneResearch: ArcaneResearchState;
+  /** Rules 23: the seams each realm has paid to survey. The seams themselves are geography. */
+  arcaneSurveys: ArcaneSurveyState;
   roads: RoadState;
   rosterVersion: RosterVersion;
   land: LandState;
@@ -271,6 +275,8 @@ export interface Observation {
   battleScene: BattleSceneSnapshot | null;
   battleAbilities: BattleAbilityOption[];
   arcaneResearch: ArcaneResearchObservation;
+  arcaneSites: ObservedArcaneSite[];
+  arcaneSearchCoinCost: number;
   /** Public world-generation choice; legacy saves retain their original geography. */
   layout?: MapLayout;
   roads?: RoadObservation[];

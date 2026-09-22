@@ -3,7 +3,7 @@ import { ARCANE_DISCOVERIES } from '@theandril/content';
 import { applyCommand, createArmyFormation, deserializeGame, getMovementQuery, getObservation, serializeGame, type GameCommand, type GameState } from '@theandril/sim';
 import { createArchive, applyRecordedCommand, replayArchive } from '../../chronicle/src/index';
 import { characterBattleCampaign } from '../../test-fixtures/src/character-fixture';
-import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
+import { refreshAuthoredSight, holdSurveyedSeam } from '../../test-fixtures/src/authored-land';
 import { planCharacters } from './characters';
 import { planProgression } from './progression';
 
@@ -20,6 +20,8 @@ function laboratory() {
   for (let turn = 0; turn < 20 && !town.buildings.includes('building.archive'); turn++) checked({ type: 'endTurn', factionId: owner });
   expect(town.buildings).toContain('building.archive');
   checked({ type: 'declareWar', factionId: owner, targetFactionId: 'faction.reedbound_council' });
+  // Arcane Theory is studied from a seam the realm holds; surveying is proved in the sim's own tests.
+  holdSurveyedSeam(game, owner);
   return deserializeGame(serializeGame(game));
 }
 test('observation-only AI pays for one useful Waykeeper, attaches it and purchases real national discoveries before shared-kernel combat', () => {

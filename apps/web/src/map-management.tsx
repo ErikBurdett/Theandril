@@ -46,6 +46,14 @@ export function managementPanes({ view, selection, movement, busy, name, setName
     {view.growth && <p className="field-help">Founding supplies: {view.growth.founding.coinCost} coin · realm upkeep rises by {view.growth.founding.additionalUpkeep} coin / turn. {view.growth.founding.blocker}</p>}
     <button className="primary wide" type="submit" disabled={busy || view.growth?.founding.canAfford === false}>Found settlement</button>
   </form>;
+  // Rules 23: any company can pay to survey the ground it stands on for an arcane
+  // seam. The button states the price and why a survey is refused.
+  const surveyBlocker = army && (army.movement <= 0 ? 'This company has already spent its movement this turn.'
+    : view.treasury < view.arcaneSearchCoinCost ? `An arcane survey costs ${view.arcaneSearchCoinCost} coin.` : null);
+  const survey = army && !view.battle && !view.pendingCapture && view.arcaneSearchCoinCost > 0 && <section className="arcane-survey" data-testid="arcane-survey">
+    <button className="wide" disabled={busy || Boolean(surveyBlocker)} onClick={() => issue({ type: 'searchArcane', factionId, armyId: army.id })}>Survey for an arcane seam · {view.arcaneSearchCoinCost} coin</button>
+    <p className="field-help">{surveyBlocker ?? 'Ashfall glass marks ground worth surveying. A survey spends this company\u2019s movement and reveals any seam within two hexes; holding one inside your borders draws ashglass and allows Arcane Theory.'}</p>
+  </section>;
   const routes = army && <MovementOrders movement={movement} view={view} issue={issue} locate={target => select({ ...selection, cell: target }, true)}/>;
   const composition = army && <ArmyComposition key={army.id} army={army} view={view} busy={busy} issue={issue} inspectArmy={target => select({ armyId: target.id, cell: target.cell })}/>;
   const combat = army && !view.battle && !view.pendingCapture && <><SiegeOrders army={army} view={view} busy={busy} issue={issue}/><AttackOrders army={army} view={view} busy={busy} issue={issue} terrain={target => renderer?.inspect(target)?.terrain}/></>;
@@ -81,7 +89,7 @@ export function managementPanes({ view, selection, movement, busy, name, setName
   const sidebar: ReactNode = <>
     {view.pendingCapture ? <><h2>A settlement awaits</h2><p className="field-help">Choose its fate in the capture panel before issuing campaign orders.</p></>
       : view.battle ? <><h2>Battle in progress</h2><p className="field-help">Current strength, morale, and fatigue are shown in the battle panel. Resolve the engagement before issuing campaign orders.</p></>
-      : army ? <>{summary}{armyOfficers}{transport}{founding}{routes}{composition}
+      : army ? <>{summary}{armyOfficers}{transport}{founding}{survey}{routes}{composition}
         <h3 className="section-title">Single-step shortcuts</h3><p className="field-help">Optional: move one neighboring hex using the buttons below. For complete routes and attacks, use the map or Paths & marching orders above.</p>
         <div className="nearby-cells">{neighbors(army.cell, view.width, view.height).map(target => { const known = renderer?.inspect(target); return <button key={target} disabled={busy || Boolean(army.movementBlocker)} aria-label={`Move to cell ${target}`} onClick={() => issue({ type: 'move', factionId, armyId: army.id, target })}><span>{known?.waterDepth ? WATER_DEPTH_NAMES[known.waterDepth] : terrainNames[known?.terrain ?? -1] ?? 'Unknown'}</span><small>Hex {target}</small></button>; })}</div>
       </> : settlement ? <>{summary}{production}{land()}{defense}{officers}</> : <><h2>The frontier awaits</h2><p>Select an army or settlement from the map or your realm registry to issue orders.</p></>}

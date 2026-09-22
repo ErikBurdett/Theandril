@@ -3,7 +3,7 @@ import { ARCANE_DISCOVERIES, BATTLE_SPELLS, BUILDINGS, checksum, MAX_CASTER_STRA
 import { createArchive, applyRecordedCommand, replayArchive, createJournal } from '../../chronicle/src/index';
 import { characterBattleCampaign } from '../../test-fixtures/src/character-fixture';
 import { conquestCampaign } from '../../test-fixtures/src/conquest-fixture';
-import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
+import { refreshAuthoredSight, holdSurveyedSeam } from '../../test-fixtures/src/authored-land';
 import { applyCommand, createArmyFormation, deserializeGame, getBattleScene, getObservation, serializeGame, stateHash, type BattlePresentation, type GameCommand, type GameState } from './index';
 import { chooseBattleOrder } from './combat';
 import { relocateArmy } from './warfare';
@@ -22,6 +22,8 @@ function prepare() {
   expect(game.factions[0]!.treasury).toBe(before - BUILDINGS.find(item => item.id === 'building.archive')!.coinCost);
   for (let i = 0; i < 20 && !town.buildings.includes('building.archive'); i++) issue(game, { type: 'endTurn', factionId: owner });
   expect(town.buildings).toContain('building.archive');
+  // Arcane Theory is studied from a seam the realm holds; the survey command itself is proved in arcane-sites.test.ts.
+  holdSurveyedSeam(game, owner);
   const casterId = `character.${game.nextId}`, purse = game.factions[0]!.treasury;
   issue(game, { type: 'recruitCharacter', factionId: owner, settlementId: town.id, definitionId: 'character.waykeeper' });
   expect(game.factions[0]!.treasury).toBe(purse - 40);

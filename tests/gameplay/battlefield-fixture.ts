@@ -1,6 +1,6 @@
 import { applyCommand, createArmyFormation, deserializeGame, serializeGame, type GameCommand } from '@theandril/sim';
 import { borderBattleCampaign } from '../../packages/test-fixtures/src/combat-fixture';
-import { refreshAuthoredSight } from '../../packages/test-fixtures/src/authored-land';
+import { holdSurveyedSeam, refreshAuthoredSight } from '../../packages/test-fixtures/src/authored-land';
 
 /** Explicitly authored scale workload: funded veteran officers and infrastructure,
  * forty actual formations, no injected battle, damage, targets or outcome. */
@@ -22,6 +22,8 @@ export function fullBattlefieldCampaign() {
         for (const skillId of ['skill.decisive', 'skill.muster_rolls', 'skill.field_orders']) issue({ type: 'promoteCharacter', factionId: faction.id, characterId: character.id, skillId });
       }
     }
+    // Arcane Theory is studied from a seam the realm holds; the survey itself is proved in arcane-seams.spec.ts and the sim's own tests.
+    holdSurveyedSeam(state, faction.id);
     for (const discoveryId of ['arcane.ember_projection', 'arcane.rune_binding']) issue({ type: 'researchArcane', factionId: faction.id, discoveryId });
     const roles = ['unit.guard', 'unit.spearman', 'unit.scout', 'unit.heavy_infantry', 'unit.cavalry'];
     army.formations = Array.from({ length: 20 }, (_, i) => createArmyFormation(`army.${state.nextId++}`, roles[i % roles.length]!)).sort((a, b) => a.id < b.id ? -1 : 1);

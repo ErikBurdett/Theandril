@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { RESOURCES, resourceById, type ResourceDefinition } from '@theandril/content';
 import type { World } from '@theandril/mapgen';
 import type { DomainEvent, GameState, Settlement } from './types';
+import { settlementSiteYield, SITE_RESOURCE_ID } from './arcane-sites';
 import { rulesVersion } from './rules';
 
 const id = z.string().regex(/^[a-z][a-z0-9_.-]*$/);
@@ -74,6 +75,9 @@ export function settlementResourceYield(state: GameState, town: Settlement): Rec
     const resource = resourceById.get(state.resources.deposits[cell] ?? '');
     if (resource && land?.improvements[cell] === resource.improvementId) output[resource.id] = (output[resource.id] ?? 0) + resource.extraction;
   }
+  // Rules 23: a surveyed seam inside these borders is drawn like any other work.
+  const seams = settlementSiteYield(state, town.id);
+  if (seams) output[SITE_RESOURCE_ID] = (output[SITE_RESOURCE_ID] ?? 0) + seams;
   return output;
 }
 export function harvestSettlementResources(state: GameState, town: Settlement): void {

@@ -6,7 +6,7 @@ import { borderBattleCampaign } from '../../packages/test-fixtures/src/combat-fi
 import { characterBattleCampaign, CHARACTER_FIXTURE as C } from '../../packages/test-fixtures/src/character-fixture';
 import { conquestCampaign } from '../../packages/test-fixtures/src/conquest-fixture';
 import { navalCampaign, NAVAL_FIXTURE as N } from '../../packages/test-fixtures/src/naval-fixture';
-import { refreshAuthoredSight } from '../../packages/test-fixtures/src/authored-land';
+import { holdSurveyedSeam, refreshAuthoredSight } from '../../packages/test-fixtures/src/authored-land';
 import { closeCampaignOptions, closeManagement, openCampaignJournal, openRealmAffairs, openSelectedOrders, selectFromRegistry } from './ui-navigation';
 
 async function load(page: Page, game: GameState) {
@@ -139,6 +139,8 @@ test('paid personal Waykeeper and separate research enable actual ward and ember
   const game = characterBattleCampaign();
   game.factions[0]!.knowledge = 120;
   game.settlements[C.homeId]!.buildings.push('building.archive');
+  // Arcane Theory is studied from a seam the realm holds; surveying one has its own journey.
+  holdSurveyedSeam(game, game.turnOwnerId);
   await load(page, game);
   await selectFromRegistry(page, 'settlements', 'Ashen Hearth');
   await openSelectedOrders(page);

@@ -1,6 +1,7 @@
 import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, PROSPERITY_PROJECT, resourceById, type LandYield } from '@theandril/content';
 import type { GameCommand, Observation } from '@theandril/sim';
 import { landPlanningTowns } from './observation-options';
+import { claimArcaneSeam } from './arcane';
 
 const value = (yields: LandYield, needsFood: boolean): number => yields.food * (needsFood ? 5 : 2) + yields.industry * 3 + yields.coin + yields.knowledge * 2;
 
@@ -75,6 +76,8 @@ export function planLand(view: Observation, budget: number, plannedProduction: R
       commands.push({ type: 'improveTile', factionId: view.factionId, settlementId: town.id, cell: chosen.cell.cell, improvementId: chosen.option.improvementId });
       coinSpent = chosen.option.coinCost; reasons.push(`${town.name} improves worked land with ${chosen.option.name} for ${coinSpent} coin.`);
     } else {
+      const seam = claimArcaneSeam(view, budget);
+      if (seam) { commands.push(seam.command); reasons.push(seam.reason); coinSpent = seam.coinCost; continue; }
       const claim = land.cells.filter(cell => cell.claim.canStart && cell.claim.coinCost <= budget)
         .sort((a, b) => value(b.yields.total, needsFood) + materialDemand(b.resourceId) - value(a.yields.total, needsFood) - materialDemand(a.resourceId) || a.cell - b.cell)[0];
       const weakest = worked.length ? Math.min(...worked.map(cell => value(cell.yields.total, needsFood))) : 0;

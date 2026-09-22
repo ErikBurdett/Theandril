@@ -1,5 +1,21 @@
 # Theandril implementation status
 
+## Arcane seams — rules/save 23, 2026-09-22
+
+**The first half of M2.** The Ashfall left arcane seams under Ashfall-glass ground. Where a seam lies is derived from the world's seed like any other natural feature, so a save records only which realms have paid to survey them: a standard map hides fourteen seams among a hundred and sixty-two visible glass hexes, a tiny map three among twenty-three.
+
+**A paid search.** Any company may spend its movement and 24 coin to survey the ground it stands on, revealing seams within two hexes to that realm alone. An empty survey says so and still costs. A surveyed seam inside a realm's borders draws two ashglass a turn beside the hearth's ordinary yield and falls with that hearth.
+
+**Site-gated discovery.** Arcane Theory now needs a surveyed seam inside the realm's own borders, so magic begins with geography a realm must find, take and keep. Until this slice, ashglass — the one arcane-tagged resource — had no magical consumer at all.
+
+**AI and UI.** A realm holding no seam surveys its own hinterland from surplus at most once every six turns, prefers a surveyed seam when its borders grow, and never marches a surveying company away in the same turn. The selected company offers a survey with its price and its refusal reason; the Arcane Theory tab lists surveyed seams and whether each is held.
+
+**Save compatibility.** A genuine rules-22 save and its 1,993-order archive from deployed `6644f80` load, re-seal to identical v22 bytes, replay exactly, re-seal into a v23 envelope and continue. Content is unchanged; historical envelopes refuse arcane surveys.
+
+**Measured.** A standard twelve-realm campaign with eight city-states ends on turn 231; six realms surveyed and held a seam and one completed Arcane Theory through it.
+
+**Verification.** 1,810 tests pass; browser journeys pass, including a new survey journey.
+
 ## Campaign-safety scenarios re-run against the rules that ship — 2026-09-22
 
 **Why.** The campaign-safety findings were corrected and independently reviewed under rules 17. Rules 18-22 then changed campaign pacing, added the Unification victory, made sieges consume stored food, seated city-states and added client obligations, so M0 could not close until those scenarios were proved again under the rules that actually ship.

@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS } from '@theandril/content';
 import type { CommandResult, GameState } from './types';
 import { rulesVersion } from './rules';
+import { holdsArcaneSite } from './arcane-sites';
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 export const personalAptitudesSchema = z.record(id, z.number().int().min(1).max(3));
@@ -26,6 +27,8 @@ function researchObjection(state: GameState, factionId: string, discoveryId: str
   if (state.battle || state.pendingCapture || state.victory) return 'Resolve the current battle or capture before researching.';
   if (!Object.values(state.settlements).some(town => town.factionId === factionId && !town.occupationTurns && !state.sieges[town.id] && town.buildings.includes(definition.requiredBuildingId))) return 'An unoccupied, unbesieged Witness archive is required for Arcane Theory.';
   if (faction.knowledge < definition.knowledgeCost) return 'Not enough knowledge for this arcane discovery.';
+  // Rules 23: Arcane Theory is studied from a seam the realm actually holds.
+  if (rulesVersion(state) >= 23 && !holdsArcaneSite(state, factionId)) return 'Arcane Theory needs a surveyed arcane seam inside your own borders.';
   return null;
 }
 export function researchArcane(state: GameState, factionId: string, discoveryId: string): CommandResult {

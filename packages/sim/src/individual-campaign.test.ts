@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { ARCANE_DISCOVERIES, DEVELOPMENT_NODES } from '@theandril/content';
 import { characterBattleCampaign } from '../../test-fixtures/src/character-fixture';
 import { navalCampaign, NAVAL_FIXTURE } from '../../test-fixtures/src/naval-fixture';
-import { refreshAuthoredSight } from '../../test-fixtures/src/authored-land';
+import { refreshAuthoredSight, holdSurveyedSeam } from '../../test-fixtures/src/authored-land';
 import { applyCommand, deserializeGame, getBattleScene, getObservation, serializeGame, stateHash, type BattlePresentation, type GameCommand, type GameState } from './index';
 import { chooseBattleOrder } from './combat';
 import { battleDevelopmentEffects } from './combat/development-snapshot';
@@ -25,6 +25,8 @@ function casterCampaign() {
   issue(state, { type: 'queue', factionId: own, settlementId: hearth.id, itemId: 'building.archive' });
   for (let turn = 0; turn < 25 && !hearth.buildings.includes('building.archive'); turn++) issue(state, { type: 'endTurn', factionId: own });
   expect(hearth.buildings).toContain('building.archive');
+  // Arcane Theory is studied from a seam the realm holds; surveying is proved in arcane-sites.test.ts.
+  holdSurveyedSeam(state, own);
   const casterId = `character.${state.nextId}`;
   issue(state, { type: 'recruitCharacter', factionId: own, settlementId: hearth.id, definitionId: 'character.waykeeper' });
   issue(state, { type: 'assignCharacter', factionId: own, characterId: casterId, armyId: 'army.2' });
