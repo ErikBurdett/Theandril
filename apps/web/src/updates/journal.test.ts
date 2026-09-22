@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { Journal } from './Journal';
 import { dispatches } from './content';
 import { filterDispatches } from './journal';
+import { libraryRevision } from './library';
 
 describe('journal discovery', () => {
   it('renders the featured story checkpoint from its own revision as stories change', () => {
@@ -15,6 +16,8 @@ describe('journal discovery', () => {
         const markup = renderToStaticMarkup(createElement(Journal));
         const footnote = markup.match(/<p class="feature-footnote">(.*?)<\/p>/)?.[1];
         expect(footnote).toBe(`Source checkpoint ${sourceRevision.slice(0, 7)} · Not a 1.0 release.`);
+        expect(markup).toContain(`href="https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/IMPLEMENTATION_STATUS.md"`);
+        expect(markup).toContain(`href="https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/development/2026-09-21-epic-baseline/README.md"`);
       }
     } finally {
       dispatches[0] = original;

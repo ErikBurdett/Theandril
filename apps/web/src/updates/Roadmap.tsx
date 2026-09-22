@@ -82,7 +82,7 @@ export function Roadmap() {
         <div><dt><Status status="in-progress" /></dt><dd>Parts are playable or review is open. This describes partial completion, not a promise of daily activity.</dd></div>
         <div><dt><Status status="pending" /></dt><dd>The named system or final proof is still to be completed.</dd></div>
       </dl>
-      <p className="roadmap-snapshot">Reconciled <time dateTime={roadmapSnapshot.date}>12 September 2026</time> · Gameplay rules {roadmapSnapshot.rules} · <a href={evidenceUrl('docs/IMPLEMENTATION_STATUS.md', roadmapSnapshot.revision)}>Source snapshot {roadmapSnapshot.revision.slice(0, 7)}</a></p>
+      <p className="roadmap-snapshot">Reconciled <time dateTime={roadmapSnapshot.date}>{new Date(`${roadmapSnapshot.date}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time> · Gameplay rules {roadmapSnapshot.rules} · <a href={evidenceUrl('docs/IMPLEMENTATION_STATUS.md', roadmapSnapshot.revision)}>Source snapshot {roadmapSnapshot.revision.slice(0, 7)}</a></p>
       <p className="roadmap-counts">{counts.completed} completed checkpoints · {counts['in-progress']} in progress · {counts.pending} pending. These are roadmap item counts, not a percentage of the game.</p>
     </section>
 

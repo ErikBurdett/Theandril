@@ -3,9 +3,9 @@
 ## Identity
 
 - Stable entry slug: `campaign-foundation-and-development-order`.
-- Publication state: **draft**; not in the published dispatch catalogue.
+- Publication state: **reviewed and authorized for the development catalogue**; push and live readback pending. The public dispatch pins implementation checkpoint `1e41ec24965e46e8035c57b4f54632a690b8b712`.
 - Started: 2026-09-21.
-- Base revision: `f07024fe23ad3386874656d48fbbc33a5380d979`. The [roadmap-start checkpoint](../development/2026-09-21-roadmap-start/source-manifest.json), [historical continuation](../development/2026-09-21-campaign-continuation/source-manifest.json) and [current Epic baseline pass](../development/2026-09-21-epic-baseline/runner/source-manifest.json) retain separate working-source manifests; none is a published commit.
+- Base revision: `f07024fe23ad3386874656d48fbbc33a5380d979`. The [roadmap-start checkpoint](../development/2026-09-21-roadmap-start/source-manifest.json), [historical continuation](../development/2026-09-21-campaign-continuation/source-manifest.json) and [Epic baseline pass](../development/2026-09-21-epic-baseline/runner/source-manifest.json) retain their separate working-source manifests. Their reviewed final implementation is now committed in `1e41ec24965e46e8035c57b4f54632a690b8b712`.
 - Current campaign/save rules: **17**; content hash **`b79c78ed`**. No schema or content change.
 - Categories: AI, campaign verification, contributor roadmap.
 
@@ -135,4 +135,6 @@ The foundation work advances Gates A and C, with save/replay compatibility check
 
 ## Publication
 
-No publication requested or performed. Keep this packet outside the public dispatch catalogue until review and explicit publication authorization.
+The subsequent September 21 request to reconcile and deploy Theandril explicitly authorizes publication. Earlier no-publication statements in this packet describe its original local-development scope. The public entry uses the same slug, the committed implementation checkpoint and the exact two reviewed screenshots; it preserves all fifteen open gates and the failed Epic acceptance result. Its historical checkpoint measurements are not relabelled as fresh release results.
+
+Fresh release-candidate verification passes typecheck, lint, content/art validation, build and **27/27 production Pages checks**. The unchanged headless suite remains **1,858/1,859**, with Epic at **66.513 seconds against 60**. [Release evidence](../development/2026-09-21-release-reconciliation/README.md) and [independent publication review](../development/2026-09-21-release-reconciliation/journal-review.md) separate this publication work from gameplay and whole-release acceptance. Push and live deployment readback remain pending at this preparation checkpoint.

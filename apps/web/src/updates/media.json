@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "licenseNotes": "Original owned Theandril gameplay screenshots and previously reviewed Hearth & Card interface artwork. Original provider/service terms apply; no new generation or provider call. No third-party game artwork, font CDN, terminal image, or campaign trace is shipped.",
-  "review": "Inspected original source pixels before selecting these crops; derivative review findings retained in docs/development/dispatches/frontend-evidence/REPORT.md.",
+  "review": "Original four derivative reviews: docs/development/dispatches/frontend-evidence/REPORT.md. The two exact 21 September 2026 PNG captures were independently inspected in docs/development/2026-09-21-epic-baseline/review/final.md; publication layout is verified separately.",
   "assets": [
     {
       "id": "campaign",
@@ -98,6 +98,44 @@
       "height": 562,
       "alt": "A generated archipelago of pale coasts and scattered islands shown in the game\u2019s world overview.",
       "caption": "Slice-20 generated-world overview regression fixture, cropped to the islands. Illustrative geography, not the retained Standard/24 Long archive campaign."
+    },
+    {
+      "id": "technical-ledger",
+      "path": "updates/technical-ledger.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "1e41ec24965e46e8035c57b4f54632a690b8b712",
+      "sourcePath": "docs/development/2026-09-21-epic-baseline/screens/technical-ledger.png",
+      "sourceSha256": "bf6c0c3924d3aa25ab8f2c186e0aed97a852489355eb62f805067beeda3cb799",
+      "sourceWidth": 1440,
+      "sourceHeight": 1000,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact Playwright PNG bytes; no transform or re-encoding.",
+      "sha256": "bf6c0c3924d3aa25ab8f2c186e0aed97a852489355eb62f805067beeda3cb799",
+      "bytes": 505160,
+      "width": 1440,
+      "height": 1000,
+      "alt": "The campaign chronicle shows real accepted movement orders and the complete technical JSON download control.",
+      "caption": "21 September 2026 regression capture: generated Short AI-watch campaign, seed 20260905, after saved continuation and victory. Exact uncropped PNG; illustrates the existing record, not Epic timing acceptance."
+    },
+    {
+      "id": "transport-landing",
+      "path": "updates/transport-landing.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "1e41ec24965e46e8035c57b4f54632a690b8b712",
+      "sourcePath": "docs/development/2026-09-21-epic-baseline/screens/transport-landing-390.png",
+      "sourceSha256": "7dea9b20985e5f917910eb632281b2b796d11c7526c9d3f929e19c88f644f516",
+      "sourceWidth": 390,
+      "sourceHeight": 844,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact Playwright PNG bytes; no transform or re-encoding.",
+      "sha256": "7dea9b20985e5f917910eb632281b2b796d11c7526c9d3f929e19c88f644f516",
+      "bytes": 217703,
+      "width": 390,
+      "height": 844,
+      "alt": "A passenger aboard a transport can select a landing shore and disembark through the narrow selected-orders panel.",
+      "caption": "21 September 2026 authored naval regression at 390 \u00d7 844: paid Ocean navigation and a saved deep-ocean route, followed by ordinary human landing orders. Exact uncropped PNG; not an organic AI colony."
     }
   ],
   "sharedMaterials": [
@@ -138,5 +176,5 @@
       "caption": "Decorative interface material, not a depiction of canonical gameplay."
     }
   ],
-  "totalJournalImageBytes": 147904
+  "totalJournalImageBytes": 870767
 }

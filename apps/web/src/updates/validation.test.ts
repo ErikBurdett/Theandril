@@ -1,8 +1,8 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { expect, it } from 'vitest';
-import { dispatches, sourceRevision } from './content';
-import { library, scopeLedger } from './library';
+import { dispatches } from './content';
+import { library, libraryRevision, scopeLedger } from './library';
 import media from './media.json';
 import { evidenceUrl } from './journal';
 import type { Dispatch } from './types';
@@ -32,7 +32,7 @@ it('validates stable slugs and every image cross-reference in the public catalog
 function validateEvidence(stories: readonly Dispatch[]) {
   const references = [
     ...stories.flatMap(story => story.evidence.map(link => ({ path: link.path, revision: story.sourceRevision }))),
-    ...[...library, ...scopeLedger].map(link => ({ path: link.path, revision: sourceRevision })),
+    ...[...library, ...scopeLedger].map(link => ({ path: link.path, revision: libraryRevision })),
     ...media.assets.map(image => ({ path: image.sourcePath, revision: image.sourceRevision })),
   ];
   const sources = new Map(references.map(reference => [`${reference.revision}:${reference.path}`, reference]));

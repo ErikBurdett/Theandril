@@ -1,11 +1,14 @@
 import type { Evidence, ReleaseGate, RoadmapItem, RoadmapStage, ScopeEntry } from './types';
 
+/** Current reference/roadmap evidence; historical dispatches retain their own pins. */
+export const libraryRevision = '1e41ec24965e46e8035c57b4f54632a690b8b712';
+
 /** A selected decision/gate ledger, not a substitute for the complete DoD. */
 export const scopeLedger: ScopeEntry[] = [
   { id: 'accepted-scope', state: 'Accepted scope', title: 'The agreed game, not a moving finish line', description: 'The canonical scope still calls for long single-player campaigns, online human campaigns, deep progression, multiple victory paths and authored world content. No scope cuts or new gameplay obligations are adopted by these dispatches.', path: 'GAME_1_0_SCOPE.md' },
   { id: 'campaign-integrity', state: 'Current / partial', title: 'Gates E & F · Save integrity and combat', description: 'Rule 17 advances trained-battle saving, whole-army defending contingents and pending-assault validation. Storage durability has scoped approval. Whole-gate save, combat and release certification do not follow from these targeted fixes.', path: 'docs/development/post-fix-review/summary.json' },
   { id: 'playable-foundation', state: 'Current / partial', title: 'Gates B, F2 & J · A playable foundation', description: 'Twenty-four cultures, resource economies, development branches and individual soldier battles are playable. Waykeepers are a first paid caster role, not complete magic. Content depth, campaign counterplay and the full progression targets remain partial.', path: 'docs/IMPLEMENTATION_STATUS.md' },
-  { id: 'ai-integration', state: 'Open gate', title: 'Gate C & integration · Unresolved review work', description: 'The historical review left AI queued second-harbor funding and repeated founder geography/chart-scan findings open when further work lacked authorization. Local remediation is now authorized; fixes still need fresh verification and review. Overall integration is not approved.', path: 'docs/development/post-fix-review/summary.json' },
+  { id: 'ai-integration', state: 'Open gate', title: 'Gate C & integration · Remaining campaign proof', description: 'The queued second-harbor funding and repeated founder geography findings now have independently reviewed corrections. Movement, observation and record work preserve their verified outputs. The latest local full headless run remains 1,857/1,858: Epic takes 64.779 seconds against 60. M0 and overall integration remain open.', path: 'docs/development/2026-09-21-epic-baseline/README.md' },
   { id: 'scale-browsers', state: 'Open gate', title: 'Gates D, K & L · Scale and browser confidence', description: 'Storage publication performs O(prefix bytes) reads; queued-GC proof scans the store. Large-store GC, sustained memory, real quota/process-kill durability and cross-browser certification still need separate evidence. A still image is not a frame-time result.', path: 'docs/development/review-fix-2/persistence-REPORT.md' },
   { id: 'proposed-followups', state: 'Proposal / deferred', title: 'Suggested follow-ups, not new release promises', description: 'Promoting the temporary storage probes to permanent regressions and separately profiling large-store GC are review suggestions. They require a bounded work packet and acceptance criteria. This journal does not authorize blocked probes or turn every suggestion into scope.', path: 'docs/development/post-fix-review/persistence.verdict.json' },
   { id: 'not-this-update', state: 'Not this update', title: 'Gate M, full magic and a 1.0 announcement', description: 'No online multiplayer service, complete magic system, new art production or overall 1.0 signoff is delivered here. Online play and full magical depth remain accepted release scope—not silently deferred out of 1.0. This journal adds a review surface, not those game systems.', path: 'DEFINITION_OF_DONE.md' },
@@ -16,7 +19,7 @@ export const library: Evidence[] = [
   { label: 'Implementation status', path: 'docs/IMPLEMENTATION_STATUS.md', note: 'Implemented, partial, blocked and historical work. The source of truth behind the headlines.' },
   { label: 'Agreed 1.0 scope', path: 'GAME_1_0_SCOPE.md', note: 'The accepted game and content targets. A feature only counts when it is integrated.' },
   { label: 'Definition of done', path: 'DEFINITION_OF_DONE.md', note: 'Named release gates, required evidence and the final signoff contract.' },
-  { label: 'Development workflow', path: 'docs/1.0-DEVELOPMENT.md', note: 'Canonical development workflow; the current local version adds ordered, dependency-based milestones for the existing scope.' },
+  { label: 'Development workflow', path: 'docs/1.0-DEVELOPMENT.md', note: 'Canonical M0–M10 development sequence, with dependencies and acceptance for the existing scope.' },
   { label: 'World & faction bible', path: 'docs/lore/FACTION_BIBLE.md', note: 'Twenty-four societies, disputed history and the boundary between lore and runtime.' },
   { label: 'Art status & provenance', path: 'docs/art/ART_IMPLEMENTATION_STATUS.md', note: 'Reviewed pixels, real bindings, animation scope and unresolved production limits.' },
   { label: 'Campaign-safety architecture', path: 'docs/architecture/0037-campaign-safety.md', note: 'Canonical ownership, morale correction, reserves and historical compatibility.' },
@@ -26,7 +29,7 @@ export const library: Evidence[] = [
  * The snapshot pins evidence for delivered checkpoints, not verification of the
  * remaining development plan. Reconcile it when new reviewed evidence is committed;
  * preserve historical dispatch claims and do not link uncommitted evidence. */
-export const roadmapSnapshot = { date: '2026-09-12', revision: 'fcae402da6c290b93a9a6933510c74538477ad04', rules: 17 };
+export const roadmapSnapshot = { date: '2026-09-21', revision: libraryRevision, rules: 17 };
 
 export const roadmapStages: RoadmapStage[] = [
   { id: 'foundations', title: 'Playable foundations delivered', description: 'Checked items are bounded, implemented checkpoints. Their wider 1.0 systems still have work below.' },
@@ -35,10 +38,11 @@ export const roadmapStages: RoadmapStage[] = [
   { id: 'release-proof', title: 'Prove the release together', description: 'Verify the final integrated revision. Earlier successful checkpoints and deployment do not clear these gates.' },
 ];
 
-const statusEvidence: Evidence = { label: 'Implementation status', path: 'docs/IMPLEMENTATION_STATUS.md', note: 'Rule-17 review, earlier playable slices and known gaps at the pinned evidence snapshot. Historical test totals remain separate.' };
+const statusEvidence: Evidence = { label: 'Implementation status', path: 'docs/IMPLEMENTATION_STATUS.md', note: 'Reviewed campaign foundations, earlier playable slices and known gaps at the pinned evidence snapshot. Historical test totals remain separate.' };
 const scopeEvidence: Evidence = { label: 'Accepted 1.0 scope', path: 'GAME_1_0_SCOPE.md', note: 'The agreed gameplay and content targets; no scope cut is made by this roadmap.' };
 const gateEvidence: Evidence = { label: 'Release acceptance criteria', path: 'DEFINITION_OF_DONE.md', note: 'The full objective gate, including integration, AI, saving and verification requirements.' };
 const reviewEvidence: Evidence = { label: 'Independent review reconciliation', path: 'docs/development/post-fix-review/summary.json', note: 'Scoped backend, storage and UI approvals; overall integration and release remain unapproved.' };
+const campaignEvidence: Evidence = { label: 'Campaign foundation verification', path: 'docs/development/2026-09-21-epic-baseline/README.md', note: 'Latest local 1,857/1,858 headless result, scoped 25/25 gameplay and 27/27 Pages checks, unchanged rules and independent bounded reviews.' };
 
 export const roadmapItems: RoadmapItem[] = [
   {
@@ -79,10 +83,10 @@ export const roadmapItems: RoadmapItem[] = [
   },
   {
     id: 'campaign-safety-review', stage: 'current-work', status: 'in-progress', title: 'Close the remaining campaign-safety review',
-    summary: 'Backend, storage and narrow UI fixes have scoped independent approval. The latest integration review still has open AI findings.',
-    delivered: ['Rule 17 repairs capped training morale, trained-battle saves and defending frontage without rewriting historical rule-16 campaigns.', 'Pending-assault validation and the original storage durability findings have independently reviewed corrections.'],
-    remaining: ['Resolve and independently review queued second-harbor funding and repeated founder geography/chart-scan work, preserving observation filtering and deterministic planning.', 'Diagnose the hosted Epic archive, Standard/24 contact, Huge/32 contact and Epic seed-74 timeouts without weakening assertions or inflating budgets.', 'Rerun integrated acceptance checks at the resulting source revision; retain earlier blocked or failed evidence accurately.'],
-    gates: ['A', 'C', 'E', 'F'], evidence: [reviewEvidence, statusEvidence],
+    summary: 'The original naval findings now have reviewed corrections. Epic archive timing remains the sole failure in the latest local full headless run; M0 is still in progress.',
+    delivered: ['Rule 17 repairs capped training morale, trained-battle saves and defending frontage without rewriting historical rule-16 campaigns.', 'Pending-assault validation and the original storage durability findings have independently reviewed corrections.', 'Queued second-harbor funding and shared founder geography now have ordinary-command regressions and independent review.', 'Movement, observation, save ordering, technical formatting and lazy naval preparation preserve their captured outputs; rules/save remain 17.'],
+    remaining: ['Resolve Epic archive runtime under the unchanged 60-second gate; the latest local default run takes 64.779 seconds. Worker-cap diagnostics did not clear it and were not adopted.', 'Verify the resulting revision in hosted integration, including the historical contact and pacing failures, without weakening activity, assertions or budgets.', 'Retain exact source-linked results and historical failures; scoped review and deployment do not complete M0.'],
+    gates: ['A', 'C', 'E', 'F'], evidence: [campaignEvidence, reviewEvidence, statusEvidence],
   },
   {
     id: 'victory-and-pacing', stage: 'current-work', status: 'in-progress', title: 'Give long campaigns several ways to end',
@@ -174,9 +178,9 @@ export const roadmapItems: RoadmapItem[] = [
   {
     id: 'integrated-campaign-proof', stage: 'release-proof', status: 'in-progress', title: 'Verify the complete campaign on one release candidate',
     summary: 'Scoped tests and reviewed checkpoints are retained. There is no overall integrated 1.0 acceptance report.',
-    delivered: ['Headless campaigns, battle-boundary saves, history replay and targeted production journeys have checkpoint-specific evidence.'],
+    delivered: ['Headless campaigns, battle-boundary saves, history replay and targeted production journeys have checkpoint-specific evidence.', 'The 21 September checkpoint passes 25 affected Chromium gameplay scenarios and 27 production Pages scenarios; its full headless run remains 1,857/1,858 with Epic timing open.'],
     remaining: ['Run install, typecheck, lint, unit/property checks, content/art validation, production and server builds from a clean checkout.', 'Complete human and automated journeys through every intended victory path, AI long soaks and final save/combat/diplomacy/conquest acceptance.', 'Record failures and non-overlapping results against one exact candidate revision.'],
-    gates: ['A', 'B', 'C', 'E', 'F', 'F2', 'G', 'H'], evidence: [reviewEvidence, gateEvidence],
+    gates: ['A', 'B', 'C', 'E', 'F', 'F2', 'G', 'H'], evidence: [campaignEvidence, reviewEvidence, gateEvidence],
   },
   {
     id: 'browser-certification', stage: 'release-proof', status: 'pending', title: 'Certify the supported browsers and accessibility',

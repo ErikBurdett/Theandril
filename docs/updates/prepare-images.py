@@ -1,9 +1,10 @@
-"""Reproduce journal crops from retained owned pixels, without providers.
+"""Reproduce journal crops and exact PNG copies from owned pixels, without providers.
 Run from the repository root with Pillow installed. No sibling writes.
 """
 from pathlib import Path
 from hashlib import sha256
 import json
+from shutil import copyfile
 from PIL import Image, __version__
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -23,6 +24,14 @@ SOURCES = [
      'A generated archipelago of pale coasts and scattered islands shown in the game’s world overview.',
      'Slice-20 generated-world overview regression fixture, cropped to the islands. Illustrative geography, not the retained Standard/24 Long archive campaign.'),
 ]
+PNG_SOURCES = [
+    ('technical-ledger', 'docs/development/2026-09-21-epic-baseline/screens/technical-ledger.png',
+     'The campaign chronicle shows real accepted movement orders and the complete technical JSON download control.',
+     '21 September 2026 regression capture: generated Short AI-watch campaign, seed 20260905, after saved continuation and victory. Exact uncropped PNG; illustrates the existing record, not Epic timing acceptance.'),
+    ('transport-landing', 'docs/development/2026-09-21-epic-baseline/screens/transport-landing-390.png',
+     'A passenger aboard a transport can select a landing shore and disembark through the narrow selected-orders panel.',
+     '21 September 2026 authored naval regression at 390 × 844: paid Ocean navigation and a saved deep-ocean route, followed by ordinary human landing orders. Exact uncropped PNG; not an organic AI colony.'),
+]
 
 def digest(path):
     return sha256(path.read_bytes()).hexdigest()
@@ -40,6 +49,16 @@ for id_, source, crop, alt, caption in SOURCES:
         crop=list(crop) if crop else None, resize=None, encoding=f'Pillow {__version__}, WebP lossless, method=6; RGB',
         sha256=digest(output), bytes=output.stat().st_size, width=image.width, height=image.height, alt=alt, caption=caption))
 
+for id_, source, alt, caption in PNG_SOURCES:
+    original = Image.open(ROOT / source)
+    output = OUT / f'{id_}.png'
+    copyfile(ROOT / source, output)
+    assets.append(dict(id=id_, path=f'updates/{id_}.png', sourceRepository='ErikBurdett/Theandril',
+        sourceRevision='1e41ec24965e46e8035c57b4f54632a690b8b712', sourcePath=source,
+        sourceSha256=digest(ROOT / source), sourceWidth=original.width, sourceHeight=original.height,
+        crop=None, resize=None, encoding='Exact Playwright PNG bytes; no transform or re-encoding.',
+        sha256=digest(output), bytes=output.stat().st_size, width=original.width, height=original.height, alt=alt, caption=caption))
+
 materials = []
 for id_ in ['wood', 'parchment', 'ornament.corner-idle']:
     path = f'ui/hearth-card/{id_}.webp'
@@ -49,7 +68,7 @@ for id_ in ['wood', 'parchment', 'ornament.corner-idle']:
         width=image.width, height=image.height, transform='None; reuse existing reviewed Hearth & Card derivative by URL. No duplicate texture.',
         alt='', caption='Decorative interface material, not a depiction of canonical gameplay.'))
 manifest = dict(schemaVersion=1, licenseNotes='Original owned Theandril gameplay screenshots and previously reviewed Hearth & Card interface artwork. Original provider/service terms apply; no new generation or provider call. No third-party game artwork, font CDN, terminal image, or campaign trace is shipped.',
-    review='Inspected original source pixels before selecting these crops; derivative review findings retained in docs/development/dispatches/frontend-evidence/REPORT.md.', assets=assets, sharedMaterials=materials,
+    review='Original four derivative reviews: docs/development/dispatches/frontend-evidence/REPORT.md. The two exact 21 September 2026 PNG captures were independently inspected in docs/development/2026-09-21-epic-baseline/review/final.md; publication layout is verified separately.', assets=assets, sharedMaterials=materials,
     totalJournalImageBytes=sum(asset['bytes'] for asset in assets))
 payload = json.dumps(manifest, indent=2) + '\n'
 (OUT / 'provenance.json').write_text(payload)

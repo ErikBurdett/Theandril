@@ -37,7 +37,10 @@ describe('the source-backed roadmap contract', () => {
     }
     expect(roadmapItems.find(item => item.id === 'online-campaigns')?.status).toBe('pending');
     expect(roadmapItems.find(item => item.id === 'research-and-magic')?.status).toBe('in-progress');
-    expect(roadmapItems.find(item => item.id === 'campaign-safety-review')?.remaining.join(' ')).toContain('second-harbor');
+    const campaign = roadmapItems.find(item => item.id === 'campaign-safety-review')!;
+    expect(campaign.delivered.join(' ')).toContain('second-harbor');
+    expect(campaign.remaining.join(' ')).toContain('64.779 seconds');
+    expect(campaign.status).toBe('in-progress');
   });
 
   it('resolves every evidence file at the declared immutable source snapshot', () => {

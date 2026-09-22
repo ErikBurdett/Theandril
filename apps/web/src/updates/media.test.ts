@@ -8,10 +8,10 @@ it('ships only traceable local imagery under a three MiB journal budget', () => 
   const root = resolve('apps/web/public');
   const manifestPath = resolve(root, 'updates/provenance.json');
   const assets: Asset[] = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')).assets : [];
-  expect(assets.map(asset => asset.id)).toEqual(['campaign', 'battle', 'cultures', 'archipelago']);
+  expect(assets.map(asset => asset.id)).toEqual(['campaign', 'battle', 'cultures', 'archipelago', 'technical-ledger', 'transport-landing']);
   let bytes = 0;
   for (const asset of assets) {
-    expect(asset.path).toMatch(/^updates\/[a-z-]+\.webp$/);
+    expect(asset.path).toMatch(/^updates\/[a-z-]+\.(webp|png)$/);
     const data = readFileSync(resolve(root, asset.path));
     bytes += data.length;
     if (asset.crop) {

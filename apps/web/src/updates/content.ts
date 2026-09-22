@@ -5,6 +5,52 @@ export const sourceRevision = '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef';
 export const repository = 'https://github.com/ErikBurdett/Theandril';
 const entries: Dispatch[] = [
   {
+    publication: 'published', sourceRevision: '1e41ec24965e46e8035c57b4f54632a690b8b712', sequence: 4,
+    id: 'campaign-foundation-and-development-order', edition: '04', title: 'A funded expedition and a practical route to 1.0',
+    subtitle: '21 September 2026 · Campaign foundations & the next playable systems',
+    summary: 'An island realm now counts the harbor it has already paid for. Fleet planning, explored land and campaign records take less repeated work, while the remaining Epic timing failure stays visible.',
+    topic: 'Engineering', tags: ['AI', 'Naval expeditions', 'Performance', 'Records', 'Roadmap'],
+    status: 'Reviewed checkpoint', checkpoint: 'Campaign foundation · rules 17', image: 'technical-ledger',
+    takeaways: ['A paid second harbor counts toward the two-outlet commitment limit, even while construction is queued.', 'Routes, observations, save bytes and recorded decisions retain their verified results through the reviewed optimizations.', 'M0 and all fifteen whole release gates remain open. Client contracts and unification are next systems to develop, not features in this checkpoint.'],
+    sections: [
+      { id: 'fund-the-expedition', title: 'Spend on the expedition already under way', paragraphs: [
+        'An isolated realm could pay for an unnecessary third harbor while its second was still being built. The naval planner now counts paid queued construction toward its two-outlet commitment limit. Ordinary payment, blocked scout funding and a saved caravan journey through arrival and founding have explicit regression coverage.',
+        'Waiting founders also shared a chart but repeatedly rebuilt its geography. Selection now precedes shared assessment. Later work delays shoreline, home-land and navigation preparation until a plan actually uses it. Complete captured naval plans retain the same orders, reasons, held armies and expenditure. These corrections close the two original naval review findings; they do not certify every strategic AI behavior.',
+        'The narrow image shows an authored human-command regression: after paid Ocean navigation and a saved deep-ocean journey, the passenger can select a legal shore and disembark. The test verifies its formations and saves again. It is not an organically planned AI colony.',
+      ], image: 'transport-landing' },
+      { id: 'same-journey', title: 'Keep the journey, remove repeated work', paragraphs: [
+        'Movement searches skip edges that cannot improve a route, reuse local neighbor storage and omit unused predecessor maps in range searches. Fleet planning asks for a destination preview without publishing an unused reachable overlay. The preliminary search and shared 4,096-node budget remain intact; map controls still receive their complete movement results.',
+        'Explored-land observations avoid temporary object copies, while eligible unordered explored-cell lists use native unsigned sorting for saves. Captured complete observations preserve optional fields, fog memory and historical rules. Callers still cannot mutate the campaign through a returned observation. An authored eight-turn paid voyage retains all 22 accepted commands, save mirrors and final hash fa29672f.',
+      ] },
+      { id: 'keep-the-record', title: 'Keep every order and the same saved history', paragraphs: [
+        'Replay compares ordinary event and battle JSON trees directly instead of encoding both trees for each comparison. Technical records use direct sorted formatting without an intermediate parse and copy. Complete comparisons, corruption rejection and exact technical-export bytes remain covered. Current campaign rules and save version stay at 17; content remains b79c78ed. There is no migration.',
+        'The ledger image comes from the generated Short AI-watch campaign with seed 20260905 after saved continuation and victory. It displays actual accepted orders and the complete JSON download control. The screenshot illustrates the existing record; it is not a new UI feature or proof that Epic archives meet their timing budget.',
+        'Measurements have different boundaries. A prior generated Epic before/after sample retained 22,914 commands, 249 battles and final hash 1e4534db while campaign time changed from 32.443 to 27.161 seconds. Later query and detached-plan gains were modest or mixed. These local samples do not establish a universal whole-campaign speedup.',
+      ] },
+      { id: 'checked-and-open', title: 'What passed, and what still fails', paragraphs: [
+        'The final 21 September local checkpoint passed typecheck, lint, content and art validation, the production build, 25 affected Chromium gameplay scenarios and 27 production Pages scenarios. Those browser counts are scoped journeys, not complete gameplay or cross-browser certification. Independent reviews found no blocking issue in the bounded changes and their factual and visual account.',
+        'The unchanged default headless run passed 1,857 of 1,858 tests across 220 of 221 files. Epic archive verification remained the sole failure at 64.779 seconds against its 60-second limit. Eight-worker and four-worker diagnostics also failed that limit; neither cap was adopted. No assertion, timeout, historical seal, activity requirement or rendering budget was relaxed. These are retained checkpoint executions, not a claim about subsequent hosted CI.',
+        'Broader hash caching, alternate hash kernels and a different pathfinding heap were investigated and rejected. A validation wrapper changed rejection formatting and was rejected too. None ships in the runtime. Browser compendium captures now write to current test output so later runs preserve historical review images.',
+      ] },
+      { id: 'development-order', title: 'A concrete order for the remaining game', paragraphs: [
+        'The existing roadmap now orders the accepted work into M0–M10, with dependencies, owners, playable outcomes and acceptance. No gameplay scope is added or cut. M0 remains in progress, and all fifteen whole release gates remain open. Deployment makes a development checkpoint available; it does not turn that checkpoint into Theandril 1.0.',
+        'First resolve the actual Epic archive runtime under the existing gate. Then M1 connects client-state diplomacy to a distinct, contestable unification victory. A genuine pre-change rules-17 treaty and pending-offer archive, plus interface handoffs, prepare compatibility work. Client contracts, tribute and unification are not implemented here.',
+        'M2 follows with a complete magical-site, qualified-caster and counterplay loop; M3 adds practical empire delegation and coordinated orders. Supply and trade, independent powers and politics, epochs, deeper progression, authored breadth, online campaigns and integrated release proof follow the same canonical plan. Contributors should start from the linked development workflow and preserve simulation ownership in packages/sim.',
+      ] },
+    ],
+    evidence: [
+      { label: 'Campaign foundation work packet', path: 'docs/updates/campaign-foundation-work-packet.md', note: 'Full three-pass account and imagery, retained at its pre-publication reviewed checkpoint.' },
+      { label: 'Paid harbor and founder corrections', path: 'docs/development/2026-09-21-roadmap-start/naval/README.md', note: 'Original naval findings, ordinary-command regressions and bounded geography measurements.' },
+      { label: 'First campaign and replay measurements', path: 'docs/development/2026-09-21-roadmap-start/performance/README.md', note: 'Generated Epic sample and comparison-only timings, with their separate limits.' },
+      { label: 'Observation, save and preview continuation', path: 'docs/development/2026-09-21-campaign-continuation/README.md', note: 'Exact-output evidence, paid-voyage checks and rejected hash-cache investigation.' },
+      { label: 'Current checkpoint checks and limits', path: 'docs/development/2026-09-21-epic-baseline/README.md', note: '1,857/1,858 headless, scoped browser passes, movement/naval measurements and unsuccessful worker-cap diagnostics.' },
+      { label: 'Independent factual and visual review', path: 'docs/development/2026-09-21-epic-baseline/review/final.md', note: 'Exact source/image readback and bounded approval; Epic, M0 and all release gates remain open.' },
+      { label: 'Current image provenance', path: 'docs/development/2026-09-21-epic-baseline/screens/provenance.json', note: 'Exact original Playwright PNGs, capture contexts, dimensions and hashes.' },
+      { label: 'Development sequence and acceptance', path: 'docs/1.0-DEVELOPMENT.md', note: 'The existing canonical M0–M10 plan, not a second roadmap or a release promise.' },
+      { label: 'Implementation status', path: 'docs/IMPLEMENTATION_STATUS.md', note: 'Delivered, partial and historical systems at this exact checkpoint.' },
+    ],
+  },
+  {
     publication: 'published', sourceRevision, sequence: 3,
     id: 'r17-campaign-safety', edition: '01', title: 'A campaign worth keeping',
     subtitle: 'Rule 17 · Save integrity, contested battles & the work still open',
