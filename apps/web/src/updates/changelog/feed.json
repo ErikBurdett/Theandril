@@ -1,5 +1,96 @@
 [
   {
+    "sha": "4699d6095a96b02b60647865f455b719ce735dca",
+    "shortSha": "4699d60",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T15:13:42-05:00",
+    "subject": "feat: client states and negotiated unification (rules/save 22)",
+    "body": "A realm may now take another realm as its client: a subsidy paid on\nacceptance, tribute every turn for an agreed term, and no war between patron\nand client while the oath holds. The client keeps its own hearths, armies and\norders — patronage is an obligation between realms, not a conquest. Every\nterm is disclosed before consent, and an offer that can no longer be funded\nsays so rather than failing on acceptance.\n\nA patron may release a client. A client may renounce: lawfully once the term\nhas run, or as a breach that ends the binding peace between them and is\nremembered as a grievance. A client that cannot pay for three turns running\nfalls out of its obligation. Patronage may not chain, cycle, duplicate or\ncross an active war.\n\nA client's hearths stand behind its patron's unification bid, so the second\nvictory path is now reachable through diplomacy as well as conquest, and the\nVictory tab separates hearths held from hearths pledged. The AI courts weaker\nneighbours — city-states first — at most once every ten turns, weighs an offer\nagainst its own hearths, income and wars, and never plans a war on its own\npatron or client.\n\nPatronage keeps patrons and clients out of each other's wars, which lengthened\nthe longest campaigns, so Long is now 32,000 and Epic 36,000: a standard\ntwelve-realm map ends on turn 205, 283 and 342 for Standard, Long and Epic.\nThe rules-21 pack is frozen as f70d99d5; a genuine rules-21 save and its\n2,037-order archive from cce82cf load, re-seal to identical bytes, replay\nexactly and continue.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 23,
+    "insertions": 628,
+    "deletions": 56,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "packages/ai"
+    ],
+    "notes": "## Oaths between realms\n\nA realm can now take another realm as its client. The patron pays a subsidy when the oath is accepted; the client pays tribute every turn for an agreed term, keeps its own hearths, armies and orders, and neither realm may make war on the other while the obligation holds. Every term — what is paid now, what is owed each turn, how long it binds, and what it forbids — is stated before either side consents.\n\nThe oath can end three ways. A patron may release its client at any time. A client may walk away lawfully once the term has run. Or it may renounce early, which is a breach: the binding peace between the two realms ends and the broken word is remembered.\n\nThis changes how a campaign can be won. A client's hearths stand behind its patron's unification bid, so the second victory path is now open to diplomacy as well as conquest — and city-states, who have no wars of their own to fight, make willing clients. Rival realms court them, and the Victory tab shows how many hearths are your own and how many were pledged to you.\n\nBecause patrons and clients keep out of each other's wars, campaigns ran longer than intended, so the two longest paces are re-priced from measured games. Saved campaigns from the previous rules load unchanged and replay exactly."
+  },
+  {
+    "sha": "1114c6ba0ef702292a960e6f7d3c0747a2a45227",
+    "shortSha": "1114c6b",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T14:29:39-05:00",
+    "subject": "docs: bring the published roadmap up to rules 21",
+    "body": "The catalogue now records what rules 18-21 delivered: seven map types, the\nUnification victory, measured campaign lengths and twenty-four city-states,\nwhich moves independent powers from pending to in progress. The Epic archive\nruntime claim is replaced by the work that remains - re-running the retained\ncampaign-safety scenarios against rules 21.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 14,
+    "deletions": 13,
+    "areas": [
+      "apps/web"
+    ]
+  },
+  {
+    "sha": "cce82cfd66b96154b82186ee2f241d6c83f42b59",
+    "shortSha": "cce82cf",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T14:06:18-05:00",
+    "subject": "test: name the map-type control in the production smoke journey",
+    "body": "The setup control was renamed from World layout to Map type when generator 8\nadded Civilization-style map types; the built-bundle smoke test still looked\nfor the old label.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 1,
+    "insertions": 1,
+    "deletions": 1,
+    "areas": [
+      "tests/production"
+    ]
+  },
+  {
+    "sha": "45dcf6a32e624544e987462ba5ad48a7cd87ced8",
+    "shortSha": "45dcf6a",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T14:00:35-05:00",
+    "subject": "docs: record the browser journey results for rules 21",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 2,
+    "deletions": 2,
+    "areas": [
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development"
+    ]
+  },
+  {
+    "sha": "53014423513df5c1f3f5a6051de7b9c52e7d900c",
+    "shortSha": "5301442",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T14:00:27-05:00",
+    "subject": "test: follow rules-21 border growth in the city journeys",
+    "body": "Boundaries now grow in a handful of turns, so the city-growth journey derives\nits pre-expansion checkpoint from the observation instead of a fixed turn\ncount and meter, and the mature hearth fixture settles at 39 claims.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 15,
+    "deletions": 9,
+    "areas": [
+      "tests/gameplay"
+    ]
+  },
+  {
+    "sha": "90af55092a4ed904ca79eefc4f0d205a33ea66d4",
+    "shortSha": "90af550",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T13:50:58-05:00",
+    "subject": "docs: publish a journal note for the city-state release",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 230,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "7f5ac01a02c13d5cfaae3b016a97157b56bc0f3b",
     "shortSha": "7f5ac01",
     "author": "ErikBurdett",
