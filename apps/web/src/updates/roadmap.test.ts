@@ -39,7 +39,7 @@ describe('the source-backed roadmap contract', () => {
     expect(roadmapItems.find(item => item.id === 'research-and-magic')?.status).toBe('in-progress');
     const campaign = roadmapItems.find(item => item.id === 'campaign-safety-review')!;
     expect(campaign.delivered.join(' ')).toContain('second-harbor');
-    expect(campaign.remaining.join(' ')).toContain('64.779 seconds');
+    expect(campaign.remaining.join(' ')).toContain('rules 21');
     expect(campaign.status).toBe('in-progress');
   });
 

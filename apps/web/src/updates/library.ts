@@ -29,7 +29,7 @@ export const library: Evidence[] = [
  * The snapshot pins evidence for delivered checkpoints, not verification of the
  * remaining development plan. Reconcile it when new reviewed evidence is committed;
  * preserve historical dispatch claims and do not link uncommitted evidence. */
-export const roadmapSnapshot = { date: '2026-09-21', revision: libraryRevision, rules: 17 };
+export const roadmapSnapshot = { date: '2026-09-22', revision: 'cce82cfd66b96154b82186ee2f241d6c83f42b59', rules: 21 };
 
 export const roadmapStages: RoadmapStage[] = [
   { id: 'foundations', title: 'Playable foundations delivered', description: 'Checked items are bounded, implemented checkpoints. Their wider 1.0 systems still have work below.' },
@@ -48,7 +48,7 @@ export const roadmapItems: RoadmapItem[] = [
   {
     id: 'world-and-exploration', stage: 'foundations', status: 'completed', title: 'Seeded worlds, exploration and saved journeys',
     summary: 'Generate a world, explore through fog, inspect the map and give an army a paid route that survives saving.',
-    delivered: ['Seeded giant maps include continents, islands, biomes, shallow shelves, deep ocean and remembered geography.', 'Reachable-hex movement, explicit attacks, waypoints and saved interruptions use canonical commands; map search, lenses and the overview expose permitted information.'],
+    delivered: ['Seeded maps include continents, islands, biomes, shallow shelves, deep ocean and remembered geography.', 'Seven chosen map types — continents, pangaea, fractal, islands, archipelago, earthlike and inland sea — generate at Civilization-scale dimensions with recommended realm counts per size.', 'Reachable-hex movement, explicit attacks, waypoints and saved interruptions use canonical commands; map search, lenses and the overview expose permitted information.'],
     remaining: [], gates: ['B', 'D'], evidence: [statusEvidence],
   },
   {
@@ -83,16 +83,16 @@ export const roadmapItems: RoadmapItem[] = [
   },
   {
     id: 'campaign-safety-review', stage: 'current-work', status: 'in-progress', title: 'Close the remaining campaign-safety review',
-    summary: 'The original naval findings now have reviewed corrections. Epic archive timing remains the sole failure in the latest local full headless run; M0 is still in progress.',
-    delivered: ['Rule 17 repairs capped training morale, trained-battle saves and defending frontage without rewriting historical rule-16 campaigns.', 'Pending-assault validation and the original storage durability findings have independently reviewed corrections.', 'Queued second-harbor funding and shared founder geography now have ordinary-command regressions and independent review.', 'Movement, observation, save ordering, technical formatting and lazy naval preparation preserve their captured outputs; rules/save remain 17.'],
-    remaining: ['Resolve Epic archive runtime under the unchanged 60-second gate; the latest local default run takes 64.779 seconds. Worker-cap diagnostics did not clear it and were not adopted.', 'Verify the resulting revision in hosted integration, including the historical contact and pacing failures, without weakening activity, assertions or budgets.', 'Retain exact source-linked results and historical failures; scoped review and deployment do not complete M0.'],
+    summary: 'The original naval findings have reviewed corrections and the Epic archive runtime no longer fails the suite. M0 is still in progress: the reviewed scenarios predate rules 18–21.',
+    delivered: ['Rule 17 repairs capped training morale, trained-battle saves and defending frontage without rewriting historical rule-16 campaigns.', 'Pending-assault validation and the original storage durability findings have independently reviewed corrections.', 'Queued second-harbor funding and shared founder geography now have ordinary-command regressions and independent review.', 'Movement, observation, save ordering, technical formatting and lazy naval preparation preserve their captured outputs.', 'Exact engine work removed the Epic archive runtime failure; the whole local suite of 1,798 unit, campaign and repository tests now passes, and continuous integration verifies the build while those suites and the 182 browser journeys run locally.'],
+    remaining: ['Re-run the retained campaign-safety scenarios against rules 21; the reviewed corrections predate Civilization-scale pacing, the unification victory, food-based sieges and city-states.', 'Close the remaining AI findings with ordinary-command regressions rather than fixtures that grant state.', 'Retain exact source-linked results and historical failures; scoped review and deployment do not complete M0.'],
     gates: ['A', 'C', 'E', 'F'], evidence: [campaignEvidence, reviewEvidence, statusEvidence],
   },
   {
     id: 'victory-and-pacing', stage: 'current-work', status: 'in-progress', title: 'Give long campaigns several ways to end',
-    summary: 'Prosperity victory and complete AI chronicles are playable. A long funding profile alone does not establish strategic variety.',
-    delivered: ['One Prosperity victory path has human controls, AI pursuit, long-campaign fixtures and saved technical/history records.'],
-    remaining: ['First implement contestable unification through conquest and client-state diplomacy; losing holdings or political support must interrupt visible progress.', 'After the complete magic loop, implement distinct arcane mastery and meet at least three tested victory paths. All intended paths need real human controls, AI pursuit and specific counterplay.', 'Prove engaging representative long campaigns and disclosed difficulty behavior; resolve sparse-contact and Epic timing checks without treating funding waits as depth.'],
+    summary: 'Prosperity and Unification are playable victory paths and campaigns end at a measured Civilization-like length. Two paths are not yet the intended strategic variety.',
+    delivered: ['One Prosperity victory path has human controls, AI pursuit, long-campaign fixtures and saved technical/history records.', 'A public, contestable Unification bid wins by holding two thirds of the world’s hearths and its host capital through the pace’s response window; losing either ends the bid, and rivals see it on the public ledger.', 'Campaign length is measured rather than asserted: a standard map with twelve realms and eight city-states ends on turn 199, 303 and 447 at Standard, Long and Epic pace.'],
+    remaining: ['Extend unification with client-state diplomacy so political support, not only held hearths, can interrupt visible progress.', 'After the complete magic loop, implement distinct arcane mastery and meet at least three tested victory paths. All intended paths need real human controls, AI pursuit and specific counterplay.', 'Prove engaging representative long campaigns and disclosed difficulty behavior without treating funding waits as depth.'],
     gates: ['B', 'C'], evidence: [statusEvidence, gateEvidence],
   },
   {
@@ -133,7 +133,7 @@ export const roadmapItems: RoadmapItem[] = [
   {
     id: 'content-and-art', stage: 'current-work', status: 'in-progress', title: 'Meet the full authored content and art targets',
     summary: 'Twenty-four cultures, thirteen shared formation types, resource works and individual battle animations are implemented. Culture skins are not extra unit definitions.',
-    delivered: ['Reviewed culture kits, civic/improvement art, seventy-two culture-specific hulls and thirteen animated battlefield roles have real consumers.'],
+    delivered: ['Reviewed culture kits, civic/improvement art, seventy-two culture-specific hulls and thirteen animated battlefield roles have real consumers.', 'The published lore library carries a twenty-four entry city-state register beside the faction bible; those powers reuse approved culture art under their own banner colour rather than claiming unmade assets.'],
     remaining: ['Deepen all twenty-four major factions and fill the forty-eight-plus independent/template roster. Meet every quantitative target in GAME_1_0_SCOPE.md with implemented units, traits, resources, progression, relics, landmarks, events and notable characters or a demonstrably non-filler documented equivalent.', 'Build discoveries, ruins, lairs and faction interactions alongside their real consumers; complete required faction/action/directional animation, terrain variants and readable dense/narrow battle presentation.', 'Validate IDs, localization, prerequisites, release assets and provenance; retain counted manifests, original sources and inspected runtime evidence. Finish reference/onboarding and roster-wide balance without counting skins as units.'],
     gates: ['J', 'N'], evidence: [statusEvidence, scopeEvidence, { label: 'Art implementation and review', path: 'docs/art/ART_IMPLEMENTATION_STATUS.md', note: 'Real runtime bindings, reviewed assets and unfinished animation/presentation coverage.' }],
   },
@@ -164,9 +164,10 @@ export const roadmapItems: RoadmapItem[] = [
     gates: ['B', 'C', 'J'], evidence: [statusEvidence, scopeEvidence],
   },
   {
-    id: 'independent-powers', stage: 'missing-systems', status: 'pending', title: 'Populate the world with independent powers',
-    summary: 'Repeated major-faction seats do not satisfy the independent-power roster or its distinct gameplay.',
-    delivered: [], remaining: ['Build on clients and trade to author at least forty-eight minor powers/templates or a demonstrably varied equivalent.', 'Implement free cities, clans, pirates, mercenaries, monster/cult enclaves, nomads and trade communities with distinct relations, contracts, recruitment/trade and client outcomes.', 'Verify nonviolent and hostile human/AI interactions, saved actor evolution and fog-safe observation; repeated major seats do not satisfy this roster.'],
+    id: 'independent-powers', stage: 'missing-systems', status: 'in-progress', title: 'Populate the world with independent powers',
+    summary: 'Twenty-four city-states are authored and playable neighbours. The wider roster and its distinct contracts and relations are not built, and repeated major-faction seats do not satisfy them.',
+    delivered: ['Twenty-four chartered city-states, each with its own name, banner colour, motto and published history, seat beside the realms; they keep one hearth, open no war and pursue no victory, but build, defend, hold territory and answer peace offers through the ordinary commands.', 'City-states borrow an existing culture\u2019s art and unit roster under their own colour, and repeated culture seats take their own epithet and colour, so a crowded map never shows two identical banners.'],
+    remaining: ['Build on clients and trade to author at least forty-eight minor powers/templates or a demonstrably varied equivalent.', 'Implement clans, pirates, mercenaries, monster/cult enclaves, nomads and trade communities with distinct relations, contracts, recruitment/trade and client outcomes; city-states currently differ only in name, colour and their single hearth.', 'Verify nonviolent and hostile human/AI interactions, saved actor evolution and fog-safe observation; repeated major seats do not satisfy this roster.'],
     gates: ['B', 'C', 'J'], evidence: [statusEvidence, scopeEvidence],
   },
   {
