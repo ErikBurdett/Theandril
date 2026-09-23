@@ -1,5 +1,39 @@
 [
   {
+    "sha": "9e9d64fda5e5cd31b811450b8726b615d221cc9b",
+    "shortSha": "9e9d64f",
+    "author": "ErikBurdett",
+    "date": "2026-09-23T00:34:46-05:00",
+    "subject": "feat: supply lines (rules/save 27)",
+    "body": "Distance cost nothing. An army twelve hexes inside an enemy realm fought as well\nas one standing in its capital, rested as well, and could stay forever. Nothing\nmade a deep invasion harder than a shallow one.\n\nEvery hearth now feeds the ground around it: four hexes over open country, twice\nas far along a built road. Supply is derived from the map every time it is asked,\nso nothing is stored and the save shape is unchanged. An enemy company standing\non a hex stops supply passing through it, a foreign hearth blocks it, and a\nhearth under siege feeds nobody - so raiding a supply line is now a real thing to\ndo, and taking a border town is what lets an invasion continue.\n\nEach turn outside supply a company loses four strength, down to a fifth of its\nfull strength and no further, and recovers morale and fatigue at a third of the\nordinary rate: it falls behind a fed enemy rather than collapsing. Supply is the\nprice of massing a force, never a tax on exploring - a force of fewer than three\ncompanies forages for itself, as does any expedition carrying a caravan, as does\nevery army of a realm that holds no hearth, which is every realm's opening.\n\nTwo first-cut rules were wrong and the campaign suite caught both. Attrition from\ntwo companies starved colonising expeditions, so the AI founded one town instead\nof many. Suppressing recovery entirely drove an unsupplied army's morale to one,\nso attacks failed and no realm reached a victory inside its pacing window.\n\nRules 27 changes behaviour, not state or content, so the seal stays 015468d1. A\ngenuine rules-26 campaign and its archive from bb6fa8d load at turn 61, re-seal\nto identical v26 bytes, replay exactly, round trip through a v27 envelope and\ncontinue ten more turns.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 19,
+    "insertions": 391,
+    "deletions": 17,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "packages/chronicle"
+    ],
+    "notes": "## Distance finally costs something\n\nAn army twelve hexes inside someone else's realm used to fight exactly as well as one standing in its own capital. It rested as well, it recovered as fast, and it could stay there forever. Nothing in the game made a deep invasion harder than a shallow one.\n\nHearths now feed the ground around them — four hexes over open country, and twice as far along a road you have built. That is your supply, and it moves with your hearths rather than your borders. Roads are no longer only about marching speed; they are how a realm reaches.\n\nIt can be cut. An enemy company standing on a hex stops supply passing through it. A hearth under siege feeds nobody at all. So there is now something to do with a fast company besides fight: get behind an enemy army and sit on the road it is eating from.\n\nA force left outside supply loses four strength a turn — down to a fifth of its full strength, never further — and rests badly, recovering morale and fatigue at a third of the usual rate. It does not collapse. It simply falls behind an enemy that is being fed, which is what eventually decides the fight.\n\nNone of this is a tax on exploring. A force of fewer than three companies forages for itself, so scouts and raiding parties go where they like. So does any expedition carrying a caravan, so settling is never punished. And a realm that holds no hearth at all — every realm on turn one — has no line to cut in the first place.\n\nThe shape this gives a war is the point. You cannot simply march to someone's capital any more. You take the border hearth first, because a captured hearth feeds *you*, and then the next one. Your selected force will tell you which hearth is feeding it, or what standing outside is costing it, and anything starving is called out in the end-of-turn list under its own heading."
+  },
+  {
+    "sha": "bb6fa8d50b3dcb2731eaab55c9ec24f49fd8bb05",
+    "shortSha": "bb6fa8d",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T23:36:16-05:00",
+    "subject": "docs: publish a journal note for grouped attention",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 43,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "075c2d22a9fc186276ef7b8effecf7e424b43797",
     "shortSha": "075c2d2",
     "author": "ErikBurdett",
