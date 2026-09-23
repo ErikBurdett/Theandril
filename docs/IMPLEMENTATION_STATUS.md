@@ -1,5 +1,13 @@
 # Theandril implementation status
 
+## The budget the planner offered twice — 2026-09-23
+
+**The fix.** A turn's plan pays for an arcane survey, a supply depot and a patronage subsidy before it works out the budget for everything else, and that budget was computed from the treasury without subtracting any of them - so the planner could commit coin it had already spent and the simulation refused the order. The survey has leaked twenty-four coin a turn since rules 23 and the depot forty since rules 28; neither surfaced until a change moved campaign trajectories.
+
+**Fleet provisions, built and reverted.** Fleets are supplied wherever they are. The intended fix - a fleet works a fixed number of turns beyond its realm's reach, then wastes until it returns inside a harbour's supply - was built, tested and measured, then reverted: the headline twelve-realm campaign ran 427 turns at eight provision turns and 412 at sixteen, against a 350-400 target and 388 without it. Provisioning lengthens campaigns because naval invasions fail, and they fail largely because the AI does not plan around fleet supply at all. Shipping it needs either AI naval staging measured back into band, or a deliberate Epic re-price with the current pace pack frozen.
+
+**Measured.** The headline campaign measures 388 turns with the budget fix, unchanged and inside the target. No rules, save or content change; the seal stays `015468d1`.
+
 ## Harbours carry supply over water — rules/save 30, 2026-09-23
 
 **The reach.** A hearth with a harbour carries its supply line out over the water - the same budget, the same road bonus, the same enemies cutting it - so a fleet or a landing near a friendly coast is fed without building a post. An ordinary hearth still stops at the shore and a depot is still a land post, so harbours gain a second reason to exist beyond launching hulls.

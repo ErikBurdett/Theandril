@@ -125,7 +125,12 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     const offset = items.length ? ((view.turn - 1) * stride) % items.length : 0;
     return [...items.slice(offset), ...items.slice(0, offset)];
   };
-  let budget = Math.max(0, view.treasury - advancement.coinSpent - advancement.reserve - foundingReserve - expeditionSavings);
+  // Every order already placed this pass has spent real coin: the survey, the
+  // depot and a patronage subsidy all pay before the rest of the turn is planned,
+  // and the budget below must not offer that coin a second time.
+  const committed = (survey ? view.arcaneSearchCoinCost : 0) + (depot ? view.depotCoinCost : 0)
+    + (patronage?.commands ?? []).reduce((sum, command) => sum + (command.type === 'proposeClient' ? command.terms.giftCoin : 0), 0);
+  let budget = Math.max(0, view.treasury - advancement.coinSpent - advancement.reserve - foundingReserve - expeditionSavings - committed);
   // Protect the next expansion caravan and one basic building before optional appointments.
   const production = new Map(view.productionOptions.map(option => [option.settlementId + ':' + option.itemId, option.canQueue]));
   const canQueue = (settlementId: string, itemId: string): boolean => production.get(settlementId + ':' + itemId) === true;
