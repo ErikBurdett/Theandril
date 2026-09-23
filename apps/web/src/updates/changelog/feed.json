@@ -1,5 +1,38 @@
 [
   {
+    "sha": "eb9cd0426131f0904bfd5812eb313f8a7078f890",
+    "shortSha": "eb9cd04",
+    "author": "ErikBurdett",
+    "date": "2026-09-23T02:32:19-05:00",
+    "subject": "feat: let the AI raid a supply line",
+    "body": "Rules 28 made a depot destructible by any enemy company that walks onto it and\nrules 29 taught the AI to build them, but nothing taught it to take one. A human\ncould strand an AI army by slipping a company behind it and sitting on the post\nit was eating from, while the AI marched past an undefended depot without\nnoticing - so the most interesting thing supply added was something only one side\ncould do.\n\nA military company scoring a destination now counts a hostile depot within three\nhexes among its objectives, weighted below the ordinary approach to an enemy\nforce. It takes a post that lies on its way and never marches for one.\n\nThe first cut looked eight hexes out and weighted a depot at four times the pull\nof an enemy army. It worked and it was wrong: the headline twelve-realm campaign\nran 446 turns against a 350-400 target, with three hundred depots razed, because\narmies chased supply posts instead of fighting and both sides spent the campaign\nrebuilding. Narrowing it to three hexes at a weight below the approach put that\ncampaign back at 389 turns - one turn off the 388 it ran without raiding at all -\nwhile still razing two hundred and thirty-eight depots.\n\nNo rules, save or content change: the depot, its destruction and its reach were\nall built in rules 28, and this is the AI client learning to use them. The seal\nstays 015468d1.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 5,
+    "insertions": 55,
+    "deletions": 4,
+    "areas": [
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "packages/ai"
+    ],
+    "notes": "## They will cut your line too\n\nSupply posts have been destructible since they arrived: walk a company onto an enemy depot and it comes down at the end of the turn. Until now only you were doing it. Rival realms would build depots to keep their own armies fed, then march straight past yours without a glance, which made the sharpest thing about supply something only one side ever used.\n\nThey notice now. A rival company with fighting on its mind will take a depot that lies on its path, and an army of yours that was being fed by that post is suddenly wasting away in open country wondering what happened.\n\nIt is deliberately a small appetite. A depot has to be close — within three hexes — and it never outranks an enemy army standing in front of them. They will take what is on the way; they will not abandon a battle to chase a supply post across the map.\n\nThat restraint took a measurement to find. The first version of this had rival armies ranging eight hexes for a depot and valuing it above the enemy in front of them, and it turned wars into a stalemate of mutual demolition — campaigns ran a fifth longer while both sides rebuilt the same posts. Pulled back to something opportunistic, the raiding still happens constantly and the war still ends when it should."
+  },
+  {
+    "sha": "8bcc714db9fccf2aeed0c4734a017b88826cd1f4",
+    "shortSha": "8bcc714",
+    "author": "ErikBurdett",
+    "date": "2026-09-23T01:52:12-05:00",
+    "subject": "docs: publish a journal note for supply visibility and AI supply",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 43,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "756dd5280212e3175be0969e19ea05e832973132",
     "shortSha": "756dd52",
     "author": "ErikBurdett",
