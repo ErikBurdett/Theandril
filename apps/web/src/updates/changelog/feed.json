@@ -1,5 +1,39 @@
 [
   {
+    "sha": "6648b2f12ff930561d6eed2a8e6fe76da62984b5",
+    "shortSha": "6648b2f",
+    "author": "ErikBurdett",
+    "date": "2026-09-23T00:59:13-05:00",
+    "subject": "feat: supply depots (rules/save 28)",
+    "body": "Supply followed hearths, and hearths came from founding or conquest. A realm\ncould reach further by building a road, but only across ground it already held,\nand an army put ashore overseas had no way to be fed short of founding a town.\nThe one lever the system offered - take the next hearth - was the same lever the\nsystem was meant to make expensive.\n\nA company now spends its movement and forty coin to raise a depot where it\nstands. The depot feeds two hexes of open country around it, or four along a\nroad: half a hearth's reach, seeded into the same search. It costs two coin a\nturn, charged with every other obligation, so a network of them is a real line in\nthe budget rather than a free map. Depots of one realm keep three hexes between\nthem and a realm may hold thirty-two, so reach is a network of posts rather than\na carpet. And any enemy company that walks onto a depot razes it at the end of\nthe turn, telling both realms - so a supply network is now a thing to raid and a\nthing to defend.\n\nRefusals are plain, and the panel gives them in the same order the rules do: an\nembarked army, a spent company, an empty purse, a hearth already on that ground,\na depot already there, a neighbour's claim, then the spacing rule.\n\nRules 28 adds state, not content, so the seal stays 015468d1. A genuine rules-27\ncampaign and its archive from b840150 load at turn 61, re-seal to identical v27\nbytes, replay exactly, round trip through a v28 envelope and continue ten more\nturns.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 17,
+    "insertions": 348,
+    "deletions": 32,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "packages/chronicle"
+    ],
+    "notes": "## Somewhere to put the stores\n\nSupply follows your hearths, which meant that until now the only way to reach further was to take someone else's — the very thing supply was supposed to make expensive. March an army into open country, or put one ashore on a coast you do not own, and there was nothing you could do about it except found a town.\n\nNow a company can stop and raise a depot where it stands. Forty coin and the rest of its movement, and the ground two hexes around it is fed — four hexes along a road. That is half of what a hearth reaches, which is enough to carry an advance forward one bound at a time, and not enough to make distance stop mattering.\n\nThey are not free to keep. Each one draws two coin a turn alongside every other obligation, so a long chain of them is a real decision about what else you are not buying. They also stand apart — three hexes between any two of yours, thirty-two at most — so what you build is a line of posts rather than a blanket.\n\nAnd they can be taken from you. Any enemy company that walks onto a depot pulls it down at the end of the turn, and both sides hear about it. A raiding party that slips behind your army and sits on the post it is eating from now does something that a battle cannot: it does not beat your army, it strands it.\n\nSo there are two ways to sustain a war now, and they cost different things. Take the next hearth, and it feeds you as it fed its old owner. Or build your own line forward, pay for it every turn, and keep something behind you worth guarding."
+  },
+  {
+    "sha": "b8401501ceee50e700c83f7fdf438bfbec2a461b",
+    "shortSha": "b840150",
+    "author": "ErikBurdett",
+    "date": "2026-09-23T00:34:50-05:00",
+    "subject": "docs: publish a journal note for supply lines",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 47,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "9e9d64fda5e5cd31b811450b8726b615d221cc9b",
     "shortSha": "9e9d64f",
     "author": "ErikBurdett",
