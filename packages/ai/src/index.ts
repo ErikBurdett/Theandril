@@ -2,6 +2,7 @@ import { BUILDINGS, UNITS } from '@theandril/content';
 import { hexDistance, neighbors } from '@theandril/mapgen';
 import { MAX_ARMY_FORMATIONS, foundingCoinCost, getMovementQuery, planDevelopment, type GameCommand, type Observation } from '@theandril/sim';
 import { answerPatronage, proposePatronage, planDiplomacy, protectedFactions, type AiPlan } from './diplomacy';
+import { planDepot } from './supply';
 import { planArcaneSurvey } from './arcane';
 import { planConquestDecision } from './conquest';
 import { planProgression } from './progression';
@@ -71,9 +72,13 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   const survey = planArcaneSurvey(view);
   // A surveying company spends its movement on the ground it stands on, so nothing
   // later in this pass may march it away.
-  const surveying = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
-  const plans: GameCommand[] = [...advancement.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? [])];
-  const reasons: string[] = [...advancement.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? [])];
+  // Rules 28: a force wasting outside supply raises a depot under itself instead.
+  // It never takes a company the survey has already spent this turn.
+  const surveyed = new Set((survey?.commands ?? []).flatMap(command => command.type === 'searchArcane' ? [command.armyId] : []));
+  const depot = planDepot(view, surveyed);
+  const surveying = new Set([...surveyed, ...(depot?.commands ?? []).flatMap(command => command.type === 'buildDepot' ? [command.armyId] : [])]);
+  const plans: GameCommand[] = [...advancement.commands, ...(patronage?.commands ?? []), ...(survey?.commands ?? []), ...(depot?.commands ?? [])];
+  const reasons: string[] = [...advancement.reasons, ...(patronage?.reasons ?? []), ...(survey?.reasons ?? []), ...(depot?.reasons ?? [])];
   if (expeditionSavings > 0) reasons.push(`Retain ${expeditionSavings} coin toward a caravan, its ${view.growth!.founding.coinCost}-coin founding fee and the next hearth’s running costs; fund basic buildings while saving.`);
   const market = view.resources?.marketSettlementIds[0];
   const surplus = market ? view.resources?.stockpiles.filter(stock => stock.amount > 12).sort((a, b) => b.salePrice * (b.amount - 6) - a.salePrice * (a.amount - 6) || (a.resourceId < b.resourceId ? -1 : a.resourceId > b.resourceId ? 1 : 0))[0] : undefined;

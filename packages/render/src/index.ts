@@ -47,7 +47,7 @@ export interface RenderMetrics {
   renderer: 'webgl'; frameCount: number; frameMs: number; frameP95Ms: number;
   renderCpuMs: number; visibleCells: number; visibleChunks: number;
   cachedChunks: number; chunkRebuilds: number; visibleEntities: number; zoom: number;
-  highlightedCells: number; routeCells: number; previewCells: number;
+  highlightedCells: number; suppliedCells: number; routeCells: number; previewCells: number;
   atlasPages: number; residentAtlasBytesEstimate: number; artLoadMs: number; artFirstRenderCpuMs: number;
   visibleSprites: number; terrainSpriteCells: number; pooledSprites: number;
   stackBadges: number; pooledStackBadges: number;
@@ -91,6 +91,7 @@ export class WorldRenderer {
   private labels = new Container();
   private selection = new Graphics();
   private movementRange = new Graphics();
+  private supplyRange = new Graphics();
   private plannedRoute = new Graphics();
   private routePreview = new Graphics();
   private cellData = new Map<number, Cell>();
@@ -135,7 +136,7 @@ export class WorldRenderer {
   private visibleArtWarnings: string[] = [];
   private visibleTileFootprints: TileFootprint[] = [];
   private reducedMotion = false;
-  private metrics: RenderMetrics = { renderer: 'webgl', frameCount: 0, frameMs: 0, frameP95Ms: 0, renderCpuMs: 0, visibleCells: 0, visibleChunks: 0, cachedChunks: 0, chunkRebuilds: 0, visibleEntities: 0, zoom: 1, highlightedCells: 0, routeCells: 0, previewCells: 0, atlasPages: 0, residentAtlasBytesEstimate: 0, artLoadMs: 0, artFirstRenderCpuMs: -1, visibleSprites: 0, terrainSpriteCells: 0, pooledSprites: 0, stackBadges: 0, pooledStackBadges: 0, territoryEdges: 0, improvementProps: 0, riverSegments: 0, roadSegments: 0, districtStreetSegments: 0, overview: false, overviewTextureBytes: 0, rangePerimeterEdges: 0, visibleLabels: 0, selectedCells: 0, hoveredCells: 0, maxCachedChunkWidth: 0, maxCachedChunkHeight: 0, cachedTextureBytesEstimate: 0 };
+  private metrics: RenderMetrics = { renderer: 'webgl', frameCount: 0, frameMs: 0, frameP95Ms: 0, renderCpuMs: 0, visibleCells: 0, visibleChunks: 0, cachedChunks: 0, chunkRebuilds: 0, visibleEntities: 0, zoom: 1, highlightedCells: 0, suppliedCells: 0, routeCells: 0, previewCells: 0, atlasPages: 0, residentAtlasBytesEstimate: 0, artLoadMs: 0, artFirstRenderCpuMs: -1, visibleSprites: 0, terrainSpriteCells: 0, pooledSprites: 0, stackBadges: 0, pooledStackBadges: 0, territoryEdges: 0, improvementProps: 0, riverSegments: 0, roadSegments: 0, districtStreetSegments: 0, overview: false, overviewTextureBytes: 0, rangePerimeterEdges: 0, visibleLabels: 0, selectedCells: 0, hoveredCells: 0, maxCachedChunkWidth: 0, maxCachedChunkHeight: 0, cachedTextureBytesEstimate: 0 };
 
   constructor(private readonly onArtStatus?: (status: ArtStatus) => void, private readonly resolveArtUrl?: (url: string) => string) {}
 
@@ -145,7 +146,7 @@ export class WorldRenderer {
     if (this.disposed) { this.app.destroy({ removeView: true, releaseGlobalResources: true }, { children: true }); return; }
     host.appendChild(this.app.canvas);
     this.app.canvas.setAttribute('aria-hidden', 'true');
-    this.world.addChild(this.terrain, this.animatedProps, this.movementRange, this.figureGround, this.figures, this.plannedRoute, this.routePreview, this.markers, this.assetSelection.container, this.labels, this.selection);
+    this.world.addChild(this.terrain, this.animatedProps, this.supplyRange, this.movementRange, this.figureGround, this.figures, this.plannedRoute, this.routePreview, this.markers, this.assetSelection.container, this.labels, this.selection);
     this.app.stage.addChild(this.world, this.battlefield.container);
     this.battlefield.resize(this.app.screen.width, this.app.screen.height);
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -337,6 +338,19 @@ export class WorldRenderer {
       for (const angle of hexPerimeterAngles(cell, this.observation.width, this.observation.height, id => reachable.has(id))) {
         this.edge(this.movementRange, x, y, angle).stroke({ color: 0xa8cabe, width: 1.6, alpha: .75 });
         this.metrics.rangePerimeterEdges++;
+      }
+    }
+  }
+  /** The ground a realm can feed, drawn under everything else so orders stay legible. */
+  setSupplyRange(cells: readonly number[]): void {
+    this.supplyRange.clear(); this.metrics.suppliedCells = cells.length;
+    if (!this.observation) return;
+    const fed = new Set(cells.filter(cell => this.cellData.has(cell)));
+    for (const cell of fed) {
+      const [x, y] = this.center(cell);
+      this.hex(this.supplyRange, x, y).fill({ color: 0xd8c27a, alpha: .07 });
+      for (const angle of hexPerimeterAngles(cell, this.observation.width, this.observation.height, id => fed.has(id))) {
+        this.edge(this.supplyRange, x, y, angle).stroke({ color: 0xd8c27a, width: 1.2, alpha: .5 });
       }
     }
   }
@@ -685,7 +699,7 @@ export class WorldRenderer {
   private refreshViewport(): void {
     if (!this.observation) return;
     this.metrics.overview = this.overviewActive;
-    for (const layer of [this.terrain, this.animatedProps, this.figureGround, this.figures, this.markers, this.labels, this.assetSelection.container, this.movementRange, this.plannedRoute, this.routePreview]) layer.visible = !this.overviewActive;
+    for (const layer of [this.terrain, this.animatedProps, this.figureGround, this.figures, this.markers, this.labels, this.assetSelection.container, this.supplyRange, this.movementRange, this.plannedRoute, this.routePreview]) layer.visible = !this.overviewActive;
     if (this.overviewSprite) this.overviewSprite.visible = this.overviewActive;
     if (this.overviewActive) { this.refreshOverview(); return; }
     const zoom = this.world.scale.x, width = this.observation.width, height = this.observation.height;

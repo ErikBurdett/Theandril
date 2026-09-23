@@ -1,5 +1,17 @@
 # Theandril implementation status
 
+## Seeing supply, playing supply, and what pacing measures — rules/save 29, 2026-09-23
+
+**The overlay.** The ground a realm's hearths and depots can feed is drawn under everything else on the map, on by default and switchable from the map guide. `Observation.suppliedCells` carries the same search that already answers every army's supply status, computed once per observation.
+
+**Abandoning.** Rules 28 let a realm create an upkeep obligation it could not end short of an enemy taking it. A realm may now pull down its own depot from the company standing on it.
+
+**The AI plays supply.** A realm at war whose force is wasting outside supply raises a depot under it - one a turn, out of surplus, under the largest suffering force, never in peacetime. Measuring what happened rather than pass/fail found three real planner defects, each of which would have shipped: it ignored foreign land claims, it took a company the arcane survey had already spent, and it ignored the thirty-two-depot cap. All three are the same class of mistake - planning from one snapshot without reconciling against the rules or its own earlier orders.
+
+**What pacing measures.** Two earlier reverts concluded that AI supply awareness shifts campaign length out of band. That was wrong: the pacing tests play a four-realm tiny map, while the 350-400 target describes a standard map with twelve realms. Measured under rules 29 with the AI playing supply and no content change: the headline epic campaign runs 388 turns, inside the target, at the unchanged Epic price; the tiny proxies run 201 (standard), 290 (long) and 296/464 (epic, two seeds). Sweeping the Epic price to 44,000 and 52,000 overshot the headline to 411 and 440, so the content pack is untouched and the proxy bounds are re-derived from measurement and labelled as proxies.
+
+**Save compatibility.** Rules 29 adds one order and no content: the seal stays `015468d1`. A genuine rules-28 campaign and its archive from deployed `e8cb13e` load at turn 61, re-seal to identical v28 bytes, replay exactly, round trip through a v29 envelope and continue.
+
 ## Supply depots — rules/save 28, 2026-09-23
 
 **The build.** A company spends its movement and forty coin to raise a depot where it stands. The depot feeds two hexes of open country around it, or four along a road - half a hearth's reach, seeded into the same search - so a realm can extend supply by building rather than only by conquering, including after a landing overseas.

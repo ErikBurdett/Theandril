@@ -219,6 +219,7 @@ export type GameCommand =
   | { type: 'setPosting'; factionId: string; armyId: string; cell: number; mode: PostingMode | 'none' }
   | { type: 'setMuster'; factionId: string; settlementId: string; cell: number | null }
   | { type: 'buildDepot'; factionId: string; armyId: string }
+  | { type: 'abandonDepot'; factionId: string; cell: number }
   | { type: 'declareWar'; factionId: string; targetFactionId: string }
   | { type: 'attack'; factionId: string; armyId: string; targetArmyId: string }
   | { type: 'battleOrder'; factionId: string; order: BattleOrder }
@@ -302,6 +303,8 @@ export interface Observation {
   musters: Muster[];
   /** Rules 27: whether each of the realm's own armies is fed, and by which hearth. */
   supply: ArmySupply[];
+  /** Every hex this realm can feed, so the map can show its own supply. */
+  suppliedCells: number[];
   depots: Depot[];
   depotCoinCost: number;
   characters: CharacterView[];

@@ -19,8 +19,8 @@ import { armyCanFound, effectiveArmyMovement, armySight, armyUpkeep, createArmyF
 import { armyTerrainBlocker, carriedArmyBlocker, disembarkArmy, embarkArmy, moveFleetCargo, navalLaunchCell, observeProductionOptions, productionRequirementBlocker } from './naval';
 import { advanceCharters, charterCommandSchemas, observeCharters, setCharter } from './charters';
 import { advancePostings, musterNewArmy, observePostings, postingCommandSchemas, setMuster, setPosting } from './postings';
-import { advanceSupply, observeSupply, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MORALE_RECOVERY } from './supply';
-import { advanceDepots, buildDepot, depotCommandSchemas, DEPOT_COIN, depotUpkeep } from './depots';
+import { advanceSupply, observeSupply, suppliedCells, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MORALE_RECOVERY } from './supply';
+import { abandonDepot, advanceDepots, buildDepot, depotAbandonSchemas, depotCommandSchemas, DEPOT_COIN, depotUpkeep } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './rules';
 import { factionStarts } from './faction-starts';
 import { MAX_EVENTS, MAX_FACTIONS } from './save';
@@ -103,9 +103,11 @@ export { MAX_EVENTS };
  * posting and muster point; historical rules never accept them. */
 const version25CommandSchema = z.discriminatedUnion('type', [...version23CommandSchema.options, ...charterCommandSchemas]);
 const version26CommandSchema = z.discriminatedUnion('type', [...version25CommandSchema.options, ...postingCommandSchemas]);
-/** Rules 28 adds the built depot; historical rules never accept it. */
-export const commandSchema = z.discriminatedUnion('type', [...version26CommandSchema.options, ...depotCommandSchemas]);
-export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : commandSchema;
+/** Rules 28 adds the built depot and rules 29 the order to pull one down;
+ * historical rules never accept either. */
+const version28CommandSchema = z.discriminatedUnion('type', [...version26CommandSchema.options, ...depotCommandSchemas]);
+export const commandSchema = z.discriminatedUnion('type', [...version28CommandSchema.options, ...depotAbandonSchemas]);
+export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : version < 28 ? version26CommandSchema : version < 29 ? version28CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
 export function initializeLegacyLand(state: GameState): void {
@@ -142,7 +144,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28)]).default(28),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29)]).default(29),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -509,8 +511,8 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     const result = setCharter(state, faction.id, command.settlementId, command.focus, command.ceiling);
     if (!result.ok) return result;
     emitted.push(...result.events);
-  } else if (command.type === 'buildDepot') {
-    const result = buildDepot(state, faction.id, command.armyId);
+  } else if (command.type === 'buildDepot' || command.type === 'abandonDepot') {
+    const result = command.type === 'buildDepot' ? buildDepot(state, faction.id, command.armyId) : abandonDepot(state, faction.id, command.cell);
     if (!result.ok) return result;
     emitted.push(...result.events);
   } else if (command.type === 'setPosting' || command.type === 'setMuster') {
@@ -613,6 +615,8 @@ export function getObservation(state: GameState, factionId: string, options: Obs
   if (!faction) throw new Error('Unknown observation faction');
   const visible = indexes(state).visible.get(factionId) ?? new Map<number, number>();
   const modern = rulesVersion(state) >= 16, world = state.world, knownLand = state.land.known[factionId], knownRoads = state.roads.known[factionId];
+  // Computed once: the same reach answers every army's supply and draws the map.
+  const supplyReach = suppliedCells(state, factionId);
   const compareId = (a: { id: string }, b: { id: string }): number => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
   const armies = Object.values(state.armies).filter(army => army.factionId === factionId || !state.transports[army.id] && visible.has(army.cell)).sort(compareId);
   const settlements = Object.values(state.settlements).filter(settlement => settlement.factionId === factionId || visible.has(settlement.cell)).sort(compareId);
@@ -647,7 +651,8 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     charters: observeCharters(state, factionId),
     postings: observePostings(state, factionId),
     musters: state.musters.filter(muster => muster.factionId === factionId),
-    supply: observeSupply(state, factionId),
+    supply: observeSupply(state, factionId, supplyReach),
+    suppliedCells: [...supplyReach.keys()].sort((a, b) => a - b),
     depots: state.depots.filter(depot => depot.factionId === factionId || indexes(state).visible.get(factionId)?.has(depot.cell)),
     depotCoinCost: rulesVersion(state) >= 28 ? DEPOT_COIN : 0,
     ...getCharacterObservation(state, factionId), commanderAbilities: observeCommanderAbilities(state, factionId),

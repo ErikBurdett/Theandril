@@ -28,6 +28,10 @@ export const depotStateSchema = z.array(depotSchema).max(MAX_DEPOTS);
 export const depotCommandSchemas = [
   z.object({ type: z.literal('buildDepot'), factionId: id, armyId: id }).strict(),
 ] as const;
+/** Rules 29: a realm may pull down its own depot and stop paying for it. */
+export const depotAbandonSchemas = [
+  z.object({ type: z.literal('abandonDepot'), factionId: id, cell }).strict(),
+] as const;
 
 const fail = (error: string): CommandResult => ({ ok: false, error, events: [] });
 const byCell = (a: Depot, b: Depot): number => a.cell - b.cell;
@@ -66,6 +70,15 @@ export function buildDepot(state: GameState, factionId: string, armyId: string):
   state.depots.sort(byCell);
   return { ok: true, events: [{ turn: state.turn, factionId, type: 'depot_built', cell: army.cell,
     message: `${army.name} raised a depot for ${DEPOT_COIN} coin. It feeds the ground around it and costs ${DEPOT_UPKEEP} coin a turn.` }] };
+}
+
+export function abandonDepot(state: GameState, factionId: string, target: number): CommandResult {
+  if (rulesVersion(state) < 29) return fail('Depots cannot be pulled down under historical rules.');
+  const index = state.depots.findIndex(depot => depot.cell === target && depot.factionId === factionId);
+  if (index < 0) return fail('You hold no depot on that hex.');
+  state.depots.splice(index, 1);
+  return { ok: true, events: [{ turn: state.turn, factionId, type: 'depot_abandoned', cell: target,
+    message: `The depot at hex ${target} was pulled down. Its ${DEPOT_UPKEEP} coin a turn is yours again, and the ground it fed is out of supply.` }] };
 }
 
 /** A depot an enemy walks onto is pulled down. Bounded by the world's depots. */

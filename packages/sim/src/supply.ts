@@ -106,9 +106,8 @@ export function armySupply(state: GameState, armyId: string, supplied = supplied
     reason: `Out of supply: no hearth of this realm reaches this ground. The company loses ${SUPPLY_ATTRITION} strength a turn and recovers nothing until it returns.` };
 }
 
-export function observeSupply(state: GameState, factionId: string): ArmySupply[] {
+export function observeSupply(state: GameState, factionId: string, supplied = suppliedCells(state, factionId)): ArmySupply[] {
   if (rulesVersion(state) < 27) return [];
-  const supplied = suppliedCells(state, factionId);
   return Object.values(state.armies).filter(army => army.factionId === factionId).sort((a, b) => a.id < b.id ? -1 : 1)
     .map(army => armySupply(state, army.id, supplied));
 }

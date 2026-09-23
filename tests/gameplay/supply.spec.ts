@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, DEPOT_COIN, serializeGame, SUPPLY_ATTRITION, type GameCommand, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
 import { cellsWithin, rebuildIndexes } from '../../packages/sim/src/visibility';
-import { openRegistry, openSelectedOrders, selectFromRegistry } from './ui-navigation';
+import { closeManagement, openRegistry, openSelectedOrders, selectFromRegistry } from './ui-navigation';
 
 function issue(state: GameState, command: GameCommand) { const result = applyCommand(state, command); if (!result.ok) throw new Error(result.error); }
 /** A three-company force standing well beyond the reach of its only hearth. */
@@ -47,9 +47,23 @@ test('a force outside supply says what it costs, is named in the turn list, and 
   await expect(depot).toContainText('feeds the ground two hexes around it');
   await depot.getByRole('button', { name: `Raise a supply depot · ${DEPOT_COIN} coin`, exact: true }).click();
   await expect(page.getByTestId('army-supply')).toContainText('Supplied from the depot at hex');
-  // Raising it spent the company's movement, and the panel says so first, exactly
-  // as the rules refuse it: the order of reasons is the same on both sides.
-  await expect(depot).toContainText('This company has already spent its movement this turn.');
+  // Standing on its own depot, the panel offers to pull it down instead.
+  await expect(depot).toContainText('Pulling it down stops its upkeep at once');
+  // The supply overlay draws the ground the realm can feed, and can be turned off.
+  await closeManagement(page);
+  await page.getByRole('button', { name: 'Map guide', exact: true }).click();
+  const supplyToggle = page.getByTestId('toggle-supply');
+  await expect(supplyToggle).toHaveAttribute('aria-pressed', 'true');
+  await supplyToggle.click();
+  await expect(supplyToggle).toHaveAttribute('aria-pressed', 'false');
+  await expect(supplyToggle).toContainText('Show supply overlay');
+  await closeManagement(page);
+
+  await openRegistry(page, 'armies');
+  await selectFromRegistry(page, 'armies', /Far column/);
+  await openSelectedOrders(page);
+  await page.getByTestId('build-depot').getByRole('button', { name: 'Pull down this depot', exact: true }).click();
+  await expect(page.getByTestId('army-supply')).toContainText('Out of supply');
 
   // The company standing in the hearth is fed, and the panel names the hearth.
   await selectFromRegistry(page, 'armies', /Wayfinder/);

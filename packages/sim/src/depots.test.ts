@@ -52,7 +52,16 @@ describe('supply depots', () => {
     const view = getObservation(state, factionId);
     expect(view.depotCoinCost).toBe(DEPOT_COIN);
     expect(view.depots).toEqual(state.depots);
+    expect(view.suppliedCells).toContain(state.armies[armyId]!.cell);
     expect(applyCommandForVersion(state, { type: 'buildDepot', factionId, armyId }, 27).error).toContain('Malformed command');
+
+    // Rules 29: the realm can pull its own depot down and stop paying for it.
+    const cellHere = state.depots[0]!.cell;
+    expect(applyCommand(state, { type: 'abandonDepot', factionId, cell: cellHere + 1 }).error).toBe('You hold no depot on that hex.');
+    run(state, { type: 'abandonDepot', factionId, cell: cellHere });
+    expect(state.depots).toEqual([]);
+    expect(suppliedCells(state, factionId).has(state.armies[armyId]!.cell)).toBe(false);
+    expect(applyCommandForVersion(state, { type: 'abandonDepot', factionId, cell: cellHere }, 28).error).toContain('Malformed command');
   });
 
   it('refuses a second depot beside the first, a hearth hex, a spent company and an empty purse', () => {

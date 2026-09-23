@@ -65,9 +65,13 @@ export function managementPanes({ view, selection, movement, busy, name, setName
       : view.treasury < view.depotCoinCost ? `A depot costs ${view.depotCoinCost} coin.`
         : cell?.settlementId ? 'A hearth already supplies this ground.'
           : depotHere ? 'A depot already stands here.' : null);
+  const ownDepotHere = army && view.depots.some(depot => depot.cell === army.cell && depot.factionId === factionId);
   const depot = army && !view.battle && !view.pendingCapture && view.depotCoinCost > 0 && <section className="arcane-survey" data-testid="build-depot">
-    <button className="wide" disabled={busy || Boolean(depotBlocker)} onClick={() => issue({ type: 'buildDepot', factionId, armyId: army.id })}>Raise a supply depot · {view.depotCoinCost} coin</button>
-    <p className="field-help">{depotBlocker ?? 'A depot feeds the ground two hexes around it, or four along a road, so an army can be supplied where no hearth reaches. It spends this company\u2019s movement, costs upkeep every turn, must stand apart from your other depots, and is pulled down by any enemy that walks onto it.'}</p>
+    {ownDepotHere
+      ? <button className="wide" disabled={busy} onClick={() => issue({ type: 'abandonDepot', factionId, cell: army.cell })}>Pull down this depot</button>
+      : <button className="wide" disabled={busy || Boolean(depotBlocker)} onClick={() => issue({ type: 'buildDepot', factionId, armyId: army.id })}>Raise a supply depot · {view.depotCoinCost} coin</button>}
+    <p className="field-help">{ownDepotHere ? 'Your depot stands here. Pulling it down stops its upkeep at once and leaves the ground it fed out of supply.'
+      : depotBlocker ?? 'A depot feeds the ground two hexes around it, or four along a road, so an army can be supplied where no hearth reaches. It spends this company\u2019s movement, costs upkeep every turn, must stand apart from your other depots, and is pulled down by any enemy that walks onto it.'}</p>
   </section>;
   const routes = army && <>
     <MovementOrders movement={movement} view={view} issue={issue} locate={target => select({ ...selection, cell: target }, true)}/>
