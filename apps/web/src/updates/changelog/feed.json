@@ -1,5 +1,39 @@
 [
   {
+    "sha": "075c2d22a9fc186276ef7b8effecf7e424b43797",
+    "shortSha": "075c2d2",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T23:36:11-05:00",
+    "subject": "feat: group what wants a decision by cause",
+    "body": "The end-of-turn list reported two totals and offered one way through them: press\nNext and read each entity's reason as it arrived. On a wide realm that said how\nmuch work there was and nothing about what kind, and the only way to find three\ninterrupted routes among a hundred idle companies was to walk all hundred.\n\nEvery candidate now carries the cause that put it there - movement remaining, an\ninterrupted route, a stalled posting, an empty production queue, a stalled\ncharter or unassigned households - derived from the same observation its reason\nalready came from. The command bar lists one row per cause, largest first, and\neach row is its own queue: clicking it jumps to the first entity of that cause\nand the existing Next and Previous controls cycle within it.\n\nThis is a UI change over the existing read model. No command, no state, no rules\nor save bump, and the content seal is untouched; totals, shortcuts, wrap-around\norder and the spoken notice are unchanged.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 9,
+    "insertions": 112,
+    "deletions": 12,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "tests/gameplay"
+    ],
+    "notes": "## What actually wants you\n\nTwo numbers at the bottom of the screen used to be the whole story: so many armies needing orders, so many idle settlements. They told you how much work was waiting and nothing at all about what kind, and the only way through was to press Next until you had seen all of it.\n\nNow the list tells you its shape. **What wants a decision** breaks the totals into the reasons behind them, largest first — a hundred companies with movement remaining, forty hearths with an empty production queue, three companies with an interrupted route.\n\nAnd each line is its own queue. Click the interrupted routes and you go straight to the first one; Next and Previous then walk only those three, not the hundred. Finding the handful of things that have actually gone wrong no longer means visiting everything that hasn't.\n\nBetween this and the hearth charters and army postings, a wide realm's end of turn is finally about exceptions. What answers for itself stays quiet; what is stuck says so, and says why."
+  },
+  {
+    "sha": "763016c6d614937ccf5535685f649b01069eb111",
+    "shortSha": "763016c",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T22:59:42-05:00",
+    "subject": "docs: publish a journal note for standing postings",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 45,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "d5903db0f6b8cbe669a08c9af1b5b9535da0c75b",
     "shortSha": "d5903db",
     "author": "ErikBurdett",
