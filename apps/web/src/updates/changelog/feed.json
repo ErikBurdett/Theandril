@@ -1,5 +1,39 @@
 [
   {
+    "sha": "28714d8ed3a397b2e8ebe51ac4152c2537c81a51",
+    "shortSha": "28714d8",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T21:40:00-05:00",
+    "subject": "feat: unbinding and culture traditions (rules/save 24)",
+    "body": "Unbinding answers a working with a working. It strips the binding from one\nactive enemy formation - any ward is undone - and every Waykeeper escorting\nthat formation loses the coming round. It costs five strain and may be used\nonce a battle, so a counter is a decision rather than a reflex, and a formation\ncarrying neither a ward nor a caster is refused with a reason. The interruption\nis ordinary saved state, so it survives a save, a replay and the chronicle.\n\nCultures now train their own tradition. A Waykeeper takes the aptitudes of the\nculture that appoints them: the Cinder March and Emberwake Convocation reach\nthe second degree of Flame, the Sepulchral Synod and Margin Observance the\nsecond degree of Rune - and only the second degree of Rune can unbind. Every\nother culture keeps the common training and cannot counter at all. A discovery\ninside a realm's own tradition is studied at three quarters of its price, so\naccess and cost both depend on who you are.\n\nMagic content is versioned inside the content seal the way the pace table\nalready was: a pack is sealed with the workings that campaign could reach.\nEvery frozen pack still reproduces exactly, and a genuine rules-23 save and its\n1,944-order archive from ef7a831 load, re-seal to identical bytes, replay\nexactly and continue.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 22,
+    "insertions": 237,
+    "deletions": 40,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "packages/chronicle"
+    ],
+    "notes": "## An answer to a working\n\nUntil now a working could only be met with steel. Unbinding changes that. It is cast at one enemy formation on the field and strips the binding from it: any ward is undone, and every Waykeeper riding with that formation is jarred badly enough to lose the coming round. It costs five strain and can be used once in a battle, so it is a decision about when the other side has committed, not something to lead with.\n\nIt also needs something to undo. Aimed at a formation that carries neither a ward nor a caster, Unbinding refuses and tells you why — *nothing binds this formation* — rather than burning the one use you had.\n\nThe bigger change is who can cast it. A Waykeeper now trains in the tradition of the culture that appointed them. The Cinder March and the Emberwake Convocation reach the second degree of Flame; the Sepulchral Synod and the Margin Observance reach the second degree of Rune. Only the second degree of Rune can unbind, so two realms in the world can answer a working and the rest cannot — they have to beat it another way. A realm also studies theory inside its own tradition at three quarters of the usual price, so what your culture is good at is cheaper as well as reachable.\n\nAutomatic casting plays the same board: a counter goes to the strongest binding on the field, a ward to the front rank, and a damaging working to whichever enemy is nearest to breaking."
+  },
+  {
+    "sha": "ef7a831a41738eb1b4ea96697d59e8b43c68e1d2",
+    "shortSha": "ef7a831",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T17:40:48-05:00",
+    "subject": "docs: publish a journal note for arcane seams",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 60,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "85accf71d1e9b02fdbc426d9d54f581620ed71f5",
     "shortSha": "85accf7",
     "author": "ErikBurdett",
