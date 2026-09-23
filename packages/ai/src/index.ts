@@ -315,16 +315,21 @@ export function planTurnWithReasons(view: Observation): AiPlan {
     const nearbyContacts = army.id === explorerId && !enemyTowns.length && !enemies.length
       ? contactClues.filter(cell => hexDistance(army.cell, cell.cell, view.width) <= 18) : [];
     const nearbyThreat = enemies.filter(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10 && enemy.strength > army.strength).slice(0, 64);
+    // Rules 28: a visible enemy depot is a target of opportunity. Taking it strands
+    // the force it feeds, but it is never worth marching for and never outranks
+    // engaging an enemy army, so it is weighted below the ordinary approach.
+    const raidCells = military ? view.depots.filter(depot => wars.has(depot.factionId) && hexDistance(army.cell, depot.cell, view.width) <= 3).map(depot => depot.cell).slice(0, 16) : [];
     const score = (cell: number): number => {
       const distance = Math.min(20, ...ownSettlements.map(town => hexDistance(cell, town.cell, view.width)));
       const invading = nearbyObjectives.length > 0;
       const approach = invading ? Math.max(...nearbyObjectives.map(town => (projectHosts.has(town.id) ? 1000 : 0) - hexDistance(cell, town.cell, view.width) * 500))
-        : military && approachCells.length ? -Math.min(...approachCells.map(enemy => hexDistance(cell, enemy, view.width))) * 100 : 0;
+        : raidCells.length ? -Math.min(...raidCells.map(post => hexDistance(cell, post, view.width))) * 80
+          : military && approachCells.length ? -Math.min(...approachCells.map(enemy => hexDistance(cell, enemy, view.width))) * 100 : 0;
       const danger = nearbyThreat.reduce((sum, enemy) => sum + Math.max(0, 5 - hexDistance(cell, enemy.cell, view.width)) * 1200, 0);
       return (portSite !== null ? -hexDistance(cell, portSite, view.width) * 500 : army.canFound ? view.growth ? settlementSiteValue(view, cell) : distance * 100
         : nearbyContacts.length ? -Math.min(...nearbyContacts.map(clue => hexDistance(cell, clue.cell, view.width))) * 500 : approach) - danger;
     };
-    const strategic = army.canFound || nearbyContacts.length > 0 || military && approachCells.length > 0 || enemies.some(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10);
+    const strategic = army.canFound || nearbyContacts.length > 0 || raidCells.length > 0 || military && approachCells.length > 0 || enemies.some(enemy => wars.has(enemy.factionId) && hexDistance(army.cell, enemy.cell, view.width) <= 10);
     const distantContact = !strategic && sparseContactNeeded(view) && army.id === explorerId && view.factions.length === 1;
     // One scout broadens the contact search while ordinary field armies retain
     // local exploration. Only new sight earns the public inward bearing: zero

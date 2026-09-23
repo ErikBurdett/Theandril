@@ -1,5 +1,11 @@
 # Theandril implementation status
 
+## Raiding a supply line — 2026-09-23
+
+**The change.** A military company scoring a destination now counts a hostile depot within three hexes among its objectives, weighted below the ordinary approach to an enemy force: it takes a post that lies on its way and never marches for one. No rules, save or content change - the depot, its destruction and its reach were all built in rules 28, and this is the AI client learning to use them.
+
+**Tuned to what the measurement said.** The first cut looked eight hexes out and weighted a depot at four times the pull of an enemy army. The headline twelve-realm campaign ran 446 turns against a 350-400 target with three hundred depots razed, because armies chased supply posts instead of fighting and both sides spent the campaign rebuilding. Narrowed to three hexes at a weight below the approach, the same campaign runs 389 turns - one off the 388 it ran without raiding - while still razing two hundred and thirty-eight depots.
+
 ## Seeing supply, playing supply, and what pacing measures — rules/save 29, 2026-09-23
 
 **The overlay.** The ground a realm's hearths and depots can feed is drawn under everything else on the map, on by default and switchable from the map guide. `Observation.suppliedCells` carries the same search that already answers every army's supply status, computed once per observation.

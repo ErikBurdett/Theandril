@@ -2,7 +2,8 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
-| 2026-09-23 | [Seeing supply, and taking a depot down](2026-09-23-supply-visibility.md) | Pushed to `master`; Pages deploys the build |
+| 2026-09-23 | [Raiding a supply line](2026-09-23-depot-raiding.md) | Pushed to `master`; Pages deploys the build |
+| 2026-09-23 | [Seeing supply, playing supply, and what pacing measures](2026-09-23-supply-visibility.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-23 | [Depots: building supply instead of conquering it](2026-09-23-depots.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-23 | [Supply lines: the first slice of M4](2026-09-23-supply.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Grouping the end-of-turn list by cause](2026-09-22-action-causes.md) | Pushed to `master`; Pages deploys the build |
