@@ -2,8 +2,8 @@
 
 ## Identity and publication boundary
 
-- Stable proposed slug: `group-postings`; planned public edition **06**.
-- Publication state: **publication prepared; final production review and deployment pending**. The user authorized publication. Edition 06 and exact image copies are now in the candidate public catalog; this packet retains its earlier draft below as authoring history.
+- Stable slug: `group-postings`; public edition **06**.
+- Publication state: **published and live-verified at `36fea99729452651c09cc7d5ddae81bb1dca4db2`**. The user authorized publication. Edition 06 and exact image copies are now in the public catalog; this packet retains its earlier draft below as authoring history.
 - Implementation revision: **`3ae1581089411a76ecfd08a8f5f811258c4f77f6`**. The final article pins committed evidence: 1,876 headless tests across 234 files, seven affected Chromium journeys and 27 implementation-checkpoint Pages checks. Publication verification remains separate.
 - Campaign rules/save remain **31** and content remains **`015468d1`**. This work does not change simulation or AI rules, canonical state, historical formats or pace prices.
 - Existing scope: **ACT-32**, within empire management and coordinated-order work. This is a bounded way to issue existing postings, not completion of theaters or empire automation.
@@ -41,3 +41,7 @@ The browser source is [group-postings.spec.ts](../../tests/gameplay/group-postin
 Use the real `group-postings-desktop.png` and `group-postings-narrow.png` outputs only after the parent retains and inspects the passing browser run. Preserve exact source pixels with no cropping, resizing or re-encoding. Their provenance must record the implementation revision, source path and SHA256, viewport, fixture seed, the authored realm/army counts, capture command and the interaction stage shown. Captions must say that the large realm is an authored regression fixture, not an organically developed empire. No public image or source revision is invented by this packet.
 
 Before adding edition 06 to the shipped catalog: resolve the implementation commit; reconcile the article's claims, exact final test results and worker metric sample with committed evidence; add reviewed image copies and provenance within the existing journal image budget; run focused catalog checks and the production-subpath reader journeys; obtain independent factual review; then have the parent perform the authorized publication and public readback. Preserve edition 05 and all earlier dispatches at their original source pins. Only bounded current roadmap delivery should change; theater, patrol, template and integrated release acceptance remain open.
+
+## Publication result
+
+Published with the game at `36fea99729452651c09cc7d5ddae81bb1dca4db2`. Build and Pages Actions passed. Final local checks pass 1,878 headless tests, seven affected development journeys and 28 production Pages journeys; the same 28 production journeys pass against the public site. Exact article routes, release ledger and group screenshot bytes were read back. [Deployment evidence](../development/2026-09-23-deploy-and-group-postings/deployment.json). Earlier preparation and pinned implementation counts above remain historical evidence. No release gate is accepted by publication.

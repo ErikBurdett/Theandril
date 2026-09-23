@@ -78,3 +78,7 @@ movement, arrival/join capacity, war decisions, fleet logistics or AI behavior.
 All fifteen release gates remain open. Standard/Long pacing and sustained naval
 recovery remain explicit fleet limitations. Publication evidence is recorded in
 the prompt report after exact revision and public readback checks.
+
+## Publication completed
+
+Release `36fea99729452651c09cc7d5ddae81bb1dca4db2` passed both GitHub workflows. The final publication suite passes **1,878/1,878** tests (`publication-tests.log`), **28/28** local Pages journeys (`publication-pages.log`) and **28/28** live journeys in50.0s (`live-pages.log`). Seven affected development journeys remain separately recorded. `live-readback.json` confirms the exact commit in the public ledger, both articles and exact published group images. The readback helper initially used an incorrect roadmap heading; correcting it to the existing “Theandril Roadmap” completed the check without a product change. `tracker-readback.json` verifies ACT-35 done, ACT-32/33 doing and the rebuilt local page. The existing catalogue bullet-count metric was recomputed from published content; editorial regrouping changes its denominator and it is not a fixed-scope completion percentage. No development or preview servers remain from this task.

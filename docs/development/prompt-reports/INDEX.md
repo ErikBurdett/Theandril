@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-23 | [Deploy fleet provisions and add group army postings](2026-09-23-deploy-and-group-postings.md) | Published `36fea99`; ACT-35 done; ACT-32 advanced; live checks pass |
 | 2026-09-23 | [Fleet provisions with an AI that plans the return](2026-09-23-fleet-provisions.md) | Local rules/save31; ACT-35 verified; nothing committed or published |
 | 2026-09-23 | [Making the measurement lesson a tool](2026-09-23-pacing-measurement.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-23 | [The budget the planner offered twice](2026-09-23-ai-budget.md) | Pushed to `master`; Pages deploys the build |

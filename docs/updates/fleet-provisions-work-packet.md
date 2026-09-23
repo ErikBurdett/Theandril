@@ -3,7 +3,7 @@
 ## Identity
 
 - Stable entry slug: `fleet-provisions`.
-- Publication state: **authorized for publication; catalog prepared for final review**.
+- Publication state: **published and live-verified at `36fea99729452651c09cc7d5ddae81bb1dca4db2`**.
 - Implementation source: **`b623c2c91d4d852cba710f2d996c28a6b1b5d624`**.
   The user explicitly authorized deployment and continued development after the
   local implementation and independent reviews were complete. The retained local
@@ -122,3 +122,7 @@ Final parent review must check the new article and current ledger against the
 pinned evidence, run the built Pages-subpath journeys, inspect the displayed
 figures and then verify the authorized publication at its actual Git revision
 and public URLs. Publication and deployment remain separate from 1.0 acceptance.
+
+## Publication result
+
+Published with the game at `36fea99729452651c09cc7d5ddae81bb1dca4db2`. Build and Pages Actions passed. Final local checks pass 1,878 headless tests, seven affected development journeys and 28 production Pages journeys; the same 28 production journeys pass against the public site. Exact article routes, release ledger and group screenshot bytes were read back. [Deployment evidence](../development/2026-09-23-deploy-and-group-postings/deployment.json). Earlier preparation and pinned implementation counts above remain historical evidence. No release gate is accepted by publication.

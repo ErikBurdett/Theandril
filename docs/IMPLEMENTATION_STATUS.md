@@ -1,5 +1,7 @@
 # Theandril implementation status
 
+**Published checkpoint — 2026-09-23:** `36fea99729452651c09cc7d5ddae81bb1dca4db2` delivers fleet provisions, group army postings and dispatches 05/06. Final local suite: **1,878 tests**; production Pages suite: **28/28 locally and 28/28 on the live site**. The seven affected development journeys also pass. Build and Pages Actions pass; [deployment, live readback and tracker evidence](development/2026-09-23-deploy-and-group-postings/deployment.json) retain their separate scopes. ACT-35 is delivered; ACT-32/M3 and ACT-33/M4 remain partial. All fifteen release gates remain open.
+
 ## Group army postings — 2026-09-23
 
 **ACT-32 advanced; M3 remains in progress.** Select up to128 land armies ashore in the paginated realm registry, retain selection across search and pages, and assign Hold/Join postings at each army’s position or one owned hearth. Clear existing postings together; accepted armies leave the selection and refused armies remain with their canonical reason. Individual orders override one member independently. Selection is temporary; ordinary postings survive save/load.
