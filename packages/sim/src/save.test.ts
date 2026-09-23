@@ -201,7 +201,7 @@ describe('save validation and migration', () => {
   });
 
   const cases: [string, (save: SaveFixture) => void][] = [
-    ['unknown version', save => { save.version = 27; }],
+    ['unknown version', save => { save.version = 28; }],
     ['mismatched content', save => { save.contentHash = 'other-pack'; }],
     ['wrong map dimensions', save => { save.state.world.width++; }],
     ['invalid terrain', save => { save.state.world.terrain[0] = 99; }],

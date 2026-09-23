@@ -9,6 +9,7 @@ import type { DiplomacyObservation, DiplomacyState, PeaceTerms } from './diploma
 import type { ClientTerms } from './clients';
 import type { Charter, CharterFocus, ObservedCharter } from './charters';
 import type { Muster, ObservedPosting, Posting, PostingMode } from './postings';
+import type { ArmySupply } from './supply';
 import type { ArcaneSurveyState, ObservedArcaneSite } from './arcane-sites';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
@@ -295,6 +296,8 @@ export interface Observation {
   charters: ObservedCharter[];
   postings: ObservedPosting[];
   musters: Muster[];
+  /** Rules 27: whether each of the realm's own armies is fed, and by which hearth. */
+  supply: ArmySupply[];
   characters: CharacterView[];
   characterRecruitment: CharacterRecruitmentOption[];
   commanderAbilities: CommanderAbilityOption[];

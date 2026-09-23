@@ -26,6 +26,8 @@ export { CHARTER_CEILING_MAX, CHARTER_CEILING_MIN, CHARTER_FOCI, CHARTER_NAMES, 
 export type { Charter, CharterFocus, ObservedCharter } from './charters';
 export { POSTING_MODES, POSTING_NAMES, joinHost, musterFor, postingFor } from './postings';
 export type { Muster, ObservedPosting, Posting, PostingMode } from './postings';
+export { SUPPLY_ATTRITION, SUPPLY_BUDGET, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MIN_FORMATIONS, SUPPLY_MORALE_RECOVERY, armySupply, suppliedCells } from './supply';
+export type { ArmySupply } from './supply';
 export { arcaneSites, observeArcaneSites, searchObjection, SITE_EXTRACTION, SITE_SEARCH_COIN, SITE_SEARCH_RADIUS } from './arcane-sites';
 export type { ArcaneSite, ObservedArcaneSite } from './arcane-sites';
 export { createRoutePreviewer, getMovementQuery, getMovementPreview, MAX_PATH_NODES, MAX_ROUTE_CELLS, MAX_WAYPOINTS } from './movement';

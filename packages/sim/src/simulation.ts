@@ -19,6 +19,7 @@ import { armyCanFound, effectiveArmyMovement, armySight, armyUpkeep, createArmyF
 import { armyTerrainBlocker, carriedArmyBlocker, disembarkArmy, embarkArmy, moveFleetCargo, navalLaunchCell, observeProductionOptions, productionRequirementBlocker } from './naval';
 import { advanceCharters, charterCommandSchemas, observeCharters, setCharter } from './charters';
 import { advancePostings, musterNewArmy, observePostings, postingCommandSchemas, setMuster, setPosting } from './postings';
+import { advanceSupply, observeSupply, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MORALE_RECOVERY } from './supply';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './rules';
 import { factionStarts } from './faction-starts';
 import { MAX_EVENTS, MAX_FACTIONS } from './save';
@@ -138,7 +139,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26)]).default(26),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27)]).default(27),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -336,11 +337,14 @@ function resolveTurn(state: GameState, emitted: DomainEvent[], observe: PhaseObs
     observe('characters', 'end');
   }
   observe('movement', 'start');
+  // Rules 27: an army outside its realm's supply wastes away and rests on nothing.
+  const starving = advanceSupply(state, emitted);
   for (const army of Object.values(state.armies)) {
     army.movement = state.transports[army.id] || armyHasCharacterMission(state, army.id) ? 0 : Math.max(1, effectiveArmyMovement(state, army, state.progression[army.factionId]?.doctrineId ?? null) - (unpaid.has(army.factionId) ? 1 : 0));
+    const fed = !starving.has(army.id);
     for (const formation of army.formations) {
-      formation.morale = Math.min(units.get(formation.unitId)?.morale ?? 1, formation.morale + 10);
-      formation.fatigue = Math.max(0, formation.fatigue - 15);
+      formation.morale = Math.min(units.get(formation.unitId)?.morale ?? 1, formation.morale + (fed ? 10 : SUPPLY_MORALE_RECOVERY));
+      formation.fatigue = Math.max(0, formation.fatigue - (fed ? 15 : SUPPLY_FATIGUE_RECOVERY));
     }
   }
   if (rulesVersion(state) < 7) state.turn++;
@@ -635,6 +639,7 @@ export function getObservation(state: GameState, factionId: string, options: Obs
     charters: observeCharters(state, factionId),
     postings: observePostings(state, factionId),
     musters: state.musters.filter(muster => muster.factionId === factionId),
+    supply: observeSupply(state, factionId),
     ...getCharacterObservation(state, factionId), commanderAbilities: observeCommanderAbilities(state, factionId),
     routes: Object.values(state.routes).filter(route => state.armies[route.armyId]?.factionId === factionId).sort((a, b) => a.armyId < b.armyId ? -1 : 1).map(route => ({ ...route, path: [...route.path], waypoints: [...route.waypoints], knownHostileIds: [...route.knownHostileIds] })),
     settlements: settlements.map(settlement => ({ ...settlement, buildings: [...settlement.buildings].sort(), food: settlement.factionId === factionId ? settlement.food : 0, queue: settlement.factionId === factionId ? settlement.queue.map(item => ({ ...item })) : [] })),

@@ -1,5 +1,17 @@
 # Theandril implementation status
 
+## Supply lines — rules/save 27, 2026-09-23
+
+**The reach.** Every hearth feeds four hexes of open country around it, and twice as far along a built road. Supply is derived from the map on demand: nothing is stored and the save shape is unchanged. An enemy company standing on a hex stops supply through it, a foreign hearth blocks it, and a hearth under siege feeds nobody.
+
+**The cost.** Each turn outside supply a company loses four strength, down to a fifth of its full strength and no further, and recovers morale and fatigue at a third of the ordinary rate. A force of fewer than three companies forages for itself, as does any expedition carrying a caravan and every army of a realm that holds no hearth - which is every realm's opening. Because supply follows hearths, taking a border town is what lets an invasion continue.
+
+**What it says.** The selected force names the hearth that feeds it or what standing outside costs it, and a starving force is named in the turn list under its own heading ahead of ordinary idleness.
+
+**Measured.** Two first-cut rules were wrong and the campaign suite caught both: attrition from two companies starved colonising expeditions and stopped AI expansion, and suppressing recovery entirely drove morale to one so no realm reached a victory in its window. An attempt to teach the AI to march worn unsupplied armies home pushed campaigns past their turn caps and was reverted.
+
+**Save compatibility.** Rules 27 changes behaviour, not state or content: the seal stays `015468d1`. A genuine rules-26 campaign and its archive from deployed `bb6fa8d` load at turn 61, re-seal to identical v26 bytes, replay exactly, round trip through a v27 envelope and continue.
+
 ## Attention grouped by cause — 2026-09-22
 
 **The grouping.** Every next-action candidate now carries the cause that put it there - movement remaining, an interrupted route, a stalled posting, an empty production queue, a stalled charter or unassigned households - derived from the same observation its reason already came from. The command bar lists one row per cause, largest first, and each row is its own navigable queue: clicking it jumps to the first entity of that cause and the existing Next/Previous controls cycle within it.

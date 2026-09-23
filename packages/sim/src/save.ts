@@ -32,7 +32,7 @@ import { musterStateSchema, postingStateSchema, validatePostings } from './posti
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 26;
+export const SAVE_VERSION = 27;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -210,7 +210,10 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders });
-const saveSchema = z.object({ version: z.literal(26), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(27), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+/** Rules 27 keeps supply lines, which are derived from the map: a rules-26 state
+ * is already the modern shape, and only the behaviour it records differs. */
+const saveV26Schema = saveSchema.extend({ version: z.literal(26) }).strict();
 const saveV25Schema = saveSchema.extend({ version: z.literal(25), state: stateV25Schema }).strict();
 const saveV24Schema = saveSchema.extend({ version: z.literal(24), state: stateV23Schema }).strict();
 /** Rules 24 changed content only, so a rules-23 state is the same shape as a rules-24 one. */
@@ -786,6 +789,11 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
+  if (version === 26) {
+    const prior = saveV26Schema.parse(raw);
+    assert(prior.contentHash === CONTENT_HASH, 'v26 content hash is not a recognized compatible pack');
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   if (version === 25) {
     const prior = saveV25Schema.parse(raw);
     assert(prior.contentHash === CONTENT_HASH, 'v25 content hash is not a recognized compatible pack');

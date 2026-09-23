@@ -56,7 +56,7 @@ describe('immutable real schema-6 mixed-army archives', () => {
     for (const record of captured.battle.archive.records.slice(after)) {
       const command = record.command as Parameters<typeof applyRecordedCommand>[2];
       const actual = applyRecordedCommand(game, archive, command);
-      expect({ ...actual, events: actual.events.filter(event => event.type !== 'formation_experience') }).toMatchObject({ ok: record.ok, events: record.events });
+      expect({ ...actual, events: actual.events.filter(event => event.type !== 'formation_experience' && event.type !== 'supply_attrition') }).toMatchObject({ ok: record.ok, events: record.events });
       expect(stateHash(deserializeGame(serializeGame(game)))).toBe(stateHash(game));
     }
     const report = game.battleReports.at(-1)!;
@@ -68,7 +68,12 @@ describe('immutable real schema-6 mixed-army archives', () => {
     expect(earned.length).toBeGreaterThan(0);
     expect(earned.every(([id, development]) => development.experience > 0 && Object.values(game.armies).some(army => army.formations.some(formation => formation.id === id)))).toBe(true);
     const historical = deserializeGame(captured.battle.finalSave);
-    expect(game.armies).toEqual(historical.armies);
+    // A modern end turn also resolves modern rules: rules 27 supply attrition can
+    // wear an unsupplied force. What must not change retroactively is who exists,
+    // where they stand and what they are made of.
+    const roster = (state: typeof game) => Object.fromEntries(Object.entries(state.armies)
+      .map(([id, army]) => [id, { factionId: army.factionId, cell: army.cell, formations: army.formations.map(item => ({ id: item.id, unitId: item.unitId })) }]));
+    expect(roster(game)).toEqual(roster(historical));
     // A modern end turn uses developed land yields; it is not an old economic seal.
     expect(game.factions.reduce((sum, faction) => sum + faction.knowledge, 0)).toBeGreaterThan(historical.factions.reduce((sum, faction) => sum + faction.knowledge, 0));
   });

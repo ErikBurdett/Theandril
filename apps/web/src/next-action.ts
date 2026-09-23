@@ -2,7 +2,7 @@ import type { Observation } from '@theandril/sim';
 
 /** Every candidate carries the cause that put it here, so a wide realm can read
  * and work one kind of exception at a time instead of cycling every entity. */
-export type ActionCause = 'movement' | 'route-interrupted' | 'posting-stalled' | 'empty-queue' | 'charter-stalled' | 'households';
+export type ActionCause = 'movement' | 'route-interrupted' | 'posting-stalled' | 'out-of-supply' | 'empty-queue' | 'charter-stalled' | 'households';
 export interface ActionCandidate { id: string; name: string; cell: number; reason: string; cause: ActionCause }
 export interface HouseholdCandidate extends ActionCandidate { unassignedHouseholds: number }
 export interface ActionCandidates { armies: ActionCandidate[]; settlements: ActionCandidate[]; households: HouseholdCandidate[] }
@@ -12,6 +12,7 @@ const CAUSE_LABELS: Readonly<Record<ActionCause, string>> = {
   'movement': 'with movement remaining',
   'route-interrupted': 'with an interrupted route',
   'posting-stalled': 'with a stalled posting',
+  'out-of-supply': 'out of supply',
   'empty-queue': 'with an empty production queue',
   'charter-stalled': 'with a stalled charter',
   'households': 'with unassigned households',
@@ -36,14 +37,19 @@ export const DEFAULT_SHORTCUTS: ShortcutBindings = { army: 'n', settlement: 's',
 const byId = (a: ActionCandidate, b: ActionCandidate) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 
 /** Navigation hints only: all actual orders remain validated by simulation. */
-export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'charters' | 'postings' | 'sieges' | 'land'>): ActionCandidates {
+export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'charters' | 'postings' | 'supply' | 'sieges' | 'land'>): ActionCandidates {
   const routes = new Map(view.routes.map(route => [route.armyId, route]));
   const besiegers = new Set(view.sieges.map(siege => siege.armyId));
   const armies: ActionCandidate[] = [];
   const postings = new Map(view.postings.map(posting => [posting.armyId, posting] as const));
+  // A force wasting outside supply is the most urgent thing an army can be doing,
+  // so it is named ahead of a posting or a route however those stand.
+  const starving = new Map(view.supply.filter(item => !item.supplied).map(item => [item.armyId, item] as const));
   for (const army of view.armies) {
     if (army.factionId !== view.factionId || army.carrierId || besiegers.has(army.id) || army.strength <= 0 || army.formations.length === 0
       || army.movementBlocker || army.commander?.status === 'mission' || army.agents.some(agent => agent.status === 'mission')) continue;
+    const hunger = starving.get(army.id);
+    if (hunger) { armies.push({ id: army.id, name: army.name, cell: army.cell, cause: 'out-of-supply', reason: hunger.reason }); continue; }
     const route = routes.get(army.id);
     if (route?.status === 'active' || (army.movement <= 0 && route?.status !== 'paused')) continue;
     // An army under a posting answers for itself; only a stuck one wants a look,
