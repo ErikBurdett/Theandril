@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { applyCommand, createArmyFormation, createGame, deserializeGame, serializeGame, SUPPLY_ATTRITION, type GameCommand, type GameState } from '@theandril/sim';
+import { applyCommand, createArmyFormation, createGame, deserializeGame, DEPOT_COIN, serializeGame, SUPPLY_ATTRITION, type GameCommand, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
 import { cellsWithin, rebuildIndexes } from '../../packages/sim/src/visibility';
 import { openRegistry, openSelectedOrders, selectFromRegistry } from './ui-navigation';
@@ -24,7 +24,7 @@ function starvingScene(): GameState {
   return deserializeGame(serializeGame(state));
 }
 
-test('a force outside supply says what it costs, and the turn list names it as its own kind of trouble', async ({ page }) => {
+test('a force outside supply says what it costs, is named in the turn list, and can raise a depot to feed itself', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
@@ -41,6 +41,15 @@ test('a force outside supply says what it costs, and the turn list names it as i
   await selectFromRegistry(page, 'armies', /Far column/);
   await openSelectedOrders(page);
   await expect(page.getByTestId('army-supply')).toContainText(`loses ${SUPPLY_ATTRITION} strength a turn`);
+
+  // Rules 28: the same column raises a depot where it stands and is fed by it.
+  const depot = page.getByTestId('build-depot');
+  await expect(depot).toContainText('feeds the ground two hexes around it');
+  await depot.getByRole('button', { name: `Raise a supply depot · ${DEPOT_COIN} coin`, exact: true }).click();
+  await expect(page.getByTestId('army-supply')).toContainText('Supplied from the depot at hex');
+  // Raising it spent the company's movement, and the panel says so first, exactly
+  // as the rules refuse it: the order of reasons is the same on both sides.
+  await expect(depot).toContainText('This company has already spent its movement this turn.');
 
   // The company standing in the hearth is fed, and the panel names the hearth.
   await selectFromRegistry(page, 'armies', /Wayfinder/);

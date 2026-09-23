@@ -33,6 +33,7 @@ interface SaveFixture {
     charters: { settlementId: string; factionId: string; focus: string; ceiling: number }[];
     postings: { armyId: string; factionId: string; cell: number; mode: string }[];
     musters: { settlementId: string; factionId: string; cell: number }[];
+    depots: { cell: number; factionId: string; foundedTurn: number }[];
   };
 }
 
@@ -68,6 +69,8 @@ function previousV3State(save: SaveFixture) {
   if (save.state.charters.length) throw new Error('Synthetic historical projection cannot discard standing charters.');
   // Postings and muster points exist only from rules 26; a v3 projection holds none.
   if (save.state.postings.length || save.state.musters.length) throw new Error('Synthetic historical projection cannot discard standing postings.');
+  // Depots exist only from rules 28; a v3 projection holds none.
+  if (save.state.depots.length) throw new Error('Synthetic historical projection cannot discard supply depots.');
   const { progression: _progression, projects: _projects, victory: _victory, pace: _pace, routes: _routes, characters: _characters, transports: _transports, land: _land, rosterVersion: _rosterVersion, roads: _roads, arcaneResearch: _arcaneResearch, resources: _resources, development: _development, ...state } = save.state;
   const { biome: _biome, generatorVersion: _generatorVersion, waterDepth: _waterDepth, layout: _layout, hydrology: _hydrology, ...world } = state.world;
   const previousBattle = (battle: CampaignBattle) => {
@@ -76,7 +79,7 @@ function previousV3State(save: SaveFixture) {
   };
   // Patronage exists only from rules 22; a v3 projection carries wars, offers and treaties alone.
   const { clients: _clients, clientOffers: _clientOffers, ...diplomacy } = state.diplomacy;
-  const { arcaneSurveys: _surveys, charters: _charters, postings: _postings, musters: _musters, ...beforeSeams } = state;
+  const { arcaneSurveys: _surveys, charters: _charters, postings: _postings, musters: _musters, depots: _depots, ...beforeSeams } = state;
   return { ...beforeSeams, diplomacy, world, armies: state.armies.map(({ formations, ...army }) => { const item = formations[0]!; return { id: army.id, factionId: army.factionId, name: army.name, unitId: item.unitId, cell: army.cell, movement: army.movement, strength: item.strength, morale: item.morale, fatigue: item.fatigue }; }), battle: state.battle ? previousBattle(state.battle) : null, battleReports: state.battleReports.map(previousBattle) };
 }
 
@@ -201,7 +204,7 @@ describe('save validation and migration', () => {
   });
 
   const cases: [string, (save: SaveFixture) => void][] = [
-    ['unknown version', save => { save.version = 28; }],
+    ['unknown version', save => { save.version = 29; }],
     ['mismatched content', save => { save.contentHash = 'other-pack'; }],
     ['wrong map dimensions', save => { save.state.world.width++; }],
     ['invalid terrain', save => { save.state.world.terrain[0] = 99; }],

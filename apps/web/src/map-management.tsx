@@ -57,9 +57,22 @@ export function managementPanes({ view, selection, movement, busy, name, setName
     <button className="wide" disabled={busy || Boolean(surveyBlocker)} onClick={() => issue({ type: 'searchArcane', factionId, armyId: army.id })}>Survey for an arcane seam · {view.arcaneSearchCoinCost} coin</button>
     <p className="field-help">{surveyBlocker ?? 'Ashfall glass marks ground worth surveying. A survey spends this company\u2019s movement and reveals any seam within two hexes; holding one inside your borders draws ashglass and allows Arcane Theory.'}</p>
   </section>;
+  // Rules 28: a company raises a depot where it stands, extending supply by
+  // building rather than by conquering. The button states the price and refusal.
+  const depotHere = army && view.depots.some(depot => depot.cell === army.cell);
+  const depotBlocker = army && (army.carrierId ? 'An embarked army cannot build; put it ashore first.'
+    : army.movement <= 0 ? 'This company has already spent its movement this turn.'
+      : view.treasury < view.depotCoinCost ? `A depot costs ${view.depotCoinCost} coin.`
+        : cell?.settlementId ? 'A hearth already supplies this ground.'
+          : depotHere ? 'A depot already stands here.' : null);
+  const depot = army && !view.battle && !view.pendingCapture && view.depotCoinCost > 0 && <section className="arcane-survey" data-testid="build-depot">
+    <button className="wide" disabled={busy || Boolean(depotBlocker)} onClick={() => issue({ type: 'buildDepot', factionId, armyId: army.id })}>Raise a supply depot · {view.depotCoinCost} coin</button>
+    <p className="field-help">{depotBlocker ?? 'A depot feeds the ground two hexes around it, or four along a road, so an army can be supplied where no hearth reaches. It spends this company\u2019s movement, costs upkeep every turn, must stand apart from your other depots, and is pulled down by any enemy that walks onto it.'}</p>
+  </section>;
   const routes = army && <>
     <MovementOrders movement={movement} view={view} issue={issue} locate={target => select({ ...selection, cell: target }, true)}/>
     <ArmyPosting key={`posting-${army.id}`} army={army} view={view} busy={busy} issue={issue}/>
+    {depot}
   </>;
   const composition = army && <ArmyComposition key={army.id} army={army} view={view} busy={busy} issue={issue} inspectArmy={target => select({ armyId: target.id, cell: target.cell })}/>;
   const combat = army && !view.battle && !view.pendingCapture && <><SiegeOrders army={army} view={view} busy={busy} issue={issue}/><AttackOrders army={army} view={view} busy={busy} issue={issue} terrain={target => renderer?.inspect(target)?.terrain}/></>;

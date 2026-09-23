@@ -10,6 +10,7 @@ import type { ClientTerms } from './clients';
 import type { Charter, CharterFocus, ObservedCharter } from './charters';
 import type { Muster, ObservedPosting, Posting, PostingMode } from './postings';
 import type { ArmySupply } from './supply';
+import type { Depot } from './depots';
 import type { ArcaneSurveyState, ObservedArcaneSite } from './arcane-sites';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
@@ -217,6 +218,7 @@ export type GameCommand =
   | { type: 'setCharter'; factionId: string; settlementId: string; focus: CharterFocus | 'none'; ceiling: number }
   | { type: 'setPosting'; factionId: string; armyId: string; cell: number; mode: PostingMode | 'none' }
   | { type: 'setMuster'; factionId: string; settlementId: string; cell: number | null }
+  | { type: 'buildDepot'; factionId: string; armyId: string }
   | { type: 'declareWar'; factionId: string; targetFactionId: string }
   | { type: 'attack'; factionId: string; armyId: string; targetArmyId: string }
   | { type: 'battleOrder'; factionId: string; order: BattleOrder }
@@ -251,6 +253,8 @@ export interface GameState {
   /** Rules 26: standing army postings and the hearths that muster into them. */
   postings: Posting[];
   musters: Muster[];
+  /** Rules 28: built supply posts, ordered by hex. */
+  depots: Depot[];
   rosterVersion: RosterVersion;
   land: LandState;
   /** Land army ID -> carrying fleet ID; sparse, no nested transports. */
@@ -298,6 +302,8 @@ export interface Observation {
   musters: Muster[];
   /** Rules 27: whether each of the realm's own armies is fed, and by which hearth. */
   supply: ArmySupply[];
+  depots: Depot[];
+  depotCoinCost: number;
   characters: CharacterView[];
   characterRecruitment: CharacterRecruitmentOption[];
   commanderAbilities: CommanderAbilityOption[];

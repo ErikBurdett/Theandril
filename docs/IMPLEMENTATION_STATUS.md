@@ -1,5 +1,15 @@
 # Theandril implementation status
 
+## Supply depots — rules/save 28, 2026-09-23
+
+**The build.** A company spends its movement and forty coin to raise a depot where it stands. The depot feeds two hexes of open country around it, or four along a road - half a hearth's reach, seeded into the same search - so a realm can extend supply by building rather than only by conquering, including after a landing overseas.
+
+**The cost and the risk.** Two coin a turn, charged with every other obligation. Depots of one realm keep three hexes apart and a realm may hold thirty-two, so reach is a network of posts rather than a carpet. Any enemy company that walks onto a depot razes it at the end of the turn, and both realms are told, so a supply network is a thing to raid and a thing to defend.
+
+**Refusals.** An embarked army, a spent company, an empty purse, a hearth already on that ground, a depot already there, a neighbour's claim, then the spacing rule - and the UI offers them in the same order the rules do.
+
+**Save compatibility.** Rules 28 adds state, not content: the seal stays `015468d1`. A genuine rules-27 campaign and its archive from deployed `b840150` load at turn 61, re-seal to identical v27 bytes, replay exactly, round trip through a v28 envelope and continue.
+
 ## Supply lines — rules/save 27, 2026-09-23
 
 **The reach.** Every hearth feeds four hexes of open country around it, and twice as far along a built road. Supply is derived from the map on demand: nothing is stored and the save shape is unchanged. An enemy company standing on a hex stops supply through it, a foreign hearth blocks it, and a hearth under siege feeds nobody.

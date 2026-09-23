@@ -1,12 +1,14 @@
 import { UNITS } from '@theandril/content';
 import { isPassable, neighbors } from '@theandril/mapgen';
 import type { DomainEvent, GameState } from './types';
+import { DEPOT_BUDGET, depotsOf } from './depots';
 import { hasRoadEdge } from './roads';
 import { indexes } from './visibility';
 import { atWar } from './warfare';
 import { rulesVersion } from './rules';
 
-/** Rules 27: a realm feeds its armies from its hearths. Supply spreads outward
+/** Rules 27: a realm feeds its armies from its hearths, and from rules 28 also
+ * from the depots it builds. Supply spreads outward
  * over passable ground, runs twice as far along a built road, and stops at an
  * enemy company. A hearth under siege feeds nobody. An army standing outside
  * supply recovers nothing and wastes away until it comes back inside one.
@@ -36,7 +38,7 @@ const isNaval = (state: GameState, armyId: string): boolean =>
 /** A realm that holds no hearth has no line to cut: its forces live off the land
  * entirely. This is also every realm's opening, before the first hearth stands. */
 const landless = (state: GameState, factionId: string): boolean =>
-  !Object.values(state.settlements).some(town => town.factionId === factionId);
+  !Object.values(state.settlements).some(town => town.factionId === factionId) && !depotsOf(state, factionId).length;
 /** Small forces and settling expeditions feed themselves. */
 const forages = (state: GameState, armyId: string): boolean => {
   const army = state.armies[armyId];
@@ -66,6 +68,12 @@ export function suppliedCells(state: GameState, factionId: string): Map<number, 
     if (town.factionId !== factionId || state.sieges[town.id]) continue;
     if (!spent.has(town.cell)) { spent.set(town.cell, 0); reached.set(town.cell, town.id); buckets[0]!.push(town.cell); }
   }
+  // A depot is seeded with only its own shorter budget left to spend.
+  for (const depot of depotsOf(state, factionId)) {
+    const start = SUPPLY_BUDGET - DEPOT_BUDGET;
+    if ((spent.get(depot.cell) ?? Infinity) <= start) continue;
+    spent.set(depot.cell, start); reached.set(depot.cell, `depot.${depot.cell}`); buckets[start]!.push(depot.cell);
+  }
   for (let cost = 0; cost <= SUPPLY_BUDGET; cost++) {
     for (const cell of buckets[cost]!.sort((a, b) => a - b)) {
       if ((spent.get(cell) ?? Infinity) < cost) continue;
@@ -90,7 +98,8 @@ export function armySupply(state: GameState, armyId: string, supplied = supplied
   if (isNaval(state, armyId)) return { armyId, supplied: true, sourceSettlementId: null, reason: 'A fleet carries its own stores.' };
   if (state.transports[armyId]) return { armyId, supplied: true, sourceSettlementId: null, reason: 'The army is aboard a fleet and draws on its stores.' };
   const source = supplied.get(army.cell);
-  if (source) return { armyId, supplied: true, sourceSettlementId: source, reason: `Supplied from ${state.settlements[source]?.name ?? source}.` };
+  if (source) return { armyId, supplied: true, sourceSettlementId: source.startsWith('depot.') ? null : source,
+    reason: source.startsWith('depot.') ? `Supplied from the depot at hex ${source.slice(6)}.` : `Supplied from ${state.settlements[source]?.name ?? source}.` };
   if (landless(state, army.factionId)) return { armyId, supplied: true, sourceSettlementId: null, reason: 'The realm holds no hearth; its forces live off the land.' };
   if (forages(state, armyId)) return { armyId, supplied: true, sourceSettlementId: null, reason: `A force of fewer than ${SUPPLY_MIN_FORMATIONS} companies, or one escorting a caravan, forages for itself.` };
   return { armyId, supplied: false, sourceSettlementId: null,
