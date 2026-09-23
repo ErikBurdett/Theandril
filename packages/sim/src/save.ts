@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { ARCANE_DISCOVERIES, BUILDINGS, IMPROVEMENTS, UNIFICATION_VICTORY, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
 import { BIOME, MAP_TYPES, deriveBiomes, deriveWaterDepth, isLake, isPassable, isValidBiome, neighbors, SeededRandom, supportedLayouts, validateHydrology, type MapLayout } from '@theandril/mapgen';
 import { emptyRoadState, roadStateSchema, validateRoads } from './roads';
-import { applyCommand, initializeLegacyLand, MAX_EVENTS } from './simulation';
+import { applyCommand, initializeLegacyLand } from './simulation';
 import { emptyLandState, landStateSchema, landStateV15Schema, landStateV10Schema, validateLand, validateLandKnowledge } from './territory';
 import { cellsWithin, rebuildIndexes, claimSightEnabled } from './visibility';
 import type { Army, CampaignBattle, GameCommand, GameState } from './types';
@@ -27,10 +27,14 @@ import { movementRouteSchema, validateMovement } from './movement';
 
 import { armyMovement, effectiveArmyMovement, armySight } from './army-composition';
 import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
+import { charterStateSchema, validateCharters } from './charters';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 24;
+export const SAVE_VERSION = 25;
+/** The campaign event ring buffer. Declared here because the save schema needs it
+ * while the module graph is still loading; the simulation imports it back. */
+export const MAX_EVENTS = 200;
 /** Rules 18 content, before rules 19 added the Unification victory. */
 export const PRE_UNIFICATION_CONTENT_HASH = '98b97bba';
 /** Rules 19–20 content, before rules 21 added the city-state roster. */
@@ -189,17 +193,22 @@ const stateV21Schema = stateV20Schema.extend({
 /** Rules 22 records patronage: standing obligations between realms. */
 const stateV22Schema = stateV21Schema.extend({ diplomacy: diplomacyStateSchema }).strict();
 /** Rules 23 records which realms have surveyed the world's arcane seams. */
-const stateSchema = stateV22Schema.extend({ arcaneSurveys: arcaneSurveySchema }).strict();
+const stateV23Schema = stateV22Schema.extend({ arcaneSurveys: arcaneSurveySchema }).strict();
+/** Rules 25 records standing production charters. */
+const stateSchema = stateV23Schema.extend({ charters: charterStateSchema }).strict();
+/** A campaign before charters is identical to one whose hearths hold none. */
+const withCharters = <T>(state: T) => ({ ...state, charters: [] as z.infer<typeof charterStateSchema> });
 /** Older envelopes carry no patronage; their states gain empty registers on load.
  * The original bytes are verified first, then the upgraded state is re-sealed. */
 const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacySchema>; factions: { id: string }[] }>(state: T) =>
-  ({ ...state, diplomacy: { ...state.diplomacy, clients: [] as z.infer<typeof clientBondSchema>[], clientOffers: [] as z.infer<typeof clientOfferSchema>[] }, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1) });
+  ({ ...state, diplomacy: { ...state.diplomacy, clients: [] as z.infer<typeof clientBondSchema>[], clientOffers: [] as z.infer<typeof clientOfferSchema>[] }, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema> });
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
-  ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1) });
-const saveSchema = z.object({ version: z.literal(24), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
-/** Rules 24 changes content only, so a rules-23 state is already the modern shape. */
-const saveV23Schema = saveSchema.extend({ version: z.literal(23) }).strict();
+  ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema> });
+const saveSchema = z.object({ version: z.literal(25), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV24Schema = saveSchema.extend({ version: z.literal(24), state: stateV23Schema }).strict();
+/** Rules 24 changed content only, so a rules-23 state is the same shape as a rules-24 one. */
+const saveV23Schema = saveV24Schema.extend({ version: z.literal(23) }).strict();
 const saveV22Schema = saveSchema.extend({ version: z.literal(22), state: stateV22Schema }).strict();
 const saveV21Schema = saveSchema.extend({ version: z.literal(21), state: stateV21Schema }).strict();
 const saveV20Schema = saveSchema.extend({ version: z.literal(20), state: stateV20Schema }).strict();
@@ -352,6 +361,7 @@ function canonicalPayload(state: GameState) {
       arcaneResearch: arcaneResearchSchema.parse(Object.entries(state.arcaneResearch).sort(([a], [b]) => a < b ? -1 : 1).map(([factionId, discoveries]) => ({ factionId, discoveries: [...discoveries] }))),
       resources, development,
       arcaneSurveys: arcaneSurveySchema.parse(state.factions.map(faction => ({ factionId: faction.id, cells: [...(state.arcaneSurveys[faction.id] ?? [])].sort((a, b) => a - b) })).sort((a, b) => a.factionId < b.factionId ? -1 : 1)),
+      charters: charterStateSchema.parse([...state.charters].sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0)),
   };
   return payload;
 }
@@ -401,6 +411,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 25) assertNoCharters(state);
   if (version < 24) assertNoCounterMagic(state);
   if (version < 23) assertNoArcaneSites(state);
   if (version < 22) assertNoPatronage(state);
@@ -479,6 +490,9 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
 export function serializeGame(state: GameState): string {
   return serializeGameForVersion(state, SAVE_VERSION);
 }
+function assertNoCharters(state: GameState): void {
+  if (state.charters.length) throw new Error('This campaign has standing charters unavailable in historical rules.');
+}
 function assertNoCounterMagic(state: GameState): void {
   const modern = new Set(ARCANE_DISCOVERIES.filter(item => (item.sinceRules ?? 14) >= 24).map(item => item.id));
   if (Object.values(state.arcaneResearch).some(list => list.some(id => modern.has(id)))) throw new Error('This campaign has arcane theory unavailable in historical rules.');
@@ -501,6 +515,7 @@ function assertNoUnification(state: GameState): void {
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 25) assertNoCharters(state);
   if (version < 24) assertNoCounterMagic(state);
   if (version < 23) assertNoArcaneSites(state);
   if (version < 22) assertNoPatronage(state);
@@ -517,8 +532,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
 }
 /** An older envelope never carries newer registers, so its hash never sees them. */
 function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
-  if (version >= 23) return latest;
-  const { arcaneSurveys: _surveys, ...beforeSeams } = latest;
+  if (version >= 25) return latest;
+  const { charters: _charters, ...beforeCharters } = latest;
+  if (version >= 23) return beforeCharters;
+  const { arcaneSurveys: _surveys, ...beforeSeams } = beforeCharters;
   if (version >= 22) return beforeSeams;
   const { clients: _clients, clientOffers: _clientOffers, ...diplomacy } = beforeSeams.diplomacy;
   return { ...beforeSeams, diplomacy: historicalDiplomacySchema.parse(diplomacy) };
@@ -754,10 +771,11 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
-  if (version === 23) {
-    const prior = saveV23Schema.parse(raw);
-    assert(prior.contentHash === PRE_COUNTER_CONTENT_HASH, 'v23 content hash is not a recognized compatible pack');
-    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  if (version === 24 || version === 23) {
+    const prior = version === 24 ? saveV24Schema.parse(raw) : saveV23Schema.parse(raw);
+    assert(prior.contentHash === (version === 24 ? CONTENT_HASH : PRE_COUNTER_CONTENT_HASH), `v${version} content hash is not a recognized compatible pack`);
+    const state = withCharters(prior.state);
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
   }
   if (version === 22) {
     const prior = saveV22Schema.parse(raw);
@@ -1121,6 +1139,7 @@ export function deserializeGame(text: string): GameState {
     routes: Object.fromEntries(data.routes.map(route => [route.armyId, route])),
     characters: Object.fromEntries(data.characters.map(character => [character.id, character])),
     transports: Object.fromEntries(data.transports.map(item => [item.armyId, item.fleetId])),
+    charters: data.charters,
   };
   assert(Object.keys(state.sieges).length === data.sieges.length && Object.keys(state.ruins).length === data.ruins.length, 'duplicate siege or ruin records');
   validateSieges(state);
@@ -1131,6 +1150,7 @@ export function deserializeGame(text: string): GameState {
   assert(data.arcaneResearch.length === state.factions.length && data.arcaneResearch.every((item, i) => i === 0 || item.factionId > data.arcaneResearch[i - 1]!.factionId), 'duplicate or unordered arcane research');
   validateArcaneResearch(state);
   validateArcaneSurveys(state);
+  validateCharters(state);
   if (state.battle) validateBattleAbilities(state, state.battle, true);
   for (const report of state.battleReports) validateBattleAbilities(state, report, false);
   rebuildCharacterIndexes(state);

@@ -148,8 +148,9 @@ export function planTurnWithReasons(view: Observation): AiPlan {
   if (naval.commands.some(command => command.type === 'queue' && command.itemId === 'unit.colonist')) plannedColonist = true;
   let plannedMilitary = ownSettlements.reduce((count, town) => count + town.queue.filter(order => units.has(order.itemId) && units.get(order.itemId)?.movementDomain !== 'naval' && order.itemId !== 'unit.colonist').length, 0);
   const productionLimit = Math.min(112, plans.length + 96);
+  const unreached: string[] = [];
   for (const town of rotate(ownSettlements, 96)) {
-    if (plans.length >= productionLimit) break;
+    if (plans.length >= productionLimit) { if (!town.queue.length) unreached.push(town.id); continue; }
     if (town.queue.length || naval.queuedSettlementIds.has(town.id)) continue;
     const building = BUILDINGS.find(item => !item.coastalOnly && !town.buildings.includes(item.id) && item.coinCost <= budget && canQueue(town.id, item.id));
     const desired = [...new Set(roster)].sort((a, b) => (rosterCounts.get(a) ?? 0) / roster.filter(id => id === a).length - (rosterCounts.get(b) ?? 0) / roster.filter(id => id === b).length || roster.indexOf(a) - roster.indexOf(b));
@@ -169,6 +170,13 @@ export function planTurnWithReasons(view: Observation): AiPlan {
       if (units.has(item.id) && item.id !== 'unit.colonist') { plannedMilitary++; rosterCounts.set(item.id, (rosterCounts.get(item.id) ?? 0) + 1); }
     }
   }
+  // Rules 25: a realm wider than one turn's orders leaves standing charters behind
+  // it, so a hearth the planner never reached still builds itself out. Works alone:
+  // a charter must never spend on companies the planner has not budgeted upkeep for.
+  const chartered = new Set(view.charters.map(charter => charter.settlementId));
+  const delegated = unreached.filter(id => !chartered.has(id)).slice(0, 8);
+  for (const settlementId of delegated) plans.push({ type: 'setCharter', factionId, settlementId, focus: 'works', ceiling: 24 });
+  if (delegated.length) reasons.push(`Leave ${delegated.length} outlying hearth${delegated.length === 1 ? '' : 's'} a Works charter: the realm is too wide to order every hearth each turn.`);
   const development = planDevelopment(view, Math.max(0, view.treasury - budget + 24), Math.max(0, recurringBudget - plannedUpkeep));
   // Training quotes were observed before this batch's missions/embarkation.
   // Execute paid development first so those later transitions cannot stale them.

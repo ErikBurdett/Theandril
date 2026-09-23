@@ -7,6 +7,7 @@ import type { CampaignPace, RosterVersion } from '@theandril/content';
 import type { BattleOrder, BattleState } from './combat';
 import type { DiplomacyObservation, DiplomacyState, PeaceTerms } from './diplomacy';
 import type { ClientTerms } from './clients';
+import type { Charter, CharterFocus, ObservedCharter } from './charters';
 import type { ArcaneSurveyState, ObservedArcaneSite } from './arcane-sites';
 import type { FactionProgression, ProgressionObservation, Victory, VictoryProject } from './progression';
 import type { MovementRoute } from './movement';
@@ -211,6 +212,7 @@ export type GameCommand =
   | { type: 'cancelMovement'; factionId: string; armyId: string }
   | { type: 'resumeMovement'; factionId: string; armyId: string }
   | { type: 'queue'; factionId: string; settlementId: string; itemId: string }
+  | { type: 'setCharter'; factionId: string; settlementId: string; focus: CharterFocus | 'none'; ceiling: number }
   | { type: 'declareWar'; factionId: string; targetFactionId: string }
   | { type: 'attack'; factionId: string; armyId: string; targetArmyId: string }
   | { type: 'battleOrder'; factionId: string; order: BattleOrder }
@@ -240,6 +242,8 @@ export interface GameState {
   /** Rules 23: the seams each realm has paid to survey. The seams themselves are geography. */
   arcaneSurveys: ArcaneSurveyState;
   roads: RoadState;
+  /** Rules 25: standing production charters, one per hearth, ordered by settlement. */
+  charters: Charter[];
   rosterVersion: RosterVersion;
   land: LandState;
   /** Land army ID -> carrying fleet ID; sparse, no nested transports. */
@@ -282,6 +286,7 @@ export interface Observation {
   roads?: RoadObservation[];
   land: LandObservation;
   productionOptions: ProductionOption[];
+  charters: ObservedCharter[];
   characters: CharacterView[];
   characterRecruitment: CharacterRecruitmentOption[];
   commanderAbilities: CommanderAbilityOption[];

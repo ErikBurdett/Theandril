@@ -11,7 +11,7 @@ export const DEFAULT_SHORTCUTS: ShortcutBindings = { army: 'n', settlement: 's',
 const byId = (a: ActionCandidate, b: ActionCandidate) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 
 /** Navigation hints only: all actual orders remain validated by simulation. */
-export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'sieges' | 'land'>): ActionCandidates {
+export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'charters' | 'sieges' | 'land'>): ActionCandidates {
   const routes = new Map(view.routes.map(route => [route.armyId, route]));
   const besiegers = new Set(view.sieges.map(siege => siege.armyId));
   const armies: ActionCandidate[] = [];
@@ -23,8 +23,13 @@ export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' 
     armies.push({ id: army.id, name: army.name, cell: army.cell, reason: route?.status === 'paused' ? `Route interrupted: ${route.pauseReason ?? 'Review the saved route.'}` : `${army.movement} movement remaining` });
   }
   const canProduce = new Set(view.productionOptions.filter(option => option.canQueue).map(option => option.settlementId));
+  // A hearth under a charter answers for itself. It is only worth a look when the
+  // charter has nothing left it can order, and then its own reason is the reason.
+  const charters = new Map(view.charters.map(charter => [charter.settlementId, charter] as const));
   const settlements = view.settlements.filter(town => town.factionId === view.factionId && town.queue.length === 0 && canProduce.has(town.id))
-    .map(town => ({ id: town.id, name: town.name, cell: town.cell, reason: 'Empty production queue; an available project can be ordered.' }));
+    .filter(town => !charters.has(town.id) || charters.get(town.id)!.blocker !== null)
+    .map(town => ({ id: town.id, name: town.name, cell: town.cell,
+      reason: charters.get(town.id)?.blocker ?? 'Empty production queue; an available project can be ordered.' }));
   // Compact canonical totals, independent of queue status and paged tile quotes.
   // Do not infer worker capacity from population or choose/spend on tiles here.
   const ownedTowns = new Map(view.settlements.filter(town => town.factionId === view.factionId).map(town => [town.id, town]));

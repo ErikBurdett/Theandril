@@ -1,5 +1,17 @@
 # Theandril implementation status
 
+## Standing charters — rules/save 25, 2026-09-22
+
+**The policy.** A hearth may hold one standing charter. It places an order only when the queue is empty, so anything ordered by hand takes precedence; revoking returns the hearth to direct orders. A charter never spends more than its ceiling (4-64 coin) on a single work and never draws the treasury below 40 coin, and it is answered after upkeep is paid so a policy cannot starve a wage.
+
+**What it builds.** Works, Wealth and Learning finish the same hearth and differ only in what they reach for first, with ties falling to the cheaper work; Muster raises the most capable company the ceiling allows, never a caravan or a hull. Every order goes through the ordinary production rules, and a hearth that changes hands ends its charter. The next work, or one of five plain refusals, is derived on demand rather than stored, so no explanation is ever stale in a save or a replay.
+
+**Attention.** A hearth under a working charter leaves the next-action list entirely; a stalled one appears with the charter's own reason in place of the generic empty-queue notice. The AI leaves a Works charter on hearths a turn's orders could not reach, and never charters Muster.
+
+**A latent cycle closed.** `save.ts` took `MAX_EVENTS` from `simulation.ts` while `simulation.ts` took `MAX_FACTIONS` back; `MAX_EVENTS` bounds a schema built at module scope, so any entry point that reached `simulation` first left that bound undefined and every save failed validation. `MAX_EVENTS` now lives beside `MAX_FACTIONS` in `save.ts`.
+
+**Save compatibility.** Rules 25 adds state, not content: the seal stays `015468d1`. A genuine rules-24 campaign and its 2,589-order archive from deployed `0fd242a` load at turn 61, re-seal to identical v24 bytes, replay exactly, round trip through a v25 envelope and continue ten more turns. Older envelopes refuse a campaign holding a charter, and rules 24 refuses the command.
+
 ## Unbinding and culture traditions — rules/save 24, 2026-09-22
 
 **The counter.** Unbinding strips the binding from one active enemy formation: any ward is undone and every Waykeeper escorting that formation loses the coming round. It costs five strain and may be used once a battle. A formation carrying neither a ward nor a caster is refused with a reason, and the interruption is ordinary saved state, so it survives save, replay and the chronicle.

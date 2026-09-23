@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BUILDINGS, UNITS } from '@theandril/content';
-import type { ArmyView, GameCommand, Observation } from '@theandril/sim';
+import { CHARTER_CEILING_MAX, CHARTER_CEILING_MIN, CHARTER_FOCI, CHARTER_NAMES, CHARTER_RESERVE, type ArmyView, type CharterFocus, type GameCommand, type Observation } from '@theandril/sim';
 import { FactionArt } from './faction-art';
 import './naval.css';
 
@@ -40,11 +40,32 @@ export function NavalTransport({ army, view, busy, issue, selectArmy }: { army: 
   </section>;
 }
 
+/** Rules 25: a standing charter keeps a hearth working when its queue empties, so a
+ * wide realm does not need an order for every hearth every turn. */
+function SettlementCharter({ view, settlementId, busy, issue }: { view: Observation; settlementId: string; busy: boolean; issue: Issue }) {
+  const charter = view.charters.find(item => item.settlementId === settlementId);
+  const [focus, setFocus] = useState<CharterFocus>(charter?.focus ?? 'works');
+  const [ceiling, setCeiling] = useState(charter?.ceiling ?? 24);
+  const set = (next: CharterFocus | 'none') => issue({ type: 'setCharter', factionId: view.factionId, settlementId, focus: next, ceiling });
+  return <details className="production-category" data-testid="settlement-charter">
+    <summary>Standing charter<span>{charter ? `${CHARTER_NAMES[charter.focus]} · ${charter.ceiling} coin` : 'none'}</span></summary>
+    <p className="field-help">A charter places one order whenever this hearth’s queue is empty. It never replaces an order you place yourself, never spends more than its ceiling on a single work, and always leaves {CHARTER_RESERVE} coin in the treasury.</p>
+    {charter && <p className="production-blocker" id={`charter-state-${settlementId}`}>{charter.itemName ? `Next: ${charter.itemName}.` : charter.blocker}</p>}
+    <label>Focus<select value={focus} disabled={busy} onChange={event => setFocus(event.target.value as CharterFocus)}>
+      {CHARTER_FOCI.map(option => <option value={option} key={option}>{CHARTER_NAMES[option]}</option>)}
+    </select></label>
+    <label>Coin ceiling<input type="number" value={ceiling} min={CHARTER_CEILING_MIN} max={CHARTER_CEILING_MAX} disabled={busy}
+      onChange={event => setCeiling(Math.min(CHARTER_CEILING_MAX, Math.max(CHARTER_CEILING_MIN, Number(event.target.value) || CHARTER_CEILING_MIN)))}/></label>
+    <button className="primary wide" disabled={busy} aria-describedby={charter ? `charter-state-${settlementId}` : undefined} onClick={() => set(focus)}>{charter ? 'Update charter' : 'Grant charter'}</button>
+    {charter && <button className="wide" disabled={busy} onClick={() => set('none')}>Revoke charter</button>}
+  </details>;
+}
+
 /** Canonical production options provide prerequisites, funds, queue and launch legality. */
 export function SettlementProduction({ view, settlementId, busy, issue }: { view: Observation; settlementId: string; busy: boolean; issue: Issue }) {
   const options = view.productionOptions.filter(option => option.settlementId === settlementId);
   const definitionId = view.factions.find(faction => faction.id === view.factionId)?.definitionId;
-  return <div className="production-catalog" aria-label="Settlement production">{(['building', 'land', 'naval'] as const).map(kind => <details key={kind} className="production-category" open={kind === 'building'} data-testid={`production-${kind}`}>
+  return <div className="production-catalog" aria-label="Settlement production"><SettlementCharter key={settlementId} view={view} settlementId={settlementId} busy={busy} issue={issue}/>{(['building', 'land', 'naval'] as const).map(kind => <details key={kind} className="production-category" open={kind === 'building'} data-testid={`production-${kind}`}>
     <summary>{kind === 'building' ? 'Construction' : kind === 'land' ? 'Recruit land forces' : 'Recruit fleet hulls'}<span>{options.filter(option => option.kind === kind && option.canQueue).length} available</span></summary>
     {kind === 'land' && <p className="field-help">Each company arrives as a separate detachment. Assign a healthy marshal and use Army composition to combine co-located formations under their command limit.</p>}
     {kind === 'naval' && <p className="field-help">Harbors launch completed hull formations onto an adjacent water hex. Select a fleet in the army registry to sail it.</p>}
