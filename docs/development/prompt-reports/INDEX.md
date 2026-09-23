@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-23 | [Harbours carry supply over water](2026-09-23-harbour-supply.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-23 | [Raiding a supply line](2026-09-23-depot-raiding.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-23 | [Seeing supply, playing supply, and what pacing measures](2026-09-23-supply-visibility.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-23 | [Depots: building supply instead of conquering it](2026-09-23-depots.md) | Pushed to `master`; Pages deploys the build |

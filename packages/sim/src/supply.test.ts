@@ -3,7 +3,7 @@ import { UNITS } from '@theandril/content';
 import { hexDistance, neighbors } from '@theandril/mapgen';
 import { applyCommand, createGame, getObservation } from './simulation';
 import { createArmyFormation } from './army-composition';
-import { armySupply, suppliedCells, SUPPLY_ATTRITION, SUPPLY_BUDGET, SUPPLY_OPEN_COST } from './supply';
+import { armySupply, HARBOR_BUILDING_ID, suppliedCells, SUPPLY_ATTRITION, SUPPLY_BUDGET, SUPPLY_OPEN_COST } from './supply';
 import { deserializeGame, serializeGame, stateHash } from './save';
 import { roadDirection } from './roads';
 import { cellsWithin, rebuildIndexes } from './visibility';
@@ -80,6 +80,36 @@ describe('supply lines', () => {
     expect(away.armies[armyId]!.formations.map(item => item.strength)).toEqual(before.map(strength => strength - SUPPLY_ATTRITION));
     expect(away.events.some(event => event.type === 'supply_attrition')).toBe(true);
     expect(stateHash(deserializeGame(serializeGame(away)))).toBe(stateHash(away));
+  });
+
+  it('carries a harbour line out over the water, and only a harbour line', () => {
+    // The coast is authored before the hearth stands, so remembered land and
+    // immutable geography agree exactly as they would in a generated world.
+    const state = createGame({ generatorVersion: 4, seed: 17, size: 'standard', factionCount: 1, pace: 'standard' });
+    const origin = state.armies['army.1']!.cell;
+    for (const cell of cellsWithin(state, origin, reach + 4)) {
+      state.world.terrain[cell] = 1; state.world.biome[cell] = 7; state.world.waterDepth[cell] = 0; state.world.fertility[cell] = 80;
+      delete state.resources.deposits[cell];
+    }
+    const ring = [...cellsWithin(state, origin, 1)].filter(cell => cell !== origin);
+    const shore = ring[0]!;
+    const open = [...cellsWithin(state, shore, 1)].find(cell => cell !== shore && !cellsWithin(state, origin, 1).includes(cell))!;
+    for (const cell of [shore, open]) { state.world.terrain[cell] = 0; state.world.biome[cell] = 0; state.world.waterDepth[cell] = 1; state.world.fertility[cell] = 0; }
+    state.explored[state.turnOwnerId] = new Set(state.world.terrain.keys());
+    run(state, { type: 'found', factionId: state.turnOwnerId, armyId: 'army.1', name: 'Harbour Hearth' });
+    const coastal = deserializeGame(serializeGame(state));
+    const factionId = coastal.turnOwnerId;
+    const town = Object.values(coastal.settlements)[0]!;
+
+    // Ordinary supply stops at the shore.
+    expect(suppliedCells(coastal, factionId).has(shore)).toBe(false);
+
+    // The same hearth with a harbour reaches across it.
+    coastal.settlements[town.id]!.buildings.push(HARBOR_BUILDING_ID);
+    const ported = deserializeGame(serializeGame(coastal));
+    const water = suppliedCells(ported, factionId);
+    expect(water.get(shore)).toBe(town.id);
+    expect(water.has(open)).toBe(true);
   });
 
   it('never starves a scout, a settling expedition or a realm with no hearth at all', () => {

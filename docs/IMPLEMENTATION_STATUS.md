@@ -1,5 +1,17 @@
 # Theandril implementation status
 
+## Harbours carry supply over water — rules/save 30, 2026-09-23
+
+**The reach.** A hearth with a harbour carries its supply line out over the water - the same budget, the same road bonus, the same enemies cutting it - so a fleet or a landing near a friendly coast is fed without building a post. An ordinary hearth still stops at the shore and a depot is still a land post, so harbours gain a second reason to exist beyond launching hulls.
+
+**Two clean passes.** Water-crossing previously depended on which line won a tie to a hex, which is the kind of order-dependence that produces a bug nobody can reproduce. Supply is now one land pass seeded from hearths and depots, then one water-capable pass seeded from harbours, merged so the first line to reach a hex feeds it.
+
+**Additive.** Nothing that was fed stops being fed. Fleets remain exempt - a hull at sea is supplied wherever it is - and removing that exemption changes how naval wars are fought, so it belongs in its own measured slice.
+
+**Measured.** The headline twelve-realm epic campaign runs 389 turns with seventeen harbours standing, identical to the 389 it ran before this change and inside the 350-400 target.
+
+**Save compatibility.** Rules 30 changes behaviour, not state or content: the seal stays `015468d1`. A genuine rules-29 campaign and its archive from deployed `d70f18e` load at turn 61, re-seal to identical v29 bytes, replay exactly and round trip through a v30 envelope.
+
 ## Raiding a supply line — 2026-09-23
 
 **The change.** A military company scoring a destination now counts a hostile depot within three hexes among its objectives, weighted below the ordinary approach to an enemy force: it takes a post that lies on its way and never marches for one. No rules, save or content change - the depot, its destruction and its reach were all built in rules 28, and this is the AI client learning to use them.

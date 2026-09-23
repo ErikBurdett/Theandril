@@ -7,8 +7,9 @@ import { indexes } from './visibility';
 import { atWar } from './warfare';
 import { rulesVersion } from './rules';
 
-/** Rules 27: a realm feeds its armies from its hearths, and from rules 28 also
- * from the depots it builds. Supply spreads outward
+/** Rules 27: a realm feeds its armies from its hearths, from rules 28 also from
+ * the depots it builds, and from rules 30 a hearth with a harbour carries supply
+ * out over the water as well as the land. Supply spreads outward
  * over passable ground, runs twice as far along a built road, and stops at an
  * enemy company. A hearth under siege feeds nobody. An army standing outside
  * supply recovers nothing and wastes away until it comes back inside one.
@@ -30,6 +31,8 @@ export const SUPPLY_FATIGUE_RECOVERY = 5;
  * a force of fewer than three companies, or any expedition carrying a caravan,
  * lives off the land wherever it goes. */
 export const SUPPLY_MIN_FORMATIONS = 3;
+/** Rules 30: only a harbour carries supply over water, and only its own line does. */
+export const HARBOR_BUILDING_ID = 'building.harbor';
 
 export interface ArmySupply { armyId: string; supplied: boolean; sourceSettlementId: string | null; reason: string }
 
@@ -61,31 +64,43 @@ export function suppliedCells(state: GameState, factionId: string): Map<number, 
     }
     return false;
   };
-  // A bucketed search: costs are one or two, so the frontier needs no heap.
-  const buckets: number[][] = Array.from({ length: SUPPLY_BUDGET + 1 }, () => []);
-  const spent = new Map<number, number>();
-  for (const town of Object.values(state.settlements).sort((a, b) => a.id < b.id ? -1 : 1)) {
-    if (town.factionId !== factionId || state.sieges[town.id]) continue;
-    if (!spent.has(town.cell)) { spent.set(town.cell, 0); reached.set(town.cell, town.id); buckets[0]!.push(town.cell); }
-  }
-  // A depot is seeded with only its own shorter budget left to spend.
-  for (const depot of depotsOf(state, factionId)) {
-    const start = SUPPLY_BUDGET - DEPOT_BUDGET;
-    if ((spent.get(depot.cell) ?? Infinity) <= start) continue;
-    spent.set(depot.cell, start); reached.set(depot.cell, `depot.${depot.cell}`); buckets[start]!.push(depot.cell);
-  }
-  for (let cost = 0; cost <= SUPPLY_BUDGET; cost++) {
-    for (const cell of buckets[cost]!.sort((a, b) => a - b)) {
-      if ((spent.get(cell) ?? Infinity) < cost) continue;
-      const source = reached.get(cell)!;
-      for (const next of neighbors(cell, width, height).sort((a, b) => a - b)) {
-        if (!isPassable(state.world.terrain[next] ?? 0) || blocked(next)) continue;
-        const step = hasRoadEdge(cell, next, width, state.roads.edges[cell] ?? 0) ? SUPPLY_ROAD_COST : SUPPLY_OPEN_COST;
-        const total = cost + step;
-        if (total > SUPPLY_BUDGET || total >= (spent.get(next) ?? Infinity)) continue;
-        spent.set(next, total); reached.set(next, source); buckets[total]!.push(next);
+  /** A bucketed search: costs are one or two, so the frontier needs no heap. The
+   * first line to reach a hex feeds it; a later, longer one changes nothing. */
+  const spread = (seeds: readonly { cell: number; source: string; spent: number }[], overWater: boolean): void => {
+    const buckets: number[][] = Array.from({ length: SUPPLY_BUDGET + 1 }, () => []);
+    const spent = new Map<number, number>();
+    const source = new Map<number, string>();
+    for (const seed of [...seeds].sort((a, b) => a.cell - b.cell)) {
+      if ((spent.get(seed.cell) ?? Infinity) <= seed.spent) continue;
+      spent.set(seed.cell, seed.spent); source.set(seed.cell, seed.source); buckets[seed.spent]!.push(seed.cell);
+    }
+    for (let cost = 0; cost <= SUPPLY_BUDGET; cost++) {
+      for (const cell of buckets[cost]!.sort((a, b) => a - b)) {
+        if ((spent.get(cell) ?? Infinity) < cost) continue;
+        for (const next of neighbors(cell, width, height).sort((a, b) => a - b)) {
+          if (!overWater && !isPassable(state.world.terrain[next] ?? 0)) continue;
+          if (blocked(next)) continue;
+          const step = hasRoadEdge(cell, next, width, state.roads.edges[cell] ?? 0) ? SUPPLY_ROAD_COST : SUPPLY_OPEN_COST;
+          const total = cost + step;
+          if (total > SUPPLY_BUDGET || total >= (spent.get(next) ?? Infinity)) continue;
+          spent.set(next, total); source.set(next, source.get(cell)!); buckets[total]!.push(next);
+        }
       }
     }
+    for (const [cell, owner] of source) if (!reached.has(cell)) reached.set(cell, owner);
+  };
+
+  const hearths = Object.values(state.settlements).filter(town => town.factionId === factionId && !state.sieges[town.id]);
+  spread([
+    ...hearths.map(town => ({ cell: town.cell, source: town.id, spent: 0 })),
+    // A depot is seeded with only its own shorter budget left to spend.
+    ...depotsOf(state, factionId).map(depot => ({ cell: depot.cell, source: `depot.${depot.cell}`, spent: SUPPLY_BUDGET - DEPOT_BUDGET })),
+  ], false);
+  // Rules 30: a hearth with a harbour carries its line out over the water too,
+  // so a fleet or a landing near a friendly coast is fed without building a post.
+  if (rulesVersion(state) >= 30) {
+    const ports = hearths.filter(town => town.buildings.includes(HARBOR_BUILDING_ID));
+    if (ports.length) spread(ports.map(town => ({ cell: town.cell, source: town.id, spent: 0 })), true);
   }
   return reached;
 }
