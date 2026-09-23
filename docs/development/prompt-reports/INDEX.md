@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-22 | [Standing postings and muster points: M3's other half](2026-09-22-postings.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Standing charters: the first slice of empire delegation](2026-09-22-charters.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Unbinding: the counter that closes M2's loop](2026-09-22-unbinding.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Arcane seams: the first half of the magical discovery loop](2026-09-22-arcane-seams.md) | Pushed to `master`; Pages deploys the build |

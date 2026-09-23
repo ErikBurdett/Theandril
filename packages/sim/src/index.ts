@@ -24,6 +24,8 @@ export type { MovementRoute, MovementPreview, MovementQuery } from './movement';
 export { isCityState } from './seats';
 export { CHARTER_CEILING_MAX, CHARTER_CEILING_MIN, CHARTER_FOCI, CHARTER_NAMES, CHARTER_RESERVE, charterFor } from './charters';
 export type { Charter, CharterFocus, ObservedCharter } from './charters';
+export { POSTING_MODES, POSTING_NAMES, joinHost, musterFor, postingFor } from './postings';
+export type { Muster, ObservedPosting, Posting, PostingMode } from './postings';
 export { arcaneSites, observeArcaneSites, searchObjection, SITE_EXTRACTION, SITE_SEARCH_COIN, SITE_SEARCH_RADIUS } from './arcane-sites';
 export type { ArcaneSite, ObservedArcaneSite } from './arcane-sites';
 export { createRoutePreviewer, getMovementQuery, getMovementPreview, MAX_PATH_NODES, MAX_ROUTE_CELLS, MAX_WAYPOINTS } from './movement';

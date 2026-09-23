@@ -18,6 +18,7 @@ import { advanceMovement, cancelMovement, moveTo, pauseMovement, queueMovement, 
 import { armyCanFound, effectiveArmyMovement, armySight, armyUpkeep, createArmyFormation, getArmyView, splitArmyFormations, transferArmyFormations } from './army-composition';
 import { armyTerrainBlocker, carriedArmyBlocker, disembarkArmy, embarkArmy, moveFleetCargo, navalLaunchCell, observeProductionOptions, productionRequirementBlocker } from './naval';
 import { advanceCharters, charterCommandSchemas, observeCharters, setCharter } from './charters';
+import { advancePostings, musterNewArmy, observePostings, postingCommandSchemas, setMuster, setPosting } from './postings';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, rulesVersion, withRules, type RulesVersion } from './rules';
 import { factionStarts } from './faction-starts';
 import { MAX_EVENTS, MAX_FACTIONS } from './save';
@@ -95,10 +96,12 @@ const version21CommandSchema = z.discriminatedUnion('type', [resourceCommandSche
 /** Rules 22 adds the patronage commands and rules 23 the arcane survey; historical rules never accept them. */
 const version22CommandSchema = z.discriminatedUnion('type', [...version21CommandSchema.options, ...clientCommandSchemas]);
 const version23CommandSchema = z.discriminatedUnion('type', [...version22CommandSchema.options, ...arcaneSiteCommandSchemas]);
-/** Rules 25 adds the standing production charter; historical rules never accept it. */
 export { MAX_EVENTS };
-export const commandSchema = z.discriminatedUnion('type', [...version23CommandSchema.options, ...charterCommandSchemas]);
-export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : commandSchema;
+/** Rules 25 adds the standing production charter and rules 26 the standing
+ * posting and muster point; historical rules never accept them. */
+const version25CommandSchema = z.discriminatedUnion('type', [...version23CommandSchema.options, ...charterCommandSchemas]);
+export const commandSchema = z.discriminatedUnion('type', [...version25CommandSchema.options, ...postingCommandSchemas]);
+export const commandSchemaForVersion = (version: RulesVersion) => version === 4 ? legacyCommandSchema : version === 5 ? version5CommandSchema : version === 6 ? version6CommandSchema : version === 7 ? version7CommandSchema : version === 8 ? version8CommandSchema : version < 12 ? version11CommandSchema : version < 14 ? version13CommandSchema : version < 16 ? version15CommandSchema : version < 22 ? version21CommandSchema : version < 23 ? version22CommandSchema : version < 25 ? version23CommandSchema : version < 26 ? version25CommandSchema : commandSchema;
 
 /** Explicit deterministic upgrade for pre-territory snapshots and historical execution. */
 export function initializeLegacyLand(state: GameState): void {
@@ -135,7 +138,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25)]).default(25),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26)]).default(26),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),
@@ -186,7 +189,7 @@ export function createGame(options: NewGameOptions): GameState {
   const state: GameState = {
     resources: createResources(world, selected.map(faction => faction.id), checked.rulesVersion >= 16 ? 1 : 0),
     development: createDevelopmentState(),
-    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)), arcaneSurveys: emptyArcaneSurveys(selected.map(faction => faction.id)), charters: [],
+    arcaneResearch: emptyArcaneResearch(selected.map(faction => faction.id)), arcaneSurveys: emptyArcaneSurveys(selected.map(faction => faction.id)), charters: [], postings: [], musters: [],
     roads: emptyRoadState(selected.map(faction => faction.id)),
     rosterVersion: checked.rosterVersion,
     land: emptyLandState(selected.map(faction => faction.id), checked.rulesVersion),
@@ -292,7 +295,7 @@ function resolveTurn(state: GameState, emitted: DomainEvent[], observe: PhaseObs
       if (queued.progress < definition.cost) break;
       settlement.queue.shift();
       if (building) settlement.buildings.push(building.id);
-      else addArmy(state, faction.id, navalLaunchCell(state, settlement, queued.itemId) ?? settlement.cell, queued.itemId);
+      else musterNewArmy(state, settlement.id, addArmy(state, faction.id, navalLaunchCell(state, settlement, queued.itemId) ?? settlement.cell, queued.itemId).id);
       emitted.push({ turn: state.turn, type: building ? 'building_completed' : 'unit_recruited', message: `${settlement.name} completed ${definition.name}.`, factionId: faction.id, cell: settlement.cell });
     }
     const growthFood = settlementGrowthFood(settlement.population, version);
@@ -344,6 +347,8 @@ function resolveTurn(state: GameState, emitted: DomainEvent[], observe: PhaseObs
   observe('movement', 'end');
   observe('travel', 'start');
   advanceMovement(state, emitted);
+  // Postings act only after ordinary travel, so an army with its own order keeps it.
+  advancePostings(state, emitted);
   observe('travel', 'end');
   observe('diplomacy', 'start');
   emitted.push(...advanceDiplomacy(state));
@@ -496,6 +501,12 @@ export function applyCommand(state: GameState, input: unknown, onPhase?: PhaseOb
     const result = setCharter(state, faction.id, command.settlementId, command.focus, command.ceiling);
     if (!result.ok) return result;
     emitted.push(...result.events);
+  } else if (command.type === 'setPosting' || command.type === 'setMuster') {
+    const result = command.type === 'setPosting'
+      ? setPosting(state, faction.id, command.armyId, command.cell, command.mode)
+      : setMuster(state, faction.id, command.settlementId, command.cell);
+    if (!result.ok) return result;
+    emitted.push(...result.events);
   } else if (command.type === 'declareWar' || command.type === 'attack' || command.type === 'battleOrder' || command.type === 'autoResolveBattle') {
     const result = command.type === 'declareWar' ? declareCampaignWar(state, faction.id, command.targetFactionId)
       : command.type === 'attack' ? startCampaignBattle(state, faction.id, command.armyId, command.targetArmyId)
@@ -622,6 +633,8 @@ export function getObservation(state: GameState, factionId: string, options: Obs
       cargo: [], transportUsed: 0, carrierId: null, canEnterDeepWater: false, embarkOptions: [], disembarkOptions: [], transportOptionsTruncated: false }) })),
     productionOptions: observeProductionOptions(state, factionId),
     charters: observeCharters(state, factionId),
+    postings: observePostings(state, factionId),
+    musters: state.musters.filter(muster => muster.factionId === factionId),
     ...getCharacterObservation(state, factionId), commanderAbilities: observeCommanderAbilities(state, factionId),
     routes: Object.values(state.routes).filter(route => state.armies[route.armyId]?.factionId === factionId).sort((a, b) => a.armyId < b.armyId ? -1 : 1).map(route => ({ ...route, path: [...route.path], waypoints: [...route.waypoints], knownHostileIds: [...route.knownHostileIds] })),
     settlements: settlements.map(settlement => ({ ...settlement, buildings: [...settlement.buildings].sort(), food: settlement.factionId === factionId ? settlement.food : 0, queue: settlement.factionId === factionId ? settlement.queue.map(item => ({ ...item })) : [] })),

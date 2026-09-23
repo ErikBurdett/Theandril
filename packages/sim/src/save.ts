@@ -28,10 +28,11 @@ import { movementRouteSchema, validateMovement } from './movement';
 import { armyMovement, effectiveArmyMovement, armySight } from './army-composition';
 import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
 import { charterStateSchema, validateCharters } from './charters';
+import { musterStateSchema, postingStateSchema, validatePostings } from './postings';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 25;
+export const SAVE_VERSION = 26;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -195,17 +196,22 @@ const stateV22Schema = stateV21Schema.extend({ diplomacy: diplomacyStateSchema }
 /** Rules 23 records which realms have surveyed the world's arcane seams. */
 const stateV23Schema = stateV22Schema.extend({ arcaneSurveys: arcaneSurveySchema }).strict();
 /** Rules 25 records standing production charters. */
-const stateSchema = stateV23Schema.extend({ charters: charterStateSchema }).strict();
-/** A campaign before charters is identical to one whose hearths hold none. */
-const withCharters = <T>(state: T) => ({ ...state, charters: [] as z.infer<typeof charterStateSchema> });
+const stateV25Schema = stateV23Schema.extend({ charters: charterStateSchema }).strict();
+/** Rules 26 records standing army postings and the hearths that muster into them. */
+const stateSchema = stateV25Schema.extend({ postings: postingStateSchema, musters: musterStateSchema }).strict();
+/** A campaign before these registers is identical to one whose realms hold none. */
+const withCharters = <T>(state: T) => ({ ...state, charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders });
+const emptyOrders = { postings: [] as z.infer<typeof postingStateSchema>, musters: [] as z.infer<typeof musterStateSchema> };
+const withOrders = <T>(state: T) => ({ ...state, ...emptyOrders });
 /** Older envelopes carry no patronage; their states gain empty registers on load.
  * The original bytes are verified first, then the upgraded state is re-sealed. */
 const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacySchema>; factions: { id: string }[] }>(state: T) =>
-  ({ ...state, diplomacy: { ...state.diplomacy, clients: [] as z.infer<typeof clientBondSchema>[], clientOffers: [] as z.infer<typeof clientOfferSchema>[] }, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema> });
+  ({ ...state, diplomacy: { ...state.diplomacy, clients: [] as z.infer<typeof clientBondSchema>[], clientOffers: [] as z.infer<typeof clientOfferSchema>[] }, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders });
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
-  ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema> });
-const saveSchema = z.object({ version: z.literal(25), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+  ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders });
+const saveSchema = z.object({ version: z.literal(26), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV25Schema = saveSchema.extend({ version: z.literal(25), state: stateV25Schema }).strict();
 const saveV24Schema = saveSchema.extend({ version: z.literal(24), state: stateV23Schema }).strict();
 /** Rules 24 changed content only, so a rules-23 state is the same shape as a rules-24 one. */
 const saveV23Schema = saveV24Schema.extend({ version: z.literal(23) }).strict();
@@ -362,6 +368,8 @@ function canonicalPayload(state: GameState) {
       resources, development,
       arcaneSurveys: arcaneSurveySchema.parse(state.factions.map(faction => ({ factionId: faction.id, cells: [...(state.arcaneSurveys[faction.id] ?? [])].sort((a, b) => a - b) })).sort((a, b) => a.factionId < b.factionId ? -1 : 1)),
       charters: charterStateSchema.parse([...state.charters].sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0)),
+      postings: postingStateSchema.parse([...state.postings].sort((a, b) => a.armyId < b.armyId ? -1 : a.armyId > b.armyId ? 1 : 0)),
+      musters: musterStateSchema.parse([...state.musters].sort((a, b) => a.settlementId < b.settlementId ? -1 : a.settlementId > b.settlementId ? 1 : 0)),
   };
   return payload;
 }
@@ -411,6 +419,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 26) assertNoStandingOrders(state);
   if (version < 25) assertNoCharters(state);
   if (version < 24) assertNoCounterMagic(state);
   if (version < 23) assertNoArcaneSites(state);
@@ -490,6 +499,9 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
 export function serializeGame(state: GameState): string {
   return serializeGameForVersion(state, SAVE_VERSION);
 }
+function assertNoStandingOrders(state: GameState): void {
+  if (state.postings.length || state.musters.length) throw new Error('This campaign has standing postings unavailable in historical rules.');
+}
 function assertNoCharters(state: GameState): void {
   if (state.charters.length) throw new Error('This campaign has standing charters unavailable in historical rules.');
 }
@@ -515,6 +527,7 @@ function assertNoUnification(state: GameState): void {
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 26) assertNoStandingOrders(state);
   if (version < 25) assertNoCharters(state);
   if (version < 24) assertNoCounterMagic(state);
   if (version < 23) assertNoArcaneSites(state);
@@ -532,8 +545,10 @@ function envelopeContentHash(state: GameState, version: RulesVersion): string {
 }
 /** An older envelope never carries newer registers, so its hash never sees them. */
 function payloadForVersion(state: GameState, version: RulesVersion, latest = canonicalPayload(state)) {
-  if (version >= 25) return latest;
-  const { charters: _charters, ...beforeCharters } = latest;
+  if (version >= 26) return latest;
+  const { postings: _postings, musters: _musters, ...beforeOrders } = latest;
+  if (version >= 25) return beforeOrders;
+  const { charters: _charters, ...beforeCharters } = beforeOrders;
   if (version >= 23) return beforeCharters;
   const { arcaneSurveys: _surveys, ...beforeSeams } = beforeCharters;
   if (version >= 22) return beforeSeams;
@@ -771,6 +786,12 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
+  if (version === 25) {
+    const prior = saveV25Schema.parse(raw);
+    assert(prior.contentHash === CONTENT_HASH, 'v25 content hash is not a recognized compatible pack');
+    const state = withOrders(prior.state);
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
+  }
   if (version === 24 || version === 23) {
     const prior = version === 24 ? saveV24Schema.parse(raw) : saveV23Schema.parse(raw);
     assert(prior.contentHash === (version === 24 ? CONTENT_HASH : PRE_COUNTER_CONTENT_HASH), `v${version} content hash is not a recognized compatible pack`);
@@ -1139,7 +1160,7 @@ export function deserializeGame(text: string): GameState {
     routes: Object.fromEntries(data.routes.map(route => [route.armyId, route])),
     characters: Object.fromEntries(data.characters.map(character => [character.id, character])),
     transports: Object.fromEntries(data.transports.map(item => [item.armyId, item.fleetId])),
-    charters: data.charters,
+    charters: data.charters, postings: data.postings, musters: data.musters,
   };
   assert(Object.keys(state.sieges).length === data.sieges.length && Object.keys(state.ruins).length === data.ruins.length, 'duplicate siege or ruin records');
   validateSieges(state);
@@ -1151,6 +1172,7 @@ export function deserializeGame(text: string): GameState {
   validateArcaneResearch(state);
   validateArcaneSurveys(state);
   validateCharters(state);
+  validatePostings(state);
   if (state.battle) validateBattleAbilities(state, state.battle, true);
   for (const report of state.battleReports) validateBattleAbilities(state, report, false);
   rebuildCharacterIndexes(state);

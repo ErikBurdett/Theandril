@@ -11,15 +11,21 @@ export const DEFAULT_SHORTCUTS: ShortcutBindings = { army: 'n', settlement: 's',
 const byId = (a: ActionCandidate, b: ActionCandidate) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 
 /** Navigation hints only: all actual orders remain validated by simulation. */
-export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'charters' | 'sieges' | 'land'>): ActionCandidates {
+export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' | 'routes' | 'settlements' | 'productionOptions' | 'charters' | 'postings' | 'sieges' | 'land'>): ActionCandidates {
   const routes = new Map(view.routes.map(route => [route.armyId, route]));
   const besiegers = new Set(view.sieges.map(siege => siege.armyId));
   const armies: ActionCandidate[] = [];
+  const postings = new Map(view.postings.map(posting => [posting.armyId, posting] as const));
   for (const army of view.armies) {
     if (army.factionId !== view.factionId || army.carrierId || besiegers.has(army.id) || army.strength <= 0 || army.formations.length === 0
       || army.movementBlocker || army.commander?.status === 'mission' || army.agents.some(agent => agent.status === 'mission')) continue;
     const route = routes.get(army.id);
     if (route?.status === 'active' || (army.movement <= 0 && route?.status !== 'paused')) continue;
+    // An army under a posting answers for itself; only a stuck one wants a look,
+    // and then the posting's own reason is the reason.
+    const posting = postings.get(army.id);
+    if (posting && !posting.blocker) continue;
+    if (posting?.blocker) { armies.push({ id: army.id, name: army.name, cell: army.cell, reason: `Posting stalled: ${posting.blocker}` }); continue; }
     armies.push({ id: army.id, name: army.name, cell: army.cell, reason: route?.status === 'paused' ? `Route interrupted: ${route.pauseReason ?? 'Review the saved route.'}` : `${army.movement} movement remaining` });
   }
   const canProduce = new Set(view.productionOptions.filter(option => option.canQueue).map(option => option.settlementId));

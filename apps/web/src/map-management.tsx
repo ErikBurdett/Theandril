@@ -9,6 +9,7 @@ import { FactionArt, MapArt } from './faction-art';
 import { SettlementLand } from './land';
 import { MovementOrders, type MapMovement, type MapSelection } from './movement';
 import { NavalTransport, SettlementProduction } from './naval';
+import { ArmyPosting, SettlementMuster } from './postings';
 import { RuinInspection, SettlementDefense, SiegeOrders } from './siege';
 import { AttackOrders } from './warfare';
 import type { LandQuery } from './use-land-query';
@@ -54,12 +55,16 @@ export function managementPanes({ view, selection, movement, busy, name, setName
     <button className="wide" disabled={busy || Boolean(surveyBlocker)} onClick={() => issue({ type: 'searchArcane', factionId, armyId: army.id })}>Survey for an arcane seam · {view.arcaneSearchCoinCost} coin</button>
     <p className="field-help">{surveyBlocker ?? 'Ashfall glass marks ground worth surveying. A survey spends this company\u2019s movement and reveals any seam within two hexes; holding one inside your borders draws ashglass and allows Arcane Theory.'}</p>
   </section>;
-  const routes = army && <MovementOrders movement={movement} view={view} issue={issue} locate={target => select({ ...selection, cell: target }, true)}/>;
+  const routes = army && <>
+    <MovementOrders movement={movement} view={view} issue={issue} locate={target => select({ ...selection, cell: target }, true)}/>
+    <ArmyPosting key={`posting-${army.id}`} army={army} view={view} busy={busy} issue={issue}/>
+  </>;
   const composition = army && <ArmyComposition key={army.id} army={army} view={view} busy={busy} issue={issue} inspectArmy={target => select({ armyId: target.id, cell: target.cell })}/>;
   const combat = army && !view.battle && !view.pendingCapture && <><SiegeOrders army={army} view={view} busy={busy} issue={issue}/><AttackOrders army={army} view={view} busy={busy} issue={issue} terrain={target => renderer?.inspect(target)?.terrain}/></>;
   const production = settlement && <>
     <h3 className="section-title">Production queue</h3>
     {settlement.queue.length ? <ol className="production-queue">{settlement.queue.map((item, index) => <li key={index}><span>{itemName(item.itemId)}</span><small>{item.progress} / {content.find(definition => definition.id === item.itemId)?.cost} industry</small></li>)}</ol> : <p className="field-help">The hearth is idle. Choose a project below.</p>}
+    <SettlementMuster key={`muster-${settlement.id}`} view={view} settlementId={settlement.id} busy={busy} issue={issue}/>
     <SettlementProduction key={settlement.id} view={view} settlementId={settlement.id} busy={busy} issue={issue}/>
   </>;
   const land = (compact = false) => settlement && <SettlementLand key={settlement.id} compact={compact} view={view} settlementId={settlement.id} selectedCell={selection.cell} busy={busy} issue={issue} selectCell={target => select({ settlementId: settlement.id, cell: target }, true)} query={query} stateHash={stateHash} queryEpoch={queryEpoch} queryEnabled={queryEnabled}/>;

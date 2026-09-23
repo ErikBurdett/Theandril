@@ -1,5 +1,15 @@
 # Theandril implementation status
 
+## Standing postings and muster points — rules/save 26, 2026-09-22
+
+**The order.** An army may be posted to a hex it has explored. Each turn it marches there under the ordinary travel order - same pathing, visibility and hostile-sighting pause - and then holds the hex or joins the force standing on it, merging the turn it arrives under the ordinary command-capacity rules. A posting only starts a march for an army with no travel order of its own, so an active route runs and a paused route keeps its reason.
+
+**The muster point.** A hearth may name one. Every company it raises is posted there the turn it forms and joins what it finds, which removes the per-company marching and merging the production panel used to ask for by hand.
+
+**Attention.** A posting states where it stands - marching, standing, the paused route's reason, no known route, nothing to join, or aboard a fleet - derived on demand rather than stored. An army under a working posting leaves the next-action list; a stalled one appears with the posting's own reason.
+
+**Save compatibility.** Rules 26 adds state, not content: the seal stays `015468d1`. A genuine rules-25 campaign and its 2,181-order archive from deployed `a29ec80` load at turn 61, re-seal to identical v25 bytes, replay exactly, round trip through a v26 envelope and continue ten more turns. Older envelopes refuse a campaign holding a posting, and rules 25 refuses the commands.
+
 ## Standing charters — rules/save 25, 2026-09-22
 
 **The policy.** A hearth may hold one standing charter. It places an order only when the queue is empty, so anything ordered by hand takes precedence; revoking returns the hearth to direct orders. A charter never spends more than its ceiling (4-64 coin) on a single work and never draws the treasury below 40 coin, and it is answered after upkeep is paid so a policy cannot starve a wage.
