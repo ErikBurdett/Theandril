@@ -5,8 +5,10 @@ concurrency:
   group: verify-${{ github.ref }}
   cancel-in-progress: true
 
-# CI only confirms the project typechecks and builds. Unit, campaign and
-# browser gameplay tests run locally (pnpm test, pnpm test:gameplay).
+# CI only confirms the project typechecks and builds. Every deep check runs on the
+# development machine: pnpm test (unit, campaigns, repository), pnpm test:gameplay
+# (browser journeys) and pnpm measure:pacing (whole AI campaigns). Hosted runners
+# render WebGL in software and are far slower, so those belong local, not here.
 jobs:
   build:
     name: Typecheck and build

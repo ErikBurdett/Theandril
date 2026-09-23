@@ -99,7 +99,35 @@ Expected checks:
 - unit tests;
 - property/determinism tests when rules change;
 - Playwright gameplay scenario when player-facing behavior changes;
-- benchmark when a hot path changes.
+- benchmark when a hot path changes;
+- pacing measurement when a rules or AI change can affect how a campaign ends.
+
+**Deep testing is local. CI only proves the project builds.** GitHub Actions runs
+install, typecheck and the production build, and the Pages workflow publishes it.
+Vitest (unit, campaigns, repository) and the Playwright journeys run on the
+development machine before committing or deploying — hosted runners render WebGL
+in software and are several times slower, so long AI campaigns and browser
+journeys time out there and turn CI red while the game is correct. Do not add
+test steps, shards or CI-only timeout workarounds to the workflows.
+
+### Measuring campaign pacing
+
+Run `pnpm measure:pacing` locally — never in CI — whenever a rules or AI change
+could alter how a campaign resolves. It plays whole campaigns and takes minutes.
+
+Judge the result against the **headline** campaign: a standard map with twelve
+realms, targeting about 200 turns for Standard, 300 for Long and 350–400 for
+Epic. The campaigns in `pacing.test.ts`, `pacing-epic.test.ts` and
+`chronicle-victory.test.ts` play a four-realm tiny map for speed. They are
+proxies: they end sooner, two epic seeds on them sit well over a hundred turns
+apart, and their bounds are derived from this tool rather than defended on their
+own. Correct work has been reverted twice for moving a proxy while the headline
+campaign stayed exactly where it should be.
+
+When a change does move the headline campaign out of its band, the choice is
+between fixing the change — usually because the AI cannot yet play the new rule —
+and re-pricing the pace deliberately with the current pack frozen, the way rules
+18, 21 and 22 each did. Tuning a number until a proxy bound goes green is neither.
 
 ## Subagents
 

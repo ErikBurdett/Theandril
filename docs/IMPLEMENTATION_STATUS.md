@@ -1,5 +1,13 @@
 # Theandril implementation status
 
+## Pacing measurement is a tool, and CI stays build-only — 2026-09-23
+
+**The tool.** `pnpm measure:pacing` plays AI campaigns to their victory and reports the turn each ended on, the victory path, depots standing and any order the planner asked for that the rules refused. Named cases: `headline` (a standard map with twelve realms - the campaign the 350-400 turn target actually describes), its Long and Standard siblings, and the four `proxy-*` cases the pacing tests play for speed.
+
+**The standard.** `AGENTS.md` and the three pacing test files now state that the headline campaign is what a pacing change is judged against, that the tiny four-realm campaigns are proxies whose bounds are derived from the tool rather than defended, and that a genuine headline drift is resolved either by fixing the change - usually the AI not yet playing a new rule - or by re-pricing the pace deliberately with the current pack frozen, as rules 18, 21 and 22 each did. Tuning a constant until a proxy bound turns green is neither.
+
+**CI stays build-only.** `Verify build` runs install, typecheck and the production build; Pages publishes it. No workflow has a test step and none should gain one. Every deep check - `pnpm test`, `pnpm test:gameplay`, `pnpm measure:pacing` - runs on the development machine, because hosted runners render WebGL in software and time out on long campaigns and browser journeys while the game is correct.
+
 ## The budget the planner offered twice — 2026-09-23
 
 **The fix.** A turn's plan pays for an arcane survey, a supply depot and a patronage subsidy before it works out the budget for everything else, and that budget was computed from the treasury without subtracting any of them - so the planner could commit coin it had already spent and the simulation refused the order. The survey has leaked twenty-four coin a turn since rules 23 and the depot forty since rules 28; neither surfaced until a change moved campaign trajectories.

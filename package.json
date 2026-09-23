@@ -34,6 +34,7 @@
     "bench:storage": "tsx scripts/benchmark-storage.ts",
     "bench:art": "tsx scripts/benchmark-art.ts",
     "content:validate": "tsx scripts/validate-content.ts",
+    "measure:pacing": "tsx scripts/measure-pacing.ts",
     "site:build-data": "tsx scripts/build-changelog.ts && tsx scripts/build-lore.ts && tsx scripts/build-compendium.ts",
     "changelog:build": "tsx scripts/build-changelog.ts"
   },
