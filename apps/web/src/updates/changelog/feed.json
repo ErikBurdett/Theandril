@@ -1,5 +1,39 @@
 [
   {
+    "sha": "756dd5280212e3175be0969e19ea05e832973132",
+    "shortSha": "756dd52",
+    "author": "ErikBurdett",
+    "date": "2026-09-23T01:52:08-05:00",
+    "subject": "feat: see supply, play supply, and measure what pacing means (rules/save 29)",
+    "body": "Supply has governed every campaign since rules 27 and could not be seen. The\nground a realm's hearths and depots can feed is now outlined under everything\nelse on the map, on by default and switchable from the map guide. The\nobservation carries the same reach that already answers each army's supply\nstatus, computed once rather than twice, so the overlay costs nothing new.\n\nRules 28 also let a realm create an upkeep obligation with no way to end it short\nof an enemy taking the depot - a flaw introduced in that slice. A realm may now\npull down its own depot from the company standing on it.\n\nThe AI plays supply. A realm at war whose force is wasting outside supply raises\na depot under it rather than abandon the operation: one a turn, out of surplus,\nunder the largest suffering force, never in peacetime. Measuring what actually\nhappened rather than pass or fail found three real planner defects, each of which\nwould have shipped: it ignored foreign land claims, it took a company the arcane\nsurvey had already spent, and it ignored the thirty-two-depot cap. All three are\nthe same mistake - planning from one snapshot without reconciling against the\nrules or against its own earlier orders in the same pass.\n\nTwo earlier attempts at this were reverted on the conclusion that AI supply\nawareness shifts campaign length out of band. That conclusion was wrong. The\npacing tests play a four-realm tiny map; the 350-400 turn target describes a\nstandard map with twelve realms. Measured under rules 29, with the AI playing\nsupply and no content change at all, the headline campaign runs 388 turns, inside\nthe target. The tiny proxies run 201, 290 and 296/464 across two epic seeds.\nSweeping the Epic project price to 44,000 and 52,000 overshot the headline to 411\nand 440, so the pace content is untouched, the seal stays 015468d1, and the proxy\nbounds are re-derived from measurement and labelled as proxies.\n\nA genuine rules-28 campaign and its archive from e8cb13e load at turn 61, re-seal\nto identical v28 bytes, replay exactly, round trip through a v29 envelope and\ncontinue.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 23,
+    "insertions": 236,
+    "deletions": 42,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "packages/ai"
+    ],
+    "notes": "## You can see it now, and so can they\n\nSupply has decided every campaign since it arrived, and until now you could not see it. The ground your hearths and depots can feed is drawn straight onto the map — a pale outline under everything else, on by default, and switchable off from the map guide if you would rather read it from the panels.\n\nDepots can also be pulled down. When they arrived they came with upkeep and no way to stop paying it short of an enemy taking the post off you, which was simply a mistake. Stand a company on your own depot and you can dismantle it; the upkeep stops that moment and the ground it fed goes quiet again.\n\nThe larger change is that rival realms now play supply too. A realm at war whose army is wasting away outside its lines will stop and raise a depot under it rather than give up the campaign. It pays for it, it keeps paying for it, and you can go and pull it down.\n\nThat last part took three attempts, and the first two were abandoned on the belief that a competent AI made campaigns finish too quickly. That turned out to be a misreading of our own tests: the fast ones play a cramped four-realm map, while the length we actually aim for describes a full twelve-realm world. Measured properly, that campaign now runs 388 turns — right where it is meant to sit — with nothing about the game's balance changed to get there."
+  },
+  {
+    "sha": "e8cb13e341c843d6bd300bf0ee66ab8a4b84179f",
+    "shortSha": "e8cb13e",
+    "author": "ErikBurdett",
+    "date": "2026-09-23T00:59:17-05:00",
+    "subject": "docs: publish a journal note for supply depots",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 45,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "6648b2f12ff930561d6eed2a8e6fe76da62984b5",
     "shortSha": "6648b2f",
     "author": "ErikBurdett",
