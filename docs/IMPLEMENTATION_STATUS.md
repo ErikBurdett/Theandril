@@ -1,8 +1,16 @@
 # Theandril implementation status
 
-## Fleet provisions and naval staging — local rules/save 31, 2026-09-23
+## Group army postings — 2026-09-23
 
-**ACT-35 implemented locally.** Fleets carry eight turns of stores beyond friendly harbour supply. Their last ration feeds everyone aboard; a further turn at sea costs hulls and passengers four strength per formation, with the existing strength floor and reduced recovery. Returning to supply replenishes stores. Splits copy endurance and transfers/merges retain the shorter endurance, so reorganizing cannot refill a fleet. Selected fleet and passenger panels expose remaining turns and replenishment guidance; foreign stores stay private.
+**ACT-32 advanced; M3 remains in progress.** Select up to128 land armies ashore in the paginated realm registry, retain selection across search and pages, and assign Hold/Join postings at each army’s position or one owned hearth. Clear existing postings together; accepted armies leave the selection and refused armies remain with their canonical reason. Individual orders override one member independently. Selection is temporary; ordinary postings survive save/load.
+
+**Scale and authority.** One bounded worker request records each existing command in stable army-ID order and publishes one final filtered observation. An authored100-army comparison transfers531,302 bytes versus51,416,921 for serial requests, with identical archives, replay and final hash. No rules, save, content, AI or pacing change. Invalid envelopes mutate nothing; valid groups report partial refusals. Recording or display interruption ends pending work and requires recovery without falsely promising rollback.
+
+**Verification.**1,876 headless tests and seven affected browser journeys pass, including100 armies/40 hearths, individual override, real capacity refusal, save restoration, keyboard/narrow controls and two damaged-response recoveries. Typecheck, lint, content/art validation and production build pass. [Evidence and reviews](development/2026-09-23-deploy-and-group-postings/README.md); [architecture](architecture/0039-group-postings.md). Theater/patrol/escort roles, named groups, policy templates and combined mature-empire acceptance remain. All fifteen release gates remain open.
+
+## Fleet provisions and naval staging — rules/save 31, 2026-09-23
+
+**ACT-35 delivered.** Fleets carry eight turns of stores beyond friendly harbour supply. Their last ration feeds everyone aboard; a further turn at sea costs hulls and passengers four strength per formation, with the existing strength floor and reduced recovery. Returning to supply replenishes stores. Splits copy endurance and transfers/merges retain the shorter endurance, so reorganizing cannot refill a fleet. Selected fleet and passenger panels expose remaining turns and replenishment guidance; foreign stores stay private.
 
 **AI.** Fleets plan a return through observed, permitted water, account for visibility-limited sailing, stop to refill, finish immediately safe landings and pay for staging harbours near depleted expeditions. Review reproduced and fixed a coastal ship choosing nearby deep-water supply over reachable shallows. The planner remains bounded to eight fleets/eight route queries per pass and two nearby return candidates; optimal harbour chains and every lost-port recovery are not proved.
 
@@ -10,7 +18,7 @@
 
 **Compatibility and verification.** Rules/save 31 adds optional canonical fleet stores; content remains `015468d1`. Six genuine rules 30 saves/archives retain original bytes and replay. Modern and mixed histories survive saving, local storage and compressed export/import. Typecheck, lint, content validation, Pages-subpath production build, **1,861/1,861 tests** and **9/9 affected browser journeys** pass. Desktop and 390px screenshots are inspected. Synthetic Huge/Legendary supply resolution measures 5.81/10.42ms median; naval planning 41.89/79.53ms, versus 33.77/63.04ms without the provision policy. This is added AI work, not a performance improvement or a full scale gate.
 
-**Evidence and remaining work.** [Verification, historical comparison, benchmark, screenshots and reviews](development/2026-09-23-fleet-provisions/README.md); [architecture](architecture/0038-fleet-provisions.md); [draft dispatch](updates/fleet-provisions-work-packet.md). Material supply costs, trade, taxation, treaty access, coordinated escorts/reinforcement, broader naval recovery and Standard/Long pacing remain open. All fifteen release gates remain open. This working-tree candidate is not committed, published or deployed.
+**Evidence and remaining work.** [Verification, historical comparison, benchmark, screenshots and reviews](development/2026-09-23-fleet-provisions/README.md); [architecture](architecture/0038-fleet-provisions.md); [draft dispatch](updates/fleet-provisions-work-packet.md). Material supply costs, trade, taxation, treaty access, coordinated escorts/reinforcement, broader naval recovery and Standard/Long pacing remain open. All fifteen release gates remain open. Published as `b623c2c91d4d852cba710f2d996c28a6b1b5d624`; GitHub Verify build and Pages deployment passed on 2026-09-23. Publication does not close a release gate.
 
 ## Pacing measurement is a tool, and CI stays build-only — 2026-09-23
 

@@ -3,9 +3,13 @@
 ## Identity
 
 - Stable entry slug: `fleet-provisions`.
-- Publication state: **draft; not published**.
-- Local base: `303434733f09dee86a4f46c65c34f5aa2af35152`; implementation is an
-  uncommitted working-tree candidate, identified by the evidence source manifest.
+- Publication state: **authorized for publication; catalog prepared for final review**.
+- Implementation source: **`b623c2c91d4d852cba710f2d996c28a6b1b5d624`**.
+  The user explicitly authorized deployment and continued development after the
+  local implementation and independent reviews were complete. The retained local
+  evidence records describe their original pre-publication boundary; this packet
+  records the later publication preparation without rewriting those records.
+- Public edition: **05**, title **A voyage needs stores for the way home**.
 - Campaign/save version: **31**. Content: **`015468d1`**, unchanged pace prices.
 - Existing work: DHARMA **ACT-35**, within **M4 / ACT-33**.
 
@@ -64,6 +68,12 @@ See the [verification and performance record](../development/2026-09-23-fleet-pr
 and [architecture decision](../architecture/0038-fleet-provisions.md).
 Pacing evidence distinguishes the twelve-realm headline campaigns from tiny
 proxies; benchmark evidence separates authored throughput from generated play.
+At the implementation checkpoint, **1,861 headless tests across 232 files** and
+**nine affected Chromium journeys** pass. The final twelve-realm headline ends
+at **234 / 342 / 379 turns** for Standard / Long / Epic. Epic is inside its band
+for this measured seed; Standard and Long remain above their approximate targets.
+The generated island sample retains one fleet and one passenger attrition turn,
+rather than claiming loss-free planning. No pace price or proxy threshold changed.
 
 ## Scope ledger and road to 1.0
 
@@ -79,13 +89,36 @@ release gates remain open.
 
 ## Publication handoff
 
-The published journal and roadmap retain their historical source pins. Its
-`supply-and-trade` item needs the following reviewed update when this candidate
-is committed and publication is authorized: mark the item **In progress**, record
-land/depot/harbour supply and finite fleet stores with AI staging, and retain
-material costs, trade, taxation, treaty access and sustained-operation proof as
-remaining work. Add the bounded naval behavior to `military-depth`; do not mark
-that system complete. Pin this packet and its actual verification artifacts to
-the eventual implementation revision before adding a published catalog entry.
+The prepared structured dispatch pins implementation evidence and all three
+unchanged screenshots to `b623c2c91d4d852cba710f2d996c28a6b1b5d624`. Its source
+notes distinguish authored player controls, generated play, synthetic timing and
+headline pacing. The previous four dispatch objects and their historical source
+pins remain unchanged.
 
-No commit, public dispatch, push, deployment or release signoff is claimed.
+The current reference ledger and roadmap now use that rules31 snapshot.
+`supply-and-trade` is **In progress**, with land/depot/harbor supply and finite
+fleet stores delivered; material costs, trade, taxation, treaty access and broad
+operation proof remain open. `military-depth` retains its partial status and
+states the bounded staging and return behavior. Relevant current entries also
+recognize existing charters/postings, current test results and the explicit
+Standard/Long pacing gap. No whole gate becomes complete.
+
+The three public PNGs are exact copies of the reviewed desktop and narrow
+captures. `apps/web/src/updates/media.json` and the downloadable public provenance
+record retain their original source paths, source revision, byte counts, SHA256
+values, viewport dimensions and authored-scenario captions. The journal imagery
+total is **2,156,459 bytes**, below its existing three MiB budget. Narrow figures
+reuse the journal's existing 390px display constraint.
+
+Publication preparation passes **21 focused checks across five files**:
+`content.test.ts`, `media.test.ts`, `roadmap.test.ts`, `validation.test.ts` and
+`journal.test.ts`. The immutable-evidence checks required a rerun outside the
+sandbox because it blocked the `git cat-file` subprocess; the unrestricted run
+passes. Scoped ESLint and whitespace checks pass. A direct comparison also
+confirms that all four historical dispatches are byte-unchanged and all three
+new public PNGs equal their reviewed source bytes.
+
+Final parent review must check the new article and current ledger against the
+pinned evidence, run the built Pages-subpath journeys, inspect the displayed
+figures and then verify the authorized publication at its actual Git revision
+and public URLs. Publication and deployment remain separate from 1.0 acceptance.

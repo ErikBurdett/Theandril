@@ -5,6 +5,54 @@ export const sourceRevision = '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef';
 export const repository = 'https://github.com/ErikBurdett/Theandril';
 const entries: Dispatch[] = [
   {
+    publication: 'published', sourceRevision: 'b623c2c91d4d852cba710f2d996c28a6b1b5d624', sequence: 5,
+    id: 'fleet-provisions', edition: '05', title: 'A voyage needs stores for the way home',
+    subtitle: '23 September 2026 · Fleet provisions & naval staging',
+    summary: 'Fleets and their passengers now share finite stores. Sailors need a route back to harbor supply, the AI plans for that return, and a saved voyage keeps the supplies it actually has.',
+    topic: 'Engineering', tags: ['Supply', 'Naval expeditions', 'AI', 'Campaign pacing', 'Saves'],
+    status: 'Reviewed checkpoint', checkpoint: 'Fleet provisions · rules 31', image: 'fleet-provisions-saved-voyage',
+    takeaways: ['Eight turns of stores feed hulls and passengers beyond friendly harbor supply; the last ration feeds everyone before later attrition begins.', 'The AI returns to known supply, waits to replenish and can fund an owned coastal staging harbor. Some disrupted or distant voyages still incur losses.', 'The measured twelve-realm Epic campaign ends at turn 379. Standard at 234 and Long at 342 remain above their approximate targets; all fifteen release gates remain open.'],
+    sections: [
+      { id: 'bring-enough-for-the-return', title: 'Bring enough for the return', paragraphs: [
+        'A harbor could feed nearby water, but until now a fleet never needed that food. Ships and passengers could remain across an ocean indefinitely. Each fleet now carries eight turns of stores outside its own realm’s supply. The final ration still feeds every formation aboard. A further turn without supplies costs each hull and passenger formation four strength, bounded by the existing strength floor, and slows morale and fatigue recovery.',
+        'The selected fleet and passenger panels show the same remaining stores and explain whether their position permits replenishment. End a turn within friendly harbor supply to refill. Supply resolves before queued movement, so a fleet arriving by a queued route refills at the following supply phase. Splitting hulls preserves their endurance; merging or transferring them retains the shorter endurance. Reorganization cannot manufacture food.',
+      ] },
+      { id: 'follow-a-saved-voyage', title: 'Follow a saved voyage', paragraphs: [
+        'The illustrated expedition is an authored browser regression with funded ships, an explicit offshore starting position and two turns of stores. Through ordinary player controls it moves, saves, reloads and consumes those final rations. The next turn reduces every hull and passenger formation by exactly four strength. The player then sails into harbor reach, replenishes stores and saves again.',
+        'The narrow capture shows the passengers drawing from their carrier’s empty stores. It is the actual selected-orders panel at 390 pixels wide, with the same warning and supply values used by gameplay. These are inspected, unchanged Playwright screenshots. They illustrate a controlled player journey; they do not depict an organically earned AI invasion.',
+      ], image: 'fleet-provisions-exhausted-narrow' },
+      { id: 'plan-the-way-home', title: 'Plan the way home before the fleet is empty', paragraphs: [
+        'The AI reads its own supply observations and canonical movement quotes. It plans a return over observed, permitted water, accounts for sailing limited by current sight and waits for replenishment after reaching supply. An immediately legal expedition landing can take precedence over returning. A depleted expedition near an owned coastal foothold can also prompt a paid harbor order, using the ordinary construction price and eligibility rules.',
+        'Independent review found a coastal galley choosing nearby deep-water supply cells even though it could reach supplied shallows around the bay. The corrected planner filters destinations by hull depth capability before retaining its two return candidates. The canonical route quote still decides whether the route is legal. Planning remains bounded to eight fleets and eight shared route queries per pass; two nearby candidates cannot prove every blocked channel or lost-port recovery.',
+        'A separate generated Small/islands campaign, seed 20260905, ran 100 rounds with no granted ships, funds, harbors or map knowledge. It recorded 2,819 accepted orders and zero refusals, 289 return movement steps, 86 resupply events, six landings and two settlements founded by transported armies. A saved mirror matched 2,477 commands and final hash afc149a5. One fleet and one passenger army each suffered one attrition turn and lost four strength. That remaining cost is part of the evidence.',
+      ], image: 'fleet-provisions-refilled-narrow' },
+      { id: 'measure-the-campaign', title: 'Measure the campaign that players are promised', paragraphs: [
+        'The headline measurement uses a Standard map with twelve realms and seed 20260905. At unchanged pace prices, Standard ends at turn 234, Long at 342 and Epic at 379. The comparable rules30 runs ended at 223, 367 and 388. Epic falls within its 350–400-turn target for this seed. Standard and Long remain above their approximate 200- and 300-turn targets, so this is not acceptance of every campaign pace.',
+        'All seven final headline and tiny proxy cases reach Prosperity with zero refused orders. Tiny four-realm campaigns remain fast regression proxies, with their own retained bounds; they do not replace the headline. No price, test timeout, proxy bound or campaign cap was changed to obtain these results. Broader seed coverage and Standard/Long balance remain work for the campaign gates.',
+      ] },
+      { id: 'keep-the-supplies-and-the-record', title: 'Keep the supplies and the record', paragraphs: [
+        'Campaign rules and save format advance to 31; content remains 015468d1. The simulation owns the optional fleet-store field, its attrition and its replenishment. The interface receives the owning realm’s supply read model, while foreign stores remain private. Resolving carriers before passengers prevents army identity ordering from consuming the passengers’ last ration too early.',
+        'Six genuine rules30 saves and archives were captured before the change. Their original bytes, hashes and command replay remain exact. Continuing an old voyage under the current rules introduces finite stores without rewriting the old record prefix. Modern and mixed histories survive local storage, compressed export/import and replay. Old envelopes reject the new field instead of silently discarding it.',
+        'At the pinned implementation checkpoint, typecheck, lint, content validation, the Pages-subpath production build and all 1,861 headless tests across 232 files pass. Nine affected Chromium journeys cover army composition, naval travel and battle, postings and supply. Earlier unsuccessful checks remain in the evidence record. These are local, scoped results, not complete browser certification or an overall release signoff.',
+      ] },
+      { id: 'the-cost-and-the-next-step', title: 'The cost and the next step toward 1.0', paragraphs: [
+        'Returning intelligently adds work. On authored complete-chart Huge and Legendary workloads with 64 and 128 loaded fleets, median supply resolution measures 5.81 and 10.42 milliseconds. Aware naval planning measures 41.89 and 79.53 milliseconds, versus 33.77 and 63.04 without the provision policy. These isolated single-realm samples exclude setup, rendering, full economic turns and sustained memory; they are not a whole-campaign speedup or a completed scale gate.',
+        'This completes the bounded fleet-provisions task within the accepted supply and sustained naval operations scope. No new gameplay obligation or scope cut is introduced. It advances Gates B, C, E, F, I and K while all fifteen release gates remain open. Material supply costs, paid trade routes, taxation, treaty access, coordinated escorts and reinforcement, broader lost-port recovery and Standard/Long pacing still need development and proof.',
+        'Contributors can start with the fleet-supply regressions, the naval planner and the retained pacing driver linked below. New logistics work needs actual player controls, observation-limited AI, save/replay continuity and measured campaign outcomes. The current roadmap records these remaining obligations; the older dispatches keep their original source pins and historical results.',
+      ] },
+    ],
+    evidence: [
+      { label: 'Fleet provisions verification and limits', path: 'docs/development/2026-09-23-fleet-provisions/README.md', note: 'Local implementation evidence retained before publication, including historical comparisons, failed checks and current scope limits.' },
+      { label: 'Fleet supply architecture', path: 'docs/architecture/0038-fleet-provisions.md', note: 'Canonical stores, turn ordering, passengers, reorganization and historical boundaries.' },
+      { label: 'Measured campaign pacing', path: 'docs/development/2026-09-23-fleet-provisions/pacing-final.log', note: 'Final seven headline/proxy campaigns; Standard 234, Long 342 and Epic 379 on the twelve-realm headline.' },
+      { label: 'Generated play and separate scale timings', path: 'docs/development/2026-09-23-fleet-provisions/benchmark-fleet-supply.json', note: 'Organic island play, saved mirror, actual remaining attrition and authored throughput samples.' },
+      { label: 'Independent code review', path: 'docs/development/2026-09-23-fleet-provisions/code-review.md', note: 'Reproduced coastal-depth failure, verified correction and bounded planner limits.' },
+      { label: 'Independent persistence review', path: 'docs/development/2026-09-23-fleet-provisions/persistence-review.md', note: 'Current field retention, old-envelope rejection, mixed history and fleet lifecycle.' },
+      { label: 'Factual evidence review', path: 'docs/development/2026-09-23-fleet-provisions/factual-review.md', note: 'Counts, pacing, generated outcomes and exact artifact hashes checked before publication preparation.' },
+      { label: 'Browser journeys and image provenance', path: 'docs/development/2026-09-23-fleet-provisions/screenshots/provenance.json', note: 'Exact reviewed pixels, source hashes, viewports and authored setup; no image transforms.' },
+    ],
+  },
+  {
     publication: 'published', sourceRevision: '1e41ec24965e46e8035c57b4f54632a690b8b712', sequence: 4,
     id: 'campaign-foundation-and-development-order', edition: '04', title: 'A funded expedition and a practical route to 1.0',
     subtitle: '21 September 2026 · Campaign foundations & the next playable systems',

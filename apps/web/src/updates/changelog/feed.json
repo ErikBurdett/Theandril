@@ -1,5 +1,56 @@
 [
   {
+    "sha": "b623c2c91d4d852cba710f2d996c28a6b1b5d624",
+    "shortSha": "b623c2c",
+    "author": "ErikBurdett",
+    "date": "2026-09-23T13:50:29-05:00",
+    "subject": "feat: provision fleets for finite voyages under rules 31",
+    "body": "",
+    "files": 58,
+    "insertions": 2321,
+    "deletions": 38,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/PERFORMANCE.md",
+      "docs/architecture"
+    ]
+  },
+  {
+    "sha": "303434733f09dee86a4f46c65c34f5aa2af35152",
+    "shortSha": "3034347",
+    "author": "ErikBurdett",
+    "date": "2026-09-23T12:35:41-05:00",
+    "subject": "chore: make pacing measurement a local tool and state the standard",
+    "body": "The lesson that campaign-length changes must be judged against the headline\ntwelve-realm campaign, not the fast four-realm test proxies, existed only as\nprose in one prompt report - and the measurement itself only as a throwaway test\nfile written and deleted five times in a single session. That is the shape of a\nlesson that gets lost: the next person to change a rule reads a red proxy bound,\nconcludes the change broke pacing, and reverts work that was correct, which is\nwhat happened twice before the headline campaign was measured.\n\npnpm measure:pacing now plays AI campaigns to their victory and reports the turn\neach ended on, the victory path, the depots standing and any order the planner\nasked for that the rules refused - both AI bugs found this session first appeared\nas a refused order inside a long campaign. Cases are named: headline (a standard\nmap with twelve realms), its Long and Standard siblings, and the four proxies the\npacing tests play.\n\nAGENTS.md and the three pacing test files now state the standard: judge the\nheadline campaign, derive the proxy bounds from the tool rather than defending\nthem, and resolve a genuine drift by fixing the change or re-pricing the pace\ndeliberately with the current pack frozen - never by tuning a constant until a\nproxy goes green.\n\nCI was already build-only and stays that way. The comment in verify.yml now names\nall three local checks and why they belong on the development machine: hosted\nrunners render WebGL in software and time out on long campaigns and browser\njourneys while the game is correct.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 9,
+    "insertions": 165,
+    "deletions": 8,
+    "areas": [
+      ".github/workflows",
+      "AGENTS.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "package.json"
+    ]
+  },
+  {
+    "sha": "32861fb6df571973f7f1eb2ddee3c0beca8a8640",
+    "shortSha": "32861fb",
+    "author": "ErikBurdett",
+    "date": "2026-09-23T03:41:44-05:00",
+    "subject": "docs: publish a journal note for the AI budget fix",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 40,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "6cbb59440186cbd574eeed90c0cb4c6aadd530d4",
     "shortSha": "6cbb594",
     "author": "ErikBurdett",

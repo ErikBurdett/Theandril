@@ -8,7 +8,7 @@ it('ships only traceable local imagery under a three MiB journal budget', () => 
   const root = resolve('apps/web/public');
   const manifestPath = resolve(root, 'updates/provenance.json');
   const assets: Asset[] = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')).assets : [];
-  expect(assets.map(asset => asset.id)).toEqual(['campaign', 'battle', 'cultures', 'archipelago', 'technical-ledger', 'transport-landing']);
+  expect(assets.map(asset => asset.id)).toEqual(['campaign', 'battle', 'cultures', 'archipelago', 'technical-ledger', 'transport-landing', 'fleet-provisions-saved-voyage', 'fleet-provisions-exhausted-narrow', 'fleet-provisions-refilled-narrow']);
   let bytes = 0;
   for (const asset of assets) {
     expect(asset.path).toMatch(/^updates\/[a-z-]+\.(webp|png)$/);
@@ -22,6 +22,12 @@ it('ships only traceable local imagery under a three MiB journal budget', () => 
     }
     expect(createHash('sha256').update(data).digest('hex')).toBe(asset.sha256);
     expect(createHash('sha256').update(readFileSync(asset.sourcePath)).digest('hex')).toBe(asset.sourceSha256);
+    if (asset.id.startsWith('fleet-provisions-')) {
+      expect(asset.crop).toBeNull();
+      expect(data.equals(readFileSync(asset.sourcePath))).toBe(true);
+      expect(asset.sha256).toBe(asset.sourceSha256);
+      expect([asset.width, asset.height]).toEqual([asset.sourceWidth, asset.sourceHeight]);
+    }
     expect(asset.alt.length).toBeGreaterThan(20);
     expect(asset.caption).toMatch(/illustrative|fixture|regression/i);
     expect(asset.width).toBeGreaterThan(0);

@@ -7,6 +7,8 @@ import { WorldRenderer, type ArtStatus, type MapPointerInput, type BattleSceneVi
 import { MovementMapHint, useMapMovement, type MapMovement, type MovementReview } from './movement';
 import type { CampaignInfo, Request, Response, WorkerMetrics } from './protocol';
 import type { CampaignMode, ChronicleDocuments } from '@theandril/chronicle';
+import { GroupPostingRequests } from './group-posting-requests';
+import type { GroupPostingIssue } from './group-postings';
 import { CampaignChronicles } from './chronicles';
 import { CampaignProgression, PublicProjects } from './progression';
 import { BattleHistory } from './warfare';
@@ -85,6 +87,7 @@ function App() {
     return () => { observer.disconnect(); if (previous) document.documentElement.style.setProperty(property, previous); else document.documentElement.style.removeProperty(property); };
   }, []);
   const sequence = useRef(0);
+  const groupPostingRequests = useRef(new GroupPostingRequests());
   const fogRequests = useRef(new WatchFogRequests());
   const [fogEnabled, setFogEnabled] = useState(true);
   const [fogPending, setFogPending] = useState(false);
@@ -328,6 +331,7 @@ function App() {
     if (response.type === 'progress') { setFeedback(response.message); return; }
     setBusy(false); setGenerating(false);
     if (response.type === 'error') {
+      groupPostingRequests.current.finish(response.id, new Error(response.message));
       if (pendingFound.current?.requestId === response.id) pendingFound.current = undefined;
       pauseWatch();
       if (previousWorker.current) { forgetWorkerDetailRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; }
@@ -335,73 +339,90 @@ function App() {
     }
     setError(false);
     if (response.type === 'state') {
-      setNavigationNotice('');
-      let cells: Observation['cells'];
-      try { cells = unpackCells(response.cells); }
-      catch (cause) {
-        campaignFault.current = true; setRecoveryRequired(true); pauseWatch();
-        invalidateDetailQueries('Map transfer could not be read. Restore a saved campaign to review land.', true);
-        setError(true); setFeedback(`The map update could not be read: ${String(cause)}. Gameplay is paused; load, import or begin a campaign to recover.`);
-        return;
+      try {
+        setNavigationNotice('');
+        let cells: Observation['cells'];
+        try { cells = unpackCells(response.cells); }
+        catch (cause) {
+          campaignFault.current = true; setRecoveryRequired(true); pauseWatch();
+          groupPostingRequests.current.reset('The map update could not be read. Restore a saved campaign.');
+          invalidateDetailQueries('Map transfer could not be read. Restore a saved campaign to review land.', true);
+          setError(true); setFeedback(`The map update could not be read: ${String(cause)}. Gameplay is paused; load, import or begin a campaign to recover.`);
+          return;
+        }
+        if (campaignFault.current && !response.reset) { groupPostingRequests.current.reset('Restore a saved campaign before issuing group orders.'); return; }
+        campaignFault.current = false; setRecoveryRequired(false);
+        if (response.reset || response.hash !== hash.current) invalidateDetailQueries('The campaign changed. Review current land details.', response.reset);
+        forgetWorkerDetailRequests(previousWorker.current); previousWorker.current?.terminate(); previousWorker.current = undefined;
+        hash.current = response.hash; metrics.current = response.metrics;
+        campaignRef.current = response.campaign; setCampaign(response.campaign);
+        if (response.reset) {
+          groupPostingRequests.current.reset('The loaded campaign changed. Review its army selection.');
+          closeMapActions();
+          setManagementWindow(undefined);
+          setBattleTransfer(undefined); setBattleReview(false);
+          fogRequests.current.reset('The loaded campaign changed. Retry its spectator controls.'); setFogPending(false);
+          pendingFound.current = undefined;
+          setRegistryEpoch(value => value + 1); setSearch(''); setForceFilter('all');
+          pauseWatch(); setProgressionOpen(false); setChroniclesOpen(false); setCharacterContext(undefined);
+          openedVictory.current = '';
+          for (const query of movementQueries.current.values()) query.reject(new Error('The loaded campaign changed. Review the route again.'));
+          movementQueries.current.clear();
+          documentsRef.current = undefined; setDocuments(undefined); setChronicleError(''); chronicleQuery.current = undefined;
+        }
+        if (response.observation.victory) pauseWatch();
+        renderer.current ??= new WorldRenderer(setArtStatus, publicAssetUrl);
+        if (!fogRequests.current.accept(response.fogEnabled, response.mapRevision)) return;
+        setFogEnabled(response.fogEnabled);
+        setMapFactions((response.map ?? response.observation).factions);
+        renderer.current.update({ ...(response.map ?? response.observation), seed: response.observation.seed, cells }, response.reset, response.mapReset);
+        // React receives only the empire read model; explored cells stay in the renderer.
+        const view = { ...response.observation, cells: [] };
+        if (view.battle || view.pendingCapture) { closeMapActions(); setManagementWindow(undefined); }
+        if (response.battlePresentation) setBattleTransfer(response.battlePresentation);
+        else if (!response.reset) setBattleTransfer(previous => previous && (view.battle?.id === previous.packet.battleId || view.battleReports.some(report => report.id === previous.packet.battleId)) ? previous : undefined);
+        observationRef.current = view; setObservation(view); setShowSetup(false);
+        const current = selectionRef.current;
+        const army = view.armies.find(item => item.id === current.armyId && item.factionId === view.factionId);
+        const settlement = view.settlements.find(item => item.id === current.settlementId && item.factionId === view.factionId);
+        const found = pendingFound.current?.requestId === response.id ? pendingFound.current : undefined;
+        if (found) pendingFound.current = undefined;
+        const foundedTown = found && found.selectionRevision === selectionRevision.current && current.armyId === found.armyId
+          ? view.settlements.find(item => item.factionId === view.factionId && item.cell === found.cell) : undefined;
+        if (mapPopupRef.current && !foundedTown && (current.armyId && (!army || army.cell !== mapPopupRef.current.cell) || current.settlementId && !settlement)) closeMapActions();
+        if (foundedTown) {
+          setRegistry('settlements'); select({ settlementId: foundedTown.id, cell: foundedTown.cell }, true);
+          if (mapPopupRef.current) openMapActions(foundedTown.cell, mapPopupRef.current.anchor, foundedTown.id);
+        } else if (found && found.selectionRevision !== selectionRevision.current) {
+          // The player inspected another entity or cleared selection while the order resolved.
+          if (army) select({ armyId: army.id, cell: army.cell });
+        } else if (!response.reset && !current.armyId && !current.settlementId && current.cell !== undefined) {
+          // Read-only terrain/diplomacy inspection is not a missing player unit.
+          // Keep it stable through ordinary updates and spectator rounds.
+          select({ cell: current.cell });
+        } else if (response.reset || (!army && !settlement)) {
+          const firstArmy = view.armies.find(item => item.factionId === view.factionId);
+          const firstSettlement = view.settlements.find(item => item.factionId === view.factionId);
+          // A new campaign can reuse the same IDs, so selection effects alone
+          // cannot synchronize a tab the player browsed before importing.
+          if (response.reset) setRegistry(firstArmy ? 'armies' : 'settlements');
+          select(firstArmy ? { armyId: firstArmy.id, cell: firstArmy.cell } : { settlementId: firstSettlement?.id, cell: firstSettlement?.cell }, true);
+        } else if (army) select({ armyId: army.id, cell: army.cell });
+        setFeedback(response.message);
+        if (response.groupPostingError) {
+          campaignFault.current = true; setRecoveryRequired(true); setError(true);
+          groupPostingRequests.current.finish(response.id, new Error(response.groupPostingError));
+        } else if (Array.isArray(response.groupPostingResults) && response.groupPostingResults.every(result => result && typeof result.armyId === 'string' && typeof result.accepted === 'boolean' && (result.message === undefined || typeof result.message === 'string'))) groupPostingRequests.current.finish(response.id, response.groupPostingResults);
+      } catch (cause) {
+        campaignFault.current = true; setRecoveryRequired(true); setError(true); pauseWatch();
+        setFeedback(`The campaign view could not be updated: ${cause instanceof Error ? cause.message : String(cause)}. Restore a saved campaign before continuing.`);
+      } finally {
+        if (groupPostingRequests.current.has(response.id)) {
+          const message = 'The group order response could not be displayed. Some orders may have applied; restore a saved campaign before continuing.';
+          groupPostingRequests.current.finish(response.id, new Error(message));
+          campaignFault.current = true; setRecoveryRequired(true); setError(true); setFeedback(message);
+        }
       }
-      if (campaignFault.current && !response.reset) return;
-      campaignFault.current = false; setRecoveryRequired(false);
-      if (response.reset || response.hash !== hash.current) invalidateDetailQueries('The campaign changed. Review current land details.', response.reset);
-      forgetWorkerDetailRequests(previousWorker.current); previousWorker.current?.terminate(); previousWorker.current = undefined;
-      hash.current = response.hash; metrics.current = response.metrics;
-      campaignRef.current = response.campaign; setCampaign(response.campaign);
-      if (response.reset) {
-        closeMapActions();
-        setManagementWindow(undefined);
-        setBattleTransfer(undefined); setBattleReview(false);
-        fogRequests.current.reset('The loaded campaign changed. Retry its spectator controls.'); setFogPending(false);
-        pendingFound.current = undefined;
-        setRegistryEpoch(value => value + 1); setSearch(''); setForceFilter('all');
-        pauseWatch(); setProgressionOpen(false); setChroniclesOpen(false); setCharacterContext(undefined);
-        openedVictory.current = '';
-        for (const query of movementQueries.current.values()) query.reject(new Error('The loaded campaign changed. Review the route again.'));
-        movementQueries.current.clear();
-        documentsRef.current = undefined; setDocuments(undefined); setChronicleError(''); chronicleQuery.current = undefined;
-      }
-      if (response.observation.victory) pauseWatch();
-    renderer.current ??= new WorldRenderer(setArtStatus, publicAssetUrl);
-      if (!fogRequests.current.accept(response.fogEnabled, response.mapRevision)) return;
-      setFogEnabled(response.fogEnabled);
-      setMapFactions((response.map ?? response.observation).factions);
-      renderer.current.update({ ...(response.map ?? response.observation), seed: response.observation.seed, cells }, response.reset, response.mapReset);
-      // React receives only the empire read model; explored cells stay in the renderer.
-      const view = { ...response.observation, cells: [] };
-      if (view.battle || view.pendingCapture) { closeMapActions(); setManagementWindow(undefined); }
-      if (response.battlePresentation) setBattleTransfer(response.battlePresentation);
-      else if (!response.reset) setBattleTransfer(previous => previous && (view.battle?.id === previous.packet.battleId || view.battleReports.some(report => report.id === previous.packet.battleId)) ? previous : undefined);
-      observationRef.current = view; setObservation(view); setShowSetup(false);
-      const current = selectionRef.current;
-      const army = view.armies.find(item => item.id === current.armyId && item.factionId === view.factionId);
-      const settlement = view.settlements.find(item => item.id === current.settlementId && item.factionId === view.factionId);
-      const found = pendingFound.current?.requestId === response.id ? pendingFound.current : undefined;
-      if (found) pendingFound.current = undefined;
-      const foundedTown = found && found.selectionRevision === selectionRevision.current && current.armyId === found.armyId
-        ? view.settlements.find(item => item.factionId === view.factionId && item.cell === found.cell) : undefined;
-      if (mapPopupRef.current && !foundedTown && (current.armyId && (!army || army.cell !== mapPopupRef.current.cell) || current.settlementId && !settlement)) closeMapActions();
-      if (foundedTown) {
-        setRegistry('settlements'); select({ settlementId: foundedTown.id, cell: foundedTown.cell }, true);
-        if (mapPopupRef.current) openMapActions(foundedTown.cell, mapPopupRef.current.anchor, foundedTown.id);
-      } else if (found && found.selectionRevision !== selectionRevision.current) {
-        // The player inspected another entity or cleared selection while the order resolved.
-        if (army) select({ armyId: army.id, cell: army.cell });
-      } else if (!response.reset && !current.armyId && !current.settlementId && current.cell !== undefined) {
-        // Read-only terrain/diplomacy inspection is not a missing player unit.
-        // Keep it stable through ordinary updates and spectator rounds.
-        select({ cell: current.cell });
-      } else if (response.reset || (!army && !settlement)) {
-        const firstArmy = view.armies.find(item => item.factionId === view.factionId);
-        const firstSettlement = view.settlements.find(item => item.factionId === view.factionId);
-        // A new campaign can reuse the same IDs, so selection effects alone
-        // cannot synchronize a tab the player browsed before importing.
-        if (response.reset) setRegistry(firstArmy ? 'armies' : 'settlements');
-        select(firstArmy ? { armyId: firstArmy.id, cell: firstArmy.cell } : { settlementId: firstSettlement?.id, cell: firstSettlement?.cell }, true);
-      } else if (army) select({ armyId: army.id, cell: army.cell });
-      setFeedback(response.message);
     } else if (response.type === 'message') setFeedback(response.message);
     else if (response.type === 'export') {
       const bytes = new Uint8Array(response.bytes);
@@ -415,6 +436,7 @@ function App() {
     const instance = new Worker(new URL('./simulation.worker.ts', import.meta.url), { type: 'module' });
     instance.onmessage = event => { if (worker.current === instance) receive(event); else { landRequestWorkers.current.delete(event.data.id); developmentRequestWorkers.current.delete(event.data.id); } };
     instance.onerror = event => {
+      groupPostingRequests.current.reset('The campaign worker stopped. Restore a saved campaign before issuing group orders.');
       fogRequests.current.reset('The campaign worker stopped. Restore a campaign before changing fog.'); setFogPending(false);
       pendingFound.current = undefined;
       invalidateDetailQueries('The campaign worker stopped. Restore a saved campaign to review land.', true);
@@ -459,7 +481,21 @@ function App() {
     window.theandril = api;
     return () => { if (window.theandril === api) delete window.theandril; fogRequests.current.reset('The campaign view closed.'); };
   }, []);
+  const issueGroupPosting: GroupPostingIssue = commands => {
+    const instance = worker.current;
+    if (!instance || busy || groupPostingRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    const id = ++sequence.current;
+    const pending = groupPostingRequests.current.enqueue(id);
+    setBusy(true); setError(false);
+    try { instance.postMessage({ id, type: 'groupPosting', commands } satisfies Request); }
+    catch (cause) {
+      groupPostingRequests.current.finish(id, cause instanceof Error ? cause : new Error(String(cause)));
+      setBusy(false);
+    }
+    return pending;
+  };
   const command = (order: GameCommand) => {
+    if (groupPostingRequests.current.busy) return;
     if (campaignRef.current.mode === 'watch' || observationRef.current?.victory) return;
     if (['endTurn', 'move', 'moveTo', 'queueMovement', 'resumeMovement', 'embarkArmy', 'disembarkArmy', 'assault', 'attack', 'resolveBattle'].includes(order.type)) closeMapActions();
     const id = send({ type: 'command', command: order });
@@ -526,7 +562,7 @@ function App() {
   };
   const cancel = () => { forgetWorkerDetailRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; invalidateDetailQueries('World generation was cancelled. Review current land details.', true); setBusy(false); setGenerating(false); setFeedback('World generation cancelled.'); };
 
-  useEffect(() => () => { landQuery.current?.reject(new Error('The campaign view closed.')); landQuery.current = undefined; landRequestWorkers.current.clear(); developmentQuery.current?.reject(new Error('The campaign view closed.')); developmentQuery.current = undefined; developmentRequestWorkers.current.clear(); worker.current?.terminate(); previousWorker.current?.terminate(); renderer.current?.destroy(); }, []);
+  useEffect(() => () => { groupPostingRequests.current.reset('The campaign view closed.'); landQuery.current?.reject(new Error('The campaign view closed.')); landQuery.current = undefined; landRequestWorkers.current.clear(); developmentQuery.current?.reject(new Error('The campaign view closed.')); developmentQuery.current = undefined; developmentRequestWorkers.current.clear(); worker.current?.terminate(); previousWorker.current?.terminate(); renderer.current?.destroy(); }, []);
   const hasCampaign = Boolean(observation);
   const victoryKey = observation?.victory ? `${observation.seed}:${hash.current}` : '';
   useEffect(() => {
@@ -742,7 +778,7 @@ function App() {
       suspended={progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen}
     />}
     {observation && managementWindow && !showSetup && !battleActive && !observation.pendingCapture && <CampaignWindow key={managementWindow} title={{ registry: 'Realm registry', orders: 'Selected orders', affairs: 'Realm affairs', journal: 'Campaign journal', guide: 'Map guide' }[managementWindow]} subtitle={managementWindow === 'orders' ? army?.name ?? settlement?.name ?? 'Map inspection' : realmName} close={() => setManagementWindow(undefined)} returnFocus={mapHost.current}>
-      {managementWindow === 'registry' && <RealmRoster key={registryEpoch} view={observation} registry={registry} search={search} force={forceFilter} selection={selection} choose={setRegistry} setSearch={setSearch} setForce={setForceFilter} characters={() => openCharacters()} select={next => { mapFocusAfterWindow.current = true; select(next, true); setManagementWindow(undefined); }}/>}
+      {managementWindow === 'registry' && <RealmRoster key={registryEpoch} view={observation} onGroupPosting={issueGroupPosting} busy={ordersBusy} registry={registry} search={search} force={forceFilter} selection={selection} choose={setRegistry} setSearch={setSearch} setForce={setForceFilter} characters={() => openCharacters()} select={next => { mapFocusAfterWindow.current = true; select(next, true); setManagementWindow(undefined); }}/>}
       {managementWindow === 'orders' && <section className="inspector" aria-label="Selected entity orders"><button className="window-map-link" onClick={showMap}>Show on map</button><fieldset className="strategic-orders" disabled={ordersBusy}>{panes?.sidebar}</fieldset></section>}
       {managementWindow === 'affairs' && <section data-testid="realm-affairs"><FactionEncounters view={observation} busy={controlLocked} issue={command} stateHash={hash.current} review={reviewPeace}/><PublicProjects view={observation} locate={cell => { mapFocusAfterWindow.current = true; select({ cell }, true); setManagementWindow(undefined); }}/><SiegeLedger view={observation} locate={cell => { mapFocusAfterWindow.current = true; renderer.current?.focus(cell); setManagementWindow(undefined); }}/></section>}
       {managementWindow === 'journal' && <><RealmJournal view={observation} locate={cell => { mapFocusAfterWindow.current = true; select({ cell }, true); setManagementWindow(undefined); }}/><BattleHistory view={observation} replayId={battleTransfer?.packet.battleId} replay={() => { pauseWatch(); setManagementWindow(undefined); setBattleReview(true); }}/>{observation.victory && <button onClick={openChronicles}>Read campaign chronicles</button>}</>}

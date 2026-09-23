@@ -1,0 +1,19 @@
+[WebServer] npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+[WebServer] (node:1527626) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:1527740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:1528625) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable map-revision response ends pending work and recovers from the saved campaign (3.0s)
+  ✓  2 tests/gameplay/group-posting-recovery.spec.ts:7:3 › a group with an unreadable missing-results response ends pending work and recovers from the saved campaign (2.5s)
+  ✓  3 tests/gameplay/group-postings.spec.ts:8:1 › a hundred armies receive one group posting, retain individual overrides and restore through a real save (13.4s)
+  ✓  4 tests/gameplay/group-postings.spec.ts:79:1 › a partly refused group reports the canonical limit and retains only refused armies (1.7s)
+  ✓  5 tests/gameplay/postings.spec.ts:28:1 › an army is posted from real controls, states where it stands, and a hearth musters what it raises (4.0s)
+  ✓  6 tests/gameplay/realm-navigation.spec.ts:27:1 › unified registry finds the hundredth army and fortieth town without rendering the whole empire or changing orders (13.7s)
+  ✓  7 tests/gameplay/realm-navigation.spec.ts:89:1 › narrow town categories expose real production, blockers and character-to-army navigation with save restoration (3.0s)
+
+  7 passed (42.5s)

@@ -4,18 +4,30 @@ import { dispatches } from './content';
 describe('public dispatch contract', () => {
   it('accepts only explicitly published, revision-pinned entries in newest-work-first order', () => {
     expect(dispatches.every(story => 'publication' in story && story.publication === 'published')).toBe(true);
-    expect(dispatches.map(story => story.id)).toEqual(['campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
+    expect(dispatches.map(story => story.id)).toEqual(['fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
     expect(dispatches.every(story => 'sourceRevision' in story && /^[0-9a-f]{40}$/.test(String(story.sourceRevision)))).toBe(true);
   });
   it('publishes the reviewed campaign foundation with its unresolved acceptance and historical pins intact', () => {
-    const story = dispatches[0]!;
+    const story = dispatches.find(entry => entry.id === 'campaign-foundation-and-development-order')!;
     expect(story.sourceRevision).toBe('1e41ec24965e46e8035c57b4f54632a690b8b712');
     const text = story.sections.flatMap(section => section.paragraphs).join(' ');
     expect(text).toContain('1,857 of 1,858');
     expect(text).toContain('64.779 seconds against its 60-second limit');
     expect(text).toContain('Client contracts, tribute and unification are not implemented');
     expect(text).toContain('all fifteen whole release gates remain open');
-    expect(dispatches.slice(1).every(entry => entry.sourceRevision === '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef')).toBe(true);
+    expect(dispatches.filter(entry => entry.sequence <= 3).every(entry => entry.sourceRevision === '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef')).toBe(true);
+  });
+  it('publishes fleet provisions with exact current evidence and the remaining pace and release limits', () => {
+    const story = dispatches[0]!;
+    expect(story).toMatchObject({ id: 'fleet-provisions', sequence: 5, sourceRevision: 'b623c2c91d4d852cba710f2d996c28a6b1b5d624', checkpoint: 'Fleet provisions · rules 31' });
+    const text = story.sections.flatMap(section => section.paragraphs).join(' ');
+    expect(text).toContain('1,861 headless tests across 232 files');
+    expect(text).toContain('Standard ends at turn 234, Long at 342 and Epic at 379');
+    expect(text).toContain('Standard and Long remain above');
+    expect(text).toContain('all fifteen release gates remain open');
+    expect(text).toContain('authored browser regression');
+    expect(text).toContain('One fleet and one passenger army each suffered one attrition turn');
+    expect(story.evidence.some(link => link.path.endsWith('/persistence-review.md'))).toBe(true);
   });
   it('publishes the campaign-safety checkpoint without claiming a release', () => {
     const story = dispatches.find(item => item.id === 'r17-campaign-safety');

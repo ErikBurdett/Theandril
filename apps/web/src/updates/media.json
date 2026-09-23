@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "licenseNotes": "Original owned Theandril gameplay screenshots and previously reviewed Hearth & Card interface artwork. Original provider/service terms apply; no new generation or provider call. No third-party game artwork, font CDN, terminal image, or campaign trace is shipped.",
-  "review": "Original four derivative reviews: docs/development/dispatches/frontend-evidence/REPORT.md. The two exact 21 September 2026 PNG captures were independently inspected in docs/development/2026-09-21-epic-baseline/review/final.md; publication layout is verified separately.",
+  "review": "Original four derivative reviews: docs/development/dispatches/frontend-evidence/REPORT.md. The two exact 21 September 2026 PNG captures were independently inspected in docs/development/2026-09-21-epic-baseline/review/final.md; publication layout is verified separately. The three exact 23 September 2026 fleet-provisions captures were inspected at desktop and 390px width; their source settings and hashes are retained in docs/development/2026-09-23-fleet-provisions/screenshots/provenance.json. Publication layout is verified separately.",
   "assets": [
     {
       "id": "campaign",
@@ -136,6 +136,63 @@
       "height": 844,
       "alt": "A passenger aboard a transport can select a landing shore and disembark through the narrow selected-orders panel.",
       "caption": "21 September 2026 authored naval regression at 390 \u00d7 844: paid Ocean navigation and a saved deep-ocean route, followed by ordinary human landing orders. Exact uncropped PNG; not an organic AI colony."
+    },
+    {
+      "id": "fleet-provisions-saved-voyage",
+      "path": "updates/fleet-provisions-saved-voyage.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "b623c2c91d4d852cba710f2d996c28a6b1b5d624",
+      "sourcePath": "docs/development/2026-09-23-fleet-provisions/screenshots/fleet-provisions-saved-voyage.png",
+      "sourceSha256": "a32c0745c070cad932f56cf7571cad5bd73691e0013f99eca8799ae68bc4138f",
+      "sourceWidth": 1440,
+      "sourceHeight": 1000,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact Playwright PNG bytes; no transform or re-encoding.",
+      "sha256": "a32c0745c070cad932f56cf7571cad5bd73691e0013f99eca8799ae68bc4138f",
+      "bytes": 887581,
+      "width": 1440,
+      "height": 1000,
+      "alt": "The selected fleet panel shows two of eight provision turns left after a saved offshore voyage.",
+      "caption": "23 September 2026 authored naval regression, seed 20260905: funded ships begin offshore with two turns of stores, then move and save through ordinary controls. Exact 1440 \u00d7 1000 PNG; not an organic AI invasion."
+    },
+    {
+      "id": "fleet-provisions-exhausted-narrow",
+      "path": "updates/fleet-provisions-exhausted-narrow.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "b623c2c91d4d852cba710f2d996c28a6b1b5d624",
+      "sourcePath": "docs/development/2026-09-23-fleet-provisions/screenshots/fleet-provisions-exhausted-narrow.png",
+      "sourceSha256": "2fc765abcdb8a6a507d7e3834722b2a0fe93e0a32db630bf9ae6608ad1606fbf",
+      "sourceWidth": 390,
+      "sourceHeight": 844,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact Playwright PNG bytes; no transform or re-encoding.",
+      "sha256": "2fc765abcdb8a6a507d7e3834722b2a0fe93e0a32db630bf9ae6608ad1606fbf",
+      "bytes": 204391,
+      "width": 390,
+      "height": 844,
+      "alt": "The selected passenger army at 390 pixels wide shares its carrying fleet\u2019s empty stores and attrition warning.",
+      "caption": "The same authored naval regression at 390 \u00d7 844: two final rations fed hulls and passengers before a further turn cost every formation four strength. Exact uncropped PNG after normal player end-turn controls."
+    },
+    {
+      "id": "fleet-provisions-refilled-narrow",
+      "path": "updates/fleet-provisions-refilled-narrow.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "b623c2c91d4d852cba710f2d996c28a6b1b5d624",
+      "sourcePath": "docs/development/2026-09-23-fleet-provisions/screenshots/fleet-provisions-refilled-narrow.png",
+      "sourceSha256": "0f76fdf207fa30ba20f4b1397ad8ef7fff7c752e1ac175f8d46f779b831e6be4",
+      "sourceWidth": 390,
+      "sourceHeight": 844,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact Playwright PNG bytes; no transform or re-encoding.",
+      "sha256": "0f76fdf207fa30ba20f4b1397ad8ef7fff7c752e1ac175f8d46f779b831e6be4",
+      "bytes": 193720,
+      "width": 390,
+      "height": 844,
+      "alt": "The selected fleet at 390 pixels wide shows eight provision turns restored within Charter Quay\u2019s harbor supply.",
+      "caption": "The same authored naval regression at 390 \u00d7 844: an ordinary move into harbor reach and an end turn refill stores to eight while prior formation losses remain. The journey then saves and reloads again. Exact uncropped PNG."
     }
   ],
   "sharedMaterials": [
@@ -176,5 +233,5 @@
       "caption": "Decorative interface material, not a depiction of canonical gameplay."
     }
   ],
-  "totalJournalImageBytes": 870767
+  "totalJournalImageBytes": 2156459
 }

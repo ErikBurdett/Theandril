@@ -17,7 +17,7 @@ test('home provides the public routes and generated ledger', async ({ page }) =>
 
 test('dispatches remain refresh-safe at their new path', async ({ page }) => {
   await page.goto('updates/dispatches/');
-  await expect(page.locator('.dispatch-row')).toHaveCount(4);
+  await expect(page.locator('.dispatch-row')).toHaveCount(5);
   await page.locator('.dispatch-row a').first().click();
   await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=/);
 });

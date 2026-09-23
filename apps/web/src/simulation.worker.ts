@@ -1,8 +1,8 @@
-import { createGame, getDevelopmentEntity, getMovementQuery, getObservation, getSettlementLandObservation, getSpectatorObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
+import { commandSchema, createGame, getDevelopmentEntity, getMovementQuery, getObservation, getSettlementLandObservation, getSpectatorObservation, previewPeace, stateHash, validateEndTurn, type GameCommand, type GameState, type Observation } from '@theandril/sim';
 import { aiObservationOptions, planTurn } from '@theandril/ai';
 import { createJournal, resumeJournal, generateChronicles, type CampaignJournal, type ChronicleDocuments } from '@theandril/chronicle';
 import { SaveStore, deserializeCampaign, exportSave, importSave, serializeCampaign } from '@theandril/persistence';
-import type { Request, Response, WorkerMetrics } from './protocol';
+import { MAX_GROUP_POSTING_COMMANDS, type GroupPostingResult, type Request, type Response, type WorkerMetrics } from './protocol';
 import { cellTransferBuffers, cellTransferBytes, packCells } from './cell-transfer';
 import { BattlePresentationMailbox } from './battle-transfer';
 
@@ -23,7 +23,7 @@ const metrics: WorkerMetrics = { generationMs: 0, commandMs: 0, aiMs: 0, transfe
 const textEncoder = new TextEncoder();
 
 function send(message: Response, transfer: Transferable[] = []): void { self.postMessage(message, { transfer }); }
-function publish(id: number, message: string, reset = false, replaceMap = false): void {
+function publish(id: number, message: string, reset = false, replaceMap = false, groupPosting?: { groupPostingResults: GroupPostingResult[]; groupPostingError?: string }): void {
   if (!state || !journal) throw new Error('Begin or load a campaign first.');
   const observation = queryObservation ??= getObservation(state, state.turnOwnerId, { landDetails: 'none', developmentCandidates: false });
   if (reset) { fogEnabled = true; battlePresentations.reset(); }
@@ -41,11 +41,31 @@ function publish(id: number, message: string, reset = false, replaceMap = false)
   const map = spectator ? (({ cells: _cells, ...summary }) => { void _cells; return summary; })(spectator) : undefined;
   const packed = packCells(cells);
   metrics.cellTransferBytes = cellTransferBytes(packed);
-  metrics.transferBytes = textEncoder.encode(JSON.stringify(summary)).byteLength + (map ? textEncoder.encode(JSON.stringify(map)).byteLength : 0) + (battlePresentation ? textEncoder.encode(JSON.stringify(battlePresentation)).byteLength : 0) + metrics.cellTransferBytes;
+  metrics.groupPostingResultBytes = groupPosting ? textEncoder.encode(JSON.stringify(groupPosting)).byteLength : 0;
+  metrics.transferBytes = textEncoder.encode(JSON.stringify(summary)).byteLength + (map ? textEncoder.encode(JSON.stringify(map)).byteLength : 0) + (battlePresentation ? textEncoder.encode(JSON.stringify(battlePresentation)).byteLength : 0) + metrics.cellTransferBytes + metrics.groupPostingResultBytes;
   metrics.totalTransferBytes += metrics.transferBytes;
   publishedHash = stateHash(state);
   queryHash = publishedHash;
-  send({ id, type: 'state', observation: summary, cells: packed, ...(map ? { map } : {}), ...(battlePresentation ? { battlePresentation } : {}), fogEnabled, mapRevision, mapReset, campaign: { mode: journal.mode, coverage: journal.coverage }, reset, hash: publishedHash, metrics: { ...metrics }, message }, cellTransferBuffers(packed));
+  send({ id, type: 'state', observation: summary, cells: packed, ...(map ? { map } : {}), ...(battlePresentation ? { battlePresentation } : {}), ...groupPosting, fogEnabled, mapRevision, mapReset, campaign: { mode: journal.mode, coverage: journal.coverage }, reset, hash: publishedHash, metrics: { ...metrics }, message }, cellTransferBuffers(packed));
+}
+
+/** Validate the entire transport envelope before the first canonical order. */
+function groupPostingCommands(request: Extract<Request, { type: 'groupPosting' }>, factionId: string): Extract<GameCommand, { type: 'setPosting' }>[] {
+  if (!Number.isSafeInteger(request.id) || request.id < 0 || Object.keys(request).some(key => !['id', 'type', 'commands'].includes(key))
+    || !Array.isArray(request.commands) || request.commands.length < 1 || request.commands.length > MAX_GROUP_POSTING_COMMANDS) {
+    throw new Error(`A group posting requires between 1 and ${MAX_GROUP_POSTING_COMMANDS} posting orders in a valid request.`);
+  }
+  const ids = new Set<string>();
+  const commands = Array.from(request.commands).map((input, index) => {
+    const parsed = commandSchema.safeParse(input);
+    if (!parsed.success || parsed.data.type !== 'setPosting') throw new Error(`Group posting item ${index + 1} is not a valid posting order.`);
+    const command = parsed.data;
+    if (command.factionId !== factionId) throw new Error('This seat does not control every faction in the group posting.');
+    if (ids.has(command.armyId)) throw new Error('A group posting may name each army only once.');
+    ids.add(command.armyId);
+    return command;
+  });
+  return commands.sort((a, b) => a.armyId < b.armyId ? -1 : a.armyId > b.armyId ? 1 : 0);
 }
 
 function applyCommand(game: GameState, command: GameCommand) {
@@ -205,6 +225,29 @@ async function handle(request: Request): Promise<void> {
       let message = state.victory ? 'The campaign has ended. Its two chronicles are ready to read.' : `AI round complete. Turn ${state.turn}.`;
       if (warnings.length) message += ' ' + warnings.join(' ');
       publish(request.id, await autosave(message));
+      return;
+    }
+    if (request.type === 'groupPosting') {
+      if (journal.mode === 'watch') throw new Error('AI watch controls every faction. Pause or step rounds from the watch controls.');
+      if (state.victory) throw new Error('The campaign has ended. Open its chronicles to review the result.');
+      const commands = groupPostingCommands(request, state.turnOwnerId), started = performance.now();
+      const groupPostingResults: GroupPostingResult[] = [];
+      let groupPostingError: string | undefined;
+      for (const command of commands) {
+        try {
+          const result = applyCommand(state, command);
+          groupPostingResults.push({ armyId: command.armyId, accepted: result.ok, ...(!result.ok ? { message: result.error ?? 'The posting could not be completed.' } : {}) });
+        } catch (error) {
+          // A recorder can fail after the command mutated canonical state. Do
+          // not call that order refused, roll it back, or attempt the next one.
+          groupPostingError = `Recording was interrupted after ${groupPostingResults.length} completed order${groupPostingResults.length === 1 ? '' : 's'}. Some orders may have applied; restore a saved campaign before continuing. ${error instanceof Error ? error.message : String(error)}`;
+          break;
+        }
+      }
+      metrics.commandMs = performance.now() - started; metrics.aiMs = 0;
+      const accepted = groupPostingResults.filter(result => result.accepted).length;
+      const message = groupPostingError ?? `${accepted} posting${accepted === 1 ? '' : 's'} accepted; ${groupPostingResults.length - accepted} refused.`;
+      publish(request.id, message, false, false, { groupPostingResults, ...(groupPostingError ? { groupPostingError } : {}) });
       return;
     }
     if (request.type === 'command') {

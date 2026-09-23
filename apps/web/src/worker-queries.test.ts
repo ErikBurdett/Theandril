@@ -1,10 +1,11 @@
 import 'fake-indexeddb/auto';
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
-import { createGame, getMovementQuery, getObservation, getSettlementLandObservation, serializeGame, stateHash } from '@theandril/sim';
-import { deserializeCampaign, exportSave, importSave, SaveStore } from '@theandril/persistence';
-import { prosperityCampaign } from '../../../packages/test-fixtures/src/victory-fixture';
+import { applyCommand, createArmyFormation, createGame, deserializeGame, getMovementQuery, getObservation, getSettlementLandObservation, serializeGame, stateHash, type GameCommand } from '@theandril/sim';
+import { CampaignJournal, createJournal, replayArchive } from '@theandril/chronicle';
+import { deserializeCampaign, exportSave, importSave, SaveStore, serializeCampaign } from '@theandril/persistence';
+import { prosperityCampaign, unificationCampaign } from '../../../packages/test-fixtures/src/victory-fixture';
 import { unpackCells } from './cell-transfer';
-import type { Request, Response } from './protocol';
+import { MAX_GROUP_POSTING_COMMANDS, type Request, type Response } from './protocol';
 
 type WithoutId<T> = T extends { id: number } ? Omit<T, 'id'> : never;
 type RequestBody = WithoutId<Request>;
@@ -205,5 +206,167 @@ describe('actual worker scoped-query boundary', () => {
     const movement = await request({ type: 'movementQuery', armyId: 'army.2' }, 'movementQuery');
     expect(movement.hash).toBe(state.hash);
     expect((await exported()).archive).toEqual(loaded.archive);
+  });
+});
+
+function groupPostingFixture(count = 100) {
+  const game = createGame({ seed: 17, size: 'tiny', factionCount: 2, pace: 'short' });
+  const factionId = game.turnOwnerId, cell = game.world.starts[0]!;
+  const commands: Extract<GameCommand, { type: 'setPosting' }>[] = [];
+  for (let index = 0; index < count; index++) {
+    const id = `army.${game.nextId++}`;
+    game.armies[id] = { id, factionId, name: `Authored registry company ${index + 1}`, cell, movement: 3, formations: [createArmyFormation(id, 'unit.guard')] };
+    commands.push({ type: 'setPosting', factionId, armyId: id, cell, mode: 'hold' });
+  }
+  return { game: deserializeGame(serializeGame(game)), commands: commands.sort((a, b) => a.armyId < b.armyId ? -1 : 1) };
+}
+
+describe('actual worker group-posting boundary', () => {
+  it('journals 100 ordinary postings with one fog-preserving response, matching serial commands, replay and saved continuation', async () => {
+    const { game, commands } = groupPostingFixture(), bytes = await exportSave(serializeGame(game));
+    const initial = await request({ type: 'import', bytes }, 'state');
+    const beforeCells = getObservation(game, game.turnOwnerId).cells;
+    const started = performance.now();
+    const batch = dispatch({ type: 'groupPosting', commands: [...commands].reverse() }, 'state');
+    const result = await batch.response, groupMs = performance.now() - started;
+    expect(completed.filter(id => id === batch.id)).toHaveLength(1);
+    expect(result.groupPostingResults).toEqual(commands.map(command => ({ armyId: command.armyId, accepted: true })));
+    expect(result.groupPostingError).toBeUndefined();
+    expect(result.observation.postings).toHaveLength(100);
+    expect(result).toMatchObject({ fogEnabled: true, mapReset: false, reset: false, mapRevision: initial.mapRevision });
+    expect(result.map).toBeUndefined(); expect(unpackCells(result.cells)).toEqual([]);
+    expect(transfers.get(result.id)).toMatchObject({ bufferCount: 3, detached: [true, true, true] });
+    const resultBytes = new TextEncoder().encode(JSON.stringify({ groupPostingResults: result.groupPostingResults })).byteLength;
+    expect(result.metrics.groupPostingResultBytes).toBe(resultBytes);
+    expect(resultBytes).toBeLessThan(8_000);
+    expect(result.metrics.transferBytes).toBe(new TextEncoder().encode(JSON.stringify(result.observation)).byteLength + result.metrics.cellTransferBytes + resultBytes);
+    expect(result.metrics.totalTransferBytes - initial.metrics.totalTransferBytes).toBe(result.metrics.transferBytes);
+    const grouped = await exported();
+    expect(grouped.archive.records.map(record => record.command)).toEqual(commands);
+    expect(grouped.archive.records.every(record => record.ok)).toBe(true);
+    expect(stateHash(replayArchive(grouped.archive))).toBe(result.hash);
+    expect(getObservation(grouped.game, game.turnOwnerId).cells).toEqual(beforeCells);
+    await request({ type: 'save' }, 'message');
+    expect((await request({ type: 'load' }, 'state')).hash).toBe(result.hash);
+    const clear = { ...commands[0]!, mode: 'none' } as const;
+    const resumed = await request({ type: 'groupPosting', commands: [clear] }, 'state');
+    expect(resumed.groupPostingResults).toEqual([{ armyId: clear.armyId, accepted: true }]);
+    expect(applyCommand(grouped.game, clear).ok).toBe(true);
+    expect(resumed.hash).toBe(stateHash(grouped.game));
+    expect(stateHash(replayArchive((await exported()).archive))).toBe(resumed.hash);
+
+    await request({ type: 'import', bytes }, 'state');
+    const serialStart = performance.now(); let serialBytes = 0, serialHash = '';
+    for (const command of commands) {
+      const next = await request({ type: 'command', command }, 'state');
+      serialBytes += next.metrics.transferBytes; serialHash = next.hash;
+      expect(next.groupPostingResults).toBeUndefined(); expect(next.metrics.groupPostingResultBytes).toBe(0);
+    }
+    const serialMs = performance.now() - serialStart, serial = await exported();
+    expect(serialHash).toBe(result.hash); expect(serial.archive).toEqual(grouped.archive);
+    expect(result.metrics.transferBytes).toBeLessThan(serialBytes / 50);
+    console.info(JSON.stringify({ probe: 'actual-worker-100-postings', synthetic: true, authoredCoLocatedCompanies: 100,
+      groupResponses: 1, serialResponses: 100, groupBytes: result.metrics.transferBytes, resultBytes, serialBytes, groupMs, serialMs,
+      hash: result.hash, exactSerialArchive: true, unchangedFog: true, savedContinuation: true }));
+  });
+
+  it('reports and journals individual canonical refusals while applying valid siblings in stable order', async () => {
+    const { game, commands } = groupPostingFixture(2), owner = game.turnOwnerId;
+    const foreign = Object.values(game.armies).find(army => army.factionId !== owner)!;
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const items = [...commands, { ...commands[0]!, armyId: 'army.missing' }, { ...commands[0]!, armyId: foreign.id }];
+    const result = await request({ type: 'groupPosting', commands: items.reverse() }, 'state');
+    expect(result.groupPostingResults?.filter(item => item.accepted)).toHaveLength(2);
+    expect(result.groupPostingResults?.filter(item => !item.accepted)).toEqual([
+      { armyId: foreign.id, accepted: false, message: 'You do not control that army.' },
+      { armyId: 'army.missing', accepted: false, message: 'You do not control that army.' },
+    ]);
+    expect(result.observation.postings.map(item => item.armyId)).toEqual(commands.map(command => command.armyId));
+    const saved = await exported();
+    expect(saved.archive.records).toHaveLength(4);
+    expect(saved.archive.records.map(record => record.ok)).toEqual(result.groupPostingResults!.map(item => item.accepted));
+    expect(stateHash(replayArchive(saved.archive))).toBe(result.hash);
+  });
+
+  it('accepts the full 128-order transport limit without truncation or extra state responses', async () => {
+    const { game, commands } = groupPostingFixture(MAX_GROUP_POSTING_COMMANDS);
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const batch = dispatch({ type: 'groupPosting', commands }, 'state'), result = await batch.response;
+    expect(result.groupPostingResults).toHaveLength(MAX_GROUP_POSTING_COMMANDS);
+    expect(result.groupPostingResults?.every(item => item.accepted)).toBe(true);
+    expect(result.observation.postings).toHaveLength(MAX_GROUP_POSTING_COMMANDS);
+    expect(completed.filter(id => id === batch.id)).toHaveLength(1);
+    expect(result.metrics.groupPostingResultBytes).toBeLessThan(8_000);
+    const saved = await exported();
+    expect(saved.archive.records).toHaveLength(MAX_GROUP_POSTING_COMMANDS);
+    expect(stateHash(replayArchive(saved.archive))).toBe(result.hash);
+  });
+
+  it('rejects every malformed or wrong-seat envelope before any command or archive record is applied', async () => {
+    const { game, commands } = groupPostingFixture(2);
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const before = await exported(), first = commands[0]!, second = commands[1]!;
+    const sparse = Array<unknown>(3); sparse[0] = first; sparse[2] = second;
+    const invalid: unknown[] = [
+      [], Array.from({ length: MAX_GROUP_POSTING_COMMANDS + 1 }, (_, index) => ({ ...first, armyId: `army.${index + 1000}` })),
+      [first, first], [first, { ...second, factionId: game.factions[1]!.id }],
+      [first, { ...second, type: 'endTurn' }], [first, { ...second, mode: 'invalid' }],
+      [first, { ...second, cell: 1.5 }], [first, { ...second, extra: true }], [first, null],
+      [first, undefined], sparse, { 0: first, length: 1 }, null,
+    ];
+    for (const input of invalid) {
+      const response = await request({ type: 'groupPosting', commands: input as typeof commands }, 'error');
+      expect(response.message.length).toBeGreaterThan(0);
+      expect((await exported()).text).toBe(before.text);
+    }
+    const forged = { type: 'groupPosting', commands: [first], hiddenMode: 'watch' } as unknown as RequestBody;
+    expect((await request(forged, 'error')).message).toContain('valid request');
+    expect((await exported()).text).toBe(before.text);
+  });
+
+  it('rejects watch and completed campaigns without mutating their archives', async () => {
+    const { game, commands } = groupPostingFixture(1);
+    const watch = createJournal(game, { mode: 'watch', coverage: 'from-save' });
+    await request({ type: 'import', bytes: await exportSave(serializeCampaign(game, watch.materialize())) }, 'state');
+    const before = await exported();
+    expect((await request({ type: 'groupPosting', commands }, 'error')).message).toContain('AI watch controls');
+    expect((await exported()).text).toBe(before.text);
+    const won = unificationCampaign();
+    for (let turn = 0; turn < 120 && !won.victory; turn++) expect(applyCommand(won, { type: 'endTurn', factionId: won.turnOwnerId }).ok).toBe(true);
+    expect(won.victory).not.toBeNull();
+    await request({ type: 'import', bytes: await exportSave(serializeGame(won)) }, 'state');
+    const ended = await exported();
+    expect((await request({ type: 'groupPosting', commands }, 'error')).message).toContain('campaign has ended');
+    expect((await exported()).text).toBe(ended.text);
+  });
+
+  it('publishes actual partial state once after a recorder exception, stops remaining orders and requires restore', async () => {
+    const { game, commands } = groupPostingFixture(3);
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    await request({ type: 'save' }, 'message');
+    const record = CampaignJournal.prototype.record;
+    const interrupted = vi.spyOn(CampaignJournal.prototype, 'record').mockImplementation(function (this: CampaignJournal, ...args: Parameters<typeof record>) {
+      const result = record.apply(this, args);
+      if (args[1].type === 'setPosting' && args[1].armyId === commands[1]!.armyId) throw new Error('Authored record-transfer failure after mutation');
+      return result;
+    });
+    try {
+      const batch = dispatch({ type: 'groupPosting', commands }, 'state'), partial = await batch.response;
+      expect(completed.filter(id => id === batch.id)).toHaveLength(1);
+      expect(interrupted).toHaveBeenCalledTimes(2);
+      expect(partial.groupPostingResults).toEqual([{ armyId: commands[0]!.armyId, accepted: true }]);
+      expect(partial.groupPostingError).toContain('after 1 completed order');
+      expect(partial.groupPostingError).toContain('Some orders may have applied; restore a saved campaign');
+      expect(partial.observation.postings.map(item => item.armyId)).toEqual(commands.slice(0, 2).map(command => command.armyId));
+      for (const command of commands.slice(0, 2)) expect(applyCommand(game, command).ok).toBe(true);
+      expect(partial.hash).toBe(stateHash(game));
+      expect((await request({ type: 'groupPosting', commands: [commands[2]!] }, 'error')).message).toContain('Recording was interrupted');
+      expect(interrupted).toHaveBeenCalledTimes(2);
+    } finally { interrupted.mockRestore(); }
+    const restored = await request({ type: 'load' }, 'state');
+    expect(restored.observation.postings).toEqual([]);
+    const retried = await request({ type: 'groupPosting', commands }, 'state');
+    expect(retried.groupPostingResults?.every(item => item.accepted)).toBe(true);
+    expect(stateHash(replayArchive((await exported()).archive))).toBe(retried.hash);
   });
 });

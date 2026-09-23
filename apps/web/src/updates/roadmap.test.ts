@@ -52,6 +52,19 @@ describe('the source-backed roadmap contract', () => {
       expect(() => execFileSync('git', ['cat-file', '-e', `${roadmapSnapshot.revision}:${path}`], { stdio: 'pipe' }), path).not.toThrow();
     }
   });
+  it('records current supply and pacing without completing a wider system or gate', () => {
+    expect(roadmapSnapshot).toMatchObject({ revision: 'b623c2c91d4d852cba710f2d996c28a6b1b5d624', rules: 31 });
+    const supply = roadmapItems.find(item => item.id === 'supply-and-trade')!;
+    expect(supply).toMatchObject({ stage: 'current-work', status: 'in-progress' });
+    expect(supply.delivered.join(' ')).toContain('eight turns of provisions');
+    expect(supply.remaining.join(' ')).toContain('taxation');
+    expect(supply.remaining.join(' ')).toContain('treaty access');
+    const pacing = roadmapItems.find(item => item.id === 'victory-and-pacing')!;
+    expect(pacing.delivered.join(' ')).toContain('234 at Standard, 342 at Long and 379 at Epic');
+    expect(pacing.remaining.join(' ')).toContain('not general pacing acceptance');
+    expect(roadmapGates).toHaveLength(15);
+    expect(roadmapGates.every(gate => gate.status === 'in-progress' || gate.status === 'pending')).toBe(true);
+  });
 });
 
 describe('roadmap browsing and permanent URLs', () => {

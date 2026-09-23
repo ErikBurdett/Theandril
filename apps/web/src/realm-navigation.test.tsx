@@ -28,6 +28,17 @@ describe('realm navigation presentation', () => {
     expect(registryEntries(view, 'settlements', '', 'all', 'id').every(item => item.factionId === view.factionId)).toBe(true);
   });
 
+  it('offers bounded, separately labelled group checkboxes without changing the locate action', () => {
+    const game = characterCampaign(100), view = getObservation(game, game.turnOwnerId);
+    const html = renderToStaticMarkup(<RealmRegistry view={view} registry="armies" search="" force="all" selection={{}} select={() => { throw new Error('Rendering must not navigate.'); }} onGroupPosting={async () => { throw new Error('Rendering must not issue orders.'); }}/>);
+    expect(html.match(/type="checkbox"/g)).toHaveLength(REGISTRY_PAGE_SIZE);
+    expect(html.match(/class="registry-item /g)).toHaveLength(REGISTRY_PAGE_SIZE);
+    expect(html).toContain('Select matching armies');
+    expect(html).toContain('for group orders');
+    expect(html).toContain('0 armies selected');
+    expect(html).toContain('Page 1 of 4');
+  });
+
   it('uses one keyboard tablist and a real character action with a clearly named current selection', () => {
     const html = renderToStaticMarkup(<RealmNavigation registry="settlements" armyCount={100} townCount={40} characterCount={3} choose={() => {}} characters={() => {}} selectionName="Ashen Hearth" selectionKind="Selected settlement" showMap={() => {}} showOrders={() => {}}/>);
     expect(html.match(/role="tablist"/g)).toHaveLength(1);
