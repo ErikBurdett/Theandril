@@ -28,7 +28,7 @@ import { sameDevelopmentFocus, type DevelopmentQuery, type DevelopmentQueryResul
 import { FactionOverviewControl } from './faction-overview-control';
 import { unpackCells } from './cell-transfer';
 import { WatchFogRequests, type WatchFogApi } from './watch-fog';
-import { actionCandidates, actionShortcut, loadShortcuts, nextAction, saveShortcuts, shortcutError, SHORTCUT_STORAGE_KEY, type ActionKind, type Direction, type ShortcutBindings } from './next-action';
+import { actionCandidates, actionGroups, actionShortcut, loadShortcuts, nextAction, saveShortcuts, shortcutError, SHORTCUT_STORAGE_KEY, type ActionCause, type ActionKind, type Direction, type ShortcutBindings } from './next-action';
 import { CapturePanel, SiegeLedger } from './siege';
 import './style.css';
 import './campaign-records.css';
@@ -596,10 +596,12 @@ function App() {
   const navigationLocked = ordersBusy || showSetup || !observation;
   const nextActions = useMemo(() => observation ? actionCandidates(observation) : { armies: [], settlements: [], households: [] }, [observation]);
   const unassignedHouseholds = nextActions.households.reduce((total, town) => total + town.unassignedHouseholds, 0);
-  const jumpToAction = (kind: ActionKind, direction: Direction = 1) => {
+  const actionCauses = useMemo(() => actionGroups(nextActions), [nextActions]);
+  const jumpToAction = (kind: ActionKind, direction: Direction = 1, cause?: ActionCause) => {
     if (navigationLocked) return;
     const current = selectionRef.current;
-    const candidates = kind === 'army' ? nextActions.armies : kind === 'household' ? nextActions.households : nextActions.settlements;
+    const all = kind === 'army' ? nextActions.armies : kind === 'household' ? nextActions.households : nextActions.settlements;
+    const candidates = cause ? all.filter(item => item.cause === cause) : all;
     const candidate = nextAction(candidates, kind === 'army' ? current.armyId : current.settlementId, direction);
     if (!candidate) { setNavigationNotice(kind === 'army' ? 'No armies currently need orders or route review.' : kind === 'household' ? 'No settlements have unassigned households.' : 'No idle settlements have an available production order.'); return; }
     closeMapActions(); setManagementWindow(undefined);
@@ -749,6 +751,11 @@ function App() {
         <div><button disabled={navigationLocked || nextActions.armies.length === 0} aria-label="Previous army needing orders" title="Previous army needing orders" onClick={() => jumpToAction('army', -1)}>‹</button><button disabled={navigationLocked || nextActions.armies.length === 0} aria-label="Next army needing orders" aria-keyshortcuts={armyKey.toUpperCase()} onClick={() => jumpToAction('army')}>Next army <kbd>{armyKey.toUpperCase()}</kbd></button><button disabled={navigationLocked || nextActions.settlements.length === 0} aria-label="Previous idle settlement" title="Previous idle settlement" onClick={() => jumpToAction('settlement', -1)}>‹</button><button disabled={navigationLocked || nextActions.settlements.length === 0} aria-label="Next idle settlement" aria-keyshortcuts={settlementKey.toUpperCase()} onClick={() => jumpToAction('settlement')}>Next town <kbd>{settlementKey.toUpperCase()}</kbd></button></div>
         <p className="field-help" data-testid="household-counts">Labor: {unassignedHouseholds} unassigned household{unassignedHouseholds === 1 ? '' : 's'} · {nextActions.households.length} settlement{nextActions.households.length === 1 ? '' : 's'}</p>
         <div className="hud-household-actions"><button disabled={navigationLocked || nextActions.households.length === 0} aria-label="Previous settlement with unassigned households" title="Previous settlement with unassigned households" onClick={() => jumpToAction('household', -1)}>‹</button><button disabled={navigationLocked || nextActions.households.length === 0} aria-label="Next settlement with unassigned households" aria-haspopup="dialog" onClick={() => jumpToAction('household')}>Review households</button></div>
+        {actionCauses.length > 0 && <details className="hud-action-causes" data-testid="next-action-causes">
+          <summary>What wants a decision<span>{actionCauses.length} kind{actionCauses.length === 1 ? '' : 's'}</span></summary>
+          {actionCauses.map(group => <button key={`${group.kind}-${group.cause}`} className="wide" disabled={navigationLocked}
+            onClick={() => jumpToAction(group.kind, 1, group.cause)}>{group.label}</button>)}
+        </details>}
         <span role="status" aria-live="polite" data-testid="next-action-notice" className="field-help">{navigationNotice}</span>
       </section>}
       {observation && <div className="hud-end-turn">{(observation.battle || observation.pendingCapture) && <p id="battle-blocker" className="battle-blocker">{observation.pendingCapture ? 'Resolve the settlement capture before ending the turn.' : 'Resolve the pending battle before ending the turn.'}</p>}<div className="turn"><small>AGE OF FRACTURE</small><strong data-testid="turn-counter">Turn {observation.turn}</strong></div><button className="primary end-turn" aria-label="End turn" aria-describedby={observation.battle || observation.pendingCapture ? 'battle-blocker' : undefined} disabled={ordersBusy || showSetup} onClick={endTurn}>End turn <kbd>{turnKey.toUpperCase()}</kbd></button></div>}

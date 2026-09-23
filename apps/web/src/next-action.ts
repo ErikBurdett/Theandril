@@ -1,9 +1,34 @@
 import type { Observation } from '@theandril/sim';
 
-export interface ActionCandidate { id: string; name: string; cell: number; reason: string }
+/** Every candidate carries the cause that put it here, so a wide realm can read
+ * and work one kind of exception at a time instead of cycling every entity. */
+export type ActionCause = 'movement' | 'route-interrupted' | 'posting-stalled' | 'empty-queue' | 'charter-stalled' | 'households';
+export interface ActionCandidate { id: string; name: string; cell: number; reason: string; cause: ActionCause }
 export interface HouseholdCandidate extends ActionCandidate { unassignedHouseholds: number }
 export interface ActionCandidates { armies: ActionCandidate[]; settlements: ActionCandidate[]; households: HouseholdCandidate[] }
 export type ActionKind = 'army' | 'settlement' | 'household';
+export interface ActionGroup { kind: ActionKind; cause: ActionCause; label: string; count: number }
+const CAUSE_LABELS: Readonly<Record<ActionCause, string>> = {
+  'movement': 'with movement remaining',
+  'route-interrupted': 'with an interrupted route',
+  'posting-stalled': 'with a stalled posting',
+  'empty-queue': 'with an empty production queue',
+  'charter-stalled': 'with a stalled charter',
+  'households': 'with unassigned households',
+};
+const plural = (kind: ActionKind, count: number): string =>
+  kind === 'army' ? count === 1 ? 'company' : 'companies' : count === 1 ? 'hearth' : 'hearths';
+
+/** One row per cause, largest first: the shape of the work, not a list of names. */
+export function actionGroups(candidates: ActionCandidates): ActionGroup[] {
+  const groups: ActionGroup[] = [];
+  for (const [kind, items] of [['army', candidates.armies], ['settlement', candidates.settlements], ['household', candidates.households]] as const) {
+    const counts = new Map<ActionCause, number>();
+    for (const item of items) counts.set(item.cause, (counts.get(item.cause) ?? 0) + 1);
+    for (const [cause, count] of counts) groups.push({ kind, cause, count, label: `${count} ${plural(kind, count)} ${CAUSE_LABELS[cause]}` });
+  }
+  return groups.sort((a, b) => b.count - a.count || (a.label < b.label ? -1 : a.label > b.label ? 1 : 0));
+}
 export type Direction = 1 | -1;
 export interface ShortcutBindings { army: string; settlement: string; turn: string }
 export const SHORTCUT_STORAGE_KEY = 'theandril.shortcuts.v1';
@@ -25,8 +50,9 @@ export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' 
     // and then the posting's own reason is the reason.
     const posting = postings.get(army.id);
     if (posting && !posting.blocker) continue;
-    if (posting?.blocker) { armies.push({ id: army.id, name: army.name, cell: army.cell, reason: `Posting stalled: ${posting.blocker}` }); continue; }
-    armies.push({ id: army.id, name: army.name, cell: army.cell, reason: route?.status === 'paused' ? `Route interrupted: ${route.pauseReason ?? 'Review the saved route.'}` : `${army.movement} movement remaining` });
+    if (posting?.blocker) { armies.push({ id: army.id, name: army.name, cell: army.cell, cause: 'posting-stalled', reason: `Posting stalled: ${posting.blocker}` }); continue; }
+    armies.push({ id: army.id, name: army.name, cell: army.cell, cause: route?.status === 'paused' ? 'route-interrupted' : 'movement',
+      reason: route?.status === 'paused' ? `Route interrupted: ${route.pauseReason ?? 'Review the saved route.'}` : `${army.movement} movement remaining` });
   }
   const canProduce = new Set(view.productionOptions.filter(option => option.canQueue).map(option => option.settlementId));
   // A hearth under a charter answers for itself. It is only worth a look when the
@@ -35,6 +61,7 @@ export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' 
   const settlements = view.settlements.filter(town => town.factionId === view.factionId && town.queue.length === 0 && canProduce.has(town.id))
     .filter(town => !charters.has(town.id) || charters.get(town.id)!.blocker !== null)
     .map(town => ({ id: town.id, name: town.name, cell: town.cell,
+      cause: charters.has(town.id) ? 'charter-stalled' as const : 'empty-queue' as const,
       reason: charters.get(town.id)?.blocker ?? 'Empty production queue; an available project can be ordered.' }));
   // Compact canonical totals, independent of queue status and paged tile quotes.
   // Do not infer worker capacity from population or choose/spend on tiles here.
@@ -42,7 +69,7 @@ export function actionCandidates(view: Pick<Observation, 'factionId' | 'armies' 
   const households: HouseholdCandidate[] = [];
   for (const land of view.land.settlements) {
     const town = ownedTowns.get(land.settlementId), unassignedHouseholds = land.workerCapacity - land.worked.length;
-    if (town && unassignedHouseholds > 0) households.push({ id: town.id, name: town.name, cell: town.cell, unassignedHouseholds,
+    if (town && unassignedHouseholds > 0) households.push({ id: town.id, name: town.name, cell: town.cell, unassignedHouseholds, cause: 'households',
       reason: `${unassignedHouseholds} unassigned household${unassignedHouseholds === 1 ? '' : 's'}. Review land to assign worked tiles; unassigned households add no tile yields.` });
   }
   return { armies: armies.sort(byId), settlements: settlements.sort(byId), households: households.sort(byId) };

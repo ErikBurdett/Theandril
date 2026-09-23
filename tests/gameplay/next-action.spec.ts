@@ -54,6 +54,14 @@ test('hundred-army forty-town navigation wraps, clears filters and respects typi
   const armies = view.ownArmies.map(army => army.id).sort(), towns = view.ownSettlements.map(town => town.id).sort();
   const hash = await page.evaluate(() => window.__THEANDRIL__!.getStateHash());
   await expect(page.getByTestId('next-action-counts')).toContainText('100 needing orders · 40 idle settlements');
+  // A wide realm reads the shape of the work, then walks one kind of exception.
+  const causes = page.getByTestId('next-action-causes');
+  await causes.locator(':scope > summary').click();
+  await expect(causes.locator(':scope > summary')).toContainText('3 kinds');
+  await expect(causes.getByRole('button', { name: '100 companies with movement remaining', exact: true })).toBeVisible();
+  await causes.getByRole('button', { name: '40 hearths with an empty production queue', exact: true }).click();
+  await selectedTown(page, towns[0]!);
+  await expect(page.getByTestId('next-action-notice')).toContainText('Empty production queue');
   await openRegistry(page, 'armies');
   await page.getByRole('searchbox', { name: 'Search your realm' }).fill('no matching army');
   await page.getByRole('combobox', { name: 'Force type' }).selectOption('naval');

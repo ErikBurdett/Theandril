@@ -50,6 +50,11 @@
 .hud-next-actions .field-help { font-size: calc(11px * var(--text-scale,1)); }
 .hud-next-actions > .hud-household-actions { grid-template-columns: 44px minmax(0,1fr); }
 .hud-next-actions [data-testid="household-counts"] { margin: 6px 0 0; overflow-wrap: anywhere; }
+.hud-action-causes { margin-top: 7px; max-width: 330px; }
+.hud-action-causes > summary { min-height: 40px; padding: 10px 0; cursor: pointer; font-size: calc(12px * var(--text-scale,1)); }
+.hud-action-causes > summary > span { float: right; font-size: calc(10px * var(--text-scale,1)); color: #b6c2a4; line-height: 2; }
+.hud-action-causes > button { display: block; width: 100%; margin-bottom: 5px; text-align: left; overflow-wrap: anywhere; }
+.hud-action-causes > summary:focus-visible { outline: 2px solid #c9af73; outline-offset: 2px; }
 .hud-end-turn { display: flex; gap: 14px; align-items: center; justify-content: flex-end; }
 .application .hud-end-turn .turn { min-width: 70px; margin: 0; text-align: center; }
 .application .hud-end-turn .turn strong { font-size: calc(23px * var(--text-scale,1)); }

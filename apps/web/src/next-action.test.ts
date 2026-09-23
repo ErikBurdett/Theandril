@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { applyCommand, createGame, getObservation, stateHash, type ArmyView, type Observation } from '@theandril/sim';
 import { conquestCampaign } from '../../../packages/test-fixtures/src/conquest-fixture';
 import { growingHouseholdCampaign } from '../../../tests/gameplay/household-fixture';
-import { actionCandidates, actionShortcut, loadShortcuts, nextAction, saveShortcuts, shortcutError, type ActionCandidate } from './next-action';
+import { actionCandidates, actionGroups, actionShortcut, loadShortcuts, nextAction, saveShortcuts, shortcutError, type ActionCandidate } from './next-action';
 
 const game = createGame({ seed: 20260905, size: 'tiny', factionCount: 2 });
 const initial = getObservation(game, game.turnOwnerId);
@@ -25,7 +25,7 @@ describe('observed-only next-action navigation', () => {
     const hash = stateHash(game), observation = JSON.stringify(view);
     const attention = actionCandidates(view);
     expect(attention.settlements).toEqual([]);
-    expect(attention.households).toEqual([{ id: town.id, name: town.name, cell: town.cell, unassignedHouseholds: 1,
+    expect(attention.households).toEqual([{ id: town.id, name: town.name, cell: town.cell, unassignedHouseholds: 1, cause: 'households',
       reason: '1 unassigned household. Review land to assign worked tiles; unassigned households add no tile yields.' }]);
     expect(JSON.stringify(view)).toBe(observation); expect(stateHash(game)).toBe(hash);
   });
@@ -93,8 +93,23 @@ describe('observed-only next-action navigation', () => {
     expect(actionCandidates(view).armies.some(item => item.id === 'army.2')).toBe(false);
   });
 
+  it('groups what wants a decision by cause, largest first', () => {
+    const candidate = (id: string, cause: ActionCandidate['cause']): ActionCandidate => ({ id, name: id, cell: 1, reason: '', cause });
+    expect(actionGroups({
+      armies: [candidate('army.1', 'movement'), candidate('army.2', 'movement'), candidate('army.3', 'route-interrupted')],
+      settlements: [candidate('settlement.1', 'charter-stalled')],
+      households: [{ ...candidate('settlement.2', 'households'), unassignedHouseholds: 3 }],
+    })).toEqual([
+      { kind: 'army', cause: 'movement', count: 2, label: '2 companies with movement remaining' },
+      { kind: 'army', cause: 'route-interrupted', count: 1, label: '1 company with an interrupted route' },
+      { kind: 'settlement', cause: 'charter-stalled', count: 1, label: '1 hearth with a stalled charter' },
+      { kind: 'household', cause: 'households', count: 1, label: '1 hearth with unassigned households' },
+    ]);
+    expect(actionGroups({ armies: [], settlements: [], households: [] })).toEqual([]);
+  });
+
   it('wraps stable IDs forward/backward, including from a removed or now-ineligible selection', () => {
-    const candidates: ActionCandidate[] = ['army.1', 'army.10', 'army.3'].map(id => ({ id, name: id, cell: 1, reason: '' }));
+    const candidates: ActionCandidate[] = ['army.1', 'army.10', 'army.3'].map(id => ({ id, name: id, cell: 1, reason: '', cause: 'movement' as const }));
     expect(nextAction(candidates, undefined)?.id).toBe('army.1');
     expect(nextAction(candidates, undefined, -1)?.id).toBe('army.3');
     expect(nextAction(candidates, 'army.3')?.id).toBe('army.1');

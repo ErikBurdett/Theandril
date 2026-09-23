@@ -1,5 +1,11 @@
 # Theandril implementation status
 
+## Attention grouped by cause — 2026-09-22
+
+**The grouping.** Every next-action candidate now carries the cause that put it there - movement remaining, an interrupted route, a stalled posting, an empty production queue, a stalled charter or unassigned households - derived from the same observation its reason already came from. The command bar lists one row per cause, largest first, and each row is its own navigable queue: clicking it jumps to the first entity of that cause and the existing Next/Previous controls cycle within it.
+
+**Scope.** A UI change over the existing read model. No command, no state, no rules or save bump, and the content seal is untouched. Totals, shortcuts, wrap-around order and the spoken notice are unchanged.
+
 ## Standing postings and muster points — rules/save 26, 2026-09-22
 
 **The order.** An army may be posted to a hex it has explored. Each turn it marches there under the ordinary travel order - same pathing, visibility and hostile-sighting pause - and then holds the hex or joins the force standing on it, merging the turn it arrives under the ordinary command-capacity rules. A posting only starts a march for an army with no travel order of its own, so an active route runs and a paused route keeps its reason.
