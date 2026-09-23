@@ -1,5 +1,39 @@
 [
   {
+    "sha": "d5903db0f6b8cbe669a08c9af1b5b9535da0c75b",
+    "shortSha": "d5903db",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T22:59:37-05:00",
+    "subject": "feat: standing postings and muster points (rules/save 26)",
+    "body": "An army may now be posted to a hex it has explored. Each turn it marches there\nunder the ordinary travel order - the same pathing, visibility and\nhostile-sighting pause a player gets - and then holds the hex or joins the force\nstanding on it, merging the turn it arrives under the ordinary command capacity.\nA posting only ever starts a march for an army that has no travel order of its\nown, so an active route runs and a paused route keeps its reason; clearing it\nreturns the army to direct orders.\n\nA hearth may also name a muster point. Every company it raises is posted there\nthe turn it forms and joins what it finds, which removes the singleton marching\nand merging the production panel previously asked for by hand.\n\nA posting always states where it stands - marching, standing, its paused route's\nreason, no known route, nothing to join, or aboard a fleet - derived on demand\nrather than stored, so nothing is stale in a save, a replay or the chronicle. An\narmy under a working posting leaves the next-action list and a stalled one\nappears with the posting's own reason, so with rules 25's charters both halves\nof a turn's busywork now answer for themselves.\n\nRules 26 adds state, not content, so the seal stays 015468d1. A genuine rules-25\ncampaign and its 2,181-order archive from a29ec80 load at turn 61, re-seal to\nidentical v25 bytes, replay exactly, round trip through a v26 envelope and\ncontinue ten more turns.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 19,
+    "insertions": 497,
+    "deletions": 29,
+    "areas": [
+      "apps/web",
+      "docs/1.0-DEVELOPMENT.md",
+      "docs/IMPLEMENTATION_STATUS.md",
+      "docs/development",
+      "packages/chronicle"
+    ],
+    "notes": "## Companies that know where to go\n\nRaise a company and it used to arrive as its own little army, standing in the hearth that built it, waiting for you to walk it across the map and fold it into the force it was always meant to join. Six hearths raising troops meant six of those walks, every time.\n\nNow an army can be posted. Name a hex it has explored and it marches there on its own, under exactly the travel order you would have given it — the same roads, the same fog, the same halt when something hostile comes into view. When it arrives it either holds the hex or joins the force standing on it, folding in the moment it gets there.\n\nA posting never argues with you. It only moves an army that has no travel order of its own, so anything you order yourself happens first and the posting waits its turn. Clear it and the army is back under direct orders, with nothing to undo.\n\nThe part that saves the most clicking is the muster point. Give a hearth one, and every company it raises is posted there the turn it forms and joins whatever it finds. Set it once at the start of a war and the reinforcements simply arrive.\n\nAnd a posting tells you where it stands: marching, standing, or stuck — and if it is stuck, why. There is no known route. There is nothing here to join. The road was interrupted. A posted army that is getting on with it drops out of your end-of-turn list entirely; a stuck one shows up with its reason attached. Between this and the hearth charters, what is left in that list is the things that actually want you."
+  },
+  {
+    "sha": "a29ec80ece02624dc21cd8dc5df0229182364f5f",
+    "shortSha": "a29ec80",
+    "author": "ErikBurdett",
+    "date": "2026-09-22T22:23:14-05:00",
+    "subject": "docs: publish a journal note for standing charters",
+    "body": "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+    "files": 2,
+    "insertions": 45,
+    "deletions": 0,
+    "areas": [
+      "apps/web",
+      "docs/updates"
+    ]
+  },
+  {
     "sha": "7bdb7dbe2308610922543acc566339a1ace1d975",
     "shortSha": "7bdb7db",
     "author": "ErikBurdett",
