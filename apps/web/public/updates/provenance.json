@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "licenseNotes": "Original owned Theandril gameplay screenshots and previously reviewed Hearth & Card interface artwork. Original provider/service terms apply; no new generation or provider call. No third-party game artwork, font CDN, terminal image, or campaign trace is shipped.",
-  "review": "Original four derivative reviews: docs/development/dispatches/frontend-evidence/REPORT.md. The two exact 21 September 2026 PNG captures were independently inspected in docs/development/2026-09-21-epic-baseline/review/final.md; publication layout is verified separately. The three exact 23 September 2026 fleet-provisions captures were inspected at desktop and 390px width; their source settings and hashes are retained in docs/development/2026-09-23-fleet-provisions/screenshots/provenance.json. Publication layout is verified separately.",
+  "review": "Original four derivative reviews: docs/development/dispatches/frontend-evidence/REPORT.md. The two exact 21 September 2026 PNG captures were independently inspected in docs/development/2026-09-21-epic-baseline/review/final.md; publication layout is verified separately. The three exact 23 September 2026 fleet-provisions captures were inspected at desktop and 390px width; their source settings and hashes are retained in docs/development/2026-09-23-fleet-provisions/screenshots/provenance.json. Publication layout is verified separately. The two exact 23 September group-postings captures were inspected at desktop and 390px width; source hashes and authored setup are retained in docs/development/2026-09-23-deploy-and-group-postings/screenshots/provenance.json. Publication layout is verified separately.",
   "assets": [
     {
       "id": "campaign",
@@ -193,6 +193,44 @@
       "height": 844,
       "alt": "The selected fleet at 390 pixels wide shows eight provision turns restored within Charter Quay\u2019s harbor supply.",
       "caption": "The same authored naval regression at 390 \u00d7 844: an ordinary move into harbor reach and an end turn refill stores to eight while prior formation losses remain. The journey then saves and reloads again. Exact uncropped PNG."
+    },
+    {
+      "id": "group-postings-desktop",
+      "path": "updates/group-postings-desktop.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "3ae1581089411a76ecfd08a8f5f811258c4f77f6",
+      "sourcePath": "docs/development/2026-09-23-deploy-and-group-postings/screenshots/group-postings-desktop.png",
+      "sourceSha256": "d0e3a66ceee2c4d0767b9b9e12711215bd447a5fa05aaaeb9bd942843e2de8f5",
+      "sourceWidth": 1440,
+      "sourceHeight": 1000,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact Playwright PNG bytes; no transform or re-encoding.",
+      "sha256": "d0e3a66ceee2c4d0767b9b9e12711215bd447a5fa05aaaeb9bd942843e2de8f5",
+      "bytes": 616230,
+      "width": 1440,
+      "height": 1000,
+      "alt": "The realm registry reports 100 orders accepted and zero refused, with accepted armies removed from the selection.",
+      "caption": "Authored Legendary regression, seed 20260905, 100 owned armies, forty owned hearths and 4,000 armies overall. Ordinary registry controls apply 100 hold postings and report their results at 1440 \u00d7 1000. This is a controlled browser fixture, not an organically grown empire. Exact uncropped PNG."
+    },
+    {
+      "id": "group-postings-narrow",
+      "path": "updates/group-postings-narrow.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "3ae1581089411a76ecfd08a8f5f811258c4f77f6",
+      "sourcePath": "docs/development/2026-09-23-deploy-and-group-postings/screenshots/group-postings-narrow.png",
+      "sourceSha256": "4f5410a3143b8c6fbfb099a79210db4cfe807247ed2f2fd790be8bf52f78087d",
+      "sourceWidth": 390,
+      "sourceHeight": 844,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact Playwright PNG bytes; no transform or re-encoding.",
+      "sha256": "4f5410a3143b8c6fbfb099a79210db4cfe807247ed2f2fd790be8bf52f78087d",
+      "bytes": 140060,
+      "width": 390,
+      "height": 844,
+      "alt": "The narrow realm registry shows 100 selected armies, their shared posting controls and the clear-postings action.",
+      "caption": "Authored Legendary regression, seed 20260905, 100 owned armies, forty owned hearths and 4,000 armies overall. At 390 \u00d7 844, the player selects the group before clearing postings after an individual override. The journey then restores the saved postings. Exact uncropped PNG."
     }
   ],
   "sharedMaterials": [
@@ -233,5 +271,5 @@
       "caption": "Decorative interface material, not a depiction of canonical gameplay."
     }
   ],
-  "totalJournalImageBytes": 2156459
+  "totalJournalImageBytes": 2912749
 }

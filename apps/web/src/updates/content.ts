@@ -5,6 +5,46 @@ export const sourceRevision = '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef';
 export const repository = 'https://github.com/ErikBurdett/Theandril';
 const entries: Dispatch[] = [
   {
+    publication: 'published', sourceRevision: '3ae1581089411a76ecfd08a8f5f811258c4f77f6', sequence: 6,
+    id: 'group-postings', edition: '06', title: 'One posting for a hundred armies',
+    subtitle: '23 September 2026 · Standing orders across a realm',
+    summary: 'Select armies across the registry, give them standing postings together, and keep control of each member. One bounded request now returns one campaign update with a clear result for every order.',
+    topic: 'Engineering', tags: ['Empire management', 'Standing orders', 'Worker transport', 'Saves'],
+    status: 'Reviewed checkpoint', checkpoint: 'Group postings · ACT-32', image: 'group-postings-desktop',
+    takeaways: ['Select up to 128 land armies ashore across search and 25-row pages, then post them where they stand or at an owned hearth.', 'Each army keeps its own saved order. Accepted armies leave the selection; refused armies stay selected with their canonical reason.', 'The 100-army browser journey covers individual override, clearing and save restoration. Broader theater planning and all fifteen release gates remain open.'],
+    sections: [
+      { id: 'give-the-order-together', title: 'Give the order together', paragraphs: [
+        'A hundred armies should not require a hundred trips through selected orders to receive the same standing instruction. The realm registry now lets players check land armies ashore and apply a posting to the group. Selection survives search changes and the existing 25-row pages. The panel counts selected armies outside the current filter, and Select matching armies reaches across pages up to a disclosed 128-army request limit. That limit does not cap the realm’s armies or postings.',
+        'Choose where each army stands or one owned hearth, then choose Hold or Join on arrival. Existing travel orders take precedence, movement and joining use the ordinary rules, and stalled postings retain their explanations. An individual order can override one member later. Clearing postings skips selected armies without one. Selection is temporary interface state; the resulting postings are saved campaign orders.',
+      ], image: 'group-postings-narrow' },
+      { id: 'keep-the-result-inspectable', title: 'Keep the result inspectable', paragraphs: [
+        'Accepted armies leave the selection. Refused armies remain checked beside the simulation’s reason, ready for inspection or correction. One refusal does not undo earlier accepted orders or prevent later valid ones. The interface submits existing commands; packages/sim still decides their legality.',
+        'The worker validates the whole request before the first command, processes it in stable army-ID order and records accepted and canonically refused commands in the ordinary journal. It sends one final permitted observation with the results. These commands are not an atomic transaction: a recording interruption stops processing, returns the actual partial state and requires restoring a saved campaign. The interrupted order is never described as an ordinary refusal or a rollback.',
+      ] },
+      { id: 'follow-the-hundred-army-journey', title: 'Follow the hundred-army journey', paragraphs: [
+        'The screenshots come from a real browser journey over an authored Legendary fixture: 100 owned armies, forty owned hearths and 4,000 armies in the world. Keyboard selection, paging and search lead to one hundred hold postings. Normal controls then save the campaign, change one army to Join, clear the group and restore the posted state with its exact hash. Selecting checkboxes changes neither canonical state nor worker-transfer totals.',
+        'The desktop capture shows all 100 orders accepted. The 390-pixel capture shows the same armies selected before clearing, after the individual override. Both images retain their original PNG bytes. A separate boundary fixture produces an actual partial refusal at the existing posting limit. Two browser fault injections also prove that damaged responses finish pending work, require recovery and allow a clean retry after restoring a save. These authored regressions do not depict an organically developed empire.',
+      ] },
+      { id: 'send-the-summary-once', title: 'Send the summary once', paragraphs: [
+        'A worker-harness comparison applies 100 grouped postings and the same commands separately. Both paths produce the same archive and hash e43b0ca7. The grouped request transfers 531,302 bytes, including 3,725 result bytes, instead of 51,416,921 bytes, publishing one state response instead of 100. A separate browser assertion verifies one final packet, unchanged explored knowledge and no cell rows beyond the empty codec header.',
+        'The retained single harness sample took 10.97 milliseconds for the group and 686.40 milliseconds for the serial requests, including structured cloning. These are synthetic worker timings, not browser frame-time distributions or whole-campaign speedups. The final summary still contains the existing army read models; the improvement avoids publishing them repeatedly. No global work was added to each turn or frame.',
+      ] },
+      { id: 'a-bounded-step-toward-delegation', title: 'A bounded step toward delegation', paragraphs: [
+        'At the pinned implementation revision, 1,876 headless tests across 234 files and seven affected Chromium journeys pass. Typecheck, lint, content and art validation, and the production build pass. The 27 production Pages checks also pass at that checkpoint, before this sixth article was added; its publication layout receives a separate review. These execution scopes overlap and are not added into a larger total. Earlier failed attempts and their corrections remain in the linked record.',
+        'This advances existing ACT-32 and M3 scope without changing simulation or AI rules, canonical state, save formats, content or campaign prices. Rules/save remain 31 and content remains 015468d1. Pacing was not rerun for this interface and transport change; the preceding fleet measurement remains Standard 234, Long 342 and Epic 379.',
+        'M3 remains in progress. Theater strategy, patrol and escort roles, durable named groups, broader order templates, settlement batch policies and combined mature-empire acceptance still need implementation and proof. Selection currently covers land armies ashore, not fleets or embarked passengers. No accepted scope is cut or added here, and all fifteen release gates remain open.',
+      ] },
+    ],
+    evidence: [
+      { label: 'Group postings verification', path: 'docs/development/2026-09-23-deploy-and-group-postings/README.md', note: 'Exact local checks, authored browser scope, corrected failures and remaining ACT-32 work.' },
+      { label: 'Bounded worker architecture', path: 'docs/architecture/0039-group-postings.md', note: 'Canonical command authority, partial outcomes, interrupted recording and the single synthetic transfer sample.' },
+      { label: 'Independent integration review', path: 'docs/development/2026-09-23-deploy-and-group-postings/code-review.md', note: 'Error-path finding, correction and real-worker recovery checks.' },
+      { label: 'Real group-order browser journey', path: 'tests/gameplay/group-postings.spec.ts', note: 'Ordinary controls over authored scale and capacity fixtures; selection, individual override and exact save restoration.' },
+      { label: 'Original screenshots and provenance', path: 'docs/development/2026-09-23-deploy-and-group-postings/screenshots/provenance.json', note: 'Retained desktop and narrow captures with source paths, dimensions and exact hashes.' },
+      { label: 'Implementation status and remaining scope', path: 'docs/IMPLEMENTATION_STATUS.md', note: 'M3 remains in progress and every whole release gate remains open at this source pin.' },
+    ],
+  },
+  {
     publication: 'published', sourceRevision: 'b623c2c91d4d852cba710f2d996c28a6b1b5d624', sequence: 5,
     id: 'fleet-provisions', edition: '05', title: 'A voyage needs stores for the way home',
     subtitle: '23 September 2026 · Fleet provisions & naval staging',

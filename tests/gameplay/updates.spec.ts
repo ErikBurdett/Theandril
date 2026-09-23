@@ -30,15 +30,15 @@ for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 13
     await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
     await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
     await page.evaluate(scale => { document.documentElement.style.fontSize = `${scale}%`; }, dimensions.scale);
-    await expect(page.getByRole('heading', { level: 1, name: 'A voyage needs stores for the way home' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'One posting for a hundred armies' })).toBeVisible();
     await page.screenshot({ path: testInfo.outputPath('reader-top.png') });
-    await page.locator('.illustration-fleet-provisions-exhausted-narrow').scrollIntoViewIfNeeded();
-    await page.locator('.illustration-fleet-provisions-exhausted-narrow > button > img').evaluate(image => (image as HTMLImageElement).decode());
-    await page.locator('.illustration-fleet-provisions-exhausted-narrow').screenshot({ path: testInfo.outputPath('exhausted-provisions-illustration.png') });
-    await page.locator('.illustration-fleet-provisions-refilled-narrow').scrollIntoViewIfNeeded();
-    await page.locator('.illustration-fleet-provisions-refilled-narrow > button > img').evaluate(image => (image as HTMLImageElement).decode());
-    await page.locator('.illustration-fleet-provisions-refilled-narrow').screenshot({ path: testInfo.outputPath('refilled-provisions-illustration.png') });
-    await page.getByRole('heading', { name: 'Keep the supplies and the record' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
+    await page.locator('.illustration-group-postings-desktop').scrollIntoViewIfNeeded();
+    await page.locator('.illustration-group-postings-desktop > button > img').evaluate(image => (image as HTMLImageElement).decode());
+    await page.locator('.illustration-group-postings-desktop').screenshot({ path: testInfo.outputPath('group-postings-desktop-illustration.png') });
+    await page.locator('.illustration-group-postings-narrow').scrollIntoViewIfNeeded();
+    await page.locator('.illustration-group-postings-narrow > button > img').evaluate(image => (image as HTMLImageElement).decode());
+    await page.locator('.illustration-group-postings-narrow').screenshot({ path: testInfo.outputPath('group-postings-narrow-illustration.png') });
+    await page.getByRole('heading', { name: 'A bounded step toward delegation' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
     await page.screenshot({ path: testInfo.outputPath('reader-chapter.png') });
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
     const imageFacts = await page.locator('figure > button > img').evaluateAll(elements => elements.map(element => { const image = element as HTMLImageElement; return { src: image.currentSrc, width: image.naturalWidth, complete: image.complete }; }));
@@ -103,8 +103,8 @@ test('archive search combines topic filters, survives refresh and recovers from 
   await page.getByRole('button', { name: 'Engineering', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'No dispatches found' })).toBeVisible();
   await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
-  await expect(page.getByRole('status')).toHaveText('5 dispatches');
-  await expect(page.locator('.dispatch-row')).toHaveCount(5);
+  await expect(page.getByRole('status')).toHaveText('6 dispatches');
+  await expect(page.locator('.dispatch-row')).toHaveCount(6);
 });
 
 test('scope ledger links real gates and a contributor can reach authoring guidance', async ({ page }) => {
@@ -116,7 +116,7 @@ test('scope ledger links real gates and a contributor can reach authoring guidan
   await expect(ledger.getByText('Proposal / deferred', { exact: true })).toBeVisible();
   await expect(ledger.getByText('Not this update', { exact: true })).toBeVisible();
   await expect(ledger).toContainText('observed supply');
-  await expect(ledger).toContainText('1,861 headless tests');
+  await expect(ledger).toContainText('1,876 headless tests');
   await expect(page.getByRole('link', { name: 'Definition of done', exact: true })).toHaveAttribute('href', /DEFINITION_OF_DONE.md$/);
   await expect(page.getByRole('heading', { name: 'The reference shelf' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Authoring guide', exact: true })).toHaveAttribute('href', /docs\/updates\/CONTRIBUTING.md$/);
@@ -143,10 +143,12 @@ test('public journal opens a permanent, refresh-safe campaign dispatch', async (
   await page.goto('updates/dispatches/');
   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
-  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=fleet-provisions$/);
-  await expect(page.getByRole('heading', { level: 1, name: 'A voyage needs stores for the way home' })).toBeVisible();
+  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=group-postings$/);
+  await expect(page.getByRole('heading', { level: 1, name: 'One posting for a hundred armies' })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole('heading', { level: 1, name: 'A voyage needs stores for the way home' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'One posting for a hundred armies' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Group postings verification' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/3ae1581089411a76ecfd08a8f5f811258c4f77f6/docs/development/2026-09-23-deploy-and-group-postings/README.md');
+  await page.getByRole('link', { name: 'A voyage needs stores for the way home', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Factual evidence review' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/b623c2c91d4d852cba710f2d996c28a6b1b5d624/docs/development/2026-09-23-fleet-provisions/factual-review.md');
   await page.getByRole('link', { name: 'A campaign worth keeping', exact: true }).click();
   await expect(page.getByRole('heading', { level: 1, name: 'A campaign worth keeping' })).toBeVisible();

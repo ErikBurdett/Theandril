@@ -1,0 +1,37 @@
+import { expect, test } from '@playwright/test';
+import { closeManagement, openRegistry } from '../gameplay/ui-navigation';
+
+test('production group postings use the real worker and survive manual save restoration', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('./');
+  await page.getByRole('combobox', { name: 'World size', exact: true }).selectOption('tiny');
+  await page.getByLabel('Faction count', { exact: true }).fill('2');
+  await page.getByRole('button', { name: 'Begin campaign', exact: true }).click();
+  await expect(page.getByTestId('turn-counter')).toHaveText('Turn 1');
+  expect(await page.evaluate(() => typeof window.__THEANDRIL__)).toBe('undefined');
+  await openRegistry(page, 'armies');
+  const group = page.getByTestId('group-postings');
+  await group.getByRole('button', { name: 'Select matching armies', exact: true }).click();
+  await group.getByRole('button', { name: 'Post selected armies (2)', exact: true }).click();
+  await expect(page.getByTestId('group-posting-results')).toContainText('2 orders accepted · 0 refused');
+  await closeManagement(page);
+  await page.getByTestId('campaign-menu').locator(':scope > summary').click();
+  await page.getByRole('button', { name: 'Save campaign', exact: true }).click();
+  await expect(page.getByTestId('feedback')).toContainText('Campaign saved.');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openRegistry(page, 'armies');
+  await group.getByRole('button', { name: 'Select matching armies', exact: true }).click();
+  await group.getByRole('button', { name: 'Clear selected postings (2)', exact: true }).click();
+  await expect(page.getByTestId('group-posting-results')).toContainText('2 orders accepted · 0 refused');
+  await closeManagement(page);
+  await page.getByTestId('campaign-menu').locator(':scope > summary').click();
+  await page.getByRole('button', { name: 'Load campaign', exact: true }).click();
+  await expect(page.getByTestId('feedback')).toContainText('Campaign restored.');
+  await openRegistry(page, 'armies');
+  await expect(group).toContainText('0 armies selected');
+  await group.getByRole('button', { name: 'Select matching armies', exact: true }).click();
+  await expect(group.getByRole('button', { name: 'Clear selected postings (2)', exact: true })).toBeEnabled();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(errors).toEqual([]);
+});

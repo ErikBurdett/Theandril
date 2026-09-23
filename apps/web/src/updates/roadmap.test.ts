@@ -53,7 +53,7 @@ describe('the source-backed roadmap contract', () => {
     }
   });
   it('records current supply and pacing without completing a wider system or gate', () => {
-    expect(roadmapSnapshot).toMatchObject({ revision: 'b623c2c91d4d852cba710f2d996c28a6b1b5d624', rules: 31 });
+    expect(roadmapSnapshot).toMatchObject({ revision: '3ae1581089411a76ecfd08a8f5f811258c4f77f6', rules: 31 });
     const supply = roadmapItems.find(item => item.id === 'supply-and-trade')!;
     expect(supply).toMatchObject({ stage: 'current-work', status: 'in-progress' });
     expect(supply.delivered.join(' ')).toContain('eight turns of provisions');
@@ -64,6 +64,17 @@ describe('the source-backed roadmap contract', () => {
     expect(pacing.remaining.join(' ')).toContain('not general pacing acceptance');
     expect(roadmapGates).toHaveLength(15);
     expect(roadmapGates.every(gate => gate.status === 'in-progress' || gate.status === 'pending')).toBe(true);
+  });
+  it('records group orders as partial empire management with broader delegation still open', () => {
+    const empire = roadmapItems.find(item => item.id === 'empire-management')!;
+    expect(empire.status).toBe('in-progress');
+    expect(empire.delivered.join(' ')).toContain('Up to 128 land armies ashore');
+    expect(empire.delivered.join(' ')).toContain('One final worker response');
+    expect(empire.delivered.join(' ')).toContain('refused armies retained for review');
+    expect(empire.remaining.join(' ')).toContain('durable named groups');
+    expect(empire.remaining.join(' ')).toContain('patrol/escort');
+    expect(empire.remaining.join(' ')).toContain('representative mature campaigns');
+    expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-23-deploy-and-group-postings/README.md')).toBe(true);
   });
 });
 

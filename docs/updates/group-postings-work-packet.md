@@ -3,12 +3,16 @@
 ## Identity and publication boundary
 
 - Stable proposed slug: `group-postings`; planned public edition **06**.
-- Publication state: **draft; awaiting the implementation commit and final evidence**. The user has authorized publication, but this draft is not a shipped catalog entry.
-- Implementation revision: **not yet pinned**. The parent will commit the reviewed implementation before this article or its images enter the public journal.
+- Publication state: **publication prepared; final production review and deployment pending**. The user authorized publication. Edition 06 and exact image copies are now in the candidate public catalog; this packet retains its earlier draft below as authoring history.
+- Implementation revision: **`3ae1581089411a76ecfd08a8f5f811258c4f77f6`**. The final article pins committed evidence: 1,876 headless tests across 234 files, seven affected Chromium journeys and 27 implementation-checkpoint Pages checks. Publication verification remains separate.
 - Campaign rules/save remain **31** and content remains **`015468d1`**. This work does not change simulation or AI rules, canonical state, historical formats or pace prices.
 - Existing scope: **ACT-32**, within empire management and coordinated-order work. This is a bounded way to issue existing postings, not completion of theaters or empire automation.
 
-## Candidate article
+## Publication preparation
+
+The final structured article is in `apps/web/src/updates/content.ts`. [Preparation notes](../development/2026-09-23-deploy-and-group-postings/group-journal-preparation.md) record **23/23 focused checks**, exact image hashes, historical-entry preservation and remaining parent publication work. [Independent factual review](../development/2026-09-23-deploy-and-group-postings/group-publication-review.md) found no material correction required. Both reviewed screenshots are copied unchanged, and all journal images total **2,912,749 bytes** within the existing 3 MiB budget. The current roadmap pin advances while edition 05 and its four predecessors keep their original source revisions.
+
+## Earlier candidate article, retained as draft history
 
 A hundred armies should not require a hundred trips through selected orders to receive the same standing instruction. The army registry now lets the player check land armies ashore, choose a destination and apply a posting to the selected group. It keeps the existing 25-row pages. Selections survive paging and search changes, and the panel states how many selected armies are outside the current filter. A player can select matching armies across those pages, up to a disclosed limit of 128 per request. That limit does not cap the realm's armies or canonical postings.
 
