@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-22 | [Unbinding: the counter that closes M2's loop](2026-09-22-unbinding.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Arcane seams: the first half of the magical discovery loop](2026-09-22-arcane-seams.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [Client states, and a roadmap the tracker can show](2026-09-22-client-states.md) | Pushed to `master`; Pages deploys the build |
 | 2026-09-22 | [City-states, wider realms and forty-two-realm maps](2026-09-22-city-states-and-wider-realms.md) | Pushed to `master`; Pages deploys the build |

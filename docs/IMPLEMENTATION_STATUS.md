@@ -1,5 +1,17 @@
 # Theandril implementation status
 
+## Unbinding and culture traditions — rules/save 24, 2026-09-22
+
+**The counter.** Unbinding strips the binding from one active enemy formation: any ward is undone and every Waykeeper escorting that formation loses the coming round. It costs five strain and may be used once a battle. A formation carrying neither a ward nor a caster is refused with a reason, and the interruption is ordinary saved state, so it survives save, replay and the chronicle.
+
+**Faction asymmetry.** A Waykeeper takes the aptitudes of the culture that appoints them. The Cinder March and Emberwake Convocation reach the second degree of Flame; the Sepulchral Synod and Margin Observance reach the second degree of Rune, which is what Unbinding requires. Every other culture keeps the common training and cannot counter at all. A discovery inside a realm's own tradition is studied at three quarters of its price, so access and cost both depend on who you are.
+
+**Content versioning.** Magic content is now versioned inside the content seal the way the pace table already was: a pack is sealed with the workings that campaign could reach. Every frozen pack still reproduces exactly — rules 17 `b79c78ed`, 18 `98b97bba`, 19-20 `3127e431`, 21 `f70d99d5`, 22-23 `f4076f55` — and rules 24 seals as `015468d1`.
+
+**Save compatibility.** A genuine rules-23 save and its 1,944-order archive from deployed `ef7a831` load, re-seal to identical v23 bytes, replay exactly, re-seal into a v24 envelope and continue. Historical rules refuse the new theory and older envelopes refuse a campaign that researched it.
+
+**Verification.** 1,812 tests pass; browser journeys pass.
+
 ## Arcane seams — rules/save 23, 2026-09-22
 
 **The first half of M2.** The Ashfall left arcane seams under Ashfall-glass ground. Where a seam lies is derived from the world's seed like any other natural feature, so a save records only which realms have paid to survey them: a standard map hides fourteen seams among a hundred and sixty-two visible glass hexes, a tiny map three among twenty-three.

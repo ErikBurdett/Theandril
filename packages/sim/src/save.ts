@@ -7,7 +7,7 @@ import { isHull } from './combat/individual';
 import { createDevelopmentState, developmentStateSchema, validateDevelopment } from './development';
 import { resourceStateSchema, validateResources } from './resources';
 import { z } from 'zod';
-import { BUILDINGS, IMPROVEMENTS, UNIFICATION_VICTORY, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
+import { ARCANE_DISCOVERIES, BUILDINGS, IMPROVEMENTS, UNIFICATION_VICTORY, CHARACTER_DEFINITIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CONTENT_HASH, DOCTRINES, FACTIONS, FACTION_ROSTERS, UNITS, campaignPaceSchema, checksum, legacyRosterVersionSchema, rosterVersionSchema } from '@theandril/content';
 import { BIOME, MAP_TYPES, deriveBiomes, deriveWaterDepth, isLake, isPassable, isValidBiome, neighbors, SeededRandom, supportedLayouts, validateHydrology, type MapLayout } from '@theandril/mapgen';
 import { emptyRoadState, roadStateSchema, validateRoads } from './roads';
 import { applyCommand, initializeLegacyLand, MAX_EVENTS } from './simulation';
@@ -30,13 +30,15 @@ import { armyDomain, armyTerrainBlocker, validateTransports } from './naval';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 23;
+export const SAVE_VERSION = 24;
 /** Rules 18 content, before rules 19 added the Unification victory. */
 export const PRE_UNIFICATION_CONTENT_HASH = '98b97bba';
 /** Rules 19–20 content, before rules 21 added the city-state roster. */
 export const PRE_CITY_STATE_CONTENT_HASH = '3127e431';
 /** Rules 21 content, before rules 22 repriced the longest campaign for patronage. */
 export const PRE_PATRONAGE_CONTENT_HASH = 'f70d99d5';
+/** Rules 22–23 content, before rules 24 added unbinding and culture traditions. */
+export const PRE_COUNTER_CONTENT_HASH = 'f4076f55';
 /** Rules 16–17 content, before rules 18 rebalanced campaign pacing. */
 export const PRE_PACING_CONTENT_HASH = 'b79c78ed';
 export const PRE_DEVELOPMENT_CONTENT_HASH = 'eec4003a';
@@ -195,7 +197,9 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1) });
-const saveSchema = z.object({ version: z.literal(23), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(24), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+/** Rules 24 changes content only, so a rules-23 state is already the modern shape. */
+const saveV23Schema = saveSchema.extend({ version: z.literal(23) }).strict();
 const saveV22Schema = saveSchema.extend({ version: z.literal(22), state: stateV22Schema }).strict();
 const saveV21Schema = saveSchema.extend({ version: z.literal(21), state: stateV21Schema }).strict();
 const saveV20Schema = saveSchema.extend({ version: z.literal(20), state: stateV20Schema }).strict();
@@ -397,6 +401,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 24) assertNoCounterMagic(state);
   if (version < 23) assertNoArcaneSites(state);
   if (version < 22) assertNoPatronage(state);
   if (version < 21) assertHistoricalSeats(state);
@@ -474,6 +479,10 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
 export function serializeGame(state: GameState): string {
   return serializeGameForVersion(state, SAVE_VERSION);
 }
+function assertNoCounterMagic(state: GameState): void {
+  const modern = new Set(ARCANE_DISCOVERIES.filter(item => (item.sinceRules ?? 14) >= 24).map(item => item.id));
+  if (Object.values(state.arcaneResearch).some(list => list.some(id => modern.has(id)))) throw new Error('This campaign has arcane theory unavailable in historical rules.');
+}
 function assertNoArcaneSites(state: GameState): void {
   if (hasArcaneSurveys(state)) throw new Error('This campaign has arcane surveys unavailable in historical rules.');
 }
@@ -492,11 +501,13 @@ function assertNoUnification(state: GameState): void {
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 24) assertNoCounterMagic(state);
   if (version < 23) assertNoArcaneSites(state);
   if (version < 22) assertNoPatronage(state);
   if (version < 21) assertHistoricalSeats(state);
   if (version < 20) assertHistoricalSieges(state);
-  if (version >= 22) return CONTENT_HASH;
+  if (version >= 24) return CONTENT_HASH;
+  if (version >= 22) return PRE_COUNTER_CONTENT_HASH;
   if (version >= 21) return PRE_PATRONAGE_CONTENT_HASH;
   if (version >= 19) return PRE_CITY_STATE_CONTENT_HASH;
   assertNoUnification(state);
@@ -743,12 +754,17 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
+  if (version === 23) {
+    const prior = saveV23Schema.parse(raw);
+    assert(prior.contentHash === PRE_COUNTER_CONTENT_HASH, 'v23 content hash is not a recognized compatible pack');
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
+  }
   if (version === 22) {
     const prior = saveV22Schema.parse(raw);
-    assert(prior.contentHash === CONTENT_HASH, 'v22 content hash is not a recognized compatible pack');
+    assert(prior.contentHash === PRE_COUNTER_CONTENT_HASH, 'v22 content hash is not a recognized compatible pack');
     assert(prior.stateChecksum === checksum(JSON.stringify(prior.state)), 'v22 snapshot checksum does not match its contents');
     const state = withSeams(prior.state);
-    return { ...prior, version: SAVE_VERSION, state, stateChecksum: checksum(JSON.stringify(state)) };
+    return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH, state, stateChecksum: checksum(JSON.stringify(state)) };
   }
   if (version === 21) {
     const prior = saveV21Schema.parse(raw);

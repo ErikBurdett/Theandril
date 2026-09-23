@@ -26,6 +26,10 @@ const active = (item: BattleFormation) => item.strength > 0 && item.morale > 0;
 const formations = (battle: CampaignBattle) => [...battle.combat.attacker, ...battle.combat.defender];
 const sideOf = (battle: CampaignBattle, formationId: string): BattleSide => battle.combat.attacker.some(item => item.id === formationId) ? 'attacker' : 'defender';
 const sourceFaction = (battle: CampaignBattle, source: Source): string => source.armyId === battle.attackerId ? battle.attackerFactionId : battle.defenderFactionId;
+/** Every caster whose own escort includes this formation: what a counter reaches. */
+const escortingCasters = (battle: CampaignBattle, formationId: string): Source[] =>
+  (battle.abilityState?.sources ?? []).filter(source => source.sourceKind === 'character'
+    && sourceFormations(battle, source).some(item => item.id === formationId));
 const sourceFormations = (battle: CampaignBattle, source: Source): BattleFormation[] => {
   if (source.sourceKind === 'formation') return formations(battle).filter(item => item.id === source.sourceId);
   const ids = new Set(battle.formationBindings.filter(item => item.armyId === source.armyId).map(item => item.battleFormationId));
@@ -86,11 +90,13 @@ function targetObjection(battle: CampaignBattle, source: Source, targetId: strin
   const distance = friendly ? Math.abs(anchor.row - target.row) + Math.abs(anchor.column - target.column) : anchor.row + target.row + 1 + Math.floor(Math.abs(anchor.column - target.column) / 2);
   if (distance > spell.range) return 'This formation is outside the spell’s battlefield range.';
   if (spell.kind === 'ward' && (target.ward ?? 0) >= spell.power) return 'This formation already has an equal or stronger ward.';
+  if (spell.kind === 'counter' && !(target.ward ?? 0) && !escortingCasters(battle, target.id).length) return 'Nothing binds this formation: choose a warded formation or one escorting a caster.';
   return null;
 }
 function execute(battle: CampaignBattle, source: Source, targetId: string | undefined, actionRound: number, events: DomainEvent[], turn: number, observe?: BattleFactObserver): void {
   const targets = source.abilityId === 'ability.rally' ? sourceFormations(battle, source).filter(active) : formations(battle).filter(item => item.id === targetId);
-  const killedSoldierIds: string[] = [];
+  const killedSoldierIds: string[] = [], interrupted: string[] = [];
+  let unbound = 0;
   const before = observe ? targets.map(item => ({ ...item })) : [];
   const spell = BATTLE_SPELLS.find(item => item.id === source.abilityId);
   let restored = 0;
@@ -100,6 +106,16 @@ function execute(battle: CampaignBattle, source: Source, targetId: string | unde
       const amount = Math.max(0, Math.min(maximum, (units.get(target.unitId)?.morale ?? target.morale) - target.morale)); target.morale += amount; restored += amount;
     } else if (source.abilityId === 'ability.set_shields') { target.ward = Math.max(target.ward ?? 0, shieldDrill.protection); target.fatigue += shieldDrill.fatigueCost; }
     else if (spell?.kind === 'ward') target.ward = Math.max(target.ward ?? 0, spell.power);
+    else if (spell?.kind === 'counter') {
+      unbound += Math.min(target.ward ?? 0, spell.power);
+      target.ward = Math.max(0, (target.ward ?? 0) - spell.power);
+      // The caster holding the binding loses the coming round: a real interruption,
+      // recorded in the same saved state that governs every other cast.
+      for (const escort of escortingCasters(battle, target.id)) {
+        const jarred = battle.abilityState!.casters.find(item => item.characterId === escort.sourceId);
+        if (jarred) { jarred.lastActedRound = Math.min(12, actionRound + 1); interrupted.push(escort.sourceId); }
+      }
+    }
     else if (spell) {
       const damage = Math.min(target.strength, Math.max(1, spell.power - Math.floor(target.armor / 3))), absorbed = Math.min(target.ward ?? 0, damage);
       target.ward = (target.ward ?? 0) - absorbed; target.strength -= damage - absorbed;
@@ -113,8 +129,8 @@ function execute(battle: CampaignBattle, source: Source, targetId: string | unde
   const actor = battle.characterSnapshots.find(item => item.characterId === source.sourceId)?.name ?? units.get(sourceFormations(battle, source)[0]?.unitId ?? '')?.name ?? source.sourceId;
   const abilityName = spell?.name ?? (source.abilityId === 'ability.rally' ? 'Rally' : 'Set shields');
   events.push({ turn, factionId: sourceFaction(battle, source), type: source.abilityId === 'ability.rally' ? 'commander_rallied' : 'battle_ability_used', cell: battle.defenderCell,
-    message: source.abilityId === 'ability.rally' ? `${actor} rallied the army, restoring ${restored} formation morale in total.` : `${actor} used ${abilityName}${targetId ? ` on ${targetId}` : ''}.` });
-  observe?.({ ...(battle.rulesVersion >= 10 ? { killedSoldierIds } : {}), round: battle.combat.round, type: 'ability', sourceId: source.sourceId, sourceKind: source.sourceKind, targetIds: targets.map(item => item.id), abilityId: source.abilityId, attackKind: spell?.kind === 'damage' ? 'fire' : spell ? 'ward' : source.abilityId === 'ability.rally' ? 'rally' : 'brace', changes: targets.map((item, i) => battleStatChange(before[i]!, item)), winner: null, reason: null });
+    message: source.abilityId === 'ability.rally' ? `${actor} rallied the army, restoring ${restored} formation morale in total.` : spell?.kind === 'counter' ? `${actor} used ${abilityName} on ${targetId}, undoing ${unbound} protection${interrupted.length ? ' and jarring its caster for the coming round' : ''}.` : `${actor} used ${abilityName}${targetId ? ` on ${targetId}` : ''}.` });
+  observe?.({ ...(battle.rulesVersion >= 10 ? { killedSoldierIds } : {}), round: battle.combat.round, type: 'ability', sourceId: source.sourceId, sourceKind: source.sourceKind, targetIds: targets.map(item => item.id), abilityId: source.abilityId, attackKind: spell?.kind === 'damage' ? 'fire' : spell?.kind === 'counter' ? 'counter' : spell ? 'ward' : source.abilityId === 'ability.rally' ? 'rally' : 'brace', changes: targets.map((item, i) => battleStatChange(before[i]!, item)), winner: null, reason: null });
   if (spell?.kind === 'damage') for (const target of targets) if (!active(target)) {
     const changes = [];
     for (const ally of battle.combat[sideOf(battle, target.id)]) if (active(ally)) { const morale = ally.morale; ally.morale = Math.max(0, ally.morale - 8); if (observe) changes.push({ formationId: ally.id, strengthDelta: 0, moraleDelta: ally.morale - morale, fatigueDelta: 0, wardDelta: 0 }); }
@@ -135,7 +151,11 @@ export function automaticBattleAbilities(state: GameState, battle: CampaignBattl
     const candidates = source.abilityId === shieldDrill.id ? sourceFormations(battle, source) : formations(battle);
     const targets = candidates.filter(target => !targetObjection(battle, source, target.id));
     const spell = BATTLE_SPELLS.find(item => item.id === source.abilityId);
-    targets.sort((a, b) => (spell?.kind === 'ward' ? a.row - b.row || b.strength - a.strength : a.strength - b.strength) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+    // A counter goes where the strongest binding is; a ward to the front rank; a
+    // damaging working to the enemy most nearly broken.
+    targets.sort((a, b) => (spell?.kind === 'counter' ? (b.ward ?? 0) - (a.ward ?? 0) || b.strength - a.strength
+      : spell?.kind === 'ward' ? a.row - b.row || b.strength - a.strength
+      : a.strength - b.strength) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
     if (targets[0]) execute(battle, source, targets[0].id, battle.combat.round, events, state.turn, observe);
   }
 }

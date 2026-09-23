@@ -1,7 +1,7 @@
 import type { BattleFormation, BattleState } from './index';
 
 export type BattleSide = 'attacker' | 'defender';
-export type BattleAttackKind = 'melee' | 'reach' | 'projectile' | 'fire' | 'ward' | 'rally' | 'brace';
+export type BattleAttackKind = 'melee' | 'reach' | 'projectile' | 'fire' | 'ward' | 'counter' | 'rally' | 'brace';
 export interface BattleSceneFormation extends BattleFormation {
   armyId: string | null; side: BattleSide; factionId: string; factionDefinitionId: string;
   unitName: string; armyName: string; ward: number;

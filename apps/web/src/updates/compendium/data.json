@@ -11372,6 +11372,20 @@
       "power": 10
     },
     {
+      "id": "spell.unbinding",
+      "name": "Unbinding",
+      "description": "Strip the binding from one active enemy formation and jar the Waykeeper holding it: any ward is undone and that caster loses the coming round. Requires the second degree of the Rune path. Costs five strain, once per battle.",
+      "discoveryId": "arcane.unbinding",
+      "pathId": "path.rune",
+      "pathLevel": 2,
+      "kind": "counter",
+      "target": "enemy",
+      "strainCost": 5,
+      "uses": 1,
+      "range": 4,
+      "power": 8
+    },
+    {
       "id": "spell.bound_ward",
       "name": "Bound ward",
       "description": "Bind up to eight protective points around one active friendly formation. Protection is consumed by incoming damage and never restores strength or routed morale. Costs three strain, at most twice per battle.",
@@ -11396,6 +11410,17 @@
       "spellIds": [
         "spell.cinder_thread"
       ]
+    },
+    {
+      "id": "arcane.unbinding",
+      "name": "Measured unbinding",
+      "description": "National Arcane Theory for Unbinding. A Waykeeper must be Rune-gifted to the second degree, which only some traditions teach; research alone cannot cast it.",
+      "knowledgeCost": 56,
+      "requiredBuildingId": "building.archive",
+      "spellIds": [
+        "spell.unbinding"
+      ],
+      "sinceRules": 24
     },
     {
       "id": "arcane.rune_binding",

@@ -6,7 +6,7 @@ import type { Army, CampaignBattle, CommandResult, DomainEvent, GameState } from
 import { cellsWithin, indexes } from './visibility';
 import { rulesVersion } from './rules';
 import { armyDomain, carriedArmyBlocker } from './naval';
-import { WAYKEEPER_APTITUDES } from '@theandril/content';
+import { factionAptitudes, WAYKEEPER_APTITUDES } from '@theandril/content';
 import { characterSpellIds, personalAptitudesSchema } from './magic';
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
@@ -227,7 +227,8 @@ export function recruitCharacter(state: GameState, factionId: string, settlement
   const error = recruitmentObjection(state, factionId, settlementId, definitionId); if (error) return fail(error);
   const faction = treasury(state, factionId)!; const definition = definitions.get(definitionId)!; const next = state.nextId;
   const character: Character = { id: `character.${next}`, factionId, definitionId, name: characterName(faction.definitionId, next), experience: 0, skillId: null, learnedSkillIds: [], woundedTurns: 0, dead: false, location: { kind: 'settlement', settlementId }, mission: null };
-  if (definition.role === 'waykeeper') character.aptitudes = { ...WAYKEEPER_APTITUDES };
+  // Rules 24: a Waykeeper is trained in the tradition of the culture that appoints them.
+  if (definition.role === 'waykeeper') character.aptitudes = { ...(rulesVersion(state) >= 24 ? factionAptitudes(faction.definitionId) : WAYKEEPER_APTITUDES) };
   faction.treasury -= definition.coinCost; state.nextId++; state.characters[character.id] = character; rebuildCharacterIndexes(state);
   return { ok: true, events: [notice(state, character, 'character_recruited', `${character.name} was appointed ${definition.name} for ${definition.coinCost} coin.`)] };
 }

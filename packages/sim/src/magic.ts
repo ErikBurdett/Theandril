@@ -1,8 +1,12 @@
 import { z } from 'zod';
-import { ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS } from '@theandril/content';
+import { arcaneKnowledgeCost, ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS } from '@theandril/content';
 import type { CommandResult, GameState } from './types';
 import { rulesVersion } from './rules';
 import { holdsArcaneSite } from './arcane-sites';
+
+/** Rules 24: a discovery inside a realm's own tradition costs three quarters. */
+const discoveryCost = (state: GameState, definitionId: string, definition: { id: string; knowledgeCost: number }): number =>
+  rulesVersion(state) >= 24 ? arcaneKnowledgeCost(definitionId, definition.id, definition.knowledgeCost) : definition.knowledgeCost;
 
 const id = z.string().min(1).max(100).regex(/^[a-z][a-z0-9_.-]*$/);
 export const personalAptitudesSchema = z.record(id, z.number().int().min(1).max(3));
@@ -23,10 +27,11 @@ function researchObjection(state: GameState, factionId: string, discoveryId: str
   const definition = ARCANE_DISCOVERIES.find(item => item.id === discoveryId);
   const faction = state.factions.find(item => item.id === factionId);
   if (!definition || !faction) return 'Unknown arcane discovery.';
+  if ((definition.sinceRules ?? 14) > rulesVersion(state)) return 'This arcane discovery is unavailable under these historical rules.';
   if (state.arcaneResearch[factionId]?.includes(discoveryId)) return 'This arcane discovery is already researched.';
   if (state.battle || state.pendingCapture || state.victory) return 'Resolve the current battle or capture before researching.';
   if (!Object.values(state.settlements).some(town => town.factionId === factionId && !town.occupationTurns && !state.sieges[town.id] && town.buildings.includes(definition.requiredBuildingId))) return 'An unoccupied, unbesieged Witness archive is required for Arcane Theory.';
-  if (faction.knowledge < definition.knowledgeCost) return 'Not enough knowledge for this arcane discovery.';
+  if (faction.knowledge < discoveryCost(state, faction.definitionId, definition)) return 'Not enough knowledge for this arcane discovery.';
   // Rules 23: Arcane Theory is studied from a seam the realm actually holds.
   if (rulesVersion(state) >= 23 && !holdsArcaneSite(state, factionId)) return 'Arcane Theory needs a surveyed arcane seam inside your own borders.';
   return null;
@@ -35,7 +40,9 @@ export function researchArcane(state: GameState, factionId: string, discoveryId:
   const error = researchObjection(state, factionId, discoveryId);
   if (error) return { ok: false, error, events: [] };
   const definition = ARCANE_DISCOVERIES.find(item => item.id === discoveryId)!;
-  state.factions.find(item => item.id === factionId)!.knowledge -= definition.knowledgeCost;
+  const faction = state.factions.find(item => item.id === factionId)!;
+  const cost = discoveryCost(state, faction.definitionId, definition);
+  faction.knowledge -= cost;
   state.arcaneResearch[factionId]!.push(discoveryId); state.arcaneResearch[factionId]!.sort();
   return { ok: true, events: [{ turn: state.turn, factionId, type: 'arcane_researched', message: `${definition.name} was researched for ${definition.knowledgeCost} knowledge. A personally qualified caster is still required.` }] };
 }

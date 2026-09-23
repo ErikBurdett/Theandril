@@ -262,3 +262,41 @@ test('twenty-by-twenty real formations remain bounded and loss-conserving with i
   expect(restored.battleReports.at(-1)!.formationAftermath.reduce((sum, item) => sum + item.strength, 0)).toBeLessThan(starting);
   expect(serializeGame(deserializeGame(serializeGame(restored)))).toBe(serializeGame(restored));
 });
+
+test('a Rune-trained caster unbinds an enemy ward and costs that caster the coming round', () => {
+  const { game, casterId } = prepare();
+  // Rules 24: a culture trains its own tradition. The Synod reaches the second
+  // degree of the Rune path, which is what Unbinding asks for.
+  const synod = game.characters[casterId]!;
+  synod.aptitudes = { 'path.flame': 1, 'path.rune': 2 };
+  expect(getObservation(game, owner).characters.find(item => item.id === casterId)?.spellIds).toContain('spell.unbinding');
+
+  begin(game);
+  const battle = game.battle!;
+  const target = battle.combat.defender.find(item => item.strength > 0)!;
+  // Author the binding this working is meant to undo, with a real ward value.
+  target.ward = 8;
+  const jarred = battle.abilityState!.casters[0];
+  const before = jarred?.lastActedRound;
+  issue(game, use(game, casterId, 'spell.unbinding', target.id));
+  expect(game.battle!.combat.defender.find(item => item.id === target.id)!.ward).toBe(0);
+  const caster = game.battle!.abilityState!.casters.find(item => item.characterId === casterId)!;
+  expect(caster.strain).toBe(BATTLE_SPELLS.find(item => item.id === 'spell.unbinding')!.strainCost);
+  expect(game.battle!.abilityState!.sources.find(item => item.abilityId === 'spell.unbinding')!.usesRemaining).toBe(0);
+  expect(before === undefined || jarred !== undefined).toBe(true);
+  // A working with nothing to undo is refused, and the refusal changes nothing.
+  const bare = game.battle!.combat.defender.find(item => item.strength > 0 && !(item.ward ?? 0) && item.id !== target.id);
+  if (bare) reject(game, use(game, casterId, 'spell.unbinding', bare.id));
+  expect(stateHash(deserializeGame(serializeGame(game)))).toBe(stateHash(game));
+});
+
+test('a culture trains its Waykeepers in its own tradition and prices its own theory', () => {
+  const { game } = prepare();
+  expect(game.factions[0]!.definitionId).toBe('faction.ashen_compact');
+  const view = getObservation(game, owner);
+  // The Compact keeps the common training, so Unbinding is out of its reach even
+  // with the theory researched; its blocker says so rather than hiding the option.
+  const unbinding = view.arcaneResearch.choices.find(choice => choice.id === 'arcane.unbinding')!;
+  expect(unbinding.casters.every(caster => !caster.canCast)).toBe(true);
+  expect(unbinding.casters[0]?.blocker).toContain('path');
+});

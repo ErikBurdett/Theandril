@@ -103,7 +103,7 @@ export function battleLayout(scene: BattleSceneSnapshot, width: number, height: 
 export function battleEffect(event: BattlePresentationEvent): string | undefined {
   if (event.type !== 'attack' && event.type !== 'ability' && event.type !== 'pursuit') return undefined;
   return event.attackKind === 'fire' ? BATTLE_EFFECT_IDS.ember
-    : event.attackKind === 'ward' || event.attackKind === 'brace' ? BATTLE_EFFECT_IDS.ward
+    : event.attackKind === 'ward' || event.attackKind === 'brace' || event.attackKind === 'counter' ? BATTLE_EFFECT_IDS.ward
       : event.attackKind === 'rally' ? BATTLE_EFFECT_IDS.rally
         : event.attackKind === 'projectile' ? BATTLE_EFFECT_IDS.projectile
           : event.attackKind === 'melee' || event.attackKind === 'reach' ? BATTLE_EFFECT_IDS.melee : undefined;

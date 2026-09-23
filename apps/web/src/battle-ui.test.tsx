@@ -28,7 +28,7 @@ describe('authoritative battlefield controls', () => {
   it('labels national Arcane Theory separately from personal aptitude and uses real blockers', () => {
     const view = getObservation(borderBattleCampaign(), 'faction.ashen_compact');
     const html = renderToStaticMarkup(createElement(ArcaneResearch, { view, blocked: false, issue: () => undefined }));
-    expect(view.arcaneResearch.choices).toHaveLength(2);
+    expect(view.arcaneResearch.choices).toHaveLength(3);
     expect(html).toContain('national discoveries, personal practitioners');
     for (const choice of view.arcaneResearch.choices) { expect(html).toContain(choice.name); expect(html).toContain(`${choice.knowledgeCost} knowledge`); expect(html).toContain(choice.blocker!); }
     expect(html).toContain('No living Waykeeper appointed.');

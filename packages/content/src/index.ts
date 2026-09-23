@@ -8,7 +8,7 @@ import { CITY_STATES, cityStateSchema } from './city-states';
 import { CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, validateCharacterContent } from './characters';
 import { BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, validateEcologyContent } from './ecology';
 import { FACTIONS, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, factionSchema, validateFactionContent } from './factions';
-import { ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, validateMagicContent } from './magic';
+import { ARCANE_DISCOVERIES, BATTLE_SPELLS, FACTION_APTITUDES, FACTION_ARCANE_TRADITIONS, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, validateMagicContent } from './magic';
 export * from './progression';
 export * from './city-states';
 export * from './characters';
@@ -68,7 +68,16 @@ export function checksum(text: string): string {
   return (hash >>> 0).toString(16).padStart(8, '0');
 }
 /** The whole-pack seal. Historical packs substitute their frozen pace table and omit later additions. */
-export const contentPackHash = (paces: typeof CAMPAIGN_PACES = CAMPAIGN_PACES, unification: typeof UNIFICATION_VICTORY | null = UNIFICATION_VICTORY, cityStates = true): string => checksum(JSON.stringify({ BUILDINGS, UNITS, FACTIONS, TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES: paces, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, ARCANE_DISCOVERIES, BATTLE_SPELLS, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, RESOURCES, DEVELOPMENT_NODES, ...(unification ? { UNIFICATION_VICTORY: unification } : {}), ...(cityStates ? { CITY_STATES } : {}) }));
+/** Magic content is versioned like the pace table: an older pack is sealed with
+ * the workings that campaign could actually reach. */
+export interface MagicPack { discoveries: typeof ARCANE_DISCOVERIES; spells: typeof BATTLE_SPELLS; traditions: boolean }
+export const CURRENT_MAGIC: MagicPack = { discoveries: ARCANE_DISCOVERIES, spells: BATTLE_SPELLS, traditions: true };
+export const magicPackForRules = (rules: number): MagicPack => {
+  const discoveries = ARCANE_DISCOVERIES.filter(item => (item.sinceRules ?? 14) <= rules);
+  const ids = new Set(discoveries.map(item => item.id));
+  return { discoveries, spells: BATTLE_SPELLS.filter(spell => ids.has(spell.discoveryId)), traditions: rules >= 24 };
+};
+export const contentPackHash = (paces: typeof CAMPAIGN_PACES = CAMPAIGN_PACES, unification: typeof UNIFICATION_VICTORY | null = UNIFICATION_VICTORY, cityStates = true, magic: MagicPack = CURRENT_MAGIC): string => checksum(JSON.stringify({ BUILDINGS, UNITS, FACTIONS, TECHNOLOGIES, INSTITUTIONS, DOCTRINES, PROSPERITY_PROJECT, CAMPAIGN_PACES: paces, CHARACTER_DEFINITIONS, CHARACTER_MISSIONS, CHARACTER_SKILLS, COMMANDER_ABILITIES, CHARACTER_NAMES, BIOME_YIELDS, FACTION_ECOLOGIES, IMPROVEMENTS, NATURAL_FEATURES, FACTION_ROSTERS, FACTION_PROFILES, FACTION_RECRUITMENT_WEIGHTS, ARCANE_DISCOVERIES: magic.discoveries, BATTLE_SPELLS: magic.spells, MAGIC_PATHS, WAYKEEPER_APTITUDES, MAX_CASTER_STRAIN, INNATE_BATTLE_ABILITIES, RESOURCES, DEVELOPMENT_NODES, ...(unification ? { UNIFICATION_VICTORY: unification } : {}), ...(cityStates ? { CITY_STATES } : {}), ...(magic.traditions ? { FACTION_APTITUDES, FACTION_ARCANE_TRADITIONS } : {}) }));
 export const CONTENT_HASH = contentPackHash();
 export const LOCALIZATION: Readonly<Record<string, string>> = Object.fromEntries([
   ...INNATE_BATTLE_ABILITIES.flatMap(item => [[item.id + '.name', item.name], [item.id + '.description', item.description]]),
