@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyCommandForVersion, battleReportForVersion, createGame, deserializeGame, serializeGame, stateHash } from './index';
+import { applyCommandForVersion, battleReportForVersion, createGame, deserializeGame, serializeGame, stateHash, SAVE_VERSION } from './index';
 import type { Army, CampaignBattle, DomainEvent, FactionState, Settlement, Siege, CaptureDecision, Ruin, DiplomacyState, FactionProgression, VictoryProject, Victory, CampaignPace, MovementRoute, GameState } from './index';
 import { createResources } from './resources';
 import { deriveBiomes } from '@theandril/mapgen';
@@ -204,7 +204,7 @@ describe('save validation and migration', () => {
   });
 
   const cases: [string, (save: SaveFixture) => void][] = [
-    ['unknown version', save => { save.version = 31; }],
+    ['unknown version', save => { save.version = SAVE_VERSION + 1; }],
     ['mismatched content', save => { save.contentHash = 'other-pack'; }],
     ['wrong map dimensions', save => { save.state.world.width++; }],
     ['invalid terrain', save => { save.state.world.terrain[0] = 99; }],

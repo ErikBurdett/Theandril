@@ -1,0 +1,18 @@
+
+> theandril@0.1.0 measure:pacing /home/telephoneheater/Work/Theandril
+> tsx scripts/measure-pacing.ts all
+
+headline (epic, standard, 12 realms, seed 20260905) — target 350–400 turns
+  turn 379 · prosperity · 173 depots · 0 refused orders · 34s
+headline-long (long, standard, 12 realms, seed 20260905) — target about 300 turns
+  turn 342 · prosperity · 159 depots · 0 refused orders · 28s
+headline-standard (standard, standard, 12 realms, seed 20260905) — target about 200 turns
+  turn 234 · prosperity · 138 depots · 0 refused orders · 17s
+proxy-epic (epic, tiny, 4 realms, seed 74) — target pacing-epic.test.ts bound
+  turn 363 · prosperity · 8 depots · 0 refused orders · 5s
+proxy-epic-chronicle (epic, tiny, 4 realms, seed 20260905) — target chronicle-victory.test.ts bound
+  turn 378 · prosperity · 9 depots · 0 refused orders · 6s
+proxy-long (long, tiny, 4 realms, seed 99) — target pacing.test.ts bound
+  turn 261 · prosperity · 10 depots · 0 refused orders · 4s
+proxy-standard (standard, tiny, 4 realms, seed 74) — target pacing.test.ts bound
+  turn 215 · prosperity · 10 depots · 0 refused orders · 2s

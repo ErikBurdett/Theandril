@@ -1,0 +1,16 @@
+
+Running 9 tests using 1 worker
+
+(node:1105582) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/army.spec.ts:53:1 › mixed armies merge, split and transfer stable formations without refreshing movement; an escorted caravan founds without consuming its scouts (7.2s)
+  ✓  2 tests/gameplay/army.spec.ts:94:1 › mixed formation battles deploy each real role and preserve exact losses through a saved tactical round (7.4s)
+  ✓  3 tests/gameplay/army.spec.ts:124:1 › twelve-formation limits and proper-subset splitting stay explicit in the narrow keyboard roster (3.6s)
+  ✓  4 tests/gameplay/naval.spec.ts:51:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker (11.3s)
+  ✓  5 tests/gameplay/naval.spec.ts:107:1 › a saved voyage spends its last provisions before hulls and passengers waste, then refills within harbor supply (12.1s)
+  ✓  6 tests/gameplay/naval.spec.ts:173:1 › harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet (8.4s)
+  ✓  7 tests/gameplay/naval.spec.ts:209:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships (8.4s)
+  ✓  8 tests/gameplay/postings.spec.ts:28:1 › an army is posted from real controls, states where it stands, and a hearth musters what it raises (3.8s)
+  ✓  9 tests/gameplay/supply.spec.ts:27:1 › a force outside supply says what it costs, is named in the turn list, and can raise a depot to feed itself (5.0s)
+
+  9 passed (1.1m)

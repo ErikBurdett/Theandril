@@ -1,6 +1,6 @@
 import { closeManagement, openRegistry, selectFromRegistry, openSelectedOrders, openRealmAffairs, openCampaignJournal, openProduction } from './ui-navigation';
 import { expect, test, type Page } from '@playwright/test';
-import { applyCommand, createArmyFormation, deserializeGame, serializeGame, stateHash, type GameCommand, type GameState } from '@theandril/sim';
+import { applyCommand, createArmyFormation, deserializeGame, getObservation, serializeGame, stateHash, SUPPLY_ATTRITION, type GameCommand, type GameState } from '@theandril/sim';
 import { exportSave } from '@theandril/persistence';
 import { navalCampaign, NAVAL_FIXTURE as N } from '../../packages/test-fixtures/src/naval-fixture';
 import { refreshAuthoredSight } from '../../packages/test-fixtures/src/authored-land';
@@ -102,6 +102,72 @@ test('an embarked expedition crosses researched deep ocean by a saved queued voy
   expect(cargo).toMatchObject({ cell: N.landingCell, movement: 0 }); expect(cargo.formations.map(item => item.id)).toEqual(cargoIds);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await saveReload(page);
+});
+
+test('a saved voyage spends its last provisions before hulls and passengers waste, then refills within harbor supply', async ({ page }, testInfo) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  let state = navalCampaign({ enemyFleet: false });
+  const factionId = state.turnOwnerId;
+  issue(state, { type: 'research', factionId, technologyId: 'technology.ocean_navigation' });
+  issue(state, { type: 'embarkArmy', factionId, armyId: N.cargoId, fleetId: N.fleetId });
+  // Explicit scenario setup: a loaded expedition already at sea with two turns
+  // left. Every subsequent movement, turn, save and load uses the real controls.
+  state.armies[N.fleetId]!.cell = N.voyageCell;
+  state.armies[N.fleetId]!.provisions = 2;
+  state.armies[N.cargoId]!.cell = N.voyageCell;
+  refreshAuthoredSight(state);
+  state = deserializeGame(serializeGame(state));
+  const offshore = N.voyageCell - 1, suppliedWater = offshore - 1;
+  const supply = getObservation(state, factionId).suppliedCells;
+  expect(supply).not.toContain(offshore); expect(supply).toContain(suppliedWater);
+  const initial = [N.fleetId, N.cargoId].flatMap(id => state.armies[id]!.formations.map(({ id, strength }) => ({ id, strength })));
+  const strengths = () => page.evaluate(ids => window.__THEANDRIL__!.getSummary()!.ownArmies.filter(army => ids.includes(army.id)).flatMap(army => army.formations.map(({ id, strength }) => ({ id, strength }))), [N.fleetId, N.cargoId] as string[]);
+  const stores = page.getByTestId('fleet-provisions');
+
+  await importCampaign(page, state); await selectArmy(page, N.fleetName);
+  await expect(stores).toContainText('2 / 8 turns');
+  await expect(stores.getByRole('meter', { name: 'Turns of fleet provisions' })).toHaveAttribute('value', '2');
+  await review(page, offshore); await page.getByRole('button', { name: 'Move now', exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSummary()!.ownArmies.find(army => army.id === 'army.2')!.cell)).toBe(offshore);
+  await saveReload(page); await selectArmy(page, N.fleetName);
+  await expect(stores).toContainText('2 / 8 turns');
+  await stores.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: testInfo.outputPath('fleet-provisions-saved-voyage.png') });
+
+  await endTurn(page); await openSelectedOrders(page);
+  await expect(stores).toContainText('1 / 8 turns');
+  await expect(stores).toContainText('Return to harbor supply before the stores run out');
+  expect(await strengths()).toEqual(initial);
+  await endTurn(page); await openSelectedOrders(page);
+  await expect(stores).toContainText('0 / 8 turns');
+  expect(await strengths()).toEqual(initial); // The last ration fed this turn.
+  await endTurn(page); await openSelectedOrders(page);
+  const depleted = initial.map(formation => ({ ...formation, strength: formation.strength - SUPPLY_ATTRITION }));
+  expect(await strengths()).toEqual(depleted);
+  await expect(page.getByTestId('army-supply')).toContainText('Out of stores');
+  await selectArmy(page, N.cargoName);
+  await expect(stores).toContainText('0 / 8 turns');
+  await expect(stores).toContainText('Hulls and passengers share these stores');
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await stores.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: testInfo.outputPath('fleet-provisions-exhausted-narrow.png') });
+  expect(await stores.evaluate(element => { const bounds = element.getBoundingClientRect(); return bounds.left >= 0 && bounds.right <= innerWidth; })).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole('button', { name: 'Select carrying fleet', exact: true }).click();
+  await review(page, suppliedWater); await page.getByRole('button', { name: 'Move now', exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSummary()!.ownArmies.find(army => army.id === 'army.2')!.cell)).toBe(suppliedWater);
+  await expect(stores).toContainText('Within harbor supply: stores refill at the end of the turn');
+  await expect(stores).toContainText('0 / 8 turns');
+  await endTurn(page); await openSelectedOrders(page);
+  await expect(stores).toContainText('8 / 8 turns');
+  expect(await strengths()).toEqual(depleted);
+  await stores.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: testInfo.outputPath('fleet-provisions-refilled-narrow.png') });
+  await saveReload(page); await selectArmy(page, N.cargoName);
+  await expect(stores).toContainText('8 / 8 turns');
+  expect(errors).toEqual([]);
 });
 
 test('harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet', async ({ page }, testInfo) => {

@@ -6,6 +6,8 @@ import { hasRoadEdge } from './roads';
 import { indexes } from './visibility';
 import { atWar } from './warfare';
 import { rulesVersion } from './rules';
+import { FLEET_PROVISION_TURNS } from './fleet-provisions';
+export { FLEET_PROVISION_TURNS } from './fleet-provisions';
 
 /** Rules 27: a realm feeds its armies from its hearths, from rules 28 also from
  * the depots it builds, and from rules 30 a hearth with a harbour carries supply
@@ -34,7 +36,14 @@ export const SUPPLY_MIN_FORMATIONS = 3;
 /** Rules 30: only a harbour carries supply over water, and only its own line does. */
 export const HARBOR_BUILDING_ID = 'building.harbor';
 
-export interface ArmySupply { armyId: string; supplied: boolean; sourceSettlementId: string | null; reason: string }
+export interface ArmySupply {
+  armyId: string;
+  supplied: boolean;
+  sourceSettlementId: string | null;
+  reason: string;
+  /** Private to this realm; also shown on its embarked armies. */
+  fleetProvisions?: { remaining: number; capacity: number; refilling: boolean };
+}
 
 const isNaval = (state: GameState, armyId: string): boolean =>
   state.armies[armyId]?.formations.some(item => units.get(item.unitId)?.movementDomain === 'naval') ?? false;
@@ -110,6 +119,22 @@ export function armySupply(state: GameState, armyId: string, supplied = supplied
   const army = state.armies[armyId];
   if (!army) return { armyId, supplied: true, sourceSettlementId: null, reason: '' };
   if (rulesVersion(state) < 27) return { armyId, supplied: true, sourceSettlementId: null, reason: 'Supply lines are not kept under these rules.' };
+  if (rulesVersion(state) >= 31) {
+    const carrierId = state.transports[armyId];
+    if (carrierId) {
+      const carrier = armySupply(state, carrierId, supplied);
+      return { ...carrier, armyId, reason: `Aboard ${state.armies[carrierId]?.name ?? 'its carrier'}. ${carrier.reason}` };
+    }
+    if (isNaval(state, armyId)) {
+      const source = supplied.get(army.cell);
+      const remaining = army.provisions ?? FLEET_PROVISION_TURNS;
+      return { armyId, supplied: Boolean(source) || remaining > 0, sourceSettlementId: source && !source.startsWith('depot.') ? source : null,
+        fleetProvisions: { remaining, capacity: FLEET_PROVISION_TURNS, refilling: Boolean(source) },
+        reason: source ? `Supplied from ${state.settlements[source]?.name ?? source}. Stores refill to ${FLEET_PROVISION_TURNS} turns at the end of the turn.`
+          : remaining > 0 ? `Stores feed this fleet and its passengers for ${remaining} more turn${remaining === 1 ? '' : 's'} beyond harbour supply. Return to resupply before they run out.`
+            : `Out of stores: this fleet and its passengers lose ${SUPPLY_ATTRITION} strength a turn and recover slowly. Return to friendly harbour supply.` };
+    }
+  }
   if (isNaval(state, armyId)) return { armyId, supplied: true, sourceSettlementId: null, reason: 'A fleet carries its own stores.' };
   if (state.transports[armyId]) return { armyId, supplied: true, sourceSettlementId: null, reason: 'The army is aboard a fleet and draws on its stores.' };
   const source = supplied.get(army.cell);
@@ -131,12 +156,34 @@ export function observeSupply(state: GameState, factionId: string, supplied = su
 export function advanceSupply(state: GameState, emitted: DomainEvent[]): Set<string> {
   const starving = new Set<string>();
   if (rulesVersion(state) < 27) return starving;
+  const modern = rulesVersion(state) >= 31;
   for (const faction of state.factions) {
-    if (landless(state, faction.id)) continue;
+    const noHearth = landless(state, faction.id);
+    if (!modern && noHearth) continue;
     const supplied = suppliedCells(state, faction.id);
+    const armies = Object.values(state.armies).filter(item => item.factionId === faction.id).sort((a, b) => a.id < b.id ? -1 : 1);
+    // Resolve all carriers before their passengers, so army ID ordering cannot
+    // charge cargo a turn earlier when its carrier consumes the last ration.
+    if (modern) for (const army of armies) {
+      if (!isNaval(state, army.id)) continue;
+      const previous = army.provisions ?? FLEET_PROVISION_TURNS;
+      if (supplied.has(army.cell)) {
+        army.provisions = FLEET_PROVISION_TURNS;
+        if (previous < FLEET_PROVISION_TURNS) emitted.push({ turn: state.turn, factionId: faction.id, type: 'fleet_resupplied', cell: army.cell,
+          message: `${army.name} replenished its stores to ${FLEET_PROVISION_TURNS} turns at friendly harbour supply.` });
+      } else {
+        army.provisions = Math.max(0, previous - 1);
+        if (previous === 0) starving.add(army.id);
+        if (previous === 1) emitted.push({ turn: state.turn, factionId: faction.id, type: 'fleet_stores_empty', cell: army.cell,
+          message: `${army.name} consumed its last stores. Return to friendly harbour supply before the next turn to avoid losses aboard.` });
+      }
+    }
     let worn = 0;
-    for (const army of Object.values(state.armies).filter(item => item.factionId === faction.id).sort((a, b) => a.id < b.id ? -1 : 1)) {
-      if (isNaval(state, army.id) || state.transports[army.id] || supplied.has(army.cell) || forages(state, army.id)) continue;
+    for (const army of armies) {
+      const carrier = state.transports[army.id];
+      if (modern && (isNaval(state, army.id) || carrier)) {
+        if (!starving.has(carrier ?? army.id)) continue;
+      } else if (noHearth || isNaval(state, army.id) || carrier || supplied.has(army.cell) || forages(state, army.id)) continue;
       starving.add(army.id);
       let lost = false;
       for (const formation of army.formations) {
@@ -147,7 +194,8 @@ export function advanceSupply(state: GameState, emitted: DomainEvent[]): Set<str
       if (lost) worn++;
     }
     if (worn) emitted.push({ turn: state.turn, factionId: faction.id, type: 'supply_attrition',
-      message: `${worn} compan${worn === 1 ? 'y is' : 'ies are'} out of supply and wasting away. Bring them within reach of a hearth, take one, or build a road.` });
+      message: modern ? `${worn} force${worn === 1 ? ' is' : 's are'} out of supply and wasting away. Return fleets to harbour supply; bring land forces within reach of a hearth, depot or road.`
+        : `${worn} compan${worn === 1 ? 'y is' : 'ies are'} out of supply and wasting away. Bring them within reach of a hearth, take one, or build a road.` });
   }
   return starving;
 }

@@ -7,6 +7,17 @@ import './naval.css';
 type Issue = (command: GameCommand) => void;
 const lossWarning = 'Destroyed transport formations reduce carrying space and can drown passengers. If the fleet sinks, every carried formation and its attached characters are lost.';
 
+/** Display the simulation's stores and refill decision for hulls and their passengers. */
+export function FleetProvisions({ supply }: { supply: Observation['supply'][number] }) {
+  const stores = supply.fleetProvisions;
+  if (!stores) return null;
+  return <section className="fleet-provisions" aria-label="Fleet provisions" data-testid="fleet-provisions">
+    <div className="fleet-provisions-heading"><strong>Fleet provisions</strong><span>{stores.remaining} / {stores.capacity} turns</span></div>
+    <meter min={0} max={stores.capacity} value={stores.remaining} aria-label="Turns of fleet provisions"/>
+    <p className="field-help">{stores.refilling ? 'Within harbor supply: stores refill at the end of the turn.' : supply.supplied ? 'Return to harbor supply before the stores run out.' : 'Stores exhausted. Return to harbor supply to replenish.'} Hulls and passengers share these stores.</p>
+  </section>;
+}
+
 export function NavalTransport({ army, view, busy, issue, selectArmy }: { army: ArmyView; view: Observation; busy: boolean; issue: Issue; selectArmy: (armyId: string) => void }) {
   const [fleetId, setFleetId] = useState('');
   const [target, setTarget] = useState<number>();

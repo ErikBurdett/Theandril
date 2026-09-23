@@ -26,7 +26,7 @@ export { CHARTER_CEILING_MAX, CHARTER_CEILING_MIN, CHARTER_FOCI, CHARTER_NAMES, 
 export type { Charter, CharterFocus, ObservedCharter } from './charters';
 export { POSTING_MODES, POSTING_NAMES, joinHost, musterFor, postingFor } from './postings';
 export type { Muster, ObservedPosting, Posting, PostingMode } from './postings';
-export { HARBOR_BUILDING_ID, SUPPLY_ATTRITION, SUPPLY_BUDGET, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MIN_FORMATIONS, SUPPLY_MORALE_RECOVERY, armySupply, suppliedCells } from './supply';
+export { FLEET_PROVISION_TURNS, HARBOR_BUILDING_ID, SUPPLY_ATTRITION, SUPPLY_BUDGET, SUPPLY_FATIGUE_RECOVERY, SUPPLY_MIN_FORMATIONS, SUPPLY_MORALE_RECOVERY, armySupply, suppliedCells } from './supply';
 export type { ArmySupply } from './supply';
 export { DEPOT_BUDGET, DEPOT_COIN, DEPOT_SPACING, DEPOT_UPKEEP, MAX_REALM_DEPOTS, depotObjection, depotsOf } from './depots';
 export type { Depot } from './depots';

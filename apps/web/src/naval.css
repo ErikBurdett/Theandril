@@ -1,6 +1,11 @@
 .naval-transport{border-block:1px solid #52605c;margin:18px 0;padding:0 0 16px;min-width:0}
 .naval-transport label{font-size:12px;margin:14px 0 9px}
 .naval-transport select{min-width:0;font-size:11px}
+.fleet-provisions{border:1px solid #52605c;background:#202a24;padding:12px;margin:12px 0;min-width:0}
+.fleet-provisions-heading{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;font-size:calc(12px * var(--text-scale,1));color:#dac99f}
+.fleet-provisions-heading strong{font-weight:400}.fleet-provisions-heading span{white-space:nowrap}
+.fleet-provisions meter{display:block;width:100%;height:12px;margin:9px 0;accent-color:#bca673}
+.fleet-provisions .field-help{margin:6px 0 0}
 .transport-capacity{color:#dac99f;font-size:14px;margin:12px 0}
 .transport-warning{color:#d7b58d;font-size:11px;line-height:1.7;border-left:2px solid #ad8156;padding-left:10px;margin:13px 0}
 .transport-cargo{list-style:none;padding:0;margin:12px 0}

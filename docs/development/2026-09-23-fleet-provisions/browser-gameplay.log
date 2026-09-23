@@ -1,0 +1,56 @@
+
+Running 5 tests using 1 worker
+
+(node:1017157) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/naval.spec.ts:51:1 › an embarked expedition crosses researched deep ocean by a saved queued voyage, with no duplicate passenger marker (31.0s)
+  ✘  2 tests/gameplay/naval.spec.ts:107:1 › a saved voyage spends its last provisions before hulls and passengers waste, then refills within harbor supply (16.8s)
+(node:1026117) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 tests/gameplay/naval.spec.ts:173:1 › harbor recruitment launches real hulls and an adjacent harbor marshal takes command of a fleet (8.5s)
+  ✓  4 tests/gameplay/naval.spec.ts:209:1 › a saved naval battle resolves exact transport casualties without deploying its passengers as ships (8.8s)
+  ✓  5 tests/gameplay/supply.spec.ts:27:1 › a force outside supply says what it costs, is named in the turn list, and can raise a depot to feed itself (6.0s)
+
+
+  1) tests/gameplay/naval.spec.ts:107:1 › a saved voyage spends its last provisions before hulls and passengers waste, then refills within harbor supply 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('army-supply')
+    Expected substring: "Out of supply"
+    Received string:    "Out of stores: this fleet and its passengers lose 4 strength a turn and recover slowly. Return to friendly harbour supply."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByTestId('army-supply') with timeout 5000ms
+      - waiting for getByTestId('army-supply')
+        14 × locator resolved to <p data-testid="army-supply" class="production-blocker">Out of stores: this fleet and its passengers lose…</p>
+           - unexpected value "Out of stores: this fleet and its passengers lose 4 strength a turn and recover slowly. Return to friendly harbour supply."
+
+
+      146 |   const depleted = initial.map(formation => ({ ...formation, strength: formation.strength - SUPPLY_ATTRITION }));
+      147 |   expect(await strengths()).toEqual(depleted);
+    > 148 |   await expect(page.getByTestId('army-supply')).toContainText('Out of supply');
+          |                                                 ^
+      149 |   await selectArmy(page, N.cargoName);
+      150 |   await expect(stores).toContainText('0 / 8 turns');
+      151 |   await expect(stores).toContainText('Hulls and passengers share these stores');
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/naval.spec.ts:148:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/naval-a-saved-voyage-spend-1db31-efills-within-harbor-supply/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/naval-a-saved-voyage-spend-1db31-efills-within-harbor-supply/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/naval-a-saved-voyage-spend-1db31-efills-within-harbor-supply/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/naval-a-saved-voyage-spend-1db31-efills-within-harbor-supply/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/gameplay/naval.spec.ts:107:1 › a saved voyage spends its last provisions before hulls and passengers waste, then refills within harbor supply 
+  4 passed (1.2m)

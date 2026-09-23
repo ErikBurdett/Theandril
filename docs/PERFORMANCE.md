@@ -1,5 +1,13 @@
 # Performance measurements
 
+## Finite fleet stores and observed naval returns — local rules 31
+
+[Fleet supply evidence](development/2026-09-23-fleet-provisions/README.md) separates supply resolution from observation and AI planning. Synthetic resource-free, fully charted island workloads use 128 harbours/64 loaded fleets on Huge 196,608 cells and 256/128 on Legendary 307,200 cells. Twelve samples follow three warmups and alternate explicit rules30/31 supply contexts and no-provisions/provision-aware planner observations; output seals repeat and strict saves roundtrip.
+
+Supply resolution medians change 5.36→5.81ms (Huge), 10.18→10.42ms (Legendary). Naval planning changes 33.77→41.89ms and 63.04→79.53ms; Legendary current p95 is 108.85ms. The added return decisions increase planner cost on these charts. AI-scoped observation is separately 22.17/37.38ms median. Eight fleets/eight route queries remain configured caps, not measured query totals. No full-turn, renderer, multi-realm contested-network or retained-memory signoff follows from this synthetic measurement. [Raw workload/limits/timings](development/2026-09-23-fleet-provisions/benchmark-fleet-supply.json).
+
+Separately, a generated Small/islands four-realm 100-round campaign issues 2,819 accepted orders with zero refusals, 289 return steps, 86 resupplies, six landings and two transported foundings. One fleet and one passenger army each suffer one attrition turn. The 2,477-command saved mirror matches exactly. The headline Standard-map twelve-realm Epic campaign ends at 379, inside 350–400, with unchanged prices; the other pace results and open balance limits are reported separately.
+
 ## Layered campaign HUD and larger visible towns — slice 25
 
 The same Huge save (`b14aa18a`) and packed/total worker bytes (1,769,695/1,974,826) retain 16.7–16.8 ms rolling frame p95. Removing side panels changes the canvas from 890×786 to 1440×696 at the same browser viewport; maximum chunk backing becomes 18/72 MiB rather than 26/104 MiB. Different visible geometry prevents a matched-camera speedup claim. Map/battle atlases are unchanged; three separate DOM materials add 68,784 bytes and potentially 2.0625 MiB decoded. Full verification, raw before/after, production checks and open contact/Epic/battlefield gates are in the [slice-25 report](performance/0037-layered-hud.md).

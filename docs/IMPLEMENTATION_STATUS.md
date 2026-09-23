@@ -1,5 +1,17 @@
 # Theandril implementation status
 
+## Fleet provisions and naval staging — local rules/save 31, 2026-09-23
+
+**ACT-35 implemented locally.** Fleets carry eight turns of stores beyond friendly harbour supply. Their last ration feeds everyone aboard; a further turn at sea costs hulls and passengers four strength per formation, with the existing strength floor and reduced recovery. Returning to supply replenishes stores. Splits copy endurance and transfers/merges retain the shorter endurance, so reorganizing cannot refill a fleet. Selected fleet and passenger panels expose remaining turns and replenishment guidance; foreign stores stay private.
+
+**AI.** Fleets plan a return through observed, permitted water, account for visibility-limited sailing, stop to refill, finish immediately safe landings and pay for staging harbours near depleted expeditions. Review reproduced and fixed a coastal ship choosing nearby deep-water supply over reachable shallows. The planner remains bounded to eight fleets/eight route queries per pass and two nearby return candidates; optimal harbour chains and every lost-port recovery are not proved.
+
+**Measured, with prices unchanged.** The final Standard-map, twelve-realm Epic campaign ends at **379 turns**, inside 350–400, compared with 388 at rules 30. Long improves 367→342 but remains above its about 300 target; Standard moves 223→234 and remains above about 200. All seven headline/proxy measurements reach victory with zero refused orders. No price, timeout or proxy bound was changed. A separate generated 100-round island campaign records 2,819 accepted commands, 86 refills, six landings and two transported foundings; one fleet and its passengers each suffer one attrition turn. Its saved mirror is exact.
+
+**Compatibility and verification.** Rules/save 31 adds optional canonical fleet stores; content remains `015468d1`. Six genuine rules 30 saves/archives retain original bytes and replay. Modern and mixed histories survive saving, local storage and compressed export/import. Typecheck, lint, content validation, Pages-subpath production build, **1,861/1,861 tests** and **9/9 affected browser journeys** pass. Desktop and 390px screenshots are inspected. Synthetic Huge/Legendary supply resolution measures 5.81/10.42ms median; naval planning 41.89/79.53ms, versus 33.77/63.04ms without the provision policy. This is added AI work, not a performance improvement or a full scale gate.
+
+**Evidence and remaining work.** [Verification, historical comparison, benchmark, screenshots and reviews](development/2026-09-23-fleet-provisions/README.md); [architecture](architecture/0038-fleet-provisions.md); [draft dispatch](updates/fleet-provisions-work-packet.md). Material supply costs, trade, taxation, treaty access, coordinated escorts/reinforcement, broader naval recovery and Standard/Long pacing remain open. All fifteen release gates remain open. This working-tree candidate is not committed, published or deployed.
+
 ## Pacing measurement is a tool, and CI stays build-only — 2026-09-23
 
 **The tool.** `pnpm measure:pacing` plays AI campaigns to their victory and reports the turn each ended on, the victory path, depots standing and any order the planner asked for that the rules refused. Named cases: `headline` (a standard map with twelve realms - the campaign the 350-400 turn target actually describes), its Long and Standard siblings, and the four `proxy-*` cases the pacing tests play for speed.

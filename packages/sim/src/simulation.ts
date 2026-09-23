@@ -120,6 +120,7 @@ export function initializeLegacyLand(state: GameState): void {
 export function applyCommandForVersion(state: GameState, input: unknown, version: RulesVersion): CommandResult {
   const parsed = commandSchemaForVersion(version).safeParse(input);
   if (!parsed.success) return { ok: false, error: 'Malformed command: ' + parsed.error.issues[0]?.message, events: [] };
+  if (version < 31 && Object.values(state.armies).some(army => army.provisions !== undefined)) throw new Error('Historical rules cannot execute a campaign containing fleet provisions.');
   if (version < 15 && (Object.values(state.armies).some(army => army.formations.some(item => !PRE_SPECIALIST_UNIT_IDS.has(item.unitId))) || Object.values(state.settlements).some(town => town.queue.some(item => item.itemId.startsWith('unit.') && !PRE_SPECIALIST_UNIT_IDS.has(item.itemId))) || [...(state.battle ? [state.battle] : []), ...state.battleReports].some(battle => [...battle.combat.attacker, ...battle.combat.defender].some(item => !PRE_SPECIALIST_UNIT_IDS.has(item.unitId))))) throw new Error('Historical rules cannot execute formations absent from their frozen pack.');
   if (version < 14 && (Object.values(state.arcaneResearch).some(items => items.length) || Object.values(state.characters).some(item => item.aptitudes || item.definitionId === 'character.waykeeper') || (state.battle?.rulesVersion ?? 0) >= 9 || state.battleReports.some(item => item.rulesVersion >= 9))) throw new Error('Historical rules cannot execute arcane research or modern battle abilities.');
   if (version < 13 && (state.rosterVersion > 3 || state.factions.some(faction => !(FACTION_ROSTERS[3] as readonly string[]).includes(faction.definitionId)))) throw new Error('Historical rules cannot execute cultures absent from their frozen roster.');
@@ -144,7 +145,7 @@ const units = new Map(UNITS.map(item => [item.id, item]));
 
 export function createGame(options: NewGameOptions): GameState {
   const checked = z.object({
-    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30)]).default(30),
+    rulesVersion: z.union([z.literal(4), z.literal(5), z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10), z.literal(11), z.literal(12), z.literal(13), z.literal(14), z.literal(15), z.literal(16), z.literal(17), z.literal(18), z.literal(19), z.literal(20), z.literal(21), z.literal(22), z.literal(23), z.literal(24), z.literal(25), z.literal(26), z.literal(27), z.literal(28), z.literal(29), z.literal(30), z.literal(31)]).default(31),
     seed: z.number().int().min(0).max(0xffff_ffff),
     size: z.enum(['tiny', 'small', 'standard', 'huge', 'legendary']),
     factionCount: z.number().int().min(1).max(MAX_FACTIONS).default(4),

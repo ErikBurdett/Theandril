@@ -1,0 +1,114 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| packages/sim/src/fleet-supply.test.ts (5 tests | 5 failed) 107ms
+     × consumes the last ration before attrition, shares stores with passengers, and refills on a saved return 43ms
+     × never renews endurance through a split, merge or partial transfer 18ms
+     × has no small-fleet or landless exemption and never heals a damaged hull up to the attrition floor 16ms
+     × keeps foreign stores private and preserves the historical fleet exemption 13ms
+     × bounds long starvation and makes passenger outcomes independent of army ID ordering 15ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| packages/sim/src/fleet-supply.test.ts > fleet provisions > consumes the last ration before attrition, shares stores with passengers, and refills on a saved return
+AssertionError: expected undefined to deeply equal { remaining: undefined, …(2) }
+
+- Expected:
+{
+  "capacity": undefined,
+  "refilling": false,
+  "remaining": undefined,
+}
+
++ Received:
+undefined
+
+ ❯ packages/sim/src/fleet-supply.test.ts:34:20
+     32|     const cargoBefore = state.armies[N.cargoId]!.formations.map(item =…
+     33|     const stores = armySupply(state, N.fleetId).fleetProvisions!;
+     34|     expect(stores).toEqual({ remaining: FLEET_PROVISION_TURNS, capacit…
+       |                    ^
+     35|     for (let remaining = stores.remaining - 1; remaining >= 0; remaini…
+     36|       end(state);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  |unit| packages/sim/src/fleet-supply.test.ts > fleet provisions > never renews endurance through a split, merge or partial transfer
+AssertionError: expected undefined to be 2 // Object.is equality
+
+- Expected:
+2
+
++ Received:
+undefined
+
+ ❯ packages/sim/src/fleet-supply.test.ts:68:50
+     66|     const detachedId = `army.${state.nextId}`;
+     67|     issue(state, { type: 'splitArmy', factionId, armyId: fleet.id, for…
+     68|     expect(state.armies[detachedId]!.provisions).toBe(2);
+       |                                                  ^
+     69|     expect(fleet.provisions).toBe(2);
+     70|     // Receiving a fully provisioned hull cannot reset an exhausted fo…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |unit| packages/sim/src/fleet-supply.test.ts > fleet provisions > has no small-fleet or landless exemption and never heals a damaged hull up to the attrition floor
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ packages/sim/src/fleet-supply.test.ts:88:50
+     86|     delete state.settlements[N.homeId];
+     87|     // Supply is a derived query: avoid persisting an intentionally re…
+     88|     expect(armySupply(state, fleet.id).supplied).toBe(false);
+       |                                                  ^
+     89|     end(state);
+     90|     expect(fleet.formations[0]).toMatchObject({ strength: 1, morale: 4…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |unit| packages/sim/src/fleet-supply.test.ts > fleet provisions > keeps foreign stores private and preserves the historical fleet exemption
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ packages/sim/src/fleet-supply.test.ts:100:77
+     98|     const observation = getObservation(state, factionId);
+     99|     expect(observation.supply.every(entry => state.armies[entry.armyId…
+    100|     expect(observation.armies.every(army => army.provisions === undefi…
+       |                                                                             ^
+    101|     withRules(state, 30, () => {
+    102|       expect(armySupply(state, N.fleetId)).toMatchObject({ supplied: t…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |unit| packages/sim/src/fleet-supply.test.ts > fleet provisions > bounds long starvation and makes passenger outcomes independent of army ID ordering
+Error: Invalid save: invalid runtime entity ID
+ ❯ assert packages/sim/src/save.ts:589:25
+    587|
+    588| function assert(condition: unknown, message: string): asserts conditio…
+    589|   if (!condition) throw new Error('Invalid save: ' + message);
+       |                         ^
+    590| }
+    591|
+ ❯ checkEntity packages/sim/src/save.ts:912:5
+ ❯ deserializeGame packages/sim/src/save.ts:920:5
+ ❯ restore packages/sim/src/fleet-supply.test.ts:16:50
+ ❯ packages/sim/src/fleet-supply.test.ts:115:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed (5)
+   Start at  12:56:36
+   Duration  630ms (transform 343ms, setup 0ms, import 449ms, tests 107ms, environment 0ms)
+

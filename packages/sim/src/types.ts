@@ -36,6 +36,8 @@ export interface Army {
   cell: number;
   movement: number;
   formations: ArmyFormation[];
+  /** Rules 31: turns of stores aboard a fleet. Absent on a new/legacy hull means full. */
+  provisions?: number;
 }
 
 /** Observed whole-army frontage, not an estimate of who will win. */

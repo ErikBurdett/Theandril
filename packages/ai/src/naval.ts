@@ -1,6 +1,6 @@
 import { BUILDINGS, UNITS } from '@theandril/content';
-import { hexDistance, isLake, isPassable, neighbors, TERRAIN } from '@theandril/mapgen';
-import { createRoutePreviewer, getMovementPreview, type ArmyView, type GameCommand, type Observation } from '@theandril/sim';
+import { hexDistance, isLake, isPassable, neighbors, TERRAIN, WATER_DEPTH } from '@theandril/mapgen';
+import { createRoutePreviewer, getMovementPreview, type ArmyView, type GameCommand, type MovementPreview, type Observation } from '@theandril/sim';
 import { settlementSpacing } from './expansion';
 import { protectedFactions, type AiPlan } from './diplomacy';
 import { createNavigation } from './navigation';
@@ -267,13 +267,16 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
   const commands: GameCommand[] = [], reasons: string[] = [], heldArmyIds = new Set(options.heldArmyIds), queuedSettlementIds = new Set<string>();
   let budget = Math.max(0, coinBudget), interrupts = false;
   const result = (): NavalPlan => ({ commands, reasons, heldArmyIds, queuedSettlementIds, coinSpent: Math.max(0, coinBudget) - budget, interrupts });
-  if (view.victory || view.battle || view.pendingCapture || !hasNavalOpportunity(view)) return result();
+  const provisions = new Map(view.supply.filter(item => item.fleetProvisions).map(item => [item.armyId, item.fleetProvisions!]));
+  if (view.victory || view.battle || view.pendingCapture || !hasNavalOpportunity(view) && !provisions.size) return result();
   const factionId = view.factionId, cells = observedCells(view);
   const own = view.armies.filter(army => army.factionId === factionId).sort(byId);
-  const fleets = own.filter(army => army.domain === 'naval' && isSea(cells.get(army.cell)));
+  const fleets = own.filter(army => army.domain === 'naval' && (isSea(cells.get(army.cell))
+    || provisions.has(army.id) && cells.get(army.cell)?.terrain === TERRAIN.water));
   const foreign = view.armies.filter(army => army.factionId !== factionId && !army.carrierId);
   const protectedIds = protectedFactions(view), wars = new Set(view.wars);
   const towns = view.settlements.filter(town => town.factionId === factionId).sort(byId);
+  const supplied = new Set(view.suppliedCells);
   const seaKnowledge = createSeaKnowledge(view, cells);
   // Unknown remote hulls cannot satisfy a local charter, but uncertainty must
   // not create an unbounded realm-wide shipbuilding subsidy either.
@@ -315,6 +318,16 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
   const operatingTowns = towns.filter(town => coastalWaters(view, town.cell, cells).some(sameSea));
   const queuedCount = (itemId: string) => operatingTowns.reduce((sum, town) => sum + town.queue.filter(order => order.itemId === itemId).length, 0);
   const ocean = portWater.some(cell => !seaKnowledge.shallowEnclosed(cell));
+  // A real overseas foothold can extend the next voyage. Fund at most one legal
+  // harbor near a depleted fleet; do not invent ports on undiscovered coasts or
+  // spend on every coastal town before an expedition actually needs its reach.
+  const staging = coastTowns.filter(town => !town.buildings.includes('building.harbor') && !town.queue.length
+    && !town.occupationTurns && !view.visibleSiegeSettlementIds.includes(town.id)
+    && fleets.some(fleet => {
+      const stores = provisions.get(fleet.id);
+      return stores && !stores.refilling && stores.remaining < stores.capacity && hexDistance(fleet.cell, town.cell, view.width) <= 8;
+    })).sort((a, b) => nearest(a.cell, fleets) - nearest(b.cell, fleets) || byId(a, b))[0];
+  if (staging) queue(staging.id, 'building.harbor');
   // Wait for fresh prerequisite facts; research and construction are never assumed completed.
   if (prospective && !harbor && !prospective.queue.some(order => order.itemId === 'building.harbor')) queue(prospective.id, 'building.harbor');
   const transports = transportHulls(fleets);
@@ -404,25 +417,75 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
   // Most bounded queries target water or shore outside the army's known area;
   // the previewer answers those from the first complete search instead of repeating it.
   const routePreview = createRoutePreviewer(view);
-  const toward = (army: ArmyView, target: number): number | undefined => {
-    if (routeQueries >= MAX_NAVAL_ROUTE_QUERIES || target === army.cell) return undefined;
+  const requestRoute = (army: ArmyView, target: number): MovementPreview | null => {
+    if (routeQueries >= MAX_NAVAL_ROUTE_QUERIES || target === army.cell) return null;
     routeQueries++;
     const preview = routePreview(army.id, target);
-    if (!preview?.canQueue || preview.action !== 'move') return undefined;
-    let spent = 0, destination: number | undefined;
+    return preview?.canQueue && preview.action === 'move' ? preview : null;
+  };
+  const routeStep = (army: ArmyView, preview: MovementPreview): number | undefined => {
+    let spent = 0, destination: number | undefined, stagingCell: number | undefined;
     for (const cell of preview.path) {
       // Do not let earlier same-batch discoveries invalidate a route through remembered fog.
       const known = cells.get(cell); if (!known?.visible) break;
       spent += known.terrain === 2 || known.terrain === 3 ? 2 : 1;
       if (spent > army.movement) break;
-      if (!claimed.has(cell)) destination = cell;
+      if (!claimed.has(cell)) { destination = cell; if (supplied.has(cell)) stagingCell = cell; }
     }
+    const stores = provisions.get(army.id);
+    // Moving through supply is not a refill: the fleet must finish its turn
+    // there. Stop at a harbor's reach encountered along the intended voyage.
+    if (stores && stores.remaining < stores.capacity && stagingCell !== undefined) return stagingCell;
     return destination;
+  };
+  const toward = (army: ArmyView, target: number): number | undefined => {
+    const preview = requestRoute(army, target);
+    return preview ? routeStep(army, preview) : undefined;
   };
   const move = (army: ArmyView, target: number | undefined, reason: string): boolean => {
     if (target === undefined) return false;
     commands.push({ type: 'moveTo', factionId, armyId: army.id, target }); heldArmyIds.add(army.id); claimed.add(target);
     if (reasons.length < 20) reasons.push(`${army.name}: ${reason}.`); return true;
+  };
+  // Own canonical supply is already bounded by hearth reach. Retain only
+  // observed water and ask at most two of the existing eight public route
+  // queries per fleet; unknown cells never become a claimed harbor connection.
+  const refuelingWater = view.suppliedCells.filter(cell => cells.get(cell)?.terrain === TERRAIN.water && !occupied.has(cell));
+  const returnForStores = (fleet: ArmyView): boolean => {
+    const stores = provisions.get(fleet.id);
+    if (!stores) return false; // Historical rules preserve their original policy.
+    if (stores.refilling && stores.remaining < stores.capacity) {
+      heldArmyIds.add(fleet.id);
+      const waiting = cargoCandidates.find(army => army.formations.length <= fleet.transportCapacity && hexDistance(army.cell, fleet.cell, view.width) <= 1);
+      if (waiting) heldArmyIds.add(waiting.id);
+      if (reasons.length < 20) reasons.push(`${fleet.name} holds within harbor supply to refill ${stores.remaining}/${stores.capacity} provision turns.`);
+      return true;
+    }
+    if (stores.refilling || stores.remaining > Math.ceil(stores.capacity / 2) + 1) return false;
+    const targets: { cell: number; distance: number }[] = [];
+    for (const cell of refuelingWater) {
+      if (!fleet.canEnterDeepWater && cells.get(cell)?.waterDepth !== WATER_DEPTH.shallow) continue;
+      const distance = hexDistance(fleet.cell, cell, view.width), last = targets[1];
+      if (last && (distance > last.distance || distance === last.distance && cell > last.cell)
+        || seaKnowledge.basinRelation(fleet.cell, cell) === 'separate') continue;
+      targets.push({ cell, distance }); targets.sort((a, b) => a.distance - b.distance || a.cell - b.cell);
+      if (targets.length > 2) targets.pop();
+    }
+    for (const target of targets) {
+      const preview = requestRoute(fleet, target.cell);
+      if (!preview) continue;
+      const destination = routeStep(fleet, preview);
+      // The immediate route deliberately stays in current sight. A transport
+      // with five movement and three sight normally advances three water hexes
+      // per plan, so its return reserve cannot assume five-hex future turns.
+      const firstStep = destination === undefined ? 0 : preview.path.indexOf(destination) + 1;
+      const turns = 1 + Math.ceil(Math.max(0, preview.cost - firstStep) / Math.max(1, Math.min(fleet.maxMovement, fleet.sight)));
+      if (stores.remaining > turns + 1) return false;
+      move(fleet, destination, `return through charted water to harbor supply (${stores.remaining} provision turns; ${turns}-turn route)`);
+      heldArmyIds.add(fleet.id);
+      return true;
+    }
+    return false;
   };
   // Recombine paid hulls at a shared port without downgrading ocean capability or changing cargo.
   for (const target of fleets.filter(fleet => !fleet.cargo.length && !heldArmyIds.has(fleet.id)).slice(0, MAX_NAVAL_FLEETS)) {
@@ -455,6 +518,7 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
   for (const fleet of [...fleets.slice(offset), ...fleets.slice(0, offset)].slice(0, MAX_NAVAL_FLEETS)) {
     if (heldArmyIds.has(fleet.id) || fleet.movement <= 0 || fleet.movementBlocker) continue;
     const passengers = fleet.cargo.flatMap(cargo => own.find(army => army.id === cargo.armyId) ?? []);
+    if (!passengers.length && returnForStores(fleet)) continue;
     if (!passengers.length && fleet.canAttack && !fleet.commandBlocker && fleet.morale >= 40 && fleet.fatigue <= 60) {
       const checkedCells = new Set<number>();
       const target = foreign.find(enemy => {
@@ -495,6 +559,7 @@ export function planNaval(view: Observation, coinBudget: number, options: NavalP
         commands.push({ type: 'disembarkArmy', factionId, armyId: passenger.id, target: permitted.cell }); heldArmyIds.add(fleet.id); heldArmyIds.add(passenger.id);
         reasons.push(`${fleet.name} lands ${passenger.name} on an unoccupied shore away from existing hearths.`); continue;
       }
+      if (returnForStores(fleet)) continue;
       let destination: number | undefined;
       for (const shore of landings.slice(0, 4)) {
         const water = neighbors(shore.cell, view.width, view.height).filter(cell => isSea(cells.get(cell)) && !occupied.has(cell)).sort((a, b) => hexDistance(fleet.cell, a, view.width) - hexDistance(fleet.cell, b, view.width) || a - b);

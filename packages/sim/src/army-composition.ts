@@ -5,6 +5,7 @@ import { indexes, updateSight } from './visibility';
 import { armyCommandCapacity, armyCommandStatus, armyHasCharacterMission, characterCommandCapacity, characterCompositionObjection, charactersForArmy, observeArmyCharacters, transferArmyCharacters } from './characters';
 import { rulesVersion } from './rules';
 import { armyDomain, armyTransportBlocker, getNavalArmyView } from './naval';
+import { FLEET_PROVISION_TURNS } from './fleet-provisions';
 
 export const MAX_ARMY_FORMATIONS = 20;
 export const DETACHMENT_FORMATIONS = 12;
@@ -25,6 +26,8 @@ export function armyUnitId(army: Army): string {
   return (ordered.find(item => !units.get(item.unitId)?.canFound) ?? ordered[0])?.unitId ?? '';
 }
 export function getArmyView(state: GameState, army: Army): ArmyView {
+  // Stores belong in the owner's supply read model, never a visible enemy roster.
+  const { provisions: _provisions, ...publicArmy } = army;
   const blocker = armyHasCharacterMission(state, army.id) ? 'Cancel the active character mission before moving or reorganizing this army.' : null;
   const command = armyCommandStatus(state, army), peers = [...(indexes(state).armies.get(army.cell) ?? [])].filter(id => id !== army.id && state.armies[id]?.factionId === army.factionId).sort();
   const mergeOptions = peers.slice(0, 24).map(id => {
@@ -35,7 +38,7 @@ export function getArmyView(state: GameState, army: Army): ArmyView {
     return { armyId: id, label: target.name, resultCapacity, canMerge: mergeBlocker === null, blocker: mergeBlocker, transferLimit, transferBlocker: common ?? (transferLimit ? null : 'The receiving army has no spare command capacity.') };
   });
   const battleDefense = rulesVersion(state) >= 17 && !state.transports[army.id] ? defensePreview([army, ...peers.map(id => state.armies[id]!)], army.id) : undefined;
-  return { ...army, ...(battleDefense ? { battleDefense } : {}), ...observeArmyCharacters(state, army.id), ...getNavalArmyView(state, army), formationCapacity: command.capacity, overCommand: command.overCommand, commandBlocker: command.commandBlocker, capacityReason: command.capacityReason, splitFormationLimit: DETACHMENT_FORMATIONS, mergeOptions, mergeOptionsTruncated: peers.length > 24,
+  return { ...publicArmy, ...(battleDefense ? { battleDefense } : {}), ...observeArmyCharacters(state, army.id), ...getNavalArmyView(state, army), formationCapacity: command.capacity, overCommand: command.overCommand, commandBlocker: command.commandBlocker, capacityReason: command.capacityReason, splitFormationLimit: DETACHMENT_FORMATIONS, mergeOptions, mergeOptionsTruncated: peers.length > 24,
     movementBlocker: blocker, reorganizationBlocker: objection(state, army.factionId, army), formations: army.formations.map(item => ({ ...item })), unitId: armyUnitId(army), displayUnitId: armyUnitId(army),
     strength: armyStrength(army), maxStrength: armyMaxStrength(army), morale: armyMorale(army), fatigue: armyFatigue(army),
     maxMovement: effectiveArmyMovement(state, army), sight: armySight(army), upkeep: armyUpkeep(army), canFound: armyCanFound(army), canAttack: armyCanAttack(army) };
@@ -93,6 +96,8 @@ export function transferArmyFormations(state: GameState, factionId: string, sour
   if (characterError) return fail(characterError);
   const events: DomainEvent[] = [];
   sight(state, source, -1); sight(state, target, -1);
+  // Joining stores cannot refresh either fleet: retain the shorter endurance.
+  if (rulesVersion(state) >= 31 && armyDomain(source) === 'naval') target.provisions = Math.min(source.provisions ?? FLEET_PROVISION_TURNS, target.provisions ?? FLEET_PROVISION_TURNS);
   target.formations.push(...source.formations.filter(item => ids.has(item.id)));
   source.formations = source.formations.filter(item => !ids.has(item.id));
   target.movement = Math.min(target.movement, source.movement);
@@ -112,6 +117,7 @@ export function splitArmyFormations(state: GameState, factionId: string, armyId:
   if (ids.size > DETACHMENT_FORMATIONS) return fail('A new unled detachment can contain at most twelve formations; the marshal remains with the original army.');
   const id = `army.${state.nextId}`;
   const detached: Army = { id, factionId, name: name ?? `${source.name} detachment`.slice(0, 80).trim(), cell: source.cell, movement: source.movement, formations: source.formations.filter(item => ids.has(item.id)) };
+  if (rulesVersion(state) >= 31 && source.provisions !== undefined) detached.provisions = source.provisions;
   const events: DomainEvent[] = [];
   sight(state, source, -1);
   source.formations = source.formations.filter(item => !ids.has(item.id));

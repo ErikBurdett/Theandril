@@ -8,7 +8,7 @@ import { ArmyCharacters, CharacterAppointments } from './characters';
 import { FactionArt, MapArt } from './faction-art';
 import { SettlementLand } from './land';
 import { MovementOrders, type MapMovement, type MapSelection } from './movement';
-import { NavalTransport, SettlementProduction } from './naval';
+import { FleetProvisions, NavalTransport, SettlementProduction } from './naval';
 import { ArmyPosting, SettlementMuster } from './postings';
 import { RuinInspection, SettlementDefense, SiegeOrders } from './siege';
 import { AttackOrders } from './warfare';
@@ -97,6 +97,7 @@ export function managementPanes({ view, selection, movement, busy, name, setName
     <p className="subtle">{army.domain === 'naval' ? 'Fleet · ' : army.carrierId ? 'Embarked army · ' : ''}{army.formations.length === 1 ? itemName(army.unitId) : `${army.formations.length} formations together`} · cell {army.cell}</p>
     <div className="stat-pair"><div><strong>{army.movement}</strong><small>Movement</small></div><div><strong>{army.strength}</strong><small>Strength</small></div></div>
     {supply && <p className={supply.supplied ? 'field-help' : 'production-blocker'} data-testid="army-supply">{supply.reason}</p>}
+    {supply && <FleetProvisions supply={supply}/>}
   </> : settlement ? <>
     <h2>{settlement.name}</h2><p className="subtle">A hearth of the {realmName} · cell {settlement.cell}</p>
     <div className="stat-pair"><div><strong>{settlement.population}</strong><small>Population</small></div><div><strong>{settlement.food}</strong><small>Stored food</small></div></div>

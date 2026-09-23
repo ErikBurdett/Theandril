@@ -33,7 +33,7 @@ import { depotStateSchema, validateDepots } from './depots';
 import { LEGACY_UNIT_IDS, PRE_SPECIALIST_UNIT_IDS, withRules, type RulesVersion } from './rules';
 import { characterAftermathSchema, characterBattleSnapshotSchema, schema13CharacterBattleSnapshotSchema, schema13CharacterSchema, legacyCharacterBattleSnapshotSchema, characterLeadership, characterSkillEffects, characterSchema, legacyCharacterSchema, rebuildCharacterIndexes, validateCharacters, validateCharacterTraining } from './characters';
 
-export const SAVE_VERSION = 30;
+export const SAVE_VERSION = 31;
 /** The campaign event ring buffer. Declared here because the save schema needs it
  * while the module graph is still loading; the simulation imports it back. */
 export const MAX_EVENTS = 200;
@@ -81,6 +81,9 @@ const armyV5Schema = armyV1Schema.extend({ morale: z.number().int().min(1).max(1
 export const armyFormationSchema = z.object({ id, unitId: id, strength: integer.positive(), morale: z.number().int().min(1).max(100), fatigue: z.number().int().min(0).max(100) }).strict();
 const armyV7Schema = z.object({ id, factionId: id, name, cell, movement: integer, formations: z.array(armyFormationSchema).min(1).max(12) }).strict();
 const armySchema = armyV7Schema.extend({ formations: z.array(armyFormationSchema).min(1).max(20) }).strict();
+/** Omitted stores preserve old save bytes and mean a newly provisioned fleet. */
+const armyV31Schema = armySchema.extend({ provisions: z.number().int().min(0).max(8).optional() }).strict()
+  .refine(army => army.provisions === undefined || armyDomain(army) === 'naval', 'Only a fleet can carry provisions.');
 const settlementV2Schema = z.object({
   id, factionId: id, name, cell, population: z.number().int().min(1).max(20), food: integer,
   buildings: z.array(id).max(1000), queue: z.array(z.object({ itemId: id, progress: integer }).strict()).max(5),
@@ -201,7 +204,9 @@ const stateV25Schema = stateV23Schema.extend({ charters: charterStateSchema }).s
 /** Rules 26 records standing army postings and the hearths that muster into them. */
 const stateV27Schema = stateV25Schema.extend({ postings: postingStateSchema, musters: musterStateSchema }).strict();
 /** Rules 28 records built supply depots. */
-const stateSchema = stateV27Schema.extend({ depots: depotStateSchema }).strict();
+const stateV30Schema = stateV27Schema.extend({ depots: depotStateSchema }).strict();
+/** Rules 31 makes a fleet's finite stores canonical; old schemas stay strict. */
+const stateSchema = stateV30Schema.extend({ armies: z.array(armyV31Schema).max(60_000) }).strict();
 const withDepots = <T>(state: T) => ({ ...state, depots: [] as z.infer<typeof depotStateSchema> });
 /** A campaign before these registers is identical to one whose realms hold none. */
 const withCharters = <T>(state: T) => ({ ...state, charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders });
@@ -214,10 +219,11 @@ const withPatronage = <T extends { diplomacy: z.infer<typeof historicalDiplomacy
 /** A rules-22 campaign hides no seams; one that never surveyed any is identical. */
 const withSeams = <T extends { factions: { id: string }[] }>(state: T) =>
   ({ ...state, arcaneSurveys: state.factions.map(faction => ({ factionId: faction.id, cells: [] as number[] })).sort((a, b) => a.factionId < b.factionId ? -1 : 1), charters: [] as z.infer<typeof charterStateSchema>, ...emptyOrders });
-const saveSchema = z.object({ version: z.literal(30), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveSchema = z.object({ version: z.literal(31), gameVersion: z.literal('0.1.0'), contentHash: z.string(), stateChecksum: z.string().regex(/^[a-f0-9]{8}$/), state: stateSchema }).strict();
+const saveV30Schema = saveSchema.extend({ version: z.literal(30), state: stateV30Schema }).strict();
 /** Rules 30 carries harbour supply over water, which is derived from the map:
  * a rules-28 state is already the modern shape and only behaviour differs. */
-const saveV29Schema = saveSchema.extend({ version: z.literal(29) }).strict();
+const saveV29Schema = saveV30Schema.extend({ version: z.literal(29) }).strict();
 const saveV28Schema = saveV29Schema.extend({ version: z.literal(28) }).strict();
 const saveV27Schema = saveSchema.extend({ version: z.literal(27), state: stateV27Schema }).strict();
 /** Rules 27 keeps supply lines, which are derived from the map: a rules-26 state
@@ -357,7 +363,7 @@ function canonicalPayload(state: GameState) {
       turn: state.turn, nextId: state.nextId, turnOwnerId: state.turnOwnerId,
       world: { seed: state.world.seed, width: state.world.width, height: state.world.height, terrain: [...state.world.terrain], fertility: [...state.world.fertility], starts: [...state.world.starts], biome: [...state.world.biome], generatorVersion: state.world.generatorVersion, waterDepth: [...state.world.waterDepth], layout: state.world.layout, hydrology: [...state.world.hydrology] },
       factions: state.factions.map(faction => ({ id: faction.id, definitionId: faction.definitionId, name: faction.name, color: faction.color, treasury: faction.treasury, knowledge: faction.knowledge })),
-      armies: Object.values(state.armies).sort(compareId).map(army => ({ id: army.id, factionId: army.factionId, name: army.name, cell: army.cell, movement: army.movement, formations: army.formations.map(item => armyFormationSchema.parse(item)) })),
+      armies: Object.values(state.armies).sort(compareId).map(army => armyV31Schema.parse({ id: army.id, factionId: army.factionId, name: army.name, cell: army.cell, movement: army.movement, formations: army.formations, ...(army.provisions === undefined ? {} : { provisions: army.provisions }) })),
       settlements: Object.values(state.settlements).sort(compareId).map(settlement => ({ id: settlement.id, factionId: settlement.factionId, name: settlement.name, cell: settlement.cell, population: settlement.population, food: settlement.food, buildings: [...settlement.buildings].sort(), queue: settlement.queue.map(queued => ({ itemId: queued.itemId, progress: queued.progress })), founderFactionId: settlement.founderFactionId, devastation: settlement.devastation, occupationTurns: settlement.occupationTurns })),
       explored: state.factions.map(faction => ({ factionId: faction.id, cells: sortedExploredCells(state.explored[faction.id] ?? []) })),
       events: state.events.map(event => ({ turn: event.turn, type: event.type, message: event.message, factionId: event.factionId, ...(event.cell === undefined ? {} : { cell: event.cell }) })),
@@ -432,6 +438,7 @@ function hashEnvelope(version: RulesVersion, contentHash: string, payload: objec
 
 /** Exact old envelope projection, never a silently rewritten archive seal. */
 export function serializeGameForVersion(state: GameState, version: RulesVersion): string {
+  if (version < 31) assertNoFleetProvisions(state);
   if (version < 28) assertNoDepots(state);
   if (version < 26) assertNoStandingOrders(state);
   if (version < 25) assertNoCharters(state);
@@ -513,6 +520,9 @@ export function serializeGameForVersion(state: GameState, version: RulesVersion)
 export function serializeGame(state: GameState): string {
   return serializeGameForVersion(state, SAVE_VERSION);
 }
+function assertNoFleetProvisions(state: GameState): void {
+  if (Object.values(state.armies).some(army => army.provisions !== undefined)) throw new Error('This campaign has fleet provisions unavailable in historical rules.');
+}
 function assertNoDepots(state: GameState): void {
   if (state.depots.length) throw new Error('This campaign has supply depots unavailable in historical rules.');
 }
@@ -544,6 +554,7 @@ function assertNoUnification(state: GameState): void {
 }
 /** Older envelopes seal their frozen packs and cannot carry newer geography or victories. */
 function envelopeContentHash(state: GameState, version: RulesVersion): string {
+  if (version < 31) assertNoFleetProvisions(state);
   if (version < 28) assertNoDepots(state);
   if (version < 26) assertNoStandingOrders(state);
   if (version < 25) assertNoCharters(state);
@@ -806,8 +817,8 @@ function parseSave(raw: unknown): z.infer<typeof saveSchema> {
   // pacing content only, so their states continue unchanged under the new pack.
   // Rules 20 and 21 change semantics and seat limits; a v19/v20 state stays valid
   // under the newer pack, which only adds the city-state roster.
-  if (version === 29 || version === 28) {
-    const prior = version === 29 ? saveV29Schema.parse(raw) : saveV28Schema.parse(raw);
+  if (version === 30 || version === 29 || version === 28) {
+    const prior = version === 30 ? saveV30Schema.parse(raw) : version === 29 ? saveV29Schema.parse(raw) : saveV28Schema.parse(raw);
     assert(prior.contentHash === CONTENT_HASH, `v${version} content hash is not a recognized compatible pack`);
     return { ...prior, version: SAVE_VERSION, contentHash: CONTENT_HASH };
   }

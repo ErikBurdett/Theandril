@@ -29,7 +29,7 @@ describe('genuine schema-8 evidence through territory rules', () => {
     for (let turn = 0; turn < 4; turn++) expect(applyRecordedCommand(game, archive, { type: 'endTurn', factionId: game.turnOwnerId }).ok).toBe(true);
     expect(archive.records.slice(0, prefix.length)).toEqual(prefix);
     expect(serializeGame(replayArchive(parseArchive(archive, game)))).toBe(serializeGame(game));
-    expect(() => serializeGameForVersion(game, 8)).toThrow(/pre-territory|border progress|resources or development/);
+    expect(() => serializeGameForVersion(game, 8)).toThrow(/pre-territory|border progress|resources or development|fleet provisions/);
   });
   it('rejects modern land orders under old rules without mutation and rejects forged new cultures in old envelopes', () => {
     const game = deserializeGame(captured.growth.save), hash = stateHash(game);

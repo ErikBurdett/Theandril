@@ -16,7 +16,7 @@ export function planDepot(view: Observation, busy: ReadonlySet<string>): AiPlan 
   const own = view.depots.filter(depot => depot.factionId === view.factionId);
   if (own.length >= MAX_REALM_DEPOTS) return null;
   const hearths = new Set(view.settlements.map(item => item.cell));
-  const candidates = view.armies.filter(item => item.factionId === view.factionId && starving.has(item.id) && item.movement > 0 && !item.carrierId && !busy.has(item.id)
+  const candidates = view.armies.filter(item => item.factionId === view.factionId && item.domain !== 'naval' && starving.has(item.id) && item.movement > 0 && !item.carrierId && !busy.has(item.id)
     && !hearths.has(item.cell) && !view.depots.some(depot => depot.cell === item.cell)
     && own.every(depot => hexDistance(depot.cell, item.cell, view.width) >= DEPOT_SPACING));
   if (!candidates.length) return null;
