@@ -1,0 +1,125 @@
+
+> theandril@0.1.0 test /home/telephoneheater/Work/Theandril
+> vitest run
+
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |repository| apps/web/src/updates/changelog.test.ts (6 tests | 2 failed) 25ms
+     × is deterministic and the committed feed is an exact record from its newest commit back to the root 17ms
+     × does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift 5ms
+ ❯ |unit| tests/tooling/pages-journal.test.ts (2 tests | 1 failed) 2547ms
+   × the actual Pages suite collects journal journeys alongside game and navigation smoke 2542ms
+ ❯ |unit| apps/web/src/updates/validation.test.ts (5 tests | 2 failed) 48ms
+   × links evidence that really exists at the pinned Git revision, not just on disk 19ms
+   × rejects a missing object at one of two revisions sharing an evidence path 15ms
+ ❯ |unit| apps/web/src/updates/roadmap.test.ts (7 tests | 1 failed) 37ms
+     × resolves every evidence file at the declared immutable source snapshot 16ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |repository| apps/web/src/updates/changelog.test.ts > master changelog feed > is deterministic and the committed feed is an exact record from its newest commit back to the root
+Error: spawnSync git EPERM
+ ❯ git scripts/build-changelog.ts:7:36
+      5|
+      6| const root = resolve(import.meta.dirname, '..');
+      7| const git = (...args: string[]) => execFileSync('git', args, { cwd: ro…
+       |                                    ^
+      8|
+      9| /** Numstat must not vary with the clone: autocrlf/attributes, rename …
+ ❯ buildFeed scripts/build-changelog.ts:16:10
+ ❯ apps/web/src/updates/changelog.test.ts:13:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  |repository| apps/web/src/updates/changelog.test.ts > master changelog feed > does not depend on the clone: fixed 7-char short SHAs, pinned diff algorithm, no line-ending or rename drift
+Error: spawnSync git EPERM
+ ❯ git scripts/build-changelog.ts:7:36
+      5|
+      6| const root = resolve(import.meta.dirname, '..');
+      7| const git = (...args: string[]) => execFileSync('git', args, { cwd: ro…
+       |                                    ^
+      8|
+      9| /** Numstat must not vary with the clone: autocrlf/attributes, rename …
+ ❯ buildFeed scripts/build-changelog.ts:16:10
+ ❯ apps/web/src/updates/changelog.test.ts:25:38
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  |unit| tests/tooling/pages-journal.test.ts > the actual Pages suite collects journal journeys alongside game and navigation smoke
+Error: spawnSync pnpm EPERM
+ ❯ tests/tooling/pages-journal.test.ts:14:19
+     12|
+     13| test('the actual Pages suite collects journal journeys alongside game …
+     14|   const listing = execFileSync('pnpm', ['exec', 'playwright', 'test', …
+       |                   ^
+     15|   expect(listing).toContain('updates.spec.ts');
+     16|   expect(listing).toContain('home.spec.ts');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  |unit| apps/web/src/updates/roadmap.test.ts > the source-backed roadmap contract > resolves every evidence file at the declared immutable source snapshot
+AssertionError: docs/IMPLEMENTATION_STATUS.md: expected [Function] to not throw an error but 'Error: spawnSync git EPERM' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"Error: spawnSync git EPERM"
+
+ ❯ apps/web/src/updates/roadmap.test.ts:52:129
+     50|     for (const path of paths) {
+     51|       expect(path).not.toMatch(/(^\/|\.\.|\\|^https?:|[?#])/);
+     52|       expect(() => execFileSync('git', ['cat-file', '-e', `${roadmapSn…
+       |                                                                                                                                 ^
+     53|     }
+     54|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  |unit| apps/web/src/updates/validation.test.ts > links evidence that really exists at the pinned Git revision, not just on disk
+AssertionError: 3ae1581089411a76ecfd08a8f5f811258c4f77f6:docs/development/2026-09-23-deploy-and-group-postings/README.md: expected [Function] to not throw an error but 'Error: spawnSync git EPERM' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"Error: spawnSync git EPERM"
+
+ ❯ validateEvidence apps/web/src/updates/validation.test.ts:42:98
+     40|     expect(revision).toMatch(/^[a-f0-9]{40}$/);
+     41|     expect(path).not.toMatch(/(^\/|\.\.|\\|^https?:|[?#])/);
+     42|     expect(() => execFileSync('git', ['cat-file', '-e', object], { std…
+       |                                                                                                  ^
+     43|     expect(evidenceUrl(path, revision)).toBe(`https://github.com/ErikB…
+     44|   }
+ ❯ apps/web/src/updates/validation.test.ts:48:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  |unit| apps/web/src/updates/validation.test.ts > rejects a missing object at one of two revisions sharing an evidence path
+AssertionError: expected [Function] to not throw an error but 'Error: spawnSync git EPERM' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"Error: spawnSync git EPERM"
+
+ ❯ apps/web/src/updates/validation.test.ts:59:110
+     57|   const present = { ...dispatches[0]!, sourceRevision: presentRevision…
+     58|   expect(() => execFileSync('git', ['cat-file', '-e', `${missingRevisi…
+     59|   expect(() => execFileSync('git', ['cat-file', '-e', `${presentRevisi…
+       |                                                                                                              ^
+     60|   expect(() => validateEvidence([missing, present])).toThrow(`${missin…
+     61|   expect(() => validateEvidence([present, missing])).toThrow(`${missin…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  4 failed | 231 passed (235)
+      Tests  6 failed | 1883 passed (1889)
+   Start at  16:53:47
+   Duration  33.66s (transform 32.78s, setup 0ms, import 123.65s, tests 496.70s, environment 30ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

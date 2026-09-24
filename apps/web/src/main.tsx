@@ -5,10 +5,11 @@ import { GENERATOR_VERSION, MAP_TYPES, RECOMMENDED_CITY_STATES, RECOMMENDED_FACT
 import type { CampaignPace, DevelopmentFocus, GameCommand, MapObservation, MovementQuery, Observation, PeaceAssessment, PeaceTerms } from '@theandril/sim';
 import { WorldRenderer, type ArtStatus, type MapPointerInput, type BattleSceneView } from '@theandril/render';
 import { MovementMapHint, useMapMovement, type MapMovement, type MovementReview } from './movement';
-import type { CampaignInfo, Request, Response, WorkerMetrics } from './protocol';
+import type { CampaignInfo, GroupCharterResult, Request, Response, WorkerMetrics } from './protocol';
 import type { CampaignMode, ChronicleDocuments } from '@theandril/chronicle';
-import { GroupPostingRequests } from './group-posting-requests';
+import { GroupOrderRequests, GroupPostingRequests } from './group-posting-requests';
 import type { GroupPostingIssue } from './group-postings';
+import type { GroupCharterIssue } from './group-charters';
 import { CampaignChronicles } from './chronicles';
 import { CampaignProgression, PublicProjects } from './progression';
 import { BattleHistory } from './warfare';
@@ -88,6 +89,7 @@ function App() {
   }, []);
   const sequence = useRef(0);
   const groupPostingRequests = useRef(new GroupPostingRequests());
+  const groupCharterRequests = useRef(new GroupOrderRequests<GroupCharterResult>());
   const fogRequests = useRef(new WatchFogRequests());
   const [fogEnabled, setFogEnabled] = useState(true);
   const [fogPending, setFogPending] = useState(false);
@@ -332,6 +334,7 @@ function App() {
     setBusy(false); setGenerating(false);
     if (response.type === 'error') {
       groupPostingRequests.current.finish(response.id, new Error(response.message));
+      groupCharterRequests.current.finish(response.id, new Error(response.message));
       if (pendingFound.current?.requestId === response.id) pendingFound.current = undefined;
       pauseWatch();
       if (previousWorker.current) { forgetWorkerDetailRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; }
@@ -345,19 +348,19 @@ function App() {
         try { cells = unpackCells(response.cells); }
         catch (cause) {
           campaignFault.current = true; setRecoveryRequired(true); pauseWatch();
-          groupPostingRequests.current.reset('The map update could not be read. Restore a saved campaign.');
+          for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) requests.reset('The map update could not be read. Restore a saved campaign.');
           invalidateDetailQueries('Map transfer could not be read. Restore a saved campaign to review land.', true);
           setError(true); setFeedback(`The map update could not be read: ${String(cause)}. Gameplay is paused; load, import or begin a campaign to recover.`);
           return;
         }
-        if (campaignFault.current && !response.reset) { groupPostingRequests.current.reset('Restore a saved campaign before issuing group orders.'); return; }
+        if (campaignFault.current && !response.reset) { for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) requests.reset('Restore a saved campaign before issuing group orders.'); return; }
         campaignFault.current = false; setRecoveryRequired(false);
         if (response.reset || response.hash !== hash.current) invalidateDetailQueries('The campaign changed. Review current land details.', response.reset);
         forgetWorkerDetailRequests(previousWorker.current); previousWorker.current?.terminate(); previousWorker.current = undefined;
         hash.current = response.hash; metrics.current = response.metrics;
         campaignRef.current = response.campaign; setCampaign(response.campaign);
         if (response.reset) {
-          groupPostingRequests.current.reset('The loaded campaign changed. Review its army selection.');
+          for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) requests.reset('The loaded campaign changed. Review its group selections.');
           closeMapActions();
           setManagementWindow(undefined);
           setBattleTransfer(undefined); setBattleReview(false);
@@ -413,13 +416,17 @@ function App() {
           campaignFault.current = true; setRecoveryRequired(true); setError(true);
           groupPostingRequests.current.finish(response.id, new Error(response.groupPostingError));
         } else if (Array.isArray(response.groupPostingResults) && response.groupPostingResults.every(result => result && typeof result.armyId === 'string' && typeof result.accepted === 'boolean' && (result.message === undefined || typeof result.message === 'string'))) groupPostingRequests.current.finish(response.id, response.groupPostingResults);
+        if (response.groupCharterError) {
+          campaignFault.current = true; setRecoveryRequired(true); setError(true);
+          groupCharterRequests.current.finish(response.id, new Error(response.groupCharterError));
+        } else if (Array.isArray(response.groupCharterResults) && response.groupCharterResults.every(result => result && typeof result.settlementId === 'string' && typeof result.accepted === 'boolean' && (result.message === undefined || typeof result.message === 'string'))) groupCharterRequests.current.finish(response.id, response.groupCharterResults);
       } catch (cause) {
         campaignFault.current = true; setRecoveryRequired(true); setError(true); pauseWatch();
         setFeedback(`The campaign view could not be updated: ${cause instanceof Error ? cause.message : String(cause)}. Restore a saved campaign before continuing.`);
       } finally {
-        if (groupPostingRequests.current.has(response.id)) {
+        for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) if (requests.has(response.id)) {
           const message = 'The group order response could not be displayed. Some orders may have applied; restore a saved campaign before continuing.';
-          groupPostingRequests.current.finish(response.id, new Error(message));
+          requests.finish(response.id, new Error(message));
           campaignFault.current = true; setRecoveryRequired(true); setError(true); setFeedback(message);
         }
       }
@@ -436,7 +443,7 @@ function App() {
     const instance = new Worker(new URL('./simulation.worker.ts', import.meta.url), { type: 'module' });
     instance.onmessage = event => { if (worker.current === instance) receive(event); else { landRequestWorkers.current.delete(event.data.id); developmentRequestWorkers.current.delete(event.data.id); } };
     instance.onerror = event => {
-      groupPostingRequests.current.reset('The campaign worker stopped. Restore a saved campaign before issuing group orders.');
+      for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) requests.reset('The campaign worker stopped. Restore a saved campaign before issuing group orders.');
       fogRequests.current.reset('The campaign worker stopped. Restore a campaign before changing fog.'); setFogPending(false);
       pendingFound.current = undefined;
       invalidateDetailQueries('The campaign worker stopped. Restore a saved campaign to review land.', true);
@@ -483,7 +490,7 @@ function App() {
   }, []);
   const issueGroupPosting: GroupPostingIssue = commands => {
     const instance = worker.current;
-    if (!instance || busy || groupPostingRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    if (!instance || busy || groupPostingRequests.current.busy || groupCharterRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
     const id = ++sequence.current;
     const pending = groupPostingRequests.current.enqueue(id);
     setBusy(true); setError(false);
@@ -494,8 +501,21 @@ function App() {
     }
     return pending;
   };
+  const issueGroupCharter: GroupCharterIssue = commands => {
+    const instance = worker.current;
+    if (!instance || busy || groupPostingRequests.current.busy || groupCharterRequests.current.busy || previousWorker.current || campaignFault.current || !observationRef.current || campaignRef.current.mode === 'watch' || observationRef.current.victory || observationRef.current.battle || observationRef.current.pendingCapture) return Promise.reject(new Error('Finish the current decision before issuing group orders.'));
+    const id = ++sequence.current;
+    const pending = groupCharterRequests.current.enqueue(id);
+    setBusy(true); setError(false);
+    try { instance.postMessage({ id, type: 'groupCharter', commands } satisfies Request); }
+    catch (cause) {
+      groupCharterRequests.current.finish(id, cause instanceof Error ? cause : new Error(String(cause)));
+      setBusy(false);
+    }
+    return pending;
+  };
   const command = (order: GameCommand) => {
-    if (groupPostingRequests.current.busy) return;
+    if (groupPostingRequests.current.busy || groupCharterRequests.current.busy) return;
     if (campaignRef.current.mode === 'watch' || observationRef.current?.victory) return;
     if (['endTurn', 'move', 'moveTo', 'queueMovement', 'resumeMovement', 'embarkArmy', 'disembarkArmy', 'assault', 'attack', 'resolveBattle'].includes(order.type)) closeMapActions();
     const id = send({ type: 'command', command: order });
@@ -562,7 +582,7 @@ function App() {
   };
   const cancel = () => { forgetWorkerDetailRequests(worker.current); worker.current?.terminate(); worker.current = previousWorker.current; previousWorker.current = undefined; invalidateDetailQueries('World generation was cancelled. Review current land details.', true); setBusy(false); setGenerating(false); setFeedback('World generation cancelled.'); };
 
-  useEffect(() => () => { groupPostingRequests.current.reset('The campaign view closed.'); landQuery.current?.reject(new Error('The campaign view closed.')); landQuery.current = undefined; landRequestWorkers.current.clear(); developmentQuery.current?.reject(new Error('The campaign view closed.')); developmentQuery.current = undefined; developmentRequestWorkers.current.clear(); worker.current?.terminate(); previousWorker.current?.terminate(); renderer.current?.destroy(); }, []);
+  useEffect(() => () => { for (const requests of [groupPostingRequests.current, groupCharterRequests.current]) requests.reset('The campaign view closed.'); landQuery.current?.reject(new Error('The campaign view closed.')); landQuery.current = undefined; landRequestWorkers.current.clear(); developmentQuery.current?.reject(new Error('The campaign view closed.')); developmentQuery.current = undefined; developmentRequestWorkers.current.clear(); worker.current?.terminate(); previousWorker.current?.terminate(); renderer.current?.destroy(); }, []);
   const hasCampaign = Boolean(observation);
   const victoryKey = observation?.victory ? `${observation.seed}:${hash.current}` : '';
   useEffect(() => {
@@ -778,7 +798,7 @@ function App() {
       suspended={progressionOpen || Boolean(characterContext) || chroniclesOpen || artLabOpen}
     />}
     {observation && managementWindow && !showSetup && !battleActive && !observation.pendingCapture && <CampaignWindow key={managementWindow} title={{ registry: 'Realm registry', orders: 'Selected orders', affairs: 'Realm affairs', journal: 'Campaign journal', guide: 'Map guide' }[managementWindow]} subtitle={managementWindow === 'orders' ? army?.name ?? settlement?.name ?? 'Map inspection' : realmName} close={() => setManagementWindow(undefined)} returnFocus={mapHost.current}>
-      {managementWindow === 'registry' && <RealmRoster key={registryEpoch} view={observation} onGroupPosting={issueGroupPosting} busy={ordersBusy} registry={registry} search={search} force={forceFilter} selection={selection} choose={setRegistry} setSearch={setSearch} setForce={setForceFilter} characters={() => openCharacters()} select={next => { mapFocusAfterWindow.current = true; select(next, true); setManagementWindow(undefined); }}/>}
+      {managementWindow === 'registry' && <RealmRoster key={registryEpoch} view={observation} onGroupPosting={issueGroupPosting} onGroupCharter={issueGroupCharter} busy={ordersBusy} registry={registry} search={search} force={forceFilter} selection={selection} choose={setRegistry} setSearch={setSearch} setForce={setForceFilter} characters={() => openCharacters()} select={next => { mapFocusAfterWindow.current = true; select(next, true); setManagementWindow(undefined); }}/>}
       {managementWindow === 'orders' && <section className="inspector" aria-label="Selected entity orders"><button className="window-map-link" onClick={showMap}>Show on map</button><fieldset className="strategic-orders" disabled={ordersBusy}>{panes?.sidebar}</fieldset></section>}
       {managementWindow === 'affairs' && <section data-testid="realm-affairs"><FactionEncounters view={observation} busy={controlLocked} issue={command} stateHash={hash.current} review={reviewPeace}/><PublicProjects view={observation} locate={cell => { mapFocusAfterWindow.current = true; select({ cell }, true); setManagementWindow(undefined); }}/><SiegeLedger view={observation} locate={cell => { mapFocusAfterWindow.current = true; renderer.current?.focus(cell); setManagementWindow(undefined); }}/></section>}
       {managementWindow === 'journal' && <><RealmJournal view={observation} locate={cell => { mapFocusAfterWindow.current = true; select({ cell }, true); setManagementWindow(undefined); }}/><BattleHistory view={observation} replayId={battleTransfer?.packet.battleId} replay={() => { pauseWatch(); setManagementWindow(undefined); setBattleReview(true); }}/>{observation.victory && <button onClick={openChronicles}>Read campaign chronicles</button>}</>}

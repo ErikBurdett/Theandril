@@ -1,0 +1,119 @@
+
+Running 5 tests using 1 worker
+
+(node:1271386) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/gameplay/charters.spec.ts:28:1 › a standing charter keeps a hearth building, states its next work, and is revoked from the same panel (3.2s)
+  ✘  2 tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable map-revision response ends pending work and recovers from the saved campaign (45.7s)
+(node:1277659) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable missing-results response ends pending work and recovers from the saved campaign (45.7s)
+(node:1282773) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 tests/gameplay/group-charters.spec.ts:8:1 › forty hearths receive shared charters across pages, preserve queues, and restore individual overrides (45.9s)
+(node:1286925) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 tests/gameplay/group-charters.spec.ts:93:1 › a partly refused group retains only the hearth whose new charter exceeded the canonical limit (6.0s)
+
+
+  1) tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable map-revision response ends pending work and recovers from the saved campaign 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('group-charters').getByLabel('Charter focus', { exact: true })
+
+
+      46 |     const group = page.getByTestId('group-charters');
+      47 |     await group.getByRole('button', { name: 'Select matching hearths', exact: true }).click();
+    > 48 |     await group.getByLabel('Charter focus', { exact: true }).selectOption('wealth');
+         |                                                              ^
+      49 |     await group.getByLabel('Coin ceiling per hearth', { exact: true }).fill('24');
+      50 |     await group.getByRole('button', { name: 'Apply charters (1)', exact: true }).click();
+      51 |     await expect(page.getByTestId('feedback')).toContainText('The group order response could not be displayed.');
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/group-charter-recovery.spec.ts:48:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/group-charter-recovery-a-c-71f64-ers-from-the-saved-campaign/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/group-charter-recovery-a-c-71f64-ers-from-the-saved-campaign/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/group-charter-recovery-a-c-71f64-ers-from-the-saved-campaign/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/group-charter-recovery-a-c-71f64-ers-from-the-saved-campaign/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable missing-results response ends pending work and recovers from the saved campaign 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('group-charters').getByLabel('Charter focus', { exact: true })
+
+
+      46 |     const group = page.getByTestId('group-charters');
+      47 |     await group.getByRole('button', { name: 'Select matching hearths', exact: true }).click();
+    > 48 |     await group.getByLabel('Charter focus', { exact: true }).selectOption('wealth');
+         |                                                              ^
+      49 |     await group.getByLabel('Coin ceiling per hearth', { exact: true }).fill('24');
+      50 |     await group.getByRole('button', { name: 'Apply charters (1)', exact: true }).click();
+      51 |     await expect(page.getByTestId('feedback')).toContainText('The group order response could not be displayed.');
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/group-charter-recovery.spec.ts:48:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/group-charter-recovery-a-c-57019-ers-from-the-saved-campaign/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/group-charter-recovery-a-c-57019-ers-from-the-saved-campaign/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/group-charter-recovery-a-c-57019-ers-from-the-saved-campaign/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/group-charter-recovery-a-c-57019-ers-from-the-saved-campaign/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/gameplay/group-charters.spec.ts:8:1 › forty hearths receive shared charters across pages, preserve queues, and restore individual overrides 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByTestId('settlement-charter').getByLabel('Focus', { exact: true })
+
+
+      64 |   const charter = page.getByTestId('settlement-charter');
+      65 |   await charter.locator(':scope > summary').click();
+    > 66 |   await charter.getByRole('combobox', { name: 'Focus', exact: true }).selectOption('learning');
+         |                                                      ^
+      67 |   await charter.getByRole('button', { name: 'Update charter', exact: true }).click();
+      68 |   await expect.poll(() => page.evaluate(() => window.__THEANDRIL__!.getSummary()!.charters.filter(item => item.focus === 'learning').length)).toBe(1);
+      69 |   expect(await page.evaluate(() => window.__THEANDRIL__!.getSummary()!.charters.filter(item => item.focus === 'wealth').length)).toBe(39);
+        at /home/telephoneheater/Work/Theandril/tests/gameplay/group-charters.spec.ts:66:54
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/group-charters-forty-heart-8bc78-estore-individual-overrides/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/group-charters-forty-heart-8bc78-estore-individual-overrides/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/group-charters-forty-heart-8bc78-estore-individual-overrides/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/group-charters-forty-heart-8bc78-estore-individual-overrides/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable map-revision response ends pending work and recovers from the saved campaign 
+    tests/gameplay/group-charter-recovery.spec.ts:7:3 › a charter group with an unreadable missing-results response ends pending work and recovers from the saved campaign 
+    tests/gameplay/group-charters.spec.ts:8:1 › forty hearths receive shared charters across pages, preserve queues, and restore individual overrides 
+  2 passed (2.5m)

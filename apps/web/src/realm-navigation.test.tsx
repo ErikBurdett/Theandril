@@ -39,6 +39,23 @@ describe('realm navigation presentation', () => {
     expect(html).toContain('Page 1 of 4');
   });
 
+  it('offers grouped charters across a forty-hearth directory with only one page of owned checkboxes', () => {
+    const game = characterCampaign(100), view = getObservation(game, game.turnOwnerId);
+    const town = view.settlements.find(item => item.factionId === view.factionId)!;
+    // Presentation-only directory: does not claim these towns were founded.
+    view.settlements = Array.from({ length: 40 }, (_, index) => ({ ...town, id: `town.${String(index).padStart(2, '0')}`, name: `Hearth ${index + 1}` }));
+    view.settlements.push({ ...town, id: 'foreign-town', name: 'Foreign town', factionId: 'another-realm' });
+    const html = renderToStaticMarkup(<RealmRegistry view={view} registry="settlements" search="" force="all" selection={{}} select={() => { throw new Error('Rendering must not navigate.'); }} onGroupPosting={async () => []} onGroupCharter={async () => { throw new Error('Rendering must not issue orders.'); }}/>);
+    expect(html.match(/type="checkbox"/g)).toHaveLength(REGISTRY_PAGE_SIZE);
+    expect(html.match(/class="registry-item /g)).toHaveLength(REGISTRY_PAGE_SIZE);
+    expect(html).toContain('Select matching hearths');
+    expect(html).not.toContain('Select matching armies');
+    expect(html).not.toContain('Foreign town');
+    expect(html).toContain('0 hearths selected');
+    expect(html).toContain('Page 1 of 2');
+    expect(registryEntries(view, 'settlements', 'town.39', 'all', 'id')).toHaveLength(1);
+  });
+
   it('uses one keyboard tablist and a real character action with a clearly named current selection', () => {
     const html = renderToStaticMarkup(<RealmNavigation registry="settlements" armyCount={100} townCount={40} characterCount={3} choose={() => {}} characters={() => {}} selectionName="Ashen Hearth" selectionKind="Selected settlement" showMap={() => {}} showOrders={() => {}}/>);
     expect(html.match(/role="tablist"/g)).toHaveLength(1);

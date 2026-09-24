@@ -1,11 +1,13 @@
 import 'fake-indexeddb/auto';
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { hexDistance, isPassable } from '@theandril/mapgen';
 import { applyCommand, createArmyFormation, createGame, deserializeGame, getMovementQuery, getObservation, getSettlementLandObservation, serializeGame, stateHash, type GameCommand } from '@theandril/sim';
 import { CampaignJournal, createJournal, replayArchive } from '@theandril/chronicle';
 import { deserializeCampaign, exportSave, importSave, SaveStore, serializeCampaign } from '@theandril/persistence';
 import { prosperityCampaign, unificationCampaign } from '../../../packages/test-fixtures/src/victory-fixture';
+import { rebaseAuthoredLand } from '../../../packages/test-fixtures/src/authored-land';
 import { unpackCells } from './cell-transfer';
-import { MAX_GROUP_POSTING_COMMANDS, type Request, type Response } from './protocol';
+import { MAX_GROUP_ORDER_COMMANDS, MAX_GROUP_POSTING_COMMANDS, type Request, type Response } from './protocol';
 
 type WithoutId<T> = T extends { id: number } ? Omit<T, 'id'> : never;
 type RequestBody = WithoutId<Request>;
@@ -367,6 +369,195 @@ describe('actual worker group-posting boundary', () => {
     expect(restored.observation.postings).toEqual([]);
     const retried = await request({ type: 'groupPosting', commands }, 'state');
     expect(retried.groupPostingResults?.every(item => item.accepted)).toBe(true);
+    expect(stateHash(replayArchive((await exported()).archive))).toBe(retried.hash);
+  });
+});
+
+/** Authored separated hearths, not an earned empire; every order under test is canonical. */
+function groupCharterFixture(count = 40) {
+  const game = createGame({ seed: 17, size: count > 4 ? 'small' : 'tiny', factionCount: 2, pace: 'short', generatorVersion: 4 });
+  const factionId = game.turnOwnerId;
+  for (const faction of game.factions) {
+    const caravan = Object.values(game.armies).find(army => army.factionId === faction.id && army.formations.some(formation => formation.unitId === 'unit.colonist'))!;
+    expect(applyCommand(game, { type: 'found', factionId: faction.id, armyId: caravan.id, name: `${faction.name} Hearth` }).ok).toBe(true);
+  }
+  const source = Object.values(game.settlements).find(town => town.factionId === factionId)!;
+  const own = [source];
+  for (let cell = 0; own.length < count && cell < game.world.terrain.length; cell++) {
+    if (!isPassable(game.world.terrain[cell]!) || Object.values(game.settlements).some(town => hexDistance(cell, town.cell, game.world.width) < 4)) continue;
+    const id = `settlement.${game.nextId++}`;
+    const town = { ...structuredClone(source), id, cell, name: `Authored charter hearth ${own.length + 1}` };
+    game.settlements[id] = town; own.push(town);
+  }
+  expect(own).toHaveLength(count);
+  game.factions.find(faction => faction.id === factionId)!.treasury = 10_000;
+  rebaseAuthoredLand(game);
+  expect(applyCommand(game, { type: 'queue', factionId, settlementId: own[0]!.id, itemId: 'building.granary' }).ok).toBe(true);
+  if (own[1]) expect(applyCommand(game, { type: 'queue', factionId, settlementId: own[1].id, itemId: 'unit.guard' }).ok).toBe(true);
+  const focuses = ['works', 'wealth', 'learning', 'muster'] as const;
+  const ceilings = [4, 12, 24, 64] as const;
+  const commands: Extract<GameCommand, { type: 'setCharter' }>[] = own.map((town, index) => ({ type: 'setCharter', factionId, settlementId: town.id, focus: focuses[index % 4]!, ceiling: ceilings[index % 4]! }));
+  commands.sort((a, b) => a.settlementId < b.settlementId ? -1 : 1);
+  return { game: deserializeGame(serializeGame(game)), commands };
+}
+
+describe('actual worker group-charter boundary', () => {
+  it('journals 40 charters with one unchanged-map response, exact serial replay and saved continuation without spending or replacing queues', async () => {
+    const { game, commands } = groupCharterFixture(), bytes = await exportSave(serializeGame(game));
+    const initial = await request({ type: 'import', bytes }, 'state');
+    const beforeCells = getObservation(game, game.turnOwnerId).cells;
+    const queues = Object.fromEntries(Object.values(game.settlements).map(town => [town.id, town.queue]));
+    const treasury = game.factions.map(faction => faction.treasury);
+    const started = performance.now();
+    const batch = dispatch({ type: 'groupCharter', commands: [...commands].reverse() }, 'state');
+    const result = await batch.response, groupMs = performance.now() - started;
+    expect(completed.filter(id => id === batch.id)).toHaveLength(1);
+    expect(result.groupCharterResults).toEqual(commands.map(command => ({ settlementId: command.settlementId, accepted: true })));
+    expect(result.groupCharterError).toBeUndefined(); expect(result.groupPostingResults).toBeUndefined();
+    expect(result.observation.charters).toHaveLength(40);
+    expect(result).toMatchObject({ fogEnabled: true, mapReset: false, reset: false, mapRevision: initial.mapRevision });
+    expect(result.map).toBeUndefined(); expect(unpackCells(result.cells)).toEqual([]);
+    expect(transfers.get(result.id)).toMatchObject({ bufferCount: 3, detached: [true, true, true] });
+    const resultBytes = new TextEncoder().encode(JSON.stringify({ groupCharterResults: result.groupCharterResults })).byteLength;
+    expect(result.metrics.groupCharterResultBytes).toBe(resultBytes); expect(result.metrics.groupPostingResultBytes).toBe(0);
+    expect(result.metrics.transferBytes).toBe(new TextEncoder().encode(JSON.stringify(result.observation)).byteLength + result.metrics.cellTransferBytes + resultBytes);
+    expect(result.metrics.totalTransferBytes - initial.metrics.totalTransferBytes).toBe(result.metrics.transferBytes);
+    const grouped = await exported();
+    expect(grouped.archive.records.map(record => record.command)).toEqual(commands);
+    expect(grouped.archive.records.every(record => record.ok)).toBe(true);
+    expect(stateHash(replayArchive(grouped.archive))).toBe(result.hash);
+    expect(getObservation(grouped.game, game.turnOwnerId).cells).toEqual(beforeCells);
+    expect(Object.fromEntries(Object.values(grouped.game.settlements).map(town => [town.id, town.queue]))).toEqual(queues);
+    expect(grouped.game.factions.map(faction => faction.treasury)).toEqual(treasury);
+    await request({ type: 'save' }, 'message');
+    const clear = { ...commands[0]!, focus: 'none' } as const;
+    await request({ type: 'groupCharter', commands: [clear] }, 'state');
+    const loaded = await request({ type: 'load' }, 'state');
+    expect(loaded.hash).toBe(result.hash); expect(loaded.observation.charters).toHaveLength(40);
+    expect(loaded.metrics.groupCharterResultBytes).toBe(0);
+    const resumed = await request({ type: 'groupCharter', commands: [clear] }, 'state');
+    expect(resumed.groupCharterResults).toEqual([{ settlementId: clear.settlementId, accepted: true }]);
+    expect(applyCommand(grouped.game, clear).ok).toBe(true);
+    expect(resumed.hash).toBe(stateHash(grouped.game));
+    expect(stateHash(replayArchive((await exported()).archive))).toBe(resumed.hash);
+
+    await request({ type: 'import', bytes }, 'state');
+    const serialStart = performance.now(); let serialBytes = 0, serialHash = '';
+    for (const command of commands) {
+      const next = await request({ type: 'command', command }, 'state');
+      serialBytes += next.metrics.transferBytes; serialHash = next.hash;
+      expect(next.groupCharterResults).toBeUndefined(); expect(next.metrics.groupCharterResultBytes).toBe(0);
+    }
+    const serialMs = performance.now() - serialStart, serial = await exported();
+    expect(serialHash).toBe(result.hash); expect(serial.archive).toEqual(grouped.archive);
+    expect(result.metrics.transferBytes).toBeLessThan(serialBytes / 20);
+    console.info(JSON.stringify({ probe: 'actual-worker-40-charters', synthetic: true, authoredOwnedHearths: 40, size: 'small', generatorVersion: 4,
+      groupResponses: 1, serialResponses: 40, groupBytes: result.metrics.transferBytes, resultBytes, serialBytes, groupMs, serialMs,
+      hash: result.hash, exactSerialArchive: true, unchangedFog: true, unchangedQueues: true, unchangedTreasury: true, savedContinuation: true }));
+  });
+
+  it('records actual missing/foreign and empty-revoke refusals while applying valid siblings', async () => {
+    const { game, commands } = groupCharterFixture(3);
+    const foreign = Object.values(game.settlements).find(town => town.factionId !== game.turnOwnerId)!;
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const items = [...commands.slice(0, 2), { ...commands[2]!, focus: 'none' as const }, { ...commands[0]!, settlementId: foreign.id }, { ...commands[0]!, settlementId: 'settlement.missing' }];
+    const result = await request({ type: 'groupCharter', commands: items.reverse() }, 'state');
+    expect(result.groupCharterResults?.filter(item => item.accepted)).toHaveLength(2);
+    expect(result.groupCharterResults?.filter(item => !item.accepted)).toEqual([
+      { settlementId: foreign.id, accepted: false, message: 'You do not control that settlement.' },
+      { settlementId: commands[2]!.settlementId, accepted: false, message: 'That hearth holds no charter.' },
+      { settlementId: 'settlement.missing', accepted: false, message: 'You do not control that settlement.' },
+    ].sort((a, b) => a.settlementId < b.settlementId ? -1 : 1));
+    expect(result.observation.charters.map(charter => charter.settlementId)).toEqual(commands.slice(0, 2).map(command => command.settlementId));
+    const saved = await exported();
+    expect(saved.archive.records).toHaveLength(5);
+    expect(saved.archive.records.map(record => record.ok)).toEqual(result.groupCharterResults!.map(item => item.accepted));
+    expect(stateHash(replayArchive(saved.archive))).toBe(result.hash);
+  });
+
+  it('accepts all 128 charters without truncation or additional responses', async () => {
+    expect(MAX_GROUP_POSTING_COMMANDS).toBe(MAX_GROUP_ORDER_COMMANDS);
+    const { game, commands } = groupCharterFixture(MAX_GROUP_ORDER_COMMANDS);
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const batch = dispatch({ type: 'groupCharter', commands }, 'state'), result = await batch.response;
+    expect(result.groupCharterResults).toHaveLength(MAX_GROUP_ORDER_COMMANDS);
+    expect(result.groupCharterResults?.every(item => item.accepted)).toBe(true);
+    expect(result.observation.charters).toHaveLength(MAX_GROUP_ORDER_COMMANDS);
+    expect(completed.filter(id => id === batch.id)).toHaveLength(1);
+    expect(result.metrics.groupCharterResultBytes).toBeLessThan(8_000);
+    const saved = await exported();
+    expect(saved.archive.records).toHaveLength(MAX_GROUP_ORDER_COMMANDS);
+    expect(stateHash(replayArchive(saved.archive))).toBe(result.hash);
+  });
+
+  it('validates every charter and the complete bounded envelope before mutation', async () => {
+    const { game, commands } = groupCharterFixture(2);
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    const before = await exported(), first = commands[0]!, second = commands[1]!;
+    const sparse = Array<unknown>(3); sparse[0] = first; sparse[2] = second;
+    const invalid: unknown[] = [
+      [], Array.from({ length: MAX_GROUP_ORDER_COMMANDS + 1 }, (_, index) => ({ ...first, settlementId: `settlement.${index + 1000}` })),
+      [first, first], [first, { ...second, factionId: game.factions[1]!.id }],
+      [first, { type: 'setPosting', factionId: first.factionId, armyId: 'army.1', cell: game.world.starts[0], mode: 'hold' }],
+      [first, { ...second, focus: 'invalid' }], [first, { ...second, ceiling: 3 }], [first, { ...second, ceiling: 65 }], [first, { ...second, ceiling: 12.5 }],
+      [first, { ...second, extra: true }], [first, null], [first, undefined], sparse, { 0: first, length: 1 }, null,
+    ];
+    for (const input of invalid) {
+      const response = await request({ type: 'groupCharter', commands: input as typeof commands }, 'error');
+      expect(response.message.length).toBeGreaterThan(0);
+      expect((await exported()).text).toBe(before.text);
+    }
+    const forged = { type: 'groupCharter', commands: [first], hiddenMode: 'watch' } as unknown as RequestBody;
+    expect((await request(forged, 'error')).message).toContain('valid request');
+    expect((await exported()).text).toBe(before.text);
+  });
+
+  it('rejects group charters in watch and victorious campaigns without changing the archive', async () => {
+    const { game, commands } = groupCharterFixture(1);
+    const watch = createJournal(game, { mode: 'watch', coverage: 'from-save' });
+    await request({ type: 'import', bytes: await exportSave(serializeCampaign(game, watch.materialize())) }, 'state');
+    const before = await exported();
+    expect((await request({ type: 'groupCharter', commands }, 'error')).message).toContain('AI watch controls');
+    expect((await exported()).text).toBe(before.text);
+    const won = unificationCampaign();
+    for (let turn = 0; turn < 120 && !won.victory; turn++) expect(applyCommand(won, { type: 'endTurn', factionId: won.turnOwnerId }).ok).toBe(true);
+    expect(won.victory).not.toBeNull();
+    await request({ type: 'import', bytes: await exportSave(serializeGame(won)) }, 'state');
+    const ended = await exported();
+    expect((await request({ type: 'groupCharter', commands }, 'error')).message).toContain('campaign has ended');
+    expect((await exported()).text).toBe(ended.text);
+  });
+
+  it('publishes actual partial charters after recording fails, stops, and recovers from a real save', async () => {
+    const { game, commands } = groupCharterFixture(3);
+    await request({ type: 'import', bytes: await exportSave(serializeGame(game)) }, 'state');
+    await request({ type: 'save' }, 'message');
+    const record = CampaignJournal.prototype.record;
+    const interrupted = vi.spyOn(CampaignJournal.prototype, 'record').mockImplementation(function (this: CampaignJournal, ...args: Parameters<typeof record>) {
+      const result = record.apply(this, args);
+      if (args[1].type === 'setCharter' && args[1].settlementId === commands[1]!.settlementId) throw new Error('Authored charter recording failure after mutation');
+      return result;
+    });
+    try {
+      const batch = dispatch({ type: 'groupCharter', commands }, 'state'), partial = await batch.response;
+      expect(completed.filter(id => id === batch.id)).toHaveLength(1);
+      expect(interrupted).toHaveBeenCalledTimes(2);
+      expect(partial.groupCharterResults).toEqual([{ settlementId: commands[0]!.settlementId, accepted: true }]);
+      expect(partial.groupCharterError).toContain('after 1 completed order');
+      expect(partial.groupCharterError).toContain('Some orders may have applied; restore a saved campaign');
+      expect(partial.observation.charters.map(charter => charter.settlementId)).toEqual(commands.slice(0, 2).map(command => command.settlementId));
+      expect(partial.metrics.groupCharterResultBytes).toBe(new TextEncoder().encode(JSON.stringify({ groupCharterResults: partial.groupCharterResults, groupCharterError: partial.groupCharterError })).byteLength);
+      for (const command of commands.slice(0, 2)) expect(applyCommand(game, command).ok).toBe(true);
+      expect(partial.hash).toBe(stateHash(game));
+      for (const body of [{ type: 'groupCharter', commands: [commands[2]!] }, { type: 'save' }, { type: 'export' }] as RequestBody[]) {
+        expect((await request(body, 'error')).message).toContain('Recording was interrupted');
+      }
+      expect(interrupted).toHaveBeenCalledTimes(2);
+    } finally { interrupted.mockRestore(); }
+    const restored = await request({ type: 'load' }, 'state');
+    expect(restored.observation.charters).toEqual([]);
+    const retried = await request({ type: 'groupCharter', commands }, 'state');
+    expect(retried.groupCharterResults?.every(item => item.accepted)).toBe(true);
     expect(stateHash(replayArchive((await exported()).archive))).toBe(retried.hash);
   });
 });

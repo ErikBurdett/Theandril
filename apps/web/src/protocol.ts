@@ -6,13 +6,16 @@ import type { BattleTransfer } from './battle-transfer';
 
 export interface CampaignInfo { mode: CampaignMode; coverage: 'complete' | 'from-save' }
 /** One bounded client convenience request; each order remains canonical. */
-export const MAX_GROUP_POSTING_COMMANDS = 128;
+export const MAX_GROUP_ORDER_COMMANDS = 128;
+export const MAX_GROUP_POSTING_COMMANDS = MAX_GROUP_ORDER_COMMANDS;
 export interface GroupPostingResult { armyId: string; accepted: boolean; message?: string }
+export interface GroupCharterResult { settlementId: string; accepted: boolean; message?: string }
 
 export type Request =
   | { id: number; type: 'new'; seed: number; size: MapSize; mode: CampaignMode; pace: CampaignPace; factionCount?: number; cityStateCount?: number; factionDefinitionId?: string; layout?: Exclude<MapLayout, 'legacy'> }
   | { id: number; type: 'command'; command: GameCommand }
   | { id: number; type: 'groupPosting'; commands: Extract<GameCommand, { type: 'setPosting' }>[] }
+  | { id: number; type: 'groupCharter'; commands: Extract<GameCommand, { type: 'setCharter' }>[] }
   | { id: number; type: 'previewPeace'; targetFactionId: string; terms: PeaceTerms }
   | { id: number; type: 'movementQuery'; armyId: string; target?: number; append?: boolean }
   | { id: number; type: 'landQuery'; settlementId: string; window?: import('@theandril/sim').LandCellWindow }
@@ -36,6 +39,7 @@ export interface WorkerMetrics {
   developmentQueryBytes?: number;
   totalDevelopmentQueryBytes?: number;
   groupPostingResultBytes?: number;
+  groupCharterResultBytes?: number;
 }
 
 export type Response =
@@ -48,4 +52,4 @@ export type Response =
   | { id: number; type: 'error'; message: string }
   | { id: number; type: 'export'; bytes: Uint8Array }
   | { id: number; type: 'message'; message: string }
-  | { id: number; type: 'state'; observation: Omit<Observation, 'cells'>; cells: PackedCells; map?: Omit<MapObservation, 'cells'>; battlePresentation?: BattleTransfer; fogEnabled: boolean; mapRevision: number; mapReset: boolean; campaign: CampaignInfo; reset: boolean; hash: string; metrics: WorkerMetrics; message: string; groupPostingResults?: GroupPostingResult[]; groupPostingError?: string };
+  | { id: number; type: 'state'; observation: Omit<Observation, 'cells'>; cells: PackedCells; map?: Omit<MapObservation, 'cells'>; battlePresentation?: BattleTransfer; fogEnabled: boolean; mapRevision: number; mapReset: boolean; campaign: CampaignInfo; reset: boolean; hash: string; metrics: WorkerMetrics; message: string; groupPostingResults?: GroupPostingResult[]; groupPostingError?: string; groupCharterResults?: GroupCharterResult[]; groupCharterError?: string };

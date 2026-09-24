@@ -1,0 +1,27 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |repository| apps/web/src/updates/changelog.test.ts (6 tests | 1 failed) 22274ms
+     × is deterministic and the committed feed is an exact record from its newest commit back to the root 22269ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |repository| apps/web/src/updates/changelog.test.ts > master changelog feed > is deterministic and the committed feed is an exact record from its newest commit back to the root
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ apps/web/src/updates/changelog.test.ts:12:3
+     10|   // determinism check) and share the result rather than building a th…
+     11|   let generated: ReturnType<typeof buildFeed>;
+     12|   it('is deterministic and the committed feed is an exact record from …
+       |   ^
+     13|     generated = buildFeed();
+     14|     expect(buildFeed()).toEqual(generated);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 234 passed (235)
+      Tests  1 failed | 1888 passed (1889)
+   Start at  16:58:03
+   Duration  34.61s (transform 37.48s, setup 0ms, import 135.93s, tests 539.59s, environment 35ms)
+

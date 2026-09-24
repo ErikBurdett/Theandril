@@ -2,7 +2,7 @@ import { commandSchema, createGame, getDevelopmentEntity, getMovementQuery, getO
 import { aiObservationOptions, planTurn } from '@theandril/ai';
 import { createJournal, resumeJournal, generateChronicles, type CampaignJournal, type ChronicleDocuments } from '@theandril/chronicle';
 import { SaveStore, deserializeCampaign, exportSave, importSave, serializeCampaign } from '@theandril/persistence';
-import { MAX_GROUP_POSTING_COMMANDS, type GroupPostingResult, type Request, type Response, type WorkerMetrics } from './protocol';
+import { MAX_GROUP_ORDER_COMMANDS, type GroupCharterResult, type GroupPostingResult, type Request, type Response, type WorkerMetrics } from './protocol';
 import { cellTransferBuffers, cellTransferBytes, packCells } from './cell-transfer';
 import { BattlePresentationMailbox } from './battle-transfer';
 
@@ -23,7 +23,11 @@ const metrics: WorkerMetrics = { generationMs: 0, commandMs: 0, aiMs: 0, transfe
 const textEncoder = new TextEncoder();
 
 function send(message: Response, transfer: Transferable[] = []): void { self.postMessage(message, { transfer }); }
-function publish(id: number, message: string, reset = false, replaceMap = false, groupPosting?: { groupPostingResults: GroupPostingResult[]; groupPostingError?: string }): void {
+type GroupCommand = Extract<GameCommand, { type: 'setPosting' | 'setCharter' }>;
+type GroupRequest = Extract<Request, { type: 'groupPosting' | 'groupCharter' }>;
+type GroupResponse = { groupPostingResults: GroupPostingResult[]; groupPostingError?: string } | { groupCharterResults: GroupCharterResult[]; groupCharterError?: string };
+
+function publish(id: number, message: string, reset = false, replaceMap = false, group?: GroupResponse): void {
   if (!state || !journal) throw new Error('Begin or load a campaign first.');
   const observation = queryObservation ??= getObservation(state, state.turnOwnerId, { landDetails: 'none', developmentCandidates: false });
   if (reset) { fogEnabled = true; battlePresentations.reset(); }
@@ -41,31 +45,54 @@ function publish(id: number, message: string, reset = false, replaceMap = false,
   const map = spectator ? (({ cells: _cells, ...summary }) => { void _cells; return summary; })(spectator) : undefined;
   const packed = packCells(cells);
   metrics.cellTransferBytes = cellTransferBytes(packed);
-  metrics.groupPostingResultBytes = groupPosting ? textEncoder.encode(JSON.stringify(groupPosting)).byteLength : 0;
-  metrics.transferBytes = textEncoder.encode(JSON.stringify(summary)).byteLength + (map ? textEncoder.encode(JSON.stringify(map)).byteLength : 0) + (battlePresentation ? textEncoder.encode(JSON.stringify(battlePresentation)).byteLength : 0) + metrics.cellTransferBytes + metrics.groupPostingResultBytes;
+  const resultBytes = group ? textEncoder.encode(JSON.stringify(group)).byteLength : 0;
+  metrics.groupPostingResultBytes = group && 'groupPostingResults' in group ? resultBytes : 0;
+  metrics.groupCharterResultBytes = group && 'groupCharterResults' in group ? resultBytes : 0;
+  metrics.transferBytes = textEncoder.encode(JSON.stringify(summary)).byteLength + (map ? textEncoder.encode(JSON.stringify(map)).byteLength : 0) + (battlePresentation ? textEncoder.encode(JSON.stringify(battlePresentation)).byteLength : 0) + metrics.cellTransferBytes + resultBytes;
   metrics.totalTransferBytes += metrics.transferBytes;
   publishedHash = stateHash(state);
   queryHash = publishedHash;
-  send({ id, type: 'state', observation: summary, cells: packed, ...(map ? { map } : {}), ...(battlePresentation ? { battlePresentation } : {}), ...groupPosting, fogEnabled, mapRevision, mapReset, campaign: { mode: journal.mode, coverage: journal.coverage }, reset, hash: publishedHash, metrics: { ...metrics }, message }, cellTransferBuffers(packed));
+  send({ id, type: 'state', observation: summary, cells: packed, ...(map ? { map } : {}), ...(battlePresentation ? { battlePresentation } : {}), ...group, fogEnabled, mapRevision, mapReset, campaign: { mode: journal.mode, coverage: journal.coverage }, reset, hash: publishedHash, metrics: { ...metrics }, message }, cellTransferBuffers(packed));
 }
 
+const groupEntityId = (command: GroupCommand): string => command.type === 'setPosting' ? command.armyId : command.settlementId;
+
 /** Validate the entire transport envelope before the first canonical order. */
-function groupPostingCommands(request: Extract<Request, { type: 'groupPosting' }>, factionId: string): Extract<GameCommand, { type: 'setPosting' }>[] {
+function groupCommands(request: GroupRequest, factionId: string): GroupCommand[] {
+  const posting = request.type === 'groupPosting', kind = posting ? 'posting' : 'charter';
   if (!Number.isSafeInteger(request.id) || request.id < 0 || Object.keys(request).some(key => !['id', 'type', 'commands'].includes(key))
-    || !Array.isArray(request.commands) || request.commands.length < 1 || request.commands.length > MAX_GROUP_POSTING_COMMANDS) {
-    throw new Error(`A group posting requires between 1 and ${MAX_GROUP_POSTING_COMMANDS} posting orders in a valid request.`);
+    || !Array.isArray(request.commands) || request.commands.length < 1 || request.commands.length > MAX_GROUP_ORDER_COMMANDS) {
+    throw new Error(`A group ${kind} requires between 1 and ${MAX_GROUP_ORDER_COMMANDS} ${kind} orders in a valid request.`);
   }
   const ids = new Set<string>();
-  const commands = Array.from(request.commands).map((input, index) => {
+  const commands = Array.from<GroupCommand>(request.commands).map((input, index) => {
     const parsed = commandSchema.safeParse(input);
-    if (!parsed.success || parsed.data.type !== 'setPosting') throw new Error(`Group posting item ${index + 1} is not a valid posting order.`);
+    if (!parsed.success || (parsed.data.type !== 'setPosting' && parsed.data.type !== 'setCharter') || (parsed.data.type === 'setPosting') !== posting) throw new Error(`Group ${kind} item ${index + 1} is not a valid ${kind} order.`);
     const command = parsed.data;
-    if (command.factionId !== factionId) throw new Error('This seat does not control every faction in the group posting.');
-    if (ids.has(command.armyId)) throw new Error('A group posting may name each army only once.');
-    ids.add(command.armyId);
+    if (command.factionId !== factionId) throw new Error(`This seat does not control every faction in the group ${kind}.`);
+    const id = groupEntityId(command);
+    if (ids.has(id)) throw new Error(`A group ${kind} may name each ${posting ? 'army' : 'settlement'} only once.`);
+    ids.add(id);
     return command;
   });
-  return commands.sort((a, b) => a.armyId < b.armyId ? -1 : a.armyId > b.armyId ? 1 : 0);
+  return commands.sort((a, b) => groupEntityId(a) < groupEntityId(b) ? -1 : groupEntityId(a) > groupEntityId(b) ? 1 : 0);
+}
+
+function applyGroupCommands(game: GameState, commands: GroupCommand[]) {
+  const results: Array<{ entityId: string; accepted: boolean; message?: string }> = [];
+  let error: string | undefined;
+  for (const command of commands) {
+    try {
+      const result = applyCommand(game, command);
+      results.push({ entityId: groupEntityId(command), accepted: result.ok, ...(!result.ok ? { message: result.error ?? `The ${command.type === 'setPosting' ? 'posting' : 'charter'} could not be completed.` } : {}) });
+    } catch (cause) {
+      // A recorder can fail after the command mutated canonical state. Do
+      // not call that order refused, roll it back, or attempt the next one.
+      error = `Recording was interrupted after ${results.length} completed order${results.length === 1 ? '' : 's'}. Some orders may have applied; restore a saved campaign before continuing. ${cause instanceof Error ? cause.message : String(cause)}`;
+      break;
+    }
+  }
+  return { results, error };
 }
 
 function applyCommand(game: GameState, command: GameCommand) {
@@ -227,27 +254,18 @@ async function handle(request: Request): Promise<void> {
       publish(request.id, await autosave(message));
       return;
     }
-    if (request.type === 'groupPosting') {
+    if (request.type === 'groupPosting' || request.type === 'groupCharter') {
       if (journal.mode === 'watch') throw new Error('AI watch controls every faction. Pause or step rounds from the watch controls.');
       if (state.victory) throw new Error('The campaign has ended. Open its chronicles to review the result.');
-      const commands = groupPostingCommands(request, state.turnOwnerId), started = performance.now();
-      const groupPostingResults: GroupPostingResult[] = [];
-      let groupPostingError: string | undefined;
-      for (const command of commands) {
-        try {
-          const result = applyCommand(state, command);
-          groupPostingResults.push({ armyId: command.armyId, accepted: result.ok, ...(!result.ok ? { message: result.error ?? 'The posting could not be completed.' } : {}) });
-        } catch (error) {
-          // A recorder can fail after the command mutated canonical state. Do
-          // not call that order refused, roll it back, or attempt the next one.
-          groupPostingError = `Recording was interrupted after ${groupPostingResults.length} completed order${groupPostingResults.length === 1 ? '' : 's'}. Some orders may have applied; restore a saved campaign before continuing. ${error instanceof Error ? error.message : String(error)}`;
-          break;
-        }
-      }
+      const commands = groupCommands(request, state.turnOwnerId), started = performance.now();
+      const { results, error } = applyGroupCommands(state, commands);
       metrics.commandMs = performance.now() - started; metrics.aiMs = 0;
-      const accepted = groupPostingResults.filter(result => result.accepted).length;
-      const message = groupPostingError ?? `${accepted} posting${accepted === 1 ? '' : 's'} accepted; ${groupPostingResults.length - accepted} refused.`;
-      publish(request.id, message, false, false, { groupPostingResults, ...(groupPostingError ? { groupPostingError } : {}) });
+      const accepted = results.filter(result => result.accepted).length, kind = request.type === 'groupPosting' ? 'posting' : 'charter';
+      const message = error ?? `${accepted} ${kind}${accepted === 1 ? '' : 's'} accepted; ${results.length - accepted} refused.`;
+      const response: GroupResponse = request.type === 'groupPosting'
+        ? { groupPostingResults: results.map(({ entityId, ...result }) => ({ armyId: entityId, ...result })), ...(error ? { groupPostingError: error } : {}) }
+        : { groupCharterResults: results.map(({ entityId, ...result }) => ({ settlementId: entityId, ...result })), ...(error ? { groupCharterError: error } : {}) };
+      publish(request.id, message, false, false, response);
       return;
     }
     if (request.type === 'command') {
