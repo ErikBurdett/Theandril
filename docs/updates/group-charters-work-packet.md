@@ -65,3 +65,7 @@ and live readback.
 ## Final publication preparation
 
 Independent [publication review](../development/2026-09-24-group-charters/publication-review.md) found no blocking issue. The final source candidate passes 1,891 tests across 235 files and 29 production Pages journeys, with typecheck, lint and the build passing. [Publication verification](../development/2026-09-24-group-charters/publication-verification.md) retains exact scopes, inspected desktop/narrow/enlarged-text images, and corrected local storage/socket-path failures. The user’s prior deployment authorization continues to apply. Public readback follows the push.
+
+## Published result
+
+The user-authorized publication is live at `ee12011edb9990e8a5948301174b039fbbb9c04d`; edition 07 retains its implementation pin `f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9`. Both GitHub workflows passed. Exact live ledger, article source link and screenshot bytes were read back without page errors. The live suite passed 28 scenarios; one artwork readiness check failed during slow HTTP 200 transfers and passed on the unchanged focused rerun. [Deployment evidence](../development/2026-09-24-group-charters/deployment.json) and [network record](../development/2026-09-24-group-charters/live-asset-network.json) preserve those scopes. DHARMA was rebuilt with ACT-32 still doing. Publication does not accept a release gate.

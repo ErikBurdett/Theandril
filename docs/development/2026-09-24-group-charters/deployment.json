@@ -1,0 +1,27 @@
+{
+  "releaseCommit": "ee12011edb9990e8a5948301174b039fbbb9c04d",
+  "implementationCommit": "f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9",
+  "actions": [
+    {
+      "name": "Verify build",
+      "conclusion": "success",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36080241037"
+    },
+    {
+      "name": "Publish development demo to Pages",
+      "conclusion": "success",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36080240836"
+    }
+  ],
+  "localPublicationTests": 1891,
+  "localDevelopmentJourneys": 12,
+  "localProductionJourneys": 29,
+  "liveRun": {
+    "passed": 28,
+    "failed": 1,
+    "failure": "Existing setup crest remained loading after five-second readiness limit. Catalogue and atlas both returned HTTP200 with slow transfer.",
+    "focusedUnchangedAssetRecheckPassed": 1
+  },
+  "allReleaseGatesOpen": true,
+  "releaseAcceptance": false
+}

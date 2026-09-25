@@ -1,0 +1,34 @@
+{
+  "source": "live-asset-first-attempt/trace.zip",
+  "readinessTimeoutMs": 5000,
+  "assets": [
+    {
+      "url": "https://erikburdett.github.io/Theandril/art/catalog.json",
+      "status": 200,
+      "durationMs": 2607.713,
+      "timings": {
+        "dns": -1,
+        "connect": -1,
+        "ssl": -1,
+        "send": 0,
+        "wait": 2571.105,
+        "receive": 36.608
+      }
+    },
+    {
+      "url": "https://erikburdett.github.io/Theandril/art/foundation.png",
+      "status": 200,
+      "durationMs": 2248.691,
+      "timings": {
+        "dns": -1,
+        "connect": -1,
+        "ssl": -1,
+        "send": 0,
+        "wait": 870.925,
+        "receive": 1377.766
+      }
+    }
+  ],
+  "recheck": "live-assets-recheck.log",
+  "interpretation": "Both recorded requests succeeded. Their combined transfer durations approached the readiness timeout before decoding/rendering. Exact cause of public network delay is not established; no source or timeout was changed."
+}

@@ -2,6 +2,7 @@
 
 | Date | Report | Publication |
 | --- | --- | --- |
+| 2026-09-24 | [Group hearth charters and deployment](2026-09-24-group-charters.md) | Published `ee12011`; ACT-32 advanced; live charter/save checks pass; asset check passed on unchanged rerun |
 | 2026-09-23 | [Deploy fleet provisions and add group army postings](2026-09-23-deploy-and-group-postings.md) | Published `36fea99`; ACT-35 done; ACT-32 advanced; live checks pass |
 | 2026-09-23 | [Fleet provisions with an AI that plans the return](2026-09-23-fleet-provisions.md) | Local rules/save31; ACT-35 verified; nothing committed or published |
 | 2026-09-23 | [Making the measurement lesson a tool](2026-09-23-pacing-measurement.md) | Pushed to `master`; Pages deploys the build |
