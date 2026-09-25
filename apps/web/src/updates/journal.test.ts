@@ -17,7 +17,7 @@ describe('journal discovery', () => {
         const footnote = markup.match(/<p class="feature-footnote">(.*?)<\/p>/)?.[1];
         expect(footnote).toBe(`Source checkpoint ${sourceRevision.slice(0, 7)} · Not a 1.0 release.`);
         expect(markup).toContain(`href="https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/IMPLEMENTATION_STATUS.md"`);
-        expect(markup).toContain(`href="https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/development/2026-09-23-deploy-and-group-postings/README.md"`);
+        expect(markup).toContain(`href="https://github.com/ErikBurdett/Theandril/blob/${libraryRevision}/docs/development/2026-09-24-group-charters/README.md"`);
       }
     } finally {
       dispatches[0] = original;

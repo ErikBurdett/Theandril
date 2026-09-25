@@ -1,0 +1,1025 @@
+[WebServer] (node:2526338) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2526763) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 29 tests using 1 worker
+
+(node:2526846) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence (1ms)
+(node:2526895) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 tests/gameplay/home.spec.ts:3:1 › home provides the public routes and generated ledger (1ms)
+(node:2527035) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path (1ms)
+(node:2527073) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   4 tests/gameplay/home.spec.ts:25:1 › a permalink to a commit beyond the first page reveals it and scrolls to it (1ms)
+(node:2527232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   5 tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors (1ms)
+(node:2527284) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open (1ms)
+(node:2527352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   7 tests/gameplay/roadmap.spec.ts:24:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check (1ms)
+(node:2527390) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 tests/gameplay/roadmap.spec.ts:45:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record (1ms)
+(node:2527422) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   9 tests/gameplay/roadmap.spec.ts:62:1 › same-document Back and Forward restore filters and linked-item evidence (2ms)
+(node:2527538) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  10 tests/gameplay/roadmap.spec.ts:93:3 › roadmap keyboard and layout at 1440px / 100% text (1ms)
+(node:2527837) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  11 tests/gameplay/roadmap.spec.ts:93:3 › roadmap keyboard and layout at 390px / 130% text (1ms)
+(node:2527982) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  12 tests/gameplay/roadmap.spec.ts:120:1 › unknown item links recover honestly and dispatches link to the full roadmap (1ms)
+(node:2528104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  13 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text (1ms)
+(node:2528275) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  14 tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text (1ms)
+(node:2528466) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  15 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text (1ms)
+(node:2528543) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  16 tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text (1ms)
+(node:2528727) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  17 tests/gameplay/updates.spec.ts:50:1 › reading surfaces retain contrast without putting texture over the text (1ms)
+(node:2528850) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  18 tests/gameplay/updates.spec.ts:81:1 › unknown dispatch links fail honestly and keyboard skip navigation works (1ms)
+(node:2528939) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  19 tests/gameplay/updates.spec.ts:92:1 › archive search combines topic filters, survives refresh and recovers from no results (1ms)
+(node:2529041) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  20 tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance (1ms)
+(node:2529075) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  21 tests/gameplay/updates.spec.ts:123:1 › a keyboard reader can enlarge a real image and return to the same control (1ms)
+(node:2529126) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  22 tests/gameplay/updates.spec.ts:139:1 › public journal opens a permanent, refresh-safe campaign dispatch (1ms)
+(node:2529257) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  23 tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks (1ms)
+(node:2529309) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  24 tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base (1ms)
+(node:2529360) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  25 tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup (1ms)
+(node:2529413) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  26 tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration (1ms)
+(node:2529519) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  27 tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration (1ms)
+(node:2529642) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  28 tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks (1ms)
+(node:2529716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  29 tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks (1ms)
+
+
+  1) tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-H3DtIy --remote-debugging-pipe --no-startup-window
+    <launched> pid=2526866
+    [pid=2526866][err] [2526866:2526866:0924/195004.868801:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.jIzTMP/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-H3DtIy --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2526866
+      - [pid=2526866][err] [2526866:2526866:0924/195004.868801:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.jIzTMP/SingletonSocket.
+      - [pid=2526866] <gracefully close start>
+      - [pid=2526866] <kill>
+      - [pid=2526866] <will force kill>
+      - [pid=2526866] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2526866] starting temporary directories cleanup
+      - [pid=2526866] finished temporary directories cleanup
+      - [pid=2526866] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-compendium-compen-b9cfd--and-narrow-layout-evidence/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-compendium-compen-b9cfd--and-narrow-layout-evidence/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-compendium-compen-b9cfd--and-narrow-layout-evidence/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/gameplay/home.spec.ts:3:1 › home provides the public routes and generated ledger ────────
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-kqnFFb --remote-debugging-pipe --no-startup-window
+    <launched> pid=2527018
+    [pid=2527018][err] [2527018:2527018:0924/195005.373705:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.dkrRKZ/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-kqnFFb --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2527018
+      - [pid=2527018][err] [2527018:2527018:0924/195005.373705:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.dkrRKZ/SingletonSocket.
+      - [pid=2527018] <gracefully close start>
+      - [pid=2527018] <kill>
+      - [pid=2527018] <will force kill>
+      - [pid=2527018] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2527018] starting temporary directories cleanup
+      - [pid=2527018] finished temporary directories cleanup
+      - [pid=2527018] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-home-home-provide-8888f-routes-and-generated-ledger/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-home-home-provide-8888f-routes-and-generated-ledger/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-home-home-provide-8888f-routes-and-generated-ledger/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path ───────────
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-LuKaGY --remote-debugging-pipe --no-startup-window
+    <launched> pid=2527053
+    [pid=2527053][err] [2527053:2527053:0924/195005.851611:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.YH8pBv/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-LuKaGY --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2527053
+      - [pid=2527053][err] [2527053:2527053:0924/195005.851611:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.YH8pBv/SingletonSocket.
+      - [pid=2527053] <gracefully close start>
+      - [pid=2527053] <kill>
+      - [pid=2527053] <will force kill>
+      - [pid=2527053] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2527053] starting temporary directories cleanup
+      - [pid=2527053] finished temporary directories cleanup
+      - [pid=2527053] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-home-dispatches-r-55267-resh-safe-at-their-new-path/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/gameplay/home.spec.ts:25:1 › a permalink to a commit beyond the first page reveals it and scrolls to it 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-lFY8ow --remote-debugging-pipe --no-startup-window
+    <launched> pid=2527152
+    [pid=2527152][err] [2527152:2527152:0924/195006.297139:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.D6INiN/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-lFY8ow --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2527152
+      - [pid=2527152][err] [2527152:2527152:0924/195006.297139:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.D6INiN/SingletonSocket.
+      - [pid=2527152] <gracefully close start>
+      - [pid=2527152] <kill>
+      - [pid=2527152] <will force kill>
+      - [pid=2527152] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2527152] starting temporary directories cleanup
+      - [pid=2527152] finished temporary directories cleanup
+      - [pid=2527152] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-home-a-permalink--5364d-eveals-it-and-scrolls-to-it/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-home-a-permalink--5364d-eveals-it-and-scrolls-to-it/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-home-a-permalink--5364d-eveals-it-and-scrolls-to-it/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-jn3ooW --remote-debugging-pipe --no-startup-window
+    <launched> pid=2527266
+    [pid=2527266][err] [2527266:2527266:0924/195006.774828:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.86NIso/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-jn3ooW --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2527266
+      - [pid=2527266][err] [2527266:2527266:0924/195006.774828:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.86NIso/SingletonSocket.
+      - [pid=2527266] <gracefully close start>
+      - [pid=2527266] <kill>
+      - [pid=2527266] <will force kill>
+      - [pid=2527266] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2527266] starting temporary directories cleanup
+      - [pid=2527266] finished temporary directories cleanup
+      - [pid=2527266] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-lore-lore-shelf-c-9f3f1--layout-work-without-errors/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-lore-lore-shelf-c-9f3f1--layout-work-without-errors/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-lore-lore-shelf-c-9f3f1--layout-work-without-errors/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-HVPYNu --remote-debugging-pipe --no-startup-window
+    <launched> pid=2527317
+    [pid=2527317][err] [2527317:2527317:0924/195007.262182:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.rEUv67/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-HVPYNu --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2527317
+      - [pid=2527317][err] [2527317:2527317:0924/195007.262182:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.rEUv67/SingletonSocket.
+      - [pid=2527317] <gracefully close start>
+      - [pid=2527317] <kill>
+      - [pid=2527317] <will force kill>
+      - [pid=2527317] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2527317] starting temporary directories cleanup
+      - [pid=2527317] finished temporary directories cleanup
+      - [pid=2527317] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-roadmap-the-roadm-cde8f-ith-every-release-gate-open/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests/gameplay/roadmap.spec.ts:24:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-3THubK --remote-debugging-pipe --no-startup-window
+    <launched> pid=2527367
+    [pid=2527367][err] [2527367:2527367:0924/195007.761591:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.c7aOiT/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-3THubK --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2527367
+      - [pid=2527367][err] [2527367:2527367:0924/195007.761591:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.c7aOiT/SingletonSocket.
+      - [pid=2527367] <gracefully close start>
+      - [pid=2527367] <kill>
+      - [pid=2527367] <will force kill>
+      - [pid=2527367] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2527367] starting temporary directories cleanup
+      - [pid=2527367] finished temporary directories cleanup
+      - [pid=2527367] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-roadmap-status-an-e003d--preserve-the-release-check/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-roadmap-status-an-e003d--preserve-the-release-check/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-roadmap-status-an-e003d--preserve-the-release-check/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) tests/gameplay/roadmap.spec.ts:45:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-us2Qrp --remote-debugging-pipe --no-startup-window
+    <launched> pid=2527404
+    [pid=2527404][err] [2527404:2527404:0924/195008.243214:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.tzR31Q/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-us2Qrp --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2527404
+      - [pid=2527404][err] [2527404:2527404:0924/195008.243214:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.tzR31Q/SingletonSocket.
+      - [pid=2527404] <gracefully close start>
+      - [pid=2527404] <kill>
+      - [pid=2527404] <will force kill>
+      - [pid=2527404] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2527404] starting temporary directories cleanup
+      - [pid=2527404] finished temporary directories cleanup
+      - [pid=2527404] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-roadmap-an-item-p-3ad60-urns-to-the-filtered-record/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-roadmap-an-item-p-3ad60-urns-to-the-filtered-record/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-roadmap-an-item-p-3ad60-urns-to-the-filtered-record/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) tests/gameplay/roadmap.spec.ts:62:1 › same-document Back and Forward restore filters and linked-item evidence 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-cHNXPo --remote-debugging-pipe --no-startup-window
+    <launched> pid=2527457
+    [pid=2527457][err] [2527457:2527457:0924/195008.744661:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.U8v1zO/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-cHNXPo --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2527457
+      - [pid=2527457][err] [2527457:2527457:0924/195008.744661:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.U8v1zO/SingletonSocket.
+      - [pid=2527457] <gracefully close start>
+      - [pid=2527457] <kill>
+      - [pid=2527457] <will force kill>
+      - [pid=2527457] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2527457] starting temporary directories cleanup
+      - [pid=2527457] finished temporary directories cleanup
+      - [pid=2527457] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-roadmap-same-docu-b1607-rs-and-linked-item-evidence/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-roadmap-same-docu-b1607-rs-and-linked-item-evidence/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-roadmap-same-docu-b1607-rs-and-linked-item-evidence/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) tests/gameplay/roadmap.spec.ts:93:3 › roadmap keyboard and layout at 1440px / 100% text ──────
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-kp46Wq --remote-debugging-pipe --no-startup-window
+    <launched> pid=2527722
+    [pid=2527722][err] [2527722:2527722:0924/195009.288821:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.4Mxwvo/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-kp46Wq --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2527722
+      - [pid=2527722][err] [2527722:2527722:0924/195009.288821:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.4Mxwvo/SingletonSocket.
+      - [pid=2527722] <gracefully close start>
+      - [pid=2527722] <kill>
+      - [pid=2527722] <will force kill>
+      - [pid=2527722] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2527722] starting temporary directories cleanup
+      - [pid=2527722] finished temporary directories cleanup
+      - [pid=2527722] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-roadmap-roadmap-k-6870f-d-layout-at-1440px-100-text/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-roadmap-roadmap-k-6870f-d-layout-at-1440px-100-text/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-roadmap-roadmap-k-6870f-d-layout-at-1440px-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) tests/gameplay/roadmap.spec.ts:93:3 › roadmap keyboard and layout at 390px / 130% text ───────
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-35pQwy --remote-debugging-pipe --no-startup-window
+    <launched> pid=2527927
+    [pid=2527927][err] [2527927:2527927:0924/195009.798910:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.U5zPaC/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-35pQwy --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2527927
+      - [pid=2527927][err] [2527927:2527927:0924/195009.798910:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.U5zPaC/SingletonSocket.
+      - [pid=2527927] <gracefully close start>
+      - [pid=2527927] <kill>
+      - [pid=2527927] <will force kill>
+      - [pid=2527927] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2527927] starting temporary directories cleanup
+      - [pid=2527927] finished temporary directories cleanup
+      - [pid=2527927] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-roadmap-roadmap-k-b7ad2-nd-layout-at-390px-130-text/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-roadmap-roadmap-k-b7ad2-nd-layout-at-390px-130-text/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-roadmap-roadmap-k-b7ad2-nd-layout-at-390px-130-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) tests/gameplay/roadmap.spec.ts:120:1 › unknown item links recover honestly and dispatches link to the full roadmap 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-mLEqsD --remote-debugging-pipe --no-startup-window
+    <launched> pid=2528057
+    [pid=2528057][err] [2528057:2528057:0924/195010.264548:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.ZDII38/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-mLEqsD --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2528057
+      - [pid=2528057][err] [2528057:2528057:0924/195010.264548:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.ZDII38/SingletonSocket.
+      - [pid=2528057] <gracefully close start>
+      - [pid=2528057] <kill>
+      - [pid=2528057] <will force kill>
+      - [pid=2528057] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2528057] starting temporary directories cleanup
+      - [pid=2528057] finished temporary directories cleanup
+      - [pid=2528057] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-roadmap-unknown-i-0f17d-es-link-to-the-full-roadmap/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-roadmap-unknown-i-0f17d-es-link-to-the-full-roadmap/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-roadmap-unknown-i-0f17d-es-link-to-the-full-roadmap/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text ────────────────
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-3XpAMm --remote-debugging-pipe --no-startup-window
+    <launched> pid=2528250
+    [pid=2528250][err] [2528250:2528250:0924/195010.776921:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.rEqi5G/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-3XpAMm --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2528250
+      - [pid=2528250][err] [2528250:2528250:0924/195010.776921:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.rEqi5G/SingletonSocket.
+      - [pid=2528250] <gracefully close start>
+      - [pid=2528250] <kill>
+      - [pid=2528250] <will force kill>
+      - [pid=2528250] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2528250] starting temporary directories cleanup
+      - [pid=2528250] finished temporary directories cleanup
+      - [pid=2528250] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-updates-readable-journal-at-1440px-and-100-text/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-readable-journal-at-1440px-and-100-text/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-readable-journal-at-1440px-and-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text ────────────────
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-kFUIMV --remote-debugging-pipe --no-startup-window
+    <launched> pid=2528324
+    [pid=2528324][err] [2528324:2528324:0924/195011.263227:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.lS2A8k/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-kFUIMV --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2528324
+      - [pid=2528324][err] [2528324:2528324:0924/195011.263227:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.lS2A8k/SingletonSocket.
+      - [pid=2528324] <gracefully close start>
+      - [pid=2528324] <kill>
+      - [pid=2528324] <will force kill>
+      - [pid=2528324] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2528324] starting temporary directories cleanup
+      - [pid=2528324] finished temporary directories cleanup
+      - [pid=2528324] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-updates-readable-journal-at-1366px-and-100-text/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-readable-journal-at-1366px-and-100-text/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-readable-journal-at-1366px-and-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15) tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text ─────────────────
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-n9b1Fw --remote-debugging-pipe --no-startup-window
+    <launched> pid=2528524
+    [pid=2528524][err] [2528524:2528524:0924/195011.782018:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.QUly5M/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-n9b1Fw --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2528524
+      - [pid=2528524][err] [2528524:2528524:0924/195011.782018:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.QUly5M/SingletonSocket.
+      - [pid=2528524] <gracefully close start>
+      - [pid=2528524] <kill>
+      - [pid=2528524] <will force kill>
+      - [pid=2528524] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2528524] starting temporary directories cleanup
+      - [pid=2528524] finished temporary directories cleanup
+      - [pid=2528524] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-updates-readable-journal-at-390px-and-100-text/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-readable-journal-at-390px-and-100-text/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-readable-journal-at-390px-and-100-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  16) tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text ─────────────────
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-fQemoe --remote-debugging-pipe --no-startup-window
+    <launched> pid=2528678
+    [pid=2528678][err] [2528678:2528678:0924/195012.309092:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.ohSmG1/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-fQemoe --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2528678
+      - [pid=2528678][err] [2528678:2528678:0924/195012.309092:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.ohSmG1/SingletonSocket.
+      - [pid=2528678] <gracefully close start>
+      - [pid=2528678] <kill>
+      - [pid=2528678] <will force kill>
+      - [pid=2528678] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2528678] starting temporary directories cleanup
+      - [pid=2528678] finished temporary directories cleanup
+      - [pid=2528678] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-updates-readable-journal-at-390px-and-130-text/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-readable-journal-at-390px-and-130-text/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-readable-journal-at-390px-and-130-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  17) tests/gameplay/updates.spec.ts:50:1 › reading surfaces retain contrast without putting texture over the text 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-bhl3S5 --remote-debugging-pipe --no-startup-window
+    <launched> pid=2528760
+    [pid=2528760][err] [2528760:2528760:0924/195012.776937:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.csHLGs/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-bhl3S5 --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2528760
+      - [pid=2528760][err] [2528760:2528760:0924/195012.776937:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.csHLGs/SingletonSocket.
+      - [pid=2528760] <gracefully close start>
+      - [pid=2528760] <kill>
+      - [pid=2528760] <will force kill>
+      - [pid=2528760] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2528760] starting temporary directories cleanup
+      - [pid=2528760] finished temporary directories cleanup
+      - [pid=2528760] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-updates-reading-s-9c57e-tting-texture-over-the-text/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-reading-s-9c57e-tting-texture-over-the-text/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-reading-s-9c57e-tting-texture-over-the-text/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  18) tests/gameplay/updates.spec.ts:81:1 › unknown dispatch links fail honestly and keyboard skip navigation works 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-Ub8kjo --remote-debugging-pipe --no-startup-window
+    <launched> pid=2528897
+    [pid=2528897][err] [2528897:2528897:0924/195013.275225:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.4jZLOn/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-Ub8kjo --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2528897
+      - [pid=2528897][err] [2528897:2528897:0924/195013.275225:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.4jZLOn/SingletonSocket.
+      - [pid=2528897] <gracefully close start>
+      - [pid=2528897] <kill>
+      - [pid=2528897] <will force kill>
+      - [pid=2528897] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2528897] starting temporary directories cleanup
+      - [pid=2528897] finished temporary directories cleanup
+      - [pid=2528897] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-updates-unknown-d-e01f8-board-skip-navigation-works/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-unknown-d-e01f8-board-skip-navigation-works/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-unknown-d-e01f8-board-skip-navigation-works/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  19) tests/gameplay/updates.spec.ts:92:1 › archive search combines topic filters, survives refresh and recovers from no results 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-1WhkpC --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529013
+    [pid=2529013][err] [2529013:2529013:0924/195013.765777:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.TXROv2/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-1WhkpC --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529013
+      - [pid=2529013][err] [2529013:2529013:0924/195013.765777:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.TXROv2/SingletonSocket.
+      - [pid=2529013] <gracefully close start>
+      - [pid=2529013] <kill>
+      - [pid=2529013] <will force kill>
+      - [pid=2529013] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529013] starting temporary directories cleanup
+      - [pid=2529013] finished temporary directories cleanup
+      - [pid=2529013] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-updates-archive-s-19673-nd-recovers-from-no-results/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-archive-s-19673-nd-recovers-from-no-results/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-archive-s-19673-nd-recovers-from-no-results/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  20) tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-i53JVB --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529055
+    [pid=2529055][err] [2529055:2529055:0924/195014.229159:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.hWiBkn/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-i53JVB --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529055
+      - [pid=2529055][err] [2529055:2529055:0924/195014.229159:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.hWiBkn/SingletonSocket.
+      - [pid=2529055] <gracefully close start>
+      - [pid=2529055] <kill>
+      - [pid=2529055] <will force kill>
+      - [pid=2529055] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529055] starting temporary directories cleanup
+      - [pid=2529055] finished temporary directories cleanup
+      - [pid=2529055] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-scope-led-e1003-an-reach-authoring-guidance/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  21) tests/gameplay/updates.spec.ts:123:1 › a keyboard reader can enlarge a real image and return to the same control 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-tlvvpb --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529089
+    [pid=2529089][err] [2529089:2529089:0924/195014.712900:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.2OcPE6/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-tlvvpb --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529089
+      - [pid=2529089][err] [2529089:2529089:0924/195014.712900:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.2OcPE6/SingletonSocket.
+      - [pid=2529089] <gracefully close start>
+      - [pid=2529089] <kill>
+      - [pid=2529089] <will force kill>
+      - [pid=2529089] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529089] starting temporary directories cleanup
+      - [pid=2529089] finished temporary directories cleanup
+      - [pid=2529089] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-updates-a-keyboar-e4521--return-to-the-same-control/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-a-keyboar-e4521--return-to-the-same-control/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-a-keyboar-e4521--return-to-the-same-control/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  22) tests/gameplay/updates.spec.ts:139:1 › public journal opens a permanent, refresh-safe campaign dispatch 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-tqnJLq --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529216
+    [pid=2529216][err] [2529216:2529216:0924/195015.193667:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.IQkfyK/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-tqnJLq --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529216
+      - [pid=2529216][err] [2529216:2529216:0924/195015.193667:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.IQkfyK/SingletonSocket.
+      - [pid=2529216] <gracefully close start>
+      - [pid=2529216] <kill>
+      - [pid=2529216] <will force kill>
+      - [pid=2529216] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529216] starting temporary directories cleanup
+      - [pid=2529216] finished temporary directories cleanup
+      - [pid=2529216] <gracefully close end>
+
+
+    Error Context: test-results/gameplay-updates-public-jo-558b4-resh-safe-campaign-dispatch/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-updates-public-jo-558b4-resh-safe-campaign-dispatch/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-updates-public-jo-558b4-resh-safe-campaign-dispatch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  23) tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-gFE5M4 --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529292
+    [pid=2529292][err] [2529292:2529292:0924/195015.744975:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.A7bBb7/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-gFE5M4 --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529292
+      - [pid=2529292][err] [2529292:2529292:0924/195015.744975:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.A7bBb7/SingletonSocket.
+      - [pid=2529292] <gracefully close start>
+      - [pid=2529292] <kill>
+      - [pid=2529292] <will force kill>
+      - [pid=2529292] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529292] starting temporary directories cleanup
+      - [pid=2529292] finished temporary directories cleanup
+      - [pid=2529292] <gracefully close end>
+
+
+    Error Context: test-results/production-battlefield-bui-0a8e0-s-without-development-hooks/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/production-battlefield-bui-0a8e0-s-without-development-hooks/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/production-battlefield-bui-0a8e0-s-without-development-hooks/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  24) tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-e4YYlQ --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529324
+    [pid=2529324][err] [2529324:2529324:0924/195016.219501:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.skO5Mx/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-e4YYlQ --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529324
+      - [pid=2529324][err] [2529324:2529324:0924/195016.219501:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.skO5Mx/SingletonSocket.
+      - [pid=2529324] <gracefully close start>
+      - [pid=2529324] <kill>
+      - [pid=2529324] <will force kill>
+      - [pid=2529324] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529324] starting temporary directories cleanup
+      - [pid=2529324] finished temporary directories cleanup
+      - [pid=2529324] <gracefully close end>
+
+
+    Error Context: test-results/production-deployment-asse-8b5b2--configured-deployment-base/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/production-deployment-asse-8b5b2--configured-deployment-base/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/production-deployment-asse-8b5b2--configured-deployment-base/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  25) tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-siQhsx --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529374
+    [pid=2529374][err] [2529374:2529374:0924/195016.673397:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.efhwhz/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-siQhsx --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529374
+      - [pid=2529374][err] [2529374:2529374:0924/195016.673397:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.efhwhz/SingletonSocket.
+      - [pid=2529374] <gracefully close start>
+      - [pid=2529374] <kill>
+      - [pid=2529374] <will force kill>
+      - [pid=2529374] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529374] starting temporary directories cleanup
+      - [pid=2529374] finished temporary directories cleanup
+      - [pid=2529374] <gracefully close end>
+
+
+    Error Context: test-results/production-developer-navig-10742-t-discarding-campaign-setup/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/production-developer-navig-10742-t-discarding-campaign-setup/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/production-developer-navig-10742-t-discarding-campaign-setup/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  26) tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-2K0mcB --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529497
+    [pid=2529497][err] [2529497:2529497:0924/195017.137706:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.AOIq2P/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-2K0mcB --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529497
+      - [pid=2529497][err] [2529497:2529497:0924/195017.137706:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.AOIq2P/SingletonSocket.
+      - [pid=2529497] <gracefully close start>
+      - [pid=2529497] <kill>
+      - [pid=2529497] <will force kill>
+      - [pid=2529497] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529497] starting temporary directories cleanup
+      - [pid=2529497] finished temporary directories cleanup
+      - [pid=2529497] <gracefully close end>
+
+
+    Error Context: test-results/production-group-charters--434d2-and-manual-save-restoration/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/production-group-charters--434d2-and-manual-save-restoration/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/production-group-charters--434d2-and-manual-save-restoration/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  27) tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-QlfpEm --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529549
+    [pid=2529549][err] [2529549:2529549:0924/195017.604046:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.MpOT16/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-QlfpEm --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529549
+      - [pid=2529549][err] [2529549:2529549:0924/195017.604046:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.MpOT16/SingletonSocket.
+      - [pid=2529549] <gracefully close start>
+      - [pid=2529549] <kill>
+      - [pid=2529549] <will force kill>
+      - [pid=2529549] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529549] starting temporary directories cleanup
+      - [pid=2529549] finished temporary directories cleanup
+      - [pid=2529549] <gracefully close end>
+
+
+    Error Context: test-results/production-group-postings--d7034-ive-manual-save-restoration/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/production-group-postings--d7034-ive-manual-save-restoration/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/production-group-postings--d7034-ive-manual-save-restoration/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  28) tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-jlh0BQ --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529675
+    [pid=2529675][err] [2529675:2529675:0924/195018.208835:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.yqZsU3/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-jlh0BQ --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529675
+      - [pid=2529675][err] [2529675:2529675:0924/195018.208835:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.yqZsU3/SingletonSocket.
+      - [pid=2529675] <gracefully close start>
+      - [pid=2529675] <kill>
+      - [pid=2529675] <will force kill>
+      - [pid=2529675] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529675] starting temporary directories cleanup
+      - [pid=2529675] finished temporary directories cleanup
+      - [pid=2529675] <gracefully close end>
+
+
+    Error Context: test-results/production-map-actions-bui-a9ed1-d-without-development-hooks/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/production-map-actions-bui-a9ed1-d-without-development-hooks/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/production-map-actions-bui-a9ed1-d-without-development-hooks/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  29) tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-KjZ9U5 --remote-debugging-pipe --no-startup-window
+    <launched> pid=2529775
+    [pid=2529775][err] [2529775:2529775:0924/195018.674752:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.9Acej6/SingletonSocket.
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --enable-unsafe-swiftshader --user-data-dir=/home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/playwright_chromiumdev_profile-KjZ9U5 --remote-debugging-pipe --no-startup-window
+      - <launched> pid=2529775
+      - [pid=2529775][err] [2529775:2529775:0924/195018.674752:FATAL:chrome/browser/process_singleton_posix.cc:313] Socket path too long: /home/telephoneheater/Work/Theandril/node_modules/.cache/theandril-verification-tmp/org.chromium.Chromium.9Acej6/SingletonSocket.
+      - [pid=2529775] <gracefully close start>
+      - [pid=2529775] <kill>
+      - [pid=2529775] <will force kill>
+      - [pid=2529775] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=2529775] starting temporary directories cleanup
+      - [pid=2529775] finished temporary directories cleanup
+      - [pid=2529775] <gracefully close end>
+
+
+    Error Context: test-results/production-watch-fog-produ-93b05-d-without-development-hooks/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/production-watch-fog-produ-93b05-d-without-development-hooks/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/production-watch-fog-produ-93b05-d-without-development-hooks/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  29 failed
+    tests/gameplay/compendium.spec.ts:4:1 › compendium journeys retain real culture, unit, atlas, search, refresh and narrow-layout evidence 
+    tests/gameplay/home.spec.ts:3:1 › home provides the public routes and generated ledger ─────────
+    tests/gameplay/home.spec.ts:18:1 › dispatches remain refresh-safe at their new path ────────────
+    tests/gameplay/home.spec.ts:25:1 › a permalink to a commit beyond the first page reveals it and scrolls to it 
+    tests/gameplay/lore.spec.ts:3:1 › lore shelf, chapter journey, search and narrow layout work without errors 
+    tests/gameplay/roadmap.spec.ts:4:1 › the roadmap is discoverable from home and shows bounded completion with every release gate open 
+    tests/gameplay/roadmap.spec.ts:24:1 › status and acceptance search survive refresh, reset cleanly and preserve the release check 
+    tests/gameplay/roadmap.spec.ts:45:1 › an item permalink opens its evidence, survives refresh and returns to the filtered record 
+    tests/gameplay/roadmap.spec.ts:62:1 › same-document Back and Forward restore filters and linked-item evidence 
+    tests/gameplay/roadmap.spec.ts:93:3 › roadmap keyboard and layout at 1440px / 100% text ────────
+    tests/gameplay/roadmap.spec.ts:93:3 › roadmap keyboard and layout at 390px / 130% text ─────────
+    tests/gameplay/roadmap.spec.ts:120:1 › unknown item links recover honestly and dispatches link to the full roadmap 
+    tests/gameplay/updates.spec.ts:5:3 › readable journal at 1440px and 100% text ──────────────────
+    tests/gameplay/updates.spec.ts:5:3 › readable journal at 1366px and 100% text ──────────────────
+    tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 100% text ───────────────────
+    tests/gameplay/updates.spec.ts:5:3 › readable journal at 390px and 130% text ───────────────────
+    tests/gameplay/updates.spec.ts:50:1 › reading surfaces retain contrast without putting texture over the text 
+    tests/gameplay/updates.spec.ts:81:1 › unknown dispatch links fail honestly and keyboard skip navigation works 
+    tests/gameplay/updates.spec.ts:92:1 › archive search combines topic filters, survives refresh and recovers from no results 
+    tests/gameplay/updates.spec.ts:107:1 › scope ledger links real gates and a contributor can reach authoring guidance 
+    tests/gameplay/updates.spec.ts:123:1 › a keyboard reader can enlarge a real image and return to the same control 
+    tests/gameplay/updates.spec.ts:139:1 › public journal opens a permanent, refresh-safe campaign dispatch 
+    tests/production/battlefield.spec.ts:9:1 › built battlefield loads its exact approved battle page and preserves real manual abilities and saved outcomes without development hooks 
+    tests/production/deployment-assets.spec.ts:7:1 › built game loads verified map art, UI materials and its real worker inside the configured deployment base 
+    tests/production/developer-navigation.spec.ts:3:1 › game exposes the developer journal without discarding campaign setup 
+    tests/production/group-charters.spec.ts:4:1 › production group charters reach the real worker and survive a narrow revoke and manual save restoration 
+    tests/production/group-postings.spec.ts:4:1 › production group postings use the real worker and survive manual save restoration 
+    tests/production/map-actions.spec.ts:35:1 › built map actions preserve paid production, land work and resources through a real save/load without development hooks 
+    tests/production/watch-fog.spec.ts:3:1 › production exposes the watch-only fog command without development hooks 

@@ -53,7 +53,7 @@ describe('the source-backed roadmap contract', () => {
     }
   });
   it('records current supply and pacing without completing a wider system or gate', () => {
-    expect(roadmapSnapshot).toMatchObject({ revision: '3ae1581089411a76ecfd08a8f5f811258c4f77f6', rules: 31 });
+    expect(roadmapSnapshot).toMatchObject({ date: '2026-09-24', revision: 'f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9', rules: 31 });
     const supply = roadmapItems.find(item => item.id === 'supply-and-trade')!;
     expect(supply).toMatchObject({ stage: 'current-work', status: 'in-progress' });
     expect(supply.delivered.join(' ')).toContain('eight turns of provisions');
@@ -75,6 +75,16 @@ describe('the source-backed roadmap contract', () => {
     expect(empire.remaining.join(' ')).toContain('patrol/escort');
     expect(empire.remaining.join(' ')).toContain('representative mature campaigns');
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-23-deploy-and-group-postings/README.md')).toBe(true);
+  });
+  it('recognizes delivered group charters while retaining wider governor and template work', () => {
+    const empire = roadmapItems.find(item => item.id === 'empire-management')!;
+    expect(empire.status).toBe('in-progress');
+    expect(empire.delivered.join(' ')).toContain('Up to 128 owned hearths');
+    expect(empire.delivered.join(' ')).toContain('Assignment and revocation preserve queues and treasury');
+    expect(empire.remaining.join(' ')).not.toContain('Complete settlement batch policies');
+    expect(empire.remaining.join(' ')).toContain('saved reusable order templates');
+    expect(empire.remaining.join(' ')).toContain('broader governor decisions');
+    expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-24-group-charters/README.md')).toBe(true);
   });
 });
 

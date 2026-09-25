@@ -5,6 +5,47 @@ export const sourceRevision = '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef';
 export const repository = 'https://github.com/ErikBurdett/Theandril';
 const entries: Dispatch[] = [
   {
+    publication: 'published', sourceRevision: 'f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9', sequence: 7,
+    id: 'group-charters', edition: '07', title: 'One charter policy for forty hearths',
+    subtitle: '24 September 2026 · Settlement delegation',
+    summary: 'Give selected hearths the same standing charter, keep their queued work intact, and inspect each result. Shared controls now explain what every hearth may spend from the realm’s treasury.',
+    topic: 'Engineering', tags: ['Empire management', 'Charters', 'Production', 'Worker transport', 'Saves'],
+    status: 'Reviewed checkpoint', checkpoint: 'Group hearth charters · ACT-32', image: 'group-charters-narrow',
+    takeaways: ['Select up to 128 owned hearths across search and 25-row pages, then apply or revoke existing charter policies together.', 'Each charter has a ceiling per work and shares the treasury’s forty-coin reserve. Assignment and revocation preserve current queues and spend no coin immediately.', 'Forty-hearth browser and worker fixtures prove bounded workflows; saved reusable templates, broader governor decisions and M3 acceptance remain open.'],
+    sections: [
+      { id: 'give-hearths-a-shared-brief', title: 'Give hearths a shared brief', paragraphs: [
+        'A growing realm needs a way to give several hearths the same standing brief without opening every settlement panel. Select owned hearths across the registry’s search results and 25-row pages, choose Works, Wealth, Learning or Muster, then apply the existing charter policy to as many as 128 hearths in one request. Army and hearth selections remain independent across tabs.',
+        'The shared form is a temporary convenience. Each resulting charter remains an individual saved policy, and an order at one hearth changes only that hearth. Accepted orders leave the selection; refused hearths stay checked with their canonical reason. Registry rows show the current policy and its observed next work or blocker.',
+      ] },
+      { id: 'understand-the-shared-treasury', title: 'Understand the shared treasury', paragraphs: [
+        'Applying a charter spends nothing immediately. Once per turn after upkeep, a charter can buy one work when its hearth’s queue is empty, within its own ceiling and while leaving forty coin in the shared treasury. The ceiling applies to each work; it is not one pooled allowance for every selected hearth. Muster recruits land companies that add upkeep. Existing production always comes first.',
+        'Revoking a charter stops future orders and keeps its current queue. The screenshot deliberately shows an empty, unsubmitted grant ceiling: Apply charters is disabled, while Revoke charters remains available for the forty existing policies. Revocation uses each saved charter’s valid ceiling, so an unfinished new form cannot prevent cancellation. This is an inspected 390-pixel browser capture with unchanged PNG bytes, not a normal empty campaign state.',
+      ] },
+      { id: 'keep-each-order-accountable', title: 'Keep each order accountable', paragraphs: [
+        'The worker validates the entire request before applying its first command, then records ordinary setCharter commands in stable settlement-ID order. The simulation retains authority over legality and production. One final permitted observation reports the results; a canonical refusal does not undo earlier accepted orders or prevent later valid ones.',
+        'These commands are not an atomic transaction. If recording fails after a mutation, processing stops, the actual partial state is returned and restoration is required. Missing or unreadable responses also finish pending work and lock further orders until a saved campaign is restored. The interface does not leave a spinner running or quietly retry an uncertain order.',
+      ] },
+      { id: 'follow-forty-hearths', title: 'Follow forty hearths', paragraphs: [
+        'The authored Legendary browser fixture has forty owned hearths, one hundred owned armies and 4,000 armies overall. Real controls select across pages, filters and tabs, apply forty Wealth charters, save, override one hearth, revoke at 390 pixels and restore the exact saved hash. Assignment preserves treasury, existing queues and explored knowledge, and sends one final worker packet. Separate cases exercise a real capacity refusal and two damaged-response recoveries.',
+        'A separate production journey begins a generated tiny two-realm campaign, founds a hearth through ordinary controls, grants Wealth with a 24-coin ceiling, saves, revokes on a narrow screen and restores the policy. It passes without development hooks. These are controlled player journeys; the pictured large realm was authored for regression coverage rather than grown through an organic campaign.',
+        'The smaller worker fixture uses a Small map, generator 4 and seed 17, with forty authored hearths and two paid manual queues. Grouped and serial commands produce identical archives, replay and final hash e204a0e9. The grouped transfer is 193,929 bytes, including 1,981 result bytes, versus 7,409,845 bytes for forty serial responses. It publishes once instead of forty times. The retained 12.14ms and 459.89ms timings are one synthetic sample including cloning, not browser frame-time distributions or whole-campaign speedups.',
+      ] },
+      { id: 'a-further-step-toward-delegation', title: 'A further step toward delegation', paragraphs: [
+        'The pinned implementation passes 1,889 headless tests across 235 files with four local test workers, 12 affected Chromium journeys and the one new built-production charter journey. Typecheck, lint, content and art validation, and the Pages-subpath build pass. These scopes are reported separately, not added together. Earlier selector failures, sandbox subprocess refusals and a Git-history timeout under concurrent load remain in the evidence. Timeouts and assertions were unchanged. This seventh article’s publication checks follow separately.',
+        'Rules/save remain 31 and content remains 015468d1. No simulation rule, AI policy, price or save format changed, so pacing was not rerun for this interface and transport extension. The prior headline remains Standard 234, Long 342 and Epic 379, with Standard and Long above their approximate targets.',
+        'This advances existing ACT-32 scope without adding or cutting release obligations. M3 remains in progress: durable named groups, saved reusable templates, theater strategy, patrol and escort roles, broader governor decisions and combined mature-campaign delegation still need implementation and proof. All fifteen release gates remain open.',
+      ] },
+    ],
+    evidence: [
+      { label: 'Group charters verification', path: 'docs/development/2026-09-24-group-charters/README.md', note: 'Exact local results, failed attempts, authored browser scope and remaining delegation work.' },
+      { label: 'Group charter architecture', path: 'docs/architecture/0040-group-charters.md', note: 'Budget disclosure, preserved queues, canonical command authority and bounded worker publication.' },
+      { label: 'Independent integration review', path: 'docs/development/2026-09-24-group-charters/integration-review.md', note: 'Client and worker boundaries reviewed separately from browser execution.' },
+      { label: 'Worker evidence and client review', path: 'docs/development/2026-09-24-group-charters/worker-review.md', note: 'Forty-hearth serial comparison, exact bytes, sample timings and explicit reviewer authorship boundaries.' },
+      { label: 'Actual production charter journey', path: 'tests/production/group-charters.spec.ts', note: 'Generated campaign, ordinary founding and charter controls, narrow revocation and saved restoration without debug hooks.' },
+      { label: 'Original screenshot provenance', path: 'docs/development/2026-09-24-group-charters/screenshots/provenance.json', note: 'Exact inspected pixels and authored setup; the narrow view intentionally has an invalid unsubmitted grant ceiling.' },
+    ],
+  },
+  {
     publication: 'published', sourceRevision: '3ae1581089411a76ecfd08a8f5f811258c4f77f6', sequence: 6,
     id: 'group-postings', edition: '06', title: 'One posting for a hundred armies',
     subtitle: '23 September 2026 · Standing orders across a realm',

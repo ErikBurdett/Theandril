@@ -4,7 +4,7 @@ import { dispatches } from './content';
 describe('public dispatch contract', () => {
   it('accepts only explicitly published, revision-pinned entries in newest-work-first order', () => {
     expect(dispatches.every(story => 'publication' in story && story.publication === 'published')).toBe(true);
-    expect(dispatches.map(story => story.id)).toEqual(['group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
+    expect(dispatches.map(story => story.id)).toEqual(['group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
     expect(dispatches.every(story => 'sourceRevision' in story && /^[0-9a-f]{40}$/.test(String(story.sourceRevision)))).toBe(true);
   });
   it('publishes the reviewed campaign foundation with its unresolved acceptance and historical pins intact', () => {
@@ -30,7 +30,7 @@ describe('public dispatch contract', () => {
     expect(story.evidence.some(link => link.path.endsWith('/persistence-review.md'))).toBe(true);
   });
   it('publishes bounded group postings without changing rules or closing M3', () => {
-    const story = dispatches[0]!;
+    const story = dispatches.find(entry => entry.id === 'group-postings')!;
     expect(story).toMatchObject({ id: 'group-postings', sequence: 6, sourceRevision: '3ae1581089411a76ecfd08a8f5f811258c4f77f6', topic: 'Engineering' });
     const text = story.sections.flatMap(section => section.paragraphs).join(' ');
     expect(text).toContain('1,876 headless tests across 234 files and seven affected Chromium journeys');
@@ -41,6 +41,21 @@ describe('public dispatch contract', () => {
     expect(text).toContain('M3 remains in progress');
     expect(text).toContain('all fifteen release gates remain open');
     expect([story.image, ...story.sections.map(section => section.image)]).toEqual(expect.arrayContaining(['group-postings-desktop', 'group-postings-narrow']));
+  });
+  it('publishes charter delegation with an honest error-state illustration and bounded proof', () => {
+    const story = dispatches[0]!;
+    expect(story).toMatchObject({ id: 'group-charters', sequence: 7, sourceRevision: 'f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9', topic: 'Engineering', image: 'group-charters-narrow' });
+    const text = story.sections.flatMap(section => section.paragraphs).join(' ');
+    expect(text).toContain('1,889 headless tests across 235 files with four local test workers');
+    expect(text).toContain('12 affected Chromium journeys and the one new built-production charter journey');
+    expect(text).toContain('empty, unsubmitted grant ceiling');
+    expect(text).toContain('Revoke charters remains available');
+    expect(text).toContain('193,929 bytes, including 1,981 result bytes, versus 7,409,845 bytes');
+    expect(text).toContain('Rules/save remain 31 and content remains 015468d1');
+    expect(text).toContain('saved reusable templates');
+    expect(text).toContain('M3 remains in progress');
+    expect(text).toContain('All fifteen release gates remain open');
+    expect(story.evidence.some(link => link.path === 'tests/production/group-charters.spec.ts')).toBe(true);
   });
   it('publishes the campaign-safety checkpoint without claiming a release', () => {
     const story = dispatches.find(item => item.id === 'r17-campaign-safety');

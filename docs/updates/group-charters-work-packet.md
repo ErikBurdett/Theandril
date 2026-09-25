@@ -1,13 +1,30 @@
-# Give every hearth a standing brief
+# One charter policy for forty hearths
 
 ## Identity and publication boundary
 
-- Proposed slug: `group-charters`; planned edition **07**, topic **Engineering**.
-- **Draft.** Implementation source is not yet committed or pinned. Browser results, retained imagery and final checks are pending. Do not add this draft to the public catalog yet.
+- Slug: `group-charters`; edition **07**, topic **Engineering**.
+- **Publication prepared; independent editorial review and final publication checks pending.** The user authorized deployment. The structured article and exact narrow image are now in the candidate catalog, pinned to implementation **`f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9`**.
 - Existing scope: **ACT-32 / M3**, extending settlement delegation. No new release obligation or scope cut.
 - Rules/save remain **31** and content remains **`015468d1`**. Simulation rules, AI decisions, canonical state, save formats and campaign prices are unchanged.
 
-## Candidate article
+## Publication preparation
+
+The final article is in `apps/web/src/updates/content.ts`, titled **One charter policy for forty hearths**. It reports the pinned 1,889-test/235-file run, 12 affected Chromium journeys and one new built-production charter journey as separate scopes. It preserves failed attempts and correction boundaries. The image caption explicitly describes the deliberately empty, unsubmitted grant ceiling: grant is disabled while the forty existing charters can still be revoked. It does not present that fixture as organic play or a normal empty state.
+
+Only `group-charters-narrow.png` is added publicly: **124,703 bytes**, **390 × 844**, SHA256 **`aa3fa051dd44a94c58f10c07ae5796fdb168e523e627f28d3fba08a0e3b4e25f`**. It is byte-identical to the inspected source under `docs/development/2026-09-24-group-charters/screenshots/`, with no crop, resize or re-encoding. The existing 390px article rule also applies to this image. The frontend and public provenance manifests remain identical, and total journal imagery is **3,037,452 bytes**, below the unchanged **3 MiB** budget.
+
+The current library/roadmap advances to the implementation pin and 24 September snapshot. Existing group charter assignment is now delivered; broader governor decisions, durable named groups, saved reusable templates, theaters and combined mature-campaign delegation remain unfinished. Counts computed from the current library remain **6 completed / 13 in progress / 4 pending** roadmap items; all **15 release gates** stay open (**13 in progress / 2 pending**). All six previous dispatch objects and eleven prior media records remain unchanged.
+
+Focused verification on 2026-09-24:
+
+```text
+./node_modules/.bin/vitest run apps/web/src/updates/content.test.ts apps/web/src/updates/media.test.ts apps/web/src/updates/roadmap.test.ts apps/web/src/updates/validation.test.ts apps/web/src/updates/journal.test.ts
+5 files passed; 25 tests passed; 458ms; started 17:12:35
+```
+
+The approved execution includes real Git-object checks at declared immutable pins. Scoped ESLint and `git diff --check` pass. This preparation did not run a full suite, browser, server, commit or deployment. The parent owns the seven-entry home/reader expectations, full publication Pages run and public readback. Independent editorial review is separate from author preparation.
+
+## Earlier candidate article, retained as draft history
 
 A growing realm needs a way to give several hearths the same standing brief without opening every settlement panel. The registry now selects up to 128 owned hearths across its existing 25-row pages. Search and registry changes keep that selection, independently of selected armies. Choose Works, Wealth, Learning or Muster and a coin ceiling, then apply the existing charter policy to the group. The resulting charters remain individual saved orders that can be changed at one hearth later; the selection and shared form are temporary conveniences, not durable named templates.
 
@@ -23,7 +40,7 @@ The browser work uses different evidence: an authored Legendary realm with forty
 
 This advances M3 without completing it. Durable named groups and reusable templates, theaters, patrol and escort roles, broader governor decisions and combined mature-campaign delegation remain open. No release gate is closed by this draft or by a later successful deployment.
 
-## Evidence and publication handoff
+## Earlier evidence and publication handoff
 
 [Architecture 0040](../architecture/0040-group-charters.md) records the boundary and cost. Implementation lives in `apps/web/src/group-charters.tsx`, the realm registry, `main.tsx`, the shared group request ledger, protocol and worker. The focused worker handoff reports **18 passing checks, including six new charter checks**; these are one execution scope, not 18 plus six, and must not be added to a later full-suite count.
 
@@ -33,7 +50,7 @@ Before publication: commit and resolve the implementation SHA; reconcile final c
 
 ## Completed local implementation checks
 
-The source pin is assigned after the implementation commit. At this checkpoint,
+The implementation pin is `f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9`. At this checkpoint,
 1,889 tests across 235 files pass with four local workers, 12 affected gameplay
 journeys pass, and the built production charter journey passes without debug
 hooks. Typecheck, lint, content/art validation and the Pages-subpath build pass.
@@ -42,4 +59,9 @@ selector attempts, sandbox subprocess refusals, a concurrency timeout and their
 scoped corrections. Desktop and 390px original screenshots were inspected; narrow
 revocation remains available with an invalid unsubmitted grant ceiling.
 Independent integration/client reviews found no actionable defect. Publication
-still needs the pinned article, catalog/layout review and live readback.
+has the pinned article prepared and still needs independent catalog/layout review
+and live readback.
+
+## Final publication preparation
+
+Independent [publication review](../development/2026-09-24-group-charters/publication-review.md) found no blocking issue. The final source candidate passes 1,891 tests across 235 files and 29 production Pages journeys, with typecheck, lint and the build passing. [Publication verification](../development/2026-09-24-group-charters/publication-verification.md) retains exact scopes, inspected desktop/narrow/enlarged-text images, and corrected local storage/socket-path failures. The user’s prior deployment authorization continues to apply. Public readback follows the push.
