@@ -1,0 +1,73 @@
+{
+  "revision": "676d56471cb806fb007fc0207ea16b0b638c467c",
+  "sourceRevision": "0d26fa3c34ac89164637f515e95671420400a841",
+  "date": "2026-09-26",
+  "game": "https://erikburdett.github.io/Theandril/",
+  "dispatch": "https://erikburdett.github.io/Theandril/updates/dispatches/?dispatch=selection-groups",
+  "actions": [
+    {
+      "name": "Verify build",
+      "id": 36258443325,
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "676d56471cb806fb007fc0207ea16b0b638c467c",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36258443325"
+    },
+    {
+      "name": "Publish development demo to Pages",
+      "id": 36258443288,
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "676d56471cb806fb007fc0207ea16b0b638c467c",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36258443288"
+    }
+  ],
+  "checks": {
+    "headless": {
+      "passed": 1943,
+      "files": 243,
+      "seconds": 55.54,
+      "log": "publication-tests.log"
+    },
+    "finalDatePublication": {
+      "passed": 24,
+      "files": 4,
+      "seconds": 0.208,
+      "log": "publication-final-date-tests.log"
+    },
+    "affectedGameplay": {
+      "passed": 20,
+      "log": "browser-final.log"
+    },
+    "localPages": {
+      "passed": 31,
+      "seconds": 54.5,
+      "log": "publication-pages.log"
+    },
+    "livePages": {
+      "passed": 31,
+      "duration": "1.2m",
+      "log": "live-pages.log"
+    },
+    "local64Seat": {
+      "passed": true,
+      "seconds": 10.256439,
+      "log": "local-64-seat.log"
+    },
+    "live64Seat": {
+      "passed": true,
+      "seconds": 13.535208260000001,
+      "log": "live-64-seat.log",
+      "evidence": "live-64-seat/live-64-seat.json",
+      "exports": 3,
+      "canonicalHash": "838191d9"
+    },
+    "exactReadback": "live-readback.json"
+  },
+  "retainedCorrections": [
+    "The final date-only source-pin check initially could not spawn Git under the sandbox; the authorized retry passed unchanged.",
+    "The standalone 64-seat runner initially failed its console check on Chromium\u2019s automatic root favicon404. CDP identified the exact request; only that correlated implicit browser-icon request is retained as a warning. All game errors remain fatal. Initial and diagnostic failures are retained.",
+    "Earlier implementation integration, browser synchronization and schema-limit failures remain recorded in README.md."
+  ],
+  "releaseGates": "All15 remain open; ACT-32/M3 remain in progress. DH-020 live save acceptance is met; ACT-36 awaits final clean synchronized publication."
+}

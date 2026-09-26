@@ -1,6 +1,6 @@
 # Saved realm groups — work packet
 
-- State: edition 09 independently reviewed and verified for authorized publication. Final publication checks pass 1,943 tests / 243 files and 31 local production Pages journeys; deployment and live verification follow. Implementation evidence remains separately pinned (1,941 tests / 243 files, 20 affected browser journeys, one production journey).
+- State: edition 09 published as `676d56471cb806fb007fc0207ea16b0b638c467c`, with successful build/Pages workflows, 31 local and 31 live production journeys, exact readback and independent live review. Implementation evidence remains pinned separately.
 - Source baseline: `6cb7692c800464d3c5ad66b42df6cf063ffeb0ca`.
 - Verified implementation source: `0d26fa3c34ac89164637f515e95671420400a841`.
 - Rules/save: 32; content remains `015468d1`.
@@ -79,3 +79,13 @@ canonical-state, archive and replay comparisons. The initial attempts failed
 on Chromium’s implicit root favicon 404, then a diagnostic run correlated
 its exact URL/CDP request. That narrow browser warning is retained separately;
 all game errors still fail. The runner and evidence are retained for live reuse.
+
+## Publication outcome
+
+Both workflows passed for the exact publication above. The live 31-journey
+suite and separate ordinary-control 64-seat save/reload/export/import check
+pass; the latter retains exact state and archive comparisons and three actual
+downloads. Independent live image and download review finds no blocker.
+DHARMA resolves DH-020, advances ACT-32/M3 and keeps ACT-36 doing until final
+clean/synchronized evidence publication. See [deployment and live evidence](../development/2026-09-25-selection-groups/deployment.json).
+All fifteen release gates remain open. No gameplay scope or pricing was added.

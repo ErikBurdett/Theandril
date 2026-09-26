@@ -1,0 +1,144 @@
+{
+  "mode": "apply",
+  "revision": "676d56471cb806fb007fc0207ea16b0b638c467c",
+  "original_publication_revision": "676d56471cb806fb007fc0207ea16b0b638c467c",
+  "verified_live_source": "0d26fa3c34ac89164637f515e95671420400a841",
+  "verified_live_image": {
+    "path": "apps/web/public/updates/selection-groups-recall.png",
+    "bytes": 15348,
+    "sha256": "28236174d7b432ccf6ed1188b9529fe9a5f41d8b45ca61a7c59358a58f42e2ec"
+  },
+  "implementation_and_evidence_committed": true,
+  "uncommitted_required_paths": [],
+  "verified_logs_sha256": {
+    "docs/development/2026-09-25-selection-groups/publication-tests.log": "7ce00aca0da138c31d022988da7ef065e575f2d3225d73e4b14044568ddbd20a",
+    "docs/development/2026-09-25-selection-groups/browser-final.log": "b0c170549d8e4b01d5c8f24d5bba757ee9882ea073caf8259d141faac35bc3d7",
+    "docs/development/2026-09-25-selection-groups/publication-pages.log": "b4ff079daaada415c141d327aaa34dddf56e17e0adbb9b0cafbc5b4a31e12188",
+    "docs/development/2026-09-25-selection-groups/live-pages.log": "971703a174878e9df8394018c7ab4b96a83c1216a1048be1e0e982afbc2ce398",
+    "docs/development/2026-09-25-selection-groups/live-readback.json": "8e0a93be2c697a8d6741ebd6c79357bfd951266006cf36ec071c43ffaf956eb7",
+    "docs/development/2026-09-25-selection-groups/deployment.json": "5e92eebd3f94307c693e3ef912d54577a53b046fa8e1b20ba1f5f35046eecfa6",
+    "docs/development/2026-09-25-selection-groups/live-64-seat.log": "eefc115ddb7650280dd8ccd2f4c9193adb644ca5abdda2b955e6181137aefd4d",
+    "scripts/verify-sixty-four-seat-save.ts": "6a53bb99ca14c74250e92c84f58417df7d11023b5bad8173be69b27b41fd94e0",
+    "docs/development/2026-09-25-selection-groups/live-64-seat/before-manual-save.theandril": "c06a9a351a8ed6b4f1120d3f22d67e6b5f0768fce80d8bed5d04f5b1c4131c45",
+    "docs/development/2026-09-25-selection-groups/live-64-seat/after-manual-load.theandril": "5d7f43104290ca71664e912b5c31dfdd41e3b29b9b851ed85f5adb252fa8f7d1",
+    "docs/development/2026-09-25-selection-groups/live-64-seat/after-portable-import.theandril": "5d7f43104290ca71664e912b5c31dfdd41e3b29b9b851ed85f5adb252fa8f7d1",
+    "docs/development/2026-09-25-selection-groups/live-64-seat/live-64-seat.json": "40dca4b4546c83f388688493e403229f9c67ebfcb67e8974da0416cd328237c2"
+  },
+  "verified_live_64_seat": {
+    "revision": "676d56471cb806fb007fc0207ea16b0b638c467c",
+    "sourceRevision": "0d26fa3c34ac89164637f515e95671420400a841",
+    "origin": "https://erikburdett.github.io/Theandril/",
+    "rulesVersion": 32,
+    "contentHash": "015468d1",
+    "totalSeats": 64,
+    "issue": "DH-020",
+    "passed": true,
+    "stage": "complete",
+    "developmentHooks": false,
+    "startedOnLive": true,
+    "manualSaveSucceeded": true,
+    "pageReloaded": true,
+    "resumedSavedCampaign": true,
+    "errors": [],
+    "beforeSave": {
+      "path": "docs/development/2026-09-25-selection-groups/live-64-seat/before-manual-save.theandril",
+      "bytes": 89544,
+      "sha256": "c06a9a351a8ed6b4f1120d3f22d67e6b5f0768fce80d8bed5d04f5b1c4131c45",
+      "stateHash": "838191d9"
+    },
+    "afterReload": {
+      "path": "docs/development/2026-09-25-selection-groups/live-64-seat/after-manual-load.theandril",
+      "bytes": 89541,
+      "sha256": "5d7f43104290ca71664e912b5c31dfdd41e3b29b9b851ed85f5adb252fa8f7d1",
+      "stateHash": "838191d9"
+    },
+    "afterImport": {
+      "path": "docs/development/2026-09-25-selection-groups/live-64-seat/after-portable-import.theandril",
+      "bytes": 89541,
+      "sha256": "5d7f43104290ca71664e912b5c31dfdd41e3b29b9b851ed85f5adb252fa8f7d1",
+      "stateHash": "838191d9"
+    },
+    "evidence": "docs/development/2026-09-25-selection-groups/live-64-seat/live-64-seat.json",
+    "log": "docs/development/2026-09-25-selection-groups/live-64-seat.log"
+  },
+  "verified_deployment_actions": [
+    {
+      "name": "Verify build",
+      "id": 36258443325,
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "676d56471cb806fb007fc0207ea16b0b638c467c",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36258443325"
+    },
+    {
+      "name": "Publish development demo to Pages",
+      "id": 36258443288,
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "676d56471cb806fb007fc0207ea16b0b638c467c",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36258443288"
+    }
+  ],
+  "verified_final_deployment_actions": null,
+  "ACT-32": {
+    "status": "doing",
+    "updated": "2026-09-26",
+    "fix": "Continue bounded theaters and patrol/escort roles, army-order templates, production sequences and broader governor decisions over existing saved army/hearth selection groups, standing charters, muster points, group postings, group settlement charters, the personal charter-template library and cause-grouped alerts. Preserve individual overrides, inspectable blockers, ordinary command authority, historical replay and bounded worker publication.",
+    "prompt": "Context: ~/Work/Theandril, rules/save 32 and content 015468d1. Read docs/1.0-DEVELOPMENT.md M3, docs/architecture/0042-selection-groups.md and docs/development/2026-09-25-selection-groups/README.md. Standing charters, postings/musters, cause-grouped alerts, group army postings, group settlement charters and personal browser charter templates already exist. Canonical saved selections now retain up to 24 named army/hearth groups per realm with up to 128 members each; Recall only restores eligible checks, while applying orders remains explicit. Final publication verification passes 1,943 headless tests across 243 files, 20 affected Chromium journeys, 31 local production Pages journeys and 31 live Pages journeys. These are separate suite scopes, not additive test totals.\n\nTask: deliver the next dependency-ready slice of bounded theaters/patrol/escort orders, army-order templates, production sequences or broader governor decisions. Reuse completed saved groups, selection, batching and personal charter templates instead of rebuilding them.\n\nNext acceptance: in a saved representative mature realm with 100+ armies and many hearths, use ordinary player controls to delegate a policy and coordinated order, inspect and resolve grouped blockers, and override one actor without disabling the others. Prove canonical validation, permitted AI knowledge where relevant, deterministic save/replay, keyboard/narrow controls and bounded measured transfers. Keep personal templates separate from canonical group/order state. Measure headline pacing when rules or AI behavior can change campaign outcomes. Theaters, patrol/escort roles, army-order templates, production sequences, broader governor decisions and combined mature-realm acceptance remain open. Publication requires authorization for the new task.",
+    "append_history": {
+      "date": "2026-09-26",
+      "status": "doing",
+      "note": "2026-09-26 verified saved-selection-group progress at published HEAD 676d56471cb806fb007fc0207ea16b0b638c467c, implementation source 0d26fa3c34ac89164637f515e95671420400a841. Each realm can retain up to 24 named selection groups of owned land armies or hearths combined, with at most 128 members each. Ordinary canonical commands create, rename, replace or delete groups. A dedicated deterministic group counter preserves gameplay entity IDs, and observations expose only detached own groups to the viewer. Choosing a saved record issues no order; explicit Recall replaces the eligible selection on that registry tab, and posting/charter application remains a separate action. Permanent member loss is pruned at relevant successful lifecycle commands; empty named groups and temporarily embarked land armies are retained. Groups survive canonical save/reload, replay and campaign export/import. Genuine prechange rules-31 snapshots and archives retain their original bytes and seals; older saves gain fresh empty group registers. Rules 32 also repairs the existing 64-seat save limit for arcane research; earlier strict schemas stay frozen. Final publication verification passes 1,943 headless tests across 243 files, 20 affected Chromium journeys, 31 local production Pages journeys and 31 live Pages journeys. These are separate suite scopes, not additive test totals. Rules/save 32 adds organizational metadata and repairs the current 64-seat save research-register limit while preserving historical schema limits; content remains 015468d1. No AI strategy or campaign prices changed. Evidence: ~/Work/Theandril/docs/development/2026-09-25-selection-groups/. ACT-32 and M3 remain in progress. Theaters, patrol/escort roles, army-order templates, production sequences, broader governor decisions and combined mature-realm acceptance remain open. All 15 release gates remain open."
+    }
+  },
+  "ACT-36": {
+    "status": "doing",
+    "updated": "2026-09-26",
+    "completed": null,
+    "append_history": {
+      "date": "2026-09-26",
+      "status": "doing",
+      "note": "2026-09-26: implementation source 0d26fa3c34ac89164637f515e95671420400a841 and publication 676d56471cb806fb007fc0207ea16b0b638c467c are committed and live. Final publication verification passes 1,943 headless tests across 243 files, 20 affected Chromium journeys, 31 local production Pages journeys and 31 live Pages journeys. These are separate suite scopes, not additive test totals. Exact live identity/image readback and successful Verify build/Pages workflow records are retained. The separate ordinary-control live 64-seat campaign saves, reloads and exports identical canonical snapshots, resolving DH-020. ACT-36 remains doing until final evidence is committed, master is clean and synchronized, and the final deployed revision receives its own successful workflow records and exact readback. Evidence: ~/Work/Theandril/docs/development/2026-09-25-selection-groups/."
+    }
+  },
+  "DH-020": {
+    "status": "resolved",
+    "updated": "2026-09-26",
+    "resolved": "2026-09-26",
+    "append_history": {
+      "date": "2026-09-26",
+      "status": "resolved",
+      "note": "2026-09-26: DH-020 resolved at publication 676d56471cb806fb007fc0207ea16b0b638c467c, implementation source 0d26fa3c34ac89164637f515e95671420400a841. Rules/save 32 supports 64 arcane-research rows and keeps earlier strict schemas frozen; unrepresentable historical exports are refused. A 64-seat campaign created through ordinary controls on the live Pages site, without development hooks, completed manual save, full-page reload/resume and portable export. Separate retained before/after downloads have identical canonical snapshot bytes and state hash 838191d9; both carry 64 factions and complete matching 64-row research registers. The dedicated live runner and download bytes are independently checked by this helper. This fixes save integrity only; ACT-32/M3 and all 15 release gates remain open. Evidence: ~/Work/Theandril/docs/development/2026-09-25-selection-groups/live-64-seat/live-64-seat.json."
+    },
+    "append_evidence": {
+      "label": "Live 64-seat save/reload/export evidence",
+      "url": "https://github.com/ErikBurdett/Theandril/commit/676d56471cb806fb007fc0207ea16b0b638c467c",
+      "note": "docs/development/2026-09-25-selection-groups/live-64-seat/live-64-seat.json; before/after canonical hash 838191d9; actual compressed downloads and separate successful browser runner retained locally."
+    }
+  },
+  "Theandril.M3": {
+    "status": "in-progress",
+    "detail": "Standing charters, muster points, army postings, cause-grouped alerts, bounded group postings/charters and the personal browser charter-template library are delivered. The 25 September saved-groups slice adds persistent canonical selections: Each realm can retain up to 24 named selection groups of owned land armies or hearths combined, with at most 128 members each. Ordinary canonical commands create, rename, replace or delete groups. A dedicated deterministic group counter preserves gameplay entity IDs, and observations expose only detached own groups to the viewer. Choosing a saved record issues no order; explicit Recall replaces the eligible selection on that registry tab, and posting/charter application remains a separate action. Permanent member loss is pruned at relevant successful lifecycle commands; empty named groups and temporarily embarked land armies are retained. Groups survive canonical save/reload, replay and campaign export/import. Genuine prechange rules-31 snapshots and archives retain their original bytes and seals; older saves gain fresh empty group registers. Rules 32 also repairs the existing 64-seat save limit for arcane research; earlier strict schemas stay frozen. Final publication verification passes 1,943 headless tests across 243 files, 20 affected Chromium journeys, 31 local production Pages journeys and 31 live Pages journeys. These are separate suite scopes, not additive test totals. Rules/save 32, unchanged content 015468d1. Theaters, patrol/escort roles, army-order templates, production sequences, broader governor decisions and combined mature-realm acceptance remain open."
+  },
+  "Theandril.roadmap_recomputed_fields": {
+    "done": 59,
+    "total": 108,
+    "updated": "2026-09-26",
+    "note": "6 of 23 catalogue items are complete and all 15 release gates remain open. Rules/save 32 adds canonical saved army/hearth selection groups to finite fleet supplies, group orders and the separate personal charter-template library. Acceptance-point totals are recomputed from the structured delivered/remaining catalogue bullets. Editorial regrouping changes these totals; they are not a fixed-scope completion percentage or release acceptance."
+  },
+  "unchanged": [
+    "all unrelated actions/issues",
+    "all existing histories/evidence",
+    "all other projects and milestones",
+    "release-gate status"
+  ],
+  "build_on_apply": {
+    "command": [
+      "/home/telephoneheater/Projects/PIA/pia-tracker/scripts/run.sh",
+      "build"
+    ],
+    "TRACKER_HOME": "/home/telephoneheater/Projects/DHARMA/dharma-tracker"
+  }
+}
+== dharma-tracker build 2026-09-26T12:59:51-05:00
+built 2 editions → /home/telephoneheater/Projects/DHARMA/dharma-tracker/site

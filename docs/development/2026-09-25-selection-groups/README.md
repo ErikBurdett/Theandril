@@ -1,7 +1,7 @@
 # Saved realm groups — 25 September 2026
 
-Implemented and locally verified checkpoint. Publication and live verification
-are separate; all fifteen release gates remain open.
+Implemented, independently reviewed and published on 26 September. Local
+and live verification are recorded separately; all fifteen release gates remain open.
 
 ## Player outcome
 
@@ -157,3 +157,30 @@ verified exports; [result](local-64-seat/local-64-seat.json), actual downloads a
 screenshots are retained. Exact canonical state remains 911,896 bytes with hash
 `838191d9`. This runtime was already built before the verifier was introduced;
 only the test runner changed. Live verification follows publication.
+
+## Published and verified live — 26 September
+
+Published **`676d56471cb806fb007fc0207ea16b0b638c467c`**, implementation
+**`0d26fa3c34ac89164637f515e95671420400a841`**. Both GitHub workflows pass;
+[deployment.json](deployment.json) retains exact run IDs and links.
+[Live Pages](live-pages.log): **31/31**, 1.2 minutes. The separate
+[live 64-seat check](live-64-seat.log) passes in **13.535 seconds**, with
+three actual exported campaigns and exact canonical/archive/replay comparison.
+[Live result and downloads](live-64-seat/live-64-seat.json) retain hash
+`838191d9` and all 64 faction-owned research rows. This is one real first-turn
+40+24 campaign, not mature-campaign or pacing acceptance. The implicit root
+favicon warning remains explicit in raw browser diagnostics.
+
+[Exact readback](live-readback.json) verifies the published commit, article pin,
+roadmap deep link and byte-identical image. [Independent live review](live-review.md)
+inspects the displayed journal and saved game, and independently compares the
+actual downloads. No blocker remains within this verification scope.
+
+The guarded DHARMA update and generated-page readback are retained in
+[tracker-apply.log](tracker-apply.log), [tracker-readback.json](tracker-readback.json)
+and [tracker context](tracker-context-after.txt). DH-020 is resolved. ACT-32/M3
+remain in progress; ACT-36 final closure requires the follow-up evidence commit
+to be clean, synchronized and live-verified. Catalogue totals are 59 delivered
+and 49 remaining editorial bullets, not a fixed-scope release percentage.
+All fifteen release gates remain open. No unrelated tracker records, histories,
+weekly writing, infrastructure or CI workflows were changed.
