@@ -1,0 +1,92 @@
+{
+  "date": "2026-09-25",
+  "baseRevision": "5774393676361c264e4e6d38a154cefb84f7e188",
+  "sourceState": "Uncommitted charter-template implementation above baseRevision; exact source hashes below. Parent assigns the implementation pin when committing.",
+  "sourceHashes": {
+    "apps/web/src/charter-templates.tsx": "c65a6f9833b0000cfbc047544ce7446223006e9d613db6f62e4316cfd1deae3a",
+    "apps/web/src/group-charters.tsx": "7109237c8274920b4e5f75ad3b50110899b8c5b79f6fec2d727147505aaef1c6",
+    "packages/persistence/src/charter-templates.ts": "c9488403b72763490ad886693ca55a987afd579713ce73cb7de2865dc9a6e514",
+    "tests/gameplay/charter-templates.spec.ts": "3c507060e8effc6fc15ebba104c4c1116591d2efbc635d79a101364d8dfc8790",
+    "tests/production/charter-templates.spec.ts": "33522d00f80aa2895fb40e56f0cf31201ac9a6a910b827df28fbb5baae489065",
+    "packages/test-fixtures/src/empire-land-fixture.ts": "444e23982b6f6920899e83b54a7d5029594d78410acf53cf5ced18c2663bbfac",
+    "packages/test-fixtures/src/index.ts": "8feb55cf6a9c2b60cbe0b8aa37c46b0cd6df7b2752e4c49aa6b72262b6d52c09"
+  },
+  "scenario": {
+    "fixture": "empireLandCampaign(legendary)",
+    "generatorVersion": 4,
+    "seed": 20260905,
+    "ownedHearths": 40,
+    "ownedArmies": 100,
+    "totalArmies": 4000,
+    "authoredSetup": "Synthetic ownership and armies from the existing empire fixture; one production queue paid through ordinary applyCommand before import. Subsequent template, group charter, individual override, save/load and export actions use actual player controls.",
+    "organicCampaign": false
+  },
+  "browser": "Chromium selected through /usr/bin/chromium; Playwright 1.63.0",
+  "captureCommand": "TMPDIR=/home/telephoneheater/Work/Theandril/node_modules/.tmp PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium ./node_modules/.bin/playwright test tests/gameplay/charter-templates.spec.ts tests/gameplay/group-charters.spec.ts tests/gameplay/group-charter-recovery.spec.ts tests/gameplay/charters.spec.ts tests/gameplay/group-postings.spec.ts tests/gameplay/group-posting-recovery.spec.ts tests/gameplay/realm-navigation.spec.ts tests/gameplay/postings.spec.ts --output=docs/development/2026-09-25-charter-templates/browser-initial-artifacts > docs/development/2026-09-25-charter-templates/browser-initial.log 2>&1",
+  "verification": {
+    "result": "16 passed (1.8m)",
+    "log": "docs/development/2026-09-25-charter-templates/browser-final.log",
+    "firstRunLog": "docs/development/2026-09-25-charter-templates/browser-initial.log",
+    "failedBrowserAttempts": 0,
+    "scope": "Four new template journeys plus twelve existing affected gameplay journeys; not full gameplay or production verification."
+  },
+  "images": [
+    {
+      "path": "docs/development/2026-09-25-charter-templates/screenshots/charter-templates-desktop.png",
+      "source": "docs/development/2026-09-25-charter-templates/browser-initial-artifacts/charter-templates-a-saved--88d87-hs-individually-overridable/charter-templates-desktop.png",
+      "sha256": "8c10b548d99a54cade011f9594cdcc77b1fbf7f86335b19b225032509e76b6c2",
+      "bytes": 497781,
+      "width": 1440,
+      "height": 1000,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "deviceScaleFactor": 1,
+      "captureMode": "Playwright viewport screenshot",
+      "locator": null,
+      "transform": "none; original Playwright PNG bytes, no post-capture cropping, resizing or re-encoding",
+      "stage": "Study charter updated to Learning/32 and recalled before export and explicit Apply; no canonical charters yet.",
+      "capturedAt": "2026-09-26T00:36:45.538153+00:00",
+      "review": "Inspected exact PNG. Template name, policy, browser-local disclosure, actions and recall-before-Apply status are readable. Narrow viewport has no horizontal document overflow; the controls capture preserves the keyboard focus ring."
+    },
+    {
+      "path": "docs/development/2026-09-25-charter-templates/screenshots/charter-templates-narrow.png",
+      "source": "docs/development/2026-09-25-charter-templates/browser-initial-artifacts/charter-templates-a-saved--88d87-hs-individually-overridable/charter-templates-narrow.png",
+      "sha256": "84fe25141b07ba4d6cf39ea75e0241674026f77000208e6df567db4cd7b45e6d",
+      "bytes": 140582,
+      "width": 390,
+      "height": 844,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 1,
+      "captureMode": "Playwright viewport screenshot",
+      "locator": null,
+      "transform": "none; original Playwright PNG bytes, no post-capture cropping, resizing or re-encoding",
+      "stage": "Study charter recalled through keyboard controls after browser reload and manual campaign restoration; Learning/32 form awaits explicit Apply.",
+      "capturedAt": "2026-09-26T00:36:55.031562+00:00",
+      "review": "Inspected exact PNG. Template name, policy, browser-local disclosure, actions and recall-before-Apply status are readable. Narrow viewport has no horizontal document overflow; the controls capture preserves the keyboard focus ring."
+    },
+    {
+      "path": "docs/development/2026-09-25-charter-templates/screenshots/charter-templates-controls.png",
+      "source": "docs/development/2026-09-25-charter-templates/browser-initial-artifacts/charter-templates-a-saved--88d87-hs-individually-overridable/charter-templates-controls.png",
+      "sha256": "c13d1faf13474cd790dee991d426c51e82c0a9d2ea7970470585a144529cccea",
+      "bytes": 81322,
+      "width": 318,
+      "height": 724,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 1,
+      "captureMode": "Playwright locator screenshot",
+      "locator": "[data-testid=\"charter-templates\"]",
+      "transform": "none; original Playwright PNG bytes, no post-capture cropping, resizing or re-encoding",
+      "stage": "Direct locator capture of the open template controls at the same recalled-before-Apply stage; keyboard focus remains on Recall template.",
+      "capturedAt": "2026-09-26T00:36:55.126566+00:00",
+      "review": "Inspected exact PNG. Template name, policy, browser-local disclosure, actions and recall-before-Apply status are readable. Narrow viewport has no horizontal document overflow; the controls capture preserves the keyboard focus ring."
+    }
+  ]
+}

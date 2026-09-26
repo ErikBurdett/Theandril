@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { CHARTER_CEILING_MAX, CHARTER_CEILING_MIN, CHARTER_FOCI, CHARTER_NAMES, CHARTER_RESERVE, type CharterFocus, type GameCommand, type Observation } from '@theandril/sim';
 import { MAX_GROUP_ORDER_COMMANDS, type GroupCharterResult } from './protocol';
+import { CharterTemplates } from './charter-templates';
 
 export type GroupCharterCommand = Extract<GameCommand, { type: 'setCharter' }>;
 export type { GroupCharterResult } from './protocol';
@@ -28,6 +29,7 @@ export function GroupCharterOrders({ view, selected, matching, busy, issue, sele
   const [focus, setFocus] = useState<CharterFocus>('works');
   const [ceilingText, setCeilingText] = useState('24');
   const [pending, setPending] = useState(false);
+  const [templatesBusy, setTemplatesBusy] = useState(false);
   const [results, setResults] = useState<Array<GroupCharterResult & { name: string }>>();
   const [error, setError] = useState('');
   const mounted = useRef(true);
@@ -40,7 +42,7 @@ export function GroupCharterOrders({ view, selected, matching, busy, issue, sele
   const queuedCount = towns.filter(town => town.queue.length > 0).length;
   const ceiling = Number(ceilingText);
   const validCeiling = ceilingText.trim() !== '' && Number.isInteger(ceiling) && ceiling >= CHARTER_CEILING_MIN && ceiling <= CHARTER_CEILING_MAX;
-  const locked = busy || pending;
+  const locked = busy || pending || templatesBusy;
   const submit = async (nextFocus: CharterFocus | 'none') => {
     if (locked || (nextFocus !== 'none' && !validCeiling)) return;
     const commands = groupCharterCommands(view, checked, nextFocus, ceiling);
@@ -68,6 +70,7 @@ export function GroupCharterOrders({ view, selected, matching, busy, issue, sele
       <p className="field-help">Applying charters spends no coin now. Each hearth may spend up to its ceiling on one work whenever its queue is empty, once per turn after upkeep. All charters share your treasury and leave {CHARTER_RESERVE} coin in reserve.</p>
       <p className="field-help">Works, Wealth and Learning prioritize buildings; Muster raises land companies that add upkeep. Existing production orders stay in place. Revoking a charter stops future orders and keeps its current queue.</p>
       {queuedCount > 0 && <p className="field-help">{queuedCount} selected {queuedCount === 1 ? 'hearth already has' : 'hearths already have'} production queued; those orders come first.</p>}
+      <CharterTemplates focus={focus} ceiling={validCeiling ? ceiling : undefined} busy={busy || pending} onPendingChange={setTemplatesBusy} recall={template => { setFocus(template.focus); setCeilingText(String(template.ceiling)); }}/>
       <div className="group-selection-actions"><button className="primary" disabled={locked || !validCeiling} onClick={() => { void submit(focus); }}>Apply charters ({checked.size})</button><button disabled={locked || !charterCount} onClick={() => { void submit('none'); }}>Revoke charters ({charterCount})</button></div>
       {charterCount < checked.size && <p className="field-help">Revocation leaves the {checked.size - charterCount} selected {checked.size - charterCount === 1 ? 'hearth' : 'hearths'} without charters unchanged.</p>}
     </>}

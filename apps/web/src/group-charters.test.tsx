@@ -68,5 +68,7 @@ describe('group hearth charters', () => {
     expect(html).toContain(`min="${CHARTER_CEILING_MIN}" max="${CHARTER_CEILING_MAX}" step="1"`);
     expect(html).toContain('Coin ceiling per hearth<input');
     expect(html).toContain('<button class="primary" disabled="">Apply charters (1)</button>');
+    expect(html).toContain('<summary>Charter templates</summary>');
+    expect(html).toContain('not included in campaign exports');
   });
 });
