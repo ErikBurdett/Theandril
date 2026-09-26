@@ -4,8 +4,9 @@
 
 - Working title: Keep a charter worth repeating
 - Slug: charter-templates; proposed edition 08.
-- State: draft. Implementation and independent review pending.
-- Rules/save 31; content `015468d1`; no planned canonical change.
+- State: reviewed publication candidate; final local checks complete, live readback pending.
+- Source revision: `3ed4a6c456c3e4130fddf35b44dfdf51034cc269`.
+- Rules/save 31; content `015468d1`; no canonical change.
 
 ## Player outcome and scope
 
@@ -28,3 +29,9 @@ Storage: `packages/persistence/src/charter-templates.ts`. Controls: `apps/web/sr
 Implementation is complete locally. **1,902 tests/237 files**, **16 affected gameplay journeys**, and **one separate built-production template journey** pass. Typecheck, lint, content/art validation and Pages-subpath build pass. Independent storage and UI reviews caught and resolved the cached failed-open Retry defect; the real transient-denial browser case proves recovery. [Evidence](../development/2026-09-25-charter-templates/README.md) retains exact scopes and original screenshots.
 
 The proposed illustration is the unmodified 318×724 controls capture, 81,322 bytes, SHA256 `c13d1faf13474cd790dee991d426c51e82c0a9d2ea7970470585a144529cccea`. It shows an authored realm’s Study charter recalled with keyboard focus before explicit application, not organic campaign growth. It fits the existing three-MiB journal imagery budget. Source pin and final factual/publication checks follow the implementation commit.
+
+## Final local publication checks
+
+Edition 08 and the current library are pinned to the implementation above. The final publication suite passes **1,904 tests/237 files** and **30 local production Pages journeys**. Typecheck, lint and production build pass. The initial test-only typecheck failure is retained and the corrected roadmap assertions pass all nine focused tests. Independent factual and displayed-pixel review finds no blocking issue. [Final evidence](../development/2026-09-25-charter-templates/publication-verification.md) separates this scope from the earlier implementation checks.
+
+All seven older articles and twelve older images remain unchanged. Thirteen images total 3,118,774 bytes under the unchanged three-MiB budget. Desktop, narrow and 130% text layouts are inspected. The raster preview shrinks on narrow screens; the caption scales and the original image remains accessible. Prior user authorization covers publication; exact Actions and public readback follow deployment.

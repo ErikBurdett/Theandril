@@ -4,7 +4,7 @@ import { dispatches } from './content';
 describe('public dispatch contract', () => {
   it('accepts only explicitly published, revision-pinned entries in newest-work-first order', () => {
     expect(dispatches.every(story => 'publication' in story && story.publication === 'published')).toBe(true);
-    expect(dispatches.map(story => story.id)).toEqual(['group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
+    expect(dispatches.map(story => story.id)).toEqual(['charter-templates', 'group-charters', 'group-postings', 'fleet-provisions', 'campaign-foundation-and-development-order', 'r17-campaign-safety', 'keeping-the-record', 'twenty-four-cultures']);
     expect(dispatches.every(story => 'sourceRevision' in story && /^[0-9a-f]{40}$/.test(String(story.sourceRevision)))).toBe(true);
   });
   it('publishes the reviewed campaign foundation with its unresolved acceptance and historical pins intact', () => {
@@ -43,7 +43,7 @@ describe('public dispatch contract', () => {
     expect([story.image, ...story.sections.map(section => section.image)]).toEqual(expect.arrayContaining(['group-postings-desktop', 'group-postings-narrow']));
   });
   it('publishes charter delegation with an honest error-state illustration and bounded proof', () => {
-    const story = dispatches[0]!;
+    const story = dispatches.find(entry => entry.id === 'group-charters')!;
     expect(story).toMatchObject({ id: 'group-charters', sequence: 7, sourceRevision: 'f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9', topic: 'Engineering', image: 'group-charters-narrow' });
     const text = story.sections.flatMap(section => section.paragraphs).join(' ');
     expect(text).toContain('1,889 headless tests across 235 files with four local test workers');
@@ -56,6 +56,24 @@ describe('public dispatch contract', () => {
     expect(text).toContain('M3 remains in progress');
     expect(text).toContain('All fifteen release gates remain open');
     expect(story.evidence.some(link => link.path === 'tests/production/group-charters.spec.ts')).toBe(true);
+  });
+  it('publishes personal charter templates without implying automatic orders or campaign portability', () => {
+    const story = dispatches[0]!;
+    expect(story).toMatchObject({ id: 'charter-templates', sequence: 8, sourceRevision: '3ed4a6c456c3e4130fddf35b44dfdf51034cc269', image: 'charter-templates-controls' });
+    const text = story.sections.flatMap(section => section.paragraphs).join(' ');
+    expect(text).toContain('up to twenty-four policies');
+    expect(text).toContain('Recall template fills the form, and Apply charters remains a separate decision');
+    expect(text).toContain('not included in campaign exports');
+    expect(text).toContain('last committed write');
+    expect(text).toContain('Retry now opens a fresh connection');
+    expect(text).toContain('1,902 headless tests across 237 files in 55.46 seconds');
+    expect(text).toContain('Sixteen affected Chromium gameplay journeys pass in 1.8 minutes');
+    expect(text).toContain('one separate built-production template journey passes in 8.2 seconds');
+    expect(text).toContain('reported separately, not added together');
+    expect(text).toContain('Rules/save remain 31 and content remains 015468d1');
+    expect(text).toContain('M3 remains in progress');
+    expect(text).toContain('All fifteen release gates remain open');
+    expect(story.evidence.some(link => link.label === 'Charter templates verification' && link.path === 'docs/development/2026-09-25-charter-templates/README.md')).toBe(true);
   });
   it('publishes the campaign-safety checkpoint without claiming a release', () => {
     const story = dispatches.find(item => item.id === 'r17-campaign-safety');

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "licenseNotes": "Original owned Theandril gameplay screenshots and previously reviewed Hearth & Card interface artwork. Original provider/service terms apply; no new generation or provider call. No third-party game artwork, font CDN, terminal image, or campaign trace is shipped.",
-  "review": "Original four derivative reviews: docs/development/dispatches/frontend-evidence/REPORT.md. The two exact 21 September 2026 PNG captures were independently inspected in docs/development/2026-09-21-epic-baseline/review/final.md; publication layout is verified separately. The three exact 23 September 2026 fleet-provisions captures were inspected at desktop and 390px width; their source settings and hashes are retained in docs/development/2026-09-23-fleet-provisions/screenshots/provenance.json. Publication layout is verified separately. The two exact 23 September group-postings captures were inspected at desktop and 390px width; source hashes and authored setup are retained in docs/development/2026-09-23-deploy-and-group-postings/screenshots/provenance.json. Publication layout is verified separately. The exact 24 September group-charters narrow capture was inspected at 390px width; it deliberately shows an invalid unsubmitted grant ceiling with valid revocation. Source settings and hash are retained in docs/development/2026-09-24-group-charters/screenshots/provenance.json. Publication layout is reviewed separately.",
+  "review": "Original four derivative reviews: docs/development/dispatches/frontend-evidence/REPORT.md. The two exact 21 September 2026 PNG captures were independently inspected in docs/development/2026-09-21-epic-baseline/review/final.md; publication layout is verified separately. The three exact 23 September 2026 fleet-provisions captures were inspected at desktop and 390px width; their source settings and hashes are retained in docs/development/2026-09-23-fleet-provisions/screenshots/provenance.json. Publication layout is verified separately. The two exact 23 September group-postings captures were inspected at desktop and 390px width; source hashes and authored setup are retained in docs/development/2026-09-23-deploy-and-group-postings/screenshots/provenance.json. Publication layout is verified separately. The exact 24 September group-charters narrow capture was inspected at 390px width; it deliberately shows an invalid unsubmitted grant ceiling with valid revocation. Source settings and hash are retained in docs/development/2026-09-24-group-charters/screenshots/provenance.json. Publication layout is reviewed separately. The exact 25 September charter-templates controls capture was inspected at 318 by 724 pixels from a 390px viewport, preserving keyboard focus on Recall before explicit Apply. Original capture settings and hashes are retained in docs/development/2026-09-25-charter-templates/screenshots/provenance.json. Publication layout is reviewed separately.",
   "assets": [
     {
       "id": "campaign",
@@ -250,6 +250,25 @@
       "height": 844,
       "alt": "Forty selected hearths at 390 pixels wide: the grant ceiling is empty and Apply charters is disabled, while Revoke charters remains enabled.",
       "caption": "Authored Legendary regression, generator 4, seed 20260905: forty owned hearths, one hundred owned armies and 4,000 total armies. At 390 \u00d7 844 the player deliberately empties an unsubmitted grant ceiling; new grants are disabled, but the forty existing charters can still be revoked without replacing queued production. Exact uncropped PNG, not an organically grown realm or a normal empty form."
+    },
+    {
+      "id": "charter-templates-controls",
+      "path": "updates/charter-templates-controls.png",
+      "sourceRepository": "ErikBurdett/Theandril",
+      "sourceRevision": "3ed4a6c456c3e4130fddf35b44dfdf51034cc269",
+      "sourcePath": "docs/development/2026-09-25-charter-templates/screenshots/charter-templates-controls.png",
+      "sourceSha256": "c13d1faf13474cd790dee991d426c51e82c0a9d2ea7970470585a144529cccea",
+      "sourceWidth": 318,
+      "sourceHeight": 724,
+      "crop": null,
+      "resize": null,
+      "encoding": "Exact Playwright locator PNG bytes from the charter-templates controls at a 390 by 844 viewport; no later crop, resize or re-encoding.",
+      "sha256": "c13d1faf13474cd790dee991d426c51e82c0a9d2ea7970470585a144529cccea",
+      "bytes": 81322,
+      "width": 318,
+      "height": 724,
+      "alt": "The Study charter stores Learning with a 32-coin ceiling. Keyboard focus is on Recall template, and the status asks the player to review before Apply charters.",
+      "caption": "Authored Legendary regression, generator 4, seed 20260905: forty owned hearths, one hundred owned armies and 4,000 total armies. Exact 318 by 724 locator capture inside a 390 by 844 viewport, after browser reload and saved campaign restoration. Study charter has been recalled by keyboard; applying it remains a separate player action. Original PNG bytes, with no later crop, resize or re-encoding; not an organically grown realm."
     }
   ],
   "sharedMaterials": [

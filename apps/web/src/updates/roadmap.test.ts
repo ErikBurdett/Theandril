@@ -53,7 +53,7 @@ describe('the source-backed roadmap contract', () => {
     }
   });
   it('records current supply and pacing without completing a wider system or gate', () => {
-    expect(roadmapSnapshot).toMatchObject({ date: '2026-09-24', revision: 'f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9', rules: 31 });
+    expect(roadmapSnapshot).toMatchObject({ date: '2026-09-25', revision: '3ed4a6c456c3e4130fddf35b44dfdf51034cc269', rules: 31 });
     const supply = roadmapItems.find(item => item.id === 'supply-and-trade')!;
     expect(supply).toMatchObject({ stage: 'current-work', status: 'in-progress' });
     expect(supply.delivered.join(' ')).toContain('eight turns of provisions');
@@ -82,9 +82,22 @@ describe('the source-backed roadmap contract', () => {
     expect(empire.delivered.join(' ')).toContain('Up to 128 owned hearths');
     expect(empire.delivered.join(' ')).toContain('Assignment and revocation preserve queues and treasury');
     expect(empire.remaining.join(' ')).not.toContain('Complete settlement batch policies');
-    expect(empire.remaining.join(' ')).toContain('saved reusable order templates');
+    expect(empire.remaining.join(' ')).toContain('saved reusable army order templates');
     expect(empire.remaining.join(' ')).toContain('broader governor decisions');
     expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-24-group-charters/README.md')).toBe(true);
+  });
+  it('records browser-local charter templates while preserving the remaining M3 and release boundaries', () => {
+    const empire = roadmapItems.find(item => item.id === 'empire-management')!;
+    const text = empire.delivered.join(' ');
+    expect(empire.status).toBe('in-progress');
+    expect(text).toContain('Up to 24 named charter focus/ceiling templates');
+    expect(text).toContain('Apply charters remains explicit');
+    expect(text).toContain('campaign exports exclude the library');
+    expect(empire.remaining.join(' ')).toContain('production sequences');
+    expect(empire.remaining.join(' ')).toContain('durable named groups');
+    expect(empire.evidence.some(link => link.path === 'docs/development/2026-09-25-charter-templates/README.md')).toBe(true);
+    expect(roadmapCounts(roadmapItems)).toEqual({ completed: 6, 'in-progress': 13, pending: 4 });
+    expect(roadmapGates.every(gate => ['in-progress', 'pending'].includes(gate.status))).toBe(true);
   });
 });
 

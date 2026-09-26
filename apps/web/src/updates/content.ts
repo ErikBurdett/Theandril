@@ -5,6 +5,46 @@ export const sourceRevision = '8b3b8c148b7e8ee3689001210033fee7a1b8a6ef';
 export const repository = 'https://github.com/ErikBurdett/Theandril';
 const entries: Dispatch[] = [
   {
+    publication: 'published', sourceRevision: '3ed4a6c456c3e4130fddf35b44dfdf51034cc269', sequence: 8,
+    id: 'charter-templates', edition: '08', title: 'Keep a charter worth repeating',
+    subtitle: '25 September 2026 · Reusable charter policies',
+    summary: 'Save a useful charter policy by name, recall it in another campaign, then choose which hearths should receive it. A personal browser library keeps repeated setup apart from the orders already governing a realm.',
+    topic: 'Engineering', tags: ['Empire management', 'Charters', 'Templates', 'Browser storage', 'Accessibility'],
+    status: 'Reviewed checkpoint', checkpoint: 'Charter templates · ACT-32', image: 'charter-templates-controls',
+    takeaways: ['Keep up to twenty-four named charter policies in this browser, each with a focus and coin ceiling.', 'Recall fills the group form. Apply charters is still the explicit order that changes selected hearths; editing a template never changes existing charters.', 'Keyboard, narrow-screen and storage recovery journeys verify this bounded workflow. Broader templates, named groups and M3 acceptance remain open.'],
+    sections: [
+      { id: 'keep-a-useful-policy', title: 'Keep a useful policy', paragraphs: [
+        'A group of hearths may need the same brief several times: Learning with a 32-coin ceiling for one campaign, or Works with a smaller allowance for another. Open Charter templates inside the selected-hearth form, give the current focus and ceiling a name, and save it. The library holds up to twenty-four policies, with unique names of up to forty characters. Update replaces the selected saved policy; Delete removes it from the library.',
+        'Choosing a saved entry shows its name and policy without changing the charter form. Recall template fills the form, and Apply charters remains a separate decision. The pictured Study charter has been recalled by keyboard. Its visible message asks the player to review the policy before issuing orders. The exact 318-by-724-pixel locator capture shows the actual controls within a 390-pixel browser viewport, with no later crop, resize or re-encoding.',
+      ] },
+      { id: 'a-library-beside-the-campaign', title: 'A library beside the campaign', paragraphs: [
+        'The templates belong to this browser and origin. They survive refresh and a change of campaign, but are not included in campaign exports, synchronized to another device, or refreshed live from another open tab. Competing writes serialize; two tabs editing the same template use the last committed write. A template contains a name, a focus and a ceiling. It does not remember selected hearths or create a persistent named group.',
+        'Once applied, each hearth’s charter follows the existing simulation rules and is saved in the campaign as before. A template update does not rewrite those active charters. Individual overrides, partial refusals, existing production queues, the per-work ceiling and the shared forty-coin reserve remain unchanged. The template library adds no purchase, turn processing or worker message.',
+      ] },
+      { id: 'keep-failures-visible', title: 'Keep failures visible', paragraphs: [
+        'Storage reads and writes are bounded and validated. Unsupported or malformed stored rows are refused without being deleted or silently repaired. Duplicate names, a full library and failed writes produce a visible explanation. A failed library operation releases the ordinary charter controls, so the player can continue with the existing form. Retry reloads the library; it does not retry a game order.',
+        'Independent review found that reusing a connection after an initial denied open could keep Retry from working after access returned. Retry now opens a fresh connection. Leaving the panel defers connection closure until an in-flight storage operation settles, and a late reply cannot update a replacement panel. If a template change commits but the following refresh fails, the message states that the change was saved and the library could not be loaded.',
+      ] },
+      { id: 'follow-a-policy-through-real-controls', title: 'Follow a policy through real controls', paragraphs: [
+        'The authored Legendary browser fixture has forty owned hearths, one hundred owned armies and 4,000 armies in the world. Real controls save and update a policy, recall it by keyboard at 390 pixels, and verify that library actions do not change the canonical hash or worker-transfer totals. The actual compressed campaign export contains no template name or preference history. Applying forty Learning charters with a 32-coin ceiling then publishes one ordinary group response while preserving queues, treasury and explored knowledge. Individual override and exact campaign save restoration remain separate actions.',
+        'The same journey retains the library after refresh and deletes through the visible controls. Other cases expose denied and malformed storage, preserve the malformed row, and recover from a transient failed open in the same mounted panel. The separate production journey founds hearths in two generated tiny two-realm campaigns, retains the template between them, and exercises recall, explicit assignment, manual save, narrow revocation and restoration without development hooks. These controlled journeys do not establish organic growth of the pictured large realm or browser-wide release certification.',
+      ] },
+      { id: 'another-part-of-delegation', title: 'Another part of delegation', paragraphs: [
+        'The pinned implementation passes 1,902 headless tests across 237 files in 55.46 seconds with four local workers. Sixteen affected Chromium gameplay journeys pass in 1.8 minutes, and one separate built-production template journey passes in 8.2 seconds. Typecheck, lint, content and art validation, and the Pages-subpath build pass. These execution scopes overlap and are reported separately, not added together. The reviewed Retry defect and its correction remain in the evidence; the transient-denial browser case proves recovery. This eighth article’s publication checks follow separately.',
+        'Rules/save remain 31 and content remains 015468d1. This interface and personal preference store changes no simulation rule, AI decision, price or campaign save format. Pacing was not rerun; the earlier headline remains Standard 234, Long 342 and Epic 379, with Standard and Long above their approximate targets.',
+        'This advances existing ACT-32 scope without adding or cutting release obligations. M3 remains in progress. Saved charter policies cover one repeatable brief; army order templates, production sequences, durable named groups, theater strategy, patrol and escort roles, broader governor decisions and combined mature-campaign delegation remain unfinished. All fifteen release gates remain open.',
+      ] },
+    ],
+    evidence: [
+      { label: 'Charter templates verification', path: 'docs/development/2026-09-25-charter-templates/README.md', note: 'Exact local results, separate execution scopes, authored browser boundaries and remaining delegation work.' },
+      { label: 'Charter templates architecture', path: 'docs/architecture/0041-charter-templates.md', note: 'Personal preferences, explicit Recall and Apply, bounded storage and unchanged canonical commands.' },
+      { label: 'Independent storage review', path: 'docs/development/2026-09-25-charter-templates/integration-review.md', note: 'Transaction and validation review, explicit authorship boundaries and UI lifecycle self-review.' },
+      { label: 'Independent UI review', path: 'docs/development/2026-09-25-charter-templates/storage-and-ui-review.md', note: 'Cached failed-open finding, fresh-connection correction and direct-control independence.' },
+      { label: 'Actual production template journey', path: 'tests/production/charter-templates.spec.ts', note: 'Two generated campaigns, persistent browser preferences, explicit charter orders and saved restoration without debug hooks.' },
+      { label: 'Original screenshot provenance', path: 'docs/development/2026-09-25-charter-templates/screenshots/provenance.json', note: 'Exact inspected Playwright pixels, authored setup and keyboard Recall before explicit Apply.' },
+    ],
+  },
+  {
     publication: 'published', sourceRevision: 'f78ed07d04ffbc3310d05e0124aa6d8f9d5a09e9', sequence: 7,
     id: 'group-charters', edition: '07', title: 'One charter policy for forty hearths',
     subtitle: '24 September 2026 · Settlement delegation',
