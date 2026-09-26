@@ -30,11 +30,11 @@ for (const dimensions of [{ width: 1440, height: 1000, scale: 100 }, { width: 13
     await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
     await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
     await page.evaluate(scale => { document.documentElement.style.fontSize = `${scale}%`; }, dimensions.scale);
-    await expect(page.getByRole('heading', { level: 1, name: 'Keep a charter worth repeating' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Recall a group, then give the order' })).toBeVisible();
     await page.screenshot({ path: testInfo.outputPath('reader-top.png') });
-    await page.locator('.illustration-charter-templates-controls').scrollIntoViewIfNeeded();
-    await page.locator('.illustration-charter-templates-controls > button > img').evaluate(image => (image as HTMLImageElement).decode());
-    await page.locator('.illustration-charter-templates-controls').screenshot({ path: testInfo.outputPath('charter-templates-controls-illustration.png') });
+    await page.locator('.illustration-selection-groups-recall').scrollIntoViewIfNeeded();
+    await page.locator('.illustration-selection-groups-recall > button > img').evaluate(image => (image as HTMLImageElement).decode());
+    await page.locator('.illustration-selection-groups-recall').screenshot({ path: testInfo.outputPath('selection-groups-recall-illustration.png') });
     await page.getByRole('heading', { name: 'Another part of delegation' }).evaluate(element => element.scrollIntoView({ block: 'start' }));
     await page.screenshot({ path: testInfo.outputPath('reader-chapter.png') });
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
@@ -100,8 +100,8 @@ test('archive search combines topic filters, survives refresh and recovers from 
   await page.getByRole('button', { name: 'Engineering', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'No dispatches found' })).toBeVisible();
   await page.getByRole('button', { name: 'Reset search & filters', exact: true }).click();
-  await expect(page.getByRole('status')).toHaveText('8 dispatches');
-  await expect(page.locator('.dispatch-row')).toHaveCount(8);
+  await expect(page.getByRole('status')).toHaveText('9 dispatches');
+  await expect(page.locator('.dispatch-row')).toHaveCount(9);
 });
 
 test('scope ledger links real gates and a contributor can reach authoring guidance', async ({ page }) => {
@@ -113,7 +113,7 @@ test('scope ledger links real gates and a contributor can reach authoring guidan
   await expect(ledger.getByText('Proposal / deferred', { exact: true })).toBeVisible();
   await expect(ledger.getByText('Not this update', { exact: true })).toBeVisible();
   await expect(ledger).toContainText('observed supply');
-  await expect(ledger).toContainText('1,902 headless tests');
+  await expect(ledger).toContainText('1,941 headless tests');
   await expect(page.getByRole('link', { name: 'Definition of done', exact: true })).toHaveAttribute('href', /DEFINITION_OF_DONE.md$/);
   await expect(page.getByRole('heading', { name: 'The reference shelf' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Authoring guide', exact: true })).toHaveAttribute('href', /docs\/updates\/CONTRIBUTING.md$/);
@@ -140,11 +140,11 @@ test('public journal opens a permanent, refresh-safe campaign dispatch', async (
   await page.goto('updates/dispatches/');
   await expect(page.getByRole('heading', { name: 'Theandril Dispatches', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Read the featured dispatch' }).click();
-  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=charter-templates$/);
-  await expect(page.getByRole('heading', { level: 1, name: 'Keep a charter worth repeating' })).toBeVisible();
+  await expect(page).toHaveURL(/updates\/dispatches\/\?dispatch=selection-groups$/);
+  await expect(page.getByRole('heading', { level: 1, name: 'Recall a group, then give the order' })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole('heading', { level: 1, name: 'Keep a charter worth repeating' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Charter templates verification' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/3ed4a6c456c3e4130fddf35b44dfdf51034cc269/docs/development/2026-09-25-charter-templates/README.md');
+  await expect(page.getByRole('heading', { level: 1, name: 'Recall a group, then give the order' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Saved groups verification' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/0d26fa3c34ac89164637f515e95671420400a841/docs/development/2026-09-25-selection-groups/README.md');
   await page.getByRole('link', { name: 'A voyage needs stores for the way home', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Factual evidence review' })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/b623c2c91d4d852cba710f2d996c28a6b1b5d624/docs/development/2026-09-23-fleet-provisions/factual-review.md');
   await page.getByRole('link', { name: 'A campaign worth keeping', exact: true }).click();

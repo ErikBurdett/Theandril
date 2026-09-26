@@ -112,3 +112,48 @@ AI reads neither these groups nor their events. No new pacing run is claimed.
 The earlier headline remains Standard 234, Long 342 and Epic 379; Standard/Long
 remain above approximate targets. Full-suite proxy campaigns are separate
 regressions, not replacement headline pacing evidence.
+
+## Publication candidate verification — 26 September
+
+[Publication tests](publication-tests.log): **1,943 / 243 files**, 55.54s.
+Final date-only correction: [24 focused checks](publication-final-date-tests.log),
+208ms; the [first sandbox attempt](publication-final-date-sandbox.log) could not
+spawn Git. Assertions were retained. [Final typecheck](publication-final-typecheck.log),
+[lint](publication-lint.log) and [Pages build](publication-build.log) pass.
+[Local production Pages](publication-pages.log): **31/31**, 54.5s. These overlapping
+publication scopes do not replace or add to the pinned implementation results.
+
+[Independent publication review](publication-review.md) passes factual, image
+provenance and final displayed-layout checks. Exact relevant screenshots and
+the actual capture invocation are retained in [publication-screenshots](publication-screenshots/provenance.json).
+The full raw output remains in the ignored local verification cache; retained
+pixels are unchanged. Existing large-chunk build warnings remain visible.
+
+Publication and live verification are recorded after the authorized deployment.
+
+## Separate DH-020 production save check
+
+The retained `scripts/verify-sixty-four-seat-save.ts` creates a genuine
+Legendary/gen8 campaign through the setup UI: seed 20260926, forty major realms
+and twenty-four city-states. It founds one hearth, exports, manually saves,
+reloads and loads, then reimports the actual portable download. Public persistence
+and chronicle APIs compare exact canonical bytes, history and replay for all
+three exports, including all 64 faction-owned arcane research rows. It does not
+read browser storage or expose simulation hooks. This is first-turn storage
+proof, not an organic mature-campaign, AI, memory, pacing or rendering benchmark.
+
+The initial run and diagnostic rerun completed all three state comparisons but
+failed their aggregate console assertion. Their retained
+[initial result](local-64-seat-initial-result.json) and
+[diagnostic result](local-64-seat-diagnostic-result.json) identify Chromium’s
+automatic same-origin `/favicon.ico`404, with CDP resource type `Other` and
+initiator `other`. No game request or browser exception failed. The final runner
+records only this correlated browser icon request as an explicit warning;
+other console, HTTP and CDP errors remain failures. The raw failed captures and
+downloads remain intact under `node_modules/.cache/theandril-selection-groups/`
+with their original run names. Both original logs are retained alongside this
+report; neither failed run is counted as passing. The final [local run](local-64-seat.log) passes in 10.26 seconds with three
+verified exports; [result](local-64-seat/local-64-seat.json), actual downloads and
+screenshots are retained. Exact canonical state remains 911,896 bytes with hash
+`838191d9`. This runtime was already built before the verifier was introduced;
+only the test runner changed. Live verification follows publication.

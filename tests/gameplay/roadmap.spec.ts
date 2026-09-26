@@ -16,6 +16,11 @@ test('the roadmap is discoverable from home and shows bounded completion with ev
   await expect(page.locator('.roadmap-gates > div')).toHaveCount(roadmapGates.length);
   await expect(page.locator('.roadmap-gates .roadmap-status-completed')).toHaveCount(0);
   await expect(page.locator('.roadmap-introduction')).toContainText('No overall 1.0 gate is signed off.');
+  const empire = page.locator('#roadmap-empire-management');
+  await empire.locator('summary').click();
+  await expect(empire).toContainText('Up to 24 named campaign groups');
+  await expect(empire).toContainText('saved reusable army order templates');
+  await expect(empire.getByRole('link', { name: 'Saved groups verification', exact: true })).toHaveAttribute('href', 'https://github.com/ErikBurdett/Theandril/blob/0d26fa3c34ac89164637f515e95671420400a841/docs/development/2026-09-25-selection-groups/README.md');
   await expect(page.getByRole('link', { name: 'Hearth & Card roadmap' })).toHaveAttribute('href', 'https://erikburdett.github.io/theandril-hearth-and-card/updates/roadmap/');
   expect(workers).toEqual([]);
   expect(errors).toEqual([]);

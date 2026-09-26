@@ -1,0 +1,418 @@
+{
+  "reviewDate": "2026-09-26",
+  "implementationRevision": "0d26fa3c34ac89164637f515e95671420400a841",
+  "captureRevision": "Uncommitted edition09 publication candidate after the implementation revision; exact source hashes below.",
+  "baseURL": "http://127.0.0.1:4175/Theandril/",
+  "browser": "Chromium via Playwright Pages configuration",
+  "publicationDate": "2026-09-26",
+  "sourceHashes": {
+    "apps/web/src/updates/content.ts": "38e0b4b151f00d90fea185a364b73d3074cf51d65e55dbac9f213fce2061ba10",
+    "apps/web/src/updates/library.ts": "925327c31f39b1303c3dd666576966eb67dd6e0d0d77f7bbf2460e16472279aa",
+    "apps/web/src/updates/media.json": "20ca2673a735c1be3678517340c3956cfc231b0bbd87ef2dd2550321f006b34e",
+    "apps/web/public/updates/provenance.json": "20ca2673a735c1be3678517340c3956cfc231b0bbd87ef2dd2550321f006b34e",
+    "apps/web/src/updates/journal.css": "133a74e9d88c9b07522533b0409d36b01802f33515e45092eda4b0ef92c62234",
+    "tests/gameplay/updates.spec.ts": "a02604c9327e17abcbf0b6d5beded53cc2e1d15dcb2f4b8f21caea75b38203a4",
+    "tests/gameplay/roadmap.spec.ts": "07663e16861c680abf1d650aa5c7fd1814cba981fac87626fcbccc8043d126ed",
+    "playwright.pages.config.ts": "6c5f0f8167218adb0cf500db94332129c1c40fc6e9026a8f0e7f06d38acd60fa"
+  },
+  "captureTests": [
+    "tests/gameplay/updates.spec.ts: readable journal at each viewport/text setting",
+    "tests/gameplay/roadmap.spec.ts: roadmap keyboard and layout at each viewport/text setting"
+  ],
+  "settingsNotes": "Journal journeys request reduced motion. Text enlargement sets document.documentElement.style.fontSize to the recorded percentage; it is not browser zoom. Roadmap settings come from the two explicit test cases. Device scale factor is the Playwright context default of 1.",
+  "scenario": "Actual built static publication pages under the Pages subpath, navigated with ordinary links, keyboard and filters. The embedded public illustration is the exact previously reviewed authored Legendary/gen4/seed20260905 gameplay capture, not a new organic campaign.",
+  "transformations": [],
+  "preservation": "Exact byte copies of original Playwright output. No post-capture clipping, resizing, recompression, pixel edits or generated pixels. Locator captures retain their original element boundaries; full viewport captures retain their original viewport boundaries.",
+  "runResult": {
+    "log": "docs/development/2026-09-25-selection-groups/publication-pages.log",
+    "passed": 31,
+    "durationSeconds": 54.5,
+    "runner": "Parent integration agent; reviewer did not rerun the browser."
+  },
+  "files": [
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-roadmap-roadmap-k-6870f-d-layout-at-1440px-100-text/roadmap-top.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-roadmap-roadmap-k-6870f-d-layout-at-1440px-100-text/roadmap-top.png",
+      "sha256": "c4b95382f7d82c6bd9fbf35430a0e32f970f6e44a9654b885c414132d6fbf387",
+      "bytes": 393125,
+      "surface": "roadmap",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 1440,
+        "height": 1000
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-roadmap-roadmap-k-6870f-d-layout-at-1440px-100-text/roadmap-open-item.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-roadmap-roadmap-k-6870f-d-layout-at-1440px-100-text/roadmap-open-item.png",
+      "sha256": "3d41d2224f42db7747100247e551997ef07f726ef935a3b20de8274e62daf93b",
+      "bytes": 489100,
+      "surface": "roadmap",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 1208,
+        "height": 1437
+      },
+      "captureMethod": "Playwright locator.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-roadmap-roadmap-k-6870f-d-layout-at-1440px-100-text/roadmap-pending.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-roadmap-roadmap-k-6870f-d-layout-at-1440px-100-text/roadmap-pending.png",
+      "sha256": "7584ee5a500b7b82c76a62f629c9067356f922c753804e0abf5998d25f32e9f9",
+      "bytes": 378739,
+      "surface": "roadmap",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 1440,
+        "height": 1000
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-roadmap-roadmap-k-b7ad2-nd-layout-at-390px-130-text/roadmap-top.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-roadmap-roadmap-k-b7ad2-nd-layout-at-390px-130-text/roadmap-top.png",
+      "sha256": "31e66ff2d4a9be4dce94e6f5d2ae286ea898165931772438b9e499ff4c78bac8",
+      "bytes": 164408,
+      "surface": "roadmap",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 130,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 390,
+        "height": 844
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-roadmap-roadmap-k-b7ad2-nd-layout-at-390px-130-text/roadmap-open-item.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-roadmap-roadmap-k-b7ad2-nd-layout-at-390px-130-text/roadmap-open-item.png",
+      "sha256": "76dd05205668385eebfacd5870223840ee6f9e88f110c57e98f78477189725d1",
+      "bytes": 619431,
+      "surface": "roadmap",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 130,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 292,
+        "height": 4029
+      },
+      "captureMethod": "Playwright locator.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-roadmap-roadmap-k-b7ad2-nd-layout-at-390px-130-text/roadmap-pending.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-roadmap-roadmap-k-b7ad2-nd-layout-at-390px-130-text/roadmap-pending.png",
+      "sha256": "43ee1b2fab35b415e7357825407d7e31d170dc1c07fa576265b27fba8160a9ae",
+      "bytes": 161568,
+      "surface": "roadmap",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 130,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 390,
+        "height": 844
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-1366px-and-100-text/reader-top.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-1366px-and-100-text/reader-top.png",
+      "sha256": "e85eb97b34ba7368e34aba27a9fdafb0edbb084e68c4cdc64af61f29ab00bc3c",
+      "bytes": 271030,
+      "surface": "journal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 1366,
+        "height": 768
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-1366px-and-100-text/reader-chapter.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-1366px-and-100-text/reader-chapter.png",
+      "sha256": "ea2f0896494f406a41981655779e0ed9d180b43e312c2dab77d90fe267b5ad06",
+      "bytes": 393961,
+      "surface": "journal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 1366,
+        "height": 768
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-1366px-and-100-text/selection-groups-recall-illustration.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-1366px-and-100-text/selection-groups-recall-illustration.png",
+      "sha256": "b2d2f1ed785ac9024fcb85194b27cceb3a5aec2ba633a00d76ba1f2e68add117",
+      "bytes": 77270,
+      "surface": "journal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 319,
+        "height": 450
+      },
+      "captureMethod": "Playwright locator.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-1366px-and-100-text/layout-evidence.json",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-1366px-and-100-text/layout-evidence.json",
+      "sha256": "bf9389d1665b58a501b935fda18b15134117746ba3efbbb387c58075f5708989",
+      "bytes": 275,
+      "surface": "journal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "captureMethod": "Playwright writeFile layout observations"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-1440px-and-100-text/reader-top.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-1440px-and-100-text/reader-top.png",
+      "sha256": "fe159075f51886b028ab945246acfbf83f1bb63bc8ce6d8d5f8cc7799c3f8623",
+      "bytes": 374026,
+      "surface": "journal",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 1440,
+        "height": 1000
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-1440px-and-100-text/reader-chapter.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-1440px-and-100-text/reader-chapter.png",
+      "sha256": "dbe441b67b227f6c71f7ca6de3751627fcabe9616fd12baa23514b94cec95fa2",
+      "bytes": 509574,
+      "surface": "journal",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 1440,
+        "height": 1000
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-1440px-and-100-text/selection-groups-recall-illustration.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-1440px-and-100-text/selection-groups-recall-illustration.png",
+      "sha256": "6544c0288c9ec615f2c891876267ae8242772e692386b089226244a35867d1ac",
+      "bytes": 78591,
+      "surface": "journal",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 319,
+        "height": 450
+      },
+      "captureMethod": "Playwright locator.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-1440px-and-100-text/layout-evidence.json",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-1440px-and-100-text/layout-evidence.json",
+      "sha256": "76e05c0b7e28d367f245819d5b44207f3734ce1326321de6ef95189570b5c3e4",
+      "bytes": 276,
+      "surface": "journal",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "captureMethod": "Playwright writeFile layout observations"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-390px-and-100-text/reader-top.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-390px-and-100-text/reader-top.png",
+      "sha256": "8ec063d903cb74d8cc42820ef31229e077ff38a42d825ef2f618b661934a1509",
+      "bytes": 162069,
+      "surface": "journal",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 390,
+        "height": 844
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-390px-and-100-text/reader-chapter.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-390px-and-100-text/reader-chapter.png",
+      "sha256": "958191bbf7f88b7089070b46a209488b8f3ee2443961277e2a7da4a84d3fe3de",
+      "bytes": 204535,
+      "surface": "journal",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 390,
+        "height": 844
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-390px-and-100-text/selection-groups-recall-illustration.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-390px-and-100-text/selection-groups-recall-illustration.png",
+      "sha256": "112a891fb3053029eaf5bc4421ccca1853e9c17f81f00d7733d9f354a779c5b9",
+      "bytes": 78944,
+      "surface": "journal",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 310,
+        "height": 447
+      },
+      "captureMethod": "Playwright locator.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-390px-and-100-text/layout-evidence.json",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-390px-and-100-text/layout-evidence.json",
+      "sha256": "9e6ee1cb5829de2bb7d6411021cd748b39de000b37900c071b0a94ae346db7ee",
+      "bytes": 274,
+      "surface": "journal",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 100,
+      "deviceScaleFactor": 1,
+      "captureMethod": "Playwright writeFile layout observations"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-390px-and-130-text/reader-top.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-390px-and-130-text/reader-top.png",
+      "sha256": "c93736feb1eaa455ebe4bfdbf6b555f6ef702414c1b0be1d41f71276b25ed324",
+      "bytes": 156376,
+      "surface": "journal",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 130,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 390,
+        "height": 844
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-390px-and-130-text/reader-chapter.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-390px-and-130-text/reader-chapter.png",
+      "sha256": "ebb9ad9bbc6ccf5524f157ddf35be2d82d95eb409359d5d45f3df843288ddd61",
+      "bytes": 186887,
+      "surface": "journal",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 130,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 390,
+        "height": 844
+      },
+      "captureMethod": "Playwright page.screenshot (viewport)"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-390px-and-130-text/selection-groups-recall-illustration.png",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-390px-and-130-text/selection-groups-recall-illustration.png",
+      "sha256": "32b333e40511f43324ce13fcfc0fb6bc6d73b1bdc9eb3ed622d204b9662f5dd1",
+      "bytes": 112636,
+      "surface": "journal",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 130,
+      "deviceScaleFactor": 1,
+      "imageSize": {
+        "width": 292,
+        "height": 652
+      },
+      "captureMethod": "Playwright locator.screenshot"
+    },
+    {
+      "path": "docs/development/2026-09-25-selection-groups/publication-screenshots/gameplay-updates-readable-journal-at-390px-and-130-text/layout-evidence.json",
+      "originalCapturedOutputPath": "docs/development/2026-09-25-selection-groups/publication-pages-output/gameplay-updates-readable-journal-at-390px-and-130-text/layout-evidence.json",
+      "sha256": "2556afceea4fa11f77eaa4fd1afccdfda8b699d5776a2791103bb8c2a73eb3ce",
+      "bytes": 274,
+      "surface": "journal",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFontSizePercent": 130,
+      "deviceScaleFactor": 1,
+      "captureMethod": "Playwright writeFile layout observations"
+    }
+  ],
+  "captureCommandRecord": "The reviewer did not execute the browser. The parent executed the full Pages suite; its completed output is publication-pages.log. The invocation below reproduces the config, tests and retained output directory; unrecorded parent shell wrappers are not asserted.",
+  "reproductionCommand": "PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium TMPDIR=\"$PWD/node_modules/.tmp\" ./node_modules/.bin/playwright test --config=playwright.pages.config.ts --reporter=line --output=docs/development/2026-09-25-selection-groups/publication-pages-output",
+  "actualCaptureCommand": "TMPDIR=/home/telephoneheater/Work/Theandril/node_modules/.tmp PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium ./node_modules/.bin/playwright test --config playwright.pages.config.ts --output=docs/development/2026-09-25-selection-groups/publication-pages-output > docs/development/2026-09-25-selection-groups/publication-pages.log 2>&1",
+  "localRawArchivePath": "node_modules/.cache/theandril-selection-groups/publication-pages-output"
+}

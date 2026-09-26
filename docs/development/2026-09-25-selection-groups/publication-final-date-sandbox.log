@@ -1,0 +1,33 @@
+
+ RUN  v4.1.11 /home/telephoneheater/Work/Theandril
+
+ ❯ |unit| apps/web/src/updates/roadmap.test.ts (10 tests | 1 failed) 13ms
+     × resolves every evidence file at the declared immutable source snapshot 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unit| apps/web/src/updates/roadmap.test.ts > the source-backed roadmap contract > resolves every evidence file at the declared immutable source snapshot
+AssertionError: docs/IMPLEMENTATION_STATUS.md: expected [Function] to not throw an error but 'Error: spawnSync git EPERM' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"Error: spawnSync git EPERM"
+
+ ❯ apps/web/src/updates/roadmap.test.ts:65:129
+     63|     for (const path of paths) {
+     64|       expect(path).not.toMatch(/(^\/|\.\.|\\|^https?:|[?#])/);
+     65|       expect(() => execFileSync('git', ['cat-file', '-e', `${roadmapSn…
+       |                                                                                                                                 ^
+     66|     }
+     67|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 23 passed (24)
+   Start at  01:29:48
+   Duration  198ms (transform 189ms, setup 0ms, import 247ms, tests 56ms, environment 0ms)
+
