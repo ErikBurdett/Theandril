@@ -1,5 +1,7 @@
 # Theandril implementation status
 
+**Published checkpoint — 2026-09-25:** `1d256b09b5a7fe273d2e340b6c4014b722f9d49d` delivers reusable charter templates and dispatch 08. Final local verification passes **1,904 tests**, **16 affected gameplay journeys** and **30 production Pages journeys**. GitHub build/Pages and **30/30 live journeys** pass. Exact commit, article/source and image-byte readback pass. [Deployment evidence](development/2026-09-25-charter-templates/deployment.json) retains the corrected test-only typecheck and readback-helper issues. DHARMA records this checkpoint; ACT-32/M3 remain in progress and all fifteen gates remain open.
+
 ## Reusable charter templates — 2026-09-25
 
 **ACT-32 advances; M3 remains in progress.** After selecting hearths in the registry, save up to 24 named charter policies, each holding a focus and a per-work coin ceiling. Update, recall or delete them in the same controls. Recall fills the form; Apply charters still explicitly issues ordinary commands. Editing a template leaves active charters unchanged. The in-game guide explains the workflow.

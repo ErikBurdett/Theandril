@@ -4,7 +4,7 @@
 
 - Working title: Keep a charter worth repeating
 - Slug: charter-templates; proposed edition 08.
-- State: reviewed publication candidate; final local checks complete, live readback pending.
+- State: published and verified on 2026-09-25 at `1d256b09b5a7fe273d2e340b6c4014b722f9d49d`.
 - Source revision: `3ed4a6c456c3e4130fddf35b44dfdf51034cc269`.
 - Rules/save 31; content `015468d1`; no canonical change.
 
@@ -35,3 +35,7 @@ The proposed illustration is the unmodified 318×724 controls capture, 81,322 by
 Edition 08 and the current library are pinned to the implementation above. The final publication suite passes **1,904 tests/237 files** and **30 local production Pages journeys**. Typecheck, lint and production build pass. The initial test-only typecheck failure is retained and the corrected roadmap assertions pass all nine focused tests. Independent factual and displayed-pixel review finds no blocking issue. [Final evidence](../development/2026-09-25-charter-templates/publication-verification.md) separates this scope from the earlier implementation checks.
 
 All seven older articles and twelve older images remain unchanged. Thirteen images total 3,118,774 bytes under the unchanged three-MiB budget. Desktop, narrow and 130% text layouts are inspected. The raster preview shrinks on narrow screens; the caption scales and the original image remains accessible. Prior user authorization covers publication; exact Actions and public readback follow deployment.
+
+## Publication result
+
+GitHub Verify build and Pages passed for `1d256b0`; all **30 live Pages journeys** passed on their first run. Exact commit, immutable article/source link and public PNG bytes match. The standalone readback helper needed to open the roadmap's evidence disclosure before asserting its contents; its corrected check passes, and the original helper mistake is retained. No game change followed local acceptance. [Deployment and tracker readback](../development/2026-09-25-charter-templates/deployment.json) record the released checkpoint; DHARMA's ACT-32/M3 remain partial and all fifteen release gates remain open.

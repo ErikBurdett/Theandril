@@ -1,0 +1,49 @@
+{
+  "mode": "apply",
+  "revision": "1d256b09b5a7fe273d2e340b6c4014b722f9d49d",
+  "implementation_and_evidence_committed": true,
+  "uncommitted_required_paths": [],
+  "verified_logs_sha256": {
+    "docs/development/2026-09-25-charter-templates/publication-tests.log": "3a5cf24efe82f425160a0c70b58ded315b83e6561c5a2f198d99bbb2ce044bc6",
+    "docs/development/2026-09-25-charter-templates/browser-final.log": "e398f8583a7dcc4d9f1a6ecabbcbadae6ecf92468590182e3616bcc2efc059c7",
+    "docs/development/2026-09-25-charter-templates/publication-pages.log": "0be54142f63501c33bfc871382b7686ffcddf518f87f3bc44304c9e762096cff",
+    "docs/development/2026-09-25-charter-templates/live-pages.log": "e72c81424e2bbb4f230d499e98ad0b8d4526d883a09f69d305dc9c456ada958c",
+    "docs/development/2026-09-25-charter-templates/live-readback.json": "9d11a7feb1428a6fa97391c70c79a65a28e8e8c654c159799b62b881c28f27bb"
+  },
+  "ACT-32": {
+    "status": "doing",
+    "updated": "2026-09-25",
+    "fix": "Continue durable named groups, bounded theaters and patrol/escort roles, army-order templates, production sequences and broader governor decisions over the existing charters, muster points, group postings, group settlement charters, personal charter-template library and cause-grouped alerts. Preserve individual overrides, inspectable blockers, ordinary command authority and bounded worker publication.",
+    "prompt": "Context: ~/Work/Theandril, rules/save 31 and content 015468d1. Read docs/1.0-DEVELOPMENT.md M3, docs/architecture/0041-charter-templates.md and docs/development/2026-09-25-charter-templates/README.md. Standing charters, postings/musters, cause-grouped alerts, group land-army postings and group settlement-charter grants/revocations already exist. The personal browser library now saves up to 24 named charter focus/ceiling templates; Recall only fills the form, while explicit Apply remains canonical. Final publication verification passes 1,904 headless tests across 237 files, 16 affected Chromium journeys, 30 local production Pages journeys and 30 live Pages journeys. These are separate suite scopes, not additive test totals.\n\nTask: deliver the next dependency-ready slice of durable named groups, bounded theaters/patrol/escort orders, army-order templates, production sequences or broader governor decisions. Reuse completed selection, batching and personal charter templates instead of rebuilding them.\n\nNext acceptance: in a saved representative mature realm with 100+ armies and many hearths, use ordinary player controls to delegate a policy and coordinated order, inspect and resolve grouped blockers, and override one actor without disabling the others. Prove canonical validation, permitted AI knowledge where relevant, deterministic save/replay, keyboard/narrow controls and bounded measured transfers. Keep personal preferences separate from canonical orders. Measure headline pacing only if rules or AI behavior change. Durable named groups, theaters/patrol/escorts, army-order templates, production sequences, broader governor decisions and combined mature-realm acceptance remain open. Publication requires authorization for the new task.",
+    "append_history": {
+      "date": "2026-09-25",
+      "status": "doing",
+      "note": "2026-09-25 verified charter-template progress, source/evidence HEAD 1d256b09b5a7fe273d2e340b6c4014b722f9d49d. Players can keep up to 24 named charter templates in a personal browser/origin-local library, each holding an existing charter focus and coin ceiling. Selecting a template issues no orders; Recall fills the form and Apply charters remains a separate explicit action. Saving, updating or deleting templates leaves active charters unchanged. Templates survive browser reload and campaign changes but are excluded from campaign exports; applied charters remain canonical saved and replayed state. Strict bounded storage validation and transactional writes preserve existing rows on failure, and visible storage errors leave direct charter controls usable. Final publication verification passes 1,904 headless tests across 237 files, 16 affected Chromium journeys, 30 local production Pages journeys and 30 live Pages journeys. These are separate suite scopes, not additive test totals. Rules/save remain 31, content remains 015468d1; this browser preference slice changes no rules, AI or campaign prices and requires no new pacing run. Evidence: ~/Work/Theandril/docs/development/2026-09-25-charter-templates/. ACT-32 and M3 remain in progress. Durable named groups, theaters/patrol/escorts, army-order templates, production sequences, broader governor decisions and combined mature-realm acceptance remain open. All 15 release gates remain open."
+    }
+  },
+  "Theandril.M3": {
+    "status": "in-progress",
+    "detail": "Standing charters, muster points, army postings and cause-grouped alerts exist. Batches assign or clear existing postings for up to 128 land armies ashore, or grant/revoke existing charters for up to 128 owned hearths, with ordinary canonical validation and individual overrides. The 25 September slice adds a reusable charter-policy library: Players can keep up to 24 named charter templates in a personal browser/origin-local library, each holding an existing charter focus and coin ceiling. Selecting a template issues no orders; Recall fills the form and Apply charters remains a separate explicit action. Saving, updating or deleting templates leaves active charters unchanged. Templates survive browser reload and campaign changes but are excluded from campaign exports; applied charters remain canonical saved and replayed state. Strict bounded storage validation and transactional writes preserve existing rows on failure, and visible storage errors leave direct charter controls usable. Final publication verification passes 1,904 headless tests across 237 files, 16 affected Chromium journeys, 30 local production Pages journeys and 30 live Pages journeys. These are separate suite scopes, not additive test totals. Rules/save 31 and content 015468d1 are unchanged. Durable named groups, theaters/patrol/escorts, army-order templates, production sequences, broader governor decisions and combined mature-realm acceptance remain open."
+  },
+  "Theandril.roadmap_recomputed_fields": {
+    "done": 56,
+    "total": 105,
+    "updated": "2026-09-25",
+    "note": "6 of 23 catalogue items are complete and all 15 release gates remain open. Rules/save 31 includes finite fleet supplies, group postings and group settlement charters; the personal charter-template library changes no campaign rules or save format. Acceptance-point totals are recomputed from the structured delivered/remaining catalogue bullets. Editorial regrouping changes these totals; they are not a fixed-scope completion percentage or release acceptance."
+  },
+  "unchanged": [
+    "all other actions",
+    "all existing history",
+    "all other projects and milestones",
+    "release-gate status"
+  ],
+  "build_on_apply": {
+    "command": [
+      "/home/telephoneheater/Projects/PIA/pia-tracker/scripts/run.sh",
+      "build"
+    ],
+    "TRACKER_HOME": "/home/telephoneheater/Projects/DHARMA/dharma-tracker"
+  }
+}
+== dharma-tracker build 2026-09-25T21:10:43-05:00
+built 1 editions → /home/telephoneheater/Projects/DHARMA/dharma-tracker/site

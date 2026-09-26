@@ -1,0 +1,49 @@
+{
+  "revision": "1d256b09b5a7fe273d2e340b6c4014b722f9d49d",
+  "sourceRevision": "3ed4a6c456c3e4130fddf35b44dfdf51034cc269",
+  "date": "2026-09-25",
+  "game": "https://erikburdett.github.io/Theandril/",
+  "dispatch": "https://erikburdett.github.io/Theandril/updates/dispatches/?dispatch=charter-templates",
+  "actions": [
+    {
+      "name": "Verify build",
+      "id": 36209024267,
+      "conclusion": "success",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36209024267"
+    },
+    {
+      "name": "Publish development demo to Pages",
+      "id": 36209024268,
+      "conclusion": "success",
+      "url": "https://github.com/ErikBurdett/Theandril/actions/runs/36209024268"
+    }
+  ],
+  "checks": {
+    "headless": {
+      "passed": 1904,
+      "files": 237,
+      "seconds": 55.37,
+      "log": "publication-tests.log"
+    },
+    "affectedGameplay": {
+      "passed": 16,
+      "log": "browser-final.log"
+    },
+    "localPages": {
+      "passed": 30,
+      "seconds": 44.5,
+      "log": "publication-pages.log"
+    },
+    "livePages": {
+      "passed": 30,
+      "duration": "1.9m",
+      "log": "live-pages.log"
+    },
+    "exactReadback": "live-readback.json"
+  },
+  "retainedCorrections": [
+    "Initial publication typecheck found a narrowed-union comparison in a new test; corrected assertion, final typecheck and nine focused roadmap checks pass.",
+    "Standalone readback initially expected text inside a collapsed roadmap disclosure. Corrected helper uses the actual permalink and verifies the opened disclosure; no application change."
+  ],
+  "releaseGates": "All 15 remain open; ACT-32/M3 remain in progress."
+}
